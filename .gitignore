@@ -14,12 +14,13 @@ env/
 ENV/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
 *~
-.DS_Store
+
+# VS Code - we DO commit .vscode/ for team Marp config
+# (removed from ignore list so settings are shared)
 
 # Outputs (generated files - don't commit large binaries)
 outputs/*.md

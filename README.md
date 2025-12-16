@@ -221,6 +221,50 @@ npm install -g @marp-team/marp-cli
 marp --version
 ```
 
+## VS Code Setup (Recommended)
+
+### First Time Setup
+
+1. **Install VS Code:** https://code.visualstudio.com/
+
+2. **Open the repository:**
+   ```bash
+   cd fastr-slide-builder
+   code .
+   ```
+
+3. **Install recommended extensions:**
+   - VS Code will prompt: "This workspace has extension recommendations"
+   - Click **Install All** to add Marp and Python extensions
+   - Or manually: Extensions → Search "Marp" → Install "Marp for VS Code"
+
+4. **Verify FASTR theme is working:**
+   - Open any `.md` file (e.g., `workshops/example/custom_slides.md`)
+   - Click the Marp icon in top-right corner (or press `Cmd/Ctrl+K V`)
+   - Preview should show **FASTR teal styling** (not default gray)
+
+**Note:** Settings are pre-configured in `.vscode/settings.json` - no manual configuration needed!
+
+### Previewing Slides in VS Code
+
+- **Open preview:** Click Marp icon in top-right, or `Cmd+K V` (Mac) / `Ctrl+K V` (Windows)
+- **Side-by-side editing:** Preview opens alongside your markdown editor
+- **Live updates:** Preview refreshes as you type
+
+**The preview automatically uses the FASTR theme:**
+- Teal headers (#0f706d)
+- White background
+- Proper FASTR branding
+
+### Editing Markdown
+
+- Headers: Use `#` for slide titles, `##` for sections
+- Slide breaks: `---` on its own line
+- Images: `![Description](path/to/image.png)`
+- Bullets: `-` for lists
+
+VS Code will wrap lines and provide syntax highlighting automatically.
+
 ## Common Commands
 
 ```bash
