@@ -22,11 +22,9 @@ ENV/
 # VS Code - we DO commit .vscode/ for team Marp config
 # (removed from ignore list so settings are shared)
 
-# Outputs (generated files - don't commit large binaries)
-outputs/*.md
-outputs/*.pdf
-outputs/*.pptx
-!outputs/.gitkeep
+# Outputs - now tracked so they sync between Codespace and local
+# (remove these lines if repo gets too large)
+!outputs/
 
 # Temp files
 *_temp.md
