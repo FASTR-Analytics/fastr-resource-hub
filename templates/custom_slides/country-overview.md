@@ -6,7 +6,7 @@ paginate: true
 
 # Country Health System Overview
 
-## {{LOCATION}}
+**{{LOCATION}}**
 
 ---
 

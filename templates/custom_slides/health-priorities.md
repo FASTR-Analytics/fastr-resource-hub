@@ -6,7 +6,7 @@ paginate: true
 
 # National Health Priorities
 
-## {{LOCATION}}
+**{{LOCATION}}**
 
 ---
 

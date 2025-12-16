@@ -6,7 +6,11 @@ paginate: true
 
 # Workshop Objectives
 
-## By the end of this workshop, participants will be able to:
+## {{WORKSHOP_NAME}}
+
+**{{DATE}}** | {{LOCATION}}
+
+By the end of this workshop, participants will be able to:
 
 1. **[Objective 1]** - e.g., Extract and prepare routine health data for analysis
 
