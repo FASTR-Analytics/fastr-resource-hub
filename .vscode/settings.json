@@ -7,7 +7,11 @@
   "markdown.preview.typographer": true,
   "[markdown]": {
     "editor.wordWrap": "on",
-    "editor.quickSuggestions": false
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
   },
   "files.associations": {
     "*.md": "markdown"

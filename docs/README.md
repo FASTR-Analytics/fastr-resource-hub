@@ -8,6 +8,7 @@ Welcome to the documentation for the FASTR slide builder! This directory contain
 
 - **[Markdown Guide](markdown-guide.md)** - Cheat sheet for writing Marp slides
 - **[Building Decks](building-decks.md)** - How to assemble and render presentations
+- **[Codespaces Workflow](codespaces-workflow.md)** - ⚠️ How to save work in Codespaces (CRITICAL!)
 - **[Local Setup](local-setup.md)** - Installing software on your machine
 
 ---
