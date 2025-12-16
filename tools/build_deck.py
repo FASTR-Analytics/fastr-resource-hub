@@ -365,6 +365,9 @@ paginate: true
     if title_content:
         title_content = strip_frontmatter(title_content)
         title_content = substitute_variables(title_content, config)
+        # Ensure it ends with slide break
+        if not title_content.rstrip().endswith('---'):
+            title_content = title_content.rstrip() + "\n\n---\n"
         deck_content += title_content + "\n"
         print(f"   ✓ Title slide added")
 
@@ -375,6 +378,9 @@ paginate: true
         if agenda_content:
             agenda_content = strip_frontmatter(agenda_content)
             agenda_content = substitute_variables(agenda_content, config)
+            # Ensure it ends with slide break
+            if not agenda_content.rstrip().endswith('---'):
+                agenda_content = agenda_content.rstrip() + "\n\n---\n"
             deck_content += agenda_content + "\n"
             print(f"   ✓ Agenda slide added")
 
@@ -391,6 +397,9 @@ paginate: true
                 if content:
                     content = strip_frontmatter(content)
                     content = substitute_variables(content, config)
+                    # Ensure it ends with slide break
+                    if not content.rstrip().endswith('---'):
+                        content = content.rstrip() + "\n\n---\n"
                     deck_content += "\n" + content + "\n"
                     print(f"   ✓ {num}. {SECTION_DESCRIPTIONS[num]}")
 
@@ -401,6 +410,9 @@ paginate: true
         if breaks_content:
             breaks_content = strip_frontmatter(breaks_content)
             breaks_content = substitute_variables(breaks_content, config)
+            # Ensure it ends with slide break
+            if not breaks_content.rstrip().endswith('---'):
+                breaks_content = breaks_content.rstrip() + "\n\n---\n"
             deck_content += breaks_content + "\n"
             print(f"\n☕ Break slides added")
 
@@ -416,6 +428,9 @@ paginate: true
             if content:
                 content = strip_frontmatter(content)
                 content = substitute_variables(content, config)
+                # Ensure it ends with slide break
+                if not content.rstrip().endswith('---'):
+                    content = content.rstrip() + "\n\n---\n"
                 deck_content += "\n" + content + "\n"
                 print(f"   ✓ {custom_file}")
 
