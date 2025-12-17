@@ -10,7 +10,7 @@ Creates a new workshop folder with everything you need:
   - Placeholder agenda image
 
 Just run:
-    python3 tools/setup_workshop.py
+    python3 tools/01_setup_workshop.py
 
 ═══════════════════════════════════════════════════════════════════════
 """

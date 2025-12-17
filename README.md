@@ -115,8 +115,21 @@ fastr-slide-builder/
 │   └── fastr-outputs/      # Default FASTR visualizations
 │
 ├── outputs/                # Generated decks (gitignored)
-├── fastr-theme.css         # Marp theme for PDF export
-└── fastr-reference.pptx    # PowerPoint template
+```
+
+### Assets Folder Guide
+
+| Folder | What goes here | Examples |
+|--------|----------------|----------|
+| `logos/` | Brand logos, partner logos | fastr-logo.png, who-logo.png |
+| `diagrams/` | Methodology flowcharts, conceptual diagrams | data-flow.svg, fastr-approach.png |
+| `screenshots/` | UI screenshots, data examples | dhis2-export.png, csv-format.png |
+| `fastr-outputs/` | Standard FASTR visualizations | coverage-chart.png, dq-heatmap.png |
+
+Reference in slides:
+```markdown
+![](../../assets/logos/fastr-logo.png)        # from workshops/
+![](../assets/diagrams/data-flow.svg)         # from core_content/
 ```
 
 ## Built-in Sessions
