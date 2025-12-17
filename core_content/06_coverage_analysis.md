@@ -142,21 +142,26 @@ Coverage = (Services Delivered / Target Population) × 100%
 
 ---
 
-## Step 3: Validate Against Surveys
+## Step 3: Select Best Denominator
 
-**How do we know our coverage estimate is correct?**
+**Problem:** Different denominators give different coverage estimates. Which one is most accurate?
 
-**Compare to survey data:**
+**Solution:** Compare each denominator's estimates against survey reference values
 
-| Year | FASTR Estimate | Survey Estimate | Match? |
-|------|----------------|-----------------|--------|
-| 2019 | 76% | 78% | ✓ Close |
-| 2020 | 79% | - | - |
-| 2021 | 82% | 81% | ✓ Close |
+**How it works:**
+1. Calculate coverage using each available denominator
+2. Compare each estimate to survey values (where available)
+3. Select the denominator with the **smallest error** (closest to surveys)
 
-**If FASTR estimates match surveys:** We can trust estimates for non-survey years (like 2020)
+**Example - Penta3 Coverage:**
 
-**If they don't match:** Need to adjust our method or check data quality
+| Denominator | 2019 Estimate | Survey (78%) | Error |
+|-------------|---------------|--------------|-------|
+| Live births (UN) | 82% | 78% | 4% |
+| **Surviving infants** | **76%** | 78% | **2%** ← Best |
+| DTP1-derived | 71% | 78% | 7% |
+
+**FASTR automatically selects the denominator that produces estimates closest to validated survey data.**
 
 ---
 
