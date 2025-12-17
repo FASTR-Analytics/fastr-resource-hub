@@ -24,6 +24,69 @@ paginate: true
 
 
 
+# Workshop Objectives
+
+## FASTR Workshop - Example Country
+
+**January 15-17, 2025** | Capital City, Country
+
+By the end of this workshop, participants will be able to:
+
+1. **[Objective 1]** - e.g., Extract and prepare routine health data for analysis
+
+2. **[Objective 2]** - e.g., Apply data quality assessment methods to identify issues
+
+3. **[Objective 3]** - e.g., Generate coverage estimates using the FASTR methodology
+
+4. **[Objective 4]** - e.g., Interpret and communicate findings to stakeholders
+
+---
+
+
+
+# Country Health System Overview
+
+**Capital City, Country**
+
+---
+
+## Health System Structure
+
+| Level | Description |
+|-------|-------------|
+| National | [Ministry of Health] |
+| Regional | [X provinces/regions] |
+| District | [X districts] |
+| Facility | [X,XXX] health facilities |
+
+**Reporting to DHIS2:** [X,XXX] ([XX%])
+
+---
+
+## Population
+
+| Group | Estimate |
+|-------|----------|
+| Total population | [XX million] |
+| Women of reproductive age | [X.X million] |
+| Children under 5 | [X.X million] |
+| Expected pregnancies/year | [XXX,XXX] |
+| Expected live births/year | [XXX,XXX] |
+
+---
+
+## Data Sources
+
+**Routine data:**
+- DHIS2 (reporting rate: [XX%])
+
+**Survey data:**
+- [DHS/MICS YYYY]
+
+---
+
+
+
 # What is FASTR?
 
 A data-driven framework developed by the GFF to help countries monitor and improve maternal, newborn, child, and adolescent health services.
@@ -125,6 +188,38 @@ Establish a regular way of analysing results and discussing what actions should 
 We'll resume at 10:45 AM
 
 ---
+
+
+# National Health Priorities
+
+**Capital City, Country**
+
+---
+
+## Key Health Indicators
+
+| Indicator | Current ([YYYY]) | Target |
+|-----------|---------------------------|--------|
+| ANC4 coverage | [XX%] | [XX%] |
+| Skilled birth attendance | [XX%] | [XX%] |
+| Penta3 coverage | [XX%] | [XX%] |
+| Measles coverage | [XX%] | [XX%] |
+
+*Source: [DHS/MICS YYYY]*
+
+---
+
+## Priority Areas for This Analysis
+
+1. **[Priority 1]** - e.g., Maternal and newborn health
+2. **[Priority 2]** - e.g., Childhood immunization
+3. **[Priority 3]** - e.g., Malaria prevention
+
+**Why these priorities?**
+[Brief explanation of why these were selected]
+
+---
+
 
 
 # Data Extraction
@@ -485,6 +580,48 @@ This accounts for patients visiting different facilities for different services.
 We'll resume at 3:30 PM
 
 ---
+
+
+# Data Quality Findings
+
+**Capital City, Country** | January 15-17, 2025
+
+---
+
+## Reporting Completeness
+
+**Overall completeness:** [XX%]
+
+| Region/Province | Completeness |
+|-----------------|--------------|
+| [Region 1] | [XX%] |
+| [Region 2] | [XX%] |
+| [Region 3] | [XX%] |
+
+---
+
+## Outliers Detected
+
+**Total outliers flagged:** [XXX] facility-months
+
+**Most common issues:**
+- [Issue 1] - e.g., Decimal point errors
+- [Issue 2] - e.g., Cumulative vs monthly reporting
+
+---
+
+## Consistency Checks
+
+**Pass rate:** [XX%] of districts
+
+| Check | Result |
+|-------|--------|
+| ANC1 >= ANC4 | [X%] pass |
+| Penta1 >= Penta3 | [X%] pass |
+| BCG ~ Penta1 | [X%] pass |
+
+---
+
 
 # Data Adjustment
 
@@ -1150,6 +1287,48 @@ We'll resume at 10:45 AM
 ---
 
 
+# Service Disruption Analysis
+
+## Capital City, Country Findings
+
+---
+
+## National Trends
+
+**Analysis period:** [Start year] - [End year]
+
+[Insert chart or describe trend]
+
+**Key observations:**
+- [Observation about COVID-19 period]
+- [Observation about recovery]
+- [Other notable disruptions]
+
+---
+
+## Regional Variations
+
+| Region | Disruption Level | Recovery Status |
+|--------|------------------|-----------------|
+| [Region 1] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
+| [Region 2] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
+| [Region 3] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
+
+---
+
+## Indicators Most Affected
+
+1. **[Indicator 1]** - [% change during disruption]
+2. **[Indicator 2]** - [% change during disruption]
+3. **[Indicator 3]** - [% change during disruption]
+
+**Least affected:**
+- [Indicator] - remained stable because [reason]
+
+---
+
+
+
 # Estimating Service Coverage
 
 Understanding what percentage of people are being reached
@@ -1645,6 +1824,95 @@ Coverage = (Services Delivered / Target Population) × 100%
 
 >**Result:**
 >Better information → Better decisions → Better health outcomes
+
+---
+
+
+
+# Coverage Analysis Results
+
+**Capital City, Country** | January 15-17, 2025
+
+---
+
+## Key Coverage Estimates
+
+| Indicator | FASTR | Survey ([YYYY]) | Difference |
+|-----------|-------|--------------------------|------------|
+| ANC1 | [XX%] | [XX%] | |
+| ANC4 | [XX%] | [XX%] | |
+| Skilled birth attendance | [XX%] | [XX%] | |
+| Penta3 | [XX%] | [XX%] | |
+| Measles | [XX%] | [XX%] | |
+
+---
+
+## Comparison with [DHS/MICS YYYY]
+
+**Key findings:**
+- [Finding 1 - how do FASTR estimates compare?]
+- [Finding 2 - any notable differences?]
+- [Finding 3 - what might explain differences?]
+
+---
+
+## Geographic Variations
+
+**Highest coverage:**
+- [Region/District] - [XX%]
+
+**Lowest coverage:**
+- [Region/District] - [XX%]
+
+**Equity implications:**
+[Brief note on geographic disparities]
+
+---
+
+
+
+# Next Steps & Action Items
+
+---
+
+## Immediate Actions (Next 2 Weeks)
+
+- [ ] **[Action 1]** - e.g., Share preliminary findings with MOH
+- [ ] **[Action 2]** - e.g., Request additional data for [specific gap]
+- [ ] **[Action 3]** - e.g., Schedule follow-up meeting
+
+**Responsible:** [Names/Teams]
+
+---
+
+## Short-term Actions (Next 3 Months)
+
+1. **Data quality improvements**
+   - [Specific action]
+   - [Specific action]
+
+2. **Capacity building**
+   - [Training need]
+   - [Support required]
+
+3. **Integration with planning**
+   - [How findings will be used]
+
+---
+
+## Long-term Recommendations
+
+- **Routine updates:** [Frequency of FASTR refresh]
+- **System strengthening:** [Key improvements needed]
+- **Institutionalization:** [How to make this sustainable]
+
+---
+
+## Questions & Discussion
+
+**Contact:** fastr@example.org
+
+**Resources:** https://fastr.org
 
 ---
 

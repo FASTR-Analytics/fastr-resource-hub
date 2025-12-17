@@ -120,11 +120,10 @@ def main():
                 shutil.copy2(src, dst)
                 print(f"   + {filename}")
 
-    # Copy placeholder agenda
-    example_agenda = os.path.join(base_dir, "workshops", "example", "agenda.png")
-    if os.path.exists(example_agenda):
-        shutil.copy2(example_agenda, os.path.join(workshop_dir, "agenda.png"))
-        print("   + agenda.png (placeholder - replace with yours)")
+    # Create placeholder agenda
+    agenda_path = os.path.join(workshop_dir, "agenda.png")
+    open(agenda_path, 'w').close()  # Create empty file
+    print("   + agenda.png (placeholder - replace with yours)")
 
     # Generate config.py
     config_content = f'''"""

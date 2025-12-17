@@ -3,15 +3,12 @@
                         WORKSHOP CONFIGURATION FILE
 ═══════════════════════════════════════════════════════════════════════════════
 
-This file defines all the settings for your workshop slide deck.
+Workshop: FASTR Workshop - Example Country
+Location: Capital City, Country
+Date: January 15-17, 2025
 
-HOW TO USE:
-1. Copy this entire 'example' folder to a new folder with your workshop name
-   Example: cp -r workshops/example workshops/2025-03-kenya
-
-2. Edit this config.py with your workshop details
-
-3. Run: python3 tools/02_build_deck.py
+To build your deck, run:
+    python3 tools/02_build_deck.py --workshop example
 
 ═══════════════════════════════════════════════════════════════════════════════
 """
@@ -21,15 +18,13 @@ WORKSHOP_CONFIG = {
     # ═══════════════════════════════════════════════════════════════════════
     # SECTION 1: BASIC WORKSHOP INFO
     # ═══════════════════════════════════════════════════════════════════════
-    # This information appears on the title slide and closing slides
 
-    'workshop_id': 'example',                          # Folder name (no spaces!)
-    'name': 'FASTR Workshop - Example Country',        # Full workshop title
-    'date': 'January 15-17, 2025',                     # Workshop dates
-    'location': 'Capital City, Country',               # City and country
-    'facilitators': 'Dr. Smith, Dr. Jones',            # Lead facilitator names
+    'workshop_id': 'example',
+    'name': 'FASTR Workshop - Example Country',
+    'date': 'January 15-17, 2025',
+    'location': 'Capital City, Country',
+    'facilitators': 'Dr. Smith, Dr. Jones',
 
-    # Contact info (shown on closing slide)
     'contact_email': 'fastr@example.org',
     'website': 'https://fastr.org',
 
@@ -38,86 +33,55 @@ WORKSHOP_CONFIG = {
     # SECTION 2: YOUR DECK - What slides, in what order
     # ═══════════════════════════════════════════════════════════════════════
     #
-    # List everything you want in your deck, in order.
-    # - Built-in sessions: 'intro', 'extraction', 'dq_assessment', etc.
-    # - Your custom slides: 'objectives.md', 'country-data.md', etc.
+    # Built-in sessions: 'intro', 'extraction', 'dq_assessment', etc.
+    # Your custom slides: 'objectives.md', 'country-overview.md', etc.
     #
-    # Just put your .md files wherever you want them to appear!
-    #
-    # AVAILABLE BUILT-IN SESSIONS:
-    # ┌──────────────────────────────────────────────────────────────────────┐
-    # │  'agenda'        = Agenda slide (needs agenda.png in your folder)    │
-    # │  'intro'         = Background & FASTR Approach (~30 min)             │
-    # │  'extraction'    = Data Extraction from DHIS2 (~45 min)              │
-    # │  'dq_assessment' = Data Quality Assessment (~90 min)                 │
-    # │  'dq_adjustment' = Data Adjustment Methods (~60 min)                 │
-    # │  'disruption'    = Service Disruption Detection (~90 min)            │
-    # │  'coverage'      = Coverage Analysis (~90 min)                       │
-    # │  'facility'      = Facility Assessments (~30 min)                    │
-    # └──────────────────────────────────────────────────────────────────────┘
-    #
-    # CUSTOM SLIDES:
-    # Copy templates from templates/custom_slides/ to your workshop folder,
-    # customize them, then add them to deck_order where you want them.
+    # Comment out any slides you don't want to include.
 
     'deck_order': [
         # --- Opening ---
         'agenda',
-        # 'objectives.md',        # ← Copy from templates/custom_slides/
-        # 'country-overview.md',  # ← Copy from templates/custom_slides/
+        'objectives.md',
+        'country-overview.md',
 
         # --- Core Content ---
         'intro',
-        # 'health-priorities.md', # ← Copy from templates/custom_slides/
+        'health-priorities.md',
         'extraction',
         'dq_assessment',
-        # 'dq-findings.md',       # ← Copy from templates/custom_slides/
+        'dq-findings.md',
         'dq_adjustment',
         'disruption',
-        # 'disruption-local.md',  # ← Copy from templates/custom_slides/
+        'disruption-local.md',
         'coverage',
-        # 'coverage-results.md',  # ← Copy from templates/custom_slides/
+        'coverage-results.md',
 
         # --- Closing ---
-        # 'next-steps.md',        # ← Copy from templates/custom_slides/
+        'next-steps.md',
     ],
 
 
     # ═══════════════════════════════════════════════════════════════════════
-    # SECTION 3: WORKSHOP SCHEDULE & BREAKS
+    # SECTION 3: WORKSHOP SCHEDULE
     # ═══════════════════════════════════════════════════════════════════════
-    # How many days? Set to None to be prompted when building.
 
-    'workshop_days': None,  # None = prompt me, or 1, 2, 3
+    'workshop_days': 2,
 
-    # Break times (shown on break slides)
     'tea_time': '10:45 AM',
     'lunch_time': '1:00 PM',
     'afternoon_tea_time': '3:30 PM',
-
-    # What time does each day start? (for day-end slides)
     'day_start_time': '9:00 AM',
 
-    # Include "See you tomorrow" slides between days?
     'include_day_end_slides': True,
-
-
-    # ═══════════════════════════════════════════════════════════════════════
-    # SECTION 4: CLOSING SLIDES
-    # ═══════════════════════════════════════════════════════════════════════
-
-    # Include "Thank You" and contact information slides at the end?
     'include_closing': True,
-
-    # Agenda image filename (must be in your workshop folder)
     'agenda_image': 'agenda.png',
 
 
     # ═══════════════════════════════════════════════════════════════════════
-    # SECTION 5: COUNTRY DATA
+    # SECTION 4: COUNTRY DATA
     # ═══════════════════════════════════════════════════════════════════════
-    # Fill in your country stats here. Use {{variable_name}} in your slides.
-    # Example: {{total_facilities}} becomes "2,847" in the slides.
+    # Fill in your country stats here. Use {variable_name} in your slides.
+    # Example: {total_facilities} becomes "2,847" in the slides.
 
     'country_data': {
         # Health system
