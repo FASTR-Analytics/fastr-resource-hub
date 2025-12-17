@@ -4,13 +4,12 @@ theme: fastr
 paginate: true
 ---
 
+![FASTR Logo](../assets/logos/FASTR_Primary_01_FullName.png)
+
 # {{WORKSHOP_NAME}}
 
-**Date:** {{DATE}}
-**Location:** {{LOCATION}}
-**Facilitators:** {{FACILITATORS}}
+**{{DATE}}** | **{{LOCATION}}**
 
-<!-- ![FASTR Logo](../assets/logos/fastr_logo.png) -->
-<!-- TODO: Add FASTR logo to assets/logos/ folder -->
+*{{FACILITATORS}}*
 
 ---
