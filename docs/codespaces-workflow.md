@@ -97,7 +97,7 @@ git pull origin main
 # ... edit workshops/2025_XX_country/config.py ...
 
 # 3. Build
-python3 tools/02_build_deck.py --workshop 2025_XX_country
+python3 tools/03_build_deck.py --workshop 2025_XX_country
 
 # 4. Save your config to GitHub
 git add workshops/2025_XX_country/

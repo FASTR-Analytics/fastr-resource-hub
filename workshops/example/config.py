@@ -8,7 +8,7 @@ Location: Capital City, Country
 Date: January 15-17, 2025
 
 To build your deck, run:
-    python3 tools/02_build_deck.py --workshop example
+    python3 tools/03_build_deck.py --workshop example
 
 ═══════════════════════════════════════════════════════════════════════════════
 """

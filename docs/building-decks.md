@@ -2,17 +2,27 @@
 
 Step-by-step guide for assembling and rendering FASTR workshop presentations.
 
-## Overview: Two-Step Workflow
+## Overview: Workflow
 
-Building a workshop deck involves two distinct steps:
+```bash
+# 1. Create workshop (interactive wizard)
+python3 tools/01_setup_workshop.py
 
-1. **Assemble** - Combine core content + templates + custom slides into a single markdown file
-2. **Render** - Export the markdown to PDF (recommended) or PowerPoint
+# 2. Check your setup (catches common issues)
+python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
+
+# 3. Build the deck
+python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
+
+# 4. Export to PDF
+marp outputs/YOUR_WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+```
 
 ```
 Workshop Config  ─┐
 Core Content     ─┼─> [Build Script] ─> Markdown Deck ─> [Marp CLI] ─> PDF
 Custom Slides    ─┘                                    └> [Pandoc] ─> PowerPoint
+Country Assets   ─┘
 ```
 
 ---
@@ -189,7 +199,7 @@ cp ~/Desktop/agenda.png workshops/2025_01_nigeria/agenda.png
 Run the build script to assemble all content into a single markdown file:
 
 ```bash
-python3 tools/02_build_deck.py --workshop 2025_01_nigeria
+python3 tools/03_build_deck.py --workshop 2025_01_nigeria
 ```
 
 **What this does:**
@@ -319,7 +329,7 @@ xdg-open outputs/2025_01_nigeria_deck.pdf
 ### Rendering Command
 
 ```bash
-python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
+python3 tools/04_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
 ```
 
 **Output:** `outputs/2025_01_nigeria_deck.pptx`
@@ -433,7 +443,7 @@ cp ~/Desktop/nigeria_agenda.png agenda.png
 cd ../..
 
 # Build the deck
-python3 tools/02_build_deck.py --workshop 2025_01_nigeria
+python3 tools/03_build_deck.py --workshop 2025_01_nigeria
 ```
 
 ### 5. Render to PDF (Primary)
@@ -443,7 +453,7 @@ marp outputs/2025_01_nigeria_deck.md --theme-set fastr-theme.css --pdf
 
 ### 6. Render to PowerPoint (Backup)
 ```bash
-python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
+python3 tools/04_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
 ```
 
 ### 7. Review and Share
@@ -547,7 +557,7 @@ cp outputs/2025_01_nigeria_deck.pdf ~/Desktop/
 
 **Build a deck:**
 ```bash
-python3 tools/02_build_deck.py --workshop WORKSHOP_ID
+python3 tools/03_build_deck.py --workshop WORKSHOP_ID
 ```
 
 **Render to PDF:**
@@ -557,7 +567,7 @@ marp outputs/DECK.md --theme-set fastr-theme.css --pdf
 
 **Render to PowerPoint:**
 ```bash
-python3 tools/03_convert_to_pptx.py outputs/DECK.md
+python3 tools/04_convert_to_pptx.py outputs/DECK.md
 ```
 
 **Preview in browser:**

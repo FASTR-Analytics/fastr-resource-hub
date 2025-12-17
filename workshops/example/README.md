@@ -20,11 +20,11 @@
 ## To build your deck
 
 ```bash
-python3 tools/02_build_deck.py --workshop example
+python3 tools/03_build_deck.py --workshop example
 ```
 
 ## To convert to PowerPoint
 
 ```bash
-python3 tools/03_convert_to_pptx.py outputs/example_deck.md
+python3 tools/04_convert_to_pptx.py outputs/example_deck.md
 ```

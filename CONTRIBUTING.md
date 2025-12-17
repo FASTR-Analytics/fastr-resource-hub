@@ -57,7 +57,7 @@ Core content files are reusable FASTR methodology modules used across all worksh
 
 2. **Test your changes**
    ```bash
-   python3 tools/02_build_deck.py --workshop example
+   python3 tools/03_build_deck.py --workshop example
    marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
    ```
 
@@ -133,7 +133,7 @@ Custom slide templates allow you to create reusable slide layouts that can be us
 
 4. **Test the template**
    ```bash
-   python3 tools/02_build_deck.py --workshop your_workshop
+   python3 tools/03_build_deck.py --workshop your_workshop
    ```
 
 ### Template Best Practices
@@ -165,19 +165,19 @@ Build tools are Python scripts that assemble and process slide decks.
 
 1. **Edit the tool script**
    ```bash
-   code tools/02_build_deck.py
+   code tools/03_build_deck.py
    ```
 
 2. **Test with multiple workshops**
    ```bash
    # Test with example workshop
-   python3 tools/02_build_deck.py --workshop example
+   python3 tools/03_build_deck.py --workshop example
 
    # Test with another workshop
-   python3 tools/02_build_deck.py --workshop demo_country
+   python3 tools/03_build_deck.py --workshop demo_country
 
    # Test edge cases
-   python3 tools/02_build_deck.py --workshop minimal_workshop
+   python3 tools/03_build_deck.py --workshop minimal_workshop
    ```
 
 3. **Verify outputs**
@@ -200,7 +200,7 @@ Build tools are Python scripts that assemble and process slide decks.
 
 5. **Commit with detailed message**
    ```bash
-   git add tools/02_build_deck.py
+   git add tools/03_build_deck.py
    git commit -m "Add support for conditional section inclusion
 
    - Added --exclude-sections flag
@@ -226,7 +226,7 @@ Always test before committing. The level of testing depends on what you changed.
 
 ```bash
 # Build example deck
-python3 tools/02_build_deck.py --workshop example
+python3 tools/03_build_deck.py --workshop example
 
 # Render to PDF
 marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
@@ -245,7 +245,7 @@ open outputs/example_deck.pdf
 
 ```bash
 # Build workshop using the template
-python3 tools/02_build_deck.py --workshop your_workshop
+python3 tools/03_build_deck.py --workshop your_workshop
 
 # Check template was inserted correctly
 grep "Results Overview" outputs/your_workshop_deck.md
@@ -267,7 +267,7 @@ open outputs/your_workshop_deck.pdf
 # Test with multiple workshops
 for workshop in example demo_country; do
     echo "Testing $workshop..."
-    python3 tools/02_build_deck.py --workshop $workshop
+    python3 tools/03_build_deck.py --workshop $workshop
     if [ $? -eq 0 ]; then
         echo "✓ $workshop build succeeded"
     else
@@ -276,8 +276,8 @@ for workshop in example demo_country; do
 done
 
 # Test error handling
-python3 tools/02_build_deck.py --workshop nonexistent
-python3 tools/02_build_deck.py  # Missing required argument
+python3 tools/03_build_deck.py --workshop nonexistent
+python3 tools/03_build_deck.py  # Missing required argument
 ```
 
 **Check for:**
@@ -290,13 +290,13 @@ python3 tools/02_build_deck.py  # Missing required argument
 
 ```bash
 # Fast syntax check
-python3 -m py_compile tools/02_build_deck.py
+python3 -m py_compile tools/03_build_deck.py
 
 # Build without PDF (faster)
-python3 tools/02_build_deck.py --workshop example
+python3 tools/03_build_deck.py --workshop example
 
 # Build with PDF
-python3 tools/02_build_deck.py --workshop example && \
+python3 tools/03_build_deck.py --workshop example && \
   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
 
 # Check specific section
@@ -320,7 +320,7 @@ code workshops/2025_01_nigeria/config.py
 code workshops/2025_01_nigeria/custom_slides.md
 
 # Build and test
-python3 tools/02_build_deck.py --workshop 2025_01_nigeria
+python3 tools/03_build_deck.py --workshop 2025_01_nigeria
 
 # Commit
 git add workshops/2025_01_nigeria/
@@ -363,7 +363,7 @@ git commit -m "Add results visualization"
 code templates/title_slide.md
 
 # Test with example
-python3 tools/02_build_deck.py --workshop example
+python3 tools/03_build_deck.py --workshop example
 
 # Verify all variables work
 marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
