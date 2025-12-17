@@ -160,23 +160,27 @@ Coverage = (Services Delivered / Target Population) × 100%
 
 ---
 
-## Filling Gaps Between Surveys
+## Projecting Forward from Surveys
 
-**Problem:** Surveys only every 3-5 years. What about in between?
+**Problem:** Surveys only every 3-5 years. What's happened since the last survey?
 
-**Solution:** Use trends from DHIS2 data to fill gaps
+**Solution:** Project forward from the last survey using HMIS trends
+
+**How it works:**
+1. **Anchor** to the most recent survey value (baseline)
+2. **Calculate deltas** (year-on-year changes) from HMIS coverage data
+3. **Project forward:** New estimate = Survey value + cumulative HMIS change
 
 **Example - ANC4 Coverage:**
 
-| Year | Survey | DHIS2-based | FASTR Final Estimate |
-|------|--------|-------------|---------------------|
-| 2018 | - | 65% | 65% |
-| **2019** | **70%** | 68% | **70% (survey)** |
-| 2020 | - | 72% | **72%** (follow DHIS2 trend) |
-| 2021 | - | 74% | **74%** (follow DHIS2 trend) |
-| **2022** | **75%** | 76% | **75% (survey)** |
+| Year | Survey | HMIS Coverage | HMIS Delta | Projected |
+|------|--------|---------------|------------|-----------|
+| 2019 | **68%** | 65% | - | **68%** (anchor) |
+| 2020 | - | 67% | +2% | **70%** (68 + 2) |
+| 2021 | - | 70% | +3% | **73%** (68 + 5) |
+| 2022 | - | 72% | +2% | **75%** (68 + 7) |
 
-**FASTR tracks the direction of change from DHIS2** while anchoring to validated survey points.
+**Key insight:** FASTR uses HMIS to track the *direction and magnitude of change*, anchored to validated survey data.
 
 ---
 
@@ -405,9 +409,9 @@ Coverage = (Services Delivered / Target Population) × 100%
 - Surveys (accurate but infrequent)
 - Population data (always available but may be outdated)
 
-**4. Fills gaps between surveys**
-- Uses DHIS2 trends to estimate coverage for non-survey years
-- Anchored to validated survey points
+**4. Projects forward from surveys**
+- Uses HMIS trends to project coverage beyond the last survey
+- Anchored to validated survey baseline, tracks direction of change
 
 **5. Geographic detail reveals equity gaps**
 - National averages can hide local problems
