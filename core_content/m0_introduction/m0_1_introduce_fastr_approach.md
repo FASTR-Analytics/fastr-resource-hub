@@ -10,7 +10,7 @@ A data-driven framework developed by the GFF to help countries monitor and impro
 
 FASTR strengthens the use of routine health facility data by applying standardized methods for data quality assessment, trend analysis, coverage estimation, and decision-focused interpretation.
 
-![FASTR Approach](../../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Approach](../..//shared%20assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 ---
 ### FASTR supports governments to:
