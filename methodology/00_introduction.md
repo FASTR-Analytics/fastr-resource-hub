@@ -202,12 +202,26 @@ More results and reports can be found in the [FASTR Resource Repository](https:/
 
 ## What This Documentation Covers
 
-This methodology documentation describes the FASTR approach to routine HMIS data analysis. FASTR uses four code modules to automate different parts of the analysis:
+This methodology documentation describes the complete FASTR approach to routine HMIS data analysis, from initial planning through results communication.
 
-- [**Module 4 · Data Quality Assessment**](04_data_quality_assessment.md) - Automated assessment of HMIS data quality through completeness, timeliness, consistency, and accuracy metrics
-- [**Module 5 · Data Quality Adjustments**](05_data_quality_adjustment.md) - Automated techniques for improving data accuracy by identifying and adjusting for data quality issues
-- [**Module 6a · Service Utilization**](06a_service_utilization.md) - Automated analysis of health service usage patterns to identify changes in priority service volumes
-- [**Module 6b · Coverage Estimates**](06b_coverage_estimates.md) - Automated methods for estimating service coverage and comparing trends to country targets
+### Planning & Preparation
+
+- [**Identify Questions & Indicators**](01_identify_questions_indicators.md) - Defining priority questions and selecting core indicators for FASTR implementation
+- [**Data Extraction**](02_data_extraction.md) - Extracting and preparing HMIS data from DHIS2 for analysis
+- [**The FASTR Data Analytics Platform**](03_fastr_analytics_platform.md) - Using the platform for automated analysis and visualization
+
+### Analytics Modules (FASTR Platform)
+
+The FASTR analytics platform includes four automated modules:
+
+- [**Data Quality Assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
+- [**Data Quality Adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
+- [**Service Utilization Analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
+- [**Coverage Estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
+
+### Results & Communication
+
+- [**Results Communication and Data Use**](07_results_communication.md) - Interpreting findings, data visualization, and using data for decision-making
 
 ## References
 

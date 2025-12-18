@@ -1,10 +1,10 @@
-# Module 1: Data Quality Assessment (DQA)
+# Data Quality Assessment (DQA)
 
 ## 1. Overview (What & Why)
 
 ### What does this module do?
 
-The Data Quality Assessment (DQA) module evaluates the reliability of Health Management Information System (HMIS) data from health facilities. It acts as a quality control checkpoint in the FASTR pipeline, examining monthly facility reports to identify data issues before the information is used for decision-making.
+The Data Quality Assessment (DQA) module (Module 1 in the FASTR analytics platform) evaluates the reliability of Health Management Information System (HMIS) data from health facilities. It acts as a quality control checkpoint in the FASTR pipeline, examining monthly facility reports to identify data issues before the information is used for decision-making.
 
 The module assesses data quality through three complementary lenses: **detecting outliers** (unusually high values that may indicate reporting errors), **assessing completeness** (whether facilities consistently submit their reports), and **measuring consistency** (whether related health indicators align with expected patterns). These assessments are combined into an overall DQA score that provides a single measure of data reliability.
 

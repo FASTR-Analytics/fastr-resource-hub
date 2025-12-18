@@ -1,9 +1,9 @@
-# Module 6: Data Analysis - Coverage Estimates
+# Coverage Estimates
 
 <!-- SLIDE:m6_3 -->
 ## Service Coverage Estimates
 
-This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
 
 **Three data sources integrated:**
 1. Adjusted health service volumes from HMIS

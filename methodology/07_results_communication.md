@@ -1,4 +1,4 @@
-# Module 7: Results Communication and Data Use
+# Results Communication and Data Use
 
 This module covers how to interpret, communicate, and use FASTR results for decision-making.
 

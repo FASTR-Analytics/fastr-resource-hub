@@ -1,4 +1,4 @@
-# Module 2: Data Extraction
+# Data Extraction
 
 This module covers the process of extracting data from DHIS2 for use in FASTR analyses.
 

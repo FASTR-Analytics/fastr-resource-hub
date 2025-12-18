@@ -1,4 +1,4 @@
-# Module 1: Identify Questions & Indicators
+# Identify Questions & Indicators
 
 This module guides the process of identifying the right questions and indicators for FASTR implementation.
 

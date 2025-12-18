@@ -1,9 +1,9 @@
-# Module 5: Data Quality Adjustment
+# Data Quality Adjustment
 
 <!-- SLIDE:m5_1 -->
 ## Approach to Data Quality Adjustment
 
-The Data Quality Adjustment module systematically corrects two common problems in routine health facility data:
+The Data Quality Adjustment module (Module 2 in the FASTR analytics platform) systematically corrects two common problems in routine health facility data:
 
 1. **Outliers** - extreme values caused by reporting errors or data entry mistakes
 2. **Missing data** - from incomplete reporting

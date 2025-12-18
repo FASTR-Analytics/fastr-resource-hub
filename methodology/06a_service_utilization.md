@@ -1,9 +1,9 @@
-# Module 6: Data Analysis - Service Utilization
+# Service Utilization Analysis
 
 <!-- SLIDE:m6_1 -->
 ## Service Utilization Analysis
 
-The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
 
 **Key capabilities:**
 - Identifies when health services deviate significantly from expected patterns
