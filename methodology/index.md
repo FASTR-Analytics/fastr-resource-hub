@@ -31,4 +31,3 @@ This documentation describes the FASTR approach to routine HMIS data analysis fo
 ## About FASTR
 
 The Global Financing Facility (GFF) supports country-led efforts to improve the timely use of data for decision-making through **Frequent Assessments and Health System Tools for Resilience (FASTR)**. This methodology documentation focuses on RMNCAH-N service use monitoring using routine HMIS data.
-# Trigger build

@@ -105,7 +105,7 @@ The module operates in two sequential stages, each with a distinct purpose:
 
 ### Workflow Diagram
 
-<iframe src="../images/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 3 Interactive Workflow"></iframe>
+<iframe src="resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 3 Interactive Workflow"></iframe>
 
 ### Key Decision Points
 

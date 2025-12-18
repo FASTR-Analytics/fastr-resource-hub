@@ -149,7 +149,7 @@ Results are saved with standardized column structures for each administrative le
 
 ### Workflow Diagram
 
-<iframe src="../images/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 4 Interactive Workflow"></iframe>
+<iframe src="resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 4 Interactive Workflow"></iframe>
 
 ### Key Decision Points
 

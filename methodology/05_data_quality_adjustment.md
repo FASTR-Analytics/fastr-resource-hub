@@ -89,7 +89,7 @@ The module saves four CSV files: one for facility-level data, one for subnationa
 
 ### Workflow Diagram
 
-<iframe src="../images/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 2 Interactive Workflow"></iframe>
+<iframe src="resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 2 Interactive Workflow"></iframe>
 
 ### Key Decision Points
 

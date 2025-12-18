@@ -88,7 +88,7 @@ The module produces several output files containing outlier lists, completeness 
 
 ### Workflow Diagram
 
-<iframe src="../images/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 1 Interactive Workflow"></iframe>
+<iframe src="resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 1 Interactive Workflow"></iframe>
 
 ### Key Decision Points
 
