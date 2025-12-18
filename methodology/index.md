@@ -1,4 +1,4 @@
-<div style="text-align: center; margin-bottom: 2em;">
+<div style="text-align: center; margin-bottom: 2em;" markdown>
 
 ![FASTR Logo](resources/logos/FASTR_Primary_01_FullName.png){: style="max-width: 600px; width: 100%"}
 

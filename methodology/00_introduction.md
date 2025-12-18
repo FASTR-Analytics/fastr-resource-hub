@@ -1,9 +1,3 @@
-<div style="text-align: center; margin-bottom: 2em;">
-
-![FASTR Logo](resources/logos/FASTR_Primary_01_FullName.png){: style="max-width: 600px; width: 100%"}
-
-</div>
-
 # FASTR RMNCAH-N Service Use Monitoring: Methodology Documentation
 
 <!-- SLIDE:m0_1 -->
@@ -13,6 +7,12 @@ The Global Financing Facility (GFF) supports country-led efforts to improve the 
 
 FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
 <!-- /SLIDE -->
+
+## Introduction to FASTR
+
+The Global Financing Facility (GFF) supports country-led efforts to improve the timely use of data for decision-making, ultimately leading to stronger primary healthcare (PHC) systems and better reproductive, maternal, newborn, child, and adolescent health and nutrition (RMNCAH-N) outcomes. This set of initiatives and technical support is referred to as **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
+
+FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
 
 <!-- SLIDE:m0_2 -->
 ## RMNCAH-N Service Use Monitoring
@@ -29,6 +29,16 @@ These analyses focus on priority indicators tied to national health reforms and 
 
 *Figure 1. Steps to implement RMNCAH-N service use monitoring*
 <!-- /SLIDE -->
+
+## RMNCAH-N Service Use Monitoring
+
+The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
+
+1. **Assess data quality** at national and sub-national levels to identify and address completeness, accuracy, and consistency issues
+2. **Track service utilization changes** by measuring monthly shifts in priority RMNCAH-N health service volumes
+3. **Monitor coverage progress** by comparing service delivery trends against country-specific targets and benchmarks
+
+These analyses focus on priority indicators tied to national health reforms and World Bank investments, with findings informing country planning processes and project implementation cycles. During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services using this approach.
 
 ![Steps to implement RMNCAH-N service use monitoring.](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
@@ -49,6 +59,16 @@ Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data
 
 *Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
 <!-- /SLIDE -->
+
+### Why rapid-cycle analytics?
+
+Existing health systems data sources are critical but often come with challenges that limit their use. Health management information system data may not be analyzed promptly or may be perceived as too low-quality to use for decision making. Traditional in-person household and facility-based surveys demand extensive resources and time, with long lags between survey design, data collection, and the availability of findings. This prevents decision-makers from using data to drive meaningful improvements in health outcomes. To fill this gap, the GFF supports countries to develop and use rapid-cycle analytic approaches.
+
+---
+
+### How does it work?
+
+Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
 
 ![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
@@ -73,6 +93,20 @@ Illustrative capacity-building activities include support to automate the extrac
 
 *Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
 <!-- /SLIDE -->
+
+### Technical Approaches
+
+FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
+
+1. **Analysis of routine health management information system (HMIS) data** assesses data quality, quantifies changes in priority health service volumes, and compares trends in service coverage to country targets for priority RMNCAH-N indicators.
+
+2. **Rapid-cycle health facility phone surveys** assess the performance of PHC facilities, monitor the implementation of reforms, identify the impact of shocks, and track changes over time. The phone survey is administered to a representative panel sample of PHCs over four quarterly contacts a year.
+
+3. **High-frequency household phone surveys** provide a snapshot of care seeking behavior, foregone care, financial protection, service coverage, and patient experience of care. Household surveys are currently done in partnership with the World Bank's Living Standards Measurement Study.
+
+4. **Follow-on analyses** employ root cause analysis and implementation research approaches to provide deeper understanding of issues uncovered by rapid-cycle analytics (e.g., explaining district-level performance variation, contextualizing the impact of health systems reforms, or investigating underlying causes of data quality issues and service delivery disruptions).
+
+Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
 
 ![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
@@ -132,6 +166,28 @@ The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N in
 
 The FASTR approach to routine data analysis focuses on a core set of data quality metrics which enables identification of the highest priority data quality issues for which data quality adjustments can be made. In addition to the core data quality measures, the FASTR approach generates an overall data quality score which combines the core metrics into a single summary measure.
 <!-- /SLIDE -->
+
+## FASTR Approach to Routine Data Analysis
+
+The FASTR approach to routine data analysis takes a three-pronged approach:
+
+1. **Identify issues in data quality**
+2. **Adjust for issues with data quality** to improve analysis accuracy
+3. **Analyze data to answer pressing country-specific policy questions** including identifying changes in priority service volumes and trends in service coverage as compared to country priorities and targets
+
+This approach enables identification of the highest priority data quality issues and subsequent necessary analytical adjustments so that data can be continually improved while appropriate analyses are conducted. Data quality assessment is conducted by indicator and can be disaggregated at sub-national level given facility-level data is used for the analysis. This is important to generate policy relevant regular reporting on data quality, service volume, and coverage estimates which provides a continual snapshot of RMNCAH-N service use.
+
+---
+
+### Focus on a Set of Core Indicators
+
+The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum, priority health areas across LMICs. These indicators capture key service delivery events, which have higher completeness rates and higher volume. In addition, these indicators serve as proxies for other services and interventions delivered at the same service contact. In addition, outpatient consultations (OPDs) are used as a proxy for the general use of health services. Additional, country and program-specific indicators can be added to the analysis to be responsive to country priorities.
+
+---
+
+### Focus on a Set of Core Data Quality Metrics
+
+The FASTR approach to routine data analysis focuses on a core set of data quality metrics which enables identification of the highest priority data quality issues for which data quality adjustments can be made. In addition to the core data quality measures, the FASTR approach generates an overall data quality score which combines the core metrics into a single summary measure.
 
 ## Results Communication and Data Use
 
