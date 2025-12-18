@@ -218,35 +218,32 @@ def format_time(minutes):
 def auto_assign_modules_to_days(selected_modules, num_days):
     """
     Auto-assign modules to days based on duration.
-    Tries to balance total time per day.
+    Maintains module order while balancing time across days.
     """
-    # Calculate total duration
-    total_duration = sum(MODULES[m]['duration'] for m in selected_modules)
+    # Sort modules to maintain logical sequence (0, 1, 2, 3, 4, 5, 6, 7)
+    sorted_modules = sorted(selected_modules)
+
+    # Calculate total duration and target per day
+    total_duration = sum(MODULES[m]['duration'] for m in sorted_modules)
     target_per_day = total_duration / num_days
 
     days = {d: [] for d in range(1, num_days + 1)}
     day_durations = {d: 0 for d in range(1, num_days + 1)}
 
-    # Assign modules, trying to balance days
-    remaining = list(selected_modules)
     current_day = 1
 
-    for mod in remaining:
+    # Assign modules in order, moving to next day when current is full
+    for mod in sorted_modules:
         duration = MODULES[mod]['duration']
 
-        # Find best day (not exceeding target too much)
-        best_day = current_day
-        for d in range(1, num_days + 1):
-            if day_durations[d] + duration <= target_per_day * 1.2:
-                best_day = d
-                break
+        # If adding this module exceeds target and we have more days, consider next day
+        if (day_durations[current_day] > 0 and
+            day_durations[current_day] + duration > target_per_day * 1.3 and
+            current_day < num_days):
+            current_day += 1
 
-        days[best_day].append(mod)
-        day_durations[best_day] += duration
-
-        # Move to next day if current is full
-        if day_durations[current_day] >= target_per_day:
-            current_day = min(current_day + 1, num_days)
+        days[current_day].append(mod)
+        day_durations[current_day] += duration
 
     return days
 
