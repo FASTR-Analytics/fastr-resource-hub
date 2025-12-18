@@ -1,0 +1,154 @@
+workshop:
+  id: 2025-nigeria
+  name: FASTR Workshop - Nigeria
+  country: Nigeria
+  location: Lagos
+  date: Jan 10-15, 2026
+  facilitators: Claire
+  contact_email: fastr@worldbank.org
+schedule:
+  days: 5
+  start_time: 9:00 AM
+  tea_time: 10:30 AM
+  lunch_time: 12:30 PM
+  afternoon_tea: 3:30 PM
+  agenda:
+    day1:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Introduction to the FASTR Approach
+      module: m0
+      duration: 75
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    - time: 10:45 AM
+      session: Identify Questions & Indicators
+      module: m1
+      duration: 60
+    day2:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Extraction
+      module: m2
+      duration: 30
+    - time: 9:45 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_1
+      duration: 15
+    - time: 10:00 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_2
+      duration: 15
+    - time: 10:15 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_3
+      duration: 15
+    - time: 10:30 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_4
+      duration: 15
+    - time: 10:45 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_5
+      duration: 15
+    - time: 11:00 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_6
+      duration: 15
+    - time: 11:15 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_7
+      duration: 15
+    - time: 11:30 AM
+      session: The FASTR Data Analytics Platform (continued)
+      module: m3_8
+      duration: 15
+    day3:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Quality Assessment
+      module: m4
+      duration: 75
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    - time: 10:45 AM
+      session: Data Quality Adjustment
+      module: m5
+      duration: 60
+    day4:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Analysis
+      module: m6
+      duration: 90
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    day5:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Results Communication and Data Use
+      module: m7
+      duration: 75
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+content:
+  modules:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  deck_order:
+  - agenda
+  - m0
+  - m1
+  - m2
+  - m3_1
+  - m3_2
+  - m3_3
+  - m3_4
+  - m3_5
+  - m3_6
+  - m3_7
+  - m3_8
+  - m4
+  - m5
+  - m6
+  - m7
+  - next-steps.md
+  custom_slides:
+  - objectives.md
+  - country-overview.md
+  - health-priorities.md
+  - next-steps.md
+country_data:
+  total_facilities: '[number of facilities]'
+  facilities_reporting: '[facilities reporting to DHIS2]'
+  reporting_rate: '[XX%]'
+  total_population: '[X million]'
+  women_reproductive_age: '[X million]'
+  under5_population: '[X million]'
+  expected_pregnancies: '[X per year]'
+  expected_births: '[X per year]'
+  last_survey: '[DHS YYYY or MICS YYYY]'

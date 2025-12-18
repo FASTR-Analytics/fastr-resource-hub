@@ -635,10 +635,101 @@ def main():
     # Create workshop folder
     os.makedirs(workshop_dir, exist_ok=True)
 
-    # Write YAML config
+    # Write YAML config with helpful comments
     config_path = os.path.join(workshop_dir, "workshop.yaml")
     with open(config_path, 'w') as f:
-        yaml.dump(config, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
+        f.write(f"""# ═══════════════════════════════════════════════════════════════════════
+# WORKSHOP CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════
+# Edit this file to customize your workshop.
+# After editing, rebuild with: python3 tools/03_build_deck.py
+# ═══════════════════════════════════════════════════════════════════════
+
+workshop:
+  id: {workshop_id}
+  name: {config['workshop']['name']}
+  country: {country}
+  location: {location}
+  date: {date_str}
+  facilitators: {facilitators}
+  contact_email: fastr@worldbank.org
+
+# ───────────────────────────────────────────────────────────────────────
+# SCHEDULE
+# ───────────────────────────────────────────────────────────────────────
+# To change session times: edit the 'time' field for each item
+# To add a session: copy an existing item and modify it
+# To remove a session: delete the entire item (time + session + duration)
+# Break types: add 'type: break' to show in italics on agenda
+# ───────────────────────────────────────────────────────────────────────
+
+schedule:
+  days: {num_days}
+  start_time: "{start_time}"
+  tea_time: "{tea_time}"
+  lunch_time: "{lunch_time}"
+  afternoon_tea: "{afternoon_tea}"
+  agenda:
+""")
+        # Write each day's schedule
+        for day_key, day_items in daily_schedules.items():
+            f.write(f"    {day_key}:\n")
+            for item in day_items:
+                f.write(f"      - time: \"{item['time']}\"\n")
+                f.write(f"        session: {item['session']}\n")
+                if 'module' in item:
+                    f.write(f"        module: {item['module']}\n")
+                if item.get('type') == 'break':
+                    f.write(f"        type: break\n")
+                f.write(f"        duration: {item['duration']}\n")
+
+        f.write(f"""
+# ───────────────────────────────────────────────────────────────────────
+# CONTENT - What slides appear in the deck
+# ───────────────────────────────────────────────────────────────────────
+# deck_order controls what appears and in what order:
+#   - 'agenda'     → Generated agenda slide(s)
+#   - 'm0', 'm1'   → All slides from that module
+#   - 'm3_1'       → Single topic from module 3 (for splitting long modules)
+#   - 'file.md'    → Custom slide from this workshop folder
+#
+# TO CHANGE ORDER: Rearrange items in deck_order
+# TO REMOVE MODULE: Delete it from deck_order
+# TO ADD CUSTOM SLIDE: Add filename.md and list it in deck_order
+# ───────────────────────────────────────────────────────────────────────
+
+content:
+  modules: {selected_modules}
+  deck_order:
+""")
+        for item in deck_order_items:
+            f.write(f"    - {item}\n")
+
+        f.write(f"""  custom_slides:
+    - objectives.md
+    - country-overview.md
+    - health-priorities.md
+    - next-steps.md
+
+# ───────────────────────────────────────────────────────────────────────
+# COUNTRY DATA - Variables for {{{{placeholder}}}} substitution
+# ───────────────────────────────────────────────────────────────────────
+# These values replace {{{{variable_name}}}} in your slides.
+# Example: {{{{total_population}}}} becomes "45 million"
+# Edit the values below with your country's data.
+# ───────────────────────────────────────────────────────────────────────
+
+country_data:
+  total_facilities: "[number of facilities]"
+  facilities_reporting: "[facilities reporting to DHIS2]"
+  reporting_rate: "[XX%]"
+  total_population: "[X million]"
+  women_reproductive_age: "[X million]"
+  under5_population: "[X million]"
+  expected_pregnancies: "[X per year]"
+  expected_births: "[X per year]"
+  last_survey: "[DHS YYYY or MICS YYYY]"
+""")
     print(f"   ✓ workshop.yaml")
 
     # Copy custom slide templates
