@@ -100,6 +100,7 @@ theme:
 
 # Plugins
 plugins:
+  - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
       lang: en
