@@ -198,19 +198,4 @@ Audit of slide content status across all methodology modules.
 
 ---
 
-## Workload Estimate
-
-> **Rough estimates only** - actual time will vary based on content complexity and available resources.
-
-| Category | Slides | Est. Hours |
-|----------|--------|------------|
-| Module 1 | 4 | 16-24 |
-| Module 3 | 8 | 32-48 |
-| Module 7 | 5 | 20-30 |
-| Module 2 | 1 | 4-6 |
-| Modules 6a/6b | 4-7 | 16-28 |
-| **Total** | **22-25** | **88-136** |
-
----
-
 *Last updated: 2025-12-18*
