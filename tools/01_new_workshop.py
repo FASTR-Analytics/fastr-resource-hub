@@ -306,48 +306,59 @@ def auto_assign_modules_to_days(selected_modules, num_days):
 def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins):
     """
     Build a detailed schedule for one day.
+    Consolidates consecutive topics from the same module into single entries.
 
     Args:
         day_items: list of dicts with 'id', 'duration', 'mod_num', 'label'
     """
+    # First, consolidate consecutive items from the same module
+    consolidated = []
+    i = 0
+    while i < len(day_items):
+        item = day_items[i]
+        mod_num = item['mod_num']
+        total_duration = item['duration']
+
+        # Look ahead for more items from same module
+        j = i + 1
+        while j < len(day_items) and day_items[j]['mod_num'] == mod_num:
+            total_duration += day_items[j]['duration']
+            j += 1
+
+        # Create consolidated entry
+        consolidated.append({
+            'mod_num': mod_num,
+            'duration': total_duration,
+            'name': MODULES[mod_num]['name'],
+        })
+        i = j
+
     schedule = []
     current_time = start_time_mins
 
-    # Welcome/recap
-    schedule.append({
-        'time': format_time(current_time),
-        'session': 'Welcome & Introductions',
-        'duration': 15
-    })
-    current_time += 15
-
     items_done = 0
-    total_items = len(day_items)
+    total_items = len(consolidated)
 
-    for item in day_items:
+    for item in consolidated:
         mod_num = item['mod_num']
-        item_id = item['id']
         duration = item['duration']
+        session_name = item['name']
 
-        # Get session name - use module name for whole modules, label for topics
-        if '_' in item_id:
-            # Topic: use module name + part indicator
-            session_name = f"{MODULES[mod_num]['name']} (continued)"
-        else:
-            # Whole module
-            session_name = MODULES[mod_num]['name']
+        # Add item to schedule with start and end time
+        start_str = format_time(current_time)
+        end_time = current_time + duration
+        end_str = format_time(end_time)
 
-        # Add item to schedule
         schedule.append({
-            'time': format_time(current_time),
+            'time': f"{start_str} - {end_str}",
             'session': session_name,
-            'module': item_id,
+            'module': f'm{mod_num}',
             'duration': duration
         })
-        current_time += duration
+        current_time = end_time
         items_done += 1
 
-        # Check for tea break (after first item if we haven't passed tea time)
+        # Check for tea break
         if items_done == 1 and current_time >= tea_time_mins - 15 and current_time < lunch_time_mins:
             schedule.append({
                 'time': format_time(tea_time_mins),
