@@ -50,7 +50,7 @@ This section will cover:
 -->
 
 <!-- SLIDE:m2_1 -->
-## 2.1 Why Extract Data?
+## Why Extract Data?
 
 ### Why Extract Data from DHIS2? Why not analyse directly inside DHIS2?
 
@@ -72,7 +72,7 @@ Data should be extracted at the **facility-month level** to enable:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2 -->
-## 2.2 Tools for Data Extraction
+## Tools for Data Extraction
 
 *Content to be developed*
 

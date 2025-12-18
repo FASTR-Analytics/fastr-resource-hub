@@ -36,7 +36,7 @@ This section will cover the complete process of communicating and using FASTR re
 -->
 
 <!-- SLIDE:m7_1 -->
-## 7.1 Analytical Thinking & Interpretation
+## Analytical Thinking & Interpretation
 
 *Content to be developed*
 
@@ -48,7 +48,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2 -->
-## 7.2 Data Visualization, Communication & Message Development
+## Data Visualization, Communication & Message Development
 
 *Content to be developed*
 
@@ -60,7 +60,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_3 -->
-## 7.3 Using Data for Decision-Making
+## Using Data for Decision-Making
 
 *Content to be developed*
 
@@ -72,7 +72,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_4 -->
-## 7.4 Stakeholder Engagement & Advocacy
+## Stakeholder Engagement & Advocacy
 
 *Content to be developed*
 
@@ -84,7 +84,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_5 -->
-## 7.5 Practice: Generating Quarterly Reporting Products
+## Generating Quarterly Reporting Products
 
 *Content to be developed*
 

@@ -34,7 +34,7 @@ This section will cover the complete process of:
 -->
 
 <!-- SLIDE:m1_1 -->
-## 1.1 Introduction to FASTR: Gaps and Challenges
+## Introduction to FASTR: Gaps and Challenges
 
 *Content to be developed*
 
@@ -45,7 +45,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2 -->
-## 1.2 Development of a Data Use Case
+## Development of a Data Use Case
 
 *Content to be developed*
 
@@ -56,7 +56,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3 -->
-## 1.3 Defining Priority Questions and Selecting Indicators
+## Defining Priority Questions and Selecting Indicators
 
 *Content to be developed*
 
@@ -68,7 +68,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_4 -->
-## 1.4 Preparing for Data Extraction
+## Preparing for Data Extraction
 
 *Content to be developed*
 

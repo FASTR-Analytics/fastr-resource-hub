@@ -42,7 +42,7 @@ This section will cover the complete process of working with the FASTR analytics
 -->
 
 <!-- SLIDE:m3_1 -->
-## 3.1 Overview of the Platform
+## Overview of the Platform
 
 *Content to be developed*
 
@@ -53,7 +53,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->
-## 3.2 Accessing the Platform
+## Accessing the Platform
 
 *Content to be developed*
 
@@ -64,7 +64,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_3 -->
-## 3.3 Setting Up the Structure
+## Setting Up the Structure
 
 *Content to be developed*
 
@@ -75,7 +75,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_4 -->
-## 3.4 Importing a Dataset
+## Importing a Dataset
 
 *Content to be developed*
 
@@ -86,7 +86,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_5 -->
-## 3.5 Installing and Running Modules
+## Installing and Running Modules
 
 *Content to be developed*
 
@@ -97,7 +97,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_6 -->
-## 3.6 Creating a New Project
+## Creating a New Project
 
 *Content to be developed*
 
@@ -108,7 +108,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_7 -->
-## 3.7 Creating Visualizations
+## Creating Visualizations
 
 *Content to be developed*
 
@@ -119,7 +119,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_8 -->
-## 3.8 Creating Reports
+## Creating Reports
 
 *Content to be developed*
 
