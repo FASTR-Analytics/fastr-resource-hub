@@ -4,15 +4,17 @@
                     FASTR SLIDE EXTRACTION TOOL
 ═══════════════════════════════════════════════════════════════════════════════
 
-Extracts slide content from methodology documentation.
+Step 0: Extract slide content from methodology documentation.
 
 USAGE:
-    python3 tools/extract_slides.py
+    python3 tools/00_extract_slides.py
 
 This script:
 1. Scans methodology/*.md files for <!-- SLIDE:xxx --> markers
 2. Extracts content between markers
 3. Generates/updates slide files in core_content/
+
+Run this ONCE when setting up, or whenever methodology docs change.
 
 MARKER FORMAT:
     <!-- SLIDE:m4_1 -->
@@ -304,7 +306,8 @@ def main():
     if success:
         print("💡 Next steps:")
         print("   1. Review extracted files in core_content/")
-        print("   2. Build a deck: python3 tools/03_build_deck.py --workshop example")
+        print("   2. Create a workshop: python3 tools/01_new_workshop.py")
+        print("   3. Build a deck: python3 tools/03_build_deck.py --workshop <name>")
         print("")
 
     sys.exit(0 if success else 1)

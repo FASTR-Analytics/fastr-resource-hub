@@ -61,6 +61,12 @@ import os
 import sys
 import importlib.util
 
+try:
+    import yaml
+    YAML_AVAILABLE = True
+except ImportError:
+    YAML_AVAILABLE = False
+
 # ═══════════════════════════════════════════════════════════════════════
 # MODULE DEFINITIONS
 # ═══════════════════════════════════════════════════════════════════════
@@ -346,25 +352,113 @@ def prompt_for_workshop(base_dir):
             sys.exit(0)
 
 
+def generate_agenda_slide(config):
+    """Generate agenda slide content from YAML config (table format)."""
+    schedule = config.get('_yaml_schedule', {})
+    agenda = schedule.get('agenda', {})
+    num_days = schedule.get('days', 1)
+
+    if not agenda:
+        return None
+
+    slide_content = "\n# Workshop Agenda\n\n"
+
+    for day_num in range(1, num_days + 1):
+        day_key = f'day{day_num}'
+        day_items = agenda.get(day_key, [])
+
+        if not day_items:
+            continue
+
+        if num_days > 1:
+            slide_content += f"**Day {day_num}**\n\n"
+
+        slide_content += "| Time | Session |\n|------|--------|\n"
+
+        for item in day_items:
+            time = item.get('time', '')
+            session = item.get('session', '')
+            is_break = item.get('type') == 'break'
+
+            if is_break:
+                slide_content += f"| {time} | *{session}* |\n"
+            else:
+                slide_content += f"| {time} | **{session}** |\n"
+
+        slide_content += "\n"
+
+    slide_content += "---\n"
+    return slide_content
+
+
+def load_yaml_config(yaml_path):
+    """Load and convert YAML config to expected format."""
+    if not YAML_AVAILABLE:
+        return None
+
+    with open(yaml_path, 'r') as f:
+        yaml_config = yaml.safe_load(f)
+
+    workshop = yaml_config.get('workshop', {})
+    schedule = yaml_config.get('schedule', {})
+    content = yaml_config.get('content', {})
+
+    # Convert to expected format
+    config = {
+        'workshop_id': workshop.get('id', ''),
+        'name': workshop.get('name', ''),
+        'date': workshop.get('date', ''),
+        'location': workshop.get('location', ''),
+        'facilitators': workshop.get('facilitators', ''),
+        'contact_email': workshop.get('contact_email', ''),
+        'website': workshop.get('website', 'https://fastr.org'),
+
+        'workshop_days': schedule.get('days', 2),
+        'tea_time': schedule.get('tea_time', '10:30 AM'),
+        'lunch_time': schedule.get('lunch_time', '12:30 PM'),
+        'afternoon_tea_time': schedule.get('afternoon_tea', '3:30 PM'),
+        'day_start_time': schedule.get('start_time', '9:00 AM'),
+
+        'deck_order': content.get('deck_order', []),
+        'include_day_end_slides': True,
+        'include_closing': True,
+
+        # Store original YAML schedule for agenda generation
+        '_yaml_schedule': schedule,
+        '_is_yaml': True,
+    }
+
+    return config
+
+
 def load_workshop_config(workshop_id, base_dir):
-    """Load the config.py file from a workshop folder"""
-    config_path = os.path.join(base_dir, "workshops", workshop_id, "config.py")
+    """Load workshop config from YAML or Python file."""
+    workshop_dir = os.path.join(base_dir, "workshops", workshop_id)
+    yaml_path = os.path.join(workshop_dir, "workshop.yaml")
+    py_path = os.path.join(workshop_dir, "config.py")
 
-    if not os.path.exists(config_path):
-        print(f"\nError: Workshop config not found!")
-        print(f"   Looking for: {config_path}")
-        print(f"\nMake sure:")
-        print(f"   1. Workshop folder exists: workshops/{workshop_id}/")
-        print(f"   2. It contains: config.py")
-        print(f"\nTry copying the example:")
-        print(f"   cp -r workshops/example workshops/{workshop_id}")
-        sys.exit(1)
+    # Try YAML first
+    if os.path.exists(yaml_path) and YAML_AVAILABLE:
+        print(f"   Loading workshop.yaml")
+        return load_yaml_config(yaml_path)
 
-    spec = importlib.util.spec_from_file_location("workshop_config", config_path)
-    config_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(config_module)
+    # Fall back to Python config
+    if os.path.exists(py_path):
+        print(f"   Loading config.py")
+        spec = importlib.util.spec_from_file_location("workshop_config", py_path)
+        config_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(config_module)
+        return config_module.WORKSHOP_CONFIG
 
-    return config_module.WORKSHOP_CONFIG
+    # No config found
+    print(f"\nError: Workshop config not found!")
+    print(f"   Looking for: workshop.yaml or config.py")
+    print(f"\nMake sure:")
+    print(f"   1. Workshop folder exists: workshops/{workshop_id}/")
+    print(f"   2. It contains: workshop.yaml or config.py")
+    print(f"\nCreate a workshop with:")
+    print(f"   python3 tools/01_new_workshop.py")
+    sys.exit(1)
 
 
 def prompt_for_days(config):
@@ -838,14 +932,22 @@ paginate: true
     for item in deck_order:
         # Check what type of item this is
         if item == 'agenda':
-            # Agenda slide
-            agenda_path = os.path.join(base_dir, "templates", "agenda.md")
-            agenda_content = read_markdown_file(agenda_path)
-            if agenda_content:
-                agenda_content = strip_frontmatter(agenda_content)
-                agenda_content = substitute_variables(agenda_content, config)
-                deck_content += ensure_slide_break(agenda_content) + "\n"
-                print(f"   Agenda")
+            # Agenda slide - generate from YAML config or use template
+            if config.get('_is_yaml'):
+                # Generate agenda from YAML schedule
+                agenda_content = generate_agenda_slide(config)
+                if agenda_content:
+                    deck_content += ensure_slide_break(agenda_content) + "\n"
+                    print(f"   Agenda (generated from config)")
+            else:
+                # Fall back to template for Python config
+                agenda_path = os.path.join(base_dir, "templates", "agenda.md")
+                agenda_content = read_markdown_file(agenda_path)
+                if agenda_content:
+                    agenda_content = strip_frontmatter(agenda_content)
+                    agenda_content = substitute_variables(agenda_content, config)
+                    deck_content += ensure_slide_break(agenda_content) + "\n"
+                    print(f"   Agenda (from template)")
 
         elif item.endswith('.md'):
             # Custom slide from workshop folder

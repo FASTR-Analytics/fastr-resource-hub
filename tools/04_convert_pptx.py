@@ -26,7 +26,7 @@ OPTION 1: Interactive Mode (Easiest!)
 --------------------------------------
 Just run without arguments and follow the prompts:
 
-    python3 tools/04_convert_to_pptx.py
+    python3 tools/04_convert_pptx.py
 
 The script will:
   - Show you all available markdown decks
@@ -39,11 +39,11 @@ OPTION 2: Command Line (For Experts)
 -------------------------------------
 Specify the markdown file directly:
 
-    python3 tools/04_convert_to_pptx.py outputs/2025-01-nigeria_deck.md
+    python3 tools/04_convert_pptx.py outputs/2025-01-nigeria_deck.md
 
 Or with custom template:
 
-    python3 tools/04_convert_to_pptx.py outputs/deck.md --reference custom.pptx
+    python3 tools/04_convert_pptx.py outputs/deck.md --reference custom.pptx
 
 
 ═══════════════════════════════════════════════════════════════════════
@@ -504,8 +504,8 @@ def main():
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-  python3 tools/04_convert_to_pptx.py outputs/example_deck.md
-  python3 tools/04_convert_to_pptx.py outputs/my_deck.md --reference custom.pptx
+  python3 tools/04_convert_pptx.py outputs/example_deck.md
+  python3 tools/04_convert_pptx.py outputs/my_deck.md --reference custom.pptx
 
 Note: PDF export is recommended over PowerPoint!
   marp outputs/deck.md --theme-set fastr-theme.css --pdf
