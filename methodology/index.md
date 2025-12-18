@@ -10,6 +10,44 @@ The Global Financing Facility (GFF) supports country-led efforts to improve the 
 
 FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
 
+<!-- SLIDE:m0_1 -->
+# What is FASTR?
+
+**Frequent Assessments and Health System Tools for Resilience**
+
+A data-driven framework developed by the GFF to help countries monitor and improve maternal, newborn, child, and adolescent health services.
+
+---
+
+## FASTR Supports Countries To:
+
+- **Assess data quality** at national and sub-national levels
+- **Track service utilization changes** in priority RMNCAH-N services
+- **Monitor coverage progress** against country-specific targets
+
+---
+
+## Why Rapid-Cycle Analytics?
+
+**The challenge:**
+- HMIS data may not be analyzed promptly
+- Data quality concerns limit trust and use
+- Household surveys are infrequent (every 3-5 years)
+
+**The solution:**
+Rapid-cycle analytic approaches provide timely, rigorous data that respond to each country's priorities
+
+---
+
+## The FASTR Cycle
+
+![FASTR rapid-cycle analytics framework](images/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+
+**Analyze → Learn → Strengthen → Act**
+
+A continuous cycle to improve data use for decision-making
+<!-- /SLIDE -->
+
 ## RMNCAH-N Service Use Monitoring
 
 The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:

@@ -52,6 +52,11 @@ MODULE_FOLDERS = {
 
 # Topic names for generating filenames
 TOPIC_NAMES = {
+    # m0 - Introduction
+    'm0_1': 'introduce_fastr_approach',
+    'm0_2': 'overview_of_resources',
+    'm0_3': 'models_of_implementation',
+
     # m4 - Data Quality Assessment
     'm4_1': 'approach_to_dqa',
     'm4_2': 'indicator_completeness',
