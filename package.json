@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "FASTR methodology slide deck builder using Marp",
   "scripts": {
-    "build": "python3 tools/03_build_deck.py",
-    "extract": "python3 tools/extract_slides.py",
-    "check": "python3 tools/02_check_workshop.py",
-    "setup-workshop": "python3 tools/01_setup_workshop.py",
-    "convert-pptx": "python3 tools/04_convert_to_pptx.py",
+    "build": "python3 tools/02_build_deck.py",
+    "extract": "python3 tools/00_extract_slides.py",
+    "new-workshop": "python3 tools/01_new_workshop.py",
+    "convert-pptx": "python3 tools/03_convert_pptx.py",
     "docs": "cd methodology && mkdocs serve",
     "docs-build": "cd methodology && mkdocs build"
   },

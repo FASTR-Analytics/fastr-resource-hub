@@ -30,7 +30,7 @@ New to this project? **[Read the Start Here guide](help%20and%20instructions/00_
 ```bash
 python3 tools/00_extract_slides.py    # Extract slides from methodology
 python3 tools/01_new_workshop.py      # Create new workshop
-python3 tools/03_build_deck.py        # Build deck
+python3 tools/02_build_deck.py        # Validate + Build deck
 ```
 
 ---

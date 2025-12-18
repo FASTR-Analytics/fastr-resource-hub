@@ -26,7 +26,7 @@ OPTION 1: Interactive Mode (Easiest!)
 --------------------------------------
 Just run without arguments and follow the prompts:
 
-    python3 tools/04_convert_pptx.py
+    python3 tools/03_convert_pptx.py
 
 The script will:
   - Show you all available markdown decks
@@ -39,11 +39,11 @@ OPTION 2: Command Line (For Experts)
 -------------------------------------
 Specify the markdown file directly:
 
-    python3 tools/04_convert_pptx.py outputs/2025-01-nigeria_deck.md
+    python3 tools/03_convert_pptx.py outputs/2025-01-nigeria_deck.md
 
 Or with custom template:
 
-    python3 tools/04_convert_pptx.py outputs/deck.md --reference custom.pptx
+    python3 tools/03_convert_pptx.py outputs/deck.md --reference custom.pptx
 
 
 ═══════════════════════════════════════════════════════════════════════
@@ -58,7 +58,7 @@ Or with custom template:
 
 2. Build your deck first:
 
-   python3 tools/03_build_deck.py --workshop YOUR-WORKSHOP
+   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP
 
 3. You should have a markdown file:
 
@@ -208,7 +208,7 @@ def prompt_for_deck(base_dir):
     if not decks:
         print("❌ No decks found in outputs/ folder!")
         print("\n💡 Build a deck first:")
-        print("   python3 tools/03_build_deck.py --workshop YOUR-WORKSHOP")
+        print("   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP")
         sys.exit(1)
 
     for i, deck in enumerate(decks, 1):
@@ -384,7 +384,7 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
     if not os.path.exists(md_file):
         print(f"\n❌ Error: File not found: {md_file}")
         print(f"\n💡 Make sure you've built a deck first:")
-        print(f"   python3 tools/03_build_deck.py --workshop YOUR-WORKSHOP")
+        print(f"   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP")
         return False
 
     # Show what we're converting
@@ -519,8 +519,8 @@ def main():
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-  python3 tools/04_convert_pptx.py outputs/example_deck.md
-  python3 tools/04_convert_pptx.py outputs/my_deck.md --reference custom.pptx
+  python3 tools/03_convert_pptx.py outputs/example_deck.md
+  python3 tools/03_convert_pptx.py outputs/my_deck.md --reference custom.pptx
 
 Note: PDF export is recommended over PowerPoint!
   marp outputs/deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files

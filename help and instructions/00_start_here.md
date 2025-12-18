@@ -104,7 +104,7 @@ This extracts SLIDE-marked content into `core_content/` for use in workshops.
 
 ```bash
 python3 tools/01_new_workshop.py       # Interactive wizard
-python3 tools/03_build_deck.py         # Build deck
+python3 tools/02_build_deck.py         # Build deck
 marp --no-config outputs/YOUR_deck.md --theme fastr-theme.css --pdf -o outputs/YOUR_deck.pdf
 ```
 
@@ -140,9 +140,8 @@ marp --no-config outputs/YOUR_deck.md --theme fastr-theme.css --pdf -o outputs/Y
 |---------|--------------|
 | `python3 tools/00_extract_slides.py` | Extract slides from methodology |
 | `python3 tools/01_new_workshop.py` | Create new workshop |
-| `python3 tools/02_check_workshop.py` | Check workshop for errors |
-| `python3 tools/03_build_deck.py` | Build the slide deck |
-| `python3 tools/04_convert_pptx.py` | Convert to PowerPoint |
+| `python3 tools/02_build_deck.py` | Validate + Build the slide deck |
+| `python3 tools/03_convert_pptx.py` | Convert to PowerPoint |
 
 ---
 

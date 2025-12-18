@@ -455,7 +455,7 @@ Let's test the complete setup by building the example workshop.
 
 3. **Build the example deck:**
    ```bash
-   python tools/03_build_deck.py --workshop example
+   python tools/02_build_deck.py --workshop example
    ```
 
    Expected output:
@@ -495,7 +495,7 @@ Let's test the complete setup by building the example workshop.
 
 3. **Build the example deck:**
    ```bash
-   python3 tools/03_build_deck.py --workshop example
+   python3 tools/02_build_deck.py --workshop example
    ```
 
    Expected output:
@@ -581,7 +581,7 @@ To export to PowerPoint:
 
 ```bash
 # After building your deck
-python3 tools/04_convert_to_pptx.py outputs/example_deck.md
+python3 tools/03_convert_pptx.py outputs/example_deck.md
 ```
 
 Output: `outputs/example_deck.pptx`
@@ -655,10 +655,10 @@ Output: `outputs/example_deck.pptx`
 ### Build a deck
 ```bash
 # Windows
-python tools/03_build_deck.py --workshop WORKSHOP_ID
+python tools/02_build_deck.py --workshop WORKSHOP_ID
 
 # Mac
-python3 tools/03_build_deck.py --workshop WORKSHOP_ID
+python3 tools/02_build_deck.py --workshop WORKSHOP_ID
 ```
 
 ### Render to PDF
@@ -669,10 +669,10 @@ marp --no-config outputs/DECK.md --theme fastr-theme.css --pdf --allow-local-fil
 ### Render to PowerPoint
 ```bash
 # Windows
-python tools/04_convert_to_pptx.py outputs/DECK.md
+python tools/03_convert_pptx.py outputs/DECK.md
 
 # Mac
-python3 tools/04_convert_to_pptx.py outputs/DECK.md
+python3 tools/03_convert_pptx.py outputs/DECK.md
 ```
 
 ### Open in VS Code

@@ -77,7 +77,7 @@ python3 tools/00_extract_slides.py
 
 ```bash
 # Build example workshop
-python3 tools/03_build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 
 # Export to PDF
 marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
@@ -117,8 +117,7 @@ workshops/YOUR_WORKSHOP/
 ### 3. Build and test
 
 ```bash
-python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
-python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
+python3 tools/02_build_deck.py --workshop YOUR_WORKSHOP
 marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 

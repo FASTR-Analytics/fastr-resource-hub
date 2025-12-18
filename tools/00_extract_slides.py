@@ -326,7 +326,7 @@ def main():
         print("💡 Next steps:")
         print("   1. Review extracted files in core_content/")
         print("   2. Create a workshop: python3 tools/01_new_workshop.py")
-        print("   3. Build a deck: python3 tools/03_build_deck.py --workshop <name>")
+        print("   3. Build a deck: python3 tools/02_build_deck.py --workshop <name>")
         print("")
 
     sys.exit(0 if success else 1)

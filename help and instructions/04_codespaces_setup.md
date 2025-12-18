@@ -94,10 +94,10 @@ git push origin main
 git pull origin main
 
 # 2. Create workshop (or edit existing)
-python3 tools/01_setup_workshop.py
+python3 tools/01_new_workshop.py
 
 # 3. Build
-python3 tools/03_build_deck.py --workshop 2025-country
+python3 tools/02_build_deck.py --workshop 2025-country
 
 # 4. Save your config to GitHub
 git add workshops/2025-country/

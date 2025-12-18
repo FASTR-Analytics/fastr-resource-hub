@@ -271,7 +271,7 @@ def hello_world():
 
 ````markdown
 ```bash
-python3 tools/03_build_deck.py --workshop nigeria
+python3 tools/02_build_deck.py --workshop nigeria
 marp --no-config outputs/nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 ````
@@ -507,7 +507,7 @@ paginate: true
 
 3. Build the deck:
    ```bash
-   python3 tools/03_build_deck.py --workshop 2025_01_nigeria
+   python3 tools/02_build_deck.py --workshop 2025_01_nigeria
    ```
 
 **Output:** `outputs/2025_01_nigeria_deck.md`
@@ -644,7 +644,7 @@ Well-organized content below.
 ### Building to PDF:
 ```bash
 # Build the deck
-python3 tools/03_build_deck.py --workshop your_workshop
+python3 tools/02_build_deck.py --workshop your_workshop
 
 # Render to PDF
 marp --no-config outputs/your_workshop_deck.md --theme fastr-theme.css --pdf --allow-local-files

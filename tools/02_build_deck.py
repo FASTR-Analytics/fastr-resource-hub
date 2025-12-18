@@ -4,39 +4,23 @@
                     FASTR SLIDE DECK BUILDER
 ═══════════════════════════════════════════════════════════════════════
 
-This script assembles a complete slide deck from:
-  1. Title slide (with your workshop details)
-  2. Agenda slide (if you have agenda.png)
-  3. Core FASTR sessions (with breaks inserted at natural points!)
-  4. Your custom slides (country-specific content)
-  5. Closing slides (thank you & contact)
+Validates and builds a complete slide deck for FASTR workshops.
+
+What it does:
+  1. Validates workshop config (required fields, missing files, undefined variables)
+  2. Assembles slides from core content + custom slides
+  3. Inserts breaks and day markers at appropriate points
+  4. Generates a Marp-ready markdown file
 
 ═══════════════════════════════════════════════════════════════════════
                          HOW TO USE
 ═══════════════════════════════════════════════════════════════════════
 
-OPTION 1: Interactive Mode (Easiest!)
---------------------------------------
-Just run without arguments and follow the prompts:
+Interactive mode:
+    python3 tools/02_build_deck.py
 
-    python3 tools/03_build_deck.py
-
-The script will:
-  - Show you all available workshops
-  - Ask which one to build
-  - Ask how many days your workshop is
-  - Show suggested break placements
-  - Build it!
-
-
-OPTION 2: Command Line (For Experts)
--------------------------------------
-Specify the workshop folder name directly:
-
-    python3 tools/03_build_deck.py --workshop 2025-01-nigeria
-
-Replace "2025-01-nigeria" with YOUR workshop folder name.
-
+Command line:
+    python3 tools/02_build_deck.py --workshop 2025-nigeria
 
 ═══════════════════════════════════════════════════════════════════════
                       BEFORE YOU START
@@ -45,12 +29,7 @@ Replace "2025-01-nigeria" with YOUR workshop folder name.
 1. Create a workshop using the wizard:
    python3 tools/01_new_workshop.py
 
-2. This creates a folder with:
-   workshop.yaml (settings, schedule, modules)
-   *.md files (customizable slides)
-   media/ folder (for country outputs)
-
-3. Edit workshop.yaml to customize:
+2. Edit workshop.yaml to customize:
    - country_data section for {{variable}} substitution
    - deck_order to add/remove slides
 
@@ -85,6 +64,115 @@ try:
     YAML_AVAILABLE = True
 except ImportError:
     YAML_AVAILABLE = False
+
+import re
+
+# ═══════════════════════════════════════════════════════════════════════
+# VALIDATION FUNCTIONS
+# ═══════════════════════════════════════════════════════════════════════
+
+# Required config fields
+REQUIRED_FIELDS = ['name', 'date', 'location']
+
+
+def find_variables_in_file(filepath):
+    """Find all {{variable}} patterns in a file"""
+    variables = set()
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        matches = re.findall(r'\{\{(\w+)\}\}', content)
+        variables.update(matches)
+    except:
+        pass
+    return variables
+
+
+def find_images_in_file(filepath):
+    """Find all image references in a markdown file"""
+    images = []
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
+        pattern = r'!\[[^\]]*\]\((.*?\.(?:png|jpg|jpeg|gif|svg|webp))\)'
+        matches = re.findall(pattern, content, re.IGNORECASE)
+        images.extend(matches)
+    except:
+        pass
+    return images
+
+
+def validate_workshop(workshop_id, base_dir, config):
+    """
+    Validate workshop setup before building.
+    Returns (success, errors, warnings)
+    """
+    workshop_dir = os.path.join(base_dir, "workshops", workshop_id)
+    core_content_dir = os.path.join(base_dir, "core_content")
+
+    errors = []
+    warnings = []
+
+    print("\n   Validating workshop setup...")
+
+    # CHECK 1: Required fields
+    for field in REQUIRED_FIELDS:
+        value = config.get(field, '')
+        if not value or (isinstance(value, str) and value.strip() == ''):
+            warnings.append(f"Required field '{field}' is empty")
+        elif isinstance(value, str) and ('EXAMPLE' in value.upper() or 'YOUR' in value.upper()):
+            warnings.append(f"Field '{field}' has placeholder text: {value}")
+
+    # CHECK 2: Files in deck_order exist
+    deck_order = config.get('deck_order', [])
+    for item in deck_order:
+        if item == 'agenda':
+            continue
+        elif item.endswith('.md'):
+            custom_path = os.path.join(workshop_dir, item)
+            template_path = os.path.join(base_dir, "templates", "custom_slides", item)
+            if not os.path.exists(custom_path) and not os.path.exists(template_path):
+                errors.append(f"Custom slide missing: {item}")
+
+    # CHECK 3: Variables have values
+    available_vars = set(['WORKSHOP_ID', 'WORKSHOP_NAME', 'DATE', 'LOCATION',
+                         'FACILITATORS', 'COUNTRY', 'TEA_TIME', 'LUNCH_TIME'])
+    country_data = config.get('country_data', {})
+    available_vars.update(country_data.keys())
+
+    files_to_check = []
+    for item in deck_order:
+        if item.endswith('.md'):
+            workshop_path = os.path.join(workshop_dir, item)
+            template_path = os.path.join(base_dir, "templates", "custom_slides", item)
+            if os.path.exists(workshop_path):
+                files_to_check.append(workshop_path)
+            elif os.path.exists(template_path):
+                files_to_check.append(template_path)
+
+    used_vars = set()
+    for filepath in files_to_check:
+        used_vars.update(find_variables_in_file(filepath))
+
+    undefined = used_vars - available_vars
+    for var in sorted(undefined):
+        warnings.append(f"Variable '{{{{{var}}}}}' used but not defined in country_data")
+
+    # Print results
+    if errors:
+        print(f"   ERRORS: {len(errors)}")
+        for e in errors:
+            print(f"      - {e}")
+    if warnings:
+        print(f"   WARNINGS: {len(warnings)}")
+        for w in warnings:
+            print(f"      - {w}")
+    if not errors and not warnings:
+        print("   All checks passed!")
+
+    return len(errors) == 0, errors, warnings
+
 
 # ═══════════════════════════════════════════════════════════════════════
 # MODULE DEFINITIONS
@@ -900,10 +988,16 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
     print(f"       BUILDING WORKSHOP: {workshop_id}")
     print("=" * 70)
 
-    # Step 1: Load the workshop configuration
-    print("\nStep 1: Reading workshop configuration...")
+    # Step 1: Load and validate workshop configuration
+    print("\nStep 1: Loading and validating workshop...")
     config = load_workshop_config(workshop_id, base_dir)
     print("   Config loaded successfully")
+
+    # Validate before building
+    valid, errors, warnings = validate_workshop(workshop_id, base_dir, config)
+    if not valid:
+        print("\n   Build cancelled due to errors. Please fix the issues above.")
+        sys.exit(1)
 
     # Check if using new deck_order format
     deck_order = config.get('deck_order')
@@ -1093,7 +1187,7 @@ paginate: true
 
     print(f"\n   OPTION 2: Convert to PowerPoint")
     print(f"   " + "-" * 40)
-    print(f"   python3 tools/04_convert_to_pptx.py {output_path}")
+    print(f"   python3 tools/03_convert_pptx.py {output_path}")
     print(f"\n   Note: PowerPoint may need font/layout adjustments")
 
     print("\n" + "=" * 70 + "\n")
@@ -1116,8 +1210,8 @@ def main():
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-  python3 tools/03_build_deck.py --workshop 2025-01-nigeria
-  python3 tools/03_build_deck.py --workshop example --output test.md
+  python3 tools/02_build_deck.py --workshop 2025-01-nigeria
+  python3 tools/02_build_deck.py --workshop example --output test.md
 
 For more help, see: docs/building-decks.md
             """

@@ -764,7 +764,7 @@ def main():
 # WORKSHOP CONFIGURATION
 # ═══════════════════════════════════════════════════════════════════════
 # Edit this file to customize your workshop.
-# After editing, rebuild with: python3 tools/03_build_deck.py
+# After editing, rebuild with: python3 tools/02_build_deck.py
 # ═══════════════════════════════════════════════════════════════════════
 
 workshop:
@@ -969,14 +969,11 @@ country_data:
 ## Build Your Deck
 
 ```bash
-# Optional: Check setup
-python3 tools/02_check_workshop.py {workshop_id}
-
-# Build the deck
-python3 tools/03_build_deck.py {workshop_id}
+# Build the deck (validates automatically)
+python3 tools/02_build_deck.py --workshop {workshop_id}
 
 # Convert to PowerPoint (optional)
-python3 tools/04_convert_pptx.py {workshop_id}
+python3 tools/03_convert_pptx.py outputs/{workshop_id}_deck.md
 ```
 
 ## Country Outputs
@@ -998,7 +995,7 @@ Add your FASTR platform outputs to `media/outputs/` to include them in slides.
     print(f"\n   Next steps:")
     print(f"   1. Edit custom slides in workshops/{workshop_id}/")
     print(f"   2. Add country outputs to workshops/{workshop_id}/media/outputs/")
-    print(f"   3. Build: python3 tools/03_build_deck.py {workshop_id}")
+    print(f"   3. Build: python3 tools/02_build_deck.py --workshop {workshop_id}")
     print("\n" + "═" * 70 + "\n")
 
 

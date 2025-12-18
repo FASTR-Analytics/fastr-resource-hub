@@ -13,11 +13,10 @@ mkdocs-minify-plugin>=0.7.0
 # cd methodology/plugins && pip install -e .
 
 # Standard library only for tools (no additional deps)
-# - tools/extract_slides.py
-# - tools/01_setup_workshop.py
-# - tools/02_check_workshop.py
-# - tools/03_build_deck.py
-# - tools/04_convert_to_pptx.py
+# - tools/00_extract_slides.py
+# - tools/01_new_workshop.py
+# - tools/02_build_deck.py
+# - tools/03_convert_pptx.py
 
 # Optional: for PPTX conversion (libreoffice required separately)
 # LibreOffice must be installed on the system for PDF to PPTX conversion

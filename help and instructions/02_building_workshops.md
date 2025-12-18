@@ -11,16 +11,13 @@ Step-by-step guide for creating FASTR workshop presentations.
 python3 tools/01_new_workshop.py
 
 # 2. Edit your files
-#    - config.py (workshop details, country data)
+#    - workshop.yaml (workshop details, country data)
 #    - Custom slide .md files (your content)
 
-# 3. Check setup (catches common issues)
-python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
+# 3. Build the deck (validates automatically)
+python3 tools/02_build_deck.py --workshop YOUR_WORKSHOP
 
-# 4. Build the deck
-python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
-
-# 5. Export to PDF
+# 4. Export to PDF
 marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
@@ -92,21 +89,16 @@ Use `{{variable_name}}` in any slide to insert these values.
 
 ---
 
-## Part 3: Check & Build
-
-### Check Setup
+## Part 3: Build
 
 ```bash
-python3 tools/02_check_workshop.py --workshop 2025-nigeria
+python3 tools/02_build_deck.py --workshop 2025-nigeria
 ```
 
-Catches: missing files, undefined variables, broken images.
-
-### Build Deck
-
-```bash
-python3 tools/03_build_deck.py --workshop 2025-nigeria
-```
+The build script automatically validates:
+- Required fields (name, date, location)
+- Files in deck_order exist
+- Variables used have values in country_data
 
 Output: `outputs/2025-nigeria_deck.md`
 
@@ -125,7 +117,7 @@ Output: `outputs/2025-nigeria_deck.pdf`
 ### PowerPoint (Alternative)
 
 ```bash
-python3 tools/04_convert_pptx.py outputs/2025-nigeria_deck.md
+python3 tools/03_convert_pptx.py outputs/2025-nigeria_deck.md
 ```
 
 Note: PowerPoint may need font/layout adjustments after export.
@@ -165,11 +157,8 @@ Use these IDs in your `deck_order`:
 # Create workshop
 python3 tools/01_new_workshop.py
 
-# Check setup
-python3 tools/02_check_workshop.py --workshop WORKSHOP_ID
-
-# Build deck
-python3 tools/03_build_deck.py --workshop WORKSHOP_ID
+# Build deck (validates automatically)
+python3 tools/02_build_deck.py --workshop WORKSHOP_ID
 
 # Export to PDF
 marp --no-config outputs/WORKSHOP_ID_deck.md --theme fastr-theme.css --pdf --allow-local-files
