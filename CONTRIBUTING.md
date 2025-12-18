@@ -1,37 +1,53 @@
 # Contributing to FASTR Slide Builder
 
-Thank you for contributing! This guide covers how to update content and create workshops.
+This guide covers how to update methodology content and create workshop presentations.
 
 ---
 
 ## Quick Reference
 
-- **Edit methodology content:** Work in `methodology/` folder
-- **Create workshops:** Run `python3 tools/01_new_workshop.py`
-- **Full documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
-- **Help guides:** See `help and instructions/` folder
+| Task | Command |
+|------|---------|
+| Edit content | Work in `methodology/` folder |
+| Extract slides | `python3 tools/00_extract_slides.py` |
+| Create workshop | `python3 tools/01_new_workshop.py` |
+| Build deck | `python3 tools/02_build_deck.py --workshop NAME` |
 
 ---
 
-## The Single Source of Truth
+## Understanding the File Structure
 
-All FASTR methodology content lives in **`methodology/`**. This is the ONLY place to edit content.
+### Each methodology file has two parts:
 
 ```
-methodology/                    ← Edit HERE
-├── 00_introduction.md
-├── 04_data_quality_assessment.md
-├── 05_data_quality_adjustment.md
-├── 06a_service_utilization.md
-├── 06b_coverage_estimates.md
-└── ...
-
-    ↓ python3 tools/00_extract_slides.py
-
-core_content/                   ← Auto-generated (don't edit)
+methodology/04_data_quality_assessment.md
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│  # Data Quality Assessment                                          │
+│                                                                     │
+│  Full documentation content here...                                 │
+│  This appears on the methodology website.                           │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  <!--                                                               │
+│  ////////////////////////////////////////////////////////////////////│
+│  //   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //│
+│  //  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//│
+│  //   ... SLIDE CONTENT ...                                        //│
+│  ////////////////////////////////////////////////////////////////////│
+│  -->                                                                │
+│                                                                     │
+│  <!-- SLIDE:m4_1 -->                                                │
+│  ## Slide Title                                                     │
+│  Condensed bullet points for workshops                              │
+│  <!-- /SLIDE -->                                                    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-**Never edit files in `core_content/` directly** - they are regenerated from methodology files.
+- **Above the ASCII banner** = Documentation website content
+- **Below the ASCII banner** = Workshop slide content
 
 ---
 
@@ -39,58 +55,35 @@ core_content/                   ← Auto-generated (don't edit)
 
 ### 1. Edit the methodology file
 
-Open a file in `methodology/` and make your changes:
-
 ```bash
-# Example: editing data quality assessment
+# Open in your editor
 code methodology/04_data_quality_assessment.md
 ```
 
-### 2. Mark slide content (if needed)
+### 2. Edit both parts as needed
 
-Wrap content that should become slides with SLIDE markers:
-
-```markdown
-Regular documentation text here (won't be a slide).
-
-<!-- SLIDE:m4_1 -->
-## This Becomes a Slide
-
-- Bullet points
-- More content
-
-![Image](resources/default_outputs/chart.png)
-<!-- /SLIDE -->
-
-More documentation text (won't be a slide).
-```
+- Update documentation content (above separator)
+- Update slide content (below separator, in SLIDE markers)
 
 ### 3. Extract slides
-
-After editing, regenerate the slide files:
 
 ```bash
 python3 tools/00_extract_slides.py
 ```
 
-### 4. Test your changes
+This regenerates `core_content/` from methodology files.
+
+### 4. Test with a build
 
 ```bash
-# Build example workshop
 python3 tools/02_build_deck.py --workshop example
-
-# Export to PDF
-marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
-
-# View result
-open outputs/example_deck.pdf
 ```
 
-### 5. Commit both methodology and core_content
+### 5. Commit both folders
 
 ```bash
 git add methodology/ core_content/
-git commit -m "Update DQA section with new content"
+git commit -m "content: Update DQA section"
 git push
 ```
 
@@ -104,46 +97,101 @@ git push
 python3 tools/01_new_workshop.py
 ```
 
-### 2. Edit your workshop files
+The wizard asks for:
+- Workshop name and location
+- Date and facilitators
+- Number of days
+- Which modules to include
+
+### 2. What gets created
 
 ```
-workshops/YOUR_WORKSHOP/
-├── config.py           # Workshop settings, deck order, country data
-├── objectives.md       # Custom slide
-├── dq-findings.md      # Custom slide
-└── ...
+workshops/2025-nigeria/
+├── workshop.yaml              # Settings, schedule, country data
+├── 01_objectives.md           # Custom slide: workshop goals
+├── 02_country-overview.md     # Custom slide: country context
+├── 03_health-priorities.md    # Custom slide: focus areas
+├── 99_next-steps.md           # Custom slide: action items
+└── media/                     # Workshop-specific images
 ```
 
-### 3. Build and test
+### 3. Customize workshop.yaml
+
+```yaml
+workshop:
+  name: "FASTR Workshop - Nigeria"
+  date: "January 15-17, 2025"
+  location: "Abuja, Nigeria"
+
+country_data:
+  total_facilities: "2,847"
+  reporting_rate: "92%"
+  # Add your country's data here
+```
+
+Variables like `{{total_facilities}}` in slides get replaced with these values.
+
+### 4. Build and export
 
 ```bash
-python3 tools/02_build_deck.py --workshop YOUR_WORKSHOP
-marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
+# Build (validates automatically)
+python3 tools/02_build_deck.py --workshop 2025-nigeria
+
+# Export to PDF
+marp --no-config outputs/2025-nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
-### 4. Commit
+### 5. Commit your workshop
 
 ```bash
-git add workshops/YOUR_WORKSHOP/
-git commit -m "Add workshop for Country 2025"
+git add workshops/2025-nigeria/
+git commit -m "workshop: Add Nigeria 2025"
 git push
 ```
 
 ---
 
+## SLIDE Marker Reference
+
+### Basic syntax
+
+```markdown
+<!-- SLIDE:m4_1 -->
+## Slide Title
+
+- Bullet point
+- Another point
+
+![Chart](resources/default_outputs/chart.png)
+<!-- /SLIDE -->
+```
+
+### Slide ID format
+
+Use pattern: `m{module}_{number}`
+
+| Module | Example IDs |
+|--------|-------------|
+| Introduction (m0) | `m0_1`, `m0_2`, `m0_3` |
+| Questions (m1) | `m1_1`, `m1_2` |
+| Extraction (m2) | `m2_1`, `m2_2` |
+| Platform (m3) | `m3_1`, `m3_2`, ... `m3_8` |
+| DQA (m4) | `m4_1`, `m4_2`, `m4_3` |
+| Adjustment (m5) | `m5_1`, `m5_2` |
+| Analysis (m6) | `m6_1`, `m6_2`, ... `m6_5` |
+| Results (m7) | `m7_1`, `m7_2` |
+
+---
+
 ## Setup Options
 
-### GitHub Codespaces (Recommended)
-
-No installation needed:
+### GitHub Codespaces (No installation needed)
 
 1. Go to https://github.com/FASTR-Analytics/fastr-slide-builder
 2. Click **Code** → **Codespaces** → **Create codespace**
-3. Everything is ready in 2-3 minutes
+3. Ready in 2-3 minutes
 
 ### Local Setup
-
-See [help and instructions/03_local_setup.md](help%20and%20instructions/03_local_setup.md)
 
 ```bash
 git clone https://github.com/FASTR-Analytics/fastr-slide-builder.git
@@ -151,39 +199,36 @@ cd fastr-slide-builder
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+npm install -g @marp-team/marp-cli
 ```
 
 ---
 
-## Commit Guidelines
-
-### Format
+## Commit Message Format
 
 ```
 <type>: <short description>
 ```
 
-### Types
+| Type | Use for |
+|------|---------|
+| `content:` | Methodology content changes |
+| `workshop:` | Workshop additions/updates |
+| `tools:` | Build script changes |
+| `docs:` | Documentation updates |
+| `fix:` | Bug fixes |
 
-- `content:` - Methodology content changes
-- `workshop:` - Workshop additions/updates
-- `tools:` - Build script updates
-- `docs:` - Documentation updates
-- `fix:` - Bug fixes
-
-### Examples
-
+Examples:
 ```bash
 git commit -m "content: Update DQA completeness section"
 git commit -m "workshop: Add Nigeria 2025 workshop"
-git commit -m "tools: Fix slide extraction for module 6"
-git commit -m "docs: Update README with new workflow"
+git commit -m "fix: Correct image path in module 3"
 ```
 
 ---
 
 ## Questions?
 
-- Check the [Methodology Documentation](https://fastr-analytics.github.io/fastr-slide-builder/)
-- Review `workshops/example/` for reference
-- Contact the FASTR team
+- **Documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Help guides:** See `help and instructions/` folder
+- **Contact:** FASTR team

@@ -103,9 +103,9 @@ This extracts SLIDE-marked content into `core_content/` for use in workshops.
 ### To create a workshop presentation:
 
 ```bash
-python3 tools/01_new_workshop.py       # Interactive wizard
-python3 tools/02_build_deck.py         # Build deck
-marp --no-config outputs/YOUR_deck.md --theme fastr-theme.css --pdf -o outputs/YOUR_deck.pdf
+python3 tools/01_new_workshop.py                    # Interactive wizard
+python3 tools/02_build_deck.py --workshop NAME      # Build deck (validates automatically)
+marp --no-config outputs/NAME_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
 ---

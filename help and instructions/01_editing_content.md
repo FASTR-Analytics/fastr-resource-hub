@@ -498,20 +498,19 @@ paginate: true
 
 ## Step-by-step process:
 
-1. Create workshop folder:
+1. Create workshop using the wizard:
    ```bash
-   cp -r workshops/example workshops/2025_01_nigeria
+   python3 tools/01_new_workshop.py
    ```
 
-2. Edit configuration in `config.py`
+2. Edit configuration in `workshop.yaml` (country data, schedule)
 
 3. Build the deck:
    ```bash
-   python3 tools/02_build_deck.py --workshop 2025_01_nigeria
+   python3 tools/02_build_deck.py --workshop 2025-nigeria
    ```
 
-**Output:** `outputs/2025_01_nigeria_deck.md`
-```
+**Output:** `outputs/2025-nigeria_deck.md`
 
 ## Common Mistakes to Avoid
 
