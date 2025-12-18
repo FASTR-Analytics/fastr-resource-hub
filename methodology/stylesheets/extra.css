@@ -1,5 +1,10 @@
 /* Custom Styles for FASTR Methodology Documentation */
 
+/* Hide right sidebar (TOC) - keep left sidebar for module navigation */
+.md-sidebar--secondary {
+  display: none;
+}
+
 /* FASTR Brand Colors */
 :root {
   --md-primary-fg-color: #025b61;
