@@ -164,7 +164,8 @@ This ensures that temporary reporting gaps don't create artificial drops to zero
 Heatmap showing percent change in service volumes due to missing data imputation.
 <!-- /SLIDE -->
 
-**3. Combined Adjustment Impact**
+<!-- SLIDE:m5_4 -->
+## Combined Adjustment Impact
 
 Heatmap showing percent change in service volumes when both outlier and completeness adjustments are applied, with geographic areas as rows and indicators as columns.
 
@@ -172,7 +173,7 @@ Heatmap showing percent change in service volumes when both outlier and complete
 
 **Interpretation Guide:**
 tbd
-
+<!-- /SLIDE -->
 
 ---
 

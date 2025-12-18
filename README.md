@@ -47,4 +47,6 @@ See [00 Start Here](help%20and%20instructions/00_start_here.md) for details.
 
 ## License
 
-FASTR methodology and content - see your organization's license.
+Copyright (c) 2025 The World Bank, Global Financing Facility for Women, Children and Adolescents (GFF), Frequent Assessments and System Tools for Resilience (FASTR) Initiative. All rights reserved.
+
+This software is proprietary and made publicly available for transparency and reference purposes only. Viewing and reviewing the source code is permitted.

@@ -13,8 +13,10 @@ Audit of content status across all methodology modules.
 1. Gather existing PowerPoint/PDF decks for each module
 2. Use AI to extract relevant content into markdown format
 3. Adapt content to fit the methodology documentation structure
-4. Add SLIDE markers for workshop presentation extraction
+4. Content goes into existing SLIDE markers (structure already in place)
 5. Review and refine with subject matter experts
+
+> **Good news:** The placeholder modules (M1, M3, M7) already have the correct slide marker structure - we just need to fill in the content, not create new markers.
 
 ---
 
@@ -38,13 +40,13 @@ Audit of content status across all methodology modules.
 | M3 FASTR Platform | PLACEHOLDER | **Create entire module content** |
 | M4 DQ Assessment | DRAFTED | Review needed |
 | M5 DQ Adjustment | DRAFTED | Review needed |
-| M6a Service Utilization | PARTIAL | Review + consider expansion |
-| M6b Coverage Estimates | PARTIAL | Review + consider expansion |
+| M6a Service Utilization | DRAFTED | Review needed |
+| M6b Coverage Estimates | DRAFTED | Review needed |
 | M7 Results Communication | PLACEHOLDER | **Create entire module content** |
 
 **Modules needing full content creation: M1, M3, M7**
-**Modules needing review: M0, M4, M5**
-**Modules needing completion: M2, M6a, M6b**
+**Modules needing review: M0, M4, M5, M6a, M6b**
+**Modules needing completion: M2**
 
 ---
 
@@ -126,27 +128,28 @@ Audit of content status across all methodology modules.
 | m5_1 | Approach to Data Quality Adjustment | Drafted | Review |
 | m5_2 | Adjustment for Outliers | Drafted | Review |
 | m5_3 | Adjustment for Completeness | Drafted | Review |
+| m5_4 | Combined Adjustment Impact | Drafted | Review |
 
 ---
 
 ### Module 6a: Service Utilization (06a_service_utilization.md)
-**Status: PARTIAL - NEEDS REVIEW + EXPANSION**
+**Status: DRAFTED - NEEDS REVIEW**
 
 | Slide ID | Title | Status | Action |
 |----------|-------|--------|--------|
 | m6_1 | Service Utilization Analysis | Drafted | Review |
 | m6_2 | Surplus and Disruption Analyses | Drafted | Review |
-| - | Additional visualization slides | Not created | Consider adding slides for the 4 default visualizations |
+| m6a_3 | Service Utilization: FASTR Outputs | Drafted | Review |
 
 ---
 
 ### Module 6b: Coverage Estimates (06b_coverage_estimates.md)
-**Status: PARTIAL - NEEDS REVIEW + EXPANSION**
+**Status: DRAFTED - NEEDS REVIEW**
 
 | Slide ID | Title | Status | Action |
 |----------|-------|--------|--------|
 | m6_3 | Service Coverage Estimates | Drafted | Review |
-| - | Additional visualization slides | Not created | Consider adding slides for the 3 default visualizations |
+| m6b_4 | Coverage Estimates: FASTR Outputs | Drafted | Review |
 
 ---
 
@@ -194,11 +197,11 @@ These modules need complete content - use AI to extract from existing decks:
 - [ ] M0 Introduction - review content
 - [ ] M4 DQ Assessment - review content
 - [ ] M5 DQ Adjustment - review content
+- [ ] M6a Service Utilization - review content
+- [ ] M6b Coverage Estimates - review content
 
 **Partial modules (need completion):**
 - [ ] M2 Data Extraction - complete m2_2
-- [ ] M6a Service Utilization - review + consider expansion
-- [ ] M6b Coverage Estimates - review + consider expansion
 
 ---
 

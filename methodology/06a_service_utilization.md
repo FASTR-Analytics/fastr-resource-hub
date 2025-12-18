@@ -135,33 +135,27 @@ The control chart level determines where the statistical modeling occurs (trend 
 
 **Output Generation**: The final outputs provide disruption impacts at multiple geographic scales, enabling users to see both national-level summaries and local-level details. All calculations preserve the original data while adding predicted values and disruption metrics.
 
-### Analysis Outputs and Visualization
+<!-- SLIDE:m6a_3 -->
+## Service Utilization: FASTR Outputs
 
 The FASTR analysis generates four main visual outputs for disruption analysis:
 
 **1. Change in Service Volume**
 
-Time series showing percentage change in service volumes over time, identifying periods of significant increases or decreases across indicators.
-
 ![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 **2. Actual vs Expected Services (National)**
-
-Line charts comparing actual service delivery to expected volumes at the national level, with disrupted periods highlighted.
 
 ![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 **3. Actual vs Expected Services (Subnational)**
 
-Line charts comparing actual service delivery to expected volumes at admin area 2 level, enabling identification of geographic variation in disruptions.
-
 ![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 **4. Volume Change Due to Data Quality Adjustments**
 
-Comparison showing the impact of data quality adjustments from Module 2 on disruption detection and volume estimates.
-
 ![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+<!-- /SLIDE -->
 
 **Interpretation Guide:**
 - **Disrupted periods**: Indicated by shaded regions or highlighting where actual volumes deviate significantly from expected
