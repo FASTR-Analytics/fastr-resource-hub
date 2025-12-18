@@ -427,7 +427,7 @@ If you don't see the notification:
 ### Verify Extensions Are Working
 
 1. **Open a markdown file:**
-   - Click `core_content/01_background_rationale.md`
+   - Click `methodology/04_data_quality_assessment.md`
 
 2. **Open Marp preview:**
    - Click the Marp icon in the top-right corner
@@ -710,12 +710,13 @@ Congratulations! You now have a complete local development environment for the F
 - **Build your first deck:** See [Building Decks Guide](building-decks.md)
 - **Contribute content:** See [CONTRIBUTING.md](../CONTRIBUTING.md)
 - **Explore examples:** Check `workshops/example/`
+- **View methodology docs:** https://fastr-analytics.github.io/fastr-slide-builder/
 
 ### Getting Help
 
-- **Documentation:** Browse the [docs/](README.md) folder
+- **Online documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Help guides:** Browse this folder
 - **Examples:** Review `workshops/example/`
-- **Issues:** Check existing files for examples
 - **Team:** Contact the FASTR team for support
 
 ---

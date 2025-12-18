@@ -1,376 +1,157 @@
 # Contributing to FASTR Slide Builder
 
-Thank you for contributing to the FASTR slide deck system! This guide provides practical instructions for common contribution tasks.
+Thank you for contributing! This guide covers how to update content and create workshops.
+
+---
 
 ## Quick Reference
 
-- **Edit session slides:** Modify files in `core_content/`
-- **Add custom templates:** Create files in `templates/custom_slides/`
-- **Modify build tools:** Update scripts in `tools/`
-- **Full documentation:** See [docs/](docs/) for detailed guides
-
-## Setup Options
-
-### GitHub.com (No Installation)
-**Best for:** Quick content edits
-**Can do:** Edit markdown files, update configs
-**Can't do:** Build decks, generate PDFs, preview FASTR theme
-
-### GitHub Codespaces (Recommended)
-**Best for:** Building decks, testing changes
-**Setup:** Code → Codespaces → Create codespace (2-3 min)
-**Includes:** Python, Node.js, Marp CLI, VS Code, FASTR theme
-
-### Local Setup
-**Best for:** Offline work
-**Guide:** See [docs/local-setup.md](docs/local-setup.md)
+- **Edit methodology content:** Work in `methodology/` folder
+- **Create workshops:** Run `python3 tools/01_new_workshop.py`
+- **Full documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Help guides:** See `help and instructions/` folder
 
 ---
 
-## Modifying Core Content (Session Slides)
+## The Single Source of Truth
 
-Core content files are reusable FASTR methodology modules used across all workshops.
+All FASTR methodology content lives in **`methodology/`**. This is the ONLY place to edit content.
 
-### Location
-`core_content/` - Seven main sections:
-- `01_background_rationale.md`
-- `02_fastr_approach.md`
-- `03_coverage_analysis.md`
-- `04_data_quality_assessment.md`
-- `05_results_reporting.md`
-- `06_action_planning.md`
-- `07_data_use.md`
+```
+methodology/                    ← Edit HERE
+├── 00_introduction.md
+├── 04_data_quality_assessment.md
+├── 05_data_quality_adjustment.md
+├── 06a_service_utilization.md
+├── 06b_coverage_estimates.md
+└── ...
 
-### When to Edit
-- Update FASTR methodology
-- Fix typos or errors
-- Improve explanations
-- Add or update diagrams
+    ↓ python3 tools/00_extract_slides.py
 
-### How to Edit
+core_content/                   ← Auto-generated (don't edit)
+```
 
-1. **Edit the markdown file**
-   ```bash
-   # In Codespaces or local setup
-   code core_content/04_data_quality_assessment.md
-   ```
-
-2. **Test your changes**
-   ```bash
-   python3 tools/03_build_deck.py --workshop example
-   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
-   ```
-
-3. **Review the output**
-   ```bash
-   open outputs/example_deck.pdf
-   ```
-
-4. **Commit**
-   ```bash
-   git add core_content/04_data_quality_assessment.md
-   git commit -m "Update DQA section: add missing indicators"
-   git push
-   ```
-
-### Important Notes
-- Changes affect ALL future workshops using these sections
-- Always test with the example workshop before committing
-- Use `../assets/subfolder/` for image paths in core content (e.g., `../assets/diagrams/`, `../assets/screenshots/`)
+**Never edit files in `core_content/` directly** - they are regenerated from methodology files.
 
 ---
 
-## Adding Custom Slide Templates
+## Updating Methodology Content
 
-Custom slide templates allow you to create reusable slide layouts that can be used in workshop configurations.
+### 1. Edit the methodology file
 
-### Location
-`templates/custom_slides/` - Optional custom templates referenced in workshop configs
-
-### When to Create
-- Reusable country-specific layouts
-- Standard results presentation formats
-- Specialized section templates
-
-### How to Create
-
-1. **Create a new template file**
-   ```bash
-   # Example: Create a results overview template
-   code templates/custom_slides/results_overview.md
-   ```
-
-2. **Write your template with variables**
-   ```markdown
-   ---
-   # Results Overview
-
-   ## {{COUNTRY_NAME}} FASTR Analysis
-
-   **Period:** {{ANALYSIS_PERIOD}}
-   **Facilities:** {{FACILITY_COUNT}}
-
-   ---
-
-   # Key Findings
-
-   {{CUSTOM_FINDINGS}}
-   ```
-
-3. **Reference in workshop config**
-   ```python
-   # In workshops/your_workshop/config.py
-   CUSTOM_SLIDES = {
-       'results_overview': {
-           'file': 'templates/custom_slides/results_overview.md',
-           'position': 'after_section_4',
-           'variables': {
-               'CUSTOM_FINDINGS': '- Finding 1\n- Finding 2'
-           }
-       }
-   }
-   ```
-
-4. **Test the template**
-   ```bash
-   python3 tools/03_build_deck.py --workshop your_workshop
-   ```
-
-### Template Best Practices
-- Use `{{UPPERCASE_VARIABLES}}` for placeholder text
-- Include slide breaks (`---`) between slides
-- Keep templates generic and reusable
-- Document required variables in comments
-- Test with multiple workshops
-
----
-
-## Modifying Build Tools
-
-Build tools are Python scripts that assemble and process slide decks.
-
-### Location
-`tools/` - Main build scripts:
-- `01_convert_to_pptx.py` - PowerPoint conversion
-- `02_build_deck.py` - Deck assembly
-- `03_create_workshop.py` - Workshop scaffolding
-
-### When to Modify
-- Fix bugs in build process
-- Add new features (e.g., new variable types)
-- Improve error handling
-- Optimize performance
-
-### How to Modify
-
-1. **Edit the tool script**
-   ```bash
-   code tools/03_build_deck.py
-   ```
-
-2. **Test with multiple workshops**
-   ```bash
-   # Test with example workshop
-   python3 tools/03_build_deck.py --workshop example
-
-   # Test with another workshop
-   python3 tools/03_build_deck.py --workshop demo_country
-
-   # Test edge cases
-   python3 tools/03_build_deck.py --workshop minimal_workshop
-   ```
-
-3. **Verify outputs**
-   ```bash
-   # Check generated markdown
-   cat outputs/example_deck.md
-
-   # Build PDF
-   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
-
-   # Open and review
-   open outputs/example_deck.pdf
-   ```
-
-4. **Update documentation if needed**
-   ```bash
-   # Update relevant docs
-   code docs/building-decks.md
-   ```
-
-5. **Commit with detailed message**
-   ```bash
-   git add tools/03_build_deck.py
-   git commit -m "Add support for conditional section inclusion
-
-   - Added --exclude-sections flag
-   - Improved error handling for missing configs
-   - Updated variable substitution logic"
-   git push
-   ```
-
-### Tool Development Tips
-- Add helpful error messages
-- Use logging for debugging
-- Validate inputs early
-- Test with edge cases
-- Keep backward compatibility
-
----
-
-## Testing Changes
-
-Always test before committing. The level of testing depends on what you changed.
-
-### Testing Core Content Changes
+Open a file in `methodology/` and make your changes:
 
 ```bash
-# Build example deck
+# Example: editing data quality assessment
+code methodology/04_data_quality_assessment.md
+```
+
+### 2. Mark slide content (if needed)
+
+Wrap content that should become slides with SLIDE markers:
+
+```markdown
+Regular documentation text here (won't be a slide).
+
+<!-- SLIDE:m4_1 -->
+## This Becomes a Slide
+
+- Bullet points
+- More content
+
+![Image](resources/default_outputs/chart.png)
+<!-- /SLIDE -->
+
+More documentation text (won't be a slide).
+```
+
+### 3. Extract slides
+
+After editing, regenerate the slide files:
+
+```bash
+python3 tools/00_extract_slides.py
+```
+
+### 4. Test your changes
+
+```bash
+# Build example workshop
 python3 tools/03_build_deck.py --workshop example
 
-# Render to PDF
+# Export to PDF
 marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
 
-# Review output
+# View result
 open outputs/example_deck.pdf
 ```
 
-**Check for:**
-- Typos and formatting
-- Image links working
-- Slide breaks in correct places
-- Content flows logically
-
-### Testing Custom Templates
+### 5. Commit both methodology and core_content
 
 ```bash
-# Build workshop using the template
-python3 tools/03_build_deck.py --workshop your_workshop
-
-# Check template was inserted correctly
-grep "Results Overview" outputs/your_workshop_deck.md
-
-# Render and review
-marp outputs/your_workshop_deck.md --theme-set fastr-theme.css --pdf
-open outputs/your_workshop_deck.pdf
-```
-
-**Check for:**
-- Variables substituted correctly
-- Template appears in right position
-- Styling matches FASTR theme
-- No extra blank slides
-
-### Testing Tool Changes
-
-```bash
-# Test with multiple workshops
-for workshop in example demo_country; do
-    echo "Testing $workshop..."
-    python3 tools/03_build_deck.py --workshop $workshop
-    if [ $? -eq 0 ]; then
-        echo "✓ $workshop build succeeded"
-    else
-        echo "✗ $workshop build failed"
-    fi
-done
-
-# Test error handling
-python3 tools/03_build_deck.py --workshop nonexistent
-python3 tools/03_build_deck.py  # Missing required argument
-```
-
-**Check for:**
-- No regressions in existing workshops
-- Error messages are clear and helpful
-- Edge cases handled gracefully
-- Performance acceptable
-
-### Quick Test Commands
-
-```bash
-# Fast syntax check
-python3 -m py_compile tools/03_build_deck.py
-
-# Build without PDF (faster)
-python3 tools/03_build_deck.py --workshop example
-
-# Build with PDF
-python3 tools/03_build_deck.py --workshop example && \
-  marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
-
-# Check specific section
-grep -A 20 "Data Quality" outputs/example_deck.md
+git add methodology/ core_content/
+git commit -m "Update DQA section with new content"
+git push
 ```
 
 ---
 
-## Common Tasks
+## Creating a Workshop
 
-### Add a New Workshop
+### 1. Run the wizard
 
 ```bash
-# Create from example
-cp -r workshops/example workshops/2025_01_nigeria
+python3 tools/01_new_workshop.py
+```
 
-# Edit config
-code workshops/2025_01_nigeria/config.py
+### 2. Edit your workshop files
 
-# Add custom slides (optional)
-code workshops/2025_01_nigeria/custom_slides.md
+```
+workshops/YOUR_WORKSHOP/
+├── config.py           # Workshop settings, deck order, country data
+├── objectives.md       # Custom slide
+├── dq-findings.md      # Custom slide
+└── ...
+```
 
-# Build and test
-python3 tools/03_build_deck.py --workshop 2025_01_nigeria
+### 3. Build and test
 
-# Commit
-git add workshops/2025_01_nigeria/
-git commit -m "Add Nigeria January 2025 workshop"
+```bash
+python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
+python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
+marp outputs/YOUR_WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+```
+
+### 4. Commit
+
+```bash
+git add workshops/YOUR_WORKSHOP/
+git commit -m "Add workshop for Country 2025"
 git push
 ```
 
-### Add an Image
+---
 
-**To core content:**
-```bash
-# Add to assets (use appropriate subfolder)
-cp ~/Desktop/diagram.png assets/diagrams/
+## Setup Options
 
-# Reference in markdown with subfolder
-# ![Description](../assets/diagrams/diagram.png)
+### GitHub Codespaces (Recommended)
 
-# Commit both
-git add assets/diagrams/diagram.png core_content/02_fastr_approach.md
-git commit -m "Add FASTR approach diagram"
-```
+No installation needed:
 
-**To workshop:**
-```bash
-# Add to workshop folder
-cp ~/Desktop/results.png workshops/2025_01_nigeria/
+1. Go to https://github.com/FASTR-Analytics/fastr-slide-builder
+2. Click **Code** → **Codespaces** → **Create codespace**
+3. Everything is ready in 2-3 minutes
 
-# Reference in custom slides
-# ![Results](results.png)
+### Local Setup
 
-# Commit
-git add workshops/2025_01_nigeria/
-git commit -m "Add results visualization"
-```
-
-### Update Standard Templates
+See [help and instructions/local-setup.md](help%20and%20instructions/local-setup.md)
 
 ```bash
-# Edit template
-code templates/title_slide.md
-
-# Test with example
-python3 tools/03_build_deck.py --workshop example
-
-# Verify all variables work
-marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
-
-# Commit
-git add templates/title_slide.md
-git commit -m "Update title slide layout"
+git clone https://github.com/FASTR-Analytics/fastr-slide-builder.git
+cd fastr-slide-builder
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ---
@@ -378,55 +159,32 @@ git commit -m "Update title slide layout"
 ## Commit Guidelines
 
 ### Format
+
 ```
 <type>: <short description>
-
-<optional details>
 ```
 
 ### Types
-- `content:` - Core content changes
+
+- `content:` - Methodology content changes
 - `workshop:` - Workshop additions/updates
-- `template:` - Template changes
 - `tools:` - Build script updates
-- `docs:` - Documentation
+- `docs:` - Documentation updates
 - `fix:` - Bug fixes
 
 ### Examples
 
-**Good:**
-```
-content: Update DQA section with 2025 indicators
-
-Added malaria and COVID-19 tracking indicators.
-Updated example visualizations.
-```
-
-```
-tools: Add --exclude-sections flag to build script
-
-Allows selective section inclusion for custom workshops.
-```
-
-**Avoid:**
-```
-updates
-fixed stuff
-changes
+```bash
+git commit -m "content: Update DQA completeness section"
+git commit -m "workshop: Add Nigeria 2025 workshop"
+git commit -m "tools: Fix slide extraction for module 6"
+git commit -m "docs: Update README with new workflow"
 ```
 
 ---
-
-## Getting Help
-
-- **Documentation:** [docs/](docs/) - Detailed guides
-- **Examples:** `workshops/example/` - Reference implementation
-- **README:** [README.md](README.md) - Project overview
 
 ## Questions?
 
-Contact the FASTR team or check existing workshop configurations for examples.
-
----
-
-Thank you for contributing to FASTR!
+- Check the [Methodology Documentation](https://fastr-analytics.github.io/fastr-slide-builder/)
+- Review `workshops/example/` for reference
+- Contact the FASTR team
