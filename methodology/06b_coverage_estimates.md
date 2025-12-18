@@ -1,30 +1,5 @@
 # Coverage Estimates
 
-<!-- SLIDE:m6_3 -->
-## Service Coverage Estimates
-
-The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
-
-**Three data sources integrated:**
-1. Adjusted health service volumes from HMIS
-2. Population projections from United Nations
-3. Household survey data from MICS/DHS
-
----
-
-### Two-Part Process
-
-**Part 1: Denominator Calculation**
-- Calculate target populations using multiple methods (HMIS-based and population-based)
-- Compare against survey benchmarks
-- Automatically select best denominator for each indicator
-
-**Part 2: Coverage Estimation**
-- Override automatic selections based on programmatic knowledge
-- Project survey estimates forward using HMIS trends
-- Generate final coverage estimates
-<!-- /SLIDE -->
-
 ## 1. Overview (What & Why)
 
 ### What does this module do?
@@ -174,24 +149,6 @@ Each health indicator targets a specific population (e.g., pregnant women for AN
 **Coverage Calculation**: The module calculates multiple coverage estimates by dividing service volumes by different denominator options (population-based, HMIS-implied, hybrid approaches). Each coverage estimate is then compared against survey benchmarks to identify which denominator produces the most plausible results for each indicator, balancing between HMIS data quality and population estimate accuracy.
 
 **Temporal Projection**: For years beyond the most recent survey, the module projects coverage estimates forward by combining the last observed survey value with HMIS-based trends. This produces complete coverage time series that leverage both the validity of survey data and the timeliness of routine HMIS reporting, with all estimates accompanied by metadata indicating data source and projection methodology.
-
-<!-- SLIDE:m6b_4 -->
-## Coverage Estimates: FASTR Outputs
-
-The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
-
-**1. Coverage Calculated from HMIS Data (National)**
-
-![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
-
-**2. Coverage Calculated from HMIS Data (Admin Area 2)**
-
-![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
-
-**3. Coverage Calculated from HMIS Data (Admin Area 3)**
-
-![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
-<!-- /SLIDE -->
 
 **Interpretation Guide:**
 
@@ -1550,3 +1507,63 @@ Same as national, plus:
 
 **Last updated**: 10-11-2025
 **Contact**: FASTR Project Team
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Edit workshop slides below this line                //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m6_3 -->
+## Service Coverage Estimates
+
+The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+
+**Three data sources integrated:**
+1. Adjusted health service volumes from HMIS
+2. Population projections from United Nations
+3. Household survey data from MICS/DHS
+
+---
+
+### Two-Part Process
+
+**Part 1: Denominator Calculation**
+- Calculate target populations using multiple methods (HMIS-based and population-based)
+- Compare against survey benchmarks
+- Automatically select best denominator for each indicator
+
+**Part 2: Coverage Estimation**
+- Override automatic selections based on programmatic knowledge
+- Project survey estimates forward using HMIS trends
+- Generate final coverage estimates
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6b_4 -->
+## Coverage Estimates: FASTR Outputs
+
+The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
+
+**1. Coverage Calculated from HMIS Data (National)**
+
+![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+**2. Coverage Calculated from HMIS Data (Admin Area 2)**
+
+![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+**3. Coverage Calculated from HMIS Data (Admin Area 3)**
+
+![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+<!-- /SLIDE -->

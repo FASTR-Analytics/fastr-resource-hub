@@ -2,6 +2,39 @@
 
 This module covers how to interpret, communicate, and use FASTR results for decision-making.
 
+## Overview
+
+*Full documentation content to be developed*
+
+This section will cover the complete process of communicating and using FASTR results:
+
+1. **Analytical Thinking & Interpretation** - Frameworks for interpreting FASTR outputs, connecting data patterns to programmatic meaning, common interpretation pitfalls to avoid, building analytical thinking skills
+
+2. **Data Visualization, Communication & Message Development** - Principles of effective data visualization, tailoring messages to different audiences, creating compelling narratives from data, best practices for presenting findings
+
+3. **Using Data for Decision-Making** - Translating insights into action, decision-making frameworks, prioritization approaches, monitoring implementation of decisions
+
+4. **Stakeholder Engagement & Advocacy** - Identifying key stakeholders, engagement strategies, building buy-in for data-driven decisions, advocacy approaches
+
+5. **Practice: Generating Quarterly Reporting Products** - Quarterly reporting workflow, using the FASTR platform for automated reports, quality assurance for reports, distribution and feedback mechanisms
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Edit workshop slides below this line                //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
 <!-- SLIDE:m7_1 -->
 ## 7.1 Analytical Thinking & Interpretation
 

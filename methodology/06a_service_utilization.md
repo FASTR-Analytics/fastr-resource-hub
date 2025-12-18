@@ -1,53 +1,5 @@
 # Service Utilization Analysis
 
-<!-- SLIDE:m6_1 -->
-## Service Utilization Analysis
-
-The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
-
-**Key capabilities:**
-- Identifies when health services deviate significantly from expected patterns
-- Measures magnitude of disruptions at national, provincial, and district levels
-- Distinguishes normal fluctuations from genuine disruptions requiring investigation
-
----
-
-### Two-Stage Analysis Process
-
-**Stage 1: Control Chart Analysis**
-- Model expected patterns using historical trends and seasonality
-- Detect significant deviations from expected volumes
-- Flag disrupted periods
-
-**Stage 2: Disruption Quantification**
-- Use panel regression to estimate service volume changes
-- Calculate shortfalls and surpluses in absolute numbers
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_2 -->
-## Surplus and Disruption Analyses
-
-The module detects multiple types of service disruptions:
-
-| Disruption Type | Description |
-|----------------|-------------|
-| **Sharp disruptions** | Single months with extreme deviations |
-| **Sustained drops** | Gradual declines over several months |
-| **Sustained dips** | Periods consistently below expected levels |
-| **Sustained rises** | Periods consistently above expected levels |
-| **Missing data patterns** | Gaps in reporting that may signal problems |
-
----
-
-### Quantifying Impact
-
-Disruption analysis quantifies shortfalls and surpluses by comparing:
-- **Predicted volumes** (what would have happened without disruption)
-- **Actual volumes** (what was observed)
-
-Results are reported in absolute numbers and percentages at each geographic level.
-<!-- /SLIDE -->
-
 ## 1. Overview (What & Why)
 
 ### What does this module do?
@@ -134,28 +86,6 @@ The control chart level determines where the statistical modeling occurs (trend 
 **Impact Quantification**: For months flagged as disrupted, the module uses regression models to estimate what service volumes would have been without the disruption. By comparing predicted to actual volumes, it calculates how many services were missed (shortfalls) or how much service delivery increased (surpluses).
 
 **Output Generation**: The final outputs provide disruption impacts at multiple geographic scales, enabling users to see both national-level summaries and local-level details. All calculations preserve the original data while adding predicted values and disruption metrics.
-
-<!-- SLIDE:m6a_3 -->
-## Service Utilization: FASTR Outputs
-
-The FASTR analysis generates four main visual outputs for disruption analysis:
-
-**1. Change in Service Volume**
-
-![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
-
-**2. Actual vs Expected Services (National)**
-
-![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
-
-**3. Actual vs Expected Services (Subnational)**
-
-![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
-
-**4. Volume Change Due to Data Quality Adjustments**
-
-![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
-<!-- /SLIDE -->
 
 **Interpretation Guide:**
 - **Disrupted periods**: Indicated by shaded regions or highlighting where actual volumes deviate significantly from expected
@@ -975,3 +905,90 @@ The FASTR analysis generates four main visual outputs for disruption analysis:
 
 **Last updated**: 10-11-2025
 **Contact**: FASTR Project Team
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Edit workshop slides below this line                //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m6_1 -->
+## Service Utilization Analysis
+
+The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+
+**Key capabilities:**
+- Identifies when health services deviate significantly from expected patterns
+- Measures magnitude of disruptions at national, provincial, and district levels
+- Distinguishes normal fluctuations from genuine disruptions requiring investigation
+
+---
+
+### Two-Stage Analysis Process
+
+**Stage 1: Control Chart Analysis**
+- Model expected patterns using historical trends and seasonality
+- Detect significant deviations from expected volumes
+- Flag disrupted periods
+
+**Stage 2: Disruption Quantification**
+- Use panel regression to estimate service volume changes
+- Calculate shortfalls and surpluses in absolute numbers
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2 -->
+## Surplus and Disruption Analyses
+
+The module detects multiple types of service disruptions:
+
+| Disruption Type | Description |
+|----------------|-------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected levels |
+| **Sustained rises** | Periods consistently above expected levels |
+| **Missing data patterns** | Gaps in reporting that may signal problems |
+
+---
+
+### Quantifying Impact
+
+Disruption analysis quantifies shortfalls and surpluses by comparing:
+- **Predicted volumes** (what would have happened without disruption)
+- **Actual volumes** (what was observed)
+
+Results are reported in absolute numbers and percentages at each geographic level.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6a_3 -->
+## Service Utilization: FASTR Outputs
+
+The FASTR analysis generates four main visual outputs for disruption analysis:
+
+**1. Change in Service Volume**
+
+![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+**2. Actual vs Expected Services (National)**
+
+![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+**3. Actual vs Expected Services (Subnational)**
+
+![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+**4. Volume Change Due to Data Quality Adjustments**
+
+![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+<!-- /SLIDE -->
