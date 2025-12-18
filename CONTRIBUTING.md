@@ -80,7 +80,7 @@ python3 tools/00_extract_slides.py
 python3 tools/03_build_deck.py --workshop example
 
 # Export to PDF
-marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
 
 # View result
 open outputs/example_deck.pdf
@@ -119,7 +119,7 @@ workshops/YOUR_WORKSHOP/
 ```bash
 python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
 python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
-marp outputs/YOUR_WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
 ### 4. Commit

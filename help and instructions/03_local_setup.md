@@ -470,7 +470,7 @@ Let's test the complete setup by building the example workshop.
 
 4. **Convert to PDF:**
    ```bash
-   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
+   marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
    ```
 
    Expected output:
@@ -510,7 +510,7 @@ Let's test the complete setup by building the example workshop.
 
 4. **Convert to PDF:**
    ```bash
-   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
+   marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
    ```
 
 5. **Open the PDF:**
@@ -627,7 +627,7 @@ Output: `outputs/example_deck.pptx`
 - Restart terminal after installation
 
 **PDF has no styling**
-- Missing `--theme-set fastr-theme.css` flag
+- Missing `--theme fastr-theme.css` flag
 - Run command from repository root
 - Verify `fastr-theme.css` exists in folder
 
@@ -663,7 +663,7 @@ python3 tools/03_build_deck.py --workshop WORKSHOP_ID
 
 ### Render to PDF
 ```bash
-marp outputs/DECK.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/DECK.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
 ### Render to PowerPoint

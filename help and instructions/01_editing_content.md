@@ -1,71 +1,81 @@
 # Editing Methodology Content
 
-How to write and edit FASTR methodology files using Markdown.
+How to write and edit FASTR methodology files.
 
 ---
 
-## FASTR Slide Markers (Our System)
+## File Structure
 
-In FASTR, we use special markers to identify which content becomes workshop slides. This is **different from Marp's `---` syntax** - our markers work inside the methodology files.
+Each methodology file has **two parts** separated by an ASCII art banner:
 
-### Basic Syntax
+### Part 1: Documentation (top of file)
 
-```markdown
-<!-- SLIDE:slide_id -->
-Content that will become a slide
-<!-- /SLIDE -->
+Write full documentation content here - explanations, context, references. This becomes the methodology website.
+
+### Part 2: Slides (after the separator)
+
+Look for the ASCII art banner that says "SLIDE CONTENT":
+
+```
+<!--
+////////////////////////////////////////////////////////////////////
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//            Edit workshop slides below this line                //
+////////////////////////////////////////////////////////////////////
+-->
 ```
 
-### How It Works
+Everything **below** this banner is slide content for workshops.
 
-When you edit files in `methodology/`, you wrap slide content with markers:
+---
+
+## SLIDE Markers
+
+Slides are wrapped with special markers:
 
 ```markdown
-# Data Quality Assessment
-
-This paragraph is documentation only - it appears on the website
-but NOT in workshop slides.
-
 <!-- SLIDE:m4_1 -->
-## What is DQA?
+## Slide Title
 
-This content WILL become a slide!
+- Bullet point
+- Another point
 
-- Completeness checks
-- Outlier detection
-- Consistency validation
-
-![DQA Chart](resources/default_outputs/dqa_chart.png)
+![Chart](resources/default_outputs/chart.png)
 <!-- /SLIDE -->
 
-This paragraph is also documentation only.
-
 <!-- SLIDE:m4_2 -->
-## Completeness
+## Another Slide
 
-Another slide starts here...
+More content...
 <!-- /SLIDE -->
 ```
 
 ### Slide ID Format
 
-Use this pattern: `m{module}_{section}`
+Use pattern: `m{module}_{number}`
 
 | Module | IDs |
 |--------|-----|
-| Module 0 (Introduction) | `m0_1`, `m0_2`, `m0_3` |
-| Module 4 (DQA) | `m4_1`, `m4_2`, `m4_3` |
-| Module 5 (Adjustment) | `m5_1`, `m5_2`, `m5_3` |
-| Module 6a (Utilization) | `m6a_1`, `m6a_2` |
-| Module 6b (Coverage) | `m6b_1`, `m6b_2` |
-| Module 7 (Communication) | `m7_1`, `m7_2` |
+| Module 0 (Introduction) | `m0_1`, `m0_2`, `m0_3`... |
+| Module 1 (Questions) | `m1_1`, `m1_2`... |
+| Module 2 (Extraction) | `m2_1`, `m2_2`... |
+| Module 3 (Platform) | `m3_1`, `m3_2`... |
+| Module 4 (DQA) | `m4_1`, `m4_2`... |
+| Module 5 (Adjustment) | `m5_1`, `m5_2`... |
+| Module 6 (Analysis) | `m6_1`, `m6_2`... |
+| Module 7 (Results) | `m7_1`, `m7_2`... |
 
 ### Rules
 
-1. **Unique IDs** - Each slide ID must be unique across all files
+1. **Unique IDs** - Each slide ID must be unique
 2. **Matching tags** - Every `<!-- SLIDE:xxx -->` needs a `<!-- /SLIDE -->`
 3. **No nesting** - Don't put markers inside other markers
-4. **Images** - Use `resources/...` paths (relative to methodology folder)
+4. **Images** - Use `resources/...` paths
 
 ### Extracting Slides
 
@@ -74,7 +84,7 @@ After editing, run:
 python3 tools/00_extract_slides.py
 ```
 
-This pulls out all SLIDE-marked content into `core_content/` for use in workshops.
+This extracts SLIDE-marked content into `core_content/` for workshops.
 
 ---
 
@@ -262,7 +272,7 @@ def hello_world():
 ````markdown
 ```bash
 python3 tools/03_build_deck.py --workshop nigeria
-marp outputs/nigeria_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 ````
 
@@ -637,7 +647,7 @@ Well-organized content below.
 python3 tools/03_build_deck.py --workshop your_workshop
 
 # Render to PDF
-marp outputs/your_workshop_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/your_workshop_deck.md --theme fastr-theme.css --pdf --allow-local-files
 
 # Open and review
 open outputs/your_workshop_deck.pdf

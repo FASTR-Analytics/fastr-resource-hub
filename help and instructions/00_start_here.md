@@ -8,94 +8,105 @@ Welcome! This guide explains how the FASTR slide builder works.
 
 **All your work happens in the `methodology/` folder.**
 
-That's it. You edit files there, and two things happen:
-
-1. Your content becomes part of the **documentation website**
-2. Parts you mark become **workshop slides**
+To contribute to methodology content AND slide content, you only need to work in the `methodology/` folder. That's it.
 
 ---
 
-## The 9 Module Files
+## What is this project?
 
-There are 9 files in `methodology/`. Each one corresponds to a module in the **FASTR RMNCAH-N Service Use Monitoring Resource Package**:
+The `methodology/` folder contains the entire **FASTR RMNCAH-N Service Use Monitoring Resource Package**. The 9 module files cover the complete FASTR methodology:
 
 | File | Module |
 |------|--------|
-| `00_introduction.md` | Module 0: Introduction to FASTR |
-| `01_identify_questions_indicators.md` | Module 1: Identify Questions & Indicators |
-| `02_data_extraction.md` | Module 2: Data Extraction |
-| `03_fastr_analytics_platform.md` | Module 3: FASTR Analytics Platform |
-| `04_data_quality_assessment.md` | Module 4: Data Quality Assessment |
-| `05_data_quality_adjustment.md` | Module 5: Data Quality Adjustment |
-| `06a_service_utilization.md` | Module 6a: Service Utilization Analysis |
-| `06b_coverage_estimates.md` | Module 6b: Coverage Estimates |
-| `07_results_communication.md` | Module 7: Results Communication |
-
-**To update content:** Open the file and edit it. Save. Done.
+| `00_introduction.md` | Introduction to FASTR |
+| `01_identify_questions_indicators.md` | Identify Questions & Indicators |
+| `02_data_extraction.md` | Data Extraction |
+| `03_fastr_analytics_platform.md` | The FASTR Analytics Platform |
+| `04_data_quality_assessment.md` | Data Quality Assessment |
+| `05_data_quality_adjustment.md` | Data Quality Adjustment |
+| `06a_service_utilization.md` | Service Utilization Analysis |
+| `06b_coverage_estimates.md` | Coverage Estimates |
+| `07_results_communication.md` | Results Communication |
 
 ---
 
-## How Content Becomes Two Things
+## How Each File Works
 
-When you edit a file in `methodology/`, it serves two purposes:
+Each methodology file has **two parts** that serve different purposes:
 
 ```
-methodology/04_data_quality_assessment.md
-        │
-        ├──→ Full text appears on the documentation website
-        │    https://fastr-analytics.github.io/fastr-slide-builder/
-        │
-        └──→ SLIDE-marked sections become workshop slides
-             (for presenting in person)
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│  # Data Quality Assessment                                          │
+│                                                                     │
+│  Full documentation content here...                                 │
+│  This appears on the methodology website.                           │
+│  Detailed explanations, context, references.                        │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  <!--                                                               │
+│  ////////////////////////////////////////////////////////////////////│
+│  //   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //│
+│  //  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//│
+│  //  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//│
+│  //   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//│
+│  //   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//│
+│  //  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//│
+│  //            Edit workshop slides below this line                //│
+│  ////////////////////////////////////////////////////////////////////│
+│  -->                                                                │
+│                                                                     │
+│  <!-- SLIDE:m4_1 -->                                                │
+│  ## Slide Title                                                     │
+│  Condensed bullet points for workshops                              │
+│  <!-- /SLIDE -->                                                    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-### What are SLIDE markers?
+### Part 1: Documentation (top of file)
 
-They're special comments that say "this part should become a slide":
+Everything **above** the ASCII art separator becomes the **documentation website**:
+- https://fastr-analytics.github.io/fastr-slide-builder/
+- Full explanations, context, references
+- All the detail needed for self-study
 
-```markdown
-This text is documentation only.
+### Part 2: Slides (after the separator)
 
-<!-- SLIDE:m4_1 -->
-## Data Quality Assessment
-
-This text will become a slide!
-
-- Bullet point
-- Another point
-
-![Chart](resources/default_outputs/chart.png)
-<!-- /SLIDE -->
-
-This text is documentation only again.
-```
-
-**The rule:** Content between `<!-- SLIDE:xxx -->` and `<!-- /SLIDE -->` becomes a slide. Everything else is just documentation.
+Everything **below** the `SLIDE CONTENT` ASCII art separator becomes **workshop slides**:
+- Look for the big ASCII art banner
+- Below it are `<!-- SLIDE:xxx -->` markers
+- Content between markers = presentation slides
+- Condensed for in-person delivery
 
 ---
 
-## The Simple Workflow
+## How to Contribute
 
-### If you're just editing content:
+### To update methodology content:
 
 1. Open a file in `methodology/`
-2. Make your changes
-3. Save
-4. Push to GitHub
-5. The website updates automatically
+2. Edit the **documentation content** (above the separator)
+3. Edit the **slide content** (below the separator)
+4. Save and push to GitHub
+5. Website updates automatically
 
-### If you want to update slides too:
+### To extract slides for workshops:
 
-1. Edit files in `methodology/`
-2. Run: `python3 tools/00_extract_slides.py`
-3. The slides in `core_content/` are updated
+After editing slide content, run:
+```bash
+python3 tools/00_extract_slides.py
+```
+This extracts SLIDE-marked content into `core_content/` for use in workshops.
 
-### If you're building a workshop presentation:
+### To create a workshop presentation:
 
-1. Run: `python3 tools/01_new_workshop.py`
-2. Edit your workshop config
-3. Run: `python3 tools/03_build_deck.py`
-4. Export: `marp outputs/YOUR_deck.md --theme-set fastr-theme.css --pdf`
+```bash
+python3 tools/01_new_workshop.py       # Interactive wizard
+python3 tools/03_build_deck.py         # Build deck
+marp --no-config outputs/YOUR_deck.md --theme fastr-theme.css --pdf -o outputs/YOUR_deck.pdf
+```
 
 ---
 

@@ -71,7 +71,7 @@ Or with custom template:
 
 We STRONGLY recommend using PDF instead:
 
-    marp outputs/YOUR-WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+    marp outputs/YOUR-WORKSHOP_deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files
 
 Why PDF is better:
   ✅ Perfect FASTR styling (teal colors, correct fonts)
@@ -366,11 +366,11 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
                     print("   Linux:   sudo apt install pandoc")
                     print("   Windows: https://pandoc.org/installing.html")
                     print("\nOR use PDF export instead (recommended!):")
-                    print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
+                    print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
                     return False
             else:
                 print("\nOR use PDF export instead (recommended!):")
-                print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
+                print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
                 return False
         except KeyboardInterrupt:
             print("\n\nCancelled.")
@@ -403,7 +403,7 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
         response = input("\n➤ Continue with PowerPoint conversion? [y/N]: ").strip().lower()
         if response not in ['y', 'yes']:
             print("\n💡 Using PDF instead:")
-            print(f"   marp {md_file} --theme-set fastr-theme.css --pdf")
+            print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
             print("\n👋 Conversion cancelled")
             return False
 
@@ -477,7 +477,7 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
         print(f"   3. Verify FASTR teal color (#0f706d)")
 
         print(f"\n💡 To avoid manual fixes, use PDF:")
-        print(f"   marp {md_file} --theme-set fastr-theme.css --pdf")
+        print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
 
         print("\n" + "═" * 70 + "\n")
 
@@ -488,7 +488,7 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
         if e.stderr:
             print(f"   Error: {e.stderr}")
         print(f"\n💡 Try PDF export instead:")
-        print(f"   marp {md_file} --theme-set fastr-theme.css --pdf")
+        print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
         return False
 
     finally:
@@ -523,7 +523,7 @@ Examples:
   python3 tools/04_convert_pptx.py outputs/my_deck.md --reference custom.pptx
 
 Note: PDF export is recommended over PowerPoint!
-  marp outputs/deck.md --theme-set fastr-theme.css --pdf
+  marp outputs/deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files
 
 For more help, see: docs/building-decks.md
             """
@@ -560,7 +560,7 @@ For more help, see: docs/building-decks.md
         print("\n⚠️  Reminder: PDF is the RECOMMENDED export format!")
         print("   PowerPoint requires manual adjustments after export.")
         print("\n💡 To use PDF instead (easier, better results):")
-        print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
+        print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
 
         # Prompt user to select a deck
         deck_file = prompt_for_deck(base_dir)

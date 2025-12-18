@@ -1088,7 +1088,7 @@ paginate: true
     print(f"\nNext steps:")
     print(f"\n   OPTION 1: Convert to PDF (RECOMMENDED)")
     print(f"   " + "-" * 40)
-    print(f"   marp {output_path} --theme-set fastr-theme.css --pdf")
+    print(f"   marp --no-config {output_path} --theme fastr-theme.css --pdf --allow-local-files")
     print(f"\n   Why PDF? Consistent styling, no font issues, ready to present!")
 
     print(f"\n   OPTION 2: Convert to PowerPoint")

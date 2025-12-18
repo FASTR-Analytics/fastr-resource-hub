@@ -21,7 +21,7 @@ python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
 python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
 
 # 5. Export to PDF
-marp outputs/YOUR_WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
 ---
@@ -117,7 +117,7 @@ Output: `outputs/2025-nigeria_deck.md`
 ### PDF (Recommended)
 
 ```bash
-marp outputs/2025-nigeria_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/2025-nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
 ```
 
 Output: `outputs/2025-nigeria_deck.pdf`
@@ -155,7 +155,7 @@ Use these IDs in your `deck_order`:
 | Config not found | Ensure config.py exists in workshop folder |
 | Variable not defined | Add to country_data in config.py |
 | marp: command not found | Install: `npm install -g @marp-team/marp-cli` |
-| No styling in PDF | Include `--theme-set fastr-theme.css` |
+| No styling in PDF | Use `--theme fastr-theme.css` (not --theme-set) |
 
 ---
 
@@ -172,8 +172,8 @@ python3 tools/02_check_workshop.py --workshop WORKSHOP_ID
 python3 tools/03_build_deck.py --workshop WORKSHOP_ID
 
 # Export to PDF
-marp outputs/WORKSHOP_ID_deck.md --theme-set fastr-theme.css --pdf
+marp --no-config outputs/WORKSHOP_ID_deck.md --theme fastr-theme.css --pdf --allow-local-files
 
 # Preview in browser
-marp --preview outputs/WORKSHOP_ID_deck.md --theme-set fastr-theme.css
+marp --no-config --preview outputs/WORKSHOP_ID_deck.md --theme fastr-theme.css
 ```
