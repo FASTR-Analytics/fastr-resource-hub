@@ -372,7 +372,10 @@ def prompt_for_workshop(base_dir):
 
 
 def generate_agenda_slide(config):
-    """Generate agenda slide content from YAML config (table format)."""
+    """
+    Generate agenda slide content from YAML config (table format).
+    For workshops > 3 days, splits into multiple slides (2 days per slide).
+    """
     schedule = config.get('_yaml_schedule', {})
     agenda = schedule.get('agenda', {})
     num_days = schedule.get('days', 1)
@@ -380,34 +383,55 @@ def generate_agenda_slide(config):
     if not agenda:
         return None
 
-    slide_content = "\n# Workshop Agenda\n\n"
+    # Determine how many days per slide
+    # 1-3 days: all on one slide
+    # 4+ days: 2 days per slide
+    if num_days <= 3:
+        days_per_slide = num_days
+    else:
+        days_per_slide = 2
 
-    for day_num in range(1, num_days + 1):
-        day_key = f'day{day_num}'
-        day_items = agenda.get(day_key, [])
+    all_slides = []
 
-        if not day_items:
-            continue
+    # Generate slides
+    start_day = 1
+    while start_day <= num_days:
+        end_day = min(start_day + days_per_slide - 1, num_days)
 
-        if num_days > 1:
+        # Build this slide
+        if num_days <= 3:
+            slide_content = "\n# Workshop Agenda\n\n"
+        else:
+            slide_content = f"\n# Workshop Agenda (Days {start_day}-{end_day})\n\n"
+
+        for day_num in range(start_day, end_day + 1):
+            day_key = f'day{day_num}'
+            day_items = agenda.get(day_key, [])
+
+            if not day_items:
+                continue
+
             slide_content += f"**Day {day_num}**\n\n"
+            slide_content += "| Time | Session |\n|------|--------|\n"
 
-        slide_content += "| Time | Session |\n|------|--------|\n"
+            for item in day_items:
+                time = item.get('time', '')
+                session = item.get('session', '')
+                is_break = item.get('type') == 'break'
 
-        for item in day_items:
-            time = item.get('time', '')
-            session = item.get('session', '')
-            is_break = item.get('type') == 'break'
+                if is_break:
+                    slide_content += f"| {time} | *{session}* |\n"
+                else:
+                    slide_content += f"| {time} | **{session}** |\n"
 
-            if is_break:
-                slide_content += f"| {time} | *{session}* |\n"
-            else:
-                slide_content += f"| {time} | **{session}** |\n"
+            slide_content += "\n"
 
-        slide_content += "\n"
+        slide_content += "---\n"
+        all_slides.append(slide_content)
 
-    slide_content += "---\n"
-    return slide_content
+        start_day = end_day + 1
+
+    return "".join(all_slides)
 
 
 def load_yaml_config(yaml_path):

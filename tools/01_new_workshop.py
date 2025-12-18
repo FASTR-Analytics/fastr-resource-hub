@@ -91,6 +91,9 @@ DEFAULT_MODULES = [0, 2, 4, 5, 6]
 # Estimated duration per topic in minutes
 MINUTES_PER_TOPIC = 15
 
+# Modules longer than this will be auto-split across days
+LONG_MODULE_THRESHOLD = 90
+
 
 def discover_modules(base_dir):
     """
@@ -116,9 +119,14 @@ def discover_modules(base_dir):
 
             # Count topics (markdown files in the module folder)
             topics = []
+            topic_ids = []
             for f in sorted(os.listdir(item_path)):
                 if f.endswith('.md'):
                     topics.append(f)
+                    # Extract topic ID from filename (e.g., "m3_1_overview.md" -> "m3_1")
+                    match = re.match(r'^(m\d+_\d+)', f)
+                    if match:
+                        topic_ids.append(match.group(1))
 
             # Get official name, or derive from folder name if not defined
             if mod_num in MODULE_NAMES:
@@ -140,6 +148,7 @@ def discover_modules(base_dir):
                 'short': short,
                 'duration': duration,
                 'topics': len(topics),
+                'topic_ids': topic_ids,  # e.g., ['m3_1', 'm3_2', ...]
                 'default': mod_num in DEFAULT_MODULES,
                 'folder': item,
             }
@@ -215,16 +224,59 @@ def format_time(minutes):
     return f"{hours}:{mins:02d} {period}"
 
 
+def is_long_module(mod_num):
+    """Check if a module exceeds the split threshold."""
+    return MODULES[mod_num]['duration'] > LONG_MODULE_THRESHOLD
+
+
+def expand_module_to_topics(mod_num):
+    """
+    Expand a module into its individual topics.
+    Returns list of (item_id, duration, label) tuples.
+    For long modules: [('m3_1', 15, 'Platform pt.1'), ('m3_2', 15, 'Platform pt.2'), ...]
+    """
+    mod = MODULES[mod_num]
+    topic_ids = mod.get('topic_ids', [])
+    short_name = mod['short']
+
+    items = []
+    for i, topic_id in enumerate(topic_ids, 1):
+        items.append((topic_id, MINUTES_PER_TOPIC, f"{short_name} pt.{i}"))
+
+    return items
+
+
 def auto_assign_modules_to_days(selected_modules, num_days):
     """
     Auto-assign modules to days based on duration.
     Maintains module order while balancing time across days.
+    Long modules (>90 min) are automatically split into individual topics.
+
+    Returns:
+        days: dict mapping day number to list of items
+        split_modules: set of module numbers that were split
     """
     # Sort modules to maintain logical sequence (0, 1, 2, 3, 4, 5, 6, 7)
     sorted_modules = sorted(selected_modules)
 
-    # Calculate total duration and target per day
-    total_duration = sum(MODULES[m]['duration'] for m in sorted_modules)
+    # Build list of all items (modules or topics) with their durations
+    # Each item: (item_id, duration, mod_num, label)
+    all_items = []
+    split_modules = set()
+
+    for mod_num in sorted_modules:
+        mod = MODULES[mod_num]
+        if is_long_module(mod_num) and mod.get('topic_ids'):
+            # Split this module into individual topics
+            split_modules.add(mod_num)
+            for topic_id, duration, label in expand_module_to_topics(mod_num):
+                all_items.append((topic_id, duration, mod_num, label))
+        else:
+            # Keep as whole module
+            all_items.append((f'm{mod_num}', mod['duration'], mod_num, mod['short']))
+
+    # Calculate target per day
+    total_duration = sum(item[1] for item in all_items)
     target_per_day = total_duration / num_days
 
     days = {d: [] for d in range(1, num_days + 1)}
@@ -232,24 +284,32 @@ def auto_assign_modules_to_days(selected_modules, num_days):
 
     current_day = 1
 
-    # Assign modules in order, moving to next day when current is full
-    for mod in sorted_modules:
-        duration = MODULES[mod]['duration']
-
-        # If adding this module exceeds target and we have more days, consider next day
+    # Assign items in order, moving to next day when current is full
+    for item_id, duration, mod_num, label in all_items:
+        # If adding this item exceeds target and we have more days, consider next day
         if (day_durations[current_day] > 0 and
             day_durations[current_day] + duration > target_per_day * 1.3 and
             current_day < num_days):
             current_day += 1
 
-        days[current_day].append(mod)
+        days[current_day].append({
+            'id': item_id,
+            'duration': duration,
+            'mod_num': mod_num,
+            'label': label,
+        })
         day_durations[current_day] += duration
 
-    return days
+    return days, split_modules
 
 
-def build_daily_schedule(day_modules, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins):
-    """Build a detailed schedule for one day."""
+def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins):
+    """
+    Build a detailed schedule for one day.
+
+    Args:
+        day_items: list of dicts with 'id', 'duration', 'mod_num', 'label'
+    """
     schedule = []
     current_time = start_time_mins
 
@@ -261,24 +321,34 @@ def build_daily_schedule(day_modules, start_time_mins, tea_time_mins, lunch_time
     })
     current_time += 15
 
-    modules_done = 0
-    total_modules = len(day_modules)
+    items_done = 0
+    total_items = len(day_items)
 
-    for i, mod_num in enumerate(day_modules):
-        mod = MODULES[mod_num]
+    for item in day_items:
+        mod_num = item['mod_num']
+        item_id = item['id']
+        duration = item['duration']
 
-        # Add module
+        # Get session name - use module name for whole modules, label for topics
+        if '_' in item_id:
+            # Topic: use module name + part indicator
+            session_name = f"{MODULES[mod_num]['name']} (continued)"
+        else:
+            # Whole module
+            session_name = MODULES[mod_num]['name']
+
+        # Add item to schedule
         schedule.append({
             'time': format_time(current_time),
-            'session': mod['name'],
-            'module': f'm{mod_num}',
-            'duration': mod['duration']
+            'session': session_name,
+            'module': item_id,
+            'duration': duration
         })
-        current_time += mod['duration']
-        modules_done += 1
+        current_time += duration
+        items_done += 1
 
-        # Check for tea break (after first module if we haven't passed tea time)
-        if modules_done == 1 and current_time >= tea_time_mins - 15 and current_time < lunch_time_mins:
+        # Check for tea break (after first item if we haven't passed tea time)
+        if items_done == 1 and current_time >= tea_time_mins - 15 and current_time < lunch_time_mins:
             schedule.append({
                 'time': format_time(tea_time_mins),
                 'session': 'Tea Break',
@@ -289,7 +359,7 @@ def build_daily_schedule(day_modules, start_time_mins, tea_time_mins, lunch_time
 
         # Check for lunch (around midpoint)
         if current_time >= lunch_time_mins - 30 and current_time < lunch_time_mins + 60:
-            if modules_done < total_modules:  # Don't add lunch at end
+            if items_done < total_items:  # Don't add lunch at end
                 schedule.append({
                     'time': format_time(lunch_time_mins),
                     'session': 'Lunch',
@@ -299,7 +369,7 @@ def build_daily_schedule(day_modules, start_time_mins, tea_time_mins, lunch_time
                 current_time = lunch_time_mins + 60
 
         # Check for afternoon tea
-        if current_time >= afternoon_tea_mins - 15 and modules_done < total_modules:
+        if current_time >= afternoon_tea_mins - 15 and items_done < total_items:
             schedule.append({
                 'time': format_time(afternoon_tea_mins),
                 'session': 'Afternoon Tea',
@@ -437,29 +507,65 @@ def main():
     print("STEP 4: Daily Schedule")
     print("─" * 70 + "\n")
 
-    # Auto-assign modules to days
-    days_assignment = auto_assign_modules_to_days(selected_modules, num_days)
+    # Auto-assign modules to days (splits long modules automatically)
+    days_assignment, split_modules = auto_assign_modules_to_days(selected_modules, num_days)
 
     print("   Suggested schedule:\n")
-    for day, mods in days_assignment.items():
-        mod_labels = [f"{MODULES[m]['short']} (m{m})" for m in mods]
-        total_mins = sum(MODULES[m]['duration'] for m in mods)
-        print(f"   Day {day}: {', '.join(mod_labels)} - {total_mins} min")
+    if split_modules:
+        split_names = [f"m{m} ({MODULES[m]['short']})" for m in sorted(split_modules)]
+        print(f"   Note: Long modules auto-split across days: {', '.join(split_names)}\n")
+
+    for day, items in days_assignment.items():
+        labels = [item['label'] for item in items]
+        total_mins = sum(item['duration'] for item in items)
+        print(f"   Day {day}: {', '.join(labels)} - {total_mins} min")
 
     adjust = input("\n   Adjust this schedule? [y/N]: ").strip().lower()
 
     if adjust == 'y':
+        print("\n   (Enter module numbers or topic IDs like: 0,1,m3_1,m3_2)")
         for day in range(1, num_days + 1):
-            current = ','.join(str(m) for m in days_assignment[day])
-            new_input = input(f"   Day {day} modules [{current}]: ").strip()
+            current = ','.join(item['id'] for item in days_assignment[day])
+            new_input = input(f"   Day {day} [{current}]: ").strip()
             if new_input:
-                new_mods = []
-                for m in new_input.split(','):
-                    m = m.strip()
-                    if m.isdigit() and int(m) in MODULES:
-                        new_mods.append(int(m))
-                if new_mods:
-                    days_assignment[day] = new_mods
+                new_items = []
+                for item_str in new_input.split(','):
+                    item_str = item_str.strip()
+                    # Handle module number (e.g., "3") or prefix (e.g., "m3") or topic (e.g., "m3_1")
+                    if item_str.isdigit():
+                        mod_num = int(item_str)
+                        if mod_num in MODULES:
+                            new_items.append({
+                                'id': f'm{mod_num}',
+                                'duration': MODULES[mod_num]['duration'],
+                                'mod_num': mod_num,
+                                'label': MODULES[mod_num]['short'],
+                            })
+                    elif item_str.startswith('m'):
+                        # Could be m3 or m3_1
+                        if '_' in item_str:
+                            # Topic ID like m3_1
+                            parts = item_str.split('_')
+                            mod_num = int(parts[0][1:])
+                            if mod_num in MODULES:
+                                new_items.append({
+                                    'id': item_str,
+                                    'duration': MINUTES_PER_TOPIC,
+                                    'mod_num': mod_num,
+                                    'label': item_str,
+                                })
+                        else:
+                            # Module prefix like m3
+                            mod_num = int(item_str[1:])
+                            if mod_num in MODULES:
+                                new_items.append({
+                                    'id': item_str,
+                                    'duration': MODULES[mod_num]['duration'],
+                                    'mod_num': mod_num,
+                                    'label': MODULES[mod_num]['short'],
+                                })
+                if new_items:
+                    days_assignment[day] = new_items
 
     # ─────────────────────────────────────────────────────────────────────────
     # BUILD CONFIG
@@ -470,10 +576,17 @@ def main():
 
     # Build full schedule
     daily_schedules = {}
-    for day, mods in days_assignment.items():
+    for day, items in days_assignment.items():
         daily_schedules[f'day{day}'] = build_daily_schedule(
-            mods, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins
+            items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins
         )
+
+    # Build deck_order from all items across all days (preserves split modules)
+    deck_order_items = ['agenda']
+    for day in range(1, num_days + 1):
+        for item in days_assignment[day]:
+            deck_order_items.append(item['id'])
+    deck_order_items.append('next-steps.md')
 
     # Build config
     config = {
@@ -496,7 +609,7 @@ def main():
         },
         'content': {
             'modules': selected_modules,
-            'deck_order': ['agenda'] + [f'm{m}' for m in selected_modules] + ['next-steps.md'],
+            'deck_order': deck_order_items,
             'custom_slides': [
                 'objectives.md',
                 'country-overview.md',
