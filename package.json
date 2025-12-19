@@ -1,7 +1,7 @@
 {
-  "name": "fastr-slide-builder",
+  "name": "fastr-resource-hub",
   "version": "1.0.0",
-  "description": "FASTR methodology slide deck builder using Marp",
+  "description": "FASTR RMNCAH-N Service Use Monitoring Resource Package - methodology docs and workshop builder",
   "scripts": {
     "build": "python3 tools/02_build_deck.py",
     "extract": "python3 tools/00_extract_slides.py",

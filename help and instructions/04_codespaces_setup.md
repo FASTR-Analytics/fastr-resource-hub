@@ -55,7 +55,7 @@ git push origin main
 
 **ALWAYS verify your changes are on GitHub:**
 
-1. Go to: https://github.com/FASTR-Analytics/fastr-slide-builder/commits/main
+1. Go to: https://github.com/FASTR-Analytics/fastr-resource-hub/commits/main
 2. You should see your commit at the top
 3. ✅ Your work is safe!
 

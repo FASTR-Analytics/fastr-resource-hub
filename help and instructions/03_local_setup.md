@@ -323,17 +323,17 @@ Now download the FASTR slide builder repository to your computer.
 
 3. **Clone the repository:**
    ```bash
-   git clone https://github.com/FASTR-Analytics/fastr-slide-builder.git
+   git clone https://github.com/FASTR-Analytics/fastr-resource-hub.git
    ```
 
 4. **Navigate into the folder:**
    ```bash
-   cd fastr-slide-builder
+   cd fastr-resource-hub
    ```
 
 **What this does:**
 - Downloads all files from GitHub
-- Creates a `fastr-slide-builder` folder
+- Creates a `fastr-resource-hub` folder
 - Sets up Git tracking for changes
 
 ### Mac
@@ -348,12 +348,12 @@ Now download the FASTR slide builder repository to your computer.
 
 3. **Clone the repository:**
    ```bash
-   git clone https://github.com/FASTR-Analytics/fastr-slide-builder.git
+   git clone https://github.com/FASTR-Analytics/fastr-resource-hub.git
    ```
 
 4. **Navigate into the folder:**
    ```bash
-   cd fastr-slide-builder
+   cd fastr-resource-hub
    ```
 
 ---
@@ -364,7 +364,7 @@ Now download the FASTR slide builder repository to your computer.
 
 **Option 1: From Command Prompt (Easiest)**
 
-If you're still in the `fastr-slide-builder` folder:
+If you're still in the `fastr-resource-hub` folder:
 ```bash
 code .
 ```
@@ -374,14 +374,14 @@ code .
 
 1. Open VS Code
 2. Click "File" → "Open Folder"
-3. Navigate to `Desktop\fastr-slide-builder`
+3. Navigate to `Desktop\fastr-resource-hub`
 4. Click "Select Folder"
 
 ### Mac
 
 **Option 1: From Terminal (Easiest)**
 
-If you're still in the `fastr-slide-builder` folder:
+If you're still in the `fastr-resource-hub` folder:
 ```bash
 code .
 ```
@@ -390,7 +390,7 @@ code .
 
 1. Open VS Code
 2. Click "File" → "Open"
-3. Navigate to the `fastr-slide-builder` folder
+3. Navigate to the `fastr-resource-hub` folder
 4. Click "Open"
 
 ---
@@ -450,7 +450,7 @@ Let's test the complete setup by building the example workshop.
 
 2. **Navigate to the repository:**
    ```bash
-   cd Desktop\fastr-slide-builder
+   cd Desktop\fastr-resource-hub
    ```
 
 3. **Build the example deck:**
@@ -490,7 +490,7 @@ Let's test the complete setup by building the example workshop.
 
 2. **Navigate to the repository:**
    ```bash
-   cd ~/Desktop/fastr-slide-builder
+   cd ~/Desktop/fastr-resource-hub
    ```
 
 3. **Build the example deck:**
@@ -710,11 +710,11 @@ Congratulations! You now have a complete local development environment for the F
 - **Build your first deck:** See [Building Workshops](02_building_workshops.md)
 - **Contribute content:** See [CONTRIBUTING.md](../CONTRIBUTING.md)
 - **Explore examples:** Check `workshops/example/`
-- **View methodology docs:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **View methodology docs:** https://fastr-analytics.github.io/fastr-resource-hub/
 
 ### Getting Help
 
-- **Online documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Online documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
 - **Help guides:** Browse this folder
 - **Examples:** Review `workshops/example/`
 - **Team:** Contact the FASTR team for support

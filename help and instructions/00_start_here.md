@@ -68,7 +68,7 @@ Each methodology file has **two parts** that serve different purposes:
 ### Part 1: Documentation (top of file)
 
 Everything **above** the ASCII art separator becomes the **documentation website**:
-- https://fastr-analytics.github.io/fastr-slide-builder/
+- https://fastr-analytics.github.io/fastr-resource-hub/
 - Full explanations, context, references
 - All the detail needed for self-study
 
@@ -147,6 +147,6 @@ marp --no-config outputs/NAME_deck.md --theme fastr-theme.css --pdf --allow-loca
 
 ## Need Help?
 
-- **Documentation website:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Documentation website:** https://fastr-analytics.github.io/fastr-resource-hub/
 - **Example workshop:** Look at `workshops/example/`
 - **Questions:** Contact the FASTR team

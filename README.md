@@ -1,8 +1,8 @@
-# FASTR Slide Builder
+# FASTR Resource Hub
 
 Build workshop presentations from the FASTR RMNCAH-N Service Use Monitoring Resource Package.
 
-**Methodology Documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+**Methodology Documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
 
 ---
 
@@ -72,7 +72,7 @@ git push
 ## Folder Structure
 
 ```
-fastr-slide-builder/
+fastr-resource-hub/
 ├── methodology/           # Source content (edit here!)
 │   ├── 00_introduction.md
 │   ├── 01_identify_questions_indicators.md

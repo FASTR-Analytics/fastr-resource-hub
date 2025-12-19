@@ -251,7 +251,7 @@ def extract_slides(base_dir):
 
     if not os.path.exists(methodology_dir):
         print("❌ Error: methodology/ folder not found")
-        print("   Make sure you're running from the fastr-slide-builder directory")
+        print("   Make sure you're running from the fastr-resource-hub directory")
         return False
 
     print("\n" + "═" * 70)

@@ -1,9 +1,9 @@
 site_name: FASTR RMNCAH-N Service Use Monitoring
 site_description: Methodology documentation for RMNCAH-N service use monitoring using routine HMIS data.
-site_url: https://FASTR-Analytics.github.io/fastr-slide-builder/
+site_url: https://FASTR-Analytics.github.io/fastr-resource-hub/
 docs_dir: methodology
-repo_url: https://github.com/FASTR-Analytics/fastr-slide-builder
-repo_name: FASTR-Analytics/fastr-slide-builder
+repo_url: https://github.com/FASTR-Analytics/fastr-resource-hub
+repo_name: FASTR-Analytics/fastr-resource-hub
 
 # Navigation
 nav:

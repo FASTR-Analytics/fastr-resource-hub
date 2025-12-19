@@ -187,15 +187,15 @@ Use pattern: `m{module}_{number}`
 
 ### GitHub Codespaces (No installation needed)
 
-1. Go to https://github.com/FASTR-Analytics/fastr-slide-builder
+1. Go to https://github.com/FASTR-Analytics/fastr-resource-hub
 2. Click **Code** → **Codespaces** → **Create codespace**
 3. Ready in 2-3 minutes
 
 ### Local Setup
 
 ```bash
-git clone https://github.com/FASTR-Analytics/fastr-slide-builder.git
-cd fastr-slide-builder
+git clone https://github.com/FASTR-Analytics/fastr-resource-hub.git
+cd fastr-resource-hub
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -229,6 +229,6 @@ git commit -m "fix: Correct image path in module 3"
 
 ## Questions?
 
-- **Documentation:** https://fastr-analytics.github.io/fastr-slide-builder/
+- **Documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
 - **Help guides:** See `help and instructions/` folder
 - **Contact:** FASTR team
