@@ -4,11 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## Why Extract Data?
+## Why extract data from DHIS2?
 
-### Why Extract Data from DHIS2? Why not analyse directly inside DHIS2?
+### Data quality adjustment
 
-**The FASTR Analytics Platform applies data quality adjustments**
+The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
 The FASTR methodology includes specific approaches to:
 - Identify and adjust for outliers
@@ -16,10 +16,3 @@ The FASTR methodology includes specific approaches to:
 - Apply consistent data quality metrics
 
 These adjustments require processing that cannot be done within DHIS2's native analytics.
-
-### What Format and Granularity is Required?
-
-Data should be extracted at the **facility-month level** to enable:
-- Facility-level data quality assessment
-- Subnational disaggregation of results
-- Longitudinal trend analysis

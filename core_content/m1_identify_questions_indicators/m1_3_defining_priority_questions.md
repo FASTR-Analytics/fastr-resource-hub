@@ -4,12 +4,10 @@ theme: fastr
 paginate: true
 ---
 
-## Defining Priority Questions and Selecting Indicators
+## What makes a good indicator for FASTR analysis?
 
-*Content to be developed*
-
-This section will cover:
-- How to define priority questions for FASTR analysis
-- Criteria for selecting indicators
-- What makes a good FASTR indicator
-- Aligning indicators with national strategies
+- **Relevance**: Does this indicator align with our priority questions and objectives?
+- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
+- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type**: Is this indicator a count of services delivered?

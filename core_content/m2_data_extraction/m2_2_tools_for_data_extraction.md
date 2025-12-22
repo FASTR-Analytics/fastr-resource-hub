@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Tools for Data Extraction
+## Tools for data extraction
 
 *Content to be developed*
 

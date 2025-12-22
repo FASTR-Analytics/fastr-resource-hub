@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Generating Quarterly Reporting Products
+## Generating quarterly reporting products
 
 *Content to be developed*
 

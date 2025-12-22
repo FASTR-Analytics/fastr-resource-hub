@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Introduction to FASTR: Gaps and Challenges
+## Introduction to FASTR: gaps and challenges
 
 *Content to be developed*
 

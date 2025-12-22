@@ -4,12 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Using Data for Decision-Making
+## Dissemination and data use roadmap
 
-*Content to be developed*
+A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
 
-This section will cover:
-- Translating insights into action
-- Decision-making frameworks
-- Prioritization approaches
-- Monitoring implementation of decisions
+### Why is it important?
+- Establishes metrics to evaluate the success of data use
+- Identifies key stakeholders, target audiences, and dissemination platforms
+- Outlines steps needed to achieve data dissemination goals
+- Anticipates potential challenges and develops strategies to solve for them

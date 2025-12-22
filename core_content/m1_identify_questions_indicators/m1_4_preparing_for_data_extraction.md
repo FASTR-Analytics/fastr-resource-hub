@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Preparing for Data Extraction
+## Preparing for data extraction
 
 *Content to be developed*
 

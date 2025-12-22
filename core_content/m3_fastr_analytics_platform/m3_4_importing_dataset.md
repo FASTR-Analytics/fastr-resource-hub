@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Importing a Dataset
+## Importing a dataset
 
 *Content to be developed*
 

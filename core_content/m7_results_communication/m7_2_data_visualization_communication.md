@@ -4,12 +4,10 @@ theme: fastr
 paginate: true
 ---
 
-## Data Visualization, Communication & Message Development
+## Moving from data to key messages
 
-*Content to be developed*
+### What is a result?
+Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
 
-This section will cover:
-- Principles of effective data visualization
-- Tailoring messages to different audiences
-- Creating compelling narratives from data
-- Best practices for presenting findings
+### What is a key takeaway?
+Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.

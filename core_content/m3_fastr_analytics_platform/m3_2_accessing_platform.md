@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Accessing the Platform
+## Accessing the platform
 
 *Content to be developed*
 

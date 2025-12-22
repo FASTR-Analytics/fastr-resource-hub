@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Creating a New Project
+## Creating a new project
 
 *Content to be developed*
 

@@ -4,12 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Stakeholder Engagement & Advocacy
+## End user mapping
 
-*Content to be developed*
+End user mapping helps ensure that our outputs will meet the real needs of our end users.
 
-This section will cover:
-- Identifying key stakeholders
-- Engagement strategies
-- Building buy-in for data-driven decisions
-- Advocacy approaches
+### Key questions
+1. **Who is my end user?**
+2. **What does this end user need to accomplish with the report?**
+3. **What information are they most interested in?**
+4. **What do they like/not like about current reports?**
+5. **How do they like to receive their information?**

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Creating Visualizations
+## Creating visualizations
 
 *Content to be developed*
 
