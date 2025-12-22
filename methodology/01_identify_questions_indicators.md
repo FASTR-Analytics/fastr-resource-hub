@@ -48,6 +48,8 @@ Effective data use relies on well-defined questions. Priority questions will gui
 
 ### PICO Framework for Identifying Answerable Questions
 
+> **Note:** This content was hidden in the original presentation but may be useful to include.
+
 The PICO framework is a standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
 
 | Component | Description |
@@ -185,6 +187,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2d -->
+<!-- Note: This slide was hidden in the original presentation but may be useful to include -->
 ## PICO Framework for Identifying Answerable Questions
 
 A standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
