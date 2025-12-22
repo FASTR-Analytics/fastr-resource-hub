@@ -4,7 +4,7 @@ This module covers the process of extracting data from DHIS2 for use in FASTR an
 
 ## Overview
 
-### Why Extract Data from DHIS2?
+### Why extract data from DHIS2?
 
 **Data Quality Adjustment**
 
@@ -25,7 +25,7 @@ The FASTR approach uses more advanced statistical methods, such as regression an
 
 The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs.
 
-### What Format and Granularity is Required?
+### What format and granularity is required?
 
 Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
 
@@ -36,7 +36,7 @@ Data should be downloaded for each **indicator of interest**, at **facility leve
 
 We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality and adjustments for data quality. We also want to be able to look at trends over time, accounting for things like seasonality. Using monthly facility level data allows us to conduct the most robust analysis.
 
-### Key Variables
+### Key variables
 
 The data extracted should include the following required elements:
 
@@ -86,7 +86,7 @@ The data extracted should include the following required elements:
 | `Total` | The aggregated sum of a specific data element within a given organizational unit and period |
 | `date_downloaded` | The date when the data was extracted from DHIS2 (useful for auditing and version control) |
 
-### How Much Data?
+### How much data?
 
 **Initial FASTR Analysis**
 
@@ -103,7 +103,7 @@ The data extracted should include the following required elements:
 - Additionally, include the **three preceding months** to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments
 - If you have reason to believe there have been substantial changes to the historical data, you can always choose to redownload a longer time period
 
-### Tools for Data Extraction
+### Tools for data extraction
 
 *Full documentation content to be developed*
 
@@ -131,9 +131,9 @@ This section will cover:
 -->
 
 <!-- SLIDE:m2_1 -->
-## Why Extract Data from DHIS2?
+## Why extract data from DHIS2?
 
-### Data Quality Adjustment
+### Data quality adjustment
 
 The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
@@ -146,9 +146,9 @@ These adjustments require processing that cannot be done within DHIS2's native a
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1a -->
-## Why Extract Data from DHIS2?
+## Why extract data from DHIS2?
 
-### Analysis Complexity
+### Analysis complexity
 
 The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
 
@@ -161,20 +161,20 @@ The choice between DHIS2 and the FASTR approach should be guided by the specific
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1b -->
-## Data Format and Granularity
+## Data format and granularity
 
 Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
 
 - Data should be saved in **long format** meaning each row represents a single observation or measurement
 - Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files
 
-### Why Monthly Facility Level Data?
+### Why monthly facility level data?
 
 We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality. Using monthly facility level data allows us to conduct the most robust analysis.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1c -->
-## Key Variables
+## Key variables
 
 The data extracted should include the following required elements:
 
@@ -187,19 +187,19 @@ The data extracted should include the following required elements:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1d -->
-## How Much Data?
+## How much data?
 
-### Initial FASTR Analysis
+### Initial FASTR analysis
 - Download approximately **five years** of historical data
 - Exact period depends on data availability and consistency in indicator definitions
 
-### Routine Update to FASTR Analysis
+### Routine update to FASTR analysis
 - Download new data covering the most recent months not previously included (usually **three months** for quarterly implementation)
 - Include the **three preceding months** as recent data is often subject to changes due to late reporting or data quality adjustments
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2 -->
-## Tools for Data Extraction
+## Tools for data extraction
 
 *Content to be developed*
 

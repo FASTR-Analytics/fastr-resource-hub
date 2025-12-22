@@ -46,7 +46,7 @@ This section will cover the complete process of working with the FASTR analytics
 -->
 
 <!-- SLIDE:m3_1 -->
-## Overview of the Platform
+## Overview of the platform
 
 The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
 
@@ -56,7 +56,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->
-## Accessing the Platform
+## Accessing the platform
 
 *Content to be developed*
 
@@ -67,7 +67,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_3 -->
-## Setting Up the Structure
+## Setting up the structure
 
 *Content to be developed*
 
@@ -78,7 +78,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_4 -->
-## Importing a Dataset
+## Importing a dataset
 
 *Content to be developed*
 
@@ -89,7 +89,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_5 -->
-## Installing and Running Modules
+## Installing and running modules
 
 *Content to be developed*
 
@@ -100,7 +100,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_6 -->
-## Creating a New Project
+## Creating a new project
 
 *Content to be developed*
 
@@ -111,7 +111,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_7 -->
-## Creating Visualizations
+## Creating visualizations
 
 *Content to be developed*
 
@@ -122,7 +122,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_8 -->
-## Creating Reports
+## Creating reports
 
 *Content to be developed*
 

@@ -32,7 +32,16 @@ Each methodology file has two parts:
 
 When adding new content, add it to the appropriate methodology file in both sections if it should appear on both the website and in workshop slides.
 
-## The 9 Module Files
+## Style guidelines
+
+**Headings**: Use sentence case (only capitalize the first word and proper nouns). Do NOT capitalize each word.
+
+- Correct: `## Why focus on high volume indicators?`
+- Incorrect: `## Why Focus on High Volume Indicators?`
+
+**Heading hierarchy**: Use `##` for main sections, `###` for subsections, etc.
+
+## The 9 module files
 
 | File | Topic |
 |------|-------|

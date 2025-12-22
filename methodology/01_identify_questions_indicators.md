@@ -14,7 +14,7 @@ This section will cover the complete process of:
 
 3. **Defining Priority Questions and Selecting Indicators** - How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
 
-## Defining Priority Questions
+## Defining priority questions
 
 Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and can enhance decision making support.
 
@@ -26,7 +26,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 - **Important to individuals/groups**: Matters to stakeholders
 - **Answerable**: Can be addressed with available data and methods
 
-### Is My Question a Relevant Priority? 5+ Ws to Consider
+### Is my question a relevant priority? 5+ Ws to consider
 
 - **Who** is your audience?
 - **What** do they need and want to know?
@@ -35,7 +35,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 - **Why** do they need to know?
 - **How** will they use the findings?
 
-### What Do We Mean by Answerable?
+### What do we mean by answerable?
 
 **We have the data**
 - Type, quantity, quality sufficient for the question
@@ -46,7 +46,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 **We have the time**
 - We can answer the question on a quarterly basis
 
-### PICO Framework for Identifying Answerable Questions
+### PICO framework for identifying answerable questions
 
 > **Note:** This content was hidden in the original presentation but may be useful to include.
 
@@ -59,7 +59,7 @@ The PICO framework is a standard tool from evidence-based medicine and public he
 | **C**omparison | What is baseline/non-intervention - relevant comparisons if applicable |
 | **O**utcome | What is public health objective - expected changes or impacts |
 
-## Selecting Indicators: What Makes a Good Indicator for FASTR Analysis?
+## Selecting indicators: what makes a good indicator for FASTR analysis?
 
 When selecting indicators for FASTR analysis, consider the following criteria:
 
@@ -69,7 +69,7 @@ When selecting indicators for FASTR analysis, consider the following criteria:
 - **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
 - **Type**: Is this indicator a count of services delivered?
 
-### Why Focus on High Volume Indicators?
+### Why focus on high volume indicators?
 
 One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
 
@@ -79,7 +79,7 @@ One key added-value of the FASTR approach is making adjustments for data quality
 
 Count indicators allow for ongoing data quality checks, including improved precision in identifying outliers or data issues and flexibility to validate counts before deriving proportions externally.
 
-### Why Focus on High Completeness Indicators?
+### Why focus on high completeness indicators?
 
 High completeness indicators are recommended because they improve data quality, reduce bias, and enable more accurate, timely, and actionable insights, ultimately leading to better-informed public health decisions.
 
@@ -89,7 +89,7 @@ High completeness indicators are recommended because they improve data quality, 
 
 Statistical methods such as imputation can be used to adjust for incomplete data; however, this requires making assumptions about the missing data. See [Data Quality Adjustment](05_data_quality_adjustment.md) for details.
 
-### Why Focus on Count Indicators?
+### Why focus on count indicators?
 
 **Challenges with Proportion Indicators:**
 
@@ -103,7 +103,7 @@ Statistical methods such as imputation can be used to adjust for incomplete data
 - Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
 - Mortality and similar rare events are better suited for annual reviews than frequent (e.g., monthly or quarterly) updates
 
-### FASTR Core Indicators
+### FASTR core indicators
 
 The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum across LMICs. These indicators capture key service delivery events with higher completeness rates and higher volume, and serve as proxies for other services and interventions delivered at the same service contact. Outpatient consultations (OPDs) are also used as a proxy for the general use of health services. Additional country and program-specific indicators can be added to the analysis to be responsive to country priorities
 
@@ -127,7 +127,7 @@ The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N in
 -->
 
 <!-- SLIDE:m1_1 -->
-## Introduction to FASTR: Gaps and Challenges
+## Introduction to FASTR: gaps and challenges
 
 *Content to be developed*
 
@@ -138,7 +138,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2 -->
-## Development of a Data Use Case
+## Development of a data use case
 
 *Content to be developed*
 
@@ -149,7 +149,7 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2a -->
-## Defining Priority Questions
+## Defining priority questions
 
 Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and enhance decision making support.
 
@@ -163,7 +163,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2b -->
-## Is My Question a Relevant Priority? 5+ Ws to Consider
+## Is my question a relevant priority? 5+ Ws to consider
 
 - **Who** is your audience?
 - **What** do they need and want to know?
@@ -188,7 +188,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 
 <!-- SLIDE:m1_2d -->
 <!-- Note: This slide was hidden in the original presentation but may be useful to include -->
-## PICO Framework for Identifying Answerable Questions
+## PICO framework for identifying answerable questions
 
 A standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
 
@@ -201,7 +201,7 @@ A standard tool from evidence-based medicine and public health research for form
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3 -->
-## What Makes a Good Indicator for FASTR Analysis?
+## What makes a good indicator for FASTR analysis?
 
 - **Relevance**: Does this indicator align with our priority questions and objectives?
 - **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
@@ -262,7 +262,7 @@ Additional country and program-specific indicators can be added to be responsive
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_4 -->
-## Preparing for Data Extraction
+## Preparing for data extraction
 
 *Content to be developed*
 

@@ -16,9 +16,9 @@ This section covers the complete process of communicating and using FASTR result
 
 5. **Practice: Generating Quarterly Reporting Products** - Quarterly reporting workflow, using the FASTR platform for automated reports, quality assurance for reports, distribution and feedback mechanisms
 
-## Moving from Data to Key Messages
+## Moving from data to key messages
 
-### What is a Result?
+### What is a result?
 
 Results are what the analysis found...
 
@@ -33,7 +33,7 @@ They are often...
 - Hard to understand 'at a glance'
 - Lacking interpretation
 
-### What is a Key Takeaway?
+### What is a key takeaway?
 
 Key takeaways are what the results are telling us...
 
@@ -47,7 +47,7 @@ They should be...
 - Easy to remember
 - Actionable
 
-### Example: Result vs Key Takeaway
+### Example: result vs key takeaway
 
 **Example 1 (Result):**
 
@@ -57,16 +57,16 @@ They should be...
 
 > While earlier periods show sharp fluctuations in ANC1 service volumes, particularly in 2020 and 2022, the relative stability observed from mid-2023 onward suggests improvements in the consistency of service delivery. This trend may reflect strengthened systems, reduced disruptions, or more predictable care-seeking patterns — providing a stronger foundation for sustained antenatal care coverage.
 
-## Choosing the Right Report Format
+## Choosing the right report format
 
-### Key Considerations
+### Key considerations
 
 - **Audience** – Who will be using the report?
 - **Purpose** – Inform, persuade, summarize, or analyze?
 - **Level of Detail** – High-level summary vs. in-depth analysis
 - **Accessibility** – How will the audience access and use it?
 
-### Report Format Options
+### Report format options
 
 | Format | Best For | Pros | Cons |
 |--------|----------|------|------|
@@ -75,7 +75,7 @@ They should be...
 | Infographics | General audiences, advocacy | Engaging, digestible, shareable | Limited depth, requires design effort |
 | Posters | Conferences, workshops | High impact, visual summary | Not suited for complex data |
 
-### Which Format Works Best?
+### Which format works best?
 
 | Audience | Format |
 |----------|--------|
@@ -84,11 +84,11 @@ They should be...
 | General public and advocacy groups | Infographics + posters |
 | Conference or workshop attendees | Poster + summary slide deck |
 
-## Storytelling with Data
+## Storytelling with data
 
 Storytelling is a powerful communication tool to help translate data and data visualizations into compelling narratives to guide decision-making and convey important health information.
 
-### The Goal of Storytelling with Data Can Vary and Take Various Forms:
+### The goal of storytelling with data can vary and take various forms
 
 - Explanation of a data visualization
 - "Once upon a time story" and what we can learn from it
@@ -97,7 +97,7 @@ Storytelling is a powerful communication tool to help translate data and data vi
 - Causation or correlation story
 - "How" story
 
-### Elements of a Data Story
+### Elements of a data story
 
 - **Plot**: What questions will you answer from the data, and how?
 - **Setting**: What is the context?
@@ -105,7 +105,7 @@ Storytelling is a powerful communication tool to help translate data and data vi
 - **Issue**: What is the main health issue?
 - **Implication**: What are the actions/recommendations?
 
-### Storytelling Can Take Different Forms
+### Storytelling can take different forms
 
 - Can include data visualizations/images
 - With or without numbers
@@ -113,7 +113,7 @@ Storytelling is a powerful communication tool to help translate data and data vi
 
 Be creative and remember to tailor the story to your audience.
 
-### Example: Developing a Data Story
+### Example: developing a data story
 
 **Part 1: Introduction and Context**
 
@@ -137,18 +137,18 @@ Call to action:
 
 > For Penta 3 immunization, Ayn Region and Ras-Asayr Region in Puntland State need further attention with >6% outliers. Showing disaggregated data is imperative as national and state-level estimates of data quality indicators can mask specific regions requiring further data quality investigation.
 
-## Dissemination and Data Use Roadmap
+## Dissemination and data use roadmap
 
 A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively. It serves as a guide for ensuring that the analytical product developed reaches its intended audience and achieves its goals.
 
-### Why is Developing a Dissemination and Data Use Roadmap Important?
+### Why is developing a dissemination and data use roadmap important?
 
 - Establishes metrics and indicators to evaluate the success of data use
 - Clearly identifies key stakeholders, target audiences, and dissemination platforms/forums
 - Outlines the steps needed to achieve data dissemination goals
 - Anticipates potential challenges and barriers in data dissemination and use and develops strategies to solve for them
 
-### Dissemination and Data Use Roadmap Components
+### Dissemination and data use roadmap Components
 
 | Component | Description | Example |
 |-----------|-------------|---------|
@@ -160,7 +160,7 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 | **Steps required & Who is accountable** | Define steps and assign roles and responsibilities | Get on agenda for platform meeting – Director; Finalize presentation – officer |
 | **Monitoring & Evaluation** | How will you know if you are successful? | The % of quarterly reports that were disseminated in relevant forums; A list of actions that were taken as a result of the data is created and maintained |
 
-## Action Plan for FASTR Moving Forward
+## Action plan for FASTR moving forward
 
 An action plan will help guide FASTR activities at the country level over the next year. Consider:
 
@@ -177,7 +177,7 @@ An action plan will help guide FASTR activities at the country level over the ne
 - How would you like to practice? (e.g., solo, in a group, in regular weekly meetings?)
 - Who wasn't at this training that needs to understand this content? What additional training is needed?
 
-### Action Plan Structure
+### Action plan structure
 
 | Section | Description |
 |---------|-------------|
@@ -187,11 +187,11 @@ An action plan will help guide FASTR activities at the country level over the ne
 | **Timeline** | When will you complete this step? |
 | **Evaluation metric** | Identify metrics or criteria to assess progress or success |
 
-## End User Mapping
+## End user mapping
 
 End user mapping helps ensure that our outputs will meet the real needs of our end users.
 
-### Key Questions for End User Mapping
+### Key questions for end user mapping
 
 1. **Who is my end user?** (e.g., head of a regional health bureau, regional health authority, national policy maker?)
 
@@ -203,7 +203,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 
 5. **How do they like to receive their information?** (PPT, brief, key messages/bullet points, graphs, maps, dashboards?)
 
-### User Mapping Example
+### User mapping example
 
 | Question | Example Response |
 |----------|------------------|
@@ -232,7 +232,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 -->
 
 <!-- SLIDE:m7_1 -->
-## Analytical Thinking & Interpretation
+## Analytical thinking & interpretation
 
 *Content to be developed*
 
@@ -244,17 +244,17 @@ This section will cover:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2 -->
-## Moving from Data to Key Messages
+## Moving from data to key messages
 
-### What is a Result?
+### What is a result?
 Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
 
-### What is a Key Takeaway?
+### What is a key takeaway?
 Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2a -->
-## Example: Result vs Key Takeaway
+## Example: result vs key takeaway
 
 **Result:**
 > In Q3 2022, the volume of ANC1 visits increased by 15% from the previous quarter—the largest quarterly rise in the period—followed by a 12% drop in Q1 2023. Since then, ANC1 volumes have remained relatively stable.
@@ -264,9 +264,9 @@ Key takeaways are what the results are telling us — why the results matter, th
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2b -->
-## Choosing the Right Report Format
+## Choosing the right report format
 
-### Key Considerations
+### Key considerations
 - **Audience** – Who will be using the report?
 - **Purpose** – Inform, persuade, summarize, or analyze?
 - **Level of Detail** – High-level summary vs. in-depth analysis
@@ -280,11 +280,11 @@ Key takeaways are what the results are telling us — why the results matter, th
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2c -->
-## Storytelling with Data
+## Storytelling with data
 
 Storytelling is a powerful communication tool to help translate data into compelling narratives to guide decision-making.
 
-### Elements of a Data Story
+### Elements of a data story
 - **Plot**: What questions will you answer from the data?
 - **Setting**: What is the context?
 - **Audience**: Who is your target audience?
@@ -295,7 +295,7 @@ Be creative and remember to tailor the story to your audience.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2d -->
-## Example: Developing a Data Story
+## Example: developing a data story
 
 **Setting:** Examining routine data quality is critical to inform targeted action by the Ministry of Health
 
@@ -307,11 +307,11 @@ Be creative and remember to tailor the story to your audience.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_3 -->
-## Dissemination and Data Use Roadmap
+## Dissemination and data use roadmap
 
 A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
 
-### Why is it Important?
+### Why is it important?
 - Establishes metrics to evaluate the success of data use
 - Identifies key stakeholders, target audiences, and dissemination platforms
 - Outlines steps needed to achieve data dissemination goals
@@ -319,7 +319,7 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_3a -->
-## Action Plan for FASTR Moving Forward
+## Action plan for FASTR moving forward
 
 Consider these key areas:
 
@@ -333,11 +333,11 @@ Consider these key areas:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_4 -->
-## End User Mapping
+## End user mapping
 
 End user mapping helps ensure that our outputs will meet the real needs of our end users.
 
-### Key Questions
+### Key questions
 1. **Who is my end user?**
 2. **What does this end user need to accomplish with the report?**
 3. **What information are they most interested in?**
@@ -346,7 +346,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_5 -->
-## Generating Quarterly Reporting Products
+## Generating quarterly reporting products
 
 *Content to be developed*
 
