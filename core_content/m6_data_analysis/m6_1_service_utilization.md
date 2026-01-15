@@ -25,13 +25,17 @@ Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjus
 
 ## Service utilization: FASTR outputs
 
-![h:420 Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+**Change in service volume over time**
+
+![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
 ## Service utilization: Subnational
 
-![h:420 Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+**Comparing volumes across regions**
+
+![Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 ---
 

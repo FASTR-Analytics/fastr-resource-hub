@@ -178,7 +178,7 @@ This step includes a pre-extraction checklist, review of the DHIS2 configuration
 <!-- SLIDE:m1_1 -->
 ## Introduction to FASTR: gaps and challenges
 
-*Content to be developed*
+
 
 This section will cover:
 - Identifying gaps and challenges that FASTR is well suited to support
@@ -189,7 +189,7 @@ This section will cover:
 <!-- SLIDE:m1_2 -->
 ## Development of a data use case
 
-*Content to be developed*
+
 
 This section will cover:
 - Co-creation workshop approach with MoH and stakeholders

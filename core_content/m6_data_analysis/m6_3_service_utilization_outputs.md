@@ -4,24 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-## Service utilization: Change in volume
+## Service utilization: FASTR outputs
 
-![h:420 Change in service volume over time.](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+The FASTR analysis generates four main visual outputs for disruption analysis:
 
----
+**1. Change in service volume**
 
-## Service utilization: Actual vs expected (national)
+![Change in service volume over time.](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
-![h:420 Actual vs expected number of services at national level.](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+**2. Actual vs expected services (national)**
 
----
+![Actual vs expected number of services at national level.](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-## Service utilization: Actual vs expected (subnational)
+**3. Actual vs expected services (subnational)**
 
-![h:420 Actual vs expected number of services at subnational level.](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Actual vs expected number of services at subnational level.](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
----
+**4. Volume change due to data quality adjustments**
 
-## Service utilization: Volume change from adjustments
-
-![h:420 Volume change due to data quality adjustments.](../../resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+![Volume change due to data quality adjustments.](../../resources/default_outputs/Module3_4_Volume_change_adjustments.png)

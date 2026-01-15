@@ -15,6 +15,19 @@ Beyond simple trends, FASTR can detect and quantify service disruptions.
 
 ---
 
+## Types of disruptions detected
+
+| Type | What it captures |
+|------|------------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected |
+| **Sustained rises** | Periods consistently above expected |
+
+---
+
 ## Disruption outputs
 
-![h:420 Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+**Actual vs expected at national level**
+
+![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
