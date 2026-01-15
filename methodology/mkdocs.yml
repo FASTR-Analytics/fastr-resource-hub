@@ -10,14 +10,14 @@ repo_name: FASTR-Analytics/fastr-resource-hub
 # Note: Executive Summary, Module 7, and Module 8 are hidden but still available for workshops
 nav:
   - Overview: index.md
-  - Module 0 · Introduction: 00_introduction.md
-  - Module 1 · Identify Questions & Indicators: 01_identify_questions_indicators.md
-  - Module 2 · Data Extraction: 02_data_extraction.md
-  - Module 3 · FASTR Analytics Platform: 03_fastr_analytics_platform.md
-  - Module 4 · Data Quality Assessment: 04_data_quality_assessment.md
-  - Module 5 · Data Quality Adjustments: 05_data_quality_adjustment.md
-  - Module 6a · Service Utilization: 06a_service_utilization.md
-  - Module 6b · Coverage Estimates: 06b_coverage_estimates.md
+  - Introduction: 00_introduction.md
+  - Identify Questions & Indicators: 01_identify_questions_indicators.md
+  - Data Extraction: 02_data_extraction.md
+  - FASTR Analytics Platform: 03_fastr_analytics_platform.md
+  - Data Quality Assessment: 04_data_quality_assessment.md
+  - Data Quality Adjustments: 05_data_quality_adjustment.md
+  - Service Utilization: 06a_service_utilization.md
+  - Coverage Estimates: 06b_coverage_estimates.md
   - Disclaimer: disclaimer.md
 
 # Theme Configuration
@@ -120,14 +120,14 @@ plugins:
             language: fr
           nav_translations:
             Overview: Vue d'ensemble
-            Module 0 · Introduction: Module 0 · Introduction
-            Module 1 · Identify Questions & Indicators: Module 1 · Identifier les questions et indicateurs
-            Module 2 · Data Extraction: Module 2 · Extraction des données
-            Module 3 · FASTR Analytics Platform: Module 3 · Plateforme d'analyse FASTR
-            Module 4 · Data Quality Assessment: Module 4 · Évaluation de la qualité des données
-            Module 5 · Data Quality Adjustments: Module 5 · Ajustement de la qualité des données
-            Module 6a · Service Utilization: Module 6a · Utilisation des services
-            Module 6b · Coverage Estimates: Module 6b · Estimations de couverture
+            Introduction: Introduction
+            Identify Questions & Indicators: Identifier les questions et indicateurs
+            Data Extraction: Extraction des données
+            FASTR Analytics Platform: Plateforme d'analyse FASTR
+            Data Quality Assessment: Évaluation de la qualité des données
+            Data Quality Adjustments: Ajustement de la qualité des données
+            Service Utilization: Utilisation des services
+            Coverage Estimates: Estimations de couverture
             Disclaimer: Avertissement
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:
