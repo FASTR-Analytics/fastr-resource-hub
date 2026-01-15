@@ -6,7 +6,6 @@ on:
     paths:
       - 'methodology/**'
       - 'resources/**'
-      - 'mkdocs.yml'
       - 'requirements.txt'
   workflow_dispatch:  # Allow manual trigger
 
