@@ -92,7 +92,8 @@
       "Bash(.venv/bin/pip3 install:*)",
       "Bash(.venv/bin/pip install:*)",
       "Bash(unzip:*)",
-      "Bash(.venv/bin/mkdocs build:*)"
+      "Bash(.venv/bin/mkdocs build:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }

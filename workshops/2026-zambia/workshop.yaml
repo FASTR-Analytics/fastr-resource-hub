@@ -211,7 +211,7 @@ schedule:
 
     - time: "09:15-10:15"
       session: "HFA overview and questionnaire adaptation guidelines"
-      topics: [m8_1, m8_2]
+      topics: [m8_1]
       speaker: "GFF FASTR team"
       duration: 60
 
@@ -220,7 +220,6 @@ schedule:
 
     - time: "10:15-12:30"
       session: "Review questionnaire + hands-on adaptation"
-      topics: [m8_3, m8_4]
       speaker: "GFF FASTR team"
       duration: 135
 
@@ -250,7 +249,6 @@ schedule:
 
     - time: "15:30-16:30"
       session: "HFA priorities and data use case in Zambia"
-      topics: [m8_5]
       speaker: "GFF FASTR team"
       duration: 60
 
