@@ -898,33 +898,6 @@ Changes greater than **10%** (increase or decrease) are flagged for review.
 
 
 
-## Service Coverage Estimates
-
-This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
-
-**Three data sources integrated:**
-1. Adjusted health service volumes from HMIS
-2. Population projections from United Nations
-3. Household survey data from MICS/DHS
-
----
-
-### Two-Part Process
-
-**Part 1: Denominator Calculation**
-- Calculate target populations using multiple methods (HMIS-based and population-based)
-- Compare against survey benchmarks
-- Automatically select best denominator for each indicator
-
-**Part 2: Coverage Estimation**
-- Override automatic selections based on programmatic knowledge
-- Project survey estimates forward using HMIS trends
-- Generate final coverage estimates
-
----
-
-
-
 ## Output: Actual vs expected (national)
 
 ![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
@@ -1104,14 +1077,6 @@ This ensures coverage estimates are grounded in observed service delivery patter
 Surveys (DHS/MICS) occur every 3-5 years. The module projects the last survey value forward using the trend observed in HMIS-calculated coverage:
 
 ![Coverage projection method](../resources/diagrams/coverage_projection.svg)
-
----
-
-### Projection formula
-
-$$\text{Projected coverage}_t = \text{Last survey value} + (\text{HMIS coverage}_t - \text{HMIS coverage}_{\text{survey year}})$$
-
-This preserves the survey calibration while incorporating observed trends from administrative data.
 
 ---
 
