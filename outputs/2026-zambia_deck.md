@@ -1049,6 +1049,94 @@ Using survey coverage + DHIS2 counts to derive denominators:
 
 
 
+## Estimating denominators from ANC-1: Visual example
+
+Starting from ANC1 visits, apply demographic adjustment factors to estimate denominators for other services:
+
+![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
+
+---
+
+
+
+## Multiple denominator options
+
+Each HMIS indicator provides an **entry point** into the demographic cascade. From that starting point, the module calculates forward and backward to derive all target populations:
+
+| Entry point | Calculation | Denominators derived |
+|-------------|-------------|---------------------|
+| **ANC1** | ANC1 ÷ coverage → Pregnancies | → Deliveries → Births → Live births → DPT-eligible → Measles-eligible |
+| **Deliveries** | Deliveries ÷ coverage → Live births | ← Pregnancies ← ... and → DPT-eligible → Measles-eligible |
+| **BCG** | BCG ÷ coverage → Live births | ← Pregnancies ← ... and → DPT-eligible → Measles-eligible |
+| **Penta1** | Penta1 ÷ coverage → DPT-eligible | → Measles-eligible |
+| **UN WPP** | Population projections | Pregnancies, Live births, DPT-eligible, Measles-eligible |
+
+The module calculates coverage using **each** denominator option, then selects the best one.
+
+---
+
+
+
+## Selecting the best denominator
+
+**How the module selects the best denominator:**
+
+1. **Calculate coverage** using each denominator option
+2. **Compare to survey** (DHS/MICS) benchmark for that indicator
+3. **Select the denominator** that produces coverage closest to survey
+
+---
+
+### Selection rules
+
+- **HMIS-based denominators preferred** over population projections
+- **Independent denominators preferred** (e.g., using ANC1 to estimate Penta3 coverage, not Penta1)
+- **Lowest error wins** when multiple options are available
+
+This ensures coverage estimates are grounded in observed service delivery patterns.
+
+---
+
+
+
+## Projecting coverage between surveys
+
+Surveys (DHS/MICS) occur every 3-5 years. The module projects the last survey value forward using the trend observed in HMIS-calculated coverage:
+
+![Coverage projection method](../resources/diagrams/coverage_projection.svg)
+
+---
+
+### Projection formula
+
+$$\text{Projected coverage}_t = \text{Last survey value} + (\text{HMIS coverage}_t - \text{HMIS coverage}_{\text{survey year}})$$
+
+This preserves the survey calibration while incorporating observed trends from administrative data.
+
+---
+
+
+
+## Interpreting coverage outputs
+
+**Understanding the chart lines:**
+
+- **Black line/points**: Survey data (DHS/MICS) - the reference standard from household surveys
+- **Grey line/points**: HMIS-based coverage - calculated from facility data and selected denominator
+- **Red line/points**: Projected coverage - survey estimates extended using HMIS trends
+
+---
+
+### Key questions when reviewing
+
+1. **How close is HMIS coverage to survey?** Large gaps may indicate denominator or data quality issues
+2. **Are trends consistent?** HMIS and survey should generally move in the same direction
+3. **Are projections plausible?** Coverage should stay between 0-100% and align with program knowledge
+
+---
+
+
+
 ## Coverage estimates: FASTR outputs
 
 The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
