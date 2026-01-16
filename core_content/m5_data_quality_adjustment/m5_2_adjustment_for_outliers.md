@@ -19,4 +19,6 @@ For each value flagged as an outlier, the module calculates what the value "shou
 
 ### Outlier adjustment: FASTR output
 
-![h:420 Percent change in volume due to outlier adjustment.](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment.](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+
+Heatmap showing percent change in service volumes due to outlier replacement.

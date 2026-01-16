@@ -60,4 +60,4 @@ AND for which the count is greater than 100.
 
 ## Outliers: FASTR output
 
-![h:420 Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)

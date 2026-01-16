@@ -4,24 +4,60 @@ theme: fastr
 paginate: true
 ---
 
-## Service utilization: Change in volume
+## Detecting disruptions
 
-![h:420 Change in service volume over time.](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+Beyond simple trends, we detect periods where service delivery deviates significantly from what we would expect.
 
----
+**The approach:**
 
-## Service utilization: Actual vs expected (national)
-
-![h:420 Actual vs expected number of services at national level.](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
-
----
-
-## Service utilization: Actual vs expected (subnational)
-
-![h:420 Actual vs expected number of services at subnational level.](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+1. Calculate **expected volume** based on historical patterns
+2. Compare **actual volume** to expected
+3. Quantify the **shortfall** (actual below expected) or **surplus** (actual above expected)
 
 ---
 
-## Service utilization: Volume change from adjustments
+## What is "expected" volume?
 
-![h:420 Volume change due to data quality adjustments.](../../resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+We model expected service volume using two components:
+
+**Trend:** The long-term direction (increasing, decreasing, or stable)
+
+**Seasonality:** Predictable monthly patterns (e.g., malaria cases rise in rainy season)
+
+The model learns these patterns from historical data and projects what volume *should* be in each month.
+
+---
+
+## Expected vs actual: Visual concept
+
+<div class="columns">
+<div>
+
+**When actual = expected:**
+Services are delivered as anticipated based on historical patterns.
+
+**When actual < expected (shortfall):**
+Fewer services than expected — possible disruption.
+
+**When actual > expected (surplus):**
+More services than expected — could indicate catch-up, outreach, or reporting changes.
+
+</div>
+<div>
+
+![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+</div>
+</div>
+
+---
+
+## Reading the actual vs expected charts
+
+**Black line:** Actual (observed) service volumes
+
+**Red shaded areas:** Shortfall periods — actual is below expected
+
+**Green shaded areas:** Surplus periods — actual is above expected
+
+**The larger the shaded area, the greater the disruption magnitude.**

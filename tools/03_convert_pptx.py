@@ -105,6 +105,8 @@ class Layout:
     MARGIN_TOP = Inches(0.5)
     MARGIN_BOTTOM = Inches(0.5)
     CONTENT_WIDTH = Inches(12.333)
+    # Centered content position: (slide_width - content_width) / 2
+    CONTENT_LEFT = Inches(0.5)  # (13.333 - 12.333) / 2 = 0.5
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -229,8 +231,13 @@ def parse_markdown(content):
             # Skip table lines
             if line_stripped.startswith('|'):
                 continue
-            # Skip HTML
-            if line_stripped.startswith('<') or line_stripped.startswith('!'):
+            # Skip images (markdown and HTML)
+            if line_stripped.startswith('!['):
+                continue
+            if line_stripped.startswith('<img'):
+                continue
+            # Skip div wrappers (but HTML text tags like <em> handled later)
+            if line_stripped.startswith('<div') or line_stripped.startswith('</div'):
                 continue
             # Skip comments
             if line_stripped.startswith('<!--'):
@@ -269,7 +276,7 @@ def detect_slide_type(slide, index):
     """
     Detect slide type from content.
 
-    Returns: 'title', 'agenda', 'break', 'two_column', 'table', 'image', 'content'
+    Returns: 'title', 'agenda', 'break', 'section', 'two_column', 'table', 'image', 'content'
     """
     headers = slide['headers']
     h1_text = headers[0][1] if headers and headers[0][0] == 1 else ''
@@ -290,6 +297,13 @@ def detect_slide_type(slide, index):
         return 'break'
     if re.search(r'\b(break|lunch|tea)\b', h1_text, re.IGNORECASE):
         return 'break'
+
+    # Section header slide: "Session X:" ONLY when minimal content (just header)
+    # Don't use section type if slide has bullets, paragraphs, or images
+    has_content = len(slide['bullets']) > 0 or len(slide['paragraphs']) > 0 or slide['images']
+    if headers and headers[0][0] == 1 and not has_content:
+        if re.match(r'^Session\s+\d+', h1_text, re.IGNORECASE):
+            return 'section'
 
     # Two-column slide
     if slide['columns']:
@@ -359,17 +373,20 @@ def convert_svg_to_png(svg_path, temp_dir):
 def add_image_to_slide(slide, img_path, left, top, width=None, height=None):
     """Add image to slide, handling SVG conversion if needed."""
     if not img_path or not os.path.exists(img_path):
+        print(f"   Warning: Image not found: {img_path}")
         return None
 
     # Convert SVG if needed
     if img_path.lower().endswith('.svg'):
         import tempfile
-        with tempfile.TemporaryDirectory() as temp_dir:
-            png_path = convert_svg_to_png(img_path, temp_dir)
-            if png_path:
-                img_path = png_path
-            else:
-                return None  # SVG conversion failed
+        # Create a persistent temp file (not auto-deleted)
+        temp_dir = tempfile.mkdtemp()
+        png_path = convert_svg_to_png(img_path, temp_dir)
+        if png_path and os.path.exists(png_path):
+            img_path = png_path
+        else:
+            print(f"   Warning: SVG conversion failed for {os.path.basename(img_path)} - install cairosvg")
+            return None
 
     try:
         if width and height:
@@ -381,7 +398,7 @@ def add_image_to_slide(slide, img_path, left, top, width=None, height=None):
         else:
             return slide.shapes.add_picture(img_path, left, top)
     except Exception as e:
-        print(f"   Warning: Could not add image: {e}")
+        print(f"   Warning: Could not add image {os.path.basename(img_path)}: {e}")
         return None
 
 
@@ -399,11 +416,19 @@ def style_paragraph(para, font_size, color, bold=False, italic=False):
 
 
 def strip_html_tags(text):
-    """Remove HTML tags from text (img, div, span, etc.)."""
+    """Remove HTML tags from text, converting em/i to markdown italic first."""
+    # Convert <em>...</em> and <i>...</i> to markdown italic *...*
+    text = re.sub(r'<em>([^<]+)</em>', r'*\1*', text, flags=re.IGNORECASE)
+    text = re.sub(r'<i>([^<]+)</i>', r'*\1*', text, flags=re.IGNORECASE)
+    # Convert <strong>...</strong> and <b>...</b> to markdown bold **...**
+    text = re.sub(r'<strong>([^<]+)</strong>', r'**\1**', text, flags=re.IGNORECASE)
+    text = re.sub(r'<b>([^<]+)</b>', r'**\1**', text, flags=re.IGNORECASE)
+    # Convert <small>...</small> to regular text (italicized)
+    text = re.sub(r'<small>([^<]+)</small>', r'*\1*', text, flags=re.IGNORECASE)
     # Remove <img ...> tags
     text = re.sub(r'<img\s+[^>]*/?>', '', text)
     # Remove other common HTML tags but keep content
-    text = re.sub(r'</?(?:div|span|p|br|a)[^>]*>', '', text)
+    text = re.sub(r'</?(?:div|span|p|br|a|small|em|i|strong|b)[^>]*>', '', text)
     return text.strip()
 
 
@@ -476,19 +501,19 @@ def add_h1_with_underline(slide, text, top=None):
     if top is None:
         top = Layout.MARGIN_TOP
 
-    # Add title text
+    # Add title text - centered
     title_shape = add_text_box(
         slide,
-        Layout.MARGIN_LEFT, top,
-        Layout.CONTENT_WIDTH, Inches(0.55),
+        Layout.CONTENT_LEFT, top,
+        Layout.CONTENT_WIDTH, Inches(0.6),
         text, Fonts.H1_SIZE, Colors.DEEP_GREEN, bold=True
     )
 
-    # Add underline - positioned below the text box
+    # Add thin underline - positioned well below the text
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Layout.MARGIN_LEFT, top + Inches(0.5),
-        Inches(5), Inches(0.05)
+        Layout.CONTENT_LEFT, top + Inches(0.65),
+        Inches(4), Inches(0.025)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.LIME
@@ -501,15 +526,16 @@ def add_h2_with_underline(slide, text, top):
     """Add H2 header with blue underline."""
     title_shape = add_text_box(
         slide,
-        Layout.MARGIN_LEFT, top,
-        Layout.CONTENT_WIDTH, Inches(0.45),
+        Layout.CONTENT_LEFT, top,
+        Layout.CONTENT_WIDTH, Inches(0.5),
         text, Fonts.H2_SIZE, Colors.NAVY, bold=True
     )
 
+    # Add thin underline - positioned well below the text
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Layout.MARGIN_LEFT, top + Inches(0.42),
-        Inches(4), Inches(0.04)
+        Layout.CONTENT_LEFT, top + Inches(0.55),
+        Inches(3), Inches(0.02)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.BLUE
@@ -634,7 +660,7 @@ def build_agenda_slide(prs, data, base_dir, md_dir):
 
         table = slide.shapes.add_table(
             rows, cols,
-            Layout.MARGIN_LEFT, Inches(1.0),
+            Layout.CONTENT_LEFT, Inches(1.0),
             Inches(12.3), row_height * rows
         ).table
 
@@ -709,6 +735,101 @@ def build_break_slide(prs, data, base_dir, md_dir):
     return slide
 
 
+def build_section_slide(prs, data, base_dir, md_dir):
+    """Build section header slide with centered title (like break but for sessions)."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Get title
+    title = data['headers'][0][1] if data['headers'] else 'Section'
+
+    # Large centered title
+    add_text_box(
+        slide,
+        Inches(1), Inches(2.8),
+        Inches(11.333), Inches(1.5),
+        title, Pt(44), Colors.DEEP_GREEN,
+        bold=True, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE
+    )
+
+    # Add underline below title
+    underline = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Inches(4), Inches(4.5),
+        Inches(5.333), Inches(0.03)
+    )
+    underline.fill.solid()
+    underline.fill.fore_color.rgb = Colors.LIME
+    underline.line.fill.background()
+
+    return slide
+
+
+def parse_column_content(content):
+    """Parse column content into structured items (paragraphs, bullets, numbered)."""
+    items = []
+    lines = content.strip().split('\n')
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        # Skip image tags only (not text with HTML formatting)
+        if line.startswith('!['):
+            continue
+        if line.startswith('<img'):
+            continue
+        # Skip div wrappers but not content inside
+        if line.startswith('<div') or line.startswith('</div'):
+            continue
+
+        # Check for bullet
+        bullet_match = re.match(r'^[-*]\s+(.+)$', line)
+        if bullet_match:
+            items.append(('bullet', bullet_match.group(1)))
+            continue
+
+        # Check for numbered list
+        num_match = re.match(r'^\d+\.\s+(.+)$', line)
+        if num_match:
+            items.append(('bullet', num_match.group(1)))
+            continue
+
+        # Regular paragraph (may contain HTML tags like <em>, which will be converted)
+        items.append(('paragraph', line))
+
+    return items
+
+
+def add_column_text(slide, items, left, top, width):
+    """Add column text content to slide."""
+    if not items:
+        return None
+
+    # Use full available height
+    height = Inches(5.5)
+    shape = slide.shapes.add_textbox(left, top, width, height)
+    tf = shape.text_frame
+    tf.word_wrap = True
+    tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
+
+    first_para = True
+    for item_type, text in items:
+        if first_para:
+            p = tf.paragraphs[0]
+            first_para = False
+        else:
+            p = tf.add_paragraph()
+
+        if item_type == 'bullet':
+            add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
+            p.space_after = Pt(4)
+        else:
+            add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
+            p.space_after = Pt(10)  # More space after paragraphs
+
+    return shape
+
+
 def build_two_column_slide(prs, data, base_dir, md_dir):
     """Build two-column slide with text and image."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
@@ -731,14 +852,25 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
 
     content_top = Inches(1.4)
     col_width = Inches(5.8)
-    col_height = Inches(5.5)
+
+    def extract_image_path(content):
+        """Extract image path from markdown or HTML img tag."""
+        # Try markdown format first
+        md_match = re.search(r'!\[[^\]]*\]\(([^)]+)\)', content)
+        if md_match:
+            return md_match.group(1).split()[0]
+        # Try HTML img tag
+        html_match = re.search(r'<img\s+[^>]*src=["\']([^"\']+)["\']', content)
+        if html_match:
+            return html_match.group(1)
+        return None
 
     # Left column
     if left_has_image:
         # Add image
-        img_match = re.search(r'!\[[^\]]*\]\(([^)]+)\)', left_content)
-        if img_match:
-            img_path = resolve_image_path(img_match.group(1).split()[0], base_dir, md_dir)
+        img_src = extract_image_path(left_content)
+        if img_src:
+            img_path = resolve_image_path(img_src, base_dir, md_dir)
             if img_path:
                 add_image_to_slide(
                     slide, img_path,
@@ -746,17 +878,17 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
                     width=col_width
                 )
     else:
-        # Add bullets
-        bullets = re.findall(r'^[-*]\s+(.+)$', left_content, re.MULTILINE)
-        if bullets:
-            add_bullet_list(slide, bullets, Layout.MARGIN_LEFT, content_top, col_width)
+        # Add text content (paragraphs, bullets, numbered lists)
+        items = parse_column_content(left_content)
+        if items:
+            add_column_text(slide, items, Layout.MARGIN_LEFT, content_top, col_width)
 
     # Right column
     right_left = Inches(7)
     if right_has_image:
-        img_match = re.search(r'!\[[^\]]*\]\(([^)]+)\)', right_content)
-        if img_match:
-            img_path = resolve_image_path(img_match.group(1).split()[0], base_dir, md_dir)
+        img_src = extract_image_path(right_content)
+        if img_src:
+            img_path = resolve_image_path(img_src, base_dir, md_dir)
             if img_path:
                 add_image_to_slide(
                     slide, img_path,
@@ -764,9 +896,10 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
                     width=col_width
                 )
     else:
-        bullets = re.findall(r'^[-*]\s+(.+)$', right_content, re.MULTILINE)
-        if bullets:
-            add_bullet_list(slide, bullets, right_left, content_top, col_width)
+        # Add text content
+        items = parse_column_content(right_content)
+        if items:
+            add_column_text(slide, items, right_left, content_top, col_width)
 
     return slide
 
@@ -783,6 +916,49 @@ def build_table_slide(prs, data, base_dir, md_dir):
         else:
             add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
 
+    # Split content into before-table and after-table based on raw markdown
+    raw = data['raw']
+    content = data.get('content', [])
+
+    # Find where table starts and ends in raw markdown
+    table_start = raw.find('|')
+    table_end = raw.rfind('|')
+
+    content_above = []
+    content_below = []
+
+    if content and table_start > 0:
+        # Get text before and after table
+        text_before = raw[:table_start]
+        text_after = raw[table_end+1:] if table_end > 0 else ''
+
+        for item_type, text in content:
+            # Check if this content appears before or after the table
+            if text in text_before:
+                content_above.append((item_type, text))
+            elif text in text_after:
+                content_below.append((item_type, text))
+
+    # Render content above table
+    content_top = Inches(1.2)
+    if content_above:
+        shape = slide.shapes.add_textbox(
+            Layout.CONTENT_LEFT, content_top,
+            Layout.CONTENT_WIDTH, Inches(0.8)
+        )
+        tf = shape.text_frame
+        tf.word_wrap = True
+        first_para = True
+        for item_type, text in content_above:
+            if first_para:
+                p = tf.paragraphs[0]
+                first_para = False
+            else:
+                p = tf.add_paragraph()
+            add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+            p.space_after = Pt(4)
+        content_top = Inches(2.0)  # Move table down
+
     # Table
     if data['table']:
         table_data = data['table']
@@ -794,29 +970,41 @@ def build_table_slide(prs, data, base_dir, md_dir):
         font_size = Fonts.TABLE_SIZE if cols <= 4 else Fonts.SMALL_SIZE
         row_height = Inches(0.35) if cols <= 4 else Inches(0.3)
 
-        table = slide.shapes.add_table(
+        table_shape = slide.shapes.add_table(
             rows, cols,
-            Layout.MARGIN_LEFT, Inches(1.2),
+            Layout.CONTENT_LEFT, content_top,
             table_width, row_height * rows
-        ).table
+        )
+        table = table_shape.table
 
-        # Calculate column widths proportionally based on max content length
-        col_max_chars = []
+        # Calculate column widths based on content
+        import math
+        col_widths = []
+        min_width = Inches(1.0)
+
         for c_idx in range(cols):
-            max_len = 5  # minimum width
+            lengths = []
             for row in table_data:
                 if c_idx < len(row):
-                    # Strip markdown for length calculation
                     clean = re.sub(r'\*+([^*]+)\*+', r'\1', str(row[c_idx]))
-                    max_len = max(max_len, len(clean))
-            col_max_chars.append(max_len)
+                    clean = re.sub(r'<[^>]+>', '', clean)
+                    lengths.append(len(clean))
 
-        total_chars = sum(col_max_chars)
+            if lengths:
+                avg_len = sum(lengths) / len(lengths)
+                max_len = max(lengths)
+                effective_len = math.sqrt(0.7 * avg_len + 0.3 * max_len + 5)
+            else:
+                effective_len = 3
+            col_widths.append(effective_len)
+
+        total_width = sum(col_widths)
         for c_idx in range(cols):
-            proportion = col_max_chars[c_idx] / total_chars
-            table.columns[c_idx].width = int(table_width * proportion)
+            proportion = col_widths[c_idx] / total_width
+            width = int(table_width * proportion)
+            table.columns[c_idx].width = max(width, min_width)
 
-        # Fill table with formatted text
+        # Fill table
         for r_idx, row in enumerate(table_data):
             is_header = r_idx == 0
             for c_idx, cell_text in enumerate(row):
@@ -824,13 +1012,11 @@ def build_table_slide(prs, data, base_dir, md_dir):
                     continue
                 cell = table.cell(r_idx, c_idx)
                 cell.text_frame.word_wrap = True
-
                 para = cell.text_frame.paragraphs[0]
 
                 if is_header:
                     cell.fill.solid()
                     cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
-                    # Headers: use bold, no markdown parsing needed
                     clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
                     para.text = clean_text
                     para.font.size = font_size
@@ -838,8 +1024,30 @@ def build_table_slide(prs, data, base_dir, md_dir):
                     para.font.color.rgb = Colors.NAVY
                     para.font.bold = True
                 else:
-                    # Body: use formatted text for bold/italic
                     add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
+
+        # Calculate where content below should start
+        table_bottom = content_top + row_height * rows + Inches(0.2)
+    else:
+        table_bottom = content_top
+
+    # Render content below table
+    if content_below:
+        shape = slide.shapes.add_textbox(
+            Layout.CONTENT_LEFT, table_bottom,
+            Layout.CONTENT_WIDTH, Inches(2.5)
+        )
+        tf = shape.text_frame
+        tf.word_wrap = True
+        first_para = True
+        for item_type, text in content_below:
+            if first_para:
+                p = tf.paragraphs[0]
+                first_para = False
+            else:
+                p = tf.add_paragraph()
+            add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+            p.space_after = Pt(6)
 
     return slide
 
@@ -856,25 +1064,46 @@ def build_image_slide(prs, data, base_dir, md_dir):
         else:
             add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
 
-    # Add main image
+    # Add main image - centered horizontally, below title
     if data['images']:
         img = data['images'][0]
         img_path = resolve_image_path(img['path'], base_dir, md_dir)
         if img_path:
-            # Center the image
+            # Calculate centered position
+            img_width = Inches(10)
+            img_left = (Layout.WIDTH - img_width) / 2
             add_image_to_slide(
                 slide, img_path,
-                Inches(1.5), Inches(1.5),
-                width=Inches(10)
+                img_left, Inches(1.5),
+                width=img_width
             )
+        else:
+            print(f"   Warning: Could not resolve image path: {img['path']}")
 
-    # Add any bullets below
-    if data['bullets']:
-        add_bullet_list(
-            slide, data['bullets'],
-            Layout.MARGIN_LEFT, Inches(5.5),
-            Layout.CONTENT_WIDTH, Fonts.BODY_SIZE
+    # Add any text content (bullets and paragraphs) below the image - centered
+    content = data.get('content', [])
+    if content:
+        shape = slide.shapes.add_textbox(
+            Layout.CONTENT_LEFT, Inches(5.8),
+            Layout.CONTENT_WIDTH, Inches(1.5)
         )
+        tf = shape.text_frame
+        tf.word_wrap = True
+        tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
+
+        first_para = True
+        for item_type, text in content:
+            if first_para:
+                p = tf.paragraphs[0]
+                first_para = False
+            else:
+                p = tf.add_paragraph()
+
+            if item_type == 'bullet':
+                add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
+            else:
+                add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
+            p.space_after = Pt(6)
 
     return slide
 
@@ -883,29 +1112,31 @@ def build_content_slide(prs, data, base_dir, md_dir):
     """Build standard content slide with headers and bullets."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
 
-    current_top = Layout.MARGIN_TOP
+    # Title area: top of slide
+    title_top = Layout.MARGIN_TOP
 
     # Add H1/H2 headers at top (H3+ are in content flow)
     for level, text in data['headers']:
         if level == 1:
-            add_h1_with_underline(slide, text, current_top)
-            current_top += Inches(0.75)  # Space after H1 (reduced since font is smaller)
+            add_h1_with_underline(slide, text, title_top)
         elif level == 2:
-            add_h2_with_underline(slide, text, current_top)
-            current_top += Inches(0.65)  # Space after H2
-        # H3+ handled in content loop below
+            add_h2_with_underline(slide, text, title_top)
+        break  # Only first header at top
 
-    # Render ALL content (H3+, paragraphs, bullets) in ONE text box
+    # Content area: fixed position below title, full width, full remaining height
+    content_top = Inches(1.3)  # Below title and underline
+    content_height = Inches(5.7)  # Fill to near bottom
+
+    # Render ALL content (H3+, paragraphs, bullets) in ONE centered full-width text box
     content = data.get('content', [])
     if content:
-        # Calculate height based on content
-        height = Inches(0.3 * len(content) + 0.5)
         shape = slide.shapes.add_textbox(
-            Layout.MARGIN_LEFT, current_top + Inches(0.15),  # Gap between title and content
-            Layout.CONTENT_WIDTH, height
+            Layout.CONTENT_LEFT, content_top,
+            Layout.CONTENT_WIDTH, content_height
         )
         tf = shape.text_frame
         tf.word_wrap = True
+        tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
 
         first_para = True
         for item_type, text in content:
@@ -919,14 +1150,17 @@ def build_content_slide(prs, data, base_dir, md_dir):
                 level, header_text = text
                 p.text = header_text
                 style_paragraph(p, Fonts.H3_SIZE, Colors.PURPLE, bold=True)
+                p.space_after = Pt(6)
 
             elif item_type == 'bullet':
                 # Use formatted text to handle bold/italic within bullets
                 add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                p.space_after = Pt(4)
 
             elif item_type == 'paragraph':
                 # Use formatted text to handle inline bold/italic
                 add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
+                p.space_after = Pt(10)  # More space after paragraphs
 
     # Add image if present (to the right)
     if data['images']:
@@ -985,6 +1219,7 @@ def convert_to_pptx(md_file, base_dir, output_path=None):
         'title': build_title_slide,
         'agenda': build_agenda_slide,
         'break': build_break_slide,
+        'section': build_section_slide,
         'two_column': build_two_column_slide,
         'table': build_table_slide,
         'image': build_image_slide,

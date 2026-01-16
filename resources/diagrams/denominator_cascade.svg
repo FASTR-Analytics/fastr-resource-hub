@@ -21,58 +21,58 @@
     </marker>
   </defs>
 
-  <!-- Row 1: Pregnancies -> Deliveries -> Births -->
+  <!-- Row 1: Pregnancies -> Deliveries -> Births (full width) -->
 
   <!-- Box 1: Pregnancies (light blue) -->
-  <rect class="box-pregnancies" x="40" y="30" width="110" height="36"/>
-  <text class="text-dark" x="95" y="53">Pregnancies</text>
+  <rect class="box-pregnancies" x="40" y="30" width="120" height="36"/>
+  <text class="text-dark" x="100" y="53">Pregnancies</text>
 
   <!-- Arrow 1 + label below -->
-  <line class="arrow" x1="150" y1="48" x2="215" y2="48"/>
-  <text class="label" x="182" y="72">Remove</text>
-  <text class="label" x="182" y="82">#pregnancy losses</text>
+  <line class="arrow" x1="160" y1="48" x2="250" y2="48"/>
+  <text class="label" x="205" y="72">Remove</text>
+  <text class="label" x="205" y="82">#pregnancy losses</text>
 
   <!-- Box 2: Deliveries (blue) -->
-  <rect class="box-deliveries" x="225" y="30" width="100" height="36"/>
-  <text class="text-light" x="275" y="53">Deliveries</text>
+  <rect class="box-deliveries" x="260" y="30" width="110" height="36"/>
+  <text class="text-light" x="315" y="53">Deliveries</text>
 
   <!-- Arrow 2 + label below -->
-  <line class="arrow" x1="325" y1="48" x2="390" y2="48"/>
-  <text class="label" x="357" y="72">Add</text>
-  <text class="label" x="357" y="82">#twins</text>
+  <line class="arrow" x1="370" y1="48" x2="460" y2="48"/>
+  <text class="label" x="415" y="72">Add</text>
+  <text class="label" x="415" y="82">#twins</text>
 
-  <!-- Box 3: Births (green) -->
-  <rect class="box-births" x="400" y="30" width="80" height="36"/>
-  <text class="text-light" x="440" y="53">Births</text>
+  <!-- Box 3: Births (teal) -->
+  <rect class="box-births" x="470" y="30" width="90" height="36"/>
+  <text class="text-light" x="515" y="53">Births</text>
 
-  <!-- Arrow down to row 2 -->
-  <path class="arrow" d="M 480 48 L 520 48 L 520 128 L 490 128"/>
-  <text class="label" x="560" y="83">Remove</text>
-  <text class="label" x="560" y="93">#stillbirths</text>
+  <!-- Arrow loop right and down to row 2 -->
+  <path class="arrow" d="M 560 48 L 740 48 L 740 128 L 640 128"/>
+  <text class="label" x="650" y="83">Remove</text>
+  <text class="label" x="650" y="93">#stillbirths</text>
 
   <!-- Row 2: Live Births -> DPT-eligible -->
 
   <!-- Box 4: Live Births (gold) -->
-  <rect class="box-livebirths" x="380" y="110" width="100" height="36"/>
-  <text class="text-dark" x="430" y="133">Live Births</text>
+  <rect class="box-livebirths" x="520" y="110" width="110" height="36"/>
+  <text class="text-dark" x="575" y="133">Live Births</text>
 
   <!-- Arrow 4 + label below -->
-  <line class="arrow" x1="380" y1="128" x2="290" y2="128"/>
-  <text class="label" x="335" y="152">Remove</text>
-  <text class="label" x="335" y="162">#neonatal deaths</text>
+  <line class="arrow" x1="520" y1="128" x2="400" y2="128"/>
+  <text class="label" x="460" y="152">Remove</text>
+  <text class="label" x="460" y="162">#neonatal deaths</text>
 
   <!-- Box 5: DPT-eligible Infants (orchid/pink) -->
-  <rect class="box-dpt" x="110" y="110" width="170" height="36"/>
-  <text class="text-light" x="195" y="133">DPT-eligible Infants</text>
+  <rect class="box-dpt" x="200" y="110" width="190" height="36"/>
+  <text class="text-light" x="295" y="133">DPT-eligible Infants</text>
 
   <!-- Arrow down to row 3 -->
-  <path class="arrow" d="M 195 146 L 195 186"/>
-  <text class="label" x="250" y="170">Remove</text>
-  <text class="label" x="250" y="180">#post-neonatal deaths</text>
+  <path class="arrow" d="M 200 128 L 160 128 L 160 210 L 260 210"/>
+  <text class="label" x="110" y="170">Remove</text>
+  <text class="label" x="110" y="180">#post-neonatal deaths</text>
 
   <!-- Box 6: Measles-eligible Infants (lime) -->
-  <rect class="box-measles" x="90" y="196" width="210" height="36"/>
-  <text class="text-dark" x="195" y="219">Measles-eligible Infants</text>
+  <rect class="box-measles" x="270" y="192" width="220" height="36"/>
+  <text class="text-dark" x="380" y="215">Measles-eligible Infants</text>
 
   <!-- Note box -->
   <rect x="40" y="255" width="720" height="70" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>

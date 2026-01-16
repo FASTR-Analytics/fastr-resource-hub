@@ -6,39 +6,16 @@ paginate: true
 
 ## Service utilization analysis
 
-Monitoring changes in the volume of priority health services over time.
+Understanding how health service volumes are changing over time.
 
 ---
 
-## What we assess
+## Two questions we answer
 
-**Service utilization trends:**
-- Absolute yearly/quarterly volume for selected services
-- Percent change over time
-- Comparison across regions
+**1. How is service volume changing?**
 
-Any year with more than a **10% change** compared to the previous year is flagged for review.
+Compare volumes year-over-year to identify increases or decreases across regions and indicators.
 
-Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjustments.
+**2. Are there disruptions from expected patterns?**
 
----
-
-## Service utilization: FASTR outputs
-
-![h:420 Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
-
----
-
-## Service utilization: Subnational
-
-![h:420 Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
-
----
-
-## DHIS2 vs FASTR comparison
-
-| Aspect | DHIS2 | FASTR |
-|--------|-------|-------|
-| **Data quality** | Raw data | Adjusts for outliers and/or completeness |
-| **Visualization** | Standard trend charts | Percent change to flag meaningful fluctuations |
-| **Analysis** | Trends only | Trends + disruption quantification |
+Compare actual volumes to what we would expect based on historical trends, to detect and quantify shortfalls or surpluses.

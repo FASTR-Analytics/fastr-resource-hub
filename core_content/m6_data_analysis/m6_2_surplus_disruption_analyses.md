@@ -4,17 +4,33 @@ theme: fastr
 paginate: true
 ---
 
-## Disruption analysis
+## Measuring change over time
 
-Beyond simple trends, FASTR can detect and quantify service disruptions.
+We calculate **year-over-year percent change** to identify meaningful shifts in service delivery.
 
 **How it works:**
-1. Model expected service volumes based on historical patterns and seasonality
-2. Compare actual volumes to expected volumes
-3. Quantify shortfalls or surpluses in absolute numbers
+
+For each indicator and region, we compare total volume in the current year to the previous year:
+
+$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+
+Changes greater than **10%** (increase or decrease) are flagged for review.
 
 ---
 
-## Disruption outputs
+## Output: Change in service volume
 
-![h:420 Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+---
+
+## Reading this chart
+
+**Bars** show annual service volumes by region.
+
+**Percentages** above bars show year-over-year change.
+
+**What to look for:**
+- Which regions show the largest increases or decreases?
+- Are changes consistent across regions or localized?
+- Do patterns differ by indicator?

@@ -1749,7 +1749,7 @@ Same as national, plus:
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m6_4 -->
+<!-- SLIDE:m6_6 -->
 ## Service coverage estimates
 
 The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
@@ -1774,7 +1774,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 - Generate final coverage estimates
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_4a -->
+<!-- SLIDE:m6_7 -->
 ## What is service coverage?
 
 **Coverage** answers: *What percentage of the target population received this health service?*
@@ -1782,7 +1782,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 ![Coverage equation](resources/diagrams/coverage_equation.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_4b -->
+<!-- SLIDE:m6_8 -->
 ## Types of denominators for FASTR core analysis
 
 | Type of service | Denominator |
@@ -1794,7 +1794,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 | Penta3 | Infants eligible for Penta (infants surviving 1+ months) |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_4c -->
+<!-- SLIDE:m6_9 -->
 ## Expected relationships which help with estimating denominators
 
 Starting from pregnancies, apply demographic factors to estimate other denominators:
@@ -1802,7 +1802,7 @@ Starting from pregnancies, apply demographic factors to estimate other denominat
 ![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_4d -->
+<!-- SLIDE:m6_10 -->
 ## Estimating denominators from ANC-1
 
 Using survey coverage + DHIS2 counts to derive denominators:
@@ -1814,7 +1814,7 @@ Using survey coverage + DHIS2 counts to derive denominators:
 | Live births | Deliveries × survival rate | 102,105 × 0.98 = 100,063 |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_5 -->
+<!-- SLIDE:m6_11 -->
 ## Coverage estimates: FASTR outputs
 
 The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:

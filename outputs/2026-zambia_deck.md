@@ -629,7 +629,7 @@ Each month, are facilities sending in their reports?
 
 ## Completeness: FASTR output
 
-![h:420 Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
@@ -691,7 +691,7 @@ AND for which the count is greater than 100.
 
 ## Outliers: FASTR output
 
-![h:420 Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
@@ -759,7 +759,7 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency: FASTR output
 
-![h:420 Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
@@ -791,13 +791,13 @@ This accounts for patients visiting different facilities for different services.
 
 ## Overall DQA score: FASTR output
 
-![h:420 Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
 ## Mean DQA score: FASTR output
 
-![h:420 Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -845,61 +845,130 @@ This prevents reporting gaps from creating artificial drops to zero.
 
 ## Service utilization analysis
 
-Monitoring changes in the volume of priority health services over time.
+Understanding how health service volumes are changing over time.
 
 ---
 
-## What we assess
+## Two questions we answer
 
-**Service utilization trends:**
-- Absolute yearly/quarterly volume for selected services
-- Percent change over time
-- Comparison across regions
+**1. How is service volume changing?**
 
-Any year with more than a **10% change** compared to the previous year is flagged for review.
+Compare volumes year-over-year to identify increases or decreases across regions and indicators.
 
-Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjustments.
+**2. Are there disruptions from expected patterns?**
 
----
-
-## Service utilization: FASTR outputs
-
-![h:420 Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
-
----
-
-## Service utilization: Subnational
-
-![h:420 Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
-
----
-
-## DHIS2 vs FASTR comparison
-
-| Aspect | DHIS2 | FASTR |
-|--------|-------|-------|
-| **Data quality** | Raw data | Adjusts for outliers and/or completeness |
-| **Visualization** | Standard trend charts | Percent change to flag meaningful fluctuations |
-| **Analysis** | Trends only | Trends + disruption quantification |
+Compare actual volumes to what we would expect based on historical trends, to detect and quantify shortfalls or surpluses.
 
 ---
 
 
 
-## Disruption analysis
+## Measuring change over time
 
-Beyond simple trends, FASTR can detect and quantify service disruptions.
+We calculate **year-over-year percent change** to identify meaningful shifts in service delivery.
 
 **How it works:**
-1. Model expected service volumes based on historical patterns and seasonality
-2. Compare actual volumes to expected volumes
-3. Quantify shortfalls or surpluses in absolute numbers
+
+For each indicator and region, we compare total volume in the current year to the previous year:
+
+$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+
+Changes greater than **10%** (increase or decrease) are flagged for review.
 
 ---
 
-## Disruption outputs
+## Output: Change in service volume
 
-![h:420 Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+---
+
+## Reading this chart
+
+**Bars** show annual service volumes by region.
+
+**Percentages** above bars show year-over-year change.
+
+**What to look for:**
+- Which regions show the largest increases or decreases?
+- Are changes consistent across regions or localized?
+- Do patterns differ by indicator?
+
+---
+
+
+
+## Service Coverage Estimates
+
+This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+
+**Three data sources integrated:**
+1. Adjusted health service volumes from HMIS
+2. Population projections from United Nations
+3. Household survey data from MICS/DHS
+
+---
+
+### Two-Part Process
+
+**Part 1: Denominator Calculation**
+- Calculate target populations using multiple methods (HMIS-based and population-based)
+- Compare against survey benchmarks
+- Automatically select best denominator for each indicator
+
+**Part 2: Coverage Estimation**
+- Override automatic selections based on programmatic knowledge
+- Project survey estimates forward using HMIS trends
+- Generate final coverage estimates
+
+---
+
+
+
+## Output: Actual vs expected (national)
+
+![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+This chart shows national-level comparison of actual service volumes against expected values derived from historical trends and seasonality.
+
+---
+
+## Output: Actual vs expected (subnational)
+
+![Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+Subnational charts allow comparison across regions to identify where disruptions are concentrated.
+
+---
+
+
+
+## Impact of data quality adjustments
+
+The analysis can use different versions of the data:
+
+| Scenario | What it uses |
+|----------|--------------|
+| **No adjustment** | Raw reported values |
+| **Outlier adjustment** | Extreme values corrected |
+| **Completeness adjustment** | Adjusted for missing reports |
+| **Both adjustments** | Outliers corrected + completeness adjusted |
+
+---
+
+## Output: Volume change by adjustment scenario
+
+![Volume change due to adjustments](../resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+
+---
+
+## Why compare scenarios?
+
+Comparing results across adjustment scenarios helps assess:
+
+- **How much do adjustments change the picture?** If results are similar, findings are robust.
+- **Which adjustment has the biggest impact?** Completeness vs outlier corrections.
+- **Are conclusions sensitive to data quality assumptions?** Important for interpretation confidence.
 
 ---
 
@@ -980,21 +1049,21 @@ Using survey coverage + DHIS2 counts to derive denominators:
 
 
 
-## Coverage estimates: National level
+## Coverage estimates: FASTR outputs
 
-![h:420 Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
 
----
+**1. Coverage calculated from HMIS data (national)**
 
-## Coverage estimates: Admin area 2
+![Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-![h:420 Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+**2. Coverage calculated from HMIS data (admin area 2)**
 
----
+![Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
-## Coverage estimates: Admin area 3
+**3. Coverage calculated from HMIS data (admin area 3)**
 
-![h:420 Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
 ---
 

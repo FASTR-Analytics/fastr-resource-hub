@@ -1,10 +1,21 @@
-# FASTR Slide Builder - Python Dependencies
+# FASTR Resource Hub - Python Dependencies
+# Install: pip install -r requirements.txt
 
-# Core
+# ═══════════════════════════════════════════════════════════════════════
+# CORE (required for all tools)
+# ═══════════════════════════════════════════════════════════════════════
 PyYAML>=6.0
-requests>=2.28.0
 
-# MkDocs and plugins for methodology documentation
+# ═══════════════════════════════════════════════════════════════════════
+# POWERPOINT CONVERSION (tools/03_convert_pptx.py)
+# ═══════════════════════════════════════════════════════════════════════
+python-pptx>=0.6.21
+Pillow>=9.0.0
+cairosvg>=2.7.0
+
+# ═══════════════════════════════════════════════════════════════════════
+# MKDOCS DOCUMENTATION (methodology site)
+# ═══════════════════════════════════════════════════════════════════════
 mkdocs>=1.5.0
 mkdocs-material>=9.0.0
 mkdocs-bibtex>=2.11.0
@@ -12,16 +23,7 @@ mkdocs-minify-plugin>=0.7.0
 mkdocs-static-i18n>=1.0.0
 mkdocs-exclude>=1.0.2
 
-# Strip-slides plugin (install separately)
-# cd methodology/plugins && pip install -e .
-
-# Standard library only for tools (no additional deps)
-# - tools/00_extract_slides.py
-# - tools/01_new_workshop.py
-# - tools/02_build_deck.py
-# - tools/03_convert_pptx.py
-
-# PowerPoint conversion
-python-pptx>=0.6.21
-Pillow>=9.0.0
-cairosvg>=2.7.0  # Optional: for SVG to PNG conversion
+# ═══════════════════════════════════════════════════════════════════════
+# OPTIONAL
+# ═══════════════════════════════════════════════════════════════════════
+requests>=2.28.0

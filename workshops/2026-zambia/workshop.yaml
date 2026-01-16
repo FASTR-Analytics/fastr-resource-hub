@@ -110,7 +110,7 @@ schedule:
 
     - time: "09:15-10:15"
       session: "Data quality, service utilization, coverage"
-      topics: [m4_0, m4_1, m4_2, m4_3, m4_4, m4_5, m5_1, m6_1, m6_2, m6_4, m6_4a, m6_4b, m6_4c, m6_4d, m6_5]
+      topics: [m4_0, m4_1, m4_2, m4_3, m4_4, m4_5, m5_1, m6_1, m6_2, m6_3, m6_4, m6_5, m6_6, m6_7, m6_8, m6_9, m6_10, m6_11]
       speaker: "GFF FASTR team"
       duration: 60
 

@@ -1126,96 +1126,155 @@ For the volume change chart (output 4):
 <!-- SLIDE:m6_1 -->
 ## Service utilization analysis
 
-Monitoring changes in the volume of priority health services over time.
+Understanding how health service volumes are changing over time.
 
 ---
 
-## What we assess
+## Two questions we answer
 
-**Service utilization trends:**
-- Absolute yearly/quarterly volume for selected services
-- Percent change over time
-- Comparison across regions
+**1. How is service volume changing?**
 
-Any year with more than a **10% change** compared to the previous year is flagged for review.
+Compare volumes year-over-year to identify increases or decreases across regions and indicators.
 
-Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjustments.
+**2. Are there disruptions from expected patterns?**
+
+Compare actual volumes to what we would expect based on historical trends, to detect and quantify shortfalls or surpluses.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2 -->
+## Measuring change over time
+
+We calculate **year-over-year percent change** to identify meaningful shifts in service delivery.
+
+**How it works:**
+
+For each indicator and region, we compare total volume in the current year to the previous year:
+
+$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+
+Changes greater than **10%** (increase or decrease) are flagged for review.
 
 ---
 
-## Service utilization: FASTR outputs
-
-**Change in service volume over time**
+## Output: Change in service volume
 
 ![Change in service volume](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
-## Service utilization: Subnational
+## Reading this chart
 
-**Comparing volumes across regions**
+**Bars** show annual service volumes by region.
 
-![Actual vs expected subnational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+**Percentages** above bars show year-over-year change.
 
----
-
-## DHIS2 vs FASTR comparison
-
-| Aspect | DHIS2 | FASTR |
-|--------|-------|-------|
-| **Data quality** | Raw data | Adjusts for outliers and/or completeness |
-| **Visualization** | Standard trend charts | Percent change to flag meaningful fluctuations |
-| **Analysis** | Trends only | Trends + disruption quantification |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_2 -->
-## Disruption analysis
-
-Beyond simple trends, FASTR can detect and quantify service disruptions.
-
-**How it works:**
-1. Model expected service volumes based on historical patterns and seasonality
-2. Compare actual volumes to expected volumes
-3. Quantify shortfalls or surpluses in absolute numbers
-
----
-
-## Types of disruptions detected
-
-| Type | What it captures |
-|------|------------------|
-| **Sharp disruptions** | Single months with extreme deviations |
-| **Sustained drops** | Gradual declines over several months |
-| **Sustained dips** | Periods consistently below expected |
-| **Sustained rises** | Periods consistently above expected |
-
----
-
-## Disruption outputs
-
-**Actual vs expected at national level**
-
-![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+**What to look for:**
+- Which regions show the largest increases or decreases?
+- Are changes consistent across regions or localized?
+- Do patterns differ by indicator?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_3 -->
-## Service utilization: FASTR outputs
+## Detecting disruptions
 
-The FASTR analysis generates four main visual outputs for disruption analysis:
+Beyond simple trends, we detect periods where service delivery deviates significantly from what we would expect.
 
-**1. Change in service volume**
+**The approach:**
 
-![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+1. Calculate **expected volume** based on historical patterns
+2. Compare **actual volume** to expected
+3. Quantify the **shortfall** (actual below expected) or **surplus** (actual above expected)
 
-**2. Actual vs expected services (national)**
+---
 
-![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+## What is "expected" volume?
 
-**3. Actual vs expected services (subnational)**
+We model expected service volume using two components:
 
-![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+**Trend:** The long-term direction (increasing, decreasing, or stable)
 
-**4. Volume change due to data quality adjustments**
+**Seasonality:** Predictable monthly patterns (e.g., malaria cases rise in rainy season)
 
-![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+The model learns these patterns from historical data and projects what volume *should* be in each month.
+
+---
+
+## Expected vs actual: Visual concept
+
+<div class="columns">
+<div>
+
+**When actual = expected:**
+Services are delivered as anticipated based on historical patterns.
+
+**When actual < expected (shortfall):**
+Fewer services than expected — possible disruption.
+
+**When actual > expected (surplus):**
+More services than expected — could indicate catch-up, outreach, or reporting changes.
+
+</div>
+<div>
+
+![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+</div>
+</div>
+
+---
+
+## Reading the actual vs expected charts
+
+**Black line:** Actual (observed) service volumes
+
+**Red shaded areas:** Shortfall periods — actual is below expected
+
+**Green shaded areas:** Surplus periods — actual is above expected
+
+**The larger the shaded area, the greater the disruption magnitude.**
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_4 -->
+## Output: Actual vs expected (national)
+
+![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+This chart shows national-level comparison of actual service volumes against expected values derived from historical trends and seasonality.
+
+---
+
+## Output: Actual vs expected (subnational)
+
+![Actual vs expected subnational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+Subnational charts allow comparison across regions to identify where disruptions are concentrated.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_5 -->
+## Impact of data quality adjustments
+
+The analysis can use different versions of the data:
+
+| Scenario | What it uses |
+|----------|--------------|
+| **No adjustment** | Raw reported values |
+| **Outlier adjustment** | Extreme values corrected |
+| **Completeness adjustment** | Adjusted for missing reports |
+| **Both adjustments** | Outliers corrected + completeness adjusted |
+
+---
+
+## Output: Volume change by adjustment scenario
+
+![Volume change due to adjustments](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+
+---
+
+## Why compare scenarios?
+
+Comparing results across adjustment scenarios helps assess:
+
+- **How much do adjustments change the picture?** If results are similar, findings are robust.
+- **Which adjustment has the biggest impact?** Completeness vs outlier corrections.
+- **Are conclusions sensitive to data quality assumptions?** Important for interpretation confidence.
 <!-- /SLIDE -->
