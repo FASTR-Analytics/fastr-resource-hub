@@ -1103,7 +1103,7 @@ For the volume change chart (output 4):
 
 ---
 
-**Last updated**: 06-01-2026
+**Last updated**: 17-01-2026
 **Contact**: FASTR Project Team
 
 ---
@@ -1126,33 +1126,31 @@ For the volume change chart (output 4):
 <!-- SLIDE:m6_1 -->
 ## Service utilization analysis
 
-Understanding how health service volumes are changing over time.
+Analysis of health service delivery patterns to detect and quantify changes in service volumes over time.
 
 ---
 
-## Two questions we answer
+## Objectives
 
-**1. How is service volume changing?**
+**1. Measure changes in service volume**
 
-Compare volumes year-over-year to identify increases or decreases across regions and indicators.
+Year-over-year comparison of service volumes identifies increases or decreases across regions and indicators.
 
-**2. Are there disruptions from expected patterns?**
+**2. Detect and quantify disruptions**
 
-Compare actual volumes to what we would expect based on historical trends, to detect and quantify shortfalls or surpluses.
+Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
-## Measuring change over time
+## Year-over-year change
 
-We calculate **year-over-year percent change** to identify meaningful shifts in service delivery.
+**Year-over-year percent change** quantifies shifts in service delivery between consecutive years.
 
-**How it works:**
-
-For each indicator and region, we compare total volume in the current year to the previous year:
+For each indicator and region, total volume in the current year is compared to the previous year:
 
 $$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
 
-Changes greater than **10%** (increase or decrease) are flagged for review.
+Changes exceeding **±10%** are flagged for review.
 
 ---
 
@@ -1162,56 +1160,56 @@ Changes greater than **10%** (increase or decrease) are flagged for review.
 
 ---
 
-## Reading this chart
+## Interpretation
 
-**Bars** show annual service volumes by region.
+| Element | Description |
+|---------|-------------|
+| **Bars** | Annual service volumes by region |
+| **Percentages** | Year-over-year change annotations |
 
-**Percentages** above bars show year-over-year change.
-
-**What to look for:**
-- Which regions show the largest increases or decreases?
-- Are changes consistent across regions or localized?
-- Do patterns differ by indicator?
+**Key considerations:**
+- Which regions exhibit the largest changes?
+- Are changes consistent across regions or geographically concentrated?
+- Do patterns vary by indicator?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_3 -->
-## Detecting disruptions
+## Disruption detection
 
-Beyond simple trends, we detect periods where service delivery deviates significantly from what we would expect.
+The analysis identifies periods where service delivery deviates significantly from expected levels using a two-stage approach:
 
-**The approach:**
-
-1. Calculate **expected volume** based on historical patterns
-2. Compare **actual volume** to expected
-3. Quantify the **shortfall** (actual below expected) or **surplus** (actual above expected)
-
----
-
-## What is "expected" volume?
-
-We model expected service volume using two components:
-
-**Trend:** The long-term direction (increasing, decreasing, or stable)
-
-**Seasonality:** Predictable monthly patterns (e.g., malaria cases rise in rainy season)
-
-The model learns these patterns from historical data and projects what volume *should* be in each month.
+| Stage | Method | Purpose |
+|-------|--------|---------|
+| **1. Control chart analysis** | Statistical process control | Identify when disruptions occur |
+| **2. Regression analysis** | Panel regression models | Quantify disruption magnitude |
 
 ---
 
-## Expected vs actual: Visual concept
+## Expected service volume
+
+Expected volume is modeled using two components:
+
+| Component | Description |
+|-----------|-------------|
+| **Trend** | Long-term direction (increasing, decreasing, or stable) |
+| **Seasonality** | Predictable monthly patterns (e.g., increased malaria cases during rainy season) |
+
+The model estimates expected volume for each month based on historical patterns. Significant deviations from expected values are flagged as potential disruptions.
+
+---
+
+## Shortfalls and surpluses
 
 <div class="columns">
 <div>
 
-**When actual = expected:**
-Services are delivered as anticipated based on historical patterns.
+| Comparison | Interpretation |
+|------------|----------------|
+| **Actual = Expected** | Services delivered as anticipated |
+| **Actual < Expected** | Shortfall: fewer services than expected |
+| **Actual > Expected** | Surplus: more services than expected |
 
-**When actual < expected (shortfall):**
-Fewer services than expected — possible disruption.
-
-**When actual > expected (surplus):**
-More services than expected — could indicate catch-up, outreach, or reporting changes.
+Surpluses may indicate catch-up campaigns, outreach activities, or reporting changes.
 
 </div>
 <div>
@@ -1223,15 +1221,15 @@ More services than expected — could indicate catch-up, outreach, or reporting 
 
 ---
 
-## Reading the actual vs expected charts
+## Chart interpretation
 
-**Black line:** Actual (observed) service volumes
+| Element | Description |
+|---------|-------------|
+| **Black line** | Actual (observed) service volumes |
+| **Red shaded areas** | Shortfall periods (actual below expected) |
+| **Green shaded areas** | Surplus periods (actual above expected) |
 
-**Red shaded areas:** Shortfall periods — actual is below expected
-
-**Green shaded areas:** Surplus periods — actual is above expected
-
-**The larger the shaded area, the greater the disruption magnitude.**
+The magnitude of the shaded area corresponds to the scale of the disruption.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_4 -->
@@ -1239,7 +1237,7 @@ More services than expected — could indicate catch-up, outreach, or reporting 
 
 ![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-This chart shows national-level comparison of actual service volumes against expected values derived from historical trends and seasonality.
+National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
 ---
 
@@ -1247,34 +1245,36 @@ This chart shows national-level comparison of actual service volumes against exp
 
 ![Actual vs expected subnational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
-Subnational charts allow comparison across regions to identify where disruptions are concentrated.
+Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5 -->
-## Impact of data quality adjustments
+## Data quality adjustment scenarios
 
-The analysis can use different versions of the data:
+The analysis supports four data versions to assess sensitivity to adjustment assumptions:
 
-| Scenario | What it uses |
-|----------|--------------|
+| Scenario | Description |
+|----------|-------------|
 | **No adjustment** | Raw reported values |
 | **Outlier adjustment** | Extreme values corrected |
-| **Completeness adjustment** | Adjusted for missing reports |
-| **Both adjustments** | Outliers corrected + completeness adjusted |
+| **Completeness adjustment** | Adjusted for missing facility reports |
+| **Both adjustments** | Outlier and completeness adjustments applied |
 
 ---
 
-## Output: Volume change by adjustment scenario
+## Output: Volume by adjustment scenario
 
 ![Volume change due to adjustments](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
 
 ---
 
-## Why compare scenarios?
+## Rationale for scenario comparison
 
-Comparing results across adjustment scenarios helps assess:
+Comparison across adjustment scenarios addresses three questions:
 
-- **How much do adjustments change the picture?** If results are similar, findings are robust.
-- **Which adjustment has the biggest impact?** Completeness vs outlier corrections.
-- **Are conclusions sensitive to data quality assumptions?** Important for interpretation confidence.
+| Question | Implication |
+|----------|-------------|
+| Do adjustments substantially change results? | If results are similar across scenarios, findings are robust |
+| Which adjustment has greater impact? | Identifies whether completeness or outlier correction drives differences |
+| Are conclusions sensitive to assumptions? | Informs confidence in interpretation |
 <!-- /SLIDE -->

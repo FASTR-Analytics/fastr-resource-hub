@@ -8,7 +8,7 @@ paginate: true
 
 ![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-This chart shows national-level comparison of actual service volumes against expected values derived from historical trends and seasonality.
+National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
 ---
 
@@ -16,4 +16,4 @@ This chart shows national-level comparison of actual service volumes against exp
 
 ![Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
-Subnational charts allow comparison across regions to identify where disruptions are concentrated.
+Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.

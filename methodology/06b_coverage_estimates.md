@@ -1729,7 +1729,7 @@ Same as national, plus:
 
 ---
 
-**Last updated**: 08-01-2026
+**Last updated**: 17-01-2026
 **Contact**: FASTR Project Team
 
 ---
@@ -1752,154 +1752,158 @@ Same as national, plus:
 <!-- SLIDE:m6_6 -->
 ## Service coverage estimates
 
-The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+The Coverage Estimates module estimates health service coverage: the percentage of the target population that received a given health service.
 
-**Three data sources integrated:**
-1. Adjusted health service volumes from HMIS
-2. Population projections from United Nations
-3. Household survey data from MICS/DHS
+**Data sources:**
+
+| Source | Purpose |
+|--------|---------|
+| HMIS | Adjusted health service volumes |
+| UN WPP | Population projections |
+| DHS/MICS | Household survey benchmarks |
 
 ---
 
-### Two-part process
+### Two-part analytical process
 
-**Part 1: Denominator calculation**
-- Calculate target populations using multiple methods (HMIS-based and population-based)
-- Compare against survey benchmarks
-- Automatically select best denominator for each indicator
-
-**Part 2: Coverage estimation**
-- Override automatic selections based on programmatic knowledge
-- Project survey estimates forward using HMIS trends
-- Generate final coverage estimates
+| Part | Components |
+|------|------------|
+| **Part 1: Denominator calculation** | Calculate target populations using multiple methods; compare against survey benchmarks; select optimal denominator for each indicator |
+| **Part 2: Coverage estimation** | Apply denominator selections; project survey estimates forward using HMIS trends; generate final coverage estimates |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
-## What is service coverage?
+## Definition of service coverage
 
-**Coverage** answers: *What percentage of the target population received this health service?*
+**Service coverage** represents the proportion of the target population that received a specified health service.
 
 ![Coverage equation](resources/diagrams/coverage_equation.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
-## Types of denominators for FASTR core analysis
+## Denominators by service type
 
-| Type of service | Denominator |
-|-----------------|-------------|
-| ANC | Pregnancies |
-| Delivery | Live births |
+Each health indicator corresponds to a specific target population:
+
+| Service | Target population (denominator) |
+|---------|--------------------------------|
+| ANC1, ANC4 | Pregnant women |
+| Institutional delivery | Live births |
 | BCG | Live births |
-| Penta1 | Infants eligible for Penta (infants surviving 1+ months) |
-| Penta3 | Infants eligible for Penta (infants surviving 1+ months) |
+| Penta1, Penta3 | Infants surviving beyond neonatal period |
+| Measles1, Measles2 | Infants surviving beyond infancy |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_9 -->
-## Expected relationships which help with estimating denominators
+## Demographic cascade
 
-Starting from pregnancies, apply demographic factors to estimate other denominators:
+Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
 
 ![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
-## Estimating denominators from ANC-1
+## Denominator estimation from ANC1
 
-Using survey coverage + DHIS2 counts to derive denominators:
+HMIS service counts combined with survey coverage estimates enable derivation of target populations:
 
-| Step | Formula | Example |
-|------|---------|---------|
+| Target population | Calculation | Example |
+|-------------------|-------------|---------|
 | Pregnancies | ANC1 count ÷ ANC1 coverage | 100,000 ÷ 0.95 = 105,263 |
-| Deliveries | Pregnancies × (1 - stillbirth rate) | 105,263 × 0.97 = 102,105 |
-| Live births | Deliveries × survival rate | 102,105 × 0.98 = 100,063 |
+| Deliveries | Pregnancies × (1 − pregnancy loss rate) | 105,263 × 0.97 = 102,105 |
+| Live births | Deliveries × (1 − stillbirth rate) | 102,105 × 0.98 = 100,063 |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
-## Estimating denominators from ANC-1: Visual example
+## Denominator cascade: Illustration
 
-Starting from ANC1 visits, apply demographic adjustment factors to estimate denominators for other services:
+Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
 
 ![Denominator cascade example](resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_12 -->
-## Multiple denominator options
+## Multiple denominator entry points
 
-Each HMIS indicator provides an **entry point** into the demographic cascade. From that starting point, the module calculates forward and backward to derive all target populations:
+Each HMIS indicator serves as an entry point into the demographic cascade. The module calculates forward and backward to derive all target populations:
 
-| Entry point | Calculation | Denominators derived |
-|-------------|-------------|---------------------|
-| **ANC1** | ANC1 ÷ coverage → Pregnancies | → Deliveries → Births → Live births → DPT-eligible → Measles-eligible |
-| **Deliveries** | Deliveries ÷ coverage → Live births | ← Pregnancies ← ... and → DPT-eligible → Measles-eligible |
-| **BCG** | BCG ÷ coverage → Live births | ← Pregnancies ← ... and → DPT-eligible → Measles-eligible |
-| **Penta1** | Penta1 ÷ coverage → DPT-eligible | → Measles-eligible |
+| Entry point | Base calculation | Denominators derived |
+|-------------|------------------|---------------------|
+| **ANC1** | ANC1 ÷ coverage → Pregnancies | Deliveries, Births, Live births, DPT-eligible, Measles-eligible |
+| **Deliveries** | Deliveries ÷ coverage → Live births | Pregnancies (backward), DPT-eligible, Measles-eligible |
+| **BCG** | BCG ÷ coverage → Live births | Pregnancies (backward), DPT-eligible, Measles-eligible |
+| **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles-eligible |
 | **UN WPP** | Population projections | Pregnancies, Live births, DPT-eligible, Measles-eligible |
 
-The module calculates coverage using **each** denominator option, then selects the best one.
+Coverage is calculated using each denominator option; the optimal denominator is then selected.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
-## Selecting the best denominator
+## Denominator selection methodology
 
-**How the module selects the best denominator:**
+**Selection process:**
 
-1. **Calculate coverage** using each denominator option
-2. **Compare to survey** (DHS/MICS) benchmark for that indicator
-3. **Select the denominator** that produces coverage closest to survey
+1. Calculate coverage using each denominator option
+2. Compare each estimate to survey benchmark (DHS/MICS)
+3. Select the denominator producing the smallest error
 
 ---
 
-### Selection rules
+### Selection hierarchy
 
-- **HMIS-based denominators preferred** over population projections
-- **Independent denominators preferred** (e.g., using ANC1 to estimate Penta3 coverage, not Penta1)
-- **Lowest error wins** when multiple options are available
-
-This ensures coverage estimates are grounded in observed service delivery patterns.
+| Priority | Rule | Rationale |
+|----------|------|-----------|
+| 1 | HMIS-based denominators over population projections | Grounded in observed service delivery |
+| 2 | Independent denominators over reference-based | Avoids circular calculation (e.g., ANC1-based denominator for Penta3, not Penta1-based) |
+| 3 | Minimum squared error | Closest alignment with survey benchmark |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_14 -->
-## Projecting coverage between surveys
+## Coverage projection methodology
 
-Surveys (DHS/MICS) occur every 3-5 years. The module projects the last survey value forward using the trend observed in HMIS-calculated coverage:
+Household surveys (DHS/MICS) are conducted at 3-5 year intervals. The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
 ![Coverage projection method](resources/diagrams/coverage_projection.svg)
 
-**How it works:** Calculate the year-over-year change (delta) in HMIS coverage, then add each delta to the last survey value. This carries forward the survey baseline while incorporating observed HMIS trends.
+Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_15 -->
-## Interpreting coverage outputs
+## Interpretation of coverage outputs
 
-**Understanding the chart lines:**
+**Chart elements:**
 
-- **Black line/points**: Survey data (DHS/MICS) - the reference standard from household surveys
-- **Grey line/points**: HMIS-based coverage - calculated from facility data and selected denominator
-- **Red line/points**: Projected coverage - survey estimates extended using HMIS trends
+| Element | Description |
+|---------|-------------|
+| **Black line/points** | Survey data (DHS/MICS) — household survey reference |
+| **Grey line/points** | HMIS-based coverage from facility data |
+| **Red line/points** | Projected coverage — survey estimates extended using HMIS trends |
 
 ---
 
-### Key questions when reviewing
+### Considerations for review
 
-1. **How close is HMIS coverage to survey?** Large gaps may indicate denominator or data quality issues
-2. **Are trends consistent?** HMIS and survey should generally move in the same direction
-3. **Are projections plausible?** Coverage should stay between 0-100% and align with program knowledge
+| Question | Implication |
+|----------|-------------|
+| How closely does HMIS coverage align with survey? | Large gaps may indicate denominator or data quality issues |
+| Are trends consistent between sources? | HMIS and survey should generally move in the same direction |
+| Are projections plausible? | Coverage should remain within 0-100% and align with programmatic knowledge |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_16 -->
-## Coverage estimates: FASTR outputs
+## Coverage outputs by geographic level
 
-The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
+Coverage estimates are generated at multiple administrative levels:
 
-**1. Coverage calculated from HMIS data (national)**
+**National level**
 
 ![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-**2. Coverage calculated from HMIS data (admin area 2)**
+**Subnational level (admin area 2)**
 
 ![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
-**3. Coverage calculated from HMIS data (admin area 3)**
+**District level (admin area 3)**
 
 ![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 <!-- /SLIDE -->

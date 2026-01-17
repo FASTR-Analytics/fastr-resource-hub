@@ -117,11 +117,22 @@ TOPIC_NAMES = {
     'm5_4': 'adjusting_dq_in_platform',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
-    'm6_1': 'service_utilization',
-    'm6_2': 'surplus_disruption_analyses',
-    'm6_3': 'service_utilization_outputs',
-    'm6_4': 'service_coverage',
-    'm6_5': 'coverage_outputs',
+    'm6_1': 'service_utilization_analysis',
+    'm6_2': 'year_over_year_change',
+    'm6_3': 'disruption_detection',
+    'm6_4': 'actual_vs_expected_outputs',
+    'm6_5': 'data_quality_adjustment_scenarios',
+    'm6_6': 'service_coverage_introduction',
+    'm6_7': 'definition_of_coverage',
+    'm6_8': 'denominators_by_service_type',
+    'm6_9': 'demographic_cascade',
+    'm6_10': 'denominator_estimation_from_anc1',
+    'm6_11': 'denominator_cascade_illustration',
+    'm6_12': 'multiple_denominator_entry_points',
+    'm6_13': 'denominator_selection_methodology',
+    'm6_14': 'coverage_projection_methodology',
+    'm6_15': 'interpretation_of_coverage_outputs',
+    'm6_16': 'coverage_outputs_by_geographic_level',
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
