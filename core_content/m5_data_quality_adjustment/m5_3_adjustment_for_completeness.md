@@ -4,16 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-## Adjustment for completeness
+## Completeness adjustment methodology
 
-For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach.
+For months identified as incomplete or missing, values are imputed using the same 6-month rolling average approach applied to outlier adjustment.
 
-This ensures that temporary reporting gaps don't create artificial drops to zero in the data.
+| Priority | Method | Application |
+|----------|--------|-------------|
+| 1 | Centered 6-month average | When sufficient data exists before and after the gap |
+| 2 | Forward 6-month average | For gaps at the start of the time series |
+| 3 | Backward 6-month average | For gaps at the end of the time series |
+| 4 | Facility historical mean | Fallback when rolling averages unavailable |
+
+This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
 
 ---
 
-### Completeness adjustment: FASTR output
+## Completeness adjustment: FASTR output
 
 ![Percent change in volume due to completeness adjustment.](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
-Heatmap showing percent change in service volumes due to missing data imputation.
+**Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.

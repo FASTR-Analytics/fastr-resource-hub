@@ -4,27 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-## Putting it all together: Overall data quality
+## Calculating the overall quality score
 
----
+**The composite score integrates all three data quality dimensions:**
 
-## Overall quality score
+1. **Completeness:** Did the facility submit a report?
+2. **Outlier status:** Are reported values within plausible ranges?
+3. **Consistency:** Do related indicators demonstrate expected relationships?
 
-**For each facility and month, we combine all three checks:**
+**Binary DQA score:**
+- Score = 1 if all three criteria are satisfied
+- Score = 0 if any criterion is not met
 
-1. **Complete:** Did the facility report?
-2. **No outliers:** Are the numbers reasonable?
-3. **Consistent:** Do related numbers make sense?
+**Mean DQA score:** Weighted average of completeness-outlier score and consistency score
 
-**Binary DQA Score:**
-- dqa_score = 1 if ALL three checks pass
-- dqa_score = 0 if ANY check fails
-
-**DQA Mean:** Average of completeness-outlier score and consistency score
-
-**This helps us:**
-- Decide which data to use for analysis
-- Identify facilities needing support
+**Applications:**
+- Inform decisions regarding data inclusion in analyses
+- Identify facilities requiring targeted data quality support
 
 ---
 

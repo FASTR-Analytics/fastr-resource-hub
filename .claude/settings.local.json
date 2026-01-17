@@ -93,7 +93,8 @@
       "Bash(.venv/bin/pip install:*)",
       "Bash(unzip:*)",
       "Bash(.venv/bin/mkdocs build:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(python tools/00_extract_slides.py:*)"
     ]
   }
 }

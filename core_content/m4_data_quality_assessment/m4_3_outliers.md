@@ -4,19 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Question 2: Are numbers reasonable?
-
----
-
-## Outliers: Spotting suspicious numbers
+## Identifying implausible values
 
 <div style="display: flex; gap: 1.5em; align-items: center;">
 <div style="flex: 1;">
 
-**In this example:**
-Region A shows a spike in February that's far higher than the other regions.
+**Illustration:**
+Region A displays an anomalous increase in February that substantially exceeds values reported by other regions.
 
-This is likely a data entry error - after adjustment, all regions show similar gradual trends.
+This pattern is indicative of a data entry error. Following adjustment, all regions demonstrate consistent gradual trends.
 
 </div>
 <div style="flex: 2;">
@@ -28,36 +24,36 @@ This is likely a data entry error - after adjustment, all regions show similar g
 
 ---
 
-## How we spot outliers
+## Outlier detection methodology
 
-Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
+Outliers are identified through analysis of within-facility variation in monthly reporting for each indicator.
 
-A value is flagged as an outlier if it meets EITHER of two criteria:
+A value is classified as an outlier if it meets EITHER criterion:
 
-1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
-2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+1. The value exceeds 10 times the Median Absolute Deviation (MAD) from the facility's monthly median for that indicator, OR
+2. The value represents more than 80% of the total volume for a given facility, indicator, and time period
 
-AND for which the count is greater than 100.
+AND the reported count exceeds 100.
 
 ---
 
-## Outlier example
+## Outlier illustration
 
-**Health Center B - Malaria tests:**
+**Health Centre B - Malaria diagnostic tests:**
 
-| Month | Tests Reported | Normal? |
+| Month | Tests reported | Classification |
 |-------|----------------|---------|
-| January | 245 | Normal |
-| February | 267 | Normal |
+| January | 245 | Within expected range |
+| February | 267 | Within expected range |
 | **March** | **2,890** | **Outlier** |
-| April | 256 | Normal |
+| April | 256 | Within expected range |
 
-**What happened?** Probably someone entered "2890" instead of "289" (extra zero)
+**Probable cause:** Data entry error (e.g., "2890" entered instead of "289")
 
-**Impact if we don't fix it:** March would show a huge "spike" in malaria that didn't really happen.
+**Analytical impact:** Without adjustment, the data would indicate an erroneous increase in malaria testing during March.
 
 ---
 
-## Outliers: FASTR output
+## Outlier prevalence: FASTR output
 
 ![Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)

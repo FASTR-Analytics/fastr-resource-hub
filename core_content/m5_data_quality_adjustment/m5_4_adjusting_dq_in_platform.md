@@ -4,11 +4,16 @@ theme: fastr
 paginate: true
 ---
 
-## Combined adjustment impact
+## Combined adjustment: FASTR output
 
-Heatmap showing percent change in service volumes when both outlier and completeness adjustments are applied, with geographic areas as rows and indicators as columns.
+When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
 
 ![Percent change in volume due to both outlier and completeness adjustment.](../../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
-**Interpretation guide:**
-tbd
+**Interpretation:**
+
+| Value | Meaning |
+|-------|---------|
+| **Negative** | Outlier effect dominates (extreme values reduced volume) |
+| **Positive** | Completeness effect dominates (imputed values increased volume) |
+| **Near zero** | Minimal adjustment required; data quality was high |

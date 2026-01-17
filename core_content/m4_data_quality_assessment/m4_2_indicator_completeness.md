@@ -4,21 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## Question 1: Are facilities reporting?
-
----
-
-## Completeness: Did we get reports?
+## Assessing reporting completeness
 
 <div style="display: flex; gap: 1.5em; align-items: center;">
 <div style="flex: 1;">
 
-**What we're checking:**
-Each month, are facilities sending in their reports?
+**Definition:**
+The proportion of expected facility reports that were submitted within a given period.
 
-**Why it matters:**
-- Missing reports = incomplete picture
-- Apparent drops may just be missing data
+**Significance:**
+- Incomplete reporting limits the representativeness of aggregate data
+- Apparent declines in service volumes may reflect reporting gaps rather than actual reductions
 
 </div>
 <div style="flex: 2;">
@@ -30,16 +26,16 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## What's good completeness?
+## Interpreting completeness rates
 
-**It depends on your health system:**
-- 90%+ is excellent
-- 80-90% is good
-- Below 80% means we're missing a lot of information
+**Reference benchmarks:**
+- 90% and above: High completeness
+- 80-89%: Moderate completeness
+- Below 80%: Substantial reporting gaps
 
-**Important:** Even 100% completeness doesn't mean we have the full picture - some services might happen outside facilities or some facilities might not be in the reporting system.
+**Considerations:** Complete reporting does not capture services delivered outside the formal health system or by facilities not included in the HMIS.
 
-**What to look for:** Is completeness improving over time? Which areas have low completeness?
+**Key analytical questions:** Are completeness rates improving over time? Which geographic areas or facility types demonstrate lower completeness?
 
 ---
 

@@ -14,7 +14,7 @@ FASTR prioritizes a core set of RMNCAH-N indicators that:
 - Have relatively high reporting completeness and volumes
 - Serve as proxies for broader service delivery performance
 
-Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.
+<small>*Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.*</small>
 
 ### Core data quality metrics
 
@@ -24,4 +24,4 @@ Analysis is anchored in a standardized set of data quality metrics, including:
 - Extreme value (outlier) detection
 - Consistency across related indicators
 
-These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.
+<small>*These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.*</small>

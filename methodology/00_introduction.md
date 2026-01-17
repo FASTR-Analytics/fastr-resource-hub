@@ -202,23 +202,22 @@ FASTR brings together four complementary technical approaches:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
-## What FASTR does with routine HMIS data
+## RMNCAH-N service use monitoring
+
+Rapid-cycle approaches using routine health management information system (HMIS) data can be used to:
+
+- **Evaluate the quality of HMIS data** both at the national and sub-national levels to help address gaps in quality and completeness
+- **Measure monthly changes** in the utilization of critical health services, enabling a rapid response to challenges and the opportunity to gain insights on the progress of reforms
+- **Compare service coverage trends** with country targets, facilitating the continuous monitoring of RMNCAH-N progress
+
+---
+
+### How does it work?
 
 <div class="columns">
 <div>
 
-FASTR works directly with Ministries of Health to transform routine HMIS data into actionable evidence for policy and program management.
-
-Using facility-level data, the approach focuses on three core analytic functions:
-
-**Assess data quality**
-Identify key issues related to completeness, outliers, and internal consistency.
-
-**Adjust for data quality limitations**
-Apply transparent, indicator-specific methods to improve the reliability of trend analysis.
-
-**Analyze service use and coverage trends**
-Track changes in priority RMNCAH-N services and compare progress against country priorities and benchmarks.
+Through collaboration with Ministries of Health, the GFF assists countries in developing and reviewing regular analyses of HMIS data, focusing on specific priority health service indicators linked to national health care reforms, as well as GFF and World Bank investments.
 
 </div>
 <div>
@@ -265,7 +264,7 @@ FASTR prioritizes a core set of RMNCAH-N indicators that:
 - Have relatively high reporting completeness and volumes
 - Serve as proxies for broader service delivery performance
 
-Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.
+<small>*Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.*</small>
 
 ### Core data quality metrics
 
@@ -275,27 +274,10 @@ Analysis is anchored in a standardized set of data quality metrics, including:
 - Extreme value (outlier) detection
 - Consistency across related indicators
 
-These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5 -->
-## FASTR approach to routine data analysis
-
-The FASTR approach follows a three-step workflow:
-
-### 1. Assess data quality
-Identify issues related to completeness, outliers, and internal consistency at national and subnational levels.
-
-### 2. Adjust for data quality limitations
-Apply transparent, indicator-specific corrections to improve the reliability of trend analysis.
-
-### 3. Analyze service delivery
-Quantify changes in priority service volumes and compare coverage trends against country targets.
-
-This enables continuous, subnational monitoring while data quality is systematically improved.
+<small>*These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.*</small>
 <!-- /SLIDE -->
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 17-01-2026
 **Contact**: FASTR Project Team

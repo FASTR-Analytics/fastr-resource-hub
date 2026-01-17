@@ -857,7 +857,7 @@ For the combined adjustment heatmap (output 3):
 
 ---
 
-**Last updated**: 06-01-2026
+**Last updated**: 17-01-2026
 **Contact**: FASTR Project Team
 
 ---
@@ -878,87 +878,97 @@ For the combined adjustment heatmap (output 3):
 -->
 
 <!-- SLIDE:m5_1 -->
-## Approach to data quality adjustment
+## Rationale for data quality adjustment
 
-The FASTR analytics platform provides an option for adjusting data for outliers, indicator completeness, or both.
+Routine HMIS data contain two common limitations that can distort analytical results:
 
----
+| Issue | Impact on analysis |
+|-------|-------------------|
+| **Outliers** | Extreme values create artificial spikes in service volumes |
+| **Incomplete reporting** | Missing data creates artificial declines that do not reflect actual service delivery |
 
-## Adjustment for outliers
-
-Each outlier is replaced using the facility's own historical data through a **6-month rolling average**.
-
-**Method depends on position in time series:**
-
-| Position | Method | Example (outlier in June) |
-|----------|--------|---------------------------|
-| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
-| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May-Jun (excluding outlier) |
-| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
-
-If rolling averages unavailable: same month from previous year, then facility mean.
+FASTR addresses these limitations by replacing problematic values with estimates derived from each facility's historical reporting patterns.
 
 ---
 
-## Adjustment for completeness
+## Adjustment scenarios
 
-Missing values are imputed using the same 6-month rolling average approach.
+To support transparency and sensitivity analysis, FASTR produces four parallel datasets:
 
-**Method depends on position in time series:**
+| Scenario | Description |
+|----------|-------------|
+| **Unadjusted** | Original reported values |
+| **Outliers adjusted** | Extreme values replaced |
+| **Completeness adjusted** | Missing values imputed |
+| **Both adjusted** | All corrections applied |
 
-| Position | Method | Example (missing in June) |
-|----------|--------|---------------------------|
-| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
-| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May |
-| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+---
 
-This prevents reporting gaps from creating artificial drops to zero.
+## Indicators excluded from adjustment
+
+Certain indicators are excluded from the adjustment process:
+
+- **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
+- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_2 -->
-## Adjustment for outliers
+## Outlier adjustment methodology
 
-For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern.
+Outlier values are replaced using facility-specific historical data. The adjustment follows a hierarchical approach:
 
-**Methods used (in order of preference):**
-1. Centered 6-month rolling average (3 months before + 3 months after)
-2. Forward 6-month rolling average
-3. Backward 6-month rolling average
-4. Same month from the previous year (for seasonal indicators)
-5. Facility-specific historical mean (fallback)
+| Priority | Method | Application |
+|----------|--------|-------------|
+| 1 | Centered 6-month average | 3 months before + 3 months after the outlier |
+| 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
+| 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
+| 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
+| 5 | Facility historical mean | Fallback when no other method is applicable |
 
 ---
 
-### Outlier adjustment: FASTR output
+## Outlier adjustment: FASTR output
 
 ![Percent change in volume due to outlier adjustment.](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
-Heatmap showing percent change in service volumes due to outlier replacement.
+**Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
-## Adjustment for completeness
+## Completeness adjustment methodology
 
-For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach.
+For months identified as incomplete or missing, values are imputed using the same 6-month rolling average approach applied to outlier adjustment.
 
-This ensures that temporary reporting gaps don't create artificial drops to zero in the data.
+| Priority | Method | Application |
+|----------|--------|-------------|
+| 1 | Centered 6-month average | When sufficient data exists before and after the gap |
+| 2 | Forward 6-month average | For gaps at the start of the time series |
+| 3 | Backward 6-month average | For gaps at the end of the time series |
+| 4 | Facility historical mean | Fallback when rolling averages unavailable |
+
+This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
 
 ---
 
-### Completeness adjustment: FASTR output
+## Completeness adjustment: FASTR output
 
 ![Percent change in volume due to completeness adjustment.](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
-Heatmap showing percent change in service volumes due to missing data imputation.
+**Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
-## Combined adjustment impact
+## Combined adjustment: FASTR output
 
-Heatmap showing percent change in service volumes when both outlier and completeness adjustments are applied, with geographic areas as rows and indicators as columns.
+When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
 
 ![Percent change in volume due to both outlier and completeness adjustment.](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
-**Interpretation guide:**
-tbd
+**Interpretation:**
+
+| Value | Meaning |
+|-------|---------|
+| **Negative** | Outlier effect dominates (extreme values reduced volume) |
+| **Positive** | Completeness effect dominates (imputed values increased volume) |
+| **Near zero** | Minimal adjustment required; data quality was high |
 <!-- /SLIDE -->

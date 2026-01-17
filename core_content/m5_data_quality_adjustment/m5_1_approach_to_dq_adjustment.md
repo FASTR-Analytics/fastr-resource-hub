@@ -4,38 +4,35 @@ theme: fastr
 paginate: true
 ---
 
-## Approach to data quality adjustment
+## Rationale for data quality adjustment
 
-The FASTR analytics platform provides an option for adjusting data for outliers, indicator completeness, or both.
+Routine HMIS data contain two common limitations that can distort analytical results:
 
----
+| Issue | Impact on analysis |
+|-------|-------------------|
+| **Outliers** | Extreme values create artificial spikes in service volumes |
+| **Incomplete reporting** | Missing data creates artificial declines that do not reflect actual service delivery |
 
-## Adjustment for outliers
-
-Each outlier is replaced using the facility's own historical data through a **6-month rolling average**.
-
-**Method depends on position in time series:**
-
-| Position | Method | Example (outlier in June) |
-|----------|--------|---------------------------|
-| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
-| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May-Jun (excluding outlier) |
-| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
-
-If rolling averages unavailable: same month from previous year, then facility mean.
+FASTR addresses these limitations by replacing problematic values with estimates derived from each facility's historical reporting patterns.
 
 ---
 
-## Adjustment for completeness
+## Adjustment scenarios
 
-Missing values are imputed using the same 6-month rolling average approach.
+To support transparency and sensitivity analysis, FASTR produces four parallel datasets:
 
-**Method depends on position in time series:**
+| Scenario | Description |
+|----------|-------------|
+| **Unadjusted** | Original reported values |
+| **Outliers adjusted** | Extreme values replaced |
+| **Completeness adjusted** | Missing values imputed |
+| **Both adjusted** | All corrections applied |
 
-| Position | Method | Example (missing in June) |
-|----------|--------|---------------------------|
-| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
-| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May |
-| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+---
 
-This prevents reporting gaps from creating artificial drops to zero.
+## Indicators excluded from adjustment
+
+Certain indicators are excluded from the adjustment process:
+
+- **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
+- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment

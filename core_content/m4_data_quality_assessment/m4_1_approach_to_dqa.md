@@ -6,48 +6,46 @@ paginate: true
 
 ## Data quality assessment
 
-Understanding the reliability of routine health data
+Evaluating the reliability of routine health information system data
 
 ---
-## Why talk about data quality?
+## Rationale for data quality assessment
 
-**The challenge:** Health facilities report data every month, but sometimes:
-- Numbers seem too high or too low
-- Facilities forget to report
-- Related numbers don't match up
+**Challenge:** Routine health facility data may contain quality limitations:
+- Reported values may fall outside plausible ranges
+- Reporting gaps affect data completeness
+- Inconsistencies exist between related indicators
 
-**The impact:** Bad data leads to bad decisions
-- We might think services are improving when they're not
-- We might miss real problems in certain areas
-- Resources might go to the wrong places
-
-**FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
+**Implications:** Data quality limitations affect decision-making
+- Inaccurate assessments of service delivery trends
+- Misidentification of areas requiring intervention
+- Suboptimal resource allocation
 
 ---
 
-## Objectives of FASTR Data Quality Assessment
+## Objectives of data quality assessment
 
-**Objective 1: Analytical adjustment**
+**Objective 1: Enable analytical adjustment**
 
-Assessing data quality allows you to adjust for data quality issues, improving the ability to use DHIS2 data for decision-making
+Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
 
-**Objective 2: Monitor data quality over time**
+**Objective 2: Monitor data quality trends**
 
-Key learning questions include:
-- **What is the quality of data for different indicators in DHIS2?** (can inform indicators you select for analysis)
-- **Which areas report higher vs. lower quality data?** (can inform targeted data quality validation and supportive supervision)
-- **How has data quality improved over time?** (can assess the result of data quality investments, training, etc.)
+Data quality assessment enables ongoing monitoring to:
+- Inform indicator selection based on quality profiles across the HMIS
+- Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
+- Evaluate the effectiveness of data quality improvement initiatives over time
 
 ---
-## Three simple questions about data quality
+## Core dimensions of data quality
 
-**1. Are facilities reporting regularly?**
-- Completeness: Did we get reports from facilities this month?
+**1. Completeness**
+Are health facilities submitting reports consistently?
 
-**2. Are the numbers reasonable?**
-- Outliers: Are there any suspiciously high values?
+**2. Outlier prevalence**
+Are reported values within plausible ranges?
 
-**3. Do related numbers make sense together?**
-- Consistency: Do related services show expected patterns?
+**3. Internal consistency**
+Do related indicators demonstrate expected relationships?
 
-These three questions help us understand if we can trust the data for decision-making.
+These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.

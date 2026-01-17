@@ -1498,7 +1498,7 @@ The module follows this sequence:
 
 ---
 
-**Last updated**: 06-01-2026 (reviewed for consistency with R code)
+**Last updated**: 17-01-2026
 **Contact**: FASTR Project Team
 
 ---
@@ -1519,79 +1519,88 @@ The module follows this sequence:
 -->
 
 <!-- SLIDE:m4_0 -->
-## FASTR Analytical Pipeline
+## FASTR analytical pipeline
+
+<div class="columns">
+<div>
+
+The FASTR analysis follows a sequential workflow where each step builds on the previous:
+
+1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
+2. **Adjust for quality issues** - Apply corrections to improve data reliability
+3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+
+Each step must be completed before moving to the next.
+
+</div>
+<div>
 
 ![Analytical Pipeline](resources/diagrams/analytical_pipeline.svg)
 
-The components are interdependent: first assess data quality, then apply adjustments, then use the adjusted data for analysis.
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
 ## Data quality assessment
 
-Understanding the reliability of routine health data
+Evaluating the reliability of routine health information system data
 
 ---
-## Why talk about data quality?
+## Rationale for data quality assessment
 
-**The challenge:** Health facilities report data every month, but sometimes:
-- Numbers seem too high or too low
-- Facilities forget to report
-- Related numbers don't match up
+**Challenge:** Routine health facility data may contain quality limitations:
+- Reported values may fall outside plausible ranges
+- Reporting gaps affect data completeness
+- Inconsistencies exist between related indicators
 
-**The impact:** Bad data leads to bad decisions
-- We might think services are improving when they're not
-- We might miss real problems in certain areas
-- Resources might go to the wrong places
-
-**FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
+**Implications:** Data quality limitations affect decision-making
+- Inaccurate assessments of service delivery trends
+- Misidentification of areas requiring intervention
+- Suboptimal resource allocation
 
 ---
 
-## Objectives of FASTR Data Quality Assessment
+## Objectives of data quality assessment
 
-**Objective 1: Analytical adjustment**
+**Objective 1: Enable analytical adjustment**
 
-Assessing data quality allows you to adjust for data quality issues, improving the ability to use DHIS2 data for decision-making
+Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
 
-**Objective 2: Monitor data quality over time**
+**Objective 2: Monitor data quality trends**
 
-Key learning questions include:
-- **What is the quality of data for different indicators in DHIS2?** (can inform indicators you select for analysis)
-- **Which areas report higher vs. lower quality data?** (can inform targeted data quality validation and supportive supervision)
-- **How has data quality improved over time?** (can assess the result of data quality investments, training, etc.)
+Data quality assessment enables ongoing monitoring to:
+- Inform indicator selection based on quality profiles across the HMIS
+- Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
+- Evaluate the effectiveness of data quality improvement initiatives over time
 
 ---
-## Three simple questions about data quality
+## Core dimensions of data quality
 
-**1. Are facilities reporting regularly?**
-- Completeness: Did we get reports from facilities this month?
+**1. Completeness**
+Are health facilities submitting reports consistently?
 
-**2. Are the numbers reasonable?**
-- Outliers: Are there any suspiciously high values?
+**2. Outlier prevalence**
+Are reported values within plausible ranges?
 
-**3. Do related numbers make sense together?**
-- Consistency: Do related services show expected patterns?
+**3. Internal consistency**
+Do related indicators demonstrate expected relationships?
 
-These three questions help us understand if we can trust the data for decision-making.
+These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
-## Question 1: Are facilities reporting?
-
----
-
-## Completeness: Did we get reports?
+## Assessing reporting completeness
 
 <div style="display: flex; gap: 1.5em; align-items: center;">
 <div style="flex: 1;">
 
-**What we're checking:**
-Each month, are facilities sending in their reports?
+**Definition:**
+The proportion of expected facility reports that were submitted within a given period.
 
-**Why it matters:**
-- Missing reports = incomplete picture
-- Apparent drops may just be missing data
+**Significance:**
+- Incomplete reporting limits the representativeness of aggregate data
+- Apparent declines in service volumes may reflect reporting gaps rather than actual reductions
 
 </div>
 <div style="flex: 2;">
@@ -1603,16 +1612,16 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## What's good completeness?
+## Interpreting completeness rates
 
-**It depends on your health system:**
-- 90%+ is excellent
-- 80-90% is good
-- Below 80% means we're missing a lot of information
+**Reference benchmarks:**
+- 90% and above: High completeness
+- 80-89%: Moderate completeness
+- Below 80%: Substantial reporting gaps
 
-**Important:** Even 100% completeness doesn't mean we have the full picture - some services might happen outside facilities or some facilities might not be in the reporting system.
+**Considerations:** Complete reporting does not capture services delivered outside the formal health system or by facilities not included in the HMIS.
 
-**What to look for:** Is completeness improving over time? Which areas have low completeness?
+**Key analytical questions:** Are completeness rates improving over time? Which geographic areas or facility types demonstrate lower completeness?
 
 ---
 
@@ -1622,19 +1631,15 @@ Each month, are facilities sending in their reports?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3 -->
-## Question 2: Are numbers reasonable?
-
----
-
-## Outliers: Spotting suspicious numbers
+## Identifying implausible values
 
 <div style="display: flex; gap: 1.5em; align-items: center;">
 <div style="flex: 1;">
 
-**In this example:**
-Region A shows a spike in February that's far higher than the other regions.
+**Illustration:**
+Region A displays an anomalous increase in February that substantially exceeds values reported by other regions.
 
-This is likely a data entry error - after adjustment, all regions show similar gradual trends.
+This pattern is indicative of a data entry error. Following adjustment, all regions demonstrate consistent gradual trends.
 
 </div>
 <div style="flex: 2;">
@@ -1646,129 +1651,101 @@ This is likely a data entry error - after adjustment, all regions show similar g
 
 ---
 
-## How we spot outliers
+## Outlier detection methodology
 
-Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
+Outliers are identified through analysis of within-facility variation in monthly reporting for each indicator.
 
-A value is flagged as an outlier if it meets EITHER of two criteria:
+A value is classified as an outlier if it meets EITHER criterion:
 
-1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
-2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+1. The value exceeds 10 times the Median Absolute Deviation (MAD) from the facility's monthly median for that indicator, OR
+2. The value represents more than 80% of the total volume for a given facility, indicator, and time period
 
-AND for which the count is greater than 100.
+AND the reported count exceeds 100.
 
 ---
 
-## Outlier example
+## Outlier illustration
 
-**Health Center B - Malaria tests:**
+**Health Centre B - Malaria diagnostic tests:**
 
-| Month | Tests Reported | Normal? |
+| Month | Tests reported | Classification |
 |-------|----------------|---------|
-| January | 245 | Normal |
-| February | 267 | Normal |
+| January | 245 | Within expected range |
+| February | 267 | Within expected range |
 | **March** | **2,890** | **Outlier** |
-| April | 256 | Normal |
+| April | 256 | Within expected range |
 
-**What happened?** Probably someone entered "2890" instead of "289" (extra zero)
+**Probable cause:** Data entry error (e.g., "2890" entered instead of "289")
 
-**Impact if we don't fix it:** March would show a huge "spike" in malaria that didn't really happen.
+**Analytical impact:** Without adjustment, the data would indicate an erroneous increase in malaria testing during March.
 
 ---
 
-## Outliers: FASTR output
+## Outlier prevalence: FASTR output
 
 ![Outliers](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
-## Question 3: Do related numbers match up?
+## Assessing relationships between indicators
+
+Related health services demonstrate predictable relationships that can be used to assess data quality. FASTR evaluates the following indicator pairs:
+
+| Indicator pair | Expected relationship | Rationale |
+|----------------|----------------------|-----------|
+| ANC1 / ANC4 | ANC1 ≥ ANC4 | More women initiate antenatal care than complete four visits |
+| Penta1 / Penta3 | Penta1 ≥ Penta3 | More children receive the first dose than complete the series |
+| BCG / Deliveries | BCG ≈ Deliveries | BCG is administered at birth; counts should be similar |
+
+Violations of these expected relationships indicate potential data quality issues requiring investigation.
 
 ---
 
-## Consistency: Do related services make sense together?
+## Why assess consistency at district level?
 
-**What we're checking:**
-Health services are related - certain patterns are expected.
+<div class="columns">
+<div>
 
-**Example 1 - ANC visits:**
-- More women should get their **1st** ANC visit (ANC1)
-- Fewer should complete all **4** visits (ANC4)
-- We expect: ANC1 >= ANC4
+Patients often access different services at different facilities within a district:
 
-**Example 2 - Vaccinations:**
-- More babies should get their **1st** Penta dose (Penta1)
-- Fewer should complete all **3** doses (Penta3)
-- We expect: Penta1 >= Penta3
+- A woman may attend **ANC1** at a nearby health post, but travel to a health centre for **ANC4**
+- A child may receive **Penta1** at a local clinic, but complete **Penta3** at a district hospital
 
-**If these relationships are backwards, something's wrong with the data.**
-
----
-
-## Why check consistency at district level?
-
-**Patients move between facilities:**
-- Woman might get ANC1 at Health Center A
-- But deliver at District Hospital B
-- If we only look at each facility separately, numbers might not match
-
-**Solution:** Check consistency at district level
-- Add up all ANC1 visits in the district
-- Add up all ANC4 visits in the district
-- Compare the totals
-
-This accounts for patients visiting different facilities for different services.
-
----
-
-## Consistency example
-
-<div style="display: flex; gap: 1em; align-items: center;">
-<div style="flex: 1; font-size: 0.75em;">
-
-**This passes the consistency check:**
-- More women started ANC (5,200) than completed 4 visits (4,100)
-- This is logical - not everyone completes all visits
-
-**If it was reversed** (ANC4 > ANC1), we'd know there's a data quality problem.
+Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
 
 </div>
-<div style="flex: 2;">
+<div>
 
-![Consistency Illustration](../resources/diagrams/consistency_illustration.svg)
+![District consistency](resources/diagrams/district_consistency.svg)
 
 </div>
 </div>
 
 ---
 
-## Consistency: FASTR output
+## Internal consistency: FASTR output
 
 ![Internal Consistency](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_5 -->
-## Putting it all together: Overall data quality
+## Calculating the overall quality score
 
----
+**The composite score integrates all three data quality dimensions:**
 
-## Overall quality score
+1. **Completeness:** Did the facility submit a report?
+2. **Outlier status:** Are reported values within plausible ranges?
+3. **Consistency:** Do related indicators demonstrate expected relationships?
 
-**For each facility and month, we combine all three checks:**
+**Binary DQA score:**
+- Score = 1 if all three criteria are satisfied
+- Score = 0 if any criterion is not met
 
-1. **Complete:** Did the facility report?
-2. **No outliers:** Are the numbers reasonable?
-3. **Consistent:** Do related numbers make sense?
+**Mean DQA score:** Weighted average of completeness-outlier score and consistency score
 
-**Binary DQA Score:**
-- dqa_score = 1 if ALL three checks pass
-- dqa_score = 0 if ANY check fails
-
-**DQA Mean:** Average of completeness-outlier score and consistency score
-
-**This helps us:**
-- Decide which data to use for analysis
-- Identify facilities needing support
+**Applications:**
+- Inform decisions regarding data inclusion in analyses
+- Identify facilities requiring targeted data quality support
 
 ---
 
