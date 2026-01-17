@@ -6,7 +6,7 @@ paginate: true
 
 ## Coverage projection methodology
 
-Household surveys (DHS/MICS) are conducted at 3-5 year intervals. The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
+The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
 ![Coverage projection method](../../resources/diagrams/coverage_projection.svg)
 

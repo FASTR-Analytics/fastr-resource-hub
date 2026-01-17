@@ -1803,18 +1803,6 @@ Sequential demographic adjustments transform one target population estimate into
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
-## Denominator estimation from ANC1
-
-HMIS service counts combined with survey coverage estimates enable derivation of target populations:
-
-| Target population | Calculation | Example |
-|-------------------|-------------|---------|
-| Pregnancies | ANC1 count ÷ ANC1 coverage | 100,000 ÷ 0.95 = 105,263 |
-| Deliveries | Pregnancies × (1 − pregnancy loss rate) | 105,263 × 0.97 = 102,105 |
-| Live births | Deliveries × (1 − stillbirth rate) | 102,105 × 0.98 = 100,063 |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_11 -->
 ## Denominator cascade: Illustration
 
 Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
@@ -1822,46 +1810,52 @@ Starting from ANC1 service counts, demographic adjustment factors are applied se
 ![Denominator cascade example](resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_11 -->
+## Forward and backward derivation
+
+From any entry point, the cascade derives denominators in both directions:
+
+| Direction | Method | Example from Penta1 |
+|-----------|--------|---------------------|
+| **Forward** | Apply mortality/attrition rates | DPT-eligible → Measles1-eligible → Measles2-eligible |
+| **Backward** | Reverse mortality rates (add deaths back) | DPT-eligible → Live births → Births → Deliveries → Pregnancies |
+
+Backward derivation enables estimation of upstream populations from downstream service counts.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_12 -->
-## Multiple denominator entry points
+## Denominators by entry point
 
-Each HMIS indicator serves as an entry point into the demographic cascade. The module calculates forward and backward to derive all target populations:
+Each HMIS indicator serves as an entry point. The module derives all target populations via forward and backward cascades:
 
-| Entry point | Base calculation | Denominators derived |
-|-------------|------------------|---------------------|
-| **ANC1** | ANC1 ÷ coverage → Pregnancies | Deliveries, Births, Live births, DPT-eligible, Measles-eligible |
-| **Deliveries** | Deliveries ÷ coverage → Live births | Pregnancies (backward), DPT-eligible, Measles-eligible |
-| **BCG** | BCG ÷ coverage → Live births | Pregnancies (backward), DPT-eligible, Measles-eligible |
-| **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles-eligible |
-| **UN WPP** | Population projections | Pregnancies, Live births, DPT-eligible, Measles-eligible |
-
-Coverage is calculated using each denominator option; the optimal denominator is then selected.
+| Entry point | Base calculation | Forward derivation | Backward derivation |
+|-------------|------------------|-------------------|---------------------|
+| **ANC1** | ANC1 ÷ coverage → Pregnancies | Deliveries → Live births → DPT-eligible → Measles-eligible | — |
+| **Deliveries** | Deliveries ÷ coverage → Deliveries | Live births → DPT-eligible → Measles-eligible | Pregnancies |
+| **BCG** | BCG ÷ coverage → Live births | DPT-eligible → Measles-eligible | Deliveries → Pregnancies |
+| **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles1-eligible → Measles2-eligible | Live births → Births → Deliveries → Pregnancies |
+| **UN WPP** | Population projections | All denominators directly | — |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
-## Denominator selection methodology
+## Automatic denominator selection
 
-**Selection process:**
+For each indicator, the module selects the denominator that produces coverage closest to the survey benchmark.
+
+**Selection algorithm:**
 
 1. Calculate coverage using each denominator option
-2. Compare each estimate to survey benchmark (DHS/MICS)
-3. Select the denominator producing the smallest error
+2. Calculate squared error against survey: $(coverage - survey)^2$
+3. Apply selection hierarchy (HMIS-based denominators prioritized over UN WPP)
+4. Select the HMIS-based denominator with minimum error
 
----
-
-### Selection hierarchy
-
-| Priority | Rule | Rationale |
-|----------|------|-----------|
-| 1 | HMIS-based denominators over population projections | Grounded in observed service delivery |
-| 2 | Independent denominators over reference-based | Avoids circular calculation (e.g., ANC1-based denominator for Penta3, not Penta1-based) |
-| 3 | Minimum squared error | Closest alignment with survey benchmark |
+Selection is made per indicator and geographic area. Users may override automatic selections in Part 2.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_14 -->
 ## Coverage projection methodology
 
-Household surveys (DHS/MICS) are conducted at 3-5 year intervals. The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
+The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
 ![Coverage projection method](resources/diagrams/coverage_projection.svg)
 
@@ -1871,39 +1865,27 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 <!-- SLIDE:m6_15 -->
 ## Interpretation of coverage outputs
 
-**Chart elements:**
-
 | Element | Description |
 |---------|-------------|
 | **Black line/points** | Survey data (DHS/MICS) — household survey reference |
 | **Grey line/points** | HMIS-based coverage from facility data |
 | **Red line/points** | Projected coverage — survey estimates extended using HMIS trends |
-
----
-
-### Considerations for review
-
-| Question | Implication |
-|----------|-------------|
-| How closely does HMIS coverage align with survey? | Large gaps may indicate denominator or data quality issues |
-| Are trends consistent between sources? | HMIS and survey should generally move in the same direction |
-| Are projections plausible? | Coverage should remain within 0-100% and align with programmatic knowledge |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_16 -->
-## Coverage outputs by geographic level
-
-Coverage estimates are generated at multiple administrative levels:
-
-**National level**
+## Output: Coverage (national)
 
 ![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+<!-- /SLIDE -->
 
-**Subnational level (admin area 2)**
+<!-- SLIDE:m6_17 -->
+## Output: Coverage (subnational)
 
 ![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+<!-- /SLIDE -->
 
-**District level (admin area 3)**
+<!-- SLIDE:m6_18 -->
+## Output: Coverage (district)
 
 ![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 <!-- /SLIDE -->

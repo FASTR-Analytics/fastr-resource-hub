@@ -4,20 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Denominator selection methodology
+## Automatic denominator selection
 
-**Selection process:**
+For each indicator, the module selects the denominator that produces coverage closest to the survey benchmark.
+
+**Selection algorithm:**
 
 1. Calculate coverage using each denominator option
-2. Compare each estimate to survey benchmark (DHS/MICS)
-3. Select the denominator producing the smallest error
+2. Calculate squared error against survey: $(coverage - survey)^2$
+3. Apply selection hierarchy (HMIS-based denominators prioritized over UN WPP)
+4. Select the HMIS-based denominator with minimum error
 
----
-
-### Selection hierarchy
-
-| Priority | Rule | Rationale |
-|----------|------|-----------|
-| 1 | HMIS-based denominators over population projections | Grounded in observed service delivery |
-| 2 | Independent denominators over reference-based | Avoids circular calculation (e.g., ANC1-based denominator for Penta3, not Penta1-based) |
-| 3 | Minimum squared error | Closest alignment with survey benchmark |
+Selection is made per indicator and geographic area. Users may override automatic selections in Part 2.
