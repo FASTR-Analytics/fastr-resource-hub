@@ -760,6 +760,35 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 
 
+## DQA module: Configuration parameters
+
+The Data Quality Assessment module uses configurable parameters:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `GEOLEVEL` | admin_area_3 | Geographic level for consistency analysis |
+| `OUTLIER_PROPORTION_THRESHOLD` | 0.80 | Flag if single month exceeds this proportion of annual volume |
+| `MINIMUM_COUNT_THRESHOLD` | 100 | Only flag outliers with count above this threshold |
+| `MADS` | 10 | Number of MADs for statistical outlier detection |
+| `DQA_INDICATORS` | penta1, anc1, opd | Core indicators for DQA scoring |
+| `CONSISTENCY_PAIRS_USED` | penta, anc | Indicator pairs for consistency assessment |
+
+---
+
+## Tuning DQA parameters
+
+| Objective | Adjustment |
+|-----------|------------|
+| **More sensitive outlier detection** | Lower `MADS` to 8; lower `OUTLIER_PROPORTION_THRESHOLD` to 0.6–0.7 |
+| **Less sensitive outlier detection** | Increase `MADS` to 12–15; increase `OUTLIER_PROPORTION_THRESHOLD` to 0.9 |
+| **Include small facilities** | Lower `MINIMUM_COUNT_THRESHOLD` to 50 |
+| **Focus on large facilities** | Increase `MINIMUM_COUNT_THRESHOLD` to 200+ |
+| **Coarser consistency analysis** | Set `GEOLEVEL` to admin_area_2 |
+
+---
+
+
+
 ## Rationale for data quality adjustment
 
 Routine HMIS data contain two common limitations that can distort analytical results:
@@ -792,6 +821,35 @@ Certain indicators are excluded from the adjustment process:
 
 - **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
 - **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment
+
+---
+
+
+
+## Adjustment module: Configuration parameters
+
+The Data Quality Adjustment module uses these key parameters:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| **Rolling window** | 6 months | Window size for calculating replacement values |
+| **Low volume threshold** | 100 | Indicators never exceeding this count are excluded from outlier adjustment |
+
+---
+
+## Adjustment hierarchy
+
+When replacing outliers or filling missing values, the module applies methods in priority order:
+
+| Priority | Method | When used |
+|----------|--------|-----------|
+| 1 | Centered 6-month average | Default: 3 months before + 3 months after |
+| 2 | Forward 6-month average | When insufficient preceding data |
+| 3 | Backward 6-month average | When insufficient following data |
+| 4 | Same month, previous year | For seasonal indicators when rolling averages unavailable |
+| 5 | Facility historical mean | Fallback when no other method available |
+
+**Excluded indicators:** Mortality-related indicators (maternal deaths, neonatal deaths, under-5 deaths) are never adjusted.
 
 ---
 
@@ -963,6 +1021,33 @@ Comparison across adjustment scenarios addresses three questions:
 
 
 
+## Service utilization: Configuration parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `SELECTEDCOUNT` | count_final_both | Data column used for analysis |
+| `SMOOTH_K` | 7 | Rolling median window size (must be odd) |
+| `MADS_THRESHOLD` | 1.5 | MAD threshold for sharp disruption detection |
+| `DIP_THRESHOLD` | 0.90 | Flag periods below 90% of expected volume |
+| `DIFFPERCENT` | 10 | Percentage threshold for visualization |
+| `RUN_DISTRICT_MODEL` | FALSE | Enable district-level regression analysis |
+| `RUN_ADMIN_AREA_4_ANALYSIS` | FALSE | Enable ward-level analysis |
+
+---
+
+## Tuning sensitivity
+
+| Objective | Adjustment |
+|-----------|------------|
+| **More sensitive detection** | Lower `MADS_THRESHOLD` to 1.0; set `DIP_THRESHOLD` to 0.95; reduce `SMOOTH_K` to 5 |
+| **Less sensitive detection** | Increase `MADS_THRESHOLD` to 2.0; set `DIP_THRESHOLD` to 0.80; increase `SMOOTH_K` to 9 or 11 |
+| **Faster runtime** | Set `RUN_DISTRICT_MODEL` and `RUN_ADMIN_AREA_4_ANALYSIS` to FALSE |
+| **Detailed subnational analysis** | Set `RUN_DISTRICT_MODEL` to TRUE (slower) |
+
+---
+
+
+
 ## Service coverage estimates
 
 The Coverage Estimates module estimates health service coverage: the percentage of the target population that received a given health service.
@@ -1125,6 +1210,40 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 ## Output: Coverage (district)
 
 ![Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+
+---
+
+
+
+## Coverage module: Configuration parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `ANALYSIS_LEVEL` | NATIONAL_PLUS_AA2 | Geographic scope for analysis |
+| `SELECTED_COUNT_VARIABLE` | count_final_both | Which adjusted count to use |
+
+**Analysis level options:**
+- `NATIONAL_ONLY` — National analysis only
+- `NATIONAL_PLUS_AA2` — National + provinces/regions
+- `NATIONAL_PLUS_AA2_AA3` — National + provinces + districts
+
+---
+
+## Demographic adjustment parameters
+
+These parameters adjust denominators for the target population:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `PREGNANCY_LOSS_RATE` | 0.03 | 3% pregnancy loss |
+| `TWIN_RATE` | 0.015 | 1.5% twin births |
+| `STILLBIRTH_RATE` | 0.02 | 2% stillbirths |
+| `P1_NMR` | 0.039 | Neonatal mortality rate |
+| `P2_PNMR` | 0.028 | Post-neonatal mortality rate |
+| `INFANT_MORTALITY_RATE` | 0.063 | Infant mortality rate |
+| `UNDER5_MORTALITY_RATE` | 0.103 | Under-5 mortality rate |
+
+**Note:** Country-specific rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 
 ---
 

@@ -108,13 +108,14 @@ TOPIC_NAMES = {
     'm4_3': 'outliers',
     'm4_4': 'internal_consistency',
     'm4_5': 'overall_dqa_score',
-    'm4_6': 'assessing_dq_in_platform',
+    'm4_6': 'dqa_configuration_parameters',
 
     # m5 - Data Quality Adjustment (from 05_data_quality_adjustment.md)
     'm5_1': 'approach_to_dq_adjustment',
     'm5_2': 'adjustment_for_outliers',
     'm5_3': 'adjustment_for_completeness',
     'm5_4': 'adjusting_dq_in_platform',
+    'm5_5': 'adjustment_configuration_parameters',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization_analysis',
@@ -122,6 +123,7 @@ TOPIC_NAMES = {
     'm6_3': 'disruption_detection',
     'm6_4': 'actual_vs_expected_outputs',
     'm6_5': 'data_quality_adjustment_scenarios',
+    'm6_5a': 'service_utilization_configuration_parameters',
     'm6_6': 'service_coverage_introduction',
     'm6_7': 'definition_of_coverage',
     'm6_8': 'denominators_by_service_type',
@@ -135,6 +137,7 @@ TOPIC_NAMES = {
     'm6_16': 'coverage_output_national',
     'm6_17': 'coverage_output_subnational',
     'm6_18': 'coverage_output_district',
+    'm6_19': 'coverage_configuration_parameters',
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
