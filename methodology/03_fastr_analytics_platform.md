@@ -8,271 +8,135 @@ The FASTR analytics platform is a web-based tool designed to support data qualit
 
 ### Data management
 
-- Import and manage health facility structure (administrative areas and facilities)
-- Import HMIS (Health Management Information System) data
-- Import HFA (Health Facility Assessment) data
-- Manage indicators from multiple sources
-- Track dataset versions over time
+The platform provides comprehensive data management functionality. Users can import and manage health facility structures, including administrative areas and individual facilities. The system supports data imports from Health Management Information Systems (HMIS) and Health Facility Assessments (HFA), enabling users to manage indicators from multiple sources while tracking dataset versions over time.
 
 ### Data analysis
 
-- Enable and configure analytical modules
-- Process data using R-based analytical scripts
-- Chain modules together for complex analyses
-- Monitor processing status and logs
+Analytical capabilities are delivered through configurable modules. Users can enable and configure analytical modules that process data using R-based statistical scripts. These modules can be chained together to support complex, multi-step analyses, with built-in tools for monitoring processing status and reviewing logs.
 
 ### Visualization
 
-- Create charts, maps, and tables from processed data
-- Filter and disaggregate data by multiple dimensions
-- Customize appearance and styling
-- Export visualizations as images or data files
+The platform offers robust visualization tools for presenting analytical results. Users can create charts, maps, and tables from processed data, with options to filter and disaggregate by multiple dimensions. Visualizations can be customized in terms of appearance and styling, and exported as images or data files for use in external applications.
 
 ### Reporting
 
-- Combine multiple visualizations into reports
-- Export reports as PowerPoint presentations or PDFs
-- Organize and reorder report pages
-- Share reports with stakeholders
+Reporting functionality enables users to combine multiple visualizations into comprehensive reports. Reports can be exported as PowerPoint presentations or PDF documents. Users can organize and reorder report pages to meet specific communication needs and share completed reports with stakeholders.
 
 ### Collaboration
 
-- Organize work into projects
-- Assign users with different roles (viewer, editor, admin)
-- Control access at the project level
-- Lock projects to prevent changes
+The platform supports collaborative work through a project-based structure. Users can organize their work into discrete projects and assign team members with different roles, including viewer, editor, and administrator permissions. Access controls operate at the project level, and projects can be locked to prevent unintended changes.
 
 ## Who should use this application?
 
 ### Data analysts
 
-Analyze health data trends, create visualizations, and generate reports for decision-makers.
+Data analysts will find the platform valuable for analyzing health data trends, creating visualizations, and generating reports for decision-makers. The analytical modules and visualization tools are designed to support rigorous data analysis workflows.
 
 ### Health program managers
 
-Monitor program performance, track indicators, and share insights with teams.
+Health program managers can use the platform to monitor program performance, track key indicators, and share insights with their teams. The reporting functionality enables regular communication of results to support evidence-based program management.
 
 ### System administrators
 
-Set up the system, manage users, import data, and configure the platform for organizational needs.
+System administrators are responsible for setting up the platform, managing users, importing data, and configuring the system to meet organizational needs. Administrative tools provide control over user access, data sources, and platform settings.
 
 ## How the application works
 
 ### Organization level (instance)
 
-The **instance** is your organization's workspace containing:
-
-- All users
-- Shared structure (administrative areas and health facilities)
-- Shared indicators
-- Data sources (HMIS, HFA)
-- All projects
+The **instance** serves as the organization's primary workspace within the platform. Each instance contains all registered users, the shared administrative structure (including administrative areas and health facilities), shared indicator definitions, data sources (both HMIS and HFA), and all projects created within the organization.
 
 ### Project level
 
-**Projects** provide focused analysis workspaces:
-
-- Select which data to include (time periods, facilities, indicators)
-- Enable analytical modules
-- Create visualizations
-- Build reports
+**Projects** provide focused analysis workspaces within an instance. Each project allows users to select which data to include by defining specific time periods, facilities, and indicators. Within a project, users can enable analytical modules, create visualizations, and build reports tailored to specific analytical objectives.
 
 ### Data flow
 
-**Data Import → Module Processing → Visualizations → Reports**
-
-1. **Data Import**: Upload health facility data at the instance level
-2. **Project Setup**: Create projects with specific data windows
-3. **Module Processing**: Enable modules to process and analyze data
-4. **Visualizations**: Create charts, maps, and tables from module outputs
-5. **Reports**: Combine visualizations into exportable reports
+The platform follows a structured data flow: **Data Import → Module Processing → Visualizations → Reports**. Users first upload health facility data at the instance level. Projects are then created with specific data windows that define the scope of analysis. Analytical modules process and analyze the selected data, producing outputs that can be used to create charts, maps, and tables. Finally, visualizations are combined into exportable reports for dissemination.
 
 ## Technical requirements
 
 ### Supported languages
 
-The application supports:
-
-- English
-- French
-
-Language settings can be configured at the instance level.
+The application currently supports English and French. Language settings can be configured at the instance level to meet the needs of different user communities.
 
 ### Browser requirements
 
-The application works best in modern web browsers:
-
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
-
-Ensure JavaScript is enabled for full functionality.
+The application is designed to work with modern web browsers. Chrome is recommended for optimal performance, though Firefox, Safari, and Edge are also supported. JavaScript must be enabled for full functionality.
 
 ## Basic concepts
 
-Understanding these core concepts will help you use the application effectively.
+Understanding these core concepts will help users work effectively with the application.
 
 ### Instance
 
-An **instance** is your organization's workspace. It contains:
-
-- All users
-- Shared administrative structure
-- Data sources
-- All projects
-
-Think of it as the top-level container for everything in the system.
+An **instance** is the organization's primary workspace within the platform. It serves as the top-level container for all users, the shared administrative structure, data sources, and projects. Each organization typically operates within a single instance that provides the foundation for all analytical work.
 
 ### Projects
 
-A **project** is a focused analysis workspace within an instance. Projects allow you to:
-
-- Work with specific subsets of data (time periods, facilities, indicators)
-- Enable analytical modules
-- Create visualizations
-- Generate reports
-- Collaborate with specific team members
-
-Multiple projects can exist in one instance, each with different data scopes and users.
+A **project** is a focused analysis workspace within an instance. Projects enable users to work with specific subsets of data by defining time periods, facilities, and indicators relevant to a particular analytical objective. Within each project, users can enable analytical modules, create visualizations, generate reports, and collaborate with team members. Multiple projects can exist within one instance, each with different data scopes and user access configurations.
 
 ### Structure
 
-The **structure** defines the hierarchical organization of administrative areas and health facilities.
+The **structure** defines the hierarchical organization of administrative areas and health facilities within the platform.
 
-**Admin areas** are administrative boundaries organized in levels:
+**Administrative areas** represent geographic boundaries organized in up to four levels. Admin Area 1 represents the country boundaries. Admin Area 2 corresponds to the largest subnational units such as provinces or regions. Admin Area 3 encompasses mid-level units like districts or departments, while Admin Area 4 represents smaller units such as communes or sub-districts. Not all instances require all four administrative levels.
 
-- **Admin Area 1**: Largest geographic unit (e.g., provinces, regions)
-- **Admin Area 2**: Mid-level unit (e.g., districts, departments)
-- **Admin Area 3**: Smaller unit (e.g., communes, sub-districts)
-- **Admin Area 4**: Smallest unit (e.g., villages, wards)
-
-Not all instances use all four levels.
-
-**Health facilities** are healthcare service delivery points (hospitals, clinics, health posts) linked to admin areas. Facilities may have additional attributes like:
-
-- Facility type (hospital, health center, dispensary)
-- Ownership (public, private, faith-based)
+**Health facilities** are the healthcare service delivery points—including hospitals, clinics, and health posts—that are linked to administrative areas within the structure. Facilities may have additional attributes such as facility type (hospital, health center, or dispensary) and ownership category (public, private, or faith-based).
 
 ### Data sources
 
 #### HMIS data
 
-Health Management Information System data contains routine health service statistics:
-
-- Service delivery indicators
-- Disease surveillance
-- Program performance metrics
-- Typically reported monthly
+Health Management Information System (HMIS) data contains routine health service statistics collected from facilities. This includes service delivery indicators, disease surveillance data, and program performance metrics. HMIS data is typically reported on a monthly basis and forms the foundation for most routine health system analyses.
 
 #### HFA data
 
-Health Facility Assessment data contains facility characteristics and capacity information:
-
-- Infrastructure availability
-- Equipment and supplies
-- Staffing levels
-- Service readiness
+Health Facility Assessment (HFA) data contains information about facility characteristics and capacity. This includes data on infrastructure availability, equipment and supplies, staffing levels, and service readiness. HFA data complements HMIS data by providing context about the facilities from which routine data is reported.
 
 ### Indicators
 
-Measurable health metrics that can be:
-
-- **Common Indicators**: Defined and shared across the instance
-- **DHIS2 Indicators**: Imported from external DHIS2 systems
+**Indicators** are measurable health metrics used within the platform. These can be either **Common Indicators**, which are defined and shared across the instance for consistent measurement, or **DHIS2 Indicators**, which are imported from external DHIS2 systems and may follow different naming conventions or calculation methods.
 
 ### Datasets and versions
 
-A **dataset** is a collection of health data (HMIS or HFA). Each time data is imported, a new version is created, allowing you to:
-
-- Track changes over time
-- Switch between versions if needed
-- Maintain data history
+A **dataset** is a collection of health data, either HMIS or HFA. Each time data is imported into the platform, a new version is created. This versioning system allows users to track changes over time, switch between versions if needed, and maintain a complete data history for audit and comparison purposes.
 
 ### Modules
 
-**Modules** are data processing units that execute analytical R scripts. They:
+**Modules** are data processing units that execute analytical R scripts within the platform. Each module takes input data from datasets or from the outputs of other modules, processes and analyzes the data according to defined statistical methods, and produces results objects as output files. Modules can be chained together to support complex analytical workflows where one module uses another's outputs as its inputs.
 
-- Take input data (from datasets or other modules)
-- Process and analyze the data
-- Produce results objects (output files)
-- Can be chained together (one module uses another's outputs)
-
-**Module types:**
-
-- **Module Definition**: The template or blueprint for a type of analysis
-- **Module Instance**: A module enabled and configured in a specific project
-
-Modules may have prerequisites—other modules that must be enabled first.
+The platform distinguishes between two module types. A **Module Definition** is the template or blueprint for a type of analysis, defining the analytical methods and parameters available. A **Module Instance** is a module that has been enabled and configured within a specific project. Some modules have prerequisites, meaning that other modules must be enabled first before they can be used.
 
 ### Visualizations (presentation objects)
 
-**Visualizations** (also called presentation objects) are visual representations of data:
+**Visualizations**, also referred to as presentation objects, are visual representations of data generated from module outputs. The platform supports three main visualization types: charts (including bar charts, line graphs, and pie charts), maps (geographic visualizations showing data across administrative areas), and tables (tabular data displays).
 
-- **Charts**: Bar charts, line graphs, pie charts, etc.
-- **Maps**: Geographic visualizations showing data across administrative areas
-- **Tables**: Tabular data displays
-
-Visualizations use data from module outputs and can be:
-
-- Filtered by various dimensions
-- Disaggregated (broken down by facility type, time period, etc.)
-- Styled and customized
-- Exported or included in reports
+Visualizations can be filtered by various dimensions and disaggregated by factors such as facility type, time period, or administrative level. Users can customize the appearance and styling of visualizations, and export them for use in external applications or include them directly in reports.
 
 ### Reports
 
-**Reports** are collections of visualization pages designed for export and sharing. Reports can be:
-
-- Exported as PowerPoint presentations
-- Exported as PDF documents
-- Organized with multiple pages
-- Configured with custom layouts and orientations
-
-Each page in a report is a **report item** containing a visualization.
+**Reports** are collections of visualization pages designed for export and sharing with stakeholders. Reports can be exported as PowerPoint presentations or PDF documents, and can be organized with multiple pages configured with custom layouts and orientations. Each page in a report is a **report item** that contains a visualization.
 
 ### Windowing
 
-**Windowing** means selecting a subset of instance data for a project. You can filter by:
-
-- **Time period**: Select specific months/years
-- **Indicators**: Include all or specific indicators
-- **Administrative areas**: Include all or specific regions
-- **Facilities**: Filter by facility type or ownership
-
-This allows projects to focus on relevant data without loading everything.
+**Windowing** refers to the process of selecting a subset of instance data for use within a project. Users can filter data by time period (selecting specific months or years), by indicators (including all or only specific indicators), by administrative areas (including all or specific regions), and by facilities (filtering by facility type or ownership). This functionality allows projects to focus on the data most relevant to their analytical objectives without loading the entire dataset.
 
 ### Disaggregation
 
-**Disaggregation** means breaking down data by dimensions to see patterns:
-
-- By time period (monthly, quarterly, yearly)
-- By administrative area level
-- By facility type
-- By facility ownership
-- By indicator categories
+**Disaggregation** refers to the process of breaking down data by dimensions to identify patterns and variations. Data can be disaggregated by time period (monthly, quarterly, or yearly), by administrative area level, by facility type, by facility ownership, or by indicator categories. This capability supports more nuanced analysis and helps identify disparities across different dimensions.
 
 ### User roles
 
-Users can have different roles determining their permissions:
-
-**At instance level:**
-
-- **Global Admin**: Full access to all instance settings and projects
-
-**At project level:**
-
-- **Admin**: Can modify project settings, modules, visualizations, and reports
-- **Editor**: Can create and modify visualizations and reports
-- **Viewer**: Can view but not modify project contents
+Users can be assigned different roles that determine their permissions within the platform. At the **instance level**, Global Administrators have full access to all instance settings and projects. At the **project level**, three roles are available: Administrators can modify project settings, modules, visualizations, and reports; Editors can create and modify visualizations and reports; and Viewers can view project contents but cannot make modifications.
 
 ### Data quality scores
 
-The system automatically assesses data completeness and accuracy, providing quality scores to help identify data issues.
+The platform automatically assesses data completeness and accuracy, generating quality scores that help users identify potential data issues. These scores support data quality review processes and help prioritize areas requiring attention.
 
 ### Lock status
 
-Projects can be **locked** to prevent modifications to configuration while allowing report viewing. Locked projects cannot have modules or data settings changed.
+Projects can be **locked** to prevent modifications to their configuration while still allowing users to view reports. When a project is locked, modules and data settings cannot be changed, providing a mechanism to preserve analytical configurations once they have been finalized.
 
 ---
 
