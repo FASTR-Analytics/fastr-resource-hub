@@ -1124,9 +1124,9 @@ For the volume change chart (output 4):
 -->
 
 <!-- SLIDE:m6_1 -->
-## Service utilization analysis
+## Service utilization analysis - Module 3
 
-Analysis of health service delivery patterns to detect and quantify changes in service volumes over time.
+Detecting and quantifying changes in health service delivery over time
 
 ---
 
@@ -1176,60 +1176,54 @@ Changes exceeding **±10%** are flagged for review.
 <!-- SLIDE:m6_3 -->
 ## Disruption detection
 
-The analysis identifies periods where service delivery deviates significantly from expected levels using a two-stage approach:
-
-| Stage | Method | Purpose |
-|-------|--------|---------|
-| **1. Control chart analysis** | Statistical process control | Identify when disruptions occur |
-| **2. Regression analysis** | Panel regression models | Quantify disruption magnitude |
+Our approach to service disruptions and surpluses utilizes an interrupted time series regression with facility-level fixed effects. Previous large and unexpected changes in historical data are removed. Unexpected volume changes are estimated by comparing observed volume to expected volume based on historical trends and seasonality.
 
 ---
 
-## Expected service volume
+## Disruptions and surpluses
 
-Expected volume is modeled using two components:
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
-| Component | Description |
-|-----------|-------------|
-| **Trend** | Long-term direction (increasing, decreasing, or stable) |
-| **Seasonality** | Predictable monthly patterns (e.g., increased malaria cases during rainy season) |
+**Disruptions** are flagged when volumes fall below anticipated levels, signaling potential barriers to access, resource shortages, or system failures.
 
-The model estimates expected volume for each month based on historical patterns. Significant deviations from expected values are flagged as potential disruptions.
-
----
-
-## Shortfalls and surpluses
-
-<div class="columns">
-<div>
-
-| Comparison | Interpretation |
-|------------|----------------|
-| **Actual = Expected** | Services delivered as anticipated |
-| **Actual < Expected** | Shortfall: fewer services than expected |
-| **Actual > Expected** | Surplus: more services than expected |
-
-Surpluses may indicate catch-up campaigns, outreach activities, or reporting changes.
+**Surpluses** occur when volumes exceed expectations, which may indicate increased demand, over-reporting, or changes in service delivery.
 
 </div>
-<div>
+<div style="flex: 2;">
 
-![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
 </div>
 
 ---
 
-## Chart interpretation
+## How it works
 
-| Element | Description |
-|---------|-------------|
-| **Black line** | Actual (observed) service volumes |
-| **Red shaded areas** | Shortfall periods (actual below expected) |
-| **Green shaded areas** | Surplus periods (actual above expected) |
+**Using past data to set expectations:** We look at the past few years of data to understand the typical pattern for each month, accounting for regular seasonal changes.
 
-The magnitude of the shaded area corresponds to the scale of the disruption.
+**Spotting unusual changes:** We compare current service volumes to expectations. If we see volumes much higher or lower than expected, we flag it as an unusual change.
+
+**Handling past disruptions:** We adjust historical data by removing previous big, unexpected changes so one-off events don't skew our understanding of what's "normal."
+
+**Detecting disruptions over time:** We look at trends to see if there are clear shifts in health service use over several months.
+
+---
+
+## Comparison to DHIS2
+
+Extension of service utilization analysis, using more complex statistical approaches not available in DHIS2.
+
+Using a regression framework, we are able to:
+
+- Account for seasonality
+- Exclude unusual changes to ensure one-off events aren't influencing normal trends
+- Use historical data as a baseline for context
+- Detect disruptions and recovery patterns
+- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
+
+This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_4 -->
@@ -1248,58 +1242,21 @@ National-level comparison of observed service volumes against expected values de
 Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_5 -->
-## Data quality adjustment scenarios
-
-The analysis supports four data versions to assess sensitivity to adjustment assumptions:
-
-| Scenario | Description |
-|----------|-------------|
-| **No adjustment** | Raw reported values |
-| **Outlier adjustment** | Extreme values corrected |
-| **Completeness adjustment** | Adjusted for missing facility reports |
-| **Both adjustments** | Outlier and completeness adjustments applied |
-
----
-
-## Output: Volume by adjustment scenario
-
-![Volume change due to adjustments](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
-
----
-
-## Rationale for scenario comparison
-
-Comparison across adjustment scenarios addresses three questions:
-
-| Question | Implication |
-|----------|-------------|
-| Do adjustments substantially change results? | If results are similar across scenarios, findings are robust |
-| Which adjustment has greater impact? | Identifies whether completeness or outlier correction drives differences |
-| Are conclusions sensitive to assumptions? | Informs confidence in interpretation |
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_5a -->
-## Service utilization: Configuration parameters
+## Service utilization module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `SELECTEDCOUNT` | count_final_both | Data column used for analysis |
-| `SMOOTH_K` | 7 | Rolling median window size (must be odd) |
-| `MADS_THRESHOLD` | 1.5 | MAD threshold for sharp disruption detection |
-| `DIP_THRESHOLD` | 0.90 | Flag periods below 90% of expected volume |
-| `DIFFPERCENT` | 10 | Percentage threshold for visualization |
-| `RUN_DISTRICT_MODEL` | FALSE | Enable district-level regression analysis |
-| `RUN_ADMIN_AREA_4_ANALYSIS` | FALSE | Enable ward-level analysis |
+<div style="font-size: 0.8em;">
 
----
+| Parameter | Description |
+|-----------|-------------|
+| **Count variable to use for modeling** | Which adjusted count to use for calculating expected values |
+| **Count variable to use for visualization** | Which adjusted count to use as actual observed values |
+| **Run district-level model** | Run regressions at admin_area_3 level. Set to Yes for detailed analysis, No for faster runtime |
+| **Run admin_area_4 analysis** | Run finest-level analysis. Warning: can be very slow for large datasets |
+| **Threshold for MAD-based control limits** | Number of MADs to flag sharp deviations. Default 1.5; higher = less sensitive |
+| **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
+| **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
+| **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
 
-## Tuning sensitivity
-
-| Objective | Adjustment |
-|-----------|------------|
-| **More sensitive detection** | Lower `MADS_THRESHOLD` to 1.0; set `DIP_THRESHOLD` to 0.95; reduce `SMOOTH_K` to 5 |
-| **Less sensitive detection** | Increase `MADS_THRESHOLD` to 2.0; set `DIP_THRESHOLD` to 0.80; increase `SMOOTH_K` to 9 or 11 |
-| **Faster runtime** | Set `RUN_DISTRICT_MODEL` and `RUN_ADMIN_AREA_4_ANALYSIS` to FALSE |
-| **Detailed subnational analysis** | Set `RUN_DISTRICT_MODEL` to TRUE (slower) |
+</div>
 <!-- /SLIDE -->

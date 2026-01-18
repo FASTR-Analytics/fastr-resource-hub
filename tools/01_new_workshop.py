@@ -72,6 +72,7 @@ MODULE_NAMES = {
     5: 'Data Quality Adjustment',
     6: 'Data Analysis',
     7: 'Results Communication and Data Use',
+    8: 'Survey & Health Facility Assessment',
 }
 
 MODULE_SHORT_NAMES = {
@@ -83,6 +84,7 @@ MODULE_SHORT_NAMES = {
     5: 'DQ Adjust',
     6: 'Analysis',
     7: 'Results',
+    8: 'HFA',
 }
 
 # Default modules for standard workshop (recommended)

@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Service utilization analysis
+## Service utilization analysis - Module 3
 
-Analysis of health service delivery patterns to detect and quantify changes in service volumes over time.
+Detecting and quantifying changes in health service delivery over time
 
 ---
 

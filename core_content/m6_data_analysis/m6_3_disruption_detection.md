@@ -6,57 +6,51 @@ paginate: true
 
 ## Disruption detection
 
-The analysis identifies periods where service delivery deviates significantly from expected levels using a two-stage approach:
-
-| Stage | Method | Purpose |
-|-------|--------|---------|
-| **1. Control chart analysis** | Statistical process control | Identify when disruptions occur |
-| **2. Regression analysis** | Panel regression models | Quantify disruption magnitude |
+Our approach to service disruptions and surpluses utilizes an interrupted time series regression with facility-level fixed effects. Previous large and unexpected changes in historical data are removed. Unexpected volume changes are estimated by comparing observed volume to expected volume based on historical trends and seasonality.
 
 ---
 
-## Expected service volume
+## Disruptions and surpluses
 
-Expected volume is modeled using two components:
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
-| Component | Description |
-|-----------|-------------|
-| **Trend** | Long-term direction (increasing, decreasing, or stable) |
-| **Seasonality** | Predictable monthly patterns (e.g., increased malaria cases during rainy season) |
+**Disruptions** are flagged when volumes fall below anticipated levels, signaling potential barriers to access, resource shortages, or system failures.
 
-The model estimates expected volume for each month based on historical patterns. Significant deviations from expected values are flagged as potential disruptions.
-
----
-
-## Shortfalls and surpluses
-
-<div class="columns">
-<div>
-
-| Comparison | Interpretation |
-|------------|----------------|
-| **Actual = Expected** | Services delivered as anticipated |
-| **Actual < Expected** | Shortfall: fewer services than expected |
-| **Actual > Expected** | Surplus: more services than expected |
-
-Surpluses may indicate catch-up campaigns, outreach activities, or reporting changes.
+**Surpluses** occur when volumes exceed expectations, which may indicate increased demand, over-reporting, or changes in service delivery.
 
 </div>
-<div>
+<div style="flex: 2;">
 
-![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
 </div>
 
 ---
 
-## Chart interpretation
+## How it works
 
-| Element | Description |
-|---------|-------------|
-| **Black line** | Actual (observed) service volumes |
-| **Red shaded areas** | Shortfall periods (actual below expected) |
-| **Green shaded areas** | Surplus periods (actual above expected) |
+**Using past data to set expectations:** We look at the past few years of data to understand the typical pattern for each month, accounting for regular seasonal changes.
 
-The magnitude of the shaded area corresponds to the scale of the disruption.
+**Spotting unusual changes:** We compare current service volumes to expectations. If we see volumes much higher or lower than expected, we flag it as an unusual change.
+
+**Handling past disruptions:** We adjust historical data by removing previous big, unexpected changes so one-off events don't skew our understanding of what's "normal."
+
+**Detecting disruptions over time:** We look at trends to see if there are clear shifts in health service use over several months.
+
+---
+
+## Comparison to DHIS2
+
+Extension of service utilization analysis, using more complex statistical approaches not available in DHIS2.
+
+Using a regression framework, we are able to:
+
+- Account for seasonality
+- Exclude unusual changes to ensure one-off events aren't influencing normal trends
+- Use historical data as a baseline for context
+- Detect disruptions and recovery patterns
+- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
+
+This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.

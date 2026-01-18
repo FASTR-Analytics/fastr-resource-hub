@@ -4,32 +4,38 @@ theme: fastr
 paginate: true
 ---
 
-## Calculating the overall quality score
+## Data quality summary score
 
-**The composite score integrates all three data quality dimensions:**
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
 
-1. **Completeness:** Did the facility submit a report?
-2. **Outlier status:** Are reported values within plausible ranges?
-3. **Consistency:** Do related indicators demonstrate expected relationships?
-
-**Binary DQA score:**
-- Score = 1 if all three criteria are satisfied
-- Score = 0 if any criterion is not met
-
-**Mean DQA score:** Weighted average of completeness-outlier score and consistency score
-
-**Applications:**
-- Inform decisions regarding data inclusion in analyses
-- Identify facilities requiring targeted data quality support
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
 
 ---
 
-## Overall DQA score: FASTR output
+## Definition of adequate data quality
 
-![Overall DQA Score](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+For the FASTR analysis, we defined adequate data quality as:
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
+- No outliers for OPD, Penta1, and ANC1, where available, **AND**
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
 
 ---
 
-## Mean DQA score: FASTR output
+## Overall DQA score: Percent of monthly values meeting all criteria
 
-![Mean DQA Score](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+For a given indicator in a given time period, the percent of monthly values meeting all DQA criteria:
+
+**% adequate quality = # monthly values meeting all criteria / total N of monthly values**
+
+![Overall DQA Score h:480](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+---
+
+## Mean DQA score: Average of component scores
+
+The mean DQA score averages two component scores:
+
+**Mean DQA = (completeness & outlier score + consistency score) / 2**
+
+![Mean DQA Score h:480](../../resources/default_outputs/Default_6._Mean_DQA_score.png)

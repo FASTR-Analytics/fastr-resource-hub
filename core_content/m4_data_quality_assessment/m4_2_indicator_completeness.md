@@ -4,17 +4,16 @@ theme: fastr
 paginate: true
 ---
 
-## Assessing reporting completeness
+## Indicator completeness
 
-<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
 <div style="flex: 1;">
 
-**Definition:**
-The proportion of expected facility reports that were submitted within a given period.
+Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so.
 
-**Significance:**
-- Incomplete reporting limits the representativeness of aggregate data
-- Apparent declines in service volumes may reflect reporting gaps rather than actual reductions
+Higher completeness improves reliability of the data, especially when completeness is stable over time.
+
+This is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form.
 
 </div>
 <div style="flex: 2;">
@@ -26,19 +25,29 @@ The proportion of expected facility reports that were submitted within a given p
 
 ---
 
-## Interpreting completeness rates
+## Definition of indicator completeness
 
-**Reference benchmarks:**
-- 90% and above: High completeness
-- 80-89%: Moderate completeness
-- Below 80%: Substantial reporting gaps
+For the FASTR analysis, completeness is defined as:
 
-**Considerations:** Complete reporting does not capture services delivered outside the formal health system or by facilities not included in the HMIS.
+**The percentage of reporting facilities each month out of the total number of facilities expected to report.**
 
-**Key analytical questions:** Are completeness rates improving over time? Which geographic areas or facility types demonstrate lower completeness?
+- A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
+- A facility is expected to report if it has reported any volume for that indicator anytime within a year
 
 ---
 
-## Completeness: FASTR output
+## Notes on completeness
 
-![Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
+
+- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
+
+---
+
+## Completeness: Percent of monthly values that are complete
+
+For a given indicator in a given time period, the percent of monthly values that are complete:
+
+**% complete = # monthly values that are complete / total N of monthly values**
+
+![Indicator Completeness h:480](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)

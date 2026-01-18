@@ -508,8 +508,7 @@ Today we will:
 
 ## FASTR analytical pipeline
 
-<div class="columns">
-<div>
+![Analytical Pipeline h:340](../resources/diagrams/analytical_pipeline.svg)
 
 The FASTR analysis follows a sequential workflow where each step builds on the previous:
 
@@ -517,21 +516,11 @@ The FASTR analysis follows a sequential workflow where each step builds on the p
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
-Each step must be completed before moving to the next.
-
-</div>
-<div>
-
-![Analytical Pipeline](../resources/diagrams/analytical_pipeline.svg)
-
-</div>
-</div>
-
 ---
 
 
 
-## Data quality assessment
+## Data quality assessment - Module 1
 
 Evaluating the reliability of routine health information system data
 
@@ -581,17 +570,16 @@ These three dimensions provide a comprehensive assessment of data reliability fo
 
 
 
-## Assessing reporting completeness
+## Indicator completeness
 
-<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
 <div style="flex: 1;">
 
-**Definition:**
-The proportion of expected facility reports that were submitted within a given period.
+Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so.
 
-**Significance:**
-- Incomplete reporting limits the representativeness of aggregate data
-- Apparent declines in service volumes may reflect reporting gaps rather than actual reductions
+Higher completeness improves reliability of the data, especially when completeness is stable over time.
+
+This is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form.
 
 </div>
 <div style="flex: 2;">
@@ -603,103 +591,111 @@ The proportion of expected facility reports that were submitted within a given p
 
 ---
 
-## Interpreting completeness rates
+## Definition of indicator completeness
 
-**Reference benchmarks:**
-- 90% and above: High completeness
-- 80-89%: Moderate completeness
-- Below 80%: Substantial reporting gaps
+For the FASTR analysis, completeness is defined as:
 
-**Considerations:** Complete reporting does not capture services delivered outside the formal health system or by facilities not included in the HMIS.
+**The percentage of reporting facilities each month out of the total number of facilities expected to report.**
 
-**Key analytical questions:** Are completeness rates improving over time? Which geographic areas or facility types demonstrate lower completeness?
+- A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
+- A facility is expected to report if it has reported any volume for that indicator anytime within a year
 
 ---
 
-## Completeness: FASTR output
+## Notes on completeness
 
-![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
+
+- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
+
+---
+
+## Completeness: Percent of monthly values that are complete
+
+For a given indicator in a given time period, the percent of monthly values that are complete:
+
+**% complete = # monthly values that are complete / total N of monthly values**
+
+![Indicator Completeness h:480](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
 
 
-## Identifying implausible values
+## Outliers
 
-<div style="display: flex; gap: 1.5em; align-items: center;">
-<div style="flex: 1;">
+The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series.
 
-**Illustration:**
-Region A displays an anomalous increase in February that substantially exceeds values reported by other regions.
+Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems.
 
-This pattern is indicative of a data entry error. Following adjustment, all regions demonstrate consistent gradual trends.
-
-</div>
-<div style="flex: 2;">
-
-![Outlier Impact](../resources/diagrams/outlier_impact.svg)
-
-</div>
-</div>
-
----
-
-## Outlier detection methodology
-
-Outliers are identified through analysis of within-facility variation in monthly reporting for each indicator.
-
-A value is classified as an outlier if it meets EITHER criterion:
-
-1. The value exceeds 10 times the Median Absolute Deviation (MAD) from the facility's monthly median for that indicator, OR
-2. The value represents more than 80% of the total volume for a given facility, indicator, and time period
-
-AND the reported count exceeds 100.
+For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis).
 
 ---
 
 ## Outlier illustration
 
-**Health Centre B - Malaria diagnostic tests:**
+Region A displays an anomalous spike in February that substantially exceeds values reported by other regions — indicative of a data entry error or reporting issue.
 
-| Month | Tests reported | Classification |
-|-------|----------------|---------|
-| January | 245 | Within expected range |
-| February | 267 | Within expected range |
-| **March** | **2,890** | **Outlier** |
-| April | 256 | Within expected range |
-
-**Probable cause:** Data entry error (e.g., "2890" entered instead of "289")
-
-**Analytical impact:** Without adjustment, the data would indicate an erroneous increase in malaria testing during March.
+![Outlier Impact](../resources/diagrams/outlier_impact.svg)
 
 ---
 
-## Outlier prevalence: FASTR output
+## Outlier detection methodology
 
-![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
+
+An outlier is defined as:
+
+A value greater than **10 times the median absolute deviation (MAD)** from the monthly median value for the indicator in each time period, **OR** a value for which the proportional contribution in volume for a facility, indicator, and time period is **greater than 80%**
+
+**AND** for which:
+
+- The volume is **greater than or equal to the median**
+- The volume is **not missing**
+- The volume is **greater than 100**
+
+---
+
+## Outliers: Percent of monthly values that are outliers
+
+For a given indicator in a given time period, the percent of monthly values that are outliers:
+
+**% outliers = # monthly values that are outliers / total N of monthly values**
+
+![Outliers h:480](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
 
 
-## Assessing relationships between indicators
+## Consistency between related indicators
 
-Related health services demonstrate predictable relationships that can be used to assess data quality. FASTR evaluates the following indicator pairs:
+Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
 
-| Indicator pair | Expected relationship | Rationale |
-|----------------|----------------------|-----------|
-| ANC1 / ANC4 | ANC1 ≥ ANC4 | More women initiate antenatal care than complete four visits |
-| Penta1 / Penta3 | Penta1 ≥ Penta3 | More children receive the first dose than complete the series |
-| BCG / Deliveries | BCG ≈ Deliveries | BCG is administered at birth; counts should be similar |
+---
 
-Violations of these expected relationships indicate potential data quality issues requiring investigation.
+## Indicator pairs assessed
+
+FASTR assesses the following pairs of indicators to measure internal consistency:
+
+| Indicator pair | Expected relationship |
+|----------------|----------------------|
+| ANC1 / ANC4 | Ratio should be ≥ 0.95 |
+| Penta1 / Penta3 | Ratio should be ≥ 0.95 |
+| BCG / Facility delivery | Ratio should be within 30% (i.e. ≥0.7 and ≤1.3) |
+
+These pairs of indicators have expected relationships.
+
+We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
+
+BCG is a birth dose vaccine so we expect that these indicators will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
 
 ---
 
 ## Why assess consistency at district level?
 
-<div class="columns">
-<div>
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
 Patients often access different services at different facilities within a district:
 
@@ -709,7 +705,7 @@ Patients often access different services at different facilities within a distri
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
 
 </div>
-<div>
+<div style="flex: 2;">
 
 ![District consistency](../resources/diagrams/district_consistency.svg)
 
@@ -720,41 +716,47 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency h:480](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
 
 
-## Calculating the overall quality score
+## Data quality summary score
 
-**The composite score integrates all three data quality dimensions:**
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
 
-1. **Completeness:** Did the facility submit a report?
-2. **Outlier status:** Are reported values within plausible ranges?
-3. **Consistency:** Do related indicators demonstrate expected relationships?
-
-**Binary DQA score:**
-- Score = 1 if all three criteria are satisfied
-- Score = 0 if any criterion is not met
-
-**Mean DQA score:** Weighted average of completeness-outlier score and consistency score
-
-**Applications:**
-- Inform decisions regarding data inclusion in analyses
-- Identify facilities requiring targeted data quality support
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
 
 ---
 
-## Overall DQA score: FASTR output
+## Definition of adequate data quality
 
-![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+For the FASTR analysis, we defined adequate data quality as:
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
+- No outliers for OPD, Penta1, and ANC1, where available, **AND**
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
 
 ---
 
-## Mean DQA score: FASTR output
+## Overall DQA score: Percent of monthly values meeting all criteria
 
-![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+For a given indicator in a given time period, the percent of monthly values meeting all DQA criteria:
+
+**% adequate quality = # monthly values meeting all criteria / total N of monthly values**
+
+![Overall DQA Score h:480](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+---
+
+## Mean DQA score: Average of component scores
+
+The mean DQA score averages two component scores:
+
+**Mean DQA = (completeness & outlier score + consistency score) / 2**
+
+![Mean DQA Score h:480](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -762,32 +764,23 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## DQA module: Configuration parameters
 
-The Data Quality Assessment module uses configurable parameters:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `GEOLEVEL` | admin_area_3 | Geographic level for consistency analysis |
-| `OUTLIER_PROPORTION_THRESHOLD` | 0.80 | Flag if single month exceeds this proportion of annual volume |
-| `MINIMUM_COUNT_THRESHOLD` | 100 | Only flag outliers with count above this threshold |
-| `MADS` | 10 | Number of MADs for statistical outlier detection |
-| `DQA_INDICATORS` | penta1, anc1, opd | Core indicators for DQA scoring |
-| `CONSISTENCY_PAIRS_USED` | penta, anc | Indicator pairs for consistency assessment |
-
----
-
-## Tuning DQA parameters
-
-| Objective | Adjustment |
-|-----------|------------|
-| **More sensitive outlier detection** | Lower `MADS` to 8; lower `OUTLIER_PROPORTION_THRESHOLD` to 0.6–0.7 |
-| **Less sensitive outlier detection** | Increase `MADS` to 12–15; increase `OUTLIER_PROPORTION_THRESHOLD` to 0.9 |
-| **Include small facilities** | Lower `MINIMUM_COUNT_THRESHOLD` to 50 |
-| **Focus on large facilities** | Increase `MINIMUM_COUNT_THRESHOLD` to 200+ |
-| **Coarser consistency analysis** | Set `GEOLEVEL` to admin_area_2 |
+| Parameter | Description |
+|-----------|-------------|
+| **Proportion threshold for outlier detection** | Adjusts the threshold for proportional contribution to flag a facility-month as an outlier |
+| **Minimum count threshold for consideration** | Defines the minimum count required for a facility-month to be considered an outlier |
+| **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
+| **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
+| **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
 
 ---
 
 
+
+## Data quality adjustment - Module 2
+
+Correcting outliers and imputing missing values to improve data reliability
+
+---
 
 ## Rationale for data quality adjustment
 
@@ -826,38 +819,68 @@ Certain indicators are excluded from the adjustment process:
 
 
 
-## Adjustment module: Configuration parameters
+## Outlier adjustment methodology
 
-The Data Quality Adjustment module uses these key parameters:
+Outlier values are replaced using facility-specific historical data. The adjustment follows a hierarchical approach:
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **Rolling window** | 6 months | Window size for calculating replacement values |
-| **Low volume threshold** | 100 | Indicators never exceeding this count are excluded from outlier adjustment |
+| Priority | Method | Application |
+|----------|--------|-------------|
+| 1 | Centered 6-month average | 3 months before + 3 months after the outlier |
+| 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
+| 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
+| 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
+| 5 | Facility historical mean | Fallback when no other method is applicable |
 
 ---
 
-## Adjustment hierarchy
+## Outlier adjustment: FASTR output
 
-When replacing outliers or filling missing values, the module applies methods in priority order:
+![Percent change in volume due to outlier adjustment. h:400](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
-| Priority | Method | When used |
-|----------|--------|-----------|
-| 1 | Centered 6-month average | Default: 3 months before + 3 months after |
-| 2 | Forward 6-month average | When insufficient preceding data |
-| 3 | Backward 6-month average | When insufficient following data |
-| 4 | Same month, previous year | For seasonal indicators when rolling averages unavailable |
-| 5 | Facility historical mean | Fallback when no other method available |
-
-**Excluded indicators:** Mortality-related indicators (maternal deaths, neonatal deaths, under-5 deaths) are never adjusted.
+**Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.
 
 ---
 
 
 
-## Service utilization analysis
+## Completeness adjustment methodology
 
-Analysis of health service delivery patterns to detect and quantify changes in service volumes over time.
+For months identified as incomplete or missing, values are imputed using the same 6-month rolling average approach applied to outlier adjustment.
+
+| Priority | Method | Application |
+|----------|--------|-------------|
+| 1 | Centered 6-month average | When sufficient data exists before and after the gap |
+| 2 | Forward 6-month average | For gaps at the start of the time series |
+| 3 | Backward 6-month average | For gaps at the end of the time series |
+| 4 | Facility historical mean | Fallback when rolling averages unavailable |
+
+This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
+
+---
+
+## Completeness adjustment: FASTR output
+
+![Percent change in volume due to completeness adjustment. h:400](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+**Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.
+
+---
+
+
+
+## Combined adjustment: FASTR output
+
+When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
+
+![Percent change in volume due to both outlier and completeness adjustment. h:480](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+
+---
+
+
+
+## Service utilization analysis - Module 3
+
+Detecting and quantifying changes in health service delivery over time
 
 ---
 
@@ -881,7 +904,7 @@ Statistical comparison of observed volumes against expected levels—derived fro
 
 For each indicator and region, total volume in the current year is compared to the previous year:
 
-$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+**Percent change = (Current year − Previous year) / Previous year × 100**
 
 Changes exceeding **±10%** are flagged for review.
 
@@ -889,7 +912,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:480](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
@@ -911,60 +934,54 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Disruption detection
 
-The analysis identifies periods where service delivery deviates significantly from expected levels using a two-stage approach:
-
-| Stage | Method | Purpose |
-|-------|--------|---------|
-| **1. Control chart analysis** | Statistical process control | Identify when disruptions occur |
-| **2. Regression analysis** | Panel regression models | Quantify disruption magnitude |
+Our approach to service disruptions and surpluses utilizes an interrupted time series regression with facility-level fixed effects. Previous large and unexpected changes in historical data are removed. Unexpected volume changes are estimated by comparing observed volume to expected volume based on historical trends and seasonality.
 
 ---
 
-## Expected service volume
+## Disruptions and surpluses
 
-Expected volume is modeled using two components:
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
-| Component | Description |
-|-----------|-------------|
-| **Trend** | Long-term direction (increasing, decreasing, or stable) |
-| **Seasonality** | Predictable monthly patterns (e.g., increased malaria cases during rainy season) |
+**Disruptions** are flagged when volumes fall below anticipated levels, signaling potential barriers to access, resource shortages, or system failures.
 
-The model estimates expected volume for each month based on historical patterns. Significant deviations from expected values are flagged as potential disruptions.
-
----
-
-## Shortfalls and surpluses
-
-<div class="columns">
-<div>
-
-| Comparison | Interpretation |
-|------------|----------------|
-| **Actual = Expected** | Services delivered as anticipated |
-| **Actual < Expected** | Shortfall: fewer services than expected |
-| **Actual > Expected** | Surplus: more services than expected |
-
-Surpluses may indicate catch-up campaigns, outreach activities, or reporting changes.
+**Surpluses** occur when volumes exceed expectations, which may indicate increased demand, over-reporting, or changes in service delivery.
 
 </div>
-<div>
+<div style="flex: 2;">
 
-![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
 </div>
 
 ---
 
-## Chart interpretation
+## How it works
 
-| Element | Description |
-|---------|-------------|
-| **Black line** | Actual (observed) service volumes |
-| **Red shaded areas** | Shortfall periods (actual below expected) |
-| **Green shaded areas** | Surplus periods (actual above expected) |
+**Using past data to set expectations:** We look at the past few years of data to understand the typical pattern for each month, accounting for regular seasonal changes.
 
-The magnitude of the shaded area corresponds to the scale of the disruption.
+**Spotting unusual changes:** We compare current service volumes to expectations. If we see volumes much higher or lower than expected, we flag it as an unusual change.
+
+**Handling past disruptions:** We adjust historical data by removing previous big, unexpected changes so one-off events don't skew our understanding of what's "normal."
+
+**Detecting disruptions over time:** We look at trends to see if there are clear shifts in health service use over several months.
+
+---
+
+## Comparison to DHIS2
+
+Extension of service utilization analysis, using more complex statistical approaches not available in DHIS2.
+
+Using a regression framework, we are able to:
+
+- Account for seasonality
+- Exclude unusual changes to ensure one-off events aren't influencing normal trends
+- Use historical data as a baseline for context
+- Detect disruptions and recovery patterns
+- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
+
+This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
 
 ---
 
@@ -972,7 +989,7 @@ The magnitude of the shaded area corresponds to the scale of the disruption.
 
 ## Output: Actual vs expected (national)
 
-![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected national h:420](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
@@ -980,7 +997,7 @@ National-level comparison of observed service volumes against expected values de
 
 ## Output: Actual vs expected (subnational)
 
-![Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Actual vs expected subnational h:420](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 
@@ -988,81 +1005,46 @@ Subnational disaggregation enables identification of geographic areas where disr
 
 
 
-## Data quality adjustment scenarios
+## Service utilization module: Configuration parameters
 
-The analysis supports four data versions to assess sensitivity to adjustment assumptions:
+<div style="font-size: 0.8em;">
 
-| Scenario | Description |
-|----------|-------------|
-| **No adjustment** | Raw reported values |
-| **Outlier adjustment** | Extreme values corrected |
-| **Completeness adjustment** | Adjusted for missing facility reports |
-| **Both adjustments** | Outlier and completeness adjustments applied |
+| Parameter | Description |
+|-----------|-------------|
+| **Count variable to use for modeling** | Which adjusted count to use for calculating expected values |
+| **Count variable to use for visualization** | Which adjusted count to use as actual observed values |
+| **Run district-level model** | Run regressions at admin_area_3 level. Set to Yes for detailed analysis, No for faster runtime |
+| **Run admin_area_4 analysis** | Run finest-level analysis. Warning: can be very slow for large datasets |
+| **Threshold for MAD-based control limits** | Number of MADs to flag sharp deviations. Default 1.5; higher = less sensitive |
+| **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
+| **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
+| **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
 
----
-
-## Output: Volume by adjustment scenario
-
-![Volume change due to adjustments](../resources/default_outputs/Module3_4_Volume_change_adjustments.png)
-
----
-
-## Rationale for scenario comparison
-
-Comparison across adjustment scenarios addresses three questions:
-
-| Question | Implication |
-|----------|-------------|
-| Do adjustments substantially change results? | If results are similar across scenarios, findings are robust |
-| Which adjustment has greater impact? | Identifies whether completeness or outlier correction drives differences |
-| Are conclusions sensitive to assumptions? | Informs confidence in interpretation |
+</div>
 
 ---
 
 
 
-## Service utilization: Configuration parameters
+## Service coverage estimates - Module 4
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `SELECTEDCOUNT` | count_final_both | Data column used for analysis |
-| `SMOOTH_K` | 7 | Rolling median window size (must be odd) |
-| `MADS_THRESHOLD` | 1.5 | MAD threshold for sharp disruption detection |
-| `DIP_THRESHOLD` | 0.90 | Flag periods below 90% of expected volume |
-| `DIFFPERCENT` | 10 | Percentage threshold for visualization |
-| `RUN_DISTRICT_MODEL` | FALSE | Enable district-level regression analysis |
-| `RUN_ADMIN_AREA_4_ANALYSIS` | FALSE | Enable ward-level analysis |
+Estimating the percentage of the target population that received a given health service
 
 ---
 
-## Tuning sensitivity
+## Our approach to service coverage analysis
 
-| Objective | Adjustment |
-|-----------|------------|
-| **More sensitive detection** | Lower `MADS_THRESHOLD` to 1.0; set `DIP_THRESHOLD` to 0.95; reduce `SMOOTH_K` to 5 |
-| **Less sensitive detection** | Increase `MADS_THRESHOLD` to 2.0; set `DIP_THRESHOLD` to 0.80; increase `SMOOTH_K` to 9 or 11 |
-| **Faster runtime** | Set `RUN_DISTRICT_MODEL` and `RUN_ADMIN_AREA_4_ANALYSIS` to FALSE |
-| **Detailed subnational analysis** | Set `RUN_DISTRICT_MODEL` to TRUE (slower) |
+Our approach derives and validates population denominators, significantly improving coverage estimates reported from HMIS systems.
 
----
+In countries with accurate data, this approach helps identify subnational inequities and updates outdated estimates, while in countries with less precise data, the trends still provide valuable insights into performance.
 
-
-
-## Service coverage estimates
-
-The Coverage Estimates module estimates health service coverage: the percentage of the target population that received a given health service.
-
-**Data sources:**
-
-| Source | Purpose |
-|--------|---------|
-| HMIS | Adjusted health service volumes |
-| UN WPP | Population projections |
-| DHS/MICS | Household survey benchmarks |
+We use these estimates to track recent trends and subnational disparities in the coverage of selected health services.
 
 ---
 
-### Two-part analytical process
+## Two-part analytical process
+
+The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|
@@ -1073,11 +1055,11 @@ The Coverage Estimates module estimates health service coverage: the percentage 
 
 
 
-## Definition of service coverage
+## What is service coverage?
 
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
-![Coverage equation](../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:420](../resources/diagrams/coverage_equation.svg)
 
 ---
 
@@ -1103,7 +1085,7 @@ Each health indicator corresponds to a specific target population:
 
 Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
 
-![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
+![Denominator cascade flowchart h:480](../resources/diagrams/denominator_cascade.svg)
 
 ---
 
@@ -1113,7 +1095,7 @@ Sequential demographic adjustments transform one target population estimate into
 
 Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
 
-![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example h:480](../resources/diagrams/denominator_cascade_example.svg)
 
 ---
 
@@ -1171,7 +1153,7 @@ Selection is made per indicator and geographic area. Users may override automati
 
 The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
-![Coverage projection method](../resources/diagrams/coverage_projection.svg)
+![Coverage projection method h:400](../resources/diagrams/coverage_projection.svg)
 
 Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
 
@@ -1193,7 +1175,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (national)
 
-![Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Coverage calculated from HMIS data at national level. h:520](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 ---
 
@@ -1201,7 +1183,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+![Coverage calculated from HMIS data at admin area 2 level. h:520](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 ---
 
@@ -1209,7 +1191,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (district)
 
-![Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![Coverage calculated from HMIS data at admin area 3 level. h:520](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
 ---
 
@@ -1217,33 +1199,23 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Coverage module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `ANALYSIS_LEVEL` | NATIONAL_PLUS_AA2 | Geographic scope for analysis |
-| `SELECTED_COUNT_VARIABLE` | count_final_both | Which adjusted count to use |
+<div style="font-size: 0.8em;">
 
-**Analysis level options:**
-- `NATIONAL_ONLY` — National analysis only
-- `NATIONAL_PLUS_AA2` — National + provinces/regions
-- `NATIONAL_PLUS_AA2_AA3` — National + provinces + districts
+| Parameter | Description |
+|-----------|-------------|
+| **Count value to use** | Which adjusted count to use for coverage calculation |
+| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
+| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
+| **Twin rate** | Proportion of deliveries resulting in twins |
+| **Stillbirth rate** | Proportion of births that are stillbirths |
+| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
+| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
+| **Infant mortality rate** | Deaths before age 1 per live birth |
+| **Under 5 mortality rate** | Deaths before age 5 per live birth |
 
----
+</div>
 
-## Demographic adjustment parameters
-
-These parameters adjust denominators for the target population:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `PREGNANCY_LOSS_RATE` | 0.03 | 3% pregnancy loss |
-| `TWIN_RATE` | 0.015 | 1.5% twin births |
-| `STILLBIRTH_RATE` | 0.02 | 2% stillbirths |
-| `P1_NMR` | 0.039 | Neonatal mortality rate |
-| `P2_PNMR` | 0.028 | Post-neonatal mortality rate |
-| `INFANT_MORTALITY_RATE` | 0.063 | Infant mortality rate |
-| `UNDER5_MORTALITY_RATE` | 0.103 | Under-5 mortality rate |
-
-**Note:** Country-specific rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 
 ---
 

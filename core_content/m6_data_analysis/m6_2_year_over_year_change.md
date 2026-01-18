@@ -10,7 +10,7 @@ paginate: true
 
 For each indicator and region, total volume in the current year is compared to the previous year:
 
-$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+**Percent change = (Current year − Previous year) / Previous year × 100**
 
 Changes exceeding **±10%** are flagged for review.
 
@@ -18,7 +18,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:480](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 

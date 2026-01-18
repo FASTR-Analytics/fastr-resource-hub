@@ -4,25 +4,19 @@ theme: fastr
 paginate: true
 ---
 
-## Service utilization: Configuration parameters
+## Service utilization module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `SELECTEDCOUNT` | count_final_both | Data column used for analysis |
-| `SMOOTH_K` | 7 | Rolling median window size (must be odd) |
-| `MADS_THRESHOLD` | 1.5 | MAD threshold for sharp disruption detection |
-| `DIP_THRESHOLD` | 0.90 | Flag periods below 90% of expected volume |
-| `DIFFPERCENT` | 10 | Percentage threshold for visualization |
-| `RUN_DISTRICT_MODEL` | FALSE | Enable district-level regression analysis |
-| `RUN_ADMIN_AREA_4_ANALYSIS` | FALSE | Enable ward-level analysis |
+<div style="font-size: 0.8em;">
 
----
+| Parameter | Description |
+|-----------|-------------|
+| **Count variable to use for modeling** | Which adjusted count to use for calculating expected values |
+| **Count variable to use for visualization** | Which adjusted count to use as actual observed values |
+| **Run district-level model** | Run regressions at admin_area_3 level. Set to Yes for detailed analysis, No for faster runtime |
+| **Run admin_area_4 analysis** | Run finest-level analysis. Warning: can be very slow for large datasets |
+| **Threshold for MAD-based control limits** | Number of MADs to flag sharp deviations. Default 1.5; higher = less sensitive |
+| **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
+| **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
+| **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
 
-## Tuning sensitivity
-
-| Objective | Adjustment |
-|-----------|------------|
-| **More sensitive detection** | Lower `MADS_THRESHOLD` to 1.0; set `DIP_THRESHOLD` to 0.95; reduce `SMOOTH_K` to 5 |
-| **Less sensitive detection** | Increase `MADS_THRESHOLD` to 2.0; set `DIP_THRESHOLD` to 0.80; increase `SMOOTH_K` to 9 or 11 |
-| **Faster runtime** | Set `RUN_DISTRICT_MODEL` and `RUN_ADMIN_AREA_4_ANALYSIS` to FALSE |
-| **Detailed subnational analysis** | Set `RUN_DISTRICT_MODEL` to TRUE (slower) |
+</div>

@@ -4,8 +4,8 @@ theme: fastr
 paginate: true
 ---
 
-## Definition of service coverage
+## What is service coverage?
 
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
-![Coverage equation](../../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:420](../../resources/diagrams/coverage_equation.svg)

@@ -4,6 +4,12 @@ theme: fastr
 paginate: true
 ---
 
+## Data quality adjustment - Module 2
+
+Correcting outliers and imputing missing values to improve data reliability
+
+---
+
 ## Rationale for data quality adjustment
 
 Routine HMIS data contain two common limitations that can distort analytical results:

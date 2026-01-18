@@ -1750,21 +1750,25 @@ Same as national, plus:
 -->
 
 <!-- SLIDE:m6_6 -->
-## Service coverage estimates
+## Service coverage estimates - Module 4
 
-The Coverage Estimates module estimates health service coverage: the percentage of the target population that received a given health service.
-
-**Data sources:**
-
-| Source | Purpose |
-|--------|---------|
-| HMIS | Adjusted health service volumes |
-| UN WPP | Population projections |
-| DHS/MICS | Household survey benchmarks |
+Estimating the percentage of the target population that received a given health service
 
 ---
 
-### Two-part analytical process
+## Our approach to service coverage analysis
+
+Our approach derives and validates population denominators, significantly improving coverage estimates reported from HMIS systems.
+
+In countries with accurate data, this approach helps identify subnational inequities and updates outdated estimates, while in countries with less precise data, the trends still provide valuable insights into performance.
+
+We use these estimates to track recent trends and subnational disparities in the coverage of selected health services.
+
+---
+
+## Two-part analytical process
+
+The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|
@@ -1773,7 +1777,7 @@ The Coverage Estimates module estimates health service coverage: the percentage 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
-## Definition of service coverage
+## What is service coverage?
 
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
@@ -1893,31 +1897,21 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 <!-- SLIDE:m6_19 -->
 ## Coverage module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `ANALYSIS_LEVEL` | NATIONAL_PLUS_AA2 | Geographic scope for analysis |
-| `SELECTED_COUNT_VARIABLE` | count_final_both | Which adjusted count to use |
+<div style="font-size: 0.8em;">
 
-**Analysis level options:**
-- `NATIONAL_ONLY` — National analysis only
-- `NATIONAL_PLUS_AA2` — National + provinces/regions
-- `NATIONAL_PLUS_AA2_AA3` — National + provinces + districts
+| Parameter | Description |
+|-----------|-------------|
+| **Count value to use** | Which adjusted count to use for coverage calculation |
+| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
+| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
+| **Twin rate** | Proportion of deliveries resulting in twins |
+| **Stillbirth rate** | Proportion of births that are stillbirths |
+| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
+| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
+| **Infant mortality rate** | Deaths before age 1 per live birth |
+| **Under 5 mortality rate** | Deaths before age 5 per live birth |
 
----
+</div>
 
-## Demographic adjustment parameters
-
-These parameters adjust denominators for the target population:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `PREGNANCY_LOSS_RATE` | 0.03 | 3% pregnancy loss |
-| `TWIN_RATE` | 0.015 | 1.5% twin births |
-| `STILLBIRTH_RATE` | 0.02 | 2% stillbirths |
-| `P1_NMR` | 0.039 | Neonatal mortality rate |
-| `P2_PNMR` | 0.028 | Post-neonatal mortality rate |
-| `INFANT_MORTALITY_RATE` | 0.063 | Infant mortality rate |
-| `UNDER5_MORTALITY_RATE` | 0.103 | Under-5 mortality rate |
-
-**Note:** Country-specific rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 <!-- /SLIDE -->

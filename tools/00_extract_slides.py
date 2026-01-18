@@ -115,14 +115,12 @@ TOPIC_NAMES = {
     'm5_2': 'adjustment_for_outliers',
     'm5_3': 'adjustment_for_completeness',
     'm5_4': 'adjusting_dq_in_platform',
-    'm5_5': 'adjustment_configuration_parameters',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization_analysis',
     'm6_2': 'year_over_year_change',
     'm6_3': 'disruption_detection',
     'm6_4': 'actual_vs_expected_outputs',
-    'm6_5': 'data_quality_adjustment_scenarios',
     'm6_5a': 'service_utilization_configuration_parameters',
     'm6_6': 'service_coverage_introduction',
     'm6_7': 'definition_of_coverage',

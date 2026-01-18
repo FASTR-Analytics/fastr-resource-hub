@@ -878,6 +878,12 @@ For the combined adjustment heatmap (output 3):
 -->
 
 <!-- SLIDE:m5_1 -->
+## Data quality adjustment - Module 2
+
+Correcting outliers and imputing missing values to improve data reliability
+
+---
+
 ## Rationale for data quality adjustment
 
 Routine HMIS data contain two common limitations that can distort analytical results:
@@ -963,39 +969,4 @@ This approach prevents temporary reporting gaps from creating artificial decline
 When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
 
 ![Percent change in volume due to both outlier and completeness adjustment.](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
-
-**Interpretation:**
-
-| Value | Meaning |
-|-------|---------|
-| **Negative** | Outlier effect dominates (extreme values reduced volume) |
-| **Positive** | Completeness effect dominates (imputed values increased volume) |
-| **Near zero** | Minimal adjustment required; data quality was high |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m5_5 -->
-## Adjustment module: Configuration parameters
-
-The Data Quality Adjustment module uses these key parameters:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **Rolling window** | 6 months | Window size for calculating replacement values |
-| **Low volume threshold** | 100 | Indicators never exceeding this count are excluded from outlier adjustment |
-
----
-
-## Adjustment hierarchy
-
-When replacing outliers or filling missing values, the module applies methods in priority order:
-
-| Priority | Method | When used |
-|----------|--------|-----------|
-| 1 | Centered 6-month average | Default: 3 months before + 3 months after |
-| 2 | Forward 6-month average | When insufficient preceding data |
-| 3 | Backward 6-month average | When insufficient following data |
-| 4 | Same month, previous year | For seasonal indicators when rolling averages unavailable |
-| 5 | Facility historical mean | Fallback when no other method available |
-
-**Excluded indicators:** Mortality-related indicators (maternal deaths, neonatal deaths, under-5 deaths) are never adjusted.
 <!-- /SLIDE -->

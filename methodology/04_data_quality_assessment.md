@@ -1521,8 +1521,8 @@ The module follows this sequence:
 <!-- SLIDE:m4_0 -->
 ## FASTR analytical pipeline
 
-<div class="columns">
-<div>
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
 The FASTR analysis follows a sequential workflow where each step builds on the previous:
 
@@ -1530,10 +1530,8 @@ The FASTR analysis follows a sequential workflow where each step builds on the p
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
-Each step must be completed before moving to the next.
-
 </div>
-<div>
+<div style="flex: 2;">
 
 ![Analytical Pipeline](resources/diagrams/analytical_pipeline.svg)
 
@@ -1542,7 +1540,7 @@ Each step must be completed before moving to the next.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
-## Data quality assessment
+## Data quality assessment - Module 1
 
 Evaluating the reliability of routine health information system data
 
@@ -1590,17 +1588,16 @@ These three dimensions provide a comprehensive assessment of data reliability fo
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
-## Assessing reporting completeness
+## Indicator completeness
 
-<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
 <div style="flex: 1;">
 
-**Definition:**
-The proportion of expected facility reports that were submitted within a given period.
+Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so.
 
-**Significance:**
-- Incomplete reporting limits the representativeness of aggregate data
-- Apparent declines in service volumes may reflect reporting gaps rather than actual reductions
+Higher completeness improves reliability of the data, especially when completeness is stable over time.
+
+This is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form.
 
 </div>
 <div style="flex: 2;">
@@ -1612,99 +1609,107 @@ The proportion of expected facility reports that were submitted within a given p
 
 ---
 
-## Interpreting completeness rates
+## Definition of indicator completeness
 
-**Reference benchmarks:**
-- 90% and above: High completeness
-- 80-89%: Moderate completeness
-- Below 80%: Substantial reporting gaps
+For the FASTR analysis, completeness is defined as:
 
-**Considerations:** Complete reporting does not capture services delivered outside the formal health system or by facilities not included in the HMIS.
+**The percentage of reporting facilities each month out of the total number of facilities expected to report.**
 
-**Key analytical questions:** Are completeness rates improving over time? Which geographic areas or facility types demonstrate lower completeness?
+- A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
+- A facility is expected to report if it has reported any volume for that indicator anytime within a year
 
 ---
 
-## Completeness: FASTR output
+## Notes on completeness
+
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
+
+- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
+
+---
+
+## Completeness: Percent of monthly values that are complete
+
+For a given indicator in a given time period, the percent of monthly values that are complete:
+
+**% complete = # monthly values that are complete / total N of monthly values**
 
 ![Indicator Completeness](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3 -->
-## Identifying implausible values
+## Outliers
 
-<div style="display: flex; gap: 1.5em; align-items: center;">
-<div style="flex: 1;">
+The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series.
 
-**Illustration:**
-Region A displays an anomalous increase in February that substantially exceeds values reported by other regions.
+Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems.
 
-This pattern is indicative of a data entry error. Following adjustment, all regions demonstrate consistent gradual trends.
-
-</div>
-<div style="flex: 2;">
-
-![Outlier Impact](resources/diagrams/outlier_impact.svg)
-
-</div>
-</div>
-
----
-
-## Outlier detection methodology
-
-Outliers are identified through analysis of within-facility variation in monthly reporting for each indicator.
-
-A value is classified as an outlier if it meets EITHER criterion:
-
-1. The value exceeds 10 times the Median Absolute Deviation (MAD) from the facility's monthly median for that indicator, OR
-2. The value represents more than 80% of the total volume for a given facility, indicator, and time period
-
-AND the reported count exceeds 100.
+For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis).
 
 ---
 
 ## Outlier illustration
 
-**Health Centre B - Malaria diagnostic tests:**
+Region A displays an anomalous spike in February that substantially exceeds values reported by other regions — indicative of a data entry error or reporting issue.
 
-| Month | Tests reported | Classification |
-|-------|----------------|---------|
-| January | 245 | Within expected range |
-| February | 267 | Within expected range |
-| **March** | **2,890** | **Outlier** |
-| April | 256 | Within expected range |
-
-**Probable cause:** Data entry error (e.g., "2890" entered instead of "289")
-
-**Analytical impact:** Without adjustment, the data would indicate an erroneous increase in malaria testing during March.
+![Outlier Impact](resources/diagrams/outlier_impact.svg)
 
 ---
 
-## Outlier prevalence: FASTR output
+## Outlier detection methodology
+
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
+
+An outlier is defined as:
+
+A value greater than **10 times the median absolute deviation (MAD)** from the monthly median value for the indicator in each time period, **OR** a value for which the proportional contribution in volume for a facility, indicator, and time period is **greater than 80%**
+
+**AND** for which:
+
+- The volume is **greater than or equal to the median**
+- The volume is **not missing**
+- The volume is **greater than 100**
+
+---
+
+## Outliers: Percent of monthly values that are outliers
+
+For a given indicator in a given time period, the percent of monthly values that are outliers:
+
+**% outliers = # monthly values that are outliers / total N of monthly values**
 
 ![Outliers](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
-## Assessing relationships between indicators
+## Consistency between related indicators
 
-Related health services demonstrate predictable relationships that can be used to assess data quality. FASTR evaluates the following indicator pairs:
+Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
 
-| Indicator pair | Expected relationship | Rationale |
-|----------------|----------------------|-----------|
-| ANC1 / ANC4 | ANC1 ≥ ANC4 | More women initiate antenatal care than complete four visits |
-| Penta1 / Penta3 | Penta1 ≥ Penta3 | More children receive the first dose than complete the series |
-| BCG / Deliveries | BCG ≈ Deliveries | BCG is administered at birth; counts should be similar |
+---
 
-Violations of these expected relationships indicate potential data quality issues requiring investigation.
+## Indicator pairs assessed
+
+FASTR assesses the following pairs of indicators to measure internal consistency:
+
+| Indicator pair | Expected relationship |
+|----------------|----------------------|
+| ANC1 / ANC4 | Ratio should be ≥ 0.95 |
+| Penta1 / Penta3 | Ratio should be ≥ 0.95 |
+| BCG / Facility delivery | Ratio should be within 30% (i.e. ≥0.7 and ≤1.3) |
+
+These pairs of indicators have expected relationships.
+
+We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
+
+BCG is a birth dose vaccine so we expect that these indicators will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
 
 ---
 
 ## Why assess consistency at district level?
 
-<div class="columns">
-<div>
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
 Patients often access different services at different facilities within a district:
 
@@ -1714,7 +1719,7 @@ Patients often access different services at different facilities within a distri
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
 
 </div>
-<div>
+<div style="flex: 2;">
 
 ![District consistency](resources/diagrams/district_consistency.svg)
 
@@ -1729,33 +1734,39 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_5 -->
-## Calculating the overall quality score
+## Data quality summary score
 
-**The composite score integrates all three data quality dimensions:**
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
 
-1. **Completeness:** Did the facility submit a report?
-2. **Outlier status:** Are reported values within plausible ranges?
-3. **Consistency:** Do related indicators demonstrate expected relationships?
-
-**Binary DQA score:**
-- Score = 1 if all three criteria are satisfied
-- Score = 0 if any criterion is not met
-
-**Mean DQA score:** Weighted average of completeness-outlier score and consistency score
-
-**Applications:**
-- Inform decisions regarding data inclusion in analyses
-- Identify facilities requiring targeted data quality support
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
 
 ---
 
-## Overall DQA score: FASTR output
+## Definition of adequate data quality
+
+For the FASTR analysis, we defined adequate data quality as:
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
+- No outliers for OPD, Penta1, and ANC1, where available, **AND**
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+
+---
+
+## Overall DQA score: Percent of monthly values meeting all criteria
+
+For a given indicator in a given time period, the percent of monthly values meeting all DQA criteria:
+
+**% adequate quality = # monthly values meeting all criteria / total N of monthly values**
 
 ![Overall DQA Score](resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
-## Mean DQA score: FASTR output
+## Mean DQA score: Average of component scores
+
+The mean DQA score averages two component scores:
+
+**Mean DQA = (completeness & outlier score + consistency score) / 2**
 
 ![Mean DQA Score](resources/default_outputs/Default_6._Mean_DQA_score.png)
 <!-- /SLIDE -->
@@ -1763,27 +1774,12 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 <!-- SLIDE:m4_6 -->
 ## DQA module: Configuration parameters
 
-The Data Quality Assessment module uses configurable parameters:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `GEOLEVEL` | admin_area_3 | Geographic level for consistency analysis |
-| `OUTLIER_PROPORTION_THRESHOLD` | 0.80 | Flag if single month exceeds this proportion of annual volume |
-| `MINIMUM_COUNT_THRESHOLD` | 100 | Only flag outliers with count above this threshold |
-| `MADS` | 10 | Number of MADs for statistical outlier detection |
-| `DQA_INDICATORS` | penta1, anc1, opd | Core indicators for DQA scoring |
-| `CONSISTENCY_PAIRS_USED` | penta, anc | Indicator pairs for consistency assessment |
-
----
-
-## Tuning DQA parameters
-
-| Objective | Adjustment |
-|-----------|------------|
-| **More sensitive outlier detection** | Lower `MADS` to 8; lower `OUTLIER_PROPORTION_THRESHOLD` to 0.6–0.7 |
-| **Less sensitive outlier detection** | Increase `MADS` to 12–15; increase `OUTLIER_PROPORTION_THRESHOLD` to 0.9 |
-| **Include small facilities** | Lower `MINIMUM_COUNT_THRESHOLD` to 50 |
-| **Focus on large facilities** | Increase `MINIMUM_COUNT_THRESHOLD` to 200+ |
-| **Coarser consistency analysis** | Set `GEOLEVEL` to admin_area_2 |
+| Parameter | Description |
+|-----------|-------------|
+| **Proportion threshold for outlier detection** | Adjusts the threshold for proportional contribution to flag a facility-month as an outlier |
+| **Minimum count threshold for consideration** | Defines the minimum count required for a facility-month to be considered an outlier |
+| **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
+| **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
+| **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
 <!-- /SLIDE -->
 

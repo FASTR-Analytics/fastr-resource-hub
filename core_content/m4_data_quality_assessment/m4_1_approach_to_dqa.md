@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Data quality assessment
+## Data quality assessment - Module 1
 
 Evaluating the reliability of routine health information system data
 

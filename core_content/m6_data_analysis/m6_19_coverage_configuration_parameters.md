@@ -6,30 +6,20 @@ paginate: true
 
 ## Coverage module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `ANALYSIS_LEVEL` | NATIONAL_PLUS_AA2 | Geographic scope for analysis |
-| `SELECTED_COUNT_VARIABLE` | count_final_both | Which adjusted count to use |
+<div style="font-size: 0.8em;">
 
-**Analysis level options:**
-- `NATIONAL_ONLY` — National analysis only
-- `NATIONAL_PLUS_AA2` — National + provinces/regions
-- `NATIONAL_PLUS_AA2_AA3` — National + provinces + districts
+| Parameter | Description |
+|-----------|-------------|
+| **Count value to use** | Which adjusted count to use for coverage calculation |
+| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
+| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
+| **Twin rate** | Proportion of deliveries resulting in twins |
+| **Stillbirth rate** | Proportion of births that are stillbirths |
+| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
+| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
+| **Infant mortality rate** | Deaths before age 1 per live birth |
+| **Under 5 mortality rate** | Deaths before age 5 per live birth |
 
----
+</div>
 
-## Demographic adjustment parameters
-
-These parameters adjust denominators for the target population:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `PREGNANCY_LOSS_RATE` | 0.03 | 3% pregnancy loss |
-| `TWIN_RATE` | 0.015 | 1.5% twin births |
-| `STILLBIRTH_RATE` | 0.02 | 2% stillbirths |
-| `P1_NMR` | 0.039 | Neonatal mortality rate |
-| `P2_PNMR` | 0.028 | Post-neonatal mortality rate |
-| `INFANT_MORTALITY_RATE` | 0.063 | Infant mortality rate |
-| `UNDER5_MORTALITY_RATE` | 0.103 | Under-5 mortality rate |
-
-**Note:** Country-specific rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.

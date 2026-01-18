@@ -4,21 +4,25 @@ theme: fastr
 paginate: true
 ---
 
-## Service coverage estimates
+## Service coverage estimates - Module 4
 
-The Coverage Estimates module estimates health service coverage: the percentage of the target population that received a given health service.
-
-**Data sources:**
-
-| Source | Purpose |
-|--------|---------|
-| HMIS | Adjusted health service volumes |
-| UN WPP | Population projections |
-| DHS/MICS | Household survey benchmarks |
+Estimating the percentage of the target population that received a given health service
 
 ---
 
-### Two-part analytical process
+## Our approach to service coverage analysis
+
+Our approach derives and validates population denominators, significantly improving coverage estimates reported from HMIS systems.
+
+In countries with accurate data, this approach helps identify subnational inequities and updates outdated estimates, while in countries with less precise data, the trends still provide valuable insights into performance.
+
+We use these estimates to track recent trends and subnational disparities in the coverage of selected health services.
+
+---
+
+## Two-part analytical process
+
+The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|
