@@ -98,7 +98,8 @@
       "Bash(mkdocs gh-deploy:*)",
       "Bash(gh run list:*)",
       "Bash(python:*)",
-      "Bash(npx @marp-team/marp-cli)"
+      "Bash(npx @marp-team/marp-cli)",
+      "Bash(npx @marp-team/marp-cli:*)"
     ]
   }
 }

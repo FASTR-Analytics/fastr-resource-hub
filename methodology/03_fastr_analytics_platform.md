@@ -16,6 +16,10 @@ The platform provides comprehensive data management functionality. Users can imp
 
 Analytical capabilities are delivered through configurable modules. Users can enable and configure analytical modules that process data using R-based statistical scripts. These modules can be chained together to support complex, multi-step analyses, with built-in tools for monitoring processing status and reviewing logs.
 
+### AI assistant
+
+An integrated AI assistant helps users understand and interpret their data. The assistant can explain module outputs, describe data trends and patterns, provide insights about visualizations, and help generate narrative content for reports. Users can ask questions about their project data in natural language and receive contextual guidance on analysis and interpretation.
+
 ### Visualization
 
 The platform offers robust visualization tools for presenting analytical results. Users can create charts, maps, and tables from processed data, with options to filter and disaggregate by multiple dimensions. Visualizations can be customized in terms of appearance and styling, and exported as images or data files for use in external applications.
