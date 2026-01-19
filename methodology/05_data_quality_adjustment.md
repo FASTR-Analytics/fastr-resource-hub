@@ -36,7 +36,7 @@ The module applies a standardized, multi-step process to adjust routine health f
 The module integrates three inputs: reported facility-level service volumes, outlier flags identifying anomalous values (from Module 1), and completeness flags indicating months with incomplete reporting (from Module 1). Indicators for which adjustment is not appropriate (such as mortality-related measures) are identified and excluded from subsequent adjustment steps.
 
 **Step 2: Identify low-volume indicators**
-Before any adjustments are applied, each indicator is assessed for sufficient variation. Indicators that never exceed 100 reported events in any month across the full time series are flagged and excluded from outlier adjustment, as statistical outlier detection is not meaningful for consistently low-count indicators.
+Before any adjustments are applied, each indicator is assessed for sufficient variation. Indicators that never exceed 100 reported events in any month across the full time series are flagged and excluded from adjustment, as statistical methods are not meaningful for consistently low-count indicators.
 
 **Step 3: Adjust outlier values**
 For observations flagged as outliers, the module estimates replacement values based on the facility’s own historical reporting patterns. A hierarchical set of methods is applied sequentially:
@@ -87,7 +87,7 @@ The module applies adjustments to two categories of observations:
 Certain indicators are explicitly excluded from adjustment:
 
 - Mortality-related indicators (including under-five deaths, maternal deaths, and neonatal deaths), as these represent discrete events for which smoothing or imputation is not appropriate  
-- Low-volume indicators that never exceed 100 reported events in any month, for which statistical outlier detection is not meaningful  
+- Low-volume indicators that never exceed 100 reported events in any month, for which statistical adjustment is not meaningful  
 
 **Selection of adjustment scenario**
 
@@ -176,7 +176,7 @@ For the combined adjustment heatmap (output 3):
 
 ??? "Low volume exclusions"
 
-    Indicators are also automatically excluded from **outlier adjustment** if they have zero observations above 100 across the entire dataset. This prevents meaningless outlier detection on indicators with consistently low counts.
+    Indicators are also automatically excluded from **adjustment** if they have zero observations above 100 across the entire dataset. This prevents meaningless statistical adjustment on indicators with consistently low counts.
 
     **Exclusion logic**:
 
@@ -261,7 +261,7 @@ For the combined adjustment heatmap (output 3):
     | `M2_adjusted_data.csv` | Facility | Adjusted volumes for all scenarios at facility level | `facility_id`, admin areas (excl. admin_area_1), `period_id`, `indicator_common_id`, `count_final_*` |
     | `M2_adjusted_data_admin_area.csv` | Subnational | Aggregated adjusted volumes at subnational admin areas | Admin areas (excl. admin_area_1), `period_id`, `indicator_common_id`, `count_final_*` |
     | `M2_adjusted_data_national.csv` | National | Aggregated adjusted volumes at national level | `admin_area_1`, `period_id`, `indicator_common_id`, `count_final_*` |
-    | `M2_low_volume_exclusions.csv` | Metadata | Indicators excluded from outlier adjustment due to low volumes | `indicator_common_id`, `low_volume_exclude` |
+    | `M2_low_volume_exclusions.csv` | Metadata | Indicators excluded from adjustment due to low volumes | `indicator_common_id`, `low_volume_exclude` |
 
 ??? "Output data structure"
 
@@ -915,7 +915,7 @@ To support transparency and sensitivity analysis, FASTR produces four parallel d
 Certain indicators are excluded from the adjustment process:
 
 - **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
-- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment
+- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_2 -->
@@ -929,7 +929,7 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 | 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
 | 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
 | 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
-| 5 | Facility historical mean | Fallback when no other method is applicable |
+| 5 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 ---
 
@@ -950,7 +950,7 @@ For months identified as incomplete or missing, values are imputed using the sam
 | 1 | Centered 6-month average | When sufficient data exists before and after the gap |
 | 2 | Forward 6-month average | For gaps at the start of the time series |
 | 3 | Backward 6-month average | For gaps at the end of the time series |
-| 4 | Facility historical mean | Fallback when rolling averages unavailable |
+| 4 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
 

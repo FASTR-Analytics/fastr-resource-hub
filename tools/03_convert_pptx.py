@@ -48,7 +48,7 @@ try:
     from pptx import Presentation
     from pptx.util import Inches, Pt
     from pptx.dml.color import RGBColor
-    from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+    from pptx.enum.text import PP_ALIGN, MSO_ANCHOR, MSO_AUTO_SIZE
     from pptx.enum.shapes import MSO_SHAPE
 except ImportError:
     print("Error: python-pptx not installed.")
@@ -73,6 +73,7 @@ class Colors:
     NAVY = RGBColor(0x21, 0x56, 0x8C)         # #21568C - H2
     BLUE = RGBColor(0x1A, 0x90, 0xC0)         # #1A90C0 - H2 underline
     LIGHT_BLUE = RGBColor(0xCA, 0xE6, 0xE9)   # #CAE6E9 - table headers
+    LIGHT_GREEN = RGBColor(0xE8, 0xF4, 0xF3)  # #E8F4F3 - session headers
 
     GOLD = RGBColor(0xD8, 0xA8, 0x22)         # #D8A822
     PURPLE = RGBColor(0x7A, 0x1F, 0x6E)       # #7A1F6E
@@ -87,11 +88,11 @@ class Colors:
 
 class Fonts:
     """Font settings"""
-    FAMILY = 'Arial'  # Universal fallback
+    FAMILY = 'Calibri'  # Closer to Inter, widely available
     H1_SIZE = Pt(32)   # Reduced from Pt(40) to prevent underline overlap
     H2_SIZE = Pt(26)   # Reduced from Pt(32) to prevent underline overlap
     H3_SIZE = Pt(22)
-    BODY_SIZE = Pt(16)
+    BODY_SIZE = Pt(18)  # Increased from 16 for better readability
     TABLE_SIZE = Pt(14)
     SMALL_SIZE = Pt(12)
 
@@ -100,13 +101,13 @@ class Layout:
     """Slide dimensions and margins (16:9)"""
     WIDTH = Inches(13.333)
     HEIGHT = Inches(7.5)
-    MARGIN_LEFT = Inches(0.5)
-    MARGIN_RIGHT = Inches(0.5)
-    MARGIN_TOP = Inches(0.5)
+    MARGIN_LEFT = Inches(0.75)
+    MARGIN_RIGHT = Inches(0.75)
+    MARGIN_TOP = Inches(0.6)
     MARGIN_BOTTOM = Inches(0.5)
-    CONTENT_WIDTH = Inches(12.333)
+    CONTENT_WIDTH = Inches(11.833)  # 13.333 - 0.75 - 0.75
     # Centered content position: (slide_width - content_width) / 2
-    CONTENT_LEFT = Inches(0.5)  # (13.333 - 12.333) / 2 = 0.5
+    CONTENT_LEFT = Inches(0.75)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -182,19 +183,47 @@ def parse_markdown(content):
                 'path': match.group(1)
             })
 
-        # Extract table
+        # Extract table (markdown or HTML)
         table_lines = []
         in_table = False
-        for line in raw.split('\n'):
-            if '|' in line and line.strip().startswith('|'):
-                in_table = True
-                # Skip separator line
-                if re.match(r'^\|[\s\-:|]+\|$', line.strip()):
-                    continue
-                cells = [c.strip() for c in line.strip().strip('|').split('|')]
-                table_lines.append(cells)
-            elif in_table:
-                break
+
+        # First try HTML table
+        html_table_match = re.search(r'<table[^>]*>(.*?)</table>', raw, re.DOTALL | re.IGNORECASE)
+        if html_table_match:
+            table_html = html_table_match.group(1)
+            # Parse rows
+            for row_match in re.finditer(r'<tr[^>]*>(.*?)</tr>', table_html, re.DOTALL | re.IGNORECASE):
+                row_html = row_match.group(1)
+                cells = []
+                # Parse cells (th or td)
+                for cell_match in re.finditer(r'<t[hd][^>]*>(.*?)</t[hd]>', row_html, re.DOTALL | re.IGNORECASE):
+                    cell_text = cell_match.group(1)
+                    # Check for colspan
+                    colspan_match = re.search(r'colspan=["\']?(\d+)', row_match.group(0), re.IGNORECASE)
+                    # Strip HTML tags from cell content but preserve text
+                    cell_text = re.sub(r'<strong>|</strong>', '**', cell_text)
+                    cell_text = re.sub(r'<em>|</em>', '*', cell_text)
+                    cell_text = re.sub(r'<[^>]+>', '', cell_text).strip()
+                    cells.append(cell_text)
+                    # If colspan, add empty cells
+                    if colspan_match:
+                        for _ in range(int(colspan_match.group(1)) - 1):
+                            cells.append('')
+                if cells:
+                    table_lines.append(cells)
+        else:
+            # Try markdown table
+            for line in raw.split('\n'):
+                if '|' in line and line.strip().startswith('|'):
+                    in_table = True
+                    # Skip separator line
+                    if re.match(r'^\|[\s\-:|]+\|$', line.strip()):
+                        continue
+                    cells = [c.strip() for c in line.strip().strip('|').split('|')]
+                    table_lines.append(cells)
+                elif in_table:
+                    break
+
         if table_lines:
             slide['table'] = table_lines
 
@@ -436,6 +465,7 @@ def add_formatted_text(paragraph, text, font_size, color):
     """
     Parse markdown formatting and add styled runs to paragraph.
     Handles **bold**, *italic*, and `code` formatting.
+    Bold text is colored Navy, italic text is colored Green (matching CSS).
     """
     # Clear any existing text
     paragraph.clear()
@@ -458,17 +488,71 @@ def add_formatted_text(paragraph, text, font_size, color):
         run.font.name = Fonts.FAMILY
 
         if segment.startswith('**') and segment.endswith('**'):
-            # Bold text
+            # Bold text - Navy color to match CSS
             run.text = segment[2:-2]
             run.font.bold = True
+            run.font.color.rgb = Colors.NAVY
         elif segment.startswith('*') and segment.endswith('*') and not segment.startswith('**'):
-            # Italic text
+            # Italic text - Green color to match CSS
             run.text = segment[1:-1]
             run.font.italic = True
+            run.font.color.rgb = Colors.GREEN
         elif segment.startswith('`') and segment.endswith('`'):
-            # Code text
+            # Code text - Navy color
             run.text = segment[1:-1]
             run.font.name = 'Courier New'
+            run.font.color.rgb = Colors.NAVY
+        else:
+            # Plain text
+            run.text = segment
+
+
+def add_formatted_bullet_text(paragraph, text, font_size, color):
+    """
+    Add a bullet point with lime-colored bullet and formatted text.
+    The bullet character is rendered in lime, the text uses standard formatting.
+    """
+    # Clear any existing text
+    paragraph.clear()
+
+    # Add lime-colored bullet character
+    bullet_run = paragraph.add_run()
+    bullet_run.text = "• "
+    bullet_run.font.size = font_size
+    bullet_run.font.color.rgb = Colors.LIME
+    bullet_run.font.name = Fonts.FAMILY
+
+    # Strip HTML tags first
+    text = strip_html_tags(text)
+
+    # Pattern to match **bold**, *italic*, `code`, or plain text
+    pattern = r'(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|[^*`]+)'
+
+    for match in re.finditer(pattern, text):
+        segment = match.group(1)
+        if not segment:
+            continue
+
+        run = paragraph.add_run()
+        run.font.size = font_size
+        run.font.color.rgb = color
+        run.font.name = Fonts.FAMILY
+
+        if segment.startswith('**') and segment.endswith('**'):
+            # Bold text - Navy color
+            run.text = segment[2:-2]
+            run.font.bold = True
+            run.font.color.rgb = Colors.NAVY
+        elif segment.startswith('*') and segment.endswith('*') and not segment.startswith('**'):
+            # Italic text - Green color
+            run.text = segment[1:-1]
+            run.font.italic = True
+            run.font.color.rgb = Colors.GREEN
+        elif segment.startswith('`') and segment.endswith('`'):
+            # Code text - Navy color
+            run.text = segment[1:-1]
+            run.font.name = 'Courier New'
+            run.font.color.rgb = Colors.NAVY
         else:
             # Plain text
             run.text = segment
@@ -509,11 +593,11 @@ def add_h1_with_underline(slide, text, top=None):
         text, Fonts.H1_SIZE, Colors.DEEP_GREEN, bold=True
     )
 
-    # Add thin underline - positioned well below the text
+    # Add underline - positioned well below the text
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
         Layout.CONTENT_LEFT, top + Inches(0.65),
-        Inches(4), Inches(0.025)
+        Inches(4), Inches(0.04)  # Thicker to match PDF styling
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.LIME
@@ -531,11 +615,11 @@ def add_h2_with_underline(slide, text, top):
         text, Fonts.H2_SIZE, Colors.NAVY, bold=True
     )
 
-    # Add thin underline - positioned well below the text
+    # Add underline - positioned well below the text
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
         Layout.CONTENT_LEFT, top + Inches(0.55),
-        Inches(3), Inches(0.02)
+        Inches(3), Inches(0.03)  # Thicker to match PDF styling
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.BLUE
@@ -563,8 +647,8 @@ def add_bullet_list(slide, bullets, left, top, width, font_size=None):
         else:
             p = tf.add_paragraph()
 
-        # Use formatted text to preserve bold/italic
-        add_formatted_text(p, f"• {bullet}", font_size, Colors.TEXT_DARK)
+        # Use formatted bullet text with lime-colored bullet
+        add_formatted_bullet_text(p, bullet, font_size, Colors.TEXT_DARK)
         p.level = 0
 
     return shape
@@ -658,40 +742,78 @@ def build_agenda_slide(prs, data, base_dir, md_dir):
         font_size = Fonts.SMALL_SIZE if rows > 10 else Fonts.TABLE_SIZE
         row_height = Inches(0.28) if rows > 10 else Inches(0.32)
 
+        # Full width table respecting margins
+        table_width = Layout.CONTENT_WIDTH  # 11.833"
+        table_left = Layout.CONTENT_LEFT    # 0.75"
+
         table = slide.shapes.add_table(
             rows, cols,
-            Layout.CONTENT_LEFT, Inches(1.0),
-            Inches(12.3), row_height * rows
+            table_left, Inches(1.2),
+            table_width, row_height * rows
         ).table
 
-        # Set column widths - Time | Session | Speaker
+        # Set column widths - Time | Session | Speaker (proportional to table width)
         if cols >= 3:
             table.columns[0].width = Inches(2.0)   # Time
-            table.columns[1].width = Inches(8.0)   # Session
-            table.columns[2].width = Inches(2.3)   # Speaker
+            table.columns[1].width = Inches(7.6)   # Session
+            table.columns[2].width = Inches(2.2)   # Speaker
 
         # Fill table with formatted text
         for r_idx, row in enumerate(table_data):
             is_header = r_idx == 0
-            for c_idx, cell_text in enumerate(row):
-                if c_idx >= cols:
-                    continue
-                cell = table.cell(r_idx, c_idx)
-                cell.text_frame.word_wrap = True
 
-                para = cell.text_frame.paragraphs[0]
+            # Check if this is a session header row (Session X: or **Header** with empty other cells)
+            row_text = ' '.join(str(cell) for cell in row)
+            # Match "Session X:" or rows where first cell is bold and other cells are empty
+            is_session_row = bool(re.match(r'.*Session\s+\d+:', row_text, re.IGNORECASE))
+            # Also check for bold header rows like "**Opening Session**" with empty subsequent cells
+            if not is_session_row and cols >= 2:
+                first_cell_bold = row[0].startswith('**') and row[0].endswith('**')
+                other_cells_empty = all(str(c).strip() == '' for c in row[1:])
+                is_session_row = first_cell_bold and other_cells_empty
 
-                if is_header:
-                    cell.fill.solid()
-                    cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
-                    clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
-                    para.text = clean_text
-                    para.font.size = font_size
-                    para.font.name = Fonts.FAMILY
-                    para.font.color.rgb = Colors.NAVY
-                    para.font.bold = True
-                else:
-                    add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
+            # Merge cells for session header rows
+            if is_session_row and cols >= 2:
+                # Merge all cells in this row
+                first_cell = table.cell(r_idx, 0)
+                last_cell = table.cell(r_idx, cols - 1)
+                first_cell.merge(last_cell)
+
+                # Style the merged cell
+                merged_cell = table.cell(r_idx, 0)
+                merged_cell.fill.solid()
+                merged_cell.fill.fore_color.rgb = Colors.LIGHT_GREEN
+                merged_cell.text_frame.word_wrap = False
+
+                para = merged_cell.text_frame.paragraphs[0]
+                # Get the session text (find the cell with "Session")
+                session_text = next((str(c) for c in row if 'Session' in str(c)), row_text)
+                clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', session_text)
+                para.text = clean_text.strip()
+                para.font.size = font_size
+                para.font.name = Fonts.FAMILY
+                para.font.color.rgb = Colors.DEEP_GREEN
+                para.font.bold = True
+            else:
+                for c_idx, cell_text in enumerate(row):
+                    if c_idx >= cols:
+                        continue
+                    cell = table.cell(r_idx, c_idx)
+                    cell.text_frame.word_wrap = True
+
+                    para = cell.text_frame.paragraphs[0]
+
+                    if is_header:
+                        cell.fill.solid()
+                        cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                        clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
+                        para.text = clean_text
+                        para.font.size = font_size
+                        para.font.name = Fonts.FAMILY
+                        para.font.color.rgb = Colors.NAVY
+                        para.font.bold = True
+                    else:
+                        add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
 
     return slide
 
@@ -821,11 +943,11 @@ def add_column_text(slide, items, left, top, width):
             p = tf.add_paragraph()
 
         if item_type == 'bullet':
-            add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
-            p.space_after = Pt(4)
+            add_formatted_bullet_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+            p.space_after = Pt(8)
         else:
             add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
-            p.space_after = Pt(10)  # More space after paragraphs
+            p.space_after = Pt(12)  # More space after paragraphs
 
     return shape
 
@@ -1100,10 +1222,11 @@ def build_image_slide(prs, data, base_dir, md_dir):
                 p = tf.add_paragraph()
 
             if item_type == 'bullet':
-                add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                add_formatted_bullet_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                p.space_after = Pt(8)
             else:
                 add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
-            p.space_after = Pt(6)
+                p.space_after = Pt(10)
 
     return slide
 
@@ -1124,19 +1247,31 @@ def build_content_slide(prs, data, base_dir, md_dir):
         break  # Only first header at top
 
     # Content area: fixed position below title, full width, full remaining height
-    content_top = Inches(1.3)  # Below title and underline
-    content_height = Inches(5.7)  # Fill to near bottom
+    content_top = Inches(1.5)  # Below title and underline, with more breathing room
+    content_height = Inches(5.5)  # Fill to near bottom
 
-    # Render ALL content (H3+, paragraphs, bullets) in ONE centered full-width text box
+    # Check if slide has images - if so, use narrower text width to avoid overlap
+    has_image = bool(data['images'])
+    if has_image:
+        content_width = Inches(6.0)  # Leave room for image on right
+    else:
+        content_width = Layout.CONTENT_WIDTH
+
+    # Render ALL content (H3+, paragraphs, bullets) in ONE text box
     content = data.get('content', [])
     if content:
         shape = slide.shapes.add_textbox(
             Layout.CONTENT_LEFT, content_top,
-            Layout.CONTENT_WIDTH, content_height
+            content_width, content_height
         )
         tf = shape.text_frame
         tf.word_wrap = True
-        tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
+        if has_image:
+            # When image present, auto-size text box to avoid overlap
+            tf.auto_size = MSO_AUTO_SIZE.SHAPE_TO_FIT_TEXT
+            tf.anchor = MSO_ANCHOR.TOP
+        else:
+            tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
 
         first_para = True
         for item_type, text in content:
@@ -1149,28 +1284,30 @@ def build_content_slide(prs, data, base_dir, md_dir):
             if item_type == 'header':
                 level, header_text = text
                 p.text = header_text
-                style_paragraph(p, Fonts.H3_SIZE, Colors.PURPLE, bold=True)
-                p.space_after = Pt(6)
+                # H3+ styled with Orchid to match PDF accent color
+                style_paragraph(p, Fonts.H3_SIZE, Colors.ORCHID, bold=True)
+                p.space_before = Pt(8)
+                p.space_after = Pt(10)
 
             elif item_type == 'bullet':
-                # Use formatted text to handle bold/italic within bullets
-                add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
-                p.space_after = Pt(4)
+                # Use formatted bullet text with lime-colored bullet
+                add_formatted_bullet_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                p.space_after = Pt(8)
 
             elif item_type == 'paragraph':
                 # Use formatted text to handle inline bold/italic
                 add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
-                p.space_after = Pt(10)  # More space after paragraphs
+                p.space_after = Pt(14)  # More space after paragraphs
 
-    # Add image if present (to the right)
+    # Add image if present (to the right, with gap from text)
     if data['images']:
         img = data['images'][0]
         img_path = resolve_image_path(img['path'], base_dir, md_dir)
         if img_path:
             add_image_to_slide(
                 slide, img_path,
-                Inches(8), Inches(1.5),
-                width=Inches(4.5)
+                Inches(7.25), Inches(1.5),
+                width=Inches(5.5)
             )
 
     return slide

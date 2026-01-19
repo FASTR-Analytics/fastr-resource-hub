@@ -41,4 +41,4 @@ To support transparency and sensitivity analysis, FASTR produces four parallel d
 Certain indicators are excluded from the adjustment process:
 
 - **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
-- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment
+- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment

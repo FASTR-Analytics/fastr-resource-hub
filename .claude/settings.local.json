@@ -96,7 +96,9 @@
       "Bash(git checkout:*)",
       "Bash(python tools/00_extract_slides.py:*)",
       "Bash(mkdocs gh-deploy:*)",
-      "Bash(gh run list:*)"
+      "Bash(gh run list:*)",
+      "Bash(python:*)",
+      "Bash(npx @marp-team/marp-cli)"
     ]
   }
 }

@@ -8,4 +8,4 @@ paginate: true
 
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
-![Coverage equation h:420](../../resources/diagrams/coverage_equation.svg)
+![Coverage equation](../../resources/diagrams/coverage_equation.svg)

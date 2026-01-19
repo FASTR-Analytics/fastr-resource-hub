@@ -14,12 +14,12 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 | 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
 | 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
 | 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
-| 5 | Facility historical mean | Fallback when no other method is applicable |
+| 5 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 ---
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment. h:400](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment.](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 **Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.

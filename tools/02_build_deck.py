@@ -211,6 +211,12 @@ MODULES = {
             ('m2_1d', 'm2_1d_why_extract_data_continued.md'),
             ('m2_2', 'm2_2_tools_for_data_extraction.md'),
             ('m2_2a', 'm2_2a_data_downloader.md'),
+            ('m2_2b', 'm2_2b_tools_for_data_extraction_continued.md'),
+            ('m2_2c', 'm2_2c_tools_for_data_extraction_continued.md'),
+            ('m2_2d', 'm2_2d_tools_for_data_extraction_continued.md'),
+            ('m2_2e', 'm2_2e_tools_for_data_extraction_continued.md'),
+            ('m2_2f', 'm2_2f_tools_for_data_extraction_continued.md'),
+            ('m2_2g', 'm2_2g_tools_for_data_extraction_continued.md'),
         ],
     },
     3: {
@@ -550,7 +556,9 @@ def generate_agenda_slide(config):
         else:
             slide_content += f"**Day {day_num}**\n\n"
 
-        slide_content += "| Time | Agenda | Facilitator/Presenter |\n|------|--------|--------|\n"
+        # Use HTML table for colspan support on section headers
+        slide_content += '<table>\n'
+        slide_content += '<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>\n'
 
         for item in day_items:
             item_type = item.get('type', '')
@@ -559,16 +567,16 @@ def generate_agenda_slide(config):
             speaker = item.get('speaker', '')
 
             if item_type == 'section':
-                # Section header - spans all columns (bold, no time)
-                slide_content += f"| **{session}** | | |\n"
+                # Section header - spans all columns
+                slide_content += f'<tr style="background: #E8F4F3;"><td colspan="3"><strong>{session}</strong></td></tr>\n'
             elif item_type == 'break':
-                # Breaks - italicized, no speaker
-                slide_content += f"| {time} | *{session}* | |\n"
+                # Breaks - italicized
+                slide_content += f'<tr><td>{time}</td><td><em>{session}</em></td><td></td></tr>\n'
             else:
                 # Regular item
-                slide_content += f"| {time} | {session} | {speaker} |\n"
+                slide_content += f'<tr><td>{time}</td><td>{session}</td><td>{speaker}</td></tr>\n'
 
-        slide_content += "\n---\n"
+        slide_content += '</table>\n\n---\n'
         all_slides.append(slide_content)
 
     return "".join(all_slides)

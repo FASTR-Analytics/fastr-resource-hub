@@ -1838,7 +1838,7 @@ Each HMIS indicator serves as an entry point. The module derives all target popu
 | **Deliveries** | Deliveries ÷ coverage → Deliveries | Live births → DPT-eligible → Measles-eligible | Pregnancies |
 | **BCG** | BCG ÷ coverage → Live births | DPT-eligible → Measles-eligible | Deliveries → Pregnancies |
 | **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles1-eligible → Measles2-eligible | Live births → Births → Deliveries → Pregnancies |
-| **UN WPP** | Population projections | All denominators directly | — |
+| **UN WPP** | Crude birth rate × population → Pregnancies, live births; Under-1 pop → DPT, measles | Applies mortality rates for measles denominators | — |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->

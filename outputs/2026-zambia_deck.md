@@ -21,23 +21,24 @@ paginate: true
 
 **Day 1 -- Laying the Foundation: Introducing FASTR and Configuring the Analytics Platform**
 
-| Time | Agenda | Facilitator/Presenter |
-|------|--------|--------|
-| **Opening Session** | | |
-| 08:30-09:00 | Participant registration | MoH team |
-| 09:00-09:10 | Welcome and opening remarks | MoH team |
-| 09:10-09:20 | Icebreakers/Introductions | MoH team |
-| 09:20-09:35 | Overview of agenda, workshop objectives | GFF FASTR team |
-| **Session 1: Overview of the FASTR approach** | | |
-| 09:35-10:30 | Overview: FASTR Approaches | GFF FASTR team |
-| **Session 2: HMIS data extraction** | | |
-| 10:30-11:30 | Data extraction: Rationale and methods | GFF FASTR team |
-| **Session 3: Introduction to the FASTR analytics platform** | | |
-| 11:30-12:30 | Introduction to the FASTR analytics platform | GFF FASTR team |
-| 12:30-14:00 | *Lunch Break* | |
-| 14:00-14:30 | Getting participants into the platform | GFF FASTR team |
-| **Session 4: Configuring the FASTR analytics platform** | | |
-| 14:30-16:30 | Configuring the analysis platform | GFF FASTR team |
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Opening Session</strong></td></tr>
+<tr><td>08:30-09:00</td><td>Participant registration</td><td>MoH team</td></tr>
+<tr><td>09:00-09:10</td><td>Welcome and opening remarks</td><td>MoH team</td></tr>
+<tr><td>09:10-09:20</td><td>Icebreakers/Introductions</td><td>MoH team</td></tr>
+<tr><td>09:20-09:35</td><td>Overview of agenda, workshop objectives</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 1: Overview of the FASTR approach</strong></td></tr>
+<tr><td>09:35-10:30</td><td>Overview: FASTR Approaches</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 2: HMIS data extraction</strong></td></tr>
+<tr><td>10:30-11:30</td><td>Data extraction: Rationale and methods</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 3: Introduction to the FASTR analytics platform</strong></td></tr>
+<tr><td>11:30-12:30</td><td>Introduction to the FASTR analytics platform</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr><td>14:00-14:30</td><td>Getting participants into the platform</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 4: Configuring the FASTR analytics platform</strong></td></tr>
+<tr><td>14:30-16:30</td><td>Configuring the analysis platform</td><td>GFF FASTR team</td></tr>
+</table>
 
 ---
 
@@ -46,18 +47,19 @@ paginate: true
 
 **Day 2 -- Building the Analysis: Applying FASTR Methods and Generating Outputs**
 
-| Time | Agenda | Facilitator/Presenter |
-|------|--------|--------|
-| 09:00-09:15 | Overview of Day 2 agenda | GFF FASTR team |
-| **Session 5: Overview of FASTR methods and analytical outputs** | | |
-| 09:15-10:15 | Data quality, service utilization, coverage | GFF FASTR team |
-| **Session 6: Creating a project** | | |
-| 10:15-11:15 | Project creation and settings | GFF FASTR team |
-| **Session 7: Creating visualizations** | | |
-| 11:15-12:30 | Creating and editing visualizations | GFF FASTR team |
-| 12:30-14:00 | *Lunch Break* | |
-| **Session 8: Creating reports** | | |
-| 14:30-16:30 | Practice creating and editing reports | GFF FASTR team |
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Overview of Day 2 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 5: Overview of FASTR methods and analytical outputs</strong></td></tr>
+<tr><td>09:15-10:15</td><td>Data quality, service utilization, coverage</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 6: Creating a project</strong></td></tr>
+<tr><td>10:15-11:15</td><td>Project creation and settings</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 7: Creating visualizations</strong></td></tr>
+<tr><td>11:15-12:30</td><td>Creating and editing visualizations</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Creating reports</strong></td></tr>
+<tr><td>14:30-16:30</td><td>Practice creating and editing reports</td><td>GFF FASTR team</td></tr>
+</table>
 
 ---
 
@@ -66,18 +68,19 @@ paginate: true
 
 **Day 3 -- From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making**
 
-| Time | Agenda | Facilitator/Presenter |
-|------|--------|--------|
-| 09:00-09:15 | Overview of Day 3 agenda | GFF FASTR team |
-| **Session 8: Interpretation of visualizations** | | |
-| 09:15-10:15 | Approaches to support interpretation | GFF FASTR team |
-| **Session 9: Creating a Q4 2025 report** | | |
-| 10:15-12:30 | Creating short and long reports with country context | GFF FASTR team |
-| 12:30-14:00 | *Lunch Break* | |
-| **Session 9 (cont'd): Creating a Q4 2025 report** | | |
-| 14:00-15:00 | Continue report creation with country context | GFF FASTR team |
-| **Session 10: Presenting reports** | | |
-| 14:30-15:30 | Present reports, group feedback | GFF FASTR team |
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Overview of Day 3 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Interpretation of visualizations</strong></td></tr>
+<tr><td>09:15-10:15</td><td>Approaches to support interpretation</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 9: Creating a Q4 2025 report</strong></td></tr>
+<tr><td>10:15-12:30</td><td>Creating short and long reports with country context</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 9 (cont'd): Creating a Q4 2025 report</strong></td></tr>
+<tr><td>14:00-15:00</td><td>Continue report creation with country context</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10: Presenting reports</strong></td></tr>
+<tr><td>14:30-15:30</td><td>Present reports, group feedback</td><td>GFF FASTR team</td></tr>
+</table>
 
 ---
 
@@ -86,22 +89,23 @@ paginate: true
 
 **Day 4 -- Designing the Health Facility Assessment**
 
-| Time | Agenda | Facilitator/Presenter |
-|------|--------|--------|
-| 09:00-09:15 | Overview of Day 4 agenda | GFF FASTR team |
-| **Session 12: Overview of FASTR HFA phone survey** | | |
-| 09:15-10:15 | HFA overview and questionnaire adaptation guidelines | GFF FASTR team |
-| **Session 13: Questionnaire adaptation to the Zambian context** | | |
-| 10:15-12:30 | Review questionnaire + hands-on adaptation | GFF FASTR team |
-| 12:30-14:00 | *Lunch Break* | |
-| **Session 14: Questionnaire adaptation (cont'd)** | | |
-| 14:00-15:00 | Continue questionnaire adaptation (in groups) | GFF FASTR team |
-| **Session 15: Discussion: HFA adapted questionnaire** | | |
-| 14:30-15:30 | Discuss adapted questionnaire in plenary | GFF FASTR team |
-| **Session 16: Discussion: HFA priorities and data use** | | |
-| 15:30-16:30 | HFA priorities and data use case in Zambia | GFF FASTR team |
-| **Session 17: Action planning and wrap-up** | | |
-| 16:30-17:00 | Key messages and wrap-up | GFF FASTR team |
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Overview of Day 4 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 12: Overview of FASTR HFA phone survey</strong></td></tr>
+<tr><td>09:15-10:15</td><td>HFA overview and questionnaire adaptation guidelines</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13: Questionnaire adaptation to the Zambian context</strong></td></tr>
+<tr><td>10:15-12:30</td><td>Review questionnaire + hands-on adaptation</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14: Questionnaire adaptation (cont'd)</strong></td></tr>
+<tr><td>14:00-15:00</td><td>Continue questionnaire adaptation (in groups)</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 15: Discussion: HFA adapted questionnaire</strong></td></tr>
+<tr><td>14:30-15:30</td><td>Discuss adapted questionnaire in plenary</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 16: Discussion: HFA priorities and data use</strong></td></tr>
+<tr><td>15:30-16:30</td><td>HFA priorities and data use case in Zambia</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 17: Action planning and wrap-up</strong></td></tr>
+<tr><td>16:30-17:00</td><td>Key messages and wrap-up</td><td>GFF FASTR team</td></tr>
+</table>
 
 ---
 
@@ -222,8 +226,6 @@ FASTR's rapid-cycle analytics address this gap by providing:
 - Timely insights aligned with country decision cycles
 - Continuous learning rather than one-off assessments
 - Direct feedback loops between data, analysis, and action
-
-During the COVID-19 pandemic, this approach was applied in over 20 countries to monitor disruptions to essential RMNCAH-N services and inform response and recovery planning.
 
 </div>
 <div>
@@ -382,6 +384,66 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 ---
 
 
+
+## Data Downloader: Login
+
+![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
+
+Enter your DHIS2 instance URL and credentials to connect.
+
+---
+
+
+
+## Data Downloader: Overview
+
+![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
+
+The main interface displays available data elements and download options.
+
+---
+
+
+
+## Data Downloader: Download history
+
+![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
+
+Track previous downloads and re-download data as needed.
+
+---
+
+
+
+## Data Downloader: Data dictionary
+
+![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
+
+Browse and search available data elements and indicators from your DHIS2 instance.
+
+---
+
+
+
+## Data Downloader: Facility list
+
+![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
+
+View and filter facilities by administrative level and organization unit.
+
+---
+
+
+
+## Data Downloader: Facility map
+
+![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
+
+Visualize facility locations on an interactive map.
+
+---
+
+
 # Session 3: Introduction to the FASTR analytics platform
 
 ---
@@ -508,7 +570,7 @@ Today we will:
 
 ## FASTR analytical pipeline
 
-![Analytical Pipeline h:340](../resources/diagrams/analytical_pipeline.svg)
+![Analytical Pipeline h:390](../resources/diagrams/analytical_pipeline.svg)
 
 The FASTR analysis follows a sequential workflow where each step builds on the previous:
 
@@ -608,6 +670,8 @@ For the FASTR analysis, completeness is defined as:
 
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
 
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
+
 ---
 
 ## Completeness: Percent of monthly values that are complete
@@ -616,7 +680,7 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% complete = # monthly values that are complete / total N of monthly values**
 
-![Indicator Completeness h:480](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
@@ -662,7 +726,7 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% outliers = # monthly values that are outliers / total N of monthly values**
 
-![Outliers h:480](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
@@ -716,7 +780,7 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency h:480](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
@@ -746,17 +810,19 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 **% adequate quality = # monthly values meeting all criteria / total N of monthly values**
 
-![Overall DQA Score h:480](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
-## Mean DQA score: Average of component scores
+## Mean DQA score: How close are we to adequate quality?
 
-The mean DQA score averages two component scores:
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
 
-![Mean DQA Score h:480](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+Lower scores indicate more data quality issues that need attention before the data can be used with confidence.
+
+![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -813,7 +879,7 @@ To support transparency and sensitivity analysis, FASTR produces four parallel d
 Certain indicators are excluded from the adjustment process:
 
 - **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
-- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from outlier adjustment
+- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment
 
 ---
 
@@ -829,13 +895,13 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 | 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
 | 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
 | 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
-| 5 | Facility historical mean | Fallback when no other method is applicable |
+| 5 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 ---
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment. h:400](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment.](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 **Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.
 
@@ -852,7 +918,7 @@ For months identified as incomplete or missing, values are imputed using the sam
 | 1 | Centered 6-month average | When sufficient data exists before and after the gap |
 | 2 | Forward 6-month average | For gaps at the start of the time series |
 | 3 | Backward 6-month average | For gaps at the end of the time series |
-| 4 | Facility historical mean | Fallback when rolling averages unavailable |
+| 4 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
 
@@ -860,7 +926,7 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment. h:400](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Percent change in volume due to completeness adjustment.](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 **Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.
 
@@ -872,7 +938,7 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
 
-![Percent change in volume due to both outlier and completeness adjustment. h:480](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+![Percent change in volume due to both outlier and completeness adjustment.](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
 ---
 
@@ -904,7 +970,7 @@ Statistical comparison of observed volumes against expected levels—derived fro
 
 For each indicator and region, total volume in the current year is compared to the previous year:
 
-**Percent change = (Current year − Previous year) / Previous year × 100**
+**Percent change** = (Current year − Previous year) ÷ Previous year × 100
 
 Changes exceeding **±10%** are flagged for review.
 
@@ -912,7 +978,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume h:480](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
@@ -989,7 +1055,7 @@ This improves the ability to interpret and compare utilization data across natio
 
 ## Output: Actual vs expected (national)
 
-![Actual vs expected national h:420](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
@@ -997,7 +1063,7 @@ National-level comparison of observed service volumes against expected values de
 
 ## Output: Actual vs expected (subnational)
 
-![Actual vs expected subnational h:420](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 
@@ -1059,7 +1125,7 @@ The coverage estimation module operates in two sequential parts:
 
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
-![Coverage equation h:420](../resources/diagrams/coverage_equation.svg)
+![Coverage equation](../resources/diagrams/coverage_equation.svg)
 
 ---
 
@@ -1085,7 +1151,7 @@ Each health indicator corresponds to a specific target population:
 
 Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
 
-![Denominator cascade flowchart h:480](../resources/diagrams/denominator_cascade.svg)
+![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
 
 ---
 
@@ -1095,7 +1161,7 @@ Sequential demographic adjustments transform one target population estimate into
 
 Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
 
-![Denominator cascade example h:480](../resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
 
 ---
 
@@ -1126,7 +1192,7 @@ Each HMIS indicator serves as an entry point. The module derives all target popu
 | **Deliveries** | Deliveries ÷ coverage → Deliveries | Live births → DPT-eligible → Measles-eligible | Pregnancies |
 | **BCG** | BCG ÷ coverage → Live births | DPT-eligible → Measles-eligible | Deliveries → Pregnancies |
 | **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles1-eligible → Measles2-eligible | Live births → Births → Deliveries → Pregnancies |
-| **UN WPP** | Population projections | All denominators directly | — |
+| **UN WPP** | Crude birth rate × population → Pregnancies, live births; Under-1 pop → DPT, measles | Applies mortality rates for measles denominators | — |
 
 ---
 
@@ -1153,7 +1219,7 @@ Selection is made per indicator and geographic area. Users may override automati
 
 The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
-![Coverage projection method h:400](../resources/diagrams/coverage_projection.svg)
+![Coverage projection method](../resources/diagrams/coverage_projection.svg)
 
 Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
 
@@ -1175,7 +1241,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (national)
 
-![Coverage calculated from HMIS data at national level. h:520](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 ---
 
@@ -1183,7 +1249,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 2 level. h:520](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+![Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 ---
 
@@ -1191,7 +1257,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Output: Coverage (district)
 
-![Coverage calculated from HMIS data at admin area 3 level. h:520](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
 ---
 
@@ -1498,9 +1564,9 @@ Lusaka
 
 **FASTR Team**
 
-<img src="../resources/icons/email.png" class="icon" style="height: 1em; vertical-align: middle;"> **Email:** 
+**Email:** 
 
-<img src="../resources/icons/globe.png" class="icon" style="height: 1em; vertical-align: middle;"> **Website:** https://www.globalfinancingfacility.org/
+**Website:** https://www.globalfinancingfacility.org/
 
 ---
 

@@ -1521,22 +1521,13 @@ The module follows this sequence:
 <!-- SLIDE:m4_0 -->
 ## FASTR analytical pipeline
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+![Analytical Pipeline h:390](resources/diagrams/analytical_pipeline.svg)
 
 The FASTR analysis follows a sequential workflow where each step builds on the previous:
 
 1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
-
-</div>
-<div style="flex: 2;">
-
-![Analytical Pipeline](resources/diagrams/analytical_pipeline.svg)
-
-</div>
-</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
@@ -1625,6 +1616,8 @@ For the FASTR analysis, completeness is defined as:
 - A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
 
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
+
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
 ---
 
@@ -1762,11 +1755,13 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 ---
 
-## Mean DQA score: Average of component scores
+## Mean DQA score: How close are we to adequate quality?
 
-The mean DQA score averages two component scores:
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
+
+Lower scores indicate more data quality issues that need attention before the data can be used with confidence.
 
 ![Mean DQA Score](resources/default_outputs/Default_6._Mean_DQA_score.png)
 <!-- /SLIDE -->

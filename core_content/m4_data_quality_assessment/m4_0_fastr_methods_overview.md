@@ -6,7 +6,7 @@ paginate: true
 
 ## FASTR analytical pipeline
 
-![Analytical Pipeline h:340](../../resources/diagrams/analytical_pipeline.svg)
+![Analytical Pipeline h:390](../../resources/diagrams/analytical_pipeline.svg)
 
 The FASTR analysis follows a sequential workflow where each step builds on the previous:
 

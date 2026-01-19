@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 420">
   <defs>
     <style>
       .title { font-family: Inter, sans-serif; font-size: 16px; font-weight: 700; fill: #09544F; }
@@ -82,39 +82,5 @@
   <!-- Small person icons on paths -->
   <use href="#person" x="255" y="125" width="24" height="24" fill="#27ae60"/>
   <use href="#person" x="340" y="235" width="24" height="24" fill="#e67e22"/>
-
-  <!-- Right side: Indicator pairs legend -->
-  <g transform="translate(565, 100)">
-    <text class="title" x="0" y="0">Consistency Checks</text>
-    <text class="note-text" x="0" y="22">(expected relationships)</text>
-
-    <!-- ANC pair -->
-    <g transform="translate(0, 55)">
-      <rect x="0" y="0" width="60" height="30" rx="4" fill="#27ae60"/>
-      <text class="indicator-label" x="30" y="20" text-anchor="middle">ANC1</text>
-      <text x="70" y="22" fill="#333" font-family="Inter, sans-serif" font-size="20" font-weight="600">≥</text>
-      <rect x="90" y="0" width="60" height="30" rx="4" fill="#27ae60"/>
-      <text class="indicator-label" x="120" y="20" text-anchor="middle">ANC4</text>
-    </g>
-    <text class="relation-text" x="0" y="105">More start care than complete 4 visits</text>
-
-    <!-- Penta pair -->
-    <g transform="translate(0, 130)">
-      <rect x="0" y="0" width="60" height="30" rx="4" fill="#e67e22"/>
-      <text class="indicator-label" x="30" y="20" text-anchor="middle">Penta1</text>
-      <text x="70" y="22" fill="#333" font-family="Inter, sans-serif" font-size="20" font-weight="600">≥</text>
-      <rect x="90" y="0" width="60" height="30" rx="4" fill="#e67e22"/>
-      <text class="indicator-label" x="120" y="20" text-anchor="middle">Penta3</text>
-    </g>
-    <text class="relation-text" x="0" y="180">More get dose 1 than complete series</text>
-  </g>
-
-  <!-- Key message at bottom -->
-  <g transform="translate(565, 310)">
-    <rect x="0" y="0" width="290" height="70" rx="6" fill="#f0f7f6" stroke="#09544F" stroke-width="1"/>
-    <text class="district-label" x="145" y="24" text-anchor="middle">District-level analysis</text>
-    <text class="note-text" x="145" y="44" text-anchor="middle">captures these relationships even when</text>
-    <text class="note-text" x="145" y="60" text-anchor="middle">patients visit different facilities</text>
-  </g>
 
 </svg>

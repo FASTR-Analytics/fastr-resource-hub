@@ -1148,7 +1148,7 @@ Statistical comparison of observed volumes against expected levels—derived fro
 
 For each indicator and region, total volume in the current year is compared to the previous year:
 
-$$\text{Percent change} = \frac{\text{Current year} - \text{Previous year}}{\text{Previous year}} \times 100$$
+**Percent change** = (Current year − Previous year) ÷ Previous year × 100
 
 Changes exceeding **±10%** are flagged for review.
 

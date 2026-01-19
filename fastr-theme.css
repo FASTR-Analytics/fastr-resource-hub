@@ -482,17 +482,60 @@ section.bg-purple ul > li::marker { color: var(--fastr-lime); }
 
 section.agenda {
   font-size: 16px;
-  padding: 30px 25px;
+  padding: 60px 80px !important;
+  overflow: visible;
+  display: block !important;
+  flex-direction: unset !important;
+}
+
+section.agenda * {
+  flex: none !important;
 }
 
 section.agenda h1 {
   font-size: 1.6em;
   margin-bottom: 0.3em;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  display: block;
 }
 
-section.agenda table {
+section.agenda > p {
+  margin-left: 0;
+  margin-right: 0;
   width: 100%;
-  margin: 0;
+  display: block;
+}
+
+section.agenda table,
+section.agenda > table {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.8em;
+  table-layout: fixed;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  display: table !important;
+  flex: none !important;
+}
+
+section.agenda th:first-child,
+section.agenda td:first-child {
+  width: 15%;
+}
+
+section.agenda th:nth-child(2),
+section.agenda td:nth-child(2) {
+  width: 60%;
+}
+
+section.agenda th:last-child,
+section.agenda td:last-child {
+  width: 25%;
 }
 
 section.agenda > p:first-of-type {

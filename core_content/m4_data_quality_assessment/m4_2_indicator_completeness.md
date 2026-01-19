@@ -42,6 +42,8 @@ For the FASTR analysis, completeness is defined as:
 
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
 
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
+
 ---
 
 ## Completeness: Percent of monthly values that are complete
@@ -50,4 +52,4 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% complete = # monthly values that are complete / total N of monthly values**
 
-![Indicator Completeness h:480](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)

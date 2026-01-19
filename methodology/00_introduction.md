@@ -242,8 +242,6 @@ FASTR's rapid-cycle analytics address this gap by providing:
 - Continuous learning rather than one-off assessments
 - Direct feedback loops between data, analysis, and action
 
-During the COVID-19 pandemic, this approach was applied in over 20 countries to monitor disruptions to essential RMNCAH-N services and inform response and recovery planning.
-
 </div>
 <div>
 

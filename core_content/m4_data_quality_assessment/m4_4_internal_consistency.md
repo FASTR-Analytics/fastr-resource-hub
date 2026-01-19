@@ -52,4 +52,4 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency h:480](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)

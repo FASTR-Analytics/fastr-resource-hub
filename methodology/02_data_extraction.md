@@ -240,6 +240,54 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 *Facilitator will demonstrate the Data Downloader*
 <!-- /SLIDE -->
 
+<!-- SLIDE:m2_2b -->
+## Data Downloader: Login
+
+![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
+
+Enter your DHIS2 instance URL and credentials to connect.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2c -->
+## Data Downloader: Overview
+
+![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
+
+The main interface displays available data elements and download options.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2d -->
+## Data Downloader: Download history
+
+![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
+
+Track previous downloads and re-download data as needed.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2e -->
+## Data Downloader: Data dictionary
+
+![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
+
+Browse and search available data elements and indicators from your DHIS2 instance.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2f -->
+## Data Downloader: Facility list
+
+![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
+
+View and filter facilities by administrative level and organization unit.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2g -->
+## Data Downloader: Facility map
+
+![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
+
+Visualize facility locations on an interactive map.
+<!-- /SLIDE -->
+
 ---
 
 **Last updated**: 07-01-2026

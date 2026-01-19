@@ -28,14 +28,16 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 **% adequate quality = # monthly values meeting all criteria / total N of monthly values**
 
-![Overall DQA Score h:480](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
-## Mean DQA score: Average of component scores
+## Mean DQA score: How close are we to adequate quality?
 
-The mean DQA score averages two component scores:
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
 
-![Mean DQA Score h:480](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+Lower scores indicate more data quality issues that need attention before the data can be used with confidence.
+
+![Mean DQA Score](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
