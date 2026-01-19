@@ -534,15 +534,17 @@ A country may only need one project, or multiple projects can be used for:
 
 ## Practice: Logging Into the Platform
 
-**Steps:**
+<style scoped>
+table { border: none !important; background: transparent !important; }
+table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; }
+</style>
 
-1. Go to your country analytics platform URL
-2. Click **Sign up** to create an account
-3. Enter your information (you may need to verify your email)
-4. After logging in, you will initially see a blank page with no projects
-5. You will be added to the group project for today's session
-
-*Facilitator will provide the platform URL and assist with login.*
+| | |
+|:---|:---|
+| ![Login page h:200](../workshops/2026-zambia/media/01_login_page.png) | ![Sign up form h:200](../workshops/2026-zambia/media/02_sign_up.png) |
+| **1.** Go to https://zambia.fastr-analytics.org | **2.** Click Sign up and enter your details |
+| **3.** Enter your information (verify email) | |
+| **4.** After login, you'll be added to a project | |
 
 ---
 
@@ -743,6 +745,7 @@ For the FASTR analysis, completeness is defined as:
 
 - A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
 - A facility is expected to report if it has reported any volume for that indicator anytime within a year
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
 ---
 
@@ -752,7 +755,6 @@ For the FASTR analysis, completeness is defined as:
 
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
 
-- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
 ---
 

@@ -33,6 +33,7 @@ For the FASTR analysis, completeness is defined as:
 
 - A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
 - A facility is expected to report if it has reported any volume for that indicator anytime within a year
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
 ---
 
@@ -42,7 +43,6 @@ For the FASTR analysis, completeness is defined as:
 
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
 
-- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
 ---
 

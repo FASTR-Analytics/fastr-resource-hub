@@ -710,7 +710,11 @@ def load_workshop_config(workshop_id, base_dir):
     # Try YAML first
     if os.path.exists(yaml_path) and YAML_AVAILABLE:
         print(f"   Loading workshop.yaml")
-        return load_yaml_config(yaml_path)
+        config = load_yaml_config(yaml_path)
+        # Ensure workshop_id is set (from folder name if not in yaml)
+        if not config.get('workshop_id'):
+            config['workshop_id'] = workshop_id
+        return config
 
     # Fall back to Python config
     if os.path.exists(py_path):
@@ -1003,8 +1007,12 @@ def confirm_schedule():
 
 def substitute_variables(content, config, extra_vars=None):
     """Replace {{VARIABLE}} placeholders with actual values"""
+    workshop_id = config.get('workshop_id', '')
+    country_data = config.get('country_data', {})
+    country_name = country_data.get('COUNTRY', '').lower().replace(' ', '-')
+
     replacements = {
-        'WORKSHOP_ID': config.get('workshop_id', ''),
+        'WORKSHOP_ID': workshop_id,
         'WORKSHOP_NAME': config.get('name', ''),
         'DATE': config.get('date', ''),
         'LOCATION': config.get('location', ''),
@@ -1017,6 +1025,10 @@ def substitute_variables(content, config, extra_vars=None):
         'LUNCH_TIME': config.get('lunch_time', '1:00 PM'),
         'AFTERNOON_TEA_TIME': config.get('afternoon_tea_time', '3:30 PM'),
         'DAY_START_TIME': config.get('day_start_time', '9:00 AM'),
+        # Workshop-specific media path (relative to outputs/ folder)
+        'WORKSHOP_MEDIA': f'../workshops/{workshop_id}/media' if workshop_id else '../media',
+        # Platform URL based on country name (e.g., https://zambia.fastr-analytics.org/)
+        'PLATFORM_URL': f'https://{country_name}.fastr-analytics.org' if country_name else 'https://fastr-analytics.org',
     }
 
     # Add country_data variables (all keys become {{key}} variables)

@@ -254,6 +254,10 @@ def fix_image_paths(content, source_file):
         if img_path.startswith('http://') or img_path.startswith('https://'):
             return match.group(0)
 
+        # Skip template variables like {{WORKSHOP_MEDIA}}/file.png
+        if '{{' in img_path:
+            return match.group(0)
+
         # Skip already-fixed paths (starts with ../../resources)
         if img_path.startswith('../../resources/'):
             return match.group(0)
