@@ -72,7 +72,7 @@ schedule:
 
     - time: "11:30-12:30"
       session: "Introduction to the FASTR analytics platform"
-      topics: [m3_1, m3_2]
+      topics: [m3_1, m3_1b, m3_2]
       speaker: "GFF FASTR team"
       duration: 60
 

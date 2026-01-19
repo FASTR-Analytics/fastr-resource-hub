@@ -466,6 +466,16 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 
 
 
+## Platform Capabilities
+
+![Platform Capabilities](../resources/diagrams/platform_capabilities.svg)
+
+Data flows from import through analysis to shareable outputs.
+
+---
+
+
+
 ## Live Demo: Platform Access & Roles
 
 **In this demo, we will:**
