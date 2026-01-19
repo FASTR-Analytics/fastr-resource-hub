@@ -6,6 +6,6 @@ paginate: true
 
 ## Platform Capabilities
 
-![Platform Capabilities](../../resources/diagrams/platform_capabilities.svg)
+![Platform Capabilities h:380](../../resources/diagrams/platform_capabilities.svg)
 
 Data flows from import through analysis to shareable outputs.
