@@ -476,6 +476,78 @@ Data flows from import through analysis to shareable outputs.
 
 
 
+## Country Instance
+
+Each country has its own **instance** of the FASTR analytics platform.
+
+An instance contains:
+
+- All registered users and their accounts
+- The shared administrative structure (regions, districts, facilities)
+- Indicator definitions and data sources
+- All projects created for that country
+
+**Think of an instance as your country's dedicated workspace.**
+
+---
+
+
+
+## User Roles and Permissions
+
+There are two levels of permissions in the platform:
+
+**Instance-level roles:**
+
+- **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+
+**Project-level roles:**
+
+- **Project Editors** can create visualizations, create reports, and download/export results
+- **Project Viewers** can view visualizations, view reports, and download/export results
+
+*Administrators are assigned per instance; Editors and Viewers are assigned per project.*
+
+---
+
+
+
+## Projects Within an Instance
+
+Each country instance can contain **multiple projects**.
+
+A country may only need one project, or multiple projects can be used for:
+
+- Different versions of analyses
+- A demo or playground project
+- Separate projects for different teams or programs
+
+**Key questions when setting up:**
+
+- Who is the admin?
+- Who can edit?
+- Who can view?
+
+---
+
+
+
+## Practice: Logging Into the Platform
+
+**Steps:**
+
+1. Go to your country analytics platform URL
+2. Click **Sign up** to create an account
+3. Enter your information (you may need to verify your email)
+4. After logging in, you will initially see a blank page with no projects
+5. You will be added to the group project for today's session
+
+*Facilitator will provide the platform URL and assist with login.*
+
+---
+
+
+
 ## Live Demo: Platform Access & Roles
 
 **In this demo, we will:**
