@@ -20,6 +20,6 @@ Rien dans le présent document ne peut constituer ou être interprété ou consi
 
 ## Droits et autorisations
 
-Le matériel contenu dans cet ouvrage est soumis à des droits d'auteur. La Banque mondiale encourageant la diffusion de ses connaissCPNes, cet ouvrage peut être reproduit, en tout ou en partie, à des fins non commerciales, à condition qu'il soit fait mention de la source.
+Le matériel contenu dans cet ouvrage est soumis à des droits d'auteur. La Banque mondiale encourageant la diffusion de ses connaissances, cet ouvrage peut être reproduit, en tout ou en partie, à des fins non commerciales, à condition qu'il soit fait mention de la source.
 
 Toute question concernant les droits et les licences, y compris les droits subsidiaires, doit être adressée à World Bank Publications, The World Bank Group, 1818 H Street NW, Washington, DC 20433, USA ; fax : 202-522-2625 ; e-mail : pubrights@worldbank.org.

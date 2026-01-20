@@ -7,15 +7,15 @@
 
 > **Note:** Le contenu de cette section est susceptible d'être révisé.
 
-## FASTR SRMNIA-N surveillCPNe de l'utilisation des services
+## FASTR SRMNIA-N surveillance de l'utilisation des services
 
 Cette documentation décrit l'approche FASTR pour le suivi de la prestation des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N) en utilisant les données du système d'information sur la gestion de la santé (SIGS). La méthodologie guide les utilisateurs à travers un processus de bout en bout : de la définition des questions prioritaires et de l'extraction des données à la communication des résultats pour la prise de décision, en passant par l'analyse basée sur une plateforme.
 
 ## Contexte
 
-La Facilité de finCPNement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Les systèmes d'information sur la gestion de la santé dans les pays à revenu faible et intermédiaire génèrent mensuellement des données de routine sur la prestation de services au niveau des établissements. Cependant, ces données sont souvent affectées par des rapports incomplets, des statistiques aberrantes et des incohérences internes qui limitent leur utilité analytique.
+La Facilité de financement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Les systèmes d'information sur la gestion de la santé dans les pays à revenu faible et intermédiaire génèrent mensuellement des données de routine sur la prestation de services au niveau des établissements. Cependant, ces données sont souvent affectées par des rapports incomplets, des statistiques aberrantes et des incohérences internes qui limitent leur utilité analytique.
 
-Les enquêtes traditionnelles auprès des ménages (EDS, MICS) fournissent des estimations validées de la couverture, mais sont menées peu fréquemment (généralement tous les 3 à 5 ans), ce qui crée des lacunes dans la disponibilité de données opportunes pour le suivi des tendCPNes de la prestation de services, la détection des perturbations et le suivi des progrès accomplis dans la réalisation des objectifs du système de santé. FASTR répond à ces contraintes grâce à un processus analytique structuré qui évalue et corrige systématiquement les problèmes de qualité des données de routine du SIGS.
+Les enquêtes traditionnelles auprès des ménages (EDS, MICS) fournissent des estimations validées de la couverture, mais sont menées peu fréquemment (généralement tous les 3 à 5 ans), ce qui crée des lacunes dans la disponibilité de données opportunes pour le suivi des tendances de la prestation de services, la détection des perturbations et le suivi des progrès accomplis dans la réalisation des objectifs du système de santé. FASTR répond à ces contraintes grâce à un processus analytique structuré qui évalue et corrige systématiquement les problèmes de qualité des données de routine du SIGS.
 
 ## La méthodologie FASTR
 
@@ -25,7 +25,7 @@ La méthodologie FASTR commence par l'identification des questions analytiques p
 
 ### Extraction des données
 
-Les données au niveau de l'établissement sont extraites directement du DHIS2 via des API à une résolution mensuelle et structurées dans la plateforme pour soutenir l'évaluation de la qualité des données, l'analyse infranationale et le suivi des tendCPNes.
+Les données au niveau de l'établissement sont extraites directement du DHIS2 via des API à une résolution mensuelle et structurées dans la plateforme pour soutenir l'évaluation de la qualité des données, l'analyse infranationale et le suivi des tendances.
 
 ### La plateforme d'analyse FASTR
 
@@ -41,7 +41,7 @@ Le module d'ajustement de la qualité des données produit quatre versions paral
 
 ### module 3 de la plateforme : Analyse de l'utilisation des services
 
-Ce module applique des techniques de contrôle des processus statistiques pour détecter les écarts entre les volumes de services et les modèles attendus, après avoir pris en compte la saisonnalité et les tendCPNes à long terme. Des modèles de régression par panel sont estimés aux niveaux national, régional et du district pour quantifier l'ampleur et la signification statistique des déficits ou des excédents de services pendant les périodes de perturbation identifiées.
+Ce module applique des techniques de contrôle des processus statistiques pour détecter les écarts entre les volumes de services et les modèles attendus, après avoir pris en compte la saisonnalité et les tendances à long terme. Des modèles de régression par panel sont estimés aux niveaux national, régional et du district pour quantifier l'ampleur et la signification statistique des déficits ou des excédents de services pendant les périodes de perturbation identifiées.
 
 ### module 4 de la plateforme : Estimation de la couverture
 

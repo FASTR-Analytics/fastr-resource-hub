@@ -118,13 +118,13 @@ Tableau de la carte thermique avec les zones en lignes et les indicateurs de san
 
 **3. Complétude des indicateurs dans le temps**
 
-Graphiques chronologiques horizontaux montrant les tendCPNes en matière d'exhaustivité pour chaque indicateur au cours de la période d'analyse.
+Graphiques chronologiques horizontaux montrant les tendances en matière d'exhaustivité pour chaque indicateur au cours de la période d'analyse.
 
 (resources/default_outputs/Default_3._Proportion_of_completed_records_over_time.png)
 
 **4. Cohérence interne**
 
-Tableau de la carte thermique avec les zones comme lignes et les catégories de repères de cohérence comme colonnes, codées par couleur en fonction de la performCPNe.
+Tableau de la carte thermique avec les zones comme lignes et les catégories de repères de cohérence comme colonnes, codées par couleur en fonction de la performance.
 
 (resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
@@ -161,7 +161,7 @@ Pour la carte thermique de l'exhaustivité des indicateurs (résultat 2) :
 
 Pour le graphique de l'exhaustivité de l'indicateur dans le temps (résultat 3) :
 
-- **Tableau chronologique horizontal** montrant les tendCPNes de l'exhaustivité par indicateur
+- **Tableau chronologique horizontal** montrant les tendances de l'exhaustivité par indicateur
 - **Axe X** : Période de temps
 - **Axe Y** : Pourcentage d'exhaustivité
 - Indique si les rapports s'améliorent, diminuent ou sont stables
@@ -197,7 +197,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     GEOLEVEL <- "admin_area_3"  # Admin level (1=national, 2=région, 3=district, etc.)
     ```
 
-    Le paramètre `GEOLEVEL` détermine le niveau d'agrégation pour l'analyse de cohérence. Les niveaux administratifs inférieurs (3-4) permettent de saisir les tendCPNes locales, mais les données peuvent être rares. Les niveaux supérieurs (2) fournissent des estimations plus stables mais peuvent masquer des incohérences locales.
+    Le paramètre `GEOLEVEL` détermine le niveau d'agrégation pour l'analyse de cohérence. Les niveaux administratifs inférieurs (3-4) permettent de saisir les tendances locales, mais les données peuvent être rares. Les niveaux supérieurs (2) fournissent des estimations plus stables mais peuvent masquer des incohérences locales.
 
 ? ?? "Paramètres de détection des valeurs aberrantes
 
@@ -212,7 +212,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     MADS <- 10  # Flag if value > 10 MADs from median
     ```
 
-    **Tuning guidCPNe:**
+    **Tuning guidance:**
     - **Détection plus sensible** : Abaisser `valeur aberrante_PROPORTION_THRESHOLD` à 0,6-0,7, réduire `MADS` à 8
     - **Détection moins sensible** : Augmenter __CODE_BLOC_44__ à 0,9, augmenter __CODE_BLOC_45__ à 12-15
     - **Petites installations** : Réduire __CODE_BLOC_46__ à 50
@@ -238,7 +238,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     )
     ```
 
-    Les fourchettes reflètent les attentes du programme. Par exemple, la CPN1 devrait toujours être au moins 95% de la CPN4 (plus de femmes commencent les soins que de femmes qui vont jusqu'au bout des quatre visites). La tolérCPNe de 5 % tient compte des variations dans la saisie des données. Le BCG, en tant que vaccin administré à la naissCPNe, devrait correspondre approximativement au nombre d'accouchements dans les établissements de santé, avec une tolérCPNe de 30 % pour les variations.
+    Les fourchettes reflètent les attentes du programme. Par exemple, la CPN1 devrait toujours être au moins 95% de la CPN4 (plus de femmes commencent les soins que de femmes qui vont jusqu'au bout des quatre visites). La tolerance de 5 % tient compte des variations dans la saisie des données. Le BCG, en tant que vaccin administré à la naissance, devrait correspondre approximativement au nombre d'accouchements dans les établissements de santé, avec une tolerance de 30 % pour les variations.
 
 ### Spécifications des entrées/sorties
 
@@ -319,7 +319,7 @@ __CODE_BLOC_4__
 
     - Calcul des pourcentages d'exhaustivité
     - Identification des lacunes en matière de déclaration
-    - Analyse des tendCPNes du comportement en matière de déclaration
+    - Analyse des tendances du comportement en matière de déclaration
 
 ? ?? "M1_output_consistency_geo.csv - Cohérence au niveau géographique"
 
@@ -375,7 +375,7 @@ __CODE_BLOC_4__
     **Cas d'utilisation** :
 
     - Filtrage des données pour les modules suivants (par exemple, n'utiliser que les mois d'installation avec dqa_score=1)
-    - Suivi des tendCPNes de la qualité des données dans le temps
+    - Suivi des tendances de la qualité des données dans le temps
     - Identifier les établissements qui ont besoin d'un soutien pour améliorer la qualité des données
 
 ### Documentation sur les fonctions clés
@@ -726,7 +726,7 @@ __CODE_BLOC_4__
 
     Le module applique des repères définis par programme pour les paires d'indicateurs :
 
-    **ConsistCPNe CPN:**
+    **Coherence CPN:**
 
     $$
     \text{CPN Consistency} =
@@ -736,9 +736,9 @@ __CODE_BLOC_4__
     \NFin{cases}
     $$
 
-    **Interprétation** : Plus de femmes devraient commencer la CPN (CPN1) que terminer les quatre visites (CPN4). Le ratio devrait être ≥ 0,95, avec une tolérCPNe de 5 % pour les variations de données.
+    **Interprétation** : Plus de femmes devraient commencer la CPN (CPN1) que terminer les quatre visites (CPN4). Le ratio devrait être ≥ 0,95, avec une tolerance de 5 % pour les variations de données.
 
-    **ConsistCPNe Penta:**
+    **Coherence Penta:**
 
     $$
     \text{Penta Consistency} =
@@ -753,14 +753,14 @@ __CODE_BLOC_4__
     **BCG/Cohérence d'administration:**
 
     $$
-    \text{BCG/ConsistCPNe d'administration} =
+    \text{BCG/Coherence d'administration} =
     \begin{cases}
     1, & 0.7 \leq \frac{\text{BCG Volume}}{\text{Delivery Volume}} \leq 1.3 \\N- \N- \N- \N
     0, & \text{autre}
     \N-END{cases}
     $$
 
-    **Interprétation** : Le BCG est un vaccin administré à la naissCPNe, de sorte que le nombre de vaccinations par le BCG devrait être à peu près égal au nombre d'accouchements dans les établissements. La fourchette plus large (±30%) tient compte des nourrissons nés ailleurs qui reçoivent le BCG dans l'établissement ou des nourrissons nés dans l'établissement qui reçoivent le BCG ailleurs.
+    **Interprétation** : Le BCG est un vaccin administré à la naissance, de sorte que le nombre de vaccinations par le BCG devrait être à peu près égal au nombre d'accouchements dans les établissements. La fourchette plus large (±30%) tient compte des nourrissons nés ailleurs qui reçoivent le BCG dans l'établissement ou des nourrissons nés dans l'établissement qui reçoivent le BCG ailleurs.
 
     **Détail de la mise en œuvre:**
     La cohérence est évaluée au niveau du district/de l'arrondissement (spécifié par `GEOLEVEL`) pour tenir compte des patients qui se rendent dans plusieurs établissements de leur région pour différents services.
@@ -1171,16 +1171,16 @@ __CODE_BLOC_4__
     - Envisager un traitement par année si les ensembles de données pluriannuels posent des problèmes de mémoire
     - Surveillez l'utilisation de la mémoire : `pryr::mem_used()` à différentes étapes
 
-? ?? "Opportunités d'optimisation des performCPNes"
+? ?? "Opportunités d'optimisation des performances"
 
     **Mise en œuvre actuelle:**
     L'analyse de complétude traite les indicateurs séquentiellement en utilisant `lapply()`.
 
     **Amélioration potentielle:**
-    Pour les ensembles de données comportant de nombreux indicateurs, la parallélisation pourrait améliorer les performCPNes :
+    Pour les ensembles de données comportant de nombreux indicateurs, la parallélisation pourrait améliorer les performances :
 
     ```r
-    # Future enhCPNement (not in current code)
+    # Future enhancement (not in current code)
     library(parallel)
 
     # Detect available cores
@@ -1264,8 +1264,8 @@ __CODE_BLOC_4__
     - Un faible taux d'exhaustivité pour des indicateurs spécifiques peut refléter de véritables lacunes dans les services
 
     **Cohérence:**
-    - la cohérence = 0 peut indiquer des problèmes de qualité des données OU des problèmes de performCPNe programmatique (par exemple, un taux d'abandon élevé)
-    - L'interprétation nécessite des connaissCPNes programmatiques
+    - la cohérence = 0 peut indiquer des problèmes de qualité des données OU des problèmes de performance programmatique (par exemple, un taux d'abandon élevé)
+    - L'interprétation nécessite des connaissances programmatiques
     - Les schémas géographiques peuvent aider à distinguer les problèmes systématiques des erreurs aléatoires
 
     **Scores AQD:**
@@ -1395,7 +1395,7 @@ L'analyse FASTR suit un processus séquentiel où chaque étape s'appuie sur la 
 - Il existe des incohérences entre les indicateurs connexes
 
 **Conséquences:** Les limites de la qualité des données affectent la prise de décision
-- Évaluations inexactes des tendCPNes en matière de prestation de services
+- Évaluations inexactes des tendances en matière de prestation de services
 - Mauvaise identification des domaines nécessitant une intervention
 - Affectation sous-optimale des ressources
 
@@ -1407,7 +1407,7 @@ L'analyse FASTR suit un processus séquentiel où chaque étape s'appuie sur la 
 
 L'évaluation systématique de la qualité des données permet d'appliquer des ajustements ciblés, améliorant ainsi l'utilité des données du système d'information sur les ménages pour la prise de décision fondée sur des données probantes.
 
-**Objectif 2 : surveiller les tendCPNes en matière de qualité des données
+**Objectif 2 : surveiller les tendances en matière de qualité des données
 
 L'évaluation de la qualité des données permet un suivi continu pour :
 - D'éclairer la sélection des indicateurs sur la base des profils de qualité dans l'ensemble du système d'information sur les ménages
@@ -1439,7 +1439,7 @@ Ces trois dimensions permettent une évaluation complète de la fiabilité des d
 
 **Pourquoi c'est important:**
 - Une plus grande exhaustivité améliore la fiabilité des données
-- La stabilité dans le temps renforce l'analyse des tendCPNes
+- La stabilité dans le temps renforce l'analyse des tendances
 
 **Distinction clé:**
 Complétude de l'indicateur ≠ Complétude du rapport. Cette mesure examine des éléments de données spécifiques, et pas seulement la question de savoir si le formulaire mensuel a été soumis.
@@ -1548,7 +1548,7 @@ Les indicateurs du programme ayant une relation prévisible sont examinés afin 
 
 Ces paires ont des relations attendues. Nous nous attendons à ce que CPN1 > CPN4 puisque toutes les femmes n'effectuent pas quatre visites.
 
-Le BCG est un vaccin administré à la naissCPNe, nous nous attendons donc à ce que le nombre d'accouchements en établissement soit similaire, avec une tolérCPNe de 30 % pour la variabilité.
+Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce que le nombre d'accouchements en établissement soit similaire, avec une tolerance de 30 % pour la variabilité.
 
 </div>
 <div>
@@ -1592,7 +1592,7 @@ La vérification de la cohérence au niveau de l'établissement de santé ne tie
 
 Une mesure composite de la qualité des données donne une vue d'ensemble de la manière dont un ensemble de données répond aux normes de qualité.
 
-En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Les systèmes de santé peuvent ainsi évaluer rapidement la fiabilité des données, ce qui facilite l'identification des tendCPNes et des problèmes en un coup d'œil.
+En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Les systèmes de santé peuvent ainsi évaluer rapidement la fiabilité des données, ce qui facilite l'identification des tendances et des problèmes en un coup d'œil.
 
 ---
 

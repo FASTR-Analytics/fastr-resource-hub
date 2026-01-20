@@ -111,7 +111,12 @@
       "Bash(/bin/echo:*)",
       "Bash(/bin/bash:*)",
       "Bash(npx marp:*)",
-      "Bash(code --list-extensions:*)"
+      "Bash(code --list-extensions:*)",
+      "Bash(mkdocs serve:*)",
+      "Bash(for:*)",
+      "Bash(do sed -i '' 's/<!-- Add <!-- REVIEWED --> after human review to protect from overwrite -->/<!-- Add REVIEWED marker after human review to protect from overwrite -->/' \"$f\")",
+      "Bash(pkill:*)",
+      "Bash(curl:*)"
     ]
   }
 }

@@ -10,23 +10,23 @@
 Le module Estimations de la couverture quantifie la couverture des services de santé en intégrant les volumes de services administratifs ajustés du Système d'information sur la gestion de la santé (SIGS), les projections démographiques des Perspectives de la population mondiale des Nations unies (UN WPP) et les données d'enquêtes auprès des ménages. Le module s'appuie actuellement sur les enquêtes démographiques et de santé (EDS) et les enquêtes en grappes à indicateurs multiples (MICS), mais il est conçu pour intégrer d'autres sources d'enquêtes représentatives au niveau national dès qu'elles seront disponibles. Le module estime la part de la population cible qui a bénéficié d'un service de santé donné, fournissant ainsi une mesure standardisée de la portée des services à des fins de suivi, de comparaison et d'analyse en aval.
 Le module est structuré en deux composantes.
 
-**La partie 1** construit les dénominateurs de la population cible en utilisant plusieurs approches méthodologiques et évalue leur performCPNe en comparant les estimations de couverture obtenues avec les valeurs de référence des enquêtes disponibles pour chaque indicateur de santé.
+**La partie 1** construit les dénominateurs de la population cible en utilisant plusieurs approches méthodologiques et évalue leur performance en comparant les estimations de couverture obtenues avec les valeurs de référence des enquêtes disponibles pour chaque indicateur de santé.
 
-**La partie 2** permet aux utilisateurs de revoir et d'ajuster les choix de dénominateurs en fonction de considérations programmatiques et d'étendre dans le temps les estimations de couverture basées sur des enquêtes en utilisant les tendCPNes dérivées des données administratives, lorsque les données d'enquête ne sont pas disponibles.
+**La partie 2** permet aux utilisateurs de revoir et d'ajuster les choix de dénominateurs en fonction de considérations programmatiques et d'étendre dans le temps les estimations de couverture basées sur des enquêtes en utilisant les tendances dérivées des données administratives, lorsque les données d'enquête ne sont pas disponibles.
 
 Ensemble, ces composantes convertissent les volumes de services administratifs en estimations de couverture standardisées qui peuvent être examinées dans le temps et à différents niveaux géographiques, et utilisées dans des contextes d'analyse et de suivi.
 
 ### Raison d'être de l'analyse
 
-La couverture des services de santé est une mesure essentielle pour évaluer la performCPNe et l'équité du système de santé. Bien que le module 2 produise des volumes de services ajustés, ces chiffres n'indiquent pas à eux seuls dans quelle mesure les services atteignent les populations qu'ils sont censés desservir. Les estimations de la couverture placent la prestation de services dans son contexte en établissant un lien entre les volumes de services et les besoins de la population.
+La couverture des services de santé est une mesure essentielle pour évaluer la performance et l'équité du système de santé. Bien que le module 2 produise des volumes de services ajustés, ces chiffres n'indiquent pas à eux seuls dans quelle mesure les services atteignent les populations qu'ils sont censés desservir. Les estimations de la couverture placent la prestation de services dans son contexte en établissant un lien entre les volumes de services et les besoins de la population.
 
 Ce module aborde les principaux défis liés à l'estimation de la couverture, notamment :
 
 - **Multiples sources de données** : Intégration des données SIGS avec les données d'enquête
 
-- **L'incertitude du dénominateur : Différentes méthodes d'estimation des populations cibles peuvent donner des résultats différents ; le module évalue systématiquement les options
+- **L'incertitude du denominateur** : Differentes methodes d'estimation des populations cibles peuvent donner des resultats differents ; le module evalue systematiquement les options
 
-- **Lacunes temporelles** : Les enquêtes ont lieu tous les 3 à 5 ans ; le module projette des estimations pour les années intermédiaires en utilisant les tendCPNes administratives
+- **Lacunes temporelles** : Les enquêtes ont lieu tous les 3 à 5 ans ; le module projette des estimations pour les années intermédiaires en utilisant les tendances administratives
 
 - **Analyse infranationale** : Permet le suivi de la couverture au niveau national, provincial et du district
 
@@ -54,9 +54,9 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 
 - Permet aux utilisateurs d'ignorer les sélections automatiques et de choisir des dénominateurs spécifiques
 
-- Calcul des tendCPNes de couverture d'une année sur l'autre à partir des données administratives
+- Calcul des tendances de couverture d'une année sur l'autre à partir des données administratives
 
-- Projette les estimations de l'enquête vers l'avant en utilisant les tendCPNes du SIGS pour combler les lacunes temporelles
+- Projette les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS pour combler les lacunes temporelles
 
 - Résultats : Estimations finales de la couverture combinant les données du SIGS, de l'enquête et les valeurs projetées
 
@@ -98,19 +98,19 @@ Si des données infranationales sont disponibles, le processus se répète pour 
 #### Partie 2 : Sélection du dénominateur et projection de l'enquête
 
 **Étape 1 : Configuration par l'utilisateur**
-Les utilisateurs examinent les résultats de la partie 1 et configurent la sélection des dénominateurs pour chaque indicateur. Les options comprennent l'utilisation de la "meilleure" sélection automatique ou l'utilisation d'un dénominateur spécifique basé sur la connaissCPNe du programme.
+Les utilisateurs examinent les résultats de la partie 1 et configurent la sélection des dénominateurs pour chaque indicateur. Les options comprennent l'utilisation de la "meilleure" sélection automatique ou l'utilisation d'un dénominateur spécifique basé sur la connaissance du programme.
 
 **Étape 2 : Filtrer sur les dénominateurs sélectionnés**
 Le module filtre les résultats combinés de la partie 1 pour n'inclure que les dénominateurs sélectionnés par l'utilisateur, créant ainsi un ensemble de données ciblé pour l'analyse.
 
-**Étape 3 : Calculer les tendCPNes de la couverture**
+**Étape 3 : Calculer les tendances de la couverture**
 Les changements d'une année sur l'autre (deltas) dans la couverture basée sur le SIGS sont calculés. Cela permet de savoir si la couverture augmente, diminue ou est stable dans le temps.
 
 **Étape 4 : Identifier les données de référence de l'enquête**
-Pour chaque zone géographique et chaque indicateur, l'observation la plus récente de l'enquête est identifiée comme le point d'CPNrage de référence pour les projections.
+Pour chaque zone géographique et chaque indicateur, l'observation la plus récente de l'enquête est identifiée comme le point d'ancrage de référence pour les projections.
 
 **Étape 5 : Projeter les estimations de l'enquête dans l'avenir**
-Le module étend les estimations de la couverture de l'enquête aux années sans enquête en appliquant les tendCPNes du système d'information sur les ménages. La projection utilise : La valeur de la dernière enquête + (couverture SIGS de l'année en cours - couverture SIGS de l'année de l'enquête). Cela permet de préserver le calibrage de l'enquête tout en incorporant les tendCPNes observées.
+Le module étend les estimations de la couverture de l'enquête aux années sans enquête en appliquant les tendances du système d'information sur les ménages. La projection utilise : La valeur de la dernière enquête + (couverture SIGS de l'année en cours - couverture SIGS de l'année de l'enquête). Cela permet de préserver le calibrage de l'enquête tout en incorporant les tendances observées.
 
 **Étape 6 : Combiner toutes les estimations**
 Le résultat final fusionne trois types d'estimations :
@@ -119,10 +119,10 @@ Le résultat final fusionne trois types d'estimations :
 
 - **Valeurs originales de l'enquête** : Observations réelles de l'enquête auprès des ménages
 
-- **Couverture projetée de l'enquête** : Estimations de l'enquête étendues à l'aide des tendCPNes du système d'information sur les ménages
+- **Couverture projetée de l'enquête** : Estimations de l'enquête étendues à l'aide des tendances du système d'information sur les ménages
 
-**Étape 7 : Sauvegarde des résultats finaux
-Les résultats sont sauvegardés avec des structures de colonnes standardisées pour chaque niveau administratif, prêts pour la visualisation et les rapports.
+**Etape 7 : Sauvegarde des resultats finaux**
+Les resultats sont sauvegardes avec des structures de colonnes standardisées pour chaque niveau administratif, prêts pour la visualisation et les rapports.
 
 ### Diagramme de flux de travail
 
@@ -132,11 +132,11 @@ Les résultats sont sauvegardés avec des structures de colonnes standardisées 
 
 **1. Sélection des dénominateurs**
 
-Dans la partie 1, le module sélectionne automatiquement les options de dénominateur en fonction de leur alignement sur les valeurs de référence disponibles pour l'enquête. Dans la partie 2, les utilisateurs peuvent revoir et remplacer ces sélections en fonction de leurs connaissCPNes programmatiques ou de leurs priorités analytiques. Le choix du dénominateur détermine si les estimations de couverture sont principalement CPNrées dans les modèles de prestation de services observés (dénominateurs basés sur le SIGS) ou dans les projections démographiques (dénominateurs basés sur la population).
+Dans la partie 1, le module sélectionne automatiquement les options de dénominateur en fonction de leur alignement sur les valeurs de référence disponibles pour l'enquête. Dans la partie 2, les utilisateurs peuvent revoir et remplacer ces sélections en fonction de leurs connaissances programmatiques ou de leurs priorités analytiques. Le choix du dénominateur détermine si les estimations de couverture sont principalement ancrées dans les modèles de prestation de services observés (dénominateurs basés sur le SIGS) ou dans les projections démographiques (dénominateurs basés sur la population).
 
 **2. Traitement des écarts entre les enquêtes**
 
-Les enquêtes auprès des ménages sont menées à intervalles irréguliers, généralement tous les trois à cinq ans. Dans la partie 1, les valeurs de l'enquête sont reportées entre les années d'enquête, ce qui suppose implicitement une couverture constante jusqu'à la prochaine observation de l'enquête. Dans la partie 2, la couverture est projetée vers l'avant en utilisant les tendCPNes dérivées des données SIGS, ce qui permet de refléter les changements dans la prestation de services au cours des périodes sans données d'enquête.
+Les enquêtes auprès des ménages sont menées à intervalles irréguliers, généralement tous les trois à cinq ans. Dans la partie 1, les valeurs de l'enquête sont reportées entre les années d'enquête, ce qui suppose implicitement une couverture constante jusqu'à la prochaine observation de l'enquête. Dans la partie 2, la couverture est projetée vers l'avant en utilisant les tendances dérivées des données SIGS, ce qui permet de refléter les changements dans la prestation de services au cours des périodes sans données d'enquête.
 
 **3. Utilisation de données d'enquête nationales ou infranationales**
 
@@ -153,17 +153,17 @@ Chaque indicateur de santé correspond à une population cible spécifique (par 
 
 Le module intègre trois sources de données primaires : les volumes annualisés de services SIGS agrégés par unité géographique ; les estimations de la couverture de l'enquête sur les ménages harmonisées entre les cycles d'enquête et complétées pour créer des séries temporelles continues ; et les projections démographiques filtrées pour extraire les populations spécifiques à l'âge et au sexe pertinentes pour chaque indicateur de santé.
 
-**Construction du dénominateur
+**Construction du denominateur**
 
 En utilisant la relation entre les volumes de services SIGS déclarés et les estimations de couverture basées sur l'enquête, le module dérive des dénominateurs implicites SIGS représentant la taille de la population cohérente avec la prestation de services observée et les niveaux de couverture de l'enquête. Ces dénominateurs sont ensuite ajustés pour refléter les populations cibles spécifiques à l'indicateur par le biais de corrections démographiques séquentielles, y compris la perte de grossesse, la mortinatalité et la mortalité.
 
-**Calcul de la couverture
+**Calcul de la couverture**
 
 Les estimations de couverture multiples sont calculées en divisant les volumes de services par des options de dénominateur alternatives, y compris des approches basées sur la population, des approches implicites SIGS et des approches hybrides. Chaque estimation de couverture est évaluée par rapport aux valeurs de référence de l'enquête afin d'évaluer la plausibilité et d'informer la sélection du dénominateur pour chaque indicateur.
 
-**Projection temporelle
+**Projection temporelle**
 
-Pour les années au-delà de l'observation la plus récente de l'enquête, les estimations de couverture sont projetées en combinant la dernière valeur observée de l'enquête avec les tendCPNes dérivées des données SIGS.
+Pour les annees au-dela de l'observation la plus récente de l'enquête, les estimations de couverture sont projetées en combinant la dernière valeur observée de l'enquête avec les tendances dérivées des données SIGS.
 
 ---
 
@@ -173,7 +173,7 @@ L'analyse FASTR génère des visualisations d'estimations de couverture à plusi
 
 **1. Couverture calculée à partir des données SIGS (national)**
 
-TendCPNes de la couverture au niveau national comparant les estimations dérivées du SIGS aux références de l'enquête.
+Tendances de la couverture au niveau national comparant les estimations dérivées du SIGS aux références de l'enquête.
 
 ![Couverture calculée à partir des données SIGS au niveau national](resources/default_outputs/module4_1_couverture_SIGS_National.png)
 
@@ -195,13 +195,13 @@ Pour tous les graphiques de couverture (sorties 1-3) :
 
 - **Ligne/points noirs** : Couverture basée sur des enquêtes (EDS/MICS) - la norme de référence
 - **Ligne/points gris** : Couverture basée sur le SIGS calculée à partir des données de l'établissement
-- **Ligne/points rouges** : Ligne/points rouges** : Couverture projetée étendant les estimations de l'enquête en utilisant les tendCPNes du SIGS
+- **Ligne/points rouges** : Ligne/points rouges** : Couverture projetée étendant les estimations de l'enquête en utilisant les tendances du SIGS
 - **Axe Y** : Pourcentage de couverture (0-100%)
 - **Axe X** : pourcentage de couverture (0-100%) Période (années)
 
 Niveaux géographiques :
 
-- **Sortie 1** : TendCPNes au niveau national
+- **Sortie 1** : Tendances au niveau national
 - **Sortie 2** : Ventilation de la zone administrative 2 (régionale/provinciale)
 - **Résultat 3** : Ventilation du domaine administratif 3 (district) pour le ciblage local
 
@@ -258,12 +258,12 @@ La partie 1 intègre trois sources de données primaires :
 
 - Source : GitHub Dépôt GitHub
 - Fournit des dénominateurs basés sur la population
-- Inclut la population totale, les naissCPNes, les populations de moins de 1 an et de moins de 5 ans
+- Inclut la population totale, les naissances, les populations de moins de 1 an et de moins de 5 ans
 
 **Contexte de données supplémentaires:**
 
 **Projections démographiques (UN WPP)**
-Issues des Perspectives de la population mondiale des Nations unies, ces estimations fournissent des chiffres de population par âge et de population totale utilisés pour calculer les dénominateurs des estimations de couverture. Ces projections tiennent compte des tendCPNes démographiques, notamment de la fécondité, de la mortalité et des migrations.
+Issues des Perspectives de la population mondiale des Nations unies, ces estimations fournissent des chiffres de population par âge et de population totale utilisés pour calculer les dénominateurs des estimations de couverture. Ces projections tiennent compte des tendances démographiques, notamment de la fécondité, de la mortalité et des migrations.
 
 **Données d'enquête - MICS**
 Les MICS, menées par l'UNICEF, fournissent des estimations basées sur des enquêtes auprès des ménages pour les principaux indicateurs de santé, y compris la couverture des services de santé maternelle et infantile.
@@ -336,7 +336,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Sortie** :
 
-    - `carried` : Données d'enquête étendues avec des valeurs remplies à l'avCPNe
+    - `carried` : Données d'enquête étendues avec des valeurs remplies à l'avance
     - cODE_BLOCK_54__ : Observations brutes de l'enquête (format large)
     - cODE_BLOCK_55__ : Observations brutes de l'enquête (format long) avec détails de la source
 
@@ -379,8 +379,8 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     1. **De l'CPN1** :
        - `dCPN1_pregnCPNy` : Grossesses estimées
        - cODE_BLOCK_67__ : Estimation des accouchements
-       - cODE_BLOCK_68__ : Estimation des naissCPNes (vivants + mort-nés)
-       - cODE_BLOCK_69__ : Estimation des naissCPNes vivantes
+       - cODE_BLOCK_68__ : Estimation des naissances (vivants + mort-nés)
+       - cODE_BLOCK_69__ : Estimation des naissances vivantes
        - cODE_BLOC_70__ : Eligible pour le DTC (ajusté pour la mortalité néonatale)
        - cODE_BLOCK_71__ : Éligible pour le MCV1
        - cODE_BLOC_72__ : Eligible pour le MCV2
@@ -410,9 +410,9 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **C. Vitamine A et vaccination complète** :
 
-    Pour chaque dénominateur de naissCPNe vivante, des dénominateurs supplémentaires sont automatiquement créés :
+    Pour chaque dénominateur de naissance vivante, des dénominateurs supplémentaires sont automatiquement créés :
 
-    - `d*_vitaminA` : NaissCPNes vivantes × (1 - U5MR) × 4,5 (enfants de 6 à 59 mois)
+    - `d*_vitaminA` : Naissances vivantes × (1 - U5MR) × 4,5 (enfants de 6 à 59 mois)
     - cODE_BLOC_97__ : NAISSCPNE VIVANTE × (1 - RMU5) × 4,5 (ENFANTS DE 6 À 59 MOIS) : NaissCPNe vivante × (1 - TMI)
 
     **Ajustement pour les déclarations incomplètes** :
@@ -448,7 +448,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **Input** :
 
     - Estimations de la couverture de tous les dénominateurs
-    - Valeurs de référence de l'enquête (remplies à l'avCPNe)
+    - Valeurs de référence de l'enquête (remplies à l'avance)
 
     **Algorithme de sélection** :
 
@@ -584,22 +584,22 @@ $$
 d_{\text{CPN1-accouchement}} = d_{\text{CPN1-grossesse}} \n- fois (1 - \text{taux de perte de grossesse})
 $$
 
-**NaissCPNes estimées** (ajustées pour les naissCPNes gémellaires) :
+**Naissances estimées** (ajustées pour les naissances gémellaires) :
 
 $$
-d_{\text{CPN1-naissCPNe}} = d_{\text{CPN1-accouchement}} / (1 - 0,5 fois \text{twin rate})
+d_{\text{CPN1-naissance}} = d_{\text{CPN1-accouchement}} / (1 - 0,5 fois \text{twin rate})
 $$
 
-**NaissCPNes vivantes estimées** (ajustées pour les mort-nés) :
+**Naissances vivantes estimées** (ajustées pour les mort-nés) :
 
 $$
-d_{\text{CPN1-naissCPNe vivante}} = d_{\text{CPN1-naissCPNe}} \n- fois (1 - \text{taux de mortinatalité})
+d_{\text{CPN1-naissance vivante}} = d_{\text{CPN1-naissance}} \n- fois (1 - \text{taux de mortinatalité})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** (ajusté pour la mortalité néonatale) :
 
 $$
-d_{\text{CPN1-DTC}} = d_{\text{CPN1-naissCPNe vivante}} \time (1 - \text{taux de mortalité néonatale})
+d_{\text{CPN1-DTC}} = d_{\text{CPN1-naissance vivante}} \time (1 - \text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** (ajusté pour la mortalité post-néonatale) :
@@ -620,28 +620,28 @@ $$
 
 À partir du nombre de livraisons institutionnelles et de la couverture de l'enquête :
 
-**NaissCPNes vivantes estimées** (calcul de base) :
+**Naissances vivantes estimées** (calcul de base) :
 
 $$
 d_{\text{delivery-livebirth}} = \frac{\text{count}_{\text{delivery}} \times 100}{\text{couverture}_{\text{delivery}}}
 $$
 
-**NaissCPNes estimées** (ajustées pour la mortinatalité) :
+**Naissances estimées** (ajustées pour la mortinatalité) :
 
 $$
 d_{\text{l'accouchement}} = d_{\text{l'accouchement}} / (1 - \text{taux de mortinatalité})
 $$
 
-**Grossesses estimées** (ajustées pour les naissCPNes gémellaires et les pertes de grossesse) :
+**Grossesses estimées** (ajustées pour les naissances gémellaires et les pertes de grossesse) :
 
 $$
-d_{{text{accouchement-grossesse}} = d_{{text{accouchement-naissCPNe}} \n- fois (1 - 0,5 \n- fois \n-{taux de jumeaux}) / (1 - \n-{taux de perte de grossesse})
+d_{{text{accouchement-grossesse}} = d_{{text{accouchement-naissance}} \n- fois (1 - 0,5 \n- fois \n-{taux de jumeaux}) / (1 - \n-{taux de perte de grossesse})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{délivrCPNe-DTC}} = d_{\text{délivrCPNe-naissCPNe vivante}} \n- fois (1 - \n-text{taux de mortalité néonatale})
+d_{\text{délivrCPNe-DTC}} = d_{\text{délivrCPNe-naissance vivante}} \n- fois (1 - \n-text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** :
@@ -664,16 +664,16 @@ $$
 
 À partir des chiffres de la vaccination BCG et de la couverture de l'enquête :
 
-**NaissCPNes vivantes estimées** (calcul de base) :
+**Naissances vivantes estimées** (calcul de base) :
 
 $$
-d_{\text{BCG-naissCPNes vivantes}} = \frac{\text{count}_{{text{BCG}} \times 100}{\text{couverture}_{\text{BCG}}}
+d_{\text{BCG-naissances vivantes}} = \frac{\text{count}_{{text{BCG}} \times 100}{\text{couverture}_{\text{BCG}}}
 $$
 
 **Grossesses estimées** (en remontant les ajustements démographiques) :
 
 $$
-d_{\text{BCG-grossesse}} = \frac{d_{\text{BCG-naissCPNe vivante}}}{(1 - \text{taux de perte de grossesse}) \times (1 + \text{taux de jumeaux}) \times (1 - \text{taux de mortinatalité})}
+d_{\text{BCG-grossesse}} = \frac{d_{\text{BCG-naissance vivante}}}{(1 - \text{taux de perte de grossesse}) \times (1 + \text{taux de jumeaux}) \times (1 - \text{taux de mortinatalité})}
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
@@ -708,50 +708,50 @@ $$
 
 ---
 
-**Dénominateurs dérivés du nombre de naissCPNes vivantes**
+**Dénominateurs dérivés du nombre de naissances vivantes**
 
-Lorsque les données sur les naissCPNes vivantes sont directement déclarées dans le système SIGS :
+Lorsque les données sur les naissances vivantes sont directement déclarées dans le système SIGS :
 
-**NaissCPNes vivantes estimées** (calcul de base) :
+**Naissances vivantes estimées** (calcul de base) :
 
 $$
-d_{\text{naissCPNes vivantes-naissCPNes vivantes}} = \frac{\text{count}_{{text{naissCPNes vivantes}} \times 100}{\text{couverture}_{\text{livebirth}}}
+d_{\text{naissances vivantes-naissances vivantes}} = \frac{\text{count}_{{text{naissances vivantes}} \times 100}{\text{couverture}_{\text{livebirth}}}
 $$
 
 **Grossesses estimées** (à rebours) :
 
 $$
-d_{\text{naissCPNes vivantes-grossesse}} = \frac{d_{{text{naissCPNes vivantes- naissCPNe vivante}} \n- fois (1 - 0.5 \n- fois \n-{taux de jumeaux})}{(1 - \n-{taux de mortinatalité}) \n- fois (1 - \n-{taux de perte de grossesse})}
+d_{\text{naissances vivantes-grossesse}} = \frac{d_{{text{naissances vivantes- naissance vivante}} \n- fois (1 - 0.5 \n- fois \n-{taux de jumeaux})}{(1 - \n-{taux de mortinatalité}) \n- fois (1 - \n-{taux de perte de grossesse})}
 $$
 
 **Accouchements estimés** :
 
 $$
-d_{\text{naissCPNes vivantes-accouchement}} = d_{\text{naissCPNes vivantes-grossesse}} \n- fois (1 - \text{taux de perte de grossesse})
+d_{\text{naissances vivantes-accouchement}} = d_{\text{naissances vivantes-grossesse}} \n- fois (1 - \text{taux de perte de grossesse})
 $$
 
-**NaissCPNes estimées** :
+**Naissances estimées** :
 
 $$
-d_{\text{naissCPNes vivantes}} = d_{\text{naissCPNes vivantes}} / (1 - \text{taux de mortinatalité})
+d_{\text{naissances vivantes}} = d_{\text{naissances vivantes}} / (1 - \text{taux de mortinatalité})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{naissCPNes vivantes-DTC}} = d_{\text{naissCPNes vivantes-naissCPNes vivantes}} \n- fois (1 - \n-text{taux de mortalité néonatale})
+d_{\text{naissances vivantes-DTC}} = d_{\text{naissances vivantes-naissances vivantes}} \n- fois (1 - \n-text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** :
 
 $$
-d_{\text{naissCPNes vivantes-rougeole1}} = d_{\text{naissCPNes vivantes-DTC}} \n- fois (1 - \n-text{taux de mortalité post-néonatale})
+d_{\text{naissances vivantes-rougeole1}} = d_{\text{naissances vivantes-DTC}} \n- fois (1 - \n-text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** :
 
 $$
-d_{\text{naissCPNes vivantes-rougeole2}} = d_{\text{naissCPNes vivantes-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
+d_{\text{naissances vivantes-rougeole2}} = d_{\text{naissances vivantes-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
 $$
 
 #### Calculs du dénominateur basés sur le PPNU
@@ -766,7 +766,7 @@ $$
 d_{\text{wpp-grossesse}} = \frac{\text{Taux brut de natalité}}{1000} \fréquences \fréquences \fréquences \fréquences{Population totale} \frac{1}{1 + \text{twin rate}} \frac{1}{1 + \text{twin rate}}
 $$
 
-**NaissCPNes vivantes estimées** (à partir du taux brut de natalité) :
+**Naissances vivantes estimées** (à partir du taux brut de natalité) :
 
 $$
 d_{{text{wpp-livebirth}} = \frac{\text{Taux brut de natalité}}{1000} \a fois \text{Population totale}
@@ -802,16 +802,16 @@ Cet ajustement garantit que les dénominateurs sont comparables aux volumes de s
 
 ---
 
-**Dénominateurs dérivés des estimations de naissCPNes vivantes (calculs secondaires)**
+**Dénominateurs dérivés des estimations de naissances vivantes (calculs secondaires)**
 
-Une fois que tous les dénominateurs primaires des naissCPNes vivantes ont été calculés (à partir des CPN1, des accouchements, du BCG, du Penta1, du nombre de naissCPNes vivantes et du WPP), le module génère des estimations supplémentaires de la population cible pour des interventions spécifiques en appliquant des ajustements de la mortalité en fonction de l'âge :
+Une fois que tous les dénominateurs primaires des naissances vivantes ont été calculés (à partir des CPN1, des accouchements, du BCG, du Penta1, du nombre de naissances vivantes et du WPP), le module génère des estimations supplémentaires de la population cible pour des interventions spécifiques en appliquant des ajustements de la mortalité en fonction de l'âge :
 
 **Enfants âgés de 6 à 59 mois (population cible pour la supplémentation en vitamine A)**
 
-Pour chaque source de dénominateur de naissCPNes vivantes, le nombre estimé d'enfants âgés de 6 à 59 mois est calculé :
+Pour chaque source de dénominateur de naissances vivantes, le nombre estimé d'enfants âgés de 6 à 59 mois est calculé :
 
 $$
-d_{\text{source-vitamineA}} = d_{\text{source-naissCPNe vivante}} \n- fois (1 - \text{taux de mortalité des enfants de moins de 5 ans}) \n- fois 4,5
+d_{\text{source-vitamineA}} = d_{\text{source-naissance vivante}} \n- fois (1 - \text{taux de mortalité des enfants de moins de 5 ans}) \n- fois 4,5
 $$
 
 Où :
@@ -823,19 +823,19 @@ Où :
 
 **Nourrissons de moins de 12 mois (population cible d'enfants complètement vaccinés)**
 
-Pour chaque source de dénominateur de naissCPNes vivantes, le nombre estimé de nourrissons de moins de 12 mois est calculé :
+Pour chaque source de dénominateur de naissances vivantes, le nombre estimé de nourrissons de moins de 12 mois est calculé :
 
 $$
-d_{\text{source-pleinement-immunisée}} = d_{\text{source-naissCPNe-vivante}} \n- fois (1 - \text{taux de mortalité infantile})
+d_{\text{source-pleinement-immunisée}} = d_{\text{source-naissance-vivante}} \n- fois (1 - \text{taux de mortalité infantile})
 $$
 
 Où :
 
-- `source` représente l'un des éléments suivants : CPN1, accouchement, BCG, Penta1, naissCPNes vivantes ou wpp
+- `source` représente l'un des éléments suivants : CPN1, accouchement, BCG, Penta1, naissances vivantes ou wpp
 - Le taux de mortalité infantile est ajusté pour tenir compte de la survie jusqu'à l'âge de 12 mois
 - Résultat : **Population estimée de nourrissons de moins d'un an** pouvant bénéficier d'une évaluation complète de la vaccination
 
-Ces estimations de la population cible sont calculées automatiquement pour **tous les dénominateurs de naissCPNes vivantes disponibles**, ce qui garantit une méthodologie cohérente entre les différents indicateurs sources.
+Ces estimations de la population cible sont calculées automatiquement pour **tous les dénominateurs de naissances vivantes disponibles**, ce qui garantit une méthodologie cohérente entre les différents indicateurs sources.
 
 #### Étapes d'exécution du flux de travail
 
@@ -856,13 +856,13 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 - Pour chaque indicateur de santé avec des données de couverture d'enquête :
   - Calculer le dénominateur de base : `count ÷ survey_couverture`
   - Appliquer les cascades démographiques pour dériver les dénominateurs correspondants
-  - Générer des dénominateurs à partir de tous les indicateurs sources disponibles (CPN1, accouchement, BCG, Penta1, naissCPNes vivantes)
+  - Générer des dénominateurs à partir de tous les indicateurs sources disponibles (CPN1, accouchement, BCG, Penta1, naissances vivantes)
 
 **Étape 3 : Calculer les dénominateurs basés sur le WPP**
 
 - Extraire les projections démographiques pour le pays cible
 - Calculer les estimations de grossesses à partir du taux brut de natalité
-- Calculer les estimations de naissCPNes vivantes
+- Calculer les estimations de naissances vivantes
 - Générer des dénominateurs pour la population de moins de 1 an
 - Appliquer les ajustements de mortalité pour les populations éligibles à la vaccination
 - Ajuster pour les périodes de déclaration incomplètes (mois déclarés < 12)
@@ -1058,11 +1058,11 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
 La partie 2 a trois objectifs principaux :
 
-1. **Sélection du dénominateur par l'utilisateur** : Alors que la partie 1 sélectionne automatiquement le "meilleur" dénominateur en minimisant l'erreur par rapport aux données de l'enquête, la partie 2 permet aux utilisateurs d'outrepasser cette sélection et de choisir des dénominateurs spécifiques sur la base de leurs connaissCPNes programmatiques ou de leurs priorités politiques
+1. **Sélection du dénominateur par l'utilisateur** : Alors que la partie 1 sélectionne automatiquement le "meilleur" dénominateur en minimisant l'erreur par rapport aux données de l'enquête, la partie 2 permet aux utilisateurs d'outrepasser cette sélection et de choisir des dénominateurs spécifiques sur la base de leurs connaissances programmatiques ou de leurs priorités politiques
 
-2. **Analyse des tendCPNes temporelles** : Analyse des tendCPNes temporelles** : calcule les changements d'une année sur l'autre (deltas) dans la couverture pour comprendre les tendCPNes de la prestation de services au fil du temps
+2. **Analyse des tendances temporelles** : Analyse des tendances temporelles** : calcule les changements d'une année sur l'autre (deltas) dans la couverture pour comprendre les tendances de la prestation de services au fil du temps
 
-3. **Projection de l'enquête** : Projette les estimations de couverture basées sur l'enquête dans le temps en utilisant les tendCPNes observées dans les données administratives (SIGS), en comblant les lacunes lorsque les données de l'enquête ne sont pas disponibles
+3. **Projection de l'enquête** : Projette les estimations de couverture basées sur l'enquête dans le temps en utilisant les tendances observées dans les données administratives (SIGS), en comblant les lacunes lorsque les données de l'enquête ne sont pas disponibles
 
 #### Configuration de l'utilisateur
 
@@ -1108,7 +1108,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     Les dénominateurs disponibles varient selon le type d'indicateur en fonction de la population cible appropriée :
 
     - **Indicateurs basés sur la grossesse** (CPN1, CPN4) : Utiliser des dénominateurs ajustés à la grossesse
-    - **Indicateurs basés sur les naissCPNes vivantes** (accouchement, BCG, SBA, PNC) : Utiliser les dénominateurs ajustés aux naissCPNes vivantes
+    - **Indicateurs basés sur les naissances vivantes** (accouchement, BCG, SBA, PNC) : Utiliser les dénominateurs ajustés aux naissances vivantes
     - **Groupe d'âge éligible au DTC** (Penta1-3, VPO1-3) : Utiliser les dénominateurs ajustés pour le DTC (enfants éligibles pour le DTC)
     - **Groupe d'âge éligible pour la rougeole** (Rougeole1, Rougeole2) : Utiliser les dénominateurs ajustés pour la rougeole (enfants éligibles pour le vaccin contre la rougeole)
 
@@ -1175,7 +1175,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
 ? ?? "Fonction 2 : `project_survey_from_deltas()`"
 
-    **Objectif** : Projette les estimations de couverture basées sur les enquêtes en utilisant les tendCPNes des données administratives.
+    **Objectif** : Projette les estimations de couverture basées sur les enquêtes en utilisant les tendances des données administratives.
 
     **Algorithme** :
 
@@ -1227,9 +1227,9 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
     **Hypothèses** :
 
-    - Les tendCPNes observées dans les données administratives reflètent les changements réels dans la couverture des services
+    - Les tendances observées dans les données administratives reflètent les changements réels dans la couverture des services
     - L'enquête de référence fournit un point de référence précis
-    - Les tendCPNes observées dans les données administratives peuvent être appliquées aux estimations de l'enquête
+    - Les tendances observées dans les données administratives peuvent être appliquées aux estimations de l'enquête
 
     **Input** :
 
@@ -1391,7 +1391,7 @@ La partie 2 exécute le flux de travail suivant pour chaque niveau administratif
 
 - Utiliser `project_survey_from_deltas()` pour étendre les estimations de l'enquête
 - La base est CPNrée dans l'enquête la plus récente
-- Les projections utilisent les deltas cumulés des tendCPNes SIGS
+- Les projections utilisent les deltas cumulés des tendances SIGS
 
 **Sous-étape 4 : Construire les résultats finaux**
 
@@ -1421,7 +1421,7 @@ La partie 2 produit trois fichiers de sortie :
 - cODE_BLOC_201__ : Code de l'indicateur standardisé
 - cODE_BLOC_202__ : Source du dénominateur sélectionné
 - cODE_BLOC_203__ : Couverture initiale basée sur l'enquête (NA pour les années sans enquête)
-- cODE_BLOC_204__ : Projection de la couverture de l'enquête à l'aide des tendCPNes SIGS
+- cODE_BLOC_204__ : Projection de la couverture de l'enquête à l'aide des tendances SIGS
 - cODE_BLOC_205__ : Estimation de la couverture basée sur le SIGS
 - cODE_BLOC_206__ : Source de l'enquête (par exemple, "EDS 2018")
 - `survey_raw_source_detail` : Détails supplémentaires sur la source
@@ -1462,7 +1462,7 @@ Identique à la colonne nationale, plus :
 
     **Quand spécifier un dénominateur** :
 
-    - Les connaissCPNes programmatiques suggèrent qu'un dénominateur spécifique est le plus précis
+    - Les connaissances programmatiques suggèrent qu'un dénominateur spécifique est le plus précis
     - Les exigences politiques imposent l'utilisation d'estimations spécifiques de la population
     - Réalisation d'analyses de sensibilité
     - Problèmes connus avec certaines sources de données
@@ -1474,13 +1474,13 @@ Identique à la colonne nationale, plus :
     **Avantages** :
 
     - Préserve le calibrage en niveau des données d'enquête
-    - Prolonge en douceur les estimations de l'enquête en utilisant les tendCPNes administratives
+    - Prolonge en douceur les estimations de l'enquête en utilisant les tendances administratives
     - Évite les erreurs cumulées dues aux changements d'une année sur l'autre
     - Maintient la cohérence lorsque la couverture SIGS est stable
 
     **Limites** :
 
-    - Suppose que les tendCPNes SIGS reflètent les véritables changements de couverture
+    - Suppose que les tendances SIGS reflètent les véritables changements de couverture
     - Peut diverger de la réalité si la qualité des données administratives diminue
     - Les projections deviennent moins fiables à mesure que l'on s'éloigne de l'enquête de référence
     - Ne tient pas compte des biais systématiques dans les données SIGS
@@ -1512,7 +1512,7 @@ Identique à la colonne nationale, plus :
 
     1. **Contrôlant la vraisemblCPNe des projections** :
        - Les valeurs projetées se situent-elles dans des fourchettes plausibles (0-100%) ?
-       - Les tendCPNes ont-elles un sens programmatique ?
+       - Les tendances ont-elles un sens programmatique ?
 
     2. **Comparer les dénominateurs** :
        - Exécuter la partie 2 avec différentes sélections de dénominateurs
@@ -1522,12 +1522,12 @@ Identique à la colonne nationale, plus :
        - Lorsque de nouvelles données d'enquête sont disponibles, comparer les projections aux valeurs réelles
        - Mise à jour de la base de référence et nouvelle exécution si nécessaire
 
-    4. **Examiner les tendCPNes du système SIGS** :
+    4. **Examiner les tendances du système SIGS** :
        - Des écarts importants peuvent indiquer des problèmes de qualité des données
        - Les changements soudains doivent faire l'objet d'une enquête
 
     5. **Cohérence au niveau de l'administration** :
-       - Vérifier si les tendCPNes infranationales s'alignent sur les tendCPNes nationales
+       - Vérifier si les tendances infranationales s'alignent sur les tendances nationales
        - Enquêter sur les écarts importants
 
 
@@ -1611,7 +1611,7 @@ Identique à la colonne nationale, plus :
     source("06_module_couverture_estimates_part2.R")
     ```
 
-    **Cas d'utilisation** : Lorsque les connaissCPNes programmatiques suggèrent qu'un dénominateur spécifique est plus approprié que l'option statistiquement sélectionnée.
+    **Cas d'utilisation** : Lorsque les connaissances programmatiques suggèrent qu'un dénominateur spécifique est plus approprié que l'option statistiquement sélectionnée.
 
 ? ?? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide
 
@@ -1685,8 +1685,8 @@ Identique à la colonne nationale, plus :
     | Code de l'indicateur de santé | `dénominateur` | Type de dénominateur sélectionné
     | `couverture_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100) | `couverture_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100)
     | `couverture_original_estimate` | Valeur de l'enquête si disponible |
-    | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendCPNes du SIGS
-    | `survey_raw_source` | Source de l'enquête (EDS/MICS) | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendCPNes SIGS
+    | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances du SIGS
+    | `survey_raw_source` | Source de l'enquête (EDS/MICS) | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances SIGS
     | __CODE_BLOC_234__ | Nom et année de l'enquête spécifique | __CODE_BLOC_234__ | Source de l'enquête (EDS/MICS)
 
 ? ?? "Examen des options de dénominateur"
@@ -1751,9 +1751,9 @@ Estimation du pourcentage de la population cible ayant bénéficié d'un service
 
 Notre approche permet de dériver et de valider les dénominateurs de la population, ce qui améliore considérablement les estimations de couverture communiquées par les systèmes SIGS.
 
-Dans les pays disposant de données précises, cette approche permet d'identifier les inégalités infranationales et de mettre à jour les estimations obsolètes, tandis que dans les pays disposant de données moins précises, les tendCPNes fournissent toujours des informations précieuses sur les performCPNes.
+Dans les pays disposant de données précises, cette approche permet d'identifier les inégalités infranationales et de mettre à jour les estimations obsolètes, tandis que dans les pays disposant de données moins précises, les tendances fournissent toujours des informations précieuses sur les performances.
 
-Nous utilisons ces estimations pour suivre les tendCPNes récentes et les disparités infranationales dans la couverture de certains services de santé.
+Nous utilisons ces estimations pour suivre les tendances récentes et les disparités infranationales dans la couverture de certains services de santé.
 
 ---
 
@@ -1764,7 +1764,7 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 | Le module d'estimation de la couverture fonctionne en deux parties séquentielles : - Partie - Composants
 |------|------------|
 **Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur
-**Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendCPNes du SIGS ; générer les estimations finales de la couverture
+**Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
@@ -1783,8 +1783,8 @@ Chaque indicateur de santé correspond à une population cible spécifique :
 | Service de santé publique - Population cible (dénominateur) - Service de santé publique - Population cible (dénominateur) - Service de santé publique - Population cible (dénominateur)
 |---------|--------------------------------|
 | Soins prénatals (CPN1), soins prénatals (CPN4), femmes enceintes (CPN2), accouchement en institution (CPN3)
-naissCPNes vivantes | Accouchement en institution | NaissCPNes vivantes | BCG
-| NaissCPNes vivantes - BCG - NaissCPNes vivantes
+naissances vivantes | Accouchement en institution | Naissances vivantes | BCG
+| Naissances vivantes - BCG - Naissances vivantes
 | Penta1, Penta3 | Nourrissons ayant survécu au-delà de la période néonatale | Rougeole1, Rougeole2
 | Rougeole1, Rougeole2 | Nourrissons survivant au-delà de la période néonatale
 <!-- /SLIDE -->
@@ -1830,11 +1830,11 @@ Chaque indicateur SIGS sert de point d'entrée. Le module dérive toutes les pop
 
 | Le module dérive toutes les populations cibles par des cascades ascendantes et descendantes : - point d'entrée - calcul de base - dérivation ascendante - dérivation descendante
 |-------------|------------------|-------------------|---------------------|
-| **CPN1** | CPN1 ÷ couverture → Grossesses | Accouchements → NaissCPNes vivantes → Éligibilité au DTC → Éligibilité à la rougeole | - | |
-| Accouchements ÷ couverture → Accouchements | NaissCPNes vivantes → éligibles au DTC → éligibles à la rougeole | Grossesses |
-**BCG** | BCG ÷ couverture → naissCPNes vivantes | éligibles au DCT → éligibles à la rougeole | accouchements → grossesses | **Penta1** | accouchements → couverture → naissCPNes vivantes
-**Penta1** | Penta1 ÷ couverture → éligible au DTC | éligible à la rougeole1 → éligible à la rougeole2 | NaissCPNes vivantes → NaissCPNes → Accouchements → Grossesses | **UN WPP** | Cr Cr
-| Taux de natalité brut × population → Grossesses, naissCPNes vivantes ; Population de moins de 1 an → DTC, rougeole | Applique les taux de mortalité pour les dénominateurs de la rougeole | - |
+| **CPN1** | CPN1 ÷ couverture → Grossesses | Accouchements → Naissances vivantes → Éligibilité au DTC → Éligibilité à la rougeole | - | |
+| Accouchements ÷ couverture → Accouchements | Naissances vivantes → éligibles au DTC → éligibles à la rougeole | Grossesses |
+**BCG** | BCG ÷ couverture → naissances vivantes | éligibles au DCT → éligibles à la rougeole | accouchements → grossesses | **Penta1** | accouchements → couverture → naissances vivantes
+**Penta1** | Penta1 ÷ couverture → éligible au DTC | éligible à la rougeole1 → éligible à la rougeole2 | Naissances vivantes → Naissances → Accouchements → Grossesses | **UN WPP** | Cr Cr
+| Taux de natalité brut × population → Grossesses, naissances vivantes ; Population de moins de 1 an → DTC, rougeole | Applique les taux de mortalité pour les dénominateurs de la rougeole | - |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
@@ -1855,11 +1855,11 @@ La sélection se fait par indicateur et par zone géographique. Les utilisateurs
 <!-- SLIDE:m6_14 -->
 ## Méthodologie de projection de la couverture
 
-Le module projette la valeur de l'enquête la plus récente en utilisant les tendCPNes observées dans la couverture dérivée du SIGS :
+Le module projette la valeur de l'enquête la plus récente en utilisant les tendances observées dans la couverture dérivée du SIGS :
 
 ![Méthode de projection de la couverture](resources/diagrams/couverture_projection.svg)
 
-Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendCPNes observées en matière de prestation de services.
+Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendances observées en matière de prestation de services.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_16 -->
@@ -1875,7 +1875,7 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 
 #### Interprétation
 
-**Les lignes/points noirs** indiquent les données de l'enquête (EDS/MICS) comme référence de l'enquête sur les ménages. **Les lignes/points gris** indiquent la couverture basée sur le SIGS à partir des données des établissements. **Les lignes/points rouges** indiquent la couverture projetée - estimations de l'enquête étendues à l'aide des tendCPNes du SIGS.
+**Les lignes/points noirs** indiquent les données de l'enquête (EDS/MICS) comme référence de l'enquête sur les ménages. **Les lignes/points gris** indiquent la couverture basée sur le SIGS à partir des données des établissements. **Les lignes/points rouges** indiquent la couverture projetée - estimations de l'enquête étendues à l'aide des tendances du SIGS.
 
 </div>
 </div>
@@ -1903,12 +1903,12 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 | Valeur de comptage à utiliser** | Valeur de comptage ajustée à utiliser pour le calcul de la couverture
 | Niveau pour lequel calculer la couverture** | Niveaux géographiques pour l'estimation de la couverture : national, provincial (zone administrative 2) ou district (zone administrative 3)
 | Taux de perte de grossesse** | Proportion de grossesses se terminant par une perte avant l'accouchement
-| Taux de jumeaux ** Proportion d'accouchements donnant lieu à la naissCPNe de jumeaux
+| Taux de jumeaux ** Proportion d'accouchements donnant lieu à la naissance de jumeaux
 | Taux d'accouchement de jumeaux ** Taux de mortinatalité** | Proportion d'accouchements de mort-nés
-| Taux de mortalité néonatale*** - Décès au cours des 28 premiers jours par naissCPNe vivante
-**Taux de mortalité postnatale** | Décès entre 28 jours et 1 an par naissCPNe vivante **Taux de mortalité infantile** | Décès entre 28 jours et 1 an par naissCPNe vivante
-| Taux de mortalité infantile ** Taux de mortalité infantile** Décès avant l'âge de 1 an par naissCPNe vivante
-| Taux de mortalité des enfants de moins de 5 ans** - Décès avant l'âge de 5 ans par naissCPNe vivante
+| Taux de mortalité néonatale*** - Décès au cours des 28 premiers jours par naissance vivante
+**Taux de mortalité postnatale** | Décès entre 28 jours et 1 an par naissance vivante **Taux de mortalité infantile** | Décès entre 28 jours et 1 an par naissance vivante
+| Taux de mortalité infantile ** Taux de mortalité infantile** Décès avant l'âge de 1 an par naissance vivante
+| Taux de mortalité des enfants de moins de 5 ans** - Décès avant l'âge de 5 ans par naissance vivante
 
 </div>
 

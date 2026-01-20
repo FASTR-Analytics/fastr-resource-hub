@@ -20,7 +20,7 @@ Les données de routine du SIGS nous indiquent *la quantité* de services fourni
 - Le personnel formé est-il présent ?
 - Quels sont les défis auxquels les établissements sont confrontés ?
 
-En reliant les réponses à l'enquête aux données de routine, l'approche FASTR permet une interprétation plus nuCPNée des tendCPNes en matière de prestation de services.
+En reliant les réponses à l'enquête aux données de routine, l'approche FASTR permet une interprétation plus nuancée des tendances en matière de prestation de services.
 
 ### Points clés
 

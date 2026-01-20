@@ -9,7 +9,7 @@
 
 Le module Utilisation des services analyse les schémas de prestation des services de santé afin de détecter et de quantifier les perturbations des volumes de services au fil du temps. Il identifie les écarts par rapport aux schémas de prestation de services prévus et estime l'ampleur de ces perturbations aux niveaux national, provincial et du district.
 
-À l'aide de méthodes de contrôle des processus statistiques et de régression, le module compare les volumes de services observés avec les niveaux attendus dérivés des tendCPNes historiques et saisonnières. Cela permet de distinguer les variations régulières et prévisibles (telles que l'augmentation saisonnière des cas de paludisme) des perturbations importantes des services, y compris les baisses soudaines des services du SRMNIA-N - tels que la vaccination et les soins de santé maternelle ou infantile - pendant les périodes de conflit ou les urgences de santé publique.
+À l'aide de méthodes de contrôle des processus statistiques et de régression, le module compare les volumes de services observés avec les niveaux attendus dérivés des tendances historiques et saisonnières. Cela permet de distinguer les variations régulières et prévisibles (telles que l'augmentation saisonnière des cas de paludisme) des perturbations importantes des services, y compris les baisses soudaines des services du SRMNIA-N - tels que la vaccination et les soins de santé maternelle ou infantile - pendant les périodes de conflit ou les urgences de santé publique.
 
 L'analyse produit des estimations quantifiées des déficits et des excédents de services, ce qui permet de mesurer systématiquement les changements dans la prestation des services et de les comparer dans le temps et au niveau géographique.
 
@@ -17,7 +17,7 @@ L'analyse produit des estimations quantifiées des déficits et des excédents d
 
 Les données sur l'utilisation des services donnent une idée de la manière dont les populations accèdent aux services de santé essentiels, mais les volumes observés peuvent varier pour de multiples raisons, notamment la saisonnalité, les changements de politique, les chocs extérieurs (tels que les pandémies, les catastrophes naturelles ou les conflits), les limites de la qualité des données et les changements dans la disponibilité des services. Sans analyse systématique, il est difficile de distinguer les variations normales des perturbations matérielles dans la prestation des services.
 
-Ce module applique une approche standardisée, basée sur les données, pour identifier les déviations dans l'utilisation des services et pour quantifier leur ampleur. Les résultats permettent de détecter les problèmes émergents dans la prestation de services, de les comparer entre les différents niveaux géographiques et de les suivre dans le temps, y compris pendant les périodes de perturbation et de reprise. Les résultats sont structurés de manière à pouvoir être utilisés pour le suivi de routine, les rapports analytiques et l'évaluation des changements dans la performCPNe des services de santé.
+Ce module applique une approche standardisée, basée sur les données, pour identifier les déviations dans l'utilisation des services et pour quantifier leur ampleur. Les résultats permettent de détecter les problèmes émergents dans la prestation de services, de les comparer entre les différents niveaux géographiques et de les suivre dans le temps, y compris pendant les périodes de perturbation et de reprise. Les résultats sont structurés de manière à pouvoir être utilisés pour le suivi de routine, les rapports analytiques et l'évaluation des changements dans la performance des services de santé.
 
 ### Points clés
 
@@ -39,7 +39,7 @@ Le module fonctionne en deux parties séquentielles, chacune ayant un objectif d
 
 1. **Préparer les données** : Charger les données sur les services de santé, supprimer les valeurs aberrantes précédemment identifiées, les agréger au niveau géographique approprié et compléter les mois manquants par interpolation.
 
-2. **Modéliser les modèles attendus** : Pour chaque combinaison d'indicateur de santé et de zone géographique, utiliser des méthodes statistiques robustes pour estimer ce que les volumes de services devraient être sur la base des tendCPNes historiques et saisonnières (par exemple, tenir compte des augmentations prévisibles des cas de paludisme pendant la saison des pluies).
+2. **Modéliser les modèles attendus** : Pour chaque combinaison d'indicateur de santé et de zone géographique, utiliser des méthodes statistiques robustes pour estimer ce que les volumes de services devraient être sur la base des tendances historiques et saisonnières (par exemple, tenir compte des augmentations prévisibles des cas de paludisme pendant la saison des pluies).
 
 3. **Détecter les écarts** : Comparer les volumes de services réels aux modèles attendus et identifier les écarts significatifs à l'aide de plusieurs règles de détection :
    - **Perturbations importantes** : Perturbations brutales** : mois uniques présentant des écarts extrêmes
@@ -52,7 +52,7 @@ Le module fonctionne en deux parties séquentielles, chacune ayant un objectif d
 
 **Partie 2 : Analyse des perturbations** - Quantifie l'impact des perturbations identifiées
 
-5. **Appliquer des modèles de régression** : Utiliser la régression par panel à plusieurs niveaux géographiques (national, provincial, district) pour estimer dans quelle mesure les volumes de services ont changé pendant les périodes de perturbation identifiées, en tenant compte des tendCPNes et de la saisonnalité.
+5. **Appliquer des modèles de régression** : Utiliser la régression par panel à plusieurs niveaux géographiques (national, provincial, district) pour estimer dans quelle mesure les volumes de services ont changé pendant les périodes de perturbation identifiées, en tenant compte des tendances et de la saisonnalité.
 
 6. **Calculer les déficits et les excédents** : Comparer les volumes prévus aux volumes réels pour quantifier l'ampleur des perturbations en chiffres absolus et en pourcentages.
 
@@ -73,7 +73,7 @@ Le module prend en charge l'analyse des perturbations à plusieurs échelles gé
 Le niveau auquel les cartes de contrôle sont calculées détermine où la modélisation statistique est effectuée. Il est configuré à l'aide de deux drapeaux et suit la convention FASTR selon laquelle les niveaux administratifs les plus élevés correspondent à des unités géographiques plus petites.
 
 - **Configuration par défaut (les deux drapeaux sont à FALSE)**
-  Les cartes de contrôle sont calculées à un niveau infranational intermédiaire (**admin_area_2**). Les volumes de services sont agrégés à ce niveau, et l'estimation des tendCPNes, le calcul des limites de contrôle et la détection des perturbations sont effectués pour chaque combinaison géographie-indicateur. Cette option est la plus efficace en termes de calcul et convient au suivi de routine.
+  Les cartes de contrôle sont calculées à un niveau infranational intermédiaire (**admin_area_2**). Les volumes de services sont agrégés à ce niveau, et l'estimation des tendances, le calcul des limites de contrôle et la détection des perturbations sont effectués pour chaque combinaison géographie-indicateur. Cette option est la plus efficace en termes de calcul et convient au suivi de routine.
 
 - **RUN_district_MODEL = TRUE**
   Les cartes de contrôle sont calculées à un niveau infranational plus fin (**admin_area_3**). Les volumes de services sont agrégés à des unités géographiques plus petites, ce qui permet de détecter des perturbations localisées qui pourraient être masquées à des niveaux d'agrégation plus élevés. Cette option nécessite davantage de calculs, mais offre une meilleure résolution spatiale.
@@ -81,7 +81,7 @@ Le niveau auquel les cartes de contrôle sont calculées détermine où la modé
 - **RUN_ADMIN_AREA_4_ANALYSIS = TRUE**
   Les cartes de contrôle sont calculées au niveau géographique le plus granulaire disponible (**admin_area_4**). Cela permet d'identifier les perturbations très localisées ou au niveau des installations. Il s'agit de l'option la plus gourmande en ressources et elle est généralement utilisée pour des analyses ciblées ou diagnostiques.
 
-Le niveau de carte de contrôle sélectionné détermine l'endroit où la modélisation statistique est effectuée, y compris l'estimation des tendCPNes, le calcul des limites de contrôle et le signalement des perturbations. Quel que soit le niveau auquel les cartes de contrôle sont calculées, les résultats des perturbations sont agrégés et présentés à tous les niveaux géographiques disponibles (national et infranational).
+Le niveau de carte de contrôle sélectionné détermine l'endroit où la modélisation statistique est effectuée, y compris l'estimation des tendances, le calcul des limites de contrôle et le signalement des perturbations. Quel que soit le niveau auquel les cartes de contrôle sont calculées, les résultats des perturbations sont agrégés et présentés à tous les niveaux géographiques disponibles (national et infranational).
 
 
 **Paramètres de sensibilité
@@ -97,15 +97,15 @@ Le module accepte des versions alternatives des comptages de services produits p
 
 **Transformation de l'entrée**
 
-Le module commence par le décompte mensuel des services au niveau de l'établissement (par exemple, les livraisons déclarées par chaque établissement). Ces données sont agrégées au niveau géographique sélectionné. Les observations identifiées comme aberrantes dans le module 1 sont exclues afin d'éviter que les valeurs anormales n'influencent l'estimation des tendCPNes et les limites de contrôle.
+Le module commence par le décompte mensuel des services au niveau de l'établissement (par exemple, les livraisons déclarées par chaque établissement). Ces données sont agrégées au niveau géographique sélectionné. Les observations identifiées comme aberrantes dans le module 1 sont exclues afin d'éviter que les valeurs anormales n'influencent l'estimation des tendances et les limites de contrôle.
 
-**Estimation et détection des tendCPNes
+**Estimation et détection des tendances
 
-En utilisant des méthodes statistiques robustes, le module estime les modèles d'utilisation des services attendus pour chaque indicateur et unité géographique sur la base des données historiques, en tenant compte des tendCPNes à long terme et de la saisonnalité. Les mois au cours desquels les volumes de services observés s'écartent de manière significative de ces modèles attendus sont signalés comme des perturbations potentielles.
+En utilisant des méthodes statistiques robustes, le module estime les modèles d'utilisation des services attendus pour chaque indicateur et unité géographique sur la base des données historiques, en tenant compte des tendances à long terme et de la saisonnalité. Les mois au cours desquels les volumes de services observés s'écartent de manière significative de ces modèles attendus sont signalés comme des perturbations potentielles.
 
 **Quantification de l'impact des perturbations
 
-Pour les périodes identifiées comme perturbées, des modèles de régression sont utilisés pour estimer les volumes de service contrefactuels - représentant l'utilisation attendue en l'absence de perturbation. Les différences entre les volumes prédits et observés sont calculées pour quantifier les insuffisCPNes ou les excédents de service.
+Pour les périodes identifiées comme perturbées, des modèles de régression sont utilisés pour estimer les volumes de service contrefactuels - représentant l'utilisation attendue en l'absence de perturbation. Les différences entre les volumes prédits et observés sont calculées pour quantifier les insuffisances ou les excédents de service.
 
 **Structure de sortie**
 
@@ -177,7 +177,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     | Paramètres de la carte de contrôle - Paramètres par défaut - Type - Description - Guide d'ajustement - Paramètres de la carte de contrôle - Paramètres par défaut - Type - Description - Guide d'ajustement
     |-----------|---------|------|-------------|-----------------|
-    | 7 | Entier (impair) | Taille de la fenêtre médiane mobile en mois | Valeurs plus grandes = tendCPNes plus lisses, moins de sensibilité. Il doit s'agir d'un nombre impair (par exemple, 5, 7, 9, 11)
+    | 7 | Entier (impair) | Taille de la fenêtre médiane mobile en mois | Valeurs plus grandes = tendances plus lisses, moins de sensibilité. Il doit s'agir d'un nombre impair (par exemple, 5, 7, 9, 11)
     | 1.5 | Numérique | Seuil des unités MAD pour les fortes perturbations | Plus bas = plus sensible (par exemple, 1.0), plus haut = plus conservateur (par exemple, 2.0) |
     | 0.90 | Numérique | Seuil de proportion pour les baisses soutenues | 0.90 = marquer si en dessous de 90% de la valeur attendue (baisse de 10%). Utiliser 0.80 pour un seuil de chute de 20%
     | 10 | Numérique | Seuil de pourcentage pour le tracé des perturbations | Si la valeur réelle diffère de la valeur prédite de >10%, utiliser la valeur prédite dans les visualisations
@@ -232,7 +232,7 @@ Pour le graphique de variation de volume (résultat 4) :
        - Colonnes requises : `établissement_id`, `indicateur_common_id`, `period_id`, `valeur aberrante_flag`
 
     3. **`SIGS_ISO3.csv`** (utilisé uniquement pour la recherche géographique)
-       - Fichier SIGS brut utilisé uniquement pour extraire la correspondCPNe établissement_id → admin_area_1
+       - Fichier SIGS brut utilisé uniquement pour extraire la correspondance établissement_id → admin_area_1
        - Requis car M2_adjusted_data.csv n'inclut pas admin_area_1
        - Colonnes requises : `établissement_id`, `admin_area_1`
 
@@ -272,7 +272,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **But** : Suivi de l'utilisation de la mémoire tout au long de l'exécution
 
-    **Utilisation Diagnostics pour l'optimisation des performCPNes et le dépannage
+    **Utilisation Diagnostics pour l'optimisation des performances et le dépannage
 
     #### 2. Résultats de l'analyse des perturbations
 
@@ -323,7 +323,7 @@ Pour le graphique de variation de volume (résultat 4) :
     - cODE_BLOC_95__ : Volume de service réel
     - cODE_BLOC_96__ : Volume de service attendu
     - cODE_BLOC_97__ : NOMBRE ABSOLU DE SERVICES MANQUANTS (EN CAS DE PERTURBATION NÉGATIVE) : Nombre absolu de services manquants (si perturbation négative)
-    - cODE_BLOC_98__ : Pourcentage d'insuffisCPNe par rapport aux prévisions
+    - cODE_BLOC_98__ : Pourcentage d'insuffisance par rapport aux prévisions
     - cODE_BLOC_99__ : NOMBRE ABSOLU DE SERVICES EXCÉDENTAIRES (EN CAS DE PERTURBATION POSITIVE) : Nombre absolu de services excédentaires (en cas de perturbation positive)
     - cODE_BLOC_100__ : Pourcentage d'excédent par rapport aux prévisions
 
@@ -353,7 +353,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Processus** :
 
-    1. Ajuste un modèle linéaire robuste (en utilisant `MASS::rlm()`) avec des contrôles saisonniers et des tendCPNes temporelles
+    1. Ajuste un modèle linéaire robuste (en utilisant `MASS::rlm()`) avec des contrôles saisonniers et des tendances temporelles
     2. Applique un lissage de la médiane roulante aux valeurs prédites pour réduire le bruit
     3. Calcule les résidus et les normalise en utilisant l'écart absolu médian (MAD)
     4. Applique une logique d'étiquetage basée sur des règles pour identifier les différents types de perturbations
@@ -370,7 +370,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Caractéristiques clés** :
 
-    - Traite les données manquantes avec élégCPNe grâce à l'interpolation
+    - Traite les données manquantes avec elegance grâce à l'interpolation
     - Utilise une régression robuste pour minimiser l'influence des valeurs aberrantes
     - Utilise plusieurs règles de détection des perturbations pour différents modèles
     - Assure des prédictions non négatives (les comptes ne peuvent pas être négatifs)
@@ -454,7 +454,7 @@ Pour le graphique de variation de volume (résultat 4) :
     - **Paramètre:** `DIP_THRESHOLD` (par défaut : `0.90`)
     - Les utilisateurs peuvent ajuster ce paramètre pour détecter des baisses plus ou moins importantes (par exemple, `0.80` pour une baisse de 20 %).
 
-    **Les hausses soutenues** : Symétrique aux baisses, signale les périodes de surperformCPNe constante :
+    **Les hausses soutenues** : Symétrique aux baisses, signale les périodes de surperformance constante :
 
     $$ \text{count_original} > \text{RISE_THRESHOLD} \n- fois \n-text{count_smooth} $$
 
@@ -465,7 +465,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     - **Règle fixe**.
 
-    **Recent tail override** : Marquage automatique de tous les mois des 6 derniers mois de données pour s'assurer que les tendCPNes récentes sont examinées, même si le marquage basé sur un modèle n'est pas concluant.
+    **Recent tail override** : Marquage automatique de tous les mois des 6 derniers mois de données pour s'assurer que les tendances récentes sont examinées, même si le marquage basé sur un modèle n'est pas concluant.
 
     - **Règle fixe**.
 
@@ -509,7 +509,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     ### Modèles de régression pour l'analyse des perturbations
 
-    Une fois les anomalies identifiées et enregistrées dans `M3_chartout.csv`, l'analyse des perturbations quantifie leur impact à l'aide de modèles de régression. Ces modèles estiment dans quelle mesure l'utilisation des services a changé au cours des périodes de perturbation signalées en tenant compte des tendCPNes à long terme et des variations saisonnières.
+    Une fois les anomalies identifiées et enregistrées dans `M3_chartout.csv`, l'analyse des perturbations quantifie leur impact à l'aide de modèles de régression. Ces modèles estiment dans quelle mesure l'utilisation des services a changé au cours des périodes de perturbation signalées en tenant compte des tendances à long terme et des variations saisonnières.
 
     Pour chaque indicateur, nous estimons
 
@@ -517,7 +517,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     où :
     - $Y_{it}$ est le volume de service observé,
-    - $\text{date}$ capture les tendCPNes temporelles,
+    - $\text{date}$ capture les tendances temporelles,
     - $text{month}_m$ contrôle la saisonnalité,
     - $text{tagged}$ est la variable fictive de perturbation (issue de l'analyse de la carte de contrôle),
     - $epsilon_{it}$ est le terme d'erreur.
@@ -534,7 +534,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Où :
     - $Y_{it}$ = volume (par exemple, nombre de livraisons)
-    - $text{date}$ = tendCPNe temporelle
+    - $text{date}$ = tendance temporelle
     - $text{month}_m$ = contrôle de la saisonnalité (variable factorielle)
     - $text{tagged}$ = variable muette pour la période de perturbation
     - $\epsilon_{it}$ = terme d'erreur, regroupé au niveau du district (`admin_area_3`)
@@ -549,7 +549,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Où :
     - $Y_{it}$ = volume (par exemple, nombre de livraisons)
-    - $text{date}$ = tendCPNe temporelle
+    - $text{date}$ = tendance temporelle
     - $text{month}_m$ = contrôle de la saisonnalité (variable factorielle)
     - $text{tagged}$ = variable muette pour la période de perturbation
     - $\epsilon_{it}$ = terme d'erreur, regroupé au niveau du district
@@ -564,7 +564,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Où :
     - $Y_{it}$ = volume (par exemple, nombre de livraisons)
-    - $text{date}$ = tendCPNe temporelle
+    - $text{date}$ = tendance temporelle
     - $text{month}_m$ = contrôle de la saisonnalité (variable factorielle)
     - $text{tagged}$ = variable muette pour la période de perturbation
     - $\epsilon_{it}$ = terme d'erreur, regroupé au niveau du quartier (`admin_area_4`) si plusieurs regroupements sont disponibles
@@ -573,17 +573,17 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Chaque niveau de régression produit les résultats suivants :
 
-    **Valeurs attendues (`expect_admin_area_*`)** : Volume de service prédit, ajusté pour tenir compte de la saisonnalité et des tendCPNes.
+    **Valeurs attendues (`expect_admin_area_*`)** : Volume de service prédit, ajusté pour tenir compte de la saisonnalité et des tendances.
 
     **Effet de perturbation (`b_admin_area_*`)** : Estimation de la variation relative en cas de perturbations :
 
     $$ b_{{text{admin_area_*}} = -\frac{\text{diff moyenne}}{\text{prédiction moyenne}} $$
 
-    **Coefficient de tendCPNe (`b_tendCPNe_admin_area_*`)** : Reflète la tendCPNe à long terme.
+    **Coefficient de tendance (`b_tendance_admin_area_*`)** : Reflète la tendance à long terme.
 
     - Positif = augmentation de l'utilisation des services
     - Négatif = baisse de l'utilisation des services
-    - Proche de zéro = tendCPNe stable
+    - Proche de zéro = tendance stable
 
     **P-value (`p_admin_area_*`)**: Mesure la signification statistique de l'effet de perturbation.
 
@@ -643,7 +643,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     #### Étape 3 : Appliquer la régression et le lissage
 
-    Estimez le volume de service attendu à l'aide d'une régression robuste, puis lissez la tendCPNe prédite.
+    Estimez le volume de service attendu à l'aide d'une régression robuste, puis lissez la tendance prédite.
 
     - Ajuster la régression robuste (`rlm`) pour chaque panel en utilisant l'une des trois spécifications du modèle en fonction de la disponibilité des données.
     - Appliquer le lissage de la médiane glissante aux prédictions en utilisant la taille de fenêtre `SMOOTH_K`.
@@ -678,7 +678,7 @@ Pour le graphique de variation de volume (résultat 4) :
     Pour chaque __CODE_BLOC_183__, estimer le modèle au niveau national avec les erreurs regroupées au niveau du district.
 
     - Un modèle de régression en panel est appliqué au niveau national, estimant le volume de services attendu (__CODE_BLOC_184__) pour chaque indicateur.
-    - Le modèle contrôle les tendCPNes à long terme et les modèles saisonniers d'utilisation des services.
+    - Le modèle contrôle les tendances à long terme et les modèles saisonniers d'utilisation des services.
     - Lorsqu'une perturbation (`tagged = 1`) est identifiée, les volumes de services prévus sont ajustés en supprimant l'effet estimé de la perturbation afin d'isoler son impact.
     
     #### Étape 3 : Régression intermédiaire au niveau sous-national
@@ -686,7 +686,7 @@ Pour le graphique de variation de volume (résultat 4) :
     Pour chaque combinaison __CODE_BLOC_186__ × __CODE_BLOC_187__, des modèles infranationaux sont estimés, avec des erreurs standard regroupées à un niveau administratif inférieur.
 
     - Un modèle de régression en panel à effets fixes est appliqué à un niveau sous-national intermédiaire, estimant les volumes de service attendus (__CODE_BLOC_188__) tout en tenant compte des caractéristiques géographiques invariantes dans le temps.
-    - Le modèle contrôle les tendCPNes historiques et la saisonnalité.
+    - Le modèle contrôle les tendances historiques et la saisonnalité.
     - Lorsqu'une perturbation est identifiée, les volumes prédits sont ajustés pour isoler l'effet de la perturbation.
 
     #### Étape 4 : Régression fine au niveau infranational (si activée)
@@ -694,7 +694,7 @@ Pour le graphique de variation de volume (résultat 4) :
     Pour chaque combinaison `indicateur_common_id` × `admin_area_3`, des modèles infranationaux sont estimés, avec des erreurs standard regroupées à un niveau administratif plus fin.
 
     - Un modèle de régression en panel à effets fixes est appliqué à un niveau infranational fin, estimant les volumes de service attendus (`expect_admin_area_3`).
-    - Le modèle contrôle les tendCPNes historiques et la saisonnalité.
+    - Le modèle contrôle les tendances historiques et la saisonnalité.
     - Lorsqu'une perturbation est identifiée, les volumes prédits sont ajustés pour isoler l'effet de la perturbation.
 
     #### Étape 5 : Préparer les résultats pour la visualisation
@@ -910,7 +910,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Explication** : Marquage automatique des 6 derniers mois
 
-    **But** : Permet d'examiner les tendCPNes récentes, même en l'absence de preuves statistiques solides
+    **But** : Permet d'examiner les tendances récentes, même en l'absence de preuves statistiques solides
 
     **Solutions** :
 
@@ -948,7 +948,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Explication** : Des agrégations géographiques différentes permettent de saisir des modèles différents
 
-    **Exemple** : La tendCPNe nationale peut être stable alors que certains districts connaissent d'importantes perturbations
+    **Exemple** : La tendance nationale peut être stable alors que certains districts connaissent d'importantes perturbations
 
     **Solutions** :
 
@@ -971,13 +971,13 @@ Pour le graphique de variation de volume (résultat 4) :
     - Les valeurs < 0,05 indiquent des perturbations statistiquement significatives
     - Les valeurs > 0,05 peuvent indiquer une variation normale plutôt que de véritables perturbations
 
-    **Coefficients de tendCPNe (b_tendCPNe_admin_area_*)** :
+    **Coefficients de tendance (b_tendance_admin_area_*)** :
 
     - Les valeurs positives indiquent une augmentation de l'utilisation des services au fil du temps
     - Les valeurs négatives indiquent une diminution de l'utilisation des services au fil du temps
     - Les valeurs proches de zéro indiquent des schémas d'utilisation stables
 
-    ### Considérations sur les performCPNes
+    ### Considérations sur les performances
 
     **Facteurs de temps de fonctionnement** :
 
@@ -1033,15 +1033,15 @@ Pour le graphique de variation de volume (résultat 4) :
     count ~ month_factor + as.numeric(date)
     ```
 
-    Tient compte à la fois de la saisonnalité et de la tendCPNe linéaire
+    Tient compte à la fois de la saisonnalité et de la tendance linéaire
 
-    **tendCPNe-Only Model** (nécessite ≥12 obs) :
+    **tendance-Only Model** (nécessite ≥12 obs) :
 
     ```r
     count ~ as.numeric(date)
     ```
 
-    Tient compte uniquement de la tendCPNe linéaire (données insuffisantes pour la saisonnalité)
+    Tient compte uniquement de la tendance linéaire (données insuffisantes pour la saisonnalité)
 
     **Retour à la médiane** (<12 observations) :
 
@@ -1057,7 +1057,7 @@ Pour le graphique de variation de volume (résultat 4) :
     - Avertissements émis pour les modèles non convergents
     - Les modèles non convergents sont encore utilisés (une convergence partielle est souvent suffisante)
 
-    ### AssurCPNe qualité
+    ### Assurance qualité
 
     **Nettoyage des données** :
 
@@ -1068,7 +1068,7 @@ Pour le graphique de variation de volume (résultat 4) :
     **Marquage automatique** :
 
     - Les mois récents (6 derniers mois) sont automatiquement marqués pour garantir la prise en compte des perturbations actuelles
-    - Évite de manquer des perturbations en cours en raison d'un écart insuffisant par rapport à la tendCPNe
+    - Évite de manquer des perturbations en cours en raison d'un écart insuffisant par rapport à la tendance
 
     **Contrôles de robustesse** :
 
@@ -1091,7 +1091,7 @@ Pour le graphique de variation de volume (résultat 4) :
     1. **module 1** : Évaluation de la qualité des données (génère `M1_output_valeurs aberrantes.csv`)
     2. **module 2** : Ajustements de la qualité des données (génère `M2_adjusted_data.csv`) Ajustements de la qualité des données (génère __CODE_BLOC_214__)
 
-    ### DépendCPNes
+    ### Dependances
 
     **Packages R requis** :
 
@@ -1141,7 +1141,7 @@ La comparaison des volumes de services d'une année sur l'autre permet d'identif
 
 **2. Détecter et quantifier les perturbations**
 
-La comparaison statistique des volumes observés par rapport aux niveaux attendus - dérivés des tendCPNes historiques et saisonnières - permet d'identifier et de quantifier les insuffisCPNes ou les excédents de service.
+La comparaison statistique des volumes observés par rapport aux niveaux attendus - dérivés des tendances historiques et saisonnières - permet d'identifier et de quantifier les insuffisances ou les excédents de service.
 
 ---
 
@@ -1180,7 +1180,7 @@ Les changements dépassant **±10%** sont signalés pour examen.
 **Considérations clés:**
 - Quelles sont les régions qui enregistrent les changements les plus importants ?
 - Les changements sont-ils cohérents d'une région à l'autre ou concentrés géographiquement ?
-- Les tendCPNes varient-elles en fonction de l'indicateur ?
+- Les tendances varient-elles en fonction de l'indicateur ?
 
 </div>
 </div>
@@ -1189,7 +1189,7 @@ Les changements dépassant **±10%** sont signalés pour examen.
 <!-- SLIDE:m6_3 -->
 ## Détection des perturbations
 
-Notre approche des interruptions de service et des excédents utilise une régression de séries temporelles interrompues avec des effets fixes au niveau de l'établissement. Les changements antérieurs importants et inattendus dans les données historiques sont supprimés. Les changements de volume inattendus sont estimés en comparant le volume observé au volume attendu sur la base des tendCPNes historiques et de la saisonnalité.
+Notre approche des interruptions de service et des excédents utilise une régression de séries temporelles interrompues avec des effets fixes au niveau de l'établissement. Les changements antérieurs importants et inattendus dans les données historiques sont supprimés. Les changements de volume inattendus sont estimés en comparant le volume observé au volume attendu sur la base des tendances historiques et de la saisonnalité.
 
 ---
 
@@ -1198,7 +1198,7 @@ Notre approche des interruptions de service et des excédents utilise une régre
 <div style="display : flex ; gap : 1.5em ; align-items : flex-start ;">
 <div style="flex : 1 ;">
 
-**Les perturbations** sont signalées lorsque les volumes sont inférieurs aux niveaux prévus, ce qui indique des obstacles potentiels à l'accès, des pénuries de ressources ou des défaillCPNes du système.
+**Les perturbations** sont signalées lorsque les volumes sont inférieurs aux niveaux prévus, ce qui indique des obstacles potentiels à l'accès, des pénuries de ressources ou des defaillances du système.
 
 **Les excédents** sont signalés lorsque les volumes dépassent les attentes, ce qui peut indiquer une augmentation de la demande, une surdéclaration ou des changements dans la prestation des services.
 
@@ -1220,7 +1220,7 @@ Notre approche des interruptions de service et des excédents utilise une régre
 
 **Nous ajustons les données historiques en supprimant les changements importants et inattendus survenus précédemment, afin d'éviter que des événements ponctuels ne faussent notre compréhension de ce qui est "normal"
 
-**Détecter les perturbations dans le temps:** Nous examinons les tendCPNes pour voir s'il y a des changements clairs dans l'utilisation des services de santé sur plusieurs mois.
+**Détecter les perturbations dans le temps:** Nous examinons les tendances pour voir s'il y a des changements clairs dans l'utilisation des services de santé sur plusieurs mois.
 
 ---
 
@@ -1231,10 +1231,10 @@ Extension de l'analyse de l'utilisation des services, en utilisant des approches
 En utilisant un cadre de régression, nous sommes en mesure de :
 
 - Tenir compte de la saisonnalité
-- Exclure les changements inhabituels afin de s'assurer que des événements ponctuels n'influencent pas les tendCPNes normales
+- Exclure les changements inhabituels afin de s'assurer que des événements ponctuels n'influencent pas les tendances normales
 - Utiliser les données historiques comme base de référence pour le contexte
 - Détecter les perturbations et les modèles de reprise
-- Quantifier les changements à l'aide d'une méthodologie solide plutôt que d'observer simplement les fluctuations d'une ligne de tendCPNe
+- Quantifier les changements à l'aide d'une méthodologie solide plutôt que d'observer simplement les fluctuations d'une ligne de tendance
 
 Cela améliore la capacité d'interpréter et de comparer les données d'utilisation à travers les zones nationales et sous-nationales sans avoir besoin de dénominateurs de population.
 <!-- /SLIDE -->
@@ -1244,7 +1244,7 @@ Cela améliore la capacité d'interpréter et de comparer les données d'utilisa
 
 ![Nationalité réelle vs nationale attendue h:380](resources/default_outputs/module3_2_Actual_vs_expected_national.png)
 
-<p style="font-size : 0.8em ; color : #666 ;">Comparaison au niveau national des volumes de services observés par rapport aux valeurs attendues dérivées des tendCPNes historiques et saisonnières.
+<p style="font-size : 0.8em ; color : #666 ;">Comparaison au niveau national des volumes de services observés par rapport aux valeurs attendues dérivées des tendances historiques et saisonnières.
 
 ---
 
@@ -1265,7 +1265,7 @@ Cela améliore la capacité d'interpréter et de comparer les données d'utilisa
 | Variable de comptage à utiliser pour la modélisation ** Variable de comptage ajustée à utiliser pour le calcul des valeurs attendues ** Variable de comptage à utiliser pour la visualisation ** Variable de comptage ajustée à utiliser pour les valeurs réelles
 | Variable de comptage à utiliser pour la visualisation** | Variable de comptage ajustée à utiliser comme valeurs observées réelles |
 | Exécuter les régressions au niveau admin_area_3. La valeur de ce paramètre est Oui pour une analyse détaillée, Non pour une exécution plus rapide
-| LCPNer l'analyse au niveau admin_area_4 ** LCPNer l'analyse au niveau le plus fin. Avertissement : peut être très lent pour les grands ensembles de données
+| Lancer l'analyse au niveau admin_area_4 ** Lancer l'analyse au niveau le plus fin. Avertissement : peut être très lent pour les grands ensembles de données
 | Seuil pour les limites de contrôle basées sur les MAD** | Nombre de MAD pour signaler les écarts importants. Par défaut, 1,5 ; plus élevé = moins sensible
 | Fenêtre de lissage (k)** | Taille de la fenêtre en mois pour le lissage de la médiane glissante. Doit être impair. La valeur par défaut est 7
 | Seuil de baisse** | Indicateur si la valeur réelle est inférieure à cette proportion de la valeur attendue. Par défaut, 0,9 (baisse ≥10%) ; utilisez 0,8 pour ne signaler que les fortes baisses

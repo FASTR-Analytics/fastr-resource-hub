@@ -9,13 +9,13 @@
 
 Le module d'ajustement de la qualité des données s'attaque à deux limitations courantes des données de routine des établissements de santé : les valeurs extrêmes résultant d'erreurs de déclaration ou de saisie des données (**valeurs aberrantes**) et les lacunes résultant d'une déclaration incomplète (**données manquantes**). Plutôt que d'exclure les observations concernées, le module remplace ces valeurs par des estimations statistiquement dérivées, fondées sur les modèles de déclaration historiques de chaque établissement.
 
-Le processus d'ajustement applique des méthodes de lissage des séries temporelles qui s'appuient sur les tendCPNes et la saisonnalité observées dans les données au niveau de l'établissement. Les moyennes mobiles et les profils historiques spécifiques à l'établissement sont utilisés pour corriger les valeurs anormales tout en préservant les modèles de prestation de services sous-jacents.
+Le processus d'ajustement applique des méthodes de lissage des séries temporelles qui s'appuient sur les tendances et la saisonnalité observées dans les données au niveau de l'établissement. Les moyennes mobiles et les profils historiques spécifiques à l'établissement sont utilisés pour corriger les valeurs anormales tout en préservant les modèles de prestation de services sous-jacents.
 
 Pour favoriser la transparence et la flexibilité analytique, le module génère quatre ensembles de données parallèles : données non ajustées, données avec corrections des valeurs aberrantes uniquement, données avec imputation des valeurs manquantes uniquement, et données avec les deux ajustements appliqués. Cela permet aux utilisateurs d'évaluer la sensibilité des résultats aux différentes hypothèses de qualité des données et de sélectionner l'ensemble de données le plus approprié à leur objectif analytique.
 
 ### Raison d'être de l'analyse
 
-Les données du système d'information sur la gestion de la santé (SIGS) contiennent souvent des erreurs de déclaration et des lacunes qui peuvent fausser les tendCPNes observées et masquer les schémas sous-jacents de la prestation de services. Les valeurs extrêmes peuvent créer des pics artificiels dans les volumes de services, tandis que les rapports incomplets peuvent entraîner des baisses apparentes qui reflètent des problèmes de qualité des données plutôt que de véritables changements dans la prestation de services. Ces limites sont particulièrement importantes lorsque les données SIGS sont utilisées pour le suivi des performCPNes, la comparaison entre les unités géographiques ou l'analyse des tendCPNes.
+Les données du système d'information sur la gestion de la santé (SIGS) contiennent souvent des erreurs de déclaration et des lacunes qui peuvent fausser les tendances observées et masquer les schémas sous-jacents de la prestation de services. Les valeurs extrêmes peuvent créer des pics artificiels dans les volumes de services, tandis que les rapports incomplets peuvent entraîner des baisses apparentes qui reflètent des problèmes de qualité des données plutôt que de véritables changements dans la prestation de services. Ces limites sont particulièrement importantes lorsque les données SIGS sont utilisées pour le suivi des performances, la comparaison entre les unités géographiques ou l'analyse des tendances.
 
 En traitant systématiquement les valeurs aberrantes et les données manquantes avant l'analyse, ce module améliore la cohérence et l'interprétabilité des données SIGS. Cela permet de s'assurer que les résultats analytiques ultérieurs sont basés sur des modèles de prestation de services observés plutôt que sur des artefacts introduits par la variabilité des rapports ou les contraintes liées à la qualité des données.
 
@@ -55,7 +55,7 @@ Pour les observations signalées comme aberrantes, le module estime les valeurs 
 - Moyenne historique spécifique à l'établissement
 
 **Étape 4 : Remplir les données manquantes et incomplètes**
-Pour les mois identifiés comme manquants ou incomplets, les valeurs sont imputées en utilisant le même cadre de moyenne mobile que celui appliqué à l'ajustement des valeurs aberrantes. Cette approche permet d'éviter les chutes artificielles à zéro causées par des lacunes temporaires dans les rapports, tout en maintenant la cohérence avec les tendCPNes spécifiques à l'établissement.
+Pour les mois identifiés comme manquants ou incomplets, les valeurs sont imputées en utilisant le même cadre de moyenne mobile que celui appliqué à l'ajustement des valeurs aberrantes. Cette approche permet d'éviter les chutes artificielles à zéro causées par des lacunes temporaires dans les rapports, tout en maintenant la cohérence avec les tendances spécifiques à l'établissement.
 
 **Étape 5 : Créer plusieurs scénarios
 Pour favoriser la transparence et l'analyse de sensibilité, le module produit quatre ensembles de données parallèles :
@@ -97,20 +97,20 @@ Certains indicateurs sont explicitement exclus de l'ajustement :
 Le module génère quatre scénarios d'ajustement pour tenir compte des différents contextes analytiques et des conditions de qualité des données :
 
 - **Pas d'ajustement** : Pas d'ajustement** : conserve les valeurs déclarées et convient aux exercices de validation ou aux contextes dans lesquels la qualité des données est jugée élevée
-- **Ajustement des valeurs extrêmes uniquement** : Ajustement des valeurs extrêmes uniquement** : Applique des corrections lorsque des valeurs extrêmes sont présentes mais que l'exhaustivité de la déclaration est par ailleurs stable
-- **Ajustement de l'exhaustivité uniquement** : Corrige les lacunes dans la déclaration tout en préservant les valeurs déclarées dans les périodes où les données sont complètes
-- **Ajustement des valeurs aberrantes et de l'exhaustivité** : Applique les deux corrections lorsque des limitations de la qualité des données sont présentes dans les deux dimensions
+- **Ajustement des valeurs extremes uniquement** : applique des corrections lorsque des valeurs extremes sont presentes mais que l'exhaustivite de la declaration est par ailleurs stable
+- **Ajustement de l'exhaustivite uniquement** : corrige les lacunes dans la declaration tout en preservant les valeurs declarees dans les periodes ou les donnees sont completes
+- **Ajustement des valeurs aberrantes et de l'exhaustivite** : applique les deux corrections lorsque des limitations de la qualite des donnees sont presentes dans les deux dimensions
 
 ### Traitement des données et résultats
 
-**Structure d'entrée
-Le module reçoit les volumes de services mensuels au niveau de l'établissement ainsi que les indicateurs de qualité des données générés dans le module 1, y compris les indicateurs de valeurs aberrantes et l'état d'exhaustivité. Chaque combinaison établissement-indicateur-mois est traitée comme une observation distincte en vue d'un ajustement potentiel.
+**Structure d'entree**
+Le module recoit les volumes de services mensuels au niveau de l'établissement ainsi que les indicateurs de qualité des données générés dans le module 1, y compris les indicateurs de valeurs aberrantes et l'état d'exhaustivité. Chaque combinaison établissement-indicateur-mois est traitée comme une observation distincte en vue d'un ajustement potentiel.
 
-**Application des ajustements
-Sur la base du scénario sélectionné, des comptes de services ajustés sont générés. Les observations signalées comme aberrantes sont remplacées par des valeurs dérivées de moyennes historiques spécifiques à l'établissement, excluant les périodes anormales. Pour les mois où la déclaration est incomplète ou manquante, les valeurs sont imputées à l'aide de modèles historiques au niveau de l'établissement afin de maintenir la continuité de la série temporelle.
+**Application des ajustements**
+Sur la base du scenario selectionne, des comptes de services ajustés sont générés. Les observations signalées comme aberrantes sont remplacées par des valeurs dérivées de moyennes historiques spécifiques à l'établissement, excluant les périodes anormales. Pour les mois où la déclaration est incomplète ou manquante, les valeurs sont imputées à l'aide de modèles historiques au niveau de l'établissement afin de maintenir la continuité de la série temporelle.
 
-**Génération d'ensembles de données parallèles
-Quatre versions parallèles des comptes ajustés sont produites : les valeurs non ajustées, les valeurs ajustées pour les valeurs aberrantes, les valeurs ajustées pour l'exhaustivité et les valeurs avec les deux ajustements appliqués. Cette structure permet aux analyses en aval d'évaluer explicitement la sensibilité aux différentes hypothèses de qualité des données.
+**Generation d'ensembles de donnees paralleles**
+Quatre versions paralleles des comptes ajustes sont produites : les valeurs non ajustées, les valeurs ajustées pour les valeurs aberrantes, les valeurs ajustées pour l'exhaustivité et les valeurs avec les deux ajustements appliqués. Cette structure permet aux analyses en aval d'évaluer explicitement la sensibilité aux différentes hypothèses de qualité des données.
 
 **Structure d'agrégation et de sortie**
 Les données ajustées au niveau de l'établissement sont agrégées au niveau du district, au niveau sous-national et au niveau national, les quatre scénarios d'ajustement étant retenus. Chaque enregistrement de sortie comprend l'unité géographique, l'indicateur, la période de temps et les comptes de services correspondants pour chaque scénario, ce qui permet une analyse flexible des cas d'utilisation et des objectifs analytiques.
@@ -138,7 +138,7 @@ Carte thermique montrant le pourcentage de changement dans le volume de services
 
 (resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_valeur aberrante_and_complétude_adjustment.png)
 
-**Guide d'interprétation
+**Guide d'interpretation**
 
 Pour toutes les cartes thermiques :
 
@@ -175,7 +175,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
     EXCLUDED_FROM_ADJUSTMENT <- c("u5_deaths", "maternal_deaths", "neonatal_deaths")
     ```
 
-    **Justification** : Les comptes de décès ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendCPNes épidémiologiques ou des signaux d'épidémies.
+    **Justification** : Les comptes de décès ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendances épidémiologiques ou des signaux d'épidémies.
 
 ? ?? "Exclusions de faibles volumes
 
@@ -200,7 +200,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
 
     **Avantages** :
 
-    - Capture les tendCPNes à moyen terme
+    - Capture les tendances à moyen terme
     - Réduit l'impact des fluctuations à court terme
     - Suffisamment de points de données pour obtenir des moyennes stables
     - Fonctionne bien pour les indicateurs stables et saisonniers
@@ -291,7 +291,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
 
     Le module dépend des paquets R suivants :
 
-    -   `data.table` - Manipulation et agrégation de données haute performCPNe
+    -   `data.table` - Manipulation et agrégation de données haute performance
     -   `zoo` - Calculs de fenêtres glissantes (`frollmean` pour les moyennes glissantes)
     -   `lubridate` - Traitement et manipulation des dates
 
@@ -318,7 +318,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
     **Opérations clés** :
 
     1. Fusionne les ensembles de données d'entrée par `établissement_id`, `indicateur_common_id`, et `period_id`
-    2. Convertit les `period_id` en dates pour l'ordonnCPNement temporel
+    2. Convertit les `period_id` en dates pour l'ordonnancement temporel
     3. Calcule les moyennes glissantes (centrées, en avant, en arrière) pour les valeurs valides
     4. Applique une hiérarchie d'ajustement basée sur la disponibilité des données
     5. Suivi de la méthode d'ajustement utilisée pour chaque valeur remplacée
@@ -362,7 +362,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
 
     **Approche statistique** :
 
-    Les moyennes mobiles sont utilisées pour estimer les valeurs attendues. Une moyenne glissante (également appelée moyenne mobile) est la moyenne d'un ensemble de périodes entourant la période cible. Cette technique permet de lisser les fluctuations à court terme et de mettre en évidence les tendCPNes à long terme.
+    Les moyennes mobiles sont utilisées pour estimer les valeurs attendues. Une moyenne glissante (également appelée moyenne mobile) est la moyenne d'un ensemble de périodes entourant la période cible. Cette technique permet de lisser les fluctuations à court terme et de mettre en évidence les tendances à long terme.
 
     **Définition des valeurs valides** :
 
@@ -392,7 +392,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
     1.  **Moyenne centrée sur 6 mois (`roll6`)**
 
         -   Utilise les trois mois précédant et les trois mois suivant le mois aberrant
-        -   Fournit une moyenne équilibrée basée sur les tendCPNes proches
+        -   Fournit une moyenne équilibrée basée sur les tendances proches
         -   S'applique lorsqu'il existe suffisamment de valeurs valides de part et d'autre du mois
         -   Étiquette de la méthode : `roll6`
 
@@ -759,9 +759,9 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
 
     **Causes possibles** :
 
-    - InsuffisCPNe de données historiques valides pour les moyennes mobiles
+    - Insuffisance de données historiques valides pour les moyennes mobiles
     - Les modifications réelles du programme sont lissées
-    - Les tendCPNes saisonnières ne sont pas prises en compte dans la fenêtre de 6 mois
+    - Les tendances saisonnières ne sont pas prises en compte dans la fenêtre de 6 mois
 
     **Solution** :
 
@@ -797,14 +797,14 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
     - Examiner les statistiques sur l'exhaustivité du module 1
     - Considérer le seuil de qualité des données pour l'inclusion
 
-? ?? "Contrôles d'assurCPNe qualité
+? ?? "Contrôles d'assurance qualité
 
     Le module comprend plusieurs contrôles de qualité :
 
     1. **Exclusions des faibles volumes** : Identifie et exclut automatiquement les indicateurs qui ne comportent aucune observation de grande valeur
     2. **Suivi des ajustements** : Compte et rapporte le nombre de valeurs ajustées par chaque méthode
     3. **Indicateurs exclus** : Assure que les décès ne sont jamais ajustés
-    4. **Journalisation de la console** : Fournit des statistiques détaillées sur l'état d'avCPNement et des statistiques sommaires
+    4. **Journalisation de la console** : Fournit des statistiques détaillées sur l'état d'avancement et des statistiques sommaires
 
     **Exemple de sortie de la console** :
 
@@ -843,14 +843,14 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
     1. **Comparer les scénarios** : Examiner les différences entre `count_final_none` et `count_final_both`
     2. **Examiner les exclusions** : Vérifier que `M2_low_volume_exclusions.csv` ne contient pas d'indicateurs inattendus
     3. **Analyse agrégée** : S'assurer que les totaux infranationaux et nationaux sont raisonnables
-    4. **Graphiques temporels** : Visualiser les tendCPNes avant/après l'ajustement pour identifier le lissage excessif
+    4. **Graphiques temporels** : Visualiser les tendances avant/après l'ajustement pour identifier le lissage excessif
     5. **Vérifications ponctuelles au niveau de l'établissement** : Examiner les ajustements pour un échantillon d'installations
 
 ? ?? "Limites"
 
     1. **Les fenêtres mobiles supposent la stabilité** : Les ajustements fonctionnent mieux lorsque la prestation de services est relativement stable. De véritables changements de programme (par exemple, de nouvelles campagnes) peuvent être lissés de manière incorrecte.
 
-    2. **Pas d'incertitude sur les ajustements** : Le module fournit des estimations ponctuelles sans intervalles de confiCPNe. Les valeurs ajustées doivent être considérées comme des estimations.
+    2. **Pas d'incertitude sur les ajustements** : Le module fournit des estimations ponctuelles sans intervalles de confiance. Les valeurs ajustées doivent être considérées comme des estimations.
 
     3. **Ajustements spécifiques à l'installation** : Il n'y a pas d'emprunt d'informations entre les établissements. Les établissements disposant de très peu de données peuvent avoir des ajustements instables.
 

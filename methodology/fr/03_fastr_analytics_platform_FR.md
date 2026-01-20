@@ -7,7 +7,7 @@
 
 La plateforme d'analyse FASTR est un outil en ligne conçu pour soutenir l'évaluation, l'ajustement et l'analyse de la qualité des données de santé de routine. Elle permet aux utilisateurs de télécharger et d'analyser des données provenant de diverses sources, y compris le DHIS2, avec des méthodes statistiques intégrées pour générer un ensemble de données ajustées et effectuer des analyses prioritaires sur des indicateurs sélectionnés. La plateforme fournit une interface conviviale pour l'exécution des analyses et offre des options flexibles pour la visualisation et l'exportation des résultats.
 
-![Capacités de la plateforme](resources/diagrams/plateforme_capabilities.svg)
+![Capacités de la plateforme](resources/diagrams/platform_capabilities.svg)
 
 ## Capacités clés
 
@@ -21,7 +21,7 @@ Les capacités analytiques sont fournies par le biais de modules configurables. 
 
 ### Assistant IA
 
-Un assistant IA intégré aide les utilisateurs à comprendre et à interpréter leurs données. L'assistant peut expliquer les résultats des modules, décrire les tendCPNes et les modèles de données, fournir des informations sur les visualisations et aider à générer du contenu narratif pour les rapports. Les utilisateurs peuvent poser des questions sur les données de leur projet en langage naturel et recevoir des conseils contextuels sur l'analyse et l'interprétation.
+Un assistant IA intégré aide les utilisateurs à comprendre et à interpréter leurs données. L'assistant peut expliquer les résultats des modules, décrire les tendances et les modèles de données, fournir des informations sur les visualisations et aider à générer du contenu narratif pour les rapports. Les utilisateurs peuvent poser des questions sur les données de leur projet en langage naturel et recevoir des conseils contextuels sur l'analyse et l'interprétation.
 
 ### Visualisation
 
@@ -39,11 +39,11 @@ La plateforme prend en charge le travail collaboratif grâce à une structure ba
 
 ### Les analystes de données
 
-Les analystes de données trouveront la plateforme très utile pour analyser les tendCPNes des données de santé, créer des visualisations et générer des rapports pour les décideurs. Les modules analytiques et les outils de visualisation sont conçus pour soutenir des flux de travail d'analyse de données rigoureux.
+Les analystes de données trouveront la plateforme très utile pour analyser les tendances des données de santé, créer des visualisations et générer des rapports pour les décideurs. Les modules analytiques et les outils de visualisation sont conçus pour soutenir des flux de travail d'analyse de données rigoureux.
 
 ### Gestionnaires de programmes de santé
 
-Les responsables de programmes de santé peuvent utiliser la plateforme pour surveiller les performCPNes des programmes, suivre les indicateurs clés et partager des informations avec leurs équipes. La fonctionnalité de reporting permet une communication régulière des résultats afin de soutenir une gestion de programme basée sur des preuves.
+Les responsables de programmes de santé peuvent utiliser la plateforme pour surveiller les performances des programmes, suivre les indicateurs clés et partager des informations avec leurs équipes. La fonctionnalité de reporting permet une communication régulière des résultats afin de soutenir une gestion de programme basée sur des preuves.
 
 ### Administrateurs du système
 
@@ -51,43 +51,43 @@ Les administrateurs du système sont chargés de mettre en place la plateforme, 
 
 ## Fonctionnement de l'application
 
-### Niveau de l'organisation (instCPNe)
+### Niveau de l'organisation (instance)
 
-L'instCPNe** est l'espace de travail principal de l'organisation au sein de la plateforme. Chaque instCPNe contient tous les utilisateurs enregistrés, la structure administrative partagée (y compris les zones administratives et les établissements de santé), les définitions des indicateurs partagés, les sources de données (SIGS et HFA) et tous les projets créés au sein de l'organisation.
+L'instance** est l'espace de travail principal de l'organisation au sein de la plateforme. Chaque instance contient tous les utilisateurs enregistrés, la structure administrative partagée (y compris les zones administratives et les établissements de santé), les définitions des indicateurs partagés, les sources de données (SIGS et HFA) et tous les projets créés au sein de l'organisation.
 
 ### Niveau du projet
 
-**Les projets** fournissent des espaces de travail d'analyse ciblés au sein d'une instCPNe. Chaque projet permet aux utilisateurs de sélectionner les données à inclure en définissant des périodes, des établissements et des indicateurs spécifiques. Au sein d'un projet, les utilisateurs peuvent activer des modules analytiques, créer des visualisations et élaborer des rapports adaptés à des objectifs analytiques spécifiques.
+**Les projets** fournissent des espaces de travail d'analyse ciblés au sein d'une instance. Chaque projet permet aux utilisateurs de sélectionner les données à inclure en définissant des périodes, des établissements et des indicateurs spécifiques. Au sein d'un projet, les utilisateurs peuvent activer des modules analytiques, créer des visualisations et élaborer des rapports adaptés à des objectifs analytiques spécifiques.
 
-![Projets au sein de l'instCPNe](resources/diagrams/projects_within_instCPNe.svg)
+![Projets au sein de l'instance](resources/diagrams/projects_within_instance.svg)
 
 
 ### Flux de données
 
-La plate-forme suit un flux de données structuré : **Importation des données → Traitement des modules → Visualisations → Rapports**. Les utilisateurs commencent par télécharger les données de l'établissement de santé au niveau de l'instCPNe. Des projets sont ensuite créés avec des fenêtres de données spécifiques qui définissent l'étendue de l'analyse. Les modules analytiques traitent et analysent les données sélectionnées, produisant des résultats qui peuvent être utilisés pour créer des graphiques, des cartes et des tableaux. Enfin, les visualisations sont combinées dans des rapports exportables pour la diffusion.
+La plate-forme suit un flux de données structuré : **Importation des données → Traitement des modules → Visualisations → Rapports**. Les utilisateurs commencent par télécharger les données de l'établissement de santé au niveau de l'instance. Des projets sont ensuite créés avec des fenêtres de données spécifiques qui définissent l'étendue de l'analyse. Les modules analytiques traitent et analysent les données sélectionnées, produisant des résultats qui peuvent être utilisés pour créer des graphiques, des cartes et des tableaux. Enfin, les visualisations sont combinées dans des rapports exportables pour la diffusion.
 
 
 ## Exigences techniques
 
 ### Langues supportées
 
-L'application prend actuellement en charge l'anglais et le français. Les paramètres linguistiques peuvent être configurés au niveau de l'instCPNe pour répondre aux besoins des différentes communautés d'utilisateurs.
+L'application prend actuellement en charge l'anglais et le français. Les paramètres linguistiques peuvent être configurés au niveau de l'instance pour répondre aux besoins des différentes communautés d'utilisateurs.
 
 ### Exigences en matière de navigateur
 
-L'application est conçue pour fonctionner avec des navigateurs web modernes. Chrome est recommandé pour des performCPNes optimales, mais Firefox, Safari et Edge sont également pris en charge. JavaScript doit être activé pour une fonctionnalité complète.
+L'application est conçue pour fonctionner avec des navigateurs web modernes. Chrome est recommandé pour des performances optimales, mais Firefox, Safari et Edge sont également pris en charge. JavaScript doit être activé pour une fonctionnalité complète.
 
 ## Concepts de base
 
 La compréhension de ces concepts de base aidera les utilisateurs à travailler efficacement avec l'application.
 
-### InstCPNe
+### Instance
 
-Une **instCPNe** est l'espace de travail principal de l'organisation au sein de la plate-forme. Elle sert de conteneur de premier niveau pour tous les utilisateurs, la structure administrative partagée, les sources de données et les projets. Chaque organisation opère généralement au sein d'une seule instCPNe qui fournit la base de tout le travail analytique.
+Une **instance** est l'espace de travail principal de l'organisation au sein de la plate-forme. Elle sert de conteneur de premier niveau pour tous les utilisateurs, la structure administrative partagée, les sources de données et les projets. Chaque organisation opère généralement au sein d'une seule instance qui fournit la base de tout le travail analytique.
 
 ### Projets
 
-Un **projet** est un espace de travail d'analyse ciblé au sein d'une instCPNe. Les projets permettent aux utilisateurs de travailler avec des sous-ensembles spécifiques de données en définissant des périodes, des installations et des indicateurs pertinents pour un objectif analytique particulier. Dans chaque projet, les utilisateurs peuvent activer des modules analytiques, créer des visualisations, générer des rapports et collaborer avec les membres de l'équipe. Plusieurs projets peuvent exister au sein d'une même instCPNe, chacun ayant une portée de données et des configurations d'accès utilisateur différentes.
+Un **projet** est un espace de travail d'analyse ciblé au sein d'une instance. Les projets permettent aux utilisateurs de travailler avec des sous-ensembles spécifiques de données en définissant des périodes, des installations et des indicateurs pertinents pour un objectif analytique particulier. Dans chaque projet, les utilisateurs peuvent activer des modules analytiques, créer des visualisations, générer des rapports et collaborer avec les membres de l'équipe. Plusieurs projets peuvent exister au sein d'une même instance, chacun ayant une portée de données et des configurations d'accès utilisateur différentes.
 
 ### Structure
 
@@ -101,7 +101,7 @@ La **structure** définit l'organisation hiérarchique des zones administratives
 
 #### Données SIGS
 
-Les données du système d'information sur la gestion de la santé (SIGS) contiennent des statistiques de routine sur les services de santé recueillies auprès des établissements. Il s'agit notamment d'indicateurs de prestation de services, de données de surveillCPNe des maladies et d'indicateurs de performCPNe des programmes. Les données SIGS sont généralement communiquées sur une base mensuelle et constituent la base de la plupart des analyses de routine du système de santé.
+Les données du système d'information sur la gestion de la santé (SIGS) contiennent des statistiques de routine sur les services de santé recueillies auprès des établissements. Il s'agit notamment d'indicateurs de prestation de services, de données de surveillance des maladies et d'indicateurs de performCPNe des programmes. Les données SIGS sont généralement communiquées sur une base mensuelle et constituent la base de la plupart des analyses de routine du système de santé.
 
 #### Données HFA
 
@@ -109,7 +109,7 @@ Les données d'évaluation des établissements de santé (HFA) contiennent des i
 
 ### Indicateurs
 
-**Les indicateurs** sont des paramètres de santé mesurables utilisés dans la plateforme. Il peut s'agir soit d'**Indicateurs communs**, qui sont définis et partagés dans l'instCPNe pour une mesure cohérente, soit d'**Indicateurs DHIS2**, qui sont importés de systèmes DHIS2 externes et peuvent suivre des conventions de dénomination ou des méthodes de calcul différentes.
+**Les indicateurs** sont des paramètres de santé mesurables utilisés dans la plateforme. Il peut s'agir soit d'**Indicateurs communs**, qui sont définis et partagés dans l'instance pour une mesure cohérente, soit d'**Indicateurs DHIS2**, qui sont importés de systèmes DHIS2 externes et peuvent suivre des conventions de dénomination ou des méthodes de calcul différentes.
 
 ### Ensembles de données et versions
 
@@ -119,7 +119,7 @@ Un **dataset** est une collection de données de santé, soit SIGS soit HFA. Cha
 
 **Les modules** sont des unités de traitement des données qui exécutent des scripts analytiques R au sein de la plateforme. Chaque module prend des données d'entrée provenant d'ensembles de données ou des sorties d'autres modules, traite et analyse les données selon des méthodes statistiques définies et produit des objets de résultats sous forme de fichiers de sortie. Les modules peuvent être enchaînés pour prendre en charge des flux de travail analytiques complexes dans lesquels un module utilise les sorties d'un autre module comme ses entrées.
 
-La plateforme distingue deux types de modules. Une **Définition de module** est le modèle ou le plan d'un type d'analyse, définissant les méthodes analytiques et les paramètres disponibles. Une **InstCPNe de module** est un module qui a été activé et configuré dans un projet spécifique. Certains modules ont des conditions préalables, ce qui signifie que d'autres modules doivent d'abord être activés avant de pouvoir être utilisés.
+La plateforme distingue deux types de modules. Une **Définition de module** est le modèle ou le plan d'un type d'analyse, définissant les méthodes analytiques et les paramètres disponibles. Une **Instance de module** est un module qui a été activé et configuré dans un projet spécifique. Certains modules ont des conditions préalables, ce qui signifie que d'autres modules doivent d'abord être activés avant de pouvoir être utilisés.
 
 ### Visualisations (objets de présentation)
 
@@ -133,7 +133,7 @@ Les visualisations peuvent être filtrées selon diverses dimensions et désagr�
 
 ### Fenêtrage
 
-**Le fenêtrage** fait référence au processus de sélection d'un sous-ensemble de données d'instCPNe à utiliser dans le cadre d'un projet. Les utilisateurs peuvent filtrer les données par période (en sélectionnant des mois ou des années spécifiques), par indicateurs (y compris tous les indicateurs ou seulement des indicateurs spécifiques), par zones administratives (y compris toutes les régions ou des régions spécifiques) et par établissements (en filtrant par type d'établissement ou par propriété). Cette fonctionnalité permet aux projets de se concentrer sur les données les plus pertinentes pour leurs objectifs analytiques sans avoir à charger l'ensemble des données.
+**Le fenêtrage** fait référence au processus de sélection d'un sous-ensemble de données d'instance à utiliser dans le cadre d'un projet. Les utilisateurs peuvent filtrer les données par période (en sélectionnant des mois ou des années spécifiques), par indicateurs (y compris tous les indicateurs ou seulement des indicateurs spécifiques), par zones administratives (y compris toutes les régions ou des régions spécifiques) et par établissements (en filtrant par type d'établissement ou par propriété). Cette fonctionnalité permet aux projets de se concentrer sur les données les plus pertinentes pour leurs objectifs analytiques sans avoir à charger l'ensemble des données.
 
 ### Désagrégation
 
@@ -141,7 +141,7 @@ Les visualisations peuvent être filtrées selon diverses dimensions et désagr�
 
 ### Rôles des utilisateurs
 
-Les utilisateurs peuvent se voir attribuer différents rôles qui déterminent leurs autorisations au sein de la plateforme. Au **niveau de l'instCPNe**, les administrateurs globaux ont un accès complet à tous les paramètres de l'instCPNe et à tous les projets. Au **niveau du projet**, trois rôles sont disponibles : Les administrateurs peuvent modifier les paramètres du projet, les modules, les visualisations et les rapports ; les éditeurs peuvent créer et modifier les visualisations et les rapports ; et les spectateurs peuvent voir le contenu du projet mais ne peuvent pas le modifier.
+Les utilisateurs peuvent se voir attribuer différents rôles qui déterminent leurs autorisations au sein de la plateforme. Au **niveau de l'instance**, les administrateurs globaux ont un accès complet à tous les paramètres de l'instance et à tous les projets. Au **niveau du projet**, trois rôles sont disponibles : Les administrateurs peuvent modifier les paramètres du projet, les modules, les visualisations et les rapports ; les éditeurs peuvent créer et modifier les visualisations et les rapports ; et les spectateurs peuvent voir le contenu du projet mais ne peuvent pas le modifier.
 
 ### Qualité des données
 
@@ -163,8 +163,8 @@ Introduction à la plate-forme d'analyse FASTR, à ses caractéristiques et à s
 #### 1.0 Accéder à la plateforme d'analyse FASTR
 Création de comptes, connexion, autorisations et rôles des utilisateurs
 
-1.1 Demander une instCPNe nationale
-Pour demander une instCPNe nationale, contactez Ashley Sheffel à l'adresse asheffel@worldbank.org
+1.1 Demander une instance nationale
+Pour demander une instance nationale, contactez Ashley Sheffel à l'adresse asheffel@worldbank.org
 1.2 Création d'un compte sur la plateforme FASTR Analytics <iframe src="https://scribehow.com/embed/12_Creating_a_FASTR_Analytics_plateforme_account__9Av54dcqRTK1XkP1mYAc_g" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
 1.3 Se connecter à la plateforme <iframe src="https://scribehow.com/embed/13_Signing_into_the_plateforme__ICDGCqyIQ6SxAcK4RKou7g" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
 1.4 Accès FAQ
@@ -231,24 +231,24 @@ p { text-align : center ; }
 img { display : block ; margin : 0 auto ; }
 </style>
 
-![Capacités de la plate-forme h:420](../resources/diagrams/plateforme_capabilities.svg)
+![Capacités de la plate-forme h:420](../resources/diagrams/platform_capabilities.svg)
 
 <p style="font-size : 0.8em ; color : #666 ; margin-top : 0.5rem ;">Les flux de données vont de l'importation aux résultats partageables en passant par l'analyse
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
-## Pays InstCPNe
+## Pays Instance
 
-Chaque pays possède sa propre **instCPNe** de la plateforme analytique FASTR.
+Chaque pays possède sa propre **instance** de la plateforme analytique FASTR.
 
-Une instCPNe contient :
+Une instance contient :
 
 - Tous les utilisateurs enregistrés et leurs comptes
 - La structure administrative partagée (régions, districts, établissements)
 - Les définitions des indicateurs et les sources de données
 - Tous les projets créés pour ce pays
 
-**Pensez à une instCPNe comme à l'espace de travail dédié à votre pays
+**Pensez à une instance comme à l'espace de travail dédié à votre pays
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
@@ -256,20 +256,20 @@ Une instCPNe contient :
 
 Il existe deux niveaux de permissions dans la plate-forme :
 
-**Rôles au niveau de l'instCPNe:**
+**Rôles au niveau de l'instance:**
 
-- **Les administrateurs de l'instCPNe** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules et effectuer des analyses
+- **Les administrateurs de l'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules et effectuer des analyses
 
 **Rôles au niveau du projet:**
 
 - **Les éditeurs de projets** peuvent créer des visualisations, des rapports et télécharger/exporter des résultats
 - **Les visualisateurs de projets** peuvent afficher des visualisations, consulter des rapports et télécharger/exporter des résultats
 
-*Les administrateurs sont assignés par instCPNe ; les éditeurs et les visualisateurs sont assignés par projet
+*Les administrateurs sont assignés par instance ; les éditeurs et les visualisateurs sont assignés par projet
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
-## Projets au sein d'une instCPNe
+## Projets au sein d'une instance
 
 <style scoped>
 .container { display : flex ; gap : 1rem ; }
@@ -281,12 +281,12 @@ Il existe deux niveaux de permissions dans la plate-forme :
 <div class="container">
 <div class="img-col">
 
-![Projets au sein de l'instCPNe](../resources/diagrammes/projets_au sein_de_l'instCPNe.svg)
+![Projets au sein de l'instance](../resources/diagrammes/projets_au sein_de_l'instance.svg)
 
 </div>
 <div class="text-col">
 
-Chaque instCPNe de pays peut contenir **plusieurs projets**.
+Chaque instance de pays peut contenir **plusieurs projets**.
 
 Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
 

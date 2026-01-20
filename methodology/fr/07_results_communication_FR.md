@@ -17,7 +17,7 @@ Cette section couvre l'ensemble du processus de communication et d'utilisation d
 
 4. **Engagement des parties prenantes et plaidoyer** - Identifier les parties prenantes clés, stratégies d'engagement, susciter l'adhésion à des décisions fondées sur des données, approches en matière de plaidoyer
 
-5. **Pratique : Génération de rapports trimestriels** - Flux de travail pour les rapports trimestriels, utilisation de la plateforme FASTR pour les rapports automatisés, assurCPNe qualité pour les rapports, distribution et mécanismes de retour d'information
+5. **Pratique : Génération de rapports trimestriels** - Flux de travail pour les rapports trimestriels, utilisation de la plateforme FASTR pour les rapports automatisés, assurance qualité pour les rapports, distribution et mécanismes de retour d'information
 
 ## Passer des données aux messages clés
 
@@ -58,7 +58,7 @@ Ils devraient être...
 
 **Exemple 2 (Principaux enseignements):**
 
-> Alors que les périodes précédentes montrent de fortes fluctuations dans les volumes de services CPN1, en particulier en 2020 et 2022, la stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendCPNe peut refléter des systèmes renforcés, des perturbations réduites ou des schémas de recherche de soins plus prévisibles - ce qui constitue une base plus solide pour une couverture durable des soins prénatals.
+> Alors que les périodes précédentes montrent de fortes fluctuations dans les volumes de services CPN1, en particulier en 2020 et 2022, la stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendance peut refléter des systèmes renforcés, des perturbations réduites ou des schémas de recherche de soins plus prévisibles - ce qui constitue une base plus solide pour une couverture durable des soins prénatals.
 
 ## Choisir le bon format de rapport
 
@@ -157,9 +157,9 @@ Une feuille de route pour l'utilisation des données est un plan stratégique qu
 |-----------|-------------|---------|
 | La plate-forme de coordination nationale du SRMNIA-N a été mise en place par le Ministère de l'Agriculture et de l'Agroalimentaire
 | Les objectifs de votre message*** se concentrent sur un objectif spécifique par public - Faciliter l'utilisation des données pour la prise de décision et l'élaboration des politiques - Les messages clés*** se concentrent sur un objectif spécifique par public - Faciliter la prise de décision et l'élaboration des politiques
-| Messages clés*** - Définir les messages clés que vous souhaitez communiquer - TendCPNes du SRMNIA-N et identification des districts en retard de développement
-| Les tendCPNes du SRMNIA-N et l'identification des districts en retard de développement
-**Temporisation** | Identifier le calendrier avec les étapes clés et les échéCPNes | La prochaine réunion de la plateforme est prévue pour le deuxième trimestre
+| Messages clés*** - Définir les messages clés que vous souhaitez communiquer - Tendances du SRMNIA-N et identification des districts en retard de développement
+| Les tendances du SRMNIA-N et l'identification des districts en retard de développement
+**Temporisation** | Identifier le calendrier avec les étapes clés et les échéances | La prochaine réunion de la plateforme est prévue pour le deuxième trimestre
 | La prochaine réunion de la plateforme est prévue pour le deuxième trimestre de l'année
 | Comment saurez-vous si vous avez réussi ? | Le pourcentage de rapports trimestriels qui ont été diffusés dans les forums pertinents ; une liste des actions qui ont été prises à la suite des données est créée et tenue à jour
 
@@ -170,8 +170,8 @@ Un plan d'action permettra d'orienter les activités du FASTR au niveau national
 **Vos cas d'utilisation**
 - Souhaitez-vous modifier ou ajouter quelque chose à votre cas d'utilisation des données ?
 
-**Finalisation du rapport
-- Le rapport que vous avez rédigé lors de l'atelier est-il celui que vous souhaitez utiliser à l'avenir ? Si ce n'est pas le cas, comment allez-vous finaliser votre rapport ?
+**Finalisation du rapport**
+- Le rapport que vous avez redige lors de l'atelier est-il celui que vous souhaitez utiliser à l'avenir ? Si ce n'est pas le cas, comment allez-vous finaliser votre rapport ?
 
 **Le processus de mise à jour et de diffusion en continu de vos analyses trimestrielles**
 - Qui sera chargé de télécharger les données sur la plateforme d'analyse ? De la création des rapports ?
@@ -200,7 +200,7 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 
 2. **Qu'est-ce que cet utilisateur final doit accomplir avec le rapport?** (par exemple, prendre une décision, discuter lors d'une réunion, prendre des décisions programmatiques, etc.)
 
-3. **Sur la base des informations que nous pouvons inclure dans le rapport, quelles sont les informations qui l'intéressent le plus ? Qu'ont-ils besoin de savoir** (par exemple, des tendCPNes de haut niveau, des informations détaillées, des comparaisons entre États/régions/districts/woredas) ?
+3. **Sur la base des informations que nous pouvons inclure dans le rapport, quelles sont les informations qui l'intéressent le plus ? Qu'ont-ils besoin de savoir** (par exemple, des tendances de haut niveau, des informations détaillées, des comparaisons entre États/régions/districts/woredas) ?
 
 4. **Qu'apprécient-ils dans les rapports actuels ? Qu'est-ce qu'ils n'aiment pas?** (par exemple, ils aiment les cartes et les tableaux de bord ; ils n'aiment pas trop de texte, ni les détails techniques complexes)
 
@@ -212,7 +212,7 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 |----------|------------------|
 | Qui est l'utilisateur final ? ** | Chef d'un bureau/autorité régional(e) de la santé
 | L'utilisateur final a besoin d'accomplir quoi avec ce rapport?** | Prendre une décision ; Diriger son équipe
-| Quels types d'informations ont-ils besoin ? ** TendCPNes de haut niveau par service et par zone sous-nationale ; comparaisons de performCPNe - qui doit rendre des comptes ? |
+| Quels types d'informations ont-ils besoin ? ** Tendances de haut niveau par service et par zone sous-nationale ; comparaisons de performance - qui doit rendre des comptes ? |
 | Qu'est-ce qui leur plaît dans l'analyse actuelle ? Qu'est-ce qu'ils n'aiment pas ? ** **Aimer : informations exploitables, visuels simples ; **Aimer : contenu trop technique ou non aligné sur les besoins de prise de décision ; **Aimer : contenu trop technique ou non aligné sur les besoins de prise de décision
 | Comment aiment-ils recevoir l'information ? ** Présentations lors de réunions de direction
 | Les présentations à des réunions de cadres supérieurs ne sont pas toujours bien accueillies par les clients
@@ -245,7 +245,7 @@ Pour chaque sortie FASTR, posez trois questions :
 2. **Pourquoi ? - Envisagez plusieurs explications
 3. **Que devrions-nous faire ? ** - Identifier les prochaines étapes ou actions
 
-<small>*Passer des chiffres aux idées nécessite un contexte, une réflexion critique et des connaissCPNes programmatiques.*</small>
+<small>*Passer des chiffres aux idées nécessite un contexte, une réflexion critique et des connaissances programmatiques.*</small>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_1a -->
@@ -253,10 +253,10 @@ Pour chaque sortie FASTR, posez trois questions :
 
 Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les questions suivantes :
 
-- **Qualité des données ou changement réel?** Cette tendCPNe pourrait-elle refléter des problèmes de déclaration plutôt que des changements dans la prestation des services ?
+- **Qualité des données ou changement réel?** Cette tendance pourrait-elle refléter des problèmes de déclaration plutôt que des changements dans la prestation des services ?
 - **Quels sont les facteurs externes en jeu ? ** Changements de politique, modèles saisonniers, chocs ou campagnes ?
-- **Cette tendCPNe est-elle logique du point de vue programmatique ? Serait-elle prévisible compte tenu de ce que nous savons du système de santé ?
-- **Les tendCPNes nationales peuvent masquer d'importantes variations régionales
+- **Cette tendance est-elle logique du point de vue programmatique ? Serait-elle prévisible compte tenu de ce que nous savons du système de santé ?
+- **Les tendances nationales peuvent masquer d'importantes variations régionales
 - **Quelles informations supplémentaires sont nécessaires ? Quel contexte pourrait renforcer ou remettre en question cette interprétation ?
 <!-- /SLIDE -->
 
@@ -267,7 +267,7 @@ Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les
 <div style="flex : 1 ;">
 
 **Masquage de l'agrégation
-Les moyennes nationales peuvent masquer des variations régionales importantes. Il faut toujours examiner les tendCPNes infranationales.
+Les moyennes nationales peuvent masquer des variations régionales importantes. Il faut toujours examiner les tendances infranationales.
 
 **Complétude ≠ représentativité**
 Un niveau élevé d'exhaustivité des rapports ne signifie pas que les données couvrent toutes les prestations de services (secteur privé, soins informels).
@@ -276,10 +276,10 @@ Un niveau élevé d'exhaustivité des rapports ne signifie pas que les données 
 <div style="flex : 1 ;">
 
 **Manque de contexte**
-Les tendCPNes sans contexte n'ont pas de sens. Tenez compte de la saisonnalité, des changements de politique et des chocs externes.
+Les tendances sans contexte n'ont pas de sens. Tenez compte de la saisonnalité, des changements de politique et des chocs externes.
 
 **Surinterprétation du bruit**
-Les fluctuations à court terme peuvent être des variations normales. Se concentrer sur les tendCPNes durables et les écarts significatifs.
+Les fluctuations à court terme peuvent être des variations normales. Se concentrer sur les tendances durables et les écarts significatifs.
 
 </div>
 </div>
@@ -295,7 +295,7 @@ Les fluctuations à court terme peuvent être des variations normales. Se concen
 Les scores faibles de l'AQD peuvent refléter les pratiques de saisie des données plutôt que la qualité du service. Concentrez-vous sur l'identification de la dimension spécifique (exhaustivité, valeurs aberrantes, cohérence) à l'origine des problèmes.
 
 **Utilisation des services
-Distinguer les tendCPNes saisonnières des perturbations réelles. Les comparaisons d'une année sur l'autre permettent d'isoler les changements programmatiques des fluctuations normales.
+Distinguer les tendances saisonnières des perturbations réelles. Les comparaisons d'une année sur l'autre permettent d'isoler les changements programmatiques des fluctuations normales.
 
 </div>
 <div style="flex : 1 ;">
@@ -304,7 +304,7 @@ Distinguer les tendCPNes saisonnières des perturbations réelles. Les comparais
 Une couverture >100% indique qu'un rapprochement est nécessaire entre les données du SIGS et celles de l'enquête. Vérifier si la source du dénominateur correspond au contexte de la prestation de services.
 
 **Tous modules confondus
-Examiner les tendCPNes à plusieurs niveaux géographiques - la désagrégation sous-nationale révèle souvent la réalité.
+Examiner les tendances à plusieurs niveaux géographiques - la désagrégation sous-nationale révèle souvent la réalité.
 
 </div>
 </div>
@@ -327,7 +327,7 @@ Les principaux enseignements sont ce que les résultats nous apprennent - pourqu
 > Au troisième trimestre 2022, le volume des visites CPN1 a augmenté de 15 % par rapport au trimestre précédent - la plus forte hausse trimestrielle de la période - suivie d'une baisse de 12 % au premier trimestre 2023. Depuis, les volumes de visites CPN1 sont restés relativement stables.
 
 **Principaux enseignements:**
-> La stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendCPNe peut refléter des systèmes renforcés ou des schémas de recherche de soins plus prévisibles - fournissant une base plus solide pour une couverture durable des soins prénatals.
+> La stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendance peut refléter des systèmes renforcés ou des schémas de recherche de soins plus prévisibles - fournissant une base plus solide pour une couverture durable des soins prénatals.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2b -->
@@ -413,7 +413,7 @@ Tenez compte de ces domaines clés :
 Cette section couvre les points suivants
 - Le flux de travail des rapports trimestriels
 - Utilisation de la plateforme FASTR pour les rapports automatisés
-- L'assurCPNe qualité des rapports
+- L'assurance qualité des rapports
 - Mécanismes de distribution et de retour d'information
 <!-- /SLIDE -->
 

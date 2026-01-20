@@ -23,7 +23,7 @@ Ces procédures nécessitent un traitement des données et des opérations stati
 
 **Complexité de l'analyse
 
-FASTR applique des méthodes analytiques - notamment des techniques de régression - qui vont au-delà de l'analyse descriptive des tendCPNes disponible dans DHIS2. Alors que DHIS2 permet de visualiser les tendCPNes brutes de la prestation de services, FASTR offre des capacités analytiques supplémentaires, notamment :
+FASTR applique des méthodes analytiques - notamment des techniques de régression - qui vont au-delà de l'analyse descriptive des tendances disponible dans DHIS2. Alors que DHIS2 permet de visualiser les tendances brutes de la prestation de services, FASTR offre des capacités analytiques supplémentaires, notamment :
 
 - L'identification d'augmentations ou de diminutions statistiquement significatives des volumes de services
 - L'ajustement des limites de la qualité des données
@@ -42,7 +42,7 @@ Les données doivent être extraites pour chaque **indicateur d'intérêt**, au 
 
 **Pourquoi des données mensuelles au niveau de l'établissement ?
 
-L'utilisation des données les plus granulaires disponibles permet une évaluation plus précise des modèles de déclaration et des problèmes de qualité des données. Les données mensuelles au niveau de l'établissement permettent un ajustement solide de l'exhaustivité de la déclaration, l'identification des anomalies spécifiques à l'établissement et l'estimation des tendCPNes dans le temps tout en tenant compte des variations saisonnières. Ce niveau de granularité permet une mise en œuvre complète de la méthodologie FASTR.
+L'utilisation des données les plus granulaires disponibles permet une évaluation plus précise des modèles de déclaration et des problèmes de qualité des données. Les données mensuelles au niveau de l'établissement permettent un ajustement solide de l'exhaustivité de la déclaration, l'identification des anomalies spécifiques à l'établissement et l'estimation des tendances dans le temps tout en tenant compte des variations saisonnières. Ce niveau de granularité permet une mise en œuvre complète de la méthodologie FASTR.
 
 ### Variables clés
 
@@ -104,7 +104,7 @@ Pour la mise en œuvre initiale, il est généralement recommandé d'extraire en
 - La cohérence des définitions des indicateurs dans le temps
 - Les caractéristiques du système national de données de routine
 
-Une série chronologique pluriannuelle améliore la fiabilité de l'estimation des tendCPNes et de la correction des variations saisonnières.
+Une série chronologique pluriannuelle améliore la fiabilité de l'estimation des tendances et de la correction des variations saisonnières.
 
 **Mise à jour régulière de l'analyse FASTR**
 
@@ -122,7 +122,7 @@ Cette section couvrira :
 - Les options d'exportation des données DHIS2
 - Les méthodes d'extraction basées sur l'API
 - Les exigences en matière de transformation des données
-- Les contrôles d'assurCPNe qualité des données extraites
+- Les contrôles d'assurance qualité des données extraites
 
 ---
 
@@ -161,7 +161,7 @@ Ces ajustements nécessitent un traitement qui ne peut pas être effectué dans 
 
 ### Complexité de l'analyse
 
-L'approche FASTR utilise des méthodes statistiques plus avCPNées, telles que l'analyse de régression, qui ne sont pas disponibles dans le DHIS2. Alors que DHIS2 permet de tracer des tendCPNes dans le temps à partir de données brutes, FASTR peut aller plus loin :
+L'approche FASTR utilise des méthodes statistiques plus avCPNées, telles que l'analyse de régression, qui ne sont pas disponibles dans le DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin :
 
 - En identifiant les augmentations ou les diminutions significatives du volume de services
 - En ajustant les problèmes de qualité des données
@@ -231,7 +231,7 @@ Ces deux outils permettent une extraction efficace des données et nous fourniss
 Le téléchargeur de données est une application de bureau permettant d'extraire des données du DHIS2.
 
 **Caractéristiques principales:**
-- Connexion à n'importe quelle instCPNe DHIS2
+- Connexion à n'importe quelle instance DHIS2
 - Parcourir et sélectionner les éléments de données et les indicateurs
 - Téléchargement des données au niveau de l'établissement au format CSV
 - Maintien de l'historique des téléchargements
@@ -254,7 +254,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <div>
 
-**Connectez-vous à votre instCPNe DHIS2**
+**Connectez-vous à votre instance DHIS2**
 
 - Entrez l'URL de votre serveur DHIS2
 - Indiquez votre nom d'utilisateur et votre mot de passe

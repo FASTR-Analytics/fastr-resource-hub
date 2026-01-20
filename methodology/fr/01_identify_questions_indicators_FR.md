@@ -21,7 +21,7 @@ Cette section couvre en particulier les points suivants
    Un cadre pour formuler des questions analytiques prioritaires, sélectionner des indicateurs appropriés et aligner l'analyse FASTR sur les stratégies nationales et les besoins en matière de prise de décision.
 
 4. **Préparation de l'extraction des données**
-   Un aperçu de haut niveau des considérations préalables à l'extraction, y compris la compréhension de la configuration du DHIS2, la mise en correspondCPNe des indicateurs avec les éléments de données et la planification du calendrier d'extraction.
+   Un aperçu de haut niveau des considérations préalables à l'extraction, y compris la compréhension de la configuration du DHIS2, la mise en correspondance des indicateurs avec les éléments de données et la planification du calendrier d'extraction.
 
 ---
 
@@ -109,10 +109,10 @@ La sélection des indicateurs est essentielle à la qualité et à l'utilité de
 L'un des principaux atouts de l'approche FASTR est sa capacité à s'adapter aux problèmes de qualité des données. Les indicateurs de volume élevé sont mieux adaptés à ce processus pour les raisons suivantes :
 
 - **Réduction de la sensibilité aux valeurs aberrantes**
-  Dans les indicateurs à faible volume, les points de données individuels peuvent affecter les tendCPNes de manière disproportionnée.
+  Dans les indicateurs à faible volume, les points de données individuels peuvent affecter les tendances de manière disproportionnée.
 
 - **Des estimations plus stables
-  Les données à fort volume réduisent la variabilité aléatoire et améliorent la fiabilité de la détection des tendCPNes.
+  Les données à fort volume réduisent la variabilité aléatoire et améliorent la fiabilité de la détection des tendances.
 
 - **Identification plus claire des véritables anomalies**
   Des effectifs plus importants permettent de distinguer plus facilement les véritables valeurs aberrantes des variations naturelles.
@@ -130,7 +130,7 @@ Les indicateurs à haut degré d'exhaustivité sont préférés parce qu'ils.. :
   Un niveau élevé d'exhaustivité permet des comparaisons significatives dans le temps et dans l'espace.
 
 - **Réduire les erreurs d'interprétation
-  Des données incomplètes peuvent faussement suggérer des changements dans l'utilisation des services lorsque ces changements sont dus à des lacunes dans les rapports plutôt qu'à des tendCPNes réelles.
+  Des données incomplètes peuvent faussement suggérer des changements dans l'utilisation des services lorsque ces changements sont dus à des lacunes dans les rapports plutôt qu'à des tendances réelles.
 
 Bien que des méthodes statistiques telles que l'imputation puissent être utilisées pour traiter les données incomplètes, ces méthodes requièrent des hypothèses sur les valeurs manquantes. De plus amples détails sont fournis dans [Ajustement de la qualité des données] (05_data_quality_adjustment.md).
 
@@ -159,7 +159,7 @@ Les consultations externes sont également incluses en tant qu'indicateur de l'u
 
 ## Préparation de l'extraction des données
 
-Cette étape comprend une liste de contrôle préalable à l'extraction, l'examen de la configuration de DHIS2, la mise en correspondCPNe des indicateurs avec les éléments de données et la planification du calendrier d'extraction. Ces étapes garantissent que les analyses en aval sont basées sur des données cohérentes et bien comprises.
+Cette étape comprend une liste de contrôle préalable à l'extraction, l'examen de la configuration de DHIS2, la mise en correspondance des indicateurs avec les éléments de données et la planification du calendrier d'extraction. Ces étapes garantissent que les analyses en aval sont basées sur des données cohérentes et bien comprises.
 
 ---
 
@@ -268,7 +268,7 @@ Outil standard de la médecine fondée sur les preuves et de la recherche en san
 L'une des principales valeurs ajoutées de l'approche FASTR consiste à procéder à des ajustements pour tenir compte de la qualité des données. Les indicateurs à faible volume sont difficiles à ajuster :
 
 - **Plus grande sensibilité aux valeurs aberrantes** : Un seul point de données inhabituellement élevé ou bas peut avoir un impact disproportionné sur l'analyse globale
-- **Estimations instables** : De petites variations peuvent conduire à des changements de pourcentage importants, ce qui rend plus difficile la distinction entre les tendCPNes réelles et la variabilité aléatoire
+- **Estimations instables** : De petites variations peuvent conduire à des changements de pourcentage importants, ce qui rend plus difficile la distinction entre les tendances réelles et la variabilité aléatoire
 - **Difficulté à identifier les vraies valeurs aberrantes** : Difficulté à déterminer si un point de données est réellement aberrant ou s'il fait partie de la variabilité naturelle
 
 Les indicateurs de comptage permettent de vérifier en permanence la qualité des données et d'identifier plus précisément les valeurs aberrantes.
@@ -321,7 +321,7 @@ D'autres indicateurs spécifiques aux pays et aux programmes peuvent être ajout
 Cette section couvrira :
 - Liste de contrôle avant l'extraction
 - Comprendre la configuration de votre DHIS2
-- Mise en correspondCPNe des indicateurs avec les éléments de données
+- Mise en correspondance des indicateurs avec les éléments de données
 - Planification du calendrier d'extraction
 <!-- /SLIDE -->
 
