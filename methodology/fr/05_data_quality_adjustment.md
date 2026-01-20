@@ -76,7 +76,7 @@ Le module génère des fichiers de sortie structurés pour les ensembles de donn
 
 ### Diagramme de flux de travail
 
-<iframe src="../resources/diagrams/mod2_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 2 Interactive Workflow"></iframe>
+<iframe src="../../resources/diagrams/mod2_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 2 Interactive Workflow"></iframe>
 
 ### Points de décision clés
 
