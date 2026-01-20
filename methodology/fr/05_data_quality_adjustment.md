@@ -122,41 +122,41 @@ L'analyse FASTR génère trois principaux résultats visuels comparant les volum
 
 **1. Impact de l'ajustement des valeurs aberrantes**
 
-Carte thermique montrant le pourcentage de changement dans le volume de service dû à l'ajustement des valeurs aberrantes, par indicateur et par zone géographique.
+Heatmap montrant le pourcentage de changement dans le volume de service dû à l'ajustement des valeurs aberrantes, par indicateur et par zone géographique.
 
 (resources/default_outputs/Default_1._Percent_change_in_volume_due_to_valeur aberrante_adjustment.png)
 
 **2. Impact de l'ajustement de l'exhaustivité**
 
-Carte thermique montrant la variation en pourcentage du volume de services due à l'ajustement de l'exhaustivité (données manquantes), par indicateur et par zone géographique.
+Heatmap montrant la variation en pourcentage du volume de services due à l'ajustement de l'exhaustivité (données manquantes), par indicateur et par zone géographique.
 
 (resources/default_outputs/Default_2._Percent_change_in_volume_due_to_complétude_adjustment.png)
 
 **3. Impact de l'ajustement combiné**
 
-Carte thermique montrant le pourcentage de changement dans le volume de services lorsque les ajustements des valeurs aberrantes et de l'exhaustivité sont appliqués.
+Heatmap montrant le pourcentage de changement dans le volume de services lorsque les ajustements des valeurs aberrantes et de l'exhaustivité sont appliqués.
 
 (resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_valeur aberrante_and_complétude_adjustment.png)
 
 **Guide d'interpretation**
 
-Pour toutes les cartes thermiques :
+Pour toutes les heatmaps :
 
 - **Lignes** : Zones géographiques (zones/régions)
 - **Colonnes** : Indicateurs de santé
 - **Valeurs** : Pourcentage de variation du volume de services après ajustement
 
-Pour la carte thermique de l'ajustement des valeurs aberrantes (résultat 1) :
+Pour la heatmap de l'ajustement des valeurs aberrantes (résultat 1) :
 
 - **Valeurs négatives** : Les valeurs extrêmement élevées ont été remplacées par des estimations plus faibles
 - Les valeurs proches de zéro indiquent que peu de valeurs aberrantes ont été détectées
 
-Pour la carte thermique des ajustements d'exhaustivité (résultat 2) :
+Pour la heatmap des ajustements d'exhaustivité (résultat 2) :
 
 - **Valeurs positives** : Les données manquantes ont été complétées, ce qui a permis d'augmenter le volume total
 - Les valeurs proches de zéro indiquent que la déclaration était déjà complète
 
-Pour la carte thermique de l'ajustement combiné (résultat 3) :
+Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 - Montre l'effet net des deux ajustements
 - Négatif = l'effet des valeurs aberrantes domine ; Positif = l'effet de l'exhaustivité domine

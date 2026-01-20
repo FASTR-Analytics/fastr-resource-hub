@@ -102,16 +102,16 @@ Le module traite les données en format long, avec un enregistrement par combina
 
 L'analyse FASTR génère six principaux résultats visuels :
 
-**1. Carte thermique des valeurs aberrantes**
+**1. Heatmap des valeurs aberrantes**
 
-Tableau de la carte thermique avec les zones comme lignes et les indicateurs de santé comme colonnes, codés par couleur en fonction du pourcentage de valeurs aberrantes.
+Tableau de la heatmap avec les zones comme lignes et les indicateurs de santé comme colonnes, codés par couleur en fonction du pourcentage de valeurs aberrantes.
 
 ![Pourcentage de mois d'installation qui sont aberrants](resources/default_outputs/Default_1._Proportion_of_valeurs aberrantes.png)
 
 
 **2. Complétude de l'indicateur**
 
-Tableau de la carte thermique avec les zones en lignes et les indicateurs de santé en colonnes, codés par couleur en fonction du pourcentage d'exhaustivité.
+Tableau de la heatmap avec les zones en lignes et les indicateurs de santé en colonnes, codés par couleur en fonction du pourcentage d'exhaustivité.
 
 ![Pourcentage de mois d'établissement avec des données complètes](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
@@ -124,37 +124,37 @@ Graphiques chronologiques horizontaux montrant les tendances en matière d'exhau
 
 **4. Cohérence interne**
 
-Tableau de la carte thermique avec les zones comme lignes et les catégories de repères de cohérence comme colonnes, codées par couleur en fonction de la performance.
+Tableau de la heatmap avec les zones comme lignes et les catégories de repères de cohérence comme colonnes, codées par couleur en fonction de la performance.
 
 (resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 
 **5. Score global du CQD**
 
-Tableau de la carte thermique avec les zones comme lignes et les périodes comme colonnes, codées par couleur en fonction du pourcentage du score CQD.
+Tableau de la heatmap avec les zones comme lignes et les périodes comme colonnes, codées par couleur en fonction du pourcentage du score CQD.
 
 (resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 **6. Score moyen de l'AQD**
 
-Tableau de la carte thermique avec les zones comme lignes et les périodes comme colonnes, codées par couleur en fonction du score moyen de l'AQD.
+Tableau de la heatmap avec les zones comme lignes et les périodes comme colonnes, codées par couleur en fonction du score moyen de l'AQD.
 
 ![Score moyen de qualité des données sur l'ensemble des mois de l'établissement](resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 
 **Guide d'interprétation**
 
-Pour les cartes thermiques (sorties 1, 2, 4, 5, 6) :
+Pour les heatmaps (sorties 1, 2, 4, 5, 6) :
 
 - **Lignes** : Zones géographiques (zones/régions)
 - **Colonnes** : Indicateurs de santé ou périodes de temps
 
-Pour la carte thermique des valeurs aberrantes (résultat 1) :
+Pour la heatmap des valeurs aberrantes (résultat 1) :
 
 - **Valeurs** : Pourcentage de mois d'établissement signalés comme aberrants
 - Des pourcentages plus faibles indiquent moins de valeurs extrêmes
 
-Pour la carte thermique de l'exhaustivité des indicateurs (résultat 2) :
+Pour la heatmap de l'exhaustivité des indicateurs (résultat 2) :
 
 - **Valeurs** : Pourcentage de mois d'installation avec un rapport complet
 - Des pourcentages plus élevés indiquent un rapport plus complet
@@ -166,12 +166,12 @@ Pour le graphique de l'exhaustivité de l'indicateur dans le temps (résultat 3)
 - **Axe Y** : Pourcentage d'exhaustivité
 - Indique si les rapports s'améliorent, diminuent ou sont stables
 
-Pour la carte thermique de la cohérence interne (résultat 4) :
+Pour la heatmap de la cohérence interne (résultat 4) :
 
 - **Valeurs** : Pourcentage de domaines répondant aux critères de cohérence
 - Indique si les indicateurs liés suivent les relations attendues (par exemple, CPN1 ≥ CPN4)
 
-Pour les cartes thermiques des scores de l'AQD (résultats 5-6) :
+Pour les heatmaps des scores de l'AQD (résultats 5-6) :
 
 - **Sortie 5** : Pourcentage de mois de l'établissement ayant passé tous les contrôles de qualité
 - **Résultat 6** : Score moyen de l'AQD sur l'ensemble des mois de l'établissement
@@ -338,7 +338,7 @@ __CODE_BLOC_4__
 
     - Comprendre les modèles de prestation de services au niveau du district
     - Identifier les zones géographiques présentant des problèmes de cohérence
-    - Création de cartes thermiques de cohérence par zone
+    - Création de heatmaps de cohérence par zone
 
 ? ?? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement
 
