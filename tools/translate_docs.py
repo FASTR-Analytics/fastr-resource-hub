@@ -120,7 +120,7 @@ def get_translatable_files(docs_dir: Path) -> list:
 
 
 def get_output_path(input_path: Path, target_lang: str, docs_dir: Path = None) -> Path:
-    """Get output path using folder structure with suffix: input.md -> fr/input_FR.md"""
+    """Get output path using folder structure: input.md -> fr/input.md"""
     if docs_dir is None:
         docs_dir = METHODOLOGY_DOCS
     # Get relative path from docs_dir
@@ -128,10 +128,8 @@ def get_output_path(input_path: Path, target_lang: str, docs_dir: Path = None) -
         rel_path = input_path.relative_to(docs_dir)
     except ValueError:
         rel_path = Path(input_path.name)
-    # Add language suffix to filename (e.g., file.md -> file_FR.md)
-    new_name = f"{rel_path.stem}_{target_lang.upper()}.md"
-    # Output to language subfolder with suffix
-    return docs_dir / target_lang.lower() / new_name
+    # Output to language subfolder (same filename)
+    return docs_dir / target_lang.lower() / rel_path
 
 
 def find_new_sections(en_content: str, fr_content: str) -> list:
