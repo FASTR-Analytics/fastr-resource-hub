@@ -21,6 +21,6 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment.](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Percent change in volume due to completeness adjustment. h:380](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
-**Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.</p>

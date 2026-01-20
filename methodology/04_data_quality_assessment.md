@@ -1623,11 +1623,11 @@ For the FASTR analysis, completeness is defined as:
 
 ## Completeness: Percent of monthly values that are complete
 
-For a given indicator in a given time period, the percent of monthly values that are complete:
+<p style="font-size: 0.9em; margin-bottom: 0.5rem;">For a given indicator in a given time period, the percent of monthly values that are complete:</p>
 
-**% complete = # monthly values that are complete / total N of monthly values**
+<p style="font-size: 0.9em;"><strong>% complete = # monthly values that are complete / total N of monthly values</strong></p>
 
-![Indicator Completeness](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator Completeness h:340](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3 -->

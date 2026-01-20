@@ -219,9 +219,14 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 <!-- SLIDE:m3_1b -->
 ## Platform Capabilities
 
-![Platform Capabilities h:380](../resources/diagrams/platform_capabilities.svg)
+<style scoped>
+p { text-align: center; }
+img { display: block; margin: 0 auto; }
+</style>
 
-Data flows from import through analysis to shareable outputs.
+![Platform Capabilities h:420](../resources/diagrams/platform_capabilities.svg)
+
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Data flows from import through analysis to shareable outputs.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
@@ -259,6 +264,21 @@ There are two levels of permissions in the platform:
 <!-- SLIDE:m3_2c -->
 ## Projects Within an Instance
 
+<style scoped>
+.container { display: flex; gap: 1rem; }
+.container .img-col { flex: 2; }
+.container .img-col img { width: 100%; height: auto; }
+.container .text-col { flex: 1; font-size: 0.85em; }
+</style>
+
+<div class="container">
+<div class="img-col">
+
+![Projects within instance](../resources/diagrams/projects_within_instance.svg)
+
+</div>
+<div class="text-col">
+
 Each country instance can contain **multiple projects**.
 
 A country may only need one project, or multiple projects can be used for:
@@ -272,22 +292,25 @@ A country may only need one project, or multiple projects can be used for:
 - Who is the admin?
 - Who can edit?
 - Who can view?
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2d -->
 ## Practice: Logging Into the Platform
 
 <style scoped>
-table { border: none !important; background: transparent !important; }
-table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; }
+table { border: none !important; background: transparent !important; width: 100% !important; }
+table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
+table img { max-height: 280px !important; width: auto !important; }
 </style>
 
 | | |
 |:---|:---|
-| ![Login page h:200]({{WORKSHOP_MEDIA}}/01_login_page.png) | ![Sign up form h:200]({{WORKSHOP_MEDIA}}/02_sign_up.png) |
+| ![Login page]({{WORKSHOP_MEDIA}}/01_login_page.png) | ![Sign up form]({{WORKSHOP_MEDIA}}/02_sign_up.png) |
 | **1.** Go to {{PLATFORM_URL}} | **2.** Click Sign up and enter your details |
-| **3.** Enter your information (verify email) | |
-| **4.** After login, you'll be added to a project | |
+| **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->

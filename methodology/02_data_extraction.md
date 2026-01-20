@@ -245,7 +245,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
 
-Enter your DHIS2 instance URL and credentials to connect.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Enter your DHIS2 instance URL and credentials to connect.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2c -->
@@ -253,7 +253,7 @@ Enter your DHIS2 instance URL and credentials to connect.
 
 ![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
 
-The main interface displays available data elements and download options.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2d -->
@@ -261,7 +261,7 @@ The main interface displays available data elements and download options.
 
 ![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
 
-Track previous downloads and re-download data as needed.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Track previous downloads and re-download data as needed.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2e -->
@@ -269,7 +269,7 @@ Track previous downloads and re-download data as needed.
 
 ![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
 
-Browse and search available data elements and indicators from your DHIS2 instance.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Browse and search available data elements and indicators from your DHIS2 instance.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2f -->
@@ -277,7 +277,7 @@ Browse and search available data elements and indicators from your DHIS2 instanc
 
 ![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
 
-View and filter facilities by administrative level and organization unit.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">View and filter facilities by administrative level and organization unit.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2g -->
@@ -285,7 +285,7 @@ View and filter facilities by administrative level and organization unit.
 
 ![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
 
-Visualize facility locations on an interactive map.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Visualize facility locations on an interactive map.</p>
 <!-- /SLIDE -->
 
 ---

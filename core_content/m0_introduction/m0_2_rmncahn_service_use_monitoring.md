@@ -6,25 +6,26 @@ paginate: true
 
 ## RMNCAH-N service use monitoring
 
-Rapid-cycle approaches using routine health management information system (HMIS) data can be used to:
+<style scoped>
+.split { display: flex !important; gap: 2rem; align-items: flex-start; }
+.split .text { flex: 1; }
+.split .image { flex: 2; }
+.split .image img { max-height: 320px !important; width: auto !important; }
+</style>
 
-- **Evaluate the quality of HMIS data** both at the national and sub-national levels to help address gaps in quality and completeness
-- **Measure monthly changes** in the utilization of critical health services, enabling a rapid response to challenges and the opportunity to gain insights on the progress of reforms
-- **Compare service coverage trends** with country targets, facilitating the continuous monitoring of RMNCAH-N progress
+<div class="split">
+<div class="text">
 
----
+Rapid-cycle approaches using routine HMIS data can:
 
-### How does it work?
-
-<div class="columns">
-<div>
-
-Through collaboration with Ministries of Health, the GFF assists countries in developing and reviewing regular analyses of HMIS data, focusing on specific priority health service indicators linked to national health care reforms, as well as GFF and World Bank investments.
+- **Evaluate HMIS data quality** at national and sub-national levels
+- **Measure monthly changes** in health service utilization
+- **Compare coverage trends** with country targets
 
 </div>
-<div>
+<div class="image">
 
-![Steps to implement RMNCAH-N service use monitoring](../../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![HMIS data flow](../../resources/diagrams/HMIS_data_flow.svg)
 
 </div>
 </div>

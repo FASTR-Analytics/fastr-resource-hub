@@ -8,4 +8,4 @@ paginate: true
 
 ![Data Downloader overview h:420](../../resources/screenshots/data_downloader/02_overview.png)
 
-The main interface displays available data elements and download options.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>

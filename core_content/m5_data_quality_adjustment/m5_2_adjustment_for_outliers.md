@@ -20,6 +20,6 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment.](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment. h:380](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
-**Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.</p>

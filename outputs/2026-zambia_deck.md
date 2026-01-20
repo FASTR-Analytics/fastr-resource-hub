@@ -187,25 +187,26 @@ FASTR brings together four complementary technical approaches:
 
 ## RMNCAH-N service use monitoring
 
-Rapid-cycle approaches using routine health management information system (HMIS) data can be used to:
+<style scoped>
+.split { display: flex !important; gap: 2rem; align-items: flex-start; }
+.split .text { flex: 1; }
+.split .image { flex: 2; }
+.split .image img { max-height: 320px !important; width: auto !important; }
+</style>
 
-- **Evaluate the quality of HMIS data** both at the national and sub-national levels to help address gaps in quality and completeness
-- **Measure monthly changes** in the utilization of critical health services, enabling a rapid response to challenges and the opportunity to gain insights on the progress of reforms
-- **Compare service coverage trends** with country targets, facilitating the continuous monitoring of RMNCAH-N progress
+<div class="split">
+<div class="text">
 
----
+Rapid-cycle approaches using routine HMIS data can:
 
-### How does it work?
-
-<div class="columns">
-<div>
-
-Through collaboration with Ministries of Health, the GFF assists countries in developing and reviewing regular analyses of HMIS data, focusing on specific priority health service indicators linked to national health care reforms, as well as GFF and World Bank investments.
+- **Evaluate HMIS data quality** at national and sub-national levels
+- **Measure monthly changes** in health service utilization
+- **Compare coverage trends** with country targets
 
 </div>
-<div>
+<div class="image">
 
-![Steps to implement RMNCAH-N service use monitoring](../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![HMIS data flow](../resources/diagrams/HMIS_data_flow.svg)
 
 </div>
 </div>
@@ -389,7 +390,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
 
-Enter your DHIS2 instance URL and credentials to connect.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Enter your DHIS2 instance URL and credentials to connect.</p>
 
 ---
 
@@ -399,7 +400,7 @@ Enter your DHIS2 instance URL and credentials to connect.
 
 ![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
 
-The main interface displays available data elements and download options.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>
 
 ---
 
@@ -409,7 +410,7 @@ The main interface displays available data elements and download options.
 
 ![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
 
-Track previous downloads and re-download data as needed.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Track previous downloads and re-download data as needed.</p>
 
 ---
 
@@ -419,7 +420,7 @@ Track previous downloads and re-download data as needed.
 
 ![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
 
-Browse and search available data elements and indicators from your DHIS2 instance.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Browse and search available data elements and indicators from your DHIS2 instance.</p>
 
 ---
 
@@ -429,7 +430,7 @@ Browse and search available data elements and indicators from your DHIS2 instanc
 
 ![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
 
-View and filter facilities by administrative level and organization unit.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">View and filter facilities by administrative level and organization unit.</p>
 
 ---
 
@@ -439,7 +440,7 @@ View and filter facilities by administrative level and organization unit.
 
 ![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
 
-Visualize facility locations on an interactive map.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Visualize facility locations on an interactive map.</p>
 
 ---
 
@@ -468,9 +469,14 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 
 ## Platform Capabilities
 
-![Platform Capabilities h:380](../resources/diagrams/platform_capabilities.svg)
+<style scoped>
+p { text-align: center; }
+img { display: block; margin: 0 auto; }
+</style>
 
-Data flows from import through analysis to shareable outputs.
+![Platform Capabilities h:420](../resources/diagrams/platform_capabilities.svg)
+
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Data flows from import through analysis to shareable outputs.</p>
 
 ---
 
@@ -514,6 +520,21 @@ There are two levels of permissions in the platform:
 
 ## Projects Within an Instance
 
+<style scoped>
+.container { display: flex; gap: 1rem; }
+.container .img-col { flex: 2; }
+.container .img-col img { width: 100%; height: auto; }
+.container .text-col { flex: 1; font-size: 0.85em; }
+</style>
+
+<div class="container">
+<div class="img-col">
+
+![Projects within instance](../resources/diagrams/projects_within_instance.svg)
+
+</div>
+<div class="text-col">
+
 Each country instance can contain **multiple projects**.
 
 A country may only need one project, or multiple projects can be used for:
@@ -528,6 +549,9 @@ A country may only need one project, or multiple projects can be used for:
 - Who can edit?
 - Who can view?
 
+</div>
+</div>
+
 ---
 
 
@@ -535,16 +559,16 @@ A country may only need one project, or multiple projects can be used for:
 ## Practice: Logging Into the Platform
 
 <style scoped>
-table { border: none !important; background: transparent !important; }
-table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; }
+table { border: none !important; background: transparent !important; width: 100% !important; }
+table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
+table img { max-height: 280px !important; width: auto !important; }
 </style>
 
 | | |
 |:---|:---|
-| ![Login page h:200](../workshops/2026-zambia/media/01_login_page.png) | ![Sign up form h:200](../workshops/2026-zambia/media/02_sign_up.png) |
+| ![Login page](../workshops/2026-zambia/media/01_login_page.png) | ![Sign up form](../workshops/2026-zambia/media/02_sign_up.png) |
 | **1.** Go to https://zambia.fastr-analytics.org | **2.** Click Sign up and enter your details |
-| **3.** Enter your information (verify email) | |
-| **4.** After login, you'll be added to a project | |
+| **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
 
 ---
 
@@ -760,11 +784,11 @@ For the FASTR analysis, completeness is defined as:
 
 ## Completeness: Percent of monthly values that are complete
 
-For a given indicator in a given time period, the percent of monthly values that are complete:
+<p style="font-size: 0.9em; margin-bottom: 0.5rem;">For a given indicator in a given time period, the percent of monthly values that are complete:</p>
 
-**% complete = # monthly values that are complete / total N of monthly values**
+<p style="font-size: 0.9em;"><strong>% complete = # monthly values that are complete / total N of monthly values</strong></p>
 
-![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator Completeness h:340](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
@@ -985,9 +1009,9 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment.](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment. h:380](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
-**Interpretation:** Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.</p>
 
 ---
 
@@ -1010,9 +1034,9 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment.](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Percent change in volume due to completeness adjustment. h:380](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
-**Interpretation:** Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.</p>
 
 ---
 
@@ -1020,9 +1044,9 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Combined adjustment: FASTR output
 
-When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.
+<p style="font-size: 0.9em; margin-bottom: 0.5rem;">When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.</p>
 
-![Percent change in volume due to both outlier and completeness adjustment.](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+![Percent change in volume due to both outlier and completeness adjustment. h:380](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
 ---
 
@@ -1323,7 +1347,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 
 
-## Output: Coverage (national)
+## Coverage (national)
 
 ![Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
@@ -1331,7 +1355,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 
 
-## Output: Coverage (subnational)
+## Coverage (subnational)
 
 ![Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
@@ -1339,9 +1363,9 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 
 
-## Output: Coverage (district)
+## Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![Coverage calculated from HMIS data at subnational level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
 
 ---
 

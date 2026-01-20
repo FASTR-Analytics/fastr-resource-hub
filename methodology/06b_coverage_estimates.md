@@ -1877,21 +1877,21 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_16 -->
-## Output: Coverage (national)
+## Coverage (national)
 
 ![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_17 -->
-## Output: Coverage (subnational)
+## Coverage (subnational)
 
 ![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_18 -->
-## Output: Coverage (district)
+## Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![Coverage calculated from HMIS data at subnational level.](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
