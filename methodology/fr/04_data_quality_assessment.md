@@ -19,11 +19,11 @@ La qualité des données influe directement sur la fiabilité des indicateurs de
 
 ### Points clés
 
-| Composante de l'analyse de la qualité de l'eau
+| Composante | Détails |
 |-----------|---------|
-| Les données brutes du SIGS (`SIGS_ISO3.csv`) contenant les volumes de services des établissements par mois et par indicateur<br>Les identifiants des zones géographiques/administratives<br>Les noms des indicateurs normalisés
-| Les résultats de la cohérence au niveau géographique<br>Les scores globaux de l'AQD<br>Les résultats de la cohérence au niveau géographique<br>Les résultats de la cohérence au niveau géographique<br>Les résultats de la cohérence au niveau géographique<br>Les résultats de la cohérence au niveau géographique<br>Les scores globaux de l'AQD
-| Les résultats de l'analyse de la qualité des données (AQD) sont les suivants : **Objectif** | Évaluer la fiabilité des données SIGS par la détection des valeurs aberrantes, l'évaluation de l'exhaustivité et la vérification de la cohérence afin de garantir des données fiables pour l'estimation de la couverture
+| **Entrées** | Données brutes du SIGS (`hmis_ISO3.csv`) contenant les volumes de services des établissements par mois et par indicateur<br>Identifiants des zones géographiques/administratives<br>Noms d'indicateurs normalisés |
+| **Sorties** | - Indicateurs et listes de valeurs aberrantes<br>- Statut d'exhaustivité par établissement-indicateur-mois<br>- Résultats de cohérence au niveau géographique<br>- Scores globaux de l'AQD |
+| **Objectif** | Évaluer la fiabilité des données SIGS par la détection des valeurs aberrantes, l'évaluation de l'exhaustivité et la vérification de la cohérence afin de garantir des données fiables pour l'estimation de la couverture |
 
 ---
 

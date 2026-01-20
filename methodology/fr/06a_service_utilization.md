@@ -23,9 +23,9 @@ Ce module applique une approche standardisée, basée sur les données, pour ide
 
 | Composante | Détails |
 |-----------|---------|
-| Les volumes de services ajustés du module 2 (`M2_adjusted_data.csv`)<br>Les indicateurs de valeurs aberrantes du module 1 (`M1_output_valeurs aberrantes.csv`)<br>Le SIGS brut (`SIGS_ISO3.csv`) - uniquement pour la recherche admin_area_1
-| Les indicateurs de perturbation (`M3_chartout.csv`)<br>Les impacts quantifiés par niveau géographique (`M3_perturbations_analysis_*.csv`)<br>Les résumés des déficits/excédents (`M3_all_indicateurs_shortfalls_*.csv`) | **Objectif** | Détecter les perturbations (`M3_chartout.csv`)<br>Les impacts quantifiés par niveau géographique (`M3_perturbations_analysis_*.csv`)
-| Détecter et quantifier les perturbations dans la fourniture des services par une analyse en deux étapes : les cartes de contrôle identifient le moment où les perturbations se produisent, la régression par panel quantifie leur ampleur
+| **Entrées** | Volumes de services ajustés du module 2 (`M2_adjusted_data.csv`)<br>Indicateurs de valeurs aberrantes du module 1 (`M1_output_outliers.csv`)<br>SIGS brut (`hmis_ISO3.csv`) - uniquement pour la recherche admin_area_1 |
+| **Sorties** | Indicateurs de perturbation (`M3_chartout.csv`)<br>Impacts quantifiés par niveau géographique (`M3_disruptions_analysis_*.csv`)<br>Résumés des déficits/excédents (`M3_all_indicators_shortfalls_*.csv`) |
+| **Objectif** | Détecter et quantifier les perturbations dans la fourniture des services par une analyse en deux étapes : les cartes de contrôle identifient quand les perturbations se produisent, la régression par panel quantifie leur ampleur |
 
 ---
 
