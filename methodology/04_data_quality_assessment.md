@@ -1671,7 +1671,7 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% outliers = # monthly values that are outliers / total N of monthly values**
 
-![Outliers](resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers h:340](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
@@ -1723,7 +1723,7 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency h:420](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_5 -->
@@ -1751,7 +1751,7 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 **% adequate quality = # monthly values meeting all criteria / total N of monthly values**
 
-![Overall DQA Score](resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score h:340](resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
@@ -1761,9 +1761,9 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
 
-Lower scores indicate more data quality issues that need attention before the data can be used with confidence.
+<p style="font-size: 0.85em;">Lower scores indicate more data quality issues that need attention before the data can be used with confidence.</p>
 
-![Mean DQA Score](resources/default_outputs/Default_6._Mean_DQA_score.png)
+![Mean DQA Score h:320](resources/default_outputs/Default_6._Mean_DQA_score.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_6 -->

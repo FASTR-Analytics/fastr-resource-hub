@@ -1139,6 +1139,12 @@ Year-over-year comparison of service volumes identifies increases or decreases a
 **2. Detect and quantify disruptions**
 
 Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
+
+---
+
+## Service utilization over time
+
+![Service utilization over time h:420](resources/default_outputs/Module3_5_Number_of_services_reported.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1156,7 +1162,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:420](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
@@ -1192,7 +1198,7 @@ Our approach to service disruptions and surpluses utilizes an interrupted time s
 </div>
 <div style="flex: 2;">
 
-![Actual vs expected](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Disruption and surplus example h:300](resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
@@ -1229,17 +1235,17 @@ This improves the ability to interpret and compare utilization data across natio
 <!-- SLIDE:m6_4 -->
 ## Output: Actual vs expected (national)
 
-![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected national h:380](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
+<p style="font-size: 0.8em; color: #666;">National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
 ---
 
 ## Output: Actual vs expected (subnational)
 
-![Actual vs expected subnational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Actual vs expected subnational h:380](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
-Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
+<p style="font-size: 0.8em; color: #666;">Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->

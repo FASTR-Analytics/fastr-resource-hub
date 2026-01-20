@@ -18,7 +18,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:420](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 

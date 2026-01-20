@@ -1809,9 +1809,9 @@ Sequential demographic adjustments transform one target population estimate into
 <!-- SLIDE:m6_10 -->
 ## Denominator cascade: Illustration
 
-Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
+<p style="font-size: 0.85em;">Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:</p>
 
-![Denominator cascade example](resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example h:380](resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
@@ -1879,19 +1879,19 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 <!-- SLIDE:m6_16 -->
 ## Coverage (national)
 
-![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Coverage calculated from HMIS data at national level. h:420](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_17 -->
 ## Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+![Coverage calculated from HMIS data at admin area 2 level. h:420](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_18 -->
 ## Coverage (subnational)
 
-![Coverage calculated from HMIS data at subnational level.](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
+![Coverage calculated from HMIS data at subnational level. h:420](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->

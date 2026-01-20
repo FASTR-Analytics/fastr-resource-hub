@@ -44,4 +44,4 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% outliers = # monthly values that are outliers / total N of monthly values**
 
-![Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers h:340](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)

@@ -19,3 +19,9 @@ Year-over-year comparison of service volumes identifies increases or decreases a
 **2. Detect and quantify disruptions**
 
 Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
+
+---
+
+## Service utilization over time
+
+![Service utilization over time h:420](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)

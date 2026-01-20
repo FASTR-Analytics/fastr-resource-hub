@@ -834,7 +834,7 @@ For a given indicator in a given time period, the percent of monthly values that
 
 **% outliers = # monthly values that are outliers / total N of monthly values**
 
-![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers h:340](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
@@ -888,7 +888,7 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency h:420](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
@@ -918,7 +918,7 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 **% adequate quality = # monthly values meeting all criteria / total N of monthly values**
 
-![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score h:340](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
@@ -928,9 +928,9 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
 
-Lower scores indicate more data quality issues that need attention before the data can be used with confidence.
+<p style="font-size: 0.85em;">Lower scores indicate more data quality issues that need attention before the data can be used with confidence.</p>
 
-![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+![Mean DQA Score h:320](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -1070,6 +1070,12 @@ Statistical comparison of observed volumes against expected levels—derived fro
 
 ---
 
+## Service utilization over time
+
+![Service utilization over time h:420](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+---
+
 
 
 ## Year-over-year change
@@ -1086,7 +1092,7 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:420](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
@@ -1124,7 +1130,7 @@ Our approach to service disruptions and surpluses utilizes an interrupted time s
 </div>
 <div style="flex: 2;">
 
-![Actual vs expected](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Disruption and surplus example h:300](../resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
@@ -1163,17 +1169,17 @@ This improves the ability to interpret and compare utilization data across natio
 
 ## Output: Actual vs expected (national)
 
-![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Actual vs expected national h:380](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
+<p style="font-size: 0.8em; color: #666;">National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
 
 ---
 
 ## Output: Actual vs expected (subnational)
 
-![Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Actual vs expected subnational h:380](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
-Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
+<p style="font-size: 0.8em; color: #666;">Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
 
 ---
 
@@ -1267,9 +1273,9 @@ Sequential demographic adjustments transform one target population estimate into
 
 ## Denominator cascade: Illustration
 
-Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:
+<p style="font-size: 0.85em;">Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:</p>
 
-![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example h:380](../resources/diagrams/denominator_cascade_example.svg)
 
 ---
 
@@ -1349,7 +1355,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Coverage (national)
 
-![Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Coverage calculated from HMIS data at national level. h:420](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 ---
 
@@ -1357,7 +1363,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Coverage (subnational)
 
-![Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+![Coverage calculated from HMIS data at admin area 2 level. h:420](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 ---
 
@@ -1365,7 +1371,7 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 ## Coverage (subnational)
 
-![Coverage calculated from HMIS data at subnational level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
+![Coverage calculated from HMIS data at subnational level. h:420](../resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
 
 ---
 

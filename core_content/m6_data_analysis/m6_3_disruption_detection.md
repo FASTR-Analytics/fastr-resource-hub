@@ -22,7 +22,7 @@ Our approach to service disruptions and surpluses utilizes an interrupted time s
 </div>
 <div style="flex: 2;">
 
-![Actual vs expected](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Disruption and surplus example h:300](../../resources/diagrams/disruption_chart.png)
 
 </div>
 </div>

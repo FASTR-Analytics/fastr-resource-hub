@@ -937,7 +937,6 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ![Percent change in volume due to outlier adjustment. h:380](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Negative values indicate that extreme high values were replaced with lower estimates. Values near zero indicate few outliers were detected for that indicator/area.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
@@ -960,13 +959,10 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ![Percent change in volume due to completeness adjustment. h:380](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;"><strong>Interpretation:</strong> Positive values indicate that missing data was imputed, increasing total reported volume. Values near zero indicate reporting was already complete for that indicator/area.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
 ## Combined adjustment: FASTR output
-
-<p style="font-size: 0.9em; margin-bottom: 0.5rem;">When both adjustments are applied, outliers are corrected first, then missing values are imputed using the cleaned data.</p>
 
 ![Percent change in volume due to both outlier and completeness adjustment. h:380](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 <!-- /SLIDE -->
