@@ -11,9 +11,6 @@ const config = {
   // Custom theme
   themeSet: './fastr-theme.css',
 
-  // Default input/output directories
-  inputDir: './outputs',
-
   // PDF export settings (16:9 aspect ratio)
   pdf: true,
 }

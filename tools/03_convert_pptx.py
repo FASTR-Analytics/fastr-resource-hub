@@ -238,9 +238,9 @@ def parse_markdown(content):
         if table_lines:
             slide['table'] = table_lines
 
-        # Extract columns div
+        # Extract columns div (handles both "columns" and "split" classes)
         cols_match = re.search(
-            r'<div\s+class="columns[^"]*">\s*<div>(.*?)</div>\s*<div>(.*?)</div>\s*</div>',
+            r'<div\s+class="(?:columns|split)[^"]*">\s*<div[^>]*>(.*?)</div>\s*<div[^>]*>(.*?)</div>\s*</div>',
             raw, re.DOTALL
         )
         if cols_match:
@@ -967,11 +967,33 @@ def build_section_slide(prs, data, base_dir, md_dir):
 
 
 def parse_column_content(content):
-    """Parse column content into structured items (paragraphs, bullets, numbered)."""
+    """Parse column content into structured items (paragraphs, bullets, numbered, tables)."""
     items = []
     lines = content.strip().split('\n')
 
+    # First, extract any table
+    table_lines = []
+    in_table = False
+    non_table_lines = []
+
     for line in lines:
+        stripped = line.strip()
+        if stripped.startswith('|') and '|' in stripped[1:]:
+            in_table = True
+            # Skip separator line
+            if not re.match(r'^\|[\s\-:|]+\|$', stripped):
+                cells = [c.strip() for c in stripped.strip('|').split('|')]
+                table_lines.append(cells)
+        else:
+            if in_table and stripped:
+                in_table = False
+            non_table_lines.append(line)
+
+    # Add table as a single item if found
+    if table_lines:
+        items.append(('table', table_lines))
+
+    for line in non_table_lines:
         line = line.strip()
         if not line:
             continue
@@ -1002,17 +1024,96 @@ def parse_column_content(content):
     return items
 
 
+def add_column_table(slide, table_data, left, top, width):
+    """Add a small table to a column."""
+    if not table_data:
+        return None, top
+
+    rows = len(table_data)
+    cols = len(table_data[0]) if table_data else 2
+    row_height = Inches(0.35)
+
+    table_shape = slide.shapes.add_table(
+        rows, cols,
+        left, top,
+        width, row_height * rows
+    )
+    table = table_shape.table
+
+    # Distribute column widths evenly
+    col_width = int(width / cols)
+    for c_idx in range(cols):
+        table.columns[c_idx].width = col_width
+
+    # Fill table
+    for r_idx, row in enumerate(table_data):
+        is_header = r_idx == 0
+        for c_idx, cell_text in enumerate(row):
+            if c_idx >= cols:
+                continue
+            cell = table.cell(r_idx, c_idx)
+            cell.text_frame.word_wrap = True
+            para = cell.text_frame.paragraphs[0]
+
+            if is_header:
+                cell.fill.solid()
+                cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', str(cell_text))
+                para.text = clean_text
+                para.font.size = Fonts.SMALL_SIZE
+                para.font.name = Fonts.FAMILY
+                para.font.color.rgb = Colors.NAVY
+                para.font.bold = True
+            else:
+                add_formatted_text(para, str(cell_text), Fonts.SMALL_SIZE, Colors.TEXT_DARK)
+
+    return table_shape, top + row_height * rows + Inches(0.2)
+
+
 def add_column_text(slide, items, left, top, width):
-    """Add column text content to slide."""
+    """Add column text content to slide, including tables."""
     if not items:
         return None
 
-    # Use full available height
-    height = Inches(5.5)
+    current_top = top
+    shapes = []
+
+    # Separate tables from text items
+    text_items = []
+    for item_type, content in items:
+        if item_type == 'table':
+            # First add any accumulated text
+            if text_items:
+                shape = _add_text_items(slide, text_items, left, current_top, width)
+                if shape:
+                    shapes.append(shape)
+                    current_top += Inches(0.5 * len(text_items))
+                text_items = []
+            # Add the table
+            table_shape, current_top = add_column_table(slide, content, left, current_top, width)
+            if table_shape:
+                shapes.append(table_shape)
+        else:
+            text_items.append((item_type, content))
+
+    # Add remaining text items
+    if text_items:
+        shape = _add_text_items(slide, text_items, left, current_top, width)
+        if shape:
+            shapes.append(shape)
+
+    return shapes[0] if shapes else None
+
+
+def _add_text_items(slide, items, left, top, width):
+    """Helper to add text items (paragraphs and bullets) to a textbox."""
+    if not items:
+        return None
+
+    height = Inches(0.4 * len(items) + 0.5)
     shape = slide.shapes.add_textbox(left, top, width, height)
     tf = shape.text_frame
     tf.word_wrap = True
-    tf.anchor = MSO_ANCHOR.MIDDLE  # Vertically center text
 
     first_para = True
     for item_type, text in items:
@@ -1027,7 +1128,7 @@ def add_column_text(slide, items, left, top, width):
             p.space_after = Pt(8)
         else:
             add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
-            p.space_after = Pt(12)  # More space after paragraphs
+            p.space_after = Pt(12)
 
     return shape
 
@@ -1053,7 +1154,23 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
     right_has_image = '![' in right_content or '<img' in right_content
 
     content_top = Inches(1.4)
-    col_width = Inches(5.8)
+
+    # Adjust column widths: text columns narrower, image columns wider
+    if left_has_image and not right_has_image:
+        # Image left, text right
+        left_col_width = Inches(6.5)
+        right_col_width = Inches(5.0)
+        right_col_left = Inches(7.5)
+    elif right_has_image and not left_has_image:
+        # Text left, image right - narrower text, wider image
+        left_col_width = Inches(4.5)
+        right_col_width = Inches(7.0)
+        right_col_left = Inches(5.5)
+    else:
+        # Both text or both images - equal widths
+        left_col_width = Inches(5.8)
+        right_col_width = Inches(5.8)
+        right_col_left = Inches(7.0)
 
     def extract_image_path(content):
         """Extract image path from markdown or HTML img tag."""
@@ -1077,16 +1194,15 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
                 add_image_to_slide(
                     slide, img_path,
                     Layout.MARGIN_LEFT, content_top,
-                    width=col_width
+                    width=left_col_width
                 )
     else:
         # Add text content (paragraphs, bullets, numbered lists)
         items = parse_column_content(left_content)
         if items:
-            add_column_text(slide, items, Layout.MARGIN_LEFT, content_top, col_width)
+            add_column_text(slide, items, Layout.MARGIN_LEFT, content_top, left_col_width)
 
     # Right column
-    right_left = Inches(7)
     if right_has_image:
         img_src = extract_image_path(right_content)
         if img_src:
@@ -1094,14 +1210,14 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
             if img_path:
                 add_image_to_slide(
                     slide, img_path,
-                    right_left, content_top,
-                    width=col_width
+                    right_col_left, content_top,
+                    width=right_col_width
                 )
     else:
         # Add text content
         items = parse_column_content(right_content)
         if items:
-            add_column_text(slide, items, right_left, content_top, col_width)
+            add_column_text(slide, items, right_col_left, content_top, right_col_width)
 
     return slide
 

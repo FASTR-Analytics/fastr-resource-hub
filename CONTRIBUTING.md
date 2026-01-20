@@ -12,7 +12,8 @@ This guide covers how to update methodology content and create workshop presenta
 | Extract slides | `python3 tools/00_extract_slides.py` |
 | Create workshop | `python3 tools/01_new_workshop.py` |
 | Build deck | `python3 tools/02_build_deck.py --workshop NAME` |
-
+| Export to PDF | `python3 tools/04_export_pdf.py --workshop NAME` |
+| Export to PPTX | `python3 tools/03_export_pptx.py --workshop NAME` |
 ---
 
 ## Understanding the File Structure

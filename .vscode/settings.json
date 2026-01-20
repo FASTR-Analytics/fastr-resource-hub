@@ -3,6 +3,7 @@
   "markdown.marp.themes": [
     "./fastr-theme.css"
   ],
+  "markdown.marp.browserPath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   "markdown.preview.breaks": true,
   "markdown.preview.typographer": true,
   "[markdown]": {

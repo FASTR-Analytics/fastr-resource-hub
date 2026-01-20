@@ -109,7 +109,9 @@
       "Bash(:)",
       "Bash(exit 0)",
       "Bash(/bin/echo:*)",
-      "Bash(/bin/bash:*)"
+      "Bash(/bin/bash:*)",
+      "Bash(npx marp:*)",
+      "Bash(code --list-extensions:*)"
     ]
   }
 }
