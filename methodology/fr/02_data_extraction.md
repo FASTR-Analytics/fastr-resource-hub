@@ -48,51 +48,51 @@ L'utilisation des données les plus granulaires disponibles permet une évaluati
 
 L'ensemble de données extraites doit comprendre au minimum les variables suivantes :
 
-| Élément Description
+| Élément | Description |
 |--------|-------------|
-| Unité d'organisation - Identifiant de l'unité d'organisation
-| Nom de l'indicateur - Nom de l'indicateur - Nom de l'indicateur - Nom de l'indicateur - Nom de l'indicateur - Nom de l'indicateur
-nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur
-| Nom de l'indicateur | Total / compte | Valeur agrégée de l'indicateur | Nom de l'indicateur
+| Unités org. | Identifiant de l'unité organisationnelle |
+| Période | Période de l'observation |
+| Nom de l'indicateur | Nom de l'indicateur |
+| Total / compte | Valeur agrégée de l'indicateur |
 
 **Termes de l'unité organisationnelle**
 
-| Termes de l'unité organisationnelle ** Terme de l'unité organisationnelle ** Description
+| Terme | Description |
 |------|-------------|
-| Niveau administratif le plus élevé (par exemple, le pays) | `orgunitlevel1` | Niveau administratif intermédiaire (par exemple, l'État ou la province)
-| `orgunitlevel2` | Niveau administratif intermédiaire (par exemple, état ou province) | `orgunitlevel3` | Niveau administratif supérieur (par exemple, pays)
-| `orgunitlevel3` | district ou équivalent |
-| `orgunitlevel4` | Sous-district ou établissement de santé
-| `orgunitlevel5` | Unité ou département au sein d'une structure sanitaire
+| `orgunitlevel1` | Niveau administratif le plus élevé (par exemple, pays) |
+| `orgunitlevel2` | Niveau administratif intermédiaire (par exemple, état ou province) |
+| `orgunitlevel3` | District ou équivalent |
+| `orgunitlevel4` | Sous-district ou établissement de santé |
+| `orgunitlevel5` | Unité ou département au sein d'un établissement |
 | `organisationunitid` | Identifiant DHIS2 unique pour l'unité organisationnelle |
-| `organisationunitname` | Nom de l'unité organisationnelle | `organisationunitname` | Nom de l'unité organisationnelle
-| `organisationunitcode` | Code normalisé de l'unité organisationnelle | `organisationunitcode` | Code normalisé de l'unité organisationnelle
-| __CODE_BLOC_8__ | Description de l'unité organisationnelle
+| `organisationunitname` | Nom de l'unité organisationnelle |
+| `organisationunitcode` | Code normalisé de l'unité organisationnelle |
+| `organisationunitdescription` | Description de l'unité organisationnelle |
 
 **Termes de la période**
 
-| Termes de la période ** Termes de la période ** Description ** Termes de la période ** Termes de la période ** Description
+| Terme | Description |
 |------|-------------|
-| `periodid` | Identificateur unique pour la période de déclaration
-| `periodname` | Libellé de la période lisible par l'homme (par exemple, janvier 2024, T1 2024) | `periodcode` | Libellé de la période lisible par l'homme (par exemple, janvier 2024, T1 2024)
-| `periodcode` | Code de période normalisé (par exemple, 202401) | `periodcode` | Code de période normalisé (par exemple, 202401)
+| `periodid` | Identifiant unique pour la période de déclaration |
+| `periodname` | Libellé de la période lisible (par exemple, janvier 2024, T1 2024) |
+| `periodcode` | Code de période normalisé (par exemple, 202401) |
 | `perioddescription` | Description incluant les dates de début et de fin de la période |
 
 **Termes de l'élément de données**
 
-| Termes de l'élément de données** - Termes de l'élément de données** - Description
+| Terme | Description |
 |------|-------------|
-| `dataid` | Identifiant unique de l'élément de données | `dataname` | Nom de l'élément de données
-| `dataname` | Nom de l'élément de données | `datacode` | Nom de l'élément de données
-| `datacode` | Code normalisé de l'élément de données | `datacode` | Code normalisé de l'élément de données
-| `datadescription` | Description de l'élément de données | `datadescription` | Description de l'élément de données
+| `dataid` | Identifiant unique de l'élément de données |
+| `dataname` | Nom de l'élément de données |
+| `datacode` | Code normalisé de l'élément de données |
+| `datadescription` | Description de l'élément de données |
 
 **Autres termes**
 
-| Terme | Description
+| Terme | Description |
 |------|-------------|
-| Valeur agrégée de l'élément de données par unité organisationnelle et par période
-| Date d'extraction des données, à des fins d'audit et de contrôle de la version
+| `total` | Valeur agrégée de l'élément de données par unité organisationnelle et période |
+| `date_downloaded` | Date d'extraction des données, pour audit et contrôle de version |
 
 ### Combien de données ?
 
