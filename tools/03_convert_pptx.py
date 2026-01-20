@@ -88,7 +88,7 @@ class Colors:
 
 class Fonts:
     """Font settings"""
-    FAMILY = 'Calibri'  # Closer to Inter, widely available
+    FAMILY = 'Poppins'  # FASTR brand typeface
     H1_SIZE = Pt(32)   # Reduced from Pt(40) to prevent underline overlap
     H2_SIZE = Pt(26)   # Reduced from Pt(32) to prevent underline overlap
     H3_SIZE = Pt(22)
@@ -132,6 +132,9 @@ def parse_markdown(content):
         match = re.match(r'^---\n.*?\n---\n?', content, re.DOTALL)
         if match:
             content = content[match.end():]
+
+    # Strip <style> blocks (including scoped)
+    content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL)
 
     # Split into slides
     raw_slides = re.split(r'\n---\s*\n', content)
@@ -374,8 +377,8 @@ def resolve_image_path(img_path, base_dir, md_dir):
         os.path.join(base_dir, 'assets', os.path.basename(img_path)),
     ]
 
-    # Handle ../resources/... paths from outputs/ folder
-    if '../resources/' in img_path:
+    # Handle ../ paths from outputs/ folder (resources, workshops, etc.)
+    if img_path.startswith('../'):
         clean_path = img_path.replace('../', '')
         paths_to_try.insert(0, os.path.join(base_dir, clean_path))
 
@@ -459,6 +462,11 @@ def strip_html_tags(text):
     # Remove other common HTML tags but keep content
     text = re.sub(r'</?(?:div|span|p|br|a|small|em|i|strong|b)[^>]*>', '', text)
     return text.strip()
+
+
+def strip_markdown_images(text):
+    """Remove markdown image syntax from text."""
+    return re.sub(r'!\[[^\]]*\]\([^)]+\)', '', text).strip()
 
 
 def add_formatted_text(paragraph, text, font_size, color):
@@ -659,33 +667,52 @@ def add_bullet_list(slide, bullets, left, top, width, font_size=None):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def build_title_slide(prs, data, base_dir, md_dir):
-    """Build title slide with centered content and logo."""
+    """Build title slide with background image and white text."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Check for background image (![bg] syntax in raw)
+    raw = data['raw']
+    bg_match = re.search(r'!\[bg\]\(([^)]+)\)', raw)
+    has_bg_image = False
+
+    if bg_match:
+        bg_path = bg_match.group(1).split()[0]
+        bg_full_path = resolve_image_path(bg_path, base_dir, md_dir)
+        if bg_full_path and os.path.exists(bg_full_path):
+            # Set background image to fill entire slide
+            slide.shapes.add_picture(
+                bg_full_path,
+                Inches(0), Inches(0),
+                width=Layout.WIDTH, height=Layout.HEIGHT
+            )
+            has_bg_image = True
 
     # Get title
     title = data['headers'][0][1] if data['headers'] else 'FASTR Workshop'
 
+    # Text colors - white if background image, otherwise branded colors
+    title_color = Colors.WHITE if has_bg_image else Colors.DEEP_GREEN
+    subtitle_color = RGBColor(0xF0, 0xF0, 0xF0) if has_bg_image else Colors.NAVY
+    facilitator_color = RGBColor(0xE0, 0xE0, 0xE0) if has_bg_image else Colors.TEXT_DARK
+
     # Centered title
     add_text_box(
         slide,
-        Inches(1), Inches(2),
-        Inches(11.333), Inches(1.2),
-        title, Fonts.H1_SIZE, Colors.DEEP_GREEN,
+        Inches(1), Inches(2.5),
+        Inches(11.333), Inches(1.5),
+        title, Fonts.H1_SIZE, title_color,
         bold=True, align=PP_ALIGN.CENTER
     )
 
     # Underline
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Inches(3), Inches(3.2),
+        Inches(3), Inches(4.0),
         Inches(7.333), Inches(0.06)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.LIME
     underline.line.fill.background()
-
-    # Extract subtitle info from raw content
-    raw = data['raw']
 
     # Look for date/location line (bold text)
     date_match = re.search(r'\*\*([^*]+)\*\*\s*\|\s*\*\*([^*]+)\*\*', raw)
@@ -693,33 +720,34 @@ def build_title_slide(prs, data, base_dir, md_dir):
         subtitle = f"{date_match.group(1)} | {date_match.group(2)}"
         add_text_box(
             slide,
-            Inches(1), Inches(3.5),
+            Inches(1), Inches(4.3),
             Inches(11.333), Inches(0.5),
-            subtitle, Fonts.H2_SIZE, Colors.NAVY,
+            subtitle, Fonts.H2_SIZE, subtitle_color,
             align=PP_ALIGN.CENTER
         )
 
     # Look for facilitator (italic text)
     fac_match = re.search(r'\*([^*]+)\*(?!\*)', raw)
-    if fac_match and 'Facilitator' in fac_match.group(1) or fac_match:
+    if fac_match:
         add_text_box(
             slide,
-            Inches(1), Inches(4.2),
+            Inches(1), Inches(5.0),
             Inches(11.333), Inches(0.4),
-            fac_match.group(1) if fac_match else '', Fonts.BODY_SIZE, Colors.TEXT_DARK,
+            fac_match.group(1), Fonts.BODY_SIZE, facilitator_color,
             align=PP_ALIGN.CENTER
         )
 
-    # Add logo
-    for img in data['images']:
-        img_path = resolve_image_path(img['path'], base_dir, md_dir)
-        if img_path and ('logo' in img_path.lower() or 'fastr' in img_path.lower()):
-            add_image_to_slide(
-                slide, img_path,
-                Inches(10.5), Inches(6.2),
-                width=Inches(2.3)
-            )
-            break
+    # Only add logo if no background image (background already has logos)
+    if not has_bg_image:
+        for img in data['images']:
+            img_path = resolve_image_path(img['path'], base_dir, md_dir)
+            if img_path and ('logo' in img_path.lower() or 'fastr' in img_path.lower()):
+                add_image_to_slide(
+                    slide, img_path,
+                    Inches(10.5), Inches(6.2),
+                    width=Inches(2.3)
+                )
+                break
 
     return slide
 
@@ -1038,6 +1066,61 @@ def build_table_slide(prs, data, base_dir, md_dir):
         else:
             add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
 
+    # Check if this is a layout table (contains images) - render differently
+    if data['images'] and data['table']:
+        table_data = data['table']
+        # Check if any table cell contains image markdown
+        has_image_cells = any('![' in str(cell) for row in table_data for cell in row)
+
+        if has_image_cells:
+            # This is a layout table - render images and text separately
+            num_images = len(data['images'])
+
+            # Render images side by side
+            if num_images >= 2:
+                img_width = Inches(5.5)
+                img_top = Inches(1.3)
+                for i, img in enumerate(data['images'][:2]):
+                    img_path = resolve_image_path(img['path'], base_dir, md_dir)
+                    if img_path:
+                        left = Layout.CONTENT_LEFT if i == 0 else Inches(7)
+                        add_image_to_slide(slide, img_path, left, img_top, width=img_width)
+            elif num_images == 1:
+                img = data['images'][0]
+                img_path = resolve_image_path(img['path'], base_dir, md_dir)
+                if img_path:
+                    add_image_to_slide(slide, img_path, Inches(3.5), Inches(1.3), width=Inches(6))
+
+            # Extract text from table cells (skip image cells and empty cells)
+            text_items = []
+            for row in table_data:
+                for cell in row:
+                    cell_text = strip_markdown_images(str(cell)).strip()
+                    if cell_text and cell_text != '|':
+                        text_items.append(cell_text)
+
+            # Render text below images
+            if text_items:
+                text_top = Inches(4.8)
+                shape = slide.shapes.add_textbox(
+                    Layout.CONTENT_LEFT, text_top,
+                    Layout.CONTENT_WIDTH, Inches(2.5)
+                )
+                tf = shape.text_frame
+                tf.word_wrap = True
+
+                first_para = True
+                for text in text_items:
+                    if first_para:
+                        p = tf.paragraphs[0]
+                        first_para = False
+                    else:
+                        p = tf.add_paragraph()
+                    add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                    p.space_after = Pt(6)
+
+            return slide
+
     # Split content into before-table and after-table based on raw markdown
     raw = data['raw']
     content = data.get('content', [])
@@ -1140,13 +1223,17 @@ def build_table_slide(prs, data, base_dir, md_dir):
                     cell.fill.solid()
                     cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
                     clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
+                    clean_text = strip_markdown_images(clean_text)
                     para.text = clean_text
                     para.font.size = font_size
                     para.font.name = Fonts.FAMILY
                     para.font.color.rgb = Colors.NAVY
                     para.font.bold = True
                 else:
-                    add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
+                    # Strip image markdown from table cells (images rendered separately)
+                    clean_cell_text = strip_markdown_images(cell_text)
+                    if clean_cell_text:
+                        add_formatted_text(para, clean_cell_text, font_size, Colors.TEXT_DARK)
 
         # Calculate where content below should start
         table_bottom = content_top + row_height * rows + Inches(0.2)
@@ -1221,7 +1308,12 @@ def build_image_slide(prs, data, base_dir, md_dir):
             else:
                 p = tf.add_paragraph()
 
-            if item_type == 'bullet':
+            if item_type == 'header':
+                level, header_text = text
+                p.text = header_text
+                style_paragraph(p, Fonts.H3_SIZE, Colors.ORCHID, bold=True)
+                p.space_after = Pt(8)
+            elif item_type == 'bullet':
                 add_formatted_bullet_text(p, text, Fonts.BODY_SIZE, Colors.TEXT_DARK)
                 p.space_after = Pt(8)
             else:

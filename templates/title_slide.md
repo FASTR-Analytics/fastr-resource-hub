@@ -4,12 +4,18 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: title-cover -->
+
+![bg](../resources/backgrounds/cover_slide.png)
+
+<div class="title-content">
+
 # {{WORKSHOP_NAME}}
 
 **{{DATE}}** | **{{LOCATION}}**
 
 *{{FACILITATORS}}*
 
-<img src="../resources/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
+</div>
 
 ---

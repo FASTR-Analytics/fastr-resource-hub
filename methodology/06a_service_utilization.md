@@ -1162,21 +1162,25 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume h:420](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
----
+![Change in service volume h:340](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
-## Interpretation
+</div>
+<div style="flex: 1;">
 
-| Element | Description |
-|---------|-------------|
-| **Bars** | Annual service volumes by region |
-| **Percentages** | Year-over-year change annotations |
+### Interpretation
+
+**Bars** show annual service volumes by region. **Percentages** indicate year-over-year change.
 
 **Key considerations:**
 - Which regions exhibit the largest changes?
 - Are changes consistent across regions or geographically concentrated?
 - Do patterns vary by indicator?
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_3 -->

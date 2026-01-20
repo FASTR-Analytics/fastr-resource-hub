@@ -1866,20 +1866,23 @@ The module projects the most recent survey value forward using trends observed i
 Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_15 -->
-## Interpretation of coverage outputs
-
-| Element | Description |
-|---------|-------------|
-| **Black line/points** | Survey data (DHS/MICS) — household survey reference |
-| **Grey line/points** | HMIS-based coverage from facility data |
-| **Red line/points** | Projected coverage — survey estimates extended using HMIS trends |
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_16 -->
 ## Coverage (national)
 
-![Coverage calculated from HMIS data at national level. h:420](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Coverage calculated from HMIS data at national level. h:340](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1;">
+
+### Interpretation
+
+**Black line/points** show survey data (DHS/MICS) as the household survey reference. **Grey line/points** show HMIS-based coverage from facility data. **Red line/points** show projected coverage — survey estimates extended using HMIS trends.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_17 -->

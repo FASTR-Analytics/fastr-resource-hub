@@ -205,10 +205,10 @@ FASTR brings together four complementary technical approaches:
 ## RMNCAH-N service use monitoring
 
 <style scoped>
-.split { display: flex !important; gap: 2rem; align-items: flex-start; }
+.split { display: flex !important; gap: 2rem; align-items: center; }
 .split .text { flex: 1; }
-.split .image { flex: 2; }
-.split .image img { max-height: 320px !important; width: auto !important; }
+.split .image { flex: 1; display: flex; justify-content: center; align-items: center; }
+.split .image img { max-height: 420px !important; max-width: 100% !important; }
 </style>
 
 <div class="split">

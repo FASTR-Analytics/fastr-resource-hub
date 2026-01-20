@@ -5,13 +5,19 @@ paginate: true
 ---
 
 
+<!-- _class: title-cover -->
+
+![bg](../resources/backgrounds/cover_slide.png)
+
+<div class="title-content">
+
 # In-Country Working Session: FASTR Implementation & RMNCAH-N Service Monitoring Analysis
 
 **January 27-30, 2026** | **Lusaka**
 
 *GFF FASTR Team*
 
-<img src="../resources/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
+</div>
 
 ---
 
@@ -188,10 +194,10 @@ FASTR brings together four complementary technical approaches:
 ## RMNCAH-N service use monitoring
 
 <style scoped>
-.split { display: flex !important; gap: 2rem; align-items: flex-start; }
+.split { display: flex !important; gap: 2rem; align-items: center; }
 .split .text { flex: 1; }
-.split .image { flex: 2; }
-.split .image img { max-height: 320px !important; width: auto !important; }
+.split .image { flex: 1; display: flex; justify-content: center; align-items: center; }
+.split .image img { max-height: 420px !important; max-width: 100% !important; }
 </style>
 
 <div class="split">
@@ -1085,21 +1091,25 @@ Changes exceeding **±10%** are flagged for review.
 
 ## Output: Change in service volume
 
-![Change in service volume h:420](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
----
+![Change in service volume h:340](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
-## Interpretation
+</div>
+<div style="flex: 1;">
 
-| Element | Description |
-|---------|-------------|
-| **Bars** | Annual service volumes by region |
-| **Percentages** | Year-over-year change annotations |
+### Interpretation
+
+**Bars** show annual service volumes by region. **Percentages** indicate year-over-year change.
 
 **Key considerations:**
 - Which regions exhibit the largest changes?
 - Are changes consistent across regions or geographically concentrated?
 - Do patterns vary by indicator?
+
+</div>
+</div>
 
 ---
 
@@ -1334,21 +1344,22 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 
 
-## Interpretation of coverage outputs
-
-| Element | Description |
-|---------|-------------|
-| **Black line/points** | Survey data (DHS/MICS) — household survey reference |
-| **Grey line/points** | HMIS-based coverage from facility data |
-| **Red line/points** | Projected coverage — survey estimates extended using HMIS trends |
-
----
-
-
-
 ## Coverage (national)
 
-![Coverage calculated from HMIS data at national level. h:420](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Coverage calculated from HMIS data at national level. h:340](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1;">
+
+### Interpretation
+
+**Black line/points** show survey data (DHS/MICS) as the household survey reference. **Grey line/points** show HMIS-based coverage from facility data. **Red line/points** show projected coverage — survey estimates extended using HMIS trends.
+
+</div>
+</div>
 
 ---
 
@@ -1492,13 +1503,83 @@ Today we move from analysis to action:
 
 ## Analytical thinking & interpretation
 
-*Content to be developed*
+Interpretation connects **data patterns** to **programmatic meaning**.
 
-This section will cover:
-- Frameworks for interpreting FASTR outputs
-- Connecting data patterns to programmatic meaning
-- Common interpretation pitfalls to avoid
-- Building analytical thinking skills
+For every FASTR output, ask three questions:
+
+1. **What does it show?** — Describe the pattern accurately
+2. **Why might that be?** — Consider multiple explanations
+3. **What should we do?** — Identify next steps or actions
+
+<small>*Moving from numbers to insights requires context, critical thinking, and programmatic knowledge.*</small>
+
+---
+
+
+
+## Critical thinking checklist
+
+Before drawing conclusions from FASTR outputs, ask:
+
+- **Data quality or real change?** Could this pattern reflect reporting issues rather than service delivery changes?
+- **What external factors apply?** Policy changes, seasonal patterns, shocks, or campaigns?
+- **Does it make programmatic sense?** Would this pattern be expected given what we know about the health system?
+- **What does disaggregation reveal?** National trends can mask important regional variation
+- **What additional information is needed?** What context would strengthen or challenge this interpretation?
+
+---
+
+
+
+## Common interpretation pitfalls
+
+<div style="display: flex; gap: 1.5em;">
+<div style="flex: 1;">
+
+**Aggregation masking**
+National averages can hide critical regional variation. Always examine subnational patterns.
+
+**Completeness ≠ representativeness**
+High reporting completeness doesn't mean data captures all service delivery (private sector, informal care).
+
+</div>
+<div style="flex: 1;">
+
+**Missing context**
+Patterns without context are meaningless. Consider seasonality, policy changes, and external shocks.
+
+**Over-interpreting noise**
+Short-term fluctuations may be normal variation. Focus on sustained trends and significant deviations.
+
+</div>
+</div>
+
+---
+
+
+
+## Interpreting FASTR module outputs
+
+<div style="display: flex; gap: 1.5em;">
+<div style="flex: 1;">
+
+**Data quality assessment**
+Low DQA scores may reflect data entry practices rather than service quality. Focus on identifying the specific dimension (completeness, outliers, consistency) driving issues.
+
+**Service utilization**
+Distinguish seasonal patterns from real disruptions. Year-over-year comparisons help isolate programmatic changes from normal fluctuation.
+
+</div>
+<div style="flex: 1;">
+
+**Coverage estimates**
+Coverage >100% signals reconciliation needed between HMIS and survey data. Consider whether the denominator source matches the service delivery context.
+
+**Across all modules**
+Examine patterns at multiple geographic levels — subnational disaggregation often reveals the true story.
+
+</div>
+</div>
 
 ---
 
@@ -1535,16 +1616,9 @@ Back at 14:00
 ---
 
 
-## End user mapping
+## Presenting reports and group feedback
 
-End user mapping helps ensure that our outputs will meet the real needs of our end users.
-
-### Key questions
-1. **Who is my end user?**
-2. **What does this end user need to accomplish with the report?**
-3. **What information are they most interested in?**
-4. **What do they like/not like about current reports?**
-5. **How do they like to receive their information?**
+*Content to be developed*
 
 ---
 
