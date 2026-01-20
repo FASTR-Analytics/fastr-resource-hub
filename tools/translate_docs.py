@@ -11,7 +11,7 @@ Usage:
     python3 tools/translate_docs.py --lang fr --dry-run
 
 Workflow:
-    1. Run translation → creates .fr.md files
+    1. Run translation → creates fr/file.md files in language folder
     2. Human reviews and edits French file
     3. Human adds <!-- REVIEWED --> at top
     4. Future runs:
@@ -40,7 +40,10 @@ METHODOLOGY_DOCS = REPO_ROOT / "methodology"
 REVIEWED_MARKER = "<!-- REVIEWED -->"
 NEW_CONTENT_MARKER = "<!-- NEW CONTENT - needs review -->"
 
-# Language suffix patterns
+# Language folder names (for folder-based i18n structure)
+LANG_FOLDERS = ['fr', 'es', 'de', 'pt']
+
+# Legacy language suffix patterns (for backwards compatibility detection)
 LANG_SUFFIXES = ['.fr.', '.es.', '.de.', '.pt.']
 
 
@@ -101,9 +104,14 @@ def is_reviewed(file_path: Path) -> bool:
 
 
 def get_translatable_files(docs_dir: Path) -> list:
-    """Get list of English markdown files."""
+    """Get list of English markdown files (excludes language folders and legacy suffixes)."""
     files = []
     for md_file in docs_dir.rglob("*.md"):
+        # Skip files in language folders (e.g., fr/, es/)
+        rel_parts = md_file.relative_to(docs_dir).parts
+        if rel_parts and rel_parts[0] in LANG_FOLDERS:
+            continue
+        # Skip legacy suffix files (e.g., file.fr.md)
         is_translation = any(suffix in md_file.name for suffix in LANG_SUFFIXES)
         if is_translation:
             continue
@@ -111,9 +119,17 @@ def get_translatable_files(docs_dir: Path) -> list:
     return sorted(files)
 
 
-def get_output_path(input_path: Path, target_lang: str) -> Path:
-    """Get output path: input.md -> input.fr.md"""
-    return input_path.parent / f"{input_path.stem}.{target_lang.lower()}.md"
+def get_output_path(input_path: Path, target_lang: str, docs_dir: Path = None) -> Path:
+    """Get output path using folder structure: input.md -> fr/input.md"""
+    if docs_dir is None:
+        docs_dir = METHODOLOGY_DOCS
+    # Get relative path from docs_dir
+    try:
+        rel_path = input_path.relative_to(docs_dir)
+    except ValueError:
+        rel_path = Path(input_path.name)
+    # Output to language subfolder
+    return docs_dir / target_lang.lower() / rel_path
 
 
 def find_new_sections(en_content: str, fr_content: str) -> list:
@@ -199,9 +215,9 @@ How it works:
   ┌─────────────────────────────────────────────────────────────┐
   │ File Status          │ Action                               │
   ├─────────────────────────────────────────────────────────────┤
-  │ No .fr.md exists     │ Full translation                     │
-  │ .fr.md, no marker    │ Re-translate (overwrite)             │
-  │ .fr.md + REVIEWED    │ Check for new EN sections → append   │
+  │ No fr/file.md exists │ Full translation                     │
+  │ fr/file.md, no marker│ Re-translate (overwrite)             │
+  │ fr/file.md + REVIEWED│ Check for new EN sections → append   │
   └─────────────────────────────────────────────────────────────┘
 
 Workflow:
@@ -276,10 +292,10 @@ Examples:
         print(f"Translation status ({target_lang.upper()}):\n")
 
         for input_path in files:
-            output_path = get_output_path(input_path, target_lang)
+            output_path = get_output_path(input_path, target_lang, docs_dir)
 
             if not output_path.exists():
-                print(f"  ○ {input_path.name} → not translated")
+                print(f"  ○ {input_path.name} → not translated (would create {output_path.relative_to(docs_dir)})")
             else:
                 reviewed = is_reviewed(output_path)
 
@@ -320,7 +336,7 @@ Examples:
     stats = {"translated": 0, "appended": 0, "skipped": 0, "errors": 0}
 
     for input_path in files:
-        output_path = get_output_path(input_path, target_lang)
+        output_path = get_output_path(input_path, target_lang, docs_dir)
         reviewed = is_reviewed(output_path)
 
         # Force mode - full re-translate

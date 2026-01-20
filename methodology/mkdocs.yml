@@ -105,7 +105,7 @@ plugins:
         - 08_survey_hfa.md
         - executive_summary*.md
   - i18n:
-      docs_structure: suffix  # Uses .fr.md suffix for French files
+      docs_structure: folder  # Uses fr/ folder for French files
       fallback_to_default: true
       languages:
         - locale: en

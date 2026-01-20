@@ -56,7 +56,8 @@ The **instance** serves as the organization's primary workspace within the platf
 
 **Projects** provide focused analysis workspaces within an instance. Each project allows users to select which data to include by defining specific time periods, facilities, and indicators. Within a project, users can enable analytical modules, create visualizations, and build reports tailored to specific analytical objectives.
 
-![Projects within instance](../resources/diagrams/projects_within_instance.svg)
+![Projects within instance](resources/diagrams/projects_within_instance.svg)
+
 
 ### Data flow
 
