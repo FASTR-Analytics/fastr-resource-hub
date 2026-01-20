@@ -223,7 +223,7 @@ def extract_frontmatter(text: str) -> Tuple[str, str]:
 
 def protect_code_blocks(text: str) -> Tuple[str, dict]:
     """
-    Replace code blocks with placeholders to protect from translation.
+    Replace code blocks, inline code, and file paths with placeholders to protect from translation.
     Returns (protected_text, placeholder_map).
     """
     placeholders = {}
@@ -235,17 +235,42 @@ def protect_code_blocks(text: str) -> Tuple[str, dict]:
         counter[0] += 1
         return placeholder
 
+    def replace_path(match):
+        # For images/links, only protect the path portion, not the alt text
+        placeholder = f"__PATH_{counter[0]}__"
+        placeholders[placeholder] = match.group(2)  # Just the path
+        counter[0] += 1
+        prefix = match.group(1)  # "![" or "["
+        suffix = ")"
+        return f"{prefix}{placeholder}{suffix}"
+
     # Protect fenced code blocks (```...```)
     protected = re.sub(r'```[\s\S]*?```', replace_block, text)
 
     # Protect inline code (`...`)
     protected = re.sub(r'`[^`]+`', replace_block, protected)
 
+    # Protect markdown image paths: ![alt text](path/to/image.png)
+    # Captures: group(1)=![alt text](  group(2)=path/to/image.png
+    protected = re.sub(r'(!\[[^\]]*\]\()([^)]+)\)', replace_path, protected)
+
+    # Protect markdown link paths that look like file paths (contain . or /)
+    # Captures: group(1)=[text](  group(2)=path/or/url
+    protected = re.sub(r'(\[[^\]]*\]\()([^)]*[./][^)]*)\)', replace_path, protected)
+
+    # Protect HTML src attributes: src="path/to/file"
+    def replace_src(match):
+        placeholder = f"__SRC_{counter[0]}__"
+        placeholders[placeholder] = match.group(1)
+        counter[0] += 1
+        return f'src="{placeholder}"'
+    protected = re.sub(r'src="([^"]+)"', replace_src, protected)
+
     return protected, placeholders
 
 
 def restore_code_blocks(text: str, placeholders: dict) -> str:
-    """Restore code blocks from placeholders."""
+    """Restore code blocks, paths, and src attributes from placeholders."""
     for placeholder, original in placeholders.items():
         text = text.replace(placeholder, original)
     return text

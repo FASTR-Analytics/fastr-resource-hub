@@ -124,19 +124,19 @@ L'analyse FASTR génère trois principaux résultats visuels comparant les volum
 
 Heatmap montrant le pourcentage de changement dans le volume de service dû à l'ajustement des valeurs aberrantes, par indicateur et par zone géographique.
 
-(resources/default_outputs/Default_1._Percent_change_in_volume_due_to_valeur aberrante_adjustment.png)
+![Impact de l'ajustement des valeurs aberrantes](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 **2. Impact de l'ajustement de l'exhaustivité**
 
 Heatmap montrant la variation en pourcentage du volume de services due à l'ajustement de l'exhaustivité (données manquantes), par indicateur et par zone géographique.
 
-(resources/default_outputs/Default_2._Percent_change_in_volume_due_to_complétude_adjustment.png)
+![Impact de l'ajustement de l'exhaustivité](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 **3. Impact de l'ajustement combiné**
 
 Heatmap montrant le pourcentage de changement dans le volume de services lorsque les ajustements des valeurs aberrantes et de l'exhaustivité sont appliqués.
 
-(resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_valeur aberrante_and_complétude_adjustment.png)
+![Impact de l'ajustement combiné](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
 **Guide d'interpretation**
 
@@ -938,7 +938,7 @@ Les valeurs aberrantes sont remplacées par des données historiques spécifique
 
 ## Ajustement des valeurs aberrantes : Sortie FASTR
 
-![Pourcentage de changement de volume dû à l'ajustement des valeurs aberrantes. h:380](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_valeur aberrante_adjustment.png)
+![Pourcentage de changement de volume dû à l'ajustement des valeurs aberrantes h:380](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 <!-- /SLIDE -->
 
@@ -960,12 +960,12 @@ Cette approche permet d'éviter que des lacunes temporaires dans les rapports ne
 
 ## Ajustement de l'exhaustivité : Résultats du FASTR
 
-![Pourcentage de changement de volume dû à l'ajustement de complétude. h:380](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_complétude_adjustment.png)
+![Pourcentage de changement de volume dû à l'ajustement de l'exhaustivité h:380](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
 ## Ajustement combiné : Sortie FASTR
 
-![Pourcentage de changement de volume dû à l'ajustement des valeurs aberrantes et de l'exhaustivité. h:380](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_valeur aberrante_and_complétude_adjustment.png)
+![Pourcentage de changement de volume dû à l'ajustement combiné h:380](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 <!-- /SLIDE -->
