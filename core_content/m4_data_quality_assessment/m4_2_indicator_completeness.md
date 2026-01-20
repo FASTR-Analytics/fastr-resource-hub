@@ -9,11 +9,14 @@ paginate: true
 <div style="display: flex; gap: 1.5em; align-items: flex-start;">
 <div style="flex: 1;">
 
-Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so.
+**What it measures:** The extent to which facilities report data on selected core indicators
 
-Higher completeness improves reliability of the data, especially when completeness is stable over time.
+**Why it matters:**
+- Higher completeness improves data reliability
+- Stability over time strengthens trend analysis
 
-This is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form.
+**Key distinction:**
+Indicator completeness ≠ reporting completeness. This metric examines specific data elements, not just whether the monthly form was submitted.
 
 </div>
 <div style="flex: 2;">

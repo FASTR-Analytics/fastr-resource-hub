@@ -6,6 +6,20 @@ paginate: true
 
 ## Data Downloader: Facility list
 
-![Data Downloader facility list h:420](../../resources/screenshots/data_downloader/05_facility_list.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">View and filter facilities by administrative level and organization unit.</p>
+![Data Downloader facility list h:380](../../resources/screenshots/data_downloader/05_facility_list.png)
+
+</div>
+<div>
+
+**Facility management**
+
+- View complete facility list
+- Filter by administrative level
+- Search by facility name
+- Export facility data
+
+</div>
+</div>

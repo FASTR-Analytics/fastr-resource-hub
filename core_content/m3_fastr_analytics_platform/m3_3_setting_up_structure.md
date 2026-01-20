@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Setting Up Admin Areas
 
-**In this hands-on session, we will configure:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will configure:**
 
 - Admin areas (regions, districts)
 - Facility structure

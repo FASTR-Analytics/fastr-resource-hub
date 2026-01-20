@@ -6,6 +6,20 @@ paginate: true
 
 ## Data Downloader: Data dictionary
 
-![Data Downloader dictionary h:420](../../resources/screenshots/data_downloader/04_dictionary.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Browse and search available data elements and indicators from your DHIS2 instance.</p>
+![Data Downloader dictionary h:380](../../resources/screenshots/data_downloader/04_dictionary.png)
+
+</div>
+<div>
+
+**Explore available data**
+
+- Browse all data elements from your DHIS2
+- Search by name or code
+- View metadata and definitions
+- Identify indicators for your analysis
+
+</div>
+</div>

@@ -172,18 +172,26 @@ def parse_markdown(content):
             text = re.sub(r'<[^>]+>', '', text).strip()
             slide['headers'].append((level, text))
 
-        # Extract images ![alt](path)
+        # Extract images ![alt](path) - also parse h:XXX height from alt text
         for match in re.finditer(r'!\[([^\]]*)\]\(([^)]+)\)', raw):
+            alt_text = match.group(1)
+            # Check for height specification like "h:40" or "h:420"
+            height_match = re.search(r'h:(\d+)', alt_text)
+            specified_height = int(height_match.group(1)) if height_match else None
+            # Clean alt text (remove height spec)
+            clean_alt = re.sub(r'\s*h:\d+', '', alt_text).strip()
             slide['images'].append({
-                'alt': match.group(1),
-                'path': match.group(2).split()[0]  # Remove any title
+                'alt': clean_alt,
+                'path': match.group(2).split()[0],  # Remove any title
+                'height': specified_height
             })
 
         # Extract HTML images <img src="path">
         for match in re.finditer(r'<img\s+[^>]*src=["\']([^"\']+)["\']', raw):
             slide['images'].append({
                 'alt': '',
-                'path': match.group(1)
+                'path': match.group(1),
+                'height': None
             })
 
         # Extract table (markdown or HTML)
@@ -313,10 +321,12 @@ def detect_slide_type(slide, index):
     headers = slide['headers']
     h1_text = headers[0][1] if headers and headers[0][0] == 1 else ''
 
-    # Title slide: first slide with logo
+    # Title slide: first slide with logo/cover, or title-cover class
     if index == 0:
+        if slide['css_class'] == 'title-cover':
+            return 'title'
         for img in slide['images']:
-            if 'logo' in img['path'].lower() or 'fastr' in img['path'].lower():
+            if 'logo' in img['path'].lower() or 'fastr' in img['path'].lower() or 'cover' in img['path'].lower():
                 return 'title'
 
     # Agenda slide
@@ -330,9 +340,15 @@ def detect_slide_type(slide, index):
     if re.search(r'\b(break|lunch|tea)\b', h1_text, re.IGNORECASE):
         return 'break'
 
-    # Section header slide: "Session X:" ONLY when minimal content (just header)
-    # Don't use section type if slide has bullets, paragraphs, or images
-    has_content = len(slide['bullets']) > 0 or len(slide['paragraphs']) > 0 or slide['images']
+    # Section header slide: "Session X:" or has section-cover class
+    # Background images (![bg]) don't count as content
+    non_bg_images = [img for img in slide['images'] if img['alt'] != 'bg']
+    has_content = len(slide['bullets']) > 0 or len(slide['paragraphs']) > 0 or non_bg_images
+
+    # Check for section-cover class
+    if slide['css_class'] == 'section-cover':
+        return 'section'
+
     if headers and headers[0][0] == 1 and not has_content:
         if re.match(r'^Session\s+\d+', h1_text, re.IGNORECASE):
             return 'section'
@@ -695,20 +711,36 @@ def build_title_slide(prs, data, base_dir, md_dir):
     subtitle_color = RGBColor(0xF0, 0xF0, 0xF0) if has_bg_image else Colors.NAVY
     facilitator_color = RGBColor(0xE0, 0xE0, 0xE0) if has_bg_image else Colors.TEXT_DARK
 
+    # Position content lower if background image (to avoid logo in top left)
+    if has_bg_image:
+        title_top = Inches(3.2)
+        underline_top = Inches(4.5)
+        subtitle_top = Inches(4.8)
+        facilitator_top = Inches(5.4)
+        title_font = Pt(28)  # Smaller for background slides
+        subtitle_font = Pt(22)
+    else:
+        title_top = Inches(2.5)
+        underline_top = Inches(4.0)
+        subtitle_top = Inches(4.3)
+        facilitator_top = Inches(5.0)
+        title_font = Fonts.H1_SIZE
+        subtitle_font = Fonts.H2_SIZE
+
     # Centered title
     add_text_box(
         slide,
-        Inches(1), Inches(2.5),
-        Inches(11.333), Inches(1.5),
-        title, Fonts.H1_SIZE, title_color,
+        Inches(1), title_top,
+        Inches(11.333), Inches(1.2),
+        title, title_font, title_color,
         bold=True, align=PP_ALIGN.CENTER
     )
 
     # Underline
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Inches(3), Inches(4.0),
-        Inches(7.333), Inches(0.06)
+        Inches(3), underline_top,
+        Inches(7.333), Inches(0.05)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.LIME
@@ -720,9 +752,9 @@ def build_title_slide(prs, data, base_dir, md_dir):
         subtitle = f"{date_match.group(1)} | {date_match.group(2)}"
         add_text_box(
             slide,
-            Inches(1), Inches(4.3),
+            Inches(1), subtitle_top,
             Inches(11.333), Inches(0.5),
-            subtitle, Fonts.H2_SIZE, subtitle_color,
+            subtitle, subtitle_font, subtitle_color,
             align=PP_ALIGN.CENTER
         )
 
@@ -731,7 +763,7 @@ def build_title_slide(prs, data, base_dir, md_dir):
     if fac_match:
         add_text_box(
             slide,
-            Inches(1), Inches(5.0),
+            Inches(1), facilitator_top,
             Inches(11.333), Inches(0.4),
             fac_match.group(1), Fonts.BODY_SIZE, facilitator_color,
             align=PP_ALIGN.CENTER
@@ -889,15 +921,35 @@ def build_section_slide(prs, data, base_dir, md_dir):
     """Build section header slide with centered title (like break but for sessions)."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
 
+    # Check for background image
+    raw = data['raw']
+    bg_match = re.search(r'!\[bg\]\(([^)]+)\)', raw)
+    has_bg_image = False
+
+    if bg_match:
+        bg_path = bg_match.group(1).split()[0]
+        bg_full_path = resolve_image_path(bg_path, base_dir, md_dir)
+        if bg_full_path and os.path.exists(bg_full_path):
+            # Add background image to fill entire slide
+            slide.shapes.add_picture(
+                bg_full_path,
+                Inches(0), Inches(0),
+                width=Layout.WIDTH, height=Layout.HEIGHT
+            )
+            has_bg_image = True
+
     # Get title
     title = data['headers'][0][1] if data['headers'] else 'Section'
+
+    # Text color - white if background image
+    title_color = Colors.WHITE if has_bg_image else Colors.DEEP_GREEN
 
     # Large centered title
     add_text_box(
         slide,
         Inches(1), Inches(2.8),
         Inches(11.333), Inches(1.5),
-        title, Pt(44), Colors.DEEP_GREEN,
+        title, Pt(44), title_color,
         bold=True, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE
     )
 
@@ -1342,8 +1394,12 @@ def build_content_slide(prs, data, base_dir, md_dir):
     content_top = Inches(1.5)  # Below title and underline, with more breathing room
     content_height = Inches(5.5)  # Fill to near bottom
 
-    # Check if slide has images - if so, use narrower text width to avoid overlap
-    has_image = bool(data['images'])
+    # Check if slide has images (excluding small icons) - if so, use narrower text width
+    # Small icons have height < 100, regular images have height >= 100 or no height specified
+    def is_regular_image(img):
+        h = img.get('height')
+        return h is None or h >= 100
+    has_image = any(is_regular_image(img) for img in data['images'])
     if has_image:
         content_width = Inches(6.0)  # Leave room for image on right
     else:
@@ -1392,15 +1448,30 @@ def build_content_slide(prs, data, base_dir, md_dir):
                 p.space_after = Pt(14)  # More space after paragraphs
 
     # Add image if present (to the right, with gap from text)
+    # Skip small icons (h:40 or similar) - they're inline indicators
     if data['images']:
-        img = data['images'][0]
-        img_path = resolve_image_path(img['path'], base_dir, md_dir)
-        if img_path:
-            add_image_to_slide(
-                slide, img_path,
-                Inches(7.25), Inches(1.5),
-                width=Inches(5.5)
-            )
+        for img in data['images']:
+            # Skip small icons (height < 100px)
+            if img.get('height') and img['height'] < 100:
+                continue
+            img_path = resolve_image_path(img['path'], base_dir, md_dir)
+            if img_path:
+                # Use specified height if available, otherwise default width
+                if img.get('height') and img['height'] >= 100:
+                    # Convert px to inches (assuming 96 DPI)
+                    img_height = Inches(img['height'] / 96)
+                    add_image_to_slide(
+                        slide, img_path,
+                        Inches(7.25), Inches(1.5),
+                        height=img_height
+                    )
+                else:
+                    add_image_to_slide(
+                        slide, img_path,
+                        Inches(7.25), Inches(1.5),
+                        width=Inches(5.5)
+                    )
+                break  # Only first non-icon image
 
     return slide
 

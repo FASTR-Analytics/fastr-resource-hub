@@ -6,6 +6,20 @@ paginate: true
 
 ## Data Downloader: Facility map
 
-![Data Downloader facility map h:420](../../resources/screenshots/data_downloader/06_facility_map.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Visualize facility locations on an interactive map.</p>
+![Data Downloader facility map h:380](../../resources/screenshots/data_downloader/06_facility_map.png)
+
+</div>
+<div>
+
+**Geographic visualization**
+
+- Download GeoJSON boundary files
+- Toggle administrative boundaries by level (Level 1 = country, Level 2 = regions, etc.)
+- Higher levels display facility points
+- Useful for verifying geographic structure
+
+</div>
+</div>

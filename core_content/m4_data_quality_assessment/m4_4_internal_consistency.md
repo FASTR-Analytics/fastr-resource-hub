@@ -12,19 +12,26 @@ Program indicators with a predictable relationship are examined to determine whe
 
 ## Indicator pairs assessed
 
-FASTR assesses the following pairs of indicators to measure internal consistency:
+<div class="columns">
+<div>
 
 | Indicator pair | Expected relationship |
 |----------------|----------------------|
 | ANC1 / ANC4 | Ratio should be ≥ 0.95 |
 | Penta1 / Penta3 | Ratio should be ≥ 0.95 |
-| BCG / Facility delivery | Ratio should be within 30% (i.e. ≥0.7 and ≤1.3) |
+| BCG / Facility delivery | Within 30% (≥0.7 and ≤1.3) |
 
-These pairs of indicators have expected relationships.
+These pairs have expected relationships. We expect ANC1 > ANC4 since not all women complete four visits.
 
-We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
+BCG is a birth dose vaccine so we expect similar numbers to facility deliveries, with a 30% tolerance for variability.
 
-BCG is a birth dose vaccine so we expect that these indicators will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
+</div>
+<div>
+
+![Consistency illustration h:280](../../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
 
 ---
 

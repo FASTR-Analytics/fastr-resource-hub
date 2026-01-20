@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Creating Reports
 
-**In this hands-on session, we will:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Use report templates
 - Generate automated reports

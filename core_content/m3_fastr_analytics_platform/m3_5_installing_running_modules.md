@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Installing and Running Modules
 
-**In this hands-on session, we will:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review available analysis modules
 - Install required modules

@@ -6,6 +6,11 @@ paginate: true
 
 ## Denominators by entry point
 
+<style scoped>
+table { font-size: 0.75em; }
+th, td { padding: 0.3em 0.5em !important; }
+</style>
+
 Each HMIS indicator serves as an entry point. The module derives all target populations via forward and backward cascades:
 
 | Entry point | Base calculation | Forward derivation | Backward derivation |

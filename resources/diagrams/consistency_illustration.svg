@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260">
   <defs>
     <style>
-      .title { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
-      .subtitle { font-family: 'Inter', sans-serif; font-size: 11px; fill: #21568C; }
-      .box-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
-      .annotation { font-family: 'Inter', sans-serif; font-size: 10px; fill: #666; text-anchor: middle; }
-      .result-text { font-family: 'Inter', sans-serif; font-size: 11px; fill: #09544F; font-weight: 600; }
+      .title { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #21568C; }
+      .box-label { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .annotation { font-family: 'Poppins', sans-serif; font-size: 10px; fill: #666; text-anchor: middle; }
+      .result-text { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #09544F; font-weight: 600; }
       .box-anc1 { fill: #1A90C0; }
       .box-anc4 { fill: #1F9A9C; }
       .connector { stroke: #999; stroke-width: 2; fill: none; }

@@ -8,14 +8,10 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-<div class="title-content">
-
 # {{WORKSHOP_NAME}}
 
 **{{DATE}}** | **{{LOCATION}}**
 
 *{{FACILITATORS}}*
-
-</div>
 
 ---

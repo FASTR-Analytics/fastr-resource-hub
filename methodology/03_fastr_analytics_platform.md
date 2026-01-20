@@ -316,7 +316,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_2 -->
 ## Live Demo: Platform Access & Roles
 
-**In this demo, we will:**
+![demo h:40](../resources/icons/demo.svg) **In this demo, we will:**
 
 - Navigate to the FASTR platform
 - Explore user roles: Administrator, Editor, Viewer
@@ -329,7 +329,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_3 -->
 ## Activity: Setting Up Admin Areas
 
-**In this hands-on session, we will configure:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will configure:**
 
 - Admin areas (regions, districts)
 - Facility structure
@@ -341,7 +341,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_4 -->
 ## Activity: Importing Data
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review data format requirements
 - Walk through the import process
@@ -353,7 +353,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_5 -->
 ## Activity: Installing and Running Modules
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review available analysis modules
 - Install required modules
@@ -365,7 +365,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_6 -->
 ## Activity: Creating a Project
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Set up a new project
 - Configure project settings
@@ -378,7 +378,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_7 -->
 ## Activity: Creating Visualizations
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Explore available chart types
 - Create and customize visualizations
@@ -390,7 +390,7 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_8 -->
 ## Activity: Creating Reports
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Use report templates
 - Generate automated reports

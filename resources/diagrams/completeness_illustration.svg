@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 280">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 300">
   <defs>
     <style>
-      .title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; fill: #09544F; }
-      .subtitle { font-family: 'Inter', sans-serif; font-size: 14px; fill: #21568C; }
-      .facility-label { font-family: 'Inter', sans-serif; font-size: 13px; fill: #333; text-anchor: end; }
-      .month-label { font-family: 'Inter', sans-serif; font-size: 11px; fill: #666; text-anchor: middle; }
+      .title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: 'Poppins', sans-serif; font-size: 14px; fill: #21568C; }
+      .facility-label { font-family: 'Poppins', sans-serif; font-size: 13px; fill: #333; text-anchor: end; }
+      .month-label { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #666; text-anchor: middle; }
       .cell-reported { fill: #1F9A9C; }
       .cell-missing { fill: #E5E5E5; }
-      .legend-text { font-family: 'Inter', sans-serif; font-size: 13px; fill: #333; }
-      .stat-text { font-family: 'Inter', sans-serif; font-size: 14px; fill: #09544F; font-weight: 600; }
+      .legend-text { font-family: 'Poppins', sans-serif; font-size: 13px; fill: #333; }
+      .stat-text { font-family: 'Poppins', sans-serif; font-size: 14px; fill: #09544F; font-weight: 600; }
     </style>
   </defs>
 
@@ -111,8 +111,8 @@
   <rect class="cell-missing" x="250" y="210" width="20" height="16" rx="2"/>
   <text class="legend-text" x="278" y="223">Missing</text>
 
-  <!-- Stats box -->
-  <rect x="370" y="205" width="290" height="55" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
-  <text class="stat-text" x="385" y="228">5 facilities × 12 months = 60 expected</text>
-  <text class="stat-text" x="385" y="248">48 reported → 80% completeness</text>
+  <!-- Stats box - below grid, aligned with facility labels -->
+  <rect x="140" y="240" width="290" height="50" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
+  <text class="stat-text" x="155" y="262">5 facilities × 12 months = 60 expected</text>
+  <text class="stat-text" x="155" y="280">48 reported → 80% completeness</text>
 </svg>

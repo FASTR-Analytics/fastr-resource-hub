@@ -99,7 +99,17 @@
       "Bash(gh run list:*)",
       "Bash(python:*)",
       "Bash(npx @marp-team/marp-cli)",
-      "Bash(npx @marp-team/marp-cli:*)"
+      "Bash(npx @marp-team/marp-cli:*)",
+      "Bash(xmllint:*)",
+      "Bash(for f in ppt/slides/*.xml)",
+      "Bash(do xmllint --noout \"$f\")",
+      "Bash(file:*)",
+      "Bash(/bin/ls:*)",
+      "Bash(bash -c \"cd /Users/claireboulange/Desktop/fastr-resource-hub && pwd\")",
+      "Bash(:)",
+      "Bash(exit 0)",
+      "Bash(/bin/echo:*)",
+      "Bash(/bin/bash:*)"
     ]
   }
 }

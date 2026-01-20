@@ -6,7 +6,7 @@ paginate: true
 
 ## Live Demo: Platform Access & Roles
 
-**In this demo, we will:**
+![demo h:40](../../resources/icons/demo.svg) **In this demo, we will:**
 
 - Navigate to the FASTR platform
 - Explore user roles: Administrator, Editor, Viewer

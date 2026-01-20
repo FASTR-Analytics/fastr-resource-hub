@@ -6,6 +6,20 @@ paginate: true
 
 ## Data Downloader: Download history
 
-![Data Downloader history h:420](../../resources/screenshots/data_downloader/03_history.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Track previous downloads and re-download data as needed.</p>
+![Data Downloader history h:380](../../resources/screenshots/data_downloader/03_history.png)
+
+</div>
+<div>
+
+**Track your downloads**
+
+- View all previous download sessions
+- Re-download data with same parameters
+- Access download logs and status
+- Manage downloaded files
+
+</div>
+</div>

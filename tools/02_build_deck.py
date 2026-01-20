@@ -1664,7 +1664,7 @@ paginate: true
                 if is_valid and files:
                     # Generate session title slide if we have a section header
                     if current_section:
-                        session_title = f"\n# {current_section}\n\n---\n"
+                        session_title = f"\n<!-- _class: section-cover -->\n\n![bg](../resources/backgrounds/section_slide.png)\n\n# {current_section}\n\n---\n"
                         deck_content += session_title
                         current_section = None  # Reset after using
                     module_overrides = []
@@ -1688,7 +1688,7 @@ paginate: true
             if item.get('topics'):
                 # Generate session title slide if we have a section header
                 if current_section:
-                    session_title = f"\n# {current_section}\n\n---\n"
+                    session_title = f"\n<!-- _class: section-cover -->\n\n![bg](../resources/backgrounds/section_slide.png)\n\n# {current_section}\n\n---\n"
                     deck_content += session_title
                     current_section = None  # Reset after using
                 topics_overrides = []

@@ -6,6 +6,20 @@ paginate: true
 
 ## Data Downloader: Overview
 
-![Data Downloader overview h:420](../../resources/screenshots/data_downloader/02_overview.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>
+![Data Downloader overview h:380](../../resources/screenshots/data_downloader/02_overview.png)
+
+</div>
+<div>
+
+**Main interface**
+
+- Browse available data elements and indicators
+- Select time periods and organization units
+- Configure download options
+- Start data extraction
+
+</div>
+</div>

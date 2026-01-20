@@ -223,6 +223,12 @@ footer {
   padding-top: 1em;
 }
 
+/* Marp pagination (slide numbers) */
+section::after {
+  font-size: 0.5em;
+  color: var(--text-light);
+}
+
 /* ========================================
    HEADER - CUSTOM POSITIONING
    ======================================== */
@@ -341,7 +347,7 @@ img.icon {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2em;
-  align-items: center;
+  align-items: start;
 }
 
 .columns > div {
@@ -575,7 +581,7 @@ section.title-cover h1 {
   border-bottom: 3px solid var(--fastr-lime);
   font-size: 1.8em;
   margin-bottom: 0.3em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: none;
 }
 
 section.title-cover strong {
@@ -594,11 +600,32 @@ section.title-cover p {
   margin: 0.15em 0;
 }
 
-section.title-cover .title-content {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 20px 40px;
-  border-radius: 8px;
-  margin-top: 120px;
+
+/* ========================================
+   SECTION COVER SLIDE - SESSION DIVIDERS
+   ======================================== */
+/* Use: <!-- _class: section-cover --> */
+
+section.section-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 100px;
+}
+
+section.section-cover h1 {
+  color: #ffffff;
+  border-bottom: 3px solid var(--fastr-lime);
+  font-size: 2em;
+  margin-bottom: 0.3em;
+  background: none;
+}
+
+section.section-cover p {
+  color: #f0f0f0;
+  font-size: 1.1em;
 }
 
 /* ========================================

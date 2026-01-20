@@ -237,55 +237,138 @@ The Data Downloader is a desktop application for extracting data from DHIS2.
 
 https://github.com/worldbank/DHIS2-Downloader/releases/
 
-*Facilitator will demonstrate the Data Downloader*
+![demo h:35](../resources/icons/demo.svg) *Facilitator will demonstrate the Data Downloader*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2b -->
 ## Data Downloader: Login
 
-![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Enter your DHIS2 instance URL and credentials to connect.</p>
+![Data Downloader login screen h:380](../resources/screenshots/data_downloader/01_login.png)
+
+</div>
+<div>
+
+**Connect to your DHIS2 instance**
+
+- Enter your DHIS2 server URL
+- Provide your username and password
+- The tool securely stores credentials for future sessions
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2c -->
 ## Data Downloader: Overview
 
-![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>
+![Data Downloader overview h:380](../resources/screenshots/data_downloader/02_overview.png)
+
+</div>
+<div>
+
+**Main interface**
+
+- Browse available data elements and indicators
+- Select time periods and organization units
+- Configure download options
+- Start data extraction
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2d -->
 ## Data Downloader: Download history
 
-![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Track previous downloads and re-download data as needed.</p>
+![Data Downloader history h:380](../resources/screenshots/data_downloader/03_history.png)
+
+</div>
+<div>
+
+**Track your downloads**
+
+- View all previous download sessions
+- Re-download data with same parameters
+- Access download logs and status
+- Manage downloaded files
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2e -->
 ## Data Downloader: Data dictionary
 
-![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Browse and search available data elements and indicators from your DHIS2 instance.</p>
+![Data Downloader dictionary h:380](../resources/screenshots/data_downloader/04_dictionary.png)
+
+</div>
+<div>
+
+**Explore available data**
+
+- Browse all data elements from your DHIS2
+- Search by name or code
+- View metadata and definitions
+- Identify indicators for your analysis
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2f -->
 ## Data Downloader: Facility list
 
-![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">View and filter facilities by administrative level and organization unit.</p>
+![Data Downloader facility list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
+
+</div>
+<div>
+
+**Facility management**
+
+- View complete facility list
+- Filter by administrative level
+- Search by facility name
+- Export facility data
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2g -->
 ## Data Downloader: Facility map
 
-![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Visualize facility locations on an interactive map.</p>
+![Data Downloader facility map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
+
+</div>
+<div>
+
+**Geographic visualization**
+
+- Download GeoJSON boundary files
+- Toggle administrative boundaries by level (Level 1 = country, Level 2 = regions, etc.)
+- Higher levels display facility points
+- Useful for verifying geographic structure
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 ---

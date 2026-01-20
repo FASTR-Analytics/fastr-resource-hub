@@ -6,6 +6,19 @@ paginate: true
 
 ## Data Downloader: Login
 
-![Data Downloader login screen h:420](../../resources/screenshots/data_downloader/01_login.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Enter your DHIS2 instance URL and credentials to connect.</p>
+![Data Downloader login screen h:380](../../resources/screenshots/data_downloader/01_login.png)
+
+</div>
+<div>
+
+**Connect to your DHIS2 instance**
+
+- Enter your DHIS2 server URL
+- Provide your username and password
+- The tool securely stores credentials for future sessions
+
+</div>
+</div>

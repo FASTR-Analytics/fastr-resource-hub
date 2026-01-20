@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Importing Data
 
-**In this hands-on session, we will:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review data format requirements
 - Walk through the import process

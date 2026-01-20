@@ -9,21 +9,19 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-<div class="title-content">
-
 # In-Country Working Session: FASTR Implementation & RMNCAH-N Service Monitoring Analysis
 
 **January 27-30, 2026** | **Lusaka**
 
 *GFF FASTR Team*
 
-</div>
-
 ---
 
 
 <!-- _class: agenda -->
 # Agenda
+
+<div style="margin-top: 0.4em;"></div>
 
 **Day 1 -- Laying the Foundation: Introducing FASTR and Configuring the Analytics Platform**
 
@@ -51,6 +49,8 @@ paginate: true
 <!-- _class: agenda -->
 # Agenda
 
+<div style="margin-top: 0.4em;"></div>
+
 **Day 2 -- Building the Analysis: Applying FASTR Methods and Generating Outputs**
 
 <table>
@@ -72,6 +72,8 @@ paginate: true
 <!-- _class: agenda -->
 # Agenda
 
+<div style="margin-top: 0.4em;"></div>
+
 **Day 3 -- From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making**
 
 <table>
@@ -92,6 +94,8 @@ paginate: true
 
 <!-- _class: agenda -->
 # Agenda
+
+<div style="margin-top: 0.4em;"></div>
 
 **Day 4 -- Designing the Health Facility Assessment**
 
@@ -157,6 +161,10 @@ paginate: true
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 1: Overview of the FASTR approach
 
@@ -248,6 +256,9 @@ FASTR's rapid-cycle analytics address this gap by providing:
 
 ## Focus of the analysis
 
+<div class="columns">
+<div>
+
 ### Core indicators
 
 FASTR prioritizes a core set of RMNCAH-N indicators that:
@@ -256,20 +267,30 @@ FASTR prioritizes a core set of RMNCAH-N indicators that:
 - Have relatively high reporting completeness and volumes
 - Serve as proxies for broader service delivery performance
 
-<small>*Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.*</small>
+<small>*The indicator set can be expanded to reflect country-specific priorities.*</small>
+
+</div>
+<div>
 
 ### Core data quality metrics
 
-Analysis is anchored in a standardized set of data quality metrics, including:
+Analysis is anchored in a standardized set of data quality metrics:
 
 - Reporting completeness
 - Extreme value (outlier) detection
 - Consistency across related indicators
 
-<small>*These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.*</small>
+<small>*These metrics are summarized into an overall data quality score.*</small>
+
+</div>
+</div>
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 2: HMIS data extraction
 
@@ -386,7 +407,7 @@ The Data Downloader is a desktop application for extracting data from DHIS2.
 
 https://github.com/worldbank/DHIS2-Downloader/releases/
 
-*Facilitator will demonstrate the Data Downloader*
+![demo h:35](../resources/icons/demo.svg) *Facilitator will demonstrate the Data Downloader*
 
 ---
 
@@ -394,9 +415,22 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Login
 
-![Data Downloader login screen h:420](../resources/screenshots/data_downloader/01_login.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Enter your DHIS2 instance URL and credentials to connect.</p>
+![Data Downloader login screen h:380](../resources/screenshots/data_downloader/01_login.png)
+
+</div>
+<div>
+
+**Connect to your DHIS2 instance**
+
+- Enter your DHIS2 server URL
+- Provide your username and password
+- The tool securely stores credentials for future sessions
+
+</div>
+</div>
 
 ---
 
@@ -404,9 +438,23 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Overview
 
-![Data Downloader overview h:420](../resources/screenshots/data_downloader/02_overview.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">The main interface displays available data elements and download options.</p>
+![Data Downloader overview h:380](../resources/screenshots/data_downloader/02_overview.png)
+
+</div>
+<div>
+
+**Main interface**
+
+- Browse available data elements and indicators
+- Select time periods and organization units
+- Configure download options
+- Start data extraction
+
+</div>
+</div>
 
 ---
 
@@ -414,9 +462,23 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Download history
 
-![Data Downloader history h:420](../resources/screenshots/data_downloader/03_history.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Track previous downloads and re-download data as needed.</p>
+![Data Downloader history h:380](../resources/screenshots/data_downloader/03_history.png)
+
+</div>
+<div>
+
+**Track your downloads**
+
+- View all previous download sessions
+- Re-download data with same parameters
+- Access download logs and status
+- Manage downloaded files
+
+</div>
+</div>
 
 ---
 
@@ -424,9 +486,23 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Data dictionary
 
-![Data Downloader dictionary h:420](../resources/screenshots/data_downloader/04_dictionary.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Browse and search available data elements and indicators from your DHIS2 instance.</p>
+![Data Downloader dictionary h:380](../resources/screenshots/data_downloader/04_dictionary.png)
+
+</div>
+<div>
+
+**Explore available data**
+
+- Browse all data elements from your DHIS2
+- Search by name or code
+- View metadata and definitions
+- Identify indicators for your analysis
+
+</div>
+</div>
 
 ---
 
@@ -434,9 +510,23 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Facility list
 
-![Data Downloader facility list h:420](../resources/screenshots/data_downloader/05_facility_list.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">View and filter facilities by administrative level and organization unit.</p>
+![Data Downloader facility list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
+
+</div>
+<div>
+
+**Facility management**
+
+- View complete facility list
+- Filter by administrative level
+- Search by facility name
+- Export facility data
+
+</div>
+</div>
 
 ---
 
@@ -444,12 +534,30 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Facility map
 
-![Data Downloader facility map h:420](../resources/screenshots/data_downloader/06_facility_map.png)
+<div class="columns">
+<div>
 
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Visualize facility locations on an interactive map.</p>
+![Data Downloader facility map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
+
+</div>
+<div>
+
+**Geographic visualization**
+
+- Download GeoJSON boundary files
+- Toggle administrative boundaries by level (Level 1 = country, Level 2 = regions, etc.)
+- Higher levels display facility points
+- Useful for verifying geographic structure
+
+</div>
+</div>
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 3: Introduction to the FASTR analytics platform
 
@@ -582,7 +690,7 @@ table img { max-height: 280px !important; width: auto !important; }
 
 ## Live Demo: Platform Access & Roles
 
-**In this demo, we will:**
+![demo h:40](../resources/icons/demo.svg) **In this demo, we will:**
 
 - Navigate to the FASTR platform
 - Explore user roles: Administrator, Editor, Viewer
@@ -603,6 +711,10 @@ Back at 14:00
 ---
 
 
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
 # Session 4: Configuring the FASTR analytics platform
 
 ---
@@ -610,7 +722,7 @@ Back at 14:00
 
 ## Activity: Setting Up Admin Areas
 
-**In this hands-on session, we will configure:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will configure:**
 
 - Admin areas (regions, districts)
 - Facility structure
@@ -624,7 +736,7 @@ Back at 14:00
 
 ## Activity: Importing Data
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review data format requirements
 - Walk through the import process
@@ -638,7 +750,7 @@ Back at 14:00
 
 ## Activity: Installing and Running Modules
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Review available analysis modules
 - Install required modules
@@ -676,6 +788,10 @@ Today we will:
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 5: Overview of FASTR methods and analytical outputs
 
@@ -751,11 +867,14 @@ These three dimensions provide a comprehensive assessment of data reliability fo
 <div style="display: flex; gap: 1.5em; align-items: flex-start;">
 <div style="flex: 1;">
 
-Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so.
+**What it measures:** The extent to which facilities report data on selected core indicators
 
-Higher completeness improves reliability of the data, especially when completeness is stable over time.
+**Why it matters:**
+- Higher completeness improves data reliability
+- Stability over time strengthens trend analysis
 
-This is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form.
+**Key distinction:**
+Indicator completeness ≠ reporting completeness. This metric examines specific data elements, not just whether the monthly form was submitted.
 
 </div>
 <div style="flex: 2;">
@@ -854,19 +973,26 @@ Program indicators with a predictable relationship are examined to determine whe
 
 ## Indicator pairs assessed
 
-FASTR assesses the following pairs of indicators to measure internal consistency:
+<div class="columns">
+<div>
 
 | Indicator pair | Expected relationship |
 |----------------|----------------------|
 | ANC1 / ANC4 | Ratio should be ≥ 0.95 |
 | Penta1 / Penta3 | Ratio should be ≥ 0.95 |
-| BCG / Facility delivery | Ratio should be within 30% (i.e. ≥0.7 and ≤1.3) |
+| BCG / Facility delivery | Within 30% (≥0.7 and ≤1.3) |
 
-These pairs of indicators have expected relationships.
+These pairs have expected relationships. We expect ANC1 > ANC4 since not all women complete four visits.
 
-We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
+BCG is a birth dose vaccine so we expect similar numbers to facility deliveries, with a 30% tolerance for variability.
 
-BCG is a birth dose vaccine so we expect that these indicators will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
+</div>
+<div>
+
+![Consistency illustration h:280](../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1301,6 +1427,11 @@ Backward derivation enables estimation of upstream populations from downstream s
 
 ## Denominators by entry point
 
+<style scoped>
+table { font-size: 0.75em; }
+th, td { padding: 0.3em 0.5em !important; }
+</style>
+
 Each HMIS indicator serves as an entry point. The module derives all target populations via forward and backward cascades:
 
 | Entry point | Base calculation | Forward derivation | Backward derivation |
@@ -1404,6 +1535,10 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 ---
 
 
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
 # Session 6: Creating a project
 
 ---
@@ -1411,7 +1546,7 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 
 ## Activity: Creating a Project
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Set up a new project
 - Configure project settings
@@ -1423,6 +1558,10 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 ---
 
 
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
 # Session 7: Creating visualizations
 
 ---
@@ -1430,7 +1569,7 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 
 ## Activity: Creating Visualizations
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Explore available chart types
 - Create and customize visualizations
@@ -1450,6 +1589,10 @@ Back at 14:00
 ---
 
 
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
 # Session 8: Creating reports
 
 ---
@@ -1457,7 +1600,7 @@ Back at 14:00
 
 ## Activity: Creating Reports
 
-**In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Use report templates
 - Generate automated reports
@@ -1495,6 +1638,10 @@ Today we move from analysis to action:
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 8: Interpretation of visualizations
 
@@ -1584,6 +1731,10 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 ---
 
 
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
 # Session 9: Creating a Q4 2025 report
 
 ---
@@ -1610,6 +1761,10 @@ Back at 14:00
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 10: Presenting reports
 
@@ -1650,6 +1805,10 @@ Today we design the Health Facility Assessment:
 
 ---
 
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
 
 # Session 12: Overview of FASTR HFA phone survey
 

@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Creating Visualizations
 
-**In this hands-on session, we will:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Explore available chart types
 - Create and customize visualizations

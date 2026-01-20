@@ -6,7 +6,7 @@ paginate: true
 
 ## Activity: Creating a Project
 
-**In this hands-on session, we will:**
+![hands-on h:40](../../resources/icons/hands_on.svg) **In this hands-on session, we will:**
 
 - Set up a new project
 - Configure project settings
