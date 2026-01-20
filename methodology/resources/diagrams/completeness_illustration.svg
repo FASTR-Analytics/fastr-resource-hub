@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 300">
+  <defs>
+    <style>
+      .title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: 'Poppins', sans-serif; font-size: 14px; fill: #21568C; }
+      .facility-label { font-family: 'Poppins', sans-serif; font-size: 13px; fill: #333; text-anchor: end; }
+      .month-label { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #666; text-anchor: middle; }
+      .cell-reported { fill: #1F9A9C; }
+      .cell-missing { fill: #E5E5E5; }
+      .legend-text { font-family: 'Poppins', sans-serif; font-size: 13px; fill: #333; }
+      .stat-text { font-family: 'Poppins', sans-serif; font-size: 14px; fill: #09544F; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text class="title" x="20" y="28">Region A: Indicator Completeness</text>
+  <text class="subtitle" x="20" y="48">5 health facilities reporting monthly on ANC1</text>
+
+  <!-- Month labels -->
+  <text class="month-label" x="155" y="65">Jan</text>
+  <text class="month-label" x="190" y="65">Feb</text>
+  <text class="month-label" x="225" y="65">Mar</text>
+  <text class="month-label" x="260" y="65">Apr</text>
+  <text class="month-label" x="295" y="65">May</text>
+  <text class="month-label" x="330" y="65">Jun</text>
+  <text class="month-label" x="365" y="65">Jul</text>
+  <text class="month-label" x="400" y="65">Aug</text>
+  <text class="month-label" x="435" y="65">Sep</text>
+  <text class="month-label" x="470" y="65">Oct</text>
+  <text class="month-label" x="505" y="65">Nov</text>
+  <text class="month-label" x="540" y="65">Dec</text>
+
+  <!-- Facility A - all reported -->
+  <text class="facility-label" x="130" y="88">Facility A</text>
+  <rect class="cell-reported" x="140" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="175" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="210" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="245" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="280" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="315" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="350" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="385" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="420" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="455" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="490" y="75" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="525" y="75" width="30" height="18" rx="2"/>
+
+  <!-- Facility B - some missing -->
+  <text class="facility-label" x="130" y="113">Facility B</text>
+  <rect class="cell-reported" x="140" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="175" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="210" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="245" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="280" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="315" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="350" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="385" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="420" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="455" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="490" y="100" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="525" y="100" width="30" height="18" rx="2"/>
+
+  <!-- Facility C - more missing -->
+  <text class="facility-label" x="130" y="138">Facility C</text>
+  <rect class="cell-reported" x="140" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="175" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="210" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="245" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="280" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="315" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="350" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="385" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="420" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="455" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="490" y="125" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="525" y="125" width="30" height="18" rx="2"/>
+
+  <!-- Facility D - all reported -->
+  <text class="facility-label" x="130" y="163">Facility D</text>
+  <rect class="cell-reported" x="140" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="175" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="210" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="245" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="280" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="315" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="350" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="385" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="420" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="455" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="490" y="150" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="525" y="150" width="30" height="18" rx="2"/>
+
+  <!-- Facility E - many missing -->
+  <text class="facility-label" x="130" y="188">Facility E</text>
+  <rect class="cell-missing" x="140" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="175" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="210" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="245" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="280" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="315" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="350" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="385" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="420" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="455" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-missing" x="490" y="175" width="30" height="18" rx="2"/>
+  <rect class="cell-reported" x="525" y="175" width="30" height="18" rx="2"/>
+
+  <!-- Legend -->
+  <rect class="cell-reported" x="140" y="210" width="20" height="16" rx="2"/>
+  <text class="legend-text" x="168" y="223">Reported</text>
+  <rect class="cell-missing" x="250" y="210" width="20" height="16" rx="2"/>
+  <text class="legend-text" x="278" y="223">Missing</text>
+
+  <!-- Stats box - below grid, aligned with facility labels -->
+  <rect x="140" y="240" width="290" height="50" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
+  <text class="stat-text" x="155" y="262">5 facilities × 12 months = 60 expected</text>
+  <text class="stat-text" x="155" y="280">48 reported → 80% completeness</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260">
+  <defs>
+    <style>
+      .title { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #21568C; }
+      .box-label { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .annotation { font-family: 'Poppins', sans-serif; font-size: 10px; fill: #666; text-anchor: middle; }
+      .result-text { font-family: 'Poppins', sans-serif; font-size: 11px; fill: #09544F; font-weight: 600; }
+      .box-anc1 { fill: #1A90C0; }
+      .box-anc4 { fill: #1F9A9C; }
+      .connector { stroke: #999; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text class="title" x="210" y="25" text-anchor="middle">District X - ANC Services</text>
+
+  <!-- ANC1 Box (wider, at top) -->
+  <rect class="box-anc1" x="60" y="50" width="300" height="45" rx="6"/>
+  <text class="box-label" x="210" y="78">ANC1: 5,200 visits</text>
+  <text class="annotation" x="210" y="108">Women who start ANC</text>
+
+  <!-- Connector lines (funnel shape) -->
+  <path class="connector" d="M 110 95 L 135 130"/>
+  <path class="connector" d="M 310 95 L 285 130"/>
+
+  <!-- ANC4 Box (narrower, at bottom) -->
+  <rect class="box-anc4" x="110" y="130" width="200" height="45" rx="6"/>
+  <text class="box-label" x="210" y="158">ANC4: 4,100 visits</text>
+  <text class="annotation" x="210" y="188">Women who complete 4 visits</text>
+
+  <!-- Checkmark and result -->
+  <circle cx="95" cy="225" r="12" fill="#1F9A9C"/>
+  <path d="M 89 225 L 93 229 L 101 221" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <text class="result-text" x="115" y="229">Passes consistency check (ANC1 > ANC4)</text>
+</svg>

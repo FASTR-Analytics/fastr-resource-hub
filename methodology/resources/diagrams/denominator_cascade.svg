@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380">
+  <defs>
+    <style>
+      /* FASTR Theme Colors */
+      .box-pregnancies { fill: #CAE6E9; stroke: #0C716B; stroke-width: 2; rx: 8; }
+      .box-deliveries { fill: #1A90C0; stroke: #21568C; stroke-width: 2; rx: 8; }
+      .box-births { fill: #1F9A9C; stroke: #0C716B; stroke-width: 2; rx: 8; }
+      .box-livebirths { fill: #D8A822; stroke: #09544F; stroke-width: 2; rx: 8; }
+      .box-dpt { fill: #BD5091; stroke: #7A1F6E; stroke-width: 2; rx: 8; }
+      .box-measles { fill: #D0CB17; stroke: #09544F; stroke-width: 2; rx: 8; }
+
+      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-light { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .arrow { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #21568C; text-anchor: middle; font-style: italic; }
+      .note-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #21568C; }
+      .note { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #7f8c8d; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0C716B"/>
+    </marker>
+  </defs>
+
+  <!-- Row 1: Pregnancies -> Deliveries -> Births (full width) -->
+
+  <!-- Box 1: Pregnancies (light blue) -->
+  <rect class="box-pregnancies" x="40" y="30" width="120" height="36"/>
+  <text class="text-dark" x="100" y="53">Pregnancies</text>
+
+  <!-- Arrow 1 + label below -->
+  <line class="arrow" x1="160" y1="48" x2="250" y2="48"/>
+  <text class="label" x="205" y="72">Remove</text>
+  <text class="label" x="205" y="82">#pregnancy losses</text>
+
+  <!-- Box 2: Deliveries (blue) -->
+  <rect class="box-deliveries" x="260" y="30" width="110" height="36"/>
+  <text class="text-light" x="315" y="53">Deliveries</text>
+
+  <!-- Arrow 2 + label below -->
+  <line class="arrow" x1="370" y1="48" x2="460" y2="48"/>
+  <text class="label" x="415" y="72">Add</text>
+  <text class="label" x="415" y="82">#twins</text>
+
+  <!-- Box 3: Births (teal) -->
+  <rect class="box-births" x="470" y="30" width="90" height="36"/>
+  <text class="text-light" x="515" y="53">Births</text>
+
+  <!-- Arrow loop right and down to row 2 -->
+  <path class="arrow" d="M 560 48 L 740 48 L 740 128 L 640 128"/>
+  <text class="label" x="650" y="83">Remove</text>
+  <text class="label" x="650" y="93">#stillbirths</text>
+
+  <!-- Row 2: Live Births -> DPT-eligible -->
+
+  <!-- Box 4: Live Births (gold) -->
+  <rect class="box-livebirths" x="520" y="110" width="110" height="36"/>
+  <text class="text-dark" x="575" y="133">Live Births</text>
+
+  <!-- Arrow 4 + label below -->
+  <line class="arrow" x1="520" y1="128" x2="400" y2="128"/>
+  <text class="label" x="460" y="152">Remove</text>
+  <text class="label" x="460" y="162">#neonatal deaths</text>
+
+  <!-- Box 5: DPT-eligible Infants (orchid/pink) -->
+  <rect class="box-dpt" x="200" y="110" width="190" height="36"/>
+  <text class="text-light" x="295" y="133">DPT-eligible Infants</text>
+
+  <!-- Arrow down to row 3 -->
+  <path class="arrow" d="M 200 128 L 160 128 L 160 210 L 260 210"/>
+  <text class="label" x="110" y="170">Remove</text>
+  <text class="label" x="110" y="180">#post-neonatal deaths</text>
+
+  <!-- Box 6: Measles-eligible Infants (lime) -->
+  <rect class="box-measles" x="270" y="192" width="220" height="36"/>
+  <text class="text-dark" x="380" y="215">Measles-eligible Infants</text>
+
+  <!-- Note box -->
+  <rect x="40" y="255" width="720" height="70" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
+  <text class="note-title" x="55" y="275">Default values:</text>
+  <text class="note" x="55" y="291">Pregnancy loss rate = 0.03  |  Twin rate = 0.015  |  Stillbirth rate = 0.02  |  NMR = 0.03  |  PNMR = 0.02</text>
+  <text class="note-title" x="55" y="311">Use country-specific values for stillbirth rate, NMR, PNMR, and IMR when available from DHS/MICS.</text>
+</svg>

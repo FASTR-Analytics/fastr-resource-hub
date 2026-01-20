@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <style>
+      /* FASTR Theme Colors */
+      .box-anc { fill: #21568C; stroke: #0C716B; stroke-width: 2; rx: 8; }
+      .box-coverage { fill: #7f8c8d; stroke: #555; stroke-width: 2; rx: 8; }
+      .box-pregnancies { fill: #CAE6E9; stroke: #0C716B; stroke-width: 2; rx: 8; }
+      .box-deliveries { fill: #1A90C0; stroke: #21568C; stroke-width: 2; rx: 8; }
+      .box-births { fill: #1F9A9C; stroke: #0C716B; stroke-width: 2; rx: 8; }
+      .box-livebirths { fill: #D8A822; stroke: #09544F; stroke-width: 2; rx: 8; }
+      .box-dpt { fill: #BD5091; stroke: #7A1F6E; stroke-width: 2; rx: 8; }
+      .box-measles { fill: #D0CB17; stroke: #09544F; stroke-width: 2; rx: 8; }
+
+      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-light { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .text-number { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
+      .text-number-light { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .text-small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #ffffff; text-anchor: middle; }
+      .arrow { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 8px; fill: #21568C; text-anchor: middle; font-style: italic; }
+      .calc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #c0392b; text-anchor: middle; font-weight: 600; }
+      .source { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 8px; fill: #7f8c8d; text-anchor: middle; font-style: italic; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .note { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #7f8c8d; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0C716B"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text class="title" x="400" y="20" text-anchor="middle">Example: Calculating denominators from ANC1 visits</text>
+
+  <!-- Row 1: ANC1 ÷ Coverage -> Pregnancies -> Deliveries -> Births -->
+
+  <!-- Starting inputs -->
+  <rect class="box-anc" x="40" y="40" width="80" height="45"/>
+  <text class="text-light" x="80" y="56">ANC1 Visits</text>
+  <text class="text-small" x="80" y="68">(from DHIS2)</text>
+  <text class="text-number-light" x="80" y="82">10,000</text>
+
+  <text class="calc" x="130" y="63">÷</text>
+
+  <rect class="box-coverage" x="140" y="40" width="80" height="45"/>
+  <text class="text-light" x="180" y="56">ANC1 Cov.</text>
+  <text class="text-small" x="180" y="68">(from DHS)</text>
+  <text class="text-number-light" x="180" y="82">87%</text>
+
+  <!-- Arrow to Pregnancies -->
+  <line class="arrow" x1="220" y1="63" x2="270" y2="63"/>
+  <text class="calc" x="245" y="55">= 11,494</text>
+
+  <!-- Box 1: Pregnancies -->
+  <rect class="box-pregnancies" x="280" y="40" width="100" height="45"/>
+  <text class="text-dark" x="330" y="56">Pregnancies</text>
+  <text class="text-number" x="330" y="75">11,494</text>
+
+  <!-- Arrow 1 -->
+  <line class="arrow" x1="380" y1="63" x2="430" y2="63"/>
+  <text class="label" x="405" y="53">× 0.97</text>
+  <text class="calc" x="405" y="90">-345</text>
+
+  <!-- Box 2: Deliveries -->
+  <rect class="box-deliveries" x="440" y="40" width="100" height="45"/>
+  <text class="text-light" x="490" y="56">Deliveries</text>
+  <text class="text-number-light" x="490" y="75">11,149</text>
+
+  <!-- Arrow 2 -->
+  <line class="arrow" x1="540" y1="63" x2="590" y2="63"/>
+  <text class="label" x="565" y="53">× 1.015</text>
+  <text class="calc" x="565" y="90">+167</text>
+
+  <!-- Box 3: Births -->
+  <rect class="box-births" x="600" y="40" width="90" height="45"/>
+  <text class="text-light" x="645" y="56">Births</text>
+  <text class="text-number-light" x="645" y="75">11,316</text>
+
+  <!-- Arrow loop to row 2 -->
+  <path class="arrow" d="M 690 63 L 740 63 L 740 140 L 640 140"/>
+  <text class="label" x="720" y="100">× 0.98</text>
+  <text class="calc" x="720" y="115">-226</text>
+
+  <!-- Row 2: Live Births -> DPT-eligible -->
+
+  <!-- Box 4: Live Births -->
+  <rect class="box-livebirths" x="520" y="117" width="110" height="45"/>
+  <text class="text-dark" x="575" y="133">Live Births</text>
+  <text class="text-number" x="575" y="152">11,090</text>
+
+  <!-- Arrow 4 -->
+  <line class="arrow" x1="520" y1="140" x2="420" y2="140"/>
+  <text class="label" x="470" y="130">× 0.97</text>
+  <text class="calc" x="470" y="170">-333</text>
+
+  <!-- Box 5: DPT-eligible Infants -->
+  <rect class="box-dpt" x="210" y="117" width="200" height="45"/>
+  <text class="text-light" x="310" y="133">DPT-eligible Infants</text>
+  <text class="text-number-light" x="310" y="152">10,757</text>
+
+  <!-- Arrow to row 3 -->
+  <path class="arrow" d="M 210 140 L 60 140 L 60 220 L 200 220"/>
+  <text class="label" x="115" y="180">× 0.98</text>
+  <text class="calc" x="115" y="195">-215</text>
+
+  <!-- Box 6: Measles-eligible Infants -->
+  <rect class="box-measles" x="210" y="197" width="220" height="45"/>
+  <text class="text-dark" x="320" y="213">Measles-eligible Infants</text>
+  <text class="text-number" x="320" y="232">10,542</text>
+
+  <!-- Summary box -->
+  <rect x="40" y="270" width="720" height="115" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
+  <text class="title" x="55" y="292">Calculation summary:</text>
+  <text class="note" x="55" y="312">Step 1: Pregnancies = ANC1 visits ÷ ANC1 coverage = 10,000 ÷ 0.87 = 11,494</text>
+  <text class="note" x="55" y="330">Step 2: Apply demographic factors through the cascade:</text>
+  <text class="note" x="70" y="348">Pregnancies (11,494) → Deliveries (11,149) → Births (11,316) → Live Births (11,090) → DPT-eligible (10,757) → Measles-eligible (10,542)</text>
+  <text class="note" x="55" y="372">Rates: Pregnancy loss = 3%, Twin rate = 1.5%, Stillbirth = 2%, NMR = 3%, PNMR = 2%</text>
+</svg>

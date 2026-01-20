@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <style>
+      .title { font-family: Inter, sans-serif; font-size: 18px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: Inter, sans-serif; font-size: 14px; fill: #21568C; }
+      .axis-label { font-family: Inter, sans-serif; font-size: 12px; fill: #666; }
+      .axis-line { stroke: #ccc; stroke-width: 1; }
+      .grid-line { stroke: #eee; stroke-width: 1; }
+      .legend-text { font-family: Inter, sans-serif; font-size: 13px; fill: #333; }
+      .callout { font-family: Inter, sans-serif; font-size: 12px; fill: #c0392b; font-weight: 600; }
+      .callout-box { fill: #ffeaa7; stroke: #f39c12; stroke-width: 1; rx: 3; }
+      .note-text { font-family: Inter, sans-serif; font-size: 13px; fill: #27ae60; font-style: italic; }
+    </style>
+  </defs>
+
+  <!-- LEFT CHART: With outlier -->
+  <g transform="translate(40, 30)">
+    <text class="title" x="160" y="0" text-anchor="middle">With outliers included</text>
+    <text class="subtitle" x="160" y="16" text-anchor="middle">(Region A shows spike in February)</text>
+
+    <!-- Y-axis -->
+    <line class="axis-line" x1="40" y1="40" x2="40" y2="260"/>
+    <!-- X-axis -->
+    <line class="axis-line" x1="40" y1="260" x2="320" y2="260"/>
+
+    <!-- Grid lines -->
+    <line class="grid-line" x1="40" y1="95" x2="320" y2="95"/>
+    <line class="grid-line" x1="40" y1="150" x2="320" y2="150"/>
+    <line class="grid-line" x1="40" y1="205" x2="320" y2="205"/>
+
+    <!-- Y-axis labels -->
+    <text class="axis-label" x="35" y="45" text-anchor="end">3,000</text>
+    <text class="axis-label" x="35" y="100" text-anchor="end">2,000</text>
+    <text class="axis-label" x="35" y="155" text-anchor="end">1,000</text>
+    <text class="axis-label" x="35" y="210" text-anchor="end">500</text>
+    <text class="axis-label" x="35" y="265" text-anchor="end">0</text>
+
+    <!-- X-axis labels -->
+    <text class="axis-label" x="75" y="278" text-anchor="middle">Jan</text>
+    <text class="axis-label" x="130" y="278" text-anchor="middle">Feb</text>
+    <text class="axis-label" x="185" y="278" text-anchor="middle">Mar</text>
+    <text class="axis-label" x="240" y="278" text-anchor="middle">Apr</text>
+    <text class="axis-label" x="295" y="278" text-anchor="middle">May</text>
+
+    <!-- Luapula line (with outlier spike in Q2) - Blue -->
+    <polyline fill="none" stroke="#1A90C0" stroke-width="2.5"
+              points="75,176 130,45 185,182 240,171 295,165"/>
+    <circle cx="75" cy="176" r="4" fill="#1A90C0"/>
+    <circle cx="130" cy="45" r="6" fill="#c0392b" stroke="#fff" stroke-width="2"/>
+    <circle cx="185" cy="182" r="4" fill="#1A90C0"/>
+    <circle cx="240" cy="171" r="4" fill="#1A90C0"/>
+    <circle cx="295" cy="165" r="4" fill="#1A90C0"/>
+
+    <!-- Southern line - Teal -->
+    <polyline fill="none" stroke="#1F9A9C" stroke-width="2"
+              points="75,193 130,187 185,182 240,176 295,171"/>
+    <circle cx="75" cy="193" r="3" fill="#1F9A9C"/>
+    <circle cx="130" cy="187" r="3" fill="#1F9A9C"/>
+    <circle cx="185" cy="182" r="3" fill="#1F9A9C"/>
+    <circle cx="240" cy="176" r="3" fill="#1F9A9C"/>
+    <circle cx="295" cy="171" r="3" fill="#1F9A9C"/>
+
+    <!-- Eastern line - Gold -->
+    <polyline fill="none" stroke="#D8A822" stroke-width="2"
+              points="75,198 130,193 185,187 240,182 295,176"/>
+    <circle cx="75" cy="198" r="3" fill="#D8A822"/>
+    <circle cx="130" cy="193" r="3" fill="#D8A822"/>
+    <circle cx="185" cy="187" r="3" fill="#D8A822"/>
+    <circle cx="240" cy="182" r="3" fill="#D8A822"/>
+    <circle cx="295" cy="176" r="3" fill="#D8A822"/>
+
+    <!-- Callout for outlier -->
+    <rect class="callout-box" x="80" y="55" width="100" height="18"/>
+    <text class="callout" x="130" y="67" text-anchor="middle">Suspected outlier</text>
+    <line stroke="#f39c12" stroke-width="1" x1="130" y1="73" x2="130" y2="51" stroke-dasharray="3,2"/>
+
+    <!-- Legend -->
+    <line x1="70" y1="320" x2="90" y2="320" stroke="#1A90C0" stroke-width="2"/>
+    <text class="legend-text" x="95" y="323">Region A</text>
+    <line x1="155" y1="320" x2="175" y2="320" stroke="#1F9A9C" stroke-width="2"/>
+    <text class="legend-text" x="180" y="323">Region B</text>
+    <line x1="240" y1="320" x2="260" y2="320" stroke="#D8A822" stroke-width="2"/>
+    <text class="legend-text" x="265" y="323">Region C</text>
+  </g>
+
+  <!-- RIGHT CHART: Without outlier -->
+  <g transform="translate(460, 30)">
+    <text class="title" x="160" y="0" text-anchor="middle">Without outliers</text>
+    <text class="subtitle" x="160" y="16" text-anchor="middle">(Regions show similar trends)</text>
+
+    <!-- Y-axis -->
+    <line class="axis-line" x1="40" y1="40" x2="40" y2="260"/>
+    <!-- X-axis -->
+    <line class="axis-line" x1="40" y1="260" x2="320" y2="260"/>
+
+    <!-- Grid lines -->
+    <line class="grid-line" x1="40" y1="95" x2="320" y2="95"/>
+    <line class="grid-line" x1="40" y1="150" x2="320" y2="150"/>
+    <line class="grid-line" x1="40" y1="205" x2="320" y2="205"/>
+
+    <!-- Y-axis labels -->
+    <text class="axis-label" x="35" y="45" text-anchor="end">3,000</text>
+    <text class="axis-label" x="35" y="100" text-anchor="end">2,000</text>
+    <text class="axis-label" x="35" y="155" text-anchor="end">1,000</text>
+    <text class="axis-label" x="35" y="210" text-anchor="end">500</text>
+    <text class="axis-label" x="35" y="265" text-anchor="end">0</text>
+
+    <!-- X-axis labels -->
+    <text class="axis-label" x="75" y="278" text-anchor="middle">Jan</text>
+    <text class="axis-label" x="130" y="278" text-anchor="middle">Feb</text>
+    <text class="axis-label" x="185" y="278" text-anchor="middle">Mar</text>
+    <text class="axis-label" x="240" y="278" text-anchor="middle">Apr</text>
+    <text class="axis-label" x="295" y="278" text-anchor="middle">May</text>
+
+    <!-- Luapula line (corrected - no spike) - Blue -->
+    <polyline fill="none" stroke="#1A90C0" stroke-width="2.5"
+              points="75,176 130,176 185,182 240,171 295,165"/>
+    <circle cx="75" cy="176" r="4" fill="#1A90C0"/>
+    <circle cx="130" cy="176" r="4" fill="#1A90C0"/>
+    <circle cx="185" cy="182" r="4" fill="#1A90C0"/>
+    <circle cx="240" cy="171" r="4" fill="#1A90C0"/>
+    <circle cx="295" cy="165" r="4" fill="#1A90C0"/>
+
+    <!-- Southern line - Teal -->
+    <polyline fill="none" stroke="#1F9A9C" stroke-width="2"
+              points="75,193 130,187 185,182 240,176 295,171"/>
+    <circle cx="75" cy="193" r="3" fill="#1F9A9C"/>
+    <circle cx="130" cy="187" r="3" fill="#1F9A9C"/>
+    <circle cx="185" cy="182" r="3" fill="#1F9A9C"/>
+    <circle cx="240" cy="176" r="3" fill="#1F9A9C"/>
+    <circle cx="295" cy="171" r="3" fill="#1F9A9C"/>
+
+    <!-- Eastern line - Gold -->
+    <polyline fill="none" stroke="#D8A822" stroke-width="2"
+              points="75,198 130,193 185,187 240,182 295,176"/>
+    <circle cx="75" cy="198" r="3" fill="#D8A822"/>
+    <circle cx="130" cy="193" r="3" fill="#D8A822"/>
+    <circle cx="185" cy="187" r="3" fill="#D8A822"/>
+    <circle cx="240" cy="182" r="3" fill="#D8A822"/>
+    <circle cx="295" cy="176" r="3" fill="#D8A822"/>
+
+    <!-- Note about similar trends -->
+    <text class="note-text" x="160" y="320" text-anchor="middle">Outliers can distort the true picture of service trends</text>
+  </g>
+</svg>
