@@ -21,8 +21,6 @@ paginate: true
 <!-- _class: agenda -->
 # Agenda
 
-<div style="margin-top: 0.4em;"></div>
-
 **Day 1 -- Laying the Foundation: Introducing FASTR and Configuring the Analytics Platform**
 
 <table>
@@ -49,8 +47,6 @@ paginate: true
 <!-- _class: agenda -->
 # Agenda
 
-<div style="margin-top: 0.4em;"></div>
-
 **Day 2 -- Building the Analysis: Applying FASTR Methods and Generating Outputs**
 
 <table>
@@ -72,8 +68,6 @@ paginate: true
 <!-- _class: agenda -->
 # Agenda
 
-<div style="margin-top: 0.4em;"></div>
-
 **Day 3 -- From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making**
 
 <table>
@@ -94,8 +88,6 @@ paginate: true
 
 <!-- _class: agenda -->
 # Agenda
-
-<div style="margin-top: 0.4em;"></div>
 
 **Day 4 -- Designing the Health Facility Assessment**
 
