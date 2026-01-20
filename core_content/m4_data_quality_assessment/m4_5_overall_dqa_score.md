@@ -38,6 +38,5 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 **Mean DQA = (completeness & outlier score + consistency score) / 2**
 
-<p style="font-size: 0.85em;">Lower scores indicate more data quality issues that need attention before the data can be used with confidence.</p>
 
 ![Mean DQA Score h:320](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
