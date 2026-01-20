@@ -297,7 +297,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **Exemple de structure** :
 
     ```
-    admin_area_1  admin_area_2  year  countCPN1  countdelivery  ...  nummonth
+    admin_area_1  admin_area_2  year  countANC1  countdelivery  ...  nummonth
     Country_Name  Province_A    2020  12500      10200          ...  12
     Country_Name  Province_A    2021  13000      10500          ...  11
     ```
@@ -377,7 +377,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **A. Dénominateurs basés sur les services** (en utilisant le numérateur SIGS ÷ la couverture de l'enquête) :
 
     1. **De l'CPN1** :
-       - `dCPN1_pregnCPNy` : Grossesses estimées
+       - `d'anc1_pregnancy` : Grossesses estimées
        - cODE_BLOCK_67__ : Estimation des accouchements
        - cODE_BLOCK_68__ : Estimation des naissances (vivants + mort-nés)
        - cODE_BLOCK_69__ : Estimation des naissances vivantes
@@ -386,7 +386,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
        - cODE_BLOC_72__ : Eligible pour le MCV2
 
     2. **A partir de la livraison** :
-       - `ddelivery_livebirth`, `ddelivery_birth`, `ddelivery_pregnCPNy`
+       - `ddelivery_livebirth`, `ddelivery_birth`, `ddelivery_pregnancy`
        - `ddelivery_DTC`, `ddelivery_rougeole1`, `ddelivery_rougeole2`
 
     3. **A partir de SBA** (accouchement assisté par un personnel qualifié) :
@@ -395,14 +395,14 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
        - `dsba_DTC`, `dsba_rougeole1`, `dsba_rougeole2`
 
     4. **De la part du BCG** (uniquement au niveau national) :
-       - `dBCG_pregnCPNy`, `dBCG_livebirth`, `dBCG_DTC`
+       - `dBCG_pregnancy`, `dBCG_livebirth`, `dBCG_DTC`
 
     5. **De Penta1** :
        - `dPenta1_DTC`, `dPenta1_rougeole1`, `dPenta1_rougeole2`
 
     **B. Dénominateurs basés sur la population** (nationaux uniquement) :
 
-    - `dwpp_pregnCPNy` : Taux brut de natalité × population totale ÷ (1 + taux de gémellité)
+    - `dwpp_pregnancy` : Taux brut de natalité × population totale ÷ (1 + taux de gémellité)
     - tAUX DE NATALITÉ BRUT × POPULATION TOTALE ÷ (1 + TAUX DE JUMEAUX) `dwpp_livebirth` : Du taux brut de natalité × population totale
     - cODE_BLOCK_93__ : Population de moins de 1 an
     - cODE_BLOC_94__ : POPULATION DE MOINS DE 1 AN CORRIGÉE POUR TENIR COMPTE DE LA MORTALITÉ NÉONATALE : Population de moins de 1 an ajustée pour la mortalité néonatale
@@ -413,7 +413,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     Pour chaque dénominateur de naissance vivante, des dénominateurs supplémentaires sont automatiquement créés :
 
     - `d*_vitaminA` : Naissances vivantes × (1 - U5MR) × 4,5 (enfants de 6 à 59 mois)
-    - cODE_BLOC_97__ : NAISSCPNE VIVANTE × (1 - RMU5) × 4,5 (ENFANTS DE 6 À 59 MOIS) : NaissCPNe vivante × (1 - TMI)
+    - cODE_BLOC_97__ : NAISSANCE VIVANTE × (1 - RMU5) × 4,5 (ENFANTS DE 6 À 59 MOIS) : Naissance vivante × (1 - TMI)
 
     **Ajustement pour les déclarations incomplètes** :
 
@@ -433,11 +433,11 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Logique** :
 
-    - `reference_based` : Dénominateur calculé à partir du même indicateur (par exemple, `dCPN1_pregnCPNy` pour CPN1)
+    - `reference_based` : Dénominateur calculé à partir du même indicateur (par exemple, `d'anc1_pregnancy` pour CPN1)
     - cODE_BLOC_102__ : Dénominateur calculé à partir des données démographiques du PPS de l'ONU
     - cODE_BLOC_103__ : Dénominateur provenant d'un indicateur de service différent
 
-    **ImportCPNe** :
+    **Importance** :
 
     Cette classification garantit que lors de la sélection des "meilleurs" dénominateurs, nous évitons d'utiliser des dénominateurs basés sur des références (qui montreraient artificiellement une couverture à 100% égale à la valeur de l'enquête).
 
@@ -479,7 +479,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **Décision clé de conception** :
 
     - Les dénominateurs des PPNU sont exclus de la "meilleure" sélection par défaut
-    - Évite une dépendCPNe excessive à l'égard des projections démographiques
+    - Évite une dépendance excessive à l'égard des projections démographiques
     - Assure que les données SIGS déterminent la couverture lorsqu'elles sont disponibles
     - Le PPNU n'est utilisé que lorsqu'il n'existe pas d'options basées sur le SIGS
 
@@ -499,8 +499,8 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     admin_area_1  year  indicateur_common_id  dénominateur_best_or_survey  value
     Country_Name  2020  CPN1                 best                        85.3
     Country_Name  2020  CPN1                 survey                      84.2
-    Country_Name  2020  CPN1                 dCPN1_pregnCPNy             85.3
-    Country_Name  2020  CPN1                 dwpp_pregnCPNy              82.1
+    Country_Name  2020  CPN1                 d'anc1_pregnancy             85.3
+    Country_Name  2020  CPN1                 dwpp_pregnancy              82.1
     ```
 
     **Catégories de dénominateurs** :
@@ -552,8 +552,8 @@ Avant de présenter les formules spécifiques, il est important de comprendre le
 Considérons comment une estimation de 10 000 grossesses se traduit en population éligible à la vaccination DTC :
 
 ```
-Starting point (pregnCPNies):           10,000
-→ After pregnCPNy loss (3%):            10,000 × (1 - 0.03) = 9,700 deliveries
+Starting point (pregnancies):           10,000
+→ After pregnancy loss (3%):            10,000 × (1 - 0.03) = 9,700 deliveries
 → After twin adjustment (1.5% rate):    9,700 × (1 - 0.015/2) = 9,627 births
 → After stillbirths (2%):               9,627 × (1 - 0.02) = 9,435 live births
 → After neonatal deaths (3.9%):         9,435 × (1 - 0.039) = 9,067 DTC-eligible children
@@ -562,7 +562,7 @@ Starting point (pregnCPNies):           10,000
 Cette cascade montre comment chaque facteur démographique réduit séquentiellement la taille de la population au fur et à mesure que l'on passe d'un stade de vie à l'autre. Les formules mathématiques détaillées dans les sections suivantes suivent la même logique, mais fonctionnent dans **les deux sens** :
 
 - **Cascade ascendante** : En partant des indicateurs antérieurs (CPN1, accouchement) et en les ajustant en fonction des populations cibles ultérieures
-- **Cascade rétrospective** : En partant d'indicateurs plus récents (BCG, Penta1) et en revenant en arrière pour estimer les populations plus CPNiennes
+- **Cascade rétrospective** : En partant d'indicateurs plus récents (BCG, Penta1) et en revenant en arrière pour estimer les populations plus anciennes
 
 Les taux spécifiques et les formules pour chaque source de dénominateur sont détaillés ci-dessous.
 
@@ -641,13 +641,13 @@ $$
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{délivrCPNe-DTC}} = d_{\text{délivrCPNe-naissance vivante}} \n- fois (1 - \n-text{taux de mortalité néonatale})
+d_{\text{délivrance-DTC}} = d_{\text{délivrance-naissance vivante}} \n- fois (1 - \n-text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** :
 
 $$
-d_{\text{délivrCPNe-rougeole1}} = d_{\text{délivrCPNe-DTC}} \time (1 - \text{taux de mortalité post-néonatale})
+d_{\text{délivrance-rougeole1}} = d_{\text{délivrance-DTC}} \time (1 - \text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** :
@@ -817,8 +817,8 @@ $$
 Où :
 
 - `source` représente l'un des éléments suivants : CPN1, delivery, BCG, Penta1, livebirths ou wpp
-- Le facteur **4,5** représente la durée approximative (en années) de la trCPNhe d'âge cible pour la vitamine A (6-59 mois ≈ 4,5 ans)
-- Le taux de mortalité des moins de 5 ans tient compte de la survie de l'enfant pour atteindre la trCPNhe d'âge de 6 à 59 mois
+- Le facteur **4,5** représente la durée approximative (en années) de la tranche d'âge cible pour la vitamine A (6-59 mois ≈ 4,5 ans)
+- Le taux de mortalité des moins de 5 ans tient compte de la survie de l'enfant pour atteindre la tranche d'âge de 6 à 59 mois
 - Résultat : **Population estimée d'enfants âgés de 6 à 59 mois** éligibles à une supplémentation en vitamine A
 
 **Nourrissons de moins de 12 mois (population cible d'enfants complètement vaccinés)**
@@ -846,7 +846,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 - Charger les données ajustées du module 2 du SIGS (fichiers nationaux et infranationaux)
 - Charger les données d'enquête à partir du dépôt GitHub (ensemble de données EDS/MICS unifiées)
 - Charger les données de population du WPP de l'ONU à partir du dépôt GitHub
-- Valider la correspondCPNe des codes ISO3 entre les ensembles de données
+- Valider la correspondance des codes ISO3 entre les ensembles de données
 - Agréger les données mensuelles du SIGS en totaux annuels
 - Harmoniser les données d'enquête (priorité à l'EDS par rapport à l'enquête MICS)
 - Remplir les valeurs de l'enquête pour créer des séries temporelles continues
@@ -916,7 +916,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     **Champs** :
 
-    - `dénominateur` : Nom complet du dénominateur (par exemple, `dCPN1_livebirth`)
+    - `dénominateur` : Nom complet du dénominateur (par exemple, `d'anc1_livebirth`)
     - `source_indicateur` : Service utilisé (par exemple, `source_CPN1`, `source_wpp`)
     - `target_population` : Groupe cible (par exemple, `target_livebirth`, `target_DTC`)
     - __CODE_BLOC_124__ : Taille du dénominateur calculée
@@ -966,9 +966,9 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     1. **Validation ISO3** : Vérifie que les données de l'enquête et de la population correspondent à celles du pays SIGS
 
-    2. **CorrespondCPNe géographique** : Validation des noms des régions administratives entre le SIGS et l'enquête
-       - Rapporte le taux de concordCPNe (par exemple, "15/20 régions concordent")
-       - Retourne au niveau géographique supérieur en cas de non-concordCPNe
+    2. **Correspondance géographique** : Validation des noms des régions administratives entre le SIGS et l'enquête
+       - Rapporte le taux de concordance (par exemple, "15/20 régions concordent")
+       - Retourne au niveau géographique supérieur en cas de non-concordance
 
     3. **Mécanismes de repli** :
        - Sous-national → national si aucune donnée d'enquête locale n'est disponible
@@ -990,7 +990,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - `CPN1` : Soins prénatals 1ère visite
     - cODE_BLOCK_140__ : Soins prénatals 4+ visites
     - cODE_BLOCK_141__ : Accouchement en institution
-    - cODE_BLOC_142__ : AssistCPNe qualifiée à l'accouchement
+    - cODE_BLOC_142__ : Assistance qualifiée à l'accouchement
     - cODE_BLOCK_143__ : Soins postnatals (enfant)
     - cODE_BLOCK_144__ : Soins postnatals (mère)
 
@@ -1038,7 +1038,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
 ? ?? "Résolution des problèmes courants
 
-    **Problèmes** : Pas de correspondCPNe entre les domaines administratifs du SIGS et de l'enquête
+    **Problèmes** : Pas de correspondance entre les domaines administratifs du SIGS et de l'enquête
 
     - **Solution** : Vérifiez que le code ISO3 est correct ; vérifiez les conventions de dénomination des zones administratives ; le module reviendra à l'analyse nationale
 
@@ -1074,19 +1074,19 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
     ```r
     dénominateur_SELECTION <- list(
-      # PREGNCPNY-RELATED indicateurS
-      CPN1 = "best",                    # Options: "best", "dCPN1_pregnCPNy", "ddelivery_pregnCPNy", "dBCG_pregnCPNy", "dlivebirths_pregnCPNy", "dwpp_pregnCPNy"
+      # PREGNANCY-RELATED indicateurS
+      CPN1 = "best",                    # Options: "best", "d'anc1_pregnancy", "ddelivery_pregnancy", "dBCG_pregnancy", "dlivebirths_pregnancy", "dwpp_pregnancy"
       CPN4 = "best",
 
       # LIVE BIRTH-RELATED indicateurS
-      delivery = "best",                # Options: "best", "dCPN1_livebirth", "ddelivery_livebirth", "dBCG_livebirth", "dlivebirths_livebirth", "dwpp_livebirth"
+      delivery = "best",                # Options: "best", "d'anc1_livebirth", "ddelivery_livebirth", "dBCG_livebirth", "dlivebirths_livebirth", "dwpp_livebirth"
       BCG = "best",
       sba = "best",
       pnc1_mother = "best",
       pnc1 = "best",
 
       # DTC-ELIGIBLE AGE GROUP indicateurS
-      Penta1 = "best",                  # Options: "best", "dCPN1_DTC", "ddelivery_DTC", "dPenta1_DTC", "dBCG_DTC", "dlivebirths_DTC", "dwpp_DTC"
+      Penta1 = "best",                  # Options: "best", "d'anc1_DTC", "ddelivery_DTC", "dPenta1_DTC", "dBCG_DTC", "dlivebirths_DTC", "dwpp_DTC"
       Penta2 = "best",
       Penta3 = "best",
       VPO1 = "best",
@@ -1094,12 +1094,12 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
       VPO3 = "best",
 
       # rougeole-ELIGIBLE AGE GROUP indicateurS
-      rougeole1 = "best",                # Options: "best", "dCPN1_rougeole1", "ddelivery_rougeole1", "dPenta1_rougeole1", "dBCG_rougeole1", "dlivebirths_rougeole1", "dwpp_rougeole1"
+      rougeole1 = "best",                # Options: "best", "d'anc1_rougeole1", "ddelivery_rougeole1", "dPenta1_rougeole1", "dBCG_rougeole1", "dlivebirths_rougeole1", "dwpp_rougeole1"
       rougeole2 = "best",
 
       # ADDITIONAL indicateurS
-      vitaminA = "best",                # Options: "best", "dCPN1_vitaminA", "dBCG_vitaminA", "ddelivery_vitaminA", "dwpp_vitaminA"
-      fully_immunized = "best"          # Options: "best", "dCPN1_fully_immunized", "dBCG_fully_immunized", "ddelivery_fully_immunized", "dwpp_fully_immunized"
+      vitaminA = "best",                # Options: "best", "d'anc1_vitaminA", "dBCG_vitaminA", "ddelivery_vitaminA", "dwpp_vitaminA"
+      fully_immunized = "best"          # Options: "best", "d'anc1_fully_immunized", "dBCG_fully_immunized", "ddelivery_fully_immunized", "dwpp_fully_immunized"
     )
     ```
 
@@ -1264,7 +1264,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
        - Renommer la colonne couverture en `couverture_cov` pour plus de clarté
 
     2. **Fusionner les projections** : Joindre les estimations projetées de l'enquête
-       - CorrespondCPNe par géographie, année, indicateur et dénominateur
+       - Correspondance par géographie, année, indicateur et dénominateur
        - Créer une colonne `couverture_avgsurveyprojection`
 
     3. **Traiter les données d'enquête originales** (si elles sont disponibles) :
@@ -1272,7 +1272,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
        - Préserver les métadonnées de la source (source, source_detail)
        - Élargir les valeurs de l'enquête à tous les dénominateurs pour cet indicateur
 
-    4. **Calculer les projections finales** : Utiliser une formule de projection améliorée qui s'CPNre dans la dernière valeur d'enquête :
+    4. **Calculer les projections finales** : Utiliser une formule de projection améliorée qui s'ancre dans la dernière valeur d'enquête :
 
        Pour les années postérieures à la dernière année d'enquête :
 
@@ -1282,7 +1282,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
        Cette approche additive
        - Préserve l'étalonnage des données d'enquête
-       - Applique la tendCPNe de l'enquête SIGS (delta) pour étendre l'estimation vers l'avant
+       - Applique la tendance de l'enquête SIGS (delta) pour étendre l'estimation vers l'avant
        - Évite les erreurs cumulées dues aux deltas d'une année sur l'autre
 
     5. **Combiner les résultats** : Fusionner tous les composants à l'aide d'une jointure externe complète pour préserver :
@@ -1390,7 +1390,7 @@ La partie 2 exécute le flux de travail suivant pour chaque niveau administratif
 **Sous-étape 3 : projeter les valeurs de l'enquête**
 
 - Utiliser `project_survey_from_deltas()` pour étendre les estimations de l'enquête
-- La base est CPNrée dans l'enquête la plus récente
+- La base est ancrée dans l'enquête la plus récente
 - Les projections utilisent les deltas cumulés des tendances SIGS
 
 **Sous-étape 4 : Construire les résultats finaux**
@@ -1510,7 +1510,7 @@ Identique à la colonne nationale, plus :
 
     Les utilisateurs doivent valider les résultats de la partie 2 en procédant comme suit
 
-    1. **Contrôlant la vraisemblCPNe des projections** :
+    1. **Contrôlant la vraisemblance des projections** :
        - Les valeurs projetées se situent-elles dans des fourchettes plausibles (0-100%) ?
        - Les tendances ont-elles un sens programmatique ?
 
@@ -1585,7 +1585,7 @@ Identique à la colonne nationale, plus :
 
     ```r
     # Use country-specific mortality rates from EDS or other sources
-    PREGNCPNY_LOSS_RATE <- 0.04      # Default: 0.03
+    PREGNANCY_LOSS_RATE <- 0.04      # Default: 0.03
     TWIN_RATE <- 0.02                # Default: 0.015
     STILLBIRTH_RATE <- 0.025         # Default: 0.02
     P1_NMR <- 0.045                  # Default: 0.039
@@ -1603,7 +1603,7 @@ Identique à la colonne nationale, plus :
 
     ```r
     # Override automatic "best" selection for specific indicateurs
-    DENOM_CPN1 <- "dCPN1_pregnCPNy"      # Use CPN1-based dénominateur
+    DENOM_CPN1 <- "d'anc1_pregnancy"      # Use CPN1-based dénominateur
     DENOM_Penta3 <- "dwpp_DTC"           # Use WPP population estimate
     DENOM_rougeole1 <- "best"             # Keep automatic selection
 

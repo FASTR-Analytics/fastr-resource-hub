@@ -1271,7 +1271,7 @@ __CODE_BLOC_4__
     **Scores AQD:**
     - dqa_score = 1 indique que les données ont passé toutes les vérifications, et qu'elles peuvent être utilisées sans ajustement
     - dqa_score = 0 nécessite un examen plus approfondi
-    - dqa_mean fournit une vision nuCPNée (0,75 = plutôt bon, 0,25 = plutôt mauvais)
+    - dqa_mean fournit une vision nuancée (0,75 = plutôt bon, 0,25 = plutôt mauvais)
 
 ### Résumé des mesures de qualité des données
 

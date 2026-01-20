@@ -161,7 +161,7 @@ Ces ajustements nécessitent un traitement qui ne peut pas être effectué dans 
 
 ### Complexité de l'analyse
 
-L'approche FASTR utilise des méthodes statistiques plus avCPNées, telles que l'analyse de régression, qui ne sont pas disponibles dans le DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin :
+L'approche FASTR utilise des méthodes statistiques plus avancées, telles que l'analyse de régression, qui ne sont pas disponibles dans le DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin :
 
 - En identifiant les augmentations ou les diminutions significatives du volume de services
 - En ajustant les problèmes de qualité des données

@@ -101,7 +101,7 @@ La **structure** définit l'organisation hiérarchique des zones administratives
 
 #### Données SIGS
 
-Les données du système d'information sur la gestion de la santé (SIGS) contiennent des statistiques de routine sur les services de santé recueillies auprès des établissements. Il s'agit notamment d'indicateurs de prestation de services, de données de surveillance des maladies et d'indicateurs de performCPNe des programmes. Les données SIGS sont généralement communiquées sur une base mensuelle et constituent la base de la plupart des analyses de routine du système de santé.
+Les données du système d'information sur la gestion de la santé (SIGS) contiennent des statistiques de routine sur les services de santé recueillies auprès des établissements. Il s'agit notamment d'indicateurs de prestation de services, de données de surveillance des maladies et d'indicateurs de performance des programmes. Les données SIGS sont généralement communiquées sur une base mensuelle et constituent la base de la plupart des analyses de routine du système de santé.
 
 #### Données HFA
 
@@ -137,7 +137,7 @@ Les visualisations peuvent être filtrées selon diverses dimensions et désagr�
 
 ### Désagrégation
 
-**La désagrégation** fait référence au processus de décomposition des données par dimensions afin d'identifier les modèles et les variations. Les données peuvent être désagrégées par période (mensuelle, trimestrielle ou annuelle), par zone administrative, par type d'établissement, par propriétaire de l'établissement ou par catégories d'indicateurs. Cette capacité permet une analyse plus nuCPNée et aide à identifier les disparités entre les différentes dimensions.
+**La désagrégation** fait référence au processus de décomposition des données par dimensions afin d'identifier les modèles et les variations. Les données peuvent être désagrégées par période (mensuelle, trimestrielle ou annuelle), par zone administrative, par type d'établissement, par propriétaire de l'établissement ou par catégories d'indicateurs. Cette capacité permet une analyse plus nuancée et aide à identifier les disparités entre les différentes dimensions.
 
 ### Rôles des utilisateurs
 

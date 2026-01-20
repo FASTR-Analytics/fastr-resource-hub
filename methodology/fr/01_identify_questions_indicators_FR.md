@@ -37,7 +37,7 @@ L'utilisation efficace des données de routine dépend de questions analytiques 
 - **Pertinente
   Suffisamment important pour justifier une analyse et éclairer la prise de décision.
 
-- **CPNré dans les réalités actuelles
+- **Ancré dans les réalités actuelles
   En rapport avec les défis, les réformes ou les chocs en cours qui affectent la prestation de services.
 
 - **Significatif pour les parties prenantes

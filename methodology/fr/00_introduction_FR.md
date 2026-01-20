@@ -1,7 +1,7 @@
 <!-- AUTO-TRANSLATED from 00_introduction.md -->
 <!-- Add REVIEWED marker after human review to protect from overwrite -->
 
-# FASTR SRMNIA-N surveillCPNe de l'utilisation des services : Documentation méthodologique
+# FASTR SRMNIA-N surveillance de l'utilisation des services : Documentation méthodologique
 
 ## Introduction à FASTR
 
@@ -45,7 +45,7 @@ Les quatre approches techniques du FASTR, étayées par le renforcement des capa
 
 2. **Les enquêtes téléphoniques à cycle rapide sur les établissements de santé** évaluent la performance des établissements de soins de santé primaires, surveillent la mise en œuvre des réformes, identifient l'impact des chocs et suivent les changements au fil du temps. L'enquête téléphonique est menée auprès d'un échantillon représentatif de SSP au cours de quatre contacts trimestriels par an.
 
-3. **Les enquêtes téléphoniques à haute fréquence auprès des ménages** fournissent un aperçu des comportements de recherche de soins, du renoncement aux soins, de la protection finCPNière, de la couverture des services et de l'expérience des patients en matière de soins. Les enquêtes auprès des ménages sont actuellement réalisées en partenariat avec l'étude de mesure des niveaux de vie de la Banque mondiale.
+3. **Les enquêtes téléphoniques à haute fréquence auprès des ménages** fournissent un aperçu des comportements de recherche de soins, du renoncement aux soins, de la protection financière, de la couverture des services et de l'expérience des patients en matière de soins. Les enquêtes auprès des ménages sont actuellement réalisées en partenariat avec l'étude de mesure des niveaux de vie de la Banque mondiale.
 
 4. **Les analyses de suivi** utilisent des approches d'analyse des causes profondes et de recherche sur la mise en œuvre afin de mieux comprendre les problèmes mis en évidence par les analyses à cycle rapide (par exemple, expliquer les variations de performance au niveau du district, contextualiser l'impact des réformes des systèmes de santé, ou étudier les causes sous-jacentes des problèmes de qualité des données et des interruptions de la prestation de services).
 
@@ -131,7 +131,7 @@ L'approche FASTR de l'analyse de routine des données se concentre sur un ensemb
 
 Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels.
 
-- **Rapport** : [COVID-19 : Impact sur les services de santé essentiels] (https://www.globalfinCPNingétablissement.org/sites/GFF_new/files/documents/GFF-IG13-2-COVID-19-Essential-Health-Services.pdf)
+- **Rapport** : [COVID-19 : Impact sur les services de santé essentiels] (https://www.globalfinancingfacility.org/sites/GFF_new/files/documents/GFF-IG13-2-COVID-19-Essential-Health-Services.pdf)
 - **Article** : [Utilisation des soins de santé et mortalité maternelle et infantile pendant la pandémie de COVID-19 dans 18 pays à revenu faible ou intermédiaire](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1004070)
 - **Article** : [Utilisation de la vaccination et inégalités infranationales pendant la pandémie COVID-19](https://www.mdpi.com/2076-393X/11/9/1415)
 - **Article** : [Perturbations dans l'utilisation des services de santé maternelle et infantile pendant la pandémie COVID-19 : analyse de huit pays d'Afrique subsaharienne](https://academic.oup.com/heapol/article/36/7/1140/6306443)
