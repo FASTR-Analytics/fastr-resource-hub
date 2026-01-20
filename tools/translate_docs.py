@@ -157,7 +157,7 @@ def translate_file_full(input_path: Path, output_path: Path, target_lang: str) -
         translated = translate_content(content, target_lang.upper())
 
         header = f"<!-- AUTO-TRANSLATED from {input_path.name} -->\n"
-        header += "<!-- Add <!-- REVIEWED --> after human review to protect from overwrite -->\n\n"
+        header += "<!-- Add REVIEWED marker after human review to protect from overwrite -->\n\n"
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, 'w', encoding='utf-8') as f:

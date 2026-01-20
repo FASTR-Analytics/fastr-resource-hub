@@ -1,0 +1,294 @@
+<!-- AUTO-TRANSLATED from 00_introduction.md -->
+<!-- Add REVIEWED marker after human review to protect from overwrite -->
+
+# FASTR SRMNIA-N surveillCPNe de l'utilisation des services : Documentation méthodologique
+
+## Introduction à FASTR
+
+La Facilité de finCPNement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision, conduisant finalement à des systèmes de soins de santé primaires (SSP) plus forts et à de meilleurs résultats en matière de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N). Cet ensemble d'initiatives et de soutien technique est appelé **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
+
+FASTR englobe quatre approches techniques : (1) le suivi de l'utilisation des services du SRMNIA-N à l'aide des données du système d'information sur la gestion de la santé (SIGS), (2) des enquêtes téléphoniques à cycle rapide auprès des établissements de santé, (3) des enquêtes téléphoniques à haute fréquence auprès des ménages, et (4) des analyses de suivi. **Cette documentation méthodologique se concentre spécifiquement sur la première approche : Le suivi de l'utilisation des services du SRMNIA-N**
+
+## Suivi de l'utilisation des services du SRMNIA-N
+
+Le GFF collabore avec les ministères de la santé pour effectuer des analyses de cycle rapide des données SIGS de routine. Cette approche répond à trois objectifs principaux :
+
+1. **Évaluer la qualité des données** aux niveaux national et sous-national afin d'identifier et de résoudre les problèmes d'exhaustivité, d'exactitude et de cohérence
+2. **Suivre l'évolution de l'utilisation des services** en mesurant les changements mensuels dans les volumes de services de santé prioritaires du SRMNIA-N
+3. **Suivre les progrès de la couverture** en comparant les tendCPNes de la prestation de services avec les objectifs et les points de référence spécifiques au pays
+
+Ces analyses se concentrent sur les indicateurs prioritaires liés aux réformes nationales en matière de santé et aux investissements de la Banque mondiale, et les résultats informent les processus de planification nationale et les cycles de mise en œuvre des projets. Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels en utilisant cette approche.
+
+(resources/diagrams/Steps%20to%20implement%20SRMNIA-N%20service%20chart.svg)
+
+*Figure 1. Étapes de la mise en œuvre du contrôle de l'utilisation des services du SRMNIA-N*
+
+### Pourquoi l'analyse en cycle rapide ?
+
+Les sources de données des systèmes de santé existants sont essentielles, mais elles présentent souvent des difficultés qui limitent leur utilisation. Les données du SIGS peuvent ne pas être analysées rapidement ou être perçues comme étant de trop mauvaise qualité pour être utilisées dans le cadre d'une prise de décision. Les enquêtes traditionnelles sur les ménages et les établissements exigent beaucoup de ressources et de temps, avec de longs délais entre la conception de l'enquête, la collecte des données et la disponibilité des résultats. Cela empêche les décideurs d'utiliser les données pour améliorer de manière significative les résultats en matière de santé. Pour combler cette lacune, le GFF aide les pays à développer et à utiliser des approches analytiques à cycle rapide.
+
+---
+
+### Comment cela fonctionne-t-il ?
+
+Les approches analytiques à cycle rapide fournissent des données opportunes, rigoureuses et prioritaires qui répondent aux priorités spécifiques de chaque pays et aux besoins en matière d'utilisation des données. Ce cycle continu d'analyse-apprentissage-renforcement-action vise à améliorer l'utilisation systématique des données pour la prise de décision en vue d'améliorer les résultats du SRMNIA-N.
+
+(resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg) (Cadre analytique à cycle rapide FASTR montrant le cycle continu d'analyse, d'apprentissage, de renforcement et d'action)
+
+*Figure 2. L'approche analytique à cycle rapide de la FASTR : Analyser, apprendre, renforcer, agir*
+
+### Approches techniques
+
+Les quatre approches techniques du FASTR, étayées par le renforcement des capacités et le soutien à l'utilisation des données, permettent aux pays d'utiliser l'analyse en cycle rapide pour renforcer les systèmes de soins de santé primaires et améliorer les résultats du SRMNIA-N grâce à l'analyse et à l'utilisation opportunes et fréquentes des données.
+
+1. **L'analyse des données SIGS de routine** permet d'évaluer la qualité des données, de quantifier les changements dans les volumes de services de santé prioritaires et de comparer les tendCPNes de la couverture des services aux objectifs nationaux pour les indicateurs prioritaires du SRMNIA-N.
+
+2. **Les enquêtes téléphoniques à cycle rapide sur les établissements de santé** évaluent la performCPNe des établissements de soins de santé primaires, surveillent la mise en œuvre des réformes, identifient l'impact des chocs et suivent les changements au fil du temps. L'enquête téléphonique est menée auprès d'un échantillon représentatif de SSP au cours de quatre contacts trimestriels par an.
+
+3. **Les enquêtes téléphoniques à haute fréquence auprès des ménages** fournissent un aperçu des comportements de recherche de soins, du renoncement aux soins, de la protection finCPNière, de la couverture des services et de l'expérience des patients en matière de soins. Les enquêtes auprès des ménages sont actuellement réalisées en partenariat avec l'étude de mesure des niveaux de vie de la Banque mondiale.
+
+4. **Les analyses de suivi** utilisent des approches d'analyse des causes profondes et de recherche sur la mise en œuvre afin de mieux comprendre les problèmes mis en évidence par les analyses à cycle rapide (par exemple, expliquer les variations de performCPNe au niveau du district, contextualiser l'impact des réformes des systèmes de santé, ou étudier les causes sous-jacentes des problèmes de qualité des données et des interruptions de la prestation de services).
+
+Parmi les activités de renforcement des capacités, on peut citer le soutien à l'automatisation de l'extraction, du nettoyage et de l'analyse des données de routine, ainsi que le soutien à l'institutionnalisation des méthodes de collecte et d'analyse des données issues des enquêtes téléphoniques rapides. Le soutien à l'utilisation des données donne la priorité à l'intégration de l'analyse en cycle rapide dans les mécanismes existants d'examen des données et de retour d'information aux niveaux national et infranational, afin de renforcer l'utilisation systématique des données pour la prise de décision.
+
+(ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)] (ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)
+
+*Figure 3. Analyse en cycle rapide dans le cadre de l'initiative FASTR (Frequent Assessments and System Tools for Resilience)* (ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)
+
+## Acronymes et abréviations
+
+| Acronyme | Définition |
+|---------|------------|
+| Programme d'enquêtes démographiques et de santé (EDS) - ***Programmes et organisations*** - **EDS** - Programme d'EDS
+| Programme d'enquêtes démographiques et de santé (EDS)
+**FASTR** | Évaluations fréquentes et outils du système de santé pour la résilience
+| La Facilité mondiale de finCPNement (FMF)
+**MICS** | Enquêtes en grappes à indicateurs multiples (Multiple indicateur Cluster Surveys)
+**MoH** | Ministère de la santé **MoH** | Ministère de la santé
+**MoH** | Ministère de la santé | **UN** | Nations Unies
+| Les systèmes de données et les sources*** sont les suivants
+**DHIS2** | DHIS2 (également orthographié DHIS 2, CPNiennement Logiciel d'information sanitaire de district)
+**SIGS** | Système d'information sur la gestion de la santé (Système d'information de gestion de la santé)
+**WPP** | World Population Prospects (Perspectives de la population mondiale)
+| Indicateurs de santé et services de santé*** - Indicateurs de santé et services de santé***
+| Soins prénatals - **CPN** - Soins de santé primaires - **BCG** - Soins de santé primaires - **BCG** - Soins de santé secondaires
+| Bacillus Calmette-Guérin (vaccin contre la tuberculose)
+| Vaccin antirougeoleux **MCV** | Vaccin antirougeoleux*****************************
+**OPD** | Service de consultations externes **Penta** | Pentagone
+| Vaccin Pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b)
+**SRMNIA-N **SRMNIA-N **SRMNIA-N
+**SRMNIA-N** | Santé et nutrition de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent
+**SBA** | Accoucheuse qualifiée (Skilled Birth Attendant)
+| Les termes techniques et statistiques ne sont pas utilisés dans le cadre de l'analyse des données
+| Évaluation de la qualité des données (AQD)
+**MAD** | Écart absolu de la médiane
+**MAD** * Écart absolu de la médiane * ***Géographique*** **MLMIC***** Écart absolu de la médiane
+| Pays à faible revenu et à revenu intermédiaire (PFRMI)
+| Afrique subsaharienne*** - Afrique du Sud*** - Afrique du Sud
+
+## Utilisation des données du système d'information sur la gestion de la santé de routine dans les PRFM
+
+Les données sur les établissements de santé collectées par le biais du système d'information sur la gestion de la santé (SIGS) constituent une source de données primaire pour évaluer la performCPNe du secteur de la santé. Les données du SIGS sont largement utilisées à diverses fins, notamment pour l'examen du secteur de la santé, la planification et l'allocation des ressources, le suivi des programmes, l'amélioration de la qualité des soins de santé et l'établissement de rapports. Les ministères de la santé des pays à revenu faible et intermédiaire (PRFI) s'efforcent d'assurer un accès équitable à des services de santé et à des soins de qualité en vue d'atteindre la couverture sanitaire universelle et d'autres stratégies nationales. Ces efforts peuvent être plus fructueux si la prise de décision à tous les niveaux du secteur est bien informée par des données opportunes, fiables et complètes recueillies par le biais d'un système d'information sanitaire bien établi. Des décisions judicieuses reposent sur des données fiables ; il est donc essentiel de veiller à ce que les données soient de bonne qualité.
+
+Des données de mauvaise qualité ont un impact différent sur les différents niveaux du système de santé. Pour les gestionnaires de programmes, des données inexactes peuvent conduire à de mauvaises décisions qui nuisent aux opérations du programme et, en fin de compte, à la santé de la population. Au niveau de la planification, des données de mauvaise qualité peuvent fausser les preuves des progrès accomplis dans la réalisation des objectifs du secteur de la santé et entraver les processus de planification annuelle en fournissant des résultats trompeurs. En outre, lors de la détermination des investissements dans le secteur de la santé, des données de mauvaise qualité peuvent conduire à un mauvais ciblage des ressources. Bien que les données du SIGS soient essentielles à la solidité des systèmes de santé, des études menées en Afrique subsaharienne (ASS) ont fait état de problèmes liés à la qualité des données, notamment en ce qui concerne l'exhaustivité, l'actualité, l'exactitude et la cohérence [@abouzahr2005 ; @mavimbe2005 ; @sychareun2014 ; @mutale2013 ; @amoakoh2015 ; @gimbel2011 ; @teklegiorgis2016 ; @rowe2009potentiel ; @belay2013 ; @moukenet2021]. Ces préoccupations concernant la qualité des informations de routine ont compromis leur utilisation dans la prise de décision au sein du secteur de la santé [@mutale2013 ; @belay2013 ; @xiao2017 ; @ohagan2017 ; @chen2014 ; @glele2014 ; @bhattacharya2019 ; @nshimyiryo2020 ; @ouedraogo2019 ; @endriyas2019 ; @mwangu2005 ; @rowe2009caution]. Toutefois, ces dernières années, les pays ont considérablement amélioré la qualité des données du SIGS, qui a été renforcée par un système d'évaluation de la qualité des données, d'amélioration de la qualité des données et d'utilisation des données pour une prise de décision fondée sur des données probantes [@nisingizwe2014 ; @wagenaar2015 ; @mphatswe2012].
+
+## Définir la qualité des données
+
+La définition de la qualité des données est complexe, et bien qu'il n'existe pas de définition unique de la qualité des données, quatre dimensions sont le plus souvent utilisées pour la décrire : l'exhaustivité, l'actualité, la cohérence et l'exactitude [@who2017dqa].
+
+### Dimensions et évaluation de la qualité des données
+
+| Les dimensions de la qualité des données et leur évaluation ** **Domaine de la qualité des données** | **Que mesure-t-elle ?
+|------------------------|---------------------------|-------------------------|
+| Les données sont-elles toutes présentes ? Les informations disponibles sont-elles suffisantes pour prendre des décisions sur la santé de la population et pour cibler les ressources afin d'améliorer la couverture, l'efficacité et la qualité du système de santé ? | L'exhaustivité est évaluée en mesurant si toutes les unités censées faire un rapport le font effectivement (**complétude des rapports**)<br><br>- L'exhaustivité est évaluée en mesurant la complétude des données des indicateurs (pas de valeurs manquantes) ; elle diffère de la complétude globale des rapports en ce sens qu'elle examine la complétude d'éléments de données spécifiques et pas seulement la réception du formulaire de rapport mensuel (**complétude des indicateurs**) <br><br>- L'exhaustivité est évaluée en mesurant la complétude des données des indicateurs (pas de valeurs manquantes)
+| Les données sont-elles régulièrement soumises dans les délais ? | Les données sont-elles régulièrement transmises dans les délais ?
+| Les données sont-elles plausibles au regard de ce qui a été rapporté précédemment ? | Les tendCPNes sont évaluées afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**présence de valeurs aberrantes**)<br><br>- Évaluer les tendCPNes des indicateurs du programme afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**cohérence sur plusieurs années**) plusieurs années (**cohérence dans le temps**)<br><br>- Évaluer les indicateurs du programme qui ont une relation prévisible afin de déterminer si la relation attendue existe entre ces 2 indicateurs (**cohérence entre les indicateurs connexes**)<br><br>- Évaluer le niveau de concordCPNe entre deux sources de données mesurant le même indicateur de santé ; les deux sources de données habituellement comparées sont les données provenant du système d'information sur la santé et les données d'une enquête périodique auprès de la population (**comparaison externe avec d'autres sources de données**)<br><br>- Déterminer l'adéquation des données démographiques utilisées pour évaluer la performCPNe des indicateurs de santé en comparant deux sources différentes d'estimations démographiques connexes pour vérifier leur concordCPNe (**cohérence des données démographiques**)
+| Les données reflètent-elles fidèlement le niveau réel de prestation de services dans l'établissement de santé ? | Les données reflètent-elles fidèlement le niveau réel de prestation de services dans l'établissement de santé ? - Évaluer l'exactitude des indicateurs sélectionnés en examinant les documents sources dans les établissements de santé et en les comparant aux rapports mensuels et aux valeurs SIGS (**cohérence des données rapportées et des enregistrements originaux, facteur de vérification des données**) 
+
+## Approche FASTR de l'analyse des données de routine
+
+L'approche FASTR de l'analyse des données de routine comporte trois volets :
+
+1. **Identifier les problèmes de qualité des données**
+2. **Ajuster les problèmes de qualité des données** pour améliorer la précision de l'analyse
+3. **Analyser les données pour répondre aux questions politiques urgentes spécifiques au pays**, y compris l'identification des changements dans les volumes de services prioritaires et les tendCPNes dans la couverture des services par rapport aux priorités et aux objectifs du pays
+
+Cette approche permet d'identifier les problèmes de qualité des données les plus prioritaires et de procéder aux ajustements analytiques nécessaires afin d'améliorer continuellement les données tout en menant les analyses appropriées. L'évaluation de la qualité des données est effectuée par indicateur et peut être désagrégée au niveau sous-national étant donné que les données au niveau de l'établissement sont utilisées pour l'analyse. Ceci est important pour générer des rapports réguliers et pertinents sur la qualité des données, le volume des services et les estimations de couverture qui fournissent un instantané continu de l'utilisation des services du SRMNIA-N.
+
+---
+
+### Se concentrer sur un ensemble d'indicateurs de base
+
+L'approche FASTR de l'analyse des données de routine se concentre sur un ensemble d'indicateurs SRMNIA-N qui caractérisent le continuum des soins de santé reproductive, maternelle et infantile, les domaines de santé prioritaires dans les PRFM. Ces indicateurs capturent les événements clés de la prestation de services, qui ont des taux d'exhaustivité plus élevés et un volume plus important. En outre, ces indicateurs servent d'indicateurs de substitution pour d'autres services et interventions fournis lors du même contact. En outre, les consultations externes (OPD) sont utilisées comme indicateur de l'utilisation générale des services de santé. Des indicateurs supplémentaires, spécifiques à un pays ou à un programme, peuvent être ajoutés à l'analyse pour répondre aux priorités nationales.
+
+---
+
+### Se concentrer sur un ensemble de mesures de qualité des données de base
+
+L'approche FASTR de l'analyse de routine des données se concentre sur un ensemble de mesures de base de la qualité des données, ce qui permet d'identifier les problèmes de qualité des données les plus prioritaires pour lesquels des ajustements de la qualité des données peuvent être effectués. En plus des mesures de base de la qualité des données, l'approche FASTR génère un score global de qualité des données qui combine les mesures de base en une seule mesure récapitulative.
+
+## Communication des résultats et utilisation des données
+
+Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels.
+
+- **Rapport** : [COVID-19 : Impact sur les services de santé essentiels] (https://www.globalfinCPNingétablissement.org/sites/GFF_new/files/documents/GFF-IG13-2-COVID-19-Essential-Health-Services.pdf)
+- **Article** : [Utilisation des soins de santé et mortalité maternelle et infantile pendant la pandémie de COVID-19 dans 18 pays à revenu faible ou intermédiaire](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1004070)
+- **Article** : [Utilisation de la vaccination et inégalités infranationales pendant la pandémie COVID-19](https://www.mdpi.com/2076-393X/11/9/1415)
+- **Article** : [Perturbations dans l'utilisation des services de santé maternelle et infantile pendant la pandémie COVID-19 : analyse de huit pays d'Afrique subsaharienne](https://academic.oup.com/heapol/article/36/7/1140/6306443)
+
+D'autres résultats et rapports sont disponibles dans le [Référentiel de ressources du FASTR] (https://data.GFFportal.org/key-theme/FASTR/resource-repository/index.php/home).
+
+## Ce que couvre cette documentation
+
+Cette documentation méthodologique décrit l'approche complète de la FASTR pour l'analyse de routine des données SIGS, de la planification initiale à la communication des résultats.
+
+### Planification et préparation
+
+- [**Identifier les questions et les indicateurs**](01_identify_questions_indicateurs.md) - Définir les questions prioritaires et sélectionner les indicateurs de base pour la mise en œuvre du FASTR
+- [Extraction des données**](02_data_extraction.md) - Extraction et préparation des données SIGS du DHIS2 pour l'analyse
+- [La plateforme d'analyse des données du FASTR**](03_FASTR_analytics_plateforme.md) - Utilisation de la plateforme pour l'analyse et la visualisation automatisées
+
+### modules d'analyse (plate-forme FASTR)
+
+La plate-forme d'analyse FASTR comprend quatre modules automatisés :
+
+- [**Évaluation de la qualité des données**](04_data_quality_assessment.md) - module 1 de la plateforme. Évaluation de la qualité des données SIGS par le biais de l'exhaustivité, de la détection des valeurs aberrantes et de la mesure de la cohérence
+- [Ajustement de la qualité des données**](05_data_quality_adjustment.md) - module 2 de la plate-forme. Techniques pour améliorer la précision des données en ajustant les valeurs aberrantes et les rapports incomplets
+- [Analyse de l'utilisation des services**](06a_service_utilization.md) - module 3 de la plateforme. Analyse des schémas d'utilisation des services de santé pour détecter et quantifier les perturbations
+- [Estimation de la couverture**](06b_couverture_estimates.md) - module 4 de la plateforme. Méthodes d'estimation de la couverture des services et comparaison des tendCPNes avec les objectifs nationaux
+
+## Références
+
+\full_bibliographie
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+// //
+// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
+
+// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
+ . ` | | | | . ` |/
+// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
+// |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+// //
+// Modifiez les diapositives de l'atelier en dessous de cette ligne //
+// //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m0_1 -->
+## Introduction à FASTR
+
+<div class="columns">
+<div>
+
+Le Fonds de finCPNement mondial (GFF) soutient les efforts déployés par les pays pour renforcer l'utilisation de données actualisées pour la prise de décision, dans le but d'améliorer les performCPNes des soins de santé primaires (SSP) et les résultats du SRMNIA-N.
+
+**Les évaluations fréquentes et les outils du système de santé pour la résilience (FASTR)** sont le cadre analytique à cycle rapide du GFF pour le suivi des performCPNes du système de santé à l'aide de données à haute fréquence.
+
+FASTR rassemble quatre approches techniques complémentaires :
+
+1. L'analyse de routine des données du système d'information sanitaire (SIGS)
+2. Enquêtes téléphoniques dans les établissements de santé
+3. Enquêtes téléphoniques à haute fréquence auprès des ménages
+4. Analyses complémentaires axées sur les problèmes
+
+</div>
+<div>
+
+![FASTR Technical Approaches](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_2 -->
+## SRMNIA-N contrôle de l'utilisation des services
+
+<style scoped>
+.split { display : flex !important ; gap : 2rem ; align-items : center ; }
+.split .text { flex : 1 ; }
+.split .image { flex : 1 ; display : flex ; justify-content : center ; align-items : center ; }
+.split .image img { max-height : 420px !important ; max-width : 100% !important ; }
+</style>
+
+<div class="split">
+<div class="text">
+
+Les approches à cycle rapide utilisant les données SIGS de routine peuvent :
+
+- **Évaluer la qualité des données SIGS** aux niveaux national et sous-national
+- **Mesurer les changements mensuels** dans l'utilisation des services de santé
+- **Comparer les tendCPNes de la couverture** avec les objectifs nationaux
+
+</div>
+<div class="image">
+
+![Flux de données SIGS](../resources/diagrammes/SIGS_data_flow.svg)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_3 -->
+## Pourquoi des analyses à cycle rapide ?
+
+<div class="columns">
+<div>
+
+Les systèmes d'information sanitaire de routine constituent une source essentielle de données, mais ils sont souvent sous-utilisés en raison des préoccupations relatives à la qualité des données et des longs délais entre la collecte et l'analyse des données. Les enquêtes traditionnelles auprès des ménages et des établissements, bien qu'essentielles, sont gourmandes en ressources et peu fréquentes.
+
+Les analyses à cycle rapide de FASTR comblent cette lacune en fournissant :
+
+- Des informations opportunes alignées sur les cycles de décision des pays
+- Un apprentissage continu plutôt que des évaluations ponctuelles
+- Des boucles de rétroaction directes entre les données, l'analyse et l'action
+
+</div>
+<div>
+
+![Cadre analytique à cycle rapide FASTR](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_4 -->
+## Objet de l'analyse
+
+<div class="columns">
+<div>
+
+### Indicateurs de base
+
+Le FASTR donne la priorité à un ensemble d'indicateurs SRMNIA-N qui :
+
+- Représentent les principaux contacts de prestation de services dans le continuum des soins
+- Présentent un degré d'exhaustivité et un volume de rapports relativement élevés
+- Servent d'indicateurs de la performCPNe générale de la prestation de services
+
+<small>*L'ensemble des indicateurs peut être élargi pour refléter les priorités propres à chaque pays*</small>
+
+</div>
+<div>
+
+### Mesures de la qualité des données de base
+
+L'analyse est CPNrée dans un ensemble normalisé de mesures de la qualité des données :
+
+- Exhaustivité des rapports
+- Détection des valeurs extrêmes (aberrations)
+- Cohérence entre les indicateurs connexes
+
+<small>*Ces mesures sont résumées dans un score global de qualité des données*</small>
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+---
+
+**Dernière mise à jour** : 17-01-2026
+**Contact** : Équipe du projet FASTR
