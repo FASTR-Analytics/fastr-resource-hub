@@ -255,9 +255,9 @@ Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les
 
 - **Qualité des données ou changement réel?** Cette tendance pourrait-elle refléter des problèmes de déclaration plutôt que des changements dans la prestation des services ?
 - **Quels sont les facteurs externes en jeu ? ** Changements de politique, modèles saisonniers, chocs ou campagnes ?
-- **Cette tendance est-elle logique du point de vue programmatique ? Serait-elle prévisible compte tenu de ce que nous savons du système de santé ?
-- **Les tendances nationales peuvent masquer d'importantes variations régionales
-- **Quelles informations supplémentaires sont nécessaires ? Quel contexte pourrait renforcer ou remettre en question cette interprétation ?
+- **Cette tendance est-elle logique du point de vue programmatique ?** Serait-elle prévisible compte tenu de ce que nous savons du système de santé ?
+- **Les tendances nationales peuvent masquer d'importantes variations régionales**
+- **Quelles informations supplémentaires sont nécessaires ?** Quel contexte pourrait renforcer ou remettre en question cette interprétation ?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_1b -->
@@ -266,7 +266,7 @@ Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les
 <div style="display : flex ; gap : 1.5em ;">
 <div style="flex : 1 ;">
 
-**Masquage de l'agrégation
+**Masquage de l'agrégation**
 Les moyennes nationales peuvent masquer des variations régionales importantes. Il faut toujours examiner les tendances infranationales.
 
 **Complétude ≠ représentativité**
@@ -294,16 +294,16 @@ Les fluctuations à court terme peuvent être des variations normales. Se concen
 **Évaluation de la qualité des données**
 Les scores faibles de l'AQD peuvent refléter les pratiques de saisie des données plutôt que la qualité du service. Concentrez-vous sur l'identification de la dimension spécifique (exhaustivité, valeurs aberrantes, cohérence) à l'origine des problèmes.
 
-**Utilisation des services
+**Utilisation des services**
 Distinguer les tendances saisonnières des perturbations réelles. Les comparaisons d'une année sur l'autre permettent d'isoler les changements programmatiques des fluctuations normales.
 
 </div>
 <div style="flex : 1 ;">
 
-**Estimations de la couverture
+**Estimations de la couverture**
 Une couverture >100% indique qu'un rapprochement est nécessaire entre les données du SIGS et celles de l'enquête. Vérifier si la source du dénominateur correspond au contexte de la prestation de services.
 
-**Tous modules confondus
+**Tous modules confondus**
 Examiner les tendances à plusieurs niveaux géographiques - la désagrégation sous-nationale révèle souvent la réalité.
 
 </div>
@@ -364,9 +364,9 @@ Soyez créatif et n'oubliez pas d'adapter l'histoire à votre public.
 <!-- SLIDE:m7_2d -->
 ## Exemple : élaboration d'un récit de données
 
-**L'examen de la qualité des données de routine est essentiel pour permettre au ministère de la santé de prendre des mesures ciblées
+**L'examen de la qualité des données de routine est essentiel pour permettre au ministère de la santé de prendre des mesures ciblées**
 
-**En Somalie, la qualité des données varie d'un indicateur à l'autre : Les CPN4, les accouchements en institution et le vaccin BCG présentaient moins de valeurs aberrantes que le Penta 3 et l'OPD.
+**En Somalie, la qualité des données varie d'un indicateur à l'autre : Les CPN4, les accouchements en institution et le vaccin BCG présentaient moins de valeurs aberrantes que le Penta 3 et l'OPD.**
 
 **Contexte:** L'État de Hirshabelle présente une qualité de données plus faible avec plus de 3 % de données aberrantes pour les consultations externes. L'État du Puntland avait 2,5 % de données aberrantes pour les vaccins Penta 3.
 

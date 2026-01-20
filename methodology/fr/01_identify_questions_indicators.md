@@ -31,19 +31,19 @@ L'utilisation efficace des données de routine dépend de questions analytiques 
 
 **Les caractéristiques d'une bonne question prioritaire sont les suivantes:**
 
-- **Aborde une question prioritaire
+- **Aborde une question prioritaire**
   Elle se concentre sur des sujets qui intéressent clairement les décideurs politiques et les gestionnaires de programmes.
 
-- **Pertinente
+- **Pertinente**
   Suffisamment important pour justifier une analyse et éclairer la prise de décision.
 
-- **Ancré dans les réalités actuelles
+- **Ancré dans les réalités actuelles**
   En rapport avec les défis, les réformes ou les chocs en cours qui affectent la prestation de services.
 
-- **Significatif pour les parties prenantes
+- **Significatif pour les parties prenantes**
   Aborde des questions qui importent à des personnes ou des groupes spécifiques impliqués dans la planification ou la mise en œuvre.
 
-- **Réalisable
+- **Réalisable**
   Peut être abordé en utilisant les données, les méthodes et les délais disponibles.
 
 ### Évaluer la pertinence : questions clés à prendre en considération
@@ -51,11 +51,11 @@ L'utilisation efficace des données de routine dépend de questions analytiques 
 Pour déterminer si une question est prioritaire, les considérations suivantes sont utiles :
 
 - **Qui** est le public visé ?  
-- **Qu'ont-ils besoin de savoir ou veulent-ils savoir ?  
-- **Quand ont-ils besoin de ces informations ?  
-- **Quelle période ou quel événement** les intéresse ?  
-- **Pourquoi ces informations sont-elles nécessaires ?  
-- **Comment les résultats seront-ils utilisés ?
+- **Qu'ont-ils besoin de savoir ou veulent-ils savoir ?**
+- **Quand ont-ils besoin de ces informations ?**
+- **Quelle période ou quel événement** les intéresse ?
+- **Pourquoi ces informations sont-elles nécessaires ?**
+- **Comment les résultats seront-ils utilisés ?**
 
 ### Qu'entendons-nous par "susceptible de donner lieu à une réponse" ?
 
@@ -64,10 +64,10 @@ Une question est considérée comme susceptible de recevoir une réponse si les 
 **Disponibilité des données**
 - Les données requises existent et sont d'un type, d'une quantité et d'une qualité suffisants.
 
-**Faisabilité analytique
+**Faisabilité analytique**
 - Des méthodes appropriées et statistiquement valables sont disponibles et peuvent être appliquées.
 
-**Délai d'exécution
+**Délai d'exécution**
 - L'analyse peut être réalisée dans les délais impartis (par exemple, les cycles de déclaration trimestriels).
 
 ### Cadre PICO pour la formulation de questions auxquelles il est possible de répondre
@@ -98,10 +98,10 @@ La sélection des indicateurs est essentielle à la qualité et à l'utilité de
 - **Exhaustivité**
   L'exhaustivité des rapports est élevée dans tous les établissements et dans le temps.
 
-- **Fréquence
+- **Fréquence**
   L'indicateur est rapporté assez fréquemment (généralement tous les mois) pour permettre une analyse en cycle rapide.
 
-- **Type d'indicateur
+- **Type d'indicateur**
   L'indicateur représente le nombre de services fournis.
 
 ### Pourquoi se concentrer sur les indicateurs à volume élevé ?
@@ -111,7 +111,7 @@ L'un des principaux atouts de l'approche FASTR est sa capacité à s'adapter aux
 - **Réduction de la sensibilité aux valeurs aberrantes**
   Dans les indicateurs à faible volume, les points de données individuels peuvent affecter les tendances de manière disproportionnée.
 
-- **Des estimations plus stables
+- **Des estimations plus stables**
   Les données à fort volume réduisent la variabilité aléatoire et améliorent la fiabilité de la détection des tendances.
 
 - **Identification plus claire des véritables anomalies**
@@ -126,17 +126,17 @@ Les indicateurs à haut degré d'exhaustivité sont préférés parce qu'ils.. :
 - **Améliorent la fiabilité des données**
   Des données plus complètes réduisent les biais et donnent une image plus représentative de la prestation de services.
 
-- **Les données plus complètes réduisent les biais et donnent une image plus représentative de la prestation de services
+- **Les données plus complètes réduisent les biais et donnent une image plus représentative de la prestation de services**
   Un niveau élevé d'exhaustivité permet des comparaisons significatives dans le temps et dans l'espace.
 
-- **Réduire les erreurs d'interprétation
+- **Réduire les erreurs d'interprétation**
   Des données incomplètes peuvent faussement suggérer des changements dans l'utilisation des services lorsque ces changements sont dus à des lacunes dans les rapports plutôt qu'à des tendances réelles.
 
 Bien que des méthodes statistiques telles que l'imputation puissent être utilisées pour traiter les données incomplètes, ces méthodes requièrent des hypothèses sur les valeurs manquantes. De plus amples détails sont fournis dans [Ajustement de la qualité des données] (05_data_quality_adjustment.md).
 
 ### Pourquoi se concentrer sur les indicateurs de comptage ?
 
-**Limites des indicateurs de proportion
+**Limites des indicateurs de proportion**
 
 - Les proportions limitent la possibilité d'ajuster séparément les numérateurs et les dénominateurs pour tenir compte des problèmes de qualité des données.  
 - Les numérateurs et les dénominateurs peuvent être affectés par différentes sources d'erreur.  
@@ -218,11 +218,11 @@ L'utilisation efficace des données repose sur des questions bien définies. Les
 ## Ma question est-elle une priorité pertinente ? 5+ Ws à considérer
 
 - **Qui** est votre public ?
-- **Qu'est-ce qu'ils ont besoin de savoir et veulent savoir ?
+- **Qu'est-ce qu'ils ont besoin de savoir et veulent savoir ?**
 - **Quand** ont-ils besoin de le savoir ?
 - **Quand** se déroule l'événement/l'intervention/la période qui les intéresse ?
-- **Pourquoi ont-ils besoin de savoir ?
-- **Comment utiliseront-ils les résultats ?
+- **Pourquoi ont-ils besoin de savoir ?**
+- **Comment utiliseront-ils les résultats ?**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2c -->
@@ -234,7 +234,7 @@ L'utilisation efficace des données repose sur des questions bien définies. Les
 **Nous disposons des outils/méthodes d'analyse**
 - Statistiquement valables ; utilisables
 
-**Nous disposons du temps nécessaire
+**Nous disposons du temps nécessaire**
 - Nous pouvons répondre à la question sur une base trimestrielle
 <!-- /SLIDE -->
 

@@ -64,11 +64,11 @@ Le module fonctionne en deux parties séquentielles, chacune ayant un objectif d
 
 ### Points de décision clés
 
-**Niveau d'analyse géographique
+**Niveau d'analyse géographique**
 
 Le module prend en charge l'analyse des perturbations à plusieurs échelles géographiques. Les utilisateurs peuvent limiter l'analyse aux niveaux national et provincial, ce qui est plus rapide en termes de calcul et convient au suivi de routine, ou étendre l'analyse aux niveaux du district et de la circonscription pour obtenir des informations plus granulaires en vue d'une enquête et d'une réponse ciblées.
 
-**Sélection du niveau de la carte de contrôle
+**Sélection du niveau de la carte de contrôle**
 
 Le niveau auquel les cartes de contrôle sont calculées détermine où la modélisation statistique est effectuée. Il est configuré à l'aide de deux drapeaux et suit la convention FASTR selon laquelle les niveaux administratifs les plus élevés correspondent à des unités géographiques plus petites.
 
@@ -84,7 +84,7 @@ Le niveau auquel les cartes de contrôle sont calculées détermine où la modé
 Le niveau de carte de contrôle sélectionné détermine l'endroit où la modélisation statistique est effectuée, y compris l'estimation des tendances, le calcul des limites de contrôle et le signalement des perturbations. Quel que soit le niveau auquel les cartes de contrôle sont calculées, les résultats des perturbations sont agrégés et présentés à tous les niveaux géographiques disponibles (national et infranational).
 
 
-**Paramètres de sensibilité
+**Paramètres de sensibilité**
 
 Le module utilise des seuils statistiques configurables pour définir ce qui constitue une perturbation. Les paramètres les plus sensibles (seuils inférieurs) signalent les écarts les plus faibles par rapport aux modèles attendus et conviennent à des fins d'alerte précoce. Les paramètres plus conservateurs (seuils plus élevés) limitent la détection aux écarts plus importants et sont utiles pour se concentrer sur les perturbations majeures.
 
@@ -99,11 +99,11 @@ Le module accepte des versions alternatives des comptages de services produits p
 
 Le module commence par le décompte mensuel des services au niveau de l'établissement (par exemple, les livraisons déclarées par chaque établissement). Ces données sont agrégées au niveau géographique sélectionné. Les observations identifiées comme aberrantes dans le module 1 sont exclues afin d'éviter que les valeurs anormales n'influencent l'estimation des tendances et les limites de contrôle.
 
-**Estimation et détection des tendances
+**Estimation et détection des tendances**
 
 En utilisant des méthodes statistiques robustes, le module estime les modèles d'utilisation des services attendus pour chaque indicateur et unité géographique sur la base des données historiques, en tenant compte des tendances à long terme et de la saisonnalité. Les mois au cours desquels les volumes de services observés s'écartent de manière significative de ces modèles attendus sont signalés comme des perturbations potentielles.
 
-**Quantification de l'impact des perturbations
+**Quantification de l'impact des perturbations**
 
 Pour les périodes identifiées comme perturbées, des modèles de régression sont utilisés pour estimer les volumes de service contrefactuels - représentant l'utilisation attendue en l'absence de perturbation. Les différences entre les volumes prédits et observés sont calculées pour quantifier les insuffisances ou les excédents de service.
 
@@ -1214,11 +1214,11 @@ Notre approche des interruptions de service et des excédents utilise une régre
 
 ## Comment ça marche
 
-**Nous examinons les données des dernières années pour comprendre le modèle typique de chaque mois, en tenant compte des changements saisonniers réguliers.
+**Nous examinons les données des dernières années pour comprendre le modèle typique de chaque mois, en tenant compte des changements saisonniers réguliers.**
 
 **Repérer les changements inhabituels:** Nous comparons les volumes de services actuels aux prévisions. Si nous constatons que les volumes sont beaucoup plus élevés ou plus bas que prévu, nous le signalons comme un changement inhabituel.
 
-**Nous ajustons les données historiques en supprimant les changements importants et inattendus survenus précédemment, afin d'éviter que des événements ponctuels ne faussent notre compréhension de ce qui est "normal"
+**Nous ajustons les données historiques en supprimant les changements importants et inattendus survenus précédemment, afin d'éviter que des événements ponctuels ne faussent notre compréhension de ce qui est "normal"**
 
 **Détecter les perturbations dans le temps:** Nous examinons les tendances pour voir s'il y a des changements clairs dans l'utilisation des services de santé sur plusieurs mois.
 

@@ -57,7 +57,7 @@ Pour les observations signalées comme aberrantes, le module estime les valeurs 
 **Étape 4 : Remplir les données manquantes et incomplètes**
 Pour les mois identifiés comme manquants ou incomplets, les valeurs sont imputées en utilisant le même cadre de moyenne mobile que celui appliqué à l'ajustement des valeurs aberrantes. Cette approche permet d'éviter les chutes artificielles à zéro causées par des lacunes temporaires dans les rapports, tout en maintenant la cohérence avec les tendances spécifiques à l'établissement.
 
-**Étape 5 : Créer plusieurs scénarios
+**Étape 5 : Créer plusieurs scénarios**
 Pour favoriser la transparence et l'analyse de sensibilité, le module produit quatre ensembles de données parallèles :
 
 - Données non ajustées (valeurs déclarées originales)
@@ -92,7 +92,7 @@ Certains indicateurs sont explicitement exclus de l'ajustement :
 - Les indicateurs liés à la mortalité (y compris les décès d'enfants de moins de cinq ans, les décès maternels et les décès néonatals), car ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
 - Les indicateurs de faible volume qui ne dépassent jamais 100 événements déclarés au cours d'un mois donné, pour lesquels l'ajustement statistique n'est pas significatif
 
-**Sélection du scénario d'ajustement
+**Sélection du scénario d'ajustement**
 
 Le module génère quatre scénarios d'ajustement pour tenir compte des différents contextes analytiques et des conditions de qualité des données :
 
@@ -860,7 +860,7 @@ Pour la carte thermique de l'ajustement combiné (résultat 3) :
 
 ---
 
-**Dernière mise à jour 17-01-2026
+**Dernière mise à jour** : 17-01-2026
 **Contact** : Équipe du projet FASTR
 
 ---

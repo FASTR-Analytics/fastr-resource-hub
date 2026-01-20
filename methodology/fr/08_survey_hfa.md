@@ -52,7 +52,7 @@ Les enquêtes téléphoniques sont menées par des enquêteurs formés à l'aide
 - **Répondant** : Responsable de l'établissement ou agent de santé désigné
 - **Durée** : 15-30 minutes par établissement
 - **Fréquence** : Trimestrielle ou selon les besoins
-- **Contrôle de la qualité Rappels, contrôle par le superviseur, validation des données
+- **Contrôle de la qualité** Rappels, contrôle par le superviseur, validation des données
 
 ### Structure du questionnaire
 
@@ -88,7 +88,7 @@ Passez en revue chaque section avec les parties prenantes du pays pour identifie
 **Étape 2 : Identifier les priorités du pays**
 Déterminer les services et les indicateurs les plus importants pour les objectifs de santé du pays.
 
-**Étape 3 : Modifier les questions
+**Étape 3 : Modifier les questions**
 Adapter la formulation, ajouter des questions spécifiques au pays, supprimer les éléments non pertinents.
 
 **Étape 4 : Pré-test**

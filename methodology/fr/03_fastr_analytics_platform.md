@@ -53,7 +53,7 @@ Les administrateurs du système sont chargés de mettre en place la plateforme, 
 
 ### Niveau de l'organisation (instance)
 
-L'instance** est l'espace de travail principal de l'organisation au sein de la plateforme. Chaque instance contient tous les utilisateurs enregistrés, la structure administrative partagée (y compris les zones administratives et les établissements de santé), les définitions des indicateurs partagés, les sources de données (SIGS et HFA) et tous les projets créés au sein de l'organisation.
+**L'instance** est l'espace de travail principal de l'organisation au sein de la plateforme. Chaque instance contient tous les utilisateurs enregistrés, la structure administrative partagée (y compris les zones administratives et les établissements de santé), les définitions des indicateurs partagés, les sources de données (SIGS et HFA) et tous les projets créés au sein de l'organisation.
 
 ### Niveau du projet
 
@@ -220,7 +220,7 @@ La plateforme d'analyse FASTR est un outil en ligne pour l'évaluation de la qua
 - Interface conviviale pour l'exécution des analyses
 - Options flexibles de visualisation et d'exportation
 
-**Dans cette session, nous fournirons un aperçu conceptuel de la plateforme et de ses capacités
+**Dans cette session, nous fournirons un aperçu conceptuel de la plateforme et de ses capacités**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_1b -->
@@ -248,7 +248,7 @@ Une instance contient :
 - Les définitions des indicateurs et les sources de données
 - Tous les projets créés pour ce pays
 
-**Pensez à une instance comme à l'espace de travail dédié à votre pays
+**Pensez à une instance comme à l'espace de travail dédié à votre pays**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->

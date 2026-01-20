@@ -36,7 +36,7 @@ Le module applique une séquence structurée de contrôles de la qualité des do
 **Étape 1 : Préparation des données**
 Les rapports mensuels des établissements sont chargés et organisés pour l'analyse. Les dates sont normalisées et les unités géographiques ainsi que les indicateurs de santé disponibles dans l'ensemble de données sont identifiés.
 
-**Étape 2 : Détection des valeurs aberrantes
+**Étape 2 : Détection des valeurs aberrantes**
 Pour chaque établissement et chaque indicateur (par exemple, les doses de vaccin Pentavalent ou les visites de soins prénatals), le module identifie les valeurs anormalement élevées qui peuvent refléter des erreurs de déclaration ou de saisie des données. Deux approches complémentaires sont utilisées : la détection statistique des valeurs aberrantes, basée sur les écarts par rapport à l'historique des rapports d'un établissement, et les vérifications proportionnelles qui signalent les mois représentant une part invraisemblablement importante des volumes de services annuels.
 
 **Étape 3 : Évaluation de l'exhaustivité**
@@ -60,7 +60,7 @@ Le module génère un ensemble de résultats structurés, y compris les indicate
 
 ### Points de décision clés
 
-**Quand une valeur est-elle considérée comme aberrante ?
+**Quand une valeur est-elle considérée comme aberrante ?**
 
 Les valeurs aberrantes sont identifiées en évaluant les variations au sein de l'établissement dans les rapports mensuels pour chaque indicateur. Une valeur est considérée comme aberrante si elle remplit **l'un ou l'autre** des critères suivants :
 
@@ -69,21 +69,21 @@ Les valeurs aberrantes sont identifiées en évaluant les variations au sein de 
 
 L'écart absolu est calculé en utilisant uniquement les valeurs égales ou supérieures à la médiane, afin de concentrer la détection sur les valeurs inhabituellement élevées et d'éviter de signaler les observations portant sur de faibles volumes.
 
-**Pourquoi la cohérence est-elle évaluée au niveau du district plutôt qu'au niveau de l'établissement ?
+**Pourquoi la cohérence est-elle évaluée au niveau du district plutôt qu'au niveau de l'établissement ?**
 
 Les patients se font souvent soigner dans différents établissements au sein d'un même district, en fonction du service. Par exemple, une femme peut recevoir sa première visite de soins prénatals dans un centre de santé primaire, mais accoucher dans un hôpital de district. L'évaluation de la cohérence au niveau du district tient compte de ces mouvements de patients et fournit une représentation plus précise des schémas d'utilisation des services.
 
-**Que se passe-t-il lorsque les indicateurs requis sont manquants ?
+**Que se passe-t-il lorsque les indicateurs requis sont manquants ?**
 
 Le module s'adapte aux données disponibles. Si les paires d'indicateurs nécessaires à l'évaluation de la cohérence sont manquantes, les contrôles de cohérence ne sont pas appliqués et le score AQD est calculé en utilisant uniquement les dimensions d'aberration et d'exhaustivité. L'analyse se poursuit en utilisant les dimensions de qualité qui peuvent être évaluées.
 
-**Comment les installations inactives sont-elles gérées ?
+**Comment les installations inactives sont-elles gérées ?**
 
 Les établissements qui n'ont pas fait de déclaration pendant six mois consécutifs ou plus au début ou à la fin de leur période de déclaration sont classés comme inactifs pour ces mois plutôt qu'incomplets. Cela évite de pénaliser les installations qui n'ont pas encore commencé à faire leur déclaration ou qui ont définitivement cessé leurs activités.
 
 ### Traitement des données et résultats
 
-**Aperçu de la transformation
+**Aperçu de la transformation**
 
 Le module transforme les rapports d'installation bruts en ensembles de données marqués d'un label de qualité en suivant les étapes suivantes :
 
@@ -1407,7 +1407,7 @@ L'analyse FASTR suit un processus séquentiel où chaque étape s'appuie sur la 
 
 L'évaluation systématique de la qualité des données permet d'appliquer des ajustements ciblés, améliorant ainsi l'utilité des données du système d'information sur les ménages pour la prise de décision fondée sur des données probantes.
 
-**Objectif 2 : surveiller les tendances en matière de qualité des données
+**Objectif 2 : surveiller les tendances en matière de qualité des données**
 
 L'évaluation de la qualité des données permet un suivi continu pour :
 - D'éclairer la sélection des indicateurs sur la base des profils de qualité dans l'ensemble du système d'information sur les ménages

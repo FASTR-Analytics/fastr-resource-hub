@@ -59,32 +59,32 @@ Parmi les activités de renforcement des capacités, on peut citer le soutien à
 
 | Acronyme | Définition |
 |---------|------------|
-| Programme d'enquêtes démographiques et de santé (EDS) - ***Programmes et organisations*** - **EDS** - Programme d'EDS
-| Programme d'enquêtes démographiques et de santé (EDS)
-**FASTR** | Évaluations fréquentes et outils du système de santé pour la résilience
-| La Facilité mondiale de financement (FMF)
-**MICS** | Enquêtes en grappes à indicateurs multiples (Multiple indicateur Cluster Surveys)
-**MoH** | Ministère de la santé **MoH** | Ministère de la santé
-**MoH** | Ministère de la santé | **UN** | Nations Unies
-| Les systèmes de données et les sources*** sont les suivants
-**DHIS2** | DHIS2 (également orthographié DHIS 2, anciennement Logiciel d'information sanitaire de district)
-**SIGS** | Système d'information sur la gestion de la santé (Système d'information de gestion de la santé)
-**WPP** | World Population Prospects (Perspectives de la population mondiale)
-| Indicateurs de santé et services de santé*** - Indicateurs de santé et services de santé***
-| Soins prénatals - **CPN** - Soins de santé primaires - **BCG** - Soins de santé primaires - **BCG** - Soins de santé secondaires
-| Bacillus Calmette-Guérin (vaccin contre la tuberculose)
-| Vaccin antirougeoleux **MCV** | Vaccin antirougeoleux*****************************
-**OPD** | Service de consultations externes **Penta** | Pentagone
-| Vaccin Pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b)
-**SRMNIA-N **SRMNIA-N **SRMNIA-N
-**SRMNIA-N** | Santé et nutrition de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent
-**SBA** | Accoucheuse qualifiée (Skilled Birth Attendant)
-| Les termes techniques et statistiques ne sont pas utilisés dans le cadre de l'analyse des données
-| Évaluation de la qualité des données (AQD)
-**MAD** | Écart absolu de la médiane
-**MAD** * Écart absolu de la médiane * ***Géographique*** **MLMIC***** Écart absolu de la médiane
-| Pays à faible revenu et à revenu intermédiaire (PFRMI)
-| Afrique subsaharienne*** - Afrique du Sud*** - Afrique du Sud
+| | ***Programmes et organisations*** |
+| **EDS** | Programme d'enquêtes démographiques et de santé |
+| **FASTR** | Évaluations fréquentes et outils du système de santé pour la résilience |
+| **GFF** | Facilité mondiale de financement |
+| **MICS** | Enquêtes en grappes à indicateurs multiples |
+| **MoH** | Ministère de la santé |
+| **UN** | Nations Unies |
+| | ***Systèmes de données et sources*** |
+| **DHIS2** | DHIS2 (également orthographié DHIS 2, anciennement Logiciel d'information sanitaire de district) |
+| **SIGS** | Système d'information de gestion de la santé |
+| **WPP** | Perspectives de la population mondiale (World Population Prospects) |
+| | ***Indicateurs et services de santé*** |
+| **CPN** | Consultation prénatale (Antenatal Care) |
+| **BCG** | Bacillus Calmette-Guérin (vaccin contre la tuberculose) |
+| **MCV** | Vaccin contenant la rougeole |
+| **OPD** | Service de consultations externes |
+| **Penta** | Vaccin pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b) |
+| **SSP** | Soins de santé primaires |
+| **SRMNIA-N** | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition |
+| **SBA** | Accoucheuse qualifiée |
+| | ***Termes techniques et statistiques*** |
+| **EQD** | Évaluation de la qualité des données |
+| **MAD** | Écart absolu médian |
+| | ***Géographique*** |
+| **PRFI** | Pays à revenu faible et intermédiaire |
+| **ASS** | Afrique subsaharienne |
 
 ## Utilisation des données du système d'information sur la gestion de la santé de routine dans les PRFM
 

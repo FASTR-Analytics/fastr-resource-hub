@@ -21,7 +21,7 @@ L'approche FASTR donne la priorité à l'ajustement systématique de la qualité
 
 Ces procédures nécessitent un traitement des données et des opérations statistiques qui ne peuvent être mis en œuvre dans l'environnement analytique natif de DHIS2.
 
-**Complexité de l'analyse
+**Complexité de l'analyse**
 
 FASTR applique des méthodes analytiques - notamment des techniques de régression - qui vont au-delà de l'analyse descriptive des tendances disponible dans DHIS2. Alors que DHIS2 permet de visualiser les tendances brutes de la prestation de services, FASTR offre des capacités analytiques supplémentaires, notamment :
 
@@ -40,7 +40,7 @@ Les données doivent être extraites pour chaque **indicateur d'intérêt**, au 
 - Les données doivent être enregistrées au format **.csv**
 - Les données peuvent être stockées dans un seul fichier ou réparties dans plusieurs fichiers, qui peuvent être combinés lors du téléchargement vers la plateforme d'analyse
 
-**Pourquoi des données mensuelles au niveau de l'établissement ?
+**Pourquoi des données mensuelles au niveau de l'établissement ?**
 
 L'utilisation des données les plus granulaires disponibles permet une évaluation plus précise des modèles de déclaration et des problèmes de qualité des données. Les données mensuelles au niveau de l'établissement permettent un ajustement solide de l'exhaustivité de la déclaration, l'identification des anomalies spécifiques à l'établissement et l'estimation des tendances dans le temps tout en tenant compte des variations saisonnières. Ce niveau de granularité permet une mise en œuvre complète de la méthodologie FASTR.
 
@@ -55,7 +55,7 @@ L'ensemble de données extraites doit comprendre au minimum les variables suivan
 nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur
 | Nom de l'indicateur | Total / compte | Valeur agrégée de l'indicateur | Nom de l'indicateur
 
-**Termes de l'unité organisationnelle
+**Termes de l'unité organisationnelle**
 
 | Termes de l'unité organisationnelle ** Terme de l'unité organisationnelle ** Description
 |------|-------------|
@@ -78,7 +78,7 @@ nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur | Nom de l'indic
 | `periodcode` | Code de période normalisé (par exemple, 202401) | `periodcode` | Code de période normalisé (par exemple, 202401)
 | `perioddescription` | Description incluant les dates de début et de fin de la période |
 
-**Termes de l'élément de données
+**Termes de l'élément de données**
 
 | Termes de l'élément de données** - Termes de l'élément de données** - Description
 |------|-------------|
