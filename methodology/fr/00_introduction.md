@@ -51,9 +51,9 @@ Les quatre approches techniques du FASTR, étayées par le renforcement des capa
 
 Parmi les activités de renforcement des capacités, on peut citer le soutien à l'automatisation de l'extraction, du nettoyage et de l'analyse des données de routine, ainsi que le soutien à l'institutionnalisation des méthodes de collecte et d'analyse des données issues des enquêtes téléphoniques rapides. Le soutien à l'utilisation des données donne la priorité à l'intégration de l'analyse en cycle rapide dans les mécanismes existants d'examen des données et de retour d'information aux niveaux national et infranational, afin de renforcer l'utilisation systématique des données pour la prise de décision.
 
-(ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)] (ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)
+![Analyse en cycle rapide FASTR](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
-*Figure 3. Analyse en cycle rapide dans le cadre de l'initiative FASTR (Frequent Assessments and System Tools for Resilience)* (ressources/diagrammes/Technical-Rapid-cycle-analytics--V3.svg)
+*Figure 3. Analyse en cycle rapide dans le cadre de l'initiative FASTR (Frequent Assessments and System Tools for Resilience)*
 
 ## Acronymes et abréviations
 
@@ -98,12 +98,12 @@ La définition de la qualité des données est complexe, et bien qu'il n'existe 
 
 ### Dimensions et évaluation de la qualité des données
 
-| Les dimensions de la qualité des données et leur évaluation ** **Domaine de la qualité des données** | **Que mesure-t-elle ?
+| **Domaine de la qualité des données** | **Que mesure-t-elle ?** | **Comment est-elle évaluée ?** |
 |------------------------|---------------------------|-------------------------|
-| Les données sont-elles toutes présentes ? Les informations disponibles sont-elles suffisantes pour prendre des décisions sur la santé de la population et pour cibler les ressources afin d'améliorer la couverture, l'efficacité et la qualité du système de santé ? | L'exhaustivité est évaluée en mesurant si toutes les unités censées faire un rapport le font effectivement (**complétude des rapports**)<br><br>- L'exhaustivité est évaluée en mesurant la complétude des données des indicateurs (pas de valeurs manquantes) ; elle diffère de la complétude globale des rapports en ce sens qu'elle examine la complétude d'éléments de données spécifiques et pas seulement la réception du formulaire de rapport mensuel (**complétude des indicateurs**) <br><br>- L'exhaustivité est évaluée en mesurant la complétude des données des indicateurs (pas de valeurs manquantes)
-| Les données sont-elles régulièrement soumises dans les délais ? | Les données sont-elles régulièrement transmises dans les délais ?
-| Les données sont-elles plausibles au regard de ce qui a été rapporté précédemment ? | Les tendances sont évaluées afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**présence de valeurs aberrantes**)<br><br>- Évaluer les tendances des indicateurs du programme afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**cohérence sur plusieurs années**) plusieurs années (**cohérence dans le temps**)<br><br>- Évaluer les indicateurs du programme qui ont une relation prévisible afin de déterminer si la relation attendue existe entre ces 2 indicateurs (**cohérence entre les indicateurs connexes**)<br><br>- Évaluer le niveau de concordance entre deux sources de données mesurant le même indicateur de santé ; les deux sources de données habituellement comparées sont les données provenant du système d'information sur la santé et les données d'une enquête périodique auprès de la population (**comparaison externe avec d'autres sources de données**)<br><br>- Déterminer l'adéquation des données démographiques utilisées pour évaluer la performance des indicateurs de santé en comparant deux sources différentes d'estimations démographiques connexes pour vérifier leur concordance (**cohérence des données démographiques**)
-| Les données reflètent-elles fidèlement le niveau réel de prestation de services dans l'établissement de santé ? | Les données reflètent-elles fidèlement le niveau réel de prestation de services dans l'établissement de santé ? - Évaluer l'exactitude des indicateurs sélectionnés en examinant les documents sources dans les établissements de santé et en les comparant aux rapports mensuels et aux valeurs SIGS (**cohérence des données rapportées et des enregistrements originaux, facteur de vérification des données**) 
+| **Exhaustivité** | Les données sont-elles toutes présentes ? Les informations disponibles sont-elles suffisantes pour prendre des décisions sur la santé de la population et pour cibler les ressources afin d'améliorer la couverture, l'efficacité et la qualité du système de santé ? | • Évaluée en mesurant si toutes les unités censées faire un rapport le font effectivement (**complétude des rapports**)<br><br>• Évaluée en mesurant la complétude des données des indicateurs (pas de valeurs manquantes) ; elle diffère de la complétude globale des rapports en ce sens qu'elle examine la complétude d'éléments de données spécifiques et pas seulement la réception du formulaire de rapport mensuel (**complétude des indicateurs**) |
+| **Ponctualité** | Les données sont-elles régulièrement soumises dans les délais ? | • Évaluée en mesurant si les unités qui ont soumis des rapports l'ont fait avant une date limite définie (**ponctualité**) |
+| **Cohérence** | Les données sont-elles plausibles au regard de ce qui a été rapporté précédemment ? | • Les tendances sont évaluées afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**présence de valeurs aberrantes**)<br><br>• Évaluer les tendances des indicateurs du programme afin de déterminer si les valeurs rapportées sont extrêmes par rapport à d'autres valeurs rapportées au cours de l'année ou sur plusieurs années (**cohérence dans le temps**)<br><br>• Évaluer les indicateurs du programme qui ont une relation prévisible afin de déterminer si la relation attendue existe entre ces 2 indicateurs (**cohérence entre les indicateurs connexes**)<br><br>• Évaluer le niveau de concordance entre deux sources de données mesurant le même indicateur de santé ; les deux sources de données habituellement comparées sont les données provenant du système d'information sur la santé et les données d'une enquête périodique auprès de la population (**comparaison externe avec d'autres sources de données**)<br><br>• Déterminer l'adéquation des données démographiques utilisées pour évaluer la performance des indicateurs de santé en comparant deux sources différentes d'estimations démographiques connexes pour vérifier leur concordance (**cohérence des données démographiques**) |
+| **Exactitude** | Les données reflètent-elles fidèlement le niveau réel de prestation de services dans l'établissement de santé ? | • Évaluer l'exactitude des indicateurs sélectionnés en examinant les documents sources dans les établissements de santé et en les comparant aux rapports mensuels et aux valeurs SIGS (**cohérence des données rapportées et des enregistrements originaux, facteur de vérification des données**) | 
 
 ## Approche FASTR de l'analyse des données de routine
 
@@ -226,7 +226,7 @@ Les approches à cycle rapide utilisant les données SIGS de routine peuvent :
 </div>
 <div class="image">
 
-![Flux de données SIGS](../resources/diagrammes/SIGS_data_flow.svg)
+![Flux de données SIGS](../resources/diagrams/HMIS_data_flow.svg)
 
 </div>
 </div>

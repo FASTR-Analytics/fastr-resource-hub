@@ -1447,7 +1447,7 @@ Complétude de l'indicateur ≠ Complétude du rapport. Cette mesure examine des
 </div>
 <div style="flex : 2 ;">
 
-![Illustration de la complétude](../resources/diagrammes/complétude_illustration.svg)
+![Illustration de la complétude](../resources/diagrams/completeness_illustration.svg)
 
 </div>
 </div>
@@ -1553,7 +1553,7 @@ Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce
 </div>
 <div>
 
-![Illustration de cohérence h:280](../resources/diagrammes/consistency_illustration.svg)
+![Illustration de cohérence h:280](../resources/diagrams/consistency_illustration.svg)
 
 </div>
 </div>
