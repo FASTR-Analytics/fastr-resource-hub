@@ -126,7 +126,7 @@ Les resultats sont sauvegardes avec des structures de colonnes standardisées po
 
 ### Diagramme de flux de travail
 
-<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 4 Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod4_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 4 Interactive Workflow"></iframe>
 
 ### Points de décision clés
 

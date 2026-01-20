@@ -131,12 +131,12 @@ L'approche FASTR de l'analyse de routine des données se concentre sur un ensemb
 
 Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels.
 
-- **Rapport** : [COVID-19 : Impact sur les services de santé essentiels] (https://www.globalfinancingfacility.org/sites/GFF_new/files/documents/GFF-IG13-2-COVID-19-Essential-Health-Services.pdf)
+- **Rapport** : [COVID-19 : Impact sur les services de santé essentiels](https://www.globalfinancingfacility.org/sites/GFF_new/files/documents/GFF-IG13-2-COVID-19-Essential-Health-Services.pdf)
 - **Article** : [Utilisation des soins de santé et mortalité maternelle et infantile pendant la pandémie de COVID-19 dans 18 pays à revenu faible ou intermédiaire](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1004070)
 - **Article** : [Utilisation de la vaccination et inégalités infranationales pendant la pandémie COVID-19](https://www.mdpi.com/2076-393X/11/9/1415)
 - **Article** : [Perturbations dans l'utilisation des services de santé maternelle et infantile pendant la pandémie COVID-19 : analyse de huit pays d'Afrique subsaharienne](https://academic.oup.com/heapol/article/36/7/1140/6306443)
 
-D'autres résultats et rapports sont disponibles dans le [Référentiel de ressources du FASTR] (https://data.GFFportal.org/key-theme/FASTR/resource-repository/index.php/home).
+D'autres résultats et rapports sont disponibles dans le [Référentiel de ressources du FASTR](https://data.GFFportal.org/key-theme/FASTR/resource-repository/index.php/home).
 
 ## Ce que couvre cette documentation
 

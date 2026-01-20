@@ -60,7 +60,7 @@ Le module fonctionne en deux parties séquentielles, chacune ayant un objectif d
 
 ### Diagramme de flux de travail
 
-<iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 3 Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod3_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 3 Interactive Workflow"></iframe>
 
 ### Points de décision clés
 

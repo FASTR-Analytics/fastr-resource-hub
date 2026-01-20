@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASTR Calcul des dénominateurs et estimation de la couverture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #09544F 0%, #0C716B 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .workflow {
+            padding: 40px;
+        }
+
+        .part {
+            margin-bottom: 50px;
+        }
+
+        .part-header {
+            background: #f0f4f8;
+            border-left: 5px solid #0C716B;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .part-header h2 {
+            color: #09544F;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .part-header p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .stage-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .flow-row {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-box {
+            flex: 1;
+            min-width: 200px;
+            background: #CAE6E9;
+            border: 2px solid #0C716B;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #09544F;
+            transition: all 0.3s ease;
+        }
+
+        .input-box:hover {
+            background: #B8DDE0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 90, 140, 0.15);
+        }
+
+        .process-box {
+            flex: 1;
+            min-width: 250px;
+            background: #fafbfc;
+            border: 2px solid #1F9A9C;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: left;
+            color: #333;
+        }
+
+        .process-box h4 {
+            color: #09544F;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .process-box ul {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .process-box li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .process-box li:before {
+            content: "•";
+            color: #0C716B;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .comparison-box {
+            background: #FDF6E3;
+            border: 2px solid #D8A822;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .comparison-box h4 {
+            color: #D8A822;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        .comparison-item {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #D8A822;
+            padding-left: 12px;
+        }
+
+        .arrow {
+            text-align: center;
+            color: #0C716B;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: 300;
+        }
+
+        .decision-box {
+            background: #E6F7E6;
+            border: 2px solid #1F9A9C;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .decision-box h4 {
+            color: #09544F;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .output-box {
+            background: #F5EBF4;
+            border: 2px solid #7A1F6E;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .output-box h4 {
+            color: #7A1F6E;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .output-box ul {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .output-box li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .output-box li:before {
+            content: "✓";
+            color: #7A1F6E;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #0C716B;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stage-title {
+            color: #09544F;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .flow-row {
+                flex-direction: column;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .workflow {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FASTR Calcul des dénominateurs et estimation de la couverture</h1>
+            <p>Analyses en cycle rapide pour le suivi de la couverture des services basé sur HMIS</p>
+        </header>
+
+        <div class="workflow">
+            <!-- PART 1 -->
+            <div class="part">
+                <div class="part-header">
+                    <h2>PARTIE 1 : Calcul et sélection des dénominateurs</h2>
+                    <p>Harmoniser plusieurs sources de données pour calculer et comparer les options de dénominateurs</p>
+                </div>
+
+                <div class="stage-container">
+                    <!-- Step 1: Data Sources -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">1</span>
+                            Rassembler les sources de données
+                        </div>
+                        <div class="flow-row">
+                            <div class="input-box">Données HMIS<br><small>(Module 2)</small></div>
+                            <div class="input-box">Données d'enquête<br><small>(MICS/DHS)</small></div>
+                            <div class="input-box">Données de population<br><small>(UN WPP)</small></div>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 2: Process & Harmonize -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">2</span>
+                            Traiter et harmoniser les données
+                        </div>
+                        <div class="process-box">
+                            <h4>Étapes de préparation des données</h4>
+                            <ul>
+                                <li>Agréger les données mensuelles au niveau annuel</li>
+                                <li>Prioriser les données DHS sur MICS lorsque les deux sont disponibles</li>
+                                <li>Reporter les données d'enquête pour combler les lacunes</li>
+                                <li>Filtrer les estimations de population au niveau national</li>
+                                <li>Aligner tous les jeux de données par période</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 3: Calculate Multiple Options -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">3</span>
+                            Calculer plusieurs options de dénominateurs
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Options de dénominateurs par source</h4>
+                            <div class="comparison-row">
+                                <div class="comparison-item">
+                                    <strong>Basés sur HMIS :</strong><br>
+                                    • À partir des contacts ANC1<br>
+                                    • À partir des accouchements<br>
+                                    • À partir des procédures SBA<br>
+                                    • À partir des vaccinations BCG<br>
+                                    • À partir des doses Penta1
+                                </div>
+                                <div class="comparison-item">
+                                    <strong>Basés sur la population :</strong><br>
+                                    • À partir des estimations du taux de natalité<br>
+                                    • À partir de la population totale<br>
+                                    • À partir de la population des moins d'un an<br>
+                                    • Avec ajustements démographiques
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 4: Calculate Coverage -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">4</span>
+                            Calculer la couverture pour chaque dénominateur
+                        </div>
+                        <div class="process-box">
+                            <h4>Formule de calcul de la couverture</h4>
+                            <ul>
+                                <li><strong>Couverture = (Volume de services / Dénominateur) × 100</strong></li>
+                                <li>Appliquer les ajustements démographiques à chaque option de dénominateur</li>
+                                <li>Générer des estimations de couverture pour tous les indicateurs de services</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 5: Compare to Survey -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">5</span>
+                            Comparer chaque couverture à la référence de l'enquête
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Calcul de l'erreur</h4>
+                            <div class="comparison-row">
+                                <div class="comparison-item">
+                                    <strong>Métrique d'erreur :</strong><br>
+                                    Erreur = (Couverture HMIS - Couverture enquête)²
+                                </div>
+                                <div class="comparison-item">
+                                    <strong>Évaluation :</strong><br>
+                                    Identifier le dénominateur avec l'erreur minimale
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 6: Selection -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">6</span>
+                            Sélectionner le meilleur dénominateur
+                        </div>
+                        <div class="decision-box">
+                            <h4>Critères de sélection</h4>
+                            <ul style="list-style: none; font-size: 13px;">
+                                <li style="margin-bottom: 8px;">✓ <strong>Principal :</strong> Erreur minimale par rapport à l'enquête</li>
+                                <li style="margin-bottom: 8px;">✓ <strong>Secondaire :</strong> Préférer HMIS à la population</li>
+                                <li style="margin-bottom: 8px;">✓ <strong>Tertiaire :</strong> Considérations de qualité et d'exhaustivité des données</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 7: Outputs Part 1 -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">7</span>
+                            Enregistrer les sorties de la Partie 1
+                        </div>
+                        <div class="output-box">
+                            <h4>Fichiers de sortie</h4>
+                            <ul>
+                                <li><strong>M4_denominators :</strong> Toutes les options de dénominateurs calculées et estimations de couverture</li>
+                                <li><strong>M4_combined_results :</strong> Valeurs de couverture + sélection du meilleur dénominateur par indicateur</li>
+                                <li><strong>M4_selected_denominator_per_indicator :</strong> Récapitulatif du dénominateur sélectionné comme « meilleur » pour chaque indicateur</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 2 -->
+            <div class="part">
+                <div class="part-header">
+                    <h2>PARTIE 2 : Sélection des dénominateurs et projection de la couverture</h2>
+                    <p>Sélectionner les dénominateurs et projeter les estimations d'enquête en utilisant les tendances HMIS</p>
+                </div>
+
+                <div class="stage-container">
+                    <!-- Step 1: Configure Selection -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">1</span>
+                            L'utilisateur configure la sélection des dénominateurs
+                        </div>
+                        <div class="process-box">
+                            <h4>Options de configuration</h4>
+                            <ul>
+                                <li>Utiliser les « meilleurs » dénominateurs (sélectionnés automatiquement dans la Partie 1)</li>
+                                <li>Remplacer par des spécifications de dénominateur personnalisées par indicateur</li>
+                                <li>Spécifier différents dénominateurs pour différents domaines de services de santé</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 2: Filter Results -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">2</span>
+                            Filtrer les résultats de la Partie 1 aux dénominateurs sélectionnés
+                        </div>
+                        <div class="process-box">
+                            <h4>Sous-ensemble des données</h4>
+                            <ul>
+                                <li>Extraire l'option de dénominateur sélectionnée pour chaque indicateur</li>
+                                <li>Conserver les calculs de couverture associés</li>
+                                <li>Préparer les données pour l'analyse de projection</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 3: Calculate Deltas -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">3</span>
+                            Calculer les variations de couverture d'une année à l'autre
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Calcul des variations</h4>
+                            <div class="comparison-row">
+                                <div class="comparison-item">
+                                    <strong>Formule :</strong><br>
+                                    Δ Couverture = Couverture(t) - Couverture(t-1)
+                                </div>
+                                <div class="comparison-item">
+                                    <strong>Objectif :</strong><br>
+                                    Identifier les tendances de prestation de services dans le temps
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 4: Baseline -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">4</span>
+                            Identifier l'enquête la plus récente comme référence
+                        </div>
+                        <div class="process-box">
+                            <h4>Sélection de la référence</h4>
+                            <ul>
+                                <li>Localiser l'enquête DHS ou MICS la plus récente</li>
+                                <li>Extraire les estimations de couverture de l'enquête pour tous les indicateurs</li>
+                                <li>Utiliser comme point de référence pour la projection</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 5: Project Forward -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">5</span>
+                            Projeter les estimations d'enquête vers l'avant
+                        </div>
+                        <div class="decision-box">
+                            <h4>Formule de projection</h4>
+                            <ul style="list-style: none; font-size: 13px;">
+                                <li style="margin-bottom: 10px;">
+                                    <strong>Couverture projetée = Dernière enquête + (HMIS_maintenant - HMIS_alors)</strong>
+                                </li>
+                                <li style="margin-bottom: 8px;">
+                                    Utilise la tendance HMIS pour mettre à jour la référence de l'enquête vers l'avant
+                                </li>
+                                <li>
+                                    Comble l'écart entre l'année de l'enquête et la période actuelle
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 6: Combine Results -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">6</span>
+                            Combiner les résultats finaux
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Intégration des résultats</h4>
+                            <div class="comparison-row">
+                                <div class="comparison-item">
+                                    • Estimations de couverture basées sur HMIS
+                                </div>
+                                <div class="comparison-item">
+                                    • Valeurs originales de l'enquête
+                                </div>
+                            </div>
+                            <div class="comparison-row">
+                                <div class="comparison-item">
+                                    • Couverture d'enquête projetée
+                                </div>
+                                <div class="comparison-item">
+                                    • Par niveau administratif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <!-- Step 7: Final Output -->
+                    <div>
+                        <div class="stage-title">
+                            <span class="step-number">7</span>
+                            Enregistrer les sorties finales
+                        </div>
+                        <div class="output-box">
+                            <h4>Livrable final</h4>
+                            <ul>
+                                <li><strong>M5_coverage_estimation_national.csv :</strong> Estimations de couverture au niveau national incluant les valeurs basées sur HMIS, les données d'enquête et les projections vers l'avant</li>
+                                <li><strong>M5_coverage_estimation_admin2.csv :</strong> Estimations de couverture au niveau zone administrative 2</li>
+                                <li><strong>M5_coverage_estimation_admin3.csv :</strong> Estimations de couverture au niveau zone administrative 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

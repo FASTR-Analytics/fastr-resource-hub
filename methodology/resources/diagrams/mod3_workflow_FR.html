@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux de travail FASTR pour la détection et l'analyse des perturbations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #09544F 0%, #0C716B 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .workflow {
+            padding: 40px;
+        }
+
+        .stage-section {
+            margin-bottom: 40px;
+        }
+
+        .stage-header {
+            background: linear-gradient(135deg, #CAE6E9 0%, #CAE6E9 100%);
+            border-left: 5px solid #09544F;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .stage-header h2 {
+            color: #09544F;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .stage-header p {
+            color: #21568C;
+            font-size: 13px;
+        }
+
+        .flow-box {
+            background: #fafbfc;
+            border: 2px solid #1F9A9C;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .flow-box h4 {
+            color: #09544F;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .flow-box p {
+            color: #555;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .arrow-connector {
+            text-align: center;
+            color: #0C716B;
+            font-size: 24px;
+            margin: 15px 0;
+            font-weight: 300;
+        }
+
+        .process-box {
+            background: white;
+            border: 2px solid #7A1F6E;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .process-box h4 {
+            color: #7A1F6E;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .process-list {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .process-list li {
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .process-list li:before {
+            content: "•";
+            color: #7A1F6E;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .regression-box {
+            background: #F5EBF4;
+            border: 2px solid #7A1F6E;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+
+        .regression-box h5 {
+            color: #7A1F6E;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .regression-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .regression-item {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #7A1F6E;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .regression-estimates {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .calculation-box {
+            background: white;
+            border: 2px solid #0C716B;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .calculation-box h5 {
+            color: #09544F;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .calculation-list {
+            list-style: none;
+            font-size: 13px;
+        }
+
+        .calculation-list li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .calculation-list li:before {
+            content: "•";
+            color: #0C716B;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .output-section {
+            background: linear-gradient(135deg, #F5EBF4 0%, #E8D4E6 100%);
+            border: 3px solid #7A1F6E;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 15px;
+        }
+
+        .output-section h4 {
+            color: #7A1F6E;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .output-list {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .output-list li {
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 4px solid #7A1F6E;
+            color: #555;
+        }
+
+        .output-list li:before {
+            content: "✓";
+            color: #7A1F6E;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .output-filename {
+            font-family: 'Courier New', monospace;
+            color: #7A1F6E;
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ccc, transparent);
+            margin: 35px 0;
+        }
+
+        @media (max-width: 768px) {
+            .workflow {
+                padding: 20px;
+            }
+
+            .regression-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Détection et analyse des perturbations</h1>
+            <p>Identification du moment où les perturbations de services surviennent et quantification de leur impact</p>
+        </header>
+
+        <div class="workflow">
+            <!-- PART 1 -->
+            <div class="stage-section">
+                <div class="stage-header">
+                    <h2>PARTIE 1 : Analyse par carte de contrôle</h2>
+                    <p>Identifie QUAND les perturbations surviennent pour les indicateurs de services</p>
+                </div>
+
+                <div class="flow-box">
+                    <h4>Pipeline de préparation des données</h4>
+                    <ul class="process-list">
+                        <li><strong>Charger les données :</strong> M2_adjusted_data.csv (comptages ajustés pour la qualité) + M1_output_outliers.csv (signalements de valeurs aberrantes) + HMIS brut (uniquement pour extraire la correspondance admin_area_1)</li>
+                        <li><strong>Joindre et filtrer :</strong> Joindre les signalements de valeurs aberrantes aux données ajustées, puis supprimer les lignes signalées comme aberrantes</li>
+                        <li><strong>Agréger :</strong> Sommer les comptages des établissements au niveau géographique (ex. : district) par indicateur et mois</li>
+                        <li><strong>Étendre les séries temporelles :</strong> Créer des lignes explicites pour les mois manquants dans chaque panel indicateur-géographie</li>
+                        <li><strong>Gérer les faibles volumes :</strong> Mettre à NA les mois avec un comptage &lt; 50% de la moyenne du panel</li>
+                        <li><strong>Interpoler :</strong> Remplir les valeurs NA par interpolation linéaire pour l'ajustement du modèle</li>
+                    </ul>
+                </div>
+
+                <div class="arrow-connector">↓</div>
+
+                <div class="process-box">
+                    <h4>Analyse par carte de contrôle pour chaque indicateur × zone géographique</h4>
+                    <ul class="process-list">
+                        <li>Ajuster un modèle robuste : comptage ~ saisonnalité + tendance temporelle</li>
+                        <li>Lisser les prédictions pour réduire le bruit et la variabilité</li>
+                        <li>Calculer l'écart des valeurs réelles par rapport aux prédictions attendues</li>
+                        <li>Appliquer les règles de détection : chutes brutales, baisses soutenues, rapports manquants</li>
+                        <li>Signaler les mois perturbés pour chaque combinaison indicateur-zone</li>
+                    </ul>
+                </div>
+
+                <div class="arrow-connector">↓</div>
+
+                <div class="output-section">
+                    <h4>Sortie de la Partie 1</h4>
+                    <ul class="output-list">
+                        <li><span class="output-filename">M3_chartout.csv</span> — Signalements de perturbations par mois, zone géographique et indicateur</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- PART 2 -->
+            <div class="stage-section">
+                <div class="stage-header">
+                    <h2>PARTIE 2 : Analyse des perturbations</h2>
+                    <p>Quantifie l'AMPLEUR de l'impact pendant les périodes de perturbation</p>
+                </div>
+
+                <div class="flow-box">
+                    <h4>Intégration des données</h4>
+                    <p>Joindre les signalements de perturbations de la Partie 1 aux données au niveau établissement pour une analyse d'impact détaillée</p>
+                </div>
+
+                <div class="arrow-connector">↓</div>
+
+                <div class="regression-box">
+                    <h5>Régressions de panel à plusieurs niveaux géographiques</h5>
+                    <div class="regression-grid">
+                        <div class="regression-item">
+                            <strong>Zone administrative niveau 1 :</strong> Impact national
+                        </div>
+                        <div class="regression-item">
+                            <strong>Zone administrative niveau 2 :</strong> Impacts régionaux
+                        </div>
+                        <div class="regression-item">
+                            <strong>Zone administrative niveau 3 :</strong> Impacts locaux
+                        </div>
+                        <div class="regression-item">
+                            <strong>Zone administrative niveau 4 :</strong> Analyse géographique détaillée
+                        </div>
+                    </div>
+                    <div class="regression-estimates">
+                        <strong>Chaque modèle à chaque niveau administratif estime :</strong>
+                        <ul style="list-style: none; margin-top: 10px;">
+                            <li style="margin-bottom: 6px;">• Volume de services attendu (en tenant compte des tendances existantes)</li>
+                            <li style="margin-bottom: 6px;">• Effet des périodes de perturbation sur la prestation de services</li>
+                            <li>• Significativité statistique des impacts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow-connector">↓</div>
+
+                <div class="calculation-box">
+                    <h5>Calculer les déficits et les excédents</h5>
+                    <ul class="calculation-list">
+                        <li>Différence absolue : Nombre de services perdus/gagnés</li>
+                        <li>Différence en pourcentage : Variation en pourcentage par rapport au volume attendu</li>
+                        <li>Intervalles de confiance pour les estimations d'impact</li>
+                    </ul>
+                </div>
+
+                <div class="arrow-connector">↓</div>
+
+                <div class="output-section">
+                    <h4>Sorties de la Partie 2</h4>
+                    <ul class="output-list">
+                        <li><span class="output-filename">M3_disruptions_analysis_admin_area_1.csv</span> — Estimations d'impact au niveau zone administrative 1 (national)</li>
+                        <li><span class="output-filename">M3_disruptions_analysis_admin_area_2.csv</span> — Estimations d'impact au niveau zone administrative 2</li>
+                        <li><span class="output-filename">M3_disruptions_analysis_admin_area_3.csv</span> — Estimations d'impact au niveau zone administrative 3</li>
+                        <li><span class="output-filename">M3_disruptions_analysis_admin_area_4.csv</span> — Estimations d'impact au niveau zone administrative 4</li>
+                        <li><span class="output-filename">M3_all_indicators_shortfalls_admin_area_1.csv</span> — Statistiques récapitulatives (zone administrative niveau 1)</li>
+                        <li><span class="output-filename">M3_all_indicators_shortfalls_admin_area_2.csv</span> — Statistiques récapitulatives (zone administrative niveau 2)</li>
+                        <li><span class="output-filename">M3_all_indicators_shortfalls_admin_area_3.csv</span> — Statistiques récapitulatives (zone administrative niveau 3)</li>
+                        <li><span class="output-filename">M3_all_indicators_shortfalls_admin_area_4.csv</span> — Statistiques récapitulatives (zone administrative niveau 4)</li>
+                        <li><span class="output-filename">M3_service_utilization.csv</span> — Données formatées pour la visualisation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
