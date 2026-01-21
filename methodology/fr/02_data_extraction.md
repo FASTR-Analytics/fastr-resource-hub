@@ -189,12 +189,12 @@ Nous voulons utiliser les données les plus granulaires auxquelles nous avons ac
 
 Les données extraites doivent comprendre les éléments obligatoires suivants :
 
-| Élément Description
+| Élément | Description |
 |---------|-------------|
-| Unités d'organisation | Identifiant de l'unité d'organisation
-| Période | Période de temps des données | Nom de l'indicateur
-| Nom de l'indicateur | Nom de l'indicateur | Nom de l'indicateur
-| Total/compte | Valeur agrégée
+| Unités d'organisation | Identifiant de l'unité d'organisation |
+| Période | Période de temps des données |
+| Nom de l'indicateur | Nom de l'indicateur |
+| Total/compte | Valeur agrégée |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1d -->

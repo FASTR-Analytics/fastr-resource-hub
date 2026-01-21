@@ -78,10 +78,10 @@ Le cadre PICO, couramment utilisé dans le domaine de la santé publique et de l
 
 | Composant | Description |
 |----------|-------------|
-| La population ou le groupe d'intérêt
-| Le service, le programme ou l'action examinés
-| Le service, le programme ou l'action examinés
-| Le changement attendu ou l'objectif de santé publique
+| **Population** | La population ou le groupe d'intérêt |
+| **Intervention** | Le service, le programme ou l'action examinés |
+| **Comparaison** | La condition de référence ou de comparaison pertinente, le cas échéant |
+| **Outcome (Résultat)** | Le changement attendu ou l'objectif de santé publique |
 
 ---
 
@@ -246,10 +246,10 @@ Outil standard de la médecine fondée sur les preuves et de la recherche en san
 
 | Composant | Description |
 |-----------|-------------|
-| Questionnaire d'enquête : **P**opulation | Qui fait l'objet de l'enquête ?
-| Les questions suivantes sont posées à l'aide d'un formulaire de demande d'information
-| Les résultats de l'étude peuvent être comparés à ceux de l'étude précédente
-| Les résultats de l'étude ne sont pas nécessairement les mêmes que ceux de l'étude précédente
+| **P**opulation | Qui fait l'objet de l'enquête |
+| **I**ntervention | Qu'est-ce qui est examiné |
+| **C**omparaison | Quelle est la situation de référence/sans intervention |
+| **O**utcome (Résultat) | Quel est l'objectif de santé publique |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3 -->
