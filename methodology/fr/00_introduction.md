@@ -159,7 +159,7 @@ La plate-forme d'analyse FASTR comprend quatre modules automatisés :
 
 ## Références
 
-\full_bibliographie
+\full_bibliography
 
 ---
 
