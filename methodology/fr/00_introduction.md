@@ -71,20 +71,20 @@ Parmi les activités de renforcement des capacités, on peut citer le soutien à
 | **HMIS/SIGS** | Système d'information de gestion de la santé (Health Management Information System) |
 | **WPP** | Perspectives de la population mondiale (World Population Prospects) |
 | | ***Indicateurs et services de santé*** |
-| **ANC** | Consultation prénatale (Antenatal Care) |
+| **CPN** | Consultation prénatale (ANC - Antenatal Care) |
 | **BCG** | Bacillus Calmette-Guérin (vaccin contre la tuberculose) |
-| **MCV** | Vaccin contenant la rougeole (Measles-Containing Vaccine) |
-| **OPD** | Consultations externes (Outpatient Department) |
+| **VAR** | Vaccin anti-rougeoleux (MCV - Measles-Containing Vaccine) |
+| **CE** | Consultations externes (OPD - Outpatient Department) |
 | **Penta** | Vaccin pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b) |
-| **PHC** | Soins de santé primaires (Primary Health Care) |
-| **RMNCAH-N** | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition |
-| **SBA** | Accoucheuse qualifiée (Skilled Birth Attendant) |
+| **SSP** | Soins de santé primaires (PHC - Primary Health Care) |
+| **SRMNIA-N** | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition (RMNCAH-N) |
+| **AA** | Accouchement assisté (SBA - Skilled Birth Attendant) |
 | | ***Termes techniques et statistiques*** |
-| **DQA** | Évaluation de la qualité des données (Data Quality Assessment) |
-| **MAD** | Écart absolu médian (Median Absolute Deviation) |
+| **EQD** | Évaluation de la qualité des données (DQA - Data Quality Assessment) |
+| **EAM** | Écart absolu médian (MAD - Median Absolute Deviation) |
 | | ***Géographique*** |
-| **LMIC** | Pays à revenu faible et intermédiaire (Low- and Middle-Income Countries) |
-| **SSA** | Afrique subsaharienne (Sub-Saharan Africa) |
+| **PRFI** | Pays à revenu faible et intermédiaire (LMIC - Low- and Middle-Income Countries) |
+| **ASS** | Afrique subsaharienne (SSA - Sub-Saharan Africa) |
 
 ## Utilisation des données du système d'information sur la gestion de la santé de routine dans les PRFM
 
