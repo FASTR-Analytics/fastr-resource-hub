@@ -24,11 +24,11 @@ En reliant les réponses à l'enquête aux données de routine, l'approche FASTR
 
 ### Points clés
 
-| Les points clés de l'approche FASTR sont les suivants
+| Composante | Détails |
 |-----------|---------|
-| Les indicateurs de disponibilité des services<br>- Les scores de préparation<br>- L'état de la chaîne d'approvisionnement<br>- Les informations de contact de l'établissement<br>Les indicateurs de disponibilité des services<br>- Les scores de préparation<br>- Les informations de contact de l'établissement
-| Indicateurs de disponibilité des services<br>- scores de préparation<br>- état de la chaîne d'approvisionnement<br>- informations sur le personnel<br>- analyse de routine de l'enquête liée à la base de données
-| Les résultats de l'analyse de routine de l'enquête sont liés à ceux de l'analyse de routine de l'enquête, mais ils sont également liés à ceux de l'analyse de routine de l'enquête et à ceux de l'analyse de routine de l'enquête
+| **Entrées** | Cadre d'échantillonnage des établissements à partir du SIGS<br>Questionnaire d'enquête téléphonique standardisé<br>Informations de contact des établissements |
+| **Sorties** | - Indicateurs de disponibilité des services<br>- Scores de préparation<br>- État de la chaîne d'approvisionnement<br>- Informations sur le personnel<br>- Analyse liée enquête-routine |
+| **Objectif** | Compléter le suivi de routine du SIGS avec un contexte au niveau des établissements pour améliorer l'interprétation et informer les interventions ciblées |
 
 ---
 

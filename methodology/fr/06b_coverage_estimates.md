@@ -32,11 +32,11 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 
 ### Points clés
 
-| Composant | Détails |
+| Composante | Détails |
 |-----------|---------|
-| M2_données_ajustées (nationales et sous-nationales) du module 2<br>Données d'enquête (MICS/EDS) du dépôt GitHub<br>Données de population (UN WPP) du dépôt GitHub<br>Données de population (UN WPP) de l'ONU
-| M4_dénominateurs (national, admin2, admin3) - populations cibles calculées<br>M4_combined_results (national, admin2, admin3) - estimations de couverture avec tous les dénominateurs<br>M5_couverture_estimation (national, admin2, admin3) - couverture finale avec projections<br>M4_combined_results (national, admin2, admin3) - estimations de couverture avec tous les dénominateurs<br>M5_couverture_estimation (national, admin2, admin3) - couverture finale avec projections
-| La couverture des services de santé est estimée en comparant les volumes de services aux populations cibles, validés par rapport aux références de l'enquête
+| **Entrées** | M2_adjusted_data (nationales et sous-nationales) du module 2<br>Données d'enquête (MICS/EDS) du dépôt GitHub<br>Données de population (UN WPP) du dépôt GitHub |
+| **Sorties** | M4_denominators (national, admin2, admin3) - populations cibles calculées<br>M4_combined_results (national, admin2, admin3) - estimations de couverture avec tous les dénominateurs<br>M5_coverage_estimation (national, admin2, admin3) - couverture finale avec projections |
+| **Objectif** | Estimer la couverture des services de santé en comparant les volumes de services aux populations cibles, validés par rapport aux références de l'enquête |
 
 ### Partie 1 et partie 2 expliquées
 
@@ -1761,10 +1761,10 @@ Nous utilisons ces estimations pour suivre les tendances récentes et les dispar
 
 Le module d'estimation de la couverture fonctionne en deux parties séquentielles :
 
-| Le module d'estimation de la couverture fonctionne en deux parties séquentielles : - Partie - Composants
+| Partie | Composants |
 |------|------------|
-**Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur
-**Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture
+| **Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur |
+| **Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
@@ -1780,13 +1780,13 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 Chaque indicateur de santé correspond à une population cible spécifique :
 
-| Service de santé publique - Population cible (dénominateur) - Service de santé publique - Population cible (dénominateur) - Service de santé publique - Population cible (dénominateur)
+| Service | Population cible (dénominateur) |
 |---------|--------------------------------|
-| Soins prénatals (CPN1), soins prénatals (CPN4), femmes enceintes (CPN2), accouchement en institution (CPN3)
-naissances vivantes | Accouchement en institution | Naissances vivantes | BCG
-| Naissances vivantes - BCG - Naissances vivantes
-| Penta1, Penta3 | Nourrissons ayant survécu au-delà de la période néonatale | Rougeole1, Rougeole2
-| Rougeole1, Rougeole2 | Nourrissons survivant au-delà de la période néonatale
+| CPN1, CPN4 | Femmes enceintes |
+| Accouchement en institution | Naissances vivantes |
+| BCG | Naissances vivantes |
+| Penta1, Penta3 | Nourrissons ayant survécu au-delà de la période néonatale |
+| Rougeole1, Rougeole2 | Nourrissons survivant au-delà de la période infantile |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_9 -->
@@ -1810,10 +1810,10 @@ Des ajustements démographiques séquentiels transforment une estimation de la p
 
 À partir de n'importe quel point d'entrée, la cascade dérive les dénominateurs dans les deux sens :
 
-| Exemple à partir de Penta1
+| Direction | Méthode | Exemple à partir de Penta1 |
 |-----------|--------|---------------------|
-| Taux de mortalité et d'attrition | Éligibilité au DTC → Éligibilité à la rougeole 1 → Éligibilité à la rougeole 2 | Taux de mortalité et d'attrition **En amont** | Appliquer les taux de mortalité et d'attrition
-| Les taux de mortalité et d'attrition sont appliqués à l'inverse des taux de mortalité et d'attrition de l'année précédente
+| **En aval** | Appliquer les taux de mortalité/attrition | Éligible au DTC → Éligible à la rougeole1 → Éligible à la rougeole2 |
+| **En amont** | Inverser les taux de mortalité (rajouter les décès) | Éligible au DTC → Naissances vivantes → Naissances → Accouchements → Grossesses |
 
 La dérivation à rebours permet d'estimer les populations en amont à partir des dénombrements de services en aval.
 <!-- /SLIDE -->
@@ -1828,13 +1828,13 @@ th, td { padding : 0.3em 0.5em !important ; }
 
 Chaque indicateur SIGS sert de point d'entrée. Le module dérive toutes les populations cibles via des cascades avant et arrière :
 
-| Le module dérive toutes les populations cibles par des cascades ascendantes et descendantes : - point d'entrée - calcul de base - dérivation ascendante - dérivation descendante
+| Point d'entrée | Calcul de base | Dérivation en aval | Dérivation en amont |
 |-------------|------------------|-------------------|---------------------|
-| **CPN1** | CPN1 ÷ couverture → Grossesses | Accouchements → Naissances vivantes → Éligibilité au DTC → Éligibilité à la rougeole | - | |
-| Accouchements ÷ couverture → Accouchements | Naissances vivantes → éligibles au DTC → éligibles à la rougeole | Grossesses |
-**BCG** | BCG ÷ couverture → naissances vivantes | éligibles au DCT → éligibles à la rougeole | accouchements → grossesses | **Penta1** | accouchements → couverture → naissances vivantes
-**Penta1** | Penta1 ÷ couverture → éligible au DTC | éligible à la rougeole1 → éligible à la rougeole2 | Naissances vivantes → Naissances → Accouchements → Grossesses | **UN WPP** | Cr Cr
-| Taux de natalité brut × population → Grossesses, naissances vivantes ; Population de moins de 1 an → DTC, rougeole | Applique les taux de mortalité pour les dénominateurs de la rougeole | - |
+| **CPN1** | CPN1 ÷ couverture → Grossesses | Accouchements → Naissances vivantes → Éligible au DTC → Éligible à la rougeole | — |
+| **Accouchements** | Accouchements ÷ couverture → Accouchements | Naissances vivantes → Éligible au DTC → Éligible à la rougeole | Grossesses |
+| **BCG** | BCG ÷ couverture → Naissances vivantes | Éligible au DTC → Éligible à la rougeole | Accouchements → Grossesses |
+| **Penta1** | Penta1 ÷ couverture → Éligible au DTC | Éligible à la rougeole1 → Éligible à la rougeole2 | Naissances vivantes → Naissances → Accouchements → Grossesses |
+| **UN WPP** | Taux de natalité brut × population → Grossesses, naissances vivantes ; Population <1 an → DTC, rougeole | Applique les taux de mortalité pour les dénominateurs rougeole | — |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
@@ -1900,15 +1900,15 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 
 | Paramètre | Description |
 |-----------|-------------|
-| Valeur de comptage à utiliser** | Valeur de comptage ajustée à utiliser pour le calcul de la couverture
-| Niveau pour lequel calculer la couverture** | Niveaux géographiques pour l'estimation de la couverture : national, provincial (zone administrative 2) ou district (zone administrative 3)
-| Taux de perte de grossesse** | Proportion de grossesses se terminant par une perte avant l'accouchement
-| Taux de jumeaux ** Proportion d'accouchements donnant lieu à la naissance de jumeaux
-| Taux d'accouchement de jumeaux ** Taux de mortinatalité** | Proportion d'accouchements de mort-nés
-| Taux de mortalité néonatale*** - Décès au cours des 28 premiers jours par naissance vivante
-**Taux de mortalité postnatale** | Décès entre 28 jours et 1 an par naissance vivante **Taux de mortalité infantile** | Décès entre 28 jours et 1 an par naissance vivante
-| Taux de mortalité infantile ** Taux de mortalité infantile** Décès avant l'âge de 1 an par naissance vivante
-| Taux de mortalité des enfants de moins de 5 ans** - Décès avant l'âge de 5 ans par naissance vivante
+| **Valeur de comptage à utiliser** | Valeur de comptage ajustée à utiliser pour le calcul de la couverture |
+| **Niveau pour lequel calculer la couverture** | Niveaux géographiques pour l'estimation de la couverture : national, provincial (zone administrative 2) ou district (zone administrative 3) |
+| **Taux de perte de grossesse** | Proportion de grossesses se terminant par une perte avant l'accouchement |
+| **Taux de jumeaux** | Proportion d'accouchements donnant lieu à la naissance de jumeaux |
+| **Taux de mortinatalité** | Proportion de naissances mort-nées |
+| **Taux de mortalité néonatale** | Décès au cours des 28 premiers jours par naissance vivante |
+| **Taux de mortalité postnéonatale** | Décès entre 28 jours et 1 an par naissance vivante |
+| **Taux de mortalité infantile** | Décès avant l'âge de 1 an par naissance vivante |
+| **Taux de mortalité des moins de 5 ans** | Décès avant l'âge de 5 ans par naissance vivante |
 
 </div>
 

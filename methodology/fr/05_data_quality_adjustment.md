@@ -21,11 +21,11 @@ En traitant systématiquement les valeurs aberrantes et les données manquantes 
 
 ### Points clés
 
-| Composant | Détails |
+| Composante | Détails |
 |-----------|---------|
-| Les données brutes du SIGS (`SIGS_ISO3.csv`)<br>Les indicateurs de valeurs extrêmes du module 1 (`M1_output_valeurs aberrantes.csv`)<br>Les indicateurs d'exhaustivité du module 1 (`M1_output_complétude.csv`) | **Les données ajustées au niveau de l'établissement (`M2_adjusted_data.csv`)<br>Les données ajustées au niveau de l'établissement (`M2_adjusted_data.csv`)
-| Données ajustées au niveau de l'établissement (`M2_adjusted_data.csv`)<br>Données agrégées sous-nationales (`M2_adjusted_data_admin_area.csv`)<br>Données agrégées nationales (`M2_adjusted_data_national.csv`)<br>Métadonnées d'exclusion (`M2_low_volume_exclusions.csv`) | **Objectif** | Remplacer les données ajustées au niveau de l'établissement (`M2_low_volume_exclusions.csv`)<br>Métadonnées d'exclusion (`M2_low_volume_exclusions.csv`)
-| L'objectif est de remplacer les valeurs aberrantes et de compléter les données manquantes à l'aide de modèles historiques spécifiques à l'établissement ; quatre scénarios d'ajustement sont produits (aucun, valeurs aberrantes uniquement, exhaustivité uniquement, les deux)
+| **Entrées** | Données brutes du SIGS (`hmis_ISO3.csv`)<br>Indicateurs de valeurs aberrantes du module 1 (`M1_output_outliers.csv`)<br>Indicateurs d'exhaustivité du module 1 (`M1_output_completeness.csv`) |
+| **Sorties** | Données ajustées au niveau de l'établissement (`M2_adjusted_data.csv`)<br>Données agrégées sous-nationales (`M2_adjusted_data_admin_area.csv`)<br>Données agrégées nationales (`M2_adjusted_data_national.csv`)<br>Métadonnées d'exclusion (`M2_low_volume_exclusions.csv`) |
+| **Objectif** | Remplacer les valeurs aberrantes et compléter les données manquantes à l'aide de modèles historiques spécifiques à l'établissement ; quatre scénarios d'ajustement sont produits (aucun, valeurs aberrantes uniquement, exhaustivité uniquement, les deux) |
 
 ---
 
@@ -891,10 +891,10 @@ Correction des valeurs aberrantes et imputation des valeurs manquantes pour amé
 
 Les données de routine du SIGS présentent deux limites communes qui peuvent fausser les résultats analytiques :
 
-| Les données de routine du SIGS comportent deux limitations communes qui peuvent fausser les résultats analytiques : - le problème - l'impact sur l'analyse
+| Problème | Impact sur l'analyse |
 |-------|-------------------|
-| Les valeurs extrêmes créent des pics artificiels dans les volumes de services
-| Les données manquantes créent des baisses artificielles qui ne reflètent pas la prestation réelle de services
+| **Valeurs aberrantes** | Les valeurs extrêmes créent des pics artificiels dans les volumes de services |
+| **Rapports incomplets** | Les données manquantes créent des baisses artificielles qui ne reflètent pas la prestation réelle de services |
 
 FASTR répond à ces limitations en remplaçant les valeurs problématiques par des estimations dérivées des modèles de rapports historiques de chaque établissement.
 
@@ -906,10 +906,10 @@ Pour favoriser la transparence et l'analyse de sensibilité, le FASTR produit qu
 
 | Scénario | Description |
 |----------|-------------|
-| Valeurs de départ : **non ajustées** | Valeurs de départ : **Outres ajustées** | Valeurs extrêmes remplacées
-**Ajusté pour les valeurs extrêmes** | Remplacé par les valeurs extrêmes
-| Les valeurs extrêmes sont remplacées par les valeurs extrêmes
-| Les valeurs extrêmes sont remplacées par les valeurs extrêmes
+| **Non ajusté** | Valeurs déclarées originales |
+| **Valeurs aberrantes ajustées** | Valeurs extrêmes remplacées |
+| **Exhaustivité ajustée** | Valeurs manquantes imputées |
+| **Les deux ajustés** | Toutes les corrections appliquées |
 
 ---
 
@@ -926,12 +926,12 @@ Certains indicateurs sont exclus du processus d'ajustement :
 
 Les valeurs aberrantes sont remplacées par des données historiques spécifiques à l'établissement. L'ajustement suit une approche hiérarchique :
 
-| Priorité - Méthode - Application - Priorité - Méthode - Application - Priorité - Méthode - Application - Priorité
+| Priorité | Méthode | Application |
 |----------|--------|-------------|
-| 1 | Moyenne centrée sur 6 mois | 3 mois avant + 3 mois après la valeur aberrante | 1 | Moyenne centrée sur 6 mois | 3 mois avant + 3 mois après la valeur aberrante
-| 2 | Moyenne sur 6 mois vers l'avant | Lorsque les données précédentes sont insuffisantes (par exemple, début de série) | 3 | Moyenne sur 6 mois vers l'arrière
-| 3 | Moyenne sur 6 mois vers l'arrière | Lorsque les données suivantes sont insuffisantes (par exemple, fin de série) | 4 | Même mois, année précédente
-| 4 | Même mois, année précédente | Lorsque les moyennes glissantes ne sont pas disponibles ; utile pour les indicateurs saisonniers
+| 1 | Moyenne centrée sur 6 mois | 3 mois avant + 3 mois après la valeur aberrante |
+| 2 | Moyenne sur 6 mois vers l'avant | Lorsque les données précédentes sont insuffisantes (par exemple, début de série) |
+| 3 | Moyenne sur 6 mois vers l'arrière | Lorsque les données suivantes sont insuffisantes (par exemple, fin de série) |
+| 4 | Même mois, année précédente | Lorsque les moyennes glissantes ne sont pas disponibles ; utile pour les indicateurs saisonniers |
 | 5 | Moyenne historique de l'établissement | Moyenne de toutes les valeurs valides pour cet indicateur dans cet établissement |
 
 ---
@@ -947,11 +947,11 @@ Les valeurs aberrantes sont remplacées par des données historiques spécifique
 
 Pour les mois identifiés comme incomplets ou manquants, les valeurs sont imputées en utilisant la même approche de moyenne mobile sur 6 mois que celle appliquée à l'ajustement des valeurs aberrantes.
 
-| Priorité - Méthode - Application - Méthode de calcul - Méthode de calcul - Méthode de calcul - Méthode de calcul - Méthode de calcul - Méthode de calcul
+| Priorité | Méthode | Application |
 |----------|--------|-------------|
 | 1 | Moyenne centrée sur 6 mois | Lorsque des données suffisantes existent avant et après la lacune |
-| 2 | Moyenne sur 6 mois vers l'avant | Pour les écarts au début de la série temporelle
-| 3 | Moyenne à rebours sur 6 mois | Pour les écarts à la fin de la série temporelle | 4 | Moyenne historique de l'installation
+| 2 | Moyenne sur 6 mois vers l'avant | Pour les écarts au début de la série temporelle |
+| 3 | Moyenne à rebours sur 6 mois | Pour les écarts à la fin de la série temporelle |
 | 4 | Moyenne historique de l'établissement | Moyenne de toutes les valeurs valides pour cet indicateur dans cet établissement |
 
 Cette approche permet d'éviter que des lacunes temporaires dans les rapports ne créent des baisses artificielles dans les volumes de services.

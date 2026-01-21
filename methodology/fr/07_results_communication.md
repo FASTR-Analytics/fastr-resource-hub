@@ -71,21 +71,21 @@ Ils devraient être...
 
 ### Options de format de rapport
 
-| Format de rapport - Meilleur pour - Avantages - Inconvénients - Format de rapport - Format de rapport - Meilleur pour - Avantages - Inconvénients
+| Format | Meilleur pour | Avantages | Inconvénients |
 |--------|----------|------|------|
-| Rapports Word/PDF | Décideurs politiques, experts techniques | Détaillés, formels, faciles à imprimer | Peuvent être denses, non interactifs
-| Les diapositives sont utilisées pour les présentations, par les décideurs, et sont visuelles, faciles à suivre, axées sur le résumé
-| Infographies | Grand public, plaidoyer | Engageantes, digestes, partageables | Profondeur limitée, nécessite un effort de conception
+| Rapports Word/PDF | Décideurs politiques, experts techniques | Détaillés, formels, faciles à imprimer | Peuvent être denses, non interactifs |
+| Diaporamas | Présentations, décideurs | Visuels, faciles à suivre, axés sur le résumé | Moins détaillés, le contexte peut être perdu |
+| Infographies | Grand public, plaidoyer | Engageantes, digestes, partageables | Profondeur limitée, nécessite un effort de conception |
 | Posters | Conférences, ateliers | Résumé visuel à fort impact | Ne convient pas aux données complexes |
 
 ### Quel est le meilleur format ?
 
 | Audience | Format |
 |----------|--------|
-| Les fonctionnaires et les décideurs politiques - Les experts techniques et les chercheurs - Les experts techniques et les chercheurs - Les experts techniques et les chercheurs - Les experts techniques et les chercheurs - Les experts techniques et les chercheurs
-| Les experts techniques et les chercheurs | Rapport complet au format word/PDF + annexe de données
-| Grand public et groupes de défense | Infographies + affiches | participants à des conférences ou à des ateliers
-| Les participants à une conférence ou à un atelier : Affiche + diaporama de synthèse
+| Fonctionnaires et décideurs politiques | Bref diaporama + résumé exécutif PDF |
+| Experts techniques et chercheurs | Rapport complet Word/PDF + annexe de données |
+| Grand public et groupes de défense | Infographies + affiches |
+| Participants à une conférence ou un atelier | Affiche + diaporama de synthèse |
 
 ## Raconter une histoire avec des données
 
@@ -155,13 +155,13 @@ Une feuille de route pour l'utilisation des données est un plan stratégique qu
 
 | Composant | Description | Exemple |
 |-----------|-------------|---------|
-| La plate-forme de coordination nationale du SRMNIA-N a été mise en place par le Ministère de l'Agriculture et de l'Agroalimentaire
-| Les objectifs de votre message*** se concentrent sur un objectif spécifique par public - Faciliter l'utilisation des données pour la prise de décision et l'élaboration des politiques - Les messages clés*** se concentrent sur un objectif spécifique par public - Faciliter la prise de décision et l'élaboration des politiques
-| Messages clés*** - Définir les messages clés que vous souhaitez communiquer - Tendances du SRMNIA-N et identification des districts en retard de développement
-| Les tendances du SRMNIA-N et l'identification des districts en retard de développement
-**Temporisation** | Identifier le calendrier avec les étapes clés et les échéances | La prochaine réunion de la plateforme est prévue pour le deuxième trimestre
-| La prochaine réunion de la plateforme est prévue pour le deuxième trimestre de l'année
-| Comment saurez-vous si vous avez réussi ? | Le pourcentage de rapports trimestriels qui ont été diffusés dans les forums pertinents ; une liste des actions qui ont été prises à la suite des données est créée et tenue à jour
+| **Qui est votre utilisateur final ?** | Identifier le public cible | Plateforme de coordination nationale SRMNIA-N |
+| **Objectifs de votre message** | Se concentrer sur un objectif spécifique par public | Faciliter l'utilisation des données pour la prise de décision et l'élaboration des politiques |
+| **Messages clés** | Définir les messages principaux que vous souhaitez communiquer | Tendances du SRMNIA-N et identification des districts en retard |
+| **Canaux de diffusion** | Spécifier les canaux ou forums de diffusion existants | Réunions trimestrielles de la plateforme SRMNIA-N |
+| **Calendrier** | Identifier le calendrier avec les étapes clés et les échéances | La prochaine réunion de la plateforme est prévue pour le T2 |
+| **Étapes requises et responsabilités** | Définir les étapes et attribuer les rôles et responsabilités | Inscription à l'ordre du jour – Directeur ; Finalisation de la présentation – Agent |
+| **Suivi et évaluation** | Comment saurez-vous si vous avez réussi ? | Le % de rapports trimestriels diffusés dans les forums pertinents ; une liste des actions prises suite aux données est créée et maintenue |
 
 ## Un plan d'action pour le FASTR qui va de l'avant
 
@@ -184,11 +184,11 @@ Un plan d'action permettra d'orienter les activités du FASTR au niveau national
 
 | Section | Description |
 |---------|-------------|
-| Le plan d'action est structuré de la façon suivante : - Section - Description - Site Internet -
-| Les étapes de l'action **Les ressources nécessaires** | Identifier la personne responsable de chaque étape de l'action **Les ressources nécessaires** | Identifier la personne responsable de chaque étape de l'action
-| Les ressources nécessaires** | Identifier les ressources (par exemple, le temps, le matériel) nécessaires pour chaque étape
-**Temporisation** | Quand terminerez-vous cette étape ? |
-| Les mesures d'évaluation **Identifier les mesures ou les critères permettant d'évaluer les progrès ou les réussites
+| **Étape(s) d'action** | Lister les étapes ou tâches spécifiques nécessaires pour atteindre l'objectif |
+| **Personne responsable** | Identifier la personne responsable de chaque étape |
+| **Ressources nécessaires** | Identifier les ressources (par exemple, temps, matériel) requises pour chaque étape |
+| **Calendrier** | Quand terminerez-vous cette étape ? |
+| **Mesure d'évaluation** | Identifier les mesures ou critères pour évaluer les progrès ou la réussite |
 
 ## Cartographie de l'utilisateur final
 
@@ -208,13 +208,14 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 
 ### Exemple de cartographie des utilisateurs
 
-| Question - Exemple de réponse - Question - Exemple de réponse - Question - Exemple de réponse - Question - Exemple de réponse - Question - Exemple de réponse
+| Question | Exemple de réponse |
 |----------|------------------|
-| Qui est l'utilisateur final ? ** | Chef d'un bureau/autorité régional(e) de la santé
-| L'utilisateur final a besoin d'accomplir quoi avec ce rapport?** | Prendre une décision ; Diriger son équipe
-| Quels types d'informations ont-ils besoin ? ** Tendances de haut niveau par service et par zone sous-nationale ; comparaisons de performance - qui doit rendre des comptes ? |
-| Qu'est-ce qui leur plaît dans l'analyse actuelle ? Qu'est-ce qu'ils n'aiment pas ? ** **Aimer : informations exploitables, visuels simples ; **Aimer : contenu trop technique ou non aligné sur les besoins de prise de décision ; **Aimer : contenu trop technique ou non aligné sur les besoins de prise de décision
-| Comment aiment-ils recevoir l'information ? ** Présentations lors de réunions de direction
+| **Qui est l'utilisateur final ?** | Chef d'un bureau/autorité régional(e) de la santé |
+| **Que doit accomplir cet utilisateur final avec ce rapport ?** | Prendre une décision ; Diriger son équipe |
+| **Quels types d'informations ont-ils besoin ?** | Tendances de haut niveau par service et par zone sous-nationale ; comparaisons de performance – qui doit rendre des comptes ? |
+| **Qu'est-ce qu'ils apprécient dans l'analyse actuelle ? Qu'est-ce qu'ils n'aiment pas ?** | **Apprécient :** informations exploitables, visuels simples ; **N'aiment pas :** contenu trop technique ou non aligné sur les besoins de prise de décision |
+| **Comment aiment-ils recevoir l'information ?** | Présentations lors de réunions de direction |
+| **Implications pour la conception de votre produit** | Court PPT avec des résultats axés uniquement sur les tendances des services ; ajouter des recommandations exploitables |
 | Les présentations à des réunions de cadres supérieurs ne sont pas toujours bien accueillies par les clients
 
 ---
@@ -339,11 +340,11 @@ Les principaux enseignements sont ce que les résultats nous apprennent - pourqu
 - **Niveau de détail** - Résumé de haut niveau ou analyse approfondie
 - **Accessibilité** - Comment le public accèdera-t-il au rapport et l'utilisera-t-il ?
 
-| Format de l'information
+| Audience | Format |
 |----------|--------|
-| Fonctionnaires gouvernementaux et décideurs politiques | Brève présentation de diapositives + résumé exécutif PDF
-| Les experts techniques et les chercheurs | Rapport complet au format word/PDF + annexe de données
-| Grand public et groupes de défense | Infographies + affiches
+| Fonctionnaires gouvernementaux et décideurs politiques | Bref diaporama + résumé exécutif PDF |
+| Experts techniques et chercheurs | Rapport complet Word/PDF + annexe de données |
+| Grand public et groupes de défense | Infographies + affiches |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2c -->

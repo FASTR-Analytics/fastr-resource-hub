@@ -1275,20 +1275,20 @@ __CODE_BLOC_4__
 
 ### Résumé des mesures de qualité des données
 
-| Métrique | Type | Intervalle | Interprétation
+| Métrique | Type | Intervalle | Interprétation |
 |-------------------------------|-------------|------------|---------------------------------------------------------------------------|
-| valeur aberrante_flag | Binaire | 0 ou 1 | 1 = Valeur aberrante détectée par l'une ou l'autre des méthodes (MAD ou proportionnelle) ET compte > 100
-| valeur aberrante_mad | Binaire | 0 ou 1 | 1 = Valeur aberrante statistique (basée sur la valeur MAD) |
-| valeur aberrante_pc | Binaire | 0 ou 1 | 1 = Valeur aberrante proportionnelle (>80% du volume annuel) | mad_residual | Continu | 0 ou 1 | 1 = Valeur aberrante proportionnelle (>80% du volume annuel) | mad_residual
-| mad_residual | Continu | 0 à ∞ | Ecart standardisé par rapport à la médiane (plus élevé = plus extrême) |
+| outlier_flag | Binaire | 0 ou 1 | 1 = Valeur aberrante détectée par l'une ou l'autre des méthodes (MAD ou proportionnelle) ET compte > 100 |
+| outlier_mad | Binaire | 0 ou 1 | 1 = Valeur aberrante statistique (basée sur MAD) |
+| outlier_pc | Binaire | 0 ou 1 | 1 = Valeur aberrante proportionnelle (>80% du volume annuel) |
+| mad_residual | Continu | 0 à ∞ | Écart standardisé par rapport à la médiane (plus élevé = plus extrême) |
 | pc | Continu | 0 à 1 | Proportion du volume annuel (plus proche de 1 = plus concentré) |
-| Complétude_flag | Catégorique | 0, 1, 2 | 0=Incomplet (manquant), 1=Complet (rapporté), 2=Inactif (supprimé) |
-| Cohérence - Binaire - 0, 1, NA - 1=Constante (réussit le test), 0=Incohérente, NA=Impossible à calculer - 1=Consistante (réussit le test)
-| Rapport de cohérence | Continu | 0 à ∞ | Rapport d'indicateurs appariés (l'interprétation dépend de l'appairage) |
-| Score de complétude et de valeurs aberrantes - Continu - 0 à 1 - Proportion d'indicateurs CQD passant les contrôles de complétude et de valeurs aberrantes - Continu - 0 à 1
-| Score de cohérence - Continu - 0 à 1 - Proportion de paires de cohérence passant les tests de référence
-dqa_mean | Continu | 0 à 1 | Moyenne des scores des composants (mesure globale de la qualité) | dqa_score | Continu | 0 à 1 | Moyenne des scores des composants (mesure globale de la qualité)
-| dqa_score | Binaire | 0 ou 1 | 1 = Toutes les vérifications sont réussies (complètes, pas de valeurs aberrantes, cohérentes) ; 0 = toutes les vérifications ont échoué
+| completeness_flag | Catégorique | 0, 1, 2 | 0=Incomplet (manquant), 1=Complet (rapporté), 2=Inactif (supprimé) |
+| sconsistency | Binaire | 0, 1, NA | 1=Cohérent (réussit le test), 0=Incohérent, NA=Impossible à calculer |
+| consistency_ratio | Continu | 0 à ∞ | Rapport d'indicateurs appariés (l'interprétation dépend de l'appairage) |
+| completeness_outlier_score | Continu | 0 à 1 | Proportion d'indicateurs AQD passant les contrôles de complétude et de valeurs aberrantes |
+| consistency_score | Continu | 0 à 1 | Proportion de paires de cohérence passant les tests de référence |
+| dqa_mean | Continu | 0 à 1 | Moyenne des scores des composants (mesure globale de la qualité) |
+| dqa_score | Binaire | 0 ou 1 | 1 = Toutes les vérifications réussies ; 0 = au moins une vérification échouée |
 
 
 ### Flux de travail d'exécution
@@ -1540,11 +1540,11 @@ Les indicateurs du programme ayant une relation prévisible sont examinés afin 
 <div class="columns">
 <div>
 
-| Paire d'indicateurs - Relation attendue - Relation attendue - Relation attendue - Relation attendue
+| Paire d'indicateurs | Relation attendue |
 |----------------|----------------------|
-| CPN1 / CPN4 | Le rapport doit être ≥ 0,95
-| Penta1 / Penta3 | Le rapport devrait être ≥ 0,95 |
-| BCG / accouchement en milieu hospitalier : dans les 30 % (≥0,7 et ≤1,3)
+| CPN1 / CPN4 | Le rapport doit être ≥ 0,95 |
+| Penta1 / Penta3 | Le rapport doit être ≥ 0,95 |
+| BCG / Accouchement en établissement | Dans les 30 % (≥0,7 et ≤1,3) |
 
 Ces paires ont des relations attendues. Nous nous attendons à ce que CPN1 > CPN4 puisque toutes les femmes n'effectuent pas quatre visites.
 
@@ -1631,10 +1631,10 @@ Le score moyen de l'AQD indique dans quelle mesure les données d'un établissem
 
 | Paramètre | Description |
 |-----------|-------------|
-| Seuil de proportion pour la détection des valeurs aberrantes** | Ajuste le seuil de contribution proportionnelle pour signaler un mois d'installation comme aberrant
-| Seuil de comptage minimum pour la prise en compte** | Définit le comptage minimum requis pour qu'un mois d'installation soit considéré comme une valeur aberrante
-| Les valeurs aberrantes sont définies comme des observations qui sont supérieures à X fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période de temps
-**Indicateurs soumis à l'AQD** | Définit quels indicateurs sont inclus pour l'évaluation des valeurs aberrantes et de l'exhaustivité pour l'inclusion dans le score de l'AQD
-| **Paires de cohérence utilisées** | Définit les paires d'indicateurs utilisées pour l'analyse de cohérence et les fourchettes de ratios attendues
+| **Seuil de proportion pour la détection des valeurs aberrantes** | Ajuste le seuil de contribution proportionnelle pour signaler un mois d'établissement comme aberrant |
+| **Seuil de comptage minimum** | Définit le comptage minimum requis pour qu'un mois d'établissement soit considéré comme une valeur aberrante |
+| **Nombre d'EAM** | Les valeurs aberrantes sont définies comme des observations supérieures à X fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur |
+| **Indicateurs soumis à l'AQD** | Définit quels indicateurs sont inclus pour l'évaluation des valeurs aberrantes et de l'exhaustivité pour l'inclusion dans le score de l'AQD |
+| **Paires de cohérence utilisées** | Définit les paires d'indicateurs utilisées pour l'analyse de cohérence et les fourchettes de ratios attendues |
 <!-- /SLIDE -->
 
