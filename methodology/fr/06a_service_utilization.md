@@ -190,7 +190,7 @@ Pour le graphique de variation de volume (résultat 4) :
     |-----------|---------|------|-------------|-----------------|
     | Niveau géographique pour les cartes de contrôle | Réglage automatique basé sur `RUN_district_MODEL` et `RUN_ADMIN_AREA_4_ANALYSIS` | Niveau géographique pour les cartes de contrôle | Niveau géographique pour les cartes de contrôle | Niveau géographique pour les cartes de contrôle
     | FALSE | Logique | Exécuter ou non les régressions admin_area_3 | Mettre TRUE pour l'analyse au niveau du district (augmente le temps d'exécution)
-    | FAUX | Logique | Exécuter ou non l'analyse admin_area_4 | Mettre VRAI pour l'analyse au niveau le plus fin (très lent pour les grands ensembles de données) |
+    | FALSE | Logique | Exécuter ou non l'analyse admin_area_4 | Mettre TRUE pour l'analyse au niveau le plus fin (très lent pour les grands ensembles de données) |
 
 ? ?? "Paramètres de la source de données
 

@@ -344,7 +344,7 @@ __CODE_BLOC_4__
 
     **Objectif** : Résultats de la cohérence géographique étendus au niveau de l'établissement
 
-    **Columns:**
+    **Colonnes:**
 
     - cODE_BLOCK_77__ : Identifiant de l'établissement
     - cODE_BLOCK_78__ : Zones géographiques (incluses dynamiquement en fonction des données)
@@ -390,12 +390,12 @@ __CODE_BLOC_4__
 
     - `file_path` (caractère) : Chemin d'accès au fichier CSV du SIGP
 
-    **Returns** : Liste contenant :
+    **Retourne** : Liste contenant :
 
     - `data` : Cadre de données prétraité avec le champ date ajouté
     - cODE_BLOCK_90__ : Vecteur de noms de colonnes géographiques détectés
 
-    **Process:**
+    **Processus:**
     1. Lecture du fichier CSV contenant les données SIGS
     2. Convertit `period_id` (format YYYYMM) en objets Date pour l'ordre temporel
     3. Détecte toutes les colonnes relatives aux zones administratives (admin_area_1 à admin_area_8)
@@ -422,9 +422,9 @@ __CODE_BLOC_4__
     - cODE_BLOCK_96__ : Liste contenant les consistency_pairs et consistency_ranges
     - bLOC_CODE_97__ : L'ensemble de données SIGS
 
-    **Returns** : Mise à jour des consistency_params avec seulement les paires valides (liste vide s'il n'y a pas de paires valides)
+    **Retourne** : Mise à jour des consistency_params avec seulement les paires valides (liste vide s'il n'y a pas de paires valides)
 
-    **Process:**
+    **Processus:**
     1. Vérifie quels indicateurs sont disponibles dans l'ensemble de données
     2. Supprime les paires de cohérence pour lesquelles un ou les deux indicateurs sont manquants
     3. Émet des avertissements concernant les paires supprimées
@@ -490,7 +490,7 @@ __CODE_BLOC_4__
 
     **Résultats** : Ensemble de données au format long avec les indicateurs d'exhaustivité pour toutes les combinaisons établissement-indicateur-période
 
-    **Process:**
+    **Processus:**
 
     1. Identifie la première et la dernière période de rapport pour chaque indicateur au niveau mondial
     2. Appelle `generate_full_series_per_indicateur()` pour chaque indicateur
@@ -519,7 +519,7 @@ __CODE_BLOC_4__
 
     **Résultats** : Série chronologique complète avec des lignes explicites pour les périodes déclarées et non déclarées
 
-    **Process:**
+    **Processus:**
 
     1. Sous-ensemble de données pour un indicateur spécifique
     2. Génère une séquence mensuelle de la première à la dernière période_id pour cet indicateur
@@ -563,7 +563,7 @@ __CODE_BLOC_4__
 
     **Résultats** : Cadre de données au format long avec les résultats de cohérence au niveau géographique
 
-    **Process:**
+    **Processus:**
 
     1. Exclut les valeurs aberrantes (définit le nombre à NA lorsque outlier_flag = 1)
     2. Agrégation des données au niveau géographique spécifié par période (somme des installations)
@@ -589,7 +589,7 @@ __CODE_BLOC_4__
 
     **Signature** : `expand_geo_consistency_to_facilities(établissement_metadata, geo_consistency_results, geo_level)`
 
-    **Purpose** : Attribuer des résultats de cohérence au niveau géographique à des installations individuelles
+    **Objectif** : Attribuer des résultats de cohérence au niveau géographique à des installations individuelles
 
     **Paramètres:**
 
@@ -597,9 +597,9 @@ __CODE_BLOC_4__
     - cODE_BLOCK_130__ : Sortie de geo_consistency_analysis()
     - `geo_level` : Niveau géographique utilisé dans l'analyse de cohérence
 
-    **Returns** : Jeu de données au niveau de l'établissement avec drapeaux de cohérence
+    **Retourne** : Jeu de données au niveau de l'établissement avec drapeaux de cohérence
 
-    **Process:**
+    **Processus:**
 
     - Extraction de la liste des établissements avec leurs affectations géographiques
     - Effectue une jointure à gauche pour répliquer les scores de cohérence au niveau géographique à tous les établissements de cette zone
@@ -667,7 +667,7 @@ __CODE_BLOC_4__
     - Toutes les paires de cohérence ont des indicateurs manquants
     - L'ensemble de données ne contient pas d'indicateurs appariés
 
-    **Scoring:**
+    **Notation:**
 
     - Utilise uniquement les composantes d'exhaustivité et de valeurs aberrantes
     - cODE_BLOCK_140__ = CODE_BLOCK_141__

@@ -277,7 +277,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Objectif** : Préparer les données SIGS pour le calcul du dénominateur
 
-    **Input** :
+    **Entrée** :
 
     - Données de volume ajustées du module 2
     - Variable de comptage sélectionnée (par exemple, `count_final_both`)
@@ -306,7 +306,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Objectif** : Harmoniser et étendre les données d'enquête pour les utiliser comme points de référence en matière de couverture
 
-    **Input** :
+    **Entrée** :
 
     - Données d'enquête (EDS/MICS)
     - Noms des pays SIGS et codes ISO3
@@ -344,7 +344,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Objectif** : Préparer les estimations de la population du WPP de l'ONU pour le calcul du dénominateur
 
-    **Input** :
+    **Entrée** :
 
     - Estimations de la population (UN WPP)
     - Identifiants du pays SIGS
@@ -445,7 +445,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Objectif** : Sélectionne le dénominateur le plus performant pour chaque indicateur
 
-    **Input** :
+    **Entrée** :
 
     - Estimations de la couverture de tous les dénominateurs
     - Valeurs de référence de l'enquête (remplies à l'avance)
@@ -487,7 +487,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Objectif** : Fusionne les estimations de couverture et les observations d'enquête en une sortie unifiée
 
-    **Input** :
+    **Entrée** :
 
     - Résultats de la comparaison de la couverture (choix du meilleur dénominateur)
     - Observations brutes de l'enquête
@@ -1155,7 +1155,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     - $g$ = zone géographique
     - $t$ = temps (année)
 
-    **Input** :
+    **Entrée** :
 
     - `couverture_df` : Cadre de données avec les estimations de couverture
     - cODE_BLOCK_166__ : Nombre d'années de décalage (par défaut = 1 pour une comparaison d'une année sur l'autre)
@@ -1231,7 +1231,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     - L'enquête de référence fournit un point de référence précis
     - Les tendances observées dans les données administratives peuvent être appliquées aux estimations de l'enquête
 
-    **Input** :
+    **Entrée** :
 
     - `deltas_df` : Sortie de `couverture_deltas()` contenant les changements de couverture
     - bLOC_CODE_172__ : Données brutes de l'enquête avec les années et les valeurs
@@ -1304,7 +1304,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     \hat{C}_t = S_{t_s} + (C_{\text{SIGS},t} - C_{\text{SIGS},t_s})
     $$
 
-    **Input** :
+    **Entrée** :
 
     - `couverture_df` : Estimations de la couverture basées sur le SIGS à partir de dénominateurs sélectionnés
     - cODE_BLOC_177__ : Estimations projetées de l'enquête à partir de __CODE_BLOC_178___
@@ -1356,7 +1356,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     2. Renommer la colonne `value` en `survey_value`
     3. Sélectionner dynamiquement les colonnes pertinentes en fonction des niveaux d'administration présents
 
-    **Input** :
+    **Entrée** :
 
     Cadre de données des résultats combinés de la partie 1
 

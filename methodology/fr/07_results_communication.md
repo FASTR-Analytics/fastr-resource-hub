@@ -324,7 +324,7 @@ Les principaux enseignements sont ce que les résultats nous apprennent - pourqu
 <!-- SLIDE:m7_2a -->
 ## Exemple : résultat vs
 
-**Resultat:**
+**Résultat:**
 > Au troisième trimestre 2022, le volume des visites CPN1 a augmenté de 15 % par rapport au trimestre précédent - la plus forte hausse trimestrielle de la période - suivie d'une baisse de 12 % au premier trimestre 2023. Depuis, les volumes de visites CPN1 sont restés relativement stables.
 
 **Principaux enseignements:**

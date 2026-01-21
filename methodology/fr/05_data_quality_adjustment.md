@@ -311,7 +311,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     - __CODE_BLOC_76__ (logique) : Application ou non de l'ajustement des valeurs aberrantes
     - __CODE_BLOC_77__ (logique) : Appliquer ou non l'ajustement de l'exhaustivité
 
-    **Returns** :
+    **Retourne** :
 
     data.table avec les valeurs ajustées dans la colonne `count_working` et les métadonnées d'ajustement
 
@@ -337,7 +337,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     - `completeness_data` (data.table) : Drapeaux d'exhaustivité
     - `outlier_data` (data.table) : Indicateurs de valeurs aberrantes
 
-    **Returns** :
+    **Retourne** :
 
     data.table avec quatre colonnes `count_final_*`, une par scénario
 

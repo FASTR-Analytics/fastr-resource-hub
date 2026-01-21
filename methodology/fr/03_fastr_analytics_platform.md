@@ -27,7 +27,7 @@ Un assistant IA intégré aide les utilisateurs à comprendre et à interpréter
 
 La plateforme offre des outils de visualisation robustes pour présenter les résultats analytiques. Les utilisateurs peuvent créer des graphiques, des cartes et des tableaux à partir des données traitées, avec des options de filtrage et de désagrégation selon plusieurs dimensions. Les visualisations peuvent être personnalisées en termes d'apparence et de style, et exportées sous forme d'images ou de fichiers de données pour être utilisées dans des applications externes.
 
-### Reporting
+### Rapports
 
 La fonctionnalité de création de rapports permet aux utilisateurs de combiner plusieurs visualisations dans des rapports complets. Les rapports peuvent être exportés sous forme de présentations PowerPoint ou de documents PDF. Les utilisateurs peuvent organiser et réorganiser les pages des rapports pour répondre à des besoins de communication spécifiques et partager les rapports terminés avec les parties prenantes.
 
@@ -237,7 +237,7 @@ img { display : block ; margin : 0 auto ; }
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
-## Pays Instance
+## Instance pays
 
 Chaque pays possède sa propre **instance** de la plateforme analytique FASTR.
 
