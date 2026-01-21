@@ -1009,7 +1009,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - cODE_BLOCK_158__ : Taux de mortalité infantile (enquête uniquement)
     - cODE_BLOCK_159__ : Supplémentation en vitamine A
 
-??? "Notes d'utilisation et bonnes pratiques
+??? "Notes d'utilisation et bonnes pratiques"
 
     **Quand utiliser quelle variable de comptage**
 
@@ -1036,7 +1036,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - **Dénominateurs de référence** : montrent la cohérence interne du système SIGS (mais sont exclus de la "meilleure" valeur par défaut) : Offrent des points de référence basés sur la population
     - La comparaison de plusieurs options révèle des problèmes de qualité des données
 
-??? "Résolution des problèmes courants
+??? "Résolution des problèmes courants"
 
     **Problèmes** : Pas de correspondance entre les domaines administratifs du SIGS et de l'enquête
 
@@ -1114,7 +1114,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
     Chaque option de dénominateur combine une source (CPN1, Delivery, BCG, Penta1, ou WPP) avec un facteur d'ajustement de l'âge.
 
-??? "2) Configuration du niveau administratif
+??? "2) Configuration du niveau administratif"
 
     ```r
     RUN_NATIONAL <- TRUE  # Always TRUE - national analysis is mandatory
@@ -1452,7 +1452,7 @@ Identique à la colonne nationale, plus :
 
 #### Considérations méthodologiques
 
-??? "1. stratégie de sélection du dénominateur
+??? "1. stratégie de sélection du dénominateur"
 
     **Quand utiliser le terme "meilleur "** :
 
@@ -1467,7 +1467,7 @@ Identique à la colonne nationale, plus :
     - Réalisation d'analyses de sensibilité
     - Problèmes connus avec certaines sources de données
 
-??? "2) Méthodologie de projection
+??? "2) Méthodologie de projection"
 
     L'approche de projection de la partie 2 utilise une **méthode delta additive** plutôt qu'un remplacement multiplicatif ou direct :
 
@@ -1506,7 +1506,7 @@ Identique à la colonne nationale, plus :
 
     **Important** : Les estimations entre les niveaux peuvent ne pas être directement comparables si des dénominateurs différents sont sélectionnés ou si la qualité des données varie selon le niveau.
 
-??? "Validation et contrôles de qualité
+??? "Validation et contrôles de qualité"
 
     Les utilisateurs doivent valider les résultats de la partie 2 en procédant comme suit
 
@@ -1531,7 +1531,7 @@ Identique à la colonne nationale, plus :
        - Enquêter sur les écarts importants
 
 
-??? "Résolution des problèmes courants
+??? "Résolution des problèmes courants"
 
     **Problème** : "Pas de données dans les résultats combinés d'admin2"
 
@@ -1581,7 +1581,7 @@ Identique à la colonne nationale, plus :
 
     La partie 1 génère des estimations de dénominateurs et sélectionne le meilleur dénominateur pour chaque indicateur sur la base d'une comparaison d'enquêtes.
 
-??? "Exemple 2 : Ajustement des paramètres de mortalité
+??? "Exemple 2 : Ajustement des paramètres de mortalité"
 
     ```r
     # Use country-specific mortality rates from EDS or other sources
@@ -1613,7 +1613,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Lorsque les connaissances programmatiques suggèrent qu'un dénominateur spécifique est plus approprié que l'option statistiquement sélectionnée.
 
-??? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide
+??? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide"
 
     ```r
     # Part 1: Run national level only (faster)
@@ -1626,7 +1626,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Analyse exploratoire initiale, ou lorsque les données d'enquêtes infranationales ne sont pas disponibles.
 
-??? "Exemple 5 : Analyse infranationale complète
+??? "Exemple 5 : Analyse infranationale complète"
 
     ```r
     # Part 1: Include admin3 level
@@ -1639,7 +1639,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Analyse détaillée au niveau du district lorsqu'il existe des données d'enquête infranationales.
 
-??? "Exemple 6 : Utilisation programmatique des résultats
+??? "Exemple 6 : Utilisation programmatique des résultats"
 
     ```r
     # Load couverture outputs
@@ -1701,7 +1701,7 @@ Identique à la colonne nationale, plus :
 
     Pour annuler la sélection automatique dans la partie 2, définissez les paramètres `DENOM_*` avec un nom de dénominateur spécifique au lieu de `"best"`.
 
-??? "Exigences en matière de données infranationales
+??? "Exigences en matière de données infranationales"
 
     Le module vérifie la disponibilité des données infranationales :
 
@@ -1709,7 +1709,7 @@ Identique à la colonne nationale, plus :
     - Si aucune donnée d'enquête infranationale correspondante n'est trouvée, le module passe à un niveau géographique supérieur
     - Les messages de la console indiquent les niveaux d'analyse en cours de traitement
 
-??? "Contrôles de validation
+??? "Contrôles de validation"
 
     Après avoir exécuté les deux parties, examinez les résultats pour :
 

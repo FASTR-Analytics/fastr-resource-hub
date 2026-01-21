@@ -165,7 +165,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Paramètres de configuration
 
-??? "Paramètres d'analyse de base
+??? "Paramètres d'analyse de base"
 
     | Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration
     |-----------|---------|------|-------------|-----------------|
@@ -192,13 +192,13 @@ Pour le graphique de variation de volume (résultat 4) :
     | FALSE | Logique | Exécuter ou non les régressions admin_area_3 | Mettre TRUE pour l'analyse au niveau du district (augmente le temps d'exécution)
     | FALSE | Logique | Exécuter ou non l'analyse admin_area_4 | Mettre TRUE pour l'analyse au niveau le plus fin (très lent pour les grands ensembles de données) |
 
-??? "Paramètres de la source de données
+??? "Paramètres de la source de données"
 
     | Paramètres de la source de données - Paramètres - Défauts - Type - Description - Paramètres de la source de données - Paramètres - Défauts - Type - Description
     |-----------|---------|------|-------------|
     | `PROJECT_DATA_SIGS` | "SIGS_ISO3.csv" | Nom de fichier pour les données SIGS brutes
 
-??? "Guide de sélection des paramètres
+??? "Guide de sélection des paramètres"
 
     **Pour l'analyse à haute sensibilité** (détection des petites perturbations) :
     - __CODE_BLOC_38__
@@ -423,7 +423,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Méthodes et algorithmes statistiques
 
-??? "Analyse des cartes de contrôle
+??? "Analyse des cartes de contrôle"
 
     Les volumes de services sont agrégés au niveau géographique spécifié (configurable via `CONTROL_CHART_LEVEL`). Le pipeline supprime les valeurs aberrantes (`outlier_flag == 1`), complète les mois manquants et filtre les mois à faible volume (<50% du volume moyen global).
 
@@ -666,7 +666,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Un mois se voit attribuer `tagged = 1` si l'une des conditions ci-dessus est remplie. Les enregistrements marqués sont sauvegardés dans `M3_chartout.csv` et transmis à l'analyse des perturbations.
 
-??? "Partie 2 : Analyse des perturbations
+??? "Partie 2 : Analyse des perturbations"
 
     #### Étape 1 : Préparation des données
 
@@ -806,7 +806,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Cas d'utilisation** : Comparer les estimations de perturbations entre différents scénarios d'ajustement de la qualité des données.
 
-??? "Exemple 5 : Optimisation de la mémoire pour les grands ensembles de données
+??? "Exemple 5 : Optimisation de la mémoire pour les grands ensembles de données"
 
     ```r
     # Reduce batch sizes for memory-constrained environments
@@ -958,7 +958,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Notes d'utilisation
 
-??? "Directives d'interprétation
+??? "Directives d'interprétation"
 
     **Effets de perturbation (b_admin_area_*)** :
 

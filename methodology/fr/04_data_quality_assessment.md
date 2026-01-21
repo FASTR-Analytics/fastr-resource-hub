@@ -199,7 +199,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
 
     Le paramètre `GEOLEVEL` détermine le niveau d'agrégation pour l'analyse de cohérence. Les niveaux administratifs inférieurs (3-4) permettent de saisir les tendances locales, mais les données peuvent être rares. Les niveaux supérieurs (2) fournissent des estimations plus stables mais peuvent masquer des incohérences locales.
 
-??? "Paramètres de détection des valeurs aberrantes
+??? "Paramètres de détection des valeurs aberrantes"
 
     ```r
     # Proportion threshold for outlier detection
@@ -218,7 +218,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     - **Petites installations** : Réduire __CODE_BLOC_46__ à 50
     - **Grandes installations uniquement** : Augmenter `MINIMUM_COUNT_THRESHOLD` à 200+
 
-??? "Sélection de l'indicateur CQD
+??? "Sélection de l'indicateur CQD"
 
     cODE_BLOC_2__
 
@@ -279,7 +279,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Les gestionnaires de données examinent des valeurs aberrantes spécifiques en vue d'une enquête ou d'une correction
 
-??? "M1_output_outliers.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes
+??? "M1_output_outliers.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes"
 
     **Objectif** : Ensemble complet de données avec indicateurs de valeurs aberrantes pour toutes les combinaisons établissement-indicateur-période
 
@@ -340,7 +340,7 @@ __CODE_BLOC_4__
     - Identifier les zones géographiques présentant des problèmes de cohérence
     - Création de heatmaps de cohérence par zone
 
-??? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement
+??? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement"
 
     **Objectif** : Résultats de la cohérence géographique étendus au niveau de l'établissement
 
@@ -360,7 +360,7 @@ __CODE_BLOC_4__
     - Fusion des indicateurs de cohérence avec les analyses au niveau de l'établissement
     - Rapports de qualité spécifiques à l'établissement
 
-??? "M1_output_dqa.csv - notes finales de l'AQD
+??? "M1_output_dqa.csv - notes finales de l'AQD"
 
     **Objectif** : Scores composites de qualité des données par établissement et par période
 
@@ -785,7 +785,7 @@ __CODE_BLOC_4__
 
     **Note importante** : Un niveau élevé d'exhaustivité n'indique pas nécessairement que le SIGS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être fournis dans les établissements ou certains établissements peuvent ne pas faire de déclaration. Pour les pays où le DHIS2 ne stocke pas les zéros, l'exhaustivité de l'indicateur peut être sous-estimée s'il y a beaucoup d'établissements à faible volume.
 
-??? "Calcul du score composite de l'AQD
+??? "Calcul du score composite de l'AQD"
 
     Le score de l'AQD combine trois dimensions de la qualité pour un ensemble défini d'indicateurs de base.
 
@@ -865,7 +865,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Pays avec des volumes de services généralement faibles où les seuils par défaut sont trop conservateurs.
 
-??? "Exemple 3 : Niveau géographique différent pour plus de cohérence
+??? "Exemple 3 : Niveau géographique différent pour plus de cohérence"
 
     cODE_BLOCK_19__
 
@@ -885,7 +885,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Analyse spécialisée portant sur un domaine de service spécifique.
 
-??? "Exemple 5 : Se présenter dans un autre pays
+??? "Exemple 5 : Se présenter dans un autre pays"
 
     ```r
     # Configure for your country
@@ -961,7 +961,7 @@ __CODE_BLOC_4__
     2. Modifiez les noms des indicateurs dans vos données pour qu'ils correspondent aux noms attendus
     3. Accepter que l'AQD soit calculé sans la composante de cohérence
 
-??? "Problème : toutes les installations sont considérées comme aberrantes
+??? "Problème : toutes les installations sont considérées comme aberrantes"
 
     **Symptômes:**
     - Pourcentage très élevé de outlier_flag = 1 dans M1_output_outliers.csv
@@ -992,7 +992,7 @@ __CODE_BLOC_4__
 
     4. Examiner les données : Vérifier s'il existe de véritables problèmes de qualité nécessitant un nettoyage des données plutôt qu'un ajustement des paramètres
 
-??? "Problème : aucun résultat de l'AQD n'a été généré
+??? "Problème : aucun résultat de l'AQD n'a été généré"
 
     **Symptômes:**
     - M1_output_dqa.csv est vide ou ne contient que des en-têtes
@@ -1024,7 +1024,7 @@ __CODE_BLOC_4__
     DQA_indicateurS <- c("Penta1", "CPN1")  # Only use what's available
     ```
 
-??? "Problème : les ratios de cohérence semblent incorrects
+??? "Problème : les ratios de cohérence semblent incorrects"
 
     **Symptômes:**
     - Tous les indicateurs de cohérence sont à 0 (incohérent)
@@ -1054,7 +1054,7 @@ __CODE_BLOC_4__
     all_consistency_ranges$pair_Penta <- c(lower = 0.85, upper = Inf)
     ```
 
-??? "Problème : les pourcentages d'exhaustivité semblent faibles
+??? "Problème : les pourcentages d'exhaustivité semblent faibles"
 
     **Symptômes:**
     - Proportion élevée de completeness_flag = 0 dans M1_output_completeness.csv
@@ -1071,7 +1071,7 @@ __CODE_BLOC_4__
     2. Les pourcentages d'exhaustivité doivent être interprétés dans leur contexte - un taux d'exhaustivité de 70 % peut être acceptable en fonction du système de santé
     3. Utiliser le drapeau completeness_flag dans les modules suivants pour pondérer les estimations de manière appropriée
 
-??? "Problème : erreur de lecture du fichier d'entrée
+??? "Problème : erreur de lecture du fichier d'entrée"
 
     **Symptômes:**
     - Erreur : "Impossible d'ouvrir le fichier 'SIGS_[COUNTRY].csv'"
@@ -1126,7 +1126,7 @@ __CODE_BLOC_4__
     - Peut contenir des espaces et des caractères spéciaux
     - Sensible à la casse dans certaines opérations
 
-??? "Stratégie des valeurs manquantes
+??? "Stratégie des valeurs manquantes"
 
     Le module utilise des approches spécifiques au contexte pour les valeurs manquantes :
 
@@ -1150,7 +1150,7 @@ __CODE_BLOC_4__
     - Seules les paires disponibles affectent le score de cohérence
     - Permet une notation partielle lorsque certains indicateurs sont manquants
 
-??? "Considérations sur la mémoire
+??? "Considérations sur la mémoire"
 
     Pour les grands ensembles de données (>1 million de lignes), le module met en œuvre plusieurs optimisations :
 
@@ -1205,7 +1205,7 @@ __CODE_BLOC_4__
     - 3-4x plus rapide avec 4 cœurs sur des ensembles de données avec 10+ indicateurs
     - Plus avantageux pour les pays avec de nombreux indicateurs et de longues séries temporelles
 
-??? "Sélection dynamique d'indicateurs
+??? "Sélection dynamique d'indicateurs"
 
     Le module s'adapte intelligemment aux données disponibles :
 
@@ -1250,7 +1250,7 @@ __CODE_BLOC_4__
     - Avertit des paires supprimées
     - Continue avec les indicateurs disponibles
 
-??? "Directives d'interprétation
+??? "Directives d'interprétation"
 
     **outlier flags:**
     - outlier_flag = 1 suggère des problèmes potentiels de qualité des données, mais nécessite une investigation
