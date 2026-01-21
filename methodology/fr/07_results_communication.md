@@ -94,19 +94,19 @@ La narration est un outil de communication puissant qui permet de traduire des d
 ### L'objectif de la narration avec des données peut varier et prendre diverses formes
 
 - Explication d'une visualisation de données
-- l'histoire "Il était une fois" et ce que nous pouvons en apprendre
-- "Histoire d'une actualité brûlante
-- "Histoire de ce qui s'est passé
+- Histoire « Il était une fois » et ce que nous pouvons en apprendre
+- Histoire « Actualité brûlante »
+- Histoire « Ce qui s'est passé »
 - Histoire de causalité ou de corrélation
-- l'histoire du "comment"
+- Histoire « Comment »
 
 ### Éléments d'un récit de données
 
-- **Tracé** : Quelles sont les questions auxquelles vous répondrez à partir des données, et comment ?
-- **Setting** : Quel est le contexte ?
+- **Intrigue** : Quelles sont les questions auxquelles vous répondrez à partir des données, et comment ?
+- **Contexte** : Quel est le cadre ?
 - **Public** : Qui est votre public cible ? (L'identification du public est très importante et dictera votre narration)
 - **Problématique** : Quel est le principal problème de santé ?
-- **Implication** : Quelles sont les actions/recommandations ?
+- **Implications** : Quelles sont les actions/recommandations ?
 
 ### La narration peut prendre différentes formes
 
@@ -353,11 +353,11 @@ Les principaux enseignements sont ce que les résultats nous apprennent - pourqu
 La narration est un outil de communication puissant qui permet de traduire les données en récits convaincants pour guider la prise de décision.
 
 ### Éléments d'un récit de données
-- **L'intrigue** : Quelles sont les questions auxquelles vous allez répondre à partir des données ?
-- **Setting** : Quel est le contexte ?
+- **Intrigue** : Quelles sont les questions auxquelles vous allez répondre à partir des données ?
+- **Contexte** : Quel est le cadre ?
 - **Public** : Qui est votre public cible ?
 - **Problématique** : Quel est le principal problème de santé ?
-- **Implication** : Quelles sont les actions/recommandations ? Quelles sont les actions/recommandations ?
+- **Implications** : Quelles sont les actions/recommandations ?
 
 Soyez créatif et n'oubliez pas d'adapter l'histoire à votre public.
 <!-- /SLIDE -->
