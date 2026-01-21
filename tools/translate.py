@@ -223,7 +223,8 @@ def extract_frontmatter(text: str) -> Tuple[str, str]:
 
 def protect_code_blocks(text: str) -> Tuple[str, dict]:
     """
-    Replace code blocks, inline code, and file paths with placeholders to protect from translation.
+    Replace code blocks, inline code, file paths, citations, and special commands
+    with placeholders to protect from translation.
     Returns (protected_text, placeholder_map).
     """
     placeholders = {}
@@ -244,11 +245,41 @@ def protect_code_blocks(text: str) -> Tuple[str, dict]:
         suffix = ")"
         return f"{prefix}{placeholder}{suffix}"
 
+    def replace_citation(match):
+        placeholder = f"__CITE_{counter[0]}__"
+        placeholders[placeholder] = match.group(0)
+        counter[0] += 1
+        return placeholder
+
+    def replace_command(match):
+        placeholder = f"__CMD_{counter[0]}__"
+        placeholders[placeholder] = match.group(0)
+        counter[0] += 1
+        return placeholder
+
+    def replace_footnote(match):
+        placeholder = f"__FN_{counter[0]}__"
+        placeholders[placeholder] = match.group(0)
+        counter[0] += 1
+        return placeholder
+
     # Protect fenced code blocks (```...```)
     protected = re.sub(r'```[\s\S]*?```', replace_block, text)
 
     # Protect inline code (`...`)
     protected = re.sub(r'`[^`]+`', replace_block, protected)
+
+    # Protect citation keys: [@key], [@key1; @key2], @key
+    # Bracketed citations like [@rowe2009potential; @smith2020]
+    protected = re.sub(r'\[@[^\]]+\]', replace_citation, protected)
+    # Standalone citations like @rowe2009potential (word boundary after)
+    protected = re.sub(r'@[a-zA-Z][a-zA-Z0-9_-]+(?=\s|[;,.\)\]]|$)', replace_citation, protected)
+
+    # Protect footnote references: [^footnote_key]
+    protected = re.sub(r'\[\^[^\]]+\]', replace_footnote, protected)
+
+    # Protect LaTeX/mkdocs commands: \full_bibliography, \newpage, etc.
+    protected = re.sub(r'\\[a-zA-Z_]+', replace_command, protected)
 
     # Protect markdown image paths: ![alt text](path/to/image.png)
     # Captures: group(1)=![alt text](  group(2)=path/to/image.png
