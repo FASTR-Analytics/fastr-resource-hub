@@ -199,10 +199,10 @@ extra:
   # Language Toggle
   alternate:
     - name: English
-      link: /en/
+      link: /fastr-resource-hub/en/
       lang: en
     - name: Français
-      link: /fr/
+      link: /fastr-resource-hub/fr/
       lang: fr
 
   # Social Links
