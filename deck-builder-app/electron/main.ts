@@ -321,6 +321,168 @@ ipcMain.handle('read-slide', async (_event, filePath: string) => {
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// IPC HANDLERS - Slide Content for Editor
+// ═══════════════════════════════════════════════════════════════════════════════
+
+interface SlideContent {
+  filename: string
+  content: string
+  isCustom: boolean
+  originalContent: string
+}
+
+// Get all slides for a module (with custom overrides)
+ipcMain.handle('get-module-slides', async (_event, moduleId: string, workshopId: string): Promise<SlideContent[]> => {
+  try {
+    const slides: SlideContent[] = []
+    const modNum = moduleId.replace('m', '')
+
+    // Find the module folder
+    const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+      .find(f => f.startsWith(`m${modNum}_`))
+
+    if (!moduleFolder) return slides
+
+    const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+    const workshopDir = path.join(WORKSHOPS_PATH, workshopId)
+    const customDir = path.join(workshopDir, 'custom_slides')
+
+    // Get all topic files sorted numerically
+    const files = fs.readdirSync(modulePath)
+      .filter(f => f.endsWith('.md'))
+      .sort((a, b) => {
+        const aMatch = a.match(/^m\d+_(\d+)/)
+        const bMatch = b.match(/^m\d+_(\d+)/)
+        const aNum = aMatch ? parseInt(aMatch[1]) : 0
+        const bNum = bMatch ? parseInt(bMatch[1]) : 0
+        if (aNum !== bNum) return aNum - bNum
+        return a.localeCompare(b)
+      })
+
+    for (const file of files) {
+      const originalPath = path.join(modulePath, file)
+      const customPath = path.join(customDir, file)
+      const originalContent = fs.readFileSync(originalPath, 'utf-8')
+
+      // Check if custom version exists
+      const hasCustom = fs.existsSync(customPath)
+      const content = hasCustom ? fs.readFileSync(customPath, 'utf-8') : originalContent
+
+      slides.push({
+        filename: file,
+        content: content,
+        isCustom: hasCustom,
+        originalContent: originalContent,
+      })
+    }
+
+    return slides
+  } catch (error) {
+    console.error('Error getting module slides:', error)
+    return []
+  }
+})
+
+// Get a specific topic slide (with custom override)
+ipcMain.handle('get-topic-slide', async (_event, topicId: string, workshopId: string): Promise<SlideContent | null> => {
+  try {
+    // topicId format: "m0_1", "m3_2", etc.
+    const modNumMatch = topicId.match(/^m(\d+)_/)
+    if (!modNumMatch) return null
+
+    const modNum = modNumMatch[1]
+    const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+      .find(f => f.startsWith(`m${modNum}_`))
+
+    if (!moduleFolder) return null
+
+    const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+    const workshopDir = path.join(WORKSHOPS_PATH, workshopId)
+    const customDir = path.join(workshopDir, 'custom_slides')
+
+    // Find the file that matches this topic ID
+    const file = fs.readdirSync(modulePath)
+      .find(f => f.startsWith(`${topicId}_`) && f.endsWith('.md'))
+
+    if (!file) return null
+
+    const originalPath = path.join(modulePath, file)
+    const customPath = path.join(customDir, file)
+    const originalContent = fs.readFileSync(originalPath, 'utf-8')
+
+    const hasCustom = fs.existsSync(customPath)
+    const content = hasCustom ? fs.readFileSync(customPath, 'utf-8') : originalContent
+
+    return {
+      filename: file,
+      content: content,
+      isCustom: hasCustom,
+      originalContent: originalContent,
+    }
+  } catch (error) {
+    console.error('Error getting topic slide:', error)
+    return null
+  }
+})
+
+// Get template/special slide content
+ipcMain.handle('get-slide-content', async (_event, slideId: string, workshopId: string): Promise<SlideContent | null> => {
+  try {
+    const workshopDir = path.join(WORKSHOPS_PATH, workshopId)
+    const customDir = path.join(workshopDir, 'custom_slides')
+    const templatesDir = path.join(RESOURCE_HUB_PATH, 'templates')
+
+    // Map slideId to template file
+    const templateMap: Record<string, string> = {
+      'title': 'title_slide.md',
+      'closing': 'closing.md',
+      'day_end': 'day_end.md',
+      'objectives': 'custom_slides/01_objectives.md',
+      'country_overview': 'custom_slides/02_country-overview.md',
+      'health_priorities': 'custom_slides/03_health-priorities.md',
+      'coverage_results': 'custom_slides/04_coverage-results.md',
+      'next_steps': 'custom_slides/99_next-steps.md',
+    }
+
+    const templateFile = templateMap[slideId]
+    if (!templateFile) {
+      // Not a recognized template - might be a custom slide in the workshop
+      const customPath = path.join(workshopDir, `${slideId}.md`)
+      if (fs.existsSync(customPath)) {
+        const content = fs.readFileSync(customPath, 'utf-8')
+        return {
+          filename: `${slideId}.md`,
+          content: content,
+          isCustom: true,
+          originalContent: content,
+        }
+      }
+      return null
+    }
+
+    const originalPath = path.join(templatesDir, templateFile)
+    const filename = path.basename(templateFile)
+    const customPath = path.join(customDir, filename)
+
+    if (!fs.existsSync(originalPath)) return null
+
+    const originalContent = fs.readFileSync(originalPath, 'utf-8')
+    const hasCustom = fs.existsSync(customPath)
+    const content = hasCustom ? fs.readFileSync(customPath, 'utf-8') : originalContent
+
+    return {
+      filename: filename,
+      content: content,
+      isCustom: hasCustom,
+      originalContent: originalContent,
+    }
+  } catch (error) {
+    console.error('Error getting slide content:', error)
+    return null
+  }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // IPC HANDLERS - Custom Slides
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -352,10 +514,18 @@ ipcMain.handle('get-custom-slides', async (_event, workshopId: string) => {
   }
 })
 
-// Save custom slide
+// Save custom slide (creates custom_slides folder if needed)
 ipcMain.handle('save-custom-slide', async (_event, workshopId: string, filename: string, content: string) => {
   try {
-    const filePath = path.join(WORKSHOPS_PATH, workshopId, filename)
+    const workshopDir = path.join(WORKSHOPS_PATH, workshopId)
+    const customDir = path.join(workshopDir, 'custom_slides')
+
+    // Create custom_slides folder if it doesn't exist
+    if (!fs.existsSync(customDir)) {
+      fs.mkdirSync(customDir, { recursive: true })
+    }
+
+    const filePath = path.join(customDir, filename)
     fs.writeFileSync(filePath, content, 'utf-8')
     return true
   } catch (error) {

@@ -1,5 +1,6 @@
 import { useState, useEffect, DragEvent } from 'react'
 import { useWorkshopStore, Session } from '../stores/workshop'
+import { SlideEditor } from './SlideEditor'
 import {
   DndContext,
   closestCenter,
@@ -31,7 +32,8 @@ import {
   ExternalLink,
   X,
   RefreshCw,
-  Eye
+  Eye,
+  Edit3
 } from 'lucide-react'
 
 interface OutputFile {
@@ -65,6 +67,7 @@ export function DeckBuilder() {
   } | null>(null)
   const [outputs, setOutputs] = useState<OutputFile[]>([])
   const [showOutputPanel, setShowOutputPanel] = useState(false)
+  const [selectedSession, setSelectedSession] = useState<{ session: Session; index: number } | null>(null)
 
   
   // Load outputs when workshop changes or after build
@@ -296,8 +299,24 @@ export function DeckBuilder() {
     }
   }
 
+  // If a session is selected for editing, show the editor full-screen
+  if (selectedSession) {
+    return (
+      <div className="h-full overflow-hidden bg-gray-50">
+        <SlideEditor
+          session={selectedSession.session}
+          sessionIndex={selectedSession.index}
+          dayNum={activeDay}
+          onClose={() => setSelectedSession(null)}
+        />
+      </div>
+    )
+  }
+
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex overflow-hidden">
+      {/* Main deck builder area */}
+      <div className="flex flex-col overflow-hidden w-full">
       {/* Header */}
       <div className="p-4 bg-white border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
@@ -518,8 +537,10 @@ export function DeckBuilder() {
                       session={session}
                       calculatedTime={sessionTimes[idx]}
                       isFirst={idx === 0 || sessions.slice(0, idx).every(s => s.type === 'section')}
+                      isSelected={false}
                       onUpdate={(updates) => updateSession(activeDay, idx, updates)}
                       onRemove={() => removeSession(activeDay, idx)}
+                      onEdit={() => setSelectedSession({ session, index: idx })}
                     />
                   )
                 })}
@@ -554,7 +575,8 @@ export function DeckBuilder() {
         </div>
       </div>
 
-          </div>
+      </div>
+    </div>
   )
 }
 
@@ -564,15 +586,19 @@ function SortableSessionItem({
   session,
   calculatedTime,
   isFirst,
+  isSelected,
   onUpdate,
   onRemove,
+  onEdit,
 }: {
   id: string
   session: Session
   calculatedTime: { start: string; end: string }
   isFirst: boolean
+  isSelected: boolean
   onUpdate: (updates: Partial<Session>) => void
   onRemove: () => void
+  onEdit: () => void
 }) {
   const {
     attributes,
@@ -599,11 +625,14 @@ function SortableSessionItem({
     return 'No content attached'
   }
 
+  // Check if this session has editable content
+  const hasEditableContent = session.module || (session.topics && session.topics.length > 0) || (session.slides && session.slides.length > 0)
+
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`session-item ${isBreak ? 'is-break' : ''}`}
+      className={`session-item ${isBreak ? 'is-break' : ''} ${isSelected ? 'ring-2 ring-fastr-primary' : ''}`}
     >
       <div className="flex items-center gap-3">
         {/* Drag handle */}
@@ -668,15 +697,18 @@ function SortableSessionItem({
           )}
         </div>
 
-        {/* Speaker */}
+        {/* Facilitator/Presenter */}
         {!isBreak && session.type !== 'section' && (
-          <input
-            type="text"
-            value={session.speaker || ''}
-            onChange={e => onUpdate({ speaker: e.target.value })}
-            placeholder="Speaker"
-            className="w-24 px-2 py-1 text-sm text-gray-600 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-fastr-secondary"
-          />
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-gray-400">by</span>
+            <input
+              type="text"
+              value={session.speaker || ''}
+              onChange={e => onUpdate({ speaker: e.target.value })}
+              placeholder="Facilitator"
+              className="w-28 px-2 py-1 text-sm text-gray-600 border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-fastr-secondary"
+            />
+          </div>
         )}
 
         {/* Duration */}
@@ -690,6 +722,21 @@ function SortableSessionItem({
           />
           <span>min</span>
         </div>
+
+        {/* Edit button (only for sessions with content) */}
+        {hasEditableContent && (
+          <button
+            onClick={onEdit}
+            className={`p-1.5 rounded transition-colors ${
+              isSelected
+                ? 'text-fastr-primary bg-fastr-light'
+                : 'text-gray-400 hover:text-fastr-primary hover:bg-fastr-light'
+            }`}
+            title="Edit slides"
+          >
+            <Edit3 className="w-4 h-4" />
+          </button>
+        )}
 
         {/* Remove button */}
         <button

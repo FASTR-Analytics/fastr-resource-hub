@@ -12,6 +12,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getContentLibrary: () => ipcRenderer.invoke('get-content-library'),
   readSlide: (filePath: string) => ipcRenderer.invoke('read-slide', filePath),
 
+  // Slide content for editor
+  getModuleSlides: (moduleId: string, workshopId: string) =>
+    ipcRenderer.invoke('get-module-slides', moduleId, workshopId),
+  getTopicSlide: (topicId: string, workshopId: string) =>
+    ipcRenderer.invoke('get-topic-slide', topicId, workshopId),
+  getSlideContent: (slideId: string, workshopId: string) =>
+    ipcRenderer.invoke('get-slide-content', slideId, workshopId),
+
   // Custom slides
   getCustomSlides: (workshopId: string) => ipcRenderer.invoke('get-custom-slides', workshopId),
   saveCustomSlide: (workshopId: string, filename: string, content: string) =>

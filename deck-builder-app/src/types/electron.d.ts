@@ -17,6 +17,13 @@ interface BuildResult {
   pdfPath: string | null
 }
 
+interface SlideContent {
+  filename: string
+  content: string
+  isCustom: boolean
+  originalContent: string
+}
+
 interface ElectronAPI {
   // Workshop operations
   getWorkshops: () => Promise<any[]>
@@ -27,6 +34,11 @@ interface ElectronAPI {
   // Content library
   getContentLibrary: () => Promise<any[]>
   readSlide: (filePath: string) => Promise<string>
+
+  // Slide content for editor
+  getModuleSlides: (moduleId: string, workshopId: string) => Promise<SlideContent[]>
+  getTopicSlide: (topicId: string, workshopId: string) => Promise<SlideContent | null>
+  getSlideContent: (slideId: string, workshopId: string) => Promise<SlideContent | null>
 
   // Custom slides
   getCustomSlides: (workshopId: string) => Promise<any[]>
