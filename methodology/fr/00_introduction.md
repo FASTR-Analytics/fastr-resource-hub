@@ -57,34 +57,34 @@ Parmi les activités de renforcement des capacités, on peut citer le soutien à
 
 ## Acronymes et abréviations
 
-| Acronyme | Définition |
-|---------|------------|
-| | ***Programmes et organisations*** |
-| **DHS** | Enquêtes démographiques et de santé (Demographic and Health Surveys) |
-| **FASTR** | Évaluations fréquentes et outils du système de santé pour la résilience |
-| **GFF** | Mécanisme de financement mondial (Global Financing Facility) |
-| **MICS** | Enquêtes en grappes à indicateurs multiples (Multiple Indicator Cluster Surveys) |
-| **MoH** | Ministère de la santé |
-| **UN** | Nations Unies |
-| | ***Systèmes de données et sources*** |
-| **DHIS2** | District Health Information Software 2 |
-| **HMIS/SIGS** | Système d'information de gestion de la santé (Health Management Information System) |
-| **WPP** | Perspectives de la population mondiale (World Population Prospects) |
-| | ***Indicateurs et services de santé*** |
-| **CPN** | Consultation prénatale (ANC - Antenatal Care) |
-| **BCG** | Bacillus Calmette-Guérin (vaccin contre la tuberculose) |
-| **VAR** | Vaccin anti-rougeoleux (MCV - Measles-Containing Vaccine) |
-| **CE** | Consultations externes (OPD - Outpatient Department) |
-| **Penta** | Vaccin pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b) |
-| **SSP** | Soins de santé primaires (PHC - Primary Health Care) |
-| **SRMNIA-N** | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition (RMNCAH-N) |
-| **AA** | Accouchement assisté (SBA - Skilled Birth Attendant) |
-| | ***Termes techniques et statistiques*** |
-| **EQD** | Évaluation de la qualité des données (DQA - Data Quality Assessment) |
-| **EAM** | Écart absolu médian (MAD - Median Absolute Deviation) |
-| | ***Géographique*** |
-| **PRFI** | Pays à revenu faible et intermédiaire (LMIC - Low- and Middle-Income Countries) |
-| **ASS** | Afrique subsaharienne (SSA - Sub-Saharan Africa) |
+| Français | English | Définition |
+|----------|---------|------------|
+| | | ***Programmes et organisations*** |
+| EDS | DHS | Enquêtes démographiques et de santé |
+| FASTR | FASTR | Évaluations fréquentes et outils du système de santé pour la résilience |
+| GFF | GFF | Mécanisme de financement mondial |
+| MICS | MICS | Enquêtes en grappes à indicateurs multiples |
+| MS | MoH | Ministère de la santé |
+| ONU | UN | Organisation des Nations Unies |
+| | | ***Systèmes de données et sources*** |
+| DHIS2 | DHIS2 | District Health Information Software 2 |
+| SIGS | HMIS | Système d'information de gestion de la santé |
+| WPP | WPP | Perspectives de la population mondiale |
+| | | ***Indicateurs et services de santé*** |
+| CPN | ANC | Consultation prénatale |
+| BCG | BCG | Bacillus Calmette-Guérin (vaccin contre la tuberculose) |
+| VAR | MCV | Vaccin anti-rougeoleux |
+| CE | OPD | Consultations externes |
+| Penta | Penta | Vaccin pentavalent |
+| SSP | PHC | Soins de santé primaires |
+| SRMNIA-N | RMNCAH-N | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition |
+| AA | SBA | Accouchement assisté |
+| | | ***Termes techniques et statistiques*** |
+| EQD | DQA | Évaluation de la qualité des données |
+| EAM | MAD | Écart absolu médian |
+| | | ***Géographique*** |
+| PRFI | LMIC | Pays à revenu faible et intermédiaire |
+| ASS | SSA | Afrique subsaharienne |
 
 ## Utilisation des données du système d'information sur la gestion de la santé de routine dans les PRFM
 
