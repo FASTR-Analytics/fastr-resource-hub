@@ -12,7 +12,7 @@ This chapter contains hands-on activities for workshop participants.
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m9_1 -->
+<!-- SLIDE:disruption_1 -->
 ## Activity: 24-month disruption analysis
 
 In this activity, participants will:
@@ -25,7 +25,7 @@ In this activity, participants will:
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_2 -->
+<!-- SLIDE:disruption_2 -->
 ## Part 1: Import latest data
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Using the Data tab**
@@ -40,7 +40,7 @@ In this activity, participants will:
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_3 -->
+<!-- SLIDE:disruption_3 -->
 ## Part 2: Run disruption analysis
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Service Utilization module**
@@ -54,7 +54,7 @@ In this activity, participants will:
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_4 -->
+<!-- SLIDE:disruption_4 -->
 ## Part 3: AI-assisted reporting
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Using the AI Assistant**
@@ -67,7 +67,7 @@ The AI Assistant can help interpret results and draft report content.
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_5 -->
+<!-- SLIDE:disruption_5 -->
 ## Discussion
 
 - What patterns emerged in the country data?
