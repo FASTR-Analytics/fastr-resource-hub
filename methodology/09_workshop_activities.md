@@ -15,6 +15,8 @@ This chapter contains hands-on activities for workshop participants.
 <!-- SLIDE:disruption -->
 ## Activity: Service utilization analysis
 
+*DRAFT - NEEDS REVIEW*
+
 In this activity, participants will:
 
 1. Update the database with current DHIS2 data
@@ -27,6 +29,8 @@ In this activity, participants will:
 
 ## Part 1: Import latest data
 
+*TO BE CONFIRMED: Data tab workflow*
+
 ![hands-on h:40](resources/icons/hands_on.svg) **Using the Data tab**
 
 1. Open the FASTR Analytics Platform
@@ -35,11 +39,13 @@ In this activity, participants will:
 4. Select indicators and extend date range through current period
 5. Run import
 
-<!-- TODO: Screenshots and detailed workflow to be added -->
+*Screenshots and detailed steps to be added*
 
 ---
 
 ## Part 2: Run service utilization module
+
+*TO BE CONFIRMED: Module configuration*
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Service Utilization module**
 
@@ -56,6 +62,8 @@ In this activity, participants will:
 
 ## Graph 1: Trends over time
 
+*NEEDS REVIEW: AI prompt wording*
+
 **Purpose:** Summarize overall service volume trajectory and identify key trends.
 
 **Suggested AI prompt:**
@@ -69,6 +77,8 @@ In this activity, participants will:
 
 ## Graph 1: Example interpretation
 
+*PLACEHOLDER: Replace with country-specific example*
+
 **BCG** volumes fluctuated through the period, with small gains in 2023 and mid-2024 followed by a decline in early 2025, returning to 50,000 doses by mid-2025.
 
 **Penta1 and Penta3** followed broadly similar trends, with parallel rises and dips through 2024 and early 2025.
@@ -78,6 +88,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 ---
 
 ## Graph 2: Quarter-on-quarter change
+
+*NEEDS REVIEW: AI prompt wording*
 
 **Purpose:** Understand service volume changes comparing one quarter to the next.
 
@@ -93,6 +105,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 
 ## Graph 3: Service disruptions and surpluses
 
+*NEEDS REVIEW: AI prompt wording*
+
 **Purpose:** Identify disruptions/surpluses and assess impact of external shocks.
 
 **Suggested AI prompt:**
@@ -105,6 +119,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 ---
 
 ## Graph 3: Example interpretation
+
+*PLACEHOLDER: Replace with country-specific example*
 
 **BCG:** Multiple disruptions in 2023 and 2025, with service use 10-24% below expected levels.
 
