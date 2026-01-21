@@ -127,19 +127,19 @@ Diagramme à barres montrant les volumes de services annuels par région et par 
 
 Graphique linéaire comparant les volumes de services observés aux prévisions du modèle au niveau national.
 
-(resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Réel vs prévu national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 **3. Services réels par rapport aux services attendus (au niveau infranational)**
 
 Graphiques linéaires par région comparant les volumes observés aux modèles attendus.
 
-(resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![Réel vs prévu infranational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 **4. Variation de volume due aux ajustements de la qualité des données**
 
 Diagramme à barres groupées comparant les volumes de services selon quatre scénarios d'ajustement : pas d'ajustement, ajustement des valeurs aberrantes uniquement, ajustement de l'exhaustivité uniquement, et les deux ajustements.
 
-(resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+![Variation de volume](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
 
 **Guide d'interprétation**
 
