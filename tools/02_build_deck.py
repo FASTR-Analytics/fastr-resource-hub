@@ -103,6 +103,25 @@ def find_images_in_file(filepath):
     return images
 
 
+def resolve_slide_path(filename, workshop_id, base_dir, core_content_dir):
+    """
+    Resolve slide file path, checking for custom overrides first.
+
+    Priority order:
+    1. Workshop's custom_slides folder (workshops/{id}/custom_slides/{filename})
+    2. Core content folder (core_content/{folder}/{filename})
+
+    Returns the path that exists, or the core_content path if neither exists.
+    """
+    # Check for custom override in workshop's custom_slides folder
+    custom_path = os.path.join(base_dir, "workshops", workshop_id, "custom_slides", filename)
+    if os.path.exists(custom_path):
+        return custom_path, True  # Return path and flag indicating it's a custom override
+
+    # Fall back to core content
+    return os.path.join(core_content_dir, filename), False
+
+
 def validate_workshop(workshop_id, base_dir, config):
     """
     Validate workshop setup before building.
@@ -1668,8 +1687,11 @@ paginate: true
                         deck_content += session_title
                         current_section = None  # Reset after using
                     module_overrides = []
+                    custom_slide_count = 0
                     for filename in files:
-                        filepath = os.path.join(core_content_dir, filename)
+                        filepath, is_custom = resolve_slide_path(filename, workshop_id, base_dir, core_content_dir)
+                        if is_custom:
+                            custom_slide_count += 1
                         content = read_markdown_file(filepath)
                         if content:
                             content = strip_frontmatter(content)
@@ -1679,6 +1701,8 @@ paginate: true
                             deck_content += "\n" + ensure_slide_break(content) + "\n"
 
                     print(f"   [{module_id}] {name}")
+                    if custom_slide_count > 0:
+                        print(f"      📝 {custom_slide_count} custom slide override(s)")
                     if module_overrides:
                         print(f"      📊 {len(module_overrides)} custom asset(s)")
                 else:
@@ -1692,11 +1716,14 @@ paginate: true
                     deck_content += session_title
                     current_section = None  # Reset after using
                 topics_overrides = []
+                topics_custom_count = 0
                 for topic_id in item['topics']:
                     files, name, is_valid = resolve_module_prefix(topic_id, exclude=exclude_list)
                     if is_valid and files:
                         for filename in files:
-                            filepath = os.path.join(core_content_dir, filename)
+                            filepath, is_custom = resolve_slide_path(filename, workshop_id, base_dir, core_content_dir)
+                            if is_custom:
+                                topics_custom_count += 1
                             content = read_markdown_file(filepath)
                             if content:
                                 content = strip_frontmatter(content)
@@ -1707,6 +1734,8 @@ paginate: true
                     else:
                         print(f"   Warning: Unknown topic '{topic_id}'")
                 print(f"   {session_name}: {item['topics']}")
+                if topics_custom_count > 0:
+                    print(f"      📝 {topics_custom_count} custom slide override(s)")
                 if topics_overrides:
                     print(f"      📊 {len(topics_overrides)} custom asset(s)")
 
@@ -1779,8 +1808,11 @@ paginate: true
                 if is_valid and files:
                     # Add all files for this module/topic
                     module_overrides = []
+                    custom_slide_count = 0
                     for filename in files:
-                        filepath = os.path.join(core_content_dir, filename)
+                        filepath, is_custom = resolve_slide_path(filename, workshop_id, base_dir, core_content_dir)
+                        if is_custom:
+                            custom_slide_count += 1
                         content = read_markdown_file(filepath)
                         if content:
                             content = strip_frontmatter(content)
@@ -1790,6 +1822,8 @@ paginate: true
                             deck_content += "\n" + ensure_slide_break(content) + "\n"
 
                     print(f"   [{item}] {name}")
+                    if custom_slide_count > 0:
+                        print(f"      📝 {custom_slide_count} custom slide override(s)")
                     if module_overrides:
                         print(f"      📊 {len(module_overrides)} custom asset(s)")
 
