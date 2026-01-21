@@ -10,7 +10,7 @@ This activity covers the complete workflow for updating DHIS2 data, running a di
 
 ### Objectives
 
-1. **Refresh data** - Use the Data Downloader to import current data from DHIS2
+1. **Refresh data** - Import current data from DHIS2 using the Data tab
 2. **Run analysis** - Execute the disruption analysis module
 3. **Interpret results** - Use AI tools to support interpretation
 4. **Document findings** - Prepare a summary report
@@ -19,26 +19,34 @@ This activity covers the complete workflow for updating DHIS2 data, running a di
 
 Ensure the analysis uses the most current available data.
 
-![hands-on h:40](../resources/icons/hands_on.svg) **Open the Data Downloader**
+![hands-on h:40](../resources/icons/hands_on.svg) **Navigate to the Data tab**
 
-The Data Downloader connects to the country DHIS2 instance and imports facility-level data directly into the FASTR database.
+Within the FASTR Analytics Platform, the **Data** tab provides options for importing new data. This includes the ability to import directly from DHIS2 via API.
 
-1. Authenticate with DHIS2 credentials
-2. Select indicators for analysis
-3. Set the date range to include at least 24 months
-4. Initiate download and import
+1. Open the FASTR Analytics Platform
+2. Navigate to the **Data** tab
+3. Select **New Import**
+4. Configure the import:
+   - Select indicators for analysis
+   - Set the date range to include at least 24 months
+5. Initiate the import
 
-*Placeholder: Screenshots of Data Downloader interface*
+*Placeholder: Screenshots of Data tab interface*
+
+<!-- TODO: Clarify exact workflow for DHIS2 API import - authentication, permissions required, configuration options -->
 
 ??? info "Technical details"
 
-    The Data Downloader uses the DHIS2 API to:
+    The DHIS2 API import option:
 
-    - Extract data at facility level
-    - Transform to FASTR-compatible format
-    - Load directly into the analysis database
+    - Connects directly to the country DHIS2 instance
+    - Extracts data at facility level
+    - Transforms to FASTR-compatible format
+    - Loads directly into the analysis database
 
     This eliminates manual data export and file handling.
+
+    **Note:** API import configuration and authentication requirements to be documented.
 
 ### Step 2: Run the disruption analysis
 
@@ -128,7 +136,7 @@ Compile findings into a structured report.
 
 **Objectives:**
 
-1. Refresh data from DHIS2 using Data Downloader
+1. Refresh data from DHIS2 using the Data tab
 2. Run disruption analysis for the past 24 months
 3. Use AI tools to support interpretation
 4. Prepare summary findings
@@ -140,14 +148,15 @@ Compile findings into a structured report.
 <!-- SLIDE:m9_2 -->
 ## Step 1: Refresh the data
 
-![hands-on h:40](resources/icons/hands_on.svg) **Using the Data Downloader**
+![hands-on h:40](resources/icons/hands_on.svg) **Using the Data tab**
 
-- Authenticate with DHIS2 credentials
-- Select indicators for analysis
-- Set date range (24+ months)
-- Download and import
+- Open FASTR Analytics Platform
+- Navigate to **Data** tab → **New Import**
+- Configure DHIS2 API connection
+- Select indicators and date range (24+ months)
+- Run import
 
-*Placeholder: Data Downloader demonstration*
+*Placeholder: Data tab demonstration*
 
 <!-- /SLIDE -->
 
