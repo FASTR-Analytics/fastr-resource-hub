@@ -8,14 +8,15 @@ import {
   Loader2,
   User,
   Bot,
-  Lightbulb
+  Lightbulb,
+  CheckCircle2
 } from 'lucide-react'
 
 const QUICK_PROMPTS = [
-  "Suggest content for a 2-day DQA workshop",
-  "What modules should I include for beginners?",
-  "Generate a slide about data quality importance",
-  "How should I structure a 3-day workshop?",
+  "Add all Data Analysis content to Day 1",
+  "Build a full day agenda with DQA and breaks",
+  "Add the Introduction module to start my workshop",
+  "Set the start time to 08:30 and add a morning session",
 ]
 
 export function AIAssistant() {
@@ -71,7 +72,7 @@ export function AIAssistant() {
             <Bot className="w-12 h-12 text-gray-300 mb-3" />
             <h3 className="font-medium text-gray-700 mb-1">How can I help?</h3>
             <p className="text-sm text-gray-500 mb-4">
-              I can help you build your workshop deck
+              I can add modules, breaks, and sessions to your deck
             </p>
 
             {/* Quick prompts */}
@@ -112,8 +113,26 @@ export function AIAssistant() {
                   }`}
                 >
                   {message.role === 'assistant' ? (
-                    <div className="markdown-preview text-sm">
-                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                    <div className="space-y-2">
+                      {/* Show actions taken */}
+                      {message.actionsTaken && message.actionsTaken.length > 0 && (
+                        <div className="bg-green-50 border border-green-200 rounded-md p-2 mb-2">
+                          <div className="flex items-center gap-1.5 text-green-700 text-xs font-medium mb-1">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            Actions completed:
+                          </div>
+                          <ul className="text-xs text-green-600 space-y-0.5">
+                            {message.actionsTaken.map((action, j) => (
+                              <li key={j}>• {action}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {message.content && (
+                        <div className="markdown-preview text-sm">
+                          <ReactMarkdown>{message.content}</ReactMarkdown>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <p className="text-sm">{message.content}</p>

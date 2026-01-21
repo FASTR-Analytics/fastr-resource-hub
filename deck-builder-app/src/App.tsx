@@ -7,7 +7,6 @@ import { WorkshopSelector } from './components/WorkshopSelector'
 import {
   Layers,
   PanelLeftClose,
-  PanelRightClose,
   Sparkles,
   Menu
 } from 'lucide-react'

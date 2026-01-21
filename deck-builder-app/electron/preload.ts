@@ -17,8 +17,19 @@ contextBridge.exposeInMainWorld('electronAPI', {
   saveCustomSlide: (workshopId: string, filename: string, content: string) =>
     ipcRenderer.invoke('save-custom-slide', workshopId, filename, content),
 
+  // Templates
+  getTemplates: () => ipcRenderer.invoke('get-templates'),
+
   // Build
-  buildDeck: (workshopId: string) => ipcRenderer.invoke('build-deck', workshopId),
+  buildDeck: (workshopId: string, skipPdf?: boolean) => ipcRenderer.invoke('build-deck', workshopId, skipPdf),
+
+  // File operations
+  openFile: (filePath: string) => ipcRenderer.invoke('open-file', filePath),
+  showInFolder: (filePath: string) => ipcRenderer.invoke('show-in-folder', filePath),
+  readFileContent: (filePath: string) => ipcRenderer.invoke('read-file-content', filePath),
+  getOutputsPath: () => ipcRenderer.invoke('get-outputs-path'),
+  getWorkshopOutputs: (workshopId: string) => ipcRenderer.invoke('get-workshop-outputs', workshopId),
+  openPreviewWindow: (htmlPath: string) => ipcRenderer.invoke('open-preview-window', htmlPath),
 
   // AI Assistant
   aiChat: (messages: any[], context: any) => ipcRenderer.invoke('ai-chat', messages, context),
@@ -36,7 +47,22 @@ declare global {
       readSlide: (filePath: string) => Promise<string>
       getCustomSlides: (workshopId: string) => Promise<any[]>
       saveCustomSlide: (workshopId: string, filename: string, content: string) => Promise<boolean>
-      buildDeck: (workshopId: string) => Promise<{ success: boolean; output: string }>
+      buildDeck: (workshopId: string) => Promise<{
+        success: boolean
+        output: string
+        outputPath: string
+        outputDir: string
+      }>
+      openFile: (filePath: string) => Promise<boolean>
+      showInFolder: (filePath: string) => Promise<boolean>
+      readFileContent: (filePath: string) => Promise<string>
+      getOutputsPath: () => Promise<string>
+      getWorkshopOutputs: (workshopId: string) => Promise<Array<{
+        name: string
+        path: string
+        type: 'md' | 'pdf' | 'pptx'
+        modified: Date
+      }>>
       aiChat: (messages: any[], context: any) => Promise<{ role: string; content: string }>
     }
   }

@@ -5,6 +5,8 @@ export interface Topic {
   id: string
   file: string
   title: string
+  slideCount: number
+  slideTitles: string[]
   preview: string[]
   path: string
 }
@@ -15,9 +17,11 @@ export interface Module {
   name: string
   folder: string
   topics: Topic[]
+  totalSlides: number
 }
 
 export interface Session {
+  _id?: string
   time?: string
   session: string
   type?: 'break' | 'section'
@@ -63,9 +67,17 @@ export interface CustomSlide {
   path: string
 }
 
+export interface AIToolCall {
+  id: string
+  name: string
+  input: any
+}
+
 export interface AIMessage {
   role: 'user' | 'assistant'
   content: string
+  toolCalls?: AIToolCall[]
+  actionsTaken?: string[]
 }
 
 interface WorkshopStore {
@@ -202,8 +214,19 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     const sessions = currentConfig.schedule[dayKey] || []
 
     if (sessionIdx >= 0 && sessionIdx < sessions.length) {
-      sessions[sessionIdx] = { ...sessions[sessionIdx], ...updates }
-      set({ currentConfig: { ...currentConfig } })
+      // Create new array with updated session to trigger React re-render
+      const newSessions = [...sessions]
+      newSessions[sessionIdx] = { ...sessions[sessionIdx], ...updates }
+
+      const newConfig = {
+        ...currentConfig,
+        schedule: {
+          ...currentConfig.schedule,
+          [dayKey]: newSessions
+        }
+      }
+
+      set({ currentConfig: newConfig })
       get().saveCurrentWorkshop()
     }
   },
@@ -214,11 +237,23 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     if (!currentConfig) return
 
     const dayKey = `day${dayNum}`
-    if (!currentConfig.schedule[dayKey]) {
-      currentConfig.schedule[dayKey] = []
+    const existingSessions = currentConfig.schedule[dayKey] || []
+
+    // Add unique ID to session for React key stability
+    const sessionWithId = {
+      ...session,
+      _id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     }
-    currentConfig.schedule[dayKey].push(session)
-    set({ currentConfig: { ...currentConfig } })
+
+    const newConfig = {
+      ...currentConfig,
+      schedule: {
+        ...currentConfig.schedule,
+        [dayKey]: [...existingSessions, sessionWithId]
+      }
+    }
+
+    set({ currentConfig: newConfig })
     get().saveCurrentWorkshop()
   },
 
@@ -231,8 +266,17 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     const sessions = currentConfig.schedule[dayKey] || []
 
     if (sessionIdx >= 0 && sessionIdx < sessions.length) {
-      sessions.splice(sessionIdx, 1)
-      set({ currentConfig: { ...currentConfig } })
+      const newSessions = sessions.filter((_: Session, i: number) => i !== sessionIdx)
+
+      const newConfig = {
+        ...currentConfig,
+        schedule: {
+          ...currentConfig.schedule,
+          [dayKey]: newSessions
+        }
+      }
+
+      set({ currentConfig: newConfig })
       get().saveCurrentWorkshop()
     }
   },
@@ -246,9 +290,19 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     const sessions = currentConfig.schedule[dayKey] || []
 
     if (fromIdx >= 0 && fromIdx < sessions.length && toIdx >= 0 && toIdx < sessions.length) {
-      const [removed] = sessions.splice(fromIdx, 1)
-      sessions.splice(toIdx, 0, removed)
-      set({ currentConfig: { ...currentConfig } })
+      const newSessions = [...sessions]
+      const [removed] = newSessions.splice(fromIdx, 1)
+      newSessions.splice(toIdx, 0, removed)
+
+      const newConfig = {
+        ...currentConfig,
+        schedule: {
+          ...currentConfig.schedule,
+          [dayKey]: newSessions
+        }
+      }
+
+      set({ currentConfig: newConfig })
       get().saveCurrentWorkshop()
     }
   },
@@ -280,17 +334,18 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
 
   // AI Assistant
   sendAIMessage: async (message: string) => {
-    const { aiMessages, currentConfig } = get()
+    const { aiMessages, currentConfig, contentLibrary, addSession, updateSession } = get()
 
     // Add user message
     const userMessage: AIMessage = { role: 'user', content: message }
     set({ aiMessages: [...aiMessages, userMessage], aiLoading: true })
 
     try {
-      // Prepare context
+      // Prepare context - include current schedule
       const context = {
         workshop: currentConfig?.workshop,
         currentDays: currentConfig?.schedule?.days,
+        schedule: currentConfig?.schedule,
       }
 
       // Call AI
@@ -301,8 +356,82 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
 
       const response = await window.electronAPI.aiChat(messages, context)
 
+      // Process tool calls if any
+      const actionsTaken: string[] = []
+
+      if (response.toolCalls && response.toolCalls.length > 0) {
+        for (const tool of response.toolCalls) {
+          const input = tool.input
+
+          if (tool.name === 'add_module') {
+            const moduleNum = input.module_number
+            const day = input.day
+            const module = contentLibrary.find(m => m.number === moduleNum)
+            const moduleName = module?.name || `Module ${moduleNum}`
+
+            // Default durations for each module
+            const defaultDurations: Record<number, number> = {
+              0: 60, 1: 90, 2: 120, 3: 180, 4: 120, 5: 90, 6: 240, 7: 120, 8: 180
+            }
+            const duration = input.duration || defaultDurations[moduleNum] || 60
+
+            addSession(day, {
+              session: moduleName,
+              module: `m${moduleNum}`,
+              duration: duration,
+            })
+            actionsTaken.push(`Added "${moduleName}" to Day ${day}`)
+          }
+
+          else if (tool.name === 'add_break') {
+            const day = input.day
+            const breakType = input.break_type
+            const duration = input.duration || (breakType === 'lunch' ? 60 : 15)
+            const breakName = breakType === 'lunch' ? 'Lunch Break' : 'Tea Break'
+
+            addSession(day, {
+              session: breakName,
+              type: 'break',
+              duration: duration,
+            })
+            actionsTaken.push(`Added ${breakName} to Day ${day}`)
+          }
+
+          else if (tool.name === 'add_custom_session') {
+            const day = input.day
+            addSession(day, {
+              session: input.session_name,
+              duration: input.duration,
+            })
+            actionsTaken.push(`Added "${input.session_name}" to Day ${day}`)
+          }
+
+          else if (tool.name === 'set_day_start_time') {
+            const day = input.day
+            const dayKey = `day${day}`
+            const sessions = currentConfig?.schedule?.[dayKey] || []
+
+            if (sessions.length > 0) {
+              updateSession(day, 0, { time: input.start_time })
+              actionsTaken.push(`Set Day ${day} start time to ${input.start_time}`)
+            }
+          }
+        }
+      }
+
+      // Build response message
+      let responseContent = response.content || ''
+      if (actionsTaken.length > 0 && !responseContent) {
+        responseContent = 'Done!'
+      }
+
       set({
-        aiMessages: [...get().aiMessages, response as AIMessage],
+        aiMessages: [...get().aiMessages, {
+          role: 'assistant',
+          content: responseContent,
+          toolCalls: response.toolCalls,
+          actionsTaken: actionsTaken,
+        }],
         aiLoading: false,
       })
     } catch (error: any) {

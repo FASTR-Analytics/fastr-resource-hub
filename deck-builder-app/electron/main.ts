@@ -1,8 +1,25 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import yaml from 'js-yaml'
 import { spawn } from 'child_process'
+import dotenv from 'dotenv'
+
+// Load environment variables from .env file
+// Try multiple paths since __dirname changes between dev and production
+const envPaths = [
+  path.join(__dirname, '..', '.env'),           // dev: dist-electron/../.env
+  path.join(__dirname, '..', '..', '.env'),     // packaged app
+  path.join(process.cwd(), '.env'),             // current working directory
+]
+
+for (const envPath of envPaths) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath })
+    console.log('Loaded .env from:', envPath)
+    break
+  }
+}
 
 // Path to the parent fastr-resource-hub directory
 const RESOURCE_HUB_PATH = path.resolve(__dirname, '../..')
@@ -29,7 +46,8 @@ function createWindow() {
   // In development, load from Vite dev server
   if (process.env.NODE_ENV === 'development' || !app.isPackaged) {
     mainWindow.loadURL('http://localhost:5173')
-    mainWindow.webContents.openDevTools()
+    // DevTools: uncomment to debug
+    // mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'))
   }
@@ -200,9 +218,20 @@ ipcMain.handle('get-content-library', async () => {
 
         const modNum = parseInt(modNumMatch[1])
 
-        // Find all topic files
+        // Find all topic files - sort numerically by topic number
         const topics: any[] = []
-        const files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md')).sort()
+        const files = fs.readdirSync(modulePath)
+          .filter(f => f.endsWith('.md'))
+          .sort((a, b) => {
+            // Extract topic numbers (e.g., "m6_1" -> 1, "m6_11" -> 11, "m6_2a" -> 2)
+            const aMatch = a.match(/^m\d+_(\d+)/)
+            const bMatch = b.match(/^m\d+_(\d+)/)
+            const aNum = aMatch ? parseInt(aMatch[1]) : 0
+            const bNum = bMatch ? parseInt(bMatch[1]) : 0
+            if (aNum !== bNum) return aNum - bNum
+            // If same number, sort alphabetically (for m6_2a vs m6_2b)
+            return a.localeCompare(b)
+          })
 
         for (const file of files) {
           // Extract topic ID (e.g., "m3_1" from "m3_1_overview.md")
@@ -215,28 +244,58 @@ ipcMain.handle('get-content-library', async () => {
           // Read file content for preview
           const content = fs.readFileSync(filePath, 'utf-8')
 
-          // Extract title from content (first # heading)
-          const titleMatch = content.match(/^#\s+(.+)$/m)
-          const title = titleMatch ? titleMatch[1] : file.replace('.md', '').replace(/_/g, ' ')
+          // Count slides (separated by ---)
+          const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
+          const slideCount = slides.length
 
-          // Extract first few bullet points for preview
-          const bullets = content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 3) || []
+          // Extract title from first ## heading (Marp uses ## for slide titles)
+          const titleMatch = content.match(/^##\s+(.+)$/m)
+          let title = titleMatch ? titleMatch[1] : ''
+
+          // Clean up title - remove "Module X" suffix if present
+          title = title.replace(/\s*-\s*Module\s*\d+$/i, '').trim()
+
+          // Fallback: derive from filename
+          if (!title) {
+            title = file.replace('.md', '').replace(/^m\d+_\d+[a-z]?_/, '').replace(/_/g, ' ')
+            title = title.charAt(0).toUpperCase() + title.slice(1)
+          }
+
+          // Extract all slide titles for preview
+          const slideTitles = content.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, '')) || []
+
+          // Extract key bullet points (bold items or first bullets)
+          const keyPoints = content.match(/^\*\*([^*]+)\*\*/gm)?.slice(0, 4).map(b => b.replace(/\*\*/g, '')) ||
+                          content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 4).map(b => b.replace(/^[-*]\s+/, '')) || []
 
           topics.push({
             id: topicId,
             file: file,
             title: title,
-            preview: bullets.map(b => b.replace(/^[-*]\s+/, '')),
+            slideCount: slideCount,
+            slideTitles: slideTitles.slice(0, 5), // First 5 slide titles
+            preview: keyPoints,
             path: filePath,
           })
         }
+
+        // Sort topics numerically by their ID
+        const sortedTopics = topics.sort((a, b) => {
+          const aMatch = a.id.match(/^m\d+_(\d+)/)
+          const bMatch = b.id.match(/^m\d+_(\d+)/)
+          const aNum = aMatch ? parseInt(aMatch[1]) : 0
+          const bNum = bMatch ? parseInt(bMatch[1]) : 0
+          if (aNum !== bNum) return aNum - bNum
+          return a.id.localeCompare(b.id)
+        })
 
         modules.push({
           number: modNum,
           id: `m${modNum}`,
           name: MODULE_NAMES[modNum] || `Module ${modNum}`,
           folder: item,
-          topics: topics,
+          topics: sortedTopics,
+          totalSlides: sortedTopics.reduce((sum, t) => sum + t.slideCount, 0),
         })
       }
     }
@@ -306,96 +365,528 @@ ipcMain.handle('save-custom-slide', async (_event, workshopId: string, filename:
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// IPC HANDLERS - Templates
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Template definitions with metadata
+const TEMPLATE_CATEGORIES = [
+  {
+    id: 'structure',
+    name: 'Structure',
+    description: 'Workshop structure slides',
+    templates: [
+      { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover' },
+      { id: 'agenda', file: 'agenda', name: 'Agenda', icon: 'list', special: true },
+      { id: 'section', file: null, name: 'Section Divider', icon: 'divider', special: true },
+      { id: 'closing', file: 'closing.md', name: 'Closing Slide', icon: 'end' },
+    ]
+  },
+  {
+    id: 'breaks',
+    name: 'Breaks & Transitions',
+    description: 'Break and day transition slides',
+    templates: [
+      { id: 'tea', file: null, name: 'Tea Break', icon: 'coffee', special: true },
+      { id: 'lunch', file: null, name: 'Lunch Break', icon: 'lunch', special: true },
+      { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset' },
+      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true },
+    ]
+  },
+  {
+    id: 'custom',
+    name: 'Custom Slide Templates',
+    description: 'Pre-made slide templates to customize',
+    templates: [
+      { id: 'objectives', file: 'custom_slides/01_objectives.md', name: 'Workshop Objectives', icon: 'target' },
+      { id: 'country', file: 'custom_slides/02_country-overview.md', name: 'Country Overview', icon: 'globe' },
+      { id: 'priorities', file: 'custom_slides/03_health-priorities.md', name: 'Health Priorities', icon: 'heart' },
+      { id: 'results', file: 'custom_slides/04_coverage-results.md', name: 'Coverage Results', icon: 'chart' },
+      { id: 'next_steps', file: 'custom_slides/99_next-steps.md', name: 'Next Steps', icon: 'arrow' },
+    ]
+  }
+]
+
+// Get template categories and items
+ipcMain.handle('get-templates', async () => {
+  const templatesDir = path.join(RESOURCE_HUB_PATH, 'templates')
+
+  return TEMPLATE_CATEGORIES.map(category => ({
+    ...category,
+    templates: category.templates.map(template => {
+      let preview = ''
+      if (template.file && !template.special) {
+        const filePath = path.join(templatesDir, template.file)
+        if (fs.existsSync(filePath)) {
+          const content = fs.readFileSync(filePath, 'utf-8')
+          // Extract first few lines for preview
+          const lines = content.split('\n').filter(l => l.trim() && !l.startsWith('---') && !l.startsWith('marp'))
+          preview = lines.slice(0, 3).join(' ').substring(0, 100)
+        }
+      }
+      return {
+        ...template,
+        path: template.file ? path.join(templatesDir, template.file) : null,
+        preview
+      }
+    })
+  }))
+})
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // IPC HANDLERS - Build Deck
 // ═══════════════════════════════════════════════════════════════════════════════
 
-ipcMain.handle('build-deck', async (_event, workshopId: string) => {
-  return new Promise((resolve, reject) => {
+ipcMain.handle('build-deck', async (_event, workshopId: string, skipPdf: boolean = false) => {
+  const outputsDir = path.join(RESOURCE_HUB_PATH, 'outputs')
+  const mdPath = path.join(outputsDir, `${workshopId}_deck.md`)
+  const htmlPath = path.join(outputsDir, `${workshopId}_deck.html`)
+  const pdfPath = path.join(outputsDir, `${workshopId}_deck.pdf`)
+
+  // Step 1: Build markdown with Python script
+  await new Promise<void>((resolve, reject) => {
     const scriptPath = path.join(RESOURCE_HUB_PATH, 'tools', '02_build_deck.py')
     const venvPython = path.join(RESOURCE_HUB_PATH, '.venv', 'bin', 'python3')
     const pythonPath = fs.existsSync(venvPython) ? venvPython : 'python3'
 
-    const process = spawn(pythonPath, [scriptPath, '--workshop', workshopId], {
+    const buildProcess = spawn(pythonPath, [scriptPath, '--workshop', workshopId], {
       cwd: RESOURCE_HUB_PATH,
     })
 
-    let stdout = ''
     let stderr = ''
 
-    process.stdout.on('data', (data) => {
-      stdout += data.toString()
-    })
-
-    process.stderr.on('data', (data) => {
+    buildProcess.stderr.on('data', (data) => {
       stderr += data.toString()
     })
 
-    process.on('close', (code) => {
+    buildProcess.on('close', (code) => {
       if (code === 0) {
-        resolve({ success: true, output: stdout })
+        resolve()
       } else {
-        reject(new Error(`Build failed: ${stderr || stdout}`))
+        reject(new Error(`Markdown build failed: ${stderr}`))
       }
     })
 
-    process.on('error', (error) => {
-      reject(error)
-    })
+    buildProcess.on('error', reject)
   })
+
+  // Step 2: Generate HTML preview with Marp (fast)
+  await new Promise<void>((resolve) => {
+    const marpPaths = ['/opt/homebrew/bin/marp', '/usr/local/bin/marp', 'marp']
+    let marpPath = 'marp'
+    for (const p of marpPaths) {
+      if (p === 'marp' || fs.existsSync(p)) {
+        marpPath = p
+        break
+      }
+    }
+
+    const themePath = path.join(RESOURCE_HUB_PATH, 'fastr-theme.css')
+
+    const marpProcess = spawn(marpPath, [
+      '--no-config',
+      '--theme', themePath,
+      '--html',
+      '--allow-local-files',
+      mdPath,
+      '-o', htmlPath
+    ], {
+      cwd: RESOURCE_HUB_PATH,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+
+    marpProcess.stdout.on('data', () => {})
+    marpProcess.stderr.on('data', () => {})
+
+    marpProcess.on('close', () => resolve())
+    marpProcess.on('error', () => resolve())
+  })
+
+  // Step 3: Convert to PDF with Marp (unless skipped)
+  if (!skipPdf) {
+    await new Promise<void>((resolve, reject) => {
+      // Find marp
+      const marpPaths = ['/opt/homebrew/bin/marp', '/usr/local/bin/marp', 'marp']
+      let marpPath = 'marp'
+      for (const p of marpPaths) {
+        if (p === 'marp' || fs.existsSync(p)) {
+          marpPath = p
+          break
+        }
+      }
+
+      // Find browser (same logic as 04_export_pdf.py)
+      const browserPaths = [
+        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
+        '/Applications/Chromium.app/Contents/MacOS/Chromium',
+      ]
+      let browserPath = ''
+      for (const p of browserPaths) {
+        if (fs.existsSync(p)) {
+          browserPath = p
+          break
+        }
+      }
+
+      const themePath = path.join(RESOURCE_HUB_PATH, 'fastr-theme.css')
+
+      const marpArgs = [
+        '--no-config',
+        '--theme', themePath,
+        '--html',
+        '--pdf',
+        '--allow-local-files',
+        ...(browserPath ? ['--browser-path', browserPath] : []),
+        mdPath,
+        '-o', pdfPath
+      ]
+
+      console.log('Running Marp:', marpPath, marpArgs.join(' '))
+
+      const marpProcess = spawn(marpPath, marpArgs, {
+        cwd: RESOURCE_HUB_PATH,
+        stdio: ['ignore', 'pipe', 'pipe'], // Prevent stdin from hanging, capture stdout/stderr
+        env: { ...process.env, PUPPETEER_EXECUTABLE_PATH: browserPath || undefined },
+      })
+
+      let stdout = ''
+      let stderr = ''
+
+      // Must consume stdout to prevent buffer from filling and blocking process
+      marpProcess.stdout.on('data', (data) => {
+        stdout += data.toString()
+      })
+
+      marpProcess.stderr.on('data', (data) => {
+        stderr += data.toString()
+      })
+
+      // Set a timeout to prevent infinite hanging
+      const timeout = setTimeout(() => {
+        console.error('Marp timed out after 60 seconds')
+        marpProcess.kill('SIGTERM')
+      }, 60000)
+
+      marpProcess.on('close', (code) => {
+        clearTimeout(timeout)
+        if (code === 0) {
+          console.log('Marp completed successfully')
+          resolve()
+        } else {
+          // PDF conversion failed, but markdown was built - don't fail completely
+          console.error('PDF conversion failed:', stderr || stdout)
+          resolve() // Still resolve, we have the markdown
+        }
+      })
+
+      marpProcess.on('error', (error) => {
+        clearTimeout(timeout)
+        console.error('Marp error:', error)
+        resolve() // Still resolve, we have the markdown
+      })
+    })
+  }
+
+  // Return paths
+  const hasPdf = fs.existsSync(pdfPath)
+  const hasHtml = fs.existsSync(htmlPath)
+
+  return {
+    success: true,
+    outputPath: hasPdf ? pdfPath : mdPath,
+    outputDir: outputsDir,
+    mdPath: mdPath,
+    htmlPath: hasHtml ? htmlPath : null,
+    pdfPath: hasPdf ? pdfPath : null,
+  }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// IPC HANDLERS - File System Navigation
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Open file in default application
+ipcMain.handle('open-file', async (_event, filePath: string) => {
+  try {
+    await shell.openPath(filePath)
+    return true
+  } catch (error) {
+    console.error('Error opening file:', error)
+    throw error
+  }
+})
+
+// Open HTML preview in a new window (for proper file:// access)
+ipcMain.handle('open-preview-window', async (_event, htmlPath: string) => {
+  try {
+    const previewWindow = new BrowserWindow({
+      width: 1200,
+      height: 800,
+      title: 'Deck Preview',
+      webPreferences: {
+        webSecurity: false, // Allow loading local files
+      },
+    })
+
+    previewWindow.loadFile(htmlPath)
+    return true
+  } catch (error) {
+    console.error('Error opening preview window:', error)
+    throw error
+  }
+})
+
+// Show file in folder (reveal in Finder/Explorer)
+ipcMain.handle('show-in-folder', async (_event, filePath: string) => {
+  try {
+    shell.showItemInFolder(filePath)
+    return true
+  } catch (error) {
+    console.error('Error showing in folder:', error)
+    throw error
+  }
+})
+
+// Read file content (for preview)
+ipcMain.handle('read-file-content', async (_event, filePath: string) => {
+  try {
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File not found: ${filePath}`)
+    }
+    return fs.readFileSync(filePath, 'utf-8')
+  } catch (error) {
+    console.error('Error reading file:', error)
+    throw error
+  }
+})
+
+// Get outputs folder path
+ipcMain.handle('get-outputs-path', async () => {
+  return path.join(RESOURCE_HUB_PATH, 'outputs')
+})
+
+// List output files for a workshop
+ipcMain.handle('get-workshop-outputs', async (_event, workshopId: string) => {
+  try {
+    const outputsDir = path.join(RESOURCE_HUB_PATH, 'outputs')
+    if (!fs.existsSync(outputsDir)) {
+      return []
+    }
+
+    const files = fs.readdirSync(outputsDir)
+    return files
+      .filter(f => f.startsWith(workshopId) && (f.endsWith('.md') || f.endsWith('.pdf') || f.endsWith('.pptx')))
+      .map(f => ({
+        name: f,
+        path: path.join(outputsDir, f),
+        type: f.endsWith('.pdf') ? 'pdf' : f.endsWith('.pptx') ? 'pptx' : 'md',
+        modified: fs.statSync(path.join(outputsDir, f)).mtime,
+      }))
+      .sort((a, b) => b.modified.getTime() - a.modified.getTime())
+  } catch (error) {
+    console.error('Error listing outputs:', error)
+    return []
+  }
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // IPC HANDLERS - AI Assistant (Claude API)
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// Detailed module descriptions for AI recommendations
+const MODULE_DETAILS: Record<number, { name: string; description: string; topics: string[]; duration: string; audience: string }> = {
+  0: {
+    name: 'Introduction to FASTR',
+    description: 'Overview of the FASTR methodology, why rapid-cycle analytics matters for RMNCAH-N programs, and introduction to technical approaches.',
+    topics: ['Introduction to FASTR approach', 'RMNCAH-N service use monitoring', 'Why rapid-cycle analytics', 'Technical approaches overview'],
+    duration: '45-60 min',
+    audience: 'All participants - essential foundation',
+  },
+  1: {
+    name: 'Identify Questions & Indicators',
+    description: 'How to identify priority analytical questions, develop data use cases, and prepare indicator frameworks for extraction.',
+    topics: ['FASTR gaps and challenges', 'Development of data use case', 'Defining priority questions', 'Preparing for data extraction'],
+    duration: '60-90 min',
+    audience: 'Program managers, M&E officers',
+  },
+  2: {
+    name: 'Data Extraction',
+    description: 'Technical module on extracting data from DHIS2 and other health information systems using various tools.',
+    topics: ['Why extract data', 'DHIS2 data structure', 'Data Downloader tool', 'API-based extraction', 'Data validation'],
+    duration: '90-120 min',
+    audience: 'Data managers, IT staff, technically-oriented participants',
+  },
+  3: {
+    name: 'FASTR Analytics Platform',
+    description: 'Hands-on introduction to the FASTR Analytics Platform - accessing, navigating, importing data, and running modules.',
+    topics: ['Platform overview', 'Accessing the platform', 'Setting up structure', 'Importing datasets', 'Running analysis modules', 'Creating visualizations', 'Generating reports'],
+    duration: '120-180 min',
+    audience: 'All data users - hands-on session',
+  },
+  4: {
+    name: 'Data Quality Assessment',
+    description: 'Systematic approach to assessing data quality: completeness, outliers, internal consistency, and overall DQA scoring.',
+    topics: ['Approach to DQA', 'Indicator completeness', 'Outlier detection', 'Internal consistency checks', 'Overall DQA score interpretation'],
+    duration: '90-120 min',
+    audience: 'Data managers, M&E officers, program staff',
+  },
+  5: {
+    name: 'Data Quality Adjustment',
+    description: 'Methods for adjusting data to account for quality issues before analysis - outlier treatment and completeness adjustment.',
+    topics: ['Approach to adjustment', 'Adjustment for outliers', 'Adjustment for completeness'],
+    duration: '60-90 min',
+    audience: 'Data analysts, M&E officers',
+  },
+  6: {
+    name: 'Data Analysis',
+    description: 'Core analytical methods: service utilization trends, year-over-year change, disruption detection, coverage estimation.',
+    topics: ['Service utilization analysis', 'Year-over-year change', 'Disruption detection', 'Actual vs expected outputs', 'Coverage introduction', 'Denominator methodology', 'Coverage projections', 'Interpreting outputs'],
+    duration: '180-240 min',
+    audience: 'All participants - core content',
+  },
+  7: {
+    name: 'Results Communication',
+    description: 'How to interpret findings, create effective visualizations, and communicate results to stakeholders for decision-making.',
+    topics: ['Analytical thinking', 'Data visualization principles', 'Using data for decisions', 'Stakeholder engagement', 'Quarterly reporting practice'],
+    duration: '90-120 min',
+    audience: 'Program managers, communications staff',
+  },
+  8: {
+    name: 'Survey & HFA',
+    description: 'Supplementary module on health facility assessments and phone surveys to complement routine data analysis.',
+    topics: ['HFA and phone survey overview', 'Questionnaire adaptation', 'Structure review', 'Hands-on adaptation', 'HFA priorities and data use'],
+    duration: '120-180 min',
+    audience: 'Survey specialists, M&E teams planning primary data collection',
+  },
+}
+
+// Tools the AI can use to modify the deck
+const AI_TOOLS = [
+  {
+    name: 'add_module',
+    description: 'Add an entire module to the workshop deck. Use this when the user wants to add all content from a module.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
+        module_number: { type: 'number', description: 'Module number (0-8). 0=Introduction, 1=Questions & Indicators, 2=Data Extraction, 3=Platform, 4=DQA, 5=DQ Adjustment, 6=Data Analysis, 7=Results Communication, 8=Survey & HFA' },
+        duration: { type: 'number', description: 'Duration in minutes (default based on module)' },
+      },
+      required: ['day', 'module_number'],
+    },
+  },
+  {
+    name: 'add_break',
+    description: 'Add a break (tea or lunch) to the workshop agenda',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to add the break to' },
+        break_type: { type: 'string', enum: ['tea', 'lunch'], description: 'Type of break' },
+        duration: { type: 'number', description: 'Duration in minutes (default: 15 for tea, 60 for lunch)' },
+      },
+      required: ['day', 'break_type'],
+    },
+  },
+  {
+    name: 'add_custom_session',
+    description: 'Add a custom session like opening remarks, country presentation, group work, etc.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to add the session to' },
+        session_name: { type: 'string', description: 'Name of the session' },
+        duration: { type: 'number', description: 'Duration in minutes' },
+      },
+      required: ['day', 'session_name', 'duration'],
+    },
+  },
+  {
+    name: 'set_day_start_time',
+    description: 'Set the start time for a day. This enables automatic time calculation for all sessions.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to set the start time for' },
+        start_time: { type: 'string', description: 'Start time in HH:MM format (e.g., "08:30")' },
+      },
+      required: ['day', 'start_time'],
+    },
+  },
+]
+
 ipcMain.handle('ai-chat', async (_event, messages: any[], context: any) => {
   try {
     const apiKey = process.env.ANTHROPIC_API_KEY
 
     if (!apiKey) {
-      throw new Error('ANTHROPIC_API_KEY not set. Add it to your environment variables.')
+      throw new Error('ANTHROPIC_API_KEY not set. Add it to .env file.')
     }
 
     const Anthropic = (await import('@anthropic-ai/sdk')).default
     const client = new Anthropic({ apiKey })
 
-    // Build system prompt with context
-    const systemPrompt = `You are an AI assistant helping build FASTR workshop decks.
+    // Build comprehensive system prompt
+    const systemPrompt = `You are a FASTR workshop planning assistant. You can DIRECTLY MODIFY the workshop deck using the tools provided.
 
-FASTR (Framework for Analytics Strengthening Through Routine data) is a methodology for analyzing health system data.
+# ABOUT FASTR
+FASTR (Framework for Analytics Strengthening Through Routine data) is a methodology for analyzing health system data, particularly RMNCAH-N (Reproductive, Maternal, Newborn, Child, Adolescent Health and Nutrition) program data from DHIS2.
 
-Available modules:
-${Object.entries(MODULE_NAMES).map(([num, name]) => `- Module ${num}: ${name}`).join('\n')}
+# AVAILABLE MODULES
+${Object.entries(MODULE_DETAILS).map(([num, mod]) => `
+## Module ${num}: ${mod.name}
+- **Description**: ${mod.description}
+- **Topics**: ${mod.topics.join(', ')}
+- **Typical Duration**: ${mod.duration}
+- **Best for**: ${mod.audience}
+`).join('\n')}
 
-Current workshop context:
+# CURRENT WORKSHOP
 ${JSON.stringify(context, null, 2)}
 
-Help the user:
-- Suggest which modules to include based on their workshop goals
-- Generate custom slide content in markdown format
-- Recommend agenda structure and timing
-- Answer questions about FASTR methodology
+# YOUR CAPABILITIES
+You can use tools to:
+1. **add_module** - Add a full module to a specific day
+2. **add_break** - Add tea or lunch breaks
+3. **add_custom_session** - Add custom sessions (opening remarks, group work, etc.)
+4. **set_day_start_time** - Set the start time for a day
 
-When generating slides, use this format:
-\`\`\`markdown
-# Slide Title
-
-- Bullet point 1
-- Bullet point 2
-- Bullet point 3
-\`\`\`
-`
+# INSTRUCTIONS
+- When the user asks to add content, USE THE TOOLS to actually add it
+- After using tools, briefly confirm what you added
+- If the user asks a question without wanting changes, just answer without using tools
+- Be proactive: if they say "add Data Analysis module", use add_module with module_number=6
+- Consider adding appropriate breaks when building a full day agenda`
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 1024,
+      max_tokens: 2048,
       system: systemPrompt,
       messages: messages,
+      tools: AI_TOOLS,
     })
+
+    // Process the response - collect tool uses and text
+    const toolCalls: any[] = []
+    let textContent = ''
+
+    for (const block of response.content) {
+      if (block.type === 'text') {
+        textContent += block.text
+      } else if (block.type === 'tool_use') {
+        toolCalls.push({
+          id: block.id,
+          name: block.name,
+          input: block.input,
+        })
+      }
+    }
 
     return {
       role: 'assistant',
-      content: response.content[0].type === 'text' ? response.content[0].text : '',
+      content: textContent,
+      toolCalls: toolCalls,
+      stopReason: response.stop_reason,
     }
   } catch (error: any) {
     console.error('AI chat error:', error)
