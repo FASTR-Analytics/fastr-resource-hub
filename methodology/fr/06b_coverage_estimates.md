@@ -273,7 +273,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
 #### Documentation sur les fonctions principales
 
-? ?? "`process_SIGS_adjusted_volume()`"
+??? "`process_SIGS_adjusted_volume()`"
 
     **Objectif** : Préparer les données SIGS pour le calcul du dénominateur
 
@@ -302,7 +302,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     Country_Name  Province_A    2021  13000      10500          ...  11
     ```
 
-? ?? "`process_survey_data()`"
+??? "`process_survey_data()`"
 
     **Objectif** : Harmoniser et étendre les données d'enquête pour les utiliser comme points de référence en matière de couverture
 
@@ -340,7 +340,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     - cODE_BLOCK_54__ : Observations brutes de l'enquête (format large)
     - cODE_BLOCK_55__ : Observations brutes de l'enquête (format long) avec détails de la source
 
-? ?? "`process_national_population_data()`"
+??? "`process_national_population_data()`"
 
     **Objectif** : Préparer les estimations de la population du WPP de l'ONU pour le calcul du dénominateur
 
@@ -362,7 +362,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     - `wide` : Indicateurs de population en format large
     - cODE_BLOCK_61__ : Données démographiques en format long avec suivi des sources
 
-? ?? "`calculate_dénominateurs()`"
+??? "`calculate_dénominateurs()`"
 
     **Objectif** : Calcule tous les dénominateurs possibles à partir des données du système d'information sur les ménages et de la population. Il s'agit de la fonction principale qui génère des estimations de dénominateurs multiples.
 
@@ -427,7 +427,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     Base de données avec tous les dénominateurs calculés et les données originales du SIGS et de l'enquête
 
-? ?? "`classify_source_type()`"
+??? "`classify_source_type()`"
 
     **Objectif** : Catégorise les dénominateurs pour éviter les références circulaires
 
@@ -441,7 +441,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     Cette classification garantit que lors de la sélection des "meilleurs" dénominateurs, nous évitons d'utiliser des dénominateurs basés sur des références (qui montreraient artificiellement une couverture à 100% égale à la valeur de l'enquête).
 
-? ?? "`compare_couverture_to_survey()`"
+??? "`compare_couverture_to_survey()`"
 
     **Objectif** : Sélectionne le dénominateur le plus performant pour chaque indicateur
 
@@ -483,7 +483,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     - Assure que les données SIGS déterminent la couverture lorsqu'elles sont disponibles
     - Le PPNU n'est utilisé que lorsqu'il n'existe pas d'options basées sur le SIGS
 
-? ?? "`create_combined_results_table()`"
+??? "`create_combined_results_table()`"
 
     **Objectif** : Fusionne les estimations de couverture et les observations d'enquête en une sortie unifiée
 
@@ -511,7 +511,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
 #### Méthodes statistiques et algorithmes
 
-? ?? "Remplissage (dernière observation reportée)"
+??? "Remplissage (dernière observation reportée)"
 
     Les données d'enquête présentent généralement des lacunes (par exemple, l'enquête démographique et sanitaire tous les 5 ans). Pour créer des dénominateurs continus :
 
@@ -529,7 +529,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     Cela suppose que la couverture reste constante jusqu'à la prochaine observation.
 
-? ?? "minimisation de l'erreur quadratique"
+??? "minimisation de l'erreur quadratique"
 
     Pour sélectionner le meilleur dénominateur :
 
@@ -896,7 +896,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 - Créer des fichiers séparés pour les niveaux national, admin2 et admin3
 - Générer des fichiers vides avec la structure correcte pour les niveaux d'administration non disponibles
 
-? ?? "Spécification des fichiers de sortie"
+??? "Spécification des fichiers de sortie"
 
     La partie 1 génère sept fichiers CSV :
 
@@ -960,7 +960,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - cODE_BLOCK_136__ : Meilleur dénominateur pour la couverture au niveau 2 de l'administration
     - `dénominateur_admin3` : Meilleur dénominateur pour la couverture au niveau 3 de l'administration
 
-? ?? "Sauvegarde et validation des données"
+??? "Sauvegarde et validation des données"
 
     La partie 1 comprend de multiples contrôles de validation :
 
@@ -981,7 +981,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     6. **Gestion des erreurs** : Enveloppe le traitement de l'enquête dans `tryCatch` pour gérer les erreurs de manière élégante
 
-? ?? "Indicateurs pris en charge"
+??? "Indicateurs pris en charge"
 
     La partie 1 traite les indicateurs de santé suivants :
 
@@ -1009,7 +1009,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - cODE_BLOCK_158__ : Taux de mortalité infantile (enquête uniquement)
     - cODE_BLOCK_159__ : Supplémentation en vitamine A
 
-? ?? "Notes d'utilisation et bonnes pratiques
+??? "Notes d'utilisation et bonnes pratiques
 
     **Quand utiliser quelle variable de comptage**
 
@@ -1036,7 +1036,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - **Dénominateurs de référence** : montrent la cohérence interne du système SIGS (mais sont exclus de la "meilleure" valeur par défaut) : Offrent des points de référence basés sur la population
     - La comparaison de plusieurs options révèle des problèmes de qualité des données
 
-? ?? "Résolution des problèmes courants
+??? "Résolution des problèmes courants
 
     **Problèmes** : Pas de correspondance entre les domaines administratifs du SIGS et de l'enquête
 
@@ -1068,7 +1068,7 @@ La partie 2 a trois objectifs principaux :
 
 Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramètres clés :
 
-? ?? "1. configuration de la sélection du dénominateur"
+??? "1. configuration de la sélection du dénominateur"
 
     Au début du script, les utilisateurs spécifient le dénominateur à utiliser pour chaque indicateur :
 
@@ -1114,7 +1114,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
     Chaque option de dénominateur combine une source (CPN1, Delivery, BCG, Penta1, ou WPP) avec un facteur d'ajustement de l'âge.
 
-? ?? "2) Configuration du niveau administratif
+??? "2) Configuration du niveau administratif
 
     ```r
     RUN_NATIONAL <- TRUE  # Always TRUE - national analysis is mandatory
@@ -1126,7 +1126,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
 #### Fonctions et méthodes principales
 
-? ?? "Fonction 1 : `couverture_deltas()`"
+??? "Fonction 1 : `couverture_deltas()`"
 
     **Objectif** : Calculer les changements de couverture d'une année sur l'autre pour chaque combinaison indicateur-dénominateur-géographie.
 
@@ -1173,7 +1173,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     | Pays A | Penta3 | dPenta1_DTC | 2019 | 78.5 | 3.3 |
     | Pays A | Penta3 | dPenta1_DTC | 2020 | 80.1 | 1.6 | Pays A | Penta3 | dPenta1_DTC | 2018 | 75.2 | NA
 
-? ?? "Fonction 2 : `project_survey_from_deltas()`"
+??? "Fonction 2 : `project_survey_from_deltas()`"
 
     **Objectif** : Projette les estimations de couverture basées sur les enquêtes en utilisant les tendances des données administratives.
 
@@ -1248,7 +1248,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
     | Pays A | Penta3 | dPenta1_DTC | 2019 | 2018 | 78.3 |
     | Pays A | Penta3 | dPenta1_DTC | 2020 | 2018 | 79.9 |
 
-? ?? "Fonction 3 : `build_final_results()`"
+??? "Fonction 3 : `build_final_results()`"
 
     **Objectif** : Combine la couverture SIGS, les estimations de l'enquête projetée et les valeurs de l'enquête originale dans un ensemble de données de sortie unifié.
 
@@ -1324,7 +1324,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
 #### Fonctions d'aide
 
-? ?? "Fonction d'aide : `filter_by_dénominateur_selection()`"
+??? "Fonction d'aide : `filter_by_dénominateur_selection()`"
 
     **Objectif** : Filtre les résultats combinés de la partie 1 en fonction de la sélection du dénominateur par l'utilisateur.
 
@@ -1346,7 +1346,7 @@ Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramèt
 
     Trame de données filtrée contenant uniquement les dénominateurs sélectionnés par l'utilisateur.
 
-? ?? "Fonction d'aide : `extract_survey_from_combined()`"
+??? "Fonction d'aide : `extract_survey_from_combined()`"
 
     **Objectif** : Extrait les valeurs brutes de l'enquête à partir des résultats combinés de la partie 1.
 
@@ -1452,7 +1452,7 @@ Identique à la colonne nationale, plus :
 
 #### Considérations méthodologiques
 
-? ?? "1. stratégie de sélection du dénominateur
+??? "1. stratégie de sélection du dénominateur
 
     **Quand utiliser le terme "meilleur "** :
 
@@ -1467,7 +1467,7 @@ Identique à la colonne nationale, plus :
     - Réalisation d'analyses de sensibilité
     - Problèmes connus avec certaines sources de données
 
-? ?? "2) Méthodologie de projection
+??? "2) Méthodologie de projection
 
     L'approche de projection de la partie 2 utilise une **méthode delta additive** plutôt qu'un remplacement multiplicatif ou direct :
 
@@ -1487,7 +1487,7 @@ Identique à la colonne nationale, plus :
 
     **Meilleure pratique** : Les projections doivent être validées par rapport aux nouvelles données d'enquête lorsqu'elles sont disponibles, et la base de référence doit être mise à jour avec l'enquête la plus récente.
 
-? ?? "3. traitement des données manquantes"
+??? "3. traitement des données manquantes"
 
     La partie 2 met en œuvre plusieurs stratégies pour les données manquantes :
 
@@ -1496,7 +1496,7 @@ Identique à la colonne nationale, plus :
     - **Lacunes au niveau de l'administration** : Le script détecte automatiquement et saute les niveaux d'administration pour lesquels il n'y a pas de données
     - **Dénominateurs manquants** : Si un dénominateur sélectionné n'existe pas pour un indicateur, cette combinaison indicateur-dénominateur est omise
 
-? ?? "Cohérence de l'analyse multiniveau"
+??? "Cohérence de l'analyse multiniveau"
 
     La partie 2 traite chaque niveau administratif de manière indépendante :
 
@@ -1506,7 +1506,7 @@ Identique à la colonne nationale, plus :
 
     **Important** : Les estimations entre les niveaux peuvent ne pas être directement comparables si des dénominateurs différents sont sélectionnés ou si la qualité des données varie selon le niveau.
 
-? ?? "Validation et contrôles de qualité
+??? "Validation et contrôles de qualité
 
     Les utilisateurs doivent valider les résultats de la partie 2 en procédant comme suit
 
@@ -1531,7 +1531,7 @@ Identique à la colonne nationale, plus :
        - Enquêter sur les écarts importants
 
 
-? ?? "Résolution des problèmes courants
+??? "Résolution des problèmes courants
 
     **Problème** : "Pas de données dans les résultats combinés d'admin2"
 
@@ -1556,7 +1556,7 @@ Identique à la colonne nationale, plus :
 
 ### Exemples de codes
 
-? ?? "Exemple 1 : Exécution de la partie 1 avec les paramètres par défaut"
+??? "Exemple 1 : Exécution de la partie 1 avec les paramètres par défaut"
 
     ```r
     # Set working directory
@@ -1581,7 +1581,7 @@ Identique à la colonne nationale, plus :
 
     La partie 1 génère des estimations de dénominateurs et sélectionne le meilleur dénominateur pour chaque indicateur sur la base d'une comparaison d'enquêtes.
 
-? ?? "Exemple 2 : Ajustement des paramètres de mortalité
+??? "Exemple 2 : Ajustement des paramètres de mortalité
 
     ```r
     # Use country-specific mortality rates from EDS or other sources
@@ -1599,7 +1599,7 @@ Identique à la colonne nationale, plus :
 
     **Sources pour les taux spécifiques aux pays** : Rapports finaux des EDS, Groupe interinstitutions des Nations unies pour l'estimation de la mortalité infantile (IGME), ou statistiques nationales de l'état civil.
 
-? ?? "Exemple 3 : Exécution de la partie 2 avec des sélections de dénominateurs personnalisées"
+??? "Exemple 3 : Exécution de la partie 2 avec des sélections de dénominateurs personnalisées"
 
     ```r
     # Override automatic "best" selection for specific indicateurs
@@ -1613,7 +1613,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Lorsque les connaissances programmatiques suggèrent qu'un dénominateur spécifique est plus approprié que l'option statistiquement sélectionnée.
 
-? ?? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide
+??? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide
 
     ```r
     # Part 1: Run national level only (faster)
@@ -1626,7 +1626,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Analyse exploratoire initiale, ou lorsque les données d'enquêtes infranationales ne sont pas disponibles.
 
-? ?? "Exemple 5 : Analyse infranationale complète
+??? "Exemple 5 : Analyse infranationale complète
 
     ```r
     # Part 1: Include admin3 level
@@ -1639,7 +1639,7 @@ Identique à la colonne nationale, plus :
 
     **Cas d'utilisation** : Analyse détaillée au niveau du district lorsqu'il existe des données d'enquête infranationales.
 
-? ?? "Exemple 6 : Utilisation programmatique des résultats
+??? "Exemple 6 : Utilisation programmatique des résultats
 
     ```r
     # Load couverture outputs
@@ -1672,7 +1672,7 @@ Identique à la colonne nationale, plus :
 
 ### Notes d'utilisation
 
-? ?? "Colonnes du fichier de sortie"
+??? "Colonnes du fichier de sortie"
 
     **Les fichiers de sortie de la partie 2** (`M5_couverture_estimation_*.csv`) contiennent :
 
@@ -1689,7 +1689,7 @@ Identique à la colonne nationale, plus :
     | `survey_raw_source` | Source de l'enquête (EDS/MICS) | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances SIGS
     | __CODE_BLOC_234__ | Nom et année de l'enquête spécifique | __CODE_BLOC_234__ | Source de l'enquête (EDS/MICS)
 
-? ?? "Examen des options de dénominateur"
+??? "Examen des options de dénominateur"
 
     Les fichiers de sortie de la partie 1 (`M4_combined_results_*.csv`) contiennent des estimations de couverture pour toutes les options de dénominateur. Pour les passer en revue :
 
@@ -1701,7 +1701,7 @@ Identique à la colonne nationale, plus :
 
     Pour annuler la sélection automatique dans la partie 2, définissez les paramètres `DENOM_*` avec un nom de dénominateur spécifique au lieu de `"best"`.
 
-? ?? "Exigences en matière de données infranationales
+??? "Exigences en matière de données infranationales
 
     Le module vérifie la disponibilité des données infranationales :
 
@@ -1709,7 +1709,7 @@ Identique à la colonne nationale, plus :
     - Si aucune donnée d'enquête infranationale correspondante n'est trouvée, le module passe à un niveau géographique supérieur
     - Les messages de la console indiquent les niveaux d'analyse en cours de traitement
 
-? ?? "Contrôles de validation
+??? "Contrôles de validation
 
     Après avoir exécuté les deux parties, examinez les résultats pour :
 

@@ -165,7 +165,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Paramètres de configuration
 
-? ?? "Paramètres d'analyse de base
+??? "Paramètres d'analyse de base
 
     | Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration
     |-----------|---------|------|-------------|-----------------|
@@ -173,7 +173,7 @@ Pour le graphique de variation de volume (résultat 4) :
     | `SELECTEDCOUNT` | "count_final_both" | Chaîne | Chaîne | Colonne de données utilisée pour l'analyse | Options : `count_final_none`, `count_final_completeness`, `count_final_both` |
     | `visualisationCOUNT` | "count_final_both" | Chaîne de caractères | Chaîne | Colonne de données utilisée pour la visualisation | Doit correspondre à ou compléter `SELECTEDCOUNT` |
 
-? ?? "Paramètres de la carte de contrôle"
+??? "Paramètres de la carte de contrôle"
 
     | Paramètres de la carte de contrôle - Paramètres par défaut - Type - Description - Guide d'ajustement - Paramètres de la carte de contrôle - Paramètres par défaut - Type - Description - Guide d'ajustement
     |-----------|---------|------|-------------|-----------------|
@@ -184,7 +184,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Note** : `RISE_THRESHOLD` est automatiquement calculé comme `1 / DIP_THRESHOLD` (par défaut : ~1.11) pour refléter symétriquement la détection de l'immersion.
 
-? ?? "Paramètres d'analyse géographique"
+??? "Paramètres d'analyse géographique"
 
     | Paramètre | Valeur par défaut | Type | Description | Guide d'ajustement
     |-----------|---------|------|-------------|-----------------|
@@ -192,13 +192,13 @@ Pour le graphique de variation de volume (résultat 4) :
     | FALSE | Logique | Exécuter ou non les régressions admin_area_3 | Mettre TRUE pour l'analyse au niveau du district (augmente le temps d'exécution)
     | FALSE | Logique | Exécuter ou non l'analyse admin_area_4 | Mettre TRUE pour l'analyse au niveau le plus fin (très lent pour les grands ensembles de données) |
 
-? ?? "Paramètres de la source de données
+??? "Paramètres de la source de données
 
     | Paramètres de la source de données - Paramètres - Défauts - Type - Description - Paramètres de la source de données - Paramètres - Défauts - Type - Description
     |-----------|---------|------|-------------|
     | `PROJECT_DATA_SIGS` | "SIGS_ISO3.csv" | Nom de fichier pour les données SIGS brutes
 
-? ?? "Guide de sélection des paramètres
+??? "Guide de sélection des paramètres
 
     **Pour l'analyse à haute sensibilité** (détection des petites perturbations) :
     - __CODE_BLOC_38__
@@ -217,7 +217,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Spécifications des entrées/sorties
 
-? ?? "Exigences d'entrée"
+??? "Exigences d'entrée"
 
     #### Entrées primaires
 
@@ -342,7 +342,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Documentation des fonctions clés
 
-? ?? "`robust_control_chart(panel_data, selected_count)`"
+??? "`robust_control_chart(panel_data, selected_count)`"
 
     **Objectif** : Identifie les anomalies dans l'utilisation des services en utilisant une régression robuste et des limites de contrôle basées sur le MAD.
 
@@ -423,7 +423,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Méthodes et algorithmes statistiques
 
-? ?? "Analyse des cartes de contrôle
+??? "Analyse des cartes de contrôle
 
     Les volumes de services sont agrégés au niveau géographique spécifié (configurable via `CONTROL_CHART_LEVEL`). Le pipeline supprime les valeurs aberrantes (`outlier_flag == 1`), complète les mois manquants et filtre les mois à faible volume (<50% du volume moyen global).
 
@@ -621,7 +621,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Étapes de l'analyse détaillée
 
-? ?? "Partie 1 : Analyse des cartes de contrôle"
+??? "Partie 1 : Analyse des cartes de contrôle"
 
     #### Étape 1 : Préparer les données
 
@@ -666,7 +666,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Un mois se voit attribuer `tagged = 1` si l'une des conditions ci-dessus est remplie. Les enregistrements marqués sont sauvegardés dans `M3_chartout.csv` et transmis à l'analyse des perturbations.
 
-? ?? "Partie 2 : Analyse des perturbations
+??? "Partie 2 : Analyse des perturbations
 
     #### Étape 1 : Préparation des données
 
@@ -724,7 +724,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Exemples de code
 
-? ?? "Exemple 1 : Exécution du module avec les paramètres par défaut"
+??? "Exemple 1 : Exécution du module avec les paramètres par défaut"
 
     ```r
     # Set working directory
@@ -754,7 +754,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     Avec les paramètres par défaut, le module exécute l'analyse de la carte de contrôle au niveau admin_area_2 et produit des estimations de perturbations pour les niveaux national et régional.
 
-? ?? "Exemple 2 : Ajustement de la sensibilité de la détection des perturbations"
+??? "Exemple 2 : Ajustement de la sensibilité de la détection des perturbations"
 
     ```r
     # Make perturbation detection more sensitive (lower thresholds)
@@ -772,7 +772,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Use case** : Ajuster la sensibilité en fonction de la qualité des données. Les données plus bruyantes peuvent nécessiter des seuils moins sensibles pour éviter les faux positifs.
 
-? ?? "Exemple 3 : Exécution d'une analyse au niveau du district"
+??? "Exemple 3 : Exécution d'une analyse au niveau du district"
 
     ```r
     # Enable district-level analysis (slower but more detailed)
@@ -786,7 +786,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Remarque** : L'analyse au niveau du district augmente considérablement la durée d'exécution. Pour les pays de grande taille, il est possible d'envisager une exécution pendant la nuit.
 
-? ?? "Exemple 4 : Sélection d'un scénario d'ajustement pour l'analyse"
+??? "Exemple 4 : Sélection d'un scénario d'ajustement pour l'analyse"
 
     ```r
     # Use unadjusted data for sensitivity analysis
@@ -806,7 +806,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Cas d'utilisation** : Comparer les estimations de perturbations entre différents scénarios d'ajustement de la qualité des données.
 
-? ?? "Exemple 5 : Optimisation de la mémoire pour les grands ensembles de données
+??? "Exemple 5 : Optimisation de la mémoire pour les grands ensembles de données
 
     ```r
     # Reduce batch sizes for memory-constrained environments
@@ -824,7 +824,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Cas d'utilisation** : Exécution sur des machines avec une RAM limitée (<8GB).
 
-? ?? "Exemple 6 : Utilisation programmatique des sorties"
+??? "Exemple 6 : Utilisation programmatique des sorties"
 
     ```r
     # Load perturbation analysis outputs
@@ -866,7 +866,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Dépannage
 
-? ?? "Problèmes courants et solutions"
+??? "Problèmes courants et solutions"
 
     #### Problème : Le script se bloque avec l'erreur "out of memory" (manque de mémoire)
 
@@ -958,7 +958,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ### Notes d'utilisation
 
-? ?? "Directives d'interprétation
+??? "Directives d'interprétation
 
     **Effets de perturbation (b_admin_area_*)** :
 

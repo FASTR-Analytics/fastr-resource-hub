@@ -199,7 +199,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
 
     Le paramètre `GEOLEVEL` détermine le niveau d'agrégation pour l'analyse de cohérence. Les niveaux administratifs inférieurs (3-4) permettent de saisir les tendances locales, mais les données peuvent être rares. Les niveaux supérieurs (2) fournissent des estimations plus stables mais peuvent masquer des incohérences locales.
 
-? ?? "Paramètres de détection des valeurs aberrantes
+??? "Paramètres de détection des valeurs aberrantes
 
     ```r
     # Proportion threshold for outlier detection
@@ -218,7 +218,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     - **Petites installations** : Réduire __CODE_BLOC_46__ à 50
     - **Grandes installations uniquement** : Augmenter `MINIMUM_COUNT_THRESHOLD` à 200+
 
-? ?? "Sélection de l'indicateur CQD
+??? "Sélection de l'indicateur CQD
 
     cODE_BLOC_2__
 
@@ -227,7 +227,7 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     - **Focalisation sur l'immunisation** : `c("BCG", "Penta1", "Penta3", "rougeole1")`
     - **Complet** : `c("Penta1", "CPN1", "opd", "delivery", "pnc1")`
 
-? ?? "Plages de référence de cohérence"
+??? "Plages de référence de cohérence"
 
     ```r
     all_consistency_ranges <- list(
@@ -265,7 +265,7 @@ __CODE_BLOC_4__
 
 #### Fichiers de sortie
 
-? ?? "M1_output_outlier_list.csv - Valeurs aberrantes marquées uniquement"
+??? "M1_output_outlier_list.csv - Valeurs aberrantes marquées uniquement"
 
     **Objectif** : Liste de référence rapide des seules observations signalées comme aberrantes
 
@@ -279,7 +279,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Les gestionnaires de données examinent des valeurs aberrantes spécifiques en vue d'une enquête ou d'une correction
 
-? ?? "M1_output_outliers.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes
+??? "M1_output_outliers.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes
 
     **Objectif** : Ensemble complet de données avec indicateurs de valeurs aberrantes pour toutes les combinaisons établissement-indicateur-période
 
@@ -297,7 +297,7 @@ __CODE_BLOC_4__
     - Analyse statistique des modèles de valeurs aberrantes
     - Génération de visualisations de la prévalence des valeurs aberrantes
 
-? ?? "M1_output_completeness.csv - Statut de complétude"
+??? "M1_output_completeness.csv - Statut de complétude"
 
     **Objectif** : Indicateurs d'exhaustivité pour toutes les combinaisons établissement-indicateur-période, y compris les enregistrements explicitement créés pour les mois manquants
 
@@ -321,7 +321,7 @@ __CODE_BLOC_4__
     - Identification des lacunes en matière de déclaration
     - Analyse des tendances du comportement en matière de déclaration
 
-? ?? "M1_output_consistency_geo.csv - Cohérence au niveau géographique"
+??? "M1_output_consistency_geo.csv - Cohérence au niveau géographique"
 
     **Objectif** : Indicateurs de cohérence calculés au niveau géographique spécifié (par exemple, district)
 
@@ -340,7 +340,7 @@ __CODE_BLOC_4__
     - Identifier les zones géographiques présentant des problèmes de cohérence
     - Création de heatmaps de cohérence par zone
 
-? ?? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement
+??? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement
 
     **Objectif** : Résultats de la cohérence géographique étendus au niveau de l'établissement
 
@@ -360,7 +360,7 @@ __CODE_BLOC_4__
     - Fusion des indicateurs de cohérence avec les analyses au niveau de l'établissement
     - Rapports de qualité spécifiques à l'établissement
 
-? ?? "M1_output_dqa.csv - notes finales de l'AQD
+??? "M1_output_dqa.csv - notes finales de l'AQD
 
     **Objectif** : Scores composites de qualité des données par établissement et par période
 
@@ -380,7 +380,7 @@ __CODE_BLOC_4__
 
 ### Documentation sur les fonctions clés
 
-? ?? "load_and_preprocess_data()"
+??? "load_and_preprocess_data()"
 
     **Signature** : `load_and_preprocess_data(file_path)`
 
@@ -411,7 +411,7 @@ __CODE_BLOC_4__
     geo_cols <- inputs$geo_cols
     ```
 
-? ?? "validate_consistency_pairs()"
+??? "validate_consistency_pairs()"
 
     **Signature** : `validate_consistency_pairs(consistency_params, data)`
 
@@ -434,7 +434,7 @@ __CODE_BLOC_4__
 
     cODE_BLOCK_6__
 
-? ?? "outlier_analysis()"
+??? "outlier_analysis()"
 
     **Signature** : `outlier_analysis(data, geo_cols, outlier_params)`
 
@@ -478,7 +478,7 @@ __CODE_BLOC_4__
     - Indicateur de valeur aberrante finale = 1 si (outlier_mad = 1 OR outlier_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
     - Le seuil (100 par défaut) garantit que seuls les volumes importants sont signalés, ce qui permet d'éviter les faux positifs dans les établissements à faible volume
 
-? ?? "process_completeness()"
+??? "process_completeness()"
 
     **Signature** : `process_completeness(outlier_data_main)`
 
@@ -505,7 +505,7 @@ __CODE_BLOC_4__
     - Indicateur d'exhaustivité : 0 (incomplet), 1 (complet), 2 (inactif - supprimé)
     - Séries temporelles complètes de la première à la dernière période de déclaration par indicateur
 
-? ?? "generate_full_series_per_indicateur()"
+??? "generate_full_series_per_indicateur()"
 
     **Signature** : `generate_full_series_per_indicateur(outlier_data, indicateur_id, timeframe)`
 
@@ -548,7 +548,7 @@ __CODE_BLOC_4__
     - 202009-202010: Complete (reported)
     ```
 
-? ?? "geo_consistency_analysis()"
+??? "geo_consistency_analysis()"
 
     **Signature** : `geo_consistency_analysis(data, geo_cols, geo_level, consistency_params)`
 
@@ -585,7 +585,7 @@ __CODE_BLOC_4__
 
     **Justification** : La mesure de la cohérence au niveau géographique tient compte des déplacements des patients entre les établissements et fournit une image plus précise des schémas d'utilisation des services au sein d'une communauté.
 
-? ?? "expand_geo_consistency_to_facilities()"
+??? "expand_geo_consistency_to_facilities()"
 
     **Signature** : `expand_geo_consistency_to_facilities(établissement_metadata, geo_consistency_results, geo_level)`
 
@@ -607,7 +607,7 @@ __CODE_BLOC_4__
 
     **Justification** : Étant donné que la cohérence est mesurée au niveau géographique (en tenant compte des déplacements des patients entre les établissements), tous les établissements d'un même district ou d'une même région reçoivent les mêmes scores de cohérence.
 
-? ?? "dqa_with_consistency()"
+??? "dqa_with_consistency()"
 
     **Signature** : `dqa_with_consistency(completeness_data, consistency_data, outlier_data, geo_cols, dqa_rules)`
 
@@ -655,7 +655,7 @@ __CODE_BLOC_4__
 
     cODE_BLOCK_11__
 
-? ?? "dqa_without_consistency()"
+??? "dqa_without_consistency()"
 
     **Signature** : `dqa_without_consistency(completeness_data, outlier_data, geo_cols, dqa_rules)`
 
@@ -679,7 +679,7 @@ __CODE_BLOC_4__
 
 ### Méthodes statistiques et algorithmes
 
-? ?? "Calcul de l'écart absolu médian (MAD)"
+??? "Calcul de l'écart absolu médian (MAD)"
 
     Le MAD est une mesure robuste de la variabilité qui est moins sensible aux valeurs aberrantes que l'écart-type.
 
@@ -705,7 +705,7 @@ __CODE_BLOC_4__
 
     cODE_BLOC_13__
 
-? ?? "Détection proportionnelle des valeurs aberrantes"
+??? "Détection proportionnelle des valeurs aberrantes"
 
     Cette méthode permet d'identifier les mois où une seule observation représente une proportion anormalement élevée du total annuel pour une combinaison installation-indicateur.
 
@@ -722,7 +722,7 @@ __CODE_BLOC_4__
 
     cODE_BLOCK_14__
 
-? ?? "Points de repère sur le rapport de cohérence"
+??? "Points de repère sur le rapport de cohérence"
 
     Le module applique des repères définis par programme pour les paires d'indicateurs :
 
@@ -765,7 +765,7 @@ __CODE_BLOC_4__
     **Détail de la mise en œuvre:**
     La cohérence est évaluée au niveau du district/de l'arrondissement (spécifié par `GEOLEVEL`) pour tenir compte des patients qui se rendent dans plusieurs établissements de leur région pour différents services.
 
-? ?? "Calcul de l'exhaustivité"
+??? "Calcul de l'exhaustivité"
 
     Pour un indicateur donné au cours d'un mois donné :
 
@@ -785,7 +785,7 @@ __CODE_BLOC_4__
 
     **Note importante** : Un niveau élevé d'exhaustivité n'indique pas nécessairement que le SIGS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être fournis dans les établissements ou certains établissements peuvent ne pas faire de déclaration. Pour les pays où le DHIS2 ne stocke pas les zéros, l'exhaustivité de l'indicateur peut être sous-estimée s'il y a beaucoup d'établissements à faible volume.
 
-? ?? "Calcul du score composite de l'AQD
+??? "Calcul du score composite de l'AQD
 
     Le score de l'AQD combine trois dimensions de la qualité pour un ensemble défini d'indicateurs de base.
 
@@ -830,7 +830,7 @@ __CODE_BLOC_4__
 
 ### Exemples de code
 
-? ?? "Exemple 1 : Exécution du module avec les paramètres par défaut"
+??? "Exemple 1 : Exécution du module avec les paramètres par défaut"
 
     ```r
     # Set working directory
@@ -851,7 +851,7 @@ __CODE_BLOC_4__
     source("01_module_data_quality_assessment.R")
     ```
 
-? ?? "Exemple 2 : Ajuster la sensibilité de la détection des valeurs aberrantes"
+??? "Exemple 2 : Ajuster la sensibilité de la détection des valeurs aberrantes"
 
     ```r
     # Make outlier detection more sensitive (lower thresholds)
@@ -865,13 +865,13 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Pays avec des volumes de services généralement faibles où les seuils par défaut sont trop conservateurs.
 
-? ?? "Exemple 3 : Niveau géographique différent pour plus de cohérence
+??? "Exemple 3 : Niveau géographique différent pour plus de cohérence
 
     cODE_BLOCK_19__
 
     **Cas d'utilisation** : Le niveau du sous-district présente des données éparses ou trop peu d'installations par zone, ce qui rend l'agrégation au niveau du district plus stable.
 
-? ?? "Exemple 4 : indicateurs CQD personnalisés"
+??? "Exemple 4 : indicateurs CQD personnalisés"
 
     ```r
     # Focus DQA on maternal health indicateurs only
@@ -885,7 +885,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Analyse spécialisée portant sur un domaine de service spécifique.
 
-? ?? "Exemple 5 : Se présenter dans un autre pays
+??? "Exemple 5 : Se présenter dans un autre pays
 
     ```r
     # Configure for your country
@@ -899,7 +899,7 @@ __CODE_BLOC_4__
     source("01_module_data_quality_assessment.R")
     ```
 
-? ?? "Exemple 6 : Utilisation programmatique des sorties"
+??? "Exemple 6 : Utilisation programmatique des sorties"
 
     ```r
     # After running the module, work with outputs
@@ -933,7 +933,7 @@ __CODE_BLOC_4__
 
 ### Dépannage
 
-? ?? "Problème : Le module saute l'analyse de cohérence"
+??? "Problème : Le module saute l'analyse de cohérence"
 
     **Symptômes:**
     - Message de la console : "Aucune paire de cohérence valide n'a été trouvée"
@@ -961,7 +961,7 @@ __CODE_BLOC_4__
     2. Modifiez les noms des indicateurs dans vos données pour qu'ils correspondent aux noms attendus
     3. Accepter que l'AQD soit calculé sans la composante de cohérence
 
-? ?? "Problème : toutes les installations sont considérées comme aberrantes
+??? "Problème : toutes les installations sont considérées comme aberrantes
 
     **Symptômes:**
     - Pourcentage très élevé de outlier_flag = 1 dans M1_output_outliers.csv
@@ -992,7 +992,7 @@ __CODE_BLOC_4__
 
     4. Examiner les données : Vérifier s'il existe de véritables problèmes de qualité nécessitant un nettoyage des données plutôt qu'un ajustement des paramètres
 
-? ?? "Problème : aucun résultat de l'AQD n'a été généré
+??? "Problème : aucun résultat de l'AQD n'a été généré
 
     **Symptômes:**
     - M1_output_dqa.csv est vide ou ne contient que des en-têtes
@@ -1024,7 +1024,7 @@ __CODE_BLOC_4__
     DQA_indicateurS <- c("Penta1", "CPN1")  # Only use what's available
     ```
 
-? ?? "Problème : les ratios de cohérence semblent incorrects
+??? "Problème : les ratios de cohérence semblent incorrects
 
     **Symptômes:**
     - Tous les indicateurs de cohérence sont à 0 (incohérent)
@@ -1054,7 +1054,7 @@ __CODE_BLOC_4__
     all_consistency_ranges$pair_Penta <- c(lower = 0.85, upper = Inf)
     ```
 
-? ?? "Problème : les pourcentages d'exhaustivité semblent faibles
+??? "Problème : les pourcentages d'exhaustivité semblent faibles
 
     **Symptômes:**
     - Proportion élevée de completeness_flag = 0 dans M1_output_completeness.csv
@@ -1071,7 +1071,7 @@ __CODE_BLOC_4__
     2. Les pourcentages d'exhaustivité doivent être interprétés dans leur contexte - un taux d'exhaustivité de 70 % peut être acceptable en fonction du système de santé
     3. Utiliser le drapeau completeness_flag dans les modules suivants pour pondérer les estimations de manière appropriée
 
-? ?? "Problème : erreur de lecture du fichier d'entrée
+??? "Problème : erreur de lecture du fichier d'entrée
 
     **Symptômes:**
     - Erreur : "Impossible d'ouvrir le fichier 'SIGS_[COUNTRY].csv'"
@@ -1099,7 +1099,7 @@ __CODE_BLOC_4__
 
 ### Notes d'utilisation
 
-? ?? "Gestion des types de données"
+??? "Gestion des types de données"
 
     **period_id Flexibilité:**
     Le module accepte `period_id` dans plusieurs formats :
@@ -1126,7 +1126,7 @@ __CODE_BLOC_4__
     - Peut contenir des espaces et des caractères spéciaux
     - Sensible à la casse dans certaines opérations
 
-? ?? "Stratégie des valeurs manquantes
+??? "Stratégie des valeurs manquantes
 
     Le module utilise des approches spécifiques au contexte pour les valeurs manquantes :
 
@@ -1150,7 +1150,7 @@ __CODE_BLOC_4__
     - Seules les paires disponibles affectent le score de cohérence
     - Permet une notation partielle lorsque certains indicateurs sont manquants
 
-? ?? "Considérations sur la mémoire
+??? "Considérations sur la mémoire
 
     Pour les grands ensembles de données (>1 million de lignes), le module met en œuvre plusieurs optimisations :
 
@@ -1171,7 +1171,7 @@ __CODE_BLOC_4__
     - Envisager un traitement par année si les ensembles de données pluriannuels posent des problèmes de mémoire
     - Surveillez l'utilisation de la mémoire : `pryr::mem_used()` à différentes étapes
 
-? ?? "Opportunités d'optimisation des performances"
+??? "Opportunités d'optimisation des performances"
 
     **Mise en œuvre actuelle:**
     L'analyse de complétude traite les indicateurs séquentiellement en utilisant `lapply()`.
@@ -1205,7 +1205,7 @@ __CODE_BLOC_4__
     - 3-4x plus rapide avec 4 cœurs sur des ensembles de données avec 10+ indicateurs
     - Plus avantageux pour les pays avec de nombreux indicateurs et de longues séries temporelles
 
-? ?? "Sélection dynamique d'indicateurs
+??? "Sélection dynamique d'indicateurs
 
     Le module s'adapte intelligemment aux données disponibles :
 
@@ -1228,7 +1228,7 @@ __CODE_BLOC_4__
     **Validation des paires de cohérence:**
     Le module vérifie chaque paire de cohérence et supprime celles qui ont des indicateurs manquants, en fournissant des avertissements clairs sur les paires qui ont été ignorées.
 
-? ?? "Gestion des erreurs et solutions de repli"
+??? "Gestion des erreurs et solutions de repli"
 
     Le module inclut une gestion robuste des erreurs :
 
@@ -1250,7 +1250,7 @@ __CODE_BLOC_4__
     - Avertit des paires supprimées
     - Continue avec les indicateurs disponibles
 
-? ?? "Directives d'interprétation
+??? "Directives d'interprétation
 
     **outlier flags:**
     - outlier_flag = 1 suggère des problèmes potentiels de qualité des données, mais nécessite une investigation

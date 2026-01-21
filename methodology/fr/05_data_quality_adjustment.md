@@ -167,7 +167,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Paramètres de configuration
 
-? ?? "Indicateurs exclus"
+??? "Indicateurs exclus"
 
     Certains indicateurs sont exclus de tous les ajustements en raison de leur caractère sensible :
 
@@ -177,7 +177,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Justification** : Les comptes de décès ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendances épidémiologiques ou des signaux d'épidémies.
 
-? ?? "Exclusions de faibles volumes
+??? "Exclusions de faibles volumes
 
     Les indicateurs sont également automatiquement exclus des **ajustements** s'ils n'ont aucune observation supérieure à 100 dans l'ensemble de la base de données. Cela permet d'éviter des ajustements statistiques inutiles sur des indicateurs dont le nombre d'observations est constamment faible.
 
@@ -194,7 +194,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Ces informations sont enregistrées dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
 
-? ?? "Configuration de la fenêtre roulante"
+??? "Configuration de la fenêtre roulante"
 
     Le module utilise une fenêtre de **6 mois** pour toutes les moyennes glissantes. Ce choix permet d'équilibrer :
 
@@ -213,7 +213,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Spécifications des entrées/sorties
 
-? ?? "Fichiers d'entrée
+??? "Fichiers d'entrée
 
     Le module nécessite trois fichiers d'entrée provenant des étapes de traitement précédentes :
 
@@ -223,7 +223,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     | Les indicateurs de valeurs aberrantes pour chaque indicateur de mois d'installation sont les suivants : `établissement_id`, `indicateur_common_id`, `period_id`, `outlier_flag`, `indicateur_common_id`, `period_id`, `outlier_flag`
     | module 1 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `établissement_id`, `indicateur_common_id`, `period_id`, `completeness_flag` | module 2 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `period_id`, `completeness_flag` | module 3 - Indicateurs d'exhaustivité pour les indicateurs de mois d'établissement
 
-? ?? "Structure des données d'entrée"
+??? "Structure des données d'entrée"
 
     **Données brutes SIGS (`SIGS_ISO3.csv`)** :
 
@@ -255,7 +255,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     FAC001      | CPN1                | 202303    | 1             # Complete
     ```
 
-? ?? "Fichiers de sortie"
+??? "Fichiers de sortie"
 
     Le module génère quatre fichiers de sortie :
 
@@ -266,7 +266,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     | National | Volumes ajustés agrégés au niveau national | `admin_area_1`, `period_id`, `indicateur_common_id`, `count_final_*` |
     | Métadonnées | Indicateurs exclus de l'ajustement en raison de la faiblesse des volumes | `indicateur_common_id`, `low_volume_exclude` | Métadonnées
 
-? ?? "Structure des données de sortie
+??? "Structure des données de sortie
 
     **Sorties au niveau de l'installation** (__CODE_BLOC_62__) :
 
@@ -287,7 +287,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Documentation sur les fonctions clés
 
-? ?? "Bibliothèques requises"
+??? "Bibliothèques requises"
 
     Le module dépend des paquets R suivants :
 
@@ -295,7 +295,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     -   `zoo` - Calculs de fenêtres glissantes (`frollmean` pour les moyennes glissantes)
     -   `lubridate` - Traitement et manipulation des dates
 
-? ?? "1. `apply_adjustments()`"
+??? "1. `apply_adjustments()`"
 
     Fonction de base qui met en œuvre la logique d'ajustement pour un scénario unique.
 
@@ -323,7 +323,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     4. Applique une hiérarchie d'ajustement basée sur la disponibilité des données
     5. Suivi de la méthode d'ajustement utilisée pour chaque valeur remplacée
 
-? ?? "2. `apply_adjustments_scenarios()`"
+??? "2. `apply_adjustments_scenarios()`"
 
     Fonction enveloppante qui exécute les ajustements dans les quatre scénarios.
 
@@ -356,7 +356,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Méthodes statistiques et algorithmes
 
-? ?? "Méthodologie d'ajustement des valeurs aberrantes
+??? "Méthodologie d'ajustement des valeurs aberrantes
 
     L'ajustement des valeurs aberrantes est appliqué à toute valeur du mois de l'établissement signalée dans le module 1 (`outlier_flag == 1`). L'objectif est de remplacer ces valeurs aberrantes par des données historiques valides provenant du même établissement et du même indicateur.
 
@@ -385,7 +385,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     ), by = .(établissement_id, indicateur_common_id)]
     ```
 
-? ?? "Hiérarchie d'ajustement pour les valeurs aberrantes"
+??? "Hiérarchie d'ajustement pour les valeurs aberrantes"
 
     Le processus d'ajustement suit cet **ordre hiérarchique** (en s'arrêtant à la première méthode disponible) :
 
@@ -441,7 +441,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Si aucune de ces méthodes ne permet de trouver un remplacement valide, la valeur aberrante d'origine est conservée.
 
-? ?? "Méthodologie d'ajustement de l'exhaustivité"
+??? "Méthodologie d'ajustement de l'exhaustivité"
 
     La correction pour exhaustivité est appliquée à tout mois-facilité pour lequel.. :
 
@@ -474,7 +474,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     ), by = .(établissement_id, indicateur_common_id)]
     ```
 
-? ?? "Hiérarchie d'ajustement pour l'exhaustivité"
+??? "Hiérarchie d'ajustement pour l'exhaustivité"
 
     Le remplacement suit cet **ordre hiérarchique** :
 
@@ -504,7 +504,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Si aucun remplacement valide n'est trouvé, la valeur reste manquante (`NA`).
 
-? ?? "Logique de traitement des scénarios
+??? "Logique de traitement des scénarios
 
     Le module traite simultanément les quatre scénarios d'ajustement à l'aide de la fonction `apply_adjustments_scenarios()` :
 
@@ -549,7 +549,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     dat[indicateur_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
     ```
 
-? ?? "Méthodes d'agrégation"
+??? "Méthodes d'agrégation"
 
     Toutes les agrégations géographiques utilisent des **sommes simples** :
 
@@ -567,7 +567,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Si de nombreux établissements ont des valeurs `NA` après ajustement, les totaux sous-nationaux/nationaux peuvent être sous-estimés. Le scénario `count_final_none` fournit un point de référence pour évaluer l'impact.
 
-? ?? "Traitement des données manquantes dans les calculs"
+??? "Traitement des données manquantes dans les calculs"
 
     Le module applique `na.rm = TRUE` dans tous les calculs de roulement :
 
@@ -581,7 +581,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Exemples de code
 
-? ?? "Exemple 1 : Ajustement des valeurs aberrantes"
+??? "Exemple 1 : Ajustement des valeurs aberrantes"
 
     **Scénario** :
 
@@ -610,7 +610,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     `roll6`
 
-? ?? "Exemple 2 : Ajustement de la complétude"
+??? "Exemple 2 : Ajustement de la complétude"
 
     **Scénario** :
 
@@ -638,7 +638,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     `roll6`
 
-? ?? "Exemple 3 : Indicateur saisonnier avec même mois-dernière année"
+??? "Exemple 3 : Indicateur saisonnier avec même mois-dernière année"
 
     **Scénario** :
 
@@ -664,7 +664,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     `same_month_last_year`
 
-? ?? "Exemple 4 : Comparaison de scénarios"
+??? "Exemple 4 : Comparaison de scénarios"
 
     **établissement** :
 
@@ -707,7 +707,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     - **Complétude** : mars est complété, mais la valeur aberrante de février est conservée : Mars est complété, mais la valeur aberrante de février est conservée
     - **Les deux** : Ensemble de données le plus complet et le plus propre
 
-? ?? "Exemple 5 : Agrégation géographique
+??? "Exemple 5 : Agrégation géographique
 
     **Code d'agrégation sous-nationale** :
 
@@ -741,7 +741,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Dépannage
 
-? ?? "Problèmes courants"
+??? "Problèmes courants"
 
     **Problème 1 : Toutes les valeurs restent non ajustées**
 
@@ -797,7 +797,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     - Examiner les statistiques sur l'exhaustivité du module 1
     - Considérer le seuil de qualité des données pour l'inclusion
 
-? ?? "Contrôles d'assurance qualité
+??? "Contrôles d'assurance qualité
 
     Le module comprend plusieurs contrôles de qualité :
 
@@ -826,7 +826,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Notes d'utilisation
 
-? ?? "Choisir le bon scénario"
+??? "Choisir le bon scénario"
 
     | Situation - Scénario recommandé - Raison d'être - Situation - Raison d'être - Situation - Raison d'être - Situation - Raison d'être
     |-----------|---------------------|-----------|
@@ -836,7 +836,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     | Qualité et exhaustivité médiocres | __CODE_BLOC_149__ | Nettoyage complet |
     analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité
 
-? ?? "Étapes de validation
+??? "Étapes de validation
 
     Après avoir exécuté ce module, considérez :
 
@@ -846,7 +846,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     4. **Graphiques temporels** : Visualiser les tendances avant/après l'ajustement pour identifier le lissage excessif
     5. **Vérifications ponctuelles au niveau de l'établissement** : Examiner les ajustements pour un échantillon d'installations
 
-? ?? "Limites"
+??? "Limites"
 
     1. **Les fenêtres mobiles supposent la stabilité** : Les ajustements fonctionnent mieux lorsque la prestation de services est relativement stable. De véritables changements de programme (par exemple, de nouvelles campagnes) peuvent être lissés de manière incorrecte.
 
