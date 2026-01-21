@@ -120,20 +120,20 @@ Tableau de la heatmap avec les zones en lignes et les indicateurs de santé en c
 
 Graphiques chronologiques horizontaux montrant les tendances en matière d'exhaustivité pour chaque indicateur au cours de la période d'analyse.
 
-(resources/default_outputs/Default_3._Proportion_of_completed_records_over_time.png)
+![Complétude dans le temps](resources/default_outputs/Default_3._Proportion_of_completed_records_over_time.png)
 
 **4. Cohérence interne**
 
 Tableau de la heatmap avec les zones comme lignes et les catégories de repères de cohérence comme colonnes, codées par couleur en fonction de la performance.
 
-(resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Cohérence interne](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 
 **5. Score global du CQD**
 
 Tableau de la heatmap avec les zones comme lignes et les périodes comme colonnes, codées par couleur en fonction du pourcentage du score CQD.
 
-(resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Score global CQD](resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 **6. Score moyen de l'AQD**
 

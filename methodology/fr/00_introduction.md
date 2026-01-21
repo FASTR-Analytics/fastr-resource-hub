@@ -19,7 +19,7 @@ Le GFF collabore avec les ministères de la santé pour effectuer des analyses d
 
 Ces analyses se concentrent sur les indicateurs prioritaires liés aux réformes nationales en matière de santé et aux investissements de la Banque mondiale, et les résultats informent les processus de planification nationale et les cycles de mise en œuvre des projets. Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels en utilisant cette approche.
 
-(resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Étapes de mise en œuvre du RMNCAH-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 *Figure 1. Étapes de la mise en œuvre du contrôle de l'utilisation des services du RMNCAH-N*
 
@@ -33,7 +33,7 @@ Les sources de données des systèmes de santé existants sont essentielles, mai
 
 Les approches analytiques à cycle rapide fournissent des données opportunes, rigoureuses et prioritaires qui répondent aux priorités spécifiques de chaque pays et aux besoins en matière d'utilisation des données. Ce cycle continu d'analyse-apprentissage-renforcement-action vise à améliorer l'utilisation systématique des données pour la prise de décision en vue d'améliorer les résultats du RMNCAH-N.
 
-(resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg) (Cadre analytique à cycle rapide FASTR montrant le cycle continu d'analyse, d'apprentissage, de renforcement et d'action)
+![Cadre analytique à cycle rapide FASTR](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 *Figure 2. L'approche analytique à cycle rapide de la FASTR : Analyser, apprendre, renforcer, agir*
 
@@ -60,31 +60,31 @@ Parmi les activités de renforcement des capacités, on peut citer le soutien à
 | Acronyme | Définition |
 |---------|------------|
 | | ***Programmes et organisations*** |
-| **EDS** | Programme d'enquêtes démographiques et de santé |
+| **DHS** | Enquêtes démographiques et de santé (Demographic and Health Surveys) |
 | **FASTR** | Évaluations fréquentes et outils du système de santé pour la résilience |
-| **GFF** | Facilité mondiale de financement |
-| **MICS** | Enquêtes en grappes à indicateurs multiples |
+| **GFF** | Mécanisme de financement mondial (Global Financing Facility) |
+| **MICS** | Enquêtes en grappes à indicateurs multiples (Multiple Indicator Cluster Surveys) |
 | **MoH** | Ministère de la santé |
 | **UN** | Nations Unies |
 | | ***Systèmes de données et sources*** |
-| **DHIS2** | DHIS2 (également orthographié DHIS 2, anciennement Logiciel d'information sanitaire de district) |
-| **SIGS** | Système d'information de gestion de la santé |
+| **DHIS2** | District Health Information Software 2 |
+| **HMIS/SIGS** | Système d'information de gestion de la santé (Health Management Information System) |
 | **WPP** | Perspectives de la population mondiale (World Population Prospects) |
 | | ***Indicateurs et services de santé*** |
-| **CPN** | Consultation prénatale (Antenatal Care) |
+| **ANC** | Consultation prénatale (Antenatal Care) |
 | **BCG** | Bacillus Calmette-Guérin (vaccin contre la tuberculose) |
-| **MCV** | Vaccin contenant la rougeole |
-| **OPD** | Service de consultations externes |
+| **MCV** | Vaccin contenant la rougeole (Measles-Containing Vaccine) |
+| **OPD** | Consultations externes (Outpatient Department) |
 | **Penta** | Vaccin pentavalent (diphtérie, tétanos, coqueluche, hépatite B, Haemophilus influenzae type b) |
-| **SSP** | Soins de santé primaires |
+| **PHC** | Soins de santé primaires (Primary Health Care) |
 | **RMNCAH-N** | Santé reproductive, maternelle, néonatale, infantile et adolescente et nutrition |
-| **SBA** | Accoucheuse qualifiée |
+| **SBA** | Accoucheuse qualifiée (Skilled Birth Attendant) |
 | | ***Termes techniques et statistiques*** |
-| **EQD** | Évaluation de la qualité des données |
-| **MAD** | Écart absolu médian |
+| **DQA** | Évaluation de la qualité des données (Data Quality Assessment) |
+| **MAD** | Écart absolu médian (Median Absolute Deviation) |
 | | ***Géographique*** |
-| **PRFI** | Pays à revenu faible et intermédiaire |
-| **ASS** | Afrique subsaharienne |
+| **LMIC** | Pays à revenu faible et intermédiaire (Low- and Middle-Income Countries) |
+| **SSA** | Afrique subsaharienne (Sub-Saharan Africa) |
 
 ## Utilisation des données du système d'information sur la gestion de la santé de routine dans les PRFM
 
