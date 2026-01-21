@@ -106,7 +106,7 @@ L'analyse FASTR génère six principaux résultats visuels :
 
 Tableau de la heatmap avec les zones comme lignes et les indicateurs de santé comme colonnes, codés par couleur en fonction du pourcentage de valeurs aberrantes.
 
-![Pourcentage de mois d'installation qui sont aberrants](resources/default_outputs/Default_1._Proportion_of_valeurs aberrantes.png)
+![Pourcentage de mois d'installation qui sont aberrants](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 
 **2. Complétude de l'indicateur**
@@ -202,18 +202,18 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
 ? ?? "Paramètres de détection des valeurs aberrantes
 
     ```r
-    # Proportion threshold for valeur aberrante detection
-    valeur aberrante_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of annual total
+    # Proportion threshold for outlier detection
+    OUTLIER_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of annual total
 
-    # Minimum count to consider for valeur aberrante flagging
+    # Minimum count to consider for outlier flagging
     MINIMUM_COUNT_THRESHOLD <- 100  # Only flag valeurs aberrantes with count >= 100
 
-    # Number of écart absolu médians for statistical valeur aberrante detection
+    # Number of median absolute deviations for statistical valeur aberrante detection
     MADS <- 10  # Flag if value > 10 MADs from median
     ```
 
     **Tuning guidance:**
-    - **Détection plus sensible** : Abaisser `valeur aberrante_PROPORTION_THRESHOLD` à 0,6-0,7, réduire `MADS` à 8
+    - **Détection plus sensible** : Abaisser `OUTLIER_PROPORTION_THRESHOLD` à 0,6-0,7, réduire `MADS` à 8
     - **Détection moins sensible** : Augmenter __CODE_BLOC_44__ à 0,9, augmenter __CODE_BLOC_45__ à 12-15
     - **Petites installations** : Réduire __CODE_BLOC_46__ à 50
     - **Grandes installations uniquement** : Augmenter `MINIMUM_COUNT_THRESHOLD` à 200+
@@ -265,7 +265,7 @@ __CODE_BLOC_4__
 
 #### Fichiers de sortie
 
-? ?? "M1_output_valeur aberrante_list.csv - Valeurs aberrantes marquées uniquement"
+? ?? "M1_output_outlier_list.csv - Valeurs aberrantes marquées uniquement"
 
     **Objectif** : Liste de référence rapide des seules observations signalées comme aberrantes
 
@@ -279,7 +279,7 @@ __CODE_BLOC_4__
 
     **Cas d'utilisation** : Les gestionnaires de données examinent des valeurs aberrantes spécifiques en vue d'une enquête ou d'une correction
 
-? ?? "M1_output_valeurs aberrantes.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes
+? ?? "M1_output_outliers.csv - Tous les enregistrements avec des indicateurs de valeurs aberrantes
 
     **Objectif** : Ensemble complet de données avec indicateurs de valeurs aberrantes pour toutes les combinaisons établissement-indicateur-période
 
@@ -297,7 +297,7 @@ __CODE_BLOC_4__
     - Analyse statistique des modèles de valeurs aberrantes
     - Génération de visualisations de la prévalence des valeurs aberrantes
 
-? ?? "M1_output_complétude.csv - Statut de complétude"
+? ?? "M1_output_completeness.csv - Statut de complétude"
 
     **Objectif** : Indicateurs d'exhaustivité pour toutes les combinaisons établissement-indicateur-période, y compris les enregistrements explicitement créés pour les mois manquants
 
@@ -312,7 +312,7 @@ __CODE_BLOC_4__
     **Caractéristiques particulières** :
 
     - Contient des lignes explicites pour les mois non déclarés
-    - Les périodes inactives (6+ mois au début/à la fin avec complétude_flag=2) sont exclues de l'exportation
+    - Les périodes inactives (6+ mois au début/à la fin avec completeness_flag=2) sont exclues de l'exportation
     - Séries temporelles complètes pour chaque combinaison établissement-indicateur
 
     **Cas d'utilisation** :
@@ -434,9 +434,9 @@ __CODE_BLOC_4__
 
     cODE_BLOCK_6__
 
-? ?? "valeur aberrante_analysis()"
+? ?? "outlier_analysis()"
 
-    **Signature** : `valeur aberrante_analysis(data, geo_cols, valeur aberrante_params)`
+    **Signature** : `outlier_analysis(data, geo_cols, outlier_params)`
 
     **But** : Identifier les valeurs aberrantes statistiques dans les volumes de services des installations à l'aide de deux méthodes de détection
 
@@ -445,7 +445,7 @@ __CODE_BLOC_4__
     - cODE_BLOCK_99__ : Données SIGS avec établissement_id, indicateur_common_id, period_id, count
     - cODE_BLOCK_100__ : Vecteur de noms de colonnes géographiques
     - cODE_BLOCK_101__ : Liste contenant :
-      - `valeur aberrante_pc_threshold` : Seuil de proportion (par défaut 0.8)
+      - `outlier_pc_threshold` : Seuil de proportion (par défaut 0.8)
       - `count_threshold` : Seuil de comptage minimum (par défaut 100)
 
     **Résultats** : Cadre de données avec les indicateurs de valeurs aberrantes et les mesures de diagnostic pour chaque établissement-indicateur-période
@@ -467,20 +467,20 @@ __CODE_BLOC_4__
     **Étape 2** : Calculer la DAM en utilisant uniquement les valeurs égales ou supérieures à la médiane
     - Évite les biais dus aux établissements ayant de nombreux mois à faible volume
     - Standardise les résidus en divisant (nombre - médiane) par MAD
-    - Drapeaux valeur aberrante_mad = 1 si mad_residual > paramètre MADS
+    - Drapeaux outlier_mad = 1 si mad_residual > paramètre MADS
 
     **Étape 3** : Calcul de la contribution proportionnelle
     - Pour chaque installation-indicateur-année, additionner le nombre total annuel
     - Calculer pc = count / annual_total
-    - Drapeaux valeur aberrante_pc = 1 si pc > valeur aberrante_PROPORTION_THRESHOLD
+    - Drapeaux outlier_pc = 1 si pc > OUTLIER_PROPORTION_THRESHOLD
 
     **Étape 4** : Combiner les drapeaux
-    - Indicateur de valeur aberrante finale = 1 si (valeur aberrante_mad = 1 OR valeur aberrante_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
+    - Indicateur de valeur aberrante finale = 1 si (outlier_mad = 1 OR outlier_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
     - Le seuil (100 par défaut) garantit que seuls les volumes importants sont signalés, ce qui permet d'éviter les faux positifs dans les établissements à faible volume
 
-? ?? "process_complétude()"
+? ?? "process_completeness()"
 
-    **Signature** : `process_complétude(valeur aberrante_data_main)`
+    **Signature** : `process_completeness(outlier_data_main)`
 
     **But** : Fonction d'orchestration principale qui génère des séries temporelles complètes et attribue des indicateurs de complétude pour tous les indicateurs
 
@@ -497,7 +497,7 @@ __CODE_BLOC_4__
     3. Applique la logique de marquage d'exhaustivité (complet/incomplet/inactif)
     4. Fusionne avec les métadonnées géographiques
     5. Combine les résultats de tous les indicateurs
-    6. Supprime les périodes inactives (complétude_flag = 2)
+    6. Supprime les périodes inactives (completeness_flag = 2)
 
     **Structure de sortie:**
 
@@ -507,13 +507,13 @@ __CODE_BLOC_4__
 
 ? ?? "generate_full_series_per_indicateur()"
 
-    **Signature** : `generate_full_series_per_indicateur(valeur aberrante_data, indicateur_id, timeframe)`
+    **Signature** : `generate_full_series_per_indicateur(outlier_data, indicateur_id, timeframe)`
 
     **Objectif** : Crée une série chronologique mensuelle complète pour un indicateur spécifique, en comblant les lacunes lorsque les établissements n'ont pas fait de déclaration
 
     **Paramètres:**
 
-    - `valeur aberrante_data` : data.table avec des résultats aberrants
+    - `outlier_data` : data.table avec des résultats aberrants
     - cODE_BLOCK_116__ : Indicateur spécifique à traiter (par exemple, "Penta1")
     - cODE_BLOC_117__ : TABLEAU DE DONNÉES AVEC PREMIER_PID ET PREMIER_BLOC_117__ : Tableau de données avec first_pid et last_pid pour chaque indicateur
 
@@ -565,7 +565,7 @@ __CODE_BLOC_4__
 
     **Process:**
 
-    1. Exclut les valeurs aberrantes (définit le nombre à NA lorsque valeur aberrante_flag = 1)
+    1. Exclut les valeurs aberrantes (définit le nombre à NA lorsque outlier_flag = 1)
     2. Agrégation des données au niveau géographique spécifié par période (somme des installations)
     3. Reformule les données en format large (une colonne par indicateur)
     4. Calcul du ratio pour chaque paire d'indicateurs
@@ -609,15 +609,15 @@ __CODE_BLOC_4__
 
 ? ?? "dqa_with_consistency()"
 
-    **Signature** : `dqa_with_consistency(complétude_data, consistency_data, valeur aberrante_data, geo_cols, dqa_rules)`
+    **Signature** : `dqa_with_consistency(completeness_data, consistency_data, outlier_data, geo_cols, dqa_rules)`
 
     **But** : Calcule les scores complets de l'AQD, y compris les contrôles de cohérence lorsque des paires de cohérence sont disponibles
 
     **Paramètres:**
 
-    - `complétude_data` : Sortie de process_complétude()
+    - `completeness_data` : Sortie de process_completeness()
     - cODE_BLOCK_134__ : Résultats de la cohérence de l'installation au format large
-    - `valeur aberrante_data` : Sortie de valeur aberrante_analysis()
+    - `outlier_data` : Sortie de outlier_analysis()
     - `geo_cols` : Vecteur de noms de colonnes géographiques
     - cODE_BLOCK_137__ : Liste spécifiant les valeurs requises pour chaque dimension
 
@@ -639,7 +639,7 @@ __CODE_BLOC_4__
 
     **3. Score moyen de l'AQD:**
     - Moyenne de la note d'exhaustivité et de la note de cohérence
-    - Formule : `(complétude_valeur aberrante_score + consistency_score) / 2`
+    - Formule : `(completeness_outlier_score + consistency_score) / 2`
 
     **4. Note binaire de l'AQD:**
     - 1 si tous les contrôles sont réussis (complet, pas de valeurs aberrantes, cohérent)
@@ -657,7 +657,7 @@ __CODE_BLOC_4__
 
 ? ?? "dqa_without_consistency()"
 
-    **Signature** : `dqa_without_consistency(complétude_data, valeur aberrante_data, geo_cols, dqa_rules)`
+    **Signature** : `dqa_without_consistency(completeness_data, outlier_data, geo_cols, dqa_rules)`
 
     **But** : Calcul des scores CQD en utilisant uniquement les contrôles d'exhaustivité et de valeurs aberrantes lorsque les données de cohérence ne sont pas disponibles ou qu'il n'existe pas de paires de cohérence valides
 
@@ -698,8 +698,8 @@ __CODE_BLOC_4__
     $$
 
     **Classification des valeurs aberrantes:**
-    - Si le résidu MAD > 10 (configurable via le paramètre `MADS`), la valeur est marquée comme une valeur aberrante basée sur MAD (`valeur aberrante_mad = 1`)
-    - Le `valeur aberrante_flag` final requiert également un nombre > 100
+    - Si le résidu MAD > 10 (configurable via le paramètre `MADS`), la valeur est marquée comme une valeur aberrante basée sur MAD (`outlier_mad = 1`)
+    - Le `outlier_flag` final requiert également un nombre > 100
 
     **Exemple:**
 
@@ -820,8 +820,8 @@ __CODE_BLOC_4__
     $$
 
     **Critères de réussite pour un score binaire:**
-    - TOUS les indicateurs de l'AQD doivent être complets (complétude_flag = 1)
-    - TOUS les indicateurs du CQD doivent être exempts de valeurs aberrantes (valeur aberrante_flag = 0)
+    - TOUS les indicateurs de l'AQD doivent être complets (completeness_flag = 1)
+    - TOUS les indicateurs du CQD doivent être exempts de valeurs aberrantes (outlier_flag = 0)
     - TOUTES les paires de cohérence disponibles doivent satisfaire aux critères de référence (sconsistency = 1)
 
     **Exemple de calcul:**
@@ -854,8 +854,8 @@ __CODE_BLOC_4__
 ? ?? "Exemple 2 : Ajuster la sensibilité de la détection des valeurs aberrantes"
 
     ```r
-    # Make valeur aberrante detection more sensitive (lower thresholds)
-    valeur aberrante_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of annual volume (was 80%)
+    # Make outlier detection more sensitive (lower thresholds)
+    OUTLIER_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of annual volume (was 80%)
     MINIMUM_COUNT_THRESHOLD <- 50         # Consider counts >=50 (was 100)
     MADS <- 8                             # Flag at 8 MADs (was 10)
 
@@ -964,8 +964,8 @@ __CODE_BLOC_4__
 ? ?? "Problème : toutes les installations sont considérées comme aberrantes
 
     **Symptômes:**
-    - Pourcentage très élevé de valeur aberrante_flag = 1 dans M1_output_valeurs aberrantes.csv
-    - La plupart des observations dans valeur aberrante_list.csv
+    - Pourcentage très élevé de outlier_flag = 1 dans M1_output_outliers.csv
+    - La plupart des observations dans outlier_list.csv
 
     **Diagnostic:**
     Vos seuils sont peut-être trop sensibles pour le contexte de vos données.
@@ -981,7 +981,7 @@ __CODE_BLOC_4__
     2. Augmenter le seuil de proportion :
 
     ```r
-    valeur aberrante_PROPORTION_THRESHOLD <- 0.9  # Increase from 0.8
+    OUTLIER_PROPORTION_THRESHOLD <- 0.9  # Increase from 0.8
     ```
 
     3. Augmenter le seuil de comptage minimum (se concentrer sur les grandes installations) :
@@ -1057,7 +1057,7 @@ __CODE_BLOC_4__
 ? ?? "Problème : les pourcentages d'exhaustivité semblent faibles
 
     **Symptômes:**
-    - Proportion élevée de complétude_flag = 0 dans M1_output_complétude.csv
+    - Proportion élevée de completeness_flag = 0 dans M1_output_completeness.csv
 
     **Diagnostic:**
     Il peut s'agir d'un problème légitime (mauvais rapport) ou d'un artefact lié à la façon dont votre DHIS2 stocke les valeurs nulles.
@@ -1069,7 +1069,7 @@ __CODE_BLOC_4__
     **Considérations:**
     1. Si votre DHIS2 ne stocke pas les zéros, les établissements à faible volume peuvent apparaître incomplets alors qu'ils n'avaient légitimement pas de services à déclarer
     2. Les pourcentages d'exhaustivité doivent être interprétés dans leur contexte - un taux d'exhaustivité de 70 % peut être acceptable en fonction du système de santé
-    3. Utiliser le drapeau complétude_flag dans les modules suivants pour pondérer les estimations de manière appropriée
+    3. Utiliser le drapeau completeness_flag dans les modules suivants pour pondérer les estimations de manière appropriée
 
 ? ?? "Problème : erreur de lecture du fichier d'entrée
 
@@ -1187,10 +1187,10 @@ __CODE_BLOC_4__
     n_cores <- detectCores() - 1
 
     # Parallel processing of indicateurs
-    complétude_list <- mclapply(
-      unique(valeur aberrante_data_main$indicateur_common_id),
+    completeness_list <- mclapply(
+      unique(outlier_data_main$indicateur_common_id),
       function(ind) generate_full_series_per_indicateur(
-        valeur aberrante_data = valeur aberrante_data_main,
+        outlier_data = outlier_data_main,
         indicateur_id = ind,
         timeframe = indicateur_timeframe
       ),
@@ -1198,7 +1198,7 @@ __CODE_BLOC_4__
     )
 
     # Combine results
-    complétude_data <- rbindlist(complétude_list)
+    completeness_data <- rbindlist(completeness_list)
     ```
 
     **Accélération attendue:**
@@ -1252,8 +1252,8 @@ __CODE_BLOC_4__
 
 ? ?? "Directives d'interprétation
 
-    **valeur aberrante flags:**
-    - valeur aberrante_flag = 1 suggère des problèmes potentiels de qualité des données, mais nécessite une investigation
+    **outlier flags:**
+    - outlier_flag = 1 suggère des problèmes potentiels de qualité des données, mais nécessite une investigation
     - Toutes les valeurs aberrantes signalées ne sont pas des erreurs (de véritables campagnes de services peuvent déclencher des drapeaux)
     - Utiliser les valeurs mad_residual et pc pour prioriser l'examen
 
@@ -1309,13 +1309,13 @@ Le module suit la séquence suivante :
    ├─ Validate consistency pairs
    └─ Filter DQA indicateurs to available ones
 
-3. valeur aberrante ANALYSIS
+3. OUTLIER ANALYSIS
    ├─ Calculate median and MAD by établissement-indicateur
    ├─ Flag MAD-based valeurs aberrantes (>10 MADs from median)
    ├─ Flag proportion-based valeurs aberrantes (>80% of annual volume)
    └─ Combine flags (either method + count > 100)
 
-4. complétude ANALYSIS
+4. COMPLETENESS ANALYSIS
    ├─ Identify reporting timeframe per indicateur
    ├─ Generate full time series (all facilities × all months)
    ├─ Tag reporting status (complete/incomplete/inactive)
@@ -1331,17 +1331,17 @@ Le module suit la séquence suivante :
 
 6. DQA SCORING
    ├─ Filter to DQA indicateurs only
-   ├─ Merge complétude, valeur aberrante, and consistency results
+   ├─ Merge completeness, outlier, and consistency results
    ├─ Calculate component scores:
-   │  ├─ complétude-valeur aberrante score (0-1)
+   │  ├─ completeness-outlier score (0-1)
    │  └─ Consistency score (0-1, if applicable)
    ├─ Calculate mean DQA score
    └─ Assign binary DQA pass/fail flag
 
 7. EXPORT RESULTS
-   ├─ M1_output_valeur aberrante_list.csv (valeurs aberrantes only)
-   ├─ M1_output_valeurs aberrantes.csv (all records with flags)
-   ├─ M1_output_complétude.csv (complétude flags)
+   ├─ M1_output_outlier_list.csv (valeurs aberrantes only)
+   ├─ M1_output_outliers.csv (all records with flags)
+   ├─ M1_output_completeness.csv (completeness flags)
    ├─ M1_output_consistency_geo.csv (geo-level consistency)
    ├─ M1_output_consistency_établissement.csv (établissement-level consistency)
    └─ M1_output_dqa.csv (final DQA scores)
@@ -1499,7 +1499,7 @@ Pour l'analyse FASTR, nous identifions les valeurs aberrantes qui sont des valeu
 
 La région A présente un pic anormal en février qui dépasse largement les valeurs déclarées par les autres régions - ce qui indique une erreur de saisie des données ou un problème de déclaration.
 
-![Impact des valeurs aberrantes](resources/diagrams/valeur aberrante_impact.svg)
+![Impact des valeurs aberrantes](resources/diagrams/outlier_impact.svg)
 
 ---
 
@@ -1525,7 +1525,7 @@ Pour un indicateur donné dans une période donnée, le pourcentage de valeurs m
 
 **% de valeurs aberrantes = # de valeurs mensuelles aberrantes / N total de valeurs mensuelles**
 
-!valeurs aberrantes h:340](resources/default_outputs/Default_1._Proportion_of_valeurs aberrantes.png)
+![Outliers h:340](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->

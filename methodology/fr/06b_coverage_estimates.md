@@ -175,19 +175,19 @@ L'analyse FASTR génère des visualisations d'estimations de couverture à plusi
 
 Tendances de la couverture au niveau national comparant les estimations dérivées du SIGS aux références de l'enquête.
 
-![Couverture calculée à partir des données SIGS au niveau national](resources/default_outputs/module4_1_couverture_SIGS_National.png)
+![Couverture calculée à partir des données SIGS au niveau national](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 **2. Couverture calculée à partir des données SIGS (zone administrative 2)**
 
 Modèles de couverture à un niveau infranational intermédiaire (**admin_area_2**), mettant en évidence les variations géographiques dans la prestation de services entre les régions.
 
-![Couverture calculée à partir des données SIGS au niveau de la zone administrative 2](resources/default_outputs/module4_2_couverture_SIGS_Admin2.png)
+![Couverture calculée à partir des données SIGS au niveau de la zone administrative 2](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 **3. Couverture calculée à partir des données SIGS (zone administrative 3)**
 
 Estimations de la couverture à un niveau infranational plus fin (**admin_area_3**), permettant un suivi plus local et l'identification des disparités infranationales.
 
-![Couverture calculée à partir des données SIGS au niveau de la zone administrative 3](resources/default_outputs/module4_3_couverture_SIGS_Admin3.png)
+![Couverture calculée à partir des données SIGS au niveau de la zone administrative 3](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
 **Guide d'interprétation**
 
@@ -1772,7 +1772,7 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 **La couverture des services** représente la proportion de la population cible qui a bénéficié d'un service de santé spécifique.
 
-![Équation de la couverture](resources/diagrams/couverture_equation.svg)
+![Équation de la couverture](resources/diagrams/coverage_equation.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
@@ -1794,7 +1794,7 @@ Chaque indicateur de santé correspond à une population cible spécifique :
 
 Des ajustements démographiques séquentiels transforment une estimation de la population cible en une autre. En commençant par les grossesses, les facteurs démographiques sont appliqués pour dériver les dénominateurs suivants :
 
-![Organigramme de la cascade du dénominateur](resources/diagrams/dénominateur_cascade.svg)
+![Organigramme de la cascade du dénominateur](resources/diagrams/denominator_cascade.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
@@ -1802,7 +1802,7 @@ Des ajustements démographiques séquentiels transforment une estimation de la p
 
 </p> <p style="font-size : 0.85em ;">En partant des comptes du service CPN1, les facteurs d'ajustement démographique sont appliqués séquentiellement pour dériver les dénominateurs des autres services:</p> <p style="font-size : 0.85em ;">Les facteurs d'ajustement démographique sont appliqués séquentiellement pour dériver les dénominateurs des autres services
 
-![Exemple de cascade de dénominateurs h:380](resources/diagrams/dénominateur_cascade_example.svg)
+![Exemple de cascade de dénominateurs h:380](resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
@@ -1857,7 +1857,7 @@ La sélection se fait par indicateur et par zone géographique. Les utilisateurs
 
 Le module projette la valeur de l'enquête la plus récente en utilisant les tendances observées dans la couverture dérivée du SIGS :
 
-![Méthode de projection de la couverture](resources/diagrams/couverture_projection.svg)
+![Méthode de projection de la couverture](resources/diagrams/coverage_projection.svg)
 
 Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendances observées en matière de prestation de services.
 <!-- /SLIDE -->
@@ -1868,7 +1868,7 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 <div style="display : flex ; gap : 1.5em ; align-items : flex-start ;">
 <div style="flex : 1.2 ;">
 
-![Couverture calculée à partir des données SIGS au niveau national. h:340](resources/default_outputs/module4_1_couverture_SIGS_National.png)
+![Couverture calculée à partir des données SIGS au niveau national. h:340](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
 <div style="flex : 1 ;">
@@ -1884,13 +1884,13 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 <!-- SLIDE:m6_17 -->
 ## Couverture (infranationale)
 
-![Couverture calculée à partir des données SIGS au niveau de la zone administrative 2. h:420](resources/default_outputs/module4_2_couverture_SIGS_Admin2.png)
+![Couverture calculée à partir des données SIGS au niveau de la zone administrative 2. h:420](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_18 -->
 ## Couverture (infranationale)
 
-![Couverture calculée à partir des données SIGS au niveau sous-national. h:420](resources/default_outputs/module4_3_couverture_SIGS_infranational.png)
+![Couverture calculée à partir des données SIGS au niveau sous-national. h:420](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->

@@ -155,10 +155,10 @@ Une feuille de route pour l'utilisation des données est un plan stratégique qu
 
 | Composant | Description | Exemple |
 |-----------|-------------|---------|
-| **Qui est votre utilisateur final ?** | Identifier le public cible | Plateforme de coordination nationale SRMNIA-N |
+| **Qui est votre utilisateur final ?** | Identifier le public cible | Plateforme de coordination nationale RMNCAH-N |
 | **Objectifs de votre message** | Se concentrer sur un objectif spécifique par public | Faciliter l'utilisation des données pour la prise de décision et l'élaboration des politiques |
-| **Messages clés** | Définir les messages principaux que vous souhaitez communiquer | Tendances du SRMNIA-N et identification des districts en retard |
-| **Canaux de diffusion** | Spécifier les canaux ou forums de diffusion existants | Réunions trimestrielles de la plateforme SRMNIA-N |
+| **Messages clés** | Définir les messages principaux que vous souhaitez communiquer | Tendances du RMNCAH-N et identification des districts en retard |
+| **Canaux de diffusion** | Spécifier les canaux ou forums de diffusion existants | Réunions trimestrielles de la plateforme RMNCAH-N |
 | **Calendrier** | Identifier le calendrier avec les étapes clés et les échéances | La prochaine réunion de la plateforme est prévue pour le T2 |
 | **Étapes requises et responsabilités** | Définir les étapes et attribuer les rôles et responsabilités | Inscription à l'ordre du jour – Directeur ; Finalisation de la présentation – Agent |
 | **Suivi et évaluation** | Comment saurez-vous si vous avez réussi ? | Le % de rapports trimestriels diffusés dans les forums pertinents ; une liste des actions prises suite aux données est créée et maintenue |

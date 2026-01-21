@@ -189,7 +189,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       total = .N
     ), by = indicateur_common_id]
 
-    no_valeur aberrante_adj <- volume_check[above_100 == 0, indicateur_common_id]
+    no_outlier_adj <- volume_check[above_100 == 0, indicateur_common_id]
     ```
 
     Ces informations sont enregistrées dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
@@ -220,8 +220,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     | Le module a besoin de trois fichiers d'entrée provenant des étapes de traitement précédentes : Fichier, Source, Description et Variables clés
     |------|--------|-------------|---------------|
     | Les données brutes du système d'information sur les ménages (SIGS), les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement et les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement et les volumes de services au niveau de l'établissement
-    | Les indicateurs de valeurs aberrantes pour chaque indicateur de mois d'installation sont les suivants : `établissement_id`, `indicateur_common_id`, `period_id`, `valeur aberrante_flag`, `indicateur_common_id`, `period_id`, `valeur aberrante_flag`
-    | module 1 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `établissement_id`, `indicateur_common_id`, `period_id`, `complétude_flag` | module 2 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `period_id`, `complétude_flag` | module 3 - Indicateurs d'exhaustivité pour les indicateurs de mois d'établissement
+    | Les indicateurs de valeurs aberrantes pour chaque indicateur de mois d'installation sont les suivants : `établissement_id`, `indicateur_common_id`, `period_id`, `outlier_flag`, `indicateur_common_id`, `period_id`, `outlier_flag`
+    | module 1 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `établissement_id`, `indicateur_common_id`, `period_id`, `completeness_flag` | module 2 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `period_id`, `completeness_flag` | module 3 - Indicateurs d'exhaustivité pour les indicateurs de mois d'établissement
 
 ? ?? "Structure des données d'entrée"
 
@@ -232,23 +232,23 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     ------------|--------------|--------------|--------------|-----------|---------------------|-------
     FAC001      | ISO3         | Province_A   | district_A   | 202301    | CPN1                | 145
     FAC001      | ISO3         | Province_A   | district_A   | 202302    | CPN1                | 152
-    FAC001      | ISO3         | Province_A   | district_A   | 202303    | CPN1                | 890  # valeur aberrante
+    FAC001      | ISO3         | Province_A   | district_A   | 202303    | CPN1                | 890  # outlier
     ```
 
-    **Drapeaux de valeurs aberrantes (`M1_output_valeurs aberrantes.csv`)** :
+    **Drapeaux de valeurs aberrantes (`M1_output_outliers.csv`)** :
 
     ```text
-    établissement_id | indicateur_common_id | period_id | valeur aberrante_flag
+    établissement_id | indicateur_common_id | period_id | outlier_flag
     ------------|---------------------|-----------|-------------
     FAC001      | CPN1                | 202301    | 0
     FAC001      | CPN1                | 202302    | 0
-    FAC001      | CPN1                | 202303    | 1           # Flagged as valeur aberrante
+    FAC001      | CPN1                | 202303    | 1           # Flagged as outlier
     ```
 
-    **Drapeaux de complétude (`M1_output_complétude.csv`)** :
+    **Drapeaux de complétude (`M1_output_completeness.csv`)** :
 
     ```text
-    établissement_id | indicateur_common_id | period_id | complétude_flag
+    établissement_id | indicateur_common_id | period_id | completeness_flag
     ------------|---------------------|-----------|------------------
     FAC001      | CPN1                | 202301    | 1             # Complete
     FAC001      | CPN1                | 202302    | 0             # Incomplete
@@ -271,7 +271,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Sorties au niveau de l'installation** (__CODE_BLOC_62__) :
 
     ```text
-    établissement_id | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count_final_none | count_final_valeurs aberrantes | count_final_complétude | count_final_both
+    établissement_id | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count_final_none | count_final_outlier | count_final_completeness | count_final_both
     ------------|--------------|--------------|-----------|---------------------|------------------|----------------------|--------------------------|------------------
     FAC001      | Province_A   | district_A   | 202301    | CPN1                | 145              | 145                  | 145                      | 145
     FAC001      | Province_A   | district_A   | 202302    | CPN1                | 152              | 152                  | 148                      | 148
@@ -282,7 +282,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     - `count_final_none` : Aucun ajustement n'est appliqué (valeurs originales)
     - cODE_BLOCK_65__ : Seul l'ajustement des valeurs aberrantes est appliqué
-    - `count_final_complétude` : Seul l'ajustement d'exhaustivité est appliqué
+    - `count_final_completeness` : Seul l'ajustement d'exhaustivité est appliqué
     - cODE_BLOCK_67__ : Ajustement des valeurs aberrantes et de l'exhaustivité appliqués
 
 ### Documentation sur les fonctions clés
@@ -306,7 +306,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Paramètres** :
 
     - `raw_data` (data.table) : Données SIGS originales avec comptage des services
-    - `complétude_data` (data.table) : Indicateurs d'exhaustivité du module 1
+    - `completeness_data` (data.table) : Indicateurs d'exhaustivité du module 1
     - cODE_BLOC_75__ (data.table) : Indicateurs de valeurs aberrantes du module 1
     - __CODE_BLOC_76__ (logique) : Application ou non de l'ajustement des valeurs aberrantes
     - __CODE_BLOC_77__ (logique) : Appliquer ou non l'ajustement de l'exhaustivité
@@ -334,8 +334,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Paramètres** :
 
     - `raw_data` (data.table) : Données SIGS d'origine
-    - `complétude_data` (data.table) : Drapeaux d'exhaustivité
-    - `valeur aberrante_data` (data.table) : Indicateurs de valeurs aberrantes
+    - `completeness_data` (data.table) : Drapeaux d'exhaustivité
+    - `outlier_data` (data.table) : Indicateurs de valeurs aberrantes
 
     **Returns** :
 
@@ -358,7 +358,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ? ?? "Méthodologie d'ajustement des valeurs aberrantes
 
-    L'ajustement des valeurs aberrantes est appliqué à toute valeur du mois de l'établissement signalée dans le module 1 (`valeur aberrante_flag == 1`). L'objectif est de remplacer ces valeurs aberrantes par des données historiques valides provenant du même établissement et du même indicateur.
+    L'ajustement des valeurs aberrantes est appliqué à toute valeur du mois de l'établissement signalée dans le module 1 (`outlier_flag == 1`). L'objectif est de remplacer ces valeurs aberrantes par des données historiques valides provenant du même établissement et du même indicateur.
 
     **Approche statistique** :
 
@@ -369,14 +369,14 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     Seules les valeurs répondant à TOUS les critères suivants sont utilisées dans les calculs :
 
     - `!is.na(count)` (non-missing)
-    - `valeur aberrante_flag == 0` (non signalées comme aberrantes)
+    - `outlier_flag == 0` (non signalées comme aberrantes)
 
     **Mise en œuvre** :
 
     Le module utilise `frollmean()` du paquet `zoo` pour des calculs de roulement efficaces :
 
     ```r
-    data_adj[, valid_count := fifelse(valeur aberrante_flag == 0L & !is.na(count), count, NA_real_)]
+    data_adj[, valid_count := fifelse(outlier_flag == 0L & !is.na(count), count, NA_real_)]
     data_adj[, `:=`(
       roll6   = frollmean(valid_count, 6, na.rm = TRUE, align = "center"),
       fwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "left"),
@@ -419,8 +419,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
         ```r
         data_adj[, `:=`(mm = month(date), yy = year(date))]
         data_adj <- data_adj[, {
-          for (i in which(valeur aberrante_flag == 1L & is.na(adj_method))) {
-            j <- which(mm == mm[i] & yy == yy[i] - 1 & valeur aberrante_flag == 0L & !is.na(count))
+          for (i in which(outlier_flag == 1L & is.na(adj_method))) {
+            j <- which(mm == mm[i] & yy == yy[i] - 1 & outlier_flag == 0L & !is.na(count))
             if (length(j) == 1L) {
               count_working[i] <- count[j]
               adj_method[i]    <- "same_month_last_year"
@@ -445,7 +445,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     La correction pour exhaustivité est appliquée à tout mois-facilité pour lequel.. :
 
-    - Le mois est marqué comme incomplet (`complétude_flag != 1`) dans le module 1, OU
+    - Le mois est marqué comme incomplet (`completeness_flag != 1`) dans le module 1, OU
     - La valeur est manquante (__CODE_BLOC_109__)
 
     **Approche statistique** :
@@ -455,7 +455,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Valeurs valides pour l'ajustement de l'exhaustivité** :
 
     - `!is.na(count_working)` (non manquantes, peut-être déjà ajustées pour les valeurs aberrantes)
-    - `valeur aberrante_flag == 0` (non signalé comme aberrant dans les données d'origine)
+    - `outlier_flag == 0` (non signalé comme aberrant dans les données d'origine)
 
     **Différence essentielle par rapport à l'ajustement des valeurs aberrantes** :
 
@@ -465,7 +465,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Mise en œuvre
 
     ```r
-    data_adj[, valid_count := fifelse(!is.na(count_working) & valeur aberrante_flag == 0L, count_working, NA_real_)]
+    data_adj[, valid_count := fifelse(!is.na(count_working) & outlier_flag == 0L, count_working, NA_real_)]
     data_adj[, `:=`(
       roll6   = frollmean(valid_count, 6, na.rm = TRUE, align = "center"),
       fwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "left"),
@@ -510,27 +510,27 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Scénario 1 : Aucun** (`count_final_none`)
 
-    - `adjust_valeurs aberrantes = FALSE`, `adjust_complétude = FALSE`
+    - `adjust_outliers = FALSE`, `adjust_completeness = FALSE`
     - Données brutes originales sans aucune modification
     - Sert de référence pour la comparaison
 
-    **Scénario 2 : valeurs aberrantes** (`count_final_valeurs aberrantes`)
+    **Scénario 2 : valeurs aberrantes** (`count_final_outlier`)
 
-    - `adjust_valeurs aberrantes = TRUE`, `adjust_complétude = FALSE`
+    - `adjust_outliers = TRUE`, `adjust_completeness = FALSE`
     - Seules les valeurs aberrantes sont remplacées
     - Les valeurs manquantes/incomplètes restent telles quelles
     - Cas d'utilisation : Lorsque l'exhaustivité est élevée mais que les valeurs aberrantes posent problème
 
-    **Scénario 3 : Exhaustivité** (`count_final_complétude`)
+    **Scénario 3 : Exhaustivité** (`count_final_completeness`)
 
-    - `adjust_valeurs aberrantes = FALSE`, `adjust_complétude = TRUE`
+    - `adjust_outliers = FALSE`, `adjust_completeness = TRUE`
     - Seules les valeurs manquantes/incomplètes sont imputées
     - Les valeurs aberrantes sont conservées dans les données
     - Cas d'utilisation : Lorsque la qualité des données est bonne mais que la déclaration est sporadique
 
     **Scénario 4 : Les deux** (`count_final_both`)
 
-    - `adjust_valeurs aberrantes = TRUE`, `adjust_complétude = TRUE`
+    - `adjust_outliers = TRUE`, `adjust_completeness = TRUE`
     - **Traitement séquentiel** : Traitement séquentiel** : les valeurs aberrantes sont d'abord corrigées, puis l'exhaustivité
     - Ajustement le plus complet
     - Cas d'utilisation : Lorsque les deux problèmes de qualité des données sont prévalents
@@ -590,11 +590,11 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Données** :
 
     ```text
-    period_id | count | valeur aberrante_flag | Surrounding valid values
+    period_id | count | outlier_flag | Surrounding valid values
     ----------|-------|--------------|-------------------------
     202301    | 145   | 0            | valid
     202302    | 152   | 0            | valid
-    202303    | 890   | 1            | valeur aberrante
+    202303    | 890   | 1            | outlier
     202304    | 148   | 0            | valid
     202305    | 155   | 0            | valid
     202306    | 147   | 0            | valid
@@ -619,7 +619,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Données** :
 
     ```text
-    period_id | count | complétude_flag | Surrounding valid values
+    period_id | count | completeness_flag | Surrounding valid values
     ----------|-------|-------------------|-------------------------
     202301    | 45    | 1                 | valid
     202302    | NA    | 0                 | INCOMPLETE
@@ -647,10 +647,10 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Données** :
 
     ```text
-    period_id | count | valeur aberrante_flag | Notes
+    period_id | count | outlier_flag | Notes
     ----------|-------|--------------|-------
     202206    | 234   | 0            | June 2022 (valid)
-    202306    | 1850  | 1            | June 2023 (valeur aberrante)
+    202306    | 1850  | 1            | June 2023 (outlier)
     ```
 
     **Logique d'ajustement** :
@@ -681,10 +681,10 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Données originales** :
 
     ```text
-    Month    | Count | valeur aberrante? | Complete?
+    Month    | Count | outlier? | Complete?
     ---------|-------|----------|----------
     Jan 2023 | 78    | No       | Yes
-    Feb 2023 | 450   | Yes      | Yes       # valeur aberrante
+    Feb 2023 | 450   | Yes      | Yes       # outlier
     Mar 2023 | NA    | -        | No        # Incomplete
     ```
 
@@ -716,8 +716,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       ,
       .(
         count_final_none         = sum(count_final_none,         na.rm = TRUE),
-        count_final_valeurs aberrantes     = sum(count_final_valeurs aberrantes,     na.rm = TRUE),
-        count_final_complétude = sum(count_final_complétude, na.rm = TRUE),
+        count_final_outlier     = sum(count_final_outlier,     na.rm = TRUE),
+        count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),
       by = c(geo_admin_area_sub, "indicateur_common_id", "period_id")
@@ -731,8 +731,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       ,
       .(
         count_final_none         = sum(count_final_none,         na.rm = TRUE),
-        count_final_valeurs aberrantes     = sum(count_final_valeurs aberrantes,     na.rm = TRUE),
-        count_final_complétude = sum(count_final_complétude, na.rm = TRUE),
+        count_final_outlier     = sum(count_final_outlier,     na.rm = TRUE),
+        count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),
       by = .(admin_area_1, indicateur_common_id, period_id)
@@ -816,7 +816,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
          Backward-filled: 67
          Same-month LY: 34
          Fallback mean: 12
-     -> Adjusting for complétude...
+     -> Adjusting for completeness...
          Roll6 filled: 2,103
          Forward-filled: 234
          Backward-filled: 178

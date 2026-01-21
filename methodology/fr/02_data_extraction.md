@@ -336,7 +336,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 <div class="columns">
 <div>
 
-![Data Downloader établissement list h:380](../resources/screenshots/data_downloader/05_établissement_list.png)
+![Data Downloader établissement list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
 
 </div>
 <div>
@@ -358,7 +358,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 <div class="columns">
 <div>
 
-![Data Downloader établissement map h:380](../resources/screenshots/data_downloader/06_établissement_map.png)
+![Data Downloader établissement map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
 
 </div>
 <div>

@@ -7,9 +7,9 @@
 
 > **Note:** Le contenu de cette section est susceptible d'être révisé.
 
-## FASTR SRMNIA-N surveillance de l'utilisation des services
+## FASTR RMNCAH-N surveillance de l'utilisation des services
 
-Cette documentation décrit l'approche FASTR pour le suivi de la prestation des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N) en utilisant les données du système d'information sur la gestion de la santé (SIGS). La méthodologie guide les utilisateurs à travers un processus de bout en bout : de la définition des questions prioritaires et de l'extraction des données à la communication des résultats pour la prise de décision, en passant par l'analyse basée sur une plateforme.
+Cette documentation décrit l'approche FASTR pour le suivi de la prestation des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (RMNCAH-N) en utilisant les données du système d'information sur la gestion de la santé (SIGS). La méthodologie guide les utilisateurs à travers un processus de bout en bout : de la définition des questions prioritaires et de l'extraction des données à la communication des résultats pour la prise de décision, en passant par l'analyse basée sur une plateforme.
 
 ## Contexte
 

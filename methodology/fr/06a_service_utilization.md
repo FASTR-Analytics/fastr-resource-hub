@@ -9,7 +9,7 @@
 
 Le module Utilisation des services analyse les schémas de prestation des services de santé afin de détecter et de quantifier les perturbations des volumes de services au fil du temps. Il identifie les écarts par rapport aux schémas de prestation de services prévus et estime l'ampleur de ces perturbations aux niveaux national, provincial et du district.
 
-À l'aide de méthodes de contrôle des processus statistiques et de régression, le module compare les volumes de services observés avec les niveaux attendus dérivés des tendances historiques et saisonnières. Cela permet de distinguer les variations régulières et prévisibles (telles que l'augmentation saisonnière des cas de paludisme) des perturbations importantes des services, y compris les baisses soudaines des services du SRMNIA-N - tels que la vaccination et les soins de santé maternelle ou infantile - pendant les périodes de conflit ou les urgences de santé publique.
+À l'aide de méthodes de contrôle des processus statistiques et de régression, le module compare les volumes de services observés avec les niveaux attendus dérivés des tendances historiques et saisonnières. Cela permet de distinguer les variations régulières et prévisibles (telles que l'augmentation saisonnière des cas de paludisme) des perturbations importantes des services, y compris les baisses soudaines des services du RMNCAH-N - tels que la vaccination et les soins de santé maternelle ou infantile - pendant les périodes de conflit ou les urgences de santé publique.
 
 L'analyse produit des estimations quantifiées des déficits et des excédents de services, ce qui permet de mesurer systématiquement les changements dans la prestation des services et de les comparer dans le temps et au niveau géographique.
 
@@ -121,25 +121,25 @@ L'analyse FASTR génère quatre sorties visuelles principales pour l'utilisation
 
 Diagramme à barres montrant les volumes de services annuels par région et par indicateur, avec des annotations sur la variation en pourcentage d'une année sur l'autre.
 
-![Évolution du volume de services dans le temps](resources/default_outputs/module3_1_Change_in_service_volume.png)
+![Évolution du volume de services dans le temps](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 **2. Services réels par rapport aux services prévus (national)**
 
 Graphique linéaire comparant les volumes de services observés aux prévisions du modèle au niveau national.
 
-(resources/default_outputs/module3_2_Actual_vs_expected_national.png)
+(resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 **3. Services réels par rapport aux services attendus (au niveau infranational)**
 
 Graphiques linéaires par région comparant les volumes observés aux modèles attendus.
 
-(resources/default_outputs/module3_3_Actual_vs_expected_infranational.png)
+(resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 **4. Variation de volume due aux ajustements de la qualité des données**
 
 Diagramme à barres groupées comparant les volumes de services selon quatre scénarios d'ajustement : pas d'ajustement, ajustement des valeurs aberrantes uniquement, ajustement de l'exhaustivité uniquement, et les deux ajustements.
 
-(resources/default_outputs/module3_4_Volume_change_adjustments.png)
+(resources/default_outputs/Module3_4_Volume_change_adjustments.png)
 
 **Guide d'interprétation**
 
@@ -170,7 +170,7 @@ Pour le graphique de variation de volume (résultat 4) :
     | Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration - Valeur par défaut - Type - Description - Guide de réglage - Paramètres de configuration
     |-----------|---------|------|-------------|-----------------|
     | `COUNTRY_ISO3` | "ISO3" | Chaîne | Code de pays à trois lettres | Définissez votre code de pays (par exemple, "RWA", "UGA", "ZMB") |
-    | `SELECTEDCOUNT` | "count_final_both" | Chaîne | Chaîne | Colonne de données utilisée pour l'analyse | Options : `count_final_none`, `count_final_complétude`, `count_final_both` |
+    | `SELECTEDCOUNT` | "count_final_both" | Chaîne | Chaîne | Colonne de données utilisée pour l'analyse | Options : `count_final_none`, `count_final_completeness`, `count_final_both` |
     | `visualisationCOUNT` | "count_final_both" | Chaîne de caractères | Chaîne | Colonne de données utilisée pour la visualisation | Doit correspondre à ou compléter `SELECTEDCOUNT` |
 
 ? ?? "Paramètres de la carte de contrôle"
@@ -224,12 +224,12 @@ Pour le graphique de variation de volume (résultat 4) :
     1. **`M2_adjusted_data.csv`** (source de données principale)
        - Résultat du module 2 (ajustements de la qualité des données)
        - Contient des comptes de services ajustés avec différentes hypothèses d'exhaustivité
-       - Colonnes obligatoires : `établissement_id`, `indicateur_common_id`, `period_id`, `count_final_none`, `count_final_complétude`, `count_final_both`
+       - Colonnes obligatoires : `établissement_id`, `indicateur_common_id`, `period_id`, `count_final_none`, `count_final_completeness`, `count_final_both`
 
-    2. **`M1_output_valeurs aberrantes.csv`**
+    2. **`M1_output_outliers.csv`**
        - Résultat du module 1 (évaluation de la qualité des données)
-       - Contient `valeur aberrante_flag` pour identifier et exclure les points de données anormaux
-       - Colonnes requises : `établissement_id`, `indicateur_common_id`, `period_id`, `valeur aberrante_flag`
+       - Contient `outlier_flag` pour identifier et exclure les points de données anormaux
+       - Colonnes requises : `établissement_id`, `indicateur_common_id`, `period_id`, `outlier_flag`
 
     3. **`SIGS_ISO3.csv`** (utilisé uniquement pour la recherche géographique)
        - Fichier SIGS brut utilisé uniquement pour extraire la correspondance établissement_id → admin_area_1
@@ -425,7 +425,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
 ? ?? "Analyse des cartes de contrôle
 
-    Les volumes de services sont agrégés au niveau géographique spécifié (configurable via `CONTROL_CHART_LEVEL`). Le pipeline supprime les valeurs aberrantes (`valeur aberrante_flag == 1`), complète les mois manquants et filtre les mois à faible volume (<50% du volume moyen global).
+    Les volumes de services sont agrégés au niveau géographique spécifié (configurable via `CONTROL_CHART_LEVEL`). Le pipeline supprime les valeurs aberrantes (`outlier_flag == 1`), complète les mois manquants et filtre les mois à faible volume (<50% du volume moyen global).
 
     Un modèle de régression robuste estime les volumes de services attendus par indicateur × zone géographique (`panelvar`). Une médiane roulante centrée est appliquée pour lisser les valeurs prédites. Les résidus (réels - lissés) sont normalisés à l'aide de MAD. Les perturbations sont identifiées à l'aide d'un système de marquage basé sur des règles.
 
@@ -629,7 +629,7 @@ Pour le graphique de variation de volume (résultat 4) :
     - Charger les indicateurs de valeurs aberrantes à partir de __CODE_BLOC_159__.
     - Charger les données brutes du SIGS uniquement pour extraire la consultation `établissement_id → admin_area_1` (puis les rejeter).
     - Fusionner les indicateurs de valeurs aberrantes dans les données ajustées par établissement × indicateur × mois.
-    - Supprimer les lignes marquées comme aberrantes (`valeur aberrante_flag == 1`).
+    - Supprimer les lignes marquées comme aberrantes (`outlier_flag == 1`).
     - Créer une variable `date` à partir de `period_id` et extraire `year` et `month`.
     - Créer un `panelvar` unique pour chaque combinaison zone géographique-indicateur.
     - Agréger les données au niveau géographique spécifié en additionnant les `count_model` (sur la base du `SELECTEDCOUNT`) par date.
@@ -793,9 +793,9 @@ Pour le graphique de variation de volume (résultat 4) :
     SELECTEDCOUNT <- "count_final_none"
     visualisationCOUNT <- "count_final_none"
 
-    # Use valeur aberrante-adjusted only
-    SELECTEDCOUNT <- "count_final_valeurs aberrantes"
-    visualisationCOUNT <- "count_final_valeurs aberrantes"
+    # Use outlier-adjusted only
+    SELECTEDCOUNT <- "count_final_outlier"
+    visualisationCOUNT <- "count_final_outlier"
 
     # Use fully adjusted data (default)
     SELECTEDCOUNT <- "count_final_both"
@@ -1088,7 +1088,7 @@ Pour le graphique de variation de volume (résultat 4) :
 
     **Prérequis** :
 
-    1. **module 1** : Évaluation de la qualité des données (génère `M1_output_valeurs aberrantes.csv`)
+    1. **module 1** : Évaluation de la qualité des données (génère `M1_output_outliers.csv`)
     2. **module 2** : Ajustements de la qualité des données (génère `M2_adjusted_data.csv`) Ajustements de la qualité des données (génère __CODE_BLOC_214__)
 
     ### Dependances
@@ -1147,7 +1147,7 @@ La comparaison statistique des volumes observés par rapport aux niveaux attendu
 
 ## Utilisation des services dans le temps
 
-![Utilisation des services dans le temps h:420](resources/default_outputs/module3_5_Number_of_services_reported.png)
+![Utilisation des services dans le temps h:420](resources/default_outputs/Module3_5_Number_of_services_reported.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1168,7 +1168,7 @@ Les changements dépassant **±10%** sont signalés pour examen.
 <div style="display : flex ; gap : 1.5em ; align-items : flex-start ;">
 <div style="flex : 1.2 ;">
 
-![Changement du volume de service h:340](resources/default_outputs/module3_1_Change_du_volume_de_service.png)
+![Changement du volume de service h:340](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
 <div style="flex : 1 ;">
@@ -1205,7 +1205,7 @@ Notre approche des interruptions de service et des excédents utilise une régre
 </div>
 <div style="flex : 2 ;">
 
-![Exemple de perturbation et de surplus h:300](resources/diagrams/perturbation_chart.png)
+![Exemple de perturbation et de surplus h:300](resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
@@ -1242,7 +1242,7 @@ Cela améliore la capacité d'interpréter et de comparer les données d'utilisa
 <!-- SLIDE:m6_4 -->
 ## Sortie : Réel vs attendu (national)
 
-![Nationalité réelle vs nationale attendue h:380](resources/default_outputs/module3_2_Actual_vs_expected_national.png)
+![Nationalité réelle vs nationale attendue h:380](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 <p style="font-size : 0.8em ; color : #666 ;">Comparaison au niveau national des volumes de services observés par rapport aux valeurs attendues dérivées des tendances historiques et saisonnières.
 
@@ -1250,7 +1250,7 @@ Cela améliore la capacité d'interpréter et de comparer les données d'utilisa
 
 ## Sortie : Réel vs attendu (infranational)
 
-![Sous-national réel vs prévu h:380](resources/default_outputs/module3_3_Actual_vs_expected_infranational.png)
+![Sous-national réel vs prévu h:380](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 <p style="font-size : 0.8em ; color : #666 ;">La désagrégation infranationale permet d'identifier les zones géographiques où se concentrent les perturbations.
 <!-- /SLIDE -->

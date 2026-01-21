@@ -151,7 +151,7 @@ Bien que des méthodes statistiques telles que l'imputation puissent être utili
 
 ## Indicateurs de base du FASTR
 
-L'approche FASTR se concentre sur un ensemble d'indicateurs SRMNIA-N qui représentent des points clés du continuum de la santé reproductive, maternelle, néonatale, infantile et adolescente et de la nutrition dans les pays à revenu faible et intermédiaire. Ces indicateurs font généralement l'objet d'un plus grand nombre de rapports et d'une plus grande exhaustivité, et servent d'indicateurs pour des modèles plus larges de prestation de services.
+L'approche FASTR se concentre sur un ensemble d'indicateurs RMNCAH-N qui représentent des points clés du continuum de la santé reproductive, maternelle, néonatale, infantile et adolescente et de la nutrition dans les pays à revenu faible et intermédiaire. Ces indicateurs font généralement l'objet d'un plus grand nombre de rapports et d'une plus grande exhaustivité, et servent d'indicateurs pour des modèles plus larges de prestation de services.
 
 Les consultations externes sont également incluses en tant qu'indicateur de l'utilisation globale des services de santé. Des indicateurs spécifiques à un pays ou à un programme peuvent être ajoutés si nécessaire pour refléter les priorités nationales.
 
@@ -303,7 +303,7 @@ Les méthodes statistiques telles que l'imputation permettent d'ajuster les donn
 <!-- SLIDE:m1_3d -->
 ## Indicateurs de base du FASTR
 
-L'approche FASTR se concentre sur un ensemble d'indicateurs SRMNIA-N qui :
+L'approche FASTR se concentre sur un ensemble d'indicateurs RMNCAH-N qui :
 - Caractérisent le continuum des soins de santé reproductive, maternelle et infantile
 - Saisissent les événements clés de la prestation de services avec des taux d'exhaustivité plus élevés et un volume plus important
 - Servent d'indicateurs pour d'autres services fournis au même contact
