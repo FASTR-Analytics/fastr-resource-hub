@@ -30,6 +30,7 @@ export interface Session {
   slides?: string[]
   speaker?: string
   duration?: number
+  icon?: string
 }
 
 export interface WorkshopConfig {

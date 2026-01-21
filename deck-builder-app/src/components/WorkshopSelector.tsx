@@ -6,7 +6,7 @@ import {
   Plus,
   Calendar,
   MapPin,
-  Users
+  CalendarDays
 } from 'lucide-react'
 
 interface Props {
@@ -185,7 +185,7 @@ export function WorkshopSelector({ onClose }: Props) {
                         {workshop.date || 'No date set'}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5" />
+                        <CalendarDays className="w-3.5 h-3.5" />
                         {workshop.days} day{workshop.days > 1 ? 's' : ''}
                       </span>
                     </div>

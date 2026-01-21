@@ -33,7 +33,16 @@ import {
   X,
   RefreshCw,
   Eye,
-  Edit3
+  Edit3,
+  LayoutTemplate,
+  ListChecks,
+  Sunset,
+  BookOpen,
+  Target,
+  Globe,
+  BarChart3,
+  ArrowRight,
+  Layers
 } from 'lucide-react'
 
 interface OutputFile {
@@ -57,6 +66,7 @@ export function DeckBuilder() {
   } = useWorkshopStore()
 
   const [activeDay, setActiveDay] = useState(1)
+  const [dayStartTime, setDayStartTime] = useState('')
   const [isBuilding, setIsBuilding] = useState(false)
   const [buildResult, setBuildResult] = useState<{
     success: boolean
@@ -69,7 +79,20 @@ export function DeckBuilder() {
   const [showOutputPanel, setShowOutputPanel] = useState(false)
   const [selectedSession, setSelectedSession] = useState<{ session: Session; index: number } | null>(null)
 
-  
+
+  // Sync day start time with first session
+  useEffect(() => {
+    if (currentConfig) {
+      const dayKey = `day${activeDay}`
+      const daySessions: Session[] = currentConfig.schedule[dayKey] || []
+      if (daySessions.length > 0 && daySessions[0].time) {
+        setDayStartTime(daySessions[0].time)
+      } else {
+        setDayStartTime('')
+      }
+    }
+  }, [currentConfig, activeDay])
+
   // Load outputs when workshop changes or after build
   useEffect(() => {
     if (currentWorkshopId) {
@@ -179,6 +202,7 @@ export function DeckBuilder() {
         session: getModuleName(moduleId),
         module: moduleId,
         duration: 60,
+        icon: 'module',
       })
     } else if (slideType === 'topic') {
       const topicId = e.dataTransfer.getData('topicId')
@@ -186,6 +210,7 @@ export function DeckBuilder() {
         session: getTopicTitle(topicId),
         topics: [topicId],
         duration: 30,
+        icon: 'topic',
       })
     } else if (slideType === 'custom') {
       const slideFile = e.dataTransfer.getData('slideFile')
@@ -193,24 +218,25 @@ export function DeckBuilder() {
         session: slideFile.replace('.md', ''),
         slides: [slideFile],
         duration: 15,
+        icon: 'custom',
       })
     } else if (slideType === 'template') {
       const templateId = e.dataTransfer.getData('templateId')
       // Map template IDs to their appropriate session types
       const templateConfig: Record<string, Partial<Session>> = {
-        'title': { session: 'Title Slide', slides: ['title'], duration: 5 },
-        'agenda': { session: 'Agenda', slides: ['agenda'], duration: 10 },
-        'section': { session: 'Section', type: 'section', duration: 0 },
-        'closing': { session: 'Closing', slides: ['closing'], duration: 5 },
-        'tea': { session: 'Tea Break', type: 'break', duration: 15 },
-        'lunch': { session: 'Lunch Break', type: 'break', duration: 60 },
-        'day_end': { session: 'End of Day', slides: ['day_end'], duration: 5 },
-        'day_recap': { session: 'Day Recap', slides: ['day_recap'], duration: 10 },
-        'objectives': { session: 'Workshop Objectives', slides: ['objectives'], duration: 10 },
-        'country': { session: 'Country Overview', slides: ['country_overview'], duration: 15 },
-        'priorities': { session: 'Health Priorities', slides: ['health_priorities'], duration: 15 },
-        'results': { session: 'Coverage Results', slides: ['coverage_results'], duration: 15 },
-        'next_steps': { session: 'Next Steps', slides: ['next_steps'], duration: 10 },
+        'title': { session: 'Title Slide', slides: ['title'], duration: 5, icon: 'cover' },
+        'agenda': { session: 'Agenda', slides: ['agenda'], duration: 10, icon: 'list' },
+        'section': { session: 'Section', type: 'section', duration: 0, icon: 'divider' },
+        'closing': { session: 'Closing', slides: ['closing'], duration: 5, icon: 'end' },
+        'tea': { session: 'Tea Break', type: 'break', duration: 15, icon: 'coffee' },
+        'lunch': { session: 'Lunch Break', type: 'break', duration: 60, icon: 'lunch' },
+        'day_end': { session: 'End of Day', slides: ['day_end'], duration: 5, icon: 'sunset' },
+        'day_recap': { session: 'Day Recap', slides: ['day_recap'], duration: 10, icon: 'recap' },
+        'objectives': { session: 'Workshop Objectives', slides: ['objectives'], duration: 10, icon: 'target' },
+        'country': { session: 'Country Overview', slides: ['country_overview'], duration: 15, icon: 'globe' },
+        'priorities': { session: 'Health Priorities', slides: ['health_priorities'], duration: 15, icon: 'heart' },
+        'results': { session: 'Coverage Results', slides: ['coverage_results'], duration: 15, icon: 'chart' },
+        'next_steps': { session: 'Next Steps', slides: ['next_steps'], duration: 10, icon: 'arrow' },
       }
 
       const config = templateConfig[templateId] || { session: templateId, duration: 10 }
@@ -437,15 +463,35 @@ export function DeckBuilder() {
         </div>
       </div>
 
-      {/* Day title */}
+      {/* Day title and start time */}
       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-        <input
-          type="text"
-          value={dayTitle}
-          onChange={e => updateDayTitle(activeDay, e.target.value)}
-          placeholder={`Day ${activeDay} theme (optional)`}
-          className="w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent"
-        />
+        <div className="flex gap-4 items-center">
+          <div className="flex-1">
+            <input
+              type="text"
+              value={dayTitle}
+              onChange={e => updateDayTitle(activeDay, e.target.value)}
+              placeholder={`Day ${activeDay} theme (optional)`}
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-600">Start:</label>
+            <input
+              type="text"
+              value={dayStartTime}
+              onChange={e => {
+                const newTime = e.target.value
+                setDayStartTime(newTime)
+                if (sessions.length > 0) {
+                  updateSession(activeDay, 0, { time: newTime })
+                }
+              }}
+              placeholder="09:00"
+              className="w-20 px-3 py-2 text-center font-mono font-bold border-2 border-fastr-primary rounded-md focus:outline-none focus:ring-2 focus:ring-fastr-primary bg-white"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Outputs panel */}
@@ -641,15 +687,29 @@ function SortableSessionItem({
         </div>
 
         {/* Icon */}
-        {isBreak ? (
-          session.session.toLowerCase().includes('lunch') ? (
-            <UtensilsCrossed className="w-5 h-5 text-amber-500" />
-          ) : (
-            <Coffee className="w-5 h-5 text-amber-500" />
-          )
-        ) : (
-          <FileText className="w-5 h-5 text-fastr-secondary" />
-        )}
+        {(() => {
+          // Use session.icon if available, otherwise infer from type/name
+          const icon = session.icon || (isBreak ? (session.session.toLowerCase().includes('lunch') ? 'lunch' : 'coffee') : 'default')
+          switch (icon) {
+            case 'cover': return <FileText className="w-5 h-5 text-fastr-accent" />
+            case 'list': return <ListChecks className="w-5 h-5 text-fastr-secondary" />
+            case 'divider': return <LayoutTemplate className="w-5 h-5 text-fastr-secondary" />
+            case 'end': return <FileText className="w-5 h-5 text-gray-500" />
+            case 'coffee': return <Coffee className="w-5 h-5 text-amber-600" />
+            case 'lunch': return <UtensilsCrossed className="w-5 h-5 text-orange-500" />
+            case 'sunset': return <Sunset className="w-5 h-5 text-orange-400" />
+            case 'recap': return <BookOpen className="w-5 h-5 text-blue-500" />
+            case 'target': return <Target className="w-5 h-5 text-red-500" />
+            case 'globe': return <Globe className="w-5 h-5 text-blue-500" />
+            case 'heart': return <FileText className="w-5 h-5 text-pink-500" />
+            case 'chart': return <BarChart3 className="w-5 h-5 text-green-500" />
+            case 'arrow': return <ArrowRight className="w-5 h-5 text-fastr-primary" />
+            case 'module': return <Layers className="w-5 h-5 text-fastr-primary" />
+            case 'topic': return <FileCode className="w-5 h-5 text-fastr-secondary" />
+            case 'custom': return <FileText className="w-5 h-5 text-fastr-accent" />
+            default: return <FileText className="w-5 h-5 text-fastr-secondary" />
+          }
+        })()}
 
         {/* Content */}
         <div className="flex-1 min-w-0">
@@ -658,27 +718,16 @@ function SortableSessionItem({
             {session.type === 'section' ? (
               <div className="w-28" /> // Empty space for section headers
             ) : (
-              <div className="flex items-center gap-1 text-sm">
-                {isFirst ? (
-                  // First session: editable start time
-                  <input
-                    type="text"
-                    value={session.time || ''}
-                    onChange={e => {
-                      e.stopPropagation()
-                      onUpdate({ time: e.target.value })
-                    }}
-                    placeholder="08:30"
-                    className="w-14 px-1.5 py-1 text-center border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-fastr-secondary bg-white"
-                  />
-                ) : (
-                  // Subsequent sessions: show calculated start time
-                  <span className="w-14 px-1.5 py-1 text-center text-gray-600 bg-gray-50 rounded">
-                    {calculatedTime.start || '--:--'}
-                  </span>
-                )}
-                <span className="text-gray-400">-</span>
-                <span className="w-14 px-1.5 py-1 text-center text-gray-500 bg-gray-50 rounded">
+              <div className="flex items-center gap-1 text-sm font-mono">
+                <span className={`w-14 px-1.5 py-1 text-center rounded ${
+                  calculatedTime.start ? 'text-gray-700 bg-gray-100' : 'text-gray-400 bg-gray-50'
+                }`}>
+                  {calculatedTime.start || '--:--'}
+                </span>
+                <span className="text-gray-400">→</span>
+                <span className={`w-14 px-1.5 py-1 text-center rounded ${
+                  calculatedTime.end ? 'text-gray-700 bg-gray-100' : 'text-gray-400 bg-gray-50'
+                }`}>
                   {calculatedTime.end || '--:--'}
                 </span>
               </div>
@@ -687,6 +736,8 @@ function SortableSessionItem({
               type="text"
               value={session.session}
               onChange={e => onUpdate({ session: e.target.value })}
+              onClick={e => e.stopPropagation()}
+              onPointerDown={e => e.stopPropagation()}
               className="flex-1 px-2 py-1 text-sm font-medium border border-transparent hover:border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-fastr-secondary focus:border-transparent"
             />
           </div>
