@@ -4,6 +4,7 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 import { spawn } from 'child_process'
 import dotenv from 'dotenv'
+import * as contentParser from './contentParser'
 
 // Load environment variables from .env file
 // Try multiple paths since __dirname changes between dev and production
@@ -68,6 +69,46 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
+  }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// FILE WATCHER - Auto-refresh content on changes
+// ═══════════════════════════════════════════════════════════════════════════════
+
+let contentWatcher: fs.FSWatcher | null = null
+
+function setupContentWatcher() {
+  if (contentWatcher) {
+    contentWatcher.close()
+  }
+
+  // Watch the core_content directory for changes
+  if (fs.existsSync(CORE_CONTENT_PATH)) {
+    contentWatcher = fs.watch(CORE_CONTENT_PATH, { recursive: true }, (eventType, filename) => {
+      if (filename && filename.endsWith('.md')) {
+        console.log(`Content changed: ${filename}`)
+        // Invalidate cache - will reload on next request
+        contentParser.invalidateCache()
+
+        // Notify renderer of content change
+        if (mainWindow) {
+          mainWindow.webContents.send('content-changed', { file: filename })
+        }
+      }
+    })
+
+    console.log('Content watcher initialized')
+  }
+}
+
+app.whenReady().then(() => {
+  setupContentWatcher()
+})
+
+app.on('before-quit', () => {
+  if (contentWatcher) {
+    contentWatcher.close()
   }
 })
 
@@ -321,6 +362,69 @@ ipcMain.handle('read-slide', async (_event, filePath: string) => {
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// IPC HANDLERS - Parsed Content (JSON-structured)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Get all parsed content (modules with structured slides)
+ipcMain.handle('get-parsed-content', async () => {
+  try {
+    const cache = contentParser.loadAllContent(CORE_CONTENT_PATH)
+    return {
+      modules: cache.modules,
+      lastUpdated: cache.lastUpdated,
+    }
+  } catch (error) {
+    console.error('Error getting parsed content:', error)
+    return { modules: [], lastUpdated: 0 }
+  }
+})
+
+// Get a specific parsed module
+ipcMain.handle('get-parsed-module', async (_event, moduleId: string) => {
+  try {
+    return contentParser.getModule(CORE_CONTENT_PATH, moduleId)
+  } catch (error) {
+    console.error('Error getting parsed module:', error)
+    return null
+  }
+})
+
+// Get a specific parsed topic
+ipcMain.handle('get-parsed-topic', async (_event, topicId: string) => {
+  try {
+    return contentParser.getTopic(CORE_CONTENT_PATH, topicId)
+  } catch (error) {
+    console.error('Error getting parsed topic:', error)
+    return null
+  }
+})
+
+// Get a specific slide from a topic
+ipcMain.handle('get-parsed-slide', async (_event, topicId: string, slideIndex: number) => {
+  try {
+    return contentParser.getSlide(CORE_CONTENT_PATH, topicId, slideIndex)
+  } catch (error) {
+    console.error('Error getting parsed slide:', error)
+    return null
+  }
+})
+
+// Force refresh content cache
+ipcMain.handle('refresh-content', async () => {
+  try {
+    contentParser.invalidateCache()
+    const cache = contentParser.loadAllContent(CORE_CONTENT_PATH, true)
+    return {
+      modules: cache.modules,
+      lastUpdated: cache.lastUpdated,
+    }
+  } catch (error) {
+    console.error('Error refreshing content:', error)
+    return { modules: [], lastUpdated: 0 }
+  }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // IPC HANDLERS - Slide Content for Editor
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -556,10 +660,10 @@ const TEMPLATE_CATEGORIES = [
     name: 'Breaks & Transitions',
     description: 'Break and day transition slides',
     templates: [
-      { id: 'tea', file: null, name: 'Tea Break', icon: 'coffee', special: true },
-      { id: 'lunch', file: null, name: 'Lunch Break', icon: 'lunch', special: true },
-      { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset' },
-      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true },
+      { id: 'tea', file: null, name: 'Tea Break', icon: 'coffee', special: true, preview: '15-minute tea/coffee break' },
+      { id: 'lunch', file: null, name: 'Lunch Break', icon: 'lunch', special: true, preview: '60-minute lunch break' },
+      { id: 'day_end', file: null, name: 'End of Day', icon: 'sunset', special: true, preview: 'Wrap up the day, preview tomorrow. Uses dayN_wrapup.md from workshop folder.' },
+      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true, preview: 'Recap previous day, preview today. Uses dayN_recap.md from workshop folder.' },
     ]
   },
   {
@@ -583,8 +687,11 @@ ipcMain.handle('get-templates', async () => {
   return TEMPLATE_CATEGORIES.map(category => ({
     ...category,
     templates: category.templates.map(template => {
-      let preview = ''
-      if (template.file && !template.special) {
+      // Use built-in preview for special templates
+      let preview = (template as any).preview || ''
+
+      // For file-based templates, read preview from file
+      if (template.file && !template.special && !preview) {
         const filePath = path.join(templatesDir, template.file)
         if (fs.existsSync(filePath)) {
           const content = fs.readFileSync(filePath, 'utf-8')
@@ -983,6 +1090,63 @@ const AI_TOOLS = [
       required: ['day', 'start_time'],
     },
   },
+  {
+    name: 'update_workshop_settings',
+    description: 'Update workshop settings like objectives, scope, outputs, priorities, or basic info. Use this to fill in workshop content based on user context.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        objectives: { type: 'string', description: 'Workshop objectives as bullet points (one per line, with or without leading dash)' },
+        scope_of_work: { type: 'string', description: 'Scope of work items as bullet points' },
+        expected_outputs: { type: 'string', description: 'Expected outputs as bullet points' },
+        priorities: { type: 'string', description: 'Key priorities/focus areas as bullet points' },
+        facilitators: { type: 'string', description: 'Facilitator names' },
+        venue: { type: 'string', description: 'Workshop venue' },
+        contact_email: { type: 'string', description: 'Contact email' },
+        website: { type: 'string', description: 'Website URL' },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'move_session',
+    description: 'Move a session to a different position within a day. Use this to reorganize the deck order.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day the session is on' },
+        from_position: { type: 'number', description: 'Current position of the session (0-indexed)' },
+        to_position: { type: 'number', description: 'New position to move it to (0-indexed)' },
+      },
+      required: ['day', 'from_position', 'to_position'],
+    },
+  },
+  {
+    name: 'remove_session',
+    description: 'Remove a session from the deck. Use this to clean up or reorganize.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day the session is on' },
+        position: { type: 'number', description: 'Position of the session to remove (0-indexed)' },
+      },
+      required: ['day', 'position'],
+    },
+  },
+  {
+    name: 'move_session_to_day',
+    description: 'Move a session from one day to another day.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        from_day: { type: 'number', description: 'Current day of the session' },
+        from_position: { type: 'number', description: 'Position of the session on current day (0-indexed)' },
+        to_day: { type: 'number', description: 'Day to move the session to' },
+        to_position: { type: 'number', description: 'Position on the new day (0-indexed, optional - defaults to end)', default: -1 },
+      },
+      required: ['from_day', 'from_position', 'to_day'],
+    },
+  },
 ]
 
 ipcMain.handle('ai-chat', async (_event, messages: any[], context: any) => {
@@ -1020,17 +1184,29 @@ You can use tools to:
 2. **add_break** - Add tea or lunch breaks
 3. **add_custom_session** - Add custom sessions (opening remarks, group work, etc.)
 4. **set_day_start_time** - Set the start time for a day
+5. **update_workshop_settings** - Fill in workshop objectives, scope, outputs, priorities, and other settings
+6. **move_session** - Move a session to a different position within a day (reorder)
+7. **remove_session** - Remove a session from the deck
+8. **move_session_to_day** - Move a session from one day to another
 
 # INSTRUCTIONS
 - When the user asks to add content, USE THE TOOLS to actually add it
 - After using tools, briefly confirm what you added
 - If the user asks a question without wanting changes, just answer without using tools
 - Be proactive: if they say "add Data Analysis module", use add_module with module_number=6
-- Consider adding appropriate breaks when building a full day agenda`
+- Consider adding appropriate breaks when building a full day agenda
+- If asked to fill in settings/objectives/scope, use update_workshop_settings with appropriate content based on the workshop context
+- For objectives/scope/outputs, generate practical FASTR-relevant content (e.g., "Configure the analytics platform", "Produce quarterly report", "Train staff on data quality assessment")
+- When reorganizing, look at the current schedule and use move_session/remove_session to improve the logical flow
+- A good workshop order typically: Opening/Intro → Foundation modules → Hands-on modules → Analysis → Communication → Wrap-up
+- Add breaks between long modules (after ~90 min of content)
+- IMPORTANT: Complete ALL requested changes in a single response. Don't just describe what you'll do - actually call all the tools needed.
+- If asked to "fill in settings AND reorganize", do BOTH in one response using multiple tool calls.
+- Always execute the full task, don't split it across multiple messages.`
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2048,
+      model: 'claude-3-5-haiku-20241022',
+      max_tokens: 4096,
       system: systemPrompt,
       messages: messages,
       tools: AI_TOOLS,

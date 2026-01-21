@@ -8,9 +8,22 @@ contextBridge.exposeInMainWorld('electronAPI', {
   saveWorkshop: (workshopId: string, config: any) => ipcRenderer.invoke('save-workshop', workshopId, config),
   createWorkshop: (workshopId: string, config: any) => ipcRenderer.invoke('create-workshop', workshopId, config),
 
-  // Content library
+  // Content library (legacy)
   getContentLibrary: () => ipcRenderer.invoke('get-content-library'),
   readSlide: (filePath: string) => ipcRenderer.invoke('read-slide', filePath),
+
+  // Parsed content (structured JSON)
+  getParsedContent: () => ipcRenderer.invoke('get-parsed-content'),
+  getParsedModule: (moduleId: string) => ipcRenderer.invoke('get-parsed-module', moduleId),
+  getParsedTopic: (topicId: string) => ipcRenderer.invoke('get-parsed-topic', topicId),
+  getParsedSlide: (topicId: string, slideIndex: number) => ipcRenderer.invoke('get-parsed-slide', topicId, slideIndex),
+  refreshContent: () => ipcRenderer.invoke('refresh-content'),
+
+  // Content change listener
+  onContentChanged: (callback: (data: { file: string }) => void) => {
+    ipcRenderer.on('content-changed', (_event, data) => callback(data))
+    return () => ipcRenderer.removeAllListeners('content-changed')
+  },
 
   // Slide content for editor
   getModuleSlides: (moduleId: string, workshopId: string) =>
@@ -45,22 +58,100 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
 // TypeScript declarations for window.electronAPI
 declare global {
+  // Parsed content types
+  interface SlideElement {
+    type: 'heading' | 'text' | 'bullet' | 'numbered' | 'image' | 'code' | 'directive'
+    content: string
+    level?: number
+    alt?: string
+    src?: string
+    language?: string
+  }
+
+  interface ParsedSlide {
+    index: number
+    title: string
+    elements: SlideElement[]
+    rawContent: string
+    layout?: string
+  }
+
+  interface ParsedTopic {
+    id: string
+    file: string
+    title: string
+    path: string
+    slides: ParsedSlide[]
+    frontmatter: Record<string, any>
+    slideCount: number
+    lastModified: number
+  }
+
+  interface ParsedModule {
+    number: number
+    id: string
+    name: string
+    folder: string
+    topics: ParsedTopic[]
+    totalSlides: number
+  }
+
+  interface ParsedContentResult {
+    modules: ParsedModule[]
+    lastUpdated: number
+  }
+
+  interface SlideContent {
+    filename: string
+    content: string
+    isCustom: boolean
+    originalContent: string
+  }
+
   interface Window {
     electronAPI: {
+      // Workshop operations
       getWorkshops: () => Promise<any[]>
       loadWorkshop: (workshopId: string) => Promise<any>
       saveWorkshop: (workshopId: string, config: any) => Promise<boolean>
       createWorkshop: (workshopId: string, config: any) => Promise<boolean>
+
+      // Content library (legacy)
       getContentLibrary: () => Promise<any[]>
       readSlide: (filePath: string) => Promise<string>
+
+      // Parsed content (structured JSON)
+      getParsedContent: () => Promise<ParsedContentResult>
+      getParsedModule: (moduleId: string) => Promise<ParsedModule | null>
+      getParsedTopic: (topicId: string) => Promise<ParsedTopic | null>
+      getParsedSlide: (topicId: string, slideIndex: number) => Promise<ParsedSlide | null>
+      refreshContent: () => Promise<ParsedContentResult>
+      onContentChanged: (callback: (data: { file: string }) => void) => () => void
+
+      // Slide content for editor
+      getModuleSlides: (moduleId: string, workshopId: string) => Promise<SlideContent[]>
+      getTopicSlide: (topicId: string, workshopId: string) => Promise<SlideContent | null>
+      getSlideContent: (slideId: string, workshopId: string) => Promise<SlideContent | null>
+
+      // Custom slides
       getCustomSlides: (workshopId: string) => Promise<any[]>
       saveCustomSlide: (workshopId: string, filename: string, content: string) => Promise<boolean>
-      buildDeck: (workshopId: string) => Promise<{
+
+      // Templates
+      getTemplates: () => Promise<any[]>
+
+      // Build
+      buildDeck: (workshopId: string, skipPdf?: boolean) => Promise<{
         success: boolean
         output: string
         outputPath: string
         outputDir: string
+        mdPath: string
+        htmlPath: string | null
+        pdfPath: string | null
       }>
+
+      // File operations
       openFile: (filePath: string) => Promise<boolean>
       showInFolder: (filePath: string) => Promise<boolean>
       readFileContent: (filePath: string) => Promise<string>
@@ -71,7 +162,10 @@ declare global {
         type: 'md' | 'pdf' | 'pptx'
         modified: Date
       }>>
-      aiChat: (messages: any[], context: any) => Promise<{ role: string; content: string }>
+      openPreviewWindow: (htmlPath: string) => Promise<boolean>
+
+      // AI Assistant
+      aiChat: (messages: any[], context: any) => Promise<{ role: string; content: string; toolCalls?: any[] }>
     }
   }
 }

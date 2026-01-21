@@ -24,13 +24,18 @@ export interface Session {
   _id?: string
   time?: string
   session: string
-  type?: 'break' | 'section'
+  type?: 'break' | 'section' | 'day_recap' | 'day_end'
   module?: string
   topics?: string[]
   slides?: string[]
   speaker?: string
   duration?: number
   icon?: string
+  // Day recap content
+  recap_yesterday?: string  // What we covered yesterday (bullet points, one per line)
+  recap_today?: string      // What we'll cover today (bullet points, one per line)
+  // Day end content
+  wrapup_message?: string   // Custom wrap-up message (optional, auto-generates if empty)
 }
 
 export interface WorkshopConfig {
@@ -40,10 +45,19 @@ export interface WorkshopConfig {
     location: string
     date: string
     facilitators: string
+    venue?: string
+    contact_email?: string
+    website?: string
+    // Workshop content for slides
+    objectives?: string      // Bullet points, one per line
+    scope_of_work?: string   // Bullet points, one per line
+    expected_outputs?: string // Bullet points, one per line
+    priorities?: string      // Bullet points, one per line
   }
   schedule: {
     days: number
     day_titles?: Record<number, string>
+    day_start_times?: Record<number, string>
     [key: string]: any // day1, day2, etc.
   }
   content: {
@@ -110,6 +124,7 @@ interface WorkshopStore {
   reorderSession: (dayNum: number, fromIdx: number, toIdx: number) => void
   addDay: () => void
   updateDayTitle: (dayNum: number, title: string) => void
+  updateDayStartTime: (dayNum: number, time: string) => void
 
   // AI Assistant
   sendAIMessage: (message: string) => Promise<void>
@@ -333,6 +348,19 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     get().saveCurrentWorkshop()
   },
 
+  // Update day start time
+  updateDayStartTime: (dayNum: number, time: string) => {
+    const { currentConfig } = get()
+    if (!currentConfig) return
+
+    if (!currentConfig.schedule.day_start_times) {
+      currentConfig.schedule.day_start_times = {}
+    }
+    currentConfig.schedule.day_start_times[dayNum] = time
+    set({ currentConfig: { ...currentConfig } })
+    get().saveCurrentWorkshop()
+  },
+
   // AI Assistant
   sendAIMessage: async (message: string) => {
     const { aiMessages, currentConfig, contentLibrary, addSession, updateSession } = get()
@@ -415,6 +443,103 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
             if (sessions.length > 0) {
               updateSession(day, 0, { time: input.start_time })
               actionsTaken.push(`Set Day ${day} start time to ${input.start_time}`)
+            }
+          }
+
+          else if (tool.name === 'update_workshop_settings') {
+            // Update workshop settings (objectives, scope, etc.)
+            if (currentConfig) {
+              const updates: string[] = []
+              const workshopUpdates: Partial<typeof currentConfig.workshop> = {}
+
+              if (input.objectives) {
+                workshopUpdates.objectives = input.objectives
+                updates.push('objectives')
+              }
+              if (input.scope_of_work) {
+                workshopUpdates.scope_of_work = input.scope_of_work
+                updates.push('scope of work')
+              }
+              if (input.expected_outputs) {
+                workshopUpdates.expected_outputs = input.expected_outputs
+                updates.push('expected outputs')
+              }
+              if (input.priorities) {
+                workshopUpdates.priorities = input.priorities
+                updates.push('priorities')
+              }
+              if (input.facilitators) {
+                workshopUpdates.facilitators = input.facilitators
+                updates.push('facilitators')
+              }
+              if (input.venue) {
+                workshopUpdates.venue = input.venue
+                updates.push('venue')
+              }
+              if (input.contact_email) {
+                workshopUpdates.contact_email = input.contact_email
+                updates.push('contact email')
+              }
+              if (input.website) {
+                workshopUpdates.website = input.website
+                updates.push('website')
+              }
+
+              if (updates.length > 0) {
+                const newConfig = {
+                  ...currentConfig,
+                  workshop: {
+                    ...currentConfig.workshop,
+                    ...workshopUpdates,
+                  },
+                }
+                set({ currentConfig: newConfig })
+                get().saveCurrentWorkshop()
+                actionsTaken.push(`Updated ${updates.join(', ')}`)
+              }
+            }
+          }
+
+          else if (tool.name === 'move_session') {
+            const { reorderSession } = get()
+            reorderSession(input.day, input.from_position, input.to_position)
+            actionsTaken.push(`Moved session from position ${input.from_position} to ${input.to_position} on Day ${input.day}`)
+          }
+
+          else if (tool.name === 'remove_session') {
+            const { removeSession } = get()
+            const dayKey = `day${input.day}`
+            const sessions = currentConfig?.schedule?.[dayKey] || []
+            const sessionName = sessions[input.position]?.session || `position ${input.position}`
+            removeSession(input.day, input.position)
+            actionsTaken.push(`Removed "${sessionName}" from Day ${input.day}`)
+          }
+
+          else if (tool.name === 'move_session_to_day') {
+            // Move session between days
+            if (currentConfig) {
+              const fromDayKey = `day${input.from_day}`
+              const toDayKey = `day${input.to_day}`
+              const fromSessions = [...(currentConfig.schedule[fromDayKey] || [])]
+              const toSessions = [...(currentConfig.schedule[toDayKey] || [])]
+
+              if (input.from_position >= 0 && input.from_position < fromSessions.length) {
+                const [session] = fromSessions.splice(input.from_position, 1)
+                const toPos = input.to_position >= 0 ? input.to_position : toSessions.length
+                toSessions.splice(toPos, 0, session)
+
+                const newConfig = {
+                  ...currentConfig,
+                  schedule: {
+                    ...currentConfig.schedule,
+                    [fromDayKey]: fromSessions,
+                    [toDayKey]: toSessions,
+                  },
+                }
+                set({ currentConfig: newConfig })
+                get().saveCurrentWorkshop()
+                actionsTaken.push(`Moved "${session.session}" from Day ${input.from_day} to Day ${input.to_day}`)
+              }
             }
           }
         }

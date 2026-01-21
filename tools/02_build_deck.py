@@ -633,6 +633,7 @@ def load_yaml_config(yaml_path):
         'lunch_time': schedule.get('lunch_time', '12:30 PM'),
         'afternoon_tea_time': schedule.get('afternoon_tea', '3:30 PM'),
         'day_start_time': schedule.get('start_time', '9:00 AM'),
+        'day_start_times': schedule.get('day_start_times', {}),  # Per-day start times
 
         'deck_order': content.get('deck_order', []),
         'include_day_end_slides': True,
@@ -704,16 +705,24 @@ def extract_unified_schedule(config):
         day_sessions = schedule.get(day_key, [])
 
         for session in day_sessions:
+            session_type = session.get('type', '')
             item = {
                 'day': day_num,
                 'session': session.get('session', ''),
                 'module': session.get('module'),
                 'topics': session.get('topics'),  # List of specific topic IDs like [m3_1, m3_2]
                 'slides': session.get('slides'),
-                'is_break': session.get('type') == 'break',
-                'is_section': session.get('type') == 'section',
+                'is_break': session_type == 'break',
+                'is_section': session_type == 'section',
+                'is_day_recap': session_type == 'day_recap',
+                'is_day_end': session_type == 'day_end',
                 'duration': session.get('duration', 0),
                 'time': session.get('time', ''),
+                # Inline content for day_recap
+                'recap_yesterday': session.get('recap_yesterday', ''),
+                'recap_today': session.get('recap_today', ''),
+                # Inline content for day_end
+                'wrapup_message': session.get('wrapup_message', ''),
             }
             items.append(item)
 
@@ -1450,7 +1459,10 @@ We'll resume at {time}
 
 def generate_day_end_slide(day_number, next_day_sessions, config):
     """Generate an end-of-day slide"""
-    day_start = config.get('day_start_time', '9:00 AM')
+    # Get next day's start time (day_number is current day, so next is day_number + 1)
+    next_day = day_number + 1
+    day_start_times = config.get('day_start_times', {})
+    day_start = day_start_times.get(next_day) or day_start_times.get(str(next_day)) or config.get('day_start_time', '9:00 AM')
 
     # Build preview of next day
     preview_items = []
@@ -1675,6 +1687,80 @@ paginate: true
                     print(f"   ☕ {session_name}")
                 continue
 
+            # Handle day_recap session type (from GUI with inline content)
+            if item.get('is_day_recap'):
+                recap_yesterday = item.get('recap_yesterday', '')
+                recap_today = item.get('recap_today', '')
+
+                if recap_yesterday or recap_today:
+                    # Generate from inline content
+                    recap_content = f"\n# Recap\n\n"
+                    if recap_yesterday:
+                        recap_content += "**Yesterday we covered:**\n\n"
+                        for line in recap_yesterday.strip().split('\n'):
+                            line = line.strip()
+                            if line and not line.startswith('-'):
+                                line = f"- {line}"
+                            if line:
+                                recap_content += f"{line}\n"
+                        recap_content += "\n---\n\n"
+
+                    if recap_today:
+                        recap_content += f"# Day {current_day} Focus\n\n**Today we will cover:**\n\n"
+                        for line in recap_today.strip().split('\n'):
+                            line = line.strip()
+                            if line and not line.startswith('-'):
+                                line = f"- {line}"
+                            if line:
+                                recap_content += f"{line}\n"
+                        recap_content += "\n---\n"
+
+                    deck_content += recap_content
+                    print(f"   📋 {session_name} (from inline content)")
+                elif current_day > 1:
+                    # Fall back to file
+                    recap_file = f"day{current_day}_recap.md"
+                    custom_path = os.path.join(workshop_dir, recap_file)
+                    content = read_markdown_file(custom_path)
+                    if content:
+                        content = strip_frontmatter(content)
+                        content = substitute_variables(content, config)
+                        deck_content += "\n" + ensure_slide_break(content) + "\n"
+                        print(f"   📋 {session_name}: {recap_file}")
+                    else:
+                        print(f"   ⚠️  Warning: No content for {session_name} - fill in the fields or create {recap_file}")
+                else:
+                    print(f"   Note: Skipping day_recap on Day 1 (nothing to recap)")
+                continue
+
+            # Handle day_end session type (from GUI with inline content)
+            if item.get('is_day_end'):
+                wrapup_message = item.get('wrapup_message', '')
+
+                if wrapup_message:
+                    # Use custom wrap-up message
+                    wrapup_content = f"\n# End of Day {current_day}\n\n{wrapup_message}\n\n---\n"
+                    deck_content += wrapup_content
+                    print(f"   🌙 {session_name} (custom message)")
+                else:
+                    # Try file first
+                    wrapup_file = f"day{current_day}_wrapup.md"
+                    custom_path = os.path.join(workshop_dir, wrapup_file)
+                    content = read_markdown_file(custom_path)
+                    if content:
+                        content = strip_frontmatter(content)
+                        content = substitute_variables(content, config)
+                        deck_content += "\n" + ensure_slide_break(content) + "\n"
+                        print(f"   🌙 {session_name}: {wrapup_file}")
+                    else:
+                        # Auto-generate end of day slide
+                        next_day_sessions = [e['session'] for e in unified_items if e['day'] == current_day + 1 and not e.get('is_break') and not e.get('is_section')]
+                        end_content = generate_day_end_slide(current_day, next_day_sessions, config)
+                        if end_content:
+                            deck_content += end_content
+                            print(f"   🌙 {session_name} (auto-generated)")
+                continue
+
             # Handle module content
             if item['module']:
                 module_id = item['module']
@@ -1748,6 +1834,79 @@ paginate: true
                         if agenda_content:
                             deck_content += ensure_slide_break(agenda_content) + "\n"
                             print(f"   {session_name}: agenda")
+
+                    elif slide_file in ['day_recap', 'day_recap.md']:
+                        # Day recap - use inline content, fall back to file, or skip
+                        recap_yesterday = item.get('recap_yesterday', '')
+                        recap_today = item.get('recap_today', '')
+
+                        if recap_yesterday or recap_today:
+                            # Generate from inline content
+                            recap_content = f"\n# Recap\n\n"
+                            if recap_yesterday:
+                                recap_content += "**Yesterday we covered:**\n\n"
+                                for line in recap_yesterday.strip().split('\n'):
+                                    line = line.strip()
+                                    if line and not line.startswith('-'):
+                                        line = f"- {line}"
+                                    if line:
+                                        recap_content += f"{line}\n"
+                                recap_content += "\n---\n\n"
+
+                            if recap_today:
+                                recap_content += f"# Day {current_day} Focus\n\n**Today we will cover:**\n\n"
+                                for line in recap_today.strip().split('\n'):
+                                    line = line.strip()
+                                    if line and not line.startswith('-'):
+                                        line = f"- {line}"
+                                    if line:
+                                        recap_content += f"{line}\n"
+                                recap_content += "\n---\n"
+
+                            deck_content += recap_content
+                            print(f"   {session_name}: (from inline content)")
+                        elif current_day > 1:
+                            # Fall back to file
+                            recap_file = f"day{current_day}_recap.md"
+                            custom_path = os.path.join(workshop_dir, recap_file)
+                            content = read_markdown_file(custom_path)
+                            if content:
+                                content = strip_frontmatter(content)
+                                content = substitute_variables(content, config)
+                                deck_content += "\n" + ensure_slide_break(content) + "\n"
+                                print(f"   {session_name}: {recap_file}")
+                            else:
+                                print(f"   Warning: No content for {session_name} - fill in the fields or create {recap_file}")
+                        else:
+                            print(f"   Note: Skipping day_recap on Day 1 (nothing to recap)")
+
+                    elif slide_file in ['day_end', 'day_end.md', 'day_wrapup', 'day_wrapup.md']:
+                        # End of day - use inline content, fall back to file, or auto-generate
+                        wrapup_message = item.get('wrapup_message', '')
+
+                        if wrapup_message:
+                            # Use custom wrap-up message
+                            wrapup_content = f"\n# End of Day {current_day}\n\n{wrapup_message}\n\n---\n"
+                            deck_content += wrapup_content
+                            print(f"   {session_name}: (custom message)")
+                        else:
+                            # Try file first
+                            wrapup_file = f"day{current_day}_wrapup.md"
+                            custom_path = os.path.join(workshop_dir, wrapup_file)
+                            content = read_markdown_file(custom_path)
+                            if content:
+                                content = strip_frontmatter(content)
+                                content = substitute_variables(content, config)
+                                deck_content += "\n" + ensure_slide_break(content) + "\n"
+                                print(f"   {session_name}: {wrapup_file}")
+                            else:
+                                # Auto-generate end of day slide
+                                next_day_sessions = [e['session'] for e in unified_items if e['day'] == current_day + 1 and not e.get('is_break') and not e.get('is_section')]
+                                end_content = generate_day_end_slide(current_day, next_day_sessions, config)
+                                if end_content:
+                                    deck_content += end_content
+                                    print(f"   {session_name}: (auto-generated)")
+
                     else:
                         # Custom slide from workshop folder
                         custom_path = os.path.join(workshop_dir, slide_file)
