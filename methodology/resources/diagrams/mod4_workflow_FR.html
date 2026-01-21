@@ -283,7 +283,7 @@
     <div class="container">
         <header>
             <h1>FASTR Calcul des dénominateurs et estimation de la couverture</h1>
-            <p>Analyses en cycle rapide pour le suivi de la couverture des services basé sur HMIS</p>
+            <p>Analyses en cycle rapide pour le suivi de la couverture des services basé sur SIGS</p>
         </header>
 
         <div class="workflow">
@@ -302,7 +302,7 @@
                             Rassembler les sources de données
                         </div>
                         <div class="flow-row">
-                            <div class="input-box">Données HMIS<br><small>(Module 2)</small></div>
+                            <div class="input-box">Données SIGS<br><small>(Module 2)</small></div>
                             <div class="input-box">Données d'enquête<br><small>(MICS/DHS)</small></div>
                             <div class="input-box">Données de population<br><small>(UN WPP)</small></div>
                         </div>
@@ -340,7 +340,7 @@
                             <h4>Options de dénominateurs par source</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
-                                    <strong>Basés sur HMIS :</strong><br>
+                                    <strong>Basés sur SIGS :</strong><br>
                                     • À partir des contacts ANC1<br>
                                     • À partir des accouchements<br>
                                     • À partir des procédures SBA<br>
@@ -389,7 +389,7 @@
                             <div class="comparison-row">
                                 <div class="comparison-item">
                                     <strong>Métrique d'erreur :</strong><br>
-                                    Erreur = (Couverture HMIS - Couverture enquête)²
+                                    Erreur = (Couverture SIGS - Couverture enquête)²
                                 </div>
                                 <div class="comparison-item">
                                     <strong>Évaluation :</strong><br>
@@ -411,7 +411,7 @@
                             <h4>Critères de sélection</h4>
                             <ul style="list-style: none; font-size: 13px;">
                                 <li style="margin-bottom: 8px;">✓ <strong>Principal :</strong> Erreur minimale par rapport à l'enquête</li>
-                                <li style="margin-bottom: 8px;">✓ <strong>Secondaire :</strong> Préférer HMIS à la population</li>
+                                <li style="margin-bottom: 8px;">✓ <strong>Secondaire :</strong> Préférer SIGS à la population</li>
                                 <li style="margin-bottom: 8px;">✓ <strong>Tertiaire :</strong> Considérations de qualité et d'exhaustivité des données</li>
                             </ul>
                         </div>
@@ -441,7 +441,7 @@
             <div class="part">
                 <div class="part-header">
                     <h2>PARTIE 2 : Sélection des dénominateurs et projection de la couverture</h2>
-                    <p>Sélectionner les dénominateurs et projeter les estimations d'enquête en utilisant les tendances HMIS</p>
+                    <p>Sélectionner les dénominateurs et projeter les estimations d'enquête en utilisant les tendances SIGS</p>
                 </div>
 
                 <div class="stage-container">
@@ -532,10 +532,10 @@
                             <h4>Formule de projection</h4>
                             <ul style="list-style: none; font-size: 13px;">
                                 <li style="margin-bottom: 10px;">
-                                    <strong>Couverture projetée = Dernière enquête + (HMIS_maintenant - HMIS_alors)</strong>
+                                    <strong>Couverture projetée = Dernière enquête + (SIGS_maintenant - SIGS_alors)</strong>
                                 </li>
                                 <li style="margin-bottom: 8px;">
-                                    Utilise la tendance HMIS pour mettre à jour la référence de l'enquête vers l'avant
+                                    Utilise la tendance SIGS pour mettre à jour la référence de l'enquête vers l'avant
                                 </li>
                                 <li>
                                     Comble l'écart entre l'année de l'enquête et la période actuelle
@@ -556,7 +556,7 @@
                             <h4>Intégration des résultats</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
-                                    • Estimations de couverture basées sur HMIS
+                                    • Estimations de couverture basées sur SIGS
                                 </div>
                                 <div class="comparison-item">
                                     • Valeurs originales de l'enquête
@@ -584,7 +584,7 @@
                         <div class="output-box">
                             <h4>Livrable final</h4>
                             <ul>
-                                <li><strong>M5_coverage_estimation_national.csv :</strong> Estimations de couverture au niveau national incluant les valeurs basées sur HMIS, les données d'enquête et les projections vers l'avant</li>
+                                <li><strong>M5_coverage_estimation_national.csv :</strong> Estimations de couverture au niveau national incluant les valeurs basées sur SIGS, les données d'enquête et les projections vers l'avant</li>
                                 <li><strong>M5_coverage_estimation_admin2.csv :</strong> Estimations de couverture au niveau zone administrative 2</li>
                                 <li><strong>M5_coverage_estimation_admin3.csv :</strong> Estimations de couverture au niveau zone administrative 3</li>
                             </ul>
