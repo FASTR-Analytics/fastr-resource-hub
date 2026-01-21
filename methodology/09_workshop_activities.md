@@ -12,7 +12,7 @@ This chapter contains hands-on activities for workshop participants.
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:disruption_1 -->
+<!-- SLIDE:disruption -->
 ## Activity: Service utilization analysis
 
 In this activity, participants will:
@@ -23,9 +23,8 @@ In this activity, participants will:
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Duration: 60-90 minutes**
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_2 -->
 ## Part 1: Import latest data
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Using the Data tab**
@@ -38,9 +37,8 @@ In this activity, participants will:
 
 <!-- TODO: Screenshots and detailed workflow to be added -->
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_3 -->
 ## Part 2: Run service utilization module
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Service Utilization module**
@@ -54,9 +52,8 @@ In this activity, participants will:
 
 **Key output:** `M3_disruptions_analysis_admin_area_1.csv`
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_4 -->
 ## Graph 1: Trends over time
 
 **Purpose:** Summarize overall service volume trajectory and identify key trends.
@@ -68,9 +65,8 @@ In this activity, participants will:
 > - Notable disruptions, seasonal patterns, or outliers
 > - Specific data points for highs, lows, and final-period values
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_5 -->
 ## Graph 1: Example interpretation
 
 **BCG** volumes fluctuated through the period, with small gains in 2023 and mid-2024 followed by a decline in early 2025, returning to 50,000 doses by mid-2025.
@@ -79,9 +75,8 @@ In this activity, participants will:
 
 By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estimated **11% dropout** between first and third doses.
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_6 -->
 ## Graph 2: Quarter-on-quarter change
 
 **Purpose:** Understand service volume changes comparing one quarter to the next.
@@ -94,9 +89,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 
 > Analyze this data to identify quarters with changes greater than 10% and highlight the 2-3 largest increases or decreases.
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_7 -->
 ## Graph 3: Service disruptions and surpluses
 
 **Purpose:** Identify disruptions/surpluses and assess impact of external shocks.
@@ -108,9 +102,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 > - Calculate average deviation for highlighted periods
 > - Red = disruption, Green = surplus
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_8 -->
 ## Graph 3: Example interpretation
 
 **BCG:** Multiple disruptions in 2023 and 2025, with service use 10-24% below expected levels.
@@ -119,9 +112,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 
 **Penta3:** Short dips of 5-13% below expected in 2023 and mid-2024.
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_9 -->
 ## Moving from data to key messages
 
 **What is a result?**
@@ -134,9 +126,8 @@ By mid-2025, Penta1 reached 64,000 doses and Penta3 57,000, indicating an estima
 - Why the results matter - the "so what"
 - Should be: few in number, simple and clear, actionable
 
-<!-- /SLIDE -->
+---
 
-<!-- SLIDE:disruption_10 -->
 ## Discussion
 
 - What trends emerged in the country data?
