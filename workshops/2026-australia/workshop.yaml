@@ -1,0 +1,133 @@
+workshop:
+  name: FASTR Workshop - Australia
+  country: Australia
+  location: Perth
+  date: Jan 10-12
+  facilitators: TBD
+  objectives: ''
+schedule:
+  days: 3
+  day_start_times:
+    '1': '09:00'
+    '2': '09:00'
+    '3': '09:00'
+  day1:
+    - _id: title-1769004605321
+      session: Title Slide
+      slides:
+        - title
+      duration: 5
+      icon: cover
+    - _id: agenda-1769004605321
+      session: Agenda
+      slides:
+        - agenda
+      duration: 10
+      icon: list
+    - _id: objectives-1769004605321
+      session: Workshop Objectives
+      slides:
+        - 01_objectives.md
+      duration: 10
+      icon: target
+    - _id: m0-1769004605321
+      session: Introduction to FASTR
+      module: m0
+      duration: 60
+      icon: module
+    - _id: m1-1769004605321
+      session: Identify Questions & Indicators
+      module: m1
+      duration: 90
+      icon: module
+    - _id: m2-1769004605321
+      session: Data Extraction
+      module: m2
+      duration: 120
+      icon: module
+    - _id: dayend-1-1769004605321
+      session: End of Day 1
+      type: day_end
+      duration: 5
+      icon: sunset
+      wrapup_message: ''
+  day2:
+    - _id: recap-2-1769004605321
+      session: Day 2 Recap
+      type: day_recap
+      duration: 10
+      icon: recap
+      recap_yesterday: ''
+      recap_today: ''
+    - _id: m3-1769004605321
+      session: FASTR Analytics Platform
+      module: m3
+      duration: 90
+      icon: module
+    - _id: tea-2-1769004605321-100
+      session: Tea Break
+      type: break
+      duration: 15
+      icon: coffee
+    - _id: m4-1769004605321
+      session: Data Quality Assessment
+      module: m4
+      duration: 120
+      icon: module
+    - _id: m5-1769004605321
+      session: Data Quality Adjustment
+      module: m5
+      duration: 90
+      icon: module
+    - _id: dayend-2-1769004605321
+      session: End of Day 2
+      type: day_end
+      duration: 5
+      icon: sunset
+      wrapup_message: ''
+  day3:
+    - _id: recap-3-1769004605321
+      session: Day 3 Recap
+      type: day_recap
+      duration: 10
+      icon: recap
+      recap_yesterday: ''
+      recap_today: ''
+    - _id: m6-1769004605321
+      session: Data Analysis
+      module: m6
+      duration: 180
+      icon: module
+    - _id: lunch-3-1769004605321
+      session: Lunch Break
+      type: break
+      duration: 60
+      icon: lunch
+    - _id: m7-1769004605321
+      session: Results Communication
+      module: m7
+      duration: 120
+      icon: module
+    - _id: closing-1769004605321
+      session: Closing
+      slides:
+        - closing.md
+      duration: 15
+      icon: end
+  day_titles:
+    '1': Theme A
+content:
+  modules:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+  custom_slides: []
+country_data:
+  COUNTRY: Australia
+  LOCATION: Perth
+  DATE: Jan 10-12

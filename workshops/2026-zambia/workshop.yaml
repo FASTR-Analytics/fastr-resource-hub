@@ -44,69 +44,90 @@ schedule:
       duration: 10
 
     - time: "09:20-09:35"
-      session: "Overview of agenda, workshop objectives"
-      slides: [agenda, 01_objectives.md, 02_scope-of-work.md, 03_expected-outputs.md]
+      session: "Workshop objectives and agenda"
+      slides: [01_objectives.md, expectations_slide.md, 03_expected-outputs.md, day1_agenda]
       speaker: "GFF FASTR team"
       duration: 15
 
     - type: section
       session: "Session 1: Overview of the FASTR approach"
 
-    - time: "09:35-10:30"
+    - time: "09:35-10:15"
       session: "Overview: FASTR Approaches"
-      module: m0
+      topics: [m0_0, m0_1, m0_3, m0_4]
+      slides: [demo_platform_slide.md]
       speaker: "GFF FASTR team"
-      duration: 55
+      duration: 40
 
     - type: section
-      session: "Session 2: HMIS data extraction"
+      session: "Session 2: Identifying priority questions and indicators"
 
-    - time: "10:30-11:30"
+    - time: "10:15-11:00"
+      session: "Identifying priority questions and indicators"
+      topics: [m1_1, m9_1, m9_2, m9_3, m1_1a, m1_1b, m1_3d, m1_3a, m1_3b, m1_3c, m1_3e]
+      slides: [activity_indicator_review.md]
+      speaker: "GFF FASTR team"
+      duration: 45
+
+    - type: section
+      session: "Session 3: HMIS data extraction"
+
+    - time: "11:00-12:00"
       session: "Data extraction: Rationale and methods"
       module: m2
+      slides: [data_extraction_platform.md]
       speaker: "GFF FASTR team"
       duration: 60
 
     - type: section
-      session: "Session 3: Introduction to the FASTR analytics platform"
+      session: "Session 4: Getting into the platform"
 
-    - time: "11:30-12:30"
-      session: "Introduction to the FASTR analytics platform"
+    - time: "12:00-12:30"
+      session: "Getting participants into the platform"
       topics: [m3_1, m3_1b, m3_2a, m3_2b, m3_2c, m3_2d, m3_2]
       speaker: "GFF FASTR team"
-      duration: 60
+      duration: 30
 
     - time: "12:30-14:00"
       session: "Lunch Break"
       type: break
       duration: 90
 
-    - time: "14:00-14:30"
-      session: "Getting participants into the platform"
-      speaker: "GFF FASTR team"
-      duration: 30
-
     - type: section
-      session: "Session 4: Configuring the FASTR analytics platform"
+      session: "Session 5: Configuring the FASTR analytics platform"
 
-    - time: "14:30-16:30"
+    - time: "14:00-15:30"
       session: "Configuring the analysis platform"
       topics: [m3_3, m3_4, m3_5]
       speaker: "GFF FASTR team"
-      duration: 120
+      duration: 90
+
+    - type: section
+      session: "Closing"
+
+    - time: "15:30-16:00"
+      session: "Key messages and wrap-up"
+      slides: [day1_wrapup.md]
+      speaker: "GFF FASTR team"
+      duration: 30
+
+    - time: "16:00-16:30"
+      session: "Reflections from participants"
+      speaker: "Participants"
+      duration: 30
 
   # ═══════════════════════════════════════════════════════════════════════
   # DAY 2: Building the Analysis
   # ═══════════════════════════════════════════════════════════════════════
   day2:
     - time: "09:00-09:15"
-      session: "Overview of Day 2 agenda"
-      slides: [day2_recap.md]
+      session: "Recap and Day 2 agenda"
+      slides: [day2_recap.md, day2_agenda]
       speaker: "GFF FASTR team"
       duration: 15
 
     - type: section
-      session: "Session 5: Overview of FASTR methods and analytical outputs"
+      session: "Session 6: Overview of FASTR methods and analytical outputs"
 
     - time: "09:15-10:15"
       session: "Data quality, service utilization, coverage"
@@ -115,7 +136,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 6: Creating a project"
+      session: "Session 7: Creating a project"
 
     - time: "10:15-11:15"
       session: "Project creation and settings"
@@ -124,7 +145,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 7: Creating visualizations"
+      session: "Session 8: Creating visualizations"
 
     - time: "11:15-12:30"
       session: "Creating and editing visualizations"
@@ -138,7 +159,7 @@ schedule:
       duration: 90
 
     - type: section
-      session: "Session 8: Creating reports"
+      session: "Session 9: Creating reports"
 
     - time: "14:30-16:30"
       session: "Practice creating and editing reports"
@@ -151,13 +172,13 @@ schedule:
   # ═══════════════════════════════════════════════════════════════════════
   day3:
     - time: "09:00-09:15"
-      session: "Overview of Day 3 agenda"
-      slides: [day3_recap.md]
+      session: "Recap and Day 3 agenda"
+      slides: [day3_recap.md, day3_agenda]
       speaker: "GFF FASTR team"
       duration: 15
 
     - type: section
-      session: "Session 8: Interpretation of visualizations"
+      session: "Session 10: Interpretation of visualizations"
 
     - time: "09:15-10:15"
       session: "Approaches to support interpretation"
@@ -166,7 +187,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 9: Creating a Q4 2025 report"
+      session: "Session 11: Creating a Q4 2025 report"
 
     - time: "10:15-12:30"
       session: "Creating short and long reports with country context"
@@ -180,7 +201,7 @@ schedule:
       duration: 90
 
     - type: section
-      session: "Session 9 (cont'd): Creating a Q4 2025 report"
+      session: "Session 11 (cont'd): Creating a Q4 2025 report"
 
     - time: "14:00-15:00"
       session: "Continue report creation with country context"
@@ -188,7 +209,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 10: Presenting reports"
+      session: "Session 12: Presenting reports"
 
     - time: "14:30-15:30"
       session: "Present reports, group feedback"
@@ -201,13 +222,13 @@ schedule:
   # ═══════════════════════════════════════════════════════════════════════
   day4:
     - time: "09:00-09:15"
-      session: "Overview of Day 4 agenda"
-      slides: [day4_recap.md]
+      session: "Recap and Day 4 agenda"
+      slides: [day4_recap.md, day4_agenda]
       speaker: "GFF FASTR team"
       duration: 15
 
     - type: section
-      session: "Session 12: Overview of FASTR HFA phone survey"
+      session: "Session 13: Overview of FASTR HFA phone survey"
 
     - time: "09:15-10:15"
       session: "HFA overview and questionnaire adaptation guidelines"
@@ -216,7 +237,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 13: Questionnaire adaptation to the Zambian context"
+      session: "Session 14: Questionnaire adaptation to the Zambian context"
 
     - time: "10:15-12:30"
       session: "Review questionnaire + hands-on adaptation"
@@ -229,7 +250,7 @@ schedule:
       duration: 90
 
     - type: section
-      session: "Session 14: Questionnaire adaptation (cont'd)"
+      session: "Session 14 (cont'd): Questionnaire adaptation"
 
     - time: "14:00-15:00"
       session: "Continue questionnaire adaptation (in groups)"

@@ -656,3 +656,24 @@ section.compact li {
 section.compact p {
   margin: 0.4em 0;
 }
+
+/* ========================================
+   CENTERED SLIDE - FOR SIMPLE CENTERED CONTENT
+   ======================================== */
+/* Use: <!-- _class: centered --> */
+
+section.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.centered h1 {
+  border-bottom: none;
+}
+
+section.centered img {
+  margin-top: 1em;
+}

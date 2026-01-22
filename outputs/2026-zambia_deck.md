@@ -9,11 +9,77 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-# In-Country Working Session: FASTR Implementation & RMNCAH-N Service Monitoring Analysis
+# STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE
 
-**January 27-30, 2026** | **Lusaka**
+**Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring**
 
-*GFF FASTR Team*
+Lusaka, Zambia
+
+January 27-30, 2026
+
+---
+
+
+<!-- _class: centered -->
+
+# Welcome and Opening Remarks
+
+![w:120](../resources/icons/lecture.png)
+
+---
+
+
+<!-- _class: centered -->
+
+# Introductions
+
+![w:120](../resources/icons/people_group.svg)
+
+---
+
+
+
+# Workshop Objectives
+
+The objectives of the workshop are to:
+
+- **Introduce the FASTR HMIS analysis platform** - Familiarize participants with the platform's purpose, core features, and functionalities, including workflows, reporting options, and outputs
+- **Strengthen analytical and reporting skills** - Enhance participants' capacity to manage data structures, customize visualizations, and produce tailored reports for diverse audiences
+- **Prepare MoH for participation in the multi-country workshop** - Configure the FASTR analytics platform for Zambia; Produce the first quarterly report
+- **Adapt the FASTR phone survey questionnaire to the Zambian context**
+
+---
+
+
+
+# Expectations for the Workshop
+
+Write on a sticky note and stick it on the flip chart:
+
+What do you want to learn?
+
+What questions about FASTR do you want answered?
+
+*We will review these on day four to see if we met our expectations.*
+
+![w:120](../resources/icons/pinned-notes.png)
+
+---
+
+
+
+# Expected Outputs
+
+**Disruption Analysis Activities**
+
+- Data extraction and configuration of analytics platform
+- Produce first quarterly report
+- Review results and contextualize findings (with relevant program teams)
+- Roadmap for participation in Abuja workshop
+
+**Phone Survey Activities**
+
+- Adaptation of questionnaire (with program input)
 
 ---
 
@@ -29,127 +95,22 @@ paginate: true
 <tr><td>08:30-09:00</td><td>Participant registration</td><td>MoH team</td></tr>
 <tr><td>09:00-09:10</td><td>Welcome and opening remarks</td><td>MoH team</td></tr>
 <tr><td>09:10-09:20</td><td>Icebreakers/Introductions</td><td>MoH team</td></tr>
-<tr><td>09:20-09:35</td><td>Overview of agenda, workshop objectives</td><td>GFF FASTR team</td></tr>
+<tr><td>09:20-09:35</td><td>Workshop objectives and agenda</td><td>GFF FASTR team</td></tr>
 <tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 1: Overview of the FASTR approach</strong></td></tr>
-<tr><td>09:35-10:30</td><td>Overview: FASTR Approaches</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 2: HMIS data extraction</strong></td></tr>
-<tr><td>10:30-11:30</td><td>Data extraction: Rationale and methods</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 3: Introduction to the FASTR analytics platform</strong></td></tr>
-<tr><td>11:30-12:30</td><td>Introduction to the FASTR analytics platform</td><td>GFF FASTR team</td></tr>
+<tr><td>09:35-10:15</td><td>Overview: FASTR Approaches</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 2: Identifying priority questions and indicators</strong></td></tr>
+<tr><td>10:15-11:00</td><td>Identifying priority questions and indicators</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 3: HMIS data extraction</strong></td></tr>
+<tr><td>11:00-12:00</td><td>Data extraction: Rationale and methods</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 4: Getting into the platform</strong></td></tr>
+<tr><td>12:00-12:30</td><td>Getting participants into the platform</td><td>GFF FASTR team</td></tr>
 <tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr><td>14:00-14:30</td><td>Getting participants into the platform</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 4: Configuring the FASTR analytics platform</strong></td></tr>
-<tr><td>14:30-16:30</td><td>Configuring the analysis platform</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 5: Configuring the FASTR analytics platform</strong></td></tr>
+<tr><td>14:00-15:30</td><td>Configuring the analysis platform</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Closing</strong></td></tr>
+<tr><td>15:30-16:00</td><td>Key messages and wrap-up</td><td>GFF FASTR team</td></tr>
+<tr><td>16:00-16:30</td><td>Reflections from participants</td><td>Participants</td></tr>
 </table>
-
----
-
-<!-- _class: agenda -->
-# Agenda
-
-**Day 2 -- Building the Analysis: Applying FASTR Methods and Generating Outputs**
-
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td>09:00-09:15</td><td>Overview of Day 2 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 5: Overview of FASTR methods and analytical outputs</strong></td></tr>
-<tr><td>09:15-10:15</td><td>Data quality, service utilization, coverage</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 6: Creating a project</strong></td></tr>
-<tr><td>10:15-11:15</td><td>Project creation and settings</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 7: Creating visualizations</strong></td></tr>
-<tr><td>11:15-12:30</td><td>Creating and editing visualizations</td><td>GFF FASTR team</td></tr>
-<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Creating reports</strong></td></tr>
-<tr><td>14:30-16:30</td><td>Practice creating and editing reports</td><td>GFF FASTR team</td></tr>
-</table>
-
----
-
-<!-- _class: agenda -->
-# Agenda
-
-**Day 3 -- From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making**
-
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td>09:00-09:15</td><td>Overview of Day 3 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Interpretation of visualizations</strong></td></tr>
-<tr><td>09:15-10:15</td><td>Approaches to support interpretation</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 9: Creating a Q4 2025 report</strong></td></tr>
-<tr><td>10:15-12:30</td><td>Creating short and long reports with country context</td><td>GFF FASTR team</td></tr>
-<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 9 (cont'd): Creating a Q4 2025 report</strong></td></tr>
-<tr><td>14:00-15:00</td><td>Continue report creation with country context</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10: Presenting reports</strong></td></tr>
-<tr><td>14:30-15:30</td><td>Present reports, group feedback</td><td>GFF FASTR team</td></tr>
-</table>
-
----
-
-<!-- _class: agenda -->
-# Agenda
-
-**Day 4 -- Designing the Health Facility Assessment**
-
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td>09:00-09:15</td><td>Overview of Day 4 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 12: Overview of FASTR HFA phone survey</strong></td></tr>
-<tr><td>09:15-10:15</td><td>HFA overview and questionnaire adaptation guidelines</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13: Questionnaire adaptation to the Zambian context</strong></td></tr>
-<tr><td>10:15-12:30</td><td>Review questionnaire + hands-on adaptation</td><td>GFF FASTR team</td></tr>
-<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14: Questionnaire adaptation (cont'd)</strong></td></tr>
-<tr><td>14:00-15:00</td><td>Continue questionnaire adaptation (in groups)</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 15: Discussion: HFA adapted questionnaire</strong></td></tr>
-<tr><td>14:30-15:30</td><td>Discuss adapted questionnaire in plenary</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 16: Discussion: HFA priorities and data use</strong></td></tr>
-<tr><td>15:30-16:30</td><td>HFA priorities and data use case in Zambia</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 17: Action planning and wrap-up</strong></td></tr>
-<tr><td>16:30-17:00</td><td>Key messages and wrap-up</td><td>GFF FASTR team</td></tr>
-</table>
-
----
-
-
-
-# Workshop Objectives
-
-- Prepare MoH for participation in the multi-country workshop
-- Strengthen capacity for disruption analysis and data extraction
-- Configure the FASTR analytics platform for Zambia
-- Produce the first quarterly report
-- Adapt the phone survey questionnaire to the Zambian context
-- Use data downloader tools for DHIS2
-
----
-
-
-
-# Scope of Work
-
-### Disruption Analysis Activities
-- Data extraction and configuration of analytics platform
-- Produce first quarterly report
-- Review results and contextualize findings (with relevant program teams)
-
-### Phone Survey Activities
-- Adaptation of questionnaire (with program input)
-
-### Capacity Building
-- Training on data downloader for all with DHIS2 access
-- Hybrid format: face-to-face and online
-
----
-
-
-
-# Expected Outputs
-
-- Adapted phone survey questionnaire
-- First quarterly report draft
-- Trained MoH team on data downloader tools
-- Roadmap for participation in Abuja workshop
 
 ---
 
@@ -163,26 +124,51 @@ paginate: true
 ---
 
 
-## Introduction to FASTR
+## What are we trying to achieve?
 
-<div class="columns">
+Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasing the systematic use of data for decision making
+
+![w:700](../resources/diagrams/rapid_cycle_analytics.png)
+
+---
+
+
+
+## How can this be achieved?
+
+Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
+
+![w:800](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+
+---
+
+
+
+## What is FASTR?
+
+An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
+
+![w:700](../resources/diagrams/what_is_fastr.png)
+
+---
+
+
+
+## What is the FASTR approach to RMNCAH-N service use monitoring?
+
+<div class="columns-image-right">
 <div>
 
-The Global Financing Facility (GFF) supports country-led efforts to strengthen the use of timely data for decision-making, with the goal of improving primary healthcare (PHC) performance and RMNCAH-N outcomes.
+Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
 
-**Frequent Assessments and Health System Tools for Resilience (FASTR)** is the GFF's rapid-cycle analytics framework for monitoring health system performance using high-frequency data.
+Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
 
-FASTR brings together four complementary technical approaches:
-
-1. Routine HMIS data analysis
-2. Health facility phone surveys
-3. High-frequency household phone surveys
-4. Follow-on, problem-driven analyses
+Combining analysis and visualization with capacity strengthening and data use support for sustainability and institutionalization
 
 </div>
 <div>
 
-![FASTR Technical Approaches](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![Steps to implement RMNCAH-N service use monitoring](../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 </div>
 </div>
@@ -191,91 +177,9 @@ FASTR brings together four complementary technical approaches:
 
 
 
-## RMNCAH-N service use monitoring
+# Demo – FASTR analysis platform
 
-<style scoped>
-.split { display: flex !important; gap: 2rem; align-items: center; }
-.split .text { flex: 1; }
-.split .image { flex: 1; display: flex; justify-content: center; align-items: center; }
-.split .image img { max-height: 420px !important; max-width: 100% !important; }
-</style>
-
-<div class="split">
-<div class="text">
-
-Rapid-cycle approaches using routine HMIS data can:
-
-- **Evaluate HMIS data quality** at national and sub-national levels
-- **Measure monthly changes** in health service utilization
-- **Compare coverage trends** with country targets
-
-</div>
-<div class="image">
-
-![HMIS data flow](../resources/diagrams/HMIS_data_flow.svg)
-
-</div>
-</div>
-
----
-
-
-
-## Why rapid-cycle analytics?
-
-<div class="columns">
-<div>
-
-Routine health information systems are a critical source of data, but they are often underused due to concerns about data quality and long delays between data collection and analysis. Traditional household and facility surveys, while essential, are resource-intensive and infrequent.
-
-FASTR's rapid-cycle analytics address this gap by providing:
-
-- Timely insights aligned with country decision cycles
-- Continuous learning rather than one-off assessments
-- Direct feedback loops between data, analysis, and action
-
-</div>
-<div>
-
-![FASTR rapid-cycle analytics framework](../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
-
-</div>
-</div>
-
----
-
-
-
-## Focus of the analysis
-
-<div class="columns">
-<div>
-
-### Core indicators
-
-FASTR prioritizes a core set of RMNCAH-N indicators that:
-
-- Represent key service delivery contacts across the continuum of care
-- Have relatively high reporting completeness and volumes
-- Serve as proxies for broader service delivery performance
-
-<small>*The indicator set can be expanded to reflect country-specific priorities.*</small>
-
-</div>
-<div>
-
-### Core data quality metrics
-
-Analysis is anchored in a standardized set of data quality metrics:
-
-- Reporting completeness
-- Extreme value (outlier) detection
-- Consistency across related indicators
-
-<small>*These metrics are summarized into an overall data quality score.*</small>
-
-</div>
-</div>
+![w:120](../resources/icons/demo.svg)
 
 ---
 
@@ -284,70 +188,244 @@ Analysis is anchored in a standardized set of data quality metrics:
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 2: HMIS data extraction
+# Session 2: Identifying priority questions and indicators
 
 ---
 
 
-## Why extract data from DHIS2?
+## What is a data use case?
 
-### Data quality adjustment
+A data use case is a specific scenario where data is utilized to achieve a particular goal or solve a problem.
+
+**Why is defining a data use case important?**
+
+- Guides decision making by providing a clear framework for analysis
+- Enhances efficiency by focusing analyses on a set of relevant key indicators to solve a specific data need
+- Leads to better results by aligning data efforts with organizational goals
+
+---
+
+
+
+## Data use case: Application 1
+
+*Placeholder - content to be added*
+
+---
+
+
+
+## Data use case: Application 2
+
+*Placeholder - content to be added*
+
+---
+
+
+
+## Data use case: Application 3
+
+*Placeholder - content to be added*
+
+---
+
+
+
+## What is our common data use case that will be the focus of this workshop?
+
+Following large shifts in resource availability from external sources, many countries are experiencing abrupt and dramatic reductions in financing
+
+- Resulting in critical gaps in programs and systems
+- Leading to potentially severe effects on service delivery and health outcomes for women, children and adolescents
+
+**Key questions arising:**
+
+- What is the magnitude of the cuts, and what effect are they having on service delivery?
+- What is the optimal way to prioritize remaining resources?
+- What other adaptations can safeguard and strengthen essential service delivery for women, children and adolescents?
+
+---
+
+
+
+## How do we select indicators? What makes a good indicator for the FASTR analysis?
+
+Indicator selection is critical to the quality and usefulness of FASTR analysis. Indicators should be chosen based on the following criteria:
+
+- **Relevance** - Does this indicator provide data that aligns with our priority questions and objectives?
+- **Volume** - Is this indicator collected at a high volume, which improves the robustness of analysis?
+- **Completeness** - Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency** - Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type** - Is this indicator a count of services delivered?
+
+---
+
+
+
+## FASTR core indicators
+
+The FASTR approach focuses on a core set of RMNCAH-N indicators that represent key points along the reproductive, maternal, newborn, child, and adolescent health and nutrition continuum in low- and middle-income countries.
+
+These indicators typically have higher reporting volumes and completeness and serve as proxies for broader service delivery patterns.
+
+- Antenatal client 1st visit
+- Antenatal client 4th visit
+- Institutional delivery
+- Postnatal care 1
+- BCG doses
+- Pentavalent 1st dose
+- Pentavalent 3rd dose
+- Outpatient visits
+
+---
+
+
+
+## Why focus on high-volume indicators?
+
+One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
+
+**Reduced sensitivity to outliers**
+In low-volume indicators, individual data points can disproportionately affect trends.
+
+**More stable estimates**
+High-volume data reduce random variability and improve the reliability of trend detection.
+
+**Clearer identification of true anomalies**
+Larger counts make it easier to distinguish genuine outliers from natural variation.
+
+---
+
+
+
+## Why focus on high-completeness indicators?
+
+Indicators with high reporting completeness are preferred because they:
+
+**Improve data reliability**
+More complete data reduces bias and provide a more representative picture of service delivery.
+
+**Support consistent analysis**
+High completeness enables meaningful comparisons across time and geographic areas.
+
+**Reduce misinterpretation**
+Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
+
+While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values.
+
+---
+
+
+
+## Why focus on count indicators?
+
+**Limitations of proportion indicators**
+
+- Proportions limit the ability to adjust numerators and denominators separately for data quality issues
+- Numerators and denominators may each be affected by different sources of error
+- Separating counts from denominator estimation allows for more transparent and flexible adjustment
+
+**Mortality as a rare event**
+
+- Mortality indicators are typically low-frequency and not well suited to adjustment
+- These indicators are generally better analyzed using annual rather than monthly or quarterly data
+
+---
+
+
+
+<!-- _class: columns-image-right -->
+
+## Countries have selected indicators to align with the disruptions context and country priorities
+
+![Data prep checklist h:280](../resources/screenshots/data_prep_checklist.png)
+
+The FASTR Data Prep Checklist has been shared with countries.
+
+The checklist includes the FASTR core RMNCAH-N indicators.
+
+Countries have added additional indicators that may be particularly relevant to the country context (e.g., indicators related to services expected to be impacted by recent funding shifts, priority indicators for the government and/or the WB project).
+
+These are the indicators included in the current analysis. Countries can continue to add indicators over time as needed for their use case(s).
+
+---
+
+
+
+## Activity
+
+![w:60](../resources/icons/hands_on.svg)
+
+We are going to review the Zambia data prep checklist together and discuss for each indicator:
+
+**Relevance**
+Does this indicator provide data that aligns with our priority questions and objectives?
+
+**Volume**
+Is this indicator collected at a high volume, which improves the robustness of analysis?
+
+**Completeness**
+Does the indicator have a high completeness rate across reporting facilities?
+
+**Frequency**
+Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+
+**Type**
+Is this indicator a count of services delivered?
+
+Based on the discussion we can refine the selection of indicators.
+
+---
+
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
+# Session 3: HMIS data extraction
+
+---
+
+
+## Show of hands...
+
+![w:120](../resources/icons/raise-hand.png)
+
+Do you regularly extract data from DHIS2?
+
+If so, what are the primary reasons?
+
+---
+
+
+
+## Why would you extract data from DHIS2? Why not just do analysis in DHIS2 itself?
+
+**Data quality adjustment**
 
 The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
-The FASTR methodology includes specific approaches to:
-- Identify and adjust for outliers
-- Adjust for incomplete reporting
-- Apply consistent data quality metrics
+**Analysis complexity**
 
-These adjustments require processing that cannot be done within DHIS2's native analytics.
+The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal variations, and comparing key periods, such as before and after a reform.
 
----
-
-
-
-## Why extract data from DHIS2?
-
-### Analysis complexity
-
-The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
-
-- Identifying significant increases or decreases in service volume
-- Adjusting for data quality issues
-- Accounting for expected seasonal variations
-- Comparing key periods, such as before and after a reform
-
-The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis.
+The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs!
 
 ---
 
 
+
+<!-- _class: columns-image-right -->
 
 ## Data format and granularity
 
-Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
+![Data format example](../workshops/2026-zambia/media/data_format_example.png)
 
-- Data should be saved in **long format** meaning each row represents a single observation or measurement
-- Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files
+Data should be downloaded for each indicator of interest, at facility level, and monthly for the period of interest.
 
-### Why monthly facility level data?
+Data should be saved in long format meaning each row represents a single observation or measurement (see example).
 
-We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality. Using monthly facility level data allows us to conduct the most robust analysis.
-
----
-
-
-
-## Key variables
-
-The data extracted should include the following required elements:
-
-| Element | Description |
-|---------|-------------|
-| Org units | Organizational unit identifier |
-| Period | Time period of the data |
-| Indicator name | Name of the indicator |
-| Total/count | The aggregated value |
+Data should be saved in .csv format and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform.
 
 ---
 
@@ -355,31 +433,40 @@ The data extracted should include the following required elements:
 
 ## How much data?
 
-### Initial FASTR analysis
-- Download approximately **five years** of historical data
-- Exact period depends on data availability and consistency in indicator definitions
+**Initial FASTR analysis**
 
-### Routine update to FASTR analysis
-- Download new data covering the most recent months not previously included (usually **three months** for quarterly implementation)
-- Include the **three preceding months** as recent data is often subject to changes due to late reporting or data quality adjustments
+- Generally recommended to download approximately five years of historical data
+- However, the exact period should be determined based on data availability, consistency in indicator definitions over time, and the specifics of a country's routine data system
+- Ideally, using at least five years of historical data allows for a thorough assessment of trends over time
+
+**Routine update to FASTR analysis**
+
+- Start with the existing database and download new data covering the most recent months not previously included – this is usually a three-month period when the FASTR analysis is being implemented on a quarterly basis
+- Additionally, include the three proceeding months to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments
+- If you have reason to believe there have been substantial changes to the historical data, you can always choose to redownload a longer time period
 
 ---
 
 
 
-## Data extraction tools
+## Data extraction
 
-We offer two tools for bulk DHIS2 data extraction:
+<div class="columns">
+<div>
 
-**API Script** (Google Colab)
-- Input login credentials, specify timeframes, indicators, and administrative levels
-- Download data as a .csv file
+We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.
 
-**Data Downloader**
-- More intuitive, streamlined interface
-- Recommended for most users
+The Data Downloader provides a streamlined interface to download DHIS2 data. This tool is particularly useful to explore DHIS2 metadata and download indicators requiring disaggregated dimensions.
 
-Both tools enable efficient data extraction, and we provide training resources to support their use.
+The Data Downloader is available at: https://github.com/worldbank/DHIS2-Downloader/releases/
+
+</div>
+<div>
+
+![Data Downloader h:380](../resources/screenshots/data_downloader.png)
+
+</div>
+</div>
 
 ---
 
@@ -547,11 +634,30 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 ---
 
 
+
+## Data extraction
+
+<div class="columns">
+<div>
+
+The FASTR analytics platform contains a direct import feature to automatically import data from DHIS2. This is often the easiest approach once indicators have been identified for inclusion in the platform.
+
+</div>
+<div>
+
+![Platform import h:380](../resources/screenshots/platform_import.png)
+
+</div>
+</div>
+
+---
+
+
 <!-- _class: section-cover -->
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 3: Introduction to the FASTR analytics platform
+# Session 4: Getting into the platform
 
 ---
 
@@ -707,7 +813,7 @@ Back at 14:00
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 4: Configuring the FASTR analytics platform
+# Session 5: Configuring the FASTR analytics platform
 
 ---
 
@@ -753,6 +859,19 @@ Back at 14:00
 ---
 
 
+
+# Day 1 Key Messages
+
+Today we covered:
+
+- Overview of the FASTR approach and methodology
+- Data extraction methods and tools for DHIS2
+- Introduction to the FASTR Analytics Platform
+- Initial platform configuration for Zambia
+
+---
+
+
 # Day 2
 
 ---
@@ -781,11 +900,33 @@ Today we will:
 ---
 
 
+<!-- _class: agenda -->
+# Agenda
+
+**Day 2 -- Building the Analysis: Applying FASTR Methods and Generating Outputs**
+
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Recap and Day 2 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 6: Overview of FASTR methods and analytical outputs</strong></td></tr>
+<tr><td>09:15-10:15</td><td>Data quality, service utilization, coverage</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 7: Creating a project</strong></td></tr>
+<tr><td>10:15-11:15</td><td>Project creation and settings</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Creating visualizations</strong></td></tr>
+<tr><td>11:15-12:30</td><td>Creating and editing visualizations</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 9: Creating reports</strong></td></tr>
+<tr><td>14:30-16:30</td><td>Practice creating and editing reports</td><td>GFF FASTR team</td></tr>
+</table>
+
+---
+
+
 <!-- _class: section-cover -->
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 5: Overview of FASTR methods and analytical outputs
+# Session 6: Overview of FASTR methods and analytical outputs
 
 ---
 
@@ -1531,7 +1672,7 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 6: Creating a project
+# Session 7: Creating a project
 
 ---
 
@@ -1554,7 +1695,7 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 7: Creating visualizations
+# Session 8: Creating visualizations
 
 ---
 
@@ -1585,7 +1726,7 @@ Back at 14:00
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 8: Creating reports
+# Session 9: Creating reports
 
 ---
 
@@ -1631,11 +1772,33 @@ Today we move from analysis to action:
 ---
 
 
+<!-- _class: agenda -->
+# Agenda
+
+**Day 3 -- From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making**
+
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Recap and Day 3 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10: Interpretation of visualizations</strong></td></tr>
+<tr><td>09:15-10:15</td><td>Approaches to support interpretation</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 11: Creating a Q4 2025 report</strong></td></tr>
+<tr><td>10:15-12:30</td><td>Creating short and long reports with country context</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 11 (cont'd): Creating a Q4 2025 report</strong></td></tr>
+<tr><td>14:00-15:00</td><td>Continue report creation with country context</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 12: Presenting reports</strong></td></tr>
+<tr><td>14:30-15:30</td><td>Present reports, group feedback</td><td>GFF FASTR team</td></tr>
+</table>
+
+---
+
+
 <!-- _class: section-cover -->
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 8: Interpretation of visualizations
+# Session 10: Interpretation of visualizations
 
 ---
 
@@ -1727,7 +1890,7 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 9: Creating a Q4 2025 report
+# Session 11: Creating a Q4 2025 report
 
 ---
 
@@ -1758,7 +1921,7 @@ Back at 14:00
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 10: Presenting reports
+# Session 12: Presenting reports
 
 ---
 
@@ -1798,11 +1961,37 @@ Today we design the Health Facility Assessment:
 ---
 
 
+<!-- _class: agenda -->
+# Agenda
+
+**Day 4 -- Designing the Health Facility Assessment**
+
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00-09:15</td><td>Recap and Day 4 agenda</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13: Overview of FASTR HFA phone survey</strong></td></tr>
+<tr><td>09:15-10:15</td><td>HFA overview and questionnaire adaptation guidelines</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14: Questionnaire adaptation to the Zambian context</strong></td></tr>
+<tr><td>10:15-12:30</td><td>Review questionnaire + hands-on adaptation</td><td>GFF FASTR team</td></tr>
+<tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14 (cont'd): Questionnaire adaptation</strong></td></tr>
+<tr><td>14:00-15:00</td><td>Continue questionnaire adaptation (in groups)</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 15: Discussion: HFA adapted questionnaire</strong></td></tr>
+<tr><td>14:30-15:30</td><td>Discuss adapted questionnaire in plenary</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 16: Discussion: HFA priorities and data use</strong></td></tr>
+<tr><td>15:30-16:30</td><td>HFA priorities and data use case in Zambia</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 17: Action planning and wrap-up</strong></td></tr>
+<tr><td>16:30-17:00</td><td>Key messages and wrap-up</td><td>GFF FASTR team</td></tr>
+</table>
+
+---
+
+
 <!-- _class: section-cover -->
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 12: Overview of FASTR HFA phone survey
+# Session 13: Overview of FASTR HFA phone survey
 
 ---
 

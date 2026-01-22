@@ -4,33 +4,21 @@ theme: fastr
 paginate: true
 ---
 
-## Focus of the analysis
+## What is the FASTR approach to RMNCAH-N service use monitoring?
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
-### Core indicators
+Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
 
-FASTR prioritizes a core set of RMNCAH-N indicators that:
+Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
 
-- Represent key service delivery contacts across the continuum of care
-- Have relatively high reporting completeness and volumes
-- Serve as proxies for broader service delivery performance
-
-<small>*The indicator set can be expanded to reflect country-specific priorities.*</small>
+Combining analysis and visualization with capacity strengthening and data use support for sustainability and institutionalization
 
 </div>
 <div>
 
-### Core data quality metrics
-
-Analysis is anchored in a standardized set of data quality metrics:
-
-- Reporting completeness
-- Extreme value (outlier) detection
-- Consistency across related indicators
-
-<small>*These metrics are summarized into an overall data quality score.*</small>
+![Steps to implement RMNCAH-N service use monitoring](../../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 </div>
 </div>

@@ -176,14 +176,42 @@ This step includes a pre-extraction checklist, review of the DHIS2 configuration
 -->
 
 <!-- SLIDE:m1_1 -->
-## Introduction to FASTR: gaps and challenges
+## What is a data use case?
 
-*Content to be developed*
+A data use case is a specific scenario where data is utilized to achieve a particular goal or solve a problem.
 
-This section will cover:
-- Identifying gaps and challenges that FASTR is well suited to support
-- How FASTR serves as an entry point to reduce fragmentation
-- Starting the conversation with government stakeholders
+**Why is defining a data use case important?**
+
+- Guides decision making by providing a clear framework for analysis
+- Enhances efficiency by focusing analyses on a set of relevant key indicators to solve a specific data need
+- Leads to better results by aligning data efforts with organizational goals
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1a -->
+## What is our common data use case that will be the focus of this workshop?
+
+Following large shifts in resource availability from external sources, many countries are experiencing abrupt and dramatic reductions in financing
+
+- Resulting in critical gaps in programs and systems
+- Leading to potentially severe effects on service delivery and health outcomes for women, children and adolescents
+
+**Key questions arising:**
+
+- What is the magnitude of the cuts, and what effect are they having on service delivery?
+- What is the optimal way to prioritize remaining resources?
+- What other adaptations can safeguard and strengthen essential service delivery for women, children and adolescents?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b -->
+## How do we select indicators? What makes a good indicator for the FASTR analysis?
+
+Indicator selection is critical to the quality and usefulness of FASTR analysis. Indicators should be chosen based on the following criteria:
+
+- **Relevance** - Does this indicator provide data that aligns with our priority questions and objectives?
+- **Volume** - Is this indicator collected at a high volume, which improves the robustness of analysis?
+- **Completeness** - Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency** - Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type** - Is this indicator a count of services delivered?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2 -->
@@ -260,54 +288,83 @@ A standard tool from evidence-based medicine and public health research for form
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3a -->
-## Why focus on high volume indicators?
+## Why focus on high-volume indicators?
 
-One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
+One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
 
-- **Greater sensitivity to outliers**: A single unusually high or low data point can disproportionately impact overall analysis
-- **Unstable estimates**: Small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability
-- **Difficulty identifying true outliers**: Challenging to determine whether a data point is genuinely an outlier or part of natural variability
+**Reduced sensitivity to outliers**
+In low-volume indicators, individual data points can disproportionately affect trends.
 
-Count indicators allow for ongoing data quality checks with improved precision in identifying outliers.
+**More stable estimates**
+High-volume data reduce random variability and improve the reliability of trend detection.
+
+**Clearer identification of true anomalies**
+Larger counts make it easier to distinguish genuine outliers from natural variation.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3b -->
-## Why focus on high completeness indicators?
+## Why focus on high-completeness indicators?
 
-High completeness indicators improve data quality, reduce bias, and enable more accurate insights:
+Indicators with high reporting completeness are preferred because they:
 
-- **Data reliability**: Data is representative of the full picture across facilities, regions, or populations
-- **Consistency in analysis**: Data points from most or all reporting units allow for consistent analysis across time periods and locations
-- **Reduced risk of misinterpretation**: Incomplete data can lead to incorrect conclusions (e.g., low completeness might falsely suggest a drop in service utilization)
+**Improve data reliability**
+More complete data reduces bias and provide a more representative picture of service delivery.
 
-Statistical methods such as imputation can adjust for incomplete data, but this requires assumptions about the missing data.
+**Support consistent analysis**
+High completeness enables meaningful comparisons across time and geographic areas.
+
+**Reduce misinterpretation**
+Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
+
+While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3c -->
 ## Why focus on count indicators?
 
-**Challenges with proportion indicators:**
-- Proportions limit our ability to apply adjustments for data quality challenges
-- Numerators may have data quality challenges, skewing actual coverage levels
-- Denominators may be outdated or inaccurate
-- Using numerators and denominators separately allows adjustments to both
+**Limitations of proportion indicators**
 
-**Mortality as a rare event:**
-- Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
-- Better suited for annual reviews than monthly or quarterly updates
+- Proportions limit the ability to adjust numerators and denominators separately for data quality issues
+- Numerators and denominators may each be affected by different sources of error
+- Separating counts from denominator estimation allows for more transparent and flexible adjustment
+
+**Mortality as a rare event**
+
+- Mortality indicators are typically low-frequency and not well suited to adjustment
+- These indicators are generally better analyzed using annual rather than monthly or quarterly data
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3d -->
 ## FASTR core indicators
 
-The FASTR approach focuses on a core set of RMNCAH-N indicators that:
-- Characterize the reproductive, maternal and child healthcare continuum
-- Capture key service delivery events with higher completeness rates and higher volume
-- Serve as proxies for other services delivered at the same contact
+The FASTR approach focuses on a core set of RMNCAH-N indicators that represent key points along the reproductive, maternal, newborn, child, and adolescent health and nutrition continuum in low- and middle-income countries.
 
-Outpatient consultations (OPDs) are used as a proxy for general use of health services.
+These indicators typically have higher reporting volumes and completeness and serve as proxies for broader service delivery patterns.
 
-Additional country and program-specific indicators can be added to be responsive to country priorities.
+- Antenatal client 1st visit
+- Antenatal client 4th visit
+- Institutional delivery
+- Postnatal care 1
+- BCG doses
+- Pentavalent 1st dose
+- Pentavalent 3rd dose
+- Outpatient visits
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_3e -->
+<!-- _class: columns-image-right -->
+
+## Countries have selected indicators to align with the disruptions context and country priorities
+
+![Data prep checklist h:280](../resources/screenshots/data_prep_checklist.png)
+
+The FASTR Data Prep Checklist has been shared with countries.
+
+The checklist includes the FASTR core RMNCAH-N indicators.
+
+Countries have added additional indicators that may be particularly relevant to the country context (e.g., indicators related to services expected to be impacted by recent funding shifts, priority indicators for the government and/or the WB project).
+
+These are the indicators included in the current analysis. Countries can continue to add indicators over time as needed for their use case(s).
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_4 -->

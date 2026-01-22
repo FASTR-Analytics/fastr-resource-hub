@@ -116,7 +116,22 @@
       "Bash(for:*)",
       "Bash(do sed -i '' 's/<!-- Add <!-- REVIEWED --> after human review to protect from overwrite -->/<!-- Add REVIEWED marker after human review to protect from overwrite -->/' \"$f\")",
       "Bash(pkill:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(rsync:*)",
+      "Bash(do sed -i '' 's/HMIS/SIGS/g' \"$file\")",
+      "Bash(.venv/bin/streamlit run app/deck_builder.py --server.headless true)",
+      "Bash(node --version:*)",
+      "Bash(npm:*)",
+      "Bash(pgrep:*)",
+      "Bash(git status:*)",
+      "Bash(lsof:*)",
+      "Bash(kill:*)",
+      "Bash(git stash:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git pull:*)",
+      "Bash(git merge:*)",
+      "Bash(git diff:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

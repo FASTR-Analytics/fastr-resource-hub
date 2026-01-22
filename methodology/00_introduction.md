@@ -175,30 +175,22 @@ The FASTR analytics platform includes four automated modules:
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m0_0 -->
+## What are we trying to achieve?
+
+Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasing the systematic use of data for decision making
+
+![w:700](resources/diagrams/rapid_cycle_analytics.png)
+
+<!-- /SLIDE -->
+
 <!-- SLIDE:m0_1 -->
-## Introduction to FASTR
+## How can this be achieved?
 
-<div class="columns">
-<div>
+Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
 
-The Global Financing Facility (GFF) supports country-led efforts to strengthen the use of timely data for decision-making, with the goal of improving primary healthcare (PHC) performance and RMNCAH-N outcomes.
+![w:800](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
-**Frequent Assessments and Health System Tools for Resilience (FASTR)** is the GFF's rapid-cycle analytics framework for monitoring health system performance using high-frequency data.
-
-FASTR brings together four complementary technical approaches:
-
-1. Routine HMIS data analysis
-2. Health facility phone surveys
-3. High-frequency household phone surveys
-4. Follow-on, problem-driven analyses
-
-</div>
-<div>
-
-![FASTR Technical Approaches](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
-
-</div>
-</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
@@ -230,56 +222,30 @@ Rapid-cycle approaches using routine HMIS data can:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_3 -->
-## Why rapid-cycle analytics?
+## What is FASTR?
 
-<div class="columns">
-<div>
+An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
 
-Routine health information systems are a critical source of data, but they are often underused due to concerns about data quality and long delays between data collection and analysis. Traditional household and facility surveys, while essential, are resource-intensive and infrequent.
+![w:700](resources/diagrams/what_is_fastr.png)
 
-FASTR's rapid-cycle analytics address this gap by providing:
-
-- Timely insights aligned with country decision cycles
-- Continuous learning rather than one-off assessments
-- Direct feedback loops between data, analysis, and action
-
-</div>
-<div>
-
-![FASTR rapid-cycle analytics framework](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
-
-</div>
-</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_4 -->
-## Focus of the analysis
+## What is the FASTR approach to RMNCAH-N service use monitoring?
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
-### Core indicators
+Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
 
-FASTR prioritizes a core set of RMNCAH-N indicators that:
+Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
 
-- Represent key service delivery contacts across the continuum of care
-- Have relatively high reporting completeness and volumes
-- Serve as proxies for broader service delivery performance
-
-<small>*The indicator set can be expanded to reflect country-specific priorities.*</small>
+Combining analysis and visualization with capacity strengthening and data use support for sustainability and institutionalization
 
 </div>
 <div>
 
-### Core data quality metrics
-
-Analysis is anchored in a standardized set of data quality metrics:
-
-- Reporting completeness
-- Extreme value (outlier) detection
-- Consistency across related indicators
-
-<small>*These metrics are summarized into an overall data quality score.*</small>
+![Steps to implement RMNCAH-N service use monitoring](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 </div>
 </div>

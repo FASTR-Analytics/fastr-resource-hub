@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
 import ReactMarkdown from 'react-markdown'
 import {
-  Sparkles,
   Send,
   Trash2,
   Loader2,
@@ -48,22 +47,19 @@ export function AIAssistant() {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-fastr-accent" />
-          <h2 className="font-semibold text-gray-800">AI Assistant</h2>
-        </div>
-        {aiMessages.length > 0 && (
+      {/* Clear button (header removed, handled by App.tsx) */}
+      {aiMessages.length > 0 && (
+        <div className="px-3 py-2 border-b border-gray-100 flex justify-end">
           <button
             onClick={clearAIMessages}
-            className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors"
+            className="flex items-center gap-1.5 px-2 py-1 text-xs text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
             title="Clear chat"
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="w-3.5 h-3.5" />
+            Clear
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

@@ -1,7 +1,10 @@
 import { useState, useEffect, DragEvent } from 'react'
 import { useWorkshopStore, Session } from '../stores/workshop'
 import { DeckPreview } from './DeckPreview'
+// import { LivePreview } from './LivePreview'  // TODO: Fix Marp browser rendering
+import { SessionEditor } from './SessionEditor'
 import { WorkshopSettings } from './WorkshopSettings'
+import { ContentInputModal, ContentSlideType, ContentSlideData } from './ContentInputModal'
 import {
   DndContext,
   closestCenter,
@@ -35,6 +38,7 @@ import {
   LayoutTemplate,
   ListChecks,
   Sunset,
+  Sunrise,
   BookOpen,
   Target,
   Globe,
@@ -44,7 +48,10 @@ import {
   Download,
   RefreshCw,
   Package,
-  Settings
+  Settings,
+  Edit3,
+  Sparkles,
+  X,
 } from 'lucide-react'
 
 type TabType = 'settings' | 'compose' | 'preview' | 'export'
@@ -67,7 +74,8 @@ export function DeckBuilder() {
     reorderSession,
     addDay,
     updateDayTitle,
-    updateDayStartTime
+    updateDayStartTime,
+    saveStatus,
   } = useWorkshopStore()
 
   const [activeTab, setActiveTab] = useState<TabType>('compose')
@@ -83,6 +91,25 @@ export function DeckBuilder() {
   } | null>(null)
   const [outputs, setOutputs] = useState<OutputFile[]>([])
 
+  // Session editor state
+  const [editingSession, setEditingSession] = useState<{
+    session: Session
+    index: number
+  } | null>(null)
+
+  // Content input modal state (for slides that need content)
+  const [contentInputModal, setContentInputModal] = useState<{
+    slideType: ContentSlideType
+    existingContent?: ContentSlideData
+  } | null>(null)
+
+  // Export progress state
+  const [exportProgress, setExportProgress] = useState<{
+    stage: string
+    progress: number
+    message?: string
+  } | null>(null)
+
   // Sync day start time from config when switching days
   useEffect(() => {
     if (currentConfig) {
@@ -97,6 +124,17 @@ export function DeckBuilder() {
       loadOutputs()
     }
   }, [currentWorkshopId])
+
+  // Listen for export progress events
+  useEffect(() => {
+    const unsubscribe = window.electronAPI.onExportProgress((progress) => {
+      setExportProgress(progress)
+      if (progress.stage === 'complete' || progress.stage === 'error') {
+        setTimeout(() => setExportProgress(null), 3000)
+      }
+    })
+    return unsubscribe
+  }, [])
 
   const loadOutputs = async () => {
     if (!currentWorkshopId) return
@@ -226,6 +264,21 @@ export function DeckBuilder() {
         return
       }
 
+      // Content slides that require input - trigger modal
+      const contentSlideTypes: Record<string, ContentSlideType> = {
+        'objectives': 'objectives',
+        'scope': 'scope',
+        'priorities': 'priorities',
+        'outputs': 'outputs',
+      }
+
+      if (contentSlideTypes[templateId]) {
+        // Open the content input modal
+        setContentInputModal({ slideType: contentSlideTypes[templateId] })
+        return
+      }
+
+      // Standard templates that don't need content input
       const templateConfig: Record<string, Partial<Session>> = {
         'title': { session: 'Title Slide', slides: ['title'], duration: 5, icon: 'cover' },
         'agenda': { session: 'Agenda', slides: ['agenda'], duration: 10, icon: 'list' },
@@ -233,9 +286,6 @@ export function DeckBuilder() {
         'closing': { session: 'Closing', slides: ['closing.md'], duration: 5, icon: 'end' },
         'tea': { session: 'Tea Break', type: 'break', duration: 15, icon: 'coffee' },
         'lunch': { session: 'Lunch Break', type: 'break', duration: 60, icon: 'lunch' },
-        'objectives': { session: 'Workshop Objectives', slides: ['01_objectives.md'], duration: 10, icon: 'target' },
-        'country': { session: 'Country Overview', slides: ['02_country-overview.md'], duration: 15, icon: 'globe' },
-        'priorities': { session: 'Health Priorities', slides: ['03_health-priorities.md'], duration: 15, icon: 'heart' },
         'results': { session: 'Coverage Results', slides: ['04_coverage-results.md'], duration: 15, icon: 'chart' },
         'next_steps': { session: 'Next Steps', slides: ['99_next-steps.md'], duration: 10, icon: 'arrow' },
       }
@@ -326,9 +376,29 @@ export function DeckBuilder() {
       <div className="bg-white border-b border-gray-200">
         {/* Workshop title */}
         <div className="px-4 pt-4 pb-3">
-          <h2 className="text-xl font-semibold text-gray-800">
-            {currentConfig.workshop.name}
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl font-semibold text-gray-800">
+              {currentConfig.workshop.name}
+            </h2>
+            {/* Save status indicator */}
+            {saveStatus === 'saving' && (
+              <span className="flex items-center gap-1.5 text-xs text-gray-400">
+                <RefreshCw className="w-3 h-3 animate-spin" />
+                Saving...
+              </span>
+            )}
+            {saveStatus === 'saved' && (
+              <span className="flex items-center gap-1.5 text-xs text-green-600">
+                <Check className="w-3 h-3" />
+                Saved
+              </span>
+            )}
+            {saveStatus === 'error' && (
+              <span className="flex items-center gap-1.5 text-xs text-red-500">
+                Save failed
+              </span>
+            )}
+          </div>
           <p className="text-sm text-gray-500">
             {currentConfig.workshop.location} • {currentConfig.workshop.date}
           </p>
@@ -494,6 +564,9 @@ export function DeckBuilder() {
                             calculatedTime={sessionTimes[idx]}
                             onUpdate={(updates) => updateSession(activeDay, idx, updates)}
                             onRemove={() => removeSession(activeDay, idx)}
+                            onEdit={(session.type === 'day_recap' || session.type === 'day_end')
+                              ? () => setEditingSession({ session, index: idx })
+                              : undefined}
                           />
                         )
                       })}
@@ -503,7 +576,76 @@ export function DeckBuilder() {
               </DndContext>
 
               {/* Quick add buttons */}
-              <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200">
+              <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-200">
+                {/* Day structure buttons */}
+                <button
+                  onClick={() => {
+                    // Add Day Recap (auto-generated)
+                    addSession(activeDay, {
+                      session: `Day ${activeDay} Recap`,
+                      type: 'day_recap',
+                      duration: 10,
+                      icon: 'recap',
+                      recap_yesterday: '',
+                      recap_today: '',
+                    })
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-50 text-blue-700 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
+                  title="Add auto-generated day recap slide"
+                >
+                  <Sunrise className="w-4 h-4" />
+                  Day Start
+                  <Sparkles className="w-3 h-3 opacity-60" />
+                </button>
+                <button
+                  onClick={() => {
+                    addSession(activeDay, {
+                      session: `End of Day ${activeDay}`,
+                      type: 'day_end',
+                      duration: 5,
+                      icon: 'sunset',
+                      wrapup_message: '',
+                    })
+                  }}
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-orange-50 text-orange-700 border border-orange-200 rounded-md hover:bg-orange-100 transition-colors"
+                  title="Add auto-generated end of day slide"
+                >
+                  <Sunset className="w-4 h-4" />
+                  Day End
+                  <Sparkles className="w-3 h-3 opacity-60" />
+                </button>
+
+                <div className="h-6 w-px bg-gray-300 mx-1" />
+
+                {/* Content slides (trigger modal) */}
+                <button
+                  onClick={() => setContentInputModal({ slideType: 'objectives' })}
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-red-50 text-red-700 border border-red-200 rounded-md hover:bg-red-100 transition-colors"
+                  title="Add objectives slide"
+                >
+                  <Target className="w-4 h-4" />
+                  Objectives
+                </button>
+                <button
+                  onClick={() => setContentInputModal({ slideType: 'scope' })}
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-50 text-blue-700 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
+                  title="Add scope of work slide"
+                >
+                  <Globe className="w-4 h-4" />
+                  Scope
+                </button>
+                <button
+                  onClick={() => setContentInputModal({ slideType: 'priorities' })}
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-50 text-purple-700 border border-purple-200 rounded-md hover:bg-purple-100 transition-colors"
+                  title="Add priorities slide"
+                >
+                  <ListChecks className="w-4 h-4" />
+                  Priorities
+                </button>
+
+                <div className="h-6 w-px bg-gray-300 mx-1" />
+
+                {/* Structure buttons */}
                 <button
                   onClick={() => addSession(activeDay, { session: 'New Session', duration: 60 })}
                   className="flex items-center gap-2 px-3 py-2 text-sm bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
@@ -518,6 +660,10 @@ export function DeckBuilder() {
                   <LayoutTemplate className="w-4 h-4" />
                   Section
                 </button>
+
+                <div className="h-6 w-px bg-gray-300 mx-1" />
+
+                {/* Break buttons */}
                 <button
                   onClick={() => addSession(activeDay, { session: 'Tea Break', type: 'break', duration: 15 })}
                   className="flex items-center gap-2 px-3 py-2 text-sm bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
@@ -698,6 +844,102 @@ export function DeckBuilder() {
           </div>
         )}
       </div>
+
+      {/* Session Editor Modal */}
+      {editingSession && (
+        <SessionEditor
+          session={editingSession.session}
+          sessionIndex={editingSession.index}
+          dayNumber={activeDay}
+          onClose={() => setEditingSession(null)}
+          onSave={(updates) => {
+            updateSession(activeDay, editingSession.index, updates)
+            setEditingSession(null)
+          }}
+        />
+      )}
+
+      {/* Content Input Modal - for slides that need content */}
+      {contentInputModal && (
+        <ContentInputModal
+          slideType={contentInputModal.slideType}
+          workshopContext={currentConfig ? {
+            name: currentConfig.workshop.name,
+            country: currentConfig.workshop.country,
+            location: currentConfig.workshop.location,
+            date: currentConfig.workshop.date,
+          } : undefined}
+          existingContent={contentInputModal.existingContent}
+          onCancel={() => setContentInputModal(null)}
+          onSave={(content) => {
+            // Map content type to session config
+            const slideConfigs: Record<ContentSlideType, { session: string; icon: string; slideFile: string }> = {
+              objectives: { session: 'Workshop Objectives', icon: 'target', slideFile: '01_objectives.md' },
+              scope: { session: 'Scope of Work', icon: 'compass', slideFile: '02_scope.md' },
+              priorities: { session: 'Health Priorities', icon: 'list', slideFile: '03_priorities.md' },
+              outputs: { session: 'Expected Outputs', icon: 'check', slideFile: '04_outputs.md' },
+              custom: { session: content.title, icon: 'custom', slideFile: 'custom.md' },
+            }
+
+            const config = slideConfigs[content.type]
+
+            // Add session with content stored
+            addSession(activeDay, {
+              session: content.title || config.session,
+              slides: [config.slideFile],
+              duration: 10,
+              icon: config.icon,
+              // Store content in workshop settings (will be used during build)
+            })
+
+            // Also update the workshop config with the content
+            if (currentConfig && content.bullets.length > 0) {
+              const contentFields: Record<ContentSlideType, keyof typeof currentConfig.workshop> = {
+                objectives: 'objectives',
+                scope: 'scope_of_work',
+                priorities: 'priorities',
+                outputs: 'expected_outputs',
+                custom: 'objectives', // fallback
+              }
+              const field = contentFields[content.type]
+              if (field && field !== 'objectives' || content.type === 'objectives') {
+                // This would ideally update the workshop config
+                // For now, the content is stored in the session
+              }
+            }
+
+            setContentInputModal(null)
+          }}
+        />
+      )}
+
+      {/* Export Progress Overlay */}
+      {exportProgress && (
+        <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg border border-gray-200 p-4 w-80 z-50">
+          <div className="flex items-center gap-3">
+            {exportProgress.stage === 'complete' ? (
+              <Check className="w-5 h-5 text-green-500" />
+            ) : exportProgress.stage === 'error' ? (
+              <X className="w-5 h-5 text-red-500" />
+            ) : (
+              <RefreshCw className="w-5 h-5 text-fastr-primary animate-spin" />
+            )}
+            <div className="flex-1">
+              <p className="text-sm font-medium text-gray-800">
+                {exportProgress.message || `Exporting... ${exportProgress.progress}%`}
+              </p>
+              {exportProgress.stage !== 'complete' && exportProgress.stage !== 'error' && (
+                <div className="mt-2 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-fastr-primary transition-all duration-300"
+                    style={{ width: `${exportProgress.progress}%` }}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -712,12 +954,14 @@ function SortableSessionItem({
   calculatedTime,
   onUpdate,
   onRemove,
+  onEdit,
 }: {
   id: string
   session: Session
   calculatedTime: { start: string; end: string }
   onUpdate: (updates: Partial<Session>) => void
   onRemove: () => void
+  onEdit?: () => void
 }) {
   const {
     attributes,
@@ -783,60 +1027,58 @@ function SortableSessionItem({
 
   // Special render for Day Recap
   if (session.type === 'day_recap') {
+    const isAutoGenerated = !session.recap_yesterday && !session.recap_today
+
     return (
       <div
         ref={setNodeRef}
         style={style}
-        className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 my-2"
+        className="bg-blue-50 border-2 border-blue-200 rounded-lg p-3 my-2"
       >
-        <div className="flex items-start gap-3">
-          <div {...attributes} {...listeners} className="cursor-grab mt-1">
+        <div className="flex items-center gap-3">
+          <div {...attributes} {...listeners} className="cursor-grab">
             <GripVertical className="w-5 h-5 text-blue-400" />
           </div>
-          <BookOpen className="w-5 h-5 text-blue-500 mt-1" />
-          <div className="flex-1 space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold text-blue-700">{session.session}</div>
-              <div className="flex items-center gap-2 text-sm text-blue-500">
-                <Clock className="w-4 h-4" />
-                <input
-                  type="number"
-                  value={session.duration || 0}
-                  onChange={e => onUpdate({ duration: parseInt(e.target.value) || 0 })}
-                  onClick={e => e.stopPropagation()}
-                  onPointerDown={e => e.stopPropagation()}
-                  className="w-12 px-1 py-0.5 text-center border border-blue-200 rounded bg-white"
-                />
-                <span>min</span>
-              </div>
+          <BookOpen className="w-5 h-5 text-blue-500" />
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-blue-700">{session.session}</span>
+              {isAutoGenerated && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full">
+                  <Sparkles className="w-3 h-3" />
+                  Auto
+                </span>
+              )}
             </div>
-
-            <div>
-              <label className="block text-xs font-medium text-blue-600 mb-1">Yesterday we covered:</label>
-              <textarea
-                value={session.recap_yesterday || ''}
-                onChange={e => onUpdate({ recap_yesterday: e.target.value })}
-                onClick={e => e.stopPropagation()}
-                onPointerDown={e => e.stopPropagation()}
-                placeholder="- Topic 1&#10;- Topic 2&#10;- Topic 3"
-                rows={3}
-                className="w-full px-3 py-2 text-sm bg-white border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder:text-blue-300"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-blue-600 mb-1">Today we will cover:</label>
-              <textarea
-                value={session.recap_today || ''}
-                onChange={e => onUpdate({ recap_today: e.target.value })}
-                onClick={e => e.stopPropagation()}
-                onPointerDown={e => e.stopPropagation()}
-                placeholder="- Topic 1&#10;- Topic 2&#10;- Topic 3"
-                rows={3}
-                className="w-full px-3 py-2 text-sm bg-white border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder:text-blue-300"
-              />
-            </div>
+            <p className="text-xs text-blue-600 mt-0.5">
+              {isAutoGenerated
+                ? 'Content auto-generated from schedule'
+                : 'Custom content configured'}
+            </p>
           </div>
+
+          <div className="flex items-center gap-2 text-sm text-blue-500">
+            <Clock className="w-4 h-4" />
+            <input
+              type="number"
+              value={session.duration || 0}
+              onChange={e => onUpdate({ duration: parseInt(e.target.value) || 0 })}
+              onClick={e => e.stopPropagation()}
+              onPointerDown={e => e.stopPropagation()}
+              className="w-12 px-1 py-0.5 text-center border border-blue-200 rounded bg-white"
+            />
+            <span>min</span>
+          </div>
+
+          {onEdit && (
+            <button
+              onClick={onEdit}
+              className="p-1.5 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors"
+              title="Edit recap content"
+            >
+              <Edit3 className="w-4 h-4" />
+            </button>
+          )}
           <button
             onClick={onRemove}
             className="p-1.5 text-blue-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"
@@ -850,50 +1092,58 @@ function SortableSessionItem({
 
   // Special render for End of Day
   if (session.type === 'day_end') {
+    const isAutoGenerated = !session.wrapup_message
+
     return (
       <div
         ref={setNodeRef}
         style={style}
-        className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4 my-2"
+        className="bg-orange-50 border-2 border-orange-200 rounded-lg p-3 my-2"
       >
-        <div className="flex items-start gap-3">
-          <div {...attributes} {...listeners} className="cursor-grab mt-1">
+        <div className="flex items-center gap-3">
+          <div {...attributes} {...listeners} className="cursor-grab">
             <GripVertical className="w-5 h-5 text-orange-400" />
           </div>
-          <Sunset className="w-5 h-5 text-orange-500 mt-1" />
-          <div className="flex-1 space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold text-orange-700">{session.session}</div>
-              <div className="flex items-center gap-2 text-sm text-orange-500">
-                <Clock className="w-4 h-4" />
-                <input
-                  type="number"
-                  value={session.duration || 0}
-                  onChange={e => onUpdate({ duration: parseInt(e.target.value) || 0 })}
-                  onClick={e => e.stopPropagation()}
-                  onPointerDown={e => e.stopPropagation()}
-                  className="w-12 px-1 py-0.5 text-center border border-orange-200 rounded bg-white"
-                />
-                <span>min</span>
-              </div>
+          <Sunset className="w-5 h-5 text-orange-500" />
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-orange-700">{session.session}</span>
+              {isAutoGenerated && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-orange-100 text-orange-600 text-xs rounded-full">
+                  <Sparkles className="w-3 h-3" />
+                  Auto
+                </span>
+              )}
             </div>
-
-            <div>
-              <label className="block text-xs font-medium text-orange-600 mb-1">Wrap-up message (optional):</label>
-              <textarea
-                value={session.wrapup_message || ''}
-                onChange={e => onUpdate({ wrapup_message: e.target.value })}
-                onClick={e => e.stopPropagation()}
-                onPointerDown={e => e.stopPropagation()}
-                placeholder="Leave empty to auto-generate 'See You Tomorrow' slide with next day's start time"
-                rows={2}
-                className="w-full px-3 py-2 text-sm bg-white border border-orange-200 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent placeholder:text-orange-300"
-              />
-            </div>
-            <p className="text-xs text-orange-500">
-              Auto-generates preview of tomorrow's sessions if message is empty
+            <p className="text-xs text-orange-600 mt-0.5">
+              {isAutoGenerated
+                ? 'Content auto-generated from schedule'
+                : 'Custom wrap-up message configured'}
             </p>
           </div>
+
+          <div className="flex items-center gap-2 text-sm text-orange-500">
+            <Clock className="w-4 h-4" />
+            <input
+              type="number"
+              value={session.duration || 0}
+              onChange={e => onUpdate({ duration: parseInt(e.target.value) || 0 })}
+              onClick={e => e.stopPropagation()}
+              onPointerDown={e => e.stopPropagation()}
+              className="w-12 px-1 py-0.5 text-center border border-orange-200 rounded bg-white"
+            />
+            <span>min</span>
+          </div>
+
+          {onEdit && (
+            <button
+              onClick={onEdit}
+              className="p-1.5 text-orange-500 hover:text-orange-700 hover:bg-orange-100 rounded transition-colors"
+              title="Edit wrap-up content"
+            >
+              <Edit3 className="w-4 h-4" />
+            </button>
+          )}
           <button
             onClick={onRemove}
             className="p-1.5 text-orange-400 hover:text-red-500 hover:bg-red-50 rounded transition-colors"

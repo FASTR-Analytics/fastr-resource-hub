@@ -167,11 +167,8 @@ Add your content here...
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="font-semibold text-gray-800 mb-3">Content Library</h2>
-
-        {/* Search */}
+      {/* Search */}
+      <div className="p-3 border-b border-gray-200">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input

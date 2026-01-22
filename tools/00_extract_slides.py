@@ -68,6 +68,7 @@ MODULE_FOLDERS = {
     6: 'm6_data_analysis',
     7: 'm7_results_communication',
     8: 'm8_survey_hfa',
+    9: 'm9_workshop_activities',
 }
 
 # Topic names for generating filenames
@@ -81,12 +82,24 @@ TOPIC_NAMES = {
     'm0_5': 'fastr_approach_to_routine_data_analysis',
 
     # m1 - Identify Questions & Indicators (from 01_identify_questions_indicators.md)
-    'm1_1': 'fastr_gaps_challenges',
+    'm1_1': 'what_is_data_use_case',
+    'm1_1a': 'common_data_use_case',
+    'm1_1b': 'how_select_indicators',
     'm1_2': 'development_of_data_use_case',
-    'm1_3': 'defining_priority_questions',
+    'm1_2a': 'defining_priority_questions',
+    'm1_2b': 'relevant_priority_questions',
+    'm1_2c': 'answerable_questions',
+    'm1_2d': 'pico_framework',
+    'm1_3': 'good_indicator_criteria',
+    'm1_3a': 'high_volume_indicators',
+    'm1_3b': 'high_completeness_indicators',
+    'm1_3c': 'count_indicators',
+    'm1_3d': 'fastr_core_indicators',
+    'm1_3e': 'country_indicator_selection',
     'm1_4': 'preparing_for_data_extraction',
 
     # m2 - Data Extraction (from 02_data_extraction.md)
+    'm2_0': 'show_of_hands_extraction',
     'm2_1': 'why_extract_data',
     'm2_2': 'tools_for_data_extraction',
     'm2_2a': 'data_downloader',
@@ -150,6 +163,11 @@ TOPIC_NAMES = {
     'm8_3': 'questionnaire_structure_review',
     'm8_4': 'hands_on_adaptation',
     'm8_5': 'hfa_priorities_data_use',
+
+    # m9 - Workshop Activities (from 09_workshop_activities.md)
+    'm9_1': 'data_use_case_application_1',
+    'm9_2': 'data_use_case_application_2',
+    'm9_3': 'data_use_case_application_3',
 }
 
 # Marp frontmatter to add to extracted slides

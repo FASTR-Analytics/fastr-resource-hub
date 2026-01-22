@@ -12,6 +12,27 @@ This chapter contains hands-on activities for workshop participants.
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m9_1 -->
+## Data use case: Application 1
+
+*Placeholder - content to be added*
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m9_2 -->
+## Data use case: Application 2
+
+*Placeholder - content to be added*
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m9_3 -->
+## Data use case: Application 3
+
+*Placeholder - content to be added*
+
+<!-- /SLIDE -->
+
 <!-- SLIDE:disruption -->
 ## Activity: Quarterly service utilization report
 

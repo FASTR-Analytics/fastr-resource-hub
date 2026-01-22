@@ -4,16 +4,21 @@ theme: fastr
 paginate: true
 ---
 
-## Data extraction tools
+## Data extraction
 
-We offer two tools for bulk DHIS2 data extraction:
+<div class="columns">
+<div>
 
-**API Script** (Google Colab)
-- Input login credentials, specify timeframes, indicators, and administrative levels
-- Download data as a .csv file
+We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.
 
-**Data Downloader**
-- More intuitive, streamlined interface
-- Recommended for most users
+The Data Downloader provides a streamlined interface to download DHIS2 data. This tool is particularly useful to explore DHIS2 metadata and download indicators requiring disaggregated dimensions.
 
-Both tools enable efficient data extraction, and we provide training resources to support their use.
+The Data Downloader is available at: https://github.com/worldbank/DHIS2-Downloader/releases/
+
+</div>
+<div>
+
+![Data Downloader h:380](../../resources/screenshots/data_downloader.png)
+
+</div>
+</div>

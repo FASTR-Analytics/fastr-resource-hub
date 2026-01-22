@@ -203,6 +203,7 @@ MODULES = {
         'name': 'Introduction to FASTR',
         'folder': 'm0_introduction',
         'topics': [
+            ('m0_0', 'm0_0_topic_0.md'),
             ('m0_1', 'm0_1_introduction_to_fastr.md'),
             ('m0_2', 'm0_2_rmncahn_service_use_monitoring.md'),
             ('m0_3', 'm0_3_why_rapid_cycle_analytics.md'),
@@ -213,9 +214,20 @@ MODULES = {
         'name': 'Identify Questions & Indicators',
         'folder': 'm1_identify_questions_indicators',
         'topics': [
-            ('m1_1', 'm1_1_fastr_gaps_challenges.md'),
+            ('m1_1', 'm1_1_what_is_data_use_case.md'),
+            ('m1_1a', 'm1_1a_common_data_use_case.md'),
+            ('m1_1b', 'm1_1b_how_select_indicators.md'),
             ('m1_2', 'm1_2_development_of_data_use_case.md'),
-            ('m1_3', 'm1_3_defining_priority_questions.md'),
+            ('m1_2a', 'm1_2a_defining_priority_questions.md'),
+            ('m1_2b', 'm1_2b_relevant_priority_questions.md'),
+            ('m1_2c', 'm1_2c_answerable_questions.md'),
+            ('m1_2d', 'm1_2d_pico_framework.md'),
+            ('m1_3', 'm1_3_good_indicator_criteria.md'),
+            ('m1_3a', 'm1_3a_high_volume_indicators.md'),
+            ('m1_3b', 'm1_3b_high_completeness_indicators.md'),
+            ('m1_3c', 'm1_3c_count_indicators.md'),
+            ('m1_3d', 'm1_3d_fastr_core_indicators.md'),
+            ('m1_3e', 'm1_3e_country_indicator_selection.md'),
             ('m1_4', 'm1_4_preparing_for_data_extraction.md'),
         ],
     },
@@ -223,10 +235,9 @@ MODULES = {
         'name': 'Data Extraction',
         'folder': 'm2_data_extraction',
         'topics': [
+            ('m2_0', 'm2_0_show_of_hands_extraction.md'),
             ('m2_1', 'm2_1_why_extract_data.md'),
-            ('m2_1a', 'm2_1a_why_extract_data_continued.md'),
             ('m2_1b', 'm2_1b_why_extract_data_continued.md'),
-            ('m2_1c', 'm2_1c_why_extract_data_continued.md'),
             ('m2_1d', 'm2_1d_why_extract_data_continued.md'),
             ('m2_2', 'm2_2_tools_for_data_extraction.md'),
             ('m2_2a', 'm2_2a_data_downloader.md'),
@@ -316,6 +327,15 @@ MODULES = {
             ('m8_3', 'm8_3_questionnaire_structure_review.md'),
             ('m8_4', 'm8_4_hands_on_adaptation.md'),
             ('m8_5', 'm8_5_hfa_priorities_data_use.md'),
+        ],
+    },
+    9: {
+        'name': 'Workshop Activities',
+        'folder': 'm9_workshop_activities',
+        'topics': [
+            ('m9_1', 'm9_1_data_use_case_application_1.md'),
+            ('m9_2', 'm9_2_data_use_case_application_2.md'),
+            ('m9_3', 'm9_3_data_use_case_application_3.md'),
         ],
     },
 }
@@ -525,6 +545,64 @@ def prompt_for_workshop(base_dir):
         except KeyboardInterrupt:
             print("\n\nCancelled by user")
             sys.exit(0)
+
+
+def generate_single_day_agenda(config, day_num):
+    """
+    Generate agenda slide content for a single day.
+    Uses compact 'agenda' class for auto-fit.
+    """
+    schedule = config.get('_yaml_schedule', {})
+    is_unified = config.get('_is_unified_format', False)
+    day_titles = schedule.get('day_titles', {})
+
+    day_key = f'day{day_num}'
+
+    # Get day items from unified or old format
+    if is_unified:
+        day_items = schedule.get(day_key, [])
+    else:
+        agenda = schedule.get('agenda', {})
+        day_items = agenda.get(day_key, [])
+
+    if not day_items:
+        return ""
+
+    # Get day title if specified
+    day_title = day_titles.get(day_num, '')
+
+    # Use compact agenda class for auto-fit
+    slide_content = "\n<!-- _class: agenda -->\n"
+    slide_content += "# Agenda\n\n"
+
+    # Add day title with theme if specified
+    if day_title:
+        slide_content += f"**Day {day_num} -- {day_title}**\n\n"
+    else:
+        slide_content += f"**Day {day_num}**\n\n"
+
+    # Use HTML table for colspan support on section headers
+    slide_content += '<table>\n'
+    slide_content += '<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>\n'
+
+    for item in day_items:
+        item_type = item.get('type', '')
+        time = item.get('time', '')
+        session = item.get('session', '')
+        speaker = item.get('speaker', '')
+
+        if item_type == 'section':
+            # Section header - spans all columns
+            slide_content += f'<tr style="background: #E8F4F3;"><td colspan="3"><strong>{session}</strong></td></tr>\n'
+        elif item_type == 'break':
+            # Breaks - italicized
+            slide_content += f'<tr><td>{time}</td><td><em>{session}</em></td><td></td></tr>\n'
+        else:
+            # Regular item
+            slide_content += f'<tr><td>{time}</td><td>{session}</td><td>{speaker}</td></tr>\n'
+
+    slide_content += '</table>\n\n---\n'
+    return slide_content
 
 
 def generate_agenda_slide(config):
@@ -1632,6 +1710,24 @@ paginate: true
         deck_content += ensure_slide_break(title_content) + "\n"
         print(f"   Title slide added")
 
+    # Add welcome slide (appears after title in all workshops)
+    welcome_path = os.path.join(base_dir, "templates", "welcome_slide.md")
+    welcome_content = read_markdown_file(welcome_path)
+    if welcome_content:
+        welcome_content = strip_frontmatter(welcome_content)
+        welcome_content = substitute_variables(welcome_content, config)
+        deck_content += ensure_slide_break(welcome_content) + "\n"
+        print(f"   Welcome slide added")
+
+    # Add introductions slide (appears after welcome in all workshops)
+    intros_path = os.path.join(base_dir, "templates", "introductions_slide.md")
+    intros_content = read_markdown_file(intros_path)
+    if intros_content:
+        intros_content = strip_frontmatter(intros_content)
+        intros_content = substitute_variables(intros_content, config)
+        deck_content += ensure_slide_break(intros_content) + "\n"
+        print(f"   Introductions slide added")
+
     # Workshop and content directories
     workshop_dir = os.path.join(base_dir, "workshops", workshop_id)
     core_content_dir = os.path.join(base_dir, "core_content")
@@ -1829,11 +1925,22 @@ paginate: true
             if item['slides']:
                 for slide_file in item['slides']:
                     if slide_file == 'agenda':
-                        # Generate agenda slides
+                        # Generate agenda slides (all days)
                         agenda_content = generate_agenda_slide(config)
                         if agenda_content:
                             deck_content += ensure_slide_break(agenda_content) + "\n"
                             print(f"   {session_name}: agenda")
+
+                    elif slide_file.endswith('_agenda') and slide_file.startswith('day'):
+                        # Day-specific agenda (e.g., day1_agenda, day2_agenda)
+                        import re
+                        day_match = re.match(r'day(\d+)_agenda', slide_file)
+                        if day_match:
+                            agenda_day = int(day_match.group(1))
+                            agenda_content = generate_single_day_agenda(config, agenda_day)
+                            if agenda_content:
+                                deck_content += ensure_slide_break(agenda_content) + "\n"
+                                print(f"   {session_name}: {slide_file}")
 
                     elif slide_file in ['day_recap', 'day_recap.md']:
                         # Day recap - use inline content, fall back to file, or skip
@@ -1908,9 +2015,13 @@ paginate: true
                                     print(f"   {session_name}: (auto-generated)")
 
                     else:
-                        # Custom slide from workshop folder
+                        # Custom slide - check workshop folder first, then templates folder
                         custom_path = os.path.join(workshop_dir, slide_file)
                         content = read_markdown_file(custom_path)
+                        if not content:
+                            # Try templates folder
+                            template_path = os.path.join(base_dir, "templates", slide_file)
+                            content = read_markdown_file(template_path)
                         if content:
                             content = strip_frontmatter(content)
                             content = substitute_variables(content, config)

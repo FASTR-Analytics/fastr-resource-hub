@@ -6,9 +6,15 @@ paginate: true
 
 # Expected Outputs
 
-- Adapted phone survey questionnaire
-- First quarterly report draft
-- Trained MoH team on data downloader tools
+**Disruption Analysis Activities**
+
+- Data extraction and configuration of analytics platform
+- Produce first quarterly report
+- Review results and contextualize findings (with relevant program teams)
 - Roadmap for participation in Abuja workshop
+
+**Phone Survey Activities**
+
+- Adaptation of questionnaire (with program input)
 
 ---

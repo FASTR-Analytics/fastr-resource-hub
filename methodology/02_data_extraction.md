@@ -138,88 +138,79 @@ This section will cover:
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m2_1 -->
-## Why extract data from DHIS2?
+<!-- SLIDE:m2_0 -->
+## Show of hands...
 
-### Data quality adjustment
+![w:120](../resources/icons/raise-hand.png)
+
+Do you regularly extract data from DHIS2?
+
+If so, what are the primary reasons?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_1 -->
+## Why would you extract data from DHIS2? Why not just do analysis in DHIS2 itself?
+
+**Data quality adjustment**
 
 The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
-The FASTR methodology includes specific approaches to:
-- Identify and adjust for outliers
-- Adjust for incomplete reporting
-- Apply consistent data quality metrics
+**Analysis complexity**
 
-These adjustments require processing that cannot be done within DHIS2's native analytics.
-<!-- /SLIDE -->
+The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal variations, and comparing key periods, such as before and after a reform.
 
-<!-- SLIDE:m2_1a -->
-## Why extract data from DHIS2?
-
-### Analysis complexity
-
-The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
-
-- Identifying significant increases or decreases in service volume
-- Adjusting for data quality issues
-- Accounting for expected seasonal variations
-- Comparing key periods, such as before and after a reform
-
-The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis.
+The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs!
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1b -->
+<!-- _class: columns-image-right -->
+
 ## Data format and granularity
 
-Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
+![Data format example]({{WORKSHOP_MEDIA}}/data_format_example.png)
 
-- Data should be saved in **long format** meaning each row represents a single observation or measurement
-- Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files
+Data should be downloaded for each indicator of interest, at facility level, and monthly for the period of interest.
 
-### Why monthly facility level data?
+Data should be saved in long format meaning each row represents a single observation or measurement (see example).
 
-We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality. Using monthly facility level data allows us to conduct the most robust analysis.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m2_1c -->
-## Key variables
-
-The data extracted should include the following required elements:
-
-| Element | Description |
-|---------|-------------|
-| Org units | Organizational unit identifier |
-| Period | Time period of the data |
-| Indicator name | Name of the indicator |
-| Total/count | The aggregated value |
+Data should be saved in .csv format and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1d -->
 ## How much data?
 
-### Initial FASTR analysis
-- Download approximately **five years** of historical data
-- Exact period depends on data availability and consistency in indicator definitions
+**Initial FASTR analysis**
 
-### Routine update to FASTR analysis
-- Download new data covering the most recent months not previously included (usually **three months** for quarterly implementation)
-- Include the **three preceding months** as recent data is often subject to changes due to late reporting or data quality adjustments
+- Generally recommended to download approximately five years of historical data
+- However, the exact period should be determined based on data availability, consistency in indicator definitions over time, and the specifics of a country's routine data system
+- Ideally, using at least five years of historical data allows for a thorough assessment of trends over time
+
+**Routine update to FASTR analysis**
+
+- Start with the existing database and download new data covering the most recent months not previously included – this is usually a three-month period when the FASTR analysis is being implemented on a quarterly basis
+- Additionally, include the three proceeding months to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments
+- If you have reason to believe there have been substantial changes to the historical data, you can always choose to redownload a longer time period
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2 -->
-## Data extraction tools
+## Data extraction
 
-We offer two tools for bulk DHIS2 data extraction:
+<div class="columns">
+<div>
 
-**API Script** (Google Colab)
-- Input login credentials, specify timeframes, indicators, and administrative levels
-- Download data as a .csv file
+We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.
 
-**Data Downloader**
-- More intuitive, streamlined interface
-- Recommended for most users
+The Data Downloader provides a streamlined interface to download DHIS2 data. This tool is particularly useful to explore DHIS2 metadata and download indicators requiring disaggregated dimensions.
 
-Both tools enable efficient data extraction, and we provide training resources to support their use.
+The Data Downloader is available at: https://github.com/worldbank/DHIS2-Downloader/releases/
+
+</div>
+<div>
+
+![Data Downloader h:380](../resources/screenshots/data_downloader.png)
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2a -->

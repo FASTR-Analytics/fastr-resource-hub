@@ -104,6 +104,8 @@ interface WorkshopStore {
   customSlides: CustomSlide[]
   isLoading: boolean
   error: string | null
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error'
+  lastSaved: Date | null
 
   // AI Assistant
   aiMessages: AIMessage[]
@@ -122,6 +124,7 @@ interface WorkshopStore {
   addSession: (dayNum: number, session: Session) => void
   removeSession: (dayNum: number, sessionIdx: number) => void
   reorderSession: (dayNum: number, fromIdx: number, toIdx: number) => void
+  moveSessionToDay: (fromDay: number, fromIdx: number, toDay: number, toIdx: number) => void
   addDay: () => void
   updateDayTitle: (dayNum: number, title: string) => void
   updateDayStartTime: (dayNum: number, time: string) => void
@@ -143,6 +146,8 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   customSlides: [],
   isLoading: false,
   error: null,
+  saveStatus: 'idle',
+  lastSaved: null,
   aiMessages: [],
   aiLoading: false,
 
@@ -179,10 +184,18 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     const { currentWorkshopId, currentConfig } = get()
     if (!currentWorkshopId || !currentConfig) return
 
+    set({ saveStatus: 'saving' })
+
     try {
       await window.electronAPI.saveWorkshop(currentWorkshopId, currentConfig)
+      set({ saveStatus: 'saved', lastSaved: new Date() })
+
+      // Reset to idle after showing "saved" status briefly
+      setTimeout(() => {
+        set({ saveStatus: 'idle' })
+      }, 2000)
     } catch (error: any) {
-      set({ error: error.message })
+      set({ error: error.message, saveStatus: 'error' })
     }
   },
 
@@ -316,6 +329,38 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
           ...currentConfig.schedule,
           [dayKey]: newSessions
         }
+      }
+
+      set({ currentConfig: newConfig })
+      get().saveCurrentWorkshop()
+    }
+  },
+
+  // Move a session between days (cross-day drag and drop)
+  moveSessionToDay: (fromDay: number, fromIdx: number, toDay: number, toIdx: number) => {
+    const { currentConfig } = get()
+    if (!currentConfig) return
+
+    const fromDayKey = `day${fromDay}`
+    const toDayKey = `day${toDay}`
+    const fromSessions = [...(currentConfig.schedule[fromDayKey] || [])]
+    const toSessions = fromDay === toDay ? fromSessions : [...(currentConfig.schedule[toDayKey] || [])]
+
+    if (fromIdx >= 0 && fromIdx < fromSessions.length) {
+      // Remove from source day
+      const [session] = fromSessions.splice(fromIdx, 1)
+
+      // Add to target day at specified position (or end if -1)
+      const targetIdx = toIdx >= 0 ? toIdx : toSessions.length
+      toSessions.splice(targetIdx, 0, session)
+
+      const newConfig = {
+        ...currentConfig,
+        schedule: {
+          ...currentConfig.schedule,
+          [fromDayKey]: fromSessions,
+          [toDayKey]: toSessions,
+        },
       }
 
       set({ currentConfig: newConfig })
