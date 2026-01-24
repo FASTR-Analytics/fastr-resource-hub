@@ -107,6 +107,7 @@ TOPIC_NAMES = {
     # m3 - FASTR Analytics Platform (from 03_fastr_analytics_platform.md)
     'm3_1': 'overview_of_platform',
     'm3_2': 'accessing_platform',
+    'm3_2e': 'configuring_platform_intro',
     'm3_3': 'setting_up_structure',
     'm3_4': 'importing_dataset',
     'm3_5': 'installing_running_modules',
@@ -117,17 +118,30 @@ TOPIC_NAMES = {
     # m4 - Data Quality Assessment (from 04_data_quality_assessment.md)
     'm4_0': 'fastr_methods_overview',
     'm4_1': 'approach_to_dqa',
+    'm4_1a': 'measures_data_quality_detailed_1',
+    'm4_1d': 'measures_data_quality_detailed_2',
+    'm4_1b': 'fastr_vs_dhis2_dqa_1',
+    'm4_1c': 'fastr_vs_dhis2_dqa_2',
     'm4_2': 'indicator_completeness',
     'm4_3': 'outliers',
     'm4_4': 'internal_consistency',
     'm4_5': 'overall_dqa_score',
     'm4_6': 'dqa_configuration_parameters',
+    # Condensed DQA slides (methods + interpretation)
+    'm4_s1': 'dqa_pipeline_overview',
+    'm4_s2': 'dqa_rationale_objectives',
+    'm4_s3': 'dqa_completeness',
+    'm4_s3b': 'dqa_outliers',
+    'm4_s4': 'dqa_score_summary',
 
     # m5 - Data Quality Adjustment (from 05_data_quality_adjustment.md)
     'm5_1': 'approach_to_dq_adjustment',
     'm5_2': 'adjustment_for_outliers',
     'm5_3': 'adjustment_for_completeness',
     'm5_4': 'adjusting_dq_in_platform',
+    # Condensed DQ Adjustment slides (methods + interpretation)
+    'm5_s1': 'dq_adjustment_overview',
+    'm5_s2': 'dq_adjustment_interpretation',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization_analysis',
@@ -149,6 +163,11 @@ TOPIC_NAMES = {
     'm6_17': 'coverage_output_subnational',
     'm6_18': 'coverage_output_district',
     'm6_19': 'coverage_configuration_parameters',
+    # Condensed Service Utilization & Coverage slides (methods + interpretation)
+    'm6_s1': 'utilization_overview',
+    'm6_s2': 'disruption_interpretation',
+    'm6_s3': 'coverage_overview',
+    'm6_s4': 'coverage_interpretation',
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
@@ -210,12 +229,20 @@ def parse_slide_id(slide_id):
     - m4_1 -> (4, 1, '')
     - m4_1a -> (4, 1, 'a')
     - m4_1b -> (4, 1, 'b')
+    - m4_s1 -> (4, 's1', '') - condensed/summary slides
 
     Returns (module_num, topic_num, suffix) or (None, None, None) if invalid.
     """
+    # Standard format: m4_1 or m4_1a
     match = re.match(r'^m(\d+)_(\d+)([a-z]?)$', slide_id)
     if match:
         return int(match.group(1)), int(match.group(2)), match.group(3)
+
+    # Summary/condensed format: m4_s1, m5_s2, m4_s3b, etc.
+    match = re.match(r'^m(\d+)_(s\d+[a-z]?)$', slide_id)
+    if match:
+        return int(match.group(1)), match.group(2), ''
+
     return None, None, None
 
 

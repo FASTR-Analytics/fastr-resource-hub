@@ -254,7 +254,13 @@ MODULES = {
         'folder': 'm3_fastr_analytics_platform',
         'topics': [
             ('m3_1', 'm3_1_overview_of_platform.md'),
+            ('m3_1b', 'm3_1b_overview_of_platform_continued.md'),
             ('m3_2', 'm3_2_accessing_platform.md'),
+            ('m3_2a', 'm3_2a_accessing_platform_continued.md'),
+            ('m3_2b', 'm3_2b_accessing_platform_continued.md'),
+            ('m3_2c', 'm3_2c_accessing_platform_continued.md'),
+            ('m3_2d', 'm3_2d_accessing_platform_continued.md'),
+            ('m3_2e', 'm3_2e_configuring_platform_intro.md'),
             ('m3_3', 'm3_3_setting_up_structure.md'),
             ('m3_4', 'm3_4_importing_dataset.md'),
             ('m3_5', 'm3_5_installing_running_modules.md'),
@@ -267,7 +273,12 @@ MODULES = {
         'name': 'Data Quality Assessment',
         'folder': 'm4_data_quality_assessment',
         'topics': [
+            ('m4_0', 'm4_0_fastr_methods_overview.md'),
             ('m4_1', 'm4_1_approach_to_dqa.md'),
+            ('m4_1a', 'm4_1a_measures_data_quality_detailed_1.md'),
+            ('m4_1d', 'm4_1d_measures_data_quality_detailed_2.md'),
+            ('m4_1b', 'm4_1b_fastr_vs_dhis2_dqa_1.md'),
+            ('m4_1c', 'm4_1c_fastr_vs_dhis2_dqa_2.md'),
             ('m4_2', 'm4_2_indicator_completeness.md'),
             ('m4_3', 'm4_3_outliers.md'),
             ('m4_4', 'm4_4_internal_consistency.md'),
@@ -444,7 +455,8 @@ def resolve_module_prefix(prefix, exclude=None):
         return ([], prefix, False)
 
     # Pattern for topic prefix: m0_1, m4_2, m1_2a, etc. (with optional letter suffix)
-    topic_match = re.match(r'^m(\d+)_(\d+[a-z]?)$', prefix)
+    # Also supports condensed/summary format: m4_s1, m5_s2, m4_s3b, etc.
+    topic_match = re.match(r'^m(\d+)_((?:\d+[a-z]?)|(?:s\d+[a-z]?))$', prefix)
     if topic_match:
         module_num = int(topic_match.group(1))
         topic_id = topic_match.group(2)  # e.g., "2" or "2a"
@@ -481,9 +493,9 @@ def resolve_module_prefix(prefix, exclude=None):
 
 
 def is_module_prefix(item):
-    """Check if an item looks like a module prefix (m0, m0_1, m1_2a, etc.)"""
+    """Check if an item looks like a module prefix (m0, m0_1, m1_2a, m4_s1, etc.)"""
     import re
-    return bool(re.match(r'^m\d+(_\d+[a-z]?)?$', item))
+    return bool(re.match(r'^m\d+(_((\d+[a-z]?)|(s\d+)))?$', item))
 
 
 def list_available_workshops(base_dir):
@@ -2017,8 +2029,9 @@ paginate: true
                     else:
                         # Custom slide - check workshop folder first, then templates folder
                         custom_path = os.path.join(workshop_dir, slide_file)
-                        content = read_markdown_file(custom_path)
-                        if not content:
+                        if os.path.exists(custom_path):
+                            content = read_markdown_file(custom_path)
+                        else:
                             # Try templates folder
                             template_path = os.path.join(base_dir, "templates", slide_file)
                             content = read_markdown_file(template_path)

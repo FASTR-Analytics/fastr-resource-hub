@@ -1270,3 +1270,86 @@ This improves the ability to interpret and compare utilization data across natio
 
 </div>
 <!-- /SLIDE -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONDENSED SLIDES: Methods + Interpretation Combined
+═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m6_s1 -->
+## Service utilization analysis
+
+Service utilization analysis tracks how many health services are being delivered over time, identifying trends, anomalies, and comparisons across areas.
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Number of services reported h:300](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing absolute service volumes over time by indicator.
+
+**What it shows:** Count of services delivered each month/quarter.
+
+**Interpretation:** Look for overall trends (increasing/decreasing) and sudden drops or spikes that may need investigation.
+
+</div>
+</div>
+
+---
+
+## Year-over-year change output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Change in service volume h:300](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap comparing current period to same period last year, with changes >±10% flagged.
+
+**Formula:** YoY change % = (this year - last year) / last year × 100
+
+**Interpretation:** Flagged changes require follow-up - is this a real program change, data issue, or expected event?
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2 -->
+## Detecting service disruptions
+
+Beyond year-over-year comparisons, we want to know: **Is service delivery on track, or has something disrupted it?**
+
+**The challenge:** Raw service counts are hard to interpret. A drop in services could be a real disruption, or just normal seasonal variation. Different areas have different baseline volumes, making direct comparison difficult.
+
+**FASTR's solution:** Use statistical modeling to estimate what service volume we would *expect* based on historical trends and seasonality, then compare actual volume to this expectation.
+
+- **Disruption:** Observed volume significantly below expected
+- **Surplus:** Observed volume significantly above expected
+
+---
+
+## Service disruption output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Disruption output h:300](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Chart comparing actual service volume to model-predicted expected volume, accounting for seasonality.
+
+**What it shows:** Deviations from expected - disruptions (below) or surpluses (above).
+
+**Interpretation:** Consider external factors: COVID, strikes, stockouts, campaigns. Persistent deviations warrant program investigation.
+
+</div>
+</div>
+<!-- /SLIDE -->
+

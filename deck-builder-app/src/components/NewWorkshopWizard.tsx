@@ -152,30 +152,76 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
       let lunchAdded = false
       let afternoonTeaAdded = false
 
-      // Day opening
+      // Day opening structure
       if (day === 1) {
+        // Day 1: Cover → Welcome → Introductions → Objectives → Expectations → Agenda
         agenda[day].push({
           _id: `title-${Date.now()}-${day}`,
-          session: 'Opening & Welcome',
-          slides: ['title'],
-          duration: 15,
+          session: `FASTR Workshop - ${data.country}`,
+          slides: ['title_slide.md'],
+          duration: 0,
           icon: 'cover',
+          time: formatTime(currentTime),
+        })
+        agenda[day].push({
+          _id: `welcome-${Date.now()}-${day}`,
+          session: 'Welcome and Opening Remarks',
+          slides: ['welcome_slide.md'],
+          duration: 10,
+          icon: 'welcome',
+          time: formatTime(currentTime),
+        })
+        currentTime += 10
+        agenda[day].push({
+          _id: `introductions-${Date.now()}-${day}`,
+          session: 'Introductions',
+          slides: ['introductions_slide.md'],
+          duration: 15,
+          icon: 'people',
           time: formatTime(currentTime),
         })
         currentTime += 15
         agenda[day].push({
           _id: `objectives-${Date.now()}-${day}`,
-          session: 'Workshop Objectives & Agenda',
-          slides: ['01_objectives.md', 'agenda'],
-          duration: 15,
+          session: 'Workshop Objectives',
+          slides: ['custom_slides/01_objectives.md'],
+          duration: 10,
           icon: 'target',
           time: formatTime(currentTime),
         })
+        currentTime += 10
+        agenda[day].push({
+          _id: `expectations-${Date.now()}-${day}`,
+          session: 'Expectations',
+          slides: ['expectations_slide.md'],
+          duration: 15,
+          icon: 'sticky',
+          time: formatTime(currentTime),
+        })
         currentTime += 15
+        agenda[day].push({
+          _id: `agenda-${day}-${Date.now()}`,
+          session: 'Day 1 Agenda',
+          type: 'section',
+          duration: 5,
+          icon: 'list',
+          time: formatTime(currentTime),
+        })
+        currentTime += 5
       } else {
+        // Day 2+: Day Title → Recap → Agenda
+        agenda[day].push({
+          _id: `daytitle-${day}-${Date.now()}`,
+          session: `Day ${day}`,
+          type: 'day_title',
+          slides: ['day_title.md'],
+          duration: 0,
+          icon: 'calendar',
+          time: formatTime(currentTime),
+        })
         agenda[day].push({
           _id: `recap-${day}-${Date.now()}`,
-          session: `Day ${day} Recap`,
+          session: `Recap of Day ${day - 1}`,
           type: 'day_recap',
           duration: 15,
           icon: 'recap',
@@ -184,6 +230,15 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
           recap_today: '',
         })
         currentTime += 15
+        agenda[day].push({
+          _id: `agenda-${day}-${Date.now()}`,
+          session: `Day ${day} Agenda`,
+          type: 'section',
+          duration: 5,
+          icon: 'list',
+          time: formatTime(currentTime),
+        })
+        currentTime += 5
       }
 
       // Add modules and breaks
@@ -196,6 +251,7 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
             _id: `tea-am-${day}-${Date.now()}`,
             session: 'Tea Break',
             type: 'break',
+            slides: ['breaks.md'],
             duration: data.teaDuration,
             icon: 'coffee',
             time: formatTime(currentTime),
@@ -210,6 +266,7 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
             _id: `lunch-${day}-${Date.now()}`,
             session: 'Lunch Break',
             type: 'break',
+            slides: ['breaks.md'],
             duration: data.lunchDuration,
             icon: 'lunch',
             time: formatTime(currentTime),
@@ -224,6 +281,7 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
             _id: `tea-pm-${day}-${Date.now()}`,
             session: 'Tea Break',
             type: 'break',
+            slides: ['breaks.md'],
             duration: data.teaDuration,
             icon: 'coffee',
             time: formatTime(currentTime),
@@ -251,28 +309,28 @@ export function NewWorkshopWizard({ onClose, onComplete }: Props) {
         moduleIndex++
       }
 
-      // Day end
-      if (day < data.days || moduleIndex >= selected.length) {
-        if (day === data.days && moduleIndex >= selected.length) {
-          agenda[day].push({
-            _id: `closing-${Date.now()}`,
-            session: 'Closing & Next Steps',
-            slides: ['closing.md'],
-            duration: 15,
-            icon: 'end',
-            time: formatTime(currentTime),
-          })
-        } else {
-          agenda[day].push({
-            _id: `dayend-${day}-${Date.now()}`,
-            session: `Day ${day} Wrap-up`,
-            type: 'day_end',
-            duration: 10,
-            icon: 'sunset',
-            time: formatTime(currentTime),
-            wrapup_message: '',
-          })
-        }
+      // Day end - every day gets End of Day slide
+      agenda[day].push({
+        _id: `dayend-${day}-${Date.now()}`,
+        session: `End of Day ${day}`,
+        type: 'day_end',
+        slides: ['day_end.md'],
+        duration: 5,
+        icon: 'sunset',
+        time: formatTime(currentTime),
+      })
+      currentTime += 5
+
+      // Last day also gets Closing slide (contact info)
+      if (day === data.days) {
+        agenda[day].push({
+          _id: `closing-${Date.now()}`,
+          session: 'Contact Information',
+          slides: ['closing.md'],
+          duration: 0,
+          icon: 'end',
+          time: formatTime(currentTime),
+        })
       }
     }
 
@@ -333,11 +391,6 @@ Output ONLY the objectives, one per line, no numbers or bullets.`
       content: {
         modules: data.selectedModules.map(id => parseInt(id.replace('m', ''))),
         custom_slides: [],
-      },
-      country_data: {
-        COUNTRY: data.country,
-        LOCATION: data.location || data.country,
-        DATE: data.dates,
       },
     }
 

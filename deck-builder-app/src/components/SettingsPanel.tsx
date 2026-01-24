@@ -7,10 +7,7 @@ import {
   Calendar,
   Users,
   Globe,
-  Database,
   Clock,
-  Plus,
-  Trash2,
   Check,
   Target,
   Mail,
@@ -23,15 +20,7 @@ interface SettingsPanelProps {
   onClose: () => void
 }
 
-// Common country data fields that workshops typically need
-const COMMON_COUNTRY_FIELDS = [
-  { key: 'POPULATION', label: 'Population', placeholder: 'e.g., 19 million' },
-  { key: 'FACILITY_COUNT', label: 'Number of health facilities', placeholder: 'e.g., 2,500' },
-  { key: 'DISTRICT_COUNT', label: 'Number of districts', placeholder: 'e.g., 116' },
-  { key: 'HMIS_NAME', label: 'HMIS system name', placeholder: 'e.g., DHIS2' },
-]
-
-type SectionKey = 'info' | 'content' | 'country' | 'days'
+type SectionKey = 'info' | 'content' | 'days'
 
 export function SettingsPanel({ onClose }: SettingsPanelProps) {
   const { currentConfig, currentWorkshopId, saveCurrentWorkshop } = useWorkshopStore()
@@ -53,13 +42,8 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
 
   const [workshopContent, setWorkshopContent] = useState({
     objectives: '',
-    scope_of_work: '',
-    expected_outputs: '',
-    priorities: '',
   })
 
-  const [countryData, setCountryData] = useState<Record<string, string>>({})
-  const [customFields, setCustomFields] = useState<{ key: string; value: string }[]>([])
   const [dayTitles, setDayTitles] = useState<Record<number, string>>({})
   const [dayStartTimes, setDayStartTimes] = useState<Record<number, string>>({})
   const [hasChanges, setHasChanges] = useState(false)
@@ -81,24 +65,8 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
 
       setWorkshopContent({
         objectives: currentConfig.workshop.objectives || '',
-        scope_of_work: currentConfig.workshop.scope_of_work || '',
-        expected_outputs: currentConfig.workshop.expected_outputs || '',
-        priorities: currentConfig.workshop.priorities || '',
       })
 
-      // Separate common fields from custom fields
-      const data = currentConfig.country_data || {}
-      const commonKeys = COMMON_COUNTRY_FIELDS.map(f => f.key)
-      const custom: { key: string; value: string }[] = []
-
-      Object.entries(data).forEach(([key, value]) => {
-        if (!commonKeys.includes(key) && !['COUNTRY', 'LOCATION', 'DATE', 'WORKSHOP_NAME'].includes(key)) {
-          custom.push({ key, value })
-        }
-      })
-
-      setCountryData(data)
-      setCustomFields(custom)
       setDayTitles(currentConfig.schedule.day_titles || {})
       setDayStartTimes(currentConfig.schedule.day_start_times || {})
       setHasChanges(false)
@@ -133,20 +101,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
         day_titles: dayTitles,
         day_start_times: dayStartTimes,
       },
-      country_data: {
-        ...countryData,
-        // Ensure common fields are synced
-        COUNTRY: workshopInfo.country,
-        LOCATION: workshopInfo.location,
-        DATE: workshopInfo.date,
-        WORKSHOP_NAME: workshopInfo.name,
-        FACILITATORS: workshopInfo.facilitators,
-        CONTACT_EMAIL: workshopInfo.contact_email,
-        WEBSITE: workshopInfo.website,
-        VENUE: workshopInfo.venue,
-        // Add custom fields
-        ...Object.fromEntries(customFields.filter(f => f.key).map(f => [f.key, f.value])),
-      },
     }
 
     // Update store and save
@@ -169,12 +123,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
     setSaveStatus('idle')
   }
 
-  const updateCountryData = (key: string, value: string) => {
-    setCountryData(prev => ({ ...prev, [key]: value }))
-    setHasChanges(true)
-    setSaveStatus('idle')
-  }
-
   const updateDayTitle = (day: number, title: string) => {
     setDayTitles(prev => ({ ...prev, [day]: title }))
     setHasChanges(true)
@@ -183,28 +131,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
 
   const updateDayStartTime = (day: number, time: string) => {
     setDayStartTimes(prev => ({ ...prev, [day]: time }))
-    setHasChanges(true)
-    setSaveStatus('idle')
-  }
-
-  const addCustomField = () => {
-    setCustomFields(prev => [...prev, { key: '', value: '' }])
-    setHasChanges(true)
-    setSaveStatus('idle')
-  }
-
-  const updateCustomField = (index: number, key: string, value: string) => {
-    setCustomFields(prev => {
-      const updated = [...prev]
-      updated[index] = { key, value }
-      return updated
-    })
-    setHasChanges(true)
-    setSaveStatus('idle')
-  }
-
-  const removeCustomField = (index: number) => {
-    setCustomFields(prev => prev.filter((_, i) => i !== index))
     setHasChanges(true)
     setSaveStatus('idle')
   }
@@ -406,144 +332,20 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                   <ChevronRight className="w-4 h-4 text-gray-400" />
                 )}
                 <Target className="w-4 h-4 text-fastr-primary" />
-                <span className="text-sm font-semibold text-gray-700">Workshop Content</span>
+                <span className="text-sm font-semibold text-gray-700">Workshop Objectives</span>
               </button>
               {expandedSections.has('content') && (
-                <div className="p-4 space-y-4">
-                  <p className="text-xs text-gray-500">
-                    Enter bullet points (one per line) - these will be used to generate slides
+                <div className="p-4">
+                  <p className="text-xs text-gray-500 mb-3">
+                    Enter objectives (one per line) - these will appear on the objectives slide
                   </p>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                      Workshop Objectives
-                    </label>
-                    <textarea
-                      value={workshopContent.objectives}
-                      onChange={e => updateWorkshopContent('objectives', e.target.value)}
-                      placeholder="Enter objectives, one per line"
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm font-mono"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                      Scope of Work
-                    </label>
-                    <textarea
-                      value={workshopContent.scope_of_work}
-                      onChange={e => updateWorkshopContent('scope_of_work', e.target.value)}
-                      placeholder="Enter scope items, one per line"
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm font-mono"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                      Expected Outputs
-                    </label>
-                    <textarea
-                      value={workshopContent.expected_outputs}
-                      onChange={e => updateWorkshopContent('expected_outputs', e.target.value)}
-                      placeholder="Enter expected outputs, one per line"
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm font-mono"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
-                      Priorities / Key Focus Areas
-                    </label>
-                    <textarea
-                      value={workshopContent.priorities}
-                      onChange={e => updateWorkshopContent('priorities', e.target.value)}
-                      placeholder="Enter priorities, one per line"
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm font-mono"
-                    />
-                  </div>
-                </div>
-              )}
-            </section>
-
-            {/* Country Data Section */}
-            <section className="border border-gray-200 rounded-lg overflow-hidden">
-              <button
-                onClick={() => toggleSection('country')}
-                className="w-full px-4 py-3 bg-gray-50 flex items-center gap-2 text-left hover:bg-gray-100 transition-colors"
-              >
-                {expandedSections.has('country') ? (
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-400" />
-                )}
-                <Database className="w-4 h-4 text-fastr-primary" />
-                <span className="text-sm font-semibold text-gray-700">Country Data Variables</span>
-              </button>
-              {expandedSections.has('country') && (
-                <div className="p-4 space-y-4">
-                  <p className="text-xs text-gray-500">
-                    These values are used in slides as {'{{VARIABLE_NAME}}'} placeholders
-                  </p>
-                  <div className="grid grid-cols-2 gap-4">
-                    {COMMON_COUNTRY_FIELDS.map(field => (
-                      <div key={field.key}>
-                        <label className="block text-sm font-medium text-gray-600 mb-1">
-                          {field.label}
-                          <span className="text-xs text-gray-400 ml-1 font-mono">{`{{${field.key}}}`}</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={countryData[field.key] || ''}
-                          onChange={e => updateCountryData(field.key, e.target.value)}
-                          placeholder={field.placeholder}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm"
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Custom fields */}
-                  {customFields.length > 0 && (
-                    <div className="pt-4 border-t border-gray-100 space-y-2">
-                      <h4 className="text-sm font-medium text-gray-600">Custom Variables</h4>
-                      {customFields.map((field, idx) => (
-                        <div key={idx} className="flex gap-2 items-center">
-                          <input
-                            type="text"
-                            value={field.key}
-                            onChange={e => updateCustomField(idx, e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, ''), field.value)}
-                            placeholder="VARIABLE_NAME"
-                            className="w-40 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm font-mono"
-                          />
-                          <input
-                            type="text"
-                            value={field.value}
-                            onChange={e => updateCustomField(idx, field.key, e.target.value)}
-                            placeholder="Value"
-                            className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm"
-                          />
-                          <button
-                            onClick={() => removeCustomField(idx)}
-                            className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <button
-                    onClick={addCustomField}
-                    className="flex items-center gap-1.5 text-sm text-fastr-primary hover:text-fastr-secondary transition-colors"
-                  >
-                    <Plus className="w-4 h-4" />
-                    Add custom variable
-                  </button>
+                  <textarea
+                    value={workshopContent.objectives}
+                    onChange={e => updateWorkshopContent('objectives', e.target.value)}
+                    placeholder="Enter objectives, one per line"
+                    rows={4}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-fastr-secondary focus:border-transparent text-sm"
+                  />
                 </div>
               )}
             </section>

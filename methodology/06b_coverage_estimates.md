@@ -1923,3 +1923,70 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 <!-- /SLIDE -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONDENSED SLIDES: Methods + Interpretation Combined
+═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m6_s3 -->
+## Service coverage estimation
+
+**Coverage** = services delivered ÷ target population
+
+![Coverage equation h:100](resources/diagrams/coverage_equation.svg)
+
+HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years.
+
+---
+
+## How FASTR estimates coverage
+
+**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
+
+**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
+
+**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s4 -->
+## Coverage output: National trends
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Coverage national h:320](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Compare HMIS and survey values - large gaps suggest denominator issues. Projected values extend surveys using HMIS trends.
+
+</div>
+</div>
+
+---
+
+## Coverage output: Subnational comparison
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Coverage subnational h:320](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Coverage estimates by subnational area, enabling geographic comparison.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Identify low-coverage areas for prioritization. Coverage >100% suggests denominator underestimate or double-counting.
+
+</div>
+</div>
+<!-- /SLIDE -->
+

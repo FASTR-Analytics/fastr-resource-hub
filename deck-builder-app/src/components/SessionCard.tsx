@@ -24,6 +24,7 @@ import {
   Sparkles,
   Edit3,
   User,
+  CalendarDays,
 } from 'lucide-react'
 
 interface SessionCardProps {
@@ -41,6 +42,7 @@ interface SessionCardProps {
 const CARD_STYLES: Record<string, { bg: string; border: string; iconBg: string; text: string }> = {
   break: { bg: 'bg-amber-50', border: 'border-amber-200', iconBg: 'bg-amber-100', text: 'text-amber-700' },
   module: { bg: 'bg-blue-50', border: 'border-blue-200', iconBg: 'bg-blue-100', text: 'text-blue-700' },
+  day_title: { bg: 'bg-gradient-to-r from-fastr-primary/10 to-fastr-secondary/10', border: 'border-fastr-primary/40', iconBg: 'bg-fastr-primary', text: 'text-fastr-primary' },
   day_recap: { bg: 'bg-sky-50', border: 'border-sky-200', iconBg: 'bg-sky-100', text: 'text-sky-700' },
   day_end: { bg: 'bg-orange-50', border: 'border-orange-200', iconBg: 'bg-orange-100', text: 'text-orange-700' },
   section: { bg: 'bg-fastr-light', border: 'border-fastr-primary/30', iconBg: 'bg-fastr-primary/20', text: 'text-fastr-primary' },

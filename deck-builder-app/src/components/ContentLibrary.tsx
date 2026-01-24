@@ -44,8 +44,11 @@ export function ContentLibrary() {
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set([0])) // Start with first module expanded
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
+  const [selectedTemplate, setSelectedTemplate] = useState<{ id: string; name: string; path: string | null } | null>(null)
   const [previewContent, setPreviewContent] = useState<string | null>(null)
   const [previewLoading, setPreviewLoading] = useState(false)
+  const [previewTitle, setPreviewTitle] = useState<string>('')
+  const [previewSlideCount, setPreviewSlideCount] = useState<number>(0)
   const [templates, setTemplates] = useState<TemplateCategory[]>([])
   const [expandedTemplates, setExpandedTemplates] = useState<Set<string>>(new Set(['structure']))
   const [showNewSlideModal, setShowNewSlideModal] = useState(false)
@@ -57,40 +60,68 @@ export function ContentLibrary() {
     window.electronAPI.getTemplates().then(setTemplates).catch(console.error)
   }, [])
 
-  // Load preview content when topic is selected
+  // Load preview content when topic or template is selected
   useEffect(() => {
-    if (selectedTopic?.path) {
+    const loadPreview = async (filePath: string) => {
       setPreviewLoading(true)
-      window.electronAPI.readSlide(selectedTopic.path)
-        .then(content => {
-          // Extract first slide content (after frontmatter, before first ---)
-          const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
-          let firstSlide = slides[0] || ''
+      try {
+        const content = await window.electronAPI.readSlide(filePath)
+        // Extract slides (after frontmatter, split by ---)
+        const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
+        setPreviewSlideCount(slides.length)
 
-          // Clean up Marp-specific markup for preview
+        // Combine all slides for preview (or just first few for long content)
+        let previewSlides = slides.slice(0, 3) // Show first 3 slides
+        let combinedPreview = previewSlides.map(slide => {
+          let cleaned = slide
           // Remove <style> blocks
-          firstSlide = firstSlide.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+          cleaned = cleaned.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
           // Remove HTML div wrappers but keep content
-          firstSlide = firstSlide.replace(/<div[^>]*>/gi, '\n')
-          firstSlide = firstSlide.replace(/<\/div>/gi, '\n')
+          cleaned = cleaned.replace(/<div[^>]*>/gi, '\n')
+          cleaned = cleaned.replace(/<\/div>/gi, '\n')
           // Remove HTML comments (Marp directives)
-          firstSlide = firstSlide.replace(/<!--[\s\S]*?-->/g, '')
+          cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, '')
           // Remove class attributes from remaining tags
-          firstSlide = firstSlide.replace(/class="[^"]*"/gi, '')
+          cleaned = cleaned.replace(/class="[^"]*"/gi, '')
+          // Remove background image directives
+          cleaned = cleaned.replace(/!\[bg[^\]]*\]\([^)]*\)/g, '')
           // Clean up extra whitespace
-          firstSlide = firstSlide.replace(/\n{3,}/g, '\n\n').trim()
+          cleaned = cleaned.replace(/\n{3,}/g, '\n\n').trim()
+          return cleaned
+        }).join('\n\n---\n\n')
 
-          setPreviewContent(firstSlide)
-        })
-        .catch(err => {
-          console.error('Error loading preview:', err)
-          setPreviewContent(null)
-        })
-        .finally(() => setPreviewLoading(false))
+        setPreviewContent(combinedPreview)
+      } catch (err) {
+        console.error('Error loading preview:', err)
+        setPreviewContent(null)
+      } finally {
+        setPreviewLoading(false)
+      }
+    }
+
+    if (selectedTopic?.path) {
+      setPreviewTitle(selectedTopic.title)
+      loadPreview(selectedTopic.path)
+    } else if (selectedTemplate?.path) {
+      setPreviewTitle(selectedTemplate.name)
+      loadPreview(selectedTemplate.path)
     } else {
       setPreviewContent(null)
+      setPreviewTitle('')
+      setPreviewSlideCount(0)
     }
-  }, [selectedTopic])
+  }, [selectedTopic, selectedTemplate])
+
+  // Clear template when topic is selected and vice versa
+  const handleSelectTopic = (topic: Topic | null) => {
+    setSelectedTemplate(null)
+    setSelectedTopic(topic)
+  }
+
+  const handleSelectTemplate = (template: { id: string; name: string; path: string | null } | null) => {
+    setSelectedTopic(null)
+    setSelectedTemplate(template)
+  }
 
   const toggleModule = (moduleNum: number) => {
     const newExpanded = new Set(expandedModules)
@@ -209,7 +240,12 @@ Add your content here...
                 {expandedTemplates.has(category.id) && (
                   <div className="bg-gray-50/50 py-1">
                     {category.templates.map(template => (
-                      <TemplateItem key={template.id} template={template} />
+                      <TemplateItem
+                        key={template.id}
+                        template={template}
+                        onSelect={() => template.path ? handleSelectTemplate({ id: template.id, name: template.name, path: template.path }) : null}
+                        isSelected={selectedTemplate?.id === template.id}
+                      />
                     ))}
                   </div>
                 )}
@@ -235,7 +271,7 @@ Add your content here...
             module={module}
             isExpanded={expandedModules.has(module.number)}
             onToggle={() => toggleModule(module.number)}
-            onSelectTopic={setSelectedTopic}
+            onSelectTopic={handleSelectTopic}
             selectedTopicId={selectedTopic?.id}
           />
         ))}
@@ -269,19 +305,24 @@ Add your content here...
         )}
       </div>
 
-      {/* Selected topic preview */}
-      {selectedTopic && (
+      {/* Selected topic/template preview */}
+      {(selectedTopic || selectedTemplate) && (
         <div className="border-t border-gray-200 bg-white flex flex-col" style={{ maxHeight: '280px' }}>
           {/* Header */}
           <div className="flex items-center justify-between p-2 border-b border-gray-100 bg-gray-50">
             <div className="flex items-center gap-2 min-w-0">
               <Eye className="w-4 h-4 text-fastr-secondary flex-shrink-0" />
-              <span className="text-sm font-medium text-gray-800 truncate">{selectedTopic.title}</span>
+              <span className="text-sm font-medium text-gray-800 truncate">{previewTitle}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400">{selectedTopic.slideCount} slides</span>
+              <span className="text-xs text-gray-400">
+                {previewSlideCount > 0 ? `${previewSlideCount} slide${previewSlideCount > 1 ? 's' : ''}` : ''}
+              </span>
               <button
-                onClick={() => setSelectedTopic(null)}
+                onClick={() => {
+                  setSelectedTopic(null)
+                  setSelectedTemplate(null)
+                }}
                 className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded"
               >
                 <X className="w-3.5 h-3.5" />
@@ -304,21 +345,24 @@ Add your content here...
                     ul: ({children}) => <ul className="text-xs text-gray-600 ml-3 mb-1.5 list-disc">{children}</ul>,
                     li: ({children}) => <li className="mb-0.5">{children}</li>,
                     strong: ({children}) => <strong className="font-semibold text-gray-800">{children}</strong>,
+                    hr: () => <hr className="my-2 border-gray-200" />,
                     img: () => <span className="inline-block bg-gray-200 text-gray-500 text-xs px-2 py-0.5 rounded">[image]</span>,
                   }}
                 >
                   {previewContent}
                 </ReactMarkdown>
               </div>
-            ) : (
+            ) : selectedTopic?.slideTitles ? (
               <div className="space-y-1">
-                {selectedTopic.slideTitles?.map((title, i) => (
+                {selectedTopic.slideTitles.map((title, i) => (
                   <div key={i} className="text-xs text-gray-600 flex items-start gap-2">
                     <span className="text-gray-400 w-4 text-right">{i + 1}.</span>
                     <span className="truncate">{title}</span>
                   </div>
                 ))}
               </div>
+            ) : (
+              <div className="text-xs text-gray-400 text-center py-4">No preview available</div>
             )}
           </div>
         </div>
@@ -532,7 +576,7 @@ function TopicItem({
 }
 
 // Template item component
-function TemplateItem({ template }: {
+function TemplateItem({ template, onSelect, isSelected }: {
   template: {
     id: string
     name: string
@@ -541,6 +585,8 @@ function TemplateItem({ template }: {
     path: string | null
     preview: string
   }
+  onSelect: () => void
+  isSelected: boolean
 }) {
   const getIcon = () => {
     switch (template.icon) {
@@ -557,13 +603,24 @@ function TemplateItem({ template }: {
       case 'heart': return <FileText className="w-4 h-4 text-pink-500" />
       case 'chart': return <BarChart3 className="w-4 h-4 text-green-500" />
       case 'arrow': return <ArrowRight className="w-4 h-4 text-fastr-primary" />
+      case 'welcome': return <FileText className="w-4 h-4 text-green-600" />
+      case 'people': return <FileText className="w-4 h-4 text-blue-600" />
+      case 'calendar': return <FileText className="w-4 h-4 text-purple-500" />
+      case 'sticky': return <FileText className="w-4 h-4 text-yellow-600" />
+      case 'demo': return <FileText className="w-4 h-4 text-indigo-500" />
       default: return <FileText className="w-4 h-4 text-gray-400" />
     }
   }
 
+  const hasPreview = template.path && !template.special
+
   return (
     <div
-      className="mx-2 my-1 flex items-center gap-2 p-2 rounded-md hover:bg-white cursor-grab border border-transparent hover:border-gray-200 transition-all"
+      className={`mx-2 my-1 flex items-center gap-2 p-2 rounded-md cursor-grab border transition-all ${
+        isSelected
+          ? 'border-fastr-secondary bg-white shadow-sm'
+          : 'border-transparent hover:bg-white hover:border-gray-200'
+      }`}
       draggable
       onDragStart={e => {
         e.dataTransfer.setData('slideType', 'template')
@@ -575,10 +632,22 @@ function TemplateItem({ template }: {
     >
       <GripVertical className="w-4 h-4 text-gray-300" />
       {getIcon()}
-      <div className="flex-1 min-w-0">
-        <span className="text-sm text-gray-700">{template.name}</span>
+      <div className="flex-1 min-w-0 flex items-center gap-2">
+        <span className="text-sm text-gray-700 flex-1">{template.name}</span>
         {template.special && (
-          <span className="ml-1.5 text-xs text-gray-400">(auto)</span>
+          <span className="text-xs text-gray-400">(auto)</span>
+        )}
+        {hasPreview && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onSelect()
+            }}
+            className="p-1 text-gray-400 hover:text-fastr-secondary rounded"
+            title="Preview slide"
+          >
+            <Eye className="w-3.5 h-3.5" />
+          </button>
         )}
       </div>
     </div>

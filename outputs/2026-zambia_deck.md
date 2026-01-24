@@ -340,13 +340,11 @@ While statistical methods such as imputation can be used to address incomplete d
 
 ![Data prep checklist h:280](../resources/screenshots/data_prep_checklist.png)
 
-The FASTR Data Prep Checklist has been shared with countries.
-
-The checklist includes the FASTR core RMNCAH-N indicators.
-
-Countries have added additional indicators that may be particularly relevant to the country context (e.g., indicators related to services expected to be impacted by recent funding shifts, priority indicators for the government and/or the WB project).
-
-These are the indicators included in the current analysis. Countries can continue to add indicators over time as needed for their use case(s).
+- The FASTR Data Prep Checklist has been shared with countries
+- The checklist includes the FASTR core RMNCAH-N indicators
+- Countries have added additional indicators relevant to their context (e.g., services impacted by funding shifts, government priorities)
+- These are the indicators included in the current analysis
+- Countries can continue to add indicators over time as needed
 
 ---
 
@@ -472,169 +470,6 @@ The Data Downloader is available at: https://github.com/worldbank/DHIS2-Download
 
 
 
-## DHIS2 Data Downloader
-
-The Data Downloader is a desktop application for extracting data from DHIS2.
-
-**Key features:**
-- Connect to any DHIS2 instance
-- Browse and select data elements and indicators
-- Download facility-level data in CSV format
-- Maintain download history
-
-**Download from GitHub:**
-
-https://github.com/worldbank/DHIS2-Downloader/releases/
-
-![demo h:35](../resources/icons/demo.svg) *Facilitator will demonstrate the Data Downloader*
-
----
-
-
-
-## Data Downloader: Login
-
-<div class="columns">
-<div>
-
-![Data Downloader login screen h:380](../resources/screenshots/data_downloader/01_login.png)
-
-</div>
-<div>
-
-**Connect to your DHIS2 instance**
-
-- Enter your DHIS2 server URL
-- Provide your username and password
-- The tool securely stores credentials for future sessions
-
-</div>
-</div>
-
----
-
-
-
-## Data Downloader: Overview
-
-<div class="columns">
-<div>
-
-![Data Downloader overview h:380](../resources/screenshots/data_downloader/02_overview.png)
-
-</div>
-<div>
-
-**Main interface**
-
-- Browse available data elements and indicators
-- Select time periods and organization units
-- Configure download options
-- Start data extraction
-
-</div>
-</div>
-
----
-
-
-
-## Data Downloader: Download history
-
-<div class="columns">
-<div>
-
-![Data Downloader history h:380](../resources/screenshots/data_downloader/03_history.png)
-
-</div>
-<div>
-
-**Track your downloads**
-
-- View all previous download sessions
-- Re-download data with same parameters
-- Access download logs and status
-- Manage downloaded files
-
-</div>
-</div>
-
----
-
-
-
-## Data Downloader: Data dictionary
-
-<div class="columns">
-<div>
-
-![Data Downloader dictionary h:380](../resources/screenshots/data_downloader/04_dictionary.png)
-
-</div>
-<div>
-
-**Explore available data**
-
-- Browse all data elements from your DHIS2
-- Search by name or code
-- View metadata and definitions
-- Identify indicators for your analysis
-
-</div>
-</div>
-
----
-
-
-
-## Data Downloader: Facility list
-
-<div class="columns">
-<div>
-
-![Data Downloader facility list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
-
-</div>
-<div>
-
-**Facility management**
-
-- View complete facility list
-- Filter by administrative level
-- Search by facility name
-- Export facility data
-
-</div>
-</div>
-
----
-
-
-
-## Data Downloader: Facility map
-
-<div class="columns">
-<div>
-
-![Data Downloader facility map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
-
-</div>
-<div>
-
-**Geographic visualization**
-
-- Download GeoJSON boundary files
-- Toggle administrative boundaries by level (Level 1 = country, Level 2 = regions, etc.)
-- Higher levels display facility points
-- Useful for verifying geographic structure
-
-</div>
-</div>
-
----
-
-
-
 ## Data extraction
 
 <div class="columns">
@@ -645,10 +480,20 @@ The FASTR analytics platform contains a direct import feature to automatically i
 </div>
 <div>
 
-![Platform import h:380](../resources/screenshots/platform_import.png)
+![Direct import h:480](../resources/screenshots/direct_import.png)
 
 </div>
 </div>
+
+---
+
+
+
+## Activity: Data downloader – LIVE Demo and practice
+
+![w:60](../resources/icons/hands_on.svg)
+
+![Data Downloader login screen h:380](../resources/screenshots/data_downloader/01_login.png)
 
 ---
 
@@ -662,18 +507,24 @@ The FASTR analytics platform contains a direct import feature to automatically i
 ---
 
 
-## Introduction to the FASTR Analytics Platform
+## FASTR analytics platform
 
-The FASTR analytics platform is a web-based tool for data quality assessment, adjustment, and analysis of routine health data.
+<div class="columns">
+<div>
 
-**Key features:**
+The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
 
-- Upload and analyze data from DHIS2 and other sources
-- Built-in statistical methods for data quality adjustment
-- User-friendly interface for running analyses
-- Flexible visualization and export options
+It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
 
-**In this session, we will provide a conceptual walkthrough of the platform and its capabilities.**
+The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
+
+</div>
+<div>
+
+![FASTR platform h:380](../workshops/2026-zambia/media/fastr_platform.png)
+
+</div>
+</div>
 
 ---
 
@@ -715,14 +566,20 @@ An instance contains:
 
 There are two levels of permissions in the platform:
 
+&nbsp;
+
 **Instance-level roles:**
 
 - **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+
+&nbsp;
 
 **Project-level roles:**
 
 - **Project Editors** can create visualizations, create reports, and download/export results
 - **Project Viewers** can view visualizations, view reports, and download/export results
+
+&nbsp;
 
 *Administrators are assigned per instance; Editors and Viewers are assigned per project.*
 
@@ -785,21 +642,6 @@ table img { max-height: 280px !important; width: auto !important; }
 ---
 
 
-
-## Live Demo: Platform Access & Roles
-
-![demo h:40](../resources/icons/demo.svg) **In this demo, we will:**
-
-- Navigate to the FASTR platform
-- Explore user roles: Administrator, Editor, Viewer
-- Review user management and permissions
-- Understand the workflow for uploading data and making analytical decisions
-
-*Facilitator will demonstrate in the live platform*
-
----
-
-
 # <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
@@ -816,6 +658,21 @@ Back at 14:00
 # Session 5: Configuring the FASTR analytics platform
 
 ---
+
+
+## Configuring the analysis platform
+
+- Configuration of the analysis platform is an admin feature
+
+- We will work together to configure the following items:
+  - Admin areas (regions, districts)
+  - Facility structure
+  - Indicator definitions
+
+- Note since this is an admin feature all participants will NOT be doing this step. Instead, you will select one person to have admin rights, and they will help us walk through these steps.
+
+---
+
 
 
 ## Activity: Setting Up Admin Areas
@@ -860,14 +717,11 @@ Back at 14:00
 
 
 
-# Day 1 Key Messages
+## Key messages and wrap-up
 
-Today we covered:
+---
 
-- Overview of the FASTR approach and methodology
-- Data extraction methods and tools for DHIS2
-- Introduction to the FASTR Analytics Platform
-- Initial platform configuration for Zambia
+## Reflections from participants
 
 ---
 
@@ -877,25 +731,9 @@ Today we covered:
 ---
 
 
-# Recap
+# Recap of day 1
 
-On Day 1, we covered:
-
-- The FASTR approach and rapid-cycle analytics methodology
-- Data extraction from DHIS2 using the Data Downloader
-- Introduction to the FASTR Analytics Platform
-- Platform configuration: admin areas, data import, modules
-
----
-
-# Day 2 Focus
-
-Today we will:
-
-- Explore FASTR methods for data quality and analysis
-- Create and configure projects
-- Build visualizations
-- Generate reports
+![w:120](../resources/icons/thought.png)
 
 ---
 
@@ -908,8 +746,8 @@ Today we will:
 <table>
 <tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
 <tr><td>09:00-09:15</td><td>Recap and Day 2 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 6: Overview of FASTR methods and analytical outputs</strong></td></tr>
-<tr><td>09:15-10:15</td><td>Data quality, service utilization, coverage</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 6: Overview of FASTR methods and interpretation</strong></td></tr>
+<tr><td>09:15-10:15</td><td>Data quality, service utilization, coverage: Methods and interpretation</td><td>GFF FASTR team</td></tr>
 <tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 7: Creating a project</strong></td></tr>
 <tr><td>10:15-11:15</td><td>Project creation and settings</td><td>GFF FASTR team</td></tr>
 <tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 8: Creating visualizations</strong></td></tr>
@@ -926,40 +764,48 @@ Today we will:
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 6: Overview of FASTR methods and analytical outputs
+# Session 6: Overview of FASTR methods and interpretation
 
 ---
 
 
 ## FASTR analytical pipeline
 
-![Analytical Pipeline h:390](../resources/diagrams/analytical_pipeline.svg)
-
-The FASTR analysis follows a sequential workflow where each step builds on the previous:
+The FASTR analysis follows a sequential workflow:
 
 1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
+![Analytical Pipeline h:280](../resources/diagrams/analytical_pipeline.svg)
+
+---
+
+## FASTR approach to data quality
+
+FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**.
+
+- Conduct granular, facility-level data quality assessments
+- Focus on high-volume indicators that produce more stable estimates
+- Emphasize variation over time and space rather than point estimates
+- Interpret results collaboratively with in-country decision-makers
+
+**Using data and providing feedback is viewed as the first step toward improving data quality.**
+
 ---
 
 
 
-## Data quality assessment - Module 1
-
-Evaluating the reliability of routine health information system data
-
----
 ## Rationale for data quality assessment
 
 **Challenge:** Routine health facility data may contain quality limitations:
-- Reported values may fall outside plausible ranges
-- Reporting gaps affect data completeness
-- Inconsistencies exist between related indicators
+- Reported values outside plausible ranges
+- Reporting gaps affecting completeness
+- Inconsistencies between related indicators
 
-**Implications:** Data quality limitations affect decision-making
-- Inaccurate assessments of service delivery trends
-- Misidentification of areas requiring intervention
+**Implications:** These limitations can distort decision-making:
+- Inaccurate assessment of service delivery trends
+- Misidentification of areas needing intervention
 - Suboptimal resource allocation
 
 ---
@@ -967,29 +813,12 @@ Evaluating the reliability of routine health information system data
 ## Objectives of data quality assessment
 
 **Objective 1: Enable analytical adjustment**
-
-Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+Systematic assessment supports targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
 
 **Objective 2: Monitor data quality trends**
-
-Data quality assessment enables ongoing monitoring to:
-- Inform indicator selection based on quality profiles across the HMIS
-- Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
-- Evaluate the effectiveness of data quality improvement initiatives over time
-
----
-## Core dimensions of data quality
-
-**1. Completeness**
-Are health facilities submitting reports consistently?
-
-**2. Outlier prevalence**
-Are reported values within plausible ranges?
-
-**3. Internal consistency**
-Do related indicators demonstrate expected relationships?
-
-These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.
+- Inform indicator selection based on quality profiles
+- Guide targeted interventions and supportive supervision
+- Evaluate effectiveness of improvement initiatives over time
 
 ---
 
@@ -997,375 +826,31 @@ These three dimensions provide a comprehensive assessment of data reliability fo
 
 ## Indicator completeness
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+Indicator completeness measures whether facilities that should be reporting data on specific indicators are actually doing so. This is different from overall reporting completeness - we're looking at specific data elements, not just whether the monthly form was submitted.
 
-**What it measures:** The extent to which facilities report data on selected core indicators
+**Definition:** Percentage of facilities reporting each month out of facilities expected to report.
+- A facility is "reporting" if there is a non-missing, non-zero value for the indicator that month
+- A facility is "expected to report" if it has reported any volume for that indicator within the past year
 
-**Why it matters:**
-- Higher completeness improves data reliability
-- Stability over time strengthens trend analysis
-
-**Key distinction:**
-Indicator completeness ≠ reporting completeness. This metric examines specific data elements, not just whether the monthly form was submitted.
-
-</div>
-<div style="flex: 2;">
-
-![Completeness Illustration](../resources/diagrams/completeness_illustration.svg)
-
-</div>
-</div>
+Higher and stable completeness improves data reliability.
 
 ---
 
-## Definition of indicator completeness
+## Indicator completeness output
 
-For the FASTR analysis, completeness is defined as:
-
-**The percentage of reporting facilities each month out of the total number of facilities expected to report.**
-
-- A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
-- A facility is expected to report if it has reported any volume for that indicator anytime within a year
-- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
-
----
-
-## Notes on completeness
-
-- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
-
-- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
-
-
----
-
-## Completeness: Percent of monthly values that are complete
-
-<p style="font-size: 0.9em; margin-bottom: 0.5rem;">For a given indicator in a given time period, the percent of monthly values that are complete:</p>
-
-<p style="font-size: 0.9em;"><strong>% complete = # monthly values that are complete / total N of monthly values</strong></p>
-
-![Indicator Completeness h:340](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
-
----
-
-
-
-## Outliers
-
-The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series.
-
-Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems.
-
-For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis).
-
----
-
-## Outlier illustration
-
-Region A displays an anomalous spike in February that substantially exceeds values reported by other regions — indicative of a data entry error or reporting issue.
-
-![Outlier Impact](../resources/diagrams/outlier_impact.svg)
-
----
-
-## Outlier detection methodology
-
-Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
-
-An outlier is defined as:
-
-A value greater than **10 times the median absolute deviation (MAD)** from the monthly median value for the indicator in each time period, **OR** a value for which the proportional contribution in volume for a facility, indicator, and time period is **greater than 80%**
-
-**AND** for which:
-
-- The volume is **greater than or equal to the median**
-- The volume is **not missing**
-- The volume is **greater than 100**
-
----
-
-## Outliers: Percent of monthly values that are outliers
-
-For a given indicator in a given time period, the percent of monthly values that are outliers:
-
-**% outliers = # monthly values that are outliers / total N of monthly values**
-
-![Outliers h:340](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
-
----
-
-
-
-## Consistency between related indicators
-
-Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
-
----
-
-## Indicator pairs assessed
-
-<div class="columns">
-<div>
-
-| Indicator pair | Expected relationship |
-|----------------|----------------------|
-| ANC1 / ANC4 | Ratio should be ≥ 0.95 |
-| Penta1 / Penta3 | Ratio should be ≥ 0.95 |
-| BCG / Facility delivery | Within 30% (≥0.7 and ≤1.3) |
-
-These pairs have expected relationships. We expect ANC1 > ANC4 since not all women complete four visits.
-
-BCG is a birth dose vaccine so we expect similar numbers to facility deliveries, with a 30% tolerance for variability.
-
-</div>
-<div>
-
-![Consistency illustration h:280](../resources/diagrams/consistency_illustration.svg)
-
-</div>
-</div>
-
----
-
-## Why assess consistency at district level?
-
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
-
-Patients often access different services at different facilities within a district:
-
-- A woman may attend **ANC1** at a nearby health post, but travel to a health centre for **ANC4**
-- A child may receive **Penta1** at a local clinic, but complete **Penta3** at a district hospital
-
-Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
-
-</div>
-<div style="flex: 2;">
-
-![District consistency](../resources/diagrams/district_consistency.svg)
-
-</div>
-</div>
-
----
-
-## Internal consistency: FASTR output
-
-![Internal Consistency h:420](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
-
----
-
-
-
-## Data quality summary score
-
-A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
-
-By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
-
----
-
-## Definition of adequate data quality
-
-For the FASTR analysis, we defined adequate data quality as:
-
-- No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
-- No outliers for OPD, Penta1, and ANC1, where available, **AND**
-- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
-
----
-
-## Overall DQA score: Percent of monthly values meeting all criteria
-
-For a given indicator in a given time period, the percent of monthly values meeting all DQA criteria:
-
-**% adequate quality = # monthly values meeting all criteria / total N of monthly values**
-
-![Overall DQA Score h:340](../resources/default_outputs/Default_5._Overall_DQA_score.png)
-
----
-
-## Mean DQA score: How close are we to adequate quality?
-
-The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
-
-**Mean DQA = (completeness & outlier score + consistency score) / 2**
-
-
-![Mean DQA Score h:320](../resources/default_outputs/Default_6._Mean_DQA_score.png)
-
----
-
-
-
-## DQA module: Configuration parameters
-
-| Parameter | Description |
-|-----------|-------------|
-| **Proportion threshold for outlier detection** | Adjusts the threshold for proportional contribution to flag a facility-month as an outlier |
-| **Minimum count threshold for consideration** | Defines the minimum count required for a facility-month to be considered an outlier |
-| **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
-| **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
-| **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
-
----
-
-
-
-## Data quality adjustment - Module 2
-
-Correcting outliers and imputing missing values to improve data reliability
-
----
-
-## Rationale for data quality adjustment
-
-Routine HMIS data contain two common limitations that can distort analytical results:
-
-| Issue | Impact on analysis |
-|-------|-------------------|
-| **Outliers** | Extreme values create artificial spikes in service volumes |
-| **Incomplete reporting** | Missing data creates artificial declines that do not reflect actual service delivery |
-
-FASTR addresses these limitations by replacing problematic values with estimates derived from each facility's historical reporting patterns.
-
----
-
-## Adjustment scenarios
-
-To support transparency and sensitivity analysis, FASTR produces four parallel datasets:
-
-| Scenario | Description |
-|----------|-------------|
-| **Unadjusted** | Original reported values |
-| **Outliers adjusted** | Extreme values replaced |
-| **Completeness adjusted** | Missing values imputed |
-| **Both adjusted** | All corrections applied |
-
----
-
-## Indicators excluded from adjustment
-
-Certain indicators are excluded from the adjustment process:
-
-- **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
-- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment
-
----
-
-
-
-## Outlier adjustment methodology
-
-Outlier values are replaced using facility-specific historical data. The adjustment follows a hierarchical approach:
-
-| Priority | Method | Application |
-|----------|--------|-------------|
-| 1 | Centered 6-month average | 3 months before + 3 months after the outlier |
-| 2 | Forward 6-month average | When insufficient preceding data (e.g., start of series) |
-| 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
-| 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
-| 5 | Facility historical mean | Mean of all valid values for this indicator at this facility |
-
----
-
-## Outlier adjustment: FASTR output
-
-![Percent change in volume due to outlier adjustment. h:380](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
-
----
-
-
-
-## Completeness adjustment methodology
-
-For months identified as incomplete or missing, values are imputed using the same 6-month rolling average approach applied to outlier adjustment.
-
-| Priority | Method | Application |
-|----------|--------|-------------|
-| 1 | Centered 6-month average | When sufficient data exists before and after the gap |
-| 2 | Forward 6-month average | For gaps at the start of the time series |
-| 3 | Backward 6-month average | For gaps at the end of the time series |
-| 4 | Facility historical mean | Mean of all valid values for this indicator at this facility |
-
-This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
-
----
-
-## Completeness adjustment: FASTR output
-
-![Percent change in volume due to completeness adjustment. h:380](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
-
----
-
-
-
-## Combined adjustment: FASTR output
-
-![Percent change in volume due to both outlier and completeness adjustment. h:380](../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
-
----
-
-
-
-## Service utilization analysis - Module 3
-
-Detecting and quantifying changes in health service delivery over time
-
----
-
-## Objectives
-
-**1. Measure changes in service volume**
-
-Year-over-year comparison of service volumes identifies increases or decreases across regions and indicators.
-
-**2. Detect and quantify disruptions**
-
-Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
-
----
-
-## Service utilization over time
-
-![Service utilization over time h:420](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
-
----
-
-
-
-## Year-over-year change
-
-**Year-over-year percent change** quantifies shifts in service delivery between consecutive years.
-
-For each indicator and region, total volume in the current year is compared to the previous year:
-
-**Percent change** = (Current year − Previous year) ÷ Previous year × 100
-
-Changes exceeding **±10%** are flagged for review.
-
----
-
-## Output: Change in service volume
-
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Change in service volume h:340](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Completeness output h:320](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
-<div style="flex: 1;">
+<div style="flex: 1; font-size: 0.85em;">
 
-### Interpretation
+**What you see:** Heatmap showing completeness by indicator and region over time.
 
-**Bars** show annual service volumes by region. **Percentages** indicate year-over-year change.
+**Formula:** Completeness % = (facilities reporting / facilities expected) × 100
 
-**Key considerations:**
-- Which regions exhibit the largest changes?
-- Are changes consistent across regions or geographically concentrated?
-- Do patterns vary by indicator?
+**Interpretation:** Look for systematic gaps by region or indicator, declining trends, or seasonal patterns. Low completeness suggests reporting barriers needing attention.
 
 </div>
 </div>
@@ -1374,253 +859,31 @@ Changes exceeding **±10%** are flagged for review.
 
 
 
-## Disruption detection
+## Outlier detection
 
-Our approach to service disruptions and surpluses utilizes an interrupted time series regression with facility-level fixed effects. Previous large and unexpected changes in historical data are removed. Unexpected volume changes are estimated by comparing observed volume to expected volume based on historical trends and seasonality.
+Outliers are values that are suspiciously **high** compared to a facility's usual reporting volume. They may result from data entry errors or genuine programmatic changes (e.g., campaigns).
 
----
+**Note:** FASTR only flags high values as outliers - unusually low values are not flagged, as these more likely reflect service disruptions than data errors.
 
-## Disruptions and surpluses
-
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
-
-**Disruptions** are flagged when volumes fall below anticipated levels, signaling potential barriers to access, resource shortages, or system failures.
-
-**Surpluses** occur when volumes exceed expectations, which may indicate increased demand, over-reporting, or changes in service delivery.
-
-</div>
-<div style="flex: 2;">
-
-![Disruption and surplus example h:300](../resources/diagrams/disruption_chart.png)
-
-</div>
-</div>
+**How outliers are identified:** For each facility and indicator, we assess within-facility variation in monthly reporting. A value is flagged if it deviates significantly from the facility's typical pattern (using statistical thresholds based on median absolute deviation).
 
 ---
 
-## How it works
+## Outlier detection output
 
-**Using past data to set expectations:** We look at the past few years of data to understand the typical pattern for each month, accounting for regular seasonal changes.
-
-**Spotting unusual changes:** We compare current service volumes to expectations. If we see volumes much higher or lower than expected, we flag it as an unusual change.
-
-**Handling past disruptions:** We adjust historical data by removing previous big, unexpected changes so one-off events don't skew our understanding of what's "normal."
-
-**Detecting disruptions over time:** We look at trends to see if there are clear shifts in health service use over several months.
-
----
-
-## Comparison to DHIS2
-
-Extension of service utilization analysis, using more complex statistical approaches not available in DHIS2.
-
-Using a regression framework, we are able to:
-
-- Account for seasonality
-- Exclude unusual changes to ensure one-off events aren't influencing normal trends
-- Use historical data as a baseline for context
-- Detect disruptions and recovery patterns
-- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
-
-This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
-
----
-
-
-
-## Output: Actual vs expected (national)
-
-![Actual vs expected national h:380](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
-
-<p style="font-size: 0.8em; color: #666;">National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
-
----
-
-## Output: Actual vs expected (subnational)
-
-![Actual vs expected subnational h:380](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
-
-<p style="font-size: 0.8em; color: #666;">Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
-
----
-
-
-
-## Service utilization module: Configuration parameters
-
-<div style="font-size: 0.8em;">
-
-| Parameter | Description |
-|-----------|-------------|
-| **Count variable to use for modeling** | Which adjusted count to use for calculating expected values |
-| **Count variable to use for visualization** | Which adjusted count to use as actual observed values |
-| **Run district-level model** | Run regressions at admin_area_3 level. Set to Yes for detailed analysis, No for faster runtime |
-| **Run admin_area_4 analysis** | Run finest-level analysis. Warning: can be very slow for large datasets |
-| **Threshold for MAD-based control limits** | Number of MADs to flag sharp deviations. Default 1.5; higher = less sensitive |
-| **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
-| **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
-| **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
-
-</div>
-
----
-
-
-
-## Service coverage estimates - Module 4
-
-Estimating the percentage of the target population that received a given health service
-
----
-
-## Our approach to service coverage analysis
-
-Our approach derives and validates population denominators, significantly improving coverage estimates reported from HMIS systems.
-
-In countries with accurate data, this approach helps identify subnational inequities and updates outdated estimates, while in countries with less precise data, the trends still provide valuable insights into performance.
-
-We use these estimates to track recent trends and subnational disparities in the coverage of selected health services.
-
----
-
-## Two-part analytical process
-
-The coverage estimation module operates in two sequential parts:
-
-| Part | Components |
-|------|------------|
-| **Part 1: Denominator calculation** | Calculate target populations using multiple methods; compare against survey benchmarks; select optimal denominator for each indicator |
-| **Part 2: Coverage estimation** | Apply denominator selections; project survey estimates forward using HMIS trends; generate final coverage estimates |
-
----
-
-
-
-## What is service coverage?
-
-**Service coverage** represents the proportion of the target population that received a specified health service.
-
-![Coverage equation](../resources/diagrams/coverage_equation.svg)
-
----
-
-
-
-## Denominators by service type
-
-Each health indicator corresponds to a specific target population:
-
-| Service | Target population (denominator) |
-|---------|--------------------------------|
-| ANC1, ANC4 | Pregnant women |
-| Institutional delivery | Live births |
-| BCG | Live births |
-| Penta1, Penta3 | Infants surviving beyond neonatal period |
-| Measles1, Measles2 | Infants surviving beyond infancy |
-
----
-
-
-
-## Demographic cascade
-
-Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
-
-![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
-
----
-
-
-
-## Denominator cascade: Illustration
-
-<p style="font-size: 0.85em;">Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:</p>
-
-![Denominator cascade example h:380](../resources/diagrams/denominator_cascade_example.svg)
-
----
-
-
-
-## Forward and backward derivation
-
-From any entry point, the cascade derives denominators in both directions:
-
-| Direction | Method | Example from Penta1 |
-|-----------|--------|---------------------|
-| **Forward** | Apply mortality/attrition rates | DPT-eligible → Measles1-eligible → Measles2-eligible |
-| **Backward** | Reverse mortality rates (add deaths back) | DPT-eligible → Live births → Births → Deliveries → Pregnancies |
-
-Backward derivation enables estimation of upstream populations from downstream service counts.
-
----
-
-
-
-## Denominators by entry point
-
-<style scoped>
-table { font-size: 0.75em; }
-th, td { padding: 0.3em 0.5em !important; }
-</style>
-
-Each HMIS indicator serves as an entry point. The module derives all target populations via forward and backward cascades:
-
-| Entry point | Base calculation | Forward derivation | Backward derivation |
-|-------------|------------------|-------------------|---------------------|
-| **ANC1** | ANC1 ÷ coverage → Pregnancies | Deliveries → Live births → DPT-eligible → Measles-eligible | — |
-| **Deliveries** | Deliveries ÷ coverage → Deliveries | Live births → DPT-eligible → Measles-eligible | Pregnancies |
-| **BCG** | BCG ÷ coverage → Live births | DPT-eligible → Measles-eligible | Deliveries → Pregnancies |
-| **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles1-eligible → Measles2-eligible | Live births → Births → Deliveries → Pregnancies |
-| **UN WPP** | Crude birth rate × population → Pregnancies, live births; Under-1 pop → DPT, measles | Applies mortality rates for measles denominators | — |
-
----
-
-
-
-## Automatic denominator selection
-
-For each indicator, the module selects the denominator that produces coverage closest to the survey benchmark.
-
-**Selection algorithm:**
-
-1. Calculate coverage using each denominator option
-2. Calculate squared error against survey: $(coverage - survey)^2$
-3. Apply selection hierarchy (HMIS-based denominators prioritized over UN WPP)
-4. Select the HMIS-based denominator with minimum error
-
-Selection is made per indicator and geographic area. Users may override automatic selections in Part 2.
-
----
-
-
-
-## Coverage projection methodology
-
-The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
-
-![Coverage projection method](../resources/diagrams/coverage_projection.svg)
-
-Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
-
----
-
-
-
-## Coverage (national)
-
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Coverage calculated from HMIS data at national level. h:340](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Outliers output h:320](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div style="flex: 1;">
+<div style="flex: 1; font-size: 0.85em;">
 
-### Interpretation
+**What you see:** Heatmap showing proportion of values flagged as outliers by indicator and region.
 
-**Black line/points** show survey data (DHS/MICS) as the household survey reference. **Grey line/points** show HMIS-based coverage from facility data. **Red line/points** show projected coverage — survey estimates extended using HMIS trends.
+**Formula:** Outlier % = (values flagged / total values) × 100
+
+**Interpretation:** High rates may indicate data entry errors or legitimate events like campaigns. Review facility registers to distinguish between the two.
 
 </div>
 </div>
@@ -1629,41 +892,267 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 
 
-## Coverage (subnational)
+## Internal consistency
 
-![Coverage calculated from HMIS data at admin area 2 level. h:420](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+Internal consistency checks whether related indicators maintain expected logical relationships. For example, ANC1 should always be ≥ ANC4 (you can't have a 4th visit without a 1st). Similarly, Penta1 ≥ Penta3. When these relationships are violated, it signals data quality issues like double-counting, under-reporting, or data flow errors.
 
----
-
-
-
-## Coverage (subnational)
-
-![Coverage calculated from HMIS data at subnational level. h:420](../resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
+FASTR assesses consistency at the **district level** rather than facility level. This is because patients frequently seek care from different facilities within the same district - a woman may have her ANC1 visit at a health post but travel to the district hospital for ANC4. Assessing at district level accounts for this patient movement.
 
 ---
 
+## Internal consistency output
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
-## Coverage module: Configuration parameters
-
-<div style="font-size: 0.8em;">
-
-| Parameter | Description |
-|-----------|-------------|
-| **Count value to use** | Which adjusted count to use for coverage calculation |
-| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
-| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
-| **Twin rate** | Proportion of deliveries resulting in twins |
-| **Stillbirth rate** | Proportion of births that are stillbirths |
-| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
-| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
-| **Infant mortality rate** | Deaths before age 1 per live birth |
-| **Under 5 mortality rate** | Deaths before age 5 per live birth |
+![Consistency output h:320](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
+<div style="flex: 1; font-size: 0.85em;">
 
-Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+**What you see:** Heatmap showing the % of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
+
+**Formula:** Consistency % = (districts meeting criteria / total districts) × 100
+
+**Interpretation:** Low consistency may indicate data flow problems, double-counting, or systematic under-reporting at the district level.
+
+</div>
+</div>
+
+---
+
+## DQA mean: combining all quality dimensions
+
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of 100% means the data passes all DQA checks - no missing values, no outliers, and consistent reporting.
+
+**Average DQA score across facilities** = (number of monthly values that are complete, not outliers, and consistent) ÷ (total number of monthly values)
+
+---
+
+## DQA mean output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![DQA score output h:320](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing DQA mean by indicator and region, color-coded from red (poor) to green (good).
+
+**Formula:** (values that are complete, not outliers, and consistent) ÷ (total values)
+
+**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts.
+
+</div>
+</div>
+
+---
+
+
+
+## Data quality adjustment
+
+**Why adjust?** Outliers and reporting gaps identified in the DQA will distort service utilization and coverage estimates if left uncorrected. The goal is to replace problematic values with reasonable estimates based on each facility's own historical patterns.
+
+**How?** Outliers and missing values are replaced using 6-month rolling averages from the facility's historical data.
+
+**Four parallel datasets:** FASTR produces unadjusted, outliers-only adjusted, completeness-only adjusted, and both-adjusted versions. This enables sensitivity analysis - comparing results across scenarios to assess how much conclusions depend on adjustment choices.
+
+**Excluded from adjustment:** Mortality indicators (discrete events that shouldn't be smoothed) and low-volume indicators (<100 events/month, where adjustment adds noise).
+
+---
+
+
+
+## Outlier adjustment output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Outlier adjustment h:320](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after replacing outliers with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically negative (outliers removed reduce volume). Large adjustments warrant investigation into their source.
+
+</div>
+</div>
+
+---
+
+## Completeness adjustment output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Completeness adjustment h:320](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after imputing missing data with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically positive (imputation adds volume). Large adjustments indicate areas needing completeness improvement.
+
+</div>
+</div>
+
+---
+
+
+
+## Service utilization analysis
+
+Service utilization analysis tracks how many health services are being delivered over time, identifying trends, anomalies, and comparisons across areas.
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Number of services reported h:300](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing absolute service volumes over time by indicator.
+
+**What it shows:** Count of services delivered each month/quarter.
+
+**Interpretation:** Look for overall trends (increasing/decreasing) and sudden drops or spikes that may need investigation.
+
+</div>
+</div>
+
+---
+
+## Year-over-year change output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Change in service volume h:300](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap comparing current period to same period last year, with changes >±10% flagged.
+
+**Formula:** YoY change % = (this year - last year) / last year × 100
+
+**Interpretation:** Flagged changes require follow-up - is this a real program change, data issue, or expected event?
+
+</div>
+</div>
+
+---
+
+
+
+## Detecting service disruptions
+
+Beyond year-over-year comparisons, we want to know: **Is service delivery on track, or has something disrupted it?**
+
+**The challenge:** Raw service counts are hard to interpret. A drop in services could be a real disruption, or just normal seasonal variation. Different areas have different baseline volumes, making direct comparison difficult.
+
+**FASTR's solution:** Use statistical modeling to estimate what service volume we would *expect* based on historical trends and seasonality, then compare actual volume to this expectation.
+
+- **Disruption:** Observed volume significantly below expected
+- **Surplus:** Observed volume significantly above expected
+
+---
+
+## Service disruption output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Disruption output h:300](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Chart comparing actual service volume to model-predicted expected volume, accounting for seasonality.
+
+**What it shows:** Deviations from expected - disruptions (below) or surpluses (above).
+
+**Interpretation:** Consider external factors: COVID, strikes, stockouts, campaigns. Persistent deviations warrant program investigation.
+
+</div>
+</div>
+
+---
+
+
+
+## Service coverage estimation
+
+**Coverage** = services delivered ÷ target population
+
+![Coverage equation h:100](../resources/diagrams/coverage_equation.svg)
+
+HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years.
+
+---
+
+## How FASTR estimates coverage
+
+**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
+
+**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
+
+**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+
+---
+
+
+
+## Coverage output: National trends
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Coverage national h:320](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Compare HMIS and survey values - large gaps suggest denominator issues. Projected values extend surveys using HMIS trends.
+
+</div>
+</div>
+
+---
+
+## Coverage output: Subnational comparison
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Coverage subnational h:320](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Coverage estimates by subnational area, enabling geographic comparison.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Identify low-coverage areas for prioritization. Coverage >100% suggests denominator underestimate or double-counting.
+
+</div>
+</div>
 
 ---
 
@@ -1700,15 +1189,15 @@ Country-specific mortality rates may be obtained from DHS reports, UN IGME, or n
 ---
 
 
-## Activity: Creating Visualizations
+## Activity: Creating visualizations
 
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
 
-- Explore available chart types
-- Create and customize visualizations
-- Export charts for use in reports
+**I do:** Facilitator demonstrates creating a time series chart for ANC1
 
-*Participants will build visualizations from their analysis*
+**We do:** Together, we create a second visualization (bar chart comparing regions)
+
+**You do:** Create one visualization of your choice and export it for your report
 
 ---
 
@@ -1731,15 +1220,27 @@ Back at 14:00
 ---
 
 
-## Activity: Creating Reports
+## Activity: Creating reports
 
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
 
-- Use report templates
-- Generate automated reports
-- Customize report content and layout
+**I do:** Facilitator demonstrates creating a report using the template
 
-*Participants will create their first quarterly report draft*
+**We do:** Together, we use the AI assistant to generate report text from our visualizations
+
+**You do:** Complete your draft report with your own content and export it
+
+---
+
+## Using the AI assistant
+
+**To interpret a visualization:**
+> *"Describe what this chart shows and write 2-3 sentences summarizing the main findings for a Ministry of Health quarterly report."*
+
+**To analyze subnational variation:**
+> *"Compare the regions shown in this chart. Which provinces are performing well and which need attention? Suggest possible reasons for the differences."*
+
+The AI will analyze your chart and generate text you can edit for your report.
 
 ---
 
@@ -1749,25 +1250,9 @@ Back at 14:00
 ---
 
 
-# Recap
+# Recap of day 2
 
-On Day 2, we covered:
-
-- FASTR methods for data quality assessment and adjustment
-- Creating and configuring projects in the platform
-- Building visualizations from Zambia data
-- Generating reports
-
----
-
-# Day 3 Focus
-
-Today we move from analysis to action:
-
-- Deep dive into interpretation of results
-- Create the Q4 2025 quarterly report
-- Present findings to the group
-- Develop action plans for continued work
+![w:120](../resources/icons/thought.png)
 
 ---
 
@@ -1780,15 +1265,13 @@ Today we move from analysis to action:
 <table>
 <tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
 <tr><td>09:00-09:15</td><td>Recap and Day 3 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10: Interpretation of visualizations</strong></td></tr>
-<tr><td>09:15-10:15</td><td>Approaches to support interpretation</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 11: Creating a Q4 2025 report</strong></td></tr>
-<tr><td>10:15-12:30</td><td>Creating short and long reports with country context</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10: Creating a Q4 2025 report</strong></td></tr>
+<tr><td>09:15-12:30</td><td>Creating short and long reports with country context</td><td>GFF FASTR team</td></tr>
 <tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 11 (cont'd): Creating a Q4 2025 report</strong></td></tr>
-<tr><td>14:00-15:00</td><td>Continue report creation with country context</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 12: Presenting reports</strong></td></tr>
-<tr><td>14:30-15:30</td><td>Present reports, group feedback</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 10 (cont'd): Creating a Q4 2025 report</strong></td></tr>
+<tr><td>14:00-15:30</td><td>Continue report creation with country context</td><td>GFF FASTR team</td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 11: Presenting reports</strong></td></tr>
+<tr><td>15:30-16:30</td><td>Present reports, group feedback</td><td>GFF FASTR team</td></tr>
 </table>
 
 ---
@@ -1798,99 +1281,7 @@ Today we move from analysis to action:
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 10: Interpretation of visualizations
-
----
-
-
-## Analytical thinking & interpretation
-
-Interpretation connects **data patterns** to **programmatic meaning**.
-
-For every FASTR output, ask three questions:
-
-1. **What does it show?** — Describe the pattern accurately
-2. **Why might that be?** — Consider multiple explanations
-3. **What should we do?** — Identify next steps or actions
-
-<small>*Moving from numbers to insights requires context, critical thinking, and programmatic knowledge.*</small>
-
----
-
-
-
-## Critical thinking checklist
-
-Before drawing conclusions from FASTR outputs, ask:
-
-- **Data quality or real change?** Could this pattern reflect reporting issues rather than service delivery changes?
-- **What external factors apply?** Policy changes, seasonal patterns, shocks, or campaigns?
-- **Does it make programmatic sense?** Would this pattern be expected given what we know about the health system?
-- **What does disaggregation reveal?** National trends can mask important regional variation
-- **What additional information is needed?** What context would strengthen or challenge this interpretation?
-
----
-
-
-
-## Common interpretation pitfalls
-
-<div style="display: flex; gap: 1.5em;">
-<div style="flex: 1;">
-
-**Aggregation masking**
-National averages can hide critical regional variation. Always examine subnational patterns.
-
-**Completeness ≠ representativeness**
-High reporting completeness doesn't mean data captures all service delivery (private sector, informal care).
-
-</div>
-<div style="flex: 1;">
-
-**Missing context**
-Patterns without context are meaningless. Consider seasonality, policy changes, and external shocks.
-
-**Over-interpreting noise**
-Short-term fluctuations may be normal variation. Focus on sustained trends and significant deviations.
-
-</div>
-</div>
-
----
-
-
-
-## Interpreting FASTR module outputs
-
-<div style="display: flex; gap: 1.5em;">
-<div style="flex: 1;">
-
-**Data quality assessment**
-Low DQA scores may reflect data entry practices rather than service quality. Focus on identifying the specific dimension (completeness, outliers, consistency) driving issues.
-
-**Service utilization**
-Distinguish seasonal patterns from real disruptions. Year-over-year comparisons help isolate programmatic changes from normal fluctuation.
-
-</div>
-<div style="flex: 1;">
-
-**Coverage estimates**
-Coverage >100% signals reconciliation needed between HMIS and survey data. Consider whether the denominator source matches the service delivery context.
-
-**Across all modules**
-Examine patterns at multiple geographic levels — subnational disaggregation often reveals the true story.
-
-</div>
-</div>
-
----
-
-
-<!-- _class: section-cover -->
-
-![bg](../resources/backgrounds/section_slide.png)
-
-# Session 11: Creating a Q4 2025 report
+# Session 10: Creating a Q4 2025 report
 
 ---
 
@@ -1921,7 +1312,7 @@ Back at 14:00
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 12: Presenting reports
+# Session 11: Presenting reports
 
 ---
 
@@ -1938,25 +1329,9 @@ Back at 14:00
 ---
 
 
-# Recap
+# Recap of day 3
 
-On Day 3, we covered:
-
-- Interpretation of FASTR visualizations
-- Creation of the Q4 2025 quarterly report
-- Presentation of findings and group feedback
-- Action planning for continued platform use
-
----
-
-# Day 4 Focus
-
-Today we design the Health Facility Assessment:
-
-- Overview of the FASTR HFA phone survey
-- Review questionnaire structure
-- Adapt questionnaire for Zambia context
-- Plan HFA priorities and data use
+![w:120](../resources/icons/thought.png)
 
 ---
 
@@ -1969,18 +1344,18 @@ Today we design the Health Facility Assessment:
 <table>
 <tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
 <tr><td>09:00-09:15</td><td>Recap and Day 4 agenda</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13: Overview of FASTR HFA phone survey</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 12: Overview of FASTR HFA phone survey</strong></td></tr>
 <tr><td>09:15-10:15</td><td>HFA overview and questionnaire adaptation guidelines</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14: Questionnaire adaptation to the Zambian context</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13: Questionnaire adaptation to the Zambian context</strong></td></tr>
 <tr><td>10:15-12:30</td><td>Review questionnaire + hands-on adaptation</td><td>GFF FASTR team</td></tr>
 <tr><td>12:30-14:00</td><td><em>Lunch Break</em></td><td></td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14 (cont'd): Questionnaire adaptation</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 13 (cont'd): Questionnaire adaptation</strong></td></tr>
 <tr><td>14:00-15:00</td><td>Continue questionnaire adaptation (in groups)</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 15: Discussion: HFA adapted questionnaire</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 14: Discussion: HFA adapted questionnaire</strong></td></tr>
 <tr><td>14:30-15:30</td><td>Discuss adapted questionnaire in plenary</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 16: Discussion: HFA priorities and data use</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 15: Discussion: HFA priorities and data use</strong></td></tr>
 <tr><td>15:30-16:30</td><td>HFA priorities and data use case in Zambia</td><td>GFF FASTR team</td></tr>
-<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 17: Action planning and wrap-up</strong></td></tr>
+<tr style="background: #E8F4F3;"><td colspan="3"><strong>Session 16: Action planning and wrap-up</strong></td></tr>
 <tr><td>16:30-17:00</td><td>Key messages and wrap-up</td><td>GFF FASTR team</td></tr>
 </table>
 
@@ -1991,7 +1366,7 @@ Today we design the Health Facility Assessment:
 
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Session 13: Overview of FASTR HFA phone survey
+# Session 12: Overview of FASTR HFA phone survey
 
 ---
 

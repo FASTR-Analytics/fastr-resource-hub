@@ -9,91 +9,51 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-# FASTR Workshop - Australia
+# STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE
 
-**Jan 10-12** | **Perth**
+**Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring**
 
-*TBD*
+Perth, Australia
+
+Jan 10-12
+
+---
+
+
+<!-- _class: centered -->
+
+# Welcome and Opening Remarks
+
+![w:120](../resources/icons/lecture.png)
 
 ---
 
 
-<!-- _class: agenda -->
-# Agenda
+<!-- _class: centered -->
 
-**Day 1**
+# Introductions
 
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td></td><td>Title Slide</td><td></td></tr>
-<tr><td></td><td>Agenda</td><td></td></tr>
-<tr><td></td><td>Workshop Objectives</td><td></td></tr>
-<tr><td></td><td>Introduction to FASTR</td><td></td></tr>
-<tr><td></td><td>Identify Questions & Indicators</td><td></td></tr>
-<tr><td></td><td>Data Extraction</td><td></td></tr>
-<tr><td></td><td>End of Day 1</td><td></td></tr>
-</table>
-
----
-
-<!-- _class: agenda -->
-# Agenda
-
-**Day 2**
-
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td></td><td>Day 2 Recap</td><td></td></tr>
-<tr><td></td><td>FASTR Analytics Platform</td><td></td></tr>
-<tr><td></td><td><em>Tea Break</em></td><td></td></tr>
-<tr><td></td><td>Data Quality Assessment</td><td></td></tr>
-<tr><td></td><td>Data Quality Adjustment</td><td></td></tr>
-<tr><td></td><td>End of Day 2</td><td></td></tr>
-</table>
-
----
-
-<!-- _class: agenda -->
-# Agenda
-
-**Day 3**
-
-<table>
-<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
-<tr><td></td><td>Day 3 Recap</td><td></td></tr>
-<tr><td></td><td>Data Analysis</td><td></td></tr>
-<tr><td></td><td><em>Lunch Break</em></td><td></td></tr>
-<tr><td></td><td>Results Communication</td><td></td></tr>
-<tr><td></td><td>Closing</td><td></td></tr>
-</table>
+![w:120](../resources/icons/people_group.svg)
 
 ---
 
 
 
-## Introduction to FASTR
+## What are we trying to achieve?
 
-<div class="columns">
-<div>
+Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasing the systematic use of data for decision making
 
-The Global Financing Facility (GFF) supports country-led efforts to strengthen the use of timely data for decision-making, with the goal of improving primary healthcare (PHC) performance and RMNCAH-N outcomes.
+![w:700](../resources/diagrams/rapid_cycle_analytics.png)
 
-**Frequent Assessments and Health System Tools for Resilience (FASTR)** is the GFF's rapid-cycle analytics framework for monitoring health system performance using high-frequency data.
+---
 
-FASTR brings together four complementary technical approaches:
 
-1. Routine HMIS data analysis
-2. Health facility phone surveys
-3. High-frequency household phone surveys
-4. Follow-on, problem-driven analyses
 
-</div>
-<div>
+## How can this be achieved?
 
-![FASTR Technical Approaches](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
 
-</div>
-</div>
+![w:800](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 ---
 
@@ -129,58 +89,31 @@ Rapid-cycle approaches using routine HMIS data can:
 
 
 
-## Why rapid-cycle analytics?
+## What is FASTR?
 
-<div class="columns">
-<div>
+An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
 
-Routine health information systems are a critical source of data, but they are often underused due to concerns about data quality and long delays between data collection and analysis. Traditional household and facility surveys, while essential, are resource-intensive and infrequent.
-
-FASTR's rapid-cycle analytics address this gap by providing:
-
-- Timely insights aligned with country decision cycles
-- Continuous learning rather than one-off assessments
-- Direct feedback loops between data, analysis, and action
-
-</div>
-<div>
-
-![FASTR rapid-cycle analytics framework](../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
-
-</div>
-</div>
+![w:700](../resources/diagrams/what_is_fastr.png)
 
 ---
 
 
 
-## Focus of the analysis
+## What is the FASTR approach to RMNCAH-N service use monitoring?
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
-### Core indicators
+Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
 
-FASTR prioritizes a core set of RMNCAH-N indicators that:
+Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
 
-- Represent key service delivery contacts across the continuum of care
-- Have relatively high reporting completeness and volumes
-- Serve as proxies for broader service delivery performance
-
-<small>*The indicator set can be expanded to reflect country-specific priorities.*</small>
+Combining analysis and visualization with capacity strengthening and data use support for sustainability and institutionalization
 
 </div>
 <div>
 
-### Core data quality metrics
-
-Analysis is anchored in a standardized set of data quality metrics:
-
-- Reporting completeness
-- Extreme value (outlier) detection
-- Consistency across related indicators
-
-<small>*These metrics are summarized into an overall data quality score.*</small>
+![Steps to implement RMNCAH-N service use monitoring](../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 </div>
 </div>
@@ -188,118 +121,92 @@ Analysis is anchored in a standardized set of data quality metrics:
 ---
 
 
+<!-- _class: agenda -->
+# Agenda
 
-## Introduction to FASTR: gaps and challenges
+**Day 1**
 
-*Content to be developed*
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td>09:00</td><td>Title Slide</td><td></td></tr>
+<tr><td></td><td>Workshop Objectives</td><td></td></tr>
+<tr><td></td><td>Introduction to FASTR</td><td></td></tr>
+<tr><td></td><td>Agenda</td><td></td></tr>
+<tr><td></td><td>Data Extraction</td><td></td></tr>
+<tr><td></td><td><em>Lunch Break</em></td><td></td></tr>
+<tr><td></td><td>Identify Questions & Indicators</td><td></td></tr>
+<tr><td></td><td><em>Tea Break</em></td><td></td></tr>
+<tr><td></td><td>End of Day 1</td><td></td></tr>
+<tr><td>09:00</td><td>Day 2 Recap</td><td></td></tr>
+<tr><td></td><td>FASTR Analytics Platform</td><td></td></tr>
+</table>
 
-This section will cover:
-- Identifying gaps and challenges that FASTR is well suited to support
-- How FASTR serves as an entry point to reduce fragmentation
-- Starting the conversation with government stakeholders
+---
+
+<!-- _class: agenda -->
+# Agenda
+
+**Day 2**
+
+<table>
+<tr style="background: #CAE6E9;"><th>Time</th><th>Agenda</th><th>Facilitator/Presenter</th></tr>
+<tr><td></td><td>Data Quality Assessment</td><td></td></tr>
+<tr><td></td><td><em>Tea Break</em></td><td></td></tr>
+<tr><td></td><td>Data Quality Adjustment</td><td></td></tr>
+<tr><td></td><td><em>Tea Break</em></td><td></td></tr>
+<tr><td></td><td>End of Day 2</td><td></td></tr>
+<tr><td></td><td>Day 3 Recap</td><td></td></tr>
+<tr><td></td><td>Data Analysis</td><td></td></tr>
+<tr><td></td><td><em>Lunch Break</em></td><td></td></tr>
+<tr><td></td><td>Results Communication</td><td></td></tr>
+<tr><td></td><td><em>Tea Break</em></td><td></td></tr>
+<tr><td></td><td>Closing</td><td></td></tr>
+<tr><td></td><td>Data Quality Assessment</td><td></td></tr>
+</table>
 
 ---
 
 
 
-## Development of a data use case
+## Show of hands...
 
-*Content to be developed*
+![w:120](../resources/icons/raise-hand.png)
 
-This section will cover:
-- Co-creation workshop approach with MoH and stakeholders
-- Data use case development guidance
-- Example use cases from country implementations
+Do you regularly extract data from DHIS2?
 
----
-
-
-
-## What makes a good indicator for FASTR analysis?
-
-- **Relevance**: Does this indicator align with our priority questions and objectives?
-- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
-- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
-- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
-- **Type**: Is this indicator a count of services delivered?
+If so, what are the primary reasons?
 
 ---
 
 
 
-## Preparing for data extraction
+## Why would you extract data from DHIS2? Why not just do analysis in DHIS2 itself?
 
-*Content to be developed*
-
-This section will cover:
-- Pre-extraction checklist
-- Understanding your DHIS2 configuration
-- Mapping indicators to data elements
-- Planning your extraction timeline
-
----
-
-
-
-## Why extract data from DHIS2?
-
-### Data quality adjustment
+**Data quality adjustment**
 
 The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
-The FASTR methodology includes specific approaches to:
-- Identify and adjust for outliers
-- Adjust for incomplete reporting
-- Apply consistent data quality metrics
+**Analysis complexity**
 
-These adjustments require processing that cannot be done within DHIS2's native analytics.
+The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal variations, and comparing key periods, such as before and after a reform.
 
----
-
-
-
-## Why extract data from DHIS2?
-
-### Analysis complexity
-
-The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
-
-- Identifying significant increases or decreases in service volume
-- Adjusting for data quality issues
-- Accounting for expected seasonal variations
-- Comparing key periods, such as before and after a reform
-
-The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis.
+The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs!
 
 ---
 
 
+
+<!-- _class: columns-image-right -->
 
 ## Data format and granularity
 
-Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
+![Data format example](../workshops/2026-australia/media/data_format_example.png)
 
-- Data should be saved in **long format** meaning each row represents a single observation or measurement
-- Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files
+Data should be downloaded for each indicator of interest, at facility level, and monthly for the period of interest.
 
-### Why monthly facility level data?
+Data should be saved in long format meaning each row represents a single observation or measurement (see example).
 
-We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality. Using monthly facility level data allows us to conduct the most robust analysis.
-
----
-
-
-
-## Key variables
-
-The data extracted should include the following required elements:
-
-| Element | Description |
-|---------|-------------|
-| Org units | Organizational unit identifier |
-| Period | Time period of the data |
-| Indicator name | Name of the indicator |
-| Total/count | The aggregated value |
+Data should be saved in .csv format and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform.
 
 ---
 
@@ -307,31 +214,40 @@ The data extracted should include the following required elements:
 
 ## How much data?
 
-### Initial FASTR analysis
-- Download approximately **five years** of historical data
-- Exact period depends on data availability and consistency in indicator definitions
+**Initial FASTR analysis**
 
-### Routine update to FASTR analysis
-- Download new data covering the most recent months not previously included (usually **three months** for quarterly implementation)
-- Include the **three preceding months** as recent data is often subject to changes due to late reporting or data quality adjustments
+- Generally recommended to download approximately five years of historical data
+- However, the exact period should be determined based on data availability, consistency in indicator definitions over time, and the specifics of a country's routine data system
+- Ideally, using at least five years of historical data allows for a thorough assessment of trends over time
+
+**Routine update to FASTR analysis**
+
+- Start with the existing database and download new data covering the most recent months not previously included – this is usually a three-month period when the FASTR analysis is being implemented on a quarterly basis
+- Additionally, include the three proceeding months to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments
+- If you have reason to believe there have been substantial changes to the historical data, you can always choose to redownload a longer time period
 
 ---
 
 
 
-## Data extraction tools
+## Data extraction
 
-We offer two tools for bulk DHIS2 data extraction:
+<div class="columns">
+<div>
 
-**API Script** (Google Colab)
-- Input login credentials, specify timeframes, indicators, and administrative levels
-- Download data as a .csv file
+We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.
 
-**Data Downloader**
-- More intuitive, streamlined interface
-- Recommended for most users
+The Data Downloader provides a streamlined interface to download DHIS2 data. This tool is particularly useful to explore DHIS2 metadata and download indicators requiring disaggregated dimensions.
 
-Both tools enable efficient data extraction, and we provide training resources to support their use.
+The Data Downloader is available at: https://github.com/worldbank/DHIS2-Downloader/releases/
+
+</div>
+<div>
+
+![Data Downloader h:380](../resources/screenshots/data_downloader.png)
+
+</div>
+</div>
 
 ---
 
@@ -359,22 +275,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ## Data Downloader: Login
 
-<div class="columns">
-<div>
-
-![Data Downloader login screen h:380](../resources/screenshots/data_downloader/01_login.png)
-
-</div>
-<div>
-
-**Connect to your DHIS2 instance**
-
-- Enter your DHIS2 server URL
-- Provide your username and password
-- The tool securely stores credentials for future sessions
-
-</div>
-</div>
+![Data Downloader login screen h:450](../resources/screenshots/data_downloader/01_login.png)
 
 ---
 
@@ -499,6 +400,258 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 ---
 
 
+# <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
+
+**60 minutes**
+
+Back at 
+
+---
+
+
+
+## What is a data use case?
+
+A data use case is a specific scenario where data is utilized to achieve a particular goal or solve a problem.
+
+**Why is defining a data use case important?**
+
+- Guides decision making by providing a clear framework for analysis
+- Enhances efficiency by focusing analyses on a set of relevant key indicators to solve a specific data need
+- Leads to better results by aligning data efforts with organizational goals
+
+---
+
+
+
+## What is our common data use case that will be the focus of this workshop?
+
+Following large shifts in resource availability from external sources, many countries are experiencing abrupt and dramatic reductions in financing
+
+- Resulting in critical gaps in programs and systems
+- Leading to potentially severe effects on service delivery and health outcomes for women, children and adolescents
+
+**Key questions arising:**
+
+- What is the magnitude of the cuts, and what effect are they having on service delivery?
+- What is the optimal way to prioritize remaining resources?
+- What other adaptations can safeguard and strengthen essential service delivery for women, children and adolescents?
+
+---
+
+
+
+## How do we select indicators? What makes a good indicator for the FASTR analysis?
+
+Indicator selection is critical to the quality and usefulness of FASTR analysis. Indicators should be chosen based on the following criteria:
+
+- **Relevance** - Does this indicator provide data that aligns with our priority questions and objectives?
+- **Volume** - Is this indicator collected at a high volume, which improves the robustness of analysis?
+- **Completeness** - Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency** - Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type** - Is this indicator a count of services delivered?
+
+---
+
+
+
+## Development of a data use case
+
+*Content to be developed*
+
+This section will cover:
+- Co-creation workshop approach with MoH and stakeholders
+- Data use case development guidance
+- Example use cases from country implementations
+
+---
+
+
+
+## Defining priority questions
+
+Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and enhance decision making support.
+
+**Qualities of a good question:**
+
+- **Addresses a priority issue**: A topic of interest to you and policy makers
+- **Relevant**: Important enough to be worth answering
+- **Related to experiences that are alive**: Connected to current issues
+- **Important to individuals/groups**: Matters to stakeholders
+- **Answerable**: Can be addressed with available data and methods
+
+---
+
+
+
+## Is my question a relevant priority? 5+ Ws to consider
+
+- **Who** is your audience?
+- **What** do they need and want to know?
+- **When** do they need to know it by?
+- **When** is the event/intervention/period they are interested in?
+- **Why** do they need to know?
+- **How** will they use the findings?
+
+---
+
+
+
+## What do we mean by answerable?
+
+**We have the data**
+- Type, quantity, quality sufficient for the question
+
+**We have the analysis tools/methods**
+- Statistically valid; feasible to use
+
+**We have the time**
+- We can answer the question on a quarterly basis
+
+---
+
+
+
+<!-- Note: This slide was hidden in the original presentation but may be useful to include -->
+## PICO framework for identifying answerable questions
+
+A standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
+
+| Component | Description |
+|-----------|-------------|
+| **P**opulation | Who is being investigated |
+| **I**ntervention | What is being investigated |
+| **C**omparison | What is baseline/non-intervention |
+| **O**utcome | What is public health objective |
+
+---
+
+
+
+## What makes a good indicator for FASTR analysis?
+
+- **Relevance**: Does this indicator align with our priority questions and objectives?
+- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
+- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type**: Is this indicator a count of services delivered?
+
+---
+
+
+
+## Why focus on high-volume indicators?
+
+One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
+
+**Reduced sensitivity to outliers**
+In low-volume indicators, individual data points can disproportionately affect trends.
+
+**More stable estimates**
+High-volume data reduce random variability and improve the reliability of trend detection.
+
+**Clearer identification of true anomalies**
+Larger counts make it easier to distinguish genuine outliers from natural variation.
+
+---
+
+
+
+## Why focus on high-completeness indicators?
+
+Indicators with high reporting completeness are preferred because they:
+
+**Improve data reliability**
+More complete data reduces bias and provide a more representative picture of service delivery.
+
+**Support consistent analysis**
+High completeness enables meaningful comparisons across time and geographic areas.
+
+**Reduce misinterpretation**
+Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
+
+While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values.
+
+---
+
+
+
+## Why focus on count indicators?
+
+**Limitations of proportion indicators**
+
+- Proportions limit the ability to adjust numerators and denominators separately for data quality issues
+- Numerators and denominators may each be affected by different sources of error
+- Separating counts from denominator estimation allows for more transparent and flexible adjustment
+
+**Mortality as a rare event**
+
+- Mortality indicators are typically low-frequency and not well suited to adjustment
+- These indicators are generally better analyzed using annual rather than monthly or quarterly data
+
+---
+
+
+
+## FASTR core indicators
+
+The FASTR approach focuses on a core set of RMNCAH-N indicators that represent key points along the reproductive, maternal, newborn, child, and adolescent health and nutrition continuum in low- and middle-income countries.
+
+These indicators typically have higher reporting volumes and completeness and serve as proxies for broader service delivery patterns.
+
+- Antenatal client 1st visit
+- Antenatal client 4th visit
+- Institutional delivery
+- Postnatal care 1
+- BCG doses
+- Pentavalent 1st dose
+- Pentavalent 3rd dose
+- Outpatient visits
+
+---
+
+
+
+<!-- _class: columns-image-right -->
+
+## Countries have selected indicators to align with the disruptions context and country priorities
+
+![Data prep checklist h:280](../resources/screenshots/data_prep_checklist.png)
+
+The FASTR Data Prep Checklist has been shared with countries.
+
+The checklist includes the FASTR core RMNCAH-N indicators.
+
+Countries have added additional indicators that may be particularly relevant to the country context (e.g., indicators related to services expected to be impacted by recent funding shifts, priority indicators for the government and/or the WB project).
+
+These are the indicators included in the current analysis. Countries can continue to add indicators over time as needed for their use case(s).
+
+---
+
+
+
+## Preparing for data extraction
+
+*Content to be developed*
+
+This section will cover:
+- Pre-extraction checklist
+- Understanding your DHIS2 configuration
+- Mapping indicators to data elements
+- Planning your extraction timeline
+
+---
+
+
+# <img src="../resources/icons/coffee.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Tea Break
+
+**15 minutes**
+
+Back at 
+
+---
+
+
 # See You Tomorrow!
 
 **Day 1 Complete**
@@ -507,23 +660,40 @@ We resume tomorrow at **09:00**
 
 ---
 
-# Day 2
+
+## FASTR analytics platform
+
+<div class="columns">
+<div>
+
+The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
+
+It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
+
+The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
+
+</div>
+<div>
+
+![FASTR platform h:380](../workshops/2026-australia/media/fastr_platform.png)
+
+</div>
+</div>
 
 ---
 
 
-## Introduction to the FASTR Analytics Platform
 
-The FASTR analytics platform is a web-based tool for data quality assessment, adjustment, and analysis of routine health data.
+## Platform Capabilities
 
-**Key features:**
+<style scoped>
+p { text-align: center; }
+img { display: block; margin: 0 auto; }
+</style>
 
-- Upload and analyze data from DHIS2 and other sources
-- Built-in statistical methods for data quality adjustment
-- User-friendly interface for running analyses
-- Flexible visualization and export options
+![Platform Capabilities h:420](../resources/diagrams/platform_capabilities.svg)
 
-**In this session, we will provide a conceptual walkthrough of the platform and its capabilities.**
+<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Data flows from import through analysis to shareable outputs.</p>
 
 ---
 
@@ -539,6 +709,119 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 - Understand the workflow for uploading data and making analytical decisions
 
 *Facilitator will demonstrate in the live platform*
+
+---
+
+
+
+## Country Instance
+
+Each country has its own **instance** of the FASTR analytics platform.
+
+An instance contains:
+
+- All registered users and their accounts
+- The shared administrative structure (regions, districts, facilities)
+- Indicator definitions and data sources
+- All projects created for that country
+
+**Think of an instance as your country's dedicated workspace.**
+
+---
+
+
+
+## User Roles and Permissions
+
+There are two levels of permissions in the platform:
+
+&nbsp;
+
+**Instance-level roles:**
+
+- **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+
+&nbsp;
+
+**Project-level roles:**
+
+- **Project Editors** can create visualizations, create reports, and download/export results
+- **Project Viewers** can view visualizations, view reports, and download/export results
+
+&nbsp;
+
+*Administrators are assigned per instance; Editors and Viewers are assigned per project.*
+
+---
+
+
+
+## Projects Within an Instance
+
+<style scoped>
+.container { display: flex; gap: 1rem; }
+.container .img-col { flex: 2; }
+.container .img-col img { width: 100%; height: auto; }
+.container .text-col { flex: 1; font-size: 0.85em; }
+</style>
+
+<div class="container">
+<div class="img-col">
+
+![Projects within instance](../resources/diagrams/projects_within_instance.svg)
+
+</div>
+<div class="text-col">
+
+Each country instance can contain **multiple projects**.
+
+A country may only need one project, or multiple projects can be used for:
+
+- Different versions of analyses
+- A demo or playground project
+- Separate projects for different teams or programs
+
+**Key questions when setting up:**
+
+- Who is the admin?
+- Who can edit?
+- Who can view?
+
+</div>
+</div>
+
+---
+
+
+
+## Practice: Logging Into the Platform
+
+<style scoped>
+table { border: none !important; background: transparent !important; width: 100% !important; }
+table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
+table img { max-height: 280px !important; width: auto !important; }
+</style>
+
+| | |
+|:---|:---|
+| ![Login page](../workshops/2026-australia/media/01_login_page.png) | ![Sign up form](../workshops/2026-australia/media/02_sign_up.png) |
+| **1.** Go to https://australia.fastr-analytics.org | **2.** Click Sign up and enter your details |
+| **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
+
+---
+
+
+
+## Configuring the analysis platform
+
+- Configuration of the analysis platform is an admin feature
+
+- We will work together to configure the following items:
+  - Admin areas (regions, districts)
+  - Facility structure
+  - Indicator definitions
+
+- Note since this is an admin feature all participants will NOT be doing this step. Instead, you will select one person to have admin rights, and they will help us walk through these steps.
 
 ---
 
@@ -628,19 +911,36 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 ---
 
 
-# <img src="../resources/icons/coffee.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Tea Break
+# Day 2
 
-**15 minutes**
+---
 
-Back at 
+
+## FASTR analytical pipeline
+
+![Analytical Pipeline h:390](../resources/diagrams/analytical_pipeline.svg)
+
+The FASTR analysis follows a sequential workflow where each step builds on the previous:
+
+1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
+2. **Adjust for quality issues** - Apply corrections to improve data reliability
+3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
 ---
 
 
 
-## Data quality assessment - Module 1
+## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
 
-Evaluating the reliability of routine health information system data
+- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+
+- We use only high-volume indicators, because the most-used services provide more stable estimates
+
+- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
+
+- We believe that using the data and providing feedback is the first step to improving the data
+
+We will discuss each of these areas over the next sessions.
 
 ---
 ## Rationale for data quality assessment
@@ -650,6 +950,8 @@ Evaluating the reliability of routine health information system data
 - Reporting gaps affect data completeness
 - Inconsistencies exist between related indicators
 
+&nbsp;
+
 **Implications:** Data quality limitations affect decision-making
 - Inaccurate assessments of service delivery trends
 - Misidentification of areas requiring intervention
@@ -657,11 +959,17 @@ Evaluating the reliability of routine health information system data
 
 ---
 
-## Objectives of data quality assessment
+## Assessing and adjusting for data quality
+
+Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
+
+&nbsp;
 
 **Objective 1: Enable analytical adjustment**
 
 Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+
+&nbsp;
 
 **Objective 2: Monitor data quality trends**
 
@@ -671,18 +979,65 @@ Data quality assessment enables ongoing monitoring to:
 - Evaluate the effectiveness of data quality improvement initiatives over time
 
 ---
-## Core dimensions of data quality
+## Measures of data quality
 
-**1. Completeness**
-Are health facilities submitting reports consistently?
+![Measures of data quality](../workshops/2026-australia/media/measures_data_quality.png)
 
-**2. Outlier prevalence**
-Are reported values within plausible ranges?
+---
 
-**3. Internal consistency**
-Do related indicators demonstrate expected relationships?
 
-These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.
+
+## Measures of data quality - detailed (1/2)
+
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Completeness** | Are all data present? | Reporting completeness: whether all units report. Indicator completeness: whether values are recorded for specific data elements |
+| **Timeliness** | Are data regularly submitted on time? | Whether units submitted reports before the set deadline |
+
+---
+
+
+
+## Measures of data quality - detailed (2/2)
+
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Consistency** | Are data plausible in view of what has been previously reported? | Presence of outliers, consistency over time, consistency between related indicators, external comparison with other data sources, consistency of population data |
+| **Accuracy** | Do data faithfully reflect actual service delivery? | Review of source documents and comparison to monthly reports and HMIS values (data verification factor) |
+
+---
+
+
+
+## How does FASTR data quality analysis differ from DHIS2? (1/2)
+
+**Purpose of data quality assessment**
+
+- **DHIS2:** focuses on data quality assessment to routinely strengthen data quality over time
+- **FASTR:** focuses on assessing data quality to inform an analysis which answers a pressing policy question
+
+&nbsp;
+
+**Data quality adjustment**
+
+- **DHIS2:** focus is on identifying data quality issues and working with facilities to improve reporting practices
+- **FASTR:** focus on applying analytical adjustment techniques to account for data quality issues in the analysis; goal is to generate the most robust estimates despite data quality challenges
+
+---
+
+
+
+## How does FASTR data quality analysis differ from DHIS2? (2/2)
+
+**Selection of indicators, measures, and thresholds** – FASTR focuses on DQA elements most relevant for analysis
+
+- The purpose of the data quality assessment guides the selection of indicators, measures, and thresholds
+
+- DHIS2 allows configuration of a DQA dashboard for any selection of indicators; FASTR selects indicators that will be used in a specific analysis
+
+- DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness - it is important for strengthening routine reporting but less important for analysis with available data
+
+- DHIS2 DQA includes reporting completeness and indicator completeness while FASTR focuses only on indicator completeness
 
 ---
 
@@ -892,6 +1247,15 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 ---
 
 
+# <img src="../resources/icons/coffee.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Tea Break
+
+**15 minutes**
+
+Back at 
+
+---
+
+
 
 ## Data quality adjustment - Module 2
 
@@ -980,15 +1344,20 @@ This approach prevents temporary reporting gaps from creating artificial decline
 ---
 
 
+# <img src="../resources/icons/coffee.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Tea Break
+
+**15 minutes**
+
+Back at 
+
+---
+
+
 # See You Tomorrow!
 
 **Day 2 Complete**
 
 We resume tomorrow at **09:00**
-
----
-
-# Day 3
 
 ---
 
@@ -1387,6 +1756,359 @@ This section will cover:
 - Using the FASTR platform for automated reports
 - Quality assurance for reports
 - Distribution and feedback mechanisms
+
+---
+
+
+# <img src="../resources/icons/coffee.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Tea Break
+
+**15 minutes**
+
+Back at 
+
+---
+
+
+
+# Contact Information
+
+**FASTR Team**
+
+**Email:** 
+
+**Website:** https://www.globalfinancingfacility.org/
+
+---
+
+
+
+## FASTR analytical pipeline
+
+![Analytical Pipeline h:390](../resources/diagrams/analytical_pipeline.svg)
+
+The FASTR analysis follows a sequential workflow where each step builds on the previous:
+
+1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
+2. **Adjust for quality issues** - Apply corrections to improve data reliability
+3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+
+---
+
+
+
+## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
+
+- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+
+- We use only high-volume indicators, because the most-used services provide more stable estimates
+
+- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
+
+- We believe that using the data and providing feedback is the first step to improving the data
+
+We will discuss each of these areas over the next sessions.
+
+---
+## Rationale for data quality assessment
+
+**Challenge:** Routine health facility data may contain quality limitations:
+- Reported values may fall outside plausible ranges
+- Reporting gaps affect data completeness
+- Inconsistencies exist between related indicators
+
+&nbsp;
+
+**Implications:** Data quality limitations affect decision-making
+- Inaccurate assessments of service delivery trends
+- Misidentification of areas requiring intervention
+- Suboptimal resource allocation
+
+---
+
+## Assessing and adjusting for data quality
+
+Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
+
+&nbsp;
+
+**Objective 1: Enable analytical adjustment**
+
+Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+
+&nbsp;
+
+**Objective 2: Monitor data quality trends**
+
+Data quality assessment enables ongoing monitoring to:
+- Inform indicator selection based on quality profiles across the HMIS
+- Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
+- Evaluate the effectiveness of data quality improvement initiatives over time
+
+---
+## Measures of data quality
+
+![Measures of data quality](../workshops/2026-australia/media/measures_data_quality.png)
+
+---
+
+
+
+## Measures of data quality - detailed (1/2)
+
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Completeness** | Are all data present? | Reporting completeness: whether all units report. Indicator completeness: whether values are recorded for specific data elements |
+| **Timeliness** | Are data regularly submitted on time? | Whether units submitted reports before the set deadline |
+
+---
+
+
+
+## Measures of data quality - detailed (2/2)
+
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Consistency** | Are data plausible in view of what has been previously reported? | Presence of outliers, consistency over time, consistency between related indicators, external comparison with other data sources, consistency of population data |
+| **Accuracy** | Do data faithfully reflect actual service delivery? | Review of source documents and comparison to monthly reports and HMIS values (data verification factor) |
+
+---
+
+
+
+## How does FASTR data quality analysis differ from DHIS2? (1/2)
+
+**Purpose of data quality assessment**
+
+- **DHIS2:** focuses on data quality assessment to routinely strengthen data quality over time
+- **FASTR:** focuses on assessing data quality to inform an analysis which answers a pressing policy question
+
+&nbsp;
+
+**Data quality adjustment**
+
+- **DHIS2:** focus is on identifying data quality issues and working with facilities to improve reporting practices
+- **FASTR:** focus on applying analytical adjustment techniques to account for data quality issues in the analysis; goal is to generate the most robust estimates despite data quality challenges
+
+---
+
+
+
+## How does FASTR data quality analysis differ from DHIS2? (2/2)
+
+**Selection of indicators, measures, and thresholds** – FASTR focuses on DQA elements most relevant for analysis
+
+- The purpose of the data quality assessment guides the selection of indicators, measures, and thresholds
+
+- DHIS2 allows configuration of a DQA dashboard for any selection of indicators; FASTR selects indicators that will be used in a specific analysis
+
+- DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness - it is important for strengthening routine reporting but less important for analysis with available data
+
+- DHIS2 DQA includes reporting completeness and indicator completeness while FASTR focuses only on indicator completeness
+
+---
+
+
+
+## Indicator completeness
+
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
+
+**What it measures:** The extent to which facilities report data on selected core indicators
+
+**Why it matters:**
+- Higher completeness improves data reliability
+- Stability over time strengthens trend analysis
+
+**Key distinction:**
+Indicator completeness ≠ reporting completeness. This metric examines specific data elements, not just whether the monthly form was submitted.
+
+</div>
+<div style="flex: 2;">
+
+![Completeness Illustration](../resources/diagrams/completeness_illustration.svg)
+
+</div>
+</div>
+
+---
+
+## Definition of indicator completeness
+
+For the FASTR analysis, completeness is defined as:
+
+**The percentage of reporting facilities each month out of the total number of facilities expected to report.**
+
+- A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
+- A facility is expected to report if it has reported any volume for that indicator anytime within a year
+- Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
+
+---
+
+## Notes on completeness
+
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services may not be delivered in facilities, or some facilities may not report
+
+- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
+
+
+---
+
+## Completeness: Percent of monthly values that are complete
+
+<p style="font-size: 0.9em; margin-bottom: 0.5rem;">For a given indicator in a given time period, the percent of monthly values that are complete:</p>
+
+<p style="font-size: 0.9em;"><strong>% complete = # monthly values that are complete / total N of monthly values</strong></p>
+
+![Indicator Completeness h:340](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+
+---
+
+
+
+## Outliers
+
+The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series.
+
+Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems.
+
+For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis).
+
+---
+
+## Outlier illustration
+
+Region A displays an anomalous spike in February that substantially exceeds values reported by other regions — indicative of a data entry error or reporting issue.
+
+![Outlier Impact](../resources/diagrams/outlier_impact.svg)
+
+---
+
+## Outlier detection methodology
+
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
+
+An outlier is defined as:
+
+A value greater than **10 times the median absolute deviation (MAD)** from the monthly median value for the indicator in each time period, **OR** a value for which the proportional contribution in volume for a facility, indicator, and time period is **greater than 80%**
+
+**AND** for which:
+
+- The volume is **greater than or equal to the median**
+- The volume is **not missing**
+- The volume is **greater than 100**
+
+---
+
+## Outliers: Percent of monthly values that are outliers
+
+For a given indicator in a given time period, the percent of monthly values that are outliers:
+
+**% outliers = # monthly values that are outliers / total N of monthly values**
+
+![Outliers h:340](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+
+---
+
+
+
+## Consistency between related indicators
+
+Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
+
+---
+
+## Indicator pairs assessed
+
+<div class="columns">
+<div>
+
+| Indicator pair | Expected relationship |
+|----------------|----------------------|
+| ANC1 / ANC4 | Ratio should be ≥ 0.95 |
+| Penta1 / Penta3 | Ratio should be ≥ 0.95 |
+| BCG / Facility delivery | Within 30% (≥0.7 and ≤1.3) |
+
+These pairs have expected relationships. We expect ANC1 > ANC4 since not all women complete four visits.
+
+BCG is a birth dose vaccine so we expect similar numbers to facility deliveries, with a 30% tolerance for variability.
+
+</div>
+<div>
+
+![Consistency illustration h:280](../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
+
+---
+
+## Why assess consistency at district level?
+
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
+
+Patients often access different services at different facilities within a district:
+
+- A woman may attend **ANC1** at a nearby health post, but travel to a health centre for **ANC4**
+- A child may receive **Penta1** at a local clinic, but complete **Penta3** at a district hospital
+
+Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
+
+</div>
+<div style="flex: 2;">
+
+![District consistency](../resources/diagrams/district_consistency.svg)
+
+</div>
+</div>
+
+---
+
+## Internal consistency: FASTR output
+
+![Internal Consistency h:420](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+---
+
+
+
+## Data quality summary score
+
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
+
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
+
+---
+
+## Definition of adequate data quality
+
+For the FASTR analysis, we defined adequate data quality as:
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
+- No outliers for OPD, Penta1, and ANC1, where available, **AND**
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+
+---
+
+## Overall DQA score: Percent of monthly values meeting all criteria
+
+For a given indicator in a given time period, the percent of monthly values meeting all DQA criteria:
+
+**% adequate quality = # monthly values meeting all criteria / total N of monthly values**
+
+![Overall DQA Score h:340](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+---
+
+## Mean DQA score: How close are we to adequate quality?
+
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
+
+**Mean DQA = (completeness & outlier score + consistency score) / 2**
+
+
+![Mean DQA Score h:320](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 

@@ -4,9 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## Data quality assessment - Module 1
+## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
 
-Evaluating the reliability of routine health information system data
+- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+
+- We use only high-volume indicators, because the most-used services provide more stable estimates
+
+- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
+
+- We believe that using the data and providing feedback is the first step to improving the data
+
+We will discuss each of these areas over the next sessions.
 
 ---
 ## Rationale for data quality assessment
@@ -16,6 +24,8 @@ Evaluating the reliability of routine health information system data
 - Reporting gaps affect data completeness
 - Inconsistencies exist between related indicators
 
+&nbsp;
+
 **Implications:** Data quality limitations affect decision-making
 - Inaccurate assessments of service delivery trends
 - Misidentification of areas requiring intervention
@@ -23,11 +33,17 @@ Evaluating the reliability of routine health information system data
 
 ---
 
-## Objectives of data quality assessment
+## Assessing and adjusting for data quality
+
+Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
+
+&nbsp;
 
 **Objective 1: Enable analytical adjustment**
 
 Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+
+&nbsp;
 
 **Objective 2: Monitor data quality trends**
 
@@ -37,15 +53,6 @@ Data quality assessment enables ongoing monitoring to:
 - Evaluate the effectiveness of data quality improvement initiatives over time
 
 ---
-## Core dimensions of data quality
+## Measures of data quality
 
-**1. Completeness**
-Are health facilities submitting reports consistently?
-
-**2. Outlier prevalence**
-Are reported values within plausible ranges?
-
-**3. Internal consistency**
-Do related indicators demonstrate expected relationships?
-
-These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.
+![Measures of data quality]({{WORKSHOP_MEDIA}}/measures_data_quality.png)

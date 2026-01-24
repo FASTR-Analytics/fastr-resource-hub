@@ -1531,9 +1531,17 @@ The FASTR analysis follows a sequential workflow where each step builds on the p
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
-## Data quality assessment - Module 1
+## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
 
-Evaluating the reliability of routine health information system data
+- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+
+- We use only high-volume indicators, because the most-used services provide more stable estimates
+
+- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
+
+- We believe that using the data and providing feedback is the first step to improving the data
+
+We will discuss each of these areas over the next sessions.
 
 ---
 ## Rationale for data quality assessment
@@ -1543,6 +1551,8 @@ Evaluating the reliability of routine health information system data
 - Reporting gaps affect data completeness
 - Inconsistencies exist between related indicators
 
+&nbsp;
+
 **Implications:** Data quality limitations affect decision-making
 - Inaccurate assessments of service delivery trends
 - Misidentification of areas requiring intervention
@@ -1550,11 +1560,17 @@ Evaluating the reliability of routine health information system data
 
 ---
 
-## Objectives of data quality assessment
+## Assessing and adjusting for data quality
+
+Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
+
+&nbsp;
 
 **Objective 1: Enable analytical adjustment**
 
 Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+
+&nbsp;
 
 **Objective 2: Monitor data quality trends**
 
@@ -1564,18 +1580,67 @@ Data quality assessment enables ongoing monitoring to:
 - Evaluate the effectiveness of data quality improvement initiatives over time
 
 ---
-## Core dimensions of data quality
+## Measures of data quality
 
-**1. Completeness**
-Are health facilities submitting reports consistently?
+![Measures of data quality]({{WORKSHOP_MEDIA}}/measures_data_quality.png)
+<!-- /SLIDE -->
 
-**2. Outlier prevalence**
-Are reported values within plausible ranges?
+<!-- SLIDE:m4_1a -->
+<style scoped>
+table { font-size: 0.55em; }
+td, th { padding: 4px 8px !important; }
+</style>
 
-**3. Internal consistency**
-Do related indicators demonstrate expected relationships?
+## Measures of data quality - detailed (1/2)
 
-These three dimensions provide a comprehensive assessment of data reliability for analytical purposes.
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Completeness** | Are all data present? Is there sufficient information available to make decisions about the health of the population and to target resources to improve health-system coverage, efficiency and quality? | • Assessed by measuring whether all units that are supposed to report actually do (reporting completeness)<br>• Assessed by measuring the completeness of indicator data (no missing values); this is different from overall reporting completeness in that it looks at completeness of specific data elements (indicator completeness) |
+| **Timeliness** | Are data regularly submitted on time? | • Assessed by measuring whether the units that submitted reports did so before a set deadline (timeliness) |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_1d -->
+<style scoped>
+table { font-size: 0.5em; }
+td, th { padding: 4px 8px !important; }
+</style>
+
+## Measures of data quality - detailed (2/2)
+
+| Domain | What does it measure? | How is it assessed? |
+|--------|----------------------|---------------------|
+| **Consistency** | Are data plausible in view of what has been previously reported? | • Trends are evaluated to determine whether reported values are extreme relative to other values reported during the year or across several years (presence of outliers)<br>• Assess trends in program indicators to determine whether reported values are extreme in relation to other values reported during the year or over several years (consistency over time)<br>• Assess program indicators which have a predictable relationship to determine whether the expected relationship exists between those 2 indicators (consistency between related indicators)<br>• Assess the level of agreement between two sources of data measuring the same health indicator (external comparison with other data sources)<br>• Determine the adequacy of the population data used in evaluating the performance of health indicators (consistency of population data) |
+| **Accuracy** | Do data faithfully reflect the actual level of service delivery conducted in the health facility? | • Assess the accuracy for selected indicators through the review of source documents in health facilities and comparison to monthly reports and HMIS values (data verification factor) |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_1b -->
+## How does FASTR data quality analysis differ from DHIS2? (1/2)
+
+**Purpose of data quality assessment**
+
+- **DHIS2:** focuses on data quality assessment to routinely strengthen data quality over time
+- **FASTR:** focuses on assessing data quality to inform an analysis which answers a pressing policy question
+
+&nbsp;
+
+**Data quality adjustment**
+
+- **DHIS2:** focus is on identifying data quality issues and working with facilities to improve reporting practices
+- **FASTR:** focus on applying analytical adjustment techniques to account for data quality issues in the analysis; goal is to generate the most robust estimates despite data quality challenges
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_1c -->
+## How does FASTR data quality analysis differ from DHIS2? (2/2)
+
+**Selection of indicators, measures, and thresholds** – FASTR focuses on DQA elements most relevant for analysis
+
+- The purpose of the data quality assessment guides the selection of indicators, measures, and thresholds
+
+- DHIS2 allows configuration of a DQA dashboard for any selection of indicators; FASTR selects indicators that will be used in a specific analysis
+
+- DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness - it is important for strengthening routine reporting but less important for analysis with available data
+
+- DHIS2 DQA includes reporting completeness and indicator completeness while FASTR focuses only on indicator completeness
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
@@ -1733,7 +1798,9 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 ## Internal consistency: FASTR output
 
-![Internal Consistency h:420](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+**% meeting consistency criteria** = (number of areas where indicator ratio meets threshold) / (total number of areas) × 100
+
+![Internal Consistency h:380](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_5 -->
@@ -1767,9 +1834,9 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 ## Mean DQA score: How close are we to adequate quality?
 
-The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of 100% means the data passes all DQA checks—no missing values, no outliers, and consistent reporting.
 
-**Mean DQA = (completeness & outlier score + consistency score) / 2**
+**Average data quality score across facilities** = (number of OPD, ANC1, and Penta1 monthly values that are complete, not outliers, and consistent) / (total number of OPD, ANC1, and Penta1 monthly values)
 
 
 ![Mean DQA Score h:320](resources/default_outputs/Default_6._Mean_DQA_score.png)
@@ -1785,5 +1852,183 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 | **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
 | **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
 | **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
+<!-- /SLIDE -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONDENSED SLIDES: Methods + Interpretation Combined
+     For workshops requiring shorter, high-level overview
+═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m4_s1 -->
+## FASTR analytical pipeline
+
+The FASTR analysis follows a sequential workflow:
+
+1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
+2. **Adjust for quality issues** - Apply corrections to improve data reliability
+3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+
+![Analytical Pipeline h:280](resources/diagrams/analytical_pipeline.svg)
+
+---
+
+## FASTR approach to data quality
+
+FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**.
+
+- Conduct granular, facility-level data quality assessments
+- Focus on high-volume indicators that produce more stable estimates
+- Emphasize variation over time and space rather than point estimates
+- Interpret results collaboratively with in-country decision-makers
+
+**Using data and providing feedback is viewed as the first step toward improving data quality.**
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s2 -->
+## Rationale for data quality assessment
+
+**Challenge:** Routine health facility data may contain quality limitations:
+- Reported values outside plausible ranges
+- Reporting gaps affecting completeness
+- Inconsistencies between related indicators
+
+**Implications:** These limitations can distort decision-making:
+- Inaccurate assessment of service delivery trends
+- Misidentification of areas needing intervention
+- Suboptimal resource allocation
+
+---
+
+## Objectives of data quality assessment
+
+**Objective 1: Enable analytical adjustment**
+Systematic assessment supports targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
+
+**Objective 2: Monitor data quality trends**
+- Inform indicator selection based on quality profiles
+- Guide targeted interventions and supportive supervision
+- Evaluate effectiveness of improvement initiatives over time
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s3 -->
+## Indicator completeness
+
+Indicator completeness measures whether facilities that should be reporting data on specific indicators are actually doing so. This is different from overall reporting completeness - we're looking at specific data elements, not just whether the monthly form was submitted.
+
+**Definition:** Percentage of facilities reporting each month out of facilities expected to report.
+- A facility is "reporting" if there is a non-missing, non-zero value for the indicator that month
+- A facility is "expected to report" if it has reported any volume for that indicator within the past year
+
+Higher and stable completeness improves data reliability.
+
+---
+
+## Indicator completeness output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Completeness output h:320](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing completeness by indicator and region over time.
+
+**Formula:** Completeness % = (facilities reporting / facilities expected) × 100
+
+**Interpretation:** Look for systematic gaps by region or indicator, declining trends, or seasonal patterns. Low completeness suggests reporting barriers needing attention.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s3b -->
+## Outlier detection
+
+Outliers are values that are suspiciously **high** compared to a facility's usual reporting volume. They may result from data entry errors or genuine programmatic changes (e.g., campaigns).
+
+**Note:** FASTR only flags high values as outliers - unusually low values are not flagged, as these more likely reflect service disruptions than data errors.
+
+**How outliers are identified:** For each facility and indicator, we assess within-facility variation in monthly reporting. A value is flagged if it deviates significantly from the facility's typical pattern (using statistical thresholds based on median absolute deviation).
+
+---
+
+## Outlier detection output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Outliers output h:320](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing proportion of values flagged as outliers by indicator and region.
+
+**Formula:** Outlier % = (values flagged / total values) × 100
+
+**Interpretation:** High rates may indicate data entry errors or legitimate events like campaigns. Review facility registers to distinguish between the two.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s4 -->
+## Internal consistency
+
+Internal consistency checks whether related indicators maintain expected logical relationships. For example, ANC1 should always be ≥ ANC4 (you can't have a 4th visit without a 1st). Similarly, Penta1 ≥ Penta3. When these relationships are violated, it signals data quality issues like double-counting, under-reporting, or data flow errors.
+
+FASTR assesses consistency at the **district level** rather than facility level. This is because patients frequently seek care from different facilities within the same district - a woman may have her ANC1 visit at a health post but travel to the district hospital for ANC4. Assessing at district level accounts for this patient movement.
+
+---
+
+## Internal consistency output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Consistency output h:320](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing the % of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
+
+**Formula:** Consistency % = (districts meeting criteria / total districts) × 100
+
+**Interpretation:** Low consistency may indicate data flow problems, double-counting, or systematic under-reporting at the district level.
+
+</div>
+</div>
+
+---
+
+## DQA mean: combining all quality dimensions
+
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of 100% means the data passes all DQA checks - no missing values, no outliers, and consistent reporting.
+
+**Average DQA score across facilities** = (number of monthly values that are complete, not outliers, and consistent) ÷ (total number of monthly values)
+
+---
+
+## DQA mean output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![DQA score output h:320](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing DQA mean by indicator and region, color-coded from red (poor) to green (good).
+
+**Formula:** (values that are complete, not outliers, and consistent) ÷ (total values)
+
+**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts.
+
+</div>
+</div>
 <!-- /SLIDE -->
 

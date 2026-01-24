@@ -74,8 +74,8 @@ schedule:
 
     - time: "11:00-12:00"
       session: "Data extraction: Rationale and methods"
-      module: m2
-      slides: [data_extraction_platform.md]
+      topics: [m2_0, m2_1, m2_1b, m2_1d, m2_2]
+      slides: [data_extraction_platform.md, activity_data_downloader.md]
       speaker: "GFF FASTR team"
       duration: 60
 
@@ -84,7 +84,7 @@ schedule:
 
     - time: "12:00-12:30"
       session: "Getting participants into the platform"
-      topics: [m3_1, m3_1b, m3_2a, m3_2b, m3_2c, m3_2d, m3_2]
+      topics: [m3_1, m3_1b, m3_2a, m3_2b, m3_2c, m3_2d]
       speaker: "GFF FASTR team"
       duration: 30
 
@@ -98,7 +98,7 @@ schedule:
 
     - time: "14:00-15:30"
       session: "Configuring the analysis platform"
-      topics: [m3_3, m3_4, m3_5]
+      topics: [m3_2e, m3_3, m3_4, m3_5]
       speaker: "GFF FASTR team"
       duration: 90
 
@@ -127,11 +127,11 @@ schedule:
       duration: 15
 
     - type: section
-      session: "Session 6: Overview of FASTR methods and analytical outputs"
+      session: "Session 6: Overview of FASTR methods and interpretation"
 
     - time: "09:15-10:15"
-      session: "Data quality, service utilization, coverage"
-      topics: [m4_0, m4_1, m4_2, m4_3, m4_4, m4_5, m4_6, m5_1, m5_2, m5_3, m5_4, m6_1, m6_2, m6_3, m6_4, m6_5a, m6_6, m6_7, m6_8, m6_9, m6_10, m6_11, m6_12, m6_13, m6_14, m6_16, m6_17, m6_18, m6_19]
+      session: "Data quality, service utilization, coverage: Methods and interpretation"
+      topics: [m4_s1, m4_s2, m4_s3, m4_s3b, m4_s4, m5_s1, m5_s2, m6_s1, m6_s2, m6_s3, m6_s4]
       speaker: "GFF FASTR team"
       duration: 60
 
@@ -178,22 +178,13 @@ schedule:
       duration: 15
 
     - type: section
-      session: "Session 10: Interpretation of visualizations"
+      session: "Session 10: Creating a Q4 2025 report"
 
-    - time: "09:15-10:15"
-      session: "Approaches to support interpretation"
-      topics: [m7_1, m7_1a, m7_1b, m7_1c]
-      speaker: "GFF FASTR team"
-      duration: 60
-
-    - type: section
-      session: "Session 11: Creating a Q4 2025 report"
-
-    - time: "10:15-12:30"
+    - time: "09:15-12:30"
       session: "Creating short and long reports with country context"
       topics: [m7_5]
       speaker: "GFF FASTR team"
-      duration: 135
+      duration: 195
 
     - time: "12:30-14:00"
       session: "Lunch Break"
@@ -201,17 +192,17 @@ schedule:
       duration: 90
 
     - type: section
-      session: "Session 11 (cont'd): Creating a Q4 2025 report"
+      session: "Session 10 (cont'd): Creating a Q4 2025 report"
 
-    - time: "14:00-15:00"
+    - time: "14:00-15:30"
       session: "Continue report creation with country context"
       speaker: "GFF FASTR team"
-      duration: 60
+      duration: 90
 
     - type: section
-      session: "Session 12: Presenting reports"
+      session: "Session 11: Presenting reports"
 
-    - time: "14:30-15:30"
+    - time: "15:30-16:30"
       session: "Present reports, group feedback"
       topics: [m7_4]
       speaker: "GFF FASTR team"
@@ -228,7 +219,7 @@ schedule:
       duration: 15
 
     - type: section
-      session: "Session 13: Overview of FASTR HFA phone survey"
+      session: "Session 12: Overview of FASTR HFA phone survey"
 
     - time: "09:15-10:15"
       session: "HFA overview and questionnaire adaptation guidelines"
@@ -237,7 +228,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 14: Questionnaire adaptation to the Zambian context"
+      session: "Session 13: Questionnaire adaptation to the Zambian context"
 
     - time: "10:15-12:30"
       session: "Review questionnaire + hands-on adaptation"
@@ -250,7 +241,7 @@ schedule:
       duration: 90
 
     - type: section
-      session: "Session 14 (cont'd): Questionnaire adaptation"
+      session: "Session 13 (cont'd): Questionnaire adaptation"
 
     - time: "14:00-15:00"
       session: "Continue questionnaire adaptation (in groups)"
@@ -258,7 +249,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 15: Discussion: HFA adapted questionnaire"
+      session: "Session 14: Discussion: HFA adapted questionnaire"
 
     - time: "14:30-15:30"
       session: "Discuss adapted questionnaire in plenary"
@@ -266,7 +257,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 16: Discussion: HFA priorities and data use"
+      session: "Session 15: Discussion: HFA priorities and data use"
 
     - time: "15:30-16:30"
       session: "HFA priorities and data use case in Zambia"
@@ -274,7 +265,7 @@ schedule:
       duration: 60
 
     - type: section
-      session: "Session 17: Action planning and wrap-up"
+      session: "Session 16: Action planning and wrap-up"
 
     - time: "16:30-17:00"
       session: "Key messages and wrap-up"

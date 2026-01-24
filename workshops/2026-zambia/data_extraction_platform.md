@@ -14,7 +14,7 @@ The FASTR analytics platform contains a direct import feature to automatically i
 </div>
 <div>
 
-![Platform import h:380](../../resources/screenshots/platform_import.png)
+![Direct import h:480](../../resources/screenshots/direct_import.png)
 
 </div>
 </div>

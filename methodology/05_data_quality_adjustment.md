@@ -935,7 +935,9 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment. h:380](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+**% change in volume** = (adjusted value - original value) / original value × 100
+
+![Percent change in volume due to outlier adjustment. h:340](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 <!-- /SLIDE -->
 
@@ -957,12 +959,75 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment. h:380](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+**% change in volume** = (adjusted value - original value) / original value × 100
+
+![Percent change in volume due to completeness adjustment. h:340](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
 ## Combined adjustment: FASTR output
 
-![Percent change in volume due to both outlier and completeness adjustment. h:380](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+**% change in volume** = (adjusted value - original value) / original value × 100
+
+![Percent change in volume due to both outlier and completeness adjustment. h:340](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 <!-- /SLIDE -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONDENSED SLIDES: Methods + Interpretation Combined
+═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m5_s1 -->
+## Data quality adjustment
+
+**Why adjust?** Outliers and reporting gaps identified in the DQA will distort service utilization and coverage estimates if left uncorrected. The goal is to replace problematic values with reasonable estimates based on each facility's own historical patterns.
+
+**How?** Outliers and missing values are replaced using 6-month rolling averages from the facility's historical data.
+
+**Four parallel datasets:** FASTR produces unadjusted, outliers-only adjusted, completeness-only adjusted, and both-adjusted versions. This enables sensitivity analysis - comparing results across scenarios to assess how much conclusions depend on adjustment choices.
+
+**Excluded from adjustment:** Mortality indicators (discrete events that shouldn't be smoothed) and low-volume indicators (<100 events/month, where adjustment adds noise).
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_s2 -->
+## Outlier adjustment output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Outlier adjustment h:320](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after replacing outliers with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically negative (outliers removed reduce volume). Large adjustments warrant investigation into their source.
+
+</div>
+</div>
+
+---
+
+## Completeness adjustment output
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Completeness adjustment h:320](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after imputing missing data with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically positive (imputation adds volume). Large adjustments indicate areas needing completeness improvement.
+
+</div>
+</div>
+<!-- /SLIDE -->
+

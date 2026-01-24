@@ -21,4 +21,6 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ## Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment. h:380](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+**% change in volume** = (adjusted value - original value) / original value × 100
+
+![Percent change in volume due to completeness adjustment. h:340](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)

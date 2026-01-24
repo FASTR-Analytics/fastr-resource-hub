@@ -20,4 +20,6 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ## Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment. h:380](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+**% change in volume** = (adjusted value - original value) / original value × 100
+
+![Percent change in volume due to outlier adjustment. h:340](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)

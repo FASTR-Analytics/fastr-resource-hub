@@ -206,18 +206,24 @@ Available analysis modules, module installation, running analyses
 -->
 
 <!-- SLIDE:m3_1 -->
-## Introduction to the FASTR Analytics Platform
+## FASTR analytics platform
 
-The FASTR analytics platform is a web-based tool for data quality assessment, adjustment, and analysis of routine health data.
+<div class="columns">
+<div>
 
-**Key features:**
+The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
 
-- Upload and analyze data from DHIS2 and other sources
-- Built-in statistical methods for data quality adjustment
-- User-friendly interface for running analyses
-- Flexible visualization and export options
+It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
 
-**In this session, we will provide a conceptual walkthrough of the platform and its capabilities.**
+The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
+
+</div>
+<div>
+
+![FASTR platform h:380]({{WORKSHOP_MEDIA}}/fastr_platform.png)
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_1b -->
@@ -253,14 +259,20 @@ An instance contains:
 
 There are two levels of permissions in the platform:
 
+&nbsp;
+
 **Instance-level roles:**
 
 - **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+
+&nbsp;
 
 **Project-level roles:**
 
 - **Project Editors** can create visualizations, create reports, and download/export results
 - **Project Viewers** can view visualizations, view reports, and download/export results
+
+&nbsp;
 
 *Administrators are assigned per instance; Editors and Viewers are assigned per project.*
 <!-- /SLIDE -->
@@ -330,6 +342,19 @@ table img { max-height: 280px !important; width: auto !important; }
 *Facilitator will demonstrate in the live platform*
 <!-- /SLIDE -->
 
+<!-- SLIDE:m3_2e -->
+## Configuring the analysis platform
+
+- Configuration of the analysis platform is an admin feature
+
+- We will work together to configure the following items:
+  - Admin areas (regions, districts)
+  - Facility structure
+  - Indicator definitions
+
+- Note since this is an admin feature all participants will NOT be doing this step. Instead, you will select one person to have admin rights, and they will help us walk through these steps.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m3_3 -->
 ## Activity: Setting Up Admin Areas
 
@@ -380,27 +405,41 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_7 -->
-## Activity: Creating Visualizations
+## Activity: Creating visualizations
 
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
 
-- Explore available chart types
-- Create and customize visualizations
-- Export charts for use in reports
+**I do:** Facilitator demonstrates creating a time series chart for ANC1
 
-*Participants will build visualizations from their analysis*
+**We do:** Together, we create a second visualization (bar chart comparing regions)
+
+**You do:** Create one visualization of your choice and export it for your report
+
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_8 -->
-## Activity: Creating Reports
+## Activity: Creating reports
 
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
+![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
 
-- Use report templates
-- Generate automated reports
-- Customize report content and layout
+**I do:** Facilitator demonstrates creating a report using the template
 
-*Participants will create their first quarterly report draft*
+**We do:** Together, we use the AI assistant to generate report text from our visualizations
+
+**You do:** Complete your draft report with your own content and export it
+
+---
+
+## Using the AI assistant
+
+**To interpret a visualization:**
+> *"Describe what this chart shows and write 2-3 sentences summarizing the main findings for a Ministry of Health quarterly report."*
+
+**To analyze subnational variation:**
+> *"Compare the regions shown in this chart. Which provinces are performing well and which need attention? Suggest possible reasons for the differences."*
+
+The AI will analyze your chart and generate text you can edit for your report.
+
 <!-- /SLIDE -->
 
 ---

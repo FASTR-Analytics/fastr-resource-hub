@@ -4,12 +4,18 @@ theme: fastr
 paginate: true
 ---
 
-# See You Tomorrow!
+<!-- _class: section-cover -->
 
-**Day {{DAY_NUMBER}} Complete**
+![bg](../resources/backgrounds/section_slide.png)
 
-We resume tomorrow at **{{DAY_START_TIME}}**
+# Key messages and wrap-up
 
-{{NEXT_DAY_PREVIEW}}
+---
+
+<!-- _class: section-cover -->
+
+![bg](../resources/backgrounds/section_slide.png)
+
+# Reflections from Participants
 
 ---

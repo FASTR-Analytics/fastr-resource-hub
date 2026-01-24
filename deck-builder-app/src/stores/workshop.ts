@@ -50,9 +50,6 @@ export interface WorkshopConfig {
     website?: string
     // Workshop content for slides
     objectives?: string      // Bullet points, one per line
-    scope_of_work?: string   // Bullet points, one per line
-    expected_outputs?: string // Bullet points, one per line
-    priorities?: string      // Bullet points, one per line
   }
   schedule: {
     days: number
@@ -64,7 +61,6 @@ export interface WorkshopConfig {
     modules: number[]
     custom_slides: string[]
   }
-  country_data: Record<string, string>
 }
 
 export interface WorkshopSummary {
@@ -368,15 +364,69 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     }
   },
 
-  // Add a new day
+  // Add a new day (Day 2+ structure)
   addDay: () => {
     const { currentConfig } = get()
     if (!currentConfig) return
 
-    const numDays = currentConfig.schedule.days + 1
-    currentConfig.schedule.days = numDays
-    currentConfig.schedule[`day${numDays}`] = []
-    set({ currentConfig: { ...currentConfig } })
+    const newDayNum = currentConfig.schedule.days + 1
+    const prevDayNum = newDayNum - 1
+
+    // Create starter sessions for the new day (Day 2+ skeleton)
+    const starterSessions: Session[] = [
+      // Day Title slide
+      {
+        _id: `day-title-${newDayNum}-${Date.now()}`,
+        session: `Day ${newDayNum}`,
+        type: 'day_title',
+        slides: ['day_title.md'],
+        duration: 0,
+        icon: 'calendar',
+      },
+      // Recap of previous day
+      {
+        _id: `day-recap-${newDayNum}-${Date.now()}`,
+        session: `Recap of Day ${prevDayNum}`,
+        type: 'day_recap',
+        duration: 15,
+        icon: 'recap',
+        recap_yesterday: '',
+        recap_today: '',
+      },
+      // Day agenda
+      {
+        _id: `day-agenda-${newDayNum}-${Date.now()}`,
+        session: `Day ${newDayNum} Agenda`,
+        type: 'section',
+        duration: 5,
+        icon: 'list',
+      },
+      // End of Day (placeholder for content to go before this)
+      {
+        _id: `day-end-${newDayNum}-${Date.now()}`,
+        session: `End of Day ${newDayNum}`,
+        type: 'day_end',
+        slides: ['day_end.md'],
+        duration: 5,
+        icon: 'sunset',
+      },
+    ]
+
+    const newSchedule: any = {
+      ...currentConfig.schedule,
+      days: newDayNum,
+      [`day${newDayNum}`]: starterSessions,
+    }
+
+    // Set default start time if not exists
+    if (!newSchedule.day_start_times) {
+      newSchedule.day_start_times = {}
+    }
+    if (!newSchedule.day_start_times[newDayNum]) {
+      newSchedule.day_start_times[newDayNum] = '09:00'
+    }
+
+    set({ currentConfig: { ...currentConfig, schedule: newSchedule } })
     get().saveCurrentWorkshop()
   },
 
@@ -492,7 +542,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
           }
 
           else if (tool.name === 'update_workshop_settings') {
-            // Update workshop settings (objectives, scope, etc.)
+            // Update workshop settings (objectives, etc.)
             if (currentConfig) {
               const updates: string[] = []
               const workshopUpdates: Partial<typeof currentConfig.workshop> = {}
@@ -500,18 +550,6 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
               if (input.objectives) {
                 workshopUpdates.objectives = input.objectives
                 updates.push('objectives')
-              }
-              if (input.scope_of_work) {
-                workshopUpdates.scope_of_work = input.scope_of_work
-                updates.push('scope of work')
-              }
-              if (input.expected_outputs) {
-                workshopUpdates.expected_outputs = input.expected_outputs
-                updates.push('expected outputs')
-              }
-              if (input.priorities) {
-                workshopUpdates.priorities = input.priorities
-                updates.push('priorities')
               }
               if (input.facilitators) {
                 workshopUpdates.facilitators = input.facilitators
@@ -585,6 +623,366 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
                 get().saveCurrentWorkshop()
                 actionsTaken.push(`Moved "${session.session}" from Day ${input.from_day} to Day ${input.to_day}`)
               }
+            }
+          }
+
+          else if (tool.name === 'set_workshop_days') {
+            // Change number of days
+            if (currentConfig) {
+              const oldDays = currentConfig.schedule.days
+              const newDays = input.num_days
+
+              const newSchedule: any = { ...currentConfig.schedule, days: newDays }
+
+              // If reducing days and redistribute is true, move sessions to remaining days
+              if (newDays < oldDays && input.redistribute) {
+                const sessionsToRedistribute: Session[] = []
+                for (let d = newDays + 1; d <= oldDays; d++) {
+                  const sessions = (currentConfig.schedule as any)[`day${d}`] || []
+                  sessionsToRedistribute.push(...sessions.filter((s: Session) => s.type !== 'break'))
+                  delete newSchedule[`day${d}`]
+                }
+                // Add to last day
+                if (sessionsToRedistribute.length > 0) {
+                  const lastDayKey = `day${newDays}`
+                  newSchedule[lastDayKey] = [
+                    ...(newSchedule[lastDayKey] || []),
+                    ...sessionsToRedistribute,
+                  ]
+                }
+              } else if (newDays < oldDays) {
+                // Just delete sessions from removed days
+                for (let d = newDays + 1; d <= oldDays; d++) {
+                  delete newSchedule[`day${d}`]
+                }
+              } else if (newDays > oldDays) {
+                // Add empty days
+                for (let d = oldDays + 1; d <= newDays; d++) {
+                  newSchedule[`day${d}`] = []
+                }
+              }
+
+              const newConfig = { ...currentConfig, schedule: newSchedule }
+              set({ currentConfig: newConfig })
+              get().saveCurrentWorkshop()
+              actionsTaken.push(`Changed workshop from ${oldDays} days to ${newDays} days`)
+            }
+          }
+
+          else if (tool.name === 'clear_day') {
+            // Clear all sessions from a day
+            if (currentConfig) {
+              const dayKey = `day${input.day}`
+              const sessionCount = (currentConfig.schedule[dayKey] || []).length
+
+              const newConfig = {
+                ...currentConfig,
+                schedule: {
+                  ...currentConfig.schedule,
+                  [dayKey]: [],
+                },
+              }
+              set({ currentConfig: newConfig })
+              get().saveCurrentWorkshop()
+              actionsTaken.push(`Cleared ${sessionCount} sessions from Day ${input.day}`)
+            }
+          }
+
+          else if (tool.name === 'swap_days') {
+            // Swap content of two days
+            if (currentConfig) {
+              const day1Key = `day${input.day1}`
+              const day2Key = `day${input.day2}`
+              const schedule = currentConfig.schedule as any
+              const day1Sessions = schedule[day1Key] || []
+              const day2Sessions = schedule[day2Key] || []
+              const day1Title = currentConfig.schedule.day_titles?.[input.day1] || ''
+              const day2Title = currentConfig.schedule.day_titles?.[input.day2] || ''
+
+              const newSchedule: any = {
+                ...currentConfig.schedule,
+                [day1Key]: day2Sessions,
+                [day2Key]: day1Sessions,
+                day_titles: {
+                  ...currentConfig.schedule.day_titles,
+                  [input.day1]: day2Title,
+                  [input.day2]: day1Title,
+                },
+              }
+              const newConfig = { ...currentConfig, schedule: newSchedule }
+              set({ currentConfig: newConfig })
+              get().saveCurrentWorkshop()
+              actionsTaken.push(`Swapped Day ${input.day1} and Day ${input.day2}`)
+            }
+          }
+
+          else if (tool.name === 'restructure_schedule') {
+            // Major schedule restructure
+            if (currentConfig) {
+              const oldDays = currentConfig.schedule.days
+              const newDays = input.new_num_days
+              const strategy = input.strategy || 'redistribute'
+
+              // Collect all sessions, filtering out day-specific and structural content
+              const contentSessions: Session[] = []
+              const seenModules = new Set<string>() // Track modules to avoid duplicates
+              const seenSessionNames = new Set<string>() // Track session names to avoid duplicates
+
+              // Structural slides to filter out (by slides array content)
+              const structuralSlides = [
+                'title_slide.md', 'day_title.md', 'welcome_slide.md',
+                'introductions_slide.md', 'closing.md', 'day_end.md',
+                'breaks.md', 'expectations_slide.md', 'custom_slides/01_objectives.md',
+                'title', 'agenda'
+              ]
+
+              // Structural session names to filter out (be specific to avoid filtering real content)
+              const structuralNames = [
+                'title slide', 'cover slide', 'cover page',
+                'welcome and opening', 'opening remarks', 'opening & welcome',
+                'introductions', 'participant introductions',
+                'workshop objectives', 'objectives',
+                'expectations',
+                'agenda', 'day 1 agenda', 'day 2 agenda', 'day 3 agenda', 'day 4 agenda', 'day 5 agenda',
+                'closing', 'contact information', 'contact info',
+                'end of day', 'day wrap-up', 'day wrap up', 'day wrapup',
+                'recap of day', 'day recap',
+                'key messages and wrap-up', 'reflections from participants'
+              ]
+
+              for (let d = 1; d <= oldDays; d++) {
+                const sessions = (currentConfig.schedule as any)[`day${d}`] || []
+                for (const s of sessions) {
+                  // Skip by type
+                  if (s.type === 'break') continue
+                  if (s.type === 'day_recap') continue
+                  if (s.type === 'day_end') continue
+                  if (s.type === 'day_title') continue
+                  if (s.type === 'section') continue
+
+                  // Skip structural slides (by slides array)
+                  if (s.slides?.some((slide: string) => structuralSlides.includes(slide))) continue
+
+                  // Skip structural sessions (by name)
+                  const sessionNameLower = (s.session || '').toLowerCase()
+                  if (structuralNames.some(name => sessionNameLower.includes(name))) continue
+
+                  // Skip duplicate modules
+                  if (s.module) {
+                    if (seenModules.has(s.module)) continue
+                    seenModules.add(s.module)
+                  }
+
+                  // Skip duplicate session names (for non-module content)
+                  if (!s.module) {
+                    if (seenSessionNames.has(sessionNameLower)) continue
+                    seenSessionNames.add(sessionNameLower)
+                  }
+
+                  // Keep actual content sessions
+                  contentSessions.push(s)
+                }
+              }
+
+              // Build new schedule
+              const newSchedule: any = {
+                days: newDays,
+                day_titles: {},
+                day_start_times: {},
+              }
+
+              // Copy start times for existing days
+              for (let d = 1; d <= newDays; d++) {
+                newSchedule.day_start_times[d] = currentConfig.schedule.day_start_times?.[d] || '09:00'
+              }
+
+              if (strategy === 'redistribute' || strategy === 'compress') {
+                // Distribute sessions evenly across new days
+                const sessionsPerDay = Math.ceil(contentSessions.length / newDays)
+
+                for (let d = 1; d <= newDays; d++) {
+                  const isFirstDay = d === 1
+                  const isLastDay = d === newDays
+                  const startIdx = (d - 1) * sessionsPerDay
+                  const endIdx = Math.min(startIdx + sessionsPerDay, contentSessions.length)
+                  const daySessions = contentSessions.slice(startIdx, endIdx)
+
+                  const finalDaySessions: Session[] = []
+
+                  if (isFirstDay) {
+                    // Day 1: Title/Cover slide first
+                    finalDaySessions.push({
+                      _id: `title-slide-${Date.now()}`,
+                      session: currentConfig.workshop?.name || 'Workshop',
+                      slides: ['title_slide.md'],
+                      duration: 0,
+                      icon: 'cover',
+                    })
+
+                    // Welcome and Opening Remarks (Day 1 only)
+                    finalDaySessions.push({
+                      _id: `welcome-${Date.now()}`,
+                      session: 'Welcome and Opening Remarks',
+                      slides: ['welcome_slide.md'],
+                      duration: 10,
+                      icon: 'welcome',
+                    })
+
+                    // Introductions (Day 1 only)
+                    finalDaySessions.push({
+                      _id: `introductions-${Date.now()}`,
+                      session: 'Introductions',
+                      slides: ['introductions_slide.md'],
+                      duration: 15,
+                      icon: 'people',
+                    })
+
+                    // Workshop Objectives (Day 1 only)
+                    finalDaySessions.push({
+                      _id: `objectives-${Date.now()}`,
+                      session: 'Workshop Objectives',
+                      slides: ['custom_slides/01_objectives.md'],
+                      duration: 10,
+                      icon: 'target',
+                    })
+
+                    // Expectations (Day 1 only)
+                    finalDaySessions.push({
+                      _id: `expectations-${Date.now()}`,
+                      session: 'Expectations',
+                      slides: ['expectations_slide.md'],
+                      duration: 15,
+                      icon: 'sticky',
+                    })
+
+                    // Day 1 Agenda
+                    finalDaySessions.push({
+                      _id: `day-agenda-${d}-${Date.now()}`,
+                      session: `Day ${d} Agenda`,
+                      type: 'section',
+                      duration: 5,
+                      icon: 'list',
+                    })
+                  } else {
+                    // Day 2+: Day Title slide
+                    finalDaySessions.push({
+                      _id: `day-title-${d}-${Date.now()}`,
+                      session: `Day ${d}`,
+                      type: 'day_title',
+                      slides: ['day_title.md'],
+                      duration: 0,
+                      icon: 'calendar',
+                    })
+
+                    // Recap of previous day
+                    finalDaySessions.push({
+                      _id: `day-recap-${d}-${Date.now()}`,
+                      session: `Recap of Day ${d - 1}`,
+                      type: 'day_recap',
+                      duration: 15,
+                      icon: 'recap',
+                      recap_yesterday: '',
+                      recap_today: '',
+                    })
+
+                    // Day N Agenda
+                    finalDaySessions.push({
+                      _id: `day-agenda-${d}-${Date.now()}`,
+                      session: `Day ${d} Agenda`,
+                      type: 'section',
+                      duration: 5,
+                      icon: 'list',
+                    })
+                  }
+
+                  // Add content sessions with clock-based break insertion
+                  // Break windows (in minutes from midnight):
+                  // - Morning tea: 10:00-11:00 (600-660 min)
+                  // - Lunch: 12:00-13:30 (720-810 min)
+                  // - Afternoon tea: 14:30-15:30 (870-930 min)
+                  const dayStartTime = newSchedule.day_start_times?.[d] || '09:00'
+                  const [startHour, startMin] = dayStartTime.split(':').map(Number)
+                  let currentTimeMinutes = startHour * 60 + startMin // Minutes from midnight
+
+                  let morningTeaAdded = false
+                  let lunchAdded = false
+                  let afternoonTeaAdded = false
+
+                  const MORNING_TEA_WINDOW = { start: 600, end: 660 }   // 10:00-11:00
+                  const LUNCH_WINDOW = { start: 720, end: 810 }         // 12:00-13:30
+                  const AFTERNOON_TEA_WINDOW = { start: 870, end: 930 } // 14:30-15:30
+
+                  for (let i = 0; i < daySessions.length; i++) {
+                    finalDaySessions.push(daySessions[i])
+                    currentTimeMinutes += daySessions[i].duration || 0
+
+                    // Don't add break after last content session
+                    if (i >= daySessions.length - 1) continue
+
+                    // Check if we should add morning tea
+                    if (!morningTeaAdded && currentTimeMinutes >= MORNING_TEA_WINDOW.start && currentTimeMinutes <= MORNING_TEA_WINDOW.end) {
+                      finalDaySessions.push({
+                        _id: `break-tea-morning-${d}-${Date.now()}`,
+                        session: 'Tea Break',
+                        type: 'break',
+                        duration: 15,
+                      })
+                      morningTeaAdded = true
+                      currentTimeMinutes += 15
+                    }
+                    // Check if we should add lunch
+                    else if (!lunchAdded && currentTimeMinutes >= LUNCH_WINDOW.start && currentTimeMinutes <= LUNCH_WINDOW.end) {
+                      finalDaySessions.push({
+                        _id: `break-lunch-${d}-${Date.now()}`,
+                        session: 'Lunch Break',
+                        type: 'break',
+                        duration: 60,
+                      })
+                      lunchAdded = true
+                      currentTimeMinutes += 60
+                    }
+                    // Check if we should add afternoon tea
+                    else if (!afternoonTeaAdded && currentTimeMinutes >= AFTERNOON_TEA_WINDOW.start && currentTimeMinutes <= AFTERNOON_TEA_WINDOW.end) {
+                      finalDaySessions.push({
+                        _id: `break-tea-afternoon-${d}-${Date.now()}`,
+                        session: 'Tea Break',
+                        type: 'break',
+                        duration: 15,
+                      })
+                      afternoonTeaAdded = true
+                      currentTimeMinutes += 15
+                    }
+                  }
+
+                  // Add Day End at the end
+                  finalDaySessions.push({
+                    _id: `day-end-${d}-${Date.now()}`,
+                    session: `End of Day ${d}`,
+                    type: 'day_end',
+                    slides: ['day_end.md'],
+                    duration: 5,
+                    icon: 'sunset',
+                  })
+
+                  // Add Closing slide (contact info) on last day only
+                  if (isLastDay) {
+                    finalDaySessions.push({
+                      _id: `closing-${Date.now()}`,
+                      session: 'Contact Information',
+                      slides: ['closing.md'],
+                      duration: 0,
+                      icon: 'contact',
+                    })
+                  }
+
+                  newSchedule[`day${d}`] = finalDaySessions
+                }
+              }
+
+              const newConfig = { ...currentConfig, schedule: newSchedule }
+              set({ currentConfig: newConfig })
+              get().saveCurrentWorkshop()
+              actionsTaken.push(`Restructured workshop from ${oldDays} to ${newDays} days (${strategy} strategy)`)
             }
           }
         }

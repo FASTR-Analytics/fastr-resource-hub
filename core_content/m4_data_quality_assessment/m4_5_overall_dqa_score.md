@@ -34,9 +34,9 @@ For a given indicator in a given time period, the percent of monthly values meet
 
 ## Mean DQA score: How close are we to adequate quality?
 
-The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of **100% means the data passes** all DQA checks—no missing values, no outliers, and consistent reporting.
+The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of 100% means the data passes all DQA checks—no missing values, no outliers, and consistent reporting.
 
-**Mean DQA = (completeness & outlier score + consistency score) / 2**
+**Average data quality score across facilities** = (number of OPD, ANC1, and Penta1 monthly values that are complete, not outliers, and consistent) / (total number of OPD, ANC1, and Penta1 monthly values)
 
 
 ![Mean DQA Score h:320](../../resources/default_outputs/Default_6._Mean_DQA_score.png)

@@ -86,23 +86,35 @@ export function QuickAddMenu({
   }
 
   const handleAddDayStart = () => {
-    onAddSession({
-      session: `Day ${dayNumber} Recap`,
-      type: 'day_recap',
-      duration: 10,
-      icon: 'recap',
-      recap_yesterday: '',
-      recap_today: '',
-    })
+    // Add recap of previous day (only makes sense if not day 1)
+    if (dayNumber > 1) {
+      onAddSession({
+        session: `Recap of Day ${dayNumber - 1}`,
+        type: 'day_recap',
+        duration: 15,
+        icon: 'recap',
+        recap_yesterday: '',
+        recap_today: '',
+      })
+    }
+    // Add day agenda
+    setTimeout(() => {
+      onAddSession({
+        session: `Day ${dayNumber} Agenda`,
+        type: 'section',
+        duration: 5,
+        icon: 'list',
+      })
+    }, 50) // Small delay to ensure proper ordering
   }
 
   const handleAddDayEnd = () => {
     onAddSession({
       session: `End of Day ${dayNumber}`,
       type: 'day_end',
+      slides: ['day_end.md'],
       duration: 5,
       icon: 'sunset',
-      wrapup_message: '',
     })
   }
 

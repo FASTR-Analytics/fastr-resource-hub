@@ -539,8 +539,15 @@ ipcMain.handle('get-slide-content', async (_event, slideId: string, workshopId: 
     // Map slideId to template file
     const templateMap: Record<string, string> = {
       'title': 'title_slide.md',
+      'day_title': 'day_title.md',
+      'welcome': 'welcome_slide.md',
+      'introductions': 'introductions_slide.md',
+      'expectations': 'expectations_slide.md',
+      'demo_platform': 'demo_platform_slide.md',
       'closing': 'closing.md',
       'day_end': 'day_end.md',
+      'day_recap': 'day_recap.md',
+      'breaks': 'breaks.md',
       'objectives': 'custom_slides/01_objectives.md',
       'country_overview': 'custom_slides/02_country-overview.md',
       'health_priorities': 'custom_slides/03_health-priorities.md',
@@ -649,33 +656,47 @@ const TEMPLATE_CATEGORIES = [
     name: 'Structure',
     description: 'Workshop structure slides',
     templates: [
-      { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover' },
-      { id: 'agenda', file: 'agenda', name: 'Agenda', icon: 'list', special: true },
+      { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover', preview: 'Workshop cover slide with title, country, dates' },
+      { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Day 1 only - Welcome and opening remarks' },
+      { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Day 1 only - Participant introductions' },
+      { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day 2+ intro slide with day number, title and date' },
       { id: 'section', file: null, name: 'Section Divider', icon: 'divider', special: true },
-      { id: 'closing', file: 'closing.md', name: 'Closing Slide', icon: 'end' },
+      { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Key messages, wrap-up, and participant reflections' },
+      { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide of workshop - contact information' },
     ]
   },
   {
     id: 'breaks',
-    name: 'Breaks & Transitions',
-    description: 'Break and day transition slides',
+    name: 'Breaks',
+    description: 'Break slides',
     templates: [
-      { id: 'tea', file: null, name: 'Tea Break', icon: 'coffee', special: true, preview: '15-minute tea/coffee break' },
-      { id: 'lunch', file: null, name: 'Lunch Break', icon: 'lunch', special: true, preview: '60-minute lunch break' },
-      { id: 'day_end', file: null, name: 'End of Day', icon: 'sunset', special: true, preview: 'Wrap up the day, preview tomorrow. Uses dayN_wrapup.md from workshop folder.' },
-      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true, preview: 'Recap previous day, preview today. Uses dayN_recap.md from workshop folder.' },
+      { id: 'tea', file: 'breaks.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
+      { id: 'lunch', file: 'breaks.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
+    ]
+  },
+  {
+    id: 'day_transitions',
+    name: 'Day Transitions',
+    description: 'Day recap and preview slides',
+    templates: [
+      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true, preview: 'Day 2+ only - Recap previous day, preview today' },
+    ]
+  },
+  {
+    id: 'activities',
+    name: 'Activities & Demos',
+    description: 'Interactive session slides',
+    templates: [
+      { id: 'expectations', file: 'expectations_slide.md', name: 'Expectations', icon: 'sticky', preview: 'Sticky note activity for participant expectations' },
+      { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Platform Demo', icon: 'demo', preview: 'FASTR Analytics Platform demonstration' },
     ]
   },
   {
     id: 'custom',
-    name: 'Custom Slide Templates',
-    description: 'Pre-made slide templates to customize',
+    name: 'Workshop Content',
+    description: 'Workshop-specific content slides',
     templates: [
-      { id: 'objectives', file: 'custom_slides/01_objectives.md', name: 'Workshop Objectives', icon: 'target' },
-      { id: 'country', file: 'custom_slides/02_country-overview.md', name: 'Country Overview', icon: 'globe' },
-      { id: 'priorities', file: 'custom_slides/03_health-priorities.md', name: 'Health Priorities', icon: 'heart' },
-      { id: 'results', file: 'custom_slides/04_coverage-results.md', name: 'Coverage Results', icon: 'chart' },
-      { id: 'next_steps', file: 'custom_slides/99_next-steps.md', name: 'Next Steps', icon: 'arrow' },
+      { id: 'objectives', file: 'custom_slides/01_objectives.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives' },
     ]
   }
 ]
@@ -1092,14 +1113,11 @@ const AI_TOOLS = [
   },
   {
     name: 'update_workshop_settings',
-    description: 'Update workshop settings like objectives, scope, outputs, priorities, or basic info. Use this to fill in workshop content based on user context.',
+    description: 'Update workshop settings like objectives or basic info. Use this to fill in workshop content based on user context.',
     input_schema: {
       type: 'object' as const,
       properties: {
         objectives: { type: 'string', description: 'Workshop objectives as bullet points (one per line, with or without leading dash)' },
-        scope_of_work: { type: 'string', description: 'Scope of work items as bullet points' },
-        expected_outputs: { type: 'string', description: 'Expected outputs as bullet points' },
-        priorities: { type: 'string', description: 'Key priorities/focus areas as bullet points' },
         facilitators: { type: 'string', description: 'Facilitator names' },
         venue: { type: 'string', description: 'Workshop venue' },
         contact_email: { type: 'string', description: 'Contact email' },
@@ -1147,6 +1165,58 @@ const AI_TOOLS = [
       required: ['from_day', 'from_position', 'to_day'],
     },
   },
+  {
+    name: 'set_workshop_days',
+    description: 'Change the number of days in the workshop. Use this to expand or reduce the workshop duration.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        num_days: { type: 'number', description: 'New number of days for the workshop (1-10)' },
+        redistribute: { type: 'boolean', description: 'If reducing days, whether to redistribute sessions from removed days to remaining days (default: false - sessions are deleted)' },
+      },
+      required: ['num_days'],
+    },
+  },
+  {
+    name: 'clear_day',
+    description: 'Remove all sessions from a specific day. Use this to start fresh with a day.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to clear (1, 2, 3, etc.)' },
+      },
+      required: ['day'],
+    },
+  },
+  {
+    name: 'swap_days',
+    description: 'Swap the content of two days. Use this to reorganize the workshop structure.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day1: { type: 'number', description: 'First day' },
+        day2: { type: 'number', description: 'Second day' },
+      },
+      required: ['day1', 'day2'],
+    },
+  },
+  {
+    name: 'restructure_schedule',
+    description: 'Completely restructure the workshop schedule. Use this for major reorganization like changing from 3 days to 2 days with smart redistribution.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        new_num_days: { type: 'number', description: 'New number of days' },
+        strategy: {
+          type: 'string',
+          enum: ['compress', 'expand', 'redistribute'],
+          description: 'How to handle the restructure: compress (merge sessions), expand (spread out), redistribute (balance across days)'
+        },
+        keep_breaks: { type: 'boolean', description: 'Whether to keep existing breaks in logical positions (default: true)' },
+      },
+      required: ['new_num_days'],
+    },
+  },
 ]
 
 ipcMain.handle('ai-chat', async (_event, messages: any[], context: any) => {
@@ -1184,10 +1254,14 @@ You can use tools to:
 2. **add_break** - Add tea or lunch breaks
 3. **add_custom_session** - Add custom sessions (opening remarks, group work, etc.)
 4. **set_day_start_time** - Set the start time for a day
-5. **update_workshop_settings** - Fill in workshop objectives, scope, outputs, priorities, and other settings
+5. **update_workshop_settings** - Fill in workshop objectives and other settings
 6. **move_session** - Move a session to a different position within a day (reorder)
 7. **remove_session** - Remove a session from the deck
 8. **move_session_to_day** - Move a session from one day to another
+9. **set_workshop_days** - Change the number of days in the workshop (expand or reduce)
+10. **clear_day** - Remove all sessions from a specific day
+11. **swap_days** - Swap the content of two days
+12. **restructure_schedule** - Completely restructure the workshop (e.g., compress 3 days into 2, redistribute content)
 
 # INSTRUCTIONS
 - When the user asks to add content, USE THE TOOLS to actually add it
@@ -1195,14 +1269,39 @@ You can use tools to:
 - If the user asks a question without wanting changes, just answer without using tools
 - Be proactive: if they say "add Data Analysis module", use add_module with module_number=6
 - Consider adding appropriate breaks when building a full day agenda
-- If asked to fill in settings/objectives/scope, use update_workshop_settings with appropriate content based on the workshop context
-- For objectives/scope/outputs, generate practical FASTR-relevant content (e.g., "Configure the analytics platform", "Produce quarterly report", "Train staff on data quality assessment")
+- If asked to fill in settings/objectives, use update_workshop_settings with appropriate content based on the workshop context
+- For objectives, generate practical FASTR-relevant content (e.g., "Configure the analytics platform", "Produce quarterly report", "Train staff on data quality assessment")
 - When reorganizing, look at the current schedule and use move_session/remove_session to improve the logical flow
 - A good workshop order typically: Opening/Intro → Foundation modules → Hands-on modules → Analysis → Communication → Wrap-up
 - Add breaks between long modules (after ~90 min of content)
+
+# RESTRUCTURING WORKSHOPS
+When asked to change the workshop structure (e.g., "make it 2 days instead of 3"):
+- Use **restructure_schedule** for major changes - it will intelligently redistribute content
+- Use **set_workshop_days** for simple day count changes
+- Use **clear_day** + manual moves for custom reorganization
+- Use **swap_days** to exchange content between days
+- When compressing days, keep essential content and remove redundant breaks
+- When expanding days, add appropriate breaks and spread content evenly
+- ALWAYS actually execute the changes - don't just describe what you would do
 - IMPORTANT: Complete ALL requested changes in a single response. Don't just describe what you'll do - actually call all the tools needed.
 - If asked to "fill in settings AND reorganize", do BOTH in one response using multiple tool calls.
-- Always execute the full task, don't split it across multiple messages.`
+- Always execute the full task, don't split it across multiple messages.
+
+# CLEANING UP / FIXING MESSY SCHEDULES
+**IMPORTANT**: When the user asks to "clean up", "fix", "restructure", "reorganize", or "tidy" the workshop:
+1. **ALWAYS use restructure_schedule** - this is the ONLY tool that properly fixes messy schedules
+2. The restructure_schedule tool will:
+   - Remove ALL breaks, recaps, day titles, day ends, sections
+   - Keep ONLY the actual content (modules, custom sessions)
+   - Redistribute content evenly across the specified number of days
+   - Add proper day structure: Day Title → Recap → Agenda → Content with breaks → Day End
+   - Enforce rules: max 2 tea breaks per day, max 1 lunch per day
+3. Do NOT try to fix issues one by one with remove_session - that's tedious and error-prone
+4. Set new_num_days to the current number of days (or requested number) to clean up without changing day count
+
+Example: User says "clean up this messy workshop" or "the schedule is broken, fix it"
+→ Call restructure_schedule with new_num_days equal to the current days count and strategy="redistribute"`
 
     const response = await client.messages.create({
       model: 'claude-3-5-haiku-20241022',
