@@ -377,47 +377,139 @@ function App() {
     }
 
     // Add starter sessions for each day
+    const ts = Date.now()
     for (let d = 1; d <= newWorkshop.days; d++) {
       schedule.day_start_times[d] = '09:00'
-      schedule.day_titles[d] = `Day ${d}`
-      schedule[`day${d}`] = [
-        {
-          _id: `day-title-${d}-${Date.now()}`,
-          session: `Day ${d}`,
-          type: 'day_title',
-          slides: ['day_title.md'],
-          duration: 0,
-        },
-        {
-          _id: `day-agenda-${d}-${Date.now()}`,
-          session: `Day ${d} Agenda`,
-          type: 'section',
-          duration: 5,
-        },
-        ...(d > 1
-          ? [
-              {
-                _id: `day-recap-${d}-${Date.now()}`,
-                session: `Recap of Day ${d - 1}`,
-                type: 'day_recap',
-                duration: 15,
-              },
-            ]
-          : []),
-        {
-          _id: `lunch-${d}-${Date.now()}`,
-          session: 'Lunch Break',
-          type: 'break',
-          duration: 60,
-        },
-        {
-          _id: `day-end-${d}-${Date.now()}`,
-          session: `End of Day ${d}`,
-          type: 'day_end',
-          slides: ['day_end.md'],
-          duration: 5,
-        },
-      ]
+      schedule.day_titles[d] = ''
+
+      if (d === 1) {
+        // Day 1 has required opening sequence
+        schedule[`day${d}`] = [
+          {
+            _id: `title-slide-${ts}`,
+            session: newWorkshop.name || 'FASTR Workshop',
+            type: 'day_title',
+            slides: ['title_slide.md'],
+            duration: 0,
+            icon: 'cover',
+          },
+          {
+            _id: `welcome-${ts}`,
+            session: 'Welcome and Opening Remarks',
+            slides: ['welcome_slide.md'],
+            duration: 10,
+            icon: 'welcome',
+          },
+          {
+            _id: `introductions-${ts}`,
+            session: 'Introductions',
+            slides: ['introductions_slide.md'],
+            duration: 15,
+            icon: 'people',
+          },
+          {
+            _id: `day-agenda-1-${ts}`,
+            session: 'Day 1 Agenda',
+            type: 'section',
+            duration: 5,
+            icon: 'list',
+          },
+          {
+            _id: `objectives-${ts}`,
+            session: 'Workshop Objectives',
+            slides: ['objectives_slide.md'],
+            duration: 10,
+            icon: 'target',
+          },
+          {
+            _id: `expectations-${ts}`,
+            session: 'Expectations',
+            slides: ['expectations_slide.md'],
+            duration: 10,
+            icon: 'clipboard',
+          },
+          {
+            _id: `expected-outputs-${ts}`,
+            session: 'Expected Outputs',
+            slides: ['expected_outputs_slide.md'],
+            duration: 10,
+            icon: 'output',
+          },
+          {
+            _id: `session-1-${ts}`,
+            session: 'Session 1',
+            duration: 60,
+            icon: 'presentation',
+          },
+          {
+            _id: `break-tea-morning-1-${ts}`,
+            session: 'Tea Break',
+            type: 'break',
+            duration: 15,
+          },
+          {
+            _id: `lunch-1-${ts}`,
+            session: 'Lunch Break',
+            type: 'break',
+            duration: 60,
+          },
+          {
+            _id: `day-end-1-${ts}`,
+            session: 'End of Day 1',
+            type: 'day_end',
+            slides: ['day_end.md'],
+            duration: 5,
+          },
+        ]
+      } else {
+        // Day 2+ has recap and standard structure
+        schedule[`day${d}`] = [
+          {
+            _id: `day-title-${d}-${ts}`,
+            session: `Day ${d}`,
+            type: 'day_title',
+            slides: ['day_title.md'],
+            duration: 0,
+          },
+          {
+            _id: `day-recap-${d}-${ts}`,
+            session: `Recap of Day ${d - 1}`,
+            type: 'day_recap',
+            duration: 15,
+          },
+          {
+            _id: `day-agenda-${d}-${ts}`,
+            session: `Day ${d} Agenda`,
+            type: 'section',
+            duration: 5,
+          },
+          {
+            _id: `session-${d}-1-${ts}`,
+            session: 'Session 1',
+            duration: 60,
+            icon: 'presentation',
+          },
+          {
+            _id: `break-tea-morning-${d}-${ts}`,
+            session: 'Tea Break',
+            type: 'break',
+            duration: 15,
+          },
+          {
+            _id: `lunch-${d}-${ts}`,
+            session: 'Lunch Break',
+            type: 'break',
+            duration: 60,
+          },
+          {
+            _id: `day-end-${d}-${ts}`,
+            session: `End of Day ${d}`,
+            type: 'day_end',
+            slides: ['day_end.md'],
+            duration: 5,
+          },
+        ]
+      }
     }
 
     const config = {

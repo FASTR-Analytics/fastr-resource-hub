@@ -44,11 +44,6 @@ The wizard asks for:
 workshops/2025-nigeria/
 ├── workshop.yaml              # Settings, schedule, country data
 ├── 01_objectives.md           # Custom slide: workshop goals
-├── 02_country-overview.md     # Custom slide: country context
-├── 03_health-priorities.md    # Custom slide: focus areas
-├── 04_coverage-results.md     # Custom slide: results
-├── 05_disruption-local.md     # Custom slide: disruption analysis
-├── 06_dq-findings.md          # Custom slide: DQ findings
 ├── 99_next-steps.md           # Custom slide: action items
 ├── media/                     # Workshop-specific images
 │   └── outputs/               # FASTR platform outputs
@@ -89,7 +84,6 @@ content:
     - agenda
     - 01_objectives.md        # Custom slide
     - m0                      # Module 0: Introduction
-    - 02_country-overview.md  # Custom slide
     - m1                      # Module 1: Questions
     - m2                      # Module 2: Extraction
     - m3                      # Module 3: Platform (auto-splits if >90 min)

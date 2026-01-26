@@ -110,8 +110,6 @@ The wizard asks for:
 workshops/2025-nigeria/
 ├── workshop.yaml              # Settings, schedule, country data
 ├── 01_objectives.md           # Custom slide: workshop goals
-├── 02_country-overview.md     # Custom slide: country context
-├── 03_health-priorities.md    # Custom slide: focus areas
 ├── 99_next-steps.md           # Custom slide: action items
 └── media/                     # Workshop-specific images
 ```
@@ -125,8 +123,8 @@ workshop:
   location: "Abuja, Nigeria"
 
 country_data:
-  total_facilities: "2,847"
-  reporting_rate: "92%"
+  LOCATION: "Abuja"
+  COUNTRY: "Nigeria"
   # Add your country's data here
 ```
 

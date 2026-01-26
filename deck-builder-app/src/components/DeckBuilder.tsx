@@ -286,7 +286,6 @@ export function DeckBuilder() {
         'closing': { session: 'Closing', slides: ['closing.md'], duration: 5, icon: 'end' },
         'tea': { session: 'Tea Break', type: 'break', duration: 15, icon: 'coffee' },
         'lunch': { session: 'Lunch Break', type: 'break', duration: 60, icon: 'lunch' },
-        'results': { session: 'Coverage Results', slides: ['04_coverage-results.md'], duration: 15, icon: 'chart' },
         'next_steps': { session: 'Next Steps', slides: ['99_next-steps.md'], duration: 10, icon: 'arrow' },
       }
       const config = templateConfig[templateId] || { session: templateId, duration: 10 }

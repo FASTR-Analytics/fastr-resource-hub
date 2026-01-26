@@ -549,9 +549,6 @@ ipcMain.handle('get-slide-content', async (_event, slideId: string, workshopId: 
       'day_recap': 'day_recap.md',
       'breaks': 'breaks.md',
       'objectives': 'custom_slides/01_objectives.md',
-      'country_overview': 'custom_slides/02_country-overview.md',
-      'health_priorities': 'custom_slides/03_health-priorities.md',
-      'coverage_results': 'custom_slides/04_coverage-results.md',
       'next_steps': 'custom_slides/99_next-steps.md',
     }
 

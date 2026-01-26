@@ -301,6 +301,7 @@ function substituteVariables(
     '{{DAY_TITLE}}': config.schedule.day_titles?.[dayNumber] || `Day ${dayNumber}`,
     '{{SESSION_NAME}}': session.session || '',
     '{{RESUME_TIME}}': calculateResumeTime(session),
+    '{{LAST_DAY}}': String(config.schedule.days || 1),
     // Cover slide fields
     '{{TITLE}}': workshop.title || 'STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE',
     '{{SUBTITLE}}': workshop.subtitle || 'Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring',

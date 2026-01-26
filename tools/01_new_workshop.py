@@ -333,8 +333,6 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
         custom_slides = {
             'opening': [
                 ('Workshop Objectives', 15, ['01_objectives.md']),
-                ('Country Overview', 20, ['02_country-overview.md']),
-                ('Health Priorities', 15, ['03_health-priorities.md']),
             ],
             'closing': [
                 ('Next Steps & Action Planning', 20, ['99_next-steps.md']),
@@ -740,43 +738,10 @@ def main():
     # ─────────────────────────────────────────────────────────────────────────
     # STEP 5: Country Data
     # ─────────────────────────────────────────────────────────────────────────
-    print("\n" + "─" * 70)
-    print("STEP 5: Country Overview Slides (optional)")
-    print("─" * 70 + "\n")
-
-    include_country_overview = get_input(
-        "   Include country overview slides with population stats? [y/N]", "n"
-    ).lower().startswith('y')
-
-    total_population = ""
-    total_facilities = ""
-    facilities_reporting = ""
-    reporting_rate = ""
-    women_reproductive_age = ""
-    under5_population = ""
-    expected_pregnancies = ""
-    expected_births = ""
-    last_survey = ""
-
-    if include_country_overview:
-        print("\n   Fill in country statistics for your slides.")
-        print("   Press Enter to skip - you can add these later in workshop.yaml\n")
-
-        total_population = get_input("   Total population", "")
-        total_facilities = get_input("   Total health facilities", "")
-        facilities_reporting = get_input("   Facilities reporting to DHIS2", "")
-        reporting_rate = get_input("   DHIS2 reporting rate", "")
-        women_reproductive_age = get_input("   Women of reproductive age", "")
-        under5_population = get_input("   Children under 5", "")
-        expected_pregnancies = get_input("   Expected pregnancies/year", "")
-        expected_births = get_input("   Expected live births/year", "")
-        last_survey = get_input("   Last survey (e.g., DHS 2022)", "")
-
-    # ─────────────────────────────────────────────────────────────────────────
-    # STEP 6: Workshop Content
+    # STEP 5: Workshop Content
     # ─────────────────────────────────────────────────────────────────────────
     print("\n" + "─" * 70)
-    print("STEP 6: Workshop Content (optional)")
+    print("STEP 5: Workshop Content (optional)")
     print("─" * 70 + "\n")
     print("   Press Enter for defaults - edit the .md files in your workshop folder later.\n")
 
@@ -795,23 +760,6 @@ def main():
             "Learn to assess and adjust for data quality issues",
             "Apply methods to analyze service utilization and coverage",
             "Practice interpreting and communicating results"
-        ]
-
-    # Health priorities
-    print("\n   Health priorities to focus on (enter each, empty line to finish):")
-    print("   Example: 'Maternal mortality reduction'\n")
-    health_priorities = []
-    while True:
-        hp = input(f"   Priority {len(health_priorities)+1}: ").strip()
-        if not hp:
-            break
-        health_priorities.append(hp)
-    if not health_priorities:
-        health_priorities = [
-            "Maternal health services (ANC, skilled birth attendance)",
-            "Child immunization coverage",
-            "Family planning services",
-            "Data quality improvement"
         ]
 
     # Next steps
@@ -869,8 +817,6 @@ def main():
             'modules': selected_modules,
             'custom_slides': [
                 '01_objectives.md',
-            ] + (['02_country-overview.md'] if include_country_overview else []) + [
-                '03_health-priorities.md',
                 '99_next-steps.md',
             ]
         },
@@ -881,20 +827,10 @@ def main():
             'WORKSHOP_NAME': f"FASTR Workshop - {country}",
             'DATE': date_str,
             'FACILITATORS': facilitators,
-            'total_facilities': total_facilities or '[number of facilities]',
-            'facilities_reporting': facilities_reporting or '[facilities reporting to DHIS2]',
-            'reporting_rate': reporting_rate or '[XX%]',
-            'total_population': total_population or '[X million]',
-            'women_reproductive_age': women_reproductive_age or '[X million]',
-            'under5_population': under5_population or '[X million]',
-            'expected_pregnancies': expected_pregnancies or '[X per year]',
-            'expected_births': expected_births or '[X per year]',
-            'last_survey': last_survey or '[DHS YYYY or MICS YYYY]',
         },
         # Workshop content
         'workshop_content': {
             'objectives': objectives,
-            'health_priorities': health_priorities,
             'next_steps': next_steps,
         }
     }
@@ -1089,10 +1025,8 @@ schedule:
 #   - 'type: break'    → Generates a break slide
 #
 # CUSTOM SLIDES (edit these in your workshop folder):
-#   01_objectives.md       - Workshop objectives
-#   02_country-overview.md - Country context
-#   03_health-priorities.md - Health priorities to focus on
-#   99_next-steps.md       - Action items (at end)
+#   01_objectives.md   - Workshop objectives
+#   99_next-steps.md   - Action items (at end)
 #
 # TO MOVE CONTENT: Cut and paste sessions between days
 # TO ADD A BREAK: Add a session with 'type: break'
@@ -1103,39 +1037,21 @@ content:
   modules: {selected_modules}
   custom_slides:
     - 01_objectives.md
-{"    - 02_country-overview.md" if include_country_overview else ""}
-    - 03_health-priorities.md
-    - 04_coverage-results.md
-    - 05_disruption-local.md
-    - 06_dq-findings.md
     - 99_next-steps.md
 
 # ───────────────────────────────────────────────────────────────────────
 # COUNTRY DATA - Variables for {{{{placeholder}}}} substitution
 # ───────────────────────────────────────────────────────────────────────
 # These values replace {{{{variable_name}}}} in your slides.
-# Example: {{{{total_population}}}} becomes "45 million"
-# Edit the values below with your country's data.
+# Example: {{{{LOCATION}}}} becomes "Lusaka"
 # ───────────────────────────────────────────────────────────────────────
 
 country_data:
-  # Auto-filled from workshop info
   LOCATION: "{location}"
   COUNTRY: "{country}"
   WORKSHOP_NAME: "{config['workshop']['name']}"
   DATE: "{date_str}"
   FACILITATORS: "{facilitators}"
-
-  # Health system data
-  total_facilities: "{total_facilities or '[number of facilities]'}"
-  facilities_reporting: "{facilities_reporting or '[facilities reporting to DHIS2]'}"
-  reporting_rate: "{reporting_rate or '[XX%]'}"
-  total_population: "{total_population or '[X million]'}"
-  women_reproductive_age: "{women_reproductive_age or '[X million]'}"
-  under5_population: "{under5_population or '[X million]'}"
-  expected_pregnancies: "{expected_pregnancies or '[X per year]'}"
-  expected_births: "{expected_births or '[X per year]'}"
-  last_survey: "{last_survey or '[DHS YYYY or MICS YYYY]'}"
 """)
     print(f"   ✓ workshop.yaml")
 
@@ -1159,26 +1075,6 @@ By the end of this workshop, participants will be able to:
     with open(os.path.join(workshop_dir, "01_objectives.md"), 'w') as f:
         f.write(objectives_content)
     print(f"   ✓ 01_objectives.md")
-
-    # 03_health-priorities.md
-    hp_bullets = '\n'.join([f"- {hp}" for hp in health_priorities])
-    priorities_content = f"""---
-marp: true
-theme: fastr
-paginate: true
----
-
-# Health Priorities
-
-## Focus areas for {country}
-
-{hp_bullets}
-
----
-"""
-    with open(os.path.join(workshop_dir, "03_health-priorities.md"), 'w') as f:
-        f.write(priorities_content)
-    print(f"   ✓ 03_health-priorities.md")
 
     # 99_next-steps.md
     ns_bullets = '\n'.join([f"- {ns}" for ns in next_steps])
@@ -1292,12 +1188,12 @@ We resume at **{start_time}**
                 f.write(wrapup_content)
             print(f"   ✓ day{day}_wrapup.md")
 
-    # Copy remaining templates (country-overview, coverage-results, etc.)
+    # Copy remaining templates from custom_slides
     templates_dir = os.path.join(base_dir, "templates", "custom_slides")
     if os.path.exists(templates_dir):
         for tmpl in Path(templates_dir).glob("*.md"):
             # Skip ones we already generated
-            if tmpl.name in ['01_objectives.md', '03_health-priorities.md', '99_next-steps.md']:
+            if tmpl.name in ['01_objectives.md', '99_next-steps.md']:
                 continue
             dest = os.path.join(workshop_dir, tmpl.name)
             if not os.path.exists(dest):
@@ -1356,8 +1252,6 @@ Add your FASTR platform outputs to `media/outputs/` to include them in slides.
     print(f"   ─────────────────────────────────────────────────────")
     print(f"   workshop.yaml          → Schedule, modules, country data")
     print(f"   01_objectives.md       → Workshop objectives")
-    print(f"   02_country-overview.md → Country context")
-    print(f"   03_health-priorities.md → Health priorities")
     print(f"   99_next-steps.md       → Action items")
     print(f"   media/outputs/         → Add FASTR charts here")
 
