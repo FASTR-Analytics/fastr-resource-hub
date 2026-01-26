@@ -236,7 +236,8 @@ const TEMPLATE_CATEGORIES = [
     name: 'Workshop Content',
     description: 'Workshop-specific content slides',
     templates: [
-      { id: 'objectives', file: 'custom_slides/01_objectives.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives' },
+      { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives (from Settings)' },
+      { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Day 1 - Workshop deliverables (from Settings)' },
     ]
   }
 ]

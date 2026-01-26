@@ -11,7 +11,21 @@ import {
   Plus,
   Pencil,
   Trash2,
+  Lock,
 } from 'lucide-react'
+
+// Compulsory session types that are locked
+const compulsoryTypes = ['day_title', 'day_end', 'day_recap', 'section']
+
+// Check if session is locked based on name patterns
+function isSessionLocked(sessionName: string, sessionType: string): boolean {
+  if (compulsoryTypes.includes(sessionType)) return true
+  const name = sessionName.toLowerCase()
+  if (name.includes('agenda') || name.includes('objectives') || name.includes('expectations') ||
+      name.includes('expected outputs') || name.includes('introductions') ||
+      name.includes('welcome') || name.includes('recap')) return true
+  return false
+}
 import { CustomSlideEditor } from './CustomSlideEditor'
 import {
   DndContext,
@@ -62,6 +76,8 @@ interface SortableSessionProps {
 }
 
 function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteClick }: SortableSessionProps) {
+  const isLocked = isSessionLocked(session.sessionName, session.sessionType)
+
   const {
     attributes,
     listeners,
@@ -69,7 +85,7 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: session.sessionId })
+  } = useSortable({ id: session.sessionId, disabled: isLocked })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -89,47 +105,55 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
     custom: 'bg-teal-500',
   }
 
-  const bgColor = typeColors[session.sessionType] || 'bg-gray-500'
+  const bgColor = isLocked ? 'bg-gray-400' : (typeColors[session.sessionType] || 'bg-gray-500')
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative ${isDragging ? 'z-50 opacity-80' : ''}`}
+      className={`relative ${isDragging ? 'z-50 opacity-80' : ''} ${isLocked ? 'opacity-60' : ''}`}
     >
       {/* Session header with drag handle */}
       <div
         className={`flex items-center gap-2 px-3 py-2 rounded-t-lg ${bgColor} text-white`}
       >
-        <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing">
-          <GripVertical className="w-4 h-4 opacity-70" />
-        </div>
+        {isLocked ? (
+          <Lock className="w-4 h-4 opacity-70" />
+        ) : (
+          <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing">
+            <GripVertical className="w-4 h-4 opacity-70" />
+          </div>
+        )}
         <span className="font-medium text-sm truncate flex-1">
           {session.sessionName}
         </span>
         <span className="text-xs opacity-70 mr-2">
           {session.slides.length} slide{session.slides.length !== 1 ? 's' : ''}
         </span>
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onEditClick(session)
-          }}
-          className="p-1 hover:bg-white/20 rounded transition-colors"
-          title="Edit session"
-        >
-          <Pencil className="w-3.5 h-3.5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onDeleteClick(session)
-          }}
-          className="p-1 hover:bg-red-500/50 rounded transition-colors"
-          title="Delete session"
-        >
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
+        {!isLocked && (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                onEditClick(session)
+              }}
+              className="p-1 hover:bg-white/20 rounded transition-colors"
+              title="Edit session"
+            >
+              <Pencil className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                onDeleteClick(session)
+              }}
+              className="p-1 hover:bg-red-500/50 rounded transition-colors"
+              title="Delete session"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </>
+        )}
       </div>
 
       {/* Slides in this session */}

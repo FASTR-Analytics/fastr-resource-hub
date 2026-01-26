@@ -49,8 +49,33 @@ const sessionTypeConfig: Record<string, { bg: string; border: string; icon: stri
   section: { bg: 'bg-gray-50', border: 'border-gray-300', icon: '📑' },
 }
 
-// Locked session types that can't be moved
-const lockedTypes = ['day_title', 'day_end']
+// Compulsory slides that are locked (can't be moved or deleted)
+// These are identified by their slide templates or session types
+const compulsorySlides = [
+  'title_slide.md',
+  'welcome_slide.md',
+  'introductions_slide.md',
+  'objectives_slide.md',
+  'expectations_slide.md',
+  'expected_outputs_slide.md',
+  'day_title.md',
+  'day_end.md',
+]
+const compulsoryTypes = ['day_title', 'day_end', 'day_recap', 'section']
+
+// Check if a session is compulsory/locked
+function isSessionLocked(session: Session): boolean {
+  // Check by type
+  if (session.type && compulsoryTypes.includes(session.type)) return true
+  // Check by slide template
+  if (session.slides?.some(s => compulsorySlides.includes(s))) return true
+  // Check by session name patterns
+  const name = session.session?.toLowerCase() || ''
+  if (name.includes('agenda') || name.includes('objectives') || name.includes('expectations') ||
+      name.includes('expected outputs') || name.includes('introductions') ||
+      name.includes('welcome') || name.includes('recap')) return true
+  return false
+}
 
 interface SortableSessionCardProps {
   session: Session & { _id: string }
@@ -60,7 +85,7 @@ interface SortableSessionCardProps {
 }
 
 function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSessionCardProps) {
-  const isLocked = lockedTypes.includes(session.type || '')
+  const isLocked = isSessionLocked(session)
   const config = session.module
     ? { bg: 'bg-blue-50', border: 'border-blue-300', icon: '📘' }
     : sessionTypeConfig[session.type || ''] || { bg: 'bg-white', border: 'border-gray-200', icon: '📝' }
@@ -82,42 +107,50 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
     transition,
   }
 
+  // Locked sessions are shown as compact, grayed-out items
+  if (isLocked) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-gray-100 border border-gray-200 opacity-60">
+        <Lock className="w-3 h-3 text-gray-400 flex-shrink-0" />
+        <span className="text-xs text-gray-500 truncate">{session.session}</span>
+        {session.duration && session.duration > 0 && (
+          <span className="text-xs text-gray-400 flex-shrink-0">{session.duration}m</span>
+        )}
+      </div>
+    )
+  }
+
+  // Editable sessions get full card treatment
   return (
     <div
       ref={setNodeRef}
       style={style}
       className={`group relative p-3 rounded-lg border-2 transition-all ${config.bg} ${config.border} ${
         isDragging ? 'opacity-50 scale-105 shadow-lg z-50' : ''
-      } ${isLocked ? 'opacity-70' : ''}`}
+      }`}
     >
-      {/* Drag handle or lock icon */}
+      {/* Drag handle */}
       <div className="absolute left-1 top-1/2 -translate-y-1/2">
-        {isLocked ? (
-          <Lock className="w-3.5 h-3.5 text-gray-400" />
-        ) : (
-          <div
-            {...attributes}
-            {...listeners}
-            className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <GripVertical className="w-4 h-4 text-gray-400" />
-          </div>
-        )}
+        <div
+          {...attributes}
+          {...listeners}
+          className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity"
+        >
+          <GripVertical className="w-4 h-4 text-gray-400" />
+        </div>
       </div>
 
       {/* Edit button */}
-      {!isLocked && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onEdit(session, dayNum, index)
-          }}
-          className="absolute right-1 top-1 p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-black/10 transition-all"
-          title="Edit session"
-        >
-          <Pencil className="w-3.5 h-3.5 text-gray-500" />
-        </button>
-      )}
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          onEdit(session, dayNum, index)
+        }}
+        className="absolute right-1 top-1 p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-black/10 transition-all"
+        title="Edit session"
+      >
+        <Pencil className="w-3.5 h-3.5 text-gray-500" />
+      </button>
 
       {/* Content */}
       <div className="pl-5 pr-6">
@@ -271,6 +304,9 @@ function App() {
   } | null>(null)
   const [_activeId, setActiveId] = useState<string | null>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
+  const [createMode, setCreateMode] = useState<'manual' | 'ai'>('manual')
+  const [aiPrompt, setAiPrompt] = useState('')
+  const [aiGenerating, setAiGenerating] = useState(false)
   const [newWorkshop, setNewWorkshop] = useState({
     name: '',
     country: '',
@@ -354,6 +390,127 @@ function App() {
   const handleDeleteSession = () => {
     if (editingSession) {
       removeSession(editingSession.dayNum, editingSession.index)
+    }
+  }
+
+  // Handle AI workshop generation - creates workshop directly
+  const handleAIGenerate = async () => {
+    if (!aiPrompt.trim()) {
+      setError('Please describe what kind of workshop you need')
+      return
+    }
+
+    setAiGenerating(true)
+    try {
+      const response = await fetch('/api/ai/generate-workshop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: aiPrompt }),
+      })
+
+      if (!response.ok) throw new Error('Failed to generate workshop')
+
+      const data = await response.json()
+
+      // Generate workshop ID
+      const year = new Date().getFullYear()
+      const countrySlug = (data.country || 'workshop').toLowerCase().replace(/\s+/g, '-')
+      const workshopId = `${year}-${countrySlug}`
+
+      // Build the schedule from AI-generated data
+      const ts = Date.now()
+      const schedule: any = {
+        days: data.days || 3,
+        day_titles: {},
+        day_start_times: {},
+      }
+
+      // Process AI-generated schedule or create default structure
+      for (let d = 1; d <= (data.days || 3); d++) {
+        schedule.day_start_times[d] = '09:00'
+        schedule.day_titles[d] = ''
+
+        const aiDaySessions = data.schedule?.[`day${d}`] || []
+        const sessions: any[] = []
+        let sessionNum = 1
+
+        if (d === 1) {
+          // Day 1 always starts with required opening sequence
+          sessions.push(
+            { _id: `title-${ts}`, session: data.name || 'FASTR Workshop', type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+            { _id: `welcome-${ts}`, session: 'Welcome and Opening Remarks', slides: ['welcome_slide.md'], duration: 10 },
+            { _id: `intro-${ts}`, session: 'Introductions', slides: ['introductions_slide.md'], duration: 15 },
+            { _id: `agenda1-${ts}`, session: 'Day 1 Agenda', type: 'section', duration: 5 },
+            { _id: `obj-${ts}`, session: 'Workshop Objectives', slides: ['objectives_slide.md'], duration: 5 },
+            { _id: `exp-${ts}`, session: 'Expectations', slides: ['expectations_slide.md'], duration: 15 },
+            { _id: `outputs-${ts}`, session: 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
+          )
+        } else {
+          // Day 2+ starts with day cover and recap
+          sessions.push(
+            { _id: `daytitle-${d}-${ts}`, session: `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
+            { _id: `recap-${d}-${ts}`, session: `Recap & Day ${d} Agenda`, type: 'day_recap', duration: 15 }
+          )
+        }
+
+        // Add AI-generated sessions (modules and breaks)
+        for (const aiSession of aiDaySessions) {
+          if (aiSession.module) {
+            sessions.push({
+              _id: `session-${d}-${sessionNum++}-${ts}`,
+              session: aiSession.session,
+              module: aiSession.module,
+              duration: aiSession.duration || 60,
+            })
+          } else if (aiSession.type === 'break') {
+            sessions.push({
+              _id: `break-${d}-${sessionNum++}-${ts}`,
+              session: aiSession.session,
+              type: 'break',
+              duration: aiSession.duration || 15,
+            })
+          }
+        }
+
+        // End each day
+        sessions.push({
+          _id: `dayend-${d}-${ts}`,
+          session: `End of Day ${d}`,
+          type: 'day_end',
+          slides: ['day_end.md'],
+          duration: 5,
+        })
+
+        schedule[`day${d}`] = sessions
+      }
+
+      // Create full config
+      const config = {
+        workshop: {
+          name: data.name || 'FASTR Workshop',
+          country: data.country || '',
+          location: data.location || '',
+          date: '',
+          facilitators: '',
+          objectives: data.objectives || '',
+          expected_outputs: data.expected_outputs || '',
+        },
+        schedule,
+        content: {
+          modules: data.modules || [],
+          custom_slides: [],
+        },
+      }
+
+      // Create the workshop directly
+      await createWorkshop(workshopId, config)
+      setShowCreateWorkshop(false)
+      setShowWorkshopSelector(false)
+      setAiPrompt('')
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setAiGenerating(false)
     }
   }
 
@@ -512,6 +669,12 @@ function App() {
       }
     }
 
+    // Check for AI-generated content
+    const aiObjectives = sessionStorage.getItem('ai_objectives')
+    const aiExpectedOutputs = sessionStorage.getItem('ai_expected_outputs')
+    sessionStorage.removeItem('ai_objectives')
+    sessionStorage.removeItem('ai_expected_outputs')
+
     const config = {
       workshop: {
         name: newWorkshop.name,
@@ -519,6 +682,8 @@ function App() {
         location: newWorkshop.location,
         date: '',
         facilitators: '',
+        objectives: aiObjectives || '',
+        expected_outputs: aiExpectedOutputs || '',
       },
       schedule,
       content: {
@@ -884,77 +1049,149 @@ function App() {
             </div>
 
             {showCreateWorkshop ? (
-              <div className="p-4 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Workshop Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={newWorkshop.name}
-                    onChange={(e) => setNewWorkshop({ ...newWorkshop, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                    placeholder="e.g., FASTR Training Workshop"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Country *
-                  </label>
-                  <input
-                    type="text"
-                    value={newWorkshop.country}
-                    onChange={(e) => setNewWorkshop({ ...newWorkshop, country: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                    placeholder="e.g., Kenya"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                  <input
-                    type="text"
-                    value={newWorkshop.location}
-                    onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                    placeholder="e.g., Nairobi"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Number of Days
-                  </label>
-                  <select
-                    value={newWorkshop.days}
-                    onChange={(e) =>
-                      setNewWorkshop({ ...newWorkshop, days: parseInt(e.target.value) })
-                    }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                  >
-                    {[1, 2, 3, 4, 5].map((d) => (
-                      <option key={d} value={d}>
-                        {d} day{d > 1 ? 's' : ''}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="flex gap-2 pt-2">
+              <div className="p-4">
+                {/* Mode toggle */}
+                <div className="flex gap-1 p-1 bg-gray-100 rounded-lg mb-4">
                   <button
-                    onClick={() => setShowCreateWorkshop(false)}
-                    className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => setCreateMode('ai')}
+                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                      createMode === 'ai'
+                        ? 'bg-white text-fastr-primary shadow-sm'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
                   >
-                    Back
+                    <Sparkles className="w-4 h-4" />
+                    AI Setup
                   </button>
                   <button
-                    onClick={handleCreateWorkshop}
-                    className="flex-1 px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors"
+                    onClick={() => setCreateMode('manual')}
+                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+                      createMode === 'manual'
+                        ? 'bg-white text-fastr-primary shadow-sm'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
                   >
-                    Create Workshop
+                    Manual
                   </button>
                 </div>
+
+                {createMode === 'ai' ? (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600">
+                      Describe your workshop and AI will set it up for you.
+                    </p>
+                    <textarea
+                      value={aiPrompt}
+                      onChange={(e) => setAiPrompt(e.target.value)}
+                      rows={4}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                      placeholder="Example: First FASTR workshop in Kenya, 3 days. Focus on data quality and coverage estimation. Use high-level introductory content (shorter versions where available). This is a refresher for teams who attended last year's training."
+                      disabled={aiGenerating}
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setShowCreateWorkshop(false)
+                          setAiPrompt('')
+                        }}
+                        className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                        disabled={aiGenerating}
+                      >
+                        Back
+                      </button>
+                      <button
+                        onClick={handleAIGenerate}
+                        disabled={aiGenerating || !aiPrompt.trim()}
+                        className="flex-1 px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                      >
+                        {aiGenerating ? (
+                          <>
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            Generating...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-4 h-4" />
+                            Generate Workshop
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Workshop Name *
+                      </label>
+                      <input
+                        type="text"
+                        value={newWorkshop.name}
+                        onChange={(e) => setNewWorkshop({ ...newWorkshop, name: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        placeholder="e.g., FASTR Training Workshop"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Country *
+                      </label>
+                      <input
+                        type="text"
+                        value={newWorkshop.country}
+                        onChange={(e) => setNewWorkshop({ ...newWorkshop, country: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        placeholder="e.g., Kenya"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                      <input
+                        type="text"
+                        value={newWorkshop.location}
+                        onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        placeholder="e.g., Nairobi"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Number of Days
+                      </label>
+                      <select
+                        value={newWorkshop.days}
+                        onChange={(e) =>
+                          setNewWorkshop({ ...newWorkshop, days: parseInt(e.target.value) })
+                        }
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                      >
+                        {[1, 2, 3, 4, 5].map((d) => (
+                          <option key={d} value={d}>
+                            {d} day{d > 1 ? 's' : ''}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="flex gap-2 pt-2">
+                      <button
+                        onClick={() => setShowCreateWorkshop(false)}
+                        className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                      >
+                        Back
+                      </button>
+                      <button
+                        onClick={handleCreateWorkshop}
+                        className="flex-1 px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors"
+                      >
+                        Create Workshop
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="p-4">
@@ -1175,47 +1412,40 @@ function App() {
               {/* Content Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Workshop Content
+                  Slide Content
                 </h3>
+                <p className="text-xs text-gray-500 mb-3">
+                  This content appears on the locked opening slides. Edit here to update what's shown.
+                </p>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Objectives
+                      Workshop Objectives
+                      <span className="ml-2 text-xs font-normal text-gray-400">→ Objectives slide</span>
                     </label>
                     <textarea
                       value={currentConfig.workshop.objectives || ''}
                       onChange={(e) => updateWorkshopSettings({ objectives: e.target.value })}
                       rows={4}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Enter workshop objectives (one per line)"
+                      placeholder="- Understand FASTR methodology&#10;- Learn data extraction techniques&#10;- Develop data analysis skills"
                     />
-                    <p className="text-xs text-gray-500 mt-1">One objective per line, will be formatted as bullet points</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Scope of Work
-                    </label>
-                    <textarea
-                      value={currentConfig.workshop.scope_of_work || ''}
-                      onChange={(e) => updateWorkshopSettings({ scope_of_work: e.target.value })}
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Enter scope of work items (one per line)"
-                    />
+                    <p className="text-xs text-gray-500 mt-1">One objective per line (start with - for bullets)</p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Expected Outputs
+                      <span className="ml-2 text-xs font-normal text-gray-400">→ Expected Outputs slide</span>
                     </label>
                     <textarea
                       value={currentConfig.workshop.expected_outputs || ''}
                       onChange={(e) => updateWorkshopSettings({ expected_outputs: e.target.value })}
-                      rows={3}
+                      rows={4}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Enter expected outputs (one per line)"
+                      placeholder="**Analysis Activities**&#10;- Data extraction completed&#10;- First quarterly report produced&#10;&#10;**Capacity Building**&#10;- Trained team members"
                     />
+                    <p className="text-xs text-gray-500 mt-1">Use **bold** for section headers, - for bullets</p>
                   </div>
                 </div>
               </section>

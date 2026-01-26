@@ -150,43 +150,85 @@ Projects can be **locked** to prevent modifications to their configuration while
 
 ---
 
-### FASTR User Guide:
+## FASTR user guide
 
-#### 0.1 Platform overview
-Introduction to the FASTR analytics platform, key features and capabilities
+Step-by-step tutorials for using the FASTR analytics platform.
 
-0.1 Landing page tour <iframe src="https://scribehow.com/embed/01_Landing_page_tour__Ixq2SHWYShuwaxBwQMJWMA" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
+### 0. Platform overview
 
-#### 1.0 Accessing the FASTR analytics platform
-Creating accounts, signing in, user permissions and roles
+Introduction to the FASTR analytics platform, key features and capabilities.
 
-1.1 Requesting a country instance 
-To request a country instance, contact Ashley Sheffel at asheffel@worldbank.org  
-1.2 Creating a FASTR Analytics platform account <iframe src="https://scribehow.com/embed/12_Creating_a_FASTR_Analytics_platform_account__9Av54dcqRTK1XkP1mYAc_g" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
-1.3 Signing into the platform <iframe src="https://scribehow.com/embed/13_Signing_into_the_platform__ICDGCqyIQ6SxAcK4RKou7g" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
-1.4 Access FAQ
+??? "0.1 Landing page tour"
 
-#### 2.0 Modules
-Understanding modules, Available analysis modules, module installation, running analyses
+    Walk through the main sections of the platform landing page, including the navigation menu, project list, and quick actions.
 
-#### 3.0 Visualizations
-Available chart types, customization options, exporting visualizations
+    <iframe src="https://scribehow.com/embed/01_Landing_page_tour__Ixq2SHWYShuwaxBwQMJWMA" width="100%" height="640" allow="fullscreen" style="border: 0;"></iframe>
 
-#### 4.0 Reports
-Report templates, automated report generation, customizing reports
+### 1. Accessing the FASTR analytics platform
 
-#### 5.0 Administration: General
-Configuring admin areas (regions, districts), setting up facilities, defining indicators 
+Creating accounts, signing in, and understanding user permissions.
 
-#### 6.0 Administration: Data management
-Data format requirements, import process, validation and error handling
+**1.1 Requesting a country instance**
 
-#### 7.0  Administration: Projects
-Project setup workflow, configuration options, best practices
+To request a country instance for your organization, contact Ashley Sheffel at asheffel@worldbank.org.
 
-#### 8.0  Administration: Modules
-Available analysis modules, module installation, running analyses
+??? "1.2 Creating a FASTR Analytics platform account"
 
+    Learn how to create your user account, set up your password, and complete your profile.
+
+    <iframe src="https://scribehow.com/embed/12_Creating_a_FASTR_Analytics_platform_account__9Av54dcqRTK1XkP1mYAc_g" width="100%" height="640" allow="fullscreen" style="border: 0;"></iframe>
+
+??? "1.3 Signing into the platform"
+
+    Step-by-step guide to signing into the platform and navigating to your projects.
+
+    <iframe src="https://scribehow.com/embed/13_Signing_into_the_platform__ICDGCqyIQ6SxAcK4RKou7g" width="100%" height="640" allow="fullscreen" style="border: 0;"></iframe>
+
+**1.4 Access FAQ**
+
+*Coming soon: Frequently asked questions about platform access and permissions.*
+
+### 2. Modules
+
+Understanding modules, available analysis modules, module installation, and running analyses.
+
+*Tutorials coming soon.*
+
+### 3. Visualizations
+
+Available chart types, customization options, and exporting visualizations.
+
+*Tutorials coming soon.*
+
+### 4. Reports
+
+Report templates, automated report generation, and customizing reports.
+
+*Tutorials coming soon.*
+
+### 5. Administration: General
+
+Configuring admin areas (regions, districts), setting up facilities, and defining indicators.
+
+*Tutorials coming soon.*
+
+### 6. Administration: Data management
+
+Data format requirements, import process, and validation and error handling.
+
+*Tutorials coming soon.*
+
+### 7. Administration: Projects
+
+Project setup workflow, configuration options, and best practices.
+
+*Tutorials coming soon.*
+
+### 8. Administration: Modules
+
+Available analysis modules, module installation, and running analyses.
+
+*Tutorials coming soon.*
 
 ---
 

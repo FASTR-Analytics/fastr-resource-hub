@@ -438,4 +438,93 @@ ONLY output valid JSON, nothing else.`
   }
 })
 
+// POST /api/ai/generate-workshop - Generate complete workshop config from natural language
+router.post('/generate-workshop', async (req, res) => {
+  try {
+    const { prompt } = req.body
+
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' })
+    }
+
+    const client = getClient()
+
+    const moduleList = Object.entries(MODULE_DETAILS)
+      .map(([num, m]) => `  Module ${num}: ${m.name} - ${m.description} (${m.duration})`)
+      .join('\n')
+
+    const response = await client.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      system: `You are an expert workshop planner for FASTR (Framework for Analytics of Service use Trends and Results) workshops focused on RMNCAH-N health data analysis.
+
+Given a user's description of their workshop needs, generate a COMPLETE workshop configuration including the full schedule.
+
+Available FASTR modules:
+${moduleList}
+
+Generate a JSON object with this structure:
+{
+  "name": "FASTR Workshop - [Country]",
+  "country": "Country name",
+  "location": "City if mentioned, otherwise empty string",
+  "days": 3,
+  "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
+  "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
+  "modules": [0, 1, 2, 4, 5, 6, 7],
+  "schedule": {
+    "day1": [
+      {"session": "Introduction to FASTR", "module": "m0", "duration": 60},
+      {"session": "Tea Break", "type": "break", "duration": 15},
+      {"session": "Identify Questions & Indicators", "module": "m1", "duration": 90}
+    ],
+    "day2": [
+      {"session": "Data Extraction", "module": "m2", "duration": 90},
+      {"session": "Lunch Break", "type": "break", "duration": 60}
+    ]
+  }
+}
+
+CRITICAL RULES:
+1. Select modules that match the workshop focus (e.g., "data quality focus" = emphasize modules 4, 5)
+2. Spread modules logically across days with breaks
+3. Day 1 should include Module 0 (Introduction) FIRST
+4. Add tea breaks (15min) mid-morning and mid-afternoon
+5. Add lunch break (60min) around midday
+6. Each day should be ~7-8 hours of content including breaks
+7. For "high-level" or "introductory" workshops, include fewer topics per module
+8. Module sessions should use "module": "m0", "m1", etc.
+9. Break sessions should use "type": "break"
+10. objectives and expected_outputs should be strings with "- " bullets separated by newlines
+
+Return ONLY valid JSON, no explanation.`,
+      messages: [
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+    })
+
+    let textContent = ''
+    for (const block of response.content) {
+      if (block.type === 'text') {
+        textContent += block.text
+      }
+    }
+
+    // Parse JSON from response
+    let jsonContent = textContent.trim()
+    if (jsonContent.startsWith('```')) {
+      jsonContent = jsonContent.replace(/^```json?\n?/, '').replace(/\n?```$/, '')
+    }
+
+    const workshopConfig = JSON.parse(jsonContent)
+    res.json(workshopConfig)
+  } catch (error: any) {
+    console.error('AI generate-workshop error:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
 export default router
