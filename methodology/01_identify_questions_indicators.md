@@ -182,12 +182,19 @@ A data use case is a specific scenario where data is utilized to achieve a parti
 
 **Why is defining a data use case important?**
 
+- Leads to better results by aligning data efforts with organizational goals.
 - Guides decision making by providing a clear framework for analysis
 - Enhances efficiency by focusing analyses on a set of relevant key indicators to solve a specific data need
-- Leads to better results by aligning data efforts with organizational goals
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1a -->
+## Examples of data use cases
+
+<!-- TODO: Add 3 examples of data use cases -->
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b -->
 ## What is our common data use case that will be the focus of this workshop?
 
 Following large shifts in resource availability from external sources, many countries are experiencing abrupt and dramatic reductions in financing
@@ -202,7 +209,7 @@ Following large shifts in resource availability from external sources, many coun
 - What other adaptations can safeguard and strengthen essential service delivery for women, children and adolescents?
 <!-- /SLIDE -->
 
-<!-- SLIDE:m1_1b -->
+<!-- SLIDE:m1_1c -->
 ## How do we select indicators? What makes a good indicator for the FASTR analysis?
 
 Indicator selection is critical to the quality and usefulness of FASTR analysis. Indicators should be chosen based on the following criteria:
@@ -215,126 +222,6 @@ Indicator selection is critical to the quality and usefulness of FASTR analysis.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2 -->
-## Development of a data use case
-
-*Content to be developed*
-
-This section will cover:
-- Co-creation workshop approach with MoH and stakeholders
-- Data use case development guidance
-- Example use cases from country implementations
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_2a -->
-## Defining priority questions
-
-Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and enhance decision making support.
-
-**Qualities of a good question:**
-
-- **Addresses a priority issue**: A topic of interest to you and policy makers
-- **Relevant**: Important enough to be worth answering
-- **Related to experiences that are alive**: Connected to current issues
-- **Important to individuals/groups**: Matters to stakeholders
-- **Answerable**: Can be addressed with available data and methods
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_2b -->
-## Is my question a relevant priority? 5+ Ws to consider
-
-- **Who** is your audience?
-- **What** do they need and want to know?
-- **When** do they need to know it by?
-- **When** is the event/intervention/period they are interested in?
-- **Why** do they need to know?
-- **How** will they use the findings?
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_2c -->
-## What do we mean by answerable?
-
-**We have the data**
-- Type, quantity, quality sufficient for the question
-
-**We have the analysis tools/methods**
-- Statistically valid; feasible to use
-
-**We have the time**
-- We can answer the question on a quarterly basis
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_2d -->
-<!-- Note: This slide was hidden in the original presentation but may be useful to include -->
-## PICO framework for identifying answerable questions
-
-A standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
-
-| Component | Description |
-|-----------|-------------|
-| **P**opulation | Who is being investigated |
-| **I**ntervention | What is being investigated |
-| **C**omparison | What is baseline/non-intervention |
-| **O**utcome | What is public health objective |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_3 -->
-## What makes a good indicator for FASTR analysis?
-
-- **Relevance**: Does this indicator align with our priority questions and objectives?
-- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
-- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
-- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
-- **Type**: Is this indicator a count of services delivered?
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_3a -->
-## Why focus on high-volume indicators?
-
-One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
-
-**Reduced sensitivity to outliers**
-In low-volume indicators, individual data points can disproportionately affect trends.
-
-**More stable estimates**
-High-volume data reduce random variability and improve the reliability of trend detection.
-
-**Clearer identification of true anomalies**
-Larger counts make it easier to distinguish genuine outliers from natural variation.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_3b -->
-## Why focus on high-completeness indicators?
-
-Indicators with high reporting completeness are preferred because they:
-
-**Improve data reliability**
-More complete data reduces bias and provide a more representative picture of service delivery.
-
-**Support consistent analysis**
-High completeness enables meaningful comparisons across time and geographic areas.
-
-**Reduce misinterpretation**
-Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
-
-While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_3c -->
-## Why focus on count indicators?
-
-**Limitations of proportion indicators**
-
-- Proportions limit the ability to adjust numerators and denominators separately for data quality issues
-- Numerators and denominators may each be affected by different sources of error
-- Separating counts from denominator estimation allows for more transparent and flexible adjustment
-
-**Mortality as a rare event**
-
-- Mortality indicators are typically low-frequency and not well suited to adjustment
-- These indicators are generally better analyzed using annual rather than monthly or quarterly data
-<!-- /SLIDE -->
-
-<!-- SLIDE:m1_3d -->
 ## FASTR core indicators
 
 The FASTR approach focuses on a core set of RMNCAH-N indicators that represent key points along the reproductive, maternal, newborn, child, and adolescent health and nutrition continuum in low- and middle-income countries.
@@ -351,7 +238,7 @@ These indicators typically have higher reporting volumes and completeness and se
 - Outpatient visits
 <!-- /SLIDE -->
 
-<!-- SLIDE:m1_3e -->
+<!-- SLIDE:m1_2a -->
 <!-- _class: columns-image-right -->
 
 ## Countries have selected indicators to align with the disruptions context and country priorities
@@ -365,19 +252,54 @@ These indicators typically have higher reporting volumes and completeness and se
 - Countries can continue to add indicators over time as needed
 <!-- /SLIDE -->
 
-<!-- SLIDE:m1_4 -->
-## Preparing for data extraction
+<!-- SLIDE:m1_3 -->
+## Why focus on high-volume indicators?
 
-*Content to be developed*
+One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
 
-This section will cover:
-- Pre-extraction checklist
-- Understanding your DHIS2 configuration
-- Mapping indicators to data elements
-- Planning your extraction timeline
+**Reduced sensitivity to outliers**
+In low-volume indicators, individual data points can disproportionately affect trends.
+
+**More stable estimates**
+High-volume data reduce random variability and improve the reliability of trend detection.
+
+**Clearer identification of true anomalies**
+Larger counts make it easier to distinguish genuine outliers from natural variation.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_3a -->
+## Why focus on high-completeness indicators?
+
+Indicators with high reporting completeness are preferred because they:
+
+**Improve data reliability**
+More complete data reduces bias and provide a more representative picture of service delivery.
+
+**Support consistent analysis**
+High completeness enables meaningful comparisons across time and geographic areas.
+
+**Reduce misinterpretation**
+Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
+
+While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_3b -->
+## Why focus on count indicators?
+
+**Limitations of proportion indicators**
+
+- Proportions limit the ability to adjust numerators and denominators separately for data quality issues
+- Numerators and denominators may each be affected by different sources of error
+- Separating counts from denominator estimation allows for more transparent and flexible adjustment
+
+**Mortality as a rare event**
+
+- Mortality indicators are typically low-frequency and not well suited to adjustment
+- These indicators are generally better analyzed using annual rather than monthly or quarterly data
 <!-- /SLIDE -->
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 26-01-2026
 **Contact**: FASTR Project Team

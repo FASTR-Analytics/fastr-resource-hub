@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
+import api, { Asset } from '../../lib/api'
 import {
   ChevronRight,
   ChevronDown,
@@ -14,7 +15,13 @@ import {
   Layout,
   Target,
   MessageSquare,
-  BookOpen
+  BookOpen,
+  Image,
+  Upload,
+  Trash2,
+  Copy,
+  Check,
+  Loader2,
 } from 'lucide-react'
 
 interface Topic {
@@ -61,13 +68,22 @@ interface TemplateCategory {
 }
 
 export function ContentLibrary() {
-  const { contentLibrary, addSession, currentConfig } = useWorkshopStore()
+  const { contentLibrary, addSession, currentConfig, currentWorkshopId } = useWorkshopStore()
+  const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
   const [fullPreview, setFullPreview] = useState<{ topic: Topic; module: Module; content: string; html?: string } | null>(null)
   const [_loadingPreview, setLoadingPreview] = useState(false)
   const [templates, setTemplates] = useState<TemplateCategory[]>([])
+  const [templatePreview, setTemplatePreview] = useState<{ template: Template; category: TemplateCategory; position: { x: number; y: number }; html?: string } | null>(null)
+
+  // Assets state
+  const [assets, setAssets] = useState<Asset[]>([])
+  const [assetsLoading, setAssetsLoading] = useState(false)
+  const [uploadingAsset, setUploadingAsset] = useState(false)
+  const [copiedAsset, setCopiedAsset] = useState<string | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
 
   // Fetch templates on mount
   useEffect(() => {
@@ -84,6 +100,89 @@ export function ContentLibrary() {
     }
     fetchTemplates()
   }, [])
+
+  // Fetch assets when workshop changes or tab switches to assets
+  const loadAssets = useCallback(async () => {
+    if (!currentWorkshopId) return
+    setAssetsLoading(true)
+    try {
+      const assetList = await api.listAssets(currentWorkshopId)
+      setAssets(assetList)
+    } catch (err) {
+      console.error('Failed to load assets:', err)
+    } finally {
+      setAssetsLoading(false)
+    }
+  }, [currentWorkshopId])
+
+  useEffect(() => {
+    if (activeTab === 'assets' && currentWorkshopId) {
+      loadAssets()
+    }
+  }, [activeTab, currentWorkshopId, loadAssets])
+
+  // Handle file upload
+  const handleUpload = async (files: FileList | null) => {
+    if (!files || !currentWorkshopId) return
+
+    setUploadingAsset(true)
+    try {
+      for (const file of Array.from(files)) {
+        await api.uploadAsset(currentWorkshopId, file)
+      }
+      await loadAssets()
+    } catch (err: any) {
+      console.error('Upload failed:', err)
+      alert(`Upload failed: ${err.message}`)
+    } finally {
+      setUploadingAsset(false)
+    }
+  }
+
+  // Handle delete asset
+  const handleDeleteAsset = async (filename: string) => {
+    if (!currentWorkshopId) return
+    if (!confirm(`Delete ${filename}?`)) return
+
+    try {
+      await api.deleteAsset(currentWorkshopId, filename)
+      await loadAssets()
+    } catch (err: any) {
+      console.error('Delete failed:', err)
+      alert(`Delete failed: ${err.message}`)
+    }
+  }
+
+  // Copy markdown to clipboard
+  const copyMarkdown = (asset: Asset) => {
+    navigator.clipboard.writeText(asset.markdown)
+    setCopiedAsset(asset.filename)
+    setTimeout(() => setCopiedAsset(null), 2000)
+  }
+
+  // Drag and drop handlers
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+    handleUpload(e.dataTransfer.files)
+  }
+
+  // Format file size
+  const formatSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+  }
 
   // Toggle module expansion
   const toggleModule = (moduleNum: number) => {
@@ -156,6 +255,74 @@ export function ContentLibrary() {
     setPreview(null)
   }
 
+  // Template preview handlers
+  const handleTemplateMouseEnter = async (e: React.MouseEvent, template: Template, category: TemplateCategory) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const position = { x: rect.right + 10, y: rect.top }
+
+    // Generate preview markdown based on template type
+    let markdown = ''
+    if (category.id === 'breaks') {
+      const isLunch = template.id === 'lunch'
+      const duration = isLunch ? 60 : 15
+      markdown = `---
+marp: true
+theme: fastr
+---
+
+<!-- _class: break -->
+
+![bg](/resources/backgrounds/break_slide.png)
+
+# ${isLunch ? '🍽️ Lunch Break' : '☕ Tea Break'}
+
+**${duration} minutes**
+
+We resume at **[time]**`
+    } else if (template.file) {
+      // Load template file content
+      try {
+        const response = await fetch(`/api/content/template/${template.id}`)
+        if (response.ok) {
+          const data = await response.json()
+          markdown = `---
+marp: true
+theme: fastr
+---
+
+${data.content}`
+        }
+      } catch (err) {
+        console.error('Failed to load template:', err)
+      }
+    }
+
+    // Render to HTML
+    if (markdown) {
+      try {
+        const renderResponse = await fetch('/api/content/render', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown })
+        })
+        if (renderResponse.ok) {
+          const data = await renderResponse.json()
+          const html = data.html.replace('<head>', '<head><base href="http://localhost:3001/">')
+          setTemplatePreview({ template, category, position, html })
+        }
+      } catch (err) {
+        console.error('Failed to render preview:', err)
+        setTemplatePreview({ template, category, position })
+      }
+    } else {
+      setTemplatePreview({ template, category, position })
+    }
+  }
+
+  const handleTemplateMouseLeave = () => {
+    setTemplatePreview(null)
+  }
+
   // Show full preview modal with rendered slides
   const showFullPreview = async (topic: Topic, module: Module) => {
     setLoadingPreview(true)
@@ -221,33 +388,171 @@ export function ContentLibrary() {
     return durations[module.number] || '60 min'
   }
 
-  if (contentLibrary.length === 0) {
-    return (
-      <div className="h-full flex items-center justify-center text-gray-400 text-sm">
-        <div className="text-center">
-          <Layers className="w-8 h-8 mx-auto mb-2" />
-          <p>Loading content...</p>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="px-3 py-2 border-b border-gray-100">
-        <p className="text-xs text-gray-500">
-          Click + to add, hover to preview
-        </p>
+      {/* Tabs */}
+      <div className="flex border-b border-gray-200">
+        <button
+          onClick={() => setActiveTab('content')}
+          className={`flex-1 px-3 py-2 text-sm font-medium flex items-center justify-center gap-1.5 transition-colors ${
+            activeTab === 'content'
+              ? 'text-fastr-primary border-b-2 border-fastr-primary bg-fastr-primary/5'
+              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          Content
+        </button>
+        <button
+          onClick={() => setActiveTab('assets')}
+          className={`flex-1 px-3 py-2 text-sm font-medium flex items-center justify-center gap-1.5 transition-colors ${
+            activeTab === 'assets'
+              ? 'text-fastr-primary border-b-2 border-fastr-primary bg-fastr-primary/5'
+              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          <Image className="w-4 h-4" />
+          Assets
+        </button>
       </div>
 
-      {/* Content list */}
+      {/* Assets Tab */}
+      {activeTab === 'assets' && (
+        <div className="flex-1 overflow-y-auto p-3">
+          {!currentWorkshopId ? (
+            <div className="text-center text-gray-400 py-8">
+              <Image className="w-8 h-8 mx-auto mb-2 opacity-50" />
+              <p className="text-sm">Select a workshop to manage assets</p>
+            </div>
+          ) : (
+            <>
+              {/* Upload area */}
+              <div
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors mb-4 ${
+                  isDragging
+                    ? 'border-fastr-primary bg-fastr-primary/10'
+                    : 'border-gray-300 hover:border-gray-400'
+                }`}
+              >
+                {uploadingAsset ? (
+                  <div className="flex items-center justify-center gap-2 text-gray-500">
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span className="text-sm">Uploading...</span>
+                  </div>
+                ) : (
+                  <>
+                    <Upload className="w-6 h-6 mx-auto text-gray-400 mb-2" />
+                    <p className="text-sm text-gray-600 mb-1">
+                      Drag & drop images here
+                    </p>
+                    <label className="text-xs text-fastr-primary hover:underline cursor-pointer">
+                      or click to browse
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className="hidden"
+                        onChange={(e) => handleUpload(e.target.files)}
+                      />
+                    </label>
+                  </>
+                )}
+              </div>
+
+              {/* Assets grid */}
+              {assetsLoading ? (
+                <div className="text-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin mx-auto text-gray-400" />
+                </div>
+              ) : assets.length === 0 ? (
+                <div className="text-center text-gray-400 py-8">
+                  <p className="text-sm">No assets uploaded yet</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  {assets.map((asset) => (
+                    <div
+                      key={asset.filename}
+                      className="group relative border rounded-lg overflow-hidden bg-gray-50 hover:border-gray-400 transition-colors"
+                    >
+                      {/* Thumbnail */}
+                      <div className="aspect-square bg-white flex items-center justify-center">
+                        <img
+                          src={asset.url}
+                          alt={asset.filename}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+
+                      {/* Info */}
+                      <div className="p-2 border-t bg-white">
+                        <p className="text-xs font-medium text-gray-700 truncate" title={asset.filename}>
+                          {asset.filename}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {formatSize(asset.size)}
+                        </p>
+                      </div>
+
+                      {/* Actions overlay */}
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <button
+                          onClick={() => copyMarkdown(asset)}
+                          className="p-2 bg-white rounded-lg hover:bg-gray-100 transition-colors"
+                          title="Copy markdown"
+                        >
+                          {copiedAsset === asset.filename ? (
+                            <Check className="w-4 h-4 text-green-600" />
+                          ) : (
+                            <Copy className="w-4 h-4 text-gray-600" />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteAsset(asset.filename)}
+                          className="p-2 bg-white rounded-lg hover:bg-red-50 transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Usage hint */}
+              {assets.length > 0 && (
+                <div className="mt-4 p-2 bg-blue-50 rounded-lg">
+                  <p className="text-xs text-blue-700">
+                    <strong>Tip:</strong> Click the copy button to get the markdown reference, then paste it in your custom slide.
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Content Tab */}
+      {activeTab === 'content' && (
       <div className="flex-1 overflow-y-auto">
+        {contentLibrary.length === 0 ? (
+          <div className="h-full flex items-center justify-center text-gray-400 text-sm">
+            <div className="text-center">
+              <Loader2 className="w-8 h-8 mx-auto mb-2 animate-spin" />
+              <p>Loading content...</p>
+            </div>
+          </div>
+        ) : (
+        <>
         {/* Templates Section */}
         {templates.filter(cat => ['breaks', 'activities'].includes(cat.id)).length > 0 && (
           <div className="border-b-2 border-gray-200 bg-amber-50/50">
             <div className="px-3 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
-              Quick Add
+              Breaks & Structure
             </div>
             {templates
               .filter(cat => ['breaks', 'activities'].includes(cat.id))
@@ -280,6 +585,8 @@ export function ContentLibrary() {
                         <div
                           key={template.id}
                           className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-gray-50 transition-colors group"
+                          onMouseEnter={(e) => handleTemplateMouseEnter(e, template, category)}
+                          onMouseLeave={handleTemplateMouseLeave}
                         >
                           <span className="text-amber-600 flex-shrink-0">
                             {getTemplateIcon(template.icon)}
@@ -391,7 +698,10 @@ export function ContentLibrary() {
             )}
           </div>
         ))}
+        </>
+        )}
       </div>
+      )}
 
       {/* Hover preview tooltip */}
       {preview && (
@@ -443,6 +753,48 @@ export function ContentLibrary() {
                   <li key={i} className="truncate">• {point}</li>
                 ))}
               </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Template hover preview tooltip */}
+      {templatePreview && (
+        <div
+          className="fixed z-50 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden pointer-events-none"
+          style={{
+            left: Math.min(templatePreview.position.x, window.innerWidth - 340),
+            top: Math.min(templatePreview.position.y, window.innerHeight - 280),
+            width: '320px',
+          }}
+        >
+          <div className="p-3 border-b border-gray-100">
+            <div className="font-medium text-sm text-gray-800">
+              {templatePreview.template.name}
+            </div>
+            <div className="text-xs text-gray-500 mt-1">
+              {templatePreview.category.id === 'breaks' && (
+                templatePreview.template.id === 'lunch' ? '60 min lunch break' : '15 min tea/coffee break'
+              )}
+              {templatePreview.category.id === 'activities' && 'Interactive session'}
+              {templatePreview.category.id === 'demo' && 'Platform demonstration'}
+            </div>
+          </div>
+          {templatePreview.html ? (
+            <div className="bg-gray-100 p-2">
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  srcDoc={templatePreview.html}
+                  className="absolute inset-0 w-full h-full bg-white rounded shadow-sm"
+                  title="Template Preview"
+                  style={{ transform: 'scale(1)', transformOrigin: 'top left' }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="p-4 text-center text-gray-400 text-sm">
+              <Loader2 className="w-5 h-5 animate-spin mx-auto mb-1" />
+              Loading preview...
             </div>
           )}
         </div>

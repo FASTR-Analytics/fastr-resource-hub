@@ -194,34 +194,6 @@ Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
-## RMNCAH-N service use monitoring
-
-<style scoped>
-.split { display: flex !important; gap: 2rem; align-items: center; }
-.split .text { flex: 1; }
-.split .image { flex: 1; display: flex; justify-content: center; align-items: center; }
-.split .image img { max-height: 420px !important; max-width: 100% !important; }
-</style>
-
-<div class="split">
-<div class="text">
-
-Rapid-cycle approaches using routine HMIS data can:
-
-- **Evaluate HMIS data quality** at national and sub-national levels
-- **Measure monthly changes** in health service utilization
-- **Compare coverage trends** with country targets
-
-</div>
-<div class="image">
-
-![HMIS data flow](../resources/diagrams/HMIS_data_flow.svg)
-
-</div>
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_3 -->
 ## What is FASTR?
 
 An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
@@ -230,7 +202,7 @@ An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m0_4 -->
+<!-- SLIDE:m0_3 -->
 ## What is the FASTR approach to RMNCAH-N service use monitoring?
 
 <div class="columns-image-right">
@@ -253,5 +225,5 @@ Combining analysis and visualization with capacity strengthening and data use su
 
 ---
 
-**Last updated**: 17-01-2026
+**Last updated**: 26-01-2026
 **Contact**: FASTR Project Team

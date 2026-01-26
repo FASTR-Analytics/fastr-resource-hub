@@ -9,6 +9,7 @@ import {
   createWorkshop,
   updateWorkshop,
   deleteWorkshop,
+  setWorkshopLocked,
   getCustomSlides,
   saveCustomSlide,
   deleteCustomSlide,
@@ -151,10 +152,30 @@ router.delete('/:id', (req, res) => {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    deleteWorkshop(req.params.id)
+    const deleted = deleteWorkshop(req.params.id)
+    if (!deleted) {
+      return res.status(403).json({ error: 'Workshop is locked and cannot be deleted' })
+    }
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error deleting workshop:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// PATCH /api/workshops/:id/lock - Lock or unlock workshop
+router.patch('/:id/lock', (req, res) => {
+  try {
+    const { locked } = req.body
+    const existing = getWorkshop(req.params.id)
+    if (!existing) {
+      return res.status(404).json({ error: 'Workshop not found' })
+    }
+
+    setWorkshopLocked(req.params.id, !!locked)
+    res.json({ success: true, locked: !!locked })
+  } catch (error: any) {
+    console.error('Error updating workshop lock:', error)
     res.status(500).json({ error: error.message })
   }
 })

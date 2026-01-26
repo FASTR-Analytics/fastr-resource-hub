@@ -60,5 +60,5 @@ Analytical outputs are translated into policy-relevant insights through structur
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 26-01-2026
 **Contact**: FASTR Project Team

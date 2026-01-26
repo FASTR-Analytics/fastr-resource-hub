@@ -17,6 +17,7 @@ export interface WorkshopInfo {
   start_date?: string
   end_date?: string
   facilitators?: string
+  locked?: boolean
 }
 
 export interface DaySchedule {
@@ -156,6 +157,16 @@ export const workshopAPI = {
   async delete(id: string): Promise<void> {
     await fetchJSON(`/workshops/${id}`, {
       method: 'DELETE',
+    })
+  },
+
+  /**
+   * Lock or unlock a workshop
+   */
+  async setLocked(id: string, locked: boolean): Promise<void> {
+    await fetchJSON(`/workshops/${id}/lock`, {
+      method: 'PATCH',
+      body: JSON.stringify({ locked }),
     })
   },
 
@@ -352,6 +363,66 @@ export const exportAPI = {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Assets API
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface Asset {
+  filename: string
+  path: string
+  url: string
+  size: number
+  modified: string
+  markdown: string
+}
+
+export const assetsAPI = {
+  /**
+   * List all assets for a workshop
+   */
+  async list(workshopId: string): Promise<Asset[]> {
+    const response = await fetchJSON<{ assets: Asset[] }>(`/assets/${workshopId}`)
+    return response.assets
+  },
+
+  /**
+   * Upload an asset
+   */
+  async upload(workshopId: string, file: File): Promise<Asset> {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const response = await fetch(`${API_BASE}/assets/${workshopId}`, {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Upload failed' }))
+      throw new Error(error.error || `HTTP ${response.status}`)
+    }
+
+    const result = await response.json()
+    return result.asset
+  },
+
+  /**
+   * Delete an asset
+   */
+  async delete(workshopId: string, filename: string): Promise<void> {
+    await fetchJSON(`/assets/${workshopId}/${filename}`, {
+      method: 'DELETE',
+    })
+  },
+
+  /**
+   * Get the full URL for an asset
+   */
+  getURL(workshopId: string, filename: string): string {
+    return `${API_BASE}/assets/${workshopId}/file/${filename}`
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Preview API (browser-based Marp rendering)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -409,6 +480,7 @@ const api = {
   createWorkshop: workshopAPI.create,
   updateWorkshop: workshopAPI.update,
   deleteWorkshop: workshopAPI.delete,
+  setWorkshopLocked: workshopAPI.setLocked,
   saveCustomSlide: workshopAPI.saveCustomSlide,
   getCustomSlide: workshopAPI.getCustomSlide,
 
@@ -436,6 +508,12 @@ const api = {
   initMarp: previewAPI.initMarp,
   renderMarkdown: previewAPI.renderMarkdown,
   renderSlide: previewAPI.renderSlide,
+
+  // Assets
+  listAssets: assetsAPI.list,
+  uploadAsset: assetsAPI.upload,
+  deleteAsset: assetsAPI.delete,
+  getAssetURL: assetsAPI.getURL,
 }
 
 export default api

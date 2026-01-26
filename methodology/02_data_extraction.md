@@ -214,6 +214,15 @@ The Data Downloader is available at: https://github.com/worldbank/DHIS2-Download
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2a -->
+## Data extraction
+
+The FASTR analytics platform contains a direct import feature to automatically import data from DHIS2. This is often the easiest approach once indicators have been identified for inclusion in the platform.
+
+<!-- TODO: Add screenshot of FASTR direct import feature -->
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2b -->
 ## DHIS2 Data Downloader
 
 The Data Downloader is a desktop application for extracting data from DHIS2.
@@ -231,13 +240,13 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 ![demo h:35](../resources/icons/demo.svg) *Facilitator will demonstrate the Data Downloader*
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2b -->
+<!-- SLIDE:m2_2c -->
 ## Data Downloader: Login
 
 ![Data Downloader login screen h:450](../resources/screenshots/data_downloader/01_login.png)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2c -->
+<!-- SLIDE:m2_2d -->
 ## Data Downloader: Overview
 
 <div class="columns">
@@ -259,7 +268,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2d -->
+<!-- SLIDE:m2_2e -->
 ## Data Downloader: Download history
 
 <div class="columns">
@@ -281,7 +290,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2e -->
+<!-- SLIDE:m2_2f -->
 ## Data Downloader: Data dictionary
 
 <div class="columns">
@@ -303,7 +312,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2f -->
+<!-- SLIDE:m2_2g -->
 ## Data Downloader: Facility list
 
 <div class="columns">
@@ -325,7 +334,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2g -->
+<!-- SLIDE:m2_2h -->
 ## Data Downloader: Facility map
 
 <div class="columns">
@@ -349,5 +358,5 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 26-01-2026
 **Contact**: FASTR Project Team

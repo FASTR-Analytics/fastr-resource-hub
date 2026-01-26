@@ -20,7 +20,11 @@ import {
   GripVertical,
   Pencil,
   Lock,
+  Unlock,
   Plus,
+  Trash2,
+  Pin,
+  PinOff,
 } from 'lucide-react'
 import {
   DndContext,
@@ -78,7 +82,7 @@ function isSessionLocked(session: Session): boolean {
 }
 
 interface SortableSessionCardProps {
-  session: Session & { _id: string }
+  session: Session & { _id: string; _startTime?: string; _endTime?: string }
   index: number
   dayNum: number
   onEdit: (session: Session, dayNum: number, index: number) => void
@@ -111,8 +115,9 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
   if (isLocked) {
     return (
       <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-gray-100 border border-gray-200 opacity-60">
+        <span className="text-xs font-mono text-gray-400 w-12 flex-shrink-0">{session._startTime || ''}</span>
         <Lock className="w-3 h-3 text-gray-400 flex-shrink-0" />
-        <span className="text-xs text-gray-500 truncate">{session.session}</span>
+        <span className="text-xs text-gray-500 truncate flex-1">{session.session}</span>
         {session.duration && session.duration > 0 && (
           <span className="text-xs text-gray-400 flex-shrink-0">{session.duration}m</span>
         )}
@@ -155,8 +160,9 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
       {/* Content */}
       <div className="pl-5 pr-6">
         <div className="flex items-center gap-2">
+          <span className="text-xs font-mono text-gray-500 w-12 flex-shrink-0">{session._startTime || ''}</span>
           <span className="text-sm">{config.icon}</span>
-          <span className="text-sm font-medium text-gray-800 truncate">{session.session}</span>
+          <span className="text-sm font-medium text-gray-800 truncate flex-1">{session.session}</span>
         </div>
         <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
           {session.duration && session.duration > 0 && (
@@ -291,6 +297,7 @@ function App() {
   } = useWorkshopStore()
 
   const [leftPanelOpen, setLeftPanelOpen] = useState(false)
+  const [leftPanelPinned, setLeftPanelPinned] = useState(false)
   const [rightPanelOpen, setRightPanelOpen] = useState(false)
   const [showWorkshopSelector, setShowWorkshopSelector] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
@@ -325,7 +332,7 @@ function App() {
   )
 
   // Get store actions
-  const { reorderSession, updateSession, removeSession, createWorkshop, updateWorkshopSettings } = useWorkshopStore()
+  const { reorderSession, updateSession, removeSession, createWorkshop, deleteWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
 
   // Load data on mount
   useEffect(() => {
@@ -426,8 +433,9 @@ function App() {
       }
 
       // Process AI-generated schedule or create default structure
+      const startTime = data.day_start_time || '09:00'
       for (let d = 1; d <= (data.days || 3); d++) {
-        schedule.day_start_times[d] = '09:00'
+        schedule.day_start_times[d] = startTime
         schedule.day_titles[d] = ''
 
         const aiDaySessions = data.schedule?.[`day${d}`] || []
@@ -446,10 +454,11 @@ function App() {
             { _id: `outputs-${ts}`, session: 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
           )
         } else {
-          // Day 2+ starts with day cover and recap
+          // Day 2+ starts with day cover, recap of previous day, then agenda
           sessions.push(
             { _id: `daytitle-${d}-${ts}`, session: `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
-            { _id: `recap-${d}-${ts}`, session: `Recap & Day ${d} Agenda`, type: 'day_recap', duration: 15 }
+            { _id: `recap-${d}-${ts}`, session: `Recap: Day ${d - 1}`, type: 'day_recap', duration: 10 },
+            { _id: `agenda-${d}-${ts}`, session: `Day ${d} Agenda`, type: 'section', duration: 5 }
           )
         }
 
@@ -630,9 +639,9 @@ function App() {
           },
           {
             _id: `day-recap-${d}-${ts}`,
-            session: `Recap of Day ${d - 1}`,
+            session: `Recap: Day ${d - 1}`,
             type: 'day_recap',
-            duration: 15,
+            duration: 10,
           },
           {
             _id: `day-agenda-${d}-${ts}`,
@@ -769,11 +778,20 @@ function App() {
 
           {/* Library toggle */}
           <button
-            onClick={() => setLeftPanelOpen(!leftPanelOpen)}
+            onClick={() => {
+              if (leftPanelPinned) {
+                // If pinned, unpin and close
+                setLeftPanelPinned(false)
+                setLeftPanelOpen(false)
+              } else {
+                // Toggle open/close
+                setLeftPanelOpen(!leftPanelOpen)
+              }
+            }}
             className={`p-2 rounded-md transition-colors ${
-              leftPanelOpen ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
+              leftPanelOpen || leftPanelPinned ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
             }`}
-            title="Content Library"
+            title={leftPanelPinned ? 'Unpin Content Library' : 'Content Library'}
           >
             <BookOpen className="w-5 h-5" />
           </button>
@@ -871,27 +889,72 @@ function App() {
 
       {/* Main content */}
       <div className="flex-1 flex overflow-hidden relative">
-        {/* Left Panel - Content Library (slide-out) */}
-        <div
-          className={`absolute left-0 top-0 bottom-0 z-10 transition-transform duration-300 ease-in-out ${
-            leftPanelOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          <div className="h-full w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
+        {/* Left Panel - Content Library (pinned or slide-out) */}
+        {leftPanelPinned ? (
+          // Pinned mode - part of flex layout
+          <div className="h-full w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
             <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
               <span className="font-medium text-gray-700">Content Library</span>
-              <button
-                onClick={() => setLeftPanelOpen(false)}
-                className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-              >
-                <X className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setLeftPanelPinned(false)}
+                  className="p-1 text-fastr-primary hover:bg-fastr-primary/10 rounded"
+                  title="Unpin panel"
+                >
+                  <PinOff className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => {
+                    setLeftPanelPinned(false)
+                    setLeftPanelOpen(false)
+                  }}
+                  className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                  title="Close panel"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
             <div className="flex-1 overflow-hidden">
               <ContentLibrary />
             </div>
           </div>
-        </div>
+        ) : (
+          // Slide-out mode - absolute positioned overlay
+          <div
+            className={`absolute left-0 top-0 bottom-0 z-10 transition-transform duration-300 ease-in-out ${
+              leftPanelOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
+          >
+            <div className="h-full w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
+                <span className="font-medium text-gray-700">Content Library</span>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      setLeftPanelPinned(true)
+                      setLeftPanelOpen(true)
+                    }}
+                    className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-fastr-primary/10 rounded"
+                    title="Pin panel"
+                  >
+                    <Pin className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setLeftPanelOpen(false)}
+                    className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                    title="Close panel"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <ContentLibrary />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Center - Main content */}
         <main className="flex-1 overflow-hidden">
@@ -916,11 +979,25 @@ function App() {
                         {Array.from({ length: currentConfig?.schedule?.days || 0 }).map((_, i) => {
                           const dayNum = i + 1
                           const dayKey = `day${dayNum}`
+                          const startTimeStr = currentConfig?.schedule?.day_start_times?.[dayNum] || '09:00'
+
+                          // Calculate cumulative times for each session
+                          let currentMinutes = parseInt(startTimeStr.split(':')[0]) * 60 + parseInt(startTimeStr.split(':')[1] || '0')
                           const sessions = (currentConfig?.schedule?.[dayKey] || []).map(
-                            (s: any, idx: number) => ({
-                              ...s,
-                              _id: s._id || `${dayKey}-${idx}`,
-                            })
+                            (s: any, idx: number) => {
+                              const sessionStart = currentMinutes
+                              currentMinutes += (s.duration || 0)
+                              const startHour = Math.floor(sessionStart / 60)
+                              const startMin = sessionStart % 60
+                              const endHour = Math.floor(currentMinutes / 60)
+                              const endMin = currentMinutes % 60
+                              return {
+                                ...s,
+                                _id: s._id || `${dayKey}-${idx}`,
+                                _startTime: `${startHour.toString().padStart(2, '0')}:${startMin.toString().padStart(2, '0')}`,
+                                _endTime: `${endHour.toString().padStart(2, '0')}:${endMin.toString().padStart(2, '0')}`,
+                              }
+                            }
                           )
 
                           return (
@@ -1211,24 +1288,70 @@ function App() {
                   ) : (
                     <div className="space-y-2">
                       {workshops.map((workshop) => (
-                        <button
+                        <div
                           key={workshop.id}
-                          onClick={() => {
-                            selectWorkshop(workshop.id)
-                            setShowWorkshopSelector(false)
-                          }}
-                          className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${
+                          className={`group flex items-center gap-2 p-3 rounded-lg border-2 transition-colors ${
                             currentWorkshopId === workshop.id
                               ? 'bg-fastr-primary/10 border-fastr-primary'
                               : 'hover:bg-gray-50 border-gray-200'
                           }`}
                         >
-                          <div className="font-medium">{workshop.name}</div>
-                          <div className="text-sm text-gray-500">
-                            {workshop.country}
-                            {workshop.location && ` • ${workshop.location}`}
-                          </div>
-                        </button>
+                          {/* Lock indicator */}
+                          {workshop.locked && (
+                            <span title="Locked">
+                              <Lock className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                            </span>
+                          )}
+                          <button
+                            onClick={() => {
+                              selectWorkshop(workshop.id)
+                              setShowWorkshopSelector(false)
+                            }}
+                            className="flex-1 text-left"
+                          >
+                            <div className="font-medium">{workshop.name}</div>
+                            <div className="text-sm text-gray-500">
+                              {workshop.country}
+                              {workshop.location && ` • ${workshop.location}`}
+                            </div>
+                          </button>
+                          {/* Lock/Unlock button */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setWorkshopLocked(workshop.id, !workshop.locked)
+                            }}
+                            className={`p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all ${
+                              workshop.locked
+                                ? 'text-amber-500 hover:text-amber-600 hover:bg-amber-50'
+                                : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+                            }`}
+                            title={workshop.locked ? 'Unlock workshop' : 'Lock workshop'}
+                          >
+                            {workshop.locked ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+                          </button>
+                          {/* Delete button - disabled if locked */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              if (workshop.locked) {
+                                alert('Cannot delete a locked workshop. Unlock it first.')
+                                return
+                              }
+                              if (confirm(`Delete "${workshop.name}"? This cannot be undone.`)) {
+                                deleteWorkshop(workshop.id)
+                              }
+                            }}
+                            className={`p-2 rounded-lg transition-all ${
+                              workshop.locked
+                                ? 'text-gray-300 cursor-not-allowed'
+                                : 'text-gray-400 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100'
+                            }`}
+                            title={workshop.locked ? 'Unlock to delete' : 'Delete workshop'}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       ))}
                     </div>
                   )}

@@ -81,6 +81,8 @@ interface WorkshopStore {
   selectWorkshop: (workshopId: string) => Promise<void>
   saveCurrentWorkshop: () => Promise<void>
   createWorkshop: (workshopId: string, config: LocalWorkshopConfig) => Promise<void>
+  deleteWorkshop: (workshopId: string) => Promise<void>
+  setWorkshopLocked: (workshopId: string, locked: boolean) => Promise<void>
   loadContentLibrary: () => Promise<void>
 
   // Config mutations (auto-save)
@@ -171,6 +173,33 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       await get().selectWorkshop(workshopId)
     } catch (error: any) {
       set({ error: error.message, isLoading: false })
+    }
+  },
+
+  // Delete workshop
+  deleteWorkshop: async (workshopId: string) => {
+    set({ isLoading: true, error: null })
+    try {
+      await api.deleteWorkshop(workshopId)
+      // If we deleted the current workshop, clear it
+      if (get().currentWorkshopId === workshopId) {
+        set({ currentWorkshopId: null, currentConfig: null })
+      }
+      await get().loadWorkshops()
+    } catch (error: any) {
+      set({ error: error.message })
+    } finally {
+      set({ isLoading: false })
+    }
+  },
+
+  // Lock/unlock workshop
+  setWorkshopLocked: async (workshopId: string, locked: boolean) => {
+    try {
+      await api.setWorkshopLocked(workshopId, locked)
+      await get().loadWorkshops()
+    } catch (error: any) {
+      set({ error: error.message })
     }
   },
 

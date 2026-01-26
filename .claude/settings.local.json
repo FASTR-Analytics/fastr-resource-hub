@@ -132,7 +132,8 @@
       "Bash(git merge:*)",
       "Bash(git diff:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(head:*)"
     ]
   }
 }

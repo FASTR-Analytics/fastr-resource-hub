@@ -469,6 +469,8 @@ Generate a JSON object with this structure:
   "country": "Country name",
   "location": "City if mentioned, otherwise empty string",
   "days": 3,
+  "day_start_time": "09:00",
+  "day_end_time": "17:00",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
   "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
   "modules": [0, 1, 2, 4, 5, 6, 7],
@@ -490,12 +492,15 @@ CRITICAL RULES:
 2. Spread modules logically across days with breaks
 3. Day 1 should include Module 0 (Introduction) FIRST
 4. Add tea breaks (15min) mid-morning and mid-afternoon
-5. Add lunch break (60min) around midday
-6. Each day should be ~7-8 hours of content including breaks
+5. Add lunch break around midday (default 60min, or as specified by user)
+6. Calculate total daily content to fit within user-specified start and end times (default 09:00-17:00)
 7. For "high-level" or "introductory" workshops, include fewer topics per module
-8. Module sessions should use "module": "m0", "m1", etc.
-9. Break sessions should use "type": "break"
+8. ONLY two session types are allowed:
+   - Module sessions: {"session": "Name", "module": "m0", "duration": 60}
+   - Break sessions: {"session": "Tea Break", "type": "break", "duration": 15}
+9. Do NOT use any other types like "discussion", "custom", etc.
 10. objectives and expected_outputs should be strings with "- " bullets separated by newlines
+11. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "4:30pm" = "16:30")
 
 Return ONLY valid JSON, no explanation.`,
       messages: [

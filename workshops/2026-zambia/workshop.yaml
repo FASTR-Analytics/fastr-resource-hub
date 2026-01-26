@@ -54,7 +54,7 @@ schedule:
 
     - time: "09:35-10:15"
       session: "Overview: FASTR Approaches"
-      topics: [m0_0, m0_1, m0_3, m0_4]
+      topics: [m0_0, m0_1, m0_2, m0_3]
       slides: [demo_platform_slide.md]
       speaker: "GFF FASTR team"
       duration: 40
@@ -64,7 +64,7 @@ schedule:
 
     - time: "10:15-11:00"
       session: "Identifying priority questions and indicators"
-      topics: [m1_1, m9_1, m9_2, m9_3, m1_1a, m1_1b, m1_3d, m1_3a, m1_3b, m1_3c, m1_3e]
+      topics: [m1_1, m9_1, m9_2, m9_3, m1_1b, m1_1c, m1_2, m1_3, m1_3a, m1_3b, m1_2a]
       slides: [activity_indicator_review.md]
       speaker: "GFF FASTR team"
       duration: 45

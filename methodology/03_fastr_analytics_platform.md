@@ -486,5 +486,5 @@ The AI will analyze your chart and generate text you can edit for your report.
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 26-01-2026
 **Contact**: FASTR Project Team

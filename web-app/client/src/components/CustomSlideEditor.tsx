@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2 } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2, Image, Upload, Loader2 } from 'lucide-react'
+import api, { Asset } from '../../lib/api'
 
 interface CustomSlideEditorProps {
   workshopId: string
@@ -65,6 +66,13 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // Asset picker state
+  const [showAssetPicker, setShowAssetPicker] = useState(false)
+  const [assets, setAssets] = useState<Asset[]>([])
+  const [assetsLoading, setAssetsLoading] = useState(false)
+  const [uploadingAsset, setUploadingAsset] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
   // Form state for simple mode
   const [contentSlides, setContentSlides] = useState<ContentSlide[]>([
     { title: '', bullets: ['', '', ''] },
@@ -73,6 +81,64 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
     title: '',
     subtitle: '',
   })
+
+  // Load assets when asset picker opens
+  const loadAssets = async () => {
+    setAssetsLoading(true)
+    try {
+      const assetList = await api.listAssets(workshopId)
+      setAssets(assetList)
+    } catch (err) {
+      console.error('Failed to load assets:', err)
+    } finally {
+      setAssetsLoading(false)
+    }
+  }
+
+  const openAssetPicker = () => {
+    setShowAssetPicker(true)
+    loadAssets()
+  }
+
+  // Handle asset upload in picker
+  const handleUploadAsset = async (files: FileList | null) => {
+    if (!files) return
+
+    setUploadingAsset(true)
+    try {
+      for (const file of Array.from(files)) {
+        await api.uploadAsset(workshopId, file)
+      }
+      await loadAssets()
+    } catch (err: any) {
+      console.error('Upload failed:', err)
+      alert(`Upload failed: ${err.message}`)
+    } finally {
+      setUploadingAsset(false)
+    }
+  }
+
+  // Insert asset markdown at cursor position
+  const insertAsset = (asset: Asset) => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      const start = textarea.selectionStart
+      const end = textarea.selectionEnd
+      const newMarkdown = markdown.slice(0, start) + asset.markdown + markdown.slice(end)
+      setMarkdown(newMarkdown)
+
+      // Restore cursor position after state update
+      setTimeout(() => {
+        textarea.focus()
+        const newPos = start + asset.markdown.length
+        textarea.setSelectionRange(newPos, newPos)
+      }, 0)
+    } else {
+      // If textarea not focused, append to end
+      setMarkdown(prev => prev + '\n' + asset.markdown)
+    }
+    setShowAssetPicker(false)
+  }
 
   const selectTemplate = (type: SlideType) => {
     setSelectedType(type)
@@ -342,10 +408,18 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                 {editorMode === 'advanced' ? (
                   // Advanced: Raw markdown
                   <>
-                    <div className="px-4 py-2 bg-gray-800 border-b border-gray-700">
+                    <div className="px-4 py-2 bg-gray-800 border-b border-gray-700 flex items-center justify-between">
                       <span className="text-sm text-gray-400">Markdown</span>
+                      <button
+                        onClick={openAssetPicker}
+                        className="flex items-center gap-1.5 px-2.5 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white rounded transition-colors"
+                      >
+                        <Image className="w-3.5 h-3.5" />
+                        Insert Image
+                      </button>
                     </div>
                     <textarea
+                      ref={textareaRef}
                       value={markdown}
                       onChange={(e) => setMarkdown(e.target.value)}
                       className="flex-1 w-full p-4 bg-gray-950 text-gray-100 font-mono text-sm resize-none focus:outline-none"
@@ -542,6 +616,99 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
             </div>
           )}
         </div>
+
+        {/* Asset Picker Modal */}
+        {showAssetPicker && (
+          <div className="absolute inset-0 bg-black/60 flex items-center justify-center p-8 z-10">
+            <div className="bg-gray-800 rounded-xl w-full max-w-2xl max-h-[80%] flex flex-col">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <Image className="w-5 h-5" />
+                  Insert Image
+                </h3>
+                <button
+                  onClick={() => setShowAssetPicker(false)}
+                  className="p-1 text-gray-400 hover:text-white hover:bg-gray-700 rounded"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-auto p-4">
+                {/* Upload area */}
+                <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 mb-4 text-center hover:border-gray-500 transition-colors">
+                  {uploadingAsset ? (
+                    <div className="flex items-center justify-center gap-2 text-gray-400">
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Uploading...</span>
+                    </div>
+                  ) : (
+                    <>
+                      <Upload className="w-6 h-6 mx-auto text-gray-500 mb-2" />
+                      <p className="text-sm text-gray-400 mb-1">Drag & drop or click to upload</p>
+                      <label className="text-xs text-fastr-secondary hover:underline cursor-pointer">
+                        Browse files
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={(e) => handleUploadAsset(e.target.files)}
+                        />
+                      </label>
+                    </>
+                  )}
+                </div>
+
+                {/* Assets grid */}
+                {assetsLoading ? (
+                  <div className="text-center py-8">
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-gray-500" />
+                  </div>
+                ) : assets.length === 0 ? (
+                  <div className="text-center text-gray-500 py-8">
+                    <Image className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                    <p className="text-sm">No images uploaded yet</p>
+                    <p className="text-xs text-gray-600 mt-1">Upload images to insert them into your slides</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-3 gap-3">
+                    {assets.map((asset) => (
+                      <button
+                        key={asset.filename}
+                        onClick={() => insertAsset(asset)}
+                        className="group relative aspect-square bg-gray-900 rounded-lg overflow-hidden border-2 border-transparent hover:border-fastr-secondary transition-colors"
+                      >
+                        <img
+                          src={asset.url}
+                          alt={asset.filename}
+                          className="w-full h-full object-contain"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="text-white text-xs font-medium px-2 py-1 bg-fastr-secondary rounded">
+                            Insert
+                          </span>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-2 py-1">
+                          <p className="text-xs text-gray-300 truncate">{asset.filename}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="px-4 py-3 border-t border-gray-700 text-right">
+                <button
+                  onClick={() => setShowAssetPicker(false)}
+                  className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

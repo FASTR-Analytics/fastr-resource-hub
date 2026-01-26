@@ -55,6 +55,16 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_custom_slides_workshop ON custom_slides(workshop_id);
 `)
 
+// Add locked column if it doesn't exist (migration)
+try {
+  db.exec(`ALTER TABLE workshops ADD COLUMN locked INTEGER DEFAULT 0`)
+} catch (e: any) {
+  // Column already exists, ignore
+  if (!e.message.includes('duplicate column')) {
+    console.error('Migration error:', e.message)
+  }
+}
+
 console.log('Database initialized at:', DB_PATH)
 
 export default db
@@ -75,6 +85,7 @@ export interface WorkshopRow {
   website: string | null
   objectives: string | null
   config: string // JSON string
+  locked: number // 0 or 1
   created_at: string
   updated_at: string
 }
@@ -107,11 +118,15 @@ export interface WorkshopConfig {
 export function getAllWorkshops() {
   const stmt = db.prepare(`
     SELECT id, name, country, location, date,
-           json_extract(config, '$.schedule.days') as days
+           json_extract(config, '$.schedule.days') as days,
+           locked
     FROM workshops
     ORDER BY updated_at DESC
   `)
-  return stmt.all()
+  return stmt.all().map((row: any) => ({
+    ...row,
+    locked: row.locked === 1
+  }))
 }
 
 // Get single workshop
@@ -167,10 +182,22 @@ export function updateWorkshop(id: string, config: WorkshopConfig) {
   )
 }
 
-// Delete workshop
-export function deleteWorkshop(id: string) {
+// Delete workshop (only if not locked)
+export function deleteWorkshop(id: string): boolean {
+  // Check if locked
+  const workshop = db.prepare('SELECT locked FROM workshops WHERE id = ?').get(id) as { locked: number } | undefined
+  if (workshop?.locked) {
+    return false // Cannot delete locked workshop
+  }
   const stmt = db.prepare('DELETE FROM workshops WHERE id = ?')
   stmt.run(id)
+  return true
+}
+
+// Lock/unlock workshop
+export function setWorkshopLocked(id: string, locked: boolean) {
+  const stmt = db.prepare('UPDATE workshops SET locked = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
+  stmt.run(locked ? 1 : 0, id)
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

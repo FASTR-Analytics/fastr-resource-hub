@@ -76,6 +76,10 @@ router.post('/:id/slides', async (req, res) => {
     const slidesData: any[] = []
     const numDays = config.schedule.days || 1
 
+    // Track cumulative session number across all days
+    let sessionNumber = 0
+    const { buildSessionMarkdown } = await import('../services/deckBuilder.js')
+
     for (let day = 1; day <= numDays; day++) {
       const dayKey = `day${day}`
       const sessions = config.schedule[dayKey] || []
@@ -84,9 +88,14 @@ router.post('/:id/slides', async (req, res) => {
         const session = sessions[sessionIdx]
         const sessionId = session._id || `day${day}-session${sessionIdx}`
 
+        // Increment session number only for content sessions (modules)
+        const isContentSession = !!session.module
+        if (isContentSession) {
+          sessionNumber++
+        }
+
         // Build markdown for this session
-        const { buildSessionMarkdown } = await import('../services/deckBuilder.js')
-        const sessionMarkdown = await buildSessionMarkdown(session, config, day)
+        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined)
 
         if (!sessionMarkdown) continue
 

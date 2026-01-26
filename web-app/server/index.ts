@@ -9,6 +9,7 @@ import workshopsRouter from './routes/workshops.js'
 import contentRouter from './routes/content.js'
 import aiRouter from './routes/ai.js'
 import exportRouter from './routes/export.js'
+import assetsRouter from './routes/assets.js'
 
 // Load environment variables
 dotenv.config()
@@ -38,6 +39,7 @@ app.use('/api/workshops', workshopsRouter)
 app.use('/api/content', contentRouter)
 app.use('/api/ai', aiRouter)
 app.use('/api/export', exportRouter)
+app.use('/api/assets', assetsRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => {

@@ -50,13 +50,22 @@ paginate: true
 
   const numDays = config.schedule.days || 1
 
+  // Track cumulative session number across all days (only count content sessions, not breaks/structure)
+  let sessionNumber = 0
+
   // Build each day
   for (let day = 1; day <= numDays; day++) {
     const dayKey = `day${day}`
     const sessions: Session[] = config.schedule[dayKey] || []
 
     for (const session of sessions) {
-      const slideContent = await buildSessionSlides(session, config, day)
+      // Increment session number only for content sessions (modules)
+      const isContentSession = !!session.module
+      if (isContentSession) {
+        sessionNumber++
+      }
+
+      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined)
       if (slideContent) {
         slides.push(slideContent)
       }
@@ -72,9 +81,10 @@ paginate: true
 export async function buildSessionMarkdown(
   session: Session,
   config: WorkshopConfig,
-  dayNumber: number
+  dayNumber: number,
+  sessionNumber?: number
 ): Promise<string | null> {
-  return buildSessionSlides(session, config, dayNumber)
+  return buildSessionSlides(session, config, dayNumber, sessionNumber)
 }
 
 /**
@@ -83,11 +93,12 @@ export async function buildSessionMarkdown(
 async function buildSessionSlides(
   session: Session,
   config: WorkshopConfig,
-  dayNumber: number
+  dayNumber: number,
+  sessionNumber?: number
 ): Promise<string | null> {
   // Module content
   if (session.module) {
-    return buildModuleSlides(session.module)
+    return buildModuleSlides(session.module, session.session, sessionNumber)
   }
 
   // Template slides
@@ -134,10 +145,23 @@ async function buildSessionSlides(
   return buildGenericSessionSlide(session)
 }
 
+// Module names for title slides
+const MODULE_NAMES: Record<string, string> = {
+  m0: 'Introduction to FASTR',
+  m1: 'Identify Questions & Indicators',
+  m2: 'Data Extraction',
+  m3: 'FASTR Analytics Platform',
+  m4: 'Data Quality Assessment',
+  m5: 'Data Quality Adjustment',
+  m6: 'Data Analysis',
+  m7: 'Results Communication',
+  m8: 'Survey & HFA',
+}
+
 /**
  * Load all slides for a module
  */
-function buildModuleSlides(moduleId: string): string | null {
+function buildModuleSlides(moduleId: string, sessionName?: string, sessionNumber?: number): string | null {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return null
 
@@ -154,7 +178,16 @@ function buildModuleSlides(moduleId: string): string | null {
       return aNum - bNum
     })
 
-  const contents: string[] = []
+  // Start with a session title slide
+  const moduleName = MODULE_NAMES[moduleId] || sessionName || 'Session'
+  const displayName = sessionName || moduleName
+  const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
+  const titleSlide = `<!-- _class: section-cover -->
+![bg](../../resources/backgrounds/section_slide.png)
+
+# ${sessionLabel}: ${displayName}`
+
+  const contents: string[] = [titleSlide]
   for (const file of files) {
     let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
     // Remove frontmatter from module files (we have our own)
@@ -399,21 +432,16 @@ ${resumeTime ? `We resume at **${resumeTime}**` : ''}
 }
 
 /**
- * Build a day recap slide
+ * Build a day recap slide - recaps the PREVIOUS day
+ * Just a simple title slide, facilitator fills in verbally
  */
 function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number): string {
-  const yesterday = session.recap_yesterday || 'Previous day content'
+  const previousDay = dayNumber - 1
 
   return `<!-- _class: section-cover -->
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
-# Day ${dayNumber} - Recap
-
----
-
-## Day ${dayNumber - 1} Recap
-
-${yesterday.split('\n').map((line: string) => `- ${line.trim()}`).join('\n')}
+# Day ${previousDay} Recap
 `
 }
 
