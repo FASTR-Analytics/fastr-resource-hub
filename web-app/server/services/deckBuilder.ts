@@ -67,6 +67,17 @@ paginate: true
 }
 
 /**
+ * Build slides for a single session (exported for use by slides endpoint)
+ */
+export async function buildSessionMarkdown(
+  session: Session,
+  config: WorkshopConfig,
+  dayNumber: number
+): Promise<string | null> {
+  return buildSessionSlides(session, config, dayNumber)
+}
+
+/**
  * Build slides for a single session
  */
 async function buildSessionSlides(
@@ -108,8 +119,14 @@ async function buildSessionSlides(
     return buildDayEndSlide(session, dayNumber)
   }
 
-  // Section/Agenda
+  // Section/Agenda - check if this is an agenda section
   if (session.type === 'section') {
+    // If session name contains "Agenda" and a day number, generate agenda table
+    const agendaMatch = session.session.match(/Day\s*(\d+)\s*Agenda/i)
+    if (agendaMatch) {
+      const agendaDay = parseInt(agendaMatch[1])
+      return buildDayAgendaSlide(config, agendaDay)
+    }
     return buildSectionSlide(session)
   }
 
@@ -157,11 +174,18 @@ async function loadSlideContent(
   dayNumber: number,
   session: Session
 ): Promise<string | null> {
+  // Check for dynamic agenda slides (day1_agenda, day2_agenda, etc.)
+  const agendaMatch = slideFile.match(/^day(\d+)_agenda$/)
+  if (agendaMatch) {
+    const agendaDay = parseInt(agendaMatch[1])
+    return buildDayAgendaSlide(config, agendaDay)
+  }
+
   // Try templates folder first
   let filePath = path.join(TEMPLATES_PATH, slideFile)
   if (!fs.existsSync(filePath)) {
     // Try custom_slides subfolder
-    filePath = path.join(TEMPLATES_PATH, slideFile)
+    filePath = path.join(TEMPLATES_PATH, 'custom_slides', slideFile)
   }
 
   if (!fs.existsSync(filePath)) {
@@ -174,10 +198,82 @@ async function loadSlideContent(
   // Remove frontmatter
   content = content.replace(/^---[\s\S]*?---\s*/m, '')
 
+  // Remove trailing slide separator (prevents double ---)
+  content = content.replace(/\n---\s*$/, '')
+
   // Substitute variables
   content = substituteVariables(content, config, dayNumber, session)
 
   return content.trim()
+}
+
+/**
+ * Build a day agenda slide with schedule table
+ */
+function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string {
+  const dayKey = `day${dayNumber}` as keyof typeof config.schedule
+  const sessions = config.schedule[dayKey] as Session[] | undefined
+  const dayTitle = config.schedule.day_titles?.[dayNumber] || `Day ${dayNumber}`
+
+  if (!sessions || sessions.length === 0) {
+    return `# Day ${dayNumber} - Agenda
+
+*No sessions scheduled*
+`
+  }
+
+  // Get day start time
+  const dayStartTime = config.schedule.day_start_times?.[dayNumber] || '09:00'
+  const [startHours, startMinutes] = dayStartTime.split(':').map(Number)
+  let currentMinutes = startHours * 60 + startMinutes
+
+  // Helper to format time
+  const formatTime = (mins: number): string => {
+    const h = Math.floor(mins / 60)
+    const m = mins % 60
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`
+  }
+
+  // Build table rows with Time, Session, and Facilitator columns
+  const rows: string[] = []
+  rows.push('| Time | Session | Facilitator |')
+  rows.push('|------|---------|-------------|')
+
+  for (const s of sessions) {
+    // Skip section headers and title slides in agenda
+    if (s.type === 'section' || s.type === 'day_title') continue
+    if (s.duration === 0) continue  // Skip 0-duration items like title slides
+
+    const name = s.session || ''
+    if (!name) continue
+
+    // Use explicit time if provided, otherwise calculate from current position
+    let timeStr = s.time || ''
+    if (!timeStr && s.duration) {
+      const endMinutes = currentMinutes + s.duration
+      timeStr = `${formatTime(currentMinutes)}-${formatTime(endMinutes)}`
+    }
+
+    const speaker = s.speaker || ''
+
+    if (timeStr) {
+      rows.push(`| ${timeStr} | ${name} | ${speaker} |`)
+    }
+
+    // Advance current time by duration
+    if (s.duration) {
+      currentMinutes += s.duration
+    }
+  }
+
+  return `<!-- _class: agenda -->
+
+# Day ${dayNumber} - Agenda
+
+**${dayTitle}**
+
+${rows.join('\n')}
+`
 }
 
 /**
@@ -189,6 +285,9 @@ function substituteVariables(
   dayNumber: number,
   session: Session
 ): string {
+  // Cast to any to access optional properties
+  const workshop = config.workshop as any
+
   const vars: Record<string, string> = {
     '{{WORKSHOP_NAME}}': config.workshop.name || 'FASTR Workshop',
     '{{COUNTRY}}': config.workshop.country || '',
@@ -202,6 +301,9 @@ function substituteVariables(
     '{{DAY_TITLE}}': config.schedule.day_titles?.[dayNumber] || `Day ${dayNumber}`,
     '{{SESSION_NAME}}': session.session || '',
     '{{RESUME_TIME}}': calculateResumeTime(session),
+    // Cover slide fields
+    '{{TITLE}}': workshop.title || 'STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE',
+    '{{SUBTITLE}}': workshop.subtitle || 'Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring',
   }
 
   // Objectives as bullet list
@@ -216,6 +318,30 @@ function substituteVariables(
     vars['{{OBJECTIVES}}'] = '- Objectives to be defined'
   }
 
+  // Scope of work as bullet list
+  if (workshop.scope_of_work) {
+    const scope = workshop.scope_of_work
+      .split('\n')
+      .filter((line: string) => line.trim())
+      .map((line: string) => `- ${line.trim().replace(/^[-•*]\s*/, '')}`)
+      .join('\n')
+    vars['{{SCOPE_OF_WORK}}'] = scope
+  } else {
+    vars['{{SCOPE_OF_WORK}}'] = ''
+  }
+
+  // Expected outputs as bullet list
+  if (workshop.expected_outputs) {
+    const outputs = workshop.expected_outputs
+      .split('\n')
+      .filter((line: string) => line.trim())
+      .map((line: string) => `- ${line.trim().replace(/^[-•*]\s*/, '')}`)
+      .join('\n')
+    vars['{{EXPECTED_OUTPUTS}}'] = outputs
+  } else {
+    vars['{{EXPECTED_OUTPUTS}}'] = ''
+  }
+
   for (const [key, value] of Object.entries(vars)) {
     content = content.replace(new RegExp(key.replace(/[{}]/g, '\\$&'), 'g'), value)
   }
@@ -227,14 +353,29 @@ function substituteVariables(
  * Calculate resume time after a break
  */
 function calculateResumeTime(session: Session): string {
-  if (!session.time || !session.duration) return ''
+  if (!session.time) return ''
 
-  const [hours, minutes] = session.time.split(':').map(Number)
-  const totalMinutes = hours * 60 + minutes + session.duration
-  const resumeHours = Math.floor(totalMinutes / 60)
-  const resumeMinutes = totalMinutes % 60
+  // Time format is "HH:MM-HH:MM" (start-end range)
+  // The end time IS the resume time
+  const timeMatch = session.time.match(/(\d{1,2}:\d{2})-(\d{1,2}:\d{2})/)
+  if (timeMatch) {
+    return timeMatch[2] // Return end time as resume time
+  }
 
-  return `${resumeHours.toString().padStart(2, '0')}:${resumeMinutes.toString().padStart(2, '0')}`
+  // Fallback: if only start time provided, calculate from duration
+  if (session.duration) {
+    const startMatch = session.time.match(/^(\d{1,2}):(\d{2})/)
+    if (startMatch) {
+      const hours = parseInt(startMatch[1])
+      const minutes = parseInt(startMatch[2])
+      const totalMinutes = hours * 60 + minutes + session.duration
+      const resumeHours = Math.floor(totalMinutes / 60)
+      const resumeMinutes = totalMinutes % 60
+      return `${resumeHours.toString().padStart(2, '0')}:${resumeMinutes.toString().padStart(2, '0')}`
+    }
+  }
+
+  return ''
 }
 
 /**
@@ -261,24 +402,17 @@ ${resumeTime ? `We resume at **${resumeTime}**` : ''}
  */
 function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number): string {
   const yesterday = session.recap_yesterday || 'Previous day content'
-  const today = session.recap_today || 'Today\'s planned content'
 
   return `<!-- _class: section-cover -->
 ![bg](../resources/backgrounds/section_slide.png)
 
-# Day ${dayNumber} - Recap & Preview
+# Day ${dayNumber} - Recap
 
 ---
 
-## Yesterday We Covered
+## Day ${dayNumber - 1} Recap
 
-${yesterday.split('\n').map(line => `- ${line.trim()}`).join('\n')}
-
----
-
-## Today We Will Cover
-
-${today.split('\n').map(line => `- ${line.trim()}`).join('\n')}
+${yesterday.split('\n').map((line: string) => `- ${line.trim()}`).join('\n')}
 `
 }
 

@@ -9,9 +9,9 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-# STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE
+# {{TITLE}}
 
-**Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring**
+**{{SUBTITLE}}**
 
 Lusaka, Zambia
 
@@ -60,7 +60,7 @@ What do you want to learn?
 
 What questions about FASTR do you want answered?
 
-*We will review these on day four to see if we met our expectations.*
+*We will review these on day 4 to see if we met our expectations.*
 
 ![w:120](../resources/icons/pinned-notes.png)
 

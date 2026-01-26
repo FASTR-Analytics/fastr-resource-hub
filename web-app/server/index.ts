@@ -23,6 +23,16 @@ const PORT = process.env.PORT || 3001
 app.use(cors())
 app.use(express.json({ limit: '10mb' }))
 
+// Serve static resources (images, diagrams, etc.)
+// __dirname is web-app/server, so go up 2 levels to reach repo root
+const REPO_ROOT = path.resolve(__dirname, '../..')
+console.log('REPO_ROOT:', REPO_ROOT)
+console.log('Resources path:', path.join(REPO_ROOT, 'resources'))
+app.use('/resources', express.static(path.join(REPO_ROOT, 'resources')))
+app.use('/fastr-theme.css', (_req, res) => {
+  res.sendFile(path.join(REPO_ROOT, 'fastr-theme.css'))
+})
+
 // API Routes
 app.use('/api/workshops', workshopsRouter)
 app.use('/api/content', contentRouter)

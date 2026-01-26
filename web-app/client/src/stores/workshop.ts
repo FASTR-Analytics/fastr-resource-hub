@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import api, { WorkshopConfig, WorkshopInfo, Module, AIMessage } from '../../lib/api'
+import api, { WorkshopInfo, Module, AIMessage } from '../../lib/api'
 
 // Types matching the backend
 export interface Session {
@@ -29,6 +29,12 @@ export interface LocalWorkshopConfig {
     contact_email?: string
     website?: string
     objectives?: string
+    // Cover slide fields
+    title?: string
+    subtitle?: string
+    // Additional content
+    scope_of_work?: string
+    expected_outputs?: string
   }
   schedule: {
     days: number
@@ -160,7 +166,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   createWorkshop: async (workshopId: string, config: LocalWorkshopConfig) => {
     set({ isLoading: true, error: null })
     try {
-      await api.createWorkshop(config as any)
+      await api.createWorkshop(workshopId, config as any)
       await get().loadWorkshops()
       await get().selectWorkshop(workshopId)
     } catch (error: any) {
@@ -421,18 +427,12 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
 
   // AI Assistant
   sendAIMessage: async (message: string) => {
-    const { aiMessages, currentConfig, contentLibrary, addSession } = get()
+    const { aiMessages, currentConfig } = get()
 
     const userMessage: LocalAIMessage = { role: 'user', content: message }
     set({ aiMessages: [...aiMessages, userMessage], aiLoading: true })
 
     try {
-      const context = {
-        workshop: currentConfig?.workshop,
-        currentDays: currentConfig?.schedule?.days,
-        schedule: currentConfig?.schedule,
-      }
-
       const messages: AIMessage[] = [...aiMessages, userMessage].map(m => ({
         role: m.role,
         content: m.content,

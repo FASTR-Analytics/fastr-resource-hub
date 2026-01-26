@@ -50,16 +50,22 @@ export interface WorkshopConfig {
 }
 
 export interface Module {
+  number: number
   id: string
-  title: string
+  name: string
+  folder: string
   topics: Topic[]
+  totalSlides: number
 }
 
 export interface Topic {
   id: string
+  file: string
   title: string
-  slides?: string[]
-  duration?: number
+  slideCount: number
+  slideTitles: string[]
+  preview: string[]
+  isShort?: boolean
 }
 
 export interface Template {
@@ -127,10 +133,10 @@ export const workshopAPI = {
   /**
    * Create a new workshop
    */
-  async create(config: WorkshopConfig): Promise<{ id: string }> {
+  async create(id: string, config: WorkshopConfig): Promise<{ id: string }> {
     return fetchJSON('/workshops', {
       method: 'POST',
-      body: JSON.stringify(config),
+      body: JSON.stringify({ id, config }),
     })
   },
 
@@ -359,7 +365,8 @@ export const previewAPI = {
     if (marpInstance) return
 
     // Dynamic import of Marp for browser
-    const { Marp } = await import('@marp-team/marp-core/browser')
+    const MarpModule = await import('@marp-team/marp-core/browser')
+    const Marp = (MarpModule as any).Marp || (MarpModule as any).default
     marpInstance = new Marp({ html: true })
 
     // Load FASTR theme

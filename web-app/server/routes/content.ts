@@ -91,6 +91,9 @@ router.get('/modules', (_req, res) => {
           const keyPoints = content.match(/^\*\*([^*]+)\*\*/gm)?.slice(0, 4).map(b => b.replace(/\*\*/g, '')) ||
                           content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 4).map(b => b.replace(/^[-*]\s+/, '')) || []
 
+          // Detect if this is a short version
+          const isShort = file.includes('_short') || file.includes('_brief')
+
           topics.push({
             id: topicId,
             file: file,
@@ -98,6 +101,7 @@ router.get('/modules', (_req, res) => {
             slideCount: slideCount,
             slideTitles: slideTitles.slice(0, 5),
             preview: keyPoints,
+            isShort: isShort,
           })
         }
 
@@ -297,7 +301,7 @@ router.get('/templates/:id', (req, res) => {
 // GET /api/content/slide/:path - Read any slide file by relative path
 router.get('/slide/*', (req, res) => {
   try {
-    const relativePath = req.params[0]
+    const relativePath = (req.params as unknown as string[])[0]
 
     // Try core_content first, then templates
     let filePath = path.join(CORE_CONTENT_PATH, relativePath)
@@ -313,6 +317,62 @@ router.get('/slide/*', (req, res) => {
     res.json({ path: relativePath, content })
   } catch (error: any) {
     console.error('Error reading slide:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Render markdown to HTML
+// ─────────────────────────────────────────────────────────────────────────────
+
+// POST /api/content/render - Render markdown to HTML
+router.post('/render', async (req, res) => {
+  try {
+    let { markdown } = req.body
+
+    if (!markdown) {
+      return res.status(400).json({ error: 'Markdown content required' })
+    }
+
+    // Rewrite relative image paths to absolute URLs
+    // ../../resources/... -> /resources/...
+    // ../resources/... -> /resources/...
+    markdown = markdown.replace(/\(\.\.\/\.\.\/resources\//g, '(/resources/')
+    markdown = markdown.replace(/\(\.\.\/resources\//g, '(/resources/')
+    markdown = markdown.replace(/\(resources\//g, '(/resources/')
+
+    // Import Marp dynamically
+    const Marp = (await import('@marp-team/marp-core')).default
+    const marp = new Marp({ html: true })
+
+    // Load FASTR theme if available
+    const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
+    if (fs.existsSync(themePath)) {
+      const themeCSS = fs.readFileSync(themePath, 'utf-8')
+      marp.themeSet.add(themeCSS)
+    }
+
+    const { html, css } = marp.render(markdown)
+
+    // Create full HTML document
+    const fullHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>${css}</style>
+  <style>
+    body { margin: 0; }
+    section { margin: 0 auto; }
+  </style>
+</head>
+<body>
+${html}
+</body>
+</html>`
+
+    res.json({ html: fullHtml })
+  } catch (error: any) {
+    console.error('Error rendering markdown:', error)
     res.status(500).json({ error: error.message })
   }
 })

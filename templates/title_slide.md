@@ -8,9 +8,9 @@ paginate: true
 
 ![bg](../resources/backgrounds/cover_slide.png)
 
-# STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE
+# {{TITLE}}
 
-**Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring**
+**{{SUBTITLE}}**
 
 {{LOCATION}}, {{COUNTRY}}
 

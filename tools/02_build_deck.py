@@ -1129,6 +1129,10 @@ def substitute_variables(content, config, extra_vars=None):
     country_data = config.get('country_data', {})
     country_name = country_data.get('COUNTRY', '').lower().replace(' ', '-')
 
+    # Get number of days from schedule or config
+    schedule = config.get('_yaml_schedule', {})
+    num_days = schedule.get('days', config.get('workshop_days', 4))
+
     replacements = {
         'WORKSHOP_ID': workshop_id,
         'WORKSHOP_NAME': config.get('name', ''),
@@ -1143,6 +1147,7 @@ def substitute_variables(content, config, extra_vars=None):
         'LUNCH_TIME': config.get('lunch_time', '1:00 PM'),
         'AFTERNOON_TEA_TIME': config.get('afternoon_tea_time', '3:30 PM'),
         'DAY_START_TIME': config.get('day_start_time', '9:00 AM'),
+        'LAST_DAY': str(num_days),
         # Workshop-specific media path (relative to outputs/ folder)
         'WORKSHOP_MEDIA': f'../workshops/{workshop_id}/media' if workshop_id else '../media',
         # Platform URL based on country name (e.g., https://zambia.fastr-analytics.org/)

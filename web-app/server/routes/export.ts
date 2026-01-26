@@ -49,6 +49,135 @@ router.post('/:id/markdown', async (req, res) => {
   }
 })
 
+// POST /api/export/:id/slides - Get slides with session metadata
+router.post('/:id/slides', async (req, res) => {
+  try {
+    const workshopId = req.params.id
+    const config = getWorkshop(workshopId)
+
+    if (!config) {
+      return res.status(404).json({ error: 'Workshop not found' })
+    }
+
+    // Import dependencies
+    const Marp = (await import('@marp-team/marp-core')).default
+    const marp = new Marp({ html: true })
+
+    // Load FASTR theme
+    const REPO_ROOT = path.resolve(__dirname, '../../..')
+    const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
+    let fastrThemeCSS = ''
+    if (fs.existsSync(themePath)) {
+      fastrThemeCSS = fs.readFileSync(themePath, 'utf-8')
+      marp.themeSet.add(fastrThemeCSS)
+    }
+
+    // Build slides for each session with metadata
+    const slidesData: any[] = []
+    const numDays = config.schedule.days || 1
+
+    for (let day = 1; day <= numDays; day++) {
+      const dayKey = `day${day}`
+      const sessions = config.schedule[dayKey] || []
+
+      for (let sessionIdx = 0; sessionIdx < sessions.length; sessionIdx++) {
+        const session = sessions[sessionIdx]
+        const sessionId = session._id || `day${day}-session${sessionIdx}`
+
+        // Build markdown for this session
+        const { buildSessionMarkdown } = await import('../services/deckBuilder.js')
+        const sessionMarkdown = await buildSessionMarkdown(session, config, day)
+
+        if (!sessionMarkdown) continue
+
+        // Render to HTML
+        const fullMarkdown = `---
+marp: true
+theme: fastr
+paginate: true
+---
+
+${sessionMarkdown}`
+
+        const { html, css } = marp.render(fullMarkdown)
+
+        // Marp renders slides as SVG elements - extract each one
+        // Structure: <div class="marpit"><svg>...</svg><svg>...</svg>...</div>
+        const svgRegex = /<svg[^>]*data-marpit-svg[^>]*>[\s\S]*?<\/svg>/g
+        let match
+        let slideIdx = 0
+
+        while ((match = svgRegex.exec(html)) !== null) {
+          // Fix relative image paths to absolute URLs
+          let svgHtml = match[0]
+          svgHtml = svgHtml.replace(/\.\.\/\.\.\/resources\//g, '/resources/')
+          svgHtml = svgHtml.replace(/\.\.\/resources\//g, '/resources/')
+          svgHtml = svgHtml.replace(/&quot;\.\.\/\.\.\/resources\//g, '&quot;/resources/')
+          svgHtml = svgHtml.replace(/&quot;\.\.\/resources\//g, '&quot;/resources/')
+
+          // Create standalone HTML for this slide
+          // Include both Marp CSS and FASTR theme CSS
+          // Add base tag so relative URLs resolve correctly in srcDoc iframe
+          const baseUrl = `http://localhost:${process.env.PORT || 3001}`
+          const slideHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base href="${baseUrl}/">
+  <style>
+    ${css}
+    ${fastrThemeCSS}
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: white;
+    }
+    .marpit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    svg[data-marpit-svg] {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="marpit">${svgHtml}</div>
+</body>
+</html>`
+
+          slidesData.push({
+            id: `${sessionId}-slide${slideIdx}`,
+            sessionId: sessionId,
+            dayNumber: day,
+            sessionIndex: sessionIdx,
+            slideIndex: slideIdx,
+            sessionName: session.session,
+            sessionType: session.type || (session.module ? 'module' : 'custom'),
+            moduleId: session.module || null,
+            html: slideHtml,
+          })
+
+          slideIdx++
+        }
+      }
+    }
+
+    res.json({
+      success: true,
+      slides: slidesData,
+      totalSlides: slidesData.length,
+    })
+  } catch (error: any) {
+    console.error('Error building slides:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
 // POST /api/export/:id/html - Build HTML preview
 router.post('/:id/html', async (req, res) => {
   try {
