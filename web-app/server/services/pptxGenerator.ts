@@ -65,6 +65,7 @@ interface ParsedSlide {
   images: Array<{ alt: string; path: string; height?: number }>
   columns: { left: string; right: string } | null
   cssClass: string | null
+  presenterNotes?: string
 }
 
 type SlideType = 'title' | 'agenda' | 'break' | 'section' | 'two_column' | 'table' | 'image' | 'content'
@@ -92,8 +93,35 @@ function parseMarkdown(content: string): ParsedSlide[] {
     raw = raw.trim()
     if (!raw) continue
 
+    // Extract CSS class directive FIRST
+    let cssClass: string | null = null
+    const classMatch = raw.match(/<!--\s*_class:\s*(\w+)\s*-->/)
+    if (classMatch) {
+      cssClass = classMatch[1]
+      raw = raw.replace(/<!--\s*_class:\s*\w+\s*-->/, '')
+    }
+
+    // Extract and remove presenter notes (HTML comments with PRESENTER NOTES)
+    // Must happen BEFORE creating slide object so cleaned raw is stored
+    let presenterNotes: string | undefined
+    const notesRegex = /<!--\s*PRESENTER NOTES:[\s\S]*?-->/gi
+    const notesMatch = raw.match(notesRegex)
+    if (notesMatch) {
+      presenterNotes = notesMatch.map(note =>
+        note.replace(/<!--\s*/, '').replace(/\s*-->/, '').replace(/^PRESENTER NOTES:\s*/i, '').trim()
+      ).join('\n\n')
+    }
+    // Remove all presenter notes comments from content
+    raw = raw.replace(notesRegex, '')
+
+    // Also remove any other HTML comments that are not directives (multi-line notes without PRESENTER NOTES label)
+    raw = raw.replace(/<!--(?!\s*_)[\s\S]*?-->/g, '')
+
+    // Trim again after removing comments
+    raw = raw.trim()
+
     const slide: ParsedSlide = {
-      raw,
+      raw,  // Now contains cleaned content without presenter notes
       headers: [],
       bullets: [],
       paragraphs: [],
@@ -101,14 +129,8 @@ function parseMarkdown(content: string): ParsedSlide[] {
       table: null,
       images: [],
       columns: null,
-      cssClass: null,
-    }
-
-    // Extract CSS class directive
-    const classMatch = raw.match(/<!--\s*_class:\s*(\w+)\s*-->/)
-    if (classMatch) {
-      slide.cssClass = classMatch[1]
-      raw = raw.replace(/<!--\s*_class:\s*\w+\s*-->/, '')
+      cssClass,
+      presenterNotes,
     }
 
     // Extract headers
@@ -174,6 +196,9 @@ function parseMarkdown(content: string): ParsedSlide[] {
     for (const line of lines) {
       const stripped = line.trim()
       if (!stripped) continue
+
+      // Skip lines that are only HTML entities like &nbsp; (used for spacing)
+      if (/^(&nbsp;|\s)+$/.test(stripped)) continue
 
       // H3+ headers in content flow
       const h3Match = stripped.match(/^(#{3,6})\s+(.+)$/)
@@ -310,6 +335,13 @@ function stripHtmlTags(text: string): string {
 
 function cleanMarkdownText(text: string): string {
   text = stripHtmlTags(text)
+  // Convert HTML entities to their characters
+  text = text.replace(/&nbsp;/g, ' ')
+  text = text.replace(/&amp;/g, '&')
+  text = text.replace(/&lt;/g, '<')
+  text = text.replace(/&gt;/g, '>')
+  text = text.replace(/&quot;/g, '"')
+  text = text.replace(/&#39;/g, "'")
   // Remove inline images (icons)
   text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, '')
   text = text.replace(/\*\*([^*]+)\*\*/g, '$1')
@@ -1058,6 +1090,14 @@ export async function generatePPTX(
 
     try {
       builders[slideType](pptx, slides[i])
+
+      // Add presenter notes to the slide if present
+      const notes = slides[i].presenterNotes
+      if (notes) {
+        const pptxSlides = (pptx as any).slides as PptxGenJS.Slide[]
+        const currentSlide = pptxSlides[pptxSlides.length - 1]
+        currentSlide.addNotes(notes)
+      }
     } catch (e) {
       console.warn(`Error building slide ${i + 1} (${slideType}):`, e)
       try {

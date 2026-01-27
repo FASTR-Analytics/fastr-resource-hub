@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
@@ -285,6 +285,484 @@ function EditSessionModal({ session, onClose, onSave, onDelete }: EditSessionMod
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Add Session Menu - Intuitive menu for adding sessions to a day
+// ─────────────────────────────────────────────────────────────────────────────
+interface AddSessionMenuProps {
+  dayNum: number
+  onClose: () => void
+  onAddSession: (session: Session) => void
+  contentLibrary: any[]
+}
+
+function AddSessionMenu({ dayNum, onClose, onAddSession, contentLibrary }: AddSessionMenuProps) {
+  const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets'>('main')
+  const [expandedModule, setExpandedModule] = useState<string | null>(null)
+  const [customTitle, setCustomTitle] = useState('')
+  const [customDuration, setCustomDuration] = useState(30)
+  const [customContent, setCustomContent] = useState(`---
+marp: true
+theme: fastr
+paginate: true
+---
+
+## Your Slide Title
+
+- First point
+- Second point
+- Third point
+
+`)
+  const [assetLibrary, setAssetLibrary] = useState<Record<string, any[]>>({})
+  const [expandedCategory, setExpandedCategory] = useState<string | null>('icons')
+  const [isLoadingAssets, setIsLoadingAssets] = useState(false)
+  const [uploadingAsset, setUploadingAsset] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  // Load asset library when viewing assets
+  useEffect(() => {
+    if (view === 'assets' && Object.keys(assetLibrary).length === 0) {
+      setIsLoadingAssets(true)
+      fetch('/api/assets/library')
+        .then(res => res.json())
+        .then(data => {
+          setAssetLibrary(data.library || {})
+          setIsLoadingAssets(false)
+        })
+        .catch(() => setIsLoadingAssets(false))
+    }
+  }, [view])
+
+  const insertImage = (asset: any) => {
+    const markdown = `![${asset.filename}](/resources/${asset.path})`
+    setCustomContent(prev => prev + '\n' + markdown + '\n')
+    setView('custom')
+  }
+
+  const handleUploadAsset = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingAsset(true)
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const res = await fetch('/api/assets/library', {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await res.json()
+      if (data.success && data.asset) {
+        // Add to custom category
+        setAssetLibrary(prev => ({
+          ...prev,
+          custom: [...(prev.custom || []), data.asset],
+        }))
+        setExpandedCategory('custom')
+      }
+    } catch (err) {
+      console.error('Upload failed:', err)
+    } finally {
+      setUploadingAsset(false)
+    }
+  }
+
+  const addBreak = (type: 'tea' | 'lunch') => {
+    const session: Session = {
+      session: type === 'tea' ? '☕ Tea Break' : '🍽️ Lunch Break',
+      type: 'break',
+      duration: type === 'tea' ? 15 : 60,
+      icon: type === 'tea' ? 'coffee' : 'utensils',
+    }
+    onAddSession(session)
+    onClose()
+  }
+
+  const addModule = (module: any, topic: any) => {
+    const session: Session = {
+      session: topic.title,
+      module: module.id,
+      topics: [topic.id],
+      slides: [topic.file],
+      duration: topic.duration || 30,
+    }
+    onAddSession(session)
+    onClose()
+  }
+
+  const addCustomSession = () => {
+    if (!customTitle.trim()) return
+    const session: Session = {
+      session: customTitle,
+      duration: customDuration,
+      slides: [], // Will store custom content elsewhere
+      // Store the custom markdown content in a special field
+      _customContent: customContent,
+    } as Session & { _customContent?: string }
+    onAddSession(session)
+    onClose()
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
+      <div
+        className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
+          <div className="flex items-center gap-2">
+            {view !== 'main' && (
+              <button
+                onClick={() => setView(view === 'assets' ? 'custom' : 'main')}
+                className="p-1 hover:bg-gray-200 rounded transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+            )}
+            <h3 className="font-semibold text-gray-800">
+              {view === 'main' && `Add to Day ${dayNum}`}
+              {view === 'modules' && 'Choose Module Content'}
+              {view === 'custom' && 'Create Custom Slide'}
+              {view === 'assets' && 'Insert Image'}
+            </h3>
+          </div>
+          <button onClick={onClose} className="p-1 hover:bg-gray-200 rounded transition-colors">
+            <X className="w-5 h-5 text-gray-500" />
+          </button>
+        </div>
+
+        {/* Main Menu */}
+        {view === 'main' && (
+          <div className="p-4 space-y-2">
+            {/* Module Content */}
+            <button
+              onClick={() => setView('modules')}
+              className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-200 transition-all text-left group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                📘
+              </div>
+              <div>
+                <div className="font-medium text-gray-800">Module Content</div>
+                <div className="text-sm text-gray-500">Add slides from FASTR modules</div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
+            </button>
+
+            {/* Breaks */}
+            <div className="pt-2">
+              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">Breaks</div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => addBreak('tea')}
+                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all"
+                >
+                  <span className="text-xl">☕</span>
+                  <div className="text-left">
+                    <div className="font-medium text-gray-800">Tea Break</div>
+                    <div className="text-xs text-gray-500">15 min</div>
+                  </div>
+                </button>
+                <button
+                  onClick={() => addBreak('lunch')}
+                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all"
+                >
+                  <span className="text-xl">🍽️</span>
+                  <div className="text-left">
+                    <div className="font-medium text-gray-800">Lunch Break</div>
+                    <div className="text-xs text-gray-500">60 min</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Custom Session */}
+            <div className="pt-2">
+              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">Custom</div>
+              <button
+                onClick={() => setView('custom')}
+                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 border border-transparent hover:border-teal-200 transition-all text-left group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                  ✏️
+                </div>
+                <div>
+                  <div className="font-medium text-gray-800">Custom Slide</div>
+                  <div className="text-sm text-gray-500">Create your own slide with markdown</div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Module Browser */}
+        {view === 'modules' && (
+          <div className="overflow-y-auto max-h-[60vh]">
+            {contentLibrary.map((module) => (
+              <div key={module.id} className="border-b border-gray-100 last:border-0">
+                <button
+                  onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
+                  className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors text-left"
+                >
+                  {expandedModule === module.id ? (
+                    <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-gray-800">{module.title}</div>
+                    <div className="text-xs text-gray-500">
+                      Module {module.number} • {(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} slides
+                    </div>
+                  </div>
+                </button>
+
+                {expandedModule === module.id && (
+                  <div className="bg-gray-50 px-4 pb-3">
+                    {/* Add Full Module Button */}
+                    {((module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)) > 0 && (
+                      <button
+                        onClick={() => {
+                          // Add all topics from this module
+                          const allTopics = [...(module.fullTopics || []), ...(module.condensedTopics || [])]
+                          const session: Session = {
+                            session: module.title,
+                            module: module.id,
+                            topics: allTopics.map((t: any) => t.id),
+                            slides: allTopics.map((t: any) => t.file),
+                            duration: allTopics.reduce((sum: number, t: any) => sum + (t.duration || 10), 0),
+                          }
+                          onAddSession(session)
+                          onClose()
+                        }}
+                        className="w-full flex items-center justify-center gap-2 p-2 mb-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
+                      >
+                        <Plus className="w-4 h-4" />
+                        Add Entire Module ({(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} slides)
+                      </button>
+                    )}
+
+                    <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">Or add individual slides:</div>
+
+                    {/* Full Topics */}
+                    {module.fullTopics && module.fullTopics.length > 0 && (
+                      <div className="mb-2">
+                        <div className="text-xs text-gray-500 font-medium py-1">Full Slides</div>
+                        {module.fullTopics.map((topic: any) => (
+                          <button
+                            key={topic.id}
+                            onClick={() => addModule(module, topic)}
+                            className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
+                          >
+                            <span className="text-gray-400">📄</span>
+                            <span className="flex-1 text-gray-700">{topic.title}</span>
+                            {topic.duration && (
+                              <span className="text-xs text-gray-400">{topic.duration}m</span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Condensed Topics */}
+                    {module.condensedTopics && module.condensedTopics.length > 0 && (
+                      <div>
+                        <div className="text-xs text-amber-600 font-medium py-1">⚡ Condensed Slides</div>
+                        {module.condensedTopics.map((topic: any) => (
+                          <button
+                            key={topic.id}
+                            onClick={() => addModule(module, topic)}
+                            className="w-full flex items-center gap-2 p-2 rounded hover:bg-amber-50 hover:shadow-sm transition-all text-left text-sm"
+                          >
+                            <span className="text-amber-500">📄</span>
+                            <span className="flex-1 text-gray-700">{topic.title}</span>
+                            {topic.duration && (
+                              <span className="text-xs text-gray-400">{topic.duration}m</span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Legacy topics (if no full/condensed split) */}
+                    {!module.fullTopics && !module.condensedTopics && module.topics?.map((topic: any) => (
+                      <button
+                        key={topic.id}
+                        onClick={() => addModule(module, topic)}
+                        className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
+                      >
+                        <span className="text-gray-400">📄</span>
+                        <span className="flex-1 text-gray-700">{topic.title}</span>
+                        {topic.duration && (
+                          <span className="text-xs text-gray-400">{topic.duration}m</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Asset Browser */}
+        {view === 'assets' && (
+          <div className="flex flex-col max-h-[60vh]">
+            {/* Upload button */}
+            <div className="p-3 border-b bg-gray-50">
+              <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-fastr-primary hover:bg-fastr-primary/5 transition-colors">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleUploadAsset}
+                  disabled={uploadingAsset}
+                />
+                {uploadingAsset ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Plus className="w-4 h-4" />
+                )}
+                <span className="text-sm text-gray-600">Upload your own image</span>
+              </label>
+            </div>
+
+            {isLoadingAssets ? (
+              <div className="p-8 text-center text-gray-500">
+                <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2" />
+                Loading assets...
+              </div>
+            ) : (
+              <div className="overflow-y-auto flex-1">
+                {Object.entries(assetLibrary).map(([category, assets]) => (
+                  <div key={category} className="border-b border-gray-100 last:border-0">
+                    <button
+                      onClick={() => setExpandedCategory(expandedCategory === category ? null : category)}
+                      className="w-full flex items-center gap-2 p-3 hover:bg-gray-50 transition-colors"
+                    >
+                      {expandedCategory === category ? (
+                        <ChevronDown className="w-4 h-4 text-gray-400" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                      )}
+                      <span className="font-medium text-gray-800 capitalize">{category.replace(/_/g, ' ')}</span>
+                      <span className="text-xs text-gray-400">({assets.length})</span>
+                    </button>
+
+                    {expandedCategory === category && (
+                      <div className="px-3 pb-3 grid grid-cols-4 gap-2">
+                        {assets.map((asset: any) => (
+                          <button
+                            key={asset.filename}
+                            onClick={() => insertImage(asset)}
+                            className="group relative aspect-square rounded-lg border border-gray-200 overflow-hidden hover:border-fastr-primary hover:shadow-md transition-all bg-white"
+                            title={asset.filename}
+                          >
+                            <img
+                              src={`/resources/${asset.path}`}
+                              alt={asset.filename}
+                              className="w-full h-full object-contain p-1"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/resources/logos/FASTR_White_Horiz.png'
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                              <span className="text-white text-xs font-medium px-2 text-center truncate">Insert</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Custom Slide Editor */}
+        {view === 'custom' && (
+          <div className="p-4 space-y-4 overflow-y-auto max-h-[60vh]">
+            {/* Title */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Session Title</label>
+              <input
+                type="text"
+                value={customTitle}
+                onChange={(e) => setCustomTitle(e.target.value)}
+                placeholder="e.g., Hands-on Activity: Data Quality"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+              />
+            </div>
+
+            {/* Duration */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Duration (minutes)</label>
+              <input
+                type="number"
+                value={customDuration}
+                onChange={(e) => setCustomDuration(parseInt(e.target.value) || 0)}
+                min={5}
+                max={240}
+                step={5}
+                className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+              />
+            </div>
+
+            {/* Markdown Editor */}
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-sm font-medium text-gray-700">
+                  Slide Content (Marp Markdown)
+                </label>
+                <button
+                  onClick={() => setView('assets')}
+                  className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600 flex items-center gap-1"
+                >
+                  🖼️ Insert Image
+                </button>
+              </div>
+              <textarea
+                ref={textareaRef}
+                value={customContent}
+                onChange={(e) => setCustomContent(e.target.value)}
+                rows={10}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary font-mono text-sm"
+                placeholder="Write your slide content in Marp markdown..."
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                Use <code className="bg-gray-100 px-1 rounded">---</code> to separate slides.
+                Variables: <code className="bg-gray-100 px-1 rounded">{'{{COUNTRY}}'}</code>,{' '}
+                <code className="bg-gray-100 px-1 rounded">{'{{LOCATION}}'}</code>
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                onClick={onClose}
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={addCustomSession}
+                disabled={!customTitle.trim()}
+                className="px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Add Session
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -936,6 +1414,8 @@ function App() {
     workshops,
     loadWorkshops,
     loadContentLibrary,
+    contentLibrary,
+    addSession,
     selectWorkshop,
     error,
     setError,
@@ -959,6 +1439,7 @@ function App() {
     dayNum: number
     index: number
   } | null>(null)
+  const [addSessionMenuDay, setAddSessionMenuDay] = useState<number | null>(null)
   const [_activeId, setActiveId] = useState<string | null>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [createMode, setCreateMode] = useState<'manual' | 'ai'>('manual')
@@ -1841,9 +2322,7 @@ function App() {
                                 {/* Add session button */}
                                 <button
                                   className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex items-center justify-center gap-2"
-                                  onClick={() => {
-                                    // TODO: Open add session menu
-                                  }}
+                                  onClick={() => setAddSessionMenuDay(dayNum)}
                                 >
                                   <Plus className="w-4 h-4" />
                                   <span className="text-sm">Add Session</span>
@@ -2475,6 +2954,16 @@ function App() {
           onClose={() => setEditingSession(null)}
           onSave={handleSaveSession}
           onDelete={handleDeleteSession}
+        />
+      )}
+
+      {/* Add Session Menu */}
+      {addSessionMenuDay !== null && (
+        <AddSessionMenu
+          dayNum={addSessionMenuDay}
+          onClose={() => setAddSessionMenuDay(null)}
+          onAddSession={(session) => addSession(addSessionMenuDay, session)}
+          contentLibrary={contentLibrary}
         />
       )}
     </div>

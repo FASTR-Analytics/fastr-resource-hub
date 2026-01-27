@@ -307,6 +307,132 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_1d -->
+## Outlier detection output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Outliers output](resources/default_outputs/Default_1._Proportion_of_outliers.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing proportion of values flagged as outliers by indicator and region.
+
+**Formula:** Outlier % = (values flagged / total values) × 100
+
+**Interpretation:** High rates may indicate data entry errors or legitimate events like campaigns. Review facility registers to distinguish between the two.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1e -->
+## Internal consistency output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Consistency output](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing the % of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
+
+**Formula:** Consistency % = (districts meeting criteria / total districts) × 100
+
+**Interpretation:** Low consistency may indicate data flow problems, double-counting, or systematic under-reporting at the district level.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1f -->
+## Overall DQA score output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![DQA score output](resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing overall DQA score by indicator and region, color-coded from red (poor) to green (good).
+
+**Formula:** DQA % = (values that are complete, not outliers, and consistent) / (total values) × 100
+
+**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts by region and indicator.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1g -->
+## Mean DQA score output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Mean DQA score](resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing mean DQA score across facilities by indicator and region.
+
+**Formula:** Mean DQA = (values that are complete, not outliers, and consistent) / (total values) × 100
+
+**Interpretation:** Shows how close facilities are to meeting all quality criteria. A score of 100% means the data passes all DQA checks.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1h -->
+## Outlier adjustment output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Outlier adjustment](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after replacing outliers with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically negative (outliers removed reduce volume). Large adjustments warrant investigation into their source.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1i -->
+## Completeness adjustment output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Completeness adjustment](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing how much service volume changed after imputing missing data with rolling averages.
+
+**Formula:** % change = (adjusted - original) / original × 100
+
+**Interpretation:** Values are typically positive (imputation adds volume). Large adjustments indicate areas needing completeness improvement.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m7_2 -->
 ## Moving from data to key messages
 
@@ -396,23 +522,6 @@ Consider these key areas:
 **Competency building** - How would you like to practice? Who else needs this training?
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4 -->
-## Presenting reports and group feedback
-
-*Content to be developed*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_5 -->
-## Generating quarterly reporting products
-
-*Content to be developed*
-
-This section will cover:
-- Quarterly reporting workflow
-- Using the FASTR platform for automated reports
-- Quality assurance for reports
-- Distribution and feedback mechanisms
-<!-- /SLIDE -->
 
 ---
 

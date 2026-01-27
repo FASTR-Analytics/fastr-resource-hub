@@ -117,11 +117,11 @@ TOPIC_NAMES = {
     # m4 - Data Quality Assessment (from 04_data_quality_assessment.md)
     'm4_0': 'fastr_methods_overview',
     'm4_1': 'approach_to_dqa',
-    'm4_1a': 'measures_data_quality_detailed_1',
-    'm4_1d': 'measures_data_quality_detailed_2',
-    'm4_1b': 'fastr_vs_dhis2_dqa_1',
-    'm4_1c': 'fastr_vs_dhis2_dqa_2',
+    'm4_1a': 'measures_data_quality_detailed',
+    'm4_1b': 'fastr_vs_dhis2_dqa',
+    'm4_1c': 'fastr_vs_dhis2_dqa_continued',
     'm4_2': 'indicator_completeness',
+    'm4_2a': 'notes_on_completeness',
     'm4_3': 'outliers',
     'm4_4': 'internal_consistency',
     'm4_5': 'overall_dqa_score',
@@ -170,10 +170,14 @@ TOPIC_NAMES = {
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
+    'm7_1d': 'outliers_output',
+    'm7_1e': 'internal_consistency_output',
+    'm7_1f': 'overall_dqa_score_output',
+    'm7_1g': 'mean_dqa_score_output',
+    'm7_1h': 'outlier_adjustment_output',
+    'm7_1i': 'completeness_adjustment_output',
     'm7_2': 'data_visualization_communication',
     'm7_3': 'using_data_for_decision_making',
-    'm7_4': 'stakeholder_engagement_advocacy',
-    'm7_5': 'practice_quarterly_reporting',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_1': 'overview_hfa_phone_survey',
@@ -183,9 +187,7 @@ TOPIC_NAMES = {
     'm8_5': 'hfa_priorities_data_use',
 
     # m9 - Workshop Activities (from 09_workshop_activities.md)
-    'm9_1': 'data_use_case_application_1',
-    'm9_2': 'data_use_case_application_2',
-    'm9_3': 'data_use_case_application_3',
+    'm9_1': 'quarterly_reporting_activity',
 }
 
 # Marp frontmatter to add to extracted slides

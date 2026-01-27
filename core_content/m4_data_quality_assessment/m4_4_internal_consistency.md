@@ -4,13 +4,14 @@ theme: fastr
 paginate: true
 ---
 
+<style scoped>
+table { font-size: 0.7em; }
+td, th { padding: 4px 8px !important; }
+</style>
+
 ## Consistency between related indicators
 
 Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
-
----
-
-## Indicator pairs assessed
 
 <div class="columns">
 <div>
@@ -21,9 +22,9 @@ Program indicators with a predictable relationship are examined to determine whe
 | Penta1 / Penta3 | Ratio should be ≥ 0.95 |
 | BCG / Facility delivery | Within 30% (≥0.7 and ≤1.3) |
 
-These pairs have expected relationships. We expect ANC1 > ANC4 since not all women complete four visits.
+We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
 
-BCG is a birth dose vaccine so we expect similar numbers to facility deliveries, with a 30% tolerance for variability.
+BCG is a birth dose vaccine so we expect that these indicators will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
 
 </div>
 <div>
@@ -32,6 +33,15 @@ BCG is a birth dose vaccine so we expect similar numbers to facility deliveries,
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Consistency checks logical relationships: ANC1 should always ≥ ANC4 (can't have 4th visit without 1st)
+- We assess at DISTRICT level because patients move between facilities within a district
+- Example: woman has ANC1 at health post, ANC4 at district hospital - still consistent at district level
+- BCG vs deliveries allows 30% tolerance because not all births happen in facilities
+- Ask: In your context, do patients commonly seek different services at different facilities?
+-->
 
 ---
 
@@ -54,20 +64,3 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 
 </div>
 </div>
-
----
-
-## Internal consistency: FASTR output
-
-**% meeting consistency criteria** = (number of areas where indicator ratio meets threshold) / (total number of areas) × 100
-
-![Internal Consistency h:380](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
-
-<!--
-PRESENTER NOTES:
-- Consistency checks logical relationships: ANC1 should always ≥ ANC4 (can't have 4th visit without 1st)
-- We assess at DISTRICT level because patients move between facilities within a district
-- Example: woman has ANC1 at health post, ANC4 at district hospital - still consistent at district level
-- BCG vs deliveries allows 30% tolerance because not all births happen in facilities
-- Ask: In your context, do patients commonly seek different services at different facilities?
--->

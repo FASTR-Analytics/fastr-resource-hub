@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 24px; fill: #4a5568; }
+    .title-teal { font-family: Arial, sans-serif; font-size: 24px; fill: #0d7377; }
+    .center-text { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #1e3a5f; }
+    .circle-text { font-family: Arial, sans-serif; font-size: 14px; fill: #4a5568; }
+    .annotation { font-family: Arial, sans-serif; font-size: 11px; fill: #4a5568; }
+    .box-text { font-family: Arial, sans-serif; font-size: 16px; fill: white; font-weight: 500; }
+  </style>
+
+  <!-- LEFT DIAGRAM: General measures -->
+
+  <!-- Title -->
+  <text x="250" y="35" text-anchor="middle" class="title">General measures</text>
+
+  <!-- Outer gray arc/ring -->
+  <circle cx="250" cy="240" r="130" fill="none" stroke="#9ca3af" stroke-width="12"/>
+
+  <!-- Center circle with Data Quality -->
+  <circle cx="250" cy="240" r="65" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="232" text-anchor="middle" class="center-text">Data</text>
+  <text x="250" y="258" text-anchor="middle" class="center-text">Quality</text>
+
+  <!-- Accuracy circle (top) -->
+  <circle cx="250" cy="110" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="115" text-anchor="middle" class="circle-text">Accuracy</text>
+
+  <!-- Consistency circle (right) -->
+  <circle cx="380" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="380" y="245" text-anchor="middle" class="circle-text">Consistency</text>
+
+  <!-- Timeliness circle (bottom) -->
+  <circle cx="250" cy="370" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="375" text-anchor="middle" class="circle-text">Timeliness</text>
+
+  <!-- Completeness circle (left) -->
+  <circle cx="120" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="120" y="245" text-anchor="middle" class="circle-text">Completeness</text>
+
+  <!-- Annotations -->
+  <!-- Accuracy annotation -->
+  <text x="330" y="75" class="annotation">Do data reflect</text>
+  <text x="330" y="88" class="annotation">what's going on</text>
+  <text x="330" y="101" class="annotation">in the real-</text>
+  <text x="330" y="114" class="annotation">world?</text>
+
+  <!-- Consistency annotation -->
+  <text x="435" y="220" class="annotation">Are relations</text>
+  <text x="435" y="233" class="annotation">consistent?</text>
+
+  <!-- Timeliness annotation -->
+  <text x="310" y="380" class="annotation">Are the data</text>
+  <text x="310" y="393" class="annotation">regularly submitted on</text>
+  <text x="310" y="406" class="annotation">time?</text>
+
+  <!-- Completeness annotation -->
+  <text x="15" y="200" class="annotation">Are all data</text>
+  <text x="15" y="213" class="annotation">present?</text>
+
+  <!-- RIGHT DIAGRAM: FASTR measures -->
+
+  <!-- Title -->
+  <text x="700" y="35" text-anchor="middle" class="title-teal">FASTR measures</text>
+
+  <!-- Connecting lines -->
+  <line x1="700" y1="135" x2="700" y2="185" stroke="#0d7377" stroke-width="2"/>
+  <line x1="700" y1="255" x2="605" y2="295" stroke="#0d7377" stroke-width="2"/>
+  <line x1="700" y1="255" x2="795" y2="295" stroke="#0d7377" stroke-width="2"/>
+
+  <!-- Indicator completeness box (top) -->
+  <rect x="600" y="60" width="200" height="75" rx="12" ry="12" fill="#0d7377"/>
+  <text x="700" y="93" text-anchor="middle" class="box-text">Indicator</text>
+  <text x="700" y="115" text-anchor="middle" class="box-text">completeness</text>
+
+  <!-- DQ Score box (center) -->
+  <rect x="620" y="185" width="160" height="70" rx="12" ry="12" fill="#0d7377"/>
+  <text x="700" y="227" text-anchor="middle" class="box-text">DQ Score</text>
+
+  <!-- Presence of outliers box (bottom left) -->
+  <rect x="520" y="295" width="140" height="80" rx="12" ry="12" fill="#0d7377"/>
+  <text x="590" y="328" text-anchor="middle" class="box-text">Presence of</text>
+  <text x="590" y="350" text-anchor="middle" class="box-text">outliers</text>
+
+  <!-- Consistency between related indicators box (bottom right) -->
+  <rect x="740" y="295" width="140" height="80" rx="12" ry="12" fill="#0d7377"/>
+  <text x="810" y="320" text-anchor="middle" class="box-text">Consistency</text>
+  <text x="810" y="342" text-anchor="middle" class="box-text">between</text>
+  <text x="810" y="364" text-anchor="middle" class="box-text">related indicators</text>
+</svg>

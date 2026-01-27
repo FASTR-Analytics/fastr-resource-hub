@@ -16,10 +16,10 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 ## Outlier detection output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Outliers output h:320](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers output](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">

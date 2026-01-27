@@ -1,18 +1,9 @@
-# Workshop activities
-
-This chapter contains hands-on activities for workshop participants.
-
+---
+marp: true
+theme: fastr
+paginate: true
 ---
 
-<!--
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//            Edit workshop slides below this line                //
-//                                                                //
-////////////////////////////////////////////////////////////////////
--->
-
-<!-- SLIDE:m9_1 -->
 ## Activity: Quarterly service utilization report
 
 *DRAFT - NEEDS REVIEW*
@@ -26,7 +17,7 @@ This chapter contains hands-on activities for workshop participants.
 3. Interpret outputs using AI tools
 4. Draft key findings for your country report
 
-![hands-on h:40](resources/icons/hands_on.svg) **Duration: 60-90 minutes**
+![hands-on h:40](../../resources/icons/hands_on.svg) **Duration: 60-90 minutes**
 
 ---
 
@@ -181,6 +172,3 @@ Before finishing, confirm your country report includes:
 - Which services showed disruptions or surpluses?
 - What factors might explain the patterns?
 - What are your key messages for decision-makers?
-
-<!-- /SLIDE -->
-

@@ -878,35 +878,19 @@ For the combined adjustment heatmap (output 3):
 -->
 
 <!-- SLIDE:m5_1 -->
-## Data quality adjustment - Module 2
-
-Correcting outliers and imputing missing values to improve data reliability
-
----
-
 ## Rationale for data quality adjustment
 
 Routine HMIS data contain two common limitations that can distort analytical results:
-
-| Issue | Impact on analysis |
-|-------|-------------------|
-| **Outliers** | Extreme values create artificial spikes in service volumes |
-| **Incomplete reporting** | Missing data creates artificial declines that do not reflect actual service delivery |
+- **Outliers:** Extreme values create artificial spikes in service volumes
+- **Incomplete reporting:** Missing data creates artificial declines that do not reflect actual service delivery
 
 FASTR addresses these limitations by replacing problematic values with estimates derived from each facility's historical reporting patterns.
 
----
-
-## Adjustment scenarios
-
-To support transparency and sensitivity analysis, FASTR produces four parallel datasets:
-
-| Scenario | Description |
-|----------|-------------|
-| **Unadjusted** | Original reported values |
-| **Outliers adjusted** | Extreme values replaced |
-| **Completeness adjusted** | Missing values imputed |
-| **Both adjusted** | All corrections applied |
+**Adjustment scenarios:** To support transparency and sensitivity analysis, FASTR produces four parallel datasets:
+- **Unadjusted:** Original reported values
+- **Outliers adjusted:** Extreme values replaced
+- **Completeness adjusted:** Missing values imputed
+- **Both adjusted:** All corrections applied
 
 ---
 
@@ -939,23 +923,6 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 | 3 | Backward 6-month average | When insufficient following data (e.g., end of series) |
 | 4 | Same month, previous year | When rolling averages unavailable; useful for seasonal indicators |
 | 5 | Facility historical mean | Mean of all valid values for this indicator at this facility |
-
----
-
-## Outlier adjustment: FASTR output
-
-**% change in volume** = (adjusted value - original value) / original value × 100
-
-![Percent change in volume due to outlier adjustment. h:340](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
-
-<!--
-PRESENTER NOTES:
-- Hierarchical approach: start with best method, fall back to alternatives
-- Centered average (3 months before + 3 after) is preferred - captures local trends
-- Forward/backward averages used at series edges
-- Same month previous year captures seasonality
-- Facility mean is last resort - still better than keeping outlier
--->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
@@ -971,23 +938,6 @@ For months identified as incomplete or missing, values are imputed using the sam
 | 4 | Facility historical mean | Mean of all valid values for this indicator at this facility |
 
 This approach prevents temporary reporting gaps from creating artificial declines in service volumes.
-
----
-
-## Completeness adjustment: FASTR output
-
-**% change in volume** = (adjusted value - original value) / original value × 100
-
-![Percent change in volume due to completeness adjustment. h:340](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
-
-<!--
-PRESENTER NOTES:
-- Same methodology as outlier adjustment - 6-month rolling averages
-- Fills in gaps from incomplete reporting
-- Prevents temporary reporting gaps from looking like service declines
-- Positive % change = imputation added volume (expected)
-- Large adjustments indicate regions/indicators needing completeness improvement
--->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
@@ -995,7 +945,7 @@ PRESENTER NOTES:
 
 **% change in volume** = (adjusted value - original value) / original value × 100
 
-![Percent change in volume due to both outlier and completeness adjustment. h:340](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+![Percent change in volume due to both outlier and completeness adjustment](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
 <!--
 PRESENTER NOTES:
@@ -1034,10 +984,10 @@ PRESENTER NOTES:
 <!-- SLIDE:m5_s2 -->
 ## Outlier adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Outlier adjustment h:320](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Outlier adjustment](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -1055,10 +1005,10 @@ PRESENTER NOTES:
 
 ## Completeness adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Completeness adjustment h:320](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Completeness adjustment](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">

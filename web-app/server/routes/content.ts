@@ -363,7 +363,7 @@ router.post('/render', async (req, res) => {
     // Match comments that contain "PRESENTER NOTES:" or are multi-line notes
     const notesRegex = /<!--\s*(PRESENTER NOTES:[\s\S]*?)-->/gi
     const notesMatches = markdown.match(notesRegex) || []
-    const presenterNotes = notesMatches.map(note =>
+    const presenterNotes = notesMatches.map((note: string) =>
       note.replace(/<!--\s*/, '').replace(/\s*-->/, '').trim()
     )
 

@@ -6,18 +6,31 @@ paginate: true
 
 ## FASTR analytical pipeline
 
-![Analytical Pipeline h:390](../../resources/diagrams/analytical_pipeline.svg)
-
-The FASTR analysis follows a sequential workflow where each step builds on the previous:
+The FASTR analysis follows a sequential workflow:
 
 1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
+![Analytical Pipeline h:280](../../resources/diagrams/analytical_pipeline.svg)
+
+---
+
+## FASTR approach to data quality
+
+FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**.
+
+- Conduct granular, facility-level data quality assessments
+- Focus on high-volume indicators that produce more stable estimates
+- Emphasize variation over time and space rather than point estimates
+- Interpret results collaboratively with in-country decision-makers
+
+**Using data and providing feedback is viewed as the first step toward improving data quality.**
+
 <!--
 PRESENTER NOTES:
-- This is the overall FASTR workflow - emphasize that each step builds on the previous
-- DQA comes first because we need to understand data limitations before analyzing
-- Adjustment is optional but recommended for most analyses
-- The final analysis uses cleaned data for more reliable estimates
+- This is the condensed overview - hit the key points quickly
+- Emphasize the philosophy: don't let perfect be the enemy of good
+- The pipeline is sequential: DQA → Adjustment → Analysis
+- Using data creates accountability and motivation to improve quality
 -->

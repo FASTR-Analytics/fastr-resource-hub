@@ -6,10 +6,10 @@ paginate: true
 
 ## Outlier adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Outlier adjustment h:320](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Outlier adjustment](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -27,10 +27,10 @@ paginate: true
 
 ## Completeness adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Completeness adjustment h:320](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Completeness adjustment](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">

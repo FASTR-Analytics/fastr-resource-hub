@@ -14,10 +14,10 @@ FASTR assesses consistency at the **district level** rather than facility level.
 
 ## Internal consistency output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Consistency output h:320](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Consistency output](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -43,10 +43,10 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 ## DQA mean output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![DQA score output h:320](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![DQA score output](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">

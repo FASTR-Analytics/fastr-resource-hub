@@ -18,10 +18,10 @@ Higher and stable completeness improves data reliability.
 
 ## Indicator completeness output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Completeness output h:320](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Completeness output](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">

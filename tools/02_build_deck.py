@@ -269,11 +269,11 @@ MODULES = {
         'topics': [
             ('m4_0', 'm4_0_fastr_methods_overview.md'),
             ('m4_1', 'm4_1_approach_to_dqa.md'),
-            ('m4_1a', 'm4_1a_measures_data_quality_detailed_1.md'),
-            ('m4_1d', 'm4_1d_measures_data_quality_detailed_2.md'),
-            ('m4_1b', 'm4_1b_fastr_vs_dhis2_dqa_1.md'),
-            ('m4_1c', 'm4_1c_fastr_vs_dhis2_dqa_2.md'),
+            ('m4_1a', 'm4_1a_measures_data_quality_detailed.md'),
+            ('m4_1b', 'm4_1b_fastr_vs_dhis2_dqa.md'),
+            ('m4_1c', 'm4_1c_fastr_vs_dhis2_dqa_continued.md'),
             ('m4_2', 'm4_2_indicator_completeness.md'),
+            ('m4_2a', 'm4_2a_notes_on_completeness.md'),
             ('m4_3', 'm4_3_outliers.md'),
             ('m4_4', 'm4_4_internal_consistency.md'),
             ('m4_5', 'm4_5_overall_dqa_score.md'),
@@ -317,10 +317,14 @@ MODULES = {
         'folder': 'm7_results_communication',
         'topics': [
             ('m7_1', 'm7_1_analytical_thinking_interpretation.md'),
+            ('m7_1d', 'm7_1d_outliers_output.md'),
+            ('m7_1e', 'm7_1e_internal_consistency_output.md'),
+            ('m7_1f', 'm7_1f_overall_dqa_score_output.md'),
+            ('m7_1g', 'm7_1g_mean_dqa_score_output.md'),
+            ('m7_1h', 'm7_1h_outlier_adjustment_output.md'),
+            ('m7_1i', 'm7_1i_completeness_adjustment_output.md'),
             ('m7_2', 'm7_2_data_visualization_communication.md'),
             ('m7_3', 'm7_3_using_data_for_decision_making.md'),
-            ('m7_4', 'm7_4_stakeholder_engagement_advocacy.md'),
-            ('m7_5', 'm7_5_practice_quarterly_reporting.md'),
         ],
     },
     8: {
@@ -338,9 +342,7 @@ MODULES = {
         'name': 'Workshop Activities',
         'folder': 'm9_workshop_activities',
         'topics': [
-            ('m9_1', 'm9_1_data_use_case_application_1.md'),
-            ('m9_2', 'm9_2_data_use_case_application_2.md'),
-            ('m9_3', 'm9_3_data_use_case_application_3.md'),
+            ('m9_1', 'm9_1_quarterly_reporting_activity.md'),
         ],
     },
 }
