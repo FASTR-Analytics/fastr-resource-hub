@@ -1145,6 +1145,15 @@ Statistical comparison of observed volumes against expected levels—derived fro
 ## Service utilization over time
 
 ![Service utilization over time h:420](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+<!--
+PRESENTER NOTES:
+- Module 3 analyzes service delivery patterns over time
+- Two main objectives: (1) measure year-over-year changes, (2) detect disruptions
+- Service utilization chart shows raw trends - look for seasonal patterns, sudden changes
+- This module uses the adjusted data from Module 2 as input
+- Statistical methods distinguish normal variation from true disruptions
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1181,6 +1190,16 @@ Changes exceeding **±10%** are flagged for review.
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Year-over-year comparison is the simplest form of service analysis
+- Formula: (Current year - Previous year) / Previous year × 100
+- Changes >±10% are flagged for review - threshold is configurable
+- Look for geographic patterns: are changes concentrated or widespread?
+- Consider: are changes real program impacts or data quality issues?
+- This output helps identify areas needing further investigation
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_3 -->
@@ -1234,6 +1253,17 @@ Using a regression framework, we are able to:
 - Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
 
 This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
+
+<!--
+PRESENTER NOTES:
+- Disruption detection goes beyond simple YoY comparison
+- Uses interrupted time series regression with fixed effects
+- Key concept: compare actual to "expected" based on historical patterns
+- Disruption = significantly below expected; Surplus = significantly above expected
+- Advantages over DHIS2: accounts for seasonality, excludes unusual historical events
+- Can quantify magnitude of disruptions in absolute numbers and percentages
+- Useful for assessing impact of events like COVID, strikes, stockouts, campaigns
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_4 -->
@@ -1250,6 +1280,17 @@ This improves the ability to interpret and compare utilization data across natio
 ![Actual vs expected subnational h:380](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 <p style="font-size: 0.8em; color: #666;">Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
+
+<!--
+PRESENTER NOTES:
+- These charts compare observed (actual) vs model-predicted (expected) volumes
+- National chart shows overall country trends
+- Subnational charts reveal geographic variation - some areas may recover while others don't
+- Red shading = shortfall periods (actual below expected)
+- Green shading = surplus periods (actual above expected)
+- Expected values account for seasonality and long-term trends
+- Ask participants: What events might explain the disruptions shown?
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->
@@ -1269,6 +1310,17 @@ This improves the ability to interpret and compare utilization data across natio
 | **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
 
 </div>
+
+<!--
+PRESENTER NOTES:
+- These parameters control sensitivity of disruption detection
+- MAD threshold: lower = more sensitive (more flags), higher = more conservative
+- Smoothing window: larger = smoother trends, smaller = captures rapid changes
+- Dip threshold: 0.9 means flag if <90% of expected (10% drop)
+- District-level analysis is optional - increases computation time significantly
+- Count variable selection: use "both" for most analyses (outlier + completeness adjusted)
+- Parameters can be tuned based on country context and data quality
+-->
 <!-- /SLIDE -->
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
@@ -1317,6 +1369,16 @@ Service utilization analysis tracks how many health services are being delivered
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Condensed version combining service trends and YoY comparison
+- First chart shows absolute volumes - identify overall patterns
+- Second chart shows relative changes - easier to compare across indicators
+- YoY changes >±10% are flagged - but threshold is configurable
+- For flagged changes, ask: data quality issue, real program change, or external event?
+- These outputs don't require population denominators - useful when denominators uncertain
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s2 -->
@@ -1351,5 +1413,16 @@ Beyond year-over-year comparisons, we want to know: **Is service delivery on tra
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Condensed version focusing on disruption detection methodology
+- Key insight: raw counts hard to interpret without context
+- Statistical model provides "expected" baseline accounting for seasonality
+- Disruption = sustained deviation below expected, not just a single bad month
+- When interpreting disruptions, consider external factors: COVID, strikes, etc.
+- Persistent deviations warrant deeper investigation into causes
+- Can run at national, provincial, or district level depending on data quality
+-->
 <!-- /SLIDE -->
 

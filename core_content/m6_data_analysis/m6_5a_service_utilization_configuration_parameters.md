@@ -20,3 +20,14 @@ paginate: true
 | **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
 
 </div>
+
+<!--
+PRESENTER NOTES:
+- These parameters control sensitivity of disruption detection
+- MAD threshold: lower = more sensitive (more flags), higher = more conservative
+- Smoothing window: larger = smoother trends, smaller = captures rapid changes
+- Dip threshold: 0.9 means flag if <90% of expected (10% drop)
+- District-level analysis is optional - increases computation time significantly
+- Count variable selection: use "both" for most analyses (outlier + completeness adjusted)
+- Parameters can be tuned based on country context and data quality
+-->

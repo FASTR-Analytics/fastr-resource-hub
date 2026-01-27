@@ -1774,6 +1774,16 @@ The coverage estimation module operates in two sequential parts:
 |------|------------|
 | **Part 1: Denominator calculation** | Calculate target populations using multiple methods; compare against survey benchmarks; select optimal denominator for each indicator |
 | **Part 2: Coverage estimation** | Apply denominator selections; project survey estimates forward using HMIS trends; generate final coverage estimates |
+
+<!--
+PRESENTER NOTES:
+- Module 4 converts service volumes into coverage percentages
+- Coverage = services / target population - the challenge is knowing target population
+- HMIS typically uses catchment populations which are often inaccurate
+- Our approach: derive denominators from HMIS data validated against surveys
+- Two-part process: Part 1 calculates and validates denominators, Part 2 generates estimates
+- This enables tracking trends and subnational disparities in coverage
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
@@ -1782,6 +1792,16 @@ The coverage estimation module operates in two sequential parts:
 **Service coverage** represents the proportion of the target population that received a specified health service.
 
 ![Coverage equation](resources/diagrams/coverage_equation.svg)
+
+<!--
+PRESENTER NOTES:
+- Coverage formula: services delivered ÷ target population × 100
+- Numerator from HMIS is relatively reliable (after DQA adjustments)
+- Denominator (target population) is the challenge
+- Standard HMIS denominators often based on outdated census projections
+- Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years
+- Our goal: derive more accurate denominators from the data itself
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
@@ -1796,6 +1816,17 @@ Each health indicator corresponds to a specific target population:
 | BCG | Live births |
 | Penta1, Penta3 | Infants surviving beyond neonatal period |
 | Measles1, Measles2 | Infants surviving beyond infancy |
+
+<!--
+PRESENTER NOTES:
+- Different services have different target populations
+- ANC: pregnant women (before delivery)
+- Delivery, BCG: live births (at or shortly after birth)
+- Penta vaccines: infants who survived neonatal period (first 28 days)
+- Measles vaccines: infants who survived beyond infancy
+- Understanding target populations is key to choosing correct denominators
+- Demographic adjustments convert one target population to another
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_9 -->
@@ -1804,6 +1835,18 @@ Each health indicator corresponds to a specific target population:
 Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
 
 ![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
+
+<!--
+PRESENTER NOTES:
+- Demographic cascade shows how populations transform through life stages
+- Start with pregnancies → apply pregnancy loss → deliveries
+- Deliveries → adjust for twins → births
+- Births → subtract stillbirths → live births
+- Live births → subtract neonatal deaths → DPT-eligible
+- DPT-eligible → subtract post-neonatal deaths → Measles-eligible
+- Each step uses country-specific mortality rates
+- This logic works in both directions (forward and backward)
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
@@ -1812,6 +1855,17 @@ Sequential demographic adjustments transform one target population estimate into
 <p style="font-size: 0.85em;">Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:</p>
 
 ![Denominator cascade example h:380](resources/diagrams/denominator_cascade_example.svg)
+
+<!--
+PRESENTER NOTES:
+- Concrete example: 10,000 ANC1 visits with 80% survey coverage
+- Back-calculate: 10,000 ÷ 0.80 = 12,500 pregnancies
+- Apply demographic factors step by step
+- Each step reduces population slightly due to losses/deaths
+- End with ~9,067 children eligible for DPT vaccination
+- These derived denominators can be used for coverage of other services
+- Numbers are illustrative - actual rates vary by country
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
@@ -1825,6 +1879,16 @@ From any entry point, the cascade derives denominators in both directions:
 | **Backward** | Reverse mortality rates (add deaths back) | DPT-eligible → Live births → Births → Deliveries → Pregnancies |
 
 Backward derivation enables estimation of upstream populations from downstream service counts.
+
+<!--
+PRESENTER NOTES:
+- Cascade works in two directions
+- Forward: pregnancies → deliveries → live births → DPT-eligible → Measles-eligible
+- Backward: reverse the logic (add deaths back instead of subtracting)
+- Example: from Penta1, can estimate live births, then births, then pregnancies
+- Multiple entry points give us multiple independent denominator estimates
+- Having multiple estimates allows validation and selection of best option
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_12 -->
@@ -1844,6 +1908,17 @@ Each HMIS indicator serves as an entry point. The module derives all target popu
 | **BCG** | BCG ÷ coverage → Live births | DPT-eligible → Measles-eligible | Deliveries → Pregnancies |
 | **Penta1** | Penta1 ÷ coverage → DPT-eligible | Measles1-eligible → Measles2-eligible | Live births → Births → Deliveries → Pregnancies |
 | **UN WPP** | Crude birth rate × population → Pregnancies, live births; Under-1 pop → DPT, measles | Applies mortality rates for measles denominators | — |
+
+<!--
+PRESENTER NOTES:
+- Each HMIS indicator can serve as an entry point for denominator calculation
+- ANC1: starts from pregnancies, derives all downstream populations
+- Delivery/BCG: starts from live births, derives in both directions
+- Penta1: starts from DPT-eligible, derives forward to measles and backward to pregnancies
+- UN WPP provides population-based alternative (not service-based)
+- Having multiple options allows selection of most accurate denominator per indicator
+- Table summarizes which denominators can be derived from each entry point
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
@@ -1859,6 +1934,17 @@ For each indicator, the module selects the denominator that produces coverage cl
 4. Select the HMIS-based denominator with minimum error
 
 Selection is made per indicator and geographic area. Users may override automatic selections in Part 2.
+
+<!--
+PRESENTER NOTES:
+- With multiple denominator options, how do we choose?
+- Calculate coverage using each option
+- Compare to survey benchmark (DHS/MICS is gold standard)
+- Select denominator with minimum squared error
+- Preference given to HMIS-based over UN WPP denominators
+- Selection is automatic but users can override in Part 2
+- Different areas may have different best denominators for same indicator
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_14 -->
@@ -1869,6 +1955,17 @@ The module projects the most recent survey value forward using trends observed i
 ![Coverage projection method](resources/diagrams/coverage_projection.svg)
 
 Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
+
+<!--
+PRESENTER NOTES:
+- Surveys are infrequent (3-5 years) - need to fill gaps
+- Projection method: last survey value + HMIS trend since survey
+- Formula: Projected = Survey baseline + (Current HMIS - Survey year HMIS)
+- Preserves calibration to survey while incorporating observed changes
+- Additive approach avoids compounding errors
+- Projections should be validated when new survey data available
+- Longer time since survey = less reliable projection
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_16 -->
@@ -1888,18 +1985,49 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- National coverage chart shows three data series
+- Black = survey (DHS/MICS) - the reference standard, but infrequent
+- Grey = HMIS-derived coverage using selected denominators
+- Red = projected coverage extending survey using HMIS trends
+- Compare HMIS and survey: large gaps suggest denominator issues
+- Projections extend surveys forward - useful for recent years without surveys
+- Coverage >100% indicates denominator underestimate or service over-reporting
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_17 -->
 ## Coverage (subnational)
 
 ![Coverage calculated from HMIS data at admin area 2 level. h:420](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+<!--
+PRESENTER NOTES:
+- Subnational coverage enables identification of geographic disparities
+- Admin area 2 = provinces/regions - intermediate level
+- Compare areas: which have high/low coverage?
+- Look for patterns: urban vs rural, border regions, etc.
+- Subnational analysis may use national survey values as fallback if local data unavailable
+- Useful for prioritizing areas for program intervention
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_18 -->
 ## Coverage (subnational)
 
 ![Coverage calculated from HMIS data at subnational level. h:420](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
+
+<!--
+PRESENTER NOTES:
+- Admin area 3 = districts - finer geographic detail
+- More granular analysis for local targeting
+- Caution: smaller populations mean more uncertainty
+- Data quality varies more at district level
+- May have more missing survey data requiring fallbacks
+- Use for operational planning and resource allocation
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
@@ -1922,6 +2050,17 @@ Year-over-year changes (deltas) in HMIS coverage are calculated and applied to t
 </div>
 
 Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+
+<!--
+PRESENTER NOTES:
+- Configuration parameters control denominator calculations
+- Count variable: which adjusted data to use (recommend "both")
+- Analysis levels: national, provincial, district - choose based on data quality
+- Demographic rates: defaults provided but should use country-specific values
+- Sources for rates: DHS reports, UN IGME estimates, national vital statistics
+- Mortality rates affect denominator calculations significantly
+- Higher mortality = smaller surviving population denominators
+-->
 <!-- /SLIDE -->
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
@@ -1946,6 +2085,17 @@ HMIS tells us how many services were delivered (numerator), but not the target p
 **Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
 
 **Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+
+<!--
+PRESENTER NOTES:
+- Condensed overview of coverage estimation methodology
+- Key insight: standard HMIS denominators (catchment populations) often inaccurate
+- FASTR approach: derive denominators from data, validate against surveys
+- Example calculation: 10,000 ANC1 / 80% coverage = 12,500 pregnancies
+- Multiple denominator options compared to select best fit
+- Projections extend surveys forward using HMIS trends
+- Result: more reliable coverage estimates for monitoring
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s4 -->
@@ -1988,5 +2138,16 @@ HMIS tells us how many services were delivered (numerator), but not the target p
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Two outputs shown: national trends and subnational comparison
+- National: compare HMIS (grey), survey (black), projected (red)
+- Gap between HMIS and survey indicates denominator accuracy
+- Subnational: identify geographic disparities for prioritization
+- Coverage >100%: denominator too small or services double-counted
+- Coverage very low: denominator too large or under-reporting
+- Use these outputs to inform program planning and resource allocation
+-->
 <!-- /SLIDE -->
 

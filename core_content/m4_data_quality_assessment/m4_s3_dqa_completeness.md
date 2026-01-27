@@ -34,3 +34,11 @@ Higher and stable completeness improves data reliability.
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Walk through the heatmap: rows are indicators, columns are time periods
+- Color intensity shows completeness level - darker = more complete
+- Point out any patterns: seasonal dips? Specific indicators with issues?
+- Emphasize: we're looking at indicator completeness, not form submission
+-->

@@ -649,10 +649,97 @@ ${data.content}`
               </div>
             </button>
 
-            {/* Topics */}
+            {/* Topics - Full and Condensed sub-sections */}
             {expandedModules.has(module.number) && (
               <div className="bg-gray-50 border-t border-gray-100">
-                {module.topics.map((topic) => (
+                {/* Full slides section */}
+                {(module as any).fullTopics?.length > 0 && (
+                  <>
+                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
+                      Full ({(module as any).fullSlides} slides)
+                    </div>
+                    {(module as any).fullTopics.map((topic: any) => (
+                      <div
+                        key={topic.id}
+                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-gray-100 transition-colors group"
+                        onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-gray-700 truncate" title={topic.title}>
+                            {topic.title}
+                          </div>
+                          <div className="text-xs text-gray-400 flex items-center gap-1">
+                            <Layers className="w-3 h-3" />
+                            <span>{topic.slideCount} slides</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button
+                            onClick={() => showFullPreview(topic, module)}
+                            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-white rounded"
+                            title="Preview slides"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => addTopic(topic, module)}
+                            className="p-1 text-fastr-primary hover:bg-white rounded"
+                            title="Add to Day 1"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
+                {/* Condensed slides section */}
+                {(module as any).condensedTopics?.length > 0 && (
+                  <>
+                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
+                      Condensed ({(module as any).condensedSlides} slides)
+                    </div>
+                    {(module as any).condensedTopics.map((topic: any) => (
+                      <div
+                        key={topic.id}
+                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-amber-50 transition-colors group"
+                        onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <FileText className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-gray-700 truncate" title={topic.title}>
+                            {topic.title}
+                          </div>
+                          <div className="text-xs text-gray-400 flex items-center gap-1">
+                            <Layers className="w-3 h-3" />
+                            <span>{topic.slideCount} slides</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button
+                            onClick={() => showFullPreview(topic, module)}
+                            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-white rounded"
+                            title="Preview slides"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => addTopic(topic, module)}
+                            className="p-1 text-fastr-primary hover:bg-white rounded"
+                            title="Add to Day 1"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
+                {/* Fallback for modules without separated topics */}
+                {!(module as any).fullTopics?.length && !(module as any).condensedTopics?.length && module.topics.map((topic) => (
                   <div
                     key={topic.id}
                     className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-gray-100 transition-colors group"
@@ -663,19 +750,12 @@ ${data.content}`
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-gray-700 truncate" title={topic.title}>
                         {topic.title}
-                        {topic.isShort && (
-                          <span className="ml-1 text-xs bg-blue-100 text-blue-600 px-1 rounded">
-                            short
-                          </span>
-                        )}
                       </div>
                       <div className="text-xs text-gray-400 flex items-center gap-1">
                         <Layers className="w-3 h-3" />
                         <span>{topic.slideCount} slides</span>
                       </div>
                     </div>
-
-                    {/* Action buttons */}
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => showFullPreview(topic, module)}

@@ -25,3 +25,12 @@ Statistical comparison of observed volumes against expected levels—derived fro
 ## Service utilization over time
 
 ![Service utilization over time h:420](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+<!--
+PRESENTER NOTES:
+- Module 3 analyzes service delivery patterns over time
+- Two main objectives: (1) measure year-over-year changes, (2) detect disruptions
+- Service utilization chart shows raw trends - look for seasonal patterns, sudden changes
+- This module uses the adjusted data from Module 2 as input
+- Statistical methods distinguish normal variation from true disruptions
+-->

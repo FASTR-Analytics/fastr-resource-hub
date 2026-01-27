@@ -23,3 +23,14 @@ paginate: true
 </div>
 
 Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+
+<!--
+PRESENTER NOTES:
+- Configuration parameters control denominator calculations
+- Count variable: which adjusted data to use (recommend "both")
+- Analysis levels: national, provincial, district - choose based on data quality
+- Demographic rates: defaults provided but should use country-specific values
+- Sources for rates: DHS reports, UN IGME estimates, national vital statistics
+- Mortality rates affect denominator calculations significantly
+- Higher mortality = smaller surviving population denominators
+-->

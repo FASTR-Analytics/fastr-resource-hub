@@ -37,3 +37,13 @@ Changes exceeding **±10%** are flagged for review.
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Year-over-year comparison is the simplest form of service analysis
+- Formula: (Current year - Previous year) / Previous year × 100
+- Changes >±10% are flagged for review - threshold is configurable
+- Look for geographic patterns: are changes concentrated or widespread?
+- Consider: are changes real program impacts or data quality issues?
+- This output helps identify areas needing further investigation
+-->

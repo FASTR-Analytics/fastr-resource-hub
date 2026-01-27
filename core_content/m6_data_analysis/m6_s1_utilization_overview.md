@@ -45,3 +45,13 @@ Service utilization analysis tracks how many health services are being delivered
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Condensed version combining service trends and YoY comparison
+- First chart shows absolute volumes - identify overall patterns
+- Second chart shows relative changes - easier to compare across indicators
+- YoY changes >±10% are flagged - but threshold is configurable
+- For flagged changes, ask: data quality issue, real program change, or external event?
+- These outputs don't require population denominators - useful when denominators uncertain
+-->

@@ -56,3 +56,12 @@ For the FASTR analysis, completeness is defined as:
 <p style="font-size: 0.9em;"><strong>% complete = # monthly values that are complete / total N of monthly values</strong></p>
 
 ![Indicator Completeness h:340](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+
+<!--
+PRESENTER NOTES:
+- Completeness is foundational - if data are missing, analysis is compromised
+- Key distinction: we look at indicator-level completeness, not just form submission
+- Inactive facilities are handled separately to avoid penalizing facilities that legitimately closed
+- Point out patterns in the heatmap: which indicators have lower completeness? Any regional patterns?
+- Ask participants: What completeness rate would you consider acceptable for your analyses?
+-->

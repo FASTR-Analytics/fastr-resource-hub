@@ -20,3 +20,14 @@ paginate: true
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- National coverage chart shows three data series
+- Black = survey (DHS/MICS) - the reference standard, but infrequent
+- Grey = HMIS-derived coverage using selected denominators
+- Red = projected coverage extending survey using HMIS trends
+- Compare HMIS and survey: large gaps suggest denominator issues
+- Projections extend surveys forward - useful for recent years without surveys
+- Coverage >100% indicates denominator underestimate or service over-reporting
+-->

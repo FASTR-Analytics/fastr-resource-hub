@@ -17,3 +17,11 @@ paginate: true
 
 - **DHIS2:** focus is on identifying data quality issues and working with facilities to improve reporting practices
 - **FASTR:** focus on applying analytical adjustment techniques to account for data quality issues in the analysis; goal is to generate the most robust estimates despite data quality challenges
+
+<!--
+PRESENTER NOTES:
+- Key distinction: DHIS2 DQA aims to improve data quality over time; FASTR DQA enables analysis now
+- Both approaches are complementary, not competing
+- FASTR adjustments don't fix underlying data - they enable analysis despite limitations
+- Findings from FASTR can feed back into DHIS2 DQ improvement efforts
+-->

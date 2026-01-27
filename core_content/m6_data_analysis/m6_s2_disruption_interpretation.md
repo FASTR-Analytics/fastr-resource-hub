@@ -35,3 +35,14 @@ Beyond year-over-year comparisons, we want to know: **Is service delivery on tra
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Condensed version focusing on disruption detection methodology
+- Key insight: raw counts hard to interpret without context
+- Statistical model provides "expected" baseline accounting for seasonality
+- Disruption = sustained deviation below expected, not just a single bad month
+- When interpreting disruptions, consider external factors: COVID, strikes, etc.
+- Persistent deviations warrant deeper investigation into causes
+- Can run at national, provincial, or district level depending on data quality
+-->

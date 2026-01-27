@@ -24,3 +24,12 @@ This approach prevents temporary reporting gaps from creating artificial decline
 **% change in volume** = (adjusted value - original value) / original value × 100
 
 ![Percent change in volume due to completeness adjustment. h:340](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+<!--
+PRESENTER NOTES:
+- Same methodology as outlier adjustment - 6-month rolling averages
+- Fills in gaps from incomplete reporting
+- Prevents temporary reporting gaps from looking like service declines
+- Positive % change = imputation added volume (expected)
+- Large adjustments indicate regions/indicators needing completeness improvement
+-->

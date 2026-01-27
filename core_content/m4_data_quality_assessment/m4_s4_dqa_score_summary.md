@@ -59,3 +59,12 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Consistency is assessed at district level to account for patient movement
+- DQA mean combines all dimensions into one summary score
+- 100% = complete + no outliers + consistent - the goal for quality data
+- Use the heatmap to identify priority areas for data quality improvement
+- This completes the DQA module - next we'll look at how to adjust for these issues
+-->

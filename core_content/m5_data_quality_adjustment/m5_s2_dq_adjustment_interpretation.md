@@ -43,3 +43,13 @@ paginate: true
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Two outputs shown: outlier adjustment and completeness adjustment
+- Outlier heatmap: negative values mean outliers were removed (reduced inflated counts)
+- Completeness heatmap: positive values mean gaps were filled (increased total volume)
+- Large adjustments (dark colors) indicate areas/indicators with data quality issues
+- Use these to identify where to focus data quality improvement efforts
+- Compare regions: which have more outlier issues vs completeness issues?
+-->

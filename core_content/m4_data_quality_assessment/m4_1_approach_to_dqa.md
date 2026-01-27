@@ -56,3 +56,12 @@ Data quality assessment enables ongoing monitoring to:
 ## Measures of data quality
 
 ![Measures of data quality]({{WORKSHOP_MEDIA}}/measures_data_quality.png)
+
+<!--
+PRESENTER NOTES:
+- Key message: Data quality should not be a barrier to data use
+- FASTR uses granular facility-level assessment, not just aggregate statistics
+- We focus on high-volume indicators because they give more stable estimates
+- Emphasize the feedback loop: using data helps improve data quality over time
+- Walk through each DQ dimension: completeness, outliers, consistency
+-->

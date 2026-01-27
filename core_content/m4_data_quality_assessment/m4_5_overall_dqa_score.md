@@ -40,3 +40,12 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 
 ![Mean DQA Score h:320](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+<!--
+PRESENTER NOTES:
+- The DQA score combines all three dimensions into one summary measure
+- 100% means: complete data, no outliers, and consistent relationships
+- This is useful for prioritizing where to focus data quality improvement efforts
+- Color coding (red to green) makes it easy to spot problem areas at a glance
+- Note: A high score doesn't guarantee accuracy - but indicates data meet basic quality criteria
+-->

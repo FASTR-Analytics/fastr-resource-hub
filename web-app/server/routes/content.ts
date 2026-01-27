@@ -59,13 +59,15 @@ router.get('/modules', (_req, res) => {
         if (!modNumMatch) continue
 
         const modNum = parseInt(modNumMatch[1])
-        const topics: any[] = []
+        const fullTopics: any[] = []
+        const condensedTopics: any[] = []
 
         const files = fs.readdirSync(modulePath)
           .filter(f => f.endsWith('.md'))
           .sort((a, b) => {
-            const aMatch = a.match(/^m\d+_(\d+)/)
-            const bMatch = b.match(/^m\d+_(\d+)/)
+            // Sort by number, handling both m4_1 and m4_s1 formats
+            const aMatch = a.match(/^m\d+_s?(\d+)/)
+            const bMatch = b.match(/^m\d+_s?(\d+)/)
             const aNum = aMatch ? parseInt(aMatch[1]) : 0
             const bNum = bMatch ? parseInt(bMatch[1]) : 0
             if (aNum !== bNum) return aNum - bNum
@@ -73,10 +75,12 @@ router.get('/modules', (_req, res) => {
           })
 
         for (const file of files) {
-          const topicMatch = file.match(/^(m\d+_\d+[a-z]?)_/)
+          // Match both regular (m4_1_...) and condensed (m4_s1_...) formats
+          const topicMatch = file.match(/^(m\d+_s?\d+[a-z]?)_/)
           if (!topicMatch) continue
 
           const topicId = topicMatch[1]
+          const isCondensed = topicId.includes('_s')
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
@@ -90,7 +94,7 @@ router.get('/modules', (_req, res) => {
           title = title.replace(/\s*-\s*Module\s*\d+$/i, '').trim()
 
           if (!title) {
-            title = file.replace('.md', '').replace(/^m\d+_\d+[a-z]?_/, '').replace(/_/g, ' ')
+            title = file.replace('.md', '').replace(/^m\d+_s?\d+[a-z]?_/, '').replace(/_/g, ' ')
             title = title.charAt(0).toUpperCase() + title.slice(1)
           }
 
@@ -101,27 +105,37 @@ router.get('/modules', (_req, res) => {
           const keyPoints = content.match(/^\*\*([^*]+)\*\*/gm)?.slice(0, 4).map(b => b.replace(/\*\*/g, '')) ||
                           content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 4).map(b => b.replace(/^[-*]\s+/, '')) || []
 
-          // Detect if this is a short version
-          const isShort = file.includes('_short') || file.includes('_brief')
-
-          topics.push({
+          const topic = {
             id: topicId,
             file: file,
             title: title,
             slideCount: slideCount,
             slideTitles: slideTitles.slice(0, 5),
             preview: keyPoints,
-            isShort: isShort,
-          })
+            isCondensed: isCondensed,
+          }
+
+          if (isCondensed) {
+            condensedTopics.push(topic)
+          } else {
+            fullTopics.push(topic)
+          }
         }
+
+        // Combine topics for backward compatibility, but also provide separated lists
+        const allTopics = [...fullTopics, ...condensedTopics]
 
         modules.push({
           number: modNum,
           id: `m${modNum}`,
           name: MODULE_NAMES[modNum] || `Module ${modNum}`,
           folder: item,
-          topics: topics,
-          totalSlides: topics.reduce((sum, t) => sum + t.slideCount, 0),
+          topics: allTopics, // All topics for backward compatibility
+          fullTopics: fullTopics,
+          condensedTopics: condensedTopics,
+          totalSlides: allTopics.reduce((sum, t) => sum + t.slideCount, 0),
+          fullSlides: fullTopics.reduce((sum, t) => sum + t.slideCount, 0),
+          condensedSlides: condensedTopics.reduce((sum, t) => sum + t.slideCount, 0),
         })
       }
     }
@@ -345,6 +359,14 @@ router.post('/render', async (req, res) => {
       return res.status(400).json({ error: 'Markdown content required' })
     }
 
+    // Extract presenter notes from HTML comments (before modifying markdown)
+    // Match comments that contain "PRESENTER NOTES:" or are multi-line notes
+    const notesRegex = /<!--\s*(PRESENTER NOTES:[\s\S]*?)-->/gi
+    const notesMatches = markdown.match(notesRegex) || []
+    const presenterNotes = notesMatches.map(note =>
+      note.replace(/<!--\s*/, '').replace(/\s*-->/, '').trim()
+    )
+
     // Rewrite relative image paths to absolute URLs
     // ../../resources/... -> /resources/...
     // ../resources/... -> /resources/...
@@ -381,7 +403,7 @@ ${html}
 </body>
 </html>`
 
-    res.json({ html: fullHtml })
+    res.json({ html: fullHtml, presenterNotes })
   } catch (error: any) {
     console.error('Error rendering markdown:', error)
     res.status(500).json({ error: error.message })

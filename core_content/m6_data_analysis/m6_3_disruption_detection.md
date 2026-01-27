@@ -54,3 +54,14 @@ Using a regression framework, we are able to:
 - Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
 
 This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
+
+<!--
+PRESENTER NOTES:
+- Disruption detection goes beyond simple YoY comparison
+- Uses interrupted time series regression with fixed effects
+- Key concept: compare actual to "expected" based on historical patterns
+- Disruption = significantly below expected; Surplus = significantly above expected
+- Advantages over DHIS2: accounts for seasonality, excludes unusual historical events
+- Can quantify magnitude of disruptions in absolute numbers and percentages
+- Useful for assessing impact of events like COVID, strikes, stockouts, campaigns
+-->

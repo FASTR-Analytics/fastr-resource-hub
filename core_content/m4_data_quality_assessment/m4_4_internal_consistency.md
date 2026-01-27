@@ -62,3 +62,12 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 **% meeting consistency criteria** = (number of areas where indicator ratio meets threshold) / (total number of areas) × 100
 
 ![Internal Consistency h:380](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+<!--
+PRESENTER NOTES:
+- Consistency checks logical relationships: ANC1 should always ≥ ANC4 (can't have 4th visit without 1st)
+- We assess at DISTRICT level because patients move between facilities within a district
+- Example: woman has ANC1 at health post, ANC4 at district hospital - still consistent at district level
+- BCG vs deliveries allows 30% tolerance because not all births happen in facilities
+- Ask: In your context, do patients commonly seek different services at different facilities?
+-->

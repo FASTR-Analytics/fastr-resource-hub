@@ -14,9 +14,7 @@ For the FASTR analysis, we identify outliers which are suspiciously high values 
 
 ---
 
-## Outlier illustration
-
-Region A displays an anomalous spike in February that substantially exceeds values reported by other regions — indicative of a data entry error or reporting issue.
+## Why adjust for outliers?
 
 ![Outlier Impact](../../resources/diagrams/outlier_impact.svg)
 
@@ -45,3 +43,12 @@ For a given indicator in a given time period, the percent of monthly values that
 **% outliers = # monthly values that are outliers / total N of monthly values**
 
 ![Outliers h:340](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+
+<!--
+PRESENTER NOTES:
+- FASTR only flags HIGH outliers - low values likely reflect real service disruptions
+- The MAD-based method is robust to the outliers themselves (unlike standard deviation)
+- Two ways to be flagged: statistical deviation OR dominating the regional total (>80%)
+- The diagram shows why outliers matter: one extreme value can mask all other trends
+- Ask: Have you seen examples of outliers in your data? What caused them?
+-->

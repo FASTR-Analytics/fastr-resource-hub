@@ -15,3 +15,11 @@ paginate: true
 - DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness - it is important for strengthening routine reporting but less important for analysis with available data
 
 - DHIS2 DQA includes reporting completeness and indicator completeness while FASTR focuses only on indicator completeness
+
+<!--
+PRESENTER NOTES:
+- FASTR is selective about which DQ measures to include
+- We exclude timeliness because it matters less for retrospective analysis
+- We focus on indicator completeness (specific values) rather than form submission
+- The goal is to assess quality of the data we will actually use in analysis
+-->

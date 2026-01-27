@@ -916,6 +916,15 @@ Certain indicators are excluded from the adjustment process:
 
 - **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
 - **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment
+
+<!--
+PRESENTER NOTES:
+- This module addresses the issues identified in DQA
+- Key concept: we replace problematic values with estimates based on facility's own history
+- Four parallel datasets allow sensitivity analysis - how much do results change?
+- Mortality excluded because smoothing discrete rare events is inappropriate
+- Low-volume excluded because adjustment adds noise to already sparse data
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_2 -->
@@ -939,6 +948,14 @@ Outlier values are replaced using facility-specific historical data. The adjustm
 
 ![Percent change in volume due to outlier adjustment. h:340](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
+<!--
+PRESENTER NOTES:
+- Hierarchical approach: start with best method, fall back to alternatives
+- Centered average (3 months before + 3 after) is preferred - captures local trends
+- Forward/backward averages used at series edges
+- Same month previous year captures seasonality
+- Facility mean is last resort - still better than keeping outlier
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
@@ -963,6 +980,14 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 ![Percent change in volume due to completeness adjustment. h:340](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
+<!--
+PRESENTER NOTES:
+- Same methodology as outlier adjustment - 6-month rolling averages
+- Fills in gaps from incomplete reporting
+- Prevents temporary reporting gaps from looking like service declines
+- Positive % change = imputation added volume (expected)
+- Large adjustments indicate regions/indicators needing completeness improvement
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
@@ -971,6 +996,15 @@ This approach prevents temporary reporting gaps from creating artificial decline
 **% change in volume** = (adjusted value - original value) / original value × 100
 
 ![Percent change in volume due to both outlier and completeness adjustment. h:340](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+
+<!--
+PRESENTER NOTES:
+- This shows net effect of both adjustments
+- Outlier adjustment typically reduces volume (removing spikes)
+- Completeness adjustment typically increases volume (filling gaps)
+- Net effect depends on which issue is more prevalent
+- Compare all four scenarios to understand sensitivity of your conclusions
+-->
 <!-- /SLIDE -->
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
@@ -987,6 +1021,14 @@ This approach prevents temporary reporting gaps from creating artificial decline
 **Four parallel datasets:** FASTR produces unadjusted, outliers-only adjusted, completeness-only adjusted, and both-adjusted versions. This enables sensitivity analysis - comparing results across scenarios to assess how much conclusions depend on adjustment choices.
 
 **Excluded from adjustment:** Mortality indicators (discrete events that shouldn't be smoothed) and low-volume indicators (<100 events/month, where adjustment adds noise).
+
+<!--
+PRESENTER NOTES:
+- Condensed overview of adjustment rationale and methods
+- Key message: adjustment enables analysis despite DQ limitations
+- Four scenarios support sensitivity analysis - important for transparency
+- Not everything should be adjusted - mortality and low-volume excluded
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_s2 -->
@@ -1029,5 +1071,15 @@ This approach prevents temporary reporting gaps from creating artificial decline
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Two outputs shown: outlier adjustment and completeness adjustment
+- Outlier heatmap: negative values mean outliers were removed (reduced inflated counts)
+- Completeness heatmap: positive values mean gaps were filled (increased total volume)
+- Large adjustments (dark colors) indicate areas/indicators with data quality issues
+- Use these to identify where to focus data quality improvement efforts
+- Compare regions: which have more outlier issues vs completeness issues?
+-->
 <!-- /SLIDE -->
 

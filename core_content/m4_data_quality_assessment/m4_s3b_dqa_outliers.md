@@ -32,3 +32,11 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Only HIGH values are flagged - low values may be real service disruptions
+- High outlier rates warrant investigation: data entry errors or real events?
+- Campaigns can cause legitimate spikes - context matters
+- The heatmap shows which indicators/regions have most outliers
+-->

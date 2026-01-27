@@ -303,6 +303,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
 
   useEffect(() => {
@@ -324,6 +325,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
     setIsLoadingPreview(true)
+    setPresenterNotes([])
     try {
       const response = await fetch(`/api/content/topic/${topic.id}`)
       if (response.ok) {
@@ -336,6 +338,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
           setPreviewHtml(renderData.html)
+          setPresenterNotes(renderData.presenterNotes || [])
         }
       }
     } catch (err) {
@@ -388,7 +391,48 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
               </button>
               {expandedModules.has(module.id) && (
                 <div className="bg-gray-50 border-t border-gray-100">
-                  {module.topics.map((topic: any) => (
+                  {/* Full slides */}
+                  {module.fullTopics?.length > 0 && (
+                    <>
+                      <div className="px-4 py-1.5 pl-10 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
+                        Full ({module.fullSlides} slides)
+                      </div>
+                      {module.fullTopics.map((topic: any) => (
+                        <button
+                          key={topic.id}
+                          onClick={() => loadPreview(topic)}
+                          className={`w-full text-left px-4 py-2 pl-12 hover:bg-gray-100 transition-colors ${
+                            previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                          }`}
+                        >
+                          <div className="text-sm text-gray-700">{topic.title}</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                        </button>
+                      ))}
+                    </>
+                  )}
+                  {/* Condensed slides */}
+                  {module.condensedTopics?.length > 0 && (
+                    <>
+                      <div className="px-4 py-1.5 pl-10 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
+                        Condensed ({module.condensedSlides} slides)
+                      </div>
+                      {module.condensedTopics.map((topic: any) => (
+                        <button
+                          key={topic.id}
+                          onClick={() => loadPreview(topic)}
+                          className={`w-full text-left px-4 py-2 pl-12 hover:bg-amber-50 transition-colors ${
+                            previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                          }`}
+                        >
+                          <div className="text-sm text-gray-700">{topic.title}</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                        </button>
+                      ))}
+                    </>
+                  )}
+                  {/* Fallback if no separated topics */}
+                  {!module.fullTopics?.length && !module.condensedTopics?.length && module.topics.map((topic: any) => (
                     <button
                       key={topic.id}
                       onClick={() => loadPreview(topic)}
@@ -414,7 +458,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
               <p>Loading preview...</p>
             </div>
           ) : previewHtml ? (
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-4xl overflow-y-auto">
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   srcDoc={previewHtml}
@@ -426,11 +470,22 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                 <p className="text-white font-medium">{previewTopic?.title}</p>
                 <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
               </div>
+              {/* Presenter Notes */}
+              {presenterNotes.length > 0 && (
+                <div className="mt-4 bg-gray-900 rounded-lg p-4 text-left">
+                  <h4 className="text-amber-400 text-sm font-semibold mb-2">Presenter Notes</h4>
+                  {presenterNotes.map((note, i) => (
+                    <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
+                      {note.replace(/^PRESENTER NOTES:\s*/i, '')}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div className="text-center text-gray-500">
               <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
-              <p className="text-lg text-white/70">Select a topic to preview</p>
+              <p className="text-lg text-white/70">Click on a slide to preview</p>
             </div>
           )}
         </div>
@@ -450,6 +505,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   const [exportFormat, setExportFormat] = useState<'pdf' | 'pptx' | null>(null)
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
 
   useEffect(() => {
@@ -507,6 +563,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
     setIsLoadingPreview(true)
+    setPresenterNotes([])
     try {
       const response = await fetch(`/api/content/topic/${topic.id}`)
       if (response.ok) {
@@ -519,6 +576,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
           setPreviewHtml(renderData.html)
+          setPresenterNotes(renderData.presenterNotes || [])
         }
       }
     } catch (err) {
@@ -628,14 +686,82 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 
                 {expandedModules.has(module.id) && (
                   <div className="bg-gray-50 border-t border-gray-100">
-                    {module.topics.map((topic: any) => (
+                    {/* Full slides */}
+                    {module.fullTopics?.length > 0 && (
+                      <>
+                        <div className="px-4 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
+                          Full ({module.fullSlides} slides)
+                        </div>
+                        {module.fullTopics.map((topic: any) => (
+                          <div
+                            key={topic.id}
+                            className={`flex items-center gap-2 px-4 py-2 pl-10 hover:bg-gray-100 transition-colors ${
+                              previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                            }`}
+                          >
+                            <button
+                              onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
+                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                                isSelected(topic.id)
+                                  ? 'bg-fastr-primary border-fastr-primary'
+                                  : 'border-gray-300 hover:border-gray-400'
+                              }`}
+                            >
+                              {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
+                            </button>
+                            <button
+                              onClick={() => loadPreview(topic)}
+                              className="flex-1 min-w-0 text-left"
+                            >
+                              <div className="text-sm text-gray-700 truncate">{topic.title}</div>
+                              <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                            </button>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {/* Condensed slides */}
+                    {module.condensedTopics?.length > 0 && (
+                      <>
+                        <div className="px-4 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
+                          Condensed ({module.condensedSlides} slides)
+                        </div>
+                        {module.condensedTopics.map((topic: any) => (
+                          <div
+                            key={topic.id}
+                            className={`flex items-center gap-2 px-4 py-2 pl-10 hover:bg-amber-50 transition-colors ${
+                              previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                            }`}
+                          >
+                            <button
+                              onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
+                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                                isSelected(topic.id)
+                                  ? 'bg-fastr-primary border-fastr-primary'
+                                  : 'border-gray-300 hover:border-gray-400'
+                              }`}
+                            >
+                              {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
+                            </button>
+                            <button
+                              onClick={() => loadPreview(topic)}
+                              className="flex-1 min-w-0 text-left"
+                            >
+                              <div className="text-sm text-gray-700 truncate">{topic.title}</div>
+                              <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                            </button>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                    {/* Fallback if no separated topics */}
+                    {!module.fullTopics?.length && !module.condensedTopics?.length && module.topics.map((topic: any) => (
                       <div
                         key={topic.id}
                         className={`flex items-center gap-2 px-4 py-2 pl-8 hover:bg-gray-100 transition-colors ${
                           previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
                         }`}
                       >
-                        {/* Checkbox */}
                         <button
                           onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
                           className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
@@ -646,7 +772,6 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                         >
                           {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
                         </button>
-                        {/* Topic info - clickable for preview */}
                         <button
                           onClick={() => loadPreview(topic)}
                           className="flex-1 min-w-0 text-left"
@@ -672,7 +797,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                 <p>Loading preview...</p>
               </div>
             ) : previewHtml ? (
-              <div className="w-full max-w-4xl">
+              <div className="w-full max-w-4xl overflow-y-auto">
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                   <iframe
                     srcDoc={previewHtml}
@@ -684,11 +809,22 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                   <p className="text-white font-medium">{previewTopic?.title}</p>
                   <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
                 </div>
+                {/* Presenter Notes */}
+                {presenterNotes.length > 0 && (
+                  <div className="mt-4 bg-gray-900 rounded-lg p-4 text-left">
+                    <h4 className="text-amber-400 text-sm font-semibold mb-2">Presenter Notes</h4>
+                    {presenterNotes.map((note, i) => (
+                      <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
+                        {note.replace(/^PRESENTER NOTES:\s*/i, '')}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="text-center text-gray-500">
                 <Zap className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg text-white/70">Click a topic to preview</p>
+                <p className="text-lg text-white/70">Click on a slide to preview</p>
                 <p className="text-sm mt-2 text-white/50">Check the box to add it to your selection</p>
               </div>
             )}
