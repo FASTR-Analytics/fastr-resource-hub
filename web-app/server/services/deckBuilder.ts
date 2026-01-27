@@ -321,11 +321,37 @@ function substituteVariables(
   // Cast to any to access optional properties
   const workshop = config.workshop as any
 
+  // Format dates nicely
+  const formatDateRange = (startDate?: string, endDate?: string): string => {
+    if (!startDate) return ''
+    try {
+      const start = new Date(startDate)
+      const end = endDate ? new Date(endDate) : null
+      const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' }
+
+      if (!end || startDate === endDate) {
+        return start.toLocaleDateString('en-US', options)
+      }
+
+      // Same month and year
+      if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+        return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}-${end.getDate()}, ${end.getFullYear()}`
+      }
+
+      // Different months
+      return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`
+    } catch {
+      return startDate || ''
+    }
+  }
+
   const vars: Record<string, string> = {
     '{{WORKSHOP_NAME}}': config.workshop.name || 'FASTR Workshop',
     '{{COUNTRY}}': config.workshop.country || '',
     '{{LOCATION}}': config.workshop.location || '',
-    '{{DATE}}': config.workshop.date || '',
+    '{{DATE}}': formatDateRange(workshop.start_date, workshop.end_date) || workshop.date || '',
+    '{{START_DATE}}': workshop.start_date || '',
+    '{{END_DATE}}': workshop.end_date || '',
     '{{VENUE}}': config.workshop.venue || '',
     '{{FACILITATORS}}': config.workshop.facilitators || '',
     '{{CONTACT_EMAIL}}': config.workshop.contact_email || '',

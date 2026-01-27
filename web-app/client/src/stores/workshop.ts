@@ -23,7 +23,9 @@ export interface LocalWorkshopConfig {
     name: string
     country: string
     location: string
-    date: string
+    date?: string
+    start_date?: string
+    end_date?: string
     facilitators: string
     venue?: string
     contact_email?: string

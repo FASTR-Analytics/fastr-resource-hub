@@ -11,6 +11,7 @@ import {
   Eye,
   Download,
   ChevronDown,
+  ChevronRight,
   Menu,
   X,
   Check,
@@ -25,6 +26,12 @@ import {
   Trash2,
   Pin,
   PinOff,
+  Library,
+  Zap,
+  ArrowLeft,
+  Folder,
+  FolderOpen,
+  Minus,
 } from 'lucide-react'
 import {
   DndContext,
@@ -283,6 +290,509 @@ function EditSessionModal({ session, onClose, onSave, onDelete }: EditSessionMod
   )
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// App Modes
+// ─────────────────────────────────────────────────────────────────────────────
+type AppMode = 'select' | 'workshop' | 'library' | 'quick'
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Library Mode Component - Browse slides without export
+// ─────────────────────────────────────────────────────────────────────────────
+function LibraryMode({ onBack }: { onBack: () => void }) {
+  const { contentLibrary, loadContentLibrary } = useWorkshopStore()
+  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [previewTopic, setPreviewTopic] = useState<any | null>(null)
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+
+  useEffect(() => {
+    if (contentLibrary.length === 0) {
+      loadContentLibrary()
+    }
+  }, [contentLibrary.length, loadContentLibrary])
+
+  const toggleModule = (moduleId: string) => {
+    const next = new Set(expandedModules)
+    if (next.has(moduleId)) {
+      next.delete(moduleId)
+    } else {
+      next.add(moduleId)
+    }
+    setExpandedModules(next)
+  }
+
+  const loadPreview = async (topic: any) => {
+    setPreviewTopic(topic)
+    setIsLoadingPreview(true)
+    try {
+      const response = await fetch(`/api/content/topic/${topic.id}`)
+      if (response.ok) {
+        const data = await response.json()
+        const renderResponse = await fetch('/api/content/render', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown: data.content })
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          setPreviewHtml(renderData.html)
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
+
+  if (contentLibrary.length === 0) {
+    return (
+      <div className="h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center text-gray-500">
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+          <p>Loading content library...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-screen flex flex-col bg-gray-100">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
+        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <ArrowLeft className="w-5 h-5 text-gray-600" />
+        </button>
+        <h1 className="text-lg font-semibold text-gray-800">Browse Content Library</h1>
+      </header>
+
+      {/* Main content */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Module list */}
+        <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
+          {contentLibrary.map((module: any) => (
+            <div key={module.id} className="border-b border-gray-100">
+              <button
+                onClick={() => toggleModule(module.id)}
+                className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-center gap-2"
+              >
+                {expandedModules.has(module.id) ? (
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                )}
+                <div className="flex-1">
+                  <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
+                  <div className="text-xs text-gray-500">{module.totalSlides} slides</div>
+                </div>
+              </button>
+              {expandedModules.has(module.id) && (
+                <div className="bg-gray-50 border-t border-gray-100">
+                  {module.topics.map((topic: any) => (
+                    <button
+                      key={topic.id}
+                      onClick={() => loadPreview(topic)}
+                      className={`w-full text-left px-4 py-2 pl-10 hover:bg-gray-100 transition-colors ${
+                        previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                      }`}
+                    >
+                      <div className="text-sm text-gray-700">{topic.title}</div>
+                      <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Preview area */}
+        <div className="flex-1 bg-gray-800 flex items-center justify-center p-6">
+          {isLoadingPreview ? (
+            <div className="text-white/70">
+              <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+              <p>Loading preview...</p>
+            </div>
+          ) : previewHtml ? (
+            <div className="w-full max-w-4xl">
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  srcDoc={previewHtml}
+                  className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
+                  title="Slide Preview"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <p className="text-white font-medium">{previewTopic?.title}</p>
+                <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">
+              <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <p className="text-lg text-white/70">Select a topic to preview</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Quick Export Mode Component - Select slides for quick presentation
+// ─────────────────────────────────────────────────────────────────────────────
+function QuickExportMode({ onBack }: { onBack: () => void }) {
+  const { contentLibrary, loadContentLibrary } = useWorkshopStore()
+  const [selectedSlides, setSelectedSlides] = useState<Array<{ module: any; topic: any }>>([])
+  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [isExporting, setIsExporting] = useState(false)
+  const [exportFormat, setExportFormat] = useState<'pdf' | 'pptx' | null>(null)
+  const [previewTopic, setPreviewTopic] = useState<any | null>(null)
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+
+  useEffect(() => {
+    if (contentLibrary.length === 0) {
+      loadContentLibrary()
+    }
+  }, [contentLibrary.length, loadContentLibrary])
+
+  const toggleModule = (moduleId: string) => {
+    const next = new Set(expandedModules)
+    if (next.has(moduleId)) {
+      next.delete(moduleId)
+    } else {
+      next.add(moduleId)
+    }
+    setExpandedModules(next)
+  }
+
+  const toggleTopic = (module: any, topic: any) => {
+    const exists = selectedSlides.find(s => s.topic.id === topic.id)
+    if (exists) {
+      setSelectedSlides(selectedSlides.filter(s => s.topic.id !== topic.id))
+    } else {
+      setSelectedSlides([...selectedSlides, { module, topic }])
+    }
+  }
+
+  const isSelected = (topicId: string) => selectedSlides.some(s => s.topic.id === topicId)
+
+  // Check if all topics in a module are selected
+  const isModuleFullySelected = (module: any) => {
+    return module.topics.every((topic: any) => isSelected(topic.id))
+  }
+
+  // Check if some (but not all) topics in a module are selected
+  const isModulePartiallySelected = (module: any) => {
+    const selectedCount = module.topics.filter((topic: any) => isSelected(topic.id)).length
+    return selectedCount > 0 && selectedCount < module.topics.length
+  }
+
+  // Toggle all topics in a module
+  const toggleModuleAllTopics = (module: any) => {
+    const allSelected = isModuleFullySelected(module)
+    if (allSelected) {
+      const moduleTopicIds = new Set(module.topics.map((t: any) => t.id))
+      setSelectedSlides(selectedSlides.filter(s => !moduleTopicIds.has(s.topic.id)))
+    } else {
+      const newSelections = module.topics
+        .filter((topic: any) => !isSelected(topic.id))
+        .map((topic: any) => ({ module, topic }))
+      setSelectedSlides([...selectedSlides, ...newSelections])
+    }
+  }
+
+  const loadPreview = async (topic: any) => {
+    setPreviewTopic(topic)
+    setIsLoadingPreview(true)
+    try {
+      const response = await fetch(`/api/content/topic/${topic.id}`)
+      if (response.ok) {
+        const data = await response.json()
+        const renderResponse = await fetch('/api/content/render', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown: data.content })
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          setPreviewHtml(renderData.html)
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
+
+  const exportSelection = async (format: 'pdf' | 'pptx') => {
+    if (selectedSlides.length === 0) return
+    setIsExporting(true)
+    setExportFormat(format)
+
+    try {
+      const topicIds = selectedSlides.map(s => s.topic.id)
+      const response = await fetch('/api/content/export/selection', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topicIds, format, title: 'Quick Export' })
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        if (data.downloadUrl) {
+          window.open(data.downloadUrl, '_blank')
+        }
+      } else {
+        alert('Export failed. Please try again.')
+      }
+    } catch (err) {
+      console.error('Export failed:', err)
+      alert('Export failed. Please try again.')
+    } finally {
+      setIsExporting(false)
+      setExportFormat(null)
+    }
+  }
+
+  const totalSlides = selectedSlides.reduce((sum, s) => sum + s.topic.slideCount, 0)
+
+  if (contentLibrary.length === 0) {
+    return (
+      <div className="h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center text-gray-500">
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+          <p>Loading content library...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-screen flex flex-col bg-gray-100">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
+        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <ArrowLeft className="w-5 h-5 text-gray-600" />
+        </button>
+        <h1 className="text-lg font-semibold text-gray-800">Quick Export</h1>
+        <span className="text-sm text-gray-500">Select slides and export to PPTX or PDF</span>
+      </header>
+
+      {/* Main content */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Topic picker */}
+        <div className="w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+          <div className="p-4 border-b border-gray-100">
+            <h2 className="font-semibold text-gray-800">Select Topics</h2>
+            <p className="text-sm text-gray-500 mt-1">Check to select, click name to preview</p>
+          </div>
+          <div className="flex-1 overflow-auto">
+            {contentLibrary.map((module: any) => (
+              <div key={module.id} className="border-b border-gray-100">
+                <div className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors">
+                  {/* Module select all checkbox */}
+                  <button
+                    onClick={(e) => { e.stopPropagation(); toggleModuleAllTopics(module) }}
+                    className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                      isModuleFullySelected(module)
+                        ? 'bg-fastr-primary border-fastr-primary'
+                        : isModulePartiallySelected(module)
+                          ? 'bg-fastr-primary/50 border-fastr-primary'
+                          : 'border-gray-300 hover:border-gray-400'
+                    }`}
+                    title="Select all topics in this module"
+                  >
+                    {isModuleFullySelected(module) && <Check className="w-3 h-3 text-white" />}
+                    {isModulePartiallySelected(module) && <Minus className="w-3 h-3 text-white" />}
+                  </button>
+                  {/* Module expand/collapse */}
+                  <button
+                    onClick={() => toggleModule(module.id)}
+                    className="flex-1 flex items-center gap-2 text-left"
+                  >
+                    {expandedModules.has(module.id) ? (
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                    )}
+                    <div className="flex-1">
+                      <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
+                      <div className="text-xs text-gray-500">{module.totalSlides} slides</div>
+                    </div>
+                  </button>
+                </div>
+
+                {expandedModules.has(module.id) && (
+                  <div className="bg-gray-50 border-t border-gray-100">
+                    {module.topics.map((topic: any) => (
+                      <div
+                        key={topic.id}
+                        className={`flex items-center gap-2 px-4 py-2 pl-8 hover:bg-gray-100 transition-colors ${
+                          previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                        }`}
+                      >
+                        {/* Checkbox */}
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
+                          className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                            isSelected(topic.id)
+                              ? 'bg-fastr-primary border-fastr-primary'
+                              : 'border-gray-300 hover:border-gray-400'
+                          }`}
+                        >
+                          {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
+                        </button>
+                        {/* Topic info - clickable for preview */}
+                        <button
+                          onClick={() => loadPreview(topic)}
+                          className="flex-1 min-w-0 text-left"
+                        >
+                          <div className="text-sm text-gray-700 truncate">{topic.title}</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Slide preview area */}
+        <div className="flex-1 bg-gray-800 flex flex-col">
+          <div className="flex-1 flex items-center justify-center p-6 overflow-auto">
+            {isLoadingPreview ? (
+              <div className="text-white/70">
+                <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+                <p>Loading preview...</p>
+              </div>
+            ) : previewHtml ? (
+              <div className="w-full max-w-4xl">
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                  <iframe
+                    srcDoc={previewHtml}
+                    className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
+                    title="Slide Preview"
+                  />
+                </div>
+                <div className="mt-4 text-center">
+                  <p className="text-white font-medium">{previewTopic?.title}</p>
+                  <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center text-gray-500">
+                <Zap className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                <p className="text-lg text-white/70">Click a topic to preview</p>
+                <p className="text-sm mt-2 text-white/50">Check the box to add it to your selection</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Selection sidebar */}
+        <div className="w-72 bg-white border-l border-gray-200 flex flex-col flex-shrink-0">
+          <div className="p-4 border-b border-gray-100">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-semibold text-gray-800">Your Selection</h3>
+              {selectedSlides.length > 0 && (
+                <button
+                  onClick={() => setSelectedSlides([])}
+                  className="text-xs text-gray-500 hover:text-gray-700"
+                >
+                  Clear all
+                </button>
+              )}
+            </div>
+            <p className="text-sm text-gray-500">
+              {selectedSlides.length} topic{selectedSlides.length !== 1 ? 's' : ''} • {totalSlides} slides
+            </p>
+          </div>
+
+          <div className="flex-1 overflow-auto p-2">
+            {selectedSlides.length === 0 ? (
+              <div className="h-full flex items-center justify-center text-gray-400 text-sm text-center p-4">
+                <p>Select topics from the library to build your presentation</p>
+              </div>
+            ) : (
+              <div className="space-y-1">
+                {selectedSlides.map((item, idx) => (
+                  <div
+                    key={item.topic.id}
+                    onClick={() => loadPreview(item.topic)}
+                    className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-colors ${
+                      previewTopic?.id === item.topic.id
+                        ? 'bg-fastr-primary/10 border border-fastr-primary/30'
+                        : 'hover:bg-gray-50 border border-transparent'
+                    }`}
+                  >
+                    <span className="w-5 h-5 bg-fastr-primary text-white text-xs rounded-full flex items-center justify-center flex-shrink-0">
+                      {idx + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm text-gray-800 truncate">{item.topic.title}</div>
+                      <div className="text-xs text-gray-400">{item.topic.slideCount} slides</div>
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleTopic(item.module, item.topic) }}
+                      className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Export buttons */}
+          <div className="p-4 border-t border-gray-100 space-y-2">
+            <button
+              onClick={() => exportSelection('pptx')}
+              disabled={selectedSlides.length === 0 || isExporting}
+              className="w-full px-4 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+            >
+              {isExporting && exportFormat === 'pptx' ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  Exporting...
+                </>
+              ) : (
+                <>
+                  <Download className="w-4 h-4" />
+                  Export PPTX
+                </>
+              )}
+            </button>
+            <button
+              onClick={() => exportSelection('pdf')}
+              disabled={selectedSlides.length === 0 || isExporting}
+              className="w-full px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+            >
+              {isExporting && exportFormat === 'pdf' ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  Exporting...
+                </>
+              ) : (
+                <>
+                  <Download className="w-4 h-4" />
+                  Export PDF
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const {
     currentWorkshopId,
@@ -295,6 +805,10 @@ function App() {
     setError,
     saveStatus,
   } = useWorkshopStore()
+
+  // App mode - starts with mode selector
+  const [appMode, setAppMode] = useState<AppMode>('select')
+  const [expandedCountries, setExpandedCountries] = useState<Set<string>>(new Set())
 
   const [leftPanelOpen, setLeftPanelOpen] = useState(false)
   const [leftPanelPinned, setLeftPanelPinned] = useState(false)
@@ -340,12 +854,12 @@ function App() {
     loadContentLibrary()
   }, [])
 
-  // Show workshop selector if no workshop is selected
+  // Show workshop selector if no workshop is selected (only in workshop mode)
   useEffect(() => {
-    if (!currentWorkshopId && workshops.length > 0) {
+    if (appMode === 'workshop' && !currentWorkshopId && workshops.length > 0) {
       setShowWorkshopSelector(true)
     }
-  }, [currentWorkshopId, workshops])
+  }, [currentWorkshopId, workshops, appMode])
 
   // Close export menu when clicking outside
   useEffect(() => {
@@ -737,10 +1251,159 @@ function App() {
     setIsBuilding(false)
   }
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // Landing Page / Mode Selector
+  // ─────────────────────────────────────────────────────────────────────────
+  if (appMode === 'select') {
+    // Group workshops by country
+    const workshopsByCountry: Record<string, typeof workshops> = {}
+    workshops.forEach(w => {
+      const country = w.country || 'Other'
+      if (!workshopsByCountry[country]) workshopsByCountry[country] = []
+      workshopsByCountry[country].push(w)
+    })
+    const countries = Object.keys(workshopsByCountry).sort()
+
+    const toggleCountry = (country: string) => {
+      const next = new Set(expandedCountries)
+      if (next.has(country)) {
+        next.delete(country)
+      } else {
+        next.add(country)
+      }
+      setExpandedCountries(next)
+    }
+
+    return (
+      <div className="h-screen bg-gray-50 flex items-center justify-center p-8">
+        <div className="w-full max-w-5xl">
+          {/* Logo/Title */}
+          <div className="text-center mb-10">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
+            <p className="text-gray-600">Build and manage workshop presentations</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Build Slide Deck */}
+            <button
+              onClick={() => setAppMode('workshop')}
+              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-md"
+            >
+              <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
+                <Presentation className="w-6 h-6 text-fastr-primary" />
+              </div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Build Slide Deck</h2>
+              <p className="text-gray-600 text-sm">
+                Build a complete slide deck for a workshop or training event
+              </p>
+            </button>
+
+            {/* Quick Export */}
+            <button
+              onClick={() => setAppMode('quick')}
+              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-md"
+            >
+              <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary/20 transition-colors">
+                <Zap className="w-6 h-6 text-fastr-secondary" />
+              </div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Quick Export</h2>
+              <p className="text-gray-600 text-sm">
+                Select slides from the library and export to PPTX or PDF
+              </p>
+            </button>
+
+            {/* Browse Library */}
+            <button
+              onClick={() => setAppMode('library')}
+              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-md"
+            >
+              <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
+                <Library className="w-6 h-6 text-amber-600" />
+              </div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Browse Library</h2>
+              <p className="text-gray-600 text-sm">
+                Explore and preview slides from the content library
+              </p>
+            </button>
+          </div>
+
+          {/* Existing Decks */}
+          {workshops.length > 0 && (
+            <div className="mt-10">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Existing Decks</h3>
+              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                {countries.map(country => (
+                  <div key={country} className="border-b border-gray-100 last:border-b-0">
+                    <button
+                      onClick={() => toggleCountry(country)}
+                      className="w-full px-4 py-3 flex items-center gap-3 hover:bg-gray-50 transition-colors text-left"
+                    >
+                      {expandedCountries.has(country) ? (
+                        <FolderOpen className="w-5 h-5 text-fastr-primary" />
+                      ) : (
+                        <Folder className="w-5 h-5 text-gray-400" />
+                      )}
+                      <span className="font-medium text-gray-800">{country}</span>
+                      <span className="text-sm text-gray-500">({workshopsByCountry[country].length})</span>
+                      <ChevronDown className={`w-4 h-4 text-gray-400 ml-auto transition-transform ${expandedCountries.has(country) ? 'rotate-180' : ''}`} />
+                    </button>
+                    {expandedCountries.has(country) && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        {workshopsByCountry[country].map(workshop => (
+                          <button
+                            key={workshop.id}
+                            onClick={() => {
+                              selectWorkshop(workshop.id)
+                              setAppMode('workshop')
+                            }}
+                            className="w-full px-4 py-2 pl-12 flex items-center gap-3 hover:bg-gray-100 transition-colors text-left"
+                          >
+                            <FileText className="w-4 h-4 text-gray-400" />
+                            <span className="text-sm text-gray-700">{workshop.name}</span>
+                            {workshop.locked && <Lock className="w-3 h-3 text-amber-500 ml-auto" />}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Library Mode
+  // ─────────────────────────────────────────────────────────────────────────
+  if (appMode === 'library') {
+    return <LibraryMode onBack={() => setAppMode('select')} />
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Quick Export Mode
+  // ─────────────────────────────────────────────────────────────────────────
+  if (appMode === 'quick') {
+    return <QuickExportMode onBack={() => setAppMode('select')} />
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Workshop Mode (default)
+  // ─────────────────────────────────────────────────────────────────────────
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       {/* Header / Toolbar */}
       <header className="bg-fastr-primary text-white px-4 py-2 flex items-center justify-between shadow-md z-20">
+        {/* Back button */}
+        <button
+          onClick={() => setAppMode('select')}
+          className="p-2 hover:bg-white/10 rounded-lg transition-colors mr-2"
+          title="Back to home"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
         <div className="flex items-center gap-3">
           <Layers className="w-6 h-6" />
           <h1 className="font-semibold text-lg">FASTR Deck Builder</h1>
@@ -1433,14 +2096,25 @@ function App() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Date
+                      Start Date
                     </label>
                     <input
-                      type="text"
-                      value={currentConfig.workshop.date || ''}
-                      onChange={(e) => updateWorkshopSettings({ date: e.target.value })}
+                      type="date"
+                      value={(currentConfig.workshop as any).start_date || ''}
+                      onChange={(e) => updateWorkshopSettings({ start_date: e.target.value } as any)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., January 15-18, 2026"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      End Date
+                    </label>
+                    <input
+                      type="date"
+                      value={(currentConfig.workshop as any).end_date || ''}
+                      onChange={(e) => updateWorkshopSettings({ end_date: e.target.value } as any)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
                     />
                   </div>
 
@@ -1615,7 +2289,7 @@ function App() {
                             placeholder={`e.g., ${dayNum === 1 ? 'Introduction & Data Extraction' : dayNum === 2 ? 'Data Quality Assessment' : 'Analysis & Communication'}`}
                           />
                         </div>
-                        <div className="w-24">
+                        <div className="w-32">
                           <input
                             type="time"
                             value={currentConfig.schedule.day_start_times?.[dayNum] || '09:00'}

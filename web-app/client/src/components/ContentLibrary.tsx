@@ -596,7 +596,7 @@ ${data.content}`
                               {template.name}
                             </div>
                             {template.preview && (
-                              <div className="text-xs text-gray-400 truncate">
+                              <div className="text-xs text-gray-400">
                                 {template.preview}
                               </div>
                             )}
