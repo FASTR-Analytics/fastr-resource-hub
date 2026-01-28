@@ -1603,11 +1603,13 @@ function App() {
   // Get store actions
   const { reorderSession, updateSession, removeSession, createWorkshop, deleteWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
 
-  // Load data on mount
+  // Load data only after authentication
   useEffect(() => {
-    loadWorkshops()
-    loadContentLibrary()
-  }, [])
+    if (isAuthenticated) {
+      loadWorkshops()
+      loadContentLibrary()
+    }
+  }, [isAuthenticated])
 
   // Show workshop selector if no workshop is selected (only in workshop mode)
   useEffect(() => {
