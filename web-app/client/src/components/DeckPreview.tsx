@@ -28,6 +28,7 @@ export function DeckPreview() {
     try {
       const response = await fetch(`/api/export/${currentWorkshopId}/html`, {
         method: 'POST',
+        credentials: 'include',
       })
 
       if (!response.ok) {

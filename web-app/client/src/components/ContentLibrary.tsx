@@ -89,7 +89,7 @@ export function ContentLibrary() {
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await fetch('/api/content/templates')
+        const response = await fetch('/api/content/templates', { credentials: 'include' })
         if (response.ok) {
           const data = await response.json()
           setTemplates(data)
@@ -282,7 +282,7 @@ We resume at **[time]**`
     } else if (template.file) {
       // Load template file content
       try {
-        const response = await fetch(`/api/content/template/${template.id}`)
+        const response = await fetch(`/api/content/template/${template.id}`, { credentials: 'include' })
         if (response.ok) {
           const data = await response.json()
           markdown = `---
@@ -302,6 +302,7 @@ ${data.content}`
       try {
         const renderResponse = await fetch('/api/content/render', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markdown })
         })
@@ -327,7 +328,7 @@ ${data.content}`
   const showFullPreview = async (topic: Topic, module: Module) => {
     setLoadingPreview(true)
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`)
+      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
 

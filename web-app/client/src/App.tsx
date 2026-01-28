@@ -330,7 +330,7 @@ paginate: true
   useEffect(() => {
     if (view === 'assets' && Object.keys(assetLibrary).length === 0) {
       setIsLoadingAssets(true)
-      fetch('/api/assets/library')
+      fetch('/api/assets/library', { credentials: 'include' })
         .then(res => res.json())
         .then(data => {
           setAssetLibrary(data.library || {})
@@ -357,6 +357,7 @@ paginate: true
     try {
       const res = await fetch('/api/assets/library', {
         method: 'POST',
+        credentials: 'include',
         body: formData,
       })
       const data = await res.json()
@@ -812,10 +813,10 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`)
+      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
-        const renderResponse = await fetch('/api/content/render', {
+        const renderResponse = await fetch('/api/content/render', { credentials: 'include',
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markdown: data.content })
@@ -1087,10 +1088,10 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`)
+      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
-        const renderResponse = await fetch('/api/content/render', {
+        const renderResponse = await fetch('/api/content/render', { credentials: 'include',
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markdown: data.content })
@@ -1115,7 +1116,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 
     try {
       const topicIds = selectedSlides.map(s => s.topic.id)
-      const response = await fetch('/api/content/export/selection', {
+      const response = await fetch('/api/content/export/selection', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topicIds, format, title: 'Quick Export' })
@@ -1677,7 +1678,7 @@ function App() {
 
     setAiGenerating(true)
     try {
-      const response = await fetch('/api/ai/generate-workshop', {
+      const response = await fetch('/api/ai/generate-workshop', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: aiPrompt }),
@@ -1985,13 +1986,13 @@ function App() {
       let downloadUrl = ''
 
       if (format === 'html') {
-        await fetch(`/api/export/${currentWorkshopId}/html`, { method: 'POST' })
+        await fetch(`/api/export/${currentWorkshopId}/html`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/html`
       } else if (format === 'pdf') {
-        await fetch(`/api/export/${currentWorkshopId}/pdf`, { method: 'POST' })
+        await fetch(`/api/export/${currentWorkshopId}/pdf`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/pdf`
       } else if (format === 'pptx') {
-        await fetch(`/api/export/${currentWorkshopId}/pptx`, { method: 'POST' })
+        await fetch(`/api/export/${currentWorkshopId}/pptx`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/pptx`
       }
 

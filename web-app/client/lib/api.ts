@@ -97,6 +97,7 @@ export interface AIToolResult {
 
 async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${url}`, {
+    credentials: 'include',  // Send session cookie with requests
     headers: {
       'Content-Type': 'application/json',
       ...options?.headers,
@@ -393,6 +394,7 @@ export const assetsAPI = {
 
     const response = await fetch(`${API_BASE}/assets/${workshopId}`, {
       method: 'POST',
+      credentials: 'include',
       body: formData,
     })
 

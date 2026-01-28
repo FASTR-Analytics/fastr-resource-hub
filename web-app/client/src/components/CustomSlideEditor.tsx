@@ -219,6 +219,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
     try {
       const response = await fetch('/api/content/render', {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ markdown: `---\nmarp: true\ntheme: fastr\n---\n\n${markdown}` }),
       })
@@ -253,6 +254,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
       // Save to API
       const response = await fetch(`/api/workshops/${workshopId}/custom-slides`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename, content: markdown }),
       })
