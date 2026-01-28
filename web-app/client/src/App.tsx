@@ -792,6 +792,9 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
 
+  // Cache for rendered previews - persists across re-renders
+  const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
+
   useEffect(() => {
     if (contentLibrary.length === 0) {
       loadContentLibrary()
@@ -810,6 +813,15 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
 
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
+
+    // Check cache first - instant if already rendered
+    const cached = previewCache.current.get(topic.id)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+
     setPreviewHtml(null)  // Clear old preview immediately
     setIsLoadingPreview(true)
     setPresenterNotes([])
@@ -824,6 +836,11 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         })
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
+          // Cache the result
+          previewCache.current.set(topic.id, {
+            html: renderData.html,
+            notes: renderData.presenterNotes || []
+          })
           setPreviewHtml(renderData.html)
           setPresenterNotes(renderData.presenterNotes || [])
         }
@@ -1032,6 +1049,9 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
 
+  // Cache for rendered previews - persists across re-renders
+  const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
+
   useEffect(() => {
     if (contentLibrary.length === 0) {
       loadContentLibrary()
@@ -1086,6 +1106,15 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
+
+    // Check cache first - instant if already rendered
+    const cached = previewCache.current.get(topic.id)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+
     setPreviewHtml(null)  // Clear old preview immediately
     setIsLoadingPreview(true)
     setPresenterNotes([])
@@ -1100,6 +1129,11 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         })
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
+          // Cache the result
+          previewCache.current.set(topic.id, {
+            html: renderData.html,
+            notes: renderData.presenterNotes || []
+          })
           setPreviewHtml(renderData.html)
           setPresenterNotes(renderData.presenterNotes || [])
         }
