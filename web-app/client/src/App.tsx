@@ -2622,26 +2622,24 @@ function App() {
         </main>
 
         {/* Right Panel - AI Assistant (slide-out) */}
-        <div
-          className={`absolute right-0 top-0 bottom-0 z-10 transition-transform duration-300 ease-in-out ${
-            rightPanelOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="h-full w-80 bg-white border-l border-gray-200 shadow-lg flex flex-col">
-            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
-              <span className="font-medium text-gray-700">AI Assistant</span>
-              <button
-                onClick={() => setRightPanelOpen(false)}
-                className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <AIAssistant />
+        {rightPanelOpen && (
+          <div className="absolute right-0 top-0 bottom-0 z-20">
+            <div className="h-full w-80 bg-white border-l border-gray-200 shadow-lg flex flex-col">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
+                <span className="font-medium text-gray-700">AI Assistant</span>
+                <button
+                  onClick={() => setRightPanelOpen(false)}
+                  className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-hidden">
+                <AIAssistant />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Workshop Selector Modal */}
