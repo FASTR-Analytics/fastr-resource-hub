@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",
+    "@libsql/client": "^0.17.0",
     "@marp-team/marp-cli": "^4.2.3",
     "@marp-team/marp-core": "^4.1.0",
     "better-sqlite3": "^11.7.0",

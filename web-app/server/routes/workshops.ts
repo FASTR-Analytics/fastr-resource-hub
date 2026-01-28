@@ -32,7 +32,7 @@ const WORKSHOPS_PATH = path.join(REPO_ROOT, 'workshops')
 // ─────────────────────────────────────────────────────────────────────────────
 
 // POST /api/workshops/import - Import workshops from file system
-router.post('/import', (_req, res) => {
+router.post('/import', async (_req, res) => {
   try {
     if (!fs.existsSync(WORKSHOPS_PATH)) {
       return res.status(404).json({ error: 'Workshops folder not found' })
@@ -50,7 +50,7 @@ router.post('/import', (_req, res) => {
       if (!fs.existsSync(yamlPath)) continue
 
       // Check if already exists
-      const existing = getWorkshop(folder)
+      const existing = await getWorkshop(folder)
       if (existing) {
         skipped.push(folder)
         continue
@@ -61,7 +61,7 @@ router.post('/import', (_req, res) => {
       const config = yaml.load(yamlContent) as WorkshopConfig
 
       // Import into database
-      createWorkshop(folder, config)
+      await createWorkshop(folder, config)
       imported.push(folder)
     }
 
@@ -82,9 +82,9 @@ router.post('/import', (_req, res) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // GET /api/workshops - List all workshops
-router.get('/', (_req, res) => {
+router.get('/', async (_req, res) => {
   try {
-    const workshops = getAllWorkshops()
+    const workshops = await getAllWorkshops()
     res.json(workshops)
   } catch (error: any) {
     console.error('Error listing workshops:', error)
@@ -93,9 +93,9 @@ router.get('/', (_req, res) => {
 })
 
 // GET /api/workshops/:id - Get workshop config
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const config = getWorkshop(req.params.id)
+    const config = await getWorkshop(req.params.id)
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
@@ -107,7 +107,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST /api/workshops - Create new workshop
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { id, config } = req.body as { id: string; config: WorkshopConfig }
 
@@ -116,12 +116,12 @@ router.post('/', (req, res) => {
     }
 
     // Check if workshop already exists
-    const existing = getWorkshop(id)
+    const existing = await getWorkshop(id)
     if (existing) {
       return res.status(409).json({ error: 'Workshop already exists' })
     }
 
-    createWorkshop(id, config)
+    await createWorkshop(id, config)
     res.status(201).json({ success: true, id })
   } catch (error: any) {
     console.error('Error creating workshop:', error)
@@ -130,17 +130,17 @@ router.post('/', (req, res) => {
 })
 
 // PUT /api/workshops/:id - Update workshop config
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const config = req.body as WorkshopConfig
 
     // Check if workshop exists
-    const existing = getWorkshop(req.params.id)
+    const existing = await getWorkshop(req.params.id)
     if (!existing) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    updateWorkshop(req.params.id, config)
+    await updateWorkshop(req.params.id, config)
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error updating workshop:', error)
@@ -149,14 +149,14 @@ router.put('/:id', (req, res) => {
 })
 
 // DELETE /api/workshops/:id - Delete workshop
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
-    const existing = getWorkshop(req.params.id)
+    const existing = await getWorkshop(req.params.id)
     if (!existing) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    const deleted = deleteWorkshop(req.params.id)
+    const deleted = await deleteWorkshop(req.params.id)
     if (!deleted) {
       return res.status(403).json({ error: 'Workshop is locked and cannot be deleted' })
     }
@@ -168,15 +168,15 @@ router.delete('/:id', (req, res) => {
 })
 
 // PATCH /api/workshops/:id/lock - Lock or unlock workshop
-router.patch('/:id/lock', (req, res) => {
+router.patch('/:id/lock', async (req, res) => {
   try {
     const { locked } = req.body
-    const existing = getWorkshop(req.params.id)
+    const existing = await getWorkshop(req.params.id)
     if (!existing) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    setWorkshopLocked(req.params.id, !!locked)
+    await setWorkshopLocked(req.params.id, !!locked)
     res.json({ success: true, locked: !!locked })
   } catch (error: any) {
     console.error('Error updating workshop lock:', error)
@@ -189,9 +189,9 @@ router.patch('/:id/lock', (req, res) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // GET /api/workshops/:id/custom-slides - List custom slides
-router.get('/:id/custom-slides', (req, res) => {
+router.get('/:id/custom-slides', async (req, res) => {
   try {
-    const slides = getCustomSlides(req.params.id)
+    const slides = await getCustomSlides(req.params.id)
     res.json(slides)
   } catch (error: any) {
     console.error('Error getting custom slides:', error)
@@ -200,7 +200,7 @@ router.get('/:id/custom-slides', (req, res) => {
 })
 
 // POST /api/workshops/:id/custom-slides - Save custom slide
-router.post('/:id/custom-slides', (req, res) => {
+router.post('/:id/custom-slides', async (req, res) => {
   try {
     const { filename, content } = req.body
 
@@ -208,7 +208,7 @@ router.post('/:id/custom-slides', (req, res) => {
       return res.status(400).json({ error: 'Missing filename or content' })
     }
 
-    saveCustomSlide(req.params.id, filename, content)
+    await saveCustomSlide(req.params.id, filename, content)
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error saving custom slide:', error)
@@ -217,9 +217,9 @@ router.post('/:id/custom-slides', (req, res) => {
 })
 
 // DELETE /api/workshops/:id/custom-slides/:filename - Delete custom slide
-router.delete('/:id/custom-slides/:filename', (req, res) => {
+router.delete('/:id/custom-slides/:filename', async (req, res) => {
   try {
-    deleteCustomSlide(req.params.id, req.params.filename)
+    await deleteCustomSlide(req.params.id, req.params.filename)
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error deleting custom slide:', error)

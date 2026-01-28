@@ -80,7 +80,7 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 router.post('/:id/markdown', async (req, res) => {
   try {
     const workshopId = req.params.id
-    const config = getWorkshop(workshopId)
+    const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
@@ -105,7 +105,7 @@ router.post('/:id/markdown', async (req, res) => {
 router.post('/:id/slides', async (req, res) => {
   try {
     const workshopId = req.params.id
-    const config = getWorkshop(workshopId)
+    const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
@@ -270,7 +270,7 @@ ${sessionMarkdown}`
 router.post('/:id/html', async (req, res) => {
   try {
     const workshopId = req.params.id
-    const config = getWorkshop(workshopId)
+    const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
@@ -313,7 +313,7 @@ ${html}
 router.post('/:id/pdf', async (req, res) => {
   try {
     const workshopId = req.params.id
-    const config = getWorkshop(workshopId)
+    const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
@@ -342,7 +342,7 @@ router.post('/:id/pdf', async (req, res) => {
 router.post('/:id/pptx', async (req, res) => {
   try {
     const workshopId = req.params.id
-    const config = getWorkshop(workshopId)
+    const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })

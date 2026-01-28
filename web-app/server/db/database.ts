@@ -1,77 +1,99 @@
-import Database, { Database as DatabaseType } from 'better-sqlite3'
+import { createClient, Client } from '@libsql/client'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import yaml from 'js-yaml'
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Database file location
-const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, '../../data/workshops.db')
+// ─────────────────────────────────────────────────────────────────────────────
+// Database Client Setup
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Ensure data directory exists
-import fs from 'fs'
-const dataDir = path.dirname(DB_PATH)
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true })
-}
+let db: Client
 
-// Initialize database
-const db: DatabaseType = new Database(DB_PATH)
-
-// Enable foreign keys and WAL mode for better performance
-db.pragma('journal_mode = WAL')
-db.pragma('foreign_keys = ON')
-
-// Create tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS workshops (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    country TEXT NOT NULL,
-    location TEXT,
-    date TEXT,
-    facilitators TEXT,
-    venue TEXT,
-    contact_email TEXT,
-    website TEXT,
-    objectives TEXT,
-    config JSON NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS custom_slides (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    workshop_id TEXT NOT NULL,
-    filename TEXT NOT NULL,
-    content TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (workshop_id) REFERENCES workshops(id) ON DELETE CASCADE,
-    UNIQUE(workshop_id, filename)
-  );
-
-  CREATE INDEX IF NOT EXISTS idx_workshops_country ON workshops(country);
-  CREATE INDEX IF NOT EXISTS idx_custom_slides_workshop ON custom_slides(workshop_id);
-`)
-
-// Add locked column if it doesn't exist (migration)
-try {
-  db.exec(`ALTER TABLE workshops ADD COLUMN locked INTEGER DEFAULT 0`)
-} catch (e: any) {
-  // Column already exists, ignore
-  if (!e.message.includes('duplicate column')) {
-    console.error('Migration error:', e.message)
+// Check if Turso is configured (production) or use local SQLite (dev)
+if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
+  // Use Turso cloud database
+  db = createClient({
+    url: process.env.TURSO_DATABASE_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN,
+  })
+  console.log('Database: Connected to Turso cloud')
+} else {
+  // Use local SQLite file for development
+  const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, '../../data/workshops.db')
+  const dataDir = path.dirname(DB_PATH)
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true })
   }
+  db = createClient({
+    url: `file:${DB_PATH}`,
+  })
+  console.log('Database: Using local SQLite at', DB_PATH)
 }
 
-console.log('Database initialized at:', DB_PATH)
+// ─────────────────────────────────────────────────────────────────────────────
+// Initialize Database Schema
+// ─────────────────────────────────────────────────────────────────────────────
+
+export async function initializeDatabase() {
+  // Create tables
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS workshops (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      country TEXT NOT NULL,
+      location TEXT,
+      date TEXT,
+      facilitators TEXT,
+      venue TEXT,
+      contact_email TEXT,
+      website TEXT,
+      objectives TEXT,
+      config TEXT NOT NULL,
+      locked INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `)
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS custom_slides (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      workshop_id TEXT NOT NULL,
+      filename TEXT NOT NULL,
+      content TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (workshop_id) REFERENCES workshops(id) ON DELETE CASCADE,
+      UNIQUE(workshop_id, filename)
+    )
+  `)
+
+  // Create indexes (ignore if exist)
+  try {
+    await db.execute('CREATE INDEX idx_workshops_country ON workshops(country)')
+  } catch (e) {
+    // Index already exists
+  }
+  try {
+    await db.execute('CREATE INDEX idx_custom_slides_workshop ON custom_slides(workshop_id)')
+  } catch (e) {
+    // Index already exists
+  }
+
+  console.log('Database schema initialized')
+
+  // Auto-import workshops from file system
+  await autoImportWorkshops()
+}
 
 export default db
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Workshop Operations
+// Types
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface WorkshopRow {
@@ -115,125 +137,154 @@ export interface WorkshopConfig {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Workshop Operations (Async)
+// ─────────────────────────────────────────────────────────────────────────────
+
 // Get all workshops (summary)
-export function getAllWorkshops() {
-  const stmt = db.prepare(`
+export async function getAllWorkshops() {
+  const result = await db.execute(`
     SELECT id, name, country, location, date,
            json_extract(config, '$.schedule.days') as days,
            locked
     FROM workshops
     ORDER BY updated_at DESC
   `)
-  return stmt.all().map((row: any) => ({
-    ...row,
+  return result.rows.map((row: any) => ({
+    id: row.id,
+    name: row.name,
+    country: row.country,
+    location: row.location,
+    date: row.date,
+    days: row.days,
     locked: row.locked === 1
   }))
 }
 
 // Get single workshop
-export function getWorkshop(id: string): WorkshopConfig | null {
-  const stmt = db.prepare('SELECT config FROM workshops WHERE id = ?')
-  const row = stmt.get(id) as { config: string } | undefined
-  if (!row) return null
-  return JSON.parse(row.config)
+export async function getWorkshop(id: string): Promise<WorkshopConfig | null> {
+  const result = await db.execute({
+    sql: 'SELECT config FROM workshops WHERE id = ?',
+    args: [id]
+  })
+  if (result.rows.length === 0) return null
+  return JSON.parse(result.rows[0].config as string)
 }
 
 // Create workshop
-export function createWorkshop(id: string, config: WorkshopConfig) {
-  const stmt = db.prepare(`
-    INSERT INTO workshops (id, name, country, location, date, facilitators, venue, contact_email, website, objectives, config)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `)
-  stmt.run(
-    id,
-    config.workshop.name,
-    config.workshop.country,
-    config.workshop.location,
-    config.workshop.date,
-    config.workshop.facilitators,
-    config.workshop.venue || null,
-    config.workshop.contact_email || null,
-    config.workshop.website || null,
-    config.workshop.objectives || null,
-    JSON.stringify(config)
-  )
+export async function createWorkshop(id: string, config: WorkshopConfig) {
+  await db.execute({
+    sql: `
+      INSERT INTO workshops (id, name, country, location, date, facilitators, venue, contact_email, website, objectives, config)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `,
+    args: [
+      id,
+      config.workshop.name,
+      config.workshop.country,
+      config.workshop.location,
+      config.workshop.date,
+      config.workshop.facilitators,
+      config.workshop.venue || null,
+      config.workshop.contact_email || null,
+      config.workshop.website || null,
+      config.workshop.objectives || null,
+      JSON.stringify(config)
+    ]
+  })
 }
 
 // Update workshop
-export function updateWorkshop(id: string, config: WorkshopConfig) {
-  const stmt = db.prepare(`
-    UPDATE workshops
-    SET name = ?, country = ?, location = ?, date = ?, facilitators = ?,
-        venue = ?, contact_email = ?, website = ?, objectives = ?,
-        config = ?, updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
-  `)
-  stmt.run(
-    config.workshop.name,
-    config.workshop.country,
-    config.workshop.location,
-    config.workshop.date,
-    config.workshop.facilitators,
-    config.workshop.venue || null,
-    config.workshop.contact_email || null,
-    config.workshop.website || null,
-    config.workshop.objectives || null,
-    JSON.stringify(config),
-    id
-  )
+export async function updateWorkshop(id: string, config: WorkshopConfig) {
+  await db.execute({
+    sql: `
+      UPDATE workshops
+      SET name = ?, country = ?, location = ?, date = ?, facilitators = ?,
+          venue = ?, contact_email = ?, website = ?, objectives = ?,
+          config = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?
+    `,
+    args: [
+      config.workshop.name,
+      config.workshop.country,
+      config.workshop.location,
+      config.workshop.date,
+      config.workshop.facilitators,
+      config.workshop.venue || null,
+      config.workshop.contact_email || null,
+      config.workshop.website || null,
+      config.workshop.objectives || null,
+      JSON.stringify(config),
+      id
+    ]
+  })
 }
 
 // Delete workshop (only if not locked)
-export function deleteWorkshop(id: string): boolean {
+export async function deleteWorkshop(id: string): Promise<boolean> {
   // Check if locked
-  const workshop = db.prepare('SELECT locked FROM workshops WHERE id = ?').get(id) as { locked: number } | undefined
-  if (workshop?.locked) {
+  const result = await db.execute({
+    sql: 'SELECT locked FROM workshops WHERE id = ?',
+    args: [id]
+  })
+  if (result.rows.length > 0 && result.rows[0].locked === 1) {
     return false // Cannot delete locked workshop
   }
-  const stmt = db.prepare('DELETE FROM workshops WHERE id = ?')
-  stmt.run(id)
+  await db.execute({
+    sql: 'DELETE FROM workshops WHERE id = ?',
+    args: [id]
+  })
   return true
 }
 
 // Lock/unlock workshop
-export function setWorkshopLocked(id: string, locked: boolean) {
-  const stmt = db.prepare('UPDATE workshops SET locked = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?')
-  stmt.run(locked ? 1 : 0, id)
+export async function setWorkshopLocked(id: string, locked: boolean) {
+  await db.execute({
+    sql: 'UPDATE workshops SET locked = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+    args: [locked ? 1 : 0, id]
+  })
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Custom Slides Operations
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function getCustomSlides(workshopId: string) {
-  const stmt = db.prepare(`
-    SELECT filename, content FROM custom_slides WHERE workshop_id = ?
-  `)
-  return stmt.all(workshopId)
+export async function getCustomSlides(workshopId: string) {
+  const result = await db.execute({
+    sql: 'SELECT filename, content FROM custom_slides WHERE workshop_id = ?',
+    args: [workshopId]
+  })
+  return result.rows.map((row: any) => ({
+    filename: row.filename,
+    content: row.content
+  }))
 }
 
-export function saveCustomSlide(workshopId: string, filename: string, content: string) {
-  const stmt = db.prepare(`
-    INSERT INTO custom_slides (workshop_id, filename, content)
-    VALUES (?, ?, ?)
-    ON CONFLICT(workshop_id, filename) DO UPDATE SET
-      content = excluded.content,
-      updated_at = CURRENT_TIMESTAMP
-  `)
-  stmt.run(workshopId, filename, content)
+export async function saveCustomSlide(workshopId: string, filename: string, content: string) {
+  await db.execute({
+    sql: `
+      INSERT INTO custom_slides (workshop_id, filename, content)
+      VALUES (?, ?, ?)
+      ON CONFLICT(workshop_id, filename) DO UPDATE SET
+        content = excluded.content,
+        updated_at = CURRENT_TIMESTAMP
+    `,
+    args: [workshopId, filename, content]
+  })
 }
 
-export function deleteCustomSlide(workshopId: string, filename: string) {
-  const stmt = db.prepare('DELETE FROM custom_slides WHERE workshop_id = ? AND filename = ?')
-  stmt.run(workshopId, filename)
+export async function deleteCustomSlide(workshopId: string, filename: string) {
+  await db.execute({
+    sql: 'DELETE FROM custom_slides WHERE workshop_id = ? AND filename = ?',
+    args: [workshopId, filename]
+  })
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Auto-import workshops from file system on startup
 // ─────────────────────────────────────────────────────────────────────────────
 
-function autoImportWorkshops() {
-  // db file is at server/db/database.ts (dev) or dist/server/db/database.js (prod)
+async function autoImportWorkshops() {
   const REPO_ROOT = process.env.NODE_ENV === 'production'
     ? path.resolve(__dirname, '../../../..')
     : path.resolve(__dirname, '../../..')
@@ -263,7 +314,7 @@ function autoImportWorkshops() {
     if (!fs.existsSync(yamlPath)) continue
 
     // Check if already exists
-    const existing = getWorkshop(folder)
+    const existing = await getWorkshop(folder)
     if (existing) {
       skipped++
       continue
@@ -273,7 +324,7 @@ function autoImportWorkshops() {
     try {
       const yamlContent = fs.readFileSync(yamlPath, 'utf-8')
       const config = yaml.load(yamlContent) as WorkshopConfig
-      createWorkshop(folder, config)
+      await createWorkshop(folder, config)
       imported++
       console.log(`  Imported: ${folder}`)
     } catch (err: any) {
@@ -283,6 +334,3 @@ function autoImportWorkshops() {
 
   console.log(`Auto-import complete: ${imported} imported, ${skipped} already exist`)
 }
-
-// Run auto-import on module load
-autoImportWorkshops()

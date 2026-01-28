@@ -14,6 +14,7 @@ import assetsRouter from './routes/assets.js'
 
 // Services
 import { initializeMarp } from './services/marpService.js'
+import { initializeDatabase } from './db/database.js'
 
 // Load environment variables
 dotenv.config()
@@ -158,6 +159,7 @@ app.use('/fastr-theme.css', (_req, res) => {
 
 // Initialize Marp service (reused across all render requests)
 await initializeMarp()
+await initializeDatabase()
 
 // API Routes
 app.use('/api/workshops', workshopsRouter)
