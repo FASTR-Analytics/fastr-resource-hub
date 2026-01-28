@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import fs from 'fs'
 import path from 'path'
+import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { getWorkshop, WorkshopConfig } from '../db/database.js'
 import { buildMarkdown } from '../services/deckBuilder.js'
@@ -8,6 +9,51 @@ import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 
 const router = Router()
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Session render cache for deck preview
+// ─────────────────────────────────────────────────────────────────────────────
+interface SessionCacheEntry {
+  slides: Array<{
+    id: string
+    sessionId: string
+    dayNumber: number
+    sessionIndex: number
+    slideIndex: number
+    sessionName: string
+    sessionType: string
+    moduleId: string | null
+    html: string
+  }>
+  timestamp: number
+}
+
+const sessionRenderCache = new Map<string, SessionCacheEntry>()
+const SESSION_CACHE_MAX_SIZE = 200
+const SESSION_CACHE_TTL = 30 * 60 * 1000  // 30 minutes
+
+function getSessionCacheKey(sessionMarkdown: string): string {
+  return crypto.createHash('md5').update(sessionMarkdown).digest('hex')
+}
+
+function cleanupSessionCache() {
+  const now = Date.now()
+  for (const [key, entry] of sessionRenderCache.entries()) {
+    if (now - entry.timestamp > SESSION_CACHE_TTL) {
+      sessionRenderCache.delete(key)
+    }
+  }
+  if (sessionRenderCache.size > SESSION_CACHE_MAX_SIZE) {
+    const entries = Array.from(sessionRenderCache.entries())
+      .sort((a, b) => a[1].timestamp - b[1].timestamp)
+    const toRemove = entries.slice(0, entries.length - SESSION_CACHE_MAX_SIZE)
+    for (const [key] of toRemove) {
+      sessionRenderCache.delete(key)
+    }
+  }
+}
+
+setInterval(cleanupSessionCache, 5 * 60 * 1000)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -54,7 +100,7 @@ router.post('/:id/markdown', async (req, res) => {
   }
 })
 
-// POST /api/export/:id/slides - Get slides with session metadata
+// POST /api/export/:id/slides - Get slides with session metadata (with caching)
 router.post('/:id/slides', async (req, res) => {
   try {
     const workshopId = req.params.id
@@ -64,7 +110,7 @@ router.post('/:id/slides', async (req, res) => {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    // Import dependencies
+    // Import dependencies - only load Marp once
     const { Marp } = await import('@marp-team/marp-core')
     const marp = new Marp({ html: true })
 
@@ -79,6 +125,8 @@ router.post('/:id/slides', async (req, res) => {
     // Build slides for each session with metadata
     const slidesData: any[] = []
     const numDays = config.schedule.days || 1
+    let cacheHits = 0
+    let cacheMisses = 0
 
     // Track cumulative session number across all days
     let sessionNumber = 0
@@ -103,6 +151,31 @@ router.post('/:id/slides', async (req, res) => {
 
         if (!sessionMarkdown) continue
 
+        // Check cache for this session's rendered slides
+        const cacheKey = getSessionCacheKey(sessionMarkdown + fastrThemeCSS)
+        const cached = sessionRenderCache.get(cacheKey)
+
+        if (cached) {
+          // Use cached slides, but update metadata (sessionId, dayNumber, etc. may have changed)
+          cacheHits++
+          for (const cachedSlide of cached.slides) {
+            slidesData.push({
+              ...cachedSlide,
+              id: `${sessionId}-slide${cachedSlide.slideIndex}`,
+              sessionId: sessionId,
+              dayNumber: day,
+              sessionIndex: sessionIdx,
+              sessionName: session.session,
+              sessionType: session.type || (session.module ? 'module' : 'custom'),
+              moduleId: session.module || null,
+            })
+          }
+          cached.timestamp = Date.now()  // Keep it fresh
+          continue
+        }
+
+        cacheMisses++
+
         // Render to HTML
         const fullMarkdown = `---
 marp: true
@@ -115,10 +188,10 @@ ${sessionMarkdown}`
         const { html, css } = marp.render(fullMarkdown)
 
         // Marp renders slides as SVG elements - extract each one
-        // Structure: <div class="marpit"><svg>...</svg><svg>...</svg>...</div>
         const svgRegex = /<svg[^>]*data-marpit-svg[^>]*>[\s\S]*?<\/svg>/g
         let match
         let slideIdx = 0
+        const sessionSlides: any[] = []
 
         while ((match = svgRegex.exec(html)) !== null) {
           // Fix relative image paths to absolute URLs
@@ -129,9 +202,6 @@ ${sessionMarkdown}`
           svgHtml = svgHtml.replace(/&quot;\.\.\/resources\//g, '&quot;/resources/')
 
           // Create standalone HTML for this slide
-          // Include both Marp CSS and FASTR theme CSS
-          // Add base tag so relative URLs resolve correctly in srcDoc iframe
-          // Base URL removed - using relative path instead
           const slideHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +233,7 @@ ${sessionMarkdown}`
 </body>
 </html>`
 
-          slidesData.push({
+          const slideData = {
             id: `${sessionId}-slide${slideIdx}`,
             sessionId: sessionId,
             dayNumber: day,
@@ -173,17 +243,30 @@ ${sessionMarkdown}`
             sessionType: session.type || (session.module ? 'module' : 'custom'),
             moduleId: session.module || null,
             html: slideHtml,
-          })
+          }
 
+          slidesData.push(slideData)
+          sessionSlides.push({ slideIndex: slideIdx, html: slideHtml })
           slideIdx++
+        }
+
+        // Cache this session's rendered slides
+        if (sessionSlides.length > 0) {
+          sessionRenderCache.set(cacheKey, {
+            slides: sessionSlides,
+            timestamp: Date.now()
+          })
         }
       }
     }
+
+    console.log(`Slides build: ${cacheHits} cache hits, ${cacheMisses} cache misses`)
 
     res.json({
       success: true,
       slides: slidesData,
       totalSlides: slidesData.length,
+      cacheStats: { hits: cacheHits, misses: cacheMisses }
     })
   } catch (error: any) {
     console.error('Error building slides:', error)
