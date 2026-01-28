@@ -16,20 +16,29 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
  */
 export async function generatePDF(mdPath: string, pdfPath: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    // Find marp executable
+    // Find marp executable - check web-app's node_modules first
+    const WEB_APP_ROOT = process.env.NODE_ENV === 'production'
+      ? path.resolve(__dirname, '../../..')  // dist/server/services -> web-app
+      : path.resolve(__dirname, '../..')      // server/services -> web-app
+
     const marpPaths = [
+      path.join(WEB_APP_ROOT, 'node_modules/.bin/marp'),
+      path.join(REPO_ROOT, 'node_modules/.bin/marp'),
       '/opt/homebrew/bin/marp',
       '/usr/local/bin/marp',
       'marp',
-      path.join(REPO_ROOT, 'node_modules/.bin/marp'),
     ]
 
-    let marpPath = 'marp'
+    let marpPath = ''
     for (const p of marpPaths) {
-      if (p === 'marp' || fs.existsSync(p)) {
+      if (fs.existsSync(p)) {
         marpPath = p
         break
       }
+    }
+
+    if (!marpPath) {
+      throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
     // Theme path
@@ -97,18 +106,28 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
  */
 export async function generateHTML(mdPath: string, htmlPath: string): Promise<void> {
   return new Promise((resolve, reject) => {
+    // Find marp executable - check web-app's node_modules first
+    const WEB_APP_ROOT = process.env.NODE_ENV === 'production'
+      ? path.resolve(__dirname, '../../..')
+      : path.resolve(__dirname, '../..')
+
     const marpPaths = [
+      path.join(WEB_APP_ROOT, 'node_modules/.bin/marp'),
+      path.join(REPO_ROOT, 'node_modules/.bin/marp'),
       '/opt/homebrew/bin/marp',
       '/usr/local/bin/marp',
-      'marp',
     ]
 
-    let marpPath = 'marp'
+    let marpPath = ''
     for (const p of marpPaths) {
-      if (p === 'marp' || fs.existsSync(p)) {
+      if (fs.existsSync(p)) {
         marpPath = p
         break
       }
+    }
+
+    if (!marpPath) {
+      throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
     const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
