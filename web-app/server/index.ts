@@ -4,8 +4,6 @@ import session from 'express-session'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
-import Database from 'better-sqlite3'
-import SqliteStoreFactory from 'better-sqlite3-session-store'
 
 // Routes
 import workshopsRouter from './routes/workshops.js'
@@ -16,9 +14,6 @@ import assetsRouter from './routes/assets.js'
 
 // Load environment variables
 dotenv.config()
-
-// Create SQLite session store
-const SqliteStore = SqliteStoreFactory(session)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -34,14 +29,37 @@ if (process.env.NODE_ENV === 'production') {
 // Team password from environment variable
 const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
 
-// Initialize SQLite database for sessions
-// In production, use a persistent path; in dev, use local file
-const SESSION_DB_PATH = process.env.NODE_ENV === 'production'
-  ? '/tmp/sessions.db'  // Render has /tmp as writable
-  : path.join(__dirname, '../sessions.db')
+// Initialize session store (try SQLite, fall back to MemoryStore)
+async function createSessionStore(): Promise<session.Store | undefined> {
+  try {
+    const Database = (await import('better-sqlite3')).default
+    const SqliteStoreFactory = (await import('better-sqlite3-session-store')).default
+    const SqliteStore = SqliteStoreFactory(session)
 
-console.log('Session database path:', SESSION_DB_PATH)
-const sessionsDb = new Database(SESSION_DB_PATH)
+    const SESSION_DB_PATH = process.env.NODE_ENV === 'production'
+      ? '/tmp/sessions.db'
+      : path.join(__dirname, '../sessions.db')
+
+    console.log('Session database path:', SESSION_DB_PATH)
+    const sessionsDb = new Database(SESSION_DB_PATH)
+
+    console.log('✓ Using SQLite session store')
+    return new SqliteStore({
+      client: sessionsDb,
+      expired: {
+        clear: true,
+        intervalMs: 15 * 60 * 1000
+      }
+    })
+  } catch (err) {
+    console.warn('⚠ SQLite session store unavailable, using MemoryStore:', (err as Error).message)
+    console.warn('  Sessions will be lost on server restart')
+    return undefined
+  }
+}
+
+// Async initialization
+const sessionStore = await createSessionStore()
 
 // Middleware
 app.use(cors({
@@ -50,15 +68,9 @@ app.use(cors({
 }))
 app.use(express.json({ limit: '10mb' }))
 
-// Session middleware with SQLite store (persists across restarts)
+// Session middleware
 app.use(session({
-  store: new SqliteStore({
-    client: sessionsDb,
-    expired: {
-      clear: true,
-      intervalMs: 15 * 60 * 1000  // Clear expired sessions every 15 minutes
-    }
-  }),
+  store: sessionStore,
   secret: process.env.SESSION_SECRET || 'fastr-deck-builder-secret-key-change-in-production',
   resave: false,
   saveUninitialized: false,
