@@ -379,7 +379,8 @@ router.post('/render', async (req, res) => {
     markdown = markdown.replace(/\(resources\//g, '(/resources/')
 
     // Import Marp dynamically
-    const Marp = (await import('@marp-team/marp-core')).default
+    const MarpModule = await import('@marp-team/marp-core')
+    const Marp = MarpModule.default || MarpModule.Marp || MarpModule
     const marp = new Marp({ html: true })
 
     // Load FASTR theme if available

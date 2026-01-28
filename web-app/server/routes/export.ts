@@ -65,7 +65,8 @@ router.post('/:id/slides', async (req, res) => {
     }
 
     // Import dependencies
-    const Marp = (await import('@marp-team/marp-core')).default
+    const MarpModule = await import('@marp-team/marp-core')
+    const Marp = MarpModule.default || MarpModule.Marp || MarpModule
     const marp = new Marp({ html: true })
 
     // Load FASTR theme
@@ -205,7 +206,8 @@ router.post('/:id/html', async (req, res) => {
     const markdown = await buildMarkdown(workshopId, config)
 
     // Convert to HTML using Marp
-    const Marp = (await import('@marp-team/marp-core')).default
+    const MarpModule = await import('@marp-team/marp-core')
+    const Marp = MarpModule.default || MarpModule.Marp || MarpModule
     const marp = new Marp({ html: true })
 
     // Load FASTR theme if it exists
