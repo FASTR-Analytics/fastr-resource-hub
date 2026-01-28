@@ -4,6 +4,8 @@ import session from 'express-session'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
+import Database from 'better-sqlite3'
+import SqliteStoreFactory from 'better-sqlite3-session-store'
 
 // Routes
 import workshopsRouter from './routes/workshops.js'
@@ -14,6 +16,9 @@ import assetsRouter from './routes/assets.js'
 
 // Load environment variables
 dotenv.config()
+
+// Create SQLite session store
+const SqliteStore = SqliteStoreFactory(session)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -29,6 +34,15 @@ if (process.env.NODE_ENV === 'production') {
 // Team password from environment variable
 const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
 
+// Initialize SQLite database for sessions
+// In production, use a persistent path; in dev, use local file
+const SESSION_DB_PATH = process.env.NODE_ENV === 'production'
+  ? '/tmp/sessions.db'  // Render has /tmp as writable
+  : path.join(__dirname, '../sessions.db')
+
+console.log('Session database path:', SESSION_DB_PATH)
+const sessionsDb = new Database(SESSION_DB_PATH)
+
 // Middleware
 app.use(cors({
   origin: true,
@@ -36,8 +50,15 @@ app.use(cors({
 }))
 app.use(express.json({ limit: '10mb' }))
 
-// Session middleware
+// Session middleware with SQLite store (persists across restarts)
 app.use(session({
+  store: new SqliteStore({
+    client: sessionsDb,
+    expired: {
+      clear: true,
+      intervalMs: 15 * 60 * 1000  // Clear expired sessions every 15 minutes
+    }
+  }),
   secret: process.env.SESSION_SECRET || 'fastr-deck-builder-secret-key-change-in-production',
   resave: false,
   saveUninitialized: false,
