@@ -95,22 +95,39 @@ export interface AIToolResult {
 // Helper Functions
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_BASE}${url}`, {
-    credentials: 'include',  // Send session cookie with requests
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-    ...options,
-  })
+async function fetchJSON<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<T> {
+  const { timeout = 60000, ...fetchOptions } = options || {}
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Unknown error' }))
-    throw new Error(error.error || `HTTP ${response.status}`)
+  // Create abort controller for timeout
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+  try {
+    const response = await fetch(`${API_BASE}${url}`, {
+      credentials: 'include',  // Send session cookie with requests
+      headers: {
+        'Content-Type': 'application/json',
+        ...fetchOptions?.headers,
+      },
+      ...fetchOptions,
+      signal: controller.signal,
+    })
+
+    clearTimeout(timeoutId)
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Unknown error' }))
+      throw new Error(error.error || `HTTP ${response.status}`)
+    }
+
+    return response.json()
+  } catch (error: any) {
+    clearTimeout(timeoutId)
+    if (error.name === 'AbortError') {
+      throw new Error('Request timed out - please try again')
+    }
+    throw error
   }
-
-  return response.json()
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -251,6 +268,7 @@ export const aiAPI = {
   }> {
     return fetchJSON('/ai/chat', {
       method: 'POST',
+      timeout: 120000,  // 2 minute timeout for AI responses
       body: JSON.stringify({
         messages,
         workshopId,
