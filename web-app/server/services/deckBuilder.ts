@@ -13,17 +13,18 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
 const CORE_CONTENT_PATH = path.join(REPO_ROOT, 'core_content')
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
 
-// Module folder names
+// Module folder names - must match actual folder names in core_content/
 const MODULE_FOLDERS: Record<string, string> = {
   m0: 'm0_introduction',
-  m1: 'm1_questions_indicators',
+  m1: 'm1_identify_questions_indicators',
   m2: 'm2_data_extraction',
-  m3: 'm3_platform',
+  m3: 'm3_fastr_analytics_platform',
   m4: 'm4_data_quality_assessment',
   m5: 'm5_data_quality_adjustment',
   m6: 'm6_data_analysis',
   m7: 'm7_results_communication',
   m8: 'm8_survey_hfa',
+  m9: 'm9_workshop_activities',
 }
 
 interface Session {
@@ -158,6 +159,7 @@ const MODULE_NAMES: Record<string, string> = {
   m6: 'Data Analysis',
   m7: 'Results Communication',
   m8: 'Survey & HFA',
+  m9: 'Workshop Activities',
 }
 
 /**

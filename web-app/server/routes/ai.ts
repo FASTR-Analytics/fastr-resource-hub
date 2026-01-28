@@ -62,6 +62,18 @@ const MODULE_DETAILS: Record<number, { name: string; description: string; topics
     topics: ['Analytical thinking', 'Data visualization principles', 'Using data for decisions'],
     duration: '90-120 min',
   },
+  8: {
+    name: 'Survey & HFA',
+    description: 'Integration of survey data and health facility assessments with routine data.',
+    topics: ['Survey data integration', 'Health facility assessments', 'Triangulating data sources'],
+    duration: '60-90 min',
+  },
+  9: {
+    name: 'Workshop Activities',
+    description: 'Hands-on activities and exercises for workshop participants.',
+    topics: ['Group exercises', 'Data interpretation activities', 'Country-specific work'],
+    duration: '60-120 min',
+  },
 }
 
 // AI Tools for modifying the deck
@@ -73,7 +85,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
       type: 'object' as const,
       properties: {
         day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
-        module_number: { type: 'number', description: 'Module number (0-7)' },
+        module_number: { type: 'number', description: 'Module number (0-9)' },
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" (complete content, 60-180min) or "condensed" (key points, 30-60min). MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
       },
