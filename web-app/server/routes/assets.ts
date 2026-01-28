@@ -9,14 +9,19 @@ const router = Router()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Different path depth in dev vs prod due to TypeScript compilation
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
+
 // Workshops directory (where assets are stored per workshop)
-const WORKSHOPS_DIR = path.resolve(__dirname, '../../../workshops')
+const WORKSHOPS_DIR = path.join(REPO_ROOT, 'workshops')
 
 // Resources directory (built-in FASTR assets)
-const RESOURCES_DIR = path.resolve(__dirname, '../../../resources')
+const RESOURCES_DIR = path.join(REPO_ROOT, 'resources')
 
 // Shared custom assets directory
-const SHARED_ASSETS_DIR = path.resolve(__dirname, '../../../resources/custom')
+const SHARED_ASSETS_DIR = path.join(REPO_ROOT, 'resources/custom')
 
 // Allowed image types
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp']
@@ -61,7 +66,256 @@ function sanitizeFilename(filename: string): string {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Routes
+// Library Assets (Built-in FASTR resources + user uploads)
+// NOTE: These routes MUST come before /:workshopId routes to avoid matching
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface LibraryAsset {
+  filename: string
+  label: string
+  category: string
+  path: string
+  url: string
+  isCustom: boolean
+}
+
+// Curated selection of diagrams (most useful for custom slides)
+const CURATED_DIAGRAMS: Array<{ file: string; label: string }> = [
+  { file: 'analytical_pipeline.svg', label: 'FASTR Analytical Pipeline' },
+  { file: 'HMIS_data_flow.svg', label: 'HMIS Data Flow' },
+  { file: 'measures_data_quality.svg', label: 'Data Quality Measures' },
+  { file: 'coverage_equation.svg', label: 'Coverage Equation' },
+  { file: 'completeness_illustration.svg', label: 'Completeness Illustration' },
+  { file: 'consistency_illustration.svg', label: 'Consistency Illustration' },
+  { file: 'outlier_impact.svg', label: 'Outlier Impact' },
+  { file: 'denominator_cascade.svg', label: 'Denominator Cascade' },
+  { file: 'coverage_projection.svg', label: 'Coverage Projection' },
+  { file: 'platform_capabilities.svg', label: 'Platform Capabilities' },
+  { file: 'rapid_cycle_analytics.png', label: 'Rapid Cycle Analytics' },
+]
+
+// Curated selection of icons
+const CURATED_ICONS: Array<{ file: string; label: string }> = [
+  { file: 'hands_on.png', label: 'Hands-on Activity' },
+  { file: 'demo.png', label: 'Demo' },
+  { file: 'lecture.png', label: 'Lecture' },
+  { file: 'coffee.png', label: 'Coffee Break' },
+  { file: 'lunch.png', label: 'Lunch' },
+  { file: 'debrief.png', label: 'Debrief' },
+  { file: 'thought.png', label: 'Discussion' },
+  { file: 'globe.png', label: 'Global/World' },
+  { file: 'communication.png', label: 'Communication' },
+  { file: 'raise-hand.png', label: 'Questions' },
+]
+
+// Curated selection of logos
+const CURATED_LOGOS: Array<{ file: string; label: string }> = [
+  { file: 'FASTR_Primary_01_FullName.png', label: 'FASTR Logo (Primary)' },
+  { file: 'FASTR_White_FullName.png', label: 'FASTR Logo (White)' },
+  { file: 'FASTR_White_Horiz.png', label: 'FASTR Logo (Horizontal)' },
+  { file: 'GFF_Logo_Horizontal_White_En.png', label: 'GFF Logo (White)' },
+]
+
+// Helper to get curated assets
+function getCuratedAssets(
+  dir: string,
+  category: string,
+  urlPrefix: string,
+  curatedList: Array<{ file: string; label: string }>
+): LibraryAsset[] {
+  const assets: LibraryAsset[] = []
+
+  for (const item of curatedList) {
+    const filePath = path.join(dir, item.file)
+    if (fs.existsSync(filePath)) {
+      assets.push({
+        filename: item.file,
+        label: item.label,
+        category,
+        path: `${urlPrefix}/${item.file}`,
+        url: `/resources/${urlPrefix}/${item.file}`,
+        isCustom: false,
+      })
+    }
+  }
+
+  return assets
+}
+
+// Helper to scan a directory for images (used for custom uploads)
+function scanDirectory(dir: string, category: string, urlPrefix: string, isCustom: boolean): LibraryAsset[] {
+  if (!fs.existsSync(dir)) return []
+
+  const assets: LibraryAsset[] = []
+  const files = fs.readdirSync(dir)
+
+  for (const file of files) {
+    const filePath = path.join(dir, file)
+    const stat = fs.statSync(filePath)
+
+    if (stat.isFile()) {
+      const ext = path.extname(file).toLowerCase()
+      if (['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(ext)) {
+        assets.push({
+          filename: file,
+          label: file.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '),
+          category,
+          path: `${urlPrefix}/${file}`,
+          url: `/resources/${urlPrefix}/${file}`,
+          isCustom,
+        })
+      }
+    }
+  }
+
+  return assets
+}
+
+// GET /api/assets/library - List all library assets (built-in + custom)
+router.get('/library', (_req, res) => {
+  try {
+    const library: Record<string, LibraryAsset[]> = {}
+
+    // Curated diagrams
+    const diagrams = getCuratedAssets(
+      path.join(RESOURCES_DIR, 'diagrams'),
+      'Diagrams',
+      'diagrams',
+      CURATED_DIAGRAMS
+    )
+    if (diagrams.length > 0) {
+      library['diagrams'] = diagrams
+    }
+
+    // Curated icons
+    const icons = getCuratedAssets(
+      path.join(RESOURCES_DIR, 'icons'),
+      'Icons',
+      'icons',
+      CURATED_ICONS
+    )
+    if (icons.length > 0) {
+      library['icons'] = icons
+    }
+
+    // Curated logos
+    const logos = getCuratedAssets(
+      path.join(RESOURCES_DIR, 'logos'),
+      'Logos',
+      'logos',
+      CURATED_LOGOS
+    )
+    if (logos.length > 0) {
+      library['logos'] = logos
+    }
+
+    // Custom user uploads (shared)
+    if (fs.existsSync(SHARED_ASSETS_DIR)) {
+      const customAssets = scanDirectory(SHARED_ASSETS_DIR, 'Your Uploads', 'custom', true)
+      if (customAssets.length > 0) {
+        library['custom'] = customAssets
+      }
+    }
+
+    res.json({ library })
+  } catch (error: any) {
+    console.error('Error listing library assets:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// GET /api/assets/library/:category/:filename - Serve a library asset
+router.get('/library/:category/:filename', (req, res) => {
+  try {
+    const { category, filename } = req.params
+
+    let filePath: string
+    if (category === 'custom') {
+      filePath = path.join(SHARED_ASSETS_DIR, filename)
+    } else {
+      filePath = path.join(RESOURCES_DIR, category, filename)
+    }
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Asset not found' })
+    }
+
+    res.sendFile(filePath)
+  } catch (error: any) {
+    console.error('Error serving library asset:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// POST /api/assets/library - Upload a custom asset to the shared library
+router.post('/library', upload.single('file'), (req, res) => {
+  try {
+    const file = req.file
+
+    if (!file) {
+      return res.status(400).json({ error: 'No file uploaded' })
+    }
+
+    // Ensure custom assets directory exists
+    if (!fs.existsSync(SHARED_ASSETS_DIR)) {
+      fs.mkdirSync(SHARED_ASSETS_DIR, { recursive: true })
+    }
+
+    // Sanitize filename
+    let filename = sanitizeFilename(file.originalname)
+
+    // Handle duplicate filenames
+    let finalFilename = filename
+    let counter = 1
+    while (fs.existsSync(path.join(SHARED_ASSETS_DIR, finalFilename))) {
+      const ext = path.extname(filename)
+      const base = path.basename(filename, ext)
+      finalFilename = `${base}_${counter}${ext}`
+      counter++
+    }
+
+    // Write file
+    const filePath = path.join(SHARED_ASSETS_DIR, finalFilename)
+    fs.writeFileSync(filePath, file.buffer)
+
+    res.json({
+      success: true,
+      asset: {
+        filename: finalFilename,
+        category: 'Custom',
+        path: `custom/${finalFilename}`,
+        url: `/resources/custom/${finalFilename}`,
+        isCustom: true,
+      },
+    })
+  } catch (error: any) {
+    console.error('Error uploading library asset:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// DELETE /api/assets/library/:filename - Delete a custom asset from the shared library
+router.delete('/library/:filename', (req, res) => {
+  try {
+    const { filename } = req.params
+    const filePath = path.join(SHARED_ASSETS_DIR, filename)
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Asset not found' })
+    }
+
+    fs.unlinkSync(filePath)
+
+    res.json({ success: true })
+  } catch (error: any) {
+    console.error('Error deleting library asset:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Workshop-Specific Asset Routes
+// NOTE: These routes use :workshopId param and MUST come after /library routes
 // ─────────────────────────────────────────────────────────────────────────────
 
 // GET /api/assets/:workshopId - List all assets for a workshop
@@ -178,171 +432,6 @@ router.delete('/:workshopId/:filename', (req, res) => {
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error deleting asset:', error)
-    res.status(500).json({ error: error.message })
-  }
-})
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Library Assets (Built-in FASTR resources + user uploads)
-// ─────────────────────────────────────────────────────────────────────────────
-
-interface LibraryAsset {
-  filename: string
-  category: string
-  path: string
-  url: string
-  isCustom: boolean
-}
-
-// Helper to scan a directory for images
-function scanDirectory(dir: string, category: string, urlPrefix: string, isCustom: boolean): LibraryAsset[] {
-  if (!fs.existsSync(dir)) return []
-
-  const assets: LibraryAsset[] = []
-  const files = fs.readdirSync(dir)
-
-  for (const file of files) {
-    const filePath = path.join(dir, file)
-    const stat = fs.statSync(filePath)
-
-    if (stat.isFile()) {
-      const ext = path.extname(file).toLowerCase()
-      if (['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(ext)) {
-        assets.push({
-          filename: file,
-          category,
-          path: `${urlPrefix}/${file}`,
-          url: `/resources/${urlPrefix}/${file}`,
-          isCustom,
-        })
-      }
-    }
-  }
-
-  return assets
-}
-
-// GET /api/assets/library - List all library assets (built-in + custom)
-router.get('/library', (_req, res) => {
-  try {
-    const library: Record<string, LibraryAsset[]> = {}
-
-    // Built-in categories
-    const categories = [
-      { name: 'icons', label: 'Icons', dir: path.join(RESOURCES_DIR, 'icons') },
-      { name: 'diagrams', label: 'Diagrams', dir: path.join(RESOURCES_DIR, 'diagrams') },
-      { name: 'logos', label: 'Logos', dir: path.join(RESOURCES_DIR, 'logos') },
-      { name: 'backgrounds', label: 'Backgrounds', dir: path.join(RESOURCES_DIR, 'backgrounds') },
-      { name: 'default_outputs', label: 'Example Outputs', dir: path.join(RESOURCES_DIR, 'default_outputs') },
-    ]
-
-    for (const cat of categories) {
-      const assets = scanDirectory(cat.dir, cat.label, cat.name, false)
-      if (assets.length > 0) {
-        library[cat.name] = assets
-      }
-    }
-
-    // Custom user uploads (shared)
-    if (fs.existsSync(SHARED_ASSETS_DIR)) {
-      const customAssets = scanDirectory(SHARED_ASSETS_DIR, 'Custom', 'custom', true)
-      if (customAssets.length > 0) {
-        library['custom'] = customAssets
-      }
-    }
-
-    res.json({ library })
-  } catch (error: any) {
-    console.error('Error listing library assets:', error)
-    res.status(500).json({ error: error.message })
-  }
-})
-
-// GET /api/assets/library/:category/:filename - Serve a library asset
-router.get('/library/:category/:filename', (req, res) => {
-  try {
-    const { category, filename } = req.params
-
-    let filePath: string
-    if (category === 'custom') {
-      filePath = path.join(SHARED_ASSETS_DIR, filename)
-    } else {
-      filePath = path.join(RESOURCES_DIR, category, filename)
-    }
-
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: 'Asset not found' })
-    }
-
-    res.sendFile(filePath)
-  } catch (error: any) {
-    console.error('Error serving library asset:', error)
-    res.status(500).json({ error: error.message })
-  }
-})
-
-// POST /api/assets/library - Upload a custom asset to the shared library
-router.post('/library', upload.single('file'), (req, res) => {
-  try {
-    const file = req.file
-
-    if (!file) {
-      return res.status(400).json({ error: 'No file uploaded' })
-    }
-
-    // Ensure custom assets directory exists
-    if (!fs.existsSync(SHARED_ASSETS_DIR)) {
-      fs.mkdirSync(SHARED_ASSETS_DIR, { recursive: true })
-    }
-
-    // Sanitize filename
-    let filename = sanitizeFilename(file.originalname)
-
-    // Handle duplicate filenames
-    let finalFilename = filename
-    let counter = 1
-    while (fs.existsSync(path.join(SHARED_ASSETS_DIR, finalFilename))) {
-      const ext = path.extname(filename)
-      const base = path.basename(filename, ext)
-      finalFilename = `${base}_${counter}${ext}`
-      counter++
-    }
-
-    // Write file
-    const filePath = path.join(SHARED_ASSETS_DIR, finalFilename)
-    fs.writeFileSync(filePath, file.buffer)
-
-    res.json({
-      success: true,
-      asset: {
-        filename: finalFilename,
-        category: 'Custom',
-        path: `custom/${finalFilename}`,
-        url: `/resources/custom/${finalFilename}`,
-        isCustom: true,
-      },
-    })
-  } catch (error: any) {
-    console.error('Error uploading library asset:', error)
-    res.status(500).json({ error: error.message })
-  }
-})
-
-// DELETE /api/assets/library/:filename - Delete a custom asset from the shared library
-router.delete('/library/:filename', (req, res) => {
-  try {
-    const { filename } = req.params
-    const filePath = path.join(SHARED_ASSETS_DIR, filename)
-
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: 'Asset not found' })
-    }
-
-    fs.unlinkSync(filePath)
-
-    res.json({ success: true })
-  } catch (error: any) {
-    console.error('Error deleting library asset:', error)
     res.status(500).json({ error: error.message })
   }
 })

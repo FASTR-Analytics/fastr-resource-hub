@@ -20,7 +20,11 @@ const router = Router()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const REPO_ROOT = path.resolve(__dirname, '../../..')
+// In dev: __dirname is web-app/server/routes, go up 3 levels
+// In prod: __dirname is web-app/dist/server/routes, go up 4 levels
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
 const WORKSHOPS_PATH = path.join(REPO_ROOT, 'workshops')
 
 // ─────────────────────────────────────────────────────────────────────────────

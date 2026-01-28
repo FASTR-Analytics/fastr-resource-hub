@@ -32,6 +32,8 @@ import {
   Folder,
   FolderOpen,
   Minus,
+  LogOut,
+  KeyRound,
 } from 'lucide-react'
 import {
   DndContext,
@@ -658,24 +660,29 @@ paginate: true
                     </button>
 
                     {expandedCategory === category && (
-                      <div className="px-3 pb-3 grid grid-cols-4 gap-2">
+                      <div className="px-3 pb-3 grid grid-cols-3 gap-3">
                         {assets.map((asset: any) => (
                           <button
                             key={asset.filename}
                             onClick={() => insertImage(asset)}
-                            className="group relative aspect-square rounded-lg border border-gray-200 overflow-hidden hover:border-fastr-primary hover:shadow-md transition-all bg-white"
-                            title={asset.filename}
+                            className="group flex flex-col rounded-lg border border-gray-200 overflow-hidden hover:border-fastr-primary hover:shadow-md transition-all bg-white"
+                            title={asset.label || asset.filename}
                           >
-                            <img
-                              src={`/resources/${asset.path}`}
-                              alt={asset.filename}
-                              className="w-full h-full object-contain p-1"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/resources/logos/FASTR_White_Horiz.png'
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                              <span className="text-white text-xs font-medium px-2 text-center truncate">Insert</span>
+                            <div className="relative aspect-square bg-gray-50">
+                              <img
+                                src={`/resources/${asset.path}`}
+                                alt={asset.label || asset.filename}
+                                className="w-full h-full object-contain p-2"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = '/resources/logos/FASTR_White_Horiz.png'
+                                }}
+                              />
+                              <div className="absolute inset-0 bg-fastr-primary/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                <span className="text-white text-xs font-medium">+ Insert</span>
+                              </div>
+                            </div>
+                            <div className="px-2 py-1.5 text-xs text-gray-600 truncate text-center border-t border-gray-100">
+                              {asset.label || asset.filename.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ')}
                             </div>
                           </button>
                         ))}
@@ -1494,6 +1501,64 @@ function App() {
     saveStatus,
   } = useWorkshopStore()
 
+  // Authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+  const [loginPassword, setLoginPassword] = useState('')
+  const [loginError, setLoginError] = useState('')
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+
+  // Check auth status on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/status', { credentials: 'include' })
+        const data = await res.json()
+        setIsAuthenticated(data.authenticated)
+      } catch {
+        setIsAuthenticated(false)
+      } finally {
+        setIsCheckingAuth(false)
+      }
+    }
+    checkAuth()
+  }, [])
+
+  // Handle login
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoggingIn(true)
+    setLoginError('')
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ password: loginPassword }),
+      })
+      if (res.ok) {
+        setIsAuthenticated(true)
+        setLoginPassword('')
+      } else {
+        setLoginError('Invalid password')
+      }
+    } catch {
+      setLoginError('Failed to connect')
+    } finally {
+      setIsLoggingIn(false)
+    }
+  }
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+    } catch {
+      // Ignore
+    }
+    setIsAuthenticated(false)
+  }
+
   // App mode - starts with mode selector
   const [appMode, setAppMode] = useState<AppMode>('select')
   const [expandedCountries, setExpandedCountries] = useState<Set<string>>(new Set())
@@ -1941,6 +2006,77 @@ function App() {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  // Auth Loading State
+  // ─────────────────────────────────────────────────────────────────────────
+  if (isCheckingAuth) {
+    return (
+      <div className="h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 text-fastr-primary animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Login Page
+  // ─────────────────────────────────────────────────────────────────────────
+  if (!isAuthenticated) {
+    return (
+      <div className="h-screen bg-gray-50 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-fastr-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <KeyRound className="w-8 h-8 text-fastr-primary" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
+            <p className="text-gray-600">Enter the team password to continue</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                Team Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors"
+                placeholder="Enter password"
+                autoFocus
+              />
+            </div>
+
+            {loginError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                {loginError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoggingIn || !loginPassword}
+              className="w-full py-3 bg-fastr-primary text-white rounded-lg font-medium hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            >
+              {isLoggingIn ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
   // Landing Page / Mode Selector
   // ─────────────────────────────────────────────────────────────────────────
   if (appMode === 'select') {
@@ -1964,18 +2100,30 @@ function App() {
     }
 
     return (
-      <div className="h-screen bg-gray-50 flex items-center justify-center p-8">
-        <div className="w-full max-w-5xl">
-          {/* Logo/Title */}
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
-            <p className="text-gray-600">Build and manage workshop presentations</p>
-          </div>
+      <div className="h-screen bg-gray-50 flex flex-col">
+        {/* Top bar with logout */}
+        <div className="flex justify-end p-4">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            Sign Out
+          </button>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Build Slide Deck */}
-            <button
-              onClick={() => setAppMode('workshop')}
+        <div className="flex-1 flex items-center justify-center p-8">
+          <div className="w-full max-w-5xl">
+            {/* Logo/Title */}
+            <div className="text-center mb-10">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
+              <p className="text-gray-600">Build and manage workshop presentations</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Build Slide Deck */}
+              <button
+                onClick={() => setAppMode('workshop')}
               className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-md"
             >
               <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
@@ -2059,6 +2207,7 @@ function App() {
               </div>
             </div>
           )}
+          </div>
         </div>
       </div>
     )

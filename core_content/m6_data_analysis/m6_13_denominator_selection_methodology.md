@@ -6,17 +6,9 @@ paginate: true
 
 ## Denominator selection methodology
 
-**Goal:** Select the denominator method that produces coverage estimates closest to survey benchmarks (DHS/MICS).
+The FASTR platform selects the denominator method that produces coverage estimates **closest to survey benchmarks** (DHS/MICS). It calculates coverage using all available denominator methods, compares each result to survey coverage estimates, and selects the denominator with the **smallest error** compared to the survey. This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
 
-**How it works:**
-
-1. Calculate coverage using all available denominator methods
-2. Compare each result to survey coverage estimates
-3. Select the denominator with the smallest error compared to the survey
-
-This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
-
-**Key point:** Each indicator (ANC1, ANC4, deliveries, etc.) may use a different denominator method. However, for a given indicator, the same method is used across all timepoints and all subnational areas for consistency. Selection is performed at the national level, then applied uniformly to all geographic levels.
+Each indicator (ANC1, ANC4, deliveries, etc.) may use a **different denominator method**. However, for a given indicator, the **same method is used across all timepoints and all subnational areas** for consistency. Selection is performed at the **national level**, then applied uniformly to all geographic levels.
 
 <!--
 PRESENTER NOTES:

@@ -6,7 +6,10 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const REPO_ROOT = path.resolve(__dirname, '../../..')
+// Different path depth in dev vs prod due to TypeScript compilation
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
 
 /**
  * Generate PDF from markdown using Marp CLI

@@ -1836,15 +1836,13 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_9 -->
-## Demographic cascade
-
-Sequential demographic adjustments transform one target population estimate into another. Starting from pregnancies, demographic factors are applied to derive subsequent denominators:
+## Expected relationships which help with estimating denominators
 
 ![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
 
 <!--
 PRESENTER NOTES:
-- Demographic cascade shows how populations transform through life stages
+Demographic cascade shows how populations transform through life stages
 - Start with pregnancies → apply pregnancy loss → deliveries
 - Deliveries → adjust for twins → births
 - Births → subtract stillbirths → live births
@@ -1852,15 +1850,24 @@ PRESENTER NOTES:
 - DPT-eligible → subtract post-neonatal deaths → Measles-eligible
 - Each step uses country-specific mortality rates
 - This logic works in both directions (forward and backward)
+
+Key formulas:
+- Preg = Del/(1-PLR)
+- Del = Preg*(1-PLR)
+- TB = Del/(1-0.5*TWR)
+- Del = TB*(1-0.5*TWR)
+- TB = LB/(1-SBR)
+- LB = TB*(1-SBR)
+- Preg = (LB*(1-0.5*TWR))/((1-SBR)*(1-PLR))
+
+At provincial level, we use all default values!
 -->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
-## Denominator cascade: Illustration
+## Estimating denominators from ANC-1
 
-<p style="font-size: 0.85em;">Starting from ANC1 service counts, demographic adjustment factors are applied sequentially to derive denominators for other services:</p>
-
-![Denominator cascade example h:380](resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example](resources/diagrams/denominator_cascade_example.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1901,17 +1908,9 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_13 -->
 ## Denominator selection methodology
 
-**Goal:** Select the denominator method that produces coverage estimates closest to survey benchmarks (DHS/MICS).
+The FASTR platform selects the denominator method that produces coverage estimates **closest to survey benchmarks** (DHS/MICS). It calculates coverage using all available denominator methods, compares each result to survey coverage estimates, and selects the denominator with the **smallest error** compared to the survey. This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
 
-**How it works:**
-
-1. Calculate coverage using all available denominator methods
-2. Compare each result to survey coverage estimates
-3. Select the denominator with the smallest error compared to the survey
-
-This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
-
-**Key point:** Each indicator (ANC1, ANC4, deliveries, etc.) may use a different denominator method. However, for a given indicator, the same method is used across all timepoints and all subnational areas for consistency. Selection is performed at the national level, then applied uniformly to all geographic levels.
+Each indicator (ANC1, ANC4, deliveries, etc.) may use a **different denominator method**. However, for a given indicator, the **same method is used across all timepoints and all subnational areas** for consistency. Selection is performed at the **national level**, then applied uniformly to all geographic levels.
 
 <!--
 PRESENTER NOTES:

@@ -1,117 +1,182 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 650">
   <defs>
     <style>
-      /* FASTR Theme Colors */
-      .box-anc { fill: #21568C; stroke: #0C716B; stroke-width: 2; rx: 8; }
-      .box-coverage { fill: #7f8c8d; stroke: #555; stroke-width: 2; rx: 8; }
-      .box-pregnancies { fill: #CAE6E9; stroke: #0C716B; stroke-width: 2; rx: 8; }
-      .box-deliveries { fill: #1A90C0; stroke: #21568C; stroke-width: 2; rx: 8; }
-      .box-births { fill: #1F9A9C; stroke: #0C716B; stroke-width: 2; rx: 8; }
-      .box-livebirths { fill: #D8A822; stroke: #09544F; stroke-width: 2; rx: 8; }
-      .box-dpt { fill: #BD5091; stroke: #7A1F6E; stroke-width: 2; rx: 8; }
-      .box-measles { fill: #D0CB17; stroke: #09544F; stroke-width: 2; rx: 8; }
+      /* FASTR Brand Colors */
+      .box-anc { fill: #1F9A9C; stroke: #09544F; stroke-width: 2; }
+      .box-main { fill: #D8A822; stroke: #09544F; stroke-width: 2; }
+      .box-adjustment { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
+      .box-formula { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
 
-      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #09544F; text-anchor: middle; }
-      .text-light { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
-      .text-number { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
-      .text-number-light { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
-      .text-small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #ffffff; text-anchor: middle; }
-      .arrow { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
-      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 8px; fill: #21568C; text-anchor: middle; font-style: italic; }
-      .calc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #c0392b; text-anchor: middle; font-weight: 600; }
-      .source { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 8px; fill: #7f8c8d; text-anchor: middle; font-style: italic; }
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
-      .note { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .text-white { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-formula { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #ffffff; text-anchor: middle; }
+
+      .arrow-forward { stroke: #0C716B; stroke-width: 3; fill: none; marker-end: url(#arrowhead-teal); }
+      .arrow-down { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead-teal-small); }
+
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 28px; font-weight: 700; fill: #0C716B; }
+      .default-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .default-value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #09544F; }
+      .footnote { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #666; }
     </style>
-    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <marker id="arrowhead-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0C716B"/>
+    </marker>
+    <marker id="arrowhead-teal-small" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#0C716B"/>
     </marker>
   </defs>
 
-  <!-- Title -->
-  <text class="title" x="400" y="20" text-anchor="middle">Example: Calculating denominators from ANC1 visits</text>
+  <!-- Background -->
+  <rect x="0" y="0" width="1400" height="650" fill="#ffffff"/>
 
-  <!-- Row 1: ANC1 ÷ Coverage -> Pregnancies -> Deliveries -> Births -->
 
-  <!-- Starting inputs -->
-  <rect class="box-anc" x="40" y="40" width="80" height="45"/>
-  <text class="text-light" x="80" y="56">ANC1 Visits</text>
-  <text class="text-small" x="80" y="68">(from DHIS2)</text>
-  <text class="text-number-light" x="80" y="82">10,000</text>
 
-  <text class="calc" x="130" y="63">÷</text>
+  <!-- Big arrow - outline only -->
+  <polygon points="40,80 1280,80 1280,70 1330,95 1280,120 1280,110 40,110" fill="none" stroke="#0C716B" stroke-width="3"/>
 
-  <rect class="box-coverage" x="140" y="40" width="80" height="45"/>
-  <text class="text-light" x="180" y="56">ANC1 Cov.</text>
-  <text class="text-small" x="180" y="68">(from DHS)</text>
-  <text class="text-number-light" x="180" y="82">87%</text>
+  <!-- ==================== ROW 1: Main flow boxes ==================== -->
 
-  <!-- Arrow to Pregnancies -->
-  <line class="arrow" x1="220" y1="63" x2="270" y2="63"/>
-  <text class="calc" x="245" y="55">= 11,494</text>
+  <!-- Box 0: #ANC-1 (green, center=100) -->
+  <rect class="box-anc" x="45" y="140" width="110" height="70" rx="6"/>
+  <text class="text-white" x="100" y="180">#ANC-1</text>
 
-  <!-- Box 1: Pregnancies -->
-  <rect class="box-pregnancies" x="280" y="40" width="100" height="45"/>
-  <text class="text-dark" x="330" y="56">Pregnancies</text>
-  <text class="text-number" x="330" y="75">11,494</text>
+  <!-- Forward arrow 0 -->
+  <line class="arrow-forward" x1="155" y1="175" x2="225" y2="175"/>
 
-  <!-- Arrow 1 -->
-  <line class="arrow" x1="380" y1="63" x2="430" y2="63"/>
-  <text class="label" x="405" y="53">× 0.97</text>
-  <text class="calc" x="405" y="90">-345</text>
+  <!-- Box 1: Pregnancies (center=290) -->
+  <rect class="box-main" x="235" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="290" y="180">#Pregnancies</text>
 
-  <!-- Box 2: Deliveries -->
-  <rect class="box-deliveries" x="440" y="40" width="100" height="45"/>
-  <text class="text-light" x="490" y="56">Deliveries</text>
-  <text class="text-number-light" x="490" y="75">11,149</text>
+  <!-- Forward arrow 1 -->
+  <line class="arrow-forward" x1="345" y1="175" x2="415" y2="175"/>
 
-  <!-- Arrow 2 -->
-  <line class="arrow" x1="540" y1="63" x2="590" y2="63"/>
-  <text class="label" x="565" y="53">× 1.015</text>
-  <text class="calc" x="565" y="90">+167</text>
+  <!-- Box 2: Deliveries (center=480) -->
+  <rect class="box-main" x="425" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="480" y="180">#Deliveries</text>
 
-  <!-- Box 3: Births -->
-  <rect class="box-births" x="600" y="40" width="90" height="45"/>
-  <text class="text-light" x="645" y="56">Births</text>
-  <text class="text-number-light" x="645" y="75">11,316</text>
+  <!-- Forward arrow 2 -->
+  <line class="arrow-forward" x1="535" y1="175" x2="605" y2="175"/>
 
-  <!-- Arrow loop to row 2 -->
-  <path class="arrow" d="M 690 63 L 740 63 L 740 140 L 640 140"/>
-  <text class="label" x="720" y="100">× 0.98</text>
-  <text class="calc" x="720" y="115">-226</text>
+  <!-- Box 3: Births (center=670) -->
+  <rect class="box-main" x="615" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="670" y="180">#Births</text>
 
-  <!-- Row 2: Live Births -> DPT-eligible -->
+  <!-- Forward arrow 3 -->
+  <line class="arrow-forward" x1="725" y1="175" x2="795" y2="175"/>
 
-  <!-- Box 4: Live Births -->
-  <rect class="box-livebirths" x="520" y="117" width="110" height="45"/>
-  <text class="text-dark" x="575" y="133">Live Births</text>
-  <text class="text-number" x="575" y="152">11,090</text>
+  <!-- Box 4: Live births (center=860) -->
+  <rect class="box-main" x="805" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="860" y="180"># Live births</text>
 
-  <!-- Arrow 4 -->
-  <line class="arrow" x1="520" y1="140" x2="420" y2="140"/>
-  <text class="label" x="470" y="130">× 0.97</text>
-  <text class="calc" x="470" y="170">-333</text>
+  <!-- Forward arrow 4 -->
+  <line class="arrow-forward" x1="915" y1="175" x2="985" y2="175"/>
 
-  <!-- Box 5: DPT-eligible Infants -->
-  <rect class="box-dpt" x="210" y="117" width="200" height="45"/>
-  <text class="text-light" x="310" y="133">DPT-eligible Infants</text>
-  <text class="text-number-light" x="310" y="152">10,757</text>
+  <!-- Box 5: Infants eligible for DPT1 (center=1060) -->
+  <rect class="box-main" x="995" y="140" width="130" height="70" rx="6"/>
+  <text class="text-dark" x="1060" y="168"># Infants</text>
+  <text class="text-dark" x="1060" y="185">eligible for</text>
+  <text class="text-dark" x="1060" y="202">DPT1</text>
 
-  <!-- Arrow to row 3 -->
-  <path class="arrow" d="M 210 140 L 60 140 L 60 220 L 200 220"/>
-  <text class="label" x="115" y="180">× 0.98</text>
-  <text class="calc" x="115" y="195">-215</text>
+  <!-- ==================== ROW 2: Adjustment boxes ==================== -->
 
-  <!-- Box 6: Measles-eligible Infants -->
-  <rect class="box-measles" x="210" y="197" width="220" height="45"/>
-  <text class="text-dark" x="320" y="213">Measles-eligible Infants</text>
-  <text class="text-number" x="320" y="232">10,542</text>
+  <!-- Down arrow under #ANC-1 -->
+  <line class="arrow-down" x1="100" y1="210" x2="100" y2="245"/>
 
-  <!-- Summary box -->
-  <rect x="40" y="270" width="720" height="115" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
-  <text class="title" x="55" y="292">Calculation summary:</text>
-  <text class="note" x="55" y="312">Step 1: Pregnancies = ANC1 visits ÷ ANC1 coverage = 10,000 ÷ 0.87 = 11,494</text>
-  <text class="note" x="55" y="330">Step 2: Apply demographic factors through the cascade:</text>
-  <text class="note" x="70" y="348">Pregnancies (11,494) → Deliveries (11,149) → Births (11,316) → Live Births (11,090) → DPT-eligible (10,757) → Measles-eligible (10,542)</text>
-  <text class="note" x="55" y="372">Rates: Pregnancy loss = 3%, Twin rate = 1.5%, Stillbirth = 2%, NMR = 3%, PNMR = 2%</text>
+  <!-- Adjustment box 0: Divide by ANC-1 coverage (center=100) -->
+  <rect class="box-adjustment" x="35" y="255" width="130" height="70" rx="6"/>
+  <text class="text-white" x="100" y="275">Divide #ANC-1</text>
+  <text class="text-white" x="100" y="291">by ANC-1</text>
+  <text class="text-white" x="100" y="307">coverage</text>
+  <text class="text-white" x="100" y="320" style="font-size:11px;font-style:italic">(from survey)</text>
+
+  <!-- Down arrow between Pregnancies and Deliveries -->
+  <line class="arrow-down" x1="385" y1="210" x2="385" y2="245"/>
+
+  <!-- Adjustment box 1: Remove pregnancy losses (center=385) -->
+  <rect class="box-adjustment" x="320" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="385" y="278">Remove</text>
+  <text class="text-white" x="385" y="294">#pregnancy</text>
+  <text class="text-white" x="385" y="310">losses</text>
+
+  <!-- Down arrow between Deliveries and Births -->
+  <line class="arrow-down" x1="575" y1="210" x2="575" y2="245"/>
+
+  <!-- Adjustment box 2: Add twins (center=575) -->
+  <rect class="box-adjustment" x="510" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="575" y="285">Add #twins</text>
+
+  <!-- Down arrow between Births and Live births -->
+  <line class="arrow-down" x1="765" y1="210" x2="765" y2="245"/>
+
+  <!-- Adjustment box 3: Remove Stillbirths (center=765) -->
+  <rect class="box-adjustment" x="700" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="765" y="282">Remove</text>
+  <text class="text-white" x="765" y="298">#Stillbirths</text>
+
+  <!-- Down arrow between Live births and DPT1 -->
+  <line class="arrow-down" x1="955" y1="210" x2="955" y2="245"/>
+
+  <!-- Adjustment box 4: Remove neonatal (center=955) -->
+  <rect class="box-adjustment" x="890" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="955" y="282">Remove</text>
+  <text class="text-white" x="955" y="298">#neonatal</text>
+
+  <!-- ==================== ROW 3: Formula boxes (under corresponding main boxes) ==================== -->
+
+  <!-- Formula box 0: Pregnancies formula (center=290, under Pregnancies) -->
+  <rect class="box-formula" x="200" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="290" y="395">#Pregnancies</text>
+  <text class="text-formula" x="290" y="411">=#ANC-1/ANC-1</text>
+  <text class="text-formula" x="290" y="427">coverage</text>
+
+  <!-- Formula box 1: Deliveries formula (center=480, under Deliveries) -->
+  <rect class="box-formula" x="390" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="480" y="392">#Deliveries =</text>
+  <text class="text-formula" x="480" y="408">#Pregnancies* (1-</text>
+  <text class="text-formula" x="480" y="424">Pregnancy loss rate)</text>
+
+  <!-- Formula box 2: Births formula (center=670, under Births) -->
+  <rect class="box-formula" x="580" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="670" y="392">#Births =</text>
+  <text class="text-formula" x="670" y="408">#Deliveries/(1-</text>
+  <text class="text-formula" x="670" y="424">(twin rate/2))</text>
+
+  <!-- Formula box 3: Live births formula (center=860, under Live births) -->
+  <rect class="box-formula" x="770" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="860" y="392">#Live births =</text>
+  <text class="text-formula" x="860" y="408">#Births* (1-</text>
+  <text class="text-formula" x="860" y="424">Stillbirth rate)</text>
+
+  <!-- Formula box 4: DPT1 formula (center=1060, under DPT1) -->
+  <rect class="box-formula" x="965" y="370" width="190" height="70" rx="6"/>
+  <text class="text-formula" x="1060" y="392">#Infants eligible</text>
+  <text class="text-formula" x="1060" y="408">for DPT1 = #Live</text>
+  <text class="text-formula" x="1060" y="424">births * (1- NMR)</text>
+
+  <!-- ==================== Default values section ==================== -->
+
+  <!-- Background for defaults -->
+  <rect x="40" y="470" width="1120" height="70" fill="#CAE6E9" rx="6"/>
+
+  <!-- Default values label -->
+  <text class="default-label" x="60" y="500">Default</text>
+  <text class="default-label" x="60" y="520">values</text>
+
+  <!-- Separator line -->
+  <line x1="130" y1="480" x2="130" y2="530" stroke="#0C716B" stroke-width="2"/>
+
+  <!-- Default values (aligned with formula boxes above) -->
+  <text class="default-value" x="290" y="505" text-anchor="middle">Pregnancy loss</text>
+  <text class="default-value" x="290" y="525" text-anchor="middle">rate = 0.03</text>
+
+  <text class="default-value" x="480" y="510" text-anchor="middle">Twin rate = 0.015</text>
+
+  <text class="default-value" x="670" y="505" text-anchor="middle">Stillbirth rate =</text>
+  <text class="default-value" x="670" y="525" text-anchor="middle">0.02</text>
+
+  <text class="default-value" x="860" y="510" text-anchor="middle">NMR = 0.03</text>
+
+  <text class="default-value" x="1060" y="510" text-anchor="middle">PNMR=0.02</text>
+
 </svg>

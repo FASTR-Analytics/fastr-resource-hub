@@ -6,8 +6,10 @@ import { WorkshopConfig } from '../db/database.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Paths
-const REPO_ROOT = path.resolve(__dirname, '../../..')
+// Paths - different in dev vs prod due to TypeScript compilation
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
 const CORE_CONTENT_PATH = path.join(REPO_ROOT, 'core_content')
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
 

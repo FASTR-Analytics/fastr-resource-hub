@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import session from 'express-session'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
@@ -20,13 +21,86 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const PORT = process.env.PORT || 3001
 
+// Team password from environment variable
+const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
+
 // Middleware
-app.use(cors())
+app.use(cors({
+  origin: true,
+  credentials: true
+}))
 app.use(express.json({ limit: '10mb' }))
 
+// Session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fastr-deck-builder-secret-key-change-in-production',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    sameSite: 'lax'
+  }
+}))
+
+// Extend session type
+declare module 'express-session' {
+  interface SessionData {
+    authenticated: boolean
+  }
+}
+
+// Auth routes (must be before auth middleware)
+app.post('/api/auth/login', (req, res) => {
+  const { password } = req.body
+  if (password === TEAM_PASSWORD) {
+    req.session.authenticated = true
+    res.json({ success: true })
+  } else {
+    res.status(401).json({ error: 'Invalid password' })
+  }
+})
+
+app.post('/api/auth/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).json({ error: 'Failed to logout' })
+    } else {
+      res.json({ success: true })
+    }
+  })
+})
+
+app.get('/api/auth/status', (req, res) => {
+  res.json({ authenticated: req.session.authenticated === true })
+})
+
+// Auth middleware - protect all API routes except auth
+const authMiddleware = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  // Allow auth routes
+  if (req.path.startsWith('/api/auth')) {
+    return next()
+  }
+  // Allow health check
+  if (req.path === '/api/health') {
+    return next()
+  }
+  // Check authentication for all other API routes
+  if (req.path.startsWith('/api/') && req.session.authenticated !== true) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+  next()
+}
+
+app.use(authMiddleware)
+
 // Serve static resources (images, diagrams, etc.)
-// __dirname is web-app/server, so go up 2 levels to reach repo root
-const REPO_ROOT = path.resolve(__dirname, '../..')
+// In dev: __dirname is web-app/server, go up 2 levels
+// In prod: __dirname is web-app/dist/server, go up 3 levels
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../..')
+  : path.resolve(__dirname, '../..')
 console.log('REPO_ROOT:', REPO_ROOT)
 console.log('Resources path:', path.join(REPO_ROOT, 'resources'))
 app.use('/resources', express.static(path.join(REPO_ROOT, 'resources')))
@@ -48,7 +122,8 @@ app.get('/api/health', (_req, res) => {
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../client/dist')
+  // In production, server runs from dist/server, client build is in dist/client
+  const clientPath = path.join(__dirname, '../client')
   app.use(express.static(clientPath))
 
   // SPA fallback

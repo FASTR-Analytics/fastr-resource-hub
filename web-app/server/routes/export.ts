@@ -12,6 +12,11 @@ const router = Router()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Repo root path (different in dev vs prod due to TypeScript compilation)
+const REPO_ROOT = process.env.NODE_ENV === 'production'
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
+
 // Output directory for generated files
 const OUTPUT_DIR = path.resolve(__dirname, '../../outputs')
 
@@ -64,7 +69,6 @@ router.post('/:id/slides', async (req, res) => {
     const marp = new Marp({ html: true })
 
     // Load FASTR theme
-    const REPO_ROOT = path.resolve(__dirname, '../../..')
     const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
     let fastrThemeCSS = ''
     if (fs.existsSync(themePath)) {
@@ -205,7 +209,6 @@ router.post('/:id/html', async (req, res) => {
     const marp = new Marp({ html: true })
 
     // Load FASTR theme if it exists
-    const REPO_ROOT = path.resolve(__dirname, '../../..')
     const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
     if (fs.existsSync(themePath)) {
       const themeCSS = fs.readFileSync(themePath, 'utf-8')
