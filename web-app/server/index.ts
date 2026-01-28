@@ -12,6 +12,9 @@ import aiRouter from './routes/ai.js'
 import exportRouter from './routes/export.js'
 import assetsRouter from './routes/assets.js'
 
+// Services
+import { initializeMarp } from './services/marpService.js'
+
 // Load environment variables
 dotenv.config()
 
@@ -152,6 +155,9 @@ app.use('/resources', express.static(path.join(REPO_ROOT, 'resources')))
 app.use('/fastr-theme.css', (_req, res) => {
   res.sendFile(path.join(REPO_ROOT, 'fastr-theme.css'))
 })
+
+// Initialize Marp service (reused across all render requests)
+await initializeMarp()
 
 // API Routes
 app.use('/api/workshops', workshopsRouter)

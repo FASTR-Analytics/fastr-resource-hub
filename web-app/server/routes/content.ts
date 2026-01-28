@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
+import { renderMarkdown, getThemeCSS } from '../services/marpService.js'
 
 const router = Router()
 
@@ -47,6 +48,17 @@ function cleanupCache() {
 // Clean cache periodically
 setInterval(cleanupCache, 5 * 60 * 1000)  // Every 5 minutes
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Content library metadata cache (avoids scanning files on every request)
+// ─────────────────────────────────────────────────────────────────────────────
+interface ModulesCache {
+  data: any[]
+  timestamp: number
+}
+
+let modulesCache: ModulesCache | null = null
+const MODULES_CACHE_TTL = 5 * 60 * 1000  // 5 minutes - content rarely changes
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -84,9 +96,14 @@ const MODULE_NAMES: Record<number, string> = {
 // Content Library
 // ─────────────────────────────────────────────────────────────────────────────
 
-// GET /api/content/modules - Get all modules and topics
+// GET /api/content/modules - Get all modules and topics (with caching)
 router.get('/modules', (_req, res) => {
   try {
+    // Return cached data if still valid
+    if (modulesCache && Date.now() - modulesCache.timestamp < MODULES_CACHE_TTL) {
+      return res.json(modulesCache.data)
+    }
+
     const modules: any[] = []
 
     if (!fs.existsSync(CORE_CONTENT_PATH)) {
@@ -184,7 +201,15 @@ router.get('/modules', (_req, res) => {
       }
     }
 
-    res.json(modules.sort((a, b) => a.number - b.number))
+    const sortedModules = modules.sort((a, b) => a.number - b.number)
+
+    // Cache the result
+    modulesCache = {
+      data: sortedModules,
+      timestamp: Date.now()
+    }
+
+    res.json(sortedModules)
   } catch (error: any) {
     console.error('Error getting modules:', error)
     res.status(500).json({ error: error.message })
@@ -427,18 +452,8 @@ router.post('/render', async (req, res) => {
     markdown = markdown.replace(/\(\.\.\/resources\//g, '(/resources/')
     markdown = markdown.replace(/\(resources\//g, '(/resources/')
 
-    // Import Marp dynamically - use named export
-    const { Marp } = await import('@marp-team/marp-core')
-    const marp = new Marp({ html: true })
-
-    // Load FASTR theme if available
-    const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
-    if (fs.existsSync(themePath)) {
-      const themeCSS = fs.readFileSync(themePath, 'utf-8')
-      marp.themeSet.add(themeCSS)
-    }
-
-    const { html, css } = marp.render(markdown)
+    // Use shared Marp service (initialized at startup, ~100ms faster per request)
+    const { html, css } = renderMarkdown(markdown)
 
     // Create full HTML document
     const fullHtml = `<!DOCTYPE html>
@@ -559,17 +574,8 @@ router.post('/export/module/:id', async (req, res) => {
         downloadUrl: `/api/content/export/download/${outputBaseName}.md`,
       })
     } else if (format === 'html') {
-      // Render to HTML
-      const { Marp } = await import('@marp-team/marp-core')
-      const marp = new Marp({ html: true })
-
-      const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
-      if (fs.existsSync(themePath)) {
-        const themeCSS = fs.readFileSync(themePath, 'utf-8')
-        marp.themeSet.add(themeCSS)
-      }
-
-      const { html, css } = marp.render(markdown)
+      // Render to HTML using shared Marp service
+      const { html, css } = renderMarkdown(markdown)
       const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -672,16 +678,8 @@ router.post('/export/selection', async (req, res) => {
         topicsExported: topicContents.length,
       })
     } else if (format === 'html') {
-      const { Marp } = await import('@marp-team/marp-core')
-      const marp = new Marp({ html: true })
-
-      const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
-      if (fs.existsSync(themePath)) {
-        const themeCSS = fs.readFileSync(themePath, 'utf-8')
-        marp.themeSet.add(themeCSS)
-      }
-
-      const { html, css } = marp.render(markdown)
+      // Render to HTML using shared Marp service
+      const { html, css } = renderMarkdown(markdown)
       const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
