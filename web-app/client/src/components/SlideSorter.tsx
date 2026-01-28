@@ -12,6 +12,7 @@ import {
   Pencil,
   Trash2,
   Lock,
+  ArrowLeft,
 } from 'lucide-react'
 
 // Compulsory session types that are locked
@@ -287,7 +288,11 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
   )
 }
 
-export function SlideSorter() {
+interface SlideSorterProps {
+  onBack?: () => void
+}
+
+export function SlideSorter({ onBack }: SlideSorterProps) {
   const { currentWorkshopId, currentConfig, reorderSession, addSession, updateSession, removeSession } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
   const [loading, setLoading] = useState(true)
@@ -471,6 +476,17 @@ export function SlideSorter() {
       {/* Toolbar */}
       <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
         <div className="flex items-center gap-4">
+          {/* Back button */}
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 text-gray-300 hover:text-white hover:bg-gray-600 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm">Back</span>
+            </button>
+          )}
+
           {/* Day filter buttons */}
           <div className="flex items-center gap-1 bg-gray-700 rounded-lg p-1">
             <button

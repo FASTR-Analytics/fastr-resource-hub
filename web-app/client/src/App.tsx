@@ -2500,7 +2500,7 @@ function App() {
         <main className="flex-1 overflow-hidden">
           {currentWorkshopId ? (
             showPreview ? (
-              <SlideSorter />
+              <SlideSorter onBack={() => setShowPreview(false)} />
             ) : (
               <DndContext
                   sensors={sensors}
