@@ -21,6 +21,11 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const PORT = process.env.PORT || 3001
 
+// Trust proxy (required for secure cookies on Render/Heroku/etc)
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1)
+}
+
 // Team password from environment variable
 const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
 
