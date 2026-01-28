@@ -227,7 +227,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
       if (response.ok) {
         const data = await response.json()
         // Add base URL for resources
-        const htmlWithBase = data.html.replace('<head>', '<head><base href="http://localhost:3001/">')
+        const htmlWithBase = data.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
         setPreviewHtml(htmlWithBase)
       }
     } catch (err) {

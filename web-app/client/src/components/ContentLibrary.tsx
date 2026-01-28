@@ -308,7 +308,7 @@ ${data.content}`
         })
         if (renderResponse.ok) {
           const data = await renderResponse.json()
-          const html = data.html.replace('<head>', '<head><base href="http://localhost:3001/">')
+          const html = data.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
           setTemplatePreview({ template, category, position, html })
         }
       } catch (err) {
