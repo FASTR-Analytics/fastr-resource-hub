@@ -141,7 +141,9 @@
       "Bash(turso db create:*)",
       "Bash(turso auth login:*)",
       "Bash(turso auth:*)",
-      "Bash(turso db:*)"
+      "Bash(turso db:*)",
+      "Bash(# Kill any existing processes on ports 3001 and 5173 pkill -f \"\"tsx watch server/index.ts\"\" || true pkill -f \"\"vite\"\" || true sleep 1 # Check if ports are free now lsof -ti:3001)",
+      "Bash(# Kill existing server processes pkill -f \"\"tsx watch server/index.ts\"\" || true lsof -ti:3001)"
     ]
   }
 }

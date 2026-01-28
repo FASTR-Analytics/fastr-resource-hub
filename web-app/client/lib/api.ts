@@ -247,6 +247,16 @@ export const contentAPI = {
   async getTemplate(templateId: string): Promise<{ id: string; name: string; content: string }> {
     return fetchJSON(`/content/template/${templateId}`)
   },
+
+  /**
+   * Rebuild content from methodology files
+   */
+  async rebuild(): Promise<{ success: boolean; message: string; duration: number; output?: string }> {
+    return fetchJSON('/content/rebuild', {
+      method: 'POST',
+      timeout: 180000,  // 3 minute timeout for rebuild
+    })
+  },
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -528,6 +538,9 @@ const api = {
   initMarp: previewAPI.initMarp,
   renderMarkdown: previewAPI.renderMarkdown,
   renderSlide: previewAPI.renderSlide,
+
+  // Content rebuild
+  rebuildContent: contentAPI.rebuild,
 
   // Assets
   listAssets: assetsAPI.list,

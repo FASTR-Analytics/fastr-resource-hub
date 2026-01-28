@@ -282,16 +282,24 @@ router.post('/:id/html', async (req, res) => {
     // Convert to HTML using shared Marp service
     const { html, css } = renderMarkdown(markdown)
 
-    // Create full HTML document
+    // Fix resource paths in the rendered HTML
+    let fixedHtml = html
+    fixedHtml = fixedHtml.replace(/\.\.\/\.\.\/resources\//g, '/resources/')
+    fixedHtml = fixedHtml.replace(/\.\.\/resources\//g, '/resources/')
+    fixedHtml = fixedHtml.replace(/&quot;\.\.\/\.\.\/resources\//g, '&quot;/resources/')
+    fixedHtml = fixedHtml.replace(/&quot;\.\.\/resources\//g, '&quot;/resources/')
+
+    // Create full HTML document with base tag for resource paths
     const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
+  <base href="/">
   <title>${config.workshop.name}</title>
   <style>${css}</style>
 </head>
 <body>
-${html}
+${fixedHtml}
 </body>
 </html>`
 

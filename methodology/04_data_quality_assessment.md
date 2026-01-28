@@ -1872,13 +1872,6 @@ FASTR takes a multi-pronged approach, based on the belief that **data quality sh
 
 **Using data and providing feedback is viewed as the first step toward improving data quality.**
 
-<!--
-PRESENTER NOTES:
-- This is the condensed overview - hit the key points quickly
-- Emphasize the philosophy: don't let perfect be the enemy of good
-- The pipeline is sequential: DQA → Adjustment → Analysis
-- Using data creates accountability and motivation to improve quality
--->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s2 -->

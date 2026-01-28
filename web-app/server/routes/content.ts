@@ -781,4 +781,67 @@ router.post('/cache/clear', (_req, res) => {
   res.json({ success: true, message: 'Cache cleared' })
 })
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Content Rebuild Endpoint
+// ─────────────────────────────────────────────────────────────────────────────
+
+// POST /api/content/rebuild - Re-extract slides from methodology files
+router.post('/rebuild', async (_req, res) => {
+  const { exec } = await import('child_process')
+  const { promisify } = await import('util')
+  const execAsync = promisify(exec)
+
+  const __filename = fileURLToPath(import.meta.url)
+  const __dirname = path.dirname(__filename)
+  const REPO_ROOT = process.env.NODE_ENV === 'production'
+    ? path.resolve(__dirname, '../../../..')
+    : path.resolve(__dirname, '../../..')
+
+  const scriptPath = path.join(REPO_ROOT, 'tools', '00_extract_slides.py')
+
+  // Check if script exists
+  if (!fs.existsSync(scriptPath)) {
+    return res.status(404).json({
+      error: 'Extract script not found',
+      path: scriptPath
+    })
+  }
+
+  try {
+    console.log('Running content extraction script...')
+    const startTime = Date.now()
+
+    // Run the Python script
+    const { stdout, stderr } = await execAsync(`python3 "${scriptPath}"`, {
+      cwd: REPO_ROOT,
+      timeout: 120000  // 2 minute timeout
+    })
+
+    const duration = Date.now() - startTime
+
+    // Clear the modules cache so new content is picked up
+    modulesCache = null
+
+    // Also clear render cache
+    renderCache.clear()
+
+    console.log('Content extraction complete in', duration, 'ms')
+
+    res.json({
+      success: true,
+      message: 'Content rebuilt successfully',
+      duration: duration,
+      output: stdout,
+      warnings: stderr || undefined
+    })
+  } catch (error: any) {
+    console.error('Content rebuild error:', error)
+    res.status(500).json({
+      error: 'Failed to rebuild content',
+      message: error.message,
+      stderr: error.stderr
+    })
+  }
+})
+
 export default router

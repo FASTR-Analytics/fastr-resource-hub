@@ -165,19 +165,199 @@ const AI_TOOLS: Anthropic.Tool[] = [
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Tool Execution Functions
+// ─────────────────────────────────────────────────────────────────────────────
+
+function executeAddModule(config: any, input: any): { success: boolean; message: string } {
+  const { day, module_number, version, duration } = input
+  const dayKey = `day${day}`
+
+  if (!config.schedule[dayKey]) {
+    config.schedule[dayKey] = []
+  }
+
+  const moduleInfo = MODULE_DETAILS[module_number]
+  if (!moduleInfo) {
+    return { success: false, message: `Module ${module_number} not found` }
+  }
+
+  // Check if this module (any version) is already in the schedule
+  for (const d of Object.keys(config.schedule)) {
+    // Only check day arrays (day1, day2, etc.), not metadata like 'days' or 'day_start_times'
+    if (!d.match(/^day\d+$/)) continue
+    const sessions = config.schedule[d]
+    if (!Array.isArray(sessions)) continue
+    for (const s of sessions) {
+      if (s.module === `m${module_number}`) {
+        return { success: false, message: `Module ${module_number} is already in the schedule on ${d}` }
+      }
+    }
+  }
+
+  // Determine topics based on version
+  // Full version uses m{n}_1, m{n}_2, etc.
+  // Condensed version uses m{n}_s1, m{n}_s2, etc.
+  const topicPrefix = version === 'condensed' ? `m${module_number}_s` : `m${module_number}_`
+
+  config.schedule[dayKey].push({
+    _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    session: moduleInfo.name,
+    module: `m${module_number}`,
+    version: version,
+    topics: [topicPrefix],  // Will be expanded when building the deck
+    duration: duration || (version === 'condensed' ? 45 : 90),
+  })
+
+  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name} to Day ${day}` }
+}
+
+function executeAddBreak(config: any, input: any): { success: boolean; message: string } {
+  const { day, break_type, duration } = input
+  const dayKey = `day${day}`
+
+  if (!config.schedule[dayKey]) {
+    config.schedule[dayKey] = []
+  }
+
+  const breakDuration = duration || (break_type === 'lunch' ? 60 : 15)
+  const breakName = break_type === 'lunch' ? 'Lunch Break' : 'Tea Break'
+
+  config.schedule[dayKey].push({
+    _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    session: breakName,
+    type: 'break',
+    duration: breakDuration,
+  })
+
+  return { success: true, message: `Added ${breakName} (${breakDuration}min) to Day ${day}` }
+}
+
+function executeAddCustomSession(config: any, input: any): { success: boolean; message: string } {
+  const { day, session_name, duration } = input
+  const dayKey = `day${day}`
+
+  if (!config.schedule[dayKey]) {
+    config.schedule[dayKey] = []
+  }
+
+  config.schedule[dayKey].push({
+    _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    session: session_name,
+    type: 'custom',
+    duration: duration,
+  })
+
+  return { success: true, message: `Added "${session_name}" (${duration}min) to Day ${day}` }
+}
+
+function executeUpdateSettings(config: any, input: any): { success: boolean; message: string } {
+  const updates: string[] = []
+
+  if (input.objectives) {
+    config.workshop.objectives = input.objectives
+    updates.push('objectives')
+  }
+  if (input.facilitators) {
+    config.workshop.facilitators = input.facilitators
+    updates.push('facilitators')
+  }
+  if (input.venue) {
+    config.workshop.venue = input.venue
+    updates.push('venue')
+  }
+  if (input.contact_email) {
+    config.workshop.contact_email = input.contact_email
+    updates.push('contact email')
+  }
+  if (input.website) {
+    config.workshop.website = input.website
+    updates.push('website')
+  }
+
+  return { success: true, message: `Updated: ${updates.join(', ')}` }
+}
+
+function executeMoveSession(config: any, input: any): { success: boolean; message: string } {
+  const { day, from_position, to_position } = input
+  const dayKey = `day${day}`
+
+  if (!config.schedule[dayKey] || config.schedule[dayKey].length === 0) {
+    return { success: false, message: `Day ${day} has no sessions` }
+  }
+
+  const sessions = config.schedule[dayKey]
+  if (from_position < 0 || from_position >= sessions.length) {
+    return { success: false, message: `Invalid from_position: ${from_position}` }
+  }
+
+  const [session] = sessions.splice(from_position, 1)
+  sessions.splice(to_position, 0, session)
+
+  return { success: true, message: `Moved "${session.session}" from position ${from_position} to ${to_position}` }
+}
+
+function executeRemoveSession(config: any, input: any): { success: boolean; message: string } {
+  const { day, position } = input
+  const dayKey = `day${day}`
+
+  if (!config.schedule[dayKey] || config.schedule[dayKey].length === 0) {
+    return { success: false, message: `Day ${day} has no sessions` }
+  }
+
+  const sessions = config.schedule[dayKey]
+  if (position < 0 || position >= sessions.length) {
+    return { success: false, message: `Invalid position: ${position}` }
+  }
+
+  const [removed] = sessions.splice(position, 1)
+  return { success: true, message: `Removed "${removed.session}" from Day ${day}` }
+}
+
+function executeTool(toolName: string, input: any, config: any): { success: boolean; message: string } {
+  switch (toolName) {
+    case 'add_module':
+      return executeAddModule(config, input)
+    case 'add_break':
+      return executeAddBreak(config, input)
+    case 'add_custom_session':
+      return executeAddCustomSession(config, input)
+    case 'update_workshop_settings':
+      return executeUpdateSettings(config, input)
+    case 'move_session':
+      return executeMoveSession(config, input)
+    case 'remove_session':
+      return executeRemoveSession(config, input)
+    default:
+      return { success: false, message: `Unknown tool: ${toolName}` }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // AI Chat Endpoint
 // ─────────────────────────────────────────────────────────────────────────────
 
 // POST /api/ai/chat - Chat with AI assistant (with tools)
 router.post('/chat', async (req, res) => {
   try {
-    const { messages, context } = req.body
+    const { messages, workshopConfig } = req.body
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Messages array required' })
     }
 
+    if (!workshopConfig) {
+      return res.status(400).json({ error: 'Workshop config required - please select a workshop first' })
+    }
+
     const client = getClient()
+
+    // Deep clone the config so we can modify it
+    let workingConfig = JSON.parse(JSON.stringify(workshopConfig))
+
+    // Ensure schedule exists
+    if (!workingConfig.schedule) {
+      workingConfig.schedule = {}
+    }
 
     // Build system prompt
     const systemPrompt = `You are a FASTR workshop planning assistant. You can DIRECTLY MODIFY the workshop deck using the tools provided.
@@ -207,7 +387,7 @@ ${Object.entries(MODULE_DETAILS).map(([num, mod]) => `
 `).join('\n')}
 
 # CURRENT WORKSHOP
-${JSON.stringify(context, null, 2)}
+${JSON.stringify(workingConfig, null, 2)}
 
 # YOUR CAPABILITIES
 You can use tools to:
@@ -217,7 +397,6 @@ You can use tools to:
 4. **update_workshop_settings** - Fill in workshop objectives and settings
 5. **move_session** - Move a session within a day
 6. **remove_session** - Remove a session from the deck
-7. **restructure_schedule** - Major schedule restructure
 
 # INSTRUCTIONS
 - When adding modules, ALWAYS specify the version parameter
@@ -227,35 +406,65 @@ You can use tools to:
 - If the user asks a question without wanting changes, just answer without using tools
 - ALWAYS actually execute the changes - don't just describe what you would do`
 
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: messages,
-      tools: AI_TOOLS,
-    })
+    let currentMessages = messages
+    let finalTextContent = ''
+    const toolResults: Array<{ tool: string; result: any }> = []
 
-    // Process response
-    const toolCalls: any[] = []
-    let textContent = ''
+    // Tool use loop - keep going until AI stops calling tools
+    let maxIterations = 5
+    while (maxIterations > 0) {
+      maxIterations--
 
-    for (const block of response.content) {
-      if (block.type === 'text') {
-        textContent += block.text
-      } else if (block.type === 'tool_use') {
-        toolCalls.push({
-          id: block.id,
-          name: block.name,
-          input: block.input,
-        })
+      const response = await client.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4096,
+        system: systemPrompt,
+        messages: currentMessages,
+        tools: AI_TOOLS,
+      })
+
+      // Process response
+      let hasToolUse = false
+      const toolUseResults: Anthropic.ToolResultBlockParam[] = []
+
+      for (const block of response.content) {
+        if (block.type === 'text') {
+          finalTextContent += block.text
+        } else if (block.type === 'tool_use') {
+          hasToolUse = true
+
+          // Execute the tool
+          const result = executeTool(block.name, block.input, workingConfig)
+          toolResults.push({ tool: block.name, result })
+
+          console.log(`AI Tool: ${block.name}`, block.input, '→', result)
+
+          toolUseResults.push({
+            type: 'tool_result',
+            tool_use_id: block.id,
+            content: JSON.stringify(result),
+          })
+        }
       }
+
+      // If no tools were called, we're done
+      if (!hasToolUse || response.stop_reason === 'end_turn') {
+        break
+      }
+
+      // Continue conversation with tool results
+      currentMessages = [
+        ...currentMessages,
+        { role: 'assistant' as const, content: response.content },
+        { role: 'user' as const, content: toolUseResults },
+      ]
     }
 
     res.json({
       role: 'assistant',
-      content: textContent,
-      toolCalls: toolCalls,
-      stopReason: response.stop_reason,
+      message: finalTextContent,
+      toolResults: toolResults,
+      updatedConfig: workingConfig,
     })
   } catch (error: any) {
     console.error('AI chat error:', error)

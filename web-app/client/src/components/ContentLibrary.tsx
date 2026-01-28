@@ -22,6 +22,7 @@ import {
   Copy,
   Check,
   Loader2,
+  RefreshCw,
 } from 'lucide-react'
 
 interface Topic {
@@ -87,6 +88,9 @@ export function ContentLibrary() {
   const [uploadingAsset, setUploadingAsset] = useState(false)
   const [copiedAsset, setCopiedAsset] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
+
+  // Rebuild state
+  const [isRebuilding, setIsRebuilding] = useState(false)
 
   // Fetch templates on mount
   useEffect(() => {
@@ -161,6 +165,24 @@ export function ContentLibrary() {
     navigator.clipboard.writeText(asset.markdown)
     setCopiedAsset(asset.filename)
     setTimeout(() => setCopiedAsset(null), 2000)
+  }
+
+  // Rebuild content from methodology files
+  const handleRebuildContent = async () => {
+    if (!confirm('Rebuild content from methodology files? This will re-extract all slides.')) return
+
+    setIsRebuilding(true)
+    try {
+      const result = await api.rebuildContent()
+      alert(`Content rebuilt successfully in ${(result.duration / 1000).toFixed(1)}s`)
+      // Reload the page to get fresh content
+      window.location.reload()
+    } catch (err: any) {
+      console.error('Rebuild failed:', err)
+      alert(`Rebuild failed: ${err.message}`)
+    } finally {
+      setIsRebuilding(false)
+    }
   }
 
   // Drag and drop handlers
@@ -359,7 +381,8 @@ ${data.content}`
         let html = ''
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
-          html = renderData.html
+          // Add base tag so /resources/ paths resolve correctly in iframe
+          html = renderData.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
         }
 
         setFullPreview({ topic, module, content: data.content, html })
@@ -431,6 +454,14 @@ ${data.content}`
         >
           <Image className="w-4 h-4" />
           Assets
+        </button>
+        <button
+          onClick={handleRebuildContent}
+          disabled={isRebuilding}
+          title="Rebuild content from methodology files"
+          className="px-2 py-2 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 transition-colors disabled:opacity-50"
+        >
+          <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
         </button>
       </div>
 
