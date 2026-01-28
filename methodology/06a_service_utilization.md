@@ -1124,177 +1124,76 @@ For the volume change chart (output 4):
 -->
 
 <!-- SLIDE:m6_1 -->
-## Service utilization analysis - Module 3
+## Service utilization analysis
 
-Detecting and quantifying changes in health service delivery over time
+Service utilization analysis measures changes in health service volumes over time. By comparing service delivery across consecutive years, this analysis identifies increases or decreases in utilization patterns across regions and indicators.
 
----
-
-## Objectives
-
-**1. Measure changes in service volume**
-
-Year-over-year comparison of service volumes identifies increases or decreases across regions and indicators.
-
-**2. Detect and quantify disruptions**
-
-Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
+The primary metric is **year-over-year percent change**, which quantifies shifts in service delivery between consecutive years. The formula calculates the difference between current and previous year volumes, expressed as a percentage of the previous year. Changes exceeding ±10% are flagged for review, as these typically represent meaningful shifts in service delivery rather than normal variation.
 
 ---
 
-## Service utilization over time
+## Service utilization comparison to DHIS2
 
-![Service utilization over time h:420](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+Service utilization trends are commonly produced in DHIS2. The FASTR approach differs in three important ways:
 
-<!--
-PRESENTER NOTES:
-- Module 3 analyzes service delivery patterns over time
-- Two main objectives: (1) measure year-over-year changes, (2) detect disruptions
-- Service utilization chart shows raw trends - look for seasonal patterns, sudden changes
-- This module uses the adjusted data from Module 2 as input
-- Statistical methods distinguish normal variation from true disruptions
--->
+- Adjusts for data quality (outliers and/or completeness)
+- Visualizes data with the percent change approach to make it easier to identify meaningful fluctuations in service delivery
+- Looks at trends, but also uses the adjusted service utilization data for additional, more complex analyses
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
-## Year-over-year change
+## Service disruptions and surpluses detection
 
-**Year-over-year percent change** quantifies shifts in service delivery between consecutive years.
+The FASTR approach to detecting service disruptions and surpluses uses **interrupted time series (ITS) regression** with facility-level fixed effects. This statistical framework allows for more meaningful interpretation and comparison of count data across subnational areas, enabling insights that raw data alone cannot provide.
 
-For each indicator and region, total volume in the current year is compared to the previous year:
-
-**Percent change** = (Current year − Previous year) ÷ Previous year × 100
-
-Changes exceeding **±10%** are flagged for review.
+By focusing on meaningful changes and trends rather than raw numbers, this approach supports more accurate and comparable analysis. Previous large and unexpected changes in historical data are removed to establish a clean baseline. Unexpected volume changes are then estimated by comparing observed volumes to expected volumes based on historical trends and seasonality.
 
 ---
 
-## Output: Change in service volume
+## How disruption detection works
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1; font-size: 0.85em;">
 
-![Change in service volume h:340](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+The analysis proceeds through four steps. First, we **use past data to set expectations** by examining several years of historical data to understand the typical pattern for each month, accounting for regular seasonal changes.
+
+Second, we **spot unusual changes** by comparing current service volumes to these expectations. Volumes that are much higher or lower than expected are flagged as unusual changes requiring investigation.
+
+Third, we **handle past disruptions** by adjusting historical data to remove previous large, unexpected changes. This ensures that one-off events do not skew our understanding of what constitutes "normal" service delivery.
+
+Fourth, we **detect disruptions over time** by examining trends to identify clear shifts in health service use over several months, distinguishing between temporary fluctuations and sustained changes.
 
 </div>
 <div style="flex: 1;">
 
-### Interpretation
-
-**Bars** show annual service volumes by region. **Percentages** indicate year-over-year change.
-
-**Key considerations:**
-- Which regions exhibit the largest changes?
-- Are changes consistent across regions or geographically concentrated?
-- Do patterns vary by indicator?
+![Disruption detection](resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
 
 <!--
 PRESENTER NOTES:
-- Year-over-year comparison is the simplest form of service analysis
-- Formula: (Current year - Previous year) / Previous year × 100
-- Changes >±10% are flagged for review - threshold is configurable
-- Look for geographic patterns: are changes concentrated or widespread?
-- Consider: are changes real program impacts or data quality issues?
-- This output helps identify areas needing further investigation
+1. Using past data to set expectations: We start by looking at the past few years of health service data to understand the typical pattern for each month. For example, if we see that certain services usually have higher or lower volumes during particular months, we use that pattern to help set "normal" expectations for each month going forward. This step helps us account for regular seasonal changes, like an increase in flu-related visits during winter months.
+2. Spotting unusual changes: Once we know what "normal" looks like, we can compare current service volumes to those expectations. If we see that the number of people using a particular health service is much higher or lower than expected, we flag it as an unusual change. This could be due to factors like an epidemic, a natural disaster, or even changes in healthcare policy.
+3. Handling past disruptions: To keep our analysis accurate, we adjust our historical data by removing previous big, unexpected changes. This makes sure that one-off events from the past don't skew our understanding of what's "normal" today.
+4. Detecting disruptions over time: Finally, we look at trends over time to see if there are clear shifts in health service use. For example, if there's a drop in routine vaccinations over several months, we can identify that as a longer-term disruption. By monitoring these trends, we get a better sense of whether changes are just seasonal or might be due to larger, lasting issues that need attention.
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_3 -->
-## Disruption detection
-
-Our approach to service disruptions and surpluses utilizes an interrupted time series regression with facility-level fixed effects. Previous large and unexpected changes in historical data are removed. Unexpected volume changes are estimated by comparing observed volume to expected volume based on historical trends and seasonality.
 
 ---
 
-## Disruptions and surpluses
+## Disruption detection comparison to DHIS2
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+Disruption detection extends service utilization analysis using statistical approaches not available in DHIS2. The regression framework enables several capabilities that improve upon simple trend visualization.
 
-**Disruptions** are flagged when volumes fall below anticipated levels, signaling potential barriers to access, resource shortages, or system failures.
+The model **accounts for seasonality** when calculating expected values, ensuring that seasonal patterns are not mistaken for disruptions. It **excludes unusual historical changes** so that one-off events do not influence the baseline. **Historical data serves as context** for establishing expected service levels, and the framework systematically **detects both disruptions and recovery patterns**.
 
-**Surpluses** occur when volumes exceed expectations, which may indicate increased demand, over-reporting, or changes in service delivery.
-
-</div>
-<div style="flex: 2;">
-
-![Disruption and surplus example h:300](resources/diagrams/disruption_chart.png)
-
-</div>
-</div>
-
----
-
-## How it works
-
-**Using past data to set expectations:** We look at the past few years of data to understand the typical pattern for each month, accounting for regular seasonal changes.
-
-**Spotting unusual changes:** We compare current service volumes to expectations. If we see volumes much higher or lower than expected, we flag it as an unusual change.
-
-**Handling past disruptions:** We adjust historical data by removing previous big, unexpected changes so one-off events don't skew our understanding of what's "normal."
-
-**Detecting disruptions over time:** We look at trends to see if there are clear shifts in health service use over several months.
-
----
-
-## Comparison to DHIS2
-
-Extension of service utilization analysis, using more complex statistical approaches not available in DHIS2.
-
-Using a regression framework, we are able to:
-
-- Account for seasonality
-- Exclude unusual changes to ensure one-off events aren't influencing normal trends
-- Use historical data as a baseline for context
-- Detect disruptions and recovery patterns
-- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line
-
-This improves the ability to interpret and compare utilization data across national and sub-national areas without needing population denominators.
-
-<!--
-PRESENTER NOTES:
-- Disruption detection goes beyond simple YoY comparison
-- Uses interrupted time series regression with fixed effects
-- Key concept: compare actual to "expected" based on historical patterns
-- Disruption = significantly below expected; Surplus = significantly above expected
-- Advantages over DHIS2: accounts for seasonality, excludes unusual historical events
-- Can quantify magnitude of disruptions in absolute numbers and percentages
-- Useful for assessing impact of events like COVID, strikes, stockouts, campaigns
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_4 -->
-## Output: Actual vs expected (national)
-
-![Actual vs expected national h:380](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
-
-<p style="font-size: 0.8em; color: #666;">National-level comparison of observed service volumes against expected values derived from historical trends and seasonal patterns.
-
----
-
-## Output: Actual vs expected (subnational)
-
-![Actual vs expected subnational h:380](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
-
-<p style="font-size: 0.8em; color: #666;">Subnational disaggregation enables identification of geographic areas where disruptions are concentrated.
-
-<!--
-PRESENTER NOTES:
-- These charts compare observed (actual) vs model-predicted (expected) volumes
-- National chart shows overall country trends
-- Subnational charts reveal geographic variation - some areas may recover while others don't
-- Red shading = shortfall periods (actual below expected)
-- Green shading = surplus periods (actual above expected)
-- Expected values account for seasonality and long-term trends
-- Ask participants: What events might explain the disruptions shown?
--->
+Most importantly, this approach **quantifies changes with a robust methodology** rather than relying on visual observation of trend fluctuations. This improves the ability to interpret and compare utilization data across national and subnational areas **without requiring population denominators**.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->
 ## Service utilization module: Configuration parameters
+
+**Note:** These parameters apply only to the disruption analysis. Year-over-year service utilization analysis does not require configuration.
 
 <div style="font-size: 0.8em;">
 

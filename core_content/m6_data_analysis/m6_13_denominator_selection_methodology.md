@@ -4,26 +4,28 @@ theme: fastr
 paginate: true
 ---
 
-## Automatic denominator selection
+## Denominator selection methodology
 
-For each indicator, the module selects the denominator that produces coverage closest to the survey benchmark.
+**Goal:** Select the denominator method that produces coverage estimates closest to survey benchmarks (DHS/MICS).
 
-**Selection algorithm:**
+**How it works:**
 
-1. Calculate coverage using each denominator option
-2. Calculate squared error against survey: $(coverage - survey)^2$
-3. Apply selection hierarchy (HMIS-based denominators prioritized over UN WPP)
-4. Select the HMIS-based denominator with minimum error
+1. Calculate coverage using all available denominator methods
+2. Compare each result to survey coverage estimates
+3. Select the denominator with the smallest error compared to the survey
 
-Selection is made per indicator and geographic area. Users may override automatic selections in Part 2.
+This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
+
+**Key point:** Each indicator (ANC1, ANC4, deliveries, etc.) may use a different denominator method. However, for a given indicator, the same method is used across all timepoints and all subnational areas for consistency. Selection is performed at the national level, then applied uniformly to all geographic levels.
 
 <!--
 PRESENTER NOTES:
-- With multiple denominator options, how do we choose?
-- Calculate coverage using each option
-- Compare to survey benchmark (DHS/MICS is gold standard)
-- Select denominator with minimum squared error
-- Preference given to HMIS-based over UN WPP denominators
-- Selection is automatic but users can override in Part 2
-- Different areas may have different best denominators for same indicator
+- We have multiple ways to calculate denominators - which one is best?
+- Survey data (DHS/MICS) is our gold standard for coverage
+- We test each denominator method and pick the one closest to survey
+- Selection is done at the national level using national survey data
+- The selected method is then applied to all subnational areas
+- This ensures consistency: same method for all regions and timepoints within an indicator
+- Different indicators can use different methods (ANC1 might use one, Penta1 another)
+- Users can override automatic selections if needed
 -->

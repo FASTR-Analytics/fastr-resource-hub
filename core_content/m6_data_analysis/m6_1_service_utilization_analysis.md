@@ -4,33 +4,18 @@ theme: fastr
 paginate: true
 ---
 
-## Service utilization analysis - Module 3
+## Service utilization analysis
 
-Detecting and quantifying changes in health service delivery over time
+Service utilization analysis measures changes in health service volumes over time. By comparing service delivery across consecutive years, this analysis identifies increases or decreases in utilization patterns across regions and indicators.
 
----
-
-## Objectives
-
-**1. Measure changes in service volume**
-
-Year-over-year comparison of service volumes identifies increases or decreases across regions and indicators.
-
-**2. Detect and quantify disruptions**
-
-Statistical comparison of observed volumes against expected levels—derived from historical trends and seasonal patterns—enables identification and quantification of service shortfalls or surpluses.
+The primary metric is **year-over-year percent change**, which quantifies shifts in service delivery between consecutive years. The formula calculates the difference between current and previous year volumes, expressed as a percentage of the previous year. Changes exceeding ±10% are flagged for review, as these typically represent meaningful shifts in service delivery rather than normal variation.
 
 ---
 
-## Service utilization over time
+## Service utilization comparison to DHIS2
 
-![Service utilization over time h:420](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+Service utilization trends are commonly produced in DHIS2. The FASTR approach differs in three important ways:
 
-<!--
-PRESENTER NOTES:
-- Module 3 analyzes service delivery patterns over time
-- Two main objectives: (1) measure year-over-year changes, (2) detect disruptions
-- Service utilization chart shows raw trends - look for seasonal patterns, sudden changes
-- This module uses the adjusted data from Module 2 as input
-- Statistical methods distinguish normal variation from true disruptions
--->
+- Adjusts for data quality (outliers and/or completeness)
+- Visualizes data with the percent change approach to make it easier to identify meaningful fluctuations in service delivery
+- Looks at trends, but also uses the adjusted service utilization data for additional, more complex analyses

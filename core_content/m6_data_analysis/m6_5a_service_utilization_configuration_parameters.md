@@ -6,6 +6,8 @@ paginate: true
 
 ## Service utilization module: Configuration parameters
 
+**Note:** These parameters apply only to the disruption analysis. Year-over-year service utilization analysis does not require configuration.
+
 <div style="font-size: 0.8em;">
 
 | Parameter | Description |

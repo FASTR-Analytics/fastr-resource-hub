@@ -929,41 +929,78 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         </div>
 
         {/* Preview area */}
-        <div className="flex-1 bg-gray-800 flex items-center justify-center p-6">
+        <div className="flex-1 bg-gray-800 flex flex-col p-6 overflow-hidden">
           {isLoadingPreview ? (
-            <div className="text-white/70">
-              <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-              <p>Loading preview...</p>
+            <div className="flex-1 flex items-center justify-center text-white/70">
+              <div>
+                <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+                <p>Loading preview...</p>
+              </div>
             </div>
           ) : previewHtml ? (
-            <div className="w-full max-w-4xl overflow-y-auto">
-              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  srcDoc={previewHtml}
-                  className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
-                  title="Slide Preview"
-                />
+            <>
+              {/* Slide preview - fixed height, always visible */}
+              <div className="flex-shrink-0 flex flex-col items-center">
+                {/* Slide count indicator */}
+                {previewTopic?.slideCount > 1 && (
+                  <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
+                    <span className="text-sm font-medium">{previewTopic.slideCount} slides</span>
+                    <span className="text-white/50">•</span>
+                    <span className="text-sm flex items-center gap-1">
+                      <span>Scroll in preview to view all</span>
+                      <ChevronDown className="w-4 h-4 animate-bounce" />
+                    </span>
+                  </div>
+                )}
+                <div className="w-full max-w-4xl">
+                  <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+                    <iframe
+                      srcDoc={previewHtml}
+                      className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
+                      title="Slide Preview"
+                    />
+                    {/* Scroll fade indicator at bottom */}
+                    {previewTopic?.slideCount > 1 && (
+                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-800/80 to-transparent rounded-b-lg pointer-events-none flex items-end justify-center pb-1">
+                        <div className="flex items-center gap-1 text-white/70 text-xs">
+                          <ChevronDown className="w-3 h-3" />
+                          <span>More slides below</span>
+                          <ChevronDown className="w-3 h-3" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-3 text-center">
+                  <p className="text-white font-medium">{previewTopic?.title}</p>
+                  {previewTopic?.slideCount === 1 && (
+                    <p className="text-white/60 text-sm">1 slide</p>
+                  )}
+                </div>
               </div>
-              <div className="mt-4 text-center">
-                <p className="text-white font-medium">{previewTopic?.title}</p>
-                <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
-              </div>
-              {/* Presenter Notes */}
+
+              {/* Presenter Notes - scrollable section below */}
               {presenterNotes.length > 0 && (
-                <div className="mt-4 bg-gray-900 rounded-lg p-4 text-left">
-                  <h4 className="text-amber-400 text-sm font-semibold mb-2">Presenter Notes</h4>
-                  {presenterNotes.map((note, i) => (
-                    <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
-                      {note.replace(/^PRESENTER NOTES:\s*/i, '')}
-                    </div>
-                  ))}
+                <div className="mt-4 flex-1 min-h-0 max-w-4xl mx-auto w-full">
+                  <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-48">
+                    <h4 className="text-amber-400 text-sm font-semibold mb-2 sticky top-0 bg-gray-900 pb-1">
+                      Presenter Notes
+                    </h4>
+                    {presenterNotes.map((note, i) => (
+                      <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
+                        {note.replace(/^PRESENTER NOTES:\s*/i, '')}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
-            </div>
+            </>
           ) : (
-            <div className="text-center text-gray-500">
-              <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
-              <p className="text-lg text-white/70">Click on a slide to preview</p>
+            <div className="flex-1 flex items-center justify-center text-center text-gray-500">
+              <div>
+                <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                <p className="text-lg text-white/70">Click on a slide to preview</p>
+              </div>
             </div>
           )}
         </div>
@@ -1267,46 +1304,81 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         </div>
 
         {/* Slide preview area */}
-        <div className="flex-1 bg-gray-800 flex flex-col">
-          <div className="flex-1 flex items-center justify-center p-6 overflow-auto">
-            {isLoadingPreview ? (
-              <div className="text-white/70">
+        <div className="flex-1 bg-gray-800 flex flex-col p-6 overflow-hidden">
+          {isLoadingPreview ? (
+            <div className="flex-1 flex items-center justify-center text-white/70">
+              <div>
                 <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
                 <p>Loading preview...</p>
               </div>
-            ) : previewHtml ? (
-              <div className="w-full max-w-4xl overflow-y-auto">
-                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                  <iframe
-                    srcDoc={previewHtml}
-                    className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
-                    title="Slide Preview"
-                  />
+            </div>
+          ) : previewHtml ? (
+            <>
+              {/* Slide preview - fixed height, always visible */}
+              <div className="flex-shrink-0 flex flex-col items-center">
+                {/* Slide count indicator */}
+                {previewTopic?.slideCount > 1 && (
+                  <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
+                    <span className="text-sm font-medium">{previewTopic.slideCount} slides</span>
+                    <span className="text-white/50">•</span>
+                    <span className="text-sm flex items-center gap-1">
+                      <span>Scroll in preview to view all</span>
+                      <ChevronDown className="w-4 h-4 animate-bounce" />
+                    </span>
+                  </div>
+                )}
+                <div className="w-full max-w-3xl">
+                  <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+                    <iframe
+                      srcDoc={previewHtml}
+                      className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
+                      title="Slide Preview"
+                    />
+                    {/* Scroll fade indicator at bottom */}
+                    {previewTopic?.slideCount > 1 && (
+                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-800/80 to-transparent rounded-b-lg pointer-events-none flex items-end justify-center pb-1">
+                        <div className="flex items-center gap-1 text-white/70 text-xs">
+                          <ChevronDown className="w-3 h-3" />
+                          <span>More slides below</span>
+                          <ChevronDown className="w-3 h-3" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="mt-4 text-center">
+                <div className="mt-3 text-center">
                   <p className="text-white font-medium">{previewTopic?.title}</p>
-                  <p className="text-white/60 text-sm">{previewTopic?.slideCount} slides</p>
+                  {previewTopic?.slideCount === 1 && (
+                    <p className="text-white/60 text-sm">1 slide</p>
+                  )}
                 </div>
-                {/* Presenter Notes */}
-                {presenterNotes.length > 0 && (
-                  <div className="mt-4 bg-gray-900 rounded-lg p-4 text-left">
-                    <h4 className="text-amber-400 text-sm font-semibold mb-2">Presenter Notes</h4>
+              </div>
+
+              {/* Presenter Notes - scrollable section below */}
+              {presenterNotes.length > 0 && (
+                <div className="mt-4 flex-1 min-h-0 max-w-3xl mx-auto w-full">
+                  <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-40">
+                    <h4 className="text-amber-400 text-sm font-semibold mb-2 sticky top-0 bg-gray-900 pb-1">
+                      Presenter Notes
+                    </h4>
                     {presenterNotes.map((note, i) => (
                       <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
                         {note.replace(/^PRESENTER NOTES:\s*/i, '')}
                       </div>
                     ))}
                   </div>
-                )}
-              </div>
-            ) : (
-              <div className="text-center text-gray-500">
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="flex-1 flex items-center justify-center text-center text-gray-500">
+              <div>
                 <Zap className="w-16 h-16 mx-auto mb-4 opacity-50" />
                 <p className="text-lg text-white/70">Click on a slide to preview</p>
                 <p className="text-sm mt-2 text-white/50">Check the box to add it to your selection</p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Selection sidebar */}

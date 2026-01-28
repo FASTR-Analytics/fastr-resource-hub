@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 450">
+  <style>
+    .box-text { font-family: Arial, sans-serif; font-size: 14px; fill: #333; }
+    .box-subtext-teal { font-family: Arial, sans-serif; font-size: 12px; fill: #0d9488; }
+    .box-subtext-orange { font-family: Arial, sans-serif; font-size: 12px; fill: #d97706; }
+    .formula-label { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #1e3a5f; }
+    .formula-fraction { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #1e3a5f; }
+  </style>
+
+  <!-- Top box (teal) -->
+  <rect x="180" y="30" width="440" height="70" rx="8" ry="8" fill="#e0f2f1" stroke="#4db6ac" stroke-width="2"/>
+  <text x="400" y="58" text-anchor="middle" class="box-text">Number of pregnant women who had 4+ ANC visits</text>
+  <text x="400" y="80" text-anchor="middle" class="box-subtext-teal">(from DHIS-2)</text>
+
+  <!-- Arrow from top box to formula -->
+  <line x1="400" y1="100" x2="400" y2="155" stroke="#5c6bc0" stroke-width="2"/>
+  <polygon points="400,165 395,155 405,155" fill="#5c6bc0"/>
+
+  <!-- Formula -->
+  <!-- "Coverage of ANC4+" label on the left -->
+  <text x="50" y="220" text-anchor="start" class="formula-label">Coverage of ANC4+</text>
+
+  <!-- Equals sign -->
+  <text x="270" y="220" text-anchor="middle" class="formula-label">=</text>
+
+  <!-- Fraction -->
+  <!-- Numerator -->
+  <text x="400" y="195" text-anchor="middle" class="formula-fraction"># ANC4+</text>
+
+  <!-- Fraction line -->
+  <line x1="300" y1="210" x2="500" y2="210" stroke="#1e3a5f" stroke-width="3"/>
+
+  <!-- Denominator -->
+  <text x="400" y="245" text-anchor="middle" class="formula-fraction"># Pregnancies</text>
+
+  <!-- Arrow from formula to bottom box -->
+  <line x1="400" y1="260" x2="400" y2="315" stroke="#5c6bc0" stroke-width="2"/>
+  <polygon points="400,325 395,315 405,315" fill="#5c6bc0"/>
+
+  <!-- Bottom box (orange/yellow) -->
+  <rect x="180" y="335" width="440" height="70" rx="8" ry="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="400" y="363" text-anchor="middle" class="box-text">Total pregnancies in the population</text>
+  <text x="400" y="385" text-anchor="middle" class="box-subtext-orange">(not available in DHIS-2)</text>
+</svg>

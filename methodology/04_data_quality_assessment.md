@@ -1528,27 +1528,6 @@ The FASTR analysis follows a sequential workflow:
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
 ![Analytical Pipeline h:280](resources/diagrams/analytical_pipeline.svg)
-
----
-
-## FASTR approach to data quality
-
-FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**.
-
-- Conduct granular, facility-level data quality assessments
-- Focus on high-volume indicators that produce more stable estimates
-- Emphasize variation over time and space rather than point estimates
-- Interpret results collaboratively with in-country decision-makers
-
-**Using data and providing feedback is viewed as the first step toward improving data quality.**
-
-<!--
-PRESENTER NOTES:
-- This is the condensed overview - hit the key points quickly
-- Emphasize the philosophy: don't let perfect be the enemy of good
-- The pipeline is sequential: DQA → Adjustment → Analysis
-- Using data creates accountability and motivation to improve quality
--->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
@@ -1636,6 +1615,8 @@ td { vertical-align: top; }
 <!-- SLIDE:m4_1b -->
 ## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
 
+<div style="font-size: 0.8em;">
+
 **Purpose of data quality assessment**
 
 - **DHIS2:** focuses on data quality assessment to routinely strengthen data quality over time
@@ -1652,10 +1633,14 @@ td { vertical-align: top; }
 - DHIS2 allows configuration of a DQA dashboard for any selection of indicators in DHIS2; FASTR selects indicators that will be used in a specific analysis
 - DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness. Timeliness is an important consideration for strengthening routine reporting but it less important to do an analysis with the data we have available today
 - DHIS2 DQA includes reporting completeness (e.g. was a report submitted) and indicator completeness (e.g. was a value recorded for an individual data element) while FASTR focuses only on indicator completeness
+
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1c -->
 ## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
+
+<div style="font-size: 0.8em;">
 
 **Selection of indicators, measures, and thresholds continued**
 
@@ -1666,10 +1651,14 @@ The purpose of the data quality assessment guides the selection of indicators, m
 - FASTR and DHIS2 DQA use different outlier detection methods (MADs vs standard deviations); FASTR focuses on identifying VERY large outliers that have undue influence in the analysis and for which adjustments will be made; DHIS2 DQA focuses on identifying outliers that should be followed up at the facility level, with no significant negative impact even if a few correct values are flagged as potential outliers, since these will be investigated further.
 
 - DHIS2 DQA may assess agreement with external data sources such as periodic population-based surveys and consistency of population data which serves as the denominator for coverage analysis. FASTR does not include this in the data quality assessment but instead incorporates this in our coverage analysis.
+
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
 ## Indicator completeness
+
+<div style="font-size: 0.8em;">
 
 **What it measures:** The extent to which facilities report data on selected core indicators
 
@@ -1683,6 +1672,8 @@ The purpose of the data quality assessment guides the selection of indicators, m
 - A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
 - A facility is expected to report if it has reported any volume for that indicator anytime within a year
 - Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
+
+</div>
 
 <!--
 PRESENTER NOTES:

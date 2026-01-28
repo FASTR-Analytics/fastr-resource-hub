@@ -433,6 +433,126 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_1j -->
+## Service utilization output: Trends over time
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Service utilization over time](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing service volumes over time by indicator.
+
+**Interpretation:** Look for seasonal patterns, sudden changes, and long-term trends. This is the raw data before disruption analysis.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1k -->
+## Service utilization output: Year-over-year change
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Change in service volume](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Bars show annual service volumes by region. Percentages indicate year-over-year change.
+
+**Formula:** % change = (current − previous) / previous × 100
+
+**Interpretation:** Which regions show largest changes? Are patterns consistent or concentrated?
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1l -->
+## Disruption output: Actual vs expected (national)
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Actual vs expected national](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** National comparison of observed (actual) vs model-predicted (expected) volumes.
+
+**Interpretation:** Red shading = shortfall (actual below expected). Green = surplus. Expected values account for seasonality and trends.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1m -->
+## Disruption output: Actual vs expected (subnational)
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Actual vs expected subnational](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Subnational comparison reveals geographic variation in disruptions.
+
+**Interpretation:** Some areas may recover while others don't. Identify where disruptions are concentrated for targeted response.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1n -->
+## Coverage output: National trends
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Coverage national](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Compare HMIS and survey values — large gaps suggest denominator issues. Projected values extend surveys using HMIS trends.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_1o -->
+## Coverage output: Subnational comparison
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Coverage subnational](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Coverage estimates by subnational area, enabling geographic comparison.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Identify geographic disparities. Compare areas to find high/low coverage regions for program targeting.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m7_2 -->
 ## Moving from data to key messages
 
