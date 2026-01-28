@@ -1,6 +1,7 @@
 import Database, { Database as DatabaseType } from 'better-sqlite3'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import yaml from 'js-yaml'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -226,3 +227,61 @@ export function deleteCustomSlide(workshopId: string, filename: string) {
   const stmt = db.prepare('DELETE FROM custom_slides WHERE workshop_id = ? AND filename = ?')
   stmt.run(workshopId, filename)
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Auto-import workshops from file system on startup
+// ─────────────────────────────────────────────────────────────────────────────
+
+function autoImportWorkshops() {
+  const REPO_ROOT = process.env.NODE_ENV === 'production'
+    ? path.resolve(__dirname, '../../..')
+    : path.resolve(__dirname, '../..')
+  const WORKSHOPS_PATH = path.join(REPO_ROOT, 'workshops')
+
+  console.log('Auto-importing workshops from:', WORKSHOPS_PATH)
+
+  if (!fs.existsSync(WORKSHOPS_PATH)) {
+    console.log('Workshops folder not found, skipping auto-import')
+    return
+  }
+
+  const folders = fs.readdirSync(WORKSHOPS_PATH)
+  let imported = 0
+  let skipped = 0
+
+  for (const folder of folders) {
+    const workshopPath = path.join(WORKSHOPS_PATH, folder)
+    const yamlPath = path.join(workshopPath, 'workshop.yaml')
+
+    // Skip non-directories and folders without workshop.yaml
+    try {
+      if (!fs.statSync(workshopPath).isDirectory()) continue
+    } catch {
+      continue
+    }
+    if (!fs.existsSync(yamlPath)) continue
+
+    // Check if already exists
+    const existing = getWorkshop(folder)
+    if (existing) {
+      skipped++
+      continue
+    }
+
+    // Read and parse YAML
+    try {
+      const yamlContent = fs.readFileSync(yamlPath, 'utf-8')
+      const config = yaml.load(yamlContent) as WorkshopConfig
+      createWorkshop(folder, config)
+      imported++
+      console.log(`  Imported: ${folder}`)
+    } catch (err: any) {
+      console.error(`  Error importing ${folder}:`, err.message)
+    }
+  }
+
+  console.log(`Auto-import complete: ${imported} imported, ${skipped} already exist`)
+}
+
+// Run auto-import on module load
+autoImportWorkshops()

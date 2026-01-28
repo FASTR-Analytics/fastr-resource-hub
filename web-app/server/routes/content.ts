@@ -378,9 +378,8 @@ router.post('/render', async (req, res) => {
     markdown = markdown.replace(/\(\.\.\/resources\//g, '(/resources/')
     markdown = markdown.replace(/\(resources\//g, '(/resources/')
 
-    // Import Marp dynamically
-    const MarpModule = await import('@marp-team/marp-core')
-    const Marp = MarpModule.default || MarpModule.Marp || MarpModule
+    // Import Marp dynamically - use named export
+    const { Marp } = await import('@marp-team/marp-core')
     const marp = new Marp({ html: true })
 
     // Load FASTR theme if available
@@ -505,8 +504,7 @@ router.post('/export/module/:id', async (req, res) => {
       })
     } else if (format === 'html') {
       // Render to HTML
-      const MarpModule = await import('@marp-team/marp-core')
-      const Marp = MarpModule.default || MarpModule.Marp || MarpModule
+      const { Marp } = await import('@marp-team/marp-core')
       const marp = new Marp({ html: true })
 
       const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
@@ -618,8 +616,7 @@ router.post('/export/selection', async (req, res) => {
         topicsExported: topicContents.length,
       })
     } else if (format === 'html') {
-      const MarpModule = await import('@marp-team/marp-core')
-      const Marp = MarpModule.default || MarpModule.Marp || MarpModule
+      const { Marp } = await import('@marp-team/marp-core')
       const marp = new Marp({ html: true })
 
       const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
