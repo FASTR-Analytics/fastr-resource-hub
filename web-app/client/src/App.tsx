@@ -192,15 +192,19 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
 // Edit Session Modal
 interface EditSessionModalProps {
   session: Session
+  dayNum: number
+  totalDays: number
   onClose: () => void
   onSave: (updates: Partial<Session>) => void
   onDelete: () => void
+  onMoveToDay: (toDay: number) => void
 }
 
-function EditSessionModal({ session, onClose, onSave, onDelete }: EditSessionModalProps) {
+function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelete, onMoveToDay }: EditSessionModalProps) {
   const [sessionName, setSessionName] = useState(session.session || '')
   const [speaker, setSpeaker] = useState(session.speaker || '')
   const [duration, setDuration] = useState(session.duration || 0)
+  const [moveToDay, setMoveToDay] = useState<number | null>(null)
 
   const handleSave = () => {
     onSave({
@@ -258,6 +262,39 @@ function EditSessionModal({ session, onClose, onSave, onDelete }: EditSessionMod
               step={5}
             />
           </div>
+
+          {/* Move to Day */}
+          {totalDays > 1 && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Move to Different Day</label>
+              <div className="flex gap-2">
+                <select
+                  value={moveToDay ?? ''}
+                  onChange={(e) => setMoveToDay(e.target.value ? parseInt(e.target.value) : null)}
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                >
+                  <option value="">Select day...</option>
+                  {Array.from({ length: totalDays }, (_, i) => i + 1)
+                    .filter(d => d !== dayNum)
+                    .map(d => (
+                      <option key={d} value={d}>Day {d}</option>
+                    ))}
+                </select>
+                <button
+                  onClick={() => {
+                    if (moveToDay) {
+                      onMoveToDay(moveToDay)
+                      onClose()
+                    }
+                  }}
+                  disabled={!moveToDay}
+                  className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Move
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t">
@@ -1637,7 +1674,7 @@ function App() {
   )
 
   // Get store actions
-  const { reorderSession, updateSession, removeSession, createWorkshop, deleteWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
+  const { reorderSession, updateSession, removeSession, moveSessionToDay, createWorkshop, deleteWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
 
   // Load data only after authentication
   useEffect(() => {
@@ -3209,9 +3246,14 @@ function App() {
       {editingSession && (
         <EditSessionModal
           session={editingSession.session}
+          dayNum={editingSession.dayNum}
+          totalDays={currentConfig?.schedule?.days || 1}
           onClose={() => setEditingSession(null)}
           onSave={handleSaveSession}
           onDelete={handleDeleteSession}
+          onMoveToDay={(toDay) => {
+            moveSessionToDay(editingSession.dayNum, editingSession.index, toDay, -1)
+          }}
         />
       )}
 

@@ -80,14 +80,23 @@ const MODULE_DETAILS: Record<number, { name: string; description: string; topics
 const AI_TOOLS: Anthropic.Tool[] = [
   {
     name: 'add_module',
-    description: 'Add a module to the workshop deck. IMPORTANT: Each module has TWO versions - "full" (complete content, longer) and "condensed" (key points only, shorter). You must specify which version. If user does not specify, ASK them before adding.',
+    description: 'Add a module (or part of a module) to the workshop deck. Each module has "full" and "condensed" versions. You can split a module across multiple sessions by specifying different topic ranges.',
     input_schema: {
       type: 'object' as const,
       properties: {
         day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
         module_number: { type: 'number', description: 'Module number (0-9)' },
-        version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" (complete content, 60-180min) or "condensed" (key points, 30-60min). MUST be specified.' },
+        version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed". MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
+        session_title: { type: 'string', description: 'Custom title for this session (e.g., "Data Quality Part 1"). If not specified, uses module name.' },
+        topic_range: {
+          type: 'object',
+          properties: {
+            start: { type: 'number', description: 'Start topic number (1-based, e.g., 1 for first topic)' },
+            end: { type: 'number', description: 'End topic number (inclusive, e.g., 3 for topics 1-3)' },
+          },
+          description: 'Optional: specify which topics to include. Use this to split a module across sessions (e.g., topics 1-3 before break, 4-6 after).'
+        },
       },
       required: ['day', 'module_number', 'version'],
     },
@@ -160,18 +169,38 @@ const AI_TOOLS: Anthropic.Tool[] = [
   },
   {
     name: 'restructure_schedule',
-    description: 'Completely restructure the workshop schedule. Use this for major reorganization.',
+    description: 'Change the number of days in the workshop. If reducing days, excess days are removed.',
     input_schema: {
       type: 'object' as const,
       properties: {
         new_num_days: { type: 'number', description: 'New number of days' },
-        strategy: {
-          type: 'string',
-          enum: ['compress', 'expand', 'redistribute'],
-          description: 'How to handle the restructure',
-        },
       },
       required: ['new_num_days'],
+    },
+  },
+  {
+    name: 'remove_day',
+    description: 'Remove an entire day from the workshop. Subsequent days are shifted down (Day 4 becomes Day 3, etc.).',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Which day to remove (1-indexed)' },
+      },
+      required: ['day'],
+    },
+  },
+  {
+    name: 'move_session_to_day',
+    description: 'Move a session from one day to another day.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        from_day: { type: 'number', description: 'Source day (1-indexed)' },
+        from_position: { type: 'number', description: 'Position in source day (0-indexed)' },
+        to_day: { type: 'number', description: 'Destination day (1-indexed)' },
+        to_position: { type: 'number', description: 'Position in destination day (0-indexed, optional - defaults to end)' },
+      },
+      required: ['from_day', 'from_position', 'to_day'],
     },
   },
 ]
@@ -180,8 +209,82 @@ const AI_TOOLS: Anthropic.Tool[] = [
 // Tool Execution Functions
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Helper: Convert time string "HH:MM" to minutes since midnight
+function timeToMinutes(time: string): number {
+  const [hours, minutes] = time.split(':').map(Number)
+  return hours * 60 + minutes
+}
+
+// Helper: Convert minutes since midnight to "HH:MM" format
+function minutesToTime(mins: number): string {
+  const h = Math.floor(mins / 60)
+  const m = mins % 60
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`
+}
+
+// Helper: Calculate the current end time of all sessions in a day
+function getDayCurrentEndTime(config: any, dayNum: number): number {
+  const dayKey = `day${dayNum}`
+  const sessions = config.schedule[dayKey] || []
+  const dayStart = config.schedule.day_start_times?.[dayNum] || '09:00'
+
+  let currentTime = timeToMinutes(dayStart)
+  for (const session of sessions) {
+    if (session.duration) {
+      currentTime += session.duration
+    }
+  }
+  return currentTime
+}
+
+// Helper: Get day end time in minutes
+function getDayEndTime(config: any, dayNum: number): number {
+  const dayEnd = config.schedule.day_end_times?.[dayNum] || config.workshop?.day_end_time || '17:00'
+  return timeToMinutes(dayEnd)
+}
+
+// Helper: Validate that adding a session won't exceed day end time
+function validateSessionFits(config: any, dayNum: number, duration: number): { fits: boolean; message?: string } {
+  const currentEnd = getDayCurrentEndTime(config, dayNum)
+  const dayEnd = getDayEndTime(config, dayNum)
+  const newEnd = currentEnd + duration
+
+  if (newEnd > dayEnd) {
+    const availableMinutes = dayEnd - currentEnd
+    return {
+      fits: false,
+      message: `Session would end at ${minutesToTime(newEnd)}, but day ends at ${minutesToTime(dayEnd)}. Only ${availableMinutes} minutes available. Consider adding to a different day or reducing duration.`
+    }
+  }
+  return { fits: true }
+}
+
+// Helper: Add a session before any day_end/section placeholders
+function addSessionToDay(config: any, dayKey: string, session: any): void {
+  const sessions = config.schedule[dayKey]
+
+  // Find the position of any day_end or closing sessions
+  let insertIndex = sessions.length
+  for (let i = sessions.length - 1; i >= 0; i--) {
+    const s = sessions[i]
+    // Check for end-of-day type sessions
+    if (s.type === 'day_end' ||
+        s.type === 'section' && (s.session?.toLowerCase().includes('wrap') || s.session?.toLowerCase().includes('closing')) ||
+        s.session?.toLowerCase().includes('key messages') ||
+        s.session?.toLowerCase().includes('reflections')) {
+      insertIndex = i
+    } else {
+      // Stop looking once we hit a regular session
+      break
+    }
+  }
+
+  // Insert at the correct position
+  sessions.splice(insertIndex, 0, session)
+}
+
 function executeAddModule(config: any, input: any): { success: boolean; message: string } {
-  const { day, module_number, version, duration } = input
+  const { day, module_number, version, duration, session_title, topic_range } = input
   const dayKey = `day${day}`
 
   if (!config.schedule[dayKey]) {
@@ -193,34 +296,73 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     return { success: false, message: `Module ${module_number} not found` }
   }
 
-  // Check if this module (any version) is already in the schedule
+  // Check for overlapping topic ranges if this module already exists
+  const existingRanges: Array<{start: number, end: number, day: string}> = []
   for (const d of Object.keys(config.schedule)) {
-    // Only check day arrays (day1, day2, etc.), not metadata like 'days' or 'day_start_times'
     if (!d.match(/^day\d+$/)) continue
     const sessions = config.schedule[d]
     if (!Array.isArray(sessions)) continue
     for (const s of sessions) {
       if (s.module === `m${module_number}`) {
-        return { success: false, message: `Module ${module_number} is already in the schedule on ${d}` }
+        if (s.topic_range) {
+          existingRanges.push({ ...s.topic_range, day: d })
+        } else {
+          // Module exists without topic_range = ALL topics are used
+          return {
+            success: false,
+            message: `Module ${module_number} (${moduleInfo.name}) already exists in full on ${d}. Cannot add again.`
+          }
+        }
       }
     }
   }
 
-  // Determine topics based on version
-  // Full version uses m{n}_1, m{n}_2, etc.
-  // Condensed version uses m{n}_s1, m{n}_s2, etc.
-  const topicPrefix = version === 'condensed' ? `m${module_number}_s` : `m${module_number}_`
+  // If adding with topic_range, check for overlaps
+  if (topic_range && existingRanges.length > 0) {
+    for (const existing of existingRanges) {
+      // Check if ranges overlap
+      if (!(topic_range.end < existing.start || topic_range.start > existing.end)) {
+        return {
+          success: false,
+          message: `Topic range ${topic_range.start}-${topic_range.end} overlaps with existing range ${existing.start}-${existing.end} on ${existing.day}. Use non-overlapping ranges to split a module.`
+        }
+      }
+    }
+  }
 
-  config.schedule[dayKey].push({
+  // If adding without topic_range but module already has partial ranges, reject
+  if (!topic_range && existingRanges.length > 0) {
+    return {
+      success: false,
+      message: `Module ${module_number} already has partial sessions. Specify a topic_range to add more parts.`
+    }
+  }
+
+  // Build session name
+  const sessionName = session_title || (topic_range
+    ? `${moduleInfo.name} (Topics ${topic_range.start}-${topic_range.end})`
+    : moduleInfo.name)
+
+  const sessionDuration = duration || (version === 'condensed' ? 45 : 90)
+
+  // Validate session fits within day
+  const validation = validateSessionFits(config, day, sessionDuration)
+  if (!validation.fits) {
+    return { success: false, message: validation.message! }
+  }
+
+  // Add session before any day_end placeholders
+  addSessionToDay(config, dayKey, {
     _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-    session: moduleInfo.name,
+    session: sessionName,
     module: `m${module_number}`,
     version: version,
-    topics: [topicPrefix],  // Will be expanded when building the deck
-    duration: duration || (version === 'condensed' ? 45 : 90),
+    topic_range: topic_range || null,  // null means all topics
+    duration: sessionDuration,
   })
 
-  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name} to Day ${day}` }
+  const rangeMsg = topic_range ? ` (topics ${topic_range.start}-${topic_range.end})` : ''
+  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name}${rangeMsg} to Day ${day}` }
 }
 
 function executeAddBreak(config: any, input: any): { success: boolean; message: string } {
@@ -234,7 +376,14 @@ function executeAddBreak(config: any, input: any): { success: boolean; message: 
   const breakDuration = duration || (break_type === 'lunch' ? 60 : 15)
   const breakName = break_type === 'lunch' ? 'Lunch Break' : 'Tea Break'
 
-  config.schedule[dayKey].push({
+  // Validate break fits within day
+  const validation = validateSessionFits(config, day, breakDuration)
+  if (!validation.fits) {
+    return { success: false, message: validation.message! }
+  }
+
+  // Add break before any day_end placeholders
+  addSessionToDay(config, dayKey, {
     _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     session: breakName,
     type: 'break',
@@ -252,7 +401,14 @@ function executeAddCustomSession(config: any, input: any): { success: boolean; m
     config.schedule[dayKey] = []
   }
 
-  config.schedule[dayKey].push({
+  // Validate session fits within day
+  const validation = validateSessionFits(config, day, duration)
+  if (!validation.fits) {
+    return { success: false, message: validation.message! }
+  }
+
+  // Add session before any day_end placeholders
+  addSessionToDay(config, dayKey, {
     _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     session: session_name,
     type: 'custom',
@@ -325,6 +481,110 @@ function executeRemoveSession(config: any, input: any): { success: boolean; mess
   return { success: true, message: `Removed "${removed.session}" from Day ${day}` }
 }
 
+function executeRestructureSchedule(config: any, input: any): { success: boolean; message: string } {
+  const { new_num_days } = input
+  const currentDays = config.schedule.days || 1
+
+  if (new_num_days < 1) {
+    return { success: false, message: 'Workshop must have at least 1 day' }
+  }
+
+  // If reducing days, remove excess days
+  if (new_num_days < currentDays) {
+    for (let d = new_num_days + 1; d <= currentDays; d++) {
+      delete config.schedule[`day${d}`]
+      if (config.schedule.day_titles) delete config.schedule.day_titles[d]
+      if (config.schedule.day_start_times) delete config.schedule.day_start_times[d]
+    }
+  }
+
+  // If adding days, create empty arrays
+  if (new_num_days > currentDays) {
+    for (let d = currentDays + 1; d <= new_num_days; d++) {
+      config.schedule[`day${d}`] = []
+    }
+  }
+
+  config.schedule.days = new_num_days
+
+  return { success: true, message: `Restructured workshop from ${currentDays} to ${new_num_days} days` }
+}
+
+function executeRemoveDay(config: any, input: any): { success: boolean; message: string } {
+  const { day } = input
+  const currentDays = config.schedule.days || 1
+
+  if (day < 1 || day > currentDays) {
+    return { success: false, message: `Invalid day: ${day}. Workshop has ${currentDays} days.` }
+  }
+
+  // Remove the day
+  delete config.schedule[`day${day}`]
+  if (config.schedule.day_titles) delete config.schedule.day_titles[day]
+  if (config.schedule.day_start_times) delete config.schedule.day_start_times[day]
+
+  // Shift subsequent days down
+  for (let d = day + 1; d <= currentDays; d++) {
+    config.schedule[`day${d - 1}`] = config.schedule[`day${d}`] || []
+    delete config.schedule[`day${d}`]
+
+    if (config.schedule.day_titles && config.schedule.day_titles[d]) {
+      config.schedule.day_titles[d - 1] = config.schedule.day_titles[d]
+      delete config.schedule.day_titles[d]
+    }
+    if (config.schedule.day_start_times && config.schedule.day_start_times[d]) {
+      config.schedule.day_start_times[d - 1] = config.schedule.day_start_times[d]
+      delete config.schedule.day_start_times[d]
+    }
+  }
+
+  config.schedule.days = currentDays - 1
+
+  return { success: true, message: `Removed Day ${day} and shifted subsequent days. Workshop now has ${currentDays - 1} days.` }
+}
+
+function executeMoveSessionToDay(config: any, input: any): { success: boolean; message: string } {
+  const { from_day, from_position, to_day, to_position } = input
+  const fromDayKey = `day${from_day}`
+  const toDayKey = `day${to_day}`
+
+  // Validate source day and position
+  if (!config.schedule[fromDayKey] || !Array.isArray(config.schedule[fromDayKey])) {
+    return { success: false, message: `Day ${from_day} does not exist or has no sessions` }
+  }
+  const fromSessions = config.schedule[fromDayKey]
+  if (from_position < 0 || from_position >= fromSessions.length) {
+    return { success: false, message: `Invalid position ${from_position} in Day ${from_day} (has ${fromSessions.length} sessions)` }
+  }
+
+  // Validate destination day
+  if (!config.schedule[toDayKey]) {
+    config.schedule[toDayKey] = []
+  }
+
+  // Get the session to move
+  const [session] = fromSessions.splice(from_position, 1)
+
+  // Validate session fits in destination day
+  const validation = validateSessionFits(config, to_day, session.duration || 0)
+  if (!validation.fits) {
+    // Put it back if it doesn't fit
+    fromSessions.splice(from_position, 0, session)
+    return { success: false, message: `Cannot move to Day ${to_day}: ${validation.message}` }
+  }
+
+  // Add to destination day
+  const toSessions = config.schedule[toDayKey]
+  if (to_position !== undefined && to_position >= 0 && to_position <= toSessions.length) {
+    toSessions.splice(to_position, 0, session)
+  } else {
+    // Add before day_end placeholders
+    addSessionToDay(config, toDayKey, session)
+  }
+
+  return { success: true, message: `Moved "${session.session}" from Day ${from_day} to Day ${to_day}` }
+}
+
 function executeTool(toolName: string, input: any, config: any): { success: boolean; message: string } {
   switch (toolName) {
     case 'add_module':
@@ -339,6 +599,12 @@ function executeTool(toolName: string, input: any, config: any): { success: bool
       return executeMoveSession(config, input)
     case 'remove_session':
       return executeRemoveSession(config, input)
+    case 'restructure_schedule':
+      return executeRestructureSchedule(config, input)
+    case 'remove_day':
+      return executeRemoveDay(config, input)
+    case 'move_session_to_day':
+      return executeMoveSessionToDay(config, input)
     default:
       return { success: false, message: `Unknown tool: ${toolName}` }
   }
@@ -403,12 +669,27 @@ ${JSON.stringify(workingConfig, null, 2)}
 
 # YOUR CAPABILITIES
 You can use tools to:
-1. **add_module** - Add a module (must specify version: "full" or "condensed")
+1. **add_module** - Add a module (must specify version: "full" or "condensed"). Can use topic_range to split.
 2. **add_break** - Add tea or lunch breaks
 3. **add_custom_session** - Add custom sessions
 4. **update_workshop_settings** - Fill in workshop objectives and settings
-5. **move_session** - Move a session within a day
-6. **remove_session** - Remove a session from the deck
+5. **move_session** - Move a session within a day (reorder)
+6. **move_session_to_day** - Move a session from one day to another
+7. **remove_session** - Remove a session from the deck
+8. **restructure_schedule** - Change the number of days (e.g., compress 4 days to 3)
+9. **remove_day** - Remove an entire day (subsequent days shift down)
+
+# SPLITTING MODULES ACROSS SESSIONS
+If a module is too long and needs a break in the middle, you CAN split it:
+1. Add the first part with topic_range: {start: 1, end: 3} (topics 1-3)
+2. Add a break session
+3. Add the second part with topic_range: {start: 4, end: 6} (topics 4-6)
+
+CRITICAL RULES:
+- Topic ranges must NOT overlap - each topic can only appear ONCE
+- The slides will follow the correct order from the chapter
+- Use session_title to name the parts (e.g., "Data Quality Part 1", "Data Quality Part 2")
+- If you don't specify topic_range, ALL topics are included (cannot split after that)
 
 # INSTRUCTIONS
 - When adding modules, ALWAYS specify the version parameter
@@ -416,7 +697,8 @@ You can use tools to:
 - When the user asks to add content, USE THE TOOLS to actually add it
 - After using tools, briefly confirm what you added
 - If the user asks a question without wanting changes, just answer without using tools
-- ALWAYS actually execute the changes - don't just describe what you would do`
+- ALWAYS actually execute the changes - don't just describe what you would do
+- If you need to add a break in the middle of content, add the module ONCE, then add a break as a separate session`
 
     let currentMessages = messages
     let finalTextContent = ''

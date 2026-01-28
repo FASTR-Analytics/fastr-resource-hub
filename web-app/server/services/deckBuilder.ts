@@ -34,6 +34,7 @@ interface Session {
   type?: string
   duration?: number
   time?: string
+  topic_range?: { start: number; end: number } | null  // For splitting modules across sessions
   [key: string]: any
 }
 
@@ -101,7 +102,7 @@ async function buildSessionSlides(
 ): Promise<string | null> {
   // Module content
   if (session.module) {
-    return buildModuleSlides(session.module, session.session, sessionNumber)
+    return buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range)
   }
 
   // Template slides
@@ -163,24 +164,49 @@ const MODULE_NAMES: Record<string, string> = {
 }
 
 /**
- * Load all slides for a module
+ * Load slides for a module, optionally filtered by topic range
+ * Topics are numbered based on their file names (e.g., m4_1_xxx.md = topic 1, m4_2_xxx.md = topic 2)
+ * Files like m4_1a_xxx.md are considered sub-topics and grouped with topic 1
  */
-function buildModuleSlides(moduleId: string, sessionName?: string, sessionNumber?: number): string | null {
+function buildModuleSlides(
+  moduleId: string,
+  sessionName?: string,
+  sessionNumber?: number,
+  topicRange?: { start: number; end: number } | null
+): string | null {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return null
 
   const modulePath = path.join(CORE_CONTENT_PATH, folderName)
   if (!fs.existsSync(modulePath)) return null
 
-  const files = fs.readdirSync(modulePath)
+  // Get and sort all files by topic number (maintaining document order)
+  let files = fs.readdirSync(modulePath)
     .filter(f => f.endsWith('.md'))
     .sort((a, b) => {
+      // Extract main topic number (e.g., m4_1 from m4_1_xxx.md or m4_1a_xxx.md)
       const aMatch = a.match(/^m\d+_(\d+)/)
       const bMatch = b.match(/^m\d+_(\d+)/)
       const aNum = aMatch ? parseInt(aMatch[1]) : 0
       const bNum = bMatch ? parseInt(bMatch[1]) : 0
-      return aNum - bNum
+      if (aNum !== bNum) return aNum - bNum
+      // If same topic number, sort alphabetically (e.g., m4_1 before m4_1a before m4_1b)
+      return a.localeCompare(b)
     })
+
+  // Filter by topic range if specified
+  if (topicRange) {
+    files = files.filter(f => {
+      const match = f.match(/^m\d+_(\d+)/)
+      if (!match) return false
+      const topicNum = parseInt(match[1])
+      return topicNum >= topicRange.start && topicNum <= topicRange.end
+    })
+  }
+
+  if (files.length === 0) {
+    return null
+  }
 
   // Start with a session title slide
   const moduleName = MODULE_NAMES[moduleId] || sessionName || 'Session'
