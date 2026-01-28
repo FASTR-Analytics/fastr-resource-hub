@@ -364,11 +364,11 @@ router.post('/render', async (req, res) => {
     }
 
     // Extract presenter notes from HTML comments (before modifying markdown)
-    // Match comments that contain "PRESENTER NOTES:" or are multi-line notes
-    const notesRegex = /<!--\s*(PRESENTER NOTES:[\s\S]*?)-->/gi
+    // Match comments that contain "PRESENTER NOTES:" - handles newlines after <!--
+    const notesRegex = /<!--[\s\n]*(PRESENTER NOTES:[\s\S]*?)-->/gi
     const notesMatches = markdown.match(notesRegex) || []
     const presenterNotes = notesMatches.map((note: string) =>
-      note.replace(/<!--\s*/, '').replace(/\s*-->/, '').trim()
+      note.replace(/<!--[\s\n]*/, '').replace(/\s*-->/, '').trim()
     )
 
     // Rewrite relative image paths to absolute URLs
