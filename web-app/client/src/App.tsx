@@ -810,6 +810,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
 
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
+    setPreviewHtml(null)  // Clear old preview immediately
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
@@ -1085,6 +1086,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
+    setPreviewHtml(null)  // Clear old preview immediately
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
