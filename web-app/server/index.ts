@@ -61,7 +61,14 @@ app.post('/api/auth/login', (req, res) => {
   const { password } = req.body
   if (password === TEAM_PASSWORD) {
     req.session.authenticated = true
-    res.json({ success: true })
+    // Explicitly save session before responding to avoid race conditions
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err)
+        return res.status(500).json({ error: 'Session error' })
+      }
+      res.json({ success: true })
+    })
   } else {
     res.status(401).json({ error: 'Invalid password' })
   }

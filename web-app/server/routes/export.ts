@@ -132,12 +132,12 @@ ${sessionMarkdown}`
           // Create standalone HTML for this slide
           // Include both Marp CSS and FASTR theme CSS
           // Add base tag so relative URLs resolve correctly in srcDoc iframe
-          const baseUrl = `http://localhost:${process.env.PORT || 3001}`
+          // Base URL removed - using relative path instead
           const slideHtml = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <base href="${baseUrl}/">
+  <base href="/">
   <style>
     ${css}
     ${fastrThemeCSS}
