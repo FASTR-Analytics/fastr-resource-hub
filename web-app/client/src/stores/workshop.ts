@@ -480,9 +480,11 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
         }
       }
 
-      // If config was updated by AI, refresh it
+      // If config was updated by AI, refresh it and save to database
       if (response.updatedConfig) {
         set({ currentConfig: response.updatedConfig as any })
+        // Save the updated config to the database
+        get().saveCurrentWorkshop()
       }
 
       set({
