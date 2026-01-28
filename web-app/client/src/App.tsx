@@ -1009,7 +1009,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
               {presenterNotes.length > 0 && (
                 <div className="mt-4 flex-1 min-h-0 max-w-4xl mx-auto w-full">
                   <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-48">
-                    <h4 className="text-amber-400 text-sm font-semibold mb-2 sticky top-0 bg-gray-900 pb-1">
+                    <h4 className="text-amber-400 text-sm font-semibold mb-2">
                       Presenter Notes
                     </h4>
                     {presenterNotes.map((note, i) => (
@@ -1402,7 +1402,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               {presenterNotes.length > 0 && (
                 <div className="mt-4 flex-1 min-h-0 max-w-3xl mx-auto w-full">
                   <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-40">
-                    <h4 className="text-amber-400 text-sm font-semibold mb-2 sticky top-0 bg-gray-900 pb-1">
+                    <h4 className="text-amber-400 text-sm font-semibold mb-2">
                       Presenter Notes
                     </h4>
                     {presenterNotes.map((note, i) => (
