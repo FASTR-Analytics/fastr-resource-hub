@@ -133,7 +133,9 @@
       "Bash(git diff:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(node:*)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(COOKIE=\"s%3A6g56hC2mP1zzaqu25qvylrVuk1pI5JWi.FDy4hX8yYQ3jdu4CVx2EPvkzNiuEJhnGvvNfeYC8x5s\")",
+      "Bash(__NEW_LINE_35448b5b7f61036a__ curl -s -b \"connect.sid=$COOKIE\" -X POST http://localhost:3001/api/content/render -H \"Content-Type: application/json\" -d '{\"\"markdown\"\":\"\"# Test Slide\\\\n\\\\nHello World\"\"}')"
     ]
   }
 }

@@ -233,9 +233,10 @@ export function deleteCustomSlide(workshopId: string, filename: string) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function autoImportWorkshops() {
+  // db file is at server/db/database.ts (dev) or dist/server/db/database.js (prod)
   const REPO_ROOT = process.env.NODE_ENV === 'production'
-    ? path.resolve(__dirname, '../../..')
-    : path.resolve(__dirname, '../..')
+    ? path.resolve(__dirname, '../../../..')
+    : path.resolve(__dirname, '../../..')
   const WORKSHOPS_PATH = path.join(REPO_ROOT, 'workshops')
 
   console.log('Auto-importing workshops from:', WORKSHOPS_PATH)
