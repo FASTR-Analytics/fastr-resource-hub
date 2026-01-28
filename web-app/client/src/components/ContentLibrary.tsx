@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
 import api, { Asset } from '../../lib/api'
 import {
@@ -77,6 +77,9 @@ export function ContentLibrary() {
   const [_loadingPreview, setLoadingPreview] = useState(false)
   const [templates, setTemplates] = useState<TemplateCategory[]>([])
   const [templatePreview, setTemplatePreview] = useState<{ template: Template; category: TemplateCategory; position: { x: number; y: number }; html?: string } | null>(null)
+
+  // Track which template is being hovered to prevent race conditions
+  const hoveredTemplateRef = useRef<string | null>(null)
 
   // Assets state
   const [assets, setAssets] = useState<Asset[]>([])
@@ -260,6 +263,9 @@ export function ContentLibrary() {
     const rect = e.currentTarget.getBoundingClientRect()
     const position = { x: rect.right + 10, y: rect.top }
 
+    // Track which template we're hovering
+    hoveredTemplateRef.current = template.id
+
     // Generate preview markdown based on template type
     let markdown = ''
     if (category.id === 'breaks') {
@@ -283,6 +289,8 @@ We resume at **[time]**`
       // Load template file content
       try {
         const response = await fetch(`/api/content/template/${template.id}`, { credentials: 'include' })
+        // Check if we're still hovering this template
+        if (hoveredTemplateRef.current !== template.id) return
         if (response.ok) {
           const data = await response.json()
           markdown = `---
@@ -297,6 +305,9 @@ ${data.content}`
       }
     }
 
+    // Check if we're still hovering this template before rendering
+    if (hoveredTemplateRef.current !== template.id) return
+
     // Render to HTML
     if (markdown) {
       try {
@@ -306,6 +317,8 @@ ${data.content}`
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markdown })
         })
+        // Check again after async operation
+        if (hoveredTemplateRef.current !== template.id) return
         if (renderResponse.ok) {
           const data = await renderResponse.json()
           const html = data.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
@@ -313,7 +326,9 @@ ${data.content}`
         }
       } catch (err) {
         console.error('Failed to render preview:', err)
-        setTemplatePreview({ template, category, position })
+        if (hoveredTemplateRef.current === template.id) {
+          setTemplatePreview({ template, category, position })
+        }
       }
     } else {
       setTemplatePreview({ template, category, position })
@@ -321,6 +336,7 @@ ${data.content}`
   }
 
   const handleTemplateMouseLeave = () => {
+    hoveredTemplateRef.current = null
     setTemplatePreview(null)
   }
 
