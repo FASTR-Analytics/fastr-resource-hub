@@ -978,8 +978,8 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                     </span>
                   </div>
                 )}
-                <div className="w-full max-w-4xl">
-                  <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+                <div className="w-full max-w-5xl">
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                     <iframe
                       srcDoc={previewHtml}
                       className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
@@ -1371,8 +1371,8 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     </span>
                   </div>
                 )}
-                <div className="w-full max-w-3xl">
-                  <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+                <div className="w-full max-w-5xl">
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                     <iframe
                       srcDoc={previewHtml}
                       className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
