@@ -1,11 +1,51 @@
 import { Router } from 'express'
 import fs from 'fs'
 import path from 'path'
+import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 
 const router = Router()
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Server-side Marp render cache
+// ─────────────────────────────────────────────────────────────────────────────
+interface CacheEntry {
+  html: string
+  presenterNotes: string[]
+  timestamp: number
+}
+
+const renderCache = new Map<string, CacheEntry>()
+const CACHE_MAX_SIZE = 500  // Max number of cached renders
+const CACHE_TTL = 60 * 60 * 1000  // 1 hour TTL
+
+function getCacheKey(markdown: string): string {
+  return crypto.createHash('md5').update(markdown).digest('hex')
+}
+
+function cleanupCache() {
+  const now = Date.now()
+  // Remove expired entries
+  for (const [key, entry] of renderCache.entries()) {
+    if (now - entry.timestamp > CACHE_TTL) {
+      renderCache.delete(key)
+    }
+  }
+  // If still too large, remove oldest entries
+  if (renderCache.size > CACHE_MAX_SIZE) {
+    const entries = Array.from(renderCache.entries())
+      .sort((a, b) => a[1].timestamp - b[1].timestamp)
+    const toRemove = entries.slice(0, entries.length - CACHE_MAX_SIZE)
+    for (const [key] of toRemove) {
+      renderCache.delete(key)
+    }
+  }
+}
+
+// Clean cache periodically
+setInterval(cleanupCache, 5 * 60 * 1000)  // Every 5 minutes
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -354,13 +394,22 @@ router.get('/slide/*', (req, res) => {
 // Render markdown to HTML
 // ─────────────────────────────────────────────────────────────────────────────
 
-// POST /api/content/render - Render markdown to HTML
+// POST /api/content/render - Render markdown to HTML (with caching)
 router.post('/render', async (req, res) => {
   try {
     let { markdown } = req.body
 
     if (!markdown) {
       return res.status(400).json({ error: 'Markdown content required' })
+    }
+
+    // Check cache first
+    const cacheKey = getCacheKey(markdown)
+    const cached = renderCache.get(cacheKey)
+    if (cached) {
+      // Update timestamp to keep frequently used items fresh
+      cached.timestamp = Date.now()
+      return res.json({ html: cached.html, presenterNotes: cached.presenterNotes, cached: true })
     }
 
     // Extract presenter notes from HTML comments (before modifying markdown)
@@ -407,7 +456,14 @@ ${html}
 </body>
 </html>`
 
-    res.json({ html: fullHtml, presenterNotes })
+    // Store in cache
+    renderCache.set(cacheKey, {
+      html: fullHtml,
+      presenterNotes,
+      timestamp: Date.now()
+    })
+
+    res.json({ html: fullHtml, presenterNotes, cached: false })
   } catch (error: any) {
     console.error('Error rendering markdown:', error)
     res.status(500).json({ error: error.message })
@@ -710,6 +766,21 @@ router.get('/export/download/:filename', (req, res) => {
     console.error('Error downloading file:', error)
     res.status(500).json({ error: error.message })
   }
+})
+
+// GET /api/content/cache/stats - Get render cache statistics
+router.get('/cache/stats', (_req, res) => {
+  res.json({
+    size: renderCache.size,
+    maxSize: CACHE_MAX_SIZE,
+    ttlMs: CACHE_TTL
+  })
+})
+
+// POST /api/content/cache/clear - Clear render cache
+router.post('/cache/clear', (_req, res) => {
+  renderCache.clear()
+  res.json({ success: true, message: 'Cache cleared' })
 })
 
 export default router
