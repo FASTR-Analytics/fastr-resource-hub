@@ -505,7 +505,8 @@ router.post('/export/module/:id', async (req, res) => {
       })
     } else if (format === 'html') {
       // Render to HTML
-      const Marp = (await import('@marp-team/marp-core')).default
+      const MarpModule = await import('@marp-team/marp-core')
+      const Marp = MarpModule.default || MarpModule.Marp || MarpModule
       const marp = new Marp({ html: true })
 
       const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
@@ -617,7 +618,8 @@ router.post('/export/selection', async (req, res) => {
         topicsExported: topicContents.length,
       })
     } else if (format === 'html') {
-      const Marp = (await import('@marp-team/marp-core')).default
+      const MarpModule = await import('@marp-team/marp-core')
+      const Marp = MarpModule.default || MarpModule.Marp || MarpModule
       const marp = new Marp({ html: true })
 
       const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
