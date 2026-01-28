@@ -15,6 +15,7 @@ import assetsRouter from './routes/assets.js'
 // Services
 import { initializeMarp } from './services/marpService.js'
 import { initializeDatabase } from './db/database.js'
+import { TursoSessionStore } from './services/tursoSessionStore.js'
 
 // Load environment variables
 dotenv.config()
@@ -33,21 +34,34 @@ if (process.env.NODE_ENV === 'production') {
 // Team password from environment variable
 const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
 
-// Initialize session store (try SQLite, fall back to MemoryStore)
+// Initialize session store (Turso in production, SQLite locally)
 async function createSessionStore(): Promise<session.Store | undefined> {
+  // Use Turso for sessions in production
+  if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
+    try {
+      const store = new TursoSessionStore({
+        url: process.env.TURSO_DATABASE_URL,
+        authToken: process.env.TURSO_AUTH_TOKEN,
+      })
+      await store.initialize()
+      return store
+    } catch (err) {
+      console.error('Failed to initialize Turso session store:', err)
+      // Fall through to local SQLite
+    }
+  }
+
+  // Fall back to local SQLite for development
   try {
     const Database = (await import('better-sqlite3')).default
     const SqliteStoreFactory = (await import('better-sqlite3-session-store')).default
     const SqliteStore = SqliteStoreFactory(session)
 
-    const SESSION_DB_PATH = process.env.NODE_ENV === 'production'
-      ? '/tmp/sessions.db'
-      : path.join(__dirname, '../sessions.db')
-
+    const SESSION_DB_PATH = path.join(__dirname, '../sessions.db')
     console.log('Session database path:', SESSION_DB_PATH)
     const sessionsDb = new Database(SESSION_DB_PATH)
 
-    console.log('✓ Using SQLite session store')
+    console.log('✓ Using local SQLite session store')
     return new SqliteStore({
       client: sessionsDb,
       expired: {
