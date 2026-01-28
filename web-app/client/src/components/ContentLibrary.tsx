@@ -335,6 +335,7 @@ ${data.content}`
         // Render markdown to HTML via backend
         const renderResponse = await fetch('/api/content/render', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ markdown: data.content })
         })
