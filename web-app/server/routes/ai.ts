@@ -68,15 +68,16 @@ const MODULE_DETAILS: Record<number, { name: string; description: string; topics
 const AI_TOOLS: Anthropic.Tool[] = [
   {
     name: 'add_module',
-    description: 'Add an entire module to the workshop deck.',
+    description: 'Add a module to the workshop deck. IMPORTANT: Each module has TWO versions - "full" (complete content, longer) and "condensed" (key points only, shorter). You must specify which version. If user does not specify, ASK them before adding.',
     input_schema: {
       type: 'object' as const,
       properties: {
         day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
-        module_number: { type: 'number', description: 'Module number (0-8)' },
+        module_number: { type: 'number', description: 'Module number (0-7)' },
+        version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" (complete content, 60-180min) or "condensed" (key points, 30-60min). MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
       },
-      required: ['day', 'module_number'],
+      required: ['day', 'module_number', 'version'],
     },
   },
   {
@@ -184,12 +185,25 @@ router.post('/chat', async (req, res) => {
 # ABOUT FASTR
 FASTR (Framework for Analytics Strengthening Through Routine data) is a methodology for analyzing health system data, particularly RMNCAH-N program data from DHIS2.
 
+# CRITICAL: MODULE VERSIONS
+Each module has TWO versions available:
+- **FULL version**: Complete content with all slides and details. Takes 60-180 minutes depending on module.
+- **CONDENSED version**: Key points only, shorter slides. Takes 30-60 minutes.
+
+**RULES:**
+1. NEVER add both versions of the same module - only ONE version per module
+2. If user does not specify which version they want, ASK THEM before adding: "Would you like the full version (complete content, ~X minutes) or condensed version (key points only, ~Y minutes)?"
+3. If user says "quick overview" or "high-level" → use condensed
+4. If user says "detailed" or "comprehensive" or "full training" → use full
+5. If unclear, default to asking
+
 # AVAILABLE MODULES
 ${Object.entries(MODULE_DETAILS).map(([num, mod]) => `
 ## Module ${num}: ${mod.name}
 - **Description**: ${mod.description}
 - **Topics**: ${mod.topics.join(', ')}
-- **Duration**: ${mod.duration}
+- **Full duration**: ${mod.duration}
+- **Condensed duration**: ~30-50% of full
 `).join('\n')}
 
 # CURRENT WORKSHOP
@@ -197,7 +211,7 @@ ${JSON.stringify(context, null, 2)}
 
 # YOUR CAPABILITIES
 You can use tools to:
-1. **add_module** - Add a full module to a specific day
+1. **add_module** - Add a module (must specify version: "full" or "condensed")
 2. **add_break** - Add tea or lunch breaks
 3. **add_custom_session** - Add custom sessions
 4. **update_workshop_settings** - Fill in workshop objectives and settings
@@ -206,6 +220,8 @@ You can use tools to:
 7. **restructure_schedule** - Major schedule restructure
 
 # INSTRUCTIONS
+- When adding modules, ALWAYS specify the version parameter
+- If user doesn't specify full vs condensed, ASK before adding
 - When the user asks to add content, USE THE TOOLS to actually add it
 - After using tools, briefly confirm what you added
 - If the user asks a question without wanting changes, just answer without using tools
@@ -463,6 +479,20 @@ Given a user's description of their workshop needs, generate a COMPLETE workshop
 Available FASTR modules:
 ${moduleList}
 
+IMPORTANT - MODULE VERSIONS:
+Each module has TWO versions:
+- "full": Complete content with all slides (longer duration)
+- "condensed": Key points only (shorter duration, ~30-50% of full)
+
+You MUST choose ONE version per module - NEVER include both versions of the same module.
+
+How to decide:
+- If user says "quick", "overview", "high-level", "introductory" → use "condensed"
+- If user says "detailed", "comprehensive", "full training", "in-depth" → use "full"
+- If user specifies short days (e.g., ends at 3:30pm) → prefer "condensed" to fit content
+- If user has many days or long days → can use "full"
+- Default to "full" if not specified and time permits
+
 Generate a JSON object with this structure:
 {
   "name": "FASTR Workshop - [Country]",
@@ -471,36 +501,38 @@ Generate a JSON object with this structure:
   "days": 3,
   "day_start_time": "09:00",
   "day_end_time": "17:00",
+  "module_version": "full",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
   "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
   "modules": [0, 1, 2, 4, 5, 6, 7],
   "schedule": {
     "day1": [
-      {"session": "Introduction to FASTR", "module": "m0", "duration": 60},
+      {"session": "Introduction to FASTR", "module": "m0", "version": "full", "duration": 60},
       {"session": "Tea Break", "type": "break", "duration": 15},
-      {"session": "Identify Questions & Indicators", "module": "m1", "duration": 90}
+      {"session": "Identify Questions & Indicators", "module": "m1", "version": "full", "duration": 90}
     ],
     "day2": [
-      {"session": "Data Extraction", "module": "m2", "duration": 90},
+      {"session": "Data Extraction", "module": "m2", "version": "full", "duration": 90},
       {"session": "Lunch Break", "type": "break", "duration": 60}
     ]
   }
 }
 
 CRITICAL RULES:
-1. Select modules that match the workshop focus (e.g., "data quality focus" = emphasize modules 4, 5)
-2. Spread modules logically across days with breaks
-3. Day 1 should include Module 0 (Introduction) FIRST
-4. Add tea breaks (15min) mid-morning and mid-afternoon
-5. Add lunch break around midday (default 60min, or as specified by user)
-6. Calculate total daily content to fit within user-specified start and end times (default 09:00-17:00)
-7. For "high-level" or "introductory" workshops, include fewer topics per module
-8. ONLY two session types are allowed:
-   - Module sessions: {"session": "Name", "module": "m0", "duration": 60}
+1. NEVER include both "full" and "condensed" versions of the same module
+2. All modules in a workshop should typically use the SAME version (all full OR all condensed)
+3. Select modules that match the workshop focus (e.g., "data quality focus" = emphasize modules 4, 5)
+4. Spread modules logically across days with breaks
+5. Day 1 should include Module 0 (Introduction) FIRST
+6. Add tea breaks (15min) mid-morning and mid-afternoon
+7. Add lunch break around midday (default 60min, or as specified by user)
+8. Calculate total daily content to fit within user-specified start and end times
+9. ONLY two session types are allowed:
+   - Module sessions: {"session": "Name", "module": "m0", "version": "full", "duration": 60}
    - Break sessions: {"session": "Tea Break", "type": "break", "duration": 15}
-9. Do NOT use any other types like "discussion", "custom", etc.
-10. objectives and expected_outputs should be strings with "- " bullets separated by newlines
-11. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "4:30pm" = "16:30")
+10. Do NOT use any other types like "discussion", "custom", etc.
+11. objectives and expected_outputs should be strings with "- " bullets separated by newlines
+12. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "3:30pm" = "15:30")
 
 Return ONLY valid JSON, no explanation.`,
       messages: [
