@@ -3051,7 +3051,7 @@ function App() {
                     </label>
                     <input
                       type="text"
-                      value={currentConfig.workshop.title || 'STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE'}
+                      value={currentConfig.workshop.title || currentConfig.workshop.name || ''}
                       onChange={(e) => updateWorkshopSettings({ title: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
                       placeholder="Main title on cover slide"
@@ -3065,7 +3065,7 @@ function App() {
                     </label>
                     <input
                       type="text"
-                      value={currentConfig.workshop.subtitle || 'Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring'}
+                      value={currentConfig.workshop.subtitle || ''}
                       onChange={(e) => updateWorkshopSettings({ subtitle: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
                       placeholder="Subtitle on cover slide"

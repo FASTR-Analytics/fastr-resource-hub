@@ -553,8 +553,8 @@ function substituteVariables(
     '{{RESUME_TIME}}': calculateResumeTime(session),
     '{{LAST_DAY}}': String(config.schedule.days || 1),
     // Cover slide fields
-    '{{TITLE}}': workshop.title || 'STRENGTHENING HEALTH SYSTEMS AND RMNCAH-N OUTCOMES THROUGH RAPID CYCLE ANALYTICS AND DATA USE',
-    '{{SUBTITLE}}': workshop.subtitle || 'Country Workshop: Introduction to FASTR RMNCAH-N Service Use Monitoring',
+    '{{TITLE}}': workshop.title || config.workshop.name || 'FASTR Workshop',
+    '{{SUBTITLE}}': workshop.subtitle || `${config.workshop.country || ''} Workshop`.trim() || '',
   }
 
   // Objectives as bullet list

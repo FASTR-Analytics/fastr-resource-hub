@@ -1054,11 +1054,16 @@ How to decide:
 Generate a JSON object with this structure:
 {
   "name": "FASTR Workshop - [Country]",
+  "title": "FASTR RMNCAH-N Data Use Workshop",
+  "subtitle": "Country Workshop: [Country]",
   "country": "Country name",
   "location": "City if mentioned, otherwise empty string",
+  "start_date": "2026-03-10",
+  "end_date": "2026-03-12",
   "days": 3,
   "day_start_time": "09:00",
   "day_end_time": "17:00",
+  "lunch_duration": 60,
   "module_version": "full",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
   "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
@@ -1091,6 +1096,10 @@ CRITICAL RULES:
 10. Do NOT use any other types like "discussion", "custom", etc.
 11. objectives and expected_outputs should be strings with "- " bullets separated by newlines
 12. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "3:30pm" = "15:30")
+16. Extract start_date and end_date from user prompt in YYYY-MM-DD format (e.g., "March 10-12, 2026" → start_date: "2026-03-10", end_date: "2026-03-12")
+17. Extract lunch_duration from user prompt (default 60 minutes if not specified)
+18. Generate a concise title (for cover slide) and subtitle based on the workshop name and country
+19. Use the workshop name provided by user for the "name" field, do not modify it
 13. NEVER DUPLICATE A MODULE - each module (m0, m1, m2, etc.) can only appear ONCE in the entire schedule
 14. Do NOT create "Part 1" and "Part 2" of the same module - just include the module ONCE with appropriate duration
 15. If a module is too long for available time, either:
