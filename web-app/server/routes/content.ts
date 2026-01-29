@@ -321,7 +321,6 @@ const TEMPLATE_CATEGORIES = [
     name: 'Activities & Demos',
     description: 'Interactive session slides',
     templates: [
-      { id: 'expectations', file: 'expectations_slide.md', name: 'Expectations', icon: 'sticky', preview: 'Sticky note activity for participant expectations' },
       { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Platform Demo', icon: 'demo', preview: 'FASTR Analytics Platform demonstration' },
     ]
   },

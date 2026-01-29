@@ -248,7 +248,12 @@ export function ContentLibrary() {
 
   // Add template to schedule
   const addTemplate = (template: Template, category: TemplateCategory) => {
-    if (!currentConfig) return
+    console.log('[ContentLibrary] addTemplate called:', template.name, category.id)
+
+    if (!currentConfig) {
+      console.warn('[ContentLibrary] No currentConfig - cannot add template')
+      return
+    }
 
     const dayNum = 1
 
@@ -256,10 +261,13 @@ export function ContentLibrary() {
     let duration = 15
     if (template.id === 'lunch') duration = 60
     if (template.id === 'tea') duration = 15
+    if (category.id === 'activities') duration = 30  // Activities get 30 min
 
     // Determine session type - only use valid types from Session interface
     // Valid types: 'break' | 'section' | 'day_recap' | 'day_end' | 'day_title' | undefined
     const sessionType = category.id === 'breaks' ? 'break' as const : undefined
+
+    console.log('[ContentLibrary] Adding session:', template.name, 'with slides:', template.file)
 
     addSession(dayNum, {
       session: template.name,
@@ -313,17 +321,13 @@ We resume at **[time]**`
     } else if (template.file) {
       // Load template file content
       try {
-        const response = await fetch(`/api/content/template/${template.id}`, { credentials: 'include' })
+        const response = await fetch(`/api/content/templates/${template.id}`, { credentials: 'include' })
         // Check if we're still hovering this template
         if (hoveredTemplateRef.current !== template.id) return
         if (response.ok) {
           const data = await response.json()
-          markdown = `---
-marp: true
-theme: fastr
----
-
-${data.content}`
+          // Use content directly - it already has frontmatter
+          markdown = data.content
         }
       } catch (err) {
         console.error('Failed to load template:', err)
@@ -670,9 +674,10 @@ ${data.content}`
                       {category.templates.map((template) => (
                         <div
                           key={template.id}
-                          className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-gray-50 transition-colors group"
+                          className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-gray-50 transition-colors group cursor-pointer"
                           onMouseEnter={(e) => handleTemplateMouseEnter(e, template, category)}
                           onMouseLeave={handleTemplateMouseLeave}
+                          onClick={() => addTemplate(template, category)}
                         >
                           <span className="text-amber-600 flex-shrink-0">
                             {getTemplateIcon(template.icon)}
