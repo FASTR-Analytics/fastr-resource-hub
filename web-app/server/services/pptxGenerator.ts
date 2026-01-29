@@ -517,8 +517,8 @@ function parseInlineFormatting(text: string, baseOptions: any): PptxGenJS.TextPr
   }
 
   // Add breakLine to the last run
-  if (runs.length > 0) {
-    runs[runs.length - 1].options.breakLine = true
+  if (runs.length > 0 && runs[runs.length - 1].options) {
+    runs[runs.length - 1].options!.breakLine = true
   }
 
   return runs
