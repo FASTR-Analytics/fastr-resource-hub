@@ -235,20 +235,22 @@ function buildModuleSlides(
   // Filter by version (full vs condensed)
   // Full version: files like m4_0_*, m4_1_*, m4_1a_* (NO _s after module ID)
   // Condensed version: files like m4_s1_*, m4_s2_* (WITH _s after module ID)
-  if (version === 'condensed') {
+  // Default to "full" if not specified
+  const effectiveVersion = version || 'full'
+
+  if (effectiveVersion === 'condensed') {
     // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
     files = files.filter(f => {
       const match = f.match(/^m\d+_s\d+/)
       return match !== null
     })
-  } else if (version === 'full') {
-    // Full: exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
+  } else {
+    // Full (default): exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
     files = files.filter(f => {
       const match = f.match(/^m\d+_s\d+/)
       return match === null  // NOT a condensed file
     })
   }
-  // If no version specified, load all files (backwards compatible, but may cause duplicates)
 
   // Sort files by topic number
   files = files.sort((a, b) => {
@@ -332,10 +334,12 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
 
   let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
 
-  // Filter by version if specified
-  if (version === 'condensed') {
+  // Filter by version (default to "full" if not specified)
+  const effectiveVersion = version || 'full'
+  if (effectiveVersion === 'condensed') {
     files = files.filter(f => f.match(/^m\d+_s\d+/) !== null)
-  } else if (version === 'full') {
+  } else {
+    // Full (default): exclude condensed files
     files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
   }
 
@@ -468,13 +472,16 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string 
     let displayName = rawName
     const isBreak = breakTypes.includes(s.type || '')
     const isAdmin = skipNumberTypes.includes(s.type || '')
-    if (!isBreak && !isAdmin && s.module) {
+    const isModuleSession = !isBreak && !isAdmin && s.module
+    if (isModuleSession) {
       displayName = `Session ${sessionNumber}: ${rawName}`
       sessionNumber++
     }
 
     if (timeStr) {
-      rows.push(`| ${timeStr} | **${displayName}** | ${speaker} |`)
+      // Only make module sessions bold, not breaks or admin items
+      const formattedName = isModuleSession ? `**${displayName}**` : displayName
+      rows.push(`| ${timeStr} | ${formattedName} | ${speaker} |`)
     }
 
     // Advance current time by duration

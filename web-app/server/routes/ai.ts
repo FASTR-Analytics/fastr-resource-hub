@@ -1091,6 +1091,12 @@ CRITICAL RULES:
 10. Do NOT use any other types like "discussion", "custom", etc.
 11. objectives and expected_outputs should be strings with "- " bullets separated by newlines
 12. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "3:30pm" = "15:30")
+13. NEVER DUPLICATE A MODULE - each module (m0, m1, m2, etc.) can only appear ONCE in the entire schedule
+14. Do NOT create "Part 1" and "Part 2" of the same module - just include the module ONCE with appropriate duration
+15. If a module is too long for available time, either:
+    - Use the condensed version instead
+    - OR place it across a break (module before break, break, then continue with next module after)
+    - NEVER split a single module into multiple sessions with the same content
 
 Return ONLY valid JSON, no explanation.`,
       messages: [
@@ -1115,6 +1121,86 @@ Return ONLY valid JSON, no explanation.`,
     }
 
     const workshopConfig = JSON.parse(jsonContent)
+
+    // POST-PROCESSING: Remove duplicate modules and clean up schedule
+    // The AI sometimes creates "Part 1" and "Part 2" with the same module content
+    if (workshopConfig.schedule) {
+      const seenModules = new Set<string>()
+      let removedCount = 0
+
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+
+        const sessions = workshopConfig.schedule[dayKey]
+
+        // Pass 1: Mark duplicates and combine durations
+        const toRemove = new Set<number>()
+        for (let i = 0; i < sessions.length; i++) {
+          const session = sessions[i]
+          if (!session.module) continue
+
+          const moduleKey = session.module
+          if (seenModules.has(moduleKey)) {
+            console.log(`[AI Post-process] Removing duplicate: ${moduleKey} (${session.session})`)
+            toRemove.add(i)
+            removedCount++
+          } else {
+            seenModules.add(moduleKey)
+          }
+        }
+
+        // Pass 2: Remove duplicates
+        workshopConfig.schedule[dayKey] = sessions.filter((_: any, i: number) => !toRemove.has(i))
+
+        // Helper to check if a session is a lunch break (always keep these)
+        const isLunch = (s: any) => s?.type === 'break' && s?.session?.toLowerCase().includes('lunch')
+        const isTeaBreak = (s: any) => s?.type === 'break' && !s?.session?.toLowerCase().includes('lunch')
+
+        // Pass 3: Remove consecutive tea breaks (if duplicate removal left two breaks in a row)
+        // Always keep lunch breaks
+        const cleaned: any[] = []
+        for (const session of workshopConfig.schedule[dayKey]) {
+          const lastSession = cleaned[cleaned.length - 1]
+          // Skip if this is a tea break and the previous one was also a break
+          if (isTeaBreak(session) && lastSession?.type === 'break') {
+            console.log(`[AI Post-process] Removing consecutive tea break: ${session.session}`)
+            continue
+          }
+          cleaned.push(session)
+        }
+        workshopConfig.schedule[dayKey] = cleaned
+
+        // Pass 4: Remove trailing tea breaks at end of day (keep lunch if it's there)
+        while (workshopConfig.schedule[dayKey].length > 0) {
+          const lastSession = workshopConfig.schedule[dayKey][workshopConfig.schedule[dayKey].length - 1]
+          if (isTeaBreak(lastSession)) {
+            console.log(`[AI Post-process] Removing trailing tea break: ${lastSession.session}`)
+            workshopConfig.schedule[dayKey].pop()
+          } else {
+            break
+          }
+        }
+
+        // Pass 5: Ensure each day has a lunch break (add one if missing)
+        const hasLunch = workshopConfig.schedule[dayKey].some((s: any) => isLunch(s))
+        if (!hasLunch && workshopConfig.schedule[dayKey].length > 0) {
+          // Find middle of sessions to insert lunch
+          const sessions = workshopConfig.schedule[dayKey]
+          const middleIndex = Math.floor(sessions.length / 2)
+          console.log(`[AI Post-process] Adding missing lunch break to ${dayKey}`)
+          sessions.splice(middleIndex, 0, {
+            session: 'Lunch Break',
+            type: 'break',
+            duration: workshopConfig.lunch_duration || 60
+          })
+        }
+      }
+
+      if (removedCount > 0) {
+        console.log(`[AI Post-process] Removed ${removedCount} duplicate module(s)`)
+      }
+    }
+
     res.json(workshopConfig)
   } catch (error: any) {
     console.error('AI generate-workshop error:', error)
