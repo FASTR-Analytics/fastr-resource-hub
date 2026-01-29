@@ -36,6 +36,7 @@ interface Session {
   duration?: number
   time?: string
   topic_range?: { start: number; end: number } | null  // For splitting modules across sessions
+  version?: 'full' | 'condensed'  // Which content version to use
   [key: string]: any
 }
 
@@ -103,21 +104,55 @@ async function buildSessionSlides(
 ): Promise<string | null> {
   const allSlideContents: string[] = []
 
-  // Module content
-  if (session.module) {
-    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides)
-    if (moduleSlides) {
-      allSlideContents.push(moduleSlides)
-    }
-  }
-
-  // Additional slides (from slides array)
-  // These can be added on top of module content
+  // PREFIX SLIDES (from slides array) - load FIRST
+  // This allows adding intro slides before module content
+  // e.g., Add m4_0_fastr_methods_overview.md before condensed content
   if (session.slides && session.slides.length > 0) {
     for (const slideFile of session.slides) {
       const content = await loadSlideContent(slideFile, config, dayNumber, session)
       if (content) {
         allSlideContents.push(content)
+      }
+    }
+  }
+
+  // MODULE CONTENT - load SECOND
+  // Uses full or condensed version based on session.version
+  if (session.module) {
+    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version)
+    if (moduleSlides) {
+      allSlideContents.push(moduleSlides)
+    }
+  }
+
+  // TOPICS ARRAY - load THIRD
+  // Individual topic files like m4_s1, m4_s2, etc.
+  // Useful for cherry-picking specific topics without loading entire module
+  if (session.topics && Array.isArray(session.topics) && session.topics.length > 0) {
+    for (const topicId of session.topics) {
+      // Topic IDs like "m4_s1" need to be converted to file names
+      // Try to find the matching file in core_content
+      const moduleMatch = topicId.match(/^(m\d+)_/)
+      if (moduleMatch) {
+        const moduleId = moduleMatch[1]
+        const folderName = MODULE_FOLDERS[moduleId]
+        if (folderName) {
+          const modulePath = path.join(CORE_CONTENT_PATH, folderName)
+          if (fs.existsSync(modulePath)) {
+            // Find file that starts with the topic ID
+            const files = fs.readdirSync(modulePath).filter(f => f.startsWith(topicId) && f.endsWith('.md'))
+            for (const file of files) {
+              let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
+              // Remove frontmatter
+              content = content.replace(/^---[\s\S]*?---\s*/m, '')
+              content = content.replace(/\n---\s*$/, '')
+              content = substituteVariables(content, config, dayNumber, session)
+              if (content.trim()) {
+                allSlideContents.push(content.trim())
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -175,13 +210,18 @@ const MODULE_NAMES: Record<string, string> = {
  * Load slides for a module, optionally filtered by topic range or excluded slides
  * Topics are numbered based on their file names (e.g., m4_1_xxx.md = topic 1, m4_2_xxx.md = topic 2)
  * Files like m4_1a_xxx.md are considered sub-topics and grouped with topic 1
+ *
+ * Content versions:
+ * - "full": Uses files like m4_0_*, m4_1_*, m4_1a_*, m4_2_* (numbered, no _s prefix)
+ * - "condensed": Uses files like m4_s1_*, m4_s2_*, m4_s3_* (with _s prefix)
  */
 function buildModuleSlides(
   moduleId: string,
   sessionName?: string,
   sessionNumber?: number,
   topicRange?: { start: number; end: number } | null,
-  excludedSlides?: string[]
+  excludedSlides?: string[],
+  version?: 'full' | 'condensed'
 ): string | null {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return null
@@ -189,27 +229,63 @@ function buildModuleSlides(
   const modulePath = path.join(CORE_CONTENT_PATH, folderName)
   if (!fs.existsSync(modulePath)) return null
 
-  // Get and sort all files by topic number (maintaining document order)
-  let files = fs.readdirSync(modulePath)
-    .filter(f => f.endsWith('.md'))
-    .sort((a, b) => {
-      // Extract main topic number (e.g., m4_1 from m4_1_xxx.md or m4_1a_xxx.md)
-      const aMatch = a.match(/^m\d+_(\d+)/)
-      const bMatch = b.match(/^m\d+_(\d+)/)
-      const aNum = aMatch ? parseInt(aMatch[1]) : 0
-      const bNum = bMatch ? parseInt(bMatch[1]) : 0
+  // Get all .md files
+  let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
+
+  // Filter by version (full vs condensed)
+  // Full version: files like m4_0_*, m4_1_*, m4_1a_* (NO _s after module ID)
+  // Condensed version: files like m4_s1_*, m4_s2_* (WITH _s after module ID)
+  if (version === 'condensed') {
+    // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
+    files = files.filter(f => {
+      const match = f.match(/^m\d+_s\d+/)
+      return match !== null
+    })
+  } else if (version === 'full') {
+    // Full: exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
+    files = files.filter(f => {
+      const match = f.match(/^m\d+_s\d+/)
+      return match === null  // NOT a condensed file
+    })
+  }
+  // If no version specified, load all files (backwards compatible, but may cause duplicates)
+
+  // Sort files by topic number
+  files = files.sort((a, b) => {
+      // Handle condensed files (m4_s1, m4_s2, etc.)
+      const aCondensedMatch = a.match(/^m\d+_s(\d+)/)
+      const bCondensedMatch = b.match(/^m\d+_s(\d+)/)
+
+      // Handle full files (m4_0, m4_1, m4_1a, etc.)
+      const aFullMatch = a.match(/^m\d+_(\d+)/)
+      const bFullMatch = b.match(/^m\d+_(\d+)/)
+
+      // Get numbers for sorting
+      const aNum = aCondensedMatch ? parseInt(aCondensedMatch[1]) : (aFullMatch ? parseInt(aFullMatch[1]) : 0)
+      const bNum = bCondensedMatch ? parseInt(bCondensedMatch[1]) : (bFullMatch ? parseInt(bFullMatch[1]) : 0)
+
       if (aNum !== bNum) return aNum - bNum
       // If same topic number, sort alphabetically (e.g., m4_1 before m4_1a before m4_1b)
       return a.localeCompare(b)
     })
 
   // Filter by topic range if specified
+  // Works for both full (m4_1_*) and condensed (m4_s1_*) files
   if (topicRange) {
     files = files.filter(f => {
-      const match = f.match(/^m\d+_(\d+)/)
-      if (!match) return false
-      const topicNum = parseInt(match[1])
-      return topicNum >= topicRange.start && topicNum <= topicRange.end
+      // Try condensed pattern first (m4_s1, m4_s2, etc.)
+      const condensedMatch = f.match(/^m\d+_s(\d+)/)
+      if (condensedMatch) {
+        const topicNum = parseInt(condensedMatch[1])
+        return topicNum >= topicRange.start && topicNum <= topicRange.end
+      }
+      // Try full pattern (m4_0, m4_1, m4_1a, etc.)
+      const fullMatch = f.match(/^m\d+_(\d+)/)
+      if (fullMatch) {
+        const topicNum = parseInt(fullMatch[1])
+        return topicNum >= topicRange.start && topicNum <= topicRange.end
+      }
+      return false
     })
   }
 
@@ -244,21 +320,38 @@ function buildModuleSlides(
 
 /**
  * Get list of all slide files for a module (for UI to display)
+ * @param moduleId - Module ID (e.g., "m4")
+ * @param version - Optional version filter ("full" or "condensed")
  */
-export function getModuleSlideFiles(moduleId: string): string[] {
+export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'condensed'): string[] {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return []
 
   const modulePath = path.join(CORE_CONTENT_PATH, folderName)
   if (!fs.existsSync(modulePath)) return []
 
-  return fs.readdirSync(modulePath)
-    .filter(f => f.endsWith('.md'))
-    .sort((a, b) => {
-      const aMatch = a.match(/^m\d+_(\d+)/)
-      const bMatch = b.match(/^m\d+_(\d+)/)
-      const aNum = aMatch ? parseInt(aMatch[1]) : 0
-      const bNum = bMatch ? parseInt(bMatch[1]) : 0
+  let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
+
+  // Filter by version if specified
+  if (version === 'condensed') {
+    files = files.filter(f => f.match(/^m\d+_s\d+/) !== null)
+  } else if (version === 'full') {
+    files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
+  }
+
+  return files.sort((a, b) => {
+      // Handle condensed files (m4_s1, m4_s2, etc.)
+      const aCondensedMatch = a.match(/^m\d+_s(\d+)/)
+      const bCondensedMatch = b.match(/^m\d+_s(\d+)/)
+
+      // Handle full files (m4_0, m4_1, m4_1a, etc.)
+      const aFullMatch = a.match(/^m\d+_(\d+)/)
+      const bFullMatch = b.match(/^m\d+_(\d+)/)
+
+      // Get numbers for sorting
+      const aNum = aCondensedMatch ? parseInt(aCondensedMatch[1]) : (aFullMatch ? parseInt(aFullMatch[1]) : 0)
+      const bNum = bCondensedMatch ? parseInt(bCondensedMatch[1]) : (bFullMatch ? parseInt(bFullMatch[1]) : 0)
+
       if (aNum !== bNum) return aNum - bNum
       return a.localeCompare(b)
     })
