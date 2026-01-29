@@ -144,7 +144,12 @@
       "Bash(turso db:*)",
       "Bash(# Kill any existing processes on ports 3001 and 5173 pkill -f \"\"tsx watch server/index.ts\"\" || true pkill -f \"\"vite\"\" || true sleep 1 # Check if ports are free now lsof -ti:3001)",
       "Bash(# Kill existing server processes pkill -f \"\"tsx watch server/index.ts\"\" || true lsof -ti:3001)",
-      "Bash(__NEW_LINE_a4377e8df5925d83__ echo \"\")"
+      "Bash(__NEW_LINE_a4377e8df5925d83__ echo \"\")",
+      "Bash(./dev.sh:*)",
+      "Bash(__NEW_LINE_83488684c3a1d49c__ echo \"\")",
+      "Bash(__NEW_LINE_a7df5db7aae9418f__ echo \"\")",
+      "Bash(sqlite3:*)",
+      "Bash(npx tsx:*)"
     ]
   }
 }

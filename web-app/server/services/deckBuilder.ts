@@ -31,6 +31,7 @@ interface Session {
   session: string
   module?: string
   slides?: string[]
+  excludedSlides?: string[]  // Slide files to exclude from module content
   type?: string
   duration?: number
   time?: string
@@ -100,23 +101,30 @@ async function buildSessionSlides(
   dayNumber: number,
   sessionNumber?: number
 ): Promise<string | null> {
+  const allSlideContents: string[] = []
+
   // Module content
   if (session.module) {
-    return buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range)
+    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides)
+    if (moduleSlides) {
+      allSlideContents.push(moduleSlides)
+    }
   }
 
-  // Template slides
+  // Additional slides (from slides array)
+  // These can be added on top of module content
   if (session.slides && session.slides.length > 0) {
-    const slideContents: string[] = []
-
     for (const slideFile of session.slides) {
       const content = await loadSlideContent(slideFile, config, dayNumber, session)
       if (content) {
-        slideContents.push(content)
+        allSlideContents.push(content)
       }
     }
+  }
 
-    return slideContents.join('\n\n---\n\n')
+  // If we have any content, return it
+  if (allSlideContents.length > 0) {
+    return allSlideContents.join('\n\n---\n\n')
   }
 
   // Break slides
@@ -164,7 +172,7 @@ const MODULE_NAMES: Record<string, string> = {
 }
 
 /**
- * Load slides for a module, optionally filtered by topic range
+ * Load slides for a module, optionally filtered by topic range or excluded slides
  * Topics are numbered based on their file names (e.g., m4_1_xxx.md = topic 1, m4_2_xxx.md = topic 2)
  * Files like m4_1a_xxx.md are considered sub-topics and grouped with topic 1
  */
@@ -172,7 +180,8 @@ function buildModuleSlides(
   moduleId: string,
   sessionName?: string,
   sessionNumber?: number,
-  topicRange?: { start: number; end: number } | null
+  topicRange?: { start: number; end: number } | null,
+  excludedSlides?: string[]
 ): string | null {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return null
@@ -204,6 +213,11 @@ function buildModuleSlides(
     })
   }
 
+  // Filter out excluded slides
+  if (excludedSlides && excludedSlides.length > 0) {
+    files = files.filter(f => !excludedSlides.includes(f))
+  }
+
   if (files.length === 0) {
     return null
   }
@@ -229,6 +243,28 @@ function buildModuleSlides(
 }
 
 /**
+ * Get list of all slide files for a module (for UI to display)
+ */
+export function getModuleSlideFiles(moduleId: string): string[] {
+  const folderName = MODULE_FOLDERS[moduleId]
+  if (!folderName) return []
+
+  const modulePath = path.join(CORE_CONTENT_PATH, folderName)
+  if (!fs.existsSync(modulePath)) return []
+
+  return fs.readdirSync(modulePath)
+    .filter(f => f.endsWith('.md'))
+    .sort((a, b) => {
+      const aMatch = a.match(/^m\d+_(\d+)/)
+      const bMatch = b.match(/^m\d+_(\d+)/)
+      const aNum = aMatch ? parseInt(aMatch[1]) : 0
+      const bNum = bMatch ? parseInt(bMatch[1]) : 0
+      if (aNum !== bNum) return aNum - bNum
+      return a.localeCompare(b)
+    })
+}
+
+/**
  * Load a slide template and substitute variables
  */
 async function loadSlideContent(
@@ -249,6 +285,18 @@ async function loadSlideContent(
   if (!fs.existsSync(filePath)) {
     // Try custom_slides subfolder
     filePath = path.join(TEMPLATES_PATH, 'custom_slides', slideFile)
+  }
+
+  // Try core_content folders (for topic files like m4_01_approach.md)
+  if (!fs.existsSync(filePath)) {
+    const moduleMatch = slideFile.match(/^(m\d+)_/)
+    if (moduleMatch) {
+      const moduleId = moduleMatch[1]
+      const folderName = MODULE_FOLDERS[moduleId]
+      if (folderName) {
+        filePath = path.join(CORE_CONTENT_PATH, folderName, slideFile)
+      }
+    }
   }
 
   if (!fs.existsSync(filePath)) {
@@ -489,15 +537,18 @@ ${resumeTime ? `We resume at **${resumeTime}**` : ''}
 
 /**
  * Build a day recap slide - recaps the PREVIOUS day
- * Just a simple title slide, facilitator fills in verbally
+ * Simple slide with thought icon, facilitator fills in verbally
  */
 function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number): string {
   const previousDay = dayNumber - 1
 
-  return `<!-- _class: section-cover -->
-![bg](../../resources/backgrounds/section_slide.png)
+  return `## Day ${previousDay} Recap
 
-# Day ${previousDay} Recap
+<div style="display: flex; justify-content: center; align-items: center; height: 60%;">
+
+![w:200](../../resources/icons/thought.png)
+
+</div>
 `
 }
 
@@ -506,16 +557,19 @@ function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber:
  */
 function buildDayEndSlide(session: Session, dayNumber: number): string {
   return `<!-- _class: section-cover -->
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
 # Key messages and wrap-up
 
 ---
 
-<!-- _class: section-cover -->
-![bg](../resources/backgrounds/section_slide.png)
+## Reflections from Participants
 
-# Reflections from Participants
+<div style="display: flex; justify-content: center; align-items: center; height: 60%;">
+
+![w:200](../../resources/icons/communication.png)
+
+</div>
 `
 }
 

@@ -69,12 +69,15 @@ interface TemplateCategory {
 }
 
 export function ContentLibrary() {
-  const { contentLibrary, addSession, currentConfig, currentWorkshopId } = useWorkshopStore()
+  const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession } = useWorkshopStore()
   const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
   const [fullPreview, setFullPreview] = useState<{ topic: Topic; module: Module; content: string; html?: string } | null>(null)
+
+  // Add to session dialog state
+  const [addToSessionDialog, setAddToSessionDialog] = useState<{ topic: Topic; module: Module } | null>(null)
   const [_loadingPreview, setLoadingPreview] = useState(false)
   const [templates, setTemplates] = useState<TemplateCategory[]>([])
   const [templatePreview, setTemplatePreview] = useState<{ template: Template; category: TemplateCategory; position: { x: number; y: number }; html?: string } | null>(null)
@@ -394,16 +397,15 @@ ${data.content}`
     }
   }
 
-  // Add topic to current day
+  // Show dialog to choose where to add topic
   const addTopic = (topic: Topic, module: Module) => {
     if (!currentConfig) return
+    setAddToSessionDialog({ topic, module })
+  }
 
-    // Add to Day 1 by default (user can drag to another day)
-    const dayNum = 1
-
-    // Estimate duration based on slide count (3 min per slide average)
+  // Add topic as a new session
+  const addTopicAsNewSession = (topic: Topic, module: Module, dayNum: number = 1) => {
     const duration = Math.max(15, topic.slideCount * 3)
-
     addSession(dayNum, {
       session: topic.title,
       module: module.id,
@@ -411,6 +413,41 @@ ${data.content}`
       duration: duration,
       slides: [topic.file],
     })
+    setAddToSessionDialog(null)
+  }
+
+  // Add topic to an existing session
+  const addTopicToExistingSession = (topic: Topic, dayNum: number, sessionIdx: number) => {
+    if (!currentConfig) return
+    const dayKey = `day${dayNum}`
+    const sessions = currentConfig.schedule[dayKey] || []
+    const existingSession = sessions[sessionIdx]
+    if (existingSession) {
+      const topicDuration = Math.max(15, topic.slideCount * 3)
+      updateSession(dayNum, sessionIdx, {
+        topics: [...(existingSession.topics || []), topic.id],
+        slides: [...(existingSession.slides || []), topic.file],
+        duration: (existingSession.duration || 0) + topicDuration,
+      })
+    }
+    setAddToSessionDialog(null)
+  }
+
+  // Get all module sessions from all days
+  const getExistingModuleSessions = () => {
+    if (!currentConfig) return []
+    const sessions: Array<{ dayNum: number; sessionIdx: number; session: any }> = []
+    const numDays = currentConfig.schedule.days || 1
+    for (let d = 1; d <= numDays; d++) {
+      const dayKey = `day${d}`
+      const daySessions = currentConfig.schedule[dayKey] || []
+      daySessions.forEach((s: any, idx: number) => {
+        if (s.module) {
+          sessions.push({ dayNum: d, sessionIdx: idx, session: s })
+        }
+      })
+    }
+    return sessions
   }
 
   // Module duration estimates
@@ -978,6 +1015,87 @@ ${data.content}`
                 className="px-4 py-2 text-sm bg-fastr-primary text-white rounded hover:bg-fastr-primary/90"
               >
                 Add to Day 1
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add to Session Dialog */}
+      {addToSessionDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div className="flex items-center justify-between px-4 py-3 border-b">
+              <h3 className="font-semibold">Add Slide</h3>
+              <button
+                onClick={() => setAddToSessionDialog(null)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-4">
+              {/* Selected topic info */}
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg mb-4">
+                <div className="text-sm font-medium text-blue-800">{addToSessionDialog.topic.title}</div>
+                <div className="text-xs text-blue-600 mt-1">
+                  From: M{addToSessionDialog.module.number} - {addToSessionDialog.module.name}
+                </div>
+              </div>
+
+              {/* Options */}
+              <div className="space-y-2">
+                {/* Create new session */}
+                <button
+                  onClick={() => addTopicAsNewSession(addToSessionDialog.topic, addToSessionDialog.module)}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed border-gray-300 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                    <Plus className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-800">Create New Session</div>
+                    <div className="text-sm text-gray-500">Add as a separate session on Day 1</div>
+                  </div>
+                </button>
+
+                {/* Existing sessions */}
+                {getExistingModuleSessions().length > 0 && (
+                  <>
+                    <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-1 pt-2">
+                      Or add to existing session
+                    </div>
+                    <div className="max-h-48 overflow-y-auto space-y-1">
+                      {getExistingModuleSessions().map(({ dayNum, sessionIdx, session }) => (
+                        <button
+                          key={`${dayNum}-${sessionIdx}`}
+                          onClick={() => addTopicToExistingSession(addToSessionDialog.topic, dayNum, sessionIdx)}
+                          className="w-full flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-700">
+                            D{dayNum}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-gray-800 truncate">{session.session}</div>
+                            <div className="text-sm text-gray-500">
+                              {session.module && <span className="text-blue-600">{session.module.toUpperCase()}</span>}
+                              {(session.slides?.length ?? 0) > 0 && <span> + {session.slides?.length} extra</span>}
+                              {' • '}{session.duration || 0} min
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-end px-4 py-3 border-t bg-gray-50">
+              <button
+                onClick={() => setAddToSessionDialog(null)}
+                className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded"
+              >
+                Cancel
               </button>
             </div>
           </div>

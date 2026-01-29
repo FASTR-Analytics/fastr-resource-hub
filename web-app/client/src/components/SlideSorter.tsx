@@ -202,7 +202,12 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
 interface EditSessionModalProps {
   session: SessionGroup | null
   onClose: () => void
-  onSave: (updates: { session?: string; speaker?: string; duration?: number }) => void
+  onSave: (updates: { session?: string; speaker?: string; duration?: number; slides?: string[]; excludedSlides?: string[] }) => void
+}
+
+interface ModuleSlideInfo {
+  filename: string
+  title: string
 }
 
 function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
@@ -210,6 +215,11 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
   const [sessionName, setSessionName] = useState('')
   const [speaker, setSpeaker] = useState('')
   const [duration, setDuration] = useState(0)
+  const [extraSlides, setExtraSlides] = useState<string[]>([])
+  const [moduleId, setModuleId] = useState<string | null>(null)
+  const [moduleSlides, setModuleSlides] = useState<ModuleSlideInfo[]>([])
+  const [excludedSlides, setExcludedSlides] = useState<string[]>([])
+  const [loadingModuleSlides, setLoadingModuleSlides] = useState(false)
 
   // Get the actual session data from config
   useEffect(() => {
@@ -221,15 +231,80 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
         setSessionName(sessionData.session || '')
         setSpeaker(sessionData.speaker || '')
         setDuration(sessionData.duration || 0)
+        setExtraSlides(sessionData.slides || [])
+        setModuleId(sessionData.module || null)
+        setExcludedSlides(sessionData.excludedSlides || [])
       }
     }
   }, [session, currentConfig])
 
+  // Fetch module slides when moduleId is set
+  useEffect(() => {
+    if (moduleId) {
+      setLoadingModuleSlides(true)
+      fetch(`/api/content/modules/${moduleId}`, { credentials: 'include' })
+        .then(res => res.json())
+        .then(data => {
+          if (data.slides) {
+            const slides = data.slides.map((s: any) => ({
+              filename: s.filename,
+              title: extractTitle(s.filename, s.content)
+            }))
+            setModuleSlides(slides)
+          }
+        })
+        .catch(err => console.error('Failed to load module slides:', err))
+        .finally(() => setLoadingModuleSlides(false))
+    } else {
+      setModuleSlides([])
+    }
+  }, [moduleId])
+
+  // Extract title from markdown content or filename
+  const extractTitle = (filename: string, content: string) => {
+    const titleMatch = content.match(/^##\s+(.+)$/m)
+    if (titleMatch) {
+      return titleMatch[1].replace(/\s*-\s*Module\s*\d+$/i, '').trim()
+    }
+    return getSlideDisplayName(filename)
+  }
+
+  const removeExtraSlide = (index: number) => {
+    const newSlides = extraSlides.filter((_, i) => i !== index)
+    setExtraSlides(newSlides)
+  }
+
+  const toggleModuleSlide = (filename: string) => {
+    if (excludedSlides.includes(filename)) {
+      setExcludedSlides(excludedSlides.filter(f => f !== filename))
+    } else {
+      setExcludedSlides([...excludedSlides, filename])
+    }
+  }
+
+  // Get display name for a slide file
+  const getSlideDisplayName = (filename: string) => {
+    // Remove path prefixes and extensions
+    let name = filename
+      .replace('custom_slides/', '')
+      .replace('.md', '')
+    // Convert underscores to spaces and capitalize
+    name = name.replace(/_/g, ' ')
+    // If it's a module topic file (m4_1_xxx), make it more readable
+    const moduleMatch = name.match(/^(m\d+)\s+(\d+[a-z]?)\s+(.+)$/i)
+    if (moduleMatch) {
+      return `${moduleMatch[1].toUpperCase()}.${moduleMatch[2]}: ${moduleMatch[3]}`
+    }
+    return name.charAt(0).toUpperCase() + name.slice(1)
+  }
+
   if (!session) return null
+
+  const activeModuleSlides = moduleSlides.filter(s => !excludedSlides.includes(s.filename))
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
-      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <h3 className="text-lg font-semibold text-white mb-4">Edit Session</h3>
 
         <div className="space-y-4">
@@ -264,6 +339,81 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
             />
           </div>
+
+          {/* Module Slides Section */}
+          {moduleId && (
+            <div>
+              <label className="block text-sm text-gray-300 mb-2">
+                Module Slides ({activeModuleSlides.length}/{moduleSlides.length} active)
+              </label>
+              {loadingModuleSlides ? (
+                <div className="text-gray-400 text-sm py-2">Loading slides...</div>
+              ) : (
+                <div className="space-y-1 bg-gray-700/50 rounded-lg p-3 max-h-48 overflow-y-auto">
+                  {moduleSlides.map((slide) => {
+                    const isExcluded = excludedSlides.includes(slide.filename)
+                    return (
+                      <div
+                        key={slide.filename}
+                        className={`flex items-center gap-2 px-2 py-1.5 rounded cursor-pointer transition-colors ${
+                          isExcluded
+                            ? 'bg-red-900/30 hover:bg-red-900/50'
+                            : 'bg-gray-700 hover:bg-gray-600'
+                        }`}
+                        onClick={() => toggleModuleSlide(slide.filename)}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={!isExcluded}
+                          onChange={() => toggleModuleSlide(slide.filename)}
+                          className="w-4 h-4 rounded border-gray-500 text-fastr-primary focus:ring-fastr-primary"
+                        />
+                        <span className={`text-sm flex-1 truncate ${isExcluded ? 'text-gray-500 line-through' : 'text-gray-200'}`} title={slide.filename}>
+                          {slide.title}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+              <p className="text-xs text-gray-500 mt-1">
+                Uncheck slides to exclude them from this session
+              </p>
+            </div>
+          )}
+
+          {/* Extra Slides Section */}
+          {extraSlides.length > 0 && (
+            <div>
+              <label className="block text-sm text-gray-300 mb-2">
+                {moduleId ? 'Additional Slides' : 'Slides'} ({extraSlides.length})
+              </label>
+              <div className="space-y-2 bg-gray-700/50 rounded-lg p-3">
+                {extraSlides.map((slide, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between gap-2 bg-gray-700 rounded px-3 py-2"
+                  >
+                    <span className="text-sm text-gray-200 truncate flex-1" title={slide}>
+                      {getSlideDisplayName(slide)}
+                    </span>
+                    <button
+                      onClick={() => removeExtraSlide(idx)}
+                      className="p-1 text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded transition-colors"
+                      title="Remove this slide"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              {moduleId && (
+                <p className="text-xs text-gray-500 mt-1">
+                  These slides are shown after the module content
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end gap-3 mt-6">
@@ -275,7 +425,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
           </button>
           <button
             onClick={() => {
-              onSave({ session: sessionName, speaker, duration })
+              onSave({ session: sessionName, speaker, duration, slides: extraSlides, excludedSlides })
               onClose()
             }}
             className="px-4 py-2 bg-fastr-primary text-white rounded hover:bg-fastr-primary/80 transition-colors"

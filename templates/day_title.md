@@ -10,8 +10,4 @@ paginate: true
 
 # Day {{DAY_NUMBER}}
 
-## {{DAY_TITLE}}
-
-{{DAY_DATE}}
-
 ---

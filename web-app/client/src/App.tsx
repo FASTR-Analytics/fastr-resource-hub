@@ -332,16 +332,24 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
 // ─────────────────────────────────────────────────────────────────────────────
 // Add Session Menu - Intuitive menu for adding sessions to a day
 // ─────────────────────────────────────────────────────────────────────────────
+interface ExistingSessionInfo {
+  index: number
+  session: Session
+}
+
 interface AddSessionMenuProps {
   dayNum: number
   onClose: () => void
   onAddSession: (session: Session) => void
+  onAddToExistingSession: (sessionIdx: number, topic: { id: string; file: string; title: string; duration?: number }) => void
   contentLibrary: any[]
+  existingSessions: ExistingSessionInfo[]
 }
 
-function AddSessionMenu({ dayNum, onClose, onAddSession, contentLibrary }: AddSessionMenuProps) {
-  const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets'>('main')
+function AddSessionMenu({ dayNum, onClose, onAddSession, onAddToExistingSession, contentLibrary, existingSessions }: AddSessionMenuProps) {
+  const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets' | 'add-to-session'>('main')
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
+  const [selectedTopic, setSelectedTopic] = useState<{ module: any; topic: any } | null>(null)
   const [customTitle, setCustomTitle] = useState('')
   const [customDuration, setCustomDuration] = useState(30)
   const [customContent, setCustomContent] = useState(`---
@@ -424,7 +432,13 @@ paginate: true
     onClose()
   }
 
-  const addModule = (module: any, topic: any) => {
+  const handleTopicClick = (module: any, topic: any) => {
+    // Always show options view so user can choose
+    setSelectedTopic({ module, topic })
+    setView('add-to-session')
+  }
+
+  const addModuleAsNewSession = (module: any, topic: any) => {
     const session: Session = {
       session: topic.title,
       module: module.id,
@@ -433,6 +447,17 @@ paginate: true
       duration: topic.duration || 30,
     }
     onAddSession(session)
+    onClose()
+  }
+
+  const addToExistingSession = (sessionIdx: number) => {
+    if (!selectedTopic) return
+    onAddToExistingSession(sessionIdx, {
+      id: selectedTopic.topic.id,
+      file: selectedTopic.topic.file,
+      title: selectedTopic.topic.title,
+      duration: selectedTopic.topic.duration,
+    })
     onClose()
   }
 
@@ -460,7 +485,11 @@ paginate: true
           <div className="flex items-center gap-2">
             {view !== 'main' && (
               <button
-                onClick={() => setView(view === 'assets' ? 'custom' : 'main')}
+                onClick={() => {
+                  if (view === 'assets') setView('custom')
+                  else if (view === 'add-to-session') setView('modules')
+                  else setView('main')
+                }}
                 className="p-1 hover:bg-gray-200 rounded transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -471,6 +500,7 @@ paginate: true
               {view === 'modules' && 'Choose Module Content'}
               {view === 'custom' && 'Create Custom Slide'}
               {view === 'assets' && 'Insert Image'}
+              {view === 'add-to-session' && 'Add to Session'}
             </h3>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-gray-200 rounded transition-colors">
@@ -599,7 +629,7 @@ paginate: true
                         {module.fullTopics.map((topic: any) => (
                           <button
                             key={topic.id}
-                            onClick={() => addModule(module, topic)}
+                            onClick={() => handleTopicClick(module, topic)}
                             className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
                           >
                             <span className="text-gray-400">📄</span>
@@ -619,7 +649,7 @@ paginate: true
                         {module.condensedTopics.map((topic: any) => (
                           <button
                             key={topic.id}
-                            onClick={() => addModule(module, topic)}
+                            onClick={() => handleTopicClick(module, topic)}
                             className="w-full flex items-center gap-2 p-2 rounded hover:bg-amber-50 hover:shadow-sm transition-all text-left text-sm"
                           >
                             <span className="text-amber-500">📄</span>
@@ -636,7 +666,7 @@ paginate: true
                     {!module.fullTopics && !module.condensedTopics && module.topics?.map((topic: any) => (
                       <button
                         key={topic.id}
-                        onClick={() => addModule(module, topic)}
+                        onClick={() => handleTopicClick(module, topic)}
                         className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
                       >
                         <span className="text-gray-400">📄</span>
@@ -805,6 +835,65 @@ paginate: true
               >
                 Add Session
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* Add to Existing Session */}
+        {view === 'add-to-session' && selectedTopic && (
+          <div className="p-4 space-y-4 max-h-[60vh] overflow-y-auto">
+            {/* Selected topic info */}
+            <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="text-sm font-medium text-blue-800">Adding: {selectedTopic.topic.title}</div>
+              <div className="text-xs text-blue-600 mt-1">From: {selectedTopic.module.title}</div>
+            </div>
+
+            {/* Options */}
+            <div className="space-y-2">
+              {/* Create new session option */}
+              <button
+                onClick={() => addModuleAsNewSession(selectedTopic.module, selectedTopic.topic)}
+                className="w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed border-gray-300 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
+              >
+                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                  <Plus className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <div className="font-medium text-gray-800">Create New Session</div>
+                  <div className="text-sm text-gray-500">Add as a separate session on Day {dayNum}</div>
+                </div>
+              </button>
+
+              {/* Existing sessions */}
+              {existingSessions.filter(s => s.session.module).length > 0 && (
+                <>
+                  <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-1 pt-2">
+                    Or add to existing session
+                  </div>
+                  {existingSessions
+                    .filter(s => s.session.module) // Only show module sessions
+                    .map(({ index, session }) => (
+                      <button
+                        key={index}
+                        onClick={() => addToExistingSession(index)}
+                        className="w-full flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-lg">
+                          📘
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-gray-800 truncate">{session.session}</div>
+                          <div className="text-sm text-gray-500">
+                            {session.module && <span className="text-blue-600">{session.module.toUpperCase()}</span>}
+                            {(session.slides?.length ?? 0) > 0 && <span> + {session.slides?.length} extra</span>}
+                            {' • '}{session.duration || 0} min
+                          </div>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                      </button>
+                    ))}
+                </>
+              )}
             </div>
           </div>
         )}
@@ -3263,7 +3352,27 @@ function App() {
           dayNum={addSessionMenuDay}
           onClose={() => setAddSessionMenuDay(null)}
           onAddSession={(session) => addSession(addSessionMenuDay, session)}
+          onAddToExistingSession={(sessionIdx, topic) => {
+            const dayKey = `day${addSessionMenuDay}`
+            const sessions = currentConfig?.schedule?.[dayKey] || []
+            const existingSession = sessions[sessionIdx]
+            if (existingSession) {
+              updateSession(addSessionMenuDay, sessionIdx, {
+                topics: [...(existingSession.topics || []), topic.id],
+                slides: [...(existingSession.slides || []), topic.file],
+                duration: (existingSession.duration || 0) + (topic.duration || 30),
+              })
+            }
+          }}
           contentLibrary={contentLibrary}
+          existingSessions={
+            (currentConfig?.schedule?.[`day${addSessionMenuDay}`] || [])
+              .map((session: Session, index: number) => ({ index, session }))
+              .filter(({ session }: { session: Session }) =>
+                session.module || // Module sessions
+                (!session.type && session.slides && session.slides.length > 0) // Sessions with slides
+              )
+          }
         />
       )}
     </div>

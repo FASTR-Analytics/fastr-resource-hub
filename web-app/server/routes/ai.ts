@@ -203,6 +203,21 @@ const AI_TOOLS: Anthropic.Tool[] = [
       required: ['from_day', 'from_position', 'to_day'],
     },
   },
+  {
+    name: 'add_topic_to_session',
+    description: 'Add a topic/slide from the content library to an existing session. Use this when the user wants to add more content to an existing session rather than creating a new one.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Day number (1-indexed)' },
+        session_position: { type: 'number', description: 'Position of the session in the day (0-indexed)' },
+        module_number: { type: 'number', description: 'Module number (0-9) to get the topic from' },
+        topic_number: { type: 'number', description: 'Topic number within the module (1-indexed)' },
+        version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed"' },
+      },
+      required: ['day', 'session_position', 'module_number', 'topic_number', 'version'],
+    },
+  },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -585,6 +600,44 @@ function executeMoveSessionToDay(config: any, input: any): { success: boolean; m
   return { success: true, message: `Moved "${session.session}" from Day ${from_day} to Day ${to_day}` }
 }
 
+function executeAddTopicToSession(config: any, input: any): { success: boolean; message: string } {
+  const { day, session_position, module_number, topic_number, version } = input
+  const dayKey = `day${day}`
+
+  // Validate day exists
+  if (!config.schedule[dayKey] || !Array.isArray(config.schedule[dayKey])) {
+    return { success: false, message: `Day ${day} does not exist` }
+  }
+
+  const sessions = config.schedule[dayKey]
+  if (session_position < 0 || session_position >= sessions.length) {
+    return { success: false, message: `Invalid session position ${session_position} in Day ${day}` }
+  }
+
+  const session = sessions[session_position]
+
+  // Build the topic file path
+  const moduleId = `m${module_number}`
+  const topicId = `${moduleId}_${topic_number}`
+  const suffix = version === 'condensed' ? '_condensed' : ''
+  const topicFile = `${moduleId}_${String(topic_number).padStart(2, '0')}${suffix}.md`
+
+  // Check if topic already exists in session
+  if (session.slides?.includes(topicFile)) {
+    return { success: false, message: `Topic ${topicFile} already exists in this session` }
+  }
+
+  // Add topic to session
+  if (!session.topics) session.topics = []
+  if (!session.slides) session.slides = []
+
+  session.topics.push(topicId)
+  session.slides.push(topicFile)
+  session.duration = (session.duration || 0) + 15 // Add default topic duration
+
+  return { success: true, message: `Added topic ${topicFile} to session "${session.session}"` }
+}
+
 function executeTool(toolName: string, input: any, config: any): { success: boolean; message: string } {
   switch (toolName) {
     case 'add_module':
@@ -605,6 +658,8 @@ function executeTool(toolName: string, input: any, config: any): { success: bool
       return executeRemoveDay(config, input)
     case 'move_session_to_day':
       return executeMoveSessionToDay(config, input)
+    case 'add_topic_to_session':
+      return executeAddTopicToSession(config, input)
     default:
       return { success: false, message: `Unknown tool: ${toolName}` }
   }

@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch server/index.ts",
+    "dev:all": "./dev.sh start",
+    "dev:stop": "./dev.sh stop",
+    "dev:restart": "./dev.sh restart",
+    "dev:status": "./dev.sh status",
     "build": "tsc && npm run build:client",
     "build:client": "cd client && npm run build",
     "start": "node dist/server/index.js",

@@ -12,10 +12,19 @@ paginate: true
 
 ---
 
-<!-- _class: section-cover -->
+## Reflections from Participants
 
-![bg](../resources/backgrounds/section_slide.png)
+<div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
-# Reflections from Participants
+![w:200](../resources/icons/communication.png)
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- What did you learn today?
+- What was most useful?
+- Any questions or concerns?
+-->
 
 ---
