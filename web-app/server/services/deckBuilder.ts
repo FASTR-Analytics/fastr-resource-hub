@@ -350,13 +350,17 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string 
   rows.push('| Time | Session | Facilitator |')
   rows.push('|------|---------|-------------|')
 
+  let sessionNumber = 1
+  const breakTypes = ['tea_break', 'lunch_break', 'break']
+  const skipNumberTypes = ['day_start', 'day_end', 'day_recap', 'opening', 'closing']
+
   for (const s of sessions) {
     // Skip section headers and title slides in agenda
     if (s.type === 'section' || s.type === 'day_title') continue
     if (s.duration === 0) continue  // Skip 0-duration items like title slides
 
-    const name = s.session || ''
-    if (!name) continue
+    const rawName = s.session || ''
+    if (!rawName) continue
 
     // Use explicit time if provided, otherwise calculate from current position
     let timeStr = s.time || ''
@@ -367,8 +371,17 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string 
 
     const speaker = s.speaker || ''
 
+    // Add session number for main sessions (not breaks or admin items)
+    let displayName = rawName
+    const isBreak = breakTypes.includes(s.type || '')
+    const isAdmin = skipNumberTypes.includes(s.type || '')
+    if (!isBreak && !isAdmin && s.module) {
+      displayName = `Session ${sessionNumber}: ${rawName}`
+      sessionNumber++
+    }
+
     if (timeStr) {
-      rows.push(`| ${timeStr} | ${name} | ${speaker} |`)
+      rows.push(`| ${timeStr} | **${displayName}** | ${speaker} |`)
     }
 
     // Advance current time by duration

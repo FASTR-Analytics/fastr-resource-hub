@@ -195,10 +195,21 @@ function parseMarkdown(content: string): ParsedSlide[] {
       }
     }
 
-    // Extract content in order
+    // Extract content in order - with multi-line bullet support
+    let currentBullet: string | null = null
+    let currentIndentLevel = 0
+
     for (const line of lines) {
       const stripped = line.trim()
-      if (!stripped) continue
+      if (!stripped) {
+        // Empty line ends current bullet
+        if (currentBullet) {
+          slide.bullets.push(currentBullet)
+          slide.content.push({ type: 'bullet', text: currentBullet })
+          currentBullet = null
+        }
+        continue
+      }
 
       // Skip lines that are only HTML entities like &nbsp; (used for spacing)
       if (/^(&nbsp;|\s)+$/.test(stripped)) continue
@@ -206,6 +217,11 @@ function parseMarkdown(content: string): ParsedSlide[] {
       // H3+ headers in content flow
       const h3Match = stripped.match(/^(#{3,6})\s+(.+)$/)
       if (h3Match) {
+        if (currentBullet) {
+          slide.bullets.push(currentBullet)
+          slide.content.push({ type: 'bullet', text: currentBullet })
+          currentBullet = null
+        }
         slide.content.push({ type: 'header', text: h3Match[2].trim(), level: h3Match[1].length })
         continue
       }
@@ -218,25 +234,64 @@ function parseMarkdown(content: string): ParsedSlide[] {
       if (stripped.startsWith('<div') || stripped.startsWith('</div')) continue
       if (stripped.startsWith('<!--')) continue
 
-      // Bullets
-      const bulletMatch = stripped.match(/^[-*]\s+(.+)$/)
+      // Bullets (-, *, or Unicode bullets like •, ▪, ►)
+      const bulletMatch = stripped.match(/^[-*•◦▪►▸‣⁃]\s+(.+)$/)
       if (bulletMatch) {
-        slide.bullets.push(bulletMatch[1].trim())
-        slide.content.push({ type: 'bullet', text: bulletMatch[1].trim() })
+        // Save previous bullet if any
+        if (currentBullet) {
+          slide.bullets.push(currentBullet)
+          slide.content.push({ type: 'bullet', text: currentBullet })
+        }
+        currentBullet = bulletMatch[1].trim()
+        currentIndentLevel = line.search(/\S/)  // Track indentation
         continue
       }
 
       // Numbered list
       const numMatch = stripped.match(/^\d+\.\s+(.+)$/)
       if (numMatch) {
-        slide.bullets.push(numMatch[1].trim())
-        slide.content.push({ type: 'bullet', text: numMatch[1].trim() })
+        if (currentBullet) {
+          slide.bullets.push(currentBullet)
+          slide.content.push({ type: 'bullet', text: currentBullet })
+        }
+        currentBullet = numMatch[1].trim()
+        currentIndentLevel = line.search(/\S/)
         continue
       }
 
-      // Paragraph
+      // Check if this is a continuation of a multi-line bullet
+      // (indented text following a bullet)
+      const lineIndent = line.search(/\S/)
+      if (currentBullet && lineIndent > currentIndentLevel) {
+        // This is continuation text - append to current bullet with space
+        currentBullet += ' ' + stripped
+        continue
+      }
+
+      // Paragraph - save any pending bullet first
+      if (currentBullet) {
+        slide.bullets.push(currentBullet)
+        slide.content.push({ type: 'bullet', text: currentBullet })
+        currentBullet = null
+      }
+
+      // Check if this is a bold-only paragraph (acts as sub-header)
+      // Match **text** or __text__ that spans the entire line
+      const boldMatch = stripped.match(/^\*\*(.+)\*\*$/) || stripped.match(/^__(.+)__$/)
+      if (boldMatch) {
+        // Treat as a sub-header (level 4)
+        slide.content.push({ type: 'header', text: boldMatch[1].trim(), level: 4 })
+        continue
+      }
+
       slide.paragraphs.push(stripped)
       slide.content.push({ type: 'paragraph', text: stripped })
+    }
+
+    // Don't forget the last bullet if any
+    if (currentBullet) {
+      slide.bullets.push(currentBullet)
+      slide.content.push({ type: 'bullet', text: currentBullet })
     }
 
     slides.push(slide)
@@ -275,7 +330,8 @@ function detectSlideType(slide: ParsedSlide, index: number): SlideType {
   const nonIconImages = slide.images.filter(img => !isIconImage(img))
   const hasContent = slide.bullets.length > 0 || slide.paragraphs.length > 0 || nonIconImages.length > 0
   if (slide.headers[0]?.level === 1 && !hasContent) {
-    if (/^Session\s+\d+/i.test(h1Text)) return 'section'
+    // Recognize "Session X", "Day X", or module titles as section slides
+    if (/^(Session|Day|Module)\s+\d+/i.test(h1Text)) return 'section'
   }
 
   // Two column
@@ -297,28 +353,33 @@ function detectSlideType(slide: ParsedSlide, index: number): SlideType {
 
 function resolveImagePath(imgPath: string): string | null {
   if (imgPath.startsWith('http://') || imgPath.startsWith('https://')) {
+    console.log(`  [IMG] Skipping URL: ${imgPath}`)
     return null
   }
 
   imgPath = imgPath.replace(/%20/g, ' ')
 
+  // Remove all leading ../ patterns
+  const cleanPath = imgPath.replace(/^(\.\.\/)+/, '')
+
   const pathsToTry = [
-    path.join(REPO_ROOT, imgPath.replace(/^\.\.\/+/, '')),
+    path.join(REPO_ROOT, cleanPath),
     path.join(REPO_ROOT, 'resources', 'logos', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'diagrams', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'backgrounds', path.basename(imgPath)),
+    path.join(REPO_ROOT, 'resources', 'screenshots', path.basename(imgPath)),
+    path.join(REPO_ROOT, 'resources', 'icons', path.basename(imgPath)),
   ]
-
-  if (imgPath.startsWith('../')) {
-    pathsToTry.unshift(path.join(REPO_ROOT, imgPath.replace(/^\.\.\//, '')))
-  }
 
   for (const p of pathsToTry) {
     if (fs.existsSync(p)) {
+      console.log(`  [IMG] Found: ${imgPath} -> ${p}`)
       return p
     }
   }
 
+  console.warn(`  [IMG] NOT FOUND: ${imgPath}`)
+  console.warn(`    Tried: ${pathsToTry.join('\n           ')}`)
   return null
 }
 
@@ -347,10 +408,120 @@ function cleanMarkdownText(text: string): string {
   text = text.replace(/&#39;/g, "'")
   // Remove inline images (icons)
   text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+  // Remove markdown bold/italic/code formatting
   text = text.replace(/\*\*([^*]+)\*\*/g, '$1')
   text = text.replace(/\*([^*]+)\*/g, '$1')
   text = text.replace(/`([^`]+)`/g, '$1')
+  // Remove Unicode bullet characters that might be in the text
+  text = text.replace(/^[\u2022\u2023\u2043\u204C\u204D\u2219\u25AA\u25AB\u25B8\u25B9\u25CF\u25E6\u29BE\u29BF\u2013\u2014►◦•▪▸‣⁃]\s*/gm, '')
+  // Normalize newlines to spaces (for multi-line text that should flow)
+  text = text.replace(/\n/g, ' ')
+  // Normalize multiple spaces to single space
+  text = text.replace(/\s+/g, ' ')
   return text.trim()
+}
+
+// Parse text with inline formatting (**bold**, *italic*) into formatted runs for pptxgenjs
+function parseInlineFormatting(text: string, baseOptions: any): PptxGenJS.TextProps[] {
+  const runs: PptxGenJS.TextProps[] = []
+
+  // Combined pattern: **bold** or *italic* (but not ** which is bold)
+  // Process bold first, then italic on remaining text
+  const boldPattern = /\*\*([^*]+)\*\*/g
+  const italicPattern = /(?<!\*)\*([^*]+)\*(?!\*)/g
+
+  // First pass: extract bold segments
+  interface Segment {
+    start: number
+    end: number
+    text: string
+    bold?: boolean
+    italic?: boolean
+  }
+  const segments: Segment[] = []
+  let match
+
+  // Find all bold matches
+  while ((match = boldPattern.exec(text)) !== null) {
+    segments.push({
+      start: match.index,
+      end: match.index + match[0].length,
+      text: match[1],
+      bold: true,
+    })
+  }
+
+  // Find all italic matches (that don't overlap with bold)
+  while ((match = italicPattern.exec(text)) !== null) {
+    const overlaps = segments.some(s =>
+      (match!.index >= s.start && match!.index < s.end) ||
+      (match!.index + match![0].length > s.start && match!.index + match![0].length <= s.end)
+    )
+    if (!overlaps) {
+      segments.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        text: match[1],
+        italic: true,
+      })
+    }
+  }
+
+  // Sort segments by start position
+  segments.sort((a, b) => a.start - b.start)
+
+  // Build runs from segments
+  let lastIndex = 0
+  for (const seg of segments) {
+    // Add plain text before this segment
+    if (seg.start > lastIndex) {
+      const plainText = text.slice(lastIndex, seg.start)
+      if (plainText.trim()) {
+        runs.push({
+          text: cleanMarkdownText(plainText),
+          options: { ...baseOptions },
+        })
+      }
+    }
+
+    // Add formatted segment
+    runs.push({
+      text: cleanMarkdownText(seg.text),
+      options: {
+        ...baseOptions,
+        bold: seg.bold || baseOptions.bold,
+        italic: seg.italic,
+      },
+    })
+
+    lastIndex = seg.end
+  }
+
+  // Add remaining text after last segment
+  if (lastIndex < text.length) {
+    const afterText = text.slice(lastIndex)
+    if (afterText.trim()) {
+      runs.push({
+        text: cleanMarkdownText(afterText),
+        options: { ...baseOptions },
+      })
+    }
+  }
+
+  // If no formatting was found, return single run with cleaned text
+  if (runs.length === 0) {
+    runs.push({
+      text: cleanMarkdownText(text),
+      options: { ...baseOptions },
+    })
+  }
+
+  // Add breakLine to the last run
+  if (runs.length > 0) {
+    runs[runs.length - 1].options.breakLine = true
+  }
+
+  return runs
 }
 
 // Check if an image is a background image (should be skipped in content)
@@ -360,8 +531,8 @@ function isBackgroundImage(img: { alt: string; path: string; height?: number }):
 
 // Check if an image is a decorative icon (should be rendered centered)
 function isDecorativeIcon(img: { alt: string; path: string; height?: number }): boolean {
-  // Has explicit width in alt text (w:120 etc)
-  if (/w:\d+/.test(img.alt)) return true
+  // Has explicit width or height in alt text (w:120, h:40, etc)
+  if (/[wh]:\d+/.test(img.alt)) return true
   // In icons folder
   if (/\/icons\//.test(img.path)) return true
   return false
@@ -426,20 +597,20 @@ function getImageLayout(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
-  // Title in FASTR teal
+  // Vertical accent line on the left of title
+  slide.addShape('rect', {
+    x: 0.5, y: 0.35, w: 0.06, h: 0.55,
+    fill: { color: COLORS.green },
+    line: { color: COLORS.green },
+  })
+
+  // Title in FASTR dark green, with left padding for the line
   slide.addText(cleanMarkdownText(title), {
-    x: 0.5, y: 0.35, w: 12.33, h: 0.7,
+    x: 0.7, y: 0.35, w: 12.13, h: 0.7,
     fontSize: FONTS.h2Size,
     fontFace: FONTS.family,
     color: COLORS.darkGreen,
     bold: true,
-  })
-
-  // Lime accent line - half width, under title
-  slide.addShape('rect', {
-    x: 0.5, y: 1.05, w: 6, h: 0.06,
-    fill: { color: COLORS.lime },
-    line: { color: COLORS.lime },
   })
 }
 
@@ -635,13 +806,15 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     // Build simple table - array of arrays of strings
     const tableRows: PptxGenJS.TableRow[] = data.table.map((row, rIdx) => {
       return row.map((cell) => {
+        // Check if cell content is wrapped in bold markers
+        const isBoldCell = /^\*\*.*\*\*$/.test(cell.trim())
         const cellObj: PptxGenJS.TableCell = {
           text: cleanMarkdownText(cell),
           options: {
             fontSize: fontSize,
             fontFace: FONTS.family,
             color: rIdx === 0 ? COLORS.navy : COLORS.textDark,
-            bold: rIdx === 0,
+            bold: rIdx === 0 || isBoldCell,
             valign: 'middle',
           },
         }
@@ -761,7 +934,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   } else {
     const bullets = parseColumnBullets(data.columns.left)
     if (bullets.length > 0) {
-      slide.addText(bullets.map(b => ({ text: b, options: { bullet: { type: 'bullet' } } })), {
+      slide.addText(bullets.map(b => ({ text: b, options: { bullet: true } })), {
         x: LAYOUT.marginLeft, y: contentTop, w: 5.5, h: 5,
         fontSize: FONTS.bodySize,
         fontFace: FONTS.family,
@@ -788,7 +961,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   } else {
     const bullets = parseColumnBullets(data.columns.right)
     if (bullets.length > 0) {
-      slide.addText(bullets.map(b => ({ text: b, options: { bullet: { type: 'bullet' } } })), {
+      slide.addText(bullets.map(b => ({ text: b, options: { bullet: true } })), {
         x: 7, y: contentTop, w: 5.5, h: 5,
         fontSize: FONTS.bodySize,
         fontFace: FONTS.family,
@@ -854,22 +1027,20 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
               fontSize: FONTS.bodySize - 2,
               fontFace: FONTS.family,
               color: COLORS.textDark,
-              bullet: { type: 'bullet' },
+              bullet: true,
               breakLine: true,
               paraSpaceAfter: 4,
             },
           })
         } else if (item.type === 'paragraph') {
-          textItems.push({
-            text: cleanMarkdownText(item.text),
-            options: {
-              fontSize: FONTS.bodySize - 2,
-              fontFace: FONTS.family,
-              color: COLORS.darkGray,
-              breakLine: true,
-              paraSpaceAfter: 6,
-            },
-          })
+          const baseOptions = {
+            fontSize: FONTS.bodySize - 2,
+            fontFace: FONTS.family,
+            color: COLORS.darkGray,
+            paraSpaceAfter: 6,
+          }
+          const runs = parseInlineFormatting(item.text, baseOptions)
+          textItems.push(...runs)
         }
       }
 
@@ -913,22 +1084,20 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
               fontSize: FONTS.bodySize,
               fontFace: FONTS.family,
               color: COLORS.textDark,
-              bullet: { type: 'bullet' },
+              bullet: true,
               breakLine: true,
               paraSpaceAfter: 8,
             },
           })
         } else if (item.type === 'paragraph') {
-          textItems.push({
-            text: cleanMarkdownText(item.text),
-            options: {
-              fontSize: FONTS.bodySize,
-              fontFace: FONTS.family,
-              color: COLORS.darkGray,
-              breakLine: true,
-              paraSpaceAfter: 14,
-            },
-          })
+          const baseOptions = {
+            fontSize: FONTS.bodySize,
+            fontFace: FONTS.family,
+            color: COLORS.darkGray,
+            paraSpaceAfter: 14,
+          }
+          const runs = parseInlineFormatting(item.text, baseOptions)
+          textItems.push(...runs)
         }
       }
 
@@ -971,9 +1140,85 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     addHeaderBar(slide, title)
   }
 
-  // Check for non-icon images
-  const hasImage = data.images.some(img => !isIconImage(img))
-  const contentWidth = hasImage ? 6 : LAYOUT.contentWidth
+  // Separate decorative icons from content images
+  const decorativeIcon = data.images.find(img => !isBackgroundImage(img) && isDecorativeIcon(img))
+  const contentImages = data.images.filter(img => !isBackgroundImage(img) && !isDecorativeIcon(img))
+  const hasContentImage = contentImages.length > 0
+
+  // Calculate layout based on what we have
+  let contentWidth = LAYOUT.contentWidth
+  let contentTop = 1.5
+  let iconRendered = false
+
+  // If we have a decorative icon, render it below the title
+  if (decorativeIcon) {
+    const iconPath = resolveImagePath(decorativeIcon.path)
+    if (iconPath) {
+      // Extract width or height from alt text (w:120, h:40, etc)
+      const widthMatch = decorativeIcon.alt.match(/w:(\d+)/)
+      const heightMatch = decorativeIcon.alt.match(/h:(\d+)/)
+
+      // Convert pixels to inches (96 dpi)
+      const iconWidth = widthMatch ? parseInt(widthMatch[1]) / 96 : undefined
+      const iconHeight = heightMatch ? parseInt(heightMatch[1]) / 96 : undefined
+
+      // Check if slide has text content - if so, left-align icon with text
+      const hasTextContent = data.content.length > 0
+
+      // Build image options - only set dimensions that are specified to maintain aspect ratio
+      const imgOpts: any = { path: iconPath, y: 1.5 }
+
+      // Determine icon size
+      let iconSize = 1.0  // default
+      if (iconWidth && iconHeight) {
+        imgOpts.w = iconWidth
+        imgOpts.h = iconHeight
+        iconSize = iconHeight
+      } else if (iconWidth) {
+        imgOpts.w = iconWidth
+        iconSize = iconWidth
+      } else if (iconHeight) {
+        imgOpts.h = iconHeight
+        iconSize = iconHeight
+      } else {
+        imgOpts.w = 1.0
+      }
+
+      // Position: left-aligned with text if there's content, otherwise centered
+      if (hasTextContent) {
+        imgOpts.x = LAYOUT.contentLeft
+      } else {
+        imgOpts.x = (LAYOUT.width - (iconWidth || iconHeight || 1.0)) / 2
+      }
+
+      contentTop = 1.5 + iconSize + 0.3
+      slide.addImage(imgOpts)
+      iconRendered = true
+    }
+  }
+
+  // Check if content image is wide - if so, use vertical layout instead of side-by-side
+  let useVerticalLayout = false
+  let contentImagePath: string | null = null
+  let contentImageLayout: ImageLayout | null = null
+
+  if (hasContentImage) {
+    for (const img of contentImages) {
+      contentImagePath = resolveImagePath(img.path)
+      if (contentImagePath) {
+        contentImageLayout = getImageLayout(contentImagePath, 11, 4, 1, 1)
+        // Use vertical layout if image is wide (aspect ratio > 1.5)
+        if (contentImageLayout && contentImageLayout.aspectRatio > 1.5) {
+          useVerticalLayout = true
+        }
+        break
+      }
+    }
+    // Only narrow content width for side-by-side layout
+    if (!useVerticalLayout) {
+      contentWidth = 6
+    }
+  }
 
   // Build content text
   const textItems: PptxGenJS.TextProps[] = []
@@ -998,49 +1243,66 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           fontSize: FONTS.bodySize,
           fontFace: FONTS.family,
           color: COLORS.textDark,
-          bullet: { type: 'bullet' },
+          bullet: true,
           breakLine: true,
           paraSpaceAfter: 8,
         },
       })
     } else if (item.type === 'paragraph') {
-      textItems.push({
-        text: cleanMarkdownText(item.text),
-        options: {
-          fontSize: FONTS.bodySize,
-          fontFace: FONTS.family,
-          color: COLORS.darkGray,
-          breakLine: true,
-          paraSpaceAfter: 14,
-        },
-      })
+      // Parse inline bold formatting
+      const baseOptions = {
+        fontSize: FONTS.bodySize,
+        fontFace: FONTS.family,
+        color: COLORS.darkGray,
+        paraSpaceAfter: 14,
+      }
+      const runs = parseInlineFormatting(item.text, baseOptions)
+      textItems.push(...runs)
     }
   }
 
   if (textItems.length > 0) {
+    // Only center text if we have an icon AND very minimal content (1-2 simple paragraphs, no bullets/headers)
+    const hasBullets = data.bullets.length > 0 || data.content.some(c => c.type === 'bullet' || c.type === 'header')
+    const hasMultipleParagraphs = data.paragraphs.length > 2
+    const hasInlineBold = data.paragraphs.some(p => /\*\*[^*]+\*\*/.test(p))
+    const shouldCenter = iconRendered && !hasContentImage && !hasBullets && !hasMultipleParagraphs && !hasInlineBold
+    const textAlign = shouldCenter ? 'center' : undefined
+
+    // Calculate text height based on layout
+    let textHeight = 5.5 - (contentTop - 1.5)
+    if (useVerticalLayout && contentImageLayout) {
+      // For vertical layout, limit text height to leave room for image below
+      textHeight = Math.min(2.5, textHeight)
+    }
+
     slide.addText(textItems, {
       x: LAYOUT.contentLeft,
-      y: 1.5,
+      y: contentTop,
       w: contentWidth,
-      h: 5.5,
-      valign: hasImage ? 'top' : 'middle',
+      h: textHeight,
+      valign: 'top',
+      align: textAlign,
     })
   }
 
-  // Add image if present (skip icons) - smart sized based on actual dimensions
-  if (hasImage) {
-    for (const img of data.images) {
-      if (isIconImage(img)) continue
-
-      const imgPath = resolveImagePath(img.path)
-      if (imgPath) {
-        const imgLayout = getImageLayout(imgPath, 6, 5, 6.5, 1.6)
-        if (imgLayout) {
-          slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
-        } else {
-          slide.addImage({ path: imgPath, x: 6.5, y: 1.8, w: 6 })
-        }
-        break
+  // Add content image if present (not decorative icons) - smart sized based on actual dimensions
+  if (hasContentImage && contentImagePath) {
+    if (useVerticalLayout && contentImageLayout) {
+      // Vertical layout: image below text, centered, using full width
+      const imgLayout = getImageLayout(contentImagePath, 11, 3.5, 1.15, 3.8)
+      if (imgLayout) {
+        slide.addImage({ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+      } else {
+        slide.addImage({ path: contentImagePath, x: 1.15, y: 3.8, w: 11 })
+      }
+    } else {
+      // Side-by-side layout: image on right
+      const imgLayout = getImageLayout(contentImagePath, 6, 5, 6.5, 1.6)
+      if (imgLayout) {
+        slide.addImage({ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+      } else {
+        slide.addImage({ path: contentImagePath, x: 6.5, y: 1.8, w: 6 })
       }
     }
   }
@@ -1090,6 +1352,14 @@ export async function generatePPTX(
   for (let i = 0; i < slides.length; i++) {
     const slideType = detectSlideType(slides[i], i)
     typeCounts[slideType] = (typeCounts[slideType] || 0) + 1
+
+    // Debug: log slide info including images
+    const slideImages = slides[i].images.filter(img => img.alt !== 'bg')
+    if (slideImages.length > 0) {
+      const title = slides[i].headers[0]?.text || '(no title)'
+      console.log(`Slide ${i + 1} [${slideType}]: "${title}" - ${slideImages.length} image(s)`)
+      slideImages.forEach(img => console.log(`  - ${img.path}`))
+    }
 
     try {
       builders[slideType](pptx, slides[i])

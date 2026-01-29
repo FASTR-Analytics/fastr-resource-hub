@@ -271,14 +271,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 <!-- SLIDE:m3_1b -->
 ## Platform Capabilities
 
-<style scoped>
-p { text-align: center; }
-img { display: block; margin: 0 auto; }
-</style>
-
-![Platform Capabilities h:420](../resources/diagrams/platform_capabilities.svg)
-
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Data flows from import through analysis to shareable outputs.</p>
+![Platform Capabilities](../resources/diagrams/platform_capabilities.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
