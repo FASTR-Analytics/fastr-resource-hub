@@ -75,13 +75,13 @@ h1 {
 }
 
 h2 {
-  color: var(--fastr-navy);
+  color: var(--fastr-dark-green);
   font-weight: 600;
   font-size: 1.8em;
   margin-top: 0.8em;
   margin-bottom: 0.5em;
-  border-bottom: 3px solid var(--fastr-blue);
-  padding-bottom: 0.2em;
+  border-left: 4px solid var(--fastr-green);
+  padding-left: 0.5em;
 }
 
 h3 {
@@ -182,10 +182,10 @@ table {
 }
 
 th {
-  background: var(--fastr-light-blue);
-  color: var(--fastr-navy);
+  background: rgba(31, 154, 156, 0.15);
+  color: var(--fastr-dark-green);
   font-weight: 600;
-  border-bottom: 2px solid var(--fastr-blue);
+  border-bottom: 2px solid var(--fastr-green);
   padding: 0.6em;
   text-align: left;
 }
@@ -196,7 +196,7 @@ td {
 }
 
 tr:hover {
-  background: var(--bg-light);
+  background: rgba(31, 154, 156, 0.08);
 }
 
 /* ========================================
@@ -419,35 +419,35 @@ img.icon {
 
 /* Purple theme */
 section.purple h1 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
-section.purple h2 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
+section.purple h2 { color: var(--fastr-purple); border-left-color: var(--fastr-orchid); }
 section.purple h3 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
 section.purple strong { color: var(--fastr-purple); }
 section.purple ul > li::marker { color: var(--fastr-orchid); }
 
 /* Navy/Blue theme */
 section.navy h1 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
-section.navy h2 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
+section.navy h2 { color: var(--fastr-navy); border-left-color: var(--fastr-blue); }
 section.navy h3 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
 section.navy strong { color: var(--fastr-navy); }
 section.navy ul > li::marker { color: var(--fastr-blue); }
 
 /* Coral/Warm theme */
 section.coral h1 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
-section.coral h2 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
+section.coral h2 { color: var(--fastr-coral); border-left-color: var(--fastr-gold); }
 section.coral h3 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
 section.coral strong { color: var(--fastr-coral); }
 section.coral ul > li::marker { color: var(--fastr-gold); }
 
 /* Gold theme */
 section.gold h1 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
-section.gold h2 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
+section.gold h2 { color: var(--fastr-deep-green); border-left-color: var(--fastr-gold); }
 section.gold h3 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
 section.gold strong { color: var(--fastr-deep-green); }
 section.gold ul > li::marker { color: var(--fastr-gold); }
 
 /* Orchid/Pink theme */
 section.orchid h1 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
-section.orchid h2 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
+section.orchid h2 { color: var(--fastr-orchid); border-left-color: var(--fastr-purple); }
 section.orchid h3 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
 section.orchid strong { color: var(--fastr-orchid); }
 section.orchid ul > li::marker { color: var(--fastr-purple); }
