@@ -150,7 +150,9 @@
       "Bash(__NEW_LINE_a7df5db7aae9418f__ echo \"\")",
       "Bash(sqlite3:*)",
       "Bash(npx tsx:*)",
-      "WebFetch(domain:uxwing.com)"
+      "WebFetch(domain:uxwing.com)",
+      "Bash(convert:*)",
+      "Bash(magick:*)"
     ]
   }
 }

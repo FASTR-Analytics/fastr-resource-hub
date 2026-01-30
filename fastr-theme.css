@@ -571,9 +571,9 @@ section.title-cover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 60px 100px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 60px 80px;
 }
 
 section.title-cover h1 {
