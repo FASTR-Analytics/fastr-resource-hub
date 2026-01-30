@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 580" width="1400" height="580">
+  <style>
+    .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #1A8A8A; }
+    .subtext { font-family: Arial, sans-serif; font-size: 14px; fill: #666666; }
+    .frequency { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .question { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .select-type { font-family: Arial, sans-serif; font-size: 16px; font-style: italic; fill: #1A8A8A; }
+    .options { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .line { stroke: #1A8A8A; stroke-width: 2; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1400" height="580" fill="white"/>
+
+  <!-- Column 1: Health Facility Assessment -->
+  <g transform="translate(40, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">Health Facility</tspan>
+      <tspan x="130" dy="28">Assessment*</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="90">
+      <tspan x="0" dy="0">Drawn from validated HFAs;</tspan>
+      <tspan x="0" dy="18">without expected high</tspan>
+      <tspan x="0" dy="18">frequency variation</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Annual question</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Is the main source of</tspan>
+      <tspan x="0" dy="22">water supply located on</tspan>
+      <tspan x="0" dy="22">the facility premises (in the</tspan>
+      <tspan x="0" dy="22">building, or within facility</tspan>
+      <tspan x="0" dy="22">grounds)?</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[single select]</text>
+
+    <!-- Options -->
+    <text class="options" x="0" y="400">
+      <tspan x="0" dy="0">1.Yes</tspan>
+      <tspan x="0" dy="24">2.No</tspan>
+      <tspan x="0" dy="24">-99 Don't know</tspan>
+    </text>
+  </g>
+
+  <!-- Column 2: High variance tracer -->
+  <g transform="translate(360, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">High variance</tspan>
+      <tspan x="130" dy="28">tracer*</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="90">
+      <tspan x="0" dy="0">Drawn from validated HFAs;</tspan>
+      <tspan x="0" dy="18">expect tracers to change</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Quarterly question</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">In the last 7 days, was</tspan>
+      <tspan x="0" dy="22">there any time when the</tspan>
+      <tspan x="0" dy="22">facility did not have water</tspan>
+      <tspan x="0" dy="22">available?</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[single select]</text>
+
+    <!-- Options -->
+    <text class="options" x="0" y="400">
+      <tspan x="0" dy="0">1.Yes</tspan>
+      <tspan x="0" dy="24">2. No</tspan>
+      <tspan x="0" dy="24">-99 Don't know</tspan>
+    </text>
+  </g>
+
+  <!-- Column 3: Perception -->
+  <g transform="translate(680, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">Perception</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="62">
+      <tspan x="0" dy="0">Perspectives of frontline</tspan>
+      <tspan x="0" dy="18">managers</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Quarterly question</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Describe how the</tspan>
+      <tspan x="0" dy="22">infrastructure challenges</tspan>
+      <tspan x="0" dy="22">have affected the health</tspan>
+      <tspan x="0" dy="22">facility and your ability to</tspan>
+      <tspan x="0" dy="22">provide services.</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[long text]</text>
+  </g>
+
+  <!-- Column 4: Exploratory -->
+  <g transform="translate(1000, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="160">
+      <tspan x="160" dy="0">Exploratory</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="62">
+      <tspan x="0" dy="0">Identify gaps for next-round</tspan>
+      <tspan x="0" dy="18">adaptation</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="320" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" text-anchor="middle" x="160" y="175">Varies</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Facilities sometimes experience</tspan>
+      <tspan x="0" dy="22">stockouts of medicines or supplies in</tspan>
+      <tspan x="0" dy="22">the past three months, for each of</tspan>
+      <tspan x="0" dy="22">the following categories of services,</tspan>
+      <tspan x="0" dy="22">how often do you have:</tspan>
+    </text>
+
+    <!-- Options -->
+    <text class="options" x="40" y="360">
+      <tspan x="40" dy="0">a.   Stockouts in supplies for NCD</tspan>
+      <tspan x="40" dy="24">b.   Stockouts in supplies for</tspan>
+      <tspan x="70" dy="22">infectious disease</tspan>
+      <tspan x="40" dy="24">c.   Stockouts in supplies for</tspan>
+      <tspan x="70" dy="22">RMNCA services</tspan>
+    </text>
+  </g>
+</svg>

@@ -137,8 +137,8 @@ router.get('/modules', (_req, res) => {
           })
 
         for (const file of files) {
-          // Match both regular (m4_1_...) and condensed (m4_s1_...) formats
-          const topicMatch = file.match(/^(m\d+_s?\d+[a-z]?)_/)
+          // Match both regular (m4_1_..., m4_1a_..., m4_1a2_...) and condensed (m4_s1_...) formats
+          const topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/)
           if (!topicMatch) continue
 
           const topicId = topicMatch[1]
@@ -156,7 +156,7 @@ router.get('/modules', (_req, res) => {
           title = title.replace(/\s*-\s*Module\s*\d+$/i, '').trim()
 
           if (!title) {
-            title = file.replace('.md', '').replace(/^m\d+_s?\d+[a-z]?_/, '').replace(/_/g, ' ')
+            title = file.replace('.md', '').replace(/^m\d+_s?\d+[a-z]*\d*_/, '').replace(/_/g, ' ')
             title = title.charAt(0).toUpperCase() + title.slice(1)
           }
 
@@ -621,18 +621,28 @@ ${html}
   }
 })
 
-// POST /api/content/export/selection - Export selected topics
+// POST /api/content/export/selection - Export selected topics and templates
 router.post('/export/selection', async (req, res) => {
   try {
-    const { topicIds, format = 'markdown', title = 'FASTR Selection' } = req.body
+    const { topicIds = [], templateFiles = [], format = 'markdown', title = 'FASTR Selection' } = req.body
 
-    if (!topicIds || !Array.isArray(topicIds) || topicIds.length === 0) {
-      return res.status(400).json({ error: 'topicIds array is required' })
+    if ((!topicIds || topicIds.length === 0) && (!templateFiles || templateFiles.length === 0)) {
+      return res.status(400).json({ error: 'topicIds or templateFiles array is required' })
     }
 
     // Read content for each topic
     const topicContents: string[] = []
 
+    // Load template files first
+    for (const templateFile of templateFiles) {
+      const filePath = path.join(TEMPLATES_PATH, templateFile)
+      if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, 'utf-8')
+        topicContents.push(content)
+      }
+    }
+
+    // Then load topic content
     for (const topicId of topicIds) {
       const modNumMatch = topicId.match(/^m(\d+)_/)
       if (!modNumMatch) continue
@@ -654,7 +664,7 @@ router.post('/export/selection', async (req, res) => {
     }
 
     if (topicContents.length === 0) {
-      return res.status(404).json({ error: 'No valid topics found' })
+      return res.status(404).json({ error: 'No valid content found' })
     }
 
     // Build the combined markdown

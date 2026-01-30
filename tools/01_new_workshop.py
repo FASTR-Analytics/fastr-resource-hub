@@ -332,7 +332,7 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
     if custom_slides is None:
         custom_slides = {
             'opening': [
-                ('Workshop Objectives', 15, ['01_objectives.md']),
+                ('Workshop Objectives', 15, ['objectives_slide.md']),
             ],
             'closing': [
                 ('Next Steps & Action Planning', 20, ['99_next-steps.md']),
@@ -816,7 +816,6 @@ def main():
         'content': {
             'modules': selected_modules,
             'custom_slides': [
-                '01_objectives.md',
                 '99_next-steps.md',
             ]
         },
@@ -856,6 +855,8 @@ workshop:
   date: {date_str}
   facilitators: {facilitators}
   contact_email: fastr@worldbank.org
+  objectives:
+""" + '\n'.join([f'    - "{obj}"' for obj in objectives]) + """
 
 # ───────────────────────────────────────────────────────────────────────
 # SCHEDULE
@@ -1025,8 +1026,8 @@ schedule:
 #   - 'type: break'    → Generates a break slide
 #
 # CUSTOM SLIDES (edit these in your workshop folder):
-#   01_objectives.md   - Workshop objectives
 #   99_next-steps.md   - Action items (at end)
+# Note: Objectives are defined in workshop.objectives above
 #
 # TO MOVE CONTENT: Cut and paste sessions between days
 # TO ADD A BREAK: Add a session with 'type: break'
@@ -1036,7 +1037,6 @@ schedule:
 content:
   modules: {selected_modules}
   custom_slides:
-    - 01_objectives.md
     - 99_next-steps.md
 
 # ───────────────────────────────────────────────────────────────────────
@@ -1056,26 +1056,6 @@ country_data:
     print(f"   ✓ workshop.yaml")
 
     # Generate custom slides with user content
-    # 01_objectives.md
-    obj_bullets = '\n'.join([f"- {obj}" for obj in objectives])
-    objectives_content = f"""---
-marp: true
-theme: fastr
-paginate: true
----
-
-# Workshop Objectives
-
-By the end of this workshop, participants will be able to:
-
-{obj_bullets}
-
----
-"""
-    with open(os.path.join(workshop_dir, "01_objectives.md"), 'w') as f:
-        f.write(objectives_content)
-    print(f"   ✓ 01_objectives.md")
-
     # 99_next-steps.md
     ns_bullets = '\n'.join([f"- {ns}" for ns in next_steps])
     nextsteps_content = f"""---
@@ -1193,7 +1173,7 @@ We resume at **{start_time}**
     if os.path.exists(templates_dir):
         for tmpl in Path(templates_dir).glob("*.md"):
             # Skip ones we already generated
-            if tmpl.name in ['01_objectives.md', '99_next-steps.md']:
+            if tmpl.name in ['99_next-steps.md']:
                 continue
             dest = os.path.join(workshop_dir, tmpl.name)
             if not os.path.exists(dest):
@@ -1250,8 +1230,7 @@ Add your FASTR platform outputs to `media/outputs/` to include them in slides.
 
     print(f"\n   Files you can edit:")
     print(f"   ─────────────────────────────────────────────────────")
-    print(f"   workshop.yaml          → Schedule, modules, country data")
-    print(f"   01_objectives.md       → Workshop objectives")
+    print(f"   workshop.yaml          → Schedule, modules, objectives, country data")
     print(f"   99_next-steps.md       → Action items")
     print(f"   media/outputs/         → Add FASTR charts here")
 

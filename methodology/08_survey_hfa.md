@@ -143,8 +143,66 @@ Depending on country needs and resources, HFA surveys may be conducted:
 -->
 
 <!-- SLIDE:m8_1 -->
-## Health Facility Assessment Phone Survey
+## Rapid-cycle facility survey
 
-*Placeholder: Content to be developed*
+<div style="display: flex; gap: 2em; align-items: center;">
+<div style="flex: 2;">
 
+- Understand service delivery constraints in PHC facilities
+- Measure the implementation of reforms
+- Assess the effect of shocks on health systems
+- Improve timeliness and relevance of facility surveys
+
+</div>
+<div style="flex: 1;">
+
+![Hospital icon](resources/icons/hospital_clinic.svg)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_1a -->
+## Health facility survey design
+
+<p style="font-size: 0.85em;">Analyzing primary health care facility performance and readiness; enables tracking over time.</p>
+
+| Component | Details |
+|-----------|---------|
+| **Mode + Length** | 30 to 45 min. phone survey |
+| **Frequency** | Tool completion over 4 quarterly contacts per year |
+| **Target** | Representative panel of 350 PHCs with annual partial replacement |
+| **Sampling** | National-level representativeness |
+| **Implementer** | Government, academic/technical partner, or survey firm dependent on context and funding source |
+| **Rapid adaptation** | Quarterly review of priority topics and emerging health systems questions informs round-to-round adaptation |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_1b -->
+## Adaptive survey content with RMNCAH-N focus
+
+Rapid facility surveys can identify gaps in service delivery and monitor reforms or shocks.
+
+<div style="font-size: 0.8em;">
+
+| Round 1 | Round 2 | Round 3 | Round 4 |
+|---------|---------|---------|---------|
+| Facility characteristics | Facility characteristics* | Facility characteristics* | Facility characteristics* |
+| Shocks | Adaptive content** | Adaptive content** | Adaptive content** |
+| Resilience to shocks | Shocks | Shocks | Shocks |
+| Services | Resilience to shocks | Resilience to shocks | Resilience to shocks |
+| Supplies | Supplies | Supplies | Supplies |
+| | Financing | Infrastructure | Workforce and staffing |
+| | Community engagement | Quality improvement processes | Leadership and coordination |
+
+</div>
+
+<p style="font-size: 0.7em;">* Asked only to replacement facilities | ** Additional locally-relevant questions generated during adaptation</p>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_1c -->
+## Four types of indicators
+
+<p style="font-size: 0.85em;">*Questions are either directly mapped to validated health facility assessments or proxies.</p>
+
+![HFA indicator types](resources/diagrams/hfa_indicator_types.svg)
 <!-- /SLIDE -->

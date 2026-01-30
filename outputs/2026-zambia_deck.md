@@ -39,9 +39,7 @@ January 27-30, 2026
 
 
 
-# Workshop Objectives
-
-The objectives of the workshop are to:
+## Workshop objectives
 
 - **Introduce the FASTR HMIS analysis platform** - Familiarize participants with the platform's purpose, core features, and functionalities, including workflows, reporting options, and outputs
 - **Strengthen analytical and reporting skills** - Enhance participants' capacity to manage data structures, customize visualizations, and produce tailored reports for diverse audiences
@@ -150,6 +148,16 @@ An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to
 
 ![w:700](../resources/diagrams/what_is_fastr.png)
 
+<!--
+PRESENTER NOTES:
+- Routine health information systems are a critical source of data, but often underused due to concerns about data quality and long delays between data collection and analysis
+- Traditional household and facility surveys, while essential, are resource-intensive and infrequent
+- FASTR's rapid-cycle analytics address this gap by providing:
+  - Timely insights aligned with country decision cycles
+  - Continuous learning rather than one-off assessments
+  - Direct feedback loops between data, analysis, and action
+-->
+
 ---
 
 
@@ -199,33 +207,198 @@ A data use case is a specific scenario where data is utilized to achieve a parti
 
 **Why is defining a data use case important?**
 
+- Leads to better results by aligning data efforts with organizational goals.
 - Guides decision making by providing a clear framework for analysis
 - Enhances efficiency by focusing analyses on a set of relevant key indicators to solve a specific data need
-- Leads to better results by aligning data efforts with organizational goals
 
 ---
 
 
 
-## Data use case: Application 1
+## Activity: Quarterly service utilization report
 
-*Placeholder - content to be added*
+*DRAFT - NEEDS REVIEW*
+
+**Goal:** Each country team produces an updated service utilization report using the latest data.
+
+**Steps:**
+
+1. Import latest data from DHIS2
+2. Run service utilization analysis
+3. Interpret outputs using AI tools
+4. Draft key findings for your country report
+
+![hands-on h:40](../resources/icons/hands_on.svg) **Duration: 60-90 minutes**
+
+---
+
+## Step 1: Import latest data
+
+*TO BE CONFIRMED: Data tab workflow*
+
+Each country team will update their database with the most recent DHIS2 data.
+
+1. Navigate to **Data** tab → **New Import**
+2. Configure your country's DHIS2 API connection
+3. Select your priority indicators
+4. Extend the date range through the current period
+5. Run import
+
+---
+
+## Step 2: Run service utilization module
+
+*TO BE CONFIRMED: Module configuration*
+
+Run the Service Utilization module for your country.
+
+- **Period:** Extend through current quarter
+- **Indicators:** Your country's priority services
+- **Geography:** National and subnational levels
+
+Output: `M3_disruptions_analysis_admin_area_1.csv`
+
+---
+
+## Step 3: Interpret your outputs
+
+For each visualization, use the AI assistant to help draft interpretations for your country report.
+
+The following slides provide:
+
+- Purpose of each graph
+- What to look for
+- Suggested AI prompts
+- Example interpretations
+
+---
+
+## Graph 1: Trends over time
+
+**Purpose:** Summarize your country's service volume trajectory over time.
+
+**What to look for:**
+
+- Highs and lows - what were the peak and minimum values?
+- Periods of increase or decrease
+- Related indicators (e.g., Penta1 vs Penta3) - do they move together?
+- Seasonality vs meaningful shifts
+
+---
+
+## Graph 1: AI prompt
+
+*NEEDS REVIEW*
+
+**Suggested prompt:**
+
+> Analyze this service volume data covering:
+> - Overall trend direction and magnitude from start to end period
+> - Notable disruptions, seasonal patterns, or outliers
+> - Specific data points for highs, lows, and final-period values
+
+---
+
+## Graph 2: Quarter-on-quarter change
+
+**Purpose:** Identify quarters with meaningful changes in your country's service volumes.
+
+**Reading the graph:**
+
+- **Gray:** No meaningful change (under 10%)
+- **Red:** Decrease of 10% or more
+- **Green:** Increase of 10% or more
+
+---
+
+## Graph 2: AI prompt
+
+*NEEDS REVIEW*
+
+**Suggested prompt:**
+
+> Analyze this data to:
+> - Note when all changes are under 10% (stable period)
+> - Highlight the 2-3 largest increases or decreases
+> - Flag any quarters with changes greater than 10%
+
+---
+
+## Graph 3: Disruptions and surpluses
+
+**Purpose:** Identify periods where your country's service delivery deviated significantly from expected levels.
+
+**What to look for:**
+
+- Which periods show disruptions (below expected)?
+- Which periods show surpluses (above expected)?
+- What is the average deviation during disruption periods?
+
+---
+
+## Graph 3: AI prompt
+
+*NEEDS REVIEW*
+
+**Suggested prompt:**
+
+> Analyze this data to:
+> - Identify disruption or surplus periods deviating more than 10% from expected
+> - Calculate average deviation for highlighted periods
+> - Red = disruption, Green = surplus
+
+---
+
+## Step 4: Draft your key messages
+
+**From data to key messages**
+
+Results are what the analysis found - often many, complex, hard to interpret at a glance.
+
+Key takeaways are the "so what" - they should be:
+
+- Few in number (3-5)
+- Simple and clear
+- Actionable
+
+Each country team: Draft 3-5 key messages from your analysis.
+
+---
+
+## Report checklist
+
+Before finishing, confirm your country report includes:
+
+- [ ] Data updated through current period
+- [ ] Trends over time interpretation
+- [ ] Quarter-on-quarter changes highlighted
+- [ ] Disruptions/surpluses identified
+- [ ] 3-5 key messages drafted
+
+---
+
+## Discussion
+
+- What trends emerged in your country's data?
+- Which services showed disruptions or surpluses?
+- What factors might explain the patterns?
+- What are your key messages for decision-makers?
 
 ---
 
 
 
-## Data use case: Application 2
+## Presenting reports and group feedback
 
-*Placeholder - content to be added*
+**Report back**
 
----
+- Each group presents their section (~5 minutes)
 
+**Discussion**
 
-
-## Data use case: Application 3
-
-*Placeholder - content to be added*
+- What worked well?
+- What was challenging?
+- Feedback on the approach
 
 ---
 
@@ -425,6 +598,13 @@ Data should be saved in long format meaning each row represents a single observa
 
 Data should be saved in .csv format and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform.
 
+<!--
+PRESENTER NOTES:
+- We want to use the most granular data we have access to in order to make more fine-tuned assessments for data quality and adjustments
+- We also want to be able to look at trends over time, accounting for things like seasonality
+- Using monthly facility-level data allows us to conduct the most robust analysis
+-->
+
 ---
 
 
@@ -532,14 +712,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 ## Platform Capabilities
 
-<style scoped>
-p { text-align: center; }
-img { display: block; margin: 0 auto; }
-</style>
-
-![Platform Capabilities h:420](../resources/diagrams/platform_capabilities.svg)
-
-<p style="font-size: 0.8em; color: #666; margin-top: 0.5rem;">Data flows from import through analysis to shareable outputs.</p>
+![Platform Capabilities](../resources/diagrams/platform_capabilities.svg)
 
 ---
 
@@ -838,10 +1011,10 @@ Higher and stable completeness improves data reliability.
 
 ## Indicator completeness output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Completeness output h:320](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Completeness output](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -854,6 +1027,14 @@ Higher and stable completeness improves data reliability.
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Walk through the heatmap: rows are indicators, columns are time periods
+- Color intensity shows completeness level - darker = more complete
+- Point out any patterns: seasonal dips? Specific indicators with issues?
+- Emphasize: we're looking at indicator completeness, not form submission
+-->
 
 ---
 
@@ -871,10 +1052,10 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 ## Outlier detection output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Outliers output h:320](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Outliers output](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -887,6 +1068,14 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Only HIGH values are flagged - low values may be real service disruptions
+- High outlier rates warrant investigation: data entry errors or real events?
+- Campaigns can cause legitimate spikes - context matters
+- The heatmap shows which indicators/regions have most outliers
+-->
 
 ---
 
@@ -902,10 +1091,10 @@ FASTR assesses consistency at the **district level** rather than facility level.
 
 ## Internal consistency output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Consistency output h:320](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Consistency output](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -931,10 +1120,10 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 ## DQA mean output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![DQA score output h:320](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![DQA score output](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -947,6 +1136,15 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Consistency is assessed at district level to account for patient movement
+- DQA mean combines all dimensions into one summary score
+- 100% = complete + no outliers + consistent - the goal for quality data
+- Use the heatmap to identify priority areas for data quality improvement
+- This completes the DQA module - next we'll look at how to adjust for these issues
+-->
 
 ---
 
@@ -962,16 +1160,24 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 **Excluded from adjustment:** Mortality indicators (discrete events that shouldn't be smoothed) and low-volume indicators (<100 events/month, where adjustment adds noise).
 
+<!--
+PRESENTER NOTES:
+- Condensed overview of adjustment rationale and methods
+- Key message: adjustment enables analysis despite DQ limitations
+- Four scenarios support sensitivity analysis - important for transparency
+- Not everything should be adjusted - mortality and low-volume excluded
+-->
+
 ---
 
 
 
 ## Outlier adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Outlier adjustment h:320](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Outlier adjustment](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -989,10 +1195,10 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 ## Completeness adjustment output
 
-<div style="display: flex; gap: 1em;">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
 
-![Completeness adjustment h:320](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Completeness adjustment](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -1005,6 +1211,16 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Two outputs shown: outlier adjustment and completeness adjustment
+- Outlier heatmap: negative values mean outliers were removed (reduced inflated counts)
+- Completeness heatmap: positive values mean gaps were filled (increased total volume)
+- Large adjustments (dark colors) indicate areas/indicators with data quality issues
+- Use these to identify where to focus data quality improvement efforts
+- Compare regions: which have more outlier issues vs completeness issues?
+-->
 
 ---
 
@@ -1052,6 +1268,16 @@ Service utilization analysis tracks how many health services are being delivered
 </div>
 </div>
 
+<!--
+PRESENTER NOTES:
+- Condensed version combining service trends and YoY comparison
+- First chart shows absolute volumes - identify overall patterns
+- Second chart shows relative changes - easier to compare across indicators
+- YoY changes >±10% are flagged - but threshold is configurable
+- For flagged changes, ask: data quality issue, real program change, or external event?
+- These outputs don't require population denominators - useful when denominators uncertain
+-->
+
 ---
 
 
@@ -1088,6 +1314,17 @@ Beyond year-over-year comparisons, we want to know: **Is service delivery on tra
 </div>
 </div>
 
+<!--
+PRESENTER NOTES:
+- Condensed version focusing on disruption detection methodology
+- Key insight: raw counts hard to interpret without context
+- Statistical model provides "expected" baseline accounting for seasonality
+- Disruption = sustained deviation below expected, not just a single bad month
+- When interpreting disruptions, consider external factors: COVID, strikes, etc.
+- Persistent deviations warrant deeper investigation into causes
+- Can run at national, provincial, or district level depending on data quality
+-->
+
 ---
 
 
@@ -1109,6 +1346,17 @@ HMIS tells us how many services were delivered (numerator), but not the target p
 **Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
 
 **Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+
+<!--
+PRESENTER NOTES:
+- Condensed overview of coverage estimation methodology
+- Key insight: standard HMIS denominators (catchment populations) often inaccurate
+- FASTR approach: derive denominators from data, validate against surveys
+- Example calculation: 10,000 ANC1 / 80% coverage = 12,500 pregnancies
+- Multiple denominator options compared to select best fit
+- Projections extend surveys forward using HMIS trends
+- Result: more reliable coverage estimates for monitoring
+-->
 
 ---
 
@@ -1153,6 +1401,17 @@ HMIS tells us how many services were delivered (numerator), but not the target p
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- Two outputs shown: national trends and subnational comparison
+- National: compare HMIS (grey), survey (black), projected (red)
+- Gap between HMIS and survey indicates denominator accuracy
+- Subnational: identify geographic disparities for prioritization
+- Coverage >100%: denominator too small or services double-counted
+- Coverage very low: denominator too large or under-reporting
+- Use these outputs to inform program planning and resource allocation
+-->
 
 ---
 
@@ -1285,20 +1544,6 @@ The AI will analyze your chart and generate text you can edit for your report.
 
 ---
 
-
-## Generating quarterly reporting products
-
-*Content to be developed*
-
-This section will cover:
-- Quarterly reporting workflow
-- Using the FASTR platform for automated reports
-- Quality assurance for reports
-- Distribution and feedback mechanisms
-
----
-
-
 # <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
@@ -1315,14 +1560,6 @@ Back at 14:00
 # Session 11: Presenting reports
 
 ---
-
-
-## Presenting reports and group feedback
-
-*Content to be developed*
-
----
-
 
 # Day 4
 
@@ -1371,9 +1608,23 @@ Back at 14:00
 ---
 
 
-## Health Facility Assessment Phone Survey
+## Rapid-cycle facility survey
 
-*Placeholder: Content to be developed*
+<div style="display: flex; gap: 2em; align-items: center;">
+<div style="flex: 2;">
+
+- Understand service delivery constraints in PHC facilities
+- Measure the implementation of reforms
+- Assess the effect of shocks on health systems
+- Improve timeliness and relevance of facility surveys
+
+</div>
+<div style="flex: 1;">
+
+![Hospital icon](../resources/icons/hospital_clinic.svg)
+
+</div>
+</div>
 
 ---
 

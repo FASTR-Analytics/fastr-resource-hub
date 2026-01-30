@@ -149,7 +149,8 @@
       "Bash(__NEW_LINE_83488684c3a1d49c__ echo \"\")",
       "Bash(__NEW_LINE_a7df5db7aae9418f__ echo \"\")",
       "Bash(sqlite3:*)",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "WebFetch(domain:uxwing.com)"
     ]
   }
 }

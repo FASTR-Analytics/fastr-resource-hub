@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-# Workshop Objectives
+## Workshop objectives
 
 {{OBJECTIVES}}
 

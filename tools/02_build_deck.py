@@ -214,7 +214,9 @@ MODULES = {
         'folder': 'm1_identify_questions_indicators',
         'topics': [
             ('m1_1', 'm1_1_what_is_data_use_case.md'),
-            ('m1_1a', 'm1_1a_examples_data_use_cases.md'),
+            ('m1_1a', 'm1_1a_nigeria_quarterly_monitoring.md'),
+            ('m1_1a2', 'm1_1a2_guinea_investment_tracking.md'),
+            ('m1_1a3', 'm1_1a3_ethiopia_program_monitoring.md'),
             ('m1_1b', 'm1_1b_common_data_use_case.md'),
             ('m1_1c', 'm1_1c_how_select_indicators.md'),
             ('m1_2', 'm1_2_fastr_core_indicators.md'),
@@ -333,7 +335,10 @@ MODULES = {
         'name': 'Survey & HFA',
         'folder': 'm8_survey_hfa',
         'topics': [
-            ('m8_1', 'm8_1_overview_hfa_phone_survey.md'),
+            ('m8_1', 'm8_1_rapid_cycle_facility_survey.md'),
+            ('m8_1a', 'm8_1a_hfa_survey_design.md'),
+            ('m8_1b', 'm8_1b_adaptive_survey_content.md'),
+            ('m8_1c', 'm8_1c_four_types_of_indicators.md'),
             ('m8_2', 'm8_2_questionnaire_adaptation_guidelines.md'),
             ('m8_3', 'm8_3_questionnaire_structure_review.md'),
             ('m8_4', 'm8_4_hands_on_adaptation.md'),
@@ -715,6 +720,7 @@ def load_yaml_config(yaml_path):
         'facilitators': workshop.get('facilitators', ''),
         'contact_email': workshop.get('contact_email', ''),
         'website': workshop.get('website', 'https://www.globalfinancingfacility.org/'),
+        'objectives': workshop.get('objectives', []),
 
         'workshop_days': schedule.get('days', 2),
         'tea_time': schedule.get('tea_time', '10:30 AM'),
@@ -1156,6 +1162,14 @@ def substitute_variables(content, config, extra_vars=None):
     country_data = config.get('country_data', {})
     for key, value in country_data.items():
         replacements[key] = str(value)
+
+    # Convert objectives list to markdown bullet points
+    objectives = config.get('objectives', [])
+    if objectives:
+        objectives_md = '\n'.join(f'- {obj}' for obj in objectives)
+        replacements['OBJECTIVES'] = objectives_md
+    else:
+        replacements['OBJECTIVES'] = ''
 
     if extra_vars:
         replacements.update(extra_vars)

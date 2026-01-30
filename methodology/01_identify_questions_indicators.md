@@ -188,10 +188,46 @@ A data use case is a specific scenario where data is utilized to achieve a parti
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1a -->
-## Examples of data use cases
+## Nigeria: Quarterly performance monitoring
 
-<!-- TODO: Add 3 examples of data use cases -->
+In Nigeria, FASTR is enabling quarterly performance monitoring for the National Health Sector Renewal Initiative -- and informing systems-strengthening efforts along the way.
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1;">
+
+![Nigeria FASTR example 1](resources/screenshots/country_examples/nigeria_example_1.png)
+
+</div>
+<div style="flex: 1;">
+
+![Nigeria FASTR example 2](resources/screenshots/country_examples/nigeria_example_2.png)
+
+</div>
+</div>
+
+<div style="font-size: 0.75em;">
+
+> "Part of the FASTR process should open up serious conversations that will lead to improvements in the system. It's not about pulling an indicator that will not get us good information. It is about using this FASTR process to make better decisions and re-engineer the system."
+>
+> — **Dr. Anthony Adoghe**, Director of M&E, Federal Ministry of Health and Social Welfare
+
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1a2 -->
+## Guinea: Tracking investment case progress
+
+Quarterly RMNCAH-N service use monitoring has supported Guinea to track investment case progress and quickly spot challenges -- like this sharp drop in immunization in the beginning of 2024.
+
+![Guinea immunization monitoring](resources/screenshots/country_examples/guinea_immunization.jpeg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1a3 -->
+## Ethiopia: Monitoring government program results
+
+Using FASTR HMIS analysis for monitoring results prioritized in government program supported by WB/GFF in Ethiopia.
+
+![Ethiopia FASTR monitoring](resources/screenshots/country_examples/ethiopia_example.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1b -->

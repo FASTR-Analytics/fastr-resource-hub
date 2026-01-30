@@ -11,6 +11,11 @@ workshop:
   venue: Protea Hotel by Marriott Lusaka Safari Lodge
   date: "January 27-30, 2026"
   facilitators: "GFF FASTR Team"
+  objectives:
+    - "**Introduce the FASTR HMIS analysis platform** - Familiarize participants with the platform's purpose, core features, and functionalities, including workflows, reporting options, and outputs"
+    - "**Strengthen analytical and reporting skills** - Enhance participants' capacity to manage data structures, customize visualizations, and produce tailored reports for diverse audiences"
+    - "**Prepare MoH for participation in the multi-country workshop** - Configure the FASTR analytics platform for Zambia; Produce the first quarterly report"
+    - "**Adapt the FASTR phone survey questionnaire to the Zambian context**"
 
 schedule:
   days: 4
@@ -45,7 +50,7 @@ schedule:
 
     - time: "09:20-09:35"
       session: "Workshop objectives and agenda"
-      slides: [01_objectives.md, expectations_slide.md, 03_expected-outputs.md, day1_agenda]
+      slides: [objectives_slide.md, expectations_slide.md, 03_expected-outputs.md, day1_agenda]
       speaker: "GFF FASTR team"
       duration: 15
 
@@ -280,7 +285,6 @@ schedule:
 content:
   modules: [0, 2, 3, 4, 5, 6, 7, 8]
   custom_slides:
-    - 01_objectives.md
     - 02_scope-of-work.md
     - 03_expected-outputs.md
     - 99_next-steps.md

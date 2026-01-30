@@ -81,7 +81,9 @@ TOPIC_NAMES = {
 
     # m1 - Identify Questions & Indicators (from 01_identify_questions_indicators.md)
     'm1_1': 'what_is_data_use_case',
-    'm1_1a': 'examples_data_use_cases',
+    'm1_1a': 'nigeria_quarterly_monitoring',
+    'm1_1a2': 'guinea_investment_tracking',
+    'm1_1a3': 'ethiopia_program_monitoring',
     'm1_1b': 'common_data_use_case',
     'm1_1c': 'how_select_indicators',
     'm1_2': 'fastr_core_indicators',
@@ -182,7 +184,10 @@ TOPIC_NAMES = {
     'm7_3': 'using_data_for_decision_making',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
-    'm8_1': 'overview_hfa_phone_survey',
+    'm8_1': 'rapid_cycle_facility_survey',
+    'm8_1a': 'hfa_survey_design',
+    'm8_1b': 'adaptive_survey_content',
+    'm8_1c': 'four_types_of_indicators',
     'm8_2': 'questionnaire_adaptation_guidelines',
     'm8_3': 'questionnaire_structure_review',
     'm8_4': 'hands_on_adaptation',
@@ -190,6 +195,7 @@ TOPIC_NAMES = {
 
     # m9 - Workshop Activities (from 09_workshop_activities.md)
     'm9_1': 'quarterly_reporting_activity',
+    'm9_2': 'presenting_reports_group_feedback',
 }
 
 # Marp frontmatter to add to extracted slides
@@ -231,13 +237,13 @@ def parse_slide_id(slide_id):
     Supports formats:
     - m4_1 -> (4, 1, '')
     - m4_1a -> (4, 1, 'a')
-    - m4_1b -> (4, 1, 'b')
+    - m4_1a2 -> (4, 1, 'a2')
     - m4_s1 -> (4, 's1', '') - condensed/summary slides
 
     Returns (module_num, topic_num, suffix) or (None, None, None) if invalid.
     """
-    # Standard format: m4_1 or m4_1a
-    match = re.match(r'^m(\d+)_(\d+)([a-z]?)$', slide_id)
+    # Standard format: m4_1, m4_1a, or m4_1a2
+    match = re.match(r'^m(\d+)_(\d+)([a-z]?\d*)$', slide_id)
     if match:
         return int(match.group(1)), int(match.group(2)), match.group(3)
 

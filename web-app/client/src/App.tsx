@@ -1167,13 +1167,16 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
 function QuickExportMode({ onBack }: { onBack: () => void }) {
   const { contentLibrary, loadContentLibrary } = useWorkshopStore()
   const [selectedSlides, setSelectedSlides] = useState<Array<{ module: any; topic: any }>>([])
+  const [selectedTemplates, setSelectedTemplates] = useState<Array<{ id: string; name: string; file: string }>>([])
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [expandedTemplateCategories, setExpandedTemplateCategories] = useState<Set<string>>(new Set(['breaks']))
   const [isExporting, setIsExporting] = useState(false)
   const [exportFormat, setExportFormat] = useState<'pdf' | 'pptx' | null>(null)
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+  const [templates, setTemplates] = useState<any[]>([])
 
   // Cache for rendered previews - persists across re-renders
   const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
@@ -1183,6 +1186,87 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       loadContentLibrary()
     }
   }, [contentLibrary.length, loadContentLibrary])
+
+  // Fetch templates
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      try {
+        const response = await fetch('/api/content/templates', { credentials: 'include' })
+        if (response.ok) {
+          const data = await response.json()
+          setTemplates(data)
+        }
+      } catch (err) {
+        console.error('Failed to fetch templates:', err)
+      }
+    }
+    fetchTemplates()
+  }, [])
+
+  const toggleTemplateCategory = (categoryId: string) => {
+    const next = new Set(expandedTemplateCategories)
+    if (next.has(categoryId)) {
+      next.delete(categoryId)
+    } else {
+      next.add(categoryId)
+    }
+    setExpandedTemplateCategories(next)
+  }
+
+  const toggleTemplate = (template: any) => {
+    const exists = selectedTemplates.find(t => t.id === template.id)
+    if (exists) {
+      setSelectedTemplates(selectedTemplates.filter(t => t.id !== template.id))
+    } else {
+      setSelectedTemplates([...selectedTemplates, { id: template.id, name: template.name, file: template.file }])
+    }
+  }
+
+  const isTemplateSelected = (templateId: string) => selectedTemplates.some(t => t.id === templateId)
+
+  const loadTemplatePreview = async (template: any) => {
+    setPreviewTopic({ id: template.id, title: template.name, slideCount: 1 })
+
+    // Check cache first
+    const cached = previewCache.current.get(template.id)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+
+    setPreviewHtml(null)
+    setIsLoadingPreview(true)
+    setPresenterNotes([])
+
+    try {
+      // Fetch template content
+      const response = await fetch(`/api/content/templates/${template.id}`, { credentials: 'include' })
+      if (response.ok) {
+        const data = await response.json()
+        // Render to HTML
+        const renderResponse = await fetch('/api/content/render', {
+          credentials: 'include',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown: data.content })
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          previewCache.current.set(template.id, {
+            html: renderData.html,
+            notes: renderData.presenterNotes || []
+          })
+          setPreviewHtml(renderData.html)
+          setPresenterNotes(renderData.presenterNotes || [])
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load template preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
 
   const toggleModule = (moduleId: string) => {
     const next = new Set(expandedModules)
@@ -1272,16 +1356,17 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   }
 
   const exportSelection = async (format: 'pdf' | 'pptx') => {
-    if (selectedSlides.length === 0) return
+    if (selectedSlides.length === 0 && selectedTemplates.length === 0) return
     setIsExporting(true)
     setExportFormat(format)
 
     try {
       const topicIds = selectedSlides.map(s => s.topic.id)
+      const templateFiles = selectedTemplates.map(t => t.file).filter(Boolean)
       const response = await fetch('/api/content/export/selection', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topicIds, format, title: 'Quick Export' })
+        body: JSON.stringify({ topicIds, templateFiles, format, title: 'Quick Export' })
       })
 
       if (response.ok) {
@@ -1301,7 +1386,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     }
   }
 
-  const totalSlides = selectedSlides.reduce((sum, s) => sum + s.topic.slideCount, 0)
+  const totalSlides = selectedSlides.reduce((sum, s) => sum + s.topic.slideCount, 0) + selectedTemplates.length
 
   if (contentLibrary.length === 0) {
     return (
@@ -1330,10 +1415,73 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         {/* Topic picker */}
         <div className="w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
           <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-800">Select Topics</h2>
+            <h2 className="font-semibold text-gray-800">Select Content</h2>
             <p className="text-sm text-gray-500 mt-1">Check to select, click name to preview</p>
           </div>
           <div className="flex-1 overflow-auto">
+            {/* Templates Section - exclude 'custom' category */}
+            {templates.filter((c: any) => c.id !== 'custom').length > 0 && (
+              <div className="border-b border-gray-200">
+                <div className="px-4 py-2 bg-amber-50 text-xs font-semibold text-amber-800 uppercase tracking-wide">
+                  Templates
+                </div>
+                {templates.filter((c: any) => c.id !== 'custom').map((category: any) => (
+                  <div key={category.id} className="border-b border-gray-100">
+                    <button
+                      onClick={() => toggleTemplateCategory(category.id)}
+                      className="w-full flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition-colors text-left"
+                    >
+                      {expandedTemplateCategories.has(category.id) ? (
+                        <ChevronDown className="w-4 h-4 text-gray-400" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                      )}
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-700 text-sm">{category.name}</div>
+                        <div className="text-xs text-gray-400">{category.description}</div>
+                      </div>
+                    </button>
+                    {expandedTemplateCategories.has(category.id) && (
+                      <div className="bg-gray-50">
+                        {category.templates.map((template: any) => (
+                          <div
+                            key={template.id}
+                            className={`flex items-center gap-2 px-4 py-2 pl-8 hover:bg-gray-100 transition-colors ${
+                              previewTopic?.id === template.id ? 'bg-amber-100' : ''
+                            }`}
+                          >
+                            <button
+                              onClick={(e) => { e.stopPropagation(); toggleTemplate(template) }}
+                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                                isTemplateSelected(template.id)
+                                  ? 'bg-amber-500 border-amber-500'
+                                  : 'border-gray-300 hover:border-gray-400'
+                              }`}
+                            >
+                              {isTemplateSelected(template.id) && <Check className="w-3 h-3 text-white" />}
+                            </button>
+                            <button
+                              onClick={() => loadTemplatePreview(template)}
+                              className="flex-1 min-w-0 text-left"
+                            >
+                              <div className="text-sm text-gray-700">{template.name}</div>
+                              {template.preview && (
+                                <div className="text-xs text-gray-400 truncate">{template.preview}</div>
+                              )}
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Modules Section */}
+            <div className="px-4 py-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wide border-b border-gray-200">
+              Modules
+            </div>
             {contentLibrary.map((module: any) => (
               <div key={module.id} className="border-b border-gray-100">
                 <div className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors">
