@@ -4,9 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Service coverage estimates - Module 4
+## Service coverage estimation
 
-Estimating the percentage of the target population that received a given health service
+**What is service coverage?**
+
+**Coverage** = services delivered ÷ target population
+
+- HMIS tells us how many services were delivered (numerator), but not the target population size (denominator)
+- Standard HMIS coverage uses catchment populations, which are often inaccurate
+- Surveys (DHS/MICS) provide reliable coverage but only every ~5 or more years
 
 ---
 

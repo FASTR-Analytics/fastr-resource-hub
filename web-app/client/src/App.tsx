@@ -2078,10 +2078,12 @@ function App() {
       const config = {
         workshop: {
           name: data.name || 'FASTR Workshop',
+          title: data.title || '',
+          subtitle: data.subtitle || '',
           country: data.country || '',
           location: data.location || '',
-          date: '',
-          facilitators: '',
+          date: data.date || '',
+          facilitators: data.facilitators || '',
           objectives: data.objectives || '',
           expected_outputs: data.expected_outputs || '',
         },

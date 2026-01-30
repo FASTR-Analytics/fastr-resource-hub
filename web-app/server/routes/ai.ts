@@ -1210,6 +1210,26 @@ Return ONLY valid JSON, no explanation.`,
       }
     }
 
+    // POST-PROCESSING: Convert start_date/end_date to formatted date string
+    if (workshopConfig.start_date && workshopConfig.end_date) {
+      const formatDate = (dateStr: string) => {
+        const date = new Date(dateStr)
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                       'July', 'August', 'September', 'October', 'November', 'December']
+        return { month: months[date.getMonth()], day: date.getDate(), year: date.getFullYear() }
+      }
+      const start = formatDate(workshopConfig.start_date)
+      const end = formatDate(workshopConfig.end_date)
+
+      // Format as "Month Day-Day, Year" or "Month Day - Month Day, Year"
+      if (start.month === end.month && start.year === end.year) {
+        workshopConfig.date = `${start.month} ${start.day}-${end.day}, ${start.year}`
+      } else {
+        workshopConfig.date = `${start.month} ${start.day} - ${end.month} ${end.day}, ${end.year}`
+      }
+      console.log(`[AI Post-process] Formatted date: ${workshopConfig.date}`)
+    }
+
     res.json(workshopConfig)
   } catch (error: any) {
     console.error('AI generate-workshop error:', error)
