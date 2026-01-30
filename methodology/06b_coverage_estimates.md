@@ -1752,13 +1752,11 @@ Same as national, plus:
 <!-- SLIDE:m6_6 -->
 ## Service coverage estimation
 
-**What is service coverage?**
+![Coverage equation h:180](resources/diagrams/coverage_equation.svg)
 
 **Coverage** = services delivered ÷ target population
 
-- HMIS tells us how many services were delivered (numerator), but not the target population size (denominator)
-- Standard HMIS coverage uses catchment populations, which are often inaccurate
-- Surveys (DHS/MICS) provide reliable coverage but only every ~5 or more years
+HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every ~5 or more years.
 
 ---
 
@@ -1793,26 +1791,6 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
-## Service coverage estimation
-
-![Coverage equation](resources/diagrams/coverage_equation.svg)
-
-**Coverage** = services delivered ÷ target population
-
-HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every ~5 or more years.
-
-<!--
-PRESENTER NOTES:
-- Coverage formula: services delivered ÷ target population × 100
-- Numerator from HMIS is relatively reliable (after DQA adjustments)
-- Denominator (target population) is the challenge
-- Standard HMIS denominators often based on outdated census projections
-- Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years
-- Our goal: derive more accurate denominators from the data itself
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_7a -->
 ## Service coverage example
 
 ![Coverage example ANC4+ h:420](resources/diagrams/coverage_example_anc4.svg)
