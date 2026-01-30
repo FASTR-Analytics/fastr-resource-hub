@@ -152,7 +152,9 @@
       "Bash(npx tsx:*)",
       "WebFetch(domain:uxwing.com)",
       "Bash(convert:*)",
-      "Bash(magick:*)"
+      "Bash(magick:*)",
+      "Bash(comm -23:*)",
+      "Bash(comm:*)"
     ]
   }
 }

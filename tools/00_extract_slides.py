@@ -150,7 +150,6 @@ TOPIC_NAMES = {
     'm6_5a': 'service_utilization_configuration_parameters',
     'm6_6': 'service_coverage_introduction',
     'm6_7': 'definition_of_coverage',
-    'm6_7a': 'service_coverage_example',
     'm6_8': 'denominators_by_service_type',
     'm6_9': 'demographic_cascade',
     'm6_10': 'denominator_cascade_illustration',
@@ -158,7 +157,6 @@ TOPIC_NAMES = {
     'm6_13': 'denominator_selection_methodology',
     'm6_13a': 'denominator_comparison',
     'm6_14': 'coverage_projection_methodology',
-    'm6_15': 'interpretation_of_coverage_outputs',
     'm6_19': 'coverage_configuration_parameters',
     # Condensed Service Utilization & Coverage slides (methods + interpretation)
     'm6_s1': 'utilization_overview',
@@ -189,10 +187,6 @@ TOPIC_NAMES = {
     'm8_1a': 'hfa_survey_design',
     'm8_1b': 'adaptive_survey_content',
     'm8_1c': 'four_types_of_indicators',
-    'm8_2': 'questionnaire_adaptation_guidelines',
-    'm8_3': 'questionnaire_structure_review',
-    'm8_4': 'hands_on_adaptation',
-    'm8_5': 'hfa_priorities_data_use',
 
     # m9 - Workshop Activities (from 09_workshop_activities.md)
     'm9_1': 'quarterly_reporting_activity',
