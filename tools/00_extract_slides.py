@@ -139,13 +139,13 @@ TOPIC_NAMES = {
     'm5_1': 'approach_to_dq_adjustment',
     'm5_2': 'adjustment_for_outliers',
     'm5_3': 'adjustment_for_completeness',
-    'm5_4': 'adjusting_dq_in_platform',
     # Condensed DQ Adjustment slides (methods + interpretation)
     'm5_s1': 'dq_adjustment_overview',
     'm5_s2': 'dq_adjustment_interpretation',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization_analysis',
+    'm6_1a': 'service_utilization_comparison_dhis2',
     'm6_2': 'service_disruptions_surpluses_detection',
     'm6_5a': 'service_utilization_configuration_parameters',
     'm6_6': 'service_coverage_introduction',
@@ -174,6 +174,7 @@ TOPIC_NAMES = {
     'm7_1g': 'mean_dqa_score_output',
     'm7_1h': 'outlier_adjustment_output',
     'm7_1i': 'completeness_adjustment_output',
+    'm7_1i2': 'combined_adjustment_output',
     'm7_1j': 'service_utilization_output',
     'm7_1k': 'year_over_year_change_output',
     'm7_1l': 'disruption_output_national',

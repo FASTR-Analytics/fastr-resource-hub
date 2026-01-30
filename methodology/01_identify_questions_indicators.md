@@ -217,17 +217,17 @@ In Nigeria, FASTR is enabling quarterly performance monitoring for the National 
 <!-- SLIDE:m1_1a2 -->
 ## Guinea: Tracking investment case progress
 
-Quarterly RMNCAH-N service use monitoring has supported Guinea to track investment case progress and quickly spot challenges -- like this sharp drop in immunization in the beginning of 2024.
+<p style="font-size: 0.85em;">Quarterly RMNCAH-N service use monitoring has supported Guinea to track investment case progress and quickly spot challenges -- like this sharp drop in immunization in the beginning of 2024.</p>
 
-![Guinea immunization monitoring](resources/screenshots/country_examples/guinea_immunization.jpeg)
+![Guinea immunization monitoring h:440](resources/screenshots/country_examples/guinea_immunization.jpeg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1a3 -->
 ## Ethiopia: Monitoring government program results
 
-Using FASTR HMIS analysis for monitoring results prioritized in government program supported by WB/GFF in Ethiopia.
+<p style="font-size: 0.85em;">Using FASTR HMIS analysis for monitoring results prioritized in government program supported by WB/GFF in Ethiopia.</p>
 
-![Ethiopia FASTR monitoring](resources/screenshots/country_examples/ethiopia_example.png)
+![Ethiopia FASTR monitoring h:440](resources/screenshots/country_examples/ethiopia_example.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1b -->

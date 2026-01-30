@@ -313,7 +313,7 @@ const TEMPLATE_CATEGORIES = [
     name: 'Day Transitions',
     description: 'Day recap and preview slides',
     templates: [
-      { id: 'day_recap', file: null, name: 'Day Recap', icon: 'recap', special: true, preview: 'Day 2+ only - Recap previous day, preview today' },
+      { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Day 2+ only - Recap previous day, preview today' },
     ]
   },
   {

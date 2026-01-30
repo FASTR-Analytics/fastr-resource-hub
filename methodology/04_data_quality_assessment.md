@@ -1911,6 +1911,15 @@ Indicator completeness measures whether facilities that should be reporting data
 
 Higher and stable completeness improves data reliability.
 
+<div style="background: #E8F4F3; border-left: 4px solid #1A8A8A; padding: 0.5em 1em; font-size: 0.75em; margin-top: 0.5em;">
+
+**Notes on completeness:**
+
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country as some services many not be delivered in facilities, or some facilities may not report.
+- For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator.
+
+</div>
+
 ---
 
 ## Indicator completeness output
@@ -1983,9 +1992,23 @@ PRESENTER NOTES:
 <!-- SLIDE:m4_s4 -->
 ## Internal consistency
 
-Internal consistency checks whether related indicators maintain expected logical relationships. For example, ANC1 should always be ≥ ANC4 (you can't have a 4th visit without a 1st). Similarly, Penta1 ≥ Penta3. When these relationships are violated, it signals data quality issues like double-counting, under-reporting, or data flow errors.
+<div style="font-size: 0.9em;">
+
+Internal consistency checks whether related indicators maintain expected logical relationships. FASTR assesses the following pairs of indicators to measure internal consistency:
+
+| Indicator pair | Expected relationship |
+|----------------|----------------------|
+| ANC1/ANC4 | Ratio should be greater than 1 |
+| Penta1/Penta3 | Ratio should be greater than 1 |
+| BCG/Facility delivery | Ratio should be within 30% (i.e. >=0.7 and <=1.3) |
+
+We expect the number of pregnant women receiving a first ANC visit will always be higher than the number of pregnant women receiving a fourth ANC visit.
+
+BCG is a birth dose vaccine so we expect that BCG and facility delivery will be equal. However, we recognize there may be more variability in this predicted relationship thus we set a range of within 30%.
 
 FASTR assesses consistency at the **district level** rather than facility level. This is because patients frequently seek care from different facilities within the same district - a woman may have her ANC1 visit at a health post but travel to the district hospital for ANC4. Assessing at district level accounts for this patient movement.
+
+</div>
 
 ---
 
