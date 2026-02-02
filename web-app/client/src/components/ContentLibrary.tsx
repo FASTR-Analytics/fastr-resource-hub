@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
-import api, { Asset } from '../../lib/api'
+import api, { Asset, previewAPI } from '../../lib/api'
 import {
   ChevronRight,
   ChevronDown,
@@ -337,22 +337,14 @@ We resume at **[time]**`
     // Check if we're still hovering this template before rendering
     if (hoveredTemplateRef.current !== template.id) return
 
-    // Render to HTML
+    // Render to HTML client-side using Marp
     if (markdown) {
       try {
-        const renderResponse = await fetch('/api/content/render', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ markdown })
-        })
+        const { html: renderedHtml, css } = await previewAPI.renderMarkdown(markdown)
         // Check again after async operation
         if (hoveredTemplateRef.current !== template.id) return
-        if (renderResponse.ok) {
-          const data = await renderResponse.json()
-          const html = data.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
-          setTemplatePreview({ template, category, position, html })
-        }
+        const html = `<!DOCTYPE html><html><head><base href="${window.location.origin}/"><style>${css}</style></head><body>${renderedHtml}</body></html>`
+        setTemplatePreview({ template, category, position, html })
       } catch (err) {
         console.error('Failed to render preview:', err)
         if (hoveredTemplateRef.current === template.id) {
@@ -377,19 +369,14 @@ We resume at **[time]**`
       if (response.ok) {
         const data = await response.json()
 
-        // Render markdown to HTML via backend
-        const renderResponse = await fetch('/api/content/render', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ markdown: data.content })
-        })
-
+        // Render markdown to HTML client-side using Marp
         let html = ''
-        if (renderResponse.ok) {
-          const renderData = await renderResponse.json()
-          // Add base tag so /resources/ paths resolve correctly in iframe
-          html = renderData.html.replace('<head>', `<head><base href="${window.location.origin}/">`)
+        try {
+          const { html: renderedHtml, css } = await previewAPI.renderMarkdown(data.content)
+          // Combine CSS and HTML, add base tag so /resources/ paths resolve correctly in iframe
+          html = `<!DOCTYPE html><html><head><base href="${window.location.origin}/"><style>${css}</style></head><body>${renderedHtml}</body></html>`
+        } catch (renderErr) {
+          console.error('Client-side render failed:', renderErr)
         }
 
         setFullPreview({ topic, module, content: data.content, html })
