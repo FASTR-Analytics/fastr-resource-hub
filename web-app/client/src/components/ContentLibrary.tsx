@@ -4,6 +4,7 @@ import api, { Asset, previewAPI } from '../../lib/api'
 import {
   ChevronRight,
   ChevronDown,
+  ChevronLeft,
   FileText,
   Clock,
   Layers,
@@ -74,11 +75,18 @@ export function ContentLibrary() {
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
-  const [fullPreview, setFullPreview] = useState<{ topic: Topic; module: Module; content: string; html?: string } | null>(null)
+
+  // Module preview state
+  const [modulePreview, setModulePreview] = useState<{
+    module: Module
+    mode: 'full' | 'condensed'
+    slides: string[]  // Array of HTML for each slide
+    currentSlide: number
+    loading: boolean
+  } | null>(null)
 
   // Add to session dialog state
   const [addToSessionDialog, setAddToSessionDialog] = useState<{ topic: Topic; module: Module } | null>(null)
-  const [_loadingPreview, setLoadingPreview] = useState(false)
   const [templates, setTemplates] = useState<TemplateCategory[]>([])
   const [templatePreview, setTemplatePreview] = useState<{ template: Template; category: TemplateCategory; position: { x: number; y: number }; html?: string } | null>(null)
 
@@ -94,6 +102,11 @@ export function ContentLibrary() {
 
   // Rebuild state
   const [isRebuilding, setIsRebuilding] = useState(false)
+
+  // Pre-initialize Marp on mount for faster previews
+  useEffect(() => {
+    previewAPI.initMarp().catch(err => console.warn('Marp pre-init failed:', err))
+  }, [])
 
   // Fetch templates on mount
   useEffect(() => {
@@ -361,30 +374,83 @@ We resume at **[time]**`
     setTemplatePreview(null)
   }
 
-  // Show full preview modal with rendered slides
-  const showFullPreview = async (topic: Topic, module: Module) => {
-    setLoadingPreview(true)
+  // Show module preview modal with all slides
+  const showModulePreview = async (module: Module, mode: 'full' | 'condensed') => {
+    // Get topics based on mode
+    const topics = mode === 'full'
+      ? ((module as any).fullTopics || module.topics)
+      : ((module as any).condensedTopics || [])
+
+    if (topics.length === 0) {
+      console.warn('No topics for mode:', mode)
+      return
+    }
+
+    // Show loading state immediately
+    setModulePreview({
+      module,
+      mode,
+      slides: [],
+      currentSlide: 0,
+      loading: true,
+    })
+
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
-      if (response.ok) {
-        const data = await response.json()
+      // Fetch all topic content in parallel
+      const contentPromises = topics.map((topic: Topic) =>
+        fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
+          .then(res => res.ok ? res.json() : null)
+      )
+      const contents = await Promise.all(contentPromises)
 
-        // Render markdown to HTML client-side using Marp
-        let html = ''
-        try {
-          const { html: renderedHtml, css } = await previewAPI.renderMarkdown(data.content)
-          // Combine CSS and HTML, add base tag so /resources/ paths resolve correctly in iframe
-          html = `<!DOCTYPE html><html><head><base href="${window.location.origin}/"><style>${css}</style></head><body>${renderedHtml}</body></html>`
-        } catch (renderErr) {
-          console.error('Client-side render failed:', renderErr)
+      // Combine all markdown content, splitting by slide separator
+      const allSlides: string[] = []
+      for (const data of contents) {
+        if (!data?.content) continue
+        // Split content into individual slides (Marp uses --- as separator)
+        const slideContents = data.content.split(/\n---\n/)
+        for (let i = 0; i < slideContents.length; i++) {
+          let slideMarkdown = slideContents[i].trim()
+          // First slide might have frontmatter, keep it; others need marp header
+          if (i === 0 && !slideMarkdown.startsWith('---')) {
+            slideMarkdown = `---\nmarp: true\ntheme: fastr\n---\n\n${slideMarkdown}`
+          } else if (i > 0) {
+            slideMarkdown = `---\nmarp: true\ntheme: fastr\n---\n\n${slideMarkdown}`
+          }
+          allSlides.push(slideMarkdown)
         }
-
-        setFullPreview({ topic, module, content: data.content, html })
       }
+
+      // Render all slides to HTML
+      const renderedSlides: string[] = []
+      for (const slideMarkdown of allSlides) {
+        try {
+          const { html, css } = await previewAPI.renderMarkdown(slideMarkdown)
+          const fullHtml = `<!DOCTYPE html><html><head><base href="${window.location.origin}/"><style>${css}</style></head><body>${html}</body></html>`
+          renderedSlides.push(fullHtml)
+        } catch (err) {
+          console.error('Failed to render slide:', err)
+          renderedSlides.push('<html><body><p>Failed to render slide</p></body></html>')
+        }
+      }
+
+      setModulePreview({
+        module,
+        mode,
+        slides: renderedSlides,
+        currentSlide: 0,
+        loading: false,
+      })
     } catch (err) {
-      console.error('Failed to load preview:', err)
-    } finally {
-      setLoadingPreview(false)
+      console.error('Failed to load module preview:', err)
+      setModulePreview(null)
+    }
+  }
+
+  // Switch module preview mode (full/condensed)
+  const switchPreviewMode = (mode: 'full' | 'condensed') => {
+    if (modulePreview && modulePreview.mode !== mode) {
+      showModulePreview(modulePreview.module, mode)
     }
   }
 
@@ -704,28 +770,38 @@ We resume at **[time]**`
         {contentLibrary.map((module) => (
           <div key={module.id} className="border-b border-gray-100">
             {/* Module header */}
-            <button
-              onClick={() => toggleModule(module.number)}
-              className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
-            >
-              {expandedModules.has(module.number) ? (
-                <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              ) : (
-                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="font-medium text-sm text-gray-700 truncate">
-                  M{module.number}: {module.name}
+            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors group">
+              <button
+                onClick={() => toggleModule(module.number)}
+                className="flex items-center gap-2 flex-1 min-w-0 text-left"
+              >
+                {expandedModules.has(module.number) ? (
+                  <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                ) : (
+                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm text-gray-700 truncate">
+                    M{module.number}: {module.name}
+                  </div>
+                  <div className="text-xs text-gray-400 flex items-center gap-2">
+                    <span>{module.topics.length} topics</span>
+                    <span>•</span>
+                    <span>{module.totalSlides} slides</span>
+                    <span>•</span>
+                    <span>{getModuleDuration(module)}</span>
+                  </div>
                 </div>
-                <div className="text-xs text-gray-400 flex items-center gap-2">
-                  <span>{module.topics.length} topics</span>
-                  <span>•</span>
-                  <span>{module.totalSlides} slides</span>
-                  <span>•</span>
-                  <span>{getModuleDuration(module)}</span>
-                </div>
-              </div>
-            </button>
+              </button>
+              {/* Preview button */}
+              <button
+                onClick={() => showModulePreview(module, 'full')}
+                className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-100 rounded opacity-0 group-hover:opacity-100 transition-all"
+                title="Preview module slides"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
 
             {/* Topics - Full and Condensed sub-sections */}
             {expandedModules.has(module.number) && (
@@ -733,8 +809,15 @@ We resume at **[time]**`
                 {/* Full slides section */}
                 {(module as any).fullTopics?.length > 0 && (
                   <>
-                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
-                      Full ({(module as any).fullSlides} slides)
+                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200 flex items-center justify-between group">
+                      <span>Full ({(module as any).fullSlides} slides)</span>
+                      <button
+                        onClick={() => showModulePreview(module, 'full')}
+                        className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-all"
+                        title="Preview all full slides"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                     {(module as any).fullTopics.map((topic: any) => (
                       <div
@@ -753,22 +836,13 @@ We resume at **[time]**`
                             <span>{topic.slideCount} slides</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={() => showFullPreview(topic, module)}
-                            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-white rounded"
-                            title="Preview slides"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => addTopic(topic, module)}
-                            className="p-1 text-fastr-primary hover:bg-white rounded"
-                            title="Add to Day 1"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => addTopic(topic, module)}
+                          className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                          title="Add to Day 1"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
                       </div>
                     ))}
                   </>
@@ -776,8 +850,15 @@ We resume at **[time]**`
                 {/* Condensed slides section */}
                 {(module as any).condensedTopics?.length > 0 && (
                   <>
-                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
-                      Condensed ({(module as any).condensedSlides} slides)
+                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200 flex items-center justify-between group">
+                      <span>Condensed ({(module as any).condensedSlides} slides)</span>
+                      <button
+                        onClick={() => showModulePreview(module, 'condensed')}
+                        className="p-1 text-amber-600 hover:text-amber-800 hover:bg-amber-100 rounded opacity-0 group-hover:opacity-100 transition-all"
+                        title="Preview all condensed slides"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                     {(module as any).condensedTopics.map((topic: any) => (
                       <div
@@ -796,22 +877,13 @@ We resume at **[time]**`
                             <span>{topic.slideCount} slides</span>
                           </div>
                         </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={() => showFullPreview(topic, module)}
-                            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-white rounded"
-                            title="Preview slides"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => addTopic(topic, module)}
-                            className="p-1 text-fastr-primary hover:bg-white rounded"
-                            title="Add to Day 1"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
-                        </div>
+                        <button
+                          onClick={() => addTopic(topic, module)}
+                          className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                          title="Add to Day 1"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
                       </div>
                     ))}
                   </>
@@ -834,22 +906,13 @@ We resume at **[time]**`
                         <span>{topic.slideCount} slides</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button
-                        onClick={() => showFullPreview(topic, module)}
-                        className="p-1 text-gray-400 hover:text-gray-600 hover:bg-white rounded"
-                        title="Preview slides"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => addTopic(topic, module)}
-                        className="p-1 text-fastr-primary hover:bg-white rounded"
-                        title="Add to Day 1"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => addTopic(topic, module)}
+                      className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                      title="Add to Day 1"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
                   </div>
                 ))}
               </div>
@@ -958,55 +1021,98 @@ We resume at **[time]**`
         </div>
       )}
 
-      {/* Full preview modal */}
-      {fullPreview && (
+      {/* Module preview modal */}
+      {modulePreview && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[80vh] flex flex-col">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b">
-              <div>
-                <h3 className="font-semibold">{fullPreview.topic.title}</h3>
-                <p className="text-sm text-gray-500">
-                  M{fullPreview.module.number}: {fullPreview.module.name}
-                </p>
+              <div className="flex items-center gap-4">
+                <div>
+                  <h3 className="font-semibold">M{modulePreview.module.number}: {modulePreview.module.name}</h3>
+                  <p className="text-sm text-gray-500">
+                    {modulePreview.slides.length} slides
+                  </p>
+                </div>
+                {/* Full/Condensed toggle */}
+                {((modulePreview.module as any).fullTopics?.length > 0 && (modulePreview.module as any).condensedTopics?.length > 0) && (
+                  <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+                    <button
+                      onClick={() => switchPreviewMode('full')}
+                      className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                        modulePreview.mode === 'full'
+                          ? 'bg-fastr-primary text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      Full
+                    </button>
+                    <button
+                      onClick={() => switchPreviewMode('condensed')}
+                      className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                        modulePreview.mode === 'condensed'
+                          ? 'bg-amber-500 text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      Condensed
+                    </button>
+                  </div>
+                )}
               </div>
               <button
-                onClick={() => setFullPreview(null)}
+                onClick={() => setModulePreview(null)}
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="flex-1 overflow-auto bg-gray-800 p-4">
-              {fullPreview.html ? (
-                <div className="flex justify-center">
-                  <iframe
-                    srcDoc={fullPreview.html}
-                    className="bg-white rounded shadow-lg"
-                    style={{ width: '800px', height: '450px' }}
-                    title="Slide Preview"
-                  />
+
+            {/* Slide viewer */}
+            <div className="flex-1 overflow-hidden bg-gray-800 flex items-center justify-center p-4">
+              {modulePreview.loading ? (
+                <div className="text-center text-white">
+                  <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
+                  <p>Loading slides...</p>
                 </div>
+              ) : modulePreview.slides.length > 0 ? (
+                <iframe
+                  srcDoc={modulePreview.slides[modulePreview.currentSlide]}
+                  className="bg-white rounded shadow-lg"
+                  style={{ width: '960px', height: '540px', maxWidth: '100%' }}
+                  title="Slide Preview"
+                />
               ) : (
-                <pre className="text-sm text-gray-300 whitespace-pre-wrap font-mono bg-gray-900 p-4 rounded">
-                  {fullPreview.content}
-                </pre>
+                <p className="text-gray-400">No slides available</p>
               )}
             </div>
-            <div className="flex justify-end gap-2 px-4 py-3 border-t">
+
+            {/* Navigation footer */}
+            <div className="flex items-center justify-between px-4 py-3 border-t bg-gray-50">
               <button
-                onClick={() => setFullPreview(null)}
-                className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                onClick={() => setModulePreview(prev => prev ? { ...prev, currentSlide: Math.max(0, prev.currentSlide - 1) } : null)}
+                disabled={modulePreview.loading || modulePreview.currentSlide === 0}
+                className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 rounded disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Close
+                <ChevronLeft className="w-4 h-4" />
+                Previous
               </button>
+              <div className="text-sm text-gray-600">
+                {modulePreview.loading ? (
+                  'Loading...'
+                ) : (
+                  <span>
+                    Slide <strong>{modulePreview.currentSlide + 1}</strong> of <strong>{modulePreview.slides.length}</strong>
+                  </span>
+                )}
+              </div>
               <button
-                onClick={() => {
-                  addTopic(fullPreview.topic, fullPreview.module)
-                  setFullPreview(null)
-                }}
-                className="px-4 py-2 text-sm bg-fastr-primary text-white rounded hover:bg-fastr-primary/90"
+                onClick={() => setModulePreview(prev => prev ? { ...prev, currentSlide: Math.min(prev.slides.length - 1, prev.currentSlide + 1) } : null)}
+                disabled={modulePreview.loading || modulePreview.currentSlide >= modulePreview.slides.length - 1}
+                className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 rounded disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Add to Day 1
+                Next
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
