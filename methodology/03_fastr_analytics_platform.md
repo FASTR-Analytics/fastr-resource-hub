@@ -465,15 +465,42 @@ The FASTR AI assistant addresses these challenges by providing on-demand support
 <!-- SLIDE:m3_9a -->
 ## What the AI assistant can do
 
-The AI assistant supports three main categories of tasks:
+**User understanding**
+- Help to understand approach and methods
+- How to use the platform itself
 
-| Category | Capabilities |
-|----------|--------------|
-| **User understanding** | Explain methods and modules, help navigate the platform, answer questions about the analysis approach |
-| **Synthesis & interpretation** | Analyze data tables, generate key messages, identify trends and patterns, create reports with narrative |
-| **Platform operations** | Configure visualizations, run modules, export results |
+**Synthesis and interpretation**
+- Look at data
+- Generate key messages (across multiple data tables)
+- Reports/decks with a story and through-line
 
-All with ease, confidence, and speed.
+**Platform operations**
+- Manipulate visualization config
+- Run modules
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e -->
+## AI grounded in evidence, not guesswork
+
+The FASTR AI assistant checks actual results, methods, and documentation before responding.
+
+![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e2 -->
+## AI is an accelerator, not a decision maker
+
+The AI supports your work — you stay in control of judgement, accountability, and action.
+
+![AI accelerator diagram](../resources/diagrams/ai_accelerator.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e3 -->
+## Principles for success
+
+Responsible automation, focused on the needs of Ministries of Health, and designed for scale.
+
+![AI principles diagram](../resources/diagrams/ai_principles.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9b -->
@@ -510,43 +537,6 @@ The AI will analyze your data and provide answers with supporting evidence.
 
 **Tailor to audience:**
 > "Summarize these findings for a policy audience"
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9d -->
-## Before and after AI
-
-| Before AI | After AI |
-|-----------|----------|
-| Users generated charts and manually interpreted, switching between applications | Simple commands generate charts with ready-to-use interpretations |
-| Interpretation depended on individual analytical skills, leading to inconsistency | AI provides immediate explanations in clear, practical language |
-| Report writing was time-consuming, struggling to translate charts into narratives | Reduced report writing time by more than half |
-| Trial-and-error to identify key trends and patterns | AI quickly identifies trends, unusual patterns, and performance gaps |
-
-The AI assistant reinforces users' existing analytical and writing skills while saving time.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9e -->
-## AI grounded in evidence, not guesswork
-
-The FASTR AI assistant checks actual results, methods, and documentation before responding.
-
-![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9e2 -->
-## AI is an accelerator, not a decision maker
-
-The AI supports your work — you stay in control of judgement, accountability, and action.
-
-![AI accelerator diagram](../resources/diagrams/ai_accelerator.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9e3 -->
-## Principles for success
-
-Responsible automation, focused on the needs of Ministries of Health, and designed for scale.
-
-![AI principles diagram](../resources/diagrams/ai_principles.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9f -->

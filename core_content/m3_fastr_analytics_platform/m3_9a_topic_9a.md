@@ -6,12 +6,15 @@ paginate: true
 
 ## What the AI assistant can do
 
-The AI assistant supports three main categories of tasks:
+**User understanding**
+- Help to understand approach and methods
+- How to use the platform itself
 
-| Category | Capabilities |
-|----------|--------------|
-| **User understanding** | Explain methods and modules, help navigate the platform, answer questions about the analysis approach |
-| **Synthesis & interpretation** | Analyze data tables, generate key messages, identify trends and patterns, create reports with narrative |
-| **Platform operations** | Configure visualizations, run modules, export results |
+**Synthesis and interpretation**
+- Look at data
+- Generate key messages (across multiple data tables)
+- Reports/decks with a story and through-line
 
-All with ease, confidence, and speed.
+**Platform operations**
+- Manipulate visualization config
+- Run modules
