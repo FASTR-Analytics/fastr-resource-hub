@@ -154,7 +154,9 @@
       "Bash(convert:*)",
       "Bash(magick:*)",
       "Bash(comm -23:*)",
-      "Bash(comm:*)"
+      "Bash(comm:*)",
+      "Bash(ps:*)",
+      "Bash(git reset:*)"
     ]
   }
 }

@@ -104,8 +104,7 @@ plugins:
       glob:
         - 07_results_communication.md
         - 08_survey_hfa.md
-        - 09_fastr_rmet_integration.md
-        - 10_workshop_activities.md
+        - 09_workshop_activities.md
         - executive_summary*.md
   - i18n:
       docs_structure: folder  # Uses fr/ folder for French files

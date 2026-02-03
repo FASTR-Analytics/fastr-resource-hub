@@ -68,8 +68,7 @@ MODULE_FOLDERS = {
     6: 'm6_data_analysis',
     7: 'm7_results_communication',
     8: 'm8_survey_hfa',
-    9: 'm9_fastr_rmet_integration',
-    10: 'm10_workshop_activities',
+    9: 'm9_workshop_activities',
 }
 
 # Topic names for generating filenames
@@ -189,18 +188,11 @@ TOPIC_NAMES = {
     'm8_1b': 'adaptive_survey_content',
     'm8_1c': 'four_types_of_indicators',
 
-    # m9 - FASTR and RMET Integration (from 09_fastr_rmet_integration.md)
-    'm9_1': 'what_is_hrt',
-    'm9_2': 'rmet_process_overview',
-    'm9_3': 'integrating_fastr_rmet',
-    'm9_4': 'why_bring_together',
-    'm9_5': 'alignment_for_triangulation',
-    'm9_6': 'complementary_insights',
-
-    # m10 - Workshop Activities (from 10_workshop_activities.md)
-    'm10_1': 'disruptions_report_activity',
-    'm10_2': 'presenting_reports_group_feedback',
-    'm10_3': 'fastr_quiz',
+    # m9 - Workshop Activities (from 09_workshop_activities.md)
+    'm9_1': 'why_detecting_disruptions_matters',
+    'm9_2': 'disruptions_report_activity',
+    'm9_3': 'presenting_reports_group_feedback',
+    'm9_4': 'fastr_quiz',
 }
 
 # Marp frontmatter to add to extracted slides

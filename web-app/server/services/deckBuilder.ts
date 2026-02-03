@@ -24,8 +24,7 @@ const MODULE_FOLDERS: Record<string, string> = {
   m6: 'm6_data_analysis',
   m7: 'm7_results_communication',
   m8: 'm8_survey_hfa',
-  m9: 'm9_fastr_rmet_integration',
-  m10: 'm10_workshop_activities',
+  m9: 'm9_workshop_activities',
 }
 
 interface Session {
@@ -204,8 +203,7 @@ const MODULE_NAMES: Record<string, string> = {
   m6: 'Data Analysis',
   m7: 'Results Communication',
   m8: 'Survey & HFA',
-  m9: 'FASTR and RMET Integration',
-  m10: 'Workshop Activities',
+  m9: 'Workshop Activities',
 }
 
 /**

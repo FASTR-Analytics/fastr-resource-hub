@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560">
+  <!-- Background -->
+  <rect width="1200" height="560" fill="#f8fafa"/>
+
+  <!-- Main flow boxes -->
+
+  <!-- Box 1: Detect -->
+  <g transform="translate(100, 60)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#1F9A9C"/>
+    <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">DETECT</text>
+    <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">FASTR identifies a change</text>
+    <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">(service disruption, increase,</text>
+    <text x="110" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">or readiness change)</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(330, 110)">
+    <line x1="0" y1="10" x2="60" y2="10" stroke="#D0CB17" stroke-width="4"/>
+    <polygon points="65,10 55,3 55,17" fill="#D0CB17"/>
+  </g>
+
+  <!-- Box 2: Investigate -->
+  <g transform="translate(400, 60)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#D8A822"/>
+    <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">INVESTIGATE</text>
+    <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">Triggers an investigation</text>
+    <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fff8e6">What's driving the change?</text>
+    <text x="110" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fff8e6">What are the root causes?</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(630, 110)">
+    <line x1="0" y1="10" x2="60" y2="10" stroke="#D0CB17" stroke-width="4"/>
+    <polygon points="65,10 55,3 55,17" fill="#D0CB17"/>
+  </g>
+
+  <!-- Box 3: Decide -->
+  <g transform="translate(700, 60)">
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#21568C"/>
+    <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">DECIDE</text>
+    <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">Findings inform decisions</text>
+    <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Prioritization and</text>
+    <text x="110" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">adaptation</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g transform="translate(930, 110)">
+    <line x1="0" y1="10" x2="60" y2="10" stroke="#D0CB17" stroke-width="4"/>
+    <polygon points="65,10 55,3 55,17" fill="#D0CB17"/>
+  </g>
+
+  <!-- Box 4: Act -->
+  <g transform="translate(1000, 60)">
+    <rect x="0" y="0" width="120" height="120" rx="12" fill="#09544F"/>
+    <text x="60" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">ACT</text>
+    <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Policy &amp;</text>
+    <text x="60" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">program action</text>
+  </g>
+
+  <!-- Divider line -->
+  <line x1="80" y1="220" x2="1120" y2="220" stroke="#0C716B" stroke-width="1" stroke-dasharray="6,4" opacity="0.3"/>
+
+  <!-- Bottom section: Investigation questions -->
+
+  <!-- Left: What disruptions trigger -->
+  <g transform="translate(100, 250)">
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#1F9A9C" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#1F9A9C"/>
+    <rect x="0" y="30" width="480" height="15" fill="#1F9A9C"/>
+    <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">When FASTR flags a disruption, ask:</text>
+
+    <circle cx="35" cy="80" r="4" fill="#1F9A9C"/>
+    <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">Has service use or delivery changed?</text>
+
+    <circle cx="35" cy="115" r="4" fill="#1F9A9C"/>
+    <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Is this a real change or a data quality issue?</text>
+
+    <circle cx="35" cy="150" r="4" fill="#1F9A9C"/>
+    <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">What could be driving this pattern?</text>
+
+    <circle cx="35" cy="185" r="4" fill="#1F9A9C"/>
+    <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">What actions could address it?</text>
+  </g>
+
+  <!-- Right: What you can investigate -->
+  <g transform="translate(620, 250)">
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#D8A822" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#D8A822"/>
+    <rect x="0" y="30" width="480" height="15" fill="#D8A822"/>
+    <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">Drill down into plausible root causes:</text>
+
+    <circle cx="35" cy="80" r="4" fill="#D8A822"/>
+    <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">Compare across geographies and facilities</text>
+
+    <circle cx="35" cy="115" r="4" fill="#D8A822"/>
+    <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Examine trends over time</text>
+
+    <circle cx="35" cy="150" r="4" fill="#D8A822"/>
+    <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">Check related indicators for patterns</text>
+
+    <circle cx="35" cy="185" r="4" fill="#D8A822"/>
+    <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Triangulate with local knowledge</text>
+  </g>
+
+  <!-- Bottom key message -->
+  <g transform="translate(100, 495)">
+    <rect x="0" y="0" width="1000" height="50" rx="8" fill="#09544F"/>
+    <text x="500" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="white">FASTR provides the evidence — you provide the judgement, context, and decisions.</text>
+  </g>
+
+</svg>

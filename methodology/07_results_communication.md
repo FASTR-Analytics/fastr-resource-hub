@@ -260,11 +260,13 @@ Before drawing conclusions from FASTR outputs, ask:
 <!-- SLIDE:m7_1b -->
 ## Common interpretation pitfalls
 
-<div style="display: flex; gap: 1.5em;">
+<div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 
 **Aggregation masking**
 National averages can hide critical regional variation. Always examine subnational patterns.
+
+<br/>
 
 **Completeness ≠ representativeness**
 High reporting completeness doesn't mean data captures all service delivery (private sector, informal care).
@@ -274,6 +276,8 @@ High reporting completeness doesn't mean data captures all service delivery (pri
 
 **Missing context**
 Patterns without context are meaningless. Consider seasonality, policy changes, and external shocks.
+
+<br/>
 
 **Over-interpreting noise**
 Short-term fluctuations may be normal variation. Focus on sustained trends and significant deviations.
@@ -285,11 +289,13 @@ Short-term fluctuations may be normal variation. Focus on sustained trends and s
 <!-- SLIDE:m7_1c -->
 ## Interpreting FASTR module outputs
 
-<div style="display: flex; gap: 1.5em;">
+<div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 
 **Data quality assessment**
 Low DQA scores may reflect data entry practices rather than service quality. Focus on identifying the specific dimension (completeness, outliers, consistency) driving issues.
+
+<br/>
 
 **Service utilization**
 Distinguish seasonal patterns from real disruptions. Year-over-year comparisons help isolate programmatic changes from normal fluctuation.
@@ -299,6 +305,8 @@ Distinguish seasonal patterns from real disruptions. Year-over-year comparisons 
 
 **Coverage estimates**
 Coverage >100% signals reconciliation needed between HMIS and survey data. Consider whether the denominator source matches the service delivery context.
+
+<br/>
 
 **Across all modules**
 Examine patterns at multiple geographic levels — subnational disaggregation often reveals the true story.
@@ -722,12 +730,8 @@ Storytelling translates data and visualizations into compelling narratives that 
 
 **The data:** ANC1 coverage increased 15% in Q3 2022, dropped 12% in Q1 2023, then stabilized through 2025.
 
----
-
 **Just the result:**
 > "ANC1 volumes fluctuated between 2022-2023 before stabilizing in 2024-2025."
-
----
 
 **The story:**
 > "After significant disruption during 2022-2023, our antenatal care services have recovered and stabilized. The consistent delivery over the past 18 months suggests our health system has built resilience. This foundation positions us to focus on quality improvements rather than crisis response."
