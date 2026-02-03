@@ -10,8 +10,19 @@ const __dirname = path.dirname(__filename)
 const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../../..')
   : path.resolve(__dirname, '../../..')
-const CORE_CONTENT_PATH = path.join(REPO_ROOT, 'core_content')
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
+
+// Supported languages
+export type Language = 'en' | 'fr'
+
+// Get core content path for a specific language
+function getCoreContentPath(language: Language = 'en'): string {
+  const suffix = language === 'en' ? '' : `_${language}`
+  return path.join(REPO_ROOT, `core_content${suffix}`)
+}
+
+// Default to English for backward compatibility
+const CORE_CONTENT_PATH = getCoreContentPath('en')
 
 // Module folder names - must match actual folder names in core_content/
 const MODULE_FOLDERS: Record<string, string> = {
@@ -42,8 +53,13 @@ interface Session {
 
 /**
  * Build the complete markdown deck from a workshop config
+ * @param workshopId - Workshop identifier
+ * @param config - Workshop configuration
+ * @param language - Language for content ('en' or 'fr', defaults to config.workshop.language or 'en')
  */
-export async function buildMarkdown(workshopId: string, config: WorkshopConfig): Promise<string> {
+export async function buildMarkdown(workshopId: string, config: WorkshopConfig, language?: Language): Promise<string> {
+  // Use provided language, or fall back to workshop config, or default to English
+  const lang: Language = language || (config.workshop as any).language || 'en'
   const slides: string[] = []
 
   // Marp frontmatter
@@ -71,7 +87,7 @@ paginate: true
         sessionNumber++
       }
 
-      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined)
+      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined, lang)
       if (slideContent) {
         slides.push(slideContent)
       }
@@ -88,9 +104,11 @@ export async function buildSessionMarkdown(
   session: Session,
   config: WorkshopConfig,
   dayNumber: number,
-  sessionNumber?: number
+  sessionNumber?: number,
+  language?: Language
 ): Promise<string | null> {
-  return buildSessionSlides(session, config, dayNumber, sessionNumber)
+  const lang: Language = language || (config.workshop as any).language || 'en'
+  return buildSessionSlides(session, config, dayNumber, sessionNumber, lang)
 }
 
 /**
@@ -100,16 +118,18 @@ async function buildSessionSlides(
   session: Session,
   config: WorkshopConfig,
   dayNumber: number,
-  sessionNumber?: number
+  sessionNumber?: number,
+  language: Language = 'en'
 ): Promise<string | null> {
   const allSlideContents: string[] = []
+  const coreContentPath = getCoreContentPath(language)
 
   // PREFIX SLIDES (from slides array) - load FIRST
   // This allows adding intro slides before module content
   // e.g., Add m4_0_fastr_methods_overview.md before condensed content
   if (session.slides && session.slides.length > 0) {
     for (const slideFile of session.slides) {
-      const content = await loadSlideContent(slideFile, config, dayNumber, session)
+      const content = await loadSlideContent(slideFile, config, dayNumber, session, language)
       if (content) {
         allSlideContents.push(content)
       }
@@ -119,7 +139,7 @@ async function buildSessionSlides(
   // MODULE CONTENT - load SECOND
   // Uses full or condensed version based on session.version
   if (session.module) {
-    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version)
+    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language)
     if (moduleSlides) {
       allSlideContents.push(moduleSlides)
     }
@@ -137,7 +157,7 @@ async function buildSessionSlides(
         const moduleId = moduleMatch[1]
         const folderName = MODULE_FOLDERS[moduleId]
         if (folderName) {
-          const modulePath = path.join(CORE_CONTENT_PATH, folderName)
+          const modulePath = path.join(coreContentPath, folderName)
           if (fs.existsSync(modulePath)) {
             // Find file that starts with the topic ID
             const files = fs.readdirSync(modulePath).filter(f => f.startsWith(topicId) && f.endsWith('.md'))
@@ -221,12 +241,14 @@ function buildModuleSlides(
   sessionNumber?: number,
   topicRange?: { start: number; end: number } | null,
   excludedSlides?: string[],
-  version?: 'full' | 'condensed'
+  version?: 'full' | 'condensed',
+  language: Language = 'en'
 ): string | null {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return null
 
-  const modulePath = path.join(CORE_CONTENT_PATH, folderName)
+  const coreContentPath = getCoreContentPath(language)
+  const modulePath = path.join(coreContentPath, folderName)
   if (!fs.existsSync(modulePath)) return null
 
   // Get all .md files
@@ -324,12 +346,14 @@ function buildModuleSlides(
  * Get list of all slide files for a module (for UI to display)
  * @param moduleId - Module ID (e.g., "m4")
  * @param version - Optional version filter ("full" or "condensed")
+ * @param language - Language code ('en' or 'fr')
  */
-export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'condensed'): string[] {
+export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'condensed', language: Language = 'en'): string[] {
   const folderName = MODULE_FOLDERS[moduleId]
   if (!folderName) return []
 
-  const modulePath = path.join(CORE_CONTENT_PATH, folderName)
+  const coreContentPath = getCoreContentPath(language)
+  const modulePath = path.join(coreContentPath, folderName)
   if (!fs.existsSync(modulePath)) return []
 
   let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
@@ -368,7 +392,8 @@ async function loadSlideContent(
   slideFile: string,
   config: WorkshopConfig,
   dayNumber: number,
-  session: Session
+  session: Session,
+  language: Language = 'en'
 ): Promise<string | null> {
   // Check for dynamic agenda slides (day1_agenda, day2_agenda, etc.)
   const agendaMatch = slideFile.match(/^day(\d+)_agenda$/)
@@ -376,6 +401,8 @@ async function loadSlideContent(
     const agendaDay = parseInt(agendaMatch[1])
     return buildDayAgendaSlide(config, agendaDay)
   }
+
+  const coreContentPath = getCoreContentPath(language)
 
   // Try templates folder first
   let filePath = path.join(TEMPLATES_PATH, slideFile)
@@ -391,7 +418,24 @@ async function loadSlideContent(
       const moduleId = moduleMatch[1]
       const folderName = MODULE_FOLDERS[moduleId]
       if (folderName) {
-        filePath = path.join(CORE_CONTENT_PATH, folderName, slideFile)
+        filePath = path.join(coreContentPath, folderName, slideFile)
+      }
+    }
+  }
+
+  // Fallback to English if French file not found
+  if (!fs.existsSync(filePath) && language !== 'en') {
+    const englishPath = getCoreContentPath('en')
+    const moduleMatch = slideFile.match(/^(m\d+)_/)
+    if (moduleMatch) {
+      const moduleId = moduleMatch[1]
+      const folderName = MODULE_FOLDERS[moduleId]
+      if (folderName) {
+        const fallbackPath = path.join(englishPath, folderName, slideFile)
+        if (fs.existsSync(fallbackPath)) {
+          console.warn(`French file not found for ${slideFile}, using English fallback`)
+          filePath = fallbackPath
+        }
       }
     }
   }

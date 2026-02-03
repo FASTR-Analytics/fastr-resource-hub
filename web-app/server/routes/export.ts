@@ -76,18 +76,24 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 // Build Endpoints
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Supported languages
+type Language = 'en' | 'fr'
+
 // POST /api/export/:id/markdown - Build markdown deck
+// Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/markdown', async (req, res) => {
   try {
     const workshopId = req.params.id
+    const language = (req.query.language as Language) || undefined
     const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
 
-    const markdown = await buildMarkdown(workshopId, config)
-    const outputPath = path.join(OUTPUT_DIR, `${workshopId}_deck.md`)
+    const markdown = await buildMarkdown(workshopId, config, language)
+    const langSuffix = language && language !== 'en' ? `_${language}` : ''
+    const outputPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.md`)
     fs.writeFileSync(outputPath, markdown, 'utf-8')
 
     res.json({
@@ -102,14 +108,19 @@ router.post('/:id/markdown', async (req, res) => {
 })
 
 // POST /api/export/:id/slides - Get slides with session metadata (with caching)
+// Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/slides', async (req, res) => {
   try {
     const workshopId = req.params.id
+    const language = (req.query.language as Language) || undefined
     const config = await getWorkshop(workshopId)
 
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
+
+    // Determine effective language
+    const effectiveLang: Language = language || (config.workshop as any).language || 'en'
 
     // Use shared Marp service (initialized at startup, ~100ms faster)
     const fastrThemeCSS = getThemeCSS()
@@ -139,7 +150,7 @@ router.post('/:id/slides', async (req, res) => {
         }
 
         // Build markdown for this session
-        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined)
+        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined, effectiveLang)
 
         if (!sessionMarkdown) continue
 
@@ -267,9 +278,11 @@ ${sessionMarkdown}`
 })
 
 // POST /api/export/:id/html - Build HTML preview
+// Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/html', async (req, res) => {
   try {
     const workshopId = req.params.id
+    const language = (req.query.language as Language) || undefined
     const config = await getWorkshop(workshopId)
 
     if (!config) {
@@ -277,7 +290,7 @@ router.post('/:id/html', async (req, res) => {
     }
 
     // Build markdown first
-    const markdown = await buildMarkdown(workshopId, config)
+    const markdown = await buildMarkdown(workshopId, config, language)
 
     // Convert to HTML using shared Marp service
     const { html, css } = renderMarkdown(markdown)
@@ -318,9 +331,11 @@ ${fixedHtml}
 })
 
 // POST /api/export/:id/pdf - Build PDF
+// Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/pdf', async (req, res) => {
   try {
     const workshopId = req.params.id
+    const language = (req.query.language as Language) || undefined
     const config = await getWorkshop(workshopId)
 
     if (!config) {
@@ -328,12 +343,13 @@ router.post('/:id/pdf', async (req, res) => {
     }
 
     // Build markdown first
-    const markdown = await buildMarkdown(workshopId, config)
-    const mdPath = path.join(OUTPUT_DIR, `${workshopId}_deck.md`)
+    const markdown = await buildMarkdown(workshopId, config, language)
+    const langSuffix = language && language !== 'en' ? `_${language}` : ''
+    const mdPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.md`)
     fs.writeFileSync(mdPath, markdown, 'utf-8')
 
     // Generate PDF
-    const pdfPath = path.join(OUTPUT_DIR, `${workshopId}_deck.pdf`)
+    const pdfPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.pdf`)
     await generatePDF(mdPath, pdfPath)
 
     res.json({
@@ -347,9 +363,11 @@ router.post('/:id/pdf', async (req, res) => {
 })
 
 // POST /api/export/:id/pptx - Build PowerPoint
+// Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/pptx', async (req, res) => {
   try {
     const workshopId = req.params.id
+    const language = (req.query.language as Language) || undefined
     const config = await getWorkshop(workshopId)
 
     if (!config) {
@@ -357,10 +375,11 @@ router.post('/:id/pptx', async (req, res) => {
     }
 
     // Build markdown first
-    const markdown = await buildMarkdown(workshopId, config)
+    const markdown = await buildMarkdown(workshopId, config, language)
 
     // Generate PPTX
-    const pptxPath = path.join(OUTPUT_DIR, `${workshopId}_deck.pptx`)
+    const langSuffix = language && language !== 'en' ? `_${language}` : ''
+    const pptxPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.pptx`)
     await generatePPTX(markdown, config, pptxPath)
 
     res.json({

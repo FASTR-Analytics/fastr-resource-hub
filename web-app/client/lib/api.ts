@@ -219,12 +219,16 @@ export const workshopAPI = {
 // Content Library API
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Supported languages
+export type Language = 'en' | 'fr'
+
 export const contentAPI = {
   /**
    * Get all modules and their topics
+   * @param language - Language code ('en' or 'fr')
    */
-  async getModules(): Promise<Module[]> {
-    return fetchJSON('/content/modules')
+  async getModules(language: Language = 'en'): Promise<Module[]> {
+    return fetchJSON(`/content/modules?language=${language}`)
   },
 
   /**
@@ -335,36 +339,44 @@ export const aiAPI = {
 export const exportAPI = {
   /**
    * Build markdown deck
+   * @param language - Optional language override
    */
-  async buildMarkdown(workshopId: string): Promise<{ markdown: string; path: string }> {
-    return fetchJSON(`/export/${workshopId}/markdown`, {
+  async buildMarkdown(workshopId: string, language?: Language): Promise<{ markdown: string; path: string }> {
+    const langParam = language ? `?language=${language}` : ''
+    return fetchJSON(`/export/${workshopId}/markdown${langParam}`, {
       method: 'POST',
     })
   },
 
   /**
    * Build HTML preview
+   * @param language - Optional language override
    */
-  async buildHTML(workshopId: string): Promise<{ html: string; path: string }> {
-    return fetchJSON(`/export/${workshopId}/html`, {
+  async buildHTML(workshopId: string, language?: Language): Promise<{ html: string; path: string }> {
+    const langParam = language ? `?language=${language}` : ''
+    return fetchJSON(`/export/${workshopId}/html${langParam}`, {
       method: 'POST',
     })
   },
 
   /**
    * Build PDF
+   * @param language - Optional language override
    */
-  async buildPDF(workshopId: string): Promise<{ path: string }> {
-    return fetchJSON(`/export/${workshopId}/pdf`, {
+  async buildPDF(workshopId: string, language?: Language): Promise<{ path: string }> {
+    const langParam = language ? `?language=${language}` : ''
+    return fetchJSON(`/export/${workshopId}/pdf${langParam}`, {
       method: 'POST',
     })
   },
 
   /**
    * Build PowerPoint
+   * @param language - Optional language override
    */
-  async buildPPTX(workshopId: string): Promise<{ path: string }> {
-    return fetchJSON(`/export/${workshopId}/pptx`, {
+  async buildPPTX(workshopId: string, language?: Language): Promise<{ path: string }> {
+    const langParam = language ? `?language=${language}` : ''
+    return fetchJSON(`/export/${workshopId}/pptx${langParam}`, {
       method: 'POST',
     })
   },
@@ -514,7 +526,7 @@ const api = {
   saveCustomSlide: workshopAPI.saveCustomSlide,
   getCustomSlide: workshopAPI.getCustomSlide,
 
-  // Content library
+  // Content library (with language support)
   getModules: contentAPI.getModules,
   getTemplates: contentAPI.getTemplates,
   getTopicContent: contentAPI.getTopic,
@@ -526,7 +538,7 @@ const api = {
   generateObjectives: aiAPI.generateObjectives,
   generateSchedule: aiAPI.generateSchedule,
 
-  // Export
+  // Export (with language support)
   buildMarkdown: exportAPI.buildMarkdown,
   buildHTML: exportAPI.buildHTML,
   buildPDF: exportAPI.buildPDF,

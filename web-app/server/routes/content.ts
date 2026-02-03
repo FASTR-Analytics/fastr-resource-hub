@@ -56,7 +56,7 @@ interface ModulesCache {
   timestamp: number
 }
 
-let modulesCache: ModulesCache | null = null
+// modulesCache moved to modulesCacheByLang in /modules endpoint
 const MODULES_CACHE_TTL = 5 * 60 * 1000  // 5 minutes - content rarely changes
 
 const __filename = fileURLToPath(import.meta.url)
@@ -76,8 +76,19 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../../..')
   : path.resolve(__dirname, '../../..')
-const CORE_CONTENT_PATH = path.join(REPO_ROOT, 'core_content')
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
+
+// Supported languages
+type Language = 'en' | 'fr'
+
+// Get core content path for a specific language
+function getCoreContentPath(language: Language = 'en'): string {
+  const suffix = language === 'en' ? '' : `_${language}`
+  return path.join(REPO_ROOT, `core_content${suffix}`)
+}
+
+// Default English path for backward compatibility
+const CORE_CONTENT_PATH = getCoreContentPath('en')
 
 // Module names
 const MODULE_NAMES: Record<number, string> = {
@@ -97,24 +108,37 @@ const MODULE_NAMES: Record<number, string> = {
 // Content Library
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Cache per language
+const modulesCacheByLang: Record<string, ModulesCache> = {}
+
 // GET /api/content/modules - Get all modules and topics (with caching)
-router.get('/modules', (_req, res) => {
+// Query params: ?language=fr (default: en)
+router.get('/modules', (req, res) => {
   try {
+    const language = (req.query.language as Language) || 'en'
+    const coreContentPath = getCoreContentPath(language)
+    const cacheKey = language
+
     // Return cached data if still valid
-    if (modulesCache && Date.now() - modulesCache.timestamp < MODULES_CACHE_TTL) {
-      return res.json(modulesCache.data)
+    if (modulesCacheByLang[cacheKey] && Date.now() - modulesCacheByLang[cacheKey].timestamp < MODULES_CACHE_TTL) {
+      return res.json(modulesCacheByLang[cacheKey].data)
     }
 
     const modules: any[] = []
 
-    if (!fs.existsSync(CORE_CONTENT_PATH)) {
+    if (!fs.existsSync(coreContentPath)) {
+      // Fallback to English if requested language not available
+      if (language !== 'en' && fs.existsSync(CORE_CONTENT_PATH)) {
+        console.warn(`Content for language '${language}' not found, falling back to English`)
+        return res.redirect(`/api/content/modules?language=en`)
+      }
       return res.json(modules)
     }
 
-    const items = fs.readdirSync(CORE_CONTENT_PATH).sort()
+    const items = fs.readdirSync(coreContentPath).sort()
 
     for (const item of items) {
-      const modulePath = path.join(CORE_CONTENT_PATH, item)
+      const modulePath = path.join(coreContentPath, item)
 
       if (fs.statSync(modulePath).isDirectory() && item.startsWith('m') && item.includes('_')) {
         const modNumMatch = item.match(/^m(\d+)_/)
@@ -204,8 +228,8 @@ router.get('/modules', (_req, res) => {
 
     const sortedModules = modules.sort((a, b) => a.number - b.number)
 
-    // Cache the result
-    modulesCache = {
+    // Cache the result per language
+    modulesCacheByLang[cacheKey] = {
       data: sortedModules,
       timestamp: Date.now()
     }
@@ -796,7 +820,8 @@ router.post('/cache/clear', (_req, res) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // POST /api/content/rebuild - Re-extract slides from methodology files
-router.post('/rebuild', async (_req, res) => {
+// Query params: ?language=fr or ?language=en,fr (default: en)
+router.post('/rebuild', async (req, res) => {
   const { exec } = await import('child_process')
   const { promisify } = await import('util')
   const execAsync = promisify(exec)
@@ -809,6 +834,16 @@ router.post('/rebuild', async (_req, res) => {
 
   const scriptPath = path.join(REPO_ROOT, 'tools', '00_extract_slides.py')
 
+  // Parse languages from query param (comma-separated or repeated)
+  let languages: string[] = ['en']
+  if (req.query.language) {
+    const langParam = Array.isArray(req.query.language)
+      ? req.query.language.join(',')
+      : req.query.language as string
+    languages = langParam.split(',').filter(l => ['en', 'fr'].includes(l))
+    if (languages.length === 0) languages = ['en']
+  }
+
   // Check if script exists
   if (!fs.existsSync(scriptPath)) {
     return res.status(404).json({
@@ -818,19 +853,22 @@ router.post('/rebuild', async (_req, res) => {
   }
 
   try {
-    console.log('Running content extraction script...')
+    console.log(`Running content extraction script for languages: ${languages.join(', ')}...`)
     const startTime = Date.now()
 
-    // Run the Python script
-    const { stdout, stderr } = await execAsync(`python3 "${scriptPath}"`, {
+    // Build command with language args
+    const langArgs = languages.map(l => `--lang ${l}`).join(' ')
+    const { stdout, stderr } = await execAsync(`python3 "${scriptPath}" ${langArgs}`, {
       cwd: REPO_ROOT,
       timeout: 120000  // 2 minute timeout
     })
 
     const duration = Date.now() - startTime
 
-    // Clear the modules cache so new content is picked up
-    modulesCache = null
+    // Clear the modules cache for all languages so new content is picked up
+    for (const lang of languages) {
+      delete modulesCacheByLang[lang]
+    }
 
     // Also clear render cache
     renderCache.clear()
@@ -839,7 +877,8 @@ router.post('/rebuild', async (_req, res) => {
 
     res.json({
       success: true,
-      message: 'Content rebuilt successfully',
+      message: `Content rebuilt successfully for ${languages.join(', ')}`,
+      languages: languages,
       duration: duration,
       output: stdout,
       warnings: stderr || undefined

@@ -128,143 +128,142 @@ Cette section couvrira :
 
 <!--
 ////////////////////////////////////////////////////////////////////
-// //
-// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
-
-// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
- . ` | | | | . ` |/
-// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
-// |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
-// //
-// Modifiez les diapositives de l'atelier en dessous de cette ligne //
-// //
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Modifiez les diapositives de l'atelier              //
+//                   en dessous de cette ligne                    //
+//                                                                //
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m2_1 -->
-## Pourquoi extraire des données de DHIS2 ?
+<!-- SLIDE:m2_0 -->
+## À main levée...
 
-### Ajustement de la qualité des données
+![w:120](../resources/icons/raise-hand.png)
+
+Extrayez-vous régulièrement des données du DHIS2 ?
+
+Si oui, quelles en sont les principales raisons ?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_1 -->
+## Pourquoi extraire des données du DHIS2 ? Pourquoi ne pas simplement faire l'analyse dans DHIS2 ?
+
+**Ajustement de la qualité des données**
 
 L'approche FASTR se concentre sur les ajustements de la qualité des données afin d'élargir les analyses que les pays peuvent effectuer avec les données DHIS2 et de générer des estimations plus robustes.
 
-La méthodologie FASTR comprend des approches spécifiques pour
-- Identifier et ajuster les valeurs aberrantes
-- Ajuster les déclarations incomplètes
-- Appliquer des mesures cohérentes de la qualité des données
+**Complexité de l'analyse**
 
-Ces ajustements nécessitent un traitement qui ne peut pas être effectué dans le cadre des fonctions analytiques natives de DHIS2.
+L'approche FASTR utilise des méthodes statistiques plus avancées, telles que l'analyse de régression, qui ne sont pas disponibles dans DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin en identifiant les augmentations ou diminutions significatives du volume de services, en ajustant les problèmes de qualité des données, en tenant compte des variations saisonnières attendues et en comparant des périodes clés, par exemple avant et après une réforme.
+
+Le choix entre DHIS2 et l'approche FASTR doit être guidé par l'objectif spécifique de votre analyse. Sélectionnez l'outil qui correspond le mieux à vos besoins analytiques !
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_1a -->
-## Pourquoi extraire des données du DHIS2 ?
+<!-- SLIDE:m2_1b -->
+<!-- _class: columns-image-right -->
 
-### Complexité de l'analyse
-
-L'approche FASTR utilise des méthodes statistiques plus avancées, telles que l'analyse de régression, qui ne sont pas disponibles dans le DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin :
-
-- En identifiant les augmentations ou les diminutions significatives du volume de services
-- En ajustant les problèmes de qualité des données
-- En tenant compte des variations saisonnières attendues
-- Comparer des périodes clés, par exemple avant et après une réforme
-
-Le choix entre le DHIS2 et l'approche FASTR doit être guidé par l'objectif spécifique de votre analyse.
-<!-- /SLIDE -->
-
-<!-- DIAPOSITIVE:m2_1b -->
 ## Format et granularité des données
 
-Les données doivent être téléchargées pour chaque **indicateur d'intérêt**, au **niveau de l'établissement**, et **mensuellement** pour la **période d'intérêt**.
+![h:200 Data format wide](resources/screenshots/data_format_wide.png)
 
-- Les données doivent être sauvegardées en **format long**, ce qui signifie que chaque ligne représente une observation ou une mesure unique
-- Les données doivent être enregistrées au format **.csv** et peuvent être enregistrées dans un seul fichier .csv ou dans plusieurs fichiers .csv
+- Les données doivent être téléchargées pour chaque **indicateur d'intérêt**, au **niveau de l'établissement**, et **mensuellement** pour la **période d'intérêt**
+- Les données doivent être sauvegardées en format long, ce qui signifie que chaque ligne représente une observation ou une mesure unique (voir l'exemple)
+- Les données doivent être enregistrées au format .csv et peuvent être enregistrées dans un seul fichier .csv ou dans plusieurs fichiers .csv qui seront combinés lors du téléchargement vers la plateforme d'analyse
 
-### Pourquoi des données mensuelles au niveau de l'établissement ?
-
-Nous voulons utiliser les données les plus granulaires auxquelles nous avons accès afin de procéder à des évaluations plus fines de la qualité des données. L'utilisation de données mensuelles au niveau de l'établissement nous permet de réaliser l'analyse la plus solide.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m2_1c -->
-## Variables clés
-
-Les données extraites doivent comprendre les éléments obligatoires suivants :
-
-| Élément | Description |
-|---------|-------------|
-| Unités d'organisation | Identifiant de l'unité d'organisation |
-| Période | Période de temps des données |
-| Nom de l'indicateur | Nom de l'indicateur |
-| Total/compte | Valeur agrégée |
+<!--
+PRESENTER NOTES:
+- Nous voulons utiliser les données les plus granulaires auxquelles nous avons accès afin de procéder à des évaluations plus fines de la qualité des données et des ajustements
+- Nous voulons également pouvoir observer les tendances dans le temps, en tenant compte de la saisonnalité
+- L'utilisation de données mensuelles au niveau de l'établissement nous permet de réaliser l'analyse la plus solide
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1d -->
 ## Combien de données ?
 
-### Analyse FASTR initiale
-- Téléchargement d'environ **cinq ans** de données historiques
-- La période exacte dépend de la disponibilité des données et de la cohérence des définitions des indicateurs
+**Analyse FASTR initiale**
 
-### Mise à jour régulière de l'analyse FASTR
-- Télécharger les nouvelles données couvrant les mois les plus récents qui n'ont pas été inclus précédemment (généralement **trois mois** pour la mise en œuvre trimestrielle)
-- Inclure les **trois mois précédents** car les données récentes sont souvent sujettes à des changements en raison de rapports tardifs ou d'ajustements de la qualité des données
+- Il est généralement recommandé de télécharger environ cinq ans de données historiques
+- Toutefois, la période exacte doit être déterminée en fonction de la disponibilité des données, de la cohérence des définitions des indicateurs dans le temps et des spécificités du système de données de routine d'un pays
+- Idéalement, l'utilisation d'au moins cinq ans de données historiques permet une évaluation approfondie des tendances dans le temps
+
+**Mise à jour régulière de l'analyse FASTR**
+
+- Commencez par la base de données existante et téléchargez les nouvelles données couvrant les mois les plus récents non précédemment inclus - il s'agit généralement d'une période de trois mois lorsque l'analyse FASTR est mise en œuvre sur une base trimestrielle
+- De plus, incluez les trois mois précédant la nouvelle période de données, car ces données relativement récentes sont souvent sujettes à des changements en raison de rapports tardifs ou d'ajustements de la qualité des données
+- Si vous avez des raisons de croire qu'il y a eu des changements substantiels dans les données historiques, vous pouvez toujours choisir de retélécharger une période plus longue
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2 -->
-## Outils d'extraction de données
-
-Nous proposons deux outils pour l'extraction en masse des données DHIS2 :
-
-**API Script** (Google Colab)
-- Saisir les identifiants de connexion, spécifier les périodes, les indicateurs et les niveaux administratifs
-- Télécharger les données sous forme de fichier .csv
-
-**Data Downloader** (téléchargeur de données)
-- Interface plus intuitive et rationalisée
-- Recommandé pour la plupart des utilisateurs
-
-Ces deux outils permettent une extraction efficace des données et nous fournissons des ressources de formation pour soutenir leur utilisation.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m2_2a -->
-## DHIS2 Data Downloader
-
-Le téléchargeur de données est une application de bureau permettant d'extraire des données du DHIS2.
-
-**Caractéristiques principales:**
-- Connexion à n'importe quelle instance DHIS2
-- Parcourir et sélectionner les éléments de données et les indicateurs
-- Téléchargement des données au niveau de l'établissement au format CSV
-- Maintien de l'historique des téléchargements
-
-**Télécharger à partir de GitHub:**
-
-https://github.com/worldbank/DHIS2-Downloader/releases/
-
-![demo h:35](../resources/icons/demo.svg) *L'animateur fera une démonstration du Data Downloader*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m2_2b -->
-## Téléchargeur de données : Connexion
+## Extraction des données
 
 <div class="columns">
 <div>
 
-![Ecran de connexion Data Downloader h:380](../resources/screenshots/data_downloader/01_login.png)
+Nous proposons deux outils pour l'extraction en masse des données DHIS2 : un Data Downloader convivial et une fonction d'importation directe au sein de la plateforme analytique FASTR.
+
+Le Data Downloader fournit une interface simplifiée pour télécharger les données DHIS2. Cet outil est particulièrement utile pour explorer les métadonnées DHIS2 et télécharger des indicateurs nécessitant des dimensions désagrégées.
+
+Le Data Downloader est disponible à l'adresse : https://github.com/worldbank/DHIS2-Downloader/releases/
 
 </div>
 <div>
 
-**Connectez-vous à votre instance DHIS2**
-
-- Entrez l'URL de votre serveur DHIS2
-- Indiquez votre nom d'utilisateur et votre mot de passe
-- L'outil stocke en toute sécurité les informations d'identification pour les sessions ultérieures
+![Data Downloader h:380](../resources/screenshots/data_downloader.png)
 
 </div>
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m2_2a -->
+## Extraction des données
+
+La **plateforme analytique FASTR** contient une fonction d'importation directe pour importer automatiquement les données du DHIS2. C'est souvent l'approche la plus simple une fois que les indicateurs ont été identifiés pour inclusion dans la plateforme.
+
+![h:200 Direct import feature](resources/screenshots/platform/direct_import_1.png)
+
+![h:200 Direct import interface](resources/screenshots/platform/direct_import_2.png)
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2b -->
+## DHIS2 Data Downloader
+
+Le Data Downloader est une application de bureau permettant d'extraire des données du DHIS2.
+
+**Caractéristiques principales :**
+- Connexion à n'importe quelle instance DHIS2
+- Parcourir et sélectionner les éléments de données et les indicateurs
+- Télécharger les données au niveau de l'établissement au format CSV
+- Conserver l'historique des téléchargements
+
+**Télécharger à partir de GitHub :**
+
+https://github.com/worldbank/DHIS2-Downloader/releases/
+
+![demo h:35](../resources/icons/demo.svg) *Le facilitateur fera une démonstration du Data Downloader*
+<!-- /SLIDE -->
+
 <!-- SLIDE:m2_2c -->
+## Data Downloader : Connexion
+
+![Écran de connexion Data Downloader h:450](../resources/screenshots/data_downloader/01_login.png)
+
+<!--
+PRESENTER NOTES:
+- Pratiquez le téléchargement de données + structure des établissements
+- Besoin de vérifier les niveaux auxquels les établissements sont déclarés pour savoir si nous pouvons utiliser la fonction d'importation directe
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2d -->
 ## Data Downloader : Vue d'ensemble
 
 <div class="columns">
@@ -286,21 +285,21 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2d -->
-## Data Downloader : Télécharger l'historique
+<!-- SLIDE:m2_2e -->
+## Data Downloader : Historique des téléchargements
 
 <div class="columns">
 <div>
 
-![Historique du téléchargeur de données h:380](../resources/screenshots/data_downloader/03_history.png)
+![Data Downloader history h:380](../resources/screenshots/data_downloader/03_history.png)
 
 </div>
 <div>
 
-**Track your downloads**
+**Suivez vos téléchargements**
 
 - Afficher toutes les sessions de téléchargement précédentes
-- Re-télécharger les données avec les mêmes paramètres
+- Retélécharger les données avec les mêmes paramètres
 - Accéder aux journaux et à l'état des téléchargements
 - Gérer les fichiers téléchargés
 
@@ -308,7 +307,7 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2e -->
+<!-- SLIDE:m2_2f -->
 ## Data Downloader : Dictionnaire de données
 
 <div class="columns">
@@ -321,8 +320,8 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 **Explorer les données disponibles**
 
-- Parcourez tous les éléments de données de votre DHIS2
-- Recherche par nom ou par code
+- Parcourir tous les éléments de données de votre DHIS2
+- Rechercher par nom ou par code
 - Voir les métadonnées et les définitions
 - Identifier les indicateurs pour votre analyse
 
@@ -330,44 +329,44 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2f -->
-## Data Downloader : Liste des installations
+<!-- SLIDE:m2_2g -->
+## Data Downloader : Liste des établissements
 
 <div class="columns">
 <div>
 
-![Data Downloader établissement list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
+![Data Downloader facility list h:380](../resources/screenshots/data_downloader/05_facility_list.png)
 
 </div>
 <div>
 
-**Gestion des installations**
+**Gestion des établissements**
 
-- Voir la liste complète des installations
+- Voir la liste complète des établissements
 - Filtrer par niveau administratif
-- Recherche par nom d'établissement
+- Rechercher par nom d'établissement
 - Exporter les données de l'établissement
 
 </div>
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m2_2g -->
-## Téléchargeur de données : Carte des installations
+<!-- SLIDE:m2_2h -->
+## Data Downloader : Carte des établissements
 
 <div class="columns">
 <div>
 
-![Data Downloader établissement map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
+![Data Downloader facility map h:380](../resources/screenshots/data_downloader/06_facility_map.png)
 
 </div>
 <div>
 
 **Visualisation géographique**
 
-- Télécharger les fichiers de frontières GeoJSON
-- Basculer les frontières administratives par niveau (Niveau 1 = pays, Niveau 2 = régions, etc.)
-- Les niveaux supérieurs affichent les points d'installation
+- Télécharger les fichiers de limites GeoJSON
+- Basculer les limites administratives par niveau (Niveau 1 = pays, Niveau 2 = régions, etc.)
+- Les niveaux supérieurs affichent les points d'établissement
 - Utile pour vérifier la structure géographique
 
 </div>
@@ -376,5 +375,5 @@ https://github.com/worldbank/DHIS2-Downloader/releases/
 
 ---
 
-**Dernière mise à jour** : 07-01-2026
+**Dernière mise à jour** : 26-01-2026
 **Contact** : Équipe du projet FASTR

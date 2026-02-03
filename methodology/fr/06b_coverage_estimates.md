@@ -1727,23 +1727,28 @@ Identique à la colonne nationale, plus :
 
 <!--
 ////////////////////////////////////////////////////////////////////
-// //
-// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
-
-// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
-// \___ \| | | | | | | | __| | | | | | | . . ` | | | | . ` |/
-// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
-// |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
-// //
-// Modifiez les diapositives de l'atelier en dessous de cette ligne //
-// //
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Modifiez les diapositives de l'atelier              //
+//                  en dessous de cette ligne                     //
+//                                                                //
 ////////////////////////////////////////////////////////////////////
 -->
 
 <!-- SLIDE:m6_6 -->
-## Estimation de la couverture des services - module 4
+## Estimation de la couverture des services
 
-Estimation du pourcentage de la population cible ayant bénéficié d'un service de santé donné
+![Équation de la couverture h:180](resources/diagrams/coverage_equation.svg)
+
+**Couverture** = services fournis ÷ population cible
+
+Le SIGS nous indique combien de services ont été fournis (numérateur), mais pas la taille de la population cible (dénominateur). La couverture SIGS standard utilise les populations de zones de desserte, qui sont souvent inexactes. Les enquêtes (EDS/MICS) fournissent une couverture fiable mais seulement tous les 5 ans ou plus.
 
 ---
 
@@ -1765,14 +1770,22 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 |------|------------|
 | **Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur |
 | **Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture |
+
+<!--
+PRESENTER NOTES:
+- Le module 4 convertit les volumes de services en pourcentages de couverture
+- Couverture = services / population cible - le défi est de connaître la population cible
+- Le SIGS utilise généralement les populations de zones de desserte qui sont souvent inexactes
+- Notre approche : dériver les dénominateurs des données SIGS validées par rapport aux enquêtes
+- Processus en deux parties : la partie 1 calcule et valide les dénominateurs, la partie 2 génère les estimations
+- Cela permet de suivre les tendances et les disparités infranationales de la couverture
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_7 -->
-## Qu'est-ce que la couverture des services ?
+## Exemple de couverture des services
 
-**La couverture des services** représente la proportion de la population cible qui a bénéficié d'un service de santé spécifique.
-
-![Équation de la couverture](resources/diagrams/coverage_equation.svg)
+![Exemple de couverture CPN4+ h:420](resources/diagrams/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
@@ -1783,73 +1796,117 @@ Chaque indicateur de santé correspond à une population cible spécifique :
 | Service | Population cible (dénominateur) |
 |---------|--------------------------------|
 | CPN1, CPN4 | Femmes enceintes |
-| Accouchement en institution | Naissances vivantes |
+| Accouchement en établissement | Naissances vivantes |
 | BCG | Naissances vivantes |
 | Penta1, Penta3 | Nourrissons ayant survécu au-delà de la période néonatale |
 | Rougeole1, Rougeole2 | Nourrissons survivant au-delà de la période infantile |
+
+<!--
+PRESENTER NOTES:
+- Différents services ont différentes populations cibles
+- CPN : femmes enceintes (avant l'accouchement)
+- Accouchement, BCG : naissances vivantes (à la naissance ou peu après)
+- Vaccins Penta : nourrissons ayant survécu à la période néonatale (28 premiers jours)
+- Vaccins contre la rougeole : nourrissons ayant survécu au-delà de la petite enfance
+- Comprendre les populations cibles est essentiel pour choisir les bons dénominateurs
+- Les ajustements démographiques convertissent une population cible en une autre
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_9 -->
-## Cascade démographique
-
-Des ajustements démographiques séquentiels transforment une estimation de la population cible en une autre. En commençant par les grossesses, les facteurs démographiques sont appliqués pour dériver les dénominateurs suivants :
+## Relations attendues qui aident à estimer les dénominateurs
 
 ![Organigramme de la cascade du dénominateur](resources/diagrams/denominator_cascade.svg)
+
+<!--
+PRESENTER NOTES:
+La cascade démographique montre comment les populations se transforment au fil des étapes de vie
+- Commencer par les grossesses → appliquer la perte de grossesse → accouchements
+- Accouchements → ajuster pour les jumeaux → naissances
+- Naissances → soustraire les mort-nés → naissances vivantes
+- Naissances vivantes → soustraire les décès néonataux → éligibles au DTC
+- Éligibles au DTC → soustraire les décès post-néonataux → éligibles à la rougeole
+- Chaque étape utilise des taux de mortalité spécifiques au pays
+- Cette logique fonctionne dans les deux sens (avant et arrière)
+
+Formules clés :
+- Gross = Acc/(1-TPG)
+- Acc = Gross*(1-TPG)
+- TN = Acc/(1-0.5*TJ)
+- Acc = TN*(1-0.5*TJ)
+- TN = NV/(1-TMN)
+- NV = TN*(1-TMN)
+- Gross = (NV*(1-0.5*TJ))/((1-TMN)*(1-TPG))
+
+Au niveau provincial, nous utilisons toutes les valeurs par défaut !
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
-## Cascade de dénominateurs : Illustration
+## Estimation des dénominateurs à partir de CPN1
 
-</p> <p style="font-size : 0.85em ;">En partant des comptes du service CPN1, les facteurs d'ajustement démographique sont appliqués séquentiellement pour dériver les dénominateurs des autres services:</p> <p style="font-size : 0.85em ;">Les facteurs d'ajustement démographique sont appliqués séquentiellement pour dériver les dénominateurs des autres services
+![Exemple de cascade de dénominateurs](resources/diagrams/denominator_cascade_example.svg)
 
-![Exemple de cascade de dénominateurs h:380](resources/diagrams/denominator_cascade_example.svg)
+<!--
+PRESENTER NOTES:
+- Exemple concret : 10 000 visites CPN1 avec 80% de couverture selon l'enquête
+- Calcul inverse : 10 000 ÷ 0,80 = 12 500 grossesses
+- Appliquer les facteurs démographiques étape par étape
+- Chaque étape réduit légèrement la population en raison des pertes/décès
+- Résultat : environ 9 067 enfants éligibles à la vaccination DTC
+- Ces dénominateurs dérivés peuvent être utilisés pour la couverture d'autres services
+- Les chiffres sont illustratifs - les taux réels varient selon les pays
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
-## Dérivation avant et arrière
+## Dérivation des dénominateurs à partir des points d'entrée
 
-À partir de n'importe quel point d'entrée, la cascade dérive les dénominateurs dans les deux sens :
+Chaque indicateur SIGS (CPN1, accouchements, BCG, Penta1) sert de **point d'entrée** pour calculer les dénominateurs. À partir de n'importe quel point d'entrée, la cascade dérive les autres populations dans les deux sens :
 
-| Direction | Méthode | Exemple à partir de Penta1 |
-|-----------|--------|---------------------|
-| **En aval** | Appliquer les taux de mortalité/attrition | Éligible au DTC → Éligible à la rougeole1 → Éligible à la rougeole2 |
-| **En amont** | Inverser les taux de mortalité (rajouter les décès) | Éligible au DTC → Naissances vivantes → Naissances → Accouchements → Grossesses |
+- **En aval :** Appliquer les taux de mortalité/attrition pour descendre dans la cascade
+  - *Exemple :* Éligible au DTC → Éligible à la rougeole1 → Éligible à la rougeole2
+- **En amont :** Inverser les taux de mortalité (rajouter les décès) pour remonter dans la cascade
+  - *Exemple :* Penta1 → Naissances vivantes → Accouchements → Grossesses
 
-La dérivation à rebours permet d'estimer les populations en amont à partir des dénombrements de services en aval.
-<!-- /SLIDE -->
+Cela nous donne **plusieurs estimations de dénominateurs indépendantes** pour chaque population cible, nous permettant de sélectionner la plus précise.
 
-<!-- SLIDE:m6_12 -->
-## Dénominateurs par point d'entrée
-
-<style scoped>
-table { font-size : 0.75em ; }
-th, td { padding : 0.3em 0.5em !important ; }
-</style>
-
-Chaque indicateur SIGS sert de point d'entrée. Le module dérive toutes les populations cibles via des cascades avant et arrière :
-
-| Point d'entrée | Calcul de base | Dérivation en aval | Dérivation en amont |
-|-------------|------------------|-------------------|---------------------|
-| **CPN1** | CPN1 ÷ couverture → Grossesses | Accouchements → Naissances vivantes → Éligible au DTC → Éligible à la rougeole | — |
-| **Accouchements** | Accouchements ÷ couverture → Accouchements | Naissances vivantes → Éligible au DTC → Éligible à la rougeole | Grossesses |
-| **BCG** | BCG ÷ couverture → Naissances vivantes | Éligible au DTC → Éligible à la rougeole | Accouchements → Grossesses |
-| **Penta1** | Penta1 ÷ couverture → Éligible au DTC | Éligible à la rougeole1 → Éligible à la rougeole2 | Naissances vivantes → Naissances → Accouchements → Grossesses |
-| **UN WPP** | Taux de natalité brut × population → Grossesses, naissances vivantes ; Population <1 an → DTC, rougeole | Applique les taux de mortalité pour les dénominateurs rougeole | — |
+<!--
+PRESENTER NOTES:
+- Chaque indicateur SIGS peut servir de point d'entrée pour le calcul du dénominateur
+- La cascade fonctionne dans deux directions - avant et arrière
+- En aval : appliquer les taux de mortalité pour obtenir les populations en aval
+- En amont : inverser la logique (rajouter les décès) pour obtenir les populations en amont
+- Exemple : à partir de Penta1, on peut estimer les naissances vivantes, puis les accouchements, puis les grossesses
+- Plusieurs points d'entrée nous donnent plusieurs estimations de dénominateurs indépendantes
+- Avoir plusieurs estimations permet la validation et la sélection de la meilleure option
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_13 -->
-## Sélection automatique du dénominateur
+## Méthodologie de sélection du dénominateur
 
-Pour chaque indicateur, le module sélectionne le dénominateur qui produit la couverture la plus proche de la référence de l'enquête.
+La plateforme FASTR sélectionne la méthode de dénominateur qui produit des estimations de couverture **les plus proches des références d'enquête** (EDS/MICS). Elle calcule la couverture en utilisant toutes les méthodes de dénominateur disponibles, compare chaque résultat aux estimations de couverture de l'enquête, et sélectionne le dénominateur avec la **plus petite erreur** par rapport à l'enquête. Cette approche minimise l'écart entre les estimations basées sur le SIGS et celles basées sur l'enquête, faisant du dénominateur sélectionné le plus fiable pour estimer la couverture réelle.
 
-**Algorithme de sélection:**
+Chaque indicateur (CPN1, CPN4, accouchements, etc.) peut utiliser une **méthode de dénominateur différente**. Cependant, pour un indicateur donné, la **même méthode est utilisée pour tous les points temporels et toutes les zones infranationales** pour assurer la cohérence. La sélection est effectuée au **niveau national**, puis appliquée uniformément à tous les niveaux géographiques.
 
-1. Calculer la couverture en utilisant chaque option de dénominateur
-2. Calculer l'erreur quadratique par rapport à l'enquête : $(couverture - enquête)^2$
-3. Appliquer la hiérarchie de sélection (les dénominateurs basés sur le SIGS sont prioritaires par rapport au WPP de l'ONU)
-4. Sélectionner le dénominateur basé sur le SIGS avec l'erreur minimale
+<!--
+PRESENTER NOTES:
+- Nous avons plusieurs façons de calculer les dénominateurs - laquelle est la meilleure ?
+- Les données d'enquête (EDS/MICS) sont notre référence pour la couverture
+- Nous testons chaque méthode de dénominateur et choisissons celle la plus proche de l'enquête
+- La sélection se fait au niveau national en utilisant les données d'enquête nationales
+- La méthode sélectionnée est ensuite appliquée à toutes les zones infranationales
+- Cela assure la cohérence : même méthode pour toutes les régions et tous les points temporels au sein d'un indicateur
+- Différents indicateurs peuvent utiliser différentes méthodes (CPN1 peut en utiliser une, Penta1 une autre)
+- Les utilisateurs peuvent remplacer les sélections automatiques si nécessaire
+-->
+<!-- /SLIDE -->
 
-La sélection se fait par indicateur et par zone géographique. Les utilisateurs peuvent annuler les sélections automatiques dans la partie 2.
+<!-- SLIDE:m6_13a -->
+## Quel dénominateur fournit des estimations plus plausibles ?
+
+![Comparaison des dénominateurs](resources/diagrams/denominator_comparison.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_14 -->
@@ -1860,43 +1917,23 @@ Le module projette la valeur de l'enquête la plus récente en utilisant les ten
 ![Méthode de projection de la couverture](resources/diagrams/coverage_projection.svg)
 
 Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendances observées en matière de prestation de services.
-<!-- /SLIDE -->
 
-<!-- SLIDE:m6_16 -->
-## Couverture (nationale)
-
-<div style="display : flex ; gap : 1.5em ; align-items : flex-start ;">
-<div style="flex : 1.2 ;">
-
-![Couverture calculée à partir des données SIGS au niveau national. h:340](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
-
-</div>
-<div style="flex : 1 ;">
-
-#### Interprétation
-
-**Les lignes/points noirs** indiquent les données de l'enquête (EDS/MICS) comme référence de l'enquête sur les ménages. **Les lignes/points gris** indiquent la couverture basée sur le SIGS à partir des données des établissements. **Les lignes/points rouges** indiquent la couverture projetée - estimations de l'enquête étendues à l'aide des tendances du SIGS.
-
-</div>
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_17 -->
-## Couverture (infranationale)
-
-![Couverture calculée à partir des données SIGS au niveau de la zone administrative 2. h:420](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_18 -->
-## Couverture (infranationale)
-
-![Couverture calculée à partir des données SIGS au niveau sous-national. h:420](resources/default_outputs/Module4_3_Coverage_HMIS_Subnational.png)
+<!--
+PRESENTER NOTES:
+- Les enquêtes sont peu fréquentes (3-5 ans) - il faut combler les lacunes
+- Méthode de projection : dernière valeur d'enquête + tendance SIGS depuis l'enquête
+- Formule : Projetée = Base d'enquête + (SIGS actuel - SIGS année d'enquête)
+- Préserve le calibrage par rapport à l'enquête tout en incorporant les changements observés
+- L'approche additive évite les erreurs cumulées
+- Les projections doivent être validées lorsque de nouvelles données d'enquête sont disponibles
+- Plus le temps depuis l'enquête est long = projection moins fiable
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
-## module de couverture : Paramètres de configuration
+## Module de couverture : Paramètres de configuration
 
-<div style="font-size : 0.8em ;">
+<div style="font-size: 0.8em;">
 
 | Paramètre | Description |
 |-----------|-------------|
@@ -1913,4 +1950,103 @@ Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont c
 </div>
 
 Les taux de mortalité spécifiques à un pays peuvent être obtenus à partir des rapports des EDS, de l'IGME des Nations unies ou des statistiques nationales de l'état civil.
+
+<!--
+PRESENTER NOTES:
+- Les paramètres de configuration contrôlent les calculs des dénominateurs
+- Variable de comptage : quelles données ajustées utiliser (recommandé "both")
+- Niveaux d'analyse : national, provincial, district - choisir en fonction de la qualité des données
+- Taux démographiques : valeurs par défaut fournies mais utiliser les valeurs spécifiques au pays
+- Sources pour les taux : rapports EDS, estimations IGME de l'ONU, statistiques nationales de l'état civil
+- Les taux de mortalité affectent significativement les calculs des dénominateurs
+- Mortalité plus élevée = dénominateurs de population survivante plus petits
+-->
+<!-- /SLIDE -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DIAPOSITIVES CONDENSÉES : Méthodes + Interprétation Combinées
+═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m6_s3 -->
+## Estimation de la couverture des services
+
+**Couverture** = services fournis ÷ population cible
+
+![Équation de la couverture h:100](resources/diagrams/coverage_equation.svg)
+
+Le SIGS nous indique combien de services ont été fournis (numérateur), mais pas la taille de la population cible (dénominateur). La couverture SIGS standard utilise les populations de zones de desserte, qui sont souvent inexactes. Les enquêtes (EDS/MICS) fournissent une couverture fiable mais seulement tous les 3-5 ans.
+
+---
+
+## Comment FASTR estime la couverture
+
+**Calculer les dénominateurs de plusieurs façons :** À partir des données SIGS, utiliser les volumes de services combinés à la couverture de l'enquête pour calculer à rebours les populations cibles. Par exemple, si 10 000 visites CPN1 et l'enquête indique 80% de couverture, cela implique environ 12 500 grossesses. Calculer également les dénominateurs à partir des projections de population de l'ONU en utilisant les taux de natalité et les ajustements démographiques.
+
+**Valider par rapport aux enquêtes :** Calculer la couverture en utilisant chaque option de dénominateur, comparer aux références d'enquête, et sélectionner le dénominateur avec la plus petite erreur.
+
+**Projeter la couverture vers l'avant :** S'ancrer à la dernière valeur d'enquête et appliquer les tendances SIGS d'une année sur l'autre pour étendre les estimations aux années post-enquête.
+
+<!--
+PRESENTER NOTES:
+- Aperçu condensé de la méthodologie d'estimation de la couverture
+- Point clé : les dénominateurs SIGS standard (populations de zones de desserte) sont souvent inexacts
+- Approche FASTR : dériver les dénominateurs des données, valider par rapport aux enquêtes
+- Exemple de calcul : 10 000 CPN1 / 80% couverture = 12 500 grossesses
+- Plusieurs options de dénominateurs comparées pour sélectionner le meilleur ajustement
+- Les projections étendent les enquêtes vers l'avant en utilisant les tendances SIGS
+- Résultat : estimations de couverture plus fiables pour le suivi
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s4 -->
+## Résultats de couverture : Tendances nationales
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Couverture nationale h:320](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**Ce que vous voyez :** Graphique linéaire montrant la couverture au fil du temps. Noir = enquête, Gris = dérivé du SIGS, Rouge = projeté.
+
+**Formule :** Couverture % = (services / population cible) × 100
+
+**Interprétation :** Comparer les valeurs SIGS et d'enquête - des écarts importants suggèrent des problèmes de dénominateur. Les valeurs projetées étendent les enquêtes en utilisant les tendances SIGS.
+
+</div>
+</div>
+
+---
+
+## Résultats de couverture : Comparaison infranationale
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Couverture infranationale h:320](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**Ce que vous voyez :** Estimations de couverture par zone infranationale, permettant une comparaison géographique.
+
+**Formule :** Couverture % = (services / population cible) × 100
+
+**Interprétation :** Identifier les zones à faible couverture pour la priorisation. Une couverture >100% suggère une sous-estimation du dénominateur ou un double comptage.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Deux résultats présentés : tendances nationales et comparaison infranationale
+- National : comparer SIGS (gris), enquête (noir), projeté (rouge)
+- L'écart entre SIGS et enquête indique la précision du dénominateur
+- Infranational : identifier les disparités géographiques pour la priorisation
+- Couverture >100% : dénominateur trop petit ou services comptés deux fois
+- Couverture très basse : dénominateur trop grand ou sous-déclaration
+- Utiliser ces résultats pour informer la planification des programmes et l'allocation des ressources
+-->
 <!-- /SLIDE -->

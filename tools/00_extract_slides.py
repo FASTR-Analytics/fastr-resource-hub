@@ -7,12 +7,13 @@
 Step 0: Extract slide content from methodology documentation.
 
 USAGE:
-    python3 tools/00_extract_slides.py
+    python3 tools/00_extract_slides.py              # English (default)
+    python3 tools/00_extract_slides.py --lang fr    # French
 
 This script:
 1. Scans methodology/*.md files for <!-- SLIDE:xxx --> markers
 2. Extracts content between markers
-3. Generates/updates slide files in core_content/
+3. Generates/updates slide files in core_content/ (or core_content_fr/ for French)
 
 Run this ONCE when setting up, or whenever methodology docs change.
 
@@ -253,12 +254,15 @@ def parse_slide_id(slide_id):
     return None, None, None
 
 
-def get_output_path(slide_id, base_dir):
+def get_output_path(slide_id, base_dir, language='en'):
     """
     Generate output file path for a slide ID.
 
     Example: 'm4_1' -> core_content/m4_data_quality_assessment/m4_1_approach_to_dqa.md
     Example: 'm0_2a' -> core_content/m0_introduction/m0_2a_implementation_steps.md
+
+    For French (language='fr'):
+    Example: 'm4_1' -> core_content_fr/m4_data_quality_assessment/m4_1_approach_to_dqa.md
     """
     module_num, topic_num, suffix = parse_slide_id(slide_id)
 
@@ -286,7 +290,10 @@ def get_output_path(slide_id, base_dir):
 
     filename = f"{slide_id}_{topic_name}.md"
 
-    return os.path.join(base_dir, 'core_content', module_folder, filename)
+    # Determine output directory based on language
+    output_dir = 'core_content' if language == 'en' else f'core_content_{language}'
+
+    return os.path.join(base_dir, output_dir, module_folder, filename)
 
 
 def fix_image_paths(content, source_file):
@@ -338,31 +345,43 @@ def fix_image_paths(content, source_file):
     return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_image, content)
 
 
-def extract_slides(base_dir):
+def extract_slides(base_dir, language='en'):
     """
     Main extraction function.
 
     Scans methodology/*.md files and extracts slide content.
+
+    Args:
+        base_dir: Base directory of the fastr-resource-hub
+        language: Language code ('en' for English, 'fr' for French, etc.)
     """
-    methodology_dir = os.path.join(base_dir, 'methodology')
+    # Determine methodology directory based on language
+    if language == 'en':
+        methodology_dir = os.path.join(base_dir, 'methodology')
+        output_dir_name = 'core_content'
+    else:
+        methodology_dir = os.path.join(base_dir, 'methodology', language)
+        output_dir_name = f'core_content_{language}'
 
     if not os.path.exists(methodology_dir):
-        print("❌ Error: methodology/ folder not found")
+        print(f"❌ Error: {methodology_dir} folder not found")
         print("   Make sure you're running from the fastr-resource-hub directory")
         return False
 
+    lang_label = f" ({language.upper()})" if language != 'en' else ""
     print("\n" + "═" * 70)
-    print("              FASTR SLIDE EXTRACTION")
+    print(f"              FASTR SLIDE EXTRACTION{lang_label}")
     print("═" * 70 + "\n")
 
     # Find all markdown files in methodology
     md_files = list(Path(methodology_dir).glob('*.md'))
 
     if not md_files:
-        print("❌ No markdown files found in methodology/")
+        print(f"❌ No markdown files found in {methodology_dir}/")
         return False
 
-    print(f"📂 Scanning {len(md_files)} methodology files...\n")
+    print(f"📂 Scanning {len(md_files)} methodology files from {methodology_dir}...")
+    print(f"📁 Output directory: {output_dir_name}/\n")
 
     total_extracted = 0
 
@@ -380,7 +399,7 @@ def extract_slides(base_dir):
         print(f"📄 {filename}")
 
         for slide_id, slide_content in slides:
-            output_path = get_output_path(slide_id, base_dir)
+            output_path = get_output_path(slide_id, base_dir, language)
 
             if not output_path:
                 continue
@@ -402,7 +421,7 @@ def extract_slides(base_dir):
             total_extracted += 1
 
     print("\n" + "─" * 70)
-    print(f"✅ Extracted {total_extracted} slide(s)")
+    print(f"✅ Extracted {total_extracted} slide(s) to {output_dir_name}/")
     print("─" * 70 + "\n")
 
     return True
@@ -413,20 +432,52 @@ def extract_slides(base_dir):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description='Extract slides from FASTR methodology files',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Examples:
+  python3 tools/00_extract_slides.py              # Extract English slides
+  python3 tools/00_extract_slides.py --lang fr    # Extract French slides
+  python3 tools/00_extract_slides.py --lang fr --lang en  # Extract both
+        '''
+    )
+    parser.add_argument(
+        '--lang', '-l',
+        action='append',
+        dest='languages',
+        choices=['en', 'fr'],
+        help='Language(s) to extract (default: en). Can be specified multiple times.'
+    )
+    args = parser.parse_args()
+
+    # Default to English if no language specified
+    languages = args.languages if args.languages else ['en']
+
     # Determine base directory (parent of tools/)
     script_dir = os.path.dirname(os.path.abspath(__file__))
     base_dir = os.path.dirname(script_dir)
 
-    success = extract_slides(base_dir)
+    all_success = True
+    for language in languages:
+        success = extract_slides(base_dir, language)
+        if not success:
+            all_success = False
 
-    if success:
+    if all_success:
+        output_dirs = ', '.join([
+            'core_content' if lang == 'en' else f'core_content_{lang}'
+            for lang in languages
+        ])
         print("💡 Next steps:")
-        print("   1. Review extracted files in core_content/")
+        print(f"   1. Review extracted files in {output_dirs}/")
         print("   2. Create a workshop: python3 tools/01_new_workshop.py")
         print("   3. Build a deck: python3 tools/02_build_deck.py --workshop <name>")
         print("")
 
-    sys.exit(0 if success else 1)
+    sys.exit(0 if all_success else 1)
 
 
 if __name__ == "__main__":

@@ -165,124 +165,71 @@ La plate-forme d'analyse FASTR comprend quatre modules automatisés :
 
 <!--
 ////////////////////////////////////////////////////////////////////
-// //
-// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
-
-// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
- . ` | | | | . ` |/
-// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
-// |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
-// //
-// Modifiez les diapositives de l'atelier en dessous de cette ligne //
-// //
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Modifiez les diapositives de l'atelier ci-dessous   //
+//                                                                //
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m0_0 -->
+## Qu'essayons-nous d'accomplir ?
+
+L'analyse à cycle rapide accélère l'amélioration des résultats en matière de SRMNIA-N en renforçant l'utilisation systématique des données pour la prise de décision
+
+![w:700](resources/diagrams/rapid_cycle_analytics.png)
+
+<!-- /SLIDE -->
+
 <!-- SLIDE:m0_1 -->
-## Introduction à FASTR
+## Comment y parvenir ?
 
-<div class="columns">
-<div>
+Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systèmes de SSP, soutenues par le renforcement des capacités et l'appui à l'utilisation des données, en adéquation avec la demande et les besoins des pays
 
-Le Fonds de financement mondial (GFF) soutient les efforts déployés par les pays pour renforcer l'utilisation de données actualisées pour la prise de décision, dans le but d'améliorer les performances des soins de santé primaires (SSP) et les résultats du RMNCAH-N.
+![w:800](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
-**Les évaluations fréquentes et les outils du système de santé pour la résilience (FASTR)** sont le cadre analytique à cycle rapide du GFF pour le suivi des performances du système de santé à l'aide de données à haute fréquence.
-
-FASTR rassemble quatre approches techniques complémentaires :
-
-1. L'analyse de routine des données du système d'information sanitaire (SIGS)
-2. Enquêtes téléphoniques dans les établissements de santé
-3. Enquêtes téléphoniques à haute fréquence auprès des ménages
-4. Analyses complémentaires axées sur les problèmes
-
-</div>
-<div>
-
-![FASTR Technical Approaches](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
-
-</div>
-</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
-## RMNCAH-N contrôle de l'utilisation des services
+## Qu'est-ce que FASTR ?
 
-<style scoped>
-.split { display : flex !important ; gap : 2rem ; align-items : center ; }
-.split .text { flex : 1 ; }
-.split .image { flex : 1 ; display : flex ; justify-content : center ; align-items : center ; }
-.split .image img { max-height : 420px !important ; max-width : 100% !important ; }
-</style>
+Une approche visant à catalyser des cycles continus « analyser, apprendre, renforcer, agir » pour favoriser l'utilisation systématique de données actualisées pour la prise de décision.
 
-<div class="split">
-<div class="text">
+![w:700](resources/diagrams/what_is_fastr.png)
 
-Les approches à cycle rapide utilisant les données SIGS de routine peuvent :
-
-- **Évaluer la qualité des données SIGS** aux niveaux national et sous-national
-- **Mesurer les changements mensuels** dans l'utilisation des services de santé
-- **Comparer les tendances de la couverture** avec les objectifs nationaux
-
-</div>
-<div class="image">
-
-![Flux de données SIGS](../resources/diagrams/HMIS_data_flow.svg)
-
-</div>
-</div>
+<!--
+PRESENTER NOTES:
+- Les systèmes d'information sanitaire de routine sont une source de données essentielle, mais souvent sous-utilisée en raison des préoccupations concernant la qualité des données et des longs délais entre la collecte et l'analyse des données
+- Les enquêtes traditionnelles auprès des ménages et des établissements, bien qu'essentielles, sont gourmandes en ressources et peu fréquentes
+- L'analyse à cycle rapide de FASTR comble cette lacune en fournissant :
+  - Des informations opportunes alignées sur les cycles de décision des pays
+  - Un apprentissage continu plutôt que des évaluations ponctuelles
+  - Des boucles de rétroaction directes entre les données, l'analyse et l'action
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_3 -->
-## Pourquoi des analyses à cycle rapide ?
+## Quelle est l'approche FASTR pour le suivi de l'utilisation des services SRMNIA-N ?
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
-Les systèmes d'information sanitaire de routine constituent une source essentielle de données, mais ils sont souvent sous-utilisés en raison des préoccupations relatives à la qualité des données et des longs délais entre la collecte et l'analyse des données. Les enquêtes traditionnelles auprès des ménages et des établissements, bien qu'essentielles, sont gourmandes en ressources et peu fréquentes.
+Analyses trimestrielles des données DHIS2, axées sur les indicateurs nationaux prioritaires
 
-Les analyses à cycle rapide de FASTR comblent cette lacune en fournissant :
+Développement d'outils durables pour garantir que les parties prenantes qui ont besoin d'utiliser les données puissent générer les analyses et visualisations appropriées, au bon moment, sur leurs indicateurs d'intérêt
 
-- Des informations opportunes alignées sur les cycles de décision des pays
-- Un apprentissage continu plutôt que des évaluations ponctuelles
-- Des boucles de rétroaction directes entre les données, l'analyse et l'action
+Combinaison de l'analyse et de la visualisation avec le renforcement des capacités et l'appui à l'utilisation des données pour assurer la durabilité et l'institutionnalisation
 
 </div>
 <div>
 
-![Cadre analytique à cycle rapide FASTR](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
-
-</div>
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_4 -->
-## Objet de l'analyse
-
-<div class="columns">
-<div>
-
-### Indicateurs de base
-
-Le FASTR donne la priorité à un ensemble d'indicateurs RMNCAH-N qui :
-
-- Représentent les principaux contacts de prestation de services dans le continuum des soins
-- Présentent un degré d'exhaustivité et un volume de rapports relativement élevés
-- Servent d'indicateurs de la performance générale de la prestation de services
-
-<small>*L'ensemble des indicateurs peut être élargi pour refléter les priorités propres à chaque pays*</small>
-
-</div>
-<div>
-
-### Mesures de la qualité des données de base
-
-L'analyse est ancree dans un ensemble normalisé de mesures de la qualité des données :
-
-- Exhaustivité des rapports
-- Détection des valeurs extrêmes (aberrations)
-- Cohérence entre les indicateurs connexes
-
-<small>*Ces mesures sont résumées dans un score global de qualité des données*</small>
+![Étapes de mise en œuvre du suivi de l'utilisation des services SRMNIA-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
 </div>
 </div>
@@ -290,5 +237,5 @@ L'analyse est ancree dans un ensemble normalisé de mesures de la qualité des d
 
 ---
 
-**Dernière mise à jour** : 17-01-2026
+**Dernière mise à jour** : 03-02-2026
 **Contact** : Équipe du projet FASTR

@@ -195,45 +195,39 @@ modules d'analyse disponibles, installation des modules, exécution des analyses
 
 <!--
 ////////////////////////////////////////////////////////////////////
-// //
-// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
-
-// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
- . ` | | | | . ` |/
-// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
-// |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
-// //
-// Modifiez les diapositives de l'atelier en dessous de cette ligne //
-// //
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Modifiez les diapositives de l'atelier ci-dessous   //
+//                                                                //
 ////////////////////////////////////////////////////////////////////
 -->
 
 <!-- SLIDE:m3_1 -->
-## Introduction à la plateforme analytique FASTR
+## Plateforme analytique FASTR
 
-La plateforme d'analyse FASTR est un outil en ligne pour l'évaluation de la qualité des données, l'ajustement et l'analyse des données de santé de routine.
+La **plateforme analytique FASTR** est un outil en ligne conçu pour soutenir l'évaluation de la qualité des données, l'ajustement et l'analyse des données de santé de routine.
 
-**Caractéristiques principales:**
+Elle permet aux utilisateurs de télécharger et d'analyser des données provenant de diverses sources, y compris le DHIS2, avec des méthodes statistiques intégrées pour générer un ensemble de données ajustées et effectuer des analyses prioritaires sur des indicateurs sélectionnés.
 
-- Téléchargement et analyse des données du DHIS2 et d'autres sources
-- Méthodes statistiques intégrées pour l'ajustement de la qualité des données
-- Interface conviviale pour l'exécution des analyses
-- Options flexibles de visualisation et d'exportation
+La plateforme fournit une interface conviviale pour l'exécution des analyses et offre des options flexibles pour la visualisation et l'exportation des résultats.
 
-**Dans cette session, nous fournirons un aperçu conceptuel de la plateforme et de ses capacités**
+<div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+
+![h:180](resources/screenshots/platform/platform_overview_1.png) ![h:180](resources/screenshots/platform/platform_overview_2.png) ![h:180](resources/screenshots/platform/platform_overview_3.png)
+
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_1b -->
-## Capacités de la plate-forme
+## Capacités de la plateforme
 
-<style scoped>
-p { text-align : center ; }
-img { display : block ; margin : 0 auto ; }
-</style>
-
-![Capacités de la plate-forme h:420](../resources/diagrams/platform_capabilities.svg)
-
-<p style="font-size : 0.8em ; color : #666 ; margin-top : 0.5rem ;">Les flux de données vont de l'importation aux résultats partageables en passant par l'analyse
+![Capacités de la plateforme](../resources/diagrams/platform_capabilities.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
@@ -248,34 +242,40 @@ Une instance contient :
 - Les définitions des indicateurs et les sources de données
 - Tous les projets créés pour ce pays
 
-**Pensez à une instance comme à l'espace de travail dédié à votre pays**
+**Pensez à une instance comme à l'espace de travail dédié à votre pays.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
 ## Rôles et autorisations des utilisateurs
 
-Il existe deux niveaux de permissions dans la plate-forme :
+Il existe deux niveaux de permissions dans la plateforme :
 
-**Rôles au niveau de l'instance:**
+&nbsp;
+
+**Rôles au niveau de l'instance :**
 
 - **Les administrateurs de l'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules et effectuer des analyses
 
-**Rôles au niveau du projet:**
+&nbsp;
+
+**Rôles au niveau du projet :**
 
 - **Les éditeurs de projets** peuvent créer des visualisations, des rapports et télécharger/exporter des résultats
 - **Les visualisateurs de projets** peuvent afficher des visualisations, consulter des rapports et télécharger/exporter des résultats
 
-*Les administrateurs sont assignés par instance ; les éditeurs et les visualisateurs sont assignés par projet
+&nbsp;
+
+*Les administrateurs sont assignés par instance ; les éditeurs et les visualisateurs sont assignés par projet.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
 ## Projets au sein d'une instance
 
 <style scoped>
-.container { display : flex ; gap : 1rem ; }
-.container .img-col { flex : 2 ; }
-.container .img-col img { width : 100% ; height : auto ; }
-.container .text-col { flex : 1 ; font-size : 0.85em ; }
+.container { display: flex; gap: 1rem; }
+.container .img-col { flex: 2; }
+.container .img-col img { width: 100%; height: auto; }
+.container .text-col { flex: 1; font-size: 0.85em; }
 </style>
 
 <div class="container">
@@ -291,10 +291,10 @@ Chaque instance de pays peut contenir **plusieurs projets**.
 Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
 
 - Différentes versions d'analyses
-- Un projet de démonstration ou de jeu
+- Un projet de démonstration ou de test
 - Des projets distincts pour différentes équipes ou différents programmes
 
-**Questions clés lors de la mise en place:**
+**Questions clés lors de la mise en place :**
 
 - Qui est l'administrateur ?
 - Qui peut modifier ?
@@ -305,44 +305,57 @@ Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent �
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2d -->
-## Pratique : Connexion à la plate-forme
+## Pratique : Connexion à la plateforme
 
 <style scoped>
-table { border : none !important ; background : transparent !important ; width : 100% !important ; }
-table td, table th { border : none !important ; background : transparent !important ; padding : 8px !important ; vertical-align : top !important ; width : 50% !important ; }
-table img { max-height : 280px !important ; width : auto !important ; }
+table { border: none !important; background: transparent !important; width: 100% !important; }
+table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
+table img { max-height: 280px !important; width: auto !important; }
 </style>
 
 | | |
 |:---|:---|
-| ![Page de connexion]({{atelier_MEDIA}}/01_login_page.png) | ![Formulaire d'inscription]({{atelier_MEDIA}}/02_sign_up.png) | !
-| Cliquez sur le bouton "Enregistrer" pour enregistrer le formulaire d'inscription | **2.** Cliquez sur S'inscrire et entrez vos coordonnées
-**3.** Saisissez vos informations (vérifiez l'email) | **4.** Après vous être connecté, vous serez ajouté à un projet |
+| ![Page de connexion](resources/screenshots/01_login_page.png) | ![Formulaire d'inscription](resources/screenshots/02_sign_up.png) |
+| **1.** Accédez à {{PLATFORM_URL}} | **2.** Cliquez sur S'inscrire et entrez vos coordonnées |
+| **3.** Saisissez vos informations (vérifiez l'email) | **4.** Après vous être connecté, vous serez ajouté à un projet |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->
-## Démonstration en direct : Accès à la plate-forme et rôles
+## Démonstration en direct : Accès à la plateforme et rôles
 
 ![demo h:40](../resources/icons/demo.svg) **Dans cette démo, nous allons :**
 
 - Naviguer vers la plateforme FASTR
-- Explorer les rôles des utilisateurs : Administrateur, Editeur, Visualisateur
+- Explorer les rôles des utilisateurs : Administrateur, Éditeur, Visualisateur
 - Examiner la gestion des utilisateurs et les permissions
 - Comprendre le flux de travail pour télécharger des données et prendre des décisions analytiques
 
-*L'animateur fera une démonstration sur la plateforme en direct*
+*Le facilitateur fera une démonstration sur la plateforme en direct*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_2e -->
+## Configuration de la plateforme d'analyse
+
+- La configuration de la plateforme d'analyse est une fonctionnalité d'administration
+
+- Nous travaillerons ensemble pour configurer les éléments suivants :
+  - Zones administratives (régions, districts)
+  - Structure des établissements
+  - Définitions des indicateurs
+
+- Notez que comme il s'agit d'une fonctionnalité d'administration, tous les participants ne feront PAS cette étape. Vous sélectionnerez une personne pour avoir les droits d'administrateur, et elle nous aidera à parcourir ces étapes.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_3 -->
-## Activité : Configuration des zones d'administration
+## Activité : Configuration des zones administratives
 
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons configurer:**
+![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons configurer :**
 
 - Les zones administratives (régions, districts)
-- La structure des installations
-- Définitions des indicateurs
+- La structure des établissements
+- Les définitions des indicateurs
 
-*Les participants travailleront directement dans la plate-forme*
+*Les participants travailleront directement dans la plateforme*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_4 -->
@@ -351,7 +364,7 @@ table img { max-height : 280px !important ; width : auto !important ; }
 ![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
 
 - Passer en revue les exigences en matière de format de données
-- Passer en revue le processus d'importation
+- Parcourir le processus d'importation
 - Gérer la validation et le contrôle des erreurs
 
 *Les participants importeront les données de leur pays*
@@ -376,37 +389,153 @@ table img { max-height : 280px !important ; width : auto !important ; }
 
 - Créer un nouveau projet
 - Configurer les paramètres du projet
-- Sélectionner les indicateurs et les périodes de temps
+- Sélectionner les indicateurs et les périodes
 - Appliquer les meilleures pratiques pour l'organisation du projet
 
 *Les participants créeront leur premier projet*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_7 -->
-## Activité : Créer des visualisations
+## Activité : Création de visualisations
 
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
+![pratique h:40](../resources/icons/hands_on.svg) **Je fais, nous faisons, vous faites**
 
-- Explorer les types de graphiques disponibles
-- Créer et personnaliser des visualisations
-- Exporter des graphiques pour les utiliser dans des rapports
+**Je fais :** Le facilitateur démontre la création d'un graphique de séries temporelles pour CPN1
 
-*Les participants créeront des visualisations à partir de leur analyse*
+**Nous faisons :** Ensemble, nous créons une deuxième visualisation (diagramme à barres comparant les régions)
+
+**Vous faites :** Créez une visualisation de votre choix et exportez-la pour votre rapport
+
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9 -->
+## L'assistant IA
+
+Les données de santé sont abondantes — les informations exploitables et disponibles en temps réel ne le sont pas.
+
+Les ministères de la Santé collectent d'énormes quantités de données (notamment dans le DHIS2), mais font face à :
+
+- Un accès limité aux logiciels d'analyse et de visualisation
+- Des pénuries et une forte rotation du personnel S&E qualifié
+- Une dépendance à des formations répétées et coûteuses qui ne passent pas à l'échelle
+- Une dépendance à des analyses externalisées qui sont lentes ou incohérentes
+
+L'assistant IA de FASTR répond à ces défis en fournissant un support à la demande pour l'analyse, l'interprétation et la génération de rapports.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9a -->
+## Ce que l'assistant IA peut faire
+
+**Compréhension par l'utilisateur**
+- Aide à comprendre l'approche et les méthodes
+- Comment utiliser la plateforme elle-même
+
+**Synthèse et interprétation**
+- Examiner les données
+- Générer des messages clés (à partir de plusieurs tableaux de données)
+- Rapports/présentations avec une histoire et un fil conducteur
+
+**Opérations de la plateforme**
+- Manipuler la configuration des visualisations
+- Exécuter des modules
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e -->
+## Une IA fondée sur les preuves, pas sur des suppositions
+
+L'assistant IA de FASTR vérifie les résultats réels, les méthodes et la documentation avant de répondre.
+
+![Diagramme des outils IA](../resources/diagrams/ai_on_rails.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e2 -->
+## L'IA est un accélérateur, pas un décideur
+
+L'IA soutient votre travail — vous gardez le contrôle du jugement, de la responsabilité et de l'action.
+
+![Diagramme accélérateur IA](../resources/diagrams/ai_accelerator.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e3 -->
+## Principes pour le succès
+
+Une automatisation responsable, axée sur les besoins des ministères de la Santé, et conçue pour passer à l'échelle.
+
+![Diagramme des principes IA](../resources/diagrams/ai_principles.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9b -->
+## Exemples de questions : Questions d'analyse
+
+Utilisez l'assistant IA pour répondre à des questions pertinentes pour les politiques :
+
+**Couverture et tendances :**
+> « Comment la couverture CPN a-t-elle évolué de 2023 à 2025 ? »
+
+**Qualité des données :**
+> « Quels États ont les meilleurs et les pires scores d'évaluation de la qualité des données ? »
+
+**Perturbations :**
+> « Y a-t-il eu des perturbations de services au cours du dernier trimestre ? »
+
+**Analyse infranationale :**
+> « Quelles régions ont de bonnes performances et lesquelles nécessitent une attention particulière ? »
+
+L'IA analysera vos données et fournira des réponses avec des preuves à l'appui.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9c -->
+## Exemples de questions : Génération de rapports
+
+**Générer des rapports :**
+> « Créez un bref rapport sur les perturbations des services SRMNIA-N »
+
+**Créer des présentations :**
+> « Générez une diapositive résumant les conclusions sur la qualité des données et la couverture »
+
+**Interpréter les visualisations :**
+> « Décrivez ce que montre ce graphique pour un rapport trimestriel »
+
+**Adapter à l'audience :**
+> « Résumez ces résultats pour une audience de décideurs politiques »
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9f -->
+## Pratique : Utilisation de l'assistant IA
+
+![pratique h:40](../resources/icons/hands_on.svg)
+
+*Contenu à rédiger*
+
+*Travaillez en binômes. Comparez ce que l'IA produit avec votre propre interprétation.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_8 -->
 ## Activité : Création de rapports
 
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
+![pratique h:40](../resources/icons/hands_on.svg) **Je fais, nous faisons, vous faites**
 
-- Utiliser des modèles de rapport
-- Générer des rapports automatisés
-- Personnaliser le contenu et la présentation des rapports
+**Je fais :** Le facilitateur démontre la création d'un rapport à l'aide du modèle
 
-*Les participants créeront leur premier projet de rapport trimestriel*
+**Nous faisons :** Ensemble, nous utilisons l'assistant IA pour générer du texte de rapport à partir de nos visualisations
+
+**Vous faites :** Complétez votre projet de rapport avec votre propre contenu et exportez-le
+
+---
+
+## Utilisation de l'assistant IA
+
+**Pour interpréter une visualisation :**
+> *« Décrivez ce que montre ce graphique et rédigez 2-3 phrases résumant les principales conclusions pour un rapport trimestriel du ministère de la Santé. »*
+
+**Pour analyser les variations infranationales :**
+> *« Comparez les régions présentées dans ce graphique. Quelles provinces ont de bonnes performances et lesquelles nécessitent une attention particulière ? Suggérez des raisons possibles pour ces différences. »*
+
+L'IA analysera votre graphique et générera du texte que vous pourrez modifier pour votre rapport.
+
 <!-- /SLIDE -->
 
 ---
 
-**Dernière mise à jour** : 07-01-2026
+**Dernière mise à jour** : 26-01-2026
 **Contact** : Équipe du projet FASTR
