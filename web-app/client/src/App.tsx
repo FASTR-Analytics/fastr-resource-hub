@@ -911,7 +911,7 @@ type AppMode = 'select' | 'workshop' | 'library' | 'quick'
 // Library Mode Component - Browse slides without export
 // ─────────────────────────────────────────────────────────────────────────────
 function LibraryMode({ onBack }: { onBack: () => void }) {
-  const { contentLibrary, loadContentLibrary } = useWorkshopStore()
+  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
@@ -996,7 +996,30 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-800">Browse Content Library</h1>
+        <h1 className="text-lg font-semibold text-gray-800 flex-1">Browse Content Library</h1>
+        {/* Language toggle */}
+        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => setContentLanguage('en')}
+            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'en'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setContentLanguage('fr')}
+            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'fr'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            FR
+          </button>
+        </div>
       </header>
 
       {/* Main content */}
@@ -1165,7 +1188,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
 // Quick Export Mode Component - Select slides for quick presentation
 // ─────────────────────────────────────────────────────────────────────────────
 function QuickExportMode({ onBack }: { onBack: () => void }) {
-  const { contentLibrary, loadContentLibrary } = useWorkshopStore()
+  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
   const [selectedSlides, setSelectedSlides] = useState<Array<{ module: any; topic: any }>>([])
   const [selectedTemplates, setSelectedTemplates] = useState<Array<{ id: string; name: string; file: string }>>([])
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
@@ -1407,7 +1430,30 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
         <h1 className="text-lg font-semibold text-gray-800">Quick Export</h1>
-        <span className="text-sm text-gray-500">Select slides and export to PPTX or PDF</span>
+        <span className="text-sm text-gray-500 flex-1">Select slides and export to PPTX or PDF</span>
+        {/* Language toggle */}
+        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => setContentLanguage('en')}
+            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'en'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setContentLanguage('fr')}
+            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'fr'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            FR
+          </button>
+        </div>
       </header>
 
       {/* Main content */}
@@ -1805,6 +1851,8 @@ function App() {
     loadWorkshops,
     loadContentLibrary,
     contentLibrary,
+    contentLanguage,
+    setContentLanguage,
     addSession,
     selectWorkshop,
     error,
@@ -2416,8 +2464,31 @@ function App() {
 
     return (
       <div className="h-screen bg-gray-50 flex flex-col">
-        {/* Top bar with logout */}
-        <div className="flex justify-end p-4">
+        {/* Top bar with language toggle and logout */}
+        <div className="flex justify-end items-center gap-4 p-4">
+          {/* Language toggle */}
+          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
+            <button
+              onClick={() => setContentLanguage('en')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                contentLanguage === 'en'
+                  ? 'bg-fastr-primary text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setContentLanguage('fr')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                contentLanguage === 'fr'
+                  ? 'bg-fastr-primary text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              FR
+            </button>
+          </div>
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors"

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import api, { WorkshopInfo, Module, AIMessage } from '../../lib/api'
+import api, { WorkshopInfo, Module, AIMessage, Language } from '../../lib/api'
 
 // Types matching the backend
 export interface Session {
@@ -69,6 +69,7 @@ interface WorkshopStore {
   currentWorkshopId: string | null
   currentConfig: LocalWorkshopConfig | null
   contentLibrary: Module[]
+  contentLanguage: Language
   isLoading: boolean
   error: string | null
   saveStatus: 'idle' | 'saving' | 'saved' | 'error'
@@ -85,7 +86,8 @@ interface WorkshopStore {
   createWorkshop: (workshopId: string, config: LocalWorkshopConfig) => Promise<void>
   deleteWorkshop: (workshopId: string) => Promise<void>
   setWorkshopLocked: (workshopId: string, locked: boolean) => Promise<void>
-  loadContentLibrary: () => Promise<void>
+  loadContentLibrary: (language?: Language) => Promise<void>
+  setContentLanguage: (language: Language) => void
 
   // Config mutations (auto-save)
   updateSession: (dayNum: number, sessionIdx: number, updates: Partial<Session>) => void
@@ -114,6 +116,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   currentWorkshopId: null,
   currentConfig: null,
   contentLibrary: [],
+  contentLanguage: 'en' as Language,
   isLoading: false,
   error: null,
   saveStatus: 'idle',
@@ -206,13 +209,20 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   },
 
   // Load content library
-  loadContentLibrary: async () => {
+  loadContentLibrary: async (language?: Language) => {
     try {
-      const library = await api.getModules()
-      set({ contentLibrary: library })
+      const lang = language || get().contentLanguage
+      const library = await api.getModules(lang)
+      set({ contentLibrary: library, contentLanguage: lang })
     } catch (error: any) {
       set({ error: error.message })
     }
+  },
+
+  // Set content language (and reload library)
+  setContentLanguage: (language: Language) => {
+    set({ contentLanguage: language })
+    get().loadContentLibrary(language)
   },
 
   // Update a session
@@ -515,4 +525,4 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   },
 }))
 
-export type { Module }
+export type { Module, Language }
