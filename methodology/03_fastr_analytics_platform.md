@@ -447,6 +447,132 @@ table img { max-height: 280px !important; width: auto !important; }
 
 <!-- /SLIDE -->
 
+<!-- SLIDE:m3_9 -->
+## The AI assistant
+
+Health data is abundant — actionable, just-in-time insights are not.
+
+Ministries of Health collect vast amounts of data (especially in DHIS2), but face:
+
+- Limited access to analysis and visualization software
+- Shortages and high turnover in skilled M&E personnel
+- Dependence on repeated, high-cost training that doesn't scale
+- Reliance on outsourced analysis that is slow or inconsistent
+
+The FASTR AI assistant addresses these challenges by providing on-demand support for analysis, interpretation, and report generation.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9a -->
+## What the AI assistant can do
+
+The AI assistant supports three main categories of tasks:
+
+| Category | Capabilities |
+|----------|--------------|
+| **User understanding** | Explain methods and modules, help navigate the platform, answer questions about the analysis approach |
+| **Synthesis & interpretation** | Analyze data tables, generate key messages, identify trends and patterns, create reports with narrative |
+| **Platform operations** | Configure visualizations, run modules, export results |
+
+All with ease, confidence, and speed.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9b -->
+## Example prompts: Analysis questions
+
+Use the AI assistant to answer policy-relevant questions:
+
+**Coverage and trends:**
+> "How has ANC coverage changed from 2023 to 2025?"
+
+**Data quality:**
+> "Which states have the best and worst DQA scores?"
+
+**Disruptions:**
+> "Have any services been disrupted in the past quarter?"
+
+**Subnational analysis:**
+> "Which regions are performing well and which need attention?"
+
+The AI will analyze your data and provide answers with supporting evidence.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9c -->
+## Example prompts: Report generation
+
+Use the AI assistant to create outputs for different audiences:
+
+**Generate reports:**
+> "Create a 1000-word report on disruptions of RMNCAH services"
+
+**Create presentations:**
+> "Generate a slide deck with sections on DQA, service utilization, and coverage"
+
+**Interpret visualizations:**
+> "Describe what this chart shows and write 2-3 sentences summarizing the main findings for a Ministry of Health quarterly report"
+
+**Tailor to audience:**
+> "Summarize these findings for a non-technical policy audience"
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d -->
+## Before and after AI
+
+| Before AI | After AI |
+|-----------|----------|
+| Users generated charts and manually interpreted, switching between applications | Simple commands generate charts with ready-to-use interpretations |
+| Interpretation depended on individual analytical skills, leading to inconsistency | AI provides immediate explanations in clear, practical language |
+| Report writing was time-consuming, struggling to translate charts into narratives | Reduced report writing time by more than half |
+| Trial-and-error to identify key trends and patterns | AI quickly identifies trends, unusual patterns, and performance gaps |
+
+The AI assistant reinforces users' existing analytical and writing skills while saving time.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e -->
+## AI grounded in evidence, not guesswork
+
+The FASTR AI assistant checks actual results, methods, and documentation before responding.
+
+![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e2 -->
+## AI is an accelerator, not a decision maker
+
+The AI supports your work — you stay in control of judgement, accountability, and action.
+
+![AI accelerator diagram](../resources/diagrams/ai_accelerator.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e3 -->
+## Principles for success
+
+Responsible automation, focused on the needs of Ministries of Health, and designed for scale.
+
+---
+
+![AI principles diagram](../resources/diagrams/ai_principles.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9f -->
+## Practice: Using the AI assistant
+
+![hands-on h:40](../resources/icons/hands_on.svg) **Try these prompts with your country's data:**
+
+**1. Ask an analysis question:**
+> "What are the main trends in [indicator] over the past year?"
+
+**2. Request interpretation:**
+> "Look at the disruptions chart and identify any periods of concern"
+
+**3. Generate a key message:**
+> "Write 2-3 key messages from this analysis for the RMNCAH-N TWG"
+
+**4. Create a report section:**
+> "Draft a paragraph describing data quality findings for our quarterly report"
+
+*Work in pairs. Compare what the AI produces with your own interpretation.*
+<!-- /SLIDE -->
+
 <!-- SLIDE:m3_8 -->
 ## Activity: Creating reports
 

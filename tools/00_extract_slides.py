@@ -191,6 +191,7 @@ TOPIC_NAMES = {
     # m9 - Workshop Activities (from 09_workshop_activities.md)
     'm9_1': 'quarterly_reporting_activity',
     'm9_2': 'presenting_reports_group_feedback',
+    'm9_3': 'fastr_quiz',
 }
 
 # Marp frontmatter to add to extracted slides

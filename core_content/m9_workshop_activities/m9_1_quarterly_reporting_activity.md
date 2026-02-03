@@ -4,171 +4,102 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Quarterly service utilization report
+## Activity: Creating a disruptions report
 
-*DRAFT - NEEDS REVIEW*
+![hands-on h:40](../../resources/icons/hands_on.svg) **Goal:** Each country team produces a disruptions report using the AI assistant.
 
-**Goal:** Each country team produces an updated service utilization report using the latest data.
+**Duration:** 90 minutes
 
-**Steps:**
-
-1. Import latest data from DHIS2
-2. Run service utilization analysis
-3. Interpret outputs using AI tools
-4. Draft key findings for your country report
-
-![hands-on h:40](../../resources/icons/hands_on.svg) **Duration: 60-90 minutes**
+**What you'll create:**
+- Analysis of service disruptions in your country
+- Subnational breakdown identifying priority areas
+- 3-5 key messages for decision-makers
+- Draft report ready for dissemination
 
 ---
 
-## Step 1: Import latest data
+## Step 1: Explore your disruptions data
 
-*TO BE CONFIRMED: Data tab workflow*
+Open the **Disruptions** visualization in your country project.
 
-Each country team will update their database with the most recent DHIS2 data.
+**Use the AI assistant to answer:**
 
-1. Navigate to **Data** tab → **New Import**
-2. Configure your country's DHIS2 API connection
-3. Select your priority indicators
-4. Extend the date range through the current period
-5. Run import
+> "Have any services been disrupted in the past quarter?"
 
----
+> "Which regions show the biggest gaps between expected and actual service volumes?"
 
-## Step 2: Run service utilization module
-
-*TO BE CONFIRMED: Module configuration*
-
-Run the Service Utilization module for your country.
-
-- **Period:** Extend through current quarter
-- **Indicators:** Your country's priority services
-- **Geography:** National and subnational levels
-
-Output: `M3_disruptions_analysis_admin_area_1.csv`
+*Write down 2-3 initial observations.*
 
 ---
 
-## Step 3: Interpret your outputs
+## Step 2: Drill into subnational patterns
 
-For each visualization, use the AI assistant to help draft interpretations for your country report.
+National trends can mask important regional differences.
 
-The following slides provide:
+**Use the AI assistant:**
 
-- Purpose of each graph
-- What to look for
-- Suggested AI prompts
-- Example interpretations
+> "Compare disruption patterns across regions. Which areas need the most attention?"
 
----
+> "Are any regions showing recovery while others are still disrupted?"
 
-## Graph 1: Trends over time
-
-**Purpose:** Summarize your country's service volume trajectory over time.
-
-**What to look for:**
-
-- Highs and lows - what were the peak and minimum values?
-- Periods of increase or decrease
-- Related indicators (e.g., Penta1 vs Penta3) - do they move together?
-- Seasonality vs meaningful shifts
+**Discuss in your team:**
+- Do you know why certain regions are affected?
+- What contextual factors might explain the pattern?
 
 ---
 
-## Graph 1: AI prompt
+## Step 3: Generate your report
 
-*NEEDS REVIEW*
+**Use the AI assistant to create outputs:**
 
-**Suggested prompt:**
+> "Create a brief report on RMNCAH service disruptions for the past 6 months, highlighting the 3 regions with the biggest concerns."
 
-> Analyze this service volume data covering:
-> - Overall trend direction and magnitude from start to end period
-> - Notable disruptions, seasonal patterns, or outliers
-> - Specific data points for highs, lows, and final-period values
+> "Generate a slide summarizing data quality and service utilization findings for the RMNCAH-N TWG."
 
----
-
-## Graph 2: Quarter-on-quarter change
-
-**Purpose:** Identify quarters with meaningful changes in your country's service volumes.
-
-**Reading the graph:**
-
-- **Gray:** No meaningful change (under 10%)
-- **Red:** Decrease of 10% or more
-- **Green:** Increase of 10% or more
+**Review and edit:**
+- Does the AI output match your interpretation?
+- What would you change for your audience?
 
 ---
 
-## Graph 2: AI prompt
+## Step 4: Draft key messages
 
-*NEEDS REVIEW*
+Transform findings into actionable messages.
 
-**Suggested prompt:**
+**Use this structure:**
 
-> Analyze this data to:
-> - Note when all changes are under 10% (stable period)
-> - Highlight the 2-3 largest increases or decreases
-> - Flag any quarters with changes greater than 10%
+| Finding | So what? | Action needed |
+|---------|----------|---------------|
+| ANC1 down 15% in Northern Region | Pregnant women not accessing care | Investigate barriers, strengthen outreach |
+| Penta3 stable nationally | Immunization program resilient | Maintain current approach |
+| Poor data quality in 2 districts | Can't trust the numbers | Data quality training needed |
 
----
-
-## Graph 3: Disruptions and surpluses
-
-**Purpose:** Identify periods where your country's service delivery deviated significantly from expected levels.
-
-**What to look for:**
-
-- Which periods show disruptions (below expected)?
-- Which periods show surpluses (above expected)?
-- What is the average deviation during disruption periods?
+**Draft 3-5 key messages for your next TWG meeting.**
 
 ---
 
-## Graph 3: AI prompt
+## Step 5: Peer review
 
-*NEEDS REVIEW*
+Pair with another country team.
 
-**Suggested prompt:**
+**Present (5 min each):**
+- Your top 3 findings
+- Your key messages
+- One question you still have
 
-> Analyze this data to:
-> - Identify disruption or surplus periods deviating more than 10% from expected
-> - Calculate average deviation for highlighted periods
-> - Red = disruption, Green = surplus
-
----
-
-## Step 4: Draft your key messages
-
-**From data to key messages**
-
-Results are what the analysis found - often many, complex, hard to interpret at a glance.
-
-Key takeaways are the "so what" - they should be:
-
-- Few in number (3-5)
-- Simple and clear
-- Actionable
-
-Each country team: Draft 3-5 key messages from your analysis.
+**Feedback:**
+- Are the messages clear?
+- Is the action specific enough?
+- What would you add?
 
 ---
 
-## Report checklist
+## Checklist
 
-Before finishing, confirm your country report includes:
+Before finishing, confirm your report includes:
 
-- [ ] Data updated through current period
-- [ ] Trends over time interpretation
-- [ ] Quarter-on-quarter changes highlighted
-- [ ] Disruptions/surpluses identified
-- [ ] 3-5 key messages drafted
-
----
-
-## Discussion
-
-- What trends emerged in your country's data?
-- Which services showed disruptions or surpluses?
-- What factors might explain the patterns?
-- What are your key messages for decision-makers?
+- [ ] National disruption summary
+- [ ] Subnational breakdown (regions of concern)
+- [ ] 3-5 key messages
+- [ ] At least one recommended action
+- [ ] Audience identified (who will receive this?)

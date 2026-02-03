@@ -663,6 +663,152 @@ Consider these key areas:
 **Competency building** - How would you like to practice? Who else needs this training?
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_4 -->
+## Understanding your audience: User mapping
+
+Before creating outputs, clarify who will use them and how.
+
+**Key questions for user mapping:**
+
+1. **Who is my end user?** (Regional health bureau head, national policy maker, program manager?)
+
+2. **What do they need to accomplish?** (Make a decision, discuss in a meeting, allocate resources?)
+
+3. **What information are they most interested in?** (High-level trends, detailed insights, comparisons across districts?)
+
+4. **What format works best for them?** (Brief slide deck, detailed report, infographic?)
+
+5. **How much time do they have?** (2-minute brief, 15-minute presentation, deep-dive workshop?)
+
+Different audiences need different outputs from the same data.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_4a -->
+## Activity: Map your users
+
+![hands-on h:40](../resources/icons/hands_on.svg) **For your country team, identify:**
+
+| Question | Your Answer |
+|----------|-------------|
+| Who is the primary end user of your FASTR outputs? | |
+| What decision or action will they take based on this data? | |
+| What 2-3 pieces of information are they most interested in? | |
+| What format/length works best for this audience? | |
+| When and where will you present to them? | |
+
+*Discuss in your country team. Share one insight with the group.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_5 -->
+## Storytelling with data
+
+Storytelling translates data and visualizations into compelling narratives that guide decision-making.
+
+**Elements of a data story:**
+
+| Element | Description |
+|---------|-------------|
+| **Plot** | What questions will you answer from the data? |
+| **Setting** | What is the context? |
+| **Audience** | Who are you telling this story to? |
+| **Issue** | What is the main health issue or finding? |
+| **Implication** | What actions or recommendations follow? |
+
+**Remember:** The story is not just *what* the data shows, but *why it matters* and *what to do about it*.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_5a -->
+## From data to story: Example
+
+**The data:** ANC1 coverage increased 15% in Q3 2022, dropped 12% in Q1 2023, then stabilized through 2025.
+
+---
+
+**Just the result:**
+> "ANC1 volumes fluctuated between 2022-2023 before stabilizing in 2024-2025."
+
+---
+
+**The story:**
+> "After significant disruption during 2022-2023, our antenatal care services have recovered and stabilized. The consistent delivery over the past 18 months suggests our health system has built resilience. This foundation positions us to focus on quality improvements rather than crisis response."
+
+*The story answers "so what?" and points toward action.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_6 -->
+## Linking results to actions
+
+Data is only valuable if it leads to decisions and actions.
+
+**The gap:** Many reports are produced but never used. Findings don't translate into program changes.
+
+**Bridging the gap:**
+
+| From Results | To Actions |
+|--------------|------------|
+| "Penta3 dropped 15% in Northern Region" | Investigate root cause, reallocate vaccines, strengthen outreach |
+| "ANC4 coverage below target in 3 districts" | Target supportive supervision, review referral pathways |
+| "Data quality poor in 2 facilities" | Provide data quality training, investigate reporting barriers |
+
+**Key question:** For each finding, ask "What decision or action does this inform?"
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_6a -->
+## Activity: Link your results to actions
+
+![hands-on h:40](../resources/icons/hands_on.svg) **For your top 3 findings, complete this table:**
+
+| Finding | Who needs to know? | What decision/action? | By when? |
+|---------|-------------------|----------------------|----------|
+| 1. | | | |
+| 2. | | | |
+| 3. | | | |
+
+**Guidance:**
+- Be specific about the decision-maker (not "the ministry" but "Director of PHC")
+- Be specific about the action (not "improve" but "conduct supportive supervision in X district")
+- Set a realistic timeline
+
+*Present your action-linked findings to a peer country for feedback.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_7 -->
+## Building a roadmap for sustained use
+
+Move from one-off analysis to **routine data use**.
+
+**Key components of a sustainability roadmap:**
+
+| Component | Questions to Answer |
+|-----------|-------------------|
+| **Frequency** | How often will you update and disseminate analyses? (Quarterly?) |
+| **Responsibility** | Who uploads data? Who creates reports? Who presents? |
+| **Platform integration** | Which existing meetings/forums will you use? (RMNCAH-N TWG, PHC reviews?) |
+| **Quality assurance** | Who reviews outputs before dissemination? |
+| **Feedback loop** | How will you track whether data is being used for decisions? |
+
+**Goal:** FASTR becomes part of routine M&E, not a special project.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_7a -->
+## Activity: Country action planning
+
+![hands-on h:40](../resources/icons/hands_on.svg) **Develop your country's FASTR action plan:**
+
+| Action Step | Responsible Person | Timeline | Success Metric |
+|-------------|-------------------|----------|----------------|
+| Complete quarterly analysis | | | |
+| Disseminate to [forum] | | | |
+| Follow up on identified issues | | | |
+| Train additional team members | | | |
+
+**Also consider:**
+- What existing platform/forum will you integrate FASTR into?
+- What's your dissemination plan for the output you created this week?
+- What support do you need from facilitators over the next quarter?
+
+*Share your action plan with another country team for peer review.*
+<!-- /SLIDE -->
 
 ---
 

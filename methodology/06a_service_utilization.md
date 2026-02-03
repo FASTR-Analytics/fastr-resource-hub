@@ -1348,3 +1348,91 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s3 -->
+## Why disruption analysis matters
+
+FASTR is designed to support multiple country-defined policy questions. **Disruption analysis** is one key use case within the broader FASTR work program.
+
+**Countries use disruption analysis to:**
+
+- Monitor service continuity and recovery
+- Identify geographic or service-specific vulnerabilities
+- Inform prioritization, planning, and resource allocation
+- Track whether services stabilize or catch up after shocks
+
+**Entry points vary by country:**
+
+- Some countries (Sierra Leone, Burkina Faso, Zambia) use disruptions as the primary entry point
+- Others (Nigeria, Somalia) initiated FASTR for different priorities, with disruptions as complementary analysis
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s4 -->
+## National stability can mask subnational differences
+
+**Key insight:** National-level trends may look stable while significant disruptions occur in specific regions.
+
+<div style="display: flex; gap: 1em; font-size: 0.85em;">
+<div style="flex: 1;">
+
+**Burkina Faso example:**
+
+- National outpatient visits appear stable
+- But regional analysis reveals significant variation
+- ANC1 and institutional deliveries show different patterns by region
+- Subnational analysis essential for interpretation
+
+</div>
+<div style="flex: 1;">
+
+**Sierra Leone example:**
+
+- National Penta1 coverage stable
+- But Western Area Urban and Bo District show disruptions
+- Targeted follow-up needed in specific areas
+- FASTR tracks whether services stabilize in subsequent quarters
+
+</div>
+</div>
+
+**Implication:** Always examine subnational data before concluding services are stable.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s5 -->
+## Country example: Nigeria
+
+Nigeria's Federal Ministry of Health has adopted FASTR as a key tool for federal and state-level performance management of the primary health care system.
+
+**Disruption detection in a polycrisis environment:**
+
+- Quantified the impact of a health worker strike in the Federal Capital Territory
+- Pinpointed BCG vaccination declines in seven states
+- Tracked increased severe acute malnutrition admissions during a cholera outbreak in Zamfara state
+
+**Routine monitoring use:**
+
+- Quarterly RMNCAH+N performance monitoring assessments
+- Tracking maternal health service uptake under the Nigeria Health Sector Renewal Initiative
+- Comparing vaccine availability in facilities receiving direct financing vs those not covered
+
+FASTR enables **timely identification** and **quick follow-up** across the country.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s6 -->
+## Key takeaway
+
+> "FASTR will not give you all the answers, but it can tell you **where to look**."
+
+**What FASTR can do:**
+
+- Analyze service use and coverage trends across subnational areas and over time
+- Assess service readiness of PHCs and get timely feedback from facility managers
+- Identify 'red flags' or signals that need prompt follow-up
+
+**This data allows you to:**
+
+- **Guide resources** to programs, services, or districts that are lagging
+- **Make course corrections** when programs aren't achieving intended results
+- **Identify positive deviants** to learn from
+- **Understand root causes** by triangulating with other data sources
+<!-- /SLIDE -->
+
