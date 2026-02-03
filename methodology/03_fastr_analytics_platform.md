@@ -499,19 +499,17 @@ The AI will analyze your data and provide answers with supporting evidence.
 <!-- SLIDE:m3_9c -->
 ## Example prompts: Report generation
 
-Use the AI assistant to create outputs for different audiences:
-
 **Generate reports:**
-> "Create a 1000-word report on disruptions of RMNCAH services"
+> "Create a brief report on RMNCAH service disruptions"
 
 **Create presentations:**
-> "Generate a slide deck with sections on DQA, service utilization, and coverage"
+> "Generate a slide summarizing DQA and coverage findings"
 
 **Interpret visualizations:**
-> "Describe what this chart shows and write 2-3 sentences summarizing the main findings for a Ministry of Health quarterly report"
+> "Describe what this chart shows for a quarterly report"
 
 **Tailor to audience:**
-> "Summarize these findings for a non-technical policy audience"
+> "Summarize these findings for a policy audience"
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d -->
@@ -548,27 +546,15 @@ The AI supports your work — you stay in control of judgement, accountability, 
 
 Responsible automation, focused on the needs of Ministries of Health, and designed for scale.
 
----
-
 ![AI principles diagram](../resources/diagrams/ai_principles.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9f -->
 ## Practice: Using the AI assistant
 
-![hands-on h:40](../resources/icons/hands_on.svg) **Try these prompts with your country's data:**
+![hands-on h:40](../resources/icons/hands_on.svg)
 
-**1. Ask an analysis question:**
-> "What are the main trends in [indicator] over the past year?"
-
-**2. Request interpretation:**
-> "Look at the disruptions chart and identify any periods of concern"
-
-**3. Generate a key message:**
-> "Write 2-3 key messages from this analysis for the RMNCAH-N TWG"
-
-**4. Create a report section:**
-> "Draft a paragraph describing data quality findings for our quarterly report"
+*Content to be drafted*
 
 *Work in pairs. Compare what the AI produces with your own interpretation.*
 <!-- /SLIDE -->
