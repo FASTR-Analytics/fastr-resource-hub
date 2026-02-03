@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
 import api, { Asset, previewAPI } from '../../lib/api'
+import { t } from '../i18n/translations'
 import {
   ChevronRight,
   ChevronDown,
@@ -70,7 +71,7 @@ interface TemplateCategory {
 }
 
 export function ContentLibrary() {
-  const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession } = useWorkshopStore()
+  const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage } = useWorkshopStore()
   const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
@@ -108,11 +109,11 @@ export function ContentLibrary() {
     previewAPI.initMarp().catch(err => console.warn('Marp pre-init failed:', err))
   }, [])
 
-  // Fetch templates on mount
+  // Fetch templates on mount and when language changes
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await fetch('/api/content/templates', { credentials: 'include' })
+        const response = await fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
         if (response.ok) {
           const data = await response.json()
           setTemplates(data)
@@ -122,7 +123,7 @@ export function ContentLibrary() {
       }
     }
     fetchTemplates()
-  }, [])
+  }, [contentLanguage])
 
   // Fetch assets when workshop changes or tab switches to assets
   const loadAssets = useCallback(async () => {
@@ -536,7 +537,7 @@ We resume at **[time]**`
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          Content
+          {t('content', contentLanguage)}
         </button>
         <button
           onClick={() => setActiveTab('assets')}
@@ -547,7 +548,7 @@ We resume at **[time]**`
           }`}
         >
           <Image className="w-4 h-4" />
-          Assets
+          {t('assets', contentLanguage)}
         </button>
         <button
           onClick={handleRebuildContent}
@@ -565,7 +566,7 @@ We resume at **[time]**`
           {!currentWorkshopId ? (
             <div className="text-center text-gray-400 py-8">
               <Image className="w-8 h-8 mx-auto mb-2 opacity-50" />
-              <p className="text-sm">Select a workshop to manage assets</p>
+              <p className="text-sm">{t('selectWorkshopAssets', contentLanguage)}</p>
             </div>
           ) : (
             <>
@@ -583,16 +584,16 @@ We resume at **[time]**`
                 {uploadingAsset ? (
                   <div className="flex items-center justify-center gap-2 text-gray-500">
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span className="text-sm">Uploading...</span>
+                    <span className="text-sm">{t('uploadingAssets', contentLanguage)}</span>
                   </div>
                 ) : (
                   <>
                     <Upload className="w-6 h-6 mx-auto text-gray-400 mb-2" />
                     <p className="text-sm text-gray-600 mb-1">
-                      Drag & drop images here
+                      {t('dragDropImages', contentLanguage)}
                     </p>
                     <label className="text-xs text-fastr-primary hover:underline cursor-pointer">
-                      or click to browse
+                      {t('orClickToBrowse', contentLanguage)}
                       <input
                         type="file"
                         accept="image/*"
@@ -612,7 +613,7 @@ We resume at **[time]**`
                 </div>
               ) : assets.length === 0 ? (
                 <div className="text-center text-gray-400 py-8">
-                  <p className="text-sm">No assets uploaded yet</p>
+                  <p className="text-sm">{t('noAssetsUploaded', contentLanguage)}</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-2">
@@ -695,7 +696,7 @@ We resume at **[time]**`
         {templates.filter(cat => ['breaks', 'activities'].includes(cat.id)).length > 0 && (
           <div className="border-b-2 border-gray-200 bg-amber-50/50">
             <div className="px-3 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
-              Breaks & Structure
+              {t('breaksAndStructure', contentLanguage)}
             </div>
             {templates
               .filter(cat => ['breaks', 'activities'].includes(cat.id))
@@ -765,7 +766,7 @@ We resume at **[time]**`
 
         {/* Modules Section */}
         <div className="px-3 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide border-b border-gray-100">
-          Modules
+          {t('modules', contentLanguage)}
         </div>
         {contentLibrary.map((module) => (
           <div key={module.id} className="border-b border-gray-100">
@@ -785,9 +786,9 @@ We resume at **[time]**`
                     M{module.number}: {module.name}
                   </div>
                   <div className="text-xs text-gray-400 flex items-center gap-2">
-                    <span>{module.topics.length} topics</span>
+                    <span>{module.topics.length} {t('xTopics', contentLanguage)}</span>
                     <span>•</span>
-                    <span>{module.totalSlides} slides</span>
+                    <span>{module.totalSlides} {t('xSlides', contentLanguage)}</span>
                     <span>•</span>
                     <span>{getModuleDuration(module)}</span>
                   </div>
@@ -833,7 +834,7 @@ We resume at **[time]**`
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
                             <Layers className="w-3 h-3" />
-                            <span>{topic.slideCount} slides</span>
+                            <span>{topic.slideCount} {t('xSlides', contentLanguage)}</span>
                           </div>
                         </div>
                         <button
@@ -874,7 +875,7 @@ We resume at **[time]**`
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
                             <Layers className="w-3 h-3" />
-                            <span>{topic.slideCount} slides</span>
+                            <span>{topic.slideCount} {t('xSlides', contentLanguage)}</span>
                           </div>
                         </div>
                         <button
@@ -903,7 +904,7 @@ We resume at **[time]**`
                       </div>
                       <div className="text-xs text-gray-400 flex items-center gap-1">
                         <Layers className="w-3 h-3" />
-                        <span>{topic.slideCount} slides</span>
+                        <span>{topic.slideCount} {t('xSlides', contentLanguage)}</span>
                       </div>
                     </div>
                     <button
@@ -940,7 +941,7 @@ We resume at **[time]**`
           <div className="text-xs text-gray-500 mb-2 flex items-center gap-3">
             <span className="flex items-center gap-1">
               <Layers className="w-3 h-3" />
-              {preview.topic.slideCount} slides
+              {preview.topic.slideCount} {t('xSlides', contentLanguage)}
             </span>
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3" />

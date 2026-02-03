@@ -2747,7 +2747,7 @@ function App() {
               ) : (
                 <Download className="w-4 h-4" />
               )}
-              <span className="text-sm font-medium">Export</span>
+              <span className="text-sm font-medium">{t('export', contentLanguage)}</span>
               <ChevronDown className="w-4 h-4" />
             </button>
 
@@ -2972,12 +2972,12 @@ function App() {
             <div className="h-full flex items-center justify-center text-gray-500">
               <div className="text-center">
                 <Layers className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p className="text-lg">Select or create a workshop to get started</p>
+                <p className="text-lg">{t('selectOrCreateWorkshop', contentLanguage)}</p>
                 <button
                   onClick={() => setShowWorkshopSelector(true)}
                   className="mt-4 px-4 py-2 bg-fastr-primary text-white rounded-md hover:bg-fastr-primary/90 transition-colors"
                 >
-                  Choose Workshop
+                  {t('chooseWorkshop', contentLanguage)}
                 </button>
               </div>
             </div>
@@ -3011,7 +3011,7 @@ function App() {
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
             <div className="flex items-center justify-between px-4 py-3 border-b">
               <h2 className="font-semibold">
-                {showCreateWorkshop ? 'Create New Workshop' : 'Select Workshop'}
+                {showCreateWorkshop ? t('createNewWorkshop', contentLanguage) : t('selectWorkshop', contentLanguage)}
               </h2>
               <button
                 onClick={() => {
@@ -3037,7 +3037,7 @@ function App() {
                     }`}
                   >
                     <Sparkles className="w-4 h-4" />
-                    AI Setup
+                    {t('aiSetup', contentLanguage)}
                   </button>
                   <button
                     onClick={() => setCreateMode('manual')}
@@ -3047,21 +3047,21 @@ function App() {
                         : 'text-gray-600 hover:text-gray-800'
                     }`}
                   >
-                    Manual
+                    {t('manual', contentLanguage)}
                   </button>
                 </div>
 
                 {createMode === 'ai' ? (
                   <div className="space-y-4">
                     <p className="text-sm text-gray-600">
-                      Describe your workshop and AI will set it up for you.
+                      {t('describeWorkshop', contentLanguage)}
                     </p>
                     <textarea
                       value={aiPrompt}
                       onChange={(e) => setAiPrompt(e.target.value)}
                       rows={4}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Example: First FASTR workshop in Kenya, 3 days. Focus on data quality and coverage estimation. Use high-level introductory content (shorter versions where available). This is a refresher for teams who attended last year's training."
+                      placeholder={t('aiPlaceholder', contentLanguage)}
                       disabled={aiGenerating}
                     />
                     <div className="flex gap-2">
@@ -3073,7 +3073,7 @@ function App() {
                         className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                         disabled={aiGenerating}
                       >
-                        Back
+                        {t('back', contentLanguage)}
                       </button>
                       <button
                         onClick={handleAIGenerate}
@@ -3083,12 +3083,12 @@ function App() {
                         {aiGenerating ? (
                           <>
                             <RefreshCw className="w-4 h-4 animate-spin" />
-                            Generating...
+                            {t('generating', contentLanguage)}
                           </>
                         ) : (
                           <>
                             <Sparkles className="w-4 h-4" />
-                            Generate Workshop
+                            {t('generateWorkshop', contentLanguage)}
                           </>
                         )}
                       </button>
@@ -3098,44 +3098,44 @@ function App() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Workshop Name *
+                        {t('workshopName', contentLanguage)} *
                       </label>
                       <input
                         type="text"
                         value={newWorkshop.name}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, name: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                        placeholder="e.g., FASTR Training Workshop"
+                        placeholder={contentLanguage === 'fr' ? 'ex. Atelier de formation FASTR' : 'e.g., FASTR Training Workshop'}
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Country *
+                        {t('country', contentLanguage)} *
                       </label>
                       <input
                         type="text"
                         value={newWorkshop.country}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, country: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                        placeholder="e.g., Kenya"
+                        placeholder={contentLanguage === 'fr' ? 'ex. Sénégal' : 'e.g., Kenya'}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">{t('city', contentLanguage)}</label>
                       <input
                         type="text"
                         value={newWorkshop.location}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                        placeholder="e.g., Nairobi"
+                        placeholder={contentLanguage === 'fr' ? 'ex. Dakar' : 'e.g., Nairobi'}
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Number of Days
+                        {t('numberOfDays', contentLanguage)}
                       </label>
                       <select
                         value={newWorkshop.days}
@@ -3146,7 +3146,7 @@ function App() {
                       >
                         {[1, 2, 3, 4, 5].map((d) => (
                           <option key={d} value={d}>
-                            {d} day{d > 1 ? 's' : ''}
+                            {d} {contentLanguage === 'fr' ? (d > 1 ? 'jours' : 'jour') : (d > 1 ? 'days' : 'day')}
                           </option>
                         ))}
                       </select>
@@ -3157,13 +3157,13 @@ function App() {
                         onClick={() => setShowCreateWorkshop(false)}
                         className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                       >
-                        Back
+                        {t('back', contentLanguage)}
                       </button>
                       <button
                         onClick={handleCreateWorkshop}
                         className="flex-1 px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors"
                       >
-                        Create Workshop
+                        {t('create', contentLanguage)}
                       </button>
                     </div>
                   </div>
@@ -3177,7 +3177,7 @@ function App() {
                   className="w-full mb-4 py-3 px-4 rounded-lg border-2 border-dashed border-fastr-primary text-fastr-primary hover:bg-fastr-primary/5 transition-colors flex items-center justify-center gap-2"
                 >
                   <Plus className="w-5 h-5" />
-                  <span className="font-medium">Create New Workshop</span>
+                  <span className="font-medium">{t('createNewWorkshop', contentLanguage)}</span>
                 </button>
 
                 {/* Existing workshops */}
@@ -3266,7 +3266,7 @@ function App() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-800">Workshop Settings</h2>
+              <h2 className="text-lg font-semibold text-gray-800">{t('workshopSettings', contentLanguage)}</h2>
               <button
                 onClick={() => setShowSettings(false)}
                 className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
@@ -3279,33 +3279,33 @@ function App() {
               {/* Cover Slide Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Cover Slide
+                  {t('coverSlide', contentLanguage)}
                 </h3>
                 <div className="space-y-4 bg-gray-50 rounded-lg p-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Presentation Title
+                      {t('presentationTitle', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.title || currentConfig.workshop.name || ''}
                       onChange={(e) => updateWorkshopSettings({ title: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Main title on cover slide"
+                      placeholder={contentLanguage === 'fr' ? 'Titre principal de la couverture' : 'Main title on cover slide'}
                     />
-                    <p className="text-xs text-gray-500 mt-1">The main title displayed on the cover slide</p>
+                    <p className="text-xs text-gray-500 mt-1">{contentLanguage === 'fr' ? 'Le titre principal affiché sur la diapositive de couverture' : 'The main title displayed on the cover slide'}</p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Subtitle
+                      {t('subtitle', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.subtitle || ''}
                       onChange={(e) => updateWorkshopSettings({ subtitle: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="Subtitle on cover slide"
+                      placeholder={contentLanguage === 'fr' ? 'Sous-titre de la couverture' : 'Subtitle on cover slide'}
                     />
                   </div>
                 </div>
@@ -3314,25 +3314,25 @@ function App() {
               {/* Basic Info Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Workshop Details
+                  {t('workshopDetails', contentLanguage)}
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Workshop Name
+                      {t('workshopName', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.name || ''}
                       onChange={(e) => updateWorkshopSettings({ name: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., FASTR Workshop - Kenya"
+                      placeholder={contentLanguage === 'fr' ? 'ex. Atelier FASTR - Sénégal' : 'e.g., FASTR Workshop - Kenya'}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Start Date
+                      {t('startDate', contentLanguage)}
                     </label>
                     <input
                       type="date"
@@ -3344,7 +3344,7 @@ function App() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      End Date
+                      {t('endDate', contentLanguage)}
                     </label>
                     <input
                       type="date"
@@ -3356,53 +3356,53 @@ function App() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Country
+                      {t('country', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.country || ''}
                       onChange={(e) => updateWorkshopSettings({ country: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., Kenya"
+                      placeholder={contentLanguage === 'fr' ? 'ex. Sénégal' : 'e.g., Kenya'}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Location / City
+                      {t('location', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.location || ''}
                       onChange={(e) => updateWorkshopSettings({ location: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., Nairobi"
+                      placeholder={contentLanguage === 'fr' ? 'ex. Dakar' : 'e.g., Nairobi'}
                     />
                   </div>
 
                   <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Venue
+                      {t('venue', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.venue || ''}
                       onChange={(e) => updateWorkshopSettings({ venue: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., Sarova Stanley Hotel"
+                      placeholder={contentLanguage === 'fr' ? 'ex. Hôtel Terrou-Bi' : 'e.g., Sarova Stanley Hotel'}
                     />
                   </div>
 
                   <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Facilitators
+                      {t('facilitators', contentLanguage)}
                     </label>
                     <input
                       type="text"
                       value={currentConfig.workshop.facilitators || ''}
                       onChange={(e) => updateWorkshopSettings({ facilitators: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., John Smith, Jane Doe"
+                      placeholder={contentLanguage === 'fr' ? 'ex. Jean Dupont, Marie Martin' : 'e.g., John Smith, Jane Doe'}
                     />
                   </div>
                 </div>
@@ -3411,32 +3411,32 @@ function App() {
               {/* Contact Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Contact Information
+                  {t('contactInformation', contentLanguage)}
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Contact Email
+                      {t('contactEmail', contentLanguage)}
                     </label>
                     <input
                       type="email"
                       value={currentConfig.workshop.contact_email || ''}
                       onChange={(e) => updateWorkshopSettings({ contact_email: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., workshop@example.org"
+                      placeholder="ex. workshop@example.org"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Website
+                      {t('website', contentLanguage)}
                     </label>
                     <input
                       type="url"
                       value={currentConfig.workshop.website || ''}
                       onChange={(e) => updateWorkshopSettings({ website: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="e.g., https://fastr.org"
+                      placeholder="ex. https://fastr.org"
                     />
                   </div>
                 </div>
@@ -3445,40 +3445,40 @@ function App() {
               {/* Content Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Slide Content
+                  {t('slideContent', contentLanguage)}
                 </h3>
                 <p className="text-xs text-gray-500 mb-3">
-                  This content appears on the locked opening slides. Edit here to update what's shown.
+                  {t('slideContentDesc', contentLanguage)}
                 </p>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Workshop Objectives
-                      <span className="ml-2 text-xs font-normal text-gray-400">→ Objectives slide</span>
+                      {t('workshopObjectives', contentLanguage)}
+                      <span className="ml-2 text-xs font-normal text-gray-400">→ {t('objectivesSlide', contentLanguage)}</span>
                     </label>
                     <textarea
                       value={currentConfig.workshop.objectives || ''}
                       onChange={(e) => updateWorkshopSettings({ objectives: e.target.value })}
                       rows={4}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="- Understand FASTR methodology&#10;- Learn data extraction techniques&#10;- Develop data analysis skills"
+                      placeholder={contentLanguage === 'fr' ? '- Comprendre la méthodologie FASTR\n- Apprendre les techniques d\'extraction de données\n- Développer des compétences analytiques' : '- Understand FASTR methodology\n- Learn data extraction techniques\n- Develop data analysis skills'}
                     />
-                    <p className="text-xs text-gray-500 mt-1">One objective per line (start with - for bullets)</p>
+                    <p className="text-xs text-gray-500 mt-1">{contentLanguage === 'fr' ? 'Un objectif par ligne (commencer par - pour les puces)' : 'One objective per line (start with - for bullets)'}</p>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Expected Outputs
-                      <span className="ml-2 text-xs font-normal text-gray-400">→ Expected Outputs slide</span>
+                      {t('expectedOutputs', contentLanguage)}
+                      <span className="ml-2 text-xs font-normal text-gray-400">→ {t('expectedOutputsSlide', contentLanguage)}</span>
                     </label>
                     <textarea
                       value={currentConfig.workshop.expected_outputs || ''}
                       onChange={(e) => updateWorkshopSettings({ expected_outputs: e.target.value })}
                       rows={4}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="**Analysis Activities**&#10;- Data extraction completed&#10;- First quarterly report produced&#10;&#10;**Capacity Building**&#10;- Trained team members"
+                      placeholder={contentLanguage === 'fr' ? '**Activités d\'analyse**\n- Extraction de données terminée\n- Premier rapport trimestriel produit\n\n**Renforcement des capacités**\n- Membres de l\'équipe formés' : '**Analysis Activities**\n- Data extraction completed\n- First quarterly report produced\n\n**Capacity Building**\n- Trained team members'}
                     />
-                    <p className="text-xs text-gray-500 mt-1">Use **bold** for section headers, - for bullets</p>
+                    <p className="text-xs text-gray-500 mt-1">{contentLanguage === 'fr' ? 'Utilisez **gras** pour les en-têtes de section, - pour les puces' : 'Use **bold** for section headers, - for bullets'}</p>
                   </div>
                 </div>
               </section>
@@ -3486,17 +3486,17 @@ function App() {
               {/* Schedule Section */}
               <section>
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  Daily Schedule
+                  {t('dailySchedule', contentLanguage)}
                 </h3>
                 <p className="text-xs text-gray-500 mb-3">
-                  Set the theme and start time for each day. These appear in agenda slides and day headers.
+                  {t('dailyScheduleDesc', contentLanguage)}
                 </p>
 
                 {/* Column headers */}
                 <div className="flex items-center gap-4 px-3 mb-2">
-                  <span className="text-xs font-medium text-gray-500 w-16">Day</span>
-                  <span className="flex-1 text-xs font-medium text-gray-500">Theme / Focus Area</span>
-                  <span className="w-24 text-xs font-medium text-gray-500">Starts at</span>
+                  <span className="text-xs font-medium text-gray-500 w-16">{t('day', contentLanguage)}</span>
+                  <span className="flex-1 text-xs font-medium text-gray-500">{t('themeFocusArea', contentLanguage)}</span>
+                  <span className="w-24 text-xs font-medium text-gray-500">{t('startsAt', contentLanguage)}</span>
                 </div>
 
                 <div className="space-y-2">
@@ -3504,7 +3504,7 @@ function App() {
                     const dayNum = i + 1
                     return (
                       <div key={dayNum} className="flex items-center gap-4 bg-gray-50 rounded-lg p-3">
-                        <span className="text-sm font-semibold text-fastr-primary w-16">Day {dayNum}</span>
+                        <span className="text-sm font-semibold text-fastr-primary w-16">{t('day', contentLanguage)} {dayNum}</span>
                         <div className="flex-1">
                           <input
                             type="text"
@@ -3522,7 +3522,9 @@ function App() {
                               useWorkshopStore.getState().saveCurrentWorkshop()
                             }}
                             className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
-                            placeholder={`e.g., ${dayNum === 1 ? 'Introduction & Data Extraction' : dayNum === 2 ? 'Data Quality Assessment' : 'Analysis & Communication'}`}
+                            placeholder={contentLanguage === 'fr'
+                              ? `ex. ${dayNum === 1 ? 'Introduction & Extraction des données' : dayNum === 2 ? 'Évaluation de la qualité des données' : 'Analyse & Communication'}`
+                              : `e.g., ${dayNum === 1 ? 'Introduction & Data Extraction' : dayNum === 2 ? 'Data Quality Assessment' : 'Analysis & Communication'}`}
                           />
                         </div>
                         <div className="w-32">
@@ -3554,13 +3556,13 @@ function App() {
             <div className="px-6 py-4 border-t bg-gray-50 rounded-b-xl">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">
-                  Changes are saved automatically
+                  {t('changesSavedAutomatically', contentLanguage)}
                 </span>
                 <button
                   onClick={() => setShowSettings(false)}
                   className="px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors text-sm font-medium"
                 >
-                  Done
+                  {t('done', contentLanguage)}
                 </button>
               </div>
             </div>
