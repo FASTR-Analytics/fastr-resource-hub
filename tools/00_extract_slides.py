@@ -133,7 +133,8 @@ TOPIC_NAMES = {
     'm4_s2': 'dqa_rationale_objectives',
     'm4_s3': 'dqa_completeness',
     'm4_s3b': 'dqa_outliers',
-    'm4_s4': 'dqa_score_summary',
+    'm4_s4': 'dqa_internal_consistency',
+    'm4_s5': 'dqa_score_summary',
 
     # m5 - Data Quality Adjustment (from 05_data_quality_adjustment.md)
     'm5_1': 'approach_to_dq_adjustment',

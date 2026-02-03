@@ -1816,11 +1816,11 @@ A composite measure of data quality provides an overall view of how well a datas
 
 By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
 
-> **Definition of adequate data quality:** For the FASTR analysis, we defined adequate data quality as:
->
-> - No missing indicator data for OPD, Penta1, and ANC1, where available, **AND**
-> - No outliers for OPD, Penta1, and ANC1, where available, **AND**
-> - Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+**Definition of adequate data quality:**
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available
+- No outliers for OPD, Penta1, and ANC1, where available
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
 
 <!-- /SLIDE -->
 
@@ -1961,6 +1961,21 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 **How outliers are identified:** For each facility and indicator, we assess within-facility variation in monthly reporting. A value is flagged if it deviates significantly from the facility's typical pattern (using statistical thresholds based on median absolute deviation).
 
+<!--
+PRESENTER NOTES:
+- The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series
+- Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems
+- For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis)
+- Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator
+- An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+- AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
+- For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
+- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
+- This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
+- Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
+- We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
+-->
+
 ---
 
 ## Outlier detection output
@@ -1984,10 +1999,17 @@ Outliers are values that are suspiciously **high** compared to a facility's usua
 
 <!--
 PRESENTER NOTES:
-- Only HIGH values are flagged - low values may be real service disruptions
-- High outlier rates warrant investigation: data entry errors or real events?
-- Campaigns can cause legitimate spikes - context matters
-- The heatmap shows which indicators/regions have most outliers
+- The presence of outliers examines whether a data point in a series of values is extreme (either abnormally high or low) in relation to others in the series
+- Outliers can be the result of changes in programmatic activities (such as an intensified campaign) or can be data quality problems
+- For the FASTR analysis, we identify outliers which are suspiciously high values compared to the usual volume of services reported by the facility (e.g., low values are not identified as outliers in the FASTR analysis)
+- Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator
+- An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+- AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
+- For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
+- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
+- This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
+- Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
+- We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
 -->
 <!-- /SLIDE -->
 
@@ -2033,17 +2055,32 @@ FASTR assesses consistency at the **district level** rather than facility level.
 </div>
 </div>
 
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s5 -->
+## Data quality summary score
+
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
+
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
+
+**Definition of adequate data quality:**
+
+- No missing indicator data for OPD, Penta1, and ANC1, where available
+- No outliers for OPD, Penta1, and ANC1, where available
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+
+<!--
+PRESENTER NOTES:
+- DQA score combines all dimensions into one summary score
+- 100% = complete + no outliers + consistent - the goal for quality data
+- Use the heatmap to identify priority areas for data quality improvement
+- This completes the DQA module - next we'll look at how to adjust for these issues
+-->
+
 ---
 
-## DQA mean: combining all quality dimensions
-
-The mean DQA score shows how close a facility's data is to meeting all quality criteria. A score of 100% means the data passes all DQA checks - no missing values, no outliers, and consistent reporting.
-
-**Average DQA score across facilities** = (number of monthly values that are complete, not outliers, and consistent) ÷ (total number of monthly values)
-
----
-
-## DQA mean output
+## Overall data quality score output
 
 <div style="display: flex; gap: 1em; align-items: flex-start;">
 <div style="flex: 1.2;">
@@ -2053,19 +2090,39 @@ The mean DQA score shows how close a facility's data is to meeting all quality c
 </div>
 <div style="flex: 1; font-size: 0.85em;">
 
-**What you see:** Heatmap showing DQA mean by indicator and region, color-coded from red (poor) to green (good).
+**What you see:** Heatmap showing overall DQA score by indicator and region, color-coded from red (poor) to green (good).
 
-**Formula:** (values that are complete, not outliers, and consistent) ÷ (total values)
+**Formula:** DQA % = (values that are complete, not outliers, and consistent) / (total values) × 100
 
-**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts.
+**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts by region and indicator.
+
+</div>
+</div>
+
+---
+
+## Mean DQA score output
+
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
+
+![Mean DQA score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap showing mean DQA score across facilities by indicator and region.
+
+**Formula:** Mean DQA = (values that are complete, not outliers, and consistent) / (total values) × 100
+
+**Interpretation:** Shows how close facilities are to meeting all quality criteria. A score of 100% means the data passes all DQA checks.
 
 </div>
 </div>
 
 <!--
 PRESENTER NOTES:
-- Consistency is assessed at district level to account for patient movement
-- DQA mean combines all dimensions into one summary score
+- DQA score combines all dimensions into one summary score
 - 100% = complete + no outliers + consistent - the goal for quality data
 - Use the heatmap to identify priority areas for data quality improvement
 - This completes the DQA module - next we'll look at how to adjust for these issues

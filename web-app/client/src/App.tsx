@@ -1758,7 +1758,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
           <div className="p-4 border-t border-gray-100 space-y-2">
             <button
               onClick={() => exportSelection('pptx')}
-              disabled={selectedSlides.length === 0 || isExporting}
+              disabled={(selectedSlides.length === 0 && selectedTemplates.length === 0) || isExporting}
               className="w-full px-4 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
             >
               {isExporting && exportFormat === 'pptx' ? (
@@ -1775,7 +1775,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
             </button>
             <button
               onClick={() => exportSelection('pdf')}
-              disabled={selectedSlides.length === 0 || isExporting}
+              disabled={(selectedSlides.length === 0 && selectedTemplates.length === 0) || isExporting}
               className="w-full px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
             >
               {isExporting && exportFormat === 'pdf' ? (

@@ -36,8 +36,9 @@ const COLORS = {
 
 const FONTS = {
   family: 'Calibri',
-  h1Size: 32,
-  h2Size: 26,
+  titleFamily: 'Poppins',  // Titles use Poppins Bold
+  h1Size: 36,              // Updated to 36
+  h2Size: 36,              // Updated to 36 for slide titles
   h3Size: 22,
   bodySize: 18,
   tableSize: 14,
@@ -477,8 +478,12 @@ function parseInlineFormatting(text: string, baseOptions: any): PptxGenJS.TextPr
     if (seg.start > lastIndex) {
       const plainText = text.slice(lastIndex, seg.start)
       if (plainText.trim()) {
+        // Preserve leading/trailing spaces for inline runs
+        const cleaned = cleanMarkdownText(plainText)
+        const hasLeadingSpace = plainText.startsWith(' ')
+        const hasTrailingSpace = plainText.endsWith(' ')
         runs.push({
-          text: cleanMarkdownText(plainText),
+          text: (hasLeadingSpace ? ' ' : '') + cleaned + (hasTrailingSpace ? ' ' : ''),
           options: { ...baseOptions },
         })
       }
@@ -501,8 +506,11 @@ function parseInlineFormatting(text: string, baseOptions: any): PptxGenJS.TextPr
   if (lastIndex < text.length) {
     const afterText = text.slice(lastIndex)
     if (afterText.trim()) {
+      // Preserve leading space for text after formatted segments
+      const cleaned = cleanMarkdownText(afterText)
+      const hasLeadingSpace = afterText.startsWith(' ')
       runs.push({
-        text: cleanMarkdownText(afterText),
+        text: (hasLeadingSpace ? ' ' : '') + cleaned,
         options: { ...baseOptions },
       })
     }
@@ -599,16 +607,16 @@ function getImageLayout(
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
   // Vertical accent line on the left of title
   slide.addShape('rect', {
-    x: 0.5, y: 0.35, w: 0.06, h: 0.70,
+    x: 0.5, y: 0.35, w: 0.06, h: 0.85,
     fill: { color: COLORS.green },
     line: { color: COLORS.green },
   })
 
-  // Title in FASTR dark green, with left padding for the line
+  // Title in FASTR dark green, Poppins Bold
   slide.addText(cleanMarkdownText(title), {
-    x: 0.7, y: 0.35, w: 12.13, h: 0.7,
+    x: 0.7, y: 0.35, w: 12.13, h: 0.85,
     fontSize: FONTS.h2Size,
-    fontFace: FONTS.family,
+    fontFace: FONTS.titleFamily,
     color: COLORS.darkGreen,
     bold: true,
   })
@@ -641,11 +649,11 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const titleColor = hasBgImage ? COLORS.white : COLORS.white
   const titleTop = hasBgImage ? 2.8 : 2.2
 
-  // Main title
+  // Main title - Poppins Bold
   slide.addText(cleanMarkdownText(title), {
     x: 0.8, y: titleTop, w: 11.733, h: 1.4,
-    fontSize: hasBgImage ? 24 : 28,
-    fontFace: FONTS.family,
+    fontSize: hasBgImage ? 32 : FONTS.h1Size,
+    fontFace: FONTS.titleFamily,
     color: titleColor,
     bold: true,
     align: 'center',
@@ -728,7 +736,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.addText(cleanMarkdownText(title), {
     x: 1, y: titleY, w: 11.333, h: 1.5,
     fontSize: 44,
-    fontFace: FONTS.family,
+    fontFace: FONTS.titleFamily,
     color: COLORS.white,
     bold: true,
     align: 'center',
@@ -764,7 +772,7 @@ function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.addText(cleanMarkdownText(title), {
     x: 1, y: 2.8, w: 11.333, h: 1.5,
     fontSize: 56,
-    fontFace: FONTS.family,
+    fontFace: FONTS.titleFamily,
     color: COLORS.white,
     bold: true,
     align: 'center',
@@ -855,6 +863,63 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const title = data.headers[0]?.text || 'Table'
   addHeaderBar(slide, title)
 
+  let tableTop = 1.5
+
+  // Check if there's paragraph content before the table - render it first
+  const hasTextContent = data.content.length > 0
+  if (hasTextContent) {
+    const textItems: PptxGenJS.TextProps[] = []
+    for (const item of data.content) {
+      if (item.type === 'header' && item.level) {
+        textItems.push({
+          text: cleanMarkdownText(item.text),
+          options: {
+            fontSize: FONTS.h3Size,
+            fontFace: FONTS.family,
+            color: COLORS.orchid,
+            bold: true,
+            breakLine: true,
+            paraSpaceAfter: 6,
+          },
+        })
+      } else if (item.type === 'bullet') {
+        textItems.push({
+          text: cleanMarkdownText(item.text),
+          options: {
+            fontSize: FONTS.bodySize - 2,
+            fontFace: FONTS.family,
+            color: COLORS.textDark,
+            bullet: true,
+            breakLine: true,
+            paraSpaceAfter: 4,
+          },
+        })
+      } else if (item.type === 'paragraph') {
+        const baseOptions = {
+          fontSize: FONTS.bodySize - 2,
+          fontFace: FONTS.family,
+          color: COLORS.darkGray,
+          paraSpaceAfter: 6,
+        }
+        const runs = parseInlineFormatting(item.text, baseOptions)
+        textItems.push(...runs)
+      }
+    }
+
+    if (textItems.length > 0) {
+      // Estimate text height - roughly 0.3 inches per line
+      const estimatedTextHeight = Math.min(2, textItems.length * 0.25)
+      slide.addText(textItems, {
+        x: LAYOUT.contentLeft,
+        y: 1.5,
+        w: LAYOUT.contentWidth,
+        h: estimatedTextHeight,
+        valign: 'top',
+      })
+      tableTop = 1.5 + estimatedTextHeight + 0.2
+    }
+  }
+
   if (data.table && data.table.length > 0) {
     const rows = data.table.length
     const cols = data.table[0].length
@@ -877,7 +942,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
     slide.addTable(tableData, {
       x: LAYOUT.contentLeft,
-      y: 1.5,
+      y: tableTop,
       w: 12.3,
       rowH: rowHeight,
       border: { pt: 0.5, color: 'CCCCCC' },
@@ -900,22 +965,122 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
   const contentTop = 1.6
 
-  // Parse column content into bullets
-  function parseColumnBullets(content: string): string[] {
-    const bullets: string[] = []
+  // Parse column content into text items (bullets, paragraphs, headers)
+  interface ColumnContent {
+    type: 'bullet' | 'paragraph' | 'header'
+    text: string
+    level?: number
+  }
+  function parseColumnContent(content: string): ColumnContent[] {
+    const items: ColumnContent[] = []
     const lines = content.split('\n')
     for (const line of lines) {
-      const match = line.trim().match(/^[-*]\s+(.+)$/)
-      if (match) {
-        bullets.push(cleanMarkdownText(match[1]))
+      const trimmed = line.trim()
+      if (!trimmed) continue
+
+      // Skip HTML tags like <div>, </div>, <br/> etc
+      if (/^<\/?[\w]+[^>]*>$/.test(trimmed)) continue
+      if (trimmed === '<br/>' || trimmed === '<br>') continue
+
+      // Skip images
+      if (trimmed.startsWith('![')) continue
+      if (trimmed.startsWith('<img')) continue
+
+      // Check for headers (### Header)
+      const headerMatch = trimmed.match(/^(#{1,6})\s+(.+)$/)
+      if (headerMatch) {
+        items.push({ type: 'header', text: cleanMarkdownText(headerMatch[2]), level: headerMatch[1].length })
+        continue
       }
+
+      // Check for bold-only line (acts as sub-header)
+      const boldMatch = trimmed.match(/^\*\*(.+)\*\*$/)
+      if (boldMatch) {
+        items.push({ type: 'header', text: cleanMarkdownText(boldMatch[1]), level: 4 })
+        continue
+      }
+
+      // Check for bullets
+      const bulletMatch = trimmed.match(/^[-*•◦▪►▸‣⁃]\s+(.+)$/)
+      if (bulletMatch) {
+        items.push({ type: 'bullet', text: cleanMarkdownText(bulletMatch[1]) })
+        continue
+      }
+
+      // Check for numbered list
+      const numMatch = trimmed.match(/^\d+\.\s+(.+)$/)
+      if (numMatch) {
+        items.push({ type: 'bullet', text: cleanMarkdownText(numMatch[1]) })
+        continue
+      }
+
+      // Plain paragraph text
+      items.push({ type: 'paragraph', text: cleanMarkdownText(trimmed) })
     }
-    return bullets
+    return items
+  }
+
+  // Legacy function for backward compatibility
+  function parseColumnBullets(content: string): string[] {
+    return parseColumnContent(content)
+      .filter(item => item.type === 'bullet')
+      .map(item => item.text)
   }
 
   // Check for images
   const leftHasImage = /!\[/.test(data.columns.left) || /<img/.test(data.columns.left)
   const rightHasImage = /!\[/.test(data.columns.right) || /<img/.test(data.columns.right)
+
+  // Helper to render column content (bullets, paragraphs, headers)
+  function renderColumnContent(columnContent: string, x: number, y: number, w: number): void {
+    const items = parseColumnContent(columnContent)
+    if (items.length === 0) return
+
+    const textItems: PptxGenJS.TextProps[] = []
+    for (const item of items) {
+      if (item.type === 'header') {
+        textItems.push({
+          text: item.text,
+          options: {
+            fontSize: item.level === 4 ? FONTS.bodySize : FONTS.h3Size,
+            fontFace: FONTS.family,
+            color: item.level === 4 ? COLORS.darkGreen : COLORS.orchid,
+            bold: true,
+            breakLine: true,
+            paraSpaceAfter: 8,
+          },
+        })
+      } else if (item.type === 'bullet') {
+        textItems.push({
+          text: item.text,
+          options: {
+            fontSize: FONTS.bodySize,
+            fontFace: FONTS.family,
+            color: COLORS.textDark,
+            bullet: true,
+            breakLine: true,
+            paraSpaceAfter: 6,
+          },
+        })
+      } else if (item.type === 'paragraph') {
+        const baseOptions = {
+          fontSize: FONTS.bodySize,
+          fontFace: FONTS.family,
+          color: COLORS.textDark,
+          paraSpaceAfter: 10,
+        }
+        const runs = parseInlineFormatting(item.text, baseOptions)
+        textItems.push(...runs)
+      }
+    }
+
+    if (textItems.length > 0) {
+      slide.addText(textItems, {
+        x, y, w, h: 5,
+        valign: 'top',
+      })
+    }
+  }
 
   // Left column
   if (leftHasImage) {
@@ -932,16 +1097,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       }
     }
   } else {
-    const bullets = parseColumnBullets(data.columns.left)
-    if (bullets.length > 0) {
-      slide.addText(bullets.map(b => ({ text: b, options: { bullet: true } })), {
-        x: LAYOUT.marginLeft, y: contentTop, w: 5.5, h: 5,
-        fontSize: FONTS.bodySize,
-        fontFace: FONTS.family,
-        color: COLORS.textDark,
-        valign: 'top',
-      })
-    }
+    renderColumnContent(data.columns.left, LAYOUT.marginLeft, contentTop, 5.5)
   }
 
   // Right column
@@ -959,16 +1115,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       }
     }
   } else {
-    const bullets = parseColumnBullets(data.columns.right)
-    if (bullets.length > 0) {
-      slide.addText(bullets.map(b => ({ text: b, options: { bullet: true } })), {
-        x: 7, y: contentTop, w: 5.5, h: 5,
-        fontSize: FONTS.bodySize,
-        fontFace: FONTS.family,
-        color: COLORS.textDark,
-        valign: 'top',
-      })
-    }
+    renderColumnContent(data.columns.right, 7, contentTop, 5.5)
   }
 
   addFooterBar(slide)
