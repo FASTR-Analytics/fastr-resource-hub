@@ -77,6 +77,15 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../../..')
   : path.resolve(__dirname, '../../..')
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
+const TEMPLATES_FR_PATH = path.join(REPO_ROOT, 'templates_fr')
+
+// Get templates path for a specific language
+function getTemplatesPath(language: Language = 'en'): string {
+  if (language === 'fr' && fs.existsSync(TEMPLATES_FR_PATH)) {
+    return TEMPLATES_FR_PATH
+  }
+  return TEMPLATES_PATH
+}
 
 // Supported languages
 type Language = 'en' | 'fr'
@@ -90,18 +99,32 @@ function getCoreContentPath(language: Language = 'en'): string {
 // Default English path for backward compatibility
 const CORE_CONTENT_PATH = getCoreContentPath('en')
 
-// Module names
-const MODULE_NAMES: Record<number, string> = {
-  0: 'Introduction to FASTR',
-  1: 'Identify Questions & Indicators',
-  2: 'Data Extraction',
-  3: 'FASTR Analytics Platform',
-  4: 'Data Quality Assessment',
-  5: 'Data Quality Adjustment',
-  6: 'Data Analysis',
-  7: 'Results Communication',
-  8: 'Survey & HFA',
-  9: 'Workshop Activities',
+// Module names by language
+const MODULE_NAMES: Record<Language, Record<number, string>> = {
+  en: {
+    0: 'Introduction to FASTR',
+    1: 'Identify Questions & Indicators',
+    2: 'Data Extraction',
+    3: 'FASTR Analytics Platform',
+    4: 'Data Quality Assessment',
+    5: 'Data Quality Adjustment',
+    6: 'Data Analysis',
+    7: 'Results Communication',
+    8: 'Survey & HFA',
+    9: 'Workshop Activities',
+  },
+  fr: {
+    0: 'Introduction à FASTR',
+    1: 'Identifier les questions et indicateurs',
+    2: 'Extraction des données',
+    3: 'Plateforme analytique FASTR',
+    4: 'Évaluation de la qualité des données',
+    5: 'Ajustement de la qualité des données',
+    6: 'Analyse des données',
+    7: 'Communication des résultats',
+    8: 'Enquêtes et EFS',
+    9: 'Activités de l\'atelier',
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -214,7 +237,7 @@ router.get('/modules', (req, res) => {
         modules.push({
           number: modNum,
           id: `m${modNum}`,
-          name: MODULE_NAMES[modNum] || `Module ${modNum}`,
+          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || `Module ${modNum}`,
           folder: item,
           topics: allTopics, // All topics for backward compatibility
           fullTopics: fullTopics,
@@ -401,14 +424,18 @@ const TEMPLATE_CATEGORIES = [
 ]
 
 // GET /api/content/templates - Get all templates
-router.get('/templates', (_req, res) => {
+// Query params: ?language=fr (default: en)
+router.get('/templates', (req, res) => {
   try {
+    const language = (req.query.language as Language) || 'en'
+    const templatesPath = getTemplatesPath(language)
+
     const result = TEMPLATE_CATEGORIES.map(category => ({
       ...category,
       templates: category.templates.map(template => {
         let filePath = null
         if (template.file) {
-          filePath = path.join(TEMPLATES_PATH, template.file)
+          filePath = path.join(templatesPath, template.file)
         }
 
         return {
@@ -426,9 +453,12 @@ router.get('/templates', (_req, res) => {
 })
 
 // GET /api/content/templates/:id - Get template content
+// Query params: ?language=fr (default: en)
 router.get('/templates/:id', (req, res) => {
   try {
     const templateId = req.params.id
+    const language = (req.query.language as Language) || 'en'
+    const templatesPath = getTemplatesPath(language)
 
     // Find template in categories
     let templateFile: string | null = null
@@ -444,13 +474,18 @@ router.get('/templates/:id', (req, res) => {
       return res.status(404).json({ error: 'Template not found' })
     }
 
-    const filePath = path.join(TEMPLATES_PATH, templateFile)
+    // Try language-specific path, fallback to English
+    let filePath = path.join(templatesPath, templateFile)
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(TEMPLATES_PATH, templateFile)
+    }
+
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: 'Template file not found' })
     }
 
     const content = fs.readFileSync(filePath, 'utf-8')
-    res.json({ filename: templateFile, content })
+    res.json({ filename: templateFile, content, language })
   } catch (error: any) {
     console.error('Error getting template:', error)
     res.status(500).json({ error: error.message })
@@ -604,7 +639,7 @@ router.post('/export/module/:id', async (req, res) => {
     }
 
     const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
-    const moduleName = MODULE_NAMES[parseInt(modNum)] || `Module ${modNum}`
+    const moduleName = MODULE_NAMES['en'][parseInt(modNum)] || `Module ${modNum}`
 
     // Read all topic files in the module
     const files = fs.readdirSync(modulePath)
@@ -699,9 +734,14 @@ router.post('/export/selection', async (req, res) => {
     // Read content for each topic
     const topicContents: string[] = []
 
-    // Load template files first
+    // Load template files first (use language-specific templates if available)
+    const templatesPath = getTemplatesPath(language as Language)
     for (const templateFile of templateFiles) {
-      const filePath = path.join(TEMPLATES_PATH, templateFile)
+      let filePath = path.join(templatesPath, templateFile)
+      // Fallback to English if French template doesn't exist
+      if (!fs.existsSync(filePath)) {
+        filePath = path.join(TEMPLATES_PATH, templateFile)
+      }
       if (fs.existsSync(filePath)) {
         const content = fs.readFileSync(filePath, 'utf-8')
         topicContents.push(content)

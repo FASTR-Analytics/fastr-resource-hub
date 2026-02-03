@@ -591,7 +591,7 @@ paginate: true
                   <div className="flex-1 min-w-0">
                     <div className="font-medium text-gray-800">{module.title}</div>
                     <div className="text-xs text-gray-500">
-                      Module {module.number} • {(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} slides
+                      Module {module.number} • {(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} {t('slides', contentLanguage)}
                     </div>
                   </div>
                 </button>
@@ -617,7 +617,7 @@ paginate: true
                         className="w-full flex items-center justify-center gap-2 p-2 mb-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
                       >
                         <Plus className="w-4 h-4" />
-                        Add Entire Module ({(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} slides)
+                        {t('addEntireModule', contentLanguage)} ({(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} {t('slides', contentLanguage)})
                       </button>
                     )}
 
@@ -1047,7 +1047,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                 )}
                 <div className="flex-1">
                   <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
-                  <div className="text-xs text-gray-500">{module.totalSlides} slides</div>
+                  <div className="text-xs text-gray-500">{module.totalSlides} {t('slides', contentLanguage)}</div>
                 </div>
               </button>
               {expandedModules.has(module.id) && (
@@ -1056,7 +1056,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                   {module.fullTopics?.length > 0 && (
                     <>
                       <div className="px-4 py-1.5 pl-10 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
-                        Full ({module.fullSlides} slides)
+                        {t('full', contentLanguage)} ({module.fullSlides} {t('slides', contentLanguage)})
                       </div>
                       {module.fullTopics.map((topic: any) => (
                         <button
@@ -1067,7 +1067,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                           }`}
                         >
                           <div className="text-sm text-gray-700">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                         </button>
                       ))}
                     </>
@@ -1076,7 +1076,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                   {module.condensedTopics?.length > 0 && (
                     <>
                       <div className="px-4 py-1.5 pl-10 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
-                        Condensed ({module.condensedSlides} slides)
+                        {t('condensed', contentLanguage)} ({module.condensedSlides} {t('slides', contentLanguage)})
                       </div>
                       {module.condensedTopics.map((topic: any) => (
                         <button
@@ -1087,7 +1087,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                           }`}
                         >
                           <div className="text-sm text-gray-700">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                         </button>
                       ))}
                     </>
@@ -1102,7 +1102,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                       }`}
                     >
                       <div className="text-sm text-gray-700">{topic.title}</div>
-                      <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                      <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                     </button>
                   ))}
                 </div>
@@ -1127,7 +1127,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                 {/* Slide count indicator */}
                 {previewTopic?.slideCount > 1 && (
                   <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
-                    <span className="text-sm font-medium">{previewTopic.slideCount} slides</span>
+                    <span className="text-sm font-medium">{previewTopic.slideCount} {t('slides', contentLanguage)}</span>
                     <span className="text-white/50">•</span>
                     <span className="text-sm flex items-center gap-1">
                       <span>Scroll in preview to view all</span>
@@ -1573,7 +1573,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     )}
                     <div className="flex-1">
                       <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
-                      <div className="text-xs text-gray-500">{module.totalSlides} slides</div>
+                      <div className="text-xs text-gray-500">{module.totalSlides} {t('slides', contentLanguage)}</div>
                     </div>
                   </button>
                 </div>
@@ -1584,7 +1584,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     {module.fullTopics?.length > 0 && (
                       <>
                         <div className="px-4 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
-                          Full ({module.fullSlides} slides)
+                          {t('full', contentLanguage)} ({module.fullSlides} {t('slides', contentLanguage)})
                         </div>
                         {module.fullTopics.map((topic: any) => (
                           <div
@@ -1608,7 +1608,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                               className="flex-1 min-w-0 text-left"
                             >
                               <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                              <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                              <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                             </button>
                           </div>
                         ))}
@@ -1618,7 +1618,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     {module.condensedTopics?.length > 0 && (
                       <>
                         <div className="px-4 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
-                          Condensed ({module.condensedSlides} slides)
+                          {t('condensed', contentLanguage)} ({module.condensedSlides} {t('slides', contentLanguage)})
                         </div>
                         {module.condensedTopics.map((topic: any) => (
                           <div
@@ -1642,7 +1642,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                               className="flex-1 min-w-0 text-left"
                             >
                               <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                              <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                              <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                             </button>
                           </div>
                         ))}
@@ -1671,7 +1671,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                           className="flex-1 min-w-0 text-left"
                         >
                           <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} slides</div>
+                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
                         </button>
                       </div>
                     ))}
@@ -1698,7 +1698,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                 {/* Slide count indicator */}
                 {previewTopic?.slideCount > 1 && (
                   <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
-                    <span className="text-sm font-medium">{previewTopic.slideCount} slides</span>
+                    <span className="text-sm font-medium">{previewTopic.slideCount} {t('slides', contentLanguage)}</span>
                     <span className="text-white/50">•</span>
                     <span className="text-sm flex items-center gap-1">
                       <span>Scroll in preview to view all</span>
@@ -1775,7 +1775,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               )}
             </div>
             <p className="text-sm text-gray-500">
-              {selectedSlides.length} topic{selectedSlides.length !== 1 ? 's' : ''} • {totalSlides} slides
+              {selectedSlides.length} topic{selectedSlides.length !== 1 ? 's' : ''} • {totalSlides} {t('slides', contentLanguage)}
             </p>
           </div>
 
@@ -1801,7 +1801,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-gray-800 truncate">{item.topic.title}</div>
-                      <div className="text-xs text-gray-400">{item.topic.slideCount} slides</div>
+                      <div className="text-xs text-gray-400">{item.topic.slideCount} {t('slides', contentLanguage)}</div>
                     </div>
                     <button
                       onClick={(e) => { e.stopPropagation(); toggleTopic(item.module, item.topic) }}

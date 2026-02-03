@@ -54,6 +54,9 @@ export const translations = {
     save: 'Save',
     delete: 'Delete',
     close: 'Close',
+    addEntireModule: 'Add Entire Module',
+    topic: 'topic',
+    topicPlural: 'topics',
   },
   fr: {
     // Landing page
@@ -106,6 +109,9 @@ export const translations = {
     save: 'Enregistrer',
     delete: 'Supprimer',
     close: 'Fermer',
+    addEntireModule: 'Ajouter le module entier',
+    topic: 'sujet',
+    topicPlural: 'sujets',
   }
 } as const
 
