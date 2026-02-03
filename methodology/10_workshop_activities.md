@@ -12,7 +12,7 @@ This chapter contains hands-on activities for workshop participants.
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m9_1 -->
+<!-- SLIDE:m10_1 -->
 ## Activity: Creating a disruptions report
 
 ![hands-on h:40](resources/icons/hands_on.svg) **Goal:** Each country team produces a disruptions report using the AI assistant.
@@ -115,7 +115,7 @@ Before finishing, confirm your report includes:
 
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_2 -->
+<!-- SLIDE:m10_2 -->
 ## Presenting reports and group feedback
 
 **Report back**
@@ -129,7 +129,7 @@ Before finishing, confirm your report includes:
 - Feedback on the approach
 <!-- /SLIDE -->
 
-<!-- SLIDE:m9_3 -->
+<!-- SLIDE:m10_3 -->
 ## FASTR Quiz
 
 **15 min | 36 pts**

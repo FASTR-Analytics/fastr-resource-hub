@@ -90,7 +90,8 @@ const MODULE_NAMES: Record<number, string> = {
   6: 'Data Analysis',
   7: 'Results Communication',
   8: 'Survey & HFA',
-  9: 'Workshop Activities',
+  9: 'FASTR and RMET Integration',
+  10: 'Workshop Activities',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

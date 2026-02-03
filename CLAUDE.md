@@ -44,7 +44,7 @@ See `help and instructions/07_style_guide.md` for the full style guide.
 - **Lists**: No periods for single-line items
 - **Expandable sections**: Use `???` for technical details
 
-## The 9 module files
+## The module files
 
 | File | Topic |
 |------|-------|
@@ -57,3 +57,5 @@ See `help and instructions/07_style_guide.md` for the full style guide.
 | `06a_service_utilization.md` | Service Utilization Analysis |
 | `06b_coverage_estimates.md` | Coverage Estimates |
 | `07_results_communication.md` | Results Communication |
+| `09_fastr_rmet_integration.md` | FASTR and RMET Integration |
+| `10_workshop_activities.md` | Workshop Activities |

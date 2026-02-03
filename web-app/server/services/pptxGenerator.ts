@@ -599,7 +599,7 @@ function getImageLayout(
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
   // Vertical accent line on the left of title
   slide.addShape('rect', {
-    x: 0.5, y: 0.35, w: 0.06, h: 0.55,
+    x: 0.5, y: 0.35, w: 0.06, h: 0.70,
     fill: { color: COLORS.green },
     line: { color: COLORS.green },
   })
