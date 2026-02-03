@@ -348,6 +348,7 @@ interface AddSessionMenuProps {
 }
 
 function AddSessionMenu({ dayNum, onClose, onAddSession, onAddToExistingSession, contentLibrary, existingSessions }: AddSessionMenuProps) {
+  const { contentLanguage } = useWorkshopStore()
   const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets' | 'add-to-session'>('main')
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
   const [selectedTopic, setSelectedTopic] = useState<{ module: any; topic: any } | null>(null)
