@@ -182,7 +182,7 @@
   <text class="default-label" x="60" y="515">défaut*</text>
 
   <!-- Separator line -->
-  <line x1="140" y1="480" x2="140" y2="530" stroke="#0C716B" stroke-width="2"/>
+  <line x1="160" y1="480" x2="160" y2="530" stroke="#0C716B" stroke-width="2"/>
 
   <!-- Default values (aligned with formula boxes above) -->
   <text class="default-value" x="285" y="505" text-anchor="middle">Taux perte</text>

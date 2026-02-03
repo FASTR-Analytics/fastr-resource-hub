@@ -118,10 +118,10 @@
   <!-- Down arrow between Live births and DPT1 -->
   <line class="arrow-down" x1="955" y1="210" x2="955" y2="245"/>
 
-  <!-- Adjustment box 4: Remove neonatal (center=955) -->
+  <!-- Adjustment box 4: Remove neonatal deaths (center=955) -->
   <rect class="box-adjustment" x="890" y="255" width="130" height="60" rx="6"/>
-  <text class="text-white" x="955" y="282">Retirer</text>
-  <text class="text-white" x="955" y="298">#néonatals</text>
+  <text class="text-white" x="955" y="282">Retirer #décès</text>
+  <text class="text-white" x="955" y="298">néonatals</text>
 
   <!-- ==================== ROW 3: Formula boxes (under corresponding main boxes) ==================== -->
 
@@ -165,7 +165,7 @@
   <text class="default-label" x="60" y="520">défaut</text>
 
   <!-- Separator line -->
-  <line x1="130" y1="480" x2="130" y2="530" stroke="#0C716B" stroke-width="2"/>
+  <line x1="160" y1="480" x2="160" y2="530" stroke="#0C716B" stroke-width="2"/>
 
   <!-- Default values (aligned with formula boxes above) -->
   <text class="default-value" x="290" y="505" text-anchor="middle">Taux perte</text>
