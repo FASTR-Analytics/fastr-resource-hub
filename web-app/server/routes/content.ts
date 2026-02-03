@@ -272,23 +272,45 @@ router.get('/modules/:id', (req, res) => {
 })
 
 // GET /api/content/topic/:id - Get specific topic content
+// Query params: ?language=fr (default: en)
 router.get('/topic/:id', (req, res) => {
   try {
     const topicId = req.params.id
+    const language = (req.query.language as Language) || 'en'
+    const coreContentPath = getCoreContentPath(language)
+
     const modNumMatch = topicId.match(/^m(\d+)_/)
     if (!modNumMatch) {
       return res.status(400).json({ error: 'Invalid topic ID' })
     }
 
     const modNum = modNumMatch[1]
-    const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+
+    // Try requested language first, fallback to English
+    let contentPath = coreContentPath
+    if (!fs.existsSync(contentPath)) {
+      contentPath = CORE_CONTENT_PATH
+    }
+
+    const moduleFolder = fs.readdirSync(contentPath)
       .find(f => f.startsWith(`m${modNum}_`))
 
     if (!moduleFolder) {
-      return res.status(404).json({ error: 'Module not found' })
+      // Fallback to English if module not found in requested language
+      if (language !== 'en') {
+        const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+          .find(f => f.startsWith(`m${modNum}_`))
+        if (enModuleFolder) {
+          contentPath = CORE_CONTENT_PATH
+        } else {
+          return res.status(404).json({ error: 'Module not found' })
+        }
+      } else {
+        return res.status(404).json({ error: 'Module not found' })
+      }
     }
 
-    const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+    const modulePath = path.join(contentPath, moduleFolder || fs.readdirSync(contentPath).find(f => f.startsWith(`m${modNum}_`))!)
     const file = fs.readdirSync(modulePath)
       .find(f => f.startsWith(`${topicId}_`) && f.endsWith('.md'))
 
@@ -296,8 +318,27 @@ router.get('/topic/:id', (req, res) => {
       return res.status(404).json({ error: 'Topic not found' })
     }
 
-    const content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
-    res.json({ filename: file, content })
+    let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
+
+    // For French, rewrite diagram paths to French versions if they exist
+    if (language === 'fr') {
+      const diagramsFrPath = path.join(REPO_ROOT, 'resources', 'diagrams_fr')
+      content = content.replace(
+        /(\(\.\.\/\.\.\/resources\/diagrams\/|\/resources\/diagrams\/)([^)]+\.svg)/g,
+        (match, prefix, filename) => {
+          // Check if French version exists
+          const frDiagramPath = path.join(diagramsFrPath, filename)
+          if (fs.existsSync(frDiagramPath)) {
+            // Rewrite to French diagram path
+            return prefix.replace('/diagrams/', '/diagrams_fr/')  + filename
+          }
+          // Keep English version if French doesn't exist
+          return match
+        }
+      )
+    }
+
+    res.json({ filename: file, content, language })
   } catch (error: any) {
     console.error('Error getting topic:', error)
     res.status(500).json({ error: error.message })
@@ -648,7 +689,8 @@ ${html}
 // POST /api/content/export/selection - Export selected topics and templates
 router.post('/export/selection', async (req, res) => {
   try {
-    const { topicIds = [], templateFiles = [], format = 'markdown', title = 'FASTR Selection' } = req.body
+    const { topicIds = [], templateFiles = [], format = 'markdown', title = 'FASTR Selection', language = 'en' } = req.body
+    const coreContentPath = getCoreContentPath(language as Language)
 
     if ((!topicIds || topicIds.length === 0) && (!templateFiles || templateFiles.length === 0)) {
       return res.status(400).json({ error: 'topicIds or templateFiles array is required' })
@@ -666,18 +708,28 @@ router.post('/export/selection', async (req, res) => {
       }
     }
 
-    // Then load topic content
+    // Then load topic content (use requested language, fallback to English)
     for (const topicId of topicIds) {
       const modNumMatch = topicId.match(/^m(\d+)_/)
       if (!modNumMatch) continue
 
       const modNum = modNumMatch[1]
-      const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+
+      // Try requested language first, fallback to English
+      let contentPath = fs.existsSync(coreContentPath) ? coreContentPath : CORE_CONTENT_PATH
+      let moduleFolder = fs.readdirSync(contentPath)
         .find(f => f.startsWith(`m${modNum}_`))
+
+      // Fallback to English if not found
+      if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
+        contentPath = CORE_CONTENT_PATH
+        moduleFolder = fs.readdirSync(contentPath)
+          .find(f => f.startsWith(`m${modNum}_`))
+      }
 
       if (!moduleFolder) continue
 
-      const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+      const modulePath = path.join(contentPath, moduleFolder)
       const file = fs.readdirSync(modulePath)
         .find(f => f.startsWith(`${topicId}_`) && f.endsWith('.md'))
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
+import { t } from './i18n/translations'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
 import { ContentLibrary } from './components/ContentLibrary'
@@ -940,8 +941,9 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
 
-    // Check cache first - instant if already rendered
-    const cached = previewCache.current.get(topic.id)
+    // Check cache first - instant if already rendered (include language in key)
+    const cacheKey = `${topic.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
     if (cached) {
       setPreviewHtml(cached.html)
       setPresenterNotes(cached.notes)
@@ -952,7 +954,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
+      const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         const renderResponse = await fetch('/api/content/render', { credentials: 'include',
@@ -962,8 +964,8 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         })
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
-          // Cache the result
-          previewCache.current.set(topic.id, {
+          // Cache the result with language key
+          previewCache.current.set(`${topic.id}_${contentLanguage}`, {
             html: renderData.html,
             notes: renderData.presenterNotes || []
           })
@@ -978,12 +980,18 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
     }
   }
 
+  // Clear preview when language changes
+  useEffect(() => {
+    setPreviewTopic(null)
+    setPreviewHtml(null)
+  }, [contentLanguage])
+
   if (contentLibrary.length === 0) {
     return (
       <div className="h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center text-gray-500">
           <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-          <p>Loading content library...</p>
+          <p>{t('loadingContentLibrary', contentLanguage)}</p>
         </div>
       </div>
     )
@@ -996,7 +1004,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-800 flex-1">Browse Content Library</h1>
+        <h1 className="text-lg font-semibold text-gray-800 flex-1">{t('browseContentLibrary', contentLanguage)}</h1>
         {/* Language toggle */}
         <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
           <button
@@ -1340,8 +1348,9 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   const loadPreview = async (topic: any) => {
     setPreviewTopic(topic)
 
-    // Check cache first - instant if already rendered
-    const cached = previewCache.current.get(topic.id)
+    // Check cache first - instant if already rendered (include language in key)
+    const cacheKey = `${topic.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
     if (cached) {
       setPreviewHtml(cached.html)
       setPresenterNotes(cached.notes)
@@ -1352,7 +1361,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     setIsLoadingPreview(true)
     setPresenterNotes([])
     try {
-      const response = await fetch(`/api/content/topic/${topic.id}`, { credentials: 'include' })
+      const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         const renderResponse = await fetch('/api/content/render', { credentials: 'include',
@@ -1362,8 +1371,8 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         })
         if (renderResponse.ok) {
           const renderData = await renderResponse.json()
-          // Cache the result
-          previewCache.current.set(topic.id, {
+          // Cache the result with language key
+          previewCache.current.set(cacheKey, {
             html: renderData.html,
             notes: renderData.presenterNotes || []
           })
@@ -1378,6 +1387,12 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     }
   }
 
+  // Clear preview when language changes
+  useEffect(() => {
+    setPreviewTopic(null)
+    setPreviewHtml(null)
+  }, [contentLanguage])
+
   const exportSelection = async (format: 'pdf' | 'pptx') => {
     if (selectedSlides.length === 0 && selectedTemplates.length === 0) return
     setIsExporting(true)
@@ -1389,7 +1404,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       const response = await fetch('/api/content/export/selection', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topicIds, templateFiles, format, title: 'Quick Export' })
+        body: JSON.stringify({ topicIds, templateFiles, format, title: 'Quick Export', language: contentLanguage })
       })
 
       if (response.ok) {
@@ -1429,8 +1444,8 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-800">Quick Export</h1>
-        <span className="text-sm text-gray-500 flex-1">Select slides and export to PPTX or PDF</span>
+        <h1 className="text-lg font-semibold text-gray-800">{t('quickExport', contentLanguage)}</h1>
+        <span className="text-sm text-gray-500 flex-1">{t('selectSlidesExport', contentLanguage)}</span>
         {/* Language toggle */}
         <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
           <button
@@ -2494,7 +2509,7 @@ function App() {
             className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors"
           >
             <LogOut className="w-4 h-4" />
-            Sign Out
+            {t('signOut', contentLanguage)}
           </button>
         </div>
 
@@ -2502,8 +2517,8 @@ function App() {
           <div className="w-full max-w-5xl">
             {/* Logo/Title */}
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
-              <p className="text-gray-600">Build and manage workshop presentations</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('appTitle', contentLanguage)}</h1>
+              <p className="text-gray-600">{t('appSubtitle', contentLanguage)}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -2515,9 +2530,9 @@ function App() {
               <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
                 <Presentation className="w-6 h-6 text-fastr-primary" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Build Slide Deck</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
               <p className="text-gray-600 text-sm">
-                Build a complete slide deck for a workshop or training event
+                {t('buildSlideDeckDesc', contentLanguage)}
               </p>
             </button>
 
@@ -2529,9 +2544,9 @@ function App() {
               <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary/20 transition-colors">
                 <Zap className="w-6 h-6 text-fastr-secondary" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Quick Export</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('quickExport', contentLanguage)}</h2>
               <p className="text-gray-600 text-sm">
-                Select slides from the library and export to PPTX or PDF
+                {t('quickExportDesc', contentLanguage)}
               </p>
             </button>
 
@@ -2543,9 +2558,9 @@ function App() {
               <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
                 <Library className="w-6 h-6 text-amber-600" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Browse Library</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('browseLibrary', contentLanguage)}</h2>
               <p className="text-gray-600 text-sm">
-                Explore and preview slides from the content library
+                {t('browseLibraryDesc', contentLanguage)}
               </p>
             </button>
           </div>
@@ -2553,7 +2568,7 @@ function App() {
           {/* Existing Decks */}
           {workshops.length > 0 && (
             <div className="mt-10">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Existing Decks</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('existingDecks', contentLanguage)}</h3>
               <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                 {countries.map(country => (
                   <div key={country} className="border-b border-gray-100 last:border-b-0">
