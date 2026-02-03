@@ -36,6 +36,8 @@ export const translations = {
     exportPPTX: 'Export PPTX',
     exporting: 'Exporting...',
     clickToPreview: 'Click on a slide to preview',
+    selectContent: 'Select Content',
+    checkToSelect: 'Check to select, click name to preview',
 
     // Content
     modules: 'Modules',
@@ -43,6 +45,38 @@ export const translations = {
     breaksStructure: 'Breaks & Structure',
     breaks: 'Breaks',
     templates: 'Templates',
+
+    // Template categories
+    structure: 'Structure',
+    structureDesc: 'Workshop structure slides',
+    breaksCategory: 'Breaks',
+    breaksDesc: 'Break slides',
+    dayTransitions: 'Day Transitions',
+    dayTransitionsDesc: 'Day recap and preview slides',
+    activitiesDemos: 'Activities & Demos',
+    activitiesDesc: 'Interactive session slides',
+
+    // Add session menu
+    addToDay: 'Add to Day',
+    chooseModuleContent: 'Choose Module Content',
+    createCustomSlide: 'Create Custom Slide',
+    insertImage: 'Insert Image',
+    addToSession: 'Add to Session',
+    moduleContent: 'Module Content',
+    addSlidesFromModules: 'Add slides from FASTR modules',
+    teaBreak: 'Tea Break',
+    lunchBreak: 'Lunch Break',
+    customSlide: 'Custom Slide',
+    createYourOwnSlide: 'Create your own slide with markdown',
+    custom: 'Custom',
+    orAddIndividualSlides: 'Or add individual slides:',
+    fullSlides: 'Full Slides',
+    condensedSlides: 'Condensed Slides',
+
+    // Quick export selection panel
+    yourSelection: 'Your Selection',
+    clearAll: 'Clear all',
+    selectTopicsFromLibrary: 'Select topics from the library to build your presentation',
 
     // Preview
     presenterNotes: 'Presenter Notes',
@@ -91,6 +125,8 @@ export const translations = {
     exportPPTX: 'Exporter PPTX',
     exporting: 'Exportation...',
     clickToPreview: 'Cliquez sur une diapositive pour prévisualiser',
+    selectContent: 'Sélectionner le contenu',
+    checkToSelect: 'Cochez pour sélectionner, cliquez sur le nom pour prévisualiser',
 
     // Content
     modules: 'Modules',
@@ -98,6 +134,38 @@ export const translations = {
     breaksStructure: 'Pauses & Structure',
     breaks: 'Pauses',
     templates: 'Modèles',
+
+    // Template categories
+    structure: 'Structure',
+    structureDesc: 'Diapositives de structure d\'atelier',
+    breaksCategory: 'Pauses',
+    breaksDesc: 'Diapositives de pause',
+    dayTransitions: 'Transitions de journée',
+    dayTransitionsDesc: 'Récapitulatif et aperçu de la journée',
+    activitiesDemos: 'Activités & Démos',
+    activitiesDesc: 'Diapositives de sessions interactives',
+
+    // Add session menu
+    addToDay: 'Ajouter au Jour',
+    chooseModuleContent: 'Choisir le contenu du module',
+    createCustomSlide: 'Créer une diapositive personnalisée',
+    insertImage: 'Insérer une image',
+    addToSession: 'Ajouter à la session',
+    moduleContent: 'Contenu du module',
+    addSlidesFromModules: 'Ajouter des diapositives des modules FASTR',
+    teaBreak: 'Pause café',
+    lunchBreak: 'Pause déjeuner',
+    customSlide: 'Diapositive personnalisée',
+    createYourOwnSlide: 'Créez votre propre diapositive en markdown',
+    custom: 'Personnalisé',
+    orAddIndividualSlides: 'Ou ajouter des diapositives individuellement :',
+    fullSlides: 'Diapositives complètes',
+    condensedSlides: 'Diapositives condensées',
+
+    // Quick export selection panel
+    yourSelection: 'Votre sélection',
+    clearAll: 'Tout effacer',
+    selectTopicsFromLibrary: 'Sélectionnez des sujets dans la bibliothèque pour créer votre présentation',
 
     // Preview
     presenterNotes: 'Notes du présentateur',

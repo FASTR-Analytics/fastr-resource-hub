@@ -372,56 +372,108 @@ router.get('/topic/:id', (req, res) => {
 // Templates
 // ─────────────────────────────────────────────────────────────────────────────
 
-const TEMPLATE_CATEGORIES = [
-  {
-    id: 'structure',
-    name: 'Structure',
-    description: 'Workshop structure slides',
-    templates: [
-      { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover', preview: 'Workshop cover slide with title, country, dates' },
-      { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Day 1 only - Welcome and opening remarks' },
-      { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Day 1 only - Participant introductions' },
-      { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day 2+ intro slide with day number, title and date' },
-      { id: 'section', file: null, name: 'Section Divider', icon: 'divider', special: true },
-      { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Key messages, wrap-up, and participant reflections' },
-      { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide of workshop - contact information' },
-    ]
-  },
-  {
-    id: 'breaks',
-    name: 'Breaks',
-    description: 'Break slides',
-    templates: [
-      { id: 'tea', file: 'breaks.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
-      { id: 'lunch', file: 'breaks.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
-    ]
-  },
-  {
-    id: 'day_transitions',
-    name: 'Day Transitions',
-    description: 'Day recap and preview slides',
-    templates: [
-      { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Day 2+ only - Recap previous day, preview today' },
-    ]
-  },
-  {
-    id: 'activities',
-    name: 'Activities & Demos',
-    description: 'Interactive session slides',
-    templates: [
-      { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Platform Demo', icon: 'demo', preview: 'FASTR Analytics Platform demonstration' },
-    ]
-  },
-  {
-    id: 'custom',
-    name: 'Workshop Content',
-    description: 'Workshop-specific content slides',
-    templates: [
-      { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives (from Settings)' },
-      { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Day 1 - Workshop deliverables (from Settings)' },
-    ]
-  }
-]
+const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
+  en: [
+    {
+      id: 'structure',
+      name: 'Structure',
+      description: 'Workshop structure slides',
+      templates: [
+        { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover', preview: 'Workshop cover slide with title, country, dates' },
+        { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Day 1 only - Welcome and opening remarks' },
+        { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Day 1 only - Participant introductions' },
+        { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day 2+ intro slide with day number, title and date' },
+        { id: 'section', file: null, name: 'Section Divider', icon: 'divider', special: true },
+        { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Key messages, wrap-up, and participant reflections' },
+        { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide of workshop - contact information' },
+      ]
+    },
+    {
+      id: 'breaks',
+      name: 'Breaks',
+      description: 'Break slides',
+      templates: [
+        { id: 'tea', file: 'breaks.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
+        { id: 'lunch', file: 'breaks.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
+      ]
+    },
+    {
+      id: 'day_transitions',
+      name: 'Day Transitions',
+      description: 'Day recap and preview slides',
+      templates: [
+        { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Day 2+ only - Recap previous day, preview today' },
+      ]
+    },
+    {
+      id: 'activities',
+      name: 'Activities & Demos',
+      description: 'Interactive session slides',
+      templates: [
+        { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Platform Demo', icon: 'demo', preview: 'FASTR Analytics Platform demonstration' },
+      ]
+    },
+    {
+      id: 'custom',
+      name: 'Workshop Content',
+      description: 'Workshop-specific content slides',
+      templates: [
+        { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives (from Settings)' },
+        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Day 1 - Workshop deliverables (from Settings)' },
+      ]
+    }
+  ],
+  fr: [
+    {
+      id: 'structure',
+      name: 'Structure',
+      description: 'Diapositives de structure d\'atelier',
+      templates: [
+        { id: 'title', file: 'title_slide.md', name: 'Page de titre', icon: 'cover', preview: 'Diapositive de couverture avec titre, pays, dates' },
+        { id: 'welcome', file: 'welcome_slide.md', name: 'Bienvenue & Ouverture', icon: 'welcome', preview: 'Jour 1 uniquement - Bienvenue et remarques d\'ouverture' },
+        { id: 'introductions', file: 'introductions_slide.md', name: 'Présentations', icon: 'people', preview: 'Jour 1 uniquement - Présentations des participants' },
+        { id: 'day_title', file: 'day_title.md', name: 'Page de titre du jour', icon: 'calendar', preview: 'Jour 2+ - Diapositive d\'introduction avec numéro, titre et date' },
+        { id: 'section', file: null, name: 'Séparateur de section', icon: 'divider', special: true },
+        { id: 'day_end', file: 'day_end.md', name: 'Fin de journée', icon: 'sunset', preview: 'Messages clés, conclusion et réflexions des participants' },
+        { id: 'closing', file: 'closing.md', name: 'Clôture/Coordonnées', icon: 'end', preview: 'Dernière diapositive de l\'atelier - coordonnées' },
+      ]
+    },
+    {
+      id: 'breaks',
+      name: 'Pauses',
+      description: 'Diapositives de pause',
+      templates: [
+        { id: 'tea', file: 'breaks.md', name: 'Pause café', icon: 'coffee', preview: 'Pause café/thé de 15 minutes avec heure de reprise' },
+        { id: 'lunch', file: 'breaks.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes avec heure de reprise' },
+      ]
+    },
+    {
+      id: 'day_transitions',
+      name: 'Transitions de journée',
+      description: 'Récapitulatif et aperçu de la journée',
+      templates: [
+        { id: 'day_recap', file: 'day_recap.md', name: 'Récapitulatif du jour', icon: 'recap', preview: 'Jour 2+ uniquement - Récapitulatif de la veille, aperçu du jour' },
+      ]
+    },
+    {
+      id: 'activities',
+      name: 'Activités & Démos',
+      description: 'Diapositives de sessions interactives',
+      templates: [
+        { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Démo plateforme', icon: 'demo', preview: 'Démonstration de la plateforme analytique FASTR' },
+      ]
+    },
+    {
+      id: 'custom',
+      name: 'Contenu de l\'atelier',
+      description: 'Diapositives de contenu spécifique à l\'atelier',
+      templates: [
+        { id: 'objectives', file: 'objectives_slide.md', name: 'Objectifs de l\'atelier', icon: 'target', preview: 'Jour 1 - Objectifs d\'apprentissage de l\'atelier (depuis Paramètres)' },
+        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Résultats attendus', icon: 'output', preview: 'Jour 1 - Livrables de l\'atelier (depuis Paramètres)' },
+      ]
+    }
+  ]
+}
 
 // GET /api/content/templates - Get all templates
 // Query params: ?language=fr (default: en)
@@ -429,10 +481,11 @@ router.get('/templates', (req, res) => {
   try {
     const language = (req.query.language as Language) || 'en'
     const templatesPath = getTemplatesPath(language)
+    const categories = TEMPLATE_CATEGORIES[language] || TEMPLATE_CATEGORIES['en']
 
-    const result = TEMPLATE_CATEGORIES.map(category => ({
+    const result = categories.map((category: any) => ({
       ...category,
-      templates: category.templates.map(template => {
+      templates: category.templates.map((template: any) => {
         let filePath = null
         if (template.file) {
           filePath = path.join(templatesPath, template.file)
@@ -459,11 +512,12 @@ router.get('/templates/:id', (req, res) => {
     const templateId = req.params.id
     const language = (req.query.language as Language) || 'en'
     const templatesPath = getTemplatesPath(language)
+    const categories = TEMPLATE_CATEGORIES[language] || TEMPLATE_CATEGORIES['en']
 
     // Find template in categories
     let templateFile: string | null = null
-    for (const category of TEMPLATE_CATEGORIES) {
-      const template = category.templates.find(t => t.id === templateId)
+    for (const category of categories) {
+      const template = category.templates.find((t: any) => t.id === templateId)
       if (template?.file) {
         templateFile = template.file
         break

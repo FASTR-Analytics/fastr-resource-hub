@@ -498,11 +498,11 @@ paginate: true
               </button>
             )}
             <h3 className="font-semibold text-gray-800">
-              {view === 'main' && `Add to Day ${dayNum}`}
-              {view === 'modules' && 'Choose Module Content'}
-              {view === 'custom' && 'Create Custom Slide'}
-              {view === 'assets' && 'Insert Image'}
-              {view === 'add-to-session' && 'Add to Session'}
+              {view === 'main' && `${t('addToDay', contentLanguage)} ${dayNum}`}
+              {view === 'modules' && t('chooseModuleContent', contentLanguage)}
+              {view === 'custom' && t('createCustomSlide', contentLanguage)}
+              {view === 'assets' && t('insertImage', contentLanguage)}
+              {view === 'add-to-session' && t('addToSession', contentLanguage)}
             </h3>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-gray-200 rounded transition-colors">
@@ -522,15 +522,15 @@ paginate: true
                 📘
               </div>
               <div>
-                <div className="font-medium text-gray-800">Module Content</div>
-                <div className="text-sm text-gray-500">Add slides from FASTR modules</div>
+                <div className="font-medium text-gray-800">{t('moduleContent', contentLanguage)}</div>
+                <div className="text-sm text-gray-500">{t('addSlidesFromModules', contentLanguage)}</div>
               </div>
               <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
             </button>
 
             {/* Breaks */}
             <div className="pt-2">
-              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">Breaks</div>
+              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">{t('breaks', contentLanguage)}</div>
               <div className="flex gap-2">
                 <button
                   onClick={() => addBreak('tea')}
@@ -538,7 +538,7 @@ paginate: true
                 >
                   <span className="text-xl">☕</span>
                   <div className="text-left">
-                    <div className="font-medium text-gray-800">Tea Break</div>
+                    <div className="font-medium text-gray-800">{t('teaBreak', contentLanguage)}</div>
                     <div className="text-xs text-gray-500">15 min</div>
                   </div>
                 </button>
@@ -548,7 +548,7 @@ paginate: true
                 >
                   <span className="text-xl">🍽️</span>
                   <div className="text-left">
-                    <div className="font-medium text-gray-800">Lunch Break</div>
+                    <div className="font-medium text-gray-800">{t('lunchBreak', contentLanguage)}</div>
                     <div className="text-xs text-gray-500">60 min</div>
                   </div>
                 </button>
@@ -557,7 +557,7 @@ paginate: true
 
             {/* Custom Session */}
             <div className="pt-2">
-              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">Custom</div>
+              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">{t('custom', contentLanguage)}</div>
               <button
                 onClick={() => setView('custom')}
                 className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 border border-transparent hover:border-teal-200 transition-all text-left group"
@@ -566,8 +566,8 @@ paginate: true
                   ✏️
                 </div>
                 <div>
-                  <div className="font-medium text-gray-800">Custom Slide</div>
-                  <div className="text-sm text-gray-500">Create your own slide with markdown</div>
+                  <div className="font-medium text-gray-800">{t('customSlide', contentLanguage)}</div>
+                  <div className="text-sm text-gray-500">{t('createYourOwnSlide', contentLanguage)}</div>
                 </div>
                 <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
               </button>
@@ -622,12 +622,12 @@ paginate: true
                       </button>
                     )}
 
-                    <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">Or add individual slides:</div>
+                    <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">{t('orAddIndividualSlides', contentLanguage)}</div>
 
                     {/* Full Topics */}
                     {module.fullTopics && module.fullTopics.length > 0 && (
                       <div className="mb-2">
-                        <div className="text-xs text-gray-500 font-medium py-1">Full Slides</div>
+                        <div className="text-xs text-gray-500 font-medium py-1">{t('fullSlides', contentLanguage)}</div>
                         {module.fullTopics.map((topic: any) => (
                           <button
                             key={topic.id}
@@ -647,7 +647,7 @@ paginate: true
                     {/* Condensed Topics */}
                     {module.condensedTopics && module.condensedTopics.length > 0 && (
                       <div>
-                        <div className="text-xs text-amber-600 font-medium py-1">⚡ Condensed Slides</div>
+                        <div className="text-xs text-amber-600 font-medium py-1">⚡ {t('condensedSlides', contentLanguage)}</div>
                         {module.condensedTopics.map((topic: any) => (
                           <button
                             key={topic.id}
@@ -1223,7 +1223,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await fetch('/api/content/templates', { credentials: 'include' })
+        const response = await fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
         if (response.ok) {
           const data = await response.json()
           setTemplates(data)
@@ -1233,7 +1233,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       }
     }
     fetchTemplates()
-  }, [])
+  }, [contentLanguage])
 
   const toggleTemplateCategory = (categoryId: string) => {
     const next = new Set(expandedTemplateCategories)
@@ -1477,15 +1477,15 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         {/* Topic picker */}
         <div className="w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
           <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-800">Select Content</h2>
-            <p className="text-sm text-gray-500 mt-1">Check to select, click name to preview</p>
+            <h2 className="font-semibold text-gray-800">{t('selectContent', contentLanguage)}</h2>
+            <p className="text-sm text-gray-500 mt-1">{t('checkToSelect', contentLanguage)}</p>
           </div>
           <div className="flex-1 overflow-auto">
             {/* Templates Section - exclude 'custom' category */}
             {templates.filter((c: any) => c.id !== 'custom').length > 0 && (
               <div className="border-b border-gray-200">
                 <div className="px-4 py-2 bg-amber-50 text-xs font-semibold text-amber-800 uppercase tracking-wide">
-                  Templates
+                  {t('templates', contentLanguage)}
                 </div>
                 {templates.filter((c: any) => c.id !== 'custom').map((category: any) => (
                   <div key={category.id} className="border-b border-gray-100">
@@ -1542,7 +1542,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 
             {/* Modules Section */}
             <div className="px-4 py-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wide border-b border-gray-200">
-              Modules
+              {t('modules', contentLanguage)}
             </div>
             {contentLibrary.map((module: any) => (
               <div key={module.id} className="border-b border-gray-100">
@@ -1765,25 +1765,25 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         <div className="w-72 bg-white border-l border-gray-200 flex flex-col flex-shrink-0">
           <div className="p-4 border-b border-gray-100">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold text-gray-800">Your Selection</h3>
+              <h3 className="font-semibold text-gray-800">{t('yourSelection', contentLanguage)}</h3>
               {selectedSlides.length > 0 && (
                 <button
                   onClick={() => setSelectedSlides([])}
                   className="text-xs text-gray-500 hover:text-gray-700"
                 >
-                  Clear all
+                  {t('clearAll', contentLanguage)}
                 </button>
               )}
             </div>
             <p className="text-sm text-gray-500">
-              {selectedSlides.length} topic{selectedSlides.length !== 1 ? 's' : ''} • {totalSlides} {t('slides', contentLanguage)}
+              {selectedSlides.length} {selectedSlides.length !== 1 ? t('topicPlural', contentLanguage) : t('topic', contentLanguage)} • {totalSlides} {t('slides', contentLanguage)}
             </p>
           </div>
 
           <div className="flex-1 overflow-auto p-2">
             {selectedSlides.length === 0 ? (
               <div className="h-full flex items-center justify-center text-gray-400 text-sm text-center p-4">
-                <p>Select topics from the library to build your presentation</p>
+                <p>{t('selectTopicsFromLibrary', contentLanguage)}</p>
               </div>
             ) : (
               <div className="space-y-1">
@@ -1826,12 +1826,12 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               {isExporting && exportFormat === 'pptx' ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  Exporting...
+                  {t('exporting', contentLanguage)}
                 </>
               ) : (
                 <>
                   <Download className="w-4 h-4" />
-                  Export PPTX
+                  {t('exportPPTX', contentLanguage)}
                 </>
               )}
             </button>
@@ -1843,12 +1843,12 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               {isExporting && exportFormat === 'pdf' ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  Exporting...
+                  {t('exporting', contentLanguage)}
                 </>
               ) : (
                 <>
                   <Download className="w-4 h-4" />
-                  Export PDF
+                  {t('exportPDF', contentLanguage)}
                 </>
               )}
             </button>
