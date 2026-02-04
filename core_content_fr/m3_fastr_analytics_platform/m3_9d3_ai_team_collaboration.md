@@ -6,10 +6,14 @@ paginate: true
 
 ## Comment les équipes collaborent
 
-**Dr. Amina** (Directrice régionale) demande à l'IA les tendances de couverture, explore en privé, puis crée la présentation « Revue mensuelle des performances » → *Maintenant visible pour toute l'équipe*
+| Qui | Action | Résultat |
+|-----|--------|----------|
+| **Dr. Amina** (Directrice) | Demande la couverture, explore en privé, crée une présentation | Présentation visible par tous |
+| **Mohamed** (Gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique dans la bibliothèque |
+| **Fatima** (Chargée de programme) | Ouvre les diapos d'Amina, utilise le graphique de Mohamed | Reçoit une explication privée |
 
-**Mohamed** (Gestionnaire de données) demande à l'IA les lacunes de rapportage, examine en privé, sauvegarde un graphique « Complétude par district » → *Graphique maintenant dans la bibliothèque pour tous*
+**Ce que chacun voit :**
 
-**Fatima** (Chargée de programme) ouvre les diapositives d'Amina, utilise le graphique de Mohamed, demande à l'IA d'expliquer une tendance → *Reçoit une explication privée, peut partager si elle crée une diapositive*
-
-**Ce que chacun voit :** Ses propres conversations IA ✓ | Diapositives et graphiques sauvegardés ✓ | Questions privées des autres ✗
+- Ses propres conversations IA — Oui
+- Diapositives et graphiques sauvegardés des autres — Oui
+- Questions privées des autres — Non

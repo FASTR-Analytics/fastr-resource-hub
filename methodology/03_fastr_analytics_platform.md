@@ -601,13 +601,17 @@ Everyone can see saved content.
 <!-- SLIDE:m3_9d3 -->
 ## How teams work together
 
-**Dr. Amina** (State Director) asks AI about coverage trends, explores privately, then creates "Monthly Performance Review" slide deck → *Now visible to all team members*
+| Who | Action | Result |
+|-----|--------|--------|
+| **Dr. Amina** (Director) | Asks AI about coverage, explores privately, creates slide deck | Deck now visible to all |
+| **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart in library for everyone |
+| **Fatima** (Program Officer) | Opens Amina's slides, uses Mohamed's chart, asks AI to explain | Gets private explanation |
 
-**Mohamed** (Data Manager) asks AI about reporting gaps, reviews privately, saves a "Reporting Completeness" chart → *Chart now in project library for everyone*
+**What each person sees:**
 
-**Fatima** (Program Officer) opens Amina's slides, uses Mohamed's chart, asks AI to explain a trend → *Gets private explanation, can share if she creates a slide*
-
-**What each person sees:** Their own AI conversations ✓ | Saved slides and charts ✓ | Each other's private questions ✗
+- Their own AI conversations — Yes
+- Saved slides and charts from others — Yes
+- Each other's private questions — No
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d4 -->
