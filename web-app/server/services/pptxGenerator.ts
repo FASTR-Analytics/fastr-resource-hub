@@ -187,8 +187,12 @@ function parseMarkdown(content: string): ParsedSlide[] {
       slide.table = tableLines
     }
 
-    // Extract columns
-    const colsMatch = raw.match(/<div\s+class="(?:columns|split)[^"]*">\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
+    // Extract columns - match class="columns/split" OR style="display: flex"
+    let colsMatch = raw.match(/<div\s+class="(?:columns|split)[^"]*">\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
+    if (!colsMatch) {
+      // Also match flex layouts: <div style="display: flex..."><div>...</div><div>...</div></div>
+      colsMatch = raw.match(/<div\s+style="[^"]*display:\s*flex[^"]*"[^>]*>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
+    }
     if (colsMatch) {
       slide.columns = {
         left: colsMatch[1].trim(),
@@ -370,6 +374,7 @@ function resolveImagePath(imgPath: string): string | null {
     path.join(REPO_ROOT, 'resources', 'backgrounds', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'screenshots', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'icons', path.basename(imgPath)),
+    path.join(REPO_ROOT, 'resources', 'default_outputs', path.basename(imgPath)),
   ]
 
   for (const p of pathsToTry) {
@@ -947,6 +952,42 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       rowH: rowHeight,
       border: { pt: 0.5, color: 'CCCCCC' },
     })
+
+    // Calculate where the table ends for positioning images below
+    const tableEndY = tableTop + (rows * rowHeight) + 0.3
+
+    // Add images below the table if present
+    const contentImages = data.images.filter(img => !isBackgroundImage(img))
+    if (contentImages.length > 0) {
+      const availableWidth = LAYOUT.contentWidth
+      const availableHeight = 7.0 - tableEndY - 0.3  // Leave margin at bottom
+
+      if (contentImages.length === 1) {
+        // Single image - center it
+        const imgPath = resolveImagePath(contentImages[0].path)
+        if (imgPath) {
+          const imgLayout = getImageLayout(imgPath, availableWidth, availableHeight, LAYOUT.contentLeft, tableEndY)
+          if (imgLayout) {
+            slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+          }
+        }
+      } else {
+        // Multiple images - arrange horizontally
+        const imgWidth = (availableWidth - (contentImages.length - 1) * 0.3) / contentImages.length
+        let imgX = LAYOUT.contentLeft
+
+        for (const img of contentImages) {
+          const imgPath = resolveImagePath(img.path)
+          if (imgPath) {
+            const imgLayout = getImageLayout(imgPath, imgWidth, availableHeight, imgX, tableEndY)
+            if (imgLayout) {
+              slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+            }
+            imgX += imgWidth + 0.3
+          }
+        }
+      }
+    }
   }
 
   addFooterBar(slide)

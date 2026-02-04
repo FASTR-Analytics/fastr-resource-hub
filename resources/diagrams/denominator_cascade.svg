@@ -32,8 +32,7 @@
     </marker>
   </defs>
 
-  <!-- Background -->
-  <rect x="0" y="0" width="1200" height="700" fill="#ffffff"/>
+  <!-- Background (transparent) -->
 
   <!-- Big arrow - outline only -->
   <polygon points="50,65 1100,65 1100,60 1150,80 1100,100 1100,95 50,95" fill="none" stroke="#0C716B" stroke-width="3"/>

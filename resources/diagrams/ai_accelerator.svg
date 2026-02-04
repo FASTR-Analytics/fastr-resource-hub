@@ -6,8 +6,7 @@
     </linearGradient>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="320" fill="#f8fafa"/>
+  <!-- Background (transparent) -->
 
   <!-- Dividing line -->
   <line x1="50" y1="135" x2="750" y2="135" stroke="#09544F" stroke-width="1.5" stroke-dasharray="8,4" opacity="0.3"/>

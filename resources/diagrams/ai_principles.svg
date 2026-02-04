@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340">
-  <!-- Background -->
-  <rect width="800" height="340" fill="#f8fafa"/>
+  <!-- Background (transparent) -->
 
   <!-- Principle 1: Open & Transparent -->
   <g transform="translate(30, 20)">

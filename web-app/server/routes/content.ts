@@ -100,7 +100,7 @@ function getCoreContentPath(language: Language = 'en'): string {
 const CORE_CONTENT_PATH = getCoreContentPath('en')
 
 // Module names by language
-const MODULE_NAMES: Record<Language, Record<number, string>> = {
+const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
   en: {
     0: 'Introduction to FASTR',
     1: 'Identify Questions & Indicators',
@@ -112,6 +112,7 @@ const MODULE_NAMES: Record<Language, Record<number, string>> = {
     7: 'Results Communication',
     8: 'Survey & HFA',
     9: 'Workshop Activities',
+    'overview': 'FASTR 20-Minute Overview',
   },
   fr: {
     0: 'Introduction à FASTR',
@@ -124,6 +125,7 @@ const MODULE_NAMES: Record<Language, Record<number, string>> = {
     7: 'Communication des résultats',
     8: 'Enquêtes et EFS',
     9: 'Activités de l\'atelier',
+    'overview': 'Vue d\'ensemble FASTR (20 min)',
   }
 }
 
@@ -163,20 +165,33 @@ router.get('/modules', (req, res) => {
     for (const item of items) {
       const modulePath = path.join(coreContentPath, item)
 
-      if (fs.statSync(modulePath).isDirectory() && item.startsWith('m') && item.includes('_')) {
-        const modNumMatch = item.match(/^m(\d+)_/)
-        if (!modNumMatch) continue
+      // Check for standard module folders (m0_, m1_, etc.) OR the overview folder
+      const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+)_/.test(item)
+      const isOverviewModule = item === 'overview_20min'
 
-        const modNum = parseInt(modNumMatch[1])
+      if (fs.statSync(modulePath).isDirectory() && (isStandardModule || isOverviewModule)) {
+        let modNum: number | string
+        let modId: string
+
+        if (isOverviewModule) {
+          modNum = 'overview'
+          modId = 'overview'
+        } else {
+          const modNumMatch = item.match(/^m(\d+)_/)
+          if (!modNumMatch) continue
+          modNum = parseInt(modNumMatch[1])
+          modId = `m${modNum}`
+        }
+
         const fullTopics: any[] = []
         const condensedTopics: any[] = []
 
         const files = fs.readdirSync(modulePath)
           .filter(f => f.endsWith('.md'))
           .sort((a, b) => {
-            // Sort by number, handling both m4_1 and m4_s1 formats
-            const aMatch = a.match(/^m\d+_s?(\d+)/)
-            const bMatch = b.match(/^m\d+_s?(\d+)/)
+            // Sort by number, handling m4_1, m4_s1, and 01_, 02_ formats
+            const aMatch = a.match(/^(?:m\d+_s?)?(\d+)/)
+            const bMatch = b.match(/^(?:m\d+_s?)?(\d+)/)
             const aNum = aMatch ? parseInt(aMatch[1]) : 0
             const bNum = bMatch ? parseInt(bMatch[1]) : 0
             if (aNum !== bNum) return aNum - bNum
@@ -184,12 +199,23 @@ router.get('/modules', (req, res) => {
           })
 
         for (const file of files) {
-          // Match both regular (m4_1_..., m4_1a_..., m4_1a2_...) and condensed (m4_s1_...) formats
-          const topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/)
-          if (!topicMatch) continue
+          // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), and overview (01_..., 02_...) formats
+          let topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/)
+          let topicId: string
+          let isCondensed = false
 
-          const topicId = topicMatch[1]
-          const isCondensed = topicId.includes('_s')
+          if (topicMatch) {
+            topicId = topicMatch[1]
+            isCondensed = topicId.includes('_s')
+          } else if (isOverviewModule) {
+            // Overview module uses 01_, 02_, etc. format
+            const overviewMatch = file.match(/^(\d+[a-z]?)_/)
+            if (!overviewMatch) continue
+            topicId = `overview_${overviewMatch[1]}`
+            isCondensed = false
+          } else {
+            continue
+          }
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
@@ -236,8 +262,8 @@ router.get('/modules', (req, res) => {
 
         modules.push({
           number: modNum,
-          id: `m${modNum}`,
-          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || `Module ${modNum}`,
+          id: modId,
+          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || (isOverviewModule ? 'FASTR Overview' : `Module ${modNum}`),
           folder: item,
           topics: allTopics, // All topics for backward compatibility
           fullTopics: fullTopics,
@@ -302,40 +328,60 @@ router.get('/topic/:id', (req, res) => {
     const language = (req.query.language as Language) || 'en'
     const coreContentPath = getCoreContentPath(language)
 
-    const modNumMatch = topicId.match(/^m(\d+)_/)
-    if (!modNumMatch) {
-      return res.status(400).json({ error: 'Invalid topic ID' })
-    }
-
-    const modNum = modNumMatch[1]
-
-    // Try requested language first, fallback to English
     let contentPath = coreContentPath
     if (!fs.existsSync(contentPath)) {
       contentPath = CORE_CONTENT_PATH
     }
 
-    const moduleFolder = fs.readdirSync(contentPath)
-      .find(f => f.startsWith(`m${modNum}_`))
+    let moduleFolder: string | undefined
+    let filePrefix: string
 
-    if (!moduleFolder) {
-      // Fallback to English if module not found in requested language
-      if (language !== 'en') {
-        const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-          .find(f => f.startsWith(`m${modNum}_`))
-        if (enModuleFolder) {
-          contentPath = CORE_CONTENT_PATH
+    // Check if it's an overview topic (overview_01, overview_02, etc.)
+    const overviewMatch = topicId.match(/^overview_(\d+[a-z]?)$/)
+    if (overviewMatch) {
+      moduleFolder = 'overview_20min'
+      filePrefix = `${overviewMatch[1]}_`  // e.g., "01_", "04b_"
+    } else {
+      // Standard module topic (m4_1, m4_s1, etc.)
+      const modNumMatch = topicId.match(/^m(\d+)_/)
+      if (!modNumMatch) {
+        return res.status(400).json({ error: 'Invalid topic ID' })
+      }
+
+      const modNum = modNumMatch[1]
+      moduleFolder = fs.readdirSync(contentPath)
+        .find(f => f.startsWith(`m${modNum}_`))
+
+      if (!moduleFolder) {
+        // Fallback to English if module not found in requested language
+        if (language !== 'en') {
+          const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+            .find(f => f.startsWith(`m${modNum}_`))
+          if (enModuleFolder) {
+            contentPath = CORE_CONTENT_PATH
+            moduleFolder = enModuleFolder
+          } else {
+            return res.status(404).json({ error: 'Module not found' })
+          }
         } else {
           return res.status(404).json({ error: 'Module not found' })
         }
-      } else {
-        return res.status(404).json({ error: 'Module not found' })
       }
+
+      filePrefix = `${topicId}_`
     }
 
-    const modulePath = path.join(contentPath, moduleFolder || fs.readdirSync(contentPath).find(f => f.startsWith(`m${modNum}_`))!)
+    if (!moduleFolder) {
+      return res.status(404).json({ error: 'Module not found' })
+    }
+
+    const modulePath = path.join(contentPath, moduleFolder)
+    if (!fs.existsSync(modulePath)) {
+      return res.status(404).json({ error: 'Module folder not found' })
+    }
+
     const file = fs.readdirSync(modulePath)
-      .find(f => f.startsWith(`${topicId}_`) && f.endsWith('.md'))
+      .find(f => f.startsWith(filePrefix) && f.endsWith('.md'))
 
     if (!file) {
       return res.status(404).json({ error: 'Topic not found' })
@@ -804,28 +850,41 @@ router.post('/export/selection', async (req, res) => {
 
     // Then load topic content (use requested language, fallback to English)
     for (const topicId of topicIds) {
-      const modNumMatch = topicId.match(/^m(\d+)_/)
-      if (!modNumMatch) continue
-
-      const modNum = modNumMatch[1]
-
-      // Try requested language first, fallback to English
       let contentPath = fs.existsSync(coreContentPath) ? coreContentPath : CORE_CONTENT_PATH
-      let moduleFolder = fs.readdirSync(contentPath)
-        .find(f => f.startsWith(`m${modNum}_`))
+      let moduleFolder: string | undefined
+      let filePrefix: string
 
-      // Fallback to English if not found
-      if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
-        contentPath = CORE_CONTENT_PATH
+      // Check if it's an overview module topic (overview_01, overview_02, etc.)
+      const overviewMatch = topicId.match(/^overview_(\d+[a-z]?)$/)
+      if (overviewMatch) {
+        moduleFolder = 'overview_20min'
+        filePrefix = `${overviewMatch[1]}_`  // e.g., "01_", "04b_"
+      } else {
+        // Standard module topic (m4_1, m4_s1, etc.)
+        const modNumMatch = topicId.match(/^m(\d+)_/)
+        if (!modNumMatch) continue
+
+        const modNum = modNumMatch[1]
         moduleFolder = fs.readdirSync(contentPath)
           .find(f => f.startsWith(`m${modNum}_`))
+
+        // Fallback to English if not found
+        if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
+          contentPath = CORE_CONTENT_PATH
+          moduleFolder = fs.readdirSync(contentPath)
+            .find(f => f.startsWith(`m${modNum}_`))
+        }
+
+        filePrefix = `${topicId}_`
       }
 
       if (!moduleFolder) continue
 
       const modulePath = path.join(contentPath, moduleFolder)
+      if (!fs.existsSync(modulePath)) continue
+
       const file = fs.readdirSync(modulePath)
-        .find(f => f.startsWith(`${topicId}_`) && f.endsWith('.md'))
+        .find(f => f.startsWith(filePrefix) && f.endsWith('.md'))
 
       if (!file) continue
 

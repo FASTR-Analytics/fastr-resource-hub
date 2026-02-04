@@ -36,6 +36,7 @@ const MODULE_FOLDERS: Record<string, string> = {
   m7: 'm7_results_communication',
   m8: 'm8_survey_hfa',
   m9: 'm9_workshop_activities',
+  overview: 'overview_20min',
 }
 
 interface Session {
@@ -224,6 +225,7 @@ const MODULE_NAMES: Record<string, string> = {
   m7: 'Results Communication',
   m8: 'Survey & HFA',
   m9: 'Workshop Activities',
+  overview: 'FASTR 20-Minute Overview',
 }
 
 /**
@@ -257,21 +259,30 @@ function buildModuleSlides(
   // Filter by version (full vs condensed)
   // Full version: files like m4_0_*, m4_1_*, m4_1a_* (NO _s after module ID)
   // Condensed version: files like m4_s1_*, m4_s2_* (WITH _s after module ID)
+  // Special case: overview module uses numeric prefixes like 01_, 02_, etc.
   // Default to "full" if not specified
   const effectiveVersion = version || 'full'
 
-  if (effectiveVersion === 'condensed') {
-    // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
-    files = files.filter(f => {
-      const match = f.match(/^m\d+_s\d+/)
-      return match !== null
-    })
-  } else {
-    // Full (default): exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
-    files = files.filter(f => {
-      const match = f.match(/^m\d+_s\d+/)
-      return match === null  // NOT a condensed file
-    })
+  // Special handling for overview module - no version filtering needed
+  if (moduleId !== 'overview') {
+    if (effectiveVersion === 'condensed') {
+      // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
+      files = files.filter(f => {
+        const match = f.match(/^m\d+_s\d+/)
+        return match !== null
+      })
+    } else {
+      // Full (default): exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
+      files = files.filter(f => {
+        const match = f.match(/^m\d+_s\d+/)
+        return match === null  // NOT a condensed file
+      })
+    }
+  }
+
+  // Exclude the combined deck file for overview module
+  if (moduleId === 'overview') {
+    files = files.filter(f => f !== 'overview_20min.md')
   }
 
   // Sort files by topic number
@@ -284,12 +295,22 @@ function buildModuleSlides(
       const aFullMatch = a.match(/^m\d+_(\d+)/)
       const bFullMatch = b.match(/^m\d+_(\d+)/)
 
+      // Handle overview files (01_, 02_, 04b_, etc.)
+      const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
+      const bOverviewMatch = b.match(/^(\d+)([a-z])?_/)
+
       // Get numbers for sorting
-      const aNum = aCondensedMatch ? parseInt(aCondensedMatch[1]) : (aFullMatch ? parseInt(aFullMatch[1]) : 0)
-      const bNum = bCondensedMatch ? parseInt(bCondensedMatch[1]) : (bFullMatch ? parseInt(bFullMatch[1]) : 0)
+      let aNum = 0, bNum = 0
+      if (aCondensedMatch) aNum = parseInt(aCondensedMatch[1])
+      else if (aFullMatch) aNum = parseInt(aFullMatch[1])
+      else if (aOverviewMatch) aNum = parseInt(aOverviewMatch[1])
+
+      if (bCondensedMatch) bNum = parseInt(bCondensedMatch[1])
+      else if (bFullMatch) bNum = parseInt(bFullMatch[1])
+      else if (bOverviewMatch) bNum = parseInt(bOverviewMatch[1])
 
       if (aNum !== bNum) return aNum - bNum
-      // If same topic number, sort alphabetically (e.g., m4_1 before m4_1a before m4_1b)
+      // If same topic number, sort alphabetically (e.g., m4_1 before m4_1a before m4_1b, or 04_ before 04b_)
       return a.localeCompare(b)
     })
 
@@ -359,12 +380,20 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
   let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
 
   // Filter by version (default to "full" if not specified)
-  const effectiveVersion = version || 'full'
-  if (effectiveVersion === 'condensed') {
-    files = files.filter(f => f.match(/^m\d+_s\d+/) !== null)
-  } else {
-    // Full (default): exclude condensed files
-    files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
+  // Special handling for overview module - no version filtering needed
+  if (moduleId !== 'overview') {
+    const effectiveVersion = version || 'full'
+    if (effectiveVersion === 'condensed') {
+      files = files.filter(f => f.match(/^m\d+_s\d+/) !== null)
+    } else {
+      // Full (default): exclude condensed files
+      files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
+    }
+  }
+
+  // Exclude the combined deck file for overview module
+  if (moduleId === 'overview') {
+    files = files.filter(f => f !== 'overview_20min.md')
   }
 
   return files.sort((a, b) => {
@@ -376,9 +405,19 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
       const aFullMatch = a.match(/^m\d+_(\d+)/)
       const bFullMatch = b.match(/^m\d+_(\d+)/)
 
+      // Handle overview files (01_, 02_, 04b_, etc.)
+      const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
+      const bOverviewMatch = b.match(/^(\d+)([a-z])?_/)
+
       // Get numbers for sorting
-      const aNum = aCondensedMatch ? parseInt(aCondensedMatch[1]) : (aFullMatch ? parseInt(aFullMatch[1]) : 0)
-      const bNum = bCondensedMatch ? parseInt(bCondensedMatch[1]) : (bFullMatch ? parseInt(bFullMatch[1]) : 0)
+      let aNum = 0, bNum = 0
+      if (aCondensedMatch) aNum = parseInt(aCondensedMatch[1])
+      else if (aFullMatch) aNum = parseInt(aFullMatch[1])
+      else if (aOverviewMatch) aNum = parseInt(aOverviewMatch[1])
+
+      if (bCondensedMatch) bNum = parseInt(bCondensedMatch[1])
+      else if (bFullMatch) bNum = parseInt(bFullMatch[1])
+      else if (bOverviewMatch) bNum = parseInt(bOverviewMatch[1])
 
       if (aNum !== bNum) return aNum - bNum
       return a.localeCompare(b)

@@ -6,8 +6,7 @@
     </linearGradient>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="340" fill="#f8fafa"/>
+  <!-- Background (transparent) -->
 
   <!-- Center: AI Assistant -->
   <g transform="translate(340, 95)">

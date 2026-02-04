@@ -1,61 +1,122 @@
 # Instructions for Claude
 
-## Content Location - Single Source of Truth
-
-**All content lives in the `methodology/` folder only.**
-
-The `methodology/` folder is the **single source of truth** for all FASTR content. Content written here is then:
-1. Published to the documentation website
-2. Extracted into slides for workshop presentations
-
-Do NOT add or edit content in:
-- `core_content/` - this is auto-generated from methodology files
-- `workshops/` - these only contain configuration, not content
-- `templates/` - structural templates only
-
-## How the System Works
+## Repository Structure
 
 ```
-methodology/*.md  →  Documentation website
+fastr-resource-hub/
+├── methodology/          # Source content for docs website (MkDocs)
+├── core_content/         # Extracted slides for web-app (auto-generated + custom)
+├── core_content_fr/      # French translations
+├── web-app/              # Deck Builder web application
+├── templates/            # Slide templates (title, breaks, etc.)
+├── templates_fr/         # French templates
+├── resources/            # Images, diagrams, backgrounds
+├── workshops/            # Workshop YAML configs
+└── tools/                # Python scripts for extraction
+```
+
+## Two Systems
+
+### 1. Documentation Website (MkDocs)
+- Lives in `methodology/` folder
+- Built with MkDocs Material
+- Run: `cd methodology && mkdocs serve`
+- Config: `methodology/mkdocs.yml`
+
+### 2. Web App - Deck Builder
+- Lives in `web-app/` folder
+- React frontend + Express backend
+- Run: `cd web-app && ./dev.sh start`
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3001
+
+## Content Flow
+
+```
+methodology/*.md  →  MkDocs website (docs)
        ↓
        →  Extracted to core_content/ (via tools/00_extract_slides.py)
               ↓
-              →  Combined into workshop decks (via tools/02_build_deck.py)
+              →  Web-app reads from core_content/ for slide library
 ```
 
-## File Structure in methodology/
+## Web-App Module System
 
-Each methodology file has two parts:
+The web-app scans `core_content/` for module folders:
 
-1. **Documentation section** (top): Full explanations for the website
-2. **Slide section** (after ASCII separator): Condensed content for workshops, marked with `<!-- SLIDE:xxx -->` tags
+**Standard modules** (auto-extracted from methodology):
+- Folder pattern: `m{number}_{name}/` (e.g., `m4_data_quality_assessment/`)
+- File pattern: `m{num}_{topic}_{name}.md` or `m{num}_s{topic}_{name}.md` (condensed)
+- Configured in: `web-app/server/routes/content.ts`
 
-When adding new content, add it to the appropriate methodology file in both sections if it should appear on both the website and in workshop slides.
+**Custom modules** (manually created):
+- Folder: `core_content/overview_20min/`
+- File pattern: `01_name.md`, `02_name.md`, etc.
+- Must be registered in `content.ts` MODULE_NAMES
 
-## Style guidelines
+### Adding a New Custom Module
 
-See `help and instructions/07_style_guide.md` for the full style guide.
+1. Create folder in `core_content/` (e.g., `core_content/my_custom/`)
+2. Add slide files with numbered prefix: `01_intro.md`, `02_content.md`
+3. Update `web-app/server/routes/content.ts`:
+   - Add to `MODULE_NAMES` for both `en` and `fr`
+   - Update folder detection logic if pattern differs from standard
+
+## File Naming Conventions
+
+| Location | Pattern | Example |
+|----------|---------|---------|
+| Methodology | `{num}_{name}.md` | `04_data_quality_assessment.md` |
+| Core content (full) | `m{num}_{topic}_{name}.md` | `m4_1_dqa_overview.md` |
+| Core content (condensed) | `m{num}_s{topic}_{name}.md` | `m4_s1_dqa_overview.md` |
+| Custom content | `{num}_{name}.md` | `01_introduction.md` |
+| French content | Same patterns in `core_content_fr/` | |
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `web-app/server/routes/content.ts` | API for modules, templates, exports |
+| `web-app/server/services/deckBuilder.ts` | Builds workshop decks from YAML |
+| `tools/00_extract_slides.py` | Extracts slides from methodology to core_content |
+| `methodology/mkdocs.yml` | MkDocs site configuration |
+
+## Running the Web-App
+
+```bash
+cd web-app
+./dev.sh start    # Start both frontend and backend
+./dev.sh stop     # Stop servers
+./dev.sh restart  # Restart servers
+./dev.sh status   # Check server status
+```
+
+Logs:
+- Backend: `tail -f /tmp/fastr-backend.log`
+- Frontend: `tail -f /tmp/fastr-frontend.log`
+
+## Style Guidelines
+
+See `help and instructions/07_style_guide.md` for full guide.
 
 **Key rules:**
 - **Headings**: Sentence case (only capitalize first word and proper nouns)
-- **Heading hierarchy**: `#` title, `##` main sections, `###` subsections, `####` details
-- **Bold**: For key terms, feature introductions, labels (e.g., **Inputs**:)
-- **Inline code**: For filenames, variables, function names (e.g., `hmis_data.csv`)
+- **Bold**: For key terms, labels (e.g., **Inputs**:)
+- **Inline code**: For filenames, variables (e.g., `hmis_data.csv`)
 - **Lists**: No periods for single-line items
-- **Expandable sections**: Use `???` for technical details
 
-## The module files
+## Module Reference
 
-| File | Topic |
-|------|-------|
-| `00_introduction.md` | Introduction to FASTR |
-| `01_identify_questions_indicators.md` | Identify Questions & Indicators |
-| `02_data_extraction.md` | Data Extraction |
-| `03_fastr_analytics_platform.md` | The FASTR Analytics Platform |
-| `04_data_quality_assessment.md` | Data Quality Assessment |
-| `05_data_quality_adjustment.md` | Data Quality Adjustment |
-| `06a_service_utilization.md` | Service Utilization Analysis |
-| `06b_coverage_estimates.md` | Coverage Estimates |
-| `07_results_communication.md` | Results Communication |
-| `09_fastr_rmet_integration.md` | FASTR and RMET Integration |
-| `10_workshop_activities.md` | Workshop Activities |
+| # | Methodology File | Topic |
+|---|------------------|-------|
+| 0 | `00_introduction.md` | Introduction to FASTR |
+| 1 | `01_identify_questions_indicators.md` | Questions & Indicators |
+| 2 | `02_data_extraction.md` | Data Extraction |
+| 3 | `03_fastr_analytics_platform.md` | Analytics Platform |
+| 4 | `04_data_quality_assessment.md` | DQ Assessment |
+| 5 | `05_data_quality_adjustment.md` | DQ Adjustment |
+| 6 | `06a_service_utilization.md`, `06b_coverage_estimates.md` | Data Analysis |
+| 7 | `07_results_communication.md` | Results Communication |
+| 8 | (Survey & HFA) | Survey & HFA |
+| 9 | `10_workshop_activities.md` | Workshop Activities |
+| - | `core_content/overview_20min/` | Custom 20-min overview (not from methodology) |
