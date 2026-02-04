@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560">
-  <!-- Background -->
-  <rect width="1200" height="560" fill="#f8fafa"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
+  <!-- Background (transparent) -->
 
   <!-- Main flow boxes -->
 
@@ -100,12 +99,6 @@
 
     <circle cx="35" cy="185" r="4" fill="#D8A822"/>
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Triangulate with local knowledge</text>
-  </g>
-
-  <!-- Bottom key message -->
-  <g transform="translate(100, 495)">
-    <rect x="0" y="0" width="1000" height="50" rx="8" fill="#09544F"/>
-    <text x="500" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="white">FASTR provides the evidence — you provide the judgement, context, and decisions.</text>
   </g>
 
 </svg>
