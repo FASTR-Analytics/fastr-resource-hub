@@ -974,137 +974,44 @@ For the volume change chart (output 4):
     - Negative values indicate declining service utilization over time
     - Values near zero indicate stable utilization patterns
 
-    ### Performance Considerations
+??? "Choosing which outputs to review"
 
-    **Runtime factors**:
+    **For quick overviews**:
 
-    - **Number of indicators**: Linear scaling
-    - **Number of geographic units**: Linear scaling within each level
-    - **Time series length**: Minimal impact (efficient regression)
-    - **Geographic detail**: Exponential scaling (many more units at finer levels)
+    - Start with year-over-year heatmaps to identify areas/indicators with notable changes
+    - Use control charts for indicators with suspected disruptions
+    - Focus on high-volume indicators where patterns are more reliable
 
-    **Estimated runtimes** (example dataset: 50 indicators, 100 districts):
+    **For subnational analysis**:
 
-    - Country-wide + Province models: ~5-10 minutes
-    - Add District models: ~30-60 minutes
-    - Add Ward models: Several hours (depends on number of wards)
+    - Province-level provides reliable patterns with sufficient data volume
+    - District-level useful for identifying local issues but patterns may be noisier
+    - Cross-check district patterns against provincial trends for consistency
 
-    **Optimization strategies**:
+    **For time-based analysis**:
 
-    - Set `RUN_DISTRICT_MODEL = FALSE` for faster execution (skips district level)
-    - Set `RUN_ADMIN_AREA_4_ANALYSIS = FALSE` (default) to avoid ward-level analysis
-    - Reduce `SMOOTH_K` for faster rolling median calculation
-    - Use `SELECTEDCOUNT = "count_final_none"` to avoid completeness adjustments
+    - Recent periods (last 6 months) may show preliminary patterns that could change
+    - Look for sustained changes (3+ consecutive months) rather than single-month spikes
+    - Consider known events (policy changes, campaigns, strikes) when interpreting
 
-    ### Data Processing Details
+??? "Limitations"
 
-    **Memory management**:
+    **Statistical limitations**:
 
-    - Uses `data.table` for efficient operations on large datasets
-    - Batch processing: Results saved to disk periodically
-    - Progressive cleanup: Objects deleted when no longer needed
-    - Temporary files enable processing datasets larger than RAM
+    - Disruption detection works best with 2+ years of historical data
+    - Low-volume indicators may show high percentage changes from small absolute changes
+    - Seasonal patterns require at least 12 months of data to model accurately
 
-    **Batch sizes** (tunable for memory constraints):
+    **Interpretation caveats**:
 
-    - Control chart: 100 panels per batch
-    - Indicators: 5 indicators per batch
-    - Provinces: 20 results per batch
-    - Districts: 15 results per batch
-    - Admin area 4: 10 results per batch
+    - Detected disruptions require contextual investigation (not all are problematic)
+    - Positive disruptions (surpluses) may reflect campaigns, catch-up, or data issues
+    - Geographic patterns affected by facility distribution and reporting rates
 
-    **Missing data handling**:
+    **Data requirements**:
 
-    1. Missing months filled via `tidyr::complete()`
-    2. Forward/backward fill for metadata
-    3. Linear interpolation (`zoo::na.approx`) for count values
-    4. Maximum gap: Unlimited (rule = 2 extends endpoints)
-
-    ### Model Fallback Logic
-
-    The control chart analysis uses adaptive model selection based on data availability:
-
-    **Full model** (requires ≥12 obs AND >12 unique dates):
-
-    ```r
-    count ~ month_factor + as.numeric(date)
-    ```
-
-    Accounts for both seasonality and linear trend
-
-    **Trend-Only Model** (requires ≥12 obs):
-
-    ```r
-    count ~ as.numeric(date)
-    ```
-
-    Accounts for linear trend only (insufficient data for seasonality)
-
-    **Median fallback** (<12 observations):
-
-    ```r
-    count_predict = median(count)
-    ```
-
-    Uses global median when insufficient data for regression
-
-    **Convergence checks**:
-
-    - Models checked for convergence status
-    - Warnings issued for non-convergent models
-    - Non-convergent models still used (partial convergence often sufficient)
-
-    ### Quality Assurance
-
-    **Data cleaning**:
-
-    - Outliers removed prior to control chart analysis (based on Module 1 flags)
-    - Low-volume months (<50% of mean) excluded to improve model stability
-    - Predictions bounded at zero (counts cannot be negative)
-
-    **Automatic flagging**:
-
-    - Recent months (last 6 months) automatically flagged to ensure current disruptions captured
-    - Prevents missing ongoing disruptions due to insufficient deviation from trend
-
-    **Robustness checks**:
-
-    - Model coefficients checked for `NA` values before use
-    - If `tagged` variable dropped from model (no variation), disruption effect set to 0
-    - P-values calculated only when valid standard errors available
-
-    **Edge case handling**:
-
-    - Single-cluster panels: No clustering applied (would fail)
-    - Insufficient data: Skip analysis for that panel/level
-    - Missing predictions: Filled with original values where possible
-
-    ### Workflow Integration
-
-    This module is **Module 3** in the FASTR analytical pipeline:
-
-    **Prerequisites**:
-
-    1. **Module 1**: Data Quality Assessment (generates `M1_output_outliers.csv`)
-    2. **Module 2**: Data Quality Adjustments (generates `M2_adjusted_data.csv`)
-
-    ### Dependencies
-
-    **R Packages Required**:
-
-    - `data.table`: Efficient data manipulation
-    - `lubridate`: Date handling
-    - `zoo`: Rolling statistics and interpolation
-    - `MASS`: Robust regression (rlm)
-    - `fixest`: Fixed-effects panel regression
-    - `dplyr`: Data manipulation
-    - `tidyr`: Data tidying
-
-
----
-
-**Last updated**: 26-01-2026
-**Contact**: FASTR Project Team
+    - Results depend on quality of completeness and outlier adjustments from earlier modules
+    - Missing geographic identifiers will reduce coverage of subnational analysis
 
 ---
 

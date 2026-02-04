@@ -156,7 +156,10 @@
       "Bash(comm -23:*)",
       "Bash(comm:*)",
       "Bash(ps:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(__NEW_LINE_64cf501f2945aaa1__ echo \"\")",
+      "Bash(__NEW_LINE_ebf45be69dbed693__ echo \"\")",
+      "Bash(__NEW_LINE_df23e7c5f1e1db21__ echo \"\")"
     ]
   }
 }

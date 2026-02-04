@@ -1239,166 +1239,6 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ### Usage notes
 
-??? "Data type handling"
-
-    **period_id Flexibility:**
-    The module accepts `period_id` in multiple formats:
-    - Integer: `202401`
-    - String: `"202401"`
-    - Numeric: `202401.0`
-
-    All formats are internally converted to Date objects for correct chronological ordering:
-
-    ```r
-    # Internal conversion
-    as.Date(sprintf("%04d-%02d-01", year, month))
-    ```
-
-    This ensures proper temporal ordering even with gaps in reporting periods.
-
-    **Count values:**
-    - Numeric values required (integers or decimals)
-    - Zero counts should be explicit `0`, not `NA`
-    - Missing counts represented as `NA` or absent rows
-
-    **Geographic columns:**
-    - Character type recommended
-    - Can contain spaces and special characters
-    - Case-sensitive in some operations
-
-??? "Missing value strategy"
-
-    The module uses context-specific approaches to missing values:
-
-    **Outlier analysis:**
-    - NA values excluded from median/MAD calculations
-    - Only non-NA values contribute to statistics
-    - Prevents bias from sparse reporting
-
-    **Completeness:**
-    - Explicit NA in count column indicates non-reporting
-    - Assigned completeness_flag = 0 (incomplete)
-    - Distinguished from inactive periods (flag = 2, removed)
-
-    **Consistency:**
-    - NA ratios (from division by zero) kept as NA, not converted to 0
-    - NA pairs excluded from consistency scoring denominator
-    - Prevents penalizing facilities for unavailable indicators
-
-    **DQA Scoring:**
-    - NA consistency pairs excluded from denominator
-    - Only available pairs affect consistency score
-    - Allows partial scoring when some indicators missing
-
-??? "Memory considerations"
-
-    For large datasets (>1 million rows), the module implements several optimizations:
-
-    **data.table Usage:**
-    - Completeness processing uses `data.table` for in-place operations
-    - Significantly faster and more memory-efficient than `dplyr` for large data
-
-    **Filtering strategy:**
-    - Filters to relevant indicators before expensive operations
-    - Reduces memory footprint during calculations
-
-    **Object management:**
-    - Removes intermediate objects after use
-    - Prevents memory accumulation during sequential processing
-
-    **Recommendations for Large Datasets:**
-    - Allocate at least 8GB RAM for countries with >1000 facilities
-    - Consider processing by year if multi-year datasets cause memory issues
-    - Monitor memory usage: `pryr::mem_used()` at various stages
-
-??? "Performance optimization opportunities"
-
-    **Current implementation:**
-    The completeness analysis processes indicators sequentially using `lapply()`.
-
-    **Potential enhancement:**
-    For datasets with many indicators, parallelization could improve performance:
-
-    ```r
-    # Future enhancement (not in current code)
-    library(parallel)
-
-    # Detect available cores
-    n_cores <- detectCores() - 1
-
-    # Parallel processing of indicators
-    completeness_list <- mclapply(
-      unique(outlier_data_main$indicator_common_id),
-      function(ind) generate_full_series_per_indicator(
-        outlier_data = outlier_data_main,
-        indicator_id = ind,
-        timeframe = indicator_timeframe
-      ),
-      mc.cores = n_cores
-    )
-
-    # Combine results
-    completeness_data <- rbindlist(completeness_list)
-    ```
-
-    **Expected speedup:**
-    - 3-4x faster with 4 cores on datasets with 10+ indicators
-    - Most beneficial for countries with many indicators and long time series
-
-??? "Dynamic indicator selection"
-
-    The module intelligently adapts to available data:
-
-    **Delivery indicator selection:**
-
-    ```r
-    # Automatically chooses between "delivery" and "sba" for BCG consistency pair
-    if ("delivery" %in% available_indicators) {
-      PAIR_DELIVERY_B <- "delivery"
-    } else if ("sba" %in% available_indicators) {
-      PAIR_DELIVERY_B <- "sba"  # Skilled birth attendant
-    } else {
-      PAIR_DELIVERY_B <- "delivery"  # Default fallback
-    }
-    ```
-
-    **DQA Indicator Validation:**
-
-    ```r
-    # Only use DQA indicators that exist in the dataset
-    dqa_indicators_to_use <- intersect(DQA_INDICATORS, unique(data$indicator_common_id))
-
-    # If none found, skip DQA analysis with informative message
-    if (length(dqa_indicators_to_use) == 0) {
-      print("Skipping DQA analysis - none of the required indicators found")
-    }
-    ```
-
-    **Consistency pair validation:**
-    The module checks each consistency pair and removes those with missing indicators, providing clear warnings about which pairs were skipped.
-
-??? "Error handling and fallbacks"
-
-    The module includes robust error handling:
-
-    **Missing consistency pairs:**
-    - If no valid pairs exist, skips consistency analysis
-    - Uses `dqa_without_consistency()` for scoring
-    - Outputs dummy files with proper headers
-
-    **Missing geographic levels:**
-    - Falls back to lowest available admin level if specified `GEOLEVEL` not found
-    - Issues warning about the fallback
-
-    **Empty results:**
-    - Creates CSV files with proper headers even when no data
-    - Ensures downstream processes do not break
-
-    **Missing indicators:**
-    - Validates all indicator requirements before analysis
-    - Warns about removed pairs
-    - Continues with available indicators
-
 ??? "Interpretation guidelines"
 
     **Outlier flags:**
@@ -1422,84 +1262,45 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - dqa_score = 0 requires further investigation
     - dqa_mean provides nuanced view (0.75 = mostly good, 0.25 = mostly poor)
 
-### Data quality metrics summary
+??? "Choosing which outputs to review"
 
-| Metric                        | Type        | Range      | Interpretation                                                            |
-|-------------------------------|-------------|------------|---------------------------------------------------------------------------|
-| outlier_flag                  | Binary      | 0 or 1     | 1 = Outlier detected by either method (MAD or proportional) AND count > 100 |
-| outlier_mad                   | Binary      | 0 or 1     | 1 = Statistical outlier (MAD-based)                                       |
-| outlier_pc                    | Binary      | 0 or 1     | 1 = Proportional outlier (>80% of annual volume)                          |
-| mad_residual                  | Continuous  | 0 to ∞     | Standardized deviation from median (higher = more extreme)                |
-| pc                            | Continuous  | 0 to 1     | Proportion of annual volume (closer to 1 = more concentrated)             |
-| completeness_flag             | Categorical | 0, 1, 2    | 0=Incomplete (missing), 1=Complete (reported), 2=Inactive (removed)      |
-| sconsistency                  | Binary      | 0, 1, NA   | 1=Consistent (passes benchmark), 0=Inconsistent, NA=Cannot calculate     |
-| consistency_ratio             | Continuous  | 0 to ∞     | Ratio of paired indicators (interpretation depends on pair)               |
-| completeness_outlier_score    | Continuous  | 0 to 1     | Proportion of DQA indicators passing completeness & outlier checks        |
-| consistency_score             | Continuous  | 0 to 1     | Proportion of consistency pairs passing benchmarks                        |
-| dqa_mean                      | Continuous  | 0 to 1     | Average of component scores (overall quality measure)                     |
-| dqa_score                     | Binary      | 0 or 1     | 1 = All checks pass (complete, no outliers, consistent); 0 = any check failed |
+    **For initial assessment**:
 
+    - Start with DQA summary heatmaps to identify areas/indicators with issues
+    - Focus on high-volume indicators (ANC1, Penta1, Delivery) which are more reliable
+    - Review completeness trends over time before point estimates
 
-### Execution workflow
+    **For deeper investigation**:
 
-The module follows this sequence:
+    - Use outlier detail files to see specific flagged values
+    - Cross-reference consistency issues with programmatic knowledge
+    - Compare patterns across adjacent geographic areas
 
-```
-1. DATA LOADING & PREPROCESSING
-   ├─ Load HMIS CSV file
-   ├─ Convert period_id to dates
-   ├─ Detect geographic columns
-   └─ Create composite malaria indicator (if applicable)
+    **Priority order**:
 
-2. CONFIGURATION & VALIDATION
-   ├─ Detect available indicators
-   ├─ Dynamically select delivery indicator (delivery vs sba)
-   ├─ Build consistency pairs based on available indicators
-   ├─ Validate consistency pairs
-   └─ Filter DQA indicators to available ones
+    1. Completeness - affects whether data represents the full picture
+    2. Outliers - directly distort aggregate statistics
+    3. Consistency - may indicate systemic issues or data entry problems
 
-3. OUTLIER ANALYSIS
-   ├─ Calculate median and MAD by facility-indicator
-   ├─ Flag MAD-based outliers (>10 MADs from median)
-   ├─ Flag proportion-based outliers (>80% of annual volume)
-   └─ Combine flags (either method + count > 100)
+??? "Limitations"
 
-4. COMPLETENESS ANALYSIS
-   ├─ Identify reporting timeframe per indicator
-   ├─ Generate full time series (all facilities × all months)
-   ├─ Tag reporting status (complete/incomplete/inactive)
-   └─ Remove inactive periods (6+ months before first/after last report)
+    **Statistical limitations**:
 
-5. CONSISTENCY ANALYSIS (if applicable)
-   ├─ Exclude outliers from data
-   ├─ Aggregate to geographic level (e.g., district)
-   ├─ Calculate ratios for indicator pairs
-   ├─ Flag consistency based on predefined ranges
-   ├─ Expand geo-level results to facilities
-   └─ Pivot to wide format (one column per pair)
+    - MAD-based outlier detection assumes roughly symmetric distributions
+    - Consistency thresholds (98th percentile) may need context-specific tuning
+    - Completeness assessment requires accurate facility master list
 
-6. DQA SCORING
-   ├─ Filter to DQA indicators only
-   ├─ Merge completeness, outlier, and consistency results
-   ├─ Calculate component scores:
-   │  ├─ Completeness-outlier score (0-1)
-   │  └─ Consistency score (0-1, if applicable)
-   ├─ Calculate mean DQA score
-   └─ Assign binary DQA pass/fail flag
+    **Interpretation caveats**:
 
-7. EXPORT RESULTS
-   ├─ M1_output_outlier_list.csv (outliers only)
-   ├─ M1_output_outliers.csv (all records with flags)
-   ├─ M1_output_completeness.csv (completeness flags)
-   ├─ M1_output_consistency_geo.csv (geo-level consistency)
-   ├─ M1_output_consistency_facility.csv (facility-level consistency)
-   └─ M1_output_dqa.csv (final DQA scores)
-```
+    - Not all flagged issues are errors (campaigns, outbreaks cause genuine spikes)
+    - Consistency failures may reflect programmatic issues, not data quality
+    - Geographic aggregations can mask facility-level variation
 
----
+    **Data requirements**:
 
-**Last updated**: 26-01-2026
-**Contact**: FASTR Project Team
+    - At least 6 months of data recommended for stable outlier detection
+    - Facility identifiers must be consistent across periods
+    - Missing geographic identifiers limit subnational analysis
 
 ---
 
