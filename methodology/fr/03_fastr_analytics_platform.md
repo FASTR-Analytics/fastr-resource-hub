@@ -411,41 +411,98 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_9 -->
 ## L'assistant IA
 
-Les données de santé sont abondantes — les informations exploitables et disponibles en temps réel ne le sont pas.
+La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 
-Les ministères de la Santé collectent d'énormes quantités de données (notamment dans le DHIS2), mais font face à :
+**Contexte :** De nombreux systèmes de santé disposent de plus de données que de capacité à les analyser
 
-- Un accès limité aux logiciels d'analyse et de visualisation
-- Des pénuries et une forte rotation du personnel S&E qualifié
-- Une dépendance à des formations répétées et coûteuses qui ne passent pas à l'échelle
-- Une dépendance à des analyses externalisées qui sont lentes ou incohérentes
+- Le personnel S&E a souvent peu de temps pour des analyses approfondies
+- Les compétences analytiques varient selon les équipes et les régions
+- Transformer les données en insights narratifs nécessite des connaissances techniques et contextuelles
 
-L'assistant IA de FASTR répond à ces défis en fournissant un support à la demande pour l'analyse, l'interprétation et la génération de rapports.
+**Ce qu'il fait :** L'assistant IA aide à combler cet écart en :
+
+- Expliquant les tendances et les patterns en langage clair
+- Générant des ébauches de rapports et des messages clés
+- Répondant aux questions sur les données ou la méthodologie
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9a -->
 ## Ce que l'assistant IA peut faire
 
-**Compréhension par l'utilisateur**
-- Aide à comprendre l'approche et les méthodes
-- Comment utiliser la plateforme elle-même
+**Répondre aux questions sur vos données**
 
-**Synthèse et interprétation**
-- Examiner les données
-- Générer des messages clés (à partir de plusieurs tableaux de données)
-- Rapports/présentations avec une histoire et un fil conducteur
+- « Comment la couverture CPN a-t-elle évolué depuis 2023 ? »
+- « Quelles régions ont la pire qualité des données ? »
+- Crée des graphiques et explications à la volée
 
-**Opérations de la plateforme**
-- Manipuler la configuration des visualisations
-- Exécuter des modules
+**Expliquer la méthodologie**
+
+- « Comment les valeurs aberrantes sont-elles détectées ? »
+- « Que signifie cette estimation de couverture ? »
+- S'appuie sur la documentation de la plateforme
+
+**Aider à construire des rapports**
+
+- Générer des présentations à partir de vos données
+- Combiner graphiques sauvegardés et texte narratif
+- Créer des présentations pour différents publics
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9a1 -->
+## L'IA à travers les composants de la plateforme
+
+| Composant | Ce que c'est | Ce que l'IA peut faire |
+|-----------|-------------|------------------------|
+| **Tableau blanc** | Canevas temporaire pour l'exploration | Créer des graphiques à la volée (ligne/barre/tableau), expliquer, max 3 blocs |
+| **Visualisations** | Graphiques sauvegardés dans le projet | Afficher, expliquer, lire les données, utiliser des réplicants |
+| **Présentations** | Présentations multi-diapositives | Construire des diapositives combinant graphiques + narratif, max 3 blocs |
+
+**Comportements clés :**
+
+- L'IA interroge toujours les données avant de commenter (pas de suppositions)
+- Peut filtrer par indicateur, région, période et désagréger de manière flexible
+- Ne peut pas créer/modifier les visualisations sauvegardées ni modifier les données
+
+**Tableau blanc** = exploration temporaire. **Visualisations** = permanentes (vous les créez). **Présentations** = combinent les deux.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e -->
-## Une IA fondée sur les preuves, pas sur des suppositions
+## Comment fonctionne l'assistant IA
 
-L'assistant IA de FASTR vérifie les résultats réels, les méthodes et la documentation avant de répondre.
+L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
 
-![Diagramme des outils IA](../resources/diagrams/ai_on_rails.svg)
+**Pour les questions sur les données** (ex: « Comment la couverture CPN a-t-elle évolué ? ») :
+
+1. Trouve la métrique pertinente dans votre projet
+2. Lit les valeurs réelles des données
+3. Répond en fonction de ce qu'elle a lu, avec une visualisation
+
+**Pour les questions méthodologiques** (ex: « Comment les valeurs aberrantes sont-elles détectées ? ») :
+
+1. Consulte la documentation pertinente
+2. Lit les détails méthodologiques
+3. Explique en langage clair
+
+![Diagramme des outils IA h:170](../resources/diagrams_fr/ai_on_rails.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e1 -->
+## Ce que l'IA fait — et ne fait pas
+
+FASTR utilise une approche hybride : statistiques traditionnelles pour les calculs, IA pour l'interaction.
+
+| L'IA gère | Les modules R gèrent |
+|-----------|---------------------|
+| Requêtes en langage naturel | Détection des valeurs aberrantes (MAD) |
+| Explication des tendances en langage clair | Estimation de la couverture (régression) |
+| Génération de rapports et narratifs | Scores de qualité des données (algorithmes) |
+| Connexion des insights entre indicateurs | Ajustements de complétude |
+
+**Pourquoi c'est important :**
+
+- Les calculs sont reproductibles, auditables et validés
+- L'IA rend les résultats accessibles sans nécessiter de compétences en programmation
+- Vous obtenez des statistiques rigoureuses avec une interface conversationnelle
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->

@@ -6,13 +6,16 @@ paginate: true
 
 ## L'assistant IA
 
-Les données de santé sont abondantes — les informations exploitables et disponibles en temps réel ne le sont pas.
+La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 
-Les ministères de la Santé collectent d'énormes quantités de données (notamment dans le DHIS2), mais font face à :
+**Contexte :** De nombreux systèmes de santé disposent de plus de données que de capacité à les analyser
 
-- Un accès limité aux logiciels d'analyse et de visualisation
-- Des pénuries et une forte rotation du personnel S&E qualifié
-- Une dépendance à des formations répétées et coûteuses qui ne passent pas à l'échelle
-- Une dépendance à des analyses externalisées qui sont lentes ou incohérentes
+- Le personnel S&E a souvent peu de temps pour des analyses approfondies
+- Les compétences analytiques varient selon les équipes et les régions
+- Transformer les données en insights narratifs nécessite des connaissances techniques et contextuelles
 
-L'assistant IA de FASTR répond à ces défis en fournissant un support à la demande pour l'analyse, l'interprétation et la génération de rapports.
+**Ce qu'il fait :** L'assistant IA aide à combler cet écart en :
+
+- Expliquant les tendances et les patterns en langage clair
+- Générant des ébauches de rapports et des messages clés
+- Répondant aux questions sur les données ou la méthodologie

@@ -6,13 +6,16 @@ paginate: true
 
 ## The AI assistant
 
-Health data is abundant — actionable, just-in-time insights are not.
+The FASTR platform includes an AI assistant that provides on-demand support for data interpretation and report generation.
 
-Ministries of Health collect vast amounts of data (especially in DHIS2), but face:
+**Context:** Many health systems have more data than capacity to analyze it
 
-- Limited access to analysis and visualization software
-- Shortages and high turnover in skilled M&E personnel
-- Dependence on repeated, high-cost training that doesn't scale
-- Reliance on outsourced analysis that is slow or inconsistent
+- M&E staff often have limited time for in-depth analysis
+- Analytical skills vary across teams and regions
+- Turning data into narrative insights requires both technical and contextual knowledge
 
-The FASTR AI assistant addresses these challenges by providing on-demand support for analysis, interpretation, and report generation.
+**What it does:** The AI assistant helps bridge this gap by:
+
+- Explaining trends and patterns in plain language
+- Generating draft reports and key messages
+- Answering questions about the data or methodology

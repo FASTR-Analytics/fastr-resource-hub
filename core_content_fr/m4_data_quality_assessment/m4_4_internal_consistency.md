@@ -4,13 +4,14 @@ theme: fastr
 paginate: true
 ---
 
+<style scoped>
+table { font-size: 0.7em; }
+td, th { padding: 4px 8px !important; }
+</style>
+
 ## Cohérence entre les indicateurs connexes
 
-Les indicateurs du programme ayant une relation prévisible sont examinés afin de déterminer si la relation attendue existe entre eux. En d'autres termes, ce processus permet de déterminer si la relation observée entre les indicateurs, telle qu'elle apparaît dans les données rapportées, est celle qui est attendue.
-
----
-
-## Paires d'indicateurs évaluées
+Les indicateurs du programme ayant une relation prévisible sont examinés afin de déterminer si la relation attendue existe entre eux. En d'autres termes, ce processus examine si la relation observée entre les indicateurs, telle qu'elle apparaît dans les données rapportées, est celle qui est attendue.
 
 <div class="columns">
 <div>
@@ -21,9 +22,9 @@ Les indicateurs du programme ayant une relation prévisible sont examinés afin 
 | Penta1 / Penta3 | Le rapport doit être ≥ 0,95 |
 | BCG / Accouchement en établissement | Dans les 30 % (≥0,7 et ≤1,3) |
 
-Ces paires ont des relations attendues. Nous nous attendons à ce que CPN1 > CPN4 puisque toutes les femmes n'effectuent pas quatre visites.
+Nous nous attendons à ce que le nombre de femmes enceintes recevant une première visite CPN soit toujours supérieur au nombre de femmes enceintes recevant une quatrième visite CPN.
 
-Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce que le nombre d'accouchements en établissement soit similaire, avec une tolerance de 30 % pour la variabilité.
+Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce que ces indicateurs soient égaux. Cependant, nous reconnaissons qu'il peut y avoir plus de variabilité dans cette relation prédite, nous définissons donc une fourchette de 30 %.
 
 </div>
 <div>
@@ -33,30 +34,33 @@ Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce
 </div>
 </div>
 
+<!--
+PRESENTER NOTES:
+- Les vérifications de cohérence examinent les relations logiques : CPN1 doit toujours être ≥ CPN4 (on ne peut pas avoir une 4ème visite sans la 1ère)
+- Nous évaluons au niveau du DISTRICT car les patients se déplacent entre les établissements au sein d'un district
+- Exemple : une femme fait sa CPN1 au poste de santé, sa CPN4 à l'hôpital de district - toujours cohérent au niveau du district
+- BCG vs accouchements permet une tolerance de 30% car tous les accouchements n'ont pas lieu dans les établissements
+- Question : Dans votre contexte, les patients cherchent-ils couramment différents services dans différents établissements ?
+-->
+
 ---
 
 ## Pourquoi évaluer la cohérence au niveau du district ?
 
-<div style="display : flex ; gap : 1.5em ; align-items : flex-start ;">
-<div style="flex : 1 ;">
+<div style="display: flex; gap: 1.5em; align-items: flex-start;">
+<div style="flex: 1;">
 
-Les patients ont souvent accès à différents services dans différents établissements d'un même district :
+Les patients ont souvent accès à différents services dans différents établissements au sein d'un même district :
 
 - Une femme peut recevoir **CPN1** dans un poste de santé voisin, mais se rendre dans un centre de santé pour **CPN4**
 - Un enfant peut recevoir **Penta1** dans un dispensaire local, mais terminer **Penta3** dans un hôpital de district
 
-La vérification de la cohérence au niveau de l'établissement de santé ne tiendrait pas compte de ces schémas. L'agrégation au niveau du district permet d'obtenir une image complète de l'utilisation des services dans une zone géographique.
+La vérification de la cohérence au niveau de l'établissement ne tiendrait pas compte de ces schémas. L'agrégation au niveau du district permet d'obtenir une image complète de l'utilisation des services dans une zone géographique.
 
 </div>
-<div style="flex : 2 ;">
+<div style="flex: 2;">
 
 ![Cohérence des districts](../../resources/diagrams/district_consistency.svg)
 
 </div>
 </div>
-
----
-
-## Cohérence interne : Sortie FASTR
-
-![Cohérence interne h:420](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)

@@ -4,8 +4,20 @@ theme: fastr
 paginate: true
 ---
 
-## AI grounded in evidence, not guesswork
+## How the AI assistant works
 
-The FASTR AI assistant checks actual results, methods, and documentation before responding.
+The AI follows a "read before responding" principle — it never guesses or assumes.
 
-![AI tools diagram](../../resources/diagrams/ai_on_rails.svg)
+**For data questions** (e.g., "How has ANC coverage changed?"):
+
+1. Finds the relevant metric in your project
+2. Reads the actual data values
+3. Responds based on what it read, with a supporting visualization
+
+**For methodology questions** (e.g., "How are outliers detected?"):
+
+1. Looks up the relevant documentation
+2. Reads the methodology details
+3. Explains in plain language
+
+![AI tools diagram h:170](../../resources/diagrams/ai_on_rails.svg)

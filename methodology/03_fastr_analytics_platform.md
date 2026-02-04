@@ -450,41 +450,98 @@ table img { max-height: 280px !important; width: auto !important; }
 <!-- SLIDE:m3_9 -->
 ## The AI assistant
 
-Health data is abundant — actionable, just-in-time insights are not.
+The FASTR platform includes an AI assistant that provides on-demand support for data interpretation and report generation.
 
-Ministries of Health collect vast amounts of data (especially in DHIS2), but face:
+**Context:** Many health systems have more data than capacity to analyze it
 
-- Limited access to analysis and visualization software
-- Shortages and high turnover in skilled M&E personnel
-- Dependence on repeated, high-cost training that doesn't scale
-- Reliance on outsourced analysis that is slow or inconsistent
+- M&E staff often have limited time for in-depth analysis
+- Analytical skills vary across teams and regions
+- Turning data into narrative insights requires both technical and contextual knowledge
 
-The FASTR AI assistant addresses these challenges by providing on-demand support for analysis, interpretation, and report generation.
+**What it does:** The AI assistant helps bridge this gap by:
+
+- Explaining trends and patterns in plain language
+- Generating draft reports and key messages
+- Answering questions about the data or methodology
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9a -->
 ## What the AI assistant can do
 
-**User understanding**
-- Help to understand approach and methods
-- How to use the platform itself
+**Answer questions about your data**
 
-**Synthesis and interpretation**
-- Look at data
-- Generate key messages (across multiple data tables)
-- Reports/decks with a story and through-line
+- "How has ANC coverage changed since 2023?"
+- "Which regions have the worst data quality?"
+- Creates charts and explanations on-the-fly
 
-**Platform operations**
-- Manipulate visualization config
-- Run modules
+**Explain methodology**
+
+- "How are outliers detected?"
+- "What does this coverage estimate mean?"
+- Draws from platform documentation
+
+**Help build reports**
+
+- Generate slide decks from your data
+- Combine saved charts with narrative text
+- Create presentations for different audiences
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9a1 -->
+## AI across platform components
+
+| Component | What it is | What AI can do |
+|-----------|-----------|----------------|
+| **Whiteboard** | Temporary canvas for exploration | Create charts on-the-fly (line/bar/table), explain data, up to 3 blocks |
+| **Visualizations** | Saved charts stored in project | Display, explain, read data, use replicants for different indicators |
+| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative, max 3 blocks per slide |
+
+**Key behaviors:**
+
+- AI always queries data first before commenting (no guessing)
+- Can filter by indicator, region, time period and disaggregate flexibly
+- Cannot create/edit saved visualizations or modify underlying data
+
+**Whiteboard** = temporary exploration. **Visualizations** = permanent (you create them). **Slide decks** = combine both.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e -->
-## AI grounded in evidence, not guesswork
+## How the AI assistant works
 
-The FASTR AI assistant checks actual results, methods, and documentation before responding.
+The AI follows a "read before responding" principle — it never guesses or assumes.
 
-![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
+**For data questions** (e.g., "How has ANC coverage changed?"):
+
+1. Finds the relevant metric in your project
+2. Reads the actual data values
+3. Responds based on what it read, with a supporting visualization
+
+**For methodology questions** (e.g., "How are outliers detected?"):
+
+1. Looks up the relevant documentation
+2. Reads the methodology details
+3. Explains in plain language
+
+![AI tools diagram h:170](../resources/diagrams/ai_on_rails.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9e1 -->
+## What AI does — and doesn't do
+
+FASTR uses a hybrid approach: traditional statistics for calculations, AI for interaction.
+
+| AI handles | R modules handle |
+|------------|------------------|
+| Natural language queries | Outlier detection (MAD) |
+| Explaining trends in plain language | Coverage estimation (regression) |
+| Generating reports and narratives | Data quality scoring (algorithms) |
+| Connecting insights across indicators | Completeness adjustments |
+
+**Why this matters:**
+
+- Calculations are reproducible, auditable, and validated
+- AI makes results accessible without requiring coding skills
+- You get rigorous statistics with a conversational interface
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->

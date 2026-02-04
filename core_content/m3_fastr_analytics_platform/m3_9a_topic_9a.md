@@ -6,15 +6,20 @@ paginate: true
 
 ## What the AI assistant can do
 
-**User understanding**
-- Help to understand approach and methods
-- How to use the platform itself
+**Answer questions about your data**
 
-**Synthesis and interpretation**
-- Look at data
-- Generate key messages (across multiple data tables)
-- Reports/decks with a story and through-line
+- "How has ANC coverage changed since 2023?"
+- "Which regions have the worst data quality?"
+- Creates charts and explanations on-the-fly
 
-**Platform operations**
-- Manipulate visualization config
-- Run modules
+**Explain methodology**
+
+- "How are outliers detected?"
+- "What does this coverage estimate mean?"
+- Draws from platform documentation
+
+**Help build reports**
+
+- Generate slide decks from your data
+- Combine saved charts with narrative text
+- Create presentations for different audiences
