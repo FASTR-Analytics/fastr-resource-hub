@@ -11,12 +11,17 @@ FASTR utilise une approche hybride : statistiques traditionnelles pour les calcu
 | L'IA gère | Les modules R gèrent |
 |-----------|---------------------|
 | Requêtes en langage naturel | Détection des valeurs aberrantes (MAD) |
-| Explication des tendances en langage clair | Estimation de la couverture (régression) |
-| Génération de rapports et narratifs | Scores de qualité des données (algorithmes) |
-| Connexion des insights entre indicateurs | Ajustements de complétude |
+| Lecture et vérification des données | Estimation de la couverture (régression) |
+| Explication des tendances en langage clair | Scores de qualité des données (algorithmes) |
+| Création de visualisations à la demande | Ajustements de complétude |
+| Génération de rapports et présentations | Tests statistiques et graphiques de contrôle |
+
+**Principe clé :** L'IA interroge toujours les données avant de répondre — pas de suppositions.
 
 **Pourquoi c'est important :**
 
 - Les calculs sont reproductibles, auditables et validés
-- L'IA rend les résultats accessibles sans nécessiter de compétences en programmation
-- Vous obtenez des statistiques rigoureuses avec une interface conversationnelle
+- L'IA rend les résultats accessibles sans compétences en programmation
+- Pas de « boîte noire » — l'IA interprète, ne calcule pas
+
+**En résumé :** L'IA est votre traducteur et guide, pas votre calculatrice.

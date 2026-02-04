@@ -116,6 +116,23 @@ TOPIC_NAMES = {
     'm3_6': 'creating_new_project',
     'm3_7': 'creating_visualizations',
     'm3_8': 'creating_reports',
+    # AI Assistant slides
+    'm3_9': 'ai_assistant_overview',
+    'm3_9a': 'ai_assistant_capabilities',
+    'm3_9a1': 'ai_platform_components',
+    'm3_9b': 'ai_ask_questions',
+    'm3_9b2': 'ai_conversations',
+    'm3_9c': 'ai_tips_better_answers',
+    'm3_9c2': 'ai_report_generation',
+    'm3_9d': 'ai_what_happens_log_off',
+    'm3_9d2': 'ai_private_vs_shared',
+    'm3_9d3': 'ai_team_collaboration',
+    'm3_9d4': 'ai_quick_reference',
+    'm3_9e': 'ai_how_it_works',
+    'm3_9e1': 'ai_does_and_doesnt',
+    'm3_9e2': 'ai_accelerator_not_decider',
+    'm3_9e3': 'ai_principles_success',
+    'm3_9f': 'ai_practice_activity',
 
     # m4 - Data Quality Assessment (from 04_data_quality_assessment.md)
     'm4_0': 'fastr_methods_overview',

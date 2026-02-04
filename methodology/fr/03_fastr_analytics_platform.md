@@ -448,22 +448,144 @@ La plateforme FASTR inclut un assistant IA qui fournit un support à la demande 
 - Créer des présentations pour différents publics
 <!-- /SLIDE -->
 
+<!-- SLIDE:m3_9b -->
+## Posez des questions, obtenez des réponses
+
+Tapez vos questions en langage naturel. L'IA analyse vos données et vous montre les résultats.
+
+| Sujet | Exemples de questions |
+|-------|----------------------|
+| **Couverture** | « Comment la couverture CPN a-t-elle évolué ? » / « Montrez-moi les tendances de vaccination pour 2024 » |
+| **Qualité des données** | « Quelles régions rapportent régulièrement ? » / « Où avons-nous des problèmes de qualité ? » |
+| **Perturbations** | « Y a-t-il eu des baisses de services récemment ? » / « Quelque chose a-t-il changé ce trimestre ? » |
+| **Régional** | « Quelles zones ont de bonnes performances ? » / « Où devons-nous concentrer notre soutien ? » |
+
+Pas de programmation requise. Pas de jargon technique. Posez simplement vos questions comme à un collègue.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9b2 -->
+## Comment fonctionnent les conversations
+
+**Exemple de conversation :**
+
+Vous : « Montrez-moi la couverture CPN1 par région »
+IA : *Crée un graphique et explique quelles régions performent bien*
+
+Vous : « Pourquoi le nombre est-il plus bas en février ? »
+IA : *Analyse les données et explique les raisons possibles*
+
+Vous : « Pouvez-vous créer un rapport à ce sujet ? »
+IA : *Construit une présentation que vous pouvez partager avec votre équipe*
+
+**Pensez à l'IA comme un analyste de données dans votre équipe** — quelqu'un qui peut instantanément extraire des rapports, créer des graphiques et répondre à vos questions sur vos données de santé.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9c -->
+## Conseils pour de meilleures réponses
+
+**Soyez précis sur :**
+
+- Quel service — « CPN1 » au lieu de « services de soins prénataux »
+- Quelle période — « 12 derniers mois » ou « 2024 »
+- Quel lieu — « Banadir » ou « toutes les régions »
+
+**Vous pouvez demander :** Graphiques, explications, comparaisons, rapports, tableaux de données
+
+**Les questions de suivi fonctionnent très bien :**
+
+1. Commencez large : « Montrez-moi la couverture vaccinale »
+2. Affinez : « Et pour le BCG seulement ? »
+3. Approfondissez : « Pourquoi a-t-elle augmenté en mai ? »
+4. Passez à l'action : « Créez une diapositive à ce sujet pour ma présentation »
+<!-- /SLIDE -->
+
 <!-- SLIDE:m3_9a1 -->
 ## L'IA à travers les composants de la plateforme
 
 | Composant | Ce que c'est | Ce que l'IA peut faire |
 |-----------|-------------|------------------------|
-| **Tableau blanc** | Canevas temporaire pour l'exploration | Créer des graphiques à la volée (ligne/barre/tableau), expliquer, max 3 blocs |
-| **Visualisations** | Graphiques sauvegardés dans le projet | Afficher, expliquer, lire les données, utiliser des réplicants |
-| **Présentations** | Présentations multi-diapositives | Construire des diapositives combinant graphiques + narratif, max 3 blocs |
+| **Tableau blanc** | Canevas temporaire pour l'exploration | Créer des graphiques (ligne/barre/tableau), expliquer, Q&R en temps réel |
+| **Visualisations** | Graphiques sauvegardés dans le projet | Afficher, expliquer, lire les données, utiliser des réplicants — ne peut pas créer/modifier |
+| **Présentations** | Présentations multi-diapositives | Construire des diapositives combinant graphiques + texte narratif |
 
-**Comportements clés :**
+**Tableau blanc :** Pour l'exploration interactive — le contenu est temporaire
 
-- L'IA interroge toujours les données avant de commenter (pas de suppositions)
-- Peut filtrer par indicateur, région, période et désagréger de manière flexible
-- Ne peut pas créer/modifier les visualisations sauvegardées ni modifier les données
+**Visualisations :** Bibliothèque permanente de graphiques réutilisables — vous les créez, l'IA peut les utiliser
 
-**Tableau blanc** = exploration temporaire. **Visualisations** = permanentes (vous les créez). **Présentations** = combinent les deux.
+**Présentations :** Pour les rapports — l'IA aide à assembler à partir des données et graphiques sauvegardés
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d -->
+## Que se passe-t-il quand vous vous déconnectez
+
+| Contenu | Sauvegardé ? | Notes |
+|---------|--------------|-------|
+| Votre conversation IA | Temporaire | Peut être disponible à votre retour (selon la configuration) |
+| Contenu du tableau blanc | Temporaire | Disparaît quand vous naviguez ailleurs |
+| Présentations que vous créez | Permanent | Sauvegardées dans le projet, visibles par l'équipe |
+| Visualisations sauvegardées | Permanent | Restent dans la bibliothèque du projet |
+| Exports téléchargés | Permanent | Sauvegardés sur votre ordinateur |
+
+**Astuce :** Si vous découvrez quelque chose d'important sur le tableau blanc, demandez à l'IA de « créer une présentation à ce sujet » avant de partir — pour que ce soit sauvegardé de façon permanente.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d2 -->
+## Privé vs partagé sur les projets d'équipe
+
+<div class="columns">
+<div>
+
+**Privé pour vous :**
+
+- Votre conversation avec l'IA
+- Vos explorations sur le tableau blanc
+- Les questions que vous posez et les réponses reçues
+
+Les autres membres de l'équipe ne peuvent pas voir ce que vous explorez.
+
+</div>
+<div>
+
+**Partagé avec l'équipe :**
+
+- Les données sous-jacentes (mêmes données SNIS)
+- Visualisations sauvegardées dans la bibliothèque
+- Présentations que vous créez et sauvegardez
+- Paramètres du projet et résultats des modules
+
+Tout le monde peut voir le contenu sauvegardé.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d3 -->
+## Comment les équipes collaborent
+
+**Dr. Amina** (Directrice régionale) demande à l'IA les tendances de couverture, explore en privé, puis crée la présentation « Revue mensuelle des performances » → *Maintenant visible pour toute l'équipe*
+
+**Mohamed** (Gestionnaire de données) demande à l'IA les lacunes de rapportage, examine en privé, sauvegarde un graphique « Complétude par district » → *Graphique maintenant dans la bibliothèque pour tous*
+
+**Fatima** (Chargée de programme) ouvre les diapositives d'Amina, utilise le graphique de Mohamed, demande à l'IA d'expliquer une tendance → *Reçoit une explication privée, peut partager si elle crée une diapositive*
+
+**Ce que chacun voit :** Ses propres conversations IA ✓ | Diapositives et graphiques sauvegardés ✓ | Questions privées des autres ✗
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d4 -->
+## Référence rapide : Qu'est-ce qui est sauvegardé et partagé ?
+
+| Quoi | Privé ou Partagé ? | Permanent ? |
+|------|-------------------|-------------|
+| Conversation IA | Privé | Temporaire |
+| Tableau blanc | Privé | Temporaire |
+| Présentations que vous créez | Partagé | Permanent |
+| Visualisations sauvegardées | Partagé | Permanent |
+| Données sous-jacentes | Partagé | Permanent |
+| Résultats des modules (DQA, couverture) | Partagé | Permanent |
+
+**Lors de l'exploration :** Posez vos questions librement, testez les analyses en privé
+
+**Lors du partage :** Créez des présentations pour vos conclusions, sauvegardez les visualisations utiles avec des noms descriptifs
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e -->
@@ -491,18 +613,34 @@ L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais
 
 FASTR utilise une approche hybride : statistiques traditionnelles pour les calculs, IA pour l'interaction.
 
-| L'IA gère | Les modules R gèrent |
-|-----------|---------------------|
-| Requêtes en langage naturel | Détection des valeurs aberrantes (MAD) |
-| Explication des tendances en langage clair | Estimation de la couverture (régression) |
-| Génération de rapports et narratifs | Scores de qualité des données (algorithmes) |
-| Connexion des insights entre indicateurs | Ajustements de complétude |
+<div class="columns">
+<div>
 
-**Pourquoi c'est important :**
+**L'IA gère :**
 
-- Les calculs sont reproductibles, auditables et validés
-- L'IA rend les résultats accessibles sans nécessiter de compétences en programmation
-- Vous obtenez des statistiques rigoureuses avec une interface conversationnelle
+- Requêtes en langage naturel
+- Lecture et vérification des données
+- Explication des tendances en langage clair
+- Création de visualisations à la demande
+- Génération de rapports et présentations
+
+</div>
+<div>
+
+**Les modules R gèrent :**
+
+- Détection des valeurs aberrantes (MAD)
+- Estimation de la couverture (régression)
+- Scores de qualité des données (algorithmes)
+- Ajustements de complétude
+- Tests statistiques et graphiques de contrôle
+
+</div>
+</div>
+
+**Principe clé :** L'IA interroge toujours les données avant de répondre — pas de suppositions.
+
+**En résumé :** L'IA est votre traducteur et guide, pas votre calculatrice.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->
@@ -510,7 +648,7 @@ FASTR utilise une approche hybride : statistiques traditionnelles pour les calcu
 
 L'IA soutient votre travail — vous gardez le contrôle du jugement, de la responsabilité et de l'action.
 
-![Diagramme accélérateur IA](../resources/diagrams/ai_accelerator.svg)
+![Diagramme accélérateur IA](../resources/diagrams_fr/ai_accelerator.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e3 -->
@@ -518,43 +656,7 @@ L'IA soutient votre travail — vous gardez le contrôle du jugement, de la resp
 
 Une automatisation responsable, axée sur les besoins des ministères de la Santé, et conçue pour passer à l'échelle.
 
-![Diagramme des principes IA](../resources/diagrams/ai_principles.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9b -->
-## Exemples de questions : Questions d'analyse
-
-Utilisez l'assistant IA pour répondre à des questions pertinentes pour les politiques :
-
-**Couverture et tendances :**
-> « Comment la couverture CPN a-t-elle évolué de 2023 à 2025 ? »
-
-**Qualité des données :**
-> « Quels États ont les meilleurs et les pires scores d'évaluation de la qualité des données ? »
-
-**Perturbations :**
-> « Y a-t-il eu des perturbations de services au cours du dernier trimestre ? »
-
-**Analyse infranationale :**
-> « Quelles régions ont de bonnes performances et lesquelles nécessitent une attention particulière ? »
-
-L'IA analysera vos données et fournira des réponses avec des preuves à l'appui.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9c -->
-## Exemples de questions : Génération de rapports
-
-**Générer des rapports :**
-> « Créez un bref rapport sur les perturbations des services SRMNIA-N »
-
-**Créer des présentations :**
-> « Générez une diapositive résumant les conclusions sur la qualité des données et la couverture »
-
-**Interpréter les visualisations :**
-> « Décrivez ce que montre ce graphique pour un rapport trimestriel »
-
-**Adapter à l'audience :**
-> « Résumez ces résultats pour une audience de décideurs politiques »
+![Diagramme des principes IA](../resources/diagrams_fr/ai_principles.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9f -->

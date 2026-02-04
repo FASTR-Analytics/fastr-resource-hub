@@ -487,22 +487,144 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 - Create presentations for different audiences
 <!-- /SLIDE -->
 
+<!-- SLIDE:m3_9b -->
+## Ask questions, get answers
+
+Type your questions in plain language. The AI analyzes your data and shows you results.
+
+| Topic | Example questions |
+|-------|-------------------|
+| **Coverage** | "How has ANC coverage changed?" / "Show me vaccination trends for 2024" |
+| **Data quality** | "Which regions report consistently?" / "Where do we have data quality issues?" |
+| **Disruptions** | "Have any services dropped recently?" / "Did anything change last quarter?" |
+| **Regional** | "Which areas are doing well?" / "Where should we focus support?" |
+
+No coding required. No technical jargon necessary. Just ask like you're talking to a colleague.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9b2 -->
+## How conversations work
+
+**Example conversation:**
+
+You: "Show me ANC1 coverage by region"
+AI: *Creates a chart and explains which regions are performing well*
+
+You: "Why is the number lower in February?"
+AI: *Analyzes the data and explains possible reasons*
+
+You: "Can you create a report about this?"
+AI: *Builds a slide deck you can share with your team*
+
+**Think of the AI as a data analyst on your team** — someone who can instantly pull reports, create charts, and answer questions about your health data.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9c -->
+## Tips for better answers
+
+**Be specific about:**
+
+- Which service — "ANC1" instead of "antenatal care services"
+- Which time period — "last 12 months" or "2024"
+- Which location — "Banadir" or "all regions"
+
+**You can ask for:** Charts, explanations, comparisons, reports, data tables
+
+**Follow-up questions work great:**
+
+1. Start broad: "Show me vaccination coverage"
+2. Narrow down: "What about just BCG?"
+3. Go deeper: "Why did it increase in May?"
+4. Take action: "Create a slide about this for my presentation"
+<!-- /SLIDE -->
+
 <!-- SLIDE:m3_9a1 -->
 ## AI across platform components
 
 | Component | What it is | What AI can do |
 |-----------|-----------|----------------|
-| **Whiteboard** | Temporary canvas for exploration | Create charts on-the-fly (line/bar/table), explain data, up to 3 blocks |
-| **Visualizations** | Saved charts stored in project | Display, explain, read data, use replicants for different indicators |
-| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative, max 3 blocks per slide |
+| **Whiteboard** | Temporary canvas for exploration | Create charts (line/bar/table), explain data, real-time Q&A |
+| **Visualizations** | Saved charts in project | Display, explain, read data, use replicants — cannot create/edit/delete |
+| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative text |
 
-**Key behaviors:**
+**Whiteboard:** For interactive exploration — content is temporary
 
-- AI always queries data first before commenting (no guessing)
-- Can filter by indicator, region, time period and disaggregate flexibly
-- Cannot create/edit saved visualizations or modify underlying data
+**Visualizations:** Permanent library of reusable charts — you create them, AI can use them
 
-**Whiteboard** = temporary exploration. **Visualizations** = permanent (you create them). **Slide decks** = combine both.
+**Slide decks:** For reports and presentations — AI helps assemble from data and saved charts
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d -->
+## What happens when you log off
+
+| Content | Saved? | Notes |
+|---------|--------|-------|
+| Your AI conversation | Temporary | May be available when you return (depends on configuration) |
+| Whiteboard content | Temporary | Disappears when you navigate away |
+| Slide decks you create | Permanent | Saved to project, visible to team |
+| Saved visualizations | Permanent | Remain in project library |
+| Downloaded exports | Permanent | Saved to your computer |
+
+**Pro tip:** If you discover something important on the whiteboard, ask the AI to "create a slide deck about this" before you leave — so it's saved permanently.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d2 -->
+## Private vs shared on team projects
+
+<div class="columns">
+<div>
+
+**Private to you:**
+
+- Your conversation with the AI
+- Your whiteboard explorations
+- Questions you ask and answers you receive
+
+Other team members cannot see what you're exploring.
+
+</div>
+<div>
+
+**Shared with team:**
+
+- The underlying data (same HMIS data)
+- Saved visualizations in project library
+- Slide decks you create and save
+- Project settings and module results
+
+Everyone can see saved content.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d3 -->
+## How teams work together
+
+**Dr. Amina** (State Director) asks AI about coverage trends, explores privately, then creates "Monthly Performance Review" slide deck → *Now visible to all team members*
+
+**Mohamed** (Data Manager) asks AI about reporting gaps, reviews privately, saves a "Reporting Completeness" chart → *Chart now in project library for everyone*
+
+**Fatima** (Program Officer) opens Amina's slides, uses Mohamed's chart, asks AI to explain a trend → *Gets private explanation, can share if she creates a slide*
+
+**What each person sees:** Their own AI conversations ✓ | Saved slides and charts ✓ | Each other's private questions ✗
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_9d4 -->
+## Quick reference: What's saved and shared?
+
+| What | Private or Shared? | Permanent? |
+|------|-------------------|------------|
+| AI conversation | Private | Temporary |
+| Whiteboard | Private | Temporary |
+| Slide decks you create | Shared | Permanent |
+| Saved visualizations | Shared | Permanent |
+| Underlying data | Shared | Permanent |
+| Module results (DQA, coverage) | Shared | Permanent |
+
+**When exploring:** Ask questions freely, test analyses privately
+
+**When sharing:** Create slide decks for findings, save useful visualizations with descriptive names
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e -->
@@ -530,18 +652,34 @@ The AI follows a "read before responding" principle — it never guesses or assu
 
 FASTR uses a hybrid approach: traditional statistics for calculations, AI for interaction.
 
-| AI handles | R modules handle |
-|------------|------------------|
-| Natural language queries | Outlier detection (MAD) |
-| Explaining trends in plain language | Coverage estimation (regression) |
-| Generating reports and narratives | Data quality scoring (algorithms) |
-| Connecting insights across indicators | Completeness adjustments |
+<div class="columns">
+<div>
 
-**Why this matters:**
+**AI handles:**
 
-- Calculations are reproducible, auditable, and validated
-- AI makes results accessible without requiring coding skills
-- You get rigorous statistics with a conversational interface
+- Natural language queries
+- Reading & verifying data first
+- Explaining trends in plain language
+- Creating visualizations on demand
+- Generating reports and slide decks
+
+</div>
+<div>
+
+**R modules handle:**
+
+- Outlier detection (MAD)
+- Coverage estimation (regression)
+- Data quality scoring (algorithms)
+- Completeness adjustments
+- Statistical testing & control charts
+
+</div>
+</div>
+
+**Key principle:** AI always queries actual data before commenting — no guessing.
+
+**Bottom line:** The AI is your translator and guide, not your calculator.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->
@@ -558,42 +696,6 @@ The AI supports your work — you stay in control of judgement, accountability, 
 Responsible automation, focused on the needs of Ministries of Health, and designed for scale.
 
 ![AI principles diagram](../resources/diagrams/ai_principles.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9b -->
-## Example prompts: Analysis questions
-
-Use the AI assistant to answer policy-relevant questions:
-
-**Coverage and trends:**
-> "How has ANC coverage changed from 2023 to 2025?"
-
-**Data quality:**
-> "Which states have the best and worst DQA scores?"
-
-**Disruptions:**
-> "Have any services been disrupted in the past quarter?"
-
-**Subnational analysis:**
-> "Which regions are performing well and which need attention?"
-
-The AI will analyze your data and provide answers with supporting evidence.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9c -->
-## Example prompts: Report generation
-
-**Generate reports:**
-> "Create a brief report on RMNCAH service disruptions"
-
-**Create presentations:**
-> "Generate a slide summarizing DQA and coverage findings"
-
-**Interpret visualizations:**
-> "Describe what this chart shows for a quarterly report"
-
-**Tailor to audience:**
-> "Summarize these findings for a policy audience"
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9f -->

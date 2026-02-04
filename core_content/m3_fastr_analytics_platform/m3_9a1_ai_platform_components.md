@@ -8,9 +8,9 @@ paginate: true
 
 | Component | What it is | What AI can do |
 |-----------|-----------|----------------|
-| **Whiteboard** | Temporary canvas for exploration | Create charts (line/bar/table), explain data, up to 3 blocks, real-time Q&A |
+| **Whiteboard** | Temporary canvas for exploration | Create charts (line/bar/table), explain data, real-time Q&A |
 | **Visualizations** | Saved charts in project | Display, explain, read data, use replicants — cannot create/edit/delete |
-| **Slide decks** | Multi-slide presentations | Build slides with charts + narrative, max 3 blocks per slide |
+| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative text |
 
 **Whiteboard:** For interactive exploration — content is temporary
 
