@@ -6,18 +6,27 @@ paginate: true
 
 ## Comment fonctionne l'assistant IA
 
+<div class="columns">
+<div>
+
 L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
 
-**Pour les questions sur les données** (ex: « Comment la couverture CPN a-t-elle évolué ? ») :
+**Pour les questions sur les données :**
 
-1. Trouve la métrique pertinente dans votre projet
-2. Lit les valeurs réelles des données
-3. Répond en fonction de ce qu'elle a lu, avec une visualisation
+1. Trouve la métrique pertinente
+2. Lit les valeurs réelles
+3. Répond avec une visualisation
 
-**Pour les questions méthodologiques** (ex: « Comment les valeurs aberrantes sont-elles détectées ? ») :
+**Pour les questions méthodologiques :**
 
-1. Consulte la documentation pertinente
-2. Lit les détails méthodologiques
+1. Consulte la documentation
+2. Lit les détails
 3. Explique en langage clair
 
-![Diagramme des outils IA h:170](../../resources/diagrams_fr/ai_on_rails.svg)
+</div>
+<div>
+
+![Diagramme des outils IA](../../resources/diagrams_fr/ai_on_rails.svg)
+
+</div>
+</div>

@@ -227,7 +227,28 @@ La plateforme fournit une interface conviviale pour l'exécution des analyses et
 <!-- SLIDE:m3_1b -->
 ## Capacités de la plateforme
 
-![Capacités de la plateforme](../resources/diagrams/platform_capabilities.svg)
+<div class="columns">
+<div>
+
+![Capacités de la plateforme](../resources/diagrams_fr/platform_capabilities.svg)
+
+</div>
+<div>
+
+**Gestion des données** — Importer les listes d'établissements et les données d'indicateurs depuis DHIS2 ou fichiers
+
+**Analyse des données** — Exécuter des modules statistiques pour l'évaluation et l'ajustement de la qualité
+
+**Visualisation** — Explorer les résultats avec des graphiques et tableaux interactifs
+
+**Rapports** — Exporter les résultats en PowerPoint ou PDF pour les parties prenantes
+
+**Collaboration** — Travailler ensemble avec votre équipe sur des projets partagés
+
+**Assistant IA** — Obtenir de l'aide pour interpréter les résultats et comprendre vos données
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
@@ -521,12 +542,12 @@ IA : *Construit une présentation que vous pouvez partager avec votre équipe*
 | Contenu | Sauvegardé ? | Notes |
 |---------|--------------|-------|
 | Votre conversation IA | Temporaire | Peut être disponible à votre retour (selon la configuration) |
-| Contenu du tableau blanc | Temporaire | Disparaît quand vous naviguez ailleurs |
+| Contenu du tableau blanc | Temporaire* | Disparaît quand vous naviguez ailleurs |
 | Présentations que vous créez | Permanent | Sauvegardées dans le projet, visibles par l'équipe |
 | Visualisations sauvegardées | Permanent | Restent dans la bibliothèque du projet |
 | Exports téléchargés | Permanent | Sauvegardés sur votre ordinateur |
 
-**Astuce :** Si vous découvrez quelque chose d'important sur le tableau blanc, demandez à l'IA de « créer une présentation à ce sujet » avant de partir — pour que ce soit sauvegardé de façon permanente.
+*Vous pouvez sauvegarder du texte ou des visuels du tableau blanc vers une présentation avant de partir.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d2 -->
@@ -575,84 +596,60 @@ Tout le monde peut voir le contenu sauvegardé.
 - Questions privées des autres — Non
 <!-- /SLIDE -->
 
-<!-- SLIDE:m3_9d4 -->
-## Référence rapide : Qu'est-ce qui est sauvegardé et partagé ?
-
-| Quoi | Privé ou Partagé ? | Permanent ? |
-|------|-------------------|-------------|
-| Conversation IA | Privé | Temporaire |
-| Tableau blanc | Privé | Temporaire |
-| Présentations que vous créez | Partagé | Permanent |
-| Visualisations sauvegardées | Partagé | Permanent |
-| Données sous-jacentes | Partagé | Permanent |
-| Résultats des modules (DQA, couverture) | Partagé | Permanent |
-
-**Lors de l'exploration :** Posez vos questions librement, testez les analyses en privé
-
-**Lors du partage :** Créez des présentations pour vos conclusions, sauvegardez les visualisations utiles avec des noms descriptifs
-<!-- /SLIDE -->
-
 <!-- SLIDE:m3_9e -->
 ## Comment fonctionne l'assistant IA
-
-L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
-
-**Pour les questions sur les données** (ex: « Comment la couverture CPN a-t-elle évolué ? ») :
-
-1. Trouve la métrique pertinente dans votre projet
-2. Lit les valeurs réelles des données
-3. Répond en fonction de ce qu'elle a lu, avec une visualisation
-
-**Pour les questions méthodologiques** (ex: « Comment les valeurs aberrantes sont-elles détectées ? ») :
-
-1. Consulte la documentation pertinente
-2. Lit les détails méthodologiques
-3. Explique en langage clair
-
-![Diagramme des outils IA h:170](../resources/diagrams_fr/ai_on_rails.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9e1 -->
-## Ce que l'IA fait — et ne fait pas
-
-FASTR utilise une approche hybride : statistiques traditionnelles pour les calculs, IA pour l'interaction.
 
 <div class="columns">
 <div>
 
-**L'IA gère :**
+L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
 
-- Requêtes en langage naturel
-- Lecture et vérification des données
-- Explication des tendances en langage clair
-- Création de visualisations à la demande
-- Génération de rapports et présentations
+**Pour les questions sur les données :**
+
+1. Trouve la métrique pertinente
+2. Lit les valeurs réelles
+3. Répond avec une visualisation
+
+**Pour les questions méthodologiques :**
+
+1. Consulte la documentation
+2. Lit les détails
+3. Explique en langage clair
 
 </div>
 <div>
 
-**Les modules R gèrent :**
-
-- Détection des valeurs aberrantes (MAD)
-- Estimation de la couverture (régression)
-- Scores de qualité des données (algorithmes)
-- Ajustements de complétude
-- Tests statistiques et graphiques de contrôle
+![Diagramme des outils IA](../resources/diagrams_fr/ai_on_rails.svg)
 
 </div>
 </div>
-
-**Principe clé :** L'IA interroge toujours les données avant de répondre — pas de suppositions.
-
-**En résumé :** L'IA est votre traducteur et guide, pas votre calculatrice.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->
 ## L'IA est un accélérateur, pas un décideur
 
-L'IA soutient votre travail — vous gardez le contrôle du jugement, de la responsabilité et de l'action.
+<div class="columns">
+<div>
 
 ![Diagramme accélérateur IA](../resources/diagrams_fr/ai_accelerator.svg)
+
+</div>
+<div>
+
+**Vous gardez le contrôle de :**
+
+- Jugement — décider ce qui compte
+- Interprétation — comprendre le contexte
+- Action — prendre des décisions
+
+**Les chiffres proviennent de méthodes validées**
+
+Tous les calculs (détection des valeurs aberrantes, estimations de couverture, scores de qualité) utilisent des formules statistiques éprouvées — pas l'IA.
+
+L'IA interprète et explique. Vous décidez et agissez.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e3 -->

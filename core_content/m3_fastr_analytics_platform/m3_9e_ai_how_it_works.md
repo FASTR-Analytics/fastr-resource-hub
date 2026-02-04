@@ -6,18 +6,27 @@ paginate: true
 
 ## How the AI assistant works
 
-The AI follows a "read before responding" principle — it never guesses or assumes.
+<div class="columns">
+<div>
 
-**For data questions** (e.g., "How has ANC coverage changed?"):
+The AI follows a "read before responding" principle — it never guesses.
 
-1. Finds the relevant metric in your project
+**For data questions:**
+
+1. Finds the relevant metric
 2. Reads the actual data values
-3. Responds based on what it read, with a supporting visualization
+3. Responds with a visualization
 
-**For methodology questions** (e.g., "How are outliers detected?"):
+**For methodology questions:**
 
-1. Looks up the relevant documentation
-2. Reads the methodology details
+1. Looks up documentation
+2. Reads the details
 3. Explains in plain language
 
-![AI tools diagram h:170](../../resources/diagrams/ai_on_rails.svg)
+</div>
+<div>
+
+![AI tools diagram](../../resources/diagrams/ai_on_rails.svg)
+
+</div>
+</div>

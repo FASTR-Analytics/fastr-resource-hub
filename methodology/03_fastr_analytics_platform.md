@@ -264,9 +264,30 @@ The platform provides a user-friendly interface for running analyses and offers 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_1b -->
-## Platform Capabilities
+## Platform capabilities
+
+<div class="columns">
+<div>
 
 ![Platform Capabilities](../resources/diagrams/platform_capabilities.svg)
+
+</div>
+<div>
+
+**Data Management** — Import facility lists and indicator data from DHIS2 or files
+
+**Data Analysis** — Run statistical modules for quality assessment and adjustment
+
+**Visualization** — Explore results with interactive charts and tables
+
+**Reporting** — Export findings to PowerPoint or PDF for stakeholders
+
+**Collaboration** — Work together with your team on shared projects
+
+**AI Assistant** — Get help interpreting results and understanding your data
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
@@ -560,12 +581,12 @@ AI: *Builds a slide deck you can share with your team*
 | Content | Saved? | Notes |
 |---------|--------|-------|
 | Your AI conversation | Temporary | May be available when you return (depends on configuration) |
-| Whiteboard content | Temporary | Disappears when you navigate away |
+| Whiteboard content | Temporary* | Disappears when you navigate away |
 | Slide decks you create | Permanent | Saved to project, visible to team |
 | Saved visualizations | Permanent | Remain in project library |
 | Downloaded exports | Permanent | Saved to your computer |
 
-**Pro tip:** If you discover something important on the whiteboard, ask the AI to "create a slide deck about this" before you leave — so it's saved permanently.
+*You can save text or visuals from the whiteboard to a slide deck before leaving.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d2 -->
@@ -614,84 +635,60 @@ Everyone can see saved content.
 - Each other's private questions — No
 <!-- /SLIDE -->
 
-<!-- SLIDE:m3_9d4 -->
-## Quick reference: What's saved and shared?
-
-| What | Private or Shared? | Permanent? |
-|------|-------------------|------------|
-| AI conversation | Private | Temporary |
-| Whiteboard | Private | Temporary |
-| Slide decks you create | Shared | Permanent |
-| Saved visualizations | Shared | Permanent |
-| Underlying data | Shared | Permanent |
-| Module results (DQA, coverage) | Shared | Permanent |
-
-**When exploring:** Ask questions freely, test analyses privately
-
-**When sharing:** Create slide decks for findings, save useful visualizations with descriptive names
-<!-- /SLIDE -->
-
 <!-- SLIDE:m3_9e -->
 ## How the AI assistant works
-
-The AI follows a "read before responding" principle — it never guesses or assumes.
-
-**For data questions** (e.g., "How has ANC coverage changed?"):
-
-1. Finds the relevant metric in your project
-2. Reads the actual data values
-3. Responds based on what it read, with a supporting visualization
-
-**For methodology questions** (e.g., "How are outliers detected?"):
-
-1. Looks up the relevant documentation
-2. Reads the methodology details
-3. Explains in plain language
-
-![AI tools diagram h:170](../resources/diagrams/ai_on_rails.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_9e1 -->
-## What AI does — and doesn't do
-
-FASTR uses a hybrid approach: traditional statistics for calculations, AI for interaction.
 
 <div class="columns">
 <div>
 
-**AI handles:**
+The AI follows a "read before responding" principle — it never guesses.
 
-- Natural language queries
-- Reading & verifying data first
-- Explaining trends in plain language
-- Creating visualizations on demand
-- Generating reports and slide decks
+**For data questions:**
+
+1. Finds the relevant metric
+2. Reads the actual data values
+3. Responds with a visualization
+
+**For methodology questions:**
+
+1. Looks up documentation
+2. Reads the details
+3. Explains in plain language
 
 </div>
 <div>
 
-**R modules handle:**
-
-- Outlier detection (MAD)
-- Coverage estimation (regression)
-- Data quality scoring (algorithms)
-- Completeness adjustments
-- Statistical testing & control charts
+![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
 
 </div>
 </div>
-
-**Key principle:** AI always queries actual data before commenting — no guessing.
-
-**Bottom line:** The AI is your translator and guide, not your calculator.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e2 -->
 ## AI is an accelerator, not a decision maker
 
-The AI supports your work — you stay in control of judgement, accountability, and action.
+<div class="columns">
+<div>
 
 ![AI accelerator diagram](../resources/diagrams/ai_accelerator.svg)
+
+</div>
+<div>
+
+**You stay in control of:**
+
+- Judgement — deciding what matters
+- Interpretation — understanding context
+- Action — making decisions
+
+**The numbers come from validated methods**
+
+All calculations (outlier detection, coverage estimates, data quality scores) use proven statistical formulas — not AI.
+
+AI interprets and explains. You decide and act.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9e3 -->
