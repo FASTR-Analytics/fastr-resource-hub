@@ -26,7 +26,6 @@
 
   <!-- Project 1 with Editor/Viewer badges -->
   <g transform="translate(60, 100)">
-    <rect width="140" height="100" rx="8" fill="#ffffff" stroke="#1F9A9C" stroke-width="2" filter="url(#shadow)"/>
     <rect width="140" height="24" rx="8" fill="#1F9A9C"/>
     <rect x="0" y="16" width="140" height="8" fill="#1F9A9C"/>
     <text x="70" y="17" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#ffffff">Analyse T4 2025</text>
@@ -43,7 +42,6 @@
 
   <!-- Project 2 with Editor/Viewer badges -->
   <g transform="translate(220, 100)">
-    <rect width="140" height="100" rx="8" fill="#ffffff" stroke="#CAE6E9" stroke-width="2" filter="url(#shadow)"/>
     <rect width="140" height="24" rx="8" fill="#CAE6E9"/>
     <rect x="0" y="16" width="140" height="8" fill="#CAE6E9"/>
     <text x="70" y="17" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Projet démo</text>
@@ -61,7 +59,6 @@
 
   <!-- Project 3 with Editor/Viewer badges -->
   <g transform="translate(380, 100)">
-    <rect width="140" height="100" rx="8" fill="#ffffff" stroke="#1F9A9C" stroke-width="2" filter="url(#shadow)"/>
     <rect width="140" height="24" rx="8" fill="#1F9A9C"/>
     <rect x="0" y="16" width="140" height="8" fill="#1F9A9C"/>
     <text x="70" y="17" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#ffffff">Équipe SRMNIA</text>
@@ -79,7 +76,6 @@
 
   <!-- Project 4 - Archive -->
   <g transform="translate(140, 220)">
-    <rect width="140" height="90" rx="8" fill="#ffffff" stroke="#CAE6E9" stroke-width="2" filter="url(#shadow)"/>
     <rect width="140" height="24" rx="8" fill="#CAE6E9"/>
     <rect x="0" y="16" width="140" height="8" fill="#CAE6E9"/>
     <text x="70" y="17" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Archive T3 2025</text>

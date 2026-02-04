@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560">
-  <!-- Background -->
-  <rect width="1200" height="560" fill="#f8fafa"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500">
 
   <!-- Main flow boxes -->
 
@@ -102,10 +100,5 @@
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Trianguler avec les connaissances locales</text>
   </g>
 
-  <!-- Bottom key message -->
-  <g transform="translate(100, 495)">
-    <rect x="0" y="0" width="1000" height="50" rx="8" fill="#09544F"/>
-    <text x="500" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="white">FASTR fournit les preuves — vous apportez le jugement, le contexte et les décisions.</text>
-  </g>
 
 </svg>

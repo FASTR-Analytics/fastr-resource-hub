@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 50 1140 540">
   <defs>
     <style>
       /* FASTR Brand Colors */
@@ -32,8 +32,6 @@
     </marker>
   </defs>
 
-  <!-- Background -->
-  <rect x="0" y="0" width="1200" height="700" fill="#ffffff"/>
 
   <!-- Big arrow - outline only -->
   <polygon points="50,65 1100,65 1100,60 1150,80 1100,100 1100,95 50,95" fill="none" stroke="#0C716B" stroke-width="3"/>

@@ -17,7 +17,6 @@
   <text class="title" x="300" y="20" text-anchor="middle">Projection de la couverture entre les enquêtes</text>
 
   <!-- Chart area background -->
-  <rect x="80" y="35" width="420" height="165" fill="#ffffff" stroke="none"/>
 
   <!-- Y-axis -->
   <line class="axis" x1="80" y1="35" x2="80" y2="200"/>
