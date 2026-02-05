@@ -8,13 +8,13 @@ paginate: true
 
 **Exemple de conversation :**
 
-Vous : « Montrez-moi la couverture CPN1 par région »
-IA : *Crée un graphique et explique quelles régions performent bien*
+Vous : « Quelles régions ont le plus de problèmes de qualité des données ? »
+IA : *Crée un graphique montrant les scores de qualité par région*
 
-Vous : « Pourquoi le nombre est-il plus bas en février ? »
-IA : *Analyse les données et explique les raisons possibles*
+Vous : « Qu'est-ce qui cause le faible score dans la région Nord ? »
+IA : *Détaille les problèmes : valeurs aberrantes, lacunes de complétude, problèmes de cohérence*
 
-Vous : « Pouvez-vous créer un rapport à ce sujet ? »
-IA : *Construit une présentation que vous pouvez partager avec votre équipe*
+Vous : « Créez un résumé pour mon directeur »
+IA : *Construit une diapositive mettant en évidence les domaines prioritaires pour l'amélioration de la qualité des données*
 
 **Pensez à l'IA comme un analyste de données dans votre équipe** — quelqu'un qui peut instantanément extraire des rapports, créer des graphiques et répondre à vos questions sur vos données de santé.

@@ -8,7 +8,7 @@ paginate: true
 
 | Who | Action | Result |
 |-----|--------|--------|
-| **Dr. Amina** (Director) | Asks AI about coverage, explores privately, creates slide deck | Deck now visible to all |
+| **Dr. Amina** (Director) | Asks AI about data quality, explores privately, creates slide deck | Deck now visible to all |
 | **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart in library for everyone |
 | **Fatima** (Program Officer) | Opens Amina's slides, uses Mohamed's chart, asks AI to explain | Gets private explanation |
 

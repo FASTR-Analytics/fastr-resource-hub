@@ -16,7 +16,7 @@ paginate: true
 
 **Les questions de suivi fonctionnent très bien :**
 
-1. Commencez large : « Montrez-moi la couverture vaccinale »
-2. Affinez : « Et pour le BCG seulement ? »
-3. Approfondissez : « Pourquoi a-t-elle augmenté en mai ? »
+1. Commencez large : « Montrez-moi les scores de qualité par région »
+2. Affinez : « Et pour les indicateurs CPN seulement ? »
+3. Approfondissez : « Pourquoi la région Nord est-elle si basse ? »
 4. Passez à l'action : « Créez une diapositive à ce sujet pour ma présentation »

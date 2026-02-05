@@ -4,16 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## AI across platform components
+## AI assistant capabilities
 
-| Component | What it is | What AI can do |
-|-----------|-----------|----------------|
-| **Whiteboard** | Temporary canvas for exploration | Create charts (line/bar/table), explain data, real-time Q&A |
-| **Visualizations** | Saved charts in project | Display, explain, read data, use replicants — cannot create/edit/delete |
-| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative text |
-
-**Whiteboard:** For interactive exploration — content is temporary
-
-**Visualizations:** Permanent library of reusable charts — you create them, AI can use them
-
-**Slide decks:** For reports and presentations — AI helps assemble from data and saved charts
+| Area | What it supports |
+|------|------------------|
+| **Data exploration** | Query metrics from analysis modules; filter by geography, time, demographics; view raw CSV data; explore across time periods and locations |
+| **Visualization** | Display project visualizations; create bar charts, line graphs, tables; combine charts, tables, and narrative text |
+| **Knowledge** | Access FASTR methodology; explain indicators and calculations; interpret results with context on data quality and limitations |
+| **Communication** | Build narratives combining visuals and text; highlight key findings; create focused views; provide evidence-based insights |

@@ -8,13 +8,13 @@ paginate: true
 
 **Example conversation:**
 
-You: "Show me ANC1 coverage by region"
-AI: *Creates a chart and explains which regions are performing well*
+You: "Which regions have the most data quality issues?"
+AI: *Creates a chart showing data quality scores by region*
 
-You: "Why is the number lower in February?"
-AI: *Analyzes the data and explains possible reasons*
+You: "What's causing the low score in the Northern region?"
+AI: *Breaks down the issues: outliers, completeness gaps, consistency problems*
 
-You: "Can you create a report about this?"
-AI: *Builds a slide deck you can share with your team*
+You: "Create a summary for my director"
+AI: *Builds a slide highlighting priority areas for data quality improvement*
 
 **Think of the AI as a data analyst on your team** — someone who can instantly pull reports, create charts, and answer questions about your health data.

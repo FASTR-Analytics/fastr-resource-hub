@@ -491,14 +491,14 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 
 **Answer questions about your data**
 
-- "How has ANC coverage changed since 2023?"
-- "Which regions have the worst data quality?"
+- "Which regions have the most outliers?"
+- "How has reporting completeness changed over time?"
 - Creates charts and explanations on-the-fly
 
 **Explain methodology**
 
 - "How are outliers detected?"
-- "What does this coverage estimate mean?"
+- "What does this data quality score mean?"
 - Draws from platform documentation
 
 **Help build reports**
@@ -515,10 +515,10 @@ Type your questions in plain language. The AI analyzes your data and shows you r
 
 | Topic | Example questions |
 |-------|-------------------|
-| **Coverage** | "How has ANC coverage changed?" / "Show me vaccination trends for 2024" |
-| **Data quality** | "Which regions report consistently?" / "Where do we have data quality issues?" |
+| **Data quality** | "Which regions have the most outliers?" / "Where are the completeness gaps?" |
+| **Trends** | "How has ANC1 changed over time?" / "Show me service volumes for 2024" |
 | **Disruptions** | "Have any services dropped recently?" / "Did anything change last quarter?" |
-| **Regional** | "Which areas are doing well?" / "Where should we focus support?" |
+| **Regional** | "Which areas have low reporting rates?" / "Where should we focus support?" |
 
 No coding required. No technical jargon necessary. Just ask like you're talking to a colleague.
 <!-- /SLIDE -->
@@ -528,14 +528,14 @@ No coding required. No technical jargon necessary. Just ask like you're talking 
 
 **Example conversation:**
 
-You: "Show me ANC1 coverage by region"
-AI: *Creates a chart and explains which regions are performing well*
+You: "Which regions have the most data quality issues?"
+AI: *Creates a chart showing data quality scores by region*
 
-You: "Why is the number lower in February?"
-AI: *Analyzes the data and explains possible reasons*
+You: "What's causing the low score in the Northern region?"
+AI: *Breaks down the issues: outliers, completeness gaps, consistency problems*
 
-You: "Can you create a report about this?"
-AI: *Builds a slide deck you can share with your team*
+You: "Create a summary for my director"
+AI: *Builds a slide highlighting priority areas for data quality improvement*
 
 **Think of the AI as a data analyst on your team** — someone who can instantly pull reports, create charts, and answer questions about your health data.
 <!-- /SLIDE -->
@@ -553,26 +553,21 @@ AI: *Builds a slide deck you can share with your team*
 
 **Follow-up questions work great:**
 
-1. Start broad: "Show me vaccination coverage"
-2. Narrow down: "What about just BCG?"
-3. Go deeper: "Why did it increase in May?"
+1. Start broad: "Show me data quality scores by region"
+2. Narrow down: "What about just ANC indicators?"
+3. Go deeper: "Why is the Northern region so low?"
 4. Take action: "Create a slide about this for my presentation"
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9a1 -->
-## AI across platform components
+## AI assistant capabilities
 
-| Component | What it is | What AI can do |
-|-----------|-----------|----------------|
-| **Whiteboard** | Temporary canvas for exploration | Create charts (line/bar/table), explain data, real-time Q&A |
-| **Visualizations** | Saved charts in project | Display, explain, read data, use replicants — cannot create/edit/delete |
-| **Slide decks** | Multi-slide presentations | Build slides combining charts + narrative text |
-
-**Whiteboard:** For interactive exploration — content is temporary
-
-**Visualizations:** Permanent library of reusable charts — you create them, AI can use them
-
-**Slide decks:** For reports and presentations — AI helps assemble from data and saved charts
+| Area | What it supports |
+|------|------------------|
+| **Data exploration** | Query metrics from analysis modules; filter by geography, time, demographics; view raw CSV data; explore across time periods and locations |
+| **Visualization** | Display project visualizations; create bar charts, line graphs, tables; combine charts, tables, and narrative text |
+| **Knowledge** | Access FASTR methodology; explain indicators and calculations; interpret results with context on data quality and limitations |
+| **Communication** | Build narratives combining visuals and text; highlight key findings; create focused views; provide evidence-based insights |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d -->
@@ -624,7 +619,7 @@ Everyone can see saved content.
 
 | Who | Action | Result |
 |-----|--------|--------|
-| **Dr. Amina** (Director) | Asks AI about coverage, explores privately, creates slide deck | Deck now visible to all |
+| **Dr. Amina** (Director) | Asks AI about data quality, explores privately, creates slide deck | Deck now visible to all |
 | **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart in library for everyone |
 | **Fatima** (Program Officer) | Opens Amina's slides, uses Mohamed's chart, asks AI to explain | Gets private explanation |
 

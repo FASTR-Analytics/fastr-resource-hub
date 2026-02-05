@@ -16,7 +16,7 @@ paginate: true
 
 **Follow-up questions work great:**
 
-1. Start broad: "Show me vaccination coverage"
-2. Narrow down: "What about just BCG?"
-3. Go deeper: "Why did it increase in May?"
+1. Start broad: "Show me data quality scores by region"
+2. Narrow down: "What about just ANC indicators?"
+3. Go deeper: "Why is the Northern region so low?"
 4. Take action: "Create a slide about this for my presentation"

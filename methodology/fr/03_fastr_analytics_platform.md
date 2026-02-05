@@ -452,14 +452,14 @@ La plateforme FASTR inclut un assistant IA qui fournit un support à la demande 
 
 **Répondre aux questions sur vos données**
 
-- « Comment la couverture CPN a-t-elle évolué depuis 2023 ? »
-- « Quelles régions ont la pire qualité des données ? »
+- « Quelles régions ont le plus de valeurs aberrantes ? »
+- « Comment la complétude des rapports a-t-elle évolué ? »
 - Crée des graphiques et explications à la volée
 
 **Expliquer la méthodologie**
 
 - « Comment les valeurs aberrantes sont-elles détectées ? »
-- « Que signifie cette estimation de couverture ? »
+- « Que signifie ce score de qualité des données ? »
 - S'appuie sur la documentation de la plateforme
 
 **Aider à construire des rapports**
@@ -476,10 +476,10 @@ Tapez vos questions en langage naturel. L'IA analyse vos données et vous montre
 
 | Sujet | Exemples de questions |
 |-------|----------------------|
-| **Couverture** | « Comment la couverture CPN a-t-elle évolué ? » / « Montrez-moi les tendances de vaccination pour 2024 » |
-| **Qualité des données** | « Quelles régions rapportent régulièrement ? » / « Où avons-nous des problèmes de qualité ? » |
+| **Qualité des données** | « Quelles régions ont le plus de valeurs aberrantes ? » / « Où sont les lacunes de complétude ? » |
+| **Tendances** | « Comment CPN1 a-t-il évolué au fil du temps ? » / « Montrez-moi les volumes de services pour 2024 » |
 | **Perturbations** | « Y a-t-il eu des baisses de services récemment ? » / « Quelque chose a-t-il changé ce trimestre ? » |
-| **Régional** | « Quelles zones ont de bonnes performances ? » / « Où devons-nous concentrer notre soutien ? » |
+| **Régional** | « Quelles zones ont de faibles taux de rapportage ? » / « Où devons-nous concentrer notre soutien ? » |
 
 Pas de programmation requise. Pas de jargon technique. Posez simplement vos questions comme à un collègue.
 <!-- /SLIDE -->
@@ -489,14 +489,14 @@ Pas de programmation requise. Pas de jargon technique. Posez simplement vos ques
 
 **Exemple de conversation :**
 
-Vous : « Montrez-moi la couverture CPN1 par région »
-IA : *Crée un graphique et explique quelles régions performent bien*
+Vous : « Quelles régions ont le plus de problèmes de qualité des données ? »
+IA : *Crée un graphique montrant les scores de qualité par région*
 
-Vous : « Pourquoi le nombre est-il plus bas en février ? »
-IA : *Analyse les données et explique les raisons possibles*
+Vous : « Qu'est-ce qui cause le faible score dans la région Nord ? »
+IA : *Détaille les problèmes : valeurs aberrantes, lacunes de complétude, problèmes de cohérence*
 
-Vous : « Pouvez-vous créer un rapport à ce sujet ? »
-IA : *Construit une présentation que vous pouvez partager avec votre équipe*
+Vous : « Créez un résumé pour mon directeur »
+IA : *Construit une diapositive mettant en évidence les domaines prioritaires pour l'amélioration de la qualité des données*
 
 **Pensez à l'IA comme un analyste de données dans votre équipe** — quelqu'un qui peut instantanément extraire des rapports, créer des graphiques et répondre à vos questions sur vos données de santé.
 <!-- /SLIDE -->
@@ -514,26 +514,21 @@ IA : *Construit une présentation que vous pouvez partager avec votre équipe*
 
 **Les questions de suivi fonctionnent très bien :**
 
-1. Commencez large : « Montrez-moi la couverture vaccinale »
-2. Affinez : « Et pour le BCG seulement ? »
-3. Approfondissez : « Pourquoi a-t-elle augmenté en mai ? »
+1. Commencez large : « Montrez-moi les scores de qualité par région »
+2. Affinez : « Et pour les indicateurs CPN seulement ? »
+3. Approfondissez : « Pourquoi la région Nord est-elle si basse ? »
 4. Passez à l'action : « Créez une diapositive à ce sujet pour ma présentation »
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9a1 -->
-## L'IA à travers les composants de la plateforme
+## Capacités de l'assistant IA
 
-| Composant | Ce que c'est | Ce que l'IA peut faire |
-|-----------|-------------|------------------------|
-| **Tableau blanc** | Canevas temporaire pour l'exploration | Créer des graphiques (ligne/barre/tableau), expliquer, Q&R en temps réel |
-| **Visualisations** | Graphiques sauvegardés dans le projet | Afficher, expliquer, lire les données, utiliser des réplicants — ne peut pas créer/modifier |
-| **Présentations** | Présentations multi-diapositives | Construire des diapositives combinant graphiques + texte narratif |
-
-**Tableau blanc :** Pour l'exploration interactive — le contenu est temporaire
-
-**Visualisations :** Bibliothèque permanente de graphiques réutilisables — vous les créez, l'IA peut les utiliser
-
-**Présentations :** Pour les rapports — l'IA aide à assembler à partir des données et graphiques sauvegardés
+| Domaine | Ce qu'il permet |
+|---------|-----------------|
+| **Exploration des données** | Interroger les métriques des modules d'analyse ; filtrer par géographie, temps, démographie ; voir les données CSV brutes ; explorer différentes périodes et localisations |
+| **Visualisation** | Afficher les visualisations du projet ; créer des graphiques à barres, courbes, tableaux ; combiner graphiques, tableaux et texte narratif |
+| **Connaissances** | Accéder à la documentation FASTR ; expliquer les indicateurs et calculs ; interpréter les résultats avec contexte sur la qualité des données et les limites |
+| **Communication** | Construire des récits combinant visuels et texte ; mettre en évidence les résultats clés ; créer des vues ciblées ; fournir des analyses basées sur les données |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_9d -->
@@ -585,7 +580,7 @@ Tout le monde peut voir le contenu sauvegardé.
 
 | Qui | Action | Résultat |
 |-----|--------|----------|
-| **Dr. Amina** (Directrice) | Demande la couverture, explore en privé, crée une présentation | Présentation visible par tous |
+| **Dr. Amina** (Directrice) | Demande la qualité des données, explore en privé, crée une présentation | Présentation visible par tous |
 | **Mohamed** (Gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique dans la bibliothèque |
 | **Fatima** (Chargée de programme) | Ouvre les diapos d'Amina, utilise le graphique de Mohamed | Reçoit une explication privée |
 

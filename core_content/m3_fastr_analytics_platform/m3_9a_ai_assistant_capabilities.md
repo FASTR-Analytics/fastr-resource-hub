@@ -8,14 +8,14 @@ paginate: true
 
 **Answer questions about your data**
 
-- "How has ANC coverage changed since 2023?"
-- "Which regions have the worst data quality?"
+- "Which regions have the most outliers?"
+- "How has reporting completeness changed over time?"
 - Creates charts and explanations on-the-fly
 
 **Explain methodology**
 
 - "How are outliers detected?"
-- "What does this coverage estimate mean?"
+- "What does this data quality score mean?"
 - Draws from platform documentation
 
 **Help build reports**

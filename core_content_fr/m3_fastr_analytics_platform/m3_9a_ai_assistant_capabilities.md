@@ -8,14 +8,14 @@ paginate: true
 
 **Répondre aux questions sur vos données**
 
-- « Comment la couverture CPN a-t-elle évolué depuis 2023 ? »
-- « Quelles régions ont la pire qualité des données ? »
+- « Quelles régions ont le plus de valeurs aberrantes ? »
+- « Comment la complétude des rapports a-t-elle évolué ? »
 - Crée des graphiques et explications à la volée
 
 **Expliquer la méthodologie**
 
 - « Comment les valeurs aberrantes sont-elles détectées ? »
-- « Que signifie cette estimation de couverture ? »
+- « Que signifie ce score de qualité des données ? »
 - S'appuie sur la documentation de la plateforme
 
 **Aider à construire des rapports**
