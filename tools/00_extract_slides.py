@@ -70,6 +70,7 @@ MODULE_FOLDERS = {
     7: 'm7_results_communication',
     8: 'm8_survey_hfa',
     9: 'm9_workshop_activities',
+    'ai': 'mai_ai_assistant',  # AI Assistant module (separate from m3)
 }
 
 # Topic names for generating filenames
@@ -212,6 +213,21 @@ TOPIC_NAMES = {
     'm9_2': 'disruptions_report_activity',
     'm9_3': 'presenting_reports_group_feedback',
     'm9_4': 'fastr_quiz',
+
+    # AI Assistant module (from 03b_ai_assistant.md)
+    'mai_1': 'ai_assistant_overview',
+    'mai_2': 'ai_assistant_capabilities',
+    'mai_3': 'ai_ask_questions',
+    'mai_4': 'ai_conversations',
+    'mai_5': 'ai_tips_better_answers',
+    'mai_6': 'ai_capabilities_table',
+    'mai_7': 'ai_what_happens_log_off',
+    'mai_8': 'ai_private_vs_shared',
+    'mai_9': 'ai_team_collaboration',
+    'mai_10': 'ai_how_it_works',
+    'mai_11': 'ai_accelerator_not_decider',
+    'mai_12': 'ai_principles_success',
+    'mai_13': 'ai_practice_activity',
 }
 
 # Marp frontmatter to add to extracted slides
@@ -255,9 +271,15 @@ def parse_slide_id(slide_id):
     - m4_1a -> (4, 1, 'a')
     - m4_1a2 -> (4, 1, 'a2')
     - m4_s1 -> (4, 's1', '') - condensed/summary slides
+    - mai_1 -> ('ai', 1, '') - AI Assistant module
 
     Returns (module_num, topic_num, suffix) or (None, None, None) if invalid.
     """
+    # AI Assistant format: mai_1, mai_2, etc.
+    match = re.match(r'^mai_(\d+)([a-z]?\d*)$', slide_id)
+    if match:
+        return 'ai', int(match.group(1)), match.group(2)
+
     # Standard format: m4_1, m4_1a, or m4_1a2
     match = re.match(r'^m(\d+)_(\d+)([a-z]?\d*)$', slide_id)
     if match:

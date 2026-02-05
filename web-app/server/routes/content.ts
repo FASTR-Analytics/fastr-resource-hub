@@ -165,23 +165,14 @@ router.get('/modules', (req, res) => {
     for (const item of items) {
       const modulePath = path.join(coreContentPath, item)
 
-      // Check for standard module folders (m0_, m1_, etc.) OR the overview folder
+      // Check for standard module folders (m0_, m1_, etc.)
       const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+)_/.test(item)
-      const isOverviewModule = item === 'overview_20min'
 
-      if (fs.statSync(modulePath).isDirectory() && (isStandardModule || isOverviewModule)) {
-        let modNum: number | string
-        let modId: string
-
-        if (isOverviewModule) {
-          modNum = 'overview'
-          modId = 'overview'
-        } else {
-          const modNumMatch = item.match(/^m(\d+)_/)
-          if (!modNumMatch) continue
-          modNum = parseInt(modNumMatch[1])
-          modId = `m${modNum}`
-        }
+      if (fs.statSync(modulePath).isDirectory() && isStandardModule) {
+        const modNumMatch = item.match(/^m(\d+)_/)
+        if (!modNumMatch) continue
+        const modNum = parseInt(modNumMatch[1])
+        const modId = `m${modNum}`
 
         const fullTopics: any[] = []
         const condensedTopics: any[] = []
@@ -207,12 +198,6 @@ router.get('/modules', (req, res) => {
           if (topicMatch) {
             topicId = topicMatch[1]
             isCondensed = topicId.includes('_s')
-          } else if (isOverviewModule) {
-            // Overview module uses 01_, 02_, etc. format
-            const overviewMatch = file.match(/^(\d+[a-z]?)_/)
-            if (!overviewMatch) continue
-            topicId = `overview_${overviewMatch[1]}`
-            isCondensed = false
           } else {
             continue
           }
@@ -263,7 +248,7 @@ router.get('/modules', (req, res) => {
         modules.push({
           number: modNum,
           id: modId,
-          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || (isOverviewModule ? 'FASTR Overview' : `Module ${modNum}`),
+          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || `Module ${modNum}`,
           folder: item,
           topics: allTopics, // All topics for backward compatibility
           fullTopics: fullTopics,
@@ -336,40 +321,33 @@ router.get('/topic/:id', (req, res) => {
     let moduleFolder: string | undefined
     let filePrefix: string
 
-    // Check if it's an overview topic (overview_01, overview_02, etc.)
-    const overviewMatch = topicId.match(/^overview_(\d+[a-z]?)$/)
-    if (overviewMatch) {
-      moduleFolder = 'overview_20min'
-      filePrefix = `${overviewMatch[1]}_`  // e.g., "01_", "04b_"
-    } else {
-      // Standard module topic (m4_1, m4_s1, etc.)
-      const modNumMatch = topicId.match(/^m(\d+)_/)
-      if (!modNumMatch) {
-        return res.status(400).json({ error: 'Invalid topic ID' })
-      }
+    // Standard module topic (m4_1, m4_s1, etc.)
+    const modNumMatch = topicId.match(/^m(\d+)_/)
+    if (!modNumMatch) {
+      return res.status(400).json({ error: 'Invalid topic ID' })
+    }
 
-      const modNum = modNumMatch[1]
-      moduleFolder = fs.readdirSync(contentPath)
-        .find(f => f.startsWith(`m${modNum}_`))
+    const modNum = modNumMatch[1]
+    moduleFolder = fs.readdirSync(contentPath)
+      .find(f => f.startsWith(`m${modNum}_`))
 
-      if (!moduleFolder) {
-        // Fallback to English if module not found in requested language
-        if (language !== 'en') {
-          const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-            .find(f => f.startsWith(`m${modNum}_`))
-          if (enModuleFolder) {
-            contentPath = CORE_CONTENT_PATH
-            moduleFolder = enModuleFolder
-          } else {
-            return res.status(404).json({ error: 'Module not found' })
-          }
+    if (!moduleFolder) {
+      // Fallback to English if module not found in requested language
+      if (language !== 'en') {
+        const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+          .find(f => f.startsWith(`m${modNum}_`))
+        if (enModuleFolder) {
+          contentPath = CORE_CONTENT_PATH
+          moduleFolder = enModuleFolder
         } else {
           return res.status(404).json({ error: 'Module not found' })
         }
+      } else {
+        return res.status(404).json({ error: 'Module not found' })
       }
-
-      filePrefix = `${topicId}_`
     }
+
+    filePrefix = `${topicId}_`
 
     if (!moduleFolder) {
       return res.status(404).json({ error: 'Module not found' })
@@ -854,29 +832,22 @@ router.post('/export/selection', async (req, res) => {
       let moduleFolder: string | undefined
       let filePrefix: string
 
-      // Check if it's an overview module topic (overview_01, overview_02, etc.)
-      const overviewMatch = topicId.match(/^overview_(\d+[a-z]?)$/)
-      if (overviewMatch) {
-        moduleFolder = 'overview_20min'
-        filePrefix = `${overviewMatch[1]}_`  // e.g., "01_", "04b_"
-      } else {
-        // Standard module topic (m4_1, m4_s1, etc.)
-        const modNumMatch = topicId.match(/^m(\d+)_/)
-        if (!modNumMatch) continue
+      // Standard module topic (m4_1, m4_s1, etc.)
+      const modNumMatch = topicId.match(/^m(\d+)_/)
+      if (!modNumMatch) continue
 
-        const modNum = modNumMatch[1]
+      const modNum = modNumMatch[1]
+      moduleFolder = fs.readdirSync(contentPath)
+        .find(f => f.startsWith(`m${modNum}_`))
+
+      // Fallback to English if not found
+      if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
+        contentPath = CORE_CONTENT_PATH
         moduleFolder = fs.readdirSync(contentPath)
           .find(f => f.startsWith(`m${modNum}_`))
-
-        // Fallback to English if not found
-        if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
-          contentPath = CORE_CONTENT_PATH
-          moduleFolder = fs.readdirSync(contentPath)
-            .find(f => f.startsWith(`m${modNum}_`))
-        }
-
-        filePrefix = `${topicId}_`
       }
+
+      filePrefix = `${topicId}_`
 
       if (!moduleFolder) continue
 

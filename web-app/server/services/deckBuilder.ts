@@ -36,7 +36,7 @@ const MODULE_FOLDERS: Record<string, string> = {
   m7: 'm7_results_communication',
   m8: 'm8_survey_hfa',
   m9: 'm9_workshop_activities',
-  overview: 'overview_20min',
+  mai: 'mai_ai_assistant',  // AI Assistant module (separate from m3)
 }
 
 interface Session {
@@ -280,11 +280,6 @@ function buildModuleSlides(
     }
   }
 
-  // Exclude the combined deck file for overview module
-  if (moduleId === 'overview') {
-    files = files.filter(f => f !== 'overview_20min.md')
-  }
-
   // Sort files by topic number
   files = files.sort((a, b) => {
       // Handle condensed files (m4_s1, m4_s2, etc.)
@@ -389,11 +384,6 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
       // Full (default): exclude condensed files
       files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
     }
-  }
-
-  // Exclude the combined deck file for overview module
-  if (moduleId === 'overview') {
-    files = files.filter(f => f !== 'overview_20min.md')
   }
 
   return files.sort((a, b) => {
