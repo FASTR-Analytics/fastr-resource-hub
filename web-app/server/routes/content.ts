@@ -112,7 +112,7 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     7: 'Results Communication',
     8: 'Survey & HFA',
     9: 'Workshop Activities',
-    'overview': 'FASTR 20-Minute Overview',
+    '3b': 'AI Assistant',
   },
   fr: {
     0: 'Introduction à FASTR',
@@ -125,7 +125,7 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     7: 'Communication des résultats',
     8: 'Enquêtes et EFS',
     9: 'Activités de l\'atelier',
-    'overview': 'Vue d\'ensemble FASTR (20 min)',
+    '3b': 'Assistant IA',
   }
 }
 
@@ -165,14 +165,23 @@ router.get('/modules', (req, res) => {
     for (const item of items) {
       const modulePath = path.join(coreContentPath, item)
 
-      // Check for standard module folders (m0_, m1_, etc.)
+      // Check for standard module folders (m0_, m1_, etc.) or AI module (mai_)
       const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+)_/.test(item)
+      const isAIModule = item.startsWith('mai_')
 
-      if (fs.statSync(modulePath).isDirectory() && isStandardModule) {
-        const modNumMatch = item.match(/^m(\d+)_/)
-        if (!modNumMatch) continue
-        const modNum = parseInt(modNumMatch[1])
-        const modId = `m${modNum}`
+      if (fs.statSync(modulePath).isDirectory() && (isStandardModule || isAIModule)) {
+        let modNum: number | string
+        let modId: string
+
+        if (isAIModule) {
+          modNum = '3b'
+          modId = 'm3b'
+        } else {
+          const modNumMatch = item.match(/^m(\d+)_/)
+          if (!modNumMatch) continue
+          modNum = parseInt(modNumMatch[1])
+          modId = `m${modNum}`
+        }
 
         const fullTopics: any[] = []
         const condensedTopics: any[] = []
@@ -190,8 +199,8 @@ router.get('/modules', (req, res) => {
           })
 
         for (const file of files) {
-          // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), and overview (01_..., 02_...) formats
-          let topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/)
+          // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), or AI (mai_1_...) formats
+          let topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+)_/)
           let topicId: string
           let isCondensed = false
 
@@ -260,7 +269,12 @@ router.get('/modules', (req, res) => {
       }
     }
 
-    const sortedModules = modules.sort((a, b) => a.number - b.number)
+    // Sort modules: numeric order, with AI module (3b = 3.5) after M3
+    const sortedModules = modules.sort((a, b) => {
+      const aNum = a.number === '3b' ? 3.5 : (typeof a.number === 'number' ? a.number : 100)
+      const bNum = b.number === '3b' ? 3.5 : (typeof b.number === 'number' ? b.number : 100)
+      return aNum - bNum
+    })
 
     // Cache the result per language
     modulesCacheByLang[cacheKey] = {
@@ -321,38 +335,50 @@ router.get('/topic/:id', (req, res) => {
     let moduleFolder: string | undefined
     let filePrefix: string
 
+    // Check for AI module topic (mai_1, mai_2, etc.)
+    const aiMatch = topicId.match(/^mai_(\d+)$/)
     // Standard module topic (m4_1, m4_s1, etc.)
     const modNumMatch = topicId.match(/^m(\d+)_/)
-    if (!modNumMatch) {
-      return res.status(400).json({ error: 'Invalid topic ID' })
-    }
 
-    const modNum = modNumMatch[1]
-    moduleFolder = fs.readdirSync(contentPath)
-      .find(f => f.startsWith(`m${modNum}_`))
+    if (aiMatch) {
+      // AI module topics
+      moduleFolder = fs.readdirSync(contentPath)
+        .find(f => f.startsWith('mai_'))
 
-    if (!moduleFolder) {
-      // Fallback to English if module not found in requested language
-      if (language !== 'en') {
+      if (!moduleFolder && language !== 'en') {
+        // Fallback to English
         const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-          .find(f => f.startsWith(`m${modNum}_`))
+          .find(f => f.startsWith('mai_'))
         if (enModuleFolder) {
           contentPath = CORE_CONTENT_PATH
           moduleFolder = enModuleFolder
-        } else {
-          return res.status(404).json({ error: 'Module not found' })
         }
-      } else {
-        return res.status(404).json({ error: 'Module not found' })
       }
-    }
+    } else if (modNumMatch) {
+      const modNum = modNumMatch[1]
+      moduleFolder = fs.readdirSync(contentPath)
+        .find(f => f.startsWith(`m${modNum}_`))
 
-    filePrefix = `${topicId}_`
+      if (!moduleFolder) {
+        // Fallback to English if module not found in requested language
+        if (language !== 'en') {
+          const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
+            .find(f => f.startsWith(`m${modNum}_`))
+          if (enModuleFolder) {
+            contentPath = CORE_CONTENT_PATH
+            moduleFolder = enModuleFolder
+          }
+        }
+      }
+    } else {
+      return res.status(400).json({ error: 'Invalid topic ID' })
+    }
 
     if (!moduleFolder) {
       return res.status(404).json({ error: 'Module not found' })
     }
 
+    filePrefix = `${topicId}_`
     const modulePath = path.join(contentPath, moduleFolder)
     if (!fs.existsSync(modulePath)) {
       return res.status(404).json({ error: 'Module folder not found' })
