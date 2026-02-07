@@ -87,35 +87,56 @@ Compare current period performance against the previous period for key indicator
 Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining performance or persistent gaps.
 ```
 
-# Indicator Deep Dives
+# Indicator Analysis
 
-## Program Areas
+FASTR focuses on core RMNCAH-N indicators that represent key points along the health continuum. These indicators typically have higher reporting volumes and serve as proxies for broader service delivery patterns.
 
-### Maternal Health
+## Maternal Health
+
+### ANC Disruptions
 ```prompt
-Analyze maternal health indicators including ANC coverage, institutional deliveries, and postnatal care. Provide:
-- Current performance levels
-- Trends over the past year
-- Geographic variations
-- Recommendations for improvement
+Analyze ANC1 and ANC4 for disruptions. Show actual vs expected volumes, flag periods where services fell below expected levels, and identify which regions are most affected.
 ```
 
-### Child Health
+### Delivery Services
 ```prompt
-Analyze child health indicators including immunization coverage, growth monitoring, and treatment of common childhood illnesses. Provide:
-- Coverage rates and trends
-- Identification of underperforming areas
-- Barriers to service delivery
-- Recommended interventions
+Analyze institutional delivery trends. Compare actual volumes to expected, highlight any disruption periods, and show subnational variation.
 ```
 
-### Immunization
+### Postnatal Care
 ```prompt
-Analyze immunization indicators including Penta1, Penta3, measles coverage, and dropout rates. Provide:
-- Coverage rates and trends
-- Dropout analysis (Penta1 to Penta3)
-- Geographic variations
-- Cold chain or supply considerations
+Analyze PNC1 for disruptions. Are postnatal care visits tracking with deliveries? Flag any gaps between expected and actual service volumes.
+```
+
+## Child Health
+
+### Immunization Coverage
+```prompt
+Analyze BCG, Penta1, and Penta3 for disruptions. Show actual vs expected for each vaccine, identify disruption periods, and flag regions with persistent gaps.
+```
+
+### Dropout Analysis
+```prompt
+Compare Penta1 to Penta3 dropout patterns. Are children completing the vaccine series? How has dropout changed over time?
+```
+
+## General Services
+
+### Outpatient Trends
+```prompt
+Analyze outpatient visit trends. Compare actual vs expected volumes, identify disruption periods, and show how patterns vary across regions.
+```
+
+## Cross-Indicator
+
+### Service Continuity
+```prompt
+Compare disruption patterns across ANC, delivery, and immunization. Are disruptions happening at the same time across services, or are some indicators more affected than others?
+```
+
+### Regional Comparison
+```prompt
+Which regions show the most disruptions across indicators? Identify areas with consistent gaps between actual and expected service volumes.
 ```
 
 # Visualizations

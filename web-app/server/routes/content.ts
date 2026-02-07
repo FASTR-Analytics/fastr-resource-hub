@@ -858,22 +858,28 @@ router.post('/export/selection', async (req, res) => {
       let moduleFolder: string | undefined
       let filePrefix: string
 
-      // Standard module topic (m4_1, m4_s1, etc.)
-      const modNumMatch = topicId.match(/^m(\d+)_/)
-      if (!modNumMatch) continue
+      // Handle mai_ prefix (AI assistant module)
+      if (topicId.startsWith('mai_')) {
+        moduleFolder = 'mai_ai_assistant'
+        filePrefix = `${topicId}_`
+      } else {
+        // Standard module topic (m4_1, m4_s1, etc.)
+        const modNumMatch = topicId.match(/^m(\d+)_/)
+        if (!modNumMatch) continue
 
-      const modNum = modNumMatch[1]
-      moduleFolder = fs.readdirSync(contentPath)
-        .find(f => f.startsWith(`m${modNum}_`))
-
-      // Fallback to English if not found
-      if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
-        contentPath = CORE_CONTENT_PATH
+        const modNum = modNumMatch[1]
         moduleFolder = fs.readdirSync(contentPath)
           .find(f => f.startsWith(`m${modNum}_`))
-      }
 
-      filePrefix = `${topicId}_`
+        // Fallback to English if not found
+        if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
+          contentPath = CORE_CONTENT_PATH
+          moduleFolder = fs.readdirSync(contentPath)
+            .find(f => f.startsWith(`m${modNum}_`))
+        }
+
+        filePrefix = `${topicId}_`
+      }
 
       if (!moduleFolder) continue
 
