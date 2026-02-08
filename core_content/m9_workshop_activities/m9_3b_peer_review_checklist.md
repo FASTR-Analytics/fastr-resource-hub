@@ -6,14 +6,16 @@ paginate: true
 
 ## Peer review: disruption report feedback
 
-Swap reports with another table. As a fresh reader, review:
+**Pair up:** DRC ↔ Burkina Faso | Sierra Leone ↔ Liberia | Zambia ↔ Nigeria/Bauchi
 
-☐ Is the main message clear within the first few sentences?
-☐ Is the report easy to follow and well structured?
-☐ Would a decision-maker understand what to do with this?
-☐ Is anything confusing or unclear?
+**Swap reports** with your paired team
 
-**Give feedback:** 2 things that work well, 2 suggestions to improve
+**Review as a fresh reader**
+☐ Is the main message clear? ☐ Easy to follow? ☐ Would a decision-maker know what to do?
+
+**Prepare feedback:** 2 things that work well, 2 suggestions to improve
+
+**Present back:** Key strengths and top suggestions for the report you reviewed
 
 <!--
 PRESENTER NOTES:

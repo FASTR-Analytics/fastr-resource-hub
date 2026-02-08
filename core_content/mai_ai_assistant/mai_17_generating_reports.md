@@ -50,8 +50,29 @@ The instructions file teaches the AI *how* to build the report. Your prompt tell
 Include these details in your prompt:
 
 > Generate a FASTR Disruptions Report for **Nigeria** covering **Jan 2024** to **Dec 2025**. Report period: **2025 Annual**. Analysis generated: **February 2026**.
+> Include national-level analysis for: ANC1/4, institutional delivery services, BCG/Penta vaccines, measles vaccines, and outpatient visits.
 
 The AI combines your details with the instructions file to produce the full report.
+
+---
+
+## Expanding your report
+
+Once you have the core disruptions report, you can ask the AI to add more sections. Simply type in the chat:
+
+**For regional analysis:**
+
+> Create regional analysis for all subnational areas.
+
+This generates one slide per region showing actual vs. expected service volumes.
+
+**For data quality assessment:**
+
+> Include data quality assessment covering completeness, outliers, internal consistency, and DQA scores.
+
+This adds an annex with DQA visualizations and interpretation.
+
+You can request one or both. The AI will append these sections to your report.
 
 ---
 

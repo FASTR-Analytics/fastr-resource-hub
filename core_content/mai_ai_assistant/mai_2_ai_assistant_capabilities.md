@@ -4,22 +4,38 @@ theme: fastr
 paginate: true
 ---
 
-## What the AI assistant can do
+## Where the AI assistant is most effective
 
-**Answer questions about your data**
+In this workshop, we will interact with the AI through **Visualizations** and **Slide Decks**.
 
-- "Which regions have the most outliers?"
-- "How has reporting completeness changed over time?"
-- Creates charts and explanations on-the-fly
+**Slide Decks**
+- Create presentation slides from scratch (cover, section, content slides)
+- Add charts, tables, and text to slides
+- Clone existing visualizations into slides
+- Update, reorder, duplicate, and delete slides
+- Build complete presentations automatically
 
-**Explain methodology**
+**Visualizations**
+- List all saved visualizations in your project
+- Show the data behind any visualization
+- Edit visualization settings (chart types, filters, disaggregations, titles)
+- Explain what a visualization shows
 
-- "How are outliers detected?"
-- "What does this data quality score mean?"
-- Draws from platform documentation
+---
 
-**Help build reports**
+## AI capabilities across the platform
 
-- Generate slide decks from your data
-- Combine saved charts with narrative text
-- Create presentations for different audiences
+The AI can also assist with other areas of the platform:
+
+**Reports** — List available reports, answer questions about findings, extract data
+*Cannot edit or regenerate reports (they are pre-built)*
+
+**Metrics** — Query raw data with filters, answer data questions with actual numbers, explain calculations
+
+**Modules** — List modules, show status and logs, view R code
+*Cannot run or edit modules (they run automatically)*
+
+**Data** — Help understand data coverage (facilities, regions, etc.)
+*Cannot upload, manage, or fix data quality issues*
+
+**Settings** — *No direct access (managed manually by users)*
