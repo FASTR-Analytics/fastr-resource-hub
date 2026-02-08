@@ -4,38 +4,42 @@ theme: fastr
 paginate: true
 ---
 
-## Where the AI assistant is most effective
+## Where the AI assistant provides the greatest value
 
-In this workshop, we will interact with the AI through **Visualizations** and **Slide Decks**.
-
-**Slide Decks**
-- Create presentation slides from scratch (cover, section, content slides)
-- Add charts, tables, and text to slides
-- Clone existing visualizations into slides
-- Update, reorder, duplicate, and delete slides
-- Build complete presentations automatically
+The AI assistant is designed to support analytical workflows as users explore data and develop outputs. Users will typically work across two primary areas of the platform:
 
 **Visualizations**
-- List all saved visualizations in your project
-- Show the data behind any visualization
-- Edit visualization settings (chart types, filters, disaggregations, titles)
-- Explain what a visualization shows
+- Access all saved visualizations within the project
+- Review underlying data for any chart or figure
+- Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
+- Receive explanations of what each visualization represents and how to interpret the findings
+
+**Slide Decks**
+- Generate presentation slides including cover pages, section dividers, and content slides
+- Incorporate charts, tables, and narrative text into slide layouts
+- Transfer visualizations directly into presentations
+- Edit, reorder, duplicate, or remove slides as needed
+- Produce complete, formatted presentations from project data
+
+These capabilities enable users to move efficiently from data exploration to polished deliverables.
 
 ---
 
-## AI capabilities across the platform
+## Additional AI capabilities across the platform
 
-The AI can also assist with other areas of the platform:
+The AI assistant can provide support across other platform areas:
 
-**Reports** — List available reports, answer questions about findings, extract data
-*Cannot edit or regenerate reports (they are pre-built)*
+**Reports**
+Access pre-built reports, review findings, and extract data for further use. Note: Reports cannot be edited or regenerated through the AI.
 
-**Metrics** — Query raw data with filters, answer data questions with actual numbers, explain calculations
+**Metrics**
+Query indicator data with filters by region, facility type, or time period. The AI can answer quantitative questions and explain how metrics are defined and calculated.
 
-**Modules** — List modules, show status and logs, view R code
-*Cannot run or edit modules (they run automatically)*
+**Modules**
+View installed analysis modules, check execution status, and access logs for troubleshooting. Note: Modules run automatically and cannot be executed or modified through the AI.
 
-**Data** — Help understand data coverage (facilities, regions, etc.)
-*Cannot upload, manage, or fix data quality issues*
+**Data**
+Understand data coverage including number of facilities, administrative areas, and reporting periods. Note: Data upload and management functions are not accessible through the AI.
 
-**Settings** — *No direct access (managed manually by users)*
+**Settings**
+Project settings are managed directly by users and are not accessible through the AI assistant.
