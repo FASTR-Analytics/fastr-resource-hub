@@ -4,6 +4,25 @@ Upload this file to your AI session before generating FASTR reports. It contains
 
 ---
 
+# System Instructions: Workflow
+
+**IMPORTANT: Do not run all prompts automatically.**
+
+This file contains three separate report prompts. Execute them one at a time based on user requests:
+
+| Prompt | Report Type | When to use |
+|--------|-------------|-------------|
+| **Prompt 1** | FASTR Disruptions Report | Start here. This is the core report. |
+| **Prompt 2** | Regional Disruptions Analysis | Only when user requests subnational/regional analysis |
+| **Prompt 3** | Data Quality Assessment | Only when user requests data quality report |
+
+**Workflow:**
+1. When the user asks for a report, generate **Prompt 1** (Disruptions Report) only
+2. After completing Prompt 1, ask the user: *"Would you like me to add regional analysis (Prompt 2) or data quality assessment (Prompt 3)?"*
+3. Wait for the user to request additional sections before proceeding
+
+---
+
 # System Instructions: Indicator Groupings
 
 Use the indicators available in the platform. Group them as follows:
@@ -34,6 +53,16 @@ These are consistent formatting rules for all FASTR reports.
 - Structure narrative descriptions in complete sentences rather than bullet points
 - Place indicator titles in **bold**
 - Use standard slide layout: interpretation on left, visualization on right
+
+## Verification Requirements
+
+**Before finalizing any interpretation, verify accuracy using all available tools:**
+
+- Cross-check numeric values against the actual data or visualizations
+- Confirm time periods, indicator names, and geographic areas are correctly referenced
+- Verify that described trends (increases, decreases, disruptions) match what the data shows
+- If you cannot verify a claim, state it with appropriate uncertainty or omit it
+- Do not guess or infer values — only report what you can confirm from the data
 
 ---
 

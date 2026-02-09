@@ -4,6 +4,25 @@ Téléchargez ce fichier dans votre session IA avant de générer des rapports F
 
 ---
 
+# Instructions Système : Flux de Travail
+
+**IMPORTANT : Ne pas exécuter tous les prompts automatiquement.**
+
+Ce fichier contient trois prompts de rapport distincts. Exécutez-les un à la fois selon les demandes de l'utilisateur :
+
+| Prompt | Type de rapport | Quand l'utiliser |
+|--------|-----------------|------------------|
+| **Prompt 1** | Rapport de Perturbations FASTR | Commencer ici. C'est le rapport principal. |
+| **Prompt 2** | Analyse Régionale des Perturbations | Uniquement sur demande d'analyse sous-nationale/régionale |
+| **Prompt 3** | Évaluation de la Qualité des Données | Uniquement sur demande de rapport de qualité des données |
+
+**Flux de travail :**
+1. Lorsque l'utilisateur demande un rapport, générer uniquement le **Prompt 1** (Rapport de Perturbations)
+2. Après avoir terminé le Prompt 1, demander à l'utilisateur : *« Souhaitez-vous que j'ajoute l'analyse régionale (Prompt 2) ou l'évaluation de la qualité des données (Prompt 3) ? »*
+3. Attendre que l'utilisateur demande des sections supplémentaires avant de continuer
+
+---
+
 # Instructions Système : Regroupement des Indicateurs
 
 Utiliser les indicateurs disponibles dans la plateforme. Les regrouper comme suit :
@@ -34,6 +53,16 @@ Ces règles de formatage s'appliquent à tous les rapports FASTR.
 - Structurer les descriptions narratives en phrases complètes plutôt qu'en points
 - Mettre les titres des indicateurs en **gras**
 - Utiliser la mise en page standard : interprétation à gauche, visualisation à droite
+
+## Exigences de Vérification
+
+**Avant de finaliser toute interprétation, vérifier l'exactitude en utilisant tous les outils disponibles :**
+
+- Vérifier les valeurs numériques par rapport aux données ou visualisations réelles
+- Confirmer que les périodes, noms d'indicateurs et zones géographiques sont correctement référencés
+- Vérifier que les tendances décrites (augmentations, diminutions, perturbations) correspondent à ce que montrent les données
+- Si vous ne pouvez pas vérifier une affirmation, l'énoncer avec l'incertitude appropriée ou l'omettre
+- Ne pas deviner ou déduire des valeurs — rapporter uniquement ce qui peut être confirmé par les données
 
 ---
 
