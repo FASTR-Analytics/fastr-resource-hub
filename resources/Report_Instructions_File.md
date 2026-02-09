@@ -4,6 +4,23 @@ Upload this file to your AI session before generating FASTR reports. It contains
 
 ---
 
+# System Instructions: Indicator Groupings
+
+Use the indicators available in the platform. Group them as follows:
+
+| Category | Core Indicators | Additional (if available) |
+|----------|----------------|---------------------------|
+| **Maternal & Newborn** | ANC1, ANC4, Institutional delivery, PNC | C-sections, maternal deaths, stillbirths, newborn care |
+| **Immunization** | BCG, Penta1, Penta3 | Measles 1/2, fully immunized, Vitamin A |
+| **General Services** | Outpatient visits (OPD) | OPD under 5, OPD over 5 |
+| **Family Planning** | *(if available)* | FP new clients, FP counseled, long-acting methods |
+| **Malaria** | *(if available)* | RDT positive, treated within 24hrs, ACT treatment |
+| **Nutrition** | *(if available)* | Malnutrition cases, acute malnutrition treated |
+
+Only include indicators that exist in the platform. Skip categories that have no available indicators.
+
+---
+
 # AI Backbone (System Instructions)
 
 These are consistent formatting rules for all FASTR reports.
@@ -68,11 +85,7 @@ Track changes in health service use over time, identifying where services fall b
 ### Indicator Selection Slide
 - **Header:** "Methodology: Indicator selection"
 - **Sub-header:** "Indicators for the service utilization analysis were selected considering nationally prioritized indicators."
-- **Indicators selected include** (grouped into):
-  - Reproductive health
-  - Maternal and newborn health
-  - Child health and nutrition
-  - General services
+- **List the indicators available in the platform**, grouped by category (see Indicator Groupings above)
 
 ---
 
@@ -85,32 +98,30 @@ Track changes in health service use over time, identifying where services fall b
 
 ## 4. National Service Utilization Analysis
 
-Create national-level disruptions and surpluses slides covering {START_DATE} to {END_DATE} for each of the following indicator groupings:
+Create national-level disruptions and surpluses slides covering {START_DATE} to {END_DATE}.
 
-### Slide for ANC1 and ANC4
-- Pull visualization titled "ANC1/4 Disruptions"
+**Create slides for each indicator category that has data available in the platform:**
+
+### Maternal Health Indicators
+Create slides for available maternal health indicators (e.g., ANC1, ANC4, institutional delivery, PNC):
+- Pull appropriate visualization
 - Include narrative description on left side describing timing, duration, and magnitude of disruptions and surpluses in complete sentences (not bullet points)
 - Put indicator title in **bold**
 
-### Slide for Institutional delivery, delivery by skilled birth attendant, postnatal care within 48 hours
+### Immunization Indicators
+Create slides for available immunization indicators (e.g., BCG, Penta1, Penta3, Measles):
 - Pull appropriate visualization
 - Include narrative description on left side describing timing, duration, and magnitude of disruptions and surpluses in complete sentences
 - Put indicator title in **bold**
 
-### Slide for BCG, Penta1, Penta3
+### General Services
+Create slides for general service indicators (e.g., outpatient visits):
 - Pull appropriate visualization
 - Include narrative description on left side describing timing, duration, and magnitude of disruptions and surpluses in complete sentences
 - Put indicator title in **bold**
 
-### Slide for Measles vaccine 1 and Measles vaccine 2
-- Pull appropriate visualization
-- Include narrative description on left side describing timing, duration, and magnitude of disruptions and surpluses in complete sentences
-- Put indicator title in **bold**
-
-### Slide for Outpatient visits
-- Pull appropriate visualization
-- Include narrative description on left side describing timing, duration, and magnitude of disruptions and surpluses in complete sentences
-- Put indicator title in **bold**
+### Additional Country-Specific Indicators
+If your platform includes other indicators (malaria, family planning, nutrition, etc.), create slides following the same format.
 
 ---
 

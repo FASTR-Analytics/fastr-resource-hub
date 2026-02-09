@@ -8,10 +8,10 @@ paginate: true
 
 | Prompt | What it does |
 |--------|--------------|
-| *"Show me an overview of the data"* | Lists available indicators, regions, and time periods |
-| *"Analyze data completeness across facilities"* | Identifies missing data patterns and reporting gaps |
-| *"Which regions should we prioritize for support?"* | Highlights areas with declining performance |
-| *"Analyze immunization indicators including dropout rates"* | Deep dive on Penta1, Penta3, measles with analysis |
-| *"Create a heatmap showing DQ scores across regions"* | Visual summary of data quality by geography |
-| *"Generate 3-5 key messages for senior leadership"* | Distills findings into actionable takeaways |
-| *"How does FASTR detect outliers?"* | Explains the statistical method used |
+| *"Show me an overview of the data: what indicators, regions, and time periods are available?"* | Lists available data in your project |
+| *"Analyze data completeness across facilities and time periods."* | Identifies missing data patterns and reporting gaps |
+| *"Based on the data, which regions or indicators should we prioritize for support?"* | Highlights areas with declining performance or persistent gaps |
+| *"Analyze BCG, Penta1, and Penta3 for disruptions."* | Shows actual vs expected for each vaccine, flags regions with gaps |
+| *"Create a heatmap showing DQ scores across regions."* | Visual summary of data quality by geography |
+| *"Generate 3-5 key messages from this analysis suitable for senior leadership."* | Distills findings into actionable takeaways |
+| *"Explain how FASTR identifies outliers in the data."* | Explains the statistical method used |

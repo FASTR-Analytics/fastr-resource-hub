@@ -11,6 +11,8 @@ The FASTR platform can generate **standardized Country Disruptions Reports** usi
 These reports include:
 - Cover and methodology slides
 - National-level disruption analysis for key indicators
+
+Optional sections you can add:
 - Subnational annex with regional breakdowns
 - Data quality annex
 
