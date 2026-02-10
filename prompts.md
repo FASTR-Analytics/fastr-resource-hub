@@ -248,3 +248,94 @@ What does the data quality score mean? How is it calculated? What score indicate
 ```prompt
 Explain how FASTR adjusts data for quality issues. When are values adjusted vs. excluded? How does this affect my analysis?
 ```
+
+# Standardized Report Generation
+
+## Prompt 1: FASTR Disruptions Report
+```prompt
+Generate a FASTR Disruptions Report.
+
+ACCURACY REQUIREMENTS:
+- Base all analysis only on data visible in the platform - do not draw on external knowledge
+- Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
+- If you cannot verify a claim from the data, mark it with [VERIFY]
+- Do not guess at dates, time periods, or magnitudes
+
+INDICATOR GROUPINGS (use only what exists in platform):
+- Maternal & Newborn: ANC1, ANC4, Institutional delivery, PNC (plus C-sections, maternal deaths, stillbirths if available)
+- Immunization: BCG, Penta1, Penta3 (plus Measles 1/2, fully immunized, Vitamin A if available)
+- General Services: Outpatient visits (plus OPD under 5, OPD over 5 if available)
+- Family Planning, Malaria, Nutrition: Include if available in platform
+
+REPORT STANDARDS:
+- Maintain cautious, analytical language - no causal claims
+- Treat disruption signals as descriptive and exploratory
+- Structure narratives in complete sentences (not bullet points)
+- Place indicator titles in bold
+- Layout: interpretation on left, visualization on right
+- Use consistent terminology throughout (do not switch between synonyms)
+
+VERIFICATION: Before finalizing each slide, cross-check:
+- All numeric values match what the visualization shows
+- Time periods and indicator names are correctly referenced
+- Described trends (increases, decreases) match the actual data direction
+- Numbers are consistent across slides (same indicator = same values)
+
+STRUCTURE:
+1. Cover slide: "Tracking Disruptions in Essential Services Using HMIS Data"
+2. Introductory slide with FASTR description
+3. Methodology slide: Service Utilization Assessment (purpose, how it works, measuring impact, how to interpret red/green areas)
+4. Indicator selection slide listing available indicators by category
+5. Section header: "Section 1: Service Utilization"
+6. National analysis slides for each indicator category with visualizations and narrative descriptions
+7. Annex 1: Subnational analysis header and summary
+8. Annex 2: Data quality - completeness heatmap and explanation of why completeness matters
+```
+
+## Prompt 2: Regional Disruptions Analysis
+```prompt
+Generate Regional Disruptions Analysis for all subnational areas.
+
+ACCURACY REQUIREMENTS:
+- Base all analysis only on data visible in the platform
+- Do not invent statistics or specific numbers - if data is not visible, say so
+- If you cannot verify a claim from the data, mark it with [VERIFY]
+
+REPORT STANDARDS:
+- Maintain cautious, analytical language - no causal claims
+- Treat disruption signals as descriptive and exploratory
+- Layout: interpretation on left, visualization on right
+- Use consistent terminology throughout
+
+VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows.
+
+STRUCTURE:
+1. Cover slide: "Subnational service utilization disruptions"
+2. One slide per subnational area with:
+   - Slide title: Name of the subnational area
+   - Visualization: Actual vs expected number of services for that area
+```
+
+## Prompt 3: Data Quality Assessment Report
+```prompt
+Generate a Data Quality Assessment Report.
+
+ACCURACY REQUIREMENTS:
+- Base all analysis only on data visible in the platform
+- Do not invent statistics or specific numbers - if data is not visible, say so
+- If you cannot verify a claim from the data, mark it with [VERIFY]
+
+REPORT STANDARDS:
+- Maintain cautious, analytical language
+- Layout: interpretation on left, visualization on right
+- Use consistent terminology throughout
+
+VERIFICATION: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
+
+STRUCTURE:
+1. Cover slide: "Data Quality Assessment" with subtitle about completeness, consistency, and outliers
+2. Reporting completeness slide: visualization + interpretation of national trends, indicators with low completeness, areas with low completeness
+3. Outliers slide: visualization + interpretation of national trends, indicators with high outliers, areas with high outliers
+4. Internal consistency slide (2 slides): visualization + interpretation across country and administrative areas
+5. Trends in data quality (2 slides): DQA score visualizations + interpretation across years, country, and administrative areas
+```
