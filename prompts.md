@@ -372,7 +372,7 @@ Interpretation (left side): Analyze the data shown in the visualization. Describ
 - IMPORTANT: Only describe what is actually visible in the chart - do not invent data
 ```
 
-## Prompt 2: Regional Disruptions Analysis (Annex 1)
+## Prompt 2: Regional Disruptions Analysis
 
 ```prompt
 Generate Annex 1: Regional Disruptions Analysis for all subnational areas. Add this annex after the main Disruptions Report.
