@@ -13,8 +13,8 @@ Ce fichier contient trois prompts de rapport distincts. Exécutez-les un à la f
 | Prompt | Type de rapport | Quand l'utiliser |
 |--------|-----------------|------------------|
 | **Prompt 1** | Rapport de Perturbations FASTR | Commencer ici. C'est le rapport principal. |
-| **Prompt 2** | Analyse Régionale des Perturbations | Uniquement sur demande d'analyse sous-nationale/régionale |
-| **Prompt 3** | Évaluation de la Qualité des Données | Uniquement sur demande de rapport de qualité des données |
+| **Prompt 2** | Analyse Régionale des Perturbations (Annexe 1) | Uniquement sur demande d'analyse sous-nationale/régionale |
+| **Prompt 3** | Évaluation de la Qualité des Données (Annexe 1 ou 2) | Uniquement sur demande de rapport de qualité des données |
 
 **Flux de travail :**
 1. Lorsque l'utilisateur demande un rapport, générer uniquement le **Prompt 1** (Rapport de Perturbations)
@@ -29,7 +29,7 @@ Utiliser les indicateurs disponibles dans la plateforme. Les regrouper comme sui
 
 | Catégorie | Indicateurs de base | Indicateurs additionnels (si disponibles) |
 |-----------|--------------------|--------------------------------------------|
-| **Santé maternelle et néonatale** | CPN1, CPN4, Accouchement institutionnel, CPoN | Césariennes, décès maternels, mort-nés, soins du nouveau-né |
+| **Santé maternelle et néonatale** | CPN1, CPN4, Accouchement institutionnel, CPoN1 | Césariennes, décès maternels, décès néonatals, mort-nés |
 | **Vaccination** | BCG, Penta1, Penta3 | Rougeole 1/2, enfants complètement vaccinés, Vitamine A |
 | **Services généraux** | Consultations externes | Consultations < 5 ans, consultations > 5 ans |
 | **Planification familiale** | *(si disponible)* | Nouvelles acceptantes PF, conseils PF, méthodes longue durée |
@@ -40,9 +40,9 @@ Inclure uniquement les indicateurs qui existent dans la plateforme. Ignorer les 
 
 ---
 
-# Instructions Système pour l'IA
+# Instructions de Base pour l'IA
 
-Ces règles de formatage s'appliquent à tous les rapports FASTR.
+Ce sont les règles de formatage cohérentes pour tous les rapports FASTR.
 
 ## Normes Générales des Rapports
 
@@ -53,6 +53,14 @@ Ces règles de formatage s'appliquent à tous les rapports FASTR.
 - Structurer les descriptions narratives en phrases complètes plutôt qu'en points
 - Mettre les titres des indicateurs en **gras**
 - Utiliser la mise en page standard : interprétation à gauche, visualisation à droite
+- Utiliser une terminologie cohérente tout au long (ne pas alterner entre synonymes)
+
+## Exigences de Précision
+
+- Baser toute analyse uniquement sur les données visibles dans la plateforme - ne pas s'appuyer sur des connaissances externes
+- Ne pas inventer de statistiques, pourcentages ou chiffres spécifiques - si les données ne sont pas visibles, le dire
+- Si vous ne pouvez pas vérifier une affirmation à partir des données, la marquer avec [VÉRIFIER]
+- Ne pas deviner les dates, périodes ou amplitudes
 
 ## Exigences de Vérification
 
@@ -68,29 +76,44 @@ Ces règles de formatage s'appliquent à tous les rapports FASTR.
 
 # PROMPT 1 : Rapport de Perturbations FASTR
 
-## 1. Section Couverture et Contexte
+## Avant de Commencer
 
-### Diapositive de Couverture
-- **Titre :** « Suivi des Perturbations des Services Essentiels à partir des Données SNIS en {PAYS} »
-- **Sous-titre :** « Rapport de Perturbations : {PÉRIODE_RAPPORT} »
-- **Pied de page :** « Analyse générée en {MOIS_ANNÉE_ANALYSE} »
-- Utiliser l'image de marque FASTR et le contexte du pays
+**DEMANDER À L'UTILISATEUR :**
+- Nom du pays
+- Période d'analyse : La plage de dates des données à inclure (mois/année de début à mois/année de fin, ex : « Janvier 2023 à Décembre 2025 »)
+- Libellé du titre du rapport : Un court libellé pour le sous-titre de la couverture décrivant ce que couvre ce rapport (ex : « T4 2025 », « Annuel 2025 », « Janvier-Juin 2025 »)
+- Date de génération de l'analyse : Le mois/année où cette analyse a été produite, pour le pied de page de la couverture (ex : « Février 2026 »)
 
-### Diapositive d'Introduction
-- **Titre :** « Suivi des Perturbations des Services Essentiels à partir des Données SNIS »
-- Inclure le texte descriptif fixe (50% de la diapositive) :
-
-> « L'approche FASTR utilise les données SNIS de routine pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé essentiels. Cette analyse fournit une perspective opportune à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des tendances attendues. Les résultats génèrent des preuves exploitables pour guider des réponses rapides, aidant à maintenir la continuité des soins essentiels pendant les périodes d'incertitude de financement ou de changement opérationnel. »
-
-- Réserver l'autre 50% de la diapositive pour l'image
+**Lorsque l'utilisateur fournit la période d'analyse :**
+- Convertir la date de début au format period_id : [ANNÉE][MOIS] en nombre à 6 chiffres (ex : Janvier 2025 = 202501)
+- Convertir la date de fin au format period_id : [ANNÉE][MOIS] en nombre à 6 chiffres (ex : Décembre 2025 = 202512)
+- Stocker ces valeurs pour les utiliser dans periodFilterOverride pour toutes les diapositives d'indicateurs
 
 ---
 
-## 2. Section Méthodologie
+## 1. Diapositive de Couverture
 
-### Diapositive Méthodologie
-- **Titre** (dans une zone de texte avec texte blanc) : « Méthodologie : Évaluation de l'Utilisation des Services »
-- **Description :**
+- **Titre :** « Suivi des Perturbations des Services Essentiels à partir des Données SNIS en [PAYS] »
+- **Sous-titre :** « Rapport de Perturbations : [LIBELLÉ_TITRE_RAPPORT] »
+- **Pied de page :** « Analyse générée en [DATE_GÉNÉRATION_ANALYSE] »
+- Utiliser l'image de marque FASTR et le contexte du pays
+
+---
+
+## 2. Diapositive d'Introduction
+
+- **Titre :** « Suivi des Perturbations des Services Essentiels à partir des Données SNIS »
+- Inclure ce texte fixe :
+
+> « L'approche FASTR utilise les données SNIS de routine pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé essentiels. Cette analyse fournit une perspective opportune à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des tendances attendues. Les résultats génèrent des preuves exploitables pour guider des réponses rapides, aidant à maintenir la continuité des soins essentiels pendant les périodes d'incertitude de financement ou de changement opérationnel. »
+
+- Réserver de l'espace pour l'image
+
+---
+
+## 3. Diapositive Méthodologie
+
+- **Titre :** « Méthodologie : Évaluation de l'Utilisation des Services »
 
 **Objectif :**
 Suivre les changements dans l'utilisation des services de santé au fil du temps, en identifiant où les services sont inférieurs ou supérieurs aux tendances attendues.
@@ -102,159 +125,169 @@ Suivre les changements dans l'utilisation des services de santé au fil du temps
 
 **Mesure de l'impact :**
 - Les périodes de perturbation signalées sont analysées pour estimer l'ampleur des changements par rapport aux attentes
-- Les résultats sont présentés aux niveaux national et sous-national, mettant en évidence les effets à l'échelle du système et les effets localisés
+- Les résultats sont présentés aux niveaux national et sous-national
 
 **Comment interpréter les figures :**
-- Zones rouges = perturbations potentielles (volumes de services inférieurs aux attentes)
-- Zones vertes = surplus potentiels (volumes de services supérieurs aux attentes)
-- Ce sont des signaux, pas des conclusions — ils indiquent quand et où les volumes s'écartent, mais nécessitent une investigation plus approfondie des raisons sous-jacentes
+- Zones rouges = perturbations potentielles (en dessous des attentes)
+- Zones vertes = surplus potentiels (au-dessus des attentes)
+- Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie
 
-- **Pied de page** (dans une zone de texte) : « Plus de détails sur la méthodologie et les approches d'ajustement de la qualité des données sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
-
-### Diapositive Sélection des Indicateurs
-- **En-tête :** « Méthodologie : Sélection des indicateurs »
-- **Sous-en-tête :** « Les indicateurs pour l'analyse de l'utilisation des services ont été sélectionnés en tenant compte des indicateurs prioritaires au niveau national. »
-- **Lister les indicateurs disponibles dans la plateforme**, regroupés par catégorie (voir Regroupement des Indicateurs ci-dessus)
+- **Pied de page :** « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
 
 ---
 
-## 3. En-tête de Section
+## 4. Diapositive Sélection des Indicateurs
+
+- **Titre :** « Méthodologie : Sélection des indicateurs »
+- **Sous-titre :** « Les indicateurs pour l'analyse de l'utilisation des services ont été sélectionnés en tenant compte des indicateurs prioritaires au niveau national. »
+- Lister les indicateurs disponibles regroupés par catégorie depuis la plateforme
+
+---
+
+## 5. Diapositive En-tête de Section
 
 - **Titre :** « Section 1 : Utilisation des Services »
 - **Sous-titre :** « Évaluation des volumes projetés basée sur les tendances historiques pour identifier les surplus et perturbations dans les services de santé »
 
 ---
 
-## 4. Analyse Nationale de l'Utilisation des Services
+## 6. Diapositives d'Analyse Nationale
 
-Créer des diapositives de perturbations et surplus au niveau national couvrant {DATE_DÉBUT} à {DATE_FIN}.
+Créer des diapositives dans cet ordre exact par catégorie. Inclure uniquement les indicateurs qui existent dans la plateforme.
 
-**Créer des diapositives pour chaque catégorie d'indicateurs ayant des données disponibles dans la plateforme :**
+**CATÉGORIE A - SANTÉ MATERNELLE :**
+Créer une diapositive chacune pour : CPN1, CPN4, Accouchement institutionnel, CPoN1 (et césariennes, décès maternels, décès néonatals, mort-nés si disponibles)
 
-### Indicateurs de Santé Maternelle
-Créer des diapositives pour les indicateurs de santé maternelle disponibles (ex : CPN1, CPN4, accouchement institutionnel, CPoN) :
-- Insérer la visualisation appropriée
-- Inclure une description narrative à gauche décrivant le moment, la durée et l'ampleur des perturbations et surplus en phrases complètes (pas en points)
-- Mettre le titre de l'indicateur en **gras**
+**CATÉGORIE B - VACCINATION :**
+Créer une diapositive chacune pour : BCG, Penta1, Penta3, Rougeole 1, Rougeole 2 (et complètement vaccinés, Vitamine A si disponibles)
 
-### Indicateurs de Vaccination
-Créer des diapositives pour les indicateurs de vaccination disponibles (ex : BCG, Penta1, Penta3, Rougeole) :
-- Insérer la visualisation appropriée
-- Inclure une description narrative à gauche décrivant le moment, la durée et l'ampleur des perturbations et surplus en phrases complètes
-- Mettre le titre de l'indicateur en **gras**
+**CATÉGORIE C - SERVICES GÉNÉRAUX :**
+Créer une diapositive chacune pour : Consultations externes (et consultations < 5 ans, consultations > 5 ans si disponibles)
 
-### Services Généraux
-Créer des diapositives pour les indicateurs de services généraux (ex : consultations externes) :
-- Insérer la visualisation appropriée
-- Inclure une description narrative à gauche décrivant le moment, la durée et l'ampleur des perturbations et surplus en phrases complètes
-- Mettre le titre de l'indicateur en **gras**
+**CATÉGORIE D - AUTRES (si disponibles dans la plateforme) :**
+Créer des diapositives pour : Planification familiale, Paludisme, indicateurs de Nutrition
 
-### Indicateurs Additionnels Spécifiques au Pays
-Si votre plateforme inclut d'autres indicateurs (paludisme, planification familiale, nutrition, etc.), créer des diapositives selon le même format.
+### Codes des Indicateurs (pour le paramètre selectedReplicant)
+
+| Catégorie | Codes |
+|-----------|-------|
+| Maternelle | anc1, anc4, delivery, pnc1, csection, maternal_deaths, neonatal_deaths |
+| Vaccination | bcg, penta1, penta3, fully_immunized |
+| Consultations | opd_under5, opd_over5 |
+| Planification Familiale | fp_new, fp_new_and_cont |
+| Paludisme | malaria_rdt_positive, malaria_treated_less_24hrs |
+| Santé Infantile | diarrhea_cases_identified, pneumonia_cases_identified, pneumonia_treated |
+
+### Pour Chaque Diapositive
+
+**Titre :** Nom de l'indicateur en gras (ex : « CPN1 - Première consultation prénatale »)
+
+**Visualisation (droite) :** Créer en utilisant from_metric avec ces paramètres :
+- type: "from_metric"
+- metricId: "m3-02-01" (Volume de services réel vs attendu - National)
+- vizPresetId: "disruption-chart"
+- chartTitle: "Réel vs Attendu : [Nom de l'Indicateur]"
+- selectedReplicant: Le code de l'indicateur (ex : "anc1", "penta3")
+- filterOverrides: DOIT inclure un filtre pour afficher uniquement cet indicateur spécifique :
+  - col: "indicator_common_id"
+  - vals: [le code de l'indicateur uniquement, ex : ["anc1"] ou ["penta3"]]
+- periodFilterOverride: Utiliser les valeurs period_id converties :
+  - periodOption: "period_id"
+  - min: Date de début (ex : 202501 pour Janvier 2025)
+  - max: Date de fin (ex : 202512 pour Décembre 2025)
+
+**Interprétation (gauche) :** Analyser les données affichées dans la visualisation. Décrire en phrases complètes :
+- Quand les perturbations se sont produites (mois/périodes spécifiques où le réel était inférieur à l'attendu)
+- Durée des perturbations (combien de mois consécutifs)
+- Ampleur des écarts (différences numériques approximatives lorsque visibles)
+- Quand des surplus se sont produits (mois/périodes spécifiques où le réel dépassait l'attendu)
+- Tendance générale (soutenue, brève, dispersée, aucune)
+- **IMPORTANT :** Décrire uniquement ce qui est réellement visible dans le graphique - ne pas inventer de données
 
 ---
 
-## 5. Annexe 1 : Analyse Sous-nationale
+# PROMPT 2 : Analyse Régionale des Perturbations (Annexe 1)
 
-### Diapositive d'En-tête de l'Annexe
+Ajouter cette annexe après le Rapport de Perturbations principal.
+
+## 1. Diapositive d'En-tête de l'Annexe
+
 - **Titre :** « Annexe 1 : Perturbations de l'utilisation des services par district »
 
-### Diapositive de Résumé
-- Créer une diapositive avec une zone de texte à droite intitulée : « Résumé des Tendances de Complétude {DATE_DÉBUT}-{DATE_FIN} »
+## 2. Diapositives par Zone Sous-nationale
 
----
+Pour CHAQUE zone sous-nationale dans la plateforme, créer une diapositive avec :
 
-## 6. Annexe 2 : Qualité des Données
+**Titre de la diapositive :** Nom de la zone sous-nationale
 
-### Visualisation de la Complétude (avant l'en-tête)
-- Créer une visualisation montrant les tendances mensuelles de complétude de {DATE_DÉBUT} à {DATE_FIN}
-- Format en tableau type carte de chaleur : années en lignes, mois en groupes de lignes, indicateurs en colonnes
-- Inclure tous les indicateurs
+**Visualisation (droite) :** Utiliser « Défaut 6. Nombre réel vs attendu de services (Zone administrative 2) » filtré pour cette zone spécifique
 
-### Diapositive d'En-tête de l'Annexe
-- **Titre :** « Annexe 2 : Tendances de la complétude des rapports par indicateur »
-- Suivre avec 3 paragraphes décrivant :
-  - Le pourcentage global de complétude pour tous les indicateurs
-  - Les zones de faible complétude
-  - Les tendances pour 2025
-
-### Texte fixe à inclure :
-
-> **Pourquoi la Complétude est Importante pour l'Analyse des Perturbations**
->
-> **Valeurs observées :** Celles-ci sont ajustées uniquement pour les valeurs aberrantes, donc elles reflètent les volumes de services bruts réels après suppression des pics non plausibles.
->
-> **Valeurs attendues :** Celles-ci sont ajustées pour la complétude et les valeurs aberrantes. Cela signifie que le modèle « comble » les lacunes de rapportage, construisant une ligne de tendance attendue comme si tous les établissements avaient rapporté de manière cohérente.
->
-> Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations sont plus susceptibles de refléter de vrais changements de services. Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement plus élevées que les valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de vraies baisses de la prestation de services.
-
----
-
-# PROMPT 2 : Analyse Régionale des Perturbations
-
-Créer les diapositives dans l'ordre suivant :
-
-### Diapositive de Couverture
-- **Titre :** « Perturbations de l'utilisation des services au niveau sous-national »
-
-### Diapositives par Zone Sous-nationale
-Pour chaque zone sous-nationale, générer une nouvelle diapositive avec :
-- **Titre de la diapositive :** Nom de la zone sous-nationale
-- **Visualisation :** « Défaut 6. Nombre réel vs attendu de services (Zone administrative 2) » pour la zone correspondante
+**Interprétation (gauche) :** Décrire en phrases complètes :
+- Quels indicateurs montrent des perturbations (en dessous des attentes) et quand
+- Quels indicateurs montrent des surplus (au-dessus des attentes) et quand
+- L'ampleur des écarts par rapport aux attentes
+- Toute tendance entre les indicateurs (ex : tous les indicateurs maternels affectés ensemble)
 
 ---
 
 # PROMPT 3 : Évaluation de la Qualité des Données
 
-Créer les diapositives dans l'ordre suivant :
+Ajouter cette annexe après le Rapport de Perturbations principal.
 
-### Diapositive 1 - Couverture
-- **Titre :** « Évaluation de la Qualité des Données »
+**NUMÉROTATION DE L'ANNEXE :** Si l'Analyse Régionale des Perturbations (Annexe 1) a été incluse, numéroter celle-ci comme Annexe 2. Sinon, la numéroter comme Annexe 1.
+
+## 1. Diapositive de Couverture
+
+- **Titre :** « Annexe [1 ou 2] : Évaluation de la Qualité des Données »
 - **Sous-titre :** « Les évaluations de la qualité des données — axées sur la complétude, la cohérence et les valeurs aberrantes — informent les ajustements appliqués aux données de routine pour améliorer la fiabilité des analyses présentées. »
 
-### Diapositive 2 - Complétude des Rapports
+## 2. Diapositive Complétude des Rapports
+
 - **Titre :** « Complétude des rapports »
-- Insérer la visualisation à droite : « Défaut 2. Proportion de dossiers complets »
-- Ajouter l'interprétation à gauche incluant :
-  - Tendances nationales globales de la complétude
-  - Discussion des indicateurs avec une faible complétude
-  - Discussion des zones administratives avec une faible complétude
+- **Visualisation (droite) :** Utiliser « Défaut 2. Proportion de dossiers complets »
+- **Interprétation (gauche) :** En phrases complètes, décrire :
+  - Les tendances nationales globales de complétude au fil du temps
+  - Quels indicateurs ont une faible complétude (les nommer)
+  - Quelles zones administratives ont une faible complétude (les nommer)
 
-### Diapositive 3 - Valeurs Aberrantes
+## 3. Diapositive Valeurs Aberrantes
+
 - **Titre :** « Valeurs aberrantes »
-- Insérer la visualisation à droite : « Défaut 1. Proportion de valeurs aberrantes »
-- Ajouter l'interprétation à gauche incluant :
-  - Tendances nationales globales des valeurs aberrantes
-  - Discussion des indicateurs avec beaucoup de valeurs aberrantes
-  - Discussion des zones administratives avec beaucoup de valeurs aberrantes
+- **Visualisation (droite) :** Utiliser « Défaut 1. Proportion de valeurs aberrantes »
+- **Interprétation (gauche) :** En phrases complètes, décrire :
+  - Les tendances nationales globales des valeurs aberrantes au fil du temps
+  - Quels indicateurs ont des taux élevés de valeurs aberrantes (les nommer)
+  - Quelles zones administratives ont des taux élevés de valeurs aberrantes (les nommer)
 
-### Diapositive 4 - Cohérence Interne
+## 4. Diapositive Cohérence Interne (première)
+
 - **Titre :** « Cohérence interne »
-- Insérer la visualisation à droite : « Défaut 4. Proportion de zones sous-nationales répondant aux critères de cohérence »
-- Ajouter l'interprétation à gauche incluant :
-  - Description de la cohérence entre les comparaisons
-  - À travers le pays
-  - À travers les zones administratives
+- **Visualisation (droite) :** Utiliser « Défaut 4. Proportion de zones sous-nationales répondant aux critères de cohérence »
+- **Interprétation (gauche) :** En phrases complètes, décrire :
+  - Quelles comparaisons de cohérence sont effectuées
+  - Les tendances générales à travers le pays
+  - Quelles zones répondent ou échouent aux critères de cohérence
 
-### Diapositive 5 - Cohérence Interne (suite)
-- Insérer la visualisation à droite : « Défaut 4. Proportion de zones sous-nationales répondant aux critères de cohérence »
-- Ajouter l'interprétation à gauche incluant :
-  - Description de la cohérence entre les comparaisons
-  - À travers le pays
-  - À travers les zones administratives
+## 5. Diapositive Cohérence Interne (deuxième)
 
-### Diapositive 6 - Tendances de la Qualité des Données
+- **Titre :** « Cohérence interne »
+- **Visualisation (droite) :** Utiliser « Défaut 4. Proportion de zones sous-nationales répondant aux critères de cohérence » (vue ou ventilation différente)
+- **Interprétation (gauche) :** Continuer à décrire les tendances de cohérence à travers les zones administratives
+
+## 6. Diapositive Tendances de la Qualité des Données (première)
+
 - **Titre :** « Tendances de la qualité des données »
-- Insérer la visualisation à droite : « Défaut 5. Score global de QDD »
-- Ajouter l'interprétation à gauche incluant :
-  - Description du score de QDD à travers les années
-  - À travers le pays
-  - À travers les zones administratives
+- **Visualisation (droite) :** Utiliser « Défaut 5. Score global de QDD »
+- **Interprétation (gauche) :** En phrases complètes, décrire :
+  - Comment les scores de QDD ont évolué au fil des années
+  - La performance globale du pays
+  - La variation entre les zones administratives
 
-### Diapositive 7 - Tendances de la Qualité des Données (suite)
+## 7. Diapositive Tendances de la Qualité des Données (deuxième)
+
 - **Titre :** « Tendances de la qualité des données »
-- Insérer la visualisation à droite : « Défaut 6. Score moyen de QDD »
-- Ajouter l'interprétation à gauche incluant :
-  - Description du score moyen de QDD à travers les années
-  - À travers le pays
-  - À travers les zones administratives
+- **Visualisation (droite) :** Utiliser « Défaut 6. Score moyen de QDD »
+- **Interprétation (gauche) :** En phrases complètes, décrire :
+  - Les tendances du score moyen de QDD au fil des années
+  - Quelles zones ont des scores en amélioration vs en déclin
+  - L'évaluation globale de la trajectoire de qualité des données

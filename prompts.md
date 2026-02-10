@@ -255,6 +255,17 @@ Explain how FASTR adjusts data for quality issues. When are values adjusted vs. 
 ```prompt
 Generate a FASTR Disruptions Report.
 
+BEFORE STARTING, ASK THE USER FOR:
+- Country name
+- Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to December 2025")
+- Report title label: A short label for the cover subtitle describing what this report covers (e.g., "Q4 2025", "2025 Annual", "January-June 2025")
+- Analysis generation date: The month/year when this analysis was produced, for the cover footer (e.g., "February 2026")
+
+When user provides the analysis time period:
+- Convert start date to period_id format: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
+- Convert end date to period_id format: [YEAR][MONTH] as 6-digit number (e.g., December 2025 = 202512)
+- Store these values to use in periodFilterOverride for all indicator slides
+
 ACCURACY REQUIREMENTS:
 - Base all analysis only on data visible in the platform - do not draw on external knowledge
 - Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
@@ -315,7 +326,7 @@ STRUCTURE:
    Create slides in this exact order by category. Only include indicators that exist in the platform.
 
    CATEGORY A - MATERNAL HEALTH:
-   Create one slide each for: ANC1, ANC4, Institutional delivery, PNC (and C-sections, maternal deaths, stillbirths if available)
+   Create one slide each for: ANC1, ANC4, Institutional delivery, PNC1 (and C-sections, maternal deaths, neonatal deaths, stillbirths if available)
 
    CATEGORY B - IMMUNIZATION:
    Create one slide each for: BCG, Penta1, Penta3, Measles 1, Measles 2 (and fully immunized, Vitamin A if available)
@@ -326,14 +337,38 @@ STRUCTURE:
    CATEGORY D - OTHER (if available in platform):
    Create slides for: Family planning, Malaria, Nutrition indicators
 
+   INDICATOR CODES (for selectedReplicant parameter):
+   - Maternal: anc1, anc4, delivery, pnc1, csection, maternal_deaths, neonatal_deaths
+   - Immunization: bcg, penta1, penta3, fully_immunized
+   - OPD: opd_under5, opd_over5
+   - Family Planning: fp_new, fp_new_and_cont
+   - Malaria: malaria_rdt_positive, malaria_treated_less_24hrs
+   - Child Health: diarrhea_cases_identified, pneumonia_cases_identified, pneumonia_treated
+
    FOR EACH SLIDE:
    - Title: Indicator name in bold (e.g., "ANC1 - First antenatal care visit")
-   - Visualization (right): "Actual vs expected" disruption chart for that indicator
-   - Interpretation (left): Describe in complete sentences:
-     - When disruptions occurred (timing)
-     - How long they lasted (duration)
-     - How large the gap was between actual and expected (magnitude)
-     - When surpluses occurred, if any
+
+   - Visualization (right): Create using from_metric with these parameters:
+     * type: "from_metric"
+     * metricId: "m3-02-01" (Actual vs expected service volume - National)
+     * vizPresetId: "disruption-chart"
+     * chartTitle: "Actual vs Expected: [Indicator Name]"
+     * selectedReplicant: The indicator code (e.g., "anc1", "anc4", "delivery", "pnc1", "bcg", "penta1", "penta3", "fully_immunized", "opd_under5", "opd_over5", "fp_new", etc.)
+     * filterOverrides: MUST include filter to show only this specific indicator:
+       - col: "indicator_common_id"
+       - vals: [the indicator code only, e.g., ["anc1"] or ["penta3"]]
+     * periodFilterOverride: Use the converted period_id values:
+       - periodOption: "period_id"
+       - min: Start date (e.g., 202501 for January 2025)
+       - max: End date (e.g., 202512 for December 2025)
+
+   - Interpretation (left): Analyze the data shown in the visualization. Describe in complete sentences:
+     * When disruptions occurred (specific months/periods when actual fell below expected)
+     * Duration of disruptions (how many consecutive months)
+     * Magnitude of gaps (approximate numerical differences where visible)
+     * When surpluses occurred (specific months/periods when actual exceeded expected)
+     * Overall pattern (sustained, brief, scattered, none)
+     * IMPORTANT: Only describe what is actually visible in the chart - do not invent data
 ```
 
 ## Prompt 2: Regional Disruptions Analysis (Annex 1)
