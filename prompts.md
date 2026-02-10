@@ -282,19 +282,63 @@ VERIFICATION: Before finalizing each slide, cross-check:
 - Numbers are consistent across slides (same indicator = same values)
 
 STRUCTURE:
-1. Cover slide: "Tracking Disruptions in Essential Services Using HMIS Data"
-2. Introductory slide with FASTR description
-3. Methodology slide: Service Utilization Assessment (purpose, how it works, measuring impact, how to interpret red/green areas)
-4. Indicator selection slide listing available indicators by category
-5. Section header: "Section 1: Service Utilization"
-6. National analysis slides for each indicator category with visualizations and narrative descriptions
-7. Annex 1: Subnational analysis header and summary
-8. Annex 2: Data quality - completeness heatmap and explanation of why completeness matters
+
+1. Cover slide
+   - Title: "Tracking Disruptions in Essential Services Using HMIS Data in [COUNTRY]"
+   - Subtitle: "Disruptions Report: [REPORT_PERIOD]"
+   - Footer: "Analysis generated in [MONTH YEAR]"
+
+2. Introductory slide
+   - Title: "Tracking Disruptions in Essential Services Using HMIS Data"
+   - Include this fixed text: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
+   - Reserve space for image
+
+3. Methodology slide
+   - Title: "Methodology: Service Utilization Assessment"
+   - Include these sections:
+     Purpose: Track changes in health service use over time, identifying where services fall below or rise above expected patterns.
+     How it works: Uses routine HMIS data, cleaned for outliers and missing values. Builds an "expected" trend line for each service, adjusting for seasonality and historical trends. Compares actual service volumes to expected levels.
+     Measuring impact: Flagged disruption periods are analyzed to estimate how much service volumes changed compared to what was expected. Results are shown at national and sub-national levels.
+     How to interpret figures: Red shaded areas = potential disruptions (below expected). Green shaded areas = potential surpluses (above expected). These are signals, not conclusions — they require further investigation.
+   - Footer: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
+
+4. Indicator selection slide
+   - Title: "Methodology: Indicator selection"
+   - Subtitle: "Indicators for the service utilization analysis were selected considering nationally prioritized indicators."
+   - List available indicators grouped by category from the platform
+
+5. Section header slide
+   - Title: "Section 1: Service Utilization"
+   - Subtitle: "Assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services"
+
+6. National analysis slides
+   Create slides in this exact order by category. Only include indicators that exist in the platform.
+
+   CATEGORY A - MATERNAL HEALTH:
+   Create one slide each for: ANC1, ANC4, Institutional delivery, PNC (and C-sections, maternal deaths, stillbirths if available)
+
+   CATEGORY B - IMMUNIZATION:
+   Create one slide each for: BCG, Penta1, Penta3, Measles 1, Measles 2 (and fully immunized, Vitamin A if available)
+
+   CATEGORY C - GENERAL SERVICES:
+   Create one slide each for: Outpatient visits (and OPD under 5, OPD over 5 if available)
+
+   CATEGORY D - OTHER (if available in platform):
+   Create slides for: Family planning, Malaria, Nutrition indicators
+
+   FOR EACH SLIDE:
+   - Title: Indicator name in bold (e.g., "ANC1 - First antenatal care visit")
+   - Visualization (right): "Actual vs expected" disruption chart for that indicator
+   - Interpretation (left): Describe in complete sentences:
+     - When disruptions occurred (timing)
+     - How long they lasted (duration)
+     - How large the gap was between actual and expected (magnitude)
+     - When surpluses occurred, if any
 ```
 
-## Prompt 2: Regional Disruptions Analysis
+## Prompt 2: Regional Disruptions Analysis (Annex 1)
 ```prompt
-Generate Regional Disruptions Analysis for all subnational areas.
+Generate Annex 1: Regional Disruptions Analysis for all subnational areas. Add this annex after the main Disruptions Report.
 
 ACCURACY REQUIREMENTS:
 - Base all analysis only on data visible in the platform
@@ -310,15 +354,26 @@ REPORT STANDARDS:
 VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows.
 
 STRUCTURE:
-1. Cover slide: "Subnational service utilization disruptions"
-2. One slide per subnational area with:
+
+1. Annex header slide
+   - Title: "Annex 1: District service utilization disruptions"
+
+2. Subnational area slides
+   For EACH subnational area in the platform, create a slide with:
    - Slide title: Name of the subnational area
-   - Visualization: Actual vs expected number of services for that area
+   - Visualization (right): Use "Default 6. Actual vs expected number of services (Admin area 2)" filtered for that specific area
+   - Interpretation (left): Describe in complete sentences:
+     - Which indicators show disruptions (below expected) and when
+     - Which indicators show surpluses (above expected) and when
+     - The magnitude of deviations from expected
+     - Any patterns across indicators (e.g., all maternal indicators affected together)
 ```
 
-## Prompt 3: Data Quality Assessment Report
+## Prompt 3: Data Quality Assessment
 ```prompt
-Generate a Data Quality Assessment Report.
+Generate a Data Quality Assessment annex. Add this after the main Disruptions Report.
+
+ANNEX NUMBERING: If Regional Disruptions Analysis (Annex 1) was included, number this as Annex 2. If not included, number this as Annex 1.
 
 ACCURACY REQUIREMENTS:
 - Base all analysis only on data visible in the platform
@@ -333,9 +388,53 @@ REPORT STANDARDS:
 VERIFICATION: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
 
 STRUCTURE:
-1. Cover slide: "Data Quality Assessment" with subtitle about completeness, consistency, and outliers
-2. Reporting completeness slide: visualization + interpretation of national trends, indicators with low completeness, areas with low completeness
-3. Outliers slide: visualization + interpretation of national trends, indicators with high outliers, areas with high outliers
-4. Internal consistency slide (2 slides): visualization + interpretation across country and administrative areas
-5. Trends in data quality (2 slides): DQA score visualizations + interpretation across years, country, and administrative areas
+
+1. Cover slide
+   - Title: "Annex [1 or 2]: Data Quality Assessment"
+   - Subtitle: "Data quality assessments — focused on completeness, consistency, and outliers — inform adjustments applied to routine data to improve reliability of the analyses presented."
+
+2. Reporting completeness slide
+   - Title: "Reporting completeness"
+   - Visualization (right): Use "Default 2. Proportion of completed records"
+   - Interpretation (left): In complete sentences describe:
+     - Overall national trends in completeness over time
+     - Which indicators have low completeness (name them)
+     - Which administrative areas have low completeness (name them)
+
+3. Outliers slide
+   - Title: "Outliers"
+   - Visualization (right): Use "Default 1. Proportion of outliers"
+   - Interpretation (left): In complete sentences describe:
+     - Overall national trends in outliers over time
+     - Which indicators have high outlier rates (name them)
+     - Which administrative areas have high outlier rates (name them)
+
+4. Internal consistency slide (first)
+   - Title: "Internal consistency"
+   - Visualization (right): Use "Default 4. Proportion of sub-national areas meeting consistency criteria"
+   - Interpretation (left): In complete sentences describe:
+     - What consistency comparisons are being made
+     - Overall patterns across the country
+     - Which areas meet or fail consistency criteria
+
+5. Internal consistency slide (second)
+   - Title: "Internal consistency"
+   - Visualization (right): Use "Default 4. Proportion of sub-national areas meeting consistency criteria" (different view or breakdown)
+   - Interpretation (left): Continue describing consistency patterns across administrative areas
+
+6. Data quality trends slide (first)
+   - Title: "Trends in data quality"
+   - Visualization (right): Use "Default 5. Overall DQA score"
+   - Interpretation (left): In complete sentences describe:
+     - How DQA scores have changed across years
+     - Overall country performance
+     - Variation across administrative areas
+
+7. Data quality trends slide (second)
+   - Title: "Trends in data quality"
+   - Visualization (right): Use "Default 6. Mean DQA score"
+   - Interpretation (left): In complete sentences describe:
+     - Mean DQA score trends across years
+     - Which areas have improving vs declining scores
+     - Overall assessment of data quality trajectory
 ```
