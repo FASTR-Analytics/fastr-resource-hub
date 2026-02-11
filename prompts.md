@@ -461,13 +461,18 @@ For EACH subnational area in the platform, create a simple slide with:
 - Visualization: Create using from_metric with these parameters:
   - type: "from_metric"
   - metricId: "m3-02-01"
-    Metric: Actual vs expected service volume (National) [number] — filtered to this specific area
+    Metric: Actual vs expected service volume (National) [number]
     Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
-    Auto-disaggregated by: indicator_common_id
   - vizPresetId: "disruption-chart"
   - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
-  - filterOverrides: Filter on admin_area_2 to show only this specific subnational area, and on indicator_common_id to include all indicators from the report
+  - Disaggregation setup:
+    - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
+    - admin_area_2 displayed as: replicant (creates separate charts per area)
+  - selectedReplicant: The admin_area_2 value for this specific subnational area
+  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
   - periodFilterOverride: Use the same period as the main report
+
+This approach uses replication — one visualization configuration with admin_area_2 as the replicant dimension. For each slide, change the selectedReplicant to the target district/area. Do NOT use filterOverrides on admin_area_2.
 
 Keep these slides clean — area name and visualization only, no interpretation text.
 ```

@@ -463,13 +463,18 @@ Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simpl
 - Visualisation : Créer avec from_metric avec ces paramètres :
   - type: "from_metric"
   - metricId: "m3-02-01"
-    Metric: Actual vs expected service volume (National) [number] — filtré pour cette zone spécifique
+    Metric: Actual vs expected service volume (National) [number]
     Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
-    Auto-disaggregated by: indicator_common_id
   - vizPresetId: "disruption-chart"
   - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la zone] »
-  - filterOverrides: Filtrer sur admin_area_2 pour afficher uniquement cette zone infranationale, et sur indicator_common_id pour inclure tous les indicateurs du rapport
+  - Configuration des désagrégations :
+    - indicator_common_id affiché comme : cells (panneaux/facettes séparés pour chaque indicateur)
+    - admin_area_2 affiché comme : replicant (crée des graphiques séparés par zone)
+  - selectedReplicant: La valeur admin_area_2 pour cette zone infranationale spécifique
+  - filterOverrides: Filtrer sur indicator_common_id pour inclure tous les indicateurs du rapport
   - periodFilterOverride: Utiliser la même période que le rapport principal
+
+Cette approche utilise la réplication — une seule configuration de visualisation avec admin_area_2 comme dimension de réplication. Pour chaque diapositive, changer le selectedReplicant pour le district/zone cible. NE PAS utiliser filterOverrides sur admin_area_2.
 
 Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
 ```
