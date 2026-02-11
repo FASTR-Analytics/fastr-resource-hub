@@ -388,7 +388,7 @@ BACK PAGE:
 ## Prompt 2: Regional Disruptions Analysis
 
 ```prompt
-Generate Annex 1: Regional Disruptions Analysis for all subnational areas. Add this annex after the main Disruptions Report.
+Generate Annex 1: Regional Disruptions Analysis for all subnational areas. Insert this annex before the back page (FASTR initiative slide). The back page must remain as the very last slide of the complete report — remove it from its current position and re-add it after the annex.
 
 ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform
@@ -456,7 +456,7 @@ Interpretation (left side): Describe in complete sentences:
 ## Prompt 3: Data Quality Assessment
 
 ```prompt
-Generate a Data Quality Assessment annex. Add this after the main Disruptions Report.
+Generate a Data Quality Assessment annex. Insert this annex before the back page (FASTR initiative slide). The back page must remain as the very last slide of the complete report — remove it from its current position and re-add it after the annex.
 
 ANNEX NUMBERING: If Regional Disruptions Analysis (Annex 1) was included, number this as Annex 2. If not included, number this as Annex 1.
 
