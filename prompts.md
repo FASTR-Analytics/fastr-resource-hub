@@ -269,33 +269,27 @@ When user provides the analysis time period, convert to period_id format:
 - Store these values to use in periodFilterOverride for all indicator slides
 
 STEP 2: DISCOVER AVAILABLE INDICATORS
-Before generating the report, check what indicators are available in the platform for this country:
+Before generating the report, check what indicators are available in the platform for this country.
 
-1. Review all indicators available in the platform
-2. Map each indicator to one of these standard groups:
-   - Adolescent Family Planning (e.g., adolescents counseled for FP, adolescents initiated on modern contraceptive method, adolescent modern contraceptive users)
-   - Family Planning (e.g., FP clients counseled, clients initiated on modern contraceptive method, modern contraceptive users)
-   - Antenatal Care (e.g., ANC1, ANC4)
-   - Deliveries and Postnatal Care (e.g., institutional delivery, PNC)
-   - Immunization (e.g., BCG, Penta1, Penta3)
-   - Malaria (e.g., malaria RDT+, malaria treated <24hrs)
-   - General Services / OPD (e.g., OPD >5, OPD <5)
-3. For any indicators that do not fit the standard groups above (e.g., C-sections, maternal deaths, neonatal deaths, diarrhea cases, pneumonia cases, fully immunized, nutrition indicators), present these to the user and ask:
-   - "I found these additional indicators: [list]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the national analysis slides?"
-   - Note: mortality indicators (maternal deaths, neonatal deaths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
-4. Present the final proposed groupings to the user for confirmation before proceeding
+Each country instance has different indicator IDs (indicator_common_id) and labels. Do NOT assume a fixed list of codes — read them from the platform.
 
-Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart.
+1. Review all indicator IDs and their labels available in the platform for this country
+2. Present the full list to the user (ID + label)
+3. Propose groupings based on the indicator labels. Use these as a starting guide, but adapt to what actually exists:
+   - Antenatal Care: indicators related to ANC visits (e.g., anc1, anc4, anc_trimester1)
+   - Deliveries and Postnatal Care: facility deliveries, skilled birth attendance, PNC, C-sections (e.g., delivery, sba, pnc1, csection)
+   - Immunization: vaccines (e.g., bcg, penta1, penta3, measles1, opv1, fully_immunized)
+   - Family Planning: FP counseling, new users, continuing users (e.g., fp_new, fp_new_and_cont, fp_counseled)
+   - Adolescent Family Planning: if adolescent-specific FP indicators exist, group separately (e.g., fp_adolescent_counseled, fp_adolescent_new)
+   - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
+   - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
+   - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
+4. For any indicators that do not fit clearly into a group, present them to the user and ask:
+   - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the national analysis slides?"
+   - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
+5. Present the final proposed groupings to the user for confirmation before proceeding
 
-KNOWN INDICATOR CODES for selectedReplicant and filterOverrides:
-- Maternal: anc1, anc4, delivery, pnc1, csection, maternal_deaths, neonatal_deaths
-- Immunization: bcg, penta1, penta3, fully_immunized
-- OPD: opd_under5, opd_over5
-- Family Planning: fp_new, fp_new_and_cont
-- Malaria: malaria_rdt_positive, malaria_treated_less_24hrs
-- Child Health: diarrhea_cases_identified, pneumonia_cases_identified, pneumonia_treated
-
-If an indicator in the platform does not match a known code above, note it and ask the user to confirm the correct code.
+Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
 ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform - do not draw on external knowledge

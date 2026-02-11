@@ -105,19 +105,19 @@ Analyse les tendances des accouchements institutionnels. Compare les volumes ré
 
 ### Soins postnatals
 ```prompt
-Analyse les CPoN 1 pour détecter les perturbations. Les visites de soins postnatals suivent-elles l'évolution des accouchements ? Signale tout écart entre les volumes de services attendus et réels.
+Analyse les indicateurs de soins postnatals (CPoN) pour détecter les perturbations. Les visites de soins postnatals suivent-elles l'évolution des accouchements ? Signale tout écart entre les volumes de services attendus et réels.
 ```
 
 ## Santé infantile
 
 ### Couverture vaccinale
 ```prompt
-Analyse le Vaccin BCG, le Vaccin Penta 1 et le Vaccin Penta 3 pour détecter les perturbations. Montre les volumes réels par rapport aux volumes attendus pour chaque vaccin, identifie les périodes de perturbation et signale les régions avec des lacunes persistantes.
+Analyse le BCG, le Penta1 et le Penta3 pour détecter les perturbations. Montre les volumes réels par rapport aux volumes attendus pour chaque vaccin, identifie les périodes de perturbation et signale les régions avec des lacunes persistantes.
 ```
 
 ### Analyse des abandons
 ```prompt
-Compare les schémas d'abandon entre le Vaccin Penta 1 et le Vaccin Penta 3. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué au fil du temps ?
+Compare les schémas d'abandon entre le Penta1 et le Penta3. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué au fil du temps ?
 ```
 
 ## Services généraux
@@ -256,16 +256,42 @@ Explique comment FASTR ajuste les données pour les problèmes de qualité. Quan
 ```prompt
 Génère un rapport FASTR sur les perturbations.
 
-AVANT DE COMMENCER, DEMANDER À L'UTILISATEUR :
+ÉTAPE 1 : DEMANDER À L'UTILISATEUR :
 1. Le nom du pays
-2. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à décembre 2025 »)
-3. Le libellé du titre du rapport : Un court libellé pour le sous-titre de la couverture décrivant ce que couvre ce rapport (par exemple « T4 2025 », « Annuel 2025 », « Janvier-juin 2025 »)
-4. La date de génération de l'analyse : Le mois/année de production de cette analyse, pour le pied de page de la couverture (par exemple « Février 2026 »)
+2. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
+3. Le sous-titre du rapport : Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 »
+
+La date de génération de l'analyse est février 2026.
 
 Quand l'utilisateur fournit la période d'analyse, convertir au format period_id :
 - La date de début devient la valeur minimale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple janvier 2025 = 202501)
 - La date de fin devient la valeur maximale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple décembre 2025 = 202512)
 - Conserver ces valeurs pour les utiliser dans periodFilterOverride pour toutes les diapositives d'indicateurs
+
+ÉTAPE 2 : DÉCOUVRIR LES INDICATEURS DISPONIBLES
+Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans la plateforme pour ce pays :
+
+Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et des libellés différents. Ne PAS supposer une liste fixe de codes — les lire depuis la plateforme.
+
+1. Passer en revue tous les identifiants d'indicateurs et leurs libellés disponibles dans la plateforme pour ce pays
+2. Présenter la liste complète à l'utilisateur (identifiant + libellé)
+3. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
+   - Soins prénatals : indicateurs liés aux visites CPN (par exemple anc1, anc4, anc_trimester1)
+   - Accouchements et soins postnatals : accouchements en structure, personnel qualifié, CPoN, césariennes (par exemple delivery, sba, pnc1, csection)
+   - Vaccination : vaccins (par exemple bcg, penta1, penta3, measles1, vaccines_completes, bcg_fixe, bcg_mobile)
+   - Planification familiale : conseil PF, nouveaux utilisateurs, utilisateurs continus (par exemple fp_new, fp_new_and_cont, fp_counseled, new_fp)
+   - Planification familiale des adolescents : si des indicateurs PF spécifiques aux adolescents existent, les regrouper séparément (par exemple fp_adolescent_counseled, fp_adolescent_new)
+   - Paludisme : tests, positivité, traitement (par exemple malaria_rdt_positive, malaria_treated_less_24hrs, malaria_positive, malaria_tx)
+   - Services généraux / Consultations externes : visites ambulatoires (par exemple opd, opd_under5, opd_over5)
+   - Nutrition : si des indicateurs de nutrition existent (par exemple malnutrition_treated, nutrition_vitamin_a, malnutrition_sam_rechutent)
+   - Nouveau-nés : si des indicateurs spécifiques aux nouveau-nés existent (par exemple newborn_kmc, newborn_underweight, breastfeeding_early)
+   - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
+4. Pour tout indicateur ne correspondant pas clairement à un groupe, le présenter à l'utilisateur et demander :
+   - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse nationale ? »
+   - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
+5. Présenter les regroupements finaux proposés à l'utilisateur pour confirmation avant de poursuivre
+
+Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse nationale, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
 EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme - ne pas recourir à des connaissances externes
@@ -273,19 +299,12 @@ EXIGENCES DE PRÉCISION :
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
 4. Ne pas deviner les dates, les périodes ou les magnitudes
 
-REGROUPEMENTS D'INDICATEURS (utiliser uniquement ceux qui existent dans la plateforme) :
-- Santé maternelle et néonatale : CPN1, CPN4, Accouchements institutionnels, CPoN (plus césariennes, décès maternels, mortinaissances si disponibles)
-- Vaccination : Vaccin BCG, Vaccin Penta 1, Vaccin Penta 3 (plus Rougeole 1/2, enfants complètement vaccinés, Vitamine A si disponibles)
-- Services généraux : Visites ambulatoires (plus visites ambulatoires moins de 5 ans, visites ambulatoires plus de 5 ans si disponibles)
-- Planification familiale, Paludisme, Nutrition : Inclure si disponibles dans la plateforme
-
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
 3. Structurer les narratifs en phrases complètes (pas de listes à puces)
-4. Mettre les titres des indicateurs en gras
-5. Mise en page : interprétation à gauche, visualisation à droite
-6. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
+4. Mise en page : interprétation à gauche, visualisation à droite
+5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 
 VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
 1. Toutes les valeurs numériques correspondent à ce que montre la visualisation
@@ -297,8 +316,8 @@ STRUCTURE :
 
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS au/en [PAYS] »
-- Sous-titre : « Rapport sur les perturbations : [LIBELLÉ_TITRE_RAPPORT] »
-- Pied de page : « Analyse générée en [DATE_GÉNÉRATION_ANALYSE] »
+- Sous-titre : « [SOUS_TITRE_RAPPORT] »
+- Pied de page : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
 
 DIAPOSITIVE 2 - Diapositive d'introduction
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS »
@@ -316,66 +335,56 @@ DIAPOSITIVE 3 - Diapositive méthodologique
 DIAPOSITIVE 4 - Diapositive de sélection des indicateurs
 - Titre : « Méthodologie : Sélection des indicateurs »
 - Sous-titre : « Les indicateurs pour l'analyse de l'utilisation des services ont été sélectionnés en tenant compte des indicateurs priorisés au niveau national. »
-- Lister les indicateurs disponibles regroupés par catégorie depuis la plateforme
+- Lister tous les indicateurs disponibles regroupés par les catégories confirmées à l'Étape 2
 
 DIAPOSITIVE 5 - Diapositive d'en-tête de section
 - Titre : « Section 1 : Utilisation des services »
 - Sous-titre : « Évaluation des volumes projetés sur la base des tendances historiques pour identifier les surplus et les perturbations dans les services de santé »
 
-DIAPOSITIVES 6+ - Diapositives d'analyse nationale
-Créer les diapositives dans cet ordre exact par catégorie. N'inclure que les indicateurs qui existent dans la plateforme.
+DIAPOSITIVES 6+ - Diapositives d'analyse nationale (une diapositive par GROUPE d'indicateurs)
+Créer une diapositive pour chaque groupe d'indicateurs confirmé à l'Étape 2. Chaque diapositive montre tous les indicateurs du groupe côte à côte.
 
-CATÉGORIE A - SANTÉ MATERNELLE :
-Créer une diapositive chacune pour : CPN1, CPN4, Accouchements institutionnels, CPoN 1 (et césariennes, décès maternels, décès néonatals, mortinaissances si disponibles)
+POUR CHAQUE DIAPOSITIVE DE GROUPE :
 
-CATÉGORIE B - VACCINATION :
-Créer une diapositive chacune pour : Vaccin BCG, Vaccin Penta 1, Vaccin Penta 3, Rougeole 1, Rougeole 2 (et enfants complètement vaccinés, Vitamine A si disponibles)
+Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion principale pour ce groupe d'indicateurs. Le titre doit décrire ce que montrent les données, pas simplement nommer les indicateurs.
+- Bon exemple : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise à la mi-2025, avec quelques perturbations pour le BCG »
+- Bon exemple : « Les accouchements montrent un surplus en 2025, tandis que les CPoN ont récupéré après des perturbations antérieures »
+- Mauvais exemple : « BCG - Vaccin Bacillus Calmette-Guérin »
+- Mauvais exemple : « Indicateurs de vaccination »
 
-CATÉGORIE C - SERVICES GÉNÉRAUX :
-Créer une diapositive chacune pour : Visites ambulatoires (et visites ambulatoires moins de 5 ans, visites ambulatoires plus de 5 ans si disponibles)
-
-CATÉGORIE D - AUTRES (si disponibles dans la plateforme) :
-Créer des diapositives pour : Planification familiale, Paludisme, indicateurs de nutrition
-
-CODES D'INDICATEURS pour le paramètre selectedReplicant :
-- Santé maternelle : anc1, anc4, delivery, pnc1, sba, delivery_cpn_ifa, delivery_hiv_tx
-- Vaccination : bcg, penta1, penta3, measles1, measles2, vaccines_completes
-- Visites ambulatoires : opd
-- Visites hospitalières : ipd
-- Planification familiale : new_fp
-- Nutrition : nutrition_vitamin_a, malnutrition_enfant, malnutrition_treated, breastfeeding_early
-
-POUR CHAQUE DIAPOSITIVE D'INDICATEUR :
-
-Titre : Nom de l'indicateur en gras (par exemple « CPN1 - Première visite de consultation prénatale »)
-
-Visualisation (côté droit) : Créer en utilisant from_metric avec ces paramètres :
-- type : "from_metric"
-- metricId : "m3-02-01" (Volume de services réel par rapport à l'attendu - National)
-- vizPresetId : "disruption-chart"
-- chartTitle : "Réel vs Attendu : [Nom de l'indicateur]"
-- selectedReplicant : Le code de l'indicateur (par exemple "anc1", "penta3")
-- filterOverrides : DOIT inclure un filtre pour montrer uniquement cet indicateur spécifique :
-  - col : "indicator_common_id"
-  - vals : [le code de l'indicateur uniquement, par exemple ["anc1"] ou ["penta3"]]
-- periodFilterOverride :
-  - periodOption : "period_id"
-  - min : Date de début sous forme de nombre à 6 chiffres (par exemple 202501 pour janvier 2025)
-  - max : Date de fin sous forme de nombre à 6 chiffres (par exemple 202512 pour décembre 2025)
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m3-02-01"
+  Metric: Actual vs expected service volume (National) [number]
+  Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
+  Auto-disaggregated by: indicator_common_id
+  Optional disaggregations: year, month, period_id
+- vizPresetId: "disruption-chart" (Disruptions and surpluses - national - YYYYMM)
+- chartTitle: "Comparing reported service use to expected trends, nationally"
+- selectedReplicant: The first indicator code in the group
+- filterOverrides: Filter on indicator_common_id to include ALL indicator codes for this group:
+  - col: "indicator_common_id"
+  - vals: [all indicator codes in the group, e.g., ["anc1", "anc4"] or ["bcg", "penta1", "penta3"]]
+- periodFilterOverride:
+  - periodOption: "period_id"
+  - min: Start date as 6-digit number (e.g., 202301 for January 2023)
+  - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
 Interprétation (côté gauche) : Analyser les données affichées dans la visualisation. Décrire en phrases complètes :
-- Quand les perturbations se sont produites (mois/périodes spécifiques où le réel est tombé en dessous de l'attendu)
-- La durée des perturbations (combien de mois consécutifs)
-- L'ampleur des écarts (différences numériques approximatives lorsqu'elles sont visibles)
-- Quand les surplus se sont produits (mois/périodes spécifiques où le réel a dépassé l'attendu)
-- Le schéma général (soutenu, bref, dispersé, aucun)
+- Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
+- Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
+- Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
+- Évaluation globale : une phrase de conclusion sur ce que le schéma combiné signifie pour ce domaine de services
 - IMPORTANT : Ne décrire que ce qui est réellement visible dans le graphique - ne pas inventer de données
+
+DERNIÈRE PAGE :
+- "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 ```
 
 ## Prompt 2 : Analyse régionale des perturbations
 
 ```prompt
-Génère l'Annexe 1 : Analyse régionale des perturbations pour toutes les zones infranationales. Ajouter cette annexe après le rapport principal sur les perturbations.
+Génère l'Annexe 1 : Analyse régionale des perturbations pour toutes les zones infranationales. Insérer cette annexe avant la dernière page (diapositive FASTR initiative). La dernière page doit rester la toute dernière diapositive du rapport complet — la retirer de sa position actuelle et la remettre après l'annexe.
 
 EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme
@@ -405,9 +414,9 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
   Optional disaggregations: year, month, period_id
-- Display as a heatmap table: subnational areas (rows) x indicators (columns), showing the percentage difference for the most recent 6 months of the analysis period
-- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
+- No preset — this metric auto-disaggregates by admin_area_2 and indicator_common_id, rendering as a table of subnational areas (rows) x indicators (columns)
 - periodFilterOverride: Filter to the most recent 6 months of the analysis period
+- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
 - Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
 
 Interprétation (côté gauche) : Décrire en phrases complètes :
@@ -427,10 +436,9 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
   Optional disaggregations: year, month, period_id
-- vizPresetId: "disruption-chart" (or appropriate preset for subnational disruption charts)
+- No preset — the metric auto-disaggregates by indicator_common_id, showing all indicators as small multiples
 - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
 - filterOverrides: Filter on admin_area_2 to show only this specific subnational area
-- Display as a grid of disruption charts for ALL indicators (small multiples)
 - periodFilterOverride: Use the same period as the main report
 
 Interprétation (côté gauche) : Décrire en phrases complètes :
@@ -443,7 +451,7 @@ Interprétation (côté gauche) : Décrire en phrases complètes :
 ## Prompt 3 : Évaluation de la qualité des données
 
 ```prompt
-Génère une annexe d'évaluation de la qualité des données. Ajouter après le rapport principal sur les perturbations.
+Génère une annexe d'évaluation de la qualité des données. Insérer cette annexe avant la dernière page (diapositive FASTR initiative). La dernière page doit rester la toute dernière diapositive du rapport complet — la retirer de sa position actuelle et la remettre après l'annexe.
 
 NUMÉROTATION DE L'ANNEXE : Si l'analyse régionale des perturbations (Annexe 1) a été incluse, numéroter celle-ci comme Annexe 2. Si elle n'a pas été incluse, numéroter comme Annexe 1.
 
