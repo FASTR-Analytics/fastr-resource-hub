@@ -491,86 +491,30 @@ NORMES DU RAPPORT :
 2. Mise en page : interprétation à gauche, visualisation à droite
 3. Utiliser une terminologie cohérente tout au long du rapport
 
+RÉFÉRENCE MÉTHODOLOGIQUE :
+Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, consultez la documentation méthodologique à l'adresse https://fastr-analytics.github.io/fastr-resource-hub/. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
+
+INDICATEURS DE QUALITÉ DES DONNÉES :
+Utiliser get_available_metrics pour confirmer les indicateurs disponibles et leurs préréglages de visualisation. Les indicateurs de qualité des données utilisés dans cette annexe sont :
+- m1-01-01 : Proportion de valeurs aberrantes [pourcentage] — préréglage : outlier-table — filtres : indicator_common_id, admin_area_2
+- m1-02-02 : Proportion de rapports complétés [pourcentage] — préréglages : completeness-table (par région), completeness-timeseries (au fil du temps) — filtres : indicator_common_id, admin_area_2
+- m1-03-01 : Proportion de zones infranationales respectant les critères de cohérence [pourcentage] — préréglage : consistency-table — filtres : ratio_type, admin_area_2
+- m1-04-01 : Proportion d'établissements avec une qualité de données adéquate [pourcentage] — préréglage : dqa-score-table — filtres : admin_area_2
+- m1-04-02 : Score moyen de qualité des données entre les établissements [pourcentage] — préréglage : mean-dqa-table — filtres : admin_area_2
+
+Pour chaque diapositive, créer la visualisation avec from_metric en utilisant le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal.
+
 VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que tous les pourcentages et scores correspondent à ce que montre la visualisation.
 
 STRUCTURE :
+
+ÉTAPE 1 : GÉNÉRER LE RÉSUMÉ DE COMPLÉTUDE
 
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Annexe [1 ou 2] : Évaluation de la qualité des données »
 - Sous-titre : « Les évaluations de la qualité des données — axées sur la complétude, la cohérence et les valeurs aberrantes — alimentent les ajustements appliqués aux données de routine pour améliorer la fiabilité des analyses présentées. »
 
-DIAPOSITIVE 2 - Complétude du rapportage
-- Titre : « Complétude du rapportage »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-02-02"
-    Metric: Proportion of completed records [percent]
-    Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
-    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
-  - vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
-    Filters: indicator_common_id, admin_area_2
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales de la complétude au fil du temps, quels indicateurs ont une faible complétude (les nommer) et quelles zones administratives ont une faible complétude (les nommer).
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
-
-DIAPOSITIVE 3 - Valeurs aberrantes
-- Titre : « Valeurs aberrantes »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-01-01"
-    Metric: Proportion of outliers [percent]
-    Values: outlier_flag (Binary variable indicating whether this is an outlier)
-    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
-  - vizPresetId: "outlier-table" (Outlier proportion table - YYYYMM)
-    Filters: indicator_common_id, admin_area_2
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales des valeurs aberrantes au fil du temps, quels indicateurs ont des taux élevés de valeurs aberrantes (les nommer) et quelles zones administratives ont des taux élevés de valeurs aberrantes (les nommer).
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
-
-DIAPOSITIVE 4 - Cohérence interne
-- Titre : « Cohérence interne »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-03-01"
-    Metric: Proportion of sub-national areas meeting consistency criteria [percent]
-    Values: sconsistency
-    Auto-disaggregated by: ratio_type
-    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
-  - vizPresetId: "consistency-table" (Internal consistency table - YYYYMM)
-    Filters: ratio_type, admin_area_2
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Décrire en phrases complètes quelles comparaisons de cohérence sont effectuées, les schémas généraux à travers le pays et quelles zones respectent ou ne respectent pas les critères de cohérence.
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
-
-DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
-- Titre : « Tendances de la qualité des données »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-04-01"
-    Metric: Proportion of facilities with adequate data quality [percent]
-    Values: dqa_score (Binary variable indicating adequate data quality)
-    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
-  - vizPresetId: "dqa-score-table" (Overall DQA score table - YYYYMM)
-    Filters: admin_area_2
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Décrire en phrases complètes comment les scores de l'EQD ont évolué au fil des années, les performances globales du pays et la variation entre les zones administratives.
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
-
-DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
-- Titre : « Tendances de la qualité des données »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-04-02"
-    Metric: Average data quality score across facilities [percent]
-    Values: dqa_mean (Data quality score across facilities)
-    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
-  - vizPresetId: "mean-dqa-table" (Mean DQA score table - YYYYMM)
-    Filters: admin_area_2
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Décrire en phrases complètes les tendances du score moyen de l'EQD au fil des années, quelles zones ont des scores en amélioration ou en déclin, et l'évaluation globale de la trajectoire de la qualité des données.
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
-
-DIAPOSITIVE 7 - Tableau des tendances de complétude
+DIAPOSITIVE 2 - Tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)
 
 Visualization (right side): Create using from_metric with these parameters:
@@ -601,4 +545,109 @@ Valeurs attendues : Elles sont ajustées pour la complétude et les valeurs aber
 Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations reflètent plus probablement de véritables changements dans les services.
 
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
+
+ÉTAPE 2 : DEMANDER À L'UTILISATEUR
+Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant la complétude par région, les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
+
+Si l'utilisateur accepte, générer les diapositives supplémentaires suivantes :
+
+DIAPOSITIVE 3 - Complétude du rapportage par région
+- Titre : Rédiger un titre analytique sur la complétude régionale (par exemple « La complétude varie selon les régions, avec [X] et [Y] constamment en dessous de 90 % pour les indicateurs clés »)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-02-02"
+    Metric: Proportion of completed records [percent]
+    Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - Display as a table: admin_area_2 (rows) × indicator_common_id (columns) showing completeness %
+  - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Nommer les régions spécifiques avec une faible complétude et les indicateurs concernés
+  - Identifier si les lacunes sont concentrées dans des zones spécifiques ou réparties dans tout le pays
+  - Signaler toute région où la complétude est faible pour plusieurs indicateurs (problèmes de rapportage systémiques)
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
+
+DIAPOSITIVE 4 - Valeurs aberrantes
+- Titre : Rédiger un titre analytique sur les valeurs aberrantes (par exemple « Les taux de valeurs aberrantes restent faibles au niveau national mais [X] montre des taux élevés ces derniers mois »)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-01-01"
+    Metric: Proportion of outliers [percent]
+    Values: outlier_flag (Binary variable indicating whether this is an outlier)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "outlier-table" (Outlier proportion table - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
+  - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance nationale globale des taux de valeurs aberrantes — sont-ils stables, en amélioration ou en détérioration ?
+  - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
+  - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
+  - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
+
+DIAPOSITIVE 5 - Cohérence interne
+- Titre : Rédiger un titre analytique sur la cohérence (par exemple « La plupart des paires d'indicateurs montrent un rapportage cohérent, mais [RATIO] sort des plages plausibles dans plusieurs régions »)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-03-01"
+    Metric: Proportion of sub-national areas meeting consistency criteria [percent]
+    Values: sconsistency
+    Auto-disaggregated by: ratio_type
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "consistency-table" (Internal consistency table - YYYYMM)
+    Filters: ratio_type, admin_area_2
+  - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
+  - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
+  - Identifier quels ratios respectent ou échouent systématiquement les critères
+  - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
+  - Mettre en évidence toute région spécifique où la cohérence est notablement faible
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+
+DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD global)
+- Titre : Rédiger un titre analytique sur les tendances de l'EQD (par exemple « La proportion d'établissements avec une qualité de données adéquate est passée de X % à Y % depuis [ANNÉE] »)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-01"
+    Metric: Proportion of facilities with adequate data quality [percent]
+    Values: dqa_score (Binary variable indicating adequate data quality)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "dqa-score-table" (Overall DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance nationale — la qualité des données s'améliore-t-elle au fil du temps ?
+  - Nommer les régions les plus performantes et les moins performantes
+  - Identifier les régions où la qualité des données s'est notablement améliorée ou détériorée
+  - Expliquer l'implication : les zones avec des scores EQD faibles peuvent avoir des estimations de perturbation moins fiables
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+
+DIAPOSITIVE 7 - Tendances de la qualité des données (score EQD moyen)
+- Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD (par exemple « Les scores moyens de qualité des données sont les plus élevés dans [X] et [Y], tandis que [Z] est en retard »)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-02"
+    Metric: Average data quality score across facilities [percent]
+    Values: dqa_mean (Data quality score across facilities)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "mean-dqa-table" (Mean DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance nationale du score moyen de l'EQD — s'améliore-t-elle, est-elle stable ou en déclin ?
+  - Comparer les régions les plus performantes aux moins performantes
+  - Signaler toute région montrant une amélioration ou un déclin significatif
+  - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 ```
