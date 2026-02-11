@@ -256,16 +256,46 @@ Explain how FASTR adjusts data for quality issues. When are values adjusted vs. 
 ```prompt
 Generate a FASTR Disruptions Report.
 
-BEFORE STARTING, ASK THE USER FOR:
+STEP 1: ASK THE USER FOR:
 1. Country name
-2. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to December 2025")
-3. Report title label: A short label for the cover subtitle describing what this report covers (e.g., "Q4 2025", "2025 Annual", "January-June 2025")
-4. Analysis generation date: The month/year when this analysis was produced, for the cover footer (e.g., "February 2026")
+2. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
+3. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
+
+The analysis generation date will be set automatically to the current month and year.
 
 When user provides the analysis time period, convert to period_id format:
 - Start date becomes min value: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
 - End date becomes max value: [YEAR][MONTH] as 6-digit number (e.g., December 2025 = 202512)
 - Store these values to use in periodFilterOverride for all indicator slides
+
+STEP 2: DISCOVER AVAILABLE INDICATORS
+Before generating the report, check what indicators are available in the platform for this country:
+
+1. Review all indicators available in the platform
+2. Map each indicator to one of these standard groups:
+   - Adolescent Family Planning (e.g., adolescents counseled for FP, adolescents initiated on modern contraceptive method, adolescent modern contraceptive users)
+   - Family Planning (e.g., FP clients counseled, clients initiated on modern contraceptive method, modern contraceptive users)
+   - Antenatal Care (e.g., ANC1, ANC4)
+   - Deliveries and Postnatal Care (e.g., institutional delivery, PNC)
+   - Immunization (e.g., BCG, Penta1, Penta3)
+   - Malaria (e.g., malaria RDT+, malaria treated <24hrs)
+   - General Services / OPD (e.g., OPD >5, OPD <5)
+3. For any indicators that do not fit the standard groups above (e.g., C-sections, maternal deaths, neonatal deaths, diarrhea cases, pneumonia cases, fully immunized, nutrition indicators), present these to the user and ask:
+   - "I found these additional indicators: [list]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the national analysis slides?"
+   - Note: mortality indicators (maternal deaths, neonatal deaths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
+4. Present the final proposed groupings to the user for confirmation before proceeding
+
+Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart.
+
+KNOWN INDICATOR CODES for selectedReplicant and filterOverrides:
+- Maternal: anc1, anc4, delivery, pnc1, csection, maternal_deaths, neonatal_deaths
+- Immunization: bcg, penta1, penta3, fully_immunized
+- OPD: opd_under5, opd_over5
+- Family Planning: fp_new, fp_new_and_cont
+- Malaria: malaria_rdt_positive, malaria_treated_less_24hrs
+- Child Health: diarrhea_cases_identified, pneumonia_cases_identified, pneumonia_treated
+
+If an indicator in the platform does not match a known code above, note it and ask the user to confirm the correct code.
 
 ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform - do not draw on external knowledge
@@ -273,19 +303,12 @@ ACCURACY REQUIREMENTS:
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
 4. Do not guess at dates, time periods, or magnitudes
 
-INDICATOR GROUPINGS (use only what exists in platform):
-- Maternal and Newborn: ANC1, ANC4, Institutional delivery, PNC (plus C-sections, maternal deaths, stillbirths if available)
-- Immunization: BCG, Penta1, Penta3 (plus Measles 1/2, fully immunized, Vitamin A if available)
-- General Services: Outpatient visits (plus OPD under 5, OPD over 5 if available)
-- Family Planning, Malaria, Nutrition: Include if available in platform
-
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
 3. Structure narratives in complete sentences (not bullet points)
-4. Place indicator titles in bold
-5. Layout: interpretation on left, visualization on right
-6. Use consistent terminology throughout (do not switch between synonyms)
+4. Layout: interpretation on left, visualization on right
+5. Use consistent terminology throughout (do not switch between synonyms)
 
 VERIFICATION - Before finalizing each slide, cross-check:
 1. All numeric values match what the visualization shows
@@ -297,8 +320,8 @@ STRUCTURE:
 
 SLIDE 1 - Cover slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data in [COUNTRY]"
-- Subtitle: "Disruptions Report: [REPORT_TITLE_LABEL]"
-- Footer: "Analysis generated in [ANALYSIS_GENERATION_DATE]"
+- Subtitle: "[REPORT_SUBTITLE]"
+- Footer: "Analysis generated in [CURRENT_MONTH_YEAR]"
 
 SLIDE 2 - Introductory slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data"
@@ -316,60 +339,50 @@ SLIDE 3 - Methodology slide
 SLIDE 4 - Indicator selection slide
 - Title: "Methodology: Indicator selection"
 - Subtitle: "Indicators for the service utilization analysis were selected considering nationally prioritized indicators."
-- List available indicators grouped by category from the platform
+- List all available indicators grouped by the confirmed categories from Step 2
 
 SLIDE 5 - Section header slide
 - Title: "Section 1: Service Utilization"
 - Subtitle: "Assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services"
 
-SLIDES 6+ - National analysis slides
-Create slides in this exact order by category. Only include indicators that exist in the platform.
+SLIDES 6+ - National analysis slides (one slide per indicator GROUP)
+Create one slide for each confirmed indicator group from Step 2. Each slide shows all indicators in that group side by side.
 
-CATEGORY A - MATERNAL HEALTH:
-Create one slide each for: ANC1, ANC4, Institutional delivery, PNC1 (and C-sections, maternal deaths, neonatal deaths, stillbirths if available)
+FOR EACH GROUP SLIDE:
 
-CATEGORY B - IMMUNIZATION:
-Create one slide each for: BCG, Penta1, Penta3, Measles 1, Measles 2 (and fully immunized, Vitamin A if available)
-
-CATEGORY C - GENERAL SERVICES:
-Create one slide each for: Outpatient visits (and OPD under 5, OPD over 5 if available)
-
-CATEGORY D - OTHER (if available in platform):
-Create slides for: Family planning, Malaria, Nutrition indicators
-
-INDICATOR CODES for selectedReplicant parameter:
-- Maternal: anc1, anc4, delivery, pnc1, csection, maternal_deaths, neonatal_deaths
-- Immunization: bcg, penta1, penta3, fully_immunized
-- OPD: opd_under5, opd_over5
-- Family Planning: fp_new, fp_new_and_cont
-- Malaria: malaria_rdt_positive, malaria_treated_less_24hrs
-- Child Health: diarrhea_cases_identified, pneumonia_cases_identified, pneumonia_treated
-
-FOR EACH INDICATOR SLIDE:
-
-Title: Indicator name in bold (e.g., "ANC1 - First antenatal care visit")
+Title: Write an analytical headline (1-2 sentences) that summarizes the key finding for this group of indicators. The headline should describe what the data shows, not just name the indicators.
+- Good example: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025, with some disruption in BCG"
+- Good example: "Deliveries show surplus in 2025, while PNC recovered after earlier disruptions"
+- Bad example: "BCG - Bacillus Calmette-Guérin vaccine"
+- Bad example: "Immunization indicators"
 
 Visualization (right side): Create using from_metric with these parameters:
 - type: "from_metric"
-- metricId: "m3-02-01" (Actual vs expected service volume - National)
-- vizPresetId: "disruption-chart"
-- chartTitle: "Actual vs Expected: [Indicator Name]"
-- selectedReplicant: The indicator code (e.g., "anc1", "penta3")
-- filterOverrides: MUST include filter to show only this specific indicator:
+- metricId: "m3-02-01"
+  Metric: Actual vs expected service volume (National) [number]
+  Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
+  Auto-disaggregated by: indicator_common_id
+  Optional disaggregations: year, month, period_id
+- vizPresetId: "disruption-chart" (Disruptions and surpluses - national - YYYYMM)
+- chartTitle: "Comparing reported service use to expected trends, nationally"
+- selectedReplicant: The first indicator code in the group
+- filterOverrides: Filter on indicator_common_id to include ALL indicator codes for this group:
   - col: "indicator_common_id"
-  - vals: [the indicator code only, e.g., ["anc1"] or ["penta3"]]
+  - vals: [all indicator codes in the group, e.g., ["anc1", "anc4"] or ["bcg", "penta1", "penta3"]]
 - periodFilterOverride:
   - periodOption: "period_id"
-  - min: Start date as 6-digit number (e.g., 202501 for January 2025)
-  - max: End date as 6-digit number (e.g., 202512 for December 2025)
+  - min: Start date as 6-digit number (e.g., 202301 for January 2023)
+  - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
 Interpretation (left side): Analyze the data shown in the visualization. Describe in complete sentences:
-- When disruptions occurred (specific months/periods when actual fell below expected)
-- Duration of disruptions (how many consecutive months)
-- Magnitude of gaps (approximate numerical differences where visible)
-- When surpluses occurred (specific months/periods when actual exceeded expected)
-- Overall pattern (sustained, brief, scattered, none)
+- For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
+- For EACH indicator in the group: when surpluses occurred, and approximate magnitude
+- Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
+- Overall assessment: a concluding sentence on what the combined pattern means for this service area
 - IMPORTANT: Only describe what is actually visible in the chart - do not invent data
+
+BACK PAGE:
+- "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 ```
 
 ## Prompt 2: Regional Disruptions Analysis
@@ -393,14 +406,45 @@ VERIFICATION: Before finalizing each slide, cross-check that described trends ma
 STRUCTURE:
 
 SLIDE 1 - Annex header slide
-- Title: "Annex 1: District service utilization disruptions"
+- Title: "Annex 1: Subnational service utilization disruptions"
 
-SLIDES 2+ - Subnational area slides
+SLIDE 2 - Subnational summary heatmap
+Title: Write an analytical headline summarizing the key subnational finding (e.g., "Large county-level disparities in performance highlight the need to understand local drivers of both service gains and gaps")
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m3-03-02"
+  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
+  Values: pct_diff (Percent difference)
+  Auto-disaggregated by: admin_area_2, indicator_common_id
+  Optional disaggregations: year, month, period_id
+- Display as a heatmap table: subnational areas (rows) x indicators (columns), showing the percentage difference for the most recent 6 months of the analysis period
+- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
+- periodFilterOverride: Filter to the most recent 6 months of the analysis period
+- Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
+
+Interpretation (left side): Describe in complete sentences:
+- Which subnational areas show consistent surpluses or shortfalls across multiple indicators
+- Whether areas that perform well on some indicators also perform well on others, or if performance varies by service area
+- Any notable patterns (e.g., areas with strong maternal health but weak malaria services)
+
+SLIDES 3+ - Subnational area profiles
 For EACH subnational area in the platform, create a slide with:
 
 Slide title: Name of the subnational area
 
-Visualization (right side): Use "Default 6. Actual vs expected number of services (Admin area 2)" filtered for that specific area
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m3-03-02"
+  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
+  Values: pct_diff (Percent difference)
+  Auto-disaggregated by: admin_area_2, indicator_common_id
+  Optional disaggregations: year, month, period_id
+- vizPresetId: "disruption-chart" (or appropriate preset for subnational disruption charts)
+- chartTitle: "Comparing reported service use to expected trends, [Area Name]"
+- filterOverrides: Filter on admin_area_2 to show only this specific subnational area
+- Display as a grid of disruption charts for ALL indicators (small multiples)
+- periodFilterOverride: Use the same period as the main report
 
 Interpretation (left side): Describe in complete sentences:
 - Which indicators show disruptions (below expected) and when
@@ -436,31 +480,98 @@ SLIDE 1 - Cover slide
 
 SLIDE 2 - Reporting completeness
 - Title: "Reporting completeness"
-- Visualization (right side): Use "Default 2. Proportion of completed records"
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-02-02"
+    Metric: Proportion of completed records [percent]
+    Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in completeness over time, which indicators have low completeness (name them), and which administrative areas have low completeness (name them).
 
 SLIDE 3 - Outliers
 - Title: "Outliers"
-- Visualization (right side): Use "Default 1. Proportion of outliers"
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-01-01"
+    Metric: Proportion of outliers [percent]
+    Values: outlier_flag (Binary variable indicating whether this is an outlier)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "outlier-table" (Outlier proportion table - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in outliers over time, which indicators have high outlier rates (name them), and which administrative areas have high outlier rates (name them).
 
 SLIDE 4 - Internal consistency (first)
 - Title: "Internal consistency"
-- Visualization (right side): Use "Default 4. Proportion of sub-national areas meeting consistency criteria"
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-03-01"
+    Metric: Proportion of sub-national areas meeting consistency criteria [percent]
+    Values: sconsistency
+    Auto-disaggregated by: ratio_type
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "consistency-table" (Internal consistency table - YYYYMM)
+    Filters: ratio_type, admin_area_2
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe what consistency comparisons are being made, overall patterns across the country, and which areas meet or fail consistency criteria.
 
 SLIDE 5 - Internal consistency (second)
 - Title: "Internal consistency"
-- Visualization (right side): Use "Default 4. Proportion of sub-national areas meeting consistency criteria" (different view or breakdown)
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-03-01" (same metric, different view or breakdown)
+  - vizPresetId: "consistency-table"
+  - filterOverrides: Filter by admin_area_2 or ratio_type to show a different breakdown
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): Continue describing consistency patterns across administrative areas.
 
 SLIDE 6 - Data quality trends (first)
 - Title: "Trends in data quality"
-- Visualization (right side): Use "Default 5. Overall DQA score"
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-01"
+    Metric: Proportion of facilities with adequate data quality [percent]
+    Values: dqa_score (Binary variable indicating adequate data quality)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "dqa-score-table" (Overall DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe how DQA scores have changed across years, overall country performance, and variation across administrative areas.
 
 SLIDE 7 - Data quality trends (second)
 - Title: "Trends in data quality"
-- Visualization (right side): Use "Default 6. Mean DQA score"
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-02"
+    Metric: Average data quality score across facilities [percent]
+    Values: dqa_mean (Data quality score across facilities)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "mean-dqa-table" (Mean DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe mean DQA score trends across years, which areas have improving vs declining scores, and overall assessment of data quality trajectory.
+
+SLIDE 8 - Completeness trends table
+Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m1-02-02"
+  Metric: Proportion of completed records [percent]
+  Values: completeness_flag
+- vizPresetId: "completeness-timeseries" (Completeness over time - YYYYMM)
+  Filters: indicator_common_id
+- Display as a table: month (rows) x indicator (columns) showing completeness %
+- Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
+- periodFilterOverride: Use the same period as the main report
+- Footer: "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report."
+
+Interpretation (left side): Describe in complete sentences:
+- Summary of completeness trends over the analysis period
+- Which indicators have weaker completeness (name them)
+- Whether completeness improved over time
+- Why completeness matters for the disruptions analysis: observed values are adjusted for outliers only, while expected values are adjusted for both completeness and outliers. When completeness is high, disruptions are more likely to reflect true service changes. When completeness is low, apparent disruptions may reflect missing reports rather than real declines.
 ```
