@@ -509,8 +509,7 @@ STRUCTURE:
 STEP 1: GENERATE COMPLETENESS SUMMARY
 
 SLIDE 1 - Cover slide
-- Title: "Annex [1 or 2]: Data Quality Assessment"
-- Subtitle: "Data quality assessments — focused on completeness, consistency, and outliers — inform adjustments applied to routine data to improve reliability of the analyses presented."
+- Title: "Annex [1 or 2]: Trends in Indicator Reporting Completeness"
 
 SLIDE 2 - Completeness trends
 Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")

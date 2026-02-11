@@ -511,8 +511,7 @@ STRUCTURE :
 ÉTAPE 1 : GÉNÉRER LE RÉSUMÉ DE COMPLÉTUDE
 
 DIAPOSITIVE 1 - Diapositive de couverture
-- Titre : « Annexe [1 ou 2] : Évaluation de la qualité des données »
-- Sous-titre : « Les évaluations de la qualité des données — axées sur la complétude, la cohérence et les valeurs aberrantes — alimentent les ajustements appliqués aux données de routine pour améliorer la fiabilité des analyses présentées. »
+- Titre : « Annexe [1 ou 2] : Tendances de la complétude du rapportage des indicateurs »
 
 DIAPOSITIVE 2 - Tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)
