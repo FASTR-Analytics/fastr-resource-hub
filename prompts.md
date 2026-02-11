@@ -510,7 +510,6 @@ STEP 1: GENERATE COMPLETENESS SUMMARY
 
 SLIDE 1 - Cover slide
 - Title: "Annex [1 or 2]: Trends in Indicator Reporting Completeness"
-- Note: If the user opts for additional DQ slides in Step 2, update this title to "Annex [1 or 2]: Data Quality Assessment"
 
 SLIDE 2 - Completeness trends
 Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")
@@ -545,30 +544,11 @@ When completeness is high, observed and expected volumes are more comparable, an
 When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 
 STEP 2: ASK THE USER
-After generating the completeness summary, ask: "Would you like me to add additional data quality slides covering reporting completeness by region, outliers, internal consistency, and DQA score trends?"
+After generating the completeness summary, ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends?"
 
-If the user says yes, generate the following additional slides:
+If the user says yes, update the cover slide title to "Annex [1 or 2]: Data Quality Assessment", then generate the following additional slides:
 
-SLIDE 3 - Reporting completeness by region
-- Title: Write an analytical headline about regional completeness (e.g., "Completeness varies across regions, with [X] and [Y] consistently below 90% for key indicators")
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-02-02"
-    Metric: Proportion of completed records [percent]
-    Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
-    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
-  - vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
-    Filters: indicator_common_id, admin_area_2
-  - Display as a table: admin_area_2 (rows) × indicator_common_id (columns) showing completeness %
-  - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
-  - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
-  - Name specific regions with low completeness and the affected indicators
-  - Identify whether gaps are concentrated in specific areas or spread across the country
-  - Note any regions where completeness is low across multiple indicators (systemic reporting issues)
-- Fixed text (include on slide below the interpretation): "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report. A facility is expected to report if it has reported any volume for each indicator anytime within a year. A high completeness does not indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities, or some facilities may not report."
-
-SLIDE 4 - Outliers
+SLIDE 3 - Outliers
 - Title: Write an analytical headline about outlier patterns (e.g., "Outlier rates remain low nationally but [X] shows elevated rates in recent months")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -588,7 +568,7 @@ SLIDE 4 - Outliers
   - Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
 - Fixed text (include on slide below the interpretation): "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
-SLIDE 5 - Internal consistency
+SLIDE 4 - Internal consistency
 - Title: Write an analytical headline about consistency (e.g., "Most indicator pairs show consistent reporting, but [RATIO] falls outside plausible ranges in several regions")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -609,7 +589,7 @@ SLIDE 5 - Internal consistency
   - Highlight any specific regions where consistency is notably low
 - Fixed text (include on slide below the interpretation): "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
-SLIDE 6 - Data quality trends (overall DQA score)
+SLIDE 5 - Data quality trends (overall DQA score)
 - Title: Write an analytical headline about DQA trends (e.g., "The proportion of facilities with adequate data quality has improved from X% to Y% since [YEAR]")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -629,7 +609,7 @@ SLIDE 6 - Data quality trends (overall DQA score)
   - Explain the implication: areas with low DQA scores may have less reliable disruption estimates
 - Fixed text (include on slide below the interpretation): "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
-SLIDE 7 - Data quality trends (mean DQA score)
+SLIDE 6 - Data quality trends (mean DQA score)
 - Title: Write an analytical headline about mean DQA trends (e.g., "Mean data quality scores are highest in [X] and [Y], while [Z] lags behind")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"

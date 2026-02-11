@@ -512,7 +512,6 @@ STRUCTURE :
 
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Annexe [1 ou 2] : Tendances de la complétude du rapportage des indicateurs »
-- Note : Si l'utilisateur opte pour les diapositives supplémentaires à l'Étape 2, mettre à jour ce titre en « Annexe [1 ou 2] : Évaluation de la qualité des données »
 
 DIAPOSITIVE 2 - Tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)
@@ -547,30 +546,11 @@ Lorsque la complétude est élevée, les volumes observés et attendus sont plus
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 ÉTAPE 2 : DEMANDER À L'UTILISATEUR
-Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant la complétude par région, les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
+Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
 
-Si l'utilisateur accepte, générer les diapositives supplémentaires suivantes :
+Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture en « Annexe [1 ou 2] : Évaluation de la qualité des données », puis générer les diapositives supplémentaires suivantes :
 
-DIAPOSITIVE 3 - Complétude du rapportage par région
-- Titre : Rédiger un titre analytique sur la complétude régionale (par exemple « La complétude varie selon les régions, avec [X] et [Y] constamment en dessous de 90 % pour les indicateurs clés »)
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-02-02"
-    Metric: Proportion of completed records [percent]
-    Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
-    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
-  - vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
-    Filters: indicator_common_id, admin_area_2
-  - Display as a table: admin_area_2 (rows) × indicator_common_id (columns) showing completeness %
-  - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
-  - Nommer les régions spécifiques avec une faible complétude et les indicateurs concernés
-  - Identifier si les lacunes sont concentrées dans des zones spécifiques ou réparties dans tout le pays
-  - Signaler toute région où la complétude est faible pour plusieurs indicateurs (problèmes de rapportage systémiques)
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
-
-DIAPOSITIVE 4 - Valeurs aberrantes
+DIAPOSITIVE 3 - Valeurs aberrantes
 - Titre : Rédiger un titre analytique sur les valeurs aberrantes (par exemple « Les taux de valeurs aberrantes restent faibles au niveau national mais [X] montre des taux élevés ces derniers mois »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -590,7 +570,7 @@ DIAPOSITIVE 4 - Valeurs aberrantes
   - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
 - Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
-DIAPOSITIVE 5 - Cohérence interne
+DIAPOSITIVE 4 - Cohérence interne
 - Titre : Rédiger un titre analytique sur la cohérence (par exemple « La plupart des paires d'indicateurs montrent un rapportage cohérent, mais [RATIO] sort des plages plausibles dans plusieurs régions »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -611,7 +591,7 @@ DIAPOSITIVE 5 - Cohérence interne
   - Mettre en évidence toute région spécifique où la cohérence est notablement faible
 - Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
-DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD global)
+DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
 - Titre : Rédiger un titre analytique sur les tendances de l'EQD (par exemple « La proportion d'établissements avec une qualité de données adéquate est passée de X % à Y % depuis [ANNÉE] »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -631,7 +611,7 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD global)
   - Expliquer l'implication : les zones avec des scores EQD faibles peuvent avoir des estimations de perturbation moins fiables
 - Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
-DIAPOSITIVE 7 - Tendances de la qualité des données (score EQD moyen)
+DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 - Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD (par exemple « Les scores moyens de qualité des données sont les plus élevés dans [X] et [Y], tandis que [Z] est en retard »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
