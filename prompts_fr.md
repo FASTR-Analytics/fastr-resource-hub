@@ -443,48 +443,35 @@ STRUCTURE :
 DIAPOSITIVE 1 - Diapositive d'en-tête de l'annexe
 - Titre : « Annexe 1 : Perturbations de l'utilisation des services au niveau infranational »
 
-DIAPOSITIVE 2 - Carte thermique synthétique infranationale
+DIAPOSITIVE 2 - Tableau synthétique infranational
 Titre : Rédiger un titre analytique résumant la principale conclusion infranationale (par exemple « D'importantes disparités au niveau des comtés en matière de performance soulignent la nécessité de comprendre les facteurs locaux des gains et des lacunes dans les services »)
 
-Visualization (right side): Create using from_metric with these parameters:
-- type: "from_metric"
-- metricId: "m3-03-02"
-  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
-  Values: pct_diff (Percent difference)
-  Auto-disaggregated by: admin_area_2, indicator_common_id
-  Optional disaggregations: year, month, period_id
-- No preset — this metric auto-disaggregates by admin_area_2 and indicator_common_id, rendering as a table of subnational areas (rows) x indicators (columns)
-- periodFilterOverride: Filter to the most recent 6 months of the analysis period
-- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
-- Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
+Créer une diapositive de contenu avec un tableau de données montrant :
+- Lignes : chaque zone infranationale
+- Colonnes : chaque indicateur (utiliser des libellés courts)
+- Valeurs : pourcentage de différence entre les volumes de services réels et attendus pour les 6 derniers mois de la période d'analyse
+- Utiliser get_metric_data avec metricId « m3-03-02 » pour récupérer les données, puis construire le tableau sur la diapositive
+- Code couleur : Vert = plus de 10 % au-dessus de l'attendu | Blanc = -10 % à +10 % | Rouge = plus de 10 % en dessous de l'attendu
+- Pied de page : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). Les écarts supérieurs à ±10 % sont surlignés en rouge ou en vert. »
 
-Interprétation (côté gauche) : Décrire en phrases complètes :
-- Quelles zones infranationales montrent des surplus ou des déficits constants pour plusieurs indicateurs
-- Si les zones performantes sur certains indicateurs le sont aussi sur d'autres, ou si la performance varie selon le domaine de services
-- Les schémas notables éventuels (par exemple des zones avec de bons résultats en santé maternelle mais de faibles résultats en paludisme)
+Sous le tableau, ajouter 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
 
 DIAPOSITIVES 3+ - Profils par zone infranationale
-Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive avec :
+Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simple avec :
 
-Titre de la diapositive : Nom de la zone infranationale
+- Titre : Nom de la zone infranationale
+- Visualisation : Créer avec from_metric avec ces paramètres :
+  - type: "from_metric"
+  - metricId: "m3-02-01"
+    Metric: Actual vs expected service volume (National) [number] — filtré pour cette zone spécifique
+    Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
+    Auto-disaggregated by: indicator_common_id
+  - vizPresetId: "disruption-chart"
+  - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la zone] »
+  - filterOverrides: Filtrer sur admin_area_2 pour afficher uniquement cette zone infranationale, et sur indicator_common_id pour inclure tous les indicateurs du rapport
+  - periodFilterOverride: Utiliser la même période que le rapport principal
 
-Visualization (right side): Create using from_metric with these parameters:
-- type: "from_metric"
-- metricId: "m3-03-02"
-  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
-  Values: pct_diff (Percent difference)
-  Auto-disaggregated by: admin_area_2, indicator_common_id
-  Optional disaggregations: year, month, period_id
-- No preset — the metric auto-disaggregates by indicator_common_id, showing all indicators as small multiples
-- chartTitle: "Comparing reported service use to expected trends, [Area Name]"
-- filterOverrides: Filter on admin_area_2 to show only this specific subnational area
-- periodFilterOverride: Use the same period as the main report
-
-Interprétation (côté gauche) : Décrire en phrases complètes :
-- Quels indicateurs montrent des perturbations (en dessous de l'attendu) et quand
-- Quels indicateurs montrent des surplus (au-dessus de l'attendu) et quand
-- L'ampleur des écarts par rapport à l'attendu
-- Les schémas éventuels entre indicateurs (par exemple tous les indicateurs de santé maternelle affectés ensemble)
+Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
 ```
 
 ## Prompt 3 : Évaluation de la qualité des données
@@ -524,6 +511,7 @@ DIAPOSITIVE 2 - Complétude du rapportage
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales de la complétude au fil du temps, quels indicateurs ont une faible complétude (les nommer) et quelles zones administratives ont une faible complétude (les nommer).
+- Pied de page fixe : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
 
 DIAPOSITIVE 3 - Valeurs aberrantes
 - Titre : « Valeurs aberrantes »
@@ -537,8 +525,9 @@ DIAPOSITIVE 3 - Valeurs aberrantes
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales des valeurs aberrantes au fil du temps, quels indicateurs ont des taux élevés de valeurs aberrantes (les nommer) et quelles zones administratives ont des taux élevés de valeurs aberrantes (les nommer).
+- Pied de page fixe : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
-DIAPOSITIVE 4 - Cohérence interne (première)
+DIAPOSITIVE 4 - Cohérence interne
 - Titre : « Cohérence interne »
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -551,18 +540,9 @@ DIAPOSITIVE 4 - Cohérence interne (première)
     Filters: ratio_type, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes quelles comparaisons de cohérence sont effectuées, les schémas généraux à travers le pays et quelles zones respectent ou ne respectent pas les critères de cohérence.
+- Pied de page fixe : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
-DIAPOSITIVE 5 - Cohérence interne (deuxième)
-- Titre : « Cohérence interne »
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-03-01" (same metric, different view or breakdown)
-  - vizPresetId: "consistency-table"
-  - filterOverrides: Filter by admin_area_2 or ratio_type to show a different breakdown
-  - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Continuer à décrire les schémas de cohérence entre les zones administratives.
-
-DIAPOSITIVE 6 - Tendances de la qualité des données (première)
+DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
 - Titre : « Tendances de la qualité des données »
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -574,8 +554,9 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (première)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes comment les scores de l'EQD ont évolué au fil des années, les performances globales du pays et la variation entre les zones administratives.
+- Pied de page fixe : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
-DIAPOSITIVE 7 - Tendances de la qualité des données (deuxième)
+DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 - Titre : « Tendances de la qualité des données »
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -587,8 +568,9 @@ DIAPOSITIVE 7 - Tendances de la qualité des données (deuxième)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances du score moyen de l'EQD au fil des années, quelles zones ont des scores en amélioration ou en déclin, et l'évaluation globale de la trajectoire de la qualité des données.
+- Pied de page fixe : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 
-DIAPOSITIVE 8 - Tableau des tendances de complétude
+DIAPOSITIVE 7 - Tableau des tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)
 
 Visualization (right side): Create using from_metric with these parameters:
@@ -607,5 +589,16 @@ Interprétation (côté gauche) : Décrire en phrases complètes :
 - Un résumé des tendances de complétude sur la période d'analyse
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
-- Pourquoi la complétude est importante pour l'analyse des perturbations : les valeurs observées sont ajustées uniquement pour les valeurs aberrantes, tandis que les valeurs attendues sont ajustées pour la complétude et les valeurs aberrantes. Lorsque la complétude est élevée, les perturbations reflètent plus probablement de véritables changements dans les services. Lorsque la complétude est faible, les perturbations apparentes peuvent refléter des rapports manquants plutôt que de véritables baisses.
+
+Puis inclure ce bloc de texte fixe :
+
+**Pourquoi la complétude est importante pour l'analyse des perturbations**
+
+Valeurs observées : Elles sont ajustées uniquement pour les valeurs aberrantes, et reflètent donc les volumes réels de services après suppression des pics implausibles.
+
+Valeurs attendues : Elles sont ajustées pour la complétude et les valeurs aberrantes. Cela signifie que le modèle « comble » les lacunes de rapportage, construisant une ligne de tendance attendue comme si tous les établissements avaient rapporté de manière cohérente.
+
+Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations reflètent plus probablement de véritables changements dans les services.
+
+Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 ```

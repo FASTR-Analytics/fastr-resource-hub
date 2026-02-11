@@ -441,48 +441,35 @@ STRUCTURE:
 SLIDE 1 - Annex header slide
 - Title: "Annex 1: Subnational service utilization disruptions"
 
-SLIDE 2 - Subnational summary heatmap
+SLIDE 2 - Subnational summary table
 Title: Write an analytical headline summarizing the key subnational finding (e.g., "Large county-level disparities in performance highlight the need to understand local drivers of both service gains and gaps")
 
-Visualization (right side): Create using from_metric with these parameters:
-- type: "from_metric"
-- metricId: "m3-03-02"
-  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
-  Values: pct_diff (Percent difference)
-  Auto-disaggregated by: admin_area_2, indicator_common_id
-  Optional disaggregations: year, month, period_id
-- No preset — this metric auto-disaggregates by admin_area_2 and indicator_common_id, rendering as a table of subnational areas (rows) x indicators (columns)
-- periodFilterOverride: Filter to the most recent 6 months of the analysis period
+Create a content slide with a data table showing:
+- Rows: each subnational area
+- Columns: each indicator (use short labels)
+- Values: percentage difference between actual and expected service volumes for the most recent 6 months of the analysis period
+- Use get_metric_data with metricId "m3-03-02" to retrieve the data, then build the table on the slide
 - Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
 - Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
 
-Interpretation (left side): Describe in complete sentences:
-- Which subnational areas show consistent surpluses or shortfalls across multiple indicators
-- Whether areas that perform well on some indicators also perform well on others, or if performance varies by service area
-- Any notable patterns (e.g., areas with strong maternal health but weak malaria services)
+Below the table, add 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
 
 SLIDES 3+ - Subnational area profiles
-For EACH subnational area in the platform, create a slide with:
+For EACH subnational area in the platform, create a simple slide with:
 
-Slide title: Name of the subnational area
+- Title: Name of the subnational area
+- Visualization: Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m3-02-01"
+    Metric: Actual vs expected service volume (National) [number] — filtered to this specific area
+    Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
+    Auto-disaggregated by: indicator_common_id
+  - vizPresetId: "disruption-chart"
+  - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
+  - filterOverrides: Filter on admin_area_2 to show only this specific subnational area, and on indicator_common_id to include all indicators from the report
+  - periodFilterOverride: Use the same period as the main report
 
-Visualization (right side): Create using from_metric with these parameters:
-- type: "from_metric"
-- metricId: "m3-03-02"
-  Metric: Difference between actual and expected service volume (Admin area 2) [percent]
-  Values: pct_diff (Percent difference)
-  Auto-disaggregated by: admin_area_2, indicator_common_id
-  Optional disaggregations: year, month, period_id
-- No preset — the metric auto-disaggregates by indicator_common_id, showing all indicators as small multiples
-- chartTitle: "Comparing reported service use to expected trends, [Area Name]"
-- filterOverrides: Filter on admin_area_2 to show only this specific subnational area
-- periodFilterOverride: Use the same period as the main report
-
-Interpretation (left side): Describe in complete sentences:
-- Which indicators show disruptions (below expected) and when
-- Which indicators show surpluses (above expected) and when
-- The magnitude of deviations from expected
-- Any patterns across indicators (e.g., all maternal indicators affected together)
+Keep these slides clean — area name and visualization only, no interpretation text.
 ```
 
 ## Prompt 3: Data Quality Assessment
@@ -522,6 +509,7 @@ SLIDE 2 - Reporting completeness
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in completeness over time, which indicators have low completeness (name them), and which administrative areas have low completeness (name them).
+- Fixed footer: "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report. A facility is expected to report if it has reported any volume for each indicator anytime within a year. A high completeness does not indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities, or some facilities may not report."
 
 SLIDE 3 - Outliers
 - Title: "Outliers"
@@ -535,8 +523,9 @@ SLIDE 3 - Outliers
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in outliers over time, which indicators have high outlier rates (name them), and which administrative areas have high outlier rates (name them).
+- Fixed footer: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
-SLIDE 4 - Internal consistency (first)
+SLIDE 4 - Internal consistency
 - Title: "Internal consistency"
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -549,18 +538,9 @@ SLIDE 4 - Internal consistency (first)
     Filters: ratio_type, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe what consistency comparisons are being made, overall patterns across the country, and which areas meet or fail consistency criteria.
+- Fixed footer: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
-SLIDE 5 - Internal consistency (second)
-- Title: "Internal consistency"
-- Visualization (right side): Create using from_metric with these parameters:
-  - type: "from_metric"
-  - metricId: "m1-03-01" (same metric, different view or breakdown)
-  - vizPresetId: "consistency-table"
-  - filterOverrides: Filter by admin_area_2 or ratio_type to show a different breakdown
-  - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): Continue describing consistency patterns across administrative areas.
-
-SLIDE 6 - Data quality trends (first)
+SLIDE 5 - Data quality trends (overall DQA score)
 - Title: "Trends in data quality"
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -572,8 +552,9 @@ SLIDE 6 - Data quality trends (first)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe how DQA scores have changed across years, overall country performance, and variation across administrative areas.
+- Fixed footer: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
-SLIDE 7 - Data quality trends (second)
+SLIDE 6 - Data quality trends (mean DQA score)
 - Title: "Trends in data quality"
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -585,8 +566,9 @@ SLIDE 7 - Data quality trends (second)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe mean DQA score trends across years, which areas have improving vs declining scores, and overall assessment of data quality trajectory.
+- Fixed footer: "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 
-SLIDE 8 - Completeness trends table
+SLIDE 7 - Completeness trends table
 Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")
 
 Visualization (right side): Create using from_metric with these parameters:
@@ -605,5 +587,16 @@ Interpretation (left side): Describe in complete sentences:
 - Summary of completeness trends over the analysis period
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
-- Why completeness matters for the disruptions analysis: observed values are adjusted for outliers only, while expected values are adjusted for both completeness and outliers. When completeness is high, disruptions are more likely to reflect true service changes. When completeness is low, apparent disruptions may reflect missing reports rather than real declines.
+
+Then include this fixed text block:
+
+**Why Completeness Matters for the Disruptions Analysis**
+
+Observed values: These are adjusted for outliers only, so they reflect the actual raw service volumes after removing implausible spikes.
+
+Expected values: These are adjusted for both completeness and outliers. This means the model "fills in" where reporting gaps exist, building an expected trend line as if all facilities had reported consistently.
+
+When completeness is high, observed and expected volumes are more comparable, and disruptions are more likely to reflect true service changes.
+
+When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 ```
