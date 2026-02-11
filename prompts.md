@@ -509,7 +509,7 @@ SLIDE 2 - Reporting completeness
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in completeness over time, which indicators have low completeness (name them), and which administrative areas have low completeness (name them).
-- Fixed footer: "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report. A facility is expected to report if it has reported any volume for each indicator anytime within a year. A high completeness does not indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities, or some facilities may not report."
+- Fixed text (include on slide below the interpretation): "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report. A facility is expected to report if it has reported any volume for each indicator anytime within a year. A high completeness does not indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities, or some facilities may not report."
 
 SLIDE 3 - Outliers
 - Title: "Outliers"
@@ -523,7 +523,7 @@ SLIDE 3 - Outliers
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe overall national trends in outliers over time, which indicators have high outlier rates (name them), and which administrative areas have high outlier rates (name them).
-- Fixed footer: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
+- Fixed text (include on slide below the interpretation): "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
 SLIDE 4 - Internal consistency
 - Title: "Internal consistency"
@@ -538,7 +538,7 @@ SLIDE 4 - Internal consistency
     Filters: ratio_type, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe what consistency comparisons are being made, overall patterns across the country, and which areas meet or fail consistency criteria.
-- Fixed footer: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
+- Fixed text (include on slide below the interpretation): "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
 SLIDE 5 - Data quality trends (overall DQA score)
 - Title: "Trends in data quality"
@@ -552,7 +552,7 @@ SLIDE 5 - Data quality trends (overall DQA score)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe how DQA scores have changed across years, overall country performance, and variation across administrative areas.
-- Fixed footer: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
+- Fixed text (include on slide below the interpretation): "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
 SLIDE 6 - Data quality trends (mean DQA score)
 - Title: "Trends in data quality"
@@ -566,7 +566,7 @@ SLIDE 6 - Data quality trends (mean DQA score)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interpretation (left side): In complete sentences describe mean DQA score trends across years, which areas have improving vs declining scores, and overall assessment of data quality trajectory.
-- Fixed footer: "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
+- Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 
 SLIDE 7 - Completeness trends table
 Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")
@@ -575,13 +575,13 @@ Visualization (right side): Create using from_metric with these parameters:
 - type: "from_metric"
 - metricId: "m1-02-02"
   Metric: Proportion of completed records [percent]
-  Values: completeness_flag
-- vizPresetId: "completeness-timeseries" (Completeness over time - YYYYMM)
-  Filters: indicator_common_id
-- Display as a table: month (rows) x indicator (columns) showing completeness %
+  Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+  Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+- vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+  Filters: indicator_common_id, admin_area_2
+- Display as a table: period_id (rows) x indicator_common_id (columns) showing completeness %
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
-- Footer: "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report."
 
 Interpretation (left side): Describe in complete sentences:
 - Summary of completeness trends over the analysis period

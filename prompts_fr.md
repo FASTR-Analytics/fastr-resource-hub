@@ -511,7 +511,7 @@ DIAPOSITIVE 2 - Complétude du rapportage
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales de la complétude au fil du temps, quels indicateurs ont une faible complétude (les nommer) et quelles zones administratives ont une faible complétude (les nommer).
-- Pied de page fixe : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une complétude élevée améliore la fiabilité des données, surtout lorsque la complétude est stable dans le temps. La complétude est définie comme le pourcentage d'établissements rapportant chaque mois par rapport au nombre total d'établissements censés rapporter. Un établissement est censé rapporter s'il a rapporté un volume quelconque pour chaque indicateur à tout moment au cours d'une année. Une complétude élevée n'indique pas que le SNIS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas rapporter. »
 
 DIAPOSITIVE 3 - Valeurs aberrantes
 - Titre : « Valeurs aberrantes »
@@ -525,7 +525,7 @@ DIAPOSITIVE 3 - Valeurs aberrantes
     Filters: indicator_common_id, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances nationales globales des valeurs aberrantes au fil du temps, quels indicateurs ont des taux élevés de valeurs aberrantes (les nommer) et quelles zones administratives ont des taux élevés de valeurs aberrantes (les nommer).
-- Pied de page fixe : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
 DIAPOSITIVE 4 - Cohérence interne
 - Titre : « Cohérence interne »
@@ -540,7 +540,7 @@ DIAPOSITIVE 4 - Cohérence interne
     Filters: ratio_type, admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes quelles comparaisons de cohérence sont effectuées, les schémas généraux à travers le pays et quelles zones respectent ou ne respectent pas les critères de cohérence.
-- Pied de page fixe : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
 DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
 - Titre : « Tendances de la qualité des données »
@@ -554,7 +554,7 @@ DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes comment les scores de l'EQD ont évolué au fil des années, les performances globales du pays et la variation entre les zones administratives.
-- Pied de page fixe : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
 DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 - Titre : « Tendances de la qualité des données »
@@ -568,7 +568,7 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
     Filters: admin_area_2
   - periodFilterOverride: Use the same period as the main report
 - Interprétation (côté gauche) : Décrire en phrases complètes les tendances du score moyen de l'EQD au fil des années, quelles zones ont des scores en amélioration ou en déclin, et l'évaluation globale de la trajectoire de la qualité des données.
-- Pied de page fixe : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 
 DIAPOSITIVE 7 - Tableau des tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)
@@ -577,13 +577,13 @@ Visualization (right side): Create using from_metric with these parameters:
 - type: "from_metric"
 - metricId: "m1-02-02"
   Metric: Proportion of completed records [percent]
-  Values: completeness_flag
-- vizPresetId: "completeness-timeseries" (Completeness over time - YYYYMM)
-  Filters: indicator_common_id
-- Display as a table: month (rows) x indicator (columns) showing completeness %
+  Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+  Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+- vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+  Filters: indicator_common_id, admin_area_2
+- Display as a table: period_id (rows) x indicator_common_id (columns) showing completeness %
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
-- Footer: "Higher completeness improves the reliability of the data, especially when completeness is stable over time. Completeness is defined as the percentage of reporting facilities each month out of the total number of facilities expected to report."
 
 Interprétation (côté gauche) : Décrire en phrases complètes :
 - Un résumé des tendances de complétude sur la période d'analyse
