@@ -4,12 +4,12 @@
 
 ### Vue d'ensemble des données
 ```prompt
-Montre-moi une vue d'ensemble des données : quels indicateurs, régions et périodes temporelles sont disponibles ?
+Montre-moi une vue d'ensemble des données : quels indicateurs, régions et périodes temporelles sont disponibles ? Crée une diapositive résumant la couverture des données.
 ```
 
 ### Dernières mises à jour
 ```prompt
-Quelles sont les mises à jour de données les plus récentes ? Montre-moi la dernière période de rapportage.
+Quelles sont les mises à jour de données les plus récentes ? Montre-moi la dernière période de rapportage et mets en évidence les changements notables avec une visualisation.
 ```
 
 # Qualité des données
@@ -18,17 +18,16 @@ Quelles sont les mises à jour de données les plus récentes ? Montre-moi la de
 
 ### Revue de la qualité
 ```prompt
-Évalue la qualité des données pour [ÉTABLISSEMENT/RÉGION/PÉRIODE]. Examine :
-- La complétude du rapportage
-- La cohérence avec les indicateurs connexes
-- La plausibilité des valeurs
-- La ponctualité du rapportage
-- Les recommandations d'amélioration
+Crée un tableau de bord de la qualité des données pour [RÉGION/PÉRIODE]. Montre-moi :
+- Les tendances de complétude au fil du temps
+- Les signalements de valeurs aberrantes par indicateur
+- Une diapositive de synthèse avec les principaux problèmes de qualité et les recommandations
+Utilise des visualisations pour rendre les tendances claires.
 ```
 
 ### Vérification de la complétude
 ```prompt
-Analyse la complétude des données à travers les établissements et les périodes. Identifie :
+Analyse la complétude des données à travers les établissements et les périodes. Montre-moi une carte thermique de la complétude et identifie :
 - Les établissements avec un rapportage incomplet
 - Les périodes avec des données manquantes
 - Les tendances dans les lacunes de données qui pourraient indiquer des problèmes systématiques
@@ -36,7 +35,7 @@ Analyse la complétude des données à travers les établissements et les pério
 
 ### Détection des valeurs aberrantes
 ```prompt
-Examine les données pour détecter les valeurs aberrantes potentielles ou les problèmes de qualité. Vérifie :
+Examine les données pour détecter les valeurs aberrantes potentielles ou les problèmes de qualité. Montre les valeurs aberrantes visuellement et vérifie :
 - Les valeurs statistiquement inhabituelles
 - Les hausses ou baisses soudaines pouvant indiquer des erreurs de rapportage
 - Les tendances dans les données manquantes
@@ -58,25 +57,23 @@ Valide les données pour [NOM DE L'INDICATEUR] en :
 
 ### Identifier les tendances clés
 ```prompt
-Analyse les indicateurs de santé disponibles et identifie les tendances les plus significatives au cours des 12 derniers mois. Concentre-toi sur :
-- Les indicateurs montrant une amélioration ou un déclin constant
-- Les schémas saisonniers éventuels
-- Les valeurs aberrantes nécessitant une investigation
-
-Présente les résultats dans un format structuré avec des chiffres et des pourcentages précis.
+Analyse les indicateurs de santé clés au cours des 12 derniers mois et crée un jeu de diapositives d'analyse des tendances :
+- Une diapositive par tendance significative avec une visualisation en séries temporelles
+- Une diapositive de synthèse mettant en évidence les 3 principales améliorations et les 3 principales préoccupations
+- Inclus des chiffres précis et des pourcentages de variation sur chaque diapositive
 ```
 
 ### Comparer les régions
 ```prompt
-Compare les performances des indicateurs de santé entre les régions administratives. Mets en évidence :
-- Les régions les plus et les moins performantes
-- Les régions montrant une amélioration ou un déclin significatif
-- Les explications possibles des différences régionales en fonction du contexte disponible
+Compare les performances des indicateurs de santé entre les régions administratives et crée des diapositives comparatives :
+- Un graphique comparant toutes les régions avec des niveaux de performance codés par couleur
+- Un tableau montrant les régions les plus et les moins performantes avec le pourcentage de variation
+- Une diapositive mettant en évidence les régions les plus améliorées et les plus préoccupantes
 ```
 
 ### Analyse période par période
 ```prompt
-Compare les performances de la période actuelle avec celles de la période précédente pour les indicateurs clés. Identifie :
+Compare les performances de la période actuelle avec celles de la période précédente pour les indicateurs clés. Montre la comparaison avec une visualisation mettant en évidence les changements. Identifie :
 - Les indicateurs avec des changements significatifs
 - Si les changements correspondent aux tendances attendues
 - Les domaines nécessitant une attention immédiate
@@ -84,7 +81,7 @@ Compare les performances de la période actuelle avec celles de la période pré
 
 ### Où concentrer les efforts
 ```prompt
-Sur la base des données, quelles régions ou indicateurs devrions-nous prioriser pour le soutien ? Identifie les zones avec des performances en déclin ou des lacunes persistantes.
+Sur la base des données, quelles régions ou indicateurs devrions-nous prioriser pour le soutien ? Identifie les zones avec des performances en déclin ou des lacunes persistantes. Crée une diapositive de synthèse montrant les zones prioritaires.
 ```
 
 # Analyse des indicateurs
@@ -95,48 +92,66 @@ FASTR se concentre sur les indicateurs fondamentaux de SRMNIA-N qui représenten
 
 ### Perturbations des CPN
 ```prompt
-Analyse les CPN1 et CPN4 pour détecter les perturbations. Montre les volumes réels par rapport aux volumes attendus, signale les périodes où les services sont tombés en dessous des niveaux attendus, et identifie les régions les plus touchées.
+Analyse les CPN1 et CPN4 pour détecter les perturbations et crée des diapositives de visualisation montrant :
+- Les volumes réels par rapport aux volumes attendus avec les périodes de perturbation mises en évidence
+- La répartition régionale des zones les plus touchées
+- Une diapositive de synthèse avec les principales conclusions et les services manqués estimés
 ```
 
 ### Services d'accouchement
 ```prompt
-Analyse les tendances des accouchements institutionnels. Compare les volumes réels aux volumes attendus, mets en évidence les périodes de perturbation et montre la variation infranationale.
+Analyse les tendances des accouchements institutionnels et crée des diapositives de visualisation montrant :
+- Les volumes réels par rapport aux volumes attendus avec les périodes de perturbation mises en évidence
+- La variation infranationale entre les régions
+- Une diapositive de synthèse avec les principales conclusions
 ```
 
 ### Soins postnatals
 ```prompt
-Analyse les indicateurs de soins postnatals (CPoN) pour détecter les perturbations. Les visites de soins postnatals suivent-elles l'évolution des accouchements ? Signale tout écart entre les volumes de services attendus et réels.
+Analyse les CPoN pour détecter les perturbations et crée des diapositives de visualisation montrant :
+- Les volumes réels de CPoN par rapport aux volumes attendus avec les périodes de perturbation mises en évidence
+- Si les visites de CPoN suivent l'évolution des accouchements
+- Les écarts entre les volumes de services attendus et réels par région
 ```
 
 ## Santé infantile
 
 ### Couverture vaccinale
 ```prompt
-Analyse le BCG, le Penta1 et le Penta3 pour détecter les perturbations. Montre les volumes réels par rapport aux volumes attendus pour chaque vaccin, identifie les périodes de perturbation et signale les régions avec des lacunes persistantes.
+Analyse le BCG, le Penta1 et le Penta3 pour détecter les perturbations et crée des diapositives de visualisation montrant :
+- Les volumes réels par rapport aux volumes attendus pour chaque vaccin avec les périodes de perturbation mises en évidence
+- Les régions avec des lacunes persistantes
+- Une diapositive de synthèse avec les principales conclusions
 ```
 
 ### Analyse des abandons
 ```prompt
-Compare les schémas d'abandon entre le Penta1 et le Penta3. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué au fil du temps ?
+Compare les schémas d'abandon entre le Penta1 et le Penta3 et montre-les sous forme de visualisation au fil du temps. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué ? Montre la variation régionale.
 ```
 
 ## Services généraux
 
 ### Tendances des visites ambulatoires
 ```prompt
-Analyse les tendances des visites ambulatoires. Compare les volumes réels aux volumes attendus, identifie les périodes de perturbation et montre comment les schémas varient selon les régions.
+Analyse les tendances des visites ambulatoires et crée des diapositives de visualisation montrant :
+- Les volumes réels par rapport aux volumes attendus avec les périodes de perturbation mises en évidence
+- Comment les schémas varient selon les régions
+- Une diapositive de synthèse avec les principales conclusions
 ```
 
 ## Analyse croisée des indicateurs
 
 ### Continuité des services
 ```prompt
-Compare les schémas de perturbation entre les CPN, les accouchements et la vaccination. Les perturbations se produisent-elles en même temps pour tous les services, ou certains indicateurs sont-ils plus affectés que d'autres ?
+Crée une analyse croisée des perturbations entre les services avec :
+- Une visualisation multi-panneaux montrant les perturbations des CPN, des accouchements et de la vaccination alignées par période
+- Une carte thermique montrant la sévérité des perturbations par service et période
+- Diapositive de synthèse : les perturbations sont-elles systémiques ou spécifiques à un service ? Quels services ont récupéré le plus rapidement ?
 ```
 
 ### Comparaison régionale
 ```prompt
-Quelles régions présentent le plus de perturbations pour l'ensemble des indicateurs ? Identifie les zones avec des écarts constants entre les volumes de services réels et attendus.
+Quelles régions présentent le plus de perturbations pour l'ensemble des indicateurs ? Crée une carte thermique montrant la sévérité des perturbations par région et par indicateur. Identifie les zones avec des écarts constants entre les volumes de services réels et attendus.
 ```
 
 # Visualisations
@@ -150,6 +165,7 @@ Crée une visualisation en séries temporelles montrant [NOM DE L'INDICATEUR] au
 - Une ligne de tendance si approprié
 - Des annotations pour les changements significatifs
 - Une désagrégation par [CATÉGORIE] si pertinent
+Optionnellement, ajoute ce graphique à une diapositive avec un titre et un texte d'analyse clé.
 ```
 
 ### Comparaison régionale
@@ -158,6 +174,7 @@ Crée une visualisation comparant [NOM DE L'INDICATEUR] entre les régions. Util
 - Un diagramme en barres pour faciliter la comparaison
 - Un code couleur pour mettre en évidence les niveaux de performance
 - Des étiquettes claires montrant les valeurs réelles
+Optionnellement, ajoute ce graphique à une diapositive avec une interprétation.
 ```
 
 ### Analyse désagrégée
@@ -166,11 +183,12 @@ Crée une visualisation montrant [NOM DE L'INDICATEUR] désagrégé par [ÂGE/SE
 - Une comparaison claire entre les groupes
 - Des pourcentages ou des valeurs absolues selon les besoins
 - Les tendances au fil du temps si pertinent
+Optionnellement, ajoute ce graphique à une diapositive avec une interprétation.
 ```
 
 ### Carte thermique
 ```prompt
-Crée une carte thermique montrant [scores de qualité des données / complétude / performance] à travers les [régions / indicateurs / périodes]. Utilise un code couleur pour mettre en évidence les zones nécessitant une attention particulière.
+Crée une carte thermique montrant [scores de qualité des données / complétude / performance] à travers les [régions / indicateurs / périodes]. Utilise un code couleur pour mettre en évidence les zones nécessitant une attention particulière. Optionnellement, ajoute à une diapositive.
 ```
 
 # Rapports et communication
@@ -179,20 +197,22 @@ Crée une carte thermique montrant [scores de qualité des données / complétud
 
 ### Résumé mensuel
 ```prompt
-Génère un résumé exécutif des indicateurs de santé clés de ce mois. Inclut :
-- Une évaluation globale des performances
-- Les 3 principales réalisations avec des indicateurs précis
-- Les 3 principaux domaines nécessitant une attention avec des recommandations
-- Les actions clés pour les parties prenantes
+Crée une présentation de résumé exécutif mensuel :
+- Diapositive de couverture : « Résumé mensuel des indicateurs de santé - [MOIS ANNÉE] »
+- Réalisations clés : diapositives montrant les principales améliorations avec des visualisations
+- Domaines nécessitant une attention : diapositives montrant les principales préoccupations avec des visualisations
+- Diapositive finale : actions recommandées pour les parties prenantes
+Prépare-la pour une présentation aux cadres dirigeants.
 ```
 
 ### Rapport trimestriel
 ```prompt
-Crée un rapport trimestriel couvrant les 3 derniers mois. Inclut :
-- Les progrès vers les objectifs annuels
-- La comparaison avec le trimestre précédent
-- Les points saillants de la performance régionale
-- Les domaines prioritaires recommandés pour le prochain trimestre
+Crée une présentation de rapport trimestriel couvrant les 3 derniers mois :
+- Diapositive de couverture : « Rapport trimestriel de santé - [TRIMESTRE ANNÉE] »
+- Progrès vers les objectifs annuels avec des visualisations
+- Comparaison avec le trimestre précédent
+- Points saillants de la performance régionale avec des graphiques
+- Diapositive finale : domaines prioritaires recommandés pour le prochain trimestre
 ```
 
 ## Communication avec les parties prenantes
@@ -210,17 +230,36 @@ Crée des points de discussion pour présenter ces résultats aux [parties prena
 - Les actions recommandées
 ```
 
+# Flux de travail
+
+## Actions rapides
+
+### D'une analyse à une diapositive
+```prompt
+J'ai trouvé quelque chose d'intéressant : [DESCRIPTION]. Crée une diapositive montrant cette analyse avec une visualisation appropriée, un titre clair énonçant la conclusion, et des chiffres à l'appui.
+```
+
+### Jeu de diapositives rapide
+```prompt
+J'ai besoin d'un jeu rapide de 5 diapositives sur [INDICATEUR/SUJET] pour [PUBLIC]. Inclus : la situation actuelle, la tendance au fil du temps, la comparaison régionale, le contexte de qualité des données, et les recommandations.
+```
+
+### Récit de données
+```prompt
+Raconte-moi l'histoire des données sur [SUJET]. Guide-moi à travers les principales conclusions avec des visualisations, puis compile les plus importantes dans un jeu de diapositives.
+```
+
 # Méthodologie
 
 ## Comprendre les indicateurs
 
 ### Expliquer un indicateur
 ```prompt
-Explique comment [NOM DE L'INDICATEUR] est calculé. Inclut :
+Explique comment [NOM DE L'INDICATEUR] est calculé et montre-moi :
 - Les définitions du numérateur et du dénominateur
-- Les sources de données
-- Les valeurs ou cibles habituelles
-- Les pièges courants d'interprétation
+- Une visualisation montrant les plages de valeurs habituelles et la performance actuelle
+- Les sources de données et les pièges courants d'interprétation
+Optionnellement, crée une diapositive de formation expliquant cet indicateur.
 ```
 
 ### Comparer des indicateurs

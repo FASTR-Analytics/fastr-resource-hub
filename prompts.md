@@ -4,12 +4,12 @@
 
 ### Dataset Overview
 ```prompt
-Show me an overview of the data: what indicators, regions, and time periods are available?
+Show me an overview of the data: what indicators, regions, and time periods are available? Create a summary slide showing data coverage.
 ```
 
 ### What's New
 ```prompt
-What are the most recent data updates? Show me the latest reporting period.
+What are the most recent data updates? Show me the latest reporting period and highlight any notable changes with a visualization.
 ```
 
 # Data Quality
@@ -18,17 +18,16 @@ What are the most recent data updates? Show me the latest reporting period.
 
 ### Quality Review
 ```prompt
-Assess the quality of data for [FACILITY/REGION/TIME PERIOD]. Examine:
-- Completeness of reporting
-- Consistency with related indicators
-- Plausibility of values
-- Timeliness of reporting
-- Recommendations for improvement
+Create a data quality dashboard for [REGION/TIME PERIOD]. Show me:
+- Completeness trends over time
+- Outlier flags by indicator
+- A summary slide with key quality issues and recommendations
+Use visualizations to make patterns clear.
 ```
 
 ### Completeness Check
 ```prompt
-Analyze data completeness across facilities and time periods. Identify:
+Analyze data completeness across facilities and time periods. Show me a completeness heatmap and identify:
 - Facilities with incomplete reporting
 - Time periods with missing data
 - Patterns in data gaps that might indicate systematic issues
@@ -36,7 +35,7 @@ Analyze data completeness across facilities and time periods. Identify:
 
 ### Outlier Detection
 ```prompt
-Review the data for potential outliers or data quality issues. Check for:
+Review the data for potential outliers or data quality issues. Show outliers visually and check for:
 - Values that are statistically unusual
 - Sudden jumps or drops that may indicate reporting errors
 - Missing data patterns
@@ -58,25 +57,23 @@ Validate the data for [METRIC NAME] by:
 
 ### Identify Key Trends
 ```prompt
-Analyze the available health metrics and identify the most significant trends over the past 12 months. Focus on:
-- Metrics showing consistent improvement or decline
-- Any seasonal patterns
-- Outliers that warrant investigation
-
-Present findings in a structured format with specific numbers and percentages.
+Analyze key health metrics over the past 12 months and create a trend analysis deck:
+- One slide per significant trend with a time series visualization
+- A summary slide highlighting top 3 improvements and top 3 concerns
+- Include specific numbers and percentage changes on each slide
 ```
 
 ### Compare Regions
 ```prompt
-Compare health indicator performance across administrative regions. Highlight:
-- Top and bottom performing regions
-- Regions showing significant improvement or decline
-- Possible explanations for regional differences based on available context
+Compare health indicator performance across administrative regions and create comparison slides:
+- A chart comparing all regions with color-coded performance levels
+- A table showing top and bottom performers with percent change
+- A slide highlighting most improved and most concerning regions
 ```
 
 ### Period-over-Period Analysis
 ```prompt
-Compare current period performance against the previous period for key indicators. Identify:
+Compare current period performance against the previous period for key indicators. Show the comparison with a visualization highlighting changes. Identify:
 - Indicators with significant changes
 - Whether changes align with expected trends
 - Areas requiring immediate attention
@@ -84,7 +81,7 @@ Compare current period performance against the previous period for key indicator
 
 ### Where to Focus
 ```prompt
-Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining performance or persistent gaps.
+Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining performance or persistent gaps. Create a summary slide showing the priority areas.
 ```
 
 # Indicator Analysis
@@ -95,48 +92,66 @@ FASTR focuses on core RMNCAH-N indicators that represent key points along the he
 
 ### ANC Disruptions
 ```prompt
-Analyze ANC1 and ANC4 for disruptions. Show actual vs expected volumes, flag periods where services fell below expected levels, and identify which regions are most affected.
+Analyze ANC1 and ANC4 for disruptions and create visualization slides showing:
+- Actual vs expected volumes with disruption periods highlighted
+- Regional breakdown of which areas are most affected
+- A summary slide with key findings and estimated missed services
 ```
 
 ### Delivery Services
 ```prompt
-Analyze institutional delivery trends. Compare actual volumes to expected, highlight any disruption periods, and show subnational variation.
+Analyze institutional delivery trends and create visualization slides showing:
+- Actual vs expected volumes with disruption periods highlighted
+- Subnational variation across regions
+- A summary slide with key findings
 ```
 
 ### Postnatal Care
 ```prompt
-Analyze PNC1 for disruptions. Are postnatal care visits tracking with deliveries? Flag any gaps between expected and actual service volumes.
+Analyze PNC for disruptions and create visualization slides showing:
+- PNC actual vs expected volumes with disruption periods highlighted
+- Whether PNC visits are tracking with deliveries
+- Gaps between expected and actual service volumes by region
 ```
 
 ## Child Health
 
 ### Immunization Coverage
 ```prompt
-Analyze BCG, Penta1, and Penta3 for disruptions. Show actual vs expected for each vaccine, identify disruption periods, and flag regions with persistent gaps.
+Analyze BCG, Penta1, and Penta3 for disruptions and create visualization slides showing:
+- Actual vs expected for each vaccine with disruption periods highlighted
+- Regions with persistent gaps
+- A summary slide with key findings
 ```
 
 ### Dropout Analysis
 ```prompt
-Compare Penta1 to Penta3 dropout patterns. Are children completing the vaccine series? How has dropout changed over time?
+Compare Penta1 to Penta3 dropout patterns and show as a visualization over time. Are children completing the vaccine series? How has dropout changed? Show regional variation.
 ```
 
 ## General Services
 
 ### Outpatient Trends
 ```prompt
-Analyze outpatient visit trends. Compare actual vs expected volumes, identify disruption periods, and show how patterns vary across regions.
+Analyze outpatient visit trends and create visualization slides showing:
+- Actual vs expected volumes with disruption periods highlighted
+- How patterns vary across regions
+- A summary slide with key findings
 ```
 
 ## Cross-Indicator
 
 ### Service Continuity
 ```prompt
-Compare disruption patterns across ANC, delivery, and immunization. Are disruptions happening at the same time across services, or are some indicators more affected than others?
+Create a cross-service disruption analysis with:
+- Multi-panel visualization showing ANC, delivery, and immunization disruptions aligned by time
+- A heatmap showing disruption severity by service and time period
+- Summary slide: Are disruptions systemic or service-specific? Which services recovered fastest?
 ```
 
 ### Regional Comparison
 ```prompt
-Which regions show the most disruptions across indicators? Identify areas with consistent gaps between actual and expected service volumes.
+Which regions show the most disruptions across indicators? Create a heatmap showing disruption severity by region and indicator. Identify areas with consistent gaps between actual and expected service volumes.
 ```
 
 # Visualizations
@@ -150,6 +165,7 @@ Create a time series visualization showing [METRIC NAME] over the past [TIME PER
 - Trend line if appropriate
 - Annotations for significant changes
 - Disaggregation by [CATEGORY] if relevant
+Optionally add this chart to a slide with a title and key insight text.
 ```
 
 ### Regional Comparison
@@ -158,6 +174,7 @@ Create a visualization comparing [METRIC NAME] across regions. Use:
 - A bar chart for easy comparison
 - Color coding to highlight performance levels
 - Clear labels showing actual values
+Optionally add this chart to a slide with interpretation.
 ```
 
 ### Disaggregated Analysis
@@ -166,11 +183,12 @@ Create a visualization showing [METRIC NAME] disaggregated by [AGE/SEX/OTHER]. D
 - Clear comparison between groups
 - Percentage or absolute values as appropriate
 - Trends over time if relevant
+Optionally add this chart to a slide with interpretation.
 ```
 
 ### Heatmap
 ```prompt
-Create a heatmap showing [DQ scores / completeness / performance] across [regions / indicators / time periods]. Use color coding to highlight areas needing attention.
+Create a heatmap showing [DQ scores / completeness / performance] across [regions / indicators / time periods]. Use color coding to highlight areas needing attention. Optionally add to a slide.
 ```
 
 # Reports & Communication
@@ -179,20 +197,22 @@ Create a heatmap showing [DQ scores / completeness / performance] across [region
 
 ### Monthly Summary
 ```prompt
-Generate an executive summary of this month's key health indicators. Include:
-- Overall performance assessment
-- Top 3 achievements with specific metrics
-- Top 3 areas needing attention with recommendations
-- Key action items for stakeholders
+Create a monthly executive summary presentation:
+- Cover slide: "Monthly Health Indicators Summary - [MONTH YEAR]"
+- Key achievements: slides showing top improvements with visualizations
+- Areas needing attention: slides showing top concerns with visualizations
+- Final slide: recommended actions for stakeholders
+Make it ready to present to senior leadership.
 ```
 
 ### Quarterly Report
 ```prompt
-Create a quarterly report covering the past 3 months. Include:
-- Progress toward annual targets
+Create a quarterly report presentation covering the past 3 months:
+- Cover slide: "Quarterly Health Report - [QUARTER YEAR]"
+- Progress toward annual targets with visualizations
 - Comparison with previous quarter
-- Regional performance highlights
-- Recommended focus areas for next quarter
+- Regional performance highlights with charts
+- Final slide: recommended focus areas for next quarter
 ```
 
 ## Stakeholder Communication
@@ -210,17 +230,36 @@ Create talking points for presenting these findings to [stakeholders]. Include:
 - Recommended actions
 ```
 
+# Workflows
+
+## Quick Actions
+
+### Insight to Slide
+```prompt
+I found something interesting: [DESCRIPTION]. Create a slide showing this insight with an appropriate visualization, a clear title that states the finding, and supporting numbers.
+```
+
+### Quick Deck
+```prompt
+I need a quick 5-slide deck on [INDICATOR/TOPIC] for [AUDIENCE]. Include: current status, trend over time, regional comparison, data quality context, and recommendations.
+```
+
+### Data Story
+```prompt
+Tell me the data story about [TOPIC]. Walk me through the key findings with visualizations, then compile the most important ones into a presentation deck.
+```
+
 # Methodology
 
 ## Understanding Metrics
 
 ### Explain Indicator
 ```prompt
-Explain how [METRIC NAME] is calculated. Include:
+Explain how [METRIC NAME] is calculated and show me:
 - Numerator and denominator definitions
-- Data sources
-- Typical values or targets
-- Common interpretation pitfalls
+- A visualization showing typical value ranges and current performance
+- Data sources and common interpretation pitfalls
+Optionally create a training slide explaining this indicator.
 ```
 
 ### Compare Indicators
