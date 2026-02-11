@@ -261,7 +261,7 @@ STEP 1: ASK THE USER FOR:
 2. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
 3. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
 
-The analysis generation date will be set automatically to the current month and year.
+The analysis generation date is February 2026.
 
 When user provides the analysis time period, convert to period_id format:
 - Start date becomes min value: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
@@ -418,9 +418,9 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
   Optional disaggregations: year, month, period_id
-- Display as a heatmap table: subnational areas (rows) x indicators (columns), showing the percentage difference for the most recent 6 months of the analysis period
-- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
+- No preset — this metric auto-disaggregates by admin_area_2 and indicator_common_id, rendering as a table of subnational areas (rows) x indicators (columns)
 - periodFilterOverride: Filter to the most recent 6 months of the analysis period
+- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
 - Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
 
 Interpretation (left side): Describe in complete sentences:
@@ -440,10 +440,9 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
   Optional disaggregations: year, month, period_id
-- vizPresetId: "disruption-chart" (or appropriate preset for subnational disruption charts)
+- No preset — the metric auto-disaggregates by indicator_common_id, showing all indicators as small multiples
 - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
 - filterOverrides: Filter on admin_area_2 to show only this specific subnational area
-- Display as a grid of disruption charts for ALL indicators (small multiples)
 - periodFilterOverride: Use the same period as the main report
 
 Interpretation (left side): Describe in complete sentences:
