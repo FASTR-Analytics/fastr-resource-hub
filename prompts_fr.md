@@ -467,14 +467,14 @@ Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simpl
     Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
   - vizPresetId: "disruption-chart"
   - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la zone] »
-  - Configuration des désagrégations :
-    - indicator_common_id affiché comme : cells (panneaux/facettes séparés pour chaque indicateur)
-    - admin_area_2 affiché comme : replicant (crée des graphiques séparés par zone)
-  - selectedReplicant: La valeur admin_area_2 pour cette zone infranationale spécifique
-  - filterOverrides: Filtrer sur indicator_common_id pour inclure tous les indicateurs du rapport
-  - periodFilterOverride: Utiliser la même période que le rapport principal
+  - Disaggregation setup:
+    - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
+    - admin_area_2 displayed as: replicant (creates separate charts per area)
+  - selectedReplicant: The admin_area_2 value for this specific subnational area
+  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
+  - periodFilterOverride: Use the same period as the main report
 
-Cette approche utilise la réplication — une seule configuration de visualisation avec admin_area_2 comme dimension de réplication. Pour chaque diapositive, changer le selectedReplicant pour le district/zone cible. NE PAS utiliser filterOverrides sur admin_area_2.
+This approach uses replication — one visualization configuration with admin_area_2 as the replicant dimension. For each slide, change the selectedReplicant to the target district/area. Do NOT use filterOverrides on admin_area_2.
 
 Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
 ```
