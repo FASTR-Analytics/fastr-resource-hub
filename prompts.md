@@ -441,18 +441,16 @@ STRUCTURE:
 SLIDE 1 - Annex header slide
 - Title: "Annex 1: Subnational service utilization disruptions"
 
-SLIDE 2 - Subnational summary table
+SLIDE 2 - Subnational summary
 Title: Write an analytical headline summarizing the key subnational finding (e.g., "Large county-level disparities in performance highlight the need to understand local drivers of both service gains and gaps")
 
-Create a content slide with a data table showing:
-- Rows: each subnational area
-- Columns: each indicator (use short labels)
-- Values: percentage difference between actual and expected service volumes for the most recent 6 months of the analysis period
-- Use get_metric_data with metricId "m3-03-02" to retrieve the data, then build the table on the slide
-- Color coding: Green = more than 10% above expected | White = -10% to +10% | Red = more than 10% below expected
-- Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus). Discrepancies greater than ±10% are highlighted in red or green."
+Write a text summary covering:
+- Which subnational areas show the strongest disruptions across multiple indicators
+- Which areas show consistent surpluses
+- Whether performance gaps are concentrated in specific areas or spread across the country
+- Any notable patterns (e.g., urban vs rural differences, regional clusters)
 
-Below the table, add 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
+Base this summary on what is visible in the platform data. Keep it concise — 4-6 sentences maximum.
 
 SLIDES 3+ - Subnational area profiles
 For EACH subnational area in the platform, create a simple slide with:
@@ -469,10 +467,12 @@ For EACH subnational area in the platform, create a simple slide with:
     - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
     - admin_area_2 displayed as: replicant (creates separate charts per area)
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
+  - filterOverrides:
+    - Filter on indicator_common_id to include all indicators from the report
+    - Filter on admin_area_2 to show only the area matching the slide title
   - periodFilterOverride: Use the same period as the main report
 
-This approach uses replication — one visualization configuration with admin_area_2 as the replicant dimension. For each slide, change the selectedReplicant to the target district/area. Do NOT use filterOverrides on admin_area_2.
+This approach uses replication with admin_area_2 as the replicant dimension. For each slide: set selectedReplicant to the target area AND add a filterOverride on admin_area_2 for that same area.
 
 Keep these slides clean — area name and visualization only, no interpretation text.
 ```

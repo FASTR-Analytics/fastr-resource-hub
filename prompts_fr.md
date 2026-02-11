@@ -446,15 +446,13 @@ DIAPOSITIVE 1 - Diapositive d'en-tête de l'annexe
 DIAPOSITIVE 2 - Tableau synthétique infranational
 Titre : Rédiger un titre analytique résumant la principale conclusion infranationale (par exemple « D'importantes disparités au niveau des comtés en matière de performance soulignent la nécessité de comprendre les facteurs locaux des gains et des lacunes dans les services »)
 
-Créer une diapositive de contenu avec un tableau de données montrant :
-- Lignes : chaque zone infranationale
-- Colonnes : chaque indicateur (utiliser des libellés courts)
-- Valeurs : pourcentage de différence entre les volumes de services réels et attendus pour les 6 derniers mois de la période d'analyse
-- Utiliser get_metric_data avec metricId « m3-03-02 » pour récupérer les données, puis construire le tableau sur la diapositive
-- Code couleur : Vert = plus de 10 % au-dessus de l'attendu | Blanc = -10 % à +10 % | Rouge = plus de 10 % en dessous de l'attendu
-- Pied de page : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). Les écarts supérieurs à ±10 % sont surlignés en rouge ou en vert. »
+Rédiger un résumé textuel couvrant :
+- Quelles zones infranationales présentent les perturbations les plus fortes pour plusieurs indicateurs
+- Quelles zones montrent des surplus constants
+- Si les écarts de performance sont concentrés dans des zones spécifiques ou répartis dans tout le pays
+- Tout schéma notable (par exemple différences urbain/rural, clusters régionaux)
 
-Sous le tableau, ajouter 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
+Baser ce résumé sur ce qui est visible dans les données de la plateforme. Rester concis — 4 à 6 phrases maximum.
 
 DIAPOSITIVES 3+ - Profils par zone infranationale
 Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simple avec :
@@ -471,10 +469,12 @@ Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simpl
     - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
     - admin_area_2 displayed as: replicant (creates separate charts per area)
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
+  - filterOverrides:
+    - Filter on indicator_common_id to include all indicators from the report
+    - Filter on admin_area_2 to show only the area matching the slide title
   - periodFilterOverride: Use the same period as the main report
 
-This approach uses replication — one visualization configuration with admin_area_2 as the replicant dimension. For each slide, change the selectedReplicant to the target district/area. Do NOT use filterOverrides on admin_area_2.
+This approach uses replication with admin_area_2 as the replicant dimension. For each slide: set selectedReplicant to the target area AND add a filterOverride on admin_area_2 for that same area.
 
 Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
 ```
