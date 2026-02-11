@@ -512,6 +512,7 @@ STRUCTURE :
 
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Annexe [1 ou 2] : Tendances de la complétude du rapportage des indicateurs »
+- Note : Si l'utilisateur opte pour les diapositives supplémentaires à l'Étape 2, mettre à jour ce titre en « Annexe [1 ou 2] : Évaluation de la qualité des données »
 
 DIAPOSITIVE 2 - Tendances de complétude
 Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple « La complétude est >95 % pour la plupart des indicateurs en 2025, renforçant la confiance dans les résultats sur les perturbations »)

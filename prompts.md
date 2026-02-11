@@ -510,6 +510,7 @@ STEP 1: GENERATE COMPLETENESS SUMMARY
 
 SLIDE 1 - Cover slide
 - Title: "Annex [1 or 2]: Trends in Indicator Reporting Completeness"
+- Note: If the user opts for additional DQ slides in Step 2, update this title to "Annex [1 or 2]: Data Quality Assessment"
 
 SLIDE 2 - Completeness trends
 Title: Write an analytical headline about completeness trends (e.g., "Completeness is >95% for most indicators in 2025, strengthening confidence in disruption findings")
