@@ -495,7 +495,7 @@ If you need additional context on how FASTR calculates data quality metrics, fet
 DATA QUALITY METRICS:
 Use get_available_metrics to confirm available metrics and their preset visualizations. The data quality metrics used in this annex are:
 - m1-01-01: Proportion of outliers [percent] — preset: outlier-table — filters: indicator_common_id, admin_area_2
-- m1-02-02: Proportion of completed records [percent] — presets: completeness-table (by region), completeness-timeseries (over time) — filters: indicator_common_id, admin_area_2
+- m1-02-02: Proportion of completed records [percent] — preset: completeness-table — filters: indicator_common_id, admin_area_2. ALWAYS use completeness-table preset for this metric (do NOT use completeness-timeseries)
 - m1-03-01: Proportion of sub-national areas meeting consistency criteria [percent] — preset: consistency-table — filters: ratio_type, admin_area_2
 - m1-04-01: Proportion of facilities with adequate data quality [percent] — preset: dqa-score-table — filters: admin_area_2
 - m1-04-02: Average data quality score across facilities [percent] — preset: mean-dqa-table — filters: admin_area_2
