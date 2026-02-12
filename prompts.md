@@ -1096,9 +1096,9 @@ TABLES AND DQ SLIDES
 - Are methodology text blocks preserved accurately — not paraphrased or watered down?
 
 4. Present your findings for this slide — list any issues found and suggest fixes
-5. Use ask_user_questions to ask: "Slide [N]: [summary of findings]. How would you like to proceed?" with options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
-
-If no issues on a slide, use ask_user_questions: "Slide [N]: No issues found. Continue?" with options: "Next slide", "Stop review here"
+5. ALWAYS use the ask_user_questions tool (not a text question) to let the user proceed. Never ask "Ready to proceed?" as plain text — always call ask_user_questions with selectable options:
+   - If issues found: "Slide [N]: [number] issues found. How would you like to proceed?" → options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
+   - If no issues: "Slide [N]: No issues found." → options: "Next slide", "Stop review here"
 
 After the last slide, confirm: "All slides reviewed."
 ```
@@ -1137,9 +1137,9 @@ WORD COUNT
 - Is each text block within the target range (50-100 words, max 180)?
 
 Present your findings for this slide — list any issues and suggest fixes.
-Use ask_user_questions to ask: "Slide [N]: [summary of findings]. How would you like to proceed?" with options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
-
-If no issues on a slide, use ask_user_questions: "Slide [N]: No issues found. Continue?" with options: "Next slide", "Stop review here"
+ALWAYS use the ask_user_questions tool (not a text question) to let the user proceed. Never ask "Ready to proceed?" as plain text — always call ask_user_questions with selectable options:
+- If issues found: "Slide [N]: [number] issues found. How would you like to proceed?" → options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
+- If no issues: "Slide [N]: No issues found." → options: "Next slide", "Stop review here"
 
 After the last slide, confirm: "All slides reviewed."
 ```
