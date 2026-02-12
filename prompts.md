@@ -304,10 +304,11 @@ Generate a FASTR Disruptions Report.
 Always check if the user is in editing_slide_deck mode. If the user is not in this mode, ask them to either create a new slide deck or open an existing one.
 
 STEP 1: ASK THE USER
+You should already know which country this is from the platform context. If you don't know what country this is, use ask_user_questions to ask.
+
 Use ask_user_questions to ask each of the following one at a time:
-1. "Which country is this report for?"
-2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
-3. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
+1. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
+2. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
 
 The analysis generation date is February 2026.
 
@@ -349,6 +350,7 @@ REPORT STANDARDS:
 3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
+6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
 NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
@@ -691,11 +693,12 @@ Generate a FASTR Subnational Disruptions Report. This report focuses on a single
 Always check if the user is in editing_slide_deck mode. If the user is not in this mode, ask them to either create a new slide deck or open an existing one.
 
 STEP 1: ASK THE USER
+You should already know which country this is from the platform context. If you don't know what country this is, use ask_user_questions to ask.
+
 Use ask_user_questions to ask each of the following one at a time:
-1. "Which country is this report for?"
-2. "Which subnational area should this report focus on? (e.g., Bauchi State, Bomi County, Région du Centre)"
-3. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
-4. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
+1. "Which subnational area should this report focus on? (e.g., Bauchi State, Bomi County, Région du Centre)"
+2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
+3. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
 
 The analysis generation date is February 2026.
 
@@ -750,6 +753,7 @@ REPORT STANDARDS:
 3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
+6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
 NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:

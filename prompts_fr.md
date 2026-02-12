@@ -304,10 +304,11 @@ Génère un rapport FASTR sur les perturbations.
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisateur n'est pas dans ce mode, lui demander de créer un nouveau slide deck ou d'en ouvrir un existant.
 
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
+Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la plateforme. Si vous ne savez pas de quel pays il s'agit, utiliser ask_user_questions pour demander.
+
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
-1. « Pour quel pays est ce rapport ? »
-2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
-3. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
+1. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
+2. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
 
 La date de génération de l'analyse est février 2026.
 
@@ -351,6 +352,7 @@ NORMES DU RAPPORT :
 3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
+6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
 
 CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
 Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
@@ -693,11 +695,12 @@ Génère un rapport FASTR sur les perturbations au niveau infranational. Ce rapp
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisateur n'est pas dans ce mode, lui demander de créer un nouveau slide deck ou d'en ouvrir un existant.
 
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
+Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la plateforme. Si vous ne savez pas de quel pays il s'agit, utiliser ask_user_questions pour demander.
+
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
-1. « Pour quel pays est ce rapport ? »
-2. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple État de Bauchi, Comté de Bomi, Région du Centre) »
-3. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
-4. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
+1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple État de Bauchi, Comté de Bomi, Région du Centre) »
+2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
+3. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
 
 La date de génération de l'analyse est février 2026.
 
@@ -752,6 +755,7 @@ NORMES DU RAPPORT :
 3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
+6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
 
 CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
 Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
