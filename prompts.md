@@ -334,7 +334,7 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
 4. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
-5. If mortality indicators exist (e.g., maternal_deaths, neonatal_deaths, stillbirths), ask about them separately with ask_user_questions after the main groupings are confirmed: "I also found mortality indicators: [list]. These involve low event counts and need different interpretation (increases = bad). Would you like to: (a) include them in a separate Mortality group, (b) exclude them from the report, or (c) add them to an existing group?"
+5. After the main groupings are confirmed, check for mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths). Always use ask_user_questions to ask: "The platform has these mortality indicators: [list]. Mortality data involves low event counts and different interpretation (increases = bad). Would you like to include them in the report or exclude them?"
 
 Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -347,7 +347,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
+3. Keep slide text concise — target 50-100 words per slide (max 180 words), use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
@@ -437,7 +437,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side — 120 words max): Analyze the data shown in the visualization. Use bullet points:
+Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points:
 - For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
 - For EACH indicator in the group: when surpluses occurred, and approximate magnitude
 - Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
@@ -714,9 +714,17 @@ Record for use throughout the report:
 - AREA_LEVEL: the admin level column (e.g., "admin_area_2" or "admin_area_3")
 - AREA_VALUE: the exact area name as it appears in the platform
 
-Use get_available_metrics to find the disruption metric and single-area chart preset for AREA_LEVEL. Store as AREA_METRIC_ID and AREA_PRESET_ID. For admin_area_2, these are typically "m3-03-01" and "disruption-chart-single-admin-area-2".
+Use get_available_metrics to find the disruption metric and single-area chart preset for AREA_LEVEL. Store as AREA_METRIC_ID and AREA_PRESET_ID.
 
-Also check if a disruption metric exists at the next admin level down (for the optional sub-area breakdown in Step 4). If found, store as SUB_AREA_METRIC_ID and SUB_AREA_PRESET_ID.
+Common metric mappings:
+- admin_area_2: metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
+- admin_area_3: metricId "m3-04-01", vizPresetId "disruption-chart-single-admin-area-3"
+
+Also check if a disruption metric exists at the next admin level down (for the optional sub-area breakdown in Step 4). If found, store as SUB_AREA_METRIC_ID, SUB_AREA_PRESET_ID, and SUB_AREA_TABLE_METRIC_ID:
+- If AREA_LEVEL is admin_area_2, the sub-area metrics are:
+  - SUB_AREA_METRIC_ID: "m3-04-01" (single district chart)
+  - SUB_AREA_PRESET_ID: "disruption-chart-single-admin-area-3"
+  - SUB_AREA_TABLE_METRIC_ID: "m3-04-02" with vizPresetId "disruption-differences-table-single-admin-area-2-multiple-admin-area-3" (summary table of all districts within the area)
 
 If no disruption metric exists at AREA_LEVEL, inform the user and suggest alternatives.
 
@@ -737,7 +745,7 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
 4. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
-5. If mortality indicators exist (e.g., maternal_deaths, neonatal_deaths, stillbirths), ask about them separately with ask_user_questions after the main groupings are confirmed: "I also found mortality indicators: [list]. These involve low event counts and need different interpretation (increases = bad). Would you like to: (a) include them in a separate Mortality group, (b) exclude them from the report, or (c) add them to an existing group?"
+5. After the main groupings are confirmed, check for mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths). Always use ask_user_questions to ask: "The platform has these mortality indicators: [list]. Mortality data involves low event counts and different interpretation (increases = bad). Would you like to include them in the report or exclude them?"
 
 Each confirmed group will become ONE slide in the analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -750,7 +758,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
+3. Keep slide text concise — target 50-100 words per slide (max 180 words), use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
@@ -836,7 +844,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side — 120 words max): Analyze the data shown in the visualization. Use bullet points:
+Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points:
 - For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
 - For EACH indicator in the group: when surpluses occurred, and approximate magnitude
 - Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
@@ -856,6 +864,21 @@ If the user says yes and sub-area metrics are available:
 
 SECTION HEADER SLIDE:
 - Title: "Sub-area Service Utilization Profiles within [AREA NAME]"
+
+SUB-AREA SUMMARY TABLE (if SUB_AREA_TABLE_METRIC_ID was found in Step 2):
+- Title: Write an analytical headline summarizing the key sub-area finding
+- Visualization: Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: SUB_AREA_TABLE_METRIC_ID (e.g., "m3-04-02")
+  - vizPresetId: "disruption-differences-table-single-admin-area-2-multiple-admin-area-3"
+  - selectedReplicant: AREA_VALUE
+  - filterOverrides:
+    - col: "indicator_common_id"
+    - vals: [all indicator codes from the report]
+    - ALSO filter on AREA_LEVEL column to scope to AREA_VALUE
+  - periodFilterOverride: Use the same period as the main report
+- Interpretation (left side): 2-3 bullet points summarizing which sub-areas show consistent surpluses or shortfalls.
+- Add a text block at the bottom: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus)."
 
 SUB-AREA SLIDES (one per sub-area):
 For EACH sub-area within [AREA NAME], create a simple slide with:

@@ -336,7 +336,7 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Nouveau-nés : si des indicateurs spécifiques aux nouveau-nés existent (par exemple newborn_kmc, newborn_underweight, breastfeeding_early)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
 4. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
-5. Si des indicateurs de mortalité existent (par exemple maternal_deaths, neonatal_deaths, stillbirths), poser la question séparément avec ask_user_questions après confirmation des regroupements principaux : « J'ai également trouvé des indicateurs de mortalité : [liste]. Ceux-ci impliquent des comptages d'événements faibles et nécessitent une interprétation différente (les augmentations = négatif). Souhaitez-vous : (a) les inclure dans un groupe Mortalité séparé, (b) les exclure du rapport, ou (c) les ajouter à un groupe existant ? »
+5. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse nationale, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -349,7 +349,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
+3. Garder le texte des diapositives concis — cible 50-100 mots par diapositive (max 180 mots), utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
@@ -439,7 +439,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche — 120 mots max) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
+Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
 - Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
 - Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
 - Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
@@ -716,9 +716,17 @@ Enregistrer pour utilisation tout au long du rapport :
 - AREA_LEVEL : la colonne du niveau administratif (par exemple "admin_area_2" ou "admin_area_3")
 - AREA_VALUE : le nom exact de la zone tel qu'il apparaît dans la plateforme
 
-Utiliser get_available_metrics pour trouver l'indicateur de perturbation et le préréglage de graphique pour zone unique au AREA_LEVEL. Stocker comme AREA_METRIC_ID et AREA_PRESET_ID. Pour admin_area_2, il s'agit généralement de "m3-03-01" et "disruption-chart-single-admin-area-2".
+Utiliser get_available_metrics pour trouver l'indicateur de perturbation et le préréglage de graphique pour zone unique au AREA_LEVEL. Stocker comme AREA_METRIC_ID et AREA_PRESET_ID.
 
-Vérifier également si un indicateur de perturbation existe au niveau administratif suivant (pour la ventilation optionnelle par sous-zone à l'Étape 4). Si trouvé, stocker comme SUB_AREA_METRIC_ID et SUB_AREA_PRESET_ID.
+Correspondances courantes des indicateurs :
+- admin_area_2 : metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
+- admin_area_3 : metricId "m3-04-01", vizPresetId "disruption-chart-single-admin-area-3"
+
+Vérifier également si un indicateur de perturbation existe au niveau administratif suivant (pour la ventilation optionnelle par sous-zone à l'Étape 4). Si trouvé, stocker comme SUB_AREA_METRIC_ID, SUB_AREA_PRESET_ID et SUB_AREA_TABLE_METRIC_ID :
+- Si AREA_LEVEL est admin_area_2, les indicateurs de sous-zone sont :
+  - SUB_AREA_METRIC_ID : "m3-04-01" (graphique par district unique)
+  - SUB_AREA_PRESET_ID : "disruption-chart-single-admin-area-3"
+  - SUB_AREA_TABLE_METRIC_ID : "m3-04-02" avec vizPresetId "disruption-differences-table-single-admin-area-2-multiple-admin-area-3" (tableau récapitulatif de tous les districts au sein de la zone)
 
 Si aucun indicateur de perturbation n'existe au AREA_LEVEL, en informer l'utilisateur et suggérer des alternatives.
 
@@ -739,7 +747,7 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Services généraux / Consultations externes : visites ambulatoires (par exemple opd, opd_under5, opd_over5)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple Nutrition, VIH/TB, MNT, Mortalité)
 4. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
-5. Si des indicateurs de mortalité existent (par exemple maternal_deaths, neonatal_deaths, stillbirths), poser la question séparément avec ask_user_questions après confirmation des regroupements principaux : « J'ai également trouvé des indicateurs de mortalité : [liste]. Ceux-ci impliquent des comptages d'événements faibles et nécessitent une interprétation différente (les augmentations = négatif). Souhaitez-vous : (a) les inclure dans un groupe Mortalité séparé, (b) les exclure du rapport, ou (c) les ajouter à un groupe existant ? »
+5. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -752,7 +760,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
+3. Garder le texte des diapositives concis — cible 50-100 mots par diapositive (max 180 mots), utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
@@ -838,7 +846,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche — 120 mots max) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
+Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
 - Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
 - Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
 - Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
@@ -858,6 +866,21 @@ Si l'utilisateur accepte et que les indicateurs de sous-zone sont disponibles :
 
 DIAPOSITIVE D'EN-TÊTE DE SECTION :
 - Titre : « Profils d'utilisation des services par sous-zone au sein de [NOM DE LA ZONE] »
+
+TABLEAU RÉCAPITULATIF DES SOUS-ZONES (si SUB_AREA_TABLE_METRIC_ID a été trouvé à l'Étape 2) :
+- Titre : Rédiger un titre analytique résumant la principale observation sur les sous-zones
+- Visualization: Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: SUB_AREA_TABLE_METRIC_ID (e.g., "m3-04-02")
+  - vizPresetId: "disruption-differences-table-single-admin-area-2-multiple-admin-area-3"
+  - selectedReplicant: AREA_VALUE
+  - filterOverrides:
+    - col: "indicator_common_id"
+    - vals: [all indicator codes from the report]
+    - ALSO filter on AREA_LEVEL column to scope to AREA_VALUE
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : 2-3 puces résumant quelles sous-zones montrent des surplus ou des déficits constants.
+- Ajouter un bloc de texte en bas : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). »
 
 DIAPOSITIVES PAR SOUS-ZONE (une par sous-zone) :
 Pour CHAQUE sous-zone au sein de [NOM DE LA ZONE], créer une diapositive simple avec :
