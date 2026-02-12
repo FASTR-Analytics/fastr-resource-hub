@@ -301,6 +301,8 @@ Explique comment FASTR ajuste les données pour les problèmes de qualité. Quan
 ```prompt
 Génère un rapport FASTR sur les perturbations.
 
+Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisateur n'est pas dans ce mode, lui demander de créer un nouveau slide deck ou d'en ouvrir un existant.
+
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
 1. « Pour quel pays est ce rapport ? »
@@ -332,10 +334,8 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Nutrition : si des indicateurs de nutrition existent (par exemple malnutrition_treated, nutrition_vitamin_a, malnutrition_sam_rechutent)
    - Nouveau-nés : si des indicateurs spécifiques aux nouveau-nés existent (par exemple newborn_kmc, newborn_underweight, breastfeeding_early)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
-4. Pour tout indicateur ne correspondant pas clairement à un groupe, utiliser ask_user_questions pour demander :
-   - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse nationale ? »
-   - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
-5. Utiliser ask_user_questions pour présenter les regroupements finaux proposés pour confirmation avant de poursuivre
+4. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
+5. Si des indicateurs de mortalité existent (par exemple maternal_deaths, neonatal_deaths, stillbirths), poser la question séparément avec ask_user_questions après confirmation des regroupements principaux : « J'ai également trouvé des indicateurs de mortalité : [liste]. Ceux-ci impliquent des comptages d'événements faibles et nécessitent une interprétation différente (les augmentations = négatif). Souhaitez-vous : (a) les inclure dans un groupe Mortalité séparé, (b) les exclure du rapport, ou (c) les ajouter à un groupe existant ? »
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse nationale, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -348,7 +348,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Structurer les narratifs en phrases complètes (pas de listes à puces)
+3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 
@@ -437,7 +437,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche) : Analyser les données affichées dans la visualisation. Décrire en phrases complètes :
+Interprétation (côté gauche — 120 mots max) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
 - Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
 - Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
 - Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
@@ -581,7 +581,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
 
-Interprétation (côté gauche) : Décrire en phrases complètes :
+Interprétation (côté gauche) : Utiliser des listes à puces :
 - Un résumé des tendances de complétude sur la période d'analyse
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
@@ -616,7 +616,7 @@ DIAPOSITIVE 3 - Valeurs aberrantes
   - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance nationale globale des taux de valeurs aberrantes — sont-ils stables, en amélioration ou en détérioration ?
   - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
   - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
@@ -637,7 +637,7 @@ DIAPOSITIVE 4 - Cohérence interne
   - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
   - Identifier quels ratios respectent ou échouent systématiquement les critères
   - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
@@ -657,7 +657,7 @@ DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
   - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance nationale — la qualité des données s'améliore-t-elle au fil du temps ?
   - Nommer les régions les plus performantes et les moins performantes
   - Identifier les régions où la qualité des données s'est notablement améliorée ou détériorée
@@ -677,7 +677,7 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
   - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance nationale du score moyen de l'EQD — s'améliore-t-elle, est-elle stable ou en déclin ?
   - Comparer les régions les plus performantes aux moins performantes
   - Signaler toute région montrant une amélioration ou un déclin significatif
@@ -689,6 +689,8 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 
 ```prompt
 Génère un rapport FASTR sur les perturbations au niveau infranational. Ce rapport se concentre sur une seule zone infranationale (par exemple un État, une province ou un comté) et est autonome — il couvre l'analyse principale des perturbations, avec une ventilation optionnelle par sous-zone et une évaluation optionnelle de la qualité des données.
+
+Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisateur n'est pas dans ce mode, lui demander de créer un nouveau slide deck ou d'en ouvrir un existant.
 
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
@@ -733,10 +735,8 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Paludisme : tests, positivité, traitement (par exemple malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - Services généraux / Consultations externes : visites ambulatoires (par exemple opd, opd_under5, opd_over5)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple Nutrition, VIH/TB, MNT, Mortalité)
-4. Pour tout indicateur ne correspondant pas clairement à un groupe, utiliser ask_user_questions pour demander :
-   - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse ? »
-   - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
-5. Utiliser ask_user_questions pour présenter les regroupements finaux proposés pour confirmation avant de poursuivre
+4. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
+5. Si des indicateurs de mortalité existent (par exemple maternal_deaths, neonatal_deaths, stillbirths), poser la question séparément avec ask_user_questions après confirmation des regroupements principaux : « J'ai également trouvé des indicateurs de mortalité : [liste]. Ceux-ci impliquent des comptages d'événements faibles et nécessitent une interprétation différente (les augmentations = négatif). Souhaitez-vous : (a) les inclure dans un groupe Mortalité séparé, (b) les exclure du rapport, ou (c) les ajouter à un groupe existant ? »
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -749,7 +749,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Structurer les narratifs en phrases complètes (pas de listes à puces)
+3. Garder le texte des diapositives concis — max 300 mots par diapositive, utiliser des listes à puces si approprié
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 
@@ -834,7 +834,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche) : Analyser les données affichées dans la visualisation. Décrire en phrases complètes :
+Interprétation (côté gauche — 120 mots max) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
 - Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
 - Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
 - Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
@@ -917,7 +917,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
 - periodFilterOverride: Use the same period as the main report
 
-Interprétation (côté gauche) : Décrire en phrases complètes :
+Interprétation (côté gauche) : Utiliser des listes à puces :
 - Un résumé des tendances de complétude sur la période d'analyse pour [NOM DE LA ZONE]
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
@@ -953,7 +953,7 @@ DIAPOSITIVE EQD 2 - Valeurs aberrantes
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance des taux de valeurs aberrantes dans [NOM DE LA ZONE] — sont-ils stables, en amélioration ou en détérioration ?
   - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
   - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
@@ -975,7 +975,7 @@ DIAPOSITIVE EQD 3 - Cohérence interne
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
   - Identifier quels ratios respectent ou échouent systématiquement les critères dans [NOM DE LA ZONE]
   - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
@@ -995,7 +995,7 @@ DIAPOSITIVE EQD 4 - Tendances de la qualité des données (score EQD global)
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance EQD dans [NOM DE LA ZONE] — la qualité des données s'améliore-t-elle au fil du temps ?
   - Identifier si la qualité des données s'est notablement améliorée ou détériorée
   - Expliquer l'implication : des scores EQD faibles peuvent signifier des estimations de perturbation moins fiables
@@ -1015,7 +1015,7 @@ DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : En phrases complètes :
+- Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance du score moyen de l'EQD dans [NOM DE LA ZONE] — s'améliore-t-elle, est-elle stable ou en déclin ?
   - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
 - Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »

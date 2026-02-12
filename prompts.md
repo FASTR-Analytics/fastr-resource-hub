@@ -301,6 +301,8 @@ Explain how FASTR adjusts data for quality issues. When are values adjusted vs. 
 ```prompt
 Generate a FASTR Disruptions Report.
 
+Always check if the user is in editing_slide_deck mode. If the user is not in this mode, ask them to either create a new slide deck or open an existing one.
+
 STEP 1: ASK THE USER
 Use ask_user_questions to ask each of the following one at a time:
 1. "Which country is this report for?"
@@ -330,10 +332,8 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
-4. For any indicators that do not fit clearly into a group, use ask_user_questions to ask:
-   - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the national analysis slides?"
-   - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
-5. Use ask_user_questions to present the final proposed groupings for confirmation before proceeding
+4. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
+5. If mortality indicators exist (e.g., maternal_deaths, neonatal_deaths, stillbirths), ask about them separately with ask_user_questions after the main groupings are confirmed: "I also found mortality indicators: [list]. These involve low event counts and need different interpretation (increases = bad). Would you like to: (a) include them in a separate Mortality group, (b) exclude them from the report, or (c) add them to an existing group?"
 
 Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -346,7 +346,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Structure narratives in complete sentences (not bullet points)
+3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 
@@ -435,7 +435,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side): Analyze the data shown in the visualization. Describe in complete sentences:
+Interpretation (left side — 120 words max): Analyze the data shown in the visualization. Use bullet points:
 - For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
 - For EACH indicator in the group: when surpluses occurred, and approximate magnitude
 - Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
@@ -579,7 +579,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
 
-Interpretation (left side): Describe in complete sentences:
+Interpretation (left side): Use bullet points:
 - Summary of completeness trends over the analysis period
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
@@ -614,7 +614,7 @@ SLIDE 3 - Outliers
   - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the overall national trend in outlier rates — are they stable, improving, or worsening?
   - Name specific indicators with the highest outlier rates
   - Note whether outlier rates have improved or worsened over the analysis period
@@ -635,7 +635,7 @@ SLIDE 4 - Internal consistency
   - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
   - Identify which ratios consistently meet or fail criteria
   - Note whether consistency is improving or worsening over the analysis period
@@ -655,7 +655,7 @@ SLIDE 5 - Data quality trends (overall DQA score)
   - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the national trend — is DQ improving over time?
   - Name top-performing and lowest-performing regions
   - Identify regions where DQ has notably improved or declined
@@ -675,7 +675,7 @@ SLIDE 6 - Data quality trends (mean DQA score)
   - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the national mean DQA trend — is it improving, stable, or declining?
   - Contrast top-performing vs lowest-performing regions
   - Note any regions showing significant improvement or decline
@@ -687,6 +687,8 @@ SLIDE 6 - Data quality trends (mean DQA score)
 
 ```prompt
 Generate a FASTR Subnational Disruptions Report. This report focuses on a single subnational area (e.g., a state, province, or county) and is self-contained — it covers the main disruption analysis, with optional sub-area breakdown and data quality assessment.
+
+Always check if the user is in editing_slide_deck mode. If the user is not in this mode, ask them to either create a new slide deck or open an existing one.
 
 STEP 1: ASK THE USER
 Use ask_user_questions to ask each of the following one at a time:
@@ -731,10 +733,8 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
-4. For any indicators that do not fit clearly into a group, use ask_user_questions to ask:
-   - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the analysis slides?"
-   - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
-5. Use ask_user_questions to present the final proposed groupings for confirmation before proceeding
+4. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
+5. If mortality indicators exist (e.g., maternal_deaths, neonatal_deaths, stillbirths), ask about them separately with ask_user_questions after the main groupings are confirmed: "I also found mortality indicators: [list]. These involve low event counts and need different interpretation (increases = bad). Would you like to: (a) include them in a separate Mortality group, (b) exclude them from the report, or (c) add them to an existing group?"
 
 Each confirmed group will become ONE slide in the analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -747,7 +747,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Structure narratives in complete sentences (not bullet points)
+3. Keep slide text concise — max 300 words per slide, use bullet points where appropriate
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 
@@ -832,7 +832,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side): Analyze the data shown in the visualization. Describe in complete sentences:
+Interpretation (left side — 120 words max): Analyze the data shown in the visualization. Use bullet points:
 - For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
 - For EACH indicator in the group: when surpluses occurred, and approximate magnitude
 - Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
@@ -915,7 +915,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
 - periodFilterOverride: Use the same period as the main report
 
-Interpretation (left side): Describe in complete sentences:
+Interpretation (left side): Use bullet points:
 - Summary of completeness trends over the analysis period for [AREA NAME]
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
@@ -951,7 +951,7 @@ DQ SLIDE 2 - Outliers
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the trend in outlier rates for [AREA NAME] — are they stable, improving, or worsening?
   - Name specific indicators with the highest outlier rates
   - Note whether outlier rates have improved or worsened over the analysis period
@@ -973,7 +973,7 @@ DQ SLIDE 3 - Internal consistency
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
   - Identify which ratios consistently meet or fail criteria in [AREA NAME]
   - Note whether consistency is improving or worsening over the analysis period
@@ -993,7 +993,7 @@ DQ SLIDE 4 - Data quality trends (overall DQA score)
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the DQA trend in [AREA NAME] — is data quality improving over time?
   - Identify whether DQ has notably improved or declined
   - Explain the implication: low DQA scores may mean less reliable disruption estimates
@@ -1013,7 +1013,7 @@ DQ SLIDE 5 - Data quality trends (mean DQA score)
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): In complete sentences:
+- Interpretation (left side): Use bullet points:
   - Describe the mean DQA trend in [AREA NAME] — is it improving, stable, or declining?
   - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
 - Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
