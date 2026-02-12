@@ -1057,3 +1057,79 @@ DQ SLIDE 5 - Data quality trends (mean DQA score)
 
 After all DQ slides, re-add the back page as the final slide.
 ```
+
+## Prompt 5: Review this report
+
+```prompt
+Review the current slide deck for accuracy, consistency, and quality issues.
+
+Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
+
+STEP 1: GO THROUGH EACH SLIDE
+Go through the slide deck one slide at a time. For each slide that has a visualization (image block with from_metric), do the following:
+
+a) Read all text blocks on the slide — title, interpretation text, any text block at the bottom
+b) Look at the visualization's from_metric parameters (metricId, vizPresetId, filterOverrides, periodFilterOverride) and use get_metric_data to pull the underlying data
+c) Compare every number, percentage, trend, and time period mentioned in the text blocks against the actual data. Every claim in the text must be traceable to the data
+
+Flag any mismatch. For each issue found, note the slide number, the text block, what it says, and what the data actually shows.
+
+STEP 2: APPLY THESE CHECKS TO EACH SLIDE
+
+DATA ACCURACY
+- Does every number in the text blocks match the underlying data from the visualization?
+- Are any statistics mentioned that cannot be verified from the data? Flag with [UNVERIFIED]
+- Watch for hedged fabrication — phrases like "approximately," "around," or "estimated" may precede invented figures. Verify every number against the actual data, even hedged ones
+- Are round numbers used where precise figures should appear? Round numbers (e.g., "about 50%") are a red flag for fabricated data
+- Are time periods correctly referenced? (correct months, years, period ranges)
+- Does the text only reference what is visible in the data? No external claims or information that cannot be traced to the visualization
+
+INDICATOR INTERPRETATION DIRECTION
+- For service delivery indicators (ANC, deliveries, PNC, immunizations, OPD, family planning): is an increase described as positive and a decrease as a concern?
+- For mortality indicators (maternal deaths, neonatal deaths, stillbirths): is an increase described as BAD and a decrease as GOOD?
+- For negative quality indicators (dropout rates, outlier rates): is an increase described as worsening?
+- Flag any slide where the interpretation direction is wrong
+
+LANGUAGE AND FRAMING
+- No causal claims — only exploratory, descriptive language (e.g., "suggests" not "caused by")
+- No overgeneralization — findings are scoped to the specific area and time period
+- Appropriate hedging — conclusions are not stronger than what the data supports
+- No indicator codes in text blocks — only human-readable labels (e.g., "ANC first visit" not "anc1")
+
+TECHNICAL TERMINOLOGY
+- Are health terms used correctly? (e.g., "skilled birth attendance" not "assisted delivery," "antenatal care" not "prenatal care" unless country-specific)
+- Are acronyms expanded correctly on first use and used consistently after?
+- Is the country name spelled correctly throughout?
+- Do admin area names match exactly what appears in the platform? (correct spelling, capitalization)
+
+TABLES AND DQ SLIDES
+- For DQ annex slides with table visualizations: pull the data with get_metric_data and check that text block descriptions match the actual values. Check for missing or duplicated entries
+- Are methodology text blocks (outlier definitions, consistency criteria, DQA scoring) preserved accurately — not paraphrased or watered down?
+
+CONSISTENCY ACROSS SLIDES
+- Same indicator referenced on multiple slides: are the values consistent?
+- Are indicator names spelled the same way throughout? (no switching between synonyms like "ANC1" vs "first antenatal visit" without reason)
+- Are time periods referenced consistently?
+- Do slide titles follow the same style?
+
+WORD COUNT
+- Is each text block within the target range (50-100 words, max 180)?
+- Flag text blocks that exceed 180 words
+
+STEP 3: PRESENT FINDINGS
+After reviewing all slides, present a summary using ask_user_questions.
+
+If issues were found:
+- List each issue with the slide number, what the problem is, and a suggested fix
+- Group issues by type (accuracy, interpretation direction, language, consistency, word count)
+- Ask: "I found these issues. Would you like me to fix all of them, or should we go through them one by one?"
+
+If no issues were found:
+- Confirm: "I reviewed all [N] slides. No accuracy, consistency, or interpretation issues found."
+
+STEP 4: FIX ISSUES
+If the user asks you to fix issues:
+- Apply corrections one slide at a time
+- For each fix, briefly state what you changed
+- After all fixes, do a final pass to confirm no new inconsistencies were introduced
+```

@@ -1059,3 +1059,79 @@ DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
 
 Après toutes les diapositives EQD, remettre la dernière page comme diapositive finale.
 ```
+
+## Prompt 5 : Réviser ce rapport
+
+```prompt
+Réviser le jeu de diapositives actuel pour vérifier l'exactitude, la cohérence et la qualité.
+
+Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
+
+ÉTAPE 1 : PARCOURIR CHAQUE DIAPOSITIVE
+Parcourir le jeu de diapositives une par une. Pour chaque diapositive qui contient une visualisation (bloc image avec from_metric), faire ce qui suit :
+
+a) Lire tous les blocs de texte de la diapositive — titre, texte d'interprétation, tout bloc de texte en bas
+b) Examiner les paramètres from_metric de la visualisation (metricId, vizPresetId, filterOverrides, periodFilterOverride) et utiliser get_metric_data pour extraire les données sous-jacentes
+c) Comparer chaque chiffre, pourcentage, tendance et période temporelle mentionnés dans les blocs de texte avec les données réelles. Chaque affirmation dans le texte doit être traçable aux données
+
+Signaler toute incohérence. Pour chaque problème trouvé, noter le numéro de diapositive, le bloc de texte concerné, ce qu'il dit et ce que les données montrent réellement.
+
+ÉTAPE 2 : APPLIQUER CES VÉRIFICATIONS À CHAQUE DIAPOSITIVE
+
+EXACTITUDE DES DONNÉES
+- Chaque chiffre dans les blocs de texte correspond-il aux données sous-jacentes de la visualisation ?
+- Des statistiques sont-elles mentionnées sans pouvoir être vérifiées à partir des données ? Signaler avec [À VÉRIFIER]
+- Attention aux fabrications masquées — des expressions comme « environ », « approximativement » ou « estimé à » peuvent précéder des chiffres inventés. Vérifier chaque nombre avec les données réelles, même ceux avec des nuances
+- Des chiffres arrondis sont-ils utilisés là où des chiffres précis devraient apparaître ? Les chiffres arrondis (par exemple « environ 50 % ») sont un signal d'alerte pour des données fabriquées
+- Les périodes temporelles sont-elles correctement référencées ? (mois, années, plages de périodes corrects)
+- Le texte ne référence-t-il que ce qui est visible dans les données ? Pas de déclarations externes ni d'informations non traçables à la visualisation
+
+DIRECTION D'INTERPRÉTATION DES INDICATEURS
+- Pour les indicateurs de prestation de services (CPN, accouchements, soins postnataux, vaccinations, consultations externes, planification familiale) : une augmentation est-elle décrite comme positive et une diminution comme préoccupante ?
+- Pour les indicateurs de mortalité (décès maternels, décès néonataux, mortinaissances) : une augmentation est-elle décrite comme MAUVAISE et une diminution comme BONNE ?
+- Pour les indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : une augmentation est-elle décrite comme une détérioration ?
+- Signaler toute diapositive où la direction d'interprétation est incorrecte
+
+LANGAGE ET FORMULATION
+- Pas de liens de causalité — uniquement un langage exploratoire et descriptif (par exemple « suggère » et non « causé par »)
+- Pas de généralisation excessive — les résultats sont limités à la zone et la période spécifiques
+- Nuances appropriées — les conclusions ne sont pas plus fortes que ce que les données permettent
+- Pas de codes d'indicateurs dans les blocs de texte — uniquement des libellés lisibles (par exemple « Première visite CPN » et non « anc1 »)
+
+TERMINOLOGIE TECHNIQUE
+- Les termes de santé sont-ils utilisés correctement ? (par exemple « accouchement assisté par du personnel qualifié » et non « accouchement aidé », « soins prénataux » et non « soins de grossesse » sauf si spécifique au pays)
+- Les acronymes sont-ils développés correctement à la première utilisation et utilisés de manière cohérente ensuite ?
+- Le nom du pays est-il correctement orthographié partout ?
+- Les noms des zones administratives correspondent-ils exactement à ce qui apparaît dans la plateforme ? (orthographe, majuscules)
+
+TABLEAUX ET DIAPOSITIVES EQD
+- Pour les diapositives d'annexe EQD avec des visualisations de tableaux : extraire les données avec get_metric_data et vérifier que les descriptions dans les blocs de texte correspondent aux valeurs réelles. Vérifier l'absence d'entrées manquantes ou dupliquées
+- Les blocs de texte méthodologiques (définitions des valeurs aberrantes, critères de cohérence, notation EQD) sont-ils préservés fidèlement — ni paraphrasés ni édulcorés ?
+
+COHÉRENCE ENTRE LES DIAPOSITIVES
+- Même indicateur référencé sur plusieurs diapositives : les valeurs sont-elles cohérentes ?
+- Les noms des indicateurs sont-ils orthographiés de la même manière partout ? (pas d'alternance entre synonymes comme « CPN1 » et « première visite prénatale » sans raison)
+- Les périodes temporelles sont-elles référencées de manière cohérente ?
+- Les titres des diapositives suivent-ils le même style ?
+
+NOMBRE DE MOTS
+- Chaque bloc de texte est-il dans la plage cible (50-100 mots, max 180) ?
+- Signaler les blocs de texte dépassant 180 mots
+
+ÉTAPE 3 : PRÉSENTER LES RÉSULTATS
+Après avoir révisé toutes les diapositives, présenter un résumé avec ask_user_questions.
+
+Si des problèmes ont été trouvés :
+- Lister chaque problème avec le numéro de diapositive, la nature du problème et une correction suggérée
+- Regrouper les problèmes par type (exactitude, direction d'interprétation, langage, cohérence, nombre de mots)
+- Demander : « J'ai trouvé ces problèmes. Souhaitez-vous que je les corrige tous, ou préférez-vous les examiner un par un ? »
+
+Si aucun problème n'a été trouvé :
+- Confirmer : « J'ai révisé les [N] diapositives. Aucun problème d'exactitude, de cohérence ou d'interprétation n'a été trouvé. »
+
+ÉTAPE 4 : CORRIGER LES PROBLÈMES
+Si l'utilisateur demande de corriger les problèmes :
+- Appliquer les corrections une diapositive à la fois
+- Pour chaque correction, indiquer brièvement ce qui a été modifié
+- Après toutes les corrections, effectuer une vérification finale pour confirmer qu'aucune nouvelle incohérence n'a été introduite
+```
