@@ -301,7 +301,8 @@ Explique comment FASTR ajuste les données pour les problèmes de qualité. Quan
 ```prompt
 Génère un rapport FASTR sur les perturbations.
 
-ÉTAPE 1 : DEMANDER À L'UTILISATEUR :
+ÉTAPE 1 : DEMANDER À L'UTILISATEUR
+Utiliser ask_user_questions pour collecter les informations suivantes en un seul appel :
 1. Le nom du pays
 2. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
 3. Le sous-titre du rapport : Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 »
@@ -331,10 +332,10 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Nutrition : si des indicateurs de nutrition existent (par exemple malnutrition_treated, nutrition_vitamin_a, malnutrition_sam_rechutent)
    - Nouveau-nés : si des indicateurs spécifiques aux nouveau-nés existent (par exemple newborn_kmc, newborn_underweight, breastfeeding_early)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
-4. Pour tout indicateur ne correspondant pas clairement à un groupe, le présenter à l'utilisateur et demander :
+4. Pour tout indicateur ne correspondant pas clairement à un groupe, utiliser ask_user_questions pour demander :
    - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse nationale ? »
    - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
-5. Présenter les regroupements finaux proposés à l'utilisateur pour confirmation avant de poursuivre
+5. Utiliser ask_user_questions pour présenter les regroupements finaux proposés pour confirmation avant de poursuivre
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse nationale, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -598,7 +599,7 @@ Lorsque la complétude est élevée, les volumes observés et attendus sont plus
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 ÉTAPE 2 : DEMANDER À L'UTILISATEUR
-Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
+Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
 
 Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture en « Annexe [1 ou 2] : Évaluation de la qualité des données », puis générer les diapositives supplémentaires suivantes :
 
@@ -689,7 +690,8 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 ```prompt
 Génère un rapport FASTR sur les perturbations au niveau infranational. Ce rapport se concentre sur une seule zone infranationale (par exemple un État, une province ou un comté) et est autonome — il couvre l'analyse principale des perturbations, avec une ventilation optionnelle par sous-zone et une évaluation optionnelle de la qualité des données.
 
-ÉTAPE 1 : DEMANDER À L'UTILISATEUR :
+ÉTAPE 1 : DEMANDER À L'UTILISATEUR
+Utiliser ask_user_questions pour collecter les informations suivantes en un seul appel :
 1. Le nom du pays
 2. Le nom de la zone infranationale (par exemple « État de Bauchi », « Comté de Bomi », « Région du Centre »)
 3. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
@@ -748,10 +750,10 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Paludisme : tests, positivité, traitement (par exemple malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - Services généraux / Consultations externes : visites ambulatoires (par exemple opd, opd_under5, opd_over5)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple Nutrition, VIH/TB, MNT, Mortalité)
-4. Pour tout indicateur ne correspondant pas clairement à un groupe, le présenter à l'utilisateur et demander :
+4. Pour tout indicateur ne correspondant pas clairement à un groupe, utiliser ask_user_questions pour demander :
    - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse ? »
    - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
-5. Présenter les regroupements finaux proposés à l'utilisateur pour confirmation avant de poursuivre
+5. Utiliser ask_user_questions pour présenter les regroupements finaux proposés pour confirmation avant de poursuivre
 
 Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
 
@@ -860,7 +862,7 @@ DERNIÈRE PAGE :
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 
 ÉTAPE 4 (OPTIONNELLE) : VENTILATION PAR SOUS-ZONE
-Après avoir généré le rapport principal, demander à l'utilisateur : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? »
+Après avoir généré le rapport principal, utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? »
 
 Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, informer l'utilisateur : « La ventilation par sous-zone n'est pas disponible — aucun indicateur de perturbation n'existe au niveau [SUB_AREA_LEVEL] pour ce pays. »
 
@@ -891,7 +893,7 @@ Garder ces diapositives épurées — nom de la sous-zone et visualisation uniqu
 Après les diapositives de sous-zones, remettre la dernière page comme diapositive finale.
 
 ÉTAPE 5 (OPTIONNELLE) : ÉVALUATION DE LA QUALITÉ DES DONNÉES
-Après la ventilation par sous-zone (ou après le rapport principal si les sous-zones ont été ignorées), demander à l'utilisateur : « Souhaitez-vous ajouter une évaluation de la qualité des données pour [NOM DE LA ZONE] ? »
+Après la ventilation par sous-zone (ou après le rapport principal si les sous-zones ont été ignorées), utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter une évaluation de la qualité des données pour [NOM DE LA ZONE] ? »
 
 Si l'utilisateur accepte, générer une section EQD ciblée sur la zone spécifique. Insérer avant la dernière page (déplacer la dernière page à la fin).
 
@@ -950,7 +952,7 @@ Lorsque la complétude est élevée, les volumes observés et attendus sont plus
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 ÉTAPE 5b : DEMANDER À L'UTILISATEUR
-Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD pour [NOM DE LA ZONE] ? »
+Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD pour [NOM DE LA ZONE] ? »
 
 Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture EQD en « Évaluation de la qualité des données : [NOM DE LA ZONE] », puis générer les diapositives supplémentaires suivantes. Toutes les diapositives sont filtrées sur [NOM DE LA ZONE].
 

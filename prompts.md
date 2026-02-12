@@ -301,7 +301,8 @@ Explain how FASTR adjusts data for quality issues. When are values adjusted vs. 
 ```prompt
 Generate a FASTR Disruptions Report.
 
-STEP 1: ASK THE USER FOR:
+STEP 1: ASK THE USER
+Use ask_user_questions to collect the following in a single call:
 1. Country name
 2. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
 3. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
@@ -329,10 +330,10 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
-4. For any indicators that do not fit clearly into a group, present them to the user and ask:
+4. For any indicators that do not fit clearly into a group, use ask_user_questions to ask:
    - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the national analysis slides?"
    - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
-5. Present the final proposed groupings to the user for confirmation before proceeding
+5. Use ask_user_questions to present the final proposed groupings for confirmation before proceeding
 
 Each confirmed group will become ONE slide in the national analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -596,7 +597,7 @@ When completeness is high, observed and expected volumes are more comparable, an
 When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 
 STEP 2: ASK THE USER
-After generating the completeness summary, ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends?"
+After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends?"
 
 If the user says yes, update the cover slide title to "Annex [1 or 2]: Data Quality Assessment", then generate the following additional slides:
 
@@ -687,7 +688,8 @@ SLIDE 6 - Data quality trends (mean DQA score)
 ```prompt
 Generate a FASTR Subnational Disruptions Report. This report focuses on a single subnational area (e.g., a state, province, or county) and is self-contained — it covers the main disruption analysis, with optional sub-area breakdown and data quality assessment.
 
-STEP 1: ASK THE USER FOR:
+STEP 1: ASK THE USER
+Use ask_user_questions to collect the following in a single call:
 1. Country name
 2. Subnational area name (e.g., "Bauchi State", "Bomi County", "Région du Centre")
 3. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
@@ -746,10 +748,10 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
    - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
-4. For any indicators that do not fit clearly into a group, present them to the user and ask:
+4. For any indicators that do not fit clearly into a group, use ask_user_questions to ask:
    - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the analysis slides?"
    - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
-5. Present the final proposed groupings to the user for confirmation before proceeding
+5. Use ask_user_questions to present the final proposed groupings for confirmation before proceeding
 
 Each confirmed group will become ONE slide in the analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
 
@@ -858,7 +860,7 @@ BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 
 STEP 4 (OPTIONAL): SUB-AREA BREAKDOWN
-After generating the main report, ask the user: "Would you like to add sub-area profiles for areas within [AREA NAME]?"
+After generating the main report, use ask_user_questions to ask: "Would you like to add sub-area profiles for areas within [AREA NAME]?"
 
 If SUB_AREA_METRIC_ID was not found in Step 2, inform the user: "Sub-area breakdown is not available — no disruption metrics exist at the [SUB_AREA_LEVEL] level for this country."
 
@@ -889,7 +891,7 @@ Keep these slides clean — sub-area name and visualization only, no interpretat
 After the sub-area slides, re-add the back page as the final slide.
 
 STEP 5 (OPTIONAL): DATA QUALITY ASSESSMENT
-After the sub-area breakdown (or after the main report if sub-areas were skipped), ask the user: "Would you like to add a data quality assessment for [AREA NAME]?"
+After the sub-area breakdown (or after the main report if sub-areas were skipped), use ask_user_questions to ask: "Would you like to add a data quality assessment for [AREA NAME]?"
 
 If the user says yes, generate a DQ section scoped to the specific area. Insert before the back page (move back page to end).
 
@@ -948,7 +950,7 @@ When completeness is high, observed and expected volumes are more comparable, an
 When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 
 STEP 5b: ASK THE USER
-After generating the completeness summary, ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends for [AREA NAME]?"
+After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends for [AREA NAME]?"
 
 If the user says yes, update the DQ cover slide title to "Data Quality Assessment: [AREA NAME]", then generate the following additional slides. All slides are filtered to [AREA NAME].
 
