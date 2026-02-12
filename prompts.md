@@ -351,6 +351,7 @@ REPORT STANDARDS:
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
+7. Always refer to slides by their number (not their ID)
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
 NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
@@ -467,6 +468,7 @@ REPORT STANDARDS:
 2. Treat disruption signals as descriptive and exploratory
 3. Layout: interpretation on left, visualization on right
 4. Use consistent terminology throughout
+5. Always refer to slides by their number (not their ID)
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
 NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
@@ -547,6 +549,7 @@ REPORT STANDARDS:
 1. Maintain cautious, analytical language
 2. Layout: interpretation on left, visualization on right
 3. Use consistent terminology throughout
+4. Always refer to slides by their number (not their ID)
 
 METHODOLOGY REFERENCE:
 If you need additional context on how FASTR calculates data quality metrics, fetch the methodology documentation from https://fastr-analytics.github.io/fastr-resource-hub/. Use it to write accurate summaries and interpretations for each slide.
@@ -766,6 +769,7 @@ REPORT STANDARDS:
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
+7. Always refer to slides by their number (not their ID)
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
 NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
@@ -1064,6 +1068,8 @@ After all DQ slides, re-add the back page as the final slide.
 Review the current slide deck for accuracy, consistency, and quality issues.
 
 Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
+
+Always refer to slides by their number (not their ID).
 
 STEP 1: GO THROUGH EACH SLIDE
 Go through the slide deck one slide at a time. For each slide that has a visualization (image block with from_metric), do the following:

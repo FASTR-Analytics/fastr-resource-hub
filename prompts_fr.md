@@ -353,6 +353,7 @@ NORMES DU RAPPORT :
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
+7. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
 CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
 Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
@@ -469,6 +470,7 @@ NORMES DU RAPPORT :
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
 3. Mise en page : interprétation à gauche, visualisation à droite
 4. Utiliser une terminologie cohérente tout au long du rapport
+5. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
 CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
 Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
@@ -549,6 +551,7 @@ NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique
 2. Mise en page : interprétation à gauche, visualisation à droite
 3. Utiliser une terminologie cohérente tout au long du rapport
+4. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
 RÉFÉRENCE MÉTHODOLOGIQUE :
 Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, consultez la documentation méthodologique à l'adresse https://fastr-analytics.github.io/fastr-resource-hub/. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
@@ -768,6 +771,7 @@ NORMES DU RAPPORT :
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
+7. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
 CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
 Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
@@ -1066,6 +1070,8 @@ Après toutes les diapositives EQD, remettre la dernière page comme diapositive
 Réviser le jeu de diapositives actuel pour vérifier l'exactitude, la cohérence et la qualité.
 
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
+
+Toujours désigner les diapositives par leur numéro (pas par leur ID).
 
 ÉTAPE 1 : PARCOURIR CHAQUE DIAPOSITIVE
 Parcourir le jeu de diapositives une par une. Pour chaque diapositive qui contient une visualisation (bloc image avec from_metric), faire ce qui suit :
