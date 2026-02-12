@@ -59,8 +59,9 @@ Valide les données pour [NOM DE L'INDICATEUR] en :
 ```prompt
 Analyse les indicateurs de santé clés au cours des 12 derniers mois et crée un jeu de diapositives d'analyse des tendances :
 - Une diapositive par tendance significative avec une visualisation en séries temporelles
-- Une diapositive de synthèse mettant en évidence les 3 principales améliorations et les 3 principales préoccupations
+- Une diapositive de synthèse mettant en évidence les 3 principales conclusions positives et les 3 principales préoccupations
 - Inclus des chiffres précis et des pourcentages de variation sur chaque diapositive
+Rappel : pour les indicateurs de mortalité, une augmentation est une préoccupation, pas une amélioration.
 ```
 
 ### Comparer les régions
@@ -69,6 +70,7 @@ Compare les performances des indicateurs de santé entre les régions administra
 - Un graphique comparant toutes les régions avec des niveaux de performance codés par couleur
 - Un tableau montrant les régions les plus et les moins performantes avec le pourcentage de variation
 - Une diapositive mettant en évidence les régions les plus améliorées et les plus préoccupantes
+Rappel : pour les indicateurs de mortalité, des valeurs plus élevées sont pires — classer en conséquence.
 ```
 
 ### Analyse période par période
@@ -81,7 +83,7 @@ Compare les performances de la période actuelle avec celles de la période pré
 
 ### Où concentrer les efforts
 ```prompt
-Sur la base des données, quelles régions ou indicateurs devrions-nous prioriser pour le soutien ? Identifie les zones avec des performances en déclin ou des lacunes persistantes. Crée une diapositive de synthèse montrant les zones prioritaires.
+Sur la base des données, quelles régions ou indicateurs devrions-nous prioriser pour le soutien ? Identifie les zones avec une prestation de services en déclin, une mortalité ou des taux d'abandon en hausse, ou des lacunes persistantes. Crée une diapositive de synthèse montrant les zones prioritaires.
 ```
 
 # Analyse des indicateurs
@@ -128,7 +130,7 @@ Analyse le BCG, le Penta1 et le Penta3 pour détecter les perturbations et crée
 
 ### Analyse des abandons
 ```prompt
-Compare les schémas d'abandon entre le Penta1 et le Penta3 et montre-les sous forme de visualisation au fil du temps. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué ? Montre la variation régionale.
+Compare les schémas d'abandon entre le Penta1 et le Penta3 et montre-les sous forme de visualisation au fil du temps. Les enfants complètent-ils la série vaccinale ? Comment l'abandon a-t-il évolué ? Montre la variation régionale. Note : une augmentation de l'abandon est un résultat négatif — cela signifie que moins d'enfants complètent la série.
 ```
 
 ## Services généraux
@@ -201,10 +203,11 @@ Crée une carte thermique montrant [scores de qualité des données / complétud
 ```prompt
 Crée une présentation de résumé exécutif mensuel :
 - Diapositive de couverture : « Résumé mensuel des indicateurs de santé - [MOIS ANNÉE] »
-- Réalisations clés : diapositives montrant les principales améliorations avec des visualisations
+- Conclusions positives : diapositives montrant les principales améliorations avec des visualisations
 - Domaines nécessitant une attention : diapositives montrant les principales préoccupations avec des visualisations
 - Diapositive finale : actions recommandées pour les parties prenantes
 Prépare-la pour une présentation aux cadres dirigeants.
+Rappel : pour les indicateurs de mortalité, une augmentation est toujours une préoccupation, jamais une réalisation. Pour les indicateurs de services, une augmentation est positive.
 ```
 
 ### Rapport trimestriel
@@ -215,6 +218,7 @@ Crée une présentation de rapport trimestriel couvrant les 3 derniers mois :
 - Comparaison avec le trimestre précédent
 - Points saillants de la performance régionale avec des graphiques
 - Diapositive finale : domaines prioritaires recommandés pour le prochain trimestre
+Rappel : pour les indicateurs de mortalité, une augmentation est toujours une préoccupation, jamais un progrès. Pour les indicateurs de services, une augmentation est positive.
 ```
 
 ## Communication avec les parties prenantes
@@ -243,7 +247,7 @@ J'ai trouvé quelque chose d'intéressant : [DESCRIPTION]. Crée une diapositive
 
 ### Jeu de diapositives rapide
 ```prompt
-J'ai besoin d'un jeu rapide de 5 diapositives sur [INDICATEUR/SUJET] pour [PUBLIC]. Inclus : la situation actuelle, la tendance au fil du temps, la comparaison régionale, le contexte de qualité des données, et les recommandations.
+J'ai besoin d'un jeu rapide de 5 diapositives sur [INDICATEUR/SUJET] pour [PUBLIC]. Inclus : la situation actuelle, la tendance au fil du temps, la comparaison régionale, le contexte de qualité des données, et les recommandations. Cadrer les tendances correctement : les augmentations de prestation de services sont positives, mais les augmentations de mortalité ou de taux d'abandon sont négatives.
 ```
 
 ### Récit de données

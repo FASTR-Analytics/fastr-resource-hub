@@ -59,8 +59,9 @@ Validate the data for [METRIC NAME] by:
 ```prompt
 Analyze key health metrics over the past 12 months and create a trend analysis deck:
 - One slide per significant trend with a time series visualization
-- A summary slide highlighting top 3 improvements and top 3 concerns
+- A summary slide highlighting top 3 positive findings and top 3 areas of concern
 - Include specific numbers and percentage changes on each slide
+Remember: for mortality indicators, an increase is a concern, not an improvement.
 ```
 
 ### Compare Regions
@@ -69,6 +70,7 @@ Compare health indicator performance across administrative regions and create co
 - A chart comparing all regions with color-coded performance levels
 - A table showing top and bottom performers with percent change
 - A slide highlighting most improved and most concerning regions
+Remember: for mortality indicators, higher values are worse — rank accordingly.
 ```
 
 ### Period-over-Period Analysis
@@ -81,7 +83,7 @@ Compare current period performance against the previous period for key indicator
 
 ### Where to Focus
 ```prompt
-Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining performance or persistent gaps. Create a summary slide showing the priority areas.
+Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining service delivery, rising mortality or dropout rates, or persistent gaps. Create a summary slide showing the priority areas.
 ```
 
 # Indicator Analysis
@@ -128,7 +130,7 @@ Analyze BCG, Penta1, and Penta3 for disruptions and create visualization slides 
 
 ### Dropout Analysis
 ```prompt
-Compare Penta1 to Penta3 dropout patterns and show as a visualization over time. Are children completing the vaccine series? How has dropout changed? Show regional variation.
+Compare Penta1 to Penta3 dropout patterns and show as a visualization over time. Are children completing the vaccine series? How has dropout changed? Show regional variation. Note: increasing dropout is a negative finding — it means fewer children complete the series.
 ```
 
 ## General Services
@@ -201,10 +203,11 @@ Create a heatmap showing [DQ scores / completeness / performance] across [region
 ```prompt
 Create a monthly executive summary presentation:
 - Cover slide: "Monthly Health Indicators Summary - [MONTH YEAR]"
-- Key achievements: slides showing top improvements with visualizations
+- Positive findings: slides showing top improvements with visualizations
 - Areas needing attention: slides showing top concerns with visualizations
 - Final slide: recommended actions for stakeholders
 Make it ready to present to senior leadership.
+Remember: for mortality indicators, an increase is always a concern, never an achievement. For service indicators, an increase is positive.
 ```
 
 ### Quarterly Report
@@ -215,6 +218,7 @@ Create a quarterly report presentation covering the past 3 months:
 - Comparison with previous quarter
 - Regional performance highlights with charts
 - Final slide: recommended focus areas for next quarter
+Remember: for mortality indicators, an increase is always a concern, never progress. For service indicators, an increase is positive.
 ```
 
 ## Stakeholder Communication
@@ -243,7 +247,7 @@ I found something interesting: [DESCRIPTION]. Create a slide showing this insigh
 
 ### Quick Deck
 ```prompt
-I need a quick 5-slide deck on [INDICATOR/TOPIC] for [AUDIENCE]. Include: current status, trend over time, regional comparison, data quality context, and recommendations.
+I need a quick 5-slide deck on [INDICATOR/TOPIC] for [AUDIENCE]. Include: current status, trend over time, regional comparison, data quality context, and recommendations. Frame trends correctly: increases in service delivery are positive, but increases in mortality or dropout rates are negative.
 ```
 
 ### Data Story
