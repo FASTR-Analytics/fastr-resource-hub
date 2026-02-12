@@ -681,3 +681,357 @@ SLIDE 6 - Data quality trends (mean DQA score)
   - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
 - Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 ```
+
+## Prompt 4: Subnational Disruptions Report
+
+```prompt
+Generate a FASTR Subnational Disruptions Report. This report focuses on a single subnational area (e.g., a state, province, or county) and is self-contained — it covers the main disruption analysis, with optional sub-area breakdown and data quality assessment.
+
+STEP 1: ASK THE USER FOR:
+1. Country name
+2. Subnational area name (e.g., "Bauchi State", "Bomi County", "Région du Centre")
+3. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
+4. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
+
+The analysis generation date is February 2026.
+
+When user provides the analysis time period, convert to period_id format:
+- Start date becomes min value: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
+- End date becomes max value: [YEAR][MONTH] as 6-digit number (e.g., December 2025 = 202512)
+- Store these values to use in periodFilterOverride for all indicator slides
+
+STEP 2: IDENTIFY ADMIN LEVEL AND METRICS
+The admin hierarchy varies by country. You already know the terminology for each country (e.g., Nigeria: zones = admin_area_2, states = admin_area_3; Liberia: counties = admin_area_2, districts = admin_area_3). Use this knowledge combined with the platform data to determine the correct level.
+
+Procedure:
+1. Based on the country and area name, determine which admin level the area belongs to. Examples:
+   - "Bauchi State" in Nigeria → states are admin_area_3 → AREA_LEVEL = "admin_area_3"
+   - "North Central" zone in Nigeria → zones are admin_area_2 → AREA_LEVEL = "admin_area_2"
+   - "Bomi County" in Liberia → counties are admin_area_2 → AREA_LEVEL = "admin_area_2"
+   - "Gbarpolu District" in Liberia → districts are admin_area_3 → AREA_LEVEL = "admin_area_3"
+
+2. Verify by checking the platform: confirm the area name exists as a value in metrics disaggregated by that level.
+
+3. Record these variables — you will use them throughout the entire report:
+   - AREA_LEVEL: the admin level column (e.g., "admin_area_2" or "admin_area_3")
+   - AREA_VALUE: the exact area name as it appears in the platform data
+   - PARENT_LEVEL: the level above (e.g., if AREA_LEVEL is "admin_area_3", PARENT_LEVEL is "admin_area_2")
+   - SUB_AREA_LEVEL: the next level down (e.g., if AREA_LEVEL is "admin_area_2", SUB_AREA_LEVEL is "admin_area_3"; if AREA_LEVEL is "admin_area_3", SUB_AREA_LEVEL is "admin_area_4")
+
+4. Find the disruption metric and preset for AREA_LEVEL using get_available_metrics:
+   - For admin_area_2: metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
+   - For admin_area_3: look for the equivalent metric (actual vs expected service volume at admin_area_3 level) and its single-area disruption chart preset
+   - Store as: AREA_METRIC_ID and AREA_PRESET_ID
+
+5. Check if sub-area breakdown is possible at SUB_AREA_LEVEL:
+   - Look for a disruption metric at SUB_AREA_LEVEL via get_available_metrics
+   - If found, store as: SUB_AREA_METRIC_ID and SUB_AREA_PRESET_ID
+   - If no metrics exist at SUB_AREA_LEVEL, note that sub-area breakdown will not be available — inform the user in Step 4
+
+6. If you cannot find a disruption metric at AREA_LEVEL, inform the user and suggest alternatives (e.g., the area may need to be analyzed at a different level)
+
+STEP 3: DISCOVER AVAILABLE INDICATORS
+Before generating the report, check what indicators are available in the platform for this country.
+
+Each country instance has different indicator IDs (indicator_common_id) and labels. Do NOT assume a fixed list of codes — read them from the platform.
+
+1. Review all indicator IDs and their labels available in the platform for this country
+2. Present the full list to the user (ID + label)
+3. Propose groupings based on the indicator labels. Use these as a starting guide, but adapt to what actually exists:
+   - Antenatal Care: indicators related to ANC visits (e.g., anc1, anc4, anc_trimester1)
+   - Deliveries and Postnatal Care: facility deliveries, skilled birth attendance, PNC, C-sections (e.g., delivery, sba, pnc1, csection)
+   - Immunization: vaccines (e.g., bcg, penta1, penta3, measles1, opv1, fully_immunized)
+   - Family Planning: FP counseling, new users, continuing users (e.g., fp_new, fp_new_and_cont, fp_counseled)
+   - Adolescent Family Planning: if adolescent-specific FP indicators exist, group separately (e.g., fp_adolescent_counseled, fp_adolescent_new)
+   - Malaria: testing, positivity, treatment (e.g., malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
+   - General Services / OPD: outpatient visits (e.g., opd, opd_under5, opd_over5)
+   - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
+4. For any indicators that do not fit clearly into a group, present them to the user and ask:
+   - "I found these additional indicators: [list with IDs and labels]. For each, would you like me to: (a) add it to an existing group, (b) create a new group, or (c) exclude it from the analysis slides?"
+   - Note: mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths) involve low-volume event counts and may not be suitable for the standard disruption chart — flag this to the user
+5. Present the final proposed groupings to the user for confirmation before proceeding
+
+Each confirmed group will become ONE slide in the analysis section, with all indicators in that group shown side by side on the same chart. Use the exact indicator_common_id values from the platform for the filterOverrides and selectedReplicant parameters.
+
+ACCURACY REQUIREMENTS:
+1. Base all analysis only on data visible in the platform - do not draw on external knowledge
+2. Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
+3. If you cannot verify a claim from the data, mark it with [VERIFY]
+4. Do not guess at dates, time periods, or magnitudes
+
+REPORT STANDARDS:
+1. Maintain cautious, analytical language - no causal claims
+2. Treat disruption signals as descriptive and exploratory
+3. Structure narratives in complete sentences (not bullet points)
+4. Layout: interpretation on left, visualization on right
+5. Use consistent terminology throughout (do not switch between synonyms)
+
+CRITICAL — INDICATOR INTERPRETATION RULES:
+NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
+
+Service delivery indicators (increase = positive, decrease = concern):
+- ANC visits, deliveries, PNC visits, immunizations, OPD visits, family planning, skilled birth attendance
+- For these: "surplus" (above expected) = positive signal, "disruption" (below expected) = concern
+
+Mortality and adverse outcome indicators (increase = BAD, decrease = positive):
+- Maternal deaths, neonatal deaths, stillbirths, and any indicator measuring deaths or adverse events
+- For these: an INCREASE is a NEGATIVE finding — more deaths is ALWAYS bad
+- For these: a DECREASE is a POSITIVE finding — fewer deaths is ALWAYS good
+- NEVER describe an increase in deaths as an "improvement" or "positive trend"
+- NEVER describe a decrease in deaths as a "concern" or "disruption"
+
+Negative quality indicators (increase = bad, decrease = good):
+- Dropout rates (e.g., Penta1 to Penta3 dropout), outlier rates, stockout rates
+- For these: an increase means the situation is worsening
+
+When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
+
+VERIFICATION - Before finalizing each slide, cross-check:
+1. All numeric values match what the visualization shows
+2. Time periods and indicator names are correctly referenced
+3. Described trends (increases, decreases) match the actual data direction
+4. Numbers are consistent across slides (same indicator = same values)
+5. Interpretation framing matches indicator type — an increase in deaths is NEVER described as positive
+
+STRUCTURE:
+
+SLIDE 1 - Cover slide
+- Title: "Tracking Disruptions in Essential Services Using HMIS Data in [AREA NAME], [COUNTRY]"
+- Subtitle: "[REPORT_SUBTITLE]"
+- Footer: "Analysis generated in [CURRENT_MONTH_YEAR]"
+
+SLIDE 2 - Introductory slide
+- Title: "Tracking Disruptions in Essential Services Using HMIS Data"
+- Fixed text: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
+- Reserve space for image
+
+SLIDE 3 - Methodology slide
+- Title: "Methodology: Service Utilization Assessment"
+- Purpose: Track changes in health service use over time, identifying where services fall below or rise above expected patterns.
+- How it works: Uses routine HMIS data, cleaned for outliers and missing values. Builds an "expected" trend line for each service, adjusting for seasonality and historical trends. Compares actual service volumes to expected levels.
+- Measuring impact: Flagged disruption periods are analyzed to estimate how much service volumes changed compared to what was expected. Results are shown for [AREA NAME].
+- How to interpret figures: Red shaded areas = potential disruptions (below expected). Green shaded areas = potential surpluses (above expected). These are signals, not conclusions — they require further investigation.
+- Footer: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
+
+SLIDE 4 - Indicator selection slide
+- Title: "Methodology: Indicator selection"
+- Subtitle: "Indicators for the service utilization analysis were selected considering nationally prioritized indicators."
+- List all available indicators grouped by the confirmed categories from Step 3
+
+SLIDE 5 - Section header slide
+- Title: "Service Utilization in [AREA NAME]"
+- Subtitle: "Assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services"
+
+SLIDES 6+ - Area-level disruption analysis slides (one slide per indicator GROUP)
+Create one slide for each confirmed indicator group from Step 3. Each slide shows all indicators in that group side by side.
+
+FOR EACH GROUP SLIDE:
+
+Title: Write an analytical headline (1-2 sentences) that summarizes the key finding for this group of indicators. The headline should describe what the data shows, not just name the indicators.
+- Good example: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025, with some disruption in BCG"
+- Good example: "Deliveries show surplus in 2025, while PNC recovered after earlier disruptions"
+- Bad example: "BCG - Bacillus Calmette-Guérin vaccine"
+- Bad example: "Immunization indicators"
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: AREA_METRIC_ID (determined in Step 2, e.g., "m3-03-01" for admin_area_2)
+- vizPresetId: AREA_PRESET_ID (determined in Step 2, e.g., "disruption-chart-single-admin-area-2" for admin_area_2)
+- chartTitle: "Comparing reported service use to expected trends, [AREA NAME]"
+- selectedReplicant: AREA_VALUE (the exact area name from the platform)
+- filterOverrides: Filter on indicator_common_id to include ALL indicator codes for this group:
+  - col: "indicator_common_id"
+  - vals: [all indicator codes in the group, e.g., ["anc1", "anc4"] or ["bcg", "penta1", "penta3"]]
+- periodFilterOverride:
+  - periodOption: "period_id"
+  - min: Start date as 6-digit number (e.g., 202301 for January 2023)
+  - max: End date as 6-digit number (e.g., 202509 for September 2025)
+
+Interpretation (left side): Analyze the data shown in the visualization. Describe in complete sentences:
+- For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
+- For EACH indicator in the group: when surpluses occurred, and approximate magnitude
+- Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
+- Overall assessment: a concluding sentence on what the combined pattern means for this service area
+- IMPORTANT: Only describe what is actually visible in the chart - do not invent data
+
+BACK PAGE:
+- "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
+
+STEP 4 (OPTIONAL): SUB-AREA BREAKDOWN
+After generating the main report, ask the user: "Would you like to add sub-area profiles for areas within [AREA NAME]?"
+
+If SUB_AREA_METRIC_ID was not found in Step 2, inform the user: "Sub-area breakdown is not available — no disruption metrics exist at the [SUB_AREA_LEVEL] level for this country."
+
+If the user says yes and sub-area metrics are available:
+- Insert the sub-area section before the back page (move back page to end)
+
+SECTION HEADER SLIDE:
+- Title: "Sub-area Service Utilization Profiles within [AREA NAME]"
+
+SUB-AREA SLIDES (one per sub-area):
+For EACH sub-area within [AREA NAME], create a simple slide with:
+
+- Title: Name of the sub-area
+- Visualization: Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: SUB_AREA_METRIC_ID (determined in Step 2)
+  - vizPresetId: SUB_AREA_PRESET_ID (determined in Step 2)
+  - chartTitle: "Comparing reported service use to expected trends, [Sub-area Name]"
+  - selectedReplicant: The sub-area name value
+  - filterOverrides:
+    - col: "indicator_common_id"
+    - vals: [all indicator codes from the report]
+    - ALSO filter on AREA_LEVEL column to scope to AREA_VALUE (e.g., col: "admin_area_2", vals: ["North Central"] if showing states within a zone)
+  - periodFilterOverride: Use the same period as the main report
+
+Keep these slides clean — sub-area name and visualization only, no interpretation text.
+
+After the sub-area slides, re-add the back page as the final slide.
+
+STEP 5 (OPTIONAL): DATA QUALITY ASSESSMENT
+After the sub-area breakdown (or after the main report if sub-areas were skipped), ask the user: "Would you like to add a data quality assessment for [AREA NAME]?"
+
+If the user says yes, generate a DQ section scoped to the specific area. Insert before the back page (move back page to end).
+
+METHODOLOGY REFERENCE:
+If you need additional context on how FASTR calculates data quality metrics, fetch the methodology documentation from https://fastr-analytics.github.io/fastr-resource-hub/. Use it to write accurate summaries and interpretations for each slide.
+
+DATA QUALITY METRICS:
+Use get_available_metrics to confirm available metrics and their preset visualizations. The data quality metrics used in this section are:
+- m1-01-01: Proportion of outliers [percent] — preset: outlier-table — filters: indicator_common_id, admin_area_2
+- m1-02-02: Proportion of completed records [percent] — preset: completeness-table — filters: indicator_common_id, admin_area_2. ALWAYS use completeness-table preset for this metric (do NOT use completeness-timeseries)
+- m1-03-01: Proportion of sub-national areas meeting consistency criteria [percent] — preset: consistency-table — filters: ratio_type, admin_area_2
+- m1-04-01: Proportion of facilities with adequate data quality [percent] — preset: dqa-score-table — filters: admin_area_2
+- m1-04-02: Average data quality score across facilities [percent] — preset: mean-dqa-table — filters: admin_area_2
+
+For each DQ slide, apply a filterOverride on the AREA_LEVEL column (determined in Step 2) to scope all data to AREA_VALUE. For example:
+  - col: AREA_LEVEL (e.g., "admin_area_2" or "admin_area_3")
+  - vals: [AREA_VALUE]
+Use periodFilterOverride matching the main report period.
+
+STEP 5a: GENERATE COMPLETENESS SUMMARY
+
+DQ COVER SLIDE:
+- Title: "Data Quality Assessment: [AREA NAME]"
+
+DQ SLIDE 1 - Completeness trends
+Title: Write an analytical headline about completeness trends in [AREA NAME] (e.g., "Completeness is >95% for most indicators in [AREA NAME], strengthening confidence in disruption findings")
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m1-02-02"
+  Metric: Proportion of completed records [percent]
+  Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+  Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+- vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+  Filters: indicator_common_id, admin_area_2
+- Display as a table: period_id (rows) x indicator_common_id (columns) showing completeness %
+- Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
+- filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+- periodFilterOverride: Use the same period as the main report
+
+Interpretation (left side): Describe in complete sentences:
+- Summary of completeness trends over the analysis period for [AREA NAME]
+- Which indicators have weaker completeness (name them)
+- Whether completeness improved over time
+
+Then include this fixed text block:
+
+**Why Completeness Matters for the Disruptions Analysis**
+
+Observed values: These are adjusted for outliers only, so they reflect the actual raw service volumes after removing implausible spikes.
+
+Expected values: These are adjusted for both completeness and outliers. This means the model "fills in" where reporting gaps exist, building an expected trend line as if all facilities had reported consistently.
+
+When completeness is high, observed and expected volumes are more comparable, and disruptions are more likely to reflect true service changes.
+
+When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
+
+STEP 5b: ASK THE USER
+After generating the completeness summary, ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends for [AREA NAME]?"
+
+If the user says yes, update the DQ cover slide title to "Data Quality Assessment: [AREA NAME]", then generate the following additional slides. All slides are filtered to [AREA NAME].
+
+DQ SLIDE 2 - Outliers
+- Title: Write an analytical headline about outlier patterns in [AREA NAME]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-01-01"
+    Metric: Proportion of outliers [percent]
+    Values: outlier_flag (Binary variable indicating whether this is an outlier)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "outlier-table" (Outlier proportion table - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
+  - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interpretation (left side): In complete sentences:
+  - Describe the trend in outlier rates for [AREA NAME] — are they stable, improving, or worsening?
+  - Name specific indicators with the highest outlier rates
+  - Note whether outlier rates have improved or worsened over the analysis period
+  - Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
+- Fixed text (include on slide below the interpretation): "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
+
+DQ SLIDE 3 - Internal consistency
+- Title: Write an analytical headline about consistency in [AREA NAME]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-03-01"
+    Metric: Proportion of sub-national areas meeting consistency criteria [percent]
+    Values: sconsistency
+    Auto-disaggregated by: ratio_type
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "consistency-table" (Internal consistency table - YYYYMM)
+    Filters: ratio_type, admin_area_2
+  - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
+  - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interpretation (left side): In complete sentences:
+  - Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
+  - Identify which ratios consistently meet or fail criteria in [AREA NAME]
+  - Note whether consistency is improving or worsening over the analysis period
+- Fixed text (include on slide below the interpretation): "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
+
+DQ SLIDE 4 - Data quality trends (overall DQA score)
+- Title: Write an analytical headline about DQA trends in [AREA NAME]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-01"
+    Metric: Proportion of facilities with adequate data quality [percent]
+    Values: dqa_score (Binary variable indicating adequate data quality)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "dqa-score-table" (Overall DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interpretation (left side): In complete sentences:
+  - Describe the DQA trend in [AREA NAME] — is data quality improving over time?
+  - Identify whether DQ has notably improved or declined
+  - Explain the implication: low DQA scores may mean less reliable disruption estimates
+- Fixed text (include on slide below the interpretation): "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
+
+DQ SLIDE 5 - Data quality trends (mean DQA score)
+- Title: Write an analytical headline about mean DQA trends in [AREA NAME]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-02"
+    Metric: Average data quality score across facilities [percent]
+    Values: dqa_mean (Data quality score across facilities)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "mean-dqa-table" (Mean DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interpretation (left side): In complete sentences:
+  - Describe the mean DQA trend in [AREA NAME] — is it improving, stable, or declining?
+  - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
+- Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
+
+After all DQ slides, re-add the back page as the final slide.
+```

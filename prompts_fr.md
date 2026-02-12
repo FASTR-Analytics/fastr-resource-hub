@@ -683,3 +683,357 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
   - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
 - Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 ```
+
+## Prompt 4 : Rapport infranational sur les perturbations
+
+```prompt
+Génère un rapport FASTR sur les perturbations au niveau infranational. Ce rapport se concentre sur une seule zone infranationale (par exemple un État, une province ou un comté) et est autonome — il couvre l'analyse principale des perturbations, avec une ventilation optionnelle par sous-zone et une évaluation optionnelle de la qualité des données.
+
+ÉTAPE 1 : DEMANDER À L'UTILISATEUR :
+1. Le nom du pays
+2. Le nom de la zone infranationale (par exemple « État de Bauchi », « Comté de Bomi », « Région du Centre »)
+3. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
+4. Le sous-titre du rapport : Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 »
+
+La date de génération de l'analyse est février 2026.
+
+Quand l'utilisateur fournit la période d'analyse, convertir au format period_id :
+- La date de début devient la valeur minimale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple janvier 2025 = 202501)
+- La date de fin devient la valeur maximale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple décembre 2025 = 202512)
+- Conserver ces valeurs pour les utiliser dans periodFilterOverride pour toutes les diapositives d'indicateurs
+
+ÉTAPE 2 : IDENTIFIER LE NIVEAU ADMINISTRATIF ET LES INDICATEURS
+La hiérarchie administrative varie selon les pays. Vous connaissez déjà la terminologie pour chaque pays (par exemple Nigéria : zones = admin_area_2, États = admin_area_3 ; Libéria : comtés = admin_area_2, districts = admin_area_3). Utiliser ces connaissances combinées aux données de la plateforme pour déterminer le bon niveau.
+
+Procédure :
+1. En fonction du pays et du nom de la zone, déterminer à quel niveau administratif la zone appartient. Exemples :
+   - « État de Bauchi » au Nigéria → les États sont admin_area_3 → AREA_LEVEL = "admin_area_3"
+   - Zone « North Central » au Nigéria → les zones sont admin_area_2 → AREA_LEVEL = "admin_area_2"
+   - « Comté de Bomi » au Libéria → les comtés sont admin_area_2 → AREA_LEVEL = "admin_area_2"
+   - « District de Gbarpolu » au Libéria → les districts sont admin_area_3 → AREA_LEVEL = "admin_area_3"
+
+2. Vérifier en consultant la plateforme : confirmer que le nom de la zone existe comme valeur dans les indicateurs désagrégés à ce niveau.
+
+3. Enregistrer ces variables — elles seront utilisées tout au long du rapport :
+   - AREA_LEVEL : la colonne du niveau administratif (par exemple "admin_area_2" ou "admin_area_3")
+   - AREA_VALUE : le nom exact de la zone tel qu'il apparaît dans les données de la plateforme
+   - PARENT_LEVEL : le niveau au-dessus (par exemple si AREA_LEVEL est "admin_area_3", PARENT_LEVEL est "admin_area_2")
+   - SUB_AREA_LEVEL : le niveau suivant en dessous (par exemple si AREA_LEVEL est "admin_area_2", SUB_AREA_LEVEL est "admin_area_3" ; si AREA_LEVEL est "admin_area_3", SUB_AREA_LEVEL est "admin_area_4")
+
+4. Trouver l'indicateur de perturbation et le préréglage pour AREA_LEVEL via get_available_metrics :
+   - Pour admin_area_2 : metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
+   - Pour admin_area_3 : rechercher l'indicateur équivalent (volume de services réel vs attendu au niveau admin_area_3) et son préréglage de graphique de perturbation pour zone unique
+   - Stocker comme : AREA_METRIC_ID et AREA_PRESET_ID
+
+5. Vérifier si la ventilation par sous-zone est possible au SUB_AREA_LEVEL :
+   - Rechercher un indicateur de perturbation au SUB_AREA_LEVEL via get_available_metrics
+   - Si trouvé, stocker comme : SUB_AREA_METRIC_ID et SUB_AREA_PRESET_ID
+   - Si aucun indicateur n'existe au SUB_AREA_LEVEL, noter que la ventilation par sous-zone ne sera pas disponible — en informer l'utilisateur à l'Étape 4
+
+6. Si aucun indicateur de perturbation ne peut être trouvé au AREA_LEVEL, en informer l'utilisateur et suggérer des alternatives (par exemple la zone devra peut-être être analysée à un autre niveau)
+
+ÉTAPE 3 : DÉCOUVRIR LES INDICATEURS DISPONIBLES
+Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans la plateforme pour ce pays.
+
+Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et des libellés différents. Ne PAS supposer une liste fixe de codes — les lire depuis la plateforme.
+
+1. Passer en revue tous les identifiants d'indicateurs et leurs libellés disponibles dans la plateforme pour ce pays
+2. Présenter la liste complète à l'utilisateur (identifiant + libellé)
+3. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
+   - Soins prénatals : indicateurs liés aux visites CPN (par exemple anc1, anc4, anc_trimester1)
+   - Accouchements et soins postnatals : accouchements en structure, personnel qualifié, CPoN, césariennes (par exemple delivery, sba, pnc1, csection)
+   - Vaccination : vaccins (par exemple bcg, penta1, penta3, measles1, opv1, fully_immunized)
+   - Planification familiale : conseil PF, nouveaux utilisateurs, utilisateurs continus (par exemple fp_new, fp_new_and_cont, fp_counseled)
+   - Planification familiale des adolescents : si des indicateurs PF spécifiques aux adolescents existent, les regrouper séparément (par exemple fp_adolescent_counseled, fp_adolescent_new)
+   - Paludisme : tests, positivité, traitement (par exemple malaria_rdt_positive, malaria_treated_less_24hrs, mal_positive)
+   - Services généraux / Consultations externes : visites ambulatoires (par exemple opd, opd_under5, opd_over5)
+   - Autres groupes selon les besoins basés sur ce qui existe (par exemple Nutrition, VIH/TB, MNT, Mortalité)
+4. Pour tout indicateur ne correspondant pas clairement à un groupe, le présenter à l'utilisateur et demander :
+   - « J'ai trouvé ces indicateurs supplémentaires : [liste avec identifiants et libellés]. Pour chacun, souhaitez-vous que je : (a) l'ajoute à un groupe existant, (b) crée un nouveau groupe, ou (c) l'exclue des diapositives d'analyse ? »
+   - Note : les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths) impliquent des comptages d'événements à faible volume et peuvent ne pas convenir au graphique standard de perturbation — le signaler à l'utilisateur
+5. Présenter les regroupements finaux proposés à l'utilisateur pour confirmation avant de poursuivre
+
+Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
+
+EXIGENCES DE PRÉCISION :
+1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme - ne pas recourir à des connaissances externes
+2. Ne pas inventer de statistiques, de pourcentages ou de chiffres précis - si les données ne sont pas visibles, le signaler
+3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
+4. Ne pas deviner les dates, les périodes ou les magnitudes
+
+NORMES DU RAPPORT :
+1. Maintenir un langage prudent et analytique - pas d'affirmations causales
+2. Traiter les signaux de perturbation comme descriptifs et exploratoires
+3. Structurer les narratifs en phrases complètes (pas de listes à puces)
+4. Mise en page : interprétation à gauche, visualisation à droite
+5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
+
+CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
+Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
+
+Indicateurs de prestation de services (augmentation = positif, baisse = préoccupant) :
+- Visites CPN, accouchements, CPoN, vaccinations, consultations externes, planification familiale, accouchements assistés
+- Pour ceux-ci : « surplus » (au-dessus de l'attendu) = signal positif, « perturbation » (en dessous de l'attendu) = préoccupant
+
+Indicateurs de mortalité et d'issues défavorables (augmentation = MAUVAIS, baisse = positif) :
+- Décès maternels, décès néonatals, mortinaissances, et tout indicateur mesurant des décès ou des issues défavorables
+- Pour ceux-ci : une AUGMENTATION est un résultat NÉGATIF — plus de décès est TOUJOURS mauvais
+- Pour ceux-ci : une DIMINUTION est un résultat POSITIF — moins de décès est TOUJOURS bon
+- Ne JAMAIS décrire une augmentation des décès comme une « amélioration » ou une « tendance positive »
+- Ne JAMAIS décrire une diminution des décès comme une « préoccupation » ou une « perturbation »
+
+Indicateurs négatifs de qualité (augmentation = mauvais, baisse = bon) :
+- Taux d'abandon (par exemple abandon Penta1 à Penta3), taux de valeurs aberrantes, taux de rupture de stock
+- Pour ceux-ci : une augmentation signifie que la situation se détériore
+
+Lors de la rédaction des titres et des interprétations, toujours vérifier : cet indicateur mesure-t-il quelque chose dont nous voulons PLUS (services) ou MOINS (décès, abandons) ? Formuler en conséquence.
+
+VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
+1. Toutes les valeurs numériques correspondent à ce que montre la visualisation
+2. Les périodes et les noms d'indicateurs sont correctement référencés
+3. Les tendances décrites (hausses, baisses) correspondent à la direction réelle des données
+4. Les chiffres sont cohérents entre les diapositives (même indicateur = mêmes valeurs)
+5. Le cadrage de l'interprétation correspond au type d'indicateur — une augmentation des décès n'est JAMAIS décrite comme positive
+
+STRUCTURE :
+
+DIAPOSITIVE 1 - Diapositive de couverture
+- Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS à/au/en [NOM DE LA ZONE], [PAYS] »
+- Sous-titre : « [SOUS_TITRE_RAPPORT] »
+- Pied de page : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
+
+DIAPOSITIVE 2 - Diapositive d'introduction
+- Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS »
+- Texte fixe : « L'approche FASTR utilise les données de routine du SNIS pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé clés. Cette analyse offre une perspective rapide à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des schémas attendus. Les résultats génèrent des données probantes exploitables pour guider des réponses rapides, contribuant à maintenir la continuité des soins essentiels en période d'incertitude financière ou de changement opérationnel. »
+- Réserver un espace pour l'image
+
+DIAPOSITIVE 3 - Diapositive méthodologique
+- Titre : « Méthodologie : Évaluation de l'utilisation des services »
+- Objectif : Suivre les changements dans l'utilisation des services de santé au fil du temps, en identifiant où les services tombent en dessous ou dépassent les schémas attendus.
+- Comment ça fonctionne : Utilise les données de routine du SNIS, nettoyées des valeurs aberrantes et des valeurs manquantes. Construit une ligne de tendance « attendue » pour chaque service, ajustée pour la saisonnalité et les tendances historiques. Compare les volumes de services réels aux niveaux attendus.
+- Mesure de l'impact : Les périodes de perturbation signalées sont analysées pour estimer dans quelle mesure les volumes de services ont changé par rapport à ce qui était attendu. Les résultats sont présentés pour [NOM DE LA ZONE].
+- Comment interpréter les figures : Les zones ombrées en rouge = perturbations potentielles (en dessous de l'attendu). Les zones ombrées en vert = surplus potentiels (au-dessus de l'attendu). Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie.
+- Pied de page : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
+
+DIAPOSITIVE 4 - Diapositive de sélection des indicateurs
+- Titre : « Méthodologie : Sélection des indicateurs »
+- Sous-titre : « Les indicateurs pour l'analyse de l'utilisation des services ont été sélectionnés en tenant compte des indicateurs priorisés au niveau national. »
+- Lister tous les indicateurs disponibles regroupés par les catégories confirmées à l'Étape 3
+
+DIAPOSITIVE 5 - Diapositive d'en-tête de section
+- Titre : « Utilisation des services à/au/en [NOM DE LA ZONE] »
+- Sous-titre : « Évaluation des volumes projetés sur la base des tendances historiques pour identifier les surplus et les perturbations dans les services de santé »
+
+DIAPOSITIVES 6+ - Diapositives d'analyse des perturbations au niveau de la zone (une diapositive par GROUPE d'indicateurs)
+Créer une diapositive pour chaque groupe d'indicateurs confirmé à l'Étape 3. Chaque diapositive montre tous les indicateurs du groupe côte à côte.
+
+POUR CHAQUE DIAPOSITIVE DE GROUPE :
+
+Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion principale pour ce groupe d'indicateurs. Le titre doit décrire ce que montrent les données, pas simplement nommer les indicateurs.
+- Bon exemple : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise à la mi-2025, avec quelques perturbations pour le BCG »
+- Bon exemple : « Les accouchements montrent un surplus en 2025, tandis que les CPoN ont récupéré après des perturbations antérieures »
+- Mauvais exemple : « BCG - Vaccin Bacillus Calmette-Guérin »
+- Mauvais exemple : « Indicateurs de vaccination »
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: AREA_METRIC_ID (determined in Step 2, e.g., "m3-03-01" for admin_area_2)
+- vizPresetId: AREA_PRESET_ID (determined in Step 2, e.g., "disruption-chart-single-admin-area-2" for admin_area_2)
+- chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [NOM DE LA ZONE] »
+- selectedReplicant: AREA_VALUE (the exact area name from the platform)
+- filterOverrides: Filter on indicator_common_id to include ALL indicator codes for this group:
+  - col: "indicator_common_id"
+  - vals: [all indicator codes in the group, e.g., ["anc1", "anc4"] or ["bcg", "penta1", "penta3"]]
+- periodFilterOverride:
+  - periodOption: "period_id"
+  - min: Start date as 6-digit number (e.g., 202301 for January 2023)
+  - max: End date as 6-digit number (e.g., 202509 for September 2025)
+
+Interprétation (côté gauche) : Analyser les données affichées dans la visualisation. Décrire en phrases complètes :
+- Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
+- Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
+- Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
+- Évaluation globale : une phrase de conclusion sur ce que le schéma combiné signifie pour ce domaine de services
+- IMPORTANT : Ne décrire que ce qui est réellement visible dans le graphique - ne pas inventer de données
+
+DERNIÈRE PAGE :
+- "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
+
+ÉTAPE 4 (OPTIONNELLE) : VENTILATION PAR SOUS-ZONE
+Après avoir généré le rapport principal, demander à l'utilisateur : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? »
+
+Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, informer l'utilisateur : « La ventilation par sous-zone n'est pas disponible — aucun indicateur de perturbation n'existe au niveau [SUB_AREA_LEVEL] pour ce pays. »
+
+Si l'utilisateur accepte et que les indicateurs de sous-zone sont disponibles :
+- Insérer la section de sous-zones avant la dernière page (déplacer la dernière page à la fin)
+
+DIAPOSITIVE D'EN-TÊTE DE SECTION :
+- Titre : « Profils d'utilisation des services par sous-zone au sein de [NOM DE LA ZONE] »
+
+DIAPOSITIVES PAR SOUS-ZONE (une par sous-zone) :
+Pour CHAQUE sous-zone au sein de [NOM DE LA ZONE], créer une diapositive simple avec :
+
+- Titre : Nom de la sous-zone
+- Visualization: Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: SUB_AREA_METRIC_ID (determined in Step 2)
+  - vizPresetId: SUB_AREA_PRESET_ID (determined in Step 2)
+  - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la sous-zone] »
+  - selectedReplicant: The sub-area name value
+  - filterOverrides:
+    - col: "indicator_common_id"
+    - vals: [all indicator codes from the report]
+    - ALSO filter on AREA_LEVEL column to scope to AREA_VALUE (e.g., col: "admin_area_2", vals: ["North Central"] if showing states within a zone)
+  - periodFilterOverride: Use the same period as the main report
+
+Garder ces diapositives épurées — nom de la sous-zone et visualisation uniquement, pas de texte d'interprétation.
+
+Après les diapositives de sous-zones, remettre la dernière page comme diapositive finale.
+
+ÉTAPE 5 (OPTIONNELLE) : ÉVALUATION DE LA QUALITÉ DES DONNÉES
+Après la ventilation par sous-zone (ou après le rapport principal si les sous-zones ont été ignorées), demander à l'utilisateur : « Souhaitez-vous ajouter une évaluation de la qualité des données pour [NOM DE LA ZONE] ? »
+
+Si l'utilisateur accepte, générer une section EQD ciblée sur la zone spécifique. Insérer avant la dernière page (déplacer la dernière page à la fin).
+
+RÉFÉRENCE MÉTHODOLOGIQUE :
+Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, consultez la documentation méthodologique à l'adresse https://fastr-analytics.github.io/fastr-resource-hub/. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
+
+INDICATEURS DE QUALITÉ DES DONNÉES :
+Utiliser get_available_metrics pour confirmer les indicateurs disponibles et leurs préréglages de visualisation. Les indicateurs de qualité des données utilisés dans cette section sont :
+- m1-01-01 : Proportion de valeurs aberrantes [pourcentage] — préréglage : outlier-table — filtres : indicator_common_id, admin_area_2
+- m1-02-02 : Proportion de rapports complétés [pourcentage] — préréglage : completeness-table — filtres : indicator_common_id, admin_area_2. TOUJOURS utiliser le préréglage completeness-table pour cet indicateur (NE PAS utiliser completeness-timeseries)
+- m1-03-01 : Proportion de zones infranationales respectant les critères de cohérence [pourcentage] — préréglage : consistency-table — filtres : ratio_type, admin_area_2
+- m1-04-01 : Proportion d'établissements avec une qualité de données adéquate [pourcentage] — préréglage : dqa-score-table — filtres : admin_area_2
+- m1-04-02 : Score moyen de qualité des données entre les établissements [pourcentage] — préréglage : mean-dqa-table — filtres : admin_area_2
+
+Pour chaque diapositive EQD, appliquer un filterOverride sur la colonne AREA_LEVEL (déterminée à l'Étape 2) pour cibler toutes les données sur AREA_VALUE. Par exemple :
+  - col: AREA_LEVEL (e.g., "admin_area_2" or "admin_area_3")
+  - vals: [AREA_VALUE]
+Utiliser periodFilterOverride correspondant à la période du rapport principal.
+
+ÉTAPE 5a : GÉNÉRER LE RÉSUMÉ DE COMPLÉTUDE
+
+DIAPOSITIVE DE COUVERTURE EQD :
+- Titre : « Évaluation de la qualité des données : [NOM DE LA ZONE] »
+
+DIAPOSITIVE EQD 1 - Tendances de complétude
+Titre : Rédiger un titre analytique sur les tendances de complétude dans [NOM DE LA ZONE] (par exemple « La complétude est >95 % pour la plupart des indicateurs dans [NOM DE LA ZONE], renforçant la confiance dans les résultats sur les perturbations »)
+
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m1-02-02"
+  Metric: Proportion of completed records [percent]
+  Values: completeness_flag (Binary variable indicating whether the facility meets criteria)
+  Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+- vizPresetId: "completeness-table" (Completeness table by region - YYYYMM)
+  Filters: indicator_common_id, admin_area_2
+- Display as a table: period_id (rows) x indicator_common_id (columns) showing completeness %
+- Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
+- filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+- periodFilterOverride: Use the same period as the main report
+
+Interprétation (côté gauche) : Décrire en phrases complètes :
+- Un résumé des tendances de complétude sur la période d'analyse pour [NOM DE LA ZONE]
+- Quels indicateurs ont une complétude plus faible (les nommer)
+- Si la complétude s'est améliorée au fil du temps
+
+Puis inclure ce bloc de texte fixe :
+
+**Pourquoi la complétude est importante pour l'analyse des perturbations**
+
+Valeurs observées : Elles sont ajustées uniquement pour les valeurs aberrantes, et reflètent donc les volumes réels de services après suppression des pics implausibles.
+
+Valeurs attendues : Elles sont ajustées pour la complétude et les valeurs aberrantes. Cela signifie que le modèle « comble » les lacunes de rapportage, construisant une ligne de tendance attendue comme si tous les établissements avaient rapporté de manière cohérente.
+
+Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations reflètent plus probablement de véritables changements dans les services.
+
+Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
+
+ÉTAPE 5b : DEMANDER À L'UTILISATEUR
+Après avoir généré le résumé de complétude, demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD pour [NOM DE LA ZONE] ? »
+
+Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture EQD en « Évaluation de la qualité des données : [NOM DE LA ZONE] », puis générer les diapositives supplémentaires suivantes. Toutes les diapositives sont filtrées sur [NOM DE LA ZONE].
+
+DIAPOSITIVE EQD 2 - Valeurs aberrantes
+- Titre : Rédiger un titre analytique sur les valeurs aberrantes dans [NOM DE LA ZONE]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-01-01"
+    Metric: Proportion of outliers [percent]
+    Values: outlier_flag (Binary variable indicating whether this is an outlier)
+    Optional disaggregations: admin_area_2, admin_area_3, indicator_common_id, year, month, period_id
+  - vizPresetId: "outlier-table" (Outlier proportion table - YYYYMM)
+    Filters: indicator_common_id, admin_area_2
+  - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
+  - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance des taux de valeurs aberrantes dans [NOM DE LA ZONE] — sont-ils stables, en amélioration ou en détérioration ?
+  - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
+  - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
+  - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
+
+DIAPOSITIVE EQD 3 - Cohérence interne
+- Titre : Rédiger un titre analytique sur la cohérence dans [NOM DE LA ZONE]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-03-01"
+    Metric: Proportion of sub-national areas meeting consistency criteria [percent]
+    Values: sconsistency
+    Auto-disaggregated by: ratio_type
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "consistency-table" (Internal consistency table - YYYYMM)
+    Filters: ratio_type, admin_area_2
+  - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
+  - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
+  - Identifier quels ratios respectent ou échouent systématiquement les critères dans [NOM DE LA ZONE]
+  - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+
+DIAPOSITIVE EQD 4 - Tendances de la qualité des données (score EQD global)
+- Titre : Rédiger un titre analytique sur les tendances de l'EQD dans [NOM DE LA ZONE]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-01"
+    Metric: Proportion of facilities with adequate data quality [percent]
+    Values: dqa_score (Binary variable indicating adequate data quality)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "dqa-score-table" (Overall DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance EQD dans [NOM DE LA ZONE] — la qualité des données s'améliore-t-elle au fil du temps ?
+  - Identifier si la qualité des données s'est notablement améliorée ou détériorée
+  - Expliquer l'implication : des scores EQD faibles peuvent signifier des estimations de perturbation moins fiables
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+
+DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
+- Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD dans [NOM DE LA ZONE]
+- Visualization (right side): Create using from_metric with these parameters:
+  - type: "from_metric"
+  - metricId: "m1-04-02"
+    Metric: Average data quality score across facilities [percent]
+    Values: dqa_mean (Data quality score across facilities)
+    Optional disaggregations: admin_area_2, admin_area_3, year, month, period_id
+  - vizPresetId: "mean-dqa-table" (Mean DQA score table - YYYYMM)
+    Filters: admin_area_2
+  - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
+  - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+  - filterOverrides: col: AREA_LEVEL, vals: [AREA_VALUE] (to scope to [AREA NAME])
+  - periodFilterOverride: Use the same period as the main report
+- Interprétation (côté gauche) : En phrases complètes :
+  - Décrire la tendance du score moyen de l'EQD dans [NOM DE LA ZONE] — s'améliore-t-elle, est-elle stable ou en déclin ?
+  - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
+- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
+
+Après toutes les diapositives EQD, remettre la dernière page comme diapositive finale.
+```
