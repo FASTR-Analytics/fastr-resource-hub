@@ -603,7 +603,7 @@ When completeness is high, observed and expected volumes are more comparable, an
 When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 
 STEP 2: ASK THE USER
-After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends?"
+After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends?" — ask this exact question only, do not add explanations
 
 If the user says yes, update the cover slide title to "Annex [1 or 2]: Data Quality Assessment", then generate the following additional slides:
 
@@ -863,9 +863,11 @@ BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 
 STEP 4 (OPTIONAL): SUB-AREA BREAKDOWN
-After generating the main report, use ask_user_questions to ask: "Would you like to add sub-area profiles for areas within [AREA NAME]?"
+Before asking the user, first verify that sub-area data actually exists: use get_metric_data with SUB_AREA_METRIC_ID to check if data is returned for areas within [AREA NAME]. If no data exists, skip this step silently — do not offer it.
 
-If SUB_AREA_METRIC_ID was not found in Step 2, inform the user: "Sub-area breakdown is not available — no disruption metrics were found at the next admin level down."
+If data exists, use ask_user_questions to ask: "Would you like to add sub-area profiles for areas within [AREA NAME]?" — ask this exact question only, do not add explanations
+
+If SUB_AREA_METRIC_ID was not found in Step 2, skip this step — do not offer it.
 
 If the user says yes and sub-area metrics are available:
 - Insert the sub-area section before the back page (move back page to end)
@@ -909,7 +911,7 @@ Keep these slides clean — sub-area name and visualization only, no interpretat
 After the sub-area slides, re-add the back page as the final slide.
 
 STEP 5 (OPTIONAL): DATA QUALITY ASSESSMENT
-After the sub-area breakdown (or after the main report if sub-areas were skipped), use ask_user_questions to ask: "Would you like to add a data quality assessment for [AREA NAME]?"
+After the sub-area breakdown (or after the main report if sub-areas were skipped), use ask_user_questions to ask: "Would you like to add a data quality assessment for [AREA NAME]?" — ask this exact question only, do not add explanations or bullet lists of what the section includes
 
 If the user says yes, generate a DQ section scoped to the specific area. Insert before the back page (move back page to end).
 
@@ -968,7 +970,7 @@ When completeness is high, observed and expected volumes are more comparable, an
 When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery.
 
 STEP 5b: ASK THE USER
-After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends for [AREA NAME]?"
+After generating the completeness summary, use ask_user_questions to ask: "Would you like me to add additional data quality slides covering outliers, internal consistency, and DQA score trends for [AREA NAME]?" — ask this exact question only, do not add explanations
 
 If the user says yes, update the DQ cover slide title to "Data Quality Assessment: [AREA NAME]", then generate the following additional slides. All slides are filtered to [AREA NAME].
 

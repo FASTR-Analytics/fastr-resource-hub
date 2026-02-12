@@ -605,7 +605,7 @@ Lorsque la complétude est élevée, les volumes observés et attendus sont plus
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 ÉTAPE 2 : DEMANDER À L'UTILISATEUR
-Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? »
+Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD ? » — poser exactement cette question uniquement, ne pas ajouter d'explications
 
 Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture en « Annexe [1 ou 2] : Évaluation de la qualité des données », puis générer les diapositives supplémentaires suivantes :
 
@@ -865,9 +865,11 @@ DERNIÈRE PAGE :
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 
 ÉTAPE 4 (OPTIONNELLE) : VENTILATION PAR SOUS-ZONE
-Après avoir généré le rapport principal, utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? »
+Avant de demander à l'utilisateur, vérifier d'abord que des données de sous-zone existent : utiliser get_metric_data avec SUB_AREA_METRIC_ID pour vérifier si des données sont renvoyées pour les zones au sein de [NOM DE LA ZONE]. Si aucune donnée n'existe, ignorer cette étape silencieusement — ne pas la proposer.
 
-Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, informer l'utilisateur : « La ventilation par sous-zone n'est pas disponible — aucun indicateur de perturbation n'a été trouvé au niveau administratif suivant. »
+Si des données existent, utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? » — poser exactement cette question uniquement, ne pas ajouter d'explications
+
+Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, ignorer cette étape — ne pas la proposer.
 
 Si l'utilisateur accepte et que les indicateurs de sous-zone sont disponibles :
 - Insérer la section de sous-zones avant la dernière page (déplacer la dernière page à la fin)
@@ -911,7 +913,7 @@ Garder ces diapositives épurées — nom de la sous-zone et visualisation uniqu
 Après les diapositives de sous-zones, remettre la dernière page comme diapositive finale.
 
 ÉTAPE 5 (OPTIONNELLE) : ÉVALUATION DE LA QUALITÉ DES DONNÉES
-Après la ventilation par sous-zone (ou après le rapport principal si les sous-zones ont été ignorées), utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter une évaluation de la qualité des données pour [NOM DE LA ZONE] ? »
+Après la ventilation par sous-zone (ou après le rapport principal si les sous-zones ont été ignorées), utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter une évaluation de la qualité des données pour [NOM DE LA ZONE] ? » — poser exactement cette question uniquement, ne pas ajouter d'explications ni de listes de ce que la section contient
 
 Si l'utilisateur accepte, générer une section EQD ciblée sur la zone spécifique. Insérer avant la dernière page (déplacer la dernière page à la fin).
 
@@ -970,7 +972,7 @@ Lorsque la complétude est élevée, les volumes observés et attendus sont plus
 Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement supérieures aux valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 ÉTAPE 5b : DEMANDER À L'UTILISATEUR
-Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD pour [NOM DE LA ZONE] ? »
+Après avoir généré le résumé de complétude, utiliser ask_user_questions pour demander : « Souhaitez-vous que j'ajoute des diapositives supplémentaires sur la qualité des données couvrant les valeurs aberrantes, la cohérence interne et les tendances des scores EQD pour [NOM DE LA ZONE] ? » — poser exactement cette question uniquement, ne pas ajouter d'explications
 
 Si l'utilisateur accepte, mettre à jour le titre de la diapositive de couverture EQD en « Évaluation de la qualité des données : [NOM DE LA ZONE] », puis générer les diapositives supplémentaires suivantes. Toutes les diapositives sont filtrées sur [NOM DE LA ZONE].
 
