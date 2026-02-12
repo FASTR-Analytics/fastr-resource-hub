@@ -1096,9 +1096,10 @@ TABLES AND DQ SLIDES
 - Are methodology text blocks preserved accurately — not paraphrased or watered down?
 
 4. Present your findings for this slide — list any issues found and suggest fixes
-5. Wait for the user before moving to the next slide
+5. Use ask_user_questions to ask: "Slide [N]: [summary of findings]. How would you like to proceed?" with options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
 
-If no issues on a slide, say so and move on.
+If no issues on a slide, use ask_user_questions: "Slide [N]: No issues found. Continue?" with options: "Next slide", "Stop review here"
+
 After the last slide, confirm: "All slides reviewed."
 ```
 
@@ -1136,8 +1137,9 @@ WORD COUNT
 - Is each text block within the target range (50-100 words, max 180)?
 
 Present your findings for this slide — list any issues and suggest fixes.
-Wait for the user before moving to the next slide.
+Use ask_user_questions to ask: "Slide [N]: [summary of findings]. How would you like to proceed?" with options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
 
-If no issues on a slide, say so and move on.
+If no issues on a slide, use ask_user_questions: "Slide [N]: No issues found. Continue?" with options: "Next slide", "Stop review here"
+
 After the last slide, confirm: "All slides reviewed."
 ```

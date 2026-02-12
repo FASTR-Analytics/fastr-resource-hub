@@ -1098,9 +1098,10 @@ TABLEAUX ET DIAPOSITIVES EQD
 - Les blocs de texte méthodologiques sont-ils préservés fidèlement — ni paraphrasés ni édulcorés ?
 
 4. Présenter les résultats pour cette diapositive — lister les problèmes trouvés et suggérer des corrections
-5. Attendre la réponse de l'utilisateur avant de passer à la diapositive suivante
+5. Utiliser ask_user_questions pour demander : « Diapositive [N] : [résumé des résultats]. Comment souhaitez-vous procéder ? » avec les options : « Corriger et passer à la suivante », « Passer à la suivante », « Arrêter la révision ici »
 
-Si aucun problème sur une diapositive, le signaler et passer à la suivante.
+Si aucun problème sur une diapositive, utiliser ask_user_questions : « Diapositive [N] : Aucun problème trouvé. Continuer ? » avec les options : « Diapositive suivante », « Arrêter la révision ici »
+
 Après la dernière diapositive, confirmer : « Toutes les diapositives ont été révisées. »
 ```
 
@@ -1138,8 +1139,9 @@ NOMBRE DE MOTS
 - Chaque bloc de texte est-il dans la plage cible (50-100 mots, max 180) ?
 
 Présenter les résultats pour cette diapositive — lister les problèmes et suggérer des corrections.
-Attendre la réponse de l'utilisateur avant de passer à la diapositive suivante.
+Utiliser ask_user_questions pour demander : « Diapositive [N] : [résumé des résultats]. Comment souhaitez-vous procéder ? » avec les options : « Corriger et passer à la suivante », « Passer à la suivante », « Arrêter la révision ici »
 
-Si aucun problème sur une diapositive, le signaler et passer à la suivante.
+Si aucun problème sur une diapositive, utiliser ask_user_questions : « Diapositive [N] : Aucun problème trouvé. Continuer ? » avec les options : « Diapositive suivante », « Arrêter la révision ici »
+
 Après la dernière diapositive, confirmer : « Toutes les diapositives ont été révisées. »
 ```
