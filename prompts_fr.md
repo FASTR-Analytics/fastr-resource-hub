@@ -302,10 +302,10 @@ Explique comment FASTR ajuste les données pour les problèmes de qualité. Quan
 Génère un rapport FASTR sur les perturbations.
 
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
-Utiliser ask_user_questions pour collecter les informations suivantes en un seul appel :
-1. Le nom du pays
-2. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
-3. Le sous-titre du rapport : Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 »
+Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
+1. « Pour quel pays est ce rapport ? »
+2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
+3. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
 
 La date de génération de l'analyse est février 2026.
 
@@ -691,11 +691,11 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 Génère un rapport FASTR sur les perturbations au niveau infranational. Ce rapport se concentre sur une seule zone infranationale (par exemple un État, une province ou un comté) et est autonome — il couvre l'analyse principale des perturbations, avec une ventilation optionnelle par sous-zone et une évaluation optionnelle de la qualité des données.
 
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
-Utiliser ask_user_questions pour collecter les informations suivantes en un seul appel :
-1. Le nom du pays
-2. Le nom de la zone infranationale (par exemple « État de Bauchi », « Comté de Bomi », « Région du Centre »)
-3. La période d'analyse : La plage de dates des données à inclure (mois/année de début au mois/année de fin, par exemple « janvier 2023 à septembre 2025 »)
-4. Le sous-titre du rapport : Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 »
+Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
+1. « Pour quel pays est ce rapport ? »
+2. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple État de Bauchi, Comté de Bomi, Région du Centre) »
+3. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
+4. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
 
 La date de génération de l'analyse est février 2026.
 
@@ -705,34 +705,17 @@ Quand l'utilisateur fournit la période d'analyse, convertir au format period_id
 - Conserver ces valeurs pour les utiliser dans periodFilterOverride pour toutes les diapositives d'indicateurs
 
 ÉTAPE 2 : IDENTIFIER LE NIVEAU ADMINISTRATIF ET LES INDICATEURS
-La hiérarchie administrative varie selon les pays. Vous connaissez déjà la terminologie pour chaque pays (par exemple Nigéria : zones = admin_area_2, États = admin_area_3 ; Libéria : comtés = admin_area_2, districts = admin_area_3). Utiliser ces connaissances combinées aux données de la plateforme pour déterminer le bon niveau.
+Vous connaissez déjà la hiérarchie administrative de chaque pays. En fonction du pays et du nom de la zone de l'Étape 1, déterminer à quel niveau administratif la zone appartient et vérifier qu'elle existe dans la plateforme.
 
-Procédure :
-1. En fonction du pays et du nom de la zone, déterminer à quel niveau administratif la zone appartient. Exemples :
-   - « État de Bauchi » au Nigéria → les États sont admin_area_3 → AREA_LEVEL = "admin_area_3"
-   - Zone « North Central » au Nigéria → les zones sont admin_area_2 → AREA_LEVEL = "admin_area_2"
-   - « Comté de Bomi » au Libéria → les comtés sont admin_area_2 → AREA_LEVEL = "admin_area_2"
-   - « District de Gbarpolu » au Libéria → les districts sont admin_area_3 → AREA_LEVEL = "admin_area_3"
+Enregistrer pour utilisation tout au long du rapport :
+- AREA_LEVEL : la colonne du niveau administratif (par exemple "admin_area_2" ou "admin_area_3")
+- AREA_VALUE : le nom exact de la zone tel qu'il apparaît dans la plateforme
 
-2. Vérifier en consultant la plateforme : confirmer que le nom de la zone existe comme valeur dans les indicateurs désagrégés à ce niveau.
+Utiliser get_available_metrics pour trouver l'indicateur de perturbation et le préréglage de graphique pour zone unique au AREA_LEVEL. Stocker comme AREA_METRIC_ID et AREA_PRESET_ID. Pour admin_area_2, il s'agit généralement de "m3-03-01" et "disruption-chart-single-admin-area-2".
 
-3. Enregistrer ces variables — elles seront utilisées tout au long du rapport :
-   - AREA_LEVEL : la colonne du niveau administratif (par exemple "admin_area_2" ou "admin_area_3")
-   - AREA_VALUE : le nom exact de la zone tel qu'il apparaît dans les données de la plateforme
-   - PARENT_LEVEL : le niveau au-dessus (par exemple si AREA_LEVEL est "admin_area_3", PARENT_LEVEL est "admin_area_2")
-   - SUB_AREA_LEVEL : le niveau suivant en dessous (par exemple si AREA_LEVEL est "admin_area_2", SUB_AREA_LEVEL est "admin_area_3" ; si AREA_LEVEL est "admin_area_3", SUB_AREA_LEVEL est "admin_area_4")
+Vérifier également si un indicateur de perturbation existe au niveau administratif suivant (pour la ventilation optionnelle par sous-zone à l'Étape 4). Si trouvé, stocker comme SUB_AREA_METRIC_ID et SUB_AREA_PRESET_ID.
 
-4. Trouver l'indicateur de perturbation et le préréglage pour AREA_LEVEL via get_available_metrics :
-   - Pour admin_area_2 : metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
-   - Pour admin_area_3 : rechercher l'indicateur équivalent (volume de services réel vs attendu au niveau admin_area_3) et son préréglage de graphique de perturbation pour zone unique
-   - Stocker comme : AREA_METRIC_ID et AREA_PRESET_ID
-
-5. Vérifier si la ventilation par sous-zone est possible au SUB_AREA_LEVEL :
-   - Rechercher un indicateur de perturbation au SUB_AREA_LEVEL via get_available_metrics
-   - Si trouvé, stocker comme : SUB_AREA_METRIC_ID et SUB_AREA_PRESET_ID
-   - Si aucun indicateur n'existe au SUB_AREA_LEVEL, noter que la ventilation par sous-zone ne sera pas disponible — en informer l'utilisateur à l'Étape 4
-
-6. Si aucun indicateur de perturbation ne peut être trouvé au AREA_LEVEL, en informer l'utilisateur et suggérer des alternatives (par exemple la zone devra peut-être être analysée à un autre niveau)
+Si aucun indicateur de perturbation n'existe au AREA_LEVEL, en informer l'utilisateur et suggérer des alternatives.
 
 ÉTAPE 3 : DÉCOUVRIR LES INDICATEURS DISPONIBLES
 Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans la plateforme pour ce pays.
@@ -864,7 +847,7 @@ DERNIÈRE PAGE :
 ÉTAPE 4 (OPTIONNELLE) : VENTILATION PAR SOUS-ZONE
 Après avoir généré le rapport principal, utiliser ask_user_questions pour demander : « Souhaitez-vous ajouter des profils de sous-zones pour les zones au sein de [NOM DE LA ZONE] ? »
 
-Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, informer l'utilisateur : « La ventilation par sous-zone n'est pas disponible — aucun indicateur de perturbation n'existe au niveau [SUB_AREA_LEVEL] pour ce pays. »
+Si SUB_AREA_METRIC_ID n'a pas été trouvé à l'Étape 2, informer l'utilisateur : « La ventilation par sous-zone n'est pas disponible — aucun indicateur de perturbation n'a été trouvé au niveau administratif suivant. »
 
 Si l'utilisateur accepte et que les indicateurs de sous-zone sont disponibles :
 - Insérer la section de sous-zones avant la dernière page (déplacer la dernière page à la fin)

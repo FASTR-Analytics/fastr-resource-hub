@@ -302,10 +302,10 @@ Explain how FASTR adjusts data for quality issues. When are values adjusted vs. 
 Generate a FASTR Disruptions Report.
 
 STEP 1: ASK THE USER
-Use ask_user_questions to collect the following in a single call:
-1. Country name
-2. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
-3. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
+Use ask_user_questions to ask each of the following one at a time:
+1. "Which country is this report for?"
+2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
+3. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
 
 The analysis generation date is February 2026.
 
@@ -689,11 +689,11 @@ SLIDE 6 - Data quality trends (mean DQA score)
 Generate a FASTR Subnational Disruptions Report. This report focuses on a single subnational area (e.g., a state, province, or county) and is self-contained — it covers the main disruption analysis, with optional sub-area breakdown and data quality assessment.
 
 STEP 1: ASK THE USER
-Use ask_user_questions to collect the following in a single call:
-1. Country name
-2. Subnational area name (e.g., "Bauchi State", "Bomi County", "Région du Centre")
-3. Analysis time period: The date range of data to include (start month/year to end month/year, e.g., "January 2023 to September 2025")
-4. Report subtitle: What would you like as the cover subtitle? For example: "Q3 2025", "2025 Annual", "January-June 2025"
+Use ask_user_questions to ask each of the following one at a time:
+1. "Which country is this report for?"
+2. "Which subnational area should this report focus on? (e.g., Bauchi State, Bomi County, Région du Centre)"
+3. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
+4. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
 
 The analysis generation date is February 2026.
 
@@ -703,34 +703,17 @@ When user provides the analysis time period, convert to period_id format:
 - Store these values to use in periodFilterOverride for all indicator slides
 
 STEP 2: IDENTIFY ADMIN LEVEL AND METRICS
-The admin hierarchy varies by country. You already know the terminology for each country (e.g., Nigeria: zones = admin_area_2, states = admin_area_3; Liberia: counties = admin_area_2, districts = admin_area_3). Use this knowledge combined with the platform data to determine the correct level.
+You already know each country's admin hierarchy. Based on the country and area name from Step 1, determine which admin level the area belongs to and verify it exists in the platform.
 
-Procedure:
-1. Based on the country and area name, determine which admin level the area belongs to. Examples:
-   - "Bauchi State" in Nigeria → states are admin_area_3 → AREA_LEVEL = "admin_area_3"
-   - "North Central" zone in Nigeria → zones are admin_area_2 → AREA_LEVEL = "admin_area_2"
-   - "Bomi County" in Liberia → counties are admin_area_2 → AREA_LEVEL = "admin_area_2"
-   - "Gbarpolu District" in Liberia → districts are admin_area_3 → AREA_LEVEL = "admin_area_3"
+Record for use throughout the report:
+- AREA_LEVEL: the admin level column (e.g., "admin_area_2" or "admin_area_3")
+- AREA_VALUE: the exact area name as it appears in the platform
 
-2. Verify by checking the platform: confirm the area name exists as a value in metrics disaggregated by that level.
+Use get_available_metrics to find the disruption metric and single-area chart preset for AREA_LEVEL. Store as AREA_METRIC_ID and AREA_PRESET_ID. For admin_area_2, these are typically "m3-03-01" and "disruption-chart-single-admin-area-2".
 
-3. Record these variables — you will use them throughout the entire report:
-   - AREA_LEVEL: the admin level column (e.g., "admin_area_2" or "admin_area_3")
-   - AREA_VALUE: the exact area name as it appears in the platform data
-   - PARENT_LEVEL: the level above (e.g., if AREA_LEVEL is "admin_area_3", PARENT_LEVEL is "admin_area_2")
-   - SUB_AREA_LEVEL: the next level down (e.g., if AREA_LEVEL is "admin_area_2", SUB_AREA_LEVEL is "admin_area_3"; if AREA_LEVEL is "admin_area_3", SUB_AREA_LEVEL is "admin_area_4")
+Also check if a disruption metric exists at the next admin level down (for the optional sub-area breakdown in Step 4). If found, store as SUB_AREA_METRIC_ID and SUB_AREA_PRESET_ID.
 
-4. Find the disruption metric and preset for AREA_LEVEL using get_available_metrics:
-   - For admin_area_2: metricId "m3-03-01", vizPresetId "disruption-chart-single-admin-area-2"
-   - For admin_area_3: look for the equivalent metric (actual vs expected service volume at admin_area_3 level) and its single-area disruption chart preset
-   - Store as: AREA_METRIC_ID and AREA_PRESET_ID
-
-5. Check if sub-area breakdown is possible at SUB_AREA_LEVEL:
-   - Look for a disruption metric at SUB_AREA_LEVEL via get_available_metrics
-   - If found, store as: SUB_AREA_METRIC_ID and SUB_AREA_PRESET_ID
-   - If no metrics exist at SUB_AREA_LEVEL, note that sub-area breakdown will not be available — inform the user in Step 4
-
-6. If you cannot find a disruption metric at AREA_LEVEL, inform the user and suggest alternatives (e.g., the area may need to be analyzed at a different level)
+If no disruption metric exists at AREA_LEVEL, inform the user and suggest alternatives.
 
 STEP 3: DISCOVER AVAILABLE INDICATORS
 Before generating the report, check what indicators are available in the platform for this country.
@@ -862,7 +845,7 @@ BACK PAGE:
 STEP 4 (OPTIONAL): SUB-AREA BREAKDOWN
 After generating the main report, use ask_user_questions to ask: "Would you like to add sub-area profiles for areas within [AREA NAME]?"
 
-If SUB_AREA_METRIC_ID was not found in Step 2, inform the user: "Sub-area breakdown is not available — no disruption metrics exist at the [SUB_AREA_LEVEL] level for this country."
+If SUB_AREA_METRIC_ID was not found in Step 2, inform the user: "Sub-area breakdown is not available — no disruption metrics were found at the next admin level down."
 
 If the user says yes and sub-area metrics are available:
 - Insert the sub-area section before the back page (move back page to end)
