@@ -1062,10 +1062,10 @@ DQ SLIDE 5 - Data quality trends (mean DQA score)
 After all DQ slides, re-add the back page as the final slide.
 ```
 
-## Prompt 5: Review this report
+## Prompt 5a: Review data accuracy
 
 ```prompt
-Review the current slide deck for accuracy, consistency, and quality issues.
+Review the current slide deck — check that every text block is accurate against the underlying data.
 
 Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
 
@@ -1080,7 +1080,7 @@ c) Compare every number, percentage, trend, and time period mentioned in the tex
 
 Flag any mismatch. For each issue found, note the slide number, the text block, what it says, and what the data actually shows.
 
-STEP 2: APPLY THESE CHECKS TO EACH SLIDE
+STEP 2: CHECK DATA ACCURACY AND INTERPRETATION
 
 DATA ACCURACY
 - Does every number in the text blocks match the underlying data from the visualization?
@@ -1096,6 +1096,36 @@ INDICATOR INTERPRETATION DIRECTION
 - For negative quality indicators (dropout rates, outlier rates): is an increase described as worsening?
 - Flag any slide where the interpretation direction is wrong
 
+TABLES AND DQ SLIDES
+- For DQ annex slides with table visualizations: pull the data with get_metric_data and check that text block descriptions match the actual values. Check for missing or duplicated entries
+- Are methodology text blocks (outlier definitions, consistency criteria, DQA scoring) preserved accurately — not paraphrased or watered down?
+
+STEP 3: PRESENT FINDINGS AND FIX
+After reviewing all slides, present a summary.
+
+If issues were found:
+- List each issue with the slide number, what the problem is, and what the data actually shows
+- Ask: "I found these data accuracy issues. Would you like me to fix all of them, or go through them one by one?"
+
+If no issues were found:
+- Confirm: "I reviewed all [N] slides. All numbers and interpretations match the underlying data."
+
+If the user asks you to fix issues:
+- Apply corrections one slide at a time
+- For each fix, briefly state what you changed
+```
+
+## Prompt 5b: Review language and consistency
+
+```prompt
+Review the current slide deck — check language, terminology, consistency, and word count.
+
+Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
+
+Always refer to slides by their number (not their ID).
+
+Go through each slide and check the following:
+
 LANGUAGE AND FRAMING
 - No causal claims — only exploratory, descriptive language (e.g., "suggests" not "caused by")
 - No overgeneralization — findings are scoped to the specific area and time period
@@ -1108,10 +1138,6 @@ TECHNICAL TERMINOLOGY
 - Is the country name spelled correctly throughout?
 - Do admin area names match exactly what appears in the platform? (correct spelling, capitalization)
 
-TABLES AND DQ SLIDES
-- For DQ annex slides with table visualizations: pull the data with get_metric_data and check that text block descriptions match the actual values. Check for missing or duplicated entries
-- Are methodology text blocks (outlier definitions, consistency criteria, DQA scoring) preserved accurately — not paraphrased or watered down?
-
 CONSISTENCY ACROSS SLIDES
 - Same indicator referenced on multiple slides: are the values consistent?
 - Are indicator names spelled the same way throughout? (no switching between synonyms like "ANC1" vs "first antenatal visit" without reason)
@@ -1122,20 +1148,17 @@ WORD COUNT
 - Is each text block within the target range (50-100 words, max 180)?
 - Flag text blocks that exceed 180 words
 
-STEP 3: PRESENT FINDINGS
-After reviewing all slides, present a summary using ask_user_questions.
+After reviewing all slides, present a summary.
 
 If issues were found:
 - List each issue with the slide number, what the problem is, and a suggested fix
-- Group issues by type (accuracy, interpretation direction, language, consistency, word count)
-- Ask: "I found these issues. Would you like me to fix all of them, or should we go through them one by one?"
+- Group issues by type (language, terminology, consistency, word count)
+- Ask: "I found these issues. Would you like me to fix all of them, or go through them one by one?"
 
 If no issues were found:
-- Confirm: "I reviewed all [N] slides. No accuracy, consistency, or interpretation issues found."
+- Confirm: "I reviewed all [N] slides. No language, consistency, or word count issues found."
 
-STEP 4: FIX ISSUES
 If the user asks you to fix issues:
 - Apply corrections one slide at a time
 - For each fix, briefly state what you changed
-- After all fixes, do a final pass to confirm no new inconsistencies were introduced
 ```

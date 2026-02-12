@@ -1064,10 +1064,10 @@ DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
 Après toutes les diapositives EQD, remettre la dernière page comme diapositive finale.
 ```
 
-## Prompt 5 : Réviser ce rapport
+## Prompt 5a : Vérifier l'exactitude des données
 
 ```prompt
-Réviser le jeu de diapositives actuel pour vérifier l'exactitude, la cohérence et la qualité.
+Réviser le jeu de diapositives actuel — vérifier que chaque bloc de texte est exact par rapport aux données sous-jacentes.
 
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
 
@@ -1082,7 +1082,7 @@ c) Comparer chaque chiffre, pourcentage, tendance et période temporelle mention
 
 Signaler toute incohérence. Pour chaque problème trouvé, noter le numéro de diapositive, le bloc de texte concerné, ce qu'il dit et ce que les données montrent réellement.
 
-ÉTAPE 2 : APPLIQUER CES VÉRIFICATIONS À CHAQUE DIAPOSITIVE
+ÉTAPE 2 : VÉRIFIER L'EXACTITUDE ET L'INTERPRÉTATION
 
 EXACTITUDE DES DONNÉES
 - Chaque chiffre dans les blocs de texte correspond-il aux données sous-jacentes de la visualisation ?
@@ -1098,6 +1098,36 @@ DIRECTION D'INTERPRÉTATION DES INDICATEURS
 - Pour les indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : une augmentation est-elle décrite comme une détérioration ?
 - Signaler toute diapositive où la direction d'interprétation est incorrecte
 
+TABLEAUX ET DIAPOSITIVES EQD
+- Pour les diapositives d'annexe EQD avec des visualisations de tableaux : extraire les données avec get_metric_data et vérifier que les descriptions dans les blocs de texte correspondent aux valeurs réelles. Vérifier l'absence d'entrées manquantes ou dupliquées
+- Les blocs de texte méthodologiques (définitions des valeurs aberrantes, critères de cohérence, notation EQD) sont-ils préservés fidèlement — ni paraphrasés ni édulcorés ?
+
+ÉTAPE 3 : PRÉSENTER LES RÉSULTATS ET CORRIGER
+Après avoir révisé toutes les diapositives, présenter un résumé.
+
+Si des problèmes ont été trouvés :
+- Lister chaque problème avec le numéro de diapositive, la nature du problème et ce que les données montrent réellement
+- Demander : « J'ai trouvé ces problèmes d'exactitude. Souhaitez-vous que je les corrige tous, ou préférez-vous les examiner un par un ? »
+
+Si aucun problème n'a été trouvé :
+- Confirmer : « J'ai révisé les [N] diapositives. Tous les chiffres et interprétations correspondent aux données sous-jacentes. »
+
+Si l'utilisateur demande de corriger les problèmes :
+- Appliquer les corrections une diapositive à la fois
+- Pour chaque correction, indiquer brièvement ce qui a été modifié
+```
+
+## Prompt 5b : Vérifier le langage et la cohérence
+
+```prompt
+Réviser le jeu de diapositives actuel — vérifier le langage, la terminologie, la cohérence et le nombre de mots.
+
+Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
+
+Toujours désigner les diapositives par leur numéro (pas par leur ID).
+
+Parcourir chaque diapositive et vérifier les points suivants :
+
 LANGAGE ET FORMULATION
 - Pas de liens de causalité — uniquement un langage exploratoire et descriptif (par exemple « suggère » et non « causé par »)
 - Pas de généralisation excessive — les résultats sont limités à la zone et la période spécifiques
@@ -1110,10 +1140,6 @@ TERMINOLOGIE TECHNIQUE
 - Le nom du pays est-il correctement orthographié partout ?
 - Les noms des zones administratives correspondent-ils exactement à ce qui apparaît dans la plateforme ? (orthographe, majuscules)
 
-TABLEAUX ET DIAPOSITIVES EQD
-- Pour les diapositives d'annexe EQD avec des visualisations de tableaux : extraire les données avec get_metric_data et vérifier que les descriptions dans les blocs de texte correspondent aux valeurs réelles. Vérifier l'absence d'entrées manquantes ou dupliquées
-- Les blocs de texte méthodologiques (définitions des valeurs aberrantes, critères de cohérence, notation EQD) sont-ils préservés fidèlement — ni paraphrasés ni édulcorés ?
-
 COHÉRENCE ENTRE LES DIAPOSITIVES
 - Même indicateur référencé sur plusieurs diapositives : les valeurs sont-elles cohérentes ?
 - Les noms des indicateurs sont-ils orthographiés de la même manière partout ? (pas d'alternance entre synonymes comme « CPN1 » et « première visite prénatale » sans raison)
@@ -1124,20 +1150,17 @@ NOMBRE DE MOTS
 - Chaque bloc de texte est-il dans la plage cible (50-100 mots, max 180) ?
 - Signaler les blocs de texte dépassant 180 mots
 
-ÉTAPE 3 : PRÉSENTER LES RÉSULTATS
-Après avoir révisé toutes les diapositives, présenter un résumé avec ask_user_questions.
+Après avoir révisé toutes les diapositives, présenter un résumé.
 
 Si des problèmes ont été trouvés :
 - Lister chaque problème avec le numéro de diapositive, la nature du problème et une correction suggérée
-- Regrouper les problèmes par type (exactitude, direction d'interprétation, langage, cohérence, nombre de mots)
+- Regrouper les problèmes par type (langage, terminologie, cohérence, nombre de mots)
 - Demander : « J'ai trouvé ces problèmes. Souhaitez-vous que je les corrige tous, ou préférez-vous les examiner un par un ? »
 
 Si aucun problème n'a été trouvé :
-- Confirmer : « J'ai révisé les [N] diapositives. Aucun problème d'exactitude, de cohérence ou d'interprétation n'a été trouvé. »
+- Confirmer : « J'ai révisé les [N] diapositives. Aucun problème de langage, cohérence ou nombre de mots n'a été trouvé. »
 
-ÉTAPE 4 : CORRIGER LES PROBLÈMES
 Si l'utilisateur demande de corriger les problèmes :
 - Appliquer les corrections une diapositive à la fois
 - Pour chaque correction, indiquer brièvement ce qui a été modifié
-- Après toutes les corrections, effectuer une vérification finale pour confirmer qu'aucune nouvelle incohérence n'a été introduite
 ```
