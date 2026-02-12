@@ -308,7 +308,7 @@ Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la pl
 
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
 1. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
-2. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
+2. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
 
 La date de génération de l'analyse est février 2026.
 
@@ -704,7 +704,7 @@ Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la pl
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
 1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? Vous pouvez choisir n'importe quel niveau administratif (par exemple zone, État, comté ou district). » — laisser l'utilisateur saisir le nom de la zone librement, ne pas présenter de liste d'options
 2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
-3. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
+3. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
 
 La date de génération de l'analyse est février 2026.
 

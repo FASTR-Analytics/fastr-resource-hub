@@ -308,7 +308,7 @@ You should already know which country this is from the platform context. If you 
 
 Use ask_user_questions to ask each of the following one at a time:
 1. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
-2. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
+2. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
 
 The analysis generation date is February 2026.
 
@@ -702,7 +702,7 @@ You should already know which country this is from the platform context. If you 
 Use ask_user_questions to ask each of the following one at a time:
 1. "Which subnational area should this report focus on? You can choose any admin level (e.g., a zone, state, county, or district)." — let the user type the area name freely, do not present a list of options
 2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
-3. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
+3. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
 
 The analysis generation date is February 2026.
 
