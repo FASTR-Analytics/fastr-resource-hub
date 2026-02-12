@@ -437,12 +437,16 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points:
-- For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
-- For EACH indicator in the group: when surpluses occurred, and approximate magnitude
-- Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
-- Overall assessment: a concluding sentence on what the combined pattern means for this service area
+Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points covering:
+- For EACH indicator: specific time periods of disruptions/surpluses, with approximate magnitudes (numbers or percentages from the chart)
+- Cross-indicator patterns: how indicators relate to each other
+- Overall assessment of what the combined pattern means
 - IMPORTANT: Only describe what is actually visible in the chart - do not invent data
+
+Good example (for a Deliveries & PNC group):
+"- Deliveries: Stable through 2023-24, clear surplus in early 2025 (~1,200 more facility deliveries than expected per month, +9.6%), moderate decline mid-2025 but still near expected levels by September
+- PNC visits: Multiple disruptions below expected in 2023-24, increase then decrease in 2025 bringing volumes closer to expected
+- Both indicators follow the same 2025 trajectory, consistent with PNC typically tracking delivery trends"
 
 BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
@@ -696,7 +700,7 @@ STEP 1: ASK THE USER
 You should already know which country this is from the platform context. If you don't know what country this is, use ask_user_questions to ask.
 
 Use ask_user_questions to ask each of the following one at a time:
-1. "Which subnational area should this report focus on? (e.g., Bauchi State, Bomi County, Région du Centre)"
+1. "Which subnational area should this report focus on? You can choose any admin level (e.g., a zone, state, county, or district)." — let the user type the area name freely, do not present a list of options
 2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
 3. "What would you like as the cover subtitle? For example: Q3 2025, 2025 Annual, January-June 2025"
 
@@ -844,12 +848,16 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points:
-- For EACH indicator in the group: when disruptions occurred (specific months/periods), duration, and approximate magnitude
-- For EACH indicator in the group: when surpluses occurred, and approximate magnitude
-- Cross-indicator analysis: describe relationships and patterns ACROSS the indicators in the group (e.g., "Because PNC typically follows delivery trends, we would expect these indicators to move together", "The parallel recovery across BCG, Penta1, and Penta3 suggests a system-wide rebound")
-- Overall assessment: a concluding sentence on what the combined pattern means for this service area
+Interpretation (left side — target 50-100 words, max 180): Analyze the data shown in the visualization. Use bullet points covering:
+- For EACH indicator: specific time periods of disruptions/surpluses, with approximate magnitudes (numbers or percentages from the chart)
+- Cross-indicator patterns: how indicators relate to each other
+- Overall assessment of what the combined pattern means
 - IMPORTANT: Only describe what is actually visible in the chart - do not invent data
+
+Good example (for a Deliveries & PNC group):
+"- Deliveries: Stable through 2023-24, clear surplus in early 2025 (~1,200 more facility deliveries than expected per month, +9.6%), moderate decline mid-2025 but still near expected levels by September
+- PNC visits: Multiple disruptions below expected in 2023-24, increase then decrease in 2025 bringing volumes closer to expected
+- Both indicators follow the same 2025 trajectory, consistent with PNC typically tracking delivery trends"
 
 BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR

@@ -439,12 +439,16 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
-- Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
-- Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
-- Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
-- Évaluation globale : une phrase de conclusion sur ce que le schéma combiné signifie pour ce domaine de services
+Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces couvrant :
+- Pour CHAQUE indicateur : périodes spécifiques de perturbations/surplus, avec ampleurs approximatives (chiffres ou pourcentages du graphique)
+- Schémas croisés entre indicateurs : comment les indicateurs sont liés entre eux
+- Évaluation globale de ce que le schéma combiné signifie
 - IMPORTANT : Ne décrire que ce qui est réellement visible dans le graphique - ne pas inventer de données
+
+Bon exemple (pour un groupe Accouchements et CPoN) :
+« - Accouchements : Stables en 2023-24, surplus net début 2025 (~1 200 accouchements de plus que prévu par mois, +9,6 %), déclin modéré mi-2025 mais toujours proche des niveaux attendus en septembre
+- Visites CPoN : Plusieurs perturbations sous le niveau attendu en 2023-24, hausse puis baisse en 2025 ramenant les volumes plus près des tendances attendues
+- Les deux indicateurs suivent la même trajectoire en 2025, cohérent avec le fait que les CPoN suivent généralement les tendances des accouchements »
 
 DERNIÈRE PAGE :
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
@@ -698,7 +702,7 @@ Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisa
 Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la plateforme. Si vous ne savez pas de quel pays il s'agit, utiliser ask_user_questions pour demander.
 
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
-1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple État de Bauchi, Comté de Bomi, Région du Centre) »
+1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? Vous pouvez choisir n'importe quel niveau administratif (par exemple zone, État, comté ou district). » — laisser l'utilisateur saisir le nom de la zone librement, ne pas présenter de liste d'options
 2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
 3. « Quel sous-titre souhaitez-vous pour la couverture ? Par exemple : T3 2025, Annuel 2025, Janvier-juin 2025 »
 
@@ -846,12 +850,16 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces :
-- Pour CHAQUE indicateur du groupe : quand les perturbations se sont produites (mois/périodes spécifiques), durée et ampleur approximative
-- Pour CHAQUE indicateur du groupe : quand les surplus se sont produits, et ampleur approximative
-- Analyse croisée des indicateurs : décrire les relations et les schémas ENTRE les indicateurs du groupe (par exemple « Comme les CPoN suivent généralement les tendances des accouchements, on s'attendrait à ce que ces indicateurs évoluent ensemble », « La reprise parallèle du BCG, Penta 1 et Penta 3 suggère un rebond à l'échelle du système »)
-- Évaluation globale : une phrase de conclusion sur ce que le schéma combiné signifie pour ce domaine de services
+Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces couvrant :
+- Pour CHAQUE indicateur : périodes spécifiques de perturbations/surplus, avec ampleurs approximatives (chiffres ou pourcentages du graphique)
+- Schémas croisés entre indicateurs : comment les indicateurs sont liés entre eux
+- Évaluation globale de ce que le schéma combiné signifie
 - IMPORTANT : Ne décrire que ce qui est réellement visible dans le graphique - ne pas inventer de données
+
+Bon exemple (pour un groupe Accouchements et CPoN) :
+« - Accouchements : Stables en 2023-24, surplus net début 2025 (~1 200 accouchements de plus que prévu par mois, +9,6 %), déclin modéré mi-2025 mais toujours proche des niveaux attendus en septembre
+- Visites CPoN : Plusieurs perturbations sous le niveau attendu en 2023-24, hausse puis baisse en 2025 ramenant les volumes plus près des tendances attendues
+- Les deux indicateurs suivent la même trajectoire en 2025, cohérent avec le fait que les CPoN suivent généralement les tendances des accouchements »
 
 DERNIÈRE PAGE :
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
