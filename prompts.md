@@ -462,12 +462,26 @@ REPORT STANDARDS:
 4. Use consistent terminology throughout
 
 CRITICAL — INDICATOR INTERPRETATION RULES:
-NOT all increases are good. NOT all decreases are bad. Apply the correct interpretation:
-- Service indicators (ANC, deliveries, immunizations, OPD, FP): increase = positive, decrease = concern
-- Mortality/death indicators (maternal deaths, neonatal deaths, stillbirths): increase = BAD (more deaths is ALWAYS bad), decrease = GOOD. NEVER describe an increase in deaths as positive.
-- Negative indicators (dropout rates, outlier rates): increase = bad, decrease = good
+NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
 
-VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows. Confirm interpretation framing matches indicator type.
+Service delivery indicators (increase = positive, decrease = concern):
+- ANC visits, deliveries, PNC visits, immunizations, OPD visits, family planning, skilled birth attendance
+- For these: "surplus" (above expected) = positive signal, "disruption" (below expected) = concern
+
+Mortality and adverse outcome indicators (increase = BAD, decrease = positive):
+- Maternal deaths, neonatal deaths, stillbirths, and any indicator measuring deaths or adverse events
+- For these: an INCREASE is a NEGATIVE finding — more deaths is ALWAYS bad
+- For these: a DECREASE is a POSITIVE finding — fewer deaths is ALWAYS good
+- NEVER describe an increase in deaths as an "improvement" or "positive trend"
+- NEVER describe a decrease in deaths as a "concern" or "disruption"
+
+Negative quality indicators (increase = bad, decrease = good):
+- Dropout rates (e.g., Penta1 to Penta3 dropout), outlier rates, stockout rates
+- For these: an increase means the situation is worsening
+
+When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
+
+VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows. Confirm interpretation framing matches indicator type — an increase in deaths is NEVER described as positive.
 
 STRUCTURE:
 
