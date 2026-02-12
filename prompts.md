@@ -88,6 +88,8 @@ Based on the data, which regions or indicators should we prioritize for support?
 
 FASTR focuses on core RMNCAH-N indicators that represent key points along the health continuum. These indicators typically have higher reporting volumes and serve as proxies for broader service delivery patterns.
 
+**Important**: Not all increases are improvements. For service delivery indicators (ANC, deliveries, immunizations), an increase is positive. But for mortality indicators (maternal deaths, neonatal deaths, stillbirths) and dropout rates, an increase is ALWAYS negative — more deaths or more dropouts is bad. Frame all analysis accordingly.
+
 ## Maternal Health
 
 ### ANC Disruptions
@@ -343,11 +345,32 @@ REPORT STANDARDS:
 4. Layout: interpretation on left, visualization on right
 5. Use consistent terminology throughout (do not switch between synonyms)
 
+CRITICAL — INDICATOR INTERPRETATION RULES:
+NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
+
+Service delivery indicators (increase = positive, decrease = concern):
+- ANC visits, deliveries, PNC visits, immunizations, OPD visits, family planning, skilled birth attendance
+- For these: "surplus" (above expected) = positive signal, "disruption" (below expected) = concern
+
+Mortality and adverse outcome indicators (increase = BAD, decrease = positive):
+- Maternal deaths, neonatal deaths, stillbirths, and any indicator measuring deaths or adverse events
+- For these: an INCREASE is a NEGATIVE finding — more deaths is ALWAYS bad
+- For these: a DECREASE is a POSITIVE finding — fewer deaths is ALWAYS good
+- NEVER describe an increase in deaths as an "improvement" or "positive trend"
+- NEVER describe a decrease in deaths as a "concern" or "disruption"
+
+Negative quality indicators (increase = bad, decrease = good):
+- Dropout rates (e.g., Penta1 to Penta3 dropout), outlier rates, stockout rates
+- For these: an increase means the situation is worsening
+
+When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
+
 VERIFICATION - Before finalizing each slide, cross-check:
 1. All numeric values match what the visualization shows
 2. Time periods and indicator names are correctly referenced
 3. Described trends (increases, decreases) match the actual data direction
 4. Numbers are consistent across slides (same indicator = same values)
+5. Interpretation framing matches indicator type — an increase in deaths is NEVER described as positive
 
 STRUCTURE:
 
@@ -434,7 +457,13 @@ REPORT STANDARDS:
 3. Layout: interpretation on left, visualization on right
 4. Use consistent terminology throughout
 
-VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows.
+CRITICAL — INDICATOR INTERPRETATION RULES:
+NOT all increases are good. NOT all decreases are bad. Apply the correct interpretation:
+- Service indicators (ANC, deliveries, immunizations, OPD, FP): increase = positive, decrease = concern
+- Mortality/death indicators (maternal deaths, neonatal deaths, stillbirths): increase = BAD (more deaths is ALWAYS bad), decrease = GOOD. NEVER describe an increase in deaths as positive.
+- Negative indicators (dropout rates, outlier rates): increase = bad, decrease = good
+
+VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows. Confirm interpretation framing matches indicator type.
 
 STRUCTURE:
 

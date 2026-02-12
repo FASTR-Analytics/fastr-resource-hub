@@ -88,6 +88,8 @@ Sur la base des données, quelles régions ou indicateurs devrions-nous priorise
 
 FASTR se concentre sur les indicateurs fondamentaux de SRMNIA-N qui représentent des points clés du continuum de soins. Ces indicateurs ont généralement des volumes de rapportage plus élevés et servent d'indicateurs indirects pour les schémas plus larges de prestation de services.
 
+**Important** : Toutes les augmentations ne sont pas des améliorations. Pour les indicateurs de prestation de services (CPN, accouchements, vaccination), une augmentation est positive. Mais pour les indicateurs de mortalité (décès maternels, décès néonatals, mortinaissances) et les taux d'abandon, une augmentation est TOUJOURS négative — plus de décès ou plus d'abandons est mauvais. Formuler toute analyse en conséquence.
+
 ## Santé maternelle
 
 ### Perturbations des CPN
@@ -345,11 +347,32 @@ NORMES DU RAPPORT :
 4. Mise en page : interprétation à gauche, visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 
+CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
+Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
+
+Indicateurs de prestation de services (augmentation = positif, baisse = préoccupant) :
+- Visites CPN, accouchements, CPoN, vaccinations, consultations externes, planification familiale, accouchements assistés
+- Pour ceux-ci : « surplus » (au-dessus de l'attendu) = signal positif, « perturbation » (en dessous de l'attendu) = préoccupant
+
+Indicateurs de mortalité et d'issues défavorables (augmentation = MAUVAIS, baisse = positif) :
+- Décès maternels, décès néonatals, mortinaissances, et tout indicateur mesurant des décès ou des issues défavorables
+- Pour ceux-ci : une AUGMENTATION est un résultat NÉGATIF — plus de décès est TOUJOURS mauvais
+- Pour ceux-ci : une DIMINUTION est un résultat POSITIF — moins de décès est TOUJOURS bon
+- Ne JAMAIS décrire une augmentation des décès comme une « amélioration » ou une « tendance positive »
+- Ne JAMAIS décrire une diminution des décès comme une « préoccupation » ou une « perturbation »
+
+Indicateurs négatifs de qualité (augmentation = mauvais, baisse = bon) :
+- Taux d'abandon (par exemple abandon Penta1 à Penta3), taux de valeurs aberrantes, taux de rupture de stock
+- Pour ceux-ci : une augmentation signifie que la situation se détériore
+
+Lors de la rédaction des titres et des interprétations, toujours vérifier : cet indicateur mesure-t-il quelque chose dont nous voulons PLUS (services) ou MOINS (décès, abandons) ? Formuler en conséquence.
+
 VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
 1. Toutes les valeurs numériques correspondent à ce que montre la visualisation
 2. Les périodes et les noms d'indicateurs sont correctement référencés
 3. Les tendances décrites (hausses, baisses) correspondent à la direction réelle des données
 4. Les chiffres sont cohérents entre les diapositives (même indicateur = mêmes valeurs)
+5. Le cadrage de l'interprétation correspond au type d'indicateur — une augmentation des décès n'est JAMAIS décrite comme positive
 
 STRUCTURE :
 
@@ -436,7 +459,13 @@ NORMES DU RAPPORT :
 3. Mise en page : interprétation à gauche, visualisation à droite
 4. Utiliser une terminologie cohérente tout au long du rapport
 
-VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que les tendances décrites correspondent à ce que montre la visualisation.
+CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
+Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Appliquer l'interprétation correcte :
+- Indicateurs de services (CPN, accouchements, vaccinations, consultations externes, PF) : augmentation = positif, baisse = préoccupant
+- Indicateurs de mortalité/décès (décès maternels, décès néonatals, mortinaissances) : augmentation = MAUVAIS (plus de décès est TOUJOURS mauvais), baisse = BON. Ne JAMAIS décrire une augmentation des décès comme positive.
+- Indicateurs négatifs (taux d'abandon, taux de valeurs aberrantes) : augmentation = mauvais, baisse = bon
+
+VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que les tendances décrites correspondent à ce que montre la visualisation. Confirmer que le cadrage de l'interprétation correspond au type d'indicateur.
 
 STRUCTURE :
 
