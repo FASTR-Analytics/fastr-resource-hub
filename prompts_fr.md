@@ -386,12 +386,12 @@ STRUCTURE :
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS au/en [PAYS] »
 - Sous-titre : « [SOUS_TITRE_RAPPORT] »
-- Pied de page : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
+- Ajouter un bloc de texte en bas : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
 
 DIAPOSITIVE 2 - Diapositive d'introduction
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS »
-- Texte fixe : « L'approche FASTR utilise les données de routine du SNIS pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé clés. Cette analyse offre une perspective rapide à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des schémas attendus. Les résultats génèrent des données probantes exploitables pour guider des réponses rapides, contribuant à maintenir la continuité des soins essentiels en période d'incertitude financière ou de changement opérationnel. »
-- Réserver un espace pour l'image
+- Bloc de texte : « L'approche FASTR utilise les données de routine du SNIS pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé clés. Cette analyse offre une perspective rapide à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des schémas attendus. Les résultats génèrent des données probantes exploitables pour guider des réponses rapides, contribuant à maintenir la continuité des soins essentiels en période d'incertitude financière ou de changement opérationnel. »
+- Ajouter un bloc image
 
 DIAPOSITIVE 3 - Diapositive méthodologique
 - Titre : « Méthodologie : Évaluation de l'utilisation des services »
@@ -399,7 +399,7 @@ DIAPOSITIVE 3 - Diapositive méthodologique
 - Comment ça fonctionne : Utilise les données de routine du SNIS, nettoyées des valeurs aberrantes et des valeurs manquantes. Construit une ligne de tendance « attendue » pour chaque service, ajustée pour la saisonnalité et les tendances historiques. Compare les volumes de services réels aux niveaux attendus.
 - Mesure de l'impact : Les périodes de perturbation signalées sont analysées pour estimer dans quelle mesure les volumes de services ont changé par rapport à ce qui était attendu. Les résultats sont présentés aux niveaux national et infranational.
 - Comment interpréter les figures : Les zones ombrées en rouge = perturbations potentielles (en dessous de l'attendu). Les zones ombrées en vert = surplus potentiels (au-dessus de l'attendu). Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie.
-- Pied de page : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
+- Ajouter un bloc de texte en bas : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
 
 DIAPOSITIVE 4 - Diapositive de sélection des indicateurs
 - Titre : « Méthodologie : Sélection des indicateurs »
@@ -508,7 +508,7 @@ Visualization (right side): Create using from_metric with these parameters:
 
 Interprétation (côté gauche) : 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
 
-Pied de page : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). »
+Ajouter un bloc de texte en bas : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). »
 
 DIAPOSITIVES 3+ - Profils par zone infranationale
 Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simple avec :
@@ -588,7 +588,7 @@ Interprétation (côté gauche) : Utiliser des listes à puces :
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
 
-Puis inclure ce bloc de texte fixe :
+Puis ajouter un bloc de texte avec :
 
 **Pourquoi la complétude est importante pour l'analyse des perturbations**
 
@@ -623,7 +623,7 @@ DIAPOSITIVE 3 - Valeurs aberrantes
   - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
   - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
   - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
+- Ajouter un bloc de texte sous l'interprétation : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
 DIAPOSITIVE 4 - Cohérence interne
 - Titre : Rédiger un titre analytique sur la cohérence (par exemple « La plupart des paires d'indicateurs montrent un rapportage cohérent, mais [RATIO] sort des plages plausibles dans plusieurs régions »)
@@ -644,7 +644,7 @@ DIAPOSITIVE 4 - Cohérence interne
   - Identifier quels ratios respectent ou échouent systématiquement les critères
   - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
   - Mettre en évidence toute région spécifique où la cohérence est notablement faible
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+- Ajouter un bloc de texte sous l'interprétation : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
 DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
 - Titre : Rédiger un titre analytique sur les tendances de l'EQD (par exemple « La proportion d'établissements avec une qualité de données adéquate est passée de X % à Y % depuis [ANNÉE] »)
@@ -664,7 +664,7 @@ DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
   - Nommer les régions les plus performantes et les moins performantes
   - Identifier les régions où la qualité des données s'est notablement améliorée ou détériorée
   - Expliquer l'implication : les zones avec des scores EQD faibles peuvent avoir des estimations de perturbation moins fiables
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+- Ajouter un bloc de texte sous l'interprétation : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
 DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
 - Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD (par exemple « Les scores moyens de qualité des données sont les plus élevés dans [X] et [Y], tandis que [Z] est en retard »)
@@ -684,7 +684,7 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
   - Comparer les régions les plus performantes aux moins performantes
   - Signaler toute région montrant une amélioration ou un déclin significatif
   - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
+- Ajouter un bloc de texte sous l'interprétation : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 ```
 
 ## Prompt 4 : Rapport infranational sur les perturbations
@@ -789,12 +789,12 @@ STRUCTURE :
 DIAPOSITIVE 1 - Diapositive de couverture
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS à/au/en [NOM DE LA ZONE], [PAYS] »
 - Sous-titre : « [SOUS_TITRE_RAPPORT] »
-- Pied de page : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
+- Ajouter un bloc de texte en bas : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
 
 DIAPOSITIVE 2 - Diapositive d'introduction
 - Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS »
-- Texte fixe : « L'approche FASTR utilise les données de routine du SNIS pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé clés. Cette analyse offre une perspective rapide à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des schémas attendus. Les résultats génèrent des données probantes exploitables pour guider des réponses rapides, contribuant à maintenir la continuité des soins essentiels en période d'incertitude financière ou de changement opérationnel. »
-- Réserver un espace pour l'image
+- Bloc de texte : « L'approche FASTR utilise les données de routine du SNIS pour suivre l'évolution de la prestation de services au fil du temps. En comparant les volumes de services observés aux volumes attendus — ajustés pour la saisonnalité et les tendances historiques — nous pouvons identifier les perturbations ou les surplus dans les services de santé clés. Cette analyse offre une perspective rapide à l'échelle du système, mettant en évidence où et quand l'utilisation des services s'écarte des schémas attendus. Les résultats génèrent des données probantes exploitables pour guider des réponses rapides, contribuant à maintenir la continuité des soins essentiels en période d'incertitude financière ou de changement opérationnel. »
+- Ajouter un bloc image
 
 DIAPOSITIVE 3 - Diapositive méthodologique
 - Titre : « Méthodologie : Évaluation de l'utilisation des services »
@@ -802,7 +802,7 @@ DIAPOSITIVE 3 - Diapositive méthodologique
 - Comment ça fonctionne : Utilise les données de routine du SNIS, nettoyées des valeurs aberrantes et des valeurs manquantes. Construit une ligne de tendance « attendue » pour chaque service, ajustée pour la saisonnalité et les tendances historiques. Compare les volumes de services réels aux niveaux attendus.
 - Mesure de l'impact : Les périodes de perturbation signalées sont analysées pour estimer dans quelle mesure les volumes de services ont changé par rapport à ce qui était attendu. Les résultats sont présentés pour [NOM DE LA ZONE].
 - Comment interpréter les figures : Les zones ombrées en rouge = perturbations potentielles (en dessous de l'attendu). Les zones ombrées en vert = surplus potentiels (au-dessus de l'attendu). Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie.
-- Pied de page : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
+- Ajouter un bloc de texte en bas : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
 
 DIAPOSITIVE 4 - Diapositive de sélection des indicateurs
 - Titre : « Méthodologie : Sélection des indicateurs »
@@ -926,7 +926,7 @@ Interprétation (côté gauche) : Utiliser des listes à puces :
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
 
-Puis inclure ce bloc de texte fixe :
+Puis ajouter un bloc de texte avec :
 
 **Pourquoi la complétude est importante pour l'analyse des perturbations**
 
@@ -962,7 +962,7 @@ DIAPOSITIVE EQD 2 - Valeurs aberrantes
   - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
   - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
   - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
+- Ajouter un bloc de texte sous l'interprétation : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
 DIAPOSITIVE EQD 3 - Cohérence interne
 - Titre : Rédiger un titre analytique sur la cohérence dans [NOM DE LA ZONE]
@@ -983,7 +983,7 @@ DIAPOSITIVE EQD 3 - Cohérence interne
   - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
   - Identifier quels ratios respectent ou échouent systématiquement les critères dans [NOM DE LA ZONE]
   - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+- Ajouter un bloc de texte sous l'interprétation : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
 DIAPOSITIVE EQD 4 - Tendances de la qualité des données (score EQD global)
 - Titre : Rédiger un titre analytique sur les tendances de l'EQD dans [NOM DE LA ZONE]
@@ -1003,7 +1003,7 @@ DIAPOSITIVE EQD 4 - Tendances de la qualité des données (score EQD global)
   - Décrire la tendance EQD dans [NOM DE LA ZONE] — la qualité des données s'améliore-t-elle au fil du temps ?
   - Identifier si la qualité des données s'est notablement améliorée ou détériorée
   - Expliquer l'implication : des scores EQD faibles peuvent signifier des estimations de perturbation moins fiables
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+- Ajouter un bloc de texte sous l'interprétation : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
 DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
 - Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD dans [NOM DE LA ZONE]
@@ -1022,7 +1022,7 @@ DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
 - Interprétation (côté gauche) : Utiliser des listes à puces :
   - Décrire la tendance du score moyen de l'EQD dans [NOM DE LA ZONE] — s'améliore-t-elle, est-elle stable ou en déclin ?
   - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
-- Texte fixe (inclure sur la diapositive sous l'interprétation) : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
+- Ajouter un bloc de texte sous l'interprétation : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 
 Après toutes les diapositives EQD, remettre la dernière page comme diapositive finale.
 ```

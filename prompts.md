@@ -384,12 +384,12 @@ STRUCTURE:
 SLIDE 1 - Cover slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data in [COUNTRY]"
 - Subtitle: "[REPORT_SUBTITLE]"
-- Footer: "Analysis generated in [CURRENT_MONTH_YEAR]"
+- Add a text block at the bottom: "Analysis generated in [CURRENT_MONTH_YEAR]"
 
 SLIDE 2 - Introductory slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data"
-- Fixed text: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
-- Reserve space for image
+- Text block: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
+- Add an image block
 
 SLIDE 3 - Methodology slide
 - Title: "Methodology: Service Utilization Assessment"
@@ -397,7 +397,7 @@ SLIDE 3 - Methodology slide
 - How it works: Uses routine HMIS data, cleaned for outliers and missing values. Builds an "expected" trend line for each service, adjusting for seasonality and historical trends. Compares actual service volumes to expected levels.
 - Measuring impact: Flagged disruption periods are analyzed to estimate how much service volumes changed compared to what was expected. Results are shown at national and sub-national levels.
 - How to interpret figures: Red shaded areas = potential disruptions (below expected). Green shaded areas = potential surpluses (above expected). These are signals, not conclusions — they require further investigation.
-- Footer: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
+- Add a text block at the bottom: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
 
 SLIDE 4 - Indicator selection slide
 - Title: "Methodology: Indicator selection"
@@ -506,7 +506,7 @@ Visualization (right side): Create using from_metric with these parameters:
 
 Interpretation (left side): 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
 
-Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus)."
+Add a text block at the bottom: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus)."
 
 SLIDES 3+ - Subnational area profiles
 For EACH subnational area in the platform, create a simple slide with:
@@ -586,7 +586,7 @@ Interpretation (left side): Use bullet points:
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
 
-Then include this fixed text block:
+Then add a text block with:
 
 **Why Completeness Matters for the Disruptions Analysis**
 
@@ -621,7 +621,7 @@ SLIDE 3 - Outliers
   - Name specific indicators with the highest outlier rates
   - Note whether outlier rates have improved or worsened over the analysis period
   - Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
-- Fixed text (include on slide below the interpretation): "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
+- Add a text block below the interpretation: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
 SLIDE 4 - Internal consistency
 - Title: Write an analytical headline about consistency (e.g., "Most indicator pairs show consistent reporting, but [RATIO] falls outside plausible ranges in several regions")
@@ -642,7 +642,7 @@ SLIDE 4 - Internal consistency
   - Identify which ratios consistently meet or fail criteria
   - Note whether consistency is improving or worsening over the analysis period
   - Highlight any specific regions where consistency is notably low
-- Fixed text (include on slide below the interpretation): "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
+- Add a text block below the interpretation: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
 SLIDE 5 - Data quality trends (overall DQA score)
 - Title: Write an analytical headline about DQA trends (e.g., "The proportion of facilities with adequate data quality has improved from X% to Y% since [YEAR]")
@@ -662,7 +662,7 @@ SLIDE 5 - Data quality trends (overall DQA score)
   - Name top-performing and lowest-performing regions
   - Identify regions where DQ has notably improved or declined
   - Explain the implication: areas with low DQA scores may have less reliable disruption estimates
-- Fixed text (include on slide below the interpretation): "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
+- Add a text block below the interpretation: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
 SLIDE 6 - Data quality trends (mean DQA score)
 - Title: Write an analytical headline about mean DQA trends (e.g., "Mean data quality scores are highest in [X] and [Y], while [Z] lags behind")
@@ -682,7 +682,7 @@ SLIDE 6 - Data quality trends (mean DQA score)
   - Contrast top-performing vs lowest-performing regions
   - Note any regions showing significant improvement or decline
   - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
-- Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
+- Add a text block below the interpretation: "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 ```
 
 ## Prompt 4: Subnational Disruptions Report
@@ -787,12 +787,12 @@ STRUCTURE:
 SLIDE 1 - Cover slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data in [AREA NAME], [COUNTRY]"
 - Subtitle: "[REPORT_SUBTITLE]"
-- Footer: "Analysis generated in [CURRENT_MONTH_YEAR]"
+- Add a text block at the bottom: "Analysis generated in [CURRENT_MONTH_YEAR]"
 
 SLIDE 2 - Introductory slide
 - Title: "Tracking Disruptions in Essential Services Using HMIS Data"
-- Fixed text: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
-- Reserve space for image
+- Text block: "The FASTR approach uses routine HMIS data to monitor how service delivery shifts over time. By comparing observed vs. expected service volumes — adjusted for seasonality and historical trends — we can identify disruptions or surpluses in key health services. This analysis provides a timely, system-wide perspective, highlighting where and when service use deviates from expected patterns. Findings generate actionable evidence to guide rapid responses, helping sustain continuity of essential care during funding uncertainty or operational change."
+- Add an image block
 
 SLIDE 3 - Methodology slide
 - Title: "Methodology: Service Utilization Assessment"
@@ -800,7 +800,7 @@ SLIDE 3 - Methodology slide
 - How it works: Uses routine HMIS data, cleaned for outliers and missing values. Builds an "expected" trend line for each service, adjusting for seasonality and historical trends. Compares actual service volumes to expected levels.
 - Measuring impact: Flagged disruption periods are analyzed to estimate how much service volumes changed compared to what was expected. Results are shown for [AREA NAME].
 - How to interpret figures: Red shaded areas = potential disruptions (below expected). Green shaded areas = potential surpluses (above expected). These are signals, not conclusions — they require further investigation.
-- Footer: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
+- Add a text block at the bottom: "More details on the methodology are found on GitHub (https://fastr-analytics.github.io/fastr-resource-hub/)."
 
 SLIDE 4 - Indicator selection slide
 - Title: "Methodology: Indicator selection"
@@ -924,7 +924,7 @@ Interpretation (left side): Use bullet points:
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
 
-Then include this fixed text block:
+Then add a text block with:
 
 **Why Completeness Matters for the Disruptions Analysis**
 
@@ -960,7 +960,7 @@ DQ SLIDE 2 - Outliers
   - Name specific indicators with the highest outlier rates
   - Note whether outlier rates have improved or worsened over the analysis period
   - Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
-- Fixed text (include on slide below the interpretation): "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
+- Add a text block below the interpretation: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
 DQ SLIDE 3 - Internal consistency
 - Title: Write an analytical headline about consistency in [AREA NAME]
@@ -981,7 +981,7 @@ DQ SLIDE 3 - Internal consistency
   - Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
   - Identify which ratios consistently meet or fail criteria in [AREA NAME]
   - Note whether consistency is improving or worsening over the analysis period
-- Fixed text (include on slide below the interpretation): "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
+- Add a text block below the interpretation: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
 DQ SLIDE 4 - Data quality trends (overall DQA score)
 - Title: Write an analytical headline about DQA trends in [AREA NAME]
@@ -1001,7 +1001,7 @@ DQ SLIDE 4 - Data quality trends (overall DQA score)
   - Describe the DQA trend in [AREA NAME] — is data quality improving over time?
   - Identify whether DQ has notably improved or declined
   - Explain the implication: low DQA scores may mean less reliable disruption estimates
-- Fixed text (include on slide below the interpretation): "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
+- Add a text block below the interpretation: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
 DQ SLIDE 5 - Data quality trends (mean DQA score)
 - Title: Write an analytical headline about mean DQA trends in [AREA NAME]
@@ -1020,7 +1020,7 @@ DQ SLIDE 5 - Data quality trends (mean DQA score)
 - Interpretation (left side): Use bullet points:
   - Describe the mean DQA trend in [AREA NAME] — is it improving, stable, or declining?
   - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
-- Fixed text (include on slide below the interpretation): "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
+- Add a text block below the interpretation: "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 
 After all DQ slides, re-add the back page as the final slide.
 ```
