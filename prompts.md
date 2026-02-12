@@ -441,16 +441,22 @@ STRUCTURE:
 SLIDE 1 - Annex header slide
 - Title: "Annex 1: Subnational service utilization disruptions"
 
-SLIDE 2 - Subnational summary
+SLIDE 2 - Subnational summary table
 Title: Write an analytical headline summarizing the key subnational finding (e.g., "Large county-level disparities in performance highlight the need to understand local drivers of both service gains and gaps")
 
-Write a text summary covering:
-- Which subnational areas show the strongest disruptions across multiple indicators
-- Which areas show consistent surpluses
-- Whether performance gaps are concentrated in specific areas or spread across the country
-- Any notable patterns (e.g., urban vs rural differences, regional clusters)
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m3-03-02"
+  Metric: Difference between actual and expected service volume [Admin area 2] [percent]
+  Values: pct_diff (Percent difference)
+  Auto-disaggregated by: admin_area_2, indicator_common_id
+- vizPresetId: "disruption-differences-table"
+- filterOverrides: Filter on indicator_common_id to include all indicators from the report
+- periodFilterOverride: Use the same period as the main report
 
-Base this summary on what is visible in the platform data. Keep it concise — 4-6 sentences maximum.
+Interpretation (left side): 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
+
+Footer: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus)."
 
 SLIDES 3+ - Subnational area profiles
 For EACH subnational area in the platform, create a simple slide with:
@@ -458,21 +464,15 @@ For EACH subnational area in the platform, create a simple slide with:
 - Title: Name of the subnational area
 - Visualization: Create using from_metric with these parameters:
   - type: "from_metric"
-  - metricId: "m3-02-01"
-    Metric: Actual vs expected service volume (National) [number]
+  - metricId: "m3-03-01"
+    Metric: Actual vs expected service volume [Admin area 2] [number]
     Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
-  - vizPresetId: "disruption-chart"
+    Auto-disaggregated by: admin_area_2, indicator_common_id
+  - vizPresetId: "disruption-chart-single-admin-area-2" (REQUIRES selectedReplicant)
   - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
-  - Disaggregation setup:
-    - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
-    - admin_area_2 displayed as: replicant (creates separate charts per area)
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides:
-    - Filter on indicator_common_id to include all indicators from the report
-    - Filter on admin_area_2 to show only the area matching the slide title
+  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
   - periodFilterOverride: Use the same period as the main report
-
-This approach uses replication with admin_area_2 as the replicant dimension. For each slide: set selectedReplicant to the target area AND add a filterOverride on admin_area_2 for that same area.
 
 Keep these slides clean — area name and visualization only, no interpretation text.
 ```

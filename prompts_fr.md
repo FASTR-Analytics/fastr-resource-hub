@@ -446,35 +446,35 @@ DIAPOSITIVE 1 - Diapositive d'en-tête de l'annexe
 DIAPOSITIVE 2 - Tableau synthétique infranational
 Titre : Rédiger un titre analytique résumant la principale conclusion infranationale (par exemple « D'importantes disparités au niveau des comtés en matière de performance soulignent la nécessité de comprendre les facteurs locaux des gains et des lacunes dans les services »)
 
-Rédiger un résumé textuel couvrant :
-- Quelles zones infranationales présentent les perturbations les plus fortes pour plusieurs indicateurs
-- Quelles zones montrent des surplus constants
-- Si les écarts de performance sont concentrés dans des zones spécifiques ou répartis dans tout le pays
-- Tout schéma notable (par exemple différences urbain/rural, clusters régionaux)
+Visualization (right side): Create using from_metric with these parameters:
+- type: "from_metric"
+- metricId: "m3-03-02"
+  Metric: Difference between actual and expected service volume [Admin area 2] [percent]
+  Values: pct_diff (Percent difference)
+  Auto-disaggregated by: admin_area_2, indicator_common_id
+- vizPresetId: "disruption-differences-table"
+- filterOverrides: Filter on indicator_common_id to include all indicators from the report
+- periodFilterOverride: Use the same period as the main report
 
-Baser ce résumé sur ce qui est visible dans les données de la plateforme. Rester concis — 4 à 6 phrases maximum.
+Interprétation (côté gauche) : 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
+
+Pied de page : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). »
 
 DIAPOSITIVES 3+ - Profils par zone infranationale
 Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simple avec :
 
 - Titre : Nom de la zone infranationale
-- Visualisation : Créer avec from_metric avec ces paramètres :
+- Visualization: Create using from_metric with these parameters:
   - type: "from_metric"
-  - metricId: "m3-02-01"
-    Metric: Actual vs expected service volume (National) [number]
+  - metricId: "m3-03-01"
+    Metric: Actual vs expected service volume [Admin area 2] [number]
     Values: count_sum (Actual service volume), count_expected_if_above_diff_threshold (Expected service volume)
-  - vizPresetId: "disruption-chart"
+    Auto-disaggregated by: admin_area_2, indicator_common_id
+  - vizPresetId: "disruption-chart-single-admin-area-2" (REQUIRES selectedReplicant)
   - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la zone] »
-  - Disaggregation setup:
-    - indicator_common_id displayed as: cells (separate panels/facets for each indicator)
-    - admin_area_2 displayed as: replicant (creates separate charts per area)
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides:
-    - Filter on indicator_common_id to include all indicators from the report
-    - Filter on admin_area_2 to show only the area matching the slide title
+  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
   - periodFilterOverride: Use the same period as the main report
-
-This approach uses replication with admin_area_2 as the replicant dimension. For each slide: set selectedReplicant to the target area AND add a filterOverride on admin_area_2 for that same area.
 
 Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
 ```
