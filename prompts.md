@@ -343,6 +343,7 @@ ACCURACY REQUIREMENTS:
 2. Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
 4. Do not guess at dates, time periods, or magnitudes
+5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
@@ -462,6 +463,7 @@ ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform
 2. Do not invent statistics or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
+4. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
@@ -544,6 +546,7 @@ ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform
 2. Do not invent statistics or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
+4. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language
@@ -761,6 +764,7 @@ ACCURACY REQUIREMENTS:
 2. Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
 4. Do not guess at dates, time periods, or magnitudes
+5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
@@ -1090,6 +1094,10 @@ INDICATOR INTERPRETATION DIRECTION
 - Service delivery indicators (ANC, deliveries, PNC, immunizations, OPD, family planning): increase = positive, decrease = concern
 - Mortality indicators (maternal deaths, neonatal deaths, stillbirths): increase = BAD, decrease = GOOD
 - Negative quality indicators (dropout rates, outlier rates): increase = worsening
+
+ACRONYMS AND METHODOLOGY
+- Are any acronyms expanded in the text? If so, verify the expansion is correct using get_methodology_docs_list and get_methodology_doc_content. NEVER assume — a wrong acronym expansion is a critical error
+- Are methodology descriptions accurate? Check against official documentation — do not let made-up methodology claims pass unchallenged
 
 TABLES AND DQ SLIDES
 - For DQ annex slides: pull the data with get_metric_data and check that text blocks match the actual values

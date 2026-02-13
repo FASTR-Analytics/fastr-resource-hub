@@ -345,6 +345,7 @@ EXIGENCES DE PRÉCISION :
 2. Ne pas inventer de statistiques, de pourcentages ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
 4. Ne pas deviner les dates, les périodes ou les magnitudes
+5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
@@ -464,6 +465,7 @@ EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme
 2. Ne pas inventer de statistiques ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
+4. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
@@ -546,6 +548,7 @@ EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme
 2. Ne pas inventer de statistiques ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
+4. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique
@@ -763,6 +766,7 @@ EXIGENCES DE PRÉCISION :
 2. Ne pas inventer de statistiques, de pourcentages ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
 4. Ne pas deviner les dates, les périodes ou les magnitudes
+5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
@@ -1092,6 +1096,10 @@ DIRECTION D'INTERPRÉTATION DES INDICATEURS
 - Indicateurs de prestation de services (CPN, accouchements, soins postnataux, vaccinations, consultations externes, planification familiale) : augmentation = positif, diminution = préoccupant
 - Indicateurs de mortalité (décès maternels, décès néonataux, mortinaissances) : augmentation = MAUVAIS, diminution = BON
 - Indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : augmentation = détérioration
+
+ACRONYMES ET MÉTHODOLOGIE
+- Des acronymes sont-ils développés dans le texte ? Si oui, vérifier que l'expansion est correcte en utilisant get_methodology_docs_list et get_methodology_doc_content. JAMAIS supposer — une expansion d'acronyme incorrecte est une erreur critique
+- Les descriptions méthodologiques sont-elles exactes ? Vérifier dans la documentation officielle — ne pas laisser passer des affirmations méthodologiques inventées
 
 TABLEAUX ET DIAPOSITIVES EQD
 - Pour les diapositives EQD : extraire les données avec get_metric_data et vérifier que les blocs de texte correspondent aux valeurs réelles
