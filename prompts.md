@@ -454,7 +454,7 @@ BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
 
 AFTER COMPLETING THE REPORT:
-Use ask_user_questions to ask: "Report complete. Would you like to add any of these sections?" with options: "Regional disruptions analysis (Prompt 2)", "Data quality assessment annex (Prompt 3)", "No, the report is done"
+Let the user know: "Report complete. If you'd like to add more sections, you can run these prompts from the library: Prompt 2 (Regional disruptions analysis) or Prompt 3 (Data quality assessment annex)."
 ```
 
 ## Prompt 2: Regional Disruptions Analysis
