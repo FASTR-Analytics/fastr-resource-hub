@@ -1101,7 +1101,7 @@ DIRECTION D'INTERPRÉTATION DES INDICATEURS
 - Indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : augmentation = détérioration
 
 ACRONYMES ET MÉTHODOLOGIE
-- Des acronymes sont-ils développés dans le texte ? Si oui, vérifier que l'expansion est correcte en utilisant get_methodology_docs_list et get_methodology_doc_content. JAMAIS supposer — une expansion d'acronyme incorrecte est une erreur critique
+- Des acronymes sont-ils développés dans le texte ? Si oui, vérifier que l'expansion est correcte en utilisant get_methodology_docs_list et get_methodology_doc_content, ou consulter https://fastr-analytics.github.io/fastr-resource-hub/. JAMAIS supposer — une expansion d'acronyme incorrecte est une erreur critique
 - Les descriptions méthodologiques sont-elles exactes ? Vérifier dans la documentation officielle — ne pas laisser passer des affirmations méthodologiques inventées
 
 TABLEAUX ET DIAPOSITIVES EQD
@@ -1136,7 +1136,7 @@ LANGAGE ET FORMULATION
 
 TERMINOLOGIE TECHNIQUE
 - Les termes de santé sont-ils utilisés correctement ? (par exemple « accouchement assisté par du personnel qualifié » et non « accouchement aidé »)
-- Les acronymes sont-ils développés correctement à la première utilisation et utilisés de manière cohérente ensuite ?
+- Les acronymes sont-ils développés correctement ? Vérifier dans la documentation méthodologique (get_methodology_docs_list / get_methodology_doc_content) ou sur https://fastr-analytics.github.io/fastr-resource-hub/. Une expansion d'acronyme incorrecte est une erreur critique — JAMAIS supposer
 - Le nom du pays est-il correctement orthographié ?
 - Les noms des zones administratives correspondent-ils exactement à ce qui apparaît dans la plateforme ?
 

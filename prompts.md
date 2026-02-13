@@ -1099,7 +1099,7 @@ INDICATOR INTERPRETATION DIRECTION
 - Negative quality indicators (dropout rates, outlier rates): increase = worsening
 
 ACRONYMS AND METHODOLOGY
-- Are any acronyms expanded in the text? If so, verify the expansion is correct using get_methodology_docs_list and get_methodology_doc_content. NEVER assume — a wrong acronym expansion is a critical error
+- Are any acronyms expanded in the text? If so, verify the expansion is correct using get_methodology_docs_list and get_methodology_doc_content, or fetch https://fastr-analytics.github.io/fastr-resource-hub/. NEVER assume — a wrong acronym expansion is a critical error
 - Are methodology descriptions accurate? Check against official documentation — do not let made-up methodology claims pass unchallenged
 
 TABLES AND DQ SLIDES
@@ -1134,7 +1134,7 @@ LANGUAGE AND FRAMING
 
 TECHNICAL TERMINOLOGY
 - Are health terms used correctly? (e.g., "skilled birth attendance" not "assisted delivery")
-- Are acronyms expanded correctly on first use and used consistently after?
+- Are acronyms expanded correctly? Verify against the methodology docs (get_methodology_docs_list / get_methodology_doc_content) or https://fastr-analytics.github.io/fastr-resource-hub/. A wrong acronym expansion is a critical error — NEVER assume
 - Is the country name spelled correctly?
 - Do admin area names match exactly what appears in the platform?
 
