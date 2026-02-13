@@ -1074,6 +1074,8 @@ After all DQ slides, re-add the back page as the final slide.
 ```prompt
 Review the current slide deck — check that every text block is accurate against the underlying data. We will review one slide at a time.
 
+CRITICAL: During this review, do not guess or hallucinate. Every claim you make about what is correct or incorrect must be verified by actually querying the data (get_metric_data), checking the platform (get_available_metrics), or fetching the methodology docs. If you are not sure about something, say so — do not assume.
+
 Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
 
 Always refer to slides by their number (not their ID).
@@ -1093,7 +1095,8 @@ DATA ACCURACY
 - Are time periods correctly referenced?
 - Does the text only reference what is visible in the data? No external claims
 
-INDICATOR INTERPRETATION DIRECTION
+INDICATOR NAMES AND INTERPRETATION
+- Do indicator names in the text match the exact labels from the platform? Use get_available_metrics to verify — do not accept paraphrased or shortened names (e.g., if the platform says "Pneumonia cases identified", the text should not say "Pneumonia cases")
 - Service delivery indicators (ANC, deliveries, PNC, immunizations, OPD, family planning): increase = positive, decrease = concern
 - Mortality indicators (maternal deaths, neonatal deaths, stillbirths): increase = BAD, decrease = GOOD
 - Negative quality indicators (dropout rates, outlier rates): increase = worsening
@@ -1131,6 +1134,7 @@ LANGUAGE AND FRAMING
 - No overgeneralization — findings are scoped to the specific area and time period
 - Appropriate hedging — conclusions are not stronger than what the data supports
 - No indicator codes in text blocks — only human-readable labels (e.g., "ANC first visit" not "anc1")
+- Do indicator names match the exact labels from the platform? Use get_available_metrics to verify — do not accept paraphrased or shortened names
 
 TECHNICAL TERMINOLOGY
 - Are health terms used correctly? (e.g., "skilled birth attendance" not "assisted delivery")

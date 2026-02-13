@@ -1076,6 +1076,8 @@ Après toutes les diapositives EQD, remettre la dernière page comme diapositive
 ```prompt
 Réviser le jeu de diapositives actuel — vérifier que chaque bloc de texte est exact par rapport aux données sous-jacentes. Nous réviserons une diapositive à la fois.
 
+CRITIQUE : Pendant cette révision, ne pas deviner ni halluciner. Chaque affirmation sur ce qui est correct ou incorrect doit être vérifiée en interrogeant réellement les données (get_metric_data), en vérifiant la plateforme (get_available_metrics), ou en consultant la documentation méthodologique. Si vous n'êtes pas sûr de quelque chose, le dire — ne pas supposer.
+
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
 
 Toujours désigner les diapositives par leur numéro (pas par leur ID).
@@ -1095,7 +1097,8 @@ EXACTITUDE DES DONNÉES
 - Les périodes temporelles sont-elles correctement référencées ?
 - Le texte ne référence-t-il que ce qui est visible dans les données ? Pas de déclarations externes
 
-DIRECTION D'INTERPRÉTATION DES INDICATEURS
+NOMS ET INTERPRÉTATION DES INDICATEURS
+- Les noms des indicateurs dans le texte correspondent-ils aux libellés exacts de la plateforme ? Utiliser get_available_metrics pour vérifier — ne pas accepter des noms paraphrasés ou raccourcis (par exemple si la plateforme dit « Cas de pneumonie identifiés », le texte ne doit pas dire « Cas de pneumonie »)
 - Indicateurs de prestation de services (CPN, accouchements, soins postnataux, vaccinations, consultations externes, planification familiale) : augmentation = positif, diminution = préoccupant
 - Indicateurs de mortalité (décès maternels, décès néonataux, mortinaissances) : augmentation = MAUVAIS, diminution = BON
 - Indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : augmentation = détérioration
@@ -1133,6 +1136,7 @@ LANGAGE ET FORMULATION
 - Pas de généralisation excessive — les résultats sont limités à la zone et la période spécifiques
 - Nuances appropriées — les conclusions ne sont pas plus fortes que ce que les données permettent
 - Pas de codes d'indicateurs dans les blocs de texte — uniquement des libellés lisibles (par exemple « Première visite CPN » et non « anc1 »)
+- Les noms des indicateurs correspondent-ils aux libellés exacts de la plateforme ? Utiliser get_available_metrics pour vérifier — ne pas accepter des noms paraphrasés ou raccourcis
 
 TERMINOLOGIE TECHNIQUE
 - Les termes de santé sont-ils utilisés correctement ? (par exemple « accouchement assisté par du personnel qualifié » et non « accouchement aidé »)
