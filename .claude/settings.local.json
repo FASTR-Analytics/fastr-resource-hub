@@ -161,7 +161,10 @@
       "Bash(__NEW_LINE_ebf45be69dbed693__ echo \"\")",
       "Bash(__NEW_LINE_df23e7c5f1e1db21__ echo \"\")",
       "Bash(brew list:*)",
-      "Bash(pdfinfo:*)"
+      "Bash(pdfinfo:*)",
+      "Bash(git -C /Users/claireboulange/Desktop/fastr-resource-hub status)",
+      "Bash(git -C /Users/claireboulange/Desktop/fastr-resource-hub diff)",
+      "Bash(git -C /Users/claireboulange/Desktop/fastr-resource-hub log --oneline -3)"
     ]
   }
 }
