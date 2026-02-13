@@ -452,6 +452,9 @@ Good example (for a Deliveries & PNC group):
 
 BACK PAGE:
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
+
+AFTER COMPLETING THE REPORT:
+Use ask_user_questions to ask: "Report complete. Would you like to add any of these sections?" with options: "Regional disruptions analysis (Prompt 2)", "Data quality assessment annex (Prompt 3)", "No, the report is done"
 ```
 
 ## Prompt 2: Regional Disruptions Analysis

@@ -454,6 +454,9 @@ Bon exemple (pour un groupe Accouchements et CPoN) :
 
 DERNIÈRE PAGE :
 - "FASTR initiative:" followed by https://data.gffportal.org/key-theme/FASTR
+
+APRÈS AVOIR TERMINÉ LE RAPPORT :
+Utiliser ask_user_questions pour demander : « Rapport terminé. Souhaitez-vous ajouter l'une de ces sections ? » avec les options : « Analyse régionale des perturbations (Prompt 2) », « Annexe évaluation de la qualité des données (Prompt 3) », « Non, le rapport est terminé »
 ```
 
 ## Prompt 2 : Analyse régionale des perturbations
