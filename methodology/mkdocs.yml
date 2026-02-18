@@ -141,22 +141,6 @@ plugins:
       csl_file: "https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl"
       bib_by_default: false
       full_bib_command: "\\full_bibliography"
-  - exporter:
-      formats:
-        pdf:
-          enabled: !ENV [MKDOCS_EXPORTER_PDF, true]
-          concurrency: 4
-          stylesheets:
-            - resources/stylesheets/pdf.css
-          scripts:
-            - resources/scripts/pdf-date.js
-          browser:
-            timeout: 120000
-      buttons:
-        - title: Download as PDF
-          icon: material-file-download-outline
-          enabled: !!python/name:mkdocs_exporter.formats.pdf.buttons.download.enabled
-          attributes: !!python/name:mkdocs_exporter.formats.pdf.buttons.download.attributes
   - minify:
       minify_html: true
       minify_js: true
@@ -243,6 +227,7 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/pdf-print.js
 
 # Copyright
 copyright: |

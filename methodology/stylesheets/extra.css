@@ -467,21 +467,142 @@ hr {
 }
 
 /* ========================================
-   PRINT
+   PRINT / SAVE AS PDF
    ======================================== */
+
+/* Download button (screen) */
+.pdf-download-btn {
+  float: right;
+  margin: 0.5rem 0 0.5rem 1rem;
+  padding: 0.4rem;
+  background: none;
+  border: 1px solid var(--fastr-deep-green);
+  border-radius: 0.3rem;
+  color: var(--fastr-deep-green);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  line-height: 0;
+}
+.pdf-download-btn:hover {
+  opacity: 1;
+  background: rgba(9, 84, 79, 0.08);
+}
+
+/* Date element: hidden on screen, shown in print */
+#pdf-download-date {
+  display: none;
+}
+
 @media print {
-  .md-header,
-  .md-tabs,
-  .md-footer,
-  .md-sidebar {
-    display: none;
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 20mm 15mm 25mm 15mm;
   }
 
-  img {
-    box-shadow: none;
+  /* Hide all UI chrome */
+  .md-header, .md-tabs, .md-footer, .md-sidebar,
+  .md-top, .md-source, .md-search, .md-dialog,
+  .md-banner, .md-consent,
+  .headerlink, .pdf-download-btn,
+  [data-md-component="header"],
+  [data-md-component="tabs"],
+  [data-md-component="footer"],
+  [data-md-component="sidebar"],
+  .md-content__button:not(.pdf-download-btn) {
+    display: none !important;
   }
 
-  h1, h2, h3 {
+  /* Full-width content */
+  .md-content {
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .md-main__inner {
+    margin: 0 !important;
+  }
+  .md-content__inner {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Show download date */
+  #pdf-download-date {
+    display: block !important;
+    font-size: 9pt;
+    color: #666;
+    margin-bottom: 1.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
+    font-family: Roboto, sans-serif;
+  }
+
+  /* Typography */
+  body {
+    font-size: 11pt;
     color: #000 !important;
+  }
+  h1 {
+    color: #09544F !important;
+    border-bottom: 2px solid #09544F;
+  }
+  h2 {
+    color: #21568C !important;
+    border-bottom: 1px solid #21568C;
+  }
+  h3 {
+    color: #7A1F6E !important;
+  }
+
+  /* Page breaks */
+  h1, h2, h3, h4 {
+    break-after: avoid;
+  }
+  figure, .admonition {
+    break-inside: avoid;
+  }
+  table {
+    break-inside: auto;
+  }
+  table tr {
+    break-inside: avoid;
+  }
+
+  /* Images */
+  img {
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  /* Links: show URL after external links */
+  a[href^="http"]:not([href*="fastr"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+    word-break: break-all;
+  }
+
+  /* Tables */
+  table {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+  }
+  table th {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+  }
+
+  /* Admonitions */
+  .admonition {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  /* Code */
+  .highlight pre {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
   }
 }
