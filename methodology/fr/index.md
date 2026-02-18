@@ -11,7 +11,7 @@
 
 **Méthodologie Documentation**
 
-Cette documentation décrit l'approche FASTR de l'analyse de routine des données SIGS pour le suivi des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (RMNCAH-N).
+Cette documentation décrit l'approche FASTR de l'analyse de routine des données SIGS pour le suivi des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N).
 
 ## Modules de documentation
 
@@ -33,5 +33,5 @@ Cette documentation décrit l'approche FASTR de l'analyse de routine des donnée
 
 ## À propos de FASTR
 
-La Facilité de financement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Cette documentation méthodologique se concentre sur le suivi de l'utilisation des services du RMNCAH-N à l'aide de données SIGS de routine.
+Le Mécanisme de financement mondial (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Cette documentation méthodologique se concentre sur le suivi de l'utilisation des services du SRMNIA-N à l'aide de données SIGS de routine.
 

@@ -1,27 +1,27 @@
 <!-- AUTO-TRANSLATED from 00_introduction.md -->
 <!-- Add REVIEWED marker after human review to protect from overwrite -->
 
-# FASTR RMNCAH-N surveillance de l'utilisation des services : Documentation méthodologique
+# FASTR SRMNIA-N surveillance de l'utilisation des services : Documentation méthodologique
 
 ## Introduction à FASTR
 
-La Facilité de financement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision, conduisant finalement à des systèmes de soins de santé primaires (SSP) plus forts et à de meilleurs résultats en matière de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (RMNCAH-N). Cet ensemble d'initiatives et de soutien technique est appelé **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
+Le Mécanisme de financement mondial (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision, conduisant finalement à des systèmes de soins de santé primaires (SSP) plus forts et à de meilleurs résultats en matière de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N). Cet ensemble d'initiatives et de soutien technique est appelé **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
 
-FASTR englobe quatre approches techniques : (1) le suivi de l'utilisation des services du RMNCAH-N à l'aide des données du système d'information sur la gestion de la santé (SIGS), (2) des enquêtes téléphoniques à cycle rapide auprès des établissements de santé, (3) des enquêtes téléphoniques à haute fréquence auprès des ménages, et (4) des analyses de suivi. **Cette documentation méthodologique se concentre spécifiquement sur la première approche : Le suivi de l'utilisation des services du RMNCAH-N**
+FASTR englobe quatre approches techniques : (1) le suivi de l'utilisation des services du SRMNIA-N à l'aide des données du système d'information sur la gestion de la santé (SIGS), (2) des enquêtes téléphoniques à cycle rapide auprès des établissements de santé, (3) des enquêtes téléphoniques à haute fréquence auprès des ménages, et (4) des analyses de suivi. **Cette documentation méthodologique se concentre spécifiquement sur la première approche : Le suivi de l'utilisation des services du SRMNIA-N**
 
-## Suivi de l'utilisation des services du RMNCAH-N
+## Suivi de l'utilisation des services du SRMNIA-N
 
 Le GFF collabore avec les ministères de la santé pour effectuer des analyses de cycle rapide des données SIGS de routine. Cette approche répond à trois objectifs principaux :
 
 1. **Évaluer la qualité des données** aux niveaux national et sous-national afin d'identifier et de résoudre les problèmes d'exhaustivité, d'exactitude et de cohérence
-2. **Suivre l'évolution de l'utilisation des services** en mesurant les changements mensuels dans les volumes de services de santé prioritaires du RMNCAH-N
+2. **Suivre l'évolution de l'utilisation des services** en mesurant les changements mensuels dans les volumes de services de santé prioritaires du SRMNIA-N
 3. **Suivre les progrès de la couverture** en comparant les tendances de la prestation de services avec les objectifs et les points de référence spécifiques au pays
 
 Ces analyses se concentrent sur les indicateurs prioritaires liés aux réformes nationales en matière de santé et aux investissements de la Banque mondiale, et les résultats informent les processus de planification nationale et les cycles de mise en œuvre des projets. Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels en utilisant cette approche.
 
-![Étapes de mise en œuvre du RMNCAH-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Étapes de mise en œuvre du SRMNIA-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
-*Figure 1. Étapes de la mise en œuvre du contrôle de l'utilisation des services du RMNCAH-N*
+*Figure 1. Étapes de la mise en œuvre du contrôle de l'utilisation des services du SRMNIA-N*
 
 ### Pourquoi l'analyse en cycle rapide ?
 
@@ -31,7 +31,7 @@ Les sources de données des systèmes de santé existants sont essentielles, mai
 
 ### Comment cela fonctionne-t-il ?
 
-Les approches analytiques à cycle rapide fournissent des données opportunes, rigoureuses et prioritaires qui répondent aux priorités spécifiques de chaque pays et aux besoins en matière d'utilisation des données. Ce cycle continu d'analyse-apprentissage-renforcement-action vise à améliorer l'utilisation systématique des données pour la prise de décision en vue d'améliorer les résultats du RMNCAH-N.
+Les approches analytiques à cycle rapide fournissent des données opportunes, rigoureuses et prioritaires qui répondent aux priorités spécifiques de chaque pays et aux besoins en matière d'utilisation des données. Ce cycle continu d'analyse-apprentissage-renforcement-action vise à améliorer l'utilisation systématique des données pour la prise de décision en vue d'améliorer les résultats du SRMNIA-N.
 
 ![Cadre analytique à cycle rapide FASTR](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
@@ -39,9 +39,9 @@ Les approches analytiques à cycle rapide fournissent des données opportunes, r
 
 ### Approches techniques
 
-Les quatre approches techniques du FASTR, étayées par le renforcement des capacités et le soutien à l'utilisation des données, permettent aux pays d'utiliser l'analyse en cycle rapide pour renforcer les systèmes de soins de santé primaires et améliorer les résultats du RMNCAH-N grâce à l'analyse et à l'utilisation opportunes et fréquentes des données.
+Les quatre approches techniques du FASTR, étayées par le renforcement des capacités et le soutien à l'utilisation des données, permettent aux pays d'utiliser l'analyse en cycle rapide pour renforcer les systèmes de soins de santé primaires et améliorer les résultats du SRMNIA-N grâce à l'analyse et à l'utilisation opportunes et fréquentes des données.
 
-1. **L'analyse des données SIGS de routine** permet d'évaluer la qualité des données, de quantifier les changements dans les volumes de services de santé prioritaires et de comparer les tendances de la couverture des services aux objectifs nationaux pour les indicateurs prioritaires du RMNCAH-N.
+1. **L'analyse des données SIGS de routine** permet d'évaluer la qualité des données, de quantifier les changements dans les volumes de services de santé prioritaires et de comparer les tendances de la couverture des services aux objectifs nationaux pour les indicateurs prioritaires du SRMNIA-N.
 
 2. **Les enquêtes téléphoniques à cycle rapide sur les établissements de santé** évaluent la performance des établissements de soins de santé primaires, surveillent la mise en œuvre des réformes, identifient l'impact des chocs et suivent les changements au fil du temps. L'enquête téléphonique est menée auprès d'un échantillon représentatif de SSP au cours de quatre contacts trimestriels par an.
 
@@ -113,13 +113,13 @@ L'approche FASTR de l'analyse des données de routine comporte trois volets :
 2. **Ajuster les problèmes de qualité des données** pour améliorer la précision de l'analyse
 3. **Analyser les données pour répondre aux questions politiques urgentes spécifiques au pays**, y compris l'identification des changements dans les volumes de services prioritaires et les tendances dans la couverture des services par rapport aux priorités et aux objectifs du pays
 
-Cette approche permet d'identifier les problèmes de qualité des données les plus prioritaires et de procéder aux ajustements analytiques nécessaires afin d'améliorer continuellement les données tout en menant les analyses appropriées. L'évaluation de la qualité des données est effectuée par indicateur et peut être désagrégée au niveau sous-national étant donné que les données au niveau de l'établissement sont utilisées pour l'analyse. Ceci est important pour générer des rapports réguliers et pertinents sur la qualité des données, le volume des services et les estimations de couverture qui fournissent un instantané continu de l'utilisation des services du RMNCAH-N.
+Cette approche permet d'identifier les problèmes de qualité des données les plus prioritaires et de procéder aux ajustements analytiques nécessaires afin d'améliorer continuellement les données tout en menant les analyses appropriées. L'évaluation de la qualité des données est effectuée par indicateur et peut être désagrégée au niveau sous-national étant donné que les données au niveau de l'établissement sont utilisées pour l'analyse. Ceci est important pour générer des rapports réguliers et pertinents sur la qualité des données, le volume des services et les estimations de couverture qui fournissent un instantané continu de l'utilisation des services du SRMNIA-N.
 
 ---
 
 ### Se concentrer sur un ensemble d'indicateurs de base
 
-L'approche FASTR de l'analyse des données de routine se concentre sur un ensemble d'indicateurs RMNCAH-N qui caractérisent le continuum des soins de santé reproductive, maternelle et infantile, les domaines de santé prioritaires dans les PRFM. Ces indicateurs capturent les événements clés de la prestation de services, qui ont des taux d'exhaustivité plus élevés et un volume plus important. En outre, ces indicateurs servent d'indicateurs de substitution pour d'autres services et interventions fournis lors du même contact. En outre, les consultations externes (OPD) sont utilisées comme indicateur de l'utilisation générale des services de santé. Des indicateurs supplémentaires, spécifiques à un pays ou à un programme, peuvent être ajoutés à l'analyse pour répondre aux priorités nationales.
+L'approche FASTR de l'analyse des données de routine se concentre sur un ensemble d'indicateurs SRMNIA-N qui caractérisent le continuum des soins de santé reproductive, maternelle et infantile, les domaines de santé prioritaires dans les PRFM. Ces indicateurs capturent les événements clés de la prestation de services, qui ont des taux d'exhaustivité plus élevés et un volume plus important. En outre, ces indicateurs servent d'indicateurs de substitution pour d'autres services et interventions fournis lors du même contact. En outre, les consultations externes (OPD) sont utilisées comme indicateur de l'utilisation générale des services de santé. Des indicateurs supplémentaires, spécifiques à un pays ou à un programme, peuvent être ajoutés à l'analyse pour répondre aux priorités nationales.
 
 ---
 

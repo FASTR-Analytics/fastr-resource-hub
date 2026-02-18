@@ -7,13 +7,13 @@
 
 > **Note:** Le contenu de cette section est susceptible d'être révisé.
 
-## FASTR RMNCAH-N surveillance de l'utilisation des services
+## FASTR SRMNIA-N surveillance de l'utilisation des services
 
-Cette documentation décrit l'approche FASTR pour le suivi de la prestation des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (RMNCAH-N) en utilisant les données du système d'information sur la gestion de la santé (SIGS). La méthodologie guide les utilisateurs à travers un processus de bout en bout : de la définition des questions prioritaires et de l'extraction des données à la communication des résultats pour la prise de décision, en passant par l'analyse basée sur une plateforme.
+Cette documentation décrit l'approche FASTR pour le suivi de la prestation des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N) en utilisant les données du système d'information sur la gestion de la santé (SIGS). La méthodologie guide les utilisateurs à travers un processus de bout en bout : de la définition des questions prioritaires et de l'extraction des données à la communication des résultats pour la prise de décision, en passant par l'analyse basée sur une plateforme.
 
 ## Contexte
 
-La Facilité de financement mondiale (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Les systèmes d'information sur la gestion de la santé dans les pays à revenu faible et intermédiaire génèrent mensuellement des données de routine sur la prestation de services au niveau des établissements. Cependant, ces données sont souvent affectées par des rapports incomplets, des statistiques aberrantes et des incohérences internes qui limitent leur utilité analytique.
+Le Mécanisme de financement mondial (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision par le biais des **évaluations fréquentes et des outils du système de santé pour la résilience (FASTR)**. Les systèmes d'information sur la gestion de la santé dans les pays à revenu faible et intermédiaire génèrent mensuellement des données de routine sur la prestation de services au niveau des établissements. Cependant, ces données sont souvent affectées par des rapports incomplets, des statistiques aberrantes et des incohérences internes qui limitent leur utilité analytique.
 
 Les enquêtes traditionnelles auprès des ménages (EDS, MICS) fournissent des estimations validées de la couverture, mais sont menées peu fréquemment (généralement tous les 3 à 5 ans), ce qui crée des lacunes dans la disponibilité de données opportunes pour le suivi des tendances de la prestation de services, la détection des perturbations et le suivi des progrès accomplis dans la réalisation des objectifs du système de santé. FASTR répond à ces contraintes grâce à un processus analytique structuré qui évalue et corrige systématiquement les problèmes de qualité des données de routine du SIGS.
 
