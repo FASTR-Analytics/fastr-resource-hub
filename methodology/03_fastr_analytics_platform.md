@@ -1,3 +1,7 @@
+---
+pdf: false
+---
+
 # The FASTR data analytics platform
 
 ## Overview
