@@ -1,7 +1,3 @@
----
-pdf: false
----
-
 <!-- AUTO-TRANSLATED from 03_fastr_analytics_platform.md -->
 <!-- Add REVIEWED marker after human review to protect from overwrite -->
 
