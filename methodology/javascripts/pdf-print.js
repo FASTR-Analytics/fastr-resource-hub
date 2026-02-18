@@ -27,7 +27,6 @@
   }
 
   function addButton() {
-    // Skip if button already exists on this page
     if (document.querySelector(".pdf-download-btn")) return;
 
     var content = document.querySelector(".md-content__inner");
@@ -55,15 +54,17 @@
     }
   }
 
-  // 1. Add button now (script is at end of <body>, DOM is ready)
+  // Add button on initial load
   addButton();
 
-  // 2. Re-add on instant navigation — watch for content area replacement
-  var observer = new MutationObserver(function () {
-    addButton();
+  // Detect instant navigation: Material uses history.pushState for page swaps.
+  // Intercept pushState and listen for popstate to re-add button after navigation.
+  var origPushState = history.pushState;
+  history.pushState = function () {
+    origPushState.apply(this, arguments);
+    setTimeout(addButton, 100);
+  };
+  window.addEventListener("popstate", function () {
+    setTimeout(addButton, 100);
   });
-  var target = document.querySelector(".md-content");
-  if (target) {
-    observer.observe(target, { childList: true, subtree: true });
-  }
 })();
