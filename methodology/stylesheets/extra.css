@@ -470,25 +470,34 @@ hr {
    PRINT / SAVE AS PDF
    ======================================== */
 
-/* PDF Download button — matches Material's md-content__button style */
+/* PDF Download button */
 a.pdf-download-btn {
+  display: block !important;
   float: right;
-  margin: 0.4rem 0 0.4rem 0.4rem;
-  padding: 0;
-  color: var(--md-default-fg-color--lighter);
+  margin: 0.4rem 0 0.4rem 0.8rem;
+  padding: 0.3rem 0.6rem;
+  color: var(--fastr-deep-green);
   cursor: pointer;
-  transition: color 0.25s;
-  border-bottom: none !important;
+  transition: color 0.25s, background 0.25s;
+  border: 1px solid var(--fastr-deep-green);
+  border-radius: 0.3rem;
+  border-bottom: 1px solid var(--fastr-deep-green) !important;
+  font-size: 0.7rem;
+  line-height: 1;
+  text-decoration: none;
+  opacity: 0.6;
 }
 a.pdf-download-btn:hover {
-  color: var(--md-accent-fg-color);
-  border-bottom: none !important;
+  opacity: 1;
+  background: rgba(9, 84, 79, 0.08);
+  color: var(--fastr-deep-green);
+  border-bottom: 1px solid var(--fastr-deep-green) !important;
 }
 a.pdf-download-btn svg {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1rem;
+  height: 1rem;
   fill: currentColor;
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 
 /* Date element: hidden on screen, shown in print */
