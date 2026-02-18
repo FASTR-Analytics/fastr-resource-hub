@@ -148,7 +148,7 @@ Cette documentation méthodologique décrit l'approche complète de la FASTR pou
 - [Extraction des données**](02_data_extraction.md) - Extraction et préparation des données SIGS du DHIS2 pour l'analyse
 - [La plateforme d'analyse des données du FASTR**](03_FASTR_analytics_plateforme.md) - Utilisation de la plateforme pour l'analyse et la visualisation automatisées
 
-### modules d'analyse (plate-forme FASTR)
+### Modules d'analyse (plate-forme FASTR)
 
 La plate-forme d'analyse FASTR comprend quatre modules automatisés :
 

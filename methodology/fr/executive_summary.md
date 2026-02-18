@@ -31,19 +31,19 @@ Les données au niveau de l'établissement sont extraites directement du DHIS2 v
 
 Ces données structurées sont traitées au sein de la plateforme analytique FASTR, qui fournit un environnement standardisé pour la mise en œuvre d'un ensemble modulaire de composants analytiques. Les utilisateurs configurent les hiérarchies administratives et les mappages d'installations et exécutent les modules analytiques pour générer des mesures de la qualité des données, des analyses de l'utilisation des services et des estimations de la couverture d'une manière cohérente et reproductible.
 
-### module de plate-forme 1 : Évaluation de la qualité des données
+### Module de plate-forme 1 : Évaluation de la qualité des données
 
 Ce module applique des méthodes statistiques pour évaluer la fiabilité des données de routine des établissements de santé. Il identifie les valeurs extrêmes à l'aide de l'écart absolu médian, évalue l'exhaustivité des rapports au niveau de l'établissement et de l'indicateur, et vérifie la cohérence interne entre les indicateurs connexes (par exemple, en s'assurant que les valeurs de la CPN1 ne sont pas inférieures à celles de la CPN4). Les résultats comprennent des scores de qualité des données au niveau de l'établissement et des drapeaux à utiliser pour l'ajustement et l'analyse ultérieurs des données.
 
-### module 2 de la plateforme : Ajustement de la qualité des données
+### Module 2 de la plateforme : Ajustement de la qualité des données
 
 Le module d'ajustement de la qualité des données produit quatre versions parallèles de l'ensemble de données : (i) données non ajustées, (ii) données ajustées pour les valeurs aberrantes uniquement, (iii) données ajustées pour les valeurs manquantes uniquement, et (iv) données ajustées à la fois pour les valeurs aberrantes et les valeurs manquantes. L'ajustement pour les valeurs aberrantes remplace les observations marquées par des médianes glissantes sur six mois, tandis que les valeurs manquantes sont imputées en utilisant la même approche hiérarchique. Le fait de conserver les quatre versions favorise la transparence et l'analyse de sensibilité.
 
-### module 3 de la plateforme : Analyse de l'utilisation des services
+### Module 3 de la plateforme : Analyse de l'utilisation des services
 
 Ce module applique des techniques de contrôle des processus statistiques pour détecter les écarts entre les volumes de services et les modèles attendus, après avoir pris en compte la saisonnalité et les tendances à long terme. Des modèles de régression par panel sont estimés aux niveaux national, régional et du district pour quantifier l'ampleur et la signification statistique des déficits ou des excédents de services pendant les périodes de perturbation identifiées.
 
-### module 4 de la plateforme : Estimation de la couverture
+### Module 4 de la plateforme : Estimation de la couverture
 
 Le module d'estimation de la couverture dérive les dénominateurs de la population cible en combinant les volumes de services SIGS avec les informations sur la couverture des enquêtes auprès des ménages et les projections démographiques. Des séries de dénominateurs multiples sont générées en utilisant des indicateurs SIGS alternatifs et des hypothèses démographiques, y compris des ajustements pour les facteurs biologiques. Les projections de couverture pour les années postérieures à l'enquête sont produites en appliquant les changements annuels dérivés du SIGS aux données de base de l'enquête.
 

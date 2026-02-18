@@ -115,7 +115,7 @@ Les données d'évaluation des établissements de santé (HFA) contiennent des i
 
 Un **dataset** est une collection de données de santé, soit SIGS soit HFA. Chaque fois que des données sont importées dans la plateforme, une nouvelle version est créée. Ce système de versions permet aux utilisateurs de suivre les changements au fil du temps, de passer d'une version à l'autre si nécessaire et de conserver un historique complet des données à des fins d'audit et de comparaison.
 
-### modules
+### Modules
 
 **Les modules** sont des unités de traitement des données qui exécutent des scripts analytiques R au sein de la plateforme. Chaque module prend des données d'entrée provenant d'ensembles de données ou des sorties d'autres modules, traite et analyse les données selon des méthodes statistiques définies et produit des objets de résultats sous forme de fichiers de sortie. Les modules peuvent être enchaînés pour prendre en charge des flux de travail analytiques complexes dans lesquels un module utilise les sorties d'un autre module comme ses entrées.
 
@@ -169,7 +169,7 @@ Pour demander une instance nationale, contactez Ashley Sheffel à l'adresse ashe
 1.3 Se connecter à la plateforme <iframe src="https://scribehow.com/embed/13_Signing_into_the_plateforme__ICDGCqyIQ6SxAcK4RKou7g" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
 1.4 Accès FAQ
 
-#### 2.0 modules
+#### 2.0 Modules
 Comprendre les modules, les modules d'analyse disponibles, l'installation des modules, l'exécution des analyses
 
 #### 3.0 Visualisations
@@ -187,8 +187,8 @@ Exigences en matière de format des données, processus d'importation, validatio
 #### 7.0 Administration : Projets
 Flux de travail pour la mise en place des projets, options de configuration, meilleures pratiques
 
-#### 8.0 Administration : modules
-modules d'analyse disponibles, installation des modules, exécution des analyses
+#### 8.0 Administration : Modules
+Modules d'analyse disponibles, installation des modules, exécution des analyses
 
 
 ---
