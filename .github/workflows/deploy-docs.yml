@@ -44,6 +44,13 @@ jobs:
       - name: Install Playwright Chromium
         run: playwright install chromium
 
+      - name: Patch mkdocs-exporter event loop bug
+        run: |
+          # Fix asyncio event loop mismatch when i18n plugin triggers nested builds
+          # See: mkdocs-exporter uses a stale event loop reference after i18n rebuild
+          PLUGIN_FILE=$(python -c "import mkdocs_exporter.formats.pdf.plugin; print(mkdocs_exporter.formats.pdf.plugin.__file__)")
+          sed -i 's/^\(\s*\)while self.tasks:/\1asyncio.set_event_loop(self.loop)\n\1while self.tasks:/' "$PLUGIN_FILE"
+
       - name: Build documentation
         run: mkdocs build -f methodology/mkdocs.yml
 
