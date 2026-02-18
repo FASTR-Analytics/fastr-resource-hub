@@ -13,6 +13,11 @@
   }
 
   function downloadPDF() {
+    // Remove any leftover date element from a previous attempt
+    var old = document.getElementById("pdf-download-date");
+    if (old) old.parentNode.removeChild(old);
+
+    // Inject date element
     var dateEl = document.createElement("div");
     dateEl.id = "pdf-download-date";
     dateEl.textContent = getDateString();
@@ -20,10 +25,11 @@
     var content = document.querySelector(".md-content__inner");
     if (content) content.insertBefore(dateEl, content.firstChild);
 
-    setTimeout(function () {
-      window.print();
-      if (dateEl.parentNode) dateEl.parentNode.removeChild(dateEl);
-    }, 100);
+    // Print directly (no setTimeout — keeps user gesture chain intact for Safari)
+    window.print();
+
+    // Clean up after print dialog closes
+    if (dateEl.parentNode) dateEl.parentNode.removeChild(dateEl);
   }
 
   function addButton() {
@@ -57,14 +63,13 @@
   // Add button on initial load
   addButton();
 
-  // Detect instant navigation: Material uses history.pushState for page swaps.
-  // Intercept pushState and listen for popstate to re-add button after navigation.
+  // Detect instant navigation: Material uses history.pushState for page swaps
   var origPushState = history.pushState;
   history.pushState = function () {
     origPushState.apply(this, arguments);
-    setTimeout(addButton, 100);
+    setTimeout(addButton, 200);
   };
   window.addEventListener("popstate", function () {
-    setTimeout(addButton, 100);
+    setTimeout(addButton, 200);
   });
 })();
