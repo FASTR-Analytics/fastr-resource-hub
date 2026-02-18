@@ -46,17 +46,7 @@ jobs:
         run: playwright install chromium
 
       - name: Patch mkdocs-exporter for compatibility
-        run: |
-          PKG_DIR=$(python -c "import mkdocs_exporter; import os; print(os.path.dirname(mkdocs_exporter.__file__))")
-
-          # Fix 1: asyncio event loop mismatch when i18n plugin triggers nested builds
-          sed -i 's/^\(\s*\)while self.tasks:/\1asyncio.set_event_loop(self.loop)\n\1while self.tasks:/' \
-            "$PKG_DIR/formats/pdf/plugin.py"
-
-          # Fix 2: strip iframes before PDF rendering to prevent network timeouts
-          # (Scribe embeds poll third-party services endlessly, blocking networkidle)
-          sed -i 's/preprocessor.preprocess(page.html)/preprocessor.preprocess(page.html)\n    preprocessor.remove("iframe")/' \
-            "$PKG_DIR/formats/pdf/renderer.py"
+        run: python methodology/plugins/patch_exporter.py
 
       - name: Build documentation
         run: mkdocs build -f methodology/mkdocs.yml
