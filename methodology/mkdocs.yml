@@ -10,14 +10,18 @@ repo_name: FASTR-Analytics/fastr-resource-hub
 # Note: Executive Summary, Module 7, and Module 8 are hidden but still available for workshops
 nav:
   - Overview: index.md
-  - Introduction: 00_introduction.md
-  - Identify Questions & Indicators: 01_identify_questions_indicators.md
-  - Data Extraction: 02_data_extraction.md
-  - FASTR Analytics Platform: 03_fastr_analytics_platform.md
-  - Data Quality Assessment: 04_data_quality_assessment.md
-  - Data Quality Adjustments: 05_data_quality_adjustment.md
-  - Service Utilization: 06a_service_utilization.md
-  - Coverage Estimates: 06b_coverage_estimates.md
+  - Getting Started:
+    - Introduction: 00_introduction.md
+    - Identify Questions & Indicators: 01_identify_questions_indicators.md
+  - Data Preparation:
+    - Data Extraction: 02_data_extraction.md
+    - FASTR Analytics Platform: 03_fastr_analytics_platform.md
+  - Data Quality:
+    - Data Quality Assessment: 04_data_quality_assessment.md
+    - Data Quality Adjustments: 05_data_quality_adjustment.md
+  - Data Analysis:
+    - Service Utilization: 06a_service_utilization.md
+    - Coverage Estimates: 06b_coverage_estimates.md
   - Disclaimer: disclaimer.md
 
 # Theme Configuration
@@ -59,14 +63,14 @@ theme:
     - navigation.tracking         # Anchor tracking
     # - navigation.tabs           # Disabled: use sidebar instead of horizontal tabs
     # - navigation.tabs.sticky    # Disabled: use sidebar instead
-    - navigation.sections         # Navigation sections
-    - navigation.expand           # Show all modules expanded
+    - navigation.expand           # All sections expanded by default, still collapsible
     - navigation.indexes          # Section index pages
     - navigation.top              # Back to top button
     - navigation.footer           # Footer navigation
 
     # Table of Contents
-    - toc.follow              # Highlight current section in TOC
+    - toc.integrate               # Merge TOC into left sidebar
+    - toc.follow                  # Highlight current section in TOC
 
     # Search
     - search.suggest              # Search suggestions
@@ -121,12 +125,16 @@ plugins:
             language: fr
           nav_translations:
             Overview: Vue d'ensemble
+            Getting Started: Pour commencer
             Introduction: Introduction
             Identify Questions & Indicators: Identifier les questions et indicateurs
+            Data Preparation: Préparation des données
             Data Extraction: Extraction des données
             FASTR Analytics Platform: Plateforme d'analyse FASTR
+            Data Quality: Qualité des données
             Data Quality Assessment: Évaluation de la qualité des données
             Data Quality Adjustments: Ajustement de la qualité des données
+            Data Analysis: Analyse des données
             Service Utilization: Utilisation des services
             Coverage Estimates: Estimations de couverture
             Disclaimer: Avertissement
