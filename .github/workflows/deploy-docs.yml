@@ -42,8 +42,8 @@ jobs:
           pip install -r requirements.txt
           pip install -e methodology/plugins/
 
-      - name: Install Playwright Chromium
-        run: playwright install chromium
+      - name: Install Playwright Chromium with OS dependencies
+        run: playwright install --with-deps chromium
 
       - name: Patch mkdocs-exporter for compatibility
         run: python methodology/plugins/patch_exporter.py
