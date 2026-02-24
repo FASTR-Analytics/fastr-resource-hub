@@ -4,12 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## AI capabilities across platform areas
+## AI assistant capabilities
 
-| Area | What the AI can do | Limitations |
-|------|-------------------|-------------|
-| **Reports** | List available reports, review findings, extract data | Cannot edit or regenerate reports |
-| **Metrics** | Query data with filters, answer quantitative questions, explain calculations | — |
-| **Modules** | View modules, check status, access logs | Cannot run or edit modules |
-| **Data** | Explain data coverage (facilities, regions, periods) | Cannot upload or manage data |
-| **Settings** | — | No access (managed by users) |
+| Area | What it supports |
+|------|------------------|
+| **Data exploration** | Query metrics from analysis modules; filter by geography, time, demographics; view raw CSV data; explore across time periods and locations |
+| **Visualization** | Display project visualizations; create bar charts, line graphs, tables; combine charts, tables, and narrative text |
+| **Knowledge** | Access FASTR methodology; explain indicators and calculations; interpret results with context on data quality and limitations |
+| **Communication** | Build narratives combining visuals and text; highlight key findings; create focused views; provide evidence-based insights |

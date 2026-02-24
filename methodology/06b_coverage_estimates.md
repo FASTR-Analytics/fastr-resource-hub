@@ -1727,6 +1727,10 @@ Same as national, plus:
     3. Consistency between `coverage_cov` and `coverage_avgsurveyprojection`
     4. Denominator selections in Part 1 output
 
+### Value add beyond standard DHIS2 analysis
+
+While DHIS2 provides a robust foundation for data collection, storage, and basic visualization, FASTR builds on this foundation with additional capabilities: automatic data quality adjustment before analysis, advanced analytical methods including disruption detection and coverage projection, standardized visualizations using percent-change approaches, improved coverage estimation using survey-derived denominators, faster analytics cycles aligned with country decision-making timelines, and built-in capacity strengthening through reproducible methods.
+
 ---
 
 <!--
@@ -2051,6 +2055,29 @@ PRESENTER NOTES:
 - Coverage >100%: denominator too small or services double-counted
 - Coverage very low: denominator too large or under-reporting
 - Use these outputs to inform program planning and resource allocation
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s5 -->
+## Why FASTR? Value add beyond standard DHIS2 analysis
+
+**DHIS2 provides the foundation** — robust data collection, storage, and basic visualization.
+
+**FASTR builds on this foundation with:**
+
+- **Data quality adjustment** — Automatically adjusts for outliers and completeness gaps before analysis
+- **Advanced analytical methods** — Disruption detection, coverage projection, and sensitivity analysis
+- **Standardized visualizations** — Percent change approach to identify meaningful fluctuations across indicators
+- **Improved coverage estimation** — Back-calculates denominators from surveys rather than relying solely on catchment populations
+- **Faster analytics cycles** — Pre-built analytical pipeline aligned with country decision-making timelines
+- **Built-in capacity strengthening** — Reproducible methods that build local analytical skills
+
+<!--
+PRESENTER NOTES:
+- DHIS2 is excellent for data collection and basic visualization — FASTR complements it
+- Key differentiator: data quality adjustment before analysis
+- Coverage methodology goes beyond simple HMIS/population ratios
+- Goal is to enable faster, more rigorous analysis for decision-making
 -->
 <!-- /SLIDE -->
 

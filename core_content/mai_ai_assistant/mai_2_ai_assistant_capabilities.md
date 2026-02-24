@@ -4,31 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-## Where the AI assistant provides the greatest value
+## What the AI assistant can do
 
-<div class="columns">
-<div>
+**Answer questions about your data**
 
-**Visualizations**
+- "Which regions have the most outliers?"
+- "How has reporting completeness changed over time?"
+- Creates charts and explanations on-the-fly
 
-Explore and understand your data
+**Explain methodology**
 
-- Access all saved visualizations within the project
-- Review underlying data for any chart or figure
-- Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
-- Receive explanations of what each visualization represents
+- "How are outliers detected?"
+- "What does this data quality score mean?"
+- Draws from platform documentation
 
-</div>
-<div>
+**Help build reports**
 
-**Slide Decks**
-
-Build presentations from your findings
-
-- Generate presentation slides including cover pages, section dividers, and content slides
-- Incorporate charts, tables, and narrative text into slide layouts
-- Transfer visualizations directly into presentations
-- Edit, reorder, duplicate, or remove slides as needed
-
-</div>
-</div>
+- Generate slide decks from your data
+- Combine saved charts with narrative text
+- Create presentations for different audiences

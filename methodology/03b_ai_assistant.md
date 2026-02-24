@@ -32,11 +32,23 @@ The AI follows a "read before responding" principle — it never guesses. For da
 
 ### What's private
 
-Your conversation with the AI, your whiteboard explorations, and the questions you ask and answers you receive are private to you. Other team members cannot see what you're exploring.
+Your conversation with the AI and the questions you ask and answers you receive are private to you. Other team members cannot see what you're exploring.
 
 ### What's shared
 
-The underlying data (same HMIS data), saved visualizations in the project library, slide decks you create and save, and project settings and module results are shared with the team. Everyone can see saved content.
+The underlying data (same HMIS data), saved visualizations in the project library, slide decks and reports you create and save, and project settings and module results are shared with the team. Everyone can see saved content.
+
+## Where the AI provides greatest value
+
+The AI assistant provides the greatest value in two areas: **visualizations** (exploring, modifying, and understanding charts) and **slide decks** (assembling presentations from data and saved charts). It can also query metrics, view module status, and help understand data coverage, though modules and settings are managed directly by users.
+
+## Effective prompting
+
+A good prompt includes six elements: (1) a clear purpose, (2) a defined audience, (3) specific geography, time, and scope, (4) interpretation guidance, (5) an output format, and (6) guardrails to keep the AI grounded in the data. The rule of thumb is simple: before sending a prompt, ask yourself whether it's obvious what you want back — if not, add one more detail.
+
+## When AI helps — and when it doesn't
+
+Not every visualization benefits equally from AI interpretation. When patterns are obvious — for example, all data quality indicators below 1% — additional AI-generated text adds length without adding insight. But when patterns are complex — sustained disruptions across multiple time periods, varying magnitudes, potential structural breaks — AI interpretation can quantify and contextualize patterns that are difficult to assess visually.
 
 ## Key principles
 
@@ -99,6 +111,68 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 - Create presentations for different audiences
 <!-- /SLIDE -->
 
+<!-- SLIDE:mai_2a -->
+## Where the AI provides greatest value
+
+<div class="columns">
+<div>
+
+**Visualizations** — Explore and understand your data
+
+- Access all saved visualizations within the project
+- Review underlying data for any chart or figure
+- Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
+- Receive explanations of what each visualization represents
+
+</div>
+<div>
+
+**Slide decks** — Build presentations from your findings
+
+- Generate presentation slides including cover pages, section dividers, and content slides
+- Incorporate charts, tables, and narrative text into slide layouts
+- Transfer visualizations directly into presentations
+- Edit, reorder, duplicate, or remove slides as needed
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:mai_2b -->
+## Additional AI capabilities across the platform
+
+The AI assistant can provide support across other platform areas:
+
+**Metrics** — Query indicator data with filters by region, facility type, or time period. The AI can answer quantitative questions and explain how metrics are defined and calculated.
+
+**Modules** — View installed analysis modules, check execution status, and access logs for troubleshooting. *Note: Modules run automatically and cannot be executed or modified through the AI.*
+
+**Data** — Understand data coverage including number of facilities, administrative areas, and reporting periods. *Note: Data upload and management functions are not accessible through the AI.*
+
+**Settings** — Project settings are managed directly by users and are not accessible through the AI assistant.
+<!-- /SLIDE -->
+
+<!-- SLIDE:mai_2c -->
+## AI across platform components
+
+<div class="columns">
+<div>
+
+**Visualizations** — Permanent library of reusable charts. You or the AI create them; you or the AI can use them.
+
+![AI across components — visualizations](resources/screenshots/ai_across_visualizations.png)
+
+</div>
+<div>
+
+**Slide decks** — For reports and presentations. The AI helps assemble content from data and saved charts.
+
+![AI across components — slide decks](resources/screenshots/ai_across_slidedecks.png)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:mai_3 -->
 ## Ask questions, get answers
 
@@ -150,6 +224,54 @@ AI: *Builds a slide highlighting priority areas for data quality improvement*
 4. Take action: "Create a slide about this for my presentation"
 <!-- /SLIDE -->
 
+<!-- SLIDE:mai_5a -->
+## What makes a good prompt?
+
+<div class="columns">
+<div>
+
+**1. Be clear on purpose**
+- Is the task explicit? (interpret, summarize, compare, generate slides)
+- Is the use case clear? (performance review, donor update, training)
+
+**2. Define the audience**
+- Is the intended audience stated? (MoH managers, analysts, policymakers)
+- Is the level of technical detail appropriate?
+
+**3. Specify geography, time, and scope**
+- Is the country or subnational level specified?
+- Is the time period clear?
+- Are priority indicators or services named?
+
+</div>
+<div>
+
+**4. Give interpretation guidance**
+- Should the AI describe trends, compare areas, or identify disruptions?
+- Should it stick to description or include implications?
+
+**5. Specify the output format**
+- Bullet points or narrative? Slide-ready text or report prose?
+- Example: "Provide 3–4 slide-ready bullets in plain language."
+
+**6. Set guardrails**
+- Ask the AI to stay grounded in the data shown
+- Request that uncertainty or data quality issues be flagged
+
+</div>
+</div>
+
+**Rule of thumb:** Before you send a prompt, ask yourself: *is it obvious what I want back?* If not, add one more detail.
+
+<!--
+PRESENTER NOTES:
+- The quality of the AI's response depends heavily on the quality of the prompt
+- The "Good vs Weak" example: "Interpret this chart for a quarterly RMNCAH performance review" vs "Explain this chart"
+- Format matters — the AI can write bullets, paragraphs, or slide-ready text, but you need to ask
+- Guardrails help keep the AI grounded — the AI should describe what the data shows, not speculate
+-->
+<!-- /SLIDE -->
+
 <!-- SLIDE:mai_6 -->
 ## AI assistant capabilities
 
@@ -166,13 +288,10 @@ AI: *Builds a slide highlighting priority areas for data quality improvement*
 
 | Content | Saved? | Notes |
 |---------|--------|-------|
-| Your AI conversation | Temporary | May be available when you return (depends on configuration) |
-| Whiteboard content | Temporary* | Disappears when you navigate away |
-| Slide decks you create | Permanent | Saved to project, visible to team |
+| Your AI conversation | Temporary | AI conversations are saved locally in the browser and are visible only to the person using that browser. Refreshing the page or closing the tab will not delete the conversation. The chat history will only disappear if the browser cache is cleared or a different browser or device is used. |
+| Slide decks/reports you create | Permanent | Saved to project, visible to team |
 | Saved visualizations | Permanent | Remain in project library |
 | Downloaded exports | Permanent | Saved to your computer |
-
-*You can save text or visuals from the whiteboard to a slide deck before leaving.
 <!-- /SLIDE -->
 
 <!-- SLIDE:mai_8 -->
@@ -184,7 +303,6 @@ AI: *Builds a slide highlighting priority areas for data quality improvement*
 **Private to you:**
 
 - Your conversation with the AI
-- Your whiteboard explorations
 - Questions you ask and answers you receive
 
 Other team members cannot see what you're exploring.
@@ -196,7 +314,7 @@ Other team members cannot see what you're exploring.
 
 - The underlying data (same HMIS data)
 - Saved visualizations in project library
-- Slide decks you create and save
+- Slide decks/reports you create and save
 - Project settings and module results
 
 Everyone can see saved content.
@@ -210,7 +328,7 @@ Everyone can see saved content.
 
 | Who | Action | Result |
 |-----|--------|--------|
-| **Dr. Amina** (Director) | Asks AI about data quality, explores privately, creates slide deck | Deck now visible to all |
+| **Dr. Amina** (Director) | Asks AI about coverage, explores privately, creates slide deck | Deck now visible to all |
 | **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart in library for everyone |
 | **Fatima** (Program Officer) | Opens Amina's slides, uses Mohamed's chart, asks AI to explain | Gets private explanation |
 
@@ -219,6 +337,8 @@ Everyone can see saved content.
 - Their own AI conversations — Yes
 - Saved slides and charts from others — Yes
 - Each other's private questions — No
+
+**Two people can use the AI assistant to add to the same slide deck at the same time.** Each chat is private, and each AI instance sees only the changes made to the deck — not the conversation.
 <!-- /SLIDE -->
 
 <!-- SLIDE:mai_10 -->
@@ -277,6 +397,52 @@ AI interprets and explains. You decide and act.
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:mai_11a -->
+## When AI adds little value
+
+<div class="columns">
+<div>
+
+**Your interpretation of figure:**
+
+Across all districts, outliers are very low, with all indicators averaging below 1%, suggesting consistent reporting quality.
+
+***When patterns are obvious, more explanation does not improve understanding.***
+
+</div>
+<div>
+
+![When AI adds little value](resources/screenshots/ai_little_value_obvious.png)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:mai_11b -->
+## When AI is helpful
+
+<div class="columns">
+<div>
+
+**Your interpretation of figure:**
+
+Multiple sustained disruptions through 2023 to 2025, with service use below expected levels during red shaded periods.
+
+**AI interpretation of figure:**
+
+In August 2023, volumes dropped significantly below expected levels (12% shortfall). Disruption intensified from January to May 2025, with February 2025 showing the largest gap at 10,100 cases (20% below expected).
+
+***When patterns are not obvious, AI interpretation can improve our understanding.***
+
+</div>
+<div>
+
+![When AI is helpful](resources/screenshots/ai_helpful_complex.png)
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:mai_12 -->
 ## Principles for success
 
@@ -297,5 +463,5 @@ Responsible automation, focused on the needs of Ministries of Health, and design
 
 ---
 
-**Last updated**: 05-02-2026
+**Last updated**: 24-02-2026
 **Contact**: FASTR Project Team

@@ -290,6 +290,18 @@ The platform provides a user-friendly interface for running analyses and offers 
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m3_2f -->
+## FASTR analytical pipeline
+
+The FASTR analysis follows a **sequential workflow**:
+
+1. **Assess data quality** — Identify issues with completeness, outliers, and consistency
+2. **Adjust for quality issues** — Apply corrections to improve data reliability
+3. **Analyze adjusted data** — Generate service utilization and coverage estimates
+
+![w:700](resources/diagrams/fastr_analytical_pipeline.svg)
+<!-- /SLIDE -->
+
 <!-- SLIDE:m3_2a -->
 ## Country Instance
 
@@ -376,8 +388,10 @@ table img { max-height: 280px !important; width: auto !important; }
 | | |
 |:---|:---|
 | ![Login page](resources/screenshots/01_login_page.png) | ![Sign up form](resources/screenshots/02_sign_up.png) |
-| **1.** Go to {{PLATFORM_URL}} | **2.** Click Sign up and enter your details |
+| **1.** Go to your country instance URL | **2.** Click Sign-in (or Sign up if you haven't created an account) |
 | **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
+
+**Your platform URL:** {{PLATFORM_URL}}
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->
@@ -495,5 +509,5 @@ The AI will analyze your chart and generate text you can edit for your report.
 
 ---
 
-**Last updated**: 26-01-2026
+**Last updated**: 24-02-2026
 **Contact**: FASTR Project Team

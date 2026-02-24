@@ -1013,6 +1013,10 @@ For the volume change chart (output 4):
     - Results depend on quality of completeness and outlier adjustments from earlier modules
     - Missing geographic identifiers will reduce coverage of subnational analysis
 
+### Quarter-on-quarter change
+
+In addition to year-over-year comparisons, FASTR generates quarter-on-quarter (QoQ) change metrics that compare the current quarter to the previous quarter. QoQ change is calculated as: (current quarter – previous quarter) / previous quarter × 100. Changes exceeding ±10% are flagged for follow-up investigation to determine whether they reflect a real programmatic change, a data quality issue, or an expected event (such as a campaign). This metric complements the year-over-year view by capturing more recent shifts in service delivery.
+
 ---
 
 <!--
@@ -1210,6 +1214,35 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s1a -->
+## Quarter-on-quarter change
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Quarter-on-quarter change h:300](resources/default_outputs/Module3_QoQ_change.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Heatmap comparing current quarter to the previous quarter, with changes >±10% flagged.
+
+**Formula:** QoQ change % = (current quarter – previous quarter) / previous quarter × 100
+
+**Interpretation:** Flagged changes require follow-up — is this a real program change, data issue, or expected event?
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- QoQ changes >±10% are flagged — but threshold is configurable
+- For flagged changes, ask: data quality issue, real program change, or external event?
+- These outputs don't require population denominators — useful when denominators uncertain
+- Complementary to the year-over-year view: captures more recent changes
+-->
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s2 -->
 ## Detecting service disruptions
 
@@ -1253,6 +1286,21 @@ PRESENTER NOTES:
 - Persistent deviations warrant deeper investigation into causes
 - Can run at national, provincial, or district level depending on data quality
 -->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2a -->
+## Has there been a disruption?
+
+![hands-on h:40](resources/icons/hands_on.svg) **Quick exercise**
+
+Service volumes remain largely steady thus far in 2025. But stability may reflect temporary continuity in funding and staffing.
+
+**Consider:**
+- The simple measure of service utilization is less commodity-dependent — uptake may be stable, but quality may have declined
+- Context matters — understanding how financing, workforce, and quality constraints interact is key
+- Ongoing facility surveys help assess whether essential commodities and service readiness are in place
+
+*Look at your country's ANC1 disruption chart. Has there been a disruption? What additional context would you need to interpret this pattern?*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3 -->

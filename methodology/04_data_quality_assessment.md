@@ -14,6 +14,10 @@ Routine HMIS data are a primary source for monitoring health service delivery at
 
 Data quality directly affects the reliability of health indicators and coverage estimates. Before service utilization rates or population coverage are calculated, it is necessary to assess whether the underlying facility data are sufficiently reliable. This module identifies data patterns that may distort analytical results, allowing users to make informed decisions about data treatment in subsequent steps of the pipeline.
 
+### FASTR approach to data quality
+
+FASTR takes a multi-pronged approach, based on the belief that data quality should not be a barrier to data use. The approach emphasizes conducting granular, facility-level data quality assessments; focusing on high-volume indicators that produce more stable estimates; emphasizing variation over time and space rather than point estimates; and interpreting results collaboratively with in-country decision-makers. Using data and providing feedback is viewed as the first step toward improving data quality.
+
 ### Key points
 
 | Component | Details |

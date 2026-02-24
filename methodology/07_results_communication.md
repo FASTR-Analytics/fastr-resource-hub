@@ -160,6 +160,10 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 | **Steps required & Who is accountable** | Define steps and assign roles and responsibilities | Get on agenda for platform meeting – Director; Finalize presentation – officer |
 | **Monitoring & Evaluation** | How will you know if you are successful? | The % of quarterly reports that were disseminated in relevant forums; A list of actions that were taken as a result of the data is created and maintained |
 
+## Three spheres of influence
+
+The Three Spheres of Influence framework helps direct attention to the actions that can be taken from FASTR data. The **sphere of control** encompasses actions within a team's immediate capacity — such as defaulter tracing, register reviews, and outreach coordination. The **sphere of influence** covers actions requiring collaboration with partners, such as securing logistics or advocating for policy changes. The **sphere of concern** includes broader systemic factors like the national policy environment, external financing, and population dynamics that provide important context but are outside direct control. When planning actions from FASTR findings, teams should focus first on what they can control, then on what they can influence.
+
 ## Action plan for FASTR moving forward
 
 An action plan will help guide FASTR activities at the country level over the next year. Consider:
@@ -776,6 +780,37 @@ Data is only valuable if it leads to decisions and actions.
 *Present your action-linked findings to a peer country for feedback.*
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_6b -->
+## Three spheres of influence
+
+The Three Spheres of Influence framework helps direct attention to the actions we can take from our data.
+
+<div class="columns">
+<div>
+
+**Sphere of control** — Actions you can take directly
+- Defaulter tracing, register reviews, outreach coordination
+- These are within your team's immediate capacity
+
+**Sphere of influence** — Actions requiring collaboration
+- Engaging partners, securing logistics, advocating for policy changes
+- You can influence but not unilaterally decide
+
+**Sphere of concern** — Broader systemic factors
+- National policy environment, external financing, population dynamics
+- Important context, but outside your direct control
+
+</div>
+<div>
+
+![Three Spheres of Influence](resources/diagrams/three_spheres_of_influence.svg)
+
+</div>
+</div>
+
+*When planning actions from your FASTR findings, focus first on what you can control, then on what you can influence.*
+<!-- /SLIDE -->
+
 <!-- SLIDE:m7_7 -->
 ## Building a roadmap for sustained use
 
@@ -816,5 +851,5 @@ Move from one-off analysis to **routine data use**.
 
 ---
 
-**Last updated**: 26-01-2026
+**Last updated**: 24-02-2026
 **Contact**: FASTR Project Team

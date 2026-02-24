@@ -48,6 +48,11 @@ package-lock.json
 # workshops/*/*.jpg
 # workshops/*/*.svg
 
+# PowerPoint files & extracted content
+*.pptx
+~$*.pptx
+pptx_extracted/
+
 # System files
 .DS_Store
 Thumbs.db

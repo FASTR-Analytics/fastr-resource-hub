@@ -12,7 +12,6 @@ paginate: true
 **Private to you:**
 
 - Your conversation with the AI
-- Your whiteboard explorations
 - Questions you ask and answers you receive
 
 Other team members cannot see what you're exploring.
@@ -24,7 +23,7 @@ Other team members cannot see what you're exploring.
 
 - The underlying data (same HMIS data)
 - Saved visualizations in project library
-- Slide decks you create and save
+- Slide decks/reports you create and save
 - Project settings and module results
 
 Everyone can see saved content.

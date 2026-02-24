@@ -80,6 +80,8 @@ TOPIC_NAMES = {
     'm0_1': 'how_can_this_be_achieved',
     'm0_2': 'what_is_fastr',
     'm0_3': 'fastr_approach_rmncahn',
+    'm0_3a': 'how_countries_use_fastr',
+    'm0_3b': 'from_analysis_to_action',
 
     # m1 - Identify Questions & Indicators (from 01_identify_questions_indicators.md)
     'm1_1': 'what_is_data_use_case',
@@ -110,6 +112,7 @@ TOPIC_NAMES = {
     # m3 - FASTR Analytics Platform (from 03_fastr_analytics_platform.md)
     'm3_1': 'overview_of_platform',
     'm3_2': 'accessing_platform',
+    'm3_2f': 'analytical_pipeline',
     'm3_2e': 'configuring_platform_intro',
     'm3_3': 'setting_up_structure',
     'm3_4': 'importing_dataset',
@@ -161,6 +164,7 @@ TOPIC_NAMES = {
     'm5_3': 'adjustment_for_completeness',
     # Condensed DQ Adjustment slides (methods + interpretation)
     'm5_s1': 'dq_adjustment_overview',
+    'm5_s1a': 'why_adjust_for_outliers',
     'm5_s2': 'dq_adjustment_interpretation',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
@@ -180,9 +184,12 @@ TOPIC_NAMES = {
     'm6_19': 'coverage_configuration_parameters',
     # Condensed Service Utilization & Coverage slides (methods + interpretation)
     'm6_s1': 'utilization_overview',
+    'm6_s1a': 'quarter_on_quarter_change',
     'm6_s2': 'disruption_interpretation',
+    'm6_s2a': 'disruption_exercise',
     'm6_s3': 'coverage_overview',
     'm6_s4': 'coverage_interpretation',
+    'm6_s5': 'value_beyond_dhis2',
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
@@ -201,6 +208,7 @@ TOPIC_NAMES = {
     'm7_1o': 'coverage_output_subnational',
     'm7_2': 'data_visualization_communication',
     'm7_3': 'using_data_for_decision_making',
+    'm7_6b': 'three_spheres_of_influence',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_1': 'rapid_cycle_facility_survey',
@@ -209,23 +217,47 @@ TOPIC_NAMES = {
     'm8_1c': 'four_types_of_indicators',
 
     # m9 - Workshop Activities (from 09_workshop_activities.md)
+    'm9_0a': 'creating_user_folder',
+    'm9_0b': 'creating_visualizations_manually',
+    'm9_0c': 'creating_visualizations_ai',
+    'm9_0d': 'explore_with_ai_assistant',
+    'm9_0e': 'creating_slide_decks',
+    'm9_0f': 'interpreting_visualizations',
+    'm9_0g': 'refining_a_prompt',
     'm9_1': 'why_detecting_disruptions_matters',
     'm9_2': 'disruptions_report_activity',
     'm9_3': 'presenting_reports_group_feedback',
     'm9_4': 'fastr_quiz',
+    'm9_5': 'manual_to_ai_reporting',
+    'm9_6': 'ai_iterative_conversation',
+    'm9_7': 'ai_single_prompt',
+    'm9_8': 'iterative_vs_single_prompts',
+    'm9_9': 'introducing_prompt_library',
+    'm9_10': 'prompt_library_organization',
+    'm9_11': 'example_prompts',
+    'm9_12': 'creating_disruption_report_ai',
+    'm9_13': 'working_from_pdf_template',
+    'm9_14': 'review_checklist',
+    'm9_15': 'editing_formatting_slides',
 
     # AI Assistant module (from 03b_ai_assistant.md)
     'mai_1': 'ai_assistant_overview',
     'mai_2': 'ai_assistant_capabilities',
+    'mai_2a': 'ai_greatest_value',
+    'mai_2b': 'ai_additional_capabilities',
+    'mai_2c': 'ai_across_components',
     'mai_3': 'ai_ask_questions',
     'mai_4': 'ai_conversations',
     'mai_5': 'ai_tips_better_answers',
+    'mai_5a': 'ai_good_prompt_checklist',
     'mai_6': 'ai_capabilities_table',
     'mai_7': 'ai_what_happens_log_off',
     'mai_8': 'ai_private_vs_shared',
     'mai_9': 'ai_team_collaboration',
     'mai_10': 'ai_how_it_works',
     'mai_11': 'ai_accelerator_not_decider',
+    'mai_11a': 'ai_little_value_example',
+    'mai_11b': 'ai_helpful_example',
     'mai_12': 'ai_principles_success',
     'mai_13': 'ai_practice_activity',
 }

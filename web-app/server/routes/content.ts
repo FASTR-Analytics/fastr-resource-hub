@@ -470,6 +470,7 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       templates: [
         { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives (from Settings)' },
         { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Day 1 - Workshop deliverables (from Settings)' },
+        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Meeting Norms', icon: 'people', preview: 'Workshop ground rules and safe space statement' },
       ]
     }
   ],
@@ -520,6 +521,7 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       templates: [
         { id: 'objectives', file: 'objectives_slide.md', name: 'Objectifs de l\'atelier', icon: 'target', preview: 'Jour 1 - Objectifs d\'apprentissage de l\'atelier (depuis Paramètres)' },
         { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Résultats attendus', icon: 'output', preview: 'Jour 1 - Livrables de l\'atelier (depuis Paramètres)' },
+        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Normes de la rencontre', icon: 'people', preview: 'Règles de l\'atelier et déclaration d\'espace sûr' },
       ]
     }
   ]

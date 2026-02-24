@@ -52,6 +52,16 @@ Illustrative capacity-building activities include support to automate the extrac
 
 *Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
 
+### How do countries use FASTR?
+
+FASTR is designed to support country-defined policy questions using routine and survey data. Different countries enter FASTR through different pathways depending on their priorities. Some countries — such as Sierra Leone, Burkina Faso, Zambia, and Liberia — began with service continuity monitoring, triggered by changes in external financing for the health sector. Others — such as Nigeria, Ghana, and DRC — initiated FASTR to answer different priority questions, with disruption analysis as complementary work.
+
+Regardless of the entry point, FASTR enables countries to monitor service continuity and recovery, identify geographic or service-specific challenges, and inform prioritization, planning, and policy dialogue.
+
+### From analysis to action
+
+FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are starting points, not endpoints. Each output triggers a cycle of investigation and action: findings raise questions, questions prompt investigation, investigation yields context, and context informs decisions. FASTR provides the evidence; stakeholders provide the context, judgement, and action.
+
 ## Acronyms and abbreviations
 
 | Acronym | Definition |
@@ -232,7 +242,49 @@ Combining analysis and visualization with capacity strengthening and data use su
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m0_3a -->
+## How do countries use FASTR?
+
+FASTR is designed to support **country-defined policy questions** using routine and survey data.
+
+**Different entry points for different countries:**
+
+- **Monitoring service disruptions:** Sierra Leone, Burkina Faso, Zambia, and Liberia began with service continuity monitoring, triggered by changes in external financing for the health sector
+- **Other priorities first:** Nigeria, Ghana, and DRC initiated FASTR for different questions, with disruptions as complementary analysis
+
+**All countries can engage with FASTR to answer policy-relevant questions including:**
+
+- Monitoring service continuity and recovery
+- Identifying geographic or service-specific challenges
+- Informing prioritization, planning, and policy dialogue
+
+<!--
+PRESENTER NOTES:
+- FASTR is flexible — countries define their own priority questions
+- Service disruptions is just one entry point, not the only use case
+- Some countries start with disruptions, others add it later
+- The methodology (DQA, adjustment, analysis) applies to all use cases
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_3b -->
+## From analysis to action
+
+FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are **starting points, not endpoints**. They trigger investigation and inform decisions.
+
+![w:600](resources/diagrams/from_analysis_to_action.svg)
+
+<!--
+PRESENTER NOTES:
+- This cycle applies to ALL FASTR outputs, not just disruptions
+- DQA findings → investigate data systems → improve reporting
+- Utilization changes → investigate service delivery → address bottlenecks
+- Coverage gaps → investigate access barriers → target interventions
+- FASTR provides evidence; stakeholders provide context, judgement, and action
+-->
+<!-- /SLIDE -->
+
 ---
 
-**Last updated**: 26-01-2026
+**Last updated**: 24-02-2026
 **Contact**: FASTR Project Team
