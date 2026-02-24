@@ -27,14 +27,12 @@ import {
   Trash2,
   Pin,
   PinOff,
-  Library,
-  Zap,
   ArrowLeft,
   Folder,
   FolderOpen,
-  Minus,
   LogOut,
   KeyRound,
+  Search,
 } from 'lucide-react'
 import {
   DndContext,
@@ -910,308 +908,118 @@ paginate: true
 type AppMode = 'select' | 'workshop' | 'library' | 'quick'
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Library Mode Component - Browse slides without export
+// Quick Export Mode - Select modules and download
 // ─────────────────────────────────────────────────────────────────────────────
-function LibraryMode({ onBack }: { onBack: () => void }) {
-  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
-  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
-  const [previewTopic, setPreviewTopic] = useState<any | null>(null)
-  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
-  const [presenterNotes, setPresenterNotes] = useState<string[]>([])
-  const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+// Slide Preview with prev/next navigation — shows one slide at a time
+// ─────────────────────────────────────────────────────────────────────────────
+function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: string[]; contentLanguage: 'en' | 'fr' }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [slideCount, setSlideCount] = useState(0)
 
-  // Cache for rendered previews - persists across re-renders
-  const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
-
+  // Count slides and set up single-slide display whenever html changes
   useEffect(() => {
-    if (contentLibrary.length === 0) {
-      loadContentLibrary()
-    }
-  }, [contentLibrary.length, loadContentLibrary])
+    setCurrentSlide(0)
+    const count = (html.match(/<section/g) || []).length
+    setSlideCount(count || 1)
+  }, [html])
 
-  const toggleModule = (moduleId: string) => {
-    const next = new Set(expandedModules)
-    if (next.has(moduleId)) {
-      next.delete(moduleId)
-    } else {
-      next.add(moduleId)
-    }
-    setExpandedModules(next)
-  }
-
-  const loadPreview = async (topic: any) => {
-    setPreviewTopic(topic)
-
-    // Check cache first - instant if already rendered (include language in key)
-    const cacheKey = `${topic.id}_${contentLanguage}`
-    const cached = previewCache.current.get(cacheKey)
-    if (cached) {
-      setPreviewHtml(cached.html)
-      setPresenterNotes(cached.notes)
-      return
-    }
-
-    setPreviewHtml(null)  // Clear old preview immediately
-    setIsLoadingPreview(true)
-    setPresenterNotes([])
-    try {
-      const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
-      if (response.ok) {
-        const data = await response.json()
-        const renderResponse = await fetch('/api/content/render', { credentials: 'include',
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ markdown: data.content })
-        })
-        if (renderResponse.ok) {
-          const renderData = await renderResponse.json()
-          // Cache the result with language key
-          previewCache.current.set(`${topic.id}_${contentLanguage}`, {
-            html: renderData.html,
-            notes: renderData.presenterNotes || []
-          })
-          setPreviewHtml(renderData.html)
-          setPresenterNotes(renderData.presenterNotes || [])
-        }
+  // Navigate to a specific slide by scrolling the section into view
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
+    const tryScroll = () => {
+      const doc = iframe.contentDocument || iframe.contentWindow?.document
+      if (!doc) return
+      const sections = doc.querySelectorAll('section')
+      if (sections[currentSlide]) {
+        sections[currentSlide].scrollIntoView({ behavior: 'auto', block: 'start' })
       }
-    } catch (err) {
-      console.error('Failed to load preview:', err)
-    } finally {
-      setIsLoadingPreview(false)
     }
+    // Try immediately and also after iframe loads
+    tryScroll()
+    iframe.addEventListener('load', tryScroll)
+    return () => iframe.removeEventListener('load', tryScroll)
+  }, [currentSlide, html])
+
+  // Inject CSS to hide scrollbar in the iframe
+  const enhancedHtml = html.replace('</head>', `<style>
+    body { overflow: hidden; }
+    section { scroll-margin-top: 0; }
+  </style></head>`)
+
+  const goToSlide = (idx: number) => {
+    if (idx >= 0 && idx < slideCount) setCurrentSlide(idx)
   }
 
-  // Clear preview when language changes
-  useEffect(() => {
-    setPreviewTopic(null)
-    setPreviewHtml(null)
-  }, [contentLanguage])
-
-  if (contentLibrary.length === 0) {
-    return (
-      <div className="h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-          <p>{t('loadingContentLibrary', contentLanguage)}</p>
-        </div>
-      </div>
-    )
-  }
+  // Current slide's presenter notes (notes array is per-slide from Marp)
+  const currentNotes = notes[currentSlide] || ''
 
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
-        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <ArrowLeft className="w-5 h-5 text-gray-600" />
+    <div className="flex flex-col h-full">
+      {/* Slide area with nav arrows */}
+      <div className="flex-1 min-h-0 flex items-center gap-2 px-2">
+        {/* Prev button */}
+        <button
+          onClick={() => goToSlide(currentSlide - 1)}
+          disabled={currentSlide === 0}
+          className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 flex-shrink-0"
+        >
+          <ArrowLeft className="w-5 h-5 text-white" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-800 flex-1">{t('browseContentLibrary', contentLanguage)}</h1>
-        {/* Language toggle */}
-        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
-          <button
-            onClick={() => setContentLanguage('en')}
-            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'en'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => setContentLanguage('fr')}
-            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'fr'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            FR
-          </button>
-        </div>
-      </header>
 
-      {/* Main content */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Module list */}
-        <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
-          {contentLibrary.map((module: any) => (
-            <div key={module.id} className="border-b border-gray-100">
-              <button
-                onClick={() => toggleModule(module.id)}
-                className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors flex items-center gap-2"
-              >
-                {expandedModules.has(module.id) ? (
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-400" />
-                )}
-                <div className="flex-1">
-                  <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
-                  <div className="text-xs text-gray-500">{module.totalSlides} {t('slides', contentLanguage)}</div>
-                </div>
-              </button>
-              {expandedModules.has(module.id) && (
-                <div className="bg-gray-50 border-t border-gray-100">
-                  {/* Full slides */}
-                  {module.fullTopics?.length > 0 && (
-                    <>
-                      <div className="px-4 py-1.5 pl-10 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
-                        {t('full', contentLanguage)} ({module.fullSlides} {t('slides', contentLanguage)})
-                      </div>
-                      {module.fullTopics.map((topic: any) => (
-                        <button
-                          key={topic.id}
-                          onClick={() => loadPreview(topic)}
-                          className={`w-full text-left px-4 py-2 pl-12 hover:bg-gray-100 transition-colors ${
-                            previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
-                          }`}
-                        >
-                          <div className="text-sm text-gray-700">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                        </button>
-                      ))}
-                    </>
-                  )}
-                  {/* Condensed slides */}
-                  {module.condensedTopics?.length > 0 && (
-                    <>
-                      <div className="px-4 py-1.5 pl-10 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
-                        {t('condensed', contentLanguage)} ({module.condensedSlides} {t('slides', contentLanguage)})
-                      </div>
-                      {module.condensedTopics.map((topic: any) => (
-                        <button
-                          key={topic.id}
-                          onClick={() => loadPreview(topic)}
-                          className={`w-full text-left px-4 py-2 pl-12 hover:bg-amber-50 transition-colors ${
-                            previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
-                          }`}
-                        >
-                          <div className="text-sm text-gray-700">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                        </button>
-                      ))}
-                    </>
-                  )}
-                  {/* Fallback if no separated topics */}
-                  {!module.fullTopics?.length && !module.condensedTopics?.length && module.topics.map((topic: any) => (
-                    <button
-                      key={topic.id}
-                      onClick={() => loadPreview(topic)}
-                      className={`w-full text-left px-4 py-2 pl-10 hover:bg-gray-100 transition-colors ${
-                        previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
-                      }`}
-                    >
-                      <div className="text-sm text-gray-700">{topic.title}</div>
-                      <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+        {/* Iframe */}
+        <div className="flex-1 h-full flex items-center justify-center">
+          <div className="w-full max-w-5xl" style={{ aspectRatio: '16/9' }}>
+            <iframe
+              ref={iframeRef}
+              srcDoc={enhancedHtml}
+              className="w-full h-full bg-white rounded-lg shadow-2xl"
+              title="Slide Preview"
+            />
+          </div>
         </div>
 
-        {/* Preview area */}
-        <div className="flex-1 bg-gray-800 flex flex-col p-6 overflow-hidden">
-          {isLoadingPreview ? (
-            <div className="flex-1 flex items-center justify-center text-white/70">
-              <div>
-                <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p>Loading preview...</p>
-              </div>
-            </div>
-          ) : previewHtml ? (
-            <>
-              {/* Slide preview - fixed height, always visible */}
-              <div className="flex-shrink-0 flex flex-col items-center">
-                {/* Slide count indicator */}
-                {previewTopic?.slideCount > 1 && (
-                  <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
-                    <span className="text-sm font-medium">{previewTopic.slideCount} {t('slides', contentLanguage)}</span>
-                    <span className="text-white/50">•</span>
-                    <span className="text-sm flex items-center gap-1">
-                      <span>Scroll in preview to view all</span>
-                      <ChevronDown className="w-4 h-4 animate-bounce" />
-                    </span>
-                  </div>
-                )}
-                <div className="w-full max-w-5xl">
-                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      srcDoc={previewHtml}
-                      className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
-                      title="Slide Preview"
-                    />
-                    {/* Scroll fade indicator at bottom */}
-                    {previewTopic?.slideCount > 1 && (
-                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-800/80 to-transparent rounded-b-lg pointer-events-none flex items-end justify-center pb-1">
-                        <div className="flex items-center gap-1 text-white/70 text-xs">
-                          <ChevronDown className="w-3 h-3" />
-                          <span>More slides below</span>
-                          <ChevronDown className="w-3 h-3" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="mt-3 text-center">
-                  <p className="text-white font-medium">{previewTopic?.title}</p>
-                  {previewTopic?.slideCount === 1 && (
-                    <p className="text-white/60 text-sm">1 slide</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Presenter Notes - scrollable section below */}
-              {presenterNotes.length > 0 && (
-                <div className="mt-4 flex-1 min-h-0 max-w-4xl mx-auto w-full">
-                  <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-48">
-                    <h4 className="text-amber-400 text-sm font-semibold mb-2">
-                      Presenter Notes
-                    </h4>
-                    {presenterNotes.map((note, i) => (
-                      <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
-                        {note.replace(/^PRESENTER NOTES:\s*/i, '')}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="flex-1 flex items-center justify-center text-center text-gray-500">
-              <div>
-                <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg text-white/70">Click on a slide to preview</p>
-              </div>
-            </div>
-          )}
-        </div>
+        {/* Next button */}
+        <button
+          onClick={() => goToSlide(currentSlide + 1)}
+          disabled={currentSlide >= slideCount - 1}
+          className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 flex-shrink-0"
+        >
+          <ChevronRight className="w-5 h-5 text-white" />
+        </button>
       </div>
+
+      {/* Slide counter */}
+      <div className="flex-shrink-0 text-center py-2">
+        <span className="text-sm text-white/60 tabular-nums">{currentSlide + 1} / {slideCount}</span>
+      </div>
+
+      {/* Presenter notes — always visible */}
+      {currentNotes && (
+        <div className="flex-shrink-0 max-h-[28%] border-t border-gray-700 overflow-y-auto px-6 py-3">
+          <h4 className="text-amber-400 text-xs font-semibold mb-1.5">{t('presenterNotes', contentLanguage)}</h4>
+          <div className="text-white/80 text-sm whitespace-pre-wrap">
+            {currentNotes.replace(/^PRESENTER NOTES:\s*/i, '')}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Quick Export Mode Component - Select slides for quick presentation
-// ─────────────────────────────────────────────────────────────────────────────
 function QuickExportMode({ onBack }: { onBack: () => void }) {
   const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
-  const [selectedSlides, setSelectedSlides] = useState<Array<{ module: any; topic: any }>>([])
-  const [selectedTemplates, setSelectedTemplates] = useState<Array<{ id: string; name: string; file: string }>>([])
-  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
-  const [expandedTemplateCategories, setExpandedTemplateCategories] = useState<Set<string>>(new Set(['breaks']))
+  const [selections, setSelections] = useState<Map<string, { moduleId: string; variant: 'full' | 'condensed' }>>(new Map())
   const [isExporting, setIsExporting] = useState(false)
   const [exportFormat, setExportFormat] = useState<'pdf' | 'pptx' | null>(null)
-  const [previewTopic, setPreviewTopic] = useState<any | null>(null)
+  const [previewModule, setPreviewModule] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
-  const [presenterNotes, setPresenterNotes] = useState<string[]>([])
+  const [previewNotes, setPreviewNotes] = useState<string[]>([])
+  const [previewSlideCount, setPreviewSlideCount] = useState(0)
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
-  const [templates, setTemplates] = useState<any[]>([])
-
-  // Cache for rendered previews - persists across re-renders
-  const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
+  const previewCache = useRef<Map<string, { html: string; notes: string[]; slideCount: number }>>(new Map())
 
   useEffect(() => {
     if (contentLibrary.length === 0) {
@@ -1219,167 +1027,102 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     }
   }, [contentLibrary.length, loadContentLibrary])
 
-  // Fetch templates
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      try {
-        const response = await fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
-        if (response.ok) {
-          const data = await response.json()
-          setTemplates(data)
-        }
-      } catch (err) {
-        console.error('Failed to fetch templates:', err)
-      }
-    }
-    fetchTemplates()
-  }, [contentLanguage])
+  const hasCondensed = (module: any) => module.condensedTopics?.length > 0
 
-  const toggleTemplateCategory = (categoryId: string) => {
-    const next = new Set(expandedTemplateCategories)
-    if (next.has(categoryId)) {
-      next.delete(categoryId)
+  const toggleModule = (module: any) => {
+    const next = new Map(selections)
+    if (next.has(module.id)) {
+      next.delete(module.id)
     } else {
-      next.add(categoryId)
+      next.set(module.id, { moduleId: module.id, variant: 'full' })
     }
-    setExpandedTemplateCategories(next)
+    setSelections(next)
   }
 
-  const toggleTemplate = (template: any) => {
-    const exists = selectedTemplates.find(t => t.id === template.id)
-    if (exists) {
-      setSelectedTemplates(selectedTemplates.filter(t => t.id !== template.id))
-    } else {
-      setSelectedTemplates([...selectedTemplates, { id: template.id, name: template.name, file: template.file }])
+  const setVariant = (moduleId: string, variant: 'full' | 'condensed') => {
+    const next = new Map(selections)
+    const existing = next.get(moduleId)
+    if (existing) {
+      next.set(moduleId, { ...existing, variant })
+      setSelections(next)
     }
   }
 
-  const isTemplateSelected = (templateId: string) => selectedTemplates.some(t => t.id === templateId)
+  const getModuleSlideCount = (module: any, variant: 'full' | 'condensed') => {
+    if (variant === 'condensed' && module.condensedSlides) return module.condensedSlides
+    return module.fullSlides || module.totalSlides || 0
+  }
 
-  const loadTemplatePreview = async (template: any) => {
-    setPreviewTopic({ id: template.id, title: template.name, slideCount: 1 })
+  const totalSlides = Array.from(selections.entries()).reduce((sum, [moduleId, sel]) => {
+    const module = contentLibrary.find((m: any) => m.id === moduleId)
+    if (!module) return sum
+    return sum + getModuleSlideCount(module, sel.variant)
+  }, 0)
 
-    // Check cache first
-    const cached = previewCache.current.get(template.id)
+  const loadPreview = async (module: any) => {
+    setPreviewModule(module)
+    const sel = selections.get(module.id)
+    const variant = sel?.variant || 'full'
+    const topics = variant === 'condensed' && module.condensedTopics?.length > 0
+      ? module.condensedTopics
+      : module.fullTopics?.length > 0
+        ? module.fullTopics
+        : module.topics
+
+    if (!topics || topics.length === 0) return
+
+    // Cache key for the whole module+variant combo
+    const cacheKey = `module_${module.id}_${variant}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
     if (cached) {
       setPreviewHtml(cached.html)
-      setPresenterNotes(cached.notes)
+      setPreviewNotes(cached.notes)
+      setPreviewSlideCount(cached.slideCount)
       return
     }
 
     setPreviewHtml(null)
+    setPreviewNotes([])
+    setPreviewSlideCount(0)
     setIsLoadingPreview(true)
-    setPresenterNotes([])
-
     try {
-      // Fetch template content
-      const response = await fetch(`/api/content/templates/${template.id}`, { credentials: 'include' })
-      if (response.ok) {
-        const data = await response.json()
-        // Render to HTML
-        const renderResponse = await fetch('/api/content/render', {
-          credentials: 'include',
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ markdown: data.content })
-        })
-        if (renderResponse.ok) {
-          const renderData = await renderResponse.json()
-          previewCache.current.set(template.id, {
-            html: renderData.html,
-            notes: renderData.presenterNotes || []
-          })
-          setPreviewHtml(renderData.html)
-          setPresenterNotes(renderData.presenterNotes || [])
-        }
+      // Fetch all topic content in parallel
+      const responses = await Promise.all(
+        topics.map((topic: any) =>
+          fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
+            .then(r => r.ok ? r.json() : null)
+        )
+      )
+      // Strip frontmatter from each topic, keep only the first one's
+      const stripFrontmatter = (md: string) => {
+        const match = md.match(/^---\s*\n[\s\S]*?\n---\s*\n/)
+        return match ? md.slice(match[0].length) : md
       }
-    } catch (err) {
-      console.error('Failed to load template preview:', err)
-    } finally {
-      setIsLoadingPreview(false)
-    }
-  }
+      const contents = responses.filter(Boolean).map((data: any) => data.content)
+      const firstFrontmatter = contents[0]?.match(/^---\s*\n[\s\S]*?\n---\s*\n/)?.[0] || ''
+      const allMarkdown = firstFrontmatter + contents
+        .map((c: string) => stripFrontmatter(c))
+        .join('\n\n---\n\n')
 
-  const toggleModule = (moduleId: string) => {
-    const next = new Set(expandedModules)
-    if (next.has(moduleId)) {
-      next.delete(moduleId)
-    } else {
-      next.add(moduleId)
-    }
-    setExpandedModules(next)
-  }
+      const totalSlideCount = topics.reduce((sum: number, t: any) => sum + (t.slideCount || 0), 0)
 
-  const toggleTopic = (module: any, topic: any) => {
-    const exists = selectedSlides.find(s => s.topic.id === topic.id)
-    if (exists) {
-      setSelectedSlides(selectedSlides.filter(s => s.topic.id !== topic.id))
-    } else {
-      setSelectedSlides([...selectedSlides, { module, topic }])
-    }
-  }
-
-  const isSelected = (topicId: string) => selectedSlides.some(s => s.topic.id === topicId)
-
-  // Check if all topics in a module are selected
-  const isModuleFullySelected = (module: any) => {
-    return module.topics.every((topic: any) => isSelected(topic.id))
-  }
-
-  // Check if some (but not all) topics in a module are selected
-  const isModulePartiallySelected = (module: any) => {
-    const selectedCount = module.topics.filter((topic: any) => isSelected(topic.id)).length
-    return selectedCount > 0 && selectedCount < module.topics.length
-  }
-
-  // Toggle all topics in a module
-  const toggleModuleAllTopics = (module: any) => {
-    const allSelected = isModuleFullySelected(module)
-    if (allSelected) {
-      const moduleTopicIds = new Set(module.topics.map((t: any) => t.id))
-      setSelectedSlides(selectedSlides.filter(s => !moduleTopicIds.has(s.topic.id)))
-    } else {
-      const newSelections = module.topics
-        .filter((topic: any) => !isSelected(topic.id))
-        .map((topic: any) => ({ module, topic }))
-      setSelectedSlides([...selectedSlides, ...newSelections])
-    }
-  }
-
-  const loadPreview = async (topic: any) => {
-    setPreviewTopic(topic)
-
-    // Check cache first - instant if already rendered (include language in key)
-    const cacheKey = `${topic.id}_${contentLanguage}`
-    const cached = previewCache.current.get(cacheKey)
-    if (cached) {
-      setPreviewHtml(cached.html)
-      setPresenterNotes(cached.notes)
-      return
-    }
-
-    setPreviewHtml(null)  // Clear old preview immediately
-    setIsLoadingPreview(true)
-    setPresenterNotes([])
-    try {
-      const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
-      if (response.ok) {
-        const data = await response.json()
-        const renderResponse = await fetch('/api/content/render', { credentials: 'include',
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ markdown: data.content })
+      // Render as one combined preview
+      const renderResponse = await fetch('/api/content/render', {
+        credentials: 'include',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown: allMarkdown })
+      })
+      if (renderResponse.ok) {
+        const renderData = await renderResponse.json()
+        previewCache.current.set(cacheKey, {
+          html: renderData.html,
+          notes: renderData.presenterNotes || [],
+          slideCount: totalSlideCount
         })
-        if (renderResponse.ok) {
-          const renderData = await renderResponse.json()
-          // Cache the result with language key
-          previewCache.current.set(cacheKey, {
-            html: renderData.html,
-            notes: renderData.presenterNotes || []
-          })
-          setPreviewHtml(renderData.html)
-          setPresenterNotes(renderData.presenterNotes || [])
-        }
+        setPreviewHtml(renderData.html)
+        setPreviewNotes(renderData.presenterNotes || [])
+        setPreviewSlideCount(totalSlideCount)
       }
     } catch (err) {
       console.error('Failed to load preview:', err)
@@ -1388,24 +1131,30 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     }
   }
 
-  // Clear preview when language changes
-  useEffect(() => {
-    setPreviewTopic(null)
-    setPreviewHtml(null)
-  }, [contentLanguage])
-
   const exportSelection = async (format: 'pdf' | 'pptx') => {
-    if (selectedSlides.length === 0 && selectedTemplates.length === 0) return
+    if (selections.size === 0) return
     setIsExporting(true)
     setExportFormat(format)
 
     try {
-      const topicIds = selectedSlides.map(s => s.topic.id)
-      const templateFiles = selectedTemplates.map(t => t.file).filter(Boolean)
-      const response = await fetch('/api/content/export/selection', { credentials: 'include',
+      // Gather all topicIds from selected modules respecting variant
+      const topicIds: string[] = []
+      for (const [moduleId, sel] of selections) {
+        const module = contentLibrary.find((m: any) => m.id === moduleId)
+        if (!module) continue
+        const topics = sel.variant === 'condensed' && module.condensedTopics?.length > 0
+          ? module.condensedTopics
+          : module.fullTopics?.length > 0
+            ? module.fullTopics
+            : module.topics
+        topics.forEach((topic: any) => topicIds.push(topic.id))
+      }
+
+      const response = await fetch('/api/content/export/selection', {
+        credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topicIds, templateFiles, format, title: 'Quick Export', language: contentLanguage })
+        body: JSON.stringify({ topicIds, format, title: 'Content Library Export', language: contentLanguage })
       })
 
       if (response.ok) {
@@ -1425,29 +1174,357 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     }
   }
 
-  const totalSlides = selectedSlides.reduce((sum, s) => sum + s.topic.slideCount, 0) + selectedTemplates.length
-
   if (contentLibrary.length === 0) {
     return (
-      <div className="h-screen bg-gray-100 flex items-center justify-center">
+      <div className="h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center text-gray-500">
           <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-          <p>Loading content library...</p>
+          <p>{t('loadingContentLibrary', contentLanguage)}</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-4">
+        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <ArrowLeft className="w-5 h-5 text-gray-600" />
+        </button>
+        <div className="flex-1">
+          <h1 className="text-xl font-semibold text-gray-900">{t('quickExport', contentLanguage)}</h1>
+          <p className="text-sm text-gray-500">{t('contentLibrarySubtitle', contentLanguage)}</p>
+        </div>
+        {/* Language toggle */}
+        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+          <button
+            onClick={() => setContentLanguage('en')}
+            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'en'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            EN
+          </button>
+          <button
+            onClick={() => setContentLanguage('fr')}
+            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+              contentLanguage === 'fr'
+                ? 'bg-white text-fastr-primary shadow-sm'
+                : 'text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            FR
+          </button>
+        </div>
+      </header>
+
+      {/* Card grid */}
+      <div className="flex-1 overflow-y-auto px-6 py-6 pb-24">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {contentLibrary.map((module: any) => {
+            const isSelected = selections.has(module.id)
+            const sel = selections.get(module.id)
+            const displaySlides = isSelected
+              ? getModuleSlideCount(module, sel!.variant)
+              : getModuleSlideCount(module, 'full')
+
+            return (
+              <div
+                key={module.id}
+                className={`relative rounded-xl border-2 transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
+                    : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                }`}
+              >
+                {/* Main clickable area */}
+                <button
+                  onClick={() => toggleModule(module)}
+                  className="w-full text-left p-5"
+                >
+                  {/* Selected checkmark badge */}
+                  {isSelected && (
+                    <div className="absolute top-3 right-3 w-6 h-6 bg-fastr-primary rounded-full flex items-center justify-center">
+                      <Check className="w-4 h-4 text-white" />
+                    </div>
+                  )}
+
+                  <h3 className="font-semibold text-gray-900 text-sm pr-8 mb-1">{module.name}</h3>
+                  <p className="text-xs text-gray-500">{displaySlides} {t('totalSlides', contentLanguage)}</p>
+                </button>
+
+                {/* Variant radios - only when selected AND has condensed */}
+                {isSelected && hasCondensed(module) && (
+                  <div className="px-5 pb-4 pt-0 space-y-1.5">
+                    <label
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
+                        sel?.variant === 'full' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <input
+                        type="radio"
+                        name={`variant-${module.id}`}
+                        checked={sel?.variant === 'full'}
+                        onChange={() => setVariant(module.id, 'full')}
+                        className="accent-fastr-primary"
+                      />
+                      <span className="flex-1">{t('detailed', contentLanguage)}</span>
+                      <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'full')}</span>
+                    </label>
+                    <label
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
+                        sel?.variant === 'condensed' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <input
+                        type="radio"
+                        name={`variant-${module.id}`}
+                        checked={sel?.variant === 'condensed'}
+                        onChange={() => setVariant(module.id, 'condensed')}
+                        className="accent-fastr-primary"
+                      />
+                      <span className="flex-1">{t('essentials', contentLanguage)}</span>
+                      <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'condensed')}</span>
+                    </label>
+                  </div>
+                )}
+
+                {/* Preview eye icon */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); loadPreview(module) }}
+                  className="absolute bottom-3 right-3 p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  title="Preview"
+                >
+                  <Eye className="w-4 h-4" />
+                </button>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Preview modal */}
+      {previewModule && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => { setPreviewModule(null); setPreviewHtml(null); setPreviewNotes([]) }}>
+          <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl mx-4 max-h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700 flex-shrink-0">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-white">{previewModule.name}</h3>
+                <p className="text-sm text-white/50 mt-0.5">{previewSlideCount} {t('totalSlides', contentLanguage)}</p>
+              </div>
+              <button onClick={() => { setPreviewModule(null); setPreviewHtml(null); setPreviewNotes([]) }} className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
+                <X className="w-5 h-5 text-white" />
+              </button>
+            </div>
+            {/* Slide preview with navigation */}
+            {isLoadingPreview ? (
+              <div className="flex-1 flex items-center justify-center text-white/70">
+                <RefreshCw className="w-8 h-8 animate-spin" />
+              </div>
+            ) : previewHtml ? (
+              <div className="flex-1 min-h-0">
+                <SlidePreview html={previewHtml} notes={previewNotes} contentLanguage={contentLanguage} />
+              </div>
+            ) : (
+              <div className="flex-1 flex items-center justify-center text-white/50">
+                <p>No preview available</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Sticky bottom bar */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ${
+          selections.size > 0 ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="backdrop-blur-lg bg-white/80 border-t border-gray-200 shadow-lg px-6 py-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <span className="text-sm font-medium text-gray-900">
+                {selections.size} {t('modulesSelected', contentLanguage)}
+              </span>
+              <span className="text-sm text-gray-500">
+                {totalSlides} {t('totalSlides', contentLanguage)}
+              </span>
+              <button
+                onClick={() => setSelections(new Map())}
+                className="text-sm text-gray-500 hover:text-gray-700 underline"
+              >
+                {t('clearAll', contentLanguage)}
+              </button>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => exportSelection('pdf')}
+                disabled={isExporting}
+                className="px-5 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center gap-2"
+              >
+                {isExporting && exportFormat === 'pdf' ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Download className="w-4 h-4" />
+                )}
+                {t('downloadPDF', contentLanguage)}
+              </button>
+              <button
+                onClick={() => exportSelection('pptx')}
+                disabled={isExporting}
+                className="px-5 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 transition-colors flex items-center gap-2"
+              >
+                {isExporting && exportFormat === 'pptx' ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Download className="w-4 h-4" />
+                )}
+                {t('downloadPPTX', contentLanguage)}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Library Mode Component - Browse and preview content (two-panel with search)
+// ─────────────────────────────────────────────────────────────────────────────
+function LibraryMode({ onBack }: { onBack: () => void }) {
+  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [previewTopic, setPreviewTopic] = useState<any | null>(null)
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null)
+  const [presenterNotes, setPresenterNotes] = useState<string[]>([])
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+
+  const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
+  const searchInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (contentLibrary.length === 0) {
+      loadContentLibrary()
+    }
+  }, [contentLibrary.length, loadContentLibrary])
+
+  const loadPreview = async (topic: any) => {
+    setPreviewTopic(topic)
+
+    const cacheKey = `${topic.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+
+    setPreviewHtml(null)
+    setIsLoadingPreview(true)
+    setPresenterNotes([])
+    try {
+      const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
+      if (response.ok) {
+        const data = await response.json()
+        const renderResponse = await fetch('/api/content/render', {
+          credentials: 'include',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown: data.content })
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          previewCache.current.set(cacheKey, {
+            html: renderData.html,
+            notes: renderData.presenterNotes || []
+          })
+          setPreviewHtml(renderData.html)
+          setPresenterNotes(renderData.presenterNotes || [])
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
+
+  useEffect(() => {
+    setPreviewTopic(null)
+    setPreviewHtml(null)
+    setPresenterNotes([])
+  }, [contentLanguage])
+
+  // Build a flat list of all topics with their module info, then filter by search
+  const allTopics = React.useMemo(() => {
+    const items: Array<{ topic: any; module: any; variant: 'full' | 'condensed' | null }> = []
+    for (const module of contentLibrary) {
+      const full = module.fullTopics || []
+      const condensed = module.condensedTopics || []
+      const fallback = !full.length && !condensed.length ? (module.topics || []) : []
+      for (const topic of full) items.push({ topic, module, variant: full.length && condensed.length ? 'full' : null })
+      for (const topic of condensed) items.push({ topic, module, variant: 'condensed' })
+      for (const topic of fallback) items.push({ topic, module, variant: null })
+    }
+    return items
+  }, [contentLibrary])
+
+  const filteredTopics = React.useMemo(() => {
+    if (!searchQuery.trim()) return allTopics
+    const q = searchQuery.toLowerCase()
+    return allTopics.filter(item =>
+      item.topic.title.toLowerCase().includes(q) ||
+      item.module.name.toLowerCase().includes(q)
+    )
+  }, [allTopics, searchQuery])
+
+  // Group filtered topics by module for display
+  const groupedByModule = React.useMemo(() => {
+    const groups: Array<{ module: any; items: typeof filteredTopics }> = []
+    const moduleMap = new Map<string, typeof filteredTopics>()
+    for (const item of filteredTopics) {
+      if (!moduleMap.has(item.module.id)) {
+        moduleMap.set(item.module.id, [])
+      }
+      moduleMap.get(item.module.id)!.push(item)
+    }
+    for (const module of contentLibrary) {
+      const items = moduleMap.get(module.id)
+      if (items && items.length > 0) {
+        groups.push({ module, items })
+      }
+    }
+    return groups
+  }, [filteredTopics, contentLibrary])
+
+  if (contentLibrary.length === 0) {
+    return (
+      <div className="h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center text-gray-500">
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+          <p>{t('loadingContentLibrary', contentLanguage)}</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
         <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-800">{t('quickExport', contentLanguage)}</h1>
-        <span className="text-sm text-gray-500 flex-1">{t('selectSlidesExport', contentLanguage)}</span>
-        {/* Language toggle */}
+        <h1 className="text-lg font-semibold text-gray-800">{t('browseContentLibrary', contentLanguage)}</h1>
+        <div className="flex-1" />
         <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => setContentLanguage('en')}
@@ -1472,387 +1549,122 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         </div>
       </header>
 
-      {/* Main content */}
+      {/* Two-panel layout */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Topic picker */}
-        <div className="w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-          <div className="p-4 border-b border-gray-100">
-            <h2 className="font-semibold text-gray-800">{t('selectContent', contentLanguage)}</h2>
-            <p className="text-sm text-gray-500 mt-1">{t('checkToSelect', contentLanguage)}</p>
-          </div>
-          <div className="flex-1 overflow-auto">
-            {/* Templates Section - exclude 'custom' category */}
-            {templates.filter((c: any) => c.id !== 'custom').length > 0 && (
-              <div className="border-b border-gray-200">
-                <div className="px-4 py-2 bg-amber-50 text-xs font-semibold text-amber-800 uppercase tracking-wide">
-                  {t('templates', contentLanguage)}
-                </div>
-                {templates.filter((c: any) => c.id !== 'custom').map((category: any) => (
-                  <div key={category.id} className="border-b border-gray-100">
-                    <button
-                      onClick={() => toggleTemplateCategory(category.id)}
-                      className="w-full flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition-colors text-left"
-                    >
-                      {expandedTemplateCategories.has(category.id) ? (
-                        <ChevronDown className="w-4 h-4 text-gray-400" />
-                      ) : (
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
-                      )}
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-700 text-sm">{category.name}</div>
-                        <div className="text-xs text-gray-400">{category.description}</div>
-                      </div>
-                    </button>
-                    {expandedTemplateCategories.has(category.id) && (
-                      <div className="bg-gray-50">
-                        {category.templates.map((template: any) => (
-                          <div
-                            key={template.id}
-                            className={`flex items-center gap-2 px-4 py-2 pl-8 hover:bg-gray-100 transition-colors ${
-                              previewTopic?.id === template.id ? 'bg-amber-100' : ''
-                            }`}
-                          >
-                            <button
-                              onClick={(e) => { e.stopPropagation(); toggleTemplate(template) }}
-                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                                isTemplateSelected(template.id)
-                                  ? 'bg-amber-500 border-amber-500'
-                                  : 'border-gray-300 hover:border-gray-400'
-                              }`}
-                            >
-                              {isTemplateSelected(template.id) && <Check className="w-3 h-3 text-white" />}
-                            </button>
-                            <button
-                              onClick={() => loadTemplatePreview(template)}
-                              className="flex-1 min-w-0 text-left"
-                            >
-                              <div className="text-sm text-gray-700">{template.name}</div>
-                              {template.preview && (
-                                <div className="text-xs text-gray-400 truncate">{template.preview}</div>
-                              )}
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Modules Section */}
-            <div className="px-4 py-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase tracking-wide border-b border-gray-200">
-              {t('modules', contentLanguage)}
+        {/* Left panel — search + topic list */}
+        <div className="w-96 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+          {/* Search bar */}
+          <div className="p-3 border-b border-gray-100">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={contentLanguage === 'fr' ? 'Rechercher des sujets...' : 'Search topics...'}
+                className="w-full pl-10 pr-8 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-fastr-primary/30 focus:border-fastr-primary"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => { setSearchQuery(''); searchInputRef.current?.focus() }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
-            {contentLibrary.map((module: any) => (
-              <div key={module.id} className="border-b border-gray-100">
-                <div className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors">
-                  {/* Module select all checkbox */}
-                  <button
-                    onClick={(e) => { e.stopPropagation(); toggleModuleAllTopics(module) }}
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                      isModuleFullySelected(module)
-                        ? 'bg-fastr-primary border-fastr-primary'
-                        : isModulePartiallySelected(module)
-                          ? 'bg-fastr-primary/50 border-fastr-primary'
-                          : 'border-gray-300 hover:border-gray-400'
-                    }`}
-                    title="Select all topics in this module"
-                  >
-                    {isModuleFullySelected(module) && <Check className="w-3 h-3 text-white" />}
-                    {isModulePartiallySelected(module) && <Minus className="w-3 h-3 text-white" />}
-                  </button>
-                  {/* Module expand/collapse */}
-                  <button
-                    onClick={() => toggleModule(module.id)}
-                    className="flex-1 flex items-center gap-2 text-left"
-                  >
-                    {expandedModules.has(module.id) ? (
-                      <ChevronDown className="w-4 h-4 text-gray-400" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4 text-gray-400" />
-                    )}
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-800 text-sm">M{module.number}: {module.name}</div>
-                      <div className="text-xs text-gray-500">{module.totalSlides} {t('slides', contentLanguage)}</div>
-                    </div>
-                  </button>
-                </div>
+            {searchQuery && (
+              <p className="text-xs text-gray-400 mt-1.5 px-1">
+                {filteredTopics.length} {filteredTopics.length === 1 ? 'result' : 'results'}
+              </p>
+            )}
+          </div>
 
-                {expandedModules.has(module.id) && (
-                  <div className="bg-gray-50 border-t border-gray-100">
-                    {/* Full slides */}
-                    {module.fullTopics?.length > 0 && (
-                      <>
-                        <div className="px-4 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200">
-                          {t('full', contentLanguage)} ({module.fullSlides} {t('slides', contentLanguage)})
-                        </div>
-                        {module.fullTopics.map((topic: any) => (
-                          <div
-                            key={topic.id}
-                            className={`flex items-center gap-2 px-4 py-2 pl-10 hover:bg-gray-100 transition-colors ${
-                              previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
-                            }`}
-                          >
-                            <button
-                              onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
-                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                                isSelected(topic.id)
-                                  ? 'bg-fastr-primary border-fastr-primary'
-                                  : 'border-gray-300 hover:border-gray-400'
-                              }`}
-                            >
-                              {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
-                            </button>
-                            <button
-                              onClick={() => loadPreview(topic)}
-                              className="flex-1 min-w-0 text-left"
-                            >
-                              <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                              <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                            </button>
-                          </div>
-                        ))}
-                      </>
-                    )}
-                    {/* Condensed slides */}
-                    {module.condensedTopics?.length > 0 && (
-                      <>
-                        <div className="px-4 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200">
-                          {t('condensed', contentLanguage)} ({module.condensedSlides} {t('slides', contentLanguage)})
-                        </div>
-                        {module.condensedTopics.map((topic: any) => (
-                          <div
-                            key={topic.id}
-                            className={`flex items-center gap-2 px-4 py-2 pl-10 hover:bg-amber-50 transition-colors ${
-                              previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
-                            }`}
-                          >
-                            <button
-                              onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
-                              className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                                isSelected(topic.id)
-                                  ? 'bg-fastr-primary border-fastr-primary'
-                                  : 'border-gray-300 hover:border-gray-400'
-                              }`}
-                            >
-                              {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
-                            </button>
-                            <button
-                              onClick={() => loadPreview(topic)}
-                              className="flex-1 min-w-0 text-left"
-                            >
-                              <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                              <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                            </button>
-                          </div>
-                        ))}
-                      </>
-                    )}
-                    {/* Fallback if no separated topics */}
-                    {!module.fullTopics?.length && !module.condensedTopics?.length && module.topics.map((topic: any) => (
-                      <div
+          {/* Topic list grouped by module — collapsible */}
+          <div className="flex-1 overflow-y-auto">
+            {groupedByModule.length === 0 ? (
+              <div className="p-8 text-center text-gray-400 text-sm">
+                {contentLanguage === 'fr' ? 'Aucun résultat' : 'No results found'}
+              </div>
+            ) : (
+              groupedByModule.map(({ module, items }) => {
+                const isSearching = searchQuery.trim().length > 0
+                const isExpanded = isSearching || expandedModules.has(module.id)
+                return (
+                  <div key={module.id} className="border-b border-gray-100">
+                    {/* Module header — clickable to expand/collapse */}
+                    <button
+                      onClick={() => {
+                        const next = new Set(expandedModules)
+                        if (next.has(module.id)) next.delete(module.id)
+                        else next.add(module.id)
+                        setExpandedModules(next)
+                      }}
+                      className="w-full text-left px-4 py-3 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                    >
+                      <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`} />
+                      <span className="text-sm font-medium text-gray-800 flex-1">{module.name}</span>
+                      <span className="text-xs text-gray-400">{items.length}</span>
+                    </button>
+                    {/* Topics — visible when expanded or searching */}
+                    {isExpanded && items.map(({ topic, variant }) => (
+                      <button
                         key={topic.id}
-                        className={`flex items-center gap-2 px-4 py-2 pl-8 hover:bg-gray-100 transition-colors ${
-                          previewTopic?.id === topic.id ? 'bg-fastr-primary/10' : ''
+                        onClick={() => loadPreview(topic)}
+                        className={`w-full text-left px-4 py-2.5 pl-10 transition-colors flex items-center gap-3 ${
+                          previewTopic?.id === topic.id
+                            ? 'bg-fastr-primary/5 border-l-2 border-l-fastr-primary'
+                            : 'hover:bg-gray-50 border-l-2 border-l-transparent'
                         }`}
                       >
-                        <button
-                          onClick={(e) => { e.stopPropagation(); toggleTopic(module, topic) }}
-                          className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                            isSelected(topic.id)
-                              ? 'bg-fastr-primary border-fastr-primary'
-                              : 'border-gray-300 hover:border-gray-400'
-                          }`}
-                        >
-                          {isSelected(topic.id) && <Check className="w-3 h-3 text-white" />}
-                        </button>
-                        <button
-                          onClick={() => loadPreview(topic)}
-                          className="flex-1 min-w-0 text-left"
-                        >
+                        <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                          <div className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</div>
-                        </button>
-                      </div>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <span className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</span>
+                            {variant === 'condensed' && (
+                              <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">{t('condensed', contentLanguage)}</span>
+                            )}
+                          </div>
+                        </div>
+                        <Eye className="w-4 h-4 text-gray-300 flex-shrink-0" />
+                      </button>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                )
+              })
+            )}
           </div>
         </div>
 
-        {/* Slide preview area */}
-        <div className="flex-1 bg-gray-800 flex flex-col p-6 overflow-hidden">
+        {/* Right panel — slide preview */}
+        <div className="flex-1 bg-gray-800 flex flex-col overflow-hidden">
           {isLoadingPreview ? (
             <div className="flex-1 flex items-center justify-center text-white/70">
-              <div>
+              <div className="text-center">
                 <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p>Loading preview...</p>
+                <p className="text-sm">Loading preview...</p>
               </div>
             </div>
           ) : previewHtml ? (
             <>
-              {/* Slide preview - fixed height, always visible */}
-              <div className="flex-shrink-0 flex flex-col items-center">
-                {/* Slide count indicator */}
-                {previewTopic?.slideCount > 1 && (
-                  <div className="mb-3 flex items-center justify-center gap-2 text-white/80 bg-white/10 rounded-full py-2 px-4 w-fit">
-                    <span className="text-sm font-medium">{previewTopic.slideCount} {t('slides', contentLanguage)}</span>
-                    <span className="text-white/50">•</span>
-                    <span className="text-sm flex items-center gap-1">
-                      <span>Scroll in preview to view all</span>
-                      <ChevronDown className="w-4 h-4 animate-bounce" />
-                    </span>
-                  </div>
-                )}
-                <div className="w-full max-w-5xl">
-                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      srcDoc={previewHtml}
-                      className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-2xl"
-                      title="Slide Preview"
-                    />
-                    {/* Scroll fade indicator at bottom */}
-                    {previewTopic?.slideCount > 1 && (
-                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-gray-800/80 to-transparent rounded-b-lg pointer-events-none flex items-end justify-center pb-1">
-                        <div className="flex items-center gap-1 text-white/70 text-xs">
-                          <ChevronDown className="w-3 h-3" />
-                          <span>More slides below</span>
-                          <ChevronDown className="w-3 h-3" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="mt-3 text-center">
-                  <p className="text-white font-medium">{previewTopic?.title}</p>
-                  {previewTopic?.slideCount === 1 && (
-                    <p className="text-white/60 text-sm">1 slide</p>
-                  )}
-                </div>
+              {/* Topic header */}
+              <div className="px-6 pt-4 pb-2 flex-shrink-0">
+                <h3 className="text-white font-medium">{previewTopic?.title}</h3>
               </div>
-
-              {/* Presenter Notes - scrollable section below */}
-              {presenterNotes.length > 0 && (
-                <div className="mt-4 flex-1 min-h-0 max-w-3xl mx-auto w-full">
-                  <div className="bg-gray-900 rounded-lg p-4 text-left h-full overflow-y-auto max-h-40">
-                    <h4 className="text-amber-400 text-sm font-semibold mb-2">
-                      Presenter Notes
-                    </h4>
-                    {presenterNotes.map((note, i) => (
-                      <div key={i} className="text-white/80 text-sm whitespace-pre-wrap mb-2">
-                        {note.replace(/^PRESENTER NOTES:\s*/i, '')}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              {/* Slide-by-slide preview */}
+              <div className="flex-1 min-h-0">
+                <SlidePreview html={previewHtml} notes={presenterNotes} contentLanguage={contentLanguage} />
+              </div>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-center text-gray-500">
+            <div className="flex-1 flex items-center justify-center text-center">
               <div>
-                <Zap className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg text-white/70">Click on a slide to preview</p>
-                <p className="text-sm mt-2 text-white/50">Check the box to add it to your selection</p>
+                <BookOpen className="w-16 h-16 mx-auto mb-4 text-white/20" />
+                <p className="text-white/50">{t('clickToPreview', contentLanguage)}</p>
               </div>
             </div>
           )}
-        </div>
-
-        {/* Selection sidebar */}
-        <div className="w-72 bg-white border-l border-gray-200 flex flex-col flex-shrink-0">
-          <div className="p-4 border-b border-gray-100">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-semibold text-gray-800">{t('yourSelection', contentLanguage)}</h3>
-              {selectedSlides.length > 0 && (
-                <button
-                  onClick={() => setSelectedSlides([])}
-                  className="text-xs text-gray-500 hover:text-gray-700"
-                >
-                  {t('clearAll', contentLanguage)}
-                </button>
-              )}
-            </div>
-            <p className="text-sm text-gray-500">
-              {selectedSlides.length} {selectedSlides.length !== 1 ? t('topicPlural', contentLanguage) : t('topic', contentLanguage)} • {totalSlides} {t('slides', contentLanguage)}
-            </p>
-          </div>
-
-          <div className="flex-1 overflow-auto p-2">
-            {selectedSlides.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-gray-400 text-sm text-center p-4">
-                <p>{t('selectTopicsFromLibrary', contentLanguage)}</p>
-              </div>
-            ) : (
-              <div className="space-y-1">
-                {selectedSlides.map((item, idx) => (
-                  <div
-                    key={item.topic.id}
-                    onClick={() => loadPreview(item.topic)}
-                    className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-colors ${
-                      previewTopic?.id === item.topic.id
-                        ? 'bg-fastr-primary/10 border border-fastr-primary/30'
-                        : 'hover:bg-gray-50 border border-transparent'
-                    }`}
-                  >
-                    <span className="w-5 h-5 bg-fastr-primary text-white text-xs rounded-full flex items-center justify-center flex-shrink-0">
-                      {idx + 1}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm text-gray-800 truncate">{item.topic.title}</div>
-                      <div className="text-xs text-gray-400">{item.topic.slideCount} {t('slides', contentLanguage)}</div>
-                    </div>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); toggleTopic(item.module, item.topic) }}
-                      className="p-1 text-gray-400 hover:text-red-500 transition-colors"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Export buttons */}
-          <div className="p-4 border-t border-gray-100 space-y-2">
-            <button
-              onClick={() => exportSelection('pptx')}
-              disabled={(selectedSlides.length === 0 && selectedTemplates.length === 0) || isExporting}
-              className="w-full px-4 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
-            >
-              {isExporting && exportFormat === 'pptx' ? (
-                <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                  {t('exporting', contentLanguage)}
-                </>
-              ) : (
-                <>
-                  <Download className="w-4 h-4" />
-                  {t('exportPPTX', contentLanguage)}
-                </>
-              )}
-            </button>
-            <button
-              onClick={() => exportSelection('pdf')}
-              disabled={(selectedSlides.length === 0 && selectedTemplates.length === 0) || isExporting}
-              className="w-full px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
-            >
-              {isExporting && exportFormat === 'pdf' ? (
-                <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                  {t('exporting', contentLanguage)}
-                </>
-              ) : (
-                <>
-                  <Download className="w-4 h-4" />
-                  {t('exportPDF', contentLanguage)}
-                </>
-              )}
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -2526,45 +2338,45 @@ function App() {
               {/* Build Slide Deck */}
               <button
                 onClick={() => setAppMode('workshop')}
-              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-md"
-            >
-              <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
-                <Presentation className="w-6 h-6 text-fastr-primary" />
-              </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
-              <p className="text-gray-600 text-sm">
-                {t('buildSlideDeckDesc', contentLanguage)}
-              </p>
-            </button>
+                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-md"
+              >
+                <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
+                  <Presentation className="w-6 h-6 text-fastr-primary" />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
+                <p className="text-gray-600 text-sm">
+                  {t('buildSlideDeckDesc', contentLanguage)}
+                </p>
+              </button>
 
-            {/* Quick Export */}
-            <button
-              onClick={() => setAppMode('quick')}
-              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-md"
-            >
-              <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary/20 transition-colors">
-                <Zap className="w-6 h-6 text-fastr-secondary" />
-              </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('quickExport', contentLanguage)}</h2>
-              <p className="text-gray-600 text-sm">
-                {t('quickExportDesc', contentLanguage)}
-              </p>
-            </button>
+              {/* Quick Export */}
+              <button
+                onClick={() => setAppMode('quick')}
+                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-md"
+              >
+                <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary/20 transition-colors">
+                  <Download className="w-6 h-6 text-fastr-secondary" />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('quickExport', contentLanguage)}</h2>
+                <p className="text-gray-600 text-sm">
+                  {t('quickExportDesc', contentLanguage)}
+                </p>
+              </button>
 
-            {/* Browse Library */}
-            <button
-              onClick={() => setAppMode('library')}
-              className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-md"
-            >
-              <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
-                <Library className="w-6 h-6 text-amber-600" />
-              </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('browseLibrary', contentLanguage)}</h2>
-              <p className="text-gray-600 text-sm">
-                {t('browseLibraryDesc', contentLanguage)}
-              </p>
-            </button>
-          </div>
+              {/* Browse Library */}
+              <button
+                onClick={() => setAppMode('library')}
+                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-md"
+              >
+                <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
+                  <BookOpen className="w-6 h-6 text-amber-600" />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('browseLibrary', contentLanguage)}</h2>
+                <p className="text-gray-600 text-sm">
+                  {t('browseLibraryDesc', contentLanguage)}
+                </p>
+              </button>
+            </div>
 
           {/* Existing Decks */}
           {workshops.length > 0 && (
@@ -2616,7 +2428,7 @@ function App() {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // Library Mode
+  // Browse Library Mode
   // ─────────────────────────────────────────────────────────────────────────
   if (appMode === 'library') {
     return <LibraryMode onBack={() => setAppMode('select')} />

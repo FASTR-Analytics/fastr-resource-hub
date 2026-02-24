@@ -69,7 +69,7 @@ schedule:
 
     - time: "10:15-11:00"
       session: "Identifying priority questions and indicators"
-      topics: [m1_1, m9_1, m9_2, m9_3, m1_1b, m1_1c, m1_2, m1_3, m1_3a, m1_3b, m1_2a]
+      topics: [m1_1, m6_2a, m9b_1, m9b_2, m1_1b, m1_1c, m1_2, m1_3, m1_3a, m1_3b, m1_2a]
       slides: [activity_indicator_review.md]
       speaker: "GFF FASTR team"
       duration: 45

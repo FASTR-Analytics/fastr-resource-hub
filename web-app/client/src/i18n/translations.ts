@@ -171,6 +171,20 @@ export const translations = {
     addEntireModule: 'Add Entire Module',
     topic: 'topic',
     topicPlural: 'topics',
+
+    // Content Library page
+    contentLibraryTitle: 'Content Library',
+    contentLibrarySubtitle: 'Select modules to build your presentation',
+    contentLibraryDesc: 'Browse, select, and export module content',
+    detailed: 'Detailed',
+    essentials: 'Essentials',
+    detailedDesc: 'Full methodology and technical detail',
+    essentialsDesc: 'Key concepts and interpretation',
+    modulesSelected: 'modules selected',
+    downloadPPTX: 'Download PPTX',
+    downloadPDF: 'Download PDF',
+    noModulesSelected: 'Select modules above to download',
+    totalSlides: 'slides',
   },
   fr: {
     // Landing page
@@ -340,6 +354,20 @@ export const translations = {
     addEntireModule: 'Ajouter le module entier',
     topic: 'sujet',
     topicPlural: 'sujets',
+
+    // Content Library page
+    contentLibraryTitle: 'Bibliothèque de contenu',
+    contentLibrarySubtitle: 'Sélectionnez des modules pour créer votre présentation',
+    contentLibraryDesc: 'Parcourez, sélectionnez et exportez le contenu des modules',
+    detailed: 'Détaillé',
+    essentials: 'Essentiel',
+    detailedDesc: 'Méthodologie complète et détails techniques',
+    essentialsDesc: 'Concepts clés et interprétation',
+    modulesSelected: 'modules sélectionnés',
+    downloadPPTX: 'Télécharger PPTX',
+    downloadPDF: 'Télécharger PDF',
+    noModulesSelected: 'Sélectionnez des modules ci-dessus pour télécharger',
+    totalSlides: 'diapositives',
   }
 } as const
 

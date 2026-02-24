@@ -111,7 +111,10 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     6: 'Data Analysis',
     7: 'Results Communication',
     8: 'Survey & HFA',
-    9: 'Workshop Activities',
+    '9a': 'Platform Activities',
+    '9b': 'Disruption Reporting',
+    '9c': 'AI Prompting',
+    '9d': 'General Activities',
     '3b': 'AI Assistant',
   },
   fr: {
@@ -124,7 +127,10 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     6: 'Analyse des données',
     7: 'Communication des résultats',
     8: 'Enquêtes et EFS',
-    9: 'Activités de l\'atelier',
+    '9a': 'Activités sur la plateforme',
+    '9b': 'Rapports de perturbation',
+    '9c': 'Exercices IA',
+    '9d': 'Activités générales',
     '3b': 'Assistant IA',
   }
 }
@@ -166,7 +172,7 @@ router.get('/modules', (req, res) => {
       const modulePath = path.join(coreContentPath, item)
 
       // Check for standard module folders (m0_, m1_, etc.) or AI module (mai_)
-      const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+)_/.test(item)
+      const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+[a-z]?)_/.test(item)
       const isAIModule = item.startsWith('mai_')
 
       if (fs.statSync(modulePath).isDirectory() && (isStandardModule || isAIModule)) {
@@ -177,10 +183,11 @@ router.get('/modules', (req, res) => {
           modNum = '3b'
           modId = 'm3b'
         } else {
-          const modNumMatch = item.match(/^m(\d+)_/)
+          const modNumMatch = item.match(/^m(\d+[a-z]?)_/)
           if (!modNumMatch) continue
-          modNum = parseInt(modNumMatch[1])
-          modId = `m${modNum}`
+          const raw = modNumMatch[1]
+          modNum = /[a-z]/.test(raw) ? raw : parseInt(raw)
+          modId = `m${raw}`
         }
 
         const fullTopics: any[] = []
@@ -190,8 +197,8 @@ router.get('/modules', (req, res) => {
           .filter(f => f.endsWith('.md'))
           .sort((a, b) => {
             // Sort by number, handling m4_1, m4_s1, and 01_, 02_ formats
-            const aMatch = a.match(/^(?:m\d+_s?)?(\d+)/)
-            const bMatch = b.match(/^(?:m\d+_s?)?(\d+)/)
+            const aMatch = a.match(/^(?:m\d+[a-z]?_s?)?(\d+)/)
+            const bMatch = b.match(/^(?:m\d+[a-z]?_s?)?(\d+)/)
             const aNum = aMatch ? parseInt(aMatch[1]) : 0
             const bNum = bMatch ? parseInt(bMatch[1]) : 0
             if (aNum !== bNum) return aNum - bNum
@@ -200,7 +207,7 @@ router.get('/modules', (req, res) => {
 
         for (const file of files) {
           // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), or AI (mai_1_...) formats
-          let topicMatch = file.match(/^(m\d+_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+)_/)
+          let topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+)_/)
           let topicId: string
           let isCondensed = false
 
@@ -223,7 +230,7 @@ router.get('/modules', (req, res) => {
           title = title.replace(/\s*-\s*Module\s*\d+$/i, '').trim()
 
           if (!title) {
-            title = file.replace('.md', '').replace(/^m\d+_s?\d+[a-z]*\d*_/, '').replace(/_/g, ' ')
+            title = file.replace('.md', '').replace(/^m\d+[a-z]?_s?\d+[a-z]*\d*_/, '').replace(/_/g, ' ')
             title = title.charAt(0).toUpperCase() + title.slice(1)
           }
 
@@ -269,11 +276,18 @@ router.get('/modules', (req, res) => {
       }
     }
 
-    // Sort modules: numeric order, with AI module (3b = 3.5) after M3
+    // Sort modules: numeric order, with letter suffixes after their base number
+    // e.g., 3, 3b (AI), 4, ..., 9a, 9b, 9c, 9d
+    function moduleSortKey(num: number | string): number {
+      if (typeof num === 'number') return num
+      const match = String(num).match(/^(\d+)([a-z])?$/)
+      if (!match) return 100
+      const base = parseInt(match[1])
+      const suffix = match[2] ? (match[2].charCodeAt(0) - 96) * 0.01 : 0
+      return base + suffix
+    }
     const sortedModules = modules.sort((a, b) => {
-      const aNum = a.number === '3b' ? 3.5 : (typeof a.number === 'number' ? a.number : 100)
-      const bNum = b.number === '3b' ? 3.5 : (typeof b.number === 'number' ? b.number : 100)
-      return aNum - bNum
+      return moduleSortKey(a.number) - moduleSortKey(b.number)
     })
 
     // Cache the result per language
@@ -337,8 +351,8 @@ router.get('/topic/:id', (req, res) => {
 
     // Check for AI module topic (mai_1, mai_2, etc.)
     const aiMatch = topicId.match(/^mai_(\d+)$/)
-    // Standard module topic (m4_1, m4_s1, etc.)
-    const modNumMatch = topicId.match(/^m(\d+)_/)
+    // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
+    const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
 
     if (aiMatch) {
       // AI module topics
@@ -745,14 +759,15 @@ router.post('/export/module/:id', async (req, res) => {
     }
 
     const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
-    const moduleName = MODULE_NAMES['en'][parseInt(modNum)] || `Module ${modNum}`
+    const modKey = /[a-z]/.test(modNum) ? modNum : parseInt(modNum)
+    const moduleName = MODULE_NAMES['en'][modKey] || `Module ${modNum}`
 
     // Read all topic files in the module
     const files = fs.readdirSync(modulePath)
       .filter(f => f.endsWith('.md'))
       .sort((a, b) => {
-        const aMatch = a.match(/^m\d+_(\d+)/)
-        const bMatch = b.match(/^m\d+_(\d+)/)
+        const aMatch = a.match(/^m\d+[a-z]?_(\d+)/)
+        const bMatch = b.match(/^m\d+[a-z]?_(\d+)/)
         const aNum = aMatch ? parseInt(aMatch[1]) : 0
         const bNum = bMatch ? parseInt(bMatch[1]) : 0
         return aNum - bNum
@@ -865,8 +880,8 @@ router.post('/export/selection', async (req, res) => {
         moduleFolder = 'mai_ai_assistant'
         filePrefix = `${topicId}_`
       } else {
-        // Standard module topic (m4_1, m4_s1, etc.)
-        const modNumMatch = topicId.match(/^m(\d+)_/)
+        // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
+        const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
         if (!modNumMatch) continue
 
         const modNum = modNumMatch[1]
