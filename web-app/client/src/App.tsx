@@ -1142,10 +1142,10 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       for (const [moduleId, sel] of selections) {
         const module = contentLibrary.find((m: any) => m.id === moduleId)
         if (!module) continue
-        const topics = sel.variant === 'condensed' && module.condensedTopics?.length > 0
-          ? module.condensedTopics
-          : module.fullTopics?.length > 0
-            ? module.fullTopics
+        const topics = sel.variant === 'condensed' && (module.condensedTopics?.length ?? 0) > 0
+          ? module.condensedTopics!
+          : (module.fullTopics?.length ?? 0) > 0
+            ? module.fullTopics!
             : module.topics
         topics.forEach((topic: any) => topicIds.push(topic.id))
       }

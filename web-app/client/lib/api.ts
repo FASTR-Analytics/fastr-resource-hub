@@ -51,12 +51,16 @@ export interface WorkshopConfig {
 }
 
 export interface Module {
-  number: number
+  number: number | string
   id: string
   name: string
   folder: string
   topics: Topic[]
+  fullTopics?: Topic[]
+  condensedTopics?: Topic[]
   totalSlides: number
+  fullSlides?: number
+  condensedSlides?: number
 }
 
 export interface Topic {

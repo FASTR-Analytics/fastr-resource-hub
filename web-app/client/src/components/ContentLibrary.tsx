@@ -39,12 +39,16 @@ interface Topic {
 }
 
 interface Module {
-  number: number
+  number: number | string
   id: string
   name: string
   folder: string
   topics: Topic[]
+  fullTopics?: Topic[]
+  condensedTopics?: Topic[]
   totalSlides: number
+  fullSlides?: number
+  condensedSlides?: number
 }
 
 interface PreviewData {
@@ -73,7 +77,7 @@ interface TemplateCategory {
 export function ContentLibrary() {
   const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage } = useWorkshopStore()
   const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
-  const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set())
+  const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
 
@@ -227,7 +231,7 @@ export function ContentLibrary() {
   }
 
   // Toggle module expansion
-  const toggleModule = (moduleNum: number) => {
+  const toggleModule = (moduleNum: number | string) => {
     const next = new Set(expandedModules)
     if (next.has(moduleNum)) {
       next.delete(moduleNum)
@@ -521,7 +525,7 @@ We resume at **[time]**`
       7: '90-120 min',
       8: '120-180 min',
     }
-    return durations[module.number] || '60 min'
+    return durations[module.number as number] || '60 min'
   }
 
   return (
