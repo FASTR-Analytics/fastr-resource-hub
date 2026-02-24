@@ -433,7 +433,7 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
         { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Day 1 only - Welcome and opening remarks' },
         { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Day 1 only - Participant introductions' },
         { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day 2+ intro slide with day number, title and date' },
-        { id: 'section', file: null, name: 'Section Divider', icon: 'divider', special: true },
+        { id: 'section', file: 'section_divider.md', name: 'Section Divider', icon: 'divider', special: true, preview: 'Section divider with title and optional subtitle' },
         { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Key messages, wrap-up, and participant reflections' },
         { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide of workshop - contact information' },
       ]
@@ -484,7 +484,7 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
         { id: 'welcome', file: 'welcome_slide.md', name: 'Bienvenue & Ouverture', icon: 'welcome', preview: 'Jour 1 uniquement - Bienvenue et remarques d\'ouverture' },
         { id: 'introductions', file: 'introductions_slide.md', name: 'Présentations', icon: 'people', preview: 'Jour 1 uniquement - Présentations des participants' },
         { id: 'day_title', file: 'day_title.md', name: 'Page de titre du jour', icon: 'calendar', preview: 'Jour 2+ - Diapositive d\'introduction avec numéro, titre et date' },
-        { id: 'section', file: null, name: 'Séparateur de section', icon: 'divider', special: true },
+        { id: 'section', file: 'section_divider.md', name: 'Séparateur de section', icon: 'divider', special: true, preview: 'Séparateur de section avec titre et sous-titre optionnel' },
         { id: 'day_end', file: 'day_end.md', name: 'Fin de journée', icon: 'sunset', preview: 'Messages clés, conclusion et réflexions des participants' },
         { id: 'closing', file: 'closing.md', name: 'Clôture/Coordonnées', icon: 'end', preview: 'Dernière diapositive de l\'atelier - coordonnées' },
       ]
