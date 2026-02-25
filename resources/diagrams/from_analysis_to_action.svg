@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Circular arrow path (implied by layout) -->
+  <!-- Step 1: Analyze -->
+  <g transform="translate(50, 90)">
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Analyze</text>
+    <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">DQA, utilization,</text>
+    <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">coverage estimates</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <g fill="#1F9A9C">
+    <line x1="195" y1="130" x2="225" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+    <polygon points="225,125 235,130 225,135"/>
+  </g>
+
+  <!-- Step 2: Identify -->
+  <g transform="translate(240, 90)">
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Identify</text>
+    <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Trends, gaps,</text>
+    <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">priorities</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <g fill="#1F9A9C">
+    <line x1="385" y1="130" x2="415" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+    <polygon points="415,125 425,130 415,135"/>
+  </g>
+
+  <!-- Step 3: Investigate -->
+  <g transform="translate(430, 90)">
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Investigate</text>
+    <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Root causes,</text>
+    <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">context, data quality</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <g fill="#1F9A9C">
+    <line x1="575" y1="130" x2="605" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+    <polygon points="605,125 615,130 605,135"/>
+  </g>
+
+  <!-- Step 4: Act -->
+  <g transform="translate(620, 90)">
+    <rect width="80" height="80" rx="12" fill="#09544F" filter="url(#shadow)"/>
+    <text x="40" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white">Act</text>
+    <text x="40" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">Decide &amp;</text>
+    <text x="40" y="69" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">respond</text>
+  </g>
+
+  <!-- Feedback arrow (bottom, Act back to Analyze) -->
+  <path d="M 660 175 L 660 220 L 120 220 L 120 175" fill="none" stroke="#CAE6E9" stroke-width="2" stroke-dasharray="6,4"/>
+  <polygon points="115,175 120,165 125,175" fill="#CAE6E9"/>
+  <text x="390" y="240" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#999" font-style="italic">Continuous cycle — each round builds on previous findings</text>
+
+  <!-- Top label -->
+  <text x="350" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#777">FASTR outputs are starting points, not endpoints</text>
+</svg>

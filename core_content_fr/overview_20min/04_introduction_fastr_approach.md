@@ -18,7 +18,7 @@ Combinaison de l'analyse et de la visualisation avec le renforcement des capacit
 </div>
 <div>
 
-![Étapes pour mettre en œuvre le suivi de l'utilisation des services SRMNIA-N](../../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Étapes pour mettre en œuvre le suivi de l'utilisation des services SRMNIA-N](../../resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
 
 </div>
 </div>
