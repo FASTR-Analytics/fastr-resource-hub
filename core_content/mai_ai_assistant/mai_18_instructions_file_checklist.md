@@ -16,10 +16,3 @@ paginate: true
 | **6. Guardrails** | "Cautious, analytical language"; "Do not present causal claims"; stay descriptive |
 
 All you need to add is the country and time period.
-
-<!--
-PRESENTER NOTES:
-- Walk through the table to show how each element of the checklist is built into the instructions file
-- This is why the instructions file saves time - it embeds all the good prompting practices
-- Users get consistent, high-quality outputs without having to remember all these details each time
--->

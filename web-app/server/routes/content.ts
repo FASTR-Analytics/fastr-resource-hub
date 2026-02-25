@@ -621,13 +621,19 @@ router.post('/render', async (req, res) => {
       return res.json({ html: cached.html, presenterNotes: cached.presenterNotes, cached: true })
     }
 
-    // Extract presenter notes from HTML comments (before modifying markdown)
-    // Match comments that contain "PRESENTER NOTES:" - handles newlines after <!--
+    // Extract presenter notes per slide — map each note to its slide index
+    // Split markdown into slides by '---' separator (skip frontmatter)
+    const slideChunks = markdown.split(/\n---\n/)
+    // First chunk is frontmatter, rest are slides (slide 0 = first content after frontmatter)
+    const presenterNotes: string[] = []
     const notesRegex = /<!--[\s\n]*(PRESENTER NOTES:[\s\S]*?)-->/gi
-    const notesMatches = markdown.match(notesRegex) || []
-    const presenterNotes = notesMatches.map((note: string) =>
-      note.replace(/<!--[\s\n]*/, '').replace(/\s*-->/, '').trim()
-    )
+    for (let i = 1; i < slideChunks.length; i++) {
+      const slideNotes = slideChunks[i].match(notesRegex)
+      if (slideNotes && slideNotes.length > 0) {
+        presenterNotes[i - 1] = slideNotes[0]
+          .replace(/<!--[\s\n]*/, '').replace(/\s*-->/, '').trim()
+      }
+    }
 
     // Rewrite relative image paths to absolute URLs
     // ../../resources/... -> /resources/...
