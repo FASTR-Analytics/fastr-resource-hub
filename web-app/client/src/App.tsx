@@ -33,6 +33,7 @@ import {
   LogOut,
   KeyRound,
   Search,
+  Users,
 } from 'lucide-react'
 import {
   DndContext,
@@ -920,7 +921,12 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
   // Count slides and set up single-slide display whenever html changes
   useEffect(() => {
     setCurrentSlide(0)
-    const count = (html.match(/<section/g) || []).length
+    // Marp generates multiple <section> tags per slide (background/content/pseudo layers)
+    // Only sections with an id="" attribute are actual content slides
+    const idCount = (html.match(/<section id="/g) || []).length
+    // Fallback: use pagination-total attribute, then raw section count
+    const paginationMatch = html.match(/data-marpit-pagination-total="(\d+)"/)
+    const count = idCount || (paginationMatch ? parseInt(paginationMatch[1]) : 1)
     setSlideCount(count || 1)
   }, [html])
 
@@ -931,7 +937,16 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
     const tryScroll = () => {
       const doc = iframe.contentDocument || iframe.contentWindow?.document
       if (!doc) return
-      const sections = doc.querySelectorAll('section')
+      // Only target content sections (those with an id), not Marp bg/pseudo layers
+      const sections = doc.querySelectorAll('section[id]')
+      if (sections.length === 0) {
+        // Fallback for slides without bg images (no advanced background layers)
+        const allSections = doc.querySelectorAll('section')
+        if (allSections[currentSlide]) {
+          allSections[currentSlide].scrollIntoView({ behavior: 'auto', block: 'start' })
+        }
+        return
+      }
       if (sections[currentSlide]) {
         sections[currentSlide].scrollIntoView({ behavior: 'auto', block: 'start' })
       }
@@ -1019,6 +1034,9 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   const [previewNotes, setPreviewNotes] = useState<string[]>([])
   const [previewSlideCount, setPreviewSlideCount] = useState(0)
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+  const [templates, setTemplates] = useState<any[]>([])
+  const [selectedTemplates, setSelectedTemplates] = useState<Set<string>>(new Set())
+  const [previewTemplate, setPreviewTemplate] = useState<any | null>(null)
   const previewCache = useRef<Map<string, { html: string; notes: string[]; slideCount: number }>>(new Map())
 
   useEffect(() => {
@@ -1026,6 +1044,13 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       loadContentLibrary()
     }
   }, [contentLibrary.length, loadContentLibrary])
+
+  useEffect(() => {
+    fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => setTemplates(data))
+      .catch(err => console.error('Failed to load templates:', err))
+  }, [contentLanguage])
 
   const hasCondensed = (module: any) => module.condensedTopics?.length > 0
 
@@ -1045,6 +1070,67 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     if (existing) {
       next.set(moduleId, { ...existing, variant })
       setSelections(next)
+    }
+  }
+
+  const toggleTemplate = (file: string) => {
+    const next = new Set(selectedTemplates)
+    if (next.has(file)) next.delete(file)
+    else next.add(file)
+    setSelectedTemplates(next)
+  }
+
+  // Templates that depend on workshop settings — hide from Quick Export
+  const workshopOnlyTemplates = new Set(['objectives', 'expected_outputs'])
+
+  const loadTemplatePreview = async (tmpl: any) => {
+    setPreviewTemplate(tmpl)
+
+    const cacheKey = `template_${tmpl.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPreviewNotes(cached.notes)
+      setPreviewSlideCount(cached.slideCount)
+      return
+    }
+
+    setPreviewHtml(null)
+    setPreviewNotes([])
+    setPreviewSlideCount(0)
+    setIsLoadingPreview(true)
+    try {
+      const response = await fetch(`/api/content/templates/${tmpl.id}?language=${contentLanguage}`, { credentials: 'include' })
+      if (response.ok) {
+        const data = await response.json()
+        // Strip trailing slide separator (---) to avoid blank slide in preview
+        const markdown = data.content.replace(/\n---\s*$/, '')
+        const renderResponse = await fetch('/api/content/render', {
+          credentials: 'include',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown })
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          // Count actual slides — only content sections (with id), not Marp bg/pseudo layers
+          const idCount = (renderData.html.match(/<section id="/g) || []).length
+          const paginationMatch = renderData.html.match(/data-marpit-pagination-total="(\d+)"/)
+          const slideCount = idCount || (paginationMatch ? parseInt(paginationMatch[1]) : 1)
+          previewCache.current.set(cacheKey, {
+            html: renderData.html,
+            notes: renderData.presenterNotes || [],
+            slideCount
+          })
+          setPreviewHtml(renderData.html)
+          setPreviewNotes(renderData.presenterNotes || [])
+          setPreviewSlideCount(slideCount)
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load template preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
     }
   }
 
@@ -1132,7 +1218,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   }
 
   const exportSelection = async (format: 'pdf' | 'pptx') => {
-    if (selections.size === 0) return
+    if (selections.size === 0 && selectedTemplates.size === 0) return
     setIsExporting(true)
     setExportFormat(format)
 
@@ -1154,7 +1240,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topicIds, format, title: 'Content Library Export', language: contentLanguage })
+        body: JSON.stringify({ topicIds, templateFiles: Array.from(selectedTemplates), format, title: 'Content Library Export', language: contentLanguage })
       })
 
       if (response.ok) {
@@ -1221,104 +1307,240 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         </div>
       </header>
 
-      {/* Card grid */}
+      {/* Module sections */}
       <div className="flex-1 overflow-y-auto px-6 py-6 pb-24">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {contentLibrary.map((module: any) => {
-            const isSelected = selections.has(module.id)
-            const sel = selections.get(module.id)
-            const displaySlides = isSelected
-              ? getModuleSlideCount(module, sel!.variant)
-              : getModuleSlideCount(module, 'full')
+        <div className="max-w-5xl mx-auto space-y-10">
 
-            return (
-              <div
-                key={module.id}
-                className={`relative rounded-xl border-2 transition-all cursor-pointer ${
-                  isSelected
-                    ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
-                    : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
-                }`}
-              >
-                {/* Main clickable area */}
-                <button
-                  onClick={() => toggleModule(module)}
-                  className="w-full text-left p-5"
+          {/* Methodology Content section */}
+          {(() => {
+            const methodologyModules = contentLibrary.filter((m: any) => !String(m.id).startsWith('m9'))
+            const activityModules = contentLibrary.filter((m: any) => String(m.id).startsWith('m9'))
+
+            const renderCard = (module: any, isActivity: boolean) => {
+              const isSelected = selections.has(module.id)
+              const sel = selections.get(module.id)
+              const displaySlides = isSelected
+                ? getModuleSlideCount(module, sel!.variant)
+                : getModuleSlideCount(module, 'full')
+              const topicCount = (module.fullTopics?.length || module.topics?.length || 0)
+              const modulePrefix = typeof module.number === 'number'
+                ? `M${module.number}: `
+                : `M${module.number}: `
+
+              return (
+                <div
+                  key={module.id}
+                  className={`relative rounded-xl border-2 transition-all cursor-pointer flex flex-col ${
+                    isActivity ? 'border-l-4 border-l-fastr-accent' : ''
+                  } ${
+                    isSelected
+                      ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
+                      : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                  }`}
                 >
-                  {/* Selected checkmark badge */}
-                  {isSelected && (
-                    <div className="absolute top-3 right-3 w-6 h-6 bg-fastr-primary rounded-full flex items-center justify-center">
-                      <Check className="w-4 h-4 text-white" />
+                  {/* Main clickable area */}
+                  <button
+                    onClick={() => toggleModule(module)}
+                    className="w-full text-left p-5 flex-1"
+                  >
+                    {/* Selected checkmark badge */}
+                    {isSelected && (
+                      <div className="absolute top-3 right-3 w-6 h-6 bg-fastr-primary rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                    )}
+
+                    <div className="flex items-start gap-2 pr-8 mb-2">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        {modulePrefix}{module.name}
+                      </h3>
+                      {isActivity && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-fastr-accent/15 text-fastr-accent whitespace-nowrap">
+                          {t('activity', contentLanguage)}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      {topicCount} {t('topicCount', contentLanguage)} · {displaySlides} {t('totalSlides', contentLanguage)}
+                    </p>
+                  </button>
+
+                  {/* Variant radios - always visible when module has condensed */}
+                  {hasCondensed(module) && (
+                    <div className="px-5 pb-4 pt-0 space-y-1.5">
+                      <label
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
+                          !isSelected || sel?.variant === 'full' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
+                        }`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <input
+                          type="radio"
+                          name={`variant-${module.id}`}
+                          checked={!isSelected || sel?.variant === 'full'}
+                          onChange={() => {
+                            if (!isSelected) toggleModule(module)
+                            setVariant(module.id, 'full')
+                          }}
+                          className="accent-fastr-primary"
+                        />
+                        <span className="flex-1">{t('detailed', contentLanguage)}</span>
+                        <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'full')} {t('totalSlides', contentLanguage)}</span>
+                      </label>
+                      <label
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
+                          isSelected && sel?.variant === 'condensed' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
+                        }`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <input
+                          type="radio"
+                          name={`variant-${module.id}`}
+                          checked={isSelected && sel?.variant === 'condensed'}
+                          onChange={() => {
+                            if (!isSelected) toggleModule(module)
+                            setTimeout(() => setVariant(module.id, 'condensed'), 0)
+                          }}
+                          className="accent-fastr-primary"
+                        />
+                        <span className="flex-1">{t('essentials', contentLanguage)}</span>
+                        <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'condensed')} {t('totalSlides', contentLanguage)}</span>
+                      </label>
                     </div>
                   )}
 
-                  <h3 className="font-semibold text-gray-900 text-sm pr-8 mb-1">{module.name}</h3>
-                  <p className="text-xs text-gray-500">{displaySlides} {t('totalSlides', contentLanguage)}</p>
-                </button>
-
-                {/* Variant radios - only when selected AND has condensed */}
-                {isSelected && hasCondensed(module) && (
-                  <div className="px-5 pb-4 pt-0 space-y-1.5">
-                    <label
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
-                        sel?.variant === 'full' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                      onClick={(e) => e.stopPropagation()}
+                  {/* Preview eye icon - positioned below variant radios */}
+                  <div className="px-5 pb-3 flex justify-end">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); loadPreview(module) }}
+                      className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                      title="Preview"
                     >
-                      <input
-                        type="radio"
-                        name={`variant-${module.id}`}
-                        checked={sel?.variant === 'full'}
-                        onChange={() => setVariant(module.id, 'full')}
-                        className="accent-fastr-primary"
-                      />
-                      <span className="flex-1">{t('detailed', contentLanguage)}</span>
-                      <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'full')}</span>
-                    </label>
-                    <label
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-sm ${
-                        sel?.variant === 'condensed' ? 'bg-fastr-primary/10 text-fastr-primary' : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <input
-                        type="radio"
-                        name={`variant-${module.id}`}
-                        checked={sel?.variant === 'condensed'}
-                        onChange={() => setVariant(module.id, 'condensed')}
-                        className="accent-fastr-primary"
-                      />
-                      <span className="flex-1">{t('essentials', contentLanguage)}</span>
-                      <span className="text-xs text-gray-400">{getModuleSlideCount(module, 'condensed')}</span>
-                    </label>
+                      <Eye className="w-4 h-4" />
+                    </button>
                   </div>
-                )}
+                </div>
+              )
+            }
 
-                {/* Preview eye icon */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); loadPreview(module) }}
-                  className="absolute bottom-3 right-3 p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                  title="Preview"
-                >
-                  <Eye className="w-4 h-4" />
-                </button>
-              </div>
+            return (
+              <>
+                {/* Methodology Content */}
+                <section>
+                  <div className="mb-4">
+                    <div className="flex items-center gap-2 mb-1">
+                      <BookOpen className="w-5 h-5 text-fastr-primary" />
+                      <h2 className="text-lg font-semibold text-gray-900">{t('methodologyContent', contentLanguage)}</h2>
+                    </div>
+                    <p className="text-sm text-gray-500 ml-7">{t('methodologyContentDesc', contentLanguage)}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {methodologyModules.map((m: any) => renderCard(m, false))}
+                  </div>
+                </section>
+
+                {/* Divider */}
+                <div className="border-t border-gray-200" />
+
+                {/* Activities & Exercises */}
+                {activityModules.length > 0 && (
+                  <section>
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Users className="w-5 h-5 text-fastr-accent" />
+                        <h2 className="text-lg font-semibold text-gray-900">{t('activitiesExercises', contentLanguage)}</h2>
+                      </div>
+                      <p className="text-sm text-gray-500 ml-7">{t('activitiesExercisesDesc', contentLanguage)}</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {activityModules.map((m: any) => renderCard(m, true))}
+                    </div>
+                  </section>
+                )}
+              </>
             )
-          })}
+          })()}
+
+          {/* Templates & Structure section */}
+          {templates.length > 0 && (
+            <>
+              <div className="border-t border-gray-200" />
+              <section>
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <FileText className="w-5 h-5 text-gray-600" />
+                    <h2 className="text-lg font-semibold text-gray-900">{t('templatesStructure', contentLanguage)}</h2>
+                  </div>
+                  <p className="text-sm text-gray-500 ml-7">{t('templatesStructureDesc', contentLanguage)}</p>
+                </div>
+                <div className="space-y-6">
+                  {templates.map((category: any) => {
+                    const filteredTemplates = category.templates.filter(
+                      (tmpl: any) => !workshopOnlyTemplates.has(tmpl.id)
+                    )
+                    if (filteredTemplates.length === 0) return null
+                    return (
+                      <div key={category.id}>
+                        <h3 className="text-sm font-medium text-gray-700 mb-2">{category.name}</h3>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                          {filteredTemplates.map((tmpl: any) => {
+                            const isSelected = selectedTemplates.has(tmpl.file)
+                            return (
+                              <div
+                                key={tmpl.id}
+                                className={`relative text-left p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                                  isSelected
+                                    ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
+                                    : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                                }`}
+                              >
+                                <button
+                                  onClick={() => toggleTemplate(tmpl.file)}
+                                  className="w-full text-left"
+                                >
+                                  {isSelected && (
+                                    <div className="absolute top-2 right-2 w-5 h-5 bg-fastr-primary rounded-full flex items-center justify-center">
+                                      <Check className="w-3 h-3 text-white" />
+                                    </div>
+                                  )}
+                                  <div className="pr-6">
+                                    <p className="font-medium text-sm text-gray-900">{tmpl.name}</p>
+                                    <p className="text-xs text-gray-500 mt-1">{tmpl.preview}</p>
+                                  </div>
+                                </button>
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); loadTemplatePreview(tmpl) }}
+                                  className="absolute bottom-2 right-2 p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                                  title="Preview"
+                                >
+                                  <Eye className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </section>
+            </>
+          )}
+
         </div>
       </div>
 
       {/* Preview modal */}
-      {previewModule && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => { setPreviewModule(null); setPreviewHtml(null); setPreviewNotes([]) }}>
+      {(previewModule || previewTemplate) && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => { setPreviewModule(null); setPreviewTemplate(null); setPreviewHtml(null); setPreviewNotes([]) }}>
           <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl mx-4 max-h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700 flex-shrink-0">
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-white">{previewModule.name}</h3>
+                <h3 className="font-semibold text-white">{previewModule?.name || previewTemplate?.name}</h3>
                 <p className="text-sm text-white/50 mt-0.5">{previewSlideCount} {t('totalSlides', contentLanguage)}</p>
               </div>
-              <button onClick={() => { setPreviewModule(null); setPreviewHtml(null); setPreviewNotes([]) }} className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
+              <button onClick={() => { setPreviewModule(null); setPreviewTemplate(null); setPreviewHtml(null); setPreviewNotes([]) }} className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
                 <X className="w-5 h-5 text-white" />
               </button>
             </div>
@@ -1343,20 +1565,22 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       {/* Sticky bottom bar */}
       <div
         className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ${
-          selections.size > 0 ? 'translate-y-0' : 'translate-y-full'
+          selections.size > 0 || selectedTemplates.size > 0 ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
         <div className="backdrop-blur-lg bg-white/80 border-t border-gray-200 shadow-lg px-6 py-4">
           <div className="max-w-6xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
               <span className="text-sm font-medium text-gray-900">
-                {selections.size} {t('modulesSelected', contentLanguage)}
+                {selections.size > 0 && `${selections.size} ${t('modulesSelected', contentLanguage)}`}
+                {selections.size > 0 && selectedTemplates.size > 0 && ' · '}
+                {selectedTemplates.size > 0 && `${selectedTemplates.size} ${t('templatesSelected', contentLanguage)}`}
               </span>
               <span className="text-sm text-gray-500">
-                {totalSlides} {t('totalSlides', contentLanguage)}
+                {totalSlides + selectedTemplates.size} {t('totalSlides', contentLanguage)}
               </span>
               <button
-                onClick={() => setSelections(new Map())}
+                onClick={() => { setSelections(new Map()); setSelectedTemplates(new Set()) }}
                 className="text-sm text-gray-500 hover:text-gray-700 underline"
               >
                 {t('clearAll', contentLanguage)}

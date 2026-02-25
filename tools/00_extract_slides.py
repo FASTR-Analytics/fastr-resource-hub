@@ -69,7 +69,7 @@ MODULE_FOLDERS = {
     6: 'm6_data_analysis',
     7: 'm7_results_communication',
     8: 'm8_survey_hfa',
-    9: 'm9_workshop_activities',
+    # Note: m9 activities are manually managed in m9a/b/c/d sub-folders, not auto-extracted
     'ai': 'mai_ai_assistant',  # AI Assistant module (separate from m3)
 }
 

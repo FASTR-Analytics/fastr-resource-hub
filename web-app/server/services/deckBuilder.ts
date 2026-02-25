@@ -35,7 +35,12 @@ const MODULE_FOLDERS: Record<string, string> = {
   m6: 'm6_data_analysis',
   m7: 'm7_results_communication',
   m8: 'm8_survey_hfa',
-  m9: 'm9_workshop_activities',
+  m9a: 'm9a_instance_setup',
+  m9b: 'm9b_getting_started',
+  m9c: 'm9c_visualizations_interpretation',
+  m9d: 'm9d_reports_review',
+  m9e: 'm9e_prompting_techniques',
+  m9f: 'm9f_fastr_quiz',
   mai: 'mai_ai_assistant',  // AI Assistant module (separate from m3)
 }
 
@@ -151,9 +156,9 @@ async function buildSessionSlides(
   // Useful for cherry-picking specific topics without loading entire module
   if (session.topics && Array.isArray(session.topics) && session.topics.length > 0) {
     for (const topicId of session.topics) {
-      // Topic IDs like "m4_s1" need to be converted to file names
+      // Topic IDs like "m4_s1", "m9c_3" need to be converted to file names
       // Try to find the matching file in core_content
-      const moduleMatch = topicId.match(/^(m\d+)_/)
+      const moduleMatch = topicId.match(/^(m\d+[a-z]?)_/)
       if (moduleMatch) {
         const moduleId = moduleMatch[1]
         const folderName = MODULE_FOLDERS[moduleId]
@@ -224,7 +229,12 @@ const MODULE_NAMES: Record<string, string> = {
   m6: 'Data Analysis',
   m7: 'Results Communication',
   m8: 'Survey & HFA',
-  m9: 'Workshop Activities',
+  m9a: 'Instance Setup',
+  m9b: 'Getting Started',
+  m9c: 'Visualizations & Interpretation',
+  m9d: 'Reports & Review',
+  m9e: 'Prompting Techniques',
+  m9f: 'FASTR Quiz',
   overview: 'FASTR 20-Minute Overview',
 }
 
@@ -268,13 +278,13 @@ function buildModuleSlides(
     if (effectiveVersion === 'condensed') {
       // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
       files = files.filter(f => {
-        const match = f.match(/^m\d+_s\d+/)
+        const match = f.match(/^m\d+[a-z]?_s\d+/)
         return match !== null
       })
     } else {
       // Full (default): exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
       files = files.filter(f => {
-        const match = f.match(/^m\d+_s\d+/)
+        const match = f.match(/^m\d+[a-z]?_s\d+/)
         return match === null  // NOT a condensed file
       })
     }
@@ -283,12 +293,12 @@ function buildModuleSlides(
   // Sort files by topic number
   files = files.sort((a, b) => {
       // Handle condensed files (m4_s1, m4_s2, etc.)
-      const aCondensedMatch = a.match(/^m\d+_s(\d+)/)
-      const bCondensedMatch = b.match(/^m\d+_s(\d+)/)
+      const aCondensedMatch = a.match(/^m\d+[a-z]?_s(\d+)/)
+      const bCondensedMatch = b.match(/^m\d+[a-z]?_s(\d+)/)
 
       // Handle full files (m4_0, m4_1, m4_1a, etc.)
-      const aFullMatch = a.match(/^m\d+_(\d+)/)
-      const bFullMatch = b.match(/^m\d+_(\d+)/)
+      const aFullMatch = a.match(/^m\d+[a-z]?_(\d+)/)
+      const bFullMatch = b.match(/^m\d+[a-z]?_(\d+)/)
 
       // Handle overview files (01_, 02_, 04b_, etc.)
       const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
@@ -314,13 +324,13 @@ function buildModuleSlides(
   if (topicRange) {
     files = files.filter(f => {
       // Try condensed pattern first (m4_s1, m4_s2, etc.)
-      const condensedMatch = f.match(/^m\d+_s(\d+)/)
+      const condensedMatch = f.match(/^m\d+[a-z]?_s(\d+)/)
       if (condensedMatch) {
         const topicNum = parseInt(condensedMatch[1])
         return topicNum >= topicRange.start && topicNum <= topicRange.end
       }
-      // Try full pattern (m4_0, m4_1, m4_1a, etc.)
-      const fullMatch = f.match(/^m\d+_(\d+)/)
+      // Try full pattern (m4_0, m4_1, m4_1a, m9c_3, etc.)
+      const fullMatch = f.match(/^m\d+[a-z]?_(\d+)/)
       if (fullMatch) {
         const topicNum = parseInt(fullMatch[1])
         return topicNum >= topicRange.start && topicNum <= topicRange.end
@@ -379,21 +389,21 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
   if (moduleId !== 'overview') {
     const effectiveVersion = version || 'full'
     if (effectiveVersion === 'condensed') {
-      files = files.filter(f => f.match(/^m\d+_s\d+/) !== null)
+      files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) !== null)
     } else {
       // Full (default): exclude condensed files
-      files = files.filter(f => f.match(/^m\d+_s\d+/) === null)
+      files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) === null)
     }
   }
 
   return files.sort((a, b) => {
       // Handle condensed files (m4_s1, m4_s2, etc.)
-      const aCondensedMatch = a.match(/^m\d+_s(\d+)/)
-      const bCondensedMatch = b.match(/^m\d+_s(\d+)/)
+      const aCondensedMatch = a.match(/^m\d+[a-z]?_s(\d+)/)
+      const bCondensedMatch = b.match(/^m\d+[a-z]?_s(\d+)/)
 
       // Handle full files (m4_0, m4_1, m4_1a, etc.)
-      const aFullMatch = a.match(/^m\d+_(\d+)/)
-      const bFullMatch = b.match(/^m\d+_(\d+)/)
+      const aFullMatch = a.match(/^m\d+[a-z]?_(\d+)/)
+      const bFullMatch = b.match(/^m\d+[a-z]?_(\d+)/)
 
       // Handle overview files (01_, 02_, 04b_, etc.)
       const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
@@ -442,7 +452,7 @@ async function loadSlideContent(
 
   // Try core_content folders (for topic files like m4_01_approach.md)
   if (!fs.existsSync(filePath)) {
-    const moduleMatch = slideFile.match(/^(m\d+)_/)
+    const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
       const folderName = MODULE_FOLDERS[moduleId]
@@ -455,7 +465,7 @@ async function loadSlideContent(
   // Fallback to English if French file not found
   if (!fs.existsSync(filePath) && language !== 'en') {
     const englishPath = getCoreContentPath('en')
-    const moduleMatch = slideFile.match(/^(m\d+)_/)
+    const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
       const folderName = MODULE_FOLDERS[moduleId]

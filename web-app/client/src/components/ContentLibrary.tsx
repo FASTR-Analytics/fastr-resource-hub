@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useWorkshopStore } from '../stores/workshop'
 import api, { Asset, previewAPI } from '../../lib/api'
 import { t } from '../i18n/translations'
@@ -85,7 +86,8 @@ export function ContentLibrary() {
   const [modulePreview, setModulePreview] = useState<{
     module: Module
     mode: 'full' | 'condensed'
-    slides: string[]  // Array of HTML for each slide
+    slides: string[]  // Single HTML document or array
+    slideCount: number
     currentSlide: number
     loading: boolean
   } | null>(null)
@@ -396,6 +398,7 @@ We resume at **[time]**`
       module,
       mode,
       slides: [],
+      slideCount: 0,
       currentSlide: 0,
       loading: true,
     })
@@ -408,41 +411,39 @@ We resume at **[time]**`
       )
       const contents = await Promise.all(contentPromises)
 
-      // Combine all markdown content, splitting by slide separator
-      const allSlides: string[] = []
+      // Build one combined Marp document from all topics
+      const slideParts: string[] = []
       for (const data of contents) {
         if (!data?.content) continue
-        // Split content into individual slides (Marp uses --- as separator)
-        const slideContents = data.content.split(/\n---\n/)
-        for (let i = 0; i < slideContents.length; i++) {
-          let slideMarkdown = slideContents[i].trim()
-          // First slide might have frontmatter, keep it; others need marp header
-          if (i === 0 && !slideMarkdown.startsWith('---')) {
-            slideMarkdown = `---\nmarp: true\ntheme: fastr\n---\n\n${slideMarkdown}`
-          } else if (i > 0) {
-            slideMarkdown = `---\nmarp: true\ntheme: fastr\n---\n\n${slideMarkdown}`
-          }
-          allSlides.push(slideMarkdown)
-        }
+        // Strip frontmatter
+        let content = data.content.replace(/^---[\s\S]*?---\s*/, '')
+        // Strip trailing slide separator
+        content = content.replace(/\n---\s*$/, '').trim()
+        if (content) slideParts.push(content)
       }
 
-      // Render all slides to HTML
-      const renderedSlides: string[] = []
-      for (const slideMarkdown of allSlides) {
-        try {
-          const { html, css } = await previewAPI.renderMarkdown(slideMarkdown)
-          const fullHtml = `<!DOCTYPE html><html><head><base href="${window.location.origin}/"><style>${css}</style></head><body>${html}</body></html>`
-          renderedSlides.push(fullHtml)
-        } catch (err) {
-          console.error('Failed to render slide:', err)
-          renderedSlides.push('<html><body><p>Failed to render slide</p></body></html>')
-        }
-      }
+      const combinedMarkdown = '---\nmarp: true\ntheme: fastr\npaginate: true\n---\n\n' + slideParts.join('\n\n---\n\n')
+
+      // Use server-side Marp rendering (reliable, handles theme + image paths)
+      const renderResponse = await fetch('/api/content/render', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ markdown: combinedMarkdown })
+      })
+      if (!renderResponse.ok) throw new Error('Render failed')
+      const renderData = await renderResponse.json()
+
+      // Count slides from rendered HTML using section[id] tags
+      const slideCount = (renderData.html.match(/<section id="/g) || []).length
+      // Store as single HTML document — navigation handled by scrolling to sections
+      const renderedSlides = slideCount > 0 ? [renderData.html] : []
 
       setModulePreview({
         module,
         mode,
         slides: renderedSlides,
+        slideCount: slideCount || 1,
         currentSlide: 0,
         loading: false,
       })
@@ -1026,8 +1027,8 @@ We resume at **[time]**`
         </div>
       )}
 
-      {/* Module preview modal */}
-      {modulePreview && (
+      {/* Module preview modal - portal to body to escape sidebar overflow */}
+      {modulePreview && createPortal(
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
             {/* Header */}
@@ -1036,7 +1037,7 @@ We resume at **[time]**`
                 <div>
                   <h3 className="font-semibold">M{modulePreview.module.number}: {modulePreview.module.name}</h3>
                   <p className="text-sm text-gray-500">
-                    {modulePreview.slides.length} slides
+                    {modulePreview.slideCount} slides
                   </p>
                 </div>
                 {/* Full/Condensed toggle */}
@@ -1082,7 +1083,19 @@ We resume at **[time]**`
                 </div>
               ) : modulePreview.slides.length > 0 ? (
                 <iframe
-                  srcDoc={modulePreview.slides[modulePreview.currentSlide]}
+                  key={modulePreview.currentSlide}
+                  srcDoc={modulePreview.slides[0]?.replace(
+                    '</head>',
+                    `<style>
+                      body { margin: 0; overflow: hidden; background: white; }
+                      .marpit > svg[data-marpit-svg] { display: none !important; }
+                      .marpit > svg[data-marpit-svg]:nth-child(${modulePreview.currentSlide + 1}) {
+                        display: block !important;
+                        width: 100%;
+                        height: 100%;
+                      }
+                    </style></head>`
+                  )}
                   className="bg-white rounded shadow-lg"
                   style={{ width: '960px', height: '540px', maxWidth: '100%' }}
                   title="Slide Preview"
@@ -1107,13 +1120,13 @@ We resume at **[time]**`
                   'Loading...'
                 ) : (
                   <span>
-                    Slide <strong>{modulePreview.currentSlide + 1}</strong> of <strong>{modulePreview.slides.length}</strong>
+                    Slide <strong>{modulePreview.currentSlide + 1}</strong> of <strong>{modulePreview.slideCount}</strong>
                   </span>
                 )}
               </div>
               <button
-                onClick={() => setModulePreview(prev => prev ? { ...prev, currentSlide: Math.min(prev.slides.length - 1, prev.currentSlide + 1) } : null)}
-                disabled={modulePreview.loading || modulePreview.currentSlide >= modulePreview.slides.length - 1}
+                onClick={() => setModulePreview(prev => prev ? { ...prev, currentSlide: Math.min(prev.slideCount - 1, prev.currentSlide + 1) } : null)}
+                disabled={modulePreview.loading || modulePreview.currentSlide >= modulePreview.slideCount - 1}
                 className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 rounded disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Next
@@ -1121,7 +1134,8 @@ We resume at **[time]**`
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Add to Session Dialog */}

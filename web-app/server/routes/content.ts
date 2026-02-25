@@ -111,10 +111,12 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     6: 'Data Analysis',
     7: 'Results Communication',
     8: 'Survey & HFA',
-    '9a': 'Platform Activities',
-    '9b': 'Disruption Reporting',
-    '9c': 'AI Prompting',
-    '9d': 'General Activities',
+    '9a': 'Instance Setup',
+    '9b': 'Getting Started',
+    '9c': 'Visualizations & Interpretation',
+    '9d': 'Reports & Review',
+    '9e': 'Prompting Techniques',
+    '9f': 'FASTR Quiz',
     '3b': 'AI Assistant',
   },
   fr: {
@@ -127,10 +129,12 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     6: 'Analyse des données',
     7: 'Communication des résultats',
     8: 'Enquêtes et EFS',
-    '9a': 'Activités sur la plateforme',
-    '9b': 'Rapports de perturbation',
-    '9c': 'Exercices IA',
-    '9d': 'Activités générales',
+    '9a': 'Configuration de l\'instance',
+    '9b': 'Prise en main',
+    '9c': 'Visualisations & Interprétation',
+    '9d': 'Rapports & Revue',
+    '9e': 'Techniques de prompting',
+    '9f': 'Quiz FASTR',
     '3b': 'Assistant IA',
   }
 }
@@ -457,8 +461,8 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       name: 'Breaks',
       description: 'Break slides',
       templates: [
-        { id: 'tea', file: 'breaks.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
-        { id: 'lunch', file: 'breaks.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
+        { id: 'tea', file: 'tea_break.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
+        { id: 'lunch', file: 'lunch_break.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
       ]
     },
     {
@@ -467,14 +471,6 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       description: 'Day recap and preview slides',
       templates: [
         { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Day 2+ only - Recap previous day, preview today' },
-      ]
-    },
-    {
-      id: 'activities',
-      name: 'Activities & Demos',
-      description: 'Interactive session slides',
-      templates: [
-        { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Platform Demo', icon: 'demo', preview: 'FASTR Analytics Platform demonstration' },
       ]
     },
     {
@@ -508,8 +504,8 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       name: 'Pauses',
       description: 'Diapositives de pause',
       templates: [
-        { id: 'tea', file: 'breaks.md', name: 'Pause café', icon: 'coffee', preview: 'Pause café/thé de 15 minutes avec heure de reprise' },
-        { id: 'lunch', file: 'breaks.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes avec heure de reprise' },
+        { id: 'tea', file: 'tea_break.md', name: 'Pause café', icon: 'coffee', preview: 'Pause café/thé de 15 minutes avec heure de reprise' },
+        { id: 'lunch', file: 'lunch_break.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes avec heure de reprise' },
       ]
     },
     {
@@ -518,14 +514,6 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       description: 'Récapitulatif et aperçu de la journée',
       templates: [
         { id: 'day_recap', file: 'day_recap.md', name: 'Récapitulatif du jour', icon: 'recap', preview: 'Jour 2+ uniquement - Récapitulatif de la veille, aperçu du jour' },
-      ]
-    },
-    {
-      id: 'activities',
-      name: 'Activités & Démos',
-      description: 'Diapositives de sessions interactives',
-      templates: [
-        { id: 'demo_platform', file: 'demo_platform_slide.md', name: 'Démo plateforme', icon: 'demo', preview: 'Démonstration de la plateforme analytique FASTR' },
       ]
     },
     {
@@ -738,6 +726,8 @@ FASTR Resource Hub Export
     // Fix image paths
     processed = processed.replace(/\(\.\.\/\.\.\/resources\//g, '(/resources/')
     processed = processed.replace(/\(\.\.\/resources\//g, '(/resources/')
+    // Strip trailing slide separator to avoid blank slides
+    processed = processed.replace(/\n---\s*$/, '')
     return processed.trim()
   }).join('\n\n---\n\n')
 

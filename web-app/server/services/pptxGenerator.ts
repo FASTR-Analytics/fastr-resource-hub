@@ -787,10 +787,17 @@ function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   // Time info - extract duration and resume time
   const timeMatch = data.raw.match(/\*\*(\d+)\s*minutes?\*\*/i)
   const resumeMatch = data.raw.match(/resume at \*\*(\d{1,2}:\d{2})\*\*/i)
+  // Also match template placeholders like {{TEA_RESUME_TIME}}
+  const resumePlaceholderMatch = data.raw.match(/resume at \{\{(\w+)\}\}/i)
+    || data.raw.match(/reprendrons à \{\{(\w+)\}\}/i)
 
   const subtitleParts: string[] = []
   if (timeMatch) subtitleParts.push(`${timeMatch[1]} minutes`)
-  if (resumeMatch) subtitleParts.push(`Back at ${resumeMatch[1]}`)
+  if (resumeMatch) {
+    subtitleParts.push(`Back at ${resumeMatch[1]}`)
+  } else if (resumePlaceholderMatch) {
+    subtitleParts.push(`We'll resume at {{${resumePlaceholderMatch[1]}}}`)
+  }
 
   if (subtitleParts.length > 0) {
     slide.addText(subtitleParts.join(' • '), {

@@ -185,6 +185,19 @@ export const translations = {
     downloadPDF: 'Download PDF',
     noModulesSelected: 'Select modules above to download',
     totalSlides: 'slides',
+
+    // Quick Export sections
+    methodologyContent: 'Methodology Content',
+    methodologyContentDesc: 'Lecture-style modules for teaching FASTR concepts',
+    activitiesExercises: 'Activities & Exercises',
+    activitiesExercisesDesc: 'Hands-on activities, exercises, and interactive content',
+    activity: 'Activity',
+    topicCount: 'topics',
+
+    // Quick Export templates section
+    templatesStructure: 'Templates & Structure',
+    templatesStructureDesc: 'Standard slides for structuring your presentation',
+    templatesSelected: 'templates selected',
   },
   fr: {
     // Landing page
@@ -368,6 +381,19 @@ export const translations = {
     downloadPDF: 'Télécharger PDF',
     noModulesSelected: 'Sélectionnez des modules ci-dessus pour télécharger',
     totalSlides: 'diapositives',
+
+    // Quick Export sections
+    methodologyContent: 'Contenu méthodologique',
+    methodologyContentDesc: 'Modules de cours pour enseigner les concepts FASTR',
+    activitiesExercises: 'Activités & Exercices',
+    activitiesExercisesDesc: 'Activités pratiques, exercices et contenu interactif',
+    activity: 'Activité',
+    topicCount: 'sujets',
+
+    // Quick Export templates section
+    templatesStructure: 'Modèles & Structure',
+    templatesStructureDesc: 'Diapositives standard pour structurer votre présentation',
+    templatesSelected: 'modèles sélectionnés',
   }
 } as const
 

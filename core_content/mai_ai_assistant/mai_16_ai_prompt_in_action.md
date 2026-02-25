@@ -6,28 +6,22 @@ paginate: true
 
 ## Prompts in action
 
-**With this prompt, you could quickly orient yourself to a new dataset:**
+**Getting started — Dataset Overview:**
 
-> *"Show me an overview of the data: what indicators, regions, and time periods are available?"*
-
-This works because it asks the AI to scan the full dataset and summarize what's there — useful when starting a new analysis or working with unfamiliar data.
+> *"Show me an overview of the data: what indicators, regions, and time periods are available? Create a summary slide showing data coverage."*
 
 ---
 
 ## Prompts in action
 
-**With this prompt, you could identify where to focus improvement efforts:**
+**Analysis — Where to Focus:**
 
-> *"Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining performance or persistent gaps."*
-
-This works because it asks for actionable prioritization, not just description — the AI will rank and recommend based on the patterns it finds.
+> *"Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining service delivery, rising mortality or dropout rates, or persistent gaps. Create a summary slide showing the priority areas."*
 
 ---
 
 ## Prompts in action
 
-**With this prompt, you could prepare for a stakeholder meeting:**
+**Workflows — Quick Deck:**
 
-> *"Create talking points for presenting these findings to regional health directors. Include main findings in plain language, supporting data points, and recommended actions."*
-
-This works because it specifies the audience and desired format — the AI tailors the output for communication rather than technical analysis.
+> *"I need a quick 5-slide deck on [INDICATOR/TOPIC] for [AUDIENCE]. Include: current status, trend over time, regional comparison, data quality context, and recommendations. Frame trends correctly: increases in service delivery are positive, but increases in mortality or dropout rates are negative."*
