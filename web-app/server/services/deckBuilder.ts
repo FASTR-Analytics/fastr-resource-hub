@@ -42,6 +42,7 @@ const MODULE_FOLDERS: Record<string, string> = {
   m9e: 'm9e_disruption_report',
   m9f: 'm9f_prompting_techniques',
   m9g: 'm9g_fastr_quiz',
+  m9h: 'm9h_platform_demo',
   mai: 'mai_ai_assistant',  // AI Assistant module (separate from m3)
 }
 
@@ -237,6 +238,7 @@ const MODULE_NAMES: Record<string, string> = {
   m9e: 'Disruption Report',
   m9f: 'Prompting Techniques',
   m9g: 'FASTR Quiz',
+  m9h: 'Platform Demo',
   overview: 'FASTR 20-Minute Overview',
 }
 

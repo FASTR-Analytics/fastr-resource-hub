@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Live Demo: Platform Access & Roles
+## Live demo: platform access & roles
 
 ![demo h:40](../../resources/icons/demo.svg) **In this demo, we will:**
 

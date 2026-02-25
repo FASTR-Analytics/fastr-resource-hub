@@ -118,6 +118,7 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     '9e': 'Disruption Report',
     '9f': 'Prompting Techniques',
     '9g': 'FASTR Quiz',
+    '9h': 'Platform Demo',
     '3b': 'AI Assistant',
   },
   fr: {
@@ -137,6 +138,7 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     '9e': 'Rapport de perturbations',
     '9f': 'Techniques de prompting',
     '9g': 'Quiz FASTR',
+    '9h': 'Démo de la plateforme',
     '3b': 'Assistant IA',
   }
 }

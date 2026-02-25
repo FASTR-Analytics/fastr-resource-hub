@@ -957,10 +957,11 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
     return () => iframe.removeEventListener('load', tryScroll)
   }, [currentSlide, html])
 
-  // Inject CSS to hide scrollbar in the iframe
+  // Inject CSS to ensure slide scales to fit inside iframe
   const enhancedHtml = html.replace('</head>', `<style>
-    body { overflow: hidden; }
+    html, body { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
     section { scroll-margin-top: 0; }
+    svg[data-marpit-svg] { display: block; width: 100%; height: 100%; }
   </style></head>`)
 
   const goToSlide = (idx: number) => {
@@ -970,10 +971,13 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
   // Current slide's presenter notes (notes array is per-slide from Marp)
   const currentNotes = notes[currentSlide] || ''
 
+  // Explicit heights in vh — no flex sizing ambiguity
+  const slideHeight = currentNotes ? 'calc(85vh - 64px - 28px - 180px)' : 'calc(85vh - 64px - 28px)'
+
   return (
-    <div className="flex flex-col h-full">
+    <div>
       {/* Slide area with nav arrows */}
-      <div className="flex-1 min-h-0 flex items-center gap-2 px-2">
+      <div className="flex items-center gap-2 px-2" style={{ height: slideHeight }}>
         {/* Prev button */}
         <button
           onClick={() => goToSlide(currentSlide - 1)}
@@ -984,15 +988,14 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
         </button>
 
         {/* Iframe */}
-        <div className="flex-1 h-full flex items-center justify-center">
-          <div className="w-full max-w-5xl" style={{ aspectRatio: '16/9' }}>
-            <iframe
-              ref={iframeRef}
-              srcDoc={enhancedHtml}
-              className="w-full h-full bg-white rounded-lg shadow-2xl"
-              title="Slide Preview"
-            />
-          </div>
+        <div className="h-full flex-1 flex items-center justify-center py-2">
+          <iframe
+            ref={iframeRef}
+            srcDoc={enhancedHtml}
+            className="bg-white rounded-lg shadow-2xl"
+            style={{ aspectRatio: '16/9', maxWidth: '100%', maxHeight: '100%' }}
+            title="Slide Preview"
+          />
         </div>
 
         {/* Next button */}
@@ -1006,13 +1009,13 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
       </div>
 
       {/* Slide counter */}
-      <div className="flex-shrink-0 text-center py-2">
+      <div className="text-center" style={{ height: '28px', lineHeight: '28px' }}>
         <span className="text-sm text-white/60 tabular-nums">{currentSlide + 1} / {slideCount}</span>
       </div>
 
-      {/* Presenter notes — always visible */}
+      {/* Presenter notes — fixed height box, scrolls internally */}
       {currentNotes && (
-        <div className="flex-shrink-0 max-h-[28%] border-t border-gray-700 overflow-y-auto px-6 py-3">
+        <div className="border-t border-gray-700 px-6 py-3" style={{ height: '180px', overflowY: 'scroll' }}>
           <h4 className="text-amber-400 text-xs font-semibold mb-1.5">{t('presenterNotes', contentLanguage)}</h4>
           <div className="text-white/80 text-sm whitespace-pre-wrap">
             {currentNotes.replace(/^PRESENTER NOTES:\s*/i, '')}
@@ -1533,9 +1536,9 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
       {/* Preview modal */}
       {(previewModule || previewTemplate) && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => { setPreviewModule(null); setPreviewTemplate(null); setPreviewHtml(null); setPreviewNotes([]) }}>
-          <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl mx-4 max-h-[90vh] flex flex-col overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-gray-800 rounded-2xl shadow-2xl w-full max-w-5xl mx-4" style={{ height: '85vh' }} onClick={(e) => e.stopPropagation()}>
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700 flex-shrink-0">
+            <div className="flex items-center justify-between px-6 border-b border-gray-700" style={{ height: '64px' }}>
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-white">{previewModule?.name || previewTemplate?.name}</h3>
                 <p className="text-sm text-white/50 mt-0.5">{previewSlideCount} {t('totalSlides', contentLanguage)}</p>
@@ -1546,15 +1549,13 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
             </div>
             {/* Slide preview with navigation */}
             {isLoadingPreview ? (
-              <div className="flex-1 flex items-center justify-center text-white/70">
+              <div className="flex items-center justify-center text-white/70" style={{ height: 'calc(85vh - 64px)' }}>
                 <RefreshCw className="w-8 h-8 animate-spin" />
               </div>
             ) : previewHtml ? (
-              <div className="flex-1 min-h-0">
-                <SlidePreview html={previewHtml} notes={previewNotes} contentLanguage={contentLanguage} />
-              </div>
+              <SlidePreview html={previewHtml} notes={previewNotes} contentLanguage={contentLanguage} />
             ) : (
-              <div className="flex-1 flex items-center justify-center text-white/50">
+              <div className="flex items-center justify-center text-white/50" style={{ height: 'calc(85vh - 64px)' }}>
                 <p>No preview available</p>
               </div>
             )}
