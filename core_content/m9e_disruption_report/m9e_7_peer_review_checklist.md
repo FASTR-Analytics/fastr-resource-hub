@@ -16,10 +16,3 @@ paginate: true
 **Prepare feedback:** 2 things that work well, 2 suggestions to improve
 
 **Present back:** Key strengths and top suggestions for the report you reviewed
-
-<!--
-PRESENTER NOTES:
-- 10-15 minutes for review
-- Fresh eyes catch what authors miss
-- Focus on clarity and communication, not content accuracy
--->
