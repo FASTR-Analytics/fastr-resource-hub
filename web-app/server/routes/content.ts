@@ -114,9 +114,10 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     '9a': 'Instance Setup',
     '9b': 'Getting Started',
     '9c': 'Visualizations & Interpretation',
-    '9d': 'Reports & Review',
-    '9e': 'Prompting Techniques',
-    '9f': 'FASTR Quiz',
+    '9d': 'Slide Decks',
+    '9e': 'Disruption Report',
+    '9f': 'Prompting Techniques',
+    '9g': 'FASTR Quiz',
     '3b': 'AI Assistant',
   },
   fr: {
@@ -132,9 +133,10 @@ const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
     '9a': 'Configuration de l\'instance',
     '9b': 'Prise en main',
     '9c': 'Visualisations & Interprétation',
-    '9d': 'Rapports & Revue',
-    '9e': 'Techniques de prompting',
-    '9f': 'Quiz FASTR',
+    '9d': 'Présentations',
+    '9e': 'Rapport de perturbations',
+    '9f': 'Techniques de prompting',
+    '9g': 'Quiz FASTR',
     '3b': 'Assistant IA',
   }
 }
@@ -445,15 +447,19 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
     {
       id: 'structure',
       name: 'Structure',
-      description: 'Workshop structure slides',
+      description: 'Workshop structure and content slides',
       templates: [
-        { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover', preview: 'Workshop cover slide with title, country, dates' },
-        { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Day 1 only - Welcome and opening remarks' },
-        { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Day 1 only - Participant introductions' },
-        { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day 2+ intro slide with day number, title and date' },
-        { id: 'section', file: 'section_divider.md', name: 'Section Divider', icon: 'divider', special: true, preview: 'Section divider with title and optional subtitle' },
-        { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Key messages, wrap-up, and participant reflections' },
-        { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide of workshop - contact information' },
+        { id: 'title', file: 'title_slide.md', name: 'Title/Cover Page', icon: 'cover', preview: 'Cover slide with title, country, dates' },
+        { id: 'welcome', file: 'welcome_slide.md', name: 'Welcome & Opening', icon: 'welcome', preview: 'Welcome and opening remarks' },
+        { id: 'introductions', file: 'introductions_slide.md', name: 'Introductions', icon: 'people', preview: 'Participant introductions' },
+        { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Learning objectives (from Settings)' },
+        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Workshop deliverables (from Settings)' },
+        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Meeting Norms', icon: 'people', preview: 'Ground rules and safe space' },
+        { id: 'section', file: 'section_divider.md', name: 'Section Divider', icon: 'divider', special: true, preview: 'Section divider with title' },
+        { id: 'day_title', file: 'day_title.md', name: 'Day Title Page', icon: 'calendar', preview: 'Day intro slide with number, title, date' },
+        { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Recap previous day, preview today' },
+        { id: 'day_end', file: 'day_end.md', name: 'End of Day', icon: 'sunset', preview: 'Wrap-up and participant reflections' },
+        { id: 'closing', file: 'closing.md', name: 'Closing/Contact Info', icon: 'end', preview: 'Last slide - contact information' },
       ]
     },
     {
@@ -461,26 +467,8 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       name: 'Breaks',
       description: 'Break slides',
       templates: [
-        { id: 'tea', file: 'tea_break.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break with resume time' },
-        { id: 'lunch', file: 'lunch_break.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break with resume time' },
-      ]
-    },
-    {
-      id: 'day_transitions',
-      name: 'Day Transitions',
-      description: 'Day recap and preview slides',
-      templates: [
-        { id: 'day_recap', file: 'day_recap.md', name: 'Day Recap', icon: 'recap', preview: 'Day 2+ only - Recap previous day, preview today' },
-      ]
-    },
-    {
-      id: 'custom',
-      name: 'Workshop Content',
-      description: 'Workshop-specific content slides',
-      templates: [
-        { id: 'objectives', file: 'objectives_slide.md', name: 'Workshop Objectives', icon: 'target', preview: 'Day 1 - Workshop learning objectives (from Settings)' },
-        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Expected Outputs', icon: 'output', preview: 'Day 1 - Workshop deliverables (from Settings)' },
-        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Meeting Norms', icon: 'people', preview: 'Workshop ground rules and safe space statement' },
+        { id: 'tea', file: 'tea_break.md', name: 'Tea Break', icon: 'coffee', preview: '15-minute tea/coffee break' },
+        { id: 'lunch', file: 'lunch_break.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break' },
       ]
     }
   ],
@@ -488,15 +476,19 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
     {
       id: 'structure',
       name: 'Structure',
-      description: 'Diapositives de structure d\'atelier',
+      description: 'Diapositives de structure et contenu',
       templates: [
-        { id: 'title', file: 'title_slide.md', name: 'Page de titre', icon: 'cover', preview: 'Diapositive de couverture avec titre, pays, dates' },
-        { id: 'welcome', file: 'welcome_slide.md', name: 'Bienvenue & Ouverture', icon: 'welcome', preview: 'Jour 1 uniquement - Bienvenue et remarques d\'ouverture' },
-        { id: 'introductions', file: 'introductions_slide.md', name: 'Présentations', icon: 'people', preview: 'Jour 1 uniquement - Présentations des participants' },
-        { id: 'day_title', file: 'day_title.md', name: 'Page de titre du jour', icon: 'calendar', preview: 'Jour 2+ - Diapositive d\'introduction avec numéro, titre et date' },
-        { id: 'section', file: 'section_divider.md', name: 'Séparateur de section', icon: 'divider', special: true, preview: 'Séparateur de section avec titre et sous-titre optionnel' },
-        { id: 'day_end', file: 'day_end.md', name: 'Fin de journée', icon: 'sunset', preview: 'Messages clés, conclusion et réflexions des participants' },
-        { id: 'closing', file: 'closing.md', name: 'Clôture/Coordonnées', icon: 'end', preview: 'Dernière diapositive de l\'atelier - coordonnées' },
+        { id: 'title', file: 'title_slide.md', name: 'Page de titre', icon: 'cover', preview: 'Couverture avec titre, pays, dates' },
+        { id: 'welcome', file: 'welcome_slide.md', name: 'Bienvenue & Ouverture', icon: 'welcome', preview: 'Bienvenue et remarques d\'ouverture' },
+        { id: 'introductions', file: 'introductions_slide.md', name: 'Présentations', icon: 'people', preview: 'Présentations des participants' },
+        { id: 'objectives', file: 'objectives_slide.md', name: 'Objectifs de l\'atelier', icon: 'target', preview: 'Objectifs d\'apprentissage (depuis Paramètres)' },
+        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Résultats attendus', icon: 'output', preview: 'Livrables de l\'atelier (depuis Paramètres)' },
+        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Normes de la rencontre', icon: 'people', preview: 'Règles et espace sûr' },
+        { id: 'section', file: 'section_divider.md', name: 'Séparateur de section', icon: 'divider', special: true, preview: 'Séparateur avec titre' },
+        { id: 'day_title', file: 'day_title.md', name: 'Page de titre du jour', icon: 'calendar', preview: 'Intro du jour avec numéro, titre, date' },
+        { id: 'day_recap', file: 'day_recap.md', name: 'Récapitulatif du jour', icon: 'recap', preview: 'Récap de la veille, aperçu du jour' },
+        { id: 'day_end', file: 'day_end.md', name: 'Fin de journée', icon: 'sunset', preview: 'Conclusion et réflexions' },
+        { id: 'closing', file: 'closing.md', name: 'Clôture/Coordonnées', icon: 'end', preview: 'Dernière diapositive - coordonnées' },
       ]
     },
     {
@@ -504,26 +496,8 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       name: 'Pauses',
       description: 'Diapositives de pause',
       templates: [
-        { id: 'tea', file: 'tea_break.md', name: 'Pause café', icon: 'coffee', preview: 'Pause café/thé de 15 minutes avec heure de reprise' },
-        { id: 'lunch', file: 'lunch_break.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes avec heure de reprise' },
-      ]
-    },
-    {
-      id: 'day_transitions',
-      name: 'Transitions de journée',
-      description: 'Récapitulatif et aperçu de la journée',
-      templates: [
-        { id: 'day_recap', file: 'day_recap.md', name: 'Récapitulatif du jour', icon: 'recap', preview: 'Jour 2+ uniquement - Récapitulatif de la veille, aperçu du jour' },
-      ]
-    },
-    {
-      id: 'custom',
-      name: 'Contenu de l\'atelier',
-      description: 'Diapositives de contenu spécifique à l\'atelier',
-      templates: [
-        { id: 'objectives', file: 'objectives_slide.md', name: 'Objectifs de l\'atelier', icon: 'target', preview: 'Jour 1 - Objectifs d\'apprentissage de l\'atelier (depuis Paramètres)' },
-        { id: 'expected_outputs', file: 'expected_outputs_slide.md', name: 'Résultats attendus', icon: 'output', preview: 'Jour 1 - Livrables de l\'atelier (depuis Paramètres)' },
-        { id: 'meeting_norms', file: 'meeting_norms.md', name: 'Normes de la rencontre', icon: 'people', preview: 'Règles de l\'atelier et déclaration d\'espace sûr' },
+        { id: 'tea', file: 'tea_break.md', name: 'Pause café', icon: 'coffee', preview: 'Pause café/thé de 15 minutes' },
+        { id: 'lunch', file: 'lunch_break.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes' },
       ]
     }
   ]

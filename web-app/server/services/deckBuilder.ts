@@ -38,9 +38,10 @@ const MODULE_FOLDERS: Record<string, string> = {
   m9a: 'm9a_instance_setup',
   m9b: 'm9b_getting_started',
   m9c: 'm9c_visualizations_interpretation',
-  m9d: 'm9d_reports_review',
-  m9e: 'm9e_prompting_techniques',
-  m9f: 'm9f_fastr_quiz',
+  m9d: 'm9d_slide_decks',
+  m9e: 'm9e_disruption_report',
+  m9f: 'm9f_prompting_techniques',
+  m9g: 'm9g_fastr_quiz',
   mai: 'mai_ai_assistant',  // AI Assistant module (separate from m3)
 }
 
@@ -232,9 +233,10 @@ const MODULE_NAMES: Record<string, string> = {
   m9a: 'Instance Setup',
   m9b: 'Getting Started',
   m9c: 'Visualizations & Interpretation',
-  m9d: 'Reports & Review',
-  m9e: 'Prompting Techniques',
-  m9f: 'FASTR Quiz',
+  m9d: 'Slide Decks',
+  m9e: 'Disruption Report',
+  m9f: 'Prompting Techniques',
+  m9g: 'FASTR Quiz',
   overview: 'FASTR 20-Minute Overview',
 }
 
