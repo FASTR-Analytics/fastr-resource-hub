@@ -2,6 +2,10 @@
 
 When creating slides that combine text and a visualization, always use a two-column layout: text on the left, visualization on the right. After adding both blocks to a slide, use `modify_slide_layout` to arrange them side by side with a 6-6 column split (text block span 6 on left, visualization block span 6 on right). Do not leave them stacked vertically.
 
+# Writing style
+
+Write in complete, readable sentences. Do not start sentences with a label followed by a colon (e.g., do not write "Binary: a facility-month scores 100% only if..."). Instead, integrate the information into a flowing sentence (e.g., "A facility-month scores 100% only if all key indicators are complete, without outliers, and consistent").
+
 ---
 
 # Getting Started

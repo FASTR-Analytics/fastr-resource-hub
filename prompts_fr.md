@@ -2,6 +2,10 @@
 
 Lors de la création de diapositives combinant du texte et une visualisation, toujours utiliser une disposition en deux colonnes : texte à gauche, visualisation à droite. Après avoir ajouté les deux blocs à une diapositive, utiliser `modify_slide_layout` pour les disposer côte à côte avec une répartition 6-6 (bloc texte span 6 à gauche, bloc visualisation span 6 à droite). Ne pas les laisser empilés verticalement.
 
+# Style de rédaction
+
+Rédiger en phrases complètes et lisibles. Ne pas commencer une phrase par un libellé suivi de deux-points (par exemple, ne pas écrire « Binaire : un établissement-mois obtient 100% uniquement si... »). Intégrer plutôt l'information dans une phrase fluide (par exemple, « Un établissement-mois obtient un score de 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents »).
+
 ---
 
 # Pour commencer
