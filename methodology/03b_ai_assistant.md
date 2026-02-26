@@ -89,7 +89,7 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 - Answering questions about the data or methodology
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_2 -->
+<!-- SLIDE:mai_3 -->
 ## What the AI assistant can do
 
 **Answer questions about your data**
@@ -111,7 +111,7 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 - Create presentations for different audiences
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_2a -->
+<!-- SLIDE:mai_3a -->
 ## Where the AI provides greatest value
 
 <div class="columns">
@@ -138,42 +138,7 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_2b -->
-## Additional AI capabilities across the platform
-
-The AI assistant can provide support across other platform areas:
-
-**Metrics** — Query indicator data with filters by region, facility type, or time period. The AI can answer quantitative questions and explain how metrics are defined and calculated.
-
-**Modules** — View installed analysis modules, check execution status, and access logs for troubleshooting. *Note: Modules run automatically and cannot be executed or modified through the AI.*
-
-**Data** — Understand data coverage including number of facilities, administrative areas, and reporting periods. *Note: Data upload and management functions are not accessible through the AI.*
-
-**Settings** — Project settings are managed directly by users and are not accessible through the AI assistant.
-<!-- /SLIDE -->
-
-<!-- SLIDE:mai_2c -->
-## AI across platform components
-
-<div class="columns">
-<div>
-
-**Visualizations** — Permanent library of reusable charts. You or the AI create them; you or the AI can use them.
-
-![AI across components — visualizations](resources/screenshots/ai_across_visualizations.png)
-
-</div>
-<div>
-
-**Slide decks** — For reports and presentations. The AI helps assemble content from data and saved charts.
-
-![AI across components — slide decks](resources/screenshots/ai_across_slidedecks.png)
-
-</div>
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:mai_4 -->
+<!-- SLIDE:mai_4a -->
 ## How conversations work
 
 **Example conversation:**
@@ -190,7 +155,7 @@ AI: *Builds a slide highlighting priority areas for data quality improvement*
 **Think of the AI as a data analyst on your team** — someone who can instantly pull reports, create charts, and answer questions about your health data.
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_5 -->
+<!-- SLIDE:mai_6 -->
 ## Tips for better answers
 
 **Be specific about:**
@@ -209,7 +174,7 @@ AI: *Builds a slide highlighting priority areas for data quality improvement*
 4. Take action: "Create a slide about this for my presentation"
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_5a -->
+<!-- SLIDE:mai_6a -->
 ## What makes a good prompt?
 
 <div class="columns">
@@ -257,18 +222,7 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_6 -->
-## AI assistant capabilities
-
-| Area | What it supports |
-|------|------------------|
-| **Data exploration** | Query metrics from analysis modules; filter by geography, time, demographics; view raw CSV data; explore across time periods and locations |
-| **Visualization** | Display project visualizations; create bar charts, line graphs, tables; combine charts, tables, and narrative text |
-| **Knowledge** | Access FASTR methodology; explain indicators and calculations; interpret results with context on data quality and limitations |
-| **Communication** | Build narratives combining visuals and text; highlight key findings; create focused views; provide evidence-based insights |
-<!-- /SLIDE -->
-
-<!-- SLIDE:mai_7 -->
+<!-- SLIDE:mai_8 -->
 ## What happens when you log off
 
 | Content | Saved? | Notes |
@@ -279,7 +233,7 @@ PRESENTER NOTES:
 | Downloaded exports | Permanent | Saved to your computer |
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_8 -->
+<!-- SLIDE:mai_8a -->
 ## Private vs shared on team projects
 
 <div class="columns">
@@ -308,7 +262,7 @@ Everyone can see saved content.
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_9 -->
+<!-- SLIDE:mai_8b -->
 ## How teams work together
 
 | Who | Action | Result |
@@ -326,7 +280,7 @@ Everyone can see saved content.
 **Two people can use the AI assistant to add to the same slide deck at the same time.** Each chat is private, and each AI instance sees only the changes made to the deck — not the conversation.
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_10 -->
+<!-- SLIDE:mai_4 -->
 ## How the AI assistant works
 
 <div class="columns">
@@ -355,7 +309,7 @@ The AI follows a "read before responding" principle — it never guesses.
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_11 -->
+<!-- SLIDE:mai_2 -->
 ## AI is an accelerator, not a decision maker
 
 <div class="columns">
@@ -382,7 +336,7 @@ AI interprets and explains. You decide and act.
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_11a -->
+<!-- SLIDE:mai_5 -->
 ## When AI adds little value
 
 <div class="columns">
@@ -403,7 +357,7 @@ Across all districts, outliers are very low, with all indicators averaging below
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_11b -->
+<!-- SLIDE:mai_5a -->
 ## When AI is helpful
 
 <div class="columns">
