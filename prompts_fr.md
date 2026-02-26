@@ -1,3 +1,9 @@
+# Préférences générales pour les diapositives
+
+Lors de la création de diapositives combinant du texte et une visualisation, toujours privilégier une disposition en deux colonnes : interprétation ou messages clés à gauche, graphique ou visualisation à droite.
+
+---
+
 # Pour commencer
 
 ## Orientation

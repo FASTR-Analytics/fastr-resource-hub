@@ -1,3 +1,9 @@
+# General slide preferences
+
+When creating slides that combine text and a visualization, always prefer a two-column layout: interpretation or key messages on the left, chart or visualization on the right.
+
+---
+
 # Getting Started
 
 ## Orientation
