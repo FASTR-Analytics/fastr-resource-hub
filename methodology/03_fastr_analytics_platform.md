@@ -290,18 +290,6 @@ The platform provides a user-friendly interface for running analyses and offers 
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m3_2f -->
-## FASTR analytical pipeline
-
-The FASTR analysis follows a **sequential workflow**:
-
-1. **Assess data quality** — Identify issues with completeness, outliers, and consistency
-2. **Adjust for quality issues** — Apply corrections to improve data reliability
-3. **Analyze adjusted data** — Generate service utilization and coverage estimates
-
-![w:700](resources/diagrams/fastr_analytical_pipeline.svg)
-<!-- /SLIDE -->
-
 <!-- SLIDE:m3_2a -->
 ## Country Instance
 
@@ -376,37 +364,6 @@ A country may only need one project, or multiple projects can be used for:
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m3_2d -->
-## Practice: Logging Into the Platform
-
-<style scoped>
-table { border: none !important; background: transparent !important; width: 100% !important; }
-table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
-table img { max-height: 280px !important; width: auto !important; }
-</style>
-
-| | |
-|:---|:---|
-| ![Login page](resources/screenshots/01_login_page.png) | ![Sign up form](resources/screenshots/02_sign_up.png) |
-| **1.** Go to your country instance URL | **2.** Click Sign-in (or Sign up if you haven't created an account) |
-| **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
-
-**Your platform URL:** {{PLATFORM_URL}}
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_2 -->
-## Live Demo: Platform Access & Roles
-
-![demo h:40](../resources/icons/demo.svg) **In this demo, we will:**
-
-- Navigate to the FASTR platform
-- Explore user roles: Administrator, Editor, Viewer
-- Review user management and permissions
-- Understand the workflow for uploading data and making analytical decisions
-
-*Facilitator will demonstrate in the live platform*
-<!-- /SLIDE -->
-
 <!-- SLIDE:m3_2e -->
 ## Configuring the analysis platform
 
@@ -418,93 +375,6 @@ table img { max-height: 280px !important; width: auto !important; }
   - Indicator definitions
 
 - Note since this is an admin feature all participants will NOT be doing this step. Instead, you will select one person to have admin rights, and they will help us walk through these steps.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_3 -->
-## Activity: Setting Up Admin Areas
-
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will configure:**
-
-- Admin areas (regions, districts)
-- Facility structure
-- Indicator definitions
-
-*Participants will work directly in the platform*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_4 -->
-## Activity: Importing Data
-
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
-
-- Review data format requirements
-- Walk through the import process
-- Handle validation and error checking
-
-*Participants will import their country's data*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_5 -->
-## Activity: Installing and Running Modules
-
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
-
-- Review available analysis modules
-- Install required modules
-- Run initial analyses
-
-*Participants will configure and run modules on their data*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_6 -->
-## Activity: Creating a Project
-
-![hands-on h:40](../resources/icons/hands_on.svg) **In this hands-on session, we will:**
-
-- Set up a new project
-- Configure project settings
-- Select indicators and time periods
-- Apply best practices for project organization
-
-*Participants will create their first project*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_7 -->
-## Activity: Creating visualizations
-
-![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
-
-**I do:** Facilitator demonstrates creating a time series chart for ANC1
-
-**We do:** Together, we create a second visualization (bar chart comparing regions)
-
-**You do:** Create one visualization of your choice and export it for your report
-
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_8 -->
-## Activity: Creating reports
-
-![hands-on h:40](../resources/icons/hands_on.svg) **I do, we do, you do**
-
-**I do:** Facilitator demonstrates creating a report using the template
-
-**We do:** Together, we use the AI assistant to generate report text from our visualizations
-
-**You do:** Complete your draft report with your own content and export it
-
----
-
-## Using the AI assistant
-
-**To interpret a visualization:**
-> *"Describe what this chart shows and write 2-3 sentences summarizing the main findings for a Ministry of Health quarterly report."*
-
-**To analyze subnational variation:**
-> *"Compare the regions shown in this chart. Which provinces are performing well and which need attention? Suggest possible reasons for the differences."*
-
-The AI will analyze your chart and generate text you can edit for your report.
-
 <!-- /SLIDE -->
 
 ---

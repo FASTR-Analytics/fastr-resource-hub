@@ -428,16 +428,6 @@ In August 2023, volumes dropped significantly below expected levels (12% shortfa
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:mai_13 -->
-## Practice: Using the AI assistant
-
-![hands-on h:40](../resources/icons/hands_on.svg)
-
-*Content to be drafted*
-
-*Work in pairs. Compare what the AI produces with your own interpretation.*
-<!-- /SLIDE -->
-
 ---
 
 **Last updated**: 24-02-2026
