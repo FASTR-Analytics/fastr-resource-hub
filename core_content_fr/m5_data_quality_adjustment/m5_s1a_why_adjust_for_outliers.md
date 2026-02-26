@@ -4,15 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Why adjust for outliers?
+## Pourquoi ajuster les valeurs aberrantes ?
 
-![Why adjust for outliers — before and after](../../resources/diagrams/why_adjust_outliers.svg)
+![Pourquoi ajuster les valeurs aberrantes — avant et après](../../resources/diagrams_fr/why_adjust_outliers.svg)
 
 <!--
 PRESENTER NOTES:
-- Visual example showing the impact of outlier adjustment
-- Left panel shows raw data with a spike caused by a data entry error
-- Right panel shows the same data after outlier adjustment using rolling averages
-- Key point: the underlying trend is preserved while the artificial spike is removed
-- This makes downstream service utilization and coverage estimates more reliable
+- Exemple visuel montrant l'impact de l'ajustement des valeurs aberrantes
+- Le panneau de gauche montre les données brutes avec un pic causé par une erreur de saisie
+- Le panneau de droite montre les mêmes données après ajustement en utilisant des moyennes mobiles
+- Point clé : la tendance sous-jacente est préservée tandis que le pic artificiel est supprimé
+- Cela rend les estimations d'utilisation des services et de couverture plus fiables
 -->
