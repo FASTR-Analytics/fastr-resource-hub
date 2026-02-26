@@ -10,8 +10,8 @@ Les résultats des contrôles de valeurs aberrantes, de complétude et de cohér
 
 **Deux mesures complémentaires :**
 
-- **Score AQD global** — pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Binaire : un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
-- **Score AQD moyen** — moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
+- **Score AQD global :** Pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
+- **Score AQD moyen :** Moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
 
 **Un établissement-mois a une qualité de données adéquate lorsque :**
 

@@ -38,6 +38,8 @@ Une valeur aberrante est définie comme :
 
 Une valeur supérieure à **10 fois l'écart absolu médian (EAM)** par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, **OU** une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est **supérieure à 80 %**
 
+*L'EAM (Mean Absolute Deviation / MAD en anglais) mesure la dispersion d'un jeu de données en calculant la moyenne des écarts absolus par rapport à la médiane. Robuste face aux valeurs aberrantes, il exprime la variabilité dans les unités d'origine.*
+
 **ET** pour laquelle :
 
 - Le volume est **supérieur ou égal à la médiane**

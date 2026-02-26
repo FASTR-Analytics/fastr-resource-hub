@@ -12,6 +12,8 @@ Les valeurs aberrantes sont des valeurs anormalement **élevées** par rapport a
 
 **Comment les valeurs aberrantes sont identifiées :** Pour chaque établissement et indicateur, nous évaluons la variation au sein de l'établissement des rapports mensuels. Une valeur est signalée si elle s'écarte significativement du schéma typique de l'établissement (en utilisant des seuils statistiques basés sur l'écart absolu médian).
 
+*L'EAM (Mean Absolute Deviation / MAD en anglais) mesure la dispersion d'un jeu de données en calculant la moyenne des écarts absolus par rapport à la médiane. Robuste face aux valeurs aberrantes, il exprime la variabilité dans les unités d'origine.*
+
 <!--
 PRESENTER NOTES:
 - La présence de valeurs aberrantes examine si un point de données dans une série de valeurs est extrême (anormalement élevé ou bas) par rapport aux autres de la série
