@@ -99,10 +99,6 @@ slides:
   order: 4
   variant: full
   title: 'Understanding your audience: User mapping'
-- file: m7_4a_map_your_users.md
-  order: 4.01
-  variant: full
-  title: 'Activity: Map your users'
 - file: m7_4a_topic_4a.md
   order: 4.01
   variant: full
@@ -119,10 +115,6 @@ slides:
   order: 6
   variant: full
   title: Linking results to actions
-- file: m7_6a_link_results_to_actions.md
-  order: 6.01
-  variant: full
-  title: 'Activity: Link your results to actions'
 - file: m7_6a_topic_6a.md
   order: 6.01
   variant: full
@@ -135,10 +127,6 @@ slides:
   order: 7
   variant: full
   title: Building a roadmap for sustained use
-- file: m7_7a_country_action_planning.md
-  order: 7.01
-  variant: full
-  title: 'Activity: Country action planning'
 - file: m7_7a_topic_7a.md
   order: 7.01
   variant: full

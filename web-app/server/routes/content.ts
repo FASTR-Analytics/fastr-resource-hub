@@ -16,6 +16,16 @@ import {
 
 const router = Router()
 
+/** Deduplicate topic arrays by id, keeping first occurrence */
+function dedupeById<T extends { id: string }>(arr: T[]): T[] {
+  const seen = new Set<string>()
+  return arr.filter(item => {
+    if (seen.has(item.id)) return false
+    seen.add(item.id)
+    return true
+  })
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Server-side Marp render cache
 // ─────────────────────────────────────────────────────────────────────────────
@@ -286,9 +296,9 @@ router.get('/modules', (req, res) => {
         id: modId,
         name: regMod.name[language] || regMod.name.en || `Module ${modNum}`,
         folder: regMod.folder,
-        topics: allTopics,
-        fullTopics: fullTopics,
-        condensedTopics: condensedTopics,
+        topics: dedupeById(allTopics),
+        fullTopics: dedupeById(fullTopics),
+        condensedTopics: dedupeById(condensedTopics),
         totalSlides: allTopics.reduce((sum, t) => sum + t.slideCount, 0),
         fullSlides: fullTopics.reduce((sum, t) => sum + t.slideCount, 0),
         condensedSlides: condensedTopics.reduce((sum, t) => sum + t.slideCount, 0),

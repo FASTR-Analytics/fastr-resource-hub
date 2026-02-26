@@ -103,18 +103,10 @@ slides:
   order: 5
   variant: condensed
   title: 'Exemple de pays : Nigeria'
-- file: m6_s5_value_beyond_dhis2.md
-  order: 5
-  variant: condensed
-  title: Why FASTR? Value add beyond standard DHIS2 analysis
 - file: m6_s6_fastr_value_beyond_dhis2.md
   order: 6
   variant: condensed
   title: Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
-- file: m6_s6_topic_s6.md
-  order: 6
-  variant: condensed
-  title: Key takeaway
 - file: m6_s7_key_takeaway.md
   order: 7
   variant: condensed

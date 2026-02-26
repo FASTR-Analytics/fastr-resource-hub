@@ -103,10 +103,6 @@ slides:
   order: 4.01
   variant: full
   title: 'Activité : Cartographiez vos utilisateurs'
-- file: m7_4a_topic_4a.md
-  order: 4.01
-  variant: full
-  title: 'Activity: Map your users'
 - file: m7_5_topic_5.md
   order: 5
   variant: full
@@ -123,10 +119,6 @@ slides:
   order: 6.01
   variant: full
   title: 'Activité : Reliez vos résultats aux actions'
-- file: m7_6a_topic_6a.md
-  order: 6.01
-  variant: full
-  title: 'Activity: Link your results to actions'
 - file: m7_6b_three_spheres_of_influence.md
   order: 6.02
   variant: full
@@ -139,7 +131,3 @@ slides:
   order: 7.01
   variant: full
   title: 'Activité : Planification d''action pays'
-- file: m7_7a_topic_7a.md
-  order: 7.01
-  variant: full
-  title: 'Activity: Country action planning'
