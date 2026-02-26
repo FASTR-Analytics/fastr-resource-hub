@@ -215,7 +215,7 @@ router.get('/modules', (req, res) => {
 
         for (const file of files) {
           // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), or AI (mai_1_...) formats
-          let topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+)_/)
+          let topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+[a-z]?)_/)
           let topicId: string
           let isCondensed = false
 
@@ -357,8 +357,8 @@ router.get('/topic/:id', (req, res) => {
     let moduleFolder: string | undefined
     let filePrefix: string
 
-    // Check for AI module topic (mai_1, mai_2, etc.)
-    const aiMatch = topicId.match(/^mai_(\d+)$/)
+    // Check for AI module topic (mai_1, mai_2, mai_5a, etc.)
+    const aiMatch = topicId.match(/^mai_(\d+[a-z]?)$/)
     // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
     const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
 
