@@ -4,11 +4,10 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Exemples de cas d'utilisation FASTR plus larges
 
 Renforcer les données pour la prise de décision afin d'améliorer la SRMNIA-N
-
-<div style="font-size: 0.72em;">
 
 **Ghana :** Institutionnalisation de l'analyse des données de routine et renforcement des processus d'utilisation des données aux niveaux national et régional en appui à la réforme des SSP gratuits au Ghana ; apport de nouvelles analyses au processus d'évaluation holistique annuelle du système de santé du Ghana aux niveaux national et régional.
 
@@ -19,8 +18,6 @@ Renforcer les données pour la prise de décision afin d'améliorer la SRMNIA-N
 **Tadjikistan :** Suivi de la disponibilité des services dans le système de soins de santé primaires du Tadjikistan, avec des résultats alimentant le processus de revue annuelle conjointe du S&E du Tadjikistan et les réunions trimestrielles de revue de la performance pour le projet Healthy Nation cofinancé par la BM/GFF.
 
 **Somalie :** Exploiter FASTR pour revitaliser et renforcer le processus de revue trimestriel du S&E du Ministère de la Santé de Somalie via un GTT S&E multi-parties prenantes qui favorise l'alignement entre les partenaires. L'analyse du SNIS – et bientôt l'enquête sur les établissements de santé – permettent au MS de suivre la performance des SSP dans les zones difficiles d'accès et de suivre l'impact des chocs (conflits et sécheresse) sur la prestation de services.
-
-</div>
 
 <!--
 PRESENTER NOTES:

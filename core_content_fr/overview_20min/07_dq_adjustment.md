@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output compact -->
 ## Ajustement de la qualité des données
 
-<div style="display: flex; gap: 1.5em;">
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
 **Pourquoi ajuster ?** Les valeurs aberrantes et les lacunes de déclaration faussent l'analyse si elles ne sont pas corrigées.
 
@@ -25,7 +26,7 @@ paginate: true
 **Exclus :** Indicateurs de mortalité et indicateurs à faible volume (<100/mois)
 
 </div>
-<div style="flex: 1;">
+<div class="output-viz">
 
 ![Ajustement des valeurs aberrantes h:180](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 

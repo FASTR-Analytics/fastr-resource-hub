@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Coverage output: National trends
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Coverage national h:320](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
 
@@ -25,15 +26,16 @@ paginate: true
 
 ---
 
+<!-- _class: output -->
 ## Coverage output: Subnational comparison
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Coverage subnational h:320](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Coverage estimates by subnational area, enabling geographic comparison.
 

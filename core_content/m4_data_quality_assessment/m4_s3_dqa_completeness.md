@@ -14,7 +14,7 @@ Indicator completeness measures whether facilities that should be reporting data
 
 Higher and stable completeness improves data reliability.
 
-<div style="background: #E8F4F3; border-left: 4px solid #1A8A8A; padding: 0.5em 1em; font-size: 0.75em; margin-top: 0.5em;">
+<div class="highlight">
 
 **Notes on completeness:**
 
@@ -25,15 +25,16 @@ Higher and stable completeness improves data reliability.
 
 ---
 
+<!-- _class: output -->
 ## Indicator completeness output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Completeness output](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing completeness by indicator and region over time.
 

@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Internal consistency output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Consistency output](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing the % of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
 

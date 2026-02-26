@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Completeness adjustment output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Completeness adjustment](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing how much service volume changed after imputing missing data with rolling averages.
 

@@ -14,7 +14,7 @@ La complétude de l'indicateur mesure si les établissements qui devraient décl
 
 Une complétude plus élevée et stable améliore la fiabilité des données.
 
-<div style="background: #E8F4F3; border-left: 4px solid #1A8A8A; padding: 0.5em 1em; font-size: 0.75em; margin-top: 0.5em;">
+<div class="highlight">
 
 **Notes sur la complétude :**
 
@@ -25,15 +25,16 @@ Une complétude plus élevée et stable améliore la fiabilité des données.
 
 ---
 
+<!-- _class: output -->
 ## Sortie de la complétude de l'indicateur
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie complétude](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant la complétude par indicateur et région au fil du temps.
 

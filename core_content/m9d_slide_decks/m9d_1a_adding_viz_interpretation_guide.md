@@ -6,7 +6,7 @@ paginate: true
 
 ## Add a visualization and interpretation text to your content slide
 
-<div class="columns" style="gap: 2em;">
+<div class="columns">
 <div>
 
 **1. Add a visualization**

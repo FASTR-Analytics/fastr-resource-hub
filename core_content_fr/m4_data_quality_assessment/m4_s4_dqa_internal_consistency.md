@@ -4,9 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Cohérence interne
-
-<div style="font-size: 0.9em;">
 
 La cohérence interne vérifie si les indicateurs connexes maintiennent les relations logiques attendues. FASTR évalue les paires d'indicateurs suivantes pour mesurer la cohérence interne :
 
@@ -22,19 +21,18 @@ Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce
 
 FASTR évalue la cohérence au **niveau du district** plutôt qu'au niveau de l'établissement. C'est parce que les patients cherchent fréquemment des soins dans différents établissements au sein du même district - une femme peut avoir sa visite CPN1 au poste de santé mais se rendre à l'hôpital de district pour CPN4. L'évaluation au niveau du district tient compte de ce mouvement des patients.
 
-</div>
-
 ---
 
+<!-- _class: output -->
 ## Sortie de la cohérence interne
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie cohérence](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant le % de districts où les paires d'indicateurs respectent les relations attendues (ex. CPN1 ≥ CPN4).
 

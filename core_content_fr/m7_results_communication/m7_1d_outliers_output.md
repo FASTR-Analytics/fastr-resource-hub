@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Sortie de détection des valeurs aberrantes
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie valeurs aberrantes](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Carte thermique montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
 

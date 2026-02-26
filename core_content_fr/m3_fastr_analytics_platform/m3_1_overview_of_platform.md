@@ -12,7 +12,7 @@ Elle permet aux utilisateurs de télécharger et d'analyser des données provena
 
 La plateforme fournit une interface conviviale pour l'exécution des analyses et offre des options flexibles pour la visualisation et l'exportation des résultats.
 
-<div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+<div class="image-row">
 
 ![h:180](../../resources/screenshots/platform/platform_overview_1.png) ![h:180](../../resources/screenshots/platform/platform_overview_2.png) ![h:180](../../resources/screenshots/platform/platform_overview_3.png)
 

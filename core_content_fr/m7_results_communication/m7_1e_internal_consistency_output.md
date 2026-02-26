@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Sortie de cohérence interne
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie cohérence](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Carte thermique montrant le % de districts où les paires d'indicateurs respectent les relations attendues (par exemple, CPN1 ≥ CPN4).
 

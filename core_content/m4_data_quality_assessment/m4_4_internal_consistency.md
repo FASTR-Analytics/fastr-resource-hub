@@ -4,10 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<style scoped>
-table { font-size: 0.7em; }
-td, th { padding: 4px 8px !important; }
-</style>
+<!-- _class: dense-table -->
 
 ## Consistency between related indicators
 
@@ -45,10 +42,12 @@ PRESENTER NOTES:
 
 ---
 
+<!-- _class: two-panel -->
+
 ## Why assess consistency at district level?
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 Patients often access different services at different facilities within a district:
 
@@ -58,7 +57,7 @@ Patients often access different services at different facilities within a distri
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
 
 </div>
-<div style="flex: 2;">
+<div>
 
 ![District consistency](../../resources/diagrams/district_consistency.svg)
 

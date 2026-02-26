@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Indicator completeness
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## Indicator completeness
 
 **What it measures:** The extent to which facilities report data on selected core indicators
 
@@ -20,8 +20,6 @@ paginate: true
 - A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
 - A facility is expected to report if it has reported any volume for that indicator anytime within a year
 - Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
-
-</div>
 
 <!--
 PRESENTER NOTES:

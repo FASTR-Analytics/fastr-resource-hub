@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
 ## Interpreting FASTR module outputs
 
-<div style="display: flex; gap: 2em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 **Data quality assessment**
 Low DQA scores may reflect data entry practices rather than service quality. Focus on identifying the specific dimension (completeness, outliers, consistency) driving issues.
@@ -18,7 +19,7 @@ Low DQA scores may reflect data entry practices rather than service quality. Foc
 Distinguish seasonal patterns from real disruptions. Year-over-year comparisons help isolate programmatic changes from normal fluctuation.
 
 </div>
-<div style="flex: 1;">
+<div>
 
 **Coverage estimates**
 Coverage >100% signals reconciliation needed between HMIS and survey data. Consider whether the denominator source matches the service delivery context.

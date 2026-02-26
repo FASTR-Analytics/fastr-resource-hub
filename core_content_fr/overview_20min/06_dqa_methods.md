@@ -4,9 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Trois dimensions de la qualité des données + score global
-
-<div style="font-size: 0.85em;">
 
 | Dimension | Ce qu'elle mesure | Signal d'alerte |
 |-----------|-------------------|-----------------|
@@ -15,29 +14,10 @@ paginate: true
 | **Cohérence** | Relations logiques (ex : CPN1 ≥ CPN4) | Problèmes de système ou de processus |
 | **Score EQD global** | Combine les 3 dimensions en une seule métrique | Vue rapide de la qualité des données |
 
-</div>
+<div class="image-row">
 
-<div style="display: flex; gap: 0.4em; margin-top: 0.3em;">
-<div style="flex: 1;">
+![Complétude h:150](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png) ![Valeurs aberrantes h:150](../../resources/default_outputs/Default_1._Proportion_of_outliers.png) ![Cohérence h:150](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png) ![Score EQD h:150](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
-![Complétude h:150](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
-
-</div>
-<div style="flex: 1;">
-
-![Valeurs aberrantes h:150](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
-
-</div>
-<div style="flex: 1;">
-
-![Cohérence h:150](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
-
-</div>
-<div style="flex: 1;">
-
-![Score EQD h:150](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
-
-</div>
 </div>
 
 <!--

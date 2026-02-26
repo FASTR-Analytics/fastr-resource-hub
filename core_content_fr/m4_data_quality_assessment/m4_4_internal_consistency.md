@@ -4,10 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<style scoped>
-table { font-size: 0.7em; }
-td, th { padding: 4px 8px !important; }
-</style>
+<!-- _class: dense-table -->
 
 ## Cohérence entre les indicateurs connexes
 
@@ -45,10 +42,12 @@ PRESENTER NOTES:
 
 ---
 
+<!-- _class: two-panel -->
+
 ## Pourquoi évaluer la cohérence au niveau du district ?
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 Les patients ont souvent accès à différents services dans différents établissements au sein d'un même district :
 
@@ -58,7 +57,7 @@ Les patients ont souvent accès à différents services dans différents établi
 La vérification de la cohérence au niveau de l'établissement ne tiendrait pas compte de ces schémas. L'agrégation au niveau du district permet d'obtenir une image complète de l'utilisation des services dans une zone géographique.
 
 </div>
-<div style="flex: 2;">
+<div>
 
 ![Cohérence des districts](../../resources/diagrams/district_consistency.svg)
 

@@ -4,19 +4,20 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
 ## Analyse de l'utilisation des services
 
 Suivre les volumes de services dans le temps, détecter les perturbations, comparer entre les zones.
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 ![Volumes de services h:220](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 **Volumes dans le temps :** Rechercher les tendances et les changements soudains
 
 </div>
-<div style="flex: 1;">
+<div>
 
 ![Variation annuelle h:220](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 

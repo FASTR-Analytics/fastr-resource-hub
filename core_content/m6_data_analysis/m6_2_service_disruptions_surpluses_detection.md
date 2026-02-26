@@ -12,10 +12,11 @@ By focusing on meaningful changes and trends rather than raw numbers, this appro
 
 ---
 
+<!-- _class: output -->
 ## How disruption detection works
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
 The analysis proceeds through four steps. First, we **use past data to set expectations** by examining several years of historical data to understand the typical pattern for each month, accounting for regular seasonal changes.
 
@@ -26,7 +27,7 @@ Third, we **handle past disruptions** by adjusting historical data to remove pre
 Fourth, we **detect disruptions over time** by examining trends to identify clear shifts in health service use over several months, distinguishing between temporary fluctuations and sustained changes.
 
 </div>
-<div style="flex: 1;">
+<div class="output-viz">
 
 ![Disruption detection](../../resources/diagrams/disruption_chart.png)
 

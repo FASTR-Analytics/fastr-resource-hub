@@ -4,11 +4,10 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Module d'utilisation des services : Paramètres de configuration
 
 **Note :** Ces paramètres s'appliquent uniquement à l'analyse des perturbations. L'analyse de l'utilisation des services d'une année sur l'autre ne nécessite pas de configuration.
-
-<div style="font-size: 0.8em;">
 
 | Paramètre | Description |
 |-----------|-------------|
@@ -20,8 +19,6 @@ paginate: true
 | **Fenêtre de lissage (k)** | Taille de la fenêtre en mois pour le lissage par médiane mobile. Doit être impair. Par défaut 7 |
 | **Seuil de baisse** | Signaler si la valeur réelle tombe en dessous de cette proportion de la valeur attendue. Par défaut 0,9 (baisse >= 10%) ; utiliser 0,8 pour ne signaler que les baisses importantes |
 | **Seuil de différence en pourcentage** | Mettre en évidence les points où la valeur réelle diffère de la valeur attendue de plus de ce pourcentage. Par défaut 10 |
-
-</div>
 
 <!--
 PRESENTER NOTES:

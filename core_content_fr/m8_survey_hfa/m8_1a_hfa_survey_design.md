@@ -4,9 +4,10 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Health facility survey design
 
-<p style="font-size: 0.85em;">Analyzing primary health care facility performance and readiness; enables tracking over time.</p>
+Analyzing primary health care facility performance and readiness; enables tracking over time.
 
 | Component | Details |
 |-----------|---------|

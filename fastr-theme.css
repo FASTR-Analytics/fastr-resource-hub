@@ -677,3 +677,135 @@ section.centered h1 {
 section.centered img {
   margin-top: 1em;
 }
+
+/* ========================================
+   OUTPUT SLIDE - VISUALIZATION + INTERPRETATION
+   ======================================== */
+/* Use: <!-- _class: output --> */
+/* Layout: image left (60%), interpretation right (40%) */
+
+section.output {
+  padding: 40px 60px;
+}
+
+section.output h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.output-layout {
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+}
+
+.output-layout .output-viz {
+  flex: 1.2;
+}
+
+.output-layout .output-viz img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+}
+
+.output-layout .output-text {
+  flex: 1;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* ========================================
+   TWO-PANEL SLIDE - TEXT + TEXT SIDE BY SIDE
+   ======================================== */
+/* Use: <!-- _class: two-panel --> */
+/* For content like HMIS vs HFA, or comparison slides */
+
+section.two-panel {
+  padding: 40px 60px;
+}
+
+section.two-panel h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.panel-layout {
+  display: flex;
+  gap: 2em;
+  font-size: 0.88em;
+}
+
+.panel-layout > div {
+  flex: 1;
+}
+
+/* ========================================
+   DENSE TABLE SLIDE
+   ======================================== */
+/* Use: <!-- _class: dense-table --> */
+/* Readable minimum font size for data tables */
+
+section.dense-table {
+  font-size: 16px;
+  padding: 40px 50px;
+}
+
+section.dense-table h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+section.dense-table table {
+  font-size: 0.7em;
+  width: 100%;
+}
+
+section.dense-table th {
+  background: var(--fastr-deep-green);
+  color: white;
+  font-size: 0.95em;
+}
+
+section.dense-table td {
+  vertical-align: top;
+  padding: 0.4em 0.6em;
+  line-height: 1.3;
+}
+
+/* ========================================
+   SPACIOUS SLIDE - MAX 4-5 BULLETS
+   ======================================== */
+/* Use: <!-- _class: spacious --> */
+/* For concept slides with generous whitespace */
+
+section.spacious {
+  padding: 60px 100px;
+}
+
+section.spacious li {
+  margin-bottom: 0.8em;
+  line-height: 1.6;
+}
+
+section.spacious p {
+  line-height: 1.6;
+  margin: 0.6em 0;
+}
+
+/* ========================================
+   IMAGE ROW - HORIZONTAL IMAGE GALLERY
+   ======================================== */
+/* Use: <div class="image-row"> for centered horizontal images */
+
+.image-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.image-row img {
+  max-height: 100%;
+}

@@ -4,9 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Module de couverture : Paramètres de configuration
-
-<div style="font-size: 0.8em;">
 
 | Paramètre | Description |
 |-----------|-------------|
@@ -19,8 +18,6 @@ paginate: true
 | **Taux de mortalité postnéonatale** | Décès entre 28 jours et 1 an par naissance vivante |
 | **Taux de mortalité infantile** | Décès avant l'âge de 1 an par naissance vivante |
 | **Taux de mortalité des moins de 5 ans** | Décès avant l'âge de 5 ans par naissance vivante |
-
-</div>
 
 Les taux de mortalité spécifiques à un pays peuvent être obtenus à partir des rapports des EDS, de l'IGME des Nations unies ou des statistiques nationales de l'état civil.
 

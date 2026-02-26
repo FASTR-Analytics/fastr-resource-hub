@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 
 **Objectif de l'évaluation de la qualité des données**
 
@@ -25,4 +25,3 @@ paginate: true
 - L'AQD de DHIS2 inclut la ponctualité comme mesure de la qualité des données. FASTR n'inclut pas la ponctualité. La ponctualité est une considération importante pour renforcer le rapportage de routine mais elle est moins importante pour faire une analyse avec les données dont nous disposons aujourd'hui
 - L'AQD de DHIS2 inclut la complétude du rapportage (ex. un rapport a-t-il été soumis) et la complétude de l'indicateur (ex. une valeur a-t-elle été enregistrée pour un élément de données individuel) tandis que FASTR se concentre uniquement sur la complétude de l'indicateur
 
-</div>

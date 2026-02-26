@@ -6,7 +6,7 @@ paginate: true
 
 ## Ajouter une visualisation et un texte d'interprétation à votre diapositive
 
-<div class="columns" style="gap: 2em;">
+<div class="columns">
 <div>
 
 **1. Ajouter une visualisation**

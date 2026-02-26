@@ -29,15 +29,16 @@ PRESENTER NOTES:
 
 ---
 
+<!-- _class: output -->
 ## Outlier detection output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Outliers output](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing proportion of values flagged as outliers by indicator and region.
 

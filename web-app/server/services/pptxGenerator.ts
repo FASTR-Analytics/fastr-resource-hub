@@ -187,8 +187,8 @@ function parseMarkdown(content: string): ParsedSlide[] {
       slide.table = tableLines
     }
 
-    // Extract columns - match class="columns/split" OR style="display: flex"
-    let colsMatch = raw.match(/<div\s+class="(?:columns|split)[^"]*">\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
+    // Extract columns - match class="columns/split/output-layout/panel-layout" OR style="display: flex"
+    let colsMatch = raw.match(/<div\s+class="(?:columns|split|output-layout|panel-layout|columns-text-left|columns-image-right)[^"]*">\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
     if (!colsMatch) {
       // Also match flex layouts: <div style="display: flex..."><div>...</div><div>...</div></div>
       colsMatch = raw.match(/<div\s+style="[^"]*display:\s*flex[^"]*"[^>]*>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
@@ -1013,6 +1013,18 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
   const contentTop = 1.6
 
+  // Determine column widths based on layout class
+  // output-layout: 60/40 split (viz takes more space)
+  // columns-text-left: 60/40 split (text takes more space)
+  // columns-image-right: 40/60 split (image takes more space)
+  // default: 50/50 split
+  const isOutputLayout = data.raw.includes('class="output-layout"')
+  const isImageRight = data.raw.includes('class="columns-image-right"')
+  const isTextLeft = data.raw.includes('class="columns-text-left"')
+  const leftColWidth = isOutputLayout ? 6.8 : isTextLeft ? 6.8 : isImageRight ? 4.5 : 5.5
+  const rightColStart = LAYOUT.marginLeft + leftColWidth + 0.5
+  const rightColWidth = LAYOUT.contentWidth - leftColWidth - 0.5
+
   // Parse column content into text items (bullets, paragraphs, headers)
   interface ColumnContent {
     type: 'bullet' | 'paragraph' | 'header'
@@ -1136,16 +1148,16 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     if (imgMatch) {
       const imgPath = resolveImagePath(imgMatch[1].split(/\s/)[0])
       if (imgPath) {
-        const imgLayout = getImageLayout(imgPath, 5.5, 5, LAYOUT.marginLeft, contentTop)
+        const imgLayout = getImageLayout(imgPath, leftColWidth, 5, LAYOUT.marginLeft, contentTop)
         if (imgLayout) {
           slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
         } else {
-          slide.addImage({ path: imgPath, x: LAYOUT.marginLeft, y: contentTop, w: 5.5 })
+          slide.addImage({ path: imgPath, x: LAYOUT.marginLeft, y: contentTop, w: leftColWidth })
         }
       }
     }
   } else {
-    renderColumnContent(data.columns.left, LAYOUT.marginLeft, contentTop, 5.5)
+    renderColumnContent(data.columns.left, LAYOUT.marginLeft, contentTop, leftColWidth)
   }
 
   // Right column
@@ -1154,16 +1166,16 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     if (imgMatch) {
       const imgPath = resolveImagePath(imgMatch[1].split(/\s/)[0])
       if (imgPath) {
-        const imgLayout = getImageLayout(imgPath, 5.5, 5, 7, contentTop)
+        const imgLayout = getImageLayout(imgPath, rightColWidth, 5, rightColStart, contentTop)
         if (imgLayout) {
           slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
         } else {
-          slide.addImage({ path: imgPath, x: 7, y: contentTop, w: 5.5 })
+          slide.addImage({ path: imgPath, x: rightColStart, y: contentTop, w: rightColWidth })
         }
       }
     }
   } else {
-    renderColumnContent(data.columns.right, 7, contentTop, 5.5)
+    renderColumnContent(data.columns.right, rightColStart, contentTop, rightColWidth)
   }
 
   addFooterBar(slide)

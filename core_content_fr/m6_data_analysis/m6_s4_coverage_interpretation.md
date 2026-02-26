@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Résultats de couverture : Tendances nationales
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Couverture nationale h:320](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Graphique linéaire montrant la couverture au fil du temps. Noir = enquête, Gris = dérivé du SIGS, Rouge = projeté.
 
@@ -25,15 +26,16 @@ paginate: true
 
 ---
 
+<!-- _class: output -->
 ## Résultats de couverture : Comparaison infranationale
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Couverture infranationale h:320](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Estimations de couverture par zone infranationale, permettant une comparaison géographique.
 

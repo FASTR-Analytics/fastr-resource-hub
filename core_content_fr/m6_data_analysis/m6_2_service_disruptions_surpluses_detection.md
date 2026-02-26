@@ -12,10 +12,11 @@ En se concentrant sur les changements et tendances significatifs plutôt que sur
 
 ---
 
+<!-- _class: output -->
 ## Fonctionnement de la détection des perturbations
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
 L'analyse se déroule en quatre étapes. Premièrement, nous **utilisons les données passées pour établir des attentes** en examinant plusieurs années de données historiques pour comprendre le schéma typique de chaque mois, en tenant compte des changements saisonniers réguliers.
 
@@ -26,7 +27,7 @@ Troisièmement, nous **gérons les perturbations passées** en ajustant les donn
 Quatrièmement, nous **détectons les perturbations dans le temps** en examinant les tendances pour identifier les changements clairs dans l'utilisation des services de santé sur plusieurs mois, en distinguant les fluctuations temporaires des changements durables.
 
 </div>
-<div style="flex: 1;">
+<div class="output-viz">
 
 ![Détection des perturbations](../../resources/diagrams/disruption_chart.png)
 

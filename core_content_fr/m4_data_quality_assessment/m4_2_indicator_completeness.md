@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Complétude de l'indicateur
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## Complétude de l'indicateur
 
 **Ce qui est mesuré :** La mesure dans laquelle les établissements rapportent des données sur des indicateurs de base sélectionnés
 
@@ -20,8 +20,6 @@ paginate: true
 - Un établissement est considéré comme "déclarant" si une valeur non manquante et non nulle est enregistrée pour l'indicateur et le mois
 - Un établissement est censé déclarer s'il a déclaré un volume quelconque pour cet indicateur à tout moment au cours de l'année
 - Les établissements qui ne déclarent pas pendant six mois consécutifs ou plus au début ou à la fin de leur période de déclaration sont classés comme **inactifs** plutôt qu'incomplets. Cela permet de ne pas pénaliser les établissements qui n'ont pas encore commencé à déclarer ou qui ont définitivement cessé leurs activités
-
-</div>
 
 <!--
 PRESENTER NOTES:

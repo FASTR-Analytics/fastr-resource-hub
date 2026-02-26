@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
 ## Common interpretation pitfalls
 
-<div style="display: flex; gap: 2em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 **Aggregation masking**
 National averages can hide critical regional variation. Always examine subnational patterns.
@@ -18,7 +19,7 @@ National averages can hide critical regional variation. Always examine subnation
 High reporting completeness doesn't mean data captures all service delivery (private sector, informal care).
 
 </div>
-<div style="flex: 1;">
+<div>
 
 **Missing context**
 Patterns without context are meaningless. Consider seasonality, policy changes, and external shocks.

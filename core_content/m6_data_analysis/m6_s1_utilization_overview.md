@@ -8,13 +8,15 @@ paginate: true
 
 Service utilization analysis tracks how many health services are being delivered over time, identifying trends, anomalies, and comparisons across areas.
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<!-- _class: output -->
+
+<div class="output-layout">
+<div class="output-viz">
 
 ![Number of services reported h:300](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Line chart showing absolute service volumes over time by indicator.
 
@@ -27,15 +29,16 @@ Service utilization analysis tracks how many health services are being delivered
 
 ---
 
+<!-- _class: output -->
 ## Year-over-year change output
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Change in service volume h:300](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap comparing current period to same period last year, with changes >±10% flagged.
 

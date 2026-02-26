@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
 
 **Purpose of data quality assessment**
 
@@ -25,4 +25,3 @@ paginate: true
 - DHIS2 DQA includes timeliness as a measure of data quality. FASTR does not include timeliness. Timeliness is an important consideration for strengthening routine reporting but it less important to do an analysis with the data we have available today
 - DHIS2 DQA includes reporting completeness (e.g. was a report submitted) and indicator completeness (e.g. was a value recorded for an individual data element) while FASTR focuses only on indicator completeness
 
-</div>

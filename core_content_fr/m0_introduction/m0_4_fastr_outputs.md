@@ -4,10 +4,12 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
+
 ## Analytique FASTR : suite de produits et résultats
 
-<div style="display: flex; gap: 1.5em; font-size: 0.82em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 ### SNIS (Données de routine des services)
 
@@ -25,7 +27,7 @@ paginate: true
 - Visuels et narratifs personnalisés alignés sur les besoins du pays
 
 </div>
-<div style="flex: 1;">
+<div>
 
 ### EES (Évaluation des établissements de santé)
 

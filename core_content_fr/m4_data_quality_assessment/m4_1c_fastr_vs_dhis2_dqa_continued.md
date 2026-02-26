@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 
 **Sélection des indicateurs, mesures et seuils (suite)**
 
@@ -18,4 +18,3 @@ L'objectif de l'évaluation de la qualité des données guide la sélection des 
 
 - L'AQD de DHIS2 peut évaluer l'accord avec des sources de données externes telles que les enquêtes périodiques en population et la cohérence des données de population qui servent de dénominateur pour l'analyse de couverture. FASTR n'inclut pas cela dans l'évaluation de la qualité des données mais l'intègre plutôt dans notre analyse de couverture.
 
-</div>

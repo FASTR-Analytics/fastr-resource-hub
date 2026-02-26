@@ -4,9 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
 ## Utilisation des services et perturbations : comparaison avec DHIS2
-
-<div style="font-size: 0.92em;">
 
 Les tendances d'utilisation des services sont couramment produites dans DHIS2
 
@@ -24,5 +23,3 @@ Les tendances d'utilisation des services sont couramment produites dans DHIS2
 - Quantifier les changements avec une méthodologie robuste par rapport à la simple observation des fluctuations dans une ligne de tendance
 
 Cela améliore la capacité à interpréter et comparer les données d'utilisation dans les zones nationales et infranationales sans avoir besoin de dénominateurs de population.
-
-</div>

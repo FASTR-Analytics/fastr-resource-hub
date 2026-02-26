@@ -17,15 +17,16 @@ Au-delà des comparaisons d'une année sur l'autre, nous voulons savoir : **La p
 
 ---
 
+<!-- _class: output -->
 ## Résultat de perturbation de service
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Résultat de perturbation h:300](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Graphique comparant le volume de service réel au volume attendu prédit par le modèle, en tenant compte de la saisonnalité.
 

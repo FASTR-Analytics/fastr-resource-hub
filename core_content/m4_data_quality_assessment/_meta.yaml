@@ -59,14 +59,14 @@ slides:
   order: 3
   variant: condensed
   title: Indicator completeness
-- file: m4_s3a_dqa_outlier_illustration.md
+- file: m4_s3b_dqa_outliers.md
   order: 3.01
   variant: condensed
-  title: Why adjust for outliers?
-- file: m4_s3b_dqa_outliers.md
+  title: Outlier detection
+- file: m4_s3a_dqa_outlier_illustration.md
   order: 3.02
   variant: condensed
-  title: Outlier detection
+  title: Why adjust for outliers?
 - file: m4_s4_dqa_internal_consistency.md
   order: 4
   variant: condensed

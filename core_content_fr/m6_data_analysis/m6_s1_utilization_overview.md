@@ -8,13 +8,15 @@ paginate: true
 
 L'analyse de l'utilisation des services suit le nombre de services de santé fournis au fil du temps, identifiant les tendances, les anomalies et les comparaisons entre les zones.
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<!-- _class: output -->
+
+<div class="output-layout">
+<div class="output-viz">
 
 ![Nombre de services déclarés h:300](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Graphique linéaire montrant les volumes de services absolus au fil du temps par indicateur.
 
@@ -27,15 +29,16 @@ L'analyse de l'utilisation des services suit le nombre de services de santé fou
 
 ---
 
+<!-- _class: output -->
 ## Résultat de la variation d'une année sur l'autre
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Changement du volume de service h:300](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Carte thermique comparant la période actuelle à la même période l'année dernière, avec les changements > ±10% signalés.
 

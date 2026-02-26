@@ -4,17 +4,18 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
 ## Résultats de couverture
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 ![Couverture nationale h:280](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 **Tendances nationales :** Noir = enquête, Gris = dérivé du SNIS, Rouge = projeté
 
 </div>
-<div style="flex: 1;">
+<div>
 
 ![Couverture infranationale h:280](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 

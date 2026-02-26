@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Sortie du score EQD global
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie score EQD](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Carte thermique montrant le score EQD global par indicateur et par région, avec un code couleur allant du rouge (faible) au vert (bon).
 

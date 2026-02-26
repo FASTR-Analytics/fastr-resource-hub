@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel compact -->
 ## En résumé, FASTR peut ...
 
-<div style="display: flex; gap: 1.5em; font-size: 0.82em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 ### Analyser les tendances d'utilisation et de couverture des services
 
@@ -18,7 +19,7 @@ paginate: true
 - Quelles régions/districts ont connu une augmentation des accouchements assistés ? Une diminution ?
 
 </div>
-<div style="flex: 1;">
+<div>
 
 ### Évaluer la préparation des CSP
 

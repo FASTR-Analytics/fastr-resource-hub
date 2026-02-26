@@ -4,10 +4,12 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: two-panel -->
+
 ## FASTR analytics: suite of outputs and products
 
-<div style="display: flex; gap: 1.5em; font-size: 0.82em;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 ### HMIS (Routine service data)
 
@@ -25,7 +27,7 @@ paginate: true
 - Customized visuals and narratives aligned with country needs
 
 </div>
-<div style="flex: 1;">
+<div>
 
 ### HFA (Health Facility Assessment)
 

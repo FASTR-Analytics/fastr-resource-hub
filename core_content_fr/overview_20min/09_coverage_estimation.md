@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output compact -->
 ## Estimation de la couverture
 
-<div style="display: flex; gap: 1.5em;">
-<div style="flex: 1.2; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
 **Le défi :** Le SNIS a les numérateurs (services) mais pas de dénominateurs fiables (population cible). Les populations de zone de desserte standard sont souvent inexactes. Les enquêtes fournissent une couverture fiable mais seulement tous les 3-5 ans.
 
@@ -19,7 +20,7 @@ paginate: true
 3. **Projeter en avant** en s'ancrant sur la dernière enquête et en appliquant les tendances SNIS
 
 </div>
-<div style="flex: 0.8; text-align: center;">
+<div class="output-viz">
 
 **Couverture** = services délivrés ÷ population cible
 

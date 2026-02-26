@@ -15,6 +15,10 @@ slides:
   order: 1.03
   variant: full
   title: Interpreting FASTR module outputs
+- file: m7_1d2_completeness_output.md
+  order: 1.035
+  variant: full
+  title: Indicator completeness output
 - file: m7_1d_outliers_output.md
   order: 1.04
   variant: full

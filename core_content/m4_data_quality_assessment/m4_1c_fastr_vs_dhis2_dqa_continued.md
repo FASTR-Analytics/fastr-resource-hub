@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
 
 **Selection of indicators, measures, and thresholds continued**
 
@@ -18,4 +18,3 @@ The purpose of the data quality assessment guides the selection of indicators, m
 
 - DHIS2 DQA may assess agreement with external data sources such as periodic population-based surveys and consistency of population data which serves as the denominator for coverage analysis. FASTR does not include this in the data quality assessment but instead incorporates this in our coverage analysis.
 
-</div>

@@ -4,15 +4,16 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: output -->
 ## Disruption output: Actual vs expected (subnational)
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Subnational comparison reveals geographic variation in disruptions.
 
