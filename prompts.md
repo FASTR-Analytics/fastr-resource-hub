@@ -349,7 +349,7 @@ REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
 3. Keep slide text concise — target 50-100 words per slide (max 180 words), use bullet points where appropriate
-4. Layout: interpretation on left, visualization on right
+4. Layout: use a two-column layout on every slide that has both text and a visualization — interpretation/key messages on the left, chart/visualization on the right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
 7. Always refer to slides by their number (not their ID)
@@ -471,7 +471,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Layout: interpretation on left, visualization on right
+3. Layout: use a two-column layout on every slide that has both text and a visualization — interpretation/key messages on the left, chart/visualization on the right
 4. Use consistent terminology throughout
 5. Always refer to slides by their number (not their ID)
 
@@ -553,7 +553,7 @@ ACCURACY REQUIREMENTS:
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language
-2. Layout: interpretation on left, visualization on right
+2. Layout: use a two-column layout on every slide that has both text and a visualization — interpretation/key messages on the left, chart/visualization on the right
 3. Use consistent terminology throughout
 4. Always refer to slides by their number (not their ID)
 
@@ -773,7 +773,7 @@ REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
 3. Keep slide text concise — target 50-100 words per slide (max 180 words), use bullet points where appropriate
-4. Layout: interpretation on left, visualization on right
+4. Layout: use a two-column layout on every slide that has both text and a visualization — interpretation/key messages on the left, chart/visualization on the right
 5. Use consistent terminology throughout (do not switch between synonyms)
 6. In all slide text (titles, interpretations, headlines), refer to indicators by their human-readable label ONLY (e.g., "Pneumonia cases identified", "ANC first visit"). NEVER include indicator_common_id codes in slide text — not on their own, not in parentheses, not as "code (Label)". Write "Pneumonia cases identified", NOT "pneumonia_cases_identified (Pneumonia cases identified)". Codes are only for technical parameters (filterOverrides, selectedReplicant)
 7. Always refer to slides by their number (not their ID)

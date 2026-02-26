@@ -351,7 +351,7 @@ NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
 3. Garder le texte des diapositives concis — cible 50-100 mots par diapositive (max 180 mots), utiliser des listes à puces si approprié
-4. Mise en page : interprétation à gauche, visualisation à droite
+4. Mise en page : utiliser une disposition en deux colonnes pour chaque diapositive contenant du texte et une visualisation — interprétation/messages clés à gauche, graphique/visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
 7. Toujours désigner les diapositives par leur numéro (pas par leur ID)
@@ -473,7 +473,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Mise en page : interprétation à gauche, visualisation à droite
+3. Mise en page : utiliser une disposition en deux colonnes pour chaque diapositive contenant du texte et une visualisation — interprétation/messages clés à gauche, graphique/visualisation à droite
 4. Utiliser une terminologie cohérente tout au long du rapport
 5. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
@@ -555,7 +555,7 @@ EXIGENCES DE PRÉCISION :
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique
-2. Mise en page : interprétation à gauche, visualisation à droite
+2. Mise en page : utiliser une disposition en deux colonnes pour chaque diapositive contenant du texte et une visualisation — interprétation/messages clés à gauche, graphique/visualisation à droite
 3. Utiliser une terminologie cohérente tout au long du rapport
 4. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
@@ -775,7 +775,7 @@ NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
 3. Garder le texte des diapositives concis — cible 50-100 mots par diapositive (max 180 mots), utiliser des listes à puces si approprié
-4. Mise en page : interprétation à gauche, visualisation à droite
+4. Mise en page : utiliser une disposition en deux colonnes pour chaque diapositive contenant du texte et une visualisation — interprétation/messages clés à gauche, graphique/visualisation à droite
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
 7. Toujours désigner les diapositives par leur numéro (pas par leur ID)
