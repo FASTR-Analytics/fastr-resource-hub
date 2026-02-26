@@ -4,27 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## L'IA est un accélérateur, pas un décideur
+## AI is an accelerator, not a decision maker
 
-<div class="columns">
-<div>
+![AI accelerator diagram](../../resources/diagrams/ai_accelerator.svg)
 
-![Diagramme accélérateur IA](../../resources/diagrams_fr/ai_accelerator.svg)
+All calculations use proven statistical formulas — not AI. The AI interprets and explains. **You decide and act.**
 
-</div>
-<div>
-
-**Vous gardez le contrôle de :**
-
-- Jugement — décider ce qui compte
-- Interprétation — comprendre le contexte
-- Action — prendre des décisions
-
-**Les chiffres proviennent de méthodes validées**
-
-Tous les calculs (détection des valeurs aberrantes, estimations de couverture, scores de qualité) utilisent des formules statistiques éprouvées — pas l'IA.
-
-L'IA interprète et explique. Vous décidez et agissez.
-
-</div>
-</div>
+<!--
+PRESENTER NOTES:
+- The key message: AI supports, humans decide
+- The diagram shows the clear separation — human at top (DECIDES), AI below (SUPPORTS)
+- Three AI capabilities: Interpretation (explains patterns), Querying (finds information), Outputs (generates drafts)
+- All numbers come from validated statistical methods, not AI generation
+- AI helps you work faster, but judgment, accountability, and action remain with you
+-->
