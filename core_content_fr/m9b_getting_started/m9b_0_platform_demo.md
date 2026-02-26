@@ -6,4 +6,4 @@ paginate: true
 
 # Démo – Plateforme d'analyse FASTR
 
-![w:120](../../resources/icons/demo.svg)
+*Le facilitateur fera une démonstration de la plateforme FASTR*

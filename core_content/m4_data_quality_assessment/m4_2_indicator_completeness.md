@@ -21,6 +21,10 @@ paginate: true
 - A facility is expected to report if it has reported any volume for that indicator anytime within a year
 - Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as **inactive** rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or have permanently ceased operations
 
+**Notes:**
+- A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery — some services may not be delivered in facilities, or some facilities may not report
+- For countries where DHIS2 does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities
+
 <!--
 PRESENTER NOTES:
 - Indicator completeness measures the extent to which facilities that are supposed to report data on the selected core indicators are in fact doing so
@@ -29,4 +33,6 @@ PRESENTER NOTES:
 - For the FASTR analysis, completeness is defined as: The percentage of reporting facilities each month out of the total number of facilities expected to report
 - A facility is deemed to be "reporting" if there is a non-missing, non-zero value recorded for the indicator and month
 - A facility is expected to report if it has reported any volume for each indicator anytime within a year
+- A high level of completeness does not necessarily indicate HMIS is representative of all service delivery
+- For DHIS2 systems that don't store 0's, completeness may be underestimated for low-volume facilities
 -->

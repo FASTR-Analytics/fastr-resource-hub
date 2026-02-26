@@ -6,12 +6,15 @@ paginate: true
 
 ## Score résumé de la qualité des données
 
-Une mesure composite de la qualité des données donne une vue d'ensemble de la manière dont un ensemble de données répond aux normes de qualité.
+Les résultats des contrôles de valeurs aberrantes, de complétude et de cohérence sont combinés en un score AQD global pour un ensemble d'indicateurs clés (Penta1, CPN1, OPD).
 
-En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Cela permet aux systèmes de santé d'évaluer rapidement la fiabilité des données, facilitant l'identification des tendances et des problèmes en un coup d'œil.
+**Deux mesures complémentaires :**
 
-**Définition d'une qualité de données adéquate :**
+- **Score AQD global** — pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Binaire : un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
+- **Score AQD moyen** — moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
 
-- Pas de données d'indicateur manquantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Pas de valeurs aberrantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4
+**Un établissement-mois a une qualité de données adéquate lorsque :**
+
+- Toutes les données des indicateurs clés sont rapportées (complets)
+- Aucune valeur n'est signalée comme aberrante
+- Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)

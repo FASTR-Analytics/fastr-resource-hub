@@ -6,21 +6,25 @@ paginate: true
 
 ## Score résumé de la qualité des données
 
-Une mesure composite de la qualité des données donne une vue d'ensemble de la manière dont un ensemble de données répond aux normes de qualité.
+Les résultats des contrôles de valeurs aberrantes, de complétude et de cohérence sont combinés en un score AQD global pour un ensemble d'indicateurs clés (Penta1, CPN1, OPD).
 
-En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Cela permet aux systèmes de santé d'évaluer rapidement la fiabilité des données, facilitant l'identification des tendances et des problèmes en un coup d'œil.
+**Deux mesures complémentaires :**
 
-**Définition d'une qualité de données adéquate :**
+- **Score AQD global** — pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Binaire : un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
+- **Score AQD moyen** — moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
 
-- Pas de données d'indicateur manquantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Pas de valeurs aberrantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4
+**Un établissement-mois a une qualité de données adéquate lorsque :**
+
+- Toutes les données des indicateurs clés sont rapportées (complets)
+- Aucune valeur n'est signalée comme aberrante
+- Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)
 
 <!--
 PRESENTER NOTES:
-- Le score AQD combine toutes les dimensions en un seul score résumé
-- 100% = complet + pas de valeurs aberrantes + cohérent - l'objectif pour des données de qualité
-- Utilisez la heatmap pour identifier les domaines prioritaires pour l'amélioration de la qualité des données
+- Le score AQD global est strict : tout ou rien. Un seul contrôle échoué = 0%
+- Le score AQD moyen est plus nuancé : montre à quel point les établissements sont proches de répondre à tous les critères
+- Exemple : si le score complétude-valeurs aberrantes est 1.0 mais la cohérence est 0.5, AQD moyen = 0.75 (75%)
+- Utilisez le score global pour identifier les zones problématiques ; utilisez le score moyen pour suivre les améliorations
 - Cela complète le module AQD - ensuite nous verrons comment ajuster pour ces problèmes
 -->
 
@@ -37,11 +41,11 @@ PRESENTER NOTES:
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Heatmap montrant le score AQD global par indicateur et région, codé par couleur du rouge (mauvais) au vert (bon).
+**Ce que vous voyez :** Heatmap montrant le pourcentage d'établissements-mois qui passent **tous** les contrôles de qualité, par indicateur et région.
 
-**Formule :** % AQD = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (total des valeurs) × 100
+**Score :** Binaire — chaque établissement-mois est soit adéquat (passe tous les contrôles) soit non. Le pourcentage reflète la part qui réussit.
 
-**Interprétation :** 100% = passe tous les contrôles. Utilisez ceci pour prioriser les efforts d'amélioration de la qualité des données par région et indicateur.
+**Interprétation :** Une mesure stricte. Des scores bas indiquent que de nombreux établissements-mois échouent à au moins un contrôle. Utilisez ceci pour identifier les régions et indicateurs nécessitant une amélioration.
 
 </div>
 </div>
@@ -59,11 +63,11 @@ PRESENTER NOTES:
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Heatmap montrant le score AQD moyen des établissements par indicateur et région.
+**Ce que vous voyez :** Heatmap montrant le score AQD moyen des établissements-mois, par indicateur et région.
 
-**Formule :** AQD moyen = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (total des valeurs) × 100
+**Score :** Moyenne du score complétude-valeurs aberrantes et du score de cohérence. Varie de 0% à 100%.
 
-**Interprétation :** Montre à quel point les établissements sont proches de répondre à tous les critères de qualité. Un score de 100% signifie que les données passent tous les contrôles AQD.
+**Interprétation :** Une mesure plus nuancée que le score global. Capture les progrès partiels — une région peut obtenir 75% même si tous les contrôles ne sont pas réussis. Utilisez ceci pour suivre les améliorations au fil du temps.
 
 </div>
 </div>

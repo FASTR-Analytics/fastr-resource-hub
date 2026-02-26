@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Review checklist: Verifying the AI output
 
 After the AI generates your report, review each section as a team.

@@ -18,4 +18,4 @@ Le Data Downloader est une application de bureau permettant d'extraire des donn�
 
 https://github.com/worldbank/DHIS2-Downloader/releases/
 
-![demo h:35](../../resources/icons/demo.svg) *Le facilitateur fera une démonstration du Data Downloader*
+*Le facilitateur fera une démonstration du Data Downloader*

@@ -21,6 +21,8 @@ You can request one or both. The AI will append these sections to your report.
 
 ---
 
+<!-- _class: compact -->
+
 ## Review checklist: Prompt 2 & Prompt 3
 
 **Prompt 2: Regional Analysis**

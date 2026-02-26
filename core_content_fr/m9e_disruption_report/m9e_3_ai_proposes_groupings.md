@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## L'IA va proposer des regroupements d'indicateurs
 
 L'IA lit les données de votre pays et découvre quels indicateurs de santé sont disponibles. Elle les regroupe ensuite en catégories et vous demande de vérifier.

@@ -27,10 +27,6 @@ slides:
   order: 2
   variant: full
   title: Indicator completeness
-- file: m4_2a_notes_on_completeness.md
-  order: 2.01
-  variant: full
-  title: Notes on completeness
 - file: m4_3_outliers.md
   order: 3
   variant: full

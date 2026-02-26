@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Liste de vérification : Vérifier le résultat de l'IA
 
 Après que l'IA a généré votre rapport, passez en revue chaque section en équipe.

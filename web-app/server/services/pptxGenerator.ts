@@ -37,8 +37,8 @@ const COLORS = {
 const FONTS = {
   family: 'Calibri',
   titleFamily: 'Poppins',  // Titles use Poppins Bold
-  h1Size: 36,              // Updated to 36
-  h2Size: 36,              // Updated to 36 for slide titles
+  h1Size: 36,
+  h2Size: 32,
   h3Size: 22,
   bodySize: 18,
   tableSize: 14,
@@ -1011,7 +1011,63 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
   if (!data.columns) return
 
-  const contentTop = 1.6
+  let contentTop = 1.6
+
+  // --- Render content BEFORE the columns div (intro text) ---
+  // Find text in raw markdown that appears before the columns div
+  const colDivPattern = /<div\s+class="(?:columns|split|output-layout|panel-layout|columns-text-left|columns-image-right)/
+  const colDivIndex = data.raw.search(colDivPattern)
+  if (colDivIndex > 0) {
+    // Extract text between h2 heading and columns div
+    const beforeCols = data.raw.substring(0, colDivIndex)
+    const introLines: string[] = []
+    for (const line of beforeCols.split('\n')) {
+      const trimmed = line.trim()
+      if (!trimmed) continue
+      if (trimmed.startsWith('#')) continue
+      if (trimmed.startsWith('---')) continue
+      if (trimmed.startsWith('<!--')) continue
+      if (trimmed.startsWith('<')) continue
+      if (trimmed.startsWith('marp:') || trimmed.startsWith('theme:') || trimmed.startsWith('paginate:')) continue
+      introLines.push(trimmed)
+    }
+    if (introLines.length > 0) {
+      const introText = introLines.map(l => cleanMarkdownText(l)).join(' ')
+      const runs = parseInlineFormatting(introText, {
+        fontSize: FONTS.bodySize,
+        fontFace: FONTS.family,
+        color: COLORS.textDark,
+      })
+      slide.addText(runs, {
+        x: LAYOUT.marginLeft, y: contentTop,
+        w: LAYOUT.contentWidth, h: 0.6,
+        valign: 'top',
+        paraSpaceAfter: 6,
+      })
+      contentTop += 0.65
+    }
+  }
+
+  // --- Render content AFTER the columns div (quotes, notes) ---
+  // Find text after the last </div> that closes the columns
+  const colsEndPattern = /<\/div>\s*<\/div>\s*(?:<\/div>)?\s*$/m
+  const afterColsMatch = data.raw.match(/<\/div>\s*<\/div>\s*(?:<\/div>)?\s*\n+([\s\S]+?)(?:<!--|$)/)
+  let afterColsText = ''
+  if (afterColsMatch) {
+    const afterLines: string[] = []
+    for (const line of afterColsMatch[1].split('\n')) {
+      let trimmed = line.trim()
+      if (!trimmed) continue
+      if (trimmed.startsWith('<')) continue
+      // Strip blockquote prefix
+      trimmed = trimmed.replace(/^>\s*/, '')
+      if (!trimmed) continue
+      afterLines.push(trimmed)
+    }
+    if (afterLines.length > 0) {
+      afterColsText = afterLines.map(l => cleanMarkdownText(l)).join('\n')
+    }
+  }
 
   // Determine column widths based on layout class
   // output-layout: 60/40 split (viz takes more space)
@@ -1025,18 +1081,21 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const rightColStart = LAYOUT.marginLeft + leftColWidth + 0.5
   const rightColWidth = LAYOUT.contentWidth - leftColWidth - 0.5
 
-  // Parse column content into text items (bullets, paragraphs, headers)
+  // Parse column content into text items (bullets, paragraphs, headers, table rows)
   interface ColumnContent {
-    type: 'bullet' | 'paragraph' | 'header'
+    type: 'bullet' | 'paragraph' | 'header' | 'table_row'
     text: string
     level?: number
+    cells?: string[]
+    isHeader?: boolean
   }
   function parseColumnContent(content: string): ColumnContent[] {
     const items: ColumnContent[] = []
     const lines = content.split('\n')
+    let tableRowIndex = 0
     for (const line of lines) {
       const trimmed = line.trim()
-      if (!trimmed) continue
+      if (!trimmed) { tableRowIndex = 0; continue }
 
       // Skip HTML tags like <div>, </div>, <br/> etc
       if (/^<\/?[\w]+[^>]*>$/.test(trimmed)) continue
@@ -1045,6 +1104,18 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       // Skip images
       if (trimmed.startsWith('![')) continue
       if (trimmed.startsWith('<img')) continue
+
+      // Table rows (pipe-delimited)
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        // Skip separator line (|---|---|)
+        if (/^\|[\s\-:|]+\|$/.test(trimmed)) { tableRowIndex++; continue }
+        const cells = trimmed.replace(/^\||\|$/g, '').split('|').map(c => cleanMarkdownText(c.trim()))
+        items.push({ type: 'table_row', text: '', cells, isHeader: tableRowIndex === 0 })
+        tableRowIndex++
+        continue
+      }
+
+      tableRowIndex = 0
 
       // Check for headers (### Header)
       const headerMatch = trimmed.match(/^(#{1,6})\s+(.+)$/)
@@ -1091,13 +1162,51 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const leftHasImage = /!\[/.test(data.columns.left) || /<img/.test(data.columns.left)
   const rightHasImage = /!\[/.test(data.columns.right) || /<img/.test(data.columns.right)
 
-  // Helper to render column content (bullets, paragraphs, headers)
+  // Helper to render column content (bullets, paragraphs, headers, tables)
   function renderColumnContent(columnContent: string, x: number, y: number, w: number): void {
     const items = parseColumnContent(columnContent)
     if (items.length === 0) return
 
+    // Separate table rows from other content
+    const tableRows: ColumnContent[] = []
     const textItems: PptxGenJS.TextProps[] = []
+    let currentY = y
+
     for (const item of items) {
+      if (item.type === 'table_row') {
+        tableRows.push(item)
+        continue
+      }
+
+      // If we accumulated table rows, render the table first
+      if (tableRows.length > 0) {
+        const tableData = tableRows.map(row => {
+          return (row.cells || []).map(cell => ({
+            text: cell,
+            options: {
+              fontSize: FONTS.tableSize,
+              fontFace: FONTS.family,
+              color: row.isHeader ? COLORS.white : COLORS.textDark,
+              bold: row.isHeader,
+            } as PptxGenJS.TextPropsOptions,
+          }))
+        })
+        if (textItems.length > 0) {
+          slide.addText(textItems.splice(0), { x, y: currentY, w, h: 1.5, valign: 'top' })
+          currentY += 1.5
+        }
+        slide.addTable(tableData, {
+          x, y: currentY, w,
+          fontSize: FONTS.tableSize,
+          border: { type: 'solid', pt: 0.5, color: 'CCCCCC' },
+          colW: Array(tableData[0]?.length || 2).fill(w / (tableData[0]?.length || 2)),
+          rowH: 0.35,
+          autoPage: false,
+        })
+        currentY += (tableRows.length + 0.5) * 0.35
+        tableRows.length = 0
+      }
+
       if (item.type === 'header') {
         textItems.push({
           text: item.text,
@@ -1134,9 +1243,38 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       }
     }
 
+    // Render any remaining table rows
+    if (tableRows.length > 0) {
+      if (textItems.length > 0) {
+        slide.addText(textItems.splice(0), { x, y: currentY, w, h: 1.5, valign: 'top' })
+        currentY += 1.5
+      }
+      const tableData = tableRows.map(row => {
+        return (row.cells || []).map(cell => ({
+          text: cell,
+          options: {
+            fontSize: FONTS.tableSize,
+            fontFace: FONTS.family,
+            color: row.isHeader ? COLORS.white : COLORS.textDark,
+            bold: row.isHeader,
+          } as PptxGenJS.TextPropsOptions,
+        }))
+      })
+      slide.addTable(tableData, {
+        x, y: currentY, w,
+        fontSize: FONTS.tableSize,
+        border: { type: 'solid', pt: 0.5, color: 'CCCCCC' },
+        colW: Array(tableData[0]?.length || 2).fill(w / (tableData[0]?.length || 2)),
+        rowH: 0.35,
+        autoPage: false,
+      })
+      currentY += (tableRows.length + 0.5) * 0.35
+    }
+
+    // Render remaining text items
     if (textItems.length > 0) {
       slide.addText(textItems, {
-        x, y, w, h: 5,
+        x, y: currentY, w, h: 5,
         valign: 'top',
       })
     }
@@ -1176,6 +1314,24 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     }
   } else {
     renderColumnContent(data.columns.right, rightColStart, contentTop, rightColWidth)
+  }
+
+  // --- Render after-columns content (quotes, notes, footnotes) ---
+  if (afterColsText) {
+    const isQuote = data.raw.includes('> "') || data.raw.includes('> *"') || data.raw.includes('> —')
+    const runs = parseInlineFormatting(afterColsText, {
+      fontSize: isQuote ? FONTS.smallSize + 2 : FONTS.bodySize - 2,
+      fontFace: FONTS.family,
+      color: isQuote ? COLORS.darkGreen : COLORS.textDark,
+      italic: isQuote,
+    })
+    slide.addText(runs, {
+      x: LAYOUT.marginLeft,
+      y: 6.0,
+      w: LAYOUT.contentWidth,
+      h: 1.2,
+      valign: 'top',
+    })
   }
 
   addFooterBar(slide)

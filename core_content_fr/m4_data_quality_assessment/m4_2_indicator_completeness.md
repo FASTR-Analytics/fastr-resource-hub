@@ -21,6 +21,10 @@ paginate: true
 - Un établissement est censé déclarer s'il a déclaré un volume quelconque pour cet indicateur à tout moment au cours de l'année
 - Les établissements qui ne déclarent pas pendant six mois consécutifs ou plus au début ou à la fin de leur période de déclaration sont classés comme **inactifs** plutôt qu'incomplets. Cela permet de ne pas pénaliser les établissements qui n'ont pas encore commencé à déclarer ou qui ont définitivement cessé leurs activités
 
+**Notes :**
+- Un niveau élevé de complétude n'indique pas nécessairement que le SIGS est représentatif de l'ensemble de la prestation de services — certains services peuvent ne pas être fournis dans les établissements, ou certains établissements peuvent ne pas déclarer
+- Pour les pays où DHIS2 ne stocke pas les 0, la complétude des indicateurs peut être sous-estimée s'il y a beaucoup d'établissements à faible volume
+
 <!--
 PRESENTER NOTES:
 - La complétude de l'indicateur mesure dans quelle mesure les établissements censés déclarer des données sur les indicateurs de base sélectionnés le font effectivement

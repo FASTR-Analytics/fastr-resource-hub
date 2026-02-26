@@ -6,21 +6,25 @@ paginate: true
 
 ## Data quality summary score
 
-A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
+Results from the outlier, completeness, and consistency checks are combined into an overall DQA score for a set of core indicators (Penta1, ANC1, OPD).
 
-By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
+**Two complementary measures:**
 
-**Definition of adequate data quality:**
+- **Overall DQA score** — percentage of facility-months passing **all** quality checks. Binary: a facility-month scores 100% only if all core indicators are complete, free of outliers, and consistent
+- **Mean DQA score** — average of the completeness-outlier score and the consistency score. Captures partial progress even when not all checks pass
 
-- No missing indicator data for OPD, Penta1, and ANC1, where available
-- No outliers for OPD, Penta1, and ANC1, where available
-- Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+**A facility-month has adequate data quality when:**
+
+- All core indicator data are reported (complete)
+- No values are flagged as outliers
+- Consistency benchmarks are met for available indicator pairs (e.g., Penta1/Penta3, ANC1/ANC4)
 
 <!--
 PRESENTER NOTES:
-- DQA score combines all dimensions into one summary score
-- 100% = complete + no outliers + consistent - the goal for quality data
-- Use the heatmap to identify priority areas for data quality improvement
+- The overall DQA score is strict: all-or-nothing. A single failed check = 0%
+- The mean DQA score is more nuanced: shows how close facilities are to meeting all criteria
+- Example: if completeness-outlier score is 1.0 but consistency is 0.5, mean DQA = 0.75 (75%)
+- Use overall score to identify problem areas; use mean score to track improvement over time
 - This completes the DQA module - next we'll look at how to adjust for these issues
 -->
 
@@ -37,11 +41,11 @@ PRESENTER NOTES:
 </div>
 <div class="output-text">
 
-**What you see:** Heatmap showing overall DQA score by indicator and region, color-coded from red (poor) to green (good).
+**What you see:** Heatmap showing the percentage of facility-months that pass **all** quality checks, by indicator and region.
 
-**Formula:** DQA % = (values that are complete, not outliers, and consistent) / (total values) × 100
+**Score:** Binary — each facility-month is either adequate (passes all checks) or not. The percentage reflects the share that pass.
 
-**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts by region and indicator.
+**Interpretation:** A strict measure. Low scores indicate many facility-months fail at least one check. Use this to identify regions and indicators needing data quality improvement.
 
 </div>
 </div>
@@ -59,11 +63,11 @@ PRESENTER NOTES:
 </div>
 <div class="output-text">
 
-**What you see:** Heatmap showing mean DQA score across facilities by indicator and region.
+**What you see:** Heatmap showing the average DQA score across facility-months, by indicator and region.
 
-**Formula:** Mean DQA = (values that are complete, not outliers, and consistent) / (total values) × 100
+**Score:** Average of the completeness-outlier score and the consistency score. Ranges from 0% to 100%.
 
-**Interpretation:** Shows how close facilities are to meeting all quality criteria. A score of 100% means the data passes all DQA checks.
+**Interpretation:** A more nuanced measure than the overall score. Captures partial progress — a region can score 75% even if not all checks pass. Use this to track improvement over time.
 
 </div>
 </div>

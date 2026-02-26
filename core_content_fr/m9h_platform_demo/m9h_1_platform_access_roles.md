@@ -6,7 +6,7 @@ paginate: true
 
 ## Démonstration en direct : accès à la plateforme et rôles
 
-![demo h:40](../../resources/icons/demo.svg) **Dans cette démo, nous allons :**
+**Dans cette démo, nous allons :**
 
 - Naviguer vers la plateforme FASTR
 - Explorer les rôles des utilisateurs : Administrateur, Éditeur, Visualisateur

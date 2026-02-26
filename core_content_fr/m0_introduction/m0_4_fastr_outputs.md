@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: two-panel -->
+<!-- _class: compact two-panel -->
 
 ## Analytique FASTR : suite de produits et résultats
 

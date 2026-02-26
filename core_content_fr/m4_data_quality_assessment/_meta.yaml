@@ -28,10 +28,6 @@ slides:
   order: 2
   variant: full
   title: Complétude de l'indicateur
-- file: m4_2a_notes_on_completeness.md
-  order: 2.01
-  variant: full
-  title: Notes sur la complétude
 - file: m4_3_outliers.md
   order: 3
   variant: full

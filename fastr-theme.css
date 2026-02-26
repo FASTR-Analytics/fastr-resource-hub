@@ -56,11 +56,9 @@ section {
   background-color: var(--bg-white);
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-dark);
-  padding: 60px 80px;
+  padding: 40px 70px;
   font-size: 21px;
   line-height: 1.4;
-  /* Pin content to top — prevents titles jumping to middle on sparse slides */
-  justify-content: flex-start;
 }
 
 
@@ -79,9 +77,9 @@ h1 {
 h2 {
   color: var(--fastr-dark-green);
   font-weight: 600;
-  font-size: 1.8em;
+  font-size: 32px;
   margin-top: 0.8em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
   border-left: 4px solid var(--fastr-green);
   padding-left: 0.5em;
 }
@@ -637,13 +635,12 @@ section.section-cover p {
 
 section.compact {
   font-size: 16px;
-  line-height: 1.4;
-  padding: 40px 60px;
+  line-height: 1.35;
+  padding: 30px 50px;
 }
 
 section.compact h2 {
-  font-size: 1.5em;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.4em;
 }
 
 section.compact h3 {
@@ -652,11 +649,11 @@ section.compact h3 {
 }
 
 section.compact li {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.15em;
 }
 
 section.compact p {
-  margin: 0.4em 0;
+  margin: 0.3em 0;
 }
 
 /* ========================================
@@ -691,7 +688,6 @@ section.output {
 }
 
 section.output h2 {
-  font-size: 1.4em;
   margin-bottom: 0.3em;
 }
 
@@ -730,7 +726,6 @@ section.two-panel {
 }
 
 section.two-panel h2 {
-  font-size: 1.5em;
   margin-bottom: 0.4em;
 }
 
@@ -756,7 +751,6 @@ section.dense-table {
 }
 
 section.dense-table h2 {
-  font-size: 1.5em;
   margin-bottom: 0.3em;
 }
 

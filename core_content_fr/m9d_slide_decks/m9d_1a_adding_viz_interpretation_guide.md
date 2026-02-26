@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Ajouter une visualisation et un texte d'interprétation à votre diapositive
 
 <div class="columns">

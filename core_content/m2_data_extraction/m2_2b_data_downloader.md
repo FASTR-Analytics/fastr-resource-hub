@@ -18,4 +18,4 @@ The Data Downloader is a desktop application for extracting data from DHIS2.
 
 https://github.com/worldbank/DHIS2-Downloader/releases/
 
-![demo h:35](../../resources/icons/demo.svg) *Facilitator will demonstrate the Data Downloader*
+*Facilitator will demonstrate the Data Downloader*

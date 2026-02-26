@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Add a visualization and interpretation text to your content slide
 
 <div class="columns">

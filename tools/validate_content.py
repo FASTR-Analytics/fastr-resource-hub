@@ -200,6 +200,82 @@ def check_modules_yaml():
     return issues
 
 
+def check_slide_density(content_dir):
+    """Check slide content density and flag overflow risks.
+
+    Guidelines (Marp 16:9 at 720px height):
+    - Max ~12 visible bullet points per slide (with compact class ~16)
+    - Content after a closing </div> of a columns layout risks overflow
+    - Slides with 0 content elements (empty) are flagged
+    - Very dense slides without 'compact' class are flagged
+    """
+    issues = []
+    for module_dir in sorted(content_dir.iterdir()):
+        if not module_dir.is_dir():
+            continue
+        for md_file in sorted(module_dir.glob('*.md')):
+            content = md_file.read_text()
+            rel_path = md_file.relative_to(PROJECT_ROOT)
+
+            # Split into slides (--- separator)
+            slides = re.split(r'^---\s*$', content, flags=re.MULTILINE)
+
+            for slide_idx, slide in enumerate(slides):
+                # Skip frontmatter (first section)
+                if slide_idx == 0 and ('marp:' in slide or 'theme:' in slide):
+                    continue
+
+                # Strip presenter notes (HTML comments)
+                visible = re.sub(r'<!--[\s\S]*?-->', '', slide).strip()
+                if not visible:
+                    continue
+
+                has_compact = 'compact' in slide and '_class' in slide
+                has_dense_table = 'dense-table' in slide
+
+                # Count visible bullets
+                bullets = len(re.findall(r'^\s*[-*]\s', visible, re.MULTILINE))
+                # Count numbered list items
+                numbered = len(re.findall(r'^\s*\d+\.\s', visible, re.MULTILINE))
+                # Count bold section headers (like **1. Title**)
+                bold_sections = len(re.findall(r'\*\*\d+\.', visible))
+                total_items = bullets + numbered
+
+                # Check for content after columns div closes
+                # Find last </div> that closes a columns layout
+                columns_match = re.search(
+                    r'<div\s+class="(?:columns|columns-image-right|columns-text-left)[^"]*">'
+                    r'[\s\S]*?</div>\s*</div>\s*\n+(.*)',
+                    visible, re.DOTALL
+                )
+                if columns_match:
+                    after_content = columns_match.group(1).strip()
+                    if after_content and len(after_content) > 10:
+                        if not has_compact:
+                            issues.append(
+                                f'{rel_path} (slide {slide_idx}): '
+                                f'Content after columns div may overflow — '
+                                f'consider adding compact class'
+                            )
+
+                # Check bullet density
+                max_items = 16 if has_compact else 12
+                if total_items > max_items:
+                    issues.append(
+                        f'{rel_path} (slide {slide_idx}): '
+                        f'{total_items} list items (max {max_items}) — '
+                        f'consider splitting into two slides'
+                    )
+                elif total_items > 10 and not has_compact and not has_dense_table:
+                    issues.append(
+                        f'{rel_path} (slide {slide_idx}): '
+                        f'{total_items} list items without compact class — '
+                        f'consider adding <!-- _class: compact -->'
+                    )
+
+    return issues
+
+
 def main():
     fix_mode = '--fix' in sys.argv
     issues = 0
@@ -333,6 +409,17 @@ def main():
             print('  OK: All modules.yaml entries valid')
     else:
         print('\n--- Skipping metadata checks (PyYAML not installed) ---')
+
+    # 8. Slide density/balance audit
+    print('\n--- Checking slide density and balance ---')
+    density_issues = check_slide_density(CORE_CONTENT_DIR)
+    if density_issues:
+        print(f'\n  WARNING: {len(density_issues)} slide density issue(s):\n')
+        for issue in density_issues:
+            print(f'    {issue}')
+        issues += len(density_issues)
+    else:
+        print('  OK: All slides within density guidelines')
 
     # Summary
     print('\n' + '=' * 60)

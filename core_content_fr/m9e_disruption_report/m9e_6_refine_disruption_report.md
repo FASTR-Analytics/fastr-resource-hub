@@ -21,6 +21,8 @@ Vous pouvez demander l'un ou les deux. L'IA ajoutera ces sections à votre rappo
 
 ---
 
+<!-- _class: compact -->
+
 ## Liste de vérification : Prompt 2 & Prompt 3
 
 **Prompt 2 : Analyse régionale**

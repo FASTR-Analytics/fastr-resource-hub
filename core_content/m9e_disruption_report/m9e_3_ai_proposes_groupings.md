@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## The AI will propose indicator groupings
 
 The AI reads your country's data and discovers which health indicators are available. It then groups them into categories and asks you to review.
