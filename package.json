@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "FASTR RMNCAH-N Service Use Monitoring Resource Package - methodology docs and workshop builder",
   "scripts": {
-    "build": "python3 tools/02_build_deck.py",
     "extract": "python3 tools/00_extract_slides.py",
-    "new-workshop": "python3 tools/01_new_workshop.py",
-    "convert-pptx": "python3 tools/03_convert_pptx.py",
+    "validate": "python3 tools/validate_content.py",
     "docs": "cd methodology && mkdocs serve",
     "docs-build": "cd methodology && mkdocs build"
   },

@@ -1,8 +1,10 @@
 # Local Setup Guide
 
-Complete installation instructions for setting up the FASTR slide builder on your local machine.
+Complete installation instructions for setting up the FASTR Resource Hub on your local machine.
 
-> **Note:** Most contributors don't need local setup! Use the [GitHub web editor](../CONTRIBUTING.md#editing-on-githubcom) for simple edits or [GitHub Codespaces](../CONTRIBUTING.md#using-github-codespaces) for a full environment without any installation.
+> **Skill level:** Beginner-friendly for content editing (steps 1-7). The web app setup (step 9) requires comfort with the terminal but instructions are provided.
+
+> **Note:** Most contributors don't need local setup! Use the [GitHub web editor](../CONTRIBUTING.md#editing-on-githubcom) for simple edits or [GitHub Codespaces](04_codespaces_setup.md) for a full environment without any installation.
 
 This guide is for users who prefer to work locally. Follow these step-by-step instructions to install all necessary software.
 
@@ -13,15 +15,12 @@ This guide is for users who prefer to work locally. Follow these step-by-step in
 You'll need to install:
 
 1. **Git** - Version control system to download and manage code
-2. **Python 3.7+** - Programming language used by the build scripts
+2. **Python 3.7+** - Programming language used by content extraction scripts
 3. **Visual Studio Code (VS Code)** - Code editor for editing slide content
-4. **Node.js** - JavaScript runtime needed for Marp CLI
-5. **Marp CLI** - Tool to convert Markdown slides to PDF
-6. **Pandoc** (Optional) - Tool to export slides to PowerPoint format
+4. **Node.js** - JavaScript runtime needed for the web app and Marp CLI
+5. **Marp CLI** - Tool to convert Markdown slides to PDF (optional, web app can also export)
 
 **Estimated time:** 30-45 minutes for complete setup
-
-**Skill level:** Beginner-friendly - no prior experience required
 
 ---
 
@@ -31,12 +30,11 @@ You'll need to install:
 2. [Installing Python 3.7+](#2-installing-python-37)
 3. [Installing Visual Studio Code](#3-installing-visual-studio-code)
 4. [Installing Node.js](#4-installing-nodejs)
-5. [Installing Marp CLI](#5-installing-marp-cli)
+5. [Installing Marp CLI](#5-installing-marp-cli) (optional)
 6. [Cloning the Repository](#6-cloning-the-repository)
 7. [Opening in VS Code](#7-opening-the-repository-in-vs-code)
 8. [Installing VS Code Extensions](#8-installing-recommended-vs-code-extensions)
-9. [Verify Everything Works](#9-verify-everything-works)
-10. [Installing Pandoc (Optional)](#10-installing-pandoc-optional)
+9. [Setting Up the Web App](#9-setting-up-the-web-app)
 
 ---
 
@@ -440,151 +438,52 @@ If you don't see the notification:
 
 ---
 
-## 9. Verify Everything Works
+## 9. Setting Up the Web App
 
-Let's test the complete setup by building the example workshop.
+The web app is where you build workshops, preview slides, and export to PDF/PowerPoint.
 
-### Windows
-
-1. **Open Command Prompt**
-
-2. **Navigate to the repository:**
-   ```bash
-   cd Desktop\fastr-resource-hub
-   ```
-
-3. **Build the example deck:**
-   ```bash
-   python tools/02_build_deck.py --workshop example
-   ```
-
-   Expected output:
-   ```
-   Building deck for workshop: example
-   ✓ Loaded configuration
-   ✓ Added title slide
-   ...
-   Successfully built deck: outputs/example_deck.md
-   Total slides: XX
-   ```
-
-4. **Convert to PDF:**
-   ```bash
-   marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
-   ```
-
-   Expected output:
-   ```
-   [  INFO ] Converting 1 markdown...
-   [  INFO ] outputs/example_deck.md => outputs/example_deck.pdf
-   ```
-
-5. **Open the PDF:**
-   ```bash
-   start outputs\example_deck.pdf
-   ```
-
-### Mac
-
-1. **Open Terminal**
-
-2. **Navigate to the repository:**
-   ```bash
-   cd ~/Desktop/fastr-resource-hub
-   ```
-
-3. **Build the example deck:**
-   ```bash
-   python3 tools/02_build_deck.py --workshop example
-   ```
-
-   Expected output:
-   ```
-   Building deck for workshop: example
-   ✓ Loaded configuration
-   ✓ Added title slide
-   ...
-   Successfully built deck: outputs/example_deck.md
-   Total slides: XX
-   ```
-
-4. **Convert to PDF:**
-   ```bash
-   marp --no-config outputs/example_deck.md --theme fastr-theme.css --pdf --allow-local-files
-   ```
-
-5. **Open the PDF:**
-   ```bash
-   open outputs/example_deck.pdf
-   ```
-
-### What to Check in the PDF
-
-- All slides rendered correctly
-- FASTR theme applied (teal headers)
-- Images loaded properly
-- No content overflow
-- Slide numbers present
-
-**If everything looks good, your setup is complete!**
-
----
-
-## 10. Installing Pandoc (Optional)
-
-Pandoc allows you to export slides to PowerPoint (.pptx) format. This is optional - only install if you need PowerPoint export.
-
-### Windows
-
-1. **Download Pandoc:**
-   - Go to: https://pandoc.org/installing.html
-   - Click the **Windows installer** link (`.msi` file)
-   - Download the latest version
-
-2. **Run the installer:**
-   - Double-click the `.msi` file
-   - Click "Next" through the prompts
-   - Click "Install"
-   - Click "Finish"
-
-3. **Verify installation:**
-   ```bash
-   # Open a NEW Command Prompt
-   pandoc --version
-   ```
-   Expected output: Pandoc version information
-
-### Mac
-
-**Option 1: Using Homebrew (Recommended if you have it)**
+### Install dependencies
 
 ```bash
-brew install pandoc
+# Navigate to the web app folder
+cd web-app
+
+# Install Node.js packages
+npm install
 ```
 
-**Option 2: Direct Download**
-
-1. Go to: https://pandoc.org/installing.html
-2. Click the **macOS installer** link (`.pkg` file)
-3. Open the downloaded file
-4. Follow the installation prompts
-5. Enter your Mac password when prompted
-
-**Verify installation:**
-```bash
-pandoc --version
-```
-
-### Using Pandoc
-
-To export to PowerPoint:
+### Start the web app
 
 ```bash
-# After building your deck
-python3 tools/03_convert_pptx.py outputs/example_deck.md
+./dev.sh start
 ```
 
-Output: `outputs/example_deck.pptx`
+Then open http://localhost:5173 in your browser.
+
+### Verify everything works
+
+1. The web app should load showing the Content Library
+2. Browse modules - you should see all FASTR modules with their slides
+3. Try the Workshop Builder to create a test workshop
+4. Export to Markdown, PDF, or PowerPoint
+
+### Web app commands
+
+```bash
+cd web-app
+./dev.sh start    # Start frontend + backend
+./dev.sh stop     # Stop servers
+./dev.sh restart  # Restart servers
+./dev.sh status   # Check server status
+```
+
+### Also verify content tools
+
+```bash
+# From the repository root
+python3 tools/00_extract_slides.py    # Extract slides from methodology
+python3 tools/validate_content.py     # Validate content consistency
+```
 
 ---
 
@@ -652,27 +551,19 @@ Output: `outputs/example_deck.pptx`
 
 ## Quick Reference Commands
 
-### Build a deck
+### Content tools
 ```bash
-# Windows
-python tools/02_build_deck.py --workshop WORKSHOP_ID
+# Extract slides from methodology files
+python3 tools/00_extract_slides.py
 
-# Mac
-python3 tools/02_build_deck.py --workshop WORKSHOP_ID
+# Validate content consistency
+python3 tools/validate_content.py
 ```
 
-### Render to PDF
+### Web app
 ```bash
-marp --no-config outputs/DECK.md --theme fastr-theme.css --pdf --allow-local-files
-```
-
-### Render to PowerPoint
-```bash
-# Windows
-python tools/03_convert_pptx.py outputs/DECK.md
-
-# Mac
-python3 tools/03_convert_pptx.py outputs/DECK.md
+cd web-app && ./dev.sh start     # Start the web app
+cd web-app && ./dev.sh stop      # Stop the web app
 ```
 
 ### Open in VS Code
@@ -683,44 +574,37 @@ code .
 ### Check versions
 ```bash
 git --version
-python --version    # or python3 --version
+python3 --version
 node --version
 npm --version
-marp --version
-pandoc --version    # if installed
 ```
 
 ---
 
 ## You're All Set!
 
-Congratulations! You now have a complete local development environment for the FASTR slide builder.
+Congratulations! You now have a complete local development environment.
 
 ### What You Can Do Now
 
-1. **Edit slides** - Open any `.md` file and start editing
-2. **Preview changes** - Use Marp preview in VS Code
-3. **Build decks** - Combine content into workshop presentations
-4. **Generate PDFs** - Create beautiful slide PDFs with FASTR styling
+1. **Edit methodology content** - Open files in `methodology/` and start editing
+2. **Preview slides** - Use Marp preview in VS Code
+3. **Build workshops** - Use the web app to create and export presentations
+4. **Export to PDF/PowerPoint** - Via the web app's export feature
 5. **Contribute** - Make improvements and share with the team
 
 ### Next Steps
 
 - **Learn markdown:** See [Editing Content](01_editing_content.md)
-- **Build your first deck:** See [Building Workshops](02_building_workshops.md)
 - **Contribute content:** See [CONTRIBUTING.md](../CONTRIBUTING.md)
-- **Explore examples:** Check `workshops/example/`
 - **View methodology docs:** https://fastr-analytics.github.io/fastr-resource-hub/
 
 ### Getting Help
 
 - **Online documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
 - **Help guides:** Browse this folder
-- **Examples:** Review `workshops/example/`
 - **Team:** Contact the FASTR team for support
 
 ---
 
 **Note:** The repository includes pre-configured settings in `.vscode/settings.json` - no manual configuration needed. Everything is ready to go!
-
-Happy slide building!

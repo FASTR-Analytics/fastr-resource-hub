@@ -30,30 +30,37 @@ methodology/04_data_quality_assessment.md
 
 ## Quick Start
 
-### To create a workshop presentation:
+### Web App (recommended)
 
 ```bash
-# 1. Create workshop (interactive wizard)
-python3 tools/01_new_workshop.py
-
-# 2. Build the deck (validates automatically)
-python3 tools/02_build_deck.py --workshop YOUR_WORKSHOP
-
-# 3. Export to PDF
-marp --no-config outputs/YOUR_WORKSHOP_deck.md --theme fastr-theme.css --pdf --allow-local-files
+cd web-app
+./dev.sh start
+# Open http://localhost:5173
 ```
 
-### To update methodology content:
+The web app provides:
+- Content library with all modules and slides
+- Workshop builder with AI-assisted scheduling
+- Export to Markdown, PDF, and PowerPoint
+- Multi-language support (English and French)
+
+### To update methodology content
 
 ```bash
 # 1. Edit files in methodology/
-# 2. Extract slides
+# 2. Extract slides (also regenerates metadata)
 python3 tools/00_extract_slides.py
 
 # 3. Commit both
-git add methodology/ core_content/
+git add methodology/ core_content/ modules.yaml
 git commit -m "Update content"
-git push
+```
+
+### Documentation website
+
+```bash
+cd methodology && mkdocs serve
+# Open http://localhost:8000
 ```
 
 ---
@@ -62,10 +69,9 @@ git push
 
 | Tool | What it does |
 |------|--------------|
-| `python3 tools/00_extract_slides.py` | Extract slides from methodology files |
-| `python3 tools/01_new_workshop.py` | Create a new workshop (interactive wizard) |
-| `python3 tools/02_build_deck.py` | Validate and build slide deck |
-| `python3 tools/03_convert_pptx.py` | Convert to PowerPoint (optional) |
+| `tools/00_extract_slides.py` | Extract slides from methodology files |
+| `tools/migrate_to_meta.py` | Generate/regenerate module metadata (modules.yaml, _meta.yaml) |
+| `tools/validate_content.py` | Validate content consistency and metadata |
 
 ---
 
@@ -74,20 +80,14 @@ git push
 ```
 fastr-resource-hub/
 ├── methodology/           # Source content (edit here!)
-│   ├── 00_introduction.md
-│   ├── 01_identify_questions_indicators.md
-│   ├── 02_data_extraction.md
-│   ├── 03_fastr_analytics_platform.md
-│   ├── 04_data_quality_assessment.md
-│   ├── 05_data_quality_adjustment.md
-│   ├── 06a_service_utilization.md
-│   ├── 06b_coverage_estimates.md
-│   └── 07_results_communication.md
-├── core_content/          # Auto-generated slides (don't edit)
-├── workshops/             # Workshop configurations
+├── core_content/          # Auto-generated slides
+├── core_content_fr/       # French translations
+├── modules.yaml           # Module definitions (single source of truth)
+├── web-app/               # Deck Builder web application
 ├── templates/             # Slide templates
-├── tools/                 # Build scripts
-└── outputs/               # Generated presentations
+├── templates_fr/          # French templates
+├── resources/             # Images, diagrams, backgrounds
+└── tools/                 # Extraction and validation scripts
 ```
 
 ---
@@ -98,9 +98,8 @@ fastr-resource-hub/
 |-------|----------------|
 | [00 Start Here](help%20and%20instructions/00_start_here.md) | Overview and key concepts |
 | [01 Editing Content](help%20and%20instructions/01_editing_content.md) | Markdown syntax & SLIDE markers |
-| [02 Building Workshops](help%20and%20instructions/02_building_workshops.md) | Create presentations |
 | [03 Local Setup](help%20and%20instructions/03_local_setup.md) | Install on your computer |
-| [04 Codespaces](help%20and%20instructions/04_codespaces_setup.md) | Work in browser (no install) |
+| [07 Style Guide](help%20and%20instructions/07_style_guide.md) | Formatting conventions |
 
 ---
 

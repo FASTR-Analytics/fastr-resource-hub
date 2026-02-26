@@ -11,6 +11,9 @@ Checks:
 2. Duplicate slides (same heading appearing in multiple modules)
 3. Broken image references
 4. EN slides missing FR translations and vice versa
+5. Metadata consistency (_meta.yaml vs files on disk)
+6. modules.yaml entries have existing folders
+7. No duplicate order values within same variant in _meta.yaml
 """
 
 import os
@@ -18,6 +21,12 @@ import re
 import sys
 from pathlib import Path
 from collections import defaultdict
+
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 METHODOLOGY_DIR = PROJECT_ROOT / 'methodology'
@@ -113,6 +122,82 @@ def check_translations(en_files, fr_files):
         if rel_path not in en_files:
             missing_en.append(rel_path)
     return missing_fr, missing_en
+
+
+def check_meta_yaml(base_dir, label='EN'):
+    """Check _meta.yaml consistency for all modules in a content directory."""
+    issues = []
+    if not base_dir.exists():
+        return issues
+
+    for module_dir in sorted(base_dir.iterdir()):
+        if not module_dir.is_dir():
+            continue
+
+        meta_path = module_dir / '_meta.yaml'
+        md_files = {f.name for f in module_dir.glob('*.md')}
+
+        if not meta_path.exists():
+            if md_files:
+                issues.append(f'{label}: {module_dir.name} has {len(md_files)} .md files but no _meta.yaml')
+            continue
+
+        meta = yaml.safe_load(meta_path.read_text())
+        if not meta or 'slides' not in meta:
+            issues.append(f'{label}: {module_dir.name}/_meta.yaml is empty or malformed')
+            continue
+
+        meta_files = {s['file'] for s in meta['slides']}
+
+        # Files on disk not listed in _meta.yaml
+        unlisted = md_files - meta_files
+        if unlisted:
+            issues.append(f'{label}: {module_dir.name} has unlisted files: {", ".join(sorted(unlisted))}')
+
+        # Stale entries in _meta.yaml (file doesn't exist)
+        stale = meta_files - md_files
+        if stale:
+            issues.append(f'{label}: {module_dir.name}/_meta.yaml lists missing files: {", ".join(sorted(stale))}')
+
+        # Duplicate order values within same variant
+        by_variant = defaultdict(list)
+        for s in meta['slides']:
+            by_variant[s.get('variant', 'full')].append(s.get('order', 0))
+        for variant, orders in by_variant.items():
+            seen = defaultdict(int)
+            for o in orders:
+                seen[o] += 1
+            dupes = [str(o) for o, count in seen.items() if count > 1]
+            if dupes:
+                issues.append(f'{label}: {module_dir.name} has duplicate order values in {variant}: {", ".join(dupes)}')
+
+    return issues
+
+
+def check_modules_yaml():
+    """Check modules.yaml entries have existing folders."""
+    issues = []
+    modules_path = PROJECT_ROOT / 'modules.yaml'
+
+    if not modules_path.exists():
+        issues.append('modules.yaml not found at project root')
+        return issues
+
+    data = yaml.safe_load(modules_path.read_text())
+    if not data or 'modules' not in data:
+        issues.append('modules.yaml is empty or malformed')
+        return issues
+
+    for mod in data['modules']:
+        folder = mod.get('folder', '')
+        mod_id = mod.get('id', '?')
+        en_path = CORE_CONTENT_DIR / folder
+        fr_path = CORE_CONTENT_FR_DIR / folder
+
+        if not en_path.exists() and not fr_path.exists():
+            issues.append(f'modules.yaml: {mod_id} references folder "{folder}" which does not exist in EN or FR')
+
+    return issues
 
 
 def main():
@@ -214,6 +299,40 @@ def main():
         issues += len(missing_en)
     if not missing_fr and not missing_en:
         print('  OK: Full translation coverage')
+
+    # 5-7. Metadata checks (requires PyYAML)
+    if HAS_YAML:
+        print('\n--- Checking _meta.yaml consistency (EN) ---')
+        meta_issues_en = check_meta_yaml(CORE_CONTENT_DIR, 'EN')
+        if meta_issues_en:
+            print(f'\n  WARNING: {len(meta_issues_en)} _meta.yaml issue(s):\n')
+            for issue in meta_issues_en:
+                print(f'    {issue}')
+            issues += len(meta_issues_en)
+        else:
+            print('  OK: All _meta.yaml files consistent with disk')
+
+        print('\n--- Checking _meta.yaml consistency (FR) ---')
+        meta_issues_fr = check_meta_yaml(CORE_CONTENT_FR_DIR, 'FR')
+        if meta_issues_fr:
+            print(f'\n  WARNING: {len(meta_issues_fr)} _meta.yaml issue(s):\n')
+            for issue in meta_issues_fr:
+                print(f'    {issue}')
+            issues += len(meta_issues_fr)
+        else:
+            print('  OK: All _meta.yaml files consistent with disk')
+
+        print('\n--- Checking modules.yaml ---')
+        mod_issues = check_modules_yaml()
+        if mod_issues:
+            print(f'\n  WARNING: {len(mod_issues)} modules.yaml issue(s):\n')
+            for issue in mod_issues:
+                print(f'    {issue}')
+            issues += len(mod_issues)
+        else:
+            print('  OK: All modules.yaml entries valid')
+    else:
+        print('\n--- Skipping metadata checks (PyYAML not installed) ---')
 
     # Summary
     print('\n' + '=' * 60)

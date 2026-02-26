@@ -1,19 +1,18 @@
-# Contributing to FASTR Slide Builder
+# Contributing to FASTR Resource Hub
 
-This guide covers how to update methodology content and create workshop presentations.
+This guide covers how to update methodology content and work with the web app.
 
 ---
 
 ## Quick Reference
 
-| Task | Command |
-|------|---------|
+| Task | How |
+|------|-----|
 | Edit content | Work in `methodology/` folder |
 | Extract slides | `python3 tools/00_extract_slides.py` |
-| Create workshop | `python3 tools/01_new_workshop.py` |
-| Build deck | `python3 tools/02_build_deck.py --workshop NAME` |
-| Export to PDF | `python3 tools/04_export_pdf.py --workshop NAME` |
-| Export to PPTX | `python3 tools/03_export_pptx.py --workshop NAME` |
+| Build workshops | Use the web app at http://localhost:5173 |
+| Validate content | `python3 tools/validate_content.py` |
+
 ---
 
 ## Understanding the File Structure
@@ -23,27 +22,13 @@ This guide covers how to update methodology content and create workshop presenta
 ```
 methodology/04_data_quality_assessment.md
 ┌─────────────────────────────────────────────────────────────────────┐
-│                                                                     │
 │  # Data Quality Assessment                                          │
-│                                                                     │
-│  Full documentation content here...                                 │
-│  This appears on the methodology website.                           │
-│                                                                     │
+│  Full documentation content here...                                 │  → Website
 ├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  <!--                                                               │
-│  ////////////////////////////////////////////////////////////////////│
-│  //   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //│
-│  //  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//│
-│  //   ... SLIDE CONTENT ...                                        //│
-│  ////////////////////////////////////////////////////////////////////│
-│  -->                                                                │
-│                                                                     │
 │  <!-- SLIDE:m4_1 -->                                                │
 │  ## Slide Title                                                     │
-│  Condensed bullet points for workshops                              │
+│  Condensed bullet points for workshops                              │  → Workshops
 │  <!-- /SLIDE -->                                                    │
-│                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -72,81 +57,33 @@ code methodology/04_data_quality_assessment.md
 python3 tools/00_extract_slides.py
 ```
 
-This regenerates `core_content/` from methodology files.
+This regenerates `core_content/` and `_meta.yaml` files from methodology.
 
-### 4. Test with a build
+### 4. Preview in the web app
 
 ```bash
-python3 tools/02_build_deck.py --workshop example
+cd web-app && ./dev.sh start
+# Open http://localhost:5173
 ```
 
-### 5. Commit both folders
+### 5. Commit
 
 ```bash
 git add methodology/ core_content/
 git commit -m "content: Update DQA section"
-git push
 ```
 
 ---
 
 ## Creating a Workshop
 
-### 1. Run the wizard
+Workshops are created and managed through the web app:
 
-```bash
-python3 tools/01_new_workshop.py
-```
-
-The wizard asks for:
-- Workshop name and location
-- Date and facilitators
-- Number of days
-- Which modules to include
-
-### 2. What gets created
-
-```
-workshops/2025-nigeria/
-├── workshop.yaml              # Settings, schedule, country data
-├── 01_objectives.md           # Custom slide: workshop goals
-├── 99_next-steps.md           # Custom slide: action items
-└── media/                     # Workshop-specific images
-```
-
-### 3. Customize workshop.yaml
-
-```yaml
-workshop:
-  name: "FASTR Workshop - Nigeria"
-  date: "January 15-17, 2025"
-  location: "Abuja, Nigeria"
-
-country_data:
-  LOCATION: "Abuja"
-  COUNTRY: "Nigeria"
-  # Add your country's data here
-```
-
-Variables like `{{total_facilities}}` in slides get replaced with these values.
-
-### 4. Build and export
-
-```bash
-# Build (validates automatically)
-python3 tools/02_build_deck.py --workshop 2025-nigeria
-
-# Export to PDF
-marp --no-config outputs/2025-nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
-```
-
-### 5. Commit your workshop
-
-```bash
-git add workshops/2025-nigeria/
-git commit -m "workshop: Add Nigeria 2025"
-git push
-```
+1. Start the web app: `cd web-app && ./dev.sh start`
+2. Open http://localhost:5173
+3. Use the Workshop Builder to create a new workshop
+4. Configure schedule, modules, and settings
+5. Export to Markdown, PDF, or PowerPoint
 
 ---
 
@@ -179,26 +116,30 @@ Use pattern: `m{module}_{number}`
 | Adjustment (m5) | `m5_1`, `m5_2` |
 | Analysis (m6) | `m6_1`, `m6_2`, ... `m6_5` |
 | Results (m7) | `m7_1`, `m7_2` |
+| AI Assistant (mai) | `mai_1`, `mai_2`, ... |
+| Condensed (any) | `m4_s1`, `m4_s2` (prefix with `_s`) |
 
 ---
 
-## Setup Options
+## Metadata System
 
-### GitHub Codespaces (No installation needed)
+Module definitions live in `modules.yaml` at the repo root. Each module folder has a `_meta.yaml` listing its slides with ordering and variant info.
 
-1. Go to https://github.com/FASTR-Analytics/fastr-resource-hub
-2. Click **Code** → **Codespaces** → **Create codespace**
-3. Ready in 2-3 minutes
+- **Regenerate metadata:** `python3 tools/migrate_to_meta.py`
+- **Validate metadata:** `python3 tools/validate_content.py`
+- **Auto-regenerated** when running `tools/00_extract_slides.py`
+
+---
+
+## Setup
 
 ### Local Setup
 
 ```bash
 git clone https://github.com/FASTR-Analytics/fastr-resource-hub.git
 cd fastr-resource-hub
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-npm install -g @marp-team/marp-cli
+cd web-app && npm install
+./dev.sh start
 ```
 
 ---
@@ -212,17 +153,9 @@ npm install -g @marp-team/marp-cli
 | Type | Use for |
 |------|---------|
 | `content:` | Methodology content changes |
-| `workshop:` | Workshop additions/updates |
 | `tools:` | Build script changes |
 | `docs:` | Documentation updates |
 | `fix:` | Bug fixes |
-
-Examples:
-```bash
-git commit -m "content: Update DQA completeness section"
-git commit -m "workshop: Add Nigeria 2025 workshop"
-git commit -m "fix: Correct image path in module 3"
-```
 
 ---
 

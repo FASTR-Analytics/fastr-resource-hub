@@ -1,0 +1,121 @@
+slides:
+- file: m6_1_service_utilization_analysis.md
+  order: 1
+  variant: full
+  title: Service utilization analysis
+- file: m6_1a_service_utilization_comparison_dhis2.md
+  order: 1.01
+  variant: full
+  title: 'Service utilization and disruptions: comparison to DHIS2'
+- file: m6_2_service_disruptions_surpluses_detection.md
+  order: 2
+  variant: full
+  title: Service disruptions and surpluses detection
+- file: m6_2a_why_detecting_disruptions_matters.md
+  order: 2.01
+  variant: full
+  title: Why detecting disruptions matters
+- file: m6_5a_service_utilization_configuration_parameters.md
+  order: 5.01
+  variant: full
+  title: 'Service utilization module: Configuration parameters'
+- file: m6_6_service_coverage_introduction.md
+  order: 6
+  variant: full
+  title: Service coverage estimation
+- file: m6_7_definition_of_coverage.md
+  order: 7
+  variant: full
+  title: Service coverage example
+- file: m6_8_denominators_by_service_type.md
+  order: 8
+  variant: full
+  title: Denominators by service type
+- file: m6_9_demographic_cascade.md
+  order: 9
+  variant: full
+  title: Expected relationships which help with estimating denominators
+- file: m6_10_denominator_cascade_illustration.md
+  order: 10
+  variant: full
+  title: Estimating denominators from ANC-1
+- file: m6_11_deriving_denominators_from_entry_points.md
+  order: 11
+  variant: full
+  title: Deriving denominators from entry points
+- file: m6_13_denominator_selection_methodology.md
+  order: 13
+  variant: full
+  title: Denominator selection methodology
+- file: m6_13a_denominator_comparison.md
+  order: 13.01
+  variant: full
+  title: Which denominator provides more plausible estimates?
+- file: m6_14_coverage_projection_methodology.md
+  order: 14
+  variant: full
+  title: Coverage projection methodology
+- file: m6_19_coverage_configuration_parameters.md
+  order: 19
+  variant: full
+  title: 'Coverage module: Configuration parameters'
+- file: m6_s1_utilization_overview.md
+  order: 1
+  variant: condensed
+  title: Service utilization analysis
+- file: m6_s1a_quarter_on_quarter_change.md
+  order: 1.01
+  variant: condensed
+  title: Quarter-on-quarter change
+- file: m6_s2_disruption_interpretation.md
+  order: 2
+  variant: condensed
+  title: Detecting service disruptions
+- file: m6_s3_coverage_overview.md
+  order: 3
+  variant: condensed
+  title: Service coverage estimation
+- file: m6_s3a_coverage_example.md
+  order: 3.01
+  variant: condensed
+  title: Service coverage example
+- file: m6_s3b_expected_relationships.md
+  order: 3.02
+  variant: condensed
+  title: Expected relationships which help with estimating denominators
+- file: m6_s3c_estimating_denominators.md
+  order: 3.03
+  variant: condensed
+  title: Estimating denominators from ANC-1
+- file: m6_s3d_five_denominator_options.md
+  order: 3.04
+  variant: condensed
+  title: Five denominator options for FASTR analysis
+- file: m6_s3e_how_fastr_estimates_coverage.md
+  order: 3.05
+  variant: condensed
+  title: How FASTR estimates coverage
+- file: m6_s4_coverage_interpretation.md
+  order: 4
+  variant: condensed
+  title: 'Coverage output: National trends'
+- file: m6_s5_country_example_nigeria.md
+  order: 5
+  variant: condensed
+  title: 'Country example: Nigeria'
+- file: m6_s5_value_beyond_dhis2.md
+  order: 5
+  variant: condensed
+  title: Why FASTR? Value add beyond standard DHIS2 analysis
+- file: m6_s6_fastr_value_beyond_dhis2.md
+  order: 6
+  variant: condensed
+  title: Why FASTR? Value add beyond standard DHIS2 analysis
+- file: m6_s6_topic_s6.md
+  order: 6
+  variant: condensed
+  title: Key takeaway
+- file: m6_s7_key_takeaway.md
+  order: 7
+  variant: condensed
+  title: Key takeaway

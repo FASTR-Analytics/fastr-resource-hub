@@ -1,0 +1,145 @@
+slides:
+- file: m7_1_analytical_thinking_interpretation.md
+  order: 1
+  variant: full
+  title: Analytical thinking & interpretation
+- file: m7_1a_analytical_thinking_interpretation_continued.md
+  order: 1.01
+  variant: full
+  title: Critical thinking checklist
+- file: m7_1b_analytical_thinking_interpretation_continued.md
+  order: 1.02
+  variant: full
+  title: Common interpretation pitfalls
+- file: m7_1c_analytical_thinking_interpretation_continued.md
+  order: 1.03
+  variant: full
+  title: Interpreting FASTR module outputs
+- file: m7_1d_outliers_output.md
+  order: 1.04
+  variant: full
+  title: Outlier detection output
+- file: m7_1e_internal_consistency_output.md
+  order: 1.05
+  variant: full
+  title: Internal consistency output
+- file: m7_1f_overall_dqa_score_output.md
+  order: 1.06
+  variant: full
+  title: Overall DQA score output
+- file: m7_1g_mean_dqa_score_output.md
+  order: 1.07
+  variant: full
+  title: Mean DQA score output
+- file: m7_1h_outlier_adjustment_output.md
+  order: 1.08
+  variant: full
+  title: Outlier adjustment output
+- file: m7_1i_completeness_adjustment_output.md
+  order: 1.09
+  variant: full
+  title: Completeness adjustment output
+- file: m7_1i2_combined_adjustment_output.md
+  order: 1.092
+  variant: full
+  title: Combined adjustment output
+- file: m7_1j_service_utilization_output.md
+  order: 1.1
+  variant: full
+  title: 'Service utilization output: Trends over time'
+- file: m7_1k_year_over_year_change_output.md
+  order: 1.11
+  variant: full
+  title: 'Service utilization output: Year-over-year change'
+- file: m7_1l_disruption_output_national.md
+  order: 1.12
+  variant: full
+  title: 'Disruption output: Actual vs expected (national)'
+- file: m7_1m_disruption_output_subnational.md
+  order: 1.13
+  variant: full
+  title: 'Disruption output: Actual vs expected (subnational)'
+- file: m7_1n_coverage_output_national.md
+  order: 1.1400000000000001
+  variant: full
+  title: 'Coverage output: National trends'
+- file: m7_1o_coverage_output_subnational.md
+  order: 1.15
+  variant: full
+  title: 'Coverage output: Subnational comparison'
+- file: m7_2_data_visualization_communication.md
+  order: 2
+  variant: full
+  title: Moving from data to key messages
+- file: m7_2a_data_visualization_communication_continued.md
+  order: 2.01
+  variant: full
+  title: 'Example: result vs key takeaway'
+- file: m7_2b_data_visualization_communication_continued.md
+  order: 2.02
+  variant: full
+  title: Choosing the right report format
+- file: m7_2c_data_visualization_communication_continued.md
+  order: 2.03
+  variant: full
+  title: Storytelling with data
+- file: m7_2d_data_visualization_communication_continued.md
+  order: 2.04
+  variant: full
+  title: 'Example: developing a data story'
+- file: m7_3_using_data_for_decision_making.md
+  order: 3
+  variant: full
+  title: Dissemination and data use roadmap
+- file: m7_3a_using_data_for_decision_making_continued.md
+  order: 3.01
+  variant: full
+  title: Action plan for FASTR moving forward
+- file: m7_4_topic_4.md
+  order: 4
+  variant: full
+  title: 'Understanding your audience: User mapping'
+- file: m7_4a_map_your_users.md
+  order: 4.01
+  variant: full
+  title: 'Activity: Map your users'
+- file: m7_4a_topic_4a.md
+  order: 4.01
+  variant: full
+  title: 'Activity: Map your users'
+- file: m7_5_topic_5.md
+  order: 5
+  variant: full
+  title: Storytelling with data
+- file: m7_5a_topic_5a.md
+  order: 5.01
+  variant: full
+  title: 'From data to story: Example'
+- file: m7_6_topic_6.md
+  order: 6
+  variant: full
+  title: Linking results to actions
+- file: m7_6a_link_results_to_actions.md
+  order: 6.01
+  variant: full
+  title: 'Activity: Link your results to actions'
+- file: m7_6a_topic_6a.md
+  order: 6.01
+  variant: full
+  title: 'Activity: Link your results to actions'
+- file: m7_6b_three_spheres_of_influence.md
+  order: 6.02
+  variant: full
+  title: Three spheres of influence
+- file: m7_7_topic_7.md
+  order: 7
+  variant: full
+  title: Building a roadmap for sustained use
+- file: m7_7a_country_action_planning.md
+  order: 7.01
+  variant: full
+  title: 'Activity: Country action planning'
+- file: m7_7a_topic_7a.md
+  order: 7.01
+  variant: full
+  title: 'Activity: Country action planning'

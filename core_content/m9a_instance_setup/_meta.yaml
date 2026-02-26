@@ -1,0 +1,17 @@
+slides:
+- file: m9a_0_setting_up_admin_areas.md
+  order: 0
+  variant: full
+  title: 'Activity: Setting Up Admin Areas'
+- file: m9a_1_importing_data.md
+  order: 1
+  variant: full
+  title: 'Activity: Importing Data'
+- file: m9a_2_installing_running_modules.md
+  order: 2
+  variant: full
+  title: 'Activity: Installing and Running Modules'
+- file: m9a_3_creating_project.md
+  order: 3
+  variant: full
+  title: 'Activity: Creating a Project'

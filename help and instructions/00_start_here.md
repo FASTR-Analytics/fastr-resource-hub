@@ -84,7 +84,7 @@ Everything **below** the `SLIDE CONTENT` ASCII art separator becomes **workshop 
 
 ## How to Contribute
 
-### To update methodology content:
+### To update methodology content (no technical skills needed):
 
 1. Open a file in `methodology/`
 2. Edit the **documentation content** (above the separator)
@@ -92,7 +92,7 @@ Everything **below** the `SLIDE CONTENT` ASCII art separator becomes **workshop 
 4. Save and push to GitHub
 5. Website updates automatically
 
-### To extract slides for workshops:
+### To extract slides after editing (basic terminal use):
 
 After editing slide content, run:
 ```bash
@@ -100,26 +100,29 @@ python3 tools/00_extract_slides.py
 ```
 This extracts SLIDE-marked content into `core_content/` for use in workshops.
 
-### To create a workshop presentation:
+### To create a workshop presentation (basic terminal use):
 
+Use the web app:
 ```bash
-python3 tools/01_new_workshop.py                    # Interactive wizard
-python3 tools/02_build_deck.py --workshop NAME      # Build deck (validates automatically)
-marp --no-config outputs/NAME_deck.md --theme fastr-theme.css --pdf --allow-local-files
+cd web-app && ./dev.sh start
+# Open http://localhost:5173
 ```
+
+The web app lets you create workshops, build schedules (with AI assistance), and export to Markdown, PDF, or PowerPoint.
 
 ---
 
 ## Other Guides
 
-| Guide | When to read it |
-|-------|-----------------|
-| [01 Editing Content](01_editing_content.md) | Markdown syntax & SLIDE markers |
-| [02 Building Workshops](02_building_workshops.md) | Creating workshop presentations |
-| [03 Local Setup](03_local_setup.md) | Setting up your computer |
-| [04 Codespaces Setup](04_codespaces_setup.md) | Working in browser (no install needed) |
-| [05 Content Action Plan](05_content_action_plan.md) | Slide content status & tasks to delegate |
-| [07 Style Guide](07_style_guide.md) | Formatting conventions for methodology docs |
+| Guide | Skill level | When to read it |
+|-------|-------------|-----------------|
+| [01 Editing Content](01_editing_content.md) | Everyone | Markdown syntax & SLIDE markers |
+| [03 Local Setup](03_local_setup.md) | Beginner | Installing Git, Python, VS Code on your computer |
+| [04 Codespaces Setup](04_codespaces_setup.md) | Everyone | Working in browser (no install needed) |
+| [05 Content Action Plan](05_content_action_plan.md) | Everyone | Slide content status & tasks to delegate |
+| [07 Style Guide](07_style_guide.md) | Everyone | Formatting conventions for methodology docs |
+| [08 Code Reference](08_code_reference.md) | Developer | R module code reference for AI assistants |
+| [09 Translation Workflow](09_translation_workflow.md) | Developer | French translation process |
 
 ---
 
@@ -129,25 +132,31 @@ marp --no-config outputs/NAME_deck.md --theme fastr-theme.css --pdf --allow-loca
 
 | Folder | What's in it |
 |--------|--------------|
-| `methodology/` | The 9 module files you edit |
+| `methodology/` | Module source files you edit |
 | `core_content/` | Auto-generated slides (don't edit directly) |
-| `workshops/` | Workshop configurations |
-| `tools/` | Build scripts |
-| `outputs/` | Generated presentations |
+| `core_content_fr/` | French translations |
+| `modules.yaml` | Module definitions (single source of truth) |
+| `web-app/` | Deck Builder web application |
+| `tools/` | Extraction and validation scripts |
 
-### The tools
+### Tools
 
 | Command | What it does |
 |---------|--------------|
 | `python3 tools/00_extract_slides.py` | Extract slides from methodology |
-| `python3 tools/01_new_workshop.py` | Create new workshop |
-| `python3 tools/02_build_deck.py` | Validate + Build the slide deck |
-| `python3 tools/03_convert_pptx.py` | Convert to PowerPoint |
+| `python3 tools/validate_content.py` | Validate content consistency |
+| `python3 tools/migrate_to_meta.py` | Regenerate module metadata |
+
+### Web app (for workshops and exports)
+
+```bash
+cd web-app && ./dev.sh start
+# Open http://localhost:5173
+```
 
 ---
 
 ## Need Help?
 
 - **Documentation website:** https://fastr-analytics.github.io/fastr-resource-hub/
-- **Example workshop:** Look at `workshops/example/`
 - **Questions:** Contact the FASTR team

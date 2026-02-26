@@ -1,0 +1,5 @@
+slides:
+- file: m9h_1_platform_access_roles.md
+  order: 1
+  variant: full
+  title: 'Live demo: platform access & roles'

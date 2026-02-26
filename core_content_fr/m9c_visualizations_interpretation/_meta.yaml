@@ -1,0 +1,34 @@
+slides:
+- file: m9c_0a_creating_visualizations_intro.md
+  order: 0.01
+  variant: full
+  title: Créer des visualisations
+- file: m9c_1_creating_visualizations_manually.md
+  order: 1
+  variant: full
+  title: 'Activité : Création manuelle de visualisations'
+- file: m9c_2_creating_visualizations_ai.md
+  order: 2
+  variant: full
+  title: 'Activité : Création de visualisations avec l''assistant IA et sauvegarde
+    dans le dossier utilisateur'
+- file: m9c_2a_explore_with_ai.md
+  order: 2.01
+  variant: full
+  title: Explorer avec l'assistant IA
+- file: m9c_3_interpreting_visualizations.md
+  order: 3
+  variant: full
+  title: Comment interpréter une visualisation FASTR
+- file: m9c_3a_interpreting_example.md
+  order: 3.01
+  variant: full
+  title: 'Exemple : Interpréter une visualisation'
+- file: m9c_4_interpreting_with_ai.md
+  order: 4
+  variant: full
+  title: 'Activité : Création d''interprétations avec l''assistant IA'
+- file: m9c_5_disruption_exercise.md
+  order: 5
+  variant: full
+  title: Y a-t-il eu une perturbation ?

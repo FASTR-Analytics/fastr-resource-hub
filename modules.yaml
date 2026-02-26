@@ -1,0 +1,188 @@
+modules:
+- id: m0
+  number: '0'
+  folder: m0_introduction
+  name:
+    en: Introduction to FASTR
+    fr: Introduction à FASTR
+  ai_context:
+    description: Overview of the FASTR methodology, why rapid-cycle analytics matters
+      for RMNCAH-N programs.
+    topics:
+    - Introduction to FASTR approach
+    - RMNCAH-N service use monitoring
+    - Why rapid-cycle analytics
+    duration: 45-60 min
+- id: m1
+  number: '1'
+  folder: m1_identify_questions_indicators
+  name:
+    en: Identify Questions & Indicators
+    fr: Identifier les questions et indicateurs
+  ai_context:
+    description: How to identify priority analytical questions, develop data use cases,
+      and prepare indicator frameworks.
+    topics:
+    - FASTR gaps and challenges
+    - Development of data use case
+    - Defining priority questions
+    duration: 60-90 min
+- id: m2
+  number: '2'
+  folder: m2_data_extraction
+  name:
+    en: Data Extraction
+    fr: Extraction des données
+  ai_context:
+    description: Technical module on extracting data from DHIS2 and other health information
+      systems.
+    topics:
+    - Why extract data
+    - DHIS2 data structure
+    - Data Downloader tool
+    - API-based extraction
+    duration: 90-120 min
+- id: m3
+  number: '3'
+  folder: m3_fastr_analytics_platform
+  name:
+    en: FASTR Analytics Platform
+    fr: Plateforme analytique FASTR
+  ai_context:
+    description: Hands-on introduction to the FASTR Analytics Platform.
+    topics:
+    - Platform overview
+    - Accessing the platform
+    - Importing datasets
+    - Running analysis modules
+    duration: 120-180 min
+- id: m3b
+  number: 3b
+  folder: mai_ai_assistant
+  name:
+    en: AI Assistant
+    fr: Assistant IA
+- id: m4
+  number: '4'
+  folder: m4_data_quality_assessment
+  name:
+    en: Data Quality Assessment
+    fr: Évaluation de la qualité des données
+  ai_context:
+    description: 'Systematic approach to assessing data quality: completeness, outliers,
+      internal consistency.'
+    topics:
+    - Approach to DQA
+    - Indicator completeness
+    - Outlier detection
+    - Internal consistency checks
+    duration: 90-120 min
+- id: m5
+  number: '5'
+  folder: m5_data_quality_adjustment
+  name:
+    en: Data Quality Adjustment
+    fr: Ajustement de la qualité des données
+  ai_context:
+    description: Methods for adjusting data to account for quality issues before analysis.
+    topics:
+    - Approach to adjustment
+    - Adjustment for outliers
+    - Adjustment for completeness
+    duration: 60-90 min
+- id: m6
+  number: '6'
+  folder: m6_data_analysis
+  name:
+    en: Data Analysis
+    fr: Analyse des données
+  ai_context:
+    description: 'Core analytical methods: service utilization trends, coverage estimation.'
+    topics:
+    - Service utilization analysis
+    - Year-over-year change
+    - Coverage introduction
+    - Interpreting outputs
+    duration: 180-240 min
+- id: m7
+  number: '7'
+  folder: m7_results_communication
+  name:
+    en: Results Communication
+    fr: Communication des résultats
+  ai_context:
+    description: How to interpret findings, create visualizations, and communicate
+      results.
+    topics:
+    - Analytical thinking
+    - Data visualization principles
+    - Using data for decisions
+    duration: 90-120 min
+- id: m8
+  number: '8'
+  folder: m8_survey_hfa
+  name:
+    en: Survey & HFA
+    fr: Enquêtes et EFS
+  ai_context:
+    description: Integration of survey data and health facility assessments with routine
+      data.
+    topics:
+    - Survey data integration
+    - Health facility assessments
+    - Triangulating data sources
+    duration: 60-90 min
+- id: m9a
+  number: 9a
+  folder: m9a_instance_setup
+  name:
+    en: Instance Setup
+    fr: Configuration de l'instance
+- id: m9b
+  number: 9b
+  folder: m9b_getting_started
+  name:
+    en: Getting Started
+    fr: Prise en main
+- id: m9c
+  number: 9c
+  folder: m9c_visualizations_interpretation
+  name:
+    en: Visualizations & Interpretation
+    fr: Visualisations & Interprétation
+- id: m9d
+  number: 9d
+  folder: m9d_slide_decks
+  name:
+    en: Slide Decks
+    fr: Présentations
+- id: m9e
+  number: 9e
+  folder: m9e_disruption_report
+  name:
+    en: Disruption Report
+    fr: Rapport de perturbations
+- id: m9f
+  number: 9f
+  folder: m9f_prompting_techniques
+  name:
+    en: Prompting Techniques
+    fr: Techniques de prompting
+- id: m9g
+  number: 9g
+  folder: m9g_fastr_quiz
+  name:
+    en: FASTR Quiz
+    fr: Quiz FASTR
+- id: m9h
+  number: 9h
+  folder: m9h_platform_demo
+  name:
+    en: Platform Demo
+    fr: Démo de la plateforme
+- id: overview
+  number: overview
+  folder: overview_20min
+  name:
+    en: FASTR 20-Minute Overview
+    fr: Aperçu FASTR en 20 minutes

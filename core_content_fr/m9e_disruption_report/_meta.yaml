@@ -1,0 +1,37 @@
+slides:
+- file: m9e_1_manual_to_ai_reporting.md
+  order: 1
+  variant: full
+  title: Place à la création de votre produit final
+- file: m9e_2_creating_disruption_report_ai.md
+  order: 2
+  variant: full
+  title: 'Activité : Créer un rapport sur les perturbations avec l''assistant IA'
+- file: m9e_2a_alternative_approach.md
+  order: 2.01
+  variant: full
+  title: 'Approche alternative : Travailler sans prompt personnalisé'
+- file: m9e_3_ai_proposes_groupings.md
+  order: 3
+  variant: full
+  title: L'IA va proposer des regroupements d'indicateurs
+- file: m9e_4_confirm_ai_builds.md
+  order: 4
+  variant: full
+  title: Confirmez et l'IA construit vos diapositives
+- file: m9e_5_review_checklist.md
+  order: 5
+  variant: full
+  title: 'Liste de vérification : Vérifier le résultat de l''IA'
+- file: m9e_6_refine_disruption_report.md
+  order: 6
+  variant: full
+  title: 'Activité : Affiner votre rapport de perturbations'
+- file: m9e_7_peer_review_checklist.md
+  order: 7
+  variant: full
+  title: 'Revue par les pairs : retour sur le rapport de perturbations'
+- file: m9e_8_presenting_reports.md
+  order: 8
+  variant: full
+  title: 'Revue par les pairs : retour sur le rapport de perturbations'

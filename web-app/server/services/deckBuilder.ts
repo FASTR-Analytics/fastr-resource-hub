@@ -2,6 +2,10 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { WorkshopConfig } from '../db/database.js'
+import {
+  getModuleFolder,
+  getModuleName,
+} from './moduleRegistry.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -24,27 +28,9 @@ function getCoreContentPath(language: Language = 'en'): string {
 // Default to English for backward compatibility
 const CORE_CONTENT_PATH = getCoreContentPath('en')
 
-// Module folder names - must match actual folder names in core_content/
-const MODULE_FOLDERS: Record<string, string> = {
-  m0: 'm0_introduction',
-  m1: 'm1_identify_questions_indicators',
-  m2: 'm2_data_extraction',
-  m3: 'm3_fastr_analytics_platform',
-  m4: 'm4_data_quality_assessment',
-  m5: 'm5_data_quality_adjustment',
-  m6: 'm6_data_analysis',
-  m7: 'm7_results_communication',
-  m8: 'm8_survey_hfa',
-  m9a: 'm9a_instance_setup',
-  m9b: 'm9b_getting_started',
-  m9c: 'm9c_visualizations_interpretation',
-  m9d: 'm9d_slide_decks',
-  m9e: 'm9e_disruption_report',
-  m9f: 'm9f_prompting_techniques',
-  m9g: 'm9g_fastr_quiz',
-  m9h: 'm9h_platform_demo',
-  mai: 'mai_ai_assistant',  // AI Assistant module (separate from m3)
-}
+// Module folder names loaded from modules.yaml via registry
+// (replaces hardcoded MODULE_FOLDERS dict)
+// Use getModuleFolder(id) for single lookups, getModuleFoldersDict() for bulk
 
 interface Session {
   session: string
@@ -163,7 +149,7 @@ async function buildSessionSlides(
       const moduleMatch = topicId.match(/^(m\d+[a-z]?)_/)
       if (moduleMatch) {
         const moduleId = moduleMatch[1]
-        const folderName = MODULE_FOLDERS[moduleId]
+        const folderName = getModuleFolder(moduleId)
         if (folderName) {
           const modulePath = path.join(coreContentPath, folderName)
           if (fs.existsSync(modulePath)) {
@@ -220,27 +206,8 @@ async function buildSessionSlides(
   return buildGenericSessionSlide(session)
 }
 
-// Module names for title slides
-const MODULE_NAMES: Record<string, string> = {
-  m0: 'Introduction to FASTR',
-  m1: 'Identify Questions & Indicators',
-  m2: 'Data Extraction',
-  m3: 'FASTR Analytics Platform',
-  m4: 'Data Quality Assessment',
-  m5: 'Data Quality Adjustment',
-  m6: 'Data Analysis',
-  m7: 'Results Communication',
-  m8: 'Survey & HFA',
-  m9a: 'Instance Setup',
-  m9b: 'Getting Started',
-  m9c: 'Visualizations & Interpretation',
-  m9d: 'Slide Decks',
-  m9e: 'Disruption Report',
-  m9f: 'Prompting Techniques',
-  m9g: 'FASTR Quiz',
-  m9h: 'Platform Demo',
-  overview: 'FASTR 20-Minute Overview',
-}
+// Module names loaded from modules.yaml via registry
+// (replaces hardcoded MODULE_NAMES dict)
 
 /**
  * Load slides for a module, optionally filtered by topic range or excluded slides
@@ -260,7 +227,7 @@ function buildModuleSlides(
   version?: 'full' | 'condensed',
   language: Language = 'en'
 ): string | null {
-  const folderName = MODULE_FOLDERS[moduleId]
+  const folderName = getModuleFolder(moduleId)
   if (!folderName) return null
 
   const coreContentPath = getCoreContentPath(language)
@@ -353,7 +320,7 @@ function buildModuleSlides(
   }
 
   // Start with a session title slide
-  const moduleName = MODULE_NAMES[moduleId] || sessionName || 'Session'
+  const moduleName = getModuleName(moduleId) || sessionName || 'Session'
   const displayName = sessionName || moduleName
   const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
   const titleSlide = `<!-- _class: section-cover -->
@@ -379,7 +346,7 @@ function buildModuleSlides(
  * @param language - Language code ('en' or 'fr')
  */
 export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'condensed', language: Language = 'en'): string[] {
-  const folderName = MODULE_FOLDERS[moduleId]
+  const folderName = getModuleFolder(moduleId)
   if (!folderName) return []
 
   const coreContentPath = getCoreContentPath(language)
@@ -459,7 +426,7 @@ async function loadSlideContent(
     const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
-      const folderName = MODULE_FOLDERS[moduleId]
+      const folderName = getModuleFolder(moduleId)
       if (folderName) {
         filePath = path.join(coreContentPath, folderName, slideFile)
       }
@@ -472,7 +439,7 @@ async function loadSlideContent(
     const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
-      const folderName = MODULE_FOLDERS[moduleId]
+      const folderName = getModuleFolder(moduleId)
       if (folderName) {
         const fallbackPath = path.join(englishPath, folderName, slideFile)
         if (fs.existsSync(fallbackPath)) {

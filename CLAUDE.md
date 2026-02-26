@@ -11,8 +11,8 @@ fastr-resource-hub/
 ├── templates/            # Slide templates (title, breaks, etc.)
 ├── templates_fr/         # French templates
 ├── resources/            # Images, diagrams, backgrounds
-├── workshops/            # Workshop YAML configs
-└── tools/                # Python scripts for extraction
+├── modules.yaml          # Single source of truth for module definitions
+└── tools/                # Python scripts for extraction and validation
 ```
 
 ## Two Systems
@@ -37,30 +37,39 @@ methodology/*.md  →  MkDocs website (docs)
        ↓
        →  Extracted to core_content/ (via tools/00_extract_slides.py)
               ↓
-              →  Web-app reads from core_content/ for slide library
+              →  _meta.yaml generated per module (slide ordering/metadata)
+              →  Web-app reads from core_content/ + _meta.yaml for slide library
 ```
 
-## Web-App Module System
+## Metadata Architecture
 
-The web-app scans `core_content/` for module folders:
+Module definitions are centralized in `modules.yaml` at the repo root. Each module folder has a `_meta.yaml` file listing its slides with order, variant (full/condensed), and title.
 
-**Standard modules** (auto-extracted from methodology):
-- Folder pattern: `m{number}_{name}/` (e.g., `m4_data_quality_assessment/`)
-- File pattern: `m{num}_{topic}_{name}.md` or `m{num}_s{topic}_{name}.md` (condensed)
-- Configured in: `web-app/server/routes/content.ts`
+**`modules.yaml`** — defines all modules with:
+- `id`, `number`, `folder` — identification and folder mapping
+- `name.en`, `name.fr` — display names per language
+- `ai_context` — description, topics, duration for AI features
 
-**Custom modules** (manually created):
-- Folder: `core_content/overview_20min/`
-- File pattern: `01_name.md`, `02_name.md`, etc.
-- Must be registered in `content.ts` MODULE_NAMES
+**`_meta.yaml`** (per module folder) — lists slides with:
+- `file` — filename
+- `order` — sort order (float, e.g., 1.01 for sub-topics)
+- `variant` — `full` or `condensed`
+- `title` — slide title
 
-### Adding a New Custom Module
+The web-app loads these via `moduleRegistry.ts` (60s TTL cache). Falls back to regex-based discovery if `_meta.yaml` is missing.
 
-1. Create folder in `core_content/` (e.g., `core_content/my_custom/`)
-2. Add slide files with numbered prefix: `01_intro.md`, `02_content.md`
-3. Update `web-app/server/routes/content.ts`:
-   - Add to `MODULE_NAMES` for both `en` and `fr`
-   - Update folder detection logic if pattern differs from standard
+### Adding a New Module
+
+1. Create folder in `core_content/` (e.g., `core_content/m10_new_module/`)
+2. Add slide files
+3. Run `python3 tools/migrate_to_meta.py` to regenerate `modules.yaml` and `_meta.yaml`
+4. Or manually add the module entry to `modules.yaml` and create `_meta.yaml`
+
+### Adding/Removing Slides
+
+1. Add or remove `.md` files in the module folder
+2. Run `python3 tools/00_extract_slides.py` (auto-regenerates `_meta.yaml`)
+3. Or run `python3 tools/migrate_to_meta.py` to regenerate metadata only
 
 ## File Naming Conventions
 
@@ -76,9 +85,13 @@ The web-app scans `core_content/` for module folders:
 
 | File | Purpose |
 |------|---------|
+| `modules.yaml` | Single source of truth for module definitions |
+| `web-app/server/services/moduleRegistry.ts` | Loads and caches module metadata for the web-app |
 | `web-app/server/routes/content.ts` | API for modules, templates, exports |
 | `web-app/server/services/deckBuilder.ts` | Builds workshop decks from YAML |
 | `tools/00_extract_slides.py` | Extracts slides from methodology to core_content |
+| `tools/migrate_to_meta.py` | Generates/regenerates modules.yaml and _meta.yaml |
+| `tools/validate_content.py` | Validates content consistency and metadata |
 | `methodology/mkdocs.yml` | MkDocs site configuration |
 
 ## Running the Web-App
@@ -113,10 +126,11 @@ See `help and instructions/07_style_guide.md` for full guide.
 | 1 | `01_identify_questions_indicators.md` | Questions & Indicators |
 | 2 | `02_data_extraction.md` | Data Extraction |
 | 3 | `03_fastr_analytics_platform.md` | Analytics Platform |
+| 3b | `03b_ai_assistant.md` | AI Assistant |
 | 4 | `04_data_quality_assessment.md` | DQ Assessment |
 | 5 | `05_data_quality_adjustment.md` | DQ Adjustment |
 | 6 | `06a_service_utilization.md`, `06b_coverage_estimates.md` | Data Analysis |
 | 7 | `07_results_communication.md` | Results Communication |
 | 8 | (Survey & HFA) | Survey & HFA |
-| 9 | `10_workshop_activities.md` | Workshop Activities |
-| - | `core_content/overview_20min/` | Custom 20-min overview (not from methodology) |
+| 9a-9h | `10_workshop_activities.md` | Workshop Activities & Platform Guides |
+| - | `core_content_fr/overview_20min/` | Custom 20-min overview (FR only) |

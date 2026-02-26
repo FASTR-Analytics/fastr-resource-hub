@@ -1,0 +1,21 @@
+slides:
+- file: m5_1_approach_to_dq_adjustment.md
+  order: 1
+  variant: full
+  title: Justification de l'ajustement de la qualité des données
+- file: m5_2_adjustment_for_outliers.md
+  order: 2
+  variant: full
+  title: Méthodologie d'ajustement des valeurs aberrantes
+- file: m5_3_adjustment_for_completeness.md
+  order: 3
+  variant: full
+  title: Méthodologie de l'ajustement d'exhaustivité
+- file: m5_s1_dq_adjustment_overview.md
+  order: 1
+  variant: condensed
+  title: Ajustement de la qualité des données
+- file: m5_s2_dq_adjustment_interpretation.md
+  order: 2
+  variant: condensed
+  title: Résultat de l'ajustement des valeurs aberrantes

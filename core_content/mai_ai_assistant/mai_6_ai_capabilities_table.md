@@ -1,0 +1,22 @@
+---
+marp: true
+theme: fastr
+paginate: true
+---
+
+## Tips for better answers
+
+**Be specific about:**
+
+- Which service — "ANC1" instead of "antenatal care services"
+- Which time period — "last 12 months" or "2024"
+- Which location — "Banadir" or "all regions"
+
+**You can ask for:** Charts, explanations, comparisons, reports, data tables
+
+**Follow-up questions work great:**
+
+1. Start broad: "Show me data quality scores by region"
+2. Narrow down: "What about just ANC indicators?"
+3. Go deeper: "Why is the Northern region so low?"
+4. Take action: "Create a slide about this for my presentation"

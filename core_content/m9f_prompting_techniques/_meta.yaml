@@ -1,0 +1,25 @@
+slides:
+- file: m9f_1_explore_with_ai_assistant.md
+  order: 1
+  variant: full
+  title: Explore with the AI Assistant
+- file: m9f_2_iterative_vs_single_prompts.md
+  order: 2
+  variant: full
+  title: 'Exercise: AI & iterative conversation'
+- file: m9f_3_refining_a_prompt.md
+  order: 3
+  variant: full
+  title: 'Self-paced exercise: Refining a prompt'
+- file: m9f_4_introducing_prompt_library.md
+  order: 4
+  variant: full
+  title: Introducing the prompt library
+- file: m9f_5_working_from_pdf_template.md
+  order: 5
+  variant: full
+  title: 'Alternative: Working from a PDF template'
+- file: m9f_6_example_prompts.md
+  order: 6
+  variant: full
+  title: Example prompts from the library

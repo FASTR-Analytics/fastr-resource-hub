@@ -1,0 +1,49 @@
+slides:
+- file: mai_1_ai_assistant_overview.md
+  order: 1
+  variant: full
+  title: L'assistant IA
+- file: mai_2_ai_accelerator_not_decider.md
+  order: 2
+  variant: full
+  title: L'IA est un accélérateur, pas un décideur
+- file: mai_3_ai_assistant_capabilities.md
+  order: 3
+  variant: full
+  title: Ce que l'assistant IA peut faire
+- file: mai_4_ai_how_it_works.md
+  order: 4
+  variant: full
+  title: Comment fonctionne l'assistant IA
+- file: mai_4a_ai_conversations.md
+  order: 4.01
+  variant: full
+  title: Comment fonctionnent les conversations
+- file: mai_6_ai_tips_better_answers.md
+  order: 6
+  variant: full
+  title: Conseils pour de meilleures réponses
+- file: mai_7_ai_prompt_library_overview.md
+  order: 7
+  variant: full
+  title: La bibliothèque de prompts
+- file: mai_7a_ai_prompt_examples_table.md
+  order: 7.01
+  variant: full
+  title: Exemples de prompts de la bibliothèque
+- file: mai_7b_ai_prompt_in_action.md
+  order: 7.02
+  variant: full
+  title: Prompts en action
+- file: mai_8_ai_what_happens_log_off.md
+  order: 8
+  variant: full
+  title: Que se passe-t-il quand vous vous déconnectez
+- file: mai_8a_ai_private_vs_shared.md
+  order: 8.01
+  variant: full
+  title: Privé vs partagé sur les projets d'équipe
+- file: mai_8b_ai_team_collaboration.md
+  order: 8.02
+  variant: full
+  title: Comment les équipes collaborent

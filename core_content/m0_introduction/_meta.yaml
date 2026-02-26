@@ -1,0 +1,29 @@
+slides:
+- file: m0_0_what_are_we_trying_to_achieve.md
+  order: 0
+  variant: full
+  title: What are we trying to achieve?
+- file: m0_1_how_can_this_be_achieved.md
+  order: 1
+  variant: full
+  title: How can this be achieved?
+- file: m0_2_what_is_fastr.md
+  order: 2
+  variant: full
+  title: What is FASTR?
+- file: m0_3_fastr_approach_rmncahn.md
+  order: 3
+  variant: full
+  title: What is the FASTR approach to RMNCAH-N service use monitoring?
+- file: m0_3a_how_countries_use_fastr.md
+  order: 3.01
+  variant: full
+  title: How do countries use FASTR?
+- file: m0_3b_from_analysis_to_action.md
+  order: 3.02
+  variant: full
+  title: From analysis to action
+- file: m0_4_fastr_outputs.md
+  order: 4
+  variant: full
+  title: 'FASTR analytics: suite of outputs and products'

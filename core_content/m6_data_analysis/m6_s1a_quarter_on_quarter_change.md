@@ -9,7 +9,7 @@ paginate: true
 <div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Quarter-on-quarter change h:300](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Quarter-on-quarter change h:300](../../resources/default_outputs/Module3_QoQ_change.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -22,3 +22,11 @@ paginate: true
 
 </div>
 </div>
+
+<!--
+PRESENTER NOTES:
+- QoQ changes >±10% are flagged — but threshold is configurable
+- For flagged changes, ask: data quality issue, real program change, or external event?
+- These outputs don't require population denominators — useful when denominators uncertain
+- Complementary to the year-over-year view: captures more recent changes
+-->

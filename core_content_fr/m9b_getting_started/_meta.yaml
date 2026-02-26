@@ -1,0 +1,13 @@
+slides:
+- file: m9b_0_platform_demo.md
+  order: 0
+  variant: full
+  title: ''
+- file: m9b_1_logging_into_platform.md
+  order: 1
+  variant: full
+  title: 'Pratique : Connexion à la plateforme'
+- file: m9b_2_creating_user_folder.md
+  order: 2
+  variant: full
+  title: Création de votre dossier personnel

@@ -1,0 +1,45 @@
+slides:
+- file: m9d_0a_creating_slide_decks_intro.md
+  order: 0.01
+  variant: full
+  title: Créer des présentations
+- file: m9d_1_creating_slide_decks.md
+  order: 1
+  variant: full
+  title: 'Activité : Créer des diaporamas'
+- file: m9d_1a_adding_viz_interpretation_guide.md
+  order: 1.01
+  variant: full
+  title: Ajouter une visualisation et un texte d'interprétation à votre diapositive
+- file: m9d_2_editing_formatting_slides.md
+  order: 2
+  variant: full
+  title: 'Votre prochaine tâche : Modifier et finaliser vos diapositives'
+- file: m9d_2a_editing_why_it_matters.md
+  order: 2.01
+  variant: full
+  title: 'Modifier vos diapositives : pourquoi c''est important'
+- file: m9d_2b_open_slide_editor.md
+  order: 2.02
+  variant: full
+  title: 'Étape 1 : Ouvrir l''éditeur de diapositives'
+- file: m9d_2c_resize_text_visualization.md
+  order: 2.03
+  variant: full
+  title: 'Étape 2 : Redimensionner les zones de texte et de visualisation'
+- file: m9d_2d_other_edits.md
+  order: 2.04
+  variant: full
+  title: Autres modifications possibles
+- file: m9d_3_formatting_text.md
+  order: 3
+  variant: full
+  title: Formater le texte de votre rapport
+- file: m9d_3a_formatting_report_style.md
+  order: 3.01
+  variant: full
+  title: 'Formater votre rapport : paramètres de style'
+- file: m9d_3b_formatting_report_logos.md
+  order: 3.02
+  variant: full
+  title: 'Formater votre rapport : logos et détails de page'

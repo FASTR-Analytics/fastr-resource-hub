@@ -112,14 +112,15 @@ methodology/
 
 ## Workshop Slides Translation
 
-Workshop decks can also be built in French:
+Workshop decks can be built in French using the web app:
 
-```bash
-# Build French workshop deck
-python3 tools/02_build_deck.py --workshop 2026-countryname --lang fr
-```
+1. Start the web app: `cd web-app && ./dev.sh start`
+2. Open http://localhost:5173
+3. Create or open a workshop
+4. Select French as the language
+5. Export to Markdown, PDF, or PowerPoint
 
-This translates the entire deck at build time and outputs to `outputs/2026-countryname_deck.fr.md`.
+The web app reads French content from `core_content_fr/` and uses French templates from `templates_fr/`.
 
 ---
 

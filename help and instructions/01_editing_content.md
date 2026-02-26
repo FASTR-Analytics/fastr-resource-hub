@@ -253,7 +253,7 @@ Use `1.` for numbered lists:
 Use single backticks for inline code:
 
 ```markdown
-Run `python3 build_deck.py` to build the deck.
+Run `python3 tools/00_extract_slides.py` to extract slides.
 ```
 
 ### Code Blocks
@@ -271,8 +271,8 @@ def hello_world():
 
 ````markdown
 ```bash
-python3 tools/02_build_deck.py --workshop nigeria
-marp --no-config outputs/nigeria_deck.md --theme fastr-theme.css --pdf --allow-local-files
+python3 tools/00_extract_slides.py
+python3 tools/validate_content.py
 ```
 ````
 
@@ -496,21 +496,16 @@ paginate: true
 
 # Building Your First Deck
 
-## Step-by-step process:
+## Using the web app:
 
-1. Create workshop using the wizard:
+1. Start the web app:
    ```bash
-   python3 tools/01_new_workshop.py
+   cd web-app && ./dev.sh start
    ```
 
-2. Edit configuration in `workshop.yaml` (country data, schedule)
+2. Open http://localhost:5173
 
-3. Build the deck:
-   ```bash
-   python3 tools/02_build_deck.py --workshop 2025-nigeria
-   ```
-
-**Output:** `outputs/2025-nigeria_deck.md`
+3. Use the Workshop Builder to create and export your deck
 
 ## Common Mistakes to Avoid
 
@@ -641,15 +636,12 @@ Well-organized content below.
 4. Edit and watch live updates
 
 ### Building to PDF:
+
+Use the web app to build and export workshop decks:
 ```bash
-# Build the deck
-python3 tools/02_build_deck.py --workshop your_workshop
-
-# Render to PDF
-marp --no-config outputs/your_workshop_deck.md --theme fastr-theme.css --pdf --allow-local-files
-
-# Open and review
-open outputs/your_workshop_deck.pdf
+cd web-app && ./dev.sh start
+# Open http://localhost:5173
+# Use Workshop Builder → Export to PDF or PowerPoint
 ```
 
 ## Need More Help?

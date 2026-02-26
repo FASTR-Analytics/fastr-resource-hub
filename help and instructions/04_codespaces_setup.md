@@ -87,24 +87,22 @@ git commit -m "Fix typo in workshop slides"
 git push origin main
 ```
 
-### Scenario 2: Building a Deck
+### Scenario 2: Editing Methodology Content
 
 ```bash
 # 1. Pull latest
 git pull origin main
 
-# 2. Create workshop (or edit existing)
-python3 tools/01_new_workshop.py
+# 2. Edit files in methodology/ folder
+# ... edit files ...
 
-# 3. Build
-python3 tools/02_build_deck.py --workshop 2025-country
+# 3. Extract updated slides
+python3 tools/00_extract_slides.py
 
-# 4. Save your config to GitHub
-git add workshops/2025-country/
-git commit -m "Add 2025 country workshop config"
+# 4. Save to GitHub
+git add methodology/ core_content/
+git commit -m "Update methodology content"
 git push origin main
-
-# Note: Don't commit the generated outputs/*.md or *.pdf files!
 ```
 
 ### Scenario 3: Multi-Day Work

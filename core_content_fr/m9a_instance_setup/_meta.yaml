@@ -1,0 +1,17 @@
+slides:
+- file: m9a_0_setting_up_admin_areas.md
+  order: 0
+  variant: full
+  title: 'Activité : Configuration des zones administratives'
+- file: m9a_1_importing_data.md
+  order: 1
+  variant: full
+  title: 'Activité : Importer des données'
+- file: m9a_2_installing_running_modules.md
+  order: 2
+  variant: full
+  title: 'Activité : Installation et exécution des modules'
+- file: m9a_3_creating_project.md
+  order: 3
+  variant: full
+  title: 'Activité : Création d''un projet'

@@ -1,0 +1,117 @@
+slides:
+- file: m6_1_service_utilization_analysis.md
+  order: 1
+  variant: full
+  title: Analyse de l'utilisation des services
+- file: m6_1a_service_utilization_comparison_dhis2.md
+  order: 1.01
+  variant: full
+  title: 'Utilisation des services et perturbations : comparaison avec DHIS2'
+- file: m6_2_service_disruptions_surpluses_detection.md
+  order: 2
+  variant: full
+  title: Détection des perturbations et excédents de services
+- file: m6_2a_why_detecting_disruptions_matters.md
+  order: 2.01
+  variant: full
+  title: Pourquoi détecter les perturbations est important
+- file: m6_3_topic_3.md
+  order: 3
+  variant: full
+  title: Détection des perturbations
+- file: m6_4_topic_4.md
+  order: 4
+  variant: full
+  title: 'Sortie : Réel vs attendu (national)'
+- file: m6_5a_service_utilization_configuration_parameters.md
+  order: 5.01
+  variant: full
+  title: 'Module d''utilisation des services : Paramètres de configuration'
+- file: m6_6_service_coverage_introduction.md
+  order: 6
+  variant: full
+  title: Estimation de la couverture des services
+- file: m6_7_definition_of_coverage.md
+  order: 7
+  variant: full
+  title: Exemple de couverture des services
+- file: m6_8_denominators_by_service_type.md
+  order: 8
+  variant: full
+  title: Dénominateurs par type de service
+- file: m6_9_demographic_cascade.md
+  order: 9
+  variant: full
+  title: Relations attendues qui aident à estimer les dénominateurs
+- file: m6_10_denominator_cascade_illustration.md
+  order: 10
+  variant: full
+  title: Estimation des dénominateurs à partir de CPN1
+- file: m6_11_deriving_denominators_from_entry_points.md
+  order: 11
+  variant: full
+  title: Dérivation des dénominateurs à partir des points d'entrée
+- file: m6_13_denominator_selection_methodology.md
+  order: 13
+  variant: full
+  title: Méthodologie de sélection du dénominateur
+- file: m6_13a_denominator_comparison.md
+  order: 13.01
+  variant: full
+  title: Quel dénominateur fournit des estimations plus plausibles ?
+- file: m6_14_coverage_projection_methodology.md
+  order: 14
+  variant: full
+  title: Méthodologie de projection de la couverture
+- file: m6_19_coverage_configuration_parameters.md
+  order: 19
+  variant: full
+  title: 'Module de couverture : Paramètres de configuration'
+- file: m6_s1_utilization_overview.md
+  order: 1
+  variant: condensed
+  title: Analyse de l'utilisation des services
+- file: m6_s2_disruption_interpretation.md
+  order: 2
+  variant: condensed
+  title: Détection des perturbations de services
+- file: m6_s3_coverage_overview.md
+  order: 3
+  variant: condensed
+  title: Estimation de la couverture des services
+- file: m6_s3a_coverage_example.md
+  order: 3.01
+  variant: condensed
+  title: Exemple de couverture des services
+- file: m6_s3b_expected_relationships.md
+  order: 3.02
+  variant: condensed
+  title: Relations attendues qui aident à estimer les dénominateurs
+- file: m6_s3c_estimating_denominators.md
+  order: 3.03
+  variant: condensed
+  title: Estimation des dénominateurs à partir de CPN1
+- file: m6_s3d_five_denominator_options.md
+  order: 3.04
+  variant: condensed
+  title: Cinq options de dénominateur pour l'analyse FASTR
+- file: m6_s3e_how_fastr_estimates_coverage.md
+  order: 3.05
+  variant: condensed
+  title: Comment FASTR estime la couverture
+- file: m6_s4_coverage_interpretation.md
+  order: 4
+  variant: condensed
+  title: 'Résultats de couverture : Tendances nationales'
+- file: m6_s5_country_example_nigeria.md
+  order: 5
+  variant: condensed
+  title: 'Exemple de pays : Nigeria'
+- file: m6_s6_fastr_value_beyond_dhis2.md
+  order: 6
+  variant: condensed
+  title: Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
+- file: m6_s7_key_takeaway.md
+  order: 7
+  variant: condensed
+  title: Point clé à retenir

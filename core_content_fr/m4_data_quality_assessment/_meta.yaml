@@ -1,0 +1,78 @@
+slides:
+- file: m4_0_fastr_methods_overview.md
+  order: 0
+  variant: full
+  title: Pipeline analytique FASTR
+- file: m4_1_approach_to_dqa.md
+  order: 1
+  variant: full
+  title: FASTR adopte une approche multidimensionnelle de la qualité des données,
+    en partant du principe que la qualité des données ne doit pas être un obstacle
+    à leur utilisation - avec les bons mécanismes de retour d'information, l'utilisation
+    des données peut contribuer à améliorer leur qualité
+- file: m4_1a_measures_data_quality_detailed.md
+  order: 1.01
+  variant: full
+  title: Mesures de la qualité des données - détaillé
+- file: m4_1b_fastr_vs_dhis2_dqa.md
+  order: 1.02
+  variant: full
+  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse
+    AQD effectuée dans DHIS2 ?
+- file: m4_1c_fastr_vs_dhis2_dqa_continued.md
+  order: 1.03
+  variant: full
+  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse
+    AQD effectuée dans DHIS2 ?
+- file: m4_2_indicator_completeness.md
+  order: 2
+  variant: full
+  title: Complétude de l'indicateur
+- file: m4_2a_notes_on_completeness.md
+  order: 2.01
+  variant: full
+  title: Notes sur la complétude
+- file: m4_3_outliers.md
+  order: 3
+  variant: full
+  title: Valeurs aberrantes
+- file: m4_4_internal_consistency.md
+  order: 4
+  variant: full
+  title: Cohérence entre les indicateurs connexes
+- file: m4_5_overall_dqa_score.md
+  order: 5
+  variant: full
+  title: Score résumé de la qualité des données
+- file: m4_6_dqa_configuration_parameters.md
+  order: 6
+  variant: full
+  title: 'Module AQD : Paramètres de configuration'
+- file: m4_s1_dqa_pipeline_overview.md
+  order: 1
+  variant: condensed
+  title: Pipeline analytique FASTR
+- file: m4_s2_dqa_rationale_objectives.md
+  order: 2
+  variant: condensed
+  title: Raison d'être de l'évaluation de la qualité des données
+- file: m4_s3_dqa_completeness.md
+  order: 3
+  variant: condensed
+  title: Complétude de l'indicateur
+- file: m4_s3a_dqa_outlier_illustration.md
+  order: 3.01
+  variant: condensed
+  title: Pourquoi ajuster pour les valeurs aberrantes ?
+- file: m4_s3b_dqa_outliers.md
+  order: 3.02
+  variant: condensed
+  title: Détection des valeurs aberrantes
+- file: m4_s4_dqa_internal_consistency.md
+  order: 4
+  variant: condensed
+  title: Cohérence interne
+- file: m4_s5_dqa_score_summary.md
+  order: 5
+  variant: condensed
+  title: Score résumé de la qualité des données

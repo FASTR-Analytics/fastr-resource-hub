@@ -1,0 +1,33 @@
+slides:
+- file: m9c_0a_creating_visualizations_intro.md
+  order: 0.01
+  variant: full
+  title: Creating visualizations
+- file: m9c_1_creating_visualizations_manually.md
+  order: 1
+  variant: full
+  title: 'Activity: Creating visualizations manually'
+- file: m9c_2_creating_visualizations_ai.md
+  order: 2
+  variant: full
+  title: 'Activity: Creating visualizations using AI Assistant & save to user folder'
+- file: m9c_2a_explore_with_ai.md
+  order: 2.01
+  variant: full
+  title: Explore with the AI Assistant
+- file: m9c_3_interpreting_visualizations.md
+  order: 3
+  variant: full
+  title: How to interpret a FASTR visualization
+- file: m9c_3a_interpreting_example.md
+  order: 3.01
+  variant: full
+  title: 'Example: Interpreting a visualization'
+- file: m9c_4_interpreting_with_ai.md
+  order: 4
+  variant: full
+  title: 'Activity: Creating interpretations with the AI Assistant'
+- file: m9c_5_disruption_exercise.md
+  order: 5
+  variant: full
+  title: Has there been a disruption?

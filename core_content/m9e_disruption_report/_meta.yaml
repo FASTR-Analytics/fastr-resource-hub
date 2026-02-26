@@ -1,0 +1,37 @@
+slides:
+- file: m9e_1_manual_to_ai_reporting.md
+  order: 1
+  variant: full
+  title: Time to build your final output
+- file: m9e_2_creating_disruption_report_ai.md
+  order: 2
+  variant: full
+  title: 'Activity: Creating a disruption report with the AI Assistant'
+- file: m9e_2a_alternative_approach.md
+  order: 2.01
+  variant: full
+  title: 'Alternative approach: Working without a custom prompt'
+- file: m9e_3_ai_proposes_groupings.md
+  order: 3
+  variant: full
+  title: The AI will propose indicator groupings
+- file: m9e_4_confirm_ai_builds.md
+  order: 4
+  variant: full
+  title: Confirm and the AI builds your slides
+- file: m9e_5_review_checklist.md
+  order: 5
+  variant: full
+  title: 'Review checklist: Verifying the AI output'
+- file: m9e_6_refine_disruption_report.md
+  order: 6
+  variant: full
+  title: 'Activity: Refine your disruption report'
+- file: m9e_7_peer_review_checklist.md
+  order: 7
+  variant: full
+  title: 'Peer review: disruption report feedback'
+- file: m9e_8_presenting_reports.md
+  order: 8
+  variant: full
+  title: Presenting reports and group feedback

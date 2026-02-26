@@ -6,6 +6,13 @@ import { fileURLToPath } from 'url'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS } from '../services/marpService.js'
+import {
+  loadModulesRegistry,
+  loadModuleMeta,
+  getModuleNamesDict,
+  getModuleFolder,
+  invalidateRegistryCache,
+} from '../services/moduleRegistry.js'
 
 const router = Router()
 
@@ -99,49 +106,8 @@ function getCoreContentPath(language: Language = 'en'): string {
 // Default English path for backward compatibility
 const CORE_CONTENT_PATH = getCoreContentPath('en')
 
-// Module names by language
-const MODULE_NAMES: Record<Language, Record<number | string, string>> = {
-  en: {
-    0: 'Introduction to FASTR',
-    1: 'Identify Questions & Indicators',
-    2: 'Data Extraction',
-    3: 'FASTR Analytics Platform',
-    4: 'Data Quality Assessment',
-    5: 'Data Quality Adjustment',
-    6: 'Data Analysis',
-    7: 'Results Communication',
-    8: 'Survey & HFA',
-    '9a': 'Instance Setup',
-    '9b': 'Getting Started',
-    '9c': 'Visualizations & Interpretation',
-    '9d': 'Slide Decks',
-    '9e': 'Disruption Report',
-    '9f': 'Prompting Techniques',
-    '9g': 'FASTR Quiz',
-    '9h': 'Platform Demo',
-    '3b': 'AI Assistant',
-  },
-  fr: {
-    0: 'Introduction à FASTR',
-    1: 'Identifier les questions et indicateurs',
-    2: 'Extraction des données',
-    3: 'Plateforme analytique FASTR',
-    4: 'Évaluation de la qualité des données',
-    5: 'Ajustement de la qualité des données',
-    6: 'Analyse des données',
-    7: 'Communication des résultats',
-    8: 'Enquêtes et EFS',
-    '9a': 'Configuration de l\'instance',
-    '9b': 'Prise en main',
-    '9c': 'Visualisations & Interprétation',
-    '9d': 'Présentations',
-    '9e': 'Rapport de perturbations',
-    '9f': 'Techniques de prompting',
-    '9g': 'Quiz FASTR',
-    '9h': 'Démo de la plateforme',
-    '3b': 'Assistant IA',
-  }
-}
+// Module names loaded from modules.yaml via registry
+// (replaces hardcoded MODULE_NAMES dict)
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content Library
@@ -174,37 +140,87 @@ router.get('/modules', (req, res) => {
       return res.json(modules)
     }
 
-    const items = fs.readdirSync(coreContentPath).sort()
+    // Load module definitions from registry (modules.yaml)
+    const registryModules = loadModulesRegistry()
+    const moduleNames = getModuleNamesDict(language)
 
-    for (const item of items) {
-      const modulePath = path.join(coreContentPath, item)
+    for (const regMod of registryModules) {
+      const modulePath = path.join(coreContentPath, regMod.folder)
+      if (!fs.existsSync(modulePath) || !fs.statSync(modulePath).isDirectory()) continue
 
-      // Check for standard module folders (m0_, m1_, etc.) or AI module (mai_)
-      const isStandardModule = item.startsWith('m') && item.includes('_') && /^m(\d+[a-z]?)_/.test(item)
-      const isAIModule = item.startsWith('mai_')
+      const modNum: number | string = /^\d+$/.test(regMod.number) ? parseInt(regMod.number) : regMod.number
+      const modId = regMod.id
 
-      if (fs.statSync(modulePath).isDirectory() && (isStandardModule || isAIModule)) {
-        let modNum: number | string
-        let modId: string
+      const fullTopics: any[] = []
+      const condensedTopics: any[] = []
 
-        if (isAIModule) {
-          modNum = '3b'
-          modId = 'm3b'
-        } else {
-          const modNumMatch = item.match(/^m(\d+[a-z]?)_/)
-          if (!modNumMatch) continue
-          const raw = modNumMatch[1]
-          modNum = /[a-z]/.test(raw) ? raw : parseInt(raw)
-          modId = `m${raw}`
+      // Try _meta.yaml first for slide ordering
+      const meta = loadModuleMeta(coreContentPath, regMod.folder)
+
+      if (meta?.slides) {
+        // Use metadata-driven discovery
+        for (const entry of meta.slides) {
+          const file = entry.file
+          const filePath = path.join(modulePath, file)
+          if (!fs.existsSync(filePath)) continue
+
+          const content = fs.readFileSync(filePath, 'utf-8')
+
+          // Count slides
+          const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
+          const slideCount = slides.length
+
+          // Use title from meta, fall back to file parsing
+          let title = entry.title || ''
+          if (!title) {
+            const titleMatch = content.match(/^##\s+(.+)$/m)
+            title = titleMatch ? titleMatch[1].replace(/\s*-\s*Module\s*\d+$/i, '').trim() : ''
+          }
+          if (!title) {
+            title = file.replace('.md', '').replace(/^m\d+[a-z]?_s?\d+[a-z]*\d*_/, '').replace(/^mai_\d+[a-z]?_/, '').replace(/^\d+[a-z]?_/, '').replace(/_/g, ' ')
+            title = title.charAt(0).toUpperCase() + title.slice(1)
+          }
+
+          // Derive topic ID from filename
+          let topicId: string
+          const topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+[a-z]?)_/)
+          if (topicMatch) {
+            topicId = topicMatch[1]
+          } else {
+            // Custom module files (01_xxx.md) — use filename stem
+            topicId = file.replace('.md', '')
+          }
+
+          // Extract slide titles
+          const slideTitles = content.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, '')) || []
+
+          // Extract key points
+          const keyPoints = content.match(/^\*\*([^*]+)\*\*/gm)?.slice(0, 4).map(b => b.replace(/\*\*/g, '')) ||
+                          content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 4).map(b => b.replace(/^[-*]\s+/, '')) || []
+
+          const isCondensed = entry.variant === 'condensed'
+
+          const topic = {
+            id: topicId,
+            file: file,
+            title: title,
+            slideCount: slideCount,
+            slideTitles: slideTitles.slice(0, 5),
+            preview: keyPoints,
+            isCondensed: isCondensed,
+          }
+
+          if (isCondensed) {
+            condensedTopics.push(topic)
+          } else {
+            fullTopics.push(topic)
+          }
         }
-
-        const fullTopics: any[] = []
-        const condensedTopics: any[] = []
-
+      } else {
+        // Fallback: regex-based discovery (safety net if _meta.yaml missing)
         const files = fs.readdirSync(modulePath)
           .filter(f => f.endsWith('.md'))
           .sort((a, b) => {
-            // Sort by number, handling m4_1, m4_s1, and 01_, 02_ formats
             const aMatch = a.match(/^(?:m\d+[a-z]?_s?)?(\d+)/)
             const bMatch = b.match(/^(?:m\d+[a-z]?_s?)?(\d+)/)
             const aNum = aMatch ? parseInt(aMatch[1]) : 0
@@ -214,7 +230,6 @@ router.get('/modules', (req, res) => {
           })
 
         for (const file of files) {
-          // Match regular (m4_1_..., m4_1a_...), condensed (m4_s1_...), or AI (mai_1_...) formats
           let topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+[a-z]?)_/)
           let topicId: string
           let isCondensed = false
@@ -228,11 +243,9 @@ router.get('/modules', (req, res) => {
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
-          // Count slides
           const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
           const slideCount = slides.length
 
-          // Extract title
           const titleMatch = content.match(/^##\s+(.+)$/m)
           let title = titleMatch ? titleMatch[1] : ''
           title = title.replace(/\s*-\s*Module\s*\d+$/i, '').trim()
@@ -242,10 +255,7 @@ router.get('/modules', (req, res) => {
             title = title.charAt(0).toUpperCase() + title.slice(1)
           }
 
-          // Extract slide titles
           const slideTitles = content.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, '')) || []
-
-          // Extract key points
           const keyPoints = content.match(/^\*\*([^*]+)\*\*/gm)?.slice(0, 4).map(b => b.replace(/\*\*/g, '')) ||
                           content.match(/^[-*]\s+(.+)$/gm)?.slice(0, 4).map(b => b.replace(/^[-*]\s+/, '')) || []
 
@@ -265,38 +275,27 @@ router.get('/modules', (req, res) => {
             fullTopics.push(topic)
           }
         }
-
-        // Combine topics for backward compatibility, but also provide separated lists
-        const allTopics = [...fullTopics, ...condensedTopics]
-
-        modules.push({
-          number: modNum,
-          id: modId,
-          name: MODULE_NAMES[language]?.[modNum] || MODULE_NAMES['en'][modNum] || `Module ${modNum}`,
-          folder: item,
-          topics: allTopics, // All topics for backward compatibility
-          fullTopics: fullTopics,
-          condensedTopics: condensedTopics,
-          totalSlides: allTopics.reduce((sum, t) => sum + t.slideCount, 0),
-          fullSlides: fullTopics.reduce((sum, t) => sum + t.slideCount, 0),
-          condensedSlides: condensedTopics.reduce((sum, t) => sum + t.slideCount, 0),
-        })
       }
+
+      // Combine topics for backward compatibility, but also provide separated lists
+      const allTopics = [...fullTopics, ...condensedTopics]
+
+      modules.push({
+        number: modNum,
+        id: modId,
+        name: regMod.name[language] || regMod.name.en || `Module ${modNum}`,
+        folder: regMod.folder,
+        topics: allTopics,
+        fullTopics: fullTopics,
+        condensedTopics: condensedTopics,
+        totalSlides: allTopics.reduce((sum, t) => sum + t.slideCount, 0),
+        fullSlides: fullTopics.reduce((sum, t) => sum + t.slideCount, 0),
+        condensedSlides: condensedTopics.reduce((sum, t) => sum + t.slideCount, 0),
+      })
     }
 
-    // Sort modules: numeric order, with letter suffixes after their base number
-    // e.g., 3, 3b (AI), 4, ..., 9a, 9b, 9c, 9d
-    function moduleSortKey(num: number | string): number {
-      if (typeof num === 'number') return num
-      const match = String(num).match(/^(\d+)([a-z])?$/)
-      if (!match) return 100
-      const base = parseInt(match[1])
-      const suffix = match[2] ? (match[2].charCodeAt(0) - 96) * 0.01 : 0
-      return base + suffix
-    }
-    const sortedModules = modules.sort((a, b) => {
-      return moduleSortKey(a.number) - moduleSortKey(b.number)
-    })
+    // Modules are already in correct order from modules.yaml
+    const sortedModules = modules
 
     // Cache the result per language
     modulesCacheByLang[cacheKey] = {
@@ -357,39 +356,39 @@ router.get('/topic/:id', (req, res) => {
     let moduleFolder: string | undefined
     let filePrefix: string
 
-    // Check for AI module topic (mai_1, mai_2, mai_5a, etc.)
+    // Determine module ID from topic ID
     const aiMatch = topicId.match(/^mai_(\d+[a-z]?)$/)
-    // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
     const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
 
     if (aiMatch) {
-      // AI module topics
-      moduleFolder = fs.readdirSync(contentPath)
-        .find(f => f.startsWith('mai_'))
+      // AI module — lookup folder from registry
+      moduleFolder = getModuleFolder('mai') || undefined
+      if (!moduleFolder) {
+        // Fallback to filesystem scan
+        moduleFolder = fs.readdirSync(contentPath).find(f => f.startsWith('mai_'))
+      }
 
-      if (!moduleFolder && language !== 'en') {
-        // Fallback to English
-        const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-          .find(f => f.startsWith('mai_'))
-        if (enModuleFolder) {
+      // Check folder exists in requested language, fallback to English
+      if (moduleFolder && !fs.existsSync(path.join(contentPath, moduleFolder)) && language !== 'en') {
+        if (fs.existsSync(path.join(CORE_CONTENT_PATH, moduleFolder))) {
           contentPath = CORE_CONTENT_PATH
-          moduleFolder = enModuleFolder
         }
       }
     } else if (modNumMatch) {
       const modNum = modNumMatch[1]
-      moduleFolder = fs.readdirSync(contentPath)
-        .find(f => f.startsWith(`m${modNum}_`))
+      const modId = `m${modNum}`
 
+      // Lookup folder from registry
+      moduleFolder = getModuleFolder(modId) || undefined
       if (!moduleFolder) {
-        // Fallback to English if module not found in requested language
-        if (language !== 'en') {
-          const enModuleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-            .find(f => f.startsWith(`m${modNum}_`))
-          if (enModuleFolder) {
-            contentPath = CORE_CONTENT_PATH
-            moduleFolder = enModuleFolder
-          }
+        // Fallback to filesystem scan
+        moduleFolder = fs.readdirSync(contentPath).find(f => f.startsWith(`m${modNum}_`))
+      }
+
+      // Check folder exists in requested language, fallback to English
+      if (moduleFolder && !fs.existsSync(path.join(contentPath, moduleFolder))) {
+        if (language !== 'en' && fs.existsSync(path.join(CORE_CONTENT_PATH, moduleFolder))) {
+          contentPath = CORE_CONTENT_PATH
         }
       }
     } else {
@@ -731,8 +730,9 @@ router.post('/export/module/:id', async (req, res) => {
     }
 
     const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+    const moduleNames = getModuleNamesDict('en')
     const modKey = /[a-z]/.test(modNum) ? modNum : parseInt(modNum)
-    const moduleName = MODULE_NAMES['en'][modKey] || `Module ${modNum}`
+    const moduleName = moduleNames[modKey] || `Module ${modNum}`
 
     // Read all topic files in the module
     const files = fs.readdirSync(modulePath)
@@ -1066,6 +1066,9 @@ router.post('/rebuild', async (req, res) => {
     for (const lang of languages) {
       delete modulesCacheByLang[lang]
     }
+
+    // Clear registry cache (modules.yaml / _meta.yaml)
+    invalidateRegistryCache()
 
     // Also clear render cache
     renderCache.clear()

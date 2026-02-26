@@ -1,0 +1,22 @@
+slides:
+- file: m0_0_what_are_we_trying_to_achieve.md
+  order: 0
+  variant: full
+  title: Qu'essayons-nous d'accomplir ?
+- file: m0_1_how_can_this_be_achieved.md
+  order: 1
+  variant: full
+  title: Comment y parvenir ?
+- file: m0_2_what_is_fastr.md
+  order: 2
+  variant: full
+  title: Qu'est-ce que FASTR ?
+- file: m0_3_fastr_approach_rmncahn.md
+  order: 3
+  variant: full
+  title: Quelle est l'approche FASTR pour le suivi de l'utilisation des services SRMNIA-N
+    ?
+- file: m0_4_fastr_outputs.md
+  order: 4
+  variant: full
+  title: 'Analytique FASTR : suite de produits et résultats'

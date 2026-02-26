@@ -1,5 +1,8 @@
 import { Router } from 'express'
 import Anthropic from '@anthropic-ai/sdk'
+import {
+  loadModulesRegistry,
+} from '../services/moduleRegistry.js'
 
 const router = Router()
 
@@ -12,68 +15,23 @@ const getClient = () => {
   return new Anthropic({ apiKey })
 }
 
-// Module details for AI context
-const MODULE_DETAILS: Record<number, { name: string; description: string; topics: string[]; duration: string }> = {
-  0: {
-    name: 'Introduction to FASTR',
-    description: 'Overview of the FASTR methodology, why rapid-cycle analytics matters for RMNCAH-N programs.',
-    topics: ['Introduction to FASTR approach', 'RMNCAH-N service use monitoring', 'Why rapid-cycle analytics'],
-    duration: '45-60 min',
-  },
-  1: {
-    name: 'Identify Questions & Indicators',
-    description: 'How to identify priority analytical questions, develop data use cases, and prepare indicator frameworks.',
-    topics: ['FASTR gaps and challenges', 'Development of data use case', 'Defining priority questions'],
-    duration: '60-90 min',
-  },
-  2: {
-    name: 'Data Extraction',
-    description: 'Technical module on extracting data from DHIS2 and other health information systems.',
-    topics: ['Why extract data', 'DHIS2 data structure', 'Data Downloader tool', 'API-based extraction'],
-    duration: '90-120 min',
-  },
-  3: {
-    name: 'FASTR Analytics Platform',
-    description: 'Hands-on introduction to the FASTR Analytics Platform.',
-    topics: ['Platform overview', 'Accessing the platform', 'Importing datasets', 'Running analysis modules'],
-    duration: '120-180 min',
-  },
-  4: {
-    name: 'Data Quality Assessment',
-    description: 'Systematic approach to assessing data quality: completeness, outliers, internal consistency.',
-    topics: ['Approach to DQA', 'Indicator completeness', 'Outlier detection', 'Internal consistency checks'],
-    duration: '90-120 min',
-  },
-  5: {
-    name: 'Data Quality Adjustment',
-    description: 'Methods for adjusting data to account for quality issues before analysis.',
-    topics: ['Approach to adjustment', 'Adjustment for outliers', 'Adjustment for completeness'],
-    duration: '60-90 min',
-  },
-  6: {
-    name: 'Data Analysis',
-    description: 'Core analytical methods: service utilization trends, coverage estimation.',
-    topics: ['Service utilization analysis', 'Year-over-year change', 'Coverage introduction', 'Interpreting outputs'],
-    duration: '180-240 min',
-  },
-  7: {
-    name: 'Results Communication',
-    description: 'How to interpret findings, create visualizations, and communicate results.',
-    topics: ['Analytical thinking', 'Data visualization principles', 'Using data for decisions'],
-    duration: '90-120 min',
-  },
-  8: {
-    name: 'Survey & HFA',
-    description: 'Integration of survey data and health facility assessments with routine data.',
-    topics: ['Survey data integration', 'Health facility assessments', 'Triangulating data sources'],
-    duration: '60-90 min',
-  },
-  9: {
-    name: 'Workshop Activities',
-    description: 'Hands-on activities and exercises for workshop participants.',
-    topics: ['Group exercises', 'Data interpretation activities', 'Country-specific work'],
-    duration: '60-120 min',
-  },
+// Module details loaded from modules.yaml via registry
+// Helper to build a MODULE_DETAILS-compatible dict on demand from registry
+function getModuleDetailsDict(): Record<number, { name: string; description: string; topics: string[]; duration: string }> {
+  const modules = loadModulesRegistry()
+  const dict: Record<number, { name: string; description: string; topics: string[]; duration: string }> = {}
+  for (const mod of modules) {
+    if (!/^\d+$/.test(mod.number)) continue  // Only numeric modules (0-9)
+    const num = parseInt(mod.number)
+    const ai = mod.ai_context
+    dict[num] = {
+      name: mod.name.en,
+      description: ai?.description || '',
+      topics: ai?.topics || [],
+      duration: ai?.duration || '',
+    }
+  }
+  return dict
 }
 
 // AI Tools for modifying the deck
@@ -306,7 +264,7 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     config.schedule[dayKey] = []
   }
 
-  const moduleInfo = MODULE_DETAILS[module_number]
+  const moduleInfo = getModuleDetailsDict()[module_number]
   if (!moduleInfo) {
     return { success: false, message: `Module ${module_number} not found` }
   }
@@ -711,7 +669,7 @@ Each module has TWO versions available:
 5. If unclear, default to asking
 
 # AVAILABLE MODULES
-${Object.entries(MODULE_DETAILS).map(([num, mod]) => `
+${Object.entries(getModuleDetailsDict()).map(([num, mod]) => `
 ## Module ${num}: ${mod.name}
 - **Description**: ${mod.description}
 - **Topics**: ${mod.topics.join(', ')}
@@ -883,7 +841,7 @@ router.post('/objectives', async (req, res) => {
 
     const client = getClient()
 
-    const moduleNames = modules.map((m: number) => MODULE_DETAILS[m]?.name || `Module ${m}`).join(', ')
+    const moduleNames = modules.map((m: number) => getModuleDetailsDict()[m]?.name || `Module ${m}`).join(', ')
 
     const prompt = `Generate 4-6 specific learning objectives for a ${duration || 3}-day FASTR workshop in ${country}.
 
@@ -948,7 +906,7 @@ router.post('/schedule', async (req, res) => {
     const client = getClient()
 
     const moduleDescriptions = modules.map((m: number) => {
-      const mod = MODULE_DETAILS[m]
+      const mod = getModuleDetailsDict()[m]
       return mod ? `Module ${m} (${mod.name}): ${mod.duration}` : `Module ${m}`
     }).join('\n')
 
@@ -1023,7 +981,7 @@ router.post('/generate-workshop', async (req, res) => {
 
     const client = getClient()
 
-    const moduleList = Object.entries(MODULE_DETAILS)
+    const moduleList = Object.entries(getModuleDetailsDict())
       .map(([num, m]) => `  Module ${num}: ${m.name} - ${m.description} (${m.duration})`)
       .join('\n')
 

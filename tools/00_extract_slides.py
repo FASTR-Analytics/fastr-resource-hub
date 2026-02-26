@@ -499,6 +499,57 @@ def extract_slides(base_dir, language='en'):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# METADATA REGENERATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def regenerate_meta(base_dir, languages):
+    """Regenerate _meta.yaml files for all extracted content directories."""
+    try:
+        from migrate_to_meta import build_meta_yaml, folder_to_mod_id
+        import yaml
+    except ImportError:
+        # Try importing from same directory
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        sys.path.insert(0, script_dir)
+        try:
+            from migrate_to_meta import build_meta_yaml, folder_to_mod_id
+            import yaml
+        except ImportError:
+            print("⚠️  Could not import migrate_to_meta or PyYAML — skipping _meta.yaml regeneration")
+            return
+
+    print("📋 Regenerating _meta.yaml files...")
+    meta_count = 0
+
+    for language in languages:
+        content_dir_name = 'core_content' if language == 'en' else f'core_content_{language}'
+        content_dir = Path(base_dir) / content_dir_name
+        if not content_dir.exists():
+            continue
+
+        label = language.upper()
+        for module_dir in sorted(content_dir.iterdir()):
+            if not module_dir.is_dir():
+                continue
+
+            mod_id = folder_to_mod_id(module_dir.name)
+            if not mod_id:
+                continue
+
+            md_files = list(module_dir.glob('*.md'))
+            if not md_files:
+                continue
+
+            meta = build_meta_yaml(module_dir, mod_id)
+            meta_path = module_dir / '_meta.yaml'
+            with open(meta_path, 'w', encoding='utf-8') as f:
+                yaml.dump(meta, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+            meta_count += 1
+
+    print(f"   ✅ Updated {meta_count} _meta.yaml files\n")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # MAIN
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -538,15 +589,15 @@ Examples:
             all_success = False
 
     if all_success:
+        # Regenerate _meta.yaml files to stay in sync
+        regenerate_meta(base_dir, languages)
+
         output_dirs = ', '.join([
             'core_content' if lang == 'en' else f'core_content_{lang}'
             for lang in languages
         ])
-        print("💡 Next steps:")
-        print(f"   1. Review extracted files in {output_dirs}/")
-        print("   2. Create a workshop: python3 tools/01_new_workshop.py")
-        print("   3. Build a deck: python3 tools/02_build_deck.py --workshop <name>")
-        print("")
+        print(f"💡 Extracted files are in {output_dirs}/")
+        print("   Open http://localhost:5173 to preview in the web app\n")
 
     sys.exit(0 if all_success else 1)
 

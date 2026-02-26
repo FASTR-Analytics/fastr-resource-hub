@@ -22,7 +22,7 @@ See **[09_translation_workflow.md](09_translation_workflow.md)** for the complet
 |------|---------|
 | `tools/translate.py` | Core DeepL translation module with caching |
 | `tools/translate_docs.py` | Translate methodology docs with REVIEWED protection |
-| `tools/02_build_deck.py --lang fr` | Build workshop decks in French |
+| Web app (language selector) | Build workshop decks in French |
 
 ### 3. REVIEWED Marker System
 
@@ -41,8 +41,8 @@ python3 tools/translate_docs.py --lang fr --status
 # Translate methodology docs
 python3 tools/translate_docs.py --lang fr
 
-# Build French workshop deck
-python3 tools/02_build_deck.py --workshop 2026-countryname --lang fr
+# Build French workshop deck: use the web app
+# cd web-app && ./dev.sh start → select French language → Export
 
 # Check DeepL API quota
 python3 tools/translate.py --check
