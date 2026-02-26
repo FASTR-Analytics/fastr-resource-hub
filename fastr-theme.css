@@ -360,7 +360,7 @@ img.icon {
   width: 100%;
   height: auto;
   object-fit: contain;
-  max-height: 450px;
+  max-height: 500px;
 }
 
 /* Text-heavy left column (60/40 split) */
@@ -381,7 +381,7 @@ img.icon {
   width: 100%;
   height: auto;
   object-fit: contain;
-  max-height: 450px;
+  max-height: 500px;
 }
 
 /* Image-heavy right column (40/60 split) */
@@ -402,7 +402,7 @@ img.icon {
   width: 100%;
   height: auto;
   object-fit: contain;
-  max-height: 450px;
+  max-height: 500px;
 }
 
 .columns-3 {
@@ -685,35 +685,36 @@ section.centered img {
 /* Layout: image left (60%), interpretation right (40%) */
 
 section.output {
-  padding: 40px 60px;
+  padding: 30px 50px;
 }
 
 section.output h2 {
-  font-size: 1.5em;
-  margin-bottom: 0.4em;
+  font-size: 1.4em;
+  margin-bottom: 0.3em;
 }
 
 .output-layout {
   display: flex;
-  gap: 1.5em;
+  gap: 1.2em;
   align-items: flex-start;
 }
 
 .output-layout .output-viz {
-  flex: 1.2;
+  flex: 1.3;
 }
 
 .output-layout .output-viz img {
   width: 100%;
   height: auto;
-  max-height: 420px;
+  max-height: 500px;
   object-fit: contain;
+  border-radius: 4px;
 }
 
 .output-layout .output-text {
-  flex: 1;
-  font-size: 0.85em;
-  line-height: 1.5;
+  flex: 0.9;
+  font-size: 0.82em;
+  line-height: 1.45;
 }
 
 /* ========================================
