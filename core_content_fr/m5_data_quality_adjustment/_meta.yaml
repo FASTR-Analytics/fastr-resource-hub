@@ -15,6 +15,10 @@ slides:
   order: 1
   variant: condensed
   title: Ajustement de la qualité des données
+- file: m5_s1a_why_adjust_for_outliers.md
+  order: 1.01
+  variant: condensed
+  title: Why adjust for outliers?
 - file: m5_s2_dq_adjustment_interpretation.md
   order: 2
   variant: condensed

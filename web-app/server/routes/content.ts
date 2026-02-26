@@ -158,8 +158,9 @@ router.get('/modules', (req, res) => {
       const meta = loadModuleMeta(coreContentPath, regMod.folder)
 
       if (meta?.slides) {
-        // Use metadata-driven discovery
-        for (const entry of meta.slides) {
+        // Use metadata-driven discovery, sorted by order field
+        const sortedSlides = [...meta.slides].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+        for (const entry of sortedSlides) {
           const file = entry.file
           const filePath = path.join(modulePath, file)
           if (!fs.existsSync(filePath)) continue
@@ -313,15 +314,17 @@ router.get('/modules', (req, res) => {
 // GET /api/content/modules/:id - Get specific module content
 router.get('/modules/:id', (req, res) => {
   try {
-    const modNum = req.params.id.replace('m', '')
-    const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-      .find(f => f.startsWith(`m${modNum}_`))
+    const modId = req.params.id
+    const moduleFolder = getModuleFolder(modId)
 
     if (!moduleFolder) {
       return res.status(404).json({ error: 'Module not found' })
     }
 
     const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
+    if (!fs.existsSync(modulePath)) {
+      return res.status(404).json({ error: 'Module folder not found' })
+    }
     const files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
 
     const slides: any[] = []
@@ -719,11 +722,10 @@ FASTR Resource Hub Export
 router.post('/export/module/:id', async (req, res) => {
   try {
     const { format = 'markdown' } = req.body
-    const modNum = req.params.id.replace('m', '')
+    const modId = req.params.id
 
-    // Find module folder
-    const moduleFolder = fs.readdirSync(CORE_CONTENT_PATH)
-      .find(f => f.startsWith(`m${modNum}_`))
+    // Find module folder via registry
+    const moduleFolder = getModuleFolder(modId)
 
     if (!moduleFolder) {
       return res.status(404).json({ error: 'Module not found' })
@@ -731,6 +733,7 @@ router.post('/export/module/:id', async (req, res) => {
 
     const modulePath = path.join(CORE_CONTENT_PATH, moduleFolder)
     const moduleNames = getModuleNamesDict('en')
+    const modNum = modId.replace('m', '')
     const modKey = /[a-z]/.test(modNum) ? modNum : parseInt(modNum)
     const moduleName = moduleNames[modKey] || `Module ${modNum}`
 
@@ -849,22 +852,19 @@ router.post('/export/selection', async (req, res) => {
 
       // Handle mai_ prefix (AI assistant module)
       if (topicId.startsWith('mai_')) {
-        moduleFolder = 'mai_ai_assistant'
+        moduleFolder = getModuleFolder('m3b') || getModuleFolder('mai') || 'mai_ai_assistant'
         filePrefix = `${topicId}_`
       } else {
         // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
         const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
         if (!modNumMatch) continue
 
-        const modNum = modNumMatch[1]
-        moduleFolder = fs.readdirSync(contentPath)
-          .find(f => f.startsWith(`m${modNum}_`))
+        const modId = `m${modNumMatch[1]}`
+        moduleFolder = getModuleFolder(modId) || undefined
 
-        // Fallback to English if not found
+        // Fallback to English if not found in requested language path
         if (!moduleFolder && contentPath !== CORE_CONTENT_PATH) {
           contentPath = CORE_CONTENT_PATH
-          moduleFolder = fs.readdirSync(contentPath)
-            .find(f => f.startsWith(`m${modNum}_`))
         }
 
         filePrefix = `${topicId}_`

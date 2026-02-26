@@ -15,14 +15,6 @@ slides:
   order: 2.01
   variant: full
   title: Pourquoi détecter les perturbations est important
-- file: m6_3_topic_3.md
-  order: 3
-  variant: full
-  title: Détection des perturbations
-- file: m6_4_topic_4.md
-  order: 4
-  variant: full
-  title: 'Sortie : Réel vs attendu (national)'
 - file: m6_5a_service_utilization_configuration_parameters.md
   order: 5.01
   variant: full
@@ -71,6 +63,10 @@ slides:
   order: 1
   variant: condensed
   title: Analyse de l'utilisation des services
+- file: m6_s1a_quarter_on_quarter_change.md
+  order: 1.01
+  variant: condensed
+  title: Quarter-on-quarter change
 - file: m6_s2_disruption_interpretation.md
   order: 2
   variant: condensed
@@ -107,10 +103,18 @@ slides:
   order: 5
   variant: condensed
   title: 'Exemple de pays : Nigeria'
+- file: m6_s5_value_beyond_dhis2.md
+  order: 5
+  variant: condensed
+  title: Why FASTR? Value add beyond standard DHIS2 analysis
 - file: m6_s6_fastr_value_beyond_dhis2.md
   order: 6
   variant: condensed
   title: Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
+- file: m6_s6_topic_s6.md
+  order: 6
+  variant: condensed
+  title: Key takeaway
 - file: m6_s7_key_takeaway.md
   order: 7
   variant: condensed

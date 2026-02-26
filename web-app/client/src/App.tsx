@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
 import { t } from './i18n/translations'
+import { useToast } from './components/Toast'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
 import { ContentLibrary } from './components/ContentLibrary'
@@ -1029,6 +1030,7 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
 // ─────────────────────────────────────────────────────────────────────────────
 function QuickExportMode({ onBack }: { onBack: () => void }) {
   const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
+  const { showToast } = useToast()
   const [selections, setSelections] = useState<Map<string, { moduleId: string; variant: 'full' | 'condensed' }>>(new Map())
   const [isExporting, setIsExporting] = useState(false)
   const [exportFormat, setExportFormat] = useState<'pdf' | 'pptx' | null>(null)
@@ -1252,11 +1254,11 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
           window.open(data.downloadUrl, '_blank')
         }
       } else {
-        alert('Export failed. Please try again.')
+        showToast('Export failed. Please try again.', 'error')
       }
     } catch (err) {
       console.error('Export failed:', err)
-      alert('Export failed. Please try again.')
+      showToast('Export failed. Please try again.', 'error')
     } finally {
       setIsExporting(false)
       setExportFormat(null)
@@ -1286,13 +1288,13 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
           <p className="text-sm text-gray-500">{t('contentLibrarySubtitle', contentLanguage)}</p>
         </div>
         {/* Language toggle */}
-        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
           <button
             onClick={() => setContentLanguage('en')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
               contentLanguage === 'en'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
+                ? 'bg-fastr-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
             EN
@@ -1301,8 +1303,8 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
             onClick={() => setContentLanguage('fr')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
               contentLanguage === 'fr'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
+                ? 'bg-fastr-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
             FR
@@ -1750,23 +1752,23 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
         </button>
         <h1 className="text-lg font-semibold text-gray-800">{t('browseContentLibrary', contentLanguage)}</h1>
         <div className="flex-1" />
-        <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
           <button
             onClick={() => setContentLanguage('en')}
-            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
               contentLanguage === 'en'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
+                ? 'bg-fastr-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
             EN
           </button>
           <button
             onClick={() => setContentLanguage('fr')}
-            className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
               contentLanguage === 'fr'
-                ? 'bg-white text-fastr-primary shadow-sm'
-                : 'text-gray-600 hover:bg-gray-200'
+                ? 'bg-fastr-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
             FR
@@ -1912,6 +1914,7 @@ function App() {
     setError,
     saveStatus,
   } = useWorkshopStore()
+  const { showToast } = useToast()
 
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -2399,24 +2402,29 @@ function App() {
 
     try {
       let downloadUrl = ''
+      let response: Response
 
       if (format === 'html') {
-        await fetch(`/api/export/${currentWorkshopId}/html`, { method: 'POST', credentials: 'include' })
+        response = await fetch(`/api/export/${currentWorkshopId}/html`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/html`
       } else if (format === 'pdf') {
-        await fetch(`/api/export/${currentWorkshopId}/pdf`, { method: 'POST', credentials: 'include' })
+        response = await fetch(`/api/export/${currentWorkshopId}/pdf`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/pdf`
       } else if (format === 'pptx') {
-        await fetch(`/api/export/${currentWorkshopId}/pptx`, { method: 'POST', credentials: 'include' })
+        response = await fetch(`/api/export/${currentWorkshopId}/pptx`, { method: 'POST', credentials: 'include' })
         downloadUrl = `/api/export/${currentWorkshopId}/download/pptx`
+      } else {
+        return
       }
 
-      // Trigger download
-      if (downloadUrl) {
-        window.open(downloadUrl, '_blank')
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || `Export failed (${response.status})`)
       }
+
+      window.open(downloadUrl, '_blank')
     } catch (error: any) {
-      alert(`Build failed: ${error.message}`)
+      showToast(`Build failed: ${error.message}`, 'error')
     }
     setIsBuilding(false)
   }
@@ -3271,7 +3279,7 @@ function App() {
                             onClick={(e) => {
                               e.stopPropagation()
                               if (workshop.locked) {
-                                alert('Cannot delete a locked workshop. Unlock it first.')
+                                showToast('Cannot delete a locked workshop. Unlock it first.', 'error')
                                 return
                               }
                               if (confirm(`Delete "${workshop.name}"? This cannot be undone.`)) {

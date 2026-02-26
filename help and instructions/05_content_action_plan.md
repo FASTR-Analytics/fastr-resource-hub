@@ -4,32 +4,34 @@ Audit of content status across all methodology modules.
 
 ---
 
-## Getting Started (Ashley & Angelica)
+## Summary
 
-### Suggested Division of Work
+| Module | Slides | Status | Action Needed |
+|--------|--------|--------|---------------|
+| M0 Introduction | 6 | DRAFTED | Review needed |
+| M1 Questions & Indicators | 11 | DRAFTED | Review needed |
+| M2 Data Extraction | 13 | PARTIAL | Complete missing content |
+| M3 FASTR Platform | 6 | PARTIAL | More slides needed (docs are comprehensive) |
+| M4 DQ Assessment | 17 | DRAFTED | Review needed |
+| M5 DQ Adjustment | 6 | DRAFTED | Review; consider more slides |
+| M6a Service Utilization | 11 | DRAFTED | Review needed |
+| M6b Coverage Estimates | 13 | DRAFTED | Review needed |
+| M7 Results Communication | 33 | DRAFTED | Review needed |
+| M8 Survey & HFA | 4 | DRAFTED | Review needed |
+| MAI AI Assistant | 28 | DRAFTED | Review needed |
+| M9a-h Workshop Activities | varies | DRAFTED | Review needed |
 
-| Person | Focus | Files |
-|--------|-------|-------|
-| **Ashley & Angelica** | Documentation content (detailed explanations) | Top half of each `.md` file |
-| **Claire** | Slide content (condensed bullets) | Bottom half (after ASCII separator) |
-| **Meghan** | Platform content |  |
+**Modules needing more slides extracted: M3, M5**
+**Modules needing review: all others**
 
+---
 
+## Status Key
 
-
-### Where to Start
-
-**Recommended first file:** `methodology/01_identify_questions_indicators.md`
-
-
-### Priority Order
-
-| Priority | Module | Why |
-|----------|--------|-----|
-| 1 | M1: Questions & Indicators | Foundation for everything else |
-| 2 | M7: Results Communication | Ties it all together |
-| 3 | M3: FASTR Platform | Technical but important |
-| 4 | M2: Data Extraction | Partially done, just needs completion |
+| Status | Meaning |
+|--------|---------|
+| **DRAFTED** | Real content exists, needs review and sign-off |
+| **PARTIAL** | Some content exists, more slides needed |
 
 ---
 
@@ -43,204 +45,130 @@ Audit of content status across all methodology modules.
 4. Content goes into existing SLIDE markers (structure already in place)
 5. Review and refine with subject matter experts
 
-The placeholder modules (M1, M3, M7) already have the correct slide marker structure - we just need to fill in the content, not create new markers.
-
----
-
-## Status Key
-
-| Status | Meaning |
-|--------|---------|
-| **DRAFTED** | Content exists, needs review and sign-off |
-| **PARTIAL** | Some content exists, more needed |
-| **PLACEHOLDER** | Module structure exists but no real content - needs full creation |
-
----
-
-## Summary
-
-| Module | Status | Action Needed | Names |
-|--------|--------|---------------|-------|
-| M0 Introduction | DRAFTED | Review needed | Ashley |
-| M1 Questions & Indicators | PLACEHOLDER | **Create entire module content** | Angelica |
-| M2 Data Extraction | PARTIAL | Complete missing content | Ashley |
-| M3 FASTR Platform | PLACEHOLDER | **Create entire module content** | Meghan |
-| M4 DQ Assessment | DRAFTED | Review needed | Cb and Ashley |
-| M5 DQ Adjustment | DRAFTED | Review needed | Cb and Ashley |
-| M6a Service Utilization | DRAFTED | Review needed | Cb and Ashley |
-| M6b Coverage Estimates | DRAFTED | Review needed | Cb and Ashley |
-| M7 Results Communication | PLACEHOLDER | **Create entire module content** |TBD|
-
-**Modules needing full content creation: M1, M3, M7**
-**Modules needing review: M0, M4, M5, M6a, M6b**
-**Modules needing completion: M2**
-
 ---
 
 ## Detailed Status by Module
 
 ### Module 0: Introduction (00_introduction.md)
-**Status: DRAFTED - NEEDS REVIEW**
+**Status: DRAFTED - NEEDS REVIEW** (6 slides)
 
-| Slide ID | Title | Status | Action |
-|----------|-------|--------|--------|
-| m0_1 | Introduction to FASTR | Drafted | Review |
-| m0_2 | RMNCAH-N Service Use Monitoring | Drafted | Review |
-| m0_3 | Why rapid-cycle analytics? / How does it work? | Drafted | Review |
-| m0_4 | Technical Approaches | Drafted | Review |
-| m0_5 | FASTR Approach to Routine Data Analysis | Drafted | Review |
+Covers FASTR introduction, rapid-cycle analytics approach, and country entry points. Good conceptual overview with presenter notes.
 
 ---
 
-### Module 1: Identify Questions & Indicators (01_identify_questions_indicators.md)
-**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
+### Module 1: Questions & Indicators (01_identify_questions_indicators.md)
+**Status: DRAFTED - NEEDS REVIEW** (11 slides)
 
-**Source material needed:** Existing workshop decks covering indicator selection, data use cases, stakeholder engagement.
-
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m1_1 | 1.1 Introduction to FASTR: Gaps and Challenges | Placeholder |
-| m1_2 | 1.2 Development of a Data Use Case | Placeholder |
-| m1_3 | 1.3 Defining Priority Questions and Selecting Indicators | Placeholder |
-| m1_4 | 1.4 Preparing for Data Extraction | Placeholder |
+Comprehensive content with country examples (Nigeria, Guinea, Ethiopia), data use case frameworks, and indicator selection guidance. Previously listed as PLACEHOLDER but has been filled in.
 
 ---
 
 ### Module 2: Data Extraction (02_data_extraction.md)
-**Status: PARTIAL**
+**Status: PARTIAL** (13 slides)
 
-| Slide ID | Title | Status | Content Needed |
-|----------|-------|--------|----------------|
-| m2_1 | 2.1 Why Extract Data? | Drafted | Review |
-| m2_2 | 2.2 Tools for Data Extraction | Placeholder | DHIS2 export tools, API examples, validation steps |
+Good content on why to extract data, but some extraction tool topics could use more detail.
 
 ---
 
 ### Module 3: FASTR Analytics Platform (03_fastr_analytics_platform.md)
-**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
+**Status: PARTIAL** (6 slides, but extensive documentation)
 
-**Source material needed:** Platform user guides, training decks, screenshots from the FASTR analytics platform.
+The documentation section (~233 lines) covers platform features comprehensively, but only 6 slides have been extracted. Major topics in the docs (data flow, modules, visualizations, reports, collaboration) need corresponding slides.
 
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m3_1 | 3.1 Overview of the Platform | Placeholder |
-| m3_2 | 3.2 Accessing the Platform | Placeholder |
-| m3_3 | 3.3 Setting Up the Structure | Placeholder |
-| m3_4 | 3.4 Importing a Dataset | Placeholder |
-| m3_5 | 3.5 Installing and Running Modules | Placeholder |
-| m3_6 | 3.6 Creating a New Project | Placeholder |
-| m3_7 | 3.7 Creating Visualizations | Placeholder |
-| m3_8 | 3.8 Creating Reports | Placeholder |
+**Action needed:**
+- [ ] Extract more slides from the existing documentation content
+- [ ] Add slides for: data flow, running modules, creating visualizations, generating reports
 
 ---
 
 ### Module 4: Data Quality Assessment (04_data_quality_assessment.md)
-**Status: DRAFTED - NEEDS REVIEW**
+**Status: DRAFTED - NEEDS REVIEW** (17 slides)
 
-| Slide ID | Title | Status | Action |
-|----------|-------|--------|--------|
-| m4_1 | Data Quality Assessment | Drafted | Review |
-| m4_2 | Question 1: Are Facilities Reporting? (Completeness) | Drafted | Review |
-| m4_3 | Question 2: Are Numbers Reasonable? (Outliers) | Drafted | Review |
-| m4_4 | Question 3: Do Related Numbers Match Up? (Consistency) | Drafted | Review |
-| m4_5 | Putting It All Together: Overall Data Quality | Drafted | Review |
+Deep technical module covering completeness, outliers, and consistency validation. Well-balanced between documentation and slides.
 
 ---
 
 ### Module 5: Data Quality Adjustment (05_data_quality_adjustment.md)
-**Status: DRAFTED - NEEDS REVIEW**
+**Status: DRAFTED - NEEDS REVIEW** (6 slides)
 
-| Slide ID | Title | Status | Action |
-|----------|-------|--------|--------|
-| m5_1 | Approach to Data Quality Adjustment | Drafted | Review |
-| m5_2 | Adjustment for Outliers | Drafted | Review |
-| m5_3 | Adjustment for Completeness | Drafted | Review |
-| m5_4 | Combined Adjustment Impact | Drafted | Review |
+Good technical content (50KB of documentation) but limited slide coverage relative to the depth of the material.
 
 ---
 
 ### Module 6a: Service Utilization (06a_service_utilization.md)
-**Status: DRAFTED - NEEDS REVIEW**
+**Status: DRAFTED - NEEDS REVIEW** (11 slides)
 
-| Slide ID | Title | Status | Action |
-|----------|-------|--------|--------|
-| m6_1 | Service Utilization Analysis | Drafted | Review |
-| m6_2 | Surplus and Disruption Analyses | Drafted | Review |
-| m6a_3 | Service Utilization: FASTR Outputs | Drafted | Review |
+Covers service disruption detection, statistical process control, and regression-based analysis.
 
 ---
 
 ### Module 6b: Coverage Estimates (06b_coverage_estimates.md)
-**Status: DRAFTED - NEEDS REVIEW**
+**Status: DRAFTED - NEEDS REVIEW** (13 slides)
 
-| Slide ID | Title | Status | Action |
-|----------|-------|--------|--------|
-| m6_3 | Service Coverage Estimates | Drafted | Review |
-| m6b_4 | Coverage Estimates: FASTR Outputs | Drafted | Review |
+Covers coverage estimation methodology, HMIS/UN WPP/survey data integration.
 
 ---
 
 ### Module 7: Results Communication (07_results_communication.md)
-**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
+**Status: DRAFTED - NEEDS REVIEW** (33 slides)
 
-**Source material needed:** Data use and communication training decks, stakeholder engagement guides, reporting templates.
+Very comprehensive module covering analytical thinking, interpretation, messaging, storytelling, and action planning. Previously listed as PLACEHOLDER but has been fully developed.
 
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m7_1 | 7.1 Analytical Thinking & Interpretation | Placeholder |
-| m7_2 | 7.2 Data Visualization, Communication & Message Development | Placeholder |
-| m7_3 | 7.3 Using Data for Decision-Making | Placeholder |
-| m7_4 | 7.4 Stakeholder Engagement & Advocacy | Placeholder |
-| m7_5 | 7.5 Practice: Generating Quarterly Reporting Products | Placeholder |
+---
+
+### Module 8: Survey & HFA
+**Status: DRAFTED** (4 slides)
+
+Covers rapid-cycle facility surveys, HFA design, adaptive content, indicator types.
+
+---
+
+### AI Assistant Module (mai_ai_assistant)
+**Status: DRAFTED** (28 slides)
+
+Covers AI capabilities, prompting techniques, conversations, data privacy. Sub-topics use letter suffixes (mai_3a, mai_5a, etc.).
+
+---
+
+## French Translation Gaps
+
+| Module | EN Files | FR Files | Missing in FR |
+|--------|----------|----------|---------------|
+| mai_ai_assistant | 28 | 12 | 16 files |
+| m7_results_communication | 36 | 32 | 4 files |
+| m8_survey_hfa | 4 | 1 | 3 files |
+| m6_data_analysis | 30 | 29 | 3 files (+ 2 stale FR files to delete) |
+| m0_introduction | 7 | 5 | 2 files |
+| m5_data_quality_adjustment | 6 | 5 | 1 file |
 
 ---
 
 ## Priority Action Items
 
-> **These are suggestions** - the team should discuss and confirm what's actually needed.
-
-### HIGH PRIORITY: Full Module Creation
-
-These modules need complete content - use AI to extract from existing decks:
-
-**Module 1: Identify Questions & Indicators**
-- [ ] Gather existing workshop decks on indicator selection
-- [ ] Extract content using AI
-- [ ] Adapt to methodology format with SLIDE markers
+### HIGH PRIORITY: Slide Extraction
 
 **Module 3: FASTR Analytics Platform**
-- [ ] Gather platform training materials and screenshots
-- [ ] Extract content using AI
-- [ ] Adapt to methodology format with SLIDE markers
+- [ ] Extract additional slides from extensive documentation
+- [ ] Cover: data flow, running modules, visualizations, reports
 
-**Module 7: Results Communication**
-- [ ] Gather data use and communication training decks
-- [ ] Extract content using AI
-- [ ] Adapt to methodology format with SLIDE markers
+### MEDIUM PRIORITY: Review
 
-### MEDIUM PRIORITY: Review & Completion
+**All drafted modules need subject matter expert review:**
+- [ ] M0 Introduction
+- [ ] M1 Questions & Indicators
+- [ ] M4 DQ Assessment
+- [ ] M5 DQ Adjustment
+- [ ] M6a Service Utilization
+- [ ] M6b Coverage Estimates
+- [ ] M7 Results Communication
 
-**Drafted modules (need review):**
-- [ ] M0 Introduction - review content
-- [ ] M4 DQ Assessment - review content
-- [ ] M5 DQ Adjustment - review content
-- [ ] M6a Service Utilization - review content
-- [ ] M6b Coverage Estimates - review content
+### LOWER PRIORITY: French Translations
 
-**Partial modules (need completion):**
-- [ ] M2 Data Extraction - complete m2_2
-
----
-
-## Delegation Suggestions
-
-> **For discussion** - suggested team assignments based on skill requirements.
-
-| Assignment | Modules | Skills Needed | Slides |
-|------------|---------|---------------|--------|
-| Team 1: Platform & Workflow | M1, M2, M3 | DHIS2 expertise, platform docs | 13 |
-| Team 2: Communication | M7 | Training/facilitation, comms | 5 |
-| Team 3: Analysis Expansion | M6a, M6b | Data analysis, visualization | 4-7 |
+- [ ] Translate 16 missing AI Assistant files
+- [ ] Translate 4 missing M7 files
+- [ ] Translate 3 missing M8 files
+- [ ] Translate remaining gaps (M0, M5, M6)
+- [ ] Delete 2 stale FR files in m6_data_analysis
 
 ---
 

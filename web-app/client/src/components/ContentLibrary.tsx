@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useWorkshopStore } from '../stores/workshop'
 import api, { Asset, previewAPI } from '../../lib/api'
 import { t } from '../i18n/translations'
+import { useToast } from './Toast'
 import {
   ChevronRight,
   ChevronDown,
@@ -77,6 +78,7 @@ interface TemplateCategory {
 
 export function ContentLibrary() {
   const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage } = useWorkshopStore()
+  const { showToast } = useToast()
   const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
   const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
@@ -163,7 +165,7 @@ export function ContentLibrary() {
       await loadAssets()
     } catch (err: any) {
       console.error('Upload failed:', err)
-      alert(`Upload failed: ${err.message}`)
+      showToast(`Upload failed: ${err.message}`, 'error')
     } finally {
       setUploadingAsset(false)
     }
@@ -179,7 +181,7 @@ export function ContentLibrary() {
       await loadAssets()
     } catch (err: any) {
       console.error('Delete failed:', err)
-      alert(`Delete failed: ${err.message}`)
+      showToast(`Delete failed: ${err.message}`, 'error')
     }
   }
 
@@ -197,12 +199,12 @@ export function ContentLibrary() {
     setIsRebuilding(true)
     try {
       const result = await api.rebuildContent()
-      alert(`Content rebuilt successfully in ${(result.duration / 1000).toFixed(1)}s`)
+      showToast(`Content rebuilt successfully in ${(result.duration / 1000).toFixed(1)}s`, 'success')
       // Reload the page to get fresh content
       window.location.reload()
     } catch (err: any) {
       console.error('Rebuild failed:', err)
-      alert(`Rebuild failed: ${err.message}`)
+      showToast(`Rebuild failed: ${err.message}`, 'error')
     } finally {
       setIsRebuilding(false)
     }
@@ -268,8 +270,6 @@ export function ContentLibrary() {
 
   // Add template to schedule
   const addTemplate = (template: Template, category: TemplateCategory) => {
-    console.log('[ContentLibrary] addTemplate called:', template.name, category.id)
-
     if (!currentConfig) {
       console.warn('[ContentLibrary] No currentConfig - cannot add template')
       return
@@ -286,8 +286,6 @@ export function ContentLibrary() {
     // Determine session type - only use valid types from Session interface
     // Valid types: 'break' | 'section' | 'day_recap' | 'day_end' | 'day_title' | undefined
     const sessionType = category.id === 'breaks' ? 'break' as const : undefined
-
-    console.log('[ContentLibrary] Adding session:', template.name, 'with slides:', template.file)
 
     addSession(dayNum, {
       session: template.name,

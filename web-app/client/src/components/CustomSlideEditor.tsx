@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2, Image, Upload, Loader2 } from 'lucide-react'
 import api, { Asset } from '../../lib/api'
+import { useToast } from './Toast'
 
 interface CustomSlideEditorProps {
   workshopId: string
@@ -57,6 +58,7 @@ ${data.subtitle || ''}`
 }
 
 export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: CustomSlideEditorProps) {
+  const { showToast } = useToast()
   const [selectedType, setSelectedType] = useState<SlideType | null>(null)
   const [editorMode, setEditorMode] = useState<EditorMode>('simple')
   const [markdown, setMarkdown] = useState('')
@@ -112,7 +114,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
       await loadAssets()
     } catch (err: any) {
       console.error('Upload failed:', err)
-      alert(`Upload failed: ${err.message}`)
+      showToast(`Upload failed: ${err.message}`, 'error')
     } finally {
       setUploadingAsset(false)
     }

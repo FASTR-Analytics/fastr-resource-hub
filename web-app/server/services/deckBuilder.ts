@@ -5,6 +5,7 @@ import { WorkshopConfig } from '../db/database.js'
 import {
   getModuleFolder,
   getModuleName,
+  loadModuleMeta,
 } from './moduleRegistry.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -234,61 +235,45 @@ function buildModuleSlides(
   const modulePath = path.join(coreContentPath, folderName)
   if (!fs.existsSync(modulePath)) return null
 
-  // Get all .md files
-  let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
-
-  // Filter by version (full vs condensed)
-  // Full version: files like m4_0_*, m4_1_*, m4_1a_* (NO _s after module ID)
-  // Condensed version: files like m4_s1_*, m4_s2_* (WITH _s after module ID)
-  // Special case: overview module uses numeric prefixes like 01_, 02_, etc.
-  // Default to "full" if not specified
   const effectiveVersion = version || 'full'
 
-  // Special handling for overview module - no version filtering needed
-  if (moduleId !== 'overview') {
-    if (effectiveVersion === 'condensed') {
-      // Condensed: only include files with _s pattern (e.g., m4_s1_*, m4_s2_*)
-      files = files.filter(f => {
-        const match = f.match(/^m\d+[a-z]?_s\d+/)
-        return match !== null
+  // Try _meta.yaml for ordering, fall back to regex
+  const meta = loadModuleMeta(coreContentPath, folderName)
+  let files: string[]
+
+  if (meta?.slides) {
+    // Metadata-driven: filter by variant + sort by order
+    files = meta.slides
+      .filter(entry => {
+        if (moduleId === 'overview') return true
+        return effectiveVersion === 'condensed'
+          ? entry.variant === 'condensed'
+          : entry.variant !== 'condensed'
       })
-    } else {
-      // Full (default): exclude files with _s pattern, keep only numbered files (m4_0_*, m4_1_*, m4_1a_*)
-      files = files.filter(f => {
-        const match = f.match(/^m\d+[a-z]?_s\d+/)
-        return match === null  // NOT a condensed file
-      })
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      .map(entry => entry.file)
+      .filter(f => fs.existsSync(path.join(modulePath, f)))
+  } else {
+    // Fallback: filesystem scan with regex sorting
+    files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
+
+    if (moduleId !== 'overview') {
+      if (effectiveVersion === 'condensed') {
+        files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) !== null)
+      } else {
+        files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) === null)
+      }
     }
-  }
 
-  // Sort files by topic number
-  files = files.sort((a, b) => {
-      // Handle condensed files (m4_s1, m4_s2, etc.)
-      const aCondensedMatch = a.match(/^m\d+[a-z]?_s(\d+)/)
-      const bCondensedMatch = b.match(/^m\d+[a-z]?_s(\d+)/)
-
-      // Handle full files (m4_0, m4_1, m4_1a, etc.)
-      const aFullMatch = a.match(/^m\d+[a-z]?_(\d+)/)
-      const bFullMatch = b.match(/^m\d+[a-z]?_(\d+)/)
-
-      // Handle overview files (01_, 02_, 04b_, etc.)
-      const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
-      const bOverviewMatch = b.match(/^(\d+)([a-z])?_/)
-
-      // Get numbers for sorting
-      let aNum = 0, bNum = 0
-      if (aCondensedMatch) aNum = parseInt(aCondensedMatch[1])
-      else if (aFullMatch) aNum = parseInt(aFullMatch[1])
-      else if (aOverviewMatch) aNum = parseInt(aOverviewMatch[1])
-
-      if (bCondensedMatch) bNum = parseInt(bCondensedMatch[1])
-      else if (bFullMatch) bNum = parseInt(bFullMatch[1])
-      else if (bOverviewMatch) bNum = parseInt(bOverviewMatch[1])
-
+    files = files.sort((a, b) => {
+      const aMatch = a.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+      const bMatch = b.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+      const aNum = aMatch ? parseInt(aMatch[1]) : 0
+      const bNum = bMatch ? parseInt(bMatch[1]) : 0
       if (aNum !== bNum) return aNum - bNum
-      // If same topic number, sort alphabetically (e.g., m4_1 before m4_1a before m4_1b, or 04_ before 04b_)
       return a.localeCompare(b)
     })
+  }
 
   // Filter by topic range if specified
   // Works for both full (m4_1_*) and condensed (m4_s1_*) files
@@ -353,46 +338,43 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
   const modulePath = path.join(coreContentPath, folderName)
   if (!fs.existsSync(modulePath)) return []
 
+  // Try _meta.yaml for ordering, fall back to regex
+  const meta = loadModuleMeta(coreContentPath, folderName)
+
+  if (meta?.slides) {
+    const effectiveVersion = version || 'full'
+    return meta.slides
+      .filter(entry => {
+        if (moduleId === 'overview') return true
+        return effectiveVersion === 'condensed'
+          ? entry.variant === 'condensed'
+          : entry.variant !== 'condensed'
+      })
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      .map(entry => entry.file)
+      .filter(f => fs.existsSync(path.join(modulePath, f)))
+  }
+
+  // Fallback: filesystem scan with regex sorting
   let files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
 
-  // Filter by version (default to "full" if not specified)
-  // Special handling for overview module - no version filtering needed
   if (moduleId !== 'overview') {
     const effectiveVersion = version || 'full'
     if (effectiveVersion === 'condensed') {
       files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) !== null)
     } else {
-      // Full (default): exclude condensed files
       files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) === null)
     }
   }
 
   return files.sort((a, b) => {
-      // Handle condensed files (m4_s1, m4_s2, etc.)
-      const aCondensedMatch = a.match(/^m\d+[a-z]?_s(\d+)/)
-      const bCondensedMatch = b.match(/^m\d+[a-z]?_s(\d+)/)
-
-      // Handle full files (m4_0, m4_1, m4_1a, etc.)
-      const aFullMatch = a.match(/^m\d+[a-z]?_(\d+)/)
-      const bFullMatch = b.match(/^m\d+[a-z]?_(\d+)/)
-
-      // Handle overview files (01_, 02_, 04b_, etc.)
-      const aOverviewMatch = a.match(/^(\d+)([a-z])?_/)
-      const bOverviewMatch = b.match(/^(\d+)([a-z])?_/)
-
-      // Get numbers for sorting
-      let aNum = 0, bNum = 0
-      if (aCondensedMatch) aNum = parseInt(aCondensedMatch[1])
-      else if (aFullMatch) aNum = parseInt(aFullMatch[1])
-      else if (aOverviewMatch) aNum = parseInt(aOverviewMatch[1])
-
-      if (bCondensedMatch) bNum = parseInt(bCondensedMatch[1])
-      else if (bFullMatch) bNum = parseInt(bFullMatch[1])
-      else if (bOverviewMatch) bNum = parseInt(bOverviewMatch[1])
-
-      if (aNum !== bNum) return aNum - bNum
-      return a.localeCompare(b)
-    })
+    const aMatch = a.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+    const bMatch = b.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+    const aNum = aMatch ? parseInt(aMatch[1]) : 0
+    const bNum = bMatch ? parseInt(bMatch[1]) : 0
+    if (aNum !== bNum) return aNum - bNum
+    return a.localeCompare(b)
+  })
 }
 
 /**
