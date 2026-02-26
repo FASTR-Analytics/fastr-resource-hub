@@ -6,31 +6,31 @@ paginate: true
 
 <!-- _class: compact -->
 
-## Example prompts at a glance
+## Exemples de prompts en un coup d'œil
 
 <div class="columns">
 <div>
 
-**Getting started**
-*"Show me an overview of the data: what indicators, regions, and time periods are available?"*
+**Pour commencer**
+*« Montrez-moi un aperçu des données : quels indicateurs, régions et périodes sont disponibles ? »*
 
-**Data quality**
-*"Analyze data completeness across facilities and time periods. Identify facilities with incomplete reporting."*
+**Qualité des données**
+*« Analysez la complétude des données par établissement et période. Identifiez les établissements avec un rapportage incomplet. »*
 
-**Analysis**
-*"Which regions or indicators should we prioritize for support? Identify areas with declining service delivery or persistent gaps."*
+**Analyse**
+*« Quelles régions ou indicateurs devrions-nous prioriser pour un soutien ? Identifiez les zones avec une prestation de services en déclin ou des lacunes persistantes. »*
 
 </div>
 <div>
 
-**Indicator analysis**
-*"Analyze BCG, Penta1, and Penta3 for disruptions. Show actual vs expected with disruption periods highlighted."*
+**Analyse par indicateur**
+*« Analysez BCG, Penta1 et Penta3 pour les perturbations. Montrez les valeurs réelles vs attendues avec les périodes de perturbation mises en évidence. »*
 
-**Workflows**
-*"I need a quick 5-slide deck on [TOPIC] for [AUDIENCE]. Include: status, trends, regional comparison, and recommendations."*
+**Flux de travail**
+*« J'ai besoin d'une présentation rapide de 5 diapositives sur [SUJET] pour [AUDIENCE]. Incluez : état des lieux, tendances, comparaison régionale et recommandations. »*
 
-**Methodology**
-*"Explain how FASTR identifies outliers. What statistical method is used? How should I interpret flagged values?"*
+**Méthodologie**
+*« Expliquez comment FASTR identifie les valeurs aberrantes. Quelle méthode statistique est utilisée ? Comment interpréter les valeurs signalées ? »*
 
 </div>
 </div>

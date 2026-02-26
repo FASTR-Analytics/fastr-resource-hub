@@ -4,17 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## From analysis to action
+## De l'analyse à l'action
 
-FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are **starting points, not endpoints**. They trigger investigation and inform decisions.
+Les résultats de FASTR — qu'il s'agisse de scores AQD, de tendances d'utilisation des services ou d'estimations de couverture — sont des **points de départ, pas des conclusions**. Ils déclenchent l'investigation et éclairent les décisions.
 
-![w:600](../../resources/diagrams/from_analysis_to_action.svg)
+![w:600](../../resources/diagrams_fr/from_analysis_to_action.svg)
 
 <!--
 PRESENTER NOTES:
-- This cycle applies to ALL FASTR outputs, not just disruptions
-- DQA findings → investigate data systems → improve reporting
-- Utilization changes → investigate service delivery → address bottlenecks
-- Coverage gaps → investigate access barriers → target interventions
-- FASTR provides evidence; stakeholders provide context, judgement, and action
+- Ce cycle s'applique à TOUS les résultats de FASTR, pas seulement aux perturbations
+- Résultats AQD → investiguer les systèmes de données → améliorer le rapportage
+- Changements d'utilisation → investiguer la prestation de services → lever les obstacles
+- Écarts de couverture → investiguer les barrières d'accès → cibler les interventions
+- FASTR fournit les preuves ; les parties prenantes apportent le contexte, le jugement et l'action
 -->

@@ -6,48 +6,48 @@ paginate: true
 
 <!-- _class: compact -->
 
-## What makes a good prompt?
+## Qu'est-ce qui fait un bon prompt ?
 
 <div class="columns">
 <div>
 
-**1. Be clear on purpose**
-- Is the task explicit? (interpret, summarize, compare, generate slides)
-- Is the use case clear? (performance review, donor update, training)
+**1. Soyez clair sur l'objectif**
+- La tâche est-elle explicite ? (interpréter, résumer, comparer, générer des diapositives)
+- Le cas d'utilisation est-il clair ? (revue de performance, mise à jour pour les bailleurs, formation)
 
-**2. Define the audience**
-- Is the intended audience stated? (MoH managers, analysts, policymakers)
-- Is the level of technical detail appropriate?
+**2. Définissez l'audience**
+- Le public cible est-il précisé ? (gestionnaires du ministère, analystes, décideurs)
+- Le niveau de détail technique est-il approprié ?
 
-**3. Specify geography, time, and scope**
-- Is the country or subnational level specified?
-- Is the time period clear?
-- Are priority indicators or services named?
+**3. Précisez la géographie, la période et le périmètre**
+- Le pays ou le niveau infranational est-il spécifié ?
+- La période est-elle claire ?
+- Les indicateurs ou services prioritaires sont-ils nommés ?
 
 </div>
 <div>
 
-**4. Give interpretation guidance**
-- Should the AI describe trends, compare areas, or identify disruptions?
-- Should it stick to description or include implications?
+**4. Donnez des orientations d'interprétation**
+- L'IA doit-elle décrire les tendances, comparer les zones ou identifier les perturbations ?
+- Doit-elle s'en tenir à la description ou inclure les implications ?
 
-**5. Specify the output format**
-- Bullet points or narrative? Slide-ready text or report prose?
-- Example: "Provide 3–4 slide-ready bullets in plain language."
+**5. Précisez le format de sortie**
+- Points de synthèse ou texte narratif ? Texte prêt pour les diapositives ou prose de rapport ?
+- Exemple : « Fournissez 3 à 4 points de synthèse en langage clair, prêts pour une diapositive. »
 
-**6. Set guardrails**
-- Ask the AI to stay grounded in the data shown
-- Request that uncertainty or data quality issues be flagged
+**6. Posez des garde-fous**
+- Demandez à l'IA de rester ancrée dans les données présentées
+- Demandez que les incertitudes ou les problèmes de qualité des données soient signalés
 
 </div>
 </div>
 
-**Rule of thumb:** Before you send a prompt, ask yourself: *is it obvious what I want back?* If not, add one more detail.
+**Règle d'or :** Avant d'envoyer un prompt, demandez-vous : *est-il évident ce que j'attends en retour ?* Si non, ajoutez un détail supplémentaire.
 
 <!--
 PRESENTER NOTES:
-- The quality of the AI's response depends heavily on the quality of the prompt
-- The "Good vs Weak" example: "Interpret this chart for a quarterly RMNCAH performance review" vs "Explain this chart"
-- Format matters — the AI can write bullets, paragraphs, or slide-ready text, but you need to ask
-- Guardrails help keep the AI grounded — the AI should describe what the data shows, not speculate
+- La qualité de la réponse de l'IA dépend fortement de la qualité du prompt
+- L'exemple « Bon vs Faible » : « Interprétez ce graphique pour une revue trimestrielle SRMNEA » vs « Expliquez ce graphique »
+- Le format compte — l'IA peut rédiger des points, des paragraphes ou du texte pour diapositives, mais il faut le demander
+- Les garde-fous maintiennent l'IA ancrée — l'IA doit décrire ce que les données montrent, pas spéculer
 -->

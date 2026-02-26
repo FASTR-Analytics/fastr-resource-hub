@@ -5,21 +5,21 @@ paginate: true
 ---
 
 <!-- _class: output -->
-## Indicator completeness output
+## Sortie de complétude des indicateurs
 
 <div class="output-layout">
 <div class="output-viz">
 
-![Completeness output](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Sortie de complétude](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
 <div class="output-text">
 
-**What you see:** Heatmap showing completeness by indicator and region, color-coded from red (low) through yellow (medium) to green (high).
+**Ce que vous voyez :** Heatmap montrant la complétude par indicateur et région, codée par couleur du rouge (faible) au jaune (moyen) au vert (élevé).
 
-**Formula:** Completeness % = (facilities reporting / facilities expected to report) × 100
+**Formule :** % de complétude = (établissements rapportant / établissements attendus) × 100
 
-**Interpretation:** Look for systematic gaps — certain indicators or regions consistently low may indicate reporting barriers needing targeted support.
+**Interprétation :** Recherchez les lacunes systématiques — certains indicateurs ou régions systématiquement bas peuvent indiquer des obstacles au rapportage nécessitant un soutien ciblé.
 
 </div>
 </div>

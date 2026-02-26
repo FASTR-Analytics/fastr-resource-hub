@@ -8,7 +8,7 @@ paginate: true
 
 Le module projette la valeur de l'enquête la plus récente en utilisant les tendances observées dans la couverture dérivée du SIGS :
 
-![Méthode de projection de la couverture](../../resources/diagrams/coverage_projection.svg)
+![Méthode de projection de la couverture](../../resources/diagrams_fr/coverage_projection.svg)
 
 Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendances observées en matière de prestation de services.
 

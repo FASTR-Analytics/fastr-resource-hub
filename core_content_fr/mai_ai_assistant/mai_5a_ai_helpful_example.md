@@ -4,25 +4,25 @@ theme: fastr
 paginate: true
 ---
 
-## When AI is helpful
+## Quand l'IA est utile
 
 <div class="columns-image-right">
 <div>
 
-**Your interpretation of figure:**
+**Votre interprétation de la figure :**
 
-Multiple sustained disruptions through 2023 to 2025, with service use below expected levels during red shaded periods.
+Plusieurs perturbations prolongées de 2023 à 2025, avec une utilisation des services en dessous des niveaux attendus pendant les périodes en rouge.
 
-**AI interpretation of figure:**
+**Interprétation de l'IA :**
 
-In August 2023, volumes dropped significantly below expected levels (12% shortfall). Disruption intensified from January to May 2025, with February 2025 showing the largest gap at 10,100 cases (20% below expected).
+En août 2023, les volumes ont chuté significativement en dessous des niveaux attendus (déficit de 12%). La perturbation s'est intensifiée de janvier à mai 2025, avec février 2025 montrant l'écart le plus important à 10 100 cas (20% en dessous des prévisions).
 
-***When patterns are not obvious, AI interpretation can improve our understanding.***
+***Quand les tendances ne sont pas évidentes, l'interprétation de l'IA peut améliorer notre compréhension.***
 
 </div>
 <div>
 
-![When AI is helpful](../../resources/screenshots/ai_helpful_complex.png)
+![Quand l'IA est utile](../../resources/screenshots/ai_helpful_complex.png)
 
 </div>
 </div>

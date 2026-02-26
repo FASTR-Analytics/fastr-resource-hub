@@ -24,7 +24,7 @@ paginate: true
 
 **Couverture** = services délivrés ÷ population cible
 
-![Équation de couverture h:120](../../resources/diagrams/coverage_equation.svg)
+![Équation de couverture h:120](../../resources/diagrams_fr/coverage_equation.svg)
 
 </div>
 </div>

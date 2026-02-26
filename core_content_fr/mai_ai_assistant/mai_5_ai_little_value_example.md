@@ -4,21 +4,21 @@ theme: fastr
 paginate: true
 ---
 
-## When AI adds little value
+## Quand l'IA apporte peu de valeur
 
 <div class="columns-image-right">
 <div>
 
-**Your interpretation of figure:**
+**Votre interprétation de la figure :**
 
-Across all districts, outliers are very low, with all indicators averaging below 1%, suggesting consistent reporting quality.
+Dans tous les districts, les valeurs aberrantes sont très faibles, avec tous les indicateurs en moyenne en dessous de 1%, ce qui suggère une qualité de rapportage cohérente.
 
-***When patterns are obvious, more explanation does not improve understanding.***
+***Quand les tendances sont évidentes, plus d'explications n'améliorent pas la compréhension.***
 
 </div>
 <div>
 
-![When AI adds little value](../../resources/screenshots/ai_little_value_obvious.png)
+![Quand l'IA apporte peu de valeur](../../resources/screenshots/ai_little_value_obvious.png)
 
 </div>
 </div>

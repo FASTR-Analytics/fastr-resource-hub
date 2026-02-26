@@ -6,31 +6,31 @@ paginate: true
 
 <!-- _class: compact -->
 
-## Three spheres of influence
+## Les trois sphères d'influence
 
-The Three Spheres of Influence framework helps direct attention to the actions we can take from our data.
+Le cadre des trois sphères d'influence aide à orienter l'attention vers les actions que nous pouvons entreprendre à partir de nos données.
 
 <div class="columns-image-right">
 <div>
 
-**Sphere of control** — Actions you can take directly
-- Defaulter tracing, register reviews, outreach coordination
-- These are within your team's immediate capacity
+**Sphère de contrôle** — Actions que vous pouvez entreprendre directement
+- Recherche des perdus de vue, revue des registres, coordination des activités de proximité
+- Ce sont des actions à la portée immédiate de votre équipe
 
-**Sphere of influence** — Actions requiring collaboration
-- Engaging partners, securing logistics, advocating for policy changes
-- You can influence but not unilaterally decide
+**Sphère d'influence** — Actions nécessitant une collaboration
+- Engagement des partenaires, sécurisation de la logistique, plaidoyer pour des changements de politique
+- Vous pouvez influencer mais pas décider unilatéralement
 
-**Sphere of concern** — Broader systemic factors
-- National policy environment, external financing, population dynamics
-- Important context, but outside your direct control
+**Sphère de préoccupation** — Facteurs systémiques plus larges
+- Environnement politique national, financement extérieur, dynamiques de population
+- Contexte important, mais hors de votre contrôle direct
 
 </div>
 <div>
 
-![Three Spheres of Influence](../../resources/diagrams/three_spheres_of_influence.svg)
+![Trois sphères d'influence](../../resources/diagrams_fr/three_spheres_of_influence.svg)
 
 </div>
 </div>
 
-*When planning actions from your FASTR findings, focus first on what you can control, then on what you can influence.*
+*Lorsque vous planifiez des actions à partir de vos résultats FASTR, concentrez-vous d'abord sur ce que vous pouvez contrôler, puis sur ce que vous pouvez influencer.*

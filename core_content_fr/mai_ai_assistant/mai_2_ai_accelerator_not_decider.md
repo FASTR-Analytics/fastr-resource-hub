@@ -4,36 +4,36 @@ theme: fastr
 paginate: true
 ---
 
-## AI is an accelerator, not a decision maker
+## L'IA est un accélérateur, pas un décideur
 
 <div class="columns-image-right">
 <div>
 
-**You stay in control of:**
+**Vous gardez le contrôle sur :**
 
-- Judgement — deciding what matters
-- Interpretation — understanding context
-- Action — making decisions
+- Le jugement — décider de ce qui compte
+- L'interprétation — comprendre le contexte
+- L'action — prendre des décisions
 
-**The numbers come from validated methods**
+**Les chiffres proviennent de méthodes validées**
 
-All calculations (outlier detection, coverage estimates, data quality scores) use proven statistical formulas — not AI.
+Tous les calculs (détection des valeurs aberrantes, estimations de couverture, scores de qualité des données) utilisent des formules statistiques éprouvées — pas l'IA.
 
-AI interprets and explains. You decide and act.
+L'IA interprète et explique. Vous décidez et agissez.
 
 </div>
 <div>
 
-![AI accelerator diagram](../../resources/diagrams/ai_accelerator.svg)
+![Diagramme IA accélérateur](../../resources/diagrams_fr/ai_accelerator.svg)
 
 </div>
 </div>
 
 <!--
 PRESENTER NOTES:
-- The key message: AI supports, humans decide
-- The diagram shows the clear separation — human at top (DECIDES), AI below (SUPPORTS)
-- Three AI capabilities: Interpretation (explains patterns), Querying (finds information), Outputs (generates drafts)
-- All numbers come from validated statistical methods, not AI generation
-- AI helps you work faster, but judgment, accountability, and action remain with you
+- Le message clé : l'IA soutient, l'humain décide
+- Le diagramme montre la séparation claire — l'humain en haut (DÉCIDE), l'IA en dessous (SOUTIENT)
+- Trois capacités de l'IA : Interprétation (explique les tendances), Interrogation (trouve l'information), Sorties (génère des ébauches)
+- Tous les chiffres proviennent de méthodes statistiques validées, pas de génération par l'IA
+- L'IA vous aide à travailler plus vite, mais le jugement, la responsabilité et l'action restent entre vos mains
 -->

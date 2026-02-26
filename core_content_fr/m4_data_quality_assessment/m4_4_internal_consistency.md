@@ -26,7 +26,7 @@ Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce
 </div>
 <div>
 
-![Illustration de cohérence h:280](../../resources/diagrams/consistency_illustration.svg)
+![Illustration de cohérence h:280](../../resources/diagrams_fr/consistency_illustration.svg)
 
 </div>
 </div>
@@ -59,7 +59,7 @@ La vérification de la cohérence au niveau de l'établissement ne tiendrait pas
 </div>
 <div>
 
-![Cohérence des districts](../../resources/diagrams/district_consistency.svg)
+![Cohérence des districts](../../resources/diagrams_fr/district_consistency.svg)
 
 </div>
 </div>

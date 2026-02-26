@@ -4,25 +4,25 @@ theme: fastr
 paginate: true
 ---
 
-## How do countries use FASTR?
+## Comment les pays utilisent-ils FASTR ?
 
-FASTR is designed to support **country-defined policy questions** using routine and survey data.
+FASTR est conçu pour répondre à des **questions de politique définies par les pays** à partir de données de routine et d'enquêtes.
 
-**Different entry points for different countries:**
+**Différents points d'entrée selon les pays :**
 
-- **Monitoring service disruptions:** Sierra Leone, Burkina Faso, Zambia, and Liberia began with service continuity monitoring, triggered by changes in external financing for the health sector
-- **Other priorities first:** Nigeria, Ghana, and DRC initiated FASTR for different questions, with disruptions as complementary analysis
+- **Suivi des perturbations de services :** La Sierra Leone, le Burkina Faso, la Zambie et le Libéria ont commencé par le suivi de la continuité des services, déclenché par des changements dans le financement extérieur du secteur de la santé
+- **Autres priorités d'abord :** Le Nigéria, le Ghana et la RDC ont initié FASTR pour d'autres questions, avec l'analyse des perturbations comme complément
 
-**All countries can engage with FASTR to answer policy-relevant questions including:**
+**Tous les pays peuvent utiliser FASTR pour répondre à des questions pertinentes pour les politiques, notamment :**
 
-- Monitoring service continuity and recovery
-- Identifying geographic or service-specific challenges
-- Informing prioritization, planning, and policy dialogue
+- Le suivi de la continuité et de la reprise des services
+- L'identification des défis géographiques ou spécifiques à certains services
+- L'appui à la priorisation, la planification et le dialogue politique
 
 <!--
 PRESENTER NOTES:
-- FASTR is flexible — countries define their own priority questions
-- Service disruptions is just one entry point, not the only use case
-- Some countries start with disruptions, others add it later
-- The methodology (DQA, adjustment, analysis) applies to all use cases
+- FASTR est flexible — les pays définissent leurs propres questions prioritaires
+- Les perturbations de services ne sont qu'un point d'entrée, pas le seul cas d'utilisation
+- Certains pays commencent par les perturbations, d'autres l'ajoutent plus tard
+- La méthodologie (AQD, ajustement, analyse) s'applique à tous les cas d'utilisation
 -->

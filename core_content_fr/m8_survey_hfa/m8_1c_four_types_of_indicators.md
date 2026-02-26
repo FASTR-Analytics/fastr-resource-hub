@@ -5,8 +5,8 @@ paginate: true
 ---
 
 <!-- _class: compact -->
-## Four types of indicators
+## Quatre types d'indicateurs
 
-*Questions are either directly mapped to validated health facility assessments or proxies.
+*Les questions sont soit directement issues d'évaluations validées des établissements de santé, soit des indicateurs de substitution.*
 
-![HFA indicator types](../../resources/diagrams/hfa_indicator_types.svg)
+![Types d'indicateurs EES](../../resources/diagrams_fr/hfa_indicator_types.svg)

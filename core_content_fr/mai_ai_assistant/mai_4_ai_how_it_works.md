@@ -6,7 +6,7 @@ paginate: true
 
 ## Comment fonctionne l'assistant IA
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.

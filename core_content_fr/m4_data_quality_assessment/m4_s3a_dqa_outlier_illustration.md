@@ -6,4 +6,4 @@ paginate: true
 
 ## Pourquoi ajuster pour les valeurs aberrantes ?
 
-![Pourquoi ajuster pour les valeurs aberrantes](../../resources/diagrams/outlier_impact.svg)
+![Pourquoi ajuster pour les valeurs aberrantes](../../resources/diagrams_fr/outlier_impact.svg)

@@ -6,7 +6,7 @@ paginate: true
 
 ## Relations attendues qui aident à estimer les dénominateurs
 
-![Organigramme de la cascade du dénominateur](../../resources/diagrams/denominator_cascade.svg)
+![Organigramme de la cascade du dénominateur](../../resources/diagrams_fr/denominator_cascade.svg)
 
 <!--
 PRESENTER NOTES:

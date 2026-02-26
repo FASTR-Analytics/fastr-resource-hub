@@ -4,27 +4,27 @@ theme: fastr
 paginate: true
 ---
 
-## Where the AI provides greatest value
+## Là où l'IA apporte le plus de valeur
 
 <div class="columns">
 <div>
 
-**Visualizations** — Explore and understand your data
+**Visualisations** — Explorer et comprendre vos données
 
-- Access all saved visualizations within the project
-- Review underlying data for any chart or figure
-- Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
-- Receive explanations of what each visualization represents
+- Accéder à toutes les visualisations enregistrées dans le projet
+- Examiner les données sous-jacentes de tout graphique ou figure
+- Modifier les paramètres de visualisation, y compris le type de graphique, les filtres, les périodes et les niveaux de désagrégation
+- Recevoir des explications sur ce que chaque visualisation représente
 
 </div>
 <div>
 
-**Slide decks** — Build presentations from your findings
+**Présentations** — Construire des présentations à partir de vos résultats
 
-- Generate presentation slides including cover pages, section dividers, and content slides
-- Incorporate charts, tables, and narrative text into slide layouts
-- Transfer visualizations directly into presentations
-- Edit, reorder, duplicate, or remove slides as needed
+- Générer des diapositives de présentation incluant pages de couverture, séparateurs de sections et diapositives de contenu
+- Intégrer graphiques, tableaux et texte narratif dans les mises en page
+- Transférer les visualisations directement dans les présentations
+- Modifier, réorganiser, dupliquer ou supprimer des diapositives selon les besoins
 
 </div>
 </div>

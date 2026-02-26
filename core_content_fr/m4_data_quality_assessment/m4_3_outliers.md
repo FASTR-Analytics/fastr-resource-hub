@@ -26,7 +26,7 @@ PRESENTER NOTES:
 
 ## Pourquoi ajuster pour les valeurs aberrantes ?
 
-![Impact des valeurs aberrantes](../../resources/diagrams/outlier_impact.svg)
+![Impact des valeurs aberrantes](../../resources/diagrams_fr/outlier_impact.svg)
 
 ---
 
