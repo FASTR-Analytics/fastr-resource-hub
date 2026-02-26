@@ -6,7 +6,7 @@ paginate: true
 
 ## When AI is helpful
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 **Your interpretation of figure:**

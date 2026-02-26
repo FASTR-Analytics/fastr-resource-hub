@@ -6,7 +6,7 @@ paginate: true
 
 ## Platform capabilities
 
-<div class="columns">
+<div class="columns-text-left">
 <div>
 
 ![Platform Capabilities](../../resources/diagrams/platform_capabilities.svg)

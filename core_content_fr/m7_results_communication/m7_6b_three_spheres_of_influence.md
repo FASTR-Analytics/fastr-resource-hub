@@ -8,7 +8,7 @@ paginate: true
 
 The Three Spheres of Influence framework helps direct attention to the actions we can take from our data.
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 **Sphere of control** — Actions you can take directly

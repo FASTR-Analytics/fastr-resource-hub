@@ -10,7 +10,7 @@ paginate: true
 
 Program indicators with a predictable relationship are examined to determine whether the expected relationship exists between them. In other words, this process examines whether the observed relationship between the indicators, as shown in the reported data, is that which is expected.
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 | Indicator pair | Expected relationship |

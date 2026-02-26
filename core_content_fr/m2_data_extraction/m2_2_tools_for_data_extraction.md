@@ -6,7 +6,7 @@ paginate: true
 
 ## Extraction des données
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 Nous proposons deux outils pour l'extraction en masse des données DHIS2 : un Data Downloader convivial et une fonction d'importation directe au sein de la plateforme analytique FASTR.

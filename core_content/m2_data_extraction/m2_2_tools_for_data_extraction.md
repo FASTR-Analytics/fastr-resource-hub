@@ -6,7 +6,7 @@ paginate: true
 
 ## Data extraction
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.

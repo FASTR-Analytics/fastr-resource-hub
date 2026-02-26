@@ -6,7 +6,7 @@ paginate: true
 
 ## How the AI assistant works
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 The AI follows a "read before responding" principle — it never guesses.

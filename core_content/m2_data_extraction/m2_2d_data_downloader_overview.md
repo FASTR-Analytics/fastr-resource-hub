@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader: Overview
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 ![Data Downloader overview h:380](../../resources/screenshots/data_downloader/02_overview.png)

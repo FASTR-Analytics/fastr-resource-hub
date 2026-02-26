@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader: Facility map
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 ![Data Downloader facility map h:380](../../resources/screenshots/data_downloader/06_facility_map.png)

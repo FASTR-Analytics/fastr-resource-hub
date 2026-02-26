@@ -10,7 +10,7 @@ paginate: true
 
 Les indicateurs du programme ayant une relation prévisible sont examinés afin de déterminer si la relation attendue existe entre eux. En d'autres termes, ce processus examine si la relation observée entre les indicateurs, telle qu'elle apparaît dans les données rapportées, est celle qui est attendue.
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 | Paire d'indicateurs | Relation attendue |
