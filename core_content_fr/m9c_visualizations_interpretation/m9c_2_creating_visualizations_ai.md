@@ -14,6 +14,6 @@ paginate: true
 
 **Vous faites :** Créez une visualisation de séries temporelles de l'utilisation des services des 12 derniers mois, pour un indicateur de votre choix, à l'aide de l'assistant IA, et enregistrez-la dans votre propre dossier.
 
-**Prompt :** *"Show me a time-series chart showing ANC1 visits in the last 12 months using the adjusted data (after outlier and completeness adjustments)"*
+**Prompt :** *"Montre-moi un graphique de séries temporelles des visites CPN1 sur les 12 derniers mois en utilisant les données ajustées (après ajustement des valeurs aberrantes et de la complétude)"*
 
 *Nous sommes dans l'onglet Visualisations*

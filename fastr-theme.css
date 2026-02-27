@@ -176,27 +176,40 @@ pre code {
    TABLES
    ======================================== */
 table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
   margin: 1em 0;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th {
-  background: rgba(31, 154, 156, 0.15);
-  color: var(--fastr-dark-green);
+  background: var(--fastr-deep-green);
+  color: #ffffff;
   font-weight: 600;
   border-bottom: 2px solid var(--fastr-green);
-  padding: 0.6em;
+  padding: 0.65em 0.9em;
   text-align: left;
+  font-size: 0.95em;
 }
 
 td {
   border-bottom: 1px solid var(--border-light);
-  padding: 0.6em;
+  padding: 0.65em 0.9em;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(31, 154, 156, 0.05);
 }
 
 tr:hover {
-  background: rgba(31, 154, 156, 0.08);
+  background: rgba(31, 154, 156, 0.1);
 }
 
 /* ========================================

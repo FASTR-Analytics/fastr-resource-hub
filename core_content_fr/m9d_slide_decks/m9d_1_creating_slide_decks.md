@@ -8,9 +8,9 @@ paginate: true
 
 **Étape par étape**
 
-**Créez votre diaporama :** Cliquez sur votre dossier → Cliquez sur **+ Create slide deck** → Donnez-lui un nom → Cliquez sur **Save**
+**Créez votre présentation :** Cliquez sur votre dossier → Cliquez sur **+ Créer une présentation** → Donnez-lui un nom → Cliquez sur **Enregistrer**
 
-**Ajoutez votre première diapositive :** Cliquez sur **Add slide** → Sélectionnez **Content slide**
+**Ajoutez votre première diapositive :** Cliquez sur **Ajouter une diapositive** → Sélectionnez **Diapositive de contenu**
 
 ---
 
@@ -24,7 +24,7 @@ paginate: true
 
 **Vous faites :** Entraînez-vous à ajouter une visualisation que vous avez déjà créée dans votre propre présentation.
 
-*Nous sommes dans l'onglet Slide Decks*
+*Nous sommes dans l'onglet Présentations*
 
 ---
 
@@ -38,6 +38,6 @@ paginate: true
 
 **Vous faites :** Demandez à l'assistant IA d'afficher une visualisation que vous avez déjà créée, puis ajoutez-la à votre propre présentation en utilisant les boutons de l'aperçu du chat IA.
 
-**Prompt :** *"Display the quarterly change in service volume visualization"*
+**Prompt :** *"Affiche la visualisation du changement trimestriel du volume de services"*
 
-*Nous sommes dans l'onglet Slide Decks*
+*Nous sommes dans l'onglet Présentations*

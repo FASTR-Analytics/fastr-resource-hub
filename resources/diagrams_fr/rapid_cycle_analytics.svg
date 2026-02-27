@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" width="345.3936" height="392.1702" viewBox="0 0 345.3936 392.1702">
+  <defs>
+    <style>.cls-1{fill:#1990c0;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7{fill-rule:evenodd;}.cls-2{fill:#1ea29c;}.cls-3{fill:#b7dbdd;}.cls-4{fill:#0c716b;}.cls-5{fill:#9ad2d3;}.cls-6{fill:none;}.cls-7{fill:#0a554f;}</style>
+  </defs>
+  <!-- Arrow shapes -->
+  <path class="cls-1" d="m240.9592,259.1234c-19.0171,18.6219-44.8826,30.2344-73.5058,30.7471v-27.7944l-48.1893,64.5225,48.1893,64.4865v-27.5594c54.0588-.549,102.4432-24.7226,135.319-62.6745h0l-41.7742,4.9231-20.0389-46.651h0Z"/>
+  <path class="cls-2" d="m327.4453,135.62l-16.6484,38.6998-50.3817-5.9451h0c2.205,8.5441,3.3852,17.5212,3.3852,26.773,0,18.6985-4.8035,36.2561-13.1475,51.5719l-23.4586-13.5038,31.763,73.9739,79.943-9.4898-24.4834-14.1321c14.6418-26.181,22.9858-56.297,22.9858-88.42,0-20.8676-3.5009-40.9052-9.9573-59.5277h0Z"/>
+  <path class="cls-7" d="m178.9912,1.0885v27.548c-54.0308.5914-102.3893,24.7546-135.3085,62.6951l41.7799-4.9582,20.0466,46.6734c19.0179-18.613,44.8923-30.2221,73.482-30.7345v27.7464l48.1998-64.4671L178.9912,1.0885h0Z"/>
+  <path class="cls-4" d="m199.9988,31.0187l25.1884,33.7216-30.3417,40.6096c26.4842,7.4397,48.8396,24.7515,62.9313,47.6954l-24.6793,14.245,79.9351,9.4428,31.7598-73.9382-23.2183,13.379c-26.0941-43.5642-69.939-75.2797-121.5752-85.1551h0Z"/>
+  <path class="cls-3" d="m85.9171,85.4373L5.9084,94.9237l23.008,13.2658c-14.9317,26.3797-23.4812,56.8493-23.4812,89.3294,0,20.8246,3.5071,40.8624,9.9688,59.4847l16.6621-38.6998,50.4231,5.9851c-2.1671-8.5838-3.3483-17.5182-3.3483-26.7699,0-19.0556,4.9629-36.9274,13.6315-52.4779l24.9734,14.4065-31.8288-74.0101h0Z"/>
+  <path class="cls-5" d="m32.3932,215.4338L.598,289.3766l23.245-13.3793c26.1204,43.562,70.0095,75.2781,121.6978,85.1573l-25.2138-33.6859,30.3723-40.6502c-26.5142-7.4367-48.8889-24.7125-62.9947-47.6535l24.7009-14.2453-80.0123-9.4858h0Z"/>
+
+  <!-- Step 1: top-left arrow (cls-7, dark green) -->
+  <g transform="translate(138,72) rotate(-25)">
+    <text x="0" y="-6" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">1. Identifier les</text>
+    <text x="0" y="7" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">questions et</text>
+    <text x="0" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">indicateurs</text>
+  </g>
+
+  <!-- Step 2: upper-right arrow (cls-4, darker green) -->
+  <g transform="translate(265,100) rotate(-55)">
+    <text x="0" y="-4" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">2. Extraction</text>
+    <text x="0" y="9" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des données</text>
+  </g>
+
+  <!-- Step 3: right arrow (cls-2, teal) -->
+  <g transform="translate(298,218) rotate(-80)">
+    <text x="0" y="-8" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">3. Évaluation</text>
+    <text x="0" y="5" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">de la qualité</text>
+    <text x="0" y="18" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des données</text>
+  </g>
+
+  <!-- Step 4: bottom arrow (cls-1, blue) -->
+  <g transform="translate(205,315) rotate(25)">
+    <text x="0" y="-8" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">4. Ajustement</text>
+    <text x="0" y="5" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">de la qualité</text>
+    <text x="0" y="18" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des données</text>
+  </g>
+
+  <!-- Step 5: lower-left arrow (cls-5, light teal) -->
+  <g transform="translate(58,280) rotate(55)">
+    <text x="0" y="-4" text-anchor="middle" fill="#231f20" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">5. Analyse</text>
+    <text x="0" y="9" text-anchor="middle" fill="#231f20" font-size="10" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des données</text>
+  </g>
+
+  <!-- Step 6: left arrow (cls-3, light blue-green) -->
+  <g transform="translate(48,165) rotate(80)">
+    <text x="0" y="-12" text-anchor="middle" fill="#231f20" font-size="9" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">6. Communication</text>
+    <text x="0" y="0" text-anchor="middle" fill="#231f20" font-size="9" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des résultats et</text>
+    <text x="0" y="12" text-anchor="middle" fill="#231f20" font-size="9" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">utilisation des</text>
+    <text x="0" y="24" text-anchor="middle" fill="#231f20" font-size="9" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">données</text>
+  </g>
+
+  <!-- Center text -->
+  <text x="173" y="182" text-anchor="middle" fill="#231f20" font-size="13" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">Processus de suivi</text>
+  <text x="173" y="199" text-anchor="middle" fill="#231f20" font-size="13" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">de l'utilisation</text>
+  <text x="173" y="216" text-anchor="middle" fill="#231f20" font-size="13" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">des services</text>
+  <text x="173" y="233" text-anchor="middle" fill="#231f20" font-size="13" font-weight="bold" font-family="'Segoe UI', Arial, sans-serif">SRMNIA-N</text>
+</svg>

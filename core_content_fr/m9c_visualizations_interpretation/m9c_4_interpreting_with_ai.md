@@ -14,8 +14,8 @@ paginate: true
 
 **Vous faites :** Créez une diapositive à partir d'une visualisation de votre choix, examinez le premier résultat de l'IA, et affinez le prompt pour améliorer le résultat.
 
-**Prompt 1 :** *"Create a slide showing reporting completeness for BCG, Penta1, Penta3 by region for 2024. Note which regions are above/below 80%."*
+**Prompt 1 :** *"Crée une diapositive montrant la complétude du rapportage pour BCG, Penta1, Penta3 par région pour 2024. Indique quelles régions sont au-dessus/en dessous de 80 %."*
 
-**Prompt 2 :** *"Simplify the text on this slide for a policymaker audience. Keep the table."*
+**Prompt 2 :** *"Simplifie le texte de cette diapositive pour un public de décideurs. Garde le tableau."*
 
-*Nous sommes dans l'onglet Slide Decks*
+*Nous sommes dans l'onglet Présentations*

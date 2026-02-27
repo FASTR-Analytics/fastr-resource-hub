@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Méthodologie de l'ajustement d'exhaustivité
+## Méthodologie de l'ajustement de la complétude
 
 Pour les mois identifiés comme incomplets ou manquants, les valeurs sont imputées en utilisant la même approche de moyenne mobile sur 6 mois que celle appliquée à l'ajustement des valeurs aberrantes.
 

@@ -40,7 +40,7 @@ L'analyse de l'utilisation des services suit le nombre de services de santé fou
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Carte thermique comparant la période actuelle à la même période l'année dernière, avec les changements > ±10% signalés.
+**Ce que vous voyez :** Heatmap comparant la période actuelle à la même période l'année dernière, avec les changements > ±10% signalés.
 
 **Formule :** Changement annuel % = (cette année - année dernière) / année dernière × 100
 

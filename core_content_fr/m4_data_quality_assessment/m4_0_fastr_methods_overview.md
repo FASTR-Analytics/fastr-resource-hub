@@ -6,10 +6,6 @@ paginate: true
 
 ## Pipeline analytique FASTR
 
-L'analyse FASTR suit un processus séquentiel :
+L'analyse FASTR suit un processus séquentiel, de l'évaluation de la qualité des données jusqu'à l'analyse des données ajustées.
 
-1. **Évaluer la qualité des données** - Identifier les problèmes d'exhaustivité, de valeurs aberrantes et de cohérence
-2. **Ajuster les problèmes de qualité** - Appliquer des corrections pour améliorer la fiabilité des données
-3. **Analyser les données ajustées** - Générer des estimations sur l'utilisation et la couverture des services
-
-![Pipeline analytique h:280](../../resources/diagrams_fr/analytical_pipeline.svg)
+![Pipeline analytique h:350](../../resources/diagrams_fr/analytical_pipeline.svg)

@@ -4,26 +4,26 @@ theme: fastr
 paginate: true
 ---
 
-## Présentation de la Prompt Library
+## Présentation de la bibliothèque de prompts
 
-L'assistant IA comprend une **Prompt Library** avec des prompts prêts à l'emploi organisés par étape du flux de travail.
+L'assistant IA comprend une **bibliothèque de prompts** avec des prompts prêts à l'emploi organisés par étape du flux de travail.
 
-**Comment y accéder :** Cliquez sur le menu à trois points dans le panneau AI Assistant → Sélectionnez **Prompt library** → Parcourez et choisissez un prompt → Modifiez-le avant de l'utiliser si nécessaire
+**Comment y accéder :** Cliquez sur le menu à trois points dans le panneau de l'assistant IA → Sélectionnez **Bibliothèque de prompts** → Parcourez et choisissez un prompt → Modifiez-le avant de l'utiliser si nécessaire
 
 **Comment l'utiliser :** Chaque prompt est conçu pour être spécifique et orienté vers un objectif précis. Vous pouvez les utiliser tels quels ou les personnaliser selon votre contexte.
 
 ---
 
-## Organisation de la Prompt Library
+## Organisation de la bibliothèque de prompts
 
 | Catégorie | Objectif |
 |-----------|----------|
-| **Getting started** | S'orienter : quelles données sont disponibles ? |
-| **Data quality** | Vérifier la complétude, les valeurs aberrantes et la validité |
-| **Analysis** | Identifier les tendances, comparer les régions, définir les priorités |
-| **Indicator deep dives** | Se concentrer sur des domaines programmatiques spécifiques |
-| **Visualizations** | Créer des graphiques, des cartes thermiques, des comparaisons |
-| **Reports & communication** | Générer des présentations et des points de discussion |
-| **Workflows** | Passer d'une analyse à une diapositive, un rapport rapide ou un récit de données |
-| **Methodology** | Comprendre le fonctionnement de FASTR |
-| **Standardized reports** | Générer des rapports complets sur les perturbations avec des prompts guidés |
+| **Pour commencer** | S'orienter : quelles données sont disponibles ? |
+| **Qualité des données** | Vérifier la complétude, les valeurs aberrantes et la validité |
+| **Analyse** | Identifier les tendances, comparer les régions, définir les priorités |
+| **Analyse approfondie des indicateurs** | Se concentrer sur des domaines programmatiques spécifiques |
+| **Visualisations** | Créer des graphiques, des cartes thermiques, des comparaisons |
+| **Rapports et communication** | Générer des présentations et des points de discussion |
+| **Flux de travail** | Passer d'une analyse à une diapositive, un rapport rapide ou un récit de données |
+| **Méthodologie** | Comprendre le fonctionnement de FASTR |
+| **Rapports standardisés** | Générer des rapports complets sur les perturbations avec des prompts guidés |

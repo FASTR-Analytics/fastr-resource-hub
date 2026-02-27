@@ -15,7 +15,7 @@ paginate: true
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Carte thermique montrant l'effet net de la suppression des valeurs aberrantes et de l'imputation de la complétude sur les volumes de services.
+**Ce que vous voyez :** Heatmap montrant l'effet net de la suppression des valeurs aberrantes et de l'imputation de la complétude sur les volumes de services.
 
 **Formule :** % de changement = (ajusté - original) / original × 100
 

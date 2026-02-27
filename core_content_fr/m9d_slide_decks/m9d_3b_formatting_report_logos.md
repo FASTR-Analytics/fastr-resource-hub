@@ -8,8 +8,8 @@ paginate: true
 
 **Paramètres du rapport :**
 
-- **Logos :** Ajouter des logos de diapositives depuis les assets téléchargés
-- **Page details :** Afficher les numéros de page, ajouter un filigrane
-- **Delete Report :** Supprimer un rapport au sein d'un projet
+- **Logos :** Ajouter des logos de diapositives depuis les ressources téléchargées
+- **Détails de page :** Afficher les numéros de page, ajouter un filigrane
+- **Supprimer le rapport :** Supprimer un rapport au sein d'un projet
 
 *N'oubliez pas de sauvegarder les paramètres*

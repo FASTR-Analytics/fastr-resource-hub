@@ -19,11 +19,11 @@ slides:
 - file: m0_3a_how_countries_use_fastr.md
   order: 3.01
   variant: full
-  title: How do countries use FASTR?
+  title: Comment les pays utilisent-ils FASTR ?
 - file: m0_3b_from_analysis_to_action.md
   order: 3.02
   variant: full
-  title: From analysis to action
+  title: De l'analyse à l'action
 - file: m0_4_fastr_outputs.md
   order: 4
   variant: full

@@ -15,7 +15,7 @@ paginate: true
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Carte thermique montrant l'évolution du volume de services après remplacement des valeurs aberrantes par des moyennes mobiles.
+**Ce que vous voyez :** Heatmap montrant l'évolution du volume de services après remplacement des valeurs aberrantes par des moyennes mobiles.
 
 **Formule :** % de changement = (ajusté - original) / original × 100
 

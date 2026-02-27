@@ -10,7 +10,7 @@ slides:
 - file: m5_3_adjustment_for_completeness.md
   order: 3
   variant: full
-  title: Méthodologie de l'ajustement d'exhaustivité
+  title: Méthodologie de l'ajustement de la complétude
 - file: m5_s1_dq_adjustment_overview.md
   order: 1
   variant: condensed
@@ -18,7 +18,7 @@ slides:
 - file: m5_s1a_why_adjust_for_outliers.md
   order: 1.01
   variant: condensed
-  title: Why adjust for outliers?
+  title: Pourquoi ajuster pour les valeurs aberrantes ?
 - file: m5_s2_dq_adjustment_interpretation.md
   order: 2
   variant: condensed

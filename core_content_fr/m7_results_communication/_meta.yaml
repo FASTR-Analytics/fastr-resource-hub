@@ -30,11 +30,11 @@ slides:
 - file: m7_1f_overall_dqa_score_output.md
   order: 1.06
   variant: full
-  title: Sortie du score EQD global
+  title: Sortie du score AQD global
 - file: m7_1g_mean_dqa_score_output.md
   order: 1.07
   variant: full
-  title: Sortie du score EQD moyen
+  title: Sortie du score AQD moyen
 - file: m7_1h_outlier_adjustment_output.md
   order: 1.08
   variant: full
@@ -126,7 +126,7 @@ slides:
 - file: m7_6b_three_spheres_of_influence.md
   order: 6.02
   variant: full
-  title: Three spheres of influence
+  title: Trois sphères d'influence
 - file: m7_7_topic_7.md
   order: 7
   variant: full

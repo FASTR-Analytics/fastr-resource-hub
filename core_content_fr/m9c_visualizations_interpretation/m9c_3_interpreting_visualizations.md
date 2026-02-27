@@ -31,4 +31,4 @@ Un cadre étape par étape pour lire n'importe quelle figure :
 
 **Vous faites :** Exercez-vous à interpréter une visualisation de votre choix dans votre présentation, en gardant à l'esprit les facteurs ci-dessus.
 
-*Nous sommes dans l'onglet Slide Decks*
+*Nous sommes dans l'onglet Présentations*

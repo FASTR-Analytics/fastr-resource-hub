@@ -5,18 +5,18 @@ paginate: true
 ---
 
 <!-- _class: compact -->
-## Adaptive survey content with RMNCAH-N focus
+## Contenu adaptatif de l'enquête axé sur la SRMNIA-N
 
-Rapid facility surveys can identify gaps in service delivery and monitor reforms or shocks.
+Les enquêtes rapides auprès des établissements peuvent identifier les lacunes dans la prestation de services et suivre les réformes ou les chocs.
 
-| Round 1 | Round 2 | Round 3 | Round 4 |
+| Cycle 1 | Cycle 2 | Cycle 3 | Cycle 4 |
 |---------|---------|---------|---------|
-| Facility characteristics | Facility characteristics* | Facility characteristics* | Facility characteristics* |
-| Shocks | Adaptive content** | Adaptive content** | Adaptive content** |
-| Resilience to shocks | Shocks | Shocks | Shocks |
-| Services | Resilience to shocks | Resilience to shocks | Resilience to shocks |
-| Supplies | Supplies | Supplies | Supplies |
-| | Financing | Infrastructure | Workforce and staffing |
-| | Community engagement | Quality improvement processes | Leadership and coordination |
+| Caractéristiques de l'établissement | Caractéristiques de l'établissement* | Caractéristiques de l'établissement* | Caractéristiques de l'établissement* |
+| Chocs | Contenu adaptatif** | Contenu adaptatif** | Contenu adaptatif** |
+| Résilience aux chocs | Chocs | Chocs | Chocs |
+| Services | Résilience aux chocs | Résilience aux chocs | Résilience aux chocs |
+| Fournitures | Fournitures | Fournitures | Fournitures |
+| | Financement | Infrastructure | Personnel et effectifs |
+| | Engagement communautaire | Processus d'amélioration de la qualité | Leadership et coordination |
 
-\* Asked only to replacement facilities | \*\* Additional locally-relevant questions generated during adaptation
+\* Posé uniquement aux établissements de remplacement | \*\* Questions supplémentaires localement pertinentes générées lors de l'adaptation

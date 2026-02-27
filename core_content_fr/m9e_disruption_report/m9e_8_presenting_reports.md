@@ -4,13 +4,14 @@ theme: fastr
 paginate: true
 ---
 
-## Revue par les pairs : retour sur le rapport de perturbations
+## Présentation des rapports et retours de groupe
 
-Échangez les rapports avec une autre table. En tant que nouveau lecteur, examinez :
+**Restitution**
 
-☐ Le message principal est-il clair dès les premières phrases ?
-☐ Le rapport est-il facile à suivre et bien structuré ?
-☐ Un décideur comprendrait-il quoi faire avec ce rapport ?
-☐ Y a-t-il quelque chose de confus ou peu clair ?
+- Chaque groupe présente sa section (~5 minutes)
 
-**Donnez un retour :** 2 points positifs, 2 suggestions d'amélioration
+**Discussion**
+
+- Qu'est-ce qui a bien fonctionné ?
+- Qu'est-ce qui a été difficile ?
+- Retours sur l'approche

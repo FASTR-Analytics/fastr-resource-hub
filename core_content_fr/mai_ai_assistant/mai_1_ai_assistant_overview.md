@@ -12,10 +12,10 @@ La plateforme FASTR inclut un assistant IA qui fournit un support à la demande 
 
 - Le personnel S&E a souvent peu de temps pour des analyses approfondies
 - Les compétences analytiques varient selon les équipes et les régions
-- Transformer les données en insights narratifs nécessite des connaissances techniques et contextuelles
+- Transformer les données en analyses narratives nécessite des connaissances techniques et contextuelles
 
 **Ce qu'il fait :** L'assistant IA aide à combler cet écart en :
 
-- Expliquant les tendances et les patterns en langage clair
+- Expliquant les tendances et les schémas en langage clair
 - Générant des ébauches de rapports et des messages clés
 - Répondant aux questions sur les données ou la méthodologie

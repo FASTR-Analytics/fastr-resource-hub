@@ -11,7 +11,7 @@ paginate: true
 <div>
 
 **Évaluation de la qualité des données**
-Les scores faibles d'EQD peuvent refléter les pratiques de saisie des données plutôt que la qualité du service. Concentrez-vous sur l'identification de la dimension spécifique (complétude, valeurs aberrantes, cohérence) à l'origine des problèmes.
+Les scores faibles d'AQD peuvent refléter les pratiques de saisie des données plutôt que la qualité du service. Concentrez-vous sur l'identification de la dimension spécifique (complétude, valeurs aberrantes, cohérence) à l'origine des problèmes.
 
 <br/>
 

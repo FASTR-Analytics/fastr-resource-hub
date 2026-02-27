@@ -13,23 +13,23 @@ paginate: true
 
 **1. Ajouter une visualisation**
 
-**Block** → **Visualization** → **Select Visualization** → Parcourez et choisissez → **Select**
+**Bloc** → **Visualisation** → **Sélectionner une visualisation** → Parcourez et choisissez → **Sélectionner**
 
 </div>
 <div>
 
 **2. Ajouter du texte à côté**
 
-Clic droit → **Add → Col to right** → Cliquez sur la zone de texte et tapez. Utilisez `#` pour les titres.
+Clic droit → **Ajouter → Colonne à droite** → Cliquez sur la zone de texte et tapez. Utilisez `#` pour les titres.
 
 </div>
 <div>
 
-**3. Modifier & sauvegarder**
+**3. Modifier et sauvegarder**
 
-Onglet **Slide** → Modifier titre, sous-titre, date → **Save**
+Onglet **Diapositive** → Modifier titre, sous-titre, date → **Enregistrer**
 
 </div>
 </div>
 
-*Plus d'options : Clic droit → Add → Row below*
+*Plus d'options : Clic droit → Ajouter → Ligne en dessous*

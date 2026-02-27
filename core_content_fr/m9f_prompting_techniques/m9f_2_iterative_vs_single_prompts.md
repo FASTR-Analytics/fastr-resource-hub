@@ -10,10 +10,10 @@ paginate: true
 
 **Saisissez ces prompts dans l'IA (dans l'ordre) :**
 
-1. *"Can you help me understand the quality of our 2024 data? I'd like a 3-slide summary I can share with my team."*
-2. *"Let's focus on overall quality, regional differences, and priorities for improvement."*
-3. *"Which region has the weakest data quality? Highlight that."*
-4. *"What should we do about this? Make the final slide more actionable."*
+1. *"Peux-tu m'aider à comprendre la qualité de nos données 2024 ? J'aimerais un résumé en 3 diapositives que je puisse partager avec mon équipe."*
+2. *"Concentrons-nous sur la qualité globale, les différences régionales et les priorités d'amélioration."*
+3. *"Quelle région a la qualité de données la plus faible ? Mets-la en évidence."*
+4. *"Que devrions-nous faire à ce sujet ? Rends la dernière diapositive plus actionnable."*
 
 ---
 
@@ -23,7 +23,7 @@ paginate: true
 
 **Saisissez ce prompt dans l'IA :**
 
-*"Build a 3-slide data quality report for 2024 covering (1) overall status, (2) regional comparison, and (3) recommendations."*
+*"Construis un rapport de qualité des données en 3 diapositives pour 2024 couvrant (1) l'état global, (2) la comparaison régionale et (3) les recommandations."*
 
 ---
 

@@ -15,7 +15,7 @@ paginate: true
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Carte thermique montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
+**Ce que vous voyez :** Heatmap montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
 
 **Formule :** % de valeurs aberrantes = (valeurs signalées / valeurs totales) × 100
 

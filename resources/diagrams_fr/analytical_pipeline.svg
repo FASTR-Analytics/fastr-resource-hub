@@ -1,57 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 10 680 300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 295">
   <defs>
     <style>
-      .box { rx: 8; stroke-width: 2; }
+      .box { rx: 10; stroke-width: 2; }
       .box-assess { fill: #1A90C0; stroke: #21568C; }
       .box-adjust { fill: #BD5091; stroke: #7A1F6E; }
       .box-util { fill: #1F9A9C; stroke: #0C716B; }
       .box-coverage { fill: #D8A822; stroke: #09544F; }
-      .text-white { font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
-      .text-dark { font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; fill: #09544F; text-anchor: middle; }
-      .text-small { font-family: Inter, sans-serif; font-size: 10px; fill: #ffffff; text-anchor: middle; }
-      .text-small-dark { font-family: Inter, sans-serif; font-size: 10px; fill: #09544F; text-anchor: middle; }
-      .module-label { font-family: Inter, sans-serif; font-size: 9px; fill: #666; text-anchor: middle; font-style: italic; }
-      .arrow { stroke: #1F9A9C; stroke-width: 2; fill: none; marker-end: url(#arrowhead); stroke-dasharray: 6,3; }
-      .arrow-label { font-family: Inter, sans-serif; font-size: 9px; fill: #21568C; text-anchor: middle; }
+      .text-white { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .text-dark { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-sub { font-family: Inter, sans-serif; font-size: 10.5px; fill: #ffffff; text-anchor: middle; opacity: 0.9; }
+      .text-sub-dark { font-family: Inter, sans-serif; font-size: 10.5px; fill: #09544F; text-anchor: middle; opacity: 0.8; }
+      .module-label { font-family: Inter, sans-serif; font-size: 9px; fill: #888; text-anchor: middle; font-style: italic; }
+      .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { font-family: Inter, sans-serif; font-size: 9.5px; fill: #555; text-anchor: middle; font-style: italic; }
     </style>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
     </marker>
   </defs>
 
-  <!-- Step 1: Data Quality Assessment -->
-  <rect class="box box-assess" x="280" y="20" width="240" height="50"/>
-  <text class="text-white" x="400" y="40">Évaluation de la qualité des données</text>
-  <text class="text-small" x="400" y="55">Complétude, valeurs aberrantes, cohérence</text>
-  <text class="module-label" x="400" y="82">Module 1</text>
+  <!-- Étape 1 : Évaluation de la qualité des données -->
+  <rect class="box box-assess" x="150" y="10" width="500" height="55"/>
+  <text class="text-white" x="400" y="31">Évaluation de la qualité des données</text>
+  <text class="text-sub" x="400" y="49">Complétude, valeurs aberrantes, cohérence</text>
+  <text class="module-label" x="400" y="78">Module 1</text>
 
   <!-- Arrow down -->
-  <line class="arrow" x1="400" y1="70" x2="400" y2="105"/>
+  <line class="arrow" x1="400" y1="65" x2="400" y2="95"/>
 
-  <!-- Step 2: Data Quality Adjustment -->
-  <rect class="box box-adjust" x="280" y="110" width="240" height="50"/>
-  <text class="text-white" x="400" y="130">Ajustement de la qualité des données</text>
-  <text class="text-small" x="400" y="145">Remplacement des aberrantes, correction</text>
-  <text class="module-label" x="400" y="172">Module 2</text>
+  <!-- Étape 2 : Ajustement de la qualité des données -->
+  <rect class="box box-adjust" x="150" y="100" width="500" height="55"/>
+  <text class="text-white" x="400" y="121">Ajustement de la qualité des données</text>
+  <text class="text-sub" x="400" y="139">Remplacement des aberrantes, correction de complétude</text>
+  <text class="module-label" x="400" y="168">Module 2</text>
 
-  <!-- Arrow splitting -->
-  <path class="arrow" d="M 400 160 L 400 190 L 200 190 L 200 215" style="marker-end: url(#arrowhead);"/>
-  <path class="arrow" d="M 400 160 L 400 190 L 600 190 L 600 215" style="marker-end: url(#arrowhead);"/>
+  <!-- Arrows splitting left and right -->
+  <path class="arrow" d="M 400 155 L 400 190 L 200 190 L 200 215"/>
+  <path class="arrow" d="M 400 155 L 400 190 L 600 190 L 600 215"/>
 
-  <!-- Label for adjusted data -->
-  <text class="arrow-label" x="400" y="203">Données ajustées et non ajustées</text>
+  <!-- Label between arrows -->
+  <text class="arrow-label" x="400" y="207">Données ajustées et non ajustées</text>
 
-  <!-- Step 3a: Service Utilization & Disruption -->
-  <rect class="box box-util" x="70" y="220" width="260" height="70"/>
-  <text class="text-white" x="200" y="245">Analyse de l'utilisation</text>
-  <text class="text-white" x="200" y="262">des services &amp; Détection des perturbations</text>
-  <text class="text-small" x="200" y="278">Volumes, tendances, écarts significatifs</text>
-  <text class="module-label" x="200" y="302">Module 3</text>
+  <!-- Étape 3a : Utilisation des services -->
+  <rect class="box box-util" x="15" y="220" width="370" height="55"/>
+  <text class="text-white" x="200" y="241">Utilisation des services</text>
+  <text class="text-white" x="200" y="258">&amp; Détection des perturbations</text>
+  <text class="text-sub" x="200" y="271">Volumes, tendances, écarts significatifs</text>
+  <text class="module-label" x="200" y="288">Module 3</text>
 
-  <!-- Step 3b: Coverage Estimation -->
-  <rect class="box box-coverage" x="470" y="220" width="260" height="70"/>
-  <text class="text-dark" x="600" y="242">Estimation de la couverture</text>
-  <text class="text-small-dark" x="600" y="258">Partie 1 : Estimation du dénominateur</text>
-  <text class="text-small-dark" x="600" y="273">Partie 2 : Calcul de la couverture</text>
-  <text class="module-label" x="600" y="302">Module 4</text>
+  <!-- Étape 3b : Estimation de la couverture -->
+  <rect class="box box-coverage" x="415" y="220" width="370" height="55"/>
+  <text class="text-dark" x="600" y="241">Estimation de la couverture</text>
+  <text class="text-sub-dark" x="600" y="258">Estimation du dénominateur</text>
+  <text class="text-sub-dark" x="600" y="271">&amp; calcul de la couverture</text>
+  <text class="module-label" x="600" y="288">Module 4</text>
 </svg>

@@ -10,8 +10,8 @@ paginate: true
 
 | Étape | Votre prompt | Après la réponse de l'IA, demandez-vous... |
 |-------|------------|----------------------------------------|
-| **1. Commencez simplement** | "Create a slide about [votre sujet]." | Qu'est-ce que l'IA a inclus ? Est-ce que cela fonctionnerait dans une réunion réelle ? |
-| **2. Ajoutez du contexte** | "Create a slide about [sujet] for a [type de réunion]. Show [données spécifiques]. Explain which regions have the most issues." | Est-ce plus précis ? Les priorités sont-elles identifiées ? |
-| **3. Rendez-le actionnable** | "Create a slide about [sujet] for [réunion]. Compare areas — which need support? Suggest possible reasons." | Les zones prioritaires sont-elles identifiées ? Des prochaines étapes sont-elles suggérées ? |
+| **1. Commencez simplement** | "Crée une diapositive sur [votre sujet]." | Qu'est-ce que l'IA a inclus ? Est-ce que cela fonctionnerait dans une réunion réelle ? |
+| **2. Ajoutez du contexte** | "Crée une diapositive sur [sujet] pour une [type de réunion]. Montre [données spécifiques]. Explique quelles régions ont le plus de problèmes." | Est-ce plus précis ? Les priorités sont-elles identifiées ? |
+| **3. Rendez-le actionnable** | "Crée une diapositive sur [sujet] pour [réunion]. Compare les zones — lesquelles ont besoin d'appui ? Suggère des raisons possibles." | Les zones prioritaires sont-elles identifiées ? Des prochaines étapes sont-elles suggérées ? |
 
 **Une fois terminé :** Qu'est-ce qui a rendu le dernier prompt plus efficace que le premier ?

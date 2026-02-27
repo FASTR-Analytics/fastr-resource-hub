@@ -14,7 +14,7 @@ slides:
 - file: mai_3a_ai_greatest_value.md
   order: 3.01
   variant: full
-  title: Where the AI provides greatest value
+  title: Où l'IA apporte le plus de valeur
 - file: mai_4_ai_how_it_works.md
   order: 4
   variant: full
@@ -26,11 +26,11 @@ slides:
 - file: mai_5_ai_little_value_example.md
   order: 5
   variant: full
-  title: When AI adds little value
+  title: Quand l'IA n'apporte que peu de valeur
 - file: mai_5a_ai_helpful_example.md
   order: 5.01
   variant: full
-  title: When AI is helpful
+  title: Quand l'IA est utile
 - file: mai_6_ai_tips_better_answers.md
   order: 6
   variant: full
@@ -38,7 +38,7 @@ slides:
 - file: mai_6a_ai_good_prompt_checklist.md
   order: 6.01
   variant: full
-  title: What makes a good prompt?
+  title: Qu'est-ce qui fait un bon prompt ?
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full

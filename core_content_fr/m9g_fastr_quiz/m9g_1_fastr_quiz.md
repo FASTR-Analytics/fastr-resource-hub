@@ -4,217 +4,56 @@ theme: fastr
 paginate: true
 ---
 
-## Quiz FASTR
+# Quiz FASTR
 
-**15 min | 40 pts**
-
-Sonnez quand vous avez la réponse !
-
-**Règles :**
-- Vous pouvez utiliser l'assistant IA pour trouver les réponses — ou peut-être que vous savez déjà !
-- Sonnez quand votre équipe est prête à répondre
-- Bonne réponse = tous les points pour votre équipe
-- Mauvaise réponse = les autres équipes peuvent voler pour +1 point bonus
+Travaillez en équipes et utilisez l'assistant IA pour trouver les réponses — ou peut-être que vous savez déjà sans utiliser l'IA !
 
 ---
 
-## Partie 1 : Concepts de base
+## 1. Que signifie FASTR ?
 
-**3 pts chacun**
+**A.** Facility Assessment and Strategic Tracking Registry
 
----
+**B.** Frequent Assessments and Health System Tools for Resilience
 
-## Question 1
-
-Que signifie FASTR ?
+**C.** Framework for Analyzing Service Trends and Reporting
 
 ---
 
-## Réponse 1
+## 2. Quelles sont les 3 dimensions de qualité des données de FASTR ?
 
-**F**requent **A**ssessments and Health **S**ystem **T**ools for **R**esilience
+**A.** Exactitude, ponctualité, complétude
 
-(Évaluations Fréquentes et Outils de Système de Santé pour la Résilience)
+**B.** Validité, fiabilité, cohérence
 
----
-
-## Question 2
-
-Quelles sont les 3 dimensions de qualité des données de FASTR ?
+**C.** Valeurs aberrantes, complétude, cohérence interne
 
 ---
 
-## Réponse 2
+## 3. Quels sont les 4 piliers techniques de FASTR ?
 
-Valeurs aberrantes, complétude, cohérence
+**A.** Évaluations des établissements de santé, Suivi des agents de santé communautaires, Suivi de la chaîne d'approvisionnement, Systèmes de gestion financière
 
----
+**B.** Analyse de l'utilisation des services SRMNIA-N (SNIS), Enquêtes téléphoniques auprès des établissements, Enquêtes téléphoniques auprès des ménages/clients, Études qualitatives rapides
 
-## Question 3
-
-Quelles sont les 4 approches techniques de FASTR ?
+**C.** Collecte de données, Analyse de données, Visualisation de données, Diffusion de données
 
 ---
 
-## Réponse 3
+## 4. Un district rapporte 200 visites CPN1 mais 350 visites CPN4. Cela démontre un problème avec quelle dimension de qualité des données ?
 
-1. Analyse SNIS
-2. Enquêtes téléphoniques des établissements
-3. Enquêtes téléphoniques des ménages
-4. Analyses de suivi
+**A.** Problème de cohérence : les visites CPN1 devraient toujours être supérieures aux visites CPN4
 
----
+**B.** Problème de complétude : des registres de visites CPN1 manquent dans certains établissements
 
-## Question 4
-
-Quel est le cycle FASTR ?
+**C.** Problème de ponctualité : les données CPN1 de la période de rapportage précédente ont été retardées
 
 ---
 
-## Réponse 4
+## 5. Couverture CPN1 — quelle est la population cible ?
 
-Analyser, apprendre, renforcer, agir
+**A.** Femmes enceintes
 
----
+**B.** Femmes en âge de procréer (15–49 ans)
 
-## Partie 2 : Scénarios
-
-**4 pts chacun**
-
----
-
-## Question 5
-
-Un district rapporte 200 visites CPN1 mais 350 visites CPN4.
-
-Quel est le problème ?
-
----
-
-## Réponse 5
-
-**Problème de cohérence**
-
-CPN1 devrait toujours être supérieur à CPN4 (plus de femmes commencent qu'en complètent les 4 visites)
-
----
-
-## Question 6
-
-Vous calculez la couverture Penta1 et obtenez 147%.
-
-Qu'est-ce que cela signifie ?
-
----
-
-## Réponse 6
-
-**Le dénominateur est trop petit**
-
-La population cible est sous-estimée
-
----
-
-## Question 7
-
-Un établissement n'a pas rapporté depuis 7 mois au début de l'année.
-
-Est-il « incomplet » ou « inactif » ?
-
----
-
-## Réponse 7
-
-**Inactif**
-
-(6+ mois sans rapport au début/fin de période = inactif, pas incomplet)
-
----
-
-## Question 8
-
-Citez une raison pour laquelle la qualité des données SNIS pourrait être mauvaise
-
----
-
-## Réponse 8
-
-- Rapportage tardif
-- Erreurs de saisie
-- Rapports manquants
-- Enregistrement incohérent
-
-(toute réponse valide)
-
----
-
-## Partie 3 : Populations cibles
-
-Pour chaque service, nommez le dénominateur. **3 pts chacun**
-
----
-
-## Question 9
-
-Couverture CPN1 — population cible = ?
-
----
-
-## Réponse 9
-
-Femmes enceintes (ou grossesses attendues)
-
----
-
-## Question 10
-
-Couverture des accouchements institutionnels — population cible = ?
-
----
-
-## Réponse 10
-
-Naissances vivantes (ou naissances vivantes attendues)
-
----
-
-## Question 11
-
-Couverture Penta3 — population cible = ?
-
----
-
-## Réponse 11
-
-Nourrissons éligibles au DTC (ou nourrissons survivants)
-
----
-
-## Question 12
-
-Pourquoi Penta1 devrait-il être supérieur à Penta3 ?
-
----
-
-## Réponse 12
-
-**Abandon** — plus d'enfants commencent la série qu'ils ne la terminent
-
----
-
-## Scores finaux
-
-| Partie | Points |
-|--------|--------|
-| Partie 1 : Concepts de base (4 Q) | 12 |
-| Partie 2 : Scénarios (4 Q) | 16 |
-| Partie 3 : Populations cibles (4 Q) | 12 |
-| **Total** | **40** |
-
----
-
-## Débriefing
-
-- Quelles questions étaient les plus difficiles à trouver ?
-- Quels prompts ont bien fonctionné avec l'assistant IA ?
-- Qu'avez-vous appris sur FASTR ?
+**C.** Population totale de la zone de desserte

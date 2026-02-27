@@ -6,31 +6,31 @@ paginate: true
 
 <!-- _class: compact -->
 
-## Example prompts at a glance
+## Exemples de prompts en un coup d'œil
 
 <div class="columns">
 <div>
 
-**Getting started**
-*"Show me an overview of the data: what indicators, regions, and time periods are available?"*
+**Pour commencer**
+*"Montre-moi un aperçu des données : quels indicateurs, régions et périodes sont disponibles ?"*
 
-**Data quality**
-*"Analyze data completeness across facilities and time periods. Identify facilities with incomplete reporting."*
+**Qualité des données**
+*"Analyse la complétude des données par établissement et par période. Identifie les établissements avec un rapportage incomplet."*
 
-**Analysis**
-*"Which regions or indicators should we prioritize for support? Identify areas with declining service delivery or persistent gaps."*
+**Analyse**
+*"Quelles régions ou indicateurs devrions-nous prioriser pour un appui ? Identifie les zones avec une baisse de la prestation de services ou des lacunes persistantes."*
 
 </div>
 <div>
 
-**Indicator analysis**
-*"Analyze BCG, Penta1, and Penta3 for disruptions. Show actual vs expected with disruption periods highlighted."*
+**Analyse par indicateur**
+*"Analyse BCG, Penta1 et Penta3 pour les perturbations. Montre les valeurs réelles vs attendues avec les périodes de perturbation mises en évidence."*
 
-**Workflows**
-*"I need a quick 5-slide deck on [TOPIC] for [AUDIENCE]. Include: status, trends, regional comparison, and recommendations."*
+**Flux de travail**
+*"J'ai besoin d'un diaporama rapide de 5 diapositives sur [SUJET] pour [PUBLIC]. Inclus : état des lieux, tendances, comparaison régionale et recommandations."*
 
-**Reports**
-*"Generate 3-5 key messages from this analysis suitable for senior leadership."*
+**Rapports**
+*"Génère 3 à 5 messages clés de cette analyse adaptés à la direction générale."*
 
 </div>
 </div>

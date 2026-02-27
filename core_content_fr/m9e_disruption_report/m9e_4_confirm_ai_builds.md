@@ -12,7 +12,7 @@ Une fois que votre équipe est d'accord sur les regroupements d'indicateurs, tap
 
 **2. L'IA construit les diapositives** — Page de couverture, méthodologie, sélection des indicateurs, puis une diapositive d'analyse par groupe
 
-**3. Chaque diapositive comprend** — Un graphique de disruption (à droite) et une interprétation écrite des tendances (à gauche)
+**3. Chaque diapositive comprend** — Un graphique de perturbation (à droite) et une interprétation écrite des tendances (à gauche)
 
 **4. Revue en équipe** — Vérifiez les diapositives dans votre présentation en équipe et signalez tout ce qui doit être ajusté
 

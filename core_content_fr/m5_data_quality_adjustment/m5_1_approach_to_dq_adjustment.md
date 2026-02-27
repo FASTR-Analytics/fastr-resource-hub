@@ -15,7 +15,7 @@ FASTR répond à ces limitations en remplaçant les valeurs problématiques par 
 **Scénarios d'ajustement :** Pour favoriser la transparence et l'analyse de sensibilité, FASTR produit quatre ensembles de données parallèles :
 - **Non ajusté :** Valeurs déclarées originales
 - **Valeurs aberrantes ajustées :** Valeurs extrêmes remplacées
-- **Exhaustivité ajustée :** Valeurs manquantes imputées
+- **Complétude ajustée :** Valeurs manquantes imputées
 - **Les deux ajustés :** Toutes les corrections appliquées
 
 ---

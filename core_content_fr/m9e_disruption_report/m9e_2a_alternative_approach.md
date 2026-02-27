@@ -20,22 +20,22 @@ paginate: true
 
 ---
 
-## Étape 1 : Télécharger le rapport dans vos Assets
+## Étape 1 : Télécharger le rapport dans vos Ressources
 
-1. Allez à la page principale et cliquez sur **Assets** dans le menu supérieur
-2. Cliquez sur **Upload assets** et glissez-déposez le fichier PDF que vous souhaitez utiliser comme modèle
+1. Allez à la page principale et cliquez sur **Ressources** dans le menu supérieur
+2. Cliquez sur **Téléverser** et glissez-déposez le fichier PDF que vous souhaitez utiliser comme modèle
 
 ---
 
 ## Étape 2 : Inclure le rapport dans votre conversation IA
 
-Une fois le fichier dans vos Assets, vous pouvez le joindre à n'importe quelle conversation IA pour que l'IA puisse s'y référer.
+Une fois le fichier dans vos Ressources, vous pouvez le joindre à n'importe quelle conversation IA pour que l'IA puisse s'y référer.
 
 1. Cliquez sur le menu à trois points (⋮) en haut à droite du panneau IA
-2. Sélectionnez **Include file**
+2. Sélectionnez **Inclure un fichier**
 3. Choisissez le fichier du rapport dans la liste
-4. Cliquez sur **Include selected**
+4. Cliquez sur **Inclure la sélection**
 
 Puis demandez à l'IA :
 
-*"Use this report as a template. Create a similar report covering [time period]."*
+*"Utilise ce rapport comme modèle. Crée un rapport similaire couvrant [période]."*

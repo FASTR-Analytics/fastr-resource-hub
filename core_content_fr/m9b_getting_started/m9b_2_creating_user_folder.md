@@ -12,5 +12,5 @@ paginate: true
 
 1. Saisissez votre adresse e-mail et votre mot de passe
 2. Accédez au projet pays
-3. Allez dans l'onglet **Slide Decks** → Cliquez sur **+ New folder** → Tapez votre nom → Cliquez sur **Save**
-4. Allez dans l'onglet **Visualization** → Cliquez sur **+ New folder** → Tapez votre nom → Cliquez sur **Save**
+3. Allez dans l'onglet **Présentations** → Cliquez sur **+ Nouveau dossier** → Tapez votre nom → Cliquez sur **Enregistrer**
+4. Allez dans l'onglet **Visualisations** → Cliquez sur **+ Nouveau dossier** → Tapez votre nom → Cliquez sur **Enregistrer**

@@ -66,7 +66,7 @@ slides:
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed
-  title: Quarter-on-quarter change
+  title: Variation trimestrielle
 - file: m6_s2_disruption_interpretation.md
   order: 2
   variant: condensed

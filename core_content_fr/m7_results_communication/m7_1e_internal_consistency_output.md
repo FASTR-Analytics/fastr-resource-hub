@@ -15,7 +15,7 @@ paginate: true
 </div>
 <div class="output-text">
 
-**Ce que vous voyez :** Carte thermique montrant le % de districts où les paires d'indicateurs respectent les relations attendues (par exemple, CPN1 ≥ CPN4).
+**Ce que vous voyez :** Heatmap montrant le % de districts où les paires d'indicateurs respectent les relations attendues (par exemple, CPN1 ≥ CPN4).
 
 **Formule :** % de cohérence = (districts répondant aux critères / districts totaux) × 100
 

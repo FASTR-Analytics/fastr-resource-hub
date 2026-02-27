@@ -180,9 +180,3 @@ modules:
   name:
     en: Platform Demo
     fr: Démo de la plateforme
-- id: overview
-  number: overview
-  folder: overview_20min
-  name:
-    en: FASTR 20-Minute Overview
-    fr: Aperçu FASTR en 20 minutes

@@ -8,9 +8,9 @@ paginate: true
 
 Si vous disposez d'un rapport précédent qui vous satisfait :
 
-1. Téléversez le rapport PDF dans vos **Assets** (page principale → Assets → Upload)
-2. Dans la conversation avec l'IA, cliquez sur le menu à trois points → **Include file** → Sélectionnez le rapport
-3. Demandez à l'IA : *"Use this report as a template. Create a similar report covering [time period]."*
+1. Téléversez le rapport PDF dans vos **Ressources** (page principale → Ressources → Téléverser)
+2. Dans la conversation avec l'IA, cliquez sur le menu à trois points → **Inclure un fichier** → Sélectionnez le rapport
+3. Demandez à l'IA : *"Utilise ce rapport comme modèle. Crée un rapport similaire couvrant [période]."*
 
 **Utilisez cette approche lorsque :**
 - Vous disposez d'un rapport précédent qui vous satisfait
