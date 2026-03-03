@@ -18,7 +18,7 @@ Combinaison de l'analyse et de la visualisation avec le renforcement des capacit
 </div>
 <div>
 
-![Processus de suivi de l'utilisation des services SRMNIA-N h:350](../../resources/diagrams_fr/rapid_cycle_analytics.svg)
+![Processus de suivi de l'utilisation des services SRMNIA-N h:350](../../resources/diagrams_fr/steps_to_implement_rmncahn_service_chart.png)
 
 </div>
 </div>

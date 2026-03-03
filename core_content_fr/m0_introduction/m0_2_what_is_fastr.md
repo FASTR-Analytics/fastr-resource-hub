@@ -8,7 +8,7 @@ paginate: true
 
 Une approche visant à catalyser des cycles continus « analyser, apprendre, renforcer, agir » pour favoriser l'utilisation systématique de données actualisées pour la prise de décision.
 
-![w:700](../../resources/diagrams/what_is_fastr.png)
+![w:700](../../resources/diagrams_fr/what_is_fastr.png)
 
 <!--
 PRESENTER NOTES:
