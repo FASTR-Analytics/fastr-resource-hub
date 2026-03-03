@@ -431,13 +431,18 @@ router.get('/topic/:id', (req, res) => {
     if (language === 'fr') {
       const diagramsFrPath = path.join(REPO_ROOT, 'resources', 'diagrams_fr')
       content = content.replace(
-        /(\(\.\.\/\.\.\/resources\/diagrams\/|\/resources\/diagrams\/)([^)]+\.svg)/g,
+        /(\(\.\.\/\.\.\/resources\/diagrams\/|\/resources\/diagrams\/)([^)]+\.(svg|png))/g,
         (match, prefix, filename) => {
-          // Check if French version exists
+          // Check if French version exists (exact match or SVG version of PNG)
           const frDiagramPath = path.join(diagramsFrPath, filename)
           if (fs.existsSync(frDiagramPath)) {
-            // Rewrite to French diagram path
-            return prefix.replace('/diagrams/', '/diagrams_fr/')  + filename
+            return prefix.replace('/diagrams/', '/diagrams_fr/') + filename
+          }
+          // Check if SVG version exists in FR (e.g., EN has .png, FR has .svg)
+          const svgFilename = filename.replace(/\.png$/, '.svg')
+          const frSvgPath = path.join(diagramsFrPath, svgFilename)
+          if (svgFilename !== filename && fs.existsSync(frSvgPath)) {
+            return prefix.replace('/diagrams/', '/diagrams_fr/') + svgFilename
           }
           // Keep English version if French doesn't exist
           return match
