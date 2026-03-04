@@ -6,7 +6,7 @@ paginate: true
 
 ## Revue par les pairs : retour sur le rapport de perturbations
 
-**Formez des binômes :** RDC ↔ Burkina Faso | Sierra Leone ↔ Libéria | Zambie ↔ Nigéria/Bauchi
+**Formez des binômes** avec une autre équipe pays
 
 **Échangez vos rapports** avec l'équipe partenaire
 

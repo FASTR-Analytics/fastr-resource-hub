@@ -6,7 +6,7 @@ paginate: true
 
 ## Peer review: disruption report feedback
 
-**Pair up:** DRC ↔ Burkina Faso | Sierra Leone ↔ Liberia | Zambia ↔ Nigeria/Bauchi
+**Pair up** with another country team
 
 **Swap reports** with your paired team
 
