@@ -16,15 +16,14 @@ const getClient = () => {
 }
 
 // Module details loaded from modules.yaml via registry
-// Helper to build a MODULE_DETAILS-compatible dict on demand from registry
-function getModuleDetailsDict(): Record<number, { name: string; description: string; topics: string[]; duration: string }> {
+// Helper to build a MODULE_DETAILS dict on demand from registry (includes all modules with ai_context)
+function getModuleDetailsDict(): Record<string, { name: string; description: string; topics: string[]; duration: string }> {
   const modules = loadModulesRegistry()
-  const dict: Record<number, { name: string; description: string; topics: string[]; duration: string }> = {}
+  const dict: Record<string, { name: string; description: string; topics: string[]; duration: string }> = {}
   for (const mod of modules) {
-    if (!/^\d+$/.test(mod.number)) continue  // Only numeric modules (0-9)
-    const num = parseInt(mod.number)
+    if (!mod.ai_context) continue  // Skip modules without AI context
     const ai = mod.ai_context
-    dict[num] = {
+    dict[mod.number] = {
       name: mod.name.en,
       description: ai?.description || '',
       topics: ai?.topics || [],
@@ -43,7 +42,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
       type: 'object' as const,
       properties: {
         day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
-        module_number: { type: 'number', description: 'Module number (0-9)' },
+        module_number: { type: 'string', description: 'Module number/ID: "0" through "8" for theory modules, "3b" for AI Assistant, "9a" through "9h" for hands-on activity modules' },
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed". MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
         session_title: { type: 'string', description: 'Custom title for this session (e.g., "Data Quality Part 1"). If not specified, uses module name.' },
@@ -169,7 +168,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
       properties: {
         day: { type: 'number', description: 'Day number (1-indexed)' },
         session_position: { type: 'number', description: 'Position of the session in the day (0-indexed)' },
-        module_number: { type: 'number', description: 'Module number (0-9) to get the topic from' },
+        module_number: { type: 'string', description: 'Module number/ID (e.g., "0" through "8", "3b", "9a" through "9h")' },
         topic_number: { type: 'number', description: 'Topic number within the module (1-indexed)' },
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed"' },
       },
@@ -257,7 +256,8 @@ function addSessionToDay(config: any, dayKey: string, session: any): void {
 }
 
 function executeAddModule(config: any, input: any): { success: boolean; message: string } {
-  const { day, module_number, version, duration, session_title, topic_range } = input
+  const { day, version, duration, session_title, topic_range } = input
+  const module_number = String(input.module_number)  // Normalize to string
   const dayKey = `day${day}`
 
   if (!config.schedule[dayKey]) {
@@ -269,6 +269,9 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     return { success: false, message: `Module ${module_number} not found` }
   }
 
+  // Build module ID: "m" + number (e.g., "m0", "m9a", "m3b")
+  const moduleId = `m${module_number}`
+
   // Check for overlapping topic ranges if this module already exists
   const existingRanges: Array<{start: number, end: number, day: string}> = []
   for (const d of Object.keys(config.schedule)) {
@@ -276,7 +279,7 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     const sessions = config.schedule[d]
     if (!Array.isArray(sessions)) continue
     for (const s of sessions) {
-      if (s.module === `m${module_number}`) {
+      if (s.module === moduleId) {
         if (s.topic_range) {
           existingRanges.push({ ...s.topic_range, day: d })
         } else {
@@ -328,7 +331,7 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
   addSessionToDay(config, dayKey, {
     _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     session: sessionName,
-    module: `m${module_number}`,
+    module: moduleId,
     version: version,
     topic_range: topic_range || null,  // null means all topics
     duration: sessionDuration,
@@ -559,7 +562,8 @@ function executeMoveSessionToDay(config: any, input: any): { success: boolean; m
 }
 
 function executeAddTopicToSession(config: any, input: any): { success: boolean; message: string } {
-  const { day, session_position, module_number, topic_number, version } = input
+  const { day, session_position, topic_number, version } = input
+  const module_number = String(input.module_number)  // Normalize to string
   const dayKey = `day${day}`
 
   // Validate day exists
@@ -656,25 +660,34 @@ router.post('/chat', async (req, res) => {
 # ABOUT FASTR
 FASTR (Framework for Analytics Strengthening Through Routine data) is a methodology for analyzing health system data, particularly RMNCAH-N program data from DHIS2.
 
-# CRITICAL: MODULE VERSIONS
-Each module has TWO versions available:
-- **FULL version**: Complete content with all slides and details. Takes 60-180 minutes depending on module.
-- **CONDENSED version**: Key points only, shorter slides. Takes 30-60 minutes.
+# MODULE TYPES
+There are two categories of modules:
+
+## Theory Modules (0-8, 3b)
+Conceptual/methodological content. Each has TWO versions:
+- **FULL version**: Complete content with all slides. Takes 60-180 minutes.
+- **CONDENSED version**: Key points only. Takes 30-60 minutes.
+
+## Activity Modules (9a-9h)
+Hands-on platform activities and exercises. Only have FULL version (use version: "full").
+These are CRITICAL for practical workshops — always pair theory with activities.
 
 **RULES:**
-1. NEVER add both versions of the same module - only ONE version per module
-2. If user does not specify which version they want, ASK THEM before adding: "Would you like the full version (complete content, ~X minutes) or condensed version (key points only, ~Y minutes)?"
-3. If user says "quick overview" or "high-level" → use condensed
-4. If user says "detailed" or "comprehensive" or "full training" → use full
-5. If unclear, default to asking
+1. NEVER add both full and condensed versions of the same module
+2. If user does not specify version for theory modules, ASK before adding
+3. "quick overview" or "high-level" → use condensed
+4. "detailed" or "comprehensive" or "full training" → use full
+5. Activity modules (9a-9h) only have full version — always use "full"
+6. For practical workshops, PREFER activity modules over custom sessions for hands-on work
+7. A good workshop balances theory and practice — don't stack all theory together
 
 # AVAILABLE MODULES
 ${Object.entries(getModuleDetailsDict()).map(([num, mod]) => `
 ## Module ${num}: ${mod.name}
 - **Description**: ${mod.description}
 - **Topics**: ${mod.topics.join(', ')}
-- **Full duration**: ${mod.duration}
-- **Condensed duration**: ~30-50% of full
+- **Duration**: ${mod.duration}
+${/^\d+$/.test(num) ? '- **Has condensed version**: yes (~30-50% of full)' : /^9/.test(num) ? '- **Type**: Hands-on activity (full only)' : '- **Has condensed version**: yes'}
 `).join('\n')}
 
 # CURRENT WORKSHOP
@@ -995,19 +1008,27 @@ Given a user's description of their workshop needs, generate a COMPLETE workshop
 Available FASTR modules:
 ${moduleList}
 
-IMPORTANT - MODULE VERSIONS:
-Each module has TWO versions:
+IMPORTANT - MODULE TYPES:
+
+Theory modules (0-8, 3b) have TWO versions:
 - "full": Complete content with all slides (longer duration)
 - "condensed": Key points only (shorter duration, ~30-50% of full)
 
-You MUST choose ONE version per module - NEVER include both versions of the same module.
+Activity modules (9a-9h) are hands-on platform exercises. Only have "full" version.
+These are CRITICAL for practical workshops. Always pair theory with relevant activities.
 
-How to decide:
-- If user says "quick", "overview", "high-level", "introductory" → use "condensed"
-- If user says "detailed", "comprehensive", "full training", "in-depth" → use "full"
-- If user specifies short days (e.g., ends at 3:30pm) → prefer "condensed" to fit content
-- If user has many days or long days → can use "full"
-- Default to "full" if not specified and time permits
+Typical pairings:
+- Module 3 (Platform) → 9a (Instance Setup) + 9b (Getting Started) + 9h (Platform Demo)
+- Module 4-5 (Data Quality) → 9c (Visualizations & Interpretation)
+- Module 6 (Data Analysis) → 9c (Visualizations) + 9d (Slide Decks)
+- Module 7 (Results Communication) → 9d (Slide Decks) + 9e (Disruption Report)
+- Module 3b (AI Assistant) → 9f (Prompting Techniques)
+
+Version choice:
+- "quick", "overview", "high-level" → use "condensed" for theory
+- "detailed", "comprehensive", "full training" → use "full"
+- Short days → prefer "condensed" for theory
+- Activity modules → always use "full"
 
 Generate a JSON object with this structure:
 {
@@ -1025,45 +1046,46 @@ Generate a JSON object with this structure:
   "module_version": "full",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
   "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
-  "modules": [0, 1, 2, 4, 5, 6, 7],
+  "modules": ["0", "1", "2", "4", "5", "6", "7", "9a", "9c"],
   "schedule": {
     "day1": [
       {"session": "Introduction to FASTR", "module": "m0", "version": "full", "duration": 60},
       {"session": "Tea Break", "type": "break", "duration": 15},
-      {"session": "Identify Questions & Indicators", "module": "m1", "version": "full", "duration": 90}
+      {"session": "Identify Questions & Indicators", "module": "m1", "version": "full", "duration": 90},
+      {"session": "Lunch Break", "type": "break", "duration": 60},
+      {"session": "Instance Setup", "module": "m9a", "version": "full", "duration": 90},
+      {"session": "Registration", "type": "custom", "duration": 30}
     ],
     "day2": [
-      {"session": "Data Extraction", "module": "m2", "version": "full", "duration": 90},
-      {"session": "Lunch Break", "type": "break", "duration": 60}
+      {"session": "Data Quality Assessment", "module": "m4", "version": "condensed", "duration": 45},
+      {"session": "Lunch Break", "type": "break", "duration": 60},
+      {"session": "Visualizations & Interpretation", "module": "m9c", "version": "full", "duration": 120}
     ]
   }
 }
 
 CRITICAL RULES:
-1. NEVER include both "full" and "condensed" versions of the same module
-2. All modules in a workshop should typically use the SAME version (all full OR all condensed)
-3. Select modules that match the workshop focus (e.g., "data quality focus" = emphasize modules 4, 5)
-4. Spread modules logically across days with breaks
-5. Day 1 should include Module 0 (Introduction) FIRST
-6. Add tea breaks (15min) mid-morning and mid-afternoon
-7. Add lunch break around midday (default 60min, or as specified by user)
-8. Calculate total daily content to fit within user-specified start and end times
-9. ONLY two session types are allowed:
+1. NEVER include both "full" and "condensed" versions of the same theory module
+2. Select modules that match the workshop focus
+3. Spread modules logically across days with breaks
+4. Day 1 should typically include Module 0 (Introduction) FIRST
+5. Add tea breaks (15min) mid-morning and mid-afternoon
+6. Add lunch break around midday (default 60min, or as specified by user)
+7. Calculate total daily content to fit within start and end times
+8. THREE session types are allowed:
    - Module sessions: {"session": "Name", "module": "m0", "version": "full", "duration": 60}
    - Break sessions: {"session": "Tea Break", "type": "break", "duration": 15}
-10. Do NOT use any other types like "discussion", "custom", etc.
+   - Custom sessions: {"session": "Country Presentations", "type": "custom", "duration": 60}
+9. Use custom sessions ONLY for non-module activities (registration, opening remarks, country presentations, group discussion, action planning)
+10. PREFER activity modules (9a-9h) over custom sessions for hands-on platform work
 11. objectives and expected_outputs should be strings with "- " bullets separated by newlines
-12. Extract day_start_time and day_end_time from user prompt (e.g., "9am" = "09:00", "3:30pm" = "15:30")
-16. Extract start_date and end_date from user prompt in YYYY-MM-DD format (e.g., "March 10-12, 2026" → start_date: "2026-03-10", end_date: "2026-03-12")
-17. Extract lunch_duration from user prompt (default 60 minutes if not specified)
-18. Generate a concise title (for cover slide) and subtitle based on the workshop name and country
-19. Use the workshop name provided by user for the "name" field, do not modify it
-13. NEVER DUPLICATE A MODULE - each module (m0, m1, m2, etc.) can only appear ONCE in the entire schedule
-14. Do NOT create "Part 1" and "Part 2" of the same module - just include the module ONCE with appropriate duration
-15. If a module is too long for available time, either:
-    - Use the condensed version instead
-    - OR place it across a break (module before break, break, then continue with next module after)
-    - NEVER split a single module into multiple sessions with the same content
+12. Extract day_start_time and day_end_time from user prompt
+13. Extract start_date and end_date from user prompt in YYYY-MM-DD format
+14. Extract lunch_duration from user prompt (default 60 minutes if not specified)
+15. Generate a concise title (for cover slide) and subtitle
+16. Use the workshop name provided by user for the "name" field
+17. NEVER DUPLICATE A MODULE - each module can only appear ONCE in the entire schedule
+18. A good workshop BALANCES theory and practice — don't stack all theory on one day
 
 Return ONLY valid JSON, no explanation.`,
       messages: [

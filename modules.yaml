@@ -62,6 +62,15 @@ modules:
   name:
     en: AI Assistant
     fr: Assistant IA
+  ai_context:
+    description: Training on the FASTR AI assistant — capabilities, effective prompting,
+      prompt library, team collaboration, and privacy.
+    topics:
+    - AI assistant role and capabilities
+    - Effective prompting techniques
+    - Prompt library and organization
+    - Team collaboration and privacy
+    duration: 150-180 min
 - id: m4
   number: '4'
   folder: m4_data_quality_assessment
@@ -138,45 +147,117 @@ modules:
   name:
     en: Instance Setup
     fr: Configuration de l'instance
+  ai_context:
+    description: Hands-on activities for configuring FASTR platform instances — admin
+      areas, data import, running modules, creating projects.
+    topics:
+    - Setting up admin areas
+    - Importing data
+    - Installing and running modules
+    - Creating a project
+    duration: 90-120 min
 - id: m9b
   number: 9b
   folder: m9b_getting_started
   name:
     en: Getting Started
     fr: Prise en main
+  ai_context:
+    description: Getting started with the FASTR platform — logging in, navigating
+      the interface, creating user folders.
+    topics:
+    - Platform demo and walkthrough
+    - Logging into the platform
+    - Creating user folders
+    duration: 30-45 min
 - id: m9c
   number: 9c
   folder: m9c_visualizations_interpretation
   name:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
+  ai_context:
+    description: Hands-on creation and interpretation of visualizations — manual and
+      AI-assisted, with disruption analysis practice.
+    topics:
+    - Creating visualizations manually
+    - Creating visualizations with AI Assistant
+    - How to interpret a FASTR visualization
+    - Interpreting visualizations in slide decks
+    - Creating interpretations with AI Assistant
+    - Disruption detection
+    duration: 120-150 min
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
   name:
     en: Slide Decks
     fr: Présentations
+  ai_context:
+    description: Building and customizing slide decks — adding visualizations, editing
+      layouts, formatting reports with logos and styles.
+    topics:
+    - Creating slide decks
+    - Adding visualizations manually and with AI
+    - Editing and finalizing slides
+    - Report formatting and styling
+    duration: 120-150 min
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
   name:
     en: Disruption Report
     fr: Rapport de perturbations
+  ai_context:
+    description: Creating disruption reports with AI assistance — from prompt to final
+      output, with peer review and refinement.
+    topics:
+    - Building a disruption report with AI
+    - Understanding and customizing prompts
+    - Reviewing and verifying AI output
+    - Refining reports with additional analyses
+    - Peer review and presenting reports
+    duration: 180-240 min
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
   name:
     en: Prompting Techniques
     fr: Techniques de prompting
+  ai_context:
+    description: Developing effective prompting skills — iterative vs single prompts,
+      prompt refinement, and using the prompt library.
+    topics:
+    - Iterative conversation strategies
+    - Single prompt design
+    - Prompt refinement exercises
+    - Prompt library organization
+    duration: 90-120 min
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
   name:
     en: FASTR Quiz
     fr: Quiz FASTR
+  ai_context:
+    description: Interactive quiz covering FASTR fundamentals — data quality dimensions,
+      technical pillars, indicator definitions.
+    topics:
+    - FASTR framework knowledge check
+    - Data quality concepts
+    - Indicator definitions
+    duration: 30-45 min
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
   name:
     en: Platform Demo
     fr: Démo de la plateforme
+  ai_context:
+    description: Live demonstration of the FASTR platform — access, user roles, and
+      basic workflow.
+    topics:
+    - Platform access and authentication
+    - User roles (Administrator, Editor, Viewer)
+    - Platform navigation
+    duration: 45-60 min
