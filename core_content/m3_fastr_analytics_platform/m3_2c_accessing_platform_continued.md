@@ -23,16 +23,9 @@ paginate: true
 
 A project is an **analytical workspace** within an instance, organized around a specific reporting objective.
 
-Each project contains:
-
-- **Metrics** — processed datasets from routine and/or survey sources, ready for analysis
-- **Visualizations** — saved charts, tables, and graphs you can reuse and update
-- **Slide decks** — presentation materials for stakeholders
-- **Analysis modules** — automated data quality checks and indicator calculations
+Each project contains **metrics**, **visualizations**, **slide decks**, and **analysis modules** — everything needed to go from raw data to a finished report.
 
 A country may need one project or several — for example, separate projects for annual reports, survey analysis, or different teams.
-
-**Key questions when setting up:** Who is the admin? Who can edit? Who can view?
 
 </div>
 </div>

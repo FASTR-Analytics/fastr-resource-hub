@@ -11,14 +11,14 @@ slides:
   order: 2.01
   variant: full
   title: Instance pays
-- file: m3_2b_accessing_platform_continued.md
+- file: m3_2c_accessing_platform_continued.md
   order: 2.02
   variant: full
-  title: Rôles et autorisations des utilisateurs
-- file: m3_2c_accessing_platform_continued.md
+  title: Projets au sein d'une instance
+- file: m3_2b_accessing_platform_continued.md
   order: 2.03
   variant: full
-  title: Projets au sein d'une instance
+  title: Rôles et autorisations des utilisateurs
 - file: m3_2e_configuring_platform_intro.md
   order: 2.05
   variant: full
