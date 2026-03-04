@@ -222,10 +222,10 @@ function validateSessionFits(config: any, dayNum: number, duration: number): { f
   const newEnd = currentEnd + duration
 
   if (newEnd > dayEnd) {
-    const availableMinutes = dayEnd - currentEnd
+    const overflowMinutes = newEnd - dayEnd
     return {
-      fits: false,
-      message: `Session would end at ${minutesToTime(newEnd)}, but day ends at ${minutesToTime(dayEnd)}. Only ${availableMinutes} minutes available. Consider adding to a different day or reducing duration.`
+      fits: true,
+      message: `Note: Day will run ${overflowMinutes} minutes past scheduled end (${minutesToTime(dayEnd)} → ${minutesToTime(newEnd)}). Session added anyway.`
     }
   }
   return { fits: true }
@@ -731,7 +731,7 @@ CRITICAL RULES:
     const toolResults: Array<{ tool: string; result: any }> = []
 
     // Tool use loop - keep going until AI stops calling tools
-    let maxIterations = 5
+    let maxIterations = 15
     while (maxIterations > 0) {
       maxIterations--
 
