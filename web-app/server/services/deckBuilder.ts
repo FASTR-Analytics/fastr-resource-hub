@@ -739,6 +739,12 @@ function buildSectionSlide(session: Session): string {
 function buildGenericSessionSlide(session: Session): string {
   return `## ${session.session}
 
-${session.duration ? `*Duration: ${session.duration} minutes*` : ''}
+<div style="display: flex; justify-content: center; align-items: center; height: 65%; opacity: 0.15;">
+<div style="text-align: center;">
+<p style="font-size: 3em; font-weight: 700; letter-spacing: 0.15em; color: #09544F;">PLACEHOLDER</p>
+</div>
+</div>
+
+${session.duration ? `*${session.duration} minutes*` : ''}
 `
 }
