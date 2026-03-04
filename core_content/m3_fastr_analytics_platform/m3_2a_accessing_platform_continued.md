@@ -4,15 +4,14 @@ theme: fastr
 paginate: true
 ---
 
-## Country Instance
+## Country instance
 
-Each country has its own **instance** of the FASTR analytics platform.
+Each country has its own **instance** of the FASTR analytics platform — a country-specific deployment that serves as the centralized hub for health data analysis.
 
-An instance contains:
+Each instance:
 
-- All registered users and their accounts
-- The shared administrative structure (regions, districts, facilities)
-- Indicator definitions and data sources
-- All projects created for that country
+- **Integrates data** from routine facility reporting (DHIS2) and household surveys (DHS, MICS)
+- **Maintains country-specific configurations** — geographic structure (regions, districts, facilities), indicator definitions, and data quality rules
+- **Provides a unified analytical environment** where users can explore both routine and survey data without needing technical expertise
 
-**Think of an instance as your country's dedicated workspace.**
+*Think of an instance as your country's integrated health data platform.*

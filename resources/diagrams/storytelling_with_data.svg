@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Step 1 -->
+  <g transform="translate(20, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <circle cx="100" cy="50" r="24" fill="#09544F"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">1</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">What is happening?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">State the key finding</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">clearly</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"Immunization coverage</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">dropped in 3 districts"</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <polyline points="228,120 242,130 228,140" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(250, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <circle cx="100" cy="50" r="24" fill="#0C716B"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">2</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Why does it matter?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">Connect to</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">real-world impact</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"400,000 children at risk</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">of preventable outbreaks"</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <polyline points="458,120 472,130 458,140" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(480, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <circle cx="100" cy="50" r="24" fill="#1F9A9C"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">3</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">What should we do?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">Point to a decision</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">or action</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"Targeted outreach could</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">reverse the trend"</text>
+  </g>
+
+
+</svg>

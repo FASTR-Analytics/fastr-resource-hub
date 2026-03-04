@@ -21,19 +21,18 @@ paginate: true
 </div>
 <div class="text-col">
 
-Each country instance can contain **multiple projects**.
+A project is an **analytical workspace** within an instance, organized around a specific reporting objective.
 
-A country may only need one project, or multiple projects can be used for:
+Each project contains:
 
-- Different versions of analyses
-- A demo or playground project
-- Separate projects for different teams or programs
+- **Metrics** — processed datasets from routine and/or survey sources, ready for analysis
+- **Visualizations** — saved charts, tables, and graphs you can reuse and update
+- **Slide decks** — presentation materials for stakeholders
+- **Analysis modules** — automated data quality checks and indicator calculations
 
-**Key questions when setting up:**
+A country may need one project or several — for example, separate projects for annual reports, survey analysis, or different teams.
 
-- Who is the admin?
-- Who can edit?
-- Who can view?
+**Key questions when setting up:** Who is the admin? Who can edit? Who can view?
 
 </div>
 </div>

@@ -21,19 +21,18 @@ paginate: true
 </div>
 <div class="text-col">
 
-Chaque instance de pays peut contenir **plusieurs projets**.
+Un projet est un **espace de travail analytique** au sein d'une instance, organisé autour d'un objectif de rapportage spécifique.
 
-Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
+Chaque projet contient :
 
-- Différentes versions d'analyses
-- Un projet de démonstration ou de test
-- Des projets distincts pour différentes équipes ou différents programmes
+- **Métriques** — jeux de données traités à partir de sources de routine et/ou d'enquêtes, prêts pour l'analyse
+- **Visualisations** — graphiques, tableaux et diagrammes enregistrés, réutilisables et actualisables
+- **Présentations** — supports de présentation pour les parties prenantes
+- **Modules d'analyse** — vérifications automatisées de la qualité des données et calculs d'indicateurs
 
-**Questions clés lors de la mise en place :**
+Un pays peut avoir besoin d'un seul projet ou de plusieurs — par exemple, des projets distincts pour les rapports annuels, l'analyse des enquêtes ou différentes équipes.
 
-- Qui est l'administrateur ?
-- Qui peut modifier ?
-- Qui peut consulter ?
+**Questions clés lors de la mise en place :** Qui est l'administrateur ? Qui peut modifier ? Qui peut consulter ?
 
 </div>
 </div>
