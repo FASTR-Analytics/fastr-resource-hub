@@ -1378,7 +1378,7 @@ L'analyse FASTR suit un processus séquentiel :
 2. **Ajuster les problèmes de qualité** - Appliquer des corrections pour améliorer la fiabilité des données
 3. **Analyser les données ajustées** - Générer des estimations sur l'utilisation et la couverture des services
 
-![Pipeline analytique h:280](resources/diagrams/analytical_pipeline.svg)
+![Pipeline analytique h:280](resources/diagrams_fr/analytical_pipeline.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
@@ -1433,7 +1433,7 @@ L'évaluation de la qualité des données permet un suivi continu pour :
 ---
 ## Mesures de la qualité des données
 
-![Mesures de la qualité des données](resources/diagrams/measures_data_quality.svg)
+![Mesures de la qualité des données](resources/diagrams_fr/measures_data_quality.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1568,7 +1568,7 @@ PRESENTER NOTES:
 
 ## Pourquoi ajuster pour les valeurs aberrantes ?
 
-![Impact des valeurs aberrantes](resources/diagrams/outlier_impact.svg)
+![Impact des valeurs aberrantes](resources/diagrams_fr/outlier_impact.svg)
 
 ---
 
@@ -1623,7 +1623,7 @@ Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce
 </div>
 <div>
 
-![Illustration de cohérence h:280](../resources/diagrams/consistency_illustration.svg)
+![Illustration de cohérence h:280](../resources/diagrams_fr/consistency_illustration.svg)
 
 </div>
 </div>
@@ -1654,7 +1654,7 @@ La vérification de la cohérence au niveau de l'établissement ne tiendrait pas
 </div>
 <div style="flex: 2;">
 
-![Cohérence des districts](resources/diagrams/district_consistency.svg)
+![Cohérence des districts](resources/diagrams_fr/district_consistency.svg)
 
 </div>
 </div>
@@ -1710,7 +1710,7 @@ L'analyse FASTR suit un processus séquentiel :
 2. **Ajuster les problèmes de qualité** - Appliquer des corrections pour améliorer la fiabilité des données
 3. **Analyser les données ajustées** - Générer des estimations sur l'utilisation et la couverture des services
 
-![Pipeline analytique h:280](resources/diagrams/analytical_pipeline.svg)
+![Pipeline analytique h:280](resources/diagrams_fr/analytical_pipeline.svg)
 
 ---
 
