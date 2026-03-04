@@ -12,7 +12,7 @@ Once your team agrees on the indicator groupings, type your confirmation in the 
 
 **2. AI builds slides** — Cover page, methodology, indicator selection, then one analysis slide per group
 
-**3. Each slide includes** — A disruption chart (right) and a written interpretation of the trends (left)
+**3. Each slide includes** — A disruption chart showing actual vs. expected service volumes (right) and a written interpretation of the trends (left)
 
 **4. Review together** — Check the slides in your deck as a team and flag anything to adjust
 

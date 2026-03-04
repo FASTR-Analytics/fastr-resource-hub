@@ -10,9 +10,9 @@ paginate: true
 
 ![h:200 Data format wide](../../resources/screenshots/data_format_wide.png)
 
-- Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**
-- Data should be saved in long format meaning each row represents a single observation or measurement (see example)
-- Data should be saved in .csv format and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform
+- Data should be downloaded for each **health indicator** (e.g. ANC1 visits, BCG vaccinations), at **facility level** (individual health centers), and **monthly** for the **period of interest**
+- Data should be saved in long format — one row per observation (e.g. one row = one facility, one month, one indicator)
+- Data should be saved as a `.csv` file (a simple spreadsheet format) — either a single file or multiple files that will be combined when uploading to the FASTR platform
 
 <!--
 PRESENTER NOTES:

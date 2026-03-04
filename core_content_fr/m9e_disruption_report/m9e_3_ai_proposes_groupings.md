@@ -32,4 +32,4 @@ L'IA lit les données de votre pays et découvre quels indicateurs de santé son
 </div>
 </div>
 
-**Exemples de regroupements :** Soins prénataux (CPN1, CPN4) · Accouchements & PPN · Vaccination (BCG, Penta 1, Penta 3) · Planification familiale · Paludisme · VIH/TB · Consultations externes · Nutrition
+**Exemples de regroupements :** Soins prénataux (CPN1 = 1ère visite, CPN4 = 4ème visite) · Accouchements & Soins postnataux · Vaccination (BCG, Penta 1, Penta 3) · Planification familiale · Paludisme · VIH/TB · Consultations externes · Nutrition

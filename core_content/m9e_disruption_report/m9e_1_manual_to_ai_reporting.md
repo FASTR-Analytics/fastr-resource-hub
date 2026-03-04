@@ -17,3 +17,5 @@ Then the whole team edits. Once the report is generated, everyone joins in to re
 We will regroup on styling before you finalize. We will demonstrate how to format text and change the theme color on your decks.
 
 **In this session, you will use the AI to generate a disruption report for your country using the most up-to-date data; then refine it into a finished presentation.**
+
+*A disruption report compares actual service delivery numbers against what was expected based on historical trends, highlighting where and when health services were significantly disrupted.*

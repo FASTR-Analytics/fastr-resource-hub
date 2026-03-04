@@ -9,9 +9,9 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-We offer two tools for bulk DHIS2 data extraction: a user-friendly Data Downloader and a direct import feature within the FASTR analytics platform.
+We offer two tools for extracting data from DHIS2: a user-friendly Data Downloader and a direct import feature within the FASTR platform.
 
-The Data Downloader provides a streamlined interface to download DHIS2 data. This tool is particularly useful to explore DHIS2 metadata and download indicators requiring disaggregated dimensions.
+The Data Downloader provides a simple interface to browse and download DHIS2 data. It is particularly useful for exploring what indicators are available in your system and downloading data broken down by categories (e.g. by age group or sex).
 
 The Data Downloader is available at: https://github.com/worldbank/DHIS2-Downloader/releases/
 

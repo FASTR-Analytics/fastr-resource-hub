@@ -13,5 +13,5 @@ You can format text using simple symbols, just like writing a message.
 | `# Heading` | Large heading |
 | `## Subheading` | Smaller heading |
 | `*bold*` | **bold** |
-| Start a line with `-` | Bullet point |
+| Start a line with `-` (a hyphen) | Bullet point |
 | Leave a blank line | Add spacing |

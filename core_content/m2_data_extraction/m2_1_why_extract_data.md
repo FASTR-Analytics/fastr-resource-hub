@@ -4,14 +4,14 @@ theme: fastr
 paginate: true
 ---
 
-## Why would you extract data from DHIS2? Why not just do analysis in DHIS2 itself?
+## Why extract data from DHIS2? Why not just analyze in DHIS2 itself?
 
 **Data quality adjustment**
 
-The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
+DHIS2 (District Health Information Software) is the national system where health facilities report their data. FASTR extracts this data and applies quality adjustments — correcting for missing reports and extreme values — to produce more reliable estimates.
 
-**Analysis complexity**
+**Deeper analysis**
 
-The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal variations, and comparing key periods, such as before and after a reform.
+FASTR uses statistical methods not available in DHIS2. While DHIS2 can plot trends using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal patterns (e.g. malaria peaks in rainy season), and comparing key periods such as before and after a reform.
 
-The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs!
+The choice between DHIS2 and FASTR depends on the purpose of your analysis. Use the tool that best fits your needs!

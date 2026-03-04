@@ -32,4 +32,4 @@ The AI reads your country's data and discovers which health indicators are avail
 </div>
 </div>
 
-**Example groupings:** Antenatal Care (ANC1, ANC4) · Deliveries & PNC · Immunization (BCG, Penta 1, Penta 3) · Family Planning · Malaria · HIV/TB · OPD · Nutrition
+**Example groupings:** Antenatal Care (ANC1 = 1st visit, ANC4 = 4th visit) · Deliveries & Postnatal Care · Immunization (BCG, Penta 1, Penta 3) · Family Planning · Malaria · HIV/TB · Outpatient Department · Nutrition

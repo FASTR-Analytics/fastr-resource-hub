@@ -31,12 +31,11 @@ Le prompt est un ensemble d'instructions détaillées qui indiquent à l'assista
 
 ## L'assistant IA vous demandera les détails de votre rapport
 
-Après avoir envoyé le prompt, l'IA vous posera quelques questions avant de commencer à construire la présentation. Le pilote de votre équipe doit taper les réponses directement dans le chat.
+Après avoir envoyé le prompt, l'IA vous posera une série de questions avant de commencer à construire la présentation. Le pilote de votre équipe doit taper les réponses directement dans le chat.
 
-1. **Nom du pays** — l'IA peut déjà détecter votre pays à partir du projet. Confirmez ou tapez le nom correct.
-2. **Période d'analyse** — fournissez une date de début et de fin pour les données que vous souhaitez analyser (par ex., "Janvier 2023 à septembre 2025")
-3. **Sous-titre du rapport** — un libellé court pour la page de couverture du rapport (par ex., "T3 2025", "Annuel 2025")
-
-**Conseil :** Répondez aux trois questions en un seul message pour gagner du temps. Par exemple : *"Sierra Leone, janvier 2023 à septembre 2025, T3 2025"*
+1. **Période d'analyse** — fournissez une date de début et de fin pour les données que vous souhaitez analyser (par ex., "Janvier 2023 à septembre 2025")
+2. **Sous-titre de couverture** — l'IA proposera des options comme "T3 2025", "Annuel 2025", ou vous pouvez taper le vôtre
+3. **Regroupements d'indicateurs** — l'IA découvre quels indicateurs de santé sont disponibles dans la plateforme de votre pays, les regroupe par catégories (par ex. Vaccination, Soins prénataux) et vous demande de vérifier et ajuster
+4. **Indicateurs de mortalité** — l'IA demandera séparément si vous souhaitez inclure les indicateurs de mortalité (par ex. décès maternels, mortinaissances), car leur interprétation est différente
 
 Exécutez maintenant le prompt. Cliquez sur **Exécuter dans le chat actuel**.

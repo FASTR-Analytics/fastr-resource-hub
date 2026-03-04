@@ -24,7 +24,7 @@ Choisissez-en un et essayez. Remarquez comment changer un mot change le résulta
 
 **3. Posez une question de suivi**
 
-Après avoir obtenu un résultat, essayez : *"Montre ceci en diagramme à barres"* | *"Quelle région a eu le plus grand changement ?"* | *"Ajoute Penta1 à la comparaison"* | *"Explique ce que cela signifie"*
+Après avoir obtenu un résultat, essayez : *"Montre ceci en diagramme à barres"* | *"Quelle région a eu le plus grand changement ?"* | *"Ajoute Penta1 (première dose du vaccin pentavalent) à la comparaison"* | *"Explique ce que cela signifie"*
 
 Pas besoin de recommencer — continuez simplement la conversation. Enregistrez les visualisations que vous aimez dans votre propre dossier.
 

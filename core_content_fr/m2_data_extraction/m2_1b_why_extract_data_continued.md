@@ -10,9 +10,9 @@ paginate: true
 
 ![h:200 Data format wide](../../resources/screenshots/data_format_wide.png)
 
-- Les données doivent être téléchargées pour chaque **indicateur d'intérêt**, au **niveau de l'établissement**, et **mensuellement** pour la **période d'intérêt**
-- Les données doivent être sauvegardées en format long, ce qui signifie que chaque ligne représente une observation ou une mesure unique (voir l'exemple)
-- Les données doivent être enregistrées au format .csv et peuvent être enregistrées dans un seul fichier .csv ou dans plusieurs fichiers .csv qui seront combinés lors du téléchargement vers la plateforme d'analyse
+- Les données doivent être téléchargées pour chaque **indicateur de santé** (par ex. visites CPN1, vaccinations BCG), au **niveau de l'établissement** (centres de santé individuels), et **mensuellement** pour la **période d'intérêt**
+- Les données doivent être en format long — une ligne par observation (par ex. une ligne = un établissement, un mois, un indicateur)
+- Les données doivent être enregistrées en fichier `.csv` (un format tableur simple) — soit un fichier unique, soit plusieurs fichiers qui seront combinés lors du téléchargement vers la plateforme FASTR
 
 <!--
 PRESENTER NOTES:

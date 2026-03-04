@@ -17,3 +17,5 @@ Ensuite, toute l'équipe édite. Une fois le rapport généré, tout le monde pa
 Nous ferons un point sur le style avant de finaliser. Nous montrerons comment mettre en forme le texte et changer les couleurs du thème de vos présentations.
 
 **Dans cette session, vous utiliserez l'IA pour générer un rapport de perturbations pour votre pays en utilisant les données les plus récentes ; puis vous l'affinerez en une présentation finalisée.**
+
+*Un rapport de perturbations compare les chiffres réels de prestation de services à ce qui était attendu selon les tendances historiques, mettant en évidence où et quand les services de santé ont été significativement perturbés.*

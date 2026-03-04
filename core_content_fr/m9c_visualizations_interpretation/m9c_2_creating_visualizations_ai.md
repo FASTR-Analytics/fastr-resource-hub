@@ -16,4 +16,6 @@ paginate: true
 
 **Prompt :** *"Montre-moi un graphique de séries temporelles des visites CPN1 sur les 12 derniers mois en utilisant les données ajustées (après ajustement des valeurs aberrantes et de la complétude)"*
 
+*Données ajustées = données corrigées pour les rapports manquants (complétude) et les valeurs extrêmes (valeurs aberrantes) afin de donner une image plus fidèle.*
+
 *Nous sommes dans l'onglet Visualisations*

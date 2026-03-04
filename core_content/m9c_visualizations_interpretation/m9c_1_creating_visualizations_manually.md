@@ -8,9 +8,9 @@ paginate: true
 
 **I do, we do, you do**
 
-**I do:** Facilitator demonstrates creating a time-series line chart of ANC1 service utilization showing monthly volumes for the past 12 months, and saving it to a folder.
+**I do:** Facilitator demonstrates creating a time-series line chart (showing data over time) of ANC1 (first antenatal care visit) service utilization showing monthly volumes for the past 12 months, and saving it to a folder.
 
-**We do:** Together, we create a second visualization — a time-series line chart of BCG service utilization, showing monthly volumes for the past 12 months, and saving it to a folder.
+**We do:** Together, we create a second visualization — a time-series line chart of BCG (a childhood vaccine) service utilization, showing monthly volumes for the past 12 months, and saving it to a folder.
 
 **You do:** Create a time-series visualization of service utilization for the past 12 months, for an indicator of your choice, and save it to your own folder.
 

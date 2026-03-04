@@ -16,4 +16,6 @@ paginate: true
 
 **Prompt:** *"Show me a time-series chart showing ANC1 visits in the last 12 months using the adjusted data (after outlier and completeness adjustments)"*
 
+*Adjusted data = data that has been corrected for missing reports (completeness) and extreme values (outliers) to give a more accurate picture.*
+
 *We are in the Visualizations tab*
