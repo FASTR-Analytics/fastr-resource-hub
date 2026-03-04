@@ -135,3 +135,23 @@ slides:
   order: 7.01
   variant: full
   title: 'Activité : Planification d''action pays'
+- file: m7_s1_from_data_to_key_messages.md
+  order: 1
+  variant: condensed
+  title: Des données aux messages clés
+- file: m7_s2_storytelling_with_data.md
+  order: 2
+  variant: condensed
+  title: Raconter une histoire avec les données
+- file: m7_s3_choosing_report_format.md
+  order: 3
+  variant: condensed
+  title: Choisir le bon format de rapport
+- file: m7_s4_linking_results_to_actions.md
+  order: 4
+  variant: condensed
+  title: Lier les résultats aux actions
+- file: m7_s5_three_spheres_of_influence.md
+  order: 5
+  variant: condensed
+  title: Les trois sphères d'influence
