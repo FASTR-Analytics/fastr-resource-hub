@@ -9,15 +9,15 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-**Votre interprétation de la figure :**
+**Ce que vous pouvez voir vous-même :**
 
-Plusieurs perturbations prolongées de 2023 à 2025, avec une utilisation des services en dessous des niveaux attendus pendant les périodes en rouge.
+L'utilisation des services est passée en dessous des niveaux attendus plusieurs fois entre 2023 et 2025 (les périodes en rouge). Mais c'est difficile de dire exactement quand et de combien.
 
-**Interprétation de l'IA :**
+**Ce que l'IA ajoute :**
 
-En août 2023, les volumes ont chuté significativement en dessous des niveaux attendus (déficit de 12%). La perturbation s'est intensifiée de janvier à mai 2025, avec février 2025 montrant l'écart le plus important à 10 100 cas (20% en dessous des prévisions).
+La plus forte baisse était en août 2023 (12% en dessous des prévisions). La situation s'est aggravée de janvier à mai 2025, avec février 2025 montrant l'écart le plus important — 10 100 cas de moins que prévu (20% en dessous).
 
-***Quand les tendances ne sont pas évidentes, l'interprétation de l'IA peut améliorer notre compréhension.***
+***Quand la tendance est complexe, l'IA peut vous aider à comprendre les détails.***
 
 </div>
 <div>

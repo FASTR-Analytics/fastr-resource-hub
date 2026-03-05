@@ -9,19 +9,19 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-The AI follows a "read before responding" principle — it never guesses.
+The AI does not guess — it always looks at the data before answering.
 
-**For data questions:**
+**When you ask about data:**
 
-1. Finds the relevant metric
-2. Reads the actual data values
-3. Responds with a visualization
+1. Finds the right indicator
+2. Reads the actual numbers
+3. Shows you a chart with an explanation
 
-**For methodology questions:**
+**When you ask how something works:**
 
-1. Looks up documentation
-2. Reads the details
-3. Explains in plain language
+1. Looks up the platform documentation
+2. Reads the relevant section
+3. Explains it in plain language
 
 </div>
 <div>

@@ -9,19 +9,19 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
+L'IA ne devine pas — elle regarde toujours les données avant de répondre.
 
-**Pour les questions sur les données :**
+**Quand vous posez une question sur les données :**
 
-1. Trouve la métrique pertinente
-2. Lit les valeurs réelles
-3. Répond avec une visualisation
+1. Trouve le bon indicateur
+2. Lit les chiffres réels
+3. Vous montre un graphique avec une explication
 
-**Pour les questions méthodologiques :**
+**Quand vous demandez comment quelque chose fonctionne :**
 
-1. Consulte la documentation
-2. Lit les détails
-3. Explique en langage clair
+1. Consulte la documentation de la plateforme
+2. Lit la section concernée
+3. Vous l'explique en langage clair
 
 </div>
 <div>

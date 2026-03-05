@@ -11,6 +11,10 @@ slides:
   order: 2.01
   variant: full
   title: Là où l'IA aide le plus
+- file: mai_4_ai_how_it_works.md
+  order: 2.02
+  variant: full
+  title: Comment fonctionne l'assistant IA
 - file: mai_2_ai_accelerator_not_decider.md
   order: 3
   variant: full
@@ -23,12 +27,8 @@ slides:
   order: 3.02
   variant: full
   title: Les 4 D — pensez à l'IA comme un nouveau collègue
-- file: mai_4_ai_how_it_works.md
-  order: 4
-  variant: full
-  title: Comment fonctionne l'assistant IA
 - file: mai_4a_ai_conversations.md
-  order: 4.01
+  order: 4
   variant: full
   title: Comment fonctionnent les conversations
 - file: mai_5_ai_little_value_example.md
@@ -43,10 +43,6 @@ slides:
   order: 6
   variant: full
   title: Conseils pour de meilleures réponses
-- file: mai_6a_ai_good_prompt_checklist.md
-  order: 6.01
-  variant: full
-  title: Qu'est-ce qui fait un bon prompt ?
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full

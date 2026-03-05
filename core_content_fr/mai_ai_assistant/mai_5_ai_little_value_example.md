@@ -9,11 +9,11 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-**Votre interprétation de la figure :**
+**Ce que vous pouvez voir vous-même :**
 
-Dans tous les districts, les valeurs aberrantes sont très faibles, avec tous les indicateurs en moyenne en dessous de 1%, ce qui suggère une qualité de rapportage cohérente.
+Dans tous les districts, les valeurs inhabituelles sont très faibles — tous les indicateurs sont en moyenne en dessous de 1%. Les données sont rapportées de manière cohérente.
 
-***Quand les tendances sont évidentes, plus d'explications n'améliorent pas la compréhension.***
+***Quand la tendance est évidente, vous n'avez pas besoin de l'IA pour l'expliquer.***
 
 </div>
 <div>

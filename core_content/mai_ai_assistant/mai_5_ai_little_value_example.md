@@ -9,11 +9,11 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-**Your interpretation of figure:**
+**What you can see yourself:**
 
-Across all districts, outliers are very low, with all indicators averaging below 1%, suggesting consistent reporting quality.
+Across all districts, unusual values are very low — all indicators average below 1%. The data is being reported consistently.
 
-***When patterns are obvious, more explanation does not improve understanding.***
+***When the pattern is obvious, you don't need the AI to explain it.***
 
 </div>
 <div>

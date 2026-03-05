@@ -6,32 +6,22 @@ paginate: true
 
 ## The prompt library
 
-The AI assistant includes a **prompt library** with ready-to-use prompts organized by workflow stage.
-
-**In this section, we will:**
-
-- Review the prompt library and how it is organized
-- Walk through example prompts
-- Explore how different prompts lead to different types of outputs
-
-**How to use the prompt library:**
-
-Each prompt is designed to be specific and purpose-driven. You can use them as-is or customize them for your context.
+The AI assistant includes a **prompt library** — a collection of ready-to-use prompts you can copy, use as-is, or adapt to your needs.
 
 ---
 
 ## Prompt library organization
 
-The library follows the natural workflow of data analysis:
+The prompts follow the natural steps of data analysis:
 
-| Category | Purpose |
+| Category | What it helps you do |
 |----------|---------|
-| **Getting started** | Orient yourself: what data is available? |
-| **Data quality** | Check completeness, outliers, and validity |
-| **Analysis** | Identify trends, compare regions, find priorities |
-| **Indicator deep dives** | Focus on specific program areas |
-| **Visualizations** | Create charts, heatmaps, comparisons |
-| **Reports & communication** | Generate presentation decks and talking points |
-| **Workflows** | Go from insight to slide, quick deck, or data story |
-| **Methodology** | Understand how FASTR works |
-| **Standardized reports** | Generate full disruption reports with guided prompts |
+| **Getting started** | See what data is available |
+| **Data quality** | Check if reports are complete and numbers make sense |
+| **Analysis** | Find trends, compare regions, identify priorities |
+| **Indicator deep dives** | Focus on a specific health area (e.g. immunization, ANC) |
+| **Visualizations** | Create charts and comparisons |
+| **Reports & communication** | Build slide decks and key messages |
+| **Workflows** | Go from a finding to a finished slide or report |
+| **Methodology** | Understand how the platform works |
+| **Standardized reports** | Generate a full disruption report step by step |

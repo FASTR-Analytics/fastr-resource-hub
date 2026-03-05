@@ -11,6 +11,10 @@ slides:
   order: 2.01
   variant: full
   title: Where the AI helps most
+- file: mai_4_ai_how_it_works.md
+  order: 2.02
+  variant: full
+  title: How the AI assistant works
 - file: mai_2_ai_accelerator_not_decider.md
   order: 3
   variant: full
@@ -23,12 +27,8 @@ slides:
   order: 3.02
   variant: full
   title: "The 4 D's — think of the AI as a new colleague"
-- file: mai_4_ai_how_it_works.md
-  order: 4
-  variant: full
-  title: How the AI assistant works
 - file: mai_4a_ai_conversations.md
-  order: 4.01
+  order: 4
   variant: full
   title: How conversations work
 - file: mai_5_ai_little_value_example.md
@@ -43,10 +43,6 @@ slides:
   order: 6
   variant: full
   title: Tips for better answers
-- file: mai_6a_ai_good_prompt_checklist.md
-  order: 6.01
-  variant: full
-  title: What makes a good prompt?
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full
