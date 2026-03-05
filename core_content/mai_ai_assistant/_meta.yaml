@@ -43,6 +43,10 @@ slides:
   order: 6
   variant: full
   title: Tips for better answers
+- file: mai_6a_ai_good_prompt_checklist.md
+  order: 6.01
+  variant: full
+  title: What makes a good prompt?
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full
