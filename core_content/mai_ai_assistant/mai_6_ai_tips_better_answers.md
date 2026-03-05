@@ -6,15 +6,7 @@ paginate: true
 
 ## Tips for better answers
 
-**Before you type, think:** Who is this for? What do I need to know? What should the result look like? The clearer you are in your own mind, the better the AI can help.
-
-**Be specific about:**
-
-- Which service — "ANC1" instead of "antenatal care services"
-- Which time period — "last 12 months" or "2024"
-- Which location — "Banadir" or "all regions"
-
-**You can ask for:** Charts, explanations, comparisons, reports, data tables
+**It's a conversation, not a test.** You don't need to write the perfect message. Start with what you know, and refine from there.
 
 **Follow-up questions work great:**
 
@@ -22,3 +14,7 @@ paginate: true
 2. Narrow down: *"Focus on the Northern region"*
 3. Go deeper: *"Why did it drop in March?"*
 4. Take action: *"Create a slide about this for my director"*
+
+**The more specific, the better:** name the indicator (*"ANC1"*), the time period (*"last 12 months"*), and the location (*"Northern region"*).
+
+**You can ask for:** charts, explanations, comparisons, reports, data tables
