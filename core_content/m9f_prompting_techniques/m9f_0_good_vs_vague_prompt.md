@@ -4,23 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## What makes a good prompt? A comparison
+## From vague to specific — building a better prompt
 
-**Vague prompt:**
-> *"Analyze the data"*
+| | Vague | Specific |
+|---|---|---|
+| **What** | *"Analyze the data"* | *"Show ANC1 trends"* |
+| **Where** | *(not said)* | *"by region"* |
+| **When** | *(not said)* | *"over the last 12 months"* |
+| **For whom** | *(not said)* | *"make a slide for my director"* |
+| **Result** | Generic summary | Focused answer you can use |
 
-You get a generic summary — the AI doesn't know what you care about, so it guesses.
-
-**Specific prompt:**
-> *"Which regions should we prioritize for support? Look at declining service delivery and persistent gaps over the last 12 months. Make a summary slide for my director."*
-
-You get a focused answer you can actually use — because you told the AI **what** to look for, **where**, and **who it's for**.
-
-**Why the second one works:**
-- You named what matters — *declining service delivery, persistent gaps*
-- You set the time period — *last 12 months*
-- You said who it's for — *my director*
-- You asked for a specific output — *a summary slide*
+The more you tell the AI, the better it can help. You don't need everything at once — start with what you know and add details as you go.
 
 ---
 

@@ -4,23 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## Qu'est-ce qui fait un bon prompt ? Une comparaison
+## Du vague au précis — construire un meilleur prompt
 
-**Prompt vague :**
-> *« Analyse les données »*
+| | Vague | Précis |
+|---|---|---|
+| **Quoi** | *« Analyse les données »* | *« Montre les tendances CPN1 »* |
+| **Où** | *(pas dit)* | *« par région »* |
+| **Quand** | *(pas dit)* | *« sur les 12 derniers mois »* |
+| **Pour qui** | *(pas dit)* | *« fais une diapositive pour mon directeur »* |
+| **Résultat** | Résumé générique | Réponse ciblée et utilisable |
 
-Vous obtenez un résumé générique — l'IA ne sait pas ce qui vous intéresse, alors elle devine.
-
-**Prompt précis :**
-> *« Quelles régions devrions-nous prioriser ? Regarde la baisse de la prestation de services et les lacunes persistantes sur les 12 derniers mois. Fais-moi une diapositive résumé pour mon directeur. »*
-
-Vous obtenez une réponse ciblée et utilisable — parce que vous avez dit à l'IA **quoi** chercher, **où**, et **pour qui**.
-
-**Pourquoi le deuxième fonctionne :**
-- Vous avez nommé ce qui compte — *baisse de la prestation, lacunes persistantes*
-- Vous avez fixé la période — *12 derniers mois*
-- Vous avez dit pour qui — *mon directeur*
-- Vous avez demandé un format précis — *une diapositive résumé*
+Plus vous en dites à l'IA, mieux elle peut vous aider. Pas besoin de tout dire d'un coup — commencez par ce que vous savez et ajoutez les détails au fur et à mesure.
 
 ---
 
