@@ -11,15 +11,15 @@ paginate: true
 
 **Vous gardez le contrôle sur :**
 
-- Le jugement — décider de ce qui compte
-- L'interprétation — comprendre le contexte
-- L'action — prendre des décisions
+- **Le jugement** — décider de ce qui compte
+- **L'interprétation** — comprendre le contexte de votre pays
+- **L'action** — prendre des décisions et présenter les résultats
 
-**Les chiffres proviennent de méthodes validées**
+**Les chiffres proviennent de méthodes testées**
 
-Tous les calculs (détection des valeurs aberrantes, estimations de couverture, scores de qualité des données) utilisent des formules statistiques éprouvées — pas l'IA.
+Tous les calculs de la plateforme (trouver les valeurs inhabituelles, estimer la couverture, évaluer la qualité des données) utilisent des formules testées — pas l'IA.
 
-L'IA interprète et explique. Vous décidez et agissez.
+L'IA vous aide à comprendre et à expliquer. Vous décidez et agissez.
 
 </div>
 <div>

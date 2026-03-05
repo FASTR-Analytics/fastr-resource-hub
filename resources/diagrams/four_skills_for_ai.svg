@@ -16,7 +16,7 @@
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">is good?</text>
     <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Know what a correct</text>
     <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">answer looks like</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">before you ask</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">before you ask — and why</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">"Does this ANC1</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">trend match what</text>
@@ -32,9 +32,9 @@
     <line x1="20" y1="95" x2="135" y2="95" stroke="#CAE6E9" stroke-width="1.5"/>
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Can I explain what</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">I need?</text>
-    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Be specific about</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">what, where, when,</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">and for whom</text>
+    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Be specific: what,</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">where, when, for whom</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">— the more detail, the better</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">"Show ANC1 by</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">region for the last</text>
@@ -51,8 +51,8 @@
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Am I giving the AI</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">the right task?</text>
     <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Break big tasks into</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">smaller steps the AI</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">can handle well</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">steps — ask one thing,</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">review it, then move on</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">"First show the data,</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">then interpret,</text>
@@ -68,9 +68,9 @@
     <line x1="20" y1="95" x2="135" y2="95" stroke="#CAE6E9" stroke-width="1.5"/>
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Am I being</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">responsible?</text>
-    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Always verify AI</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">outputs against the</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">data and your expertise</text>
+    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Verify AI outputs against</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">the data and your expertise</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">— would you put your name on it?</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">"Does this match</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">what I know about</text>

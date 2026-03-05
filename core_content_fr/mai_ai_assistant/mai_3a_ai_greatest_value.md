@@ -4,27 +4,27 @@ theme: fastr
 paginate: true
 ---
 
-## Là où l'IA apporte le plus de valeur
+## Là où l'IA aide le plus
 
 <div class="columns">
 <div>
 
-**Visualisations** — Explorer et comprendre vos données
+**Graphiques** — Explorer et comprendre vos données
 
-- Accéder à toutes les visualisations enregistrées dans le projet
-- Examiner les données sous-jacentes de tout graphique ou figure
-- Modifier les paramètres de visualisation, y compris le type de graphique, les filtres, les périodes et les niveaux de désagrégation
-- Recevoir des explications sur ce que chaque visualisation représente
+- Regarder tout graphique enregistré dans votre projet
+- Voir les chiffres derrière chaque graphique
+- Changer ce qu'un graphique montre — différentes périodes, régions ou ventilations
+- Demander à l'IA d'expliquer ce qu'un graphique signifie
 
 </div>
 <div>
 
 **Présentations** — Construire des présentations à partir de vos résultats
 
-- Générer des diapositives de présentation incluant pages de couverture, séparateurs de sections et diapositives de contenu
-- Intégrer graphiques, tableaux et texte narratif dans les mises en page
-- Transférer les visualisations directement dans les présentations
-- Modifier, réorganiser, dupliquer ou supprimer des diapositives selon les besoins
+- Créer des diapositives avec pages de couverture, séparateurs et contenu
+- Ajouter vos graphiques, tableaux et explications écrites aux diapositives
+- Transférer vos graphiques directement dans votre présentation
+- Modifier, réorganiser ou supprimer des diapositives selon les besoins
 
 </div>
 </div>

@@ -15,8 +15,8 @@
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Est-ce que je sais</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">reconnaître la qualité ?</text>
     <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Savoir à quoi ressemble</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">une bonne réponse</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">avant de demander</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">une bonne réponse avant</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">de demander — et pourquoi</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">« Cette tendance CPN1</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">correspond-elle à ce que</text>
@@ -32,9 +32,9 @@
     <line x1="20" y1="95" x2="135" y2="95" stroke="#CAE6E9" stroke-width="1.5"/>
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Est-ce que je sais</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">expliquer ce que je veux ?</text>
-    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Préciser quoi, où,</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">quand et pour qui</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555"></text>
+    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Préciser quoi, où, quand</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">et pour qui — plus vous</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">êtes précis, mieux c'est</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">« Montre CPN1 par</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">région sur les</text>
@@ -51,8 +51,8 @@
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Est-ce que je donne</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">la bonne tâche à l'IA ?</text>
     <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Découper les grandes</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">tâches en étapes</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">que l'IA peut bien faire</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">tâches en étapes — demandez</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">une chose, vérifiez, puis passez</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">« D'abord les données,</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">puis l'interprétation,</text>
@@ -68,9 +68,9 @@
     <line x1="20" y1="95" x2="135" y2="95" stroke="#CAE6E9" stroke-width="1.5"/>
     <text x="78" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Est-ce que je suis</text>
     <text x="78" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">rigoureux ?</text>
-    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Toujours vérifier les</text>
-    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">résultats de l'IA avec</text>
-    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">les données et votre expertise</text>
+    <text x="78" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Vérifier les résultats avec</text>
+    <text x="78" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">les données et votre expertise</text>
+    <text x="78" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">— mettriez-vous votre nom dessus ?</text>
     <line x1="20" y1="198" x2="135" y2="198" stroke="#CAE6E9" stroke-width="1"/>
     <text x="78" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">« Est-ce cohérent avec</text>
     <text x="78" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#777" font-style="italic">ce que je connais</text>

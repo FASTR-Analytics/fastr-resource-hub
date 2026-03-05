@@ -11,15 +11,15 @@ paginate: true
 
 **You stay in control of:**
 
-- Judgement — deciding what matters
-- Interpretation — understanding context
-- Action — making decisions
+- **Judgement** — deciding what matters
+- **Interpretation** — understanding the context in your country
+- **Action** — making decisions and presenting results
 
-**The numbers come from validated methods**
+**The numbers come from tested methods**
 
-All calculations (outlier detection, coverage estimates, data quality scores) use proven statistical formulas — not AI.
+All calculations in the platform (finding unusual values, estimating coverage, scoring data quality) use tested formulas — not AI.
 
-AI interprets and explains. You decide and act.
+The AI helps you understand and explain. You decide and act.
 
 </div>
 <div>

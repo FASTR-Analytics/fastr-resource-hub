@@ -3,26 +3,26 @@ slides:
   order: 1
   variant: full
   title: The AI assistant
-- file: mai_2_ai_accelerator_not_decider.md
-  order: 2
-  variant: full
-  title: AI is an accelerator, not a decision maker
-- file: mai_2a_four_skills_for_ai.md
-  order: 2.01
-  variant: full
-  title: 'Working well with AI: four habits'
-- file: mai_2b_four_skills_in_practice.md
-  order: 2.02
-  variant: full
-  title: "The 4 D's — think of the AI as a new colleague"
 - file: mai_3_ai_assistant_capabilities.md
-  order: 3
+  order: 2
   variant: full
   title: What the AI assistant can do
 - file: mai_3a_ai_greatest_value.md
+  order: 2.01
+  variant: full
+  title: Where the AI helps most
+- file: mai_2_ai_accelerator_not_decider.md
+  order: 3
+  variant: full
+  title: AI is an accelerator, not a decision maker
+- file: mai_2a_four_skills_for_ai.md
   order: 3.01
   variant: full
-  title: Where the AI provides greatest value
+  title: 'Working well with AI: four habits'
+- file: mai_2b_four_skills_in_practice.md
+  order: 3.02
+  variant: full
+  title: "The 4 D's — think of the AI as a new colleague"
 - file: mai_4_ai_how_it_works.md
   order: 4
   variant: full

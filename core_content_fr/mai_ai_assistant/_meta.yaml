@@ -3,26 +3,26 @@ slides:
   order: 1
   variant: full
   title: L'assistant IA
-- file: mai_2_ai_accelerator_not_decider.md
-  order: 2
-  variant: full
-  title: L'IA est un accélérateur, pas un décideur
-- file: mai_2a_four_skills_for_ai.md
-  order: 2.01
-  variant: full
-  title: 'Bien travailler avec l''IA : quatre habitudes'
-- file: mai_2b_four_skills_in_practice.md
-  order: 2.02
-  variant: full
-  title: Les 4 D — pensez à l'IA comme un nouveau collègue
 - file: mai_3_ai_assistant_capabilities.md
-  order: 3
+  order: 2
   variant: full
   title: Ce que l'assistant IA peut faire
 - file: mai_3a_ai_greatest_value.md
+  order: 2.01
+  variant: full
+  title: Là où l'IA aide le plus
+- file: mai_2_ai_accelerator_not_decider.md
+  order: 3
+  variant: full
+  title: L'IA est un accélérateur, pas un décideur
+- file: mai_2a_four_skills_for_ai.md
   order: 3.01
   variant: full
-  title: Où l'IA apporte le plus de valeur
+  title: 'Bien travailler avec l''IA : quatre habitudes'
+- file: mai_2b_four_skills_in_practice.md
+  order: 3.02
+  variant: full
+  title: Les 4 D — pensez à l'IA comme un nouveau collègue
 - file: mai_4_ai_how_it_works.md
   order: 4
   variant: full

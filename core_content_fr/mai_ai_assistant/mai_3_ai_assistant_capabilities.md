@@ -8,18 +8,18 @@ paginate: true
 
 **Répondre aux questions sur vos données**
 
-- « Quelles régions ont le plus de valeurs aberrantes ? »
-- « Comment la complétude des rapports a-t-elle évolué ? »
-- Crée des graphiques et explications à la volée
+- *« Quelles régions ont des chiffres inhabituels dans leurs rapports ? »*
+- *« Comment les rapports ont-ils évolué au cours de l'année écoulée ? »*
+- Il crée des graphiques et des explications en langage clair
 
-**Expliquer la méthodologie**
+**Expliquer le fonctionnement de la plateforme**
 
-- « Comment les valeurs aberrantes sont-elles détectées ? »
-- « Que signifie ce score de qualité des données ? »
-- S'appuie sur la documentation de la plateforme
+- *« Comment la plateforme détecte-t-elle les valeurs inhabituelles ? »*
+- *« Que signifie ce score de qualité ? »*
+- Il s'appuie sur la documentation intégrée de la plateforme
 
 **Aider à construire des rapports**
 
 - Générer des présentations à partir de vos données
-- Combiner graphiques sauvegardés et texte narratif
+- Combiner vos graphiques sauvegardés avec des explications écrites
 - Créer des présentations pour différents publics

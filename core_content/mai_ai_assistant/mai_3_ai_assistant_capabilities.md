@@ -8,18 +8,18 @@ paginate: true
 
 **Answer questions about your data**
 
-- "Which regions have the most outliers?"
-- "How has reporting completeness changed over time?"
-- Creates charts and explanations on-the-fly
+- *"Which regions have unusual numbers in their reports?"*
+- *"How has reporting changed over the past year?"*
+- It creates charts and plain-language explanations for you
 
-**Explain methodology**
+**Explain how things work**
 
-- "How are outliers detected?"
-- "What does this data quality score mean?"
-- Draws from platform documentation
+- *"How does the platform find unusual values?"*
+- *"What does this quality score mean?"*
+- It draws answers from the platform's built-in documentation
 
 **Help build reports**
 
 - Generate slide decks from your data
-- Combine saved charts with narrative text
+- Combine your saved charts with written explanations
 - Create presentations for different audiences
