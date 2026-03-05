@@ -7,6 +7,14 @@ slides:
   order: 2
   variant: full
   title: AI is an accelerator, not a decision maker
+- file: mai_2a_four_skills_for_ai.md
+  order: 2.01
+  variant: full
+  title: 'Working well with AI: four habits'
+- file: mai_2b_four_skills_in_practice.md
+  order: 2.02
+  variant: full
+  title: "The 4 D's — think of the AI as a new colleague"
 - file: mai_3_ai_assistant_capabilities.md
   order: 3
   variant: full

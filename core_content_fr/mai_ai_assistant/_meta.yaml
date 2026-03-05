@@ -7,6 +7,14 @@ slides:
   order: 2
   variant: full
   title: L'IA est un accélérateur, pas un décideur
+- file: mai_2a_four_skills_for_ai.md
+  order: 2.01
+  variant: full
+  title: 'Bien travailler avec l''IA : quatre habitudes'
+- file: mai_2b_four_skills_in_practice.md
+  order: 2.02
+  variant: full
+  title: Les 4 D — pensez à l'IA comme un nouveau collègue
 - file: mai_3_ai_assistant_capabilities.md
   order: 3
   variant: full
