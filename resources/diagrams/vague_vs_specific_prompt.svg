@@ -47,7 +47,5 @@
     <text x="205" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">The AI gives you exactly what you need</text>
   </g>
 
-  <!-- Bottom note -->
-  <text x="350" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#777" font-style="italic">Start with what you know — you can always add details in the next message</text>
 
 </svg>

@@ -47,7 +47,5 @@
     <text x="205" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">L'IA vous donne exactement ce qu'il vous faut</text>
   </g>
 
-  <!-- Bottom note -->
-  <text x="350" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#777" font-style="italic">Commencez par ce que vous savez — vous pouvez toujours ajouter des détails ensuite</text>
 
 </svg>
