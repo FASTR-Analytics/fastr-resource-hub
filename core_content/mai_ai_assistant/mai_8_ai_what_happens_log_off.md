@@ -8,7 +8,7 @@ paginate: true
 
 | Content | Saved? | Notes |
 |---------|--------|-------|
-| Your AI conversation | Temporary | AI conversations are saved locally in the browser and are visible only to the person using that browser. Refreshing the page or closing the tab will not delete the conversation. The chat history will only disappear if the browser cache is cleared or a different browser or device is used. |
+| Your AI conversation | Temporary | Stays in your browser — you won't lose it if you close the tab. But it disappears if you clear your browser data or switch to a different device. |
 | Slide decks/reports you create | Permanent | Saved to project, visible to team |
 | Saved visualizations | Permanent | Remain in project library |
 | Downloaded exports | Permanent | Saved to your computer |

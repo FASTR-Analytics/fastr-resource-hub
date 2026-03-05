@@ -21,10 +21,10 @@ Other team members cannot see what you're exploring.
 
 **Shared with team:**
 
-- The underlying data (same HMIS data)
-- Saved visualizations in project library
-- Slide decks/reports you create and save
-- Project settings and module results
+- The underlying data (everyone sees the same health data)
+- Saved charts in the project library
+- Slide decks and reports you create and save
+- Project settings and analysis results
 
 Everyone can see saved content.
 

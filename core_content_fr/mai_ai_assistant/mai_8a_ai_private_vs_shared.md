@@ -22,10 +22,10 @@ Les autres membres de l'équipe ne peuvent pas voir ce que vous explorez.
 
 **Partagé avec l'équipe :**
 
-- Les données sous-jacentes (mêmes données SNIS)
-- Visualisations sauvegardées dans la bibliothèque
-- Présentations que vous créez et sauvegardez
-- Paramètres du projet et résultats des modules
+- Les données sous-jacentes (tout le monde voit les mêmes données de santé)
+- Graphiques sauvegardés dans la bibliothèque du projet
+- Présentations et rapports que vous créez et sauvegardez
+- Paramètres du projet et résultats d'analyse
 
 Tout le monde peut voir le contenu sauvegardé.
 

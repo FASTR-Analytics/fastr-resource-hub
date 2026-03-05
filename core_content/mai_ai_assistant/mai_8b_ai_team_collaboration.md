@@ -18,4 +18,4 @@ paginate: true
 - Saved slides and charts from others — Yes
 - Each other's private questions — No
 
-**Two people can use the AI assistant to add to the same slide deck at the same time.** Each chat is private, and each AI instance sees only the changes made to the deck — not the conversation.
+**Two people can work on the same slide deck at the same time.** Each person's conversation with the AI is private — your colleagues only see the slides you create, not the questions you asked.
