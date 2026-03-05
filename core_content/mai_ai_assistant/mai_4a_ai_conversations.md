@@ -6,15 +6,17 @@ paginate: true
 
 ## How conversations work
 
+It's a conversation, not a command. You don't need to get everything right in one message — you can ask, review, and refine step by step.
+
 **Example conversation:**
 
-You: "Which regions have the most data quality issues?"
-AI: *Creates a chart showing data quality scores by region*
+You: *"Which regions have the most data quality problems?"*
+AI: *Creates a chart showing quality scores by region*
 
-You: "What's causing the low score in the Northern region?"
-AI: *Breaks down the issues: outliers, completeness gaps, consistency problems*
+You: *"What's going on in the Northern region?"*
+AI: *Explains the problems: missing reports, unusual values, inconsistent numbers*
 
-You: "Create a summary for my director"
-AI: *Builds a slide highlighting priority areas for data quality improvement*
+You: *"Make a summary slide for my director"*
+AI: *Builds a slide highlighting the priority areas*
 
-**Think of the AI as a data analyst on your team** — someone who can instantly pull reports, create charts, and answer questions about your health data.
+**Think of the AI as a colleague on your team** — someone who can pull data, create charts, and answer questions. The more you explain what you need, the better they can help.

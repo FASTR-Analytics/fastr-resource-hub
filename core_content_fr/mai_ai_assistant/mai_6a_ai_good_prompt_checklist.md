@@ -8,36 +8,38 @@ paginate: true
 
 ## Qu'est-ce qui fait un bon prompt ?
 
+**Commencez par imaginer le résultat final.** Avant d'écrire quoi que ce soit, demandez-vous : à quoi ressemblerait un bon résultat ? Si vous donniez cette tâche à un collègue, que lui diriez-vous ?
+
 <div class="columns">
 <div>
 
-**1. Soyez clair sur l'objectif**
-- La tâche est-elle explicite ? (interpréter, résumer, comparer, générer des diapositives)
-- Le cas d'utilisation est-il clair ? (revue de performance, mise à jour pour les bailleurs, formation)
+**1. De quoi avez-vous besoin ?**
+- Que doit faire l'IA ? (interpréter, résumer, comparer, créer des diapositives)
+- C'est pour quoi ? (une réunion de revue, un rapport pour les bailleurs, une formation)
 
-**2. Définissez l'audience**
-- Le public cible est-il précisé ? (gestionnaires du ministère, analystes, décideurs)
-- Le niveau de détail technique est-il approprié ?
+**2. C'est pour qui ?**
+- Votre directeur ? Une équipe de district ? Un bailleur ?
+- Est-ce que ça doit être simple ou détaillé ?
 
-**3. Précisez la géographie, la période et le périmètre**
-- Le pays ou le niveau infranational est-il spécifié ?
-- La période est-elle claire ?
-- Les indicateurs ou services prioritaires sont-ils nommés ?
+**3. Quelles données ?**
+- Quel pays ou quelle région ?
+- Quelle période ?
+- Quels indicateurs ou services ?
 
 </div>
 <div>
 
-**4. Donnez des orientations d'interprétation**
-- L'IA doit-elle décrire les tendances, comparer les zones ou identifier les perturbations ?
-- Doit-elle s'en tenir à la description ou inclure les implications ?
+**4. Quel type d'analyse ?**
+- L'IA doit-elle décrire les tendances, comparer les zones ou identifier les problèmes ?
+- Doit-elle juste décrire, ou aussi expliquer ce que ça signifie ?
 
-**5. Précisez le format de sortie**
-- Points de synthèse ou texte narratif ? Texte prêt pour les diapositives ou prose de rapport ?
-- Exemple : « Fournissez 3 à 4 points de synthèse en langage clair, prêts pour une diapositive. »
+**5. Quel format ?**
+- Des points ou des phrases complètes ? Des diapositives ou un rapport écrit ?
+- Exemple : *« Donne-moi 3–4 points en langage simple »*
 
-**6. Posez des garde-fous**
-- Demandez à l'IA de rester ancrée dans les données présentées
-- Demandez que les incertitudes ou les problèmes de qualité des données soient signalés
+**6. Restez ancré dans les données**
+- Demandez à l'IA de s'en tenir à ce que les données montrent
+- Demandez-lui de signaler tout ce qui est incertain ou incomplet
 
 </div>
 </div>

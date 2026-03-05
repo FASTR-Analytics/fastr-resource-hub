@@ -11,13 +11,13 @@ paginate: true
 <div class="columns">
 <div>
 
-**Discernment** — Check their work
+**Discernment** — Know what good looks like
 
-Just like you would review a report before signing it, look at what the AI gives you. Does it match the chart? Does it make sense for your country? If something looks wrong, ask *why* — is it a data quality issue? A reporting gap? **Trust your experience.**
+Before you ask the AI anything, think: what do I need? Who is it for? What should the result look like? Just like you would picture a finished report before writing it. Then when the AI gives you something, check it — does it match the chart? Does it make sense for your country? **Trust your experience.**
 
 **Description** — Give clear instructions
 
-Like telling a taxi driver where to go — *"take me to the hospital"* is better than *"drive somewhere."* Tell the AI exactly what you need: which indicator, which region, which time period. The more specific you are, the better the result.
+Like telling a taxi driver where to go — *"take me to the hospital"* is better than *"drive somewhere."* Tell the AI exactly what you need: which indicator, which region, which time period. You don't have to get it perfect the first time — you can go back and forth, refine, and ask again.
 
 </div>
 <div>

@@ -11,13 +11,13 @@ paginate: true
 <div class="columns">
 <div>
 
-**Discernement** — Vérifiez son travail
+**Discernement** — Savoir à quoi ressemble un bon résultat
 
-Comme vous reliriez un rapport avant de le signer, regardez ce que l'IA vous donne. Est-ce que ça correspond au graphique ? Est-ce que ça a du sens pour votre pays ? Si quelque chose semble faux, demandez-vous *pourquoi* — est-ce un problème de qualité des données ? Un rapport manquant ? **Faites confiance à votre expérience.**
+Avant de demander quoi que ce soit à l'IA, réfléchissez : de quoi ai-je besoin ? Pour qui ? À quoi devrait ressembler le résultat ? Comme vous imagineriez un rapport fini avant de l'écrire. Puis quand l'IA vous donne quelque chose, vérifiez — est-ce que ça correspond au graphique ? Est-ce que ça a du sens pour votre pays ? **Faites confiance à votre expérience.**
 
 **Description** — Donnez des instructions claires
 
-Comme quand vous indiquez une destination à un chauffeur de taxi — *« emmène-moi à l'hôpital »* est mieux que *« roule quelque part. »* Dites à l'IA exactement ce que vous voulez : quel indicateur, quelle région, quelle période. Plus vous êtes précis, meilleur sera le résultat.
+Comme quand vous indiquez une destination à un chauffeur de taxi — *« emmène-moi à l'hôpital »* est mieux que *« roule quelque part. »* Dites à l'IA exactement ce que vous voulez : quel indicateur, quelle région, quelle période. Vous n'avez pas besoin d'être parfait du premier coup — vous pouvez aller et venir, affiner et redemander.
 
 </div>
 <div>

@@ -8,36 +8,38 @@ paginate: true
 
 ## What makes a good prompt?
 
+**Start by picturing the final product.** Before you write anything, ask yourself: what would a good result look like? If you were handing this to a colleague, what would you tell them?
+
 <div class="columns">
 <div>
 
-**1. Be clear on purpose**
-- Is the task explicit? (interpret, summarize, compare, generate slides)
-- Is the use case clear? (performance review, donor update, training)
+**1. What do you need?**
+- What should the AI do? (interpret, summarize, compare, create slides)
+- What is this for? (a review meeting, a donor report, a training)
 
-**2. Define the audience**
-- Is the intended audience stated? (MoH managers, analysts, policymakers)
-- Is the level of technical detail appropriate?
+**2. Who is it for?**
+- Your director? A district team? A donor?
+- Should it be simple or detailed?
 
-**3. Specify geography, time, and scope**
-- Is the country or subnational level specified?
-- Is the time period clear?
-- Are priority indicators or services named?
+**3. Which data?**
+- Which country or region?
+- Which time period?
+- Which indicators or services?
 
 </div>
 <div>
 
-**4. Give interpretation guidance**
-- Should the AI describe trends, compare areas, or identify disruptions?
-- Should it stick to description or include implications?
+**4. What kind of analysis?**
+- Should the AI describe trends, compare areas, or find problems?
+- Should it just describe, or also explain what it means?
 
-**5. Specify the output format**
-- Bullet points or narrative? Slide-ready text or report prose?
-- Example: "Provide 3–4 slide-ready bullets in plain language."
+**5. What format?**
+- Bullet points or full sentences? Slides or a written report?
+- Example: *"Give me 3–4 bullet points in simple language"*
 
-**6. Set guardrails**
-- Ask the AI to stay grounded in the data shown
-- Request that uncertainty or data quality issues be flagged
+**6. Keep it grounded**
+- Ask the AI to stick to what the data shows
+- Ask it to flag anything uncertain or incomplete
 
 </div>
 </div>
