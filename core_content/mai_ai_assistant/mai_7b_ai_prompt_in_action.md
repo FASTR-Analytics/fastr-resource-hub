@@ -4,19 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
+## What makes a good prompt? A comparison
 
-## Unpacking a prompt — what makes this one work?
+**Vague prompt:**
+> *"Analyze the data"*
 
-> *"Based on the data, which regions or indicators should we prioritize for support? Identify areas with declining service delivery, rising mortality or dropout rates, or persistent gaps. Create a summary slide showing the priority areas."*
+You get a generic summary — the AI doesn't know what you care about, so it guesses.
 
-**What you bring (Discernment):** You already know what "priority" means for your country. The AI doesn't — it can find patterns, but only you know which ones matter.
+**Specific prompt:**
+> *"Which regions should we prioritize for support? Look at declining service delivery and persistent gaps over the last 12 months. Make a summary slide for my director."*
 
-**Clear instructions (Description):** This prompt names exactly what to look for — declining delivery, rising mortality, persistent gaps. That's why it works. A vague prompt like *"analyze the data"* would give a vague answer.
+You get a focused answer you can actually use — because you told the AI **what** to look for, **where**, and **who it's for**.
 
-**Step by step (Delegation):** This asks the AI to do two things — analyze and create a slide. If the result isn't right, try splitting it: first ask for the analysis, review it, then ask for the slide.
-
-**Your responsibility (Diligence):** When you get the result, check — do the "priority areas" match what you know from the field? If a region is flagged but you know they just changed their reporting system, that context is yours to add.
+**Why the second one works:**
+- You named what matters — *declining service delivery, persistent gaps*
+- You set the time period — *last 12 months*
+- You said who it's for — *my director*
+- You asked for a specific output — *a summary slide*
 
 ---
 

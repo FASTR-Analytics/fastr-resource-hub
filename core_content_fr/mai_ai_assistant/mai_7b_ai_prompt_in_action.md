@@ -4,19 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
+## Qu'est-ce qui fait un bon prompt ? Une comparaison
 
-## Décortiquer un prompt — pourquoi celui-ci fonctionne ?
+**Prompt vague :**
+> *« Analyse les données »*
 
-> *"Sur la base des données, quelles régions ou indicateurs devrions-nous prioriser pour le soutien ? Identifie les zones avec une prestation de services en déclin, une mortalité ou des taux d'abandon en hausse, ou des lacunes persistantes. Crée une diapositive de synthèse montrant les zones prioritaires."*
+Vous obtenez un résumé générique — l'IA ne sait pas ce qui vous intéresse, alors elle devine.
 
-**Ce que vous apportez (Discernement) :** Vous savez déjà ce que « prioritaire » veut dire pour votre pays. L'IA ne le sait pas — elle peut trouver des tendances, mais seul vous savez lesquelles comptent.
+**Prompt précis :**
+> *« Quelles régions devrions-nous prioriser ? Regarde la baisse de la prestation de services et les lacunes persistantes sur les 12 derniers mois. Fais-moi une diapositive résumé pour mon directeur. »*
 
-**Des instructions claires (Description) :** Ce prompt dit exactement quoi chercher — baisse de la prestation, hausse de la mortalité, lacunes persistantes. C'est pour ça que ça marche. Un prompt vague comme *« analyse les données »* donnerait une réponse vague.
+Vous obtenez une réponse ciblée et utilisable — parce que vous avez dit à l'IA **quoi** chercher, **où**, et **pour qui**.
 
-**Étape par étape (Délégation) :** Ici on demande deux choses — analyser et créer une diapositive. Si le résultat n'est pas bon, essayez de séparer : d'abord l'analyse, vérifiez-la, puis demandez la diapositive.
-
-**Votre responsabilité (Diligence) :** Quand vous recevez le résultat, vérifiez — est-ce que les « zones prioritaires » correspondent à ce que vous connaissez du terrain ? Si une région est signalée mais que vous savez qu'elle vient de changer son système de rapportage, ce contexte est le vôtre à ajouter.
+**Pourquoi le deuxième fonctionne :**
+- Vous avez nommé ce qui compte — *baisse de la prestation, lacunes persistantes*
+- Vous avez fixé la période — *12 derniers mois*
+- Vous avez dit pour qui — *mon directeur*
+- Vous avez demandé un format précis — *une diapositive résumé*
 
 ---
 

@@ -58,7 +58,7 @@ slides:
 - file: mai_7b_ai_prompt_in_action.md
   order: 7.02
   variant: full
-  title: Décortiquer un prompt — pourquoi ça marche
+  title: Qu'est-ce qui fait un bon prompt ? Une comparaison
 - file: mai_8_ai_what_happens_log_off.md
   order: 8
   variant: full
