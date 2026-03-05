@@ -6,15 +6,7 @@ paginate: true
 
 ## Du vague au précis — construire un meilleur prompt
 
-| | Vague | Précis |
-|---|---|---|
-| **Quoi** | *« Analyse les données »* | *« Montre les tendances CPN1 »* |
-| **Où** | *(pas dit)* | *« par région »* |
-| **Quand** | *(pas dit)* | *« sur les 12 derniers mois »* |
-| **Pour qui** | *(pas dit)* | *« fais une diapositive pour mon directeur »* |
-| **Résultat** | Résumé générique | Réponse ciblée et utilisable |
-
-Plus vous en dites à l'IA, mieux elle peut vous aider. Pas besoin de tout dire d'un coup — commencez par ce que vous savez et ajoutez les détails au fur et à mesure.
+![Prompt vague vs précis](../../resources/diagrams_fr/vague_vs_specific_prompt.svg)
 
 ---
 

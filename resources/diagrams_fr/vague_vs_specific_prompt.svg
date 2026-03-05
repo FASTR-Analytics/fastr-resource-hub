@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Left card: Vague -->
+  <g transform="translate(20, 15)">
+    <rect x="0" y="0" width="200" height="270" rx="10" fill="#FDE8E8" filter="url(#shadow)"/>
+    <circle cx="100" cy="35" r="20" fill="#C53030"/>
+    <text x="100" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#fff" dominant-baseline="central">&#x2717;</text>
+    <text x="100" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#C53030">Vague</text>
+    <line x1="20" y1="90" x2="180" y2="90" stroke="#F5C6C6" stroke-width="1.5"/>
+    <text x="100" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#555" font-style="italic">« Analyse les données »</text>
+    <line x1="20" y1="135" x2="180" y2="135" stroke="#F5C6C6" stroke-width="1"/>
+    <text x="100" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777">Quoi ? — pas dit</text>
+    <text x="100" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777">Où ? — pas dit</text>
+    <text x="100" y="200" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777">Quand ? — pas dit</text>
+    <text x="100" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777">Pour qui ? — pas dit</text>
+    <line x1="20" y1="237" x2="180" y2="237" stroke="#F5C6C6" stroke-width="1"/>
+    <text x="100" y="258" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#C53030">L'IA devine</text>
+  </g>
+
+  <!-- Arrow -->
+  <polyline points="235,150 255,160 235,170" fill="none" stroke="#09544F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right card: Specific -->
+  <g transform="translate(270, 15)">
+    <rect x="0" y="0" width="410" height="270" rx="10" fill="#E8F4F3" filter="url(#shadow)"/>
+    <circle cx="205" cy="35" r="20" fill="#09544F"/>
+    <text x="205" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#fff" dominant-baseline="central">&#x2714;</text>
+    <text x="205" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Précis</text>
+    <line x1="25" y1="90" x2="385" y2="90" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="205" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#555" font-style="italic">« Montre les tendances CPN1 par région sur les</text>
+    <text x="205" y="130" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#555" font-style="italic">12 derniers mois. Fais une diapositive pour mon directeur. »</text>
+    <line x1="25" y1="148" x2="385" y2="148" stroke="#CAE6E9" stroke-width="1"/>
+    <text x="30" y="173" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">Quoi ?</text>
+    <text x="80" y="173" font-family="Inter, sans-serif" font-size="9.5" fill="#555">tendances CPN1</text>
+    <text x="30" y="193" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">Où ?</text>
+    <text x="80" y="193" font-family="Inter, sans-serif" font-size="9.5" fill="#555">par région</text>
+    <text x="30" y="213" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">Quand ?</text>
+    <text x="80" y="213" font-family="Inter, sans-serif" font-size="9.5" fill="#555">12 derniers mois</text>
+    <text x="30" y="233" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">Pour qui ?</text>
+    <text x="100" y="233" font-family="Inter, sans-serif" font-size="9.5" fill="#555">mon directeur → une diapositive résumé</text>
+    <line x1="25" y1="250" x2="385" y2="250" stroke="#CAE6E9" stroke-width="1"/>
+    <text x="205" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" fill="#09544F">L'IA vous donne exactement ce qu'il vous faut</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="350" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#777" font-style="italic">Commencez par ce que vous savez — vous pouvez toujours ajouter des détails ensuite</text>
+
+</svg>

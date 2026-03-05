@@ -6,15 +6,7 @@ paginate: true
 
 ## From vague to specific — building a better prompt
 
-| | Vague | Specific |
-|---|---|---|
-| **What** | *"Analyze the data"* | *"Show ANC1 trends"* |
-| **Where** | *(not said)* | *"by region"* |
-| **When** | *(not said)* | *"over the last 12 months"* |
-| **For whom** | *(not said)* | *"make a slide for my director"* |
-| **Result** | Generic summary | Focused answer you can use |
-
-The more you tell the AI, the better it can help. You don't need everything at once — start with what you know and add details as you go.
+![Vague vs specific prompt](../../resources/diagrams/vague_vs_specific_prompt.svg)
 
 ---
 
