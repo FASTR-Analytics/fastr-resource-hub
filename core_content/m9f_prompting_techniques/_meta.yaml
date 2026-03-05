@@ -1,4 +1,8 @@
 slides:
+- file: m9f_0_good_vs_vague_prompt.md
+  order: 0
+  variant: full
+  title: What makes a good prompt? A comparison
 - file: m9f_1_explore_with_ai_assistant.md
   order: 1
   variant: full
