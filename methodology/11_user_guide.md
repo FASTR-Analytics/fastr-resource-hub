@@ -41,9 +41,12 @@ To request a country instance for your organization, contact Ashley Sheffel at a
 
 ## 2. Modules
 
-Understanding modules, available analysis modules, module installation, and running analyses.
+??? "2.1 Understanding modules"
 
-*Tutorials coming soon.*
+   Available analysis modules, module installation, and running analyses.
+
+  <iframe src="https://scribehow.com/page-embed/21_Understanding_Modules__WuxRH16OStKherxJbQu8Lw" width="100%" height="800" allow="fullscreen" style="border: 0; min-height: 640px"></iframe>
+
 
 ## 3. Visualizations
 
