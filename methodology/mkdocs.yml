@@ -16,6 +16,7 @@ nav:
   - Data Preparation:
     - Data Extraction: 02_data_extraction.md
     - FASTR Analytics Platform: 03_fastr_analytics_platform.md
+  - User Guide: 11_user_guide.md
   - Data Quality:
     - Data Quality Assessment: 04_data_quality_assessment.md
     - Data Quality Adjustments: 05_data_quality_adjustment.md
@@ -137,6 +138,7 @@ plugins:
             Data Analysis: Analyse des données
             Service Utilization: Utilisation des services
             Coverage Estimates: Estimations de couverture
+            User Guide: Guide de l'utilisateur
             Disclaimer: Avertissement
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:

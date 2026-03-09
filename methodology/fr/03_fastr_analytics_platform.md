@@ -151,45 +151,8 @@ La plateforme évalue automatiquement l'exhaustivité et l'exactitude des donné
 
 Les projets peuvent être **verrouillés** pour empêcher toute modification de leur configuration tout en permettant aux utilisateurs de consulter les rapports. Lorsqu'un projet est verrouillé, les modules et les paramètres de données ne peuvent pas être modifiés, ce qui permet de préserver les configurations analytiques une fois qu'elles ont été finalisées.
 
----
-
-### Guide de l'utilisateur FASTR :
-
-#### 0.1 Aperçu de la plate-forme
-Introduction à la plate-forme d'analyse FASTR, à ses caractéristiques et à ses capacités
-
-0.1 Visite de la page d'atterrissage <iframe src="https://scribehow.com/embed/01_Landing_page_tour__Ixq2SHWYShuwaxBwQMJWMA" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
-
-#### 1.0 Accéder à la plateforme d'analyse FASTR
-Création de comptes, connexion, autorisations et rôles des utilisateurs
-
-1.1 Demander une instance nationale
-Pour demander une instance nationale, contactez Ashley Sheffel à l'adresse asheffel@worldbank.org
-1.2 Création d'un compte sur la plateforme FASTR Analytics <iframe src="https://scribehow.com/embed/12_Creating_a_FASTR_Analytics_plateforme_account__9Av54dcqRTK1XkP1mYAc_g" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
-1.3 Se connecter à la plateforme <iframe src="https://scribehow.com/embed/13_Signing_into_the_plateforme__ICDGCqyIQ6SxAcK4RKou7g" width="800" height="679" allow="fullscreen" style="aspect-ratio : 1 / 1 ; border : 0 ; min-height : 480px"></iframe>
-1.4 Accès FAQ
-
-#### 2.0 Modules
-Comprendre les modules, les modules d'analyse disponibles, l'installation des modules, l'exécution des analyses
-
-#### 3.0 Visualisations
-Types de graphiques disponibles, options de personnalisation, exportation des visualisations
-
-#### 4.0 Rapports
-Modèles de rapports, génération automatique de rapports, personnalisation des rapports
-
-#### 5.0 Administration : Généralités
-Configuration des zones d'administration (régions, districts), mise en place d'installations, définition d'indicateurs
-
-#### 6.0 Administration : Gestion des données
-Exigences en matière de format des données, processus d'importation, validation et traitement des erreurs
-
-#### 7.0 Administration : Projets
-Flux de travail pour la mise en place des projets, options de configuration, meilleures pratiques
-
-#### 8.0 Administration : Modules
-Modules d'analyse disponibles, installation des modules, exécution des analyses
-
+!!! tip "Guide de l'utilisateur"
+    Pour des tutoriels étape par étape sur l'utilisation de la plateforme, consultez le [Guide de l'utilisateur FASTR](11_user_guide.md).
 
 ---
 
