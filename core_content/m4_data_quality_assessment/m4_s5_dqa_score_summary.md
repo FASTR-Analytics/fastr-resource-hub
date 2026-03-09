@@ -19,6 +19,10 @@ Results from the outlier, completeness, and consistency checks are combined into
 - No values are flagged as outliers
 - Consistency benchmarks are met for available indicator pairs (e.g., Penta1/Penta3, ANC1/ANC4)
 
+**Quick guide:** Above 80% = reliable for analysis. 60-80% = usable with caution. Below 60% = investigate before using.
+
+**Try it:** Check your region's DQA score. Is it above or below 80%? If below, which dimension is pulling it down?
+
 <!--
 PRESENTER NOTES:
 - The overall DQA score is strict: all-or-nothing. A single failed check = 0%

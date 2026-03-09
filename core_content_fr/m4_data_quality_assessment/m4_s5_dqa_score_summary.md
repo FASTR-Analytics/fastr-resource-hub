@@ -19,6 +19,10 @@ Les résultats des contrôles de valeurs aberrantes, de complétude et de cohér
 - Aucune valeur n'est signalée comme aberrante
 - Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)
 
+**Guide rapide :** Au-dessus de 80 % = fiable pour l'analyse. 60-80 % = utilisable avec prudence. En dessous de 60 % = investiguer avant d'utiliser.
+
+**Essayez :** Vérifiez le score AQD de votre région. Est-il au-dessus ou en dessous de 80 % ? Si en dessous, quelle dimension le tire vers le bas ?
+
 <!--
 PRESENTER NOTES:
 - Le score AQD global est strict : tout ou rien. Un seul contrôle échoué = 0%

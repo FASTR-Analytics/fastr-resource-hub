@@ -31,6 +31,10 @@ slides:
   order: 3
   variant: full
   title: Outliers
+- file: m4_3a_outlier_investigation.md
+  order: 3.01
+  variant: full
+  title: Investigating a flagged outlier
 - file: m4_4_internal_consistency.md
   order: 4
   variant: full

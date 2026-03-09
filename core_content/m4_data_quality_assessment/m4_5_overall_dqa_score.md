@@ -18,3 +18,15 @@ Results from the outlier, completeness, and consistency checks are combined into
 - All core indicator data are reported (complete)
 - No values are flagged as outliers
 - Consistency benchmarks are met for available indicator pairs (e.g., Penta1/Penta3, ANC1/ANC4)
+
+---
+
+## Quick interpretation guide
+
+| Score range | What it means | What to do |
+|-------------|---------------|------------|
+| **Above 80%** | Reliable — use confidently for analysis | Proceed with analysis |
+| **60-80%** | Usable with caution — some quality gaps | Note limitations, investigate weak dimensions |
+| **Below 60%** | Investigate before using | Identify which dimension (completeness, outliers, consistency) is pulling the score down |
+
+**Try it:** Check your region's overall DQA score. Is it above or below 80%? If below, look at the individual dimension scores — which one needs the most attention?

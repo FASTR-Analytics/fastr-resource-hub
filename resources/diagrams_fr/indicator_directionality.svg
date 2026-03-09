@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#09544F">Tous les changements ne vont pas dans le même sens</text>
+
+  <!-- Left column: La hausse est positive -->
+  <g transform="translate(30, 50)">
+    <rect x="0" y="0" width="310" height="250" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <!-- Header -->
+    <rect x="0" y="0" width="310" height="44" rx="12" fill="#09544F"/>
+    <rect x="0" y="20" width="310" height="24" fill="#09544F"/>
+    <text x="40" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#fff">La hausse est positive</text>
+    <text x="18" y="28" font-family="Inter, sans-serif" font-size="16" fill="#fff">&#x2191;</text>
+
+    <!-- Items -->
+    <text x="25" y="72" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="72" font-family="Inter, sans-serif" font-size="12" fill="#333">Visites CPN (CPN1, CPN4)</text>
+
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="100" font-family="Inter, sans-serif" font-size="12" fill="#333">Accouchements en établissement</text>
+
+    <text x="25" y="128" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="128" font-family="Inter, sans-serif" font-size="12" fill="#333">Vaccinations (Penta1, BCG)</text>
+
+    <text x="25" y="156" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="156" font-family="Inter, sans-serif" font-size="12" fill="#333">Consultations externes</text>
+
+    <text x="25" y="184" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="184" font-family="Inter, sans-serif" font-size="12" fill="#333">Couverture %</text>
+
+    <text x="25" y="212" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="212" font-family="Inter, sans-serif" font-size="12" fill="#333">Visites postnatales</text>
+
+    <text x="25" y="240" font-family="Inter, sans-serif" font-size="12" fill="#09544F">&#x2713;</text>
+    <text x="45" y="240" font-family="Inter, sans-serif" font-size="12" fill="#333">Complétude du rapportage</text>
+  </g>
+
+  <!-- Right column: La baisse est positive -->
+  <g transform="translate(360, 50)">
+    <rect x="0" y="0" width="310" height="250" rx="12" fill="#FDE8E8" filter="url(#shadow)"/>
+    <!-- Header -->
+    <rect x="0" y="0" width="310" height="44" rx="12" fill="#C53030"/>
+    <rect x="0" y="20" width="310" height="24" fill="#C53030"/>
+    <text x="40" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#fff">La baisse est positive</text>
+    <text x="18" y="28" font-family="Inter, sans-serif" font-size="16" fill="#fff">&#x2193;</text>
+
+    <!-- Items -->
+    <text x="25" y="72" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="72" font-family="Inter, sans-serif" font-size="12" fill="#333">Décès maternels</text>
+
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="100" font-family="Inter, sans-serif" font-size="12" fill="#333">Complications néonatales</text>
+
+    <text x="25" y="128" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="128" font-family="Inter, sans-serif" font-size="12" fill="#333">Taux d'abandon</text>
+
+    <text x="25" y="156" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="156" font-family="Inter, sans-serif" font-size="12" fill="#333">Jours de rupture de stock</text>
+
+    <text x="25" y="184" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="184" font-family="Inter, sans-serif" font-size="12" fill="#333">Taux de valeurs aberrantes</text>
+
+    <text x="25" y="212" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="212" font-family="Inter, sans-serif" font-size="12" fill="#333">Taux de mortinatalité</text>
+
+    <text x="25" y="240" font-family="Inter, sans-serif" font-size="12" fill="#C53030">&#x2713;</text>
+    <text x="45" y="240" font-family="Inter, sans-serif" font-size="12" fill="#333">Taux de létalité</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="350" y="328" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#777" font-style="italic">Posez-vous toujours la question : est-ce que plus de cela signifie une meilleure santé ?</text>
+
+</svg>

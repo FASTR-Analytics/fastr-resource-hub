@@ -3,6 +3,10 @@ slides:
   order: 1
   variant: full
   title: Analyse de l'utilisation des services
+- file: m6_1b_indicator_directionality.md
+  order: 1.005
+  variant: full
+  title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
 - file: m6_1a_service_utilization_comparison_dhis2.md
   order: 1.01
   variant: full
@@ -35,6 +39,10 @@ slides:
   order: 9
   variant: full
   title: Relations attendues qui aident à estimer les dénominateurs
+- file: m6_9a_cascade_dropout.md
+  order: 9.01
+  variant: full
+  title: Cascade de services et analyse de l'abandon
 - file: m6_10_denominator_cascade_illustration.md
   order: 10
   variant: full
@@ -63,6 +71,10 @@ slides:
   order: 1
   variant: condensed
   title: Analyse de l'utilisation des services
+- file: m6_s1b_indicator_directionality.md
+  order: 1.005
+  variant: condensed
+  title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed

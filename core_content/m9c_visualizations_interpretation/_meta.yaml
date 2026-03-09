@@ -3,6 +3,10 @@ slides:
   order: 0.01
   variant: full
   title: Creating visualizations
+- file: m9c_0b_choosing_chart_type.md
+  order: 0.5
+  variant: full
+  title: Choosing the right chart type
 - file: m9c_1_creating_visualizations_manually.md
   order: 1
   variant: full

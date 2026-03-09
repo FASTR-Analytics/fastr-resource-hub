@@ -32,6 +32,10 @@ slides:
   order: 3
   variant: full
   title: Valeurs aberrantes
+- file: m4_3a_outlier_investigation.md
+  order: 3.01
+  variant: full
+  title: Investiguer une valeur aberrante signalée
 - file: m4_4_internal_consistency.md
   order: 4
   variant: full

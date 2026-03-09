@@ -3,6 +3,10 @@ slides:
   order: 1
   variant: full
   title: Service utilization analysis
+- file: m6_1b_indicator_directionality.md
+  order: 1.005
+  variant: full
+  title: 'Indicator directionality: not all increases are good'
 - file: m6_1a_service_utilization_comparison_dhis2.md
   order: 1.01
   variant: full
@@ -35,6 +39,10 @@ slides:
   order: 9
   variant: full
   title: Expected relationships which help with estimating denominators
+- file: m6_9a_cascade_dropout.md
+  order: 9.01
+  variant: full
+  title: Service cascade and dropout analysis
 - file: m6_10_denominator_cascade_illustration.md
   order: 10
   variant: full
@@ -63,6 +71,10 @@ slides:
   order: 1
   variant: condensed
   title: Service utilization analysis
+- file: m6_s1b_indicator_directionality.md
+  order: 1.005
+  variant: condensed
+  title: 'Indicator directionality: not all increases are good'
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed

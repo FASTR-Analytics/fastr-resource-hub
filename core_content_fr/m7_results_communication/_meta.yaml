@@ -79,6 +79,10 @@ slides:
   order: 2.01
   variant: full
   title: 'Exemple : résultat vs enseignement clé'
+- file: m7_2a2_finding_statement_formula.md
+  order: 2.015
+  variant: full
+  title: Rédiger un énoncé de constat
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
@@ -139,6 +143,10 @@ slides:
   order: 1
   variant: condensed
   title: Des données aux messages clés
+- file: m7_s2a_finding_statement_formula.md
+  order: 1.5
+  variant: condensed
+  title: Rédiger un énoncé de constat
 - file: m7_s2_storytelling_with_data.md
   order: 2
   variant: condensed
