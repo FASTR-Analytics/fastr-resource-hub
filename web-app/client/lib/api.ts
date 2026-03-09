@@ -71,6 +71,7 @@ export interface Topic {
   slideTitles: string[]
   preview: string[]
   isShort?: boolean
+  status?: 'new' | 'updated'
 }
 
 export interface Template {
