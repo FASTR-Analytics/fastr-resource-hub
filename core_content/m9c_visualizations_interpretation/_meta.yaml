@@ -27,6 +27,21 @@ slides:
   order: 3.01
   variant: full
   title: 'Example: Interpreting a visualization'
+- file: m9c_3a2_interpreting_narrative.md
+  order: 3.02
+  variant: full
+  title: 'Example narrative: ANC1 and ANC4 trends'
+  status: new
+- file: m9c_3b_interpreting_activity.md
+  order: 3.03
+  variant: full
+  title: 'Activity: Interpreting visualizations in slide decks'
+  status: new
+- file: m9c_3c_try_it_yourself.md
+  order: 3.04
+  variant: full
+  title: Try it yourself
+  status: new
 - file: m9c_4_interpreting_with_ai.md
   order: 4
   variant: full
@@ -35,3 +50,8 @@ slides:
   order: 5
   variant: full
   title: Has there been a disruption?
+- file: m9c_5a_dig_deeper.md
+  order: 5.01
+  variant: full
+  title: 'Dig deeper: is it real or a data issue?'
+  status: new

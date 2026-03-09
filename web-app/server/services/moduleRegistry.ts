@@ -37,6 +37,7 @@ export interface SlideEntry {
   order: number
   variant: 'full' | 'condensed'
   title: string
+  status?: 'new' | 'updated'
 }
 
 export interface ModuleMeta {

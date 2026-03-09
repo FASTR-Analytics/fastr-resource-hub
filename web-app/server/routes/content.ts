@@ -219,6 +219,7 @@ router.get('/modules', (req, res) => {
             slideTitles: slideTitles.slice(0, 5),
             preview: keyPoints,
             isCondensed: isCondensed,
+            status: entry.status || undefined,
           }
 
           if (isCondensed) {

@@ -38,6 +38,7 @@ interface Topic {
   preview: string[]
   path?: string
   isShort?: boolean
+  status?: 'new' | 'updated'
 }
 
 interface Module {
@@ -834,6 +835,12 @@ We resume at **[time]**`
                         <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
                             {topic.title}
+                            {topic.status === 'new' && (
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">New</span>
+                            )}
+                            {topic.status === 'updated' && (
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">Updated</span>
+                            )}
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
                             <Layers className="w-3 h-3" />
@@ -875,6 +882,12 @@ We resume at **[time]**`
                         <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
                             {topic.title}
+                            {topic.status === 'new' && (
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">New</span>
+                            )}
+                            {topic.status === 'updated' && (
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">Updated</span>
+                            )}
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
                             <Layers className="w-3 h-3" />
@@ -904,6 +917,12 @@ We resume at **[time]**`
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-gray-700 truncate" title={topic.title}>
                         {topic.title}
+                        {topic.status === 'new' && (
+                          <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">New</span>
+                        )}
+                        {topic.status === 'updated' && (
+                          <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">Updated</span>
+                        )}
                       </div>
                       <div className="text-xs text-gray-400 flex items-center gap-1">
                         <Layers className="w-3 h-3" />

@@ -18,32 +18,3 @@ A step-by-step framework for reading any figure:
 | **6. So what?** | What does this mean for service delivery? What action does it suggest? |
 
 *Tip: Always check the legend, axis labels, and any footnotes before interpreting.*
-
----
-
-## Activity: Interpreting visualizations in slide decks manually
-
-**I do, we do, you do**
-
-**I do:** Facilitator demonstrates creating a slide by inserting a visualization from the general folder and manually adding an interpretation, considering the data, metrics, values, context, and conclusions to be drawn.
-
-**We do:** Together, we interpret a visualization and add interpretation in slide deck.
-
-**You do:** Practice interpreting a visualization of your choice in your presentation, remembering the above factors to be considered.
-
-*We are in the Slide Decks tab*
-
----
-
-## Try it yourself
-
-Open any FASTR visualization — a chart, heatmap, or table. Walk through all 6 steps:
-
-1. What indicator am I looking at?
-2. What geographic level and time period?
-3. What is being compared?
-4. What are the actual values?
-5. What stands out — any trends, spikes, or gaps?
-6. So what — what does this mean for health services?
-
-*Write down your answers. What did you notice at step 5 or 6 that you would have missed if you only glanced at the chart?*

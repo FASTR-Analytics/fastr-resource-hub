@@ -8,11 +8,11 @@ paginate: true
 
 **Je fais, nous faisons, vous faites**
 
-**Je fais :** Le facilitateur démontre l'utilisation de l'assistant IA pour créer une diapositive avec une visualisation et une interprétation, puis affine le prompt en clarifiant l'objectif, le public et la portée, et vérifie le résultat par rapport aux données.
+**Je fais :** Le facilitateur utilise l'assistant IA pour créer une diapositive avec une visualisation et une interprétation, puis affine le prompt et vérifie le résultat par rapport aux données
 
-**Nous faisons :** Ensemble, nous créons une diapositive et affinons le prompt en groupe pour améliorer la clarté, l'utilité et l'exactitude.
+**Nous faisons :** Ensemble, nous créons une diapositive et affinons le prompt en groupe pour améliorer la clarté et l'exactitude
 
-**Vous faites :** Créez une diapositive à partir d'une visualisation de votre choix, examinez le premier résultat de l'IA, et affinez le prompt pour améliorer le résultat.
+**Vous faites :** Créez une diapositive avec une visualisation de votre choix, examinez le résultat de l'IA, et affinez le prompt pour l'améliorer
 
 **Prompt 1 :** *"Crée une diapositive montrant la complétude du rapportage pour BCG, Penta1, Penta3 par région pour 2024. Indique quelles régions sont au-dessus/en dessous de 80 %."*
 

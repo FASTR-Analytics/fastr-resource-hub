@@ -28,6 +28,21 @@ slides:
   order: 3.01
   variant: full
   title: 'Exemple : Interpréter une visualisation'
+- file: m9c_3a2_interpreting_narrative.md
+  order: 3.02
+  variant: full
+  title: 'Exemple narratif : Tendances CPN1 et CPN4'
+  status: new
+- file: m9c_3b_interpreting_activity.md
+  order: 3.03
+  variant: full
+  title: 'Activité : Interprétation de visualisations dans les diaporamas'
+  status: new
+- file: m9c_3c_try_it_yourself.md
+  order: 3.04
+  variant: full
+  title: Essayez par vous-même
+  status: new
 - file: m9c_4_interpreting_with_ai.md
   order: 4
   variant: full
@@ -36,3 +51,8 @@ slides:
   order: 5
   variant: full
   title: Y a-t-il eu une perturbation ?
+- file: m9c_5a_dig_deeper.md
+  order: 5.01
+  variant: full
+  title: 'Creuser davantage : est-ce réel ou un problème de données ?'
+  status: new
