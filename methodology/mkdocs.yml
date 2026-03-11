@@ -217,14 +217,11 @@ extra:
       link: /fastr-resource-hub/fr/
       lang: fr
 
-  # Social Links
+  # Footer Links
   social:
-    - icon: fontawesome/solid/link
-      link: https://data.gffportal.org/key-theme/FASTR
-      name: FASTR Website
-    - icon: fontawesome/solid/house
-      link: https://fastr-analytics.github.io/fastr-resource-hub/
-      name: Home
+    - icon: fontawesome/brands/github
+      link: https://github.com/FASTR-Analytics/fastr-resource-hub
+      name: GitHub Repository
 
   # Footer
   generator: false  # Remove "Made with Material for MkDocs" notice
