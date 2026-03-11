@@ -16,11 +16,11 @@ nav:
   - Data Preparation:
     - Data Extraction: 02_data_extraction.md
     - FASTR Analytics Platform: 03_fastr_analytics_platform.md
-  - User Guide: 11_user_guide.md
-  - Data Quality:
+  - FASTR Platform User Guide: 11_user_guide.md
+  - Data Quality Methods:
     - Data Quality Assessment: 04_data_quality_assessment.md
     - Data Quality Adjustments: 05_data_quality_adjustment.md
-  - Data Analysis:
+  - Data Analysis Methods:
     - Service Utilization: 06a_service_utilization.md
     - Coverage Estimates: 06b_coverage_estimates.md
   - Disclaimer: disclaimer.md
@@ -132,13 +132,13 @@ plugins:
             Data Preparation: Préparation des données
             Data Extraction: Extraction des données
             FASTR Analytics Platform: Plateforme d'analyse FASTR
-            Data Quality: Qualité des données
+            Data Quality Methods: Méthodes de qualité des données
             Data Quality Assessment: Évaluation de la qualité des données
             Data Quality Adjustments: Ajustement de la qualité des données
-            Data Analysis: Analyse des données
+            Data Analysis Methods: Méthodes d'analyse des données
             Service Utilization: Utilisation des services
             Coverage Estimates: Estimations de couverture
-            User Guide: Guide de l'utilisateur
+            FASTR Platform User Guide: Guide de l'utilisateur de la plateforme FASTR
             Disclaimer: Avertissement
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:

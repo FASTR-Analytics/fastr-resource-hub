@@ -20,3 +20,13 @@ Nothing herein shall constitute or be construed or considered to be a limitation
 The material in this work is subject to copyright. Because The World Bank encourages dissemination of its knowledge, this work may be reproduced, in whole or in part, for noncommercial purposes as long as full attribution to this work is given.
 
 Any queries on rights and licenses, including subsidiary rights, should be addressed to World Bank Publications, The World Bank Group, 1818 H Street NW, Washington, DC 20433, USA; fax: 202-522-2625; e-mail: pubrights@worldbank.org.
+
+## Citation
+
+To cite this methodology documentation:
+
+> Global Financing Facility. *FASTR RMNCAH-N Service Use Monitoring: Methodology Documentation*. Washington, DC: The World Bank, 2025. Available at: [https://fastr-analytics.github.io/fastr-resource-hub/](https://fastr-analytics.github.io/fastr-resource-hub/)
+
+## Acknowledgements
+
+This methodology was developed by the Global Financing Facility (GFF) team at The World Bank, with contributions from partner institutions and country teams.

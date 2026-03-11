@@ -7,7 +7,7 @@
 
 La plateforme d'analyse FASTR est un outil en ligne conçu pour soutenir l'évaluation, l'ajustement et l'analyse de la qualité des données de santé de routine. Elle permet aux utilisateurs de télécharger et d'analyser des données provenant de diverses sources, y compris le DHIS2, avec des méthodes statistiques intégrées pour générer un ensemble de données ajustées et effectuer des analyses prioritaires sur des indicateurs sélectionnés. La plateforme fournit une interface conviviale pour l'exécution des analyses et offre des options flexibles pour la visualisation et l'exportation des résultats.
 
-![Capacités de la plateforme](resources/diagrams_fr/platform_capabilities.svg)
+![Capacités de la plateforme](../resources/diagrams_fr/platform_capabilities.svg)
 
 ## Capacités clés
 
@@ -59,7 +59,7 @@ Les administrateurs du système sont chargés de mettre en place la plateforme, 
 
 **Les projets** fournissent des espaces de travail d'analyse ciblés au sein d'une instance. Chaque projet permet aux utilisateurs de sélectionner les données à inclure en définissant des périodes, des établissements et des indicateurs spécifiques. Au sein d'un projet, les utilisateurs peuvent activer des modules analytiques, créer des visualisations et élaborer des rapports adaptés à des objectifs analytiques spécifiques.
 
-![Projets au sein de l'instance](resources/diagrams_fr/projects_within_instance.svg)
+![Projets au sein de l'instance](../resources/diagrams_fr/projects_within_instance.svg)
 
 
 ### Flux de données

@@ -7,11 +7,11 @@
 
 </div>
 
-# FASTR Suivi de l'utilisation des services SRMNIA-N
+# [FASTR](https://data.gffportal.org/key-theme/FASTR) Suivi de l'utilisation des services SRMNIA-N
 
-**Méthodologie Documentation**
+**Documentation méthodologique**
 
-Cette documentation décrit l'approche FASTR de l'analyse de routine des données SIGS pour le suivi des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N).
+Cette documentation décrit l'approche [FASTR](https://data.gffportal.org/key-theme/FASTR) de l'analyse de routine des données SIGS pour le suivi des services de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N).
 
 ## Modules de documentation
 
@@ -28,8 +28,9 @@ Cette documentation décrit l'approche FASTR de l'analyse de routine des donnée
 
 ## Liens rapides
 
+- [Site web FASTR](https://data.gffportal.org/key-theme/FASTR)
+- [Référentiel de ressources FASTR](https://data.gffportal.org/key-theme/FASTR/resource-repository/index.php/home)
 - [Avis de non-responsabilité](disclaimer.md)
-- [Référentiel de ressources FASTR](https://data.GFFportal.org/key-theme/FASTR/resource-repository/index.php/home)
 
 ## À propos de FASTR
 

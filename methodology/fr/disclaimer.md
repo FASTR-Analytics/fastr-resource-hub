@@ -23,3 +23,13 @@ Rien dans le présent document ne peut constituer ou être interprété ou consi
 Le matériel contenu dans cet ouvrage est soumis à des droits d'auteur. La Banque mondiale encourageant la diffusion de ses connaissances, cet ouvrage peut être reproduit, en tout ou en partie, à des fins non commerciales, à condition qu'il soit fait mention de la source.
 
 Toute question concernant les droits et les licences, y compris les droits subsidiaires, doit être adressée à World Bank Publications, The World Bank Group, 1818 H Street NW, Washington, DC 20433, USA ; fax : 202-522-2625 ; e-mail : pubrights@worldbank.org.
+
+## Citation
+
+Pour citer cette documentation méthodologique :
+
+> Mécanisme de financement mondial. *FASTR Suivi de l'utilisation des services SRMNIA-N : Documentation méthodologique*. Washington, DC : Banque mondiale, 2025. Disponible à : [https://fastr-analytics.github.io/fastr-resource-hub/](https://fastr-analytics.github.io/fastr-resource-hub/)
+
+## Remerciements
+
+Cette méthodologie a été développée par l'équipe du Mécanisme de financement mondial (GFF) à la Banque mondiale, avec les contributions d'institutions partenaires et d'équipes pays.
