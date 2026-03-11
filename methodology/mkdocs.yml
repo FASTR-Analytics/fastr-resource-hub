@@ -220,8 +220,8 @@ extra:
   # Footer Links
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/FASTR-Analytics/fastr-resource-hub
-      name: GitHub Repository
+      link: https://github.com/FASTR-Analytics/modules
+      name: Module Source Code
 
   # Footer
   generator: false  # Remove "Made with Material for MkDocs" notice
