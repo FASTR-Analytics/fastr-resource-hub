@@ -31,7 +31,7 @@ theme:
   custom_dir: overrides
   language: en
   logo: resources/logos/FASTR_White_FullName.png
-  favicon: resources/logos/FASTR_White_FullName.png
+  favicon: resources/logos/FASTR_Primary_01_FullName.png
 
   # Color Palette
   palette:
