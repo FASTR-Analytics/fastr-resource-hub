@@ -3,8 +3,7 @@ site_description: Methodology documentation for RMNCAH-N service use monitoring 
 site_url: https://FASTR-Analytics.github.io/fastr-resource-hub/
 docs_dir: .
 site_dir: ../site
-repo_url: https://data.gffportal.org/key-theme/FASTR
-repo_name: FASTR Website
+# repo_url removed — using social links instead to avoid GitHub repo widget
 
 # Navigation
 # Note: Executive Summary, Module 7, and Module 8 are hidden but still available for workshops
@@ -87,7 +86,7 @@ theme:
   # Logo and Icons
   icon:
     logo: material/book-open-page-variant
-    repo: fontawesome/solid/link
+    # repo icon not needed — repo_url removed
     admonition:
       note: fontawesome/solid/note-sticky
       abstract: fontawesome/solid/book
@@ -218,6 +217,9 @@ extra:
 
   # Social Links
   social:
+    - icon: fontawesome/solid/link
+      link: https://data.gffportal.org/key-theme/FASTR
+      name: FASTR Website
     - icon: fontawesome/solid/house
       link: /
       name: Home
