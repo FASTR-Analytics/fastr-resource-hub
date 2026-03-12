@@ -378,12 +378,18 @@ paginate: true
     if (view === 'assets' && Object.keys(assetLibrary).length === 0) {
       setIsLoadingAssets(true)
       fetch('/api/assets/library', { credentials: 'include' })
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to load assets')
+          return res.json()
+        })
         .then(data => {
           setAssetLibrary(data.library || {})
           setIsLoadingAssets(false)
         })
-        .catch(() => setIsLoadingAssets(false))
+        .catch((err) => {
+          console.error('Asset library load failed:', err)
+          setIsLoadingAssets(false)
+        })
     }
   }, [view])
 

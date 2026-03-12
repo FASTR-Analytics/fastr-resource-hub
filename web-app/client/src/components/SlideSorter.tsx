@@ -443,7 +443,7 @@ interface SlideSorterProps {
 }
 
 export function SlideSorter({ onBack }: SlideSorterProps) {
-  const { currentWorkshopId, currentConfig, reorderSession, addSession, updateSession, removeSession } = useWorkshopStore()
+  const { currentWorkshopId, currentConfig, reorderSession, moveSessionToDay, addSession, updateSession, removeSession } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -529,9 +529,25 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
     const movingSession = sessionGroups[oldIndex]
     const targetSession = sessionGroups[newIndex]
 
-    // For now, only allow reordering within the same day
+    // Cross-day move: move session to the target day at the target position
     if (movingSession.dayNumber !== targetSession.dayNumber) {
-      // TODO: Support cross-day moves using moveSessionToDay
+      setSaving(true)
+      try {
+        moveSessionToDay(
+          movingSession.dayNumber,
+          movingSession.sessionIndex,
+          targetSession.dayNumber,
+          targetSession.sessionIndex
+        )
+        setTimeout(() => {
+          buildSlides()
+          setSaving(false)
+        }, 500)
+      } catch (err: any) {
+        setError('Failed to move session: ' + err.message)
+        await buildSlides()
+        setSaving(false)
+      }
       return
     }
 

@@ -81,7 +81,7 @@ const sessionStore = await createSessionStore()
 
 // Middleware
 app.use(cors({
-  origin: true,
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:5173', 'http://localhost:3001'],
   credentials: true
 }))
 app.use(express.json({ limit: '10mb' }))

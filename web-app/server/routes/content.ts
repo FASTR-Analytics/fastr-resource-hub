@@ -318,7 +318,7 @@ router.get('/modules', (req, res) => {
     res.json(sortedModules)
   } catch (error: any) {
     console.error('Error getting modules:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -350,7 +350,7 @@ router.get('/modules/:id', (req, res) => {
     res.json({ folder: moduleFolder, slides })
   } catch (error: any) {
     console.error('Error getting module:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -454,7 +454,7 @@ router.get('/topic/:id', (req, res) => {
     res.json({ filename: file, content, language })
   } catch (error: any) {
     console.error('Error getting topic:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -549,7 +549,7 @@ router.get('/templates', (req, res) => {
     res.json(result)
   } catch (error: any) {
     console.error('Error getting templates:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -590,7 +590,7 @@ router.get('/templates/:id', (req, res) => {
     res.json({ filename: templateFile, content, language })
   } catch (error: any) {
     console.error('Error getting template:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -599,10 +599,23 @@ router.get('/slide/*', (req, res) => {
   try {
     const relativePath = (req.params as unknown as string[])[0]
 
+    // Prevent path traversal
+    const normalizedRelative = path.normalize(relativePath)
+    if (normalizedRelative.startsWith('..') || path.isAbsolute(normalizedRelative)) {
+      return res.status(403).json({ error: 'Invalid path' })
+    }
+
     // Try core_content first, then templates
-    let filePath = path.join(CORE_CONTENT_PATH, relativePath)
+    let filePath = path.resolve(CORE_CONTENT_PATH, normalizedRelative)
+    if (!filePath.startsWith(path.resolve(CORE_CONTENT_PATH))) {
+      return res.status(403).json({ error: 'Invalid path' })
+    }
+
     if (!fs.existsSync(filePath)) {
-      filePath = path.join(TEMPLATES_PATH, relativePath)
+      filePath = path.resolve(TEMPLATES_PATH, normalizedRelative)
+      if (!filePath.startsWith(path.resolve(TEMPLATES_PATH))) {
+        return res.status(403).json({ error: 'Invalid path' })
+      }
     }
 
     if (!fs.existsSync(filePath)) {
@@ -613,7 +626,7 @@ router.get('/slide/*', (req, res) => {
     res.json({ path: relativePath, content })
   } catch (error: any) {
     console.error('Error reading slide:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Failed to read slide' })
   }
 })
 
@@ -689,7 +702,7 @@ ${html}
     res.json({ html: fullHtml, presenterNotes, cached: false })
   } catch (error: any) {
     console.error('Error rendering markdown:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -829,7 +842,7 @@ ${html}
     }
   } catch (error: any) {
     console.error('Error exporting module:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -992,7 +1005,7 @@ ${html}
     }
   } catch (error: any) {
     console.error('Error exporting selection:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 
@@ -1000,16 +1013,23 @@ ${html}
 router.get('/export/download/:filename', (req, res) => {
   try {
     const { filename } = req.params
-    const filePath = path.join(OUTPUT_DIR, filename)
+
+    // Prevent path traversal — strip directory components
+    const safeFilename = path.basename(filename)
+    const filePath = path.resolve(OUTPUT_DIR, safeFilename)
+
+    if (!filePath.startsWith(path.resolve(OUTPUT_DIR))) {
+      return res.status(403).json({ error: 'Invalid filename' })
+    }
 
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: 'File not found' })
     }
 
-    res.download(filePath, filename)
+    res.download(filePath, safeFilename)
   } catch (error: any) {
     console.error('Error downloading file:', error)
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: 'Failed to download file' })
   }
 })
 
@@ -1035,9 +1055,9 @@ router.post('/cache/clear', (_req, res) => {
 // POST /api/content/rebuild - Re-extract slides from methodology files
 // Query params: ?language=fr or ?language=en,fr (default: en)
 router.post('/rebuild', async (req, res) => {
-  const { exec } = await import('child_process')
+  const { execFile } = await import('child_process')
   const { promisify } = await import('util')
-  const execAsync = promisify(exec)
+  const execFileAsync = promisify(execFile)
 
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
@@ -1060,8 +1080,7 @@ router.post('/rebuild', async (req, res) => {
   // Check if script exists
   if (!fs.existsSync(scriptPath)) {
     return res.status(404).json({
-      error: 'Extract script not found',
-      path: scriptPath
+      error: 'Extract script not found'
     })
   }
 
@@ -1069,9 +1088,9 @@ router.post('/rebuild', async (req, res) => {
     console.log(`Running content extraction script for languages: ${languages.join(', ')}...`)
     const startTime = Date.now()
 
-    // Build command with language args
-    const langArgs = languages.map(l => `--lang ${l}`).join(' ')
-    const { stdout, stderr } = await execAsync(`python3 "${scriptPath}" ${langArgs}`, {
+    // Build command args as array (no shell injection risk)
+    const args = languages.flatMap(l => ['--lang', l])
+    const { stdout, stderr } = await execFileAsync('python3', [scriptPath, ...args], {
       cwd: REPO_ROOT,
       timeout: 120000  // 2 minute timeout
     })
@@ -1102,9 +1121,7 @@ router.post('/rebuild', async (req, res) => {
   } catch (error: any) {
     console.error('Content rebuild error:', error)
     res.status(500).json({
-      error: 'Failed to rebuild content',
-      message: error.message,
-      stderr: error.stderr
+      error: 'Failed to rebuild content'
     })
   }
 })
