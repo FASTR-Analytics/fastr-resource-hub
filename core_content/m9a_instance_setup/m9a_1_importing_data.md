@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Importing Data
+## Activity: Importing data
 
 **In this hands-on session, we will:**
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Practice: Logging Into the Platform
+## Practice: Logging into the platform
 
 <style scoped>
 table { border: none !important; background: transparent !important; width: 100% !important; }

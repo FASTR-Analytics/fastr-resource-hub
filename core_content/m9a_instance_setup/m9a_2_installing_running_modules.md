@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Installing and Running Modules
+## Activity: Installing and running modules
 
 **In this hands-on session, we will:**
 

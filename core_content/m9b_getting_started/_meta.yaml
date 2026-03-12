@@ -6,7 +6,7 @@ slides:
 - file: m9b_1_logging_into_platform.md
   order: 1
   variant: full
-  title: 'Practice: Logging Into the Platform'
+  title: 'Practice: Logging into the platform'
 - file: m9b_2_creating_user_folder.md
   order: 2
   variant: full

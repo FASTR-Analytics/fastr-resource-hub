@@ -2,7 +2,7 @@ slides:
 - file: m9g_1_fastr_quiz.md
   order: 1
   variant: full
-  title: Untitled
+  title: FASTR quiz
 - file: m9g_1b_fastr_quiz.md
   order: 1.001
   variant: full

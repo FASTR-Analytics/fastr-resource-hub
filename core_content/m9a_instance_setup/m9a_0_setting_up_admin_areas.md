@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Setting Up Admin Areas
+## Activity: Setting up admin areas
 
 **In this hands-on session, we will configure:**
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Creating a Project
+## Activity: Creating a project
 
 **In this hands-on session, we will:**
 
