@@ -213,6 +213,30 @@ export const translations = {
     enterFullscreen: 'Enter fullscreen',
     moreSlides: 'more',
 
+    // Library mode search
+    result: 'result',
+    results: 'results',
+    noResultsFound: 'No results found',
+
+    // Content badges & tooltips
+    badgeNew: 'New',
+    badgeUpdated: 'Updated',
+    slidesLabel: 'Slides:',
+    keyPoints: 'Key points:',
+    nMore: 'more...',
+    tipAssetCopy: 'Click the copy button to get the markdown reference, then paste it in your custom slide.',
+    tip: 'Tip:',
+    addToDay1: 'Add to Day 1',
+    previewModuleSlides: 'Preview module slides',
+    previewAllFull: 'Preview all full slides',
+    previewAllCondensed: 'Preview all condensed slides',
+
+    // AI clarification flow
+    aiClarifying: 'Let me ask a few questions to build the right workshop...',
+    answerQuestions: 'Answer these questions',
+    generateWithAnswers: 'Generate Workshop',
+    editPrompt: 'Edit prompt',
+
     // Accessibility
     dismissError: 'Dismiss error',
     closePanel: 'Close panel',
@@ -432,6 +456,30 @@ export const translations = {
     exitFullscreen: 'Quitter le plein écran',
     enterFullscreen: 'Plein écran',
     moreSlides: 'de plus',
+
+    // Library mode search
+    result: 'résultat',
+    results: 'résultats',
+    noResultsFound: 'Aucun résultat',
+
+    // Content badges & tooltips
+    badgeNew: 'Nouveau',
+    badgeUpdated: 'Mis à jour',
+    slidesLabel: 'Diapositives :',
+    keyPoints: 'Points clés :',
+    nMore: 'de plus...',
+    tipAssetCopy: 'Cliquez sur le bouton copier pour obtenir la référence markdown, puis collez-la dans votre diapositive personnalisée.',
+    tip: 'Astuce :',
+    addToDay1: 'Ajouter au Jour 1',
+    previewModuleSlides: 'Prévisualiser les diapositives du module',
+    previewAllFull: 'Prévisualiser toutes les diapositives complètes',
+    previewAllCondensed: 'Prévisualiser toutes les diapositives condensées',
+
+    // AI clarification flow
+    aiClarifying: 'Quelques questions pour créer le bon atelier...',
+    answerQuestions: 'Répondez à ces questions',
+    generateWithAnswers: 'Générer l\'atelier',
+    editPrompt: 'Modifier la description',
 
     // Accessibility
     dismissError: 'Fermer l\'erreur',

@@ -2025,6 +2025,8 @@ function App() {
   const [createMode, setCreateMode] = useState<'manual' | 'ai'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
   const [aiGenerating, setAiGenerating] = useState(false)
+  const [aiQuestions, setAiQuestions] = useState<string[]>([])
+  const [aiAnswers, setAiAnswers] = useState<Record<number, string>>({})
   const [newWorkshop, setNewWorkshop] = useState({
     name: '',
     country: '',
@@ -2122,15 +2124,32 @@ function App() {
 
     setAiGenerating(true)
     try {
+      // Build request body — include clarifications if answering questions
+      const body: any = { prompt: aiPrompt }
+      if (aiQuestions.length > 0) {
+        body.clarifications = aiQuestions.map((q, i) => ({
+          question: q,
+          answer: aiAnswers[i] || '',
+        }))
+      }
+
       const response = await fetch('/api/ai/generate-workshop', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: aiPrompt }),
+        body: JSON.stringify(body),
       })
 
       if (!response.ok) throw new Error('Failed to generate workshop')
 
       const data = await response.json()
+
+      // Phase 1: AI needs more info — show questions
+      if (data.needsClarification && data.questions) {
+        setAiQuestions(data.questions)
+        setAiAnswers({})
+        setAiGenerating(false)
+        return
+      }
 
       // Generate workshop ID
       const year = new Date().getFullYear()
@@ -2231,6 +2250,8 @@ function App() {
       setShowCreateWorkshop(false)
       setShowWorkshopSelector(false)
       setAiPrompt('')
+      setAiQuestions([])
+      setAiAnswers({})
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -3111,6 +3132,8 @@ function App() {
                 onClick={() => {
                   setShowWorkshopSelector(false)
                   setShowCreateWorkshop(false)
+                  setAiQuestions([])
+                  setAiAnswers({})
                 }}
                 aria-label="Close dialog"
                 className="text-gray-400 hover:text-gray-600"
@@ -3148,46 +3171,108 @@ function App() {
 
                 {createMode === 'ai' ? (
                   <div className="space-y-4">
-                    <p className="text-sm text-gray-600">
-                      {t('describeWorkshop', contentLanguage)}
-                    </p>
-                    <textarea
-                      value={aiPrompt}
-                      onChange={(e) => setAiPrompt(e.target.value)}
-                      rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder={t('aiPlaceholder', contentLanguage)}
-                      disabled={aiGenerating}
-                    />
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => {
-                          setShowCreateWorkshop(false)
-                          setAiPrompt('')
-                        }}
-                        className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                        disabled={aiGenerating}
-                      >
-                        {t('back', contentLanguage)}
-                      </button>
-                      <button
-                        onClick={handleAIGenerate}
-                        disabled={aiGenerating || !aiPrompt.trim()}
-                        className="flex-1 px-4 py-2 font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                      >
-                        {aiGenerating ? (
-                          <>
-                            <RefreshCw className="w-4 h-4 animate-spin" />
-                            {t('generating', contentLanguage)}
-                          </>
-                        ) : (
-                          <>
-                            <Sparkles className="w-4 h-4" />
-                            {t('generateWorkshop', contentLanguage)}
-                          </>
-                        )}
-                      </button>
-                    </div>
+                    {aiQuestions.length > 0 ? (
+                      /* ── Clarification Q&A phase ── */
+                      <>
+                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                          <p className="text-sm font-medium text-amber-800">
+                            {t('aiClarifying', contentLanguage)}
+                          </p>
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-3">
+                          <p className="text-xs text-gray-500 mb-1">{t('describeWorkshop', contentLanguage)}</p>
+                          <p className="text-sm text-gray-700 italic">{aiPrompt}</p>
+                        </div>
+                        <div className="space-y-3">
+                          <p className="text-sm font-medium text-gray-700">{t('answerQuestions', contentLanguage)}</p>
+                          {aiQuestions.map((question, idx) => (
+                            <div key={idx}>
+                              <label className="block text-sm text-gray-700 mb-1">{question}</label>
+                              <input
+                                type="text"
+                                value={aiAnswers[idx] || ''}
+                                onChange={(e) => setAiAnswers(prev => ({ ...prev, [idx]: e.target.value }))}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                                disabled={aiGenerating}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setAiQuestions([])
+                              setAiAnswers({})
+                            }}
+                            className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                            disabled={aiGenerating}
+                          >
+                            {t('editPrompt', contentLanguage)}
+                          </button>
+                          <button
+                            onClick={handleAIGenerate}
+                            disabled={aiGenerating || aiQuestions.some((_, idx) => !aiAnswers[idx]?.trim())}
+                            className="flex-1 px-4 py-2 font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                          >
+                            {aiGenerating ? (
+                              <>
+                                <RefreshCw className="w-4 h-4 animate-spin" />
+                                {t('generating', contentLanguage)}
+                              </>
+                            ) : (
+                              <>
+                                <Sparkles className="w-4 h-4" />
+                                {t('generateWithAnswers', contentLanguage)}
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      /* ── Initial prompt phase ── */
+                      <>
+                        <p className="text-sm text-gray-600">
+                          {t('describeWorkshop', contentLanguage)}
+                        </p>
+                        <textarea
+                          value={aiPrompt}
+                          onChange={(e) => setAiPrompt(e.target.value)}
+                          rows={4}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                          placeholder={t('aiPlaceholder', contentLanguage)}
+                          disabled={aiGenerating}
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setShowCreateWorkshop(false)
+                              setAiPrompt('')
+                            }}
+                            className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                            disabled={aiGenerating}
+                          >
+                            {t('back', contentLanguage)}
+                          </button>
+                          <button
+                            onClick={handleAIGenerate}
+                            disabled={aiGenerating || !aiPrompt.trim()}
+                            className="flex-1 px-4 py-2 font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                          >
+                            {aiGenerating ? (
+                              <>
+                                <RefreshCw className="w-4 h-4 animate-spin" />
+                                {t('generating', contentLanguage)}
+                              </>
+                            ) : (
+                              <>
+                                <Sparkles className="w-4 h-4" />
+                                {t('generateWorkshop', contentLanguage)}
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div className="space-y-4">

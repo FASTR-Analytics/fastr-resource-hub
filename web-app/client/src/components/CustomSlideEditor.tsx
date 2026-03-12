@@ -375,7 +375,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                     value={sessionName}
                     onChange={(e) => setSessionName(e.target.value)}
                     placeholder="e.g., Data Quality Activity, Group Discussion..."
-                    className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-fastr-secondary"
+                    className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                   />
                 </div>
                 <div>
@@ -460,7 +460,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                           value={slide.title}
                           onChange={(e) => updateSlideTitle(slideIndex, e.target.value)}
                           placeholder="Slide title"
-                          className="w-full px-3 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-fastr-secondary"
+                          className="w-full px-3 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                         />
 
                         <div className="space-y-2">
@@ -474,7 +474,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                                   updateBullet(slideIndex, bulletIndex, e.target.value)
                                 }
                                 placeholder={`Point ${bulletIndex + 1}`}
-                                className="flex-1 px-3 py-1.5 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-fastr-secondary text-sm"
+                                className="flex-1 px-3 py-1.5 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary text-sm"
                               />
                               {slide.bullets.length > 1 && (
                                 <button
@@ -520,7 +520,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                             setSectionData((prev) => ({ ...prev, title: e.target.value }))
                           }
                           placeholder="e.g., Data Quality Assessment"
-                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-fastr-secondary text-lg"
+                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary text-lg"
                         />
                       </div>
                       <div>
@@ -534,7 +534,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                             setSectionData((prev) => ({ ...prev, subtitle: e.target.value }))
                           }
                           placeholder="e.g., Day 2 - Morning Session"
-                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-fastr-secondary"
+                          className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                         />
                       </div>
                       <div className="pt-2 text-sm text-gray-500">
@@ -669,13 +669,15 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                 {/* Assets grid */}
                 {assetsLoading ? (
                   <div className="text-center py-8">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-gray-500" />
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-fastr-secondary" />
                   </div>
                 ) : assets.length === 0 ? (
-                  <div className="text-center text-gray-500 py-8">
-                    <Image className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                  <div className="text-center text-gray-400 py-12">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 mb-3">
+                      <Image className="w-6 h-6 text-gray-500" />
+                    </div>
                     <p className="text-sm">No images uploaded yet</p>
-                    <p className="text-xs text-gray-600 mt-1">Upload images to insert them into your slides</p>
+                    <p className="text-xs text-gray-500 mt-1">Upload images to insert them into your slides</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-3 gap-3">

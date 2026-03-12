@@ -724,7 +724,24 @@ CRITICAL RULES:
 - After using tools, briefly confirm what you added
 - If the user asks a question without wanting changes, just answer without using tools
 - ALWAYS actually execute the changes - don't just describe what you would do
-- If you need to add a break in the middle of content, add the module ONCE, then add a break as a separate session`
+- If you need to add a break in the middle of content, add the module ONCE, then add a break as a separate session
+
+# STRUCTURAL RULES
+- Day title slide is ALWAYS first in each day — never move or add sessions before it
+- End of day slide is ALWAYS last — never add sessions after it
+- Recap of previous day should follow day title (Day 2+)
+- Breaks go BETWEEN content sessions, never at the start or end of a day
+- No consecutive breaks (except a tea break immediately before lunch is ok)
+- Each full day should have a lunch break
+- Module 0 (Introduction) belongs on Day 1
+- Activity modules (9a-9h) should follow their paired theory module
+
+# WHEN TO ASK FOR CLARIFICATION
+Before making large changes, ask when:
+- User says "add content" but doesn't specify which module → ask which topic area
+- User says "reorganize" without specifics → ask what the goal is
+- User wants to add many modules but the day is already full → warn and ask how to handle
+- Any request that would significantly change the workshop structure → confirm first`
 
     let currentMessages = messages
     let finalTextContent = ''
@@ -986,7 +1003,7 @@ ONLY output valid JSON, nothing else.`
 // POST /api/ai/generate-workshop - Generate complete workshop config from natural language
 router.post('/generate-workshop', async (req, res) => {
   try {
-    const { prompt } = req.body
+    const { prompt, clarifications } = req.body
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' })
@@ -997,6 +1014,68 @@ router.post('/generate-workshop', async (req, res) => {
     const moduleList = Object.entries(getModuleDetailsDict())
       .map(([num, m]) => `  Module ${num}: ${m.name} - ${m.description} (${m.duration})`)
       .join('\n')
+
+    // ── Phase 1: Check if clarification is needed ──────────────────────────
+    if (!clarifications) {
+      const clarifyResponse = await client.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1024,
+        system: `You evaluate workshop descriptions to determine if there is enough information to build a good FASTR workshop.
+
+Available modules:
+${moduleList}
+
+You MUST have clarity on these key items:
+1. Number of days (e.g., "3-day workshop")
+2. Workshop focus or which modules to include (e.g., "focus on data quality" or "full FASTR training")
+3. Audience level (e.g., "first time", "refresher", "advanced")
+
+Nice to have (do NOT ask if missing, just use defaults):
+- Country, dates, city
+- Full vs condensed preference
+- Start/end times
+
+RULES:
+- If ALL 3 key items are clear from the description, return exactly: {"ready": true}
+- If any key item is unclear, return a JSON array of 2-4 short, specific questions to ask. Each question should be a plain string.
+- Do NOT ask about things already stated in the prompt
+- Keep questions concise and practical
+- Return ONLY valid JSON, no explanation`,
+        messages: [{ role: 'user', content: prompt }],
+      })
+
+      let clarifyText = ''
+      for (const block of clarifyResponse.content) {
+        if (block.type === 'text') clarifyText += block.text
+      }
+
+      let clarifyJson = clarifyText.trim()
+      if (clarifyJson.startsWith('```')) {
+        clarifyJson = clarifyJson.replace(/^```json?\n?/, '').replace(/\n?```$/, '')
+      }
+
+      try {
+        const parsed = JSON.parse(clarifyJson)
+        if (parsed.ready !== true && Array.isArray(parsed)) {
+          // Needs clarification — return questions to frontend
+          return res.json({ needsClarification: true, questions: parsed })
+        }
+        // If parsed is {"ready": true} or any non-array, fall through to generation
+      } catch {
+        // If parsing fails, just proceed with generation
+        console.log('[AI Clarify] Could not parse clarification response, proceeding with generation')
+      }
+    }
+
+    // ── Phase 2: Generate workshop ─────────────────────────────────────────
+    // Build enriched prompt if clarifications were provided
+    let enrichedPrompt = prompt
+    if (clarifications && Array.isArray(clarifications)) {
+      const qaBlock = clarifications
+        .map((c: { question: string; answer: string }) => `Q: ${c.question}\nA: ${c.answer}`)
+        .join('\n\n')
+      enrichedPrompt = `${prompt}\n\nAdditional details:\n${qaBlock}`
+    }
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
@@ -1091,7 +1170,7 @@ Return ONLY valid JSON, no explanation.`,
       messages: [
         {
           role: 'user',
-          content: prompt,
+          content: enrichedPrompt,
         },
       ],
     })
@@ -1183,6 +1262,53 @@ Return ONLY valid JSON, no explanation.`,
             duration: workshopConfig.lunch_duration || 60
           })
         }
+      }
+
+      // Pass 6: Ensure no sessions appear after a day_end type
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        const sessions = workshopConfig.schedule[dayKey]
+        const dayEndIndex = sessions.findIndex((s: any) => s.type === 'day_end')
+        if (dayEndIndex >= 0 && dayEndIndex < sessions.length - 1) {
+          const removed = sessions.splice(dayEndIndex + 1)
+          console.log(`[AI Post-process] Removed ${removed.length} session(s) after day_end in ${dayKey}`)
+        }
+      }
+
+      // Pass 7: Ensure no breaks at the very start of a day (before first content session)
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        const sessions = workshopConfig.schedule[dayKey]
+        // Find first non-structural session (skip day_title, section, day_recap)
+        while (sessions.length > 0) {
+          const first = sessions[0]
+          if (first.type === 'day_title' || first.type === 'section' || first.type === 'day_recap') break
+          if (first.type === 'break') {
+            console.log(`[AI Post-process] Removing break at start of ${dayKey}: ${first.session}`)
+            sessions.shift()
+          } else {
+            break
+          }
+        }
+      }
+
+      // Pass 8: Remove consecutive non-lunch breaks (tea break after tea break)
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        const sessions = workshopConfig.schedule[dayKey]
+        const isLunchBreak = (s: any) => s?.type === 'break' && s?.session?.toLowerCase().includes('lunch')
+        const isNonLunchBreak = (s: any) => s?.type === 'break' && !s?.session?.toLowerCase().includes('lunch')
+        const cleaned: any[] = []
+        for (const session of sessions) {
+          const prev = cleaned[cleaned.length - 1]
+          // Allow tea break immediately before lunch, but not two tea breaks in a row
+          if (isNonLunchBreak(session) && prev && isNonLunchBreak(prev)) {
+            console.log(`[AI Post-process] Removing consecutive non-lunch break: ${session.session}`)
+            continue
+          }
+          cleaned.push(session)
+        }
+        workshopConfig.schedule[dayKey] = cleaned
       }
 
       if (removedCount > 0) {

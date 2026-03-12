@@ -120,7 +120,7 @@ export function DeckPreview() {
             onClick={() => goToSlide(currentSlide - 1)}
             disabled={currentSlide === 0}
             aria-label={t('previousSlide', contentLanguage)}
-            className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -131,7 +131,7 @@ export function DeckPreview() {
             onClick={() => goToSlide(currentSlide + 1)}
             disabled={currentSlide >= totalSlides - 1}
             aria-label={t('nextSlide', contentLanguage)}
-            className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

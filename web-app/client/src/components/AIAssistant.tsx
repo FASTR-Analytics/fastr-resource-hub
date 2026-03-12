@@ -29,10 +29,12 @@ export function AIAssistant() {
 
   if (!currentWorkshopId) {
     return (
-      <div className="h-full flex items-center justify-center p-4 text-gray-500 text-center">
+      <div className="h-full flex items-center justify-center p-4 text-center">
         <div>
-          <Sparkles className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-          <p className="text-sm">Select a workshop to use the AI assistant</p>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 mb-3">
+            <Sparkles className="w-7 h-7 text-gray-300" />
+          </div>
+          <p className="text-sm text-gray-400">Select a workshop to use the AI assistant</p>
         </div>
       </div>
     )
@@ -43,10 +45,12 @@ export function AIAssistant() {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-3 space-y-3">
         {aiMessages.length === 0 ? (
-          <div className="text-center text-gray-400 text-sm py-8">
-            <Sparkles className="w-6 h-6 mx-auto mb-2" />
-            <p>Ask me to help with your workshop:</p>
-            <ul className="mt-2 text-xs space-y-1">
+          <div className="text-center text-gray-400 text-sm py-12 px-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-fastr-light mb-3">
+              <Sparkles className="w-6 h-6 text-fastr-secondary" />
+            </div>
+            <p className="font-medium text-gray-500">Ask me to help with your workshop:</p>
+            <ul className="mt-3 text-xs space-y-1.5 text-gray-400">
               <li>"Add Module 4 to Day 2"</li>
               <li>"Move the tea break after Data Quality"</li>
               <li>"Generate objectives for this workshop"</li>
@@ -59,10 +63,10 @@ export function AIAssistant() {
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${
+                className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-sm ${
                   msg.role === 'user'
-                    ? 'bg-fastr-primary text-white'
-                    : 'bg-gray-100 text-gray-800'
+                    ? 'bg-gradient-to-br from-fastr-primary to-fastr-primary-light text-white shadow-sm'
+                    : 'bg-white text-gray-800 border border-gray-200 shadow-sm'
                 }`}
               >
                 <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -85,11 +89,11 @@ export function AIAssistant() {
 
         {aiLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-3 py-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 shadow-sm">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2 h-2 bg-fastr-secondary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 bg-fastr-secondary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 bg-fastr-secondary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
             </div>
           </div>
@@ -126,7 +130,7 @@ export function AIAssistant() {
             type="submit"
             disabled={!input.trim() || aiLoading}
             aria-label="Send message"
-            className="px-3 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
           >
             <Send className="w-4 h-4" />
           </button>

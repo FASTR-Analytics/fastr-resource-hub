@@ -534,10 +534,10 @@ We resume at **[time]**`
       <div className="flex border-b border-gray-200">
         <button
           onClick={() => setActiveTab('content')}
-          className={`flex-1 px-3 py-2 text-sm font-medium flex items-center justify-center gap-1.5 transition-colors ${
+          className={`flex-1 px-3 py-2.5 text-sm flex items-center justify-center gap-1.5 transition-colors ${
             activeTab === 'content'
-              ? 'text-fastr-primary border-b-2 border-fastr-primary bg-fastr-primary/5'
-              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              ? 'text-fastr-primary font-semibold border-b-2 border-fastr-primary bg-fastr-primary/5'
+              : 'text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50'
           }`}
         >
           <BookOpen className="w-4 h-4" />
@@ -545,10 +545,10 @@ We resume at **[time]**`
         </button>
         <button
           onClick={() => setActiveTab('assets')}
-          className={`flex-1 px-3 py-2 text-sm font-medium flex items-center justify-center gap-1.5 transition-colors ${
+          className={`flex-1 px-3 py-2.5 text-sm flex items-center justify-center gap-1.5 transition-colors ${
             activeTab === 'assets'
-              ? 'text-fastr-primary border-b-2 border-fastr-primary bg-fastr-primary/5'
-              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              ? 'text-fastr-primary font-semibold border-b-2 border-fastr-primary bg-fastr-primary/5'
+              : 'text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50'
           }`}
         >
           <Image className="w-4 h-4" />
@@ -558,7 +558,7 @@ We resume at **[time]**`
           onClick={handleRebuildContent}
           disabled={isRebuilding}
           title="Rebuild content from methodology files"
-          className="px-2 py-2 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 transition-colors disabled:opacity-50"
+          className="px-2 py-2 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
         </button>
@@ -613,7 +613,7 @@ We resume at **[time]**`
               {/* Assets grid */}
               {assetsLoading ? (
                 <div className="text-center py-8">
-                  <Loader2 className="w-6 h-6 animate-spin mx-auto text-gray-400" />
+                  <Loader2 className="w-6 h-6 animate-spin mx-auto text-fastr-secondary" />
                 </div>
               ) : assets.length === 0 ? (
                 <div className="text-center text-gray-400 py-8">
@@ -675,7 +675,7 @@ We resume at **[time]**`
               {assets.length > 0 && (
                 <div className="mt-4 p-2 bg-blue-50 rounded-lg">
                   <p className="text-xs text-blue-700">
-                    <strong>Tip:</strong> Click the copy button to get the markdown reference, then paste it in your custom slide.
+                    <strong>{t('tip', contentLanguage)}</strong> {t('tipAssetCopy', contentLanguage)}
                   </p>
                 </div>
               )}
@@ -691,7 +691,7 @@ We resume at **[time]**`
           <div className="h-full flex items-center justify-center text-gray-400 text-sm">
             <div className="text-center">
               <Loader2 className="w-8 h-8 mx-auto mb-2 animate-spin" />
-              <p>Loading content...</p>
+              <p>{t('loadingContent', contentLanguage)}</p>
             </div>
           </div>
         ) : (
@@ -755,7 +755,7 @@ We resume at **[time]**`
                           <button
                             onClick={() => addTemplate(template, category)}
                             className="p-1 text-amber-600 hover:bg-amber-100 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Add to Day 1"
+                            title={t('addToDay1', contentLanguage)}
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -785,9 +785,12 @@ We resume at **[time]**`
                 ) : (
                   <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
                 )}
+                <span className="inline-flex items-center justify-center w-7 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold flex-shrink-0">
+                  M{module.number}
+                </span>
                 <div className="flex-1 min-w-0">
                   <div className="font-medium text-sm text-gray-700 truncate">
-                    M{module.number}: {module.name}
+                    {module.name}
                   </div>
                   <div className="text-xs text-gray-400 flex items-center gap-2">
                     <span>{module.topics.length} {t('xTopics', contentLanguage)}</span>
@@ -802,7 +805,7 @@ We resume at **[time]**`
               <button
                 onClick={() => showModulePreview(module, 'full')}
                 className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-100 rounded opacity-0 group-hover:opacity-100 transition-all"
-                title="Preview module slides"
+                title={t('previewModuleSlides', contentLanguage)}
               >
                 <Eye className="w-4 h-4" />
               </button>
@@ -814,12 +817,12 @@ We resume at **[time]**`
                 {/* Full slides section */}
                 {(module as any).fullTopics?.length > 0 && (
                   <>
-                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-gray-500 bg-gray-100 border-b border-gray-200 flex items-center justify-between group">
-                      <span>Full ({(module as any).fullSlides} slides)</span>
+                    <div className="px-3 py-1.5 pl-8 text-[10px] uppercase tracking-wide font-semibold text-gray-400 bg-gray-100 border-b border-gray-200 flex items-center justify-between group">
+                      <span>{t('full', contentLanguage)} ({(module as any).fullSlides} {t('xSlides', contentLanguage)})</span>
                       <button
                         onClick={() => showModulePreview(module, 'full')}
                         className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-all"
-                        title="Preview all full slides"
+                        title={t('previewAllFull', contentLanguage)}
                       >
                         <Eye className="w-3.5 h-3.5" />
                       </button>
@@ -827,7 +830,7 @@ We resume at **[time]**`
                     {(module as any).fullTopics.map((topic: any) => (
                       <div
                         key={topic.id}
-                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-gray-100 transition-colors group"
+                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-gray-100 border-l-2 border-l-transparent hover:border-l-fastr-secondary transition-all group"
                         onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
                         onMouseLeave={handleMouseLeave}
                       >
@@ -836,10 +839,10 @@ We resume at **[time]**`
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
                             {topic.title}
                             {topic.status === 'new' && (
-                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">New</span>
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">{t('badgeNew', contentLanguage)}</span>
                             )}
                             {topic.status === 'updated' && (
-                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">Updated</span>
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">{t('badgeUpdated', contentLanguage)}</span>
                             )}
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
@@ -850,7 +853,7 @@ We resume at **[time]**`
                         <button
                           onClick={() => addTopic(topic, module)}
                           className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                          title="Add to Day 1"
+                          title={t('addToDay1', contentLanguage)}
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -861,12 +864,12 @@ We resume at **[time]**`
                 {/* Condensed slides section */}
                 {(module as any).condensedTopics?.length > 0 && (
                   <>
-                    <div className="px-3 py-1.5 pl-8 text-xs font-medium text-amber-700 bg-amber-50 border-b border-amber-200 flex items-center justify-between group">
-                      <span>Condensed ({(module as any).condensedSlides} slides)</span>
+                    <div className="px-3 py-1.5 pl-8 text-[10px] uppercase tracking-wide font-semibold text-amber-600 bg-amber-50 border-b border-amber-200 flex items-center justify-between group">
+                      <span>{t('condensed', contentLanguage)} ({(module as any).condensedSlides} {t('xSlides', contentLanguage)})</span>
                       <button
                         onClick={() => showModulePreview(module, 'condensed')}
                         className="p-1 text-amber-600 hover:text-amber-800 hover:bg-amber-100 rounded opacity-0 group-hover:opacity-100 transition-all"
-                        title="Preview all condensed slides"
+                        title={t('previewAllCondensed', contentLanguage)}
                       >
                         <Eye className="w-3.5 h-3.5" />
                       </button>
@@ -883,10 +886,10 @@ We resume at **[time]**`
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
                             {topic.title}
                             {topic.status === 'new' && (
-                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">New</span>
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-emerald-100 text-emerald-700 rounded-full">{t('badgeNew', contentLanguage)}</span>
                             )}
                             {topic.status === 'updated' && (
-                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">Updated</span>
+                              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium bg-blue-100 text-blue-700 rounded-full">{t('badgeUpdated', contentLanguage)}</span>
                             )}
                           </div>
                           <div className="text-xs text-gray-400 flex items-center gap-1">
@@ -897,7 +900,7 @@ We resume at **[time]**`
                         <button
                           onClick={() => addTopic(topic, module)}
                           className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                          title="Add to Day 1"
+                          title={t('addToDay1', contentLanguage)}
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -932,7 +935,7 @@ We resume at **[time]**`
                     <button
                       onClick={() => addTopic(topic, module)}
                       className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                      title="Add to Day 1"
+                      title={t('addToDay1', contentLanguage)}
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -974,14 +977,14 @@ We resume at **[time]**`
           {/* Slide titles */}
           {preview.topic.slideTitles.length > 0 && (
             <div className="border-t border-gray-100 pt-2 mt-2">
-              <div className="text-xs font-medium text-gray-600 mb-1">Slides:</div>
+              <div className="text-xs font-medium text-gray-600 mb-1">{t('slidesLabel', contentLanguage)}</div>
               <ul className="text-xs text-gray-500 space-y-0.5">
                 {preview.topic.slideTitles.slice(0, 5).map((title, i) => (
                   <li key={i} className="truncate">• {title}</li>
                 ))}
                 {preview.topic.slideTitles.length > 5 && (
                   <li className="text-gray-400">
-                    +{preview.topic.slideTitles.length - 5} more...
+                    +{preview.topic.slideTitles.length - 5} {t('nMore', contentLanguage)}
                   </li>
                 )}
               </ul>
@@ -991,7 +994,7 @@ We resume at **[time]**`
           {/* Key points */}
           {preview.topic.preview.length > 0 && (
             <div className="border-t border-gray-100 pt-2 mt-2">
-              <div className="text-xs font-medium text-gray-600 mb-1">Key points:</div>
+              <div className="text-xs font-medium text-gray-600 mb-1">{t('keyPoints', contentLanguage)}</div>
               <ul className="text-xs text-gray-500 space-y-0.5">
                 {preview.topic.preview.slice(0, 3).map((point, i) => (
                   <li key={i} className="truncate">• {point}</li>
@@ -1038,7 +1041,7 @@ We resume at **[time]**`
           ) : (
             <div className="p-4 text-center text-gray-400 text-sm">
               <Loader2 className="w-5 h-5 animate-spin mx-auto mb-1" />
-              Loading preview...
+              {t('loadingPreview', contentLanguage)}
             </div>
           )}
         </div>
@@ -1054,7 +1057,7 @@ We resume at **[time]**`
                 <div>
                   <h3 className="font-semibold">M{modulePreview.module.number}: {modulePreview.module.name}</h3>
                   <p className="text-sm text-gray-500">
-                    {modulePreview.slideCount} slides
+                    {modulePreview.slideCount} {t('xSlides', contentLanguage)}
                   </p>
                 </div>
                 {/* Full/Condensed toggle */}
@@ -1068,7 +1071,7 @@ We resume at **[time]**`
                           : 'bg-white text-gray-600 hover:bg-gray-50'
                       }`}
                     >
-                      Full
+                      {t('full', contentLanguage)}
                     </button>
                     <button
                       onClick={() => switchPreviewMode('condensed')}
@@ -1078,7 +1081,7 @@ We resume at **[time]**`
                           : 'bg-white text-gray-600 hover:bg-gray-50'
                       }`}
                     >
-                      Condensed
+                      {t('condensed', contentLanguage)}
                     </button>
                   </div>
                 )}
@@ -1097,7 +1100,7 @@ We resume at **[time]**`
               {modulePreview.loading ? (
                 <div className="text-center text-white">
                   <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
-                  <p>Loading slides...</p>
+                  <p>{t('loadingSlides', contentLanguage)}</p>
                 </div>
               ) : modulePreview.slides.length > 0 ? (
                 <iframe
@@ -1119,7 +1122,7 @@ We resume at **[time]**`
                   title="Slide Preview"
                 />
               ) : (
-                <p className="text-gray-400">No slides available</p>
+                <p className="text-gray-400">{t('noSlidesAvailable', contentLanguage)}</p>
               )}
             </div>
 
@@ -1131,14 +1134,14 @@ We resume at **[time]**`
                 className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 rounded disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-4 h-4" />
-                Previous
+                {t('previous', contentLanguage)}
               </button>
               <div className="text-sm text-gray-600">
                 {modulePreview.loading ? (
-                  'Loading...'
+                  t('loading', contentLanguage)
                 ) : (
                   <span>
-                    Slide <strong>{modulePreview.currentSlide + 1}</strong> of <strong>{modulePreview.slideCount}</strong>
+                    {t('slideXOfY', contentLanguage)} <strong>{modulePreview.currentSlide + 1}</strong> {t('of', contentLanguage)} <strong>{modulePreview.slideCount}</strong>
                   </span>
                 )}
               </div>
@@ -1147,7 +1150,7 @@ We resume at **[time]**`
                 disabled={modulePreview.loading || modulePreview.currentSlide >= modulePreview.slideCount - 1}
                 className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 rounded disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Next
+                {t('next', contentLanguage)}
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -1161,7 +1164,7 @@ We resume at **[time]**`
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
             <div className="flex items-center justify-between px-4 py-3 border-b">
-              <h3 className="font-semibold">Add Slide</h3>
+              <h3 className="font-semibold">{t('addSlide', contentLanguage)}</h3>
               <button
                 onClick={() => setAddToSessionDialog(null)}
                 aria-label="Close dialog"
@@ -1175,7 +1178,7 @@ We resume at **[time]**`
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg mb-4">
                 <div className="text-sm font-medium text-blue-800">{addToSessionDialog.topic.title}</div>
                 <div className="text-xs text-blue-600 mt-1">
-                  From: M{addToSessionDialog.module.number} - {addToSessionDialog.module.name}
+                  {t('from', contentLanguage)}: M{addToSessionDialog.module.number} - {addToSessionDialog.module.name}
                 </div>
               </div>
 
@@ -1190,8 +1193,8 @@ We resume at **[time]**`
                     <Plus className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
-                    <div className="font-medium text-gray-800">Create New Session</div>
-                    <div className="text-sm text-gray-500">Add as a separate session on Day 1</div>
+                    <div className="font-medium text-gray-800">{t('createNewSession', contentLanguage)}</div>
+                    <div className="text-sm text-gray-500">{t('addAsSeparateSession', contentLanguage)}</div>
                   </div>
                 </button>
 
@@ -1199,7 +1202,7 @@ We resume at **[time]**`
                 {getExistingModuleSessions().length > 0 && (
                   <>
                     <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-1 pt-2">
-                      Or add to existing session
+                      {t('orAddToExisting', contentLanguage)}
                     </div>
                     <div className="max-h-48 overflow-y-auto space-y-1">
                       {getExistingModuleSessions().map(({ dayNum, sessionIdx, session }) => (

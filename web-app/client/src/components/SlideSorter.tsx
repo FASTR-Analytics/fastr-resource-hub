@@ -116,7 +116,7 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
     >
       {/* Session header with drag handle */}
       <div
-        className={`flex items-center gap-2 px-3 py-2 rounded-t-lg ${bgColor} text-white`}
+        className={`flex items-center gap-2 px-4 py-2.5 rounded-t-lg shadow-sm ${bgColor} text-white`}
       >
         {isLocked ? (
           <Lock className="w-4 h-4 opacity-70" />
@@ -159,8 +159,8 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
 
       {/* Slides in this session */}
       <div
-        className={`flex flex-wrap gap-2 p-3 bg-gray-800/50 rounded-b-lg border-2 ${
-          isDragging ? 'border-fastr-primary shadow-2xl' : 'border-gray-700'
+        className={`flex flex-wrap gap-3 p-4 bg-gray-800/50 rounded-b-lg border ${
+          isDragging ? 'border-fastr-secondary ring-2 ring-fastr-secondary/30 shadow-2xl' : 'border-gray-700/60'
         }`}
       >
         {session.slides.map((slide, idx) => (
@@ -170,7 +170,7 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
             onClick={() => onSlideClick(slide)}
           >
             <div
-              className="rounded overflow-hidden shadow-lg hover:ring-2 hover:ring-fastr-secondary transition-all"
+              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:ring-2 hover:ring-fastr-secondary transition-all"
               style={{ width: slideWidth, height: slideHeight }}
             >
               {/* Slide number badge */}
@@ -304,7 +304,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
-      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-gray-800 rounded-xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto ring-1 ring-white/10" onClick={(e) => e.stopPropagation()}>
         <h3 className="text-lg font-semibold text-white mb-4">Edit Session</h3>
 
         <div className="space-y-4">
@@ -314,7 +314,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               type="text"
               value={sessionName}
               onChange={(e) => setSessionName(e.target.value)}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
             />
           </div>
 
@@ -325,7 +325,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               value={speaker}
               onChange={(e) => setSpeaker(e.target.value)}
               placeholder="e.g., John Smith, MoH Team"
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-500"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
             />
           </div>
 
@@ -336,7 +336,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               value={duration}
               onChange={(e) => setDuration(parseInt(e.target.value) || 0)}
               min={0}
-              className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
             />
           </div>
 
@@ -428,7 +428,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               onSave({ session: sessionName, speaker, duration, slides: extraSlides, excludedSlides })
               onClose()
             }}
-            className="px-4 py-2 bg-fastr-primary text-white rounded hover:bg-fastr-primary/80 transition-colors"
+            className="px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/80 transition-colors duration-200"
           >
             Save
           </button>
@@ -716,7 +716,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
 
           <button
             onClick={buildSlides}
-            className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 text-gray-300 hover:text-white rounded-lg"
+            className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 text-gray-300 hover:text-white hover:bg-gray-600 rounded-lg transition-colors duration-200"
           >
             <RefreshCw className="w-4 h-4" />
             Rebuild
@@ -727,7 +727,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
               setEditorDay(dayFilter === 'all' ? 1 : dayFilter)
               setShowSlideEditor(true)
             }}
-            className="flex items-center gap-2 px-3 py-1.5 bg-fastr-secondary text-white rounded-lg hover:bg-fastr-secondary/90"
+            className="flex items-center gap-2 px-3 py-1.5 bg-fastr-secondary text-white rounded-lg hover:bg-fastr-secondary/90 transition-colors duration-200"
           >
             <Plus className="w-4 h-4" />
             New Slide
