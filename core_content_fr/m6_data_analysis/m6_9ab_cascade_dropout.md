@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Calculer et interpréter l'abandon
 
 **Formule de l'abandon :**

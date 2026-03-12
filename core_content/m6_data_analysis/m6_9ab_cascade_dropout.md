@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Calculating and interpreting dropout
 
 **Dropout formula:**

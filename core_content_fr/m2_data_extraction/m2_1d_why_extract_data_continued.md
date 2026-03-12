@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Combien de données ?
 
 **Analyse FASTR initiale**

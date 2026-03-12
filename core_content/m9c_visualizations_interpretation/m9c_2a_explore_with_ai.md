@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Explore with the AI Assistant
 
 **Follow these three steps. You can type or copy the prompts exactly as shown.**
@@ -24,8 +26,12 @@ Pick one and try it. Notice how changing one word changes the output.
 
 **3. Ask a follow-up**
 
-After getting a result, try asking: *"Show this as a bar chart"* | *"Which region had the biggest change?"* | *"Add Penta1 (first dose of pentavalent vaccine) to the comparison"* | *"Explain what this means"*
+After getting a result, try:
+- *"Show this as a bar chart"*
+- *"Which region had the biggest change?"*
+- *"Add Penta1 to the comparison"*
+- *"Explain what this means"*
 
-You don't need to start over — just keep the conversation going. Save any visualizations you like to your own folder.
+Keep the conversation going — no need to start over. Save visualizations you like to your folder.
 
 *We are in the Visualizations tab*

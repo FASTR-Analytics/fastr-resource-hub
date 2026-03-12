@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## L'IA est un accélérateur, pas un décideur
 
 <div class="columns-image-right">

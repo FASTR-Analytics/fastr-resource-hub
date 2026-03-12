@@ -4,6 +4,8 @@ theme: fastr
 paginate: true
 ---
 
+<!-- _class: compact -->
+
 ## Service utilization and disruptions: comparison to DHIS2
 
 Service utilization trends are commonly produced in DHIS2

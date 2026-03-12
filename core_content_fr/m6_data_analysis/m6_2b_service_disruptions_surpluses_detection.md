@@ -10,13 +10,13 @@ paginate: true
 <div class="output-layout">
 <div class="output-text">
 
-L'analyse se déroule en quatre étapes. Premièrement, nous **utilisons les données passées pour établir des attentes** en examinant plusieurs années de données historiques pour comprendre le schéma typique de chaque mois, en tenant compte des changements saisonniers réguliers.
+L'analyse se déroule en quatre étapes. Premièrement, nous **utilisons les données passées pour établir des attentes** en examinant plusieurs années de données historiques pour comprendre les schémas mensuels typiques et les variations saisonnières.
 
-Deuxièmement, nous **repérons les changements inhabituels** en comparant les volumes de services actuels à ces attentes. Les volumes nettement supérieurs ou inférieurs aux attentes sont signalés comme des changements inhabituels nécessitant une investigation.
+Deuxièmement, nous **repérons les changements inhabituels** en comparant les volumes de services actuels aux attentes. Les écarts importants sont signalés pour investigation.
 
-Troisièmement, nous **gérons les perturbations passées** en ajustant les données historiques pour supprimer les changements importants et inattendus antérieurs. Cela garantit que les événements ponctuels ne faussent pas notre compréhension de ce qui constitue une prestation de services "normale".
+Troisièmement, nous **gérons les perturbations passées** en ajustant les données historiques pour supprimer les changements importants et inattendus. Cela empêche les événements ponctuels de fausser notre référence de prestation « normale ».
 
-Quatrièmement, nous **détectons les perturbations dans le temps** en examinant les tendances pour identifier les changements clairs dans l'utilisation des services de santé sur plusieurs mois, en distinguant les fluctuations temporaires des changements durables.
+Quatrièmement, nous **détectons les perturbations dans le temps** en examinant les tendances sur plusieurs mois pour distinguer les fluctuations temporaires des changements durables.
 
 </div>
 <div class="output-viz">

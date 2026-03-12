@@ -33,4 +33,4 @@ Le cadre des trois sphères d'influence aide à orienter l'attention vers les ac
 </div>
 </div>
 
-*Lorsque vous planifiez des actions à partir de vos résultats FASTR, concentrez-vous d'abord sur ce que vous pouvez contrôler, puis sur ce que vous pouvez influencer.*
+*Concentrez-vous d'abord sur ce que vous pouvez contrôler, puis sur ce que vous pouvez influencer.*
