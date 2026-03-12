@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
+import { t } from '../i18n/translations'
 import { RefreshCw, ChevronLeft, ChevronRight, Maximize2, Minimize2 } from 'lucide-react'
 
 export function DeckPreview() {
-  const { currentWorkshopId } = useWorkshopStore()
+  const { currentWorkshopId, contentLanguage } = useWorkshopStore()
   const [html, setHtml] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -32,7 +33,7 @@ export function DeckPreview() {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to build preview')
+        throw new Error(t('failedToBuildPreview', contentLanguage))
       }
 
       const data = await response.json()
@@ -72,7 +73,7 @@ export function DeckPreview() {
       <div className="h-full flex items-center justify-center bg-gray-900">
         <div className="text-center text-white">
           <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-3" />
-          <p>Building preview...</p>
+          <p>{t('buildingPreview', contentLanguage)}</p>
         </div>
       </div>
     )
@@ -82,12 +83,12 @@ export function DeckPreview() {
     return (
       <div className="h-full flex items-center justify-center bg-gray-900">
         <div className="text-center text-white">
-          <p className="text-red-400 mb-4">Error: {error}</p>
+          <p className="text-red-400 mb-4">{t('error', contentLanguage)}: {error}</p>
           <button
             onClick={buildPreview}
             className="px-4 py-2 bg-fastr-primary rounded-md hover:bg-fastr-primary/80"
           >
-            Try Again
+            {t('tryAgain', contentLanguage)}
           </button>
         </div>
       </div>
@@ -98,12 +99,12 @@ export function DeckPreview() {
     return (
       <div className="h-full flex items-center justify-center bg-gray-900">
         <div className="text-center text-white">
-          <p className="mb-4">No preview available</p>
+          <p className="mb-4">{t('noPreviewAvailable', contentLanguage)}</p>
           <button
             onClick={buildPreview}
             className="px-4 py-2 bg-fastr-primary rounded-md hover:bg-fastr-primary/80"
           >
-            Build Preview
+            {t('buildPreview', contentLanguage)}
           </button>
         </div>
       </div>
@@ -118,6 +119,7 @@ export function DeckPreview() {
           <button
             onClick={() => goToSlide(currentSlide - 1)}
             disabled={currentSlide === 0}
+            aria-label={t('previousSlide', contentLanguage)}
             className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -128,6 +130,7 @@ export function DeckPreview() {
           <button
             onClick={() => goToSlide(currentSlide + 1)}
             disabled={currentSlide >= totalSlides - 1}
+            aria-label={t('nextSlide', contentLanguage)}
             className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronRight className="w-5 h-5" />
@@ -140,10 +143,11 @@ export function DeckPreview() {
             className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded"
           >
             <RefreshCw className="w-4 h-4" />
-            Rebuild
+            {t('rebuildPreview', contentLanguage)}
           </button>
           <button
             onClick={toggleFullscreen}
+            aria-label={isFullscreen ? t('exitFullscreen', contentLanguage) : t('enterFullscreen', contentLanguage)}
             className="p-1.5 rounded text-gray-400 hover:text-white hover:bg-gray-700"
           >
             {isFullscreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
@@ -159,7 +163,7 @@ export function DeckPreview() {
             srcDoc={html}
             className="w-full h-full max-w-4xl bg-white rounded-lg shadow-2xl"
             style={{ aspectRatio: '16/9', maxHeight: '80vh' }}
-            title="Slide Preview"
+            title={t('slidePreview', contentLanguage)}
           />
         </div>
       </div>
@@ -182,7 +186,7 @@ export function DeckPreview() {
           ))}
           {totalSlides > 20 && (
             <span className="flex-shrink-0 text-gray-500 text-sm self-center px-2">
-              +{totalSlides - 20} more
+              +{totalSlides - 20} {t('moreSlides', contentLanguage)}
             </span>
           )}
         </div>

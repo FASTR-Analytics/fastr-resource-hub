@@ -794,6 +794,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
           {/* Close button */}
           <button
             onClick={() => setSelectedSlide(null)}
+            aria-label="Close slide view"
             className="absolute top-4 right-4 p-2 text-white/60 hover:text-white"
           >
             <X className="w-8 h-8" />
@@ -803,6 +804,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
           <button
             onClick={(e) => { e.stopPropagation(); navigateSlide('prev') }}
             disabled={slides.findIndex((s) => s.id === selectedSlide.id) === 0}
+            aria-label="Previous slide"
             className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white disabled:opacity-20"
           >
             <ChevronLeft className="w-12 h-12" />
@@ -811,6 +813,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
           <button
             onClick={(e) => { e.stopPropagation(); navigateSlide('next') }}
             disabled={slides.findIndex((s) => s.id === selectedSlide.id) === slides.length - 1}
+            aria-label="Next slide"
             className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white disabled:opacity-20"
           >
             <ChevronRight className="w-12 h-12" />

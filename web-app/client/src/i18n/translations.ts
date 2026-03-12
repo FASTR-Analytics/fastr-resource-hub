@@ -198,6 +198,30 @@ export const translations = {
     templatesStructure: 'Templates & Structure',
     templatesStructureDesc: 'Standard slides for structuring your presentation',
     templatesSelected: 'templates selected',
+
+    // Deck Preview
+    buildingPreview: 'Building preview...',
+    failedToBuildPreview: 'Failed to build preview',
+    tryAgain: 'Try Again',
+    noPreviewAvailable: 'No preview available',
+    buildPreview: 'Build Preview',
+    rebuildPreview: 'Rebuild',
+    slidePreview: 'Slide Preview',
+    previousSlide: 'Previous slide',
+    nextSlide: 'Next slide',
+    exitFullscreen: 'Exit fullscreen',
+    enterFullscreen: 'Enter fullscreen',
+    moreSlides: 'more',
+
+    // Accessibility
+    dismissError: 'Dismiss error',
+    closePanel: 'Close panel',
+    closeDialog: 'Close dialog',
+    sendMessage: 'Send message',
+    closeEditor: 'Close editor',
+    clearSearch: 'Clear search',
+    closePreview: 'Close preview',
+    closeSlideView: 'Close slide view',
   },
   fr: {
     // Landing page
@@ -394,6 +418,30 @@ export const translations = {
     templatesStructure: 'Modèles & Structure',
     templatesStructureDesc: 'Diapositives standard pour structurer votre présentation',
     templatesSelected: 'modèles sélectionnés',
+
+    // Deck Preview
+    buildingPreview: 'Génération de l\'aperçu...',
+    failedToBuildPreview: 'Échec de la génération de l\'aperçu',
+    tryAgain: 'Réessayer',
+    noPreviewAvailable: 'Aucun aperçu disponible',
+    buildPreview: 'Générer l\'aperçu',
+    rebuildPreview: 'Reconstruire',
+    slidePreview: 'Aperçu de la diapositive',
+    previousSlide: 'Diapositive précédente',
+    nextSlide: 'Diapositive suivante',
+    exitFullscreen: 'Quitter le plein écran',
+    enterFullscreen: 'Plein écran',
+    moreSlides: 'de plus',
+
+    // Accessibility
+    dismissError: 'Fermer l\'erreur',
+    closePanel: 'Fermer le panneau',
+    closeDialog: 'Fermer la fenêtre',
+    sendMessage: 'Envoyer le message',
+    closeEditor: 'Fermer l\'éditeur',
+    clearSearch: 'Effacer la recherche',
+    closePreview: 'Fermer l\'aperçu',
+    closeSlideView: 'Fermer la vue de diapositive',
   }
 } as const
 

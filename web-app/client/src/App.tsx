@@ -224,7 +224,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
       >
         <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b">
           <h3 className="font-semibold text-gray-800">Edit Session</h3>
-          <button onClick={onClose} className="p-1 hover:bg-gray-200 rounded-full transition-colors">
+          <button onClick={onClose} aria-label="Close dialog" className="p-1 hover:bg-gray-200 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
@@ -511,7 +511,7 @@ paginate: true
               {view === 'add-to-session' && t('addToSession', contentLanguage)}
             </h3>
           </div>
-          <button onClick={onClose} className="p-1 hover:bg-gray-200 rounded transition-colors">
+          <button onClick={onClose} aria-label="Close menu" className="p-1 hover:bg-gray-200 rounded transition-colors">
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
@@ -989,6 +989,7 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
         <button
           onClick={() => goToSlide(currentSlide - 1)}
           disabled={currentSlide === 0}
+          aria-label="Previous slide"
           className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 flex-shrink-0"
         >
           <ArrowLeft className="w-5 h-5 text-white" />
@@ -1009,6 +1010,7 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
         <button
           onClick={() => goToSlide(currentSlide + 1)}
           disabled={currentSlide >= slideCount - 1}
+          aria-label="Next slide"
           className="p-2 rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 flex-shrink-0"
         >
           <ChevronRight className="w-5 h-5 text-white" />
@@ -1286,7 +1288,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-4">
-        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
         <div className="flex-1">
@@ -1551,7 +1553,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                 <h3 className="font-semibold text-white">{previewModule?.name || previewTemplate?.name}</h3>
                 <p className="text-sm text-white/50 mt-0.5">{previewSlideCount} {t('totalSlides', contentLanguage)}</p>
               </div>
-              <button onClick={() => { setPreviewModule(null); setPreviewTemplate(null); setPreviewHtml(null); setPreviewNotes([]) }} className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
+              <button onClick={() => { setPreviewModule(null); setPreviewTemplate(null); setPreviewHtml(null); setPreviewNotes([]) }} aria-label="Close preview" className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
                 <X className="w-5 h-5 text-white" />
               </button>
             </div>
@@ -1753,7 +1755,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
-        <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
         <h1 className="text-lg font-semibold text-gray-800">{t('browseContentLibrary', contentLanguage)}</h1>
@@ -1801,6 +1803,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
               {searchQuery && (
                 <button
                   onClick={() => { setSearchQuery(''); searchInputRef.current?.focus() }}
+                  aria-label="Clear search"
                   className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-400 hover:text-gray-600"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -2692,6 +2695,7 @@ function App() {
           onClick={() => setAppMode('select')}
           className="p-2 hover:bg-white/10 rounded-lg transition-colors mr-2"
           title="Back to home"
+          aria-label="Back to home"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -2835,7 +2839,7 @@ function App() {
       {error && (
         <div className="bg-red-100 border-b border-red-200 text-red-700 px-4 py-2 flex items-center justify-between">
           <span>{error}</span>
-          <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700">
+          <button onClick={() => setError(null)} aria-label="Dismiss error" className="text-red-500 hover:text-red-700">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -2864,6 +2868,7 @@ function App() {
                   }}
                   className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                   title="Close panel"
+                  aria-label="Close panel"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -2891,6 +2896,7 @@ function App() {
                     }}
                     className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-fastr-primary/10 rounded"
                     title="Pin panel"
+                    aria-label="Pin panel"
                   >
                     <Pin className="w-4 h-4" />
                   </button>
@@ -2898,6 +2904,7 @@ function App() {
                     onClick={() => setLeftPanelOpen(false)}
                     className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                     title="Close panel"
+                    aria-label="Close panel"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -3043,6 +3050,7 @@ function App() {
                 <span className="font-medium text-gray-700">AI Assistant</span>
                 <button
                   onClick={() => setRightPanelOpen(false)}
+                  aria-label="Close AI assistant"
                   className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                 >
                   <X className="w-4 h-4" />
@@ -3069,6 +3077,7 @@ function App() {
                   setShowWorkshopSelector(false)
                   setShowCreateWorkshop(false)
                 }}
+                aria-label="Close dialog"
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
@@ -3320,6 +3329,7 @@ function App() {
               <h2 className="text-lg font-semibold text-gray-800">{t('workshopSettings', contentLanguage)}</h2>
               <button
                 onClick={() => setShowSettings(false)}
+                aria-label="Close settings"
                 className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <X className="w-5 h-5" />

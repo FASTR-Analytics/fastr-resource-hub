@@ -322,6 +322,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
             )}
             <button
               onClick={onClose}
+              aria-label="Close editor"
               className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg"
             >
               <X className="w-5 h-5" />
@@ -446,6 +447,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                           {contentSlides.length > 1 && (
                             <button
                               onClick={() => removeSlide(slideIndex)}
+                              aria-label={`Remove slide ${slideIndex + 1}`}
                               className="p-1 text-gray-500 hover:text-red-400 transition-colors"
                             >
                               <Trash2 className="w-4 h-4" />

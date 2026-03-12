@@ -1085,6 +1085,7 @@ We resume at **[time]**`
               </div>
               <button
                 onClick={() => setModulePreview(null)}
+                aria-label="Close preview"
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
@@ -1163,6 +1164,7 @@ We resume at **[time]**`
               <h3 className="font-semibold">Add Slide</h3>
               <button
                 onClick={() => setAddToSessionDialog(null)}
+                aria-label="Close dialog"
                 className="text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
