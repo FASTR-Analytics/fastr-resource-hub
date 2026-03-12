@@ -9,6 +9,21 @@ slides:
   title: FASTR takes a multi-pronged approach to data quality, with the belief that
     data quality should not be a barrier to data use – with the right feedback loops,
     use of data can contribute to improved quality
+- file: m4_1b_approach_to_dqa.md
+  order: 1.001
+  variant: full
+  title: Rationale for data quality assessment
+  status: new
+- file: m4_1c_approach_to_dqa.md
+  order: 1.002
+  variant: full
+  title: Assessing and adjusting for data quality
+  status: new
+- file: m4_1d_approach_to_dqa.md
+  order: 1.003
+  variant: full
+  title: Measures of data quality
+  status: new
 - file: m4_1a_measures_data_quality_detailed.md
   order: 1.01
   variant: full
@@ -31,18 +46,43 @@ slides:
   order: 3
   variant: full
   title: Outliers
+- file: m4_3b_outliers.md
+  order: 3.001
+  variant: full
+  title: Why adjust for outliers?
+  status: new
+- file: m4_3c_outliers.md
+  order: 3.002
+  variant: full
+  title: Outlier detection methodology
+  status: new
 - file: m4_3a_outlier_investigation.md
   order: 3.01
   variant: full
   title: Investigating a flagged outlier
+- file: m4_3ab_outlier_investigation.md
+  order: 3.011
+  variant: full
+  title: Making the call
+  status: new
 - file: m4_4_internal_consistency.md
   order: 4
   variant: full
   title: Consistency between related indicators
+- file: m4_4b_internal_consistency.md
+  order: 4.001
+  variant: full
+  title: Why assess consistency at district level?
+  status: new
 - file: m4_5_overall_dqa_score.md
   order: 5
   variant: full
   title: Data quality summary score
+- file: m4_5b_overall_dqa_score.md
+  order: 5.001
+  variant: full
+  title: Quick interpretation guide
+  status: new
 - file: m4_6_dqa_configuration_parameters.md
   order: 6
   variant: full
@@ -51,18 +91,38 @@ slides:
   order: 1
   variant: condensed
   title: FASTR analytical pipeline
+- file: m4_s1b_dqa_pipeline_overview.md
+  order: 1.001
+  variant: condensed
+  title: FASTR approach to data quality
+  status: new
 - file: m4_s2_dqa_rationale_objectives.md
   order: 2
   variant: condensed
   title: Rationale for data quality assessment
+- file: m4_s2b_dqa_rationale_objectives.md
+  order: 2.001
+  variant: condensed
+  title: Objectives of data quality assessment
+  status: new
 - file: m4_s3_dqa_completeness.md
   order: 3
   variant: condensed
   title: Indicator completeness
+- file: m4_s3b_dqa_completeness.md
+  order: 3.001
+  variant: condensed
+  title: Indicator completeness output
+  status: new
 - file: m4_s3b_dqa_outliers.md
   order: 3.01
   variant: condensed
   title: Outlier detection
+- file: m4_s3bb_dqa_outliers.md
+  order: 3.011
+  variant: condensed
+  title: Outlier detection output
+  status: new
 - file: m4_s3a_dqa_outlier_illustration.md
   order: 3.02
   variant: condensed
@@ -71,7 +131,22 @@ slides:
   order: 4
   variant: condensed
   title: Internal consistency
+- file: m4_s4b_dqa_internal_consistency.md
+  order: 4.001
+  variant: condensed
+  title: Internal consistency output
+  status: new
 - file: m4_s5_dqa_score_summary.md
   order: 5
   variant: condensed
   title: Data quality summary score
+- file: m4_s5b_dqa_score_summary.md
+  order: 5.001
+  variant: condensed
+  title: Overall data quality score output
+  status: new
+- file: m4_s5c_dqa_score_summary.md
+  order: 5.002
+  variant: condensed
+  title: Mean DQA score output
+  status: new

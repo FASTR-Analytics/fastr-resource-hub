@@ -18,11 +18,3 @@ Bad examples to avoid:
 - Too much: A long paragraph with jargon nobody remembers
 
 Keep it to one or two sentences. If you need more, you're describing multiple findings.
-
----
-
-## Try it yourself
-
-- Pick one finding from your FASTR analysis
-- Write it using the formula: **[Indicator] [trend] from [value] to [value] in [place/period]. This suggests [interpretation].**
-- Read it back: would someone unfamiliar with your data understand what happened and why it matters?

@@ -7,6 +7,16 @@ slides:
   order: 1
   variant: full
   title: 'Activité : Créer des diaporamas'
+- file: m9d_1b_adding_viz_manually.md
+  order: 1.005
+  variant: full
+  title: 'Activité : Ajouter des visualisations manuellement'
+  status: new
+- file: m9d_1c_adding_viz_ai.md
+  order: 1.006
+  variant: full
+  title: 'Activité : Ajouter des visualisations avec l''assistant IA'
+  status: new
 - file: m9d_1a_adding_viz_interpretation_guide.md
   order: 1.01
   variant: full
@@ -35,11 +45,7 @@ slides:
   order: 3
   variant: full
   title: Formater le texte de votre rapport
-- file: m9d_3a_formatting_report_style.md
+- file: m9d_3a_formatting_report_settings.md
   order: 3.01
   variant: full
-  title: 'Formater votre rapport : paramètres de style'
-- file: m9d_3b_formatting_report_logos.md
-  order: 3.02
-  variant: full
-  title: 'Formater votre rapport : logos et détails de page'
+  title: 'Formater votre rapport : paramètres'

@@ -26,7 +26,7 @@ slides:
 - file: mai_2b_four_skills_in_practice.md
   order: 3.02
   variant: full
-  title: "The 4 D's — think of the AI as a new colleague"
+  title: The 4 D's — think of the AI as a new colleague
 - file: mai_4a_ai_conversations.md
   order: 4
   variant: full
@@ -51,6 +51,11 @@ slides:
   order: 7
   variant: full
   title: The prompt library
+- file: mai_7b_ai_prompt_library_overview.md
+  order: 7.001
+  variant: full
+  title: Prompt library organization
+  status: new
 - file: mai_7a_ai_prompt_examples_table.md
   order: 7.01
   variant: full

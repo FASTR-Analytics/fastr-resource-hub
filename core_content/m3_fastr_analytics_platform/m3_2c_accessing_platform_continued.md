@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Projects Within an Instance
+## Projects within an instance
 
 <style scoped>
 .container { display: flex; gap: 1rem; }

@@ -3,6 +3,11 @@ slides:
   order: 1
   variant: full
   title: Justification de l'ajustement de la qualité des données
+- file: m5_1b_approach_to_dq_adjustment.md
+  order: 1.001
+  variant: full
+  title: Indicateurs exclus de l'ajustement
+  status: new
 - file: m5_2_adjustment_for_outliers.md
   order: 2
   variant: full
@@ -23,3 +28,8 @@ slides:
   order: 2
   variant: condensed
   title: Résultat de l'ajustement des valeurs aberrantes
+- file: m5_s2b_dq_adjustment_interpretation.md
+  order: 2.001
+  variant: condensed
+  title: Résultat de l'ajustement de la complétude
+  status: new

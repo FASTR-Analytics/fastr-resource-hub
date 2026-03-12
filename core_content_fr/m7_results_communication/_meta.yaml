@@ -75,6 +75,11 @@ slides:
   order: 2
   variant: full
   title: Passer des données aux messages clés
+- file: m7_2b_data_visualization_communication.md
+  order: 2.001
+  variant: full
+  title: Essayez par vous-même
+  status: new
 - file: m7_2a_data_visualization_communication_continued.md
   order: 2.01
   variant: full
@@ -83,6 +88,11 @@ slides:
   order: 2.015
   variant: full
   title: Rédiger un énoncé de constat
+- file: m7_2a2_finding_statement_formulab.md
+  order: 2.016
+  variant: full
+  title: Essayez par vous-même
+  status: new
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
@@ -91,6 +101,11 @@ slides:
   order: 2.03
   variant: full
   title: Raconter une histoire avec des données
+- file: m7_2cb_data_visualization_communication_continued.md
+  order: 2.031
+  variant: full
+  title: Structurez votre présentation comme une histoire
+  status: new
 - file: m7_2d_data_visualization_communication_continued.md
   order: 2.04
   variant: full
@@ -147,6 +162,11 @@ slides:
   order: 1.5
   variant: condensed
   title: Rédiger un énoncé de constat
+- file: m7_s2ab_finding_statement_formula.md
+  order: 1.501
+  variant: condensed
+  title: Essayez par vous-même
+  status: new
 - file: m7_s2_storytelling_with_data.md
   order: 2
   variant: condensed

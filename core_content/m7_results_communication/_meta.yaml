@@ -75,6 +75,11 @@ slides:
   order: 2
   variant: full
   title: Moving from data to key messages
+- file: m7_2b_data_visualization_communication.md
+  order: 2.001
+  variant: full
+  title: Try it yourself
+  status: new
 - file: m7_2a_data_visualization_communication_continued.md
   order: 2.01
   variant: full
@@ -83,6 +88,11 @@ slides:
   order: 2.015
   variant: full
   title: Writing a finding statement
+- file: m7_2a2_finding_statement_formulab.md
+  order: 2.016
+  variant: full
+  title: Try it yourself
+  status: new
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
@@ -91,6 +101,11 @@ slides:
   order: 2.03
   variant: full
   title: Storytelling with data
+- file: m7_2cb_data_visualization_communication_continued.md
+  order: 2.031
+  variant: full
+  title: Structure your presentation like a story
+  status: new
 - file: m7_2d_data_visualization_communication_continued.md
   order: 2.04
   variant: full
@@ -107,7 +122,7 @@ slides:
   order: 4
   variant: full
   title: 'Understanding your audience: User mapping'
-- file: m7_4a_topic_4a.md
+- file: m7_4a_map_your_users.md
   order: 4.01
   variant: full
   title: 'Activity: Map your users'
@@ -123,7 +138,7 @@ slides:
   order: 6
   variant: full
   title: Linking results to actions
-- file: m7_6a_topic_6a.md
+- file: m7_6a_link_results_to_actions.md
   order: 6.01
   variant: full
   title: 'Activity: Link your results to actions'
@@ -135,7 +150,7 @@ slides:
   order: 7
   variant: full
   title: Building a roadmap for sustained use
-- file: m7_7a_topic_7a.md
+- file: m7_7a_country_action_planning.md
   order: 7.01
   variant: full
   title: 'Activity: Country action planning'
@@ -147,6 +162,11 @@ slides:
   order: 1.5
   variant: condensed
   title: Writing a finding statement
+- file: m7_s2ab_finding_statement_formula.md
+  order: 1.501
+  variant: condensed
+  title: Try it yourself
+  status: new
 - file: m7_s2_storytelling_with_data.md
   order: 2
   variant: condensed

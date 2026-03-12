@@ -18,11 +18,3 @@ Mauvais exemples à éviter :
 - Trop long : un long paragraphe avec du jargon que personne ne retient
 
 Limitez-vous à une ou deux phrases. Si vous avez besoin de plus, vous décrivez plusieurs constats.
-
----
-
-## Essayez par vous-même
-
-- Choisissez un constat de votre analyse FASTR
-- Rédigez-le en utilisant la formule : **[Indicateur] [tendance] de [valeur] à [valeur] dans [lieu/période]. Cela suggère [interprétation].**
-- Relisez-le : quelqu'un qui ne connaît pas vos données comprendrait-il ce qui s'est passé et pourquoi c'est important ?

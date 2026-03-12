@@ -1,0 +1,35 @@
+---
+marp: true
+theme: fastr
+paginate: true
+---
+
+<!-- _class: output -->
+## Résultat de l'ajustement de la complétude
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Ajustement de la complétude](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Heatmap montrant dans quelle mesure le volume de services a changé après l'imputation des données manquantes par des moyennes mobiles.
+
+**Formule :** % de changement = (ajusté - original) / original × 100
+
+**Interprétation :** Les valeurs sont généralement positives (l'imputation ajoute du volume). Les ajustements importants indiquent les zones nécessitant une amélioration de la complétude.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Deux résultats présentés : ajustement des valeurs aberrantes et ajustement de la complétude
+- Heatmap des valeurs aberrantes : les valeurs négatives signifient que les valeurs aberrantes ont été supprimées (réduction des comptages gonflés)
+- Heatmap de la complétude : les valeurs positives signifient que les lacunes ont été comblées (augmentation du volume total)
+- Les ajustements importants (couleurs foncées) indiquent les zones/indicateurs avec des problèmes de qualité des données
+- Utilisez ces résultats pour identifier où concentrer les efforts d'amélioration de la qualité des données
+- Comparez les régions : lesquelles ont plus de problèmes de valeurs aberrantes vs de problèmes de complétude ?
+-->

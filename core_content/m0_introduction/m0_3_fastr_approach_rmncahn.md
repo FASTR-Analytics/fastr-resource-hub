@@ -9,7 +9,7 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
+Quarterly analyses of **DHIS2** (District Health Information Software 2) data, focusing on prioritized national indicators
 
 Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
 

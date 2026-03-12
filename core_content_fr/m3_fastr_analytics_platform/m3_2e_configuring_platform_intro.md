@@ -6,11 +6,12 @@ paginate: true
 
 ## Configuration de la plateforme d'analyse
 
-- La configuration de la plateforme d'analyse est une fonctionnalité d'administration
+La configuration est effectuée par un **administrateur d'instance** — tous les utilisateurs n'ont pas besoin de faire cette étape.
 
-- Nous travaillerons ensemble pour configurer les éléments suivants :
-  - Zones administratives — les niveaux géographiques de votre système de santé (régions, districts)
-  - Structure des établissements — la liste des établissements de santé et leur organisation
-  - Définitions des indicateurs — les métriques de santé que vous souhaitez suivre (par ex. visites CPN, vaccinations)
+Pendant l'atelier, un participant sera désigné avec les droits d'administrateur pour parcourir les étapes de configuration avec l'équipe de facilitation.
 
-- Notez que comme il s'agit d'une fonctionnalité d'administration, tous les participants ne feront PAS cette étape. Vous sélectionnerez une personne pour avoir les droits d'administrateur, et elle nous aidera à parcourir ces étapes.
+La configuration comprend :
+
+- **Zones administratives** — les niveaux géographiques de votre système de santé (régions, districts)
+- **Structure des établissements** — la liste des établissements de santé et leur organisation
+- **Définitions des indicateurs** — les métriques de santé que vous souhaitez suivre (par ex., visites CPN, vaccinations)

@@ -7,6 +7,16 @@ slides:
   order: 1
   variant: full
   title: 'Activity: Creating slide decks'
+- file: m9d_1b_adding_viz_manually.md
+  order: 1.005
+  variant: full
+  title: 'Activity: Adding visualizations manually'
+  status: new
+- file: m9d_1c_adding_viz_ai.md
+  order: 1.006
+  variant: full
+  title: 'Activity: Adding visualizations using AI Assistant'
+  status: new
 - file: m9d_1a_adding_viz_interpretation_guide.md
   order: 1.01
   variant: full
@@ -35,11 +45,7 @@ slides:
   order: 3
   variant: full
   title: Formatting your report text
-- file: m9d_3a_formatting_report_style.md
+- file: m9d_3a_formatting_report_settings.md
   order: 3.01
   variant: full
-  title: 'Formatting your report: style settings'
-- file: m9d_3b_formatting_report_logos.md
-  order: 3.02
-  variant: full
-  title: 'Formatting your report: logos and page details'
+  title: 'Formatting your report: settings'

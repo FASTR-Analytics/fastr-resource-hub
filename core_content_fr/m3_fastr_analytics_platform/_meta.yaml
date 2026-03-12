@@ -1,4 +1,9 @@
 slides:
+- file: m3_0_learning_objectives.md
+  order: 0.5
+  variant: full
+  title: Ce que vous allez apprendre
+  status: new
 - file: m3_1_overview_of_platform.md
   order: 1
   variant: full
@@ -23,3 +28,8 @@ slides:
   order: 2.05
   variant: full
   title: Configuration de la plateforme d'analyse
+- file: m3_3_next_steps.md
+  order: 3
+  variant: full
+  title: Prise en main de la plateforme
+  status: new

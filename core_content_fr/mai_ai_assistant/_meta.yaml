@@ -51,6 +51,11 @@ slides:
   order: 7
   variant: full
   title: La bibliothèque de prompts
+- file: mai_7b_ai_prompt_library_overview.md
+  order: 7.001
+  variant: full
+  title: Organisation de la bibliothèque de prompts
+  status: new
 - file: mai_7a_ai_prompt_examples_table.md
   order: 7.01
   variant: full

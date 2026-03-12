@@ -9,7 +9,7 @@ paginate: true
 <div class="columns-image-right">
 <div>
 
-Analyses trimestrielles des données DHIS2, axées sur les indicateurs nationaux prioritaires
+Analyses trimestrielles des données **DHIS2** (District Health Information Software 2), axées sur les indicateurs nationaux prioritaires
 
 Développement d'outils durables pour garantir que les parties prenantes qui ont besoin d'utiliser les données puissent générer les analyses et visualisations appropriées, au bon moment, sur leurs indicateurs d'intérêt
 

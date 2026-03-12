@@ -10,6 +10,21 @@ slides:
     en partant du principe que la qualité des données ne doit pas être un obstacle
     à leur utilisation - avec les bons mécanismes de retour d'information, l'utilisation
     des données peut contribuer à améliorer leur qualité
+- file: m4_1b_approach_to_dqa.md
+  order: 1.001
+  variant: full
+  title: Raison d'être de l'évaluation de la qualité des données
+  status: new
+- file: m4_1c_approach_to_dqa.md
+  order: 1.002
+  variant: full
+  title: Évaluer et ajuster la qualité des données
+  status: new
+- file: m4_1d_approach_to_dqa.md
+  order: 1.003
+  variant: full
+  title: Mesures de la qualité des données
+  status: new
 - file: m4_1a_measures_data_quality_detailed.md
   order: 1.01
   variant: full
@@ -32,18 +47,43 @@ slides:
   order: 3
   variant: full
   title: Valeurs aberrantes
+- file: m4_3b_outliers.md
+  order: 3.001
+  variant: full
+  title: Pourquoi ajuster pour les valeurs aberrantes ?
+  status: new
+- file: m4_3c_outliers.md
+  order: 3.002
+  variant: full
+  title: Méthodologie de détection des valeurs aberrantes
+  status: new
 - file: m4_3a_outlier_investigation.md
   order: 3.01
   variant: full
   title: Investiguer une valeur aberrante signalée
+- file: m4_3ab_outlier_investigation.md
+  order: 3.011
+  variant: full
+  title: Prendre la décision
+  status: new
 - file: m4_4_internal_consistency.md
   order: 4
   variant: full
   title: Cohérence entre les indicateurs connexes
+- file: m4_4b_internal_consistency.md
+  order: 4.001
+  variant: full
+  title: Pourquoi évaluer la cohérence au niveau du district ?
+  status: new
 - file: m4_5_overall_dqa_score.md
   order: 5
   variant: full
   title: Score résumé de la qualité des données
+- file: m4_5b_overall_dqa_score.md
+  order: 5.001
+  variant: full
+  title: Guide d'interprétation rapide
+  status: new
 - file: m4_6_dqa_configuration_parameters.md
   order: 6
   variant: full
@@ -52,18 +92,38 @@ slides:
   order: 1
   variant: condensed
   title: Pipeline analytique FASTR
+- file: m4_s1b_dqa_pipeline_overview.md
+  order: 1.001
+  variant: condensed
+  title: Approche FASTR de la qualité des données
+  status: new
 - file: m4_s2_dqa_rationale_objectives.md
   order: 2
   variant: condensed
   title: Raison d'être de l'évaluation de la qualité des données
+- file: m4_s2b_dqa_rationale_objectives.md
+  order: 2.001
+  variant: condensed
+  title: Objectifs de l'évaluation de la qualité des données
+  status: new
 - file: m4_s3_dqa_completeness.md
   order: 3
   variant: condensed
   title: Complétude de l'indicateur
+- file: m4_s3b_dqa_completeness.md
+  order: 3.001
+  variant: condensed
+  title: Sortie de la complétude de l'indicateur
+  status: new
 - file: m4_s3b_dqa_outliers.md
   order: 3.01
   variant: condensed
   title: Détection des valeurs aberrantes
+- file: m4_s3bb_dqa_outliers.md
+  order: 3.011
+  variant: condensed
+  title: Sortie de la détection des valeurs aberrantes
+  status: new
 - file: m4_s3a_dqa_outlier_illustration.md
   order: 3.02
   variant: condensed
@@ -72,7 +132,22 @@ slides:
   order: 4
   variant: condensed
   title: Cohérence interne
+- file: m4_s4b_dqa_internal_consistency.md
+  order: 4.001
+  variant: condensed
+  title: Sortie de la cohérence interne
+  status: new
 - file: m4_s5_dqa_score_summary.md
   order: 5
   variant: condensed
   title: Score résumé de la qualité des données
+- file: m4_s5b_dqa_score_summary.md
+  order: 5.001
+  variant: condensed
+  title: Sortie du score global de qualité des données
+  status: new
+- file: m4_s5c_dqa_score_summary.md
+  order: 5.002
+  variant: condensed
+  title: Sortie du score AQD moyen
+  status: new

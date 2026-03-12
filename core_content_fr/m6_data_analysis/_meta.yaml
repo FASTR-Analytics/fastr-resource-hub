@@ -3,6 +3,11 @@ slides:
   order: 1
   variant: full
   title: Analyse de l'utilisation des services
+- file: m6_1b_service_utilization_analysis.md
+  order: 1.001
+  variant: full
+  title: Comparaison de l'utilisation des services avec DHIS2
+  status: new
 - file: m6_1b_indicator_directionality.md
   order: 1.005
   variant: full
@@ -15,6 +20,16 @@ slides:
   order: 2
   variant: full
   title: Détection des perturbations et excédents de services
+- file: m6_2b_service_disruptions_surpluses_detection.md
+  order: 2.001
+  variant: full
+  title: Fonctionnement de la détection des perturbations
+  status: new
+- file: m6_2c_service_disruptions_surpluses_detection.md
+  order: 2.002
+  variant: full
+  title: Comparaison de la détection des perturbations avec DHIS2
+  status: new
 - file: m6_2a_why_detecting_disruptions_matters.md
   order: 2.01
   variant: full
@@ -27,6 +42,16 @@ slides:
   order: 6
   variant: full
   title: Estimation de la couverture des services
+- file: m6_6b_service_coverage_introduction.md
+  order: 6.001
+  variant: full
+  title: Notre approche de l'analyse de la couverture des services
+  status: new
+- file: m6_6c_service_coverage_introduction.md
+  order: 6.002
+  variant: full
+  title: Processus analytique en deux parties
+  status: new
 - file: m6_7_definition_of_coverage.md
   order: 7
   variant: full
@@ -43,6 +68,11 @@ slides:
   order: 9.01
   variant: full
   title: Cascade de services et analyse de l'abandon
+- file: m6_9ab_cascade_dropout.md
+  order: 9.011
+  variant: full
+  title: Calculer et interpréter l'abandon
+  status: new
 - file: m6_10_denominator_cascade_illustration.md
   order: 10
   variant: full
@@ -71,6 +101,16 @@ slides:
   order: 1
   variant: condensed
   title: Analyse de l'utilisation des services
+- file: m6_s1b_utilization_overview.md
+  order: 1.001
+  variant: condensed
+  title: Résultat de la variation d'une année sur l'autre
+  status: new
+- file: m6_s1c_utilization_overview.md
+  order: 1.002
+  variant: condensed
+  title: Essayez par vous-même
+  status: new
 - file: m6_s1b_indicator_directionality.md
   order: 1.005
   variant: condensed
@@ -83,10 +123,20 @@ slides:
   order: 2
   variant: condensed
   title: Détection des perturbations de services
+- file: m6_s2b_disruption_interpretation.md
+  order: 2.001
+  variant: condensed
+  title: Résultat de perturbation de service
+  status: new
 - file: m6_s3_coverage_overview.md
   order: 3
   variant: condensed
   title: Estimation de la couverture des services
+- file: m6_s3b_coverage_overview.md
+  order: 3.001
+  variant: condensed
+  title: Comment FASTR estime la couverture
+  status: new
 - file: m6_s3a_coverage_example.md
   order: 3.01
   variant: condensed
@@ -111,6 +161,16 @@ slides:
   order: 4
   variant: condensed
   title: 'Résultats de couverture : Tendances nationales'
+- file: m6_s4b_coverage_interpretation.md
+  order: 4.001
+  variant: condensed
+  title: 'Résultats de couverture : Comparaison infranationale'
+  status: new
+- file: m6_s4c_coverage_interpretation.md
+  order: 4.002
+  variant: condensed
+  title: Approfondir pour avoir une vue complète
+  status: new
 - file: m6_s5_country_example_nigeria.md
   order: 5
   variant: condensed

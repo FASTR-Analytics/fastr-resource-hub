@@ -2,4 +2,30 @@ slides:
 - file: m9g_1_fastr_quiz.md
   order: 1
   variant: full
-  title: Quiz FASTR
+  title: Untitled
+- file: m9g_1b_fastr_quiz.md
+  order: 1.001
+  variant: full
+  title: 1. Que signifie FASTR ?
+  status: new
+- file: m9g_1c_fastr_quiz.md
+  order: 1.002
+  variant: full
+  title: 2. Quelles sont les 3 dimensions de qualité des données de FASTR ?
+  status: new
+- file: m9g_1d_fastr_quiz.md
+  order: 1.003
+  variant: full
+  title: 3. Quels sont les 4 piliers techniques de FASTR ?
+  status: new
+- file: m9g_1e_fastr_quiz.md
+  order: 1.004
+  variant: full
+  title: 4. Un district rapporte 200 visites CPN1 mais 350 visites CPN4. Cela démontre
+    un problème avec quelle dimension de qualité des données ?
+  status: new
+- file: m9g_1f_fastr_quiz.md
+  order: 1.005
+  variant: full
+  title: 5. Couverture CPN1 — quelle est la population cible ?
+  status: new
