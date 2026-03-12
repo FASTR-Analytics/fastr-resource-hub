@@ -35,6 +35,9 @@ import {
   KeyRound,
   Search,
   Users,
+  Coffee,
+  UtensilsCrossed,
+  AlertTriangle,
 } from 'lucide-react'
 import {
   DndContext,
@@ -55,12 +58,12 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 
 // Session type colors and icons
-const sessionTypeConfig: Record<string, { bg: string; border: string; icon: string }> = {
-  break: { bg: 'bg-amber-50', border: 'border-amber-300', icon: '☕' },
-  day_title: { bg: 'bg-gray-100', border: 'border-gray-300', icon: '📅' },
-  day_end: { bg: 'bg-purple-50', border: 'border-purple-300', icon: '🏁' },
-  day_recap: { bg: 'bg-green-50', border: 'border-green-300', icon: '📋' },
-  section: { bg: 'bg-gray-50', border: 'border-gray-300', icon: '📑' },
+const sessionTypeConfig: Record<string, { bg: string; border: string; icon: string; iconType?: string }> = {
+  break: { bg: 'bg-amber-50', border: 'border-amber-200', icon: '☕', iconType: 'coffee' },
+  day_title: { bg: 'bg-gray-100', border: 'border-gray-200', icon: '📅' },
+  day_end: { bg: 'bg-purple-50', border: 'border-purple-200', icon: '🏁' },
+  day_recap: { bg: 'bg-green-50', border: 'border-green-200', icon: '📋' },
+  section: { bg: 'bg-gray-50', border: 'border-gray-200', icon: '📑' },
 }
 
 // Compulsory slides that are locked (can't be moved or deleted)
@@ -101,7 +104,7 @@ interface SortableSessionCardProps {
 function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSessionCardProps) {
   const isLocked = isSessionLocked(session)
   const config = session.module
-    ? { bg: 'bg-blue-50', border: 'border-blue-300', icon: '📘' }
+    ? { bg: 'bg-blue-50', border: 'border-blue-200', icon: '📘', iconType: 'book' }
     : sessionTypeConfig[session.type || ''] || { bg: 'bg-white', border: 'border-gray-200', icon: '📝' }
 
   const {
@@ -140,8 +143,8 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
     <div
       ref={setNodeRef}
       style={style}
-      className={`group relative p-3 rounded-lg border-2 transition-all ${config.bg} ${config.border} ${
-        isDragging ? 'opacity-50 scale-105 shadow-lg z-50' : ''
+      className={`group relative p-3 rounded-lg border shadow-sm hover:shadow-md transition-all ${config.bg} ${config.border} ${
+        isDragging ? 'opacity-80 scale-[1.02] shadow-lg ring-2 ring-fastr-secondary z-50' : ''
       }`}
     >
       {/* Drag handle */}
@@ -149,7 +152,7 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
         <div
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity"
+          className="cursor-grab active:cursor-grabbing opacity-20 group-hover:opacity-70 transition-opacity duration-200"
         >
           <GripVertical className="w-4 h-4 text-gray-400" />
         </div>
@@ -171,7 +174,13 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
       <div className="pl-5 pr-6">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-gray-500 w-12 flex-shrink-0">{session._startTime || ''}</span>
-          <span className="text-sm">{config.icon}</span>
+          {(config as any).iconType === 'book' ? (
+            <BookOpen className="w-4 h-4 text-blue-500 flex-shrink-0" />
+          ) : (config as any).iconType === 'coffee' ? (
+            <Coffee className="w-4 h-4 text-amber-500 flex-shrink-0" />
+          ) : (
+            <span className="text-sm">{config.icon}</span>
+          )}
           <span className="text-sm font-medium text-gray-800 truncate flex-1">{session.session}</span>
         </div>
         <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
@@ -185,6 +194,12 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
             </>
           )}
         </div>
+        {/* Duration bar */}
+        {session.duration && session.duration > 0 && (
+          <div className="duration-bar">
+            <div className="duration-bar-fill" style={{ width: `${Math.min((session.duration / 60) * 100, 100)}%` }} />
+          </div>
+        )}
       </div>
     </div>
   )
@@ -219,10 +234,10 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 overflow-hidden"
+        className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md mx-4 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b">
+        <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-b">
           <h3 className="font-semibold text-gray-800">Edit Session</h3>
           <button onClick={onClose} aria-label="Close dialog" className="p-1 hover:bg-gray-200 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-500" />
@@ -236,7 +251,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
               type="text"
               value={sessionName}
               onChange={(e) => setSessionName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
               placeholder="Session name"
             />
           </div>
@@ -247,7 +262,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
               type="text"
               value={speaker}
               onChange={(e) => setSpeaker(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
               placeholder="e.g., John Smith, MoH Team"
             />
           </div>
@@ -258,7 +273,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
               type="number"
               value={duration}
               onChange={(e) => setDuration(parseInt(e.target.value) || 0)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
               min={0}
               step={5}
             />
@@ -272,7 +287,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
                 <select
                   value={moveToDay ?? ''}
                   onChange={(e) => setMoveToDay(e.target.value ? parseInt(e.target.value) : null)}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                 >
                   <option value="">Select day...</option>
                   {Array.from({ length: totalDays }, (_, i) => i + 1)
@@ -298,7 +313,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
           )}
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t">
+        <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-t">
           <button
             onClick={() => {
               if (confirm('Delete this session?')) {
@@ -319,7 +334,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
             </button>
             <button
               onClick={handleSave}
-              className="px-4 py-2 text-sm bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors"
+              className="px-4 py-2 text-sm font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all"
             >
               Save Changes
             </button>
@@ -485,11 +500,11 @@ paginate: true
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-hidden"
+        className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-lg max-h-[80vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
+        <div className="flex items-center justify-between px-5 py-4 border-b bg-gray-50">
           <div className="flex items-center gap-2">
             {view !== 'main' && (
               <button
@@ -524,8 +539,8 @@ paginate: true
               onClick={() => setView('modules')}
               className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-200 transition-all text-left group"
             >
-              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                📘
+              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center group-hover:bg-fastr-primary group-hover:scale-110 transition-all">
+                <BookOpen className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
               </div>
               <div>
                 <div className="font-medium text-gray-800">{t('moduleContent', contentLanguage)}</div>
@@ -540,9 +555,11 @@ paginate: true
               <div className="flex gap-2">
                 <button
                   onClick={() => addBreak('tea')}
-                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all"
+                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all group"
                 >
-                  <span className="text-xl">☕</span>
+                  <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
+                    <Coffee className="w-4 h-4 text-amber-600 group-hover:text-white transition-colors" />
+                  </div>
                   <div className="text-left">
                     <div className="font-medium text-gray-800">{t('teaBreak', contentLanguage)}</div>
                     <div className="text-xs text-gray-500">15 min</div>
@@ -550,9 +567,11 @@ paginate: true
                 </button>
                 <button
                   onClick={() => addBreak('lunch')}
-                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all"
+                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all group"
                 >
-                  <span className="text-xl">🍽️</span>
+                  <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
+                    <UtensilsCrossed className="w-4 h-4 text-amber-600 group-hover:text-white transition-colors" />
+                  </div>
                   <div className="text-left">
                     <div className="font-medium text-gray-800">{t('lunchBreak', contentLanguage)}</div>
                     <div className="text-xs text-gray-500">60 min</div>
@@ -568,8 +587,8 @@ paginate: true
                 onClick={() => setView('custom')}
                 className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 border border-transparent hover:border-teal-200 transition-all text-left group"
               >
-                <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                  ✏️
+                <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center group-hover:bg-fastr-secondary group-hover:scale-110 transition-all">
+                  <Pencil className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <div className="font-medium text-gray-800">{t('customSlide', contentLanguage)}</div>
@@ -640,7 +659,7 @@ paginate: true
                             onClick={() => handleTopicClick(module, topic)}
                             className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
                           >
-                            <span className="text-gray-400">📄</span>
+                            <FileText className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
                             <span className="flex-1 text-gray-700">{topic.title}</span>
                             {topic.duration && (
                               <span className="text-xs text-gray-400">{topic.duration}m</span>
@@ -660,7 +679,7 @@ paginate: true
                             onClick={() => handleTopicClick(module, topic)}
                             className="w-full flex items-center gap-2 p-2 rounded hover:bg-amber-50 hover:shadow-sm transition-all text-left text-sm"
                           >
-                            <span className="text-amber-500">📄</span>
+                            <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                             <span className="flex-1 text-gray-700">{topic.title}</span>
                             {topic.duration && (
                               <span className="text-xs text-gray-400">{topic.duration}m</span>
@@ -782,7 +801,7 @@ paginate: true
                 value={customTitle}
                 onChange={(e) => setCustomTitle(e.target.value)}
                 placeholder="e.g., Hands-on Activity: Data Quality"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
               />
             </div>
 
@@ -796,7 +815,7 @@ paginate: true
                 min={5}
                 max={240}
                 step={5}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
               />
             </div>
 
@@ -886,8 +905,8 @@ paginate: true
                         onClick={() => addToExistingSession(index)}
                         className="w-full flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
                       >
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-lg">
-                          📘
+                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                          <BookOpen className="w-5 h-5 text-blue-600" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="font-medium text-gray-800 truncate">{session.session}</div>
@@ -1287,7 +1306,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 shadow-sm px-6 py-4 flex items-center gap-4">
         <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
@@ -1347,7 +1366,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                     isActivity ? 'border-l-4 border-l-fastr-accent' : ''
                   } ${
                     isSelected
-                      ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
+                      ? 'bg-fastr-primary/5 border-fastr-primary ring-1 ring-fastr-primary/20 shadow-md'
                       : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
                   }`}
                 >
@@ -1601,7 +1620,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               <button
                 onClick={() => exportSelection('pdf')}
                 disabled={isExporting}
-                className="px-5 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center gap-2"
+                className="px-5 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
               >
                 {isExporting && exportFormat === 'pdf' ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />
@@ -1613,7 +1632,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               <button
                 onClick={() => exportSelection('pptx')}
                 disabled={isExporting}
-                className="px-5 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 transition-colors flex items-center gap-2"
+                className="px-5 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
               >
                 {isExporting && exportFormat === 'pptx' ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />
@@ -1754,7 +1773,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-4">
+      <header className="bg-white border-b border-gray-200 shadow-sm px-4 py-3 flex items-center gap-4">
         <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
@@ -1812,7 +1831,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
             </div>
             {searchQuery && (
               <p className="text-xs text-gray-400 mt-1.5 px-1">
-                {filteredTopics.length} {filteredTopics.length === 1 ? 'result' : 'results'}
+                {filteredTopics.length} {filteredTopics.length === 1 ? t('result', contentLanguage) : t('results', contentLanguage)}
               </p>
             )}
           </div>
@@ -1821,7 +1840,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
           <div className="flex-1 overflow-y-auto">
             {groupedByModule.length === 0 ? (
               <div className="p-8 text-center text-gray-400 text-sm">
-                {contentLanguage === 'fr' ? 'Aucun résultat' : 'No results found'}
+                {t('noResultsFound', contentLanguage)}
               </div>
             ) : (
               groupedByModule.map(({ module, items }) => {
@@ -1879,7 +1898,7 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
             <div className="flex-1 flex items-center justify-center text-white/70">
               <div className="text-center">
                 <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p className="text-sm">Loading preview...</p>
+                <p className="text-sm">{t('loadingPreview', contentLanguage)}</p>
               </div>
             </div>
           ) : previewHtml ? (
@@ -2457,17 +2476,17 @@ function App() {
   // ─────────────────────────────────────────────────────────────────────────
   if (!isAuthenticated) {
     return (
-      <div className="h-screen bg-gray-50 flex items-center justify-center p-8">
+      <div className="h-screen bg-gradient-to-br from-fastr-primary via-fastr-primary-light to-fastr-secondary flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-fastr-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <KeyRound className="w-8 h-8 text-fastr-primary" />
+            <div className="w-20 h-20 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 ring-1 ring-white/20">
+              <KeyRound className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">FASTR Deck Builder</h1>
-            <p className="text-gray-600">Enter the team password to continue</p>
+            <h1 className="text-2xl font-bold text-white mb-2 tracking-tight">FASTR Deck Builder</h1>
+            <p className="text-white/70">Enter the team password to continue</p>
           </div>
 
-          <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+          <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-xl ring-1 ring-black/5">
             <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Team Password
@@ -2533,7 +2552,7 @@ function App() {
     }
 
     return (
-      <div className="h-screen bg-gray-50 flex flex-col">
+      <div className="h-screen bg-gradient-to-b from-fastr-light-warm to-white flex flex-col">
         {/* Top bar with language toggle and logout */}
         <div className="flex justify-end items-center gap-4 p-4">
           {/* Language toggle */}
@@ -2572,21 +2591,21 @@ function App() {
           <div className="w-full max-w-5xl">
             {/* Logo/Title */}
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('appTitle', contentLanguage)}</h1>
-              <p className="text-gray-600">{t('appSubtitle', contentLanguage)}</p>
+              <h1 className="text-3xl font-bold text-fastr-primary mb-2 tracking-tight">{t('appTitle', contentLanguage)}</h1>
+              <p className="text-gray-500">{t('appSubtitle', contentLanguage)}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Build Slide Deck */}
               <button
                 onClick={() => setAppMode('workshop')}
-                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-md"
+                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-xl"
               >
-                <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary/20 transition-colors">
-                  <Presentation className="w-6 h-6 text-fastr-primary" />
+                <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary group-hover:scale-110 transition-all duration-200">
+                  <Presentation className="w-6 h-6 text-fastr-primary group-hover:text-white transition-colors" />
                 </div>
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-500 text-sm">
                   {t('buildSlideDeckDesc', contentLanguage)}
                 </p>
               </button>
@@ -2594,13 +2613,13 @@ function App() {
               {/* Quick Export */}
               <button
                 onClick={() => setAppMode('quick')}
-                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-md"
+                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-xl"
               >
-                <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary/20 transition-colors">
-                  <Download className="w-6 h-6 text-fastr-secondary" />
+                <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary group-hover:scale-110 transition-all duration-200">
+                  <Download className="w-6 h-6 text-fastr-secondary group-hover:text-white transition-colors" />
                 </div>
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('quickExport', contentLanguage)}</h2>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-500 text-sm">
                   {t('quickExportDesc', contentLanguage)}
                 </p>
               </button>
@@ -2608,13 +2627,13 @@ function App() {
               {/* Browse Library */}
               <button
                 onClick={() => setAppMode('library')}
-                className="group bg-white hover:bg-gray-50 rounded-2xl p-6 text-left transition-all hover:scale-105 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-md"
+                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-xl"
               >
-                <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
-                  <BookOpen className="w-6 h-6 text-amber-600" />
+                <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:scale-110 transition-all duration-200">
+                  <BookOpen className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
                 </div>
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('browseLibrary', contentLanguage)}</h2>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-500 text-sm">
                   {t('browseLibraryDesc', contentLanguage)}
                 </p>
               </button>
@@ -2623,8 +2642,8 @@ function App() {
           {/* Existing Decks */}
           {workshops.length > 0 && (
             <div className="mt-10">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('existingDecks', contentLanguage)}</h3>
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">{t('existingDecks', contentLanguage)}</h3>
+              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden divide-y divide-gray-100">
                 {countries.map(country => (
                   <div key={country} className="border-b border-gray-100 last:border-b-0">
                     <button
@@ -2689,7 +2708,7 @@ function App() {
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       {/* Header / Toolbar */}
-      <header className="bg-fastr-primary text-white px-4 py-2 flex items-center justify-between shadow-md z-20">
+      <header className="bg-gradient-to-r from-fastr-primary to-fastr-primary-light text-white px-4 py-2.5 flex items-center justify-between shadow-md z-20">
         {/* Back button */}
         <button
           onClick={() => setAppMode('select')}
@@ -2795,7 +2814,7 @@ function App() {
                 setShowExportMenu(!showExportMenu)
               }}
               disabled={isBuilding || !currentWorkshopId}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isBuilding ? (
                 <RefreshCw className="w-4 h-4 animate-spin" />
@@ -2807,7 +2826,7 @@ function App() {
             </button>
 
             {showExportMenu && (
-              <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-1 z-30">
+              <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-xl shadow-2xl ring-1 ring-black/5 py-1 z-30">
                 <button
                   onClick={() => handleBuild('html')}
                   className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
@@ -2837,9 +2856,10 @@ function App() {
 
       {/* Error banner */}
       {error && (
-        <div className="bg-red-100 border-b border-red-200 text-red-700 px-4 py-2 flex items-center justify-between">
-          <span>{error}</span>
-          <button onClick={() => setError(null)} aria-label="Dismiss error" className="text-red-500 hover:text-red-700">
+        <div className="bg-red-50 border-b border-red-200 text-red-700 px-4 py-2.5 flex items-center gap-3">
+          <AlertTriangle className="w-4 h-4 text-red-500 flex-shrink-0" />
+          <span className="flex-1 text-sm">{error}</span>
+          <button onClick={() => setError(null)} aria-label="Dismiss error" className="p-1 rounded-md text-red-400 hover:text-red-600 hover:bg-red-100 transition-colors">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -2851,8 +2871,8 @@ function App() {
         {leftPanelPinned ? (
           // Pinned mode - part of flex layout
           <div className="h-full w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
-              <span className="font-medium text-gray-700">Content Library</span>
+            <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
+              <span className="font-semibold text-sm text-gray-700">Content Library</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setLeftPanelPinned(false)}
@@ -2886,8 +2906,8 @@ function App() {
             }`}
           >
             <div className="h-full w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
-              <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
-                <span className="font-medium text-gray-700">Content Library</span>
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
+                <span className="font-semibold text-sm text-gray-700">Content Library</span>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => {
@@ -2964,20 +2984,35 @@ function App() {
                           return (
                             <div
                               key={dayNum}
-                              className="flex-shrink-0 w-80 bg-gray-50 rounded-xl shadow-sm border border-gray-200"
+                              className="flex-shrink-0 w-[340px] bg-white/70 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200/80 ring-1 ring-black/[0.03]"
                             >
                               {/* Day header */}
-                              <div className="px-4 py-3 border-b border-gray-200 bg-white rounded-t-xl">
-                                <h3 className="font-semibold text-gray-800">
-                                  Day {dayNum}
-                                  {currentConfig?.schedule?.day_titles?.[dayNum] && (
-                                    <span className="text-gray-400 font-normal ml-1">
-                                      - {currentConfig.schedule.day_titles[dayNum]}
-                                    </span>
+                              <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
+                                <div className="flex items-start justify-between">
+                                  <h3 className="font-semibold text-white">
+                                    Day {dayNum}
+                                    {currentConfig?.schedule?.day_titles?.[dayNum] && (
+                                      <span className="text-white/60 font-normal ml-1">
+                                        - {currentConfig.schedule.day_titles[dayNum]}
+                                      </span>
+                                    )}
+                                  </h3>
+                                  {(currentConfig?.schedule?.days ?? 0) > 1 && (
+                                    <button
+                                      onClick={() => {
+                                        if (confirm(`Delete Day ${dayNum} and all its sessions? This cannot be undone.`)) {
+                                          useWorkshopStore.getState().removeDay(dayNum)
+                                        }
+                                      }}
+                                      className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
+                                      title={`Delete Day ${dayNum}`}
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </button>
                                   )}
-                                </h3>
+                                </div>
                                 {currentConfig?.schedule?.day_start_times?.[dayNum] && (
-                                  <div className="text-xs text-gray-500 mt-0.5">
+                                  <div className="text-xs text-white/50 mt-0.5">
                                     Starts at {currentConfig.schedule.day_start_times[dayNum]}
                                   </div>
                                 )}
@@ -3002,7 +3037,7 @@ function App() {
 
                                 {/* Add session button */}
                                 <button
-                                  className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex items-center justify-center gap-2"
+                                  className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
                                   onClick={() => setAddSessionMenuDay(dayNum)}
                                 >
                                   <Plus className="w-4 h-4" />
@@ -3067,8 +3102,8 @@ function App() {
       {/* Workshop Selector Modal */}
       {showWorkshopSelector && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
-            <div className="flex items-center justify-between px-4 py-3 border-b">
+          <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md mx-4">
+            <div className="flex items-center justify-between px-5 py-4 border-b">
               <h2 className="font-semibold">
                 {showCreateWorkshop ? t('createNewWorkshop', contentLanguage) : t('selectWorkshop', contentLanguage)}
               </h2>
@@ -3138,7 +3173,7 @@ function App() {
                       <button
                         onClick={handleAIGenerate}
                         disabled={aiGenerating || !aiPrompt.trim()}
-                        className="flex-1 px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                        className="flex-1 px-4 py-2 font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         {aiGenerating ? (
                           <>
@@ -3164,7 +3199,7 @@ function App() {
                         type="text"
                         value={newWorkshop.name}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, name: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                         placeholder={contentLanguage === 'fr' ? 'ex. Atelier de formation FASTR' : 'e.g., FASTR Training Workshop'}
                       />
                     </div>
@@ -3177,7 +3212,7 @@ function App() {
                         type="text"
                         value={newWorkshop.country}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, country: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                         placeholder={contentLanguage === 'fr' ? 'ex. Sénégal' : 'e.g., Kenya'}
                       />
                     </div>
@@ -3188,7 +3223,7 @@ function App() {
                         type="text"
                         value={newWorkshop.location}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                         placeholder={contentLanguage === 'fr' ? 'ex. Dakar' : 'e.g., Nairobi'}
                       />
                     </div>
@@ -3202,7 +3237,7 @@ function App() {
                         onChange={(e) =>
                           setNewWorkshop({ ...newWorkshop, days: parseInt(e.target.value) })
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                       >
                         {[1, 2, 3, 4, 5].map((d) => (
                           <option key={d} value={d}>
@@ -3324,7 +3359,7 @@ function App() {
       {/* Settings Modal */}
       {showSettings && currentConfig && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
+          <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b">
               <h2 className="text-lg font-semibold text-gray-800">{t('workshopSettings', contentLanguage)}</h2>
               <button
@@ -3582,7 +3617,7 @@ function App() {
                               useWorkshopStore.setState({ currentConfig: newConfig })
                               useWorkshopStore.getState().saveCurrentWorkshop()
                             }}
-                            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                             placeholder={contentLanguage === 'fr'
                               ? `ex. ${dayNum === 1 ? 'Introduction & Extraction des données' : dayNum === 2 ? 'Évaluation de la qualité des données' : 'Analyse & Communication'}`
                               : `e.g., ${dayNum === 1 ? 'Introduction & Data Extraction' : dayNum === 2 ? 'Data Quality Assessment' : 'Analysis & Communication'}`}
@@ -3604,7 +3639,7 @@ function App() {
                               useWorkshopStore.setState({ currentConfig: newConfig })
                               useWorkshopStore.getState().saveCurrentWorkshop()
                             }}
-                            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary"
+                            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                           />
                         </div>
                       </div>

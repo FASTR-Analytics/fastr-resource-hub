@@ -96,6 +96,7 @@ interface WorkshopStore {
   reorderSession: (dayNum: number, fromIdx: number, toIdx: number) => void
   moveSessionToDay: (fromDay: number, fromIdx: number, toDay: number, toIdx: number) => void
   addDay: () => void
+  removeDay: (dayNum: number) => void
   updateDayTitle: (dayNum: number, title: string) => void
   updateDayStartTime: (dayNum: number, time: string) => void
 
@@ -406,6 +407,49 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     }
     if (!newSchedule.day_start_times[newDayNum]) {
       newSchedule.day_start_times[newDayNum] = '09:00'
+    }
+
+    set({ currentConfig: { ...currentConfig, schedule: newSchedule } })
+    get().saveCurrentWorkshop()
+  },
+
+  // Remove a day and renumber remaining days
+  removeDay: (dayNum: number) => {
+    const { currentConfig } = get()
+    if (!currentConfig) return
+    if (currentConfig.schedule.days <= 1) return // Keep at least 1 day
+
+    const totalDays = currentConfig.schedule.days
+    const newSchedule: any = {
+      ...currentConfig.schedule,
+      days: totalDays - 1,
+      day_titles: { ...currentConfig.schedule.day_titles },
+      day_start_times: { ...currentConfig.schedule.day_start_times },
+    }
+
+    // Remove the deleted day key
+    delete newSchedule[`day${dayNum}`]
+    delete newSchedule.day_titles?.[dayNum]
+    delete newSchedule.day_start_times?.[dayNum]
+
+    // Renumber days above the deleted one downward
+    for (let d = dayNum + 1; d <= totalDays; d++) {
+      const newD = d - 1
+      // Sessions
+      if (newSchedule[`day${d}`]) {
+        newSchedule[`day${newD}`] = newSchedule[`day${d}`]
+        delete newSchedule[`day${d}`]
+      }
+      // Titles
+      if (newSchedule.day_titles?.[d] !== undefined) {
+        newSchedule.day_titles[newD] = newSchedule.day_titles[d]
+        delete newSchedule.day_titles[d]
+      }
+      // Start times
+      if (newSchedule.day_start_times?.[d] !== undefined) {
+        newSchedule.day_start_times[newD] = newSchedule.day_start_times[d]
+        delete newSchedule.day_start_times[d]
+      }
     }
 
     set({ currentConfig: { ...currentConfig, schedule: newSchedule } })
