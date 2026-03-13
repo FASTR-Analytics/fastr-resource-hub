@@ -1307,6 +1307,8 @@ CRITICAL RULES:
 15. Generate a concise title (for cover slide) and subtitle
 16. Use the workshop name provided by user for the "name" field
 17. NEVER DUPLICATE A MODULE - each module can only appear ONCE in the entire schedule
+18. EVERY module in the "modules" array MUST appear in the schedule — do NOT list a module without scheduling it. If it doesn't fit, remove it from the "modules" array too.
+19. Use ONLY these break names: "Tea Break" and "Lunch Break" (never translate break names, even for French workshops). ONE lunch break per day, maximum.
 18. A good workshop BALANCES theory and practice — don't stack all theory on one day
 
 Return ONLY valid JSON, no explanation.`,
@@ -1362,9 +1364,10 @@ Return ONLY valid JSON, no explanation.`,
         // Pass 2: Remove duplicates
         workshopConfig.schedule[dayKey] = sessions.filter((_: any, i: number) => !toRemove.has(i))
 
-        // Helper to check if a session is a lunch break (always keep these)
-        const isLunch = (s: any) => s?.type === 'break' && s?.session?.toLowerCase().includes('lunch')
-        const isTeaBreak = (s: any) => s?.type === 'break' && !s?.session?.toLowerCase().includes('lunch')
+        // Helper to check if a session is a lunch break (bilingual: EN + FR)
+        const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
+        const isLunch = (s: any) => s?.type === 'break' && lunchPattern.test(s?.session || '')
+        const isTeaBreak = (s: any) => s?.type === 'break' && !lunchPattern.test(s?.session || '')
 
         // Pass 3: Remove consecutive tea breaks (if duplicate removal left two breaks in a row)
         // Always keep lunch breaks
@@ -1429,15 +1432,22 @@ Return ONLY valid JSON, no explanation.`,
         }
       }
 
-      // Pass 8: Remove consecutive non-lunch breaks (tea break after tea break)
+      // Pass 8: Remove consecutive non-lunch breaks and duplicate lunch breaks
+      const lunchPatternGlobal = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
       for (const dayKey of Object.keys(workshopConfig.schedule)) {
         if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
         const sessions = workshopConfig.schedule[dayKey]
-        const isLunchBreak = (s: any) => s?.type === 'break' && s?.session?.toLowerCase().includes('lunch')
-        const isNonLunchBreak = (s: any) => s?.type === 'break' && !s?.session?.toLowerCase().includes('lunch')
+        const isLunchBreak = (s: any) => s?.type === 'break' && lunchPatternGlobal.test(s?.session || '')
+        const isNonLunchBreak = (s: any) => s?.type === 'break' && !lunchPatternGlobal.test(s?.session || '')
         const cleaned: any[] = []
+        let lunchCount = 0
         for (const session of sessions) {
           const prev = cleaned[cleaned.length - 1]
+          // Remove duplicate lunch breaks (keep only the first one per day)
+          if (isLunchBreak(session)) {
+            lunchCount++
+            if (lunchCount > 1) continue
+          }
           // Allow tea break immediately before lunch, but not two tea breaks in a row
           if (isNonLunchBreak(session) && prev && isNonLunchBreak(prev)) {
             continue
@@ -1500,6 +1510,18 @@ Return ONLY valid JSON, no explanation.`,
         workshopConfig._warnings = warnings
       }
 
+    }
+
+    // POST-PROCESSING: Sync modules array with what's actually scheduled
+    if (workshopConfig.schedule && Array.isArray(workshopConfig.modules)) {
+      const scheduledModules = new Set<string>()
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        for (const s of workshopConfig.schedule[dayKey]) {
+          if (s.module) scheduledModules.add(s.module.replace(/^m/, ''))
+        }
+      }
+      workshopConfig.modules = workshopConfig.modules.filter((m: string) => scheduledModules.has(m))
     }
 
     // POST-PROCESSING: Convert start_date/end_date to formatted date string
