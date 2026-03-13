@@ -297,6 +297,9 @@ export const translations = {
     pleaseCompleteRequired: 'Please fill in workshop name and country',
     confirmDeleteDayMsg: 'Delete Day {day} and all its sessions? This cannot be undone.',
 
+    // AI warnings
+    scheduleOverflowWarning: 'Some days may run long — review the schedule and adjust',
+
     // Accessibility
     dismissError: 'Dismiss error',
     closePanel: 'Close panel',
@@ -600,6 +603,9 @@ export const translations = {
     pleaseDescribeWorkshop: 'Veuillez décrire le type d\'atelier souhaité',
     pleaseCompleteRequired: 'Veuillez remplir le nom et le pays de l\'atelier',
     confirmDeleteDayMsg: 'Supprimer le Jour {day} et toutes ses sessions ? Cette action est irréversible.',
+
+    // AI warnings
+    scheduleOverflowWarning: 'Certaines journées pourraient dépasser l\'horaire — vérifiez le programme',
 
     // Accessibility
     dismissError: 'Fermer l\'erreur',

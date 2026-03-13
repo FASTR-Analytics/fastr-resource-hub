@@ -33,6 +33,96 @@ function getModuleDetailsDict(): Record<string, { name: string; description: str
   return dict
 }
 
+// Helper: Parse a duration string like "90-120 min" into { lower, upper } in minutes
+function parseDurationRange(duration: string): { lower: number; upper: number } {
+  const match = duration.match(/(\d+)\s*[-–]\s*(\d+)/)
+  if (match) return { lower: parseInt(match[1]), upper: parseInt(match[2]) }
+  const single = duration.match(/(\d+)/)
+  if (single) {
+    const val = parseInt(single[1])
+    return { lower: val, upper: val }
+  }
+  return { lower: 60, upper: 90 } // fallback
+}
+
+// Compute time budget: available time vs requested content
+function computeTimeBudget(params: {
+  days: number
+  dayStartTime?: string
+  dayEndTime?: string
+  lunchDuration?: number
+  requestedModules?: string[]
+  moduleVersion?: 'full' | 'condensed'
+}): { totalAvailableMinutes: number; requestedContentMinutes: number; overflowMinutes: number; perDayAvailable: number; budgetSummary: string } {
+  const {
+    days,
+    dayStartTime = '09:00',
+    dayEndTime = '17:00',
+    lunchDuration = 60,
+    requestedModules = [],
+    moduleVersion = 'full',
+  } = params
+
+  const dayLengthMinutes = timeToMinutes(dayEndTime) - timeToMinutes(dayStartTime)
+  const teaBreakOverhead = 30 // 2 x 15min tea breaks per day
+
+  // Day 1: lunch + tea + opening sessions (welcome, intros, agenda, objectives, expectations, outputs) ~55min
+  const day1Overhead = lunchDuration + teaBreakOverhead + 55
+  // Day 2+: lunch + tea + recap/agenda ~20min
+  const day2PlusOverhead = lunchDuration + teaBreakOverhead + 20
+
+  const day1Available = Math.max(0, dayLengthMinutes - day1Overhead)
+  const day2PlusAvailable = Math.max(0, dayLengthMinutes - day2PlusOverhead)
+
+  const totalAvailableMinutes = day1Available + (days > 1 ? (days - 1) * day2PlusAvailable : 0)
+  const perDayAvailable = days === 1 ? day1Available : Math.round(totalAvailableMinutes / days)
+
+  // Calculate requested content duration
+  const moduleDetails = getModuleDetailsDict()
+  let requestedContentMinutes = 0
+  const moduleBreakdown: string[] = []
+
+  for (const modNum of requestedModules) {
+    const mod = moduleDetails[modNum]
+    if (!mod) continue
+
+    const range = parseDurationRange(mod.duration)
+    const isActivity = modNum.startsWith('9')
+    let estimated: number
+
+    if (isActivity) {
+      // Activities: use upper bound (can't compress hands-on work)
+      estimated = range.upper
+    } else if (moduleVersion === 'condensed') {
+      // Condensed theory: ~70% of lower bound
+      estimated = Math.round(range.lower * 0.7)
+    } else {
+      // Full theory: midpoint of range
+      estimated = Math.round((range.lower + range.upper) / 2)
+    }
+
+    requestedContentMinutes += estimated
+    moduleBreakdown.push(`  Module ${modNum} (${mod.name}): ~${estimated} min${isActivity ? ' [activity]' : ''}`)
+  }
+
+  const overflowMinutes = Math.max(0, requestedContentMinutes - totalAvailableMinutes)
+
+  const budgetSummary = [
+    `Workshop: ${days} day(s), ${dayStartTime}–${dayEndTime}`,
+    `Available content time: ${totalAvailableMinutes} min (~${Math.round(totalAvailableMinutes / 60)}h)`,
+    `  Day 1: ${day1Available} min (after opening ceremonies + breaks)`,
+    ...(days > 1 ? [`  Days 2-${days}: ${day2PlusAvailable} min each (after recap + breaks)`] : []),
+    `Requested content: ${requestedContentMinutes} min (~${Math.round(requestedContentMinutes / 60)}h)`,
+    ...moduleBreakdown,
+    overflowMinutes > 0
+      ? `⚠ OVERFLOW: ${overflowMinutes} min (~${Math.round(overflowMinutes / 60)}h) over budget. Must condense or remove modules.`
+      : `✓ Content fits within available time (${totalAvailableMinutes - requestedContentMinutes} min buffer).`,
+    `Max content per day: ~${perDayAvailable} min`,
+  ].join('\n')
+
+  return { totalAvailableMinutes, requestedContentMinutes, overflowMinutes, perDayAvailable, budgetSummary }
+}
+
 // AI Tools for modifying the deck
 const AI_TOOLS: Anthropic.Tool[] = [
   {
@@ -1015,28 +1105,41 @@ router.post('/generate-workshop', async (req, res) => {
 
     // ── Phase 1: Check if clarification is needed ──────────────────────────
     if (!clarifications) {
+      // Pre-compute a rough time budget to include in clarification context
+      // Try to extract days and modules from the raw prompt for feasibility check
+      const roughDaysMatch = prompt.match(/(\d+)\s*[-–]?\s*days?/i)
+      const roughDays = roughDaysMatch ? parseInt(roughDaysMatch[1]) : 3
+      const roughBudget = computeTimeBudget({ days: roughDays })
+
       const clarifyResponse = await client.messages.create({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1024,
         system: `You evaluate workshop descriptions to determine if there is enough information to build a good FASTR workshop.
 
-Available modules:
+Available modules (with durations):
 ${moduleList}
 
 You MUST have clarity on these key items:
 1. Number of days (e.g., "3-day workshop")
 2. Workshop focus or which modules to include (e.g., "focus on data quality" or "full FASTR training")
 3. Audience level (e.g., "first time", "refresher", "advanced")
+4. Workshop language (English or French) — if the prompt is in French or mentions a francophone country (Senegal, Burkina Faso, DRC, Cameroon, Mali, Guinea, Niger, Chad, Benin, Togo, Côte d'Ivoire, Madagascar, Haiti, etc.), assume French and do NOT ask
 
 Nice to have (do NOT ask if missing, just use defaults):
 - Country, dates, city
 - Full vs condensed preference
 - Start/end times
 
+TIME BUDGET AWARENESS:
+- A ${roughDays}-day workshop has roughly ${roughBudget.totalAvailableMinutes} minutes (~${Math.round(roughBudget.totalAvailableMinutes / 60)}h) of available content time (after breaks, opening ceremonies, recaps)
+- If the user requests modules whose total duration clearly exceeds the available time, you MUST include a question warning them: "You've requested approximately Xh of content but only have ~Yh available. Would you like to: (a) use condensed/shorter versions for theory modules, (b) prioritize certain modules and drop others, or (c) add more days?"
+- Module durations are listed above — sum them to check feasibility
+
 RULES:
-- If ALL 3 key items are clear from the description, return exactly: {"ready": true}
+- If ALL required items are clear from the description, return exactly: {"ready": true}
 - If any key item is unclear, return a JSON array of 2-4 short, specific questions to ask. Each question should be a plain string.
 - Do NOT ask about things already stated in the prompt
+- Do NOT ask about language if the prompt is in French or mentions a francophone country
 - Keep questions concise and practical
 - Return ONLY valid JSON, no explanation`,
         messages: [{ role: 'user', content: prompt }],
@@ -1074,6 +1177,38 @@ RULES:
       enrichedPrompt = `${prompt}\n\nAdditional details:\n${qaBlock}`
     }
 
+    // Extract parameters from enriched prompt for time budget calculation
+    const daysMatch = enrichedPrompt.match(/(\d+)\s*[-–]?\s*days?/i)
+    const extractedDays = daysMatch ? parseInt(daysMatch[1]) : 3
+    const startTimeMatch = enrichedPrompt.match(/start\s*(?:at\s*)?(\d{1,2}[:.]\d{2})/i)
+    const endTimeMatch = enrichedPrompt.match(/end\s*(?:at\s*|by\s*)?(\d{1,2}[:.]\d{2})/i)
+    const extractedStartTime = startTimeMatch ? startTimeMatch[1].replace('.', ':') : '09:00'
+    const extractedEndTime = endTimeMatch ? endTimeMatch[1].replace('.', ':') : '17:00'
+    const isCondensed = /condensed|quick|overview|high-level|shorter|introductory/i.test(enrichedPrompt)
+
+    // Try to identify requested modules from the enriched prompt
+    const moduleDetails = getModuleDetailsDict()
+    const allModuleNums = Object.keys(moduleDetails)
+    const detectedModules: string[] = []
+    // Check for explicit module references or topic keywords
+    for (const num of allModuleNums) {
+      const mod = moduleDetails[num]
+      const nameWords = mod.name.toLowerCase().split(/\s+/)
+      const hasModuleRef = new RegExp(`module\\s*${num.replace(/([a-z])/g, '$1?')}\\b`, 'i').test(enrichedPrompt)
+      const hasTopicRef = nameWords.some(w => w.length > 4 && enrichedPrompt.toLowerCase().includes(w))
+      if (hasModuleRef || hasTopicRef) detectedModules.push(num)
+    }
+    // If "full training" or no specific modules, assume most modules
+    const modulesForBudget = detectedModules.length > 0 ? detectedModules : allModuleNums.filter(n => !n.startsWith('9'))
+
+    const timeBudget = computeTimeBudget({
+      days: extractedDays,
+      dayStartTime: extractedStartTime,
+      dayEndTime: extractedEndTime,
+      requestedModules: modulesForBudget,
+      moduleVersion: isCondensed ? 'condensed' : 'full',
+    })
+
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
@@ -1083,6 +1218,17 @@ Given a user's description of their workshop needs, generate a COMPLETE workshop
 
 Available FASTR modules:
 ${moduleList}
+
+TIME BUDGET (calculated):
+${timeBudget.budgetSummary}
+
+HARD SCHEDULING RULES:
+- Each day MUST end by the day_end_time. NO EXCEPTIONS.
+- Sum all session durations per day (including breaks). Total must NOT exceed ${timeToMinutes(extractedEndTime) - timeToMinutes(extractedStartTime)} minutes.
+- Day 1 available content time: ~${timeBudget.totalAvailableMinutes > 0 ? Math.round(timeBudget.totalAvailableMinutes / extractedDays) : 300} min (after opening ceremonies + breaks).
+- Activity modules (9a-9h) MUST keep their full duration. Never compress.
+- If content doesn't fit: use condensed for theory modules, or drop lower-priority modules.
+- Maximum ~${timeBudget.perDayAvailable} minutes of content sessions per day.
 
 IMPORTANT - MODULE TYPES:
 
@@ -1299,6 +1445,59 @@ Return ONLY valid JSON, no explanation.`,
           cleaned.push(session)
         }
         workshopConfig.schedule[dayKey] = cleaned
+      }
+
+      // Pass 9: Overflow detection and auto-condensing
+      const dayStartMin = timeToMinutes(workshopConfig.day_start_time || extractedStartTime)
+      const dayEndMin = timeToMinutes(workshopConfig.day_end_time || extractedEndTime)
+      const maxDayMinutes = dayEndMin - dayStartMin
+      const warnings: string[] = []
+
+      for (const dayKey of Object.keys(workshopConfig.schedule)) {
+        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        const sessions = workshopConfig.schedule[dayKey]
+
+        // Sum all durations
+        let totalMinutes = sessions.reduce((sum: number, s: any) => sum + (s.duration || 0), 0)
+
+        if (totalMinutes > maxDayMinutes) {
+          // Try to condense theory modules (from last to first) to reduce overflow
+          const moduleDetailsMap = getModuleDetailsDict()
+          for (let i = sessions.length - 1; i >= 0 && totalMinutes > maxDayMinutes; i--) {
+            const s = sessions[i]
+            if (!s.module) continue
+            // Skip activity modules (9a-9h) — can't compress
+            const modNum = s.module.replace(/^m/, '')
+            if (modNum.startsWith('9')) continue
+            // Skip already condensed
+            if (s.version === 'condensed') continue
+            // Skip breaks/custom
+            if (s.type === 'break' || s.type === 'custom') continue
+
+            const mod = moduleDetailsMap[modNum]
+            if (!mod) continue
+
+            const range = parseDurationRange(mod.duration)
+            const fullDuration = s.duration || Math.round((range.lower + range.upper) / 2)
+            const condensedDuration = Math.round(range.lower * 0.7)
+
+            // Switch to condensed
+            const saved = fullDuration - condensedDuration
+            sessions[i] = { ...s, version: 'condensed', duration: condensedDuration }
+            totalMinutes -= saved
+          }
+
+          // If still overflowing after condensing, add a warning
+          if (totalMinutes > maxDayMinutes) {
+            const overBy = totalMinutes - maxDayMinutes
+            const dayNum = dayKey.replace('day', '')
+            warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
+          }
+        }
+      }
+
+      if (warnings.length > 0) {
+        workshopConfig._warnings = warnings
       }
 
     }

@@ -2139,11 +2139,15 @@ function App() {
     }
   }, [showExportMenu])
 
-  // Custom collision detection: library items target day-column droppables; session items use closestCenter
+  // Custom collision detection: library items only target day-column droppables; session items use closestCenter
   const customCollisionDetection: CollisionDetection = (args) => {
     const activeData = args.active.data.current
     if (activeData?.type === 'library-module' || activeData?.type === 'library-topic') {
-      return rectIntersection(args)
+      // Filter to only day-column droppables (exclude sortable session cards)
+      const dayContainers = args.droppableContainers.filter(
+        container => container.data.current?.type === 'day-column'
+      )
+      return rectIntersection({ ...args, droppableContainers: dayContainers })
     }
     return closestCenter(args)
   }
@@ -2323,6 +2327,7 @@ function App() {
               _id: `session-${d}-${sessionNum++}-${ts}`,
               session: aiSession.session,
               module: aiSession.module,
+              version: aiSession.version,
               duration: aiSession.duration || 60,
             })
           } else if (aiSession.type === 'break') {
@@ -2365,6 +2370,22 @@ function App() {
           modules: data.modules || [],
           custom_slides: [],
         },
+      }
+
+      // Detect language: from AI response, clarification answers, or prompt text
+      const promptAndAnswers = [aiPrompt, ...Object.values(aiAnswers)].join(' ')
+      if (data.language === 'fr' || data.language === 'french') {
+        setContentLanguage('fr')
+      } else if (/fran[cç]ais|atelier\s+FASTR|french|francophone/i.test(promptAndAnswers) ||
+                 /\b(Sénégal|Burkina|Congo|Cameroun|Mali|Guinée|Niger|Tchad|Bénin|Togo|Madagascar|Haïti|Côte d'Ivoire)\b/i.test(promptAndAnswers)) {
+        setContentLanguage('fr')
+      }
+
+      // Show overflow warnings if any
+      if (data._warnings && Array.isArray(data._warnings) && data._warnings.length > 0) {
+        setTimeout(() => {
+          showToast(t('scheduleOverflowWarning', contentLanguage), 'info')
+        }, 500)
       }
 
       // Create the workshop directly
