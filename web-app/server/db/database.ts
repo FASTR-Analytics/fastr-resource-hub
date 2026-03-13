@@ -290,10 +290,7 @@ async function autoImportWorkshops() {
     : path.resolve(__dirname, '../../..')
   const WORKSHOPS_PATH = path.join(REPO_ROOT, 'workshops')
 
-  console.log('Auto-importing workshops from:', WORKSHOPS_PATH)
-
   if (!fs.existsSync(WORKSHOPS_PATH)) {
-    console.log('Workshops folder not found, skipping auto-import')
     return
   }
 
@@ -326,11 +323,9 @@ async function autoImportWorkshops() {
       const config = yaml.load(yamlContent) as WorkshopConfig
       await createWorkshop(folder, config)
       imported++
-      console.log(`  Imported: ${folder}`)
     } catch (err: any) {
       console.error(`  Error importing ${folder}:`, err.message)
     }
   }
 
-  console.log(`Auto-import complete: ${imported} imported, ${skipped} already exist`)
 }

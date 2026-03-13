@@ -1085,7 +1085,6 @@ router.post('/rebuild', async (req, res) => {
   }
 
   try {
-    console.log(`Running content extraction script for languages: ${languages.join(', ')}...`)
     const startTime = Date.now()
 
     // Build command args as array (no shell injection risk)
@@ -1107,8 +1106,6 @@ router.post('/rebuild', async (req, res) => {
 
     // Also clear render cache
     renderCache.clear()
-
-    console.log('Content extraction complete in', duration, 'ms')
 
     res.json({
       success: true,

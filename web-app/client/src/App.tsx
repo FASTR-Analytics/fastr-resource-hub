@@ -14,7 +14,6 @@ import {
   Download,
   ChevronDown,
   ChevronRight,
-  Menu,
   X,
   Check,
   RefreshCw,
@@ -38,16 +37,21 @@ import {
   Coffee,
   UtensilsCrossed,
   AlertTriangle,
+  ArrowRightLeft,
 } from 'lucide-react'
 import {
   DndContext,
   closestCenter,
+  rectIntersection,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
+  useDroppable,
   DragEndEvent,
   DragStartEvent,
+  DragOverlay,
+  CollisionDetection,
 } from '@dnd-kit/core'
 import {
   SortableContext,
@@ -56,6 +60,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import type { Module as LibraryModule, Topic as LibraryTopic } from './components/ContentLibrary'
 
 // Session type colors and icons
 const sessionTypeConfig: Record<string, { bg: string; border: string; icon: string; iconType?: string }> = {
@@ -98,10 +103,14 @@ interface SortableSessionCardProps {
   session: Session & { _id: string; _startTime?: string; _endTime?: string }
   index: number
   dayNum: number
+  totalDays: number
   onEdit: (session: Session, dayNum: number, index: number) => void
+  onMoveToDay: (fromDay: number, fromIdx: number, toDay: number) => void
 }
 
-function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSessionCardProps) {
+function SortableSessionCard({ session, index, dayNum, totalDays, onEdit, onMoveToDay }: SortableSessionCardProps) {
+  const [showMoveMenu, setShowMoveMenu] = useState(false)
+  const { contentLanguage } = useWorkshopStore()
   const isLocked = isSessionLocked(session)
   const config = session.module
     ? { bg: 'bg-blue-50', border: 'border-blue-200', icon: '📘', iconType: 'book' }
@@ -117,6 +126,7 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
   } = useSortable({
     id: session._id,
     disabled: isLocked,
+    data: { type: 'session', dayNum },
   })
 
   const style = {
@@ -158,17 +168,54 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
         </div>
       </div>
 
-      {/* Edit button */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation()
-          onEdit(session, dayNum, index)
-        }}
-        className="absolute right-1 top-1 p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-black/10 transition-all"
-        title="Edit session"
-      >
-        <Pencil className="w-3.5 h-3.5 text-gray-500" />
-      </button>
+      {/* Action buttons (top-right) */}
+      <div className="absolute right-1 top-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-all">
+        {/* Move to Day button */}
+        {totalDays > 1 && (
+          <div className="relative">
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setShowMoveMenu(!showMoveMenu)
+              }}
+              className="p-1 rounded hover:bg-black/10 transition-colors"
+              title={t('moveToDay', contentLanguage)}
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5 text-gray-500" />
+            </button>
+            {showMoveMenu && (
+              <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-xl ring-1 ring-black/10 py-1 z-50 min-w-[100px]">
+                {Array.from({ length: totalDays }, (_, i) => i + 1)
+                  .filter(d => d !== dayNum)
+                  .map(d => (
+                    <button
+                      key={d}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onMoveToDay(dayNum, index, d)
+                        setShowMoveMenu(false)
+                      }}
+                      className="w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-fastr-primary/10 hover:text-fastr-primary transition-colors"
+                    >
+                      {t('day', contentLanguage)} {d}
+                    </button>
+                  ))}
+              </div>
+            )}
+          </div>
+        )}
+        {/* Edit button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onEdit(session, dayNum, index)
+          }}
+          className="p-1 rounded hover:bg-black/10 transition-colors"
+          title="Edit session"
+        >
+          <Pencil className="w-3.5 h-3.5 text-gray-500" />
+        </button>
+      </div>
 
       {/* Content */}
       <div className="pl-5 pr-6">
@@ -205,6 +252,26 @@ function SortableSessionCard({ session, index, dayNum, onEdit }: SortableSession
   )
 }
 
+// Droppable day column wrapper — highlights when library items are dragged over
+function DroppableDayColumn({ dayNum, children }: { dayNum: number; children: React.ReactNode }) {
+  const { setNodeRef, isOver } = useDroppable({
+    id: `day-drop-${dayNum}`,
+    data: { type: 'day-column', dayNum },
+  })
+  return (
+    <div
+      ref={setNodeRef}
+      className={`flex-shrink-0 w-[340px] rounded-xl shadow-sm border ring-1 ring-black/[0.03] transition-all ${
+        isOver
+          ? 'border-fastr-secondary bg-fastr-secondary/5 ring-2 ring-fastr-secondary/40'
+          : 'border-gray-200/80 bg-white/70 backdrop-blur-sm'
+      }`}
+    >
+      {children}
+    </div>
+  )
+}
+
 // Edit Session Modal
 interface EditSessionModalProps {
   session: Session
@@ -217,6 +284,7 @@ interface EditSessionModalProps {
 }
 
 function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelete, onMoveToDay }: EditSessionModalProps) {
+  const { contentLanguage } = useWorkshopStore()
   const [sessionName, setSessionName] = useState(session.session || '')
   const [speaker, setSpeaker] = useState(session.speaker || '')
   const [duration, setDuration] = useState(session.duration || 0)
@@ -238,26 +306,26 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-b">
-          <h3 className="font-semibold text-gray-800">Edit Session</h3>
-          <button onClick={onClose} aria-label="Close dialog" className="p-1 hover:bg-gray-200 rounded-full transition-colors">
+          <h3 className="font-semibold text-gray-800">{t('editSession', contentLanguage)}</h3>
+          <button onClick={onClose} aria-label={t('closeDialog', contentLanguage)} className="p-1 hover:bg-gray-200 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
 
         <div className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Session Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('sessionName', contentLanguage)}</label>
             <input
               type="text"
               value={sessionName}
               onChange={(e) => setSessionName(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              placeholder="Session name"
+              placeholder={t('sessionName', contentLanguage)}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Facilitator/Presenter</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('facilitatorPresenter', contentLanguage)}</label>
             <input
               type="text"
               value={speaker}
@@ -268,7 +336,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Duration (minutes)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('durationMinutes', contentLanguage)}</label>
             <input
               type="number"
               value={duration}
@@ -282,18 +350,18 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
           {/* Move to Day */}
           {totalDays > 1 && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Move to Different Day</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('moveToDifferentDay', contentLanguage)}</label>
               <div className="flex gap-2">
                 <select
                   value={moveToDay ?? ''}
                   onChange={(e) => setMoveToDay(e.target.value ? parseInt(e.target.value) : null)}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
                 >
-                  <option value="">Select day...</option>
+                  <option value="">{t('selectDay', contentLanguage)}</option>
                   {Array.from({ length: totalDays }, (_, i) => i + 1)
                     .filter(d => d !== dayNum)
                     .map(d => (
-                      <option key={d} value={d}>Day {d}</option>
+                      <option key={d} value={d}>{t('day', contentLanguage)} {d}</option>
                     ))}
                 </select>
                 <button
@@ -306,7 +374,7 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
                   disabled={!moveToDay}
                   className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Move
+                  {t('move', contentLanguage)}
                 </button>
               </div>
             </div>
@@ -316,27 +384,27 @@ function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelet
         <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-t">
           <button
             onClick={() => {
-              if (confirm('Delete this session?')) {
+              if (confirm(t('confirmDeleteSession', contentLanguage))) {
                 onDelete()
                 onClose()
               }
             }}
             className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
           >
-            Delete Session
+            {t('deleteSession', contentLanguage)}
           </button>
           <div className="flex gap-2">
             <button
               onClick={onClose}
               className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              Cancel
+              {t('cancel', contentLanguage)}
             </button>
             <button
               onClick={handleSave}
               className="px-4 py-2 text-sm font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all"
             >
-              Save Changes
+              {t('saveChanges', contentLanguage)}
             </button>
           </div>
         </div>
@@ -1983,10 +2051,10 @@ function App() {
         setIsAuthenticated(true)
         setLoginPassword('')
       } else {
-        setLoginError('Invalid password')
+        setLoginError(t('invalidPassword', contentLanguage))
       }
     } catch {
-      setLoginError('Failed to connect')
+      setLoginError(t('failedToConnect', contentLanguage))
     } finally {
       setIsLoggingIn(false)
     }
@@ -2020,7 +2088,7 @@ function App() {
     index: number
   } | null>(null)
   const [addSessionMenuDay, setAddSessionMenuDay] = useState<number | null>(null)
-  const [_activeId, setActiveId] = useState<string | null>(null)
+  const [activeDragData, setActiveDragData] = useState<{ id: string; data: any } | null>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [createMode, setCreateMode] = useState<'manual' | 'ai'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
@@ -2071,18 +2139,66 @@ function App() {
     }
   }, [showExportMenu])
 
+  // Custom collision detection: library items target day-column droppables; session items use closestCenter
+  const customCollisionDetection: CollisionDetection = (args) => {
+    const activeData = args.active.data.current
+    if (activeData?.type === 'library-module' || activeData?.type === 'library-topic') {
+      return rectIntersection(args)
+    }
+    return closestCenter(args)
+  }
+
   // Handle drag start
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
+    setActiveDragData({
+      id: event.active.id as string,
+      data: event.active.data.current,
+    })
   }
 
   // Handle drag end
   const handleDragEnd = (event: DragEndEvent) => {
-    setActiveId(null)
+    setActiveDragData(null)
     const { active, over } = event
-    if (!over || active.id === over.id) return
+    if (!over) return
 
-    // Find which day and index the dragged item is from
+    const activeData = active.data.current
+    const overData = over.data.current
+
+    // Case 1: Library module dropped on day column
+    if (activeData?.type === 'library-module' && overData?.type === 'day-column') {
+      const module = activeData.module as LibraryModule
+      const dayNum = overData.dayNum as number
+      const allTopics = [...(module.fullTopics || module.topics || [])]
+      addSession(dayNum, {
+        session: module.name,
+        module: module.id,
+        topics: allTopics.map((t: any) => t.id),
+        slides: allTopics.map((t: any) => t.file),
+        duration: allTopics.reduce((sum: number, t: any) => sum + Math.max(15, (t.slideCount || 3) * 3), 0),
+      })
+      showToast(`${t('addedToDay', contentLanguage)} ${dayNum}: ${module.name}`, 'success')
+      return
+    }
+
+    // Case 2: Library topic dropped on day column
+    if (activeData?.type === 'library-topic' && overData?.type === 'day-column') {
+      const topic = activeData.topic as LibraryTopic
+      const module = activeData.module as LibraryModule
+      const dayNum = overData.dayNum as number
+      addSession(dayNum, {
+        session: topic.title,
+        module: module.id,
+        topics: [topic.id],
+        slides: [topic.file],
+        duration: Math.max(15, (topic.slideCount || 3) * 3),
+      })
+      showToast(`${t('addedToDay', contentLanguage)} ${dayNum}: ${topic.title}`, 'success')
+      return
+    }
+
+    // Case 3: Session reorder within a day
+    if (active.id === over.id) return
     for (let day = 1; day <= (currentConfig?.schedule?.days || 0); day++) {
       const dayKey = `day${day}`
       const sessions = currentConfig?.schedule?.[dayKey] || []
@@ -2094,6 +2210,12 @@ function App() {
         break
       }
     }
+  }
+
+  // Handle move session to another day (quick action)
+  const handleMoveToDay = (fromDay: number, fromIdx: number, toDay: number) => {
+    moveSessionToDay(fromDay, fromIdx, toDay, -1)
+    showToast(`${t('moveToDay', contentLanguage)} ${toDay}`, 'success')
   }
 
   // Handle edit session
@@ -2118,7 +2240,7 @@ function App() {
   // Handle AI workshop generation - creates workshop directly
   const handleAIGenerate = async () => {
     if (!aiPrompt.trim()) {
-      setError('Please describe what kind of workshop you need')
+      setError(t('pleaseDescribeWorkshop', contentLanguage))
       return
     }
 
@@ -2262,7 +2384,7 @@ function App() {
   // Handle create new workshop
   const handleCreateWorkshop = async () => {
     if (!newWorkshop.name || !newWorkshop.country) {
-      setError('Please fill in workshop name and country')
+      setError(t('pleaseCompleteRequired', contentLanguage))
       return
     }
 
@@ -2504,13 +2626,13 @@ function App() {
               <KeyRound className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-2 tracking-tight">FASTR Deck Builder</h1>
-            <p className="text-white/70">Enter the team password to continue</p>
+            <p className="text-white/70">{t('enterPasswordToContinue', contentLanguage)}</p>
           </div>
 
           <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-xl ring-1 ring-black/5">
             <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Team Password
+                {t('teamPassword', contentLanguage)}
               </label>
               <input
                 type="password"
@@ -2537,10 +2659,10 @@ function App() {
               {isLoggingIn ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  Signing in...
+                  {t('signingIn', contentLanguage)}
                 </>
               ) : (
-                'Sign In'
+                t('signIn', contentLanguage)
               )}
             </button>
           </form>
@@ -2729,102 +2851,107 @@ function App() {
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       {/* Header / Toolbar */}
-      <header className="bg-gradient-to-r from-fastr-primary to-fastr-primary-light text-white px-4 py-2.5 flex items-center justify-between shadow-md z-20">
-        {/* Back button */}
-        <button
-          onClick={() => setAppMode('select')}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors mr-2"
-          title="Back to home"
-          aria-label="Back to home"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <div className="flex items-center gap-3">
-          <Layers className="w-6 h-6" />
-          <h1 className="font-semibold text-lg">FASTR Deck Builder</h1>
+      <header className="bg-gradient-to-r from-fastr-primary to-fastr-primary-light text-white px-4 py-2.5 flex items-center shadow-md z-20">
+        {/* Left zone: Back + Workshop selector */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setAppMode('select')}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            title={t('back', contentLanguage)}
+            aria-label={t('back', contentLanguage)}
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+
+          {currentWorkshopId && (
+            <button
+              onClick={() => setShowWorkshopSelector(true)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
+            >
+              <FolderOpen className="w-4 h-4" />
+              <span className="text-sm font-medium max-w-[200px] truncate">
+                {currentConfig?.workshop?.name || currentWorkshopId}
+              </span>
+              <ChevronDown className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
-        {/* Workshop selector */}
-        {currentWorkshopId && (
-          <button
-            onClick={() => setShowWorkshopSelector(true)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
-          >
-            <Menu className="w-4 h-4" />
-            <span className="text-sm font-medium max-w-[200px] truncate">
-              {currentConfig?.workshop?.name || currentWorkshopId}
-            </span>
-            <ChevronDown className="w-4 h-4" />
-          </button>
-        )}
+        {/* Spacer */}
+        <div className="flex-1" />
 
-        {/* Toolbar buttons */}
+        {/* Right zone: Save status + toolbar buttons */}
         <div className="flex items-center gap-1">
           {/* Save status */}
           {saveStatus === 'saving' && (
             <span className="flex items-center gap-1.5 text-xs text-white/70 px-2">
               <RefreshCw className="w-3 h-3 animate-spin" />
-              Saving...
+              {t('saving', contentLanguage)}
             </span>
           )}
           {saveStatus === 'saved' && (
             <span className="flex items-center gap-1.5 text-xs text-green-300 px-2">
               <Check className="w-3 h-3" />
-              Saved
+              {t('saved', contentLanguage)}
             </span>
           )}
 
-          {/* Library toggle */}
+          {/* Slides (Content Library) toggle */}
           <button
             onClick={() => {
               if (leftPanelPinned) {
-                // If pinned, unpin and close
                 setLeftPanelPinned(false)
                 setLeftPanelOpen(false)
               } else {
-                // Toggle open/close
                 setLeftPanelOpen(!leftPanelOpen)
               }
             }}
-            className={`p-2 rounded-md transition-colors ${
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
               leftPanelOpen || leftPanelPinned ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
             }`}
-            title={leftPanelPinned ? 'Unpin Content Library' : 'Content Library'}
+            title={t('slidesButton', contentLanguage)}
+            aria-pressed={leftPanelOpen || leftPanelPinned}
           >
-            <BookOpen className="w-5 h-5" />
+            <BookOpen className="w-4 h-4" />
+            <span className="hidden lg:inline">{t('slidesButton', contentLanguage)}</span>
           </button>
 
-          {/* AI toggle */}
+          {/* AI Help toggle */}
           <button
             onClick={() => setRightPanelOpen(!rightPanelOpen)}
-            className={`p-2 rounded-md transition-colors ${
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
               rightPanelOpen ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
             }`}
-            title="AI Assistant"
+            title={t('aiHelp', contentLanguage)}
+            aria-pressed={rightPanelOpen}
           >
-            <Sparkles className="w-5 h-5" />
+            <Sparkles className="w-4 h-4" />
+            <span className="hidden lg:inline">{t('aiHelp', contentLanguage)}</span>
           </button>
 
           <div className="w-px h-6 bg-white/20 mx-1" />
 
+          {/* Preview toggle */}
+          <button
+            onClick={() => setShowPreview(!showPreview)}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
+              showPreview ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
+            }`}
+            title={t('preview', contentLanguage)}
+            aria-pressed={showPreview}
+          >
+            <Eye className="w-4 h-4" />
+            <span className="hidden lg:inline">{t('preview', contentLanguage)}</span>
+          </button>
+
           {/* Settings */}
           <button
             onClick={() => setShowSettings(true)}
-            className="p-2 rounded-md text-white/80 hover:bg-white/10 transition-colors"
-            title="Workshop Settings"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/80 hover:bg-white/10 transition-colors"
+            title={t('settings', contentLanguage)}
           >
-            <Settings className="w-5 h-5" />
-          </button>
-
-          {/* Preview */}
-          <button
-            onClick={() => setShowPreview(!showPreview)}
-            className={`p-2 rounded-md transition-colors ${
-              showPreview ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
-            }`}
-            title="Preview Deck"
-          >
-            <Eye className="w-5 h-5" />
+            <Settings className="w-4 h-4" />
+            <span className="hidden lg:inline">{t('settings', contentLanguage)}</span>
           </button>
 
           {/* Export dropdown */}
@@ -2853,21 +2980,21 @@ function App() {
                   className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                 >
                   <Eye className="w-4 h-4 text-gray-400" />
-                  <span>Export HTML</span>
+                  <span>{t('exportHTML', contentLanguage)}</span>
                 </button>
                 <button
                   onClick={() => handleBuild('pdf')}
                   className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                 >
                   <FileText className="w-4 h-4 text-gray-400" />
-                  <span>Export PDF</span>
+                  <span>{t('exportPDF', contentLanguage)}</span>
                 </button>
                 <button
                   onClick={() => handleBuild('pptx')}
                   className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                 >
                   <Presentation className="w-4 h-4 text-gray-400" />
-                  <span>Export PowerPoint</span>
+                  <span>{t('exportPowerPoint', contentLanguage)}</span>
                 </button>
               </div>
             )}
@@ -2887,18 +3014,24 @@ function App() {
       )}
 
       {/* Main content */}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={customCollisionDetection}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
       <div className="flex-1 flex overflow-hidden relative">
         {/* Left Panel - Content Library (pinned or slide-out) */}
         {leftPanelPinned ? (
           // Pinned mode - part of flex layout
           <div className="h-full w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
-              <span className="font-semibold text-sm text-gray-700">Content Library</span>
+              <span className="font-semibold text-sm text-gray-700">{t('contentLibrary', contentLanguage)}</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setLeftPanelPinned(false)}
                   className="p-1 text-fastr-primary hover:bg-fastr-primary/10 rounded"
-                  title="Unpin panel"
+                  title={t('unpinPanel', contentLanguage)}
                 >
                   <PinOff className="w-4 h-4" />
                 </button>
@@ -2928,7 +3061,7 @@ function App() {
           >
             <div className="h-full w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
               <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
-                <span className="font-semibold text-sm text-gray-700">Content Library</span>
+                <span className="font-semibold text-sm text-gray-700">{t('contentLibrary', contentLanguage)}</span>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => {
@@ -2936,8 +3069,8 @@ function App() {
                       setLeftPanelOpen(true)
                     }}
                     className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-fastr-primary/10 rounded"
-                    title="Pin panel"
-                    aria-label="Pin panel"
+                    title={t('pinPanel', contentLanguage)}
+                    aria-label={t('pinPanel', contentLanguage)}
                   >
                     <Pin className="w-4 h-4" />
                   </button>
@@ -2964,12 +3097,7 @@ function App() {
             showPreview ? (
               <SlideSorter onBack={() => setShowPreview(false)} />
             ) : (
-              <DndContext
-                  sensors={sensors}
-                  collisionDetection={closestCenter}
-                  onDragStart={handleDragStart}
-                  onDragEnd={handleDragEnd}
-                >
+              <>
                   <div className="h-full overflow-auto p-4">
                     <div className="max-w-7xl mx-auto">
                       <h2 className="text-xl font-semibold mb-4 text-gray-800">
@@ -3003,10 +3131,7 @@ function App() {
                           )
 
                           return (
-                            <div
-                              key={dayNum}
-                              className="flex-shrink-0 w-[340px] bg-white/70 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200/80 ring-1 ring-black/[0.03]"
-                            >
+                            <DroppableDayColumn key={dayNum} dayNum={dayNum}>
                               {/* Day header */}
                               <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
                                 <div className="flex items-start justify-between">
@@ -3021,12 +3146,12 @@ function App() {
                                   {(currentConfig?.schedule?.days ?? 0) > 1 && (
                                     <button
                                       onClick={() => {
-                                        if (confirm(`Delete Day ${dayNum} and all its sessions? This cannot be undone.`)) {
+                                        if (confirm(t('confirmDeleteDayMsg', contentLanguage).replace('{day}', String(dayNum)))) {
                                           useWorkshopStore.getState().removeDay(dayNum)
                                         }
                                       }}
                                       className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
-                                      title={`Delete Day ${dayNum}`}
+                                      title={`${t('deleteDay', contentLanguage)} ${dayNum}`}
                                     >
                                       <Trash2 className="w-4 h-4" />
                                     </button>
@@ -3051,7 +3176,9 @@ function App() {
                                       session={session}
                                       index={idx}
                                       dayNum={dayNum}
+                                      totalDays={currentConfig?.schedule?.days || 1}
                                       onEdit={handleEditSession}
+                                      onMoveToDay={handleMoveToDay}
                                     />
                                   ))}
                                 </SortableContext>
@@ -3062,10 +3189,10 @@ function App() {
                                   onClick={() => setAddSessionMenuDay(dayNum)}
                                 >
                                   <Plus className="w-4 h-4" />
-                                  <span className="text-sm">Add Session</span>
+                                  <span className="text-sm">{t('addSession', contentLanguage)}</span>
                                 </button>
                               </div>
-                            </div>
+                            </DroppableDayColumn>
                           )
                         })}
 
@@ -3075,12 +3202,12 @@ function App() {
                           onClick={() => useWorkshopStore.getState().addDay()}
                         >
                           <Plus className="w-6 h-6" />
-                          <span className="font-medium">Add Day</span>
+                          <span className="font-medium">{t('addDay', contentLanguage)}</span>
                         </button>
                       </div>
                     </div>
                   </div>
-                </DndContext>
+                </>
             )
           ) : (
             <div className="h-full flex items-center justify-center text-gray-500">
@@ -3103,7 +3230,7 @@ function App() {
           <div className="absolute right-0 top-0 bottom-0 z-20">
             <div className="h-full w-80 bg-white border-l border-gray-200 shadow-lg flex flex-col">
               <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100">
-                <span className="font-medium text-gray-700">AI Assistant</span>
+                <span className="font-medium text-gray-700">{t('aiAssistant', contentLanguage)}</span>
                 <button
                   onClick={() => setRightPanelOpen(false)}
                   aria-label="Close AI assistant"
@@ -3119,6 +3246,35 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Drag overlay — floating preview while dragging library items */}
+      <DragOverlay dropAnimation={null}>
+        {activeDragData?.data?.type === 'library-module' && (
+          <div className="px-3 py-2 bg-white rounded-lg shadow-xl border border-fastr-secondary ring-2 ring-fastr-secondary/30 max-w-[240px]">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center justify-center w-7 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold">
+                M{activeDragData.data.module.number}
+              </span>
+              <span className="text-sm font-medium text-gray-800 truncate">{activeDragData.data.module.name}</span>
+            </div>
+            <div className="text-xs text-gray-400 mt-1 pl-9">
+              {activeDragData.data.module.topics?.length || 0} {t('xTopics', contentLanguage)}
+            </div>
+          </div>
+        )}
+        {activeDragData?.data?.type === 'library-topic' && (
+          <div className="px-3 py-2 bg-white rounded-lg shadow-xl border border-fastr-secondary ring-2 ring-fastr-secondary/30 max-w-[240px]">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-fastr-primary flex-shrink-0" />
+              <span className="text-sm font-medium text-gray-800 truncate">{activeDragData.data.topic.title}</span>
+            </div>
+            <div className="text-xs text-gray-400 mt-1 pl-6">
+              {activeDragData.data.topic.slideCount || 0} {t('xSlides', contentLanguage)}
+            </div>
+          </div>
+        )}
+      </DragOverlay>
+      </DndContext>
 
       {/* Workshop Selector Modal */}
       {showWorkshopSelector && (
@@ -3363,7 +3519,7 @@ function App() {
                 {/* Existing workshops */}
                 <div className="max-h-72 overflow-auto">
                   {workshops.length === 0 ? (
-                    <p className="text-gray-500 text-center py-4">No workshops found</p>
+                    <p className="text-gray-500 text-center py-4">{t('noWorkshopsFound', contentLanguage)}</p>
                   ) : (
                     <div className="space-y-2">
                       {workshops.map((workshop) => (
@@ -3617,7 +3773,7 @@ function App() {
                       value={currentConfig.workshop.website || ''}
                       onChange={(e) => updateWorkshopSettings({ website: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                      placeholder="ex. https://fastr.org"
+                      placeholder="ex. https://data.gffportal.org/key-theme/FASTR"
                     />
                   </div>
                 </div>

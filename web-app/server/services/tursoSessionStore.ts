@@ -37,7 +37,6 @@ export class TursoSessionStore extends session.Store {
     // Start cleanup interval (every 15 minutes)
     setInterval(() => this.cleanup(), 15 * 60 * 1000)
 
-    console.log('✓ Turso session store initialized')
   }
 
   private async cleanup(): Promise<void> {

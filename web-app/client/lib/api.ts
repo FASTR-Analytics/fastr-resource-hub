@@ -196,25 +196,25 @@ export const workshopAPI = {
   /**
    * Save custom slide content
    */
-  async saveCustomSlide(workshopId: string, slideId: string, content: string): Promise<void> {
-    await fetchJSON(`/workshops/${workshopId}/slides/${slideId}`, {
-      method: 'PUT',
-      body: JSON.stringify({ content }),
+  async saveCustomSlide(workshopId: string, filename: string, content: string): Promise<void> {
+    await fetchJSON(`/workshops/${workshopId}/custom-slides`, {
+      method: 'POST',
+      body: JSON.stringify({ filename, content }),
     })
   },
 
   /**
-   * Get custom slide content
+   * Get custom slides for a workshop
    */
-  async getCustomSlide(workshopId: string, slideId: string): Promise<{ content: string }> {
-    return fetchJSON(`/workshops/${workshopId}/slides/${slideId}`)
+  async getCustomSlides(workshopId: string): Promise<any[]> {
+    return fetchJSON(`/workshops/${workshopId}/custom-slides`)
   },
 
   /**
    * Delete a custom slide
    */
-  async deleteCustomSlide(workshopId: string, slideId: string): Promise<void> {
-    await fetchJSON(`/workshops/${workshopId}/slides/${slideId}`, {
+  async deleteCustomSlide(workshopId: string, filename: string): Promise<void> {
+    await fetchJSON(`/workshops/${workshopId}/custom-slides/${encodeURIComponent(filename)}`, {
       method: 'DELETE',
     })
   },
@@ -254,7 +254,7 @@ export const contentAPI = {
    * Get a specific template's content
    */
   async getTemplate(templateId: string): Promise<{ id: string; name: string; content: string }> {
-    return fetchJSON(`/content/template/${templateId}`)
+    return fetchJSON(`/content/templates/${templateId}`)
   },
 
   /**
@@ -529,7 +529,7 @@ const api = {
   deleteWorkshop: workshopAPI.delete,
   setWorkshopLocked: workshopAPI.setLocked,
   saveCustomSlide: workshopAPI.saveCustomSlide,
-  getCustomSlide: workshopAPI.getCustomSlide,
+  getCustomSlides: workshopAPI.getCustomSlides,
 
   // Content library (with language support)
   getModules: contentAPI.getModules,

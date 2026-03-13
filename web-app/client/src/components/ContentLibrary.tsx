@@ -4,6 +4,7 @@ import { useWorkshopStore } from '../stores/workshop'
 import api, { Asset, previewAPI } from '../../lib/api'
 import { t } from '../i18n/translations'
 import { useToast } from './Toast'
+import { useDraggable } from '@dnd-kit/core'
 import {
   ChevronRight,
   ChevronDown,
@@ -27,9 +28,10 @@ import {
   Check,
   Loader2,
   RefreshCw,
+  GripVertical,
 } from 'lucide-react'
 
-interface Topic {
+export interface Topic {
   id: string
   file: string
   title: string
@@ -41,7 +43,7 @@ interface Topic {
   status?: 'new' | 'updated'
 }
 
-interface Module {
+export interface Module {
   number: number | string
   id: string
   name: string
@@ -75,6 +77,22 @@ interface TemplateCategory {
   name: string
   description: string
   templates: Template[]
+}
+
+// Drag handle for library items — renders a small grip icon that initiates drag
+function LibraryDragHandle({ id, data }: { id: string; data: any }) {
+  const { attributes, listeners, setNodeRef } = useDraggable({ id, data })
+  return (
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 hover:!opacity-100 transition-opacity flex-shrink-0 p-0.5"
+      title="Drag to a day"
+    >
+      <GripVertical className="w-3.5 h-3.5 text-gray-400" />
+    </div>
+  )
 }
 
 export function ContentLibrary() {
@@ -775,7 +793,8 @@ We resume at **[time]**`
         {contentLibrary.map((module) => (
           <div key={module.id} className="border-b border-gray-100">
             {/* Module header */}
-            <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors group">
+            <div className="flex items-center gap-1 px-3 py-2 hover:bg-gray-50 transition-colors group">
+              <LibraryDragHandle id={`library-module-${module.id}`} data={{ type: 'library-module', module }} />
               <button
                 onClick={() => toggleModule(module.number)}
                 className="flex items-center gap-2 flex-1 min-w-0 text-left"
@@ -830,10 +849,11 @@ We resume at **[time]**`
                     {(module as any).fullTopics.map((topic: any) => (
                       <div
                         key={topic.id}
-                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-gray-100 border-l-2 border-l-transparent hover:border-l-fastr-secondary transition-all group"
+                        className="flex items-center gap-1 px-3 py-2 pl-8 hover:bg-gray-100 border-l-2 border-l-transparent hover:border-l-fastr-secondary transition-all group"
                         onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
                         onMouseLeave={handleMouseLeave}
                       >
+                        <LibraryDragHandle id={`library-topic-${topic.id}`} data={{ type: 'library-topic', topic, module }} />
                         <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
@@ -877,10 +897,11 @@ We resume at **[time]**`
                     {(module as any).condensedTopics.map((topic: any) => (
                       <div
                         key={topic.id}
-                        className="flex items-center gap-2 px-3 py-2 pl-10 hover:bg-amber-50 transition-colors group"
+                        className="flex items-center gap-1 px-3 py-2 pl-8 hover:bg-amber-50 transition-colors group"
                         onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
                         onMouseLeave={handleMouseLeave}
                       >
+                        <LibraryDragHandle id={`library-topic-${topic.id}`} data={{ type: 'library-topic', topic, module }} />
                         <FileText className="w-4 h-4 text-amber-500 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm text-gray-700 truncate" title={topic.title}>
@@ -912,10 +933,11 @@ We resume at **[time]**`
                 {!(module as any).fullTopics?.length && !(module as any).condensedTopics?.length && module.topics.map((topic) => (
                   <div
                     key={topic.id}
-                    className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-gray-100 transition-colors group"
+                    className="flex items-center gap-1 px-3 py-2 pl-6 hover:bg-gray-100 transition-colors group"
                     onMouseEnter={(e) => handleMouseEnter(e, topic, module)}
                     onMouseLeave={handleMouseLeave}
                   >
+                    <LibraryDragHandle id={`library-topic-${topic.id}`} data={{ type: 'library-topic', topic, module }} />
                     <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-gray-700 truncate" title={topic.title}>

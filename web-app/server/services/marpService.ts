@@ -32,7 +32,6 @@ export async function initializeMarp(): Promise<void> {
     marpInstance.themeSet.add(fastrThemeCSS)
   }
 
-  console.log('✓ Marp service initialized with FASTR theme')
 }
 
 /**

@@ -58,10 +58,7 @@ async function createSessionStore(): Promise<session.Store | undefined> {
     const SqliteStore = SqliteStoreFactory(session)
 
     const SESSION_DB_PATH = path.join(__dirname, '../sessions.db')
-    console.log('Session database path:', SESSION_DB_PATH)
     const sessionsDb = new Database(SESSION_DB_PATH)
-
-    console.log('✓ Using local SQLite session store')
     return new SqliteStore({
       client: sessionsDb,
       expired: {
@@ -164,8 +161,6 @@ app.use(authMiddleware)
 const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../..')
   : path.resolve(__dirname, '../..')
-console.log('REPO_ROOT:', REPO_ROOT)
-console.log('Resources path:', path.join(REPO_ROOT, 'resources'))
 app.use('/resources', express.static(path.join(REPO_ROOT, 'resources')))
 app.use('/fastr-theme.css', (_req, res) => {
   res.sendFile(path.join(REPO_ROOT, 'fastr-theme.css'))

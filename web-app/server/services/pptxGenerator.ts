@@ -358,7 +358,6 @@ function detectSlideType(slide: ParsedSlide, index: number): SlideType {
 
 function resolveImagePath(imgPath: string): string | null {
   if (imgPath.startsWith('http://') || imgPath.startsWith('https://')) {
-    console.log(`  [IMG] Skipping URL: ${imgPath}`)
     return null
   }
 
@@ -379,13 +378,11 @@ function resolveImagePath(imgPath: string): string | null {
 
   for (const p of pathsToTry) {
     if (fs.existsSync(p)) {
-      console.log(`  [IMG] Found: ${imgPath} -> ${p}`)
       return p
     }
   }
 
-  console.warn(`  [IMG] NOT FOUND: ${imgPath}`)
-  console.warn(`    Tried: ${pathsToTry.join('\n           ')}`)
+  console.warn(`[PPTX] Image not found: ${imgPath}`)
   return null
 }
 
@@ -1696,7 +1693,6 @@ export async function generatePPTX(
 
   // Parse markdown
   const slides = parseMarkdown(markdown)
-  console.log(`Parsed ${slides.length} slides for PPTX`)
 
   // Build slides
   const builders: Record<SlideType, (pptx: PptxGenJS, data: ParsedSlide) => void> = {
@@ -1715,14 +1711,6 @@ export async function generatePPTX(
   for (let i = 0; i < slides.length; i++) {
     const slideType = detectSlideType(slides[i], i)
     typeCounts[slideType] = (typeCounts[slideType] || 0) + 1
-
-    // Debug: log slide info including images
-    const slideImages = slides[i].images.filter(img => img.alt !== 'bg')
-    if (slideImages.length > 0) {
-      const title = slides[i].headers[0]?.text || '(no title)'
-      console.log(`Slide ${i + 1} [${slideType}]: "${title}" - ${slideImages.length} image(s)`)
-      slideImages.forEach(img => console.log(`  - ${img.path}`))
-    }
 
     try {
       builders[slideType](pptx, slides[i])
@@ -1744,9 +1732,6 @@ export async function generatePPTX(
     }
   }
 
-  console.log('Slide types:', typeCounts)
-
   // Save
   await pptx.writeFile({ fileName: outputPath })
-  console.log('PPTX generated:', outputPath)
 }

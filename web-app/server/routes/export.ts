@@ -263,8 +263,6 @@ ${sessionMarkdown}`
       }
     }
 
-    console.log(`Slides build: ${cacheHits} cache hits, ${cacheMisses} cache misses`)
-
     res.json({
       success: true,
       slides: slidesData,

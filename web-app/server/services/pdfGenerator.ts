@@ -59,8 +59,6 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
       args.unshift('--theme', themePath)
     }
 
-    console.log('Running Marp:', marpPath, args.join(' '))
-
     const marpProcess = spawn(marpPath, args, {
       cwd: REPO_ROOT,
       stdio: ['ignore', 'pipe', 'pipe'],
@@ -86,7 +84,6 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
     marpProcess.on('close', (code) => {
       clearTimeout(timeout)
       if (code === 0) {
-        console.log('PDF generated successfully:', pdfPath)
         resolve()
       } else {
         console.error('PDF generation failed:', stderr || stdout)

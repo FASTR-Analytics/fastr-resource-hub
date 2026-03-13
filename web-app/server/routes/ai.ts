@@ -774,8 +774,6 @@ Before making large changes, ask when:
           const result = executeTool(block.name, block.input, workingConfig)
           toolResults.push({ tool: block.name, result })
 
-          console.log(`AI Tool: ${block.name}`, block.input, '→', result)
-
           toolUseResults.push({
             type: 'tool_result',
             tool_use_id: block.id,
@@ -1063,7 +1061,6 @@ RULES:
         // If parsed is {"ready": true} or any non-array, fall through to generation
       } catch {
         // If parsing fails, just proceed with generation
-        console.log('[AI Clarify] Could not parse clarification response, proceeding with generation')
       }
     }
 
@@ -1209,7 +1206,6 @@ Return ONLY valid JSON, no explanation.`,
 
           const moduleKey = session.module
           if (seenModules.has(moduleKey)) {
-            console.log(`[AI Post-process] Removing duplicate: ${moduleKey} (${session.session})`)
             toRemove.add(i)
             removedCount++
           } else {
@@ -1231,7 +1227,6 @@ Return ONLY valid JSON, no explanation.`,
           const lastSession = cleaned[cleaned.length - 1]
           // Skip if this is a tea break and the previous one was also a break
           if (isTeaBreak(session) && lastSession?.type === 'break') {
-            console.log(`[AI Post-process] Removing consecutive tea break: ${session.session}`)
             continue
           }
           cleaned.push(session)
@@ -1242,7 +1237,6 @@ Return ONLY valid JSON, no explanation.`,
         while (workshopConfig.schedule[dayKey].length > 0) {
           const lastSession = workshopConfig.schedule[dayKey][workshopConfig.schedule[dayKey].length - 1]
           if (isTeaBreak(lastSession)) {
-            console.log(`[AI Post-process] Removing trailing tea break: ${lastSession.session}`)
             workshopConfig.schedule[dayKey].pop()
           } else {
             break
@@ -1255,7 +1249,6 @@ Return ONLY valid JSON, no explanation.`,
           // Find middle of sessions to insert lunch
           const sessions = workshopConfig.schedule[dayKey]
           const middleIndex = Math.floor(sessions.length / 2)
-          console.log(`[AI Post-process] Adding missing lunch break to ${dayKey}`)
           sessions.splice(middleIndex, 0, {
             session: 'Lunch Break',
             type: 'break',
@@ -1271,7 +1264,6 @@ Return ONLY valid JSON, no explanation.`,
         const dayEndIndex = sessions.findIndex((s: any) => s.type === 'day_end')
         if (dayEndIndex >= 0 && dayEndIndex < sessions.length - 1) {
           const removed = sessions.splice(dayEndIndex + 1)
-          console.log(`[AI Post-process] Removed ${removed.length} session(s) after day_end in ${dayKey}`)
         }
       }
 
@@ -1284,7 +1276,6 @@ Return ONLY valid JSON, no explanation.`,
           const first = sessions[0]
           if (first.type === 'day_title' || first.type === 'section' || first.type === 'day_recap') break
           if (first.type === 'break') {
-            console.log(`[AI Post-process] Removing break at start of ${dayKey}: ${first.session}`)
             sessions.shift()
           } else {
             break
@@ -1303,7 +1294,6 @@ Return ONLY valid JSON, no explanation.`,
           const prev = cleaned[cleaned.length - 1]
           // Allow tea break immediately before lunch, but not two tea breaks in a row
           if (isNonLunchBreak(session) && prev && isNonLunchBreak(prev)) {
-            console.log(`[AI Post-process] Removing consecutive non-lunch break: ${session.session}`)
             continue
           }
           cleaned.push(session)
@@ -1311,9 +1301,6 @@ Return ONLY valid JSON, no explanation.`,
         workshopConfig.schedule[dayKey] = cleaned
       }
 
-      if (removedCount > 0) {
-        console.log(`[AI Post-process] Removed ${removedCount} duplicate module(s)`)
-      }
     }
 
     // POST-PROCESSING: Convert start_date/end_date to formatted date string
@@ -1333,7 +1320,6 @@ Return ONLY valid JSON, no explanation.`,
       } else {
         workshopConfig.date = `${start.month} ${start.day} - ${end.month} ${end.day}, ${end.year}`
       }
-      console.log(`[AI Post-process] Formatted date: ${workshopConfig.date}`)
     }
 
     res.json(workshopConfig)

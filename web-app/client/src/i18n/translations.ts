@@ -237,6 +237,66 @@ export const translations = {
     generateWithAnswers: 'Generate Workshop',
     editPrompt: 'Edit prompt',
 
+    // Toolbar buttons
+    slidesButton: 'Slides',
+    aiHelp: 'AI Help',
+    preview: 'Preview',
+    settings: 'Settings',
+
+    // Drag and drop
+    moveToDay: 'Move to day',
+    addedToDay: 'Added to Day',
+    dragModuleHint: 'Drag to a day column',
+
+    // Edit session modal
+    editSession: 'Edit Session',
+    sessionName: 'Session Name',
+    facilitatorPresenter: 'Facilitator/Presenter',
+    durationMinutes: 'Duration (minutes)',
+    moveToDifferentDay: 'Move to Different Day',
+    selectDay: 'Select day...',
+    move: 'Move',
+    confirmDeleteSession: 'Delete this session?',
+    deleteSession: 'Delete Session',
+    saveChanges: 'Save Changes',
+
+    // Kanban
+    addSession: 'Add Session',
+    addDay: 'Add Day',
+    deleteDay: 'Delete Day',
+
+    // Custom slide editor
+    sessionTitle: 'Session Title',
+    slideContentMarkdown: 'Slide Content (Marp Markdown)',
+    slideVariablesHelp: 'Use `---` to separate slides. Variables: `{{COUNTRY}}`, `{{LOCATION}}`',
+
+    // Auth
+    enterPasswordToContinue: 'Enter the team password to continue',
+    teamPassword: 'Team Password',
+    signingIn: 'Signing in...',
+    signIn: 'Sign In',
+    invalidPassword: 'Invalid password',
+    failedToConnect: 'Failed to connect',
+
+    // Status
+    saving: 'Saving...',
+    saved: 'Saved',
+
+    // Export
+    exportHTML: 'Export HTML',
+    exportPowerPoint: 'Export PowerPoint',
+
+    // Panels
+    aiAssistant: 'AI Assistant',
+    unpinPanel: 'Unpin panel',
+    pinPanel: 'Pin panel',
+
+    // Workshop
+    noWorkshopsFound: 'No workshops found',
+    pleaseDescribeWorkshop: 'Please describe what kind of workshop you need',
+    pleaseCompleteRequired: 'Please fill in workshop name and country',
+    confirmDeleteDayMsg: 'Delete Day {day} and all its sessions? This cannot be undone.',
+
     // Accessibility
     dismissError: 'Dismiss error',
     closePanel: 'Close panel',
@@ -480,6 +540,66 @@ export const translations = {
     answerQuestions: 'Répondez à ces questions',
     generateWithAnswers: 'Générer l\'atelier',
     editPrompt: 'Modifier la description',
+
+    // Toolbar buttons
+    slidesButton: 'Diapositives',
+    aiHelp: 'Aide IA',
+    preview: 'Aperçu',
+    settings: 'Paramètres',
+
+    // Drag and drop
+    moveToDay: 'Déplacer au jour',
+    addedToDay: 'Ajouté au Jour',
+    dragModuleHint: 'Glisser vers une colonne de jour',
+
+    // Edit session modal
+    editSession: 'Modifier la session',
+    sessionName: 'Nom de la session',
+    facilitatorPresenter: 'Animateur/Présentateur',
+    durationMinutes: 'Durée (minutes)',
+    moveToDifferentDay: 'Déplacer vers un autre jour',
+    selectDay: 'Sélectionner un jour...',
+    move: 'Déplacer',
+    confirmDeleteSession: 'Supprimer cette session ?',
+    deleteSession: 'Supprimer la session',
+    saveChanges: 'Enregistrer les modifications',
+
+    // Kanban
+    addSession: 'Ajouter une session',
+    addDay: 'Ajouter un jour',
+    deleteDay: 'Supprimer le jour',
+
+    // Custom slide editor
+    sessionTitle: 'Titre de la session',
+    slideContentMarkdown: 'Contenu de la diapositive (Marp Markdown)',
+    slideVariablesHelp: 'Utilisez `---` pour séparer les diapositives. Variables : `{{COUNTRY}}`, `{{LOCATION}}`',
+
+    // Auth
+    enterPasswordToContinue: 'Entrez le mot de passe de l\'équipe pour continuer',
+    teamPassword: 'Mot de passe de l\'équipe',
+    signingIn: 'Connexion...',
+    signIn: 'Se connecter',
+    invalidPassword: 'Mot de passe invalide',
+    failedToConnect: 'Échec de la connexion',
+
+    // Status
+    saving: 'Enregistrement...',
+    saved: 'Enregistré',
+
+    // Export
+    exportHTML: 'Exporter HTML',
+    exportPowerPoint: 'Exporter PowerPoint',
+
+    // Panels
+    aiAssistant: 'Assistant IA',
+    unpinPanel: 'Détacher le panneau',
+    pinPanel: 'Épingler le panneau',
+
+    // Workshop
+    noWorkshopsFound: 'Aucun atelier trouvé',
+    pleaseDescribeWorkshop: 'Veuillez décrire le type d\'atelier souhaité',
+    pleaseCompleteRequired: 'Veuillez remplir le nom et le pays de l\'atelier',
+    confirmDeleteDayMsg: 'Supprimer le Jour {day} et toutes ses sessions ? Cette action est irréversible.',
 
     // Accessibility
     dismissError: 'Fermer l\'erreur',
