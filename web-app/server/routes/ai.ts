@@ -17,20 +17,32 @@ const getClient = () => {
 
 // Module details loaded from modules.yaml via registry
 // Helper to build a MODULE_DETAILS dict on demand from registry (includes all modules with ai_context)
-function getModuleDetailsDict(): Record<string, { name: string; description: string; topics: string[]; duration: string }> {
+function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { name: string; description: string; topics: string[]; duration: string }> {
   const modules = loadModulesRegistry()
   const dict: Record<string, { name: string; description: string; topics: string[]; duration: string }> = {}
   for (const mod of modules) {
     if (!mod.ai_context) continue  // Skip modules without AI context
     const ai = mod.ai_context
     dict[mod.number] = {
-      name: mod.name.en,
+      name: mod.name[language] || mod.name.en,
       description: ai?.description || '',
       topics: ai?.topics || [],
       duration: ai?.duration || '',
     }
   }
   return dict
+}
+
+// Detect if a prompt is for a French workshop
+function detectLanguage(text: string): 'en' | 'fr' {
+  const frenchPattern = /fran[cç]ais|atelier\s+FASTR|francophone|en\s+fran[cç]ais/i
+  const francophoneCountries = /\b(Sénégal|Senegal|Burkina|Congo|Cameroun|Mali|Guinée|Guinee|Niger[^i]|Tchad|Chad|Bénin|Benin|Togo|Madagascar|Haïti|Haiti|Côte d'Ivoire|Cote d'Ivoire|Ivory Coast|Mauritani[ea]|Comor[eo]s|Djibouti|Gabon|Burundi|Rwanda)\b/i
+  // Check if the prompt itself is in French (common French words)
+  const frenchWords = /\b(jour|jours|journée|journées|pause|déjeuner|condensé|complet|créer|utiliser|inclure|pratique|théorique)\b/i
+  if (frenchPattern.test(text) || francophoneCountries.test(text) || frenchWords.test(text)) {
+    return 'fr'
+  }
+  return 'en'
 }
 
 // Helper: Parse a duration string like "90-120 min" into { lower, upper } in minutes
@@ -1099,7 +1111,13 @@ router.post('/generate-workshop', async (req, res) => {
 
     const client = getClient()
 
-    const moduleList = Object.entries(getModuleDetailsDict())
+    // Detect workshop language from prompt + clarifications
+    const allText = clarifications
+      ? `${prompt} ${clarifications.map((c: any) => `${c.question} ${c.answer}`).join(' ')}`
+      : prompt
+    const workshopLanguage = detectLanguage(allText)
+
+    const moduleList = Object.entries(getModuleDetailsDict(workshopLanguage))
       .map(([num, m]) => `  Module ${num}: ${m.name} - ${m.description} (${m.duration})`)
       .join('\n')
 
@@ -1309,7 +1327,9 @@ CRITICAL RULES:
 17. NEVER DUPLICATE A MODULE - each module can only appear ONCE in the entire schedule
 18. EVERY module in the "modules" array MUST appear in the schedule — do NOT list a module without scheduling it. If it doesn't fit, remove it from the "modules" array too.
 19. Use ONLY these break names: "Tea Break" and "Lunch Break" (never translate break names, even for French workshops). ONE lunch break per day, maximum.
-18. A good workshop BALANCES theory and practice — don't stack all theory on one day
+20. A good workshop BALANCES theory and practice — don't stack all theory on one day
+
+WORKSHOP LANGUAGE: ${workshopLanguage === 'fr' ? 'FRENCH — All session names, objectives, expected_outputs, title, subtitle, and name MUST be in French. Use the French module names provided above for session names. Custom session names must also be in French (e.g., "Remarques d\'ouverture", "Présentations pays", "Planification d\'actions").' : 'ENGLISH — Use English for all text content.'}
 
 Return ONLY valid JSON, no explanation.`,
       messages: [
@@ -1542,6 +1562,9 @@ Return ONLY valid JSON, no explanation.`,
         workshopConfig.date = `${start.month} ${start.day} - ${end.month} ${end.day}, ${end.year}`
       }
     }
+
+    // Pass detected language to frontend
+    workshopConfig.language = workshopLanguage
 
     res.json(workshopConfig)
   } catch (error: any) {
