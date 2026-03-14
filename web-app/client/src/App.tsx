@@ -2372,6 +2372,7 @@ function App() {
           facilitators: data.facilitators || '',
           objectives: data.objectives || '',
           expected_outputs: data.expected_outputs || '',
+          language: data.language || 'en',
         },
         schedule,
         content: {

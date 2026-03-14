@@ -396,8 +396,15 @@ async function loadSlideContent(
 
   const coreContentPath = getCoreContentPath(language)
 
-  // Try templates folder first
-  let filePath = path.join(TEMPLATES_PATH, slideFile)
+  // Try language-specific templates folder first, then fall back to English
+  const templatesPathForLang = language !== 'en'
+    ? path.join(REPO_ROOT, `templates_${language}`)
+    : TEMPLATES_PATH
+  let filePath = path.join(templatesPathForLang, slideFile)
+  if (!fs.existsSync(filePath) && language !== 'en') {
+    // Fall back to English templates
+    filePath = path.join(TEMPLATES_PATH, slideFile)
+  }
   if (!fs.existsSync(filePath)) {
     // Try custom_slides subfolder
     filePath = path.join(TEMPLATES_PATH, 'custom_slides', slideFile)
