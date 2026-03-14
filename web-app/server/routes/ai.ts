@@ -1326,7 +1326,7 @@ CRITICAL RULES:
 16. Use the workshop name provided by user for the "name" field
 17. NEVER DUPLICATE A MODULE - each module can only appear ONCE in the entire schedule
 18. EVERY module in the "modules" array MUST appear in the schedule — do NOT list a module without scheduling it. If it doesn't fit, remove it from the "modules" array too.
-19. Use ONLY these break names: "Tea Break" and "Lunch Break" (never translate break names, even for French workshops). ONE lunch break per day, maximum.
+19. ONE lunch break per day, maximum. Use consistent break names: ${workshopLanguage === 'fr' ? '"Pause café" for tea breaks and "Pause déjeuner" for lunch breaks.' : '"Tea Break" for tea breaks and "Lunch Break" for lunch breaks.'}
 20. A good workshop BALANCES theory and practice — don't stack all theory on one day
 
 WORKSHOP LANGUAGE: ${workshopLanguage === 'fr' ? 'FRENCH — All session names, objectives, expected_outputs, title, subtitle, and name MUST be in French. Use the French module names provided above for session names. Custom session names must also be in French (e.g., "Remarques d\'ouverture", "Présentations pays", "Planification d\'actions").' : 'ENGLISH — Use English for all text content.'}

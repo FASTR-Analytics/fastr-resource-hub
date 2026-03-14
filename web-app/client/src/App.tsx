@@ -2292,6 +2292,7 @@ function App() {
 
       // Process AI-generated schedule or create default structure
       const startTime = data.day_start_time || '09:00'
+      const isFr = data.language === 'fr'
       for (let d = 1; d <= (data.days || 3); d++) {
         schedule.day_start_times[d] = startTime
         schedule.day_titles[d] = ''
@@ -2303,24 +2304,24 @@ function App() {
         if (d === 1) {
           // Day 1 always starts with required opening sequence
           sessions.push(
-            { _id: `title-${ts}`, session: data.name || 'FASTR Workshop', type: 'day_title', slides: ['title_slide.md'], duration: 0 },
-            { _id: `welcome-${ts}`, session: 'Welcome and Opening Remarks', slides: ['welcome_slide.md'], duration: 10 },
-            { _id: `intro-${ts}`, session: 'Introductions', slides: ['introductions_slide.md'], duration: 15 },
-            { _id: `agenda1-${ts}`, session: 'Day 1 Agenda', type: 'section', duration: 5 },
-            { _id: `obj-${ts}`, session: 'Workshop Objectives', slides: ['objectives_slide.md'], duration: 5 },
-            { _id: `exp-${ts}`, session: 'Expectations', slides: ['expectations_slide.md'], duration: 15 },
-            { _id: `outputs-${ts}`, session: 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
+            { _id: `title-${ts}`, session: data.name || (isFr ? 'Atelier FASTR' : 'FASTR Workshop'), type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+            { _id: `welcome-${ts}`, session: isFr ? 'Remarques d\'ouverture' : 'Welcome and Opening Remarks', slides: ['welcome_slide.md'], duration: 10 },
+            { _id: `intro-${ts}`, session: isFr ? 'Présentations' : 'Introductions', slides: ['introductions_slide.md'], duration: 15 },
+            { _id: `agenda1-${ts}`, session: isFr ? 'Agenda Jour 1' : 'Day 1 Agenda', type: 'section', duration: 5 },
+            { _id: `obj-${ts}`, session: isFr ? 'Objectifs de l\'atelier' : 'Workshop Objectives', slides: ['objectives_slide.md'], duration: 5 },
+            { _id: `exp-${ts}`, session: isFr ? 'Attentes' : 'Expectations', slides: ['expectations_slide.md'], duration: 15 },
+            { _id: `outputs-${ts}`, session: isFr ? 'Résultats attendus' : 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
           )
         } else {
           // Day 2+ starts with day cover, recap of previous day, then agenda
           sessions.push(
-            { _id: `daytitle-${d}-${ts}`, session: `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
-            { _id: `recap-${d}-${ts}`, session: `Recap: Day ${d - 1}`, type: 'day_recap', duration: 10 },
-            { _id: `agenda-${d}-${ts}`, session: `Day ${d} Agenda`, type: 'section', duration: 5 }
+            { _id: `daytitle-${d}-${ts}`, session: isFr ? `Jour ${d}` : `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
+            { _id: `recap-${d}-${ts}`, session: isFr ? `Récapitulatif : Jour ${d - 1}` : `Recap: Day ${d - 1}`, type: 'day_recap', duration: 10 },
+            { _id: `agenda-${d}-${ts}`, session: isFr ? `Agenda Jour ${d}` : `Day ${d} Agenda`, type: 'section', duration: 5 }
           )
         }
 
-        // Add AI-generated sessions (modules and breaks)
+        // Add AI-generated sessions (modules, breaks, custom)
         for (const aiSession of aiDaySessions) {
           if (aiSession.module) {
             sessions.push({
@@ -2337,13 +2338,20 @@ function App() {
               type: 'break',
               duration: aiSession.duration || 15,
             })
+          } else if (aiSession.type === 'custom') {
+            sessions.push({
+              _id: `custom-${d}-${sessionNum++}-${ts}`,
+              session: aiSession.session,
+              type: 'custom',
+              duration: aiSession.duration || 30,
+            })
           }
         }
 
         // End each day
         sessions.push({
           _id: `dayend-${d}-${ts}`,
-          session: `End of Day ${d}`,
+          session: isFr ? `Fin du Jour ${d}` : `End of Day ${d}`,
           type: 'day_end',
           slides: ['day_end.md'],
           duration: 5,
