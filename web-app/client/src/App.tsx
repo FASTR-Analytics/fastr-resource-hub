@@ -2007,6 +2007,7 @@ function App() {
     setContentLanguage,
     addSession,
     selectWorkshop,
+    isLoading,
     error,
     setError,
     saveStatus,
@@ -2128,11 +2129,12 @@ function App() {
   }, [isAuthenticated])
 
   // Show workshop selector if no workshop is selected (only in workshop mode)
+  // Skip while loading — selectWorkshop is async and currentWorkshopId is still null during fetch
   useEffect(() => {
-    if (appMode === 'workshop' && !currentWorkshopId && workshops.length > 0) {
+    if (appMode === 'workshop' && !currentWorkshopId && !isLoading && workshops.length > 0) {
       setShowWorkshopSelector(true)
     }
-  }, [currentWorkshopId, workshops, appMode])
+  }, [currentWorkshopId, workshops, appMode, isLoading])
 
   // Close export menu when clicking outside
   useEffect(() => {
