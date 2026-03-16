@@ -2288,13 +2288,18 @@ function App() {
         days: data.days || 3,
         day_titles: {},
         day_start_times: {},
+        day_end_times: {},
       }
 
-      // Process AI-generated schedule or create default structure
-      const startTime = data.day_start_time || '09:00'
+      // Resolve per-day start/end times from AI response maps with fallback to singular fields
+      const aiDayStartTimes: Record<string, string> = data.day_start_times || {}
+      const aiDayEndTimes: Record<string, string> = data.day_end_times || {}
+      const defaultStartTime = data.day_start_time || '09:00'
+      const defaultEndTime = data.day_end_time || '17:00'
       const isFr = data.language === 'fr'
       for (let d = 1; d <= (data.days || 3); d++) {
-        schedule.day_start_times[d] = startTime
+        schedule.day_start_times[d] = aiDayStartTimes[d] || aiDayStartTimes[String(d)] || defaultStartTime
+        schedule.day_end_times[d] = aiDayEndTimes[d] || aiDayEndTimes[String(d)] || defaultEndTime
         schedule.day_titles[d] = ''
 
         const aiDaySessions = data.schedule?.[`day${d}`] || []
@@ -2322,29 +2327,33 @@ function App() {
         }
 
         // Add AI-generated sessions (modules, breaks, custom)
+        // Collect optional sessions separately to place after day_end
+        const optionalSessions: any[] = []
         for (const aiSession of aiDaySessions) {
+          const sessionObj: any = {
+            _id: `session-${d}-${sessionNum++}-${ts}`,
+            session: aiSession.session,
+            duration: aiSession.duration || 60,
+          }
+
           if (aiSession.module) {
-            sessions.push({
-              _id: `session-${d}-${sessionNum++}-${ts}`,
-              session: aiSession.session,
-              module: aiSession.module,
-              version: aiSession.version,
-              duration: aiSession.duration || 60,
-            })
+            sessionObj.module = aiSession.module
+            sessionObj.version = aiSession.version
           } else if (aiSession.type === 'break') {
-            sessions.push({
-              _id: `break-${d}-${sessionNum++}-${ts}`,
-              session: aiSession.session,
-              type: 'break',
-              duration: aiSession.duration || 15,
-            })
+            sessionObj._id = `break-${d}-${sessionNum}-${ts}`
+            sessionObj.type = 'break'
+            sessionObj.duration = aiSession.duration || 15
           } else if (aiSession.type === 'custom') {
-            sessions.push({
-              _id: `custom-${d}-${sessionNum++}-${ts}`,
-              session: aiSession.session,
-              type: 'custom',
-              duration: aiSession.duration || 30,
-            })
+            sessionObj._id = `custom-${d}-${sessionNum}-${ts}`
+            sessionObj.type = 'custom'
+            sessionObj.duration = aiSession.duration || 30
+          }
+
+          if (aiSession.optional) {
+            sessionObj.optional = true
+            optionalSessions.push(sessionObj)
+          } else {
+            sessions.push(sessionObj)
           }
         }
 
@@ -2356,6 +2365,11 @@ function App() {
           slides: ['day_end.md'],
           duration: 5,
         })
+
+        // Place optional/after-hours sessions after the day_end marker
+        if (optionalSessions.length > 0) {
+          sessions.push(...optionalSessions)
+        }
 
         schedule[`day${d}`] = sessions
       }
@@ -2369,6 +2383,8 @@ function App() {
           country: data.country || '',
           location: data.location || '',
           date: data.date || '',
+          start_date: data.start_date || '',
+          end_date: data.end_date || '',
           facilitators: data.facilitators || '',
           objectives: data.objectives || '',
           expected_outputs: data.expected_outputs || '',
@@ -2428,12 +2444,14 @@ function App() {
       days: newWorkshop.days,
       day_titles: {},
       day_start_times: {},
+      day_end_times: {},
     }
 
     // Add starter sessions for each day
     const ts = Date.now()
     for (let d = 1; d <= newWorkshop.days; d++) {
       schedule.day_start_times[d] = '09:00'
+      schedule.day_end_times[d] = '17:00'
       schedule.day_titles[d] = ''
 
       if (d === 1) {
@@ -3697,29 +3715,80 @@ function App() {
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('startDate', contentLanguage)}
-                    </label>
-                    <input
-                      type="date"
-                      value={(currentConfig.workshop as any).start_date || ''}
-                      onChange={(e) => updateWorkshopSettings({ start_date: e.target.value } as any)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                    />
-                  </div>
+                  {(() => {
+                    // Derive start_date/end_date from formatted date string for existing workshops
+                    const ws = currentConfig.workshop as any
+                    let startDateVal = ws.start_date || ''
+                    let endDateVal = ws.end_date || ''
+                    if ((!startDateVal || !endDateVal) && ws.date) {
+                      const monthMap: Record<string, string> = {
+                        january:'01',february:'02',march:'03',april:'04',may:'05',june:'06',
+                        july:'07',august:'08',september:'09',october:'10',november:'11',december:'12',
+                        janvier:'01',février:'02',mars:'03',avril:'04',mai:'05',juin:'06',
+                        juillet:'07',août:'08',septembre:'09',octobre:'10',novembre:'11',décembre:'12',
+                      }
+                      const dateStr = ws.date as string
+                      const monthMatch = dateStr.toLowerCase().match(new RegExp(Object.keys(monthMap).join('|')))
+                      const yearMatch = dateStr.match(/(\d{4})/)
+                      const daysMatch = dateStr.match(/(\d{1,2})\s*[-–]\s*(\d{1,2})/)
+                      if (monthMatch && yearMatch && daysMatch) {
+                        const mm = monthMap[monthMatch[0]]
+                        const yyyy = yearMatch[1]
+                        if (!startDateVal) startDateVal = `${yyyy}-${mm}-${daysMatch[1].padStart(2, '0')}`
+                        if (!endDateVal) endDateVal = `${yyyy}-${mm}-${daysMatch[2].padStart(2, '0')}`
+                      }
+                    }
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('endDate', contentLanguage)}
-                    </label>
-                    <input
-                      type="date"
-                      value={(currentConfig.workshop as any).end_date || ''}
-                      onChange={(e) => updateWorkshopSettings({ end_date: e.target.value } as any)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                    />
-                  </div>
+                    // Helper to format date string for cover slide
+                    const formatDateRange = (start: string, end: string) => {
+                      if (!start || !end) return undefined
+                      const s = new Date(start + 'T00:00:00'), e = new Date(end + 'T00:00:00')
+                      if (isNaN(s.getTime()) || isNaN(e.getTime())) return undefined
+                      const months = contentLanguage === 'fr'
+                        ? ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre']
+                        : ['January','February','March','April','May','June','July','August','September','October','November','December']
+                      if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()) {
+                        return `${s.getDate()}-${e.getDate()} ${months[s.getMonth()]}, ${s.getFullYear()}`
+                      }
+                      return `${s.getDate()} ${months[s.getMonth()]} - ${e.getDate()} ${months[e.getMonth()]}, ${e.getFullYear()}`
+                    }
+
+                    return (<>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          {t('startDate', contentLanguage)}
+                        </label>
+                        <input
+                          type="date"
+                          value={startDateVal}
+                          onChange={(e) => {
+                            const updates: any = { start_date: e.target.value }
+                            const newDate = formatDateRange(e.target.value, endDateVal)
+                            if (newDate) updates.date = newDate
+                            updateWorkshopSettings(updates)
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          {t('endDate', contentLanguage)}
+                        </label>
+                        <input
+                          type="date"
+                          value={endDateVal}
+                          onChange={(e) => {
+                            const updates: any = { end_date: e.target.value }
+                            const newDate = formatDateRange(startDateVal, e.target.value)
+                            if (newDate) updates.date = newDate
+                            updateWorkshopSettings(updates)
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                        />
+                      </div>
+                    </>)
+                  })()}
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -3864,6 +3933,7 @@ function App() {
                   <span className="text-xs font-medium text-gray-500 w-16">{t('day', contentLanguage)}</span>
                   <span className="flex-1 text-xs font-medium text-gray-500">{t('themeFocusArea', contentLanguage)}</span>
                   <span className="w-24 text-xs font-medium text-gray-500">{t('startsAt', contentLanguage)}</span>
+                  <span className="w-24 text-xs font-medium text-gray-500">{t('endsAt', contentLanguage)}</span>
                 </div>
 
                 <div className="space-y-2">
@@ -3894,7 +3964,7 @@ function App() {
                               : `e.g., ${dayNum === 1 ? 'Introduction & Data Extraction' : dayNum === 2 ? 'Data Quality Assessment' : 'Analysis & Communication'}`}
                           />
                         </div>
-                        <div className="w-32">
+                        <div className="w-24">
                           <input
                             type="time"
                             value={currentConfig.schedule.day_start_times?.[dayNum] || '09:00'}
@@ -3906,6 +3976,25 @@ function App() {
                               const newConfig = {
                                 ...currentConfig,
                                 schedule: { ...currentConfig.schedule, day_start_times: newTimes },
+                              }
+                              useWorkshopStore.setState({ currentConfig: newConfig })
+                              useWorkshopStore.getState().saveCurrentWorkshop()
+                            }}
+                            className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                          />
+                        </div>
+                        <div className="w-24">
+                          <input
+                            type="time"
+                            value={currentConfig.schedule.day_end_times?.[dayNum] || '17:00'}
+                            onChange={(e) => {
+                              const newEndTimes = {
+                                ...currentConfig.schedule.day_end_times,
+                                [dayNum]: e.target.value,
+                              }
+                              const newConfig = {
+                                ...currentConfig,
+                                schedule: { ...currentConfig.schedule, day_end_times: newEndTimes },
                               }
                               useWorkshopStore.setState({ currentConfig: newConfig })
                               useWorkshopStore.getState().saveCurrentWorkshop()

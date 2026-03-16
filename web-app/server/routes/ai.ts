@@ -57,37 +57,69 @@ function parseDurationRange(duration: string): { lower: number; upper: number } 
   return { lower: 60, upper: 90 } // fallback
 }
 
-// Compute time budget: available time vs requested content
+// Per-day budget info returned by computeTimeBudget
+interface DayBudget {
+  day: number
+  startTime: string
+  endTime: string
+  totalMinutes: number
+  overheadMinutes: number
+  availableMinutes: number
+}
+
+// Compute time budget: available time vs requested content (per-day resolution)
 function computeTimeBudget(params: {
   days: number
   dayStartTime?: string
   dayEndTime?: string
+  dayStartTimes?: Record<number, string>
+  dayEndTimes?: Record<number, string>
   lunchDuration?: number
   requestedModules?: string[]
   moduleVersion?: 'full' | 'condensed'
-}): { totalAvailableMinutes: number; requestedContentMinutes: number; overflowMinutes: number; perDayAvailable: number; budgetSummary: string } {
+}): { totalAvailableMinutes: number; requestedContentMinutes: number; overflowMinutes: number; perDayAvailable: number; perDayBudgets: DayBudget[]; budgetSummary: string } {
   const {
     days,
     dayStartTime = '09:00',
     dayEndTime = '17:00',
+    dayStartTimes = {},
+    dayEndTimes = {},
     lunchDuration = 60,
     requestedModules = [],
     moduleVersion = 'full',
   } = params
 
-  const dayLengthMinutes = timeToMinutes(dayEndTime) - timeToMinutes(dayStartTime)
   const teaBreakOverhead = 30 // 2 x 15min tea breaks per day
 
-  // Day 1: lunch + tea + opening sessions (welcome, intros, agenda, objectives, expectations, outputs) ~55min
-  const day1Overhead = lunchDuration + teaBreakOverhead + 55
-  // Day 2+: lunch + tea + recap/agenda ~20min
-  const day2PlusOverhead = lunchDuration + teaBreakOverhead + 20
+  // Build per-day budgets
+  const perDayBudgets: DayBudget[] = []
+  let totalAvailableMinutes = 0
 
-  const day1Available = Math.max(0, dayLengthMinutes - day1Overhead)
-  const day2PlusAvailable = Math.max(0, dayLengthMinutes - day2PlusOverhead)
+  for (let d = 1; d <= days; d++) {
+    const start = dayStartTimes[d] || dayStartTime
+    const end = dayEndTimes[d] || dayEndTime
+    const dayLengthMinutes = timeToMinutes(end) - timeToMinutes(start)
 
-  const totalAvailableMinutes = day1Available + (days > 1 ? (days - 1) * day2PlusAvailable : 0)
-  const perDayAvailable = days === 1 ? day1Available : Math.round(totalAvailableMinutes / days)
+    // Day 1: lunch + tea + opening sessions (welcome, intros, agenda, objectives, expectations, outputs) ~55min
+    // Day 2+: lunch + tea + recap/agenda ~20min
+    const overhead = d === 1
+      ? lunchDuration + teaBreakOverhead + 55
+      : lunchDuration + teaBreakOverhead + 20
+
+    const available = Math.max(0, dayLengthMinutes - overhead)
+    totalAvailableMinutes += available
+
+    perDayBudgets.push({
+      day: d,
+      startTime: start,
+      endTime: end,
+      totalMinutes: dayLengthMinutes,
+      overheadMinutes: overhead,
+      availableMinutes: available,
+    })
+  }
+
+  const perDayAvailable = days === 1 ? perDayBudgets[0].availableMinutes : Math.round(totalAvailableMinutes / days)
 
   // Calculate requested content duration
   const moduleDetails = getModuleDetailsDict()
@@ -119,20 +151,25 @@ function computeTimeBudget(params: {
 
   const overflowMinutes = Math.max(0, requestedContentMinutes - totalAvailableMinutes)
 
+  // Build per-day budget summary lines
+  const dayLines = perDayBudgets.map(db =>
+    `  Day ${db.day} (${db.startTime}–${db.endTime}): ${db.availableMinutes} min content available` +
+    (db.day === 1 ? ' (after opening ceremonies + breaks)' : ' (after recap + breaks)')
+  )
+
   const budgetSummary = [
-    `Workshop: ${days} day(s), ${dayStartTime}–${dayEndTime}`,
+    `Workshop: ${days} day(s)`,
     `Available content time: ${totalAvailableMinutes} min (~${Math.round(totalAvailableMinutes / 60)}h)`,
-    `  Day 1: ${day1Available} min (after opening ceremonies + breaks)`,
-    ...(days > 1 ? [`  Days 2-${days}: ${day2PlusAvailable} min each (after recap + breaks)`] : []),
+    ...dayLines,
     `Requested content: ${requestedContentMinutes} min (~${Math.round(requestedContentMinutes / 60)}h)`,
     ...moduleBreakdown,
     overflowMinutes > 0
       ? `⚠ OVERFLOW: ${overflowMinutes} min (~${Math.round(overflowMinutes / 60)}h) over budget. Must condense or remove modules.`
       : `✓ Content fits within available time (${totalAvailableMinutes - requestedContentMinutes} min buffer).`,
-    `Max content per day: ~${perDayAvailable} min`,
+    `Average content per day: ~${perDayAvailable} min`,
   ].join('\n')
 
-  return { totalAvailableMinutes, requestedContentMinutes, overflowMinutes, perDayAvailable, budgetSummary }
+  return { totalAvailableMinutes, requestedContentMinutes, overflowMinutes, perDayAvailable, perDayBudgets, budgetSummary }
 }
 
 // AI Tools for modifying the deck
@@ -1196,13 +1233,57 @@ RULES:
     }
 
     // Extract parameters from enriched prompt for time budget calculation
-    const daysMatch = enrichedPrompt.match(/(\d+)\s*[-–]?\s*days?/i)
+    const daysMatch = enrichedPrompt.match(/(\d+)\s*[-–]?\s*days?/i) || enrichedPrompt.match(/(\d+)\s*jours?/i)
     const extractedDays = daysMatch ? parseInt(daysMatch[1]) : 3
     const startTimeMatch = enrichedPrompt.match(/start\s*(?:at\s*)?(\d{1,2}[:.]\d{2})/i)
     const endTimeMatch = enrichedPrompt.match(/end\s*(?:at\s*|by\s*)?(\d{1,2}[:.]\d{2})/i)
     const extractedStartTime = startTimeMatch ? startTimeMatch[1].replace('.', ':') : '09:00'
     const extractedEndTime = endTimeMatch ? endTimeMatch[1].replace('.', ':') : '17:00'
     const isCondensed = /condensed|quick|overview|high-level|shorter|introductory/i.test(enrichedPrompt)
+
+    // Extract per-day start/end times from prompt
+    // Patterns: "Day 1: 08:30-17:00", "Jour 1: 08:30", "Day 1 starts at 08:30", "Jour 2 commence à 09:00"
+    const extractedDayStartTimes: Record<number, string> = {}
+    const extractedDayEndTimes: Record<number, string> = {}
+
+    // Pattern: "Day/Jour N: HH:MM-HH:MM" or "Day/Jour N: HH:MM–HH:MM"
+    const dayRangePattern = /(?:day|jour)\s*(\d+)\s*[:：]\s*(\d{1,2}[:.]\d{2})\s*[-–]\s*(\d{1,2}[:.]\d{2})/gi
+    let dayRangeMatch
+    while ((dayRangeMatch = dayRangePattern.exec(enrichedPrompt)) !== null) {
+      const dayNum = parseInt(dayRangeMatch[1])
+      extractedDayStartTimes[dayNum] = dayRangeMatch[2].replace('.', ':')
+      extractedDayEndTimes[dayNum] = dayRangeMatch[3].replace('.', ':')
+    }
+
+    // Pattern: "Day/Jour N starts at HH:MM" / "Jour N commence à HH:MM"
+    const dayStartPattern = /(?:day|jour)\s*(\d+)\s*(?:starts?\s*(?:at\s*)?|commence\s*[àa]\s*)(\d{1,2}[:.]\d{2})/gi
+    let dayStartMatch
+    while ((dayStartMatch = dayStartPattern.exec(enrichedPrompt)) !== null) {
+      const dayNum = parseInt(dayStartMatch[1])
+      if (!extractedDayStartTimes[dayNum]) {
+        extractedDayStartTimes[dayNum] = dayStartMatch[2].replace('.', ':')
+      }
+    }
+
+    // Pattern: "Day/Jour N ends at HH:MM" / "Jour N finit à HH:MM" / "Jour N termine à HH:MM"
+    const dayEndPattern = /(?:day|jour)\s*(\d+)\s*(?:ends?\s*(?:at\s*|by\s*)?|(?:se\s*)?(?:finit|termine)\s*[àa]\s*)(\d{1,2}[:.]\d{2})/gi
+    let dayEndMatch
+    while ((dayEndMatch = dayEndPattern.exec(enrichedPrompt)) !== null) {
+      const dayNum = parseInt(dayEndMatch[1])
+      if (!extractedDayEndTimes[dayNum]) {
+        extractedDayEndTimes[dayNum] = dayEndMatch[2].replace('.', ':')
+      }
+    }
+
+    // Pattern: "Day/Jour N: HH:MM" (start time only, no range)
+    const daySingleTimePattern = /(?:day|jour)\s*(\d+)\s*[:：]\s*(\d{1,2}[:.]\d{2})(?!\s*[-–])/gi
+    let daySingleMatch
+    while ((daySingleMatch = daySingleTimePattern.exec(enrichedPrompt)) !== null) {
+      const dayNum = parseInt(daySingleMatch[1])
+      if (!extractedDayStartTimes[dayNum]) {
+        extractedDayStartTimes[dayNum] = daySingleMatch[2].replace('.', ':')
+      }
+    }
 
     // Try to identify requested modules from the enriched prompt
     const moduleDetails = getModuleDetailsDict()
@@ -1223,6 +1304,8 @@ RULES:
       days: extractedDays,
       dayStartTime: extractedStartTime,
       dayEndTime: extractedEndTime,
+      dayStartTimes: extractedDayStartTimes,
+      dayEndTimes: extractedDayEndTimes,
       requestedModules: modulesForBudget,
       moduleVersion: isCondensed ? 'condensed' : 'full',
     })
@@ -1241,12 +1324,11 @@ TIME BUDGET (calculated):
 ${timeBudget.budgetSummary}
 
 HARD SCHEDULING RULES:
-- Each day MUST end by the day_end_time. NO EXCEPTIONS.
-- Sum all session durations per day (including breaks). Total must NOT exceed ${timeToMinutes(extractedEndTime) - timeToMinutes(extractedStartTime)} minutes.
-- Day 1 available content time: ~${timeBudget.totalAvailableMinutes > 0 ? Math.round(timeBudget.totalAvailableMinutes / extractedDays) : 300} min (after opening ceremonies + breaks).
+- Each day MUST end by its own end time. NO EXCEPTIONS.
+${timeBudget.perDayBudgets.map(db => `- Day ${db.day} (${db.startTime}–${db.endTime}): max ${db.totalMinutes} min total, ~${db.availableMinutes} min for content`).join('\n')}
+- BEFORE generating each day, note its budget. As you add sessions, subtract durations. STOP adding content when remaining budget < 30 min.
 - Activity modules (9a-9h) MUST keep their full duration. Never compress.
 - If content doesn't fit: use condensed for theory modules, or drop lower-priority modules.
-- Maximum ~${timeBudget.perDayAvailable} minutes of content sessions per day.
 
 IMPORTANT - MODULE TYPES:
 
@@ -1282,6 +1364,8 @@ Generate a JSON object with this structure:
   "days": 3,
   "day_start_time": "09:00",
   "day_end_time": "17:00",
+  "day_start_times": {"1": "08:30", "2": "09:00"},
+  "day_end_times": {"1": "17:00", "2": "17:00"},
   "lunch_duration": 60,
   "module_version": "full",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
@@ -1294,7 +1378,8 @@ Generate a JSON object with this structure:
       {"session": "Identify Questions & Indicators", "module": "m1", "version": "full", "duration": 90},
       {"session": "Lunch Break", "type": "break", "duration": 60},
       {"session": "Instance Setup", "module": "m9a", "version": "full", "duration": 90},
-      {"session": "Registration", "type": "custom", "duration": 30}
+      {"session": "Registration", "type": "custom", "duration": 30},
+      {"session": "Optional: Data Extraction", "module": "m2", "version": "condensed", "duration": 60, "optional": true}
     ],
     "day2": [
       {"session": "Data Quality Assessment", "module": "m4", "version": "condensed", "duration": 45},
@@ -1312,14 +1397,16 @@ CRITICAL RULES:
 5. Add tea breaks (15min) mid-morning and mid-afternoon
 6. Add lunch break around midday (default 60min, or as specified by user)
 7. Calculate total daily content to fit within start and end times
-8. THREE session types are allowed:
+8. FOUR session types are allowed:
    - Module sessions: {"session": "Name", "module": "m0", "version": "full", "duration": 60}
    - Break sessions: {"session": "Tea Break", "type": "break", "duration": 15}
    - Custom sessions: {"session": "Country Presentations", "type": "custom", "duration": 60}
+   - Optional after-hours sessions: {"session": "Name", "module": "m2", "version": "condensed", "duration": 60, "optional": true}
 9. Use custom sessions ONLY for non-module activities (registration, opening remarks, country presentations, group discussion, action planning)
 10. PREFER activity modules (9a-9h) over custom sessions for hands-on platform work
+21. OPTIONAL AFTER-HOURS SESSIONS: If a session is marked as optional or after-hours in the user's request, set "optional": true on that session. These sessions are placed AFTER the day_end marker and do NOT count toward the day's time budget. Use this for bonus/supplementary content that participants can attend voluntarily.
 11. objectives and expected_outputs should be strings with "- " bullets separated by newlines
-12. Extract day_start_time and day_end_time from user prompt
+12. Extract day_start_time and day_end_time from user prompt. If different days have different times, also populate day_start_times and day_end_times maps (keys are day numbers as strings)
 13. Extract start_date and end_date from user prompt in YYYY-MM-DD format
 14. Extract lunch_duration from user prompt (default 60 minutes if not specified)
 15. Generate a concise title (for cover slide) and subtitle
@@ -1426,13 +1513,21 @@ Return ONLY valid JSON, no explanation.`,
         }
       }
 
-      // Pass 6: Ensure no sessions appear after a day_end type
+      // Pass 6: Ensure no non-optional sessions appear after a day_end type
+      // Optional/after-hours sessions are allowed after day_end
       for (const dayKey of Object.keys(workshopConfig.schedule)) {
         if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
         const sessions = workshopConfig.schedule[dayKey]
         const dayEndIndex = sessions.findIndex((s: any) => s.type === 'day_end')
         if (dayEndIndex >= 0 && dayEndIndex < sessions.length - 1) {
-          const removed = sessions.splice(dayEndIndex + 1)
+          const afterEnd = sessions.slice(dayEndIndex + 1)
+          const optionalSessions = afterEnd.filter((s: any) => s.optional)
+          const nonOptional = afterEnd.filter((s: any) => !s.optional)
+          // Remove non-optional sessions after day_end, keep optional ones
+          sessions.splice(dayEndIndex + 1)
+          if (optionalSessions.length > 0) {
+            sessions.push(...optionalSessions)
+          }
         }
       }
 
@@ -1477,18 +1572,26 @@ Return ONLY valid JSON, no explanation.`,
         workshopConfig.schedule[dayKey] = cleaned
       }
 
-      // Pass 9: Overflow detection and auto-condensing
-      const dayStartMin = timeToMinutes(workshopConfig.day_start_time || extractedStartTime)
-      const dayEndMin = timeToMinutes(workshopConfig.day_end_time || extractedEndTime)
-      const maxDayMinutes = dayEndMin - dayStartMin
+      // Pass 9: Per-day overflow detection and auto-condensing
       const warnings: string[] = []
 
       for (const dayKey of Object.keys(workshopConfig.schedule)) {
         if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+        const dayNum = parseInt(dayKey.replace('day', ''))
         const sessions = workshopConfig.schedule[dayKey]
 
-        // Sum all durations
-        let totalMinutes = sessions.reduce((sum: number, s: any) => sum + (s.duration || 0), 0)
+        // Resolve this day's start/end time with fallback chain:
+        // workshopConfig.day_start_times[dayNum] → workshopConfig.day_start_time → extractedDayStartTimes[dayNum] → extractedStartTime
+        const thisDayStart = workshopConfig.day_start_times?.[dayNum] || workshopConfig.day_start_times?.[String(dayNum)] ||
+          workshopConfig.day_start_time || extractedDayStartTimes[dayNum] || extractedStartTime
+        const thisDayEnd = workshopConfig.day_end_times?.[dayNum] || workshopConfig.day_end_times?.[String(dayNum)] ||
+          workshopConfig.day_end_time || extractedDayEndTimes[dayNum] || extractedEndTime
+        const maxDayMinutes = timeToMinutes(thisDayEnd) - timeToMinutes(thisDayStart)
+
+        // Sum all durations (exclude optional/after-hours sessions)
+        let totalMinutes = sessions
+          .filter((s: any) => !s.optional)
+          .reduce((sum: number, s: any) => sum + (s.duration || 0), 0)
 
         if (totalMinutes > maxDayMinutes) {
           // Try to condense theory modules (from last to first) to reduce overflow
@@ -1517,11 +1620,14 @@ Return ONLY valid JSON, no explanation.`,
             totalMinutes -= saved
           }
 
-          // If still overflowing after condensing, add a warning
+          // If still overflowing after condensing, add a warning (localized)
           if (totalMinutes > maxDayMinutes) {
             const overBy = totalMinutes - maxDayMinutes
-            const dayNum = dayKey.replace('day', '')
-            warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
+            if (workshopLanguage === 'fr') {
+              warnings.push(`Jour ${dayNum} dépasse l'horaire de ~${overBy} minutes. Envisagez de retirer une session.`)
+            } else {
+              warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
+            }
           }
         }
       }
@@ -1532,8 +1638,8 @@ Return ONLY valid JSON, no explanation.`,
 
     }
 
-    // POST-PROCESSING: Sync modules array with what's actually scheduled
-    if (workshopConfig.schedule && Array.isArray(workshopConfig.modules)) {
+    // POST-PROCESSING: Build modules array from what's actually scheduled
+    if (workshopConfig.schedule) {
       const scheduledModules = new Set<string>()
       for (const dayKey of Object.keys(workshopConfig.schedule)) {
         if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
@@ -1541,7 +1647,14 @@ Return ONLY valid JSON, no explanation.`,
           if (s.module) scheduledModules.add(s.module.replace(/^m/, ''))
         }
       }
-      workshopConfig.modules = workshopConfig.modules.filter((m: string) => scheduledModules.has(m))
+      // Always rebuild from schedule — the AI sometimes forgets to populate it
+      workshopConfig.modules = Array.from(scheduledModules).sort((a, b) => {
+        // Sort numerically, with letter suffixes (e.g., 3b, 9a) after their base number
+        const aNum = parseInt(a) || 0
+        const bNum = parseInt(b) || 0
+        if (aNum !== bNum) return aNum - bNum
+        return a.localeCompare(b)
+      })
     }
 
     // POST-PROCESSING: Convert start_date/end_date to formatted date string
