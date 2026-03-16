@@ -197,7 +197,9 @@
       "Bash(echo EXISTS: $f:*)",
       "Bash(mkdir -p /tmp/fastr_slides && soffice --headless --convert-to png --outdir /tmp/fastr_slides \"/Users/claireboulange/Desktop/fastr-resource-hub/data_received/Presentation FASTR 2026.pptx\" 2>&1)",
       "Bash(soffice:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(sleep 5:*)",
+      "Bash(echo === All diagram references in EN ===:*)"
     ]
   }
 }

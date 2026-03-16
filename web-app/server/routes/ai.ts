@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import Anthropic from '@anthropic-ai/sdk'
+import multer from 'multer'
 import {
   loadModulesRegistry,
 } from '../services/moduleRegistry.js'
@@ -1137,6 +1138,211 @@ ONLY output valid JSON, nothing else.`
   }
 })
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared post-processing for AI-generated workshop configs
+// ─────────────────────────────────────────────────────────────────────────────
+function postProcessWorkshopConfig(
+  workshopConfig: any,
+  workshopLanguage: 'en' | 'fr',
+  fallbackStartTime: string = '09:00',
+  fallbackEndTime: string = '17:00',
+  fallbackDayStartTimes: Record<number, string> = {},
+  fallbackDayEndTimes: Record<number, string> = {},
+): void {
+  if (!workshopConfig.schedule) return
+
+  // Pass 1-2: Remove duplicate modules
+  const seenModules = new Set<string>()
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    const sessions = workshopConfig.schedule[dayKey]
+    const toRemove = new Set<number>()
+    for (let i = 0; i < sessions.length; i++) {
+      const session = sessions[i]
+      if (!session.module) continue
+      const moduleKey = session.module
+      if (seenModules.has(moduleKey)) {
+        toRemove.add(i)
+      } else {
+        seenModules.add(moduleKey)
+      }
+    }
+    workshopConfig.schedule[dayKey] = sessions.filter((_: any, i: number) => !toRemove.has(i))
+
+    // Helpers
+    const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
+    const isLunch = (s: any) => s?.type === 'break' && lunchPattern.test(s?.session || '')
+    const isTeaBreak = (s: any) => s?.type === 'break' && !lunchPattern.test(s?.session || '')
+
+    // Pass 3: Remove consecutive tea breaks
+    const cleaned: any[] = []
+    for (const session of workshopConfig.schedule[dayKey]) {
+      const lastSession = cleaned[cleaned.length - 1]
+      if (isTeaBreak(session) && lastSession?.type === 'break') continue
+      cleaned.push(session)
+    }
+    workshopConfig.schedule[dayKey] = cleaned
+
+    // Pass 4: Remove trailing tea breaks
+    while (workshopConfig.schedule[dayKey].length > 0) {
+      const lastSession = workshopConfig.schedule[dayKey][workshopConfig.schedule[dayKey].length - 1]
+      if (isTeaBreak(lastSession)) {
+        workshopConfig.schedule[dayKey].pop()
+      } else {
+        break
+      }
+    }
+
+    // Pass 5: Ensure each day has a lunch break
+    const hasLunch = workshopConfig.schedule[dayKey].some((s: any) => isLunch(s))
+    if (!hasLunch && workshopConfig.schedule[dayKey].length > 0) {
+      const sess = workshopConfig.schedule[dayKey]
+      const middleIndex = Math.floor(sess.length / 2)
+      sess.splice(middleIndex, 0, {
+        session: workshopLanguage === 'fr' ? 'Pause déjeuner' : 'Lunch Break',
+        type: 'break',
+        duration: workshopConfig.lunch_duration || 60
+      })
+    }
+  }
+
+  // Pass 6: Ensure no non-optional sessions appear after day_end
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    const sessions = workshopConfig.schedule[dayKey]
+    const dayEndIndex = sessions.findIndex((s: any) => s.type === 'day_end')
+    if (dayEndIndex >= 0 && dayEndIndex < sessions.length - 1) {
+      const afterEnd = sessions.slice(dayEndIndex + 1)
+      const optionalSessions = afterEnd.filter((s: any) => s.optional)
+      sessions.splice(dayEndIndex + 1)
+      if (optionalSessions.length > 0) {
+        sessions.push(...optionalSessions)
+      }
+    }
+  }
+
+  // Pass 7: Ensure no breaks at the very start of a day
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    const sessions = workshopConfig.schedule[dayKey]
+    while (sessions.length > 0) {
+      const first = sessions[0]
+      if (first.type === 'day_title' || first.type === 'section' || first.type === 'day_recap') break
+      if (first.type === 'break') {
+        sessions.shift()
+      } else {
+        break
+      }
+    }
+  }
+
+  // Pass 8: Remove consecutive non-lunch breaks and duplicate lunch breaks
+  const lunchPatternGlobal = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    const sessions = workshopConfig.schedule[dayKey]
+    const isLunchBreak = (s: any) => s?.type === 'break' && lunchPatternGlobal.test(s?.session || '')
+    const isNonLunchBreak = (s: any) => s?.type === 'break' && !lunchPatternGlobal.test(s?.session || '')
+    const cleaned: any[] = []
+    let lunchCount = 0
+    for (const session of sessions) {
+      const prev = cleaned[cleaned.length - 1]
+      if (isLunchBreak(session)) {
+        lunchCount++
+        if (lunchCount > 1) continue
+      }
+      if (isNonLunchBreak(session) && prev && isNonLunchBreak(prev)) continue
+      cleaned.push(session)
+    }
+    workshopConfig.schedule[dayKey] = cleaned
+  }
+
+  // Pass 9: Per-day overflow detection and auto-condensing
+  const warnings: string[] = []
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    const dayNum = parseInt(dayKey.replace('day', ''))
+    const sessions = workshopConfig.schedule[dayKey]
+
+    const thisDayStart = workshopConfig.day_start_times?.[dayNum] || workshopConfig.day_start_times?.[String(dayNum)] ||
+      workshopConfig.day_start_time || fallbackDayStartTimes[dayNum] || fallbackStartTime
+    const thisDayEnd = workshopConfig.day_end_times?.[dayNum] || workshopConfig.day_end_times?.[String(dayNum)] ||
+      workshopConfig.day_end_time || fallbackDayEndTimes[dayNum] || fallbackEndTime
+    const maxDayMinutes = timeToMinutes(thisDayEnd) - timeToMinutes(thisDayStart)
+
+    let totalMinutes = sessions
+      .filter((s: any) => !s.optional)
+      .reduce((sum: number, s: any) => sum + (s.duration || 0), 0)
+
+    if (totalMinutes > maxDayMinutes) {
+      const moduleDetailsMap = getModuleDetailsDict()
+      for (let i = sessions.length - 1; i >= 0 && totalMinutes > maxDayMinutes; i--) {
+        const s = sessions[i]
+        if (!s.module) continue
+        const modNum = s.module.replace(/^m/, '')
+        if (modNum.startsWith('9')) continue
+        if (s.version === 'condensed') continue
+        if (s.type === 'break' || s.type === 'custom') continue
+        const mod = moduleDetailsMap[modNum]
+        if (!mod) continue
+        const range = parseDurationRange(mod.duration)
+        const fullDuration = s.duration || Math.round((range.lower + range.upper) / 2)
+        const condensedDuration = Math.round(range.lower * 0.7)
+        const saved = fullDuration - condensedDuration
+        sessions[i] = { ...s, version: 'condensed', duration: condensedDuration }
+        totalMinutes -= saved
+      }
+
+      if (totalMinutes > maxDayMinutes) {
+        const overBy = totalMinutes - maxDayMinutes
+        if (workshopLanguage === 'fr') {
+          warnings.push(`Jour ${dayNum} dépasse l'horaire de ~${overBy} minutes. Envisagez de retirer une session.`)
+        } else {
+          warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
+        }
+      }
+    }
+  }
+
+  if (warnings.length > 0) {
+    workshopConfig._warnings = warnings
+  }
+
+  // Build modules array from what's actually scheduled
+  const scheduledModules = new Set<string>()
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    for (const s of workshopConfig.schedule[dayKey]) {
+      if (s.module) scheduledModules.add(s.module.replace(/^m/, ''))
+    }
+  }
+  workshopConfig.modules = Array.from(scheduledModules).sort((a, b) => {
+    const aNum = parseInt(a) || 0
+    const bNum = parseInt(b) || 0
+    if (aNum !== bNum) return aNum - bNum
+    return a.localeCompare(b)
+  })
+
+  // Convert start_date/end_date to formatted date string
+  if (workshopConfig.start_date && workshopConfig.end_date) {
+    const formatDate = (dateStr: string) => {
+      const date = new Date(dateStr)
+      const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December']
+      return { month: months[date.getMonth()], day: date.getDate(), year: date.getFullYear() }
+    }
+    const start = formatDate(workshopConfig.start_date)
+    const end = formatDate(workshopConfig.end_date)
+    if (start.month === end.month && start.year === end.year) {
+      workshopConfig.date = `${start.month} ${start.day}-${end.day}, ${start.year}`
+    } else {
+      workshopConfig.date = `${start.month} ${start.day} - ${end.month} ${end.day}, ${end.year}`
+    }
+  }
+
+  workshopConfig.language = workshopLanguage
+}
+
 // POST /api/ai/generate-workshop - Generate complete workshop config from natural language
 router.post('/generate-workshop', async (req, res) => {
   try {
@@ -1442,246 +1648,159 @@ Return ONLY valid JSON, no explanation.`,
 
     const workshopConfig = JSON.parse(jsonContent)
 
-    // POST-PROCESSING: Remove duplicate modules and clean up schedule
-    // The AI sometimes creates "Part 1" and "Part 2" with the same module content
-    if (workshopConfig.schedule) {
-      const seenModules = new Set<string>()
-      let removedCount = 0
-
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-
-        const sessions = workshopConfig.schedule[dayKey]
-
-        // Pass 1: Mark duplicates and combine durations
-        const toRemove = new Set<number>()
-        for (let i = 0; i < sessions.length; i++) {
-          const session = sessions[i]
-          if (!session.module) continue
-
-          const moduleKey = session.module
-          if (seenModules.has(moduleKey)) {
-            toRemove.add(i)
-            removedCount++
-          } else {
-            seenModules.add(moduleKey)
-          }
-        }
-
-        // Pass 2: Remove duplicates
-        workshopConfig.schedule[dayKey] = sessions.filter((_: any, i: number) => !toRemove.has(i))
-
-        // Helper to check if a session is a lunch break (bilingual: EN + FR)
-        const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
-        const isLunch = (s: any) => s?.type === 'break' && lunchPattern.test(s?.session || '')
-        const isTeaBreak = (s: any) => s?.type === 'break' && !lunchPattern.test(s?.session || '')
-
-        // Pass 3: Remove consecutive tea breaks (if duplicate removal left two breaks in a row)
-        // Always keep lunch breaks
-        const cleaned: any[] = []
-        for (const session of workshopConfig.schedule[dayKey]) {
-          const lastSession = cleaned[cleaned.length - 1]
-          // Skip if this is a tea break and the previous one was also a break
-          if (isTeaBreak(session) && lastSession?.type === 'break') {
-            continue
-          }
-          cleaned.push(session)
-        }
-        workshopConfig.schedule[dayKey] = cleaned
-
-        // Pass 4: Remove trailing tea breaks at end of day (keep lunch if it's there)
-        while (workshopConfig.schedule[dayKey].length > 0) {
-          const lastSession = workshopConfig.schedule[dayKey][workshopConfig.schedule[dayKey].length - 1]
-          if (isTeaBreak(lastSession)) {
-            workshopConfig.schedule[dayKey].pop()
-          } else {
-            break
-          }
-        }
-
-        // Pass 5: Ensure each day has a lunch break (add one if missing)
-        const hasLunch = workshopConfig.schedule[dayKey].some((s: any) => isLunch(s))
-        if (!hasLunch && workshopConfig.schedule[dayKey].length > 0) {
-          // Find middle of sessions to insert lunch
-          const sessions = workshopConfig.schedule[dayKey]
-          const middleIndex = Math.floor(sessions.length / 2)
-          sessions.splice(middleIndex, 0, {
-            session: 'Lunch Break',
-            type: 'break',
-            duration: workshopConfig.lunch_duration || 60
-          })
-        }
-      }
-
-      // Pass 6: Ensure no non-optional sessions appear after a day_end type
-      // Optional/after-hours sessions are allowed after day_end
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-        const sessions = workshopConfig.schedule[dayKey]
-        const dayEndIndex = sessions.findIndex((s: any) => s.type === 'day_end')
-        if (dayEndIndex >= 0 && dayEndIndex < sessions.length - 1) {
-          const afterEnd = sessions.slice(dayEndIndex + 1)
-          const optionalSessions = afterEnd.filter((s: any) => s.optional)
-          const nonOptional = afterEnd.filter((s: any) => !s.optional)
-          // Remove non-optional sessions after day_end, keep optional ones
-          sessions.splice(dayEndIndex + 1)
-          if (optionalSessions.length > 0) {
-            sessions.push(...optionalSessions)
-          }
-        }
-      }
-
-      // Pass 7: Ensure no breaks at the very start of a day (before first content session)
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-        const sessions = workshopConfig.schedule[dayKey]
-        // Find first non-structural session (skip day_title, section, day_recap)
-        while (sessions.length > 0) {
-          const first = sessions[0]
-          if (first.type === 'day_title' || first.type === 'section' || first.type === 'day_recap') break
-          if (first.type === 'break') {
-            sessions.shift()
-          } else {
-            break
-          }
-        }
-      }
-
-      // Pass 8: Remove consecutive non-lunch breaks and duplicate lunch breaks
-      const lunchPatternGlobal = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-        const sessions = workshopConfig.schedule[dayKey]
-        const isLunchBreak = (s: any) => s?.type === 'break' && lunchPatternGlobal.test(s?.session || '')
-        const isNonLunchBreak = (s: any) => s?.type === 'break' && !lunchPatternGlobal.test(s?.session || '')
-        const cleaned: any[] = []
-        let lunchCount = 0
-        for (const session of sessions) {
-          const prev = cleaned[cleaned.length - 1]
-          // Remove duplicate lunch breaks (keep only the first one per day)
-          if (isLunchBreak(session)) {
-            lunchCount++
-            if (lunchCount > 1) continue
-          }
-          // Allow tea break immediately before lunch, but not two tea breaks in a row
-          if (isNonLunchBreak(session) && prev && isNonLunchBreak(prev)) {
-            continue
-          }
-          cleaned.push(session)
-        }
-        workshopConfig.schedule[dayKey] = cleaned
-      }
-
-      // Pass 9: Per-day overflow detection and auto-condensing
-      const warnings: string[] = []
-
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-        const dayNum = parseInt(dayKey.replace('day', ''))
-        const sessions = workshopConfig.schedule[dayKey]
-
-        // Resolve this day's start/end time with fallback chain:
-        // workshopConfig.day_start_times[dayNum] → workshopConfig.day_start_time → extractedDayStartTimes[dayNum] → extractedStartTime
-        const thisDayStart = workshopConfig.day_start_times?.[dayNum] || workshopConfig.day_start_times?.[String(dayNum)] ||
-          workshopConfig.day_start_time || extractedDayStartTimes[dayNum] || extractedStartTime
-        const thisDayEnd = workshopConfig.day_end_times?.[dayNum] || workshopConfig.day_end_times?.[String(dayNum)] ||
-          workshopConfig.day_end_time || extractedDayEndTimes[dayNum] || extractedEndTime
-        const maxDayMinutes = timeToMinutes(thisDayEnd) - timeToMinutes(thisDayStart)
-
-        // Sum all durations (exclude optional/after-hours sessions)
-        let totalMinutes = sessions
-          .filter((s: any) => !s.optional)
-          .reduce((sum: number, s: any) => sum + (s.duration || 0), 0)
-
-        if (totalMinutes > maxDayMinutes) {
-          // Try to condense theory modules (from last to first) to reduce overflow
-          const moduleDetailsMap = getModuleDetailsDict()
-          for (let i = sessions.length - 1; i >= 0 && totalMinutes > maxDayMinutes; i--) {
-            const s = sessions[i]
-            if (!s.module) continue
-            // Skip activity modules (9a-9h) — can't compress
-            const modNum = s.module.replace(/^m/, '')
-            if (modNum.startsWith('9')) continue
-            // Skip already condensed
-            if (s.version === 'condensed') continue
-            // Skip breaks/custom
-            if (s.type === 'break' || s.type === 'custom') continue
-
-            const mod = moduleDetailsMap[modNum]
-            if (!mod) continue
-
-            const range = parseDurationRange(mod.duration)
-            const fullDuration = s.duration || Math.round((range.lower + range.upper) / 2)
-            const condensedDuration = Math.round(range.lower * 0.7)
-
-            // Switch to condensed
-            const saved = fullDuration - condensedDuration
-            sessions[i] = { ...s, version: 'condensed', duration: condensedDuration }
-            totalMinutes -= saved
-          }
-
-          // If still overflowing after condensing, add a warning (localized)
-          if (totalMinutes > maxDayMinutes) {
-            const overBy = totalMinutes - maxDayMinutes
-            if (workshopLanguage === 'fr') {
-              warnings.push(`Jour ${dayNum} dépasse l'horaire de ~${overBy} minutes. Envisagez de retirer une session.`)
-            } else {
-              warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
-            }
-          }
-        }
-      }
-
-      if (warnings.length > 0) {
-        workshopConfig._warnings = warnings
-      }
-
-    }
-
-    // POST-PROCESSING: Build modules array from what's actually scheduled
-    if (workshopConfig.schedule) {
-      const scheduledModules = new Set<string>()
-      for (const dayKey of Object.keys(workshopConfig.schedule)) {
-        if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
-        for (const s of workshopConfig.schedule[dayKey]) {
-          if (s.module) scheduledModules.add(s.module.replace(/^m/, ''))
-        }
-      }
-      // Always rebuild from schedule — the AI sometimes forgets to populate it
-      workshopConfig.modules = Array.from(scheduledModules).sort((a, b) => {
-        // Sort numerically, with letter suffixes (e.g., 3b, 9a) after their base number
-        const aNum = parseInt(a) || 0
-        const bNum = parseInt(b) || 0
-        if (aNum !== bNum) return aNum - bNum
-        return a.localeCompare(b)
-      })
-    }
-
-    // POST-PROCESSING: Convert start_date/end_date to formatted date string
-    if (workshopConfig.start_date && workshopConfig.end_date) {
-      const formatDate = (dateStr: string) => {
-        const date = new Date(dateStr)
-        const months = ['January', 'February', 'March', 'April', 'May', 'June',
-                       'July', 'August', 'September', 'October', 'November', 'December']
-        return { month: months[date.getMonth()], day: date.getDate(), year: date.getFullYear() }
-      }
-      const start = formatDate(workshopConfig.start_date)
-      const end = formatDate(workshopConfig.end_date)
-
-      // Format as "Month Day-Day, Year" or "Month Day - Month Day, Year"
-      if (start.month === end.month && start.year === end.year) {
-        workshopConfig.date = `${start.month} ${start.day}-${end.day}, ${start.year}`
-      } else {
-        workshopConfig.date = `${start.month} ${start.day} - ${end.month} ${end.day}, ${end.year}`
-      }
-    }
-
-    // Pass detected language to frontend
-    workshopConfig.language = workshopLanguage
+    // Run shared post-processing (dedup, overflow, modules array sync)
+    postProcessWorkshopConfig(
+      workshopConfig, workshopLanguage,
+      extractedStartTime, extractedEndTime,
+      extractedDayStartTimes, extractedDayEndTimes,
+    )
 
     res.json(workshopConfig)
   } catch (error: any) {
     console.error('AI generate-workshop error:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/ai/parse-agenda - Parse an uploaded agenda file or pasted text
+// ─────────────────────────────────────────────────────────────────────────────
+const agendaUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ]
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true)
+    } else {
+      cb(new Error('Only PDF and Word (.docx) files are supported'))
+    }
+  },
+})
+
+router.post('/parse-agenda', agendaUpload.single('file'), async (req, res) => {
+  try {
+    let agendaText = ''
+
+    if (req.file) {
+      // Extract text from uploaded file
+      if (req.file.mimetype === 'application/pdf') {
+        const { PDFParse } = await import('pdf-parse')
+        const parser = new PDFParse({ data: new Uint8Array(req.file.buffer) })
+        const result = await parser.getText()
+        agendaText = result.text
+      } else {
+        // Word .docx
+        const mammoth = await import('mammoth')
+        const result = await mammoth.extractRawText({ buffer: req.file.buffer })
+        agendaText = result.value
+      }
+    } else if (req.body?.text) {
+      agendaText = req.body.text
+    } else {
+      return res.status(400).json({ error: 'No file or text provided' })
+    }
+
+    if (!agendaText.trim()) {
+      return res.status(400).json({ error: 'Could not extract any text from the file' })
+    }
+
+    const client = getClient()
+    const workshopLanguage = detectLanguage(agendaText)
+
+    const moduleList = Object.entries(getModuleDetailsDict(workshopLanguage))
+      .map(([num, m]) => `  Module ${num}: ${m.name} - ${m.description} (${m.duration})`)
+      .join('\n')
+
+    const response = await client.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      system: `You are an expert at parsing workshop agendas and converting them into structured FASTR workshop configurations.
+
+Given the text of a workshop agenda (extracted from PDF, Word, or pasted text), parse it into a complete workshop configuration JSON.
+
+Available FASTR modules (match agenda sessions to these where the topic aligns):
+${moduleList}
+
+YOUR TASK:
+1. Identify the day structure (Day 1, Day 2, etc.)
+2. Extract times, session names, breaks, and durations
+3. Match sessions to FASTR modules where the topic clearly aligns (use fuzzy matching on topic names)
+4. Keep non-FASTR sessions as type: "custom"
+5. Preserve the original timing from the agenda
+6. Detect the agenda language (English or French)
+
+MATCHING RULES:
+- Match agenda sessions to FASTR modules based on topic similarity (e.g., "Data Quality Assessment" → Module 4, "Qualité des données" → Module 4)
+- If a session clearly maps to a FASTR module, use the module reference with "module": "m4", "version": "full"
+- If unsure whether a session matches a module, keep it as "type": "custom"
+- Activity/hands-on sessions about the FASTR platform should map to modules 9a-9h
+- Use "condensed" version if the agenda allocates significantly less time than the module's full duration
+
+Generate a JSON object with this structure:
+{
+  "name": "Workshop Name from agenda",
+  "title": "Workshop Title",
+  "subtitle": "Subtitle if found",
+  "country": "Country if mentioned",
+  "location": "City if mentioned",
+  "start_date": "YYYY-MM-DD if found",
+  "end_date": "YYYY-MM-DD if found",
+  "days": 3,
+  "day_start_time": "09:00",
+  "day_end_time": "17:00",
+  "day_start_times": {},
+  "day_end_times": {},
+  "lunch_duration": 60,
+  "module_version": "full",
+  "objectives": "- Objective 1\\n- Objective 2",
+  "expected_outputs": "",
+  "modules": ["0", "1", "4"],
+  "schedule": {
+    "day1": [
+      {"session": "Introduction to FASTR", "module": "m0", "version": "full", "duration": 60},
+      {"session": "Tea Break", "type": "break", "duration": 15},
+      {"session": "Country Presentations", "type": "custom", "duration": 60},
+      {"session": "Lunch Break", "type": "break", "duration": 60}
+    ]
+  }
+}
+
+RULES:
+1. Session types: module sessions (with "module" + "version"), breaks ("type": "break"), custom ("type": "custom")
+2. Use ${workshopLanguage === 'fr' ? '"Pause café" for tea breaks and "Pause déjeuner" for lunch breaks' : '"Tea Break" for tea breaks and "Lunch Break" for lunch breaks'}
+3. Preserve original session names from the agenda where possible
+4. If the agenda has times like "09:00 - 10:30", calculate the duration (90 min)
+5. Each module can only appear ONCE in the schedule
+6. WORKSHOP LANGUAGE: ${workshopLanguage === 'fr' ? 'FRENCH — Keep all session names in French as they appear in the agenda. Use French for any generated text.' : 'ENGLISH — Use English for all text.'}
+
+Return ONLY valid JSON, no explanation.`,
+      messages: [{ role: 'user', content: `Parse this workshop agenda:\n\n${agendaText}` }],
+    })
+
+    let textContent = ''
+    for (const block of response.content) {
+      if (block.type === 'text') textContent += block.text
+    }
+
+    let jsonContent = textContent.trim()
+    if (jsonContent.startsWith('```')) {
+      jsonContent = jsonContent.replace(/^```json?\n?/, '').replace(/\n?```$/, '')
+    }
+
+    const workshopConfig = JSON.parse(jsonContent)
+
+    // Run shared post-processing
+    const defaultStart = workshopConfig.day_start_time || '09:00'
+    const defaultEnd = workshopConfig.day_end_time || '17:00'
+    postProcessWorkshopConfig(workshopConfig, workshopLanguage, defaultStart, defaultEnd)
+
+    res.json(workshopConfig)
+  } catch (error: any) {
+    console.error('AI parse-agenda error:', error)
     res.status(500).json({ error: error.message })
   }
 })

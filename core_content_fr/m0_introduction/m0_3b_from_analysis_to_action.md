@@ -8,7 +8,7 @@ paginate: true
 
 Les résultats de FASTR — qu'il s'agisse de scores AQD, de tendances d'utilisation des services ou d'estimations de couverture — sont des **points de départ, pas des conclusions**. Ils déclenchent l'investigation et éclairent les décisions.
 
-![w:600](../../resources/diagrams_fr/from_analysis_to_action.svg)
+![w:850](../../resources/diagrams_fr/from_analysis_to_action.svg)
 
 <!--
 PRESENTER NOTES:

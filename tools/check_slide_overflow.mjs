@@ -110,6 +110,10 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage()
 await page.setViewport({ width: 1280, height: 720 })
 
+// Temp file for rendering — using page.goto() instead of setContent()
+// because setContent() runs on about:blank which blocks file:// image loading
+const tmpHtmlPath = path.join(REPO_ROOT, '.tmp_overflow_check.html')
+
 // ---------------------------------------------------------------------------
 // 4. Check each file for overflow
 // ---------------------------------------------------------------------------
@@ -124,22 +128,35 @@ for (const filePath of slideFiles) {
   // Render through Marp
   const { html, css } = marp.render(markdown)
 
-  // Build a full HTML document with base href for images
+  // Rewrite relative image paths to absolute paths from repo root
+  const rewrittenHtml = html
+    .replace(/\.\.\/\.\.\/resources\//g, `${REPO_ROOT}/resources/`)
+    .replace(/\.\.\/resources\//g, `${REPO_ROOT}/resources/`)
+
+  // Build a full HTML document
   const fullHTML = `<!DOCTYPE html>
 <html>
 <head>
-  <base href="file://${REPO_ROOT}/">
   <style>${css}</style>
 </head>
 <body>
-${html}
+${rewrittenHtml}
 </body>
 </html>`
 
-  await page.setContent(fullHTML, { waitUntil: 'load' })
+  // Write to temp file and navigate (allows file:// image loading)
+  fs.writeFileSync(tmpHtmlPath, fullHTML)
+  await page.goto(pathToFileURL(tmpHtmlPath).href, { waitUntil: 'load' })
 
-  // Wait briefly for images/SVGs to render
-  await page.evaluate(() => new Promise(r => setTimeout(r, 50)))
+  // Wait for all images to fully load
+  await page.evaluate(() => {
+    const imgs = document.querySelectorAll('img')
+    if (imgs.length === 0) return Promise.resolve()
+    return Promise.all(Array.from(imgs).map(img =>
+      img.complete ? Promise.resolve() :
+        new Promise(r => { img.onload = r; img.onerror = r })
+    ))
+  })
 
   // Check every <section> for overflow
   const results = await page.evaluate(() => {
@@ -179,6 +196,9 @@ ${html}
 // 5. Summary
 // ---------------------------------------------------------------------------
 await browser.close()
+
+// Clean up temp file
+try { fs.unlinkSync(tmpHtmlPath) } catch (_) {}
 
 console.log('')
 console.log('==========================')
