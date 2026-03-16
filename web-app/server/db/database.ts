@@ -124,6 +124,7 @@ export interface WorkshopConfig {
     contact_email?: string
     website?: string
     objectives?: string
+    theme?: 'classic' | 'clean' | 'bold'
   }
   schedule: {
     days: number

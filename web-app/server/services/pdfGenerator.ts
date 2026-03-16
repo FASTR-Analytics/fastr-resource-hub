@@ -41,7 +41,8 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    // Theme path
+    // Theme path — load all theme files so Marp CLI can resolve any theme
+    const themeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
     const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
 
     // Build args
@@ -54,9 +55,12 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
       '-o', pdfPath,
     ]
 
-    // Add theme if it exists
-    if (fs.existsSync(themePath)) {
-      args.unshift('--theme', themePath)
+    // Add all theme files so Marp CLI can resolve any theme referenced in frontmatter
+    for (const tf of themeFiles) {
+      const tp = path.join(REPO_ROOT, tf)
+      if (fs.existsSync(tp)) {
+        args.unshift('--theme', tp)
+      }
     }
 
     const marpProcess = spawn(marpPath, args, {
@@ -127,7 +131,7 @@ export async function generateHTML(mdPath: string, htmlPath: string): Promise<vo
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
+    const htmlThemeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
 
     const args = [
       '--no-config',
@@ -137,8 +141,12 @@ export async function generateHTML(mdPath: string, htmlPath: string): Promise<vo
       '-o', htmlPath,
     ]
 
-    if (fs.existsSync(themePath)) {
-      args.unshift('--theme', themePath)
+    // Add all theme files so Marp CLI can resolve any theme referenced in frontmatter
+    for (const tf of htmlThemeFiles) {
+      const tp = path.join(REPO_ROOT, tf)
+      if (fs.existsSync(tp)) {
+        args.unshift('--theme', tp)
+      }
     }
 
     const marpProcess = spawn(marpPath, args, {

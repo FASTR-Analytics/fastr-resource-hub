@@ -57,10 +57,14 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   const lang: Language = language || (config.workshop as any).language || 'en'
   const slides: string[] = []
 
-  // Marp frontmatter
+  // Marp frontmatter — select theme based on workshop config
+  const themeSetting = (config.workshop as any).theme || 'classic'
+  const marpTheme = themeSetting === 'clean' ? 'fastr-clean'
+    : themeSetting === 'bold' ? 'fastr-bold' : 'fastr'
+
   slides.push(`---
 marp: true
-theme: fastr
+theme: ${marpTheme}
 paginate: true
 ---
 `)
@@ -161,7 +165,7 @@ async function buildSessionSlides(
               // Remove frontmatter
               content = content.replace(/^---[\s\S]*?---\s*/m, '')
               content = content.replace(/\n---\s*$/, '')
-              content = substituteVariables(content, config, dayNumber, session)
+              content = substituteVariables(content, config, dayNumber, session, language)
               if (content.trim()) {
                 allSlideContents.push(content.trim())
               }
@@ -179,26 +183,28 @@ async function buildSessionSlides(
 
   // Break slides
   if (session.type === 'break') {
-    return buildBreakSlide(session)
+    return buildBreakSlide(session, language)
   }
 
   // Day recap
   if (session.type === 'day_recap') {
-    return buildDayRecapSlide(session, config, dayNumber)
+    return buildDayRecapSlide(session, config, dayNumber, language)
   }
 
   // Day end
   if (session.type === 'day_end') {
-    return buildDayEndSlide(session, dayNumber)
+    return buildDayEndSlide(session, dayNumber, language)
   }
 
   // Section/Agenda - check if this is an agenda section
   if (session.type === 'section') {
     // If session name contains "Agenda" and a day number, generate agenda table
+    // Supports both English "Day 1 Agenda" and French "Agenda Jour 1"
     const agendaMatch = session.session.match(/Day\s*(\d+)\s*Agenda/i)
+      || session.session.match(/Agenda\s*(?:Jour|Day)\s*(\d+)/i)
     if (agendaMatch) {
       const agendaDay = parseInt(agendaMatch[1])
-      return buildDayAgendaSlide(config, agendaDay)
+      return buildDayAgendaSlide(config, agendaDay, language)
     }
     return buildSectionSlide(session)
   }
@@ -298,6 +304,32 @@ function buildModuleSlides(
   // Filter out excluded slides
   if (excludedSlides && excludedSlides.length > 0) {
     files = files.filter(f => !excludedSlides.includes(f))
+  }
+
+  // Fall back to full variant if condensed has no slides
+  if (files.length === 0 && effectiveVersion === 'condensed') {
+    console.warn(`No condensed slides for ${moduleId}, falling back to full variant`)
+    // Re-run with full variant
+    if (meta?.slides) {
+      files = meta.slides
+        .filter(entry => moduleId === 'overview' || entry.variant !== 'condensed')
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+        .map(entry => entry.file)
+        .filter(f => fs.existsSync(path.join(modulePath, f)))
+    } else {
+      files = fs.readdirSync(modulePath).filter(f => f.endsWith('.md'))
+      if (moduleId !== 'overview') {
+        files = files.filter(f => f.match(/^m\d+[a-z]?_s\d+/) === null)
+      }
+      files = files.sort((a, b) => {
+        const aMatch = a.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+        const bMatch = b.match(/^(?:m\d+[a-z]?_s?|mai_)?(\d+)/)
+        const aNum = aMatch ? parseInt(aMatch[1]) : 0
+        const bNum = bMatch ? parseInt(bMatch[1]) : 0
+        if (aNum !== bNum) return aNum - bNum
+        return a.localeCompare(b)
+      })
+    }
   }
 
   if (files.length === 0) {
@@ -453,7 +485,7 @@ async function loadSlideContent(
   content = content.replace(/\n---\s*$/, '')
 
   // Substitute variables
-  content = substituteVariables(content, config, dayNumber, session)
+  content = substituteVariables(content, config, dayNumber, session, language)
 
   return content.trim()
 }
@@ -461,15 +493,16 @@ async function loadSlideContent(
 /**
  * Build a day agenda slide with schedule table
  */
-function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string {
+function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language: Language = 'en'): string {
+  const isFr = language === 'fr'
   const dayKey = `day${dayNumber}` as keyof typeof config.schedule
   const sessions = config.schedule[dayKey] as Session[] | undefined
-  const dayTitle = config.schedule.day_titles?.[dayNumber] || `Day ${dayNumber}`
+  const dayTitle = config.schedule.day_titles?.[dayNumber] || (isFr ? `Jour ${dayNumber}` : `Day ${dayNumber}`)
 
   if (!sessions || sessions.length === 0) {
-    return `# Day ${dayNumber} - Agenda
+    return `# ${isFr ? `Jour ${dayNumber} - Agenda` : `Day ${dayNumber} - Agenda`}
 
-*No sessions scheduled*
+*${isFr ? 'Aucune session programmée' : 'No sessions scheduled'}*
 `
   }
 
@@ -487,7 +520,9 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string 
 
   // Build table rows with Time, Session, and Facilitator columns
   const rows: string[] = []
-  rows.push('| Time | Session | Facilitator |')
+  rows.push(isFr
+    ? '| Heure | Session | Facilitateur |'
+    : '| Time | Session | Facilitator |')
   rows.push('|------|---------|-------------|')
 
   let sessionNumber = 1
@@ -535,7 +570,7 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number): string 
 
   return `<!-- _class: agenda -->
 
-# Day ${dayNumber} - Agenda
+# ${isFr ? `Jour ${dayNumber} - Agenda` : `Day ${dayNumber} - Agenda`}
 
 **${dayTitle}**
 
@@ -550,12 +585,14 @@ function substituteVariables(
   content: string,
   config: WorkshopConfig,
   dayNumber: number,
-  session: Session
+  session: Session,
+  language: Language = 'en'
 ): string {
   // Cast to any to access optional properties
   const workshop = config.workshop as any
 
   // Format dates nicely
+  const locale = language === 'fr' ? 'fr-FR' : 'en-US'
   const formatDateRange = (startDate?: string, endDate?: string): string => {
     if (!startDate) return ''
     try {
@@ -564,16 +601,16 @@ function substituteVariables(
       const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' }
 
       if (!end || startDate === endDate) {
-        return start.toLocaleDateString('en-US', options)
+        return start.toLocaleDateString(locale, options)
       }
 
       // Same month and year
       if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
-        return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}-${end.getDate()}, ${end.getFullYear()}`
+        return `${start.toLocaleDateString(locale, { month: 'long', day: 'numeric' })}-${end.getDate()}, ${end.getFullYear()}`
       }
 
       // Different months
-      return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`
+      return `${start.toLocaleDateString(locale, options)} - ${end.toLocaleDateString(locale, options)}`
     } catch {
       return startDate || ''
     }
@@ -675,19 +712,30 @@ function calculateResumeTime(session: Session): string {
 /**
  * Build a break slide
  */
-function buildBreakSlide(session: Session): string {
-  const isLunch = session.session.toLowerCase().includes('lunch')
+function buildBreakSlide(session: Session, language: Language = 'en'): string {
+  const isFr = language === 'fr'
+  const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
+  const isLunch = lunchPattern.test(session.session)
   const duration = session.duration || (isLunch ? 60 : 15)
   const resumeTime = calculateResumeTime(session)
+
+  const title = isLunch
+    ? (isFr ? '🍽️ Pause déjeuner' : '🍽️ Lunch Break')
+    : (isFr ? '☕ Pause café' : '☕ Tea Break')
+
+  const durationLabel = isFr ? `**${duration} minutes**` : `**${duration} minutes**`
+  const resumeLabel = resumeTime
+    ? (isFr ? `Reprise à **${resumeTime}**` : `We resume at **${resumeTime}**`)
+    : ''
 
   return `<!-- _class: break -->
 ![bg](../resources/backgrounds/break_slide.png)
 
-# ${isLunch ? '🍽️ Lunch Break' : '☕ Tea Break'}
+# ${title}
 
-**${duration} minutes**
+${durationLabel}
 
-${resumeTime ? `We resume at **${resumeTime}**` : ''}
+${resumeLabel}
 `
 }
 
@@ -695,10 +743,11 @@ ${resumeTime ? `We resume at **${resumeTime}**` : ''}
  * Build a day recap slide - recaps the PREVIOUS day
  * Simple slide with thought icon, facilitator fills in verbally
  */
-function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number): string {
+function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number, language: Language = 'en'): string {
+  const isFr = language === 'fr'
   const previousDay = dayNumber - 1
 
-  return `## Day ${previousDay} Recap
+  return `## ${isFr ? `Récapitulatif : Jour ${previousDay}` : `Day ${previousDay} Recap`}
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
@@ -711,15 +760,17 @@ function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber:
 /**
  * Build day end slides
  */
-function buildDayEndSlide(session: Session, dayNumber: number): string {
+function buildDayEndSlide(session: Session, dayNumber: number, language: Language = 'en'): string {
+  const isFr = language === 'fr'
+
   return `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# Key messages and wrap-up
+# ${isFr ? 'Messages clés et conclusion' : 'Key messages and wrap-up'}
 
 ---
 
-## Reflections from Participants
+## ${isFr ? 'Réflexions des participants' : 'Reflections from Participants'}
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 

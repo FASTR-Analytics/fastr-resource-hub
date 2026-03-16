@@ -84,12 +84,19 @@ export const translations = {
 
     // Workshop creation
     aiSetup: 'AI Setup',
+    uploadOrPaste: 'Upload',
     manual: 'Manual',
     describeWorkshop: 'Describe your workshop and AI will set it up for you.',
     aiPlaceholder: 'Example: First FASTR workshop in Kenya, 3 days. Focus on data quality and coverage estimation. Use high-level introductory content (shorter versions where available). This is a refresher for teams who attended last year\'s training.',
     back: 'Back',
     generating: 'Generating...',
     generateWorkshop: 'Generate Workshop',
+    uploadAgenda: 'Upload Agenda',
+    uploadAgendaDesc: 'Upload a PDF, Word doc, or paste your agenda text',
+    pasteAgendaHere: 'Or paste your agenda here...',
+    dropFileHere: 'Drop your agenda file here',
+    supportedFormats: 'PDF or Word (.docx)',
+    parsing: 'Parsing agenda...',
     workshopName: 'Workshop Name',
     country: 'Country',
     city: 'City',
@@ -301,6 +308,15 @@ export const translations = {
     // AI warnings
     scheduleOverflowWarning: 'Some days may run long — review the schedule and adjust',
 
+    // Slide theme
+    slideTheme: 'Slide Theme',
+    themeClassic: 'Classic',
+    themeClassicDesc: 'Standard styling with colored borders',
+    themeClean: 'Clean',
+    themeCleanDesc: 'Minimal and spacious',
+    themeBold: 'Bold',
+    themeBoldDesc: 'High impact with strong colors',
+
     // Accessibility
     dismissError: 'Dismiss error',
     closePanel: 'Close panel',
@@ -392,12 +408,19 @@ export const translations = {
 
     // Workshop creation
     aiSetup: 'Configuration IA',
+    uploadOrPaste: 'Importer',
     manual: 'Manuel',
     describeWorkshop: 'Décrivez votre atelier et l\'IA le configurera pour vous.',
     aiPlaceholder: 'Exemple : Premier atelier FASTR au Sénégal, 3 jours. Accent sur la qualité des données et l\'estimation de la couverture. Utiliser un contenu introductif de haut niveau (versions courtes si disponibles). Il s\'agit d\'un rappel pour les équipes qui ont assisté à la formation de l\'année dernière.',
     back: 'Retour',
     generating: 'Génération...',
     generateWorkshop: 'Générer l\'atelier',
+    uploadAgenda: 'Importer un agenda',
+    uploadAgendaDesc: 'Importez un PDF, Word, ou collez votre agenda',
+    pasteAgendaHere: 'Ou collez votre agenda ici...',
+    dropFileHere: 'Déposez votre fichier ici',
+    supportedFormats: 'PDF ou Word (.docx)',
+    parsing: 'Analyse de l\'agenda...',
     workshopName: 'Nom de l\'atelier',
     country: 'Pays',
     city: 'Ville',
@@ -608,6 +631,15 @@ export const translations = {
 
     // AI warnings
     scheduleOverflowWarning: 'Certaines journées pourraient dépasser l\'horaire — vérifiez le programme',
+
+    // Slide theme
+    slideTheme: 'Thème des diapositives',
+    themeClassic: 'Classique',
+    themeClassicDesc: 'Style standard avec bordures colorées',
+    themeClean: 'Épuré',
+    themeCleanDesc: 'Minimaliste et aéré',
+    themeBold: 'Audacieux',
+    themeBoldDesc: 'Impact fort avec couleurs vives',
 
     // Accessibility
     dismissError: 'Fermer l\'erreur',

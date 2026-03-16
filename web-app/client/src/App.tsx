@@ -38,6 +38,7 @@ import {
   UtensilsCrossed,
   AlertTriangle,
   ArrowRightLeft,
+  Upload,
 } from 'lucide-react'
 import {
   DndContext,
@@ -2090,11 +2091,14 @@ function App() {
   const [addSessionMenuDay, setAddSessionMenuDay] = useState<number | null>(null)
   const [activeDragData, setActiveDragData] = useState<{ id: string; data: any } | null>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
-  const [createMode, setCreateMode] = useState<'manual' | 'ai'>('manual')
+  const [createMode, setCreateMode] = useState<'manual' | 'ai' | 'upload'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
   const [aiGenerating, setAiGenerating] = useState(false)
   const [aiQuestions, setAiQuestions] = useState<string[]>([])
   const [aiAnswers, setAiAnswers] = useState<Record<number, string>>({})
+  const [uploadFile, setUploadFile] = useState<File | null>(null)
+  const [uploadText, setUploadText] = useState('')
+  const [uploadDragOver, setUploadDragOver] = useState(false)
   const [newWorkshop, setNewWorkshop] = useState({
     name: '',
     country: '',
@@ -2241,6 +2245,134 @@ function App() {
     }
   }
 
+  // Shared: convert AI response → config + create workshop
+  const buildWorkshopFromAIResponse = async (data: any) => {
+    const year = new Date().getFullYear()
+    const countrySlug = (data.country || 'workshop').toLowerCase().replace(/\s+/g, '-')
+    const workshopId = `${year}-${countrySlug}`
+    const isFr = data.language === 'fr'
+
+    const ts = Date.now()
+    const schedule: any = {
+      days: data.days || 3,
+      day_titles: {},
+      day_start_times: {},
+      day_end_times: {},
+    }
+
+    const aiDayStartTimes: Record<string, string> = data.day_start_times || {}
+    const aiDayEndTimes: Record<string, string> = data.day_end_times || {}
+    const defaultStartTime = data.day_start_time || '09:00'
+    const defaultEndTime = data.day_end_time || '17:00'
+
+    for (let d = 1; d <= (data.days || 3); d++) {
+      schedule.day_start_times[d] = aiDayStartTimes[d] || aiDayStartTimes[String(d)] || defaultStartTime
+      schedule.day_end_times[d] = aiDayEndTimes[d] || aiDayEndTimes[String(d)] || defaultEndTime
+      schedule.day_titles[d] = ''
+
+      const aiDaySessions = data.schedule?.[`day${d}`] || []
+      const sessions: any[] = []
+      let sessionNum = 1
+
+      if (d === 1) {
+        sessions.push(
+          { _id: `title-${ts}`, session: data.name || (isFr ? 'Atelier FASTR' : 'FASTR Workshop'), type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+          { _id: `welcome-${ts}`, session: isFr ? 'Remarques d\'ouverture' : 'Welcome and Opening Remarks', slides: ['welcome_slide.md'], duration: 10 },
+          { _id: `intro-${ts}`, session: isFr ? 'Présentations' : 'Introductions', slides: ['introductions_slide.md'], duration: 15 },
+          { _id: `agenda1-${ts}`, session: isFr ? 'Agenda Jour 1' : 'Day 1 Agenda', type: 'section', duration: 5 },
+          { _id: `obj-${ts}`, session: isFr ? 'Objectifs de l\'atelier' : 'Workshop Objectives', slides: ['objectives_slide.md'], duration: 5 },
+          { _id: `exp-${ts}`, session: isFr ? 'Attentes' : 'Expectations', slides: ['expectations_slide.md'], duration: 15 },
+          { _id: `outputs-${ts}`, session: isFr ? 'Résultats attendus' : 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
+        )
+      } else {
+        sessions.push(
+          { _id: `daytitle-${d}-${ts}`, session: isFr ? `Jour ${d}` : `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
+          { _id: `recap-${d}-${ts}`, session: isFr ? `Récapitulatif : Jour ${d - 1}` : `Recap: Day ${d - 1}`, type: 'day_recap', duration: 10 },
+          { _id: `agenda-${d}-${ts}`, session: isFr ? `Agenda Jour ${d}` : `Day ${d} Agenda`, type: 'section', duration: 5 }
+        )
+      }
+
+      const optionalSessions: any[] = []
+      for (const aiSession of aiDaySessions) {
+        const sessionObj: any = {
+          _id: `session-${d}-${sessionNum++}-${ts}`,
+          session: aiSession.session,
+          duration: aiSession.duration || 60,
+        }
+
+        if (aiSession.module) {
+          sessionObj.module = aiSession.module
+          sessionObj.version = aiSession.version
+        } else if (aiSession.type === 'break') {
+          sessionObj._id = `break-${d}-${sessionNum}-${ts}`
+          sessionObj.type = 'break'
+          sessionObj.duration = aiSession.duration || 15
+        } else if (aiSession.type === 'custom') {
+          sessionObj._id = `custom-${d}-${sessionNum}-${ts}`
+          sessionObj.type = 'custom'
+          sessionObj.duration = aiSession.duration || 30
+        }
+
+        if (aiSession.optional) {
+          sessionObj.optional = true
+          optionalSessions.push(sessionObj)
+        } else {
+          sessions.push(sessionObj)
+        }
+      }
+
+      sessions.push({
+        _id: `dayend-${d}-${ts}`,
+        session: isFr ? `Fin du Jour ${d}` : `End of Day ${d}`,
+        type: 'day_end',
+        slides: ['day_end.md'],
+        duration: 5,
+      })
+
+      if (optionalSessions.length > 0) {
+        sessions.push(...optionalSessions)
+      }
+
+      schedule[`day${d}`] = sessions
+    }
+
+    const config = {
+      workshop: {
+        name: data.name || 'FASTR Workshop',
+        title: data.title || '',
+        subtitle: data.subtitle || '',
+        country: data.country || '',
+        location: data.location || '',
+        date: data.date || '',
+        start_date: data.start_date || '',
+        end_date: data.end_date || '',
+        facilitators: data.facilitators || '',
+        objectives: data.objectives || '',
+        expected_outputs: data.expected_outputs || '',
+        language: data.language || 'en',
+      },
+      schedule,
+      content: {
+        modules: data.modules || [],
+        custom_slides: [],
+      },
+    }
+
+    if (data.language === 'fr' || data.language === 'french') {
+      setContentLanguage('fr')
+    }
+
+    if (data._warnings && Array.isArray(data._warnings) && data._warnings.length > 0) {
+      setTimeout(() => {
+        showToast(t('scheduleOverflowWarning', contentLanguage), 'info')
+      }, 500)
+    }
+
+    await createWorkshop(workshopId, config)
+    setShowCreateWorkshop(false)
+    setShowWorkshopSelector(false)
+  }
+
   // Handle AI workshop generation - creates workshop directly
   const handleAIGenerate = async () => {
     if (!aiPrompt.trim()) {
@@ -2277,149 +2409,54 @@ function App() {
         return
       }
 
-      // Generate workshop ID
-      const year = new Date().getFullYear()
-      const countrySlug = (data.country || 'workshop').toLowerCase().replace(/\s+/g, '-')
-      const workshopId = `${year}-${countrySlug}`
-
-      // Build the schedule from AI-generated data
-      const ts = Date.now()
-      const schedule: any = {
-        days: data.days || 3,
-        day_titles: {},
-        day_start_times: {},
-        day_end_times: {},
-      }
-
-      // Resolve per-day start/end times from AI response maps with fallback to singular fields
-      const aiDayStartTimes: Record<string, string> = data.day_start_times || {}
-      const aiDayEndTimes: Record<string, string> = data.day_end_times || {}
-      const defaultStartTime = data.day_start_time || '09:00'
-      const defaultEndTime = data.day_end_time || '17:00'
-      const isFr = data.language === 'fr'
-      for (let d = 1; d <= (data.days || 3); d++) {
-        schedule.day_start_times[d] = aiDayStartTimes[d] || aiDayStartTimes[String(d)] || defaultStartTime
-        schedule.day_end_times[d] = aiDayEndTimes[d] || aiDayEndTimes[String(d)] || defaultEndTime
-        schedule.day_titles[d] = ''
-
-        const aiDaySessions = data.schedule?.[`day${d}`] || []
-        const sessions: any[] = []
-        let sessionNum = 1
-
-        if (d === 1) {
-          // Day 1 always starts with required opening sequence
-          sessions.push(
-            { _id: `title-${ts}`, session: data.name || (isFr ? 'Atelier FASTR' : 'FASTR Workshop'), type: 'day_title', slides: ['title_slide.md'], duration: 0 },
-            { _id: `welcome-${ts}`, session: isFr ? 'Remarques d\'ouverture' : 'Welcome and Opening Remarks', slides: ['welcome_slide.md'], duration: 10 },
-            { _id: `intro-${ts}`, session: isFr ? 'Présentations' : 'Introductions', slides: ['introductions_slide.md'], duration: 15 },
-            { _id: `agenda1-${ts}`, session: isFr ? 'Agenda Jour 1' : 'Day 1 Agenda', type: 'section', duration: 5 },
-            { _id: `obj-${ts}`, session: isFr ? 'Objectifs de l\'atelier' : 'Workshop Objectives', slides: ['objectives_slide.md'], duration: 5 },
-            { _id: `exp-${ts}`, session: isFr ? 'Attentes' : 'Expectations', slides: ['expectations_slide.md'], duration: 15 },
-            { _id: `outputs-${ts}`, session: isFr ? 'Résultats attendus' : 'Expected Outputs', slides: ['expected_outputs_slide.md'], duration: 5 }
-          )
-        } else {
-          // Day 2+ starts with day cover, recap of previous day, then agenda
-          sessions.push(
-            { _id: `daytitle-${d}-${ts}`, session: isFr ? `Jour ${d}` : `Day ${d}`, type: 'day_title', slides: ['day_title.md'], duration: 0 },
-            { _id: `recap-${d}-${ts}`, session: isFr ? `Récapitulatif : Jour ${d - 1}` : `Recap: Day ${d - 1}`, type: 'day_recap', duration: 10 },
-            { _id: `agenda-${d}-${ts}`, session: isFr ? `Agenda Jour ${d}` : `Day ${d} Agenda`, type: 'section', duration: 5 }
-          )
-        }
-
-        // Add AI-generated sessions (modules, breaks, custom)
-        // Collect optional sessions separately to place after day_end
-        const optionalSessions: any[] = []
-        for (const aiSession of aiDaySessions) {
-          const sessionObj: any = {
-            _id: `session-${d}-${sessionNum++}-${ts}`,
-            session: aiSession.session,
-            duration: aiSession.duration || 60,
-          }
-
-          if (aiSession.module) {
-            sessionObj.module = aiSession.module
-            sessionObj.version = aiSession.version
-          } else if (aiSession.type === 'break') {
-            sessionObj._id = `break-${d}-${sessionNum}-${ts}`
-            sessionObj.type = 'break'
-            sessionObj.duration = aiSession.duration || 15
-          } else if (aiSession.type === 'custom') {
-            sessionObj._id = `custom-${d}-${sessionNum}-${ts}`
-            sessionObj.type = 'custom'
-            sessionObj.duration = aiSession.duration || 30
-          }
-
-          if (aiSession.optional) {
-            sessionObj.optional = true
-            optionalSessions.push(sessionObj)
-          } else {
-            sessions.push(sessionObj)
-          }
-        }
-
-        // End each day
-        sessions.push({
-          _id: `dayend-${d}-${ts}`,
-          session: isFr ? `Fin du Jour ${d}` : `End of Day ${d}`,
-          type: 'day_end',
-          slides: ['day_end.md'],
-          duration: 5,
-        })
-
-        // Place optional/after-hours sessions after the day_end marker
-        if (optionalSessions.length > 0) {
-          sessions.push(...optionalSessions)
-        }
-
-        schedule[`day${d}`] = sessions
-      }
-
-      // Create full config
-      const config = {
-        workshop: {
-          name: data.name || 'FASTR Workshop',
-          title: data.title || '',
-          subtitle: data.subtitle || '',
-          country: data.country || '',
-          location: data.location || '',
-          date: data.date || '',
-          start_date: data.start_date || '',
-          end_date: data.end_date || '',
-          facilitators: data.facilitators || '',
-          objectives: data.objectives || '',
-          expected_outputs: data.expected_outputs || '',
-          language: data.language || 'en',
-        },
-        schedule,
-        content: {
-          modules: data.modules || [],
-          custom_slides: [],
-        },
-      }
-
-      // Detect language: from AI response, clarification answers, or prompt text
-      const promptAndAnswers = [aiPrompt, ...Object.values(aiAnswers)].join(' ')
-      if (data.language === 'fr' || data.language === 'french') {
-        setContentLanguage('fr')
-      } else if (/fran[cç]ais|atelier\s+FASTR|french|francophone/i.test(promptAndAnswers) ||
-                 /\b(Sénégal|Burkina|Congo|Cameroun|Mali|Guinée|Niger|Tchad|Bénin|Togo|Madagascar|Haïti|Côte d'Ivoire)\b/i.test(promptAndAnswers)) {
-        setContentLanguage('fr')
-      }
-
-      // Show overflow warnings if any
-      if (data._warnings && Array.isArray(data._warnings) && data._warnings.length > 0) {
-        setTimeout(() => {
-          showToast(t('scheduleOverflowWarning', contentLanguage), 'info')
-        }, 500)
-      }
-
-      // Create the workshop directly
-      await createWorkshop(workshopId, config)
-      setShowCreateWorkshop(false)
-      setShowWorkshopSelector(false)
+      await buildWorkshopFromAIResponse(data)
       setAiPrompt('')
       setAiQuestions([])
       setAiAnswers({})
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setAiGenerating(false)
+    }
+  }
+
+  // Handle upload agenda → parse → create workshop
+  const handleUploadAgenda = async () => {
+    if (!uploadFile && !uploadText.trim()) {
+      setError(contentLanguage === 'fr' ? 'Veuillez importer un fichier ou coller votre agenda' : 'Please upload a file or paste your agenda')
+      return
+    }
+
+    setAiGenerating(true)
+    try {
+      let response: Response
+
+      if (uploadFile) {
+        const formData = new FormData()
+        formData.append('file', uploadFile)
+        response = await fetch('/api/ai/parse-agenda', {
+          credentials: 'include',
+          method: 'POST',
+          body: formData,
+        })
+      } else {
+        response = await fetch('/api/ai/parse-agenda', {
+          credentials: 'include',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: uploadText }),
+        })
+      }
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({ error: 'Failed to parse agenda' }))
+        throw new Error(err.error || 'Failed to parse agenda')
+      }
+
+      const data = await response.json()
+      await buildWorkshopFromAIResponse(data)
+      setUploadFile(null)
+      setUploadText('')
     } catch (err: any) {
       setError(err.message)
     } finally {
@@ -3338,6 +3375,8 @@ function App() {
                   setShowCreateWorkshop(false)
                   setAiQuestions([])
                   setAiAnswers({})
+                  setUploadFile(null)
+                  setUploadText('')
                 }}
                 aria-label="Close dialog"
                 className="text-gray-400 hover:text-gray-600"
@@ -3360,6 +3399,17 @@ function App() {
                   >
                     <Sparkles className="w-4 h-4" />
                     {t('aiSetup', contentLanguage)}
+                  </button>
+                  <button
+                    onClick={() => setCreateMode('upload')}
+                    className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                      createMode === 'upload'
+                        ? 'bg-white text-fastr-primary shadow-sm'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    <Upload className="w-4 h-4" />
+                    {t('uploadOrPaste', contentLanguage)}
                   </button>
                   <button
                     onClick={() => setCreateMode('manual')}
@@ -3477,6 +3527,107 @@ function App() {
                         </div>
                       </>
                     )}
+                  </div>
+                ) : createMode === 'upload' ? (
+                  <div className="space-y-4">
+                    <p className="text-sm text-gray-600">
+                      {t('uploadAgendaDesc', contentLanguage)}
+                    </p>
+
+                    {/* Drop zone */}
+                    <div
+                      onDragOver={(e) => { e.preventDefault(); setUploadDragOver(true) }}
+                      onDragLeave={() => setUploadDragOver(false)}
+                      onDrop={(e) => {
+                        e.preventDefault()
+                        setUploadDragOver(false)
+                        const file = e.dataTransfer.files[0]
+                        if (file && (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+                          setUploadFile(file)
+                        } else {
+                          setError(contentLanguage === 'fr' ? 'Format non supporté. Utilisez PDF ou Word (.docx)' : 'Unsupported format. Use PDF or Word (.docx)')
+                        }
+                      }}
+                      className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer ${
+                        uploadDragOver
+                          ? 'border-fastr-primary bg-fastr-primary/5'
+                          : uploadFile
+                            ? 'border-green-300 bg-green-50'
+                            : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                      onClick={() => {
+                        const input = document.createElement('input')
+                        input.type = 'file'
+                        input.accept = '.pdf,.docx'
+                        input.onchange = (e) => {
+                          const file = (e.target as HTMLInputElement).files?.[0]
+                          if (file) setUploadFile(file)
+                        }
+                        input.click()
+                      }}
+                    >
+                      {uploadFile ? (
+                        <div className="flex items-center justify-center gap-2">
+                          <FileText className="w-5 h-5 text-green-600" />
+                          <span className="text-sm font-medium text-green-700">{uploadFile.name}</span>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setUploadFile(null) }}
+                            className="ml-2 text-gray-400 hover:text-gray-600"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                          <p className="text-sm font-medium text-gray-700">{t('dropFileHere', contentLanguage)}</p>
+                          <p className="text-xs text-gray-500 mt-1">{t('supportedFormats', contentLanguage)}</p>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Paste textarea */}
+                    {!uploadFile && (
+                      <textarea
+                        value={uploadText}
+                        onChange={(e) => setUploadText(e.target.value)}
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
+                        placeholder={t('pasteAgendaHere', contentLanguage)}
+                        disabled={aiGenerating}
+                      />
+                    )}
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setShowCreateWorkshop(false)
+                          setUploadFile(null)
+                          setUploadText('')
+                        }}
+                        className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                        disabled={aiGenerating}
+                      >
+                        {t('back', contentLanguage)}
+                      </button>
+                      <button
+                        onClick={handleUploadAgenda}
+                        disabled={aiGenerating || (!uploadFile && !uploadText.trim())}
+                        className="flex-1 px-4 py-2 font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      >
+                        {aiGenerating ? (
+                          <>
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            {t('parsing', contentLanguage)}
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-4 h-4" />
+                            {t('generateWorkshop', contentLanguage)}
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -3693,6 +3844,37 @@ function App() {
                       placeholder={contentLanguage === 'fr' ? 'Sous-titre de la couverture' : 'Subtitle on cover slide'}
                     />
                   </div>
+                </div>
+              </section>
+
+              {/* Slide Theme Section */}
+              <section>
+                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                  {t('slideTheme', contentLanguage)}
+                </h3>
+                <div className="grid grid-cols-3 gap-3">
+                  {([
+                    { value: 'classic' as const, icon: '≡', label: t('themeClassic', contentLanguage), desc: t('themeClassicDesc', contentLanguage) },
+                    { value: 'clean' as const, icon: '○', label: t('themeClean', contentLanguage), desc: t('themeCleanDesc', contentLanguage) },
+                    { value: 'bold' as const, icon: '■', label: t('themeBold', contentLanguage), desc: t('themeBoldDesc', contentLanguage) },
+                  ]).map((theme) => {
+                    const isSelected = ((currentConfig.workshop as any).theme || 'classic') === theme.value
+                    return (
+                      <button
+                        key={theme.value}
+                        onClick={() => updateWorkshopSettings({ theme: theme.value } as any)}
+                        className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all text-center ${
+                          isSelected
+                            ? 'border-fastr-primary bg-fastr-primary/5 ring-1 ring-fastr-primary/20'
+                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="text-2xl mb-1.5" style={{ color: isSelected ? '#09544F' : '#6b7280' }}>{theme.icon}</span>
+                        <span className={`text-sm font-semibold ${isSelected ? 'text-fastr-primary' : 'text-gray-700'}`}>{theme.label}</span>
+                        <span className="text-xs text-gray-500 mt-0.5">{theme.desc}</span>
+                      </button>
+                    )
+                  })}
                 </div>
               </section>
 
