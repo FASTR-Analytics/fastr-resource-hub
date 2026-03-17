@@ -4,10 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
 ## Service utilization module: Configuration parameters
 
 **Note:** These parameters apply only to the disruption analysis. Year-over-year service utilization analysis does not require configuration.
+
+<div style="font-size: 0.8em;">
 
 | Parameter | Description |
 |-----------|-------------|
@@ -19,6 +20,8 @@ paginate: true
 | **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
 | **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
 | **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
+
+</div>
 
 <!--
 PRESENTER NOTES:

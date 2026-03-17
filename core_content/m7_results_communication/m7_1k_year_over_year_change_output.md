@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Service utilization output: Year-over-year change
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **What you see:** Bars show annual service volumes by region. Percentages indicate year-over-year change.
 

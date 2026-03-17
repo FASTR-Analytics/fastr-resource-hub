@@ -72,6 +72,51 @@ export async function initializeDatabase() {
     )
   `)
 
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS imported_modules (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      source_filename TEXT,
+      slide_count INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `)
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS imported_slides (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      module_id TEXT NOT NULL,
+      slide_order INTEGER NOT NULL,
+      original_text TEXT,
+      markdown TEXT NOT NULL,
+      title TEXT,
+      FOREIGN KEY (module_id) REFERENCES imported_modules(id) ON DELETE CASCADE
+    )
+  `)
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS external_decks (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      source_filename TEXT,
+      page_count INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `)
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS external_pages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      deck_id TEXT NOT NULL,
+      page_number INTEGER NOT NULL,
+      image_filename TEXT NOT NULL,
+      width INTEGER,
+      height INTEGER,
+      FOREIGN KEY (deck_id) REFERENCES external_decks(id) ON DELETE CASCADE
+    )
+  `)
+
   // Create indexes (ignore if exist)
   try {
     await db.execute('CREATE INDEX idx_workshops_country ON workshops(country)')
@@ -80,6 +125,16 @@ export async function initializeDatabase() {
   }
   try {
     await db.execute('CREATE INDEX idx_custom_slides_workshop ON custom_slides(workshop_id)')
+  } catch (e) {
+    // Index already exists
+  }
+  try {
+    await db.execute('CREATE INDEX idx_imported_slides_module ON imported_slides(module_id)')
+  } catch (e) {
+    // Index already exists
+  }
+  try {
+    await db.execute('CREATE INDEX idx_external_pages_deck ON external_pages(deck_id)')
   } catch (e) {
     // Index already exists
   }
@@ -279,6 +334,148 @@ export async function deleteCustomSlide(workshopId: string, filename: string) {
     sql: 'DELETE FROM custom_slides WHERE workshop_id = ? AND filename = ?',
     args: [workshopId, filename]
   })
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Imported Modules Operations
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface ImportedModuleRow {
+  id: string
+  name: string
+  source_filename: string | null
+  slide_count: number
+  created_at: string
+  updated_at: string
+}
+
+export interface ImportedSlideRow {
+  id: number
+  module_id: string
+  slide_order: number
+  original_text: string | null
+  markdown: string
+  title: string | null
+}
+
+export async function getAllImportedModules(): Promise<ImportedModuleRow[]> {
+  const result = await db.execute('SELECT * FROM imported_modules ORDER BY created_at DESC')
+  return result.rows as unknown as ImportedModuleRow[]
+}
+
+export async function getImportedModule(id: string): Promise<ImportedModuleRow | null> {
+  const result = await db.execute({
+    sql: 'SELECT * FROM imported_modules WHERE id = ?',
+    args: [id]
+  })
+  if (result.rows.length === 0) return null
+  return result.rows[0] as unknown as ImportedModuleRow
+}
+
+export async function createImportedModule(id: string, name: string, sourceFilename: string | null, slideCount: number) {
+  await db.execute({
+    sql: 'INSERT INTO imported_modules (id, name, source_filename, slide_count) VALUES (?, ?, ?, ?)',
+    args: [id, name, sourceFilename, slideCount]
+  })
+}
+
+export async function deleteImportedModule(id: string) {
+  // Delete slides first (cascade may not work in all SQLite modes)
+  await db.execute({ sql: 'DELETE FROM imported_slides WHERE module_id = ?', args: [id] })
+  await db.execute({ sql: 'DELETE FROM imported_modules WHERE id = ?', args: [id] })
+}
+
+export async function getImportedSlides(moduleId: string): Promise<ImportedSlideRow[]> {
+  const result = await db.execute({
+    sql: 'SELECT * FROM imported_slides WHERE module_id = ? ORDER BY slide_order',
+    args: [moduleId]
+  })
+  return result.rows as unknown as ImportedSlideRow[]
+}
+
+export async function saveImportedSlides(moduleId: string, slides: Array<{ order: number; originalText: string | null; markdown: string; title: string | null }>) {
+  // Clear existing slides for this module
+  await db.execute({ sql: 'DELETE FROM imported_slides WHERE module_id = ?', args: [moduleId] })
+  // Insert new slides
+  for (const slide of slides) {
+    await db.execute({
+      sql: 'INSERT INTO imported_slides (module_id, slide_order, original_text, markdown, title) VALUES (?, ?, ?, ?, ?)',
+      args: [moduleId, slide.order, slide.originalText, slide.markdown, slide.title]
+    })
+  }
+}
+
+export async function updateImportedSlide(id: number, markdown: string) {
+  await db.execute({
+    sql: 'UPDATE imported_slides SET markdown = ? WHERE id = ?',
+    args: [markdown, id]
+  })
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// External Decks Operations
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface ExternalDeckRow {
+  id: string
+  name: string
+  source_filename: string | null
+  page_count: number
+  created_at: string
+}
+
+export interface ExternalPageRow {
+  id: number
+  deck_id: string
+  page_number: number
+  image_filename: string
+  width: number | null
+  height: number | null
+}
+
+export async function createExternalDeck(
+  id: string,
+  name: string,
+  sourceFilename: string | null,
+  pages: Array<{ pageNumber: number; width: number; height: number; imageFilename: string }>
+) {
+  await db.execute({
+    sql: 'INSERT INTO external_decks (id, name, source_filename, page_count) VALUES (?, ?, ?, ?)',
+    args: [id, name, sourceFilename, pages.length]
+  })
+  for (const page of pages) {
+    await db.execute({
+      sql: 'INSERT INTO external_pages (deck_id, page_number, image_filename, width, height) VALUES (?, ?, ?, ?, ?)',
+      args: [id, page.pageNumber, page.imageFilename, page.width || null, page.height || null]
+    })
+  }
+}
+
+export async function getAllExternalDecks(): Promise<ExternalDeckRow[]> {
+  const result = await db.execute('SELECT * FROM external_decks ORDER BY created_at DESC')
+  return result.rows as unknown as ExternalDeckRow[]
+}
+
+export async function getExternalDeck(id: string): Promise<ExternalDeckRow | null> {
+  const result = await db.execute({
+    sql: 'SELECT * FROM external_decks WHERE id = ?',
+    args: [id]
+  })
+  if (result.rows.length === 0) return null
+  return result.rows[0] as unknown as ExternalDeckRow
+}
+
+export async function getExternalPages(deckId: string): Promise<ExternalPageRow[]> {
+  const result = await db.execute({
+    sql: 'SELECT * FROM external_pages WHERE deck_id = ? ORDER BY page_number',
+    args: [deckId]
+  })
+  return result.rows as unknown as ExternalPageRow[]
+}
+
+export async function deleteExternalDeck(id: string) {
+  await db.execute({ sql: 'DELETE FROM external_pages WHERE deck_id = ?', args: [id] })
+  await db.execute({ sql: 'DELETE FROM external_decks WHERE id = ?', args: [id] })
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

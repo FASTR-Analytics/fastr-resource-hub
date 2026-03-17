@@ -4,28 +4,23 @@ slides:
   variant: full
   title: FASTR quiz
 - file: m9g_1b_fastr_quiz.md
-  order: 1.001
+  order: 1.02
   variant: full
   title: 1. What does FASTR stand for?
-  status: new
 - file: m9g_1c_fastr_quiz.md
-  order: 1.002
+  order: 1.03
   variant: full
   title: 2. What are FASTR's 3 data quality dimensions?
-  status: new
 - file: m9g_1d_fastr_quiz.md
-  order: 1.003
+  order: 1.04
   variant: full
   title: 3. What are the 4 technical pillars under FASTR?
-  status: new
 - file: m9g_1e_fastr_quiz.md
-  order: 1.004
+  order: 1.05
   variant: full
   title: 4. A district reports 200 ANC1 visits but 350 ANC4 visits. This demonstrates
     a challenge with which data quality metric?
-  status: new
 - file: m9g_1f_fastr_quiz.md
-  order: 1.005
+  order: 1.06
   variant: full
   title: 5. ANC1 coverage — what is the target population?
-  status: new

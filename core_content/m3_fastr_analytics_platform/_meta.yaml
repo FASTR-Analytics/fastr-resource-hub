@@ -1,9 +1,8 @@
 slides:
 - file: m3_0_learning_objectives.md
-  order: 0.5
+  order: 0
   variant: full
   title: What you'll learn
-  status: new
 - file: m3_1_overview_of_platform.md
   order: 1
   variant: full
@@ -15,15 +14,15 @@ slides:
 - file: m3_2a_accessing_platform_continued.md
   order: 2.01
   variant: full
-  title: Country instance
-- file: m3_2c_accessing_platform_continued.md
+  title: Country Instance
+- file: m3_2b_accessing_platform_continued.md
   order: 2.02
   variant: full
-  title: Projects within an instance
-- file: m3_2b_accessing_platform_continued.md
+  title: User Roles and Permissions
+- file: m3_2c_accessing_platform_continued.md
   order: 2.03
   variant: full
-  title: User roles and permissions
+  title: Projects Within an Instance
 - file: m3_2e_configuring_platform_intro.md
   order: 2.05
   variant: full
@@ -32,4 +31,3 @@ slides:
   order: 3
   variant: full
   title: Getting started with the platform
-  status: new

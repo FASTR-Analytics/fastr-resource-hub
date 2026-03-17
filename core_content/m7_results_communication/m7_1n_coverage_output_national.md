@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Coverage output: National trends
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Coverage national](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
 

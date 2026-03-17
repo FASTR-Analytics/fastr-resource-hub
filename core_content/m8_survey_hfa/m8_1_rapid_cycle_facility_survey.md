@@ -4,11 +4,10 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Rapid-cycle facility survey
 
-<div class="output-layout">
-<div class="output-text">
+<div style="display: flex; gap: 2em; align-items: center;">
+<div style="flex: 2;">
 
 - Understand service delivery constraints in PHC facilities
 - Measure the implementation of reforms
@@ -16,7 +15,7 @@ paginate: true
 - Improve timeliness and relevance of facility surveys
 
 </div>
-<div class="output-viz">
+<div style="flex: 1;">
 
 ![Hospital icon](../../resources/icons/hospital_clinic.svg)
 

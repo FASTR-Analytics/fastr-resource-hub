@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Disruption output: Actual vs expected (national)
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **What you see:** National comparison of observed (actual) vs model-predicted (expected) volumes.
 

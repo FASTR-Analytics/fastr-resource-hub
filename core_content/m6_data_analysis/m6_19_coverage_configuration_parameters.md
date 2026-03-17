@@ -4,8 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
 ## Coverage module: Configuration parameters
+
+<div style="font-size: 0.8em;">
 
 | Parameter | Description |
 |-----------|-------------|
@@ -18,6 +19,8 @@ paginate: true
 | **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
 | **Infant mortality rate** | Deaths before age 1 per live birth |
 | **Under 5 mortality rate** | Deaths before age 5 per live birth |
+
+</div>
 
 Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 

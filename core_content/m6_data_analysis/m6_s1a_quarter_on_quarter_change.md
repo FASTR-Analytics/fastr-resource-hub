@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Quarter-on-quarter change
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
 ![Quarter-on-quarter change h:300](../../resources/default_outputs/Module3_QoQ_change.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **What you see:** Heatmap comparing current quarter to the previous quarter, with changes >±10% flagged.
 

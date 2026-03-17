@@ -4,9 +4,8 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
 ## Four types of indicators
 
-*Questions are either directly mapped to validated health facility assessments or proxies.
+<p style="font-size: 0.85em;">*Questions are either directly mapped to validated health facility assessments or proxies.</p>
 
 ![HFA indicator types](../../resources/diagrams/hfa_indicator_types.svg)

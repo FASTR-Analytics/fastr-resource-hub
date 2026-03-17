@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader: Data dictionary
 
-<div class="columns-image-right">
+<div class="columns">
 <div>
 
 ![Data Downloader dictionary h:380](../../resources/screenshots/data_downloader/04_dictionary.png)

@@ -12,7 +12,7 @@ It allows users to upload and analyze data from various sources, including DHIS2
 
 The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
 
-<div class="image-row">
+<div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
 
 ![h:180](../../resources/screenshots/platform/platform_overview_1.png) ![h:180](../../resources/screenshots/platform/platform_overview_2.png) ![h:180](../../resources/screenshots/platform/platform_overview_3.png)
 

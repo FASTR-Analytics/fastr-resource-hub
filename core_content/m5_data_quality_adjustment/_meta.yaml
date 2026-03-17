@@ -4,10 +4,9 @@ slides:
   variant: full
   title: Rationale for data quality adjustment
 - file: m5_1b_approach_to_dq_adjustment.md
-  order: 1.001
+  order: 1.02
   variant: full
   title: Indicators excluded from adjustment
-  status: new
 - file: m5_2_adjustment_for_outliers.md
   order: 2
   variant: full
@@ -29,7 +28,6 @@ slides:
   variant: condensed
   title: Outlier adjustment output
 - file: m5_s2b_dq_adjustment_interpretation.md
-  order: 2.001
+  order: 2.02
   variant: condensed
   title: Completeness adjustment output
-  status: new

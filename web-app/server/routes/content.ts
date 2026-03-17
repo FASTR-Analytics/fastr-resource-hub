@@ -12,7 +12,9 @@ import {
   getModuleNamesDict,
   getModuleFolder,
   invalidateRegistryCache,
+  loadImportedModules,
 } from '../services/moduleRegistry.js'
+import { getAllExternalDecks } from '../db/database.js'
 
 const router = Router()
 
@@ -128,7 +130,7 @@ const modulesCacheByLang: Record<string, ModulesCache> = {}
 
 // GET /api/content/modules - Get all modules and topics (with caching)
 // Query params: ?language=fr (default: en)
-router.get('/modules', (req, res) => {
+router.get('/modules', async (req, res) => {
   try {
     const language = (req.query.language as Language) || 'en'
     const coreContentPath = getCoreContentPath(language)
@@ -308,6 +310,54 @@ router.get('/modules', (req, res) => {
 
     // Modules are already in correct order from modules.yaml
     const sortedModules = modules
+
+    // Append imported modules from database
+    try {
+      const imported = await loadImportedModules()
+      for (const imp of imported) {
+        sortedModules.push({
+          number: imp.id,
+          id: imp.id,
+          name: imp.name,
+          folder: '',
+          topics: [],
+          fullTopics: [],
+          condensedTopics: [],
+          totalSlides: imp.slideCount,
+          fullSlides: imp.slideCount,
+          condensedSlides: 0,
+          isImported: true,
+          sourceFilename: imp.sourceFilename,
+        })
+      }
+    } catch (e) {
+      // Don't fail the entire request if imported modules can't be loaded
+      console.warn('Failed to load imported modules:', e)
+    }
+
+    // Append external decks (PDF pages as images)
+    try {
+      const externalDecks = await getAllExternalDecks()
+      for (const deck of externalDecks) {
+        sortedModules.push({
+          number: `ext_${deck.id}`,
+          id: `external_${deck.id}`,
+          name: deck.name,
+          folder: '',
+          topics: [],
+          fullTopics: [],
+          condensedTopics: [],
+          totalSlides: deck.page_count,
+          fullSlides: deck.page_count,
+          condensedSlides: 0,
+          isExternal: true,
+          pageCount: deck.page_count,
+          sourceFilename: deck.source_filename,
+        })
+      }
+    } catch (e) {
+      console.warn('Failed to load external decks:', e)
+    }
 
     // Cache the result per language
     modulesCacheByLang[cacheKey] = {

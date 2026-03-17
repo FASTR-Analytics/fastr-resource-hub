@@ -7,6 +7,7 @@ import {
   getModuleName,
   loadModuleMeta,
 } from './moduleRegistry.js'
+import { getImportedSlides, getImportedModule, getExternalDeck, getExternalPages } from '../db/database.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -138,7 +139,7 @@ async function buildSessionSlides(
   // MODULE CONTENT - load SECOND
   // Uses full or condensed version based on session.version
   if (session.module) {
-    const moduleSlides = buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language)
+    const moduleSlides = await buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language)
     if (moduleSlides) {
       allSlideContents.push(moduleSlides)
     }
@@ -225,7 +226,7 @@ async function buildSessionSlides(
  * - "full": Uses files like m4_0_*, m4_1_*, m4_1a_*, m4_2_* (numbered, no _s prefix)
  * - "condensed": Uses files like m4_s1_*, m4_s2_*, m4_s3_* (with _s prefix)
  */
-function buildModuleSlides(
+async function buildModuleSlides(
   moduleId: string,
   sessionName?: string,
   sessionNumber?: number,
@@ -233,7 +234,17 @@ function buildModuleSlides(
   excludedSlides?: string[],
   version?: 'full' | 'condensed',
   language: Language = 'en'
-): string | null {
+): Promise<string | null> {
+  // Handle imported modules (stored in database, not filesystem)
+  if (moduleId.startsWith('imported_')) {
+    return await buildImportedModuleSlides(moduleId, sessionName, sessionNumber)
+  }
+
+  // Handle external decks (PDF pages stored as images)
+  if (moduleId.startsWith('external_')) {
+    return await buildExternalDeckSlides(moduleId, sessionName, sessionNumber)
+  }
+
   const folderName = getModuleFolder(moduleId)
   if (!folderName) return null
 
@@ -354,6 +365,92 @@ function buildModuleSlides(
   }
 
   return contents.join('\n\n---\n\n')
+}
+
+/**
+ * Build slides for an imported module (from database)
+ */
+async function buildImportedModuleSlides(
+  moduleId: string,
+  sessionName?: string,
+  sessionNumber?: number
+): Promise<string | null> {
+  const dbId = moduleId.replace(/^imported_/, '')
+  const mod = await getImportedModule(dbId)
+  if (!mod) return null
+
+  const slides = await getImportedSlides(dbId)
+  if (slides.length === 0) return null
+
+  const displayName = sessionName || mod.name
+  const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
+  const titleSlide = `<!-- _class: section-cover -->
+![bg](../../resources/backgrounds/section_slide.png)
+
+# ${sessionLabel}: ${displayName}`
+
+  const contents: string[] = [titleSlide]
+  for (const slide of slides) {
+    if (slide.markdown.trim()) {
+      contents.push(slide.markdown.trim())
+    }
+  }
+
+  return contents.join('\n\n---\n\n')
+}
+
+/**
+ * Build slides for an external deck (PDF pages stored as images)
+ */
+async function buildExternalDeckSlides(
+  moduleId: string,
+  sessionName?: string,
+  sessionNumber?: number
+): Promise<string | null> {
+  const dbId = moduleId.replace(/^external_/, '')
+  const deck = await getExternalDeck(dbId)
+  if (!deck) return null
+
+  const pages = await getExternalPages(dbId)
+  if (pages.length === 0) return null
+
+  const displayName = sessionName || deck.name
+  const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
+  const titleSlide = `<!-- _class: section-cover -->
+![bg](../../resources/backgrounds/section_slide.png)
+
+# ${sessionLabel}: ${displayName}`
+
+  const contents: string[] = [titleSlide]
+  for (const page of pages) {
+    contents.push(`<!-- _class: external-slide -->
+![bg contain](/api/import/external/${dbId}/pages/${page.page_number})`)
+  }
+
+  return contents.join('\n\n---\n\n')
+}
+
+/**
+ * Materialize external page images from API URLs to filesystem paths.
+ * This is needed for PDF/PPTX export which can't fetch localhost URLs.
+ * Returns the rewritten markdown and a cleanup function.
+ */
+export function materializeExternalImages(markdown: string): { markdown: string; tempDir: string | null } {
+  const EXTERNAL_DIR = path.join(path.resolve(__dirname, '../../data'), 'external')
+  const regex = /!\[bg contain\]\(\/api\/import\/external\/([^/]+)\/pages\/(\d+)\)/g
+
+  let hasMatches = false
+  const rewritten = markdown.replace(regex, (_match, deckId, pageNum) => {
+    hasMatches = true
+    const imageFilename = `${deckId}_page_${pageNum}.png`
+    const imagePath = path.join(EXTERNAL_DIR, imageFilename)
+    if (fs.existsSync(imagePath)) {
+      return `![bg contain](${imagePath})`
+    }
+    return _match // Keep original if file not found
+  })
+
+  return { markdown: rewritten, tempDir: hasMatches ? EXTERNAL_DIR : null }
 }
 
 /**

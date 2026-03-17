@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Projects within an instance
+## Projects Within an Instance
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -21,11 +21,19 @@ paginate: true
 </div>
 <div class="text-col">
 
-A project is an **analytical workspace** within an instance, organized around a specific reporting objective.
+Each country instance can contain **multiple projects**.
 
-Each project contains **metrics**, **visualizations**, **slide decks**, and **analysis modules** — everything needed to go from raw data to a finished report.
+A country may only need one project, or multiple projects can be used for:
 
-A country may need one project or several — for example, separate projects for annual reports, survey analysis, or different teams.
+- Different versions of analyses
+- A demo or playground project
+- Separate projects for different teams or programs
+
+**Key questions when setting up:**
+
+- Who is the admin?
+- Who can edit?
+- Who can view?
 
 </div>
 </div>

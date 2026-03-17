@@ -8,6 +8,6 @@ paginate: true
 
 ![w:120](../../resources/icons/raise-hand.png)
 
-Do you regularly extract data from DHIS2 (your national health information system)?
+Do you regularly extract data from DHIS2?
 
 If so, what are the primary reasons?

@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader: Download history
 
-<div class="columns-image-right">
+<div class="columns">
 <div>
 
 ![Data Downloader history h:380](../../resources/screenshots/data_downloader/03_history.png)

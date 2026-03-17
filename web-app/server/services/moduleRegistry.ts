@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import yaml from 'js-yaml'
 import { fileURLToPath } from 'url'
+import { getAllImportedModules } from '../db/database.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -184,6 +185,27 @@ export function getModuleAIContext(id: number): AIContext | null {
   const modules = loadModulesRegistry()
   const mod = modules.find(m => m.number === String(id))
   return mod?.ai_context || null
+}
+
+/**
+ * Load imported modules from database.
+ * Returns them formatted for the content API with isImported flag.
+ */
+export async function loadImportedModules(): Promise<Array<{
+  id: string
+  name: string
+  sourceFilename: string | null
+  slideCount: number
+  isImported: true
+}>> {
+  const rows = await getAllImportedModules()
+  return rows.map(row => ({
+    id: `imported_${row.id}`,
+    name: row.name,
+    sourceFilename: row.source_filename,
+    slideCount: row.slide_count,
+    isImported: true as const,
+  }))
 }
 
 /**

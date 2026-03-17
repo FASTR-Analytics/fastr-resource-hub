@@ -470,6 +470,156 @@ export const assetsAPI = {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Import API (Slide Import)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface SlideImage {
+  filename: string
+  base64: string
+  contentType: string
+}
+
+export interface ParsedSlide {
+  index: number
+  text: string
+  wordCount: number
+  images?: SlideImage[]
+}
+
+export interface ConvertedSlide {
+  index: number
+  title: string
+  markdown: string
+}
+
+export interface ImportedModule {
+  id: string
+  name: string
+  source_filename: string | null
+  slide_count: number
+  created_at: string
+  updated_at: string
+}
+
+export interface ExternalDeck {
+  id: string
+  name: string
+  source_filename: string | null
+  page_count: number
+  created_at: string
+}
+
+export interface ExternalPage {
+  pageNumber: number
+  width: number
+  height: number
+}
+
+export const importAPI = {
+  async parse(file: File): Promise<{ slides: ParsedSlide[]; sourceFilename: string; totalSlides: number }> {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const response = await fetch(`${API_BASE}/import/parse`, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Upload failed' }))
+      throw new Error(error.error || `HTTP ${response.status}`)
+    }
+
+    return response.json()
+  },
+
+  async convert(slides: Array<{ index: number; text: string; images?: SlideImage[] }>, moduleName: string): Promise<{ slides: ConvertedSlide[] }> {
+    return fetchJSON('/import/convert', {
+      method: 'POST',
+      timeout: 120000,
+      body: JSON.stringify({ slides, moduleName }),
+    })
+  },
+
+  async save(data: {
+    id: string
+    name: string
+    sourceFilename: string | null
+    slides: Array<{ order: number; originalText: string | null; markdown: string; title: string | null }>
+  }): Promise<{ success: boolean; id: string }> {
+    return fetchJSON('/import/save', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  },
+
+  async listModules(): Promise<ImportedModule[]> {
+    return fetchJSON('/import/modules')
+  },
+
+  async getModule(id: string): Promise<ImportedModule & { slides: any[] }> {
+    return fetchJSON(`/import/modules/${id}`)
+  },
+
+  async deleteModule(id: string): Promise<void> {
+    await fetchJSON(`/import/modules/${id}`, { method: 'DELETE' })
+  },
+
+  async updateSlide(moduleId: string, slideId: number, markdown: string): Promise<void> {
+    await fetchJSON(`/import/modules/${moduleId}/slides/${slideId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ markdown }),
+    })
+  },
+
+  // Export converted slides as PPTX
+  async exportPPTX(slides: Array<{ markdown: string; title?: string }>, moduleName: string): Promise<{ downloadUrl: string; filename: string }> {
+    return fetchJSON('/import/export-pptx', {
+      method: 'POST',
+      timeout: 120000,
+      body: JSON.stringify({ slides, moduleName }),
+    })
+  },
+
+  // External decks
+  async uploadExternal(file: File, name?: string): Promise<{ id: string; name: string; pageCount: number; pages: ExternalPage[] }> {
+    const formData = new FormData()
+    formData.append('file', file)
+    if (name) formData.append('name', name)
+
+    const response = await fetch(`${API_BASE}/import/external`, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: 'Upload failed' }))
+      throw new Error(error.error || `HTTP ${response.status}`)
+    }
+
+    return response.json()
+  },
+
+  async listExternalDecks(): Promise<ExternalDeck[]> {
+    return fetchJSON('/import/external')
+  },
+
+  async getExternalDeck(id: string): Promise<ExternalDeck & { pages: ExternalPage[] }> {
+    return fetchJSON(`/import/external/${id}`)
+  },
+
+  async deleteExternalDeck(id: string): Promise<void> {
+    await fetchJSON(`/import/external/${id}`, { method: 'DELETE' })
+  },
+
+  getExternalPageURL(deckId: string, pageNum: number): string {
+    return `${API_BASE}/import/external/${deckId}/pages/${pageNum}`
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Preview API (browser-based Marp rendering)
 // ─────────────────────────────────────────────────────────────────────────────
 

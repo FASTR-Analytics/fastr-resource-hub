@@ -1,4 +1,8 @@
 slides:
+- file: m7_2cb_data_visualization_communication_continued.md
+  order: 0
+  variant: full
+  title: Structure your presentation like a story
 - file: m7_1_analytical_thinking_interpretation.md
   order: 1
   variant: full
@@ -15,14 +19,14 @@ slides:
   order: 1.03
   variant: full
   title: Interpreting FASTR module outputs
-- file: m7_1d2_completeness_output.md
-  order: 1.035
-  variant: full
-  title: Indicator completeness output
 - file: m7_1d_outliers_output.md
   order: 1.04
   variant: full
   title: Outlier detection output
+- file: m7_1d2_completeness_output.md
+  order: 1.042
+  variant: full
+  title: Indicator completeness output
 - file: m7_1e_internal_consistency_output.md
   order: 1.05
   variant: full
@@ -64,7 +68,7 @@ slides:
   variant: full
   title: 'Disruption output: Actual vs expected (subnational)'
 - file: m7_1n_coverage_output_national.md
-  order: 1.14
+  order: 1.1400000000000001
   variant: full
   title: 'Coverage output: National trends'
 - file: m7_1o_coverage_output_subnational.md
@@ -75,28 +79,42 @@ slides:
   order: 2
   variant: full
   title: Moving from data to key messages
-- file: m7_2b_data_visualization_communication.md
-  order: 2.001
-  variant: full
-  title: Try it yourself
-  status: new
 - file: m7_2a_data_visualization_communication_continued.md
   order: 2.01
   variant: full
   title: 'Example: result vs key takeaway'
 - file: m7_2a2_finding_statement_formula.md
-  order: 2.015
+  order: 2.012
   variant: full
   title: Writing a finding statement
 - file: m7_2a2_finding_statement_formulab.md
-  order: 2.016
+  order: 2.012
   variant: full
   title: Try it yourself
-  status: new
+- file: m7_2b_data_visualization_communication.md
+  order: 2.02
+  variant: full
+  title: Try it yourself
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
   title: Choosing the right report format
+- file: m7_2c_data_visualization_communication_continued.md
+  order: 2.03
+  variant: full
+  title: Storytelling with data
+- file: m7_2d_data_visualization_communication_continued.md
+  order: 2.04
+  variant: full
+  title: 'Example: developing a data story'
+- file: m7_3_using_data_for_decision_making.md
+  order: 3
+  variant: full
+  title: Dissemination and data use roadmap
+- file: m7_3a_using_data_for_decision_making_continued.md
+  order: 3.01
+  variant: full
+  title: Action plan for FASTR moving forward
 - file: m7_4_topic_4.md
   order: 4
   variant: full
@@ -105,15 +123,14 @@ slides:
   order: 4.01
   variant: full
   title: 'Activity: Map your users'
+- file: m7_4a_topic_4a.md
+  order: 4.01
+  variant: full
+  title: 'Activity: Map your users'
 - file: m7_5_topic_5.md
   order: 5
   variant: full
   title: Storytelling with data
-- file: m7_2cb_data_visualization_communication_continued.md
-  order: 5.005
-  variant: full
-  title: Structure your presentation like a story
-  status: new
 - file: m7_5a_topic_5a.md
   order: 5.01
   variant: full
@@ -123,6 +140,10 @@ slides:
   variant: full
   title: Linking results to actions
 - file: m7_6a_link_results_to_actions.md
+  order: 6.01
+  variant: full
+  title: 'Activity: Link your results to actions'
+- file: m7_6a_topic_6a.md
   order: 6.01
   variant: full
   title: 'Activity: Link your results to actions'
@@ -138,23 +159,26 @@ slides:
   order: 7.01
   variant: full
   title: 'Activity: Country action planning'
+- file: m7_7a_topic_7a.md
+  order: 7.01
+  variant: full
+  title: 'Activity: Country action planning'
+- file: m7_s2ab_finding_statement_formula.md
+  order: 0
+  variant: condensed
+  title: Try it yourself
 - file: m7_s1_from_data_to_key_messages.md
   order: 1
   variant: condensed
   title: From data to key messages
-- file: m7_s2a_finding_statement_formula.md
-  order: 1.5
-  variant: condensed
-  title: Writing a finding statement
-- file: m7_s2ab_finding_statement_formula.md
-  order: 1.501
-  variant: condensed
-  title: Try it yourself
-  status: new
 - file: m7_s2_storytelling_with_data.md
   order: 2
   variant: condensed
   title: Storytelling with data
+- file: m7_s2a_finding_statement_formula.md
+  order: 2.01
+  variant: condensed
+  title: Writing a finding statement
 - file: m7_s3_choosing_report_format.md
   order: 3
   variant: condensed

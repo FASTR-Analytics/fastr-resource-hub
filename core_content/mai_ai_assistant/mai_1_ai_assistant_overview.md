@@ -6,16 +6,16 @@ paginate: true
 
 ## The AI assistant
 
-The FASTR platform includes an AI assistant — a built-in helper you can ask questions and give tasks to, using everyday language.
+The FASTR platform includes an AI assistant that provides on-demand support for data interpretation and report generation.
 
-**Why it matters:** Health teams often have more data than time to analyze it
+**Context:** Many health systems have more data than capacity to analyze it
 
-- There is a lot of data, but not always enough time to look at it carefully
-- Different teams have different levels of experience with data analysis
-- Writing reports and explaining what the data means takes time and skill
+- M&E staff often have limited time for in-depth analysis
+- Analytical skills vary across teams and regions
+- Turning data into narrative insights requires both technical and contextual knowledge
 
-**What it does:** The AI assistant helps you by:
+**What it does:** The AI assistant helps bridge this gap by:
 
-- Explaining what is happening in your data, in plain language
-- Creating draft reports and key messages for you to review
-- Answering your questions about the data or how the platform works
+- Explaining trends and patterns in plain language
+- Generating draft reports and key messages
+- Answering questions about the data or methodology

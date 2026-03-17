@@ -4,7 +4,7 @@ slides:
   variant: full
   title: Creating visualizations
 - file: m9c_0b_choosing_chart_type.md
-  order: 0.5
+  order: 0.02
   variant: full
   title: Choosing the right chart type
 - file: m9c_1_creating_visualizations_manually.md
@@ -28,20 +28,17 @@ slides:
   variant: full
   title: 'Example: Interpreting a visualization'
 - file: m9c_3a2_interpreting_narrative.md
-  order: 3.02
+  order: 3.012
   variant: full
   title: 'Example narrative: ANC1 and ANC4 trends'
-  status: new
 - file: m9c_3b_interpreting_activity.md
-  order: 3.03
+  order: 3.02
   variant: full
   title: 'Activity: Interpreting visualizations in slide decks'
-  status: new
 - file: m9c_3c_try_it_yourself.md
-  order: 3.04
+  order: 3.03
   variant: full
   title: Try it yourself
-  status: new
 - file: m9c_4_interpreting_with_ai.md
   order: 4
   variant: full
@@ -54,4 +51,3 @@ slides:
   order: 5.01
   variant: full
   title: 'Dig deeper: is it real or a data issue?'
-  status: new

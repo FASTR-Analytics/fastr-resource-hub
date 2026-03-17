@@ -8,7 +8,7 @@ paginate: true
 
 FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are **starting points, not endpoints**. They trigger investigation and inform decisions.
 
-![w:850](../../resources/diagrams/from_analysis_to_action.svg)
+![w:600](../../resources/diagrams/from_analysis_to_action.svg)
 
 <!--
 PRESENTER NOTES:

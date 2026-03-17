@@ -4,7 +4,7 @@ import path from 'path'
 import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { getWorkshop, WorkshopConfig } from '../db/database.js'
-import { buildMarkdown } from '../services/deckBuilder.js'
+import { buildMarkdown, materializeExternalImages } from '../services/deckBuilder.js'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS, getThemeCSSByName, getRepoRoot } from '../services/marpService.js'
@@ -345,7 +345,12 @@ router.post('/:id/pdf', async (req, res) => {
     }
 
     // Build markdown first
-    const markdown = await buildMarkdown(workshopId, config, language)
+    let markdown = await buildMarkdown(workshopId, config, language)
+
+    // Materialize external slide images (API URLs → filesystem paths)
+    const materialized = materializeExternalImages(markdown)
+    markdown = materialized.markdown
+
     const langSuffix = language && language !== 'en' ? `_${language}` : ''
     const mdPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.md`)
     fs.writeFileSync(mdPath, markdown, 'utf-8')
@@ -377,7 +382,11 @@ router.post('/:id/pptx', async (req, res) => {
     }
 
     // Build markdown first
-    const markdown = await buildMarkdown(workshopId, config, language)
+    let markdown = await buildMarkdown(workshopId, config, language)
+
+    // Materialize external slide images (API URLs → filesystem paths)
+    const materialized = materializeExternalImages(markdown)
+    markdown = materialized.markdown
 
     // Generate PPTX
     const langSuffix = language && language !== 'en' ? `_${language}` : ''

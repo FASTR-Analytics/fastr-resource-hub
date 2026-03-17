@@ -4,13 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: compact -->
-
 ## Three spheres of influence
 
 The Three Spheres of Influence framework helps direct attention to the actions we can take from our data.
 
-<div class="columns-image-right">
+<div class="columns">
 <div>
 
 **Sphere of control** — Actions you can take directly

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## User roles and permissions
+## User Roles and Permissions
 
 There are two levels of permissions in the platform:
 

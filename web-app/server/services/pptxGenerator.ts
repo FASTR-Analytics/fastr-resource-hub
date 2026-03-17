@@ -363,6 +363,11 @@ function resolveImagePath(imgPath: string): string | null {
 
   imgPath = imgPath.replace(/%20/g, ' ')
 
+  // If it's already an absolute path (materialized external image), use directly
+  if (path.isAbsolute(imgPath) && fs.existsSync(imgPath)) {
+    return imgPath
+  }
+
   // Remove all leading ../ patterns
   const cleanPath = imgPath.replace(/^(\.\.\/)+/, '')
 
@@ -374,6 +379,8 @@ function resolveImagePath(imgPath: string): string | null {
     path.join(REPO_ROOT, 'resources', 'screenshots', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'icons', path.basename(imgPath)),
     path.join(REPO_ROOT, 'resources', 'default_outputs', path.basename(imgPath)),
+    // External slides data directory
+    path.join(REPO_ROOT, 'web-app', 'data', 'external', path.basename(imgPath)),
   ]
 
   for (const p of pathsToTry) {

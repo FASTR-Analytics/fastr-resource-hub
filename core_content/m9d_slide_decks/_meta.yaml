@@ -7,20 +7,18 @@ slides:
   order: 1
   variant: full
   title: 'Activity: Creating slide decks'
-- file: m9d_1b_adding_viz_manually.md
-  order: 1.005
-  variant: full
-  title: 'Activity: Adding visualizations manually'
-  status: new
-- file: m9d_1c_adding_viz_ai.md
-  order: 1.006
-  variant: full
-  title: 'Activity: Adding visualizations using AI Assistant'
-  status: new
 - file: m9d_1a_adding_viz_interpretation_guide.md
   order: 1.01
   variant: full
   title: Add a visualization and interpretation text to your content slide
+- file: m9d_1b_adding_viz_manually.md
+  order: 1.02
+  variant: full
+  title: 'Activity: Adding visualizations manually'
+- file: m9d_1c_adding_viz_ai.md
+  order: 1.03
+  variant: full
+  title: 'Activity: Adding visualizations using AI Assistant'
 - file: m9d_2_editing_formatting_slides.md
   order: 2
   variant: full

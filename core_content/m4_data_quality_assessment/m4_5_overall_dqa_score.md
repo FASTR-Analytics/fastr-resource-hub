@@ -6,15 +6,12 @@ paginate: true
 
 ## Data quality summary score
 
-Results from the outlier, completeness, and consistency checks are combined into an overall DQA score for a set of core indicators (Penta1, ANC1, OPD).
+A composite measure of data quality provides an overall view of how well a dataset meets quality standards.
 
-**Two complementary measures:**
+By integrating multiple dimensions of data quality into a single score, it simplifies the interpretation of detailed information from several measures. This allows health systems to quickly assess the reliability of data, making it easier to identify trends and issues at a glance.
 
-- **Overall DQA score:** Percentage of facility-months passing **all** quality checks. A facility-month scores 100% only if all core indicators are complete, free of outliers, and consistent
-- **Mean DQA score:** Average of the completeness-outlier score and the consistency score. Captures partial progress even when not all checks pass
+**Definition of adequate data quality:**
 
-**A facility-month has adequate data quality when:**
-
-- All core indicator data are reported (complete)
-- No values are flagged as outliers
-- Consistency benchmarks are met for available indicator pairs (e.g., Penta1/Penta3, ANC1/ANC4)
+- No missing indicator data for OPD, Penta1, and ANC1, where available
+- No outliers for OPD, Penta1, and ANC1, where available
+- Consistent reporting between Penta1/Penta3 and ANC1/ANC4

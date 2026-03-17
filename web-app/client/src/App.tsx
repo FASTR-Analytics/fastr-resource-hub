@@ -5,6 +5,9 @@ import { useToast } from './components/Toast'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
 import { ContentLibrary } from './components/ContentLibrary'
+import { SlideImportWizard } from './components/SlideImportWizard'
+import { GuidedTour, type GuidedTourHandle } from './components/GuidedTour'
+import { HelpButton } from './components/HelpButton'
 import {
   Layers,
   BookOpen,
@@ -1001,7 +1004,7 @@ paginate: true
 // ─────────────────────────────────────────────────────────────────────────────
 // App Modes
 // ─────────────────────────────────────────────────────────────────────────────
-type AppMode = 'select' | 'workshop' | 'library' | 'quick'
+type AppMode = 'select' | 'workshop' | 'library' | 'quick' | 'import'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Quick Export Mode - Select modules and download
@@ -2091,6 +2094,8 @@ function App() {
   } | null>(null)
   const [addSessionMenuDay, setAddSessionMenuDay] = useState<number | null>(null)
   const [activeDragData, setActiveDragData] = useState<{ id: string; data: any } | null>(null)
+  const landingTourRef = useRef<GuidedTourHandle>(null)
+  const builderTourRef = useRef<GuidedTourHandle>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [createMode, setCreateMode] = useState<'manual' | 'ai' | 'upload'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
@@ -2706,7 +2711,7 @@ function App() {
   // ─────────────────────────────────────────────────────────────────────────
   if (!isAuthenticated) {
     return (
-      <div className="h-screen bg-gradient-to-br from-fastr-primary via-fastr-primary-light to-fastr-secondary flex items-center justify-center p-8">
+      <div className="h-screen bg-fastr-primary flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <div className="w-20 h-20 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 ring-1 ring-white/20">
@@ -2786,7 +2791,7 @@ function App() {
         {/* Top bar with language toggle and logout */}
         <div className="flex justify-end items-center gap-4 p-4">
           {/* Language toggle */}
-          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
+          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1" data-tour="language-toggle">
             <button
               onClick={() => setContentLanguage('en')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
@@ -2825,7 +2830,7 @@ function App() {
               <p className="text-gray-500">{t('appSubtitle', contentLanguage)}</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-tour="landing-cards">
               {/* Build Slide Deck */}
               <button
                 onClick={() => setAppMode('workshop')}
@@ -2871,7 +2876,7 @@ function App() {
 
           {/* Existing Decks */}
           {workshops.length > 0 && (
-            <div className="mt-10">
+            <div className="mt-10" data-tour="existing-decks">
               <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">{t('existingDecks', contentLanguage)}</h3>
               <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden divide-y divide-gray-100">
                 {countries.map(country => (
@@ -2914,6 +2919,16 @@ function App() {
           )}
           </div>
         </div>
+        <GuidedTour
+          ref={landingTourRef}
+          tour="landing"
+          language={contentLanguage}
+          workshopCount={workshops.length}
+        />
+        <HelpButton
+          onClick={() => landingTourRef.current?.startTour()}
+          language={contentLanguage}
+        />
       </div>
     )
   }
@@ -2923,6 +2938,19 @@ function App() {
   // ─────────────────────────────────────────────────────────────────────────
   if (appMode === 'library') {
     return <LibraryMode onBack={() => setAppMode('select')} />
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // Import Mode
+  // ─────────────────────────────────────────────────────────────────────────
+  if (appMode === 'import') {
+    return (
+      <SlideImportWizard
+        onBack={() => setAppMode('workshop')}
+        onGoToLibrary={() => setAppMode('workshop')}
+        language={contentLanguage}
+      />
+    )
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -2998,6 +3026,7 @@ function App() {
             }`}
             title={t('slidesButton', contentLanguage)}
             aria-pressed={leftPanelOpen || leftPanelPinned}
+            data-tour="toolbar-slides"
           >
             <BookOpen className="w-4 h-4" />
             <span className="hidden lg:inline">{t('slidesButton', contentLanguage)}</span>
@@ -3011,6 +3040,7 @@ function App() {
             }`}
             title={t('aiHelp', contentLanguage)}
             aria-pressed={rightPanelOpen}
+            data-tour="toolbar-ai"
           >
             <Sparkles className="w-4 h-4" />
             <span className="hidden lg:inline">{t('aiHelp', contentLanguage)}</span>
@@ -3042,7 +3072,7 @@ function App() {
           </button>
 
           {/* Export dropdown */}
-          <div className="relative">
+          <div className="relative" data-tour="toolbar-export">
             <button
               onClick={(e) => {
                 e.stopPropagation()
@@ -3136,7 +3166,7 @@ function App() {
               </div>
             </div>
             <div className="flex-1 overflow-hidden">
-              <ContentLibrary />
+              <ContentLibrary onImportSlides={() => setAppMode('import')} />
             </div>
           </div>
         ) : (
@@ -3172,7 +3202,7 @@ function App() {
                 </div>
               </div>
               <div className="flex-1 overflow-hidden">
-                <ContentLibrary />
+                <ContentLibrary onImportSlides={() => setAppMode('import')} />
               </div>
             </div>
           </div>
@@ -3192,7 +3222,7 @@ function App() {
                       </h2>
 
                       {/* Day columns - Kanban style */}
-                      <div className="flex gap-4 overflow-x-auto pb-4">
+                      <div className="flex gap-4 overflow-x-auto pb-4" data-tour="schedule-area">
                         {Array.from({ length: currentConfig?.schedule?.days || 0 }).map((_, i) => {
                           const dayNum = i + 1
                           const dayKey = `day${dayNum}`
@@ -3274,6 +3304,7 @@ function App() {
                                 <button
                                   className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
                                   onClick={() => setAddSessionMenuDay(dayNum)}
+                                  {...(dayNum === 1 ? { 'data-tour': 'add-session-btn' } : {})}
                                 >
                                   <Plus className="w-4 h-4" />
                                   <span className="text-sm">{t('addSession', contentLanguage)}</span>
@@ -4253,6 +4284,22 @@ function App() {
               )
           }
         />
+      )}
+
+      {/* Guided tour for builder mode */}
+      {currentWorkshopId && (
+        <>
+          <GuidedTour
+            ref={builderTourRef}
+            tour="builder"
+            language={contentLanguage}
+            panelControls={{ setLeftPanelOpen, setRightPanelOpen }}
+          />
+          <HelpButton
+            onClick={() => builderTourRef.current?.startTour()}
+            language={contentLanguage}
+          />
+        </>
       )}
     </div>
   )

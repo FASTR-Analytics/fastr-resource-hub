@@ -4,7 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: dense-table -->
+<style scoped>
+table { font-size: 0.48em; }
+td, th { padding: 10px 12px !important; line-height: 1.4; }
+th { background: #0d7377; color: white; }
+td { vertical-align: top; }
+</style>
 
 ## Measures of data quality - detailed
 
