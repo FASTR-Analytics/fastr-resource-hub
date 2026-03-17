@@ -8,6 +8,7 @@ interface CustomSlideEditorProps {
   dayNumber: number
   onSave: (filename: string, content: string, sessionName: string) => void
   onClose: () => void
+  defaultType?: SlideType
 }
 
 type SlideType = 'content' | 'section'
@@ -57,9 +58,9 @@ function generateSectionMarkdown(data: SectionSlide): string {
 ${data.subtitle || ''}`
 }
 
-export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: CustomSlideEditorProps) {
+export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defaultType }: CustomSlideEditorProps) {
   const { showToast } = useToast()
-  const [selectedType, setSelectedType] = useState<SlideType | null>(null)
+  const [selectedType, setSelectedType] = useState<SlideType | null>(defaultType ?? null)
   const [editorMode, setEditorMode] = useState<EditorMode>('simple')
   const [markdown, setMarkdown] = useState('')
   const [sessionName, setSessionName] = useState('')
@@ -73,6 +74,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
   const [assets, setAssets] = useState<Asset[]>([])
   const [assetsLoading, setAssetsLoading] = useState(false)
   const [uploadingAsset, setUploadingAsset] = useState(false)
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // Form state for simple mode
@@ -120,25 +122,64 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
     }
   }
 
-  // Insert asset markdown at cursor position
-  const insertAsset = (asset: Asset) => {
-    const textarea = textareaRef.current
-    if (textarea) {
-      const start = textarea.selectionStart
-      const end = textarea.selectionEnd
-      const newMarkdown = markdown.slice(0, start) + asset.markdown + markdown.slice(end)
-      setMarkdown(newMarkdown)
+  // Image layout options for Marp
+  type ImageLayout = 'inline' | 'inline-small' | 'bg-right' | 'bg-left' | 'bg-full'
 
-      // Restore cursor position after state update
-      setTimeout(() => {
-        textarea.focus()
-        const newPos = start + asset.markdown.length
-        textarea.setSelectionRange(newPos, newPos)
-      }, 0)
-    } else {
-      // If textarea not focused, append to end
-      setMarkdown(prev => prev + '\n' + asset.markdown)
+  const imageLayoutOptions: { id: ImageLayout; label: string; desc: string }[] = [
+    { id: 'inline', label: 'Full width', desc: 'Image spans the content area' },
+    { id: 'inline-small', label: 'Small', desc: 'Smaller centered image' },
+    { id: 'bg-right', label: 'Right side', desc: 'Image fills the right half' },
+    { id: 'bg-left', label: 'Left side', desc: 'Image fills the left half' },
+    { id: 'bg-full', label: 'Background', desc: 'Full slide background' },
+  ]
+
+  // Build image markdown using full URL + Marp directives for layout
+  const buildImageMarkdown = (asset: Asset, layout: ImageLayout) => {
+    switch (layout) {
+      case 'inline':
+        return `![w:800](${asset.url})`
+      case 'inline-small':
+        return `![w:400](${asset.url})`
+      case 'bg-right':
+        return `![bg right](${asset.url})`
+      case 'bg-left':
+        return `![bg left](${asset.url})`
+      case 'bg-full':
+        return `![bg](${asset.url})`
     }
+  }
+
+  // Insert asset with chosen layout
+  const insertAssetWithLayout = (asset: Asset, layout: ImageLayout) => {
+    const md = buildImageMarkdown(asset, layout)
+
+    if (editorMode === 'advanced') {
+      const textarea = textareaRef.current
+      if (textarea) {
+        const start = textarea.selectionStart
+        const end = textarea.selectionEnd
+        const newMarkdown = markdown.slice(0, start) + md + markdown.slice(end)
+        setMarkdown(newMarkdown)
+
+        setTimeout(() => {
+          textarea.focus()
+          const newPos = start + md.length
+          textarea.setSelectionRange(newPos, newPos)
+        }, 0)
+      } else {
+        setMarkdown(prev => prev + '\n' + md)
+      }
+    } else if (selectedType === 'content') {
+      // In simple mode, append the image as a bullet on the last slide
+      setContentSlides(prev => {
+        const updated = [...prev]
+        const lastSlide = { ...updated[updated.length - 1] }
+        lastSlide.bullets = [...lastSlide.bullets, md]
+        updated[updated.length - 1] = lastSlide
+        return updated
+      })
+    }
+    setSelectedAsset(null)
     setShowAssetPicker(false)
   }
 
@@ -497,13 +538,22 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                       </div>
                     ))}
 
-                    <button
-                      onClick={addSlide}
-                      className="w-full py-3 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-fastr-secondary hover:border-fastr-secondary transition-colors flex items-center justify-center gap-2"
-                    >
-                      <Plus className="w-4 h-4" />
-                      Add another slide
-                    </button>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={addSlide}
+                        className="flex-1 py-3 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-fastr-secondary hover:border-fastr-secondary transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Plus className="w-4 h-4" />
+                        Add another slide
+                      </button>
+                      <button
+                        onClick={openAssetPicker}
+                        className="py-3 px-4 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-fastr-secondary hover:border-fastr-secondary transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Image className="w-4 h-4" />
+                        Insert Image
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   // Simple: Section slide form
@@ -642,7 +692,16 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
 
               <div className="flex-1 overflow-auto p-4">
                 {/* Upload area */}
-                <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 mb-4 text-center hover:border-gray-500 transition-colors">
+                <div
+                  className="border-2 border-dashed border-gray-600 rounded-lg p-4 mb-4 text-center hover:border-gray-500 transition-colors"
+                  onDragOver={(e) => { e.preventDefault(); e.stopPropagation() }}
+                  onDragEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
+                  onDrop={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleUploadAsset(e.dataTransfer.files)
+                  }}
+                >
                   {uploadingAsset ? (
                     <div className="flex items-center justify-center gap-2 text-gray-400">
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -666,8 +725,48 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                   )}
                 </div>
 
-                {/* Assets grid */}
-                {assetsLoading ? (
+                {/* Assets grid or layout picker */}
+                {selectedAsset ? (
+                  // Layout picker for selected image
+                  <div>
+                    <button
+                      onClick={() => setSelectedAsset(null)}
+                      className="text-sm text-fastr-secondary hover:underline mb-3 flex items-center gap-1"
+                    >
+                      ← Back to images
+                    </button>
+                    <div className="flex gap-4 mb-4">
+                      <div className="w-32 h-24 bg-gray-900 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src={selectedAsset.url} alt={selectedAsset.filename} className="w-full h-full object-contain" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-white">{selectedAsset.filename}</p>
+                        <p className="text-xs text-gray-400 mt-1">Choose how to display this image on the slide</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      {imageLayoutOptions.map((opt) => (
+                        <button
+                          key={opt.id}
+                          onClick={() => insertAssetWithLayout(selectedAsset, opt.id)}
+                          className="w-full flex items-center gap-3 p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-left"
+                        >
+                          <div className="w-12 h-8 bg-gray-800 rounded border border-gray-600 flex items-center justify-center flex-shrink-0">
+                            {opt.id === 'inline' && <div className="w-10 h-5 bg-fastr-secondary/40 rounded-sm" />}
+                            {opt.id === 'inline-small' && <div className="w-6 h-4 bg-fastr-secondary/40 rounded-sm" />}
+                            {opt.id === 'bg-right' && <div className="flex w-full h-full"><div className="w-1/2" /><div className="w-1/2 bg-fastr-secondary/40" /></div>}
+                            {opt.id === 'bg-left' && <div className="flex w-full h-full"><div className="w-1/2 bg-fastr-secondary/40" /><div className="w-1/2" /></div>}
+                            {opt.id === 'bg-full' && <div className="w-full h-full bg-fastr-secondary/40 rounded-sm" />}
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-white">{opt.label}</p>
+                            <p className="text-xs text-gray-400">{opt.desc}</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : assetsLoading ? (
                   <div className="text-center py-8">
                     <Loader2 className="w-6 h-6 animate-spin mx-auto text-fastr-secondary" />
                   </div>
@@ -684,7 +783,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                     {assets.map((asset) => (
                       <button
                         key={asset.filename}
-                        onClick={() => insertAsset(asset)}
+                        onClick={() => setSelectedAsset(asset)}
                         className="group relative aspect-square bg-gray-900 rounded-lg overflow-hidden border-2 border-transparent hover:border-fastr-secondary transition-colors"
                       >
                         <img
@@ -694,7 +793,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <span className="text-white text-xs font-medium px-2 py-1 bg-fastr-secondary rounded">
-                            Insert
+                            Select
                           </span>
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-2 py-1">
@@ -708,7 +807,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose }: Cu
 
               <div className="px-4 py-3 border-t border-gray-700 text-right">
                 <button
-                  onClick={() => setShowAssetPicker(false)}
+                  onClick={() => { setSelectedAsset(null); setShowAssetPicker(false) }}
                   className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 >
                   Cancel

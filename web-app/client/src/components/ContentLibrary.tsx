@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useWorkshopStore } from '../stores/workshop'
-import api, { Asset, previewAPI } from '../../lib/api'
+import api, { previewAPI, importAPI } from '../../lib/api'
 import { t } from '../i18n/translations'
 import { useToast } from './Toast'
+import { CustomSlideEditor } from './CustomSlideEditor'
 import { useDraggable } from '@dnd-kit/core'
 import {
   ChevronRight,
@@ -21,14 +22,12 @@ import {
   Target,
   MessageSquare,
   BookOpen,
-  Image,
   Upload,
   Trash2,
-  Copy,
-  Check,
   Loader2,
   RefreshCw,
   GripVertical,
+  PenLine,
 } from 'lucide-react'
 
 export interface Topic {
@@ -95,10 +94,13 @@ function LibraryDragHandle({ id, data }: { id: string; data: any }) {
   )
 }
 
-export function ContentLibrary() {
-  const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage } = useWorkshopStore()
+interface ContentLibraryProps {
+  onImportSlides?: () => void
+}
+
+export function ContentLibrary({ onImportSlides }: ContentLibraryProps = {}) {
+  const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage, loadContentLibrary } = useWorkshopStore()
   const { showToast } = useToast()
-  const [activeTab, setActiveTab] = useState<'content' | 'assets'>('content')
   const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
@@ -121,15 +123,11 @@ export function ContentLibrary() {
   // Track which template is being hovered to prevent race conditions
   const hoveredTemplateRef = useRef<string | null>(null)
 
-  // Assets state
-  const [assets, setAssets] = useState<Asset[]>([])
-  const [assetsLoading, setAssetsLoading] = useState(false)
-  const [uploadingAsset, setUploadingAsset] = useState(false)
-  const [copiedAsset, setCopiedAsset] = useState<string | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
-
   // Rebuild state
   const [isRebuilding, setIsRebuilding] = useState(false)
+
+  // Custom slide creator state
+  const [showSlideCreator, setShowSlideCreator] = useState(false)
 
   // Pre-initialize Marp on mount for faster previews
   useEffect(() => {
@@ -152,65 +150,6 @@ export function ContentLibrary() {
     fetchTemplates()
   }, [contentLanguage])
 
-  // Fetch assets when workshop changes or tab switches to assets
-  const loadAssets = useCallback(async () => {
-    if (!currentWorkshopId) return
-    setAssetsLoading(true)
-    try {
-      const assetList = await api.listAssets(currentWorkshopId)
-      setAssets(assetList)
-    } catch (err) {
-      console.error('Failed to load assets:', err)
-    } finally {
-      setAssetsLoading(false)
-    }
-  }, [currentWorkshopId])
-
-  useEffect(() => {
-    if (activeTab === 'assets' && currentWorkshopId) {
-      loadAssets()
-    }
-  }, [activeTab, currentWorkshopId, loadAssets])
-
-  // Handle file upload
-  const handleUpload = async (files: FileList | null) => {
-    if (!files || !currentWorkshopId) return
-
-    setUploadingAsset(true)
-    try {
-      for (const file of Array.from(files)) {
-        await api.uploadAsset(currentWorkshopId, file)
-      }
-      await loadAssets()
-    } catch (err: any) {
-      console.error('Upload failed:', err)
-      showToast(`Upload failed: ${err.message}`, 'error')
-    } finally {
-      setUploadingAsset(false)
-    }
-  }
-
-  // Handle delete asset
-  const handleDeleteAsset = async (filename: string) => {
-    if (!currentWorkshopId) return
-    if (!confirm(`Delete ${filename}?`)) return
-
-    try {
-      await api.deleteAsset(currentWorkshopId, filename)
-      await loadAssets()
-    } catch (err: any) {
-      console.error('Delete failed:', err)
-      showToast(`Delete failed: ${err.message}`, 'error')
-    }
-  }
-
-  // Copy markdown to clipboard
-  const copyMarkdown = (asset: Asset) => {
-    navigator.clipboard.writeText(asset.markdown)
-    setCopiedAsset(asset.filename)
-    setTimeout(() => setCopiedAsset(null), 2000)
-  }
-
   // Rebuild content from methodology files
   const handleRebuildContent = async () => {
     if (!confirm('Rebuild content from methodology files? This will re-extract all slides.')) return
@@ -229,29 +168,6 @@ export function ContentLibrary() {
     }
   }
 
-  // Drag and drop handlers
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-    handleUpload(e.dataTransfer.files)
-  }
-
-  // Format file size
-  const formatSize = (bytes: number): string => {
-    if (bytes < 1024) return `${bytes} B`
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-  }
 
   // Toggle module expansion
   const toggleModule = (moduleNum: number | string) => {
@@ -548,162 +464,39 @@ We resume at **[time]**`
 
   return (
     <div className="h-full flex flex-col">
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200">
-        <button
-          onClick={() => setActiveTab('content')}
-          className={`flex-1 px-3 py-2.5 text-sm flex items-center justify-center gap-1.5 transition-colors ${
-            activeTab === 'content'
-              ? 'text-fastr-primary font-semibold border-b-2 border-fastr-primary bg-fastr-primary/5'
-              : 'text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50'
-          }`}
-        >
-          <BookOpen className="w-4 h-4" />
-          {t('content', contentLanguage)}
-        </button>
-        <button
-          onClick={() => setActiveTab('assets')}
-          className={`flex-1 px-3 py-2.5 text-sm flex items-center justify-center gap-1.5 transition-colors ${
-            activeTab === 'assets'
-              ? 'text-fastr-primary font-semibold border-b-2 border-fastr-primary bg-fastr-primary/5'
-              : 'text-gray-500 font-medium hover:text-gray-700 hover:bg-gray-50'
-          }`}
-        >
-          <Image className="w-4 h-4" />
-          {t('assets', contentLanguage)}
-        </button>
+      {/* Header */}
+      <div className="flex items-center border-b border-gray-200 px-3 py-2 gap-2">
+        {onImportSlides && (
+          <button
+            onClick={onImportSlides}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            {t('importSlides', contentLanguage)}
+          </button>
+        )}
+        {currentWorkshopId && (
+          <button
+            onClick={() => setShowSlideCreator(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
+            data-tour="toolbar-create-slide"
+          >
+            <PenLine className="w-3.5 h-3.5" />
+            {t('createSlide', contentLanguage)}
+          </button>
+        )}
+        <div className="flex-1" />
         <button
           onClick={handleRebuildContent}
           disabled={isRebuilding}
           title="Rebuild content from methodology files"
-          className="px-2 py-2 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 rounded transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
         </button>
       </div>
 
-      {/* Assets Tab */}
-      {activeTab === 'assets' && (
-        <div className="flex-1 overflow-y-auto p-3">
-          {!currentWorkshopId ? (
-            <div className="text-center text-gray-400 py-8">
-              <Image className="w-8 h-8 mx-auto mb-2 opacity-50" />
-              <p className="text-sm">{t('selectWorkshopAssets', contentLanguage)}</p>
-            </div>
-          ) : (
-            <>
-              {/* Upload area */}
-              <div
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors mb-4 ${
-                  isDragging
-                    ? 'border-fastr-primary bg-fastr-primary/10'
-                    : 'border-gray-300 hover:border-gray-400'
-                }`}
-              >
-                {uploadingAsset ? (
-                  <div className="flex items-center justify-center gap-2 text-gray-500">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span className="text-sm">{t('uploadingAssets', contentLanguage)}</span>
-                  </div>
-                ) : (
-                  <>
-                    <Upload className="w-6 h-6 mx-auto text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-600 mb-1">
-                      {t('dragDropImages', contentLanguage)}
-                    </p>
-                    <label className="text-xs text-fastr-primary hover:underline cursor-pointer">
-                      {t('orClickToBrowse', contentLanguage)}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        className="hidden"
-                        onChange={(e) => handleUpload(e.target.files)}
-                      />
-                    </label>
-                  </>
-                )}
-              </div>
-
-              {/* Assets grid */}
-              {assetsLoading ? (
-                <div className="text-center py-8">
-                  <Loader2 className="w-6 h-6 animate-spin mx-auto text-fastr-secondary" />
-                </div>
-              ) : assets.length === 0 ? (
-                <div className="text-center text-gray-400 py-8">
-                  <p className="text-sm">{t('noAssetsUploaded', contentLanguage)}</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-2">
-                  {assets.map((asset) => (
-                    <div
-                      key={asset.filename}
-                      className="group relative border rounded-lg overflow-hidden bg-gray-50 hover:border-gray-400 transition-colors"
-                    >
-                      {/* Thumbnail */}
-                      <div className="aspect-square bg-white flex items-center justify-center">
-                        <img
-                          src={asset.url}
-                          alt={asset.filename}
-                          className="max-w-full max-h-full object-contain"
-                        />
-                      </div>
-
-                      {/* Info */}
-                      <div className="p-2 border-t bg-white">
-                        <p className="text-xs font-medium text-gray-700 truncate" title={asset.filename}>
-                          {asset.filename}
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          {formatSize(asset.size)}
-                        </p>
-                      </div>
-
-                      {/* Actions overlay */}
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                        <button
-                          onClick={() => copyMarkdown(asset)}
-                          className="p-2 bg-white rounded-lg hover:bg-gray-100 transition-colors"
-                          title="Copy markdown"
-                        >
-                          {copiedAsset === asset.filename ? (
-                            <Check className="w-4 h-4 text-green-600" />
-                          ) : (
-                            <Copy className="w-4 h-4 text-gray-600" />
-                          )}
-                        </button>
-                        <button
-                          onClick={() => handleDeleteAsset(asset.filename)}
-                          className="p-2 bg-white rounded-lg hover:bg-red-50 transition-colors"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-4 h-4 text-red-600" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Usage hint */}
-              {assets.length > 0 && (
-                <div className="mt-4 p-2 bg-blue-50 rounded-lg">
-                  <p className="text-xs text-blue-700">
-                    <strong>{t('tip', contentLanguage)}</strong> {t('tipAssetCopy', contentLanguage)}
-                  </p>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Content Tab */}
-      {activeTab === 'content' && (
+      {/* Content */}
       <div className="flex-1 overflow-y-auto">
         {contentLibrary.length === 0 ? (
           <div className="h-full flex items-center justify-center text-gray-400 text-sm">
@@ -790,44 +583,94 @@ We resume at **[time]**`
         <div className="px-3 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide border-b border-gray-100">
           {t('modules', contentLanguage)}
         </div>
-        {contentLibrary.map((module) => (
+        {contentLibrary.map((module) => {
+          const isImported = (module as any).isImported === true
+          const isExternal = (module as any).isExternal === true
+          const isUserContent = isImported || isExternal
+
+          return (
           <div key={module.id} className="border-b border-gray-100">
             {/* Module header */}
             <div className="flex items-center gap-1 px-3 py-2 hover:bg-gray-50 transition-colors group">
               <LibraryDragHandle id={`library-module-${module.id}`} data={{ type: 'library-module', module }} />
               <button
-                onClick={() => toggleModule(module.number)}
+                onClick={() => !isExternal && toggleModule(module.number)}
                 className="flex items-center gap-2 flex-1 min-w-0 text-left"
               >
-                {expandedModules.has(module.number) ? (
+                {!isExternal && (expandedModules.has(module.number) ? (
                   <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
                 ) : (
                   <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                ))}
+                {isExternal ? (
+                  <span className="inline-flex items-center justify-center px-1.5 h-5 rounded bg-amber-100 text-amber-700 text-[10px] font-bold flex-shrink-0">
+                    {t('externalBadge', contentLanguage)}
+                  </span>
+                ) : isImported ? (
+                  <span className="inline-flex items-center justify-center px-1.5 h-5 rounded bg-purple-100 text-purple-700 text-[10px] font-bold flex-shrink-0">
+                    {t('importBadge', contentLanguage)}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center justify-center w-7 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold flex-shrink-0">
+                    M{module.number}
+                  </span>
                 )}
-                <span className="inline-flex items-center justify-center w-7 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold flex-shrink-0">
-                  M{module.number}
-                </span>
                 <div className="flex-1 min-w-0">
                   <div className="font-medium text-sm text-gray-700 truncate">
                     {module.name}
                   </div>
                   <div className="text-xs text-gray-400 flex items-center gap-2">
-                    <span>{module.topics.length} {t('xTopics', contentLanguage)}</span>
-                    <span>•</span>
-                    <span>{module.totalSlides} {t('xSlides', contentLanguage)}</span>
-                    <span>•</span>
-                    <span>{getModuleDuration(module)}</span>
+                    {isExternal ? (
+                      <span>{(module as any).pageCount} {t('externalPages', contentLanguage)}</span>
+                    ) : (
+                      <>
+                        <span>{module.topics.length} {t('xTopics', contentLanguage)}</span>
+                        <span>•</span>
+                        <span>{module.totalSlides} {t('xSlides', contentLanguage)}</span>
+                        {!isUserContent && (
+                          <>
+                            <span>•</span>
+                            <span>{getModuleDuration(module)}</span>
+                          </>
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
               </button>
+              {/* Delete button for imported/external */}
+              {isUserContent && (
+                <button
+                  onClick={async () => {
+                    if (!confirm(`${t('delete', contentLanguage)} "${module.name}"?`)) return
+                    try {
+                      if (isExternal) {
+                        await importAPI.deleteExternalDeck(module.id.replace('external_', ''))
+                      } else {
+                        await importAPI.deleteModule(module.id.replace('imported_', ''))
+                      }
+                      await loadContentLibrary()
+                      showToast(`Deleted "${module.name}"`, 'success')
+                    } catch (err: any) {
+                      showToast(`Failed to delete: ${err.message}`, 'error')
+                    }
+                  }}
+                  className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover:opacity-100 transition-all"
+                  title={t('delete', contentLanguage)}
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
               {/* Preview button */}
-              <button
-                onClick={() => showModulePreview(module, 'full')}
-                className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-100 rounded opacity-0 group-hover:opacity-100 transition-all"
-                title={t('previewModuleSlides', contentLanguage)}
-              >
-                <Eye className="w-4 h-4" />
-              </button>
+              {!isExternal && (
+                <button
+                  onClick={() => showModulePreview(module, 'full')}
+                  className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-100 rounded opacity-0 group-hover:opacity-100 transition-all"
+                  title={t('previewModuleSlides', contentLanguage)}
+                >
+                  <Eye className="w-4 h-4" />
+                </button>
+              )}
             </div>
 
             {/* Topics - Full and Condensed sub-sections */}
@@ -966,11 +809,11 @@ We resume at **[time]**`
               </div>
             )}
           </div>
-        ))}
+          )
+        })}
         </>
         )}
       </div>
-      )}
 
       {/* Hover preview tooltip */}
       {preview && (
@@ -1261,6 +1104,26 @@ We resume at **[time]**`
             </div>
           </div>
         </div>
+      )}
+
+      {/* Custom Slide Creator Modal — portaled to body so it's not clipped by panel */}
+      {showSlideCreator && currentWorkshopId && createPortal(
+        <CustomSlideEditor
+          workshopId={currentWorkshopId}
+          dayNumber={1}
+          defaultType="content"
+          onClose={() => setShowSlideCreator(false)}
+          onSave={(filename, _content, sessionName) => {
+            addSession(1, {
+              session: sessionName,
+              type: 'section',
+              slides: [`custom_slides/${filename}`],
+              duration: 10,
+            })
+            setShowSlideCreator(false)
+          }}
+        />,
+        document.body
       )}
     </div>
   )
