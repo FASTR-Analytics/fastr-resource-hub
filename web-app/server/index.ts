@@ -12,6 +12,7 @@ import aiRouter from './routes/ai.js'
 import exportRouter from './routes/export.js'
 import assetsRouter from './routes/assets.js'
 import importRouter from './routes/import.js'
+import diagramsRouter from './routes/diagrams.js'
 
 // Services
 import { initializeMarp } from './services/marpService.js'
@@ -178,6 +179,7 @@ app.use('/api/ai', aiRouter)
 app.use('/api/export', exportRouter)
 app.use('/api/assets', assetsRouter)
 app.use('/api/import', importRouter)
+app.use('/api/diagrams', diagramsRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => {

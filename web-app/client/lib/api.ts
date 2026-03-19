@@ -644,6 +644,30 @@ export const storageAPI = {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Diagram Builder API
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const diagramAPI = {
+  async preview(config: any): Promise<{ svg: string }> {
+    return fetchJSON('/diagrams/preview', {
+      method: 'POST',
+      body: JSON.stringify(config),
+    })
+  },
+
+  async save(config: any, filename: string, language: 'en' | 'fr' | 'both'): Promise<{ paths: string[]; filename: string }> {
+    return fetchJSON('/diagrams/save', {
+      method: 'POST',
+      body: JSON.stringify({ config, filename, language }),
+    })
+  },
+
+  async getTemplates(): Promise<{ templates: Array<{ id: string; name: string; description: string; minItems: number; maxItems: number }> }> {
+    return fetchJSON('/diagrams/templates')
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Preview API (browser-based Marp rendering)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -732,6 +756,11 @@ const api = {
 
   // Content rebuild
   rebuildContent: contentAPI.rebuild,
+
+  // Diagrams
+  diagramPreview: diagramAPI.preview,
+  diagramSave: diagramAPI.save,
+  diagramTemplates: diagramAPI.getTemplates,
 
   // Assets
   listAssets: assetsAPI.list,

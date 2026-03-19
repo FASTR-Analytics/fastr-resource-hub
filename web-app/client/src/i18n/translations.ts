@@ -251,6 +251,7 @@ export const translations = {
     preview: 'Preview',
     settings: 'Settings',
     createSlide: 'New Slide',
+    createDiagram: 'Diagram',
 
     // Drag and drop
     moveToDay: 'Move to day',
@@ -684,6 +685,7 @@ export const translations = {
     preview: 'Aperçu',
     settings: 'Paramètres',
     createSlide: 'Nouvelle diapo',
+    createDiagram: 'Diagramme',
 
     // Drag and drop
     moveToDay: 'Déplacer au jour',

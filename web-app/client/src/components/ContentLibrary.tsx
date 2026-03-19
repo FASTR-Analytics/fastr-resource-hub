@@ -5,6 +5,7 @@ import api, { previewAPI, importAPI } from '../../lib/api'
 import { t } from '../i18n/translations'
 import { useToast } from './Toast'
 import { CustomSlideEditor } from './CustomSlideEditor'
+import DiagramBuilder from './DiagramBuilder'
 import { useDraggable } from '@dnd-kit/core'
 import {
   ChevronRight,
@@ -28,6 +29,7 @@ import {
   RefreshCw,
   GripVertical,
   PenLine,
+  Shapes,
 } from 'lucide-react'
 
 export interface Topic {
@@ -128,6 +130,7 @@ export function ContentLibrary({ onImportSlides }: ContentLibraryProps = {}) {
 
   // Custom slide creator state
   const [showSlideCreator, setShowSlideCreator] = useState(false)
+  const [showDiagramBuilder, setShowDiagramBuilder] = useState(false)
 
   // Pre-initialize Marp on mount for faster previews
   useEffect(() => {
@@ -490,6 +493,13 @@ We resume at **[time]**`
             {t('importSlides', contentLanguage)}
           </button>
         )}
+        <button
+          onClick={() => setShowDiagramBuilder(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors"
+        >
+          <Shapes className="w-3.5 h-3.5" />
+          {t('createDiagram', contentLanguage)}
+        </button>
         {currentWorkshopId && (
           <button
             onClick={() => setShowSlideCreator(true)}
@@ -1129,6 +1139,12 @@ We resume at **[time]**`
           </div>
         </div>
       )}
+
+      <DiagramBuilder
+        isOpen={showDiagramBuilder}
+        onClose={() => setShowDiagramBuilder(false)}
+        language={contentLanguage}
+      />
 
       {/* Custom Slide Creator Modal — portaled to body so it's not clipped by panel */}
       {showSlideCreator && currentWorkshopId && createPortal(
