@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340">
+  <defs>
+    <style>
+      .box { rx: 10; stroke-width: 2; }
+      .box-trigger { fill: #C53030; stroke: #9B2C2C; }
+      .box-q { fill: #E8F4F3; stroke: #0C716B; }
+      .box-fastr { fill: #09544F; stroke: #073B38; }
+      .title-text { font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: central; }
+      .title-dark { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
+      .q-text { font-family: Inter, sans-serif; font-size: 11.5px; fill: #09544F; text-anchor: middle; }
+      .fastr-text { font-family: Inter, sans-serif; font-size: 12px; fill: #fff; text-anchor: middle; }
+      .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arr); }
+    </style>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
+    </marker>
+  </defs>
+
+  <!-- Trigger box -->
+  <rect class="box box-trigger" x="220" y="15" width="340" height="45"/>
+  <text class="title-text" x="390" y="38">Changements majeurs du financement externe</text>
+
+  <!-- Connecting lines from trigger to questions -->
+  <line class="arrow" x1="300" y1="60" x2="102" y2="88"/>
+  <line class="arrow" x1="360" y1="60" x2="292" y2="88"/>
+  <line class="arrow" x1="420" y1="60" x2="482" y2="88"/>
+  <line class="arrow" x1="480" y1="60" x2="675" y2="88"/>
+
+  <!-- 4 question boxes in a row -->
+  <rect class="box box-q" x="15" y="90" width="175" height="80"/>
+  <text class="title-dark" x="102" y="115">Quelle ampleur ?</text>
+  <text class="q-text" x="102" y="135">Quels programmes</text>
+  <text class="q-text" x="102" y="150">et zones touchés ?</text>
+
+  <rect class="box box-q" x="205" y="90" width="175" height="80"/>
+  <text class="title-dark" x="292" y="115">Quels effets ?</text>
+  <text class="q-text" x="292" y="135">Volumes de services</text>
+  <text class="q-text" x="292" y="150">en baisse ? Où ?</text>
+
+  <rect class="box box-q" x="395" y="90" width="175" height="80"/>
+  <text class="title-dark" x="482" y="115">Comment prioriser ?</text>
+  <text class="q-text" x="482" y="135">Services et populations</text>
+  <text class="q-text" x="482" y="150">les plus vulnérables ?</text>
+
+  <rect class="box box-q" x="585" y="90" width="180" height="80"/>
+  <text class="title-dark" x="675" y="115">Comment protéger ?</text>
+  <text class="q-text" x="675" y="135">Actions pour préserver</text>
+  <text class="q-text" x="675" y="150">les services SRMNIA-N ?</text>
+
+  <!-- Arrows down to FASTR -->
+  <line class="arrow" x1="102" y1="170" x2="102" y2="200"/>
+  <line class="arrow" x1="292" y1="170" x2="292" y2="200"/>
+  <line class="arrow" x1="482" y1="170" x2="482" y2="200"/>
+  <line class="arrow" x1="675" y1="170" x2="675" y2="200"/>
+
+  <!-- FASTR response bar -->
+  <rect class="box box-fastr" x="15" y="205" width="750" height="50"/>
+  <text class="title-text" x="390" y="225">FASTR : socle analytique avec les données existantes</text>
+  <text class="fastr-text" x="390" y="243">Réponses rapides à partir des données DHIS2 déjà collectées</text>
+
+  <!-- Bottom: what FASTR enables -->
+  <line class="arrow" x1="195" y1="255" x2="195" y2="280"/>
+  <line class="arrow" x1="390" y1="255" x2="390" y2="280"/>
+  <line class="arrow" x1="585" y1="255" x2="585" y2="280"/>
+
+  <rect class="box" x="65" y="285" width="260" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
+  <text class="q-text" x="195" y="309">Détecter les perturbations tôt</text>
+
+  <rect class="box" x="345" y="285" width="230" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
+  <text class="q-text" x="460" y="309">Éclairer l'allocation des ressources</text>
+
+  <rect class="box" x="595" y="285" width="170" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
+  <text class="q-text" x="680" y="309">Plaider avec des preuves</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 296" font-family="Inter, Arial, sans-serif">
+  <!-- Stepper connector line -->
+  <line x1="30" y1="58" x2="30" y2="232" stroke="#CAE6E9" stroke-width="2"/>
+  <!-- Column divider -->
+  <line x1="260" y1="20" x2="260" y2="276" stroke="#E8F4F3" stroke-width="1.5"/>
+
+  <!-- Item 1 -->
+  <circle cx="30" cy="40" r="18" fill="#09544F"/>
+  <text x="30" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">1</text>
+  <text x="62" y="40" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Service monitoring</text>
+  <text x="276" y="40" dominant-baseline="central" fill="#555" font-size="12.5">Routine HMIS data analysis: quality, trends, and coverage</text>
+
+  <!-- Item 2 -->
+  <circle cx="30" cy="110" r="18" fill="#09544F"/>
+  <text x="30" y="110" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">2</text>
+  <text x="62" y="110" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Phone surveys</text>
+  <text x="276" y="110" dominant-baseline="central" fill="#555" font-size="12.5">Rapid-cycle monitoring of PHC readiness and reform progress</text>
+
+  <!-- Item 3 -->
+  <circle cx="30" cy="180" r="18" fill="#09544F"/>
+  <text x="30" y="180" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">3</text>
+  <text x="62" y="180" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Household surveys</text>
+  <text x="276" y="180" dominant-baseline="central" fill="#555" font-size="12.5">Demand-side data: access, financial protection, experience</text>
+
+  <!-- Item 4 -->
+  <circle cx="30" cy="250" r="18" fill="#09544F"/>
+  <text x="30" y="250" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">4</text>
+  <text x="62" y="250" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Follow-on analyses</text>
+  <text x="276" y="250" dominant-baseline="central" fill="#555" font-size="12.5">Root cause analysis and implementation research</text>
+</svg>

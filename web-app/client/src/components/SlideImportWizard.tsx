@@ -22,6 +22,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
   const [isParsing, setIsParsing] = useState(false)
   const [parsedSlides, setParsedSlides] = useState<ParsedSlide[]>([])
   const [sourceFilename, setSourceFilename] = useState('')
+  const [sessionId, setSessionId] = useState<string | undefined>()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const externalFileInputRef = useRef<HTMLInputElement>(null)
 
@@ -72,6 +73,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
       const result = await importAPI.parse(file)
       setParsedSlides(result.slides)
       setSourceFilename(result.sourceFilename)
+      setSessionId(result.sessionId)
       // Auto-set module name from filename
       const baseName = result.sourceFilename.replace(/\.(pptx|pdf|docx)$/i, '').replace(/[_-]/g, ' ')
       setModuleName(baseName)
@@ -155,8 +157,14 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
     try {
       const selected = parsedSlides.filter(s => selectedIndices.has(s.index))
       const result = await importAPI.convert(
-        selected.map(s => ({ index: s.index, text: s.text, images: s.images })),
-        moduleName
+        selected.map(s => ({
+          index: s.index,
+          text: s.text,
+          imageFilenames: s.images?.map(img => img.filename),
+        })),
+        moduleName,
+        sessionId,
+        moduleId,
       )
       setConvertedSlides(result.slides)
       setEditedMarkdown({})
@@ -230,6 +238,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
         name: moduleName,
         sourceFilename,
         slides,
+        sessionId,
       })
 
       setSavedModuleId(result.id)
@@ -269,6 +278,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
     setModuleId('')
     setEditedMarkdown({})
     setError(null)
+    setSessionId(undefined)
     setExternalDeckName('')
     setExternalDeckId('')
     setExternalPageCount(0)
@@ -540,7 +550,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
                               {slide.images!.slice(0, 3).map((img, idx) => (
                                 <img
                                   key={idx}
-                                  src={`data:${img.contentType};base64,${img.base64}`}
+                                  src={img.url}
                                   alt=""
                                   className="w-12 h-9 object-cover rounded border border-gray-200"
                                 />

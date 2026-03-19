@@ -39,6 +39,12 @@ export interface LocalWorkshopConfig {
     expected_outputs?: string
     // Slide theme
     theme?: 'classic' | 'clean' | 'bold'
+    // Deck type
+    deckType?: 'workshop' | 'webinar'
+    // Webinar-specific fields
+    event_name?: string
+    time?: string
+    duration?: number  // minutes
   }
   schedule: {
     days: number

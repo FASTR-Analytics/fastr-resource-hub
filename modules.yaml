@@ -261,3 +261,21 @@ modules:
     - User roles (Administrator, Editor, Viewer)
     - Platform navigation
     duration: 45-60 min
+- id: mw
+  number: w
+  folder: mw_webinar
+  name:
+    en: Webinar Content
+    fr: Contenu webinaire
+  ai_context:
+    description: Visual, webinar-optimized slides designed for remote audiences — concise
+      overviews of FASTR topics ideal for short virtual events.
+    topics:
+    - FASTR overview
+    - Data sources
+    - Key indicators
+    - Data quality snapshot
+    - Platform highlights
+    - AI assistant introduction
+    - Country progress
+    duration: 30-90 min

@@ -1,9 +1,17 @@
 import { Router } from 'express'
 import Anthropic from '@anthropic-ai/sdk'
 import multer from 'multer'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import {
   loadModulesRegistry,
+  loadModuleMeta,
 } from '../services/moduleRegistry.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..')
 
 const router = Router()
 
@@ -798,7 +806,7 @@ router.post('/chat', async (req, res) => {
     const systemPrompt = `You are a FASTR workshop planning assistant. You can DIRECTLY MODIFY the workshop deck using the tools provided.
 
 # ABOUT FASTR
-FASTR (Framework for Analytics Strengthening Through Routine data) is a methodology for analyzing health system data, particularly RMNCAH-N program data from DHIS2.
+FASTR (Frequent Assessments and System Tools for Resilience) is the GFF approach to rapid-cycle analytics and data use, supporting country-led efforts to improve the timely use of RMNCAH-N program data from DHIS2.
 
 # MODULE TYPES
 There are two categories of modules:
@@ -1519,7 +1527,7 @@ RULES:
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
-      system: `You are an expert workshop planner for FASTR (Framework for Analytics of Service use Trends and Results) workshops focused on RMNCAH-N health data analysis.
+      system: `You are an expert workshop planner for FASTR (Frequent Assessments and System Tools for Resilience) workshops focused on RMNCAH-N health data analysis.
 
 Given a user's description of their workshop needs, generate a COMPLETE workshop configuration including the full schedule.
 
@@ -1801,6 +1809,301 @@ Return ONLY valid JSON, no explanation.`,
     res.json(workshopConfig)
   } catch (error: any) {
     console.error('AI parse-agenda error:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Webinar generation
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Build a slide-level catalog of all available content for webinar generation.
+ * Returns module info with individual slide titles + available engagement templates.
+ */
+function getSlidesCatalog(language: 'en' | 'fr' = 'en'): string {
+  const modules = loadModulesRegistry()
+  const contentPath = language === 'fr'
+    ? path.join(REPO_ROOT, 'core_content_fr')
+    : path.join(REPO_ROOT, 'core_content')
+
+  const lines: string[] = ['AVAILABLE SLIDE CONTENT:']
+  for (const mod of modules) {
+    const meta = loadModuleMeta(contentPath, mod.folder)
+    if (!meta?.slides?.length) continue
+    const modName = mod.name[language] || mod.name.en
+    lines.push(`\n  Module ${mod.id} — ${modName}:`)
+    for (const slide of meta.slides) {
+      lines.push(`    - file: "${slide.file}", title: "${slide.title}", variant: ${slide.variant}`)
+    }
+  }
+
+  // Engagement templates
+  lines.push('\nENGAGEMENT TEMPLATES (for interaction moments):')
+  const engagementTemplates = [
+    { file: 'webinar_icebreaker.md', name: 'Icebreaker' },
+    { file: 'webinar_poll.md', name: 'Poll' },
+    { file: 'webinar_chat_prompt.md', name: 'Chat Prompt' },
+    { file: 'webinar_qa.md', name: 'Q&A Moment' },
+    { file: 'webinar_discussion.md', name: 'Discussion / Breakout' },
+    { file: 'webinar_reflection.md', name: 'Reflection Pause' },
+    { file: 'webinar_transition.md', name: 'Section Transition' },
+    { file: 'webinar_closing_cta.md', name: 'Closing & Next Steps' },
+    { file: 'webinar_logistics.md', name: 'Virtual Meeting Logistics' },
+    { file: 'webinar_next_steps.md', name: 'Next Steps' },
+    { file: 'learning_exchange_overview.md', name: 'Learning Exchange Overview' },
+  ]
+  for (const t of engagementTemplates) {
+    lines.push(`    - file: "${t.file}", name: "${t.name}"`)
+  }
+
+  // Structural templates
+  lines.push('\nSTRUCTURAL TEMPLATES:')
+  const structuralTemplates = [
+    { file: 'title_slide.md', name: 'Title / Cover Slide' },
+    { file: 'section_divider.md', name: 'Section Divider' },
+    { file: 'closing.md', name: 'Closing / Contact Info' },
+  ]
+  for (const t of structuralTemplates) {
+    lines.push(`    - file: "${t.file}", name: "${t.name}"`)
+  }
+
+  return lines.join('\n')
+}
+
+/**
+ * Post-process webinar AI output: validate files, add _id fields, check engagement pacing.
+ */
+function postProcessWebinarConfig(
+  config: any,
+  language: 'en' | 'fr',
+): void {
+  const contentPath = language === 'fr'
+    ? path.join(REPO_ROOT, 'core_content_fr')
+    : path.join(REPO_ROOT, 'core_content')
+  const templatesPath = language === 'fr'
+    ? path.join(REPO_ROOT, 'templates_fr')
+    : path.join(REPO_ROOT, 'templates')
+
+  if (!Array.isArray(config.slides)) return
+
+  const ts = Date.now()
+  const validatedSlides: any[] = []
+
+  for (let i = 0; i < config.slides.length; i++) {
+    const slide = config.slides[i]
+    slide._id = `webinar-${i}-${ts}`
+
+    // Validate file exists
+    if (slide.file) {
+      // Check templates first, then module folders
+      const templatePath = path.join(templatesPath, slide.file)
+      if (fs.existsSync(templatePath)) {
+        slide.slides = [slide.file]
+        slide.isTemplate = true
+        validatedSlides.push(slide)
+        continue
+      }
+
+      // Check in module folders
+      let found = false
+      if (slide.module) {
+        const modules = loadModulesRegistry()
+        const mod = modules.find(m => m.id === slide.module || `m${m.number}` === slide.module)
+        if (mod) {
+          const filePath = path.join(contentPath, mod.folder, slide.file)
+          if (fs.existsSync(filePath)) {
+            slide.slides = [slide.file]
+            found = true
+          }
+        }
+      }
+
+      // Search all module folders if not found via module hint
+      if (!found) {
+        const modules = loadModulesRegistry()
+        for (const mod of modules) {
+          const filePath = path.join(contentPath, mod.folder, slide.file)
+          if (fs.existsSync(filePath)) {
+            slide.slides = [slide.file]
+            slide.module = mod.id
+            found = true
+            break
+          }
+        }
+      }
+
+      if (!found) {
+        // Skip slides with invalid files
+        console.warn(`[webinar] Skipping slide with missing file: ${slide.file}`)
+        continue
+      }
+    }
+
+    validatedSlides.push(slide)
+  }
+
+  config.slides = validatedSlides
+  config.language = language
+}
+
+// POST /api/ai/generate-webinar - Generate webinar config from natural language
+router.post('/generate-webinar', async (req, res) => {
+  try {
+    const { prompt, clarifications } = req.body
+
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' })
+    }
+
+    const client = getClient()
+
+    // Detect language
+    const allText = clarifications
+      ? `${prompt} ${clarifications.map((c: any) => `${c.question} ${c.answer}`).join(' ')}`
+      : prompt
+    const webinarLanguage = detectLanguage(allText)
+
+    const slidesCatalog = getSlidesCatalog(webinarLanguage)
+
+    // ── Phase 1: Check if clarification is needed ──
+    if (!clarifications) {
+      const clarifyResponse = await client.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1024,
+        system: `You evaluate webinar descriptions to determine if there is enough information to build a good FASTR webinar.
+
+You MUST have clarity on these key items:
+1. Duration (30-120 minutes)
+2. Topic focus (which FASTR areas to cover)
+3. Audience (who is attending — program managers, data analysts, ministry officials, etc.)
+
+Nice to have (do NOT ask if missing, just use defaults):
+- Country, date
+- Context (standalone, pre-workshop, follow-up)
+- Language — if the prompt is in French or mentions a francophone country, assume French and do NOT ask
+
+RULES:
+- If ALL required items are clear from the description, return exactly: {"ready": true}
+- If any key item is unclear, return a JSON array of 2-3 short, specific questions to ask. Each question should be a plain string.
+- Do NOT ask about things already stated in the prompt
+- Keep questions concise and practical
+- Return ONLY valid JSON, no explanation`,
+        messages: [{ role: 'user', content: prompt }],
+      })
+
+      let clarifyText = ''
+      for (const block of clarifyResponse.content) {
+        if (block.type === 'text') clarifyText += block.text
+      }
+
+      let clarifyJson = clarifyText.trim()
+      if (clarifyJson.startsWith('```')) {
+        clarifyJson = clarifyJson.replace(/^```json?\n?/, '').replace(/\n?```$/, '')
+      }
+
+      try {
+        const parsed = JSON.parse(clarifyJson)
+        if (parsed.ready !== true && Array.isArray(parsed)) {
+          return res.json({ needsClarification: true, questions: parsed })
+        }
+      } catch {
+        // Proceed with generation
+      }
+    }
+
+    // ── Phase 2: Generate webinar ──
+    let enrichedPrompt = prompt
+    if (clarifications && Array.isArray(clarifications)) {
+      const qaBlock = clarifications
+        .map((c: { question: string; answer: string }) => `Q: ${c.question}\nA: ${c.answer}`)
+        .join('\n\n')
+      enrichedPrompt = `${prompt}\n\nAdditional details:\n${qaBlock}`
+    }
+
+    // Extract duration from prompt
+    const durationMatch = enrichedPrompt.match(/(\d+)\s*[-–]?\s*min/i) ||
+      enrichedPrompt.match(/(\d+)\s*minutes?/i)
+    const requestedDuration = durationMatch ? parseInt(durationMatch[1]) : 90
+
+    const response = await client.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      system: `You are an expert at planning FASTR webinars — short virtual events (30-120 minutes) focused on RMNCAH-N health data analysis.
+
+Given a description, generate a webinar as a flat list of slides with engagement moments.
+
+${slidesCatalog}
+
+WEBINAR BEST PRACTICES:
+- Engagement break every 10-15 minutes (poll, Q&A, chat prompt, reflection)
+- Remote audiences lose focus quickly — vary interaction types
+- Prefer visual, concise slides from the "mw" (webinar) module over text-heavy module slides
+- Use module slides (m0, m1, etc.) when deeper content is needed, but prefer condensed/visual versions
+
+STRUCTURE for a ${requestedDuration}-min webinar:
+1. Title slide (title_slide.md)
+2. Virtual logistics (webinar_logistics.md)
+3. Icebreaker (webinar_icebreaker.md)
+4. Content blocks with engagement moments every 10-15 min
+5. Q&A (webinar_qa.md)
+6. Closing & next steps (webinar_closing_cta.md)
+
+DURATION GUIDE:
+- 30 min: 5-8 content slides + 2-3 engagement
+- 60 min: 12-15 content slides + 4-5 engagement
+- 90 min: 18-22 content slides + 6-7 engagement
+- 120 min: 25-30 content slides + 8-10 engagement
+
+Generate a JSON object:
+{
+  "name": "Webinar title",
+  "country": "Country if mentioned",
+  "duration": ${requestedDuration},
+  "slides": [
+    {"session": "Title", "file": "title_slide.md", "duration": 0, "type": "structural"},
+    {"session": "Virtual Logistics", "file": "webinar_logistics.md", "duration": 3, "type": "structural"},
+    {"session": "Icebreaker", "file": "webinar_icebreaker.md", "duration": 3, "type": "engagement"},
+    {"session": "FASTR Overview", "file": "mw_1_fastr_at_a_glance.md", "module": "mw", "duration": 5, "type": "content"},
+    {"session": "Poll: Your experience", "file": "webinar_poll.md", "duration": 3, "type": "engagement"},
+    {"session": "Data Quality", "file": "mw_4_data_quality_snapshot.md", "module": "mw", "duration": 5, "type": "content"},
+    {"session": "Q&A", "file": "webinar_qa.md", "duration": 5, "type": "engagement"},
+    {"session": "Closing", "file": "webinar_closing_cta.md", "duration": 3, "type": "structural"}
+  ]
+}
+
+CRITICAL RULES:
+1. ONLY use files from the slide catalog above — every "file" value must be an exact filename from the catalog
+2. For module content slides, include "module" with the module id (e.g., "mw", "m0", "m3b")
+3. For templates (engagement/structural), do NOT include "module"
+4. Total duration should be within 10% of the requested ${requestedDuration} minutes
+5. Engagement moments should be spaced every 10-15 minutes of content
+6. Prefer "mw" (webinar) module slides for visual overviews
+7. Use other module slides (m0, m1, etc.) for specific deep-dive topics
+8. Each slide appears at most ONCE
+
+WEBINAR LANGUAGE: ${webinarLanguage === 'fr' ? 'FRENCH — All session names, title must be in French.' : 'ENGLISH — Use English for all text.'}
+
+Return ONLY valid JSON, no explanation.`,
+      messages: [{ role: 'user', content: enrichedPrompt }],
+    })
+
+    let textContent = ''
+    for (const block of response.content) {
+      if (block.type === 'text') textContent += block.text
+    }
+
+    let jsonContent = textContent.trim()
+    if (jsonContent.startsWith('```')) {
+      jsonContent = jsonContent.replace(/^```json?\n?/, '').replace(/\n?```$/, '')
+    }
+
+    const webinarConfig = JSON.parse(jsonContent)
+    postProcessWebinarConfig(webinarConfig, webinarLanguage)
+
+    res.json(webinarConfig)
+  } catch (error: any) {
+    console.error('AI generate-webinar error:', error)
     res.status(500).json({ error: error.message })
   }
 })

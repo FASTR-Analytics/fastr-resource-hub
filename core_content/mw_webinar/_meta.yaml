@@ -1,0 +1,81 @@
+slides:
+- file: mw_1_fastr_at_a_glance.md
+  order: 1
+  variant: full
+  title: FASTR at a glance
+- file: mw_2_data_sources_visual.md
+  order: 2
+  variant: full
+  title: Data sources at a glance
+- file: mw_3_indicator_essentials.md
+  order: 3
+  variant: full
+  title: Key RMNCAH-N indicators
+- file: mw_4_data_quality_snapshot.md
+  order: 4
+  variant: full
+  title: Data quality at a glance
+- file: mw_5_platform_highlights.md
+  order: 5
+  variant: full
+  title: FASTR Analytics Platform
+- file: mw_6_ai_assistant_intro.md
+  order: 6
+  variant: full
+  title: AI assistant
+- file: mw_7_country_progress.md
+  order: 7
+  variant: full
+  title: FASTR across countries
+- file: mw_8_webinar_objectives.md
+  order: 8
+  variant: full
+  title: Webinar objectives
+- file: mw_9_webinar_agenda.md
+  order: 9
+  variant: full
+  title: Agenda
+- file: mw_10_team_introductions.md
+  order: 10
+  variant: full
+  title: Team and participant introductions
+- file: mw_11_fastr_context.md
+  order: 11
+  variant: full
+  title: Why FASTR?
+- file: mw_12_priority_poll.md
+  order: 12
+  variant: full
+  title: Priority ranking poll
+- file: mw_13_context.md
+  order: 13
+  variant: full
+  title: Disruptions and context
+- file: mw_14_experience_poll.md
+  order: 14
+  variant: full
+  title: FASTR experience poll
+- file: mw_15_fastr_objective.md
+  order: 15
+  variant: full
+  title: FASTR objective
+- file: mw_16_rmncahn_approach.md
+  order: 16
+  variant: full
+  title: RMNCAH-N monitoring approach
+- file: mw_17_analysis_pipeline.md
+  order: 17
+  variant: full
+  title: HMIS analysis pipeline
+- file: mw_18_whats_next.md
+  order: 18
+  variant: full
+  title: What's next
+- file: mw_19_next_steps.md
+  order: 19
+  variant: full
+  title: Next steps before the workshop
+- file: mw_20_about_fastr.md
+  order: 20
+  variant: full
+  title: About FASTR

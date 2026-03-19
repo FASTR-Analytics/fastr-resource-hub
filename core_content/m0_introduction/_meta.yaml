@@ -27,3 +27,15 @@ slides:
   order: 4
   variant: full
   title: 'FASTR analytics: suite of outputs and products'
+- file: m0_5_data_triangulation.md
+  order: 5
+  variant: full
+  title: 'Data triangulation: bringing together multiple sources'
+- file: m0_6_disruptions_context.md
+  order: 6
+  variant: full
+  title: Why now? Responding to disruptions in health financing
+- file: m0_7_community_of_practice.md
+  order: 7
+  variant: full
+  title: FASTR community of practice

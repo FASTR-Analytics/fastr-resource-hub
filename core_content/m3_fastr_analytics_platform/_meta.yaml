@@ -31,3 +31,7 @@ slides:
   order: 3
   variant: full
   title: Getting started with the platform
+- file: m3_5_roadmap_2026.md
+  order: 5
+  variant: full
+  title: 'Platform roadmap: what''s coming in 2026 and beyond'

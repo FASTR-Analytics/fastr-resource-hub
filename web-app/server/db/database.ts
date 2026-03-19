@@ -180,6 +180,10 @@ export interface WorkshopConfig {
     website?: string
     objectives?: string
     theme?: 'classic' | 'clean' | 'bold'
+    deckType?: 'workshop' | 'webinar'
+    event_name?: string
+    time?: string
+    duration?: number
   }
   schedule: {
     days: number
@@ -202,6 +206,7 @@ export async function getAllWorkshops() {
   const result = await db.execute(`
     SELECT id, name, country, location, date,
            json_extract(config, '$.schedule.days') as days,
+           json_extract(config, '$.workshop.deckType') as deckType,
            locked
     FROM workshops
     ORDER BY updated_at DESC
@@ -213,6 +218,7 @@ export async function getAllWorkshops() {
     location: row.location,
     date: row.date,
     days: row.days,
+    deckType: row.deckType || 'workshop',
     locked: row.locked === 1
   }))
 }

@@ -28,3 +28,15 @@ slides:
   order: 4
   variant: full
   title: 'Analytique FASTR : suite de produits et résultats'
+- file: m0_5_data_triangulation.md
+  order: 5
+  variant: full
+  title: 'Triangulation des données : combiner plusieurs sources'
+- file: m0_6_disruptions_context.md
+  order: 6
+  variant: full
+  title: Pourquoi maintenant ? Répondre aux perturbations du financement
+- file: m0_7_community_of_practice.md
+  order: 7
+  variant: full
+  title: Communauté de pratique FASTR

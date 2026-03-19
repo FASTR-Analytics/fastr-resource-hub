@@ -438,6 +438,90 @@ router.get('/:id/download/:format', (req, res) => {
   }
 })
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Storage Management Endpoints
+// ─────────────────────────────────────────────────────────────────────────────
+
+// GET /api/export/storage - List ALL output files with sizes
+router.get('/storage', (_req, res) => {
+  try {
+    const outputs: Array<{ name: string; format: string; size: number; modified: string }> = []
+
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      return res.json({ files: outputs, totalSize: 0 })
+    }
+
+    const files = fs.readdirSync(OUTPUT_DIR)
+    let totalSize = 0
+
+    for (const file of files) {
+      const filePath = path.join(OUTPUT_DIR, file)
+      const stats = fs.statSync(filePath)
+      if (!stats.isFile()) continue
+      totalSize += stats.size
+      outputs.push({
+        name: file,
+        format: path.extname(file).replace('.', ''),
+        size: stats.size,
+        modified: stats.mtime.toISOString(),
+      })
+    }
+
+    outputs.sort((a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime())
+    res.json({ files: outputs, totalSize })
+  } catch (error: any) {
+    console.error('Error listing storage:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// DELETE /api/export/outputs/:filename - Delete a single output file
+router.delete('/outputs/:filename', (req, res) => {
+  try {
+    const filename = req.params.filename
+    // Prevent path traversal
+    if (filename.includes('/') || filename.includes('..')) {
+      return res.status(400).json({ error: 'Invalid filename' })
+    }
+    const filePath = path.join(OUTPUT_DIR, filename)
+
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' })
+    }
+
+    fs.unlinkSync(filePath)
+    res.json({ success: true })
+  } catch (error: any) {
+    console.error('Error deleting output:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// DELETE /api/export/outputs - Delete all output files
+router.delete('/outputs', (_req, res) => {
+  try {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      return res.json({ success: true, deleted: 0 })
+    }
+
+    const files = fs.readdirSync(OUTPUT_DIR)
+    let deleted = 0
+    for (const file of files) {
+      const filePath = path.join(OUTPUT_DIR, file)
+      const stats = fs.statSync(filePath)
+      if (stats.isFile()) {
+        fs.unlinkSync(filePath)
+        deleted++
+      }
+    }
+
+    res.json({ success: true, deleted })
+  } catch (error: any) {
+    console.error('Error clearing outputs:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
 // GET /api/export/:id/outputs - List all generated files for a workshop
 router.get('/:id/outputs', (req, res) => {
   try {

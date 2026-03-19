@@ -1,0 +1,81 @@
+slides:
+- file: mw_1_fastr_at_a_glance.md
+  order: 1
+  variant: full
+  title: FASTR en un coup d'œil
+- file: mw_2_data_sources_visual.md
+  order: 2
+  variant: full
+  title: Sources de données en un coup d'œil
+- file: mw_3_indicator_essentials.md
+  order: 3
+  variant: full
+  title: Indicateurs clés SRMNIA-N
+- file: mw_4_data_quality_snapshot.md
+  order: 4
+  variant: full
+  title: Qualité des données en un coup d'œil
+- file: mw_5_platform_highlights.md
+  order: 5
+  variant: full
+  title: Plateforme analytique FASTR
+- file: mw_6_ai_assistant_intro.md
+  order: 6
+  variant: full
+  title: Assistant IA
+- file: mw_7_country_progress.md
+  order: 7
+  variant: full
+  title: FASTR à travers les pays
+- file: mw_8_webinar_objectives.md
+  order: 8
+  variant: full
+  title: Objectifs du webinaire
+- file: mw_9_webinar_agenda.md
+  order: 9
+  variant: full
+  title: Ordre du jour
+- file: mw_10_team_introductions.md
+  order: 10
+  variant: full
+  title: Équipe et tour de table
+- file: mw_11_fastr_context.md
+  order: 11
+  variant: full
+  title: Pourquoi FASTR ?
+- file: mw_12_priority_poll.md
+  order: 12
+  variant: full
+  title: Sondage — priorités
+- file: mw_13_context.md
+  order: 13
+  variant: full
+  title: Perturbations et contexte
+- file: mw_14_experience_poll.md
+  order: 14
+  variant: full
+  title: Sondage — expérience FASTR
+- file: mw_15_fastr_objective.md
+  order: 15
+  variant: full
+  title: Objectif FASTR
+- file: mw_16_rmncahn_approach.md
+  order: 16
+  variant: full
+  title: Approche de suivi SRMNIA-N
+- file: mw_17_analysis_pipeline.md
+  order: 17
+  variant: full
+  title: Pipeline d'analyse HMIS
+- file: mw_18_whats_next.md
+  order: 18
+  variant: full
+  title: Et ensuite ?
+- file: mw_19_next_steps.md
+  order: 19
+  variant: full
+  title: Prochaines étapes avant l'atelier
+- file: mw_20_about_fastr.md
+  order: 20
+  variant: full
+  title: À propos de FASTR

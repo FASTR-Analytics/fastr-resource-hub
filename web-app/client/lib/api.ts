@@ -475,8 +475,8 @@ export const assetsAPI = {
 
 export interface SlideImage {
   filename: string
-  base64: string
   contentType: string
+  url: string
 }
 
 export interface ParsedSlide {
@@ -516,7 +516,7 @@ export interface ExternalPage {
 }
 
 export const importAPI = {
-  async parse(file: File): Promise<{ slides: ParsedSlide[]; sourceFilename: string; totalSlides: number }> {
+  async parse(file: File): Promise<{ slides: ParsedSlide[]; sourceFilename: string; totalSlides: number; sessionId?: string }> {
     const formData = new FormData()
     formData.append('file', file)
 
@@ -534,11 +534,16 @@ export const importAPI = {
     return response.json()
   },
 
-  async convert(slides: Array<{ index: number; text: string; images?: SlideImage[] }>, moduleName: string): Promise<{ slides: ConvertedSlide[] }> {
+  async convert(
+    slides: Array<{ index: number; text: string; imageFilenames?: string[] }>,
+    moduleName: string,
+    sessionId?: string,
+    moduleId?: string,
+  ): Promise<{ slides: ConvertedSlide[] }> {
     return fetchJSON('/import/convert', {
       method: 'POST',
       timeout: 120000,
-      body: JSON.stringify({ slides, moduleName }),
+      body: JSON.stringify({ slides, moduleName, sessionId, moduleId }),
     })
   },
 
@@ -547,6 +552,7 @@ export const importAPI = {
     name: string
     sourceFilename: string | null
     slides: Array<{ order: number; originalText: string | null; markdown: string; title: string | null }>
+    sessionId?: string
   }): Promise<{ success: boolean; id: string }> {
     return fetchJSON('/import/save', {
       method: 'POST',
@@ -616,6 +622,24 @@ export const importAPI = {
 
   getExternalPageURL(deckId: string, pageNum: number): string {
     return `${API_BASE}/import/external/${deckId}/pages/${pageNum}`
+  },
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Storage API (cross-category storage management)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const storageAPI = {
+  async listOutputs(): Promise<{ files: Array<{ name: string; format: string; size: number; modified: string }>; totalSize: number }> {
+    return fetchJSON('/export/storage')
+  },
+
+  async deleteOutput(filename: string): Promise<{ success: boolean }> {
+    return fetchJSON(`/export/outputs/${encodeURIComponent(filename)}`, { method: 'DELETE' })
+  },
+
+  async clearOutputs(): Promise<{ success: boolean; deleted: number }> {
+    return fetchJSON('/export/outputs', { method: 'DELETE' })
   },
 }
 

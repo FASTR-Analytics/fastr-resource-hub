@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="Inter, Arial, sans-serif">
+  <!-- Stepper connector line -->
+  <line x1="30" y1="56" x2="30" y2="276" stroke="#CAE6E9" stroke-width="2"/>
+  <!-- Column divider -->
+  <line x1="260" y1="16" x2="260" y2="340" stroke="#E8F4F3" stroke-width="1.5"/>
+
+  <!-- Row 1 -->
+  <circle cx="30" cy="38" r="18" fill="#09544F"/>
+  <text x="30" y="38" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">1</text>
+  <text x="62" y="38" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Comprendre</text>
+  <text x="276" y="38" dominant-baseline="central" fill="#555" font-size="12.5">L'approche FASTR et ses quatre piliers techniques</text>
+
+  <!-- Row 2 -->
+  <circle cx="30" cy="102" r="18" fill="#09544F"/>
+  <text x="30" y="102" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">2</text>
+  <text x="62" y="102" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Identifier</text>
+  <text x="276" y="102" dominant-baseline="central" fill="#555" font-size="12.5">Les sources de données et indicateurs SRMNIA-N</text>
+
+  <!-- Row 3 -->
+  <circle cx="30" cy="166" r="18" fill="#09544F"/>
+  <text x="30" y="166" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">3</text>
+  <text x="62" y="166" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Reconnaître</text>
+  <text x="276" y="166" dominant-baseline="central" fill="#555" font-size="12.5">Comment la plateforme soutient la prise de décision</text>
+
+  <!-- Row 4 -->
+  <circle cx="30" cy="230" r="18" fill="#09544F"/>
+  <text x="30" y="230" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">4</text>
+  <text x="62" y="230" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Savoir</text>
+  <text x="276" y="230" dominant-baseline="central" fill="#555" font-size="12.5">À quoi s'attendre pour l'atelier et le suivi</text>
+
+  <!-- Row 5 -->
+  <circle cx="30" cy="294" r="18" fill="#09544F"/>
+  <text x="30" y="294" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">5</text>
+  <text x="62" y="294" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Se connecter</text>
+  <text x="276" y="294" dominant-baseline="central" fill="#555" font-size="12.5">À la communauté de pratique FASTR</text>
+</svg>

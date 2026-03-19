@@ -102,7 +102,7 @@ export function ContentLibrary({ onImportSlides }: ContentLibraryProps = {}) {
   const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage, loadContentLibrary } = useWorkshopStore()
   const { showToast } = useToast()
   const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks']))
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks', 'webinar']))
   const [preview, setPreview] = useState<PreviewData | null>(null)
 
   // Module preview state
@@ -393,9 +393,24 @@ We resume at **[time]**`
     }
   }
 
-  // Show dialog to choose where to add topic
+  // Check if current deck is a webinar
+  const isWebinar = (currentConfig?.workshop as any)?.deckType === 'webinar'
+
+  // Show dialog to choose where to add topic (or add directly for webinars)
   const addTopic = (topic: Topic, module: Module) => {
     if (!currentConfig) return
+    if (isWebinar) {
+      // Webinar mode: add directly as a single-slide session on day1
+      // Don't set module — just reference the slide file so deckBuilder loads only this slide
+      const duration = Math.max(5, topic.slideCount * 3)
+      addSession(1, {
+        session: topic.title,
+        slides: [topic.file],
+        duration: duration,
+      })
+      showToast(`${t('addedToDay', contentLanguage)} 1: ${topic.title}`, 'success')
+      return
+    }
     setAddToSessionDialog({ topic, module })
   }
 
@@ -508,13 +523,21 @@ We resume at **[time]**`
         ) : (
         <>
         {/* Templates Section */}
-        {templates.filter(cat => ['breaks', 'activities'].includes(cat.id)).length > 0 && (
+        {templates.filter(cat => ['breaks', 'activities', 'webinar'].includes(cat.id)).length > 0 && (
           <div className="border-b-2 border-gray-200 bg-amber-50/50">
             <div className="px-3 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
-              {t('breaksAndStructure', contentLanguage)}
+              {isWebinar ? t('webinarAndEngagement', contentLanguage) : t('breaksAndStructure', contentLanguage)}
             </div>
             {templates
-              .filter(cat => ['breaks', 'activities'].includes(cat.id))
+              .filter(cat => ['breaks', 'activities', 'webinar'].includes(cat.id))
+              .sort((a, b) => {
+                // In webinar mode, show webinar category first
+                if (isWebinar) {
+                  if (a.id === 'webinar') return -1
+                  if (b.id === 'webinar') return 1
+                }
+                return 0
+              })
               .map((category) => (
                 <div key={category.id} className="border-t border-gray-100">
                   {/* Category header */}
@@ -890,6 +913,7 @@ We resume at **[time]**`
               )}
               {templatePreview.category.id === 'activities' && 'Interactive session'}
               {templatePreview.category.id === 'demo' && 'Platform demonstration'}
+              {templatePreview.category.id === 'webinar' && 'Webinar engagement slide'}
             </div>
           </div>
           {templatePreview.html ? (
@@ -1125,6 +1149,7 @@ We resume at **[time]**`
         />,
         document.body
       )}
+
     </div>
   )
 }

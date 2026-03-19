@@ -436,21 +436,38 @@ async function buildExternalDeckSlides(
  * Returns the rewritten markdown and a cleanup function.
  */
 export function materializeExternalImages(markdown: string): { markdown: string; tempDir: string | null } {
-  const EXTERNAL_DIR = path.join(path.resolve(__dirname, '../../data'), 'external')
-  const regex = /!\[bg contain\]\(\/api\/import\/external\/([^/]+)\/pages\/(\d+)\)/g
+  const DATA_DIR = path.resolve(__dirname, '../../data')
+  const EXTERNAL_DIR = path.join(DATA_DIR, 'external')
+  const IMPORTS_DIR = path.join(DATA_DIR, 'imports')
 
   let hasMatches = false
-  const rewritten = markdown.replace(regex, (_match, deckId, pageNum) => {
+
+  // Rewrite external deck page images
+  const externalRegex = /!\[bg contain\]\(\/api\/import\/external\/([^/]+)\/pages\/(\d+)\)/g
+  let rewritten = markdown.replace(externalRegex, (_match, deckId, pageNum) => {
     hasMatches = true
     const imageFilename = `${deckId}_page_${pageNum}.png`
     const imagePath = path.join(EXTERNAL_DIR, imageFilename)
     if (fs.existsSync(imagePath)) {
       return `![bg contain](${imagePath})`
     }
-    return _match // Keep original if file not found
+    return _match
   })
 
-  return { markdown: rewritten, tempDir: hasMatches ? EXTERNAL_DIR : null }
+  // Rewrite imported module images (any Marp image syntax)
+  const importRegex = /!\[([^\]]*)\]\(\/api\/import\/modules\/([^/]+)\/images\/([^)]+)\)/g
+  rewritten = rewritten.replace(importRegex, (_match, alt, moduleId, filename) => {
+    hasMatches = true
+    const safeModuleId = path.basename(moduleId)
+    const safeFilename = path.basename(filename)
+    const imagePath = path.join(IMPORTS_DIR, safeModuleId, safeFilename)
+    if (fs.existsSync(imagePath)) {
+      return `![${alt}](${imagePath})`
+    }
+    return _match
+  })
+
+  return { markdown: rewritten, tempDir: hasMatches ? DATA_DIR : null }
 }
 
 /**
@@ -539,9 +556,9 @@ async function loadSlideContent(
     filePath = path.join(TEMPLATES_PATH, 'custom_slides', slideFile)
   }
 
-  // Try core_content folders (for topic files like m4_01_approach.md)
+  // Try core_content folders (for topic files like m4_01_approach.md, mw_1_xxx.md, mai_3_xxx.md)
   if (!fs.existsSync(filePath)) {
-    const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
+    const moduleMatch = slideFile.match(/^(m\d+[a-z]?|m[a-z]+)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
       const folderName = getModuleFolder(moduleId)
@@ -554,7 +571,7 @@ async function loadSlideContent(
   // Fallback to English if French file not found
   if (!fs.existsSync(filePath) && language !== 'en') {
     const englishPath = getCoreContentPath('en')
-    const moduleMatch = slideFile.match(/^(m\d+[a-z]?)_/)
+    const moduleMatch = slideFile.match(/^(m\d+[a-z]?|m[a-z]+)_/)
     if (moduleMatch) {
       const moduleId = moduleMatch[1]
       const folderName = getModuleFolder(moduleId)
@@ -770,9 +787,19 @@ function substituteVariables(
     vars['{{EXPECTED_OUTPUTS}}'] = ''
   }
 
+  // Custom variables from workshop config (e.g., custom_vars: { INTERPRETATION_NOTE: "..." })
+  if (workshop.custom_vars && typeof workshop.custom_vars === 'object') {
+    for (const [key, value] of Object.entries(workshop.custom_vars)) {
+      vars[`{{${key}}}`] = String(value || '')
+    }
+  }
+
   for (const [key, value] of Object.entries(vars)) {
     content = content.replace(new RegExp(key.replace(/[{}]/g, '\\$&'), 'g'), value)
   }
+
+  // Clean up any remaining unreplaced custom variables (leave them empty)
+  content = content.replace(/\{\{[A-Z_]+\}\}/g, '')
 
   return content
 }

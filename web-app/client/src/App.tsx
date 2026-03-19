@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useWorkshopStore, Session } from './stores/workshop'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
@@ -8,6 +9,7 @@ import { ContentLibrary } from './components/ContentLibrary'
 import { SlideImportWizard } from './components/SlideImportWizard'
 import { GuidedTour, type GuidedTourHandle } from './components/GuidedTour'
 import { HelpButton } from './components/HelpButton'
+import { StorageManager } from './components/StorageManager'
 import {
   Layers,
   BookOpen,
@@ -42,6 +44,8 @@ import {
   AlertTriangle,
   ArrowRightLeft,
   Upload,
+  HardDrive,
+  Monitor,
 } from 'lucide-react'
 import {
   DndContext,
@@ -432,9 +436,10 @@ interface AddSessionMenuProps {
   onAddToExistingSession: (sessionIdx: number, topic: { id: string; file: string; title: string; duration?: number }) => void
   contentLibrary: any[]
   existingSessions: ExistingSessionInfo[]
+  isWebinar?: boolean
 }
 
-function AddSessionMenu({ dayNum, onClose, onAddSession, onAddToExistingSession, contentLibrary, existingSessions }: AddSessionMenuProps) {
+function AddSessionMenu({ dayNum, onClose, onAddSession, onAddToExistingSession, contentLibrary, existingSessions, isWebinar }: AddSessionMenuProps) {
   const { contentLanguage } = useWorkshopStore()
   const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets' | 'add-to-session'>('main')
   const [expandedModule, setExpandedModule] = useState<string | null>(null)
@@ -528,6 +533,17 @@ paginate: true
   }
 
   const handleTopicClick = (module: any, topic: any) => {
+    if (isWebinar) {
+      // Webinar mode: add directly as single-slide session (no module reference)
+      const session: Session = {
+        session: topic.title,
+        slides: [topic.file],
+        duration: topic.duration || Math.max(5, (topic.slideCount || 1) * 3),
+      }
+      onAddSession(session)
+      onClose()
+      return
+    }
     // Always show options view so user can choose
     setSelectedTopic({ module, topic })
     setView('add-to-session')
@@ -536,8 +552,8 @@ paginate: true
   const addModuleAsNewSession = (module: any, topic: any) => {
     const session: Session = {
       session: topic.title,
-      module: module.id,
-      topics: [topic.id],
+      module: isWebinar ? undefined : module.id,
+      topics: isWebinar ? undefined : [topic.id],
       slides: [topic.file],
       duration: topic.duration || 30,
     }
@@ -696,8 +712,8 @@ paginate: true
 
                 {expandedModule === module.id && (
                   <div className="bg-gray-50 px-4 pb-3">
-                    {/* Add Full Module Button */}
-                    {((module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)) > 0 && (
+                    {/* Add Full Module Button — hidden for webinars */}
+                    {!isWebinar && ((module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)) > 0 && (
                       <button
                         onClick={() => {
                           // Add all topics from this module
@@ -2078,6 +2094,7 @@ function App() {
   // App mode - starts with mode selector
   const [appMode, setAppMode] = useState<AppMode>('select')
   const [expandedCountries, setExpandedCountries] = useState<Set<string>>(new Set())
+  const [showStorageManager, setShowStorageManager] = useState(false)
 
   const [leftPanelOpen, setLeftPanelOpen] = useState(false)
   const [leftPanelPinned, setLeftPanelPinned] = useState(false)
@@ -2097,6 +2114,7 @@ function App() {
   const landingTourRef = useRef<GuidedTourHandle>(null)
   const builderTourRef = useRef<GuidedTourHandle>(null)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
+  const [pendingDeckType, setPendingDeckType] = useState<'workshop' | 'webinar'>('workshop')
   const [createMode, setCreateMode] = useState<'manual' | 'ai' | 'upload'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
   const [aiGenerating, setAiGenerating] = useState(false)
@@ -2110,6 +2128,10 @@ function App() {
     country: '',
     location: '',
     days: 3,
+    // Webinar-specific
+    date: '',
+    time: '10:00',
+    duration: 90,
   })
 
   // DnD sensors
@@ -2135,11 +2157,18 @@ function App() {
 
   // Show workshop selector if no workshop is selected (only in workshop mode)
   // Skip while loading — selectWorkshop is async and currentWorkshopId is still null during fetch
+  // For webinars: skip the selector list and go straight to the create form
   useEffect(() => {
     if (appMode === 'workshop' && !currentWorkshopId && !isLoading && workshops.length > 0) {
-      setShowWorkshopSelector(true)
+      if (pendingDeckType === 'webinar') {
+        setShowWorkshopSelector(true)
+        setShowCreateWorkshop(true)
+        setCreateMode('manual')
+      } else {
+        setShowWorkshopSelector(true)
+      }
     }
-  }, [currentWorkshopId, workshops, appMode, isLoading])
+  }, [currentWorkshopId, workshops, appMode, isLoading, pendingDeckType])
 
   // Close export menu when clicking outside
   useEffect(() => {
@@ -2380,10 +2409,71 @@ function App() {
     setShowWorkshopSelector(false)
   }
 
+  // Build webinar deck from AI response
+  const buildWebinarFromAIResponse = async (data: any) => {
+    const year = new Date().getFullYear()
+    const nameSlug = (data.name || 'webinar').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+    const workshopId = `${year}-${nameSlug}-webinar`
+
+    const ts = Date.now()
+    const sessions: any[] = []
+
+    if (Array.isArray(data.slides)) {
+      for (let i = 0; i < data.slides.length; i++) {
+        const slide = data.slides[i]
+        const sessionObj: any = {
+          _id: slide._id || `webinar-${i}-${ts}`,
+          session: slide.session || slide.name || '',
+          slides: slide.slides || (slide.file ? [slide.file] : []),
+          duration: slide.duration || 5,
+        }
+        // Don't set module — webinar sessions reference individual slides via the slides array.
+        // Setting module would cause deckBuilder to load ALL slides from that module.
+        if (slide.type === 'engagement') {
+          sessionObj.icon = 'demo'
+        }
+        sessions.push(sessionObj)
+      }
+    }
+
+    const schedule: any = {
+      days: 1,
+      day_start_times: { 1: '10:00' },
+      day1: sessions,
+    }
+
+    const config = {
+      workshop: {
+        name: data.name || 'Webinar',
+        country: data.country || '',
+        location: '',
+        date: '',
+        facilitators: '',
+        deckType: 'webinar' as const,
+        time: '10:00',
+        duration: data.duration || 90,
+        language: data.language || 'en',
+      },
+      schedule,
+      content: {
+        modules: [],
+        custom_slides: [],
+      },
+    }
+
+    if (data.language === 'fr') {
+      setContentLanguage('fr')
+    }
+
+    await createWorkshop(workshopId, config)
+    setShowCreateWorkshop(false)
+    setShowWorkshopSelector(false)
+  }
+
   // Handle AI workshop generation - creates workshop directly
   const handleAIGenerate = async () => {
     if (!aiPrompt.trim()) {
-      setError(t('pleaseDescribeWorkshop', contentLanguage))
+      setError(pendingDeckType === 'webinar' ? t('describeWebinar', contentLanguage) : t('pleaseDescribeWorkshop', contentLanguage))
       return
     }
 
@@ -2398,13 +2488,16 @@ function App() {
         }))
       }
 
-      const response = await fetch('/api/ai/generate-workshop', { credentials: 'include',
+      // Use different endpoint for webinars vs workshops
+      const endpoint = pendingDeckType === 'webinar' ? '/api/ai/generate-webinar' : '/api/ai/generate-workshop'
+
+      const response = await fetch(endpoint, { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
 
-      if (!response.ok) throw new Error('Failed to generate workshop')
+      if (!response.ok) throw new Error(pendingDeckType === 'webinar' ? 'Failed to generate webinar' : 'Failed to generate workshop')
 
       const data = await response.json()
 
@@ -2416,7 +2509,12 @@ function App() {
         return
       }
 
-      await buildWorkshopFromAIResponse(data)
+      // Use appropriate builder
+      if (pendingDeckType === 'webinar') {
+        await buildWebinarFromAIResponse(data)
+      } else {
+        await buildWorkshopFromAIResponse(data)
+      }
       setAiPrompt('')
       setAiQuestions([])
       setAiAnswers({})
@@ -2478,183 +2576,227 @@ function App() {
       return
     }
 
-    // Generate workshop ID from year and country
+    const isWebinar = pendingDeckType === 'webinar'
+
+    // Generate workshop ID from year and name slug
     const year = new Date().getFullYear()
-    const countrySlug = newWorkshop.country.toLowerCase().replace(/\s+/g, '-')
-    const workshopId = `${year}-${countrySlug}`
+    const nameSlug = newWorkshop.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+    const workshopId = isWebinar
+      ? `${year}-${nameSlug}-webinar`
+      : `${year}-${newWorkshop.country.toLowerCase().replace(/\s+/g, '-')}`
 
-    // Create initial schedule with empty days
-    const schedule: any = {
-      days: newWorkshop.days,
-      day_titles: {},
-      day_start_times: {},
-      day_end_times: {},
-    }
-
-    // Add starter sessions for each day
     const ts = Date.now()
-    for (let d = 1; d <= newWorkshop.days; d++) {
-      schedule.day_start_times[d] = '09:00'
-      schedule.day_end_times[d] = '17:00'
-      schedule.day_titles[d] = ''
 
-      if (d === 1) {
-        // Day 1 has required opening sequence
-        schedule[`day${d}`] = [
+    if (isWebinar) {
+      // ── Webinar creation: flat single-day with just a title slide ──
+      const schedule: any = {
+        days: 1,
+        day_start_times: { 1: newWorkshop.time || '10:00' },
+        day1: [
           {
             _id: `title-slide-${ts}`,
-            session: newWorkshop.name || 'FASTR Workshop',
-            type: 'day_title',
+            session: newWorkshop.name || 'Webinar',
             slides: ['title_slide.md'],
             duration: 0,
             icon: 'cover',
           },
-          {
-            _id: `welcome-${ts}`,
-            session: 'Welcome and Opening Remarks',
-            slides: ['welcome_slide.md'],
-            duration: 10,
-            icon: 'welcome',
-          },
-          {
-            _id: `introductions-${ts}`,
-            session: 'Introductions',
-            slides: ['introductions_slide.md'],
-            duration: 15,
-            icon: 'people',
-          },
-          {
-            _id: `day-agenda-1-${ts}`,
-            session: 'Day 1 Agenda',
-            type: 'section',
-            duration: 5,
-            icon: 'list',
-          },
-          {
-            _id: `objectives-${ts}`,
-            session: 'Workshop Objectives',
-            slides: ['objectives_slide.md'],
-            duration: 10,
-            icon: 'target',
-          },
-          {
-            _id: `expectations-${ts}`,
-            session: 'Expectations',
-            slides: ['expectations_slide.md'],
-            duration: 10,
-            icon: 'clipboard',
-          },
-          {
-            _id: `expected-outputs-${ts}`,
-            session: 'Expected Outputs',
-            slides: ['expected_outputs_slide.md'],
-            duration: 10,
-            icon: 'output',
-          },
-          {
-            _id: `session-1-${ts}`,
-            session: 'Session 1',
-            duration: 60,
-            icon: 'presentation',
-          },
-          {
-            _id: `break-tea-morning-1-${ts}`,
-            session: 'Tea Break',
-            type: 'break',
-            duration: 15,
-          },
-          {
-            _id: `lunch-1-${ts}`,
-            session: 'Lunch Break',
-            type: 'break',
-            duration: 60,
-          },
-          {
-            _id: `day-end-1-${ts}`,
-            session: 'End of Day 1',
-            type: 'day_end',
-            slides: ['day_end.md'],
-            duration: 5,
-          },
-        ]
-      } else {
-        // Day 2+ has recap and standard structure
-        schedule[`day${d}`] = [
-          {
-            _id: `day-title-${d}-${ts}`,
-            session: `Day ${d}`,
-            type: 'day_title',
-            slides: ['day_title.md'],
-            duration: 0,
-          },
-          {
-            _id: `day-recap-${d}-${ts}`,
-            session: `Recap: Day ${d - 1}`,
-            type: 'day_recap',
-            duration: 10,
-          },
-          {
-            _id: `day-agenda-${d}-${ts}`,
-            session: `Day ${d} Agenda`,
-            type: 'section',
-            duration: 5,
-          },
-          {
-            _id: `session-${d}-1-${ts}`,
-            session: 'Session 1',
-            duration: 60,
-            icon: 'presentation',
-          },
-          {
-            _id: `break-tea-morning-${d}-${ts}`,
-            session: 'Tea Break',
-            type: 'break',
-            duration: 15,
-          },
-          {
-            _id: `lunch-${d}-${ts}`,
-            session: 'Lunch Break',
-            type: 'break',
-            duration: 60,
-          },
-          {
-            _id: `day-end-${d}-${ts}`,
-            session: `End of Day ${d}`,
-            type: 'day_end',
-            slides: ['day_end.md'],
-            duration: 5,
-          },
-        ]
+        ],
       }
+
+      const config = {
+        workshop: {
+          name: newWorkshop.name,
+          country: newWorkshop.country,
+          location: newWorkshop.location,
+          date: newWorkshop.date || '',
+          facilitators: '',
+          deckType: 'webinar' as const,
+          time: newWorkshop.time || '10:00',
+          duration: newWorkshop.duration || 90,
+        },
+        schedule,
+        content: {
+          modules: [],
+          custom_slides: [],
+        },
+      }
+
+      await createWorkshop(workshopId, config)
+    } else {
+      // ── Workshop creation (existing logic) ──
+      // Create initial schedule with empty days
+      const schedule: any = {
+        days: newWorkshop.days,
+        day_titles: {},
+        day_start_times: {},
+        day_end_times: {},
+      }
+
+      // Add starter sessions for each day
+      for (let d = 1; d <= newWorkshop.days; d++) {
+        schedule.day_start_times[d] = '09:00'
+        schedule.day_end_times[d] = '17:00'
+        schedule.day_titles[d] = ''
+
+        if (d === 1) {
+          // Day 1 has required opening sequence
+          schedule[`day${d}`] = [
+            {
+              _id: `title-slide-${ts}`,
+              session: newWorkshop.name || 'FASTR Workshop',
+              type: 'day_title',
+              slides: ['title_slide.md'],
+              duration: 0,
+              icon: 'cover',
+            },
+            {
+              _id: `welcome-${ts}`,
+              session: 'Welcome and Opening Remarks',
+              slides: ['welcome_slide.md'],
+              duration: 10,
+              icon: 'welcome',
+            },
+            {
+              _id: `introductions-${ts}`,
+              session: 'Introductions',
+              slides: ['introductions_slide.md'],
+              duration: 15,
+              icon: 'people',
+            },
+            {
+              _id: `day-agenda-1-${ts}`,
+              session: 'Day 1 Agenda',
+              type: 'section',
+              duration: 5,
+              icon: 'list',
+            },
+            {
+              _id: `objectives-${ts}`,
+              session: 'Workshop Objectives',
+              slides: ['objectives_slide.md'],
+              duration: 10,
+              icon: 'target',
+            },
+            {
+              _id: `expectations-${ts}`,
+              session: 'Expectations',
+              slides: ['expectations_slide.md'],
+              duration: 10,
+              icon: 'clipboard',
+            },
+            {
+              _id: `expected-outputs-${ts}`,
+              session: 'Expected Outputs',
+              slides: ['expected_outputs_slide.md'],
+              duration: 10,
+              icon: 'output',
+            },
+            {
+              _id: `session-1-${ts}`,
+              session: 'Session 1',
+              duration: 60,
+              icon: 'presentation',
+            },
+            {
+              _id: `break-tea-morning-1-${ts}`,
+              session: 'Tea Break',
+              type: 'break',
+              duration: 15,
+            },
+            {
+              _id: `lunch-1-${ts}`,
+              session: 'Lunch Break',
+              type: 'break',
+              duration: 60,
+            },
+            {
+              _id: `day-end-1-${ts}`,
+              session: 'End of Day 1',
+              type: 'day_end',
+              slides: ['day_end.md'],
+              duration: 5,
+            },
+          ]
+        } else {
+          // Day 2+ has recap and standard structure
+          schedule[`day${d}`] = [
+            {
+              _id: `day-title-${d}-${ts}`,
+              session: `Day ${d}`,
+              type: 'day_title',
+              slides: ['day_title.md'],
+              duration: 0,
+            },
+            {
+              _id: `day-recap-${d}-${ts}`,
+              session: `Recap: Day ${d - 1}`,
+              type: 'day_recap',
+              duration: 10,
+            },
+            {
+              _id: `day-agenda-${d}-${ts}`,
+              session: `Day ${d} Agenda`,
+              type: 'section',
+              duration: 5,
+            },
+            {
+              _id: `session-${d}-1-${ts}`,
+              session: 'Session 1',
+              duration: 60,
+              icon: 'presentation',
+            },
+            {
+              _id: `break-tea-morning-${d}-${ts}`,
+              session: 'Tea Break',
+              type: 'break',
+              duration: 15,
+            },
+            {
+              _id: `lunch-${d}-${ts}`,
+              session: 'Lunch Break',
+              type: 'break',
+              duration: 60,
+            },
+            {
+              _id: `day-end-${d}-${ts}`,
+              session: `End of Day ${d}`,
+              type: 'day_end',
+              slides: ['day_end.md'],
+              duration: 5,
+            },
+          ]
+        }
+      }
+
+      // Check for AI-generated content
+      const aiObjectives = sessionStorage.getItem('ai_objectives')
+      const aiExpectedOutputs = sessionStorage.getItem('ai_expected_outputs')
+      sessionStorage.removeItem('ai_objectives')
+      sessionStorage.removeItem('ai_expected_outputs')
+
+      const config = {
+        workshop: {
+          name: newWorkshop.name,
+          country: newWorkshop.country,
+          location: newWorkshop.location,
+          date: '',
+          facilitators: '',
+          objectives: aiObjectives || '',
+          expected_outputs: aiExpectedOutputs || '',
+        },
+        schedule,
+        content: {
+          modules: [],
+          custom_slides: [],
+        },
+      }
+
+      await createWorkshop(workshopId, config)
     }
 
-    // Check for AI-generated content
-    const aiObjectives = sessionStorage.getItem('ai_objectives')
-    const aiExpectedOutputs = sessionStorage.getItem('ai_expected_outputs')
-    sessionStorage.removeItem('ai_objectives')
-    sessionStorage.removeItem('ai_expected_outputs')
-
-    const config = {
-      workshop: {
-        name: newWorkshop.name,
-        country: newWorkshop.country,
-        location: newWorkshop.location,
-        date: '',
-        facilitators: '',
-        objectives: aiObjectives || '',
-        expected_outputs: aiExpectedOutputs || '',
-      },
-      schedule,
-      content: {
-        modules: [],
-        custom_slides: [],
-      },
-    }
-
-    await createWorkshop(workshopId, config)
     setShowCreateWorkshop(false)
     setShowWorkshopSelector(false)
-    setNewWorkshop({ name: '', country: '', location: '', days: 3 })
+    setNewWorkshop({ name: '', country: '', location: '', days: 3, date: '', time: '10:00', duration: 90 })
   }
 
   // Build deck
@@ -2830,10 +2972,10 @@ function App() {
               <p className="text-gray-500">{t('appSubtitle', contentLanguage)}</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-tour="landing-cards">
-              {/* Build Slide Deck */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-tour="landing-cards">
+              {/* Build Workshop Deck */}
               <button
-                onClick={() => setAppMode('workshop')}
+                onClick={() => { setPendingDeckType('workshop'); setAppMode('workshop') }}
                 className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-xl"
               >
                 <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary group-hover:scale-110 transition-all duration-200">
@@ -2842,6 +2984,20 @@ function App() {
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
                 <p className="text-gray-500 text-sm">
                   {t('buildSlideDeckDesc', contentLanguage)}
+                </p>
+              </button>
+
+              {/* Build Webinar Deck */}
+              <button
+                onClick={() => { setPendingDeckType('webinar'); setAppMode('workshop') }}
+                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-indigo-500/30 shadow-sm hover:shadow-xl"
+              >
+                <div className="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-500 group-hover:scale-110 transition-all duration-200">
+                  <Monitor className="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors" />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildWebinar', contentLanguage)}</h2>
+                <p className="text-gray-500 text-sm">
+                  {t('buildWebinarDesc', contentLanguage)}
                 </p>
               </button>
 
@@ -2901,12 +3057,18 @@ function App() {
                             key={workshop.id}
                             onClick={() => {
                               selectWorkshop(workshop.id)
+                              setPendingDeckType((workshop as any).deckType || 'workshop')
                               setAppMode('workshop')
                             }}
                             className="w-full px-4 py-2 pl-12 flex items-center gap-3 hover:bg-gray-100 transition-colors text-left"
                           >
                             <FileText className="w-4 h-4 text-gray-400" />
                             <span className="text-sm text-gray-700">{workshop.name}</span>
+                            {(workshop as any).deckType === 'webinar' && (
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-600 font-medium">
+                                {t('webinarBadge', contentLanguage)}
+                              </span>
+                            )}
                             {workshop.locked && <Lock className="w-3 h-3 text-amber-500 ml-auto" />}
                           </button>
                         ))}
@@ -2917,8 +3079,25 @@ function App() {
               </div>
             </div>
           )}
+          {/* Manage Storage link */}
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => setShowStorageManager(true)}
+              className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-fastr-primary transition-colors"
+            >
+              <HardDrive className="w-3.5 h-3.5" />
+              {t('manageStorage', contentLanguage)}
+            </button>
+          </div>
           </div>
         </div>
+        {showStorageManager && createPortal(
+          <StorageManager
+            language={contentLanguage}
+            onClose={() => setShowStorageManager(false)}
+          />,
+          document.body
+        )}
         <GuidedTour
           ref={landingTourRef}
           tour="landing"
@@ -3219,110 +3398,171 @@ function App() {
                     <div className="max-w-7xl mx-auto">
                       <h2 className="text-xl font-semibold mb-4 text-gray-800">
                         {currentConfig?.workshop?.name || 'Workshop'}
+                        {(currentConfig?.workshop as any)?.deckType === 'webinar' && (
+                          <span className="ml-2 text-xs px-2 py-0.5 rounded bg-indigo-100 text-indigo-600 font-medium align-middle">
+                            {t('webinarBadge', contentLanguage)}
+                          </span>
+                        )}
                       </h2>
 
-                      {/* Day columns - Kanban style */}
-                      <div className="flex gap-4 overflow-x-auto pb-4" data-tour="schedule-area">
-                        {Array.from({ length: currentConfig?.schedule?.days || 0 }).map((_, i) => {
-                          const dayNum = i + 1
-                          const dayKey = `day${dayNum}`
-                          const startTimeStr = currentConfig?.schedule?.day_start_times?.[dayNum] || '09:00'
-
-                          // Calculate cumulative times for each session
-                          let currentMinutes = parseInt(startTimeStr.split(':')[0]) * 60 + parseInt(startTimeStr.split(':')[1] || '0')
-                          const sessions = (currentConfig?.schedule?.[dayKey] || []).map(
-                            (s: any, idx: number) => {
-                              const sessionStart = currentMinutes
-                              currentMinutes += (s.duration || 0)
-                              const startHour = Math.floor(sessionStart / 60)
-                              const startMin = sessionStart % 60
-                              const endHour = Math.floor(currentMinutes / 60)
-                              const endMin = currentMinutes % 60
-                              return {
-                                ...s,
-                                _id: s._id || `${dayKey}-${idx}`,
-                                _startTime: `${startHour.toString().padStart(2, '0')}:${startMin.toString().padStart(2, '0')}`,
-                                _endTime: `${endHour.toString().padStart(2, '0')}:${endMin.toString().padStart(2, '0')}`,
-                              }
-                            }
+                      {(currentConfig?.workshop as any)?.deckType === 'webinar' ? (
+                        /* ── Webinar mode: single vertical slide list ── */
+                        (() => {
+                          const sessions = (currentConfig?.schedule?.day1 || []).map(
+                            (s: any, idx: number) => ({
+                              ...s,
+                              _id: s._id || `day1-${idx}`,
+                            })
                           )
-
                           return (
-                            <DroppableDayColumn key={dayNum} dayNum={dayNum}>
-                              {/* Day header */}
-                              <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
-                                <div className="flex items-start justify-between">
-                                  <h3 className="font-semibold text-white">
-                                    Day {dayNum}
-                                    {currentConfig?.schedule?.day_titles?.[dayNum] && (
-                                      <span className="text-white/60 font-normal ml-1">
-                                        - {currentConfig.schedule.day_titles[dayNum]}
-                                      </span>
-                                    )}
-                                  </h3>
-                                  {(currentConfig?.schedule?.days ?? 0) > 1 && (
-                                    <button
-                                      onClick={() => {
-                                        if (confirm(t('confirmDeleteDayMsg', contentLanguage).replace('{day}', String(dayNum)))) {
-                                          useWorkshopStore.getState().removeDay(dayNum)
-                                        }
-                                      }}
-                                      className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
-                                      title={`${t('deleteDay', contentLanguage)} ${dayNum}`}
-                                    >
-                                      <Trash2 className="w-4 h-4" />
-                                    </button>
-                                  )}
+                            <div className="max-w-2xl mx-auto" data-tour="schedule-area">
+                              <DroppableDayColumn dayNum={1}>
+                                <div className="p-3 space-y-2 min-h-[200px]">
+                                  <SortableContext
+                                    items={sessions.map((s: any) => s._id)}
+                                    strategy={verticalListSortingStrategy}
+                                  >
+                                    {sessions.map((session: any, idx: number) => (
+                                      <SortableSessionCard
+                                        key={session._id}
+                                        session={session}
+                                        index={idx}
+                                        dayNum={1}
+                                        totalDays={1}
+                                        onEdit={handleEditSession}
+                                        onMoveToDay={handleMoveToDay}
+                                      />
+                                    ))}
+                                  </SortableContext>
+
+                                  {/* Add slide button */}
+                                  <button
+                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
+                                    onClick={() => setAddSessionMenuDay(1)}
+                                    data-tour="add-session-btn"
+                                  >
+                                    <Plus className="w-4 h-4" />
+                                    <span className="text-sm">{t('addSlideToWebinar', contentLanguage)}</span>
+                                  </button>
                                 </div>
-                                {currentConfig?.schedule?.day_start_times?.[dayNum] && (
-                                  <div className="text-xs text-white/50 mt-0.5">
-                                    Starts at {currentConfig.schedule.day_start_times[dayNum]}
-                                  </div>
+                              </DroppableDayColumn>
+
+                              {/* Slide count + duration summary */}
+                              <div className="mt-3 text-center text-xs text-gray-400">
+                                {sessions.length} {t('webinarSlides', contentLanguage)}
+                                {(currentConfig?.workshop as any)?.duration && (
+                                  <span className="ml-2">
+                                    ({(currentConfig?.workshop as any).duration} min)
+                                  </span>
                                 )}
                               </div>
-
-                              {/* Sessions list */}
-                              <div className="p-3 space-y-2 min-h-[200px]">
-                                <SortableContext
-                                  items={sessions.map((s: any) => s._id)}
-                                  strategy={verticalListSortingStrategy}
-                                >
-                                  {sessions.map((session: any, idx: number) => (
-                                    <SortableSessionCard
-                                      key={session._id}
-                                      session={session}
-                                      index={idx}
-                                      dayNum={dayNum}
-                                      totalDays={currentConfig?.schedule?.days || 1}
-                                      onEdit={handleEditSession}
-                                      onMoveToDay={handleMoveToDay}
-                                    />
-                                  ))}
-                                </SortableContext>
-
-                                {/* Add session button */}
-                                <button
-                                  className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
-                                  onClick={() => setAddSessionMenuDay(dayNum)}
-                                  {...(dayNum === 1 ? { 'data-tour': 'add-session-btn' } : {})}
-                                >
-                                  <Plus className="w-4 h-4" />
-                                  <span className="text-sm">{t('addSession', contentLanguage)}</span>
-                                </button>
-                              </div>
-                            </DroppableDayColumn>
+                            </div>
                           )
-                        })}
+                        })()
+                      ) : (
+                        /* ── Workshop mode: Kanban day columns ── */
+                        <div className="flex gap-4 overflow-x-auto pb-4" data-tour="schedule-area">
+                          {Array.from({ length: currentConfig?.schedule?.days || 0 }).map((_, i) => {
+                            const dayNum = i + 1
+                            const dayKey = `day${dayNum}`
+                            const startTimeStr = currentConfig?.schedule?.day_start_times?.[dayNum] || '09:00'
 
-                        {/* Add Day button */}
-                        <button
-                          className="flex-shrink-0 w-64 h-32 rounded-xl border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex flex-col items-center justify-center gap-2"
-                          onClick={() => useWorkshopStore.getState().addDay()}
-                        >
-                          <Plus className="w-6 h-6" />
-                          <span className="font-medium">{t('addDay', contentLanguage)}</span>
-                        </button>
-                      </div>
+                            // Calculate cumulative times for each session
+                            let currentMinutes = parseInt(startTimeStr.split(':')[0]) * 60 + parseInt(startTimeStr.split(':')[1] || '0')
+                            const sessions = (currentConfig?.schedule?.[dayKey] || []).map(
+                              (s: any, idx: number) => {
+                                const sessionStart = currentMinutes
+                                currentMinutes += (s.duration || 0)
+                                const startHour = Math.floor(sessionStart / 60)
+                                const startMin = sessionStart % 60
+                                const endHour = Math.floor(currentMinutes / 60)
+                                const endMin = currentMinutes % 60
+                                return {
+                                  ...s,
+                                  _id: s._id || `${dayKey}-${idx}`,
+                                  _startTime: `${startHour.toString().padStart(2, '0')}:${startMin.toString().padStart(2, '0')}`,
+                                  _endTime: `${endHour.toString().padStart(2, '0')}:${endMin.toString().padStart(2, '0')}`,
+                                }
+                              }
+                            )
+
+                            return (
+                              <DroppableDayColumn key={dayNum} dayNum={dayNum}>
+                                {/* Day header */}
+                                <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
+                                  <div className="flex items-start justify-between">
+                                    <h3 className="font-semibold text-white">
+                                      Day {dayNum}
+                                      {currentConfig?.schedule?.day_titles?.[dayNum] && (
+                                        <span className="text-white/60 font-normal ml-1">
+                                          - {currentConfig.schedule.day_titles[dayNum]}
+                                        </span>
+                                      )}
+                                    </h3>
+                                    {(currentConfig?.schedule?.days ?? 0) > 1 && (
+                                      <button
+                                        onClick={() => {
+                                          if (confirm(t('confirmDeleteDayMsg', contentLanguage).replace('{day}', String(dayNum)))) {
+                                            useWorkshopStore.getState().removeDay(dayNum)
+                                          }
+                                        }}
+                                        className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
+                                        title={`${t('deleteDay', contentLanguage)} ${dayNum}`}
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </button>
+                                    )}
+                                  </div>
+                                  {currentConfig?.schedule?.day_start_times?.[dayNum] && (
+                                    <div className="text-xs text-white/50 mt-0.5">
+                                      Starts at {currentConfig.schedule.day_start_times[dayNum]}
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Sessions list */}
+                                <div className="p-3 space-y-2 min-h-[200px]">
+                                  <SortableContext
+                                    items={sessions.map((s: any) => s._id)}
+                                    strategy={verticalListSortingStrategy}
+                                  >
+                                    {sessions.map((session: any, idx: number) => (
+                                      <SortableSessionCard
+                                        key={session._id}
+                                        session={session}
+                                        index={idx}
+                                        dayNum={dayNum}
+                                        totalDays={currentConfig?.schedule?.days || 1}
+                                        onEdit={handleEditSession}
+                                        onMoveToDay={handleMoveToDay}
+                                      />
+                                    ))}
+                                  </SortableContext>
+
+                                  {/* Add session button */}
+                                  <button
+                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
+                                    onClick={() => setAddSessionMenuDay(dayNum)}
+                                    {...(dayNum === 1 ? { 'data-tour': 'add-session-btn' } : {})}
+                                  >
+                                    <Plus className="w-4 h-4" />
+                                    <span className="text-sm">{t('addSession', contentLanguage)}</span>
+                                  </button>
+                                </div>
+                              </DroppableDayColumn>
+                            )
+                          })}
+
+                          {/* Add Day button */}
+                          <button
+                            className="flex-shrink-0 w-64 h-32 rounded-xl border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex flex-col items-center justify-center gap-2"
+                            onClick={() => useWorkshopStore.getState().addDay()}
+                          >
+                            <Plus className="w-6 h-6" />
+                            <span className="font-medium">{t('addDay', contentLanguage)}</span>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </>
@@ -3400,7 +3640,10 @@ function App() {
           <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md mx-4">
             <div className="flex items-center justify-between px-5 py-4 border-b">
               <h2 className="font-semibold">
-                {showCreateWorkshop ? t('createNewWorkshop', contentLanguage) : t('selectWorkshop', contentLanguage)}
+                {showCreateWorkshop
+                  ? (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage))
+                  : (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('selectWorkshop', contentLanguage))
+                }
               </h2>
               <button
                 onClick={() => {
@@ -3410,6 +3653,9 @@ function App() {
                   setAiAnswers({})
                   setUploadFile(null)
                   setUploadText('')
+                  if (pendingDeckType === 'webinar' && !currentWorkshopId) {
+                    setAppMode('select')
+                  }
                 }}
                 aria-label="Close dialog"
                 className="text-gray-400 hover:text-gray-600"
@@ -3420,7 +3666,7 @@ function App() {
 
             {showCreateWorkshop ? (
               <div className="p-4">
-                {/* Mode toggle */}
+                {/* Mode toggle — AI + Upload + Manual for workshops, AI + Manual for webinars */}
                 <div className="flex gap-1 p-1 bg-gray-100 rounded-lg mb-4">
                   <button
                     onClick={() => setCreateMode('ai')}
@@ -3433,6 +3679,7 @@ function App() {
                     <Sparkles className="w-4 h-4" />
                     {t('aiSetup', contentLanguage)}
                   </button>
+                  {pendingDeckType !== 'webinar' && (
                   <button
                     onClick={() => setCreateMode('upload')}
                     className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
@@ -3444,6 +3691,7 @@ function App() {
                     <Upload className="w-4 h-4" />
                     {t('uploadOrPaste', contentLanguage)}
                   </button>
+                  )}
                   <button
                     onClick={() => setCreateMode('manual')}
                     className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
@@ -3519,14 +3767,14 @@ function App() {
                       /* ── Initial prompt phase ── */
                       <>
                         <p className="text-sm text-gray-600">
-                          {t('describeWorkshop', contentLanguage)}
+                          {pendingDeckType === 'webinar' ? t('describeWebinar', contentLanguage) : t('describeWorkshop', contentLanguage)}
                         </p>
                         <textarea
                           value={aiPrompt}
                           onChange={(e) => setAiPrompt(e.target.value)}
                           rows={4}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm"
-                          placeholder={t('aiPlaceholder', contentLanguage)}
+                          placeholder={pendingDeckType === 'webinar' ? t('webinarAiPlaceholder', contentLanguage) : t('aiPlaceholder', contentLanguage)}
                           disabled={aiGenerating}
                         />
                         <div className="flex gap-2">
@@ -3538,7 +3786,7 @@ function App() {
                             className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                             disabled={aiGenerating}
                           >
-                            {t('back', contentLanguage)}
+                            {pendingDeckType === 'webinar' ? t('cancel', contentLanguage) : t('back', contentLanguage)}
                           </button>
                           <button
                             onClick={handleAIGenerate}
@@ -3553,7 +3801,7 @@ function App() {
                             ) : (
                               <>
                                 <Sparkles className="w-4 h-4" />
-                                {t('generateWorkshop', contentLanguage)}
+                                {pendingDeckType === 'webinar' ? t('generateWebinar', contentLanguage) : t('generateWorkshop', contentLanguage)}
                               </>
                             )}
                           </button>
@@ -3666,14 +3914,17 @@ function App() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('workshopName', contentLanguage)} *
+                        {pendingDeckType === 'webinar' ? t('webinarName', contentLanguage) : t('workshopName', contentLanguage)} *
                       </label>
                       <input
                         type="text"
                         value={newWorkshop.name}
                         onChange={(e) => setNewWorkshop({ ...newWorkshop, name: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-                        placeholder={contentLanguage === 'fr' ? 'ex. Atelier de formation FASTR' : 'e.g., FASTR Training Workshop'}
+                        placeholder={pendingDeckType === 'webinar'
+                          ? (contentLanguage === 'fr' ? 'ex. Webinaire FASTR - Introduction' : 'e.g., FASTR Webinar - Introduction')
+                          : (contentLanguage === 'fr' ? 'ex. Atelier de formation FASTR' : 'e.g., FASTR Training Workshop')
+                        }
                       />
                     </div>
 
@@ -3690,42 +3941,98 @@ function App() {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">{t('city', contentLanguage)}</label>
-                      <input
-                        type="text"
-                        value={newWorkshop.location}
-                        onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-                        placeholder={contentLanguage === 'fr' ? 'ex. Dakar' : 'e.g., Nairobi'}
-                      />
-                    </div>
+                    {pendingDeckType === 'webinar' ? (
+                      <>
+                        {/* Webinar-specific fields */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              {t('webinarDate', contentLanguage)}
+                            </label>
+                            <input
+                              type="date"
+                              value={newWorkshop.date}
+                              onChange={(e) => setNewWorkshop({ ...newWorkshop, date: e.target.value })}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              {t('webinarTime', contentLanguage)}
+                            </label>
+                            <input
+                              type="time"
+                              value={newWorkshop.time}
+                              onChange={(e) => setNewWorkshop({ ...newWorkshop, time: e.target.value })}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            {t('webinarDuration', contentLanguage)}
+                          </label>
+                          <select
+                            value={newWorkshop.duration}
+                            onChange={(e) => setNewWorkshop({ ...newWorkshop, duration: parseInt(e.target.value) })}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                          >
+                            {[30, 45, 60, 90, 120].map(d => (
+                              <option key={d} value={d}>{d} min</option>
+                            ))}
+                          </select>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Workshop-specific fields */}
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">{t('city', contentLanguage)}</label>
+                          <input
+                            type="text"
+                            value={newWorkshop.location}
+                            onChange={(e) => setNewWorkshop({ ...newWorkshop, location: e.target.value })}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                            placeholder={contentLanguage === 'fr' ? 'ex. Dakar' : 'e.g., Nairobi'}
+                          />
+                        </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('numberOfDays', contentLanguage)}
-                      </label>
-                      <select
-                        value={newWorkshop.days}
-                        onChange={(e) =>
-                          setNewWorkshop({ ...newWorkshop, days: parseInt(e.target.value) })
-                        }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-                      >
-                        {[1, 2, 3, 4, 5].map((d) => (
-                          <option key={d} value={d}>
-                            {d} {contentLanguage === 'fr' ? (d > 1 ? 'jours' : 'jour') : (d > 1 ? 'days' : 'day')}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            {t('numberOfDays', contentLanguage)}
+                          </label>
+                          <select
+                            value={newWorkshop.days}
+                            onChange={(e) =>
+                              setNewWorkshop({ ...newWorkshop, days: parseInt(e.target.value) })
+                            }
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
+                          >
+                            {[1, 2, 3, 4, 5].map((d) => (
+                              <option key={d} value={d}>
+                                {d} {contentLanguage === 'fr' ? (d > 1 ? 'jours' : 'jour') : (d > 1 ? 'days' : 'day')}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </>
+                    )}
 
                     <div className="flex gap-2 pt-2">
                       <button
-                        onClick={() => setShowCreateWorkshop(false)}
+                        onClick={() => {
+                          if (pendingDeckType === 'webinar') {
+                            // For webinars, close dialog and go back to landing
+                            setShowWorkshopSelector(false)
+                            setShowCreateWorkshop(false)
+                            setAppMode('select')
+                          } else {
+                            setShowCreateWorkshop(false)
+                          }
+                        }}
                         className="flex-1 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                       >
-                        {t('back', contentLanguage)}
+                        {pendingDeckType === 'webinar' ? t('cancel', contentLanguage) : t('back', contentLanguage)}
                       </button>
                       <button
                         onClick={handleCreateWorkshop}
@@ -3741,20 +4048,32 @@ function App() {
               <div className="p-4">
                 {/* Create New button */}
                 <button
-                  onClick={() => setShowCreateWorkshop(true)}
+                  onClick={() => {
+                    setShowCreateWorkshop(true)
+                    if (pendingDeckType === 'webinar') setCreateMode('manual')
+                  }}
                   className="w-full mb-4 py-3 px-4 rounded-lg border-2 border-dashed border-fastr-primary text-fastr-primary hover:bg-fastr-primary/5 transition-colors flex items-center justify-center gap-2"
                 >
                   <Plus className="w-5 h-5" />
-                  <span className="font-medium">{t('createNewWorkshop', contentLanguage)}</span>
+                  <span className="font-medium">
+                    {pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage)}
+                  </span>
                 </button>
 
-                {/* Existing workshops */}
+                {/* Existing workshops — filtered by deck type */}
+                {(() => {
+                  const filteredWorkshops = workshops.filter((w: any) =>
+                    pendingDeckType === 'webinar'
+                      ? w.deckType === 'webinar'
+                      : w.deckType !== 'webinar'
+                  )
+                  return (
                 <div className="max-h-72 overflow-auto">
-                  {workshops.length === 0 ? (
+                  {filteredWorkshops.length === 0 ? (
                     <p className="text-gray-500 text-center py-4">{t('noWorkshopsFound', contentLanguage)}</p>
                   ) : (
                     <div className="space-y-2">
-                      {workshops.map((workshop) => (
+                      {filteredWorkshops.map((workshop) => (
                         <div
                           key={workshop.id}
                           className={`group flex items-center gap-2 p-3 rounded-lg border-2 transition-colors ${
@@ -3823,6 +4142,8 @@ function App() {
                     </div>
                   )}
                 </div>
+                  )
+                })()}
               </div>
             )}
           </div>
@@ -4260,6 +4581,7 @@ function App() {
       {addSessionMenuDay !== null && (
         <AddSessionMenu
           dayNum={addSessionMenuDay}
+          isWebinar={(currentConfig?.workshop as any)?.deckType === 'webinar'}
           onClose={() => setAddSessionMenuDay(null)}
           onAddSession={(session) => addSession(addSessionMenuDay, session)}
           onAddToExistingSession={(sessionIdx, topic) => {

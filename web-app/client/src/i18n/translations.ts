@@ -11,9 +11,9 @@ export const translations = {
 
     // Mode cards
     buildSlideDeck: 'Build Slide Deck',
-    buildSlideDeckDesc: 'Build a complete slide deck for a workshop or training event',
+    buildSlideDeckDesc: 'Plan a multi-day training with sessions, breaks, and recaps',
     quickExport: 'Quick Export',
-    quickExportDesc: 'Select slides from the library and export to PPTX or PDF',
+    quickExportDesc: 'Select entire modules and export directly to PPTX or PDF',
     browseLibrary: 'Browse Library',
     browseLibraryDesc: 'Explore and preview slides from the content library',
 
@@ -309,6 +309,23 @@ export const translations = {
     // AI warnings
     scheduleOverflowWarning: 'Some days may run long — review the schedule and adjust',
 
+    // Webinar mode
+    buildWebinar: 'Build Webinar Deck',
+    buildWebinarDesc: 'Curate individual slides for a webinar or short presentation',
+    webinarName: 'Webinar Name',
+    webinarEventName: 'Event Name',
+    webinarDate: 'Date',
+    webinarTime: 'Start Time',
+    webinarDuration: 'Duration (minutes)',
+    webinarBadge: 'Webinar',
+    workshopBadge: 'Workshop',
+    addSlideToWebinar: 'Add Slide',
+    webinarSlides: 'Slides',
+    describeWebinar: 'Describe your webinar and AI will build it for you.',
+    webinarAiPlaceholder: 'Example: 90-minute webinar on FASTR for Senegal health analysts. Focus on data quality and the analytics platform. Include interactive moments.',
+    generateWebinar: 'Generate Webinar',
+    webinarAndEngagement: 'Webinar & Engagement',
+
     // Slide theme
     slideTheme: 'Slide Theme',
     themeClassic: 'Classic',
@@ -368,6 +385,28 @@ export const translations = {
     externalHelpText: 'Each PDF page becomes an image slide in your deck. Use this to include existing presentations alongside FASTR content.',
     externalPages: 'pages',
 
+    // Storage manager
+    manageStorage: 'Manage Storage',
+    totalStorage: 'Total storage',
+    generatedExports: 'Generated exports',
+    exportCache: 'Export cache',
+    exportCacheEmpty: 'No cached exports',
+    externalDecks: 'External decks',
+    importedModules: 'Imported modules',
+    items: 'items',
+    confirmClearExports: 'Clear export cache? You can re-export anytime.',
+    confirmClearExternalDecks: 'Delete all external decks?',
+    confirmClearImportedModules: 'Delete all imported modules?',
+    confirmDeleteItem: 'Delete this item?',
+    confirmDeleteGroup: 'Delete all exports in this group?',
+    noItems: 'No items',
+    workshopDecks: 'Workshop decks',
+    quickExports: 'Quick exports',
+    libraryExports: 'Library exports',
+    moduleExports: 'Module exports',
+    otherExports: 'Other',
+    deleteGroup: 'Delete all',
+
     // Accessibility
     dismissError: 'Dismiss error',
     closePanel: 'Close panel',
@@ -405,9 +444,9 @@ export const translations = {
 
     // Mode cards
     buildSlideDeck: 'Créer un diaporama',
-    buildSlideDeckDesc: 'Créez un diaporama complet pour un atelier ou une formation',
+    buildSlideDeckDesc: 'Planifiez une formation multi-jours avec sessions, pauses et récaps',
     quickExport: 'Export rapide',
-    quickExportDesc: 'Sélectionnez des diapositives et exportez en PPTX ou PDF',
+    quickExportDesc: 'Sélectionnez des modules entiers et exportez directement en PPTX ou PDF',
     browseLibrary: 'Parcourir la bibliothèque',
     browseLibraryDesc: 'Explorez et prévisualisez les diapositives de la bibliothèque',
 
@@ -703,6 +742,23 @@ export const translations = {
     // AI warnings
     scheduleOverflowWarning: 'Certaines journées pourraient dépasser l\'horaire — vérifiez le programme',
 
+    // Webinar mode
+    buildWebinar: 'Créer un diaporama webinaire',
+    buildWebinarDesc: 'Sélectionnez des diapositives individuelles pour un webinaire ou une courte présentation',
+    webinarName: 'Nom du webinaire',
+    webinarEventName: 'Nom de l\'événement',
+    webinarDate: 'Date',
+    webinarTime: 'Heure de début',
+    webinarDuration: 'Durée (minutes)',
+    webinarBadge: 'Webinaire',
+    workshopBadge: 'Atelier',
+    addSlideToWebinar: 'Ajouter une diapositive',
+    webinarSlides: 'Diapositives',
+    describeWebinar: 'Décrivez votre webinaire et l\'IA le construira pour vous.',
+    webinarAiPlaceholder: 'Exemple : Webinaire de 90 minutes sur FASTR pour les analystes de santé du Sénégal. Focus sur la qualité des données et la plateforme analytique. Inclure des moments interactifs.',
+    generateWebinar: 'Générer le webinaire',
+    webinarAndEngagement: 'Webinaire & Engagement',
+
     // Slide theme
     slideTheme: 'Thème des diapositives',
     themeClassic: 'Classique',
@@ -761,6 +817,28 @@ export const translations = {
     externalPagesImported: 'pages ajoutées comme diapositives image',
     externalHelpText: 'Chaque page du PDF devient une diapositive image dans votre diaporama. Utilisez cette option pour inclure des présentations existantes avec le contenu FASTR.',
     externalPages: 'pages',
+
+    // Storage manager
+    manageStorage: 'Gérer le stockage',
+    totalStorage: 'Stockage total',
+    generatedExports: 'Exports générés',
+    exportCache: 'Cache d\'exports',
+    exportCacheEmpty: 'Aucun export en cache',
+    externalDecks: 'Présentations externes',
+    importedModules: 'Modules importés',
+    items: 'éléments',
+    confirmClearExports: 'Vider le cache d\'exports ? Vous pouvez re-exporter à tout moment.',
+    confirmClearExternalDecks: 'Supprimer toutes les présentations externes ?',
+    confirmClearImportedModules: 'Supprimer tous les modules importés ?',
+    confirmDeleteItem: 'Supprimer cet élément ?',
+    confirmDeleteGroup: 'Supprimer tous les exports de ce groupe ?',
+    noItems: 'Aucun élément',
+    workshopDecks: 'Présentations d\'atelier',
+    quickExports: 'Exports rapides',
+    libraryExports: 'Exports bibliothèque',
+    moduleExports: 'Exports de modules',
+    otherExports: 'Autres',
+    deleteGroup: 'Tout supprimer',
 
     // Accessibility
     dismissError: 'Fermer l\'erreur',

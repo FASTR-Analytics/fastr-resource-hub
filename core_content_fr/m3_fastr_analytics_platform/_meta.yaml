@@ -33,3 +33,7 @@ slides:
   variant: full
   title: Prise en main de la plateforme
   status: new
+- file: m3_5_roadmap_2026.md
+  order: 5
+  variant: full
+  title: 'Feuille de route de la plateforme : ce qui arrive en 2026 et au-delà'
