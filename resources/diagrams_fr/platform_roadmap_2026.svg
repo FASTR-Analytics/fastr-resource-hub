@@ -30,34 +30,34 @@
   <circle class="dot" cx="540" cy="55" r="8"/>
   <text class="year" x="540" y="30">2027</text>
 
-  <circle class="dot-future" cx="720" cy="55" r="8"/>
-  <text class="year" x="720" y="30">2028+</text>
+  <circle class="dot-future" cx="680" cy="55" r="8"/>
+  <text class="year" x="680" y="30">2028+</text>
 
   <!-- Phase 1: Test at scale -->
   <rect class="box phase" x="40" y="80" width="210" height="125"/>
-  <text class="phase-lbl" x="60" y="103">Tester à grande échelle</text>
-  <text class="item" x="60" y="125">Retours des équipes MdS de 20+ pays</text>
-  <text class="item" x="60" y="143">Identifier ce qui fonctionne</text>
-  <text class="item" x="60" y="161">Prioriser les améliorations</text>
-  <line x1="145" y1="63" x2="145" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <text class="phase-lbl" x="145" y="103" text-anchor="middle">Tester à grande échelle</text>
+  <text class="item" x="145" y="125" text-anchor="middle">Retours des équipes MdS de 20+ pays</text>
+  <text class="item" x="145" y="143" text-anchor="middle">Identifier ce qui fonctionne</text>
+  <text class="item" x="145" y="161" text-anchor="middle">Prioriser les améliorations</text>
+  <line x1="120" y1="63" x2="120" y2="80" stroke="#09544F" stroke-width="1.5"/>
 
   <!-- Phase 2: Learn & refine -->
   <rect class="box phase" x="265" y="80" width="210" height="125"/>
-  <text class="phase-lbl" x="285" y="103">Apprendre et affiner</text>
-  <text class="item" x="285" y="125">IA plus précise</text>
-  <text class="item" x="285" y="143">Interface plus claire</text>
-  <text class="item" x="285" y="161">Workflows guidés</text>
-  <text class="item" x="285" y="179">Nouvelles sources (SIGL, SMDPN)</text>
-  <line x1="370" y1="63" x2="370" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <text class="phase-lbl" x="370" y="103" text-anchor="middle">Apprendre et affiner</text>
+  <text class="item" x="370" y="125" text-anchor="middle">IA plus précise</text>
+  <text class="item" x="370" y="143" text-anchor="middle">Interface plus claire</text>
+  <text class="item" x="370" y="161" text-anchor="middle">Parcours guidés</text>
+  <text class="item" x="370" y="179" text-anchor="middle">Nouvelles sources (SIGL, SMDPN)</text>
+  <line x1="330" y1="63" x2="330" y2="80" stroke="#09544F" stroke-width="1.5"/>
 
   <!-- Phase 3: Scale & automate -->
   <rect class="box phase-future" x="490" y="80" width="270" height="125"/>
-  <text class="phase-lbl" x="510" y="103">Déployer et automatiser</text>
-  <text class="item" x="510" y="125">Agents IA pour suivi automatisé</text>
-  <text class="item" x="510" y="143">Données intégrées inter-systèmes</text>
-  <text class="item" x="510" y="161">Configuration libre-service pays</text>
-  <text class="item" x="510" y="179">Données côté demande</text>
-  <line x1="625" y1="63" x2="625" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text class="phase-lbl" x="625" y="103" text-anchor="middle">Déployer et automatiser</text>
+  <text class="item" x="625" y="125" text-anchor="middle">Agents IA pour suivi automatisé</text>
+  <text class="item" x="625" y="143" text-anchor="middle">Données intégrées inter-systèmes</text>
+  <text class="item" x="625" y="161" text-anchor="middle">Configuration libre-service pays</text>
+  <text class="item" x="625" y="179" text-anchor="middle">Données côté demande</text>
+  <line x1="540" y1="63" x2="540" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
 
   <!-- Bottom bar: guiding principle -->
   <rect class="box" x="40" y="230" width="720" height="40" fill="#09544F" stroke="#073B38" rx="10"/>

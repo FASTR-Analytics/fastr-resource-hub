@@ -87,6 +87,10 @@ slides:
   order: 0
   variant: condensed
   title: Outlier detection output
+- file: m4_s0_dqa_what_we_check.md
+  order: 0.5
+  variant: condensed
+  title: 'Data quality: what does FASTR check?'
 - file: m4_s1_dqa_pipeline_overview.md
   order: 1
   variant: condensed

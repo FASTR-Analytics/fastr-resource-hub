@@ -1,13 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
-  <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
-    </filter>
-  </defs>
 
   <!-- Step 1 -->
   <g transform="translate(20, 30)">
-    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
     <circle cx="100" cy="50" r="24" fill="#09544F"/>
     <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">1</text>
     <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Que se passe-t-il ?</text>
@@ -23,7 +18,7 @@
 
   <!-- Step 2 -->
   <g transform="translate(250, 30)">
-    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
     <circle cx="100" cy="50" r="24" fill="#0C716B"/>
     <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">2</text>
     <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Pourquoi est-ce</text>
@@ -39,7 +34,7 @@
 
   <!-- Step 3 -->
   <g transform="translate(480, 30)">
-    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
     <circle cx="100" cy="50" r="24" fill="#1F9A9C"/>
     <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">3</text>
     <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Que devons-nous</text>

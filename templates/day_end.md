@@ -6,7 +6,7 @@ paginate: true
 
 <!-- _class: section-cover -->
 
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
 # Key messages and wrap-up
 
@@ -16,7 +16,7 @@ paginate: true
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
-![w:200](../resources/icons/communication.png)
+![w:200](../../resources/icons/communication.png)
 
 </div>
 

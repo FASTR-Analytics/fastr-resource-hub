@@ -14,6 +14,6 @@ Quelles questions sur FASTR souhaitez-vous voir abordées ?
 
 *Nous reverrons ces attentes le jour {{LAST_DAY}} pour vérifier si elles ont été satisfaites.*
 
-![w:120](../resources/icons/pinned-notes.png)
+![w:120](../../resources/icons/pinned-notes.png)
 
 ---

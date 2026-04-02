@@ -30,34 +30,34 @@
   <circle class="dot" cx="540" cy="55" r="8"/>
   <text class="year" x="540" y="30">2027</text>
 
-  <circle class="dot-future" cx="720" cy="55" r="8"/>
-  <text class="year" x="720" y="30">2028+</text>
+  <circle class="dot-future" cx="680" cy="55" r="8"/>
+  <text class="year" x="680" y="30">2028+</text>
 
   <!-- Phase 1: Test at scale -->
   <rect class="box phase" x="40" y="80" width="210" height="125"/>
-  <text class="phase-lbl" x="60" y="103">Test at scale</text>
-  <text class="item" x="60" y="125">MoH feedback from 20+ countries</text>
-  <text class="item" x="60" y="143">Identify what works well</text>
-  <text class="item" x="60" y="161">Prioritize improvements</text>
-  <line x1="145" y1="63" x2="145" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <text class="phase-lbl" x="145" y="103" text-anchor="middle">Test at scale</text>
+  <text class="item" x="145" y="125" text-anchor="middle">MoH feedback from 20+ countries</text>
+  <text class="item" x="145" y="143" text-anchor="middle">Identify what works well</text>
+  <text class="item" x="145" y="161" text-anchor="middle">Prioritize improvements</text>
+  <line x1="120" y1="63" x2="120" y2="80" stroke="#09544F" stroke-width="1.5"/>
 
   <!-- Phase 2: Learn & refine -->
   <rect class="box phase" x="265" y="80" width="210" height="125"/>
-  <text class="phase-lbl" x="285" y="103">Learn and refine</text>
-  <text class="item" x="285" y="125">Smarter AI responses</text>
-  <text class="item" x="285" y="143">Clearer interface</text>
-  <text class="item" x="285" y="161">Guided workflows</text>
-  <text class="item" x="285" y="179">New data sources (LMIS, MPDSR)</text>
-  <line x1="370" y1="63" x2="370" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <text class="phase-lbl" x="370" y="103" text-anchor="middle">Learn and refine</text>
+  <text class="item" x="370" y="125" text-anchor="middle">Smarter AI responses</text>
+  <text class="item" x="370" y="143" text-anchor="middle">Clearer interface</text>
+  <text class="item" x="370" y="161" text-anchor="middle">Guided workflows</text>
+  <text class="item" x="370" y="179" text-anchor="middle">New data sources (LMIS, MPDSR)</text>
+  <line x1="330" y1="63" x2="330" y2="80" stroke="#09544F" stroke-width="1.5"/>
 
   <!-- Phase 3: Scale & automate -->
   <rect class="box phase-future" x="490" y="80" width="270" height="125"/>
-  <text class="phase-lbl" x="510" y="103">Scale and automate</text>
-  <text class="item" x="510" y="125">AI agents for automated monitoring</text>
-  <text class="item" x="510" y="143">Integrated cross-system data</text>
-  <text class="item" x="510" y="161">Country self-service configuration</text>
-  <text class="item" x="510" y="179">Demand-side data integration</text>
-  <line x1="625" y1="63" x2="625" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text class="phase-lbl" x="625" y="103" text-anchor="middle">Scale and automate</text>
+  <text class="item" x="625" y="125" text-anchor="middle">AI agents for automated monitoring</text>
+  <text class="item" x="625" y="143" text-anchor="middle">Integrated cross-system data</text>
+  <text class="item" x="625" y="161" text-anchor="middle">Country self-service configuration</text>
+  <text class="item" x="625" y="179" text-anchor="middle">Demand-side data integration</text>
+  <line x1="540" y1="63" x2="540" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
 
   <!-- Bottom bar: guiding principle -->
   <rect class="box" x="40" y="230" width="720" height="40" fill="#09544F" stroke="#073B38" rx="10"/>

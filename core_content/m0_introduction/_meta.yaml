@@ -31,6 +31,14 @@ slides:
   order: 5
   variant: full
   title: 'Data triangulation: bringing together multiple sources'
+- file: m0_5a_why_fastr.md
+  order: 5.01
+  variant: full
+  title: Why FASTR?
+- file: m0_5b_disruptions_text.md
+  order: 5.02
+  variant: full
+  title: Context
 - file: m0_6_disruptions_context.md
   order: 6
   variant: full

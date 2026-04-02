@@ -8,6 +8,6 @@ paginate: true
 
 # Introductions
 
-![w:120](../resources/icons/people_group.svg)
+![w:120](../../resources/icons/people_group.svg)
 
 ---

@@ -1,16 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300">
-  <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
-    </filter>
-  </defs>
 
   <!-- Title -->
   <text x="350" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#09544F">Cascade de services : chaque étape perd des patientes</text>
 
   <!-- Step 1: CPN1 -->
   <g transform="translate(30, 50)">
-    <rect x="0" y="0" width="140" height="160" rx="10" fill="#09544F" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="140" height="160" rx="10" fill="#09544F"/>
     <text x="70" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#fff">CPN1</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#CAE6E9">Première visite prénatale</text>
     <line x1="20" y1="70" x2="120" y2="70" stroke="#1F9A9C" stroke-width="1"/>
@@ -29,7 +24,7 @@
 
   <!-- Step 2: CPN4 -->
   <g transform="translate(195, 60)">
-    <rect x="0" y="0" width="130" height="140" rx="10" fill="#0C716B" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="130" height="140" rx="10" fill="#0C716B"/>
     <text x="65" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#fff">CPN4</text>
     <text x="65" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#CAE6E9">Quatrième visite</text>
     <line x1="15" y1="62" x2="115" y2="62" stroke="#1F9A9C" stroke-width="1"/>
@@ -48,7 +43,7 @@
 
   <!-- Step 3: Accouchement -->
   <g transform="translate(350, 70)">
-    <rect x="0" y="0" width="125" height="130" rx="10" fill="#1F9A9C" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="125" height="130" rx="10" fill="#1F9A9C"/>
     <text x="62" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#fff">Accouchement</text>
     <text x="62" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#E8F4F3">En établissement</text>
     <line x1="15" y1="62" x2="110" y2="62" stroke="#0C716B" stroke-width="1"/>
@@ -67,7 +62,7 @@
 
   <!-- Step 4: CPoN -->
   <g transform="translate(500, 80)">
-    <rect x="0" y="0" width="115" height="120" rx="10" fill="#CAE6E9" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="115" height="120" rx="10" fill="#CAE6E9"/>
     <text x="58" y="28" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">CPoN</text>
     <text x="58" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#0C716B">Soins postnatals</text>
     <line x1="12" y1="58" x2="103" y2="58" stroke="#0C716B" stroke-width="1"/>

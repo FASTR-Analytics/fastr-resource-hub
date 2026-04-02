@@ -6,7 +6,7 @@ paginate: true
 
 <!-- _class: section-cover -->
 
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
 # {{SECTION_TITLE}}
 

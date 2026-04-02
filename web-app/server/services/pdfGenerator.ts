@@ -43,25 +43,21 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
 
     // Theme path — load all theme files so Marp CLI can resolve any theme
     const themeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
-    const themePath = path.join(REPO_ROOT, 'fastr-theme.css')
 
-    // Build args
+    // Build args — use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
+    const themePaths = themeFiles
+      .map(tf => path.join(REPO_ROOT, tf))
+      .filter(tp => fs.existsSync(tp))
+
     const args = [
       '--no-config',
       '--html',
       '--pdf',
       '--allow-local-files',
-      mdPath,
+      ...(themePaths.length > 0 ? ['--theme-set', ...themePaths] : []),
+      '--', mdPath,
       '-o', pdfPath,
     ]
-
-    // Add all theme files so Marp CLI can resolve any theme referenced in frontmatter
-    for (const tf of themeFiles) {
-      const tp = path.join(REPO_ROOT, tf)
-      if (fs.existsSync(tp)) {
-        args.unshift('--theme', tp)
-      }
-    }
 
     const marpProcess = spawn(marpPath, args, {
       cwd: REPO_ROOT,
@@ -133,21 +129,19 @@ export async function generateHTML(mdPath: string, htmlPath: string): Promise<vo
 
     const htmlThemeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
 
+    // Use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
+    const htmlThemePaths = htmlThemeFiles
+      .map(tf => path.join(REPO_ROOT, tf))
+      .filter(tp => fs.existsSync(tp))
+
     const args = [
       '--no-config',
       '--html',
       '--allow-local-files',
-      mdPath,
+      ...(htmlThemePaths.length > 0 ? ['--theme-set', ...htmlThemePaths] : []),
+      '--', mdPath,
       '-o', htmlPath,
     ]
-
-    // Add all theme files so Marp CLI can resolve any theme referenced in frontmatter
-    for (const tf of htmlThemeFiles) {
-      const tp = path.join(REPO_ROOT, tf)
-      if (fs.existsSync(tp)) {
-        args.unshift('--theme', tp)
-      }
-    }
 
     const marpProcess = spawn(marpPath, args, {
       cwd: REPO_ROOT,

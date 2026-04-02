@@ -15,6 +15,10 @@ slides:
   order: 3
   variant: full
   title: Completeness adjustment methodology
+- file: m5_s0_adjustment_how_it_works.md
+  order: 0
+  variant: condensed
+  title: 'Data correction: how FASTR fixes problems'
 - file: m5_s1_dq_adjustment_overview.md
   order: 1
   variant: condensed

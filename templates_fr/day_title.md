@@ -6,8 +6,8 @@ paginate: true
 
 <!-- _class: section-cover -->
 
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
-# Jour {{DAY_NUMBER}}
+# {{DAY_TITLE}}
 
 ---

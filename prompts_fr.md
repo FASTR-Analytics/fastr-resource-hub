@@ -1170,3 +1170,468 @@ TOUJOURS utiliser l'outil ask_user_questions (pas une question en texte libre) p
 
 Après la dernière diapositive, confirmer : « Toutes les diapositives ont été révisées. »
 ```
+
+## Prompt 6 : Rapport trimestriel universel
+
+```prompt
+Instructions universelles pour la génération du rapport trimestriel FASTR
+
+CONTEXTE : Ces instructions s'appliquent à tous les pays et toutes les langues. Le rapport doit être généré dans la langue appropriée selon le contexte du pays (français pour les pays francophones, anglais pour les pays anglophones).
+
+ÉTAPE 1 : VÉRIFICATIONS INITIALES ET INFORMATIONS DE BASE
+
+1.1 Vérifier le mode d'édition
+- Confirmer que l'utilisateur est en mode editing_slide_deck
+- Sinon, demander à l'utilisateur de créer un nouveau slide deck ou d'en ouvrir un existant
+
+1.2 Collecter les informations de base
+Utiliser ask_user_questions pour poser une question à la fois, dans cet ordre :
+
+Question 1 : Période d'analyse
+- Demander : « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple : janvier 2023 à septembre 2025) »
+- Convertir la réponse au format period_id :
+  - Date de début → valeur minimale : [YEAR][MONTH] sous forme de nombre à 6 chiffres (par exemple : janvier 2025 = 202501)
+  - Date de fin → valeur maximale : [YEAR][MONTH] sous forme de nombre à 6 chiffres (par exemple : décembre 2025 = 202512)
+- Conserver ces valeurs pour une utilisation ultérieure dans tous les filtres de période
+
+Question 2 : Sous-titre de couverture
+- Proposer des options basées sur la période d'analyse, par exemple :
+  - Le trimestre concerné (par exemple : « T4 2025 »)
+  - Les mois inclus (par exemple : « Octobre–décembre 2025 »)
+  - Permettre à l'utilisateur de saisir son propre texte
+
+1.3 Générer la diapositive de couverture
+
+Titre :
+- Français : « Analyse de l'utilisation des services au/à/aux [PAYS] »
+- Anglais : « [COUNTRY] - Service Utilization Analysis »
+- Adapter l'article selon le pays (au Sénégal, à Madagascar, aux Philippines, etc.)
+
+Sous-titre :
+- Utiliser la réponse de l'utilisateur à la Question 2
+
+Date :
+- Inclure la date de génération de l'analyse (mois et année en cours)
+- Format français : « Analyse générée en mars 2026 »
+- Format anglais : « Analysis generated in March 2026 »
+
+ÉTAPE 2 : DÉCOUVERTE ET ORGANISATION DES INDICATEURS
+
+2.1 Interroger la plateforme
+- Appeler get_available_metrics pour récupérer tous les indicateurs disponibles
+- Pour chaque indicateur, appeler get_metric_data avec la période d'analyse pour vérifier qu'il contient des données
+- Ne conserver que les indicateurs ayant des données réelles pour la période d'analyse
+
+2.2 Identifier les indicateurs disponibles
+- Lire les valeurs indicator_common_id et leurs libellés depuis la plateforme
+- Ne JAMAIS supposer une liste fixe d'indicateurs — chaque pays a ses propres codes et libellés
+- Créer une liste complète : identifiant + libellé pour chaque indicateur ayant des données
+
+2.3 Proposer des regroupements
+Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les catégories ci-dessous comme guide de départ, mais adapter en fonction de ce qui existe réellement :
+
+Groupes de services courants :
+- Soins prénatals : indicateurs liés aux visites CPN (par exemple : anc1, anc4, anc_trimester1, syphilis_tested_anc)
+- Accouchements et soins postnatals : accouchements en structure, accouchement assisté, CPoN, césariennes (par exemple : delivery, sba, pnc1_mother, pnc1_newborn, csection)
+- Vaccination : vaccins (par exemple : bcg, penta1, penta3, measles1, measles2, opv1, rr1, fully_immunized)
+- Planification familiale : conseil PF, nouveaux utilisateurs, utilisateurs continus (par exemple : fp_new, fp_new_and_cont, fp_counseled, new_fp)
+- Planification familiale des adolescents : si des indicateurs PF spécifiques aux adolescents existent, les regrouper séparément (par exemple : fp_adolescent_counseled, fp_adolescent_new)
+- Paludisme : tests, positivité, traitement (par exemple : malaria_tested, malaria_confirmed, malaria_treated, mal_positive)
+- Services généraux / Consultations externes : visites ambulatoires (par exemple : opd, opd_under5, opd_over5)
+- VIH/TB : dépistage VIH, traitement ARV, cas de TB (par exemple : hiv_tested, hiv_treated, tb_confirmed, tb_treated)
+- Nutrition : supplémentation en vitamine A, fer/acide folique, etc. (par exemple : vitamin_a, ifa)
+- Autres groupes selon ce qui existe (maladies non transmissibles, santé de l'enfant, etc.)
+
+2.4 Valider avec l'utilisateur
+
+Première validation : Regroupements d'indicateurs
+Utiliser ask_user_questions pour présenter les regroupements proposés :
+- Lister chaque groupe avec ses indicateurs (identifiant + libellé)
+- Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
+
+Deuxième validation : Indicateurs de mortalité
+Après confirmation des regroupements principaux :
+- Vérifier si des indicateurs de mortalité existent (par exemple : maternal_deaths, neonatal_deaths, stillbirths, child_deaths)
+- Toujours utiliser ask_user_questions pour demander :
+  - « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
+
+Gestion des groupes avec de nombreux indicateurs :
+- Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour demander comment le subdiviser
+- Suggérer des sous-groupes logiques
+- Chaque sous-groupe aura sa propre diapositive
+
+2.5 Finaliser la structure
+- Chaque groupe/sous-groupe confirmé deviendra une section avec plusieurs diapositives dans l'analyse nationale
+- Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant)
+
+EXIGENCES DE PRÉCISION (CRITIQUE)
+
+Règle d'or : Vérifier avant d'affirmer
+- ✅ Baser toute l'analyse uniquement sur les données visibles dans la plateforme
+- ✅ Ne JAMAIS inventer de statistiques, de pourcentages ou de chiffres précis
+- ✅ Si les données ne sont pas visibles, le signaler explicitement
+- ✅ Si une affirmation ne peut être vérifiée, la marquer avec [VÉRIFIER]
+- ✅ Ne jamais deviner les dates, les périodes ou les magnitudes
+
+Vérification de la terminologie et de la méthodologie
+AVANT de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique :
+- Appeler get_methodology_docs_list pour consulter la documentation disponible
+- Appeler get_methodology_doc_content pour vérifier le contenu officiel
+- Si cela ne peut être vérifié → ne pas l'inclure
+- JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie
+
+NORMES DU RAPPORT
+
+Style et langage
+- ✅ Maintenir un langage prudent et analytique — pas d'affirmations causales
+- ✅ Traiter les signaux de perturbation comme descriptifs et exploratoires
+- ✅ Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
+
+Longueur du texte
+- Cible : 50–100 mots par diapositive (ajuster à la baisse si plusieurs graphiques)
+- Maximum absolu : 180 mots par diapositive (sauf si l'utilisateur fournit le texte ; dans ce cas, ne pas le raccourcir)
+- Utiliser des listes à puces, pas de longs paragraphes
+- Diapositives avec graphiques/visualisations = moins de texte
+
+Mise en page des diapositives de contenu
+- Gauche : Interprétation textuelle
+- Droite : Visualisation/graphique
+
+Références aux indicateurs dans le texte
+RÈGLE CRITIQUE : Dans tout le texte des diapositives (titres, interprétations, en-têtes), utiliser UNIQUEMENT le libellé lisible des indicateurs.
+✅ CORRECT :
+- « Première consultation prénatale »
+- « Accouchement assisté par du personnel qualifié »
+- « Vaccin Penta 3 »
+❌ INCORRECT :
+- « anc1 »
+- « anc1 (Première consultation prénatale) »
+- « Première consultation prénatale (anc1) »
+Les codes indicator_common_id sont utilisés UNIQUEMENT dans les paramètres techniques (filterOverrides, selectedReplicant, etc.) — jamais dans le texte visible par l'utilisateur.
+
+Références aux diapositives
+- Toujours désigner les diapositives par leur numéro (par exemple : « diapositive 3 », « diapositive 5 »)
+- Jamais par leur identifiant technique (par exemple : « a3k », « x7m »)
+
+RÈGLES CRITIQUES D'INTERPRÉTATION DES INDICATEURS
+
+⚠️ ATTENTION : Toutes les augmentations ne sont pas positives. Toutes les baisses ne sont pas négatives.
+
+Appliquer l'interprétation correcte selon le type d'indicateur :
+
+Type 1 : Indicateurs de prestation de services (↑ = positif, ↓ = préoccupant)
+Exemples :
+- Visites CPN, accouchements, visites CPoN, vaccinations, consultations externes, planification familiale, accouchement assisté
+Interprétation :
+- « Excédent » (au-dessus de l'attendu) = signal positif
+- « Perturbation » (en dessous de l'attendu) = préoccupation
+
+Type 2 : Indicateurs de mortalité et d'événements indésirables (↑ = MAUVAIS, ↓ = positif)
+Exemples :
+- Décès maternels, décès néonatals, mortinaissances, décès d'enfants, tout indicateur mesurant des décès ou événements indésirables
+Interprétation :
+- Une AUGMENTATION est un constat NÉGATIF — plus de décès est TOUJOURS mauvais
+- Une DIMINUTION est un constat POSITIF — moins de décès est TOUJOURS bon
+- JAMAIS décrire une augmentation des décès comme une « amélioration » ou « tendance positive »
+- JAMAIS décrire une diminution des décès comme une « préoccupation » ou « perturbation »
+
+Type 3 : Indicateurs négatifs de qualité (↑ = mauvais, ↓ = bon)
+Exemples :
+- Taux d'abandon (par exemple : abandon Penta1 à Penta3), taux de valeurs aberrantes, taux de rupture de stock, faible poids à la naissance, cas de diarrhée
+Interprétation :
+- Une augmentation signifie que la situation se détériore
+- Une diminution signifie que la situation s'améliore
+
+Processus de vérification avant rédaction
+Avant de rédiger tout titre ou interprétation, se demander :
+- Cet indicateur mesure-t-il quelque chose dont on veut PLUS (services) ?
+- Ou quelque chose dont on veut MOINS (décès, abandons, maladies) ?
+- Formuler le langage en conséquence
+
+VÉRIFICATION AVANT FINALISATION
+
+Avant de finaliser chaque diapositive, contre-vérifier :
+- ✅ Toutes les valeurs numériques correspondent à ce que la visualisation montre
+- ✅ Les périodes et noms d'indicateurs sont correctement référencés
+- ✅ Les tendances décrites (augmentations, diminutions) correspondent à la direction réelle des données
+- ✅ Les chiffres sont cohérents d'une diapositive à l'autre (même indicateur = mêmes valeurs)
+- ✅ La formulation de l'interprétation correspond au type d'indicateur — une augmentation des décès n'est JAMAIS décrite comme positive
+
+DÉROULEMENT GÉNÉRAL
+- Vérifier le mode → editing_slide_deck
+- Collecter les informations de base → Questions 1–2 (une à la fois)
+- Générer la couverture → S'ARRÊTER et attendre la confirmation
+- Découvrir les indicateurs → get_available_metrics + get_metric_data
+- Proposer les regroupements → Présenter à l'utilisateur
+- Valider avec l'utilisateur → Regroupements, puis mortalité
+- Passer à la diapositive méthodologie
+
+Cette base universelle s'applique à tous les rapports, tous les pays, toutes les langues. Les instructions de structure spécifiques au rapport suivront.
+
+DIAPOSITIVE SUIVANTE — Méthodologie
+
+Insérer le texte tel quel sans le réduire. Dans un seul bloc texte avec des puces :
+
+Évaluation de la qualité des données
+Identifie les principaux problèmes de qualité des données en évaluant la complétude des indicateurs, en détectant les valeurs aberrantes extrêmes et en vérifiant la cohérence entre les indicateurs liés — à partir des données mensuelles du SNIS (DHIS2) au niveau des établissements.
+
+Applique des ajustements ciblés aux points de données signalés, en remplaçant les valeurs aberrantes et en imputant les données manquantes à l'aide d'une moyenne mobile centrée sur 12 mois ; les moyennes au niveau des établissements sont utilisées par défaut lorsque les données historiques sont insuffisantes.
+
+Permet une analyse de sensibilité en produisant des résultats sous quatre scénarios (aucun ajustement, valeurs aberrantes uniquement, complétude uniquement, et combiné). Dans cette analyse, les ajustements couvrent à la fois les valeurs aberrantes et la complétude.
+
+Évaluation de l'utilisation des services
+Analyse des tendances d'utilisation des services, qui identifie le pourcentage de variation de l'utilisation des services pour chaque trimestre par rapport au trimestre précédent.
+
+Analyse des perturbations et des excédents dans l'utilisation des services, qui détecte les changements significatifs (positifs ou négatifs) dans l'utilisation des services au-delà de ce qui serait attendu compte tenu de la saisonnalité et des tendances historiques.
+
+Estimation de la couverture des services
+L'analyse d'estimation de la couverture utilise les données de routine pour estimer les tendances de couverture des services aux niveaux national et infranational. Cela se fait en intégrant les volumes de services de santé ajustés, les projections démographiques et les données d'enquêtes (MICS/DHS).
+
+Les estimations de couverture sont calculées pour les indicateurs de santé clés en utilisant plusieurs sources de dénominateurs, et le dénominateur optimal est retenu en minimisant l'erreur par rapport aux données d'enquête les plus récentes.
+
+Plus de détails sur la méthodologie et les approches d'ajustement de la qualité des données sont disponibles en annexe. Le code R complet et la documentation source sont également disponibles publiquement sur GitHub (https://github.com/FASTR-Analytics)
+
+DIAPOSITIVE 4 — Diapositive de sélection des indicateurs
+- Titre : « Méthodologie : Sélection des indicateurs »
+- Sous-titre : « Les indicateurs pour l'analyse de l'utilisation des services ont été sélectionnés en tenant compte des indicateurs prioritaires au niveau national. »
+- Lister tous les indicateurs disponibles regroupés par les catégories confirmées à l'Étape 2. UTILISER CE FORMAT :
+**GROUPE 1** Indicateur1, Indicateur2. Exemple :
+Accouchements et soins postnatals : Accouchement assisté, CPoN1 mère, CPoN1 nouveau-né
+
+INSTRUCTIONS POUR GÉNÉRER la Section 1 : Évaluation de la qualité des données
+
+Exigences de précision
+- Baser toute l'analyse uniquement sur les données visibles dans la plateforme
+- Ne pas inventer de statistiques ou de chiffres précis — si les données ne sont pas visibles, le signaler
+- Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
+- JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
+
+Normes du rapport
+- Maintenir un langage prudent et analytique
+- Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 6-6 — bloc texte (span 6) à gauche, bloc visualisation (span 6) à droite. Ne pas laisser les blocs empilés verticalement
+- Utiliser une terminologie cohérente tout au long du rapport
+- Toujours désigner les diapositives par leur numéro (pas par leur ID)
+
+Référence méthodologique
+Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les métriques de qualité des données, récupérer la documentation méthodologique depuis https://fastr-analytics.github.io/fastr-resource-hub/. L'utiliser pour rédiger des résumés et interprétations précis pour chaque diapositive.
+
+Métriques de qualité des données
+Utiliser get_available_metrics pour confirmer les métriques disponibles et leurs visualisations prédéfinies. Les métriques de qualité des données utilisées dans cette annexe sont :
+- m1-01-01 : Proportion de valeurs aberrantes [pourcentage] — preset : outlier-table — filtres : indicator_common_id, admin_area_2
+- m1-02-02 : Proportion d'enregistrements complets [pourcentage] — preset : completeness-table — filtres : indicator_common_id, admin_area_2. TOUJOURS utiliser le preset completeness-table pour cette métrique (ne PAS utiliser completeness-timeseries)
+- m1-03-01 : Proportion de zones infranationales respectant les critères de cohérence [pourcentage] — preset : consistency-table — filtres : ratio_type, admin_area_2
+- m1-04-01 : Proportion d'établissements avec une qualité des données adéquate [pourcentage] — preset : dqa-score-table — filtres : admin_area_2
+- m1-04-02 : Score moyen de qualité des données des établissements [pourcentage] — preset : mean-dqa-table — filtres : admin_area_2
+
+Pour chaque diapositive, créer la visualisation en utilisant from_metric avec le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal.
+
+Vérification : Avant de finaliser chaque diapositive, contre-vérifier que tous les pourcentages et scores correspondent à ce que la visualisation montre.
+
+Structure : Diapositives d'évaluation de la qualité des données
+
+DIAPOSITIVE SUIVANTE — Complétude
+Titre : Rédiger un titre analytique sur les tendances de complétude (par exemple : « Les taux de complétude restent faibles au niveau national mais [X] montre des taux bas ces derniers mois »)
+
+Visualisation (côté droit) : Créer en utilisant from_metric avec :
+- metricId : m1-02-02
+- vizPresetId : completeness-table
+- Filtres : indicator_common_id, admin_area_2
+- Afficher sous forme de tableau : period_id (lignes) x indicator_common_id (colonnes) montrant le % de complétude
+- Color coding : Green = 90% ou plus | Yellow = 80% à 89% | Red = en dessous de 80%
+- periodFilterOverride : Utiliser la même période que le rapport principal
+
+Interprétation (côté gauche) : Utiliser des puces :
+- Décrire la tendance nationale globale de complétude — stable, en amélioration ou en dégradation ?
+- Nommer les indicateurs spécifiques avec la complétude la plus faible
+- Indiquer si les taux de complétude se sont améliorés ou dégradés sur la période d'analyse
+- Expliquer l'implication : des taux de complétude plus faibles signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
+
+Ajouter un bloc texte sous l'interprétation : « Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations sont plus susceptibles de refléter de véritables changements dans les services. Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement plus élevées que les valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses dans la prestation de services. »
+
+Note pour TIM : les légendes DQA dans les instances francophones sont en anglais.
+
+DIAPOSITIVE SUIVANTE — Valeurs aberrantes
+Titre : Rédiger un titre analytique sur les tendances des valeurs aberrantes (par exemple : « Les taux de valeurs aberrantes restent faibles au niveau national mais [X] montre des taux élevés ces derniers mois »)
+
+Visualisation (côté droit) : Créer en utilisant from_metric avec :
+- metricId : m1-01-01
+- vizPresetId : outlier-table
+- Filtres : indicator_common_id, admin_area_2
+- Afficher sous forme de tableau : period_id (lignes) × indicator_common_id (colonnes) montrant le % de valeurs aberrantes
+- Color coding : Green = en dessous de 2% | Yellow = 2% à 5% | Red = au-dessus de 5%
+- periodFilterOverride : Utiliser la même période que le rapport principal
+
+Interprétation (côté gauche) : Utiliser des puces :
+- Décrire la tendance nationale globale des taux de valeurs aberrantes — stable, en amélioration ou en dégradation ?
+- Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
+- Indiquer si les taux de valeurs aberrantes se sont améliorés ou dégradés sur la période d'analyse
+- Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
+
+Ajouter un bloc texte sous l'interprétation : « Les valeurs aberrantes sont des rapports anormalement élevés par rapport au volume habituel déclaré par l'établissement au cours des autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, dont le volume n'est pas manquant, et dont le volume moyen est supérieur à 100. »
+
+DIAPOSITIVE SUIVANTE — Cohérence interne
+Titre : Rédiger un titre analytique sur la cohérence (par exemple : « La plupart des paires d'indicateurs montrent un rapportage cohérent, mais [RATIO] sort des plages plausibles dans plusieurs régions »)
+
+Visualisation (côté droit) : Créer en utilisant from_metric avec :
+- metricId : m1-03-01
+- vizPresetId : consistency-table
+- Filtres : ratio_type, admin_area_2
+- Afficher sous forme de tableau : period_id (lignes) × ratio_type (colonnes) montrant le % de zones respectant les critères de cohérence
+- Color coding : Green = 90% ou plus | Yellow = 70% à 89% | Red = en dessous de 70%
+
+Interprétation (côté gauche) : Utiliser des puces :
+- Expliquer ce que chaque ratio_type représente (par exemple : Penta1/Penta3 compare la première à la troisième dose, ANC1/ANC4 compare la première à la quatrième visite)
+- Identifier quels ratios respectent ou échouent systématiquement aux critères
+- Indiquer si la cohérence s'améliore ou se détériore sur la période d'analyse
+- Mettre en évidence les régions spécifiques où la cohérence est particulièrement faible
+
+Ajouter un bloc texte sous l'interprétation : « La cohérence interne évalue la plausibilité des données rapportées en se basant sur des indicateurs liés. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs, et la nature de la prestation de services et du rapportage, les valeurs peuvent être attendues en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30%). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
+
+DIAPOSITIVE SUIVANTE — Tendances de la qualité des données (Score DQA global)
+Titre : Rédiger un titre analytique sur les tendances DQA (par exemple : « La proportion d'établissements avec une qualité des données adéquate est passée de X% à Y% depuis [ANNÉE] »)
+
+Visualisation (côté droit) : metricId : m1-04-01 | vizPresetId : dqa-score-table | Filtres : admin_area_2
+Afficher sous forme de tableau : admin_area_2 (lignes) × année (colonnes) montrant le % d'établissements avec une qualité des données adéquate
+Color coding : Green = 70% ou plus | Yellow = 50% à 69% | Red = en dessous de 50%
+
+Interprétation (côté gauche) : Décrire la tendance nationale de qualité des données, nommer les régions les plus/moins performantes, identifier les changements notables, expliquer les implications.
+
+Ajouter un bloc texte : « La qualité des données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, Penta1 et CPN1, lorsqu'ils sont disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
+
+DIAPOSITIVE SUIVANTE — Tendances de la qualité des données (Score DQA moyen)
+Titre : Rédiger un titre analytique sur les tendances du DQA moyen (par exemple : « Les scores moyens de qualité des données sont les plus élevés dans [X] et [Y], tandis que [Z] reste en retard »)
+
+Visualisation (côté droit) : metricId : m1-04-02 | vizPresetId : mean-dqa-table | Filtres : admin_area_2
+Afficher sous forme de tableau : admin_area_2 (lignes) × année (colonnes) montrant le score DQA moyen en %
+Color coding : Green = 70% ou plus | Yellow = 50% à 69% | Red = en dessous de 50%
+
+Interprétation (côté gauche) : Décrire la tendance nationale du DQA moyen, contraster les régions les plus/moins performantes, noter les changements significatifs, conclure avec une évaluation globale.
+
+Ajouter un bloc texte : « Les éléments inclus dans le score DQA comprennent : Pas de données manquantes pour les consultations externes, Penta1 et CPN1, lorsqu'ils sont disponibles ; Pas de valeurs aberrantes pour les consultations externes, Penta1 et CPN1, lorsqu'ils sont disponibles ; Rapportage cohérent entre Penta1/Penta3, CPN1/CPN4, BCG/Accouchements, lorsqu'ils sont disponibles. »
+
+DIAPOSITIVE SUIVANTE — En-tête de la Section 2
+Titre : « Section 2 : Utilisation des services, au niveau national »
+Sous-titre (anglais) : Service utilization over time and assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services at national level.
+Sous-titre (français) : Utilisation des services au fil du temps et évaluation des volumes projetés en fonction des tendances historiques afin d'identifier les excédents et les perturbations dans les services de santé.
+
+MODÈLE UNIVERSEL : Diapositives d'utilisation nationale des services par groupe d'indicateurs
+
+Pour chaque groupe d'indicateurs, créer trois diapositives consécutives :
+- Type de diapositive A : Tendances mensuelles d'utilisation des services
+- Type de diapositive B : Volume trimestriel des services avec variation en % d'un trimestre à l'autre
+- Type de diapositive C : Analyse des perturbations
+
+Les deux diapositives utilisent une mise en page cohérente : interprétation textuelle (span=4) à gauche, visualisation (span=8) à droite.
+
+TYPE DE DIAPOSITIVE A : Tendances mensuelles d'utilisation des services
+
+Format de l'en-tête : « Tendances de [description du groupe] »
+Règles :
+- Utiliser une phrase descriptive pour le domaine de service, PAS une liste de codes d'indicateurs
+- ✅ Bon : « Tendances des soins prénatals »
+- ✅ Bon : « Tendances des services d'accouchement »
+- ❌ Mauvais : « Tendances de BCG, Penta1, Penta3 »
+
+Bloc gauche — Interprétation textuelle (span=4) :
+Structure : [Titre évolution de l'utilisation des services] : [INDICATEUR 1] : [décrire les fluctuations mensuelles] | [INDICATEUR 2] : [décrire la tendance] | [Observation inter-indicateurs] : [tendances, écarts] | [Titre implications] : [une phrase d'analyse actionnable]
+Directives : Utiliser des titres en gras, une puce par indicateur, inclure les mois/périodes spécifiques et les chiffres approximatifs. Nombre de mots : 60–100, max 130. Ne décrire que ce qui est visible dans les données réelles.
+
+Bloc droit — Visualisation (span=8) : metricId : m3-01-01 | vizPresetId : volume-monthly | valuesFilter : count_final_both | startDate/endDate : 12 derniers trimestres complets (36 mois)
+
+TYPE DE DIAPOSITIVE B : Variation trimestrielle du volume de services
+
+En-tête de la diapositive : Une phrase analytique résumant le constat principal. Au passé, 1–2 phrases maximum. Se concentre sur la tendance globale du groupe.
+✅ Bon : « Les services prénatals ont montré une croissance progressive, avec les quatrièmes visites augmentant plus notablement que les premières en 2025 »
+❌ Mauvais : « Variation trimestrielle des services prénatals »
+
+Bloc gauche — Interprétation textuelle (span=4) :
+Structure : [Un paragraphe autonome : résumé de la tendance globale] | [INDICATEUR 1] [variations spécifiques d'un trimestre à l'autre avec pourcentages] | [INDICATEUR 2] [variations spécifiques]
+Directives : Ne mentionner que les trimestres avec une variation > 10%. Si aucune variation > 10% : « [INDICATEUR] est resté stable depuis [DATE]... » Nombre de mots : 50–80, max 100.
+
+Bloc droit : metricId : m3-01-01 | vizPresetId : volume-quarterly | valuesFilter : count_final_both | Afficher les étiquettes de données, indicateur en colonnes et non en lignes
+
+TYPE DE DIAPOSITIVE C : Analyse des perturbations
+
+Titre : Rédiger un titre analytique (1–2 phrases) résumant le constat principal pour ce groupe d'indicateurs.
+✅ Bon : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise vers mi-2025 »
+❌ Mauvais : « BCG - Bacille de Calmette-Guérin »
+
+Visualisation (côté droit) : metricId : m3-02-01 | vizPresetId : disruption-chart | chartTitle : « Comparaison de l'utilisation déclarée des services aux tendances attendues, au niveau national » | selectedReplicant : premier indicateur du groupe | filterOverrides : tous les codes d'indicateurs du groupe | periodFilterOverride : période d'analyse
+
+Interprétation (côté gauche — cible 50–100 mots, max 180) : Pour CHAQUE indicateur : périodes spécifiques de perturbations/excédents avec magnitudes approximatives. Tendances inter-indicateurs. Évaluation globale. Ne décrire que ce qui est réellement visible dans le graphique.
+
+Déroulement
+Étape 1 : Vérifier la disponibilité des données — appeler get_metric_data avant de créer les diapositives. Pour le mensuel : disaggregations : indicator_common_id, period_id. Pour le trimestriel : disaggregations : indicator_common_id, quarter_id.
+Étape 2 : Analyser les données — identifier les hauts/bas, calculer les variations en % d'un trimestre à l'autre, noter les relations entre indicateurs.
+Étape 3 : Créer les diapositives — utiliser create_slide pour chaque type (A, B, C) par groupe d'indicateurs. Positionner de manière séquentielle.
+
+Données nécessaires
+- Groupes d'indicateurs avec codes (par exemple : Soins prénatals : anc1, anc4)
+- Plage de dates : 12 derniers trimestres complets (36 mois), format YYYYMM
+- Langue : anglais ou français (ou autre)
+- Type d'ajustement (optionnel) : Par défaut : count_final_both. Alternatives : count_final_none, count_final_outliers, count_final_completeness
+- Position dans le deck : Après quelle section ou diapositive ces éléments doivent-ils être insérés ?
+
+Principes clés
+- ✅ Toujours interroger les données d'abord — utiliser get_metric_data avant de rédiger toute interprétation
+- ✅ Ne jamais fabriquer de chiffres — ne rapporter que ce qui est dans les données réelles
+- ✅ Mise en page cohérente — chaque diapositive utilise une répartition 4-8 en colonnes
+- ✅ Structure parallèle — même format textuel pour chaque groupe d'indicateurs
+- ✅ En-têtes analytiques — les en-têtes de type B décrivent des constats, pas seulement un sujet
+- ✅ Texte fondé sur les preuves — inclure les chiffres spécifiques, mois et trimestres issus des visualisations
+- ✅ Analyses actionnables — la section « Implications » suggère ce qui devrait être fait
+
+DIAPOSITIVE SUIVANTE — En-tête de la Section 3
+Titre : « Section 3 : Estimation de la couverture des services »
+Sous-titre (anglais) : Using routine data to estimate recent trends and subnational disparity in the coverage of selected health services. Not intended as official estimates.
+Sous-titre (français) : Utilisation des données de routine pour estimer les tendances récentes et les disparités infranationales dans la couverture de certains services de santé. Non destiné à servir d'estimations officielles.
+
+INSTRUCTIONS : Créer les diapositives d'estimation de la couverture pour tous les indicateurs
+
+Créer des diapositives individuelles d'estimation de la couverture pour chaque indicateur disposant de données de couverture dans les métriques m6-01-01 (national) et m6-02-01 (infranational). Organiser les diapositives selon une approche par cycle de vie : CPN1, CPN4, Accouchements, BCG, Penta 1, Penta 3.
+
+Étape 1 : Identifier les indicateurs disponibles
+Appeler get_metric_data pour m6-01-01 afin de voir quels indicateurs sont dans la dimension indicator_common_id.
+
+Étape 2 : Pour chaque indicateur, créer une diapositive
+
+Bloc 1 (Ligne supérieure, pleine largeur) : Graphique de séries temporelles de la couverture nationale AVEC ÉTIQUETTES DE DONNÉES. Utiliser : {"type": "from_visualization", "visualizationId": "wua", "replicant": "[indicator_code]"}
+
+Bloc 2 (Ligne inférieure, gauche — Span 4) : Interprétation textuelle combinée avec deux sous-sections : « Tendance nationale : » et « Variabilité infranationale : »
+
+Bloc 3 (Ligne inférieure, droite — Span 8) : Graphique en barres de la couverture infranationale. Utiliser : {"type": "from_metric", "metricId": "m6-02-01", "vizPresetId": "coverage-bar", "selectedReplicant": "[indicator_code]", "startDate": 2001, "endDate": 2025}
+
+Directives d'interprétation textuelle
+
+Pour la tendance nationale (2–3 phrases) :
+- Décrire la tendance historique des enquêtes (augmentation/diminution/stable) avec les années et pourcentages spécifiques
+- Mentionner brièvement la trajectoire projetée basée sur les enquêtes jusqu'à l'année la plus récente
+- Comparer les estimations SNIS à la trajectoire des enquêtes (alignées/supérieures/inférieures)
+- S'il y a une différence, indiquer quand elle apparaît et si elle est temporaire ou persistante
+
+Pour la variabilité infranationale (1 phrase) : « En [années], la couverture de [indicateur] montre une variabilité infranationale [forte/modérée], allant d'un minimum de X% ([région]) à un maximum de Y% ([région]), la majorité des régions enregistrant une couverture entre A% et B%. »
+
+Règles d'interprétation : Rédiger dans la langue du projet. Utiliser un langage neutre et descriptif. NE PAS spéculer sur les causes. NE PAS interpréter si les tendances sont bonnes ou mauvaises. Se concentrer UNIQUEMENT sur les tendances visibles dans les données.
+
+Liste des indicateurs à traiter
+- anc1 (CPN1)
+- anc4 (CPN4) ✓ Déjà terminé
+- bcg (BCG 0–11 mois)
+- penta1 (Penta 1)
+- penta3 (Penta 3)
+- sba (Accouchement assisté)
+- pnc1_mother (CPoN1 mère) — si disponible
+
+Convention de nommage des diapositives
+- En-tête : « Estimation de la couverture du service [Nom complet de l'indicateur en français] »
+- Titre du graphique national : « Tendances de la couverture [Indicateur] au niveau national »
+- Titre du graphique infranational : « Couverture [Indicateur] par région »
+
+DERNIÈRE PAGE
+
+FASTR initiative : https://data.gffportal.org/key-theme/FASTR
+
+APRÈS AVOIR TERMINÉ LE RAPPORT
+
+Informer l'utilisateur : « Rapport terminé. Si vous souhaitez ajouter d'autres sections, vous pouvez utiliser ces prompts depuis la bibliothèque : Prompt 2 (Analyse régionale des perturbations) ou Prompt 3 (Annexe d'évaluation de la qualité des données). »
+```

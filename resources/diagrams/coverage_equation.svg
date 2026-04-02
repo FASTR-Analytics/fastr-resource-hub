@@ -35,8 +35,8 @@
 
   <!-- Info text for Numerator -->
   <text class="info-text" x="475" y="45">Numerator comes from</text>
-  <text class="info-text" x="475" y="58">DHIS2 data, count of</text>
-  <text class="info-text" x="475" y="71">services adjusted for outliers</text>
+  <text class="info-text" x="475" y="58">DHIS2 data — service</text>
+  <text class="info-text" x="475" y="71">volumes after quality correction</text>
 
   <!-- Info text for Denominator -->
   <text class="info-text" x="475" y="135">Several options for</text>

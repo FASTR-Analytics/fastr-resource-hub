@@ -22,7 +22,7 @@ This exchange brings together country teams to strengthen their capacity for dat
 
 ## What you will learn
 
-![learning exchange objectives](../resources/diagrams/learning_exchange_objectives.svg)
+![learning exchange objectives](../../resources/diagrams/learning_exchange_objectives.svg)
 
 <!--
 By the end of this exchange, participants will be able to:

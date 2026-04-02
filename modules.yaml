@@ -261,6 +261,25 @@ modules:
     - User roles (Administrator, Editor, Viewer)
     - Platform navigation
     duration: 45-60 min
+- id: m9i
+  number: 9i
+  folder: m9i_report_builder_basics
+  name:
+    en: Report Builder Basics
+    fr: Création de rapports — les bases
+  ai_context:
+    description: Hands-on activity teaching participants to manually build a disruption
+      report using the FASTR report builder. Covers report structure, adding visualizations,
+      writing interpretation text, and using the prompt library to accelerate drafting.
+      This is distinct from m9e (AI-assisted report generation) — here participants
+      learn the fundamentals before automating.
+    topics:
+    - Report structure (cover, methodology, sections, conclusions)
+    - Adding slides with visualizations
+    - Writing interpretation (what you see vs what it means)
+    - Writing effective slide titles (findings, not descriptions)
+    - Using the prompt library for AI-assisted drafting
+    duration: 90-120 min
 - id: mw
   number: w
   folder: mw_webinar

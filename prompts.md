@@ -1168,3 +1168,468 @@ ALWAYS use the ask_user_questions tool (not a text question) to let the user pro
 
 After the last slide, confirm: "All slides reviewed."
 ```
+
+## Prompt 6: Universal Quarterly Report
+
+```prompt
+Universal Instructions for FASTR Quarterly Report Generation
+
+CONTEXT: These instructions apply to all countries and all languages. The report must be generated in the appropriate language based on the country context (French for French-speaking countries, English for English-speaking countries).
+
+STEP 1: INITIAL CHECKS AND BASIC INFORMATION
+
+1.1 Verify editing mode
+- Confirm that the user is in editing_slide_deck mode
+- If not, ask the user to create a new deck or open an existing one
+
+1.2 Collect basic information
+Use ask_user_questions to ask one question at a time, in this order:
+
+Question 1: Analysis period
+- Ask: "What analysis period should I use? (start month/year to end month/year, e.g.: January 2023 to September 2025)"
+- Convert the response to period_id format:
+  - Start date → min value: [YEAR][MONTH] as a 6-digit number (e.g.: January 2025 = 202501)
+  - End date → max value: [YEAR][MONTH] as a 6-digit number (e.g.: December 2025 = 202512)
+- Store these values for later use in all period filters
+
+Question 2: Cover subtitle
+- Suggest options based on the analysis period, for example:
+  - The relevant quarter (e.g.: "Q4 2025")
+  - The included months (e.g.: "October–December 2025")
+  - Allow the user to enter their own text
+
+1.3 Generate the cover slide
+
+Title:
+- French: "Analyse de l'utilisation des services au/à/aux [COUNTRY]"
+- English: "[COUNTRY] - Service Utilization Analysis"
+- Adapt the article according to the country (au Sénégal, à Madagascar, aux Philippines, etc.)
+
+Subtitle:
+- Use the user's answer to Question 2
+
+Date:
+- Include the date the analysis was generated (current month and year)
+- French format: "Analyse générée en mars 2026"
+- English format: "Analysis generated in March 2026"
+
+STEP 2: INDICATOR DISCOVERY AND ORGANIZATION
+
+2.1 Query the platform
+- Call get_available_metrics to retrieve all available indicators
+- For each indicator, call get_metric_data with the analysis period to verify it contains data
+- Keep only indicators with actual data for the analysis period
+
+2.2 Identify available indicators
+- Read the indicator_common_id values and their labels from the platform
+- NEVER assume a fixed list of indicators — each country has its own codes and labels
+- Create a complete list: ID + label for each indicator with data
+
+2.3 Propose groupings
+Propose groupings based on indicator labels. Use these categories as a starting guide, but adapt based on what actually exists:
+
+Common service groups:
+- Antenatal care: indicators related to ANC visits (e.g.: anc1, anc4, anc_trimester1, syphilis_tested_anc)
+- Deliveries and postnatal care: facility deliveries, skilled birth attendance, PNC, caesarean sections (e.g.: delivery, sba, pnc1_mother, pnc1_newborn, csection)
+- Immunization: vaccines (e.g.: bcg, penta1, penta3, measles1, measles2, opv1, rr1, fully_immunized)
+- Family planning: FP counseling, new users, continuing users (e.g.: fp_new, fp_new_and_cont, fp_counseled, new_fp)
+- Adolescent family planning: if adolescent-specific FP indicators exist, group them separately (e.g.: fp_adolescent_counseled, fp_adolescent_new)
+- Malaria: testing, positivity, treatment (e.g.: malaria_tested, malaria_confirmed, malaria_treated, mal_positive)
+- General services / Outpatient visits: outpatient visits (e.g.: opd, opd_under5, opd_over5)
+- HIV/TB: HIV testing, ARV treatment, TB cases (e.g.: hiv_tested, hiv_treated, tb_confirmed, tb_treated)
+- Nutrition: vitamin A supplementation, iron/folic acid, etc. (e.g.: vitamin_a, ifa)
+- Other groups depending on what exists (Non-communicable diseases, Child health, etc.)
+
+2.4 Validate with user
+
+First validation: Indicator groupings
+Use ask_user_questions to present the proposed groupings:
+- List each group with its indicators (ID + label)
+- Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
+
+Second validation: Mortality indicators
+After confirming the main groupings:
+- Check whether mortality indicators exist (e.g.: maternal_deaths, neonatal_deaths, stillbirths, child_deaths)
+- Always use ask_user_questions to ask:
+  - English: "The platform has these mortality indicators: [list]. Mortality data involves low event counts and different interpretation (increases = bad). Would you like to include them in the report or exclude them?"
+
+Managing groups with many indicators:
+- If a confirmed group contains more than 3 indicators, use ask_user_questions to ask how to divide it
+- Suggest logical subgroups
+- Each subgroup will have its own slide
+
+2.5 Finalize the structure
+- Each confirmed group/subgroup will become a section with multiple slides in the national analysis
+- Use the exact indicator_common_id values from the platform for all technical parameters (filterOverrides, selectedReplicant)
+
+ACCURACY REQUIREMENTS (CRITICAL)
+
+Golden Rule: Verify Before Asserting
+- ✅ Base all analysis solely on data visible in the platform
+- ✅ NEVER invent statistics, percentages, or specific figures
+- ✅ If data is not visible, say so explicitly
+- ✅ If a claim cannot be verified, mark it with [VERIFY]
+- ✅ Never guess dates, periods, or magnitudes
+
+Terminology and methodology verification
+BEFORE writing any acronym expansion, technical term definition, or methodology explanation:
+- Call get_methodology_docs_list to see available documentation
+- Call get_methodology_doc_content to verify official content
+- If it cannot be verified → do not include it
+- NEVER guess what acronyms stand for or invent methodology descriptions
+
+REPORT STANDARDS
+
+Style and language
+- ✅ Maintain cautious, analytical language — no causal claims
+- ✅ Treat disruption signals as descriptive and exploratory
+- ✅ Use consistent terminology throughout the report (do not alternate between synonyms)
+
+Text length
+- Target: 50–100 words per slide (adjust downward if multiple charts)
+- Absolute maximum: 180 words per slide (unless the user provides text; in that case, do not shorten it)
+- Use bullet points, not long paragraphs
+- Slides with charts/visualizations = less text
+
+Content slide layout
+- Left: Text interpretation
+- Right: Visualization/chart
+
+Indicator references in text
+CRITICAL RULE: In all slide text (titles, interpretations, headings), use ONLY the readable label of indicators.
+✅ CORRECT:
+- "First antenatal visit"
+- "Skilled birth attendance"
+- "Penta 3 vaccine"
+❌ INCORRECT:
+- "anc1"
+- "anc1 (First antenatal visit)"
+- "First antenatal visit (anc1)"
+indicator_common_id codes are used ONLY in technical parameters (filterOverrides, selectedReplicant, etc.) — never in user-visible text.
+
+Slide references
+- Always refer to slides by their number (e.g.: "slide 3", "slide 5")
+- Never by their technical ID (e.g.: "a3k", "x7m")
+
+CRITICAL INDICATOR INTERPRETATION RULES
+
+⚠️ CAUTION: Not all increases are good. Not all decreases are bad.
+
+Apply the correct interpretation according to the indicator type:
+
+Type 1: Service delivery indicators (↑ = positive, ↓ = concerning)
+Examples:
+- ANC visits, deliveries, PNC visits, vaccinations, outpatient visits, family planning, skilled birth attendance
+Interpretation:
+- "Surplus" (above expected) = positive signal
+- "Disruption" (below expected) = concern
+
+Type 2: Mortality and adverse outcome indicators (↑ = BAD, ↓ = positive)
+Examples:
+- Maternal deaths, neonatal deaths, stillbirths, child deaths, any indicator measuring deaths or adverse events
+Interpretation:
+- An INCREASE is a NEGATIVE finding — more deaths is ALWAYS bad
+- A DECREASE is a POSITIVE finding — fewer deaths is ALWAYS good
+- NEVER describe an increase in deaths as an "improvement" or "positive trend"
+- NEVER describe a decrease in deaths as a "concern" or "disruption"
+
+Type 3: Negative quality indicators (↑ = bad, ↓ = good)
+Examples:
+- Dropout rates (e.g.: Penta1 to Penta3 dropout), outlier rates, stockout rates, low birth weight, diarrhea cases
+Interpretation:
+- An increase means the situation is worsening
+- A decrease means the situation is improving
+
+Verification process before writing
+Before writing any title or interpretation, ask:
+- Does this indicator measure something we want MORE of (services)?
+- Or something we want LESS of (deaths, dropouts, disease)?
+- Frame the language accordingly
+
+PRE-FINALIZATION VERIFICATION
+
+Before finalizing each slide, cross-check:
+- ✅ All numerical values match what the visualization shows
+- ✅ Time periods and indicator names are correctly referenced
+- ✅ Described trends (increases, decreases) match the actual direction of the data
+- ✅ Figures are consistent across slides (same indicator = same values)
+- ✅ Interpretation framing matches the indicator type — an increase in deaths is NEVER described as positive
+
+OVERALL WORKFLOW
+- Verify mode → editing_slide_deck
+- Collect basic info → Questions 1–2 (one at a time)
+- Generate cover → STOP and wait for confirmation
+- Discover indicators → get_available_metrics + get_metric_data
+- Propose groupings → Present to user
+- Validate with user → Groupings, then mortality
+- Proceed to methodology slide
+
+This universal base applies to all reports, all countries, all languages. Specific report structure instructions will follow.
+
+NEXT SLIDE — Methodology
+
+Insert the text as-is without reducing it. In one text block with bullet points:
+
+Data Quality Assessment
+Identifies the main data quality issues by evaluating indicator completeness, detecting extreme outliers, and verifying consistency between related indicators — using monthly HMIS (DHIS2) data at facility level.
+
+Applies targeted adjustments to flagged data points, replacing outliers and imputing missing data using a 12-month centered moving average; facility-level means are used by default when there is insufficient historical data.
+
+Enables sensitivity analysis by producing results under four scenarios (no adjustment, outliers only, completeness only, and combined). In this analysis, adjustments cover both outliers and completeness.
+
+Service Utilization Assessment
+Analysis of service utilization trends, which identifies the percentage change in service utilization for each quarter compared to the previous quarter.
+
+Analysis of disruptions and surpluses in service utilization, which detects significant changes (positive or negative) in service use beyond what would be expected given seasonality and historical trends.
+
+Service Coverage Estimation
+The coverage estimation analysis uses routine data to estimate service coverage trends at national and subnational levels. This is done by integrating adjusted health service volumes, demographic projections, and survey data (MICS/DHS).
+
+Coverage estimates are calculated for key health indicators using multiple denominator sources, and the optimal denominator is retained by minimizing error against the most recent survey data.
+
+More details on the methodology and data quality adjustment approaches are available in the annex. The complete R code and source documentation are also publicly available on GitHub (https://github.com/FASTR-Analytics)
+
+SLIDE 4 — Indicator Selection Slide
+- Title: "Methodology: Indicator selection"
+- Subtitle: "Indicators for the service utilization analysis were selected considering nationally prioritized indicators."
+- List all available indicators grouped by the confirmed categories from Step 2. USE THIS FORMAT:
+**GROUP 1** Indicator1, Indicator2. Example:
+Deliveries and postnatal care: Skilled birth attendance, PNC1 mother, PNC1 newborn
+
+INSTRUCTIONS TO GENERATE Section 1: Data Quality Assessment
+
+Accuracy Requirements
+- Base all analysis only on data visible in the platform
+- Do not invent statistics or specific numbers — if data is not visible, say so
+- If you cannot verify a claim from the data, mark it with [VERIFY]
+- NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
+
+Report Standards
+- Maintain cautious, analytical language
+- Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 6-6 column split — text block (span 6) on the left, visualization block (span 6) on the right. Do not leave blocks stacked vertically
+- Use consistent terminology throughout
+- Always refer to slides by their number (not their ID)
+
+Methodology Reference
+If you need additional context on how FASTR calculates data quality metrics, fetch the methodology documentation from https://fastr-analytics.github.io/fastr-resource-hub/. Use it to write accurate summaries and interpretations for each slide.
+
+Data Quality Metrics
+Use get_available_metrics to confirm available metrics and their preset visualizations. The data quality metrics used in this annex are:
+- m1-01-01: Proportion of outliers [percent] — preset: outlier-table — filters: indicator_common_id, admin_area_2
+- m1-02-02: Proportion of completed records [percent] — preset: completeness-table — filters: indicator_common_id, admin_area_2. ALWAYS use completeness-table preset for this metric (do NOT use completeness-timeseries)
+- m1-03-01: Proportion of sub-national areas meeting consistency criteria [percent] — preset: consistency-table — filters: ratio_type, admin_area_2
+- m1-04-01: Proportion of facilities with adequate data quality [percent] — preset: dqa-score-table — filters: admin_area_2
+- m1-04-02: Average data quality score across facilities [percent] — preset: mean-dqa-table — filters: admin_area_2
+
+For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period.
+
+Verification: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
+
+Structure: Data Quality Assessment Slides
+
+NEXT SLIDE — Completeness
+Title: Write an analytical headline about completeness patterns (e.g., "Completeness rates remain low nationally but [X] shows low rates in recent months")
+
+Visualization (right side): Create using from_metric with:
+- metricId: m1-02-02
+- vizPresetId: completeness-table
+- Filters: indicator_common_id, admin_area_2
+- Display as table: period_id (rows) x indicator_common_id (columns) showing completeness %
+- Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
+- periodFilterOverride: Use the same period as the main report
+
+Interpretation (left side): Use bullet points:
+- Describe the overall national trend in completeness — stable, improving, or worsening?
+- Name specific indicators with the lowest completeness
+- Note whether completeness rates have improved or worsened over the analysis period
+- Explain the implication: lower completeness rates mean more values are being adjusted, which can affect the reliability of trend analysis
+
+Add a text block below the interpretation: "When completeness is high, observed and expected volumes are more comparable, and disruptions are more likely to reflect true service changes. When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery."
+
+Note for TIM: DQA legends in francophone instances are in English.
+
+NEXT SLIDE — Outliers
+Title: Write an analytical headline about outlier patterns (e.g., "Outlier rates remain low nationally but [X] shows elevated rates in recent months")
+
+Visualization (right side): Create using from_metric with:
+- metricId: m1-01-01
+- vizPresetId: outlier-table
+- Filters: indicator_common_id, admin_area_2
+- Display as table: period_id (rows) × indicator_common_id (columns) showing outlier %
+- Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
+- periodFilterOverride: Use the same period as the main report
+
+Interpretation (left side): Use bullet points:
+- Describe the overall national trend in outlier rates — stable, improving, or worsening?
+- Name specific indicators with the highest outlier rates
+- Note whether outlier rates have improved or worsened over the analysis period
+- Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
+
+Add a text block below the interpretation: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
+
+NEXT SLIDE — Internal Consistency
+Title: Write an analytical headline about consistency (e.g., "Most indicator pairs show consistent reporting, but [RATIO] falls outside plausible ranges in several regions")
+
+Visualization (right side): Create using from_metric with:
+- metricId: m1-03-01
+- vizPresetId: consistency-table
+- Filters: ratio_type, admin_area_2
+- Display as table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
+- Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
+
+Interpretation (left side): Use bullet points:
+- Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
+- Identify which ratios consistently meet or fail criteria
+- Note whether consistency is improving or worsening over the analysis period
+- Highlight any specific regions where consistency is notably low
+
+Add a text block below the interpretation: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
+
+NEXT SLIDE — Data Quality Trends (Overall DQA Score)
+Title: Write an analytical headline about DQA trends (e.g., "The proportion of facilities with adequate data quality has improved from X% to Y% since [YEAR]")
+
+Visualization (right side): metricId: m1-04-01 | vizPresetId: dqa-score-table | Filters: admin_area_2
+Display as table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
+Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+
+Interpretation (left side): Describe national DQ trend, name top/lowest-performing regions, identify notable changes, explain implications.
+
+Add a text block: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
+
+NEXT SLIDE — Data Quality Trends (Mean DQA Score)
+Title: Write an analytical headline about mean DQA trends (e.g., "Mean data quality scores are highest in [X] and [Y], while [Z] lags behind")
+
+Visualization (right side): metricId: m1-04-02 | vizPresetId: mean-dqa-table | Filters: admin_area_2
+Display as table: admin_area_2 (rows) × year (columns) showing mean DQA score %
+Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
+
+Interpretation (left side): Describe national mean DQA trend, contrast top/lowest-performing regions, note significant changes, conclude with overall assessment.
+
+Add a text block: "Items included in the DQA score include: No missing data for OPD, Penta1, and ANC1, where available; No outliers for OPD, Penta1, and ANC1, where available; Consistent reporting between Penta1/Penta3, ANC1/ANC4, BCG/Delivery, where available."
+
+NEXT SLIDE — Section 2 Header
+Title: "Section 2: Service Utilization, Nationally"
+Subtitle (English): Service utilization over time and assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services at national level.
+Subtitle (French): Utilisation des services au fil du temps et évaluation des volumes projetés en fonction des tendances historiques afin d'identifier les excédents et les perturbations dans les services de santé.
+
+UNIVERSAL TEMPLATE: National Service Utilization Slides by Indicator Group
+
+For each indicator group, create three consecutive slides:
+- Slide Type A: Monthly service utilization trends
+- Slide Type B: Quarterly service volume with quarter-to-quarter % change
+- Slide Type C: Service disruption
+
+Both slides use consistent layout: text interpretation (span=4) on left, visualization (span=8) on right.
+
+SLIDE TYPE A: Monthly Service Utilization Trends
+
+Slide Header Format: "Trends in [group description]"
+Rules:
+- Use a descriptive phrase for the service area, NOT a list of indicator codes
+- ✅ Good: "Trends in antenatal care"
+- ✅ Good: "Trends in delivery services"
+- ❌ Bad: "Trends in BCG, Penta1, Penta3"
+
+Left Block — Text Interpretation (span=4):
+Structure: [Service utilization evolution heading]: [INDICATOR 1]: [describe monthly fluctuations] | [INDICATOR 2]: [describe pattern] | [Cross-indicator insight]: [patterns, gaps] | [Implications heading]: [one sentence actionable insight]
+Guidelines: Use bold headings, one bullet per indicator, include specific months/periods and approximate numbers. Word count: 60–100 words, max 130. Only describe what is visible in actual data.
+
+Right Block — Visualization (span=8): metricId: m3-01-01 | vizPresetId: volume-monthly | valuesFilter: count_final_both | startDate/endDate: last 12 complete quarters (36 months)
+
+SLIDE TYPE B: Quarterly Change in Service Volume
+
+Slide Header: One analytical sentence summarizing the key finding. Past tense, 1–2 sentences maximum. Focuses on overall trend across the group.
+✅ Good: "Antenatal services showed gradual growth, with fourth visits increasing more notably than first visits in 2025"
+❌ Bad: "Quarter-to-quarter change in antenatal services"
+
+Left Block — Text Interpretation (span=4):
+Structure: [One standalone paragraph: overall trend summary] | [INDICATOR 1] [specific quarter-to-quarter changes with percentages] | [INDICATOR 2] [specific changes]
+Guidelines: Only mention quarters with >10% change. If no >10% changes: "[INDICATOR] remained consistent since [DATE]..." Word count: 50–80 words, max 100.
+
+Right Block: metricId: m3-01-01 | vizPresetId: volume-quarterly | valuesFilter: count_final_both | Show data labels, indicator in columns not lines
+
+SLIDE TYPE C: Disruption Analysis
+
+Title: Write an analytical headline (1–2 sentences) summarizing the key finding for this group of indicators.
+✅ Good: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025"
+❌ Bad: "BCG - Bacillus Calmette-Guérin vaccine"
+
+Visualization (right side): metricId: m3-02-01 | vizPresetId: disruption-chart | chartTitle: "Comparing reported service use to expected trends, nationally" | selectedReplicant: first indicator in group | filterOverrides: all indicator codes in group | periodFilterOverride: analysis period
+
+Interpretation (left side — target 50–100 words, max 180): For EACH indicator: specific time periods of disruptions/surpluses with approximate magnitudes. Cross-indicator patterns. Overall assessment. Only describe what is actually visible in the chart.
+
+Workflow
+Step 1: Verify data availability — call get_metric_data before creating slides. For monthly: disaggregations: indicator_common_id, period_id. For quarterly: disaggregations: indicator_common_id, quarter_id.
+Step 2: Analyze the data — identify highs/lows, calculate quarter-to-quarter % changes, note indicator relationships.
+Step 3: Create slides — use create_slide for each type (A, B, C) per indicator group. Position sequentially.
+
+Inputs Needed
+- Indicator groups with codes (e.g., Antenatal care: anc1, anc4)
+- Date range: Last 12 complete quarters (36 months), format YYYYMM
+- Language: English or French (or other)
+- Adjustment type (optional): Default: count_final_both. Alternatives: count_final_none, count_final_outliers, count_final_completeness
+- Position in deck: After which section or slide should these be inserted?
+
+Key Principles
+- ✅ Always query data first — use get_metric_data before writing any interpretation
+- ✅ Never fabricate numbers — only report what's in the actual data
+- ✅ Consistent layout — every slide uses 4-8 span split in columns
+- ✅ Parallel structure — same text format for each indicator group
+- ✅ Analytical headers — Slide Type B headers describe findings, not just topic
+- ✅ Evidence-based text — include specific numbers, months, quarters from visualizations
+- ✅ Actionable insights — "Implications" section suggests what should be done
+
+NEXT SLIDE — Section 3 Header
+Title: "Section 3: Service Coverage Estimates"
+Subtitle (English): Using routine data to estimate recent trends and subnational disparity in the coverage of selected health services. Not intended as official estimates.
+Subtitle (French): Utilisation des données de routine pour estimer les tendances récentes et les disparités infranationales dans la couverture de certains services de santé. Non destiné à servir d'estimations officielles.
+
+PROMPT: Create Coverage Estimation Slides for All Indicators
+
+Create individual coverage estimation slides for each indicator that has coverage data available in metrics m6-01-01 (national) and m6-02-01 (subnational). Organize slides following a life-course approach: CPN1, CPN4, Deliveries, BCG, Penta 1, Penta 3.
+
+Step 1: Identify Available Indicators
+Call get_metric_data for m6-01-01 to see which indicators are in the indicator_common_id dimension.
+
+Step 2: For Each Indicator, Create One Slide
+
+Block 1 (Top Row, Full Width): National coverage timeseries chart WITH DATA LABELS. Use: {"type": "from_visualization", "visualizationId": "wua", "replicant": "[indicator_code]"}
+
+Block 2 (Bottom Row, Left — Span 4): Combined text interpretation with two subsections: "Tendance nationale:" and "Variabilité infranationale:"
+
+Block 3 (Bottom Row, Right — Span 8): Subnational coverage bar chart. Use: {"type": "from_metric", "metricId": "m6-02-01", "vizPresetId": "coverage-bar", "selectedReplicant": "[indicator_code]", "startDate": 2001, "endDate": 2025}
+
+Text Interpretation Guidelines
+
+For National Trend (2–3 sentences):
+- Describe historical survey trend (increase/decrease/stable) with specific years and percentages
+- Briefly mention the survey-based projected trajectory to the latest year
+- Compare HMIS estimates to survey trajectory (aligned/higher/lower)
+- If there's a difference, indicate when it appears and whether it's temporary or persistent
+
+For Subnational Variability (1 sentence): "In [years], [indicator] coverage shows [strong/moderate] subnational variability, ranging from a minimum of X% ([region]) to a maximum of Y% ([region]), with the majority of regions recording coverage between A% and B%."
+
+Interpretation Rules: Write in project language. Use neutral, descriptive language. DO NOT speculate about causes. DO NOT interpret whether patterns are good or bad. Focus ONLY on patterns visible in the data.
+
+Indicator List to Process
+- anc1 (CPN1)
+- anc4 (CPN4) ✓ Already completed
+- bcg (BCG 0–11 months)
+- penta1 (Penta 1)
+- penta3 (Penta 3)
+- sba (Skilled birth attendance)
+- pnc1_mother (PNC1 mother) — if available
+
+Slide Naming Convention
+- Header: "Estimation de la couverture du service [Indicator Full Name in French]"
+- National chart title: "Tendances de la couverture [Indicator] au niveau national"
+- Subnational chart title: "Couverture [Indicator] par région"
+
+BACK PAGE
+
+FASTR initiative: https://data.gffportal.org/key-theme/FASTR
+
+AFTER COMPLETING THE REPORT
+
+Notify the user: "Report complete. If you'd like to add more sections, you can run these prompts from the library: Prompt 2 (Regional disruptions analysis) or Prompt 3 (Data quality assessment annex)."
+```

@@ -1,0 +1,13 @@
+slides:
+- file: m9i_1_report_overview.md
+  order: 1
+  variant: full
+  title: "Ce que nous allons construire"
+- file: m9i_2_create_report.md
+  order: 2
+  variant: full
+  title: "Créer un rapport pas à pas"
+- file: m9i_3_ai_draft.md
+  order: 3
+  variant: full
+  title: "Accélérer avec l'assistant IA"

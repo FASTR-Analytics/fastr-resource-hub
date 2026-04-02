@@ -20,11 +20,17 @@
   <rect class="box box-trigger" x="220" y="15" width="340" height="45"/>
   <text class="title-text" x="390" y="38">Changements majeurs du financement externe</text>
 
-  <!-- Connecting lines from trigger to questions -->
-  <line class="arrow" x1="300" y1="60" x2="102" y2="88"/>
-  <line class="arrow" x1="360" y1="60" x2="292" y2="88"/>
-  <line class="arrow" x1="420" y1="60" x2="482" y2="88"/>
-  <line class="arrow" x1="480" y1="60" x2="675" y2="88"/>
+  <!-- Tree connector: trigger → question boxes -->
+  <line x1="390" y1="60" x2="390" y2="75" stroke="#1F9A9C" stroke-width="2.5"/>
+  <line x1="102" y1="75" x2="675" y2="75" stroke="#1F9A9C" stroke-width="2.5"/>
+  <line x1="102" y1="75" x2="102" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
+  <line x1="292" y1="75" x2="292" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
+  <line x1="482" y1="75" x2="482" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
+  <line x1="675" y1="75" x2="675" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="96,85 102,92 108,85" fill="#1F9A9C"/>
+  <polygon points="286,85 292,92 298,85" fill="#1F9A9C"/>
+  <polygon points="476,85 482,92 488,85" fill="#1F9A9C"/>
+  <polygon points="669,85 675,92 681,85" fill="#1F9A9C"/>
 
   <!-- 4 question boxes in a row -->
   <rect class="box box-q" x="15" y="90" width="175" height="80"/>
@@ -47,21 +53,28 @@
   <text class="q-text" x="675" y="135">Actions pour préserver</text>
   <text class="q-text" x="675" y="150">les services SRMNIA-N ?</text>
 
-  <!-- Arrows down to FASTR -->
-  <line class="arrow" x1="102" y1="170" x2="102" y2="200"/>
-  <line class="arrow" x1="292" y1="170" x2="292" y2="200"/>
-  <line class="arrow" x1="482" y1="170" x2="482" y2="200"/>
-  <line class="arrow" x1="675" y1="170" x2="675" y2="200"/>
+  <!-- Arrows down to FASTR (explicit polygons for precise placement) -->
+  <line x1="102" y1="170" x2="102" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="96,198 102,205 108,198" fill="#1F9A9C"/>
+  <line x1="292" y1="170" x2="292" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="286,198 292,205 298,198" fill="#1F9A9C"/>
+  <line x1="482" y1="170" x2="482" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="476,198 482,205 488,198" fill="#1F9A9C"/>
+  <line x1="675" y1="170" x2="675" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="669,198 675,205 681,198" fill="#1F9A9C"/>
 
   <!-- FASTR response bar -->
   <rect class="box box-fastr" x="15" y="205" width="750" height="50"/>
   <text class="title-text" x="390" y="225">FASTR : socle analytique avec les données existantes</text>
   <text class="fastr-text" x="390" y="243">Réponses rapides à partir des données DHIS2 déjà collectées</text>
 
-  <!-- Bottom: what FASTR enables -->
-  <line class="arrow" x1="195" y1="255" x2="195" y2="280"/>
-  <line class="arrow" x1="390" y1="255" x2="390" y2="280"/>
-  <line class="arrow" x1="585" y1="255" x2="585" y2="280"/>
+  <!-- Bottom: what FASTR enables (arrows point to box centers) -->
+  <line x1="195" y1="255" x2="195" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="189,278 195,285 201,278" fill="#1F9A9C"/>
+  <line x1="460" y1="255" x2="460" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="454,278 460,285 466,278" fill="#1F9A9C"/>
+  <line x1="680" y1="255" x2="680" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polygon points="674,278 680,285 686,278" fill="#1F9A9C"/>
 
   <rect class="box" x="65" y="285" width="260" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
   <text class="q-text" x="195" y="309">Détecter les perturbations tôt</text>

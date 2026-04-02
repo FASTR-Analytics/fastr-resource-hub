@@ -22,7 +22,7 @@ Cet échange rassemble des équipes pays pour renforcer leurs capacités de suiv
 
 ## Ce que vous allez apprendre
 
-![objectifs de l'échange](../resources/diagrams_fr/learning_exchange_objectives.svg)
+![objectifs de l'échange](../../resources/diagrams_fr/learning_exchange_objectives.svg)
 
 <!--
 À l'issue de cet échange, les participants seront capables de :

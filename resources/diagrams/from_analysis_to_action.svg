@@ -1,14 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
-  <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
-    </filter>
-  </defs>
-
   <!-- Circular arrow path (implied by layout) -->
   <!-- Step 1: Analyze -->
   <g transform="translate(50, 90)">
-    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
     <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Analyze</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">DQA, utilization,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">coverage estimates</text>
@@ -22,7 +16,7 @@
 
   <!-- Step 2: Identify -->
   <g transform="translate(240, 90)">
-    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
     <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Identify</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Trends, gaps,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">priorities</text>
@@ -36,7 +30,7 @@
 
   <!-- Step 3: Investigate -->
   <g transform="translate(430, 90)">
-    <rect width="140" height="80" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
     <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Investigate</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Root causes,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">context, data quality</text>
@@ -50,7 +44,7 @@
 
   <!-- Step 4: Act -->
   <g transform="translate(620, 90)">
-    <rect width="80" height="80" rx="12" fill="#09544F" filter="url(#shadow)"/>
+    <rect width="80" height="80" rx="12" fill="#09544F" stroke="#073B38" stroke-width="1.5"/>
     <text x="40" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white">Act</text>
     <text x="40" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">Decide &amp;</text>
     <text x="40" y="69" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">respond</text>

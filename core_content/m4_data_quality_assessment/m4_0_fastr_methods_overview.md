@@ -4,12 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## FASTR analytical pipeline
+## How FASTR analyzes your data
 
-The FASTR analysis follows a sequential workflow:
+FASTR runs **4 modules in order**. Each one sets the stage for the next:
 
-1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
-2. **Adjust for quality issues** - Apply corrections to improve data reliability
-3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+| | Module | What it does | Why |
+|---|--------|-------------|-----|
+| 1️⃣ | **Check quality** | Spots data entry errors, missing reports, and inconsistencies | You can't analyze unreliable data |
+| 2️⃣ | **Fix problems** | Replaces extreme values and fills in missing months | Clean data for reliable results |
+| 3️⃣ | **Analyze services** | Compares observed volumes to what was expected to detect disruptions | Know where and when services changed |
+| 4️⃣ | **Estimate coverage** | Calculates % of population covered from reported data | Move from raw numbers to indicators that guide action |
 
-![Analytical Pipeline h:280](../../resources/diagrams/analytical_pipeline.svg)
+You will run all 4 modules on the platform during this workshop.

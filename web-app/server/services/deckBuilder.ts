@@ -149,6 +149,12 @@ async function buildSessionSlides(
   // Individual topic files like m4_s1, m4_s2, etc.
   // Useful for cherry-picking specific topics without loading entire module
   if (session.topics && Array.isArray(session.topics) && session.topics.length > 0) {
+    // Add section cover slide if no module already generated one
+    if (!session.module && session.session) {
+      const titleSlide = `<!-- _class: section-cover -->\n![bg](../../resources/backgrounds/section_slide.png)\n\n# ${session.session}`
+      allSlideContents.push(titleSlide)
+    }
+    const loadedFiles = new Set<string>()
     for (const topicId of session.topics) {
       // Topic IDs like "m4_s1", "m9c_3" need to be converted to file names
       // Try to find the matching file in core_content
@@ -159,9 +165,11 @@ async function buildSessionSlides(
         if (folderName) {
           const modulePath = path.join(coreContentPath, folderName)
           if (fs.existsSync(modulePath)) {
-            // Find file that starts with the topic ID
+            // Find files that start with the topic ID
             const files = fs.readdirSync(modulePath).filter(f => f.startsWith(topicId) && f.endsWith('.md'))
             for (const file of files) {
+              if (loadedFiles.has(file)) continue
+              loadedFiles.add(file)
               let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
               // Remove frontmatter
               content = content.replace(/^---[\s\S]*?---\s*/m, '')
@@ -206,6 +214,10 @@ async function buildSessionSlides(
     if (agendaMatch) {
       const agendaDay = parseInt(agendaMatch[1])
       return buildDayAgendaSlide(config, agendaDay, language)
+    }
+    // For sections with duration, add a placeholder slide after the cover
+    if (session.duration && session.duration > 0) {
+      return buildSectionSlide(session) + '\n---\n\n' + buildGenericSessionSlide(session)
     }
     return buildSectionSlide(session)
   }
@@ -350,11 +362,10 @@ async function buildModuleSlides(
   // Start with a session title slide
   const moduleName = getModuleName(moduleId) || sessionName || 'Session'
   const displayName = sessionName || moduleName
-  const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# ${sessionLabel}: ${displayName}`
+# ${displayName}`
 
   const contents: string[] = [titleSlide]
   for (const file of files) {
@@ -644,9 +655,9 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language
   const skipNumberTypes = ['day_start', 'day_end', 'day_recap', 'opening', 'closing']
 
   for (const s of sessions) {
-    // Skip section headers and title slides in agenda
-    if (s.type === 'section' || s.type === 'day_title') continue
-    if (s.duration === 0) continue  // Skip 0-duration items like title slides
+    // Skip title slides and 0-duration items (like agenda placeholders)
+    if (s.type === 'day_title') continue
+    if (!s.duration || s.duration === 0) continue
 
     const rawName = s.session || ''
     if (!rawName) continue
@@ -660,19 +671,15 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language
 
     const speaker = s.speaker || ''
 
-    // Add session number for main sessions (not breaks or admin items)
+    // Use session name directly (session names already include numbering if desired)
     let displayName = rawName
     const isBreak = breakTypes.includes(s.type || '')
     const isAdmin = skipNumberTypes.includes(s.type || '')
-    const isModuleSession = !isBreak && !isAdmin && s.module
-    if (isModuleSession) {
-      displayName = `Session ${sessionNumber}: ${rawName}`
-      sessionNumber++
-    }
+    const isContentSession = !isBreak && !isAdmin
 
     if (timeStr) {
       // Only make module sessions bold, not breaks or admin items
-      const formattedName = isModuleSession ? `**${displayName}**` : displayName
+      const formattedName = isContentSession ? `**${displayName}**` : displayName
       rows.push(`| ${timeStr} | ${formattedName} | ${speaker} |`)
     }
 
@@ -853,7 +860,7 @@ function buildBreakSlide(session: Session, language: Language = 'en'): string {
     : ''
 
   return `<!-- _class: break -->
-![bg](../resources/backgrounds/break_slide.png)
+![bg](../../resources/backgrounds/break_slide.png)
 
 # ${title}
 
@@ -909,7 +916,7 @@ function buildDayEndSlide(session: Session, dayNumber: number, language: Languag
  */
 function buildSectionSlide(session: Session): string {
   return `<!-- _class: section-cover -->
-![bg](../resources/backgrounds/section_slide.png)
+![bg](../../resources/backgrounds/section_slide.png)
 
 # ${session.session}
 `

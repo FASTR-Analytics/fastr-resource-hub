@@ -6,6 +6,6 @@ paginate: true
 
 # Demo – FASTR analysis platform
 
-![w:120](../resources/icons/demo.svg)
+![w:120](../../resources/icons/demo.svg)
 
 ---

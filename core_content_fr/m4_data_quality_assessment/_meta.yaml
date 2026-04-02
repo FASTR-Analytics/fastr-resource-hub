@@ -88,6 +88,10 @@ slides:
   order: 6
   variant: full
   title: 'Module AQD : Paramètres de configuration'
+- file: m4_s0_dqa_what_we_check.md
+  order: 0
+  variant: condensed
+  title: 'Qualité des données : que vérifie FASTR ?'
 - file: m4_s1_dqa_pipeline_overview.md
   order: 1
   variant: condensed

@@ -1,13 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320">
-  <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
-    </filter>
-  </defs>
 
   <!-- Card 1: Discernement -->
   <g transform="translate(15, 20)">
-    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3"/>
     <circle cx="78" cy="40" r="22" fill="#09544F"/>
     <text x="78" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff" dominant-baseline="central">&#x1F50D;</text>
     <text x="78" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Discernement</text>
@@ -25,7 +20,7 @@
 
   <!-- Card 2: Description -->
   <g transform="translate(185, 20)">
-    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3"/>
     <circle cx="78" cy="40" r="22" fill="#0C716B"/>
     <text x="78" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff" dominant-baseline="central">&#x1F4AC;</text>
     <text x="78" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Description</text>
@@ -43,7 +38,7 @@
 
   <!-- Card 3: Délégation -->
   <g transform="translate(355, 20)">
-    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3"/>
     <circle cx="78" cy="40" r="22" fill="#1F9A9C"/>
     <text x="78" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff" dominant-baseline="central">&#x1F4CB;</text>
     <text x="78" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Délégation</text>
@@ -61,7 +56,7 @@
 
   <!-- Card 4: Diligence -->
   <g transform="translate(525, 20)">
-    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="155" height="260" rx="10" fill="#E8F4F3"/>
     <circle cx="78" cy="40" r="22" fill="#09544F"/>
     <text x="78" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#fff" dominant-baseline="central">&#x2714;</text>
     <text x="78" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Diligence</text>

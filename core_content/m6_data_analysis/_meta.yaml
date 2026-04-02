@@ -95,6 +95,22 @@ slides:
   order: 1
   variant: condensed
   title: Service utilization analysis
+- file: m6_s0_utilization_detecting_changes.md
+  order: 0
+  variant: condensed
+  title: 'Service utilization: detecting changes'
+- file: m6_s0b_reading_disruption_chart.md
+  order: 0.001
+  variant: condensed
+  title: Reading a disruption chart
+- file: m6_s0c_coverage_methods.md
+  order: 0.01
+  variant: condensed
+  title: 'Coverage: from volumes to percentages'
+- file: m6_s0d_reading_coverage_chart.md
+  order: 0.011
+  variant: condensed
+  title: Reading a coverage chart
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed

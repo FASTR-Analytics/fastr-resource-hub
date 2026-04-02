@@ -712,6 +712,25 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     fill: { color: COLORS.lime },
     line: { color: COLORS.lime },
   })
+
+  // Add logos (GFF top-left, FASTR bottom-left) with correct aspect ratios
+  for (const img of data.images) {
+    if (isBackgroundImage(img)) continue
+    const imgPath = resolveImagePath(img.path)
+    if (!imgPath) continue
+    try {
+      const dims = imageSize(imgPath)
+      if (!dims.width || !dims.height) continue
+      const aspect = dims.width / dims.height
+      if (/GFF_Logo/i.test(img.path)) {
+        const h = 0.4
+        slide.addImage({ path: imgPath, x: 0.6, y: 0.3, w: h * aspect, h })
+      } else if (/FASTR.*White/i.test(img.path)) {
+        const h = 0.5
+        slide.addImage({ path: imgPath, x: 0.6, y: 6.85, w: h * aspect, h })
+      }
+    } catch {}
+  }
 }
 
 function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {

@@ -8,6 +8,6 @@ paginate: true
 
 # Bienvenue et remarques d'ouverture
 
-![w:120](../resources/icons/lecture.png)
+![w:120](../../resources/icons/lecture.png)
 
 ---

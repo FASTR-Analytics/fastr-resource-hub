@@ -6,7 +6,7 @@ paginate: true
 
 ## Récapitulatif de la journée
 
-![w:120](../resources/icons/thought.png)
+![w:120](../../resources/icons/thought.png)
 
 <!--
 PRESENTER NOTES:

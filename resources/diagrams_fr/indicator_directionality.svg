@@ -1,16 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
-  <defs>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/>
-    </filter>
-  </defs>
 
   <!-- Title -->
   <text x="350" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#09544F">Tous les changements ne vont pas dans le même sens</text>
 
   <!-- Left column: La hausse est positive -->
   <g transform="translate(30, 50)">
-    <rect x="0" y="0" width="310" height="250" rx="12" fill="#E8F4F3" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="310" height="250" rx="12" fill="#E8F4F3"/>
     <!-- Header -->
     <rect x="0" y="0" width="310" height="44" rx="12" fill="#09544F"/>
     <rect x="0" y="20" width="310" height="24" fill="#09544F"/>
@@ -42,7 +37,7 @@
 
   <!-- Right column: La baisse est positive -->
   <g transform="translate(360, 50)">
-    <rect x="0" y="0" width="310" height="250" rx="12" fill="#FDE8E8" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="310" height="250" rx="12" fill="#FDE8E8"/>
     <!-- Header -->
     <rect x="0" y="0" width="310" height="44" rx="12" fill="#C53030"/>
     <rect x="0" y="20" width="310" height="24" fill="#C53030"/>

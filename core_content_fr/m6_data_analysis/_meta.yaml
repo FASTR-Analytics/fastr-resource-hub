@@ -97,6 +97,22 @@ slides:
   order: 19
   variant: full
   title: 'Module de couverture : Paramètres de configuration'
+- file: m6_s0_utilization_detecting_changes.md
+  order: 0
+  variant: condensed
+  title: 'Utilisation des services : détecter les changements'
+- file: m6_s0b_reading_disruption_chart.md
+  order: 0.001
+  variant: condensed
+  title: Lire un graphique de perturbation
+- file: m6_s0c_coverage_methods.md
+  order: 0.01
+  variant: condensed
+  title: 'Couverture : des volumes aux pourcentages'
+- file: m6_s0d_reading_coverage_chart.md
+  order: 0.011
+  variant: condensed
+  title: Lire un graphique de couverture
 - file: m6_s1_utilization_overview.md
   order: 1
   variant: condensed

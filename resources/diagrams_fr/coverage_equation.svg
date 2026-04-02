@@ -35,8 +35,8 @@
 
   <!-- Info text for Numerator -->
   <text class="info-text" x="540" y="45">Le numérateur provient des</text>
-  <text class="info-text" x="540" y="58">données DHIS2, comptage des</text>
-  <text class="info-text" x="540" y="71">services ajusté pour les aberrantes</text>
+  <text class="info-text" x="540" y="58">données DHIS2 — volumes de</text>
+  <text class="info-text" x="540" y="71">services après correction qualité</text>
 
   <!-- Info text for Denominator -->
   <text class="info-text" x="540" y="135">Plusieurs options pour</text>
