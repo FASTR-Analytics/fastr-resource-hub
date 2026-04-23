@@ -319,8 +319,7 @@ You should already know which country this is from the platform context. If you 
 Use ask_user_questions to ask each of the following one at a time:
 1. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
 2. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
-
-The analysis generation date is February 2026.
+3. "When was this analysis completed?" — suggest the current month and year (e.g., "April 2026") but let the user confirm or change it. Use their answer as the report generation date.
 
 When user provides the analysis time period, convert to period_id format:
 - Start date becomes min value: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
@@ -722,8 +721,7 @@ Use ask_user_questions to ask each of the following one at a time:
 1. "Which subnational area should this report focus on? (e.g., a zone, state, county, or district)" — ask as a free-text question, let the user type the area name
 2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
 3. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
-
-The analysis generation date is February 2026.
+4. "When was this analysis completed?" — suggest the current month and year (e.g., "April 2026") but let the user confirm or change it. Use their answer as the report generation date.
 
 When user provides the analysis time period, convert to period_id format:
 - Start date becomes min value: [YEAR][MONTH] as 6-digit number (e.g., January 2025 = 202501)
@@ -1209,9 +1207,9 @@ Subtitle:
 - Use the user's answer to Question 2
 
 Date:
-- Include the date the analysis was generated (current month and year)
-- French format: "Analyse générée en mars 2026"
-- English format: "Analysis generated in March 2026"
+- Ask the user: "When was this analysis completed?" — suggest the current month and year (e.g., "April 2026") but let the user confirm or change it
+- French format: "Analyse générée en [MONTH_YEAR]"
+- English format: "Analysis generated in [MONTH_YEAR]"
 
 STEP 2: INDICATOR DISCOVERY AND ORGANIZATION
 

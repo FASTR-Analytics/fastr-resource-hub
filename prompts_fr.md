@@ -319,8 +319,7 @@ Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la pl
 Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
 1. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
 2. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
-
-La date de génération de l'analyse est février 2026.
+3. « Quand cette analyse a-t-elle été finalisée ? » — suggérer le mois et l'année en cours (par exemple « avril 2026 ») mais laisser l'utilisateur confirmer ou modifier. Utiliser sa réponse comme date de génération du rapport.
 
 Quand l'utilisateur fournit la période d'analyse, convertir au format period_id :
 - La date de début devient la valeur minimale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple janvier 2025 = 202501)
@@ -724,8 +723,7 @@ Utiliser ask_user_questions pour poser chacune des questions suivantes une à la
 1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple zone, État, comté ou district) » — poser comme question à texte libre, laisser l'utilisateur saisir le nom de la zone
 2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
 3. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
-
-La date de génération de l'analyse est février 2026.
+4. « Quand cette analyse a-t-elle été finalisée ? » — suggérer le mois et l'année en cours (par exemple « avril 2026 ») mais laisser l'utilisateur confirmer ou modifier. Utiliser sa réponse comme date de génération du rapport.
 
 Quand l'utilisateur fournit la période d'analyse, convertir au format period_id :
 - La date de début devient la valeur minimale : [ANNÉE][MOIS] sous forme de nombre à 6 chiffres (par exemple janvier 2025 = 202501)
@@ -1211,9 +1209,9 @@ Sous-titre :
 - Utiliser la réponse de l'utilisateur à la Question 2
 
 Date :
-- Inclure la date de génération de l'analyse (mois et année en cours)
-- Format français : « Analyse générée en mars 2026 »
-- Format anglais : « Analysis generated in March 2026 »
+- Demander à l'utilisateur : « Quand cette analyse a-t-elle été finalisée ? » — suggérer le mois et l'année en cours (par exemple « avril 2026 ») mais laisser l'utilisateur confirmer ou modifier
+- Format français : « Analyse générée en [MOIS_ANNÉE] »
+- Format anglais : « Analysis generated in [MONTH_YEAR] »
 
 ÉTAPE 2 : DÉCOUVERTE ET ORGANISATION DES INDICATEURS
 
