@@ -535,7 +535,7 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
 2. Treat disruption signals as descriptive and exploratory
-3. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 6-6 column split — text block (span 6) on the left, visualization block (span 6) on the right. Do not leave blocks stacked vertically
+3. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
 4. Use consistent terminology throughout
 5. Always refer to slides by their number (not their ID)
 
@@ -617,7 +617,7 @@ ACCURACY REQUIREMENTS:
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language
-2. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 6-6 column split — text block (span 6) on the left, visualization block (span 6) on the right. Do not leave blocks stacked vertically
+2. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
 3. Use consistent terminology throughout
 4. Always refer to slides by their number (not their ID)
 

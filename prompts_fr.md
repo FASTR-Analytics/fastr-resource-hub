@@ -538,7 +538,7 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 6-6 — bloc texte (span 6) à gauche, bloc visualisation (span 6) à droite. Ne pas laisser les blocs empilés verticalement
+3. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
 4. Utiliser une terminologie cohérente tout au long du rapport
 5. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
@@ -620,7 +620,7 @@ EXIGENCES DE PRÉCISION :
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique
-2. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 6-6 — bloc texte (span 6) à gauche, bloc visualisation (span 6) à droite. Ne pas laisser les blocs empilés verticalement
+2. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
 3. Utiliser une terminologie cohérente tout au long du rapport
 4. Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
