@@ -533,35 +533,22 @@ ACCURACY REQUIREMENTS:
 4. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
 
 REPORT STANDARDS:
-1. Maintain cautious, analytical language - no causal claims
-2. Treat disruption signals as descriptive and exploratory
-3. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
-4. Use consistent terminology throughout
-5. Always refer to slides by their number (not their ID)
+1. Maintain cautious, analytical language - no causal claims. Treat disruption signals as descriptive and exploratory
+2. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
+3. Use consistent terminology throughout. Always refer to slides by their number (not their ID)
+4. Word count: keep interpretation text under 60 words per slide — the span-4 column is narrow
 
-CRITICAL — INDICATOR INTERPRETATION RULES:
-NOT all increases are good. NOT all decreases are bad. You MUST apply the correct interpretation based on indicator type:
+INDICATOR INTERPRETATION:
+When writing the summary table interpretation (Slide 2), check indicator direction: service delivery indicators (ANC, deliveries, immunizations, OPD) — surplus = positive, disruption = concern. Mortality/adverse outcome indicators (deaths, stillbirths) — increase = BAD, decrease = good. Never describe an increase in deaths as positive.
 
-Service delivery indicators (increase = positive, decrease = concern):
-- ANC visits, deliveries, PNC visits, immunizations, OPD visits, family planning, skilled birth attendance
-- For these: "surplus" (above expected) = positive signal, "disruption" (below expected) = concern
+STEP 1: DISCOVER INDICATORS AND AREAS
 
-Mortality and adverse outcome indicators (increase = BAD, decrease = positive):
-- Maternal deaths, neonatal deaths, stillbirths, and any indicator measuring deaths or adverse events
-- For these: an INCREASE is a NEGATIVE finding — more deaths is ALWAYS bad
-- For these: a DECREASE is a POSITIVE finding — fewer deaths is ALWAYS good
-- NEVER describe an increase in deaths as an "improvement" or "positive trend"
-- NEVER describe a decrease in deaths as a "concern" or "disruption"
+Before creating any slides:
+1. Use get_slide_deck to read the existing report and extract the list of indicator_common_id values used in the main analysis slides (these are the indicators to filter on throughout this annex)
+2. Use get_metric_data with metricId "m3-03-01" to discover the available admin_area_2 values. This gives you the full list of subnational areas to create profile slides for
+3. If either call returns no data, inform the user and stop
 
-Negative quality indicators (increase = bad, decrease = good):
-- Dropout rates (e.g., Penta1 to Penta3 dropout), outlier rates, stockout rates
-- For these: an increase means the situation is worsening
-
-When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
-
-VERIFICATION: Before finalizing each slide, cross-check that described trends match what the visualization shows. Confirm interpretation framing matches indicator type — an increase in deaths is NEVER described as positive.
-
-STRUCTURE:
+STEP 2: BUILD SLIDES
 
 SLIDE 1 - Annex header slide
 - Title: "Annex 1: Subnational service utilization disruptions"
@@ -576,15 +563,15 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
 - vizPresetId: "disruption-differences-table"
-- filterOverrides: Filter on indicator_common_id to include all indicators from the report
+- filterOverrides: Filter on indicator_common_id to include the indicators discovered in Step 1
 - periodFilterOverride: Use the same period as the main report
 
-Interpretation (left side): 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
+Interpretation (left side, max 60 words): 2-3 sentences summarizing the key patterns (e.g., which areas show consistent surpluses or shortfalls, whether performance varies by service area).
 
 Add a text block at the bottom: "Percentage difference between the observed and expected number of services. A negative value indicates an observed level lower than the expected level (disruption), while a positive value indicates a higher level (surplus)."
 
 SLIDES 3+ - Subnational area profiles
-For EACH subnational area in the platform, create a simple slide with:
+For EACH admin_area_2 value discovered in Step 1, create a simple slide with:
 
 - Title: Name of the subnational area
 - Visualization: Create using from_metric with these parameters:
@@ -596,7 +583,7 @@ For EACH subnational area in the platform, create a simple slide with:
   - vizPresetId: "disruption-chart-single-admin-area-2" (REQUIRES selectedReplicant)
   - chartTitle: "Comparing reported service use to expected trends, [Area Name]"
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
+  - filterOverrides: Filter on indicator_common_id to include the indicators discovered in Step 1
   - periodFilterOverride: Use the same period as the main report
 
 Keep these slides clean — area name and visualization only, no interpretation text.
@@ -618,21 +605,20 @@ ACCURACY REQUIREMENTS:
 REPORT STANDARDS:
 1. Maintain cautious, analytical language
 2. Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
-3. Use consistent terminology throughout
-4. Always refer to slides by their number (not their ID)
+3. Use consistent terminology throughout. Always refer to slides by their number (not their ID)
+4. Word count: keep interpretation text under 60 words per slide — the span-4 column is narrow
 
 METHODOLOGY REFERENCE:
-If you need additional context on how FASTR calculates data quality metrics, fetch the methodology documentation from https://fastr-analytics.github.io/fastr-resource-hub/. Use it to write accurate summaries and interpretations for each slide.
+If you need additional context on how FASTR calculates data quality metrics, use get_methodology_docs_list and get_methodology_doc_content to look up the relevant methodology documentation. Use it to write accurate summaries and interpretations for each slide.
 
 DATA QUALITY METRICS:
-Use get_available_metrics to confirm available metrics and their preset visualizations. The data quality metrics used in this annex are:
+The data quality metrics used in this annex are listed below. For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period. Before creating each slide, call get_metric_data to verify the metric has data — if it returns empty, skip that slide and note it in the final summary.
+
 - m1-01-01: Proportion of outliers [percent] — preset: outlier-table — filters: indicator_common_id, admin_area_2
 - m1-02-02: Proportion of completed records [percent] — preset: completeness-table — filters: indicator_common_id, admin_area_2. ALWAYS use completeness-table preset for this metric (do NOT use completeness-timeseries)
 - m1-03-01: Proportion of sub-national areas meeting consistency criteria [percent] — preset: consistency-table — filters: ratio_type, admin_area_2
 - m1-04-01: Proportion of facilities with adequate data quality [percent] — preset: dqa-score-table — filters: admin_area_2
 - m1-04-02: Average data quality score across facilities [percent] — preset: mean-dqa-table — filters: admin_area_2
-
-For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period.
 
 VERIFICATION: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
 
@@ -658,7 +644,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
 
-Interpretation (left side): Use bullet points:
+Interpretation (left side, max 60 words): Use bullet points:
 - Summary of completeness trends over the analysis period
 - Which indicators have weaker completeness (name them)
 - Whether completeness improved over time
@@ -693,11 +679,11 @@ SLIDE 3 - Outliers
   - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): Use bullet points:
-  - Describe the overall national trend in outlier rates — are they stable, improving, or worsening?
-  - Name specific indicators with the highest outlier rates
-  - Note whether outlier rates have improved or worsened over the analysis period
-  - Explain the implication: high outlier rates mean more values are being adjusted, which can affect the reliability of trend analysis
+- Interpretation (left side, max 60 words): Use bullet points:
+  - Overall national trend in outlier rates — stable, improving, or worsening?
+  - Name indicators with the highest outlier rates
+  - Whether rates improved or worsened over the analysis period
+  - Implication: high outlier rates mean more adjusted values, affecting trend reliability
 - Add a text block below the interpretation: "Outliers are reports which are suspiciously high compared to the usual volume reported by the facility in other months. Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. Outliers are defined as observations which are greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%. Outliers are only identified for indicators where the volume is greater than or equal to the median, the volume is not missing, and the average volume is greater than 100."
 
 SLIDE 4 - Internal consistency
@@ -714,14 +700,15 @@ SLIDE 4 - Internal consistency
   - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): Use bullet points:
-  - Explain what each ratio_type represents (e.g., Penta1/Penta3 compares first to third dose, ANC1/ANC4 compares first to fourth visit)
-  - Identify which ratios consistently meet or fail criteria
-  - Note whether consistency is improving or worsening over the analysis period
-  - Highlight any specific regions where consistency is notably low
+- Interpretation (left side, max 60 words): Use bullet points:
+  - What each ratio_type represents (e.g., Penta1/Penta3, ANC1/ANC4)
+  - Which ratios consistently meet or fail criteria
+  - Whether consistency is improving or worsening
+  - Any specific regions with notably low consistency
 - Add a text block below the interpretation: "Internal consistency assesses the plausibility of reported data based on related indicators. Consistency metrics are approximate — depending on timing and seasonality, indicator definitions, and the nature of service delivery and reporting, values may be expected to sit outside plausible ranges. Indicators which are similar are expected to have roughly the same volume over the year (within a 30% margin). The data in this analysis is adjusted for outliers."
 
-SLIDE 5 - Data quality trends (overall DQA score)
+SLIDE 5 - Data quality trends (proportion of facilities with adequate DQ)
+This slide shows a binary pass/fail measure: what share of facilities meet ALL quality criteria.
 - Title: Write an analytical headline about DQA trends (e.g., "The proportion of facilities with adequate data quality has improved from X% to Y% since [YEAR]")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -734,14 +721,15 @@ SLIDE 5 - Data quality trends (overall DQA score)
   - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): Use bullet points:
-  - Describe the national trend — is DQ improving over time?
-  - Name top-performing and lowest-performing regions
-  - Identify regions where DQ has notably improved or declined
-  - Explain the implication: areas with low DQA scores may have less reliable disruption estimates
+- Interpretation (left side, max 60 words): Use bullet points:
+  - National trend — is the proportion of adequate facilities improving?
+  - Top-performing and lowest-performing regions
+  - Regions with notable improvement or decline
+  - Implication: areas with low scores may have less reliable disruption estimates
 - Add a text block below the interpretation: "Adequate data quality is defined as: 1) No missing data or outliers for OPD, Penta1, and ANC1, where available 2) Consistent reporting between Penta1/Penta3 and ANC1/ANC4."
 
 SLIDE 6 - Data quality trends (mean DQA score)
+This slide shows a continuous average score — it captures gradual improvement even when facilities don't yet pass the binary threshold in Slide 5.
 - Title: Write an analytical headline about mean DQA trends (e.g., "Mean data quality scores are highest in [X] and [Y], while [Z] lags behind")
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -754,11 +742,11 @@ SLIDE 6 - Data quality trends (mean DQA score)
   - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interpretation (left side): Use bullet points:
-  - Describe the national mean DQA trend — is it improving, stable, or declining?
+- Interpretation (left side, max 60 words): Use bullet points:
+  - National mean DQA trend — improving, stable, or declining?
   - Contrast top-performing vs lowest-performing regions
-  - Note any regions showing significant improvement or decline
-  - Conclude with an overall assessment of data quality trajectory and what it means for the disruption analysis
+  - Regions with significant improvement or decline
+  - Overall assessment: what does the trajectory mean for the disruption analysis?
 - Add a text block below the interpretation: "Items included in the DQA score include: No missing data for 1) OPD, 2) Penta1, and 3) ANC1, where available; No outliers for 4) OPD, 5) Penta1, and 6) ANC1, where available; Consistent reporting between 7) Penta1/Penta3, 8) ANC1/ANC4, 9) BCG/Delivery, where available."
 ```
 

@@ -536,35 +536,22 @@ EXIGENCES DE PRÉCISION :
 4. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
 
 NORMES DU RAPPORT :
-1. Maintenir un langage prudent et analytique - pas d'affirmations causales
-2. Traiter les signaux de perturbation comme descriptifs et exploratoires
-3. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
-4. Utiliser une terminologie cohérente tout au long du rapport
-5. Toujours désigner les diapositives par leur numéro (pas par leur ID)
+1. Maintenir un langage prudent et analytique - pas d'affirmations causales. Traiter les signaux de perturbation comme descriptifs et exploratoires
+2. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
+3. Utiliser une terminologie cohérente tout au long du rapport. Toujours désigner les diapositives par leur numéro (pas par leur ID)
+4. Nombre de mots : limiter le texte d'interprétation à 60 mots maximum par diapositive — la colonne span-4 est étroite
 
-CRITIQUE — RÈGLES D'INTERPRÉTATION DES INDICATEURS :
-Toutes les augmentations NE SONT PAS positives. Toutes les baisses NE SONT PAS négatives. Vous DEVEZ appliquer l'interprétation correcte selon le type d'indicateur :
+INTERPRÉTATION DES INDICATEURS :
+Lors de la rédaction de l'interprétation du tableau synthétique (Diapositive 2), vérifier le sens de chaque indicateur : indicateurs de prestation de services (CPN, accouchements, vaccinations, consultations externes) — surplus = positif, perturbation = préoccupant. Indicateurs de mortalité/issues défavorables (décès, mortinaissances) — augmentation = MAUVAIS, baisse = bon. Ne jamais décrire une augmentation des décès comme positive.
 
-Indicateurs de prestation de services (augmentation = positif, baisse = préoccupant) :
-- Visites CPN, accouchements, CPoN, vaccinations, consultations externes, planification familiale, accouchements assistés
-- Pour ceux-ci : « surplus » (au-dessus de l'attendu) = signal positif, « perturbation » (en dessous de l'attendu) = préoccupant
+ÉTAPE 1 : DÉCOUVRIR LES INDICATEURS ET LES ZONES
 
-Indicateurs de mortalité et d'issues défavorables (augmentation = MAUVAIS, baisse = positif) :
-- Décès maternels, décès néonatals, mortinaissances, et tout indicateur mesurant des décès ou des issues défavorables
-- Pour ceux-ci : une AUGMENTATION est un résultat NÉGATIF — plus de décès est TOUJOURS mauvais
-- Pour ceux-ci : une DIMINUTION est un résultat POSITIF — moins de décès est TOUJOURS bon
-- Ne JAMAIS décrire une augmentation des décès comme une « amélioration » ou une « tendance positive »
-- Ne JAMAIS décrire une diminution des décès comme une « préoccupation » ou une « perturbation »
+Avant de créer des diapositives :
+1. Utiliser get_slide_deck pour lire le rapport existant et extraire la liste des valeurs indicator_common_id utilisées dans les diapositives d'analyse principale (ce sont les indicateurs à filtrer dans toute cette annexe)
+2. Utiliser get_metric_data avec metricId "m3-03-01" pour découvrir les valeurs admin_area_2 disponibles. Cela donne la liste complète des zones infranationales pour les profils
+3. Si l'un des appels ne retourne aucune donnée, informer l'utilisateur et arrêter
 
-Indicateurs négatifs de qualité (augmentation = mauvais, baisse = bon) :
-- Taux d'abandon (par exemple abandon Penta1 à Penta3), taux de valeurs aberrantes, taux de rupture de stock
-- Pour ceux-ci : une augmentation signifie que la situation se détériore
-
-Lors de la rédaction des titres et des interprétations, toujours vérifier : cet indicateur mesure-t-il quelque chose dont nous voulons PLUS (services) ou MOINS (décès, abandons) ? Formuler en conséquence.
-
-VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que les tendances décrites correspondent à ce que montre la visualisation. Confirmer que le cadrage de l'interprétation correspond au type d'indicateur — une augmentation des décès n'est JAMAIS décrite comme positive.
-
-STRUCTURE :
+ÉTAPE 2 : CONSTRUIRE LES DIAPOSITIVES
 
 DIAPOSITIVE 1 - Diapositive d'en-tête de l'annexe
 - Titre : « Annexe 1 : Perturbations de l'utilisation des services au niveau infranational »
@@ -579,15 +566,15 @@ Visualization (right side): Create using from_metric with these parameters:
   Values: pct_diff (Percent difference)
   Auto-disaggregated by: admin_area_2, indicator_common_id
 - vizPresetId: "disruption-differences-table"
-- filterOverrides: Filter on indicator_common_id to include all indicators from the report
+- filterOverrides: Filter on indicator_common_id to include the indicators discovered in Step 1
 - periodFilterOverride: Use the same period as the main report
 
-Interprétation (côté gauche) : 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
+Interprétation (côté gauche, max 60 mots) : 2-3 phrases résumant les principaux schémas (par exemple quelles zones montrent des surplus ou des déficits constants, si la performance varie selon le domaine de services).
 
 Ajouter un bloc de texte en bas : « Pourcentage de différence entre le nombre de services observés et le nombre de services attendus. Une valeur négative indique un niveau observé inférieur au niveau attendu (perturbation), tandis qu'une valeur positive indique un niveau supérieur (surplus). »
 
 DIAPOSITIVES 3+ - Profils par zone infranationale
-Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simple avec :
+Pour CHAQUE valeur admin_area_2 découverte à l'étape 1, créer une diapositive simple avec :
 
 - Titre : Nom de la zone infranationale
 - Visualization: Create using from_metric with these parameters:
@@ -599,7 +586,7 @@ Pour CHAQUE zone infranationale dans la plateforme, créer une diapositive simpl
   - vizPresetId: "disruption-chart-single-admin-area-2" (REQUIRES selectedReplicant)
   - chartTitle: « Comparaison de l'utilisation des services rapportée aux tendances attendues, [Nom de la zone] »
   - selectedReplicant: The admin_area_2 value for this specific subnational area
-  - filterOverrides: Filter on indicator_common_id to include all indicators from the report
+  - filterOverrides: Filter on indicator_common_id to include the indicators discovered in Step 1
   - periodFilterOverride: Use the same period as the main report
 
 Garder ces diapositives épurées — nom de la zone et visualisation uniquement, pas de texte d'interprétation.
@@ -621,21 +608,20 @@ EXIGENCES DE PRÉCISION :
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique
 2. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
-3. Utiliser une terminologie cohérente tout au long du rapport
-4. Toujours désigner les diapositives par leur numéro (pas par leur ID)
+3. Utiliser une terminologie cohérente tout au long du rapport. Toujours désigner les diapositives par leur numéro (pas par leur ID)
+4. Nombre de mots : limiter le texte d'interprétation à 60 mots maximum par diapositive — la colonne span-4 est étroite
 
 RÉFÉRENCE MÉTHODOLOGIQUE :
-Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, consultez la documentation méthodologique à l'adresse https://fastr-analytics.github.io/fastr-resource-hub/. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
+Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, utiliser get_methodology_docs_list et get_methodology_doc_content pour consulter la documentation méthodologique pertinente. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
 
 INDICATEURS DE QUALITÉ DES DONNÉES :
-Utiliser get_available_metrics pour confirmer les indicateurs disponibles et leurs préréglages de visualisation. Les indicateurs de qualité des données utilisés dans cette annexe sont :
+Les indicateurs de qualité des données utilisés dans cette annexe sont listés ci-dessous. Pour chaque diapositive, créer la visualisation avec from_metric en utilisant le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal. Avant de créer chaque diapositive, appeler get_metric_data pour vérifier que l'indicateur contient des données — s'il est vide, ignorer cette diapositive et le signaler dans le résumé final.
+
 - m1-01-01 : Proportion de valeurs aberrantes [pourcentage] — préréglage : outlier-table — filtres : indicator_common_id, admin_area_2
 - m1-02-02 : Proportion de rapports complétés [pourcentage] — préréglage : completeness-table — filtres : indicator_common_id, admin_area_2. TOUJOURS utiliser le préréglage completeness-table pour cet indicateur (NE PAS utiliser completeness-timeseries)
 - m1-03-01 : Proportion de zones infranationales respectant les critères de cohérence [pourcentage] — préréglage : consistency-table — filtres : ratio_type, admin_area_2
 - m1-04-01 : Proportion d'établissements avec une qualité de données adéquate [pourcentage] — préréglage : dqa-score-table — filtres : admin_area_2
 - m1-04-02 : Score moyen de qualité des données entre les établissements [pourcentage] — préréglage : mean-dqa-table — filtres : admin_area_2
-
-Pour chaque diapositive, créer la visualisation avec from_metric en utilisant le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal.
 
 VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que tous les pourcentages et scores correspondent à ce que montre la visualisation.
 
@@ -661,7 +647,7 @@ Visualization (right side): Create using from_metric with these parameters:
 - Color coding: Green = 90% or above | Yellow = 80% to 89% | Red = below 80%
 - periodFilterOverride: Use the same period as the main report
 
-Interprétation (côté gauche) : Utiliser des listes à puces :
+Interprétation (côté gauche, max 60 mots) : Utiliser des listes à puces :
 - Un résumé des tendances de complétude sur la période d'analyse
 - Quels indicateurs ont une complétude plus faible (les nommer)
 - Si la complétude s'est améliorée au fil du temps
@@ -696,11 +682,11 @@ DIAPOSITIVE 3 - Valeurs aberrantes
   - Display as a table: period_id (rows) × indicator_common_id (columns) showing outlier %
   - Color coding: Green = below 2% | Yellow = 2% to 5% | Red = above 5%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Utiliser des listes à puces :
-  - Décrire la tendance nationale globale des taux de valeurs aberrantes — sont-ils stables, en amélioration ou en détérioration ?
-  - Nommer les indicateurs spécifiques avec les taux de valeurs aberrantes les plus élevés
-  - Indiquer si les taux de valeurs aberrantes se sont améliorés ou détériorés au cours de la période d'analyse
-  - Expliquer l'implication : des taux élevés de valeurs aberrantes signifient que davantage de valeurs sont ajustées, ce qui peut affecter la fiabilité de l'analyse des tendances
+- Interprétation (côté gauche, max 60 mots) : Utiliser des listes à puces :
+  - Tendance nationale globale des taux de valeurs aberrantes — stables, en amélioration ou en détérioration ?
+  - Nommer les indicateurs avec les taux les plus élevés
+  - Si les taux se sont améliorés ou détériorés sur la période
+  - Implication : des taux élevés signifient plus de valeurs ajustées, affectant la fiabilité des tendances
 - Ajouter un bloc de texte sous l'interprétation : « Les valeurs aberrantes sont des rapports dont les volumes sont anormalement élevés par rapport au volume habituel rapporté par l'établissement les autres mois. Les valeurs aberrantes sont identifiées en évaluant la variation intra-établissement du rapportage mensuel pour chaque indicateur. Les valeurs aberrantes sont définies comme des observations supérieures à 10 fois l'écart absolu médian (MAD) par rapport à la médiane mensuelle de l'indicateur pour chaque période, OU une valeur dont la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80 %. Les valeurs aberrantes ne sont identifiées que pour les indicateurs dont le volume est supérieur ou égal à la médiane, le volume n'est pas manquant et le volume moyen est supérieur à 100. »
 
 DIAPOSITIVE 4 - Cohérence interne
@@ -717,14 +703,15 @@ DIAPOSITIVE 4 - Cohérence interne
   - Display as a table: period_id (rows) × ratio_type (columns) showing % of areas meeting consistency criteria
   - Color coding: Green = 90% or above | Yellow = 70% to 89% | Red = below 70%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Utiliser des listes à puces :
-  - Expliquer ce que chaque ratio_type représente (par exemple Penta1/Penta3 compare la première à la troisième dose, CPN1/CPN4 compare la première à la quatrième visite)
-  - Identifier quels ratios respectent ou échouent systématiquement les critères
-  - Indiquer si la cohérence s'améliore ou se détériore au cours de la période d'analyse
-  - Mettre en évidence toute région spécifique où la cohérence est notablement faible
+- Interprétation (côté gauche, max 60 mots) : Utiliser des listes à puces :
+  - Ce que chaque ratio_type représente (par exemple Penta1/Penta3, CPN1/CPN4)
+  - Quels ratios respectent ou échouent systématiquement les critères
+  - Si la cohérence s'améliore ou se détériore
+  - Toute région avec une cohérence notablement faible
 - Ajouter un bloc de texte sous l'interprétation : « La cohérence interne évalue la plausibilité des données rapportées sur la base d'indicateurs connexes. Les métriques de cohérence sont approximatives — selon le calendrier et la saisonnalité, les définitions des indicateurs et la nature de la prestation de services et du rapportage, les valeurs peuvent se situer en dehors des plages plausibles. Les indicateurs similaires sont censés avoir approximativement le même volume sur l'année (dans une marge de 30 %). Les données de cette analyse sont ajustées pour les valeurs aberrantes. »
 
-DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
+DIAPOSITIVE 5 - Tendances de la qualité des données (proportion d'établissements avec une EQD adéquate)
+Cette diapositive montre une mesure binaire réussite/échec : quelle part des établissements remplit TOUS les critères de qualité.
 - Titre : Rédiger un titre analytique sur les tendances de l'EQD (par exemple « La proportion d'établissements avec une qualité de données adéquate est passée de X % à Y % depuis [ANNÉE] »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -737,14 +724,15 @@ DIAPOSITIVE 5 - Tendances de la qualité des données (score EQD global)
   - Display as a table: admin_area_2 (rows) × year (columns) showing % of facilities with adequate DQ
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Utiliser des listes à puces :
-  - Décrire la tendance nationale — la qualité des données s'améliore-t-elle au fil du temps ?
-  - Nommer les régions les plus performantes et les moins performantes
-  - Identifier les régions où la qualité des données s'est notablement améliorée ou détériorée
-  - Expliquer l'implication : les zones avec des scores EQD faibles peuvent avoir des estimations de perturbation moins fiables
+- Interprétation (côté gauche, max 60 mots) : Utiliser des listes à puces :
+  - Tendance nationale — la proportion d'établissements adéquats s'améliore-t-elle ?
+  - Régions les plus performantes et les moins performantes
+  - Régions avec une amélioration ou un déclin notable
+  - Implication : les zones avec des scores faibles peuvent avoir des estimations de perturbation moins fiables
 - Ajouter un bloc de texte sous l'interprétation : « Une qualité de données adéquate est définie comme : 1) Pas de données manquantes ni de valeurs aberrantes pour les consultations externes, le Penta1 et la CPN1, lorsque disponibles 2) Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4. »
 
 DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
+Cette diapositive montre un score moyen continu — elle capture l'amélioration progressive même lorsque les établissements n'atteignent pas encore le seuil binaire de la diapositive 5.
 - Titre : Rédiger un titre analytique sur les tendances du score moyen de l'EQD (par exemple « Les scores moyens de qualité des données sont les plus élevés dans [X] et [Y], tandis que [Z] est en retard »)
 - Visualization (right side): Create using from_metric with these parameters:
   - type: "from_metric"
@@ -757,11 +745,11 @@ DIAPOSITIVE 6 - Tendances de la qualité des données (score EQD moyen)
   - Display as a table: admin_area_2 (rows) × year (columns) showing mean DQA score %
   - Color coding: Green = 70% or above | Yellow = 50% to 69% | Red = below 50%
   - periodFilterOverride: Use the same period as the main report
-- Interprétation (côté gauche) : Utiliser des listes à puces :
-  - Décrire la tendance nationale du score moyen de l'EQD — s'améliore-t-elle, est-elle stable ou en déclin ?
-  - Comparer les régions les plus performantes aux moins performantes
-  - Signaler toute région montrant une amélioration ou un déclin significatif
-  - Conclure avec une évaluation globale de la trajectoire de la qualité des données et ce que cela signifie pour l'analyse des perturbations
+- Interprétation (côté gauche, max 60 mots) : Utiliser des listes à puces :
+  - Tendance nationale du score moyen — en amélioration, stable ou en déclin ?
+  - Comparer les régions les plus et les moins performantes
+  - Régions avec une amélioration ou un déclin significatif
+  - Évaluation globale : que signifie la trajectoire pour l'analyse des perturbations ?
 - Ajouter un bloc de texte sous l'interprétation : « Les éléments inclus dans le score EQD sont : Pas de données manquantes pour 1) les consultations externes, 2) le Penta1 et 3) la CPN1, lorsque disponibles ; Pas de valeurs aberrantes pour 4) les consultations externes, 5) le Penta1 et 6) la CPN1, lorsque disponibles ; Rapportage cohérent entre 7) Penta1/Penta3, 8) CPN1/CPN4, 9) BCG/Accouchements, lorsque disponibles. »
 ```
 
