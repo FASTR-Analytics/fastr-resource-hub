@@ -1187,94 +1187,76 @@ DQ SLIDE 5 - Data quality trends (mean DQA score)
 After all DQ slides, re-add the back page as the final slide.
 ```
 
-## Prompt 5a: Review data accuracy
+## Prompt 5: Review slide deck
 
 ```prompt
-Review the current slide deck — check that every text block is accurate against the underlying data. We will review one slide at a time.
+Review the current slide deck — check data accuracy, language, terminology, consistency, and word count in a single pass.
 
-CRITICAL: During this review, do not guess or hallucinate. Every claim you make about what is correct or incorrect must be verified by actually querying the data (get_metric_data), checking the platform (get_available_metrics), or fetching the methodology docs. If you are not sure about something, say so — do not assume.
+CRITICAL: Do not guess or hallucinate. Every claim about what is correct or incorrect must be verified. If you are unsure, say so — do not assume.
 
 Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
-
 Always refer to slides by their number (not their ID).
 
-FOR EACH SLIDE (one at a time):
-For each slide that has a visualization (image block with from_metric):
+SETUP (do this once before reviewing any slides):
+1. Call get_available_metrics ONCE — cache all indicator IDs and their labels for the entire review
+2. Call get_methodology_docs_list ONCE — cache available methodology documents
+3. Get the full list of slides in the deck
 
-1. Read all text blocks on the slide — title, interpretation text, any text block at the bottom
-2. Look at the visualization's from_metric parameters (metricId, vizPresetId, filterOverrides, periodFilterOverride) and use get_metric_data to pull the underlying data
-3. Apply these checks:
+REVIEW ALL SLIDES:
+Go through every slide. For each slide, apply ALL checks below. Do NOT use ask_user_questions between slides — move through the deck continuously.
 
-DATA ACCURACY
-- Does every number in the text blocks match the underlying data?
-- Are any statistics mentioned that cannot be verified from the data? Flag with [UNVERIFIED]
-- Watch for hedged fabrication — "approximately," "around," or "estimated" may precede invented figures. Verify every number, even hedged ones
-- Are round numbers used where precise figures should appear? (red flag for fabricated data)
+For slides WITHOUT a visualization (cover, section headers, methodology text-only): apply only the language, terminology, and consistency checks.
+For slides WITH a visualization (from_metric): apply all checks including data accuracy.
+
+CHECK 1: DATA ACCURACY (visualization slides only)
+- Use get_metric_data to pull the underlying data for this slide's visualization
+- Does every number in the text match the underlying data?
+- Are any statistics unverifiable? Flag with [UNVERIFIED]
+- Watch for hedged fabrication — "approximately" or "around" may precede invented figures
 - Are time periods correctly referenced?
-- Does the text only reference what is visible in the data? No external claims
+- Does the text only reference what is visible in the data?
 
-INDICATOR NAMES AND INTERPRETATION
-- Do indicator names in the text match the exact labels from the platform? Use get_available_metrics to verify — do not accept paraphrased or shortened names (e.g., if the platform says "Pneumonia cases identified", the text should not say "Pneumonia cases")
-- Service delivery indicators (ANC, deliveries, PNC, immunizations, OPD, family planning): increase = positive, decrease = concern
+CHECK 2: INDICATOR NAMES AND INTERPRETATION
+- Do indicator names match the exact labels cached from get_available_metrics? Do not accept paraphrased or shortened names
+- No indicator_common_id codes in text — only human-readable labels
+- Service delivery indicators (ANC, deliveries, PNC, immunizations, OPD, FP): increase = positive, decrease = concern
 - Mortality indicators (maternal deaths, neonatal deaths, stillbirths): increase = BAD, decrease = GOOD
 - Negative quality indicators (dropout rates, outlier rates): increase = worsening
 
-ACRONYMS AND METHODOLOGY
-- Are any acronyms expanded in the text? If so, verify the expansion is correct using get_methodology_docs_list and get_methodology_doc_content, or fetch https://fastr-analytics.github.io/fastr-resource-hub/. NEVER assume — a wrong acronym expansion is a critical error
-- Are methodology descriptions accurate? Check against official documentation — do not let made-up methodology claims pass unchallenged
+CHECK 3: ACRONYMS AND METHODOLOGY
+- If any acronym is expanded in the text, verify against the cached methodology docs. If needed, call get_methodology_doc_content for the specific doc. A wrong expansion is a critical error
+- Are methodology descriptions accurate and not paraphrased or watered down?
 
-TABLES AND DQ SLIDES
-- For DQ annex slides: pull the data with get_metric_data and check that text blocks match the actual values
-- Are methodology text blocks preserved accurately — not paraphrased or watered down?
+CHECK 4: LANGUAGE AND FRAMING
+- No causal claims — only exploratory, descriptive language
+- No overgeneralization — findings scoped to the specific area and time period
+- Appropriate hedging — conclusions not stronger than data supports
+- Health terms used correctly (e.g., "skilled birth attendance" not "assisted delivery")
+- Country and admin area names spelled correctly and matching the platform
 
-4. Present your findings for this slide — list any issues found and suggest fixes
-5. ALWAYS use the ask_user_questions tool (not a text question) to let the user proceed. Never ask "Ready to proceed?" as plain text — always call ask_user_questions with selectable options:
-   - If issues found: "Slide [N]: [number] issues found. How would you like to proceed?" → options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
-   - If no issues: "Slide [N]: No issues found." → options: "Next slide", "Stop review here"
-
-After the last slide, confirm: "All slides reviewed."
-```
-
-## Prompt 5b: Review language and consistency
-
-```prompt
-Review the current slide deck — check language, terminology, consistency, and word count. We will review one slide at a time.
-
-Always check if the user is in editing_slide_deck mode. If not, ask them to open the slide deck they want reviewed.
-
-Always refer to slides by their number (not their ID).
-
-FOR EACH SLIDE (one at a time):
-Read all text blocks on the slide and check:
-
-LANGUAGE AND FRAMING
-- No causal claims — only exploratory, descriptive language (e.g., "suggests" not "caused by")
-- No overgeneralization — findings are scoped to the specific area and time period
-- Appropriate hedging — conclusions are not stronger than what the data supports
-- No indicator codes in text blocks — only human-readable labels (e.g., "ANC first visit" not "anc1")
-- Do indicator names match the exact labels from the platform? Use get_available_metrics to verify — do not accept paraphrased or shortened names
-
-TECHNICAL TERMINOLOGY
-- Are health terms used correctly? (e.g., "skilled birth attendance" not "assisted delivery")
-- Are acronyms expanded correctly? Verify against the methodology docs (get_methodology_docs_list / get_methodology_doc_content) or https://fastr-analytics.github.io/fastr-resource-hub/. A wrong acronym expansion is a critical error — NEVER assume
-- Is the country name spelled correctly?
-- Do admin area names match exactly what appears in the platform?
-
-CONSISTENCY WITH PREVIOUS SLIDES
+CHECK 5: CONSISTENCY ACROSS SLIDES
 - Same indicator on multiple slides: are the values consistent?
-- Are indicator names spelled the same way as earlier slides?
-- Are time periods referenced consistently?
-- Do slide titles follow the same style as previous slides?
+- Indicator names spelled the same way throughout?
+- Time periods referenced consistently?
+- Slide titles follow the same style?
 
-WORD COUNT
+CHECK 6: WORD COUNT
 - Is each text block within the target range (50-100 words, max 180)?
 
-Present your findings for this slide — list any issues and suggest fixes.
-ALWAYS use the ask_user_questions tool (not a text question) to let the user proceed. Never ask "Ready to proceed?" as plain text — always call ask_user_questions with selectable options:
-- If issues found: "Slide [N]: [number] issues found. How would you like to proceed?" → options: "Fix and continue to next slide", "Skip to next slide", "Stop review here"
-- If no issues: "Slide [N]: No issues found." → options: "Next slide", "Stop review here"
+REPORTING:
+- For clean slides: log internally and move on — do NOT stop or ask the user
+- For slides with issues: note the slide number, issues found, and suggested fixes — then continue to the next slide
 
-After the last slide, confirm: "All slides reviewed."
+AFTER REVIEWING ALL SLIDES:
+Present a single summary report:
+
+1. "Review complete: [X] slides reviewed, [Y] issues found across [Z] slides."
+2. List each slide with issues:
+   - "Slide [N]: [issue description] → Suggested fix: [fix]"
+3. If no issues found across the entire deck: "All slides passed review. No issues found."
+4. Use ask_user_questions ONCE with options:
+   - If issues found: "How would you like to proceed?" → "Fix all issues automatically", "Review issues one by one", "Done — no fixes needed"
+   - If no issues: "All clear." → "Done"
 ```
 
 ## Prompt 6: Universal Quarterly Report

@@ -1191,94 +1191,76 @@ DIAPOSITIVE EQD 5 - Tendances de la qualité des données (score EQD moyen)
 Après toutes les diapositives EQD, remettre la dernière page comme diapositive finale.
 ```
 
-## Prompt 5a : Vérifier l'exactitude des données
+## Prompt 5 : Réviser le jeu de diapositives
 
 ```prompt
-Réviser le jeu de diapositives actuel — vérifier que chaque bloc de texte est exact par rapport aux données sous-jacentes. Nous réviserons une diapositive à la fois.
+Réviser le jeu de diapositives actuel — vérifier l'exactitude des données, le langage, la terminologie, la cohérence et le nombre de mots en une seule passe.
 
-CRITIQUE : Pendant cette révision, ne pas deviner ni halluciner. Chaque affirmation sur ce qui est correct ou incorrect doit être vérifiée en interrogeant réellement les données (get_metric_data), en vérifiant la plateforme (get_available_metrics), ou en consultant la documentation méthodologique. Si vous n'êtes pas sûr de quelque chose, le dire — ne pas supposer.
+CRITIQUE : Ne pas deviner ni halluciner. Chaque affirmation sur ce qui est correct ou incorrect doit être vérifiée. Si vous n'êtes pas sûr, le dire — ne pas supposer.
 
 Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
-
 Toujours désigner les diapositives par leur numéro (pas par leur ID).
 
-POUR CHAQUE DIAPOSITIVE (une à la fois) :
-Pour chaque diapositive qui contient une visualisation (bloc image avec from_metric) :
+PRÉPARATION (faire une seule fois avant de réviser les diapositives) :
+1. Appeler get_available_metrics UNE FOIS — mettre en cache tous les identifiants d'indicateurs et leurs libellés pour toute la révision
+2. Appeler get_methodology_docs_list UNE FOIS — mettre en cache les documents méthodologiques disponibles
+3. Obtenir la liste complète des diapositives du jeu
 
-1. Lire tous les blocs de texte de la diapositive — titre, texte d'interprétation, tout bloc de texte en bas
-2. Examiner les paramètres from_metric de la visualisation (metricId, vizPresetId, filterOverrides, periodFilterOverride) et utiliser get_metric_data pour extraire les données sous-jacentes
-3. Appliquer ces vérifications :
+RÉVISER TOUTES LES DIAPOSITIVES :
+Parcourir chaque diapositive. Pour chacune, appliquer TOUTES les vérifications ci-dessous. NE PAS utiliser ask_user_questions entre les diapositives — parcourir le jeu en continu.
 
-EXACTITUDE DES DONNÉES
-- Chaque chiffre dans les blocs de texte correspond-il aux données sous-jacentes ?
-- Des statistiques sont-elles mentionnées sans pouvoir être vérifiées ? Signaler avec [À VÉRIFIER]
-- Attention aux fabrications masquées — « environ », « approximativement » ou « estimé à » peuvent précéder des chiffres inventés. Vérifier chaque nombre, même ceux avec des nuances
-- Des chiffres arrondis sont-ils utilisés là où des chiffres précis devraient apparaître ? (signal d'alerte pour des données fabriquées)
+Pour les diapositives SANS visualisation (couverture, en-têtes de section, texte méthodologique) : appliquer uniquement les vérifications de langage, terminologie et cohérence.
+Pour les diapositives AVEC visualisation (from_metric) : appliquer toutes les vérifications y compris l'exactitude des données.
+
+VÉRIFICATION 1 : EXACTITUDE DES DONNÉES (diapositives avec visualisation uniquement)
+- Utiliser get_metric_data pour extraire les données sous-jacentes de la visualisation
+- Chaque chiffre dans le texte correspond-il aux données sous-jacentes ?
+- Des statistiques sont-elles invérifiables ? Signaler avec [À VÉRIFIER]
+- Attention aux fabrications masquées — « environ » ou « approximativement » peuvent précéder des chiffres inventés
 - Les périodes temporelles sont-elles correctement référencées ?
-- Le texte ne référence-t-il que ce qui est visible dans les données ? Pas de déclarations externes
+- Le texte ne référence-t-il que ce qui est visible dans les données ?
 
-NOMS ET INTERPRÉTATION DES INDICATEURS
-- Les noms des indicateurs dans le texte correspondent-ils aux libellés exacts de la plateforme ? Utiliser get_available_metrics pour vérifier — ne pas accepter des noms paraphrasés ou raccourcis (par exemple si la plateforme dit « Cas de pneumonie identifiés », le texte ne doit pas dire « Cas de pneumonie »)
-- Indicateurs de prestation de services (CPN, accouchements, soins postnataux, vaccinations, consultations externes, planification familiale) : augmentation = positif, diminution = préoccupant
+VÉRIFICATION 2 : NOMS ET INTERPRÉTATION DES INDICATEURS
+- Les noms des indicateurs correspondent-ils aux libellés exacts mis en cache depuis get_available_metrics ? Ne pas accepter des noms paraphrasés ou raccourcis
+- Pas de codes indicator_common_id dans le texte — uniquement des libellés lisibles
+- Indicateurs de prestation de services (CPN, accouchements, CPoN, vaccinations, consultations externes, PF) : augmentation = positif, diminution = préoccupant
 - Indicateurs de mortalité (décès maternels, décès néonataux, mortinaissances) : augmentation = MAUVAIS, diminution = BON
 - Indicateurs négatifs de qualité (taux d'abandon, taux de valeurs aberrantes) : augmentation = détérioration
 
-ACRONYMES ET MÉTHODOLOGIE
-- Des acronymes sont-ils développés dans le texte ? Si oui, vérifier que l'expansion est correcte en utilisant get_methodology_docs_list et get_methodology_doc_content, ou consulter https://fastr-analytics.github.io/fastr-resource-hub/. JAMAIS supposer — une expansion d'acronyme incorrecte est une erreur critique
-- Les descriptions méthodologiques sont-elles exactes ? Vérifier dans la documentation officielle — ne pas laisser passer des affirmations méthodologiques inventées
+VÉRIFICATION 3 : ACRONYMES ET MÉTHODOLOGIE
+- Si un acronyme est développé dans le texte, vérifier dans les documents méthodologiques mis en cache. Si nécessaire, appeler get_methodology_doc_content pour le document spécifique. Une expansion incorrecte est une erreur critique
+- Les descriptions méthodologiques sont-elles exactes, ni paraphrasées ni édulcorées ?
 
-TABLEAUX ET DIAPOSITIVES EQD
-- Pour les diapositives EQD : extraire les données avec get_metric_data et vérifier que les blocs de texte correspondent aux valeurs réelles
-- Les blocs de texte méthodologiques sont-ils préservés fidèlement — ni paraphrasés ni édulcorés ?
+VÉRIFICATION 4 : LANGAGE ET FORMULATION
+- Pas de liens de causalité — uniquement un langage exploratoire et descriptif
+- Pas de généralisation excessive — résultats limités à la zone et la période spécifiques
+- Nuances appropriées — conclusions pas plus fortes que ce que les données permettent
+- Termes de santé utilisés correctement (par exemple « accouchement assisté par du personnel qualifié » et non « accouchement aidé »)
+- Noms du pays et des zones administratives correctement orthographiés et correspondant à la plateforme
 
-4. Présenter les résultats pour cette diapositive — lister les problèmes trouvés et suggérer des corrections
-5. TOUJOURS utiliser l'outil ask_user_questions (pas une question en texte libre) pour laisser l'utilisateur continuer. Ne jamais demander « Prêt à continuer ? » en texte — toujours appeler ask_user_questions avec des options sélectionnables :
-   - Si des problèmes trouvés : « Diapositive [N] : [nombre] problèmes trouvés. Comment souhaitez-vous procéder ? » → options : « Corriger et passer à la suivante », « Passer à la suivante », « Arrêter la révision ici »
-   - Si aucun problème : « Diapositive [N] : Aucun problème trouvé. » → options : « Diapositive suivante », « Arrêter la révision ici »
-
-Après la dernière diapositive, confirmer : « Toutes les diapositives ont été révisées. »
-```
-
-## Prompt 5b : Vérifier le langage et la cohérence
-
-```prompt
-Réviser le jeu de diapositives actuel — vérifier le langage, la terminologie, la cohérence et le nombre de mots. Nous réviserons une diapositive à la fois.
-
-Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Sinon, lui demander d'ouvrir le jeu de diapositives à réviser.
-
-Toujours désigner les diapositives par leur numéro (pas par leur ID).
-
-POUR CHAQUE DIAPOSITIVE (une à la fois) :
-Lire tous les blocs de texte de la diapositive et vérifier :
-
-LANGAGE ET FORMULATION
-- Pas de liens de causalité — uniquement un langage exploratoire et descriptif (par exemple « suggère » et non « causé par »)
-- Pas de généralisation excessive — les résultats sont limités à la zone et la période spécifiques
-- Nuances appropriées — les conclusions ne sont pas plus fortes que ce que les données permettent
-- Pas de codes d'indicateurs dans les blocs de texte — uniquement des libellés lisibles (par exemple « Première visite CPN » et non « anc1 »)
-- Les noms des indicateurs correspondent-ils aux libellés exacts de la plateforme ? Utiliser get_available_metrics pour vérifier — ne pas accepter des noms paraphrasés ou raccourcis
-
-TERMINOLOGIE TECHNIQUE
-- Les termes de santé sont-ils utilisés correctement ? (par exemple « accouchement assisté par du personnel qualifié » et non « accouchement aidé »)
-- Les acronymes sont-ils développés correctement ? Vérifier dans la documentation méthodologique (get_methodology_docs_list / get_methodology_doc_content) ou sur https://fastr-analytics.github.io/fastr-resource-hub/. Une expansion d'acronyme incorrecte est une erreur critique — JAMAIS supposer
-- Le nom du pays est-il correctement orthographié ?
-- Les noms des zones administratives correspondent-ils exactement à ce qui apparaît dans la plateforme ?
-
-COHÉRENCE AVEC LES DIAPOSITIVES PRÉCÉDENTES
+VÉRIFICATION 5 : COHÉRENCE ENTRE DIAPOSITIVES
 - Même indicateur sur plusieurs diapositives : les valeurs sont-elles cohérentes ?
-- Les noms des indicateurs sont-ils orthographiés comme dans les diapositives précédentes ?
-- Les périodes temporelles sont-elles référencées de manière cohérente ?
-- Les titres des diapositives suivent-ils le même style que les précédents ?
+- Noms des indicateurs orthographiés de la même façon partout ?
+- Périodes temporelles référencées de manière cohérente ?
+- Titres des diapositives suivant le même style ?
 
-NOMBRE DE MOTS
+VÉRIFICATION 6 : NOMBRE DE MOTS
 - Chaque bloc de texte est-il dans la plage cible (50-100 mots, max 180) ?
 
-Présenter les résultats pour cette diapositive — lister les problèmes et suggérer des corrections.
-TOUJOURS utiliser l'outil ask_user_questions (pas une question en texte libre) pour laisser l'utilisateur continuer. Ne jamais demander « Prêt à continuer ? » en texte — toujours appeler ask_user_questions avec des options sélectionnables :
-- Si des problèmes trouvés : « Diapositive [N] : [nombre] problèmes trouvés. Comment souhaitez-vous procéder ? » → options : « Corriger et passer à la suivante », « Passer à la suivante », « Arrêter la révision ici »
-- Si aucun problème : « Diapositive [N] : Aucun problème trouvé. » → options : « Diapositive suivante », « Arrêter la révision ici »
+RAPPORT :
+- Pour les diapositives sans problème : noter en interne et passer à la suivante — NE PAS s'arrêter ni demander à l'utilisateur
+- Pour les diapositives avec problèmes : noter le numéro, les problèmes trouvés et les corrections suggérées — puis continuer
 
-Après la dernière diapositive, confirmer : « Toutes les diapositives ont été révisées. »
+APRÈS AVOIR RÉVISÉ TOUTES LES DIAPOSITIVES :
+Présenter un rapport de synthèse unique :
+
+1. « Révision terminée : [X] diapositives révisées, [Y] problèmes trouvés sur [Z] diapositives. »
+2. Lister chaque diapositive avec des problèmes :
+   - « Diapositive [N] : [description du problème] → Correction suggérée : [correction] »
+3. Si aucun problème trouvé sur l'ensemble du jeu : « Toutes les diapositives ont passé la révision. Aucun problème trouvé. »
+4. Utiliser ask_user_questions UNE SEULE FOIS avec les options :
+   - Si des problèmes trouvés : « Comment souhaitez-vous procéder ? » → « Corriger tous les problèmes automatiquement », « Réviser les problèmes un par un », « Terminé — pas de corrections nécessaires »
+   - Si aucun problème : « Tout est en ordre. » → « Terminé »
 ```
 
 ## Prompt 6 : Rapport trimestriel universel
