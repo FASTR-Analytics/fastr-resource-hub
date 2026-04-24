@@ -332,8 +332,9 @@ Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans
 Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et des libellés différents. Ne PAS supposer une liste fixe de codes — les lire depuis la plateforme.
 
 1. Passer en revue tous les identifiants d'indicateurs et leurs libellés disponibles dans la plateforme pour ce pays
-2. Présenter la liste complète à l'utilisateur (identifiant + libellé)
-3. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
+2. Pour chaque indicateur, appeler get_metric_data avec la période d'analyse pour vérifier qu'il contient des données. Ne conserver que les indicateurs ayant des données réelles pour la période d'analyse
+3. Présenter la liste filtrée à l'utilisateur (identifiant + libellé)
+4. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
    - Soins prénatals : indicateurs liés aux visites CPN (par exemple anc1, anc4, anc_trimester1)
    - Accouchements et soins postnatals : accouchements en structure, personnel qualifié, CPoN, césariennes (par exemple delivery, sba, pnc1, csection)
    - Vaccination : vaccins (par exemple bcg, penta1, penta3, measles1, vaccines_completes, bcg_fixe, bcg_mobile)
@@ -344,10 +345,11 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Nutrition : si des indicateurs de nutrition existent (par exemple malnutrition_treated, nutrition_vitamin_a, malnutrition_sam_rechutent)
    - Nouveau-nés : si des indicateurs spécifiques aux nouveau-nés existent (par exemple newborn_kmc, newborn_underweight, breastfeeding_early)
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
-4. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
-5. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
+5. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
+6. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
+7. Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour suggérer de le scinder en sous-groupes logiques. Chaque sous-groupe aura son propre ensemble de diapositives.
 
-Chaque groupe confirmé deviendra UNE diapositive dans la section d'analyse nationale, avec tous les indicateurs de ce groupe affichés côte à côte sur le même graphique. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour les paramètres filterOverrides et selectedReplicant.
+Chaque groupe/sous-groupe confirmé deviendra un ensemble de diapositives dans la section d'analyse nationale (tendances mensuelles, variation trimestrielle et analyse des perturbations). Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant).
 
 EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme - ne pas recourir à des connaissances externes
@@ -360,7 +362,7 @@ NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
 2. Traiter les signaux de perturbation comme descriptifs et exploratoires
 3. Garder le texte des diapositives concis — cible 50-100 mots par diapositive (max 180 mots), utiliser des listes à puces si approprié
-4. Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 6-6 — bloc texte (span 6) à gauche, bloc visualisation (span 6) à droite. Ne pas laisser les blocs empilés verticalement
+4. Mise en page des diapositives de contenu : interprétation textuelle (span 4) à gauche, visualisation (span 8) à droite. Après avoir ajouté les deux blocs, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8. Ne pas laisser les blocs empilés verticalement
 5. Utiliser une terminologie cohérente tout au long du rapport (ne pas alterner entre synonymes)
 6. Dans tout le texte des diapositives (titres, interprétations), désigner les indicateurs uniquement par leur libellé lisible (par exemple « Cas de pneumonie identifiés », « Consultation CPN 1 »). JAMAIS inclure les codes indicator_common_id dans le texte — ni seuls, ni entre parenthèses, ni sous forme « code (Libellé) ». Écrire « Cas de pneumonie identifiés », PAS « pneumonia_cases_identified (Cas de pneumonie identifiés) ». Les codes ne servent que pour les paramètres techniques (filterOverrides, selectedReplicant)
 7. Toujours désigner les diapositives par leur numéro (pas par leur ID)
@@ -395,7 +397,8 @@ VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
 STRUCTURE :
 
 DIAPOSITIVE 1 - Diapositive de couverture
-- Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS au/en [PAYS] »
+- Titre : « Suivi des perturbations des services essentiels à partir des données du SNIS au/à/aux [PAYS] »
+  - Adapter l'article selon le pays (au Sénégal, à Madagascar, aux Philippines, en Côte d'Ivoire, au Tchad, en Mauritanie, au Niger, etc.)
 - Sous-titre : « [SOUS_TITRE_RAPPORT] »
 - Ajouter un bloc de texte en bas : « Analyse générée en [MOIS_ANNÉE_ACTUEL] »
 
@@ -406,11 +409,23 @@ DIAPOSITIVE 2 - Diapositive d'introduction
 
 DIAPOSITIVE 3 - Diapositive méthodologique
 - Titre : « Méthodologie : Évaluation de l'utilisation des services »
-- Objectif : Suivre les changements dans l'utilisation des services de santé au fil du temps, en identifiant où les services tombent en dessous ou dépassent les schémas attendus.
-- Comment ça fonctionne : Utilise les données de routine du SNIS, nettoyées des valeurs aberrantes et des valeurs manquantes. Construit une ligne de tendance « attendue » pour chaque service, ajustée pour la saisonnalité et les tendances historiques. Compare les volumes de services réels aux niveaux attendus.
-- Mesure de l'impact : Les périodes de perturbation signalées sont analysées pour estimer dans quelle mesure les volumes de services ont changé par rapport à ce qui était attendu. Les résultats sont présentés aux niveaux national et infranational.
-- Comment interpréter les figures : Les zones ombrées en rouge = perturbations potentielles (en dessous de l'attendu). Les zones ombrées en vert = surplus potentiels (au-dessus de l'attendu). Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie.
-- Ajouter un bloc de texte en bas : « Plus de détails sur la méthodologie sont disponibles sur GitHub (https://fastr-analytics.github.io/fastr-resource-hub/). »
+- Insérer le texte tel quel sans le réduire. Dans un seul bloc de texte avec des puces :
+
+Évaluation de la qualité des données
+Identifie les principaux problèmes de qualité des données en évaluant la complétude des indicateurs, en détectant les valeurs aberrantes extrêmes et en vérifiant la cohérence entre indicateurs liés — à partir des données mensuelles du SNIS (DHIS2) au niveau des établissements.
+
+Applique des ajustements ciblés aux points de données signalés, en remplaçant les valeurs aberrantes et en imputant les données manquantes à l'aide d'une moyenne mobile centrée sur 12 mois ; les moyennes au niveau des établissements sont utilisées par défaut lorsque l'historique de données est insuffisant.
+
+Évaluation de l'utilisation des services
+Analyse des tendances d'utilisation des services, qui identifie le pourcentage de variation de l'utilisation des services pour chaque trimestre par rapport au trimestre précédent.
+
+Analyse des perturbations et des surplus dans l'utilisation des services, qui détecte les changements significatifs (positifs ou négatifs) dans l'utilisation des services au-delà de ce qui serait attendu compte tenu de la saisonnalité et des tendances historiques.
+
+Comment interpréter les figures de perturbation : Les zones ombrées en rouge = perturbations potentielles (en dessous de l'attendu). Les zones ombrées en vert = surplus potentiels (au-dessus de l'attendu). Ce sont des signaux, pas des conclusions — ils nécessitent une investigation plus approfondie.
+
+Plus de détails sur la méthodologie et les approches d'ajustement de la qualité des données sont disponibles en annexe. Le code R complet et la documentation source sont également disponibles publiquement sur GitHub (https://github.com/FASTR-Analytics)
+
+- Note : La qualité des données affecte l'interprétation. Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement plus élevées que les valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses de la prestation de services.
 
 DIAPOSITIVE 4 - Diapositive de sélection des indicateurs
 - Titre : « Méthodologie : Sélection des indicateurs »
@@ -421,10 +436,51 @@ DIAPOSITIVE 5 - Diapositive d'en-tête de section
 - Titre : « Section 1 : Utilisation des services »
 - Sous-titre : « Évaluation des volumes projetés sur la base des tendances historiques pour identifier les surplus et les perturbations dans les services de santé »
 
-DIAPOSITIVES 6+ - Diapositives d'analyse nationale (une diapositive par GROUPE d'indicateurs)
-Créer une diapositive pour chaque groupe d'indicateurs confirmé à l'Étape 2. Chaque diapositive montre tous les indicateurs du groupe côte à côte.
+DIAPOSITIVES 6+ - Diapositives d'analyse nationale (trois diapositives par GROUPE d'indicateurs)
+Pour chaque groupe d'indicateurs confirmé à l'Étape 2, créer trois diapositives consécutives :
+- Type A : Tendances mensuelles d'utilisation des services
+- Type B : Volume trimestriel avec variation en % d'un trimestre à l'autre
+- Type C : Analyse des perturbations
 
-POUR CHAQUE DIAPOSITIVE DE GROUPE :
+Avant de créer les diapositives pour chaque groupe, appeler get_metric_data pour vérifier la disponibilité des données.
+
+DIAPOSITIVE TYPE A : Tendances mensuelles d'utilisation des services
+
+Titre : « Tendances en [description du groupe] » — utiliser une phrase descriptive pour le domaine de service, PAS une liste de codes d'indicateurs
+- Bon : « Tendances en soins prénatals »
+- Mauvais : « Tendances en anc1, anc4 »
+
+Interprétation (côté gauche, span 4 — 60-100 mots, max 130) : Utiliser des listes à puces :
+- Une puce par indicateur décrivant les fluctuations mensuelles
+- Observation croisée entre indicateurs : schémas, écarts
+- Implications : une phrase avec une recommandation concrète
+
+Visualization (right side, span 8): Create using from_metric with:
+- metricId: "m3-01-01"
+- vizPresetId: "volume-monthly"
+- valuesFilter: "count_final_both"
+- filterOverrides: all indicator codes in the group
+- Use startDate/endDate covering last 12 complete quarters (36 months)
+
+DIAPOSITIVE TYPE B : Variation trimestrielle du volume de services
+
+Titre : Une phrase analytique résumant la conclusion trimestrielle principale. Au passé, 1-2 phrases maximum.
+- Bon : « Les services prénatals ont montré une croissance progressive, les quatrièmes visites augmentant plus nettement que les premières en 2025 »
+- Mauvais : « Variation trimestrielle des services prénatals »
+
+Interprétation (côté gauche, span 4 — 50-80 mots, max 100) :
+- Un paragraphe autonome : résumé de la tendance globale
+- Par indicateur : variations spécifiques d'un trimestre à l'autre avec pourcentages
+- Ne mentionner que les trimestres avec >10 % de variation. Si aucune variation >10 % : « [INDICATEUR] est resté stable depuis [DATE]... »
+
+Visualization (right side, span 8): Create using from_metric with:
+- metricId: "m3-01-01"
+- vizPresetId: "volume-quarterly"
+- valuesFilter: "count_final_both"
+- filterOverrides: all indicator codes in the group
+- Show data labels, indicator in columns not lines
+
+DIAPOSITIVE TYPE C : Analyse des perturbations
 
 Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion principale pour ce groupe d'indicateurs. Le titre doit décrire ce que montrent les données, pas simplement nommer les indicateurs.
 - Bon exemple : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise à la mi-2025, avec quelques perturbations pour le BCG »
@@ -432,7 +488,7 @@ Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion princ
 - Mauvais exemple : « BCG - Vaccin Bacillus Calmette-Guérin »
 - Mauvais exemple : « Indicateurs de vaccination »
 
-Visualization (right side): Create using from_metric with these parameters:
+Visualization (right side, span 8): Create using from_metric with these parameters:
 - type: "from_metric"
 - metricId: "m3-02-01"
   Metric: Actual vs expected service volume (National) [number]
@@ -450,7 +506,7 @@ Visualization (right side): Create using from_metric with these parameters:
   - min: Start date as 6-digit number (e.g., 202301 for January 2023)
   - max: End date as 6-digit number (e.g., 202509 for September 2025)
 
-Interprétation (côté gauche — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces couvrant :
+Interprétation (côté gauche, span 4 — cible 50-100 mots, max 180) : Analyser les données affichées dans la visualisation. Utiliser des listes à puces couvrant :
 - Pour CHAQUE indicateur : périodes spécifiques de perturbations/surplus, avec ampleurs approximatives (chiffres ou pourcentages du graphique)
 - Schémas croisés entre indicateurs : comment les indicateurs sont liés entre eux
 - Évaluation globale de ce que le schéma combiné signifie
