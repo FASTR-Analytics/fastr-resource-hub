@@ -150,12 +150,12 @@ Cette documentation méthodologique décrit l'approche complète de la FASTR pou
 
 ### Modules d'analyse (plate-forme FASTR)
 
-La plate-forme d'analyse FASTR comprend quatre modules automatisés :
+La plate-forme d'analyse FASTR comprend cinq modules automatisés :
 
 - [**Évaluation de la qualité des données**](04_data_quality_assessment.md) - module 1 de la plateforme. Évaluation de la qualité des données SIGS par le biais de l'exhaustivité, de la détection des valeurs aberrantes et de la mesure de la cohérence
 - [**Ajustement de la qualité des données**](05_data_quality_adjustment.md) - module 2 de la plate-forme. Techniques pour améliorer la précision des données en ajustant les valeurs aberrantes et les rapports incomplets
 - [**Analyse de l'utilisation des services**](06a_service_utilization.md) - module 3 de la plateforme. Analyse des schémas d'utilisation des services de santé pour détecter et quantifier les perturbations
-- [**Estimation de la couverture**](06b_coverage_estimates.md) - module 4 de la plateforme. Méthodes d'estimation de la couverture des services et comparaison des tendances avec les objectifs nationaux
+- [**Estimation de la couverture**](06b_coverage_estimates.md) - modules 5 et 6 de la plateforme (Partie 1 : calcul des dénominateurs, Partie 2 : estimation de la couverture). Méthodes d'estimation de la couverture des services et comparaison des tendances avec les objectifs nationaux
 
 ## Références
 

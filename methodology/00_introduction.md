@@ -157,12 +157,12 @@ This methodology documentation describes the complete FASTR approach to routine 
 
 ### Analytics modules (FASTR platform)
 
-The FASTR analytics platform includes four automated modules:
+The FASTR analytics platform includes five automated modules:
 
 - [**Data quality assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
 - [**Data quality adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
 - [**Service utilization analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
-- [**Coverage estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
+- [**Coverage estimates**](06b_coverage_estimates.md) - Modules 5 & 6 in the platform (Part 1: denominator calculation, Part 2: coverage estimation). Methods for estimating service coverage and comparing trends to country targets
 
 ## References
 

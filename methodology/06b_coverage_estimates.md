@@ -124,7 +124,7 @@ Results are saved with standardized column structures for each administrative le
 
 ### Workflow diagram
 
-<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 4 Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Coverage estimation (Modules 5 & 6) Interactive Workflow"></iframe>
 
 ### Key decision points
 
@@ -1738,7 +1738,7 @@ The coverage estimation module operates in two sequential parts:
 
 <!--
 PRESENTER NOTES:
-- Module 4 converts service volumes into coverage percentages
+- Coverage estimation (Modules 5 & 6) converts service volumes into coverage percentages
 - Coverage = services / target population - the challenge is knowing target population
 - HMIS typically uses catchment populations which are often inaccurate
 - Our approach: derive denominators from HMIS data validated against surveys

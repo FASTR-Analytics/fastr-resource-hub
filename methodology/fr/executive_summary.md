@@ -43,7 +43,7 @@ Le module d'ajustement de la qualité des données produit quatre versions paral
 
 Ce module applique des techniques de contrôle des processus statistiques pour détecter les écarts entre les volumes de services et les modèles attendus, après avoir pris en compte la saisonnalité et les tendances à long terme. Des modèles de régression par panel sont estimés aux niveaux national, régional et du district pour quantifier l'ampleur et la signification statistique des déficits ou des excédents de services pendant les périodes de perturbation identifiées.
 
-### Module 4 de la plateforme : Estimation de la couverture
+### Modules 5 et 6 de la plateforme : Estimation de la couverture (Partie 1 — dénominateurs, Partie 2 — couverture)
 
 Le module d'estimation de la couverture dérive les dénominateurs de la population cible en combinant les volumes de services SIGS avec les informations sur la couverture des enquêtes auprès des ménages et les projections démographiques. Des séries de dénominateurs multiples sont générées en utilisant des indicateurs SIGS alternatifs et des hypothèses démographiques, y compris des ajustements pour les facteurs biologiques. Les projections de couverture pour les années postérieures à l'enquête sont produites en appliquant les changements annuels dérivés du SIGS aux données de base de l'enquête.
 

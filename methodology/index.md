@@ -21,7 +21,7 @@ This documentation describes the [FASTR](https://data.gffportal.org/key-theme/FA
 | [**Data quality assessment**](04_data_quality_assessment.md) | Module 1 in platform. Assessing completeness and consistency |
 | [**Data quality adjustment**](05_data_quality_adjustment.md) | Module 2 in platform. Adjusting for outliers and missing data |
 | [**Service utilization analysis**](06a_service_utilization.md) | Module 3 in platform. Analyzing health service usage patterns |
-| [**Coverage estimates**](06b_coverage_estimates.md) | Module 4 in platform. Estimating service coverage against targets |
+| [**Coverage estimates**](06b_coverage_estimates.md) | Modules 5 & 6 in platform (Part 1: denominators, Part 2: coverage). Estimating service coverage against targets |
 
 ## Quick links
 

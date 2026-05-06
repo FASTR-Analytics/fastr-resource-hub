@@ -127,7 +127,7 @@ Les resultats sont sauvegardes avec des structures de colonnes standardisées po
 
 ### Diagramme de flux de travail
 
-<iframe src="../../resources/diagrams/mod4_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 4 Interactive Workflow"></iframe>
+<iframe src="../../resources/diagrams/mod4_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="Estimation de la couverture (Modules 5 et 6) — Workflow interactif"></iframe>
 
 ### Points de décision clés
 
@@ -1732,7 +1732,7 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 <!--
 PRESENTER NOTES:
-- Le module 4 convertit les volumes de services en pourcentages de couverture
+- L'estimation de la couverture (modules 5 et 6) convertit les volumes de services en pourcentages de couverture
 - Couverture = services / population cible - le défi est de connaître la population cible
 - Le SIGS utilise généralement les populations de zones de desserte qui sont souvent inexactes
 - Notre approche : dériver les dénominateurs des données SIGS validées par rapport aux enquêtes

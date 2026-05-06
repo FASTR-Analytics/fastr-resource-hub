@@ -40,7 +40,7 @@ The Data Quality Adjustment module produces four parallel versions of the datase
 
 This module applies statistical process control techniques to detect deviations in service volumes from expected patterns after accounting for seasonality and long-term trends. Panel regression models are estimated at national, regional, and district levels to quantify the magnitude and statistical significance of service shortfalls or surpluses during identified disruption periods.
 
-### Platform module 4: Coverage Estimation
+### Platform modules 5 & 6: Coverage Estimation (Part 1 — denominators, Part 2 — coverage)
 
 The Coverage Estimates module derives target population denominators by combining HMIS service volumes with household survey coverage information and population projections. Multiple denominator series are generated using alternative HMIS indicators and demographic assumptions, including adjustments for biological factors. Coverage projections for post-survey years are produced by applying HMIS-derived annual changes to survey baselines.
 
