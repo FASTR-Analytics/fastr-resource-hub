@@ -167,8 +167,8 @@ For the volume change chart (output 4):
     | Parameter | Default | Type | Description | Tuning Guidance |
     |-----------|---------|------|-------------|-----------------|
     | `COUNTRY_ISO3` | "ISO3" | String | Three-letter country code | Set to your country code (e.g., "RWA", "UGA", "ZMB") |
-    | `SELECTEDCOUNT` | "count_final_both" | String | Data column used for analysis | Options: `count_final_none`, `count_final_completeness`, `count_final_both` |
-    | `VISUALIZATIONCOUNT` | "count_final_both" | String | Data column used for visualization | Should match or complement `SELECTEDCOUNT` |
+    | `SELECTEDCOUNT` | "count_final_outliers" | String | Data column used for regression modelling | Options: `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both` |
+    | `VISUALIZATIONCOUNT` | "count_final_outliers" | String | Data column used for visualization | Same options as `SELECTEDCOUNT`; can differ if you want to model on one and plot another |
 
 ??? "Control chart parameters"
 
@@ -221,7 +221,7 @@ For the volume change chart (output 4):
     1. **`M2_adjusted_data.csv`** (main data source)
        - Output from Module 2 (Data Quality Adjustments)
        - Contains adjusted service counts with different completeness assumptions
-       - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_completeness`, `count_final_both`
+       - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`
 
     2. **`M1_output_outliers.csv`**
        - Output from Module 1 (Data Quality Assessment)

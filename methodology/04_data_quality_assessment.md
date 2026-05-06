@@ -23,7 +23,7 @@ FASTR takes a multi-pronged approach, based on the belief that data quality shou
 | Component | Details |
 |-----------|---------|
 | **Inputs** | Raw HMIS data (`hmis_ISO3.csv`) containing facility service volumes by month and indicator<br>Geographic/administrative area identifiers<br>Standardized indicator names |
-| **Outputs** | - Outlier flags and lists<br>- Completeness status by facility-indicator-month<br>- Consistency results at geographic level<br>- Overall DQA scores |
+| **Outputs** | `M1_output_outliers.csv` — facility-month-indicator outlier flags<br>`M1_output_outlier_list.csv` — flagged outliers only (review list)<br>`M1_output_completeness.csv` — facility-month-indicator completeness flags<br>`M1_output_consistency_geo.csv` — sub-national consistency results by ratio pair<br>`M1_output_dqa.csv` — composite DQA scores (mean and pass/fail) |
 | **Purpose** | Evaluate HMIS data reliability through outlier detection, completeness assessment, and consistency checking to ensure trustworthy inputs for coverage estimation |
 
 ---
@@ -222,17 +222,16 @@ The module uses several configurable parameters that control analysis behavior:
 ??? "DQA indicator selection"
 
     ```r
-    # Core indicators used for DQA scoring
-    DQA_INDICATORS <- c("penta1", "anc1", "opd")
+    # Core indicators used for DQA scoring (default)
+    DQA_INDICATORS <- c("anc1", "penta1", "opd")
 
-    # Consistency pairs to evaluate
-    CONSISTENCY_PAIRS_USED <- c("penta", "anc")
+    # Consistency pairs to evaluate (default)
+    CONSISTENCY_PAIRS_USED <- c("penta", "anc", "delivery")
     ```
 
-    **Standard indicator sets:**
-    - **Maternal-child focus**: `c("anc1", "anc4", "delivery", "penta1", "penta3")`
-    - **Immunization focus**: `c("bcg", "penta1", "penta3", "measles1")`
-    - **Comprehensive**: `c("penta1", "anc1", "opd", "delivery", "pnc1")`
+    **`DQA_INDICATORS` accepted values** (from the platform parameter): any subset of `c("anc1", "penta1", "opd")`.
+
+    **`CONSISTENCY_PAIRS_USED` accepted values** (from the platform parameter): any subset of `c("penta", "anc", "delivery", "malaria")`.
 
 ??? "Consistency benchmark ranges"
 
@@ -351,26 +350,6 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Understanding district-level service delivery patterns
     - Identifying geographic areas with consistency issues
     - Creating consistency heatmaps by zone
-
-??? "M1_output_consistency_facility.csv - Facility-level consistency"
-
-    **Purpose**: Geographic consistency results expanded to facility level
-
-    **Columns:**
-
-    - `facility_id`: Facility identifier
-    - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
-    - `period_id`: Time period (YYYYMM)
-    - `ratio_type`: Name of consistency pair (e.g., "pair_penta", "pair_anc")
-    - `sconsistency`: Binary flag (1=consistent, 0=inconsistent, NA=cannot calculate)
-
-    **Format**: Long format with one row per facility-period-ratio type
-
-    **Use case**:
-
-    - Input for DQA scoring
-    - Merging consistency flags with facility-level analyses
-    - Facility-specific quality reports
 
 ??? "M1_output_dqa.csv - final DQA scores"
 
@@ -1632,13 +1611,14 @@ By integrating multiple dimensions of data quality into a single score, it simpl
 <!-- SLIDE:m4_6 -->
 ## DQA module: Configuration parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| **Proportion threshold for outlier detection** | Adjusts the threshold for proportional contribution to flag a facility-month as an outlier |
-| **Minimum count threshold for consideration** | Defines the minimum count required for a facility-month to be considered an outlier |
-| **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
-| **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
-| **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| **Proportion threshold for outlier detection** | 0.8 | A facility-month is an outlier if it accounts for more than this share of annual volume for the indicator |
+| **Minimum count threshold for consideration** | 100 | Minimum reported count required for a facility-month to be eligible for outlier flagging |
+| **Number of MADs** | 10 | A value is flagged if it exceeds this multiple of the median absolute deviation from the monthly median |
+| **Indicators subjected to DQA** | `anc1, penta1, opd` | Which indicators contribute to the composite DQA score |
+| **Consistency pairs used** | `penta, anc, delivery` | Which indicator pairs are used for consistency analysis (also accepts `malaria`) |
+| **Admin level for consistency** | `admin_area_3` | Geographic level at which consistency ratios are calculated (admin_area_2 / 3 / 4) |
 
 <!--
 PRESENTER NOTES:
@@ -1647,6 +1627,7 @@ PRESENTER NOTES:
 - MAD multiplier of 10 is conservative - only flags extreme outliers
 - Minimum count of 100 prevents low-volume facilities from being over-flagged
 - Consistency pairs can be modified based on which indicators you're analyzing
+- The admin level for consistency defaults to district (admin_area_3) — coarser levels (2) are more stable, finer (4) are more granular
 -->
 <!-- /SLIDE -->
 

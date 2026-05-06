@@ -164,7 +164,9 @@ For the combined adjustment heatmap (output 3):
 
 ### Configuration parameters
 
-??? "Excluded indicators"
+**Module `m002` does not expose any user-tunable parameters in the FASTR platform** — adjustments run with the same internal logic for every project. The settings documented below are hard-coded inside the module and are described here for transparency, not for configuration.
+
+??? "Excluded indicators (hard-coded)"
 
     Some indicators are excluded from all adjustments due to their sensitive nature:
 
@@ -174,7 +176,7 @@ For the combined adjustment heatmap (output 3):
 
     **Rationale**: Death counts should not be smoothed or imputed as they represent discrete events that may have genuine temporal variation. Adjusting these could mask important epidemiological patterns or outbreak signals.
 
-??? "Low volume exclusions"
+??? "Low volume exclusions (hard-coded)"
 
     Indicators are also automatically excluded from **adjustment** if they have zero observations above 100 across the entire dataset. This prevents meaningless statistical adjustment on indicators with consistently low counts.
 
@@ -191,7 +193,7 @@ For the combined adjustment heatmap (output 3):
 
     This information is saved to `M2_low_volume_exclusions.csv` for transparency.
 
-??? "Rolling window configuration"
+??? "Rolling window configuration (hard-coded)"
 
     The module uses a **6-month window** for all rolling averages. This choice balances:
 

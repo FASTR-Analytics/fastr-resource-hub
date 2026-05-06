@@ -35,7 +35,8 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 | Composante | Détails |
 |-----------|---------|
 | **Entrées** | M2_adjusted_data (nationales et sous-nationales) du module 2<br>Données d'enquête (MICS/EDS) du dépôt GitHub<br>Données de population (UN WPP) du dépôt GitHub |
-| **Sorties** | M4_denominators (national, admin2, admin3) - populations cibles calculées<br>M4_combined_results (national, admin2, admin3) - estimations de couverture avec tous les dénominateurs<br>M5_coverage_estimation (national, admin2, admin3) - couverture finale avec projections |
+| **Sorties** | **M5 (Partie 1)** — M5_denominators (national, admin2, admin3) : populations cibles calculées · M5_combined_results (national, admin2, admin3) : estimations de couverture avec tous les dénominateurs · M5_selected_denominator_per_indicator : meilleur dénominateur par indicateur et niveau<br>**M6 (Partie 2)** — M6_coverage_estimation (national, admin2, admin3) : couverture finale avec estimations SIGS, enquête et projetées |
+| **Identifiants des modules** | Partie 1 = `m005` (requiert `m002`) · Partie 2 = `m006` (requiert `m005`) |
 | **Objectif** | Estimer la couverture des services de santé en comparant les volumes de services aux populations cibles, validés par rapport aux références de l'enquête |
 
 ### Partie 1 et partie 2 expliquées
@@ -898,15 +899,15 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
 ??? "Spécification des fichiers de sortie"
 
-    La partie 1 génère sept fichiers CSV :
+    La partie 1 (module `m005`) génère sept fichiers CSV :
 
     **Fichiers dénominateurs**
 
-    **1. M4_dénominateurs_nationaux.csv**
+    **1. M5_denominators_national.csv**
 
-    **2. M4_dénominateurs_admin2.csv**
+    **2. M5_denominators_admin2.csv**
 
-    **3. M4_dénominateurs_admin3.csv**
+    **3. M5_denominators_admin3.csv**
 
     **Structure** :
 
@@ -921,13 +922,13 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     - `target_population` : Groupe cible (par exemple, `target_livebirth`, `target_DTC`)
     - __CODE_BLOC_124__ : Taille du dénominateur calculée
 
-    **Fichiers de résultats combinés
+    **Fichiers de résultats combinés**
 
-    **4. M4_résultats_combinés_nationaux.csv**
+    **4. M5_combined_results_national.csv**
 
-    **5. M4_combiné_résultats_admin2.csv**
+    **5. M5_combined_results_admin2.csv**
 
-    **6. M4_combiné_résultats_admin3.csv**
+    **6. M5_combined_results_admin3.csv**
 
     **Structure** :
 
@@ -943,7 +944,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     **Entrée spéciale "meilleure "** : Duplique le dénominateur optimal sélectionné pour faciliter le filtrage
 
-    **7. M4_dénominateur_par_indicateur_sélectionné.csv**
+    **7. M5_selected_denominator_per_indicator.csv**
 
     **Objectif** : Résumé du dénominateur le plus performant sélectionné pour chaque indicateur à chaque niveau géographique
 
@@ -1066,63 +1067,23 @@ La partie 2 a trois objectifs principaux :
 
 #### Configuration de l'utilisateur
 
-Les utilisateurs configurent la partie 2 à l'aide de deux ensembles de paramètres clés :
+La partie 2 (module `m006`) expose un seul paramètre de configuration, `DENOMINATOR_CHAIN`, qui contrôle le dénominateur utilisé pour **tous** les calculs de couverture :
 
-??? "1. configuration de la sélection du dénominateur"
+```r
+DENOMINATOR_CHAIN <- "auto"   # Options : "auto", "anc1", "delivery", "bcg", "penta1"
+```
 
-    Au début du script, les utilisateurs spécifient le dénominateur à utiliser pour chaque indicateur :
+**Options :**
 
-    ```r
-    dénominateur_SELECTION <- list(
-      # PREGNANCY-RELATED indicateurS
-      CPN1 = "best",                    # Options: "best", "d'anc1_pregnancy", "ddelivery_pregnancy", "dBCG_pregnancy", "dlivebirths_pregnancy", "dwpp_pregnancy"
-      CPN4 = "best",
+- `"auto"` *(par défaut)* — Utilise le dénominateur `best` sélectionné par indicateur et par niveau géographique par la partie 1 (`m005`). La sélection est faite par minimisation de l'erreur quadratique par rapport aux valeurs d'enquête, séparément pour chaque indicateur.
+- `"anc1"` — Force toutes les estimations de couverture à utiliser la chaîne de dénominateurs dérivée de la CPN1 (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, etc.).
+- `"delivery"` — Force la chaîne dérivée des accouchements (`ddelivery_*`).
+- `"bcg"` — Force la chaîne dérivée du BCG (`dbcg_*`, niveau national uniquement).
+- `"penta1"` — Force la chaîne dérivée du Penta1 (`dpenta1_*`).
 
-      # LIVE BIRTH-RELATED indicateurS
-      delivery = "best",                # Options: "best", "d'anc1_livebirth", "ddelivery_livebirth", "dBCG_livebirth", "dlivebirths_livebirth", "dwpp_livebirth"
-      BCG = "best",
-      sba = "best",
-      pnc1_mother = "best",
-      pnc1 = "best",
+Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source à tous les indicateurs et à tous les niveaux géographiques pour assurer la cohérence. La couverture est ensuite calculée pour chaque indicateur en utilisant la variante de population cible appropriée de cette chaîne (par exemple, `danc1_pregnancy` pour CPN1/CPN4, `danc1_livebirth` pour accouchement/BCG/SBA, `danc1_dpt` pour Penta1-3, `danc1_measles1` pour MCV1, etc.).
 
-      # DTC-ELIGIBLE AGE GROUP indicateurS
-      Penta1 = "best",                  # Options: "best", "d'anc1_DTC", "ddelivery_DTC", "dPenta1_DTC", "dBCG_DTC", "dlivebirths_DTC", "dwpp_DTC"
-      Penta2 = "best",
-      Penta3 = "best",
-      VPO1 = "best",
-      VPO2 = "best",
-      VPO3 = "best",
-
-      # rougeole-ELIGIBLE AGE GROUP indicateurS
-      rougeole1 = "best",                # Options: "best", "d'anc1_rougeole1", "ddelivery_rougeole1", "dPenta1_rougeole1", "dBCG_rougeole1", "dlivebirths_rougeole1", "dwpp_rougeole1"
-      rougeole2 = "best",
-
-      # ADDITIONAL indicateurS
-      vitaminA = "best",                # Options: "best", "d'anc1_vitaminA", "dBCG_vitaminA", "ddelivery_vitaminA", "dwpp_vitaminA"
-      fully_immunized = "best"          # Options: "best", "d'anc1_fully_immunized", "dBCG_fully_immunized", "ddelivery_fully_immunized", "dwpp_fully_immunized"
-    )
-    ```
-
-    **Options de dénominateur par type d'indicateur:**
-
-    Les dénominateurs disponibles varient selon le type d'indicateur en fonction de la population cible appropriée :
-
-    - **Indicateurs basés sur la grossesse** (CPN1, CPN4) : Utiliser des dénominateurs ajustés à la grossesse
-    - **Indicateurs basés sur les naissances vivantes** (accouchement, BCG, SBA, PNC) : Utiliser les dénominateurs ajustés aux naissances vivantes
-    - **Groupe d'âge éligible au DTC** (Penta1-3, VPO1-3) : Utiliser les dénominateurs ajustés pour le DTC (enfants éligibles pour le DTC)
-    - **Groupe d'âge éligible pour la rougeole** (Rougeole1, Rougeole2) : Utiliser les dénominateurs ajustés pour la rougeole (enfants éligibles pour le vaccin contre la rougeole)
-
-    Chaque option de dénominateur combine une source (CPN1, Delivery, BCG, Penta1, ou WPP) avec un facteur d'ajustement de l'âge.
-
-??? "2) Configuration du niveau administratif"
-
-    ```r
-    RUN_NATIONAL <- TRUE  # Always TRUE - national analysis is mandatory
-    RUN_ADMIN2 <- TRUE    # Enable/disable admin level 2 analysis
-    RUN_ADMIN3 <- TRUE    # Enable/disable admin level 3 analysis
-    ```
-
-    Le script vérifie automatiquement la disponibilité des données et désactive les niveaux administratifs sans données.
+**La portée géographique** est héritée du paramètre `ANALYSIS_LEVEL` de la partie 1 — `m006` s'exécute pour les sorties nationales, admin 2 et admin 3 de `m005` lorsqu'elles sont disponibles.
 
 #### Fonctions et méthodes principales
 
@@ -1412,7 +1373,7 @@ La partie 2 exécute le flux de travail suivant pour chaque niveau administratif
 
 La partie 2 produit trois fichiers de sortie :
 
-#### 1. Sortie nationale : `M5_couverture_estimation_national.csv`
+#### 1. Sortie nationale : `M6_coverage_estimation_national.csv`
 
 **Colonnes** :
 
@@ -1426,7 +1387,7 @@ La partie 2 produit trois fichiers de sortie :
 - cODE_BLOC_206__ : Source de l'enquête (par exemple, "EDS 2018")
 - `survey_raw_source_detail` : Détails supplémentaires sur la source
 
-#### 2. Résultats du niveau 2 de l'administration : `M5_couverture_estimation_admin2.csv`
+#### 2. Résultats du niveau 2 de l'administration : `M6_coverage_estimation_admin2.csv`
 
 **Colonnes** :
 
@@ -1435,7 +1396,7 @@ Identique à la colonne nationale, plus :
 - `admin_area_2` : Nom de la division administrative de deuxième niveau (par exemple, province, région)
 
 
-#### 3. Niveau administratif 3 Sortie : `M5_couverture_estimation_admin3.csv`
+#### 3. Niveau administratif 3 Sortie : `M6_coverage_estimation_admin3.csv`
 
 **Colonnes** :
 
@@ -1535,8 +1496,8 @@ Identique à la colonne nationale, plus :
 
     **Problème** : "Pas de données dans les résultats combinés d'admin2"
 
-    - **Cause** : La partie 1 n'a pas traité le niveau 2 de l'administration, ou il n'existe pas de données infranationales
-    - **Solution** : Définissez `RUN_ADMIN2 <- FALSE` ou vérifiez les entrées de la partie 1
+    - **Cause** : La partie 1 (`m005`) n'a pas traité le niveau 2 de l'administration, ou il n'existe pas de données infranationales
+    - **Solution** : Modifier le paramètre `ANALYSIS_LEVEL` de la partie 1 (par exemple sur `NATIONAL_ONLY`) ou vérifier les entrées de la partie 1
 
     **Problème** : Les projections montrent des valeurs non plausibles (>100% ou <0%)
 
@@ -1590,7 +1551,7 @@ Identique à la colonne nationale, plus :
     STILLBIRTH_RATE <- 0.025         # Default: 0.02
     P1_NMR <- 0.045                  # Default: 0.039
     P2_PNMR <- 0.030                 # Default: 0.028
-    INFANT_MORTALITY_RATE <- 0.070   # Default: 0.063
+    INFANT_MORTALITY_RATE <- 0.070   # Default: 0.067
     UNDER5_MORTALITY_RATE <- 0.110   # Default: 0.103
 
     # These parameters affect survival-adjusted dénominateurs
@@ -1599,19 +1560,17 @@ Identique à la colonne nationale, plus :
 
     **Sources pour les taux spécifiques aux pays** : Rapports finaux des EDS, Groupe interinstitutions des Nations unies pour l'estimation de la mortalité infantile (IGME), ou statistiques nationales de l'état civil.
 
-??? "Exemple 3 : Exécution de la partie 2 avec des sélections de dénominateurs personnalisées"
+??? "Exemple 3 : Exécution de la partie 2 avec une chaîne de dénominateurs fixe"
 
     ```r
-    # Override automatic "best" selection for specific indicateurs
-    DENOM_CPN1 <- "d'anc1_pregnancy"      # Use CPN1-based dénominateur
-    DENOM_Penta3 <- "dwpp_DTC"           # Use WPP population estimate
-    DENOM_rougeole1 <- "best"             # Keep automatic selection
+    # Forcer tous les calculs de couverture à utiliser la chaîne dérivée de la CPN1
+    DENOMINATOR_CHAIN <- "anc1"          # Options : "auto", "anc1", "delivery", "bcg", "penta1"
 
-    # Run Part 2
-    source("06_module_couverture_estimates_part2.R")
+    # Exécuter la partie 2 (module m006)
+    source("06_module_coverage_estimates_part2.R")
     ```
 
-    **Cas d'utilisation** : Lorsque les connaissances programmatiques suggèrent qu'un dénominateur spécifique est plus approprié que l'option statistiquement sélectionnée.
+    **Cas d'utilisation** : Lorsque les connaissances programmatiques suggèrent qu'un point d'entrée spécifique est le plus fiable pour tous les indicateurs (par exemple, une déclaration CPN1 très solide), ou pour la cohérence des comparaisons entre pays. Utilisez `"auto"` (par défaut) pour conserver la sélection du meilleur dénominateur indicateur par indicateur de la partie 1.
 
 ??? "Exemple 4 : Analyse nationale uniquement pour l'évaluation rapide"
 
@@ -1643,8 +1602,8 @@ Identique à la colonne nationale, plus :
 
     ```r
     # Load couverture outputs
-    couverture_national <- read.csv("M5_couverture_estimation_national.csv")
-    couverture_admin2 <- read.csv("M5_couverture_estimation_admin2.csv")
+    couverture_national <- read.csv("M6_coverage_estimation_national.csv")
+    couverture_admin2 <- read.csv("M6_coverage_estimation_admin2.csv")
 
     # Filter to specific indicateur
     Penta3_national <- couverture_national %>%
@@ -1674,7 +1633,7 @@ Identique à la colonne nationale, plus :
 
 ??? "Colonnes du fichier de sortie"
 
-    **Les fichiers de sortie de la partie 2** (`M5_couverture_estimation_*.csv`) contiennent :
+    **Les fichiers de sortie de la partie 2** (`M6_coverage_estimation_*.csv`) contiennent :
 
     | Colonnes - Description - Colonne - Description - Colonne - Description - Colonne - Description - Colonne - Description
     |--------|-------------|
@@ -1691,7 +1650,7 @@ Identique à la colonne nationale, plus :
 
 ??? "Examen des options de dénominateur"
 
-    Les fichiers de sortie de la partie 1 (`M4_combined_results_*.csv`) contiennent des estimations de couverture pour toutes les options de dénominateur. Pour les passer en revue :
+    Les fichiers de sortie de la partie 1 (`M5_combined_results_*.csv`) contiennent des estimations de couverture pour toutes les options de dénominateur. Pour les passer en revue :
 
     1. Ouvrez le fichier des résultats combinés
     2. Filtrez sur l'indicateur qui vous intéresse
@@ -1931,35 +1890,43 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
-## Module de couverture : Paramètres de configuration
+## Modules de couverture : Paramètres de configuration
 
-<div style="font-size: 0.8em;">
+<div style="font-size: 0.75em;">
 
-| Paramètre | Description |
-|-----------|-------------|
-| **Valeur de comptage à utiliser** | Valeur de comptage ajustée à utiliser pour le calcul de la couverture |
-| **Niveau pour lequel calculer la couverture** | Niveaux géographiques pour l'estimation de la couverture : national, provincial (zone administrative 2) ou district (zone administrative 3) |
-| **Taux de perte de grossesse** | Proportion de grossesses se terminant par une perte avant l'accouchement |
-| **Taux de jumeaux** | Proportion d'accouchements donnant lieu à la naissance de jumeaux |
-| **Taux de mortinatalité** | Proportion de naissances mort-nées |
-| **Taux de mortalité néonatale** | Décès au cours des 28 premiers jours par naissance vivante |
-| **Taux de mortalité postnéonatale** | Décès entre 28 jours et 1 an par naissance vivante |
-| **Taux de mortalité infantile** | Décès avant l'âge de 1 an par naissance vivante |
-| **Taux de mortalité des moins de 5 ans** | Décès avant l'âge de 5 ans par naissance vivante |
+**Partie 1 — `m005` (calcul des dénominateurs)**
+
+| Paramètre | Défaut | Description |
+|-----------|--------|-------------|
+| **Valeur de comptage à utiliser** | `count_final_outliers` | Valeur ajustée du module 2 à utiliser |
+| **Niveau pour lequel calculer la couverture** | National + zone administrative 2 | National uniquement / + zone administrative 2 / + zones administratives 2 et 3 |
+| **Taux de perte de grossesse** | 0,03 | Proportion de grossesses se terminant par une perte avant l'accouchement |
+| **Taux de jumeaux** | 0,015 | Proportion d'accouchements donnant lieu à la naissance de jumeaux |
+| **Taux de mortinatalité** | 0,02 | Proportion de naissances mort-nées |
+| **Taux de mortalité néonatale** | 0,039 | Décès au cours des 28 premiers jours par naissance vivante |
+| **Taux de mortalité postnéonatale** | 0,028 | Décès entre 28 jours et 1 an par naissance vivante |
+| **Taux de mortalité infantile** | 0,067 | Décès avant l'âge de 1 an par naissance vivante |
+| **Taux de mortalité des moins de 5 ans** | 0,103 | Décès avant l'âge de 5 ans par naissance vivante |
+
+**Partie 2 — `m006` (estimation de la couverture)**
+
+| Paramètre | Défaut | Description |
+|-----------|--------|-------------|
+| **Chaîne de dénominateurs** | `auto` | `auto` utilise le meilleur dénominateur par indicateur (issu de la partie 1) ; ou force une chaîne unique : `anc1`, `delivery`, `bcg` ou `penta1` |
 
 </div>
 
-Les taux de mortalité spécifiques à un pays peuvent être obtenus à partir des rapports des EDS, de l'IGME des Nations unies ou des statistiques nationales de l'état civil.
+Les taux démographiques spécifiques à un pays peuvent être obtenus à partir des rapports EDS, de l'IGME des Nations unies ou des statistiques nationales de l'état civil.
 
 <!--
 PRESENTER NOTES:
-- Les paramètres de configuration contrôlent les calculs des dénominateurs
-- Variable de comptage : quelles données ajustées utiliser (recommandé "both")
+- L'estimation de la couverture s'exécute en deux modules : m005 (Partie 1, dénominateurs) et m006 (Partie 2, couverture)
+- Les paramètres de m005 contrôlent la construction des dénominateurs
+- Variable de comptage : quelles données ajustées utiliser (par défaut : ajusté pour les valeurs aberrantes)
 - Niveaux d'analyse : national, provincial, district - choisir en fonction de la qualité des données
-- Taux démographiques : valeurs par défaut fournies mais utiliser les valeurs spécifiques au pays
-- Sources pour les taux : rapports EDS, estimations IGME de l'ONU, statistiques nationales de l'état civil
-- Les taux de mortalité affectent significativement les calculs des dénominateurs
-- Mortalité plus élevée = dénominateurs de population survivante plus petits
+- Taux démographiques : valeurs par défaut fournies mais utiliser les valeurs spécifiques au pays lorsqu'elles sont disponibles
+- m006 a un seul paramètre : la chaîne de dénominateurs (auto vs source forcée)
+- "auto" laisse chaque indicateur choisir son meilleur dénominateur ; forcer une chaîne assure la cohérence entre indicateurs
 -->
 <!-- /SLIDE -->
 

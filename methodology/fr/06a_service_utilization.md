@@ -170,8 +170,8 @@ Pour le graphique de variation de volume (résultat 4) :
     | Paramètre | Valeur par défaut | Type | Description | Guide de réglage |
     |-----------|---------|------|-------------|-----------------|
     | `COUNTRY_ISO3` | "ISO3" | Chaîne | Code de pays à trois lettres | Définissez votre code de pays (par exemple, "RWA", "UGA", "ZMB") |
-    | `SELECTEDCOUNT` | "count_final_both" | Chaîne | Colonne de données utilisée pour l'analyse | Options : `count_final_none`, `count_final_completeness`, `count_final_both` |
-    | `VISUALIZATIONCOUNT` | "count_final_both" | Chaîne | Colonne de données utilisée pour la visualisation | Doit correspondre à ou compléter `SELECTEDCOUNT` |
+    | `SELECTEDCOUNT` | "count_final_outliers" | Chaîne | Colonne de données utilisée pour la modélisation par régression | Options : `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both` |
+    | `VISUALIZATIONCOUNT` | "count_final_outliers" | Chaîne | Colonne de données utilisée pour la visualisation | Mêmes options que `SELECTEDCOUNT` ; peut différer si vous souhaitez modéliser sur l'une et représenter graphiquement l'autre |
 
 ??? "Paramètres de la carte de contrôle"
 
@@ -224,7 +224,7 @@ Pour le graphique de variation de volume (résultat 4) :
     1. **`M2_adjusted_data.csv`** (source de données principale)
        - Résultat du module 2 (Ajustements de la qualité des données)
        - Contient des comptes de services ajustés avec différentes hypothèses de complétude
-       - Colonnes obligatoires : `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_completeness`, `count_final_both`
+       - Colonnes obligatoires : `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`
 
     2. **`M1_output_outliers.csv`**
        - Résultat du module 1 (Évaluation de la qualité des données)

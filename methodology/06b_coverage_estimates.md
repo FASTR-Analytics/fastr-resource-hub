@@ -32,7 +32,8 @@ This module addresses key challenges in estimating coverage, including:
 | Component | Details |
 |-----------|---------|
 | **Inputs** | M2_adjusted_data (national & subnational) from Module 2<br>Survey data (MICS/DHS) from GitHub repository<br>Population data (UN WPP) from GitHub repository |
-| **Outputs** | M4_denominators (national, admin2, admin3) - calculated target populations<br>M4_combined_results (national, admin2, admin3) - coverage estimates with all denominators<br>M5_coverage_estimation (national, admin2, admin3) - final coverage with projections |
+| **Outputs** | **M5 (Part 1)** — M5_denominators (national, admin2, admin3): calculated target populations · M5_combined_results (national, admin2, admin3): coverage estimates with all denominators · M5_selected_denominator_per_indicator: best denominator per indicator and level<br>**M6 (Part 2)** — M6_coverage_estimation (national, admin2, admin3): final coverage with HMIS, survey, and projected estimates |
+| **Module IDs** | Part 1 = `m005` (requires `m002`) · Part 2 = `m006` (requires `m005`) |
 | **Purpose** | Estimate health service coverage by comparing service volumes to target populations, validated against survey benchmarks |
 
 ### Part 1 and part 2 explained
@@ -231,16 +232,16 @@ TWIN_RATE <- 0.015               # 1.5% twin births
 STILLBIRTH_RATE <- 0.02          # 2% stillbirths
 P1_NMR <- 0.039                  # Neonatal mortality rate
 P2_PNMR <- 0.028                 # Post-neonatal mortality rate
-INFANT_MORTALITY_RATE <- 0.063   # Infant mortality rate
+INFANT_MORTALITY_RATE <- 0.067   # Infant mortality rate
 UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 ```
 
 **Count variable options:**
 
 - `count_final_none`: No adjustments (raw reported data)
-- `count_final_outlier`: Outlier adjustment only
+- `count_final_outliers`: Outlier adjustment only **(default)**
 - `count_final_completeness`: Completeness adjustment only
-- `count_final_both`: Both adjustments **(recommended)**
+- `count_final_both`: Both adjustments combined
 
 
 #### Input data sources
@@ -907,15 +908,15 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 ??? "Output files specification"
 
-    Part 1 generates seven CSV files:
+    Part 1 (module `m005`) generates seven CSV files:
 
     **Denominator files**
 
-    **1. M4_denominators_national.csv**
+    **1. M5_denominators_national.csv**
 
-    **2. M4_denominators_admin2.csv**
+    **2. M5_denominators_admin2.csv**
 
-    **3. M4_denominators_admin3.csv**
+    **3. M5_denominators_admin3.csv**
 
     **Structure**:
 
@@ -932,11 +933,11 @@ Part 1 executes the following workflow for each administrative level (national, 
 
     **Combined results files**
 
-    **4. M4_combined_results_national.csv**
+    **4. M5_combined_results_national.csv**
 
-    **5. M4_combined_results_admin2.csv**
+    **5. M5_combined_results_admin2.csv**
 
-    **6. M4_combined_results_admin3.csv**
+    **6. M5_combined_results_admin3.csv**
 
     **Structure**:
 
@@ -952,7 +953,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 
     **Special "best" Entry**: Duplicates the selected optimal denominator for easy filtering
 
-    **7. M4_selected_denominator_per_indicator.csv**
+    **7. M5_selected_denominator_per_indicator.csv**
 
     **Purpose**: Summary of the best-performing denominator selected for each indicator at each geographic level
 
@@ -1023,9 +1024,9 @@ Part 1 executes the following workflow for each administrative level (national, 
     **When to Use Which Count Variable**
 
     - `count_final_none`: No adjustments (raw reported data)
-    - `count_final_outlier`: Outlier adjustment only
+    - `count_final_outliers`: Outlier adjustment only **(default)**
     - `count_final_completeness`: Completeness adjustment only
-    - `count_final_both`: Both adjustments **(recommended)**
+    - `count_final_both`: Both adjustments combined
 
     **Interpreting "best" Denominators**
 
@@ -1075,63 +1076,23 @@ Part 2 serves three key purposes:
 
 #### User configuration
 
-Users configure Part 2 through two key parameter sets:
+Part 2 (module `m006`) exposes a single configuration parameter, `DENOMINATOR_CHAIN`, which controls the denominator used for **all** coverage calculations:
 
-??? "1. Denominator selection configuration"
+```r
+DENOMINATOR_CHAIN <- "auto"   # Options: "auto", "anc1", "delivery", "bcg", "penta1"
+```
 
-    At the top of the script, users specify which denominator to use for each indicator:
+**Options:**
 
-    ```r
-    DENOMINATOR_SELECTION <- list(
-      # PREGNANCY-RELATED INDICATORS
-      anc1 = "best",                    # Options: "best", "danc1_pregnancy", "ddelivery_pregnancy", "dbcg_pregnancy", "dlivebirths_pregnancy", "dwpp_pregnancy"
-      anc4 = "best",
+- `"auto"` *(default)* — Use the `best` denominator selected per indicator and geographic level by Part 1 (`m005`). This applies the squared-error minimisation against survey benchmarks separately for each indicator.
+- `"anc1"` — Force all coverage estimates to use the ANC1-derived denominator chain (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, etc.).
+- `"delivery"` — Force the delivery-derived chain (`ddelivery_*`).
+- `"bcg"` — Force the BCG-derived chain (`dbcg_*`, national level only).
+- `"penta1"` — Force the Penta1-derived chain (`dpenta1_*`).
 
-      # LIVE BIRTH-RELATED INDICATORS
-      delivery = "best",                # Options: "best", "danc1_livebirth", "ddelivery_livebirth", "dbcg_livebirth", "dlivebirths_livebirth", "dwpp_livebirth"
-      bcg = "best",
-      sba = "best",
-      pnc1_mother = "best",
-      pnc1 = "best",
+When a fixed chain is selected, the module applies the same source across all indicators and all geographic levels for consistency. Coverage is then derived for each indicator using the appropriate target-population variant from that chain (e.g., `danc1_pregnancy` for ANC1/ANC4, `danc1_livebirth` for delivery/BCG/SBA, `danc1_dpt` for Penta1-3, `danc1_measles1` for MCV1, etc.).
 
-      # DPT-ELIGIBLE AGE GROUP INDICATORS
-      penta1 = "best",                  # Options: "best", "danc1_dpt", "ddelivery_dpt", "dpenta1_dpt", "dbcg_dpt", "dlivebirths_dpt", "dwpp_dpt"
-      penta2 = "best",
-      penta3 = "best",
-      opv1 = "best",
-      opv2 = "best",
-      opv3 = "best",
-
-      # MEASLES-ELIGIBLE AGE GROUP INDICATORS
-      measles1 = "best",                # Options: "best", "danc1_measles1", "ddelivery_measles1", "dpenta1_measles1", "dbcg_measles1", "dlivebirths_measles1", "dwpp_measles1"
-      measles2 = "best",
-
-      # ADDITIONAL INDICATORS
-      vitaminA = "best",                # Options: "best", "danc1_vitaminA", "dbcg_vitaminA", "ddelivery_vitaminA", "dwpp_vitaminA"
-      fully_immunized = "best"          # Options: "best", "danc1_fully_immunized", "dbcg_fully_immunized", "ddelivery_fully_immunized", "dwpp_fully_immunized"
-    )
-    ```
-
-    **Denominator options by indicator type:**
-
-    The available denominators vary by indicator type based on the appropriate target population:
-
-    - **Pregnancy-based indicators** (ANC1, ANC4): Use pregnancy-adjusted denominators
-    - **Live birth-based indicators** (Delivery, BCG, SBA, PNC): Use live birth-adjusted denominators
-    - **DPT-eligible age group** (Penta1-3, OPV1-3): Use DPT-adjusted denominators (children eligible for DPT)
-    - **Measles-eligible age group** (Measles1, Measles2): Use measles-adjusted denominators (children eligible for measles vaccine)
-
-    Each denominator option combines a source (ANC1, Delivery, BCG, Penta1, or WPP) with an age-adjustment factor.
-
-??? "2. Administrative level configuration"
-
-    ```r
-    RUN_NATIONAL <- TRUE  # Always TRUE - national analysis is mandatory
-    RUN_ADMIN2 <- TRUE    # Enable/disable admin level 2 analysis
-    RUN_ADMIN3 <- TRUE    # Enable/disable admin level 3 analysis
-    ```
-
-    The script automatically checks data availability and disables admin levels with no data.
+**Geographic scope** is inherited from Part 1's `ANALYSIS_LEVEL` parameter — `m006` runs for national, admin area 2, and admin area 3 outputs from `m005` if those are present.
 
 #### Core functions and methods
 
@@ -1333,27 +1294,26 @@ Users configure Part 2 through two key parameter sets:
 
 #### Helper functions
 
-??? "Helper function: `filter_by_denominator_selection()`"
+??? "Helper function: filter by denominator chain"
 
-    **Purpose**: Filters the combined results from Part 1 based on user's denominator selection.
+    **Purpose**: Filters the combined results from Part 1 (`m005`) according to the `DENOMINATOR_CHAIN` parameter set in Part 2 (`m006`).
 
     **Algorithm**:
 
-    1. Iterate through each indicator in `DENOMINATOR_SELECTION`
-    2. For each indicator:
-       - If selection is "best": Keep rows where `denominator_best_or_survey == "best"`
-       - If selection is a specific denominator: Keep rows where `denominator_best_or_survey == selected_denominator`
-    3. Convert selected rows to coverage format (rename columns, filter out survey entries)
-    4. Combine results across all indicators
+    1. Read `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg`, or `penta1`).
+    2. If `auto`: keep rows where `denominator_best_or_survey == "best"` for each indicator.
+    3. If a specific chain (e.g., `anc1`): for each indicator, keep rows whose denominator belongs to that chain (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, `danc1_measles1`, etc.) and matches the indicator's expected target population.
+    4. Convert selected rows to coverage format (rename columns, drop survey entries).
+    5. Combine results across all indicators.
 
     **Input**:
 
     - `combined_results_df`: Output from Part 1 with all denominator options
-    - `selection_list`: The DENOMINATOR_SELECTION configuration list
+    - `chain`: Value of `DENOMINATOR_CHAIN`
 
     **Output**:
 
-    Filtered data frame containing only the user-selected denominators.
+    Filtered data frame containing only the rows matching the selected chain (one denominator per indicator).
 
 ??? "Helper function: `extract_survey_from_combined()`"
 
@@ -1419,9 +1379,9 @@ Part 2 executes the following workflow for each administrative level (national, 
 
 #### Output specifications
 
-Part 2 produces three output files:
+Part 2 (module `m006`) produces three output files:
 
-#### 1. National Output: `M5_coverage_estimation_national.csv`
+#### 1. National Output: `M6_coverage_estimation_national.csv`
 
 **Columns**:
 
@@ -1435,7 +1395,7 @@ Part 2 produces three output files:
 - `survey_raw_source`: Survey source (e.g., "DHS 2018")
 - `survey_raw_source_detail`: Additional source details
 
-#### 2. Admin Level 2 Output: `M5_coverage_estimation_admin2.csv`
+#### 2. Admin Level 2 Output: `M6_coverage_estimation_admin2.csv`
 
 **Columns**:
 
@@ -1444,7 +1404,7 @@ Same as national, plus:
 - `admin_area_2`: Second-level administrative division name (e.g., province, region)
 
 
-#### 3. Admin Level 3 Output: `M5_coverage_estimation_admin3.csv`
+#### 3. Admin Level 3 Output: `M6_coverage_estimation_admin3.csv`
 
 **Columns**:
 
@@ -1545,7 +1505,7 @@ Same as national, plus:
     **Issue**: "No data in admin2 combined results"
 
     - **Cause**: Part 1 didn't process admin level 2, or no subnational data exists
-    - **Solution**: Set `RUN_ADMIN2 <- FALSE` or check Part 1 inputs
+    - **Solution**: Adjust Part 1's `ANALYSIS_LEVEL` parameter (e.g. set to `NATIONAL_ONLY`) or check Part 1 inputs
 
     **Issue**: Projections show implausible values (>100% or <0%)
 
@@ -1599,7 +1559,7 @@ Same as national, plus:
     STILLBIRTH_RATE <- 0.025         # Default: 0.02
     P1_NMR <- 0.045                  # Default: 0.039
     P2_PNMR <- 0.030                 # Default: 0.028
-    INFANT_MORTALITY_RATE <- 0.070   # Default: 0.063
+    INFANT_MORTALITY_RATE <- 0.070   # Default: 0.067
     UNDER5_MORTALITY_RATE <- 0.110   # Default: 0.103
 
     # These parameters affect survival-adjusted denominators
@@ -1608,19 +1568,17 @@ Same as national, plus:
 
     **Sources for country-specific rates**: DHS final reports, UN Inter-agency Group for Child Mortality Estimation (UN IGME), or national vital statistics.
 
-??? "Example 3: Running Part 2 with custom denominator selections"
+??? "Example 3: Running Part 2 with a fixed denominator chain"
 
     ```r
-    # Override automatic "best" selection for specific indicators
-    DENOM_ANC1 <- "danc1_pregnancy"      # Use ANC1-based denominator
-    DENOM_PENTA3 <- "dwpp_dpt"           # Use WPP population estimate
-    DENOM_MEASLES1 <- "best"             # Keep automatic selection
+    # Force all coverage calculations to use the ANC1-derived denominator chain
+    DENOMINATOR_CHAIN <- "anc1"          # Options: "auto", "anc1", "delivery", "bcg", "penta1"
 
-    # Run Part 2
+    # Run Part 2 (module m006)
     source("06_module_coverage_estimates_part2.R")
     ```
 
-    **Use case**: When programmatic knowledge suggests a specific denominator is more appropriate than the statistically selected option.
+    **Use case**: When programmatic knowledge suggests a specific entry point is most reliable across indicators (for example, very strong ANC1 reporting), or for consistency in country comparisons. Use `"auto"` (the default) to keep the indicator-by-indicator best selection from Part 1.
 
 ??? "Example 4: National-only analysis for rapid assessment"
 
@@ -1652,8 +1610,8 @@ Same as national, plus:
 
     ```r
     # Load coverage outputs
-    coverage_national <- read.csv("M5_coverage_estimation_national.csv")
-    coverage_admin2 <- read.csv("M5_coverage_estimation_admin2.csv")
+    coverage_national <- read.csv("M6_coverage_estimation_national.csv")
+    coverage_admin2 <- read.csv("M6_coverage_estimation_admin2.csv")
 
     # Filter to specific indicator
     penta3_national <- coverage_national %>%
@@ -1683,7 +1641,7 @@ Same as national, plus:
 
 ??? "Output file columns"
 
-    **Part 2 output files** (`M5_coverage_estimation_*.csv`) contain:
+    **Part 2 output files** (`M6_coverage_estimation_*.csv`) contain:
 
     | Column | Description |
     |--------|-------------|
@@ -1700,7 +1658,7 @@ Same as national, plus:
 
 ??? "Reviewing denominator options"
 
-    Part 1 output files (`M4_combined_results_*.csv`) contain coverage estimates from all denominator options. To review:
+    Part 1 output files (`M5_combined_results_*.csv`) contain coverage estimates from all denominator options. To review:
 
     1. Open the combined results file
     2. Filter to indicator of interest
@@ -1708,7 +1666,7 @@ Same as national, plus:
     4. The row marked `best` shows the automatically selected denominator
     5. Rows marked `survey` show actual survey observations
 
-    To override automatic selection in Part 2, set the `DENOM_*` parameters to a specific denominator name instead of `"best"`.
+    To override automatic selection in Part 2 (`m006`), change the `DENOMINATOR_CHAIN` parameter from `"auto"` to one of `"anc1"`, `"delivery"`, `"bcg"`, or `"penta1"`. The selected chain is applied across all indicators and geographic levels.
 
 ??? "Subnational data requirements"
 
@@ -1938,35 +1896,43 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
-## Coverage module: Configuration parameters
+## Coverage modules: Configuration parameters
 
-<div style="font-size: 0.8em;">
+<div style="font-size: 0.75em;">
 
-| Parameter | Description |
-|-----------|-------------|
-| **Count value to use** | Which adjusted count to use for coverage calculation |
-| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
-| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
-| **Twin rate** | Proportion of deliveries resulting in twins |
-| **Stillbirth rate** | Proportion of births that are stillbirths |
-| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
-| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
-| **Infant mortality rate** | Deaths before age 1 per live birth |
-| **Under 5 mortality rate** | Deaths before age 5 per live birth |
+**Part 1 — `m005` (denominator calculation)**
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| **Count value to use** | `count_final_outliers` | Which adjusted count from Module 2 to use |
+| **Level to calculate coverage for** | National + admin area 2 | National only / +admin area 2 / +admin area 2 and 3 |
+| **Pregnancy loss rate** | 0.03 | Proportion of pregnancies ending in loss before delivery |
+| **Twin rate** | 0.015 | Proportion of deliveries resulting in twins |
+| **Stillbirth rate** | 0.02 | Proportion of births that are stillbirths |
+| **Neonatal mortality rate** | 0.039 | Deaths in first 28 days per live birth |
+| **Postneonatal mortality rate** | 0.028 | Deaths from 28 days to 1 year per live birth |
+| **Infant mortality rate** | 0.067 | Deaths before age 1 per live birth |
+| **Under 5 mortality rate** | 0.103 | Deaths before age 5 per live birth |
+
+**Part 2 — `m006` (coverage estimation)**
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| **Denominator chain** | `auto` | `auto` uses the best denominator per indicator (from Part 1); or force a single chain: `anc1`, `delivery`, `bcg`, or `penta1` |
 
 </div>
 
-Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+Country-specific demographic rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 
 <!--
 PRESENTER NOTES:
-- Configuration parameters control denominator calculations
-- Count variable: which adjusted data to use (recommend "both")
+- Coverage estimation runs in two modules: m005 (Part 1, denominators) and m006 (Part 2, coverage)
+- m005 parameters control how denominators are constructed
+- Count variable: which adjusted data to use (default: outlier-adjusted)
 - Analysis levels: national, provincial, district - choose based on data quality
-- Demographic rates: defaults provided but should use country-specific values
-- Sources for rates: DHS reports, UN IGME estimates, national vital statistics
-- Mortality rates affect denominator calculations significantly
-- Higher mortality = smaller surviving population denominators
+- Demographic rates: defaults provided but should use country-specific values when available
+- m006 has a single parameter: denominator chain (auto vs forced source)
+- "auto" lets each indicator pick its best denominator; forcing a chain ensures consistency across indicators
 -->
 <!-- /SLIDE -->
 

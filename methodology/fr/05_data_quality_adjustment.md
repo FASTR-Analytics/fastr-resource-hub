@@ -167,7 +167,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ### Paramètres de configuration
 
-??? "Indicateurs exclus"
+**Le module `m002` n'expose aucun paramètre configurable par l'utilisateur dans la plateforme FASTR** — les ajustements s'exécutent avec la même logique interne pour chaque projet. Les paramètres documentés ci-dessous sont codés en dur dans le module et sont décrits ici à des fins de transparence, et non de configuration.
+
+??? "Indicateurs exclus (codé en dur)"
 
     Certains indicateurs sont exclus de tous les ajustements en raison de leur caractère sensible :
 
@@ -177,7 +179,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Justification** : Les comptes de décès ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendances épidémiologiques ou des signaux d'épidémies.
 
-??? "Exclusions de faibles volumes"
+??? "Exclusions de faibles volumes (codé en dur)"
 
     Les indicateurs sont également automatiquement exclus des **ajustements** s'ils n'ont aucune observation supérieure à 100 dans l'ensemble de la base de données. Cela permet d'éviter des ajustements statistiques inutiles sur des indicateurs dont le nombre d'observations est constamment faible.
 
@@ -194,7 +196,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Ces informations sont enregistrées dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
 
-??? "Configuration de la fenêtre roulante"
+??? "Configuration de la fenêtre roulante (codé en dur)"
 
     Le module utilise une fenêtre de **6 mois** pour toutes les moyennes glissantes. Ce choix permet d'équilibrer :
 
@@ -271,7 +273,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Sorties au niveau de l'installation** (__CODE_BLOC_62__) :
 
     ```text
-    établissement_id | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count_final_none | count_final_outlier | count_final_completeness | count_final_both
+    établissement_id | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count_final_none | count_final_outliers | count_final_completeness | count_final_both
     ------------|--------------|--------------|-----------|---------------------|------------------|----------------------|--------------------------|------------------
     FAC001      | Province_A   | district_A   | 202301    | CPN1                | 145              | 145                  | 145                      | 145
     FAC001      | Province_A   | district_A   | 202302    | CPN1                | 152              | 152                  | 148                      | 148
@@ -514,7 +516,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     - Données brutes originales sans aucune modification
     - Sert de référence pour la comparaison
 
-    **Scénario 2 : valeurs aberrantes** (`count_final_outlier`)
+    **Scénario 2 : valeurs aberrantes** (`count_final_outliers`)
 
     - `adjust_outliers = TRUE`, `adjust_completeness = FALSE`
     - Seules les valeurs aberrantes sont remplacées
@@ -716,7 +718,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       ,
       .(
         count_final_none         = sum(count_final_none,         na.rm = TRUE),
-        count_final_outlier     = sum(count_final_outlier,     na.rm = TRUE),
+        count_final_outliers     = sum(count_final_outliers,     na.rm = TRUE),
         count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),
@@ -731,7 +733,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       ,
       .(
         count_final_none         = sum(count_final_none,         na.rm = TRUE),
-        count_final_outlier     = sum(count_final_outlier,     na.rm = TRUE),
+        count_final_outliers     = sum(count_final_outliers,     na.rm = TRUE),
         count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),

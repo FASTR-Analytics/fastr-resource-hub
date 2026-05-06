@@ -22,7 +22,7 @@ La qualité des données influe directement sur la fiabilité des indicateurs de
 | Composante | Détails |
 |-----------|---------|
 | **Entrées** | Données brutes du SIGS (`hmis_ISO3.csv`) contenant les volumes de services des établissements par mois et par indicateur<br>Identifiants des zones géographiques/administratives<br>Noms d'indicateurs normalisés |
-| **Sorties** | - Indicateurs et listes de valeurs aberrantes<br>- Statut d'exhaustivité par établissement-indicateur-mois<br>- Résultats de cohérence au niveau géographique<br>- Scores globaux de l'AQD |
+| **Sorties** | `M1_output_outliers.csv` — drapeaux de valeurs aberrantes par établissement-mois-indicateur<br>`M1_output_outlier_list.csv` — liste des valeurs aberrantes signalées (revue)<br>`M1_output_completeness.csv` — drapeaux de complétude par établissement-mois-indicateur<br>`M1_output_consistency_geo.csv` — résultats de cohérence sous-nationale par paire de ratios<br>`M1_output_dqa.csv` — scores composites de l'EQD (moyenne et réussite/échec) |
 | **Objectif** | Évaluer la fiabilité des données SIGS par la détection des valeurs aberrantes, l'évaluation de l'exhaustivité et la vérification de la cohérence afin de garantir des données fiables pour l'estimation de la couverture |
 
 ---
@@ -218,14 +218,19 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
     - **Petites installations** : Réduire __CODE_BLOC_46__ à 50
     - **Grandes installations uniquement** : Augmenter `MINIMUM_COUNT_THRESHOLD` à 200+
 
-??? "Sélection de l'indicateur CQD"
+??? "Sélection des indicateurs de l'EQD"
 
-    cODE_BLOC_2__
+    ```r
+    # Indicateurs de référence utilisés pour le score EQD (par défaut)
+    DQA_INDICATORS <- c("anc1", "penta1", "opd")
 
-    **Séries d'indicateurs standard:**
-    - **Focalisation sur la mère et l'enfant** : `c("CPN1", "CPN4", "delivery", "Penta1", "Penta3")`
-    - **Focalisation sur l'immunisation** : `c("BCG", "Penta1", "Penta3", "rougeole1")`
-    - **Complet** : `c("Penta1", "CPN1", "opd", "delivery", "pnc1")`
+    # Paires de cohérence à évaluer (par défaut)
+    CONSISTENCY_PAIRS_USED <- c("penta", "anc", "delivery")
+    ```
+
+    **Valeurs acceptées pour `DQA_INDICATORS`** (paramètre de la plateforme) : tout sous-ensemble de `c("anc1", "penta1", "opd")`.
+
+    **Valeurs acceptées pour `CONSISTENCY_PAIRS_USED`** (paramètre de la plateforme) : tout sous-ensemble de `c("penta", "anc", "delivery", "malaria")`.
 
 ??? "Plages de référence de cohérence"
 
@@ -339,26 +344,6 @@ __CODE_BLOC_4__
     - Comprendre les modèles de prestation de services au niveau du district
     - Identifier les zones géographiques présentant des problèmes de cohérence
     - Création de heatmaps de cohérence par zone
-
-??? "M1_output_consistency_établissement.csv - Cohérence au niveau de l'établissement"
-
-    **Objectif** : Résultats de la cohérence géographique étendus au niveau de l'établissement
-
-    **Colonnes:**
-
-    - cODE_BLOCK_77__ : Identifiant de l'établissement
-    - cODE_BLOCK_78__ : Zones géographiques (incluses dynamiquement en fonction des données)
-    - cODE_BLOCK_79__ : Période (YYYYMM)
-    - cODE_BLOCK_80__ : Nom de la paire de cohérence (par exemple, "pair_Penta", "pair_CPN")
-    - cODE_BLOCK_81__ : Indicateur binaire (1=consistant, 0=inconsistant, NA=incapable de calculer)
-
-    **Format** : Format long avec une ligne par type d'installation-période-ratio
-
-    **Cas d'utilisation** :
-
-    - Entrée pour la notation de l'AQD
-    - Fusion des indicateurs de cohérence avec les analyses au niveau de l'établissement
-    - Rapports de qualité spécifiques à l'établissement
 
 ??? "M1_output_dqa.csv - notes finales de l'AQD"
 
@@ -1343,7 +1328,6 @@ Le module suit la séquence suivante :
    ├─ M1_output_outliers.csv (all records with flags)
    ├─ M1_output_completeness.csv (completeness flags)
    ├─ M1_output_consistency_geo.csv (geo-level consistency)
-   ├─ M1_output_consistency_établissement.csv (établissement-level consistency)
    └─ M1_output_dqa.csv (final DQA scores)
 ```
 
@@ -1678,13 +1662,14 @@ En intégrant plusieurs dimensions de la qualité des données dans un score uni
 <!-- SLIDE:m4_6 -->
 ## Module AQD : Paramètres de configuration
 
-| Paramètre | Description |
-|-----------|-------------|
-| **Seuil de proportion pour la détection des valeurs aberrantes** | Ajuste le seuil de contribution proportionnelle pour signaler un mois d'établissement comme aberrant |
-| **Seuil de comptage minimum** | Définit le comptage minimum requis pour qu'un mois d'établissement soit considéré comme une valeur aberrante |
-| **Nombre d'EAM** | Les valeurs aberrantes sont définies comme des observations supérieures à X fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période |
-| **Indicateurs soumis à l'AQD** | Définit quels indicateurs sont inclus pour l'évaluation des valeurs aberrantes et de la complétude pour l'inclusion dans le score de l'AQD |
-| **Paires de cohérence utilisées** | Définit les paires d'indicateurs utilisées pour l'analyse de cohérence et les fourchettes de ratios attendues |
+| Paramètre | Défaut | Description |
+|-----------|--------|-------------|
+| **Seuil de proportion pour la détection des valeurs aberrantes** | 0,8 | Un mois-établissement est aberrant s'il représente plus de cette part du volume annuel pour l'indicateur |
+| **Seuil de comptage minimum** | 100 | Comptage minimum déclaré requis pour qu'un mois-établissement soit éligible au signalement comme aberrant |
+| **Nombre d'EAM** | 10 | Une valeur est signalée si elle dépasse ce multiple de l'écart absolu médian par rapport à la médiane mensuelle |
+| **Indicateurs soumis à l'EQD** | `anc1, penta1, opd` | Indicateurs contribuant au score composite EQD |
+| **Paires de cohérence utilisées** | `penta, anc, delivery` | Paires d'indicateurs utilisées pour l'analyse de cohérence (accepte également `malaria`) |
+| **Niveau administratif pour la cohérence** | `admin_area_3` | Niveau géographique auquel les ratios de cohérence sont calculés (admin_area_2 / 3 / 4) |
 
 <!--
 PRESENTER NOTES:
@@ -1693,6 +1678,7 @@ PRESENTER NOTES:
 - Le multiplicateur EAM de 10 est conservateur - ne signale que les valeurs aberrantes extrêmes
 - Le comptage minimum de 100 empêche les établissements à faible volume d'être trop signalés
 - Les paires de cohérence peuvent être modifiées en fonction des indicateurs que vous analysez
+- Le niveau administratif pour la cohérence est par défaut le district (admin_area_3) — les niveaux plus larges (2) sont plus stables, les plus fins (4) plus granulaires
 -->
 <!-- /SLIDE -->
 
