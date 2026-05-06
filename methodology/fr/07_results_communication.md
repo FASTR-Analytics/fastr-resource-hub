@@ -819,5 +819,5 @@ Passez d'une analyse ponctuelle à une **utilisation routinière des données**.
 
 ---
 
-**Dernière mise à jour** : 03-02-2026
-**Contact** : Équipe du projet FASTR
+**Dernière mise à jour** : 06-05-2026
+**Contact** : <fastr@worldbank.org>

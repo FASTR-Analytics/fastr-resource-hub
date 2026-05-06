@@ -851,5 +851,5 @@ Move from one-off analysis to **routine data use**.
 
 ---
 
-**Last updated**: 24-02-2026
-**Contact**: FASTR Project Team
+**Last updated**: 06-05-2026
+**Contact**: <fastr@worldbank.org>

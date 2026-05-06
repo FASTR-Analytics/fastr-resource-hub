@@ -63,5 +63,5 @@ Les résultats analytiques sont traduits en idées pertinentes pour les politiqu
 
 ---
 
-**Dernière mise à jour** : 07-01-2026
-**Contact** : Équipe du projet FASTR
+**Dernière mise à jour** : 06-05-2026
+**Contact** : <fastr@worldbank.org>

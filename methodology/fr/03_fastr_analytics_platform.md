@@ -419,5 +419,5 @@ L'IA analysera votre graphique et générera du texte que vous pourrez modifier 
 
 ---
 
-**Dernière mise à jour** : 26-01-2026
-**Contact** : Équipe du projet FASTR
+**Dernière mise à jour** : 06-05-2026
+**Contact** : <fastr@worldbank.org>

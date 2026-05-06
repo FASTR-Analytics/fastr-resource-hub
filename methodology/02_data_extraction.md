@@ -418,5 +418,5 @@ PRESENTER NOTES:
 
 ---
 
-**Last updated**: 26-01-2026
-**Contact**: FASTR Project Team
+**Last updated**: 06-05-2026
+**Contact**: <fastr@worldbank.org>

@@ -1484,8 +1484,8 @@ Le module suit la séquence suivante :
 
 ---
 
-**Dernière mise à jour** : 17-01-2026
-**Contact** : Équipe du projet FASTR
+**Dernière mise à jour** : 06-05-2026
+**Contact** : <fastr@worldbank.org>
 
 ---
 
