@@ -1693,6 +1693,10 @@ Identique à la colonne nationale, plus :
     3. Cohérence entre `coverage_cov` et `coverage_avgsurveyprojection`
     4. Sélection du dénominateur dans les résultats de la partie 1
 
+### Valeur ajoutée par rapport à l'analyse DHIS2 standard
+
+DHIS2 constitue une base solide pour la collecte, le stockage et la visualisation de base des données ; FASTR vient compléter cette base avec des capacités supplémentaires : ajustement automatique de la qualité des données avant l'analyse, méthodes analytiques avancées incluant la détection des perturbations et la projection de la couverture, visualisations standardisées s'appuyant sur des approches en pourcentage de variation, estimation améliorée de la couverture utilisant des dénominateurs dérivés des enquêtes, cycles analytiques plus rapides alignés sur les calendriers de décision des pays, et renforcement intégré des capacités grâce à des méthodes reproductibles.
+
 ---
 
 **Dernière mise à jour** : 06-05-2026
@@ -2031,5 +2035,28 @@ PRESENTER NOTES:
 - Couverture >100% : dénominateur trop petit ou services comptés deux fois
 - Couverture très basse : dénominateur trop grand ou sous-déclaration
 - Utiliser ces résultats pour informer la planification des programmes et l'allocation des ressources
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s5 -->
+## Pourquoi FASTR ? Valeur ajoutée par rapport à l'analyse DHIS2 standard
+
+**DHIS2 constitue la base** — collecte, stockage et visualisation de base des données.
+
+**FASTR vient compléter cette base avec :**
+
+- **Ajustement de la qualité des données** — Ajustement automatique des valeurs aberrantes et des lacunes de complétude avant l'analyse
+- **Méthodes analytiques avancées** — Détection des perturbations, projection de la couverture et analyses de sensibilité
+- **Visualisations standardisées** — Approche en pourcentage de variation pour identifier les fluctuations significatives entre indicateurs
+- **Estimation améliorée de la couverture** — Calcul rétroactif des dénominateurs à partir des enquêtes plutôt que de s'appuyer uniquement sur les populations des zones de desserte
+- **Cycles analytiques plus rapides** — Pipeline analytique pré-construit aligné sur les calendriers de décision des pays
+- **Renforcement intégré des capacités** — Méthodes reproductibles qui développent les compétences analytiques locales
+
+<!--
+PRESENTER NOTES:
+- DHIS2 est excellent pour la collecte des données et la visualisation de base — FASTR le complète
+- Différenciateur clé : ajustement de la qualité des données avant l'analyse
+- La méthodologie de couverture va au-delà des simples ratios SIGS/population
+- L'objectif est de permettre une analyse plus rapide et plus rigoureuse pour la prise de décision
 -->
 <!-- /SLIDE -->
