@@ -39,9 +39,9 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 | **Identifiants des modules** | Partie 1 = `m005` (requiert `m002`) · Partie 2 = `m006` (requiert `m005`) |
 | **Objectif** | Estimer la couverture des services de santé en comparant les volumes de services aux populations cibles, validés par rapport aux références de l'enquête |
 
-!!! warning "Rappel : l'entrée SIGS doit être des comptages, pas des % de couverture"
+!!! warning "Rappel : l'entrée SIGS doit être des volumes, pas des % de couverture"
 
-    L'estimation de la couverture fonctionne en divisant le nombre de services rendus (le **comptage** qui passe par les modules 1, 2 et 3) par un dénominateur de population cible que la plateforme construit elle-même. Si votre extraction SIGS d'origine contenait des taux de couverture pré-calculés au lieu de comptages de services, il n'y a rien à calculer ici — le comptage est le numérateur, et la plateforme fournit le dénominateur. Voir [Extraction des données](02_data_extraction.md) pour savoir quoi extraire de votre SIGS.
+    L'estimation de la couverture fonctionne en divisant le nombre de services rendus (le **volume** qui passe par les modules 1, 2 et 3) par un dénominateur de population cible que la plateforme construit elle-même. Si votre extraction SIGS d'origine contenait des taux de couverture pré-calculés au lieu de volumes de services, il n'y a rien à calculer ici — le volume est le numérateur, et la plateforme fournit le dénominateur. Voir [Extraction des données](02_data_extraction.md) pour savoir quoi extraire de votre SIGS.
 
 ### Partie 1 et partie 2 expliquées
 
