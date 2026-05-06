@@ -189,9 +189,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     volume_check <- raw_data[, .(
       above_100 = sum(count > 100, na.rm = TRUE),
       total = .N
-    ), by = indicateur_common_id]
+    ), by = indicator_common_id]
 
-    no_outlier_adj <- volume_check[above_100 == 0, indicateur_common_id]
+    no_outlier_adj <- volume_check[above_100 == 0, indicator_common_id]
     ```
 
     Ces informations sont enregistrées dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
@@ -219,73 +219,73 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Le module nécessite trois fichiers d'entrée provenant des étapes de traitement précédentes :
 
-    | Le module a besoin de trois fichiers d'entrée provenant des étapes de traitement précédentes : Fichier, Source, Description et Variables clés
+    | Fichier | Source | Description | Variables clés |
     |------|--------|-------------|---------------|
-    | Les données brutes du système d'information sur les ménages (SIGS), les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement et les volumes de services au niveau de l'établissement, les volumes de services au niveau de l'établissement et les volumes de services au niveau de l'établissement
-    | Les indicateurs de valeurs aberrantes pour chaque indicateur de mois d'installation sont les suivants : `établissement_id`, `indicateur_common_id`, `period_id`, `outlier_flag`, `indicateur_common_id`, `period_id`, `outlier_flag`
-    | module 1 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `établissement_id`, `indicateur_common_id`, `period_id`, `completeness_flag` | module 2 - Indicateurs d'exhaustivité pour chaque indicateur de mois d'établissement - `period_id`, `completeness_flag` | module 3 - Indicateurs d'exhaustivité pour les indicateurs de mois d'établissement
+    | `hmis_ISO3.csv` | Données brutes du SIGS | Volumes de services au niveau de l'établissement | `facility_id`, `indicator_common_id`, `period_id`, `count`, colonnes des zones administratives |
+    | `M1_output_outliers.csv` | Module 1 | Indicateurs de valeurs aberrantes pour chaque combinaison établissement-mois-indicateur | `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag` |
+    | `M1_output_completeness.csv` | Module 1 | Indicateurs d'exhaustivité pour chaque combinaison établissement-mois-indicateur | `facility_id`, `indicator_common_id`, `period_id`, `completeness_flag` |
 
 ??? "Structure des données d'entrée"
 
-    **Données brutes SIGS (`SIGS_ISO3.csv`)** :
+    **Données brutes SIGS (`hmis_ISO3.csv`)** :
 
     ```text
-    établissement_id | admin_area_1 | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count
+    facility_id | admin_area_1 | admin_area_2 | admin_area_3 | period_id | indicator_common_id | count
     ------------|--------------|--------------|--------------|-----------|---------------------|-------
-    FAC001      | ISO3         | Province_A   | district_A   | 202301    | CPN1                | 145
-    FAC001      | ISO3         | Province_A   | district_A   | 202302    | CPN1                | 152
-    FAC001      | ISO3         | Province_A   | district_A   | 202303    | CPN1                | 890  # outlier
+    FAC001      | ISO3         | Province_A   | District_A   | 202301    | anc1                | 145
+    FAC001      | ISO3         | Province_A   | District_A   | 202302    | anc1                | 152
+    FAC001      | ISO3         | Province_A   | District_A   | 202303    | anc1                | 890  # outlier
     ```
 
     **Drapeaux de valeurs aberrantes (`M1_output_outliers.csv`)** :
 
     ```text
-    établissement_id | indicateur_common_id | period_id | outlier_flag
+    facility_id | indicator_common_id | period_id | outlier_flag
     ------------|---------------------|-----------|-------------
-    FAC001      | CPN1                | 202301    | 0
-    FAC001      | CPN1                | 202302    | 0
-    FAC001      | CPN1                | 202303    | 1           # Flagged as outlier
+    FAC001      | anc1                | 202301    | 0
+    FAC001      | anc1                | 202302    | 0
+    FAC001      | anc1                | 202303    | 1           # Flagged as outlier
     ```
 
     **Drapeaux de complétude (`M1_output_completeness.csv`)** :
 
     ```text
-    établissement_id | indicateur_common_id | period_id | completeness_flag
+    facility_id | indicator_common_id | period_id | completeness_flag
     ------------|---------------------|-----------|------------------
-    FAC001      | CPN1                | 202301    | 1             # Complete
-    FAC001      | CPN1                | 202302    | 0             # Incomplete
-    FAC001      | CPN1                | 202303    | 1             # Complete
+    FAC001      | anc1                | 202301    | 1             # Complete
+    FAC001      | anc1                | 202302    | 0             # Incomplete
+    FAC001      | anc1                | 202303    | 1             # Complete
     ```
 
 ??? "Fichiers de sortie"
 
     Le module génère quatre fichiers de sortie :
 
-    | Le module génère quatre fichiers de sortie : Fichier, Niveau, Description, Colonnes clés
+    | Fichier | Niveau | Description | Colonnes clés |
     |------|-------|-------------|-------------|
-    | `M2_adjusted_data.csv` | Établissement | Volumes ajustés pour tous les scénarios au niveau de l'établissement | `établissement_id`, zones administratives (excl. zone_admin_1), `period_id`, `indicateur_common_id`, `count_final_*` | `period_id`, `indicateur_common_id`, `count_final_*`, `M2_adjusted_data_admin_area.csv` | Sous-état | Établissement
-    | Sous-national | Volumes ajustés agrégés dans les zones administratives sous-nationales | Zones administratives (excl. zone_admin_1), `period_id`, `indicateur_common_id`, `count_final_*` |
-    | National | Volumes ajustés agrégés au niveau national | `admin_area_1`, `period_id`, `indicateur_common_id`, `count_final_*` |
-    | Métadonnées | Indicateurs exclus de l'ajustement en raison de la faiblesse des volumes | `indicateur_common_id`, `low_volume_exclude` | Métadonnées
+    | `M2_adjusted_data.csv` | Établissement | Volumes ajustés pour tous les scénarios au niveau de l'établissement | `facility_id`, zones administratives (excl. `admin_area_1`), `period_id`, `indicator_common_id`, `count_final_*` |
+    | `M2_adjusted_data_admin_area.csv` | Sous-national | Volumes ajustés agrégés dans les zones administratives sous-nationales | Zones administratives (excl. `admin_area_1`), `period_id`, `indicator_common_id`, `count_final_*` |
+    | `M2_adjusted_data_national.csv` | National | Volumes ajustés agrégés au niveau national | `admin_area_1`, `period_id`, `indicator_common_id`, `count_final_*` |
+    | `M2_low_volume_exclusions.csv` | Métadonnées | Indicateurs exclus de l'ajustement en raison de la faiblesse des volumes | `indicator_common_id`, `low_volume_exclude` |
 
 ??? "Structure des données de sortie"
 
-    **Sorties au niveau de l'installation** (__CODE_BLOC_62__) :
+    **Sorties au niveau de l'établissement** (`M2_adjusted_data.csv`) :
 
     ```text
-    établissement_id | admin_area_2 | admin_area_3 | period_id | indicateur_common_id | count_final_none | count_final_outliers | count_final_completeness | count_final_both
+    facility_id | admin_area_2 | admin_area_3 | period_id | indicator_common_id | count_final_none | count_final_outliers | count_final_completeness | count_final_both
     ------------|--------------|--------------|-----------|---------------------|------------------|----------------------|--------------------------|------------------
-    FAC001      | Province_A   | district_A   | 202301    | CPN1                | 145              | 145                  | 145                      | 145
-    FAC001      | Province_A   | district_A   | 202302    | CPN1                | 152              | 152                  | 148                      | 148
-    FAC001      | Province_A   | district_A   | 202303    | CPN1                | 890              | 148                  | 890                      | 148
+    FAC001      | Province_A   | District_A   | 202301    | anc1                | 145              | 145                  | 145                      | 145
+    FAC001      | Province_A   | District_A   | 202302    | anc1                | 152              | 152                  | 148                      | 148
+    FAC001      | Province_A   | District_A   | 202303    | anc1                | 890              | 148                  | 890                      | 148
     ```
 
-    Chaque colonne __CODE_BLOC_63__ représente un scénario d'ajustement différent :
+    Chaque colonne `count_final_*` représente un scénario d'ajustement différent :
 
     - `count_final_none` : Aucun ajustement n'est appliqué (valeurs originales)
-    - cODE_BLOCK_65__ : Seul l'ajustement des valeurs aberrantes est appliqué
+    - `count_final_outliers` : Seul l'ajustement des valeurs aberrantes est appliqué
     - `count_final_completeness` : Seul l'ajustement d'exhaustivité est appliqué
-    - cODE_BLOCK_67__ : Ajustement des valeurs aberrantes et de l'exhaustivité appliqués
+    - `count_final_both` : Ajustement des valeurs aberrantes et de l'exhaustivité appliqués
 
 ### Documentation sur les fonctions clés
 
@@ -309,9 +309,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     - `raw_data` (data.table) : Données SIGS originales avec comptage des services
     - `completeness_data` (data.table) : Indicateurs d'exhaustivité du module 1
-    - cODE_BLOC_75__ (data.table) : Indicateurs de valeurs aberrantes du module 1
-    - __CODE_BLOC_76__ (logique) : Application ou non de l'ajustement des valeurs aberrantes
-    - __CODE_BLOC_77__ (logique) : Appliquer ou non l'ajustement de l'exhaustivité
+    - `outlier_data` (data.table) : Indicateurs de valeurs aberrantes du module 1
+    - `adjust_outliers` (logique) : Application ou non de l'ajustement des valeurs aberrantes
+    - `adjust_completeness` (logique) : Appliquer ou non l'ajustement de l'exhaustivité
 
     **Retourne** :
 
@@ -319,7 +319,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Opérations clés** :
 
-    1. Fusionne les ensembles de données d'entrée par `établissement_id`, `indicateur_common_id`, et `period_id`
+    1. Fusionne les ensembles de données d'entrée par `facility_id`, `indicator_common_id`, et `period_id`
     2. Convertit les `period_id` en dates pour l'ordonnancement temporel
     3. Calcule les moyennes glissantes (centrées, en avant, en arrière) pour les valeurs valides
     4. Applique une hiérarchie d'ajustement basée sur la disponibilité des données
@@ -346,9 +346,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Scénarios traités** :
 
     1. `none` : Pas d'ajustement (ligne de base)
-    2. cODE_BLOCK_89__ : Ajustement des valeurs aberrantes uniquement
-    3. cODE_BLOCK_90__ : Ajustement de l'exhaustivité uniquement
-    4. bLOC_CODE_91__ : Valeur aberrante séquentielle puis ajustement de l'exhaustivité
+    2. `outliers` : Ajustement des valeurs aberrantes uniquement
+    3. `completeness` : Ajustement de l'exhaustivité uniquement
+    4. `both` : Valeur aberrante séquentielle puis ajustement de l'exhaustivité
 
     **Logique de traitement** :
 
@@ -384,7 +384,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       fwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "left"),
       bwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "right"),
       fallback= mean(valid_count, na.rm = TRUE)
-    ), by = .(établissement_id, indicateur_common_id)]
+    ), by = .(facility_id, indicator_common_id)]
     ```
 
 ??? "Hiérarchie d'ajustement pour les valeurs aberrantes"
@@ -430,7 +430,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
             }
           }
           .SD
-        }, by = .(établissement_id, indicateur_common_id)]
+        }, by = .(facility_id, indicator_common_id)]
         ```
 
     5.  **Moyenne de toutes les valeurs historiques (repli)**
@@ -448,7 +448,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     La correction pour exhaustivité est appliquée à tout mois-facilité pour lequel.. :
 
     - Le mois est marqué comme incomplet (`completeness_flag != 1`) dans le module 1, OU
-    - La valeur est manquante (__CODE_BLOC_109__)
+    - La valeur est manquante (`is.na(count_working)`)
 
     **Approche statistique** :
 
@@ -473,7 +473,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
       fwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "left"),
       bwd6    = frollmean(valid_count, 6, na.rm = TRUE, align = "right"),
       fallback= mean(valid_count, na.rm = TRUE)
-    ), by = .(établissement_id, indicateur_common_id)]
+    ), by = .(facility_id, indicator_common_id)]
     ```
 
 ??? "Hiérarchie d'ajustement pour l'exhaustivité"
@@ -548,7 +548,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     Après les ajustements spécifiques au scénario, les indicateurs exclus (décès) sont réinitialisés à leurs valeurs initiales :
 
     ```r
-    dat[indicateur_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
+    dat[indicator_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
     ```
 
 ??? "Méthodes d'agrégation"
@@ -722,7 +722,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
         count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),
-      by = c(geo_admin_area_sub, "indicateur_common_id", "period_id")
+      by = c(geo_admin_area_sub, "indicator_common_id", "period_id")
     ]
     ```
 
@@ -737,7 +737,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
         count_final_completeness = sum(count_final_completeness, na.rm = TRUE),
         count_final_both         = sum(count_final_both,         na.rm = TRUE)
       ),
-      by = .(admin_area_1, indicateur_common_id, period_id)
+      by = .(admin_area_1, indicator_common_id, period_id)
     ]
     ```
 
@@ -795,7 +795,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Solution** :
 
-    - Comparer __CODE_BLOC_144__ vs __CODE_BLOC_145__ pour évaluer l'impact de l'ajustement
+    - Comparer `count_final_none` vs `count_final_both` pour évaluer l'impact de l'ajustement
     - Examiner les statistiques sur l'exhaustivité du module 1
     - Considérer le seuil de qualité des données pour l'inclusion
 
@@ -812,7 +812,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     ```text
     Running adjustments...
-     -> Adjusting valeurs aberrantes...
+     -> Adjusting outliers...
          Roll6 adjusted: 1,245
          Forward-filled: 89
          Backward-filled: 67
@@ -830,13 +830,13 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ??? "Choisir le bon scénario"
 
-    | Situation - Scénario recommandé - Raison d'être - Situation - Raison d'être - Situation - Raison d'être - Situation - Raison d'être
+    | Situation | Scénario recommandé | Raison d'être |
     |-----------|---------------------|-----------|
-    | Les données sont de haute qualité, les problèmes sont minimes | `none` | Aucun ajustement n'est nécessaire
-    | | Qualité des données, problèmes minimes | `none` | Pas d'ajustement nécessaire |
-    | Bonne qualité, faible fréquence de déclaration | __CODE_BLOC_148__ | Combler les lacunes tout en préservant les valeurs réelles
-    | Qualité et exhaustivité médiocres | __CODE_BLOC_149__ | Nettoyage complet |
-    analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité | Analyse de sensibilité
+    | Données de haute qualité, problèmes minimes | `none` | Aucun ajustement n'est nécessaire |
+    | Valeurs aberrantes sporadiques, bonne exhaustivité | `outliers` | Traiter la qualité sans imputation |
+    | Bonne qualité, faible fréquence de déclaration | `completeness` | Combler les lacunes tout en préservant les valeurs réelles |
+    | Qualité et exhaustivité médiocres | `both` | Nettoyage complet |
+    | Incertitude sur la qualité des données | Comparer tous les scénarios | Analyse de sensibilité |
 
 ??? "Étapes de validation"
 

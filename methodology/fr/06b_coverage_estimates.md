@@ -224,19 +224,28 @@ ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2"          # Geographic scope
 
 **Options de niveau d'analyse:**
 
-- cODE_BLOCK_25__ : Analyse au niveau national uniquement
-- cODE_BLOCK_26__ : National + zone administrative 2 (par exemple, provinces)
-- cODE_BLOCK_27__ : National + zone administrative 2 + zone administrative 3 (par exemple, districts)
+- `NATIONAL_ONLY` : Analyse au niveau national uniquement
+- `NATIONAL_PLUS_AA2` : National + zone administrative 2 (par exemple, provinces)
+- `NATIONAL_PLUS_AA2_AA3` : National + zone administrative 2 + zone administrative 3 (par exemple, districts)
 
 **Taux d'ajustement démographique:**
-cODE_BLOC_1__ : NATIONAL + ZONE ADMINISTRATIVE 2 + ZONE ADMINISTRATIVE 3 (PAR EXEMPLE, LES districtS)
+
+```r
+PREGNANCY_LOSS_RATE <- 0.03      # 3% pregnancy loss
+TWIN_RATE <- 0.015               # 1.5% twin births
+STILLBIRTH_RATE <- 0.02          # 2% stillbirths
+P1_NMR <- 0.039                  # Neonatal mortality rate
+P2_PNMR <- 0.028                 # Post-neonatal mortality rate
+INFANT_MORTALITY_RATE <- 0.067   # Infant mortality rate
+UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
+```
 
 **Options de la variable de comptage:**
 
 - `count_final_none` : Aucun ajustement (données brutes déclarées)
-- cODE_BLOCK_29__ : Ajustement des valeurs aberrantes uniquement
-- cODE_BLOC_30__ : Ajustement de l'exhaustivité uniquement
-- cODE_BLOC_31__ : Les deux ajustements **(recommandé)**
+- `count_final_outliers` : Ajustement des valeurs aberrantes uniquement **(par défaut)**
+- `count_final_completeness` : Ajustement de l'exhaustivité uniquement
+- `count_final_both` : Les deux ajustements combinés
 
 
 #### Sources des données d'entrée
@@ -274,7 +283,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
 #### Documentation sur les fonctions principales
 
-??? "`process_SIGS_adjusted_volume()`"
+??? "`process_hmis_adjusted_volume()`"
 
     **Objectif** : Préparer les données SIGS pour le calcul du dénominateur
 
@@ -291,14 +300,14 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Résultat** :
 
-    - `annual_SIGS` : Dénombrement annuel des services par zone et par année
-    - cODE_BLOCK_37__ : Liste des pays dans l'ensemble de données
-    - cODE_BLOCK_38__ : Code(s) ISO3 présent(s)
+    - `annual_hmis` : Dénombrement annuel des services par zone et par année
+    - `hmis_countries` : Liste des pays dans l'ensemble de données
+    - `hmis_iso3` : Code(s) ISO3 présent(s)
 
     **Exemple de structure** :
 
     ```
-    admin_area_1  admin_area_2  year  countANC1  countdelivery  ...  nummonth
+    admin_area_1  admin_area_2  year  countanc1  countdelivery  ...  nummonth
     Country_Name  Province_A    2020  12500      10200          ...  12
     Country_Name  Province_A    2021  13000      10500          ...  11
     ```
@@ -316,30 +325,30 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **Principales étapes du traitement** :
 
     1. **Harmonisation**
-       - Recodage des noms d'indicateurs (par exemple, `polio1` → `VPO1`, `vitamina` → `vitaminA`)
-       - Normalise les étiquettes des sources (`EDS`, `MICS`)
+       - Recodage des noms d'indicateurs (par exemple, `polio1` → `opv1`, `vitamina` → `vitaminA`)
+       - Normalise les étiquettes des sources (`dhs`, `mics`)
        - Filtre par pays et par date
 
-    2. **Hiérarchisation des sources
+    2. **Hiérarchisation des sources**
        - Lorsqu'il existe à la fois des EDS et des MICS pour la même année/zone/indicateur
        - L'EDS est sélectionnée de préférence
        - Préserve les détails de la source pour plus de transparence
 
-    3. **Logique de repli
+    3. **Logique de repli**
        - Si `sba` manque, utilise les valeurs de `delivery`
        - Si `pnc1_mother` manque, utilise les valeurs de `pnc1`
-       - Les zones infranationales utilisent les valeurs nationales lorsque les données locales ne sont pas disponibles (pour BCG, Penta1, Penta3)
+       - Les zones infranationales utilisent les valeurs nationales lorsque les données locales ne sont pas disponibles (pour `bcg`, `penta1`, `penta3`)
 
     4. **Remplissage en amont**
        - Crée des séries chronologiques complètes pour chaque zone
        - Reporte la dernière valeur observée (`na.locf`)
-       - Crée des colonnes de report (par exemple, `CPN1carry`, `BCGcarry`)
+       - Crée des colonnes de report (par exemple, `anc1carry`, `bcgcarry`)
 
     **Sortie** :
 
     - `carried` : Données d'enquête étendues avec des valeurs remplies à l'avance
-    - cODE_BLOCK_54__ : Observations brutes de l'enquête (format large)
-    - cODE_BLOCK_55__ : Observations brutes de l'enquête (format long) avec détails de la source
+    - `raw` : Observations brutes de l'enquête (format large)
+    - `raw_long` : Observations brutes de l'enquête (format long) avec détails de la source
 
 ??? "`process_national_population_data()`"
 
@@ -355,73 +364,73 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     - Filtre au niveau national et au pays cible
     - Extrait les indicateurs clés de la population :
       - `crudebr_unwpp` : Taux brut de natalité
-      - cODE_BLOC_58__ : Population totale
-      - cODE_BLOCK_59__ : Population de moins de 1 an
+      - `poptot_unwpp` : Population totale
+      - `totu1pop_unwpp` : Population de moins de 1 an
 
     **Sortie** :
 
     - `wide` : Indicateurs de population en format large
-    - cODE_BLOCK_61__ : Données démographiques en format long avec suivi des sources
+    - `raw_long` : Données démographiques en format long avec suivi des sources
 
-??? "`calculate_dénominateurs()`"
+??? "`calculate_denominators()`"
 
     **Objectif** : Calcule tous les dénominateurs possibles à partir des données du système d'information sur les ménages et de la population. Il s'agit de la fonction principale qui génère des estimations de dénominateurs multiples.
 
     **Entrée** :
 
-    - `SIGS_data` : Dénombrement annuel des services
-    - cODE_BLOCK_64__ : Valeurs de référence de l'enquête (reportées)
-    - cODE_BLOCK_65__ : Estimations WPP de l'ONU (uniquement au niveau national)
+    - `hmis_data` : Dénombrement annuel des services
+    - `survey_data` : Valeurs de référence de l'enquête (reportées)
+    - `population_data` : Estimations WPP de l'ONU (uniquement au niveau national)
 
     **Types de dénominateurs calculés** :
 
     **A. Dénominateurs basés sur les services** (en utilisant le numérateur SIGS ÷ la couverture de l'enquête) :
 
-    1. **De l'CPN1** :
-       - `d'anc1_pregnancy` : Grossesses estimées
-       - cODE_BLOCK_67__ : Estimation des accouchements
-       - cODE_BLOCK_68__ : Estimation des naissances (vivants + mort-nés)
-       - cODE_BLOCK_69__ : Estimation des naissances vivantes
-       - cODE_BLOC_70__ : Eligible pour le DTC (ajusté pour la mortalité néonatale)
-       - cODE_BLOCK_71__ : Éligible pour le MCV1
-       - cODE_BLOC_72__ : Eligible pour le MCV2
+    1. **À partir de ANC1** :
+       - `danc1_pregnancy` : Grossesses estimées
+       - `danc1_delivery` : Estimation des accouchements
+       - `danc1_birth` : Estimation des naissances (vivants + mort-nés)
+       - `danc1_livebirth` : Estimation des naissances vivantes
+       - `danc1_dpt` : Éligible pour le DTC (ajusté pour la mortalité néonatale)
+       - `danc1_measles1` : Éligible pour le MCV1
+       - `danc1_measles2` : Éligible pour le MCV2
 
-    2. **A partir de la livraison** :
+    2. **À partir de delivery** :
        - `ddelivery_livebirth`, `ddelivery_birth`, `ddelivery_pregnancy`
-       - `ddelivery_DTC`, `ddelivery_rougeole1`, `ddelivery_rougeole2`
+       - `ddelivery_dpt`, `ddelivery_measles1`, `ddelivery_measles2`
 
-    3. **A partir de SBA** (accouchement assisté par un personnel qualifié) :
+    3. **À partir de SBA** (accouchement assisté par un personnel qualifié) :
        - Même structure que les dénominateurs d'accouchement
-       - cODE_BLOCK_79__, CODE_BLOCK_80__, CODE_BLOCK_81__, CODE_BLOCK_81__, CODE_BLOCK_82__, CODE_BLOCK_82__, CODE_BLOCK_82__, CODE_BLOCK_82__
-       - `dsba_DTC`, `dsba_rougeole1`, `dsba_rougeole2`
+       - `dsba_livebirth`, `dsba_birth`, `dsba_pregnancy`
+       - `dsba_dpt`, `dsba_measles1`, `dsba_measles2`
 
-    4. **De la part du BCG** (uniquement au niveau national) :
-       - `dBCG_pregnancy`, `dBCG_livebirth`, `dBCG_DTC`
+    4. **À partir de BCG** (uniquement au niveau national) :
+       - `dbcg_pregnancy`, `dbcg_livebirth`, `dbcg_dpt`
 
-    5. **De Penta1** :
-       - `dPenta1_DTC`, `dPenta1_rougeole1`, `dPenta1_rougeole2`
+    5. **À partir de Penta1** :
+       - `dpenta1_dpt`, `dpenta1_measles1`, `dpenta1_measles2`
 
     **B. Dénominateurs basés sur la population** (nationaux uniquement) :
 
     - `dwpp_pregnancy` : Taux brut de natalité × population totale ÷ (1 + taux de gémellité)
-    - tAUX DE NATALITÉ BRUT × POPULATION TOTALE ÷ (1 + TAUX DE JUMEAUX) `dwpp_livebirth` : Du taux brut de natalité × population totale
-    - cODE_BLOCK_93__ : Population de moins de 1 an
-    - cODE_BLOC_94__ : POPULATION DE MOINS DE 1 AN CORRIGÉE POUR TENIR COMPTE DE LA MORTALITÉ NÉONATALE : Population de moins de 1 an ajustée pour la mortalité néonatale
-    - cODE_BLOCK_95__ : Ajusté pour la mortalité post-néonatale
+    - `dwpp_livebirth` : Du taux brut de natalité × population totale
+    - `dwpp_dpt` : Population de moins de 1 an
+    - `dwpp_measles1` : Population de moins de 1 an ajustée pour la mortalité néonatale
+    - `dwpp_measles2` : Ajusté pour la mortalité post-néonatale
 
     **C. Vitamine A et vaccination complète** :
 
     Pour chaque dénominateur de naissance vivante, des dénominateurs supplémentaires sont automatiquement créés :
 
     - `d*_vitaminA` : Naissances vivantes × (1 - U5MR) × 4,5 (enfants de 6 à 59 mois)
-    - cODE_BLOC_97__ : NAISSANCE VIVANTE × (1 - RMU5) × 4,5 (ENFANTS DE 6 À 59 MOIS) : Naissance vivante × (1 - TMI)
+    - `d*_fully_immunized` : Naissances vivantes × (1 - TMI)
 
     **Ajustement pour les déclarations incomplètes** :
 
     Lorsque `nummonth < 12`, les dénominateurs basés sur la population sont mis à l'échelle :
 
     ```
-    dénominateur_adjusted = dénominateur × (nummonth / 12)
+    denominator_adjusted = denominator × (nummonth / 12)
     ```
 
     **Sortie** :
@@ -434,15 +443,15 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Logique** :
 
-    - `reference_based` : Dénominateur calculé à partir du même indicateur (par exemple, `d'anc1_pregnancy` pour CPN1)
-    - cODE_BLOC_102__ : Dénominateur calculé à partir des données démographiques du PPS de l'ONU
-    - cODE_BLOC_103__ : Dénominateur provenant d'un indicateur de service différent
+    - `reference_based` : Dénominateur calculé à partir du même indicateur (par exemple, `danc1_pregnancy` pour `anc1`)
+    - `unwpp_based` : Dénominateur calculé à partir des données démographiques du WPP de l'ONU
+    - `independent` : Dénominateur provenant d'un indicateur de service différent
 
     **Importance** :
 
     Cette classification garantit que lors de la sélection des "meilleurs" dénominateurs, nous évitons d'utiliser des dénominateurs basés sur des références (qui montreraient artificiellement une couverture à 100% égale à la valeur de l'enquête).
 
-??? "`compare_couverture_to_survey()`"
+??? "`compare_coverage_to_survey()`"
 
     **Objectif** : Sélectionne le dénominateur le plus performant pour chaque indicateur
 
@@ -455,20 +464,24 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     1. **Calculer la couverture** : Pour chaque option de dénominateur
 
-       cODE_BLOCK_4__
+       ```
+       coverage = (service_volume / denominator) × 100
+       ```
 
     2. **Calculer l'erreur** : Comparez à la référence de l'enquête
 
-       cODE_BLOCK_5__
+       ```
+       squared_error = (HMIS_coverage - survey_coverage)²
+       ```
 
     3. **Classer le type de source** : Étiqueter chaque dénominateur comme indépendant, basé sur des références ou UNWPP
 
     4. **Hiérarchie de la sélection** :
 
        ```
-       Priority 1: Independent dénominateurs (non-reference, non-UNWPP) → lowest error
-       Priority 2: Reference-based dénominateurs (only if no independent available)
-       Priority 3: UNWPP dénominateurs (last resort fallback)
+       Priority 1: Independent denominators (non-reference, non-UNWPP) → lowest error
+       Priority 2: Reference-based denominators (only if no independent available)
+       Priority 3: UNWPP denominators (last resort fallback)
        ```
 
     5. **Cohérence géographique** : Meilleur dénominateur sélectionné par zone géographique × indicateur (et non par année)
@@ -497,18 +510,18 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     **Structure de sortie** :
 
     ```
-    admin_area_1  year  indicateur_common_id  dénominateur_best_or_survey  value
-    Country_Name  2020  CPN1                 best                        85.3
-    Country_Name  2020  CPN1                 survey                      84.2
-    Country_Name  2020  CPN1                 d'anc1_pregnancy             85.3
-    Country_Name  2020  CPN1                 dwpp_pregnancy              82.1
+    admin_area_1  year  indicator_common_id  denominator_best_or_survey  value
+    Country_Name  2020  anc1                 best                        85.3
+    Country_Name  2020  anc1                 survey                      84.2
+    Country_Name  2020  anc1                 danc1_pregnancy             85.3
+    Country_Name  2020  anc1                 dwpp_pregnancy              82.1
     ```
 
     **Catégories de dénominateurs** :
 
     - `best` : Dénominateur optimal sélectionné
-    - cODE_BLOC_107__ : Observation réelle de l'enquête
-    - cODE_BLOCK_108__ : Résultats du dénominateur individuel (toutes les options)
+    - `survey` : Observation réelle de l'enquête
+    - `d*_*` : Résultats du dénominateur individuel (toutes les options)
 
 #### Méthodes statistiques et algorithmes
 
@@ -569,118 +582,118 @@ Les taux spécifiques et les formules pour chaque source de dénominateur sont d
 
 #### Calculs du dénominateur basés sur le SIGS
 
-**Dénominateurs dérivés de l'CPN1**
+**Dénominateurs dérivés de ANC1**
 
-A partir du nombre de services CPN1 et de la couverture de l'enquête, nous calculons :
+À partir du nombre de services ANC1 et de la couverture de l'enquête, nous calculons :
 
 **Grossesses estimées** (calcul de base) :
 
 $$
-d_{\text{CPN1-grossesse}} = \frac{\text{count}_{\text{CPN1}} \times 100}{\text{couverture}_{\text{CPN1}}}
+d_{\text{anc1-pregnancy}} = \frac{\text{count}_{\text{anc1}} \times 100}{\text{coverage}_{\text{anc1}}}
 $$
 
 **Accouchements estimés** (ajustés pour les pertes de grossesse) :
 
 $$
-d_{\text{CPN1-accouchement}} = d_{\text{CPN1-grossesse}} \n- fois (1 - \text{taux de perte de grossesse})
+d_{\text{anc1-delivery}} = d_{\text{anc1-pregnancy}} \times (1 - \text{taux de perte de grossesse})
 $$
 
 **Naissances estimées** (ajustées pour les naissances gémellaires) :
 
 $$
-d_{\text{CPN1-naissance}} = d_{\text{CPN1-accouchement}} / (1 - 0,5 fois \text{twin rate})
+d_{\text{anc1-birth}} = d_{\text{anc1-delivery}} / (1 - 0.5 \times \text{taux de gémellité})
 $$
 
 **Naissances vivantes estimées** (ajustées pour les mort-nés) :
 
 $$
-d_{\text{CPN1-naissance vivante}} = d_{\text{CPN1-naissance}} \n- fois (1 - \text{taux de mortinatalité})
+d_{\text{anc1-livebirth}} = d_{\text{anc1-birth}} \times (1 - \text{taux de mortinatalité})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** (ajusté pour la mortalité néonatale) :
 
 $$
-d_{\text{CPN1-DTC}} = d_{\text{CPN1-naissance vivante}} \time (1 - \text{taux de mortalité néonatale})
+d_{\text{anc1-dpt}} = d_{\text{anc1-livebirth}} \times (1 - \text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** (ajusté pour la mortalité post-néonatale) :
 
 $$
-d_{\text{CPN1-rougeole1}} = d_{\text{CPN1-DTC}} \time (1 - \text{taux de mortalité post-néonatale})
+d_{\text{anc1-measles1}} = d_{\text{anc1-dpt}} \times (1 - \text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** (ajusté pour la mortalité post-néonatale supplémentaire) :
 
 $$
-d_{\text{CPN1-rougeole2}} = d_{\text{CPN1-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
+d_{\text{anc1-measles2}} = d_{\text{anc1-dpt}} \times (1 - 2 \times \text{taux de mortalité post-néonatale})
 $$
 
 ---
 
-**Dénominateurs dérivés de l'accouchement**
+**Dénominateurs dérivés de delivery**
 
-À partir du nombre de livraisons institutionnelles et de la couverture de l'enquête :
+À partir du nombre d'accouchements institutionnels et de la couverture de l'enquête :
 
 **Naissances vivantes estimées** (calcul de base) :
 
 $$
-d_{\text{delivery-livebirth}} = \frac{\text{count}_{\text{delivery}} \times 100}{\text{couverture}_{\text{delivery}}}
+d_{\text{delivery-livebirth}} = \frac{\text{count}_{\text{delivery}} \times 100}{\text{coverage}_{\text{delivery}}}
 $$
 
 **Naissances estimées** (ajustées pour la mortinatalité) :
 
 $$
-d_{\text{l'accouchement}} = d_{\text{l'accouchement}} / (1 - \text{taux de mortinatalité})
+d_{\text{delivery-birth}} = d_{\text{delivery-livebirth}} / (1 - \text{taux de mortinatalité})
 $$
 
 **Grossesses estimées** (ajustées pour les naissances gémellaires et les pertes de grossesse) :
 
 $$
-d_{{text{accouchement-grossesse}} = d_{{text{accouchement-naissance}} \n- fois (1 - 0,5 \n- fois \n-{taux de jumeaux}) / (1 - \n-{taux de perte de grossesse})
+d_{\text{delivery-pregnancy}} = d_{\text{delivery-birth}} \times (1 - 0.5 \times \text{taux de gémellité}) / (1 - \text{taux de perte de grossesse})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{délivrance-DTC}} = d_{\text{délivrance-naissance vivante}} \n- fois (1 - \n-text{taux de mortalité néonatale})
+d_{\text{delivery-dpt}} = d_{\text{delivery-livebirth}} \times (1 - \text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** :
 
 $$
-d_{\text{délivrance-rougeole1}} = d_{\text{délivrance-DTC}} \time (1 - \text{taux de mortalité post-néonatale})
+d_{\text{delivery-measles1}} = d_{\text{delivery-dpt}} \times (1 - \text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** :
 
 $$
-d_{\text{delivery-rougeole2}} = d_{\text{delivery-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
+d_{\text{delivery-measles2}} = d_{\text{delivery-dpt}} \times (1 - 2 \times \text{taux de mortalité post-néonatale})
 $$
 
 *Note : Les dénominateurs dérivés du accouchement assisté par un personnel qualifié (SBA) suivent les mêmes formules que les dénominateurs d'accouchement.*
 
 ---
 
-**Dénominateurs dérivés du BCG** *(analyse nationale uniquement)*
+**Dénominateurs dérivés de BCG** *(analyse nationale uniquement)*
 
 À partir des chiffres de la vaccination BCG et de la couverture de l'enquête :
 
 **Naissances vivantes estimées** (calcul de base) :
 
 $$
-d_{\text{BCG-naissances vivantes}} = \frac{\text{count}_{{text{BCG}} \times 100}{\text{couverture}_{\text{BCG}}}
+d_{\text{bcg-livebirth}} = \frac{\text{count}_{\text{bcg}} \times 100}{\text{coverage}_{\text{bcg}}}
 $$
 
 **Grossesses estimées** (en remontant les ajustements démographiques) :
 
 $$
-d_{\text{BCG-grossesse}} = \frac{d_{\text{BCG-naissance vivante}}}{(1 - \text{taux de perte de grossesse}) \times (1 + \text{taux de jumeaux}) \times (1 - \text{taux de mortinatalité})}
+d_{\text{bcg-pregnancy}} = \frac{d_{\text{bcg-livebirth}}}{(1 - \text{taux de perte de grossesse}) \times (1 + \text{taux de gémellité}) \times (1 - \text{taux de mortinatalité})}
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{BCG-DTC}} = d_{\text{BCG-livebirth}} \time (1 - \text{taux de mortalité néonatale})
+d_{\text{bcg-dpt}} = d_{\text{bcg-livebirth}} \times (1 - \text{taux de mortalité néonatale})
 $$
 
 ---
@@ -692,103 +705,103 @@ $$
 **Population éligible pour les vaccins DTC/Penta** (calcul de base) :
 
 $$
-d_{\text{Penta1-DTC}} = \frac{\text{count}_{\text{Penta1}} \times 100}{\text{couverture}_{\text{Penta1}}}
+d_{\text{penta1-dpt}} = \frac{\text{count}_{\text{penta1}} \times 100}{\text{coverage}_{\text{penta1}}}
 $$
 
 **Population éligible pour le MCV1** :
 
 $$
-d_{\text{Penta1-rougeole1}} = d_{\text{Penta1-DTC}} \n- fois (1 - \text{taux de mortalité post-néonatale})
+d_{\text{penta1-measles1}} = d_{\text{penta1-dpt}} \times (1 - \text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** :
 
 $$
-d_{\text{Penta1-rougeole2}} = d_{\text{Penta1-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
+d_{\text{penta1-measles2}} = d_{\text{penta1-dpt}} \times (1 - 2 \times \text{taux de mortalité post-néonatale})
 $$
 
 ---
 
 **Dénominateurs dérivés du nombre de naissances vivantes**
 
-Lorsque les données sur les naissances vivantes sont directement déclarées dans le système SIGS :
+Lorsque les données sur les naissances vivantes sont directement déclarées dans le SIGS :
 
 **Naissances vivantes estimées** (calcul de base) :
 
 $$
-d_{\text{naissances vivantes-naissances vivantes}} = \frac{\text{count}_{{text{naissances vivantes}} \times 100}{\text{couverture}_{\text{livebirth}}}
+d_{\text{livebirths-livebirth}} = \frac{\text{count}_{\text{livebirth}} \times 100}{\text{coverage}_{\text{livebirth}}}
 $$
 
 **Grossesses estimées** (à rebours) :
 
 $$
-d_{\text{naissances vivantes-grossesse}} = \frac{d_{{text{naissances vivantes- naissance vivante}} \n- fois (1 - 0.5 \n- fois \n-{taux de jumeaux})}{(1 - \n-{taux de mortinatalité}) \n- fois (1 - \n-{taux de perte de grossesse})}
+d_{\text{livebirths-pregnancy}} = \frac{d_{\text{livebirths-livebirth}} \times (1 - 0.5 \times \text{taux de gémellité})}{(1 - \text{taux de mortinatalité}) \times (1 - \text{taux de perte de grossesse})}
 $$
 
 **Accouchements estimés** :
 
 $$
-d_{\text{naissances vivantes-accouchement}} = d_{\text{naissances vivantes-grossesse}} \n- fois (1 - \text{taux de perte de grossesse})
+d_{\text{livebirths-delivery}} = d_{\text{livebirths-pregnancy}} \times (1 - \text{taux de perte de grossesse})
 $$
 
 **Naissances estimées** :
 
 $$
-d_{\text{naissances vivantes}} = d_{\text{naissances vivantes}} / (1 - \text{taux de mortinatalité})
+d_{\text{livebirths-birth}} = d_{\text{livebirths-livebirth}} / (1 - \text{taux de mortinatalité})
 $$
 
 **Population éligible pour les vaccins DTC/Penta** :
 
 $$
-d_{\text{naissances vivantes-DTC}} = d_{\text{naissances vivantes-naissances vivantes}} \n- fois (1 - \n-text{taux de mortalité néonatale})
+d_{\text{livebirths-dpt}} = d_{\text{livebirths-livebirth}} \times (1 - \text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV1** :
 
 $$
-d_{\text{naissances vivantes-rougeole1}} = d_{\text{naissances vivantes-DTC}} \n- fois (1 - \n-text{taux de mortalité post-néonatale})
+d_{\text{livebirths-measles1}} = d_{\text{livebirths-dpt}} \times (1 - \text{taux de mortalité post-néonatale})
 $$
 
 **Population éligible pour le MCV2** :
 
 $$
-d_{\text{naissances vivantes-rougeole2}} = d_{\text{naissances vivantes-DTC}} \time (1 - 2 \time \text{taux de mortalité post-néonatale})
+d_{\text{livebirths-measles2}} = d_{\text{livebirths-dpt}} \times (1 - 2 \times \text{taux de mortalité post-néonatale})
 $$
 
-#### Calculs du dénominateur basés sur le PPNU
+#### Calculs du dénominateur basés sur l'UNWPP
 
-**Dénominateurs dérivés des PPNU** *(analyse nationale uniquement)*
+**Dénominateurs dérivés de l'UN WPP** *(analyse nationale uniquement)*
 
 Au lieu d'utiliser les volumes de services, ces dénominateurs sont calculés directement à partir des projections de population et des taux démographiques :
 
 **Grossesses estimées** (à partir du taux brut de natalité et de la population totale) :
 
 $$
-d_{\text{wpp-grossesse}} = \frac{\text{Taux brut de natalité}}{1000} \fréquences \fréquences \fréquences \fréquences{Population totale} \frac{1}{1 + \text{twin rate}} \frac{1}{1 + \text{twin rate}}
+d_{\text{wpp-pregnancy}} = \frac{\text{Taux brut de natalité}}{1000} \times \text{Population totale} \times \frac{1}{1 + \text{taux de gémellité}}
 $$
 
 **Naissances vivantes estimées** (à partir du taux brut de natalité) :
 
 $$
-d_{{text{wpp-livebirth}} = \frac{\text{Taux brut de natalité}}{1000} \a fois \text{Population totale}
+d_{\text{wpp-livebirth}} = \frac{\text{Taux brut de natalité}}{1000} \times \text{Population totale}
 $$
 
 **Population éligible pour les vaccins DTC/Penta** (population de moins de 1 an) :
 
 $$
-d_{\text{wpp-DTC}} = \text{Population totale des moins de 1 an du WPP}
+d_{\text{wpp-dpt}} = \text{Population totale des moins de 1 an du WPP}
 $$
 
 **Population éligible pour le MCV1** (ajusté pour la mortalité néonatale) :
 
 $$
-d_{\text{wpp-rougeole1}} = d_{\text{wpp-DTC}} \time (1 - \text{taux de mortalité néonatale})
+d_{\text{wpp-measles1}} = d_{\text{wpp-dpt}} \times (1 - \text{taux de mortalité néonatale})
 $$
 
 **Population éligible pour le MCV2** (ajusté pour la mortalité post-néonatale) :
 
 $$
-d_{\text{wpp-rougeole2}} = d_{\text{wpp-DTC}} \times (1 - \text{taux de mortalité néonatale}) \times (1 - 2 \times \text{taux de mortalité post-néonatale})
+d_{\text{wpp-measles2}} = d_{\text{wpp-dpt}} \times (1 - \text{taux de mortalité néonatale}) \times (1 - 2 \times \text{taux de mortalité post-néonatale})
 $$
 
 **Ajustement pour les rapports incomplets:**
@@ -812,12 +825,12 @@ Une fois que tous les dénominateurs primaires des naissances vivantes ont été
 Pour chaque source de dénominateur de naissances vivantes, le nombre estimé d'enfants âgés de 6 à 59 mois est calculé :
 
 $$
-d_{\text{source-vitamineA}} = d_{\text{source-naissance vivante}} \n- fois (1 - \text{taux de mortalité des enfants de moins de 5 ans}) \n- fois 4,5
+d_{\text{source-vitaminA}} = d_{\text{source-livebirth}} \times (1 - \text{taux de mortalité des enfants de moins de 5 ans}) \times 4.5
 $$
 
 Où :
 
-- `source` représente l'un des éléments suivants : CPN1, delivery, BCG, Penta1, livebirths ou wpp
+- `source` représente l'un des éléments suivants : `anc1`, `delivery`, `bcg`, `penta1`, `livebirths` ou `wpp`
 - Le facteur **4,5** représente la durée approximative (en années) de la tranche d'âge cible pour la vitamine A (6-59 mois ≈ 4,5 ans)
 - Le taux de mortalité des moins de 5 ans tient compte de la survie de l'enfant pour atteindre la tranche d'âge de 6 à 59 mois
 - Résultat : **Population estimée d'enfants âgés de 6 à 59 mois** éligibles à une supplémentation en vitamine A
@@ -827,12 +840,12 @@ Où :
 Pour chaque source de dénominateur de naissances vivantes, le nombre estimé de nourrissons de moins de 12 mois est calculé :
 
 $$
-d_{\text{source-pleinement-immunisée}} = d_{\text{source-naissance-vivante}} \n- fois (1 - \text{taux de mortalité infantile})
+d_{\text{source-fully-immunized}} = d_{\text{source-livebirth}} \times (1 - \text{taux de mortalité infantile})
 $$
 
 Où :
 
-- `source` représente l'un des éléments suivants : CPN1, accouchement, BCG, Penta1, naissances vivantes ou wpp
+- `source` représente l'un des éléments suivants : `anc1`, `delivery`, `bcg`, `penta1`, `livebirths` ou `wpp`
 - Le taux de mortalité infantile est ajusté pour tenir compte de la survie jusqu'à l'âge de 12 mois
 - Résultat : **Population estimée de nourrissons de moins d'un an** pouvant bénéficier d'une évaluation complète de la vaccination
 
@@ -852,12 +865,12 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 - Harmoniser les données d'enquête (priorité à l'EDS par rapport à l'enquête MICS)
 - Remplir les valeurs de l'enquête pour créer des séries temporelles continues
 
-**Étape 2 : Calculer les dénominateurs basés sur l'enquête SIGS**
+**Étape 2 : Calculer les dénominateurs basés sur le SIGS**
 
 - Pour chaque indicateur de santé avec des données de couverture d'enquête :
-  - Calculer le dénominateur de base : `count ÷ survey_couverture`
+  - Calculer le dénominateur de base : `count ÷ survey_coverage`
   - Appliquer les cascades démographiques pour dériver les dénominateurs correspondants
-  - Générer des dénominateurs à partir de tous les indicateurs sources disponibles (CPN1, accouchement, BCG, Penta1, naissances vivantes)
+  - Générer des dénominateurs à partir de tous les indicateurs sources disponibles (`anc1`, `delivery`, `bcg`, `penta1`, `livebirths`)
 
 **Étape 3 : Calculer les dénominateurs basés sur le WPP**
 
@@ -871,8 +884,8 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 **Étape 4 : Calcul des dénominateurs secondaires**
 
 - Pour chaque dénominateur `*_livebirth` :
-  - Calculer le dénominateur de la vitamine A : __CODE_BLOC_113__
-  - Calculer le dénominateur de la vaccination complète : __CODE_BLOC_114__
+  - Calculer le dénominateur de la vitamine A : `livebirth × (1 - U5MR) × 4.5`
+  - Calculer le dénominateur de la vaccination complète : `livebirth × (1 - IMR)`
 
 **Étape 5 : Calculer les estimations de couverture**
 
@@ -883,7 +896,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 **Étape 6 : Sélectionner le meilleur dénominateur**
 
 - Pour chaque indicateur, comparer toutes les estimations de couverture basées sur le dénominateur aux données de l'enquête
-- Calculer l'erreur quadratique : `Σ(couverture_d,t - survey_t)²`
+- Calculer l'erreur quadratique : `Σ(coverage_d,t - survey_t)²`
 - Sélectionner le dénominateur avec l'erreur minimale comme "meilleur"
 - Appliquer les règles de préférence (préférer le SIGS au WPP)
 - Marquer les dénominateurs comme "référence" s'ils proviennent du même service
@@ -912,15 +925,15 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     **Structure** :
 
     ```
-    admin_area_1, [admin_area_2/3], year, dénominateur, source_indicateur, target_population, value
+    admin_area_1, [admin_area_2/3], year, denominator, source_indicator, target_population, value
     ```
 
     **Champs** :
 
-    - `dénominateur` : Nom complet du dénominateur (par exemple, `d'anc1_livebirth`)
-    - `source_indicateur` : Service utilisé (par exemple, `source_CPN1`, `source_wpp`)
-    - `target_population` : Groupe cible (par exemple, `target_livebirth`, `target_DTC`)
-    - __CODE_BLOC_124__ : Taille du dénominateur calculée
+    - `denominator` : Nom complet du dénominateur (par exemple, `danc1_livebirth`)
+    - `source_indicator` : Service utilisé (par exemple, `source_anc1`, `source_wpp`)
+    - `target_population` : Groupe cible (par exemple, `target_livebirth`, `target_dpt`)
+    - `value` : Taille du dénominateur calculée
 
     **Fichiers de résultats combinés**
 
@@ -933,14 +946,14 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     **Structure** :
 
     ```
-    admin_area_1, admin_area_3, year, indicateur_common_id, dénominateur_best_or_survey, value
+    admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value
     ```
 
     **Champs** :
 
-    - `indicateur_common_id` : Indicateur de santé (par exemple, `CPN1`, `Penta3`)
-    - `dénominateur_best_or_survey` : Soit `best`, `survey`, soit un nom de dénominateur spécifique
-    - cODE_BLOC_131__ : Pourcentage de couverture (0-100+)
+    - `indicator_common_id` : Indicateur de santé (par exemple, `anc1`, `penta3`)
+    - `denominator_best_or_survey` : Soit `best`, `survey`, soit un nom de dénominateur spécifique
+    - `value` : Pourcentage de couverture (0-100+)
 
     **Entrée spéciale "meilleure "** : Duplique le dénominateur optimal sélectionné pour faciliter le filtrage
 
@@ -951,15 +964,15 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     **Structure** :
 
     ```
-    indicateur_common_id, dénominateur_national, dénominateur_admin2, dénominateur_admin3
+    indicator_common_id, denominator_national, denominator_admin2, denominator_admin3
     ```
 
     **Champs** :
 
-    - `indicateur_common_id` : Indicateur de santé (par exemple, `CPN1`, `Penta3`)
-    - cODE_BLOC_135__ : Meilleur dénominateur pour la couverture au niveau national
-    - cODE_BLOCK_136__ : Meilleur dénominateur pour la couverture au niveau 2 de l'administration
-    - `dénominateur_admin3` : Meilleur dénominateur pour la couverture au niveau 3 de l'administration
+    - `indicator_common_id` : Indicateur de santé (par exemple, `anc1`, `penta3`)
+    - `denominator_national` : Meilleur dénominateur pour la couverture au niveau national
+    - `denominator_admin2` : Meilleur dénominateur pour la couverture au niveau 2 de l'administration
+    - `denominator_admin3` : Meilleur dénominateur pour la couverture au niveau 3 de l'administration
 
 ??? "Sauvegarde et validation des données"
 
@@ -988,36 +1001,36 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     **Santé maternelle** :
 
-    - `CPN1` : Soins prénatals 1ère visite
-    - cODE_BLOCK_140__ : Soins prénatals 4+ visites
-    - cODE_BLOCK_141__ : Accouchement en institution
-    - cODE_BLOC_142__ : Assistance qualifiée à l'accouchement
-    - cODE_BLOCK_143__ : Soins postnatals (enfant)
-    - cODE_BLOCK_144__ : Soins postnatals (mère)
+    - `anc1` : Soins prénatals 1ère visite
+    - `anc4` : Soins prénatals 4+ visites
+    - `delivery` : Accouchement en institution
+    - `sba` : Assistance qualifiée à l'accouchement
+    - `pnc1` : Soins postnatals (enfant)
+    - `pnc1_mother` : Soins postnatals (mère)
 
     **Immunisation** :
 
-    - `BCG` : Vaccin BCG
-    - cODE_BLOCK_146__, CODE_BLOCK_147__, CODE_BLOCK_148__ : Vaccin Pentavalent
-    - `rougeole1`, `rougeole2`: Vaccin contenant la rougeole
-    - `rota1`, `rota2`: Vaccin contre le rotavirus
-    - cODE_BLOCK_153__, CODE_BLOCK_154__, CODE_BLOCK_155__ : VACCIN ANTIPOLIOMYÉLITIQUE ORAL : Vaccin oral contre la polio
-    - cODE_BLOCK_156__ : Statut vaccinal complet
+    - `bcg` : Vaccin BCG
+    - `penta1`, `penta2`, `penta3` : Vaccin Pentavalent
+    - `measles1`, `measles2` : Vaccin contenant la rougeole
+    - `rota1`, `rota2` : Vaccin contre le rotavirus
+    - `opv1`, `opv2`, `opv3` : Vaccin oral contre la polio
+    - `fully_immunized` : Statut vaccinal complet
 
     **Santé de l'enfant** :
 
     - `nmr` : Taux de mortalité néonatale (enquête uniquement)
-    - cODE_BLOCK_158__ : Taux de mortalité infantile (enquête uniquement)
-    - cODE_BLOCK_159__ : Supplémentation en vitamine A
+    - `imr` : Taux de mortalité infantile (enquête uniquement)
+    - `vitaminA` : Supplémentation en vitamine A
 
 ??? "Notes d'utilisation et bonnes pratiques"
 
     **Quand utiliser quelle variable de comptage**
 
-    - cODE_BLOCK_160__ : Pas d'ajustement (données brutes)
-    - cODE_BLOC_161__ : Ajustement des valeurs aberrantes uniquement
-    - cODE_BLOCK_162__ : Ajustement de l'exhaustivité uniquement
-    - cODE_BLOCK_163__ : Les deux ajustements **(recommandé)**
+    - `count_final_none` : Pas d'ajustement (données brutes)
+    - `count_final_outliers` : Ajustement des valeurs aberrantes uniquement **(par défaut)**
+    - `count_final_completeness` : Ajustement de l'exhaustivité uniquement
+    - `count_final_both` : Les deux ajustements combinés
 
     **Interprétation des "meilleurs" dénominateurs**
 
@@ -1087,14 +1100,14 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
 #### Fonctions et méthodes principales
 
-??? "Fonction 1 : `couverture_deltas()`"
+??? "Fonction 1 : `coverage_deltas()`"
 
     **Objectif** : Calculer les changements de couverture d'une année sur l'autre pour chaque combinaison indicateur-dénominateur-géographie.
 
     **Algorithme** :
 
     ```r
-    couverture_deltas <- function(couverture_df, lag_n = 1, complete_years = TRUE)
+    coverage_deltas <- function(coverage_df, lag_n = 1, complete_years = TRUE)
     ```
 
     **Processus** :
@@ -1102,7 +1115,7 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
     1. Regroupement des données par géographie (zones administratives), par indicateur et par dénominateur
     2. Complète éventuellement les années manquantes pour créer une série chronologique complète
     3. Trie les données par ordre chronologique au sein de chaque groupe
-    4. Calcule le delta comme suit $\Delta\text{couverture}_t = \text{couverture}_t - \text{couverture}_{t-1}$
+    4. Calcule le delta comme suit $\Delta\text{coverage}_t = \text{coverage}_t - \text{coverage}_{t-1}$
 
     **Formulation mathématique** :
     $$
@@ -1118,9 +1131,9 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Entrée** :
 
-    - `couverture_df` : Cadre de données avec les estimations de couverture
-    - cODE_BLOCK_166__ : Nombre d'années de décalage (par défaut = 1 pour une comparaison d'une année sur l'autre)
-    - cODE_BLOCK_167__ : Remplir ou non les années manquantes (par défaut = VRAI)
+    - `coverage_df` : Cadre de données avec les estimations de couverture
+    - `lag_n` : Nombre d'années de décalage (par défaut = 1 pour une comparaison d'une année sur l'autre)
+    - `complete_years` : Remplir ou non les années manquantes (par défaut = TRUE)
 
     **Sortie** :
 
@@ -1128,11 +1141,11 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Exemple de sortie** :
 
-    exemple de sortie : - admin_area_1 | indicateur_common_id | dénominateur | year | couverture | delta | admin_area_1 | indicateur_common_id | dénominateur | an | couverture | delta
+    | admin_area_1 | indicator_common_id | denominator | year | coverage | delta |
     |--------------|---------------------|-------------|------|----------|-------|
-    | Pays A | Penta3 | dPenta1_DTC | 2018 | 75.2 | NA
-    | Pays A | Penta3 | dPenta1_DTC | 2019 | 78.5 | 3.3 |
-    | Pays A | Penta3 | dPenta1_DTC | 2020 | 80.1 | 1.6 | Pays A | Penta3 | dPenta1_DTC | 2018 | 75.2 | NA
+    | Country A | penta3 | dpenta1_dpt | 2018 | 75.2 | NA |
+    | Country A | penta3 | dpenta1_dpt | 2019 | 78.5 | 3.3 |
+    | Country A | penta3 | dpenta1_dpt | 2020 | 80.1 | 1.6 |
 
 ??? "Fonction 2 : `project_survey_from_deltas()`"
 
@@ -1194,8 +1207,8 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Entrée** :
 
-    - `deltas_df` : Sortie de `couverture_deltas()` contenant les changements de couverture
-    - bLOC_CODE_172__ : Données brutes de l'enquête avec les années et les valeurs
+    - `deltas_df` : Sortie de `coverage_deltas()` contenant les changements de couverture
+    - `survey_raw_long` : Données brutes de l'enquête avec les années et les valeurs
 
     **Sortie** :
 
@@ -1203,11 +1216,11 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Exemple de sortie** :
 
-    | La couverture de l'indicateur est calculée à partir de l'année de référence et de l'année projetée
+    | admin_area_1 | indicator_common_id | denominator | year | baseline_year | projected |
     |--------------|---------------------|-------------|------|---------------|-----------|
-    | Pays A | Penta3 | dPenta1_DTC | 2018 | 2018 | 75.0 |
-    | Pays A | Penta3 | dPenta1_DTC | 2019 | 2018 | 78.3 |
-    | Pays A | Penta3 | dPenta1_DTC | 2020 | 2018 | 79.9 |
+    | Country A | penta3 | dpenta1_dpt | 2018 | 2018 | 75.0 |
+    | Country A | penta3 | dpenta1_dpt | 2019 | 2018 | 78.3 |
+    | Country A | penta3 | dpenta1_dpt | 2020 | 2018 | 79.9 |
 
 ??? "Fonction 3 : `build_final_results()`"
 
@@ -1216,17 +1229,17 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
     **Algorithme** :
 
     ```r
-    build_final_results <- function(couverture_df, proj_df, survey_raw_df = NULL)
+    build_final_results <- function(coverage_df, proj_df, survey_raw_df = NULL)
     ```
 
     **Processus** :
 
     1. **Préparation de la couverture SIGS** : Extraire les estimations de couverture des données administratives
-       - Renommer la colonne couverture en `couverture_cov` pour plus de clarté
+       - Renommer la colonne couverture en `coverage_cov` pour plus de clarté
 
     2. **Fusionner les projections** : Joindre les estimations projetées de l'enquête
        - Correspondance par géographie, année, indicateur et dénominateur
-       - Créer une colonne `couverture_avgsurveyprojection`
+       - Créer une colonne `coverage_avgsurveyprojection`
 
     3. **Traiter les données d'enquête originales** (si elles sont disponibles) :
        - Regrouper plusieurs sources d'enquête en prenant la valeur moyenne
@@ -1267,45 +1280,44 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Entrée** :
 
-    - `couverture_df` : Estimations de la couverture basées sur le SIGS à partir de dénominateurs sélectionnés
-    - cODE_BLOC_177__ : Estimations projetées de l'enquête à partir de __CODE_BLOC_178___
-    - cODE_BLOC_179__ : Données d'enquête originales (facultatif)
+    - `coverage_df` : Estimations de la couverture basées sur le SIGS à partir de dénominateurs sélectionnés
+    - `proj_df` : Estimations projetées de l'enquête à partir de `project_survey_from_deltas()`
+    - `survey_raw_df` : Données d'enquête originales (facultatif)
 
     **Sortie** :
 
     Cadre de données complet avec des colonnes :
 
     - Identifiants géographiques (admin_area_1, admin_area_2, admin_area_3)
-    - année, indicateur_common_id, dénominateur
-    - cODE_BLOCK_180__ : Couverture basée sur le SIGS
-    - bLOC_CODE_181__ : Valeurs de l'enquête initiale
-    - cODE_BLOCK_182__ : Couverture projetée de l'enquête
-    - cODE_BLOCK_183__ : Source des données de l'enquête (par exemple, "EDS", "MICS")
-    - cODE_BLOC_184__ : Informations détaillées sur la source
+    - year, indicator_common_id, denominator
+    - `coverage_cov` : Couverture basée sur le SIGS
+    - `coverage_original_estimate` : Valeurs de l'enquête initiale
+    - `coverage_avgsurveyprojection` : Couverture projetée de l'enquête
+    - `survey_raw_source` : Source des données de l'enquête (par exemple, "DHS", "MICS")
+    - `survey_raw_source_detail` : Informations détaillées sur la source
 
 #### Fonctions d'aide
 
-??? "Fonction d'aide : `filter_by_dénominateur_selection()`"
+??? "Fonction d'aide : filtrage par chaîne de dénominateurs"
 
-    **Objectif** : Filtre les résultats combinés de la partie 1 en fonction de la sélection du dénominateur par l'utilisateur.
+    **Objectif** : Filtre les résultats combinés de la partie 1 (`m005`) selon le paramètre `DENOMINATOR_CHAIN` défini dans la partie 2 (`m006`).
 
     **Algorithme** :
 
-    1. Itérer à travers chaque indicateur dans `dénominateur_SELECTION`
-    2. Pour chaque indicateur :
-       - Si la sélection est "meilleure" : Conserver les lignes où `dénominateur_best_or_survey == "best"` est sélectionné
-       - Si la sélection est un dénominateur spécifique : Conserver les lignes où `dénominateur_best_or_survey == selected_dénominateur`
-    3. Convertir les lignes sélectionnées au format de couverture (renommer les colonnes, filtrer les entrées de l'enquête)
-    4. Combiner les résultats pour tous les indicateurs
+    1. Lire `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg` ou `penta1`).
+    2. Si `auto` : conserver les lignes où `denominator_best_or_survey == "best"` pour chaque indicateur.
+    3. Si une chaîne spécifique (par exemple `anc1`) : pour chaque indicateur, conserver les lignes dont le dénominateur appartient à cette chaîne (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, `danc1_measles1`, etc.) et qui correspond à la population cible attendue de l'indicateur.
+    4. Convertir les lignes sélectionnées au format de couverture (renommer les colonnes, supprimer les entrées d'enquête).
+    5. Combiner les résultats pour tous les indicateurs.
 
     **Entrée** :
 
     - `combined_results_df` : Résultat de la partie 1 avec toutes les options de dénominateur
-    - `selection_list` : La liste de configuration dénominateur_SELECTION
+    - `chain` : Valeur de `DENOMINATOR_CHAIN`
 
     **Sortie** :
 
-    Trame de données filtrée contenant uniquement les dénominateurs sélectionnés par l'utilisateur.
+    Trame de données filtrée contenant uniquement les lignes correspondant à la chaîne sélectionnée (un dénominateur par indicateur).
 
 ??? "Fonction d'aide : `extract_survey_from_combined()`"
 
@@ -1313,7 +1325,7 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Algorithme** :
 
-    1. Filtre pour les lignes où `dénominateur_best_or_survey == "survey"`
+    1. Filtre pour les lignes où `denominator_best_or_survey == "survey"`
     2. Renommer la colonne `value` en `survey_value`
     3. Sélectionner dynamiquement les colonnes pertinentes en fonction des niveaux d'administration présents
 
@@ -1323,7 +1335,7 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
 
     **Sortie** :
 
-    Cadre de données d'enquête avec colonnes : admin areas, year, indicateur_common_id, survey_value
+    Cadre de données d'enquête avec colonnes : admin areas, year, indicator_common_id, survey_value
 
 #### Étapes d'exécution du flux de travail
 
@@ -1340,12 +1352,12 @@ La partie 2 exécute le flux de travail suivant pour chaque niveau administratif
 
 **Sous-étape 1 : filtrer par sélection du dénominateur**
 
-- Appliquer les choix de dénominateur de l'utilisateur en utilisant `filter_by_dénominateur_selection()`
+- Appliquer les choix de dénominateur de l'utilisateur en utilisant `filter_by_denominator_selection()`
 - Message : Nombre d'enregistrements sélectionnés
 
 **Sous-étape 2 : Calcul des deltas**
 
-- Calculer les changements de couverture d'une année sur l'autre en utilisant `couverture_deltas()`
+- Calculer les changements de couverture d'une année sur l'autre en utilisant `coverage_deltas()`
 - Crée des séries chronologiques complètes avec des lacunes comblées
 
 **Sous-étape 3 : projeter les valeurs de l'enquête**
@@ -1378,13 +1390,13 @@ La partie 2 produit trois fichiers de sortie :
 **Colonnes** :
 
 - `admin_area_1` : Nom du pays
-- cODE_BLOCK_200__ : Année d'estimation
-- cODE_BLOC_201__ : Code de l'indicateur standardisé
-- cODE_BLOC_202__ : Source du dénominateur sélectionné
-- cODE_BLOC_203__ : Couverture initiale basée sur l'enquête (NA pour les années sans enquête)
-- cODE_BLOC_204__ : Projection de la couverture de l'enquête à l'aide des tendances SIGS
-- cODE_BLOC_205__ : Estimation de la couverture basée sur le SIGS
-- cODE_BLOC_206__ : Source de l'enquête (par exemple, "EDS 2018")
+- `year` : Année d'estimation
+- `indicator_common_id` : Code de l'indicateur standardisé
+- `denominator` : Source du dénominateur sélectionné
+- `coverage_original_estimate` : Couverture initiale basée sur l'enquête (NA pour les années sans enquête)
+- `coverage_avgsurveyprojection` : Projection de la couverture de l'enquête à l'aide des tendances SIGS
+- `coverage_cov` : Estimation de la couverture basée sur le SIGS
+- `survey_raw_source` : Source de l'enquête (par exemple, "DHS 2018")
 - `survey_raw_source_detail` : Détails supplémentaires sur la source
 
 #### 2. Résultats du niveau 2 de l'administration : `M6_coverage_estimation_admin2.csv`
@@ -1401,15 +1413,15 @@ Identique à la colonne nationale, plus :
 **Colonnes** :
 
 - `admin_area_1` : Nom du pays
-- cODE_BLOC_212__ : Nom de la division administrative de troisième niveau (par exemple, district)
-- cODE_BLOC_213__ : Année d'estimation
-- cODE_BLOC_214__ : Code de l'indicateur standardisé
-- cODE_BLOC_215__ : Source du dénominateur sélectionné
-- cODE_BLOC_216__ : Couverture de l'enquête initiale
-- cODE_BLOC_217__ : Couverture projetée de l'enquête
-- cODE_BLOC_218__ : Couverture basée sur le SIGS
-- cODE_BLOC_219__ : Source de l'enquête
-- cODE_BLOC_220__ : Détails de la source
+- `admin_area_3` : Nom de la division administrative de troisième niveau (par exemple, district)
+- `year` : Année d'estimation
+- `indicator_common_id` : Code de l'indicateur standardisé
+- `denominator` : Source du dénominateur sélectionné
+- `coverage_original_estimate` : Couverture de l'enquête initiale
+- `coverage_avgsurveyprojection` : Couverture projetée de l'enquête
+- `coverage_cov` : Couverture basée sur le SIGS
+- `survey_raw_source` : Source de l'enquête
+- `survey_raw_source_detail` : Détails de la source
 
 #### Considérations méthodologiques
 
@@ -1452,7 +1464,7 @@ Identique à la colonne nationale, plus :
 
     La partie 2 met en œuvre plusieurs stratégies pour les données manquantes :
 
-    - **Séries temporelles complètes** : La fonction `couverture_deltas()` peut combler les années manquantes, créant ainsi une série continue
+    - **Séries temporelles complètes** : La fonction `coverage_deltas()` peut combler les années manquantes, créant ainsi une série continue
     - **Les lacunes de l'enquête** : Les projections étendent les estimations vers l'avant, mais les années antérieures à la première enquête restent NA
     - **Lacunes au niveau de l'administration** : Le script détecte automatiquement et saute les niveaux d'administration pour lesquels il n'y a pas de données
     - **Dénominateurs manquants** : Si un dénominateur sélectionné n'existe pas pour un indicateur, cette combinaison indicateur-dénominateur est omise
@@ -1506,7 +1518,7 @@ Identique à la colonne nationale, plus :
 
     **Problème** : Dénominateurs manquants dans les résultats
 
-    - **Cause** : le dénominateur sélectionné n'a pas été calculé dans la partie 1 pour l'indicateur en question : Le dénominateur sélectionné n'a pas été calculé dans la partie 1 pour cet indicateur
+    - **Cause** : Le dénominateur sélectionné n'a pas été calculé dans la partie 1 pour cet indicateur
     - **Solution** : Vérifier les options de dénominateur de la partie 1, vérifier la compatibilité entre l'indicateur et le dénominateur
 
     **Problème** : Lacunes dans la couverture projetée
@@ -1537,7 +1549,7 @@ Identique à la colonne nationale, plus :
     ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2"
 
     # Run Part 1
-    source("05_module_couverture_estimates_part1.R")
+    source("05_module_coverage_estimates_part1.R")
     ```
 
     La partie 1 génère des estimations de dénominateurs et sélectionne le meilleur dénominateur pour chaque indicateur sur la base d'une comparaison d'enquêtes.
@@ -1555,7 +1567,7 @@ Identique à la colonne nationale, plus :
     UNDER5_MORTALITY_RATE <- 0.110   # Default: 0.103
 
     # These parameters affect survival-adjusted dénominateurs
-    source("05_module_couverture_estimates_part1.R")
+    source("05_module_coverage_estimates_part1.R")
     ```
 
     **Sources pour les taux spécifiques aux pays** : Rapports finaux des EDS, Groupe interinstitutions des Nations unies pour l'estimation de la mortalité infantile (IGME), ou statistiques nationales de l'état civil.
@@ -1577,10 +1589,10 @@ Identique à la colonne nationale, plus :
     ```r
     # Part 1: Run national level only (faster)
     ANALYSIS_LEVEL <- "NATIONAL_ONLY"
-    source("05_module_couverture_estimates_part1.R")
+    source("05_module_coverage_estimates_part1.R")
 
     # Part 2: Will automatically skip infranational levels
-    source("06_module_couverture_estimates_part2.R")
+    source("06_module_coverage_estimates_part2.R")
     ```
 
     **Cas d'utilisation** : Analyse exploratoire initiale, ou lorsque les données d'enquêtes infranationales ne sont pas disponibles.
@@ -1590,10 +1602,10 @@ Identique à la colonne nationale, plus :
     ```r
     # Part 1: Include admin3 level
     ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2_AA3"
-    source("05_module_couverture_estimates_part1.R")
+    source("05_module_coverage_estimates_part1.R")
 
     # Part 2: Will process all available levels
-    source("06_module_couverture_estimates_part2.R")
+    source("06_module_coverage_estimates_part2.R")
     ```
 
     **Cas d'utilisation** : Analyse détaillée au niveau du district lorsqu'il existe des données d'enquête infranationales.
@@ -1601,31 +1613,31 @@ Identique à la colonne nationale, plus :
 ??? "Exemple 6 : Utilisation programmatique des résultats"
 
     ```r
-    # Load couverture outputs
-    couverture_national <- read.csv("M6_coverage_estimation_national.csv")
-    couverture_admin2 <- read.csv("M6_coverage_estimation_admin2.csv")
+    # Load coverage outputs
+    coverage_national <- read.csv("M6_coverage_estimation_national.csv")
+    coverage_admin2 <- read.csv("M6_coverage_estimation_admin2.csv")
 
-    # Filter to specific indicateur
-    Penta3_national <- couverture_national %>%
-      filter(indicateur_common_id == "Penta3")
+    # Filter to specific indicator
+    penta3_national <- coverage_national %>%
+      filter(indicator_common_id == "penta3")
 
-    # Compare SIGS-based and survey-projected couverture
-    couverture_comparison <- Penta3_national %>%
-      select(year, couverture_cov, couverture_avgsurveyprojection, couverture_original_estimate) %>%
+    # Compare HMIS-based and survey-projected coverage
+    coverage_comparison <- penta3_national %>%
+      select(year, coverage_cov, coverage_avgsurveyprojection, coverage_original_estimate) %>%
       mutate(
-        SIGS_survey_gap = couverture_cov - couverture_avgsurveyprojection,
+        hmis_survey_gap = coverage_cov - coverage_avgsurveyprojection,
         data_source = case_when(
-          !is.na(couverture_original_estimate) ~ "Survey",
-          !is.na(couverture_avgsurveyprojection) ~ "Projected",
-          TRUE ~ "SIGS only"
+          !is.na(coverage_original_estimate) ~ "Survey",
+          !is.na(coverage_avgsurveyprojection) ~ "Projected",
+          TRUE ~ "HMIS only"
         )
       )
 
-    # Identify admin2 areas with couverture below threshold
-    low_couverture_areas <- couverture_admin2 %>%
-      filter(indicateur_common_id == "Penta3", year == max(year)) %>%
-      filter(couverture_avgsurveyprojection < 80) %>%
-      arrange(couverture_avgsurveyprojection)
+    # Identify admin2 areas with coverage below threshold
+    low_coverage_areas <- coverage_admin2 %>%
+      filter(indicator_common_id == "penta3", year == max(year)) %>%
+      filter(coverage_avgsurveyprojection < 80) %>%
+      arrange(coverage_avgsurveyprojection)
     ```
 
 
@@ -1635,18 +1647,18 @@ Identique à la colonne nationale, plus :
 
     **Les fichiers de sortie de la partie 2** (`M6_coverage_estimation_*.csv`) contiennent :
 
-    | Colonnes - Description - Colonne - Description - Colonne - Description - Colonne - Description - Colonne - Description
-    |--------|-------------|
-    | `admin_area_1` | Nom du pays
-    | `admin_area_2` / `admin_area_3` | Zone sous-nationale (le cas échéant) | `admin_area_1` / `admin_area_3` | Nom du pays
-    année civile | `year` | Année civile | `year` | Année civile
-    | Code de l'indicateur de santé | `indicateur_common_id` | Code de l'indicateur de santé
-    | Code de l'indicateur de santé | `dénominateur` | Type de dénominateur sélectionné
-    | `couverture_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100) | `couverture_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100)
-    | `couverture_original_estimate` | Valeur de l'enquête si disponible |
-    | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances du SIGS
-    | `survey_raw_source` | Source de l'enquête (EDS/MICS) | `couverture_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances SIGS
-    | __CODE_BLOC_234__ | Nom et année de l'enquête spécifique | __CODE_BLOC_234__ | Source de l'enquête (EDS/MICS)
+    | Colonne | Description |
+    |---------|-------------|
+    | `admin_area_1` | Nom du pays |
+    | `admin_area_2` / `admin_area_3` | Zone sous-nationale (le cas échéant) |
+    | `year` | Année civile |
+    | `indicator_common_id` | Code de l'indicateur de santé |
+    | `denominator` | Type de dénominateur sélectionné |
+    | `coverage_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100) |
+    | `coverage_original_estimate` | Valeur de l'enquête si disponible |
+    | `coverage_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances du SIGS |
+    | `survey_raw_source` | Source de l'enquête (DHS/MICS) |
+    | `survey_raw_source_detail` | Nom et année de l'enquête spécifique |
 
 ??? "Examen des options de dénominateur"
 
@@ -1654,11 +1666,11 @@ Identique à la colonne nationale, plus :
 
     1. Ouvrez le fichier des résultats combinés
     2. Filtrez sur l'indicateur qui vous intéresse
-    3. Comparer la colonne `value` entre les différentes entrées `dénominateur_best_or_survey`
+    3. Comparer la colonne `value` entre les différentes entrées `denominator_best_or_survey`
     4. La ligne marquée `best` montre le dénominateur automatiquement sélectionné
     5. Les lignes marquées `survey` montrent les observations réelles de l'enquête
 
-    Pour annuler la sélection automatique dans la partie 2, définissez les paramètres `DENOM_*` avec un nom de dénominateur spécifique au lieu de `"best"`.
+    Pour annuler la sélection automatique dans la partie 2 (`m006`), changez le paramètre `DENOMINATOR_CHAIN` de `"auto"` à l'une des valeurs `"anc1"`, `"delivery"`, `"bcg"` ou `"penta1"`. La chaîne sélectionnée s'applique à tous les indicateurs et niveaux géographiques.
 
 ??? "Exigences en matière de données infranationales"
 
@@ -1674,7 +1686,7 @@ Identique à la colonne nationale, plus :
 
     1. Valeurs de couverture en dehors de la plage attendue (négatives ou >100%)
     2. Lacunes dans les séries chronologiques (années manquantes)
-    3. Cohérence entre `couverture_cov` et `couverture_avgsurveyprojection`
+    3. Cohérence entre `coverage_cov` et `coverage_avgsurveyprojection`
     4. Sélection du dénominateur dans les résultats de la partie 1
 
 ---
