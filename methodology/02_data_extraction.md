@@ -29,6 +29,25 @@ FASTR applies analytical methods—most notably regression-based techniques—th
 
 The choice between relying solely on DHIS2 analytics and applying the FASTR approach should be guided by the intended analytical purpose. FASTR is designed for analyses that require greater statistical rigor, comparability over time, and consistency across geographic levels.
 
+!!! warning "Extract counts, not percentages"
+
+    The FASTR pipeline requires **raw service counts** — the actual number of events reported by each facility each month (e.g., *"152 children received Penta1 at this facility in March 2024"*). It does **not** accept percentages, proportions, rates, or pre-calculated coverage figures.
+
+    **Why this matters:**
+
+    - **Outlier detection works on magnitude.** A facility reporting 850 ANC1 visits when its usual range is 100–200 is obviously an outlier. The same facility reporting *"92% coverage"* tells us nothing — the percentage is bounded by 100, hides the underlying volume, and erases the signal we use to flag reporting errors.
+    - **Counts can be added across facilities; percentages cannot.** To get a regional or national total, the platform sums facility counts. Averaging percentages across facilities of different sizes gives the wrong answer (a 100-bed hospital and a 5-bed health post would weigh equally).
+    - **The platform builds the denominator itself.** Module 5 derives the target population (pregnant women, infants, etc.) from HMIS data, surveys, and UN projections. Module 6 then calculates coverage as `count ÷ denominator`. If you feed in a coverage % directly, there is no count to divide and no comparison to make.
+    - **Adjustment imputes counts.** Modules 1 and 2 detect outliers using statistical thresholds on raw values and fill missing months using rolling averages of past counts. Both methods are statistically meaningless on percentages.
+
+    **What to extract:** the numerator only — number of services delivered, doses given, visits recorded, deaths registered, etc. The platform handles aggregation, adjustment, and coverage calculation.
+
+    **Common pitfalls to avoid:**
+
+    - DHIS2 *"data elements"* that store coverage % directly (e.g. `ANC1 coverage rate`) — extract the underlying count instead (e.g. `ANC1 visits — first contact`).
+    - Indicators pre-aggregated by month or quarter at the district level — extract facility-month rows instead.
+    - Computed indicators like *"% of fully immunized children"* — feed in the underlying components separately (BCG, Penta1, Measles1, etc.).
+
 ### What format and granularity is required?
 
 Data should be extracted for each **indicator of interest**, at **facility level**, and at a **monthly** time step for the **period of analysis**.
@@ -160,6 +179,34 @@ The FASTR approach focuses on data quality adjustments to expand the analyses co
 The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by identifying significant increases or decreases in service volume, adjusting for data quality issues, accounting for expected seasonal variations, and comparing key periods, such as before and after a reform.
 
 The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs!
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_1a -->
+## Extract counts, not percentages
+
+FASTR analyses **raw service counts** — the actual number of services each facility reported each month. It does **not** accept percentages, proportions, or pre-calculated coverage figures.
+
+| Do extract | Do **not** extract |
+|------------|--------------------|
+| Number of ANC1 visits per facility per month | ANC1 coverage rate (%) |
+| Number of Penta1 doses administered | Vaccination coverage proportion |
+| Number of facility deliveries | Pre-calculated coverage indicators |
+
+**Why?**
+
+- You can't detect an outlier on a percentage — it is capped at 100 and hides the underlying facility volume.
+- You can't add percentages across facilities of different sizes to get a regional total.
+- The platform calculates coverage itself by dividing counts by population denominators in **Modules 5 & 6**.
+- Outlier and completeness adjustments (**Modules 1 & 2**) are statistical methods that need raw counts to work.
+
+<!--
+PRESENTER NOTES:
+- This is the most important rule for data extraction
+- Common mistake: pulling DHIS2 "data elements" that already store coverage %
+- Always extract the numerator (count of services) — the platform handles the rest
+- If your DHIS2 indicator says "rate" or "%" or "proportion", you have the wrong thing
+- Show participants concrete example: ANC1 visits (count) vs ANC1 coverage rate (%)
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1b -->

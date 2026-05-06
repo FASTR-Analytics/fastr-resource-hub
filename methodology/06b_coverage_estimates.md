@@ -36,6 +36,10 @@ This module addresses key challenges in estimating coverage, including:
 | **Module IDs** | Part 1 = `m005` (requires `m002`) · Part 2 = `m006` (requires `m005`) |
 | **Purpose** | Estimate health service coverage by comparing service volumes to target populations, validated against survey benchmarks |
 
+!!! warning "Reminder: HMIS input must be counts, not coverage %"
+
+    Coverage estimation works by dividing the number of services delivered (the **count** flowing through Modules 1, 2, and 3) by a target-population denominator that the platform builds itself. If your original HMIS extract contained pre-calculated coverage rates instead of service counts, there is nothing for this module to compute — the count is the numerator, and the platform supplies the denominator. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
+
 ### Part 1 and part 2 explained
 
 **Part 1: Denominator calculation and selection**

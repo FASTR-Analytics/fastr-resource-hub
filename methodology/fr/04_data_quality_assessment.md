@@ -25,6 +25,10 @@ La qualité des données influe directement sur la fiabilité des indicateurs de
 | **Sorties** | `M1_output_outliers.csv` — drapeaux de valeurs aberrantes par établissement-mois-indicateur<br>`M1_output_outlier_list.csv` — liste des valeurs aberrantes signalées (revue)<br>`M1_output_completeness.csv` — drapeaux de complétude par établissement-mois-indicateur<br>`M1_output_consistency_geo.csv` — résultats de cohérence sous-nationale par paire de ratios<br>`M1_output_dqa.csv` — scores composites de l'EQD (moyenne et réussite/échec) |
 | **Objectif** | Évaluer la fiabilité des données SIGS par la détection des valeurs aberrantes, l'évaluation de l'exhaustivité et la vérification de la cohérence afin de garantir des données fiables pour l'estimation de la couverture |
 
+!!! warning "Rappel : l'entrée doit être des comptages, pas des pourcentages"
+
+    Ce module attend des **comptages bruts de services** (nombre de visites, doses, accouchements déclarés par chaque établissement chaque mois). Les pourcentages, taux ou chiffres de couverture pré-calculés ne peuvent pas être analysés ici — la détection des valeurs aberrantes compare les valeurs à la distribution de volume propre à chaque établissement (un pourcentage plafonné à 100 ne contient aucun signal), et les drapeaux de complétude dépendent de la déclaration ou non d'un comptage. Voir [Extraction des données](02_data_extraction.md) pour savoir quoi extraire de votre SIGS.
+
 ---
 
 ## Flux de travail analytique

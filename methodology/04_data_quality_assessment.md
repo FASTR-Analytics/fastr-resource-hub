@@ -26,6 +26,10 @@ FASTR takes a multi-pronged approach, based on the belief that data quality shou
 | **Outputs** | `M1_output_outliers.csv` — facility-month-indicator outlier flags<br>`M1_output_outlier_list.csv` — flagged outliers only (review list)<br>`M1_output_completeness.csv` — facility-month-indicator completeness flags<br>`M1_output_consistency_geo.csv` — sub-national consistency results by ratio pair<br>`M1_output_dqa.csv` — composite DQA scores (mean and pass/fail) |
 | **Purpose** | Evaluate HMIS data reliability through outlier detection, completeness assessment, and consistency checking to ensure trustworthy inputs for coverage estimation |
 
+!!! warning "Reminder: input must be counts, not percentages"
+
+    This module expects **raw service counts** (e.g. number of visits, doses, deliveries reported by each facility each month). Percentages, rates, or pre-calculated coverage figures cannot be analysed here — outlier detection compares values against a facility's own volume distribution (a percentage capped at 100 has no signal), and completeness flags depend on whether a count was reported. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
+
 ---
 
 ## Analytical workflow

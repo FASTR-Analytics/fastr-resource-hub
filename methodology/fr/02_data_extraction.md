@@ -32,6 +32,25 @@ FASTR applique des méthodes analytiques - notamment des techniques de régressi
 
 Le choix entre l'utilisation exclusive des données analytiques du DHIS2 et l'application de l'approche FASTR doit être guidé par l'objectif analytique visé. L'approche FASTR est conçue pour les analyses qui nécessitent une plus grande rigueur statistique, une comparabilité dans le temps et une cohérence entre les différents niveaux géographiques.
 
+!!! warning "Extraire des comptages, pas des pourcentages"
+
+    Le pipeline FASTR exige des **comptages bruts de services** — le nombre réel d'événements déclarés par chaque établissement chaque mois (par exemple, *« 152 enfants ont reçu Penta1 dans cet établissement en mars 2024 »*). Il **n'accepte pas** de pourcentages, de proportions, de taux ou de chiffres de couverture pré-calculés.
+
+    **Pourquoi cela compte :**
+
+    - **La détection des valeurs aberrantes repose sur l'ampleur.** Un établissement déclarant 850 visites CPN1 alors que sa fourchette habituelle est de 100 à 200 est manifestement aberrant. Le même établissement déclarant *« 92 % de couverture »* ne nous apprend rien — le pourcentage est plafonné à 100, masque le volume sous-jacent et efface le signal qui sert à détecter les erreurs de déclaration.
+    - **On peut additionner des comptages entre établissements ; pas des pourcentages.** Pour obtenir un total régional ou national, la plateforme additionne les comptages des établissements. Faire une moyenne des pourcentages entre établissements de tailles différentes donne le mauvais résultat (un hôpital de 100 lits et un poste de santé de 5 lits pèseraient à parts égales).
+    - **La plateforme construit elle-même le dénominateur.** Le module 5 dérive la population cible (femmes enceintes, nourrissons, etc.) à partir des données SIGS, des enquêtes et des projections de l'ONU. Le module 6 calcule ensuite la couverture comme `comptage ÷ dénominateur`. Si vous fournissez directement un % de couverture, il n'y a plus de comptage à diviser ni de comparaison à faire.
+    - **L'ajustement impute des comptages.** Les modules 1 et 2 détectent les valeurs aberrantes au moyen de seuils statistiques sur les valeurs brutes et comblent les mois manquants par moyennes mobiles des comptages passés. Ces deux méthodes sont statistiquement dénuées de sens sur des pourcentages.
+
+    **Que faut-il extraire :** uniquement le numérateur — nombre de services rendus, doses administrées, visites enregistrées, décès déclarés, etc. La plateforme se charge de l'agrégation, de l'ajustement et du calcul de la couverture.
+
+    **Pièges courants à éviter :**
+
+    - Les *« data elements »* DHIS2 qui stockent directement la couverture en % (par exemple `Taux de couverture CPN1`) — extraire plutôt le comptage sous-jacent (par exemple `Visites CPN1 — premier contact`).
+    - Les indicateurs pré-agrégés par mois ou par trimestre au niveau du district — extraire plutôt des lignes établissement-mois.
+    - Les indicateurs calculés comme *« % d'enfants complètement vaccinés »* — fournir séparément les composants sous-jacents (BCG, Penta1, Rougeole 1, etc.).
+
 ### Quel est le format et la granularité requis ?
 
 Les données doivent être extraites pour chaque **indicateur d'intérêt**, au **niveau de l'établissement**, et à un pas de temps **mensuel** pour la **période d'analyse**.
@@ -164,6 +183,34 @@ L'approche FASTR se concentre sur les ajustements de la qualité des données af
 L'approche FASTR utilise des méthodes statistiques plus avancées, telles que l'analyse de régression, qui ne sont pas disponibles dans DHIS2. Alors que DHIS2 permet de tracer des tendances dans le temps à partir de données brutes, FASTR peut aller plus loin en identifiant les augmentations ou diminutions significatives du volume de services, en ajustant les problèmes de qualité des données, en tenant compte des variations saisonnières attendues et en comparant des périodes clés, par exemple avant et après une réforme.
 
 Le choix entre DHIS2 et l'approche FASTR doit être guidé par l'objectif spécifique de votre analyse. Sélectionnez l'outil qui correspond le mieux à vos besoins analytiques !
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_1a -->
+## Extraire des comptages, pas des pourcentages
+
+FASTR analyse des **comptages bruts de services** — le nombre réel de services déclarés par chaque établissement chaque mois. Il **n'accepte pas** de pourcentages, de proportions ou de chiffres de couverture pré-calculés.
+
+| À extraire | À **ne pas** extraire |
+|------------|------------------------|
+| Nombre de visites CPN1 par établissement et par mois | Taux de couverture CPN1 (%) |
+| Nombre de doses Penta1 administrées | Proportion de couverture vaccinale |
+| Nombre d'accouchements en établissement | Indicateurs de couverture pré-calculés |
+
+**Pourquoi ?**
+
+- On ne peut pas détecter une valeur aberrante sur un pourcentage — il est plafonné à 100 et masque le volume sous-jacent de l'établissement.
+- On ne peut pas additionner des pourcentages entre établissements de tailles différentes pour obtenir un total régional.
+- La plateforme calcule elle-même la couverture en divisant les comptages par les dénominateurs de population dans les **modules 5 et 6**.
+- Les ajustements pour valeurs aberrantes et complétude (**modules 1 et 2**) sont des méthodes statistiques qui exigent des comptages bruts.
+
+<!--
+PRESENTER NOTES:
+- C'est la règle la plus importante pour l'extraction des données
+- Erreur fréquente : extraire des « data elements » DHIS2 qui contiennent déjà la couverture en %
+- Toujours extraire le numérateur (comptage de services) — la plateforme s'occupe du reste
+- Si votre indicateur DHIS2 contient « taux », « % » ou « proportion », ce n'est pas le bon
+- Montrer un exemple concret aux participants : visites CPN1 (comptage) vs taux de couverture CPN1 (%)
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_1b -->
