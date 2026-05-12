@@ -854,10 +854,9 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
           dayNumber={editorDay}
           onClose={() => setShowSlideEditor(false)}
           onSave={(filename, _content, sessionName) => {
-            // Add the custom slide as a session to the day
+            // Add the custom slide as a session to the day (editable, not locked).
             addSession(editorDay, {
               session: sessionName,
-              type: 'section',
               slides: [`custom_slides/${filename}`],
               duration: 10,
             })

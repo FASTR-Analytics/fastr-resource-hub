@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#fff; color:#2C3E50; padding:60px 80px; box-sizing:border-box; position:relative; transform-origin:center;}
+  h1 { font-size:36px; font-weight:700; color:#09544F; margin:0 0 8px; padding-bottom:.2em; border-bottom:4px solid #D0CB17;}
+  .deck { font-size:13px; color:#7F8C8D; letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px;}
+  table { width:100%; border-collapse:separate; border-spacing:0; margin-top:18px; border:1px solid #DEE2E6; border-radius:8px; overflow:hidden; font-size:18px; table-layout:fixed;}
+  th { background:#09544F; color:#fff; text-align:left; padding:10px 14px; font-weight:600; border-bottom:2px solid #1F9A9C;}
+  td { padding:9px 14px; border-bottom:1px solid #DEE2E6; vertical-align:top;}
+  tr:last-child td { border-bottom:none;}
+  tbody tr:nth-child(even) td { background:rgba(31,154,156,.05);}
+  th:nth-child(1), td:nth-child(1) { width:14%;}
+  th:nth-child(3), td:nth-child(3) { width:22%;}
+  td .b { color:#0C716B; font-weight:600;}
+  .footer { position:absolute; bottom:24px; left:80px; right:80px; display:flex; justify-content:space-between; font-size:13px; color:#95A5A6;}
+  .footer img { height:24px; opacity:.6;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="deck">Day 1 · Agenda</div>
+  <h1>Agenda · Tuesday, 14 May</h1>
+  <table>
+    <thead><tr><th>Time</th><th>Session</th><th>Lead</th></tr></thead>
+    <tbody>
+      <tr><td>09:00</td><td><span class="b">Welcome &amp; opening</span> — introductions, expectations, meeting norms</td><td>GFF / MoH</td></tr>
+      <tr><td>09:45</td><td><span class="b">Why FASTR?</span> — the case for rapid-cycle analytics</td><td>FASTR team</td></tr>
+      <tr><td>10:45</td><td><em>Tea break</em></td><td>—</td></tr>
+      <tr><td>11:00</td><td><span class="b">Data extraction</span> — DHIS2 structure and the Data Downloader</td><td>Country tech leads</td></tr>
+      <tr><td>12:30</td><td><em>Lunch</em></td><td>—</td></tr>
+      <tr><td>14:00</td><td><span class="b">Data quality assessment</span> — hands-on with `hmis_ISO3.csv`</td><td>FASTR analysts</td></tr>
+      <tr><td>16:30</td><td><span class="b">Day 1 debrief</span> — sticky-note reflections, day 2 preview</td><td>Facilitators</td></tr>
+    </tbody>
+  </table>
+  <div class="footer"><img src="../assets/logos/FASTR_Primary_01_FullName.png"><span>03 / 32</span></div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

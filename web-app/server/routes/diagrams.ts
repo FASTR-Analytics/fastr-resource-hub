@@ -9,10 +9,13 @@ const __dirname = path.dirname(__filename)
 
 const router = Router()
 
-// Repo root (same logic as index.ts)
+// Repo root — matches every other route (`../../../..` in prod after compile,
+// `../../..` in dev). Pre-fix: only used `../..` here, which put SVGs in
+// `web-app/resources/` instead of `<repo>/resources/` and broke the image refs
+// in the generated slide markdown.
 const REPO_ROOT = process.env.NODE_ENV === 'production'
-  ? path.resolve(__dirname, '../../..')
-  : path.resolve(__dirname, '../..')
+  ? path.resolve(__dirname, '../../../..')
+  : path.resolve(__dirname, '../../..')
 
 // POST /api/diagrams/preview — generate SVG for live preview
 router.post('/preview', (req, res) => {

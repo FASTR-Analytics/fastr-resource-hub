@@ -86,6 +86,24 @@ function getChevronCircleStyle(color: string): { bg: string; stroke: string } {
   return CHEVRON_CIRCLE_STYLES[color] || { bg: '#f0f0f0', stroke: '#d0d0d0' }
 }
 
+/** Returns true if the value looks like plain text (not an emoji). */
+function isPlainText(v: string | undefined): boolean {
+  if (!v) return false
+  return v.length > 2 && /^[a-zA-Z0-9\s.,!?&\-\/]+$/.test(v)
+}
+
+/** Dynamic circle radius: grows for text, stays at defaultR for emoji. */
+function iconRadius(v: string | undefined, defaultR: number): number {
+  if (!v || !isPlainText(v)) return defaultR
+  return Math.max(defaultR, Math.min(defaultR * 1.8, v.length * 4 + 16))
+}
+
+/** Font size that shrinks for longer text. */
+function iconFontSize(v: string | undefined, defaultSize: number): number {
+  if (!v || !isPlainText(v)) return defaultSize
+  return Math.max(Math.round(defaultSize * 0.5), Math.min(defaultSize, Math.round(defaultSize * 2 / v.length * 2)))
+}
+
 // ── 1. Stepper ─────────────────────────────────────────────────────────────
 
 function generateStepper(items: StepperItem[]): string {
@@ -144,25 +162,35 @@ function generateChevron(items: ChevronItem[]): string {
   }
   svg += '  </defs>\n'
 
+  // Calculate per-row circle radius
+  const defaultChevronR = 34
+  const chevronRadii = items.map(item => iconRadius(item.emoji, defaultChevronR))
+  const maxChevronR = Math.max(...chevronRadii)
+  const circleCx = Math.max(56, maxChevronR + 4)
+  const textStartX = circleCx + maxChevronR + 10
+
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const color = item.color || CHEVRON_COLORS[i % CHEVRON_COLORS.length]
     const circleStyle = getChevronCircleStyle(color)
+    const r = chevronRadii[i]
 
     svg += `  <g transform="translate(0, ${i * 86})">\n`
     // Chevron bar
-    svg += `    <rect x="56" y="4" width="744" height="72" fill="${esc(color)}" clip-path="url(#cc${i})"/>\n`
+    svg += `    <rect x="${circleCx}" y="4" width="${800 - circleCx - 4}" height="72" fill="${esc(color)}" clip-path="url(#cc${i})"/>\n`
     // Icon circle
-    svg += `    <circle cx="56" cy="40" r="34" fill="${circleStyle.bg}" stroke="${circleStyle.stroke}" stroke-width="1"/>\n`
-    // Emoji
+    svg += `    <circle cx="${circleCx}" cy="40" r="${r}" fill="${circleStyle.bg}" stroke="${circleStyle.stroke}" stroke-width="1"/>\n`
+    // Icon (emoji or text)
     if (item.emoji) {
-      svg += `    <text x="56" y="40" text-anchor="middle" dominant-baseline="central" font-size="22">${esc(item.emoji)}</text>\n`
+      const fs = iconFontSize(item.emoji, 22)
+      const textish = isPlainText(item.emoji)
+      svg += `    <text x="${circleCx}" y="40" text-anchor="middle" dominant-baseline="central" font-size="${fs}" ${textish ? `font-weight="700" fill="${circleStyle.stroke}"` : ''}>${esc(item.emoji)}</text>\n`
     }
     // Line 1
-    svg += `    <text x="100" y="36" font-size="14.5" fill="white">${esc(item.line1)}</text>\n`
+    svg += `    <text x="${textStartX}" y="36" font-size="14.5" fill="white">${esc(item.line1)}</text>\n`
     // Line 2
     if (item.line2) {
-      svg += `    <text x="100" y="56" font-size="14.5" fill="white">${esc(item.line2)}</text>\n`
+      svg += `    <text x="${textStartX}" y="56" font-size="14.5" fill="white">${esc(item.line2)}</text>\n`
     }
     svg += '  </g>\n'
   }
@@ -187,13 +215,17 @@ function generateCards(cards: CardItem[]): string {
     const card = cards[i]
     const color = card.color || CARD_COLORS[i % CARD_COLORS.length]
 
+    const cardR = iconRadius(card.emoji, 22)
+    const cardCenterX = 78
+
     svg += `  <g transform="translate(${15 + i * 170}, 15)">\n`
     // Card background
     svg += `    <rect width="155" height="260" rx="10" fill="${BRAND.bg}" filter="url(#shadow)"/>\n`
     // Header circle
-    svg += `    <circle cx="78" cy="40" r="22" fill="${esc(color)}"/>\n`
-    // Emoji
-    svg += `    <text x="78" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="18">${esc(card.emoji)}</text>\n`
+    svg += `    <circle cx="${cardCenterX}" cy="40" r="${cardR}" fill="${esc(color)}"/>\n`
+    // Icon (emoji or text)
+    const cardFs = iconFontSize(card.emoji, 18)
+    svg += `    <text x="${cardCenterX}" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="${cardFs}" ${isPlainText(card.emoji) ? 'font-weight="700"' : ''}>${esc(card.emoji)}</text>\n`
     // Title
     svg += `    <text x="78" y="80" text-anchor="middle" fill="${BRAND.dark}" font-size="13" font-weight="700">${esc(card.title)}</text>\n`
     // Divider
@@ -237,49 +269,60 @@ function generateComparison(left: ComparisonSide, right: ComparisonSide): string
   const leftSymbol = left.symbol || '\u2717'
   const rightSymbol = right.symbol || '\u2713'
 
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" font-family="Inter, sans-serif">\n`
+  const CARD_W = 300
+  const CARD_H = 270
+  const GAP = 50
+  const PAD = 20
+  const totalW = PAD + CARD_W + GAP + CARD_W + PAD
+  const centerX = CARD_W / 2
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${CARD_H + 40}" font-family="Inter, sans-serif">\n`
   svg += `  ${SHADOW_FILTER}\n`
 
   // ── Left card ──
-  svg += '  <g transform="translate(20, 15)">\n'
-  svg += `    <rect width="200" height="270" rx="10" fill="${BRAND.redBg}" filter="url(#shadow)"/>\n`
-  svg += `    <circle cx="100" cy="40" r="22" fill="${BRAND.red}"/>\n`
-  svg += `    <text x="100" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="16">${esc(leftSymbol)}</text>\n`
-  svg += `    <text x="100" y="75" text-anchor="middle" fill="${BRAND.red}" font-size="13" font-weight="700">${esc(left.title)}</text>\n`
-  svg += `    <line x1="20" y1="90" x2="180" y2="90" stroke="${BRAND.redAccent}" stroke-width="1.5"/>\n`
+  svg += `  <g transform="translate(${PAD}, 15)">\n`
+  svg += `    <rect width="${CARD_W}" height="${CARD_H}" rx="10" fill="${BRAND.redBg}" filter="url(#shadow)"/>\n`
+  svg += `    <circle cx="${centerX}" cy="40" r="22" fill="${BRAND.red}"/>\n`
+  svg += `    <text x="${centerX}" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="16">${esc(leftSymbol)}</text>\n`
+  svg += `    <text x="${centerX}" y="75" text-anchor="middle" fill="${BRAND.red}" font-size="13" font-weight="700">${esc(left.title)}</text>\n`
+  svg += `    <line x1="20" y1="90" x2="${CARD_W - 20}" y2="90" stroke="${BRAND.redAccent}" stroke-width="1.5"/>\n`
 
   let leftItemStartY = 130
   if (left.quote) {
-    svg += `    <text x="100" y="110" text-anchor="middle" fill="${BRAND.text}" font-size="11" font-style="italic">${esc(left.quote)}</text>\n`
+    svg += `    <text x="${centerX}" y="110" text-anchor="middle" fill="${BRAND.text}" font-size="11" font-style="italic">${esc(left.quote)}</text>\n`
     leftItemStartY = 130
   }
 
   const leftItems = left.items || []
   for (let i = 0; i < leftItems.length; i++) {
     const y = leftItemStartY + i * 20
-    svg += `    <text x="20" y="${y}" fill="${BRAND.text}" font-size="9">\u2022 ${esc(leftItems[i])}</text>\n`
+    svg += `    <text x="20" y="${y}" fill="${BRAND.text}" font-size="9.5">\u2022 ${esc(leftItems[i])}</text>\n`
   }
 
   if (left.footer) {
-    svg += `    <text x="100" y="250" text-anchor="middle" fill="${BRAND.red}" font-size="9.5" font-weight="600">${esc(left.footer)}</text>\n`
+    svg += `    <text x="${centerX}" y="250" text-anchor="middle" fill="${BRAND.red}" font-size="9.5" font-weight="600">${esc(left.footer)}</text>\n`
   }
   svg += '  </g>\n'
 
   // ── Arrow between cards ──
-  svg += `  <line x1="230" y1="155" x2="255" y2="155" stroke="${BRAND.dark}" stroke-width="2.5"/>\n`
-  svg += `  <polyline points="250,148 260,155 250,162" fill="${BRAND.dark}"/>\n`
+  const arrowX1 = PAD + CARD_W + 5
+  const arrowX2 = PAD + CARD_W + GAP - 5
+  const arrowY = 15 + CARD_H / 2
+  svg += `  <line x1="${arrowX1}" y1="${arrowY}" x2="${arrowX2}" y2="${arrowY}" stroke="${BRAND.dark}" stroke-width="2.5"/>\n`
+  svg += `  <polyline points="${arrowX2 - 8},${arrowY - 7} ${arrowX2},${arrowY} ${arrowX2 - 8},${arrowY + 7}" fill="${BRAND.dark}"/>\n`
 
   // ── Right card ──
-  svg += '  <g transform="translate(270, 15)">\n'
-  svg += `    <rect width="410" height="270" rx="10" fill="${BRAND.bg}" filter="url(#shadow)"/>\n`
-  svg += `    <circle cx="205" cy="40" r="22" fill="${BRAND.dark}"/>\n`
-  svg += `    <text x="205" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="16">${esc(rightSymbol)}</text>\n`
-  svg += `    <text x="205" y="75" text-anchor="middle" fill="${BRAND.dark}" font-size="13" font-weight="700">${esc(right.title)}</text>\n`
-  svg += `    <line x1="20" y1="90" x2="390" y2="90" stroke="${BRAND.accent}" stroke-width="1.5"/>\n`
+  const rightX = PAD + CARD_W + GAP
+  svg += `  <g transform="translate(${rightX}, 15)">\n`
+  svg += `    <rect width="${CARD_W}" height="${CARD_H}" rx="10" fill="${BRAND.bg}" filter="url(#shadow)"/>\n`
+  svg += `    <circle cx="${centerX}" cy="40" r="22" fill="${BRAND.dark}"/>\n`
+  svg += `    <text x="${centerX}" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="16">${esc(rightSymbol)}</text>\n`
+  svg += `    <text x="${centerX}" y="75" text-anchor="middle" fill="${BRAND.dark}" font-size="13" font-weight="700">${esc(right.title)}</text>\n`
+  svg += `    <line x1="20" y1="90" x2="${CARD_W - 20}" y2="90" stroke="${BRAND.accent}" stroke-width="1.5"/>\n`
 
   let rightItemStartY = 130
   if (right.quote) {
-    svg += `    <text x="205" y="110" text-anchor="middle" fill="${BRAND.text}" font-size="11" font-style="italic">${esc(right.quote)}</text>\n`
+    svg += `    <text x="${centerX}" y="110" text-anchor="middle" fill="${BRAND.text}" font-size="11" font-style="italic">${esc(right.quote)}</text>\n`
     rightItemStartY = 130
   }
 
@@ -290,7 +333,7 @@ function generateComparison(left: ComparisonSide, right: ComparisonSide): string
   }
 
   if (right.footer) {
-    svg += `    <text x="205" y="250" text-anchor="middle" fill="${BRAND.dark}" font-size="9.5" font-weight="600">${esc(right.footer)}</text>\n`
+    svg += `    <text x="${centerX}" y="250" text-anchor="middle" fill="${BRAND.dark}" font-size="9.5" font-weight="600">${esc(right.footer)}</text>\n`
   }
   svg += '  </g>\n'
 
@@ -443,37 +486,56 @@ function generateHub(center: HubSpoke, spokes: HubSpoke[]): string {
   const W = Math.max(800, n * 160 + 80)
   const cx = W / 2
 
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} 360" font-family="Inter, sans-serif">\n`
+  // Pre-compute radii to determine viewBox height
+  const _centerR = iconRadius(center.emoji, 44)
+  const _spokeRadii = spokes.map(s => iconRadius(s.emoji, 36))
+  const _maxSpokeR = Math.max(..._spokeRadii)
+  const _centerY = 20 + _centerR
+  const _spokeY = _centerY + _centerR + 60 + _maxSpokeR
+  const H = _spokeY + _maxSpokeR + 50
+
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="Inter, sans-serif">\n`
   svg += `  ${SHADOW_FILTER}\n`
+
+  // Dynamic radii
+  const centerR = iconRadius(center.emoji, 44)
+  const spokeRadii = spokes.map(s => iconRadius(s.emoji, 36))
+  const maxSpokeR = Math.max(...spokeRadii)
+
+  const centerY = 20 + centerR
+  const spokeY = centerY + centerR + 60 + maxSpokeR
 
   // Lines from center to spokes (draw first so they appear behind circles)
   for (let i = 0; i < n; i++) {
     const spokeX = W / (n + 1) * (i + 1)
-    svg += `  <line x1="${cx}" y1="${80 + 44}" x2="${spokeX}" y2="${240 - 36}" stroke="${BRAND.accent}" stroke-width="2"/>\n`
+    svg += `  <line x1="${cx}" y1="${centerY + centerR}" x2="${spokeX}" y2="${spokeY - spokeRadii[i]}" stroke="${BRAND.accent}" stroke-width="2"/>\n`
   }
 
   // Center node
-  svg += `  <circle cx="${cx}" cy="80" r="44" fill="${BRAND.bg}" stroke="${BRAND.dark}" stroke-width="2" filter="url(#shadow)"/>\n`
+  svg += `  <circle cx="${cx}" cy="${centerY}" r="${centerR}" fill="${BRAND.bg}" stroke="${BRAND.dark}" stroke-width="2" filter="url(#shadow)"/>\n`
   if (center.emoji) {
-    svg += `  <text x="${cx}" y="80" text-anchor="middle" dominant-baseline="central" font-size="26">${esc(center.emoji)}</text>\n`
+    const centerFs = iconFontSize(center.emoji, 26)
+    svg += `  <text x="${cx}" y="${centerY}" text-anchor="middle" dominant-baseline="central" font-size="${centerFs}" ${isPlainText(center.emoji) ? `font-weight="700" fill="${BRAND.dark}"` : ''}>${esc(center.emoji)}</text>\n`
   }
-  svg += `  <text x="${cx}" y="140" text-anchor="middle" fill="${BRAND.dark}" font-size="14" font-weight="700">${esc(center.label)}</text>\n`
+  svg += `  <text x="${cx}" y="${centerY + centerR + 20}" text-anchor="middle" fill="${BRAND.dark}" font-size="14" font-weight="700">${esc(center.label)}</text>\n`
   if (center.description) {
-    svg += `  <text x="${cx}" y="158" text-anchor="middle" fill="${BRAND.text}" font-size="10">${esc(center.description)}</text>\n`
+    svg += `  <text x="${cx}" y="${centerY + centerR + 38}" text-anchor="middle" fill="${BRAND.text}" font-size="10">${esc(center.description)}</text>\n`
   }
 
   // Spoke nodes
   for (let i = 0; i < n; i++) {
     const spoke = spokes[i]
     const spokeX = W / (n + 1) * (i + 1)
+    const sr = spokeRadii[i]
 
-    svg += `  <circle cx="${spokeX}" cy="240" r="36" fill="${BRAND.bg}" stroke="${BRAND.medium}" stroke-width="1.5" filter="url(#shadow)"/>\n`
+    svg += `  <circle cx="${spokeX}" cy="${spokeY}" r="${sr}" fill="${BRAND.bg}" stroke="${BRAND.medium}" stroke-width="1.5" filter="url(#shadow)"/>\n`
     if (spoke.emoji) {
-      svg += `  <text x="${spokeX}" y="240" text-anchor="middle" dominant-baseline="central" font-size="22">${esc(spoke.emoji)}</text>\n`
+      const spokeFs = iconFontSize(spoke.emoji, 22)
+      svg += `  <text x="${spokeX}" y="${spokeY}" text-anchor="middle" dominant-baseline="central" font-size="${spokeFs}" ${isPlainText(spoke.emoji) ? `font-weight="700" fill="${BRAND.medium}"` : ''}>${esc(spoke.emoji)}</text>\n`
     }
-    svg += `  <text x="${spokeX}" y="290" text-anchor="middle" fill="${BRAND.dark}" font-size="11" font-weight="700">${esc(spoke.label)}</text>\n`
+    svg += `  <text x="${spokeX}" y="${spokeY + sr + 16}" text-anchor="middle" fill="${BRAND.dark}" font-size="11" font-weight="700">${esc(spoke.label)}</text>\n`
     if (spoke.description) {
-      svg += `  <text x="${spokeX}" y="308" text-anchor="middle" fill="${BRAND.text}" font-size="9">${esc(spoke.description)}</text>\n`
+      svg += `  <text x="${spokeX}" y="${spokeY + sr + 34}" text-anchor="middle" fill="${BRAND.text}" font-size="9">${esc(spoke.description)}</text>\n`
     }
   }
 

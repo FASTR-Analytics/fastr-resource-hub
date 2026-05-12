@@ -23,13 +23,10 @@ import {
   Target,
   MessageSquare,
   BookOpen,
-  Upload,
   Trash2,
   Loader2,
   RefreshCw,
   GripVertical,
-  PenLine,
-  Shapes,
 } from 'lucide-react'
 
 export interface Topic {
@@ -100,7 +97,7 @@ interface ContentLibraryProps {
   onImportSlides?: () => void
 }
 
-export function ContentLibrary({ onImportSlides }: ContentLibraryProps = {}) {
+export function ContentLibrary({ onImportSlides: _onImportSlides }: ContentLibraryProps = {}) {
   const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage, loadContentLibrary } = useWorkshopStore()
   const { showToast } = useToast()
   const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
@@ -482,44 +479,19 @@ We resume at **[time]**`
 
   return (
     <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="flex items-center border-b border-gray-200 px-3 py-2 gap-2">
-        {onImportSlides && (
+      {/* Admin-only rebuild button (?dev=1) */}
+      {typeof window !== 'undefined' && window.location.search.includes('dev=1') && (
+        <div className="flex justify-end border-b border-slate-200 px-3 py-1.5">
           <button
-            onClick={onImportSlides}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+            onClick={handleRebuildContent}
+            disabled={isRebuilding}
+            title="Rebuild content from methodology files"
+            className="p-1.5 text-slate-400 hover:text-fastr-primary hover:bg-slate-50 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Upload className="w-3.5 h-3.5" />
-            {t('importSlides', contentLanguage)}
+            <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
           </button>
-        )}
-        <button
-          onClick={() => setShowDiagramBuilder(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors"
-        >
-          <Shapes className="w-3.5 h-3.5" />
-          {t('createDiagram', contentLanguage)}
-        </button>
-        {currentWorkshopId && (
-          <button
-            onClick={() => setShowSlideCreator(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors"
-            data-tour="toolbar-create-slide"
-          >
-            <PenLine className="w-3.5 h-3.5" />
-            {t('createSlide', contentLanguage)}
-          </button>
-        )}
-        <div className="flex-1" />
-        <button
-          onClick={handleRebuildContent}
-          disabled={isRebuilding}
-          title="Rebuild content from methodology files"
-          className="p-1.5 text-gray-400 hover:text-fastr-primary hover:bg-gray-50 rounded transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
-        </button>
-      </div>
+        </div>
+      )}
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto">
@@ -1156,7 +1128,7 @@ We resume at **[time]**`
           onSave={(filename, _content, sessionName) => {
             addSession(1, {
               session: sessionName,
-              type: 'section',
+              // Custom slides are editable, not locked section dividers.
               slides: [`custom_slides/${filename}`],
               duration: 10,
             })

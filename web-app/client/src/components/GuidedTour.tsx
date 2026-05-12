@@ -8,7 +8,6 @@ export interface GuidedTourHandle {
 }
 
 interface PanelControls {
-  setLeftPanelOpen: (open: boolean) => void
   setRightPanelOpen: (open: boolean) => void
 }
 
@@ -30,50 +29,50 @@ function injectTheme() {
   style.id = FASTR_THEME_ID
   style.textContent = `
     .driver-popover {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      background-color: var(--bg-1);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
       max-width: 340px;
     }
     .driver-popover .driver-popover-title {
       font-size: 16px;
       font-weight: 600;
-      color: #09544F;
+      color: var(--fastr-web-primary);
     }
     .driver-popover .driver-popover-description {
-      font-size: 14px;
-      color: #4B5563;
-      line-height: 1.5;
+      font-size: var(--w-body-sm);
+      color: #475569; /* slate-600 */
+      line-height: var(--lh-cozy);
     }
     .driver-popover .driver-popover-progress-text {
-      font-size: 12px;
-      color: #9CA3AF;
+      font-size: var(--w-caption);
+      color: #94A3B8; /* slate-400 */
     }
     .driver-popover-prev-btn {
-      background-color: #E8F4F3;
-      color: #09544F;
+      background-color: var(--fastr-web-light);
+      color: var(--fastr-web-primary);
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 6px 16px;
-      font-size: 13px;
+      font-size: var(--w-body-sm);
       font-weight: 500;
     }
     .driver-popover-prev-btn:hover {
-      background-color: #CAE6E9;
+      background-color: #D6E8F2; /* slightly darker fastr-web-light */
     }
     .driver-popover-next-btn,
     .driver-popover-close-btn-text {
-      background-color: #09544F;
+      background-color: var(--fastr-web-primary);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 6px 16px;
-      font-size: 13px;
+      font-size: var(--w-body-sm);
       font-weight: 500;
     }
     .driver-popover-next-btn:hover,
     .driver-popover-close-btn-text:hover {
-      background-color: #0C716B;
+      background-color: var(--fastr-web-primary-dark);
     }
   `
   document.head.appendChild(style)
@@ -82,12 +81,12 @@ function injectTheme() {
 function buildLandingSteps(language: Language, workshopCount: number): DriveStep[] {
   const steps: DriveStep[] = [
     {
-      element: '[data-tour="landing-cards"]',
+      element: '[data-tour="new-workshop"]',
       popover: {
         title: t('tourLandingCardsTitle', language),
         description: t('tourLandingCardsDesc', language),
         side: 'bottom',
-        align: 'center',
+        align: 'end',
       },
     },
   ]
@@ -129,25 +128,15 @@ function buildBuilderSteps(language: Language, panelControls?: PanelControls): D
       },
     },
     {
-      element: '[data-tour="add-session-btn"]',
+      element: '[data-tour="add-content-btn"]',
       popover: {
         title: t('tourAddSessionTitle', language),
         description: t('tourAddSessionDesc', language),
         side: 'top',
         align: 'center',
       },
-    },
-    {
-      element: '[data-tour="toolbar-slides"]',
-      popover: {
-        title: t('tourSlidesTitle', language),
-        description: t('tourSlidesDesc', language),
-        side: 'bottom',
-        align: 'start',
-      },
       onHighlightStarted: () => {
         panelControls?.setRightPanelOpen(false)
-        panelControls?.setLeftPanelOpen(true)
       },
     },
     {
@@ -159,7 +148,6 @@ function buildBuilderSteps(language: Language, panelControls?: PanelControls): D
         align: 'start',
       },
       onHighlightStarted: () => {
-        panelControls?.setLeftPanelOpen(false)
         panelControls?.setRightPanelOpen(true)
       },
     },
@@ -211,7 +199,6 @@ export const GuidedTour = forwardRef<GuidedTourHandle, GuidedTourProps>(
           localStorage.setItem(TOUR_SEEN_KEY(tour), 'true')
           // Close any panels that the tour may have opened
           if (tour === 'builder') {
-            panelControls?.setLeftPanelOpen(false)
             panelControls?.setRightPanelOpen(false)
           }
         },

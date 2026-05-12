@@ -673,24 +673,23 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
           )}
         </div>
 
-        {/* Asset Picker Modal */}
+        {/* Asset Picker — side panel inside the editor, not a stacked modal */}
         {showAssetPicker && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center p-8 z-10">
-            <div className="bg-gray-800 rounded-xl w-full max-w-2xl max-h-[80%] flex flex-col">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <Image className="w-5 h-5" />
-                  Insert Image
-                </h3>
-                <button
-                  onClick={() => setShowAssetPicker(false)}
-                  className="p-1 text-gray-400 hover:text-white hover:bg-gray-700 rounded"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+          <div className="absolute top-0 right-0 bottom-0 w-96 bg-gray-800 border-l border-gray-700 shadow-xl flex flex-col z-10">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
+              <h3 className="font-semibold text-white flex items-center gap-2">
+                <Image className="w-5 h-5" />
+                Insert Image
+              </h3>
+              <button
+                onClick={() => setShowAssetPicker(false)}
+                className="p-1 text-gray-400 hover:text-white hover:bg-gray-700 rounded"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-              <div className="flex-1 overflow-auto p-4">
+            <div className="flex-1 overflow-auto p-4">
                 {/* Upload area */}
                 <div
                   className="border-2 border-dashed border-gray-600 rounded-lg p-4 mb-4 text-center hover:border-gray-500 transition-colors"
@@ -805,14 +804,13 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                 )}
               </div>
 
-              <div className="px-4 py-3 border-t border-gray-700 text-right">
-                <button
-                  onClick={() => { setSelectedAsset(null); setShowAssetPicker(false) }}
-                  className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
+            <div className="px-4 py-3 border-t border-gray-700 text-right">
+              <button
+                onClick={() => { setSelectedAsset(null); setShowAssetPicker(false) }}
+                className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         )}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#fff; padding:48px 64px 36px; box-sizing:border-box; position:relative; transform-origin:center; color:#2C3E50; display:flex; flex-direction:column;}
+  .head { display:flex; align-items:baseline; gap:18px; border-bottom:4px solid #D0CB17; padding-bottom:12px; margin-bottom:18px;}
+  h1 { font-size:36px; font-weight:700; color:#09544F; margin:0;}
+  .deck { font-size:12px; color:#7F8C8D; letter-spacing:.18em; text-transform:uppercase; margin-left:auto;}
+  .lede { font-size:18px; color:#2C3E50; line-height:1.45; margin:0 0 16px; max-width:1080px;}
+  .lede em { color:#0C716B; font-style:normal; font-weight:600;}
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:24px; flex:1; min-height:0;}
+  .panel { background:#F8F9FA; border-radius:10px; padding:22px 26px 20px; border-left:5px solid #1F9A9C; display:flex; flex-direction:column;}
+  .panel.right { border-left-color:#7A1F6E;}
+  .ribbon { display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .ribbon b { font-size:22px; color:#0C716B; font-weight:700; letter-spacing:-.01em;}
+  .panel.right .ribbon b { color:#7A1F6E;}
+  .ribbon .sub { font-size:13px; color:#7F8C8D; font-style:italic;}
+  .panel p { margin:0 0 12px; font-size:16px; line-height:1.45;}
+  ul { padding-left:22px; margin:6px 0 14px;}
+  li { font-size:16px; margin-bottom:7px; line-height:1.4;}
+  li::marker { color:#D0CB17;}
+  .panel.right li::marker { color:#BD5091;}
+  li strong { color:#0C716B;}
+  .panel.right li strong { color:#7A1F6E;}
+  .pillrow { display:flex; gap:8px; margin-top:auto; padding-top:10px;}
+  .pill { font-size:11px; font-weight:600; padding:4px 10px; border-radius:9999px; background:rgba(31,154,156,.15); color:#0C716B; letter-spacing:.02em;}
+  .panel.right .pill { background:rgba(122,31,110,.12); color:#7A1F6E;}
+  .footer { position:absolute; bottom:14px; left:64px; right:64px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#95A5A6;}
+  .footer img { height:20px; opacity:.55;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="head">
+    <h1>HMIS vs. HFA &mdash; two views, one country</h1>
+    <span class="deck">Module 4 · Sources</span>
+  </div>
+  <p class="lede">You will hear both acronyms all week. They sound interchangeable but they answer <em>different questions</em>, on <em>different cadences</em>, with <em>different uncertainties</em>. Use them together.</p>
+  <div class="two">
+    <div class="panel">
+      <div class="ribbon"><b>HMIS</b><span class="sub">routine, monthly, what was delivered</span></div>
+      <p>Facility-level records reported every cycle through DHIS2. The workhorse of rapid-cycle monitoring.</p>
+      <ul>
+        <li><strong>High cadence</strong> — monthly, full coverage of registered facilities</li>
+        <li><strong>Quality varies</strong> — completeness and outliers must be checked first</li>
+        <li><strong>Captures volume</strong> — visits, doses, deliveries</li>
+        <li><strong>Misses readiness</strong> — staffing, stock-outs, training</li>
+      </ul>
+      <div class="pillrow"><span class="pill">DHIS2 export</span><span class="pill">Monthly</span><span class="pill">~1 200 facilities</span></div>
+    </div>
+    <div class="panel right">
+      <div class="ribbon"><b>HFA</b><span class="sub">periodic, sampled, what could be delivered</span></div>
+      <p>A survey round at sampled facilities. Slower, but adds the context HMIS alone cannot give you.</p>
+      <ul>
+        <li><strong>Annual or biennial</strong> — sampled, not census</li>
+        <li><strong>Captures readiness</strong> — staffing, supplies, supervision</li>
+        <li><strong>Anchors trust</strong> — calibrates the HMIS signal</li>
+        <li><strong>Misses month-to-month</strong> change</li>
+      </ul>
+      <div class="pillrow"><span class="pill">HFA round 4</span><span class="pill">2024</span><span class="pill">n = 312</span></div>
+    </div>
+  </div>
+  <div class="footer"><img src="../assets/logos/FASTR_Primary_01_FullName.png"><span>22 / 32</span></div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

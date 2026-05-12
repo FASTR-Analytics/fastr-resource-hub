@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+  :root { --w:1280px; --h:720px; }
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:var(--w); height:var(--h); background:#fff; position:relative; overflow:hidden; transform-origin:center;}
+
+  /* TITLE / COVER slide */
+  .cover { background:#0C716B; color:#fff; padding:60px 80px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-end;}
+  .cover .gff { position:absolute; top:48px; left:80px; height:38px;}
+  .cover .fastr { position:absolute; top:48px; right:80px; height:52px;}
+  .cover .arcs { position:absolute; right:0; bottom:0; width:60%; height:80%; pointer-events:none;}
+  .cover h1 { font-size:64px; font-weight:700; margin:0 0 .2em; line-height:1.05; max-width:880px; border-bottom:4px solid #D0CB17; padding-bottom:.25em;}
+  .cover .sub { font-size:24px; font-weight:500; opacity:.95; margin:.4em 0;}
+  .cover .meta { font-size:20px; opacity:.85; margin-top:.6em;}
+  .cover .meta i { color:#D0CB17; font-style:normal;}
+</style>
+</head><body>
+<div class="stage"><div class="slide cover">
+  <img src="../assets/logos/GFF_Logo_Horizontal_White_En.png" class="gff" alt="GFF">
+  <img src="../assets/logos/FASTR_White_Horiz.png" class="fastr" alt="FASTR">
+  <svg class="arcs" viewBox="0 0 600 600" preserveAspectRatio="xMaxYMax slice">
+    <defs>
+      <pattern id="arc" patternUnits="userSpaceOnUse" x="600" y="600" width="600" height="600">
+        <g fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2">
+          <circle cx="600" cy="600" r="90"/><circle cx="600" cy="600" r="140"/><circle cx="600" cy="600" r="190"/>
+          <circle cx="600" cy="600" r="240"/><circle cx="600" cy="600" r="290"/><circle cx="600" cy="600" r="340"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="600" height="600" fill="rgba(0,0,0,.06)" style="clip-path: inset(40% 0 0 40%);"/>
+    <g style="opacity:.55">
+      <circle cx="600" cy="600" r="100" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="160" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="220" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="280" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="340" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="400" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+      <circle cx="600" cy="600" r="460" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+    </g>
+    <rect x="430" y="430" width="170" height="170" fill="#0a5e58"/>
+  </svg>
+  <h1>Rapid-cycle analytics for RMNCAH-N</h1>
+  <div class="sub"><strong>FASTR learning exchange · Day 1</strong></div>
+  <div class="meta"><i>Kigali, Rwanda</i> &nbsp; · &nbsp; 14 May 2026</div>
+</div></div>
+<script>
+  // Scale 1280x720 into viewport
+  function fit(){ const s=document.querySelector('.slide'); const w=innerWidth, h=innerHeight; const k=Math.min(w/1280,h/720); s.style.transform=`scale(${k})`; }
+  addEventListener('resize',fit); fit();
+</script>
+</body></html>

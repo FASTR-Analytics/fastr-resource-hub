@@ -1,15 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { createPortal } from 'react-dom'
 import { useWorkshopStore, Session } from './stores/workshop'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
-import { ContentLibrary } from './components/ContentLibrary'
 import { SlideImportWizard } from './components/SlideImportWizard'
 import { GuidedTour, type GuidedTourHandle } from './components/GuidedTour'
 import { HelpButton } from './components/HelpButton'
-import { StorageManager } from './components/StorageManager'
 import {
   Layers,
   BookOpen,
@@ -24,28 +21,22 @@ import {
   RefreshCw,
   FileText,
   Presentation,
-  GripVertical,
-  Pencil,
   Lock,
   Unlock,
   Plus,
   Trash2,
-  Pin,
-  PinOff,
   ArrowLeft,
   Folder,
   FolderOpen,
-  LogOut,
   KeyRound,
   Search,
   Users,
-  Coffee,
-  UtensilsCrossed,
   AlertTriangle,
-  ArrowRightLeft,
   Upload,
-  HardDrive,
   Monitor,
+  AlignJustify,
+  Circle,
+  Square,
 } from 'lucide-react'
 import {
   DndContext,
@@ -55,7 +46,6 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  useDroppable,
   DragEndEvent,
   DragStartEvent,
   DragOverlay,
@@ -64,963 +54,35 @@ import {
 import {
   SortableContext,
   sortableKeyboardCoordinates,
-  useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
 import type { Module as LibraryModule, Topic as LibraryTopic } from './components/ContentLibrary'
+import { SortableSessionCard, DroppableDayColumn } from './features/workshop-builder/SessionCard'
+import { EditSessionModal } from './features/workshop-builder/EditSessionModal'
+import { Modal } from './components/ui/Modal'
+import { AddContentDrawer } from './features/workshop-builder/AddContentDrawer'
+import { SettingsPage } from './features/settings/SettingsPage'
+import { AppShell, type SidebarNavId } from './features/app-shell/AppShell'
 
-// Session type colors and icons
-const sessionTypeConfig: Record<string, { bg: string; border: string; icon: string; iconType?: string }> = {
-  break: { bg: 'bg-amber-50', border: 'border-amber-200', icon: '☕', iconType: 'coffee' },
-  day_title: { bg: 'bg-gray-100', border: 'border-gray-200', icon: '📅' },
-  day_end: { bg: 'bg-purple-50', border: 'border-purple-200', icon: '🏁' },
-  day_recap: { bg: 'bg-green-50', border: 'border-green-200', icon: '📋' },
-  section: { bg: 'bg-gray-50', border: 'border-gray-200', icon: '📑' },
-}
+// SortableSessionCard, DroppableDayColumn, isSessionLocked, and session type
+// chrome live in `features/workshop-builder/SessionCard.tsx`.
 
-// Compulsory slides that are locked (can't be moved or deleted)
-// These are identified by their slide templates or session types
-const compulsorySlides = [
-  'title_slide.md',
-  'welcome_slide.md',
-  'introductions_slide.md',
-  'objectives_slide.md',
-  'expectations_slide.md',
-  'expected_outputs_slide.md',
-  'day_title.md',
-  'day_end.md',
-]
-const compulsoryTypes = ['day_title', 'day_end', 'day_recap', 'section']
+// EditSessionModal extracted to `features/workshop-builder/EditSessionModal.tsx`.
 
-// Check if a session is compulsory/locked
-function isSessionLocked(session: Session): boolean {
-  // Check by type
-  if (session.type && compulsoryTypes.includes(session.type)) return true
-  // Check by slide template
-  if (session.slides?.some(s => compulsorySlides.includes(s))) return true
-  // Check by session name patterns
-  const name = session.session?.toLowerCase() || ''
-  if (name.includes('agenda') || name.includes('objectives') || name.includes('expectations') ||
-      name.includes('expected outputs') || name.includes('introductions') ||
-      name.includes('welcome') || name.includes('recap')) return true
-  return false
-}
-
-interface SortableSessionCardProps {
-  session: Session & { _id: string; _startTime?: string; _endTime?: string }
-  index: number
-  dayNum: number
-  totalDays: number
-  onEdit: (session: Session, dayNum: number, index: number) => void
-  onMoveToDay: (fromDay: number, fromIdx: number, toDay: number) => void
-}
-
-function SortableSessionCard({ session, index, dayNum, totalDays, onEdit, onMoveToDay }: SortableSessionCardProps) {
-  const [showMoveMenu, setShowMoveMenu] = useState(false)
-  const { contentLanguage } = useWorkshopStore()
-  const isLocked = isSessionLocked(session)
-  const config = session.module
-    ? { bg: 'bg-blue-50', border: 'border-blue-200', icon: '📘', iconType: 'book' }
-    : sessionTypeConfig[session.type || ''] || { bg: 'bg-white', border: 'border-gray-200', icon: '📝' }
-
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: session._id,
-    disabled: isLocked,
-    data: { type: 'session', dayNum },
-  })
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  }
-
-  // Locked sessions are shown as compact, grayed-out items
-  if (isLocked) {
-    return (
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-gray-100 border border-gray-200 opacity-60">
-        <span className="text-xs font-mono text-gray-400 w-12 flex-shrink-0">{session._startTime || ''}</span>
-        <Lock className="w-3 h-3 text-gray-400 flex-shrink-0" />
-        <span className="text-xs text-gray-500 truncate flex-1">{session.session}</span>
-        {session.duration && session.duration > 0 && (
-          <span className="text-xs text-gray-400 flex-shrink-0">{session.duration}m</span>
-        )}
-      </div>
-    )
-  }
-
-  // Editable sessions get full card treatment
-  return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className={`group relative p-3 rounded-lg border shadow-sm hover:shadow-md transition-all ${config.bg} ${config.border} ${
-        isDragging ? 'opacity-80 scale-[1.02] shadow-lg ring-2 ring-fastr-secondary z-50' : ''
-      }`}
-    >
-      {/* Drag handle */}
-      <div className="absolute left-1 top-1/2 -translate-y-1/2">
-        <div
-          {...attributes}
-          {...listeners}
-          className="cursor-grab active:cursor-grabbing opacity-20 group-hover:opacity-70 transition-opacity duration-200"
-        >
-          <GripVertical className="w-4 h-4 text-gray-400" />
-        </div>
-      </div>
-
-      {/* Action buttons (top-right) */}
-      <div className="absolute right-1 top-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-all">
-        {/* Move to Day button */}
-        {totalDays > 1 && (
-          <div className="relative">
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setShowMoveMenu(!showMoveMenu)
-              }}
-              className="p-1 rounded hover:bg-black/10 transition-colors"
-              title={t('moveToDay', contentLanguage)}
-            >
-              <ArrowRightLeft className="w-3.5 h-3.5 text-gray-500" />
-            </button>
-            {showMoveMenu && (
-              <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-xl ring-1 ring-black/10 py-1 z-50 min-w-[100px]">
-                {Array.from({ length: totalDays }, (_, i) => i + 1)
-                  .filter(d => d !== dayNum)
-                  .map(d => (
-                    <button
-                      key={d}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        onMoveToDay(dayNum, index, d)
-                        setShowMoveMenu(false)
-                      }}
-                      className="w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-fastr-primary/10 hover:text-fastr-primary transition-colors"
-                    >
-                      {t('day', contentLanguage)} {d}
-                    </button>
-                  ))}
-              </div>
-            )}
-          </div>
-        )}
-        {/* Edit button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-            onEdit(session, dayNum, index)
-          }}
-          className="p-1 rounded hover:bg-black/10 transition-colors"
-          title="Edit session"
-        >
-          <Pencil className="w-3.5 h-3.5 text-gray-500" />
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="pl-5 pr-6">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-gray-500 w-12 flex-shrink-0">{session._startTime || ''}</span>
-          {(config as any).iconType === 'book' ? (
-            <BookOpen className="w-4 h-4 text-blue-500 flex-shrink-0" />
-          ) : (config as any).iconType === 'coffee' ? (
-            <Coffee className="w-4 h-4 text-amber-500 flex-shrink-0" />
-          ) : (
-            <span className="text-sm">{config.icon}</span>
-          )}
-          <span className="text-sm font-medium text-gray-800 truncate flex-1">{session.session}</span>
-        </div>
-        <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-          {session.duration && session.duration > 0 && (
-            <span>{session.duration} min</span>
-          )}
-          {session.speaker && (
-            <>
-              <span>•</span>
-              <span className="truncate">{session.speaker}</span>
-            </>
-          )}
-        </div>
-        {/* Duration bar */}
-        {session.duration && session.duration > 0 && (
-          <div className="duration-bar">
-            <div className="duration-bar-fill" style={{ width: `${Math.min((session.duration / 60) * 100, 100)}%` }} />
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-// Droppable day column wrapper — highlights when library items are dragged over
-function DroppableDayColumn({ dayNum, children }: { dayNum: number; children: React.ReactNode }) {
-  const { setNodeRef, isOver } = useDroppable({
-    id: `day-drop-${dayNum}`,
-    data: { type: 'day-column', dayNum },
-  })
-  return (
-    <div
-      ref={setNodeRef}
-      className={`flex-shrink-0 w-[340px] rounded-xl shadow-sm border ring-1 ring-black/[0.03] transition-all ${
-        isOver
-          ? 'border-fastr-secondary bg-fastr-secondary/5 ring-2 ring-fastr-secondary/40'
-          : 'border-gray-200/80 bg-white/70 backdrop-blur-sm'
-      }`}
-    >
-      {children}
-    </div>
-  )
-}
-
-// Edit Session Modal
-interface EditSessionModalProps {
-  session: Session
-  dayNum: number
-  totalDays: number
-  onClose: () => void
-  onSave: (updates: Partial<Session>) => void
-  onDelete: () => void
-  onMoveToDay: (toDay: number) => void
-}
-
-function EditSessionModal({ session, dayNum, totalDays, onClose, onSave, onDelete, onMoveToDay }: EditSessionModalProps) {
-  const { contentLanguage } = useWorkshopStore()
-  const [sessionName, setSessionName] = useState(session.session || '')
-  const [speaker, setSpeaker] = useState(session.speaker || '')
-  const [duration, setDuration] = useState(session.duration || 0)
-  const [moveToDay, setMoveToDay] = useState<number | null>(null)
-
-  const handleSave = () => {
-    onSave({
-      session: sessionName,
-      speaker: speaker || undefined,
-      duration,
-    })
-    onClose()
-  }
-
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
-      <div
-        className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md mx-4 overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-b">
-          <h3 className="font-semibold text-gray-800">{t('editSession', contentLanguage)}</h3>
-          <button onClick={onClose} aria-label={t('closeDialog', contentLanguage)} className="p-1 hover:bg-gray-200 rounded-full transition-colors">
-            <X className="w-5 h-5 text-gray-500" />
-          </button>
-        </div>
-
-        <div className="p-4 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t('sessionName', contentLanguage)}</label>
-            <input
-              type="text"
-              value={sessionName}
-              onChange={(e) => setSessionName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              placeholder={t('sessionName', contentLanguage)}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t('facilitatorPresenter', contentLanguage)}</label>
-            <input
-              type="text"
-              value={speaker}
-              onChange={(e) => setSpeaker(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              placeholder="e.g., John Smith, MoH Team"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t('durationMinutes', contentLanguage)}</label>
-            <input
-              type="number"
-              value={duration}
-              onChange={(e) => setDuration(parseInt(e.target.value) || 0)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              min={0}
-              step={5}
-            />
-          </div>
-
-          {/* Move to Day */}
-          {totalDays > 1 && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('moveToDifferentDay', contentLanguage)}</label>
-              <div className="flex gap-2">
-                <select
-                  value={moveToDay ?? ''}
-                  onChange={(e) => setMoveToDay(e.target.value ? parseInt(e.target.value) : null)}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-                >
-                  <option value="">{t('selectDay', contentLanguage)}</option>
-                  {Array.from({ length: totalDays }, (_, i) => i + 1)
-                    .filter(d => d !== dayNum)
-                    .map(d => (
-                      <option key={d} value={d}>{t('day', contentLanguage)} {d}</option>
-                    ))}
-                </select>
-                <button
-                  onClick={() => {
-                    if (moveToDay) {
-                      onMoveToDay(moveToDay)
-                      onClose()
-                    }
-                  }}
-                  disabled={!moveToDay}
-                  className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {t('move', contentLanguage)}
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex items-center justify-between px-5 py-4 bg-gray-50 border-t">
-          <button
-            onClick={() => {
-              if (confirm(t('confirmDeleteSession', contentLanguage))) {
-                onDelete()
-                onClose()
-              }
-            }}
-            className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-          >
-            {t('deleteSession', contentLanguage)}
-          </button>
-          <div className="flex gap-2">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              {t('cancel', contentLanguage)}
-            </button>
-            <button
-              onClick={handleSave}
-              className="px-4 py-2 text-sm font-medium bg-fastr-primary text-white rounded-lg shadow-sm hover:shadow-md hover:bg-fastr-primary-dark transition-all"
-            >
-              {t('saveChanges', contentLanguage)}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Add Session Menu - Intuitive menu for adding sessions to a day
-// ─────────────────────────────────────────────────────────────────────────────
-interface ExistingSessionInfo {
-  index: number
-  session: Session
-}
-
-interface AddSessionMenuProps {
-  dayNum: number
-  onClose: () => void
-  onAddSession: (session: Session) => void
-  onAddToExistingSession: (sessionIdx: number, topic: { id: string; file: string; title: string; duration?: number }) => void
-  contentLibrary: any[]
-  existingSessions: ExistingSessionInfo[]
-  isWebinar?: boolean
-}
-
-function AddSessionMenu({ dayNum, onClose, onAddSession, onAddToExistingSession, contentLibrary, existingSessions, isWebinar }: AddSessionMenuProps) {
-  const { contentLanguage } = useWorkshopStore()
-  const [view, setView] = useState<'main' | 'modules' | 'custom' | 'assets' | 'add-to-session'>('main')
-  const [expandedModule, setExpandedModule] = useState<string | null>(null)
-  const [selectedTopic, setSelectedTopic] = useState<{ module: any; topic: any } | null>(null)
-  const [customTitle, setCustomTitle] = useState('')
-  const [customDuration, setCustomDuration] = useState(30)
-  const [customContent, setCustomContent] = useState(`---
-marp: true
-theme: fastr
-paginate: true
----
-
-## Your Slide Title
-
-- First point
-- Second point
-- Third point
-
-`)
-  const [assetLibrary, setAssetLibrary] = useState<Record<string, any[]>>({})
-  const [expandedCategory, setExpandedCategory] = useState<string | null>('icons')
-  const [isLoadingAssets, setIsLoadingAssets] = useState(false)
-  const [uploadingAsset, setUploadingAsset] = useState(false)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-
-  // Load asset library when viewing assets
-  useEffect(() => {
-    if (view === 'assets' && Object.keys(assetLibrary).length === 0) {
-      setIsLoadingAssets(true)
-      fetch('/api/assets/library', { credentials: 'include' })
-        .then(res => {
-          if (!res.ok) throw new Error('Failed to load assets')
-          return res.json()
-        })
-        .then(data => {
-          setAssetLibrary(data.library || {})
-          setIsLoadingAssets(false)
-        })
-        .catch((err) => {
-          console.error('Asset library load failed:', err)
-          setIsLoadingAssets(false)
-        })
-    }
-  }, [view])
-
-  const insertImage = (asset: any) => {
-    const markdown = `![${asset.filename}](/resources/${asset.path})`
-    setCustomContent(prev => prev + '\n' + markdown + '\n')
-    setView('custom')
-  }
-
-  const handleUploadAsset = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    setUploadingAsset(true)
-    const formData = new FormData()
-    formData.append('file', file)
-
-    try {
-      const res = await fetch('/api/assets/library', {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      })
-      const data = await res.json()
-      if (data.success && data.asset) {
-        // Add to custom category
-        setAssetLibrary(prev => ({
-          ...prev,
-          custom: [...(prev.custom || []), data.asset],
-        }))
-        setExpandedCategory('custom')
-      }
-    } catch (err) {
-      console.error('Upload failed:', err)
-    } finally {
-      setUploadingAsset(false)
-    }
-  }
-
-  const addBreak = (type: 'tea' | 'lunch') => {
-    const session: Session = {
-      session: type === 'tea' ? '☕ Tea Break' : '🍽️ Lunch Break',
-      type: 'break',
-      duration: type === 'tea' ? 15 : 60,
-      icon: type === 'tea' ? 'coffee' : 'utensils',
-    }
-    onAddSession(session)
-    onClose()
-  }
-
-  const handleTopicClick = (module: any, topic: any) => {
-    if (isWebinar) {
-      // Webinar mode: add directly as single-slide session (no module reference)
-      const session: Session = {
-        session: topic.title,
-        slides: [topic.file],
-        duration: topic.duration || Math.max(5, (topic.slideCount || 1) * 3),
-      }
-      onAddSession(session)
-      onClose()
-      return
-    }
-    // Always show options view so user can choose
-    setSelectedTopic({ module, topic })
-    setView('add-to-session')
-  }
-
-  const addModuleAsNewSession = (module: any, topic: any) => {
-    const session: Session = {
-      session: topic.title,
-      module: isWebinar ? undefined : module.id,
-      topics: isWebinar ? undefined : [topic.id],
-      slides: [topic.file],
-      duration: topic.duration || 30,
-    }
-    onAddSession(session)
-    onClose()
-  }
-
-  const addToExistingSession = (sessionIdx: number) => {
-    if (!selectedTopic) return
-    onAddToExistingSession(sessionIdx, {
-      id: selectedTopic.topic.id,
-      file: selectedTopic.topic.file,
-      title: selectedTopic.topic.title,
-      duration: selectedTopic.topic.duration,
-    })
-    onClose()
-  }
-
-  const addCustomSession = () => {
-    if (!customTitle.trim()) return
-    const session: Session = {
-      session: customTitle,
-      duration: customDuration,
-      slides: [], // Will store custom content elsewhere
-      // Store the custom markdown content in a special field
-      _customContent: customContent,
-    } as Session & { _customContent?: string }
-    onAddSession(session)
-    onClose()
-  }
-
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
-      <div
-        className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-lg max-h-[80vh] overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b bg-gray-50">
-          <div className="flex items-center gap-2">
-            {view !== 'main' && (
-              <button
-                onClick={() => {
-                  if (view === 'assets') setView('custom')
-                  else if (view === 'add-to-session') setView('modules')
-                  else setView('main')
-                }}
-                className="p-1 hover:bg-gray-200 rounded transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </button>
-            )}
-            <h3 className="font-semibold text-gray-800">
-              {view === 'main' && `${t('addToDay', contentLanguage)} ${dayNum}`}
-              {view === 'modules' && t('chooseModuleContent', contentLanguage)}
-              {view === 'custom' && t('createCustomSlide', contentLanguage)}
-              {view === 'assets' && t('insertImage', contentLanguage)}
-              {view === 'add-to-session' && t('addToSession', contentLanguage)}
-            </h3>
-          </div>
-          <button onClick={onClose} aria-label="Close menu" className="p-1 hover:bg-gray-200 rounded transition-colors">
-            <X className="w-5 h-5 text-gray-500" />
-          </button>
-        </div>
-
-        {/* Main Menu */}
-        {view === 'main' && (
-          <div className="p-4 space-y-2">
-            {/* Module Content */}
-            <button
-              onClick={() => setView('modules')}
-              className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-200 transition-all text-left group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center group-hover:bg-fastr-primary group-hover:scale-110 transition-all">
-                <BookOpen className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
-              </div>
-              <div>
-                <div className="font-medium text-gray-800">{t('moduleContent', contentLanguage)}</div>
-                <div className="text-sm text-gray-500">{t('addSlidesFromModules', contentLanguage)}</div>
-              </div>
-              <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
-            </button>
-
-            {/* Breaks */}
-            <div className="pt-2">
-              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">{t('breaks', contentLanguage)}</div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => addBreak('tea')}
-                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
-                    <Coffee className="w-4 h-4 text-amber-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-gray-800">{t('teaBreak', contentLanguage)}</div>
-                    <div className="text-xs text-gray-500">15 min</div>
-                  </div>
-                </button>
-                <button
-                  onClick={() => addBreak('lunch')}
-                  className="flex-1 flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
-                    <UtensilsCrossed className="w-4 h-4 text-amber-600 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-gray-800">{t('lunchBreak', contentLanguage)}</div>
-                    <div className="text-xs text-gray-500">60 min</div>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            {/* Custom Session */}
-            <div className="pt-2">
-              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-3 mb-2">{t('custom', contentLanguage)}</div>
-              <button
-                onClick={() => setView('custom')}
-                className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 border border-transparent hover:border-teal-200 transition-all text-left group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center group-hover:bg-fastr-secondary group-hover:scale-110 transition-all">
-                  <Pencil className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
-                </div>
-                <div>
-                  <div className="font-medium text-gray-800">{t('customSlide', contentLanguage)}</div>
-                  <div className="text-sm text-gray-500">{t('createYourOwnSlide', contentLanguage)}</div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-gray-400 ml-auto" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Module Browser */}
-        {view === 'modules' && (
-          <div className="overflow-y-auto max-h-[60vh]">
-            {contentLibrary.map((module) => (
-              <div key={module.id} className="border-b border-gray-100 last:border-0">
-                <button
-                  onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
-                  className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors text-left"
-                >
-                  {expandedModule === module.id ? (
-                    <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  ) : (
-                    <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-800">{module.title}</div>
-                    <div className="text-xs text-gray-500">
-                      Module {module.number} • {(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} {t('slides', contentLanguage)}
-                    </div>
-                  </div>
-                </button>
-
-                {expandedModule === module.id && (
-                  <div className="bg-gray-50 px-4 pb-3">
-                    {/* Add Full Module Button — hidden for webinars */}
-                    {!isWebinar && ((module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)) > 0 && (
-                      <button
-                        onClick={() => {
-                          // Add all topics from this module
-                          const allTopics = [...(module.fullTopics || []), ...(module.condensedTopics || [])]
-                          const session: Session = {
-                            session: module.title,
-                            module: module.id,
-                            topics: allTopics.map((t: any) => t.id),
-                            slides: allTopics.map((t: any) => t.file),
-                            duration: allTopics.reduce((sum: number, t: any) => sum + (t.duration || 10), 0),
-                          }
-                          onAddSession(session)
-                          onClose()
-                        }}
-                        className="w-full flex items-center justify-center gap-2 p-2 mb-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors"
-                      >
-                        <Plus className="w-4 h-4" />
-                        {t('addEntireModule', contentLanguage)} ({(module.fullTopics?.length || 0) + (module.condensedTopics?.length || 0)} {t('slides', contentLanguage)})
-                      </button>
-                    )}
-
-                    <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">{t('orAddIndividualSlides', contentLanguage)}</div>
-
-                    {/* Full Topics */}
-                    {module.fullTopics && module.fullTopics.length > 0 && (
-                      <div className="mb-2">
-                        <div className="text-xs text-gray-500 font-medium py-1">{t('fullSlides', contentLanguage)}</div>
-                        {module.fullTopics.map((topic: any) => (
-                          <button
-                            key={topic.id}
-                            onClick={() => handleTopicClick(module, topic)}
-                            className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
-                          >
-                            <FileText className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
-                            <span className="flex-1 text-gray-700">{topic.title}</span>
-                            {topic.duration && (
-                              <span className="text-xs text-gray-400">{topic.duration}m</span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Condensed Topics */}
-                    {module.condensedTopics && module.condensedTopics.length > 0 && (
-                      <div>
-                        <div className="text-xs text-amber-600 font-medium py-1">⚡ {t('condensedSlides', contentLanguage)}</div>
-                        {module.condensedTopics.map((topic: any) => (
-                          <button
-                            key={topic.id}
-                            onClick={() => handleTopicClick(module, topic)}
-                            className="w-full flex items-center gap-2 p-2 rounded hover:bg-amber-50 hover:shadow-sm transition-all text-left text-sm"
-                          >
-                            <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                            <span className="flex-1 text-gray-700">{topic.title}</span>
-                            {topic.duration && (
-                              <span className="text-xs text-gray-400">{topic.duration}m</span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Legacy topics (if no full/condensed split) */}
-                    {!module.fullTopics && !module.condensedTopics && module.topics?.map((topic: any) => (
-                      <button
-                        key={topic.id}
-                        onClick={() => handleTopicClick(module, topic)}
-                        className="w-full flex items-center gap-2 p-2 rounded hover:bg-white hover:shadow-sm transition-all text-left text-sm"
-                      >
-                        <span className="text-gray-400">📄</span>
-                        <span className="flex-1 text-gray-700">{topic.title}</span>
-                        {topic.duration && (
-                          <span className="text-xs text-gray-400">{topic.duration}m</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Asset Browser */}
-        {view === 'assets' && (
-          <div className="flex flex-col max-h-[60vh]">
-            {/* Upload button */}
-            <div className="p-3 border-b bg-gray-50">
-              <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-fastr-primary hover:bg-fastr-primary/5 transition-colors">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleUploadAsset}
-                  disabled={uploadingAsset}
-                />
-                {uploadingAsset ? (
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Plus className="w-4 h-4" />
-                )}
-                <span className="text-sm text-gray-600">Upload your own image</span>
-              </label>
-            </div>
-
-            {isLoadingAssets ? (
-              <div className="p-8 text-center text-gray-500">
-                <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2" />
-                Loading assets...
-              </div>
-            ) : (
-              <div className="overflow-y-auto flex-1">
-                {Object.entries(assetLibrary).map(([category, assets]) => (
-                  <div key={category} className="border-b border-gray-100 last:border-0">
-                    <button
-                      onClick={() => setExpandedCategory(expandedCategory === category ? null : category)}
-                      className="w-full flex items-center gap-2 p-3 hover:bg-gray-50 transition-colors"
-                    >
-                      {expandedCategory === category ? (
-                        <ChevronDown className="w-4 h-4 text-gray-400" />
-                      ) : (
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
-                      )}
-                      <span className="font-medium text-gray-800 capitalize">{category.replace(/_/g, ' ')}</span>
-                      <span className="text-xs text-gray-400">({assets.length})</span>
-                    </button>
-
-                    {expandedCategory === category && (
-                      <div className="px-3 pb-3 grid grid-cols-3 gap-3">
-                        {assets.map((asset: any) => (
-                          <button
-                            key={asset.filename}
-                            onClick={() => insertImage(asset)}
-                            className="group flex flex-col rounded-lg border border-gray-200 overflow-hidden hover:border-fastr-primary hover:shadow-md transition-all bg-white"
-                            title={asset.label || asset.filename}
-                          >
-                            <div className="relative aspect-square bg-gray-50">
-                              <img
-                                src={`/resources/${asset.path}`}
-                                alt={asset.label || asset.filename}
-                                className="w-full h-full object-contain p-2"
-                                onError={(e) => {
-                                  (e.target as HTMLImageElement).src = '/resources/logos/FASTR_White_Horiz.png'
-                                }}
-                              />
-                              <div className="absolute inset-0 bg-fastr-primary/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <span className="text-white text-xs font-medium">+ Insert</span>
-                              </div>
-                            </div>
-                            <div className="px-2 py-1.5 text-xs text-gray-600 truncate text-center border-t border-gray-100">
-                              {asset.label || asset.filename.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ')}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Custom Slide Editor */}
-        {view === 'custom' && (
-          <div className="p-4 space-y-4 overflow-y-auto max-h-[60vh]">
-            {/* Title */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Session Title</label>
-              <input
-                type="text"
-                value={customTitle}
-                onChange={(e) => setCustomTitle(e.target.value)}
-                placeholder="e.g., Hands-on Activity: Data Quality"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              />
-            </div>
-
-            {/* Duration */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Duration (minutes)</label>
-              <input
-                type="number"
-                value={customDuration}
-                onChange={(e) => setCustomDuration(parseInt(e.target.value) || 0)}
-                min={5}
-                max={240}
-                step={5}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary transition-colors duration-200"
-              />
-            </div>
-
-            {/* Markdown Editor */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="block text-sm font-medium text-gray-700">
-                  Slide Content (Marp Markdown)
-                </label>
-                <button
-                  onClick={() => setView('assets')}
-                  className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600 flex items-center gap-1"
-                >
-                  🖼️ Insert Image
-                </button>
-              </div>
-              <textarea
-                ref={textareaRef}
-                value={customContent}
-                onChange={(e) => setCustomContent(e.target.value)}
-                rows={10}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary font-mono text-sm"
-                placeholder="Write your slide content in Marp markdown..."
-              />
-              <p className="mt-1 text-xs text-gray-500">
-                Use <code className="bg-gray-100 px-1 rounded">---</code> to separate slides.
-                Variables: <code className="bg-gray-100 px-1 rounded">{'{{COUNTRY}}'}</code>,{' '}
-                <code className="bg-gray-100 px-1 rounded">{'{{LOCATION}}'}</code>
-              </p>
-            </div>
-
-            {/* Actions */}
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                onClick={onClose}
-                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={addCustomSession}
-                disabled={!customTitle.trim()}
-                className="px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Add Session
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Add to Existing Session */}
-        {view === 'add-to-session' && selectedTopic && (
-          <div className="p-4 space-y-4 max-h-[60vh] overflow-y-auto">
-            {/* Selected topic info */}
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <div className="text-sm font-medium text-blue-800">Adding: {selectedTopic.topic.title}</div>
-              <div className="text-xs text-blue-600 mt-1">From: {selectedTopic.module.title}</div>
-            </div>
-
-            {/* Options */}
-            <div className="space-y-2">
-              {/* Create new session option */}
-              <button
-                onClick={() => addModuleAsNewSession(selectedTopic.module, selectedTopic.topic)}
-                className="w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed border-gray-300 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
-              >
-                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
-                  <Plus className="w-5 h-5 text-green-600" />
-                </div>
-                <div>
-                  <div className="font-medium text-gray-800">Create New Session</div>
-                  <div className="text-sm text-gray-500">Add as a separate session on Day {dayNum}</div>
-                </div>
-              </button>
-
-              {/* Existing sessions */}
-              {existingSessions.filter(s => s.session.module).length > 0 && (
-                <>
-                  <div className="text-xs font-medium text-gray-400 uppercase tracking-wide px-1 pt-2">
-                    Or add to existing session
-                  </div>
-                  {existingSessions
-                    .filter(s => s.session.module) // Only show module sessions
-                    .map(({ index, session }) => (
-                      <button
-                        key={index}
-                        onClick={() => addToExistingSession(index)}
-                        className="w-full flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-fastr-primary hover:bg-fastr-primary/5 transition-all text-left"
-                      >
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                          <BookOpen className="w-5 h-5 text-blue-600" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium text-gray-800 truncate">{session.session}</div>
-                          <div className="text-sm text-gray-500">
-                            {session.module && <span className="text-blue-600">{session.module.toUpperCase()}</span>}
-                            {(session.slides?.length ?? 0) > 0 && <span> + {session.slides?.length} extra</span>}
-                            {' • '}{session.duration || 0} min
-                          </div>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                      </button>
-                    ))}
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // App Modes
 // ─────────────────────────────────────────────────────────────────────────────
-type AppMode = 'select' | 'workshop' | 'library' | 'quick' | 'import'
+type AppMode = 'select' | 'workshop' | 'library' | 'quick' | 'import' | 'settings'
+
+function mapModeToNav(mode: AppMode): SidebarNavId {
+  // Quick Export is "browse library → pick → export", so it belongs under
+  // the Content library nav (not Workshops).
+  if (mode === 'library' || mode === 'quick') return 'library'
+  if (mode === 'settings') return 'settings'
+  // select / workshop / import are the workshop authoring flow
+  return 'workshops'
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Quick Export Mode - Select modules and download
@@ -1143,8 +205,8 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-function QuickExportMode({ onBack }: { onBack: () => void }) {
-  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
+function QuickExportMode() {
+  const { contentLibrary, loadContentLibrary, contentLanguage } = useWorkshopStore()
   const { showToast } = useToast()
   const [selections, setSelections] = useState<Map<string, { moduleId: string; variant: 'full' | 'condensed' }>>(new Map())
   const [isExporting, setIsExporting] = useState(false)
@@ -1381,55 +443,33 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
   }
 
   if (contentLibrary.length === 0) {
+    // Skeleton grid — same shape as the loaded module cards
     return (
-      <div className="h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-          <p>{t('loadingContentLibrary', contentLanguage)}</p>
+      <div className="h-full overflow-y-auto px-8 py-6 bg-slate-50">
+        <div className="max-w-5xl mx-auto space-y-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="rounded-2xl border border-slate-200 ring-1 ring-black/5 shadow-sm bg-white p-5 animate-pulse">
+                <div className="h-3 w-1/4 bg-slate-200 rounded mb-3" />
+                <div className="h-4 w-3/4 bg-slate-200 rounded mb-2" />
+                <div className="h-3 w-full bg-slate-100 rounded mb-1" />
+                <div className="h-3 w-5/6 bg-slate-100 rounded mb-3" />
+                <div className="h-1 w-full bg-slate-100 rounded-full" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm px-6 py-4 flex items-center gap-4">
-        <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <ArrowLeft className="w-5 h-5 text-gray-600" />
-        </button>
-        <div className="flex-1">
-          <h1 className="text-xl font-semibold text-gray-900">{t('quickExport', contentLanguage)}</h1>
-          <p className="text-sm text-gray-500">{t('contentLibrarySubtitle', contentLanguage)}</p>
-        </div>
-        {/* Language toggle */}
-        <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
-          <button
-            onClick={() => setContentLanguage('en')}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'en'
-                ? 'bg-fastr-primary text-white'
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => setContentLanguage('fr')}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'fr'
-                ? 'bg-fastr-primary text-white'
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            FR
-          </button>
-        </div>
-      </header>
-
-      {/* Module sections */}
-      <div className="flex-1 overflow-y-auto px-6 py-6 pb-24">
-        <div className="max-w-5xl mx-auto space-y-10">
+    <div className="h-full flex flex-col bg-slate-50 min-h-0">
+      <div className="flex-1 overflow-y-auto px-8 py-6 pb-28">
+        <div className="max-w-5xl mx-auto space-y-8">
+          <div className="mb-2">
+            <p className="text-body-sm text-slate-500">{t('contentLibrarySubtitle', contentLanguage)}</p>
+          </div>
 
           {/* Methodology Content section */}
           {(() => {
@@ -1450,12 +490,12 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               return (
                 <div
                   key={module.id}
-                  className={`relative rounded-xl border-2 transition-all cursor-pointer flex flex-col ${
+                  className={`relative rounded-2xl border transition-all cursor-pointer flex flex-col ${
                     isActivity ? 'border-l-4 border-l-fastr-accent' : ''
                   } ${
                     isSelected
-                      ? 'bg-fastr-primary/5 border-fastr-primary ring-1 ring-fastr-primary/20 shadow-md'
-                      : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                      ? 'bg-fastr-light/40 border-fastr-primary ring-1 ring-fastr-primary/20 shadow-sm'
+                      : 'bg-white border-slate-200 ring-1 ring-black/5 shadow-sm hover:shadow-md hover:border-slate-300'
                   }`}
                 >
                   {/* Main clickable area */}
@@ -1608,10 +648,10 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
                             return (
                               <div
                                 key={tmpl.id}
-                                className={`relative text-left p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                                className={`relative text-left p-4 rounded-2xl border transition-all cursor-pointer ${
                                   isSelected
-                                    ? 'bg-fastr-primary/5 border-fastr-primary shadow-md'
-                                    : 'bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                                    ? 'bg-fastr-light/40 border-fastr-primary ring-1 ring-fastr-primary/20 shadow-sm'
+                                    : 'bg-white border-slate-200 ring-1 ring-black/5 shadow-sm hover:shadow-md hover:border-slate-300'
                                 }`}
                               >
                                 <button
@@ -1680,35 +720,31 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
         </div>
       )}
 
-      {/* Sticky bottom bar */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ${
-          selections.size > 0 || selectedTemplates.size > 0 ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      >
-        <div className="backdrop-blur-lg bg-white/80 border-t border-gray-200 shadow-lg px-6 py-4">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-medium text-gray-900">
+      {/* Action bar — anchored to the bottom of the shell content area */}
+      {(selections.size > 0 || selectedTemplates.size > 0) && (
+        <div className="flex-shrink-0 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-sm px-8 py-3">
+          <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="text-body-sm font-semibold text-slate-900 truncate">
                 {selections.size > 0 && `${selections.size} ${t('modulesSelected', contentLanguage)}`}
                 {selections.size > 0 && selectedTemplates.size > 0 && ' · '}
                 {selectedTemplates.size > 0 && `${selectedTemplates.size} ${t('templatesSelected', contentLanguage)}`}
               </span>
-              <span className="text-sm text-gray-500">
+              <span className="text-caption text-slate-500 whitespace-nowrap">
                 {totalSlides + selectedTemplates.size} {t('totalSlides', contentLanguage)}
               </span>
               <button
                 onClick={() => { setSelections(new Map()); setSelectedTemplates(new Set()) }}
-                className="text-sm text-gray-500 hover:text-gray-700 underline"
+                className="text-caption text-slate-500 hover:text-slate-900 underline"
               >
                 {t('clearAll', contentLanguage)}
               </button>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={() => exportSelection('pdf')}
                 disabled={isExporting}
-                className="px-5 py-2.5 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
+                className="btn-secondary"
               >
                 {isExporting && exportFormat === 'pdf' ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />
@@ -1720,7 +756,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
               <button
                 onClick={() => exportSelection('pptx')}
                 disabled={isExporting}
-                className="px-5 py-2.5 bg-fastr-primary text-white text-sm font-medium rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center gap-2"
+                className="btn-accent"
               >
                 {isExporting && exportFormat === 'pptx' ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />
@@ -1732,7 +768,7 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
@@ -1740,8 +776,8 @@ function QuickExportMode({ onBack }: { onBack: () => void }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // Library Mode Component - Browse and preview content (two-panel with search)
 // ─────────────────────────────────────────────────────────────────────────────
-function LibraryMode({ onBack }: { onBack: () => void }) {
-  const { contentLibrary, loadContentLibrary, contentLanguage, setContentLanguage } = useWorkshopStore()
+function LibraryMode() {
+  const { contentLibrary, loadContentLibrary, contentLanguage } = useWorkshopStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
@@ -1799,6 +835,75 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
     }
   }
 
+  // Preview an entire module — fetches all topics in the chosen variant,
+  // concatenates them into a single Marp doc, renders once.
+  const loadModulePreview = async (module: any, variant: 'full' | 'condensed') => {
+    const topics =
+      variant === 'full'
+        ? (module.fullTopics?.length ? module.fullTopics : module.topics) || []
+        : module.condensedTopics || []
+    if (!topics.length) return
+
+    const totalSlides = topics.reduce((sum: number, tp: any) => sum + (tp.slideCount || 0), 0)
+
+    // Synthetic "topic" so the existing preview-pane render path works
+    const syntheticTopic = {
+      id: `module-${module.id}-${variant}`,
+      title: module.name,
+      slideCount: totalSlides,
+      _isModule: true,
+      _variant: variant,
+    }
+    setPreviewTopic(syntheticTopic)
+
+    const cacheKey = `${syntheticTopic.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+
+    setPreviewHtml(null)
+    setPresenterNotes([])
+    setIsLoadingPreview(true)
+    try {
+      const contents = await Promise.all(
+        topics.map((tp: any) =>
+          fetch(`/api/content/topic/${tp.id}?language=${contentLanguage}`, { credentials: 'include' })
+            .then(res => (res.ok ? res.json() : null))
+        ),
+      )
+      const parts: string[] = []
+      for (const data of contents) {
+        if (!data?.content) continue
+        let content = data.content.replace(/^---[\s\S]*?---\s*/, '')
+        content = content.replace(/\n---\s*$/, '').trim()
+        if (content) parts.push(content)
+      }
+      const combined = '---\nmarp: true\ntheme: fastr\npaginate: true\n---\n\n' + parts.join('\n\n---\n\n')
+      const renderRes = await fetch('/api/content/render', {
+        credentials: 'include',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown: combined }),
+      })
+      if (renderRes.ok) {
+        const data = await renderRes.json()
+        previewCache.current.set(cacheKey, {
+          html: data.html,
+          notes: data.presenterNotes || [],
+        })
+        setPreviewHtml(data.html)
+        setPresenterNotes(data.presenterNotes || [])
+      }
+    } catch (err) {
+      console.error('Failed to load module preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
+
   useEffect(() => {
     setPreviewTopic(null)
     setPreviewHtml(null)
@@ -1848,95 +953,79 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
   }, [filteredTopics, contentLibrary])
 
   if (contentLibrary.length === 0) {
+    // Skeleton — left panel module rows, right panel empty hint
     return (
-      <div className="h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-          <p>{t('loadingContentLibrary', contentLanguage)}</p>
+      <div className="h-full flex bg-slate-50 min-h-0">
+        <div className="w-96 bg-white border-r border-slate-200 p-4 space-y-2">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-2 py-2 animate-pulse">
+              <div className="w-3.5 h-3.5 bg-slate-200 rounded" />
+              <div className="h-3 bg-slate-200 rounded flex-1" style={{ width: `${50 + (i % 4) * 12}%` }} />
+              <div className="h-3 w-6 bg-slate-100 rounded" />
+            </div>
+          ))}
+        </div>
+        <div className="flex-1 flex items-center justify-center bg-slate-100">
+          <div className="text-center text-slate-400">
+            <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2" />
+            <p className="text-body-sm">{t('loadingContentLibrary', contentLanguage)}</p>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm px-4 py-3 flex items-center gap-4">
-        <button onClick={onBack} aria-label="Back to deck builder" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <ArrowLeft className="w-5 h-5 text-gray-600" />
-        </button>
-        <h1 className="text-lg font-semibold text-gray-800">{t('browseContentLibrary', contentLanguage)}</h1>
-        <div className="flex-1" />
-        <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1">
-          <button
-            onClick={() => setContentLanguage('en')}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'en'
-                ? 'bg-fastr-primary text-white'
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            EN
-          </button>
-          <button
-            onClick={() => setContentLanguage('fr')}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              contentLanguage === 'fr'
-                ? 'bg-fastr-primary text-white'
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            FR
-          </button>
-        </div>
-      </header>
-
-      {/* Two-panel layout */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left panel — search + topic list */}
-        <div className="w-96 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-          {/* Search bar */}
-          <div className="p-3 border-b border-gray-100">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                ref={searchInputRef}
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={contentLanguage === 'fr' ? 'Rechercher des sujets...' : 'Search topics...'}
-                className="w-full pl-10 pr-8 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-fastr-primary/30 focus:border-fastr-primary"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => { setSearchQuery(''); searchInputRef.current?.focus() }}
-                  aria-label="Clear search"
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
+    <div className="h-full flex bg-slate-50 min-h-0">
+      {/* Left panel — search + module/topic list */}
+      <div className="w-96 bg-white border-r border-slate-200 flex flex-col flex-shrink-0">
+        {/* Search bar */}
+        <div className="px-4 py-3 border-b border-slate-200">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" aria-hidden />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={contentLanguage === 'fr' ? 'Rechercher des sujets…' : 'Search topics…'}
+              className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-lg text-body-sm placeholder-slate-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/20"
+            />
             {searchQuery && (
-              <p className="text-xs text-gray-400 mt-1.5 px-1">
-                {filteredTopics.length} {filteredTopics.length === 1 ? t('result', contentLanguage) : t('results', contentLanguage)}
-              </p>
+              <button
+                onClick={() => { setSearchQuery(''); searchInputRef.current?.focus() }}
+                aria-label="Clear search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5 text-slate-400 hover:text-slate-700 rounded"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             )}
           </div>
+          {searchQuery && (
+            <p className="text-caption text-slate-500 mt-2">
+              {filteredTopics.length} {filteredTopics.length === 1 ? t('result', contentLanguage) : t('results', contentLanguage)}
+            </p>
+          )}
+        </div>
 
-          {/* Topic list grouped by module — collapsible */}
-          <div className="flex-1 overflow-y-auto">
-            {groupedByModule.length === 0 ? (
-              <div className="p-8 text-center text-gray-400 text-sm">
-                {t('noResultsFound', contentLanguage)}
-              </div>
-            ) : (
-              groupedByModule.map(({ module, items }) => {
-                const isSearching = searchQuery.trim().length > 0
-                const isExpanded = isSearching || expandedModules.has(module.id)
-                return (
-                  <div key={module.id} className="border-b border-gray-100">
-                    {/* Module header — clickable to expand/collapse */}
+        {/* Module/topic list */}
+        <div className="flex-1 overflow-y-auto py-2">
+          {groupedByModule.length === 0 ? (
+            <div className="p-8 text-center text-slate-400 text-body-sm">
+              {t('noResultsFound', contentLanguage)}
+            </div>
+          ) : (
+            groupedByModule.map(({ module, items }) => {
+              const isSearching = searchQuery.trim().length > 0
+              const isExpanded = isSearching || expandedModules.has(module.id)
+              const hasFull = (module.fullTopics?.length || module.topics?.length || 0) > 0
+              const hasCondensed = (module.condensedTopics?.length || 0) > 0
+              const moduleId = `module-${module.id}-full`
+              const moduleCondId = `module-${module.id}-condensed`
+              const isModulePreviewing = previewTopic?.id === moduleId || previewTopic?.id === moduleCondId
+              return (
+                <div key={module.id} className="mb-0.5 group">
+                  <div className={`w-full flex items-center gap-1 pr-2 ${isModulePreviewing ? 'bg-fastr-light' : ''}`}>
                     <button
                       onClick={() => {
                         const next = new Set(expandedModules)
@@ -1944,71 +1033,115 @@ function LibraryMode({ onBack }: { onBack: () => void }) {
                         else next.add(module.id)
                         setExpandedModules(next)
                       }}
-                      className="w-full text-left px-4 py-3 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                      className={`flex-1 text-left px-4 py-2 flex items-center gap-2 transition-colors focus-ring ${
+                        isModulePreviewing ? 'text-fastr-primary' : 'hover:bg-slate-50'
+                      }`}
                     >
-                      <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`} />
-                      <span className="text-sm font-medium text-gray-800 flex-1">{module.name}</span>
-                      <span className="text-xs text-gray-400">{items.length}</span>
+                      <ChevronRight className={`w-3.5 h-3.5 text-slate-400 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`} aria-hidden />
+                      <span className="text-body-sm font-semibold text-slate-800 flex-1 truncate">{module.name}</span>
+                      <span className="text-caption text-slate-400">{items.length}</span>
                     </button>
-                    {/* Topics — visible when expanded or searching */}
-                    {isExpanded && items.map(({ topic, variant }) => (
+                    {hasFull && (
                       <button
-                        key={topic.id}
-                        onClick={() => loadPreview(topic)}
-                        className={`w-full text-left px-4 py-2.5 pl-10 transition-colors flex items-center gap-3 ${
-                          previewTopic?.id === topic.id
-                            ? 'bg-fastr-primary/5 border-l-2 border-l-fastr-primary'
-                            : 'hover:bg-gray-50 border-l-2 border-l-transparent'
+                        onClick={() => loadModulePreview(module, 'full')}
+                        title={t('previewFullModule', contentLanguage)}
+                        aria-label={t('previewFullModule', contentLanguage)}
+                        className={`flex-shrink-0 p-1.5 rounded-md transition-colors focus-ring ${
+                          previewTopic?.id === moduleId
+                            ? 'bg-fastr-primary text-white'
+                            : 'text-slate-400 hover:text-fastr-primary hover:bg-white opacity-0 group-hover:opacity-100'
                         }`}
                       >
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm text-gray-700 truncate">{topic.title}</div>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-xs text-gray-400">{topic.slideCount} {t('slides', contentLanguage)}</span>
-                            {variant === 'condensed' && (
-                              <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">{t('condensed', contentLanguage)}</span>
-                            )}
-                          </div>
-                        </div>
-                        <Eye className="w-4 h-4 text-gray-300 flex-shrink-0" />
+                        <Eye className="w-3.5 h-3.5" />
                       </button>
-                    ))}
+                    )}
+                    {hasCondensed && (
+                      <button
+                        onClick={() => loadModulePreview(module, 'condensed')}
+                        title={t('previewCondensedModule', contentLanguage)}
+                        aria-label={t('previewCondensedModule', contentLanguage)}
+                        className={`flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
+                          previewTopic?.id === moduleCondId
+                            ? 'bg-amber-500 text-white'
+                            : 'bg-amber-50 text-amber-700 hover:bg-amber-100 opacity-0 group-hover:opacity-100'
+                        }`}
+                      >
+                        S
+                      </button>
+                    )}
                   </div>
-                )
-              })
-            )}
-          </div>
-        </div>
-
-        {/* Right panel — slide preview */}
-        <div className="flex-1 bg-gray-800 flex flex-col overflow-hidden">
-          {isLoadingPreview ? (
-            <div className="flex-1 flex items-center justify-center text-white/70">
-              <div className="text-center">
-                <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
-                <p className="text-sm">{t('loadingPreview', contentLanguage)}</p>
-              </div>
-            </div>
-          ) : previewHtml ? (
-            <>
-              {/* Topic header */}
-              <div className="px-6 pt-4 pb-2 flex-shrink-0">
-                <h3 className="text-white font-medium">{previewTopic?.title}</h3>
-              </div>
-              {/* Slide-by-slide preview */}
-              <div className="flex-1 min-h-0">
-                <SlidePreview html={previewHtml} notes={presenterNotes} contentLanguage={contentLanguage} />
-              </div>
-            </>
-          ) : (
-            <div className="flex-1 flex items-center justify-center text-center">
-              <div>
-                <BookOpen className="w-16 h-16 mx-auto mb-4 text-white/20" />
-                <p className="text-white/50">{t('clickToPreview', contentLanguage)}</p>
-              </div>
-            </div>
+                  {isExpanded && (
+                    <div className="pb-1">
+                      {items.map(({ topic, variant }) => (
+                        <button
+                          key={topic.id}
+                          onClick={() => loadPreview(topic)}
+                          className={`w-full text-left px-4 py-2 pl-9 transition-colors flex items-center gap-3 focus-ring ${
+                            previewTopic?.id === topic.id
+                              ? 'bg-fastr-light text-fastr-primary border-l-2 border-l-fastr-primary'
+                              : 'hover:bg-slate-50 border-l-2 border-l-transparent'
+                          }`}
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className="text-body-sm text-slate-800 truncate">{topic.title}</div>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className="text-caption text-slate-500">{topic.slideCount} {t('slides', contentLanguage)}</span>
+                              {variant === 'condensed' && (
+                                <span className="inline-flex items-center rounded-pill px-2 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('condensed', contentLanguage)}</span>
+                              )}
+                            </div>
+                          </div>
+                          <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })
           )}
         </div>
+      </div>
+
+      {/* Right panel — slide preview */}
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {isLoadingPreview ? (
+          <div className="flex-1 flex items-center justify-center bg-slate-900 text-white/70">
+            <div className="text-center">
+              <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-2" />
+              <p className="text-body-sm">{t('loadingPreview', contentLanguage)}</p>
+            </div>
+          </div>
+        ) : previewHtml ? (
+          <>
+            <div className="px-6 py-3 border-b border-slate-200 bg-white flex-shrink-0 flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-slate-400" aria-hidden />
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-body font-semibold text-slate-900 m-0 truncate">{previewTopic?.title}</h3>
+                  {previewTopic?._isModule && (
+                    <span className="inline-flex items-center rounded-pill px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-fastr-light text-fastr-primary">
+                      {previewTopic._variant === 'condensed' ? t('condensed', contentLanguage) : t('fullModule', contentLanguage)}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <span className="text-caption text-slate-500">{previewTopic?.slideCount} {t('slides', contentLanguage)}</span>
+            </div>
+            <div className="flex-1 min-h-0 bg-slate-900">
+              <SlidePreview html={previewHtml} notes={presenterNotes} contentLanguage={contentLanguage} />
+            </div>
+          </>
+        ) : (
+          <div className="flex-1 flex items-center justify-center bg-slate-100 text-center">
+            <div>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white border border-slate-200 ring-1 ring-black/5 flex items-center justify-center">
+                <BookOpen className="w-7 h-7 text-slate-400" aria-hidden />
+              </div>
+              <p className="text-body-sm text-slate-500">{t('clickToPreview', contentLanguage)}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -2021,7 +1154,6 @@ function App() {
     workshops,
     loadWorkshops,
     loadContentLibrary,
-    contentLibrary,
     contentLanguage,
     setContentLanguage,
     addSession,
@@ -2094,22 +1226,22 @@ function App() {
   // App mode - starts with mode selector
   const [appMode, setAppMode] = useState<AppMode>('select')
   const [expandedCountries, setExpandedCountries] = useState<Set<string>>(new Set())
-  const [showStorageManager, setShowStorageManager] = useState(false)
 
-  const [leftPanelOpen, setLeftPanelOpen] = useState(false)
-  const [leftPanelPinned, setLeftPanelPinned] = useState(false)
   const [rightPanelOpen, setRightPanelOpen] = useState(false)
+  const [addContentDrawerOpen, setAddContentDrawerOpen] = useState(false)
+  const [addContentDayNum, setAddContentDayNum] = useState<number | undefined>(undefined)
+  const [libraryView, setLibraryView] = useState<'browse' | 'select'>('browse')
   const [showWorkshopSelector, setShowWorkshopSelector] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [showExportMenu, setShowExportMenu] = useState(false)
+  const [showNewDeckMenu, setShowNewDeckMenu] = useState(false)
   const [isBuilding, setIsBuilding] = useState(false)
   const [editingSession, setEditingSession] = useState<{
     session: Session
     dayNum: number
     index: number
   } | null>(null)
-  const [addSessionMenuDay, setAddSessionMenuDay] = useState<number | null>(null)
   const [activeDragData, setActiveDragData] = useState<{ id: string; data: any } | null>(null)
   const landingTourRef = useRef<GuidedTourHandle>(null)
   const builderTourRef = useRef<GuidedTourHandle>(null)
@@ -2178,6 +1310,15 @@ function App() {
       return () => document.removeEventListener('click', handleClick)
     }
   }, [showExportMenu])
+
+  // Close new-deck menu when clicking outside
+  useEffect(() => {
+    const handleClick = () => setShowNewDeckMenu(false)
+    if (showNewDeckMenu) {
+      document.addEventListener('click', handleClick)
+      return () => document.removeEventListener('click', handleClick)
+    }
+  }, [showNewDeckMenu])
 
   // Custom collision detection: library items only target day-column droppables; session items use closestCenter
   const customCollisionDetection: CollisionDetection = (args) => {
@@ -2863,7 +2004,7 @@ function App() {
             <p className="text-white/70">{t('enterPasswordToContinue', contentLanguage)}</p>
           </div>
 
-          <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-xl ring-1 ring-black/5">
+          <form onSubmit={handleLogin} className="bg-white rounded-2xl p-6 shadow-sm ring-1 ring-black/5 border border-slate-200">
             <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 {t('teamPassword', contentLanguage)}
@@ -2906,6 +2047,43 @@ function App() {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  // Shell wrapper — every authenticated, non-modal screen uses this layout
+  // ─────────────────────────────────────────────────────────────────────────
+  function renderShell(args: {
+    section: string
+    breadcrumb?: string
+    searchPlaceholder?: string
+    primaryAction?: React.ReactNode
+    topbarActions?: React.ReactNode
+    children: React.ReactNode
+  }) {
+    return (
+      <AppShell
+        activeNav={mapModeToNav(appMode)}
+        onNavChange={(id) => {
+          if (id === 'workshops') setAppMode('select')
+          else if (id === 'library') setAppMode('library')
+          else if (id === 'settings') setAppMode('settings')
+        }}
+        language={contentLanguage}
+        onLanguageChange={setContentLanguage}
+        signOutLabel={t('signOut', contentLanguage)}
+        onSignOut={handleLogout}
+        workshopsLabel={t('navWorkshops', contentLanguage)}
+        libraryLabel={t('navLibrary', contentLanguage)}
+        settingsLabel={t('navSettings', contentLanguage)}
+        section={args.section}
+        breadcrumb={args.breadcrumb}
+        searchPlaceholder={args.searchPlaceholder}
+        primaryAction={args.primaryAction}
+        topbarActions={args.topbarActions}
+      >
+        {args.children}
+      </AppShell>
+    )
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
   // Landing Page / Mode Selector
   // ─────────────────────────────────────────────────────────────────────────
   if (appMode === 'select') {
@@ -2928,130 +2106,82 @@ function App() {
       setExpandedCountries(next)
     }
 
-    return (
-      <div className="h-screen bg-gradient-to-b from-fastr-light-warm to-white flex flex-col">
-        {/* Top bar with language toggle and logout */}
-        <div className="flex justify-end items-center gap-4 p-4">
-          {/* Language toggle */}
-          <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-200 p-1" data-tour="language-toggle">
+    const landingPrimary = (
+      <div className="relative" data-tour="new-workshop">
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            setShowNewDeckMenu(!showNewDeckMenu)
+          }}
+          className="btn-primary"
+        >
+          <Plus className="w-4 h-4" />
+          <span>{t('newWorkshop', contentLanguage)}</span>
+          <ChevronDown className="w-4 h-4" />
+        </button>
+        {showNewDeckMenu && (
+          <div className="absolute right-0 top-full mt-1 w-72 bg-white rounded-xl shadow-lg ring-1 ring-black/5 border border-slate-200 py-1 z-30">
             <button
-              onClick={() => setContentLanguage('en')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                contentLanguage === 'en'
-                  ? 'bg-fastr-primary text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              onClick={() => {
+                setShowNewDeckMenu(false)
+                setPendingDeckType('workshop')
+                setAppMode('workshop')
+              }}
+              className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 focus-ring"
             >
-              EN
+              <Presentation className="w-5 h-5 text-fastr-primary mt-0.5 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-body-sm font-semibold text-slate-900">{t('buildSlideDeck', contentLanguage)}</div>
+                <div className="text-caption text-slate-500 mt-0.5">{t('workshopDeckDesc', contentLanguage)}</div>
+              </div>
             </button>
             <button
-              onClick={() => setContentLanguage('fr')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                contentLanguage === 'fr'
-                  ? 'bg-fastr-primary text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              onClick={() => {
+                setShowNewDeckMenu(false)
+                setPendingDeckType('webinar')
+                setAppMode('workshop')
+              }}
+              className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 focus-ring"
             >
-              FR
+              <Monitor className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-body-sm font-semibold text-slate-900">{t('buildWebinar', contentLanguage)}</div>
+                <div className="text-caption text-slate-500 mt-0.5">{t('webinarDeckDesc', contentLanguage)}</div>
+              </div>
             </button>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            {t('signOut', contentLanguage)}
-          </button>
-        </div>
+        )}
+      </div>
+    )
 
-        <div className="flex-1 flex items-center justify-center p-8">
-          <div className="w-full max-w-5xl">
-            {/* Logo/Title */}
-            <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-fastr-primary mb-2 tracking-tight">{t('appTitle', contentLanguage)}</h1>
-              <p className="text-gray-500">{t('appSubtitle', contentLanguage)}</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-tour="landing-cards">
-              {/* Build Workshop Deck */}
-              <button
-                onClick={() => { setPendingDeckType('workshop'); setAppMode('workshop') }}
-                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-fastr-primary/30 shadow-sm hover:shadow-xl"
-              >
-                <div className="w-12 h-12 bg-fastr-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-primary group-hover:scale-110 transition-all duration-200">
-                  <Presentation className="w-6 h-6 text-fastr-primary group-hover:text-white transition-colors" />
-                </div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildSlideDeck', contentLanguage)}</h2>
-                <p className="text-gray-500 text-sm">
-                  {t('buildSlideDeckDesc', contentLanguage)}
-                </p>
-              </button>
-
-              {/* Build Webinar Deck */}
-              <button
-                onClick={() => { setPendingDeckType('webinar'); setAppMode('workshop') }}
-                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-indigo-500/30 shadow-sm hover:shadow-xl"
-              >
-                <div className="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-500 group-hover:scale-110 transition-all duration-200">
-                  <Monitor className="w-6 h-6 text-indigo-600 group-hover:text-white transition-colors" />
-                </div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('buildWebinar', contentLanguage)}</h2>
-                <p className="text-gray-500 text-sm">
-                  {t('buildWebinarDesc', contentLanguage)}
-                </p>
-              </button>
-
-              {/* Quick Export */}
-              <button
-                onClick={() => setAppMode('quick')}
-                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-fastr-secondary/30 shadow-sm hover:shadow-xl"
-              >
-                <div className="w-12 h-12 bg-fastr-secondary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-fastr-secondary group-hover:scale-110 transition-all duration-200">
-                  <Download className="w-6 h-6 text-fastr-secondary group-hover:text-white transition-colors" />
-                </div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('quickExport', contentLanguage)}</h2>
-                <p className="text-gray-500 text-sm">
-                  {t('quickExportDesc', contentLanguage)}
-                </p>
-              </button>
-
-              {/* Browse Library */}
-              <button
-                onClick={() => setAppMode('library')}
-                className="group bg-white rounded-2xl p-6 text-left transition-all duration-200 hover:-translate-y-1 border border-gray-200 hover:border-amber-500/30 shadow-sm hover:shadow-xl"
-              >
-                <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:scale-110 transition-all duration-200">
-                  <BookOpen className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
-                </div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('browseLibrary', contentLanguage)}</h2>
-                <p className="text-gray-500 text-sm">
-                  {t('browseLibraryDesc', contentLanguage)}
-                </p>
-              </button>
-            </div>
-
-          {/* Existing Decks */}
-          {workshops.length > 0 && (
-            <div className="mt-10" data-tour="existing-decks">
-              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">{t('existingDecks', contentLanguage)}</h3>
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden divide-y divide-gray-100">
+    return renderShell({
+      section: t('navWorkshops', contentLanguage),
+      breadcrumb: undefined,
+      primaryAction: landingPrimary,
+      children: (
+        <div className="h-full overflow-auto p-8">
+          <div className="max-w-5xl mx-auto">
+          {workshops.length > 0 ? (
+            <div data-tour="existing-decks">
+              <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-3">{t('existingDecks', contentLanguage)}</h3>
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm ring-1 ring-black/5 overflow-hidden divide-y divide-slate-100">
                 {countries.map(country => (
-                  <div key={country} className="border-b border-gray-100 last:border-b-0">
+                  <div key={country} className="border-b border-slate-100 last:border-b-0">
                     <button
                       onClick={() => toggleCountry(country)}
-                      className="w-full px-4 py-3 flex items-center gap-3 hover:bg-gray-50 transition-colors text-left"
+                      className="w-full px-4 py-3 flex items-center gap-3 hover:bg-slate-50 transition-colors text-left focus-ring"
                     >
                       {expandedCountries.has(country) ? (
                         <FolderOpen className="w-5 h-5 text-fastr-primary" />
                       ) : (
-                        <Folder className="w-5 h-5 text-gray-400" />
+                        <Folder className="w-5 h-5 text-slate-400" />
                       )}
-                      <span className="font-medium text-gray-800">{country}</span>
-                      <span className="text-sm text-gray-500">({workshopsByCountry[country].length})</span>
-                      <ChevronDown className={`w-4 h-4 text-gray-400 ml-auto transition-transform ${expandedCountries.has(country) ? 'rotate-180' : ''}`} />
+                      <span className="text-body-sm font-semibold text-slate-800">{country}</span>
+                      <span className="text-caption text-slate-500">({workshopsByCountry[country].length})</span>
+                      <ChevronDown className={`w-4 h-4 text-slate-400 ml-auto transition-transform ${expandedCountries.has(country) ? 'rotate-180' : ''}`} />
                     </button>
                     {expandedCountries.has(country) && (
-                      <div className="bg-gray-50 border-t border-gray-100">
+                      <div className="bg-slate-50 border-t border-slate-100">
                         {workshopsByCountry[country].map(workshop => (
                           <button
                             key={workshop.id}
@@ -3060,12 +2190,12 @@ function App() {
                               setPendingDeckType((workshop as any).deckType || 'workshop')
                               setAppMode('workshop')
                             }}
-                            className="w-full px-4 py-2 pl-12 flex items-center gap-3 hover:bg-gray-100 transition-colors text-left"
+                            className="w-full px-4 py-2 pl-12 flex items-center gap-3 hover:bg-slate-100 transition-colors text-left focus-ring"
                           >
-                            <FileText className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-700">{workshop.name}</span>
+                            <FileText className="w-4 h-4 text-slate-400" />
+                            <span className="text-body-sm text-slate-700">{workshop.name}</span>
                             {(workshop as any).deckType === 'webinar' && (
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-600 font-medium">
+                              <span className="inline-flex items-center rounded-pill px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-indigo-50 text-indigo-700">
                                 {t('webinarBadge', contentLanguage)}
                               </span>
                             )}
@@ -3078,45 +2208,77 @@ function App() {
                 ))}
               </div>
             </div>
+          ) : (
+            <div className="bg-white rounded-2xl border border-slate-200 ring-1 ring-black/5 shadow-sm p-12 text-center">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-fastr-light flex items-center justify-center">
+                <Presentation className="w-7 h-7 text-fastr-primary" />
+              </div>
+              <h2 className="text-h2 text-slate-900 m-0 mb-1">{t('noWorkshopsYet', contentLanguage)}</h2>
+              <p className="text-body-sm text-slate-500 mb-5">{t('noWorkshopsYetDesc', contentLanguage)}</p>
+              <button
+                onClick={() => { setPendingDeckType('workshop'); setAppMode('workshop') }}
+                className="btn-primary"
+              >
+                <Plus className="w-4 h-4" />
+                <span>{t('newWorkshop', contentLanguage)}</span>
+              </button>
+            </div>
           )}
-          {/* Manage Storage link */}
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => setShowStorageManager(true)}
-              className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-fastr-primary transition-colors"
-            >
-              <HardDrive className="w-3.5 h-3.5" />
-              {t('manageStorage', contentLanguage)}
-            </button>
           </div>
-          </div>
-        </div>
-        {showStorageManager && createPortal(
-          <StorageManager
+          <GuidedTour
+            ref={landingTourRef}
+            tour="landing"
             language={contentLanguage}
-            onClose={() => setShowStorageManager(false)}
-          />,
-          document.body
-        )}
-        <GuidedTour
-          ref={landingTourRef}
-          tour="landing"
-          language={contentLanguage}
-          workshopCount={workshops.length}
-        />
-        <HelpButton
-          onClick={() => landingTourRef.current?.startTour()}
-          language={contentLanguage}
-        />
-      </div>
-    )
+            workshopCount={workshops.length}
+          />
+          <HelpButton
+            onClick={() => landingTourRef.current?.startTour()}
+            language={contentLanguage}
+          />
+        </div>
+      ),
+    })
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // Browse Library Mode
+  // Content Library (Browse + Select-for-export modes)
   // ─────────────────────────────────────────────────────────────────────────
-  if (appMode === 'library') {
-    return <LibraryMode onBack={() => setAppMode('select')} />
+  if (appMode === 'library' || appMode === 'quick') {
+    // `appMode='quick'` is preserved as a deep link to the export mode;
+    // both modes render under the Content library nav.
+    const effectiveLibraryView: 'browse' | 'select' =
+      appMode === 'quick' ? 'select' : libraryView
+
+    const libraryToggle = (
+      <div className="inline-flex items-stretch border border-slate-200 bg-white rounded-lg p-0.5">
+        <button
+          onClick={() => { setLibraryView('browse'); if (appMode === 'quick') setAppMode('library') }}
+          aria-pressed={effectiveLibraryView === 'browse'}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-body-sm font-semibold transition-colors ${
+            effectiveLibraryView === 'browse' ? 'bg-fastr-primary text-white' : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5" />
+          {t('browseMode', contentLanguage)}
+        </button>
+        <button
+          onClick={() => { setLibraryView('select'); if (appMode === 'quick') setAppMode('library') }}
+          aria-pressed={effectiveLibraryView === 'select'}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-body-sm font-semibold transition-colors ${
+            effectiveLibraryView === 'select' ? 'bg-fastr-primary text-white' : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <Download className="w-3.5 h-3.5" />
+          {t('selectForExport', contentLanguage)}
+        </button>
+      </div>
+    )
+
+    return renderShell({
+      section: t('navLibrary', contentLanguage),
+      topbarActions: libraryToggle,
+      children: effectiveLibraryView === 'select' ? <QuickExportMode /> : <LibraryMode />,
+    })
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -3133,171 +2295,167 @@ function App() {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // Quick Export Mode
+  // Settings Mode
   // ─────────────────────────────────────────────────────────────────────────
-  if (appMode === 'quick') {
-    return <QuickExportMode onBack={() => setAppMode('select')} />
+  if (appMode === 'settings') {
+    return renderShell({
+      section: t('navSettings', contentLanguage),
+      children: <SettingsPage />,
+    })
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // Workshop Mode (default)
+  // Workshop Mode (default) — wrapped in AppShell with the toolbar in topbar
   // ─────────────────────────────────────────────────────────────────────────
+  const workshopSection = currentConfig?.workshop?.name || currentWorkshopId || t('navWorkshops', contentLanguage)
+  const totalDays = currentConfig?.schedule?.days || 0
+  const workshopBreadcrumb = totalDays > 0
+    ? `${totalDays} ${totalDays === 1 ? t('day', contentLanguage) : t('day', contentLanguage) + 's'}`
+    : undefined
+
+  const workshopTopbarActions = (
+    <>
+      {/* Auto-save pill — visible state, retry on failure */}
+      {saveStatus === 'saving' && (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-caption font-semibold bg-slate-100 text-slate-600">
+          <RefreshCw className="w-3 h-3 animate-spin" />
+          {t('saving', contentLanguage)}
+        </span>
+      )}
+      {saveStatus === 'saved' && (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-caption font-semibold bg-emerald-50 text-emerald-700">
+          <Check className="w-3 h-3" />
+          {t('saved', contentLanguage)}
+        </span>
+      )}
+      {saveStatus === 'error' && (
+        <button
+          onClick={() => useWorkshopStore.getState().saveCurrentWorkshop()}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-caption font-semibold bg-red-50 text-red-700 hover:bg-red-100 transition-colors focus-ring"
+          title={t('saveFailed', contentLanguage)}
+        >
+          <AlertTriangle className="w-3 h-3" />
+          {t('saveFailed', contentLanguage)} · {t('retry', contentLanguage)}
+        </button>
+      )}
+
+      <button
+        onClick={() => setRightPanelOpen(!rightPanelOpen)}
+        className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-body-sm font-semibold transition-colors focus-ring ${
+          rightPanelOpen
+            ? 'bg-fastr-primary text-white'
+            : 'text-slate-600 hover:bg-slate-100'
+        }`}
+        title={t('aiHelp', contentLanguage)}
+        aria-pressed={rightPanelOpen}
+        data-tour="toolbar-ai"
+      >
+        <Sparkles className="w-4 h-4" />
+        <span className="hidden xl:inline">{t('aiHelp', contentLanguage)}</span>
+      </button>
+
+      <div className="w-px h-6 bg-slate-200 mx-1" />
+
+      <button
+        onClick={() => setShowPreview(!showPreview)}
+        className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-body-sm font-semibold transition-colors focus-ring ${
+          showPreview
+            ? 'bg-fastr-primary text-white'
+            : 'text-slate-600 hover:bg-slate-100'
+        }`}
+        title={t('preview', contentLanguage)}
+        aria-pressed={showPreview}
+      >
+        <Eye className="w-4 h-4" />
+        <span className="hidden xl:inline">{t('preview', contentLanguage)}</span>
+      </button>
+
+      <button
+        onClick={() => setShowSettings(true)}
+        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-body-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors focus-ring"
+        title={t('workshopDetails', contentLanguage)}
+      >
+        <Settings className="w-4 h-4" />
+        <span className="hidden xl:inline">{t('workshopDetails', contentLanguage)}</span>
+      </button>
+
+      {currentWorkshopId && (
+        <button
+          onClick={() => setShowWorkshopSelector(true)}
+          className="flex items-center gap-1.5 px-2 py-1.5 rounded-md text-body-sm text-slate-500 hover:bg-slate-100 transition-colors focus-ring"
+          title={t('selectWorkshop', contentLanguage)}
+        >
+          <FolderOpen className="w-4 h-4" />
+          <ChevronDown className="w-3.5 h-3.5" />
+        </button>
+      )}
+    </>
+  )
+
+  const workshopPrimary = (
+    <div className="relative" data-tour="toolbar-export">
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowExportMenu(!showExportMenu)
+        }}
+        disabled={isBuilding || !currentWorkshopId}
+        className="btn-accent"
+      >
+        {isBuilding ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+        <span>{t('export', contentLanguage)}</span>
+        <ChevronDown className="w-4 h-4" />
+      </button>
+      {showExportMenu && (
+        <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg ring-1 ring-black/5 border border-slate-200 py-1 z-30">
+          <button onClick={() => handleBuild('html')} className="w-full flex items-center gap-2 px-4 py-2 text-body-sm text-slate-700 hover:bg-slate-50">
+            <Eye className="w-4 h-4 text-slate-400" />
+            <span>{t('exportHTML', contentLanguage)}</span>
+          </button>
+          <button onClick={() => handleBuild('pdf')} className="w-full flex items-center gap-2 px-4 py-2 text-body-sm text-slate-700 hover:bg-slate-50">
+            <FileText className="w-4 h-4 text-slate-400" />
+            <span>{t('exportPDF', contentLanguage)}</span>
+          </button>
+          <button onClick={() => handleBuild('pptx')} className="w-full flex items-center gap-2 px-4 py-2 text-body-sm text-slate-700 hover:bg-slate-50">
+            <Presentation className="w-4 h-4 text-slate-400" />
+            <span>{t('exportPowerPoint', contentLanguage)}</span>
+          </button>
+        </div>
+      )}
+    </div>
+  )
+
+  // Workshop authoring is rendered WITHOUT the global sidebar — the sidebar's
+  // job is to switch between top-level surfaces, but inside a workshop the user
+  // is focused on building. A "← Workshops" back button + topbar actions cover
+  // navigation. The drawer/preview/AI panel still work the same way.
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
-      {/* Header / Toolbar */}
-      <header className="bg-gradient-to-r from-fastr-primary to-fastr-primary-light text-white px-4 py-2.5 flex items-center shadow-md z-20">
-        {/* Left zone: Back + Workshop selector */}
-        <div className="flex items-center gap-2">
+    <div className="h-screen flex flex-col bg-slate-50">
+      <header className="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4 flex-shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={() => setAppMode('select')}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-            title={t('back', contentLanguage)}
-            aria-label={t('back', contentLanguage)}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-body-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors focus-ring"
+            title={t('navWorkshops', contentLanguage)}
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">{t('navWorkshops', contentLanguage)}</span>
           </button>
-
-          {currentWorkshopId && (
-            <button
-              onClick={() => setShowWorkshopSelector(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              <FolderOpen className="w-4 h-4" />
-              <span className="text-sm font-medium max-w-[200px] truncate">
-                {currentConfig?.workshop?.name || currentWorkshopId}
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
+          <span className="text-slate-300">/</span>
+          <h1 className="text-body font-semibold text-slate-900 m-0 truncate">{workshopSection}</h1>
+          {workshopBreadcrumb && (
+            <>
+              <span className="text-slate-300 hidden md:inline">·</span>
+              <span className="text-caption text-slate-500 hidden md:inline truncate">{workshopBreadcrumb}</span>
+            </>
           )}
         </div>
-
-        {/* Spacer */}
-        <div className="flex-1" />
-
-        {/* Right zone: Save status + toolbar buttons */}
-        <div className="flex items-center gap-1">
-          {/* Save status */}
-          {saveStatus === 'saving' && (
-            <span className="flex items-center gap-1.5 text-xs text-white/70 px-2">
-              <RefreshCw className="w-3 h-3 animate-spin" />
-              {t('saving', contentLanguage)}
-            </span>
-          )}
-          {saveStatus === 'saved' && (
-            <span className="flex items-center gap-1.5 text-xs text-green-300 px-2">
-              <Check className="w-3 h-3" />
-              {t('saved', contentLanguage)}
-            </span>
-          )}
-
-          {/* Slides (Content Library) toggle */}
-          <button
-            onClick={() => {
-              if (leftPanelPinned) {
-                setLeftPanelPinned(false)
-                setLeftPanelOpen(false)
-              } else {
-                setLeftPanelOpen(!leftPanelOpen)
-              }
-            }}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
-              leftPanelOpen || leftPanelPinned ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
-            }`}
-            title={t('slidesButton', contentLanguage)}
-            aria-pressed={leftPanelOpen || leftPanelPinned}
-            data-tour="toolbar-slides"
-          >
-            <BookOpen className="w-4 h-4" />
-            <span className="hidden lg:inline">{t('slidesButton', contentLanguage)}</span>
-          </button>
-
-          {/* AI Help toggle */}
-          <button
-            onClick={() => setRightPanelOpen(!rightPanelOpen)}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
-              rightPanelOpen ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
-            }`}
-            title={t('aiHelp', contentLanguage)}
-            aria-pressed={rightPanelOpen}
-            data-tour="toolbar-ai"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span className="hidden lg:inline">{t('aiHelp', contentLanguage)}</span>
-          </button>
-
-          <div className="w-px h-6 bg-white/20 mx-1" />
-
-          {/* Preview toggle */}
-          <button
-            onClick={() => setShowPreview(!showPreview)}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm transition-colors ${
-              showPreview ? 'bg-white/20 text-white' : 'text-white/80 hover:bg-white/10'
-            }`}
-            title={t('preview', contentLanguage)}
-            aria-pressed={showPreview}
-          >
-            <Eye className="w-4 h-4" />
-            <span className="hidden lg:inline">{t('preview', contentLanguage)}</span>
-          </button>
-
-          {/* Settings */}
-          <button
-            onClick={() => setShowSettings(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm text-white/80 hover:bg-white/10 transition-colors"
-            title={t('settings', contentLanguage)}
-          >
-            <Settings className="w-4 h-4" />
-            <span className="hidden lg:inline">{t('settings', contentLanguage)}</span>
-          </button>
-
-          {/* Export dropdown */}
-          <div className="relative" data-tour="toolbar-export">
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setShowExportMenu(!showExportMenu)
-              }}
-              disabled={isBuilding || !currentWorkshopId}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isBuilding ? (
-                <RefreshCw className="w-4 h-4 animate-spin" />
-              ) : (
-                <Download className="w-4 h-4" />
-              )}
-              <span className="text-sm font-medium">{t('export', contentLanguage)}</span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-
-            {showExportMenu && (
-              <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-xl shadow-2xl ring-1 ring-black/5 py-1 z-30">
-                <button
-                  onClick={() => handleBuild('html')}
-                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                >
-                  <Eye className="w-4 h-4 text-gray-400" />
-                  <span>{t('exportHTML', contentLanguage)}</span>
-                </button>
-                <button
-                  onClick={() => handleBuild('pdf')}
-                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                >
-                  <FileText className="w-4 h-4 text-gray-400" />
-                  <span>{t('exportPDF', contentLanguage)}</span>
-                </button>
-                <button
-                  onClick={() => handleBuild('pptx')}
-                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                >
-                  <Presentation className="w-4 h-4 text-gray-400" />
-                  <span>{t('exportPowerPoint', contentLanguage)}</span>
-                </button>
-              </div>
-            )}
-          </div>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {workshopTopbarActions}
+          {workshopPrimary}
         </div>
       </header>
-
+      <div className="flex-1 flex flex-col min-h-0">
       {/* Error banner */}
       {error && (
         <div className="bg-red-50 border-b border-red-200 text-red-700 px-4 py-2.5 flex items-center gap-3">
@@ -3317,78 +2475,13 @@ function App() {
         onDragEnd={handleDragEnd}
       >
       <div className="flex-1 flex overflow-hidden relative">
-        {/* Left Panel - Content Library (pinned or slide-out) */}
-        {leftPanelPinned ? (
-          // Pinned mode - part of flex layout
-          <div className="h-full w-80 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-            <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
-              <span className="font-semibold text-sm text-gray-700">{t('contentLibrary', contentLanguage)}</span>
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setLeftPanelPinned(false)}
-                  className="p-1 text-fastr-primary hover:bg-fastr-primary/10 rounded"
-                  title={t('unpinPanel', contentLanguage)}
-                >
-                  <PinOff className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => {
-                    setLeftPanelPinned(false)
-                    setLeftPanelOpen(false)
-                  }}
-                  className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-                  title="Close panel"
-                  aria-label="Close panel"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <ContentLibrary onImportSlides={() => setAppMode('import')} />
-            </div>
-          </div>
-        ) : (
-          // Slide-out mode - absolute positioned overlay
-          <div
-            className={`absolute left-0 top-0 bottom-0 z-10 transition-transform duration-300 ease-in-out ${
-              leftPanelOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-          >
-            <div className="h-full w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
-              <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50/80">
-                <span className="font-semibold text-sm text-gray-700">{t('contentLibrary', contentLanguage)}</span>
-                <div className="flex items-center gap-1">
-                  <button
-                    onClick={() => {
-                      setLeftPanelPinned(true)
-                      setLeftPanelOpen(true)
-                    }}
-                    className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-fastr-primary/10 rounded"
-                    title={t('pinPanel', contentLanguage)}
-                    aria-label={t('pinPanel', contentLanguage)}
-                  >
-                    <Pin className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setLeftPanelOpen(false)}
-                    className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-                    title="Close panel"
-                    aria-label="Close panel"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 overflow-hidden">
-                <ContentLibrary onImportSlides={() => setAppMode('import')} />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Center - Main content */}
-        <main className="flex-1 overflow-hidden">
+        {/* Center - Main content. When the AddContentDrawer OR AI panel is open
+            we reserve 400px / 320px on the right so day columns stay visible. */}
+        <main
+          className={`flex-1 overflow-hidden transition-[padding] duration-200 ${
+            addContentDrawerOpen ? 'pr-[400px]' : rightPanelOpen ? 'pr-80' : ''
+          }`}
+        >
           {currentWorkshopId ? (
             showPreview ? (
               <SlideSorter onBack={() => setShowPreview(false)} />
@@ -3429,20 +2522,24 @@ function App() {
                                         index={idx}
                                         dayNum={1}
                                         totalDays={1}
+                                        totalSessions={sessions.length}
                                         onEdit={handleEditSession}
                                         onMoveToDay={handleMoveToDay}
                                       />
                                     ))}
                                   </SortableContext>
 
-                                  {/* Add slide button */}
+                                  {/* + Add content — opens AddContentDrawer */}
                                   <button
-                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
-                                    onClick={() => setAddSessionMenuDay(1)}
-                                    data-tour="add-session-btn"
+                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-slate-200 text-slate-500 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2 focus-ring"
+                                    onClick={() => {
+                                      setAddContentDayNum(1)
+                                      setAddContentDrawerOpen(true)
+                                    }}
+                                    data-tour="add-content-btn"
                                   >
                                     <Plus className="w-4 h-4" />
-                                    <span className="text-sm">{t('addSlideToWebinar', contentLanguage)}</span>
+                                    <span className="text-body-sm font-semibold">{t('addContent', contentLanguage)}</span>
                                   </button>
                                 </div>
                               </DroppableDayColumn>
@@ -3490,7 +2587,7 @@ function App() {
                               <DroppableDayColumn key={dayNum} dayNum={dayNum}>
                                 {/* Day header */}
                                 <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
-                                  <div className="flex items-start justify-between">
+                                  <div className="flex items-start justify-between gap-2">
                                     <h3 className="font-semibold text-white">
                                       Day {dayNum}
                                       {currentConfig?.schedule?.day_titles?.[dayNum] && (
@@ -3499,19 +2596,33 @@ function App() {
                                         </span>
                                       )}
                                     </h3>
-                                    {(currentConfig?.schedule?.days ?? 0) > 1 && (
+                                    <div className="flex items-center gap-1 flex-shrink-0">
                                       <button
                                         onClick={() => {
-                                          if (confirm(t('confirmDeleteDayMsg', contentLanguage).replace('{day}', String(dayNum)))) {
-                                            useWorkshopStore.getState().removeDay(dayNum)
-                                          }
+                                          setAddContentDayNum(dayNum)
+                                          setAddContentDrawerOpen(true)
                                         }}
-                                        className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
-                                        title={`${t('deleteDay', contentLanguage)} ${dayNum}`}
+                                        {...(dayNum === 1 ? { 'data-tour': 'add-content-btn' } : {})}
+                                        title={t('addContent', contentLanguage)}
+                                        className="flex items-center gap-1 px-2 py-1 rounded-md text-caption font-semibold bg-white/15 text-white hover:bg-white/25 transition-colors focus-ring"
                                       >
-                                        <Trash2 className="w-4 h-4" />
+                                        <Plus className="w-3.5 h-3.5" />
+                                        <span>{t('addContent', contentLanguage)}</span>
                                       </button>
-                                    )}
+                                      {(currentConfig?.schedule?.days ?? 0) > 1 && (
+                                        <button
+                                          onClick={() => {
+                                            if (confirm(t('confirmDeleteDayMsg', contentLanguage).replace('{day}', String(dayNum)))) {
+                                              useWorkshopStore.getState().removeDay(dayNum)
+                                            }
+                                          }}
+                                          className="p-1 rounded hover:bg-white/20 text-white/40 hover:text-white transition-colors"
+                                          title={`${t('deleteDay', contentLanguage)} ${dayNum}`}
+                                        >
+                                          <Trash2 className="w-4 h-4" />
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
                                   {currentConfig?.schedule?.day_start_times?.[dayNum] && (
                                     <div className="text-xs text-white/50 mt-0.5">
@@ -3533,20 +2644,25 @@ function App() {
                                         index={idx}
                                         dayNum={dayNum}
                                         totalDays={currentConfig?.schedule?.days || 1}
+                                        totalSessions={sessions.length}
                                         onEdit={handleEditSession}
                                         onMoveToDay={handleMoveToDay}
                                       />
                                     ))}
                                   </SortableContext>
 
-                                  {/* Add session button */}
+                                  {/* + Add content (bottom dashed) — keep for users
+                                      at the bottom of long day columns. The primary
+                                      entry point is the button in the day header. */}
                                   <button
-                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-gray-200 text-gray-400 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2"
-                                    onClick={() => setAddSessionMenuDay(dayNum)}
-                                    {...(dayNum === 1 ? { 'data-tour': 'add-session-btn' } : {})}
+                                    className="w-full py-2 px-3 rounded-lg border-2 border-dashed border-slate-200 text-slate-500 hover:border-fastr-secondary hover:text-fastr-secondary hover:bg-fastr-secondary/5 transition-colors flex items-center justify-center gap-2 focus-ring"
+                                    onClick={() => {
+                                      setAddContentDayNum(dayNum)
+                                      setAddContentDrawerOpen(true)
+                                    }}
                                   >
                                     <Plus className="w-4 h-4" />
-                                    <span className="text-sm">{t('addSession', contentLanguage)}</span>
+                                    <span className="text-body-sm font-semibold">{t('addContent', contentLanguage)}</span>
                                   </button>
                                 </div>
                               </DroppableDayColumn>
@@ -3636,33 +2752,27 @@ function App() {
 
       {/* Workshop Selector Modal */}
       {showWorkshopSelector && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-md mx-4">
-            <div className="flex items-center justify-between px-5 py-4 border-b">
-              <h2 className="font-semibold">
-                {showCreateWorkshop
-                  ? (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage))
-                  : (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('selectWorkshop', contentLanguage))
-                }
-              </h2>
-              <button
-                onClick={() => {
-                  setShowWorkshopSelector(false)
-                  setShowCreateWorkshop(false)
-                  setAiQuestions([])
-                  setAiAnswers({})
-                  setUploadFile(null)
-                  setUploadText('')
-                  if (pendingDeckType === 'webinar' && !currentWorkshopId) {
-                    setAppMode('select')
-                  }
-                }}
-                aria-label="Close dialog"
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+        <Modal
+          open
+          onClose={() => {
+            setShowWorkshopSelector(false)
+            setShowCreateWorkshop(false)
+            setAiQuestions([])
+            setAiAnswers({})
+            setUploadFile(null)
+            setUploadText('')
+            if (pendingDeckType === 'webinar' && !currentWorkshopId) {
+              setAppMode('select')
+            }
+          }}
+          title={
+            showCreateWorkshop
+              ? (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage))
+              : (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('selectWorkshop', contentLanguage))
+          }
+          size="md"
+          closeOnBackdrop={false}
+        >
 
             {showCreateWorkshop ? (
               <div className="p-4">
@@ -4046,16 +3156,16 @@ function App() {
               </div>
             ) : (
               <div className="p-4">
-                {/* Create New button */}
+                {/* Create New — secondary action; primary entry is "+ New" in the topbar */}
                 <button
                   onClick={() => {
                     setShowCreateWorkshop(true)
                     if (pendingDeckType === 'webinar') setCreateMode('manual')
                   }}
-                  className="w-full mb-4 py-3 px-4 rounded-lg border-2 border-dashed border-fastr-primary text-fastr-primary hover:bg-fastr-primary/5 transition-colors flex items-center justify-center gap-2"
+                  className="w-full mb-4 py-2 px-3 rounded-lg text-body-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2 focus-ring border border-slate-200"
                 >
-                  <Plus className="w-5 h-5" />
-                  <span className="font-medium">
+                  <Plus className="w-4 h-4" />
+                  <span>
                     {pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage)}
                   </span>
                 </button>
@@ -4146,24 +3256,18 @@ function App() {
                 })()}
               </div>
             )}
-          </div>
-        </div>
+        </Modal>
       )}
 
-      {/* Settings Modal */}
+      {/* Workshop Details Modal */}
       {showSettings && currentConfig && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-2xl ring-1 ring-black/5 w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between px-6 py-4 border-b">
-              <h2 className="text-lg font-semibold text-gray-800">{t('workshopSettings', contentLanguage)}</h2>
-              <button
-                onClick={() => setShowSettings(false)}
-                aria-label="Close settings"
-                className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+        <Modal
+          open
+          onClose={() => setShowSettings(false)}
+          title={t('workshopDetails', contentLanguage)}
+          size="lg"
+          closeOnBackdrop={false}
+        >
 
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {/* Cover Slide Section */}
@@ -4208,11 +3312,12 @@ function App() {
                 </h3>
                 <div className="grid grid-cols-3 gap-3">
                   {([
-                    { value: 'classic' as const, icon: '≡', label: t('themeClassic', contentLanguage), desc: t('themeClassicDesc', contentLanguage) },
-                    { value: 'clean' as const, icon: '○', label: t('themeClean', contentLanguage), desc: t('themeCleanDesc', contentLanguage) },
-                    { value: 'bold' as const, icon: '■', label: t('themeBold', contentLanguage), desc: t('themeBoldDesc', contentLanguage) },
+                    { value: 'classic' as const, Icon: AlignJustify, label: t('themeClassic', contentLanguage), desc: t('themeClassicDesc', contentLanguage) },
+                    { value: 'clean'   as const, Icon: Circle,        label: t('themeClean',   contentLanguage), desc: t('themeCleanDesc',   contentLanguage) },
+                    { value: 'bold'    as const, Icon: Square,        label: t('themeBold',    contentLanguage), desc: t('themeBoldDesc',    contentLanguage) },
                   ]).map((theme) => {
                     const isSelected = ((currentConfig.workshop as any).theme || 'classic') === theme.value
+                    const ThemeIcon = theme.Icon
                     return (
                       <button
                         key={theme.value}
@@ -4223,7 +3328,7 @@ function App() {
                             : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                         }`}
                       >
-                        <span className="text-2xl mb-1.5" style={{ color: isSelected ? '#09544F' : '#6b7280' }}>{theme.icon}</span>
+                        <ThemeIcon className={`w-6 h-6 mb-1.5 ${isSelected ? 'text-fastr-primary' : 'text-slate-500'}`} aria-hidden />
                         <span className={`text-sm font-semibold ${isSelected ? 'text-fastr-primary' : 'text-gray-700'}`}>{theme.label}</span>
                         <span className="text-xs text-gray-500 mt-0.5">{theme.desc}</span>
                       </button>
@@ -4558,8 +3663,7 @@ function App() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
+        </Modal>
       )}
 
       {/* Edit Session Modal */}
@@ -4577,36 +3681,16 @@ function App() {
         />
       )}
 
-      {/* Add Session Menu */}
-      {addSessionMenuDay !== null && (
-        <AddSessionMenu
-          dayNum={addSessionMenuDay}
-          isWebinar={(currentConfig?.workshop as any)?.deckType === 'webinar'}
-          onClose={() => setAddSessionMenuDay(null)}
-          onAddSession={(session) => addSession(addSessionMenuDay, session)}
-          onAddToExistingSession={(sessionIdx, topic) => {
-            const dayKey = `day${addSessionMenuDay}`
-            const sessions = currentConfig?.schedule?.[dayKey] || []
-            const existingSession = sessions[sessionIdx]
-            if (existingSession) {
-              updateSession(addSessionMenuDay, sessionIdx, {
-                topics: [...(existingSession.topics || []), topic.id],
-                slides: [...(existingSession.slides || []), topic.file],
-                duration: (existingSession.duration || 0) + (topic.duration || 30),
-              })
-            }
-          }}
-          contentLibrary={contentLibrary}
-          existingSessions={
-            (currentConfig?.schedule?.[`day${addSessionMenuDay}`] || [])
-              .map((session: Session, index: number) => ({ index, session }))
-              .filter(({ session }: { session: Session }) =>
-                session.module || // Module sessions
-                (!session.type && session.slides && session.slides.length > 0) // Sessions with slides
-              )
-          }
-        />
-      )}
+      {/* + Add content drawer */}
+      <AddContentDrawer
+        open={addContentDrawerOpen}
+        onClose={() => setAddContentDrawerOpen(false)}
+        onImportSlides={() => {
+          setAddContentDrawerOpen(false)
+          setAppMode('import')
+        }}
+        targetDayNum={addContentDayNum}
+      />
 
       {/* Guided tour for builder mode */}
       {currentWorkshopId && (
@@ -4615,7 +3699,7 @@ function App() {
             ref={builderTourRef}
             tour="builder"
             language={contentLanguage}
-            panelControls={{ setLeftPanelOpen, setRightPanelOpen }}
+            panelControls={{ setRightPanelOpen }}
           />
           <HelpButton
             onClick={() => builderTourRef.current?.startTour()}
@@ -4623,6 +3707,7 @@ function App() {
           />
         </>
       )}
+      </div>
     </div>
   )
 }

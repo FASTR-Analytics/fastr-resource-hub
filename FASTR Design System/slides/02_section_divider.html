@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#09544F; color:#fff; position:relative; overflow:hidden; padding:80px 100px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; transform-origin:center;}
+  .slide .num { position:absolute; top:48px; left:80px; font-size:14px; font-weight:600; letter-spacing:.4em; color:#D0CB17;}
+  .slide .fastr { position:absolute; bottom:40px; right:80px; height:34px; opacity:.6;}
+  h1 { font-size:78px; font-weight:700; margin:0 0 16px; line-height:1.05; border-bottom:4px solid #D0CB17; padding-bottom:.28em; max-width:1000px;}
+  .sub { font-size:26px; font-weight:400; opacity:.85; max-width:780px; line-height:1.4;}
+  .arcs { position:absolute; left:-160px; top:-160px; width:520px; height:520px; opacity:.18;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="num">PART 02</div>
+  <svg class="arcs" viewBox="0 0 400 400">
+    <g fill="none" stroke="#D0CB17" stroke-width="2">
+      <circle cx="0" cy="0" r="120"/><circle cx="0" cy="0" r="180"/><circle cx="0" cy="0" r="240"/>
+      <circle cx="0" cy="0" r="300"/><circle cx="0" cy="0" r="360"/><circle cx="0" cy="0" r="420"/>
+    </g>
+  </svg>
+  <h1>Data quality assessment</h1>
+  <div class="sub">Completeness, outliers, internal consistency — and what each one is and isn&rsquo;t telling you.</div>
+  <img src="../assets/logos/FASTR_White_Horiz.png" class="fastr">
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

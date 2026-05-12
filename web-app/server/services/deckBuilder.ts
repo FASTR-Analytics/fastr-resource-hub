@@ -7,7 +7,7 @@ import {
   getModuleName,
   loadModuleMeta,
 } from './moduleRegistry.js'
-import { getImportedSlides, getImportedModule, getExternalDeck, getExternalPages } from '../db/database.js'
+import { getImportedSlides, getImportedModule, getExternalDeck, getExternalPages, getCustomSlides } from '../db/database.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -72,6 +72,13 @@ paginate: true
 
   const numDays = config.schedule.days || 1
 
+  // Pre-fetch this workshop's custom slides from the DB so `loadSlideContent`
+  // can resolve `custom_slides/{filename}` references without per-slide queries.
+  const customSlideRows = await getCustomSlides(workshopId)
+  const customSlideMap = new Map<string, string>(
+    customSlideRows.map(r => [r.filename, r.content])
+  )
+
   // Track cumulative session number across all days (only count content sessions, not breaks/structure)
   let sessionNumber = 0
 
@@ -87,7 +94,7 @@ paginate: true
         sessionNumber++
       }
 
-      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined, lang)
+      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined, lang, customSlideMap)
       if (slideContent) {
         slides.push(slideContent)
       }
@@ -105,10 +112,12 @@ export async function buildSessionMarkdown(
   config: WorkshopConfig,
   dayNumber: number,
   sessionNumber?: number,
-  language?: Language
+  language?: Language,
+  /** Custom slide content keyed by filename, pre-fetched from the DB by the caller. */
+  customSlideMap?: Map<string, string>,
 ): Promise<string | null> {
   const lang: Language = language || (config.workshop as any).language || 'en'
-  return buildSessionSlides(session, config, dayNumber, sessionNumber, lang)
+  return buildSessionSlides(session, config, dayNumber, sessionNumber, lang, customSlideMap)
 }
 
 /**
@@ -119,7 +128,8 @@ async function buildSessionSlides(
   config: WorkshopConfig,
   dayNumber: number,
   sessionNumber?: number,
-  language: Language = 'en'
+  language: Language = 'en',
+  customSlideMap?: Map<string, string>,
 ): Promise<string | null> {
   const allSlideContents: string[] = []
   const coreContentPath = getCoreContentPath(language)
@@ -129,7 +139,7 @@ async function buildSessionSlides(
   // e.g., Add m4_0_fastr_methods_overview.md before condensed content
   if (session.slides && session.slides.length > 0) {
     for (const slideFile of session.slides) {
-      const content = await loadSlideContent(slideFile, config, dayNumber, session, language)
+      const content = await loadSlideContent(slideFile, config, dayNumber, session, language, customSlideMap)
       if (content) {
         allSlideContents.push(content)
       }
@@ -542,13 +552,29 @@ async function loadSlideContent(
   config: WorkshopConfig,
   dayNumber: number,
   session: Session,
-  language: Language = 'en'
+  language: Language = 'en',
+  customSlideMap?: Map<string, string>,
 ): Promise<string | null> {
   // Check for dynamic agenda slides (day1_agenda, day2_agenda, etc.)
   const agendaMatch = slideFile.match(/^day(\d+)_agenda$/)
   if (agendaMatch) {
     const agendaDay = parseInt(agendaMatch[1])
     return buildDayAgendaSlide(config, agendaDay)
+  }
+
+  // Workshop-scoped custom slides — stored in the `custom_slides` DB table
+  // and referenced from session.slides as `custom_slides/{filename}`.
+  // Pre-fetched by buildMarkdown and passed in via `customSlideMap`.
+  if (slideFile.startsWith('custom_slides/') && customSlideMap) {
+    const filename = slideFile.slice('custom_slides/'.length)
+    const content = customSlideMap.get(filename)
+    if (content) {
+      // Strip frontmatter + trailing separator so the slide composes cleanly
+      // with the deck's outer frontmatter and `---` joiners.
+      let stripped = content.replace(/^---[\s\S]*?---\s*/m, '')
+      stripped = stripped.replace(/\n---\s*$/, '')
+      return substituteVariables(stripped.trim(), config, dayNumber, session, language)
+    }
   }
 
   const coreContentPath = getCoreContentPath(language)

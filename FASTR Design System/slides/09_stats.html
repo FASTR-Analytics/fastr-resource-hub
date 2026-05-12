@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#09544F; color:#fff; padding:80px 100px; box-sizing:border-box; position:relative; transform-origin:center; display:flex; flex-direction:column; justify-content:space-between;}
+  h1 { font-size:54px; font-weight:700; margin:0 0 12px; border-bottom:4px solid #D0CB17; padding-bottom:.25em; max-width:900px;}
+  .sub { font-size:24px; opacity:.9; max-width:840px; line-height:1.4; margin-top:12px;}
+  .row { display:flex; gap:48px; align-items:flex-end;}
+  .stat { flex:1;}
+  .n { font-size:68px; font-weight:700; color:#D0CB17; line-height:1;}
+  .n small { font-size:30px; color:#fff; opacity:.9; font-weight:500; margin-left:6px;}
+  .lbl { margin-top:8px; font-size:16px; opacity:.85; line-height:1.4;}
+  .footer { display:flex; justify-content:space-between; align-items:flex-end; font-size:13px; color:rgba(255,255,255,.7);}
+  .footer img { height:28px; opacity:.8;}
+  .arcs { position:absolute; right:-200px; bottom:-200px; width:600px; height:600px; opacity:.15;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <svg class="arcs" viewBox="0 0 600 600">
+    <g fill="none" stroke="#D0CB17" stroke-width="2">
+      <circle cx="600" cy="600" r="120"/><circle cx="600" cy="600" r="200"/><circle cx="600" cy="600" r="280"/>
+      <circle cx="600" cy="600" r="360"/><circle cx="600" cy="600" r="440"/><circle cx="600" cy="600" r="520"/>
+    </g>
+  </svg>
+  <div>
+    <h1>FASTR in numbers</h1>
+    <div class="sub">Three years in, the initiative spans most of GFF&rsquo;s priority countries.</div>
+  </div>
+  <div class="row">
+    <div class="stat"><div class="n">18<small>countries</small></div><div class="lbl">Active implementations across Sub-Saharan Africa and South Asia</div></div>
+    <div class="stat"><div class="n">1.2M<small>+</small></div><div class="lbl">Facility-month records processed through the platform</div></div>
+    <div class="stat"><div class="n">340<small>analysts</small></div><div class="lbl">Trained through workshops since 2023</div></div>
+  </div>
+  <div class="footer">
+    <img src="../assets/logos/FASTR_White_Horiz.png">
+    <span>As of Q1 2026 · GFF Secretariat</span>
+  </div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

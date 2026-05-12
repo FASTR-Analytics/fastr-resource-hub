@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#21568C; color:#fff; padding:90px 110px; box-sizing:border-box; position:relative; transform-origin:center; display:flex; flex-direction:column; justify-content:center;}
+  .mark { font-family:Georgia,serif; font-size:200px; line-height:0.6; color:#CAE6E9; opacity:.5; margin:0;}
+  blockquote { margin:0; font-size:44px; font-weight:500; line-height:1.25; max-width:1000px;}
+  blockquote em { color:#D0CB17; font-style:normal; font-weight:600;}
+  cite { margin-top:32px; display:block; font-size:20px; font-style:normal; color:#CAE6E9;}
+  cite b { color:#fff; font-weight:600;}
+  .num { position:absolute; bottom:36px; right:80px; font-size:13px; color:rgba(255,255,255,.6);}
+  .fastr { position:absolute; bottom:30px; left:80px; height:28px; opacity:.7;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <p class="mark">&ldquo;</p>
+  <blockquote>The point of monitoring is not to <em>describe what happened</em>. It is to change what happens <em>next month</em>.</blockquote>
+  <cite><b>Dr. A. Niang</b> &nbsp;·&nbsp; Director, Health Information Systems &nbsp;·&nbsp; Senegal MoH</cite>
+  <img src="../assets/logos/FASTR_White_Horiz.png" class="fastr">
+  <div class="num">11 / 32</div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

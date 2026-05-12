@@ -6,14 +6,14 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
+  background-color: var(--bg-app);
 }
 
 #root {
   height: 100vh;
 }
 
-/* Custom thin scrollbars */
+/* Thin scrollbars (light surfaces) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -24,35 +24,94 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  /* slate-300 */
+  background: #CBD5E1;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  /* slate-400 */
+  background: #94A3B8;
 }
 
 /* Dark-bg scrollbars (SlideSorter, CustomSlideEditor) */
 .bg-gray-900 ::-webkit-scrollbar-thumb,
 .bg-gray-800 ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  /* slate-600 */
+  background: #475569;
 }
 
 .bg-gray-900 ::-webkit-scrollbar-thumb:hover,
 .bg-gray-800 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  /* slate-500 */
+  background: #64748B;
 }
 
 @layer components {
+  /* Canonical card surface — white, 16px radius, slate border, thin ring */
   .card-elevated {
-    @apply bg-white rounded-2xl border border-gray-200 shadow-sm ring-1 ring-black/5 transition-all;
+    @apply bg-white rounded-2xl border border-slate-200 shadow-sm ring-1 ring-black/5 transition-all;
   }
 
   .duration-bar {
-    @apply h-1 w-full bg-gray-100 rounded-full overflow-hidden mt-1.5;
+    @apply h-1 w-full bg-slate-100 rounded-full overflow-hidden mt-1.5;
   }
 
   .duration-bar-fill {
     @apply h-full bg-fastr-secondary/60 rounded-full transition-all;
+  }
+
+  /* Form inputs — slate-50 bg, slate-200 border, teal focus ring */
+  .input-base {
+    @apply bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-body-sm text-slate-900
+           placeholder-slate-400 outline-none transition-colors
+           focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/20
+           disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
+           text-body-sm font-semibold bg-fastr-primary text-white
+           hover:bg-fastr-primary-dark active:bg-fastr-primary-dark
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
+           text-body-sm font-semibold bg-white text-slate-700 border border-slate-200
+           hover:bg-slate-50 active:bg-slate-100
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
+           text-body-sm font-semibold bg-fastr-accent text-white
+           hover:bg-[#D87E12] active:bg-[#C2700F]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
+           text-body-sm font-semibold text-slate-700
+           hover:bg-slate-100 active:bg-slate-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
+           text-body-sm font-semibold bg-red-600 text-white
+           hover:bg-red-700 active:bg-red-800
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300
+           disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+  }
+
+  /* Shared focus ring helper */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40;
   }
 }

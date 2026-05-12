@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#fff; color:#2C3E50; padding:70px 90px; box-sizing:border-box; position:relative; transform-origin:center;}
+  h1 { font-size:46px; font-weight:700; color:#09544F; margin:0 0 18px; padding-bottom:.25em; border-bottom:4px solid #D0CB17;}
+  .deck { font-size:14px; color:#7F8C8D; letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px;}
+  .lede { font-size:24px; color:#2C3E50; line-height:1.45; max-width:1060px; font-weight:400;}
+  .lede strong { color:#21568C; font-weight:600;}
+  ul { margin:36px 0 0; padding-left:28px;}
+  li { font-size:22px; margin-bottom:14px; line-height:1.45;}
+  li::marker { color:#D0CB17;}
+  li strong { color:#0C716B; font-weight:600;}
+  .num { position:absolute; bottom:28px; right:80px; font-size:13px; color:#95A5A6;}
+  .fastr { position:absolute; bottom:24px; left:80px; height:24px; opacity:.6;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="deck">Module 4 · Data quality assessment</div>
+  <h1>Why monthly facility-level data?</h1>
+  <div class="lede">Monthly facility data lets you spot <strong>service disruptions within a single quarter</strong>, rather than waiting for an annual report to confirm what every analyst already suspected.</div>
+  <ul>
+    <li><strong>Granularity</strong> — district patterns surface when national averages hide them</li>
+    <li><strong>Cadence</strong> — anomalies are flagged in weeks, not years</li>
+    <li><strong>Comparability</strong> — same indicators every month make trends honest</li>
+    <li><strong>Decision-ready</strong> — outputs land in time to redirect supervision and supply</li>
+  </ul>
+  <img src="../assets/logos/FASTR_Primary_01_FullName.png" class="fastr" style="height:28px;">
+  <div class="num">04 / 32</div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

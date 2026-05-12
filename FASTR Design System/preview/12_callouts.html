@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  body { margin:0; font-family:'Poppins',sans-serif; background:#fff; padding:14px 18px; color:#2C3E50; font-size:14px;}
+  .row { display:flex; gap:10px; }
+  .box { flex:1; padding:12px 14px; border-radius:6px; border:1px solid; border-left-width:4px; line-height:1.4;}
+  .box b { display:block; font-size:13px; margin-bottom:2px;}
+  .body { font-size:12px; opacity:.85;}
+  .info    { background:rgba(26,144,192,.15);  border-color:#1A90C0;}
+  .warning { background:rgba(216,168,34,.15);  border-color:#D8A822;}
+  .error   { background:rgba(255,100,98,.15);  border-color:#FF6462;}
+  .success { background:rgba(208,203,23,.15);  border-color:#D0CB17;}
+  .info b    { color:#21568C;} .warning b { color:#7A4F0B;} .error b { color:#A6201E;} .success b { color:#6C6B0B;}
+</style></head>
+<body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+  <div class="row">
+    <div class="box info"><b>Info</b><div class="body">Sample size n = 1 247 facilities.</div></div>
+    <div class="box success"><b>Success</b><div class="body">Data passes quality checks.</div></div>
+    <div class="box warning"><b>Warning</b><div class="body">Completeness below 70%.</div></div>
+    <div class="box error"><b>Error</b><div class="body">Outliers detected in 14 districts.</div></div>
+  </div>
+</body></html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#fff; padding:54px 72px 48px; box-sizing:border-box; position:relative; transform-origin:center; color:#2C3E50; display:flex; flex-direction:column;}
+  .head { display:flex; align-items:baseline; gap:18px; border-bottom:4px solid #D0CB17; padding-bottom:14px; margin-bottom:22px;}
+  h1 { font-size:38px; font-weight:700; color:#09544F; margin:0;}
+  .deck { font-size:12px; color:#7F8C8D; letter-spacing:.18em; text-transform:uppercase; margin-left:auto;}
+  .lede { font-size:18px; color:#2C3E50; line-height:1.5; margin:0 0 28px; max-width:980px;}
+  .lede em { color:#0C716B; font-style:normal; font-weight:600;}
+  .row { display:grid; grid-template-columns:repeat(3,1fr); gap:42px; flex:1; min-height:0; align-content:stretch;}
+  .col { display:flex; flex-direction:column; padding:6px 4px;}
+  .glyph { width:64px; height:64px; background-color:#0C716B; margin-bottom:22px;
+    -webkit-mask-size:contain; mask-size:contain;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:left center; mask-position:left center;}
+  .col h3 { margin:0 0 14px; font-size:24px; color:#0C716B; font-weight:700; line-height:1.2;}
+  .col p { font-size:17px; line-height:1.55; color:#2C3E50; margin:0;}
+  .meta { margin-top:auto; padding-top:22px; display:flex; align-items:center; gap:12px; border-top:2px solid #D0CB17; width:46px;}
+  .meta { width:auto;}
+  .meta .when { font-size:14px; font-weight:600; color:#0C716B; letter-spacing:.04em;}
+  .meta .how  { font-size:13px; color:#7F8C8D;}
+  .meta .how::before { content:"·"; margin-right:8px; color:#CBD5E1;}
+  .footer { position:absolute; bottom:18px; left:72px; right:72px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#95A5A6;}
+  .footer img { height:22px; opacity:.55;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="head">
+    <h1>How we&rsquo;ll spend this morning</h1>
+    <span class="deck">Day 1 · Welcome</span>
+  </div>
+  <p class="lede">Three blocks, three different muscles &mdash; brief, lab, debrief. By lunch you&rsquo;ll have run a real check on a real country file.</p>
+  <div class="row">
+    <div class="col">
+      <div class="glyph" style="-webkit-mask-image:url('../assets/icons/communication.png'); mask-image:url('../assets/icons/communication.png');"></div>
+      <h3>Plenary briefing</h3>
+      <p>What FASTR is, why it exists, and what it has changed in countries already running it.</p>
+      <div class="meta"><span class="when">45 min</span><span class="how">Plenary</span></div>
+    </div>
+    <div class="col">
+      <div class="glyph" style="-webkit-mask-image:url('../assets/icons/raise-hand.png'); mask-image:url('../assets/icons/raise-hand.png');"></div>
+      <h3>Hands-on lab</h3>
+      <p>Load <code>hmis_RWA.csv</code>, run the data-quality module, interpret your first outputs.</p>
+      <div class="meta"><span class="when">90 min</span><span class="how">Groups of 4</span></div>
+    </div>
+    <div class="col">
+      <div class="glyph" style="-webkit-mask-image:url('../assets/icons/debrief.png'); mask-image:url('../assets/icons/debrief.png');"></div>
+      <h3>Debrief</h3>
+      <p>One thing that surprised you, one that confirmed a hunch, one you&rsquo;ll try this week.</p>
+      <div class="meta"><span class="when">30 min</span><span class="how">Plenary</span></div>
+    </div>
+  </div>
+  <div class="footer"><img src="../assets/logos/FASTR_Primary_01_FullName.png"><span>05 / 32</span></div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

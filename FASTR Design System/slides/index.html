@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>FASTR · Slide templates</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  body { margin:0; font-family:'Inter',sans-serif; background:#F8FAFC; color:#0F172A; padding:32px 40px;}
+  h1 { font-size:24px; font-weight:700; color:#1B365D; margin:0 0 6px;}
+  .lede { font-size:14px; color:#475569; margin:0 0 28px; max-width:780px; line-height:1.5;}
+  .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .card { background:#fff; border-radius:12px; border:1px solid #E2E8F0; box-shadow:0 1px 2px rgba(15,23,42,.05); overflow:hidden;}
+  .frame { aspect-ratio: 16/9; background:#0C716B; position:relative; overflow:hidden;}
+  .frame iframe { border:0; width:1280px; height:720px; transform-origin:top left; pointer-events:none;}
+  .meta { padding:12px 16px; display:flex; justify-content:space-between; align-items:baseline;}
+  .meta a { font-size:14px; font-weight:600; color:#1B365D; text-decoration:none;}
+  .meta a:hover { color:#00A9CE;}
+  .meta span { font-size:12px; color:#64748B;}
+</style></head><body>
+  <h1>FASTR · Slide templates</h1>
+  <p class="lede">Ten ready-to-use 1280&times;720 slide types pulled from the FASTR Marp theme. Click any tile to open the slide on its own. Copy the markup straight out of <code>slides/&lt;file&gt;.html</code> &mdash; each slide is self-contained.</p>
+  <div class="grid" id="g"></div>
+  <script>
+    const slides = [
+      ["01_title.html","Title cover","Workshop opener · GFF + FASTR + date"],
+      ["02_section_divider.html","Section divider","Dark-green break between modules"],
+      ["03_content.html","Content","Heading + bulleted body with lime markers"],
+      ["04_agenda.html","Agenda","Time / session / lead table"],
+      ["05_output.html","Output","Chart 60% + interpretation 40%"],
+      ["06_two_panel.html","Two-panel","Side-by-side comparison (HMIS vs HFA)"],
+      ["07_quote.html","Quote","Big quotation on dark navy"],
+      ["08_three_up.html","Three-up icons","Activity icons in a row"],
+      ["09_stats.html","Stat showcase","Lime numbers on deep green"],
+      ["10_closing.html","Closing","Thank-you + contact pills"],
+    ];
+    const g = document.getElementById('g');
+    g.innerHTML = slides.map(([f,t,d])=>`
+      <div class="card">
+        <div class="frame"><iframe src="${f}" scrolling="no" id="if_${f}"></iframe></div>
+        <div class="meta"><a href="${f}" target="_top">${t}</a><span>${d}</span></div>
+      </div>`).join('');
+    // scale iframes to fit
+    function fit(){
+      document.querySelectorAll('.frame').forEach(f=>{
+        const w=f.clientWidth; const k=w/1280;
+        f.querySelector('iframe').style.transform=`scale(${k})`;
+        f.querySelector('iframe').style.height=`${720}px`;
+        f.querySelector('iframe').style.width=`${1280}px`;
+      });
+    }
+    addEventListener('load',fit); addEventListener('resize',fit);
+  </script>
+</body></html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FASTR Deck Builder · UI kit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] } } } };
+</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div id="root"></div>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" data-presets="env,react">
+const { useState } = React;
+
+const SLIDES = [
+  { label:"Cover", title:"Rapid-cycle analytics for RMNCAH-N", body:"Day 1 · Kigali", bg:{background:"#0C716B"}, titleCls:"text-white font-bold" },
+  { label:"Agenda", title:"Agenda · Tuesday", body:"Welcome · Why FASTR · DQA lab" },
+  { label:"Why FASTR", title:"Why monthly facility data?", body:"Granularity · cadence · comparability" },
+  { label:"DQA intro", title:"Data quality assessment", body:"Completeness · outliers · consistency", bg:{background:"#09544F"}, titleCls:"text-white font-bold" },
+  { label:"Methods", title:"Three checks, one workflow", body:"Inputs · process · outputs" },
+  { label:"Output", title:"ANC4 · sample district 2019–25",
+    eyebrow:"Module 4 · Output",
+    bullets:["Coverage dipped 12pts in 2021–22","Recovery began Q3 2022","Three districts hold 80% of the residual gap"],
+    pageNum:"17 / 32", deck:"Module 4 · Data quality"
+  },
+  { label:"Two panel", title:"HMIS vs HFA", body:"What each tells you" },
+  { label:"Quote", title:"Change what happens next month", body:"Dr A. Niang, Senegal MoH" },
+  { label:"Closing", title:"Thank you", body:"fastr@gff.org" },
+];
+
+// Default = the "Output" slide
+const DEFAULT_SLIDE = {
+  eyebrow:"Module 4 · Data quality assessment",
+  title:"ANC4 coverage · sample district, 2019–2025",
+  lede:"Coverage in a single Rwandan district illustrates how a routine HMIS series surfaces a disruption that an annual snapshot would have hidden.",
+  bullets:[
+    "Observed coverage dipped ~12 points vs. the pre-pandemic trend in 2021–22",
+    "Recovery began Q3 2022 — back on trend by 2024",
+    "Three districts now account for 80% of the residual gap",
+  ],
+  rule:"#D0CB17", h1:"#09544F", eyebrowColor:"#7F8C8D",
+  deck:"Module 4 · Data quality", pageNum:"17 / 32",
+  layoutLabel:"Output"
+};
+
+function App(){
+  const [active, setActive] = useState("Workshops");
+  const [slideIdx, setSlideIdx] = useState(5);
+  const slide = (slideIdx === 5) ? DEFAULT_SLIDE : {
+    ...DEFAULT_SLIDE,
+    title: SLIDES[slideIdx].title,
+    lede: SLIDES[slideIdx].body,
+    bullets: null,
+  };
+
+  return (
+    <div className="h-screen flex bg-slate-50">
+      <Sidebar active={active} setActive={setActive}/>
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar section="Rwanda 2026" breadcrumb="Day 2 · Data quality"/>
+        {active === "Content library" ? (
+          <ContentLibrary/>
+        ) : (
+          <div className="flex-1 flex min-h-0">
+            <SlideRail slides={SLIDES} active={slideIdx} setActive={setSlideIdx}/>
+            <DeckPreview slide={slide}/>
+            <Inspector slide={slide}/>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ContentLibrary(){
+  return (
+    <div className="flex-1 p-8 overflow-auto">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-baseline justify-between mb-5">
+          <h2 className="text-2xl font-bold text-[#1B365D]">Content library</h2>
+          <div className="flex gap-1.5">
+            {["All","Curriculum","Templates","Case studies"].map((t,i)=>(
+              <button key={t} className={`px-3 py-1.5 rounded-full text-xs font-semibold ${i===1 ? "bg-[#1B365D] text-white" : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"}`}>{t}</button>
+            ))}
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-5">
+          <ModuleCard id="01" title="Introduction to FASTR" desc="Origins of the initiative, what rapid-cycle analytics is, and where it has landed." slides="9" mins="45" accent="teal" progress={100}/>
+          <ModuleCard id="02" title="HMIS structure & extraction" desc="DHIS2 hierarchy, the Data Downloader, and what to do when an indicator disappears." slides="14" mins="120" accent="cyan" progress={100}/>
+          <ModuleCard id="04" title="Data quality assessment" desc="Completeness, outliers, internal consistency — and what each one is and isn't telling you." slides="12" mins="120" accent="teal" progress={75}/>
+          <ModuleCard id="05" title="Data quality adjustment" desc="Imputation strategies, when to adjust and when to flag." slides="10" mins="90" accent="gold" progress={40}/>
+          <ModuleCard id="06" title="Service utilization analysis" desc="Year-over-year change, disruption detection, equity slicing." slides="18" mins="180" accent="cyan" progress={100}/>
+          <ModuleCard id="07" title="Communicating results" desc="From notebook to ministerial brief — what survives the journey." slides="11" mins="90" accent="plum" progress={20}/>
+          <ModuleCard id="09c" title="Visualisations & interpretation" desc="Hands-on chart creation with AI assistance and the FASTR plot library." slides="9" mins="120" accent="gold" progress={0}/>
+          <ModuleCard id="10" title="Workshop facilitation" desc="Sticky-note debriefs, energizers, when to stop a discussion." slides="6" mins="45" accent="teal" progress={0}/>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

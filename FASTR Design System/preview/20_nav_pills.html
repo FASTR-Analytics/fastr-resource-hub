@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  body { margin:0; font-family:'Inter',sans-serif; background:#F8FAFC; padding:18px 22px; color:#0F172A;}
+  .nav { display:flex; align-items:center; gap:10px; background:#fff; padding:8px 12px; border-radius:8px; border:1px solid #E2E8F0; box-shadow:0 1px 2px rgba(15,23,42,.05);}
+  .crumb { font-size:13px; color:#475569;}
+  .crumb.cur { color:#1B365D; font-weight:600;}
+  .crumb-sep { color:#CBD5E1;}
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:9999px; font-size:11px; font-weight:600;}
+  .pill.dot::before { content:""; width:6px; height:6px; border-radius:9999px; background:currentColor;}
+  .full   { background:#E8F4F8; color:#1B365D;}
+  .cond   { background:rgba(247,148,29,.18); color:#A6630F;}
+  .draft  { background:#F1F5F9; color:#475569;}
+  .live   { background:rgba(208,203,23,.25); color:#6C6B0B;}
+  .row { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;}
+</style></head>
+<body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap">
+  <div class="nav">
+    <span class="crumb">Workshops</span>
+    <span class="crumb-sep">/</span>
+    <span class="crumb">Rwanda 2026</span>
+    <span class="crumb-sep">/</span>
+    <span class="crumb cur">Day 2 · Data quality</span>
+  </div>
+  <div class="row">
+    <span class="pill full dot">Full variant</span>
+    <span class="pill cond dot">Condensed</span>
+    <span class="pill live dot">Live now</span>
+    <span class="pill draft">Draft</span>
+    <span class="pill" style="background:#1B365D;color:#fff">12 slides</span>
+  </div>
+</body></html>

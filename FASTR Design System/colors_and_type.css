@@ -1,0 +1,272 @@
+/* =================================================================
+   FASTR DESIGN SYSTEM — Colors & Type
+   =================================================================
+   Source of truth for the FASTR Initiative design language.
+
+   Two primary surfaces use this system:
+     1) Presentation decks  → Poppins, deep-green primary,
+        chevron + arc-pattern brand motifs (see fastr-theme.css).
+     2) Deck Builder web app → Inter, navy/teal palette
+        (see ui_kits/web/).
+
+   Both palettes are exposed here so designers can choose the
+   right tokens for the surface they are working on.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   FONTS — Poppins (decks) + Inter (web app)
+   ----------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* =============================================================
+     BRAND COLORS — exact values from fastr-theme.css
+     =============================================================
+     The "official" deck palette. Greens carry the brand;
+     blues, gold/coral/purple are accents.
+  */
+
+  /* Primary greens & teals (the FASTR signature) */
+  --fastr-deep-green:  #09544F; /* logo, primary surface, H1 */
+  --fastr-dark-green:  #0C716B; /* primary, deck cover bg */
+  --fastr-green:       #1F9A9C; /* mid-teal, em / accents */
+  --fastr-light-blue:  #CAE6E9; /* tinted bg, highlight panels */
+
+  /* Lime — the brand pop. Used in tiny doses (rules, markers, chevron) */
+  --fastr-lime:        #D0CB17;
+
+  /* Blues — secondary informational */
+  --fastr-navy:        #21568C; /* strong text, links emphasis */
+  --fastr-blue:        #1A90C0; /* links, info */
+
+  /* Warm + saturated accents — sparingly */
+  --fastr-gold:        #D8A822; /* warnings, gold theme */
+  --fastr-purple:      #7A1F6E; /* H3 default, purple theme */
+  --fastr-orchid:      #BD5091; /* purple accent */
+  --fastr-coral:       #FF6462; /* errors, coral theme */
+
+  /* Aliases (mirror the source theme) */
+  --fastr-primary:       var(--fastr-dark-green);
+  --fastr-primary-dark:  var(--fastr-deep-green);
+  --fastr-primary-light: var(--fastr-green);
+  --fastr-accent:        var(--fastr-lime);
+  --fastr-warning:       var(--fastr-gold);
+  --fastr-error:         var(--fastr-coral);
+
+  /* =============================================================
+     WEB APP PALETTE — Deck Builder (web-app/client/tailwind.config.js)
+     ============================================================= */
+  --fastr-web-primary:        #1B365D;   /* dark navy */
+  --fastr-web-primary-dark:   #122544;   /* deeper navy */
+  --fastr-web-primary-light:  #2A4A7A;   /* lighter navy */
+  --fastr-web-secondary:      #00A9CE;   /* teal */
+  --fastr-web-secondary-light:#33BFDB;   /* light teal */
+  --fastr-web-accent:         #F7941D;   /* orange */
+  --fastr-web-accent-light:   #FAAB4A;   /* light orange */
+  --fastr-web-light:          #E8F4F8;   /* light blue panel */
+  --fastr-web-light-warm:     #F0F7FA;   /* warm light bg */
+
+  /* =============================================================
+     NEUTRALS — shared across surfaces
+     ============================================================= */
+  --fg-1: #2C3E50;    /* primary text (deck body) */
+  --fg-2: #7F8C8D;    /* secondary text */
+  --fg-3: #95A5A6;    /* tertiary / disabled */
+  --bg-1: #FFFFFF;    /* page */
+  --bg-2: #F8F9FA;    /* subtle */
+  --bg-3: #E9ECEF;    /* card-on-page */
+  --bg-app: #F8FAFC;  /* web-app body (slate-50) */
+  --border-1: #DEE2E6;
+  --border-2: #E5E7EB;
+
+  /* =============================================================
+     TYPOGRAPHY — families
+     ============================================================= */
+  --font-sans-decks: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans-app:   'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:       'Monaco', 'Menlo', 'Courier New', monospace;
+
+  /* Default to deck typeface — flip per surface as needed */
+  --font-sans: var(--font-sans-decks);
+
+  /* =============================================================
+     TYPE SCALE — decks (Poppins)
+     -------------------------------------------------------------
+     Decks render at 1280×720 (or larger). Body 21px / 1.4 is the
+     baseline; "clean" variant uses 20px / 1.5 for more air.
+     ============================================================= */
+  --t-display:   56px;   /* lead-slide H1, title cover */
+  --t-h1:        44px;   /* slide H1 (2.5em of 21) */
+  --t-h2:        32px;   /* section heading */
+  --t-h3:        27px;   /* subhead (1.3em) */
+  --t-body:      21px;   /* default slide body */
+  --t-body-sm:   18px;   /* compact / dense slides */
+  --t-meta:      14px;   /* footer, slide number, caption */
+
+  --lh-tight:    1.15;
+  --lh-snug:     1.4;
+  --lh-cozy:     1.5;
+  --lh-loose:    1.65;
+
+  /* =============================================================
+     TYPE SCALE — web app (Inter, screen)
+     ============================================================= */
+  --w-display:   30px;
+  --w-h1:        24px;
+  --w-h2:        20px;
+  --w-h3:        17px;
+  --w-body:      15px;
+  --w-body-sm:   13px;
+  --w-caption:   12px;
+
+  /* =============================================================
+     SPACING — 4-pt scale
+     ============================================================= */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* =============================================================
+     RADII
+     -------------------------------------------------------------
+     Decks are mostly square-edged. Tables/cards: 6–8px.
+     Web app cards: 16px (rounded-2xl). Pills: 999px.
+     ============================================================= */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* =============================================================
+     SHADOWS — minimal. Web app uses sm + ring; decks rarely use any.
+     ============================================================= */
+  --shadow-sm:   0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --shadow-md:   0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg:   0 12px 32px rgba(15, 23, 42, 0.12);
+
+  /* =============================================================
+     SEMANTIC TOKENS
+     ============================================================= */
+  --color-bg:       var(--bg-1);
+  --color-bg-muted: var(--bg-2);
+  --color-fg:       var(--fg-1);
+  --color-fg-muted: var(--fg-2);
+  --color-link:     var(--fastr-blue);
+  --color-accent:   var(--fastr-lime);
+  --color-border:   var(--border-1);
+
+  --rule-thin:    1px solid var(--border-1);
+  --rule-accent:  4px solid var(--fastr-lime);  /* the FASTR underline rule */
+}
+
+/* -----------------------------------------------------------------
+   SEMANTIC ELEMENT STYLES
+   These are defaults you can opt into by adding
+   `class="fastr-prose"` to a wrapper, or by relying on cascade.
+   ----------------------------------------------------------------- */
+
+.fastr-prose,
+.fastr-deck {
+  font-family: var(--font-sans-decks);
+  color: var(--fg-1);
+  font-size: var(--t-body);
+  line-height: var(--lh-snug);
+}
+
+.fastr-web {
+  font-family: var(--font-sans-app);
+  color: #0F172A; /* slate-900 */
+  font-size: var(--w-body);
+  line-height: var(--lh-cozy);
+}
+
+/* Decks: H1 with the signature lime underline */
+.fastr-prose h1,
+.fastr-deck h1 {
+  color: var(--fastr-deep-green);
+  font-weight: 700;
+  font-size: var(--t-h1);
+  margin: 0 0 .5em;
+  padding-bottom: .3em;
+  border-bottom: var(--rule-accent);
+  letter-spacing: -0.01em;
+}
+
+/* H2 with left-rail green */
+.fastr-prose h2,
+.fastr-deck h2 {
+  color: var(--fastr-dark-green);
+  font-weight: 600;
+  font-size: var(--t-h2);
+  margin: .8em 0;
+  padding-left: .5em;
+  border-left: 4px solid var(--fastr-green);
+}
+
+/* H3 with orchid rail */
+.fastr-prose h3,
+.fastr-deck h3 {
+  color: var(--fastr-purple);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  margin: .8em 0 .4em;
+  padding-left: .5em;
+  border-left: 4px solid var(--fastr-orchid);
+}
+
+.fastr-prose p,
+.fastr-deck p { margin: .5em 0; }
+
+.fastr-prose strong,
+.fastr-deck strong { color: var(--fastr-navy); font-weight: 600; }
+
+.fastr-prose em,
+.fastr-deck em { color: var(--fastr-green); font-style: italic; }
+
+.fastr-prose a,
+.fastr-deck a {
+  color: var(--fastr-blue);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s ease;
+}
+.fastr-prose a:hover,
+.fastr-deck a:hover { border-bottom-color: var(--fastr-blue); }
+
+.fastr-prose ul > li::marker,
+.fastr-deck ul > li::marker { color: var(--fastr-lime); }
+.fastr-prose ol > li::marker,
+.fastr-deck ol > li::marker { color: var(--fastr-blue); font-weight: 600; }
+
+.fastr-prose code,
+.fastr-deck code {
+  background: var(--bg-2);
+  color: var(--fastr-navy);
+  padding: .2em .4em;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: .9em;
+}
+
+/* Callout boxes — solid border-left rail in matched accent */
+.fastr-callout {
+  padding: 1em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--fastr-green);
+  border-left: 4px solid var(--fastr-green);
+  background: var(--fastr-light-blue);
+  margin: 1em 0;
+}
+.fastr-callout--warning { border-color: var(--fastr-gold);  background: rgba(216,168,34,.15); border-left-color: var(--fastr-gold); }
+.fastr-callout--error   { border-color: var(--fastr-coral); background: rgba(255,100,98,.15); border-left-color: var(--fastr-coral); }
+.fastr-callout--success { border-color: var(--fastr-lime);  background: rgba(208,203,23,.15); border-left-color: var(--fastr-lime); }
+.fastr-callout--info    { border-color: var(--fastr-blue);  background: rgba(26,144,192,.15); border-left-color: var(--fastr-blue); }

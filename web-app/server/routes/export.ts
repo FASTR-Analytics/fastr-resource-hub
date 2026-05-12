@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
 import { fileURLToPath } from 'url'
-import { getWorkshop, WorkshopConfig } from '../db/database.js'
+import { getWorkshop, getCustomSlides, WorkshopConfig } from '../db/database.js'
 import { buildMarkdown, materializeExternalImages } from '../services/deckBuilder.js'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
@@ -137,6 +137,13 @@ router.post('/:id/slides', async (req, res) => {
     let sessionNumber = 0
     const { buildSessionMarkdown } = await import('../services/deckBuilder.js')
 
+    // Pre-fetch workshop-scoped custom slides so each per-session build can
+    // resolve `custom_slides/{filename}` refs without per-slide DB queries.
+    const customSlideRows = await getCustomSlides(workshopId)
+    const customSlideMap = new Map<string, string>(
+      customSlideRows.map(r => [r.filename, r.content])
+    )
+
     for (let day = 1; day <= numDays; day++) {
       const dayKey = `day${day}`
       const sessions = config.schedule[dayKey] || []
@@ -152,7 +159,7 @@ router.post('/:id/slides', async (req, res) => {
         }
 
         // Build markdown for this session
-        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined, effectiveLang)
+        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined, effectiveLang, customSlideMap)
 
         if (!sessionMarkdown) continue
 

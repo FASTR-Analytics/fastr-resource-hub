@@ -9,7 +9,10 @@ import { X, Plus, Trash2, Loader2, Save, Eye } from 'lucide-react'
 interface DiagramBuilderProps {
   isOpen: boolean
   onClose: () => void
-  onSaved?: (paths: string[]) => void
+  /** Called after the SVG saves. `title` is the user-entered slide title; the
+   * caller uses it as the slide's H1 and (when undefined) falls back to a
+   * placeholder derived from the filename. */
+  onSaved?: (paths: string[], title?: string) => void
   language: 'en' | 'fr'
 }
 
@@ -410,8 +413,15 @@ const EMOJI_CATEGORIES: { label: string; emojis: string[] }[] = [
   { label: 'Charts', emojis: ['📥', '📤', '🔗', '🔒', '📦', '🗺️', '📑', '🏷️', '💰', '🕐'] },
 ]
 
-function EmojiPicker({ value, onChange }: { value: string; onChange: (emoji: string) => void }) {
+function IconPicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [mode, setMode] = useState<'emoji' | 'text'>(() => {
+    // If the value is non-empty and NOT a common emoji (i.e. longer than 2 chars or plain ASCII), default to text mode
+    if (!value) return 'emoji'
+    // Emoji are typically 1-2 code points; plain text labels are ASCII/longer
+    const isLikelyText = value.length > 2 && /^[a-zA-Z0-9\s.,!?&\-\/]+$/.test(value)
+    return isLikelyText ? 'text' : 'emoji'
+  })
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -424,8 +434,31 @@ function EmojiPicker({ value, onChange }: { value: string; onChange: (emoji: str
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
+  if (mode === 'text') {
+    return (
+      <div className="flex gap-1 items-center">
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Text..."
+          className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+          maxLength={12}
+        />
+        <button
+          type="button"
+          onClick={() => { setMode('emoji'); onChange('') }}
+          className="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap"
+          title="Switch to emoji"
+        >
+          😀
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative flex gap-1 items-center" ref={ref}>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -433,6 +466,14 @@ function EmojiPicker({ value, onChange }: { value: string; onChange: (emoji: str
         title="Pick emoji"
       >
         {value || '😀'}
+      </button>
+      <button
+        type="button"
+        onClick={() => { setMode('text'); onChange('') }}
+        className="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap"
+        title="Switch to text"
+      >
+        Aa
       </button>
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-2 w-64">
@@ -475,12 +516,11 @@ function EmojiPicker({ value, onChange }: { value: string; onChange: (emoji: str
 export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: DiagramBuilderProps) {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateType | null>(null)
   const [formData, setFormData] = useState<FormData | null>(null)
+  /** Slide title — used as the H1 on the generated slide AND (slugified) as the SVG filename. */
+  const [slideTitle, setSlideTitle] = useState('')
   const [svgPreview, setSvgPreview] = useState<string>('')
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
-  const [savedPaths, setSavedPaths] = useState<string[] | null>(null)
-  const [filename, setFilename] = useState('')
-  const [saveLang, setSaveLang] = useState<'en' | 'fr' | 'both'>('en')
   const [saveError, setSaveError] = useState<string | null>(null)
   const [previewError, setPreviewError] = useState<string | null>(null)
 
@@ -497,11 +537,10 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
     (type: TemplateType) => {
       setSelectedTemplate(type)
       setFormData(getDefaultFormData(type))
+      setSlideTitle('')
       setSvgPreview('')
       setPreviewError(null)
-      setSavedPaths(null)
       setSaveError(null)
-      setFilename('')
     },
     []
   )
@@ -534,34 +573,42 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
   }, [formData])
 
   // ── Save handler ──
+  // The user enters a slide title (e.g. "ANC4 trends"); we use it both as the
+  // slide H1 and — slugified — as the SVG filename on disk. The user never
+  // sees the filename; the title is what shows up as the slide heading.
 
   const handleSave = useCallback(async () => {
-    if (!formData || !filename.trim()) return
+    if (!formData || !slideTitle.trim()) return
     setIsSaving(true)
     setSaveError(null)
-    setSavedPaths(null)
     try {
       const config = buildConfig(formData)
-      const result = await saveDiagram(config, filename.trim(), saveLang)
-      setSavedPaths(result.paths)
-      if (onSaved) onSaved(result.paths)
+      // Slugify: lowercase, replace non-alphanumeric with underscore, trim.
+      const slug = slideTitle
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '') || 'diagram'
+      // Suffix with timestamp so two diagrams with the same title don't clash.
+      const filename = `${slug}_${Date.now()}`
+      const result = await saveDiagram(config, filename, language)
+      if (onSaved) onSaved(result.paths, slideTitle.trim())
     } catch {
       setSaveError(L('Save failed. Please try again.', 'Erreur lors de la sauvegarde. Veuillez réessayer.'))
     } finally {
       setIsSaving(false)
     }
-  }, [formData, filename, saveLang, onSaved, L])
+  }, [formData, slideTitle, language, onSaved, L])
 
   // ── Close handler ──
 
   const handleClose = useCallback(() => {
     setSelectedTemplate(null)
     setFormData(null)
+    setSlideTitle('')
     setSvgPreview('')
     setPreviewError(null)
-    setSavedPaths(null)
     setSaveError(null)
-    setFilename('')
     onClose()
   }, [onClose])
 
@@ -687,7 +734,7 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               onRemove={() => setItems(removeItem(items, i))}
             />
             <div className="flex gap-2 items-start">
-              <EmojiPicker
+              <IconPicker
                 value={item.emoji}
                 onChange={(emoji) => setItems(updateItem(items, i, { emoji }))}
               />
@@ -727,7 +774,7 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               onRemove={() => setCards(removeItem(cards, i))}
             />
             <div className="flex gap-2 items-start">
-              <EmojiPicker
+              <IconPicker
                 value={card.emoji}
                 onChange={(emoji) => setCards(updateItem(cards, i, { emoji }))}
               />
@@ -840,7 +887,7 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               onRemove={() => setNodes(removeItem(nodes, i))}
             />
             <div className="flex gap-2 items-start">
-              <EmojiPicker
+              <IconPicker
                 value={node.emoji}
                 onChange={(emoji) => setNodes(updateItem(nodes, i, { emoji }))}
               />
@@ -931,7 +978,7 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
             {L('Center', 'Centre')}
           </span>
           <div className="flex gap-2 items-start">
-            <EmojiPicker
+            <IconPicker
               value={data.center.emoji}
               onChange={(emoji) => updateCenter({ emoji })}
             />
@@ -959,7 +1006,7 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               onRemove={() => setSpokes(removeItem(data.spokes, i))}
             />
             <div className="flex gap-2 items-start">
-              <EmojiPicker
+              <IconPicker
                 value={spoke.emoji}
                 onChange={(emoji) => setSpokes(updateItem(data.spokes, i, { emoji }))}
               />
@@ -1067,6 +1114,22 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               </div>
             </div>
 
+            {/* Slide title — the user-facing label that becomes the slide H1 */}
+            {formData && (
+              <div className="mb-4">
+                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
+                  {L('Slide title', 'Titre de la diapositive')}
+                </label>
+                <input
+                  className={INPUT_CLS}
+                  placeholder={L('e.g. ANC4 trends, Data quality steps', 'p. ex. Tendances ANC4, Étapes de qualité')}
+                  value={slideTitle}
+                  onChange={(e) => setSlideTitle(e.target.value)}
+                  autoFocus
+                />
+              </div>
+            )}
+
             {/* Config form */}
             {formData && (
               <div className="flex-1 mb-4">
@@ -1077,91 +1140,27 @@ export default function DiagramBuilder({ isOpen, onClose, onSaved, language }: D
               </div>
             )}
 
-            {/* Save section */}
+            {/* Action — one click adds the diagram as a content slide on the day */}
             {formData && (
               <div className="border-t border-gray-200 pt-4 mt-auto space-y-3">
-                <div>
-                  <label className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                    {L('Filename', 'Nom du fichier')}
-                  </label>
-                  <input
-                    className={INPUT_CLS}
-                    placeholder={L('my_diagram', 'mon_diagramme')}
-                    value={filename}
-                    onChange={(e) => setFilename(e.target.value)}
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                    {L('Language', 'Langue')}
-                  </label>
-                  <div className="flex gap-3 text-sm">
-                    <label className="flex items-center gap-1 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="saveLang"
-                        value="en"
-                        checked={saveLang === 'en'}
-                        onChange={() => setSaveLang('en')}
-                        className="accent-[#09544F]"
-                      />
-                      EN
-                    </label>
-                    <label className="flex items-center gap-1 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="saveLang"
-                        value="fr"
-                        checked={saveLang === 'fr'}
-                        onChange={() => setSaveLang('fr')}
-                        className="accent-[#09544F]"
-                      />
-                      FR
-                    </label>
-                    <label className="flex items-center gap-1 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="saveLang"
-                        value="both"
-                        checked={saveLang === 'both'}
-                        onChange={() => setSaveLang('both')}
-                        className="accent-[#09544F]"
-                      />
-                      {L('Both', 'Les deux')}
-                    </label>
-                  </div>
-                </div>
-
                 <button
                   type="button"
                   onClick={handleSave}
-                  disabled={isSaving || !filename.trim()}
+                  disabled={isSaving || !slideTitle.trim()}
                   className="w-full px-4 py-2 bg-[#09544F] text-white rounded-lg hover:bg-[#0C716B] transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSaving ? (
                     <>
                       <Loader2 size={16} className="animate-spin" />
-                      {L('Saving...', 'Sauvegarde...')}
+                      {L('Adding…', 'Ajout…')}
                     </>
                   ) : (
                     <>
                       <Save size={16} />
-                      {L('Save', 'Enregistrer')}
+                      {L('Add diagram slide', 'Ajouter la diapositive')}
                     </>
                   )}
                 </button>
-
-                {savedPaths && (
-                  <div className="text-sm text-green-700 bg-green-50 rounded-lg p-2">
-                    <p className="font-medium">{L('Saved!', 'Enregistre !')}</p>
-                    {savedPaths.map((p, i) => (
-                      <p key={i} className="text-xs text-green-600 truncate mt-0.5">
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-                )}
 
                 {saveError && (
                   <div className="text-sm text-red-700 bg-red-50 rounded-lg p-2">

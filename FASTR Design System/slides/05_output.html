@@ -1,0 +1,92 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+  html,body { margin:0; height:100%; background:#1a1a1a; overflow:hidden; font-family:'Poppins',sans-serif;}
+  .stage { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center;}
+  .slide { width:1280px; height:720px; background:#fff; color:#2C3E50; padding:48px 64px 36px; box-sizing:border-box; position:relative; transform-origin:center; display:flex; flex-direction:column;}
+  .head { display:flex; align-items:baseline; gap:18px; border-bottom:4px solid #D0CB17; padding-bottom:12px; margin-bottom:18px;}
+  h1 { font-size:36px; font-weight:700; color:#09544F; margin:0;}
+  .deck { font-size:12px; color:#7F8C8D; letter-spacing:.18em; text-transform:uppercase;}
+  .body { display:grid; grid-template-columns:1.45fr 1fr; gap:30px; flex:1; min-height:0;}
+  .chart-wrap { display:flex; flex-direction:column; min-height:0;}
+  .chart { flex:1; background:#F8F9FA; border:1px solid #DEE2E6; border-radius:8px; padding:14px 16px; box-sizing:border-box; display:flex; flex-direction:column; min-height:0;}
+  .chart svg { flex:1; width:100%; min-height:0;}
+  .legend { display:flex; gap:18px; margin-top:8px; font-size:13px; color:#7F8C8D; padding-left:6px;}
+  .legend span::before { content:""; display:inline-block; width:14px; height:3px; background:currentColor; margin-right:6px; vertical-align:middle;}
+  .obs { color:#1A90C0;} .exp { color:#7F8C8D;} .dis { color:#FF6462;}
+  .caption { margin-top:10px; font-size:13px; color:#7F8C8D; font-style:italic; line-height:1.4;}
+  .caption b { font-style:normal; color:#2C3E50;}
+  h3 { font-size:20px; color:#7A1F6E; padding-left:10px; border-left:4px solid #BD5091; margin:0 0 8px; line-height:1.2;}
+  ul { padding-left:22px; margin:6px 0 18px;}
+  li { font-size:17px; margin-bottom:8px; line-height:1.4;}
+  li::marker { color:#D0CB17;}
+  .right { display:flex; flex-direction:column; justify-content:space-between; padding:4px 0;}
+  .right p { font-size:15px; color:#2C3E50; margin:0 0 4px; line-height:1.45;}
+  .footer { position:absolute; bottom:14px; left:64px; right:64px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#95A5A6;}
+  .footer img { height:20px; opacity:.55;}
+</style></head><body>
+<div class="stage"><div class="slide">
+  <div class="head">
+    <h1>ANC4 coverage · sample district, 2019&ndash;2025</h1>
+    <span class="deck" style="margin-left:auto">Module 4 · Output</span>
+  </div>
+  <div class="body">
+    <div class="chart-wrap">
+      <div class="chart">
+        <svg viewBox="0 0 520 280" preserveAspectRatio="none">
+          <g stroke="#E9ECEF" stroke-width="1">
+            <line x1="40" x2="510" y1="30"  y2="30"/>
+            <line x1="40" x2="510" y1="90"  y2="90"/>
+            <line x1="40" x2="510" y1="150" y2="150"/>
+            <line x1="40" x2="510" y1="210" y2="210"/>
+          </g>
+          <g font-family="Inter, sans-serif" font-size="11" fill="#7F8C8D">
+            <text x="34" y="34"  text-anchor="end">100</text>
+            <text x="34" y="94"  text-anchor="end">75</text>
+            <text x="34" y="154" text-anchor="end">50</text>
+            <text x="34" y="214" text-anchor="end">25</text>
+            <text x="50"  y="248">2019</text><text x="135" y="248">2020</text>
+            <text x="220" y="248">2021</text><text x="305" y="248">2022</text>
+            <text x="390" y="248">2023</text><text x="475" y="248">2024</text>
+          </g>
+          <!-- expected (dashed) -->
+          <polyline fill="none" stroke="#95A5A6" stroke-width="2" stroke-dasharray="5 5"
+            points="60,150 145,144 230,138 315,134 400,128 485,122"/>
+          <!-- observed -->
+          <polyline fill="none" stroke="#1A90C0" stroke-width="3"
+            points="60,154 145,148 230,196 315,178 400,134 485,118"/>
+          <g fill="#1A90C0">
+            <circle cx="60"  cy="154" r="4"/><circle cx="145" cy="148" r="4"/>
+            <circle cx="230" cy="196" r="5" fill="#FF6462"/>
+            <circle cx="315" cy="178" r="5" fill="#FF6462"/>
+            <circle cx="400" cy="134" r="4"/><circle cx="485" cy="118" r="4"/>
+          </g>
+          <path d="M230,196 L255,225" stroke="#FF6462" stroke-width="1.5" fill="none"/>
+          <text x="260" y="232" fill="#FF6462" font-family="Inter" font-size="12" font-weight="600">COVID-19 disruption</text>
+        </svg>
+        <div class="legend"><span class="obs">Observed</span><span class="exp">Expected trend</span><span class="dis">Flagged dip</span></div>
+      </div>
+      <div class="caption"><b>Source:</b> HMIS monthly, n=1 247 facilities · Adjusted for completeness &gt; 80%</div>
+    </div>
+    <div class="right">
+      <div>
+        <h3>What we see</h3>
+        <ul>
+          <li>~12-point gap vs. trend in 2021&ndash;22</li>
+          <li>Recovery began Q3 2022; on trend by 2024</li>
+          <li>Three districts hold 80% of the residual gap</li>
+        </ul>
+        <h3>What it means</h3>
+        <ul>
+          <li>Disruption is real &mdash; completeness held steady</li>
+          <li>Targeted catch-up closes the gap by 2026</li>
+        </ul>
+      </div>
+      <p style="font-size:13px;color:#7F8C8D;margin-top:auto;line-height:1.4">Next: drill into the three districts in module 6.</p>
+    </div>
+  </div>
+  <div class="footer"><img src="../assets/logos/FASTR_Primary_01_FullName.png"><span>17 / 32</span></div>
+</div></div>
+<script>function fit(){const s=document.querySelector('.slide');const k=Math.min(innerWidth/1280,innerHeight/720);s.style.transform=`scale(${k})`}addEventListener('resize',fit);fit();</script>
+</body></html>

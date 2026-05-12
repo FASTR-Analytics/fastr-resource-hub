@@ -57,3 +57,20 @@ pptx_extracted/
 .DS_Store
 Thumbs.db
 site/
+
+# Web-app local state (SQLite DB + WAL/SHM, build artifacts)
+web-app/data/
+web-app/dist/
+
+# Misplaced diagrams folder (pre-fix bug wrote SVGs here; kept empty)
+web-app/resources/
+
+# User-generated workshop diagrams (saved with a Date.now() timestamp suffix).
+# Curated methodology diagrams have human-readable names and stay tracked.
+resources/diagrams/*_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].svg
+resources/diagrams_fr/*_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].svg
+
+# Local reference docs and uploaded data
+data_received/
+FASTR_prompt_translated.docx
+Indicator_Reference_Sheets_GFF_Measurement_Framework.pdf
