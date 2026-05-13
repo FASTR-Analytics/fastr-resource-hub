@@ -3,72 +3,90 @@ slides:
   order: 1
   variant: full
   title: L'assistant IA
+  last_reviewed: &id001 2026-05-13
 - file: mai_3_ai_assistant_capabilities.md
   order: 2
   variant: full
   title: Ce que l'assistant IA peut faire
+  last_reviewed: *id001
 - file: mai_3a_ai_greatest_value.md
   order: 2.01
   variant: full
   title: Là où l'IA aide le plus
+  last_reviewed: *id001
 - file: mai_4_ai_how_it_works.md
   order: 2.02
   variant: full
   title: Comment fonctionne l'assistant IA
+  last_reviewed: *id001
 - file: mai_2_ai_accelerator_not_decider.md
   order: 3
   variant: full
   title: L'IA est un accélérateur, pas un décideur
+  last_reviewed: *id001
 - file: mai_2a_four_skills_for_ai.md
   order: 3.01
   variant: full
   title: 'Bien travailler avec l''IA : quatre habitudes'
+  last_reviewed: *id001
 - file: mai_2b_four_skills_in_practice.md
   order: 3.02
   variant: full
   title: Les 4 D — pensez à l'IA comme un nouveau collègue
+  last_reviewed: *id001
 - file: mai_4a_ai_conversations.md
   order: 4
   variant: full
   title: Comment fonctionnent les conversations
+  last_reviewed: *id001
 - file: mai_5_ai_little_value_example.md
   order: 5
   variant: full
   title: Quand l'IA n'apporte que peu de valeur
+  last_reviewed: *id001
 - file: mai_5a_ai_helpful_example.md
   order: 5.01
   variant: full
   title: Quand l'IA est utile
+  last_reviewed: *id001
 - file: mai_6_ai_tips_better_answers.md
   order: 6
   variant: full
   title: Conseils pour de meilleures réponses
+  last_reviewed: *id001
 - file: mai_6a_ai_good_prompt_checklist.md
   order: 6.01
   variant: full
   title: Qu'est-ce qui fait un bon prompt ?
+  last_reviewed: *id001
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full
   title: La bibliothèque de prompts
+  last_reviewed: *id001
 - file: mai_7b_ai_prompt_library_overview.md
   order: 7.001
   variant: full
   title: Organisation de la bibliothèque de prompts
   status: new
+  last_reviewed: *id001
 - file: mai_7a_ai_prompt_examples_table.md
   order: 7.01
   variant: full
   title: Exemples de prompts de la bibliothèque
+  last_reviewed: *id001
 - file: mai_8_ai_what_happens_log_off.md
   order: 8
   variant: full
   title: Que se passe-t-il quand vous vous déconnectez
+  last_reviewed: *id001
 - file: mai_8a_ai_private_vs_shared.md
   order: 8.01
   variant: full
   title: Privé vs partagé sur les projets d'équipe
+  last_reviewed: *id001
 - file: mai_8b_ai_team_collaboration.md
   order: 8.02
   variant: full
   title: Comment les équipes collaborent
+  last_reviewed: *id001

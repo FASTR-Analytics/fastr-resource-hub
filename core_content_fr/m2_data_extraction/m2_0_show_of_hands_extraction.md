@@ -6,7 +6,7 @@ paginate: true
 
 ## À main levée...
 
-![w:120](../../resources/icons/raise-hand.png)
+![w:120](../../resources/icons/raise-hand.svg)
 
 Extrayez-vous régulièrement des données du DHIS2 (votre système national d'information sanitaire) ?
 

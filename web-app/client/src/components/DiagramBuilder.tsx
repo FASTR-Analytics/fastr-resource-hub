@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { X, Plus, Trash2, Loader2, Save, Eye } from 'lucide-react'
+import { X, Plus, Trash2, Loader2, Save, Eye, Shapes } from 'lucide-react'
+import { DIAGRAM_ICONS_BY_CATEGORY, isDiagramIconId, DIAGRAM_ICONS } from '../lib/diagramIcons'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -402,25 +403,28 @@ const INPUT_CLS =
 const EMOJI_CLS =
   'px-2 py-1.5 text-sm border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500'
 
-// ── Emoji Picker ──────────────────────────────────────────────────────────
+// ── Icon Picker (Lucide) ──────────────────────────────────────────────────
+//
+// Two modes:
+//   - 'icon' (default for new content): pick a curated Lucide icon. The id
+//     (kebab-case) is stored; server-side `diagramTemplates.ts` resolves it to
+//     inline SVG paths when rendering the diagram.
+//   - 'text' (optional): a short text label (e.g., "1", "Step A").
+//
+// Backwards-compat: if `value` is an old emoji string (not a known icon id,
+// not plain text), it falls through to the icon picker with no preselection
+// and renders as text in the diagram so legacy diagrams don't disappear.
 
-const EMOJI_CATEGORIES: { label: string; emojis: string[] }[] = [
-  { label: 'Data', emojis: ['📊', '📈', '📉', '📋', '🔍', '🔬', '📐', '🧮', '💾', '🗂️'] },
-  { label: 'Health', emojis: ['🏥', '🤰', '👶', '💊', '🩺', '❤️', '🧬', '💉', '🏠', '👨‍👩‍👧'] },
-  { label: 'Communication', emojis: ['📞', '💬', '📧', '🗣️', '📢', '🎤', '📝', '✏️', '📎', '🔗'] },
-  { label: 'Actions', emojis: ['✅', '⚠️', '❓', '❌', '🎯', '💡', '⭐', '🔄', '➡️', '🔑'] },
-  { label: 'People', emojis: ['👥', '🧑‍💻', '👋', '🤝', '🌍', '🏛️', '🎓', '📚', '🛠️', '⚙️'] },
-  { label: 'Charts', emojis: ['📥', '📤', '🔗', '🔒', '📦', '🗺️', '📑', '🏷️', '💰', '🕐'] },
-]
+const ALL_ICONS = DIAGRAM_ICONS
 
 function IconPicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [mode, setMode] = useState<'emoji' | 'text'>(() => {
-    // If the value is non-empty and NOT a common emoji (i.e. longer than 2 chars or plain ASCII), default to text mode
-    if (!value) return 'emoji'
-    // Emoji are typically 1-2 code points; plain text labels are ASCII/longer
+  const [mode, setMode] = useState<'icon' | 'text'>(() => {
+    if (!value) return 'icon'
+    if (isDiagramIconId(value)) return 'icon'
+    // If it's a short label or anything not a known icon id, treat as text
     const isLikelyText = value.length > 2 && /^[a-zA-Z0-9\s.,!?&\-\/]+$/.test(value)
-    return isLikelyText ? 'text' : 'emoji'
+    return isLikelyText ? 'text' : 'icon'
   })
   const ref = useRef<HTMLDivElement>(null)
 
@@ -434,6 +438,10 @@ function IconPicker({ value, onChange }: { value: string; onChange: (v: string) 
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
+  const SelectedIconComponent = isDiagramIconId(value)
+    ? ALL_ICONS.find(i => i.id === value)?.Component
+    : null
+
   if (mode === 'text') {
     return (
       <div className="flex gap-1 items-center">
@@ -441,17 +449,17 @@ function IconPicker({ value, onChange }: { value: string; onChange: (v: string) 
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Text..."
-          className="w-20 px-2 py-1.5 text-sm border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
+          placeholder="Label…"
+          className="w-20 px-2 py-1.5 text-sm border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
           maxLength={12}
         />
         <button
           type="button"
-          onClick={() => { setMode('emoji'); onChange('') }}
-          className="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap"
-          title="Switch to emoji"
+          onClick={() => { setMode('icon'); onChange('') }}
+          className="text-xs text-slate-400 hover:text-slate-600 whitespace-nowrap"
+          title="Switch to icon"
         >
-          😀
+          icon
         </button>
       </div>
     )
@@ -462,35 +470,48 @@ function IconPicker({ value, onChange }: { value: string; onChange: (v: string) 
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-9 flex items-center justify-center text-lg border border-gray-200 rounded hover:border-gray-400 transition-colors bg-white"
-        title="Pick emoji"
+        className="w-10 h-9 flex items-center justify-center border border-slate-200 rounded hover:border-slate-400 transition-colors bg-white"
+        title="Pick icon"
       >
-        {value || '😀'}
+        {SelectedIconComponent ? (
+          <SelectedIconComponent className="w-5 h-5 text-[#09544F]" strokeWidth={2.4} />
+        ) : (
+          <Shapes className="w-4 h-4 text-slate-400" />
+        )}
       </button>
       <button
         type="button"
         onClick={() => { setMode('text'); onChange('') }}
-        className="text-xs text-gray-400 hover:text-gray-600 whitespace-nowrap"
-        title="Switch to text"
+        className="text-xs text-slate-400 hover:text-slate-600 whitespace-nowrap"
+        title="Switch to text label"
       >
         Aa
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 z-50 bg-white rounded-lg shadow-xl border border-gray-200 p-2 w-64">
-          {EMOJI_CATEGORIES.map((cat) => (
-            <div key={cat.label} className="mb-1.5">
-              <div className="text-[10px] text-gray-400 uppercase tracking-wider mb-0.5 px-0.5">{cat.label}</div>
+        <div className="absolute top-full left-0 mt-1 z-50 bg-white rounded-lg shadow-xl border border-slate-200 p-2 w-72 max-h-80 overflow-y-auto">
+          {(['Data', 'Health', 'Communication', 'Actions', 'People'] as const).map((category) => (
+            <div key={category} className="mb-2 last:mb-0">
+              <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1 px-0.5">{category}</div>
               <div className="flex flex-wrap gap-0.5">
-                {cat.emojis.map((emoji) => (
-                  <button
-                    key={emoji}
-                    type="button"
-                    onClick={() => { onChange(emoji); setIsOpen(false) }}
-                    className={`w-7 h-7 flex items-center justify-center rounded hover:bg-gray-100 text-base transition-colors ${value === emoji ? 'bg-[#E8F4F3] ring-1 ring-[#09544F]' : ''}`}
-                  >
-                    {emoji}
-                  </button>
-                ))}
+                {DIAGRAM_ICONS_BY_CATEGORY[category].map((icon) => {
+                  const Icon = icon.Component
+                  const isSelected = value === icon.id
+                  return (
+                    <button
+                      key={icon.id}
+                      type="button"
+                      onClick={() => { onChange(icon.id); setIsOpen(false) }}
+                      title={icon.label}
+                      className={`w-8 h-8 flex items-center justify-center rounded transition-colors ${
+                        isSelected
+                          ? 'bg-[#E8F4F3] ring-1 ring-[#09544F]'
+                          : 'hover:bg-slate-100'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 text-[#09544F]" strokeWidth={2.4} />
+                    </button>
+                  )
+                })}
               </div>
             </div>
           ))}

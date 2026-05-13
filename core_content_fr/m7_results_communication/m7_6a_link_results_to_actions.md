@@ -6,7 +6,7 @@ paginate: true
 
 ## Activité : Reliez vos résultats aux actions
 
-**Pour vos 3 principaux résultats, complétez ce tableau :**
+![hands-on h:40](../../resources/icons/hands_on.svg) **Pour vos 3 principaux résultats, complétez ce tableau :**
 
 | Résultat | Qui doit savoir ? | Quelle décision/action ? | Pour quand ? |
 |----------|-------------------|--------------------------|--------------|

@@ -6,7 +6,7 @@ paginate: true
 
 ## Activité : Planification d'action pays
 
-**Développez le plan d'action FASTR de votre pays :**
+![hands-on h:40](../../resources/icons/hands_on.svg) **Développez le plan d'action FASTR de votre pays :**
 
 | Étape d'action | Personne responsable | Calendrier | Indicateur de succès |
 |----------------|---------------------|------------|---------------------|

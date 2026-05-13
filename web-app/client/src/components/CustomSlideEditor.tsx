@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2, Image, Upload, Loader2 } from 'lucide-react'
 import api, { Asset } from '../../lib/api'
 import { useToast } from './Toast'
+import { Modal } from './ui/Modal'
 
 interface CustomSlideEditorProps {
   workshopId: string
@@ -315,9 +316,15 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
   }
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-900 rounded-xl shadow-2xl w-full max-w-6xl h-[90vh] flex flex-col">
-        {/* Header */}
+    <Modal
+      open
+      onClose={onClose}
+      size="full"
+      showCloseButton={false}
+      className="!bg-gray-900 !border-gray-700 !ring-0 !shadow-2xl !rounded-xl !max-w-6xl !h-[90vh]"
+      bodyClassName="!p-0 flex flex-col"
+    >
+      {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
           <div className="flex items-center gap-3">
             <Sparkles className="w-5 h-5 text-fastr-secondary" />
@@ -814,7 +821,6 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
             </div>
           </div>
         )}
-      </div>
-    </div>
+    </Modal>
   )
 }

@@ -218,6 +218,21 @@ export const workshopAPI = {
       method: 'DELETE',
     })
   },
+
+  /**
+   * Read the raw markdown source for a session.slides[] reference. Resolves
+   * library, template, and custom_slides refs. Used by EditSessionModal to
+   * pre-populate the editor when forking a library slide.
+   */
+  async getSlideContent(
+    workshopId: string,
+    ref: string,
+    language?: 'en' | 'fr',
+  ): Promise<{ ref: string; filename: string; content: string; source: 'custom' | 'template' | 'library' }> {
+    const params = new URLSearchParams({ ref })
+    if (language) params.set('language', language)
+    return fetchJSON(`/workshops/${workshopId}/slide-content?${params.toString()}`)
+  },
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

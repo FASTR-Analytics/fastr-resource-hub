@@ -1,12 +1,4 @@
 slides:
-- file: m9e_2ab_alternative_approach.md
-  order: 0
-  variant: full
-  title: 'Step 1: Upload the report to your Assets'
-- file: m9e_2ac_alternative_approach.md
-  order: 0
-  variant: full
-  title: 'Step 2: Include the report in your AI conversation'
 - file: m9e_1_manual_to_ai_reporting.md
   order: 1
   variant: full
@@ -15,18 +7,26 @@ slides:
   order: 2
   variant: full
   title: 'Activity: Creating a disruption report with the AI Assistant'
+- file: m9e_2b_creating_disruption_report_ai.md
+  order: 2.001
+  variant: full
+  title: 'Understanding the prompt: what does it do?'
+- file: m9e_2c_creating_disruption_report_ai.md
+  order: 2.002
+  variant: full
+  title: The AI Assistant will ask for your report details
 - file: m9e_2a_alternative_approach.md
   order: 2.01
   variant: full
   title: 'Alternative approach: Working without a custom prompt'
-- file: m9e_2b_creating_disruption_report_ai.md
-  order: 2.02
+- file: m9e_2ab_alternative_approach.md
+  order: 2.011
   variant: full
-  title: 'Understanding the prompt: what does it do?'
-- file: m9e_2c_creating_disruption_report_ai.md
-  order: 2.03
+  title: 'Step 1: Upload the report to your Assets'
+- file: m9e_2ac_alternative_approach.md
+  order: 2.012
   variant: full
-  title: The AI Assistant will ask for your report details
+  title: 'Step 2: Include the report in your AI conversation'
 - file: m9e_3_ai_proposes_groupings.md
   order: 3
   variant: full
@@ -44,7 +44,7 @@ slides:
   variant: full
   title: 'Activity: Refine your disruption report'
 - file: m9e_6b_refine_disruption_report.md
-  order: 6.02
+  order: 6.001
   variant: full
   title: 'Review checklist: Prompt 2 & Prompt 3'
 - file: m9e_7_peer_review_checklist.md

@@ -6,7 +6,7 @@ paginate: true
 
 ## Activité : Cartographiez vos utilisateurs
 
-**Pour votre équipe pays, identifiez :**
+![hands-on h:40](../../resources/icons/hands_on.svg) **Pour votre équipe pays, identifiez :**
 
 | Question | Votre réponse |
 |----------|---------------|

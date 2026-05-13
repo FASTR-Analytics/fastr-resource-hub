@@ -3,44 +3,54 @@ slides:
   order: 1
   variant: full
   title: What is a data use case?
+  last_reviewed: &id001 2026-05-13
 - file: m1_1a_nigeria_quarterly_monitoring.md
   order: 1.01
   variant: full
   title: 'Nigeria: Quarterly performance monitoring'
+  last_reviewed: *id001
 - file: m1_1a2_guinea_investment_tracking.md
   order: 1.012
   variant: full
   title: 'Guinea: Tracking investment case progress'
+  last_reviewed: *id001
 - file: m1_1a3_ethiopia_program_monitoring.md
   order: 1.013
   variant: full
   title: 'Ethiopia: Monitoring government program results'
+  last_reviewed: *id001
 - file: m1_1b_common_data_use_case.md
   order: 1.02
   variant: full
   title: What is our common data use case that will be the focus of this workshop?
+  last_reviewed: *id001
 - file: m1_1c_how_select_indicators.md
   order: 1.03
   variant: full
   title: How do we select indicators? What makes a good indicator for the FASTR analysis?
+  last_reviewed: *id001
 - file: m1_2_fastr_core_indicators.md
   order: 2
   variant: full
   title: FASTR core indicators
+  last_reviewed: *id001
 - file: m1_2a_country_indicator_selection.md
   order: 2.01
   variant: full
-  title: Countries have selected indicators to align with the disruptions context
-    and country priorities
+  title: Countries have selected indicators to align with the disruptions context and country priorities
+  last_reviewed: *id001
 - file: m1_3_high_volume_indicators.md
   order: 3
   variant: full
   title: Why focus on high-volume indicators?
+  last_reviewed: *id001
 - file: m1_3a_high_completeness_indicators.md
   order: 3.01
   variant: full
   title: Why focus on high-completeness indicators?
+  last_reviewed: *id001
 - file: m1_3b_count_indicators.md
   order: 3.02
   variant: full
   title: Why focus on count indicators?
+  last_reviewed: *id001

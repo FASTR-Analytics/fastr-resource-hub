@@ -8,6 +8,21 @@ import {
   loadModulesRegistry,
   loadModuleMeta,
 } from '../services/moduleRegistry.js'
+import { generateDiagram, type DiagramRequest } from '../services/diagramTemplates.js'
+import { saveCustomSlide } from '../db/database.js'
+
+/** Canonical Claude model used across this route. */
+const AI_MODEL = 'claude-sonnet-4-6'
+
+/** Curated Lucide icon ids the AI may reference for diagram items.
+ * Mirrors `client/src/lib/diagramIcons.ts` + `server/services/diagramIcons.ts`. */
+const DIAGRAM_ICON_IDS = [
+  'chart-bar', 'chart-line', 'chart-pie', 'database', 'search', 'table', 'calculator', 'file-spreadsheet',
+  'hospital', 'heart-pulse', 'stethoscope', 'baby', 'pill', 'syringe', 'activity',
+  'message-circle', 'megaphone', 'mail', 'mic', 'phone', 'send',
+  'circle-check', 'triangle-alert', 'target', 'lightbulb', 'refresh-cw', 'key-round', 'arrow-right',
+  'users', 'hand', 'graduation-cap',
+] as const
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -321,6 +336,92 @@ const AI_TOOLS: Anthropic.Tool[] = [
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed"' },
       },
       required: ['day', 'session_position', 'module_number', 'topic_number', 'version'],
+    },
+  },
+  {
+    name: 'add_custom_slide',
+    description: 'Add a freeform content slide with an H1 title and bullets (or body paragraph). Use this for country-specific framings, discussion prompts, quotes, or anything that doesn\'t fit an existing module. The result is an editable session on the chosen day.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Day number (1-indexed)' },
+        title: { type: 'string', description: 'Slide title (becomes the H1)' },
+        bullets: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Optional list of bullet points. Each bullet should be a single sentence or short phrase.',
+        },
+        body: {
+          type: 'string',
+          description: 'Optional body paragraph (used when bullets are not provided, or to introduce them).',
+        },
+        duration: { type: 'number', description: 'Duration in minutes. Default 10.' },
+      },
+      required: ['day', 'title'],
+    },
+  },
+  {
+    name: 'add_diagram',
+    description: `Create a diagram using a pre-built template and insert it as a content slide on a day. The diagram is rendered server-side to SVG and shows up as a slide with the title as H1 and the diagram below.
+
+Pick the template that fits the content:
+- stepper: numbered vertical steps (workflow phases)
+- chevron: horizontal colored bars (progressive stages)
+- cards: side-by-side cards with icon + title + body (comparison of options)
+- comparison: two-panel side-by-side (do/don't, before/after) — uses cards-style input
+- flow: horizontal arrows between boxes (linear process)
+- layers: nested rectangles (concentric levels of an idea)
+- hub: central concept with radiating spokes (one idea + facets)
+- timeline: horizontal milestones (events over time)
+
+For diagram items that support an icon, use a Lucide id from the curated catalog (see catalog list in the system prompt). Plain text labels are also fine; the diagram renderer will show them.`,
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        day: { type: 'number', description: 'Day number (1-indexed)' },
+        template: {
+          type: 'string',
+          enum: ['stepper', 'chevron', 'cards', 'comparison', 'flow', 'layers', 'hub', 'timeline'],
+          description: 'Diagram template type',
+        },
+        slide_title: { type: 'string', description: 'Slide title (becomes the H1 above the diagram)' },
+        items: {
+          type: 'array',
+          description: 'Diagram items. Shape varies slightly by template. For stepper/flow: {title, description}. For chevron: {line1, line2, icon}. For cards/comparison: {title, body, icon, footer}. For layers: {label}. For hub: {label, description, icon}. For timeline: {label, date, description}.',
+          items: {
+            type: 'object',
+            properties: {
+              title: { type: 'string' },
+              label: { type: 'string' },
+              line1: { type: 'string' },
+              line2: { type: 'string' },
+              description: { type: 'string' },
+              body: { type: 'array', items: { type: 'string' } },
+              question: { type: 'string' },
+              footer: { type: 'string' },
+              quote: { type: 'string' },
+              items: { type: 'string' },
+              symbol: { type: 'string' },
+              date: { type: 'string' },
+              icon: {
+                type: 'string',
+                description: 'Optional Lucide icon id from the curated catalog. Use one of: ' + DIAGRAM_ICON_IDS.join(', '),
+              },
+            },
+          },
+        },
+        center: {
+          type: 'object',
+          description: 'For the hub template only — the central node. {label, description, icon}.',
+          properties: {
+            label: { type: 'string' },
+            description: { type: 'string' },
+            icon: { type: 'string' },
+          },
+        },
+        duration: { type: 'number', description: 'Duration in minutes. Default 5.' },
+      },
+      required: ['day', 'template', 'slide_title'],
     },
   },
 ]
@@ -748,7 +849,239 @@ function executeAddTopicToSession(config: any, input: any): { success: boolean; 
   return { success: true, message: `Added topic ${topicFile} to session "${session.session}"` }
 }
 
-function executeTool(toolName: string, input: any, config: any): { success: boolean; message: string } {
+// ─────────────────────────────────────────────────────────────────────────────
+// Async executors (custom slide + diagram) — these write to disk + DB
+// ─────────────────────────────────────────────────────────────────────────────
+
+function slugify(s: string): string {
+  return s
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '') || 'slide'
+}
+
+async function executeAddCustomSlide(
+  config: any,
+  input: any,
+  workshopId: string,
+): Promise<{ success: boolean; message: string }> {
+  if (!workshopId) {
+    return { success: false, message: 'No workshop is currently open (workshopId missing).' }
+  }
+  const { day, title, bullets, body, duration } = input
+  const dayKey = `day${day}`
+  if (!config.schedule[dayKey]) config.schedule[dayKey] = []
+
+  const dur = typeof duration === 'number' ? duration : 10
+  const fit = validateSessionFits(config, day, dur)
+  if (!fit.fits) return { success: false, message: fit.message! }
+
+  // Build Marp markdown. H1 + optional body + optional bullets.
+  const parts: string[] = ['---', 'marp: true', 'theme: fastr', 'paginate: true', '---', '', `# ${title}`, '']
+  if (body) parts.push(body, '')
+  if (Array.isArray(bullets) && bullets.length > 0) {
+    for (const b of bullets) parts.push(`- ${b}`)
+    parts.push('')
+  }
+  const markdown = parts.join('\n')
+  const filename = `custom_${slugify(title)}_${Date.now()}.md`
+
+  try {
+    await saveCustomSlide(workshopId, filename, markdown)
+  } catch (err: any) {
+    return { success: false, message: `Failed to save slide: ${err.message}` }
+  }
+
+  addSessionToDay(config, dayKey, {
+    _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    session: title,
+    // No `type` — keep the session editable (not a locked compulsory).
+    slides: [`custom_slides/${filename}`],
+    duration: dur,
+  })
+
+  return { success: true, message: `Added custom slide "${title}" (${dur}min) to Day ${day}` }
+}
+
+/**
+ * Adapt the AI's normalized item array (where each item may carry any of
+ * `title | label | line1 | line2 | description | body | icon | …`) to the
+ * per-template DiagramRequest shape that `generateDiagram` expects.
+ *
+ * Key mapping: the AI passes `icon` (Lucide id from the curated catalog) but
+ * the diagram templates' internal field is still called `emoji` for backwards
+ * compat with legacy data. We rename `icon` → `emoji` here.
+ */
+function adaptDiagramRequest(template: string, items: any[], center: any): any {
+  const safeItems = Array.isArray(items) ? items : []
+  // Helper: pick the first defined string from a field list
+  const pick = (obj: any, ...keys: string[]): string | undefined => {
+    for (const k of keys) {
+      if (typeof obj?.[k] === 'string' && obj[k].trim()) return obj[k]
+    }
+    return undefined
+  }
+  const iconOf = (obj: any) => obj?.icon || obj?.emoji
+
+  switch (template) {
+    case 'stepper':
+      return {
+        template,
+        items: safeItems.map(i => ({
+          title: pick(i, 'title', 'label', 'line1') || '',
+          description: pick(i, 'description', 'body', 'line2') || '',
+        })),
+      }
+    case 'chevron':
+      return {
+        template,
+        items: safeItems.map(i => ({
+          line1: pick(i, 'line1', 'title', 'label') || '',
+          line2: pick(i, 'line2', 'description', 'body'),
+          emoji: iconOf(i),
+        })),
+      }
+    case 'cards':
+      return {
+        template,
+        cards: safeItems.map(i => ({
+          emoji: iconOf(i) || '',
+          title: pick(i, 'title', 'label') || '',
+          question: pick(i, 'question'),
+          body: Array.isArray(i.body) ? i.body : i.description ? [i.description] : [],
+          footer: pick(i, 'footer'),
+        })),
+      }
+    case 'comparison': {
+      const [leftRaw, rightRaw] = safeItems
+      const buildSide = (r: any) => ({
+        title: pick(r, 'title', 'label') || '',
+        symbol: pick(r, 'symbol'),
+        quote: pick(r, 'quote'),
+        items: Array.isArray(r?.body) ? r.body : Array.isArray(r?.items) ? r.items : r?.description ? [r.description] : [],
+        footer: pick(r, 'footer'),
+      })
+      return { template, left: buildSide(leftRaw || {}), right: buildSide(rightRaw || {}) }
+    }
+    case 'flow':
+      return {
+        template,
+        nodes: safeItems.map(i => ({
+          emoji: iconOf(i),
+          title: pick(i, 'title', 'label') || '',
+          description: Array.isArray(i.body) ? i.body : i.description ? [i.description] : [],
+        })),
+      }
+    case 'layers':
+      return {
+        template,
+        layers: safeItems.map(i => ({
+          label: pick(i, 'label', 'title') || '',
+          subtitle: pick(i, 'subtitle', 'description'),
+          question: pick(i, 'question'),
+          frequency: pick(i, 'frequency'),
+        })),
+      }
+    case 'hub':
+      return {
+        template,
+        center: {
+          label: pick(center || {}, 'label', 'title') || '',
+          description: pick(center || {}, 'description'),
+          emoji: iconOf(center || {}),
+        },
+        spokes: safeItems.map(i => ({
+          label: pick(i, 'label', 'title') || '',
+          description: pick(i, 'description'),
+          emoji: iconOf(i),
+        })),
+      }
+    case 'timeline':
+      return {
+        template,
+        steps: safeItems.map(i => ({
+          title: Array.isArray(i.title) ? i.title : i.title ? [i.title] : i.label ? [i.label] : [],
+          description: Array.isArray(i.description) ? i.description : i.description ? [i.description] : [],
+        })),
+      }
+    default:
+      return { template, items: safeItems }
+  }
+}
+
+async function executeAddDiagram(
+  config: any,
+  input: any,
+  workshopId: string,
+): Promise<{ success: boolean; message: string }> {
+  if (!workshopId) {
+    return { success: false, message: 'No workshop is currently open (workshopId missing).' }
+  }
+  const { day, template, slide_title, items, center, duration } = input
+  const dayKey = `day${day}`
+  if (!config.schedule[dayKey]) config.schedule[dayKey] = []
+
+  const dur = typeof duration === 'number' ? duration : 5
+  const fit = validateSessionFits(config, day, dur)
+  if (!fit.fits) return { success: false, message: fit.message! }
+
+  // Adapt the AI's normalized item array to the per-template DiagramRequest
+  // shape, mapping `icon` → `emoji` so the curated Lucide ids reach the
+  // rendering layer.
+  const diagramReq = adaptDiagramRequest(template, items, center) as DiagramRequest
+
+  let svg: string
+  try {
+    svg = generateDiagram(diagramReq)
+  } catch (err: any) {
+    return { success: false, message: `Diagram generation failed: ${err.message}` }
+  }
+
+  // Save SVG to disk
+  const slug = slugify(slide_title)
+  const svgName = `${slug}_${Date.now()}.svg`
+  const svgDir = path.join(REPO_ROOT, 'resources/diagrams')
+  fs.mkdirSync(svgDir, { recursive: true })
+  fs.writeFileSync(path.join(svgDir, svgName), svg, 'utf-8')
+  const svgRelPath = `resources/diagrams/${svgName}`
+
+  // Build slide markdown wrapping the SVG inline (same shape as the manual flow)
+  const markdown = [
+    '---',
+    'marp: true',
+    'theme: fastr',
+    'paginate: true',
+    '---',
+    '',
+    `# ${slide_title}`,
+    '',
+    `![h:500](../../${svgRelPath})`,
+    '',
+  ].join('\n')
+  const slideFilename = `diagram_${slug}_${Date.now()}.md`
+  try {
+    await saveCustomSlide(workshopId, slideFilename, markdown)
+  } catch (err: any) {
+    return { success: false, message: `Failed to save diagram slide: ${err.message}` }
+  }
+
+  addSessionToDay(config, dayKey, {
+    _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    session: slide_title,
+    slides: [`custom_slides/${slideFilename}`],
+    duration: dur,
+  })
+
+  return { success: true, message: `Added diagram "${slide_title}" (${template}) to Day ${day}` }
+}
+
+async function executeTool(
+  toolName: string,
+  input: any,
+  config: any,
+  workshopId: string,
+): Promise<{ success: boolean; message: string }> {
   switch (toolName) {
     case 'add_module':
       return executeAddModule(config, input)
@@ -756,6 +1089,10 @@ function executeTool(toolName: string, input: any, config: any): { success: bool
       return executeAddBreak(config, input)
     case 'add_custom_session':
       return executeAddCustomSession(config, input)
+    case 'add_custom_slide':
+      return await executeAddCustomSlide(config, input, workshopId)
+    case 'add_diagram':
+      return await executeAddDiagram(config, input, workshopId)
     case 'update_workshop_settings':
       return executeUpdateSettings(config, input)
     case 'move_session':
@@ -782,7 +1119,7 @@ function executeTool(toolName: string, input: any, config: any): { success: bool
 // POST /api/ai/chat - Chat with AI assistant (with tools)
 router.post('/chat', async (req, res) => {
   try {
-    const { messages, workshopConfig } = req.body
+    const { messages, workshopConfig, workshopId } = req.body
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Messages array required' })
@@ -790,6 +1127,10 @@ router.post('/chat', async (req, res) => {
 
     if (!workshopConfig) {
       return res.status(400).json({ error: 'Workshop config required - please select a workshop first' })
+    }
+
+    if (!workshopId || typeof workshopId !== 'string') {
+      return res.status(400).json({ error: 'workshopId required for tools that save slides to this workshop' })
     }
 
     const client = getClient()
@@ -845,13 +1186,28 @@ ${JSON.stringify(workingConfig, null, 2)}
 You can use tools to:
 1. **add_module** - Add a module (must specify version: "full" or "condensed"). Can use topic_range to split.
 2. **add_break** - Add tea or lunch breaks
-3. **add_custom_session** - Add custom sessions
-4. **update_workshop_settings** - Fill in workshop objectives and settings
-5. **move_session** - Move a session within a day (reorder)
-6. **move_session_to_day** - Move a session from one day to another
-7. **remove_session** - Remove a session from the deck
-8. **restructure_schedule** - Change the number of days (e.g., compress 4 days to 3)
-9. **remove_day** - Remove an entire day (subsequent days shift down)
+3. **add_custom_session** - Add a placeholder session by name + duration (no slides attached). Use for opening remarks, country presentations, group discussions — anything that lives outside the slide deck.
+4. **add_custom_slide** - Add a freeform content slide (H1 + bullets and/or body paragraph). Use this when the user wants a quick text slide that doesn't fit an existing module.
+5. **add_diagram** - Create a diagram (stepper, chevron, cards, comparison, flow, layers, hub, timeline) and insert it as a content slide. The diagram is rendered server-side to SVG and embedded under the slide title.
+6. **update_workshop_settings** - Fill in workshop objectives and settings
+7. **move_session** - Move a session within a day (reorder)
+8. **move_session_to_day** - Move a session from one day to another
+9. **remove_session** - Remove a session from the deck
+10. **restructure_schedule** - Change the number of days (e.g., compress 4 days to 3)
+11. **remove_day** - Remove an entire day (subsequent days shift down)
+12. **add_topic_to_session** - Add one specific topic from a module to an existing session (use when extending a session, not creating a new one)
+
+# DIAGRAM ICON CATALOG
+When using \`add_diagram\` with templates that take icons on items (chevron, cards, hub, timeline), use a Lucide icon id from this curated set — never an emoji and never an arbitrary string. The renderer maps the id to an inline Lucide SVG in FASTR deep green.
+
+Available icon ids, grouped by theme:
+- **Data**: chart-bar, chart-line, chart-pie, database, search, table, calculator, file-spreadsheet
+- **Health**: hospital, heart-pulse, stethoscope, baby, pill, syringe, activity
+- **Communication**: message-circle, megaphone, mail, mic, phone, send
+- **Actions / status**: circle-check, triangle-alert, target, lightbulb, refresh-cw, key-round, arrow-right
+- **People / process**: users, hand, graduation-cap
+
+Pick the icon that best matches the item's meaning. For "Completeness check" use \`circle-check\`; for "Outliers" use \`triangle-alert\`; for "Coverage rate" use \`chart-line\`. If nothing fits, leave \`icon\` out — a text-only diagram is fine.
 
 # SPLITTING MODULES ACROSS SESSIONS
 If a module is too long and needs a break in the middle, you CAN split it:
@@ -901,7 +1257,7 @@ Before making large changes, ask when:
       maxIterations--
 
       const response = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: AI_MODEL,
         max_tokens: 4096,
         system: systemPrompt,
         messages: currentMessages,
@@ -918,8 +1274,8 @@ Before making large changes, ask when:
         } else if (block.type === 'tool_use') {
           hasToolUse = true
 
-          // Execute the tool
-          const result = executeTool(block.name, block.input, workingConfig)
+          // Execute the tool (some are async — write SVGs to disk + DB)
+          const result = await executeTool(block.name, block.input, workingConfig, workshopId)
           toolResults.push({ tool: block.name, result })
 
           toolUseResults.push({
@@ -982,7 +1338,7 @@ IMPORTANT RULES:
 Context: ${context ? JSON.stringify(context) : 'General FASTR workshop'}`
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 1024,
       system: systemPrompt,
       messages: [{ role: 'user', content: prompt }],
@@ -1037,7 +1393,7 @@ Objective 3
 ...`
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 1024,
       system: 'You generate specific, actionable learning objectives for health data analytics workshops. Output only the objectives, one per line.',
       messages: [{ role: 'user', content: prompt }],
@@ -1119,7 +1475,7 @@ OUTPUT AS JSON:
 ONLY output valid JSON, nothing else.`
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 4096,
       system: 'You are a workshop scheduler. Output only valid JSON, no markdown formatting.',
       messages: [{ role: 'user', content: prompt }],
@@ -1381,7 +1737,7 @@ router.post('/generate-workshop', async (req, res) => {
       const roughBudget = computeTimeBudget({ days: roughDays })
 
       const clarifyResponse = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: AI_MODEL,
         max_tokens: 1024,
         system: `You evaluate workshop descriptions to determine if there is enough information to build a good FASTR workshop.
 
@@ -1525,7 +1881,7 @@ RULES:
     })
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 4000,
       system: `You are an expert workshop planner for FASTR (Frequent Assessments and System Tools for Resilience) workshops focused on RMNCAH-N health data analysis.
 
@@ -1724,7 +2080,7 @@ router.post('/parse-agenda', agendaUpload.single('file'), async (req, res) => {
       .join('\n')
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 4000,
       system: `You are an expert at parsing workshop agendas and converting them into structured FASTR workshop configurations.
 
@@ -1969,7 +2325,7 @@ router.post('/generate-webinar', async (req, res) => {
     // ── Phase 1: Check if clarification is needed ──
     if (!clarifications) {
       const clarifyResponse = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: AI_MODEL,
         max_tokens: 1024,
         system: `You evaluate webinar descriptions to determine if there is enough information to build a good FASTR webinar.
 
@@ -2027,7 +2383,7 @@ RULES:
     const requestedDuration = durationMatch ? parseInt(durationMatch[1]) : 90
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: AI_MODEL,
       max_tokens: 4000,
       system: `You are an expert at planning FASTR webinars — short virtual events (30-120 minutes) focused on RMNCAH-N health data analysis.
 

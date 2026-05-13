@@ -1,0 +1,277 @@
+/* ========================================
+   FASTR HANDOUT THEME (A4)
+   ========================================
+   Marp theme for printable A4 handouts.
+   Title-dominant editorial layout with a thin lime accent
+   strip at the top and a subtle "FASTR" wordmark — no logo
+   image. Brand visible, not loud.
+*/
+
+/* @theme fastr-handout */
+
+@import 'default';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --fastr-deep-green: #09544F;
+  --fastr-dark-green: #0C716B;
+  --fastr-green: #1F9A9C;
+  --fastr-lime: #D0CB17;
+  --fastr-navy: #21568C;
+  --fastr-light-bg: #F4F8F7;
+  --fastr-warm-bg: #FFFBEC;
+  --text-dark: #1F2937;
+  --text-medium: #4B5563;
+  --text-light: #6B7280;
+  --border-light: #E5E7EB;
+}
+
+/* ========================================
+   PAGE — A4 portrait
+   ======================================== */
+section {
+  /* override Marp's default flex centering — we need top-aligned block flow,
+     otherwise content overflowing A4 height gets clipped from the TOP */
+  display: block;
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  /* top: 4mm lime strip + 22mm breathing room = 26mm */
+  padding: 26mm 20mm 22mm 20mm;
+  background: white;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+/* Lime accent strip running full-width at the top */
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4mm;
+  background: var(--fastr-lime);
+}
+
+/* ========================================
+   BRAND BAND — thin rule + FASTR logo right
+   Usage in markdown (always include the explicit `height` attribute
+   on the <img> so Marp doesn't fall back to the native 1615×685 size):
+     <div class="brand-line">
+       <span class="rule"></span>
+       <img src="<path>/resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28">
+     </div>
+   ======================================== */
+.brand-line {
+  display: flex;
+  align-items: center;
+  gap: 10pt;
+  margin: 0 0 22pt 0;
+}
+
+.brand-line .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--fastr-deep-green);
+}
+
+.brand-line img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* ========================================
+   HEADINGS — title dominates the page
+   ======================================== */
+h1 {
+  color: var(--fastr-deep-green);
+  font-weight: 700;
+  font-size: 26pt;
+  margin: 0 0 0.15em 0;
+  padding-bottom: 0.25em;
+  border-bottom: 3px solid var(--fastr-lime);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* Lead/meta line right under H1 — "Activity · M9a · ~25 min" */
+.meta-line {
+  font-size: 10pt;
+  color: var(--text-medium);
+  margin: 0 0 22pt 0;
+  letter-spacing: 0.03em;
+}
+
+.meta-line strong {
+  color: var(--fastr-dark-green);
+  font-weight: 600;
+}
+
+h2 {
+  color: var(--fastr-dark-green);
+  font-weight: 600;
+  font-size: 13pt;
+  margin: 1.3em 0 0.4em 0;
+  letter-spacing: 0.01em;
+}
+
+h3 {
+  color: var(--fastr-navy);
+  font-weight: 600;
+  font-size: 11pt;
+  margin: 0.8em 0 0.2em 0;
+}
+
+/* ========================================
+   BODY
+   ======================================== */
+p, li {
+  margin: 0.45em 0;
+}
+
+ul, ol {
+  padding-left: 1.4em;
+}
+
+ul li::marker {
+  color: var(--fastr-green);
+}
+
+ol li::marker {
+  color: var(--fastr-dark-green);
+  font-weight: 600;
+}
+
+strong {
+  color: var(--fastr-deep-green);
+  font-weight: 600;
+}
+
+em {
+  color: var(--text-medium);
+}
+
+code {
+  background: var(--fastr-light-bg);
+  color: var(--fastr-deep-green);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--fastr-navy);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 1.4em 0;
+}
+
+/* ========================================
+   TABLES — worksheet rows
+   ======================================== */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0 1em 0;
+  font-size: 10pt;
+}
+
+th, td {
+  border: 1px solid var(--border-light);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--fastr-light-bg);
+  color: var(--fastr-deep-green);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+td:empty {
+  height: 26pt;
+}
+
+/* ========================================
+   CALLOUT — blockquote as a tip box
+   ======================================== */
+blockquote {
+  background: var(--fastr-warm-bg);
+  border-left: 3px solid var(--fastr-lime);
+  margin: 1em 0;
+  padding: 10px 14px;
+  color: var(--text-dark);
+  font-size: 10.5pt;
+}
+
+blockquote p {
+  margin: 0.3em 0;
+}
+
+blockquote strong {
+  color: var(--fastr-dark-green);
+}
+
+/* ========================================
+   FOOTER — via Marp `footer:` frontmatter
+   Marp renders footer text inside <footer> per section
+   ======================================== */
+footer {
+  font-size: 8.5pt;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  position: absolute;
+  bottom: 12mm;
+  left: 20mm;
+  right: 20mm;
+  border-top: 1px solid var(--border-light);
+  padding-top: 6pt;
+}
+
+/* Page number sits at the bottom-right (Marp's paginate) */
+section::after {
+  font-size: 8.5pt;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  bottom: 12mm;
+  right: 20mm;
+}
+
+/* ========================================
+   FACILITATOR-VARIANT (apply per slide via <!-- _class: facilitator -->)
+   Swaps lime → navy accents to signal "not for participants"
+   ======================================== */
+section.facilitator::before {
+  background: var(--fastr-navy);
+}
+
+section.facilitator h1 {
+  border-bottom-color: var(--fastr-navy);
+}
+
+section.facilitator .brand-line .rule,
+section.facilitator .brand-line .wordmark {
+  color: var(--fastr-navy);
+  background: var(--fastr-navy);
+}
+
+section.facilitator .brand-line .rule {
+  background: var(--fastr-navy);
+}
+
+section.facilitator blockquote {
+  background: #EAF0F8;
+  border-left-color: var(--fastr-navy);
+}

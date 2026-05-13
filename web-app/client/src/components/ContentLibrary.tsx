@@ -257,6 +257,11 @@ export function ContentLibrary({ onImportSlides: _onImportSlides }: ContentLibra
     if (category.id === 'breaks') {
       const isLunch = template.id === 'lunch'
       const duration = isLunch ? 60 : 15
+      // Inline Lucide SVG (Coffee or UtensilsCrossed) — keeps the design system's
+      // no-emoji rule, sized to fit above the H1.
+      const iconSvg = isLunch
+        ? '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"/><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"/><path d="m2.1 21.8 6.4-6.3"/><path d="m19 5-7 7"/></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>'
       markdown = `---
 marp: true
 theme: fastr
@@ -266,7 +271,9 @@ theme: fastr
 
 ![bg](/resources/backgrounds/break_slide.png)
 
-# ${isLunch ? '🍽️ Lunch Break' : '☕ Tea Break'}
+<div style="text-align:center; margin-bottom:8px">${iconSvg}</div>
+
+# ${isLunch ? 'Lunch break' : 'Tea break'}
 
 **${duration} minutes**
 
@@ -496,11 +503,18 @@ We resume at **[time]**`
       {/* Content */}
       <div className="flex-1 overflow-y-auto">
         {contentLibrary.length === 0 ? (
-          <div className="h-full flex items-center justify-center text-gray-400 text-sm">
-            <div className="text-center">
-              <Loader2 className="w-8 h-8 mx-auto mb-2 animate-spin" />
-              <p>{t('loadingContent', contentLanguage)}</p>
-            </div>
+          <div className="animate-pulse" aria-label={t('loadingContent', contentLanguage)} aria-busy="true">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="border-b border-gray-100 flex items-center gap-2 px-3 py-2">
+                <div className="w-3 h-3 rounded bg-slate-200 flex-shrink-0" />
+                <div className="w-4 h-4 rounded bg-slate-200 flex-shrink-0" />
+                <div className="w-7 h-5 rounded bg-slate-200 flex-shrink-0" />
+                <div className="flex-1 min-w-0 space-y-1.5">
+                  <div className="h-3 rounded bg-slate-200" style={{ width: `${50 + ((i * 17) % 35)}%` }} />
+                  <div className="h-2 rounded bg-slate-100" style={{ width: `${30 + ((i * 13) % 25)}%` }} />
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
         <>

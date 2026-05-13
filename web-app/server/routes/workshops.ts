@@ -15,6 +15,7 @@ import {
   deleteCustomSlide,
   WorkshopConfig
 } from '../db/database.js'
+import { resolveLibrarySlideContent, type Language } from '../services/deckBuilder.js'
 
 const router = Router()
 
@@ -223,6 +224,44 @@ router.delete('/:id/custom-slides/:filename', async (req, res) => {
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error deleting custom slide:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Slide content (read-only) — resolves a session.slides[] ref to its raw
+// markdown source. Used by EditSessionModal to pre-populate the editor when
+// forking a library slide.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// GET /api/workshops/:id/slide-content?ref=...&language=en|fr
+router.get('/:id/slide-content', async (req, res) => {
+  try {
+    const ref = String(req.query.ref || '')
+    if (!ref) return res.status(400).json({ error: 'Missing ref' })
+
+    const config = await getWorkshop(req.params.id)
+    if (!config) return res.status(404).json({ error: 'Workshop not found' })
+
+    const queryLang = req.query.language ? String(req.query.language) : null
+    const configLang = (config.workshop as any).language
+    const language: Language = (queryLang === 'fr' || queryLang === 'en')
+      ? queryLang
+      : (configLang === 'fr' ? 'fr' : 'en')
+
+    // For `custom_slides/...` refs, pre-build the lookup map from DB.
+    let customSlideMap: Map<string, string> | undefined
+    if (ref.startsWith('custom_slides/')) {
+      const slides = await getCustomSlides(req.params.id)
+      customSlideMap = new Map(slides.map(s => [s.filename, s.content]))
+    }
+
+    const resolved = resolveLibrarySlideContent(ref, language, customSlideMap)
+    if (!resolved) return res.status(404).json({ error: 'Slide not resolvable' })
+
+    res.json({ ref, ...resolved })
+  } catch (error: any) {
+    console.error('Error reading slide content:', error)
     res.status(500).json({ error: error.message })
   }
 })

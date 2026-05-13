@@ -545,6 +545,71 @@ export function getModuleSlideFiles(moduleId: string, version?: 'full' | 'conden
 }
 
 /**
+ * Resolve a slide reference to its raw markdown content (no variable substitution,
+ * no frontmatter stripping). Use this when you want the on-disk / in-db source of
+ * a slide — e.g., to populate an editor with the current content. Returns null
+ * for dynamic computed refs like `day1_agenda` (those aren't editable source).
+ *
+ * Resolution order matches `loadSlideContent`:
+ *   1. `custom_slides/<file>` → look up in customSlideMap
+ *   2. templates_<lang>/ → templates/ → templates/custom_slides/
+ *   3. core_content<_lang>/<moduleFolder>/<file>, with English fallback
+ */
+export function resolveLibrarySlideContent(
+  ref: string,
+  language: Language = 'en',
+  customSlideMap?: Map<string, string>,
+): { content: string; filename: string; source: 'custom' | 'template' | 'library' } | null {
+  // Dynamic computed slides are not source-backed — not forkable as raw markdown.
+  if (/^day\d+_(agenda|recap)$/.test(ref)) return null
+
+  if (ref.startsWith('custom_slides/')) {
+    const filename = ref.slice('custom_slides/'.length)
+    const content = customSlideMap?.get(filename)
+    if (content !== undefined) {
+      return { content, filename, source: 'custom' }
+    }
+    return null
+  }
+
+  // Templates (language-specific first, then English, then custom_slides subfolder)
+  const templatesPathForLang = language !== 'en'
+    ? path.join(REPO_ROOT, `templates_${language}`)
+    : TEMPLATES_PATH
+  const candidates: string[] = [
+    path.join(templatesPathForLang, ref),
+    path.join(TEMPLATES_PATH, ref),
+    path.join(TEMPLATES_PATH, 'custom_slides', ref),
+  ]
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return { content: fs.readFileSync(candidate, 'utf-8'), filename: ref, source: 'template' }
+    }
+  }
+
+  // core_content<_lang>/<moduleFolder>/<file>
+  const moduleMatch = ref.match(/^(m\d+[a-z]?|m[a-z]+)_/)
+  if (moduleMatch) {
+    const moduleId = moduleMatch[1]
+    const folderName = getModuleFolder(moduleId)
+    if (folderName) {
+      const langPath = path.join(getCoreContentPath(language), folderName, ref)
+      if (fs.existsSync(langPath)) {
+        return { content: fs.readFileSync(langPath, 'utf-8'), filename: ref, source: 'library' }
+      }
+      if (language !== 'en') {
+        const enPath = path.join(getCoreContentPath('en'), folderName, ref)
+        if (fs.existsSync(enPath)) {
+          return { content: fs.readFileSync(enPath, 'utf-8'), filename: ref, source: 'library' }
+        }
+      }
+    }
+  }
+
+  return null
+}
+
+/**
  * Load a slide template and substitute variables
  */
 async function loadSlideContent(
@@ -562,80 +627,17 @@ async function loadSlideContent(
     return buildDayAgendaSlide(config, agendaDay)
   }
 
-  // Workshop-scoped custom slides — stored in the `custom_slides` DB table
-  // and referenced from session.slides as `custom_slides/{filename}`.
-  // Pre-fetched by buildMarkdown and passed in via `customSlideMap`.
-  if (slideFile.startsWith('custom_slides/') && customSlideMap) {
-    const filename = slideFile.slice('custom_slides/'.length)
-    const content = customSlideMap.get(filename)
-    if (content) {
-      // Strip frontmatter + trailing separator so the slide composes cleanly
-      // with the deck's outer frontmatter and `---` joiners.
-      let stripped = content.replace(/^---[\s\S]*?---\s*/m, '')
-      stripped = stripped.replace(/\n---\s*$/, '')
-      return substituteVariables(stripped.trim(), config, dayNumber, session, language)
-    }
-  }
-
-  const coreContentPath = getCoreContentPath(language)
-
-  // Try language-specific templates folder first, then fall back to English
-  const templatesPathForLang = language !== 'en'
-    ? path.join(REPO_ROOT, `templates_${language}`)
-    : TEMPLATES_PATH
-  let filePath = path.join(templatesPathForLang, slideFile)
-  if (!fs.existsSync(filePath) && language !== 'en') {
-    // Fall back to English templates
-    filePath = path.join(TEMPLATES_PATH, slideFile)
-  }
-  if (!fs.existsSync(filePath)) {
-    // Try custom_slides subfolder
-    filePath = path.join(TEMPLATES_PATH, 'custom_slides', slideFile)
-  }
-
-  // Try core_content folders (for topic files like m4_01_approach.md, mw_1_xxx.md, mai_3_xxx.md)
-  if (!fs.existsSync(filePath)) {
-    const moduleMatch = slideFile.match(/^(m\d+[a-z]?|m[a-z]+)_/)
-    if (moduleMatch) {
-      const moduleId = moduleMatch[1]
-      const folderName = getModuleFolder(moduleId)
-      if (folderName) {
-        filePath = path.join(coreContentPath, folderName, slideFile)
-      }
-    }
-  }
-
-  // Fallback to English if French file not found
-  if (!fs.existsSync(filePath) && language !== 'en') {
-    const englishPath = getCoreContentPath('en')
-    const moduleMatch = slideFile.match(/^(m\d+[a-z]?|m[a-z]+)_/)
-    if (moduleMatch) {
-      const moduleId = moduleMatch[1]
-      const folderName = getModuleFolder(moduleId)
-      if (folderName) {
-        const fallbackPath = path.join(englishPath, folderName, slideFile)
-        if (fs.existsSync(fallbackPath)) {
-          console.warn(`French file not found for ${slideFile}, using English fallback`)
-          filePath = fallbackPath
-        }
-      }
-    }
-  }
-
-  if (!fs.existsSync(filePath)) {
+  const resolved = resolveLibrarySlideContent(slideFile, language, customSlideMap)
+  if (!resolved) {
     console.warn(`Slide file not found: ${slideFile}`)
     return null
   }
 
-  let content = fs.readFileSync(filePath, 'utf-8')
-
-  // Remove frontmatter
-  content = content.replace(/^---[\s\S]*?---\s*/m, '')
-
-  // Remove trailing slide separator (prevents double ---)
+  // Strip frontmatter and trailing separator so the slide composes cleanly
+  // with the deck's outer frontmatter and `---` joiners.
+  let content = resolved.content.replace(/^---[\s\S]*?---\s*/m, '')
   content = content.replace(/\n---\s*$/, '')
 
-  // Substitute variables
   content = substituteVariables(content, config, dayNumber, session, language)
 
   return content.trim()

@@ -2748,6 +2748,19 @@ function App() {
           </div>
         )}
       </DragOverlay>
+
+      {/* + Add content drawer — MUST be inside DndContext so the ContentLibrary
+          inside the drawer can register draggables and reach the day-column
+          droppables. React context flows through createPortal. */}
+      <AddContentDrawer
+        open={addContentDrawerOpen}
+        onClose={() => setAddContentDrawerOpen(false)}
+        onImportSlides={() => {
+          setAddContentDrawerOpen(false)
+          setAppMode('import')
+        }}
+        targetDayNum={addContentDayNum}
+      />
       </DndContext>
 
       {/* Workshop Selector Modal */}
@@ -3681,16 +3694,9 @@ function App() {
         />
       )}
 
-      {/* + Add content drawer */}
-      <AddContentDrawer
-        open={addContentDrawerOpen}
-        onClose={() => setAddContentDrawerOpen(false)}
-        onImportSlides={() => {
-          setAddContentDrawerOpen(false)
-          setAppMode('import')
-        }}
-        targetDayNum={addContentDayNum}
-      />
+      {/* AddContentDrawer is rendered inside the DndContext above so the
+          ContentLibrary inside it can register drag sources. */}
+
 
       {/* Guided tour for builder mode */}
       {currentWorkshopId && (

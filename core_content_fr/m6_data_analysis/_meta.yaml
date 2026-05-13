@@ -135,6 +135,7 @@ slides:
   order: 1.01
   variant: condensed
   title: Variation trimestrielle
+  last_reviewed: 2026-05-13
 - file: m6_s2_disruption_interpretation.md
   order: 2
   variant: condensed
@@ -195,6 +196,7 @@ slides:
   order: 6
   variant: condensed
   title: Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
+  last_reviewed: 2026-05-13
 - file: m6_s7_key_takeaway.md
   order: 7
   variant: condensed

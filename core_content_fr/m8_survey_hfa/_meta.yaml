@@ -3,6 +3,7 @@ slides:
   order: 1
   variant: full
   title: Enquête téléphonique sur l'évaluation des établissements de santé
+  last_reviewed: 2026-05-13
 - file: m8_1a_hfa_survey_design.md
   order: 1.01
   variant: full

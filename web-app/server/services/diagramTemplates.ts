@@ -82,14 +82,41 @@ function esc(text: string): string {
     .replace(/'/g, '&apos;')
 }
 
+import { isDiagramIconId, renderIconGroup } from './diagramIcons.js'
+
 function getChevronCircleStyle(color: string): { bg: string; stroke: string } {
   return CHEVRON_CIRCLE_STYLES[color] || { bg: '#f0f0f0', stroke: '#d0d0d0' }
 }
 
-/** Returns true if the value looks like plain text (not an emoji). */
+/** Returns true if the value looks like plain text (not an emoji or icon id). */
 function isPlainText(v: string | undefined): boolean {
   if (!v) return false
+  if (isDiagramIconId(v)) return false
   return v.length > 2 && /^[a-zA-Z0-9\s.,!?&\-\/]+$/.test(v)
+}
+
+/** Render an icon position: a Lucide SVG group for known icon ids, a styled
+ * `<text>` element for plain-text labels and legacy emoji. `cx`/`cy` are the
+ * circle centre; `r` controls icon size; colours apply when text is rendered. */
+function renderIconAt(
+  value: string | undefined,
+  cx: number,
+  cy: number,
+  r: number,
+  fallbackFontSize: number,
+  textFill: string,
+  iconStroke = '#09544F',
+): string {
+  if (!value) return ''
+  if (isDiagramIconId(value)) {
+    return renderIconGroup(value, cx, cy, r * 0.7, iconStroke, 2.4)
+  }
+  // Legacy emoji or short text label.
+  const fs = isPlainText(value)
+    ? Math.max(Math.round(fallbackFontSize * 0.5), Math.min(fallbackFontSize, Math.round(fallbackFontSize * 2 / value.length * 2)))
+    : fallbackFontSize
+  const weight = isPlainText(value) ? `font-weight="700"` : ''
+  return `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-size="${fs}" fill="${textFill}" ${weight}>${esc(value)}</text>`
 }
 
 /** Dynamic circle radius: grows for text, stays at defaultR for emoji. */
@@ -180,11 +207,9 @@ function generateChevron(items: ChevronItem[]): string {
     svg += `    <rect x="${circleCx}" y="4" width="${800 - circleCx - 4}" height="72" fill="${esc(color)}" clip-path="url(#cc${i})"/>\n`
     // Icon circle
     svg += `    <circle cx="${circleCx}" cy="40" r="${r}" fill="${circleStyle.bg}" stroke="${circleStyle.stroke}" stroke-width="1"/>\n`
-    // Icon (emoji or text)
+    // Icon (Lucide SVG, text label, or legacy emoji)
     if (item.emoji) {
-      const fs = iconFontSize(item.emoji, 22)
-      const textish = isPlainText(item.emoji)
-      svg += `    <text x="${circleCx}" y="40" text-anchor="middle" dominant-baseline="central" font-size="${fs}" ${textish ? `font-weight="700" fill="${circleStyle.stroke}"` : ''}>${esc(item.emoji)}</text>\n`
+      svg += `    ${renderIconAt(item.emoji, circleCx, 40, r, 22, circleStyle.stroke, circleStyle.stroke)}\n`
     }
     // Line 1
     svg += `    <text x="${textStartX}" y="36" font-size="14.5" fill="white">${esc(item.line1)}</text>\n`
@@ -223,9 +248,8 @@ function generateCards(cards: CardItem[]): string {
     svg += `    <rect width="155" height="260" rx="10" fill="${BRAND.bg}" filter="url(#shadow)"/>\n`
     // Header circle
     svg += `    <circle cx="${cardCenterX}" cy="40" r="${cardR}" fill="${esc(color)}"/>\n`
-    // Icon (emoji or text)
-    const cardFs = iconFontSize(card.emoji, 18)
-    svg += `    <text x="${cardCenterX}" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="${cardFs}" ${isPlainText(card.emoji) ? 'font-weight="700"' : ''}>${esc(card.emoji)}</text>\n`
+    // Icon (Lucide SVG, text label, or legacy emoji) — white on colored card
+    svg += `    ${renderIconAt(card.emoji, cardCenterX, 40, cardR, 18, '#fff', '#fff')}\n`
     // Title
     svg += `    <text x="78" y="80" text-anchor="middle" fill="${BRAND.dark}" font-size="13" font-weight="700">${esc(card.title)}</text>\n`
     // Divider
@@ -514,8 +538,7 @@ function generateHub(center: HubSpoke, spokes: HubSpoke[]): string {
   // Center node
   svg += `  <circle cx="${cx}" cy="${centerY}" r="${centerR}" fill="${BRAND.bg}" stroke="${BRAND.dark}" stroke-width="2" filter="url(#shadow)"/>\n`
   if (center.emoji) {
-    const centerFs = iconFontSize(center.emoji, 26)
-    svg += `  <text x="${cx}" y="${centerY}" text-anchor="middle" dominant-baseline="central" font-size="${centerFs}" ${isPlainText(center.emoji) ? `font-weight="700" fill="${BRAND.dark}"` : ''}>${esc(center.emoji)}</text>\n`
+    svg += `  ${renderIconAt(center.emoji, cx, centerY, centerR, 26, BRAND.dark, BRAND.dark)}\n`
   }
   svg += `  <text x="${cx}" y="${centerY + centerR + 20}" text-anchor="middle" fill="${BRAND.dark}" font-size="14" font-weight="700">${esc(center.label)}</text>\n`
   if (center.description) {
@@ -530,8 +553,7 @@ function generateHub(center: HubSpoke, spokes: HubSpoke[]): string {
 
     svg += `  <circle cx="${spokeX}" cy="${spokeY}" r="${sr}" fill="${BRAND.bg}" stroke="${BRAND.medium}" stroke-width="1.5" filter="url(#shadow)"/>\n`
     if (spoke.emoji) {
-      const spokeFs = iconFontSize(spoke.emoji, 22)
-      svg += `  <text x="${spokeX}" y="${spokeY}" text-anchor="middle" dominant-baseline="central" font-size="${spokeFs}" ${isPlainText(spoke.emoji) ? `font-weight="700" fill="${BRAND.medium}"` : ''}>${esc(spoke.emoji)}</text>\n`
+      svg += `  ${renderIconAt(spoke.emoji, spokeX, spokeY, sr, 22, BRAND.medium, BRAND.medium)}\n`
     }
     svg += `  <text x="${spokeX}" y="${spokeY + sr + 16}" text-anchor="middle" fill="${BRAND.dark}" font-size="11" font-weight="700">${esc(spoke.label)}</text>\n`
     if (spoke.description) {

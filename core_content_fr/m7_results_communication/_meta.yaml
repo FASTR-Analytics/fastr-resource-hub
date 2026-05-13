@@ -126,6 +126,7 @@ slides:
   order: 4.01
   variant: full
   title: 'Activité : Cartographiez vos utilisateurs'
+  last_reviewed: &id001 2026-05-13
 - file: m7_5_topic_5.md
   order: 5
   variant: full
@@ -142,10 +143,12 @@ slides:
   order: 6.01
   variant: full
   title: 'Activité : Reliez vos résultats aux actions'
+  last_reviewed: *id001
 - file: m7_6b_three_spheres_of_influence.md
   order: 6.02
   variant: full
   title: Trois sphères d'influence
+  last_reviewed: 2026-05-13
 - file: m7_7_topic_7.md
   order: 7
   variant: full
@@ -154,6 +157,7 @@ slides:
   order: 7.01
   variant: full
   title: 'Activité : Planification d''action pays'
+  last_reviewed: *id001
 - file: m7_s1_from_data_to_key_messages.md
   order: 1
   variant: condensed

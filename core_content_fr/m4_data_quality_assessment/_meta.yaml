@@ -6,10 +6,7 @@ slides:
 - file: m4_1_approach_to_dqa.md
   order: 1
   variant: full
-  title: FASTR adopte une approche multidimensionnelle de la qualité des données,
-    en partant du principe que la qualité des données ne doit pas être un obstacle
-    à leur utilisation - avec les bons mécanismes de retour d'information, l'utilisation
-    des données peut contribuer à améliorer leur qualité
+  title: FASTR adopte une approche multidimensionnelle de la qualité des données, en partant du principe que la qualité des données ne doit pas être un obstacle à leur utilisation - avec les bons mécanismes de retour d'information, l'utilisation des données peut contribuer à améliorer leur qualité
 - file: m4_1b_approach_to_dqa.md
   order: 1.001
   variant: full
@@ -32,17 +29,20 @@ slides:
 - file: m4_1b_fastr_vs_dhis2_dqa.md
   order: 1.02
   variant: full
-  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse
-    AQD effectuée dans DHIS2 ?
+  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 - file: m4_1c_fastr_vs_dhis2_dqa_continued.md
   order: 1.03
   variant: full
-  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse
-    AQD effectuée dans DHIS2 ?
+  title: En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 - file: m4_2_indicator_completeness.md
   order: 2
   variant: full
   title: Complétude de l'indicateur
+- file: m4_2a_notes_on_completeness.md
+  order: 2.01
+  variant: full
+  title: Notes sur la complétude
+  last_reviewed: 2026-05-13
 - file: m4_3_outliers.md
   order: 3
   variant: full

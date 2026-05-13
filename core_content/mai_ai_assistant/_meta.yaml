@@ -3,119 +3,89 @@ slides:
   order: 1
   variant: full
   title: The AI assistant
-- file: mai_2_ai_accelerator_not_decider.md
+  last_reviewed: &id001 2026-05-13
+- file: mai_3_ai_assistant_capabilities.md
   order: 2
   variant: full
-  title: AI is an accelerator, not a decision maker
-- file: mai_2_ai_assistant_capabilities.md
-  order: 2
-  variant: full
-  title: AI is an accelerator, not a decision maker
-- file: mai_2a_four_skills_for_ai.md
+  title: What the AI assistant can do
+  last_reviewed: *id001
+- file: mai_3a_ai_greatest_value.md
   order: 2.01
   variant: full
-  title: 'Working well with AI: four habits'
-- file: mai_2b_four_skills_in_practice.md
+  title: Where the AI helps most
+  last_reviewed: *id001
+- file: mai_4_ai_how_it_works.md
   order: 2.02
   variant: full
+  title: How the AI assistant works
+  last_reviewed: *id001
+- file: mai_2_ai_accelerator_not_decider.md
+  order: 3
+  variant: full
+  title: AI is an accelerator, not a decision maker
+  last_reviewed: *id001
+- file: mai_2a_four_skills_for_ai.md
+  order: 3.01
+  variant: full
+  title: 'Working well with AI: four habits'
+  last_reviewed: *id001
+- file: mai_2b_four_skills_in_practice.md
+  order: 3.02
+  variant: full
   title: The 4 D's — think of the AI as a new colleague
-- file: mai_3_ai_ask_questions.md
-  order: 3
-  variant: full
-  title: What the AI assistant can do
-- file: mai_3_ai_assistant_capabilities.md
-  order: 3
-  variant: full
-  title: What the AI assistant can do
-- file: mai_3a_ai_ask_questions_continued.md
-  order: 3.01
-  variant: full
-  title: Where the AI provides greatest value
-- file: mai_3a_ai_greatest_value.md
-  order: 3.01
-  variant: full
-  title: Where the AI helps most
-- file: mai_4_ai_conversations.md
-  order: 4
-  variant: full
-  title: How the AI assistant works
-- file: mai_4_ai_how_it_works.md
-  order: 4
-  variant: full
-  title: How the AI assistant works
+  last_reviewed: *id001
 - file: mai_4a_ai_conversations.md
-  order: 4.01
+  order: 4
   variant: full
   title: How conversations work
-- file: mai_4a_ai_conversations_continued.md
-  order: 4.01
-  variant: full
-  title: How conversations work
+  last_reviewed: *id001
 - file: mai_5_ai_little_value_example.md
   order: 5
   variant: full
   title: When AI adds little value
-- file: mai_5_ai_tips_better_answers.md
-  order: 5
-  variant: full
-  title: When AI adds little value
-- file: mai_5a_ai_good_prompt_checklist.md
-  order: 5.01
-  variant: full
-  title: When AI is helpful
+  last_reviewed: *id001
 - file: mai_5a_ai_helpful_example.md
   order: 5.01
   variant: full
   title: When AI is helpful
-- file: mai_6_ai_capabilities_table.md
-  order: 6
-  variant: full
-  title: Tips for better answers
+  last_reviewed: *id001
 - file: mai_6_ai_tips_better_answers.md
   order: 6
   variant: full
   title: Tips for better answers
-- file: mai_6a_ai_capabilities_table_continued.md
-  order: 6.01
-  variant: full
-  title: What makes a good prompt?
+  last_reviewed: *id001
 - file: mai_6a_ai_good_prompt_checklist.md
   order: 6.01
   variant: full
   title: What makes a good prompt?
+  last_reviewed: *id001
 - file: mai_7_ai_prompt_library_overview.md
   order: 7
   variant: full
   title: The prompt library
+  last_reviewed: *id001
+- file: mai_7b_ai_prompt_library_overview.md
+  order: 7.001
+  variant: full
+  title: Prompt library organization
+  last_reviewed: *id001
 - file: mai_7a_ai_prompt_examples_table.md
   order: 7.01
   variant: full
   title: Example prompts at a glance
-- file: mai_7b_ai_prompt_library_overview.md
-  order: 7.02
-  variant: full
-  title: Prompt library organization
-- file: mai_8_ai_private_vs_shared.md
-  order: 8
-  variant: full
-  title: What happens when you log off
+  last_reviewed: *id001
 - file: mai_8_ai_what_happens_log_off.md
   order: 8
   variant: full
   title: What happens when you log off
+  last_reviewed: *id001
 - file: mai_8a_ai_private_vs_shared.md
   order: 8.01
   variant: full
   title: Private vs shared on team projects
-- file: mai_8a_ai_private_vs_shared_continued.md
-  order: 8.01
-  variant: full
-  title: Private vs shared on team projects
-- file: mai_8b_ai_private_vs_shared_continued.md
-  order: 8.02
-  variant: full
-  title: How teams work together
+  last_reviewed: *id001
 - file: mai_8b_ai_team_collaboration.md
   order: 8.02
   variant: full
   title: How teams work together
+  last_reviewed: *id001

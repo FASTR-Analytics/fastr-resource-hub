@@ -6,8 +6,7 @@ slides:
 - file: m2_1_why_extract_data.md
   order: 1
   variant: full
-  title: Pourquoi extraire les données du DHIS2 ? Pourquoi ne pas analyser directement
-    dans DHIS2 ?
+  title: Pourquoi extraire les données du DHIS2 ? Pourquoi ne pas analyser directement dans DHIS2 ?
 - file: m2_1a_what_data_does_fastr_need.md
   order: 1.01
   variant: full
@@ -32,6 +31,7 @@ slides:
   order: 2.02
   variant: full
   title: DHIS2 Data Downloader
+  last_reviewed: 2026-05-13
 - file: m2_2c_data_downloader_login.md
   order: 2.03
   variant: full

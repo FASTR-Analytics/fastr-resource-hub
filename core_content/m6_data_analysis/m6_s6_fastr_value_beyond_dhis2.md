@@ -16,3 +16,11 @@ paginate: true
 - **Improved coverage estimation** — Back-calculates denominators from surveys rather than relying solely on catchment populations
 - **Faster analytics cycles** — Pre-built analytical pipeline aligned with country decision-making timelines
 - **Built-in capacity strengthening** — Reproducible methods that build local analytical skills
+
+<!--
+PRESENTER NOTES:
+- DHIS2 is excellent for data collection and basic visualization — FASTR complements it
+- Key differentiator: data quality adjustment before analysis
+- Coverage methodology goes beyond simple HMIS/population ratios
+- Goal is to enable faster, more rigorous analysis for decision-making
+-->

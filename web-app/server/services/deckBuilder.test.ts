@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSessionMarkdown } from './deckBuilder'
+import { buildSessionMarkdown, resolveLibrarySlideContent } from './deckBuilder'
 import type { WorkshopConfig } from '../db/database'
 
 /**
@@ -155,6 +155,40 @@ describe('buildSessionMarkdown — custom slide resolution', () => {
 
     expect(result).toBeTruthy()
     expect(result).toContain('PLACEHOLDER')
+  })
+})
+
+describe('resolveLibrarySlideContent — fork-on-edit source resolver', () => {
+  it('resolves a custom_slides/ ref from the supplied map', () => {
+    const map = new Map<string, string>([['my_edit.md', '# My edit']])
+    const res = resolveLibrarySlideContent('custom_slides/my_edit.md', 'en', map)
+    expect(res).not.toBeNull()
+    expect(res!.source).toBe('custom')
+    expect(res!.filename).toBe('my_edit.md')
+    expect(res!.content).toBe('# My edit')
+  })
+
+  it('returns null for a custom_slides/ ref that is missing from the map', () => {
+    const res = resolveLibrarySlideContent('custom_slides/missing.md', 'en', new Map())
+    expect(res).toBeNull()
+  })
+
+  it('resolves a real library slide from core_content/<module>/<file>', () => {
+    // Using a known-existing module slide from the m4 folder.
+    const res = resolveLibrarySlideContent('m4_1_approach_to_dqa.md', 'en')
+    expect(res).not.toBeNull()
+    expect(res!.source).toBe('library')
+    expect(res!.filename).toBe('m4_1_approach_to_dqa.md')
+    expect(res!.content.length).toBeGreaterThan(0)
+  })
+
+  it('returns null for dynamic computed slides (day1_agenda etc.)', () => {
+    expect(resolveLibrarySlideContent('day1_agenda', 'en')).toBeNull()
+    expect(resolveLibrarySlideContent('day3_recap', 'fr')).toBeNull()
+  })
+
+  it('returns null for an unresolvable ref', () => {
+    expect(resolveLibrarySlideContent('m4_nonexistent_slide_xyz.md', 'en')).toBeNull()
   })
 })
 
