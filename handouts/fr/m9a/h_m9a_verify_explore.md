@@ -7,9 +7,11 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step done">1. Établissements</span> <span class="arrow">→</span> <span class="step done">2. Indicateurs</span> <span class="arrow">→</span> <span class="step done">3. Données</span> <span class="arrow">→</span> <span class="step current">4. Vérifier</span></div>
+
 # Vérifier et explorer votre installation
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Configuration de l'instance</strong> · <strong>~10 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~10 min</strong></p>
 
 ## Avant de commencer
 
@@ -18,6 +20,10 @@ footer: "FASTR · Configuration de l'instance"
 ## Ce que vous allez faire
 
 Faire un contrôle ponctuel de vos données importées, apprendre à naviguer dans l'explorateur de graphiques, et confirmer que tout est prêt pour les modules d'analyse.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Vérifications
 
@@ -61,6 +67,10 @@ De retour sur la page **Données**, vous devriez avoir :
 
 Vous êtes prêt à lancer les modules d'analyse — qualité des données, utilisation des services, estimation de la couverture, etc.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Que faire si ça ne marche pas
 
 - **Toutes les valeurs apparaissent plates / à zéro** — la plage temporelle ne recoupe peut-être pas la période où DHIS2 a des données. Vérifiez votre plage et ré-importez.
@@ -68,6 +78,10 @@ Vous êtes prêt à lancer les modules d'analyse — qualité des données, util
 - **Le graphique ne charge pas** — essayez un autre navigateur ; les graphiques FASTR utilisent des fonctionnalités web modernes que certains anciens navigateurs ne supportent pas.
 
 > 🔎 **Vérifiez dans votre interface actuelle** : contrôles de graphique et disposition peuvent différer des captures ; le flux reste le même.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Étape suivante
 

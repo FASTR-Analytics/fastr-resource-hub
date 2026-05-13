@@ -36,12 +36,15 @@ section {
   position: relative;
   width: 210mm;
   height: 297mm;
-  /* top: 4mm lime strip + 22mm breathing room = 26mm */
-  padding: 26mm 20mm 22mm 20mm;
+  /* top: 4mm lime strip + 22mm breathing room = 26mm.
+     bottom: 38mm reserves space for the absolute-positioned <footer>.
+     Footer sits at bottom: 14mm; its rule + text occupies ~8mm; we want
+     >=12mm clearance between content area end and footer top. */
+  padding: 26mm 20mm 38mm 20mm;
   background: white;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 10.5pt;
-  line-height: 1.45;
+  font-size: 9.5pt;
+  line-height: 1.4;
   color: var(--text-dark);
   overflow: hidden;
 }
@@ -91,7 +94,7 @@ section::before {
 h1 {
   color: var(--fastr-deep-green);
   font-weight: 700;
-  font-size: 26pt;
+  font-size: 22pt;
   margin: 0 0 0.15em 0;
   padding-bottom: 0.25em;
   border-bottom: 3px solid var(--fastr-lime);
@@ -115,7 +118,7 @@ h1 {
 h2 {
   color: var(--fastr-dark-green);
   font-weight: 600;
-  font-size: 13pt;
+  font-size: 12pt;
   margin: 1.3em 0 0.4em 0;
   letter-spacing: 0.01em;
 }
@@ -123,7 +126,7 @@ h2 {
 h3 {
   color: var(--fastr-navy);
   font-weight: 600;
-  font-size: 11pt;
+  font-size: 10.5pt;
   margin: 0.8em 0 0.2em 0;
 }
 
@@ -225,6 +228,87 @@ blockquote strong {
 }
 
 /* ========================================
+   SETUP-FLOW BREADCRUMB
+   Shows position within a multi-handout sequence (e.g., M9a's 5 handouts).
+   Usage in markdown (place right after the brand-line, before the H1):
+     <div class="setup-breadcrumb">
+       <span class="step done">Before you begin</span>
+       <span class="arrow">→</span>
+       <span class="step current">1. Facility structure</span>
+       <span class="arrow">→</span>
+       <span class="step">2. Indicators</span>
+       ...
+     </div>
+   ======================================== */
+.setup-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5pt;
+  font-size: 8pt;
+  color: var(--text-light);
+  margin: 0 0 10pt 0;
+  padding: 4pt 9pt;
+  background: var(--fastr-light-bg);
+  border-radius: 3px;
+  letter-spacing: 0.01em;
+}
+
+.setup-breadcrumb .step {
+  color: var(--text-light);
+}
+
+.setup-breadcrumb .step.current {
+  color: var(--fastr-deep-green);
+  font-weight: 600;
+}
+
+.setup-breadcrumb .step.done {
+  color: var(--text-medium);
+}
+
+.setup-breadcrumb .arrow {
+  color: var(--border-light);
+  font-weight: 400;
+}
+
+/* ========================================
+   SCREENSHOT PLACEHOLDER
+   Used where a real screenshot will land later.
+   Usage in markdown:
+     <div class="screenshot-placeholder">
+       📷 <strong>Short description</strong><br>
+       <code>resources/screenshots/&lt;path&gt;/&lt;filename&gt;.png</code>
+     </div>
+   When the file is captured, replace the div with:
+     ![alt h:160](../../../resources/screenshots/<path>/<filename>.png)
+   ======================================== */
+.screenshot-placeholder {
+  border: 2px dashed var(--fastr-lime);
+  background: var(--fastr-warm-bg);
+  border-radius: 4px;
+  padding: 14pt 16pt;
+  margin: 1em 0;
+  text-align: center;
+  color: var(--text-medium);
+  font-size: 10pt;
+  line-height: 1.5;
+}
+
+.screenshot-placeholder strong {
+  color: var(--fastr-deep-green);
+  font-weight: 600;
+}
+
+.screenshot-placeholder code {
+  display: inline-block;
+  background: white;
+  color: var(--text-dark);
+  font-size: 8.5pt;
+  margin-top: 4pt;
+}
+
+/* ========================================
    FOOTER — via Marp `footer:` frontmatter
    Marp renders footer text inside <footer> per section
    ======================================== */
@@ -233,11 +317,11 @@ footer {
   color: var(--text-light);
   letter-spacing: 0.04em;
   position: absolute;
-  bottom: 12mm;
+  bottom: 14mm;
   left: 20mm;
   right: 20mm;
   border-top: 1px solid var(--border-light);
-  padding-top: 6pt;
+  padding-top: 4pt;
 }
 
 /* Page number sits at the bottom-right (Marp's paginate) */
@@ -245,7 +329,7 @@ section::after {
   font-size: 8.5pt;
   color: var(--text-light);
   letter-spacing: 0.04em;
-  bottom: 12mm;
+  bottom: 14mm;
   right: 20mm;
 }
 

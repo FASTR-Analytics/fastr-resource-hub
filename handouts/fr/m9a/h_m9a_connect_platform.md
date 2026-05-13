@@ -7,9 +7,11 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step current">Avant de commencer</span> <span class="arrow">→</span> <span class="step">1. Établissements</span> <span class="arrow">→</span> <span class="step">2. Indicateurs</span> <span class="arrow">→</span> <span class="step">3. Données</span> <span class="arrow">→</span> <span class="step">4. Vérifier</span></div>
+
 # Avant de commencer
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Configuration de l'instance</strong> · <strong>~5 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~5 min</strong></p>
 
 ## Ce qu'il vous faut
 
@@ -27,6 +29,10 @@ Vous parcourrez quatre documents dans l'ordre :
 2. **Importer et mapper les indicateurs** — définir les indicateurs à suivre et les lier aux noms DHIS2
 3. **Importer les données HMIS** — récupérer les vraies valeurs
 4. **Vérifier et explorer** — confirmer que tout est correctement chargé
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## À propos des identifiants DHIS2
 

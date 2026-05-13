@@ -7,9 +7,11 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step done">1. Établissements</span> <span class="arrow">→</span> <span class="step done">2. Indicateurs</span> <span class="arrow">→</span> <span class="step current">3. Données</span> <span class="arrow">→</span> <span class="step">4. Vérifier</span></div>
+
 # Importer les données HMIS
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Configuration de l'instance</strong> · <strong>~25 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~25 min</strong></p>
 
 ## Avant de commencer
 

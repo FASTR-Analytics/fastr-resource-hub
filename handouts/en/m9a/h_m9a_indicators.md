@@ -7,9 +7,11 @@ footer: "FASTR · Instance Setup"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Before you begin</span> <span class="arrow">→</span> <span class="step done">1. Facility structure</span> <span class="arrow">→</span> <span class="step current">2. Indicators</span> <span class="arrow">→</span> <span class="step">3. Data</span> <span class="arrow">→</span> <span class="step">4. Verify</span></div>
+
 # Import and map indicators
 
-<p class="meta-line"><strong>Activity</strong> · <strong>Instance Setup</strong> · <strong>~30 min</strong></p>
+<p class="meta-line"><strong>Instance Setup</strong> · <strong>~30 min</strong></p>
 
 ## Before you start
 
@@ -66,6 +68,10 @@ Without mapping, FASTR can pull data but won't know how to compare across countr
 
 ---
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Phase 3 — Map DHIS2 indicators to common indicators
 
 For each imported DHIS2 indicator, link it to its common counterpart:
@@ -84,6 +90,10 @@ For each imported DHIS2 indicator, link it to its common counterpart:
 When you go back to the indicators page, you should see every DHIS2 indicator with its mapped common indicator listed alongside.
 
 ![h:200](../../../resources/screenshots/m9a_setup/12_all_mapped.jpeg)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## What could go wrong
 

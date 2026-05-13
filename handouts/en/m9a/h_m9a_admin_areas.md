@@ -7,9 +7,11 @@ footer: "FASTR · Instance Setup"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Before you begin</span> <span class="arrow">→</span> <span class="step current">1. Facility structure</span> <span class="arrow">→</span> <span class="step">2. Indicators</span> <span class="arrow">→</span> <span class="step">3. Data</span> <span class="arrow">→</span> <span class="step">4. Verify</span></div>
+
 # Import facility structure
 
-<p class="meta-line"><strong>Activity</strong> · <strong>Instance Setup</strong> · <strong>~20 min</strong></p>
+<p class="meta-line"><strong>Instance Setup</strong> · <strong>~20 min</strong></p>
 
 ## Before you start
 
@@ -61,7 +63,7 @@ Click **Confirm and continue**.
 
 ### Phase 4 — Select the facility level
 
-Select which org-unit levels to import. For most countries the right choice is **Facility** — it's the leaf level, and selecting it brings all the levels above it along.
+Select **Facility**. FASTR's analysis modules require facility-level data — they aggregate up from facilities to districts and regions internally, not the other way around. Selecting *Facility* brings all the levels above it (district, region, …) along automatically.
 
 ![h:160](../../../resources/screenshots/m9a_setup/05_select_facility_level.jpeg)
 

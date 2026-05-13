@@ -1,0 +1,65 @@
+---
+marp: true
+theme: fastr-handout
+paginate: true
+footer: "FASTR · Prompting techniques"
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+# Use a previous report as a template
+
+<p class="meta-line"><strong>Activity</strong> · <strong>Prompting techniques</strong> · <strong>~10 min</strong></p>
+
+## Before you start
+
+- ☐ You've worked through the earlier prompting activities
+- ☐ You have a previous report (PDF) you're satisfied with and would like to reproduce for a new period
+
+## Why this matters
+
+Sometimes the easiest way to brief the AI is not to describe what you want — it's to **show** it. Uploading a prior report as a reference lets the AI match the structure, tone, and depth of an existing output rather than reinventing the format.
+
+## When to use this approach
+
+- You have a previous report you trust and want to replicate
+- You want to keep a consistent format across time periods
+- You don't have a custom prompt available for this report type
+
+## Steps
+
+### 1. Upload the report to your Assets
+
+From the main page, go to **Assets** → **Upload assets** → select your PDF.
+
+### 2. Include the report in the AI conversation
+
+Open a fresh AI conversation. Click the **three-dot menu** → **Include file** → select the report you just uploaded.
+
+The AI now has the PDF as context for everything in this conversation.
+
+### 3. Ask the AI to replicate the structure
+
+A starter prompt:
+
+> Use this report as a template. Create a similar report covering [time period] for [country/region/scope].
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Tips
+
+> **Verify, don't trust.** Even when given a template, the AI can drift — it may simplify a chart, drop a section, or summarise loosely. Walk through the output side-by-side with the template before sharing.
+
+> **Save your "good" examples.** As your team produces reports you're proud of, save them to Assets. Each one becomes a template you (or a colleague) can reuse.
+
+## What could go wrong
+
+- **AI doesn't seem to "see" the file** — re-check that you included it in the conversation (not just uploaded it). The three-dot menu must show the file as attached.
+- **Output skips sections from the template** — ask the AI explicitly: *"Include all the sections from the template, in the same order."*
+- **PDF is too large to upload** — split it into chapters, or extract the relevant pages first.
+
+## What's next
+
+This finishes the prompting techniques module. From here you'll move into using these skills in real workshop activities — building visualisations, slide decks, and disruption reports with the AI as your collaborator.

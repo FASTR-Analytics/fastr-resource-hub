@@ -7,9 +7,11 @@ footer: "FASTR · Instance Setup"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Before you begin</span> <span class="arrow">→</span> <span class="step done">1. Facility structure</span> <span class="arrow">→</span> <span class="step done">2. Indicators</span> <span class="arrow">→</span> <span class="step done">3. Data</span> <span class="arrow">→</span> <span class="step current">4. Verify</span></div>
+
 # Verify and explore your setup
 
-<p class="meta-line"><strong>Activity</strong> · <strong>Instance Setup</strong> · <strong>~10 min</strong></p>
+<p class="meta-line"><strong>Instance Setup</strong> · <strong>~10 min</strong></p>
 
 ## Before you start
 
@@ -51,6 +53,10 @@ Click **View previous imports** to see every import that's been run — date, so
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Checkpoint
 
 Back on the **Data** page, you should now have:
@@ -68,6 +74,10 @@ You're ready to run analysis modules — data quality, service utilization, cove
 - **Chart won't load** — try a different browser; FASTR's charts use modern web features that older browsers may not handle.
 
 > 🔎 **Verify in your current UI**: chart controls and panel layout may differ from the screenshots; the flow is the same.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## What's next
 

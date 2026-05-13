@@ -7,9 +7,11 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step done">1. Établissements</span> <span class="arrow">→</span> <span class="step current">2. Indicateurs</span> <span class="arrow">→</span> <span class="step">3. Données</span> <span class="arrow">→</span> <span class="step">4. Vérifier</span></div>
+
 # Importer et mapper les indicateurs
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Configuration de l'instance</strong> · <strong>~30 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~30 min</strong></p>
 
 ## Avant de commencer
 
@@ -90,6 +92,10 @@ Pour chaque indicateur DHIS2 importé, liez-le à son correspondant commun :
 De retour sur la page des indicateurs, vous devez voir chaque indicateur DHIS2 avec son indicateur commun mappé à côté.
 
 ![h:200](../../../resources/screenshots/m9a_setup/12_all_mapped.jpeg)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Que faire si ça ne marche pas
 

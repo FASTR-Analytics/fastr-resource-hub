@@ -7,9 +7,11 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step current">1. Établissements</span> <span class="arrow">→</span> <span class="step">2. Indicateurs</span> <span class="arrow">→</span> <span class="step">3. Données</span> <span class="arrow">→</span> <span class="step">4. Vérifier</span></div>
+
 # Importer la structure des établissements
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Configuration de l'instance</strong> · <strong>~20 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~20 min</strong></p>
 
 ## Avant de commencer
 
@@ -61,7 +63,7 @@ Cliquez sur **Confirm and continue**.
 
 ### Phase 4 — Sélectionner le niveau d'établissement
 
-Sélectionnez les niveaux d'unités d'organisation à importer. Pour la plupart des pays, le bon choix est **Établissement** — c'est le niveau feuille, et le sélectionner ramène tous les niveaux au-dessus.
+Sélectionnez **Établissement**. Les modules d'analyse FASTR nécessitent des données au niveau établissement — ils agrègent ensuite vers les districts et régions en interne, pas l'inverse. Sélectionner *Établissement* ramène tous les niveaux au-dessus (district, région, …) automatiquement.
 
 ![h:160](../../../resources/screenshots/m9a_setup/05_select_facility_level.jpeg)
 
