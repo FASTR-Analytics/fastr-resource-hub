@@ -7,7 +7,27 @@ slides:
   order: 2
   variant: full
   title: "Créer un rapport pas à pas"
+- file: m9i_2a_markdown_cheatsheet.md
+  order: 2.5
+  variant: full
+  title: "Aide-mémoire de mise en forme"
+  status: new
 - file: m9i_3_ai_draft.md
   order: 3
   variant: full
   title: "Accélérer avec l'assistant IA"
+- file: m9i_4_report_settings.md
+  order: 4
+  variant: full
+  title: "Paramètres du rapport"
+  status: new
+- file: m9i_5_expanding_report.md
+  order: 5
+  variant: full
+  title: "Élargir votre rapport avec d'autres prompts"
+  status: new
+- file: m9i_5a_ai_verification_checklist.md
+  order: 5.1
+  variant: full
+  title: "Liste de vérification — sortie IA"
+  status: new
