@@ -1,4 +1,14 @@
 slides:
+- file: m8_0_hfa_implementation_status.md
+  order: 0.5
+  variant: full
+  title: Les enquêtes FOSA dans les pays partenaires du GFF
+  status: new
+- file: m8_0a_fastr_hfa_approach.md
+  order: 0.6
+  variant: full
+  title: L'approche FASTR pour les enquêtes auprès des formations sanitaires
+  status: new
 - file: m8_1_rapid_cycle_facility_survey.md
   order: 1
   variant: full
@@ -16,3 +26,28 @@ slides:
   order: 1.03
   variant: full
   title: Quatre types d'indicateurs
+- file: m8_2_validity_phone_surveys.md
+  order: 1.5
+  variant: full
+  title: Les enquêtes téléphoniques donnent-elles des résultats fiables ?
+  status: new
+- file: m8_3_snis_hfa_integration.md
+  order: 2
+  variant: full
+  title: Pourquoi intégrer SNIS et enquêtes FOSA ?
+  status: new
+- file: m8_3a_triangulation_example.md
+  order: 2.01
+  variant: full
+  title: 'Exemple : la mortalité maternelle est-elle susceptible de s''améliorer ?'
+  status: new
+- file: m8_3b_dhis2_chain.md
+  order: 2.02
+  variant: full
+  title: Ce que le DHIS2 nous permet de mesurer
+  status: new
+- file: m8_3c_complete_results_chain.md
+  order: 2.03
+  variant: full
+  title: La chaîne complète des résultats
+  status: new
