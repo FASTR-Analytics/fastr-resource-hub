@@ -818,6 +818,163 @@ section.spacious p {
 }
 
 /* ========================================
+   EYEBROW TAG
+   Small-caps category label sitting above titles.
+   Used as: <div class="eyebrow">INDICATEUR D'IMPACT</div>
+   Visible accent: short left-border bar in deep green.
+   ======================================== */
+.eyebrow {
+  display: inline-block;
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fastr-deep-green);
+  padding-left: 0.6em;
+  border-left: 3px solid var(--fastr-deep-green);
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+/* ========================================
+   DATA-SOURCE PILLS
+   Colored citation pills for data sources at the bottom
+   of a card. Used as:
+     <span class="data-pill data-pill-green">DHIS2</span>
+   Four variants align with the results-chain color system.
+   ======================================== */
+.data-pill {
+  display: inline-block;
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.45em 1em;
+  border-radius: 6px;
+  color: #ffffff;
+  margin: 0.2em 0.3em 0.2em 0;
+}
+.data-pill-navy        { background: var(--fastr-navy); }
+.data-pill-deep-green  { background: var(--fastr-deep-green); }
+.data-pill-green       { background: var(--fastr-green); }
+.data-pill-gold        { background: var(--fastr-gold); }
+
+.data-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0.6em 0;
+}
+
+/* ========================================
+   CALLOUT FOOTER
+   Light-green callout strip with left border accent,
+   for the "key takeaway" sentence at the bottom of
+   a slide. Used as:
+     <div class="callout-footer">…sentence…</div>
+   ======================================== */
+.callout-footer {
+  background: rgba(31, 154, 156, 0.10);
+  border-left: 5px solid var(--fastr-deep-green);
+  padding: 0.7em 1em;
+  margin-top: 1em;
+  font-size: 0.7em;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--fastr-deep-green);
+  border-radius: 0 6px 6px 0;
+}
+
+/* ========================================
+   RESULTS CHAIN — 4-column flow
+   ENTRÉE → SORTIE → RÉSULTAT → IMPACT
+   Color progression: navy → deep-green → green → gold.
+   Used as:
+     <div class="results-chain">
+       <div class="rc-col rc-navy">
+         <div class="rc-eyebrow">ENTRÉE</div>
+         <h3 class="rc-title">…</h3>
+         <p class="rc-desc">…</p>
+         <span class="data-pill data-pill-navy">…source…</span>
+       </div>
+       <div class="rc-arrow">→</div>
+       <div class="rc-col rc-deep-green">…</div>
+       …
+     </div>
+   ======================================== */
+.results-chain {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 0.5em;
+  align-items: stretch;
+  margin: 1em 0;
+}
+.rc-col {
+  background: #fafafa;
+  border-top: 6px solid currentColor;
+  padding: 0.9em 0.8em 1em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0.7em;
+}
+.rc-navy        { color: var(--fastr-navy); background: rgba(33, 86, 140, 0.06); }
+.rc-deep-green  { color: var(--fastr-deep-green); background: rgba(9, 84, 79, 0.06); }
+.rc-green       { color: var(--fastr-green); background: rgba(31, 154, 156, 0.08); }
+.rc-gold        { color: var(--fastr-gold); background: rgba(216, 168, 34, 0.08); }
+.rc-eyebrow {
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+  color: inherit;
+}
+.rc-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0.2em 0;
+  line-height: 1.25;
+  border: none;
+  padding: 0;
+}
+.rc-desc {
+  font-size: 0.85em;
+  font-style: italic;
+  color: var(--text-medium);
+  margin: 0.4em 0 0.8em;
+  flex: 1;
+}
+.rc-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 1.4em;
+  color: var(--text-light);
+  padding: 0 0.1em;
+}
+
+/* ========================================
+   TRIANGULATION ROW
+   Horizontal row of 3 colored data-source badges
+   sitting under an indicator name. Used as:
+     <div class="eyebrow">INDICATEUR D'IMPACT</div>
+     <h2>…indicator name…</h2>
+     <div class="eyebrow">SOURCES DE TRIANGULATION</div>
+     <div class="data-pills triangulation">
+       <span class="data-pill data-pill-deep-green">…</span>
+       <span class="data-pill data-pill-green">…</span>
+       <span class="data-pill data-pill-gold">…</span>
+     </div>
+   .triangulation makes the pills bigger.
+   ======================================== */
+.data-pills.triangulation .data-pill {
+  font-size: 0.8em;
+  padding: 0.7em 1.4em;
+  flex: 1;
+  text-align: center;
+}
+
+/* ========================================
    ACTIVITY POINTER SLIDES
    Used on slides that have been replaced by handouts.
    The slide acts as a visual anchor in the deck while
