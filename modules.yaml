@@ -1,7 +1,35 @@
+# Themes group the modules for display. Order here is display order.
+themes:
+- id: foundations
+  name:
+    en: Setup & foundations
+    fr: Bases et fondations
+- id: data
+  name:
+    en: Data pipeline
+    fr: Pipeline de données
+- id: analysis
+  name:
+    en: Analysis
+    fr: Analyse
+- id: communication
+  name:
+    en: Communication & action
+    fr: Communication et action
+- id: platform
+  name:
+    en: Platform skills
+    fr: Compétences plateforme
+- id: workshop
+  name:
+    en: Workshop & assessment
+    fr: Atelier et évaluation
+
 modules:
 - id: m0
   number: '0'
   folder: m0_introduction
+  theme: foundations
   name:
     en: Introduction to FASTR
     fr: Introduction à FASTR
@@ -16,6 +44,7 @@ modules:
 - id: m1
   number: '1'
   folder: m1_identify_questions_indicators
+  theme: foundations
   name:
     en: Identify Questions & Indicators
     fr: Identifier les questions et indicateurs
@@ -30,6 +59,7 @@ modules:
 - id: m2
   number: '2'
   folder: m2_data_extraction
+  theme: data
   name:
     en: Data Extraction
     fr: Extraction des données
@@ -45,6 +75,7 @@ modules:
 - id: m3
   number: '3'
   folder: m3_fastr_analytics_platform
+  theme: foundations
   name:
     en: FASTR Analytics Platform
     fr: Plateforme analytique FASTR
@@ -59,6 +90,7 @@ modules:
 - id: m3b
   number: 3b
   folder: mai_ai_assistant
+  theme: platform
   name:
     en: AI Assistant
     fr: Assistant IA
@@ -74,6 +106,7 @@ modules:
 - id: m4
   number: '4'
   folder: m4_data_quality_assessment
+  theme: data
   name:
     en: Data Quality Assessment
     fr: Évaluation de la qualité des données
@@ -89,6 +122,7 @@ modules:
 - id: m5
   number: '5'
   folder: m5_data_quality_adjustment
+  theme: data
   name:
     en: Data Quality Adjustment
     fr: Ajustement de la qualité des données
@@ -102,6 +136,7 @@ modules:
 - id: m6
   number: '6'
   folder: m6_data_analysis
+  theme: analysis
   name:
     en: Data Analysis
     fr: Analyse des données
@@ -116,6 +151,7 @@ modules:
 - id: m7
   number: '7'
   folder: m7_results_communication
+  theme: communication
   name:
     en: Results Communication
     fr: Communication des résultats
@@ -130,6 +166,7 @@ modules:
 - id: m8
   number: '8'
   folder: m8_survey_hfa
+  theme: analysis
   name:
     en: Survey & HFA
     fr: Enquêtes et EFS
@@ -144,6 +181,7 @@ modules:
 - id: m9a
   number: 9a
   folder: m9a_instance_setup
+  theme: platform
   name:
     en: Instance Setup
     fr: Configuration de l'instance
@@ -159,6 +197,7 @@ modules:
 - id: m9b
   number: 9b
   folder: m9b_getting_started
+  theme: platform
   name:
     en: Getting Started
     fr: Prise en main
@@ -173,6 +212,7 @@ modules:
 - id: m9c
   number: 9c
   folder: m9c_visualizations_interpretation
+  theme: communication
   name:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
@@ -190,6 +230,7 @@ modules:
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
+  theme: communication
   name:
     en: Slide Decks
     fr: Présentations
@@ -205,6 +246,7 @@ modules:
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
+  theme: communication
   name:
     en: Disruption Report
     fr: Rapport de perturbations
@@ -221,6 +263,7 @@ modules:
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
+  theme: platform
   name:
     en: Prompting Techniques
     fr: Techniques de prompting
@@ -236,6 +279,7 @@ modules:
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
+  theme: workshop
   name:
     en: FASTR Quiz
     fr: Quiz FASTR
@@ -250,6 +294,7 @@ modules:
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
+  theme: platform
   name:
     en: Platform Demo
     fr: Démo de la plateforme
@@ -264,6 +309,7 @@ modules:
 - id: m9i
   number: 9i
   folder: m9i_report_builder_basics
+  theme: communication
   name:
     en: Report Builder Basics
     fr: Création de rapports — les bases
@@ -283,6 +329,7 @@ modules:
 - id: mw
   number: w
   folder: mw_webinar
+  theme: workshop
   name:
     en: Webinar Content
     fr: Contenu webinaire

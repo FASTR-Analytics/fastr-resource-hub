@@ -3,33 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-<!-- _class: compact -->
+<div class="activity-pointer">
 
-## Ajouter une visualisation et un texte d'interprétation à votre diapositive
+![h:90](../../resources/icons/hands_on.svg)
 
-<div class="columns">
-<div>
+## Référence: Ajouter une visualisation + texte d'interprétation
 
-**1. Ajouter une visualisation**
+**Voir le document distribué :** *Ajouter une visualisation + texte d'interprétation (référence)*
 
-**Bloc** → **Visualisation** → **Sélectionner une visualisation** → Parcourez et choisissez → **Sélectionner**
+**~5 min**
 
-</div>
-<div>
-
-**2. Ajouter du texte à côté**
-
-Clic droit → **Ajouter → Colonne à droite** → Cliquez sur la zone de texte et tapez. Utilisez `#` pour les titres.
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
 
 </div>
-<div>
-
-**3. Modifier et sauvegarder**
-
-Onglet **Diapositive** → Modifier titre, sous-titre, date → **Enregistrer**
-
-</div>
-</div>
-
-*Plus d'options : Clic droit → Ajouter → Ligne en dessous*

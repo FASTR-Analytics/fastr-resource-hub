@@ -7,6 +7,7 @@ import { AIAssistant } from './components/AIAssistant'
 import { SlideImportWizard } from './components/SlideImportWizard'
 import { GuidedTour, type GuidedTourHandle } from './components/GuidedTour'
 import { HelpButton } from './components/HelpButton'
+import { HandoutsPanel } from './components/HandoutsPanel'
 import {
   Layers,
   BookOpen,
@@ -780,10 +781,19 @@ function LibraryMode() {
   const { contentLibrary, loadContentLibrary, contentLanguage } = useWorkshopStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [themes, setThemes] = useState<Array<{ id: string; name: string }>>([])
+  const [collapsedThemes, setCollapsedThemes] = useState<Set<string>>(new Set())
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+
+  useEffect(() => {
+    fetch(`/api/content/themes?language=${contentLanguage}`, { credentials: 'include' })
+      .then(r => r.ok ? r.json() : [])
+      .then(setThemes)
+      .catch(err => console.warn('Failed to load themes:', err))
+  }, [contentLanguage])
 
   const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
   const searchInputRef = useRef<HTMLInputElement>(null)
@@ -952,6 +962,31 @@ function LibraryMode() {
     return groups
   }, [filteredTopics, contentLibrary])
 
+  // Group modules under themes. Modules without a theme (imported/external) bucket under '_other'.
+  const themedGroups = React.useMemo(() => {
+    type ModuleGroup = { module: any; items: typeof filteredTopics }
+    const themeOrder: Array<{ id: string; name: string }> = [
+      ...themes,
+      { id: '_other', name: contentLanguage === 'fr' ? 'Autre contenu' : 'Other content' },
+    ]
+    const byTheme = new Map<string, ModuleGroup[]>()
+    for (const g of groupedByModule) {
+      const tid = (g.module as any).theme || '_other'
+      if (!byTheme.has(tid)) byTheme.set(tid, [])
+      byTheme.get(tid)!.push(g)
+    }
+    return themeOrder
+      .map(t => ({
+        id: t.id,
+        name: t.name,
+        modules: byTheme.get(t.id) || [],
+        totalSlides: (byTheme.get(t.id) || []).reduce(
+          (sum, mg) => sum + (mg.module.totalSlides || 0), 0
+        ),
+      }))
+      .filter(t => t.modules.length > 0)
+  }, [groupedByModule, themes, contentLanguage])
+
   if (contentLibrary.length === 0) {
     // Skeleton — left panel module rows, right panel empty hint
     return (
@@ -1015,7 +1050,33 @@ function LibraryMode() {
               {t('noResultsFound', contentLanguage)}
             </div>
           ) : (
-            groupedByModule.map(({ module, items }) => {
+            themedGroups.map((themeGroup) => {
+              const isSearching = searchQuery.trim().length > 0
+              const themeOpen = isSearching || !collapsedThemes.has(themeGroup.id)
+              return (
+                <div key={themeGroup.id} className="mb-1">
+                  <button
+                    onClick={() => {
+                      const next = new Set(collapsedThemes)
+                      if (next.has(themeGroup.id)) next.delete(themeGroup.id)
+                      else next.add(themeGroup.id)
+                      setCollapsedThemes(next)
+                    }}
+                    className="w-full text-left px-4 py-1.5 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
+                  >
+                    {themeOpen ? (
+                      <ChevronDown className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+                    ) : (
+                      <ChevronRight className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+                    )}
+                    <span className="text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex-1">
+                      {themeGroup.name}
+                    </span>
+                    <span className="text-caption text-slate-400">
+                      {themeGroup.modules.length} · {themeGroup.totalSlides}
+                    </span>
+                  </button>
+                  {themeOpen && themeGroup.modules.map(({ module, items }) => {
               const isSearching = searchQuery.trim().length > 0
               const isExpanded = isSearching || expandedModules.has(module.id)
               const hasFull = (module.fullTopics?.length || module.topics?.length || 0) > 0
@@ -1096,6 +1157,9 @@ function LibraryMode() {
                       ))}
                     </div>
                   )}
+                </div>
+              )
+            })}
                 </div>
               )
             })
@@ -1230,7 +1294,7 @@ function App() {
   const [rightPanelOpen, setRightPanelOpen] = useState(false)
   const [addContentDrawerOpen, setAddContentDrawerOpen] = useState(false)
   const [addContentDayNum, setAddContentDayNum] = useState<number | undefined>(undefined)
-  const [libraryView, setLibraryView] = useState<'browse' | 'select'>('browse')
+  const [libraryView, setLibraryView] = useState<'browse' | 'handouts' | 'select'>('browse')
   const [showWorkshopSelector, setShowWorkshopSelector] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
@@ -2246,7 +2310,7 @@ function App() {
   if (appMode === 'library' || appMode === 'quick') {
     // `appMode='quick'` is preserved as a deep link to the export mode;
     // both modes render under the Content library nav.
-    const effectiveLibraryView: 'browse' | 'select' =
+    const effectiveLibraryView: 'browse' | 'handouts' | 'select' =
       appMode === 'quick' ? 'select' : libraryView
 
     const libraryToggle = (
@@ -2259,7 +2323,17 @@ function App() {
           }`}
         >
           <BookOpen className="w-3.5 h-3.5" />
-          {t('browseMode', contentLanguage)}
+          {t('slidesTab', contentLanguage)}
+        </button>
+        <button
+          onClick={() => { setLibraryView('handouts'); if (appMode === 'quick') setAppMode('library') }}
+          aria-pressed={effectiveLibraryView === 'handouts'}
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-body-sm font-semibold transition-colors ${
+            effectiveLibraryView === 'handouts' ? 'bg-fastr-primary text-white' : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <FileText className="w-3.5 h-3.5" />
+          {t('handoutsTab', contentLanguage)}
         </button>
         <button
           onClick={() => { setLibraryView('select'); if (appMode === 'quick') setAppMode('library') }}
@@ -2274,10 +2348,23 @@ function App() {
       </div>
     )
 
+    let libraryChild
+    if (effectiveLibraryView === 'select') {
+      libraryChild = <QuickExportMode />
+    } else if (effectiveLibraryView === 'handouts') {
+      libraryChild = (
+        <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-lg overflow-hidden">
+          <HandoutsPanel />
+        </div>
+      )
+    } else {
+      libraryChild = <LibraryMode />
+    }
+
     return renderShell({
       section: t('navLibrary', contentLanguage),
       topbarActions: libraryToggle,
-      children: effectiveLibraryView === 'select' ? <QuickExportMode /> : <LibraryMode />,
+      children: libraryChild,
     })
   }
 

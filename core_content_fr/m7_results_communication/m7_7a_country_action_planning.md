@@ -3,21 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Planification d'action pays
+<div class="activity-pointer">
 
-![hands-on h:40](../../resources/icons/hands_on.svg) **Développez le plan d'action FASTR de votre pays :**
+![h:90](../../resources/icons/hands_on.svg)
 
-| Étape d'action | Personne responsable | Calendrier | Indicateur de succès |
-|----------------|---------------------|------------|---------------------|
-| Compléter l'analyse trimestrielle | | | |
-| Diffuser au [forum] | | | |
-| Suivre les problèmes identifiés | | | |
-| Former des membres supplémentaires de l'équipe | | | |
+## Activité: Plan d'action pays
 
-**Considérez également :**
-- Quelle plateforme/forum existant allez-vous intégrer à FASTR ?
-- Quel est votre plan de diffusion pour le produit créé cette semaine ?
-- De quel soutien avez-vous besoin des facilitateurs au cours du prochain trimestre ?
+**Voir le document distribué :** *Plan d'action pays*
 
-*Partagez votre plan d'action avec une autre équipe pays pour une revue par les pairs.*
+**~30 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

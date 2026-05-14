@@ -3,11 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Créer des diaporamas
+<div class="activity-pointer">
 
-**Étape par étape**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Créez votre présentation :** Cliquez sur votre dossier → Cliquez sur **+ Créer une présentation** → Donnez-lui un nom → Cliquez sur **Enregistrer**
+## Activité: Créez votre première présentation
 
-**Ajoutez votre première diapositive :** Cliquez sur **Ajouter une diapositive** → Sélectionnez **Diapositive de contenu**
+**Voir le document distribué :** *Créez votre première présentation*
+
+**~10 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

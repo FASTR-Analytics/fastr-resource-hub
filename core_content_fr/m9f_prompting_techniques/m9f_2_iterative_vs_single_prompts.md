@@ -3,14 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Exercice : IA et conversation itérative
+<div class="activity-pointer">
 
-**Dans cet exercice, nous construisons un court rapport sur la qualité des données étape par étape à l'aide de l'IA**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Saisissez ces prompts dans l'IA (dans l'ordre) :**
+## Activité: Itératif vs prompt unique
 
-1. *"Peux-tu m'aider à comprendre la qualité de nos données 2024 ? J'aimerais un résumé en 3 diapositives que je puisse partager avec mon équipe."*
-2. *"Concentrons-nous sur la qualité globale, les différences régionales et les priorités d'amélioration."*
-3. *"Quelle région a la qualité de données la plus faible ? Mets-la en évidence."*
-4. *"Que devrions-nous faire à ce sujet ? Rends la dernière diapositive plus actionnable."*
+**Voir le document distribué :** *Itératif vs prompt unique*
+
+**~30 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

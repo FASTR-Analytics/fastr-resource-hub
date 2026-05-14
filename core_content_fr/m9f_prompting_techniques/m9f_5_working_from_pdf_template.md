@@ -3,16 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Alternative : Travailler à partir d'un modèle PDF
+<div class="activity-pointer">
 
-Si vous disposez d'un rapport précédent qui vous satisfait :
+![h:90](../../resources/icons/hands_on.svg)
 
-1. Téléversez le rapport PDF dans vos **Ressources** (page principale → Ressources → Téléverser)
-2. Dans la conversation avec l'IA, cliquez sur le menu à trois points → **Inclure un fichier** → Sélectionnez le rapport
-3. Demandez à l'IA : *"Utilise ce rapport comme modèle. Crée un rapport similaire couvrant [période]."*
+## Activité: Utiliser un rapport précédent comme modèle
 
-**Utilisez cette approche lorsque :**
-- Vous disposez d'un rapport précédent qui vous satisfait
-- Vous souhaitez reproduire un format similaire pour une nouvelle période
-- Aucun prompt personnalisé n'est disponible pour ce type de rapport
+**Voir le document distribué :** *Utiliser un rapport précédent comme modèle*
+
+**~10 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

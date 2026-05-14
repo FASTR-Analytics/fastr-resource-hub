@@ -3,19 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Practice: Logging into the platform
+<div class="activity-pointer">
 
-<style scoped>
-table { border: none !important; background: transparent !important; width: 100% !important; }
-table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
-table img { max-height: 280px !important; width: auto !important; }
-</style>
+![h:90](../../resources/icons/hands_on.svg)
 
-| | |
-|:---|:---|
-| ![Login page](../../resources/screenshots/01_login_page.png) | ![Sign up form](../../resources/screenshots/02_sign_up.png) |
-| **1.** Go to your country instance URL | **2.** Click Sign-in (or Sign up if you haven't created an account) |
-| **3.** Enter your information (verify email) | **4.** After login, you'll be added to a project |
+## Activity: Log in to the platform
 
-**Your platform URL:** {{PLATFORM_URL}}
+**See the participant handout:** *Log in to the platform*
+
+**~10 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

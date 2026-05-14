@@ -3,20 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
+
+<div class="activity-pointer">
+
+![h:90](../../resources/icons/hands_on.svg)
 
 ## Activity: Link your results to actions
 
-![hands-on h:40](../../resources/icons/hands_on.svg) **For your top 3 findings, complete this table:**
+**See the participant handout:** *Link your results to actions*
 
-| Finding | Who needs to know? | What decision/action? | By when? |
-|---------|-------------------|----------------------|----------|
-| 1. | | | |
-| 2. | | | |
-| 3. | | | |
+**~20 min**
 
-**Guidance:**
-- Be specific about the decision-maker (not "the ministry" but "Director of PHC")
-- Be specific about the action (not "improve" but "conduct supportive supervision in X district")
-- Set a realistic timeline
+*Print copies are distributed at this point in the session.*
 
-*Present your action-linked findings to a peer country for feedback.*
+</div>

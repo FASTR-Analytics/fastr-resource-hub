@@ -239,6 +239,18 @@ export const translations = {
     previewAllFull: 'Preview all full slides',
     previewAllCondensed: 'Preview all condensed slides',
 
+    // Library tabs + handouts
+    slidesTab: 'Slides',
+    handoutsTab: 'Handouts',
+    previewHandout: 'Preview',
+    downloadHandout: 'Download PDF',
+    noHandoutsYet: 'Handouts coming soon for this language.',
+    handoutTypeParticipant: 'Activity',
+    handoutTypeFacilitator: 'Facilitator',
+    handoutTypeReference: 'Reference',
+    handoutTypeWorksheet: 'Worksheet',
+    pdfNotRendered: 'PDF not yet rendered — showing markdown source.',
+
     // AI clarification flow
     aiClarifying: 'Let me ask a few questions to build the right workshop...',
     answerQuestions: 'Answer these questions',
@@ -739,6 +751,18 @@ export const translations = {
     previewModuleSlides: 'Prévisualiser les diapositives du module',
     previewAllFull: 'Prévisualiser toutes les diapositives complètes',
     previewAllCondensed: 'Prévisualiser toutes les diapositives condensées',
+
+    // Library tabs + handouts
+    slidesTab: 'Diapositives',
+    handoutsTab: 'Documents',
+    previewHandout: 'Aperçu',
+    downloadHandout: 'Télécharger le PDF',
+    noHandoutsYet: 'Documents bientôt disponibles dans cette langue.',
+    handoutTypeParticipant: 'Activité',
+    handoutTypeFacilitator: 'Facilitateur',
+    handoutTypeReference: 'Référence',
+    handoutTypeWorksheet: 'Fiche',
+    pdfNotRendered: 'PDF non encore généré — affichage du markdown source.',
 
     // AI clarification flow
     aiClarifying: 'Quelques questions pour créer le bon atelier...',

@@ -3,14 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Essayez vous-même — construisez un prompt
+<div class="activity-pointer">
 
-Pensez à une tâche que vous faites régulièrement. Avant d'écrire quoi que ce soit, demandez-vous :
+![h:90](../../resources/icons/hands_on.svg)
 
-1. **De quoi ai-je besoin ?** Un graphique ? Un résumé ? Une diapositive pour une réunion ?
-2. **C'est pour qui ?** Mon directeur ? Un bailleur ? Mon équipe ?
-3. **Ça doit couvrir quoi ?** Quels indicateurs ? Quelles régions ? Quelle période ?
-4. **À quoi ressemble un bon résultat ?** Est-ce que je saurais si la réponse était fausse ?
+## Activité: Construire un prompt clair
 
-Maintenant écrivez votre prompt. N'oubliez pas — vous pouvez toujours l'affiner dans le message suivant.
+**Voir le document distribué :** *Construire un prompt clair*
+
+**~15 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

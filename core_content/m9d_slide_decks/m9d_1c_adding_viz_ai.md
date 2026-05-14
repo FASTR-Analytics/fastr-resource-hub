@@ -3,17 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Adding visualizations using AI Assistant
+<div class="activity-pointer">
 
-**I do, we do, you do**
+![h:90](../../resources/icons/hands_on.svg)
 
-**I do:** Facilitator prompts the AI Assistant to show an existing visualization, then uses the buttons in the AI chat preview to add it to the slide deck
+## Activity: Add a visualisation (with the AI Assistant)
 
-**We do:** Together, we prompt the AI to display a visualization and add it to the slide deck using the chat preview buttons
+**See the participant handout:** *Add a visualisation (with the AI Assistant)*
 
-**You do:** Prompt the AI to show a visualization you created, then add it to your presentation using the chat preview buttons
+**~15 min**
 
-**Prompt:** *"Display the quarterly change in service volume visualization"*
+*Print copies are distributed at this point in the session.*
 
-*We are in the Slide Decks tab*
+</div>

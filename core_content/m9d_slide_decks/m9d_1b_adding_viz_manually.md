@@ -3,15 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Adding visualizations manually
+<div class="activity-pointer">
 
-**I do, we do, you do**
+![h:90](../../resources/icons/hands_on.svg)
 
-**I do:** Facilitator adds a visualization to the slide deck by selecting it from available visualizations and inserting it (reusing one created earlier)
+## Activity: Add a visualisation (manually)
 
-**We do:** Together, we add a previously created visualization into the slide deck
+**See the participant handout:** *Add a visualisation (manually)*
 
-**You do:** Add a visualization you already created into your own presentation
+**~15 min**
 
-*We are in the Slide Decks tab*
+*Print copies are distributed at this point in the session.*
+
+</div>

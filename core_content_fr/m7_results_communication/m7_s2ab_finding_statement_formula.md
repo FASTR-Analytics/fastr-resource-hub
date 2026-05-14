@@ -3,9 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Essayez par vous-même
+<div class="activity-pointer">
 
-- Choisissez un constat de votre analyse FASTR
-- Rédigez-le en utilisant la formule : **[Indicateur] [tendance] de [valeur] à [valeur] dans [lieu/période]. Cela suggère [interprétation].**
-- Relisez-le : quelqu'un qui ne connaît pas vos données comprendrait-il ce qui s'est passé et pourquoi c'est important ?
+![h:90](../../resources/icons/hands_on.svg)
+
+## Activité: Essayez vous-même — rédigez un énoncé de constat
+
+**Voir le document distribué :** *Rédiger un énoncé de constat*
+
+**~15 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

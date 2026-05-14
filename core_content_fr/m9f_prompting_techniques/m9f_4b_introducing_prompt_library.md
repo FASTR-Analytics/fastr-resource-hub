@@ -4,7 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Organisation de la bibliothèque de prompts
+## Ce qu'il y a dans la bibliothèque de prompts FASTR
+
+La bibliothèque est organisée selon les questions que vous posez réellement à vos données. Chaque catégorie regroupe des prompts qui suivent le même objectif — choisissez celle qui se rapproche le plus de votre besoin du jour.
 
 | Catégorie | Objectif |
 |-----------|----------|

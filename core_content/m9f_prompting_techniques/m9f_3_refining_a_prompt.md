@@ -3,15 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Self-paced exercise: Refining a prompt
+<div class="activity-pointer">
 
-**Work through three rounds on your own. Pick ONE topic — outliers, completeness, or disruptions — and stay with it.**
+![h:90](../../resources/icons/hands_on.svg)
 
-| Round | Your prompt | After the AI responds, ask yourself... |
-|-------|------------|----------------------------------------|
-| **1. Start simple** | "Create a slide about [your topic]." | What did the AI include? Would this work in a real meeting? |
-| **2. Add context** | "Create a slide about [topic] for a [meeting type]. Show [specific data]. Explain which regions have the most issues." | Is it more specific? Does it identify priorities? |
-| **3. Make it actionable** | "Create a slide about [topic] for [meeting]. Compare areas — which need support? Suggest possible reasons." | Does it prioritize areas? Point toward next steps? |
+## Activity: Refine your prompt (self-paced)
 
-**When you finish:** What made the final prompt more effective than the first?
+**See the participant handout:** *Refine your prompt*
+
+**~20 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

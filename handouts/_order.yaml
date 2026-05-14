@@ -1,0 +1,38 @@
+# Display order for handouts in the Content Library.
+# One key per module folder; value is an ordered list of filenames.
+# Filenames not listed here fall to the end, sorted alphabetically.
+# Order applies to both EN and FR (handouts/en/<m>/ and handouts/fr/<m>/).
+
+m7:
+- h_m7_user_mapping.md         # 1. Identify your audience first
+- h_m7_finding_statement.md    # 2. Frame a finding
+- h_m7_results_actions.md      # 3. Link finding to actions
+- h_m7_action_plan.md          # 4. Build the country action plan
+
+m9a:
+- h_m9a_connect_platform.md    # 0. Before you begin (DHIS2 access)
+- h_m9a_admin_areas.md         # 1. Facility structure
+- h_m9a_indicators.md          # 2. Indicators
+- h_m9a_import_data.md         # 3. Data
+- h_m9a_verify_explore.md      # 4. Verify
+
+m9b:
+- h_m9b_platform_demo.md       # Facilitator demo (intro)
+- h_m9b_logging_in.md          # 1. Sign in
+- h_m9b_user_folder.md         # 2. Create your folder
+
+m9d:
+- h_m9d_create_slide_deck.md   # 1. Create the deck
+- h_m9d_add_viz_text.md        # 2. Reference: viz + text layout
+- h_m9d_add_viz_manually.md    # 3. Add a viz manually
+- h_m9d_add_viz_ai.md          # 4. Add a viz via AI
+- h_m9d_demo_editing.md        # 5. Facilitator demo: editor
+- h_m9d_edit_slides.md         # 6. Edit and finalise
+
+m9f:
+- h_m9f_explore_ai.md          # 1. First exploration
+- h_m9f_build_prompt.md        # 2. Build a structured prompt
+- h_m9f_iterative_vs_single.md # 3. Compare approaches
+- h_m9f_refine_prompt.md       # 4. Refine iteratively
+- h_m9f_pdf_template.md        # 5. Use a previous report as template
+- h_m9f_verify_output.md       # 6. Verify the output before shipping

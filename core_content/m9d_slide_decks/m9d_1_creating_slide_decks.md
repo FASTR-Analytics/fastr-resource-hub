@@ -3,11 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Creating slide decks
+<div class="activity-pointer">
 
-**Step-by-step**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Create your slide deck:** Click your folder → Click **+ Create slide deck** → Name it → Click **Save**
+## Activity: Create your first slide deck
 
-**Add your first slide:** Click **Add slide** → Select **Content slide**
+**See the participant handout:** *Create your first slide deck*
+
+**~10 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

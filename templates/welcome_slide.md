@@ -8,6 +8,6 @@ paginate: true
 
 # Welcome and Opening Remarks
 
-![w:120](../../resources/icons/lecture.png)
+![w:120](../../resources/icons/lecture.svg)
 
 ---

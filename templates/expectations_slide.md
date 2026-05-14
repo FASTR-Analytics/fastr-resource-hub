@@ -14,6 +14,6 @@ What questions about FASTR do you want answered?
 
 *We will review these on day {{LAST_DAY}} to see if we met our expectations.*
 
-![w:120](../../resources/icons/pinned-notes.png)
+![w:120](../../resources/icons/pinned-notes.svg)
 
 ---

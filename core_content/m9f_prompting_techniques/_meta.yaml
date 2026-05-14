@@ -1,45 +1,72 @@
 slides:
-- file: m9f_0_good_vs_vague_prompt.md
-  order: 0
+# Module intro
+- file: m9f_0_intro.md
+  order: 0.4
   variant: full
-  title: From vague to specific — building a better prompt
-- file: m9f_0b_good_vs_vague_prompt.md
-  order: 0.02
-  variant: full
-  title: Try it yourself — build a prompt
+  title: Get useful answers from the AI — without surprises
+  status: new
+
+# Phase 1 — Try it + notice what's off
 - file: m9f_1_explore_with_ai_assistant.md
-  order: 1
+  order: 0.5
   variant: full
   title: Explore with the AI Assistant
+- file: m9f_1a_hallucination.md
+  order: 0.6
+  variant: full
+  title: When the AI makes things up
+  status: new
+- file: m9f_1b_editing_vs_generating.md
+  order: 0.7
+  variant: full
+  title: Two ways to ask for help
+  status: new
+
+# Phase 2 — Grounding your prompt
+- file: m9f_2a_source_grounding.md
+  order: 1.5
+  variant: full
+  title: Hand the AI the right materials
+  status: new
+- file: m9f_0b_good_vs_vague_prompt.md
+  order: 1.7
+  variant: full
+  title: Try it yourself — build a prompt
+
+# Phase 3 — Iterating with the AI
 - file: m9f_2_iterative_vs_single_prompts.md
-  order: 2
+  order: 2.0
   variant: full
   title: 'Exercise: AI & iterative conversation'
-- file: m9f_2b_iterative_vs_single_prompts.md
-  order: 2.02
-  variant: full
-  title: 'Exercise: AI & single prompt'
-- file: m9f_2c_iterative_vs_single_prompts.md
-  order: 2.03
-  variant: full
-  title: 'Iterative vs single prompts: What did you notice?'
 - file: m9f_3_refining_a_prompt.md
-  order: 3
+  order: 3.0
   variant: full
   title: 'Self-paced exercise: Refining a prompt'
+
+# Phase 4 — Production tools + verification
 - file: m9f_4_introducing_prompt_library.md
-  order: 4
+  order: 4.0
   variant: full
-  title: Introducing the prompt library
+  title: The FASTR prompt library — start from a real prompt, not a blank page
 - file: m9f_4b_introducing_prompt_library.md
   order: 4.02
   variant: full
-  title: Prompt library organization
+  title: What's inside the FASTR prompt library
 - file: m9f_5_working_from_pdf_template.md
-  order: 5
+  order: 5.0
   variant: full
   title: 'Alternative: Working from a PDF template'
 - file: m9f_6_example_prompts.md
-  order: 6
+  order: 6.0
   variant: full
-  title: Example prompts at a glance
+  title: A few prompts from the FASTR library
+- file: m9f_7_verification_checklist.md
+  order: 7.0
+  variant: full
+  title: Give the AI's answer a quick read
+  status: new
+- file: m9f_7a_verify_output.md
+  order: 7.5
+  variant: full
+  title: 'Activity: Verify the output'
+  status: new

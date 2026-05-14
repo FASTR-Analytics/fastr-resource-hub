@@ -3,20 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Reliez vos résultats aux actions
+<div class="activity-pointer">
 
-![hands-on h:40](../../resources/icons/hands_on.svg) **Pour vos 3 principaux résultats, complétez ce tableau :**
+![h:90](../../resources/icons/hands_on.svg)
 
-| Résultat | Qui doit savoir ? | Quelle décision/action ? | Pour quand ? |
-|----------|-------------------|--------------------------|--------------|
-| 1. | | | |
-| 2. | | | |
-| 3. | | | |
+## Activité: Reliez vos résultats aux actions
 
-**Conseils :**
-- Soyez précis sur le décideur (pas "le ministère" mais "Directeur des SSP")
-- Soyez précis sur l'action (pas "améliorer" mais "conduire une supervision formative dans le district X")
-- Fixez un calendrier réaliste
+**Voir le document distribué :** *Reliez vos résultats aux actions*
 
-*Présentez vos résultats liés aux actions à un pays pair pour obtenir un retour.*
+**~20 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

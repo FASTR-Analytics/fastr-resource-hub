@@ -4,7 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Prompt library organization
+## What's inside the FASTR prompt library
+
+The library is organised by the questions you actually ask of your data. Each category groups prompts that follow the same purpose — pick the one closest to what you need today.
 
 | Category | Purpose |
 |----------|---------|

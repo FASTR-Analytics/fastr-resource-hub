@@ -3,14 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Exercise: AI & iterative conversation
+<div class="activity-pointer">
 
-**In this exercise, we are building a short data quality report step by step using the AI**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Type these prompts into the AI (in order):**
+## Activity: Iterative vs single-prompt
 
-1. *"Can you help me understand the quality of our 2024 data? I'd like a 3-slide summary I can share with my team."*
-2. *"Let's focus on overall quality, regional differences, and priorities for improvement."*
-3. *"Which region has the weakest data quality? Highlight that."*
-4. *"What should we do about this? Make the final slide more actionable."*
+**See the participant handout:** *Iterative vs single-prompt*
+
+**~30 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

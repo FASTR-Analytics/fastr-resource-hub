@@ -3,14 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Création de votre dossier personnel
+<div class="activity-pointer">
 
-**Je fais :** Le facilitateur démontre comment se connecter à la plateforme, naviguer vers les dossiers et créer un nouveau dossier personnel
+![h:90](../../resources/icons/hands_on.svg)
 
-**Vous faites :**
+## Activité: Créer votre dossier personnel
 
-1. Saisissez votre adresse e-mail et votre mot de passe
-2. Accédez au projet pays
-3. Allez dans l'onglet **Présentations** → Cliquez sur **+ Nouveau dossier** → Tapez votre nom → Cliquez sur **Enregistrer**
-4. Allez dans l'onglet **Visualisations** → Cliquez sur **+ Nouveau dossier** → Tapez votre nom → Cliquez sur **Enregistrer**
+**Voir le document distribué :** *Créer votre dossier personnel*
+
+**~5 min**
+
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

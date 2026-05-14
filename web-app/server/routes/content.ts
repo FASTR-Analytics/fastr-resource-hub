@@ -2,6 +2,7 @@ import { Router } from 'express'
 import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
+import yaml from 'js-yaml'
 import { fileURLToPath } from 'url'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
@@ -9,6 +10,7 @@ import { renderMarkdown, getThemeCSS } from '../services/marpService.js'
 import {
   loadModulesRegistry,
   loadModuleMeta,
+  loadThemesRegistry,
   getModuleNamesDict,
   getModuleFolder,
   invalidateRegistryCache,
@@ -179,6 +181,10 @@ router.get('/modules', async (req, res) => {
 
           const content = fs.readFileSync(filePath, 'utf-8')
 
+          // Filter out activity-pointer slides — they're placeholders that point
+          // to handouts; users find them through the Handouts tab now.
+          if (content.includes('_class: activity-pointer')) continue
+
           // Count slides
           const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
           const slideCount = slides.length
@@ -257,6 +263,8 @@ router.get('/modules', async (req, res) => {
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
+          if (content.includes('_class: activity-pointer')) continue
+
           const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
           const slideCount = slides.length
 
@@ -299,6 +307,7 @@ router.get('/modules', async (req, res) => {
         id: modId,
         name: regMod.name[language] || regMod.name.en || `Module ${modNum}`,
         folder: regMod.folder,
+        theme: regMod.theme,
         topics: dedupeById(allTopics),
         fullTopics: dedupeById(fullTopics),
         condensedTopics: dedupeById(condensedTopics),
@@ -368,6 +377,22 @@ router.get('/modules', async (req, res) => {
     res.json(sortedModules)
   } catch (error: any) {
     console.error('Error getting modules:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// GET /api/content/themes - Get theme definitions for grouping modules in UI
+// Query params: ?language=fr (default: en)
+router.get('/themes', (req, res) => {
+  try {
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const themes = loadThemesRegistry()
+    res.json(themes.map(t => ({
+      id: t.id,
+      name: t.name[language] || t.name.en,
+    })))
+  } catch (error: any) {
+    console.error('Error getting themes:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
@@ -676,6 +701,240 @@ router.get('/templates/:id', (req, res) => {
     res.json({ filename: templateFile, content, language })
   } catch (error: any) {
     console.error('Error getting template:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Handouts
+// ─────────────────────────────────────────────────────────────────────────────
+
+const HANDOUTS_ROOT = path.join(REPO_ROOT, 'handouts')
+const HANDOUTS_OUT = path.join(HANDOUTS_ROOT, '_out')
+const HANDOUTS_ORDER_FILE = path.join(HANDOUTS_ROOT, '_order.yaml')
+
+// Cache handout order spec — re-read if file mtime changes
+let handoutOrderCache: { order: Record<string, string[]>; mtime: number } | null = null
+function loadHandoutOrder(): Record<string, string[]> {
+  if (!fs.existsSync(HANDOUTS_ORDER_FILE)) return {}
+  const stat = fs.statSync(HANDOUTS_ORDER_FILE)
+  if (handoutOrderCache && handoutOrderCache.mtime === stat.mtimeMs) {
+    return handoutOrderCache.order
+  }
+  try {
+    const raw = fs.readFileSync(HANDOUTS_ORDER_FILE, 'utf-8')
+    const parsed = (yaml.load(raw) || {}) as Record<string, string[]>
+    handoutOrderCache = { order: parsed, mtime: stat.mtimeMs }
+    return parsed
+  } catch (e) {
+    console.warn('Failed to parse handouts/_order.yaml:', e)
+    return {}
+  }
+}
+
+type HandoutType = 'participant_activity' | 'facilitator_demo' | 'reference' | 'worksheet'
+
+interface HandoutEntry {
+  id: string
+  file: string
+  moduleId: string
+  title: string
+  type: HandoutType
+  duration: string | null
+  footer: string | null
+  pdfUrl: string | null
+  markdownUrl: string
+}
+
+interface HandoutGroup {
+  moduleId: string
+  moduleName: string
+  themeId: string | null
+  themeName: string | null
+  handouts: HandoutEntry[]
+}
+
+const handoutsCacheByLang: Record<string, { data: HandoutGroup[]; timestamp: number }> = {}
+const HANDOUTS_CACHE_TTL = 5 * 60 * 1000
+
+function classifyHandout(content: string): HandoutType {
+  const metaMatch = content.match(/<p\s+class=["']meta-line["'][^>]*>([\s\S]*?)<\/p>/i)
+  const meta = metaMatch ? metaMatch[1] : ''
+  if (/_class:\s*facilitator/.test(content) || /\bDemo\b|\bDémo\b/i.test(meta)) {
+    return 'facilitator_demo'
+  }
+  if (/\bReference\b|\bRéférence\b/i.test(meta)) {
+    return 'reference'
+  }
+  if (/\bActivity\b|\bActivité\b/i.test(meta)) {
+    return 'participant_activity'
+  }
+  return 'worksheet'
+}
+
+function extractDuration(content: string): string | null {
+  const metaMatch = content.match(/<p\s+class=["']meta-line["'][^>]*>([\s\S]*?)<\/p>/i)
+  if (!metaMatch) return null
+  const m = metaMatch[1].match(/~?\s*\d+\s*(?:-\s*\d+\s*)?min/i)
+  return m ? m[0].replace(/\s+/g, ' ').trim() : null
+}
+
+function extractTitle(content: string): string {
+  const h1 = content.match(/^#\s+(.+)$/m)
+  return h1 ? h1[1].trim() : ''
+}
+
+function extractFooter(content: string): string | null {
+  const fm = content.match(/^---[\s\S]*?^---/m)
+  if (!fm) return null
+  const f = fm[0].match(/^footer:\s*["']?([^"'\n]+)["']?/m)
+  return f ? f[1].trim() : null
+}
+
+function resolvePdfUrl(stem: string, language: 'en' | 'fr'): string | null {
+  if (!fs.existsSync(HANDOUTS_OUT)) return null
+  // Try canonical form first: h_m9a_admin_areas_en.pdf
+  const canonical = `${stem}_${language}.pdf`
+  if (fs.existsSync(path.join(HANDOUTS_OUT, canonical))) {
+    return `/handouts-pdf/${canonical}`
+  }
+  // Legacy fallback: strip leading "h_{module}_" prefix (e.g., admin_areas_en.pdf)
+  const stripped = stem.replace(/^h_m[a-z0-9]+_/, '')
+  const legacy = `${stripped}_${language}.pdf`
+  if (fs.existsSync(path.join(HANDOUTS_OUT, legacy))) {
+    return `/handouts-pdf/${legacy}`
+  }
+  return null
+}
+
+// GET /api/content/handouts - Get all handouts grouped by module
+// Query params: ?language=fr (default: en)
+router.get('/handouts', (req, res) => {
+  try {
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const cacheKey = language
+
+    // Bust cache when _order.yaml changes
+    const orderMtime = fs.existsSync(HANDOUTS_ORDER_FILE) ? fs.statSync(HANDOUTS_ORDER_FILE).mtimeMs : 0
+    const cached = handoutsCacheByLang[cacheKey]
+    if (cached && Date.now() - cached.timestamp < HANDOUTS_CACHE_TTL && (cached as any).orderMtime === orderMtime) {
+      return res.json(cached.data)
+    }
+
+    const langPath = path.join(HANDOUTS_ROOT, language)
+    const groups: HandoutGroup[] = []
+
+    if (!fs.existsSync(langPath)) {
+      return res.json(groups)
+    }
+
+    const moduleNames = getModuleNamesDict(language)
+    const orderSpec = loadHandoutOrder()
+    const registryModules = loadModulesRegistry()
+    const themes = loadThemesRegistry()
+    const themeNameById = new Map(themes.map(t => [t.id, t.name[language] || t.name.en]))
+    const moduleThemeById = new Map(registryModules.map(m => [m.id, m.theme || null]))
+    const moduleDirs = fs.readdirSync(langPath)
+      .filter(d => {
+        const full = path.join(langPath, d)
+        return fs.statSync(full).isDirectory() && !d.startsWith('_') && !d.startsWith('.')
+      })
+      .sort()
+
+    for (const moduleId of moduleDirs) {
+      const moduleDir = path.join(langPath, moduleId)
+      const present = fs.readdirSync(moduleDir)
+        .filter(f => f.startsWith('h_') && f.endsWith('.md'))
+      const desiredOrder = orderSpec[moduleId] || []
+      // First: files listed in _order.yaml, in that order, if present on disk.
+      const ordered = desiredOrder.filter(f => present.includes(f))
+      // Then: any extras not in the spec, sorted alphabetically.
+      const extras = present.filter(f => !desiredOrder.includes(f)).sort()
+      const files = [...ordered, ...extras]
+
+      if (files.length === 0) continue
+
+      const handouts: HandoutEntry[] = []
+      for (const file of files) {
+        const content = fs.readFileSync(path.join(moduleDir, file), 'utf-8')
+        const stem = file.replace(/\.md$/, '')
+        handouts.push({
+          id: stem,
+          file,
+          moduleId,
+          title: extractTitle(content) || stem,
+          type: classifyHandout(content),
+          duration: extractDuration(content),
+          footer: extractFooter(content),
+          pdfUrl: resolvePdfUrl(stem, language),
+          markdownUrl: `/api/content/handouts/source/${encodeURIComponent(moduleId)}/${encodeURIComponent(file)}?language=${language}`,
+        })
+      }
+
+      // Module display name: try lookup by short id, with both numeric and prefixed forms
+      const shortId = moduleId.replace(/^m/, '')
+      const moduleName =
+        moduleNames[moduleId] ||
+        moduleNames[shortId] ||
+        moduleNames[/^\d+$/.test(shortId) ? parseInt(shortId) : shortId] ||
+        `Module ${shortId.toUpperCase()}`
+
+      const themeId = moduleThemeById.get(moduleId) || null
+      const themeName = themeId ? (themeNameById.get(themeId) || null) : null
+      groups.push({ moduleId, moduleName, themeId, themeName, handouts })
+    }
+
+    // Sort groups by theme order (foundations → data → analysis → communication → platform → workshop)
+    const themeOrder = new Map(themes.map((t, i) => [t.id, i]))
+    groups.sort((a, b) => {
+      const ai = a.themeId ? (themeOrder.get(a.themeId) ?? 999) : 999
+      const bi = b.themeId ? (themeOrder.get(b.themeId) ?? 999) : 999
+      if (ai !== bi) return ai - bi
+      return a.moduleId.localeCompare(b.moduleId)
+    })
+
+    handoutsCacheByLang[cacheKey] = { data: groups, timestamp: Date.now(), orderMtime } as any
+    res.json(groups)
+  } catch (error: any) {
+    console.error('Error getting handouts:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// GET /api/content/handouts/source/:moduleId/:file - Read handout markdown source
+router.get('/handouts/source/:moduleId/:file', (req, res) => {
+  try {
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const moduleId = req.params.moduleId
+    const file = req.params.file
+
+    // Guard against path traversal
+    if (!/^m[a-z0-9]+$/i.test(moduleId) || !/^h_[a-z0-9_]+\.md$/i.test(file)) {
+      return res.status(400).json({ error: 'Invalid path' })
+    }
+
+    const filePath = path.join(HANDOUTS_ROOT, language, moduleId, file)
+    const safeRoot = path.resolve(HANDOUTS_ROOT)
+    if (!path.resolve(filePath).startsWith(safeRoot)) {
+      return res.status(403).json({ error: 'Invalid path' })
+    }
+
+    if (!fs.existsSync(filePath)) {
+      // Fallback to English
+      if (language !== 'en') {
+        const enPath = path.join(HANDOUTS_ROOT, 'en', moduleId, file)
+        if (fs.existsSync(enPath)) {
+          const content = fs.readFileSync(enPath, 'utf-8')
+          return res.json({ filename: file, content, language: 'en' })
+        }
+      }
+      return res.status(404).json({ error: 'Handout not found' })
+    }
+
+    const content = fs.readFileSync(filePath, 'utf-8')
+    res.json({ filename: file, content, language })
+  } catch (error: any) {
+    console.error('Error reading handout source:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })

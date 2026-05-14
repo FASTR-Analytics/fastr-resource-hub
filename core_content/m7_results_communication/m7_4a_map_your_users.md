@@ -3,17 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
+
+<div class="activity-pointer">
+
+![h:90](../../resources/icons/hands_on.svg)
 
 ## Activity: Map your users
 
-![hands-on h:40](../../resources/icons/hands_on.svg) **For your country team, identify:**
+**See the participant handout:** *Map your users*
 
-| Question | Your Answer |
-|----------|-------------|
-| Who is the primary end user of your FASTR outputs? | |
-| What decision or action will they take based on this data? | |
-| What 2-3 pieces of information are they most interested in? | |
-| What format/length works best for this audience? | |
-| When and where will you present to them? | |
+**~20 min**
 
-*Discuss in your country team. Share one insight with the group.*
+*Print copies are distributed at this point in the session.*
+
+</div>

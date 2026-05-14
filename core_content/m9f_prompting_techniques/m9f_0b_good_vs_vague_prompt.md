@@ -3,14 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Try it yourself — build a prompt
+<div class="activity-pointer">
 
-Think of a task you do regularly. Before you write anything, ask yourself:
+![h:90](../../resources/icons/hands_on.svg)
 
-1. **What do I need?** A chart? A summary? A slide for a meeting?
-2. **Who is it for?** My director? A donor? My team?
-3. **What should it cover?** Which indicators? Which regions? What time period?
-4. **What does a good result look like?** Would I know if the answer was wrong?
+## Activity: Build a clear prompt
 
-Now write your prompt. Remember — you can always refine it in the next message.
+**See the participant handout:** *Build a clear prompt*
+
+**~15 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

@@ -9,11 +9,6 @@ slides:
   variant: full
   title: Ce que l'assistant IA peut faire
   last_reviewed: *id001
-- file: mai_3a_ai_greatest_value.md
-  order: 2.01
-  variant: full
-  title: Là où l'IA aide le plus
-  last_reviewed: *id001
 - file: mai_4_ai_how_it_works.md
   order: 2.02
   variant: full
@@ -24,15 +19,10 @@ slides:
   variant: full
   title: L'IA est un accélérateur, pas un décideur
   last_reviewed: *id001
-- file: mai_2a_four_skills_for_ai.md
-  order: 3.01
-  variant: full
-  title: 'Bien travailler avec l''IA : quatre habitudes'
-  last_reviewed: *id001
 - file: mai_2b_four_skills_in_practice.md
   order: 3.02
   variant: full
-  title: Les 4 D — pensez à l'IA comme un nouveau collègue
+  title: Quatre habitudes pour vraiment bien travailler avec l'IA
   last_reviewed: *id001
 - file: mai_4a_ai_conversations.md
   order: 4
@@ -48,32 +38,6 @@ slides:
   order: 5.01
   variant: full
   title: Quand l'IA est utile
-  last_reviewed: *id001
-- file: mai_6_ai_tips_better_answers.md
-  order: 6
-  variant: full
-  title: Conseils pour de meilleures réponses
-  last_reviewed: *id001
-- file: mai_6a_ai_good_prompt_checklist.md
-  order: 6.01
-  variant: full
-  title: Qu'est-ce qui fait un bon prompt ?
-  last_reviewed: *id001
-- file: mai_7_ai_prompt_library_overview.md
-  order: 7
-  variant: full
-  title: La bibliothèque de prompts
-  last_reviewed: *id001
-- file: mai_7b_ai_prompt_library_overview.md
-  order: 7.001
-  variant: full
-  title: Organisation de la bibliothèque de prompts
-  status: new
-  last_reviewed: *id001
-- file: mai_7a_ai_prompt_examples_table.md
-  order: 7.01
-  variant: full
-  title: Exemples de prompts de la bibliothèque
   last_reviewed: *id001
 - file: mai_8_ai_what_happens_log_off.md
   order: 8

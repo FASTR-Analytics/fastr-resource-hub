@@ -3,16 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Alternative: Working from a PDF template
+<div class="activity-pointer">
 
-If you have a previous report you're satisfied with:
+![h:90](../../resources/icons/hands_on.svg)
 
-1. Upload the report PDF to your **Assets** (main page → Assets → Upload)
-2. In the AI conversation, click the three-dot menu → **Include file** → Select the report
-3. Ask the AI: *"Use this report as a template. Create a similar report covering [time period]."*
+## Activity: Use a previous report as a template
 
-**Use this approach when:**
-- You have a previous report you are satisfied with
-- You want to replicate a similar format for a new period
-- No custom prompt is available for that report type
+**See the participant handout:** *Use a previous report as a template*
+
+**~10 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

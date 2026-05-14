@@ -3,15 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Ajouter des visualisations manuellement
+<div class="activity-pointer">
 
-**Je fais, nous faisons, vous faites**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Je fais :** Le facilitateur ajoute une visualisation au diaporama en la sélectionnant parmi les visualisations disponibles et en l'insérant (en réutilisant celle créée précédemment)
+## Activité: Ajouter une visualisation (manuellement)
 
-**Nous faisons :** Ensemble, nous ajoutons une visualisation précédemment créée dans le diaporama
+**Voir le document distribué :** *Ajouter une visualisation (manuellement)*
 
-**Vous faites :** Ajoutez une visualisation que vous avez déjà créée dans votre propre présentation
+**~15 min**
 
-*Nous sommes dans l'onglet Présentations*
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
+
+</div>

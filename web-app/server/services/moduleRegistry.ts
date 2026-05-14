@@ -26,11 +26,20 @@ export interface ModuleDefinition {
   id: string           // e.g., 'm4', 'm3b', 'mai', 'overview'
   number: string       // e.g., '4', '3b', 'overview'
   folder: string       // e.g., 'm4_data_quality_assessment'
+  theme?: string       // theme id from themes registry (e.g., 'foundations')
   name: {
     en: string
     fr: string
   }
   ai_context?: AIContext
+}
+
+export interface ThemeDefinition {
+  id: string
+  name: {
+    en: string
+    fr: string
+  }
 }
 
 export interface SlideEntry {
@@ -59,6 +68,7 @@ interface CacheEntry<T> {
 const CACHE_TTL = 60 * 1000  // 60 seconds
 
 let modulesCache: CacheEntry<ModuleDefinition[]> | null = null
+let themesCache: CacheEntry<ThemeDefinition[]> | null = null
 const metaCache = new Map<string, CacheEntry<ModuleMeta>>()
 
 function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
@@ -84,11 +94,27 @@ export function loadModulesRegistry(): ModuleDefinition[] {
   }
 
   const raw = fs.readFileSync(modulesPath, 'utf-8')
-  const parsed = yaml.load(raw) as { modules: ModuleDefinition[] }
+  const parsed = yaml.load(raw) as { modules: ModuleDefinition[]; themes?: ThemeDefinition[] }
   const modules = parsed?.modules || []
+  const themes = parsed?.themes || []
 
   modulesCache = { data: modules, timestamp: Date.now() }
+  themesCache = { data: themes, timestamp: Date.now() }
   return modules
+}
+
+/**
+ * Load theme definitions from modules.yaml (themes section).
+ * Themes group modules in the content library UI.
+ */
+export function loadThemesRegistry(): ThemeDefinition[] {
+  if (isFresh(themesCache)) {
+    return themesCache.data
+  }
+  // Re-parse modules.yaml — also populates themesCache as a side effect
+  loadModulesRegistry()
+  const c = themesCache as CacheEntry<ThemeDefinition[]> | null
+  return c?.data || []
 }
 
 /**
@@ -213,5 +239,6 @@ export async function loadImportedModules(): Promise<Array<{
  */
 export function invalidateRegistryCache(): void {
   modulesCache = null
+  themesCache = null
   metaCache.clear()
 }

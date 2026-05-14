@@ -3,12 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Étape 2 : Redimensionner les zones de texte et de visualisation
+<div class="activity-pointer">
 
-Dans l'aperçu de la diapositive, vous verrez un séparateur vertical entre la zone de texte (à gauche) et la zone de visualisation (à droite). Vous pouvez faire glisser ce séparateur pour redimensionner les deux zones.
+![h:90](../../resources/icons/demo.svg)
 
-- **Glissez vers la gauche** pour agrandir le graphique
-- **Glissez vers la droite** pour agrandir le texte
+## Démo: Visite de l'éditeur (Étape 2 : redimensionner)
 
-**Comment faire :** Survolez le séparateur vertical entre le texte et le graphique jusqu'à ce que votre curseur change. Cliquez et faites glisser vers la gauche ou la droite pour ajuster la répartition. La zone de texte et la visualisation se redimensionneront automatiquement.
+**Voir le document distribué :** *Visite de l'éditeur (notes du facilitateur)*
+
+**~5 min**
+
+*Notes du facilitateur — non distribuées aux participants.*
+
+</div>

@@ -3,17 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Ajouter des visualisations avec l'assistant IA
+<div class="activity-pointer">
 
-**Je fais, nous faisons, vous faites**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Je fais :** Le facilitateur demande à l'assistant IA d'afficher une visualisation existante, puis utilise les boutons dans l'aperçu du chat IA pour l'ajouter au diaporama
+## Activité: Ajouter une visualisation (avec l'Assistant IA)
 
-**Nous faisons :** Ensemble, nous demandons à l'IA d'afficher une visualisation et de l'ajouter au diaporama via les boutons de l'aperçu du chat
+**Voir le document distribué :** *Ajouter une visualisation (avec l'Assistant IA)*
 
-**Vous faites :** Demandez à l'IA d'afficher une visualisation que vous avez créée, puis ajoutez-la à votre présentation via les boutons de l'aperçu du chat
+**~15 min**
 
-**Prompt :** *"Affiche la visualisation du changement trimestriel du volume de services"*
+*Les exemplaires imprimés sont distribués à ce moment de la session.*
 
-*Nous sommes dans l'onglet Présentations*
+</div>

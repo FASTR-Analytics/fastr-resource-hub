@@ -816,3 +816,49 @@ section.spacious p {
 .image-row img {
   max-height: 100%;
 }
+
+/* ========================================
+   ACTIVITY POINTER SLIDES
+   Used on slides that have been replaced by handouts.
+   The slide acts as a visual anchor in the deck while
+   the actual content lives in the handout.
+   ======================================== */
+section.activity-pointer,
+section[data-class~="activity-pointer"] {
+  background: var(--fastr-light-blue, #E8F4F3);
+}
+
+.activity-pointer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  gap: 0.6em;
+}
+
+.activity-pointer img {
+  height: 90px;
+  width: auto;
+  margin-bottom: 0.4em;
+}
+
+.activity-pointer h2 {
+  color: var(--fastr-deep-green);
+  font-size: 38px;
+  margin: 0 0 0.3em 0;
+  border-bottom: none;
+}
+
+.activity-pointer p {
+  font-size: 22px;
+  color: var(--text-dark);
+  margin: 0.2em 0;
+}
+
+.activity-pointer p:last-child {
+  color: var(--text-medium);
+  font-size: 16px;
+  margin-top: 1em;
+}

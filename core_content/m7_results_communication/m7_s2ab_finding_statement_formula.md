@@ -3,9 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Try it yourself
+<div class="activity-pointer">
 
-- Pick one finding from your FASTR analysis
-- Write it using the formula: **[Indicator] [trend] from [value] to [value] in [place/period]. This suggests [interpretation].**
-- Read it back: would someone unfamiliar with your data understand what happened and why it matters?
+![h:90](../../resources/icons/hands_on.svg)
+
+## Activity: Try it yourself — write a finding statement
+
+**See the participant handout:** *Write a finding statement*
+
+**~15 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

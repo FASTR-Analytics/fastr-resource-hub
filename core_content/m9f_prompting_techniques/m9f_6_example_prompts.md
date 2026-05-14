@@ -6,7 +6,9 @@ paginate: true
 
 <!-- _class: compact -->
 
-## Example prompts at a glance
+## A few prompts from the FASTR library
+
+A sample of what's waiting inside the FASTR Analytics Platform prompt library — one from each category, ready to copy and adjust for your context.
 
 <div class="columns">
 <div>
@@ -34,3 +36,5 @@ paginate: true
 
 </div>
 </div>
+
+> Open the library in the AI Assistant panel to see all the categories and pick one that fits what you're working on today.

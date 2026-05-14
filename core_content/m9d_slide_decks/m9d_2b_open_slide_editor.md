@@ -3,7 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Step 1: Open the slide editor
+<div class="activity-pointer">
 
-Click on any slide in your deck to open the editor. You will see the slide preview on the right and editing options on the left.
+![h:90](../../resources/icons/demo.svg)
+
+## Demo: Editor walkthrough (Step 1: open editor)
+
+**Facilitator notes:** *Editor walkthrough (facilitator notes)*
+
+**~5 min**
+
+*Facilitator notes — not distributed to participants.*
+
+</div>

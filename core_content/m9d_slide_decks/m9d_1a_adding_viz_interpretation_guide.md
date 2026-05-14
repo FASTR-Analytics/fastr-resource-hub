@@ -3,33 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-<!-- _class: compact -->
+<div class="activity-pointer">
 
-## Add a visualization and interpretation text to your content slide
+![h:90](../../resources/icons/hands_on.svg)
 
-<div class="columns">
-<div>
+## Reference: Add a visualisation + interpretation text
 
-**1. Add a visualization**
+**See the participant handout:** *Add a visualisation + interpretation text (reference)*
 
-**Block** → **Visualization** → **Select Visualization** → Browse and choose one → **Select**
+**~5 min**
 
-</div>
-<div>
-
-**2. Add text next to it**
-
-Right-click → **Add → Col to right** → Click text area and type. Use `#` for headings.
+*Print copies are distributed at this point in the session.*
 
 </div>
-<div>
-
-**3. Edit details & save**
-
-**Slide** tab → Edit title, subtitle, date → **Save**
-
-</div>
-</div>
-
-*More options: Right-click → Add → Row below*

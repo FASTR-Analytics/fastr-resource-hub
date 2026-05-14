@@ -9,11 +9,6 @@ slides:
   variant: full
   title: What the AI assistant can do
   last_reviewed: *id001
-- file: mai_3a_ai_greatest_value.md
-  order: 2.01
-  variant: full
-  title: Where the AI helps most
-  last_reviewed: *id001
 - file: mai_4_ai_how_it_works.md
   order: 2.02
   variant: full
@@ -24,15 +19,10 @@ slides:
   variant: full
   title: AI is an accelerator, not a decision maker
   last_reviewed: *id001
-- file: mai_2a_four_skills_for_ai.md
-  order: 3.01
-  variant: full
-  title: 'Working well with AI: four habits'
-  last_reviewed: *id001
 - file: mai_2b_four_skills_in_practice.md
   order: 3.02
   variant: full
-  title: The 4 D's — think of the AI as a new colleague
+  title: Four habits make working with AI actually work
   last_reviewed: *id001
 - file: mai_4a_ai_conversations.md
   order: 4
@@ -48,31 +38,6 @@ slides:
   order: 5.01
   variant: full
   title: When AI is helpful
-  last_reviewed: *id001
-- file: mai_6_ai_tips_better_answers.md
-  order: 6
-  variant: full
-  title: Tips for better answers
-  last_reviewed: *id001
-- file: mai_6a_ai_good_prompt_checklist.md
-  order: 6.01
-  variant: full
-  title: What makes a good prompt?
-  last_reviewed: *id001
-- file: mai_7_ai_prompt_library_overview.md
-  order: 7
-  variant: full
-  title: The prompt library
-  last_reviewed: *id001
-- file: mai_7b_ai_prompt_library_overview.md
-  order: 7.001
-  variant: full
-  title: Prompt library organization
-  last_reviewed: *id001
-- file: mai_7a_ai_prompt_examples_table.md
-  order: 7.01
-  variant: full
-  title: Example prompts at a glance
   last_reviewed: *id001
 - file: mai_8_ai_what_happens_log_off.md
   order: 8

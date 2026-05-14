@@ -3,21 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Country action planning
+<div class="activity-pointer">
 
-![hands-on h:40](../../resources/icons/hands_on.svg) **Develop your country's FASTR action plan:**
+![h:90](../../resources/icons/hands_on.svg)
 
-| Action Step | Responsible Person | Timeline | Success Metric |
-|-------------|-------------------|----------|----------------|
-| Complete quarterly analysis | | | |
-| Disseminate to [forum] | | | |
-| Follow up on identified issues | | | |
-| Train additional team members | | | |
+## Activity: Country action plan
 
-**Also consider:**
-- What existing platform/forum will you integrate FASTR into?
-- What's your dissemination plan for the output you created this week?
-- What support do you need from facilitators over the next quarter?
+**See the participant handout:** *Country action plan*
 
-*Share your action plan with another country team for peer review.*
+**~30 min**
+
+*Print copies are distributed at this point in the session.*
+
+</div>

@@ -164,6 +164,7 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../..')
   : path.resolve(__dirname, '../..')
 app.use('/resources', express.static(path.join(REPO_ROOT, 'resources')))
+app.use('/handouts-pdf', express.static(path.join(REPO_ROOT, 'handouts', '_out')))
 app.use('/fastr-theme.css', (_req, res) => {
   res.sendFile(path.join(REPO_ROOT, 'fastr-theme.css'))
 })

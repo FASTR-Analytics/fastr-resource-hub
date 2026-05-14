@@ -4,10 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## Présentation de la bibliothèque de prompts
+## La bibliothèque de prompts FASTR — partez d'un vrai prompt, pas d'une page blanche
 
-L'assistant IA comprend une **bibliothèque de prompts** avec des prompts prêts à l'emploi organisés par étape du flux de travail.
+Vous venez de passer une heure à rédiger des prompts, à itérer, à affiner. C'est ça, la compétence — et elle reste utile pour la question unique que vous seul·e pouvez poser.
 
-**Comment y accéder :** Cliquez sur le menu à trois points dans le panneau de l'assistant IA → Sélectionnez **Bibliothèque de prompts** → Parcourez et choisissez un prompt → Modifiez-le avant de l'utiliser si nécessaire
+**Pour les questions qui reviennent encore et encore** (une revue trimestrielle des tendances, un état des lieux de la qualité des données, un briefing au directeur), l'équipe FASTR a déjà écrit les prompts. Ils vivent dans la **bibliothèque de prompts intégrée à la Plateforme analytique FASTR**, prête à l'emploi depuis le panneau Assistant IA.
 
-**Comment l'utiliser :** Chaque prompt est conçu pour être spécifique et orienté vers un objectif précis. Vous pouvez les utiliser tels quels ou les personnaliser selon votre contexte.
+Chacun suit les règles que vous venez d'apprendre — demande claire, ancrée dans les données de votre pays, format précis — donc vous pouvez copier un prompt, ajuster l'indicateur ou la région pour votre contexte, et sauter complètement l'étape de la page blanche.
+
+**Comment l'ouvrir :** dans la plateforme FASTR, cliquez sur le menu à trois points dans le panneau Assistant IA → **Bibliothèque de prompts** → parcourez les catégories → choisissez-en un → modifiez avant d'envoyer si vous voulez.
+
+<!--
+PRESENTER NOTES:
+This slide is the bridge from "writing your own prompts" to "using the library". The library isn't a shortcut around the skill — it's the skill, pre-applied to the recurring questions.
+-->

@@ -3,7 +3,18 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Étape 1 : Ouvrir l'éditeur de diapositives
+<div class="activity-pointer">
 
-Cliquez sur n'importe quelle diapositive dans votre présentation pour ouvrir l'éditeur. Vous verrez l'aperçu de la diapositive à droite et les options d'édition à gauche.
+![h:90](../../resources/icons/demo.svg)
+
+## Démo: Visite de l'éditeur (Étape 1 : ouvrir l'éditeur)
+
+**Voir le document distribué :** *Visite de l'éditeur (notes du facilitateur)*
+
+**~5 min**
+
+*Notes du facilitateur — non distribuées aux participants.*
+
+</div>
