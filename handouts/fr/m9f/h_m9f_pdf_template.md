@@ -7,6 +7,8 @@ footer: "FASTR · Techniques de prompting"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Construire un prompt clair</span> <span class="arrow">→</span> <span class="step done">Explorer</span> <span class="arrow">→</span> <span class="step done">Itératif vs unique</span> <span class="arrow">→</span> <span class="step done">Affiner</span> <span class="arrow">→</span> <span class="step current">Modèle PDF</span> <span class="arrow">→</span> <span class="step">Vérifier la sortie</span></div>
+
 # Utiliser un rapport précédent comme modèle
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~10 min</strong></p>

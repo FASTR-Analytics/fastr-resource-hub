@@ -21,18 +21,26 @@ m9b:
 - h_m9b_logging_in.md          # 1. Sign in
 - h_m9b_user_folder.md         # 2. Create your folder
 
+m9c:
+- h_m9c_interpret_reference.md     # 1. Reference: how to read a viz (concept first)
+- h_m9c_create_viz_manually.md     # 2. Build one manually
+- h_m9c_create_viz_ai.md           # 3. Build one with the AI Assistant
+- h_m9c_write_interpretation.md    # 4. Add interpretation to a slide
+- h_m9c_interpret_with_ai.md       # 5. Let the AI draft the interpretation
+- h_m9c_spot_disruption.md         # 6. Apply: spot a disruption
+
 m9d:
-- h_m9d_create_slide_deck.md   # 1. Create the deck
+- h_m9d_create_slide_deck.md   # 1. Create the deck (the container)
 - h_m9d_add_viz_text.md        # 2. Reference: viz + text layout
-- h_m9d_add_viz_manually.md    # 3. Add a viz manually
-- h_m9d_add_viz_ai.md          # 4. Add a viz via AI
-- h_m9d_demo_editing.md        # 5. Facilitator demo: editor
+- h_m9d_demo_editing.md        # 3. Facilitator demo: editor walkthrough
+- h_m9d_add_viz_manually.md    # 4. Add a viz manually
+- h_m9d_add_viz_ai.md          # 5. Add a viz via the AI
 - h_m9d_edit_slides.md         # 6. Edit and finalise
 
 m9f:
-- h_m9f_explore_ai.md          # 1. First exploration
-- h_m9f_build_prompt.md        # 2. Build a structured prompt
+- h_m9f_build_prompt.md        # 1. Build a clear prompt (foundation)
+- h_m9f_explore_ai.md          # 2. Explore — practice the foundation
 - h_m9f_iterative_vs_single.md # 3. Compare approaches
 - h_m9f_refine_prompt.md       # 4. Refine iteratively
 - h_m9f_pdf_template.md        # 5. Use a previous report as template
-- h_m9f_verify_output.md       # 6. Verify the output before shipping
+- h_m9f_verify_output.md       # 6. Verify the output before sharing

@@ -7,6 +7,8 @@ footer: "FASTR · Results Communication"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Map users</span> <span class="arrow">→</span> <span class="step done">Finding statement</span> <span class="arrow">→</span> <span class="step done">Results → actions</span> <span class="arrow">→</span> <span class="step current">Action plan</span></div>
+
 # Country action plan
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Results Communication</strong> · <strong>~30 min</strong></p>

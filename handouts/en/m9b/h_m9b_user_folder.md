@@ -7,6 +7,8 @@ footer: "FASTR · Getting Started"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Log in</span> <span class="arrow">→</span> <span class="step current">Your folder</span></div>
+
 # Create your user folder
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Getting Started</strong> · <strong>~5 min</strong></p>

@@ -7,6 +7,8 @@ footer: "FASTR · Communication des résultats"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Cartographier les utilisateurs</span> <span class="arrow">→</span> <span class="step current">Énoncé de constat</span> <span class="arrow">→</span> <span class="step">Résultats → actions</span> <span class="arrow">→</span> <span class="step">Plan d'action</span></div>
+
 # Rédigez un énoncé de constat
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Communication des résultats</strong> · <strong>~15 min</strong></p>

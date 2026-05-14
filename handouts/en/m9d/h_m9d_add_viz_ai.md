@@ -7,6 +7,8 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Layout reference</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step current">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+
 # Add a visualisation (with the AI Assistant)
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>

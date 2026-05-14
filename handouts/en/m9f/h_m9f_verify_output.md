@@ -7,6 +7,8 @@ footer: "FASTR · Prompting Techniques"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Build a clear prompt</span> <span class="arrow">→</span> <span class="step done">Explore</span> <span class="arrow">→</span> <span class="step done">Iterative vs single</span> <span class="arrow">→</span> <span class="step done">Refine</span> <span class="arrow">→</span> <span class="step done">PDF template</span> <span class="arrow">→</span> <span class="step current">Verify output</span></div>
+
 # Verify the output
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting Techniques</strong> · <strong>~20 min</strong></p>

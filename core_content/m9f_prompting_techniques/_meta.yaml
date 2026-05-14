@@ -6,11 +6,11 @@ slides:
   title: Get useful answers from the AI — without surprises
   status: new
 
-# Phase 1 — Try it + notice what's off
-- file: m9f_1_explore_with_ai_assistant.md
+# Phase 1 — Build a clear prompt (the foundation)
+- file: m9f_0b_good_vs_vague_prompt.md
   order: 0.5
   variant: full
-  title: Explore with the AI Assistant
+  title: Try it yourself — build a prompt
 - file: m9f_1a_hallucination.md
   order: 0.6
   variant: full
@@ -22,16 +22,16 @@ slides:
   title: Two ways to ask for help
   status: new
 
-# Phase 2 — Grounding your prompt
+# Phase 2 — Ground the AI + practice
 - file: m9f_2a_source_grounding.md
   order: 1.5
   variant: full
   title: Hand the AI the right materials
   status: new
-- file: m9f_0b_good_vs_vague_prompt.md
+- file: m9f_1_explore_with_ai_assistant.md
   order: 1.7
   variant: full
-  title: Try it yourself — build a prompt
+  title: Explore with the AI Assistant
 
 # Phase 3 — Iterating with the AI
 - file: m9f_2_iterative_vs_single_prompts.md

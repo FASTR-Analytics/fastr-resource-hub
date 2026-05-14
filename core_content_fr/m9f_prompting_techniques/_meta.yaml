@@ -6,11 +6,11 @@ slides:
   title: Obtenir des réponses utiles de l'IA — sans surprises
   status: new
 
-# Phase 1 — Essayer + remarquer ce qui cloche
-- file: m9f_1_explore_with_ai_assistant.md
+# Phase 1 — Construire un prompt clair (le fondement)
+- file: m9f_0b_good_vs_vague_prompt.md
   order: 0.5
   variant: full
-  title: Explorez avec l'assistant IA
+  title: Essayez vous-même — construire un prompt
 - file: m9f_1a_hallucination.md
   order: 0.6
   variant: full
@@ -22,16 +22,16 @@ slides:
   title: Deux façons de demander de l'aide
   status: new
 
-# Phase 2 — Ancrer votre prompt
+# Phase 2 — Ancrer l'IA + pratiquer
 - file: m9f_2a_source_grounding.md
   order: 1.5
   variant: full
   title: Donnez à l'IA les bons documents
   status: new
-- file: m9f_0b_good_vs_vague_prompt.md
+- file: m9f_1_explore_with_ai_assistant.md
   order: 1.7
   variant: full
-  title: Essayez vous-même — construire un prompt
+  title: Explorez avec l'assistant IA
 
 # Phase 3 — Itérer avec l'IA
 - file: m9f_2_iterative_vs_single_prompts.md

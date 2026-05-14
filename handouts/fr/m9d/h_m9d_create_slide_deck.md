@@ -7,6 +7,8 @@ footer: "FASTR · Présentations"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step current">Créer la présentation</span> <span class="arrow">→</span> <span class="step">Référence mise en page</span> <span class="arrow">→</span> <span class="step">Ajouter manuellement</span> <span class="arrow">→</span> <span class="step">Ajouter avec l'IA</span> <span class="arrow">→</span> <span class="step">Éditer et finaliser</span></div>
+
 # Créez votre première présentation
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~10 min</strong></p>

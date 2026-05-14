@@ -7,6 +7,8 @@ footer: "FASTR · Premiers pas"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<div class="setup-breadcrumb"><span class="step done">Connexion</span> <span class="arrow">→</span> <span class="step current">Votre dossier</span></div>
+
 # Créer votre dossier personnel
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Premiers pas</strong> · <strong>~5 min</strong></p>

@@ -732,7 +732,7 @@ function loadHandoutOrder(): Record<string, string[]> {
   }
 }
 
-type HandoutType = 'participant_activity' | 'facilitator_demo' | 'reference' | 'worksheet'
+type HandoutType = 'participant' | 'facilitator'
 
 interface HandoutEntry {
   id: string
@@ -760,16 +760,12 @@ const HANDOUTS_CACHE_TTL = 5 * 60 * 1000
 function classifyHandout(content: string): HandoutType {
   const metaMatch = content.match(/<p\s+class=["']meta-line["'][^>]*>([\s\S]*?)<\/p>/i)
   const meta = metaMatch ? metaMatch[1] : ''
+  // Facilitator-only: explicit class on slide OR "Demo" in meta-line
   if (/_class:\s*facilitator/.test(content) || /\bDemo\b|\bDémo\b/i.test(meta)) {
-    return 'facilitator_demo'
+    return 'facilitator'
   }
-  if (/\bReference\b|\bRéférence\b/i.test(meta)) {
-    return 'reference'
-  }
-  if (/\bActivity\b|\bActivité\b/i.test(meta)) {
-    return 'participant_activity'
-  }
-  return 'worksheet'
+  // Everything else lands on every participant's table
+  return 'participant'
 }
 
 function extractDuration(content: string): string | null {
