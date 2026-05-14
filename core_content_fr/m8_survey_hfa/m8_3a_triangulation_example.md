@@ -8,16 +8,16 @@ paginate: true
 
 Pour répondre à cette question, les données du SNIS et des FOSA doivent être triangulées avec d'autres sources afin de mesurer ce qui compte vraiment.
 
-<div class="eyebrow">INDICATEUR D'IMPACT</div>
+### Indicateur d'impact : mortalité maternelle institutionnelle
 
-### Mortalité maternelle institutionnelle
+**Sources de triangulation :**
 
-<div class="eyebrow">SOURCES DE TRIANGULATION</div>
+- **SRDMP** — surveillance de la mortalité
+- **DHIS2** — données du SNIS sur les services
+- **Enquêtes ménages** — EDS ou autres
 
-<div class="data-pills triangulation">
-  <span class="data-pill data-pill-deep-green">SRDMP (surveillance)</span>
-  <span class="data-pill data-pill-green">DHIS2</span>
-  <span class="data-pill data-pill-gold">Enquêtes ménages (EDS ou autre)</span>
+<div class="highlight">
+
+On ne peut pas agir pour réduire la mortalité maternelle sans comprendre ce qui se passe au sein des formations sanitaires.
+
 </div>
-
-<div class="callout-footer">On ne peut pas agir pour réduire la mortalité maternelle sans comprendre ce qui se passe au sein des formations sanitaires.</div>

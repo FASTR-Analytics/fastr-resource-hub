@@ -10,32 +10,11 @@ paginate: true
 
 Results inform decisions and concrete actions to strengthen the health system.
 
-<div class="eyebrow">THE FOUR-STEP CYCLE</div>
+### The four-step cycle
 
-<div class="results-chain">
-  <div class="rc-col rc-navy">
-    <div class="rc-eyebrow">1</div>
-    <h3 class="rc-title">Plan</h3>
-    <p class="rc-desc">Design the survey — modules, sampling, implementation modalities.</p>
-  </div>
-  <div class="rc-arrow">→</div>
-  <div class="rc-col rc-deep-green">
-    <div class="rc-eyebrow">2</div>
-    <h3 class="rc-title">Collect</h3>
-    <p class="rc-desc">Phone calls with facility representatives — 30 to 45 min each.</p>
-  </div>
-  <div class="rc-arrow">→</div>
-  <div class="rc-col rc-green">
-    <div class="rc-eyebrow">3</div>
-    <h3 class="rc-title">Analyse</h3>
-    <p class="rc-desc">Analyses run directly on the FASTR analytics platform.</p>
-  </div>
-  <div class="rc-arrow">→</div>
-  <div class="rc-col rc-gold">
-    <div class="rc-eyebrow">4</div>
-    <h3 class="rc-title">Results &amp; use</h3>
-    <p class="rc-desc">Dissemination to decision-makers; action on identified constraints.</p>
-  </div>
-</div>
+1. **Plan** — Design the survey: modules, sampling, implementation modalities.
+2. **Collect** — Phone calls with facility representatives (30–45 min each).
+3. **Analyse** — Analyses run directly on the FASTR analytics platform.
+4. **Results and use** — Dissemination to decision-makers and action on identified constraints.
 
-<div class="callout-footer">HFA survey analyses can now be run directly on the FASTR analytics platform.</div>
+> HFA survey analyses can now be run directly on the FASTR analytics platform.

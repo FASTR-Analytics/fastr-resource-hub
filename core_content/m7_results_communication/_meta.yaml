@@ -155,6 +155,11 @@ slides:
   variant: full
   title: 'Activity: Country action planning'
   last_reviewed: *id001
+- file: m7_7b_post_workshop_roadmap.md
+  order: 7.02
+  variant: full
+  title: Post-workshop roadmap for FASTR
+  status: new
 - file: m7_s1_from_data_to_key_messages.md
   order: 1
   variant: condensed

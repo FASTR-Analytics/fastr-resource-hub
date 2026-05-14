@@ -8,16 +8,16 @@ paginate: true
 
 To answer this, HMIS and HFA data have to be triangulated with other sources to measure what actually matters.
 
-<div class="eyebrow">IMPACT INDICATOR</div>
+### Impact indicator: institutional maternal mortality
 
-### Institutional maternal mortality
+**Triangulation sources:**
 
-<div class="eyebrow">TRIANGULATION SOURCES</div>
+- **MPDSR** — mortality surveillance
+- **DHIS2** — HMIS routine data on services
+- **Household surveys** — DHS or other
 
-<div class="data-pills triangulation">
-  <span class="data-pill data-pill-deep-green">MPDSR (surveillance)</span>
-  <span class="data-pill data-pill-green">DHIS2</span>
-  <span class="data-pill data-pill-gold">Household surveys (DHS or other)</span>
+<div class="highlight">
+
+You can't act to reduce maternal mortality without understanding what's happening inside health facilities.
+
 </div>
-
-<div class="callout-footer">You can't act to reduce maternal mortality without understanding what's happening inside health facilities.</div>
