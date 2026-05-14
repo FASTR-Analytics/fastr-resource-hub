@@ -43,8 +43,11 @@ Remplissez le tableau du plan d'action :
 | Diffuser au [forum] |  |  |  |
 | Suivre les problèmes identifiés |  |  |  |
 | Former des membres supplémentaires de l'équipe |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
-> **Ajoutez des lignes pour toute étape spécifique à votre pays** — p. ex. « intégrer la sortie FASTR à la réunion de revue trimestrielle », « créer un groupe de travail sur la qualité des données ».
+> **Utilisez les lignes vides pour toute étape spécifique à votre pays** — p. ex. « intégrer la sortie FASTR à la réunion de revue trimestrielle », « créer un groupe de travail sur la qualité des données ».
 
 ---
 
@@ -60,17 +63,23 @@ Utilisez-les pour mettre votre plan d'action à l'épreuve :
 
 Ne créez pas une nouvelle réunion. Branchez FASTR sur quelque chose qui existe déjà — réunion mensuelle de la direction, revue trimestrielle de programme, groupe de travail technique. Le rythme vient naturellement.
 
+<div class="answer-box"></div>
+
 ### 2. Diffusion du produit de cette semaine
 
 > *Quel est votre plan de diffusion pour le produit créé cette semaine ?*
 
 Soyez précis : qui le reçoit, dans quel format, à quelle date. Si la réponse est « on verra plus tard », c'est la même chose que « ça n'arrivera pas ».
 
+<div class="answer-box"></div>
+
 ### 3. Soutien des facilitateurs
 
 > *De quel soutien avez-vous besoin des facilitateurs au cours du prochain trimestre ?*
 
 Les demandes concrètes valent mieux que les vagues. *« Nous avons besoin d'aide pour configurer le module de perturbation »* est actionnable. *« Nous avons besoin d'aide »* ne l'est pas.
+
+<div class="answer-box"></div>
 
 ---
 

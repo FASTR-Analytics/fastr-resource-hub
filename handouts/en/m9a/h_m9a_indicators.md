@@ -7,7 +7,7 @@ footer: "FASTR · Instance Setup"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Before you begin</span> <span class="arrow">→</span> <span class="step done">1. Facility structure</span> <span class="arrow">→</span> <span class="step current">2. Indicators</span> <span class="arrow">→</span> <span class="step">3. Data</span> <span class="arrow">→</span> <span class="step">4. Verify</span></div>
+<div class="setup-breadcrumb"><span class="step done">Facility structure</span> <span class="arrow">→</span> <span class="step current">Indicators</span> <span class="arrow">→</span> <span class="step">Data</span> <span class="arrow">→</span> <span class="step">Verify</span></div>
 
 # Import and map indicators
 

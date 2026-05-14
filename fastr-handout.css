@@ -208,6 +208,18 @@ td:empty {
 }
 
 /* ========================================
+   ANSWER BOX — writeable space under question prompts
+   ======================================== */
+.answer-box {
+  margin: 0.4em 0 1.2em 0;
+  padding: 10px 12px;
+  min-height: 70pt;
+  border: 1px dashed var(--border-light);
+  border-radius: 3px;
+  background: var(--fastr-light-bg);
+}
+
+/* ========================================
    CALLOUT — blockquote as a tip box
    ======================================== */
 blockquote {

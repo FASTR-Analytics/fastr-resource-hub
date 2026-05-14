@@ -7,8 +7,6 @@ footer: "FASTR · Instance Setup"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Before you begin</span> <span class="arrow">→</span> <span class="step">1. Facility structure</span> <span class="arrow">→</span> <span class="step">2. Indicators</span> <span class="arrow">→</span> <span class="step">3. Data</span> <span class="arrow">→</span> <span class="step">4. Verify</span></div>
-
 # Before you begin
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~5 min</strong></p>

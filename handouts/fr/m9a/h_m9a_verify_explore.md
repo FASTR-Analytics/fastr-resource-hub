@@ -7,7 +7,7 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step done">1. Établissements</span> <span class="arrow">→</span> <span class="step done">2. Indicateurs</span> <span class="arrow">→</span> <span class="step done">3. Données</span> <span class="arrow">→</span> <span class="step current">4. Vérifier</span></div>
+<div class="setup-breadcrumb"><span class="step done">Établissements</span> <span class="arrow">→</span> <span class="step done">Indicateurs</span> <span class="arrow">→</span> <span class="step done">Données</span> <span class="arrow">→</span> <span class="step current">Vérifier</span></div>
 
 # Vérifier et explorer votre installation
 

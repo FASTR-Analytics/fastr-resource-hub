@@ -39,8 +39,11 @@ Fill in the action plan table:
 | Disseminate to [forum] |  |  |  |
 | Follow up on identified issues |  |  |  |
 | Train additional team members |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
-> **Add rows for any country-specific steps** — e.g., "integrate FASTR output into the quarterly review meeting", "establish a data quality working group".
+> **Use the blank rows for any country-specific steps** — e.g., "integrate FASTR output into the quarterly review meeting", "establish a data quality working group".
 
 ---
 
@@ -56,17 +59,23 @@ Use these to pressure-test the rows in your action plan:
 
 Don't create a new meeting. Plug FASTR into something that already happens — monthly directorate meeting, quarterly programme review, technical working group. The rhythm comes for free that way.
 
+<div class="answer-box"></div>
+
 ### 2. Dissemination of this week's output
 
 > *What's your dissemination plan for the output you created this week?*
 
 Be specific: who receives it, in what format, by what date. If the answer is "we'll figure it out later", that's the same as "it won't happen".
 
+<div class="answer-box"></div>
+
 ### 3. Support from facilitators
 
 > *What support do you need from facilitators over the next quarter?*
 
 Concrete asks beat vague ones. *"We need help configuring the disruption module"* is actionable. *"We need help"* is not.
+
+<div class="answer-box"></div>
 
 ---
 

@@ -7,7 +7,7 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Avant de commencer</span> <span class="arrow">→</span> <span class="step current">1. Établissements</span> <span class="arrow">→</span> <span class="step">2. Indicateurs</span> <span class="arrow">→</span> <span class="step">3. Données</span> <span class="arrow">→</span> <span class="step">4. Vérifier</span></div>
+<div class="setup-breadcrumb"><span class="step current">Établissements</span> <span class="arrow">→</span> <span class="step">Indicateurs</span> <span class="arrow">→</span> <span class="step">Données</span> <span class="arrow">→</span> <span class="step">Vérifier</span></div>
 
 # Importer la structure des établissements
 
