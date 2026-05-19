@@ -138,16 +138,16 @@ That's what the manual checklist below is for. Work through it **as a team**, wi
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Final read-out-loud
+## Final team read-through
 
-Once every section passes, read **all interpretations out loud as a team**. Listen for:
+Once every section passes, **read every interpretation together as a team** — each team member taking a section, the rest following along. Watch for:
 
-- **Anything that sounds wrong** — a number too round, a trend that's not in the chart
+- **Anything that reads wrong** — a number too round, a trend that's not in the chart
 - **Anything exaggerated** — "dramatic", "alarming", "unprecedented" without evidence
 - **Anything generic** — sentences that could apply to any country, not yours
 - **Missing local context** — the strike, the supply-chain issue, the new policy. You add it.
 
-If anyone in the room hesitates on a sentence, **flag it**. Hesitation usually means something is off.
+If anyone on the team hesitates on a sentence, **flag it**. Hesitation usually means something is off.
 
 ## Sign-off
 

@@ -44,7 +44,7 @@ Pour chaque graphique placé sur une diapositive, votre interprétation comporte
 
 ## Étapes
 
-### 1. Parcourir les six étapes à voix haute
+### 1. Parcourir les six étapes avec un collègue
 
 Avant d'écrire quoi que ce soit, parcourez le graphique avec un collègue en utilisant le cadre *Lire une viz* : indicateur, niveau et période, ce qui est comparé, valeurs, ce qui ressort, et alors.
 

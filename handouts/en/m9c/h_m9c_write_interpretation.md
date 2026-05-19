@@ -44,7 +44,7 @@ For every chart you put on a slide, your interpretation has **three parts**:
 
 ## Steps
 
-### 1. Walk the six steps out loud
+### 1. Walk the six steps with a teammate
 
 Before writing anything, talk through the chart with a teammate using the *Reading a viz* framework: indicator, level & period, what's being compared, values, what stands out, so what.
 

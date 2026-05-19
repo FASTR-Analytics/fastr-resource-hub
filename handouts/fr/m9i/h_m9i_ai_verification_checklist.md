@@ -138,16 +138,16 @@ C'est à cela que sert la liste de vérification manuelle ci-dessous. Parcourez-
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Lecture finale à voix haute
+## Relecture finale en équipe
 
-Une fois chaque section validée, lisez **toutes les interprétations à voix haute en équipe**. Écoutez :
+Une fois chaque section validée, **passez en revue toutes les interprétations ensemble en équipe** — chaque membre prenant une section, les autres suivant. Surveillez :
 
-- **Tout ce qui sonne faux** — un chiffre trop arrondi, une tendance absente du graphique
+- **Tout ce qui se lit mal** — un chiffre trop arrondi, une tendance absente du graphique
 - **Tout ce qui sonne exagéré** — « dramatique », « alarmant », « sans précédent » sans preuve
 - **Tout ce qui sonne générique** — des phrases qui s'appliqueraient à n'importe quel pays, pas au vôtre
 - **Contexte local manquant** — la grève, la rupture d'approvisionnement, la nouvelle politique. Vous l'ajoutez.
 
-Si quelqu'un dans la salle hésite sur une phrase, **signalez-la**. L'hésitation signale souvent un problème.
+Si un membre de l'équipe hésite sur une phrase, **signalez-la**. L'hésitation signale souvent un problème.
 
 ## Validation finale
 

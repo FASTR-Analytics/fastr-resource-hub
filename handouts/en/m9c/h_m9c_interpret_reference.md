@@ -56,7 +56,7 @@ Different questions call for different charts. Two patterns cover most FASTR out
 
 ## Quick test — try the six steps
 
-Find any recent chart from your country's data (a screenshot, a slide, a printed report) and walk through steps 1–6 out loud with a teammate. Notice where you slow down — that's usually where the chart is missing a label, or where the question it's trying to answer isn't clear yet.
+Find any recent chart from your country's data (a screenshot, a slide, a printed report) and walk through steps 1–6 with a teammate. Notice where you slow down — that's usually where the chart is missing a label, or where the question it's trying to answer isn't clear yet.
 
 ## What's next
 
