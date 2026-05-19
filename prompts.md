@@ -1434,14 +1434,7 @@ As you write each slide (not as a separate pass afterward), check against the me
 - ✅ Figures are consistent across slides (same indicator = same values)
 - ✅ Interpretation framing matches the indicator type — an increase in deaths is NEVER described as positive
 
-OVERALL WORKFLOW
-- Verify mode → editing_slide_deck
-- Collect basic info → all setup questions in ONE ask_user_questions call
-- Generate cover → STOP and wait for confirmation
-- Discover indicators → get_available_metrics + get_metric_data
-- Propose groupings → Present to user
-- Validate with user → Groupings, then mortality
-- Proceed to methodology slide
+After generating the cover slide, STOP and wait for user confirmation before continuing.
 
 This universal base applies to all reports, all countries, all languages. Specific report structure instructions will follow.
 
@@ -1477,20 +1470,7 @@ Deliveries and postnatal care: Skilled birth attendance, PNC1 mother, PNC1 newbo
 
 INSTRUCTIONS TO GENERATE Section 1: Data Quality Assessment
 
-Accuracy Requirements
-- Base all analysis only on data visible in the platform
-- Do not invent statistics or specific numbers — if data is not visible, say so
-- If you cannot verify a claim from the data, mark it with [VERIFY]
-- NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it. Call get_methodology_docs_list once and cache it; fetch each methodology doc only once — do not re-fetch
-
-Report Standards
-- Maintain cautious, analytical language
-- Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
-- Use consistent terminology throughout
-- Always refer to slides by their number (not their ID)
-
-Methodology Reference
-If you need additional context on how FASTR calculates data quality metrics, fetch the methodology documentation from https://fastr-analytics.github.io/fastr-resource-hub/. Use it to write accurate summaries and interpretations for each slide.
+The Accuracy Requirements, Report Standards, and indicator-interpretation rules stated above apply to this section. For context on how FASTR calculates data quality metrics, use get_methodology_docs_list and get_methodology_doc_content (call get_methodology_docs_list once and cache it; fetch each doc only once).
 
 Data Quality Metrics
 Use get_available_metrics to confirm available metrics and their preset visualizations. The data quality metrics used in this annex are:
@@ -1642,21 +1622,7 @@ Step 1: Reuse the m3-01-01 service-volume data already retrieved in the bulk cal
 Step 2: Analyze the data — identify highs/lows, calculate quarter-to-quarter % changes, note indicator relationships.
 Step 3: Create slides — use create_slide for each type (A, B, C) per indicator group. Position sequentially.
 
-Inputs Needed
-- Indicator groups with codes (e.g., Antenatal care: anc1, anc4)
-- Date range: Last 12 complete quarters (36 months), format YYYYMM
-- Language: English or French (or other)
-- Adjustment type (optional): Default: count_final_both. Alternatives: count_final_none, count_final_outliers, count_final_completeness
-- Position in deck: After which section or slide should these be inserted?
-
-Key Principles
-- ✅ Always query data first — use get_metric_data before writing any interpretation
-- ✅ Never fabricate numbers — only report what's in the actual data
-- ✅ Consistent layout — every slide uses 4-8 span split in columns
-- ✅ Parallel structure — same text format for each indicator group
-- ✅ Analytical headers — Slide Type B headers describe findings, not just topic
-- ✅ Evidence-based text — include specific numbers, months, quarters from visualizations
-- ✅ Actionable insights — "Implications" section suggests what should be done
+Adjustment type for valuesFilter: default count_final_both; alternatives are count_final_none, count_final_outliers, count_final_completeness.
 
 NEXT SLIDE — Section 3 Header
 Title: "Section 3: Service Coverage Estimates"

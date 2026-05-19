@@ -1438,14 +1438,7 @@ Au fur et à mesure que vous rédigez chaque diapositive (pas en passe séparée
 - ✅ Les chiffres sont cohérents d'une diapositive à l'autre (même indicateur = mêmes valeurs)
 - ✅ La formulation de l'interprétation correspond au type d'indicateur — une augmentation des décès n'est JAMAIS décrite comme positive
 
-DÉROULEMENT GÉNÉRAL
-- Vérifier le mode → editing_slide_deck
-- Collecter les informations de base → toutes les questions de configuration en UN SEUL appel ask_user_questions
-- Générer la couverture → S'ARRÊTER et attendre la confirmation
-- Découvrir les indicateurs → get_available_metrics + get_metric_data
-- Proposer les regroupements → Présenter à l'utilisateur
-- Valider avec l'utilisateur → Regroupements, puis mortalité
-- Passer à la diapositive méthodologie
+Après avoir généré la diapositive de couverture, S'ARRÊTER et attendre la confirmation de l'utilisateur avant de continuer.
 
 Cette base universelle s'applique à tous les rapports, tous les pays, toutes les langues. Les instructions de structure spécifiques au rapport suivront.
 
@@ -1481,20 +1474,7 @@ Accouchements et soins postnatals : Accouchement assisté, CPoN1 mère, CPoN1 no
 
 INSTRUCTIONS POUR GÉNÉRER la Section 1 : Évaluation de la qualité des données
 
-Exigences de précision
-- Baser toute l'analyse uniquement sur les données visibles dans la plateforme
-- Ne pas inventer de statistiques ou de chiffres précis — si les données ne sont pas visibles, le signaler
-- Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
-- JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure. Appeler get_methodology_docs_list une seule fois et la mettre en cache ; récupérer chaque document méthodologique une seule fois — ne pas re-télécharger
-
-Normes du rapport
-- Maintenir un langage prudent et analytique
-- Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
-- Utiliser une terminologie cohérente tout au long du rapport
-- Toujours désigner les diapositives par leur numéro (pas par leur ID)
-
-Référence méthodologique
-Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les métriques de qualité des données, récupérer la documentation méthodologique depuis https://fastr-analytics.github.io/fastr-resource-hub/. L'utiliser pour rédiger des résumés et interprétations précis pour chaque diapositive.
+Les Exigences d'exactitude, Normes du rapport et règles d'interprétation des indicateurs énoncées ci-dessus s'appliquent à cette section. Pour du contexte sur la façon dont FASTR calcule les métriques de qualité des données, utiliser get_methodology_docs_list et get_methodology_doc_content (appeler get_methodology_docs_list une seule fois et la mettre en cache ; récupérer chaque document une seule fois).
 
 Métriques de qualité des données
 Utiliser get_available_metrics pour confirmer les métriques disponibles et leurs visualisations prédéfinies. Les métriques de qualité des données utilisées dans cette annexe sont :
@@ -1646,21 +1626,7 @@ Déroulement
 Étape 2 : Analyser les données — identifier les hauts/bas, calculer les variations en % d'un trimestre à l'autre, noter les relations entre indicateurs.
 Étape 3 : Créer les diapositives — utiliser create_slide pour chaque type (A, B, C) par groupe d'indicateurs. Positionner de manière séquentielle.
 
-Données nécessaires
-- Groupes d'indicateurs avec codes (par exemple : Soins prénatals : anc1, anc4)
-- Plage de dates : 12 derniers trimestres complets (36 mois), format YYYYMM
-- Langue : anglais ou français (ou autre)
-- Type d'ajustement (optionnel) : Par défaut : count_final_both. Alternatives : count_final_none, count_final_outliers, count_final_completeness
-- Position dans le deck : Après quelle section ou diapositive ces éléments doivent-ils être insérés ?
-
-Principes clés
-- ✅ Toujours interroger les données d'abord — utiliser get_metric_data avant de rédiger toute interprétation
-- ✅ Ne jamais fabriquer de chiffres — ne rapporter que ce qui est dans les données réelles
-- ✅ Mise en page cohérente — chaque diapositive utilise une répartition 4-8 en colonnes
-- ✅ Structure parallèle — même format textuel pour chaque groupe d'indicateurs
-- ✅ En-têtes analytiques — les en-têtes de type B décrivent des constats, pas seulement un sujet
-- ✅ Texte fondé sur les preuves — inclure les chiffres spécifiques, mois et trimestres issus des visualisations
-- ✅ Analyses actionnables — la section « Implications » suggère ce qui devrait être fait
+Type d'ajustement pour valuesFilter : par défaut count_final_both ; alternatives : count_final_none, count_final_outliers, count_final_completeness.
 
 DIAPOSITIVE SUIVANTE — En-tête de la Section 3
 Titre : « Section 3 : Estimation de la couverture des services »
