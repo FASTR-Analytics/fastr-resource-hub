@@ -38,6 +38,9 @@ m9d:
 - h_m9d_add_viz_ai.md          # 5. Add a viz via the AI
 - h_m9d_edit_slides.md         # 6. Edit and finalise
 
+m9i:
+- h_m9i_ai_verification_checklist.md   # Reference: verify the AI's report output before sharing
+
 m9f:
 - h_m9f_build_prompt.md        # 1. Build a clear prompt (foundation)
 - h_m9f_explore_ai.md          # 2. Explore — practice the foundation
