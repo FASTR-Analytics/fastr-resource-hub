@@ -56,7 +56,7 @@ Différentes questions appellent différents graphiques. Deux modèles couvrent 
 
 ## Test rapide — essayez les six étapes
 
-Ouvrez la présentation ou le rapport que vous avez construit avec l'Assistant IA, et choisissez-y un graphique. Parcourez les étapes 1 à 6 avec un collègue. Repérez où vous ralentissez — c'est souvent là que le graphique manque une étiquette, ou que la question qu'il essaie de répondre n'est pas claire.
+Ouvrez la présentation ou le rapport que vous avez construit avec l'Assistant IA. Avec un collègue, parcourez les six étapes pour chaque graphique. Repérez où vous ralentissez — c'est souvent là qu'un graphique manque une étiquette, ou que la question qu'il essaie de répondre n'est pas claire.
 
 ## Étape suivante
 

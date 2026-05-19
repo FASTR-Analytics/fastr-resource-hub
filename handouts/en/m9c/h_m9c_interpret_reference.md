@@ -56,7 +56,7 @@ Different questions call for different charts. Two patterns cover most FASTR out
 
 ## Quick test — try the six steps
 
-Open the slide deck or report you've been working on with the AI Assistant, and pick one chart from it. Walk through steps 1–6 with a teammate. Notice where you slow down — that's usually where the chart is missing a label, or where the question it's trying to answer isn't clear yet.
+Open the slide deck or report you've been working on with the AI Assistant. With a teammate, walk through the six steps on each chart in it. Notice where you slow down — that's usually where a chart is missing a label, or where the question it's trying to answer isn't clear yet.
 
 ## What's next
 
