@@ -1,6 +1,6 @@
 # General slide preferences
 
-When creating slides that combine text and a visualization, always use a two-column layout: text on the left, visualization on the right. After adding both blocks to a slide, use `modify_slide_layout` to arrange them side by side with a 6-6 column split (text block span 6 on left, visualization block span 6 on right). Do not leave them stacked vertically.
+When creating slides that combine text and a visualization, always use a two-column layout: text on the left, visualization on the right. After adding both blocks to a slide, use `modify_slide_layout` to arrange them side by side with a 4-8 column split (text block span 4 on left, visualization block span 8 on right). Do not leave them stacked vertically.
 
 # Writing style
 
@@ -1485,7 +1485,7 @@ Accuracy Requirements
 
 Report Standards
 - Maintain cautious, analytical language
-- Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 6-6 column split — text block (span 6) on the left, visualization block (span 6) on the right. Do not leave blocks stacked vertically
+- Layout: after adding text and visualization blocks to a slide, use modify_slide_layout to arrange them side by side in a 4-8 column split — text block (span 4) on the left, visualization block (span 8) on the right. Do not leave blocks stacked vertically
 - Use consistent terminology throughout
 - Always refer to slides by their number (not their ID)
 
@@ -1525,7 +1525,7 @@ Interpretation (left side): Use bullet points:
 
 Add a text block below the interpretation: "When completeness is high, observed and expected volumes are more comparable, and disruptions are more likely to reflect true service changes. When completeness is low, expected values may be artificially higher than observed, creating apparent "disruptions" that actually reflect missing reports rather than real declines in service delivery."
 
-Note for TIM: DQA legends in francophone instances are in English.
+Note: DQA table legends appear in English even in francophone instances — this is expected; do not attempt to translate them.
 
 NEXT SLIDE — Outliers
 Title: Write an analytical headline about outlier patterns (e.g., "Outlier rates remain low nationally but [X] shows elevated rates in recent months")
@@ -1692,7 +1692,7 @@ Interpretation Rules: Write in project language. Use neutral, descriptive langua
 
 Indicator List to Process
 - anc1 (CPN1)
-- anc4 (CPN4) ✓ Already completed
+- anc4 (CPN4)
 - bcg (BCG 0–11 months)
 - penta1 (Penta 1)
 - penta3 (Penta 3)

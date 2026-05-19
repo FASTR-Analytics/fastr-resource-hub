@@ -1,6 +1,6 @@
 # Préférences générales pour les diapositives
 
-Lors de la création de diapositives combinant du texte et une visualisation, toujours utiliser une disposition en deux colonnes : texte à gauche, visualisation à droite. Après avoir ajouté les deux blocs à une diapositive, utiliser `modify_slide_layout` pour les disposer côte à côte avec une répartition 6-6 (bloc texte span 6 à gauche, bloc visualisation span 6 à droite). Ne pas les laisser empilés verticalement.
+Lors de la création de diapositives combinant du texte et une visualisation, toujours utiliser une disposition en deux colonnes : texte à gauche, visualisation à droite. Après avoir ajouté les deux blocs à une diapositive, utiliser `modify_slide_layout` pour les disposer côte à côte avec une répartition 4-8 (bloc texte span 4 à gauche, bloc visualisation span 8 à droite). Ne pas les laisser empilés verticalement.
 
 # Style de rédaction
 
@@ -1489,7 +1489,7 @@ Exigences de précision
 
 Normes du rapport
 - Maintenir un langage prudent et analytique
-- Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 6-6 — bloc texte (span 6) à gauche, bloc visualisation (span 6) à droite. Ne pas laisser les blocs empilés verticalement
+- Mise en page : après avoir ajouté les blocs texte et visualisation à une diapositive, utiliser modify_slide_layout pour les disposer côte à côte en répartition 4-8 — bloc texte (span 4) à gauche, bloc visualisation (span 8) à droite. Ne pas laisser les blocs empilés verticalement
 - Utiliser une terminologie cohérente tout au long du rapport
 - Toujours désigner les diapositives par leur numéro (pas par leur ID)
 
@@ -1529,7 +1529,7 @@ Interprétation (côté gauche) : Utiliser des puces :
 
 Ajouter un bloc texte sous l'interprétation : « Lorsque la complétude est élevée, les volumes observés et attendus sont plus comparables, et les perturbations sont plus susceptibles de refléter de véritables changements dans les services. Lorsque la complétude est faible, les valeurs attendues peuvent être artificiellement plus élevées que les valeurs observées, créant des « perturbations » apparentes qui reflètent en réalité des rapports manquants plutôt que de véritables baisses dans la prestation de services. »
 
-Note pour TIM : les légendes DQA dans les instances francophones sont en anglais.
+Note : les légendes des tableaux DQA apparaissent en anglais même dans les instances francophones — c'est normal ; ne pas tenter de les traduire.
 
 DIAPOSITIVE SUIVANTE — Valeurs aberrantes
 Titre : Rédiger un titre analytique sur les tendances des valeurs aberrantes (par exemple : « Les taux de valeurs aberrantes restent faibles au niveau national mais [X] montre des taux élevés ces derniers mois »)
@@ -1696,7 +1696,7 @@ Règles d'interprétation : Rédiger dans la langue du projet. Utiliser un langa
 
 Liste des indicateurs à traiter
 - anc1 (CPN1)
-- anc4 (CPN4) ✓ Déjà terminé
+- anc4 (CPN4)
 - bcg (BCG 0–11 mois)
 - penta1 (Penta 1)
 - penta3 (Penta 3)
