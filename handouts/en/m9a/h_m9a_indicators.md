@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Instance Setup"
 ---
 
@@ -13,10 +14,20 @@ footer: "FASTR · Instance Setup"
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~30 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've completed **Connect to the platform** and **Import facility structure**
-- ☐ Your **FASTR Data Prep Checklist** is open at the *Indicator mapping template* sheet. You'll use column **C — INDICATOR OF INTEREST** (e.g., ANC1, ANC4) and column **G — OFFICIAL INDICATOR NAME IN DHIS2**
+- ☐ Your **FASTR Data Prep Checklist** is open at the *Indicator mapping template* sheet — you'll use column **C — INDICATOR OF INTEREST** (e.g., ANC1, ANC4) and column **G — OFFICIAL INDICATOR NAME IN DHIS2**
+
+<p class="sb-label">Why it matters</p>
+
+Without mapping, FASTR can pull data but won't know how to compare across countries or analyses.
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
@@ -26,11 +37,12 @@ Set up indicators in three rounds:
 2. **Import DHIS2 indicators** — the country-specific names from your DHIS2 (e.g., "Antenatal client 1st visit")
 3. **Map** each DHIS2 indicator to its matching common indicator
 
-Without mapping, FASTR can pull data but won't know how to compare across countries or analyses.
+</div>
+</div>
 
 ---
 
-## Phase 1 — Create common indicators
+<h2 class="step-h"><span class="step-n">1</span><span>Create common indicators</span></h2>
 
 1. In the **Data** section (left panel), click **Indicators**.
 
@@ -48,7 +60,7 @@ Without mapping, FASTR can pull data but won't know how to compare across countr
 
 ---
 
-## Phase 2 — Import DHIS2 indicator names
+<h2 class="step-h"><span class="step-n">2</span><span>Import DHIS2 indicator names</span></h2>
 
 1. Click **Import DHIS2 indicator**.
 
@@ -72,7 +84,7 @@ Without mapping, FASTR can pull data but won't know how to compare across countr
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Phase 3 — Map DHIS2 indicators to common indicators
+<h2 class="step-h"><span class="step-n">3</span><span>Map DHIS2 indicators to common indicators</span></h2>
 
 For each imported DHIS2 indicator, link it to its common counterpart:
 

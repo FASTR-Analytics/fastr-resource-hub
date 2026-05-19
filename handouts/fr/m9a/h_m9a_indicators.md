@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Configuration de l'instance"
 ---
 
@@ -13,10 +14,20 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~30 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété **Se connecter à la plateforme** et **Importer la structure des établissements**
-- ☐ Votre **Liste de vérification pour la préparation des données FASTR** est ouverte à l'onglet *Modèle de cartographie*. Vous utiliserez la colonne **C — INDICATEUR D'INTÉRÊT** (p. ex. ANC1, ANC4) et la colonne **G — NOM OFFICIEL DE L'INDICATEUR DANS DHIS2**
+- ☐ Votre **Liste de vérification pour la préparation des données FASTR** est ouverte à l'onglet *Modèle de cartographie* — vous utiliserez la colonne **C — INDICATEUR D'INTÉRÊT** (p. ex. ANC1, ANC4) et la colonne **G — NOM OFFICIEL DE L'INDICATEUR DANS DHIS2**
+
+<p class="sb-label">Pourquoi c'est important</p>
+
+Sans mapping, FASTR peut tirer les données mais ne saura pas comment comparer entre pays ou entre analyses.
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
@@ -26,19 +37,20 @@ Configurer les indicateurs en trois étapes :
 2. **Importer les indicateurs DHIS2** — les noms spécifiques au pays issus de DHIS2 (p. ex. « Antenatal client 1st visit »)
 3. **Mapper** chaque indicateur DHIS2 à son indicateur commun correspondant
 
-Sans mapping, FASTR peut tirer les données mais ne saura pas comment comparer entre pays ou entre analyses.
+</div>
+</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Phase 1 — Créer les indicateurs communs
+<h2 class="step-h"><span class="step-n">1</span><span>Créer les indicateurs communs</span></h2>
 
 1. Dans la section **Données** (panneau de gauche), cliquez sur **Indicateurs**.
 
    ![h:160](../../../resources/screenshots/m9a_setup/07_indicators_page.jpeg)
 
-2. Consultez la **liste des indicateurs par défaut** — si vos indicateurs y sont déjà, passez à la Phase 2. Vous pouvez renommer un indicateur par défaut via l'icône crayon si nécessaire.
+2. Consultez la **liste des indicateurs par défaut** — si vos indicateurs y sont déjà, passez à l'étape 2. Vous pouvez renommer un indicateur par défaut via l'icône crayon si nécessaire.
 3. Pour ajouter un nouvel indicateur, cliquez sur **Créer un indicateur commun** (en haut à gauche).
 4. Dans le formulaire, remplissez :
    - **ID commun** — le nom de la variable. **Pas d'accents, pas d'espaces**. Tirets bas (_) acceptés (p. ex. `mam_nouveau`).
@@ -52,7 +64,7 @@ Sans mapping, FASTR peut tirer les données mais ne saura pas comment comparer e
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Phase 2 — Importer les noms d'indicateurs DHIS2
+<h2 class="step-h"><span class="step-n">2</span><span>Importer les noms d'indicateurs DHIS2</span></h2>
 
 1. Cliquez sur **Import DHIS2 indicator**.
 
@@ -74,7 +86,7 @@ Sans mapping, FASTR peut tirer les données mais ne saura pas comment comparer e
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Phase 3 — Mapper les indicateurs DHIS2 aux indicateurs communs
+<h2 class="step-h"><span class="step-n">3</span><span>Mapper les indicateurs DHIS2 aux indicateurs communs</span></h2>
 
 Pour chaque indicateur DHIS2 importé, liez-le à son correspondant commun :
 
@@ -101,7 +113,7 @@ De retour sur la page des indicateurs, vous devez voir chaque indicateur DHIS2 a
 
 - **« ID commun rejeté »** — l'ID contient un espace, un accent ou un caractère spécial. Limitez-vous aux lettres minuscules et tirets bas.
 - **La recherche DHIS2 ne retourne rien** — essayez un autre terme, ou vérifiez que votre utilisateur DHIS2 a accès aux métadonnées d'indicateurs.
-- **Pas d'indicateur commun dans le menu déroulant** — retournez à la Phase 1 et créez-le d'abord.
+- **Pas d'indicateur commun dans le menu déroulant** — retournez à l'étape 1 et créez-le d'abord.
 - **Même indicateur DHIS2 mappé à deux indicateurs communs** — en général une erreur. Chaque indicateur DHIS2 doit pointer vers exactement un indicateur commun.
 
 > 🔎 **Vérifiez dans votre interface actuelle** : libellés et emplacements peuvent différer ; le flux reste le même.

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Instance Setup"
 ---
 
@@ -13,33 +14,40 @@ footer: "FASTR · Instance Setup"
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~25 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ Facilities imported (admin units page is green)
 - ☐ Indicators imported and mapped (every DHIS2 indicator has a common-indicator link)
 - ☐ You've decided which **time period** to pull (e.g., last 36 months — discuss with your team)
 
+</aside>
+<div class="p1-main">
+
 ## What you'll do
 
-Pull the actual data values from DHIS2 for your chosen indicators and time period. This is the largest data operation in the setup — depending on country size, it can take 5-30 minutes to run.
+Pull the actual data values from DHIS2 for your chosen indicators and time period. This is the largest data operation in the setup — depending on country size, it can take 5–30 minutes to run.
 
-## Steps
-
-### 1. Open HMIS Data import
+<h2 class="step-h"><span class="step-n">1</span><span>Open HMIS Data import</span></h2>
 
 From the **Data** page, click **HMIS Data**, then **New import**.
 
-### 2. Choose "Import directly from DHIS2"
+<h2 class="step-h"><span class="step-n">2</span><span>Choose "Import directly from DHIS2"</span></h2>
 
 Same option you used for facilities. Click **Save**.
 
 > If you ticked **Save credentials for this session** earlier (in admin areas or indicators), the platform skips the connection form here. Otherwise it shows up now — same fields as before.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Select indicators and time range
+<h2 class="step-h"><span class="step-n">3</span><span>Select indicators and time range</span></h2>
 
 - Tick every indicator you want data for.
 - Set the **time range** with the slider — be deliberate (3 years of monthly data ≈ 36 periods × N facilities, which scales fast).
@@ -48,7 +56,7 @@ Same option you used for facilities. Click **Save**.
 
 Click **Save selection**.
 
-### 4. Configure error handling
+<h2 class="step-h"><span class="step-n">4</span><span>Configure error handling</span></h2>
 
 On the import-config screen, make sure **Abort the entire import attempt** is selected. This guarantees data integrity: if any indicator-period combination fails, the *whole* import is rolled back. You won't end up with half-loaded data.
 
@@ -60,13 +68,13 @@ Click **Start fetching from DHIS2**.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 5. Watch progress
+<h2 class="step-h"><span class="step-n">5</span><span>Watch progress</span></h2>
 
 A progress indicator shows the running count of fetched indicator-period combinations.
 
 > ⚠ **Don't close the tab.** The fetch runs in your browser session.
 
-### 6. Review the summary
+<h2 class="step-h"><span class="step-n">6</span><span>Review the summary</span></h2>
 
 When the fetch finishes, click **Import Summary** to see:
 
@@ -77,11 +85,11 @@ When the fetch finishes, click **Import Summary** to see:
 
 ![h:200](../../../resources/screenshots/m9a_setup/15_import_summary.jpeg)
 
-### 7. Integrate
+<h2 class="step-h"><span class="step-n">7</span><span>Integrate</span></h2>
 
 If the summary looks correct, click **Integrate and finalize**. Wait for the integration bar to complete.
 
-### 8. Clean up
+<h2 class="step-h"><span class="step-n">8</span><span>Clean up</span></h2>
 
 Click **Remove completed upload form** to clear the interface. Your imported data stays in place — you're just hiding the form.
 

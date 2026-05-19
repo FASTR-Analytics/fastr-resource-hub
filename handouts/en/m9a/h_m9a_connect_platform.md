@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Instance Setup"
 ---
 
@@ -11,13 +12,19 @@ footer: "FASTR · Instance Setup"
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~5 min</strong></p>
 
-## What you need in hand
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">What you need in hand</p>
 
 - ☐ Your **FASTR Data Prep Checklist** (filled in — *Indicator mapping template* sheet). [Download the blank template](https://github.com/FASTR-Analytics/fastr-resource-hub/raw/main/resources/checklists/FASTR_data_prep_checklist_en.xlsx)
 - ☐ Your DHIS2 instance URL (the one your team uses, e.g., `https://hmis.yourcountry.gov`)
 - ☐ Your DHIS2 username
 - ☐ Your DHIS2 password
 - ☐ A browser open on a stable network
+
+</aside>
+<div class="p1-main">
 
 ## What's coming next
 
@@ -27,6 +34,9 @@ You'll work through four handouts in order:
 2. **Import and map indicators** — define what to track and link them to DHIS2 indicator names
 3. **Import HMIS data** — pull the actual data values
 4. **Verify and explore** — confirm everything is loaded correctly
+
+</div>
+</div>
 
 ---
 

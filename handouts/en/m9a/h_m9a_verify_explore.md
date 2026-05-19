@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Instance Setup"
 ---
 
@@ -13,41 +14,48 @@ footer: "FASTR · Instance Setup"
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~10 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've completed all four previous handouts (connect / facilities / indicators / data)
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
 Spot-check your imported data, learn how to navigate the chart explorer, and confirm everything's ready for analysis modules.
 
-## Checks
-
-### 1. View imported data as a chart
+<h2 class="step-h"><span class="step-n">1</span><span>View imported data as a chart</span></h2>
 
 On the **HMIS Data** page, your indicators appear as time series. The left panel lists every indicator you imported.
 
 ![h:200](../../../resources/screenshots/m9a_setup/16_chart_imported.jpeg)
 
-### 2. Toggle indicators on the chart
+<h2 class="step-h"><span class="step-n">2</span><span>Toggle indicators on the chart</span></h2>
 
 In the left panel, **check/uncheck** indicators to show or hide them. Useful when comparing two or three at a time without clutter.
 
-### 3. Adjust the y-axis scale
+<h2 class="step-h"><span class="step-n">3</span><span>Adjust the y-axis scale</span></h2>
 
 Use the **Scale** slider at the bottom to switch between linear and a wider Y-axis when one indicator dominates the others.
+
+</div>
+</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Spot-check a known value
+<h2 class="step-h"><span class="step-n">4</span><span>Spot-check a known value</span></h2>
 
 Pick one period (e.g., last month) and one facility you know well. Mentally compare the FASTR-reported value against what you'd expect from your DHIS2 dashboards.
 
 > If they match → you're good. If they're way off → check your indicator mapping (most common cause) before running any analyses.
 
-### 5. Review import history
+<h2 class="step-h"><span class="step-n">5</span><span>Review import history</span></h2>
 
 Click **View previous imports** to see every import that's been run — date, source, rows inserted/updated. Useful for tracking what's loaded and when.
 
@@ -74,10 +82,6 @@ You're ready to run analysis modules — data quality, service utilization, cove
 - **Chart won't load** — try a different browser; FASTR's charts use modern web features that older browsers may not handle.
 
 > 🔎 **Verify in your current UI**: chart controls and panel layout may differ from the screenshots; the flow is the same.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## What's next
 

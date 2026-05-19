@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Configuration de l'instance"
 ---
 
@@ -11,13 +12,19 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~5 min</strong></p>
 
-## Ce qu'il vous faut
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Ce qu'il vous faut</p>
 
 - ☐ Votre **Liste de vérification pour la préparation des données FASTR** (complétée — onglet *Modèle de cartographie*). [Télécharger le modèle vierge](https://github.com/FASTR-Analytics/fastr-resource-hub/raw/main/resources/checklists/FASTR_data_prep_checklist_fr.xlsx)
 - ☐ L'URL de votre instance DHIS2 (celle que votre équipe utilise, p. ex. `https://hmis.votrepays.gov`)
 - ☐ Votre nom d'utilisateur DHIS2
 - ☐ Votre mot de passe DHIS2
 - ☐ Un navigateur ouvert sur une connexion stable
+
+</aside>
+<div class="p1-main">
 
 ## La suite
 
@@ -27,6 +34,9 @@ Vous parcourrez quatre documents dans l'ordre :
 2. **Importer et mapper les indicateurs** — définir les indicateurs à suivre et les lier aux noms DHIS2
 3. **Importer les données HMIS** — récupérer les vraies valeurs
 4. **Vérifier et explorer** — confirmer que tout est correctement chargé
+
+</div>
+</div>
 
 ---
 

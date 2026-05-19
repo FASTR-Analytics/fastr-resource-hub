@@ -115,6 +115,119 @@ h1 {
   font-weight: 600;
 }
 
+/* ========================================
+   HANDOUT REDESIGN — Proposal A (structured sidebar)
+   Opt-in per handout via front-matter `class: redesign`.
+   Every rule is scoped to section.redesign, so handouts
+   without the class render exactly as before. Roll out by
+   adding the class + the page-1 wrap to each handout.
+
+   Page 1 body wraps in:
+     <div class="p1-grid">
+       <aside class="p1-sidebar">
+         <p class="sb-label">Before you start</p>
+         - ☐ …
+         <p class="sb-label">Why it matters</p>
+         …text…
+       </aside>
+       <div class="p1-main"> …What you'll do + first steps… </div>
+     </div>
+   Major steps use:
+     <h2 class="step-h"><span class="step-n">1</span><span>Heading</span></h2>
+   ======================================== */
+
+/* Clean title — drop the lime underline in the redesign */
+section.redesign h1 {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0.12em;
+}
+
+/* Page-1 two-column grid */
+section.redesign .p1-grid {
+  display: grid;
+  grid-template-columns: 52mm 1fr;
+  gap: 9mm;
+  margin-top: 6pt;
+}
+
+/* Sidebar — light filled panel with rounded corners */
+.p1-sidebar {
+  align-self: start;
+  background: var(--fastr-light-bg);
+  border-radius: 7pt;
+  padding: 14pt 15pt 16pt;
+}
+.p1-sidebar .sb-label {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fastr-green);
+  margin: 0 0 6pt 0;
+}
+.p1-sidebar * + .sb-label {
+  margin-top: 15pt;
+}
+.p1-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.p1-sidebar li {
+  font-size: 8.5pt;
+  line-height: 1.4;
+  margin-bottom: 7pt;
+  color: var(--text-dark);
+}
+.p1-sidebar p {
+  font-size: 8.5pt;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--text-medium);
+}
+
+.p1-main {
+  min-width: 0;
+}
+.p1-main > h2:first-child,
+.p1-main > .step-h:first-child {
+  margin-top: 0;
+}
+
+/* Numbered step heading — filled deep-green circle + heading text */
+section.redesign .step-h {
+  display: flex;
+  align-items: center;
+  gap: 9pt;
+  margin: 20pt 0 9pt 0;
+  padding: 0;
+  border: none;
+  color: var(--fastr-deep-green);
+  font-size: 13pt;
+  font-weight: 700;
+  line-height: 1.2;
+}
+section.redesign .step-h .step-n {
+  flex: none;
+  width: 22pt;
+  height: 22pt;
+  border-radius: 50%;
+  background: var(--fastr-deep-green);
+  color: #ffffff;
+  font-size: 10.5pt;
+  font-weight: 600;
+  line-height: 1;
+  /* line-height:1 collapses the line-box so the glyph centres on the
+     circle vertically; tabular-nums gives every digit an equal advance
+     width so a narrow "1" sits as centred as a "2" or "3" */
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 h2 {
   color: var(--fastr-dark-green);
   font-weight: 600;
@@ -146,12 +259,15 @@ ul li::marker {
 }
 
 ol li::marker {
-  color: var(--fastr-dark-green);
+  color: var(--text-dark);
   font-weight: 600;
 }
 
+/* Bold = weight only, near-black. The brand colour is reserved for
+   headings and intentional accents — colouring every bold term made
+   body copy read as a wall of teal. */
 strong {
-  color: var(--fastr-deep-green);
+  color: var(--text-dark);
   font-weight: 600;
 }
 
@@ -161,7 +277,7 @@ em {
 
 code {
   background: var(--fastr-light-bg);
-  color: var(--fastr-deep-green);
+  color: var(--fastr-navy);
   padding: 1px 6px;
   border-radius: 3px;
   font-size: 0.9em;

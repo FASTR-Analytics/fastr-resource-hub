@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Configuration de l'instance"
 ---
 
@@ -13,18 +14,22 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez lu **Avant de commencer** (vous connaissez votre URL DHIS2 + identifiants)
 - ☐ Vous savez quel niveau de votre hiérarchie DHIS2 correspond à *établissement* (souvent niveau 4 ou 5)
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
 Importer directement depuis DHIS2 la hiérarchie administrative complète de votre pays (régions → districts → établissements). Après cette étape, toute analyse pourra désagréger les résultats par région, district ou établissement.
 
-## Phases
-
-### Phase 1 — Ouvrir le flux d'importation
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir le flux d'importation</span></h2>
 
 1. Cliquez sur l'onglet **Données** dans la barre de navigation en haut.
 2. Allez dans **Structure & maps**.
@@ -33,7 +38,7 @@ Importer directement depuis DHIS2 la hiérarchie administrative complète de vot
 
 ![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
 
-### Phase 2 — Choisir « Importer depuis DHIS2 »
+<h2 class="step-h"><span class="step-n">2</span><span>Choisir « Importer depuis DHIS2 »</span></h2>
 
 Vous verrez deux options. Choisissez la **deuxième — Importer directement depuis DHIS2**. (La première sert aux téléversements manuels depuis un tableur — plus lent et plus sujet aux erreurs.)
 
@@ -41,11 +46,14 @@ Vous verrez deux options. Choisissez la **deuxième — Importer directement dep
 
 Cliquez sur **Continue**.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Phase 3 — Se connecter à DHIS2 (la première fois seulement)
+<h2 class="step-h"><span class="step-n">3</span><span>Se connecter à DHIS2 (la première fois seulement)</span></h2>
 
 La plateforme affiche maintenant un petit formulaire de connexion DHIS2. Remplissez trois champs :
 
@@ -61,7 +69,7 @@ Cliquez sur **Confirm and continue**.
 
 > Si vous avez déjà sauvegardé vos identifiants dans cette session (p. ex. lors d'une importation précédente), cette étape est automatiquement sautée.
 
-### Phase 4 — Sélectionner le niveau d'établissement
+<h2 class="step-h"><span class="step-n">4</span><span>Sélectionner le niveau d'établissement</span></h2>
 
 Sélectionnez **Établissement**. Les modules d'analyse FASTR nécessitent des données au niveau établissement — ils agrègent ensuite vers les districts et régions en interne, pas l'inverse. Sélectionner *Établissement* ramène tous les niveaux au-dessus (district, région, …) automatiquement.
 
@@ -73,7 +81,7 @@ Cliquez sur **Sauvegarder**, puis **Start import**.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Phase 5 — Confirmer et intégrer
+<h2 class="step-h"><span class="step-n">5</span><span>Confirmer et intégrer</span></h2>
 
 - Sélectionnez **Ajouter de nouveaux établissements et mettre à jour les établissements existants si nécessaire**.
 - Cliquez sur **Finaliser et intégrer**.

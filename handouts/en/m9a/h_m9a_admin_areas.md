@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Instance Setup"
 ---
 
@@ -13,18 +14,22 @@ footer: "FASTR · Instance Setup"
 
 <p class="meta-line"><strong>Instance Setup</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've read **Before you begin** (you know your DHIS2 URL + credentials)
 - ☐ You know which level in your DHIS2 hierarchy corresponds to *facility* (often level 4 or 5)
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
 Pull your country's full administrative hierarchy (regions → districts → facilities) directly from DHIS2 into FASTR. After this, every analysis can disaggregate results by region, district, or facility.
 
-## Phases
-
-### Phase 1 — Open the import flow
+<h2 class="step-h"><span class="step-n">1</span><span>Open the import flow</span></h2>
 
 1. Click the **Data** tab in the top navigation.
 2. Go to **Structure & maps**.
@@ -33,7 +38,7 @@ Pull your country's full administrative hierarchy (regions → districts → fac
 
 ![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
 
-### Phase 2 — Choose "Import from DHIS2"
+<h2 class="step-h"><span class="step-n">2</span><span>Choose "Import from DHIS2"</span></h2>
 
 You'll see two options. Pick the **second one — Import directly from DHIS2**. (The first is for manual uploads from a spreadsheet — slower and more error-prone.)
 
@@ -41,11 +46,14 @@ You'll see two options. Pick the **second one — Import directly from DHIS2**. 
 
 Click **Continue**.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Phase 3 — Connect to DHIS2 (first time only)
+<h2 class="step-h"><span class="step-n">3</span><span>Connect to DHIS2 (first time only)</span></h2>
 
 The platform now shows a small DHIS2 connection form. Fill three fields:
 
@@ -61,7 +69,7 @@ Click **Confirm and continue**.
 
 > If you've already saved credentials in this session (e.g., from a previous import), this step is skipped automatically.
 
-### Phase 4 — Select the facility level
+<h2 class="step-h"><span class="step-n">4</span><span>Select the facility level</span></h2>
 
 Select **Facility**. FASTR's analysis modules require facility-level data — they aggregate up from facilities to districts and regions internally, not the other way around. Selecting *Facility* brings all the levels above it (district, region, …) along automatically.
 
@@ -73,7 +81,7 @@ Click **Save**, then **Start import**.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Phase 5 — Confirm and integrate
+<h2 class="step-h"><span class="step-n">5</span><span>Confirm and integrate</span></h2>
 
 - Select **Add new facilities and update existing ones if needed**.
 - Click **Finalize and integrate**.

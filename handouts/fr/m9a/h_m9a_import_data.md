@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Configuration de l'instance"
 ---
 
@@ -13,33 +14,40 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~25 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Établissements importés (la page des unités administratives est verte)
 - ☐ Indicateurs importés et mappés (chaque indicateur DHIS2 a un lien vers un indicateur commun)
 - ☐ Vous avez décidé de la **plage temporelle** à importer (p. ex. 36 derniers mois — discutez avec votre équipe)
 
+</aside>
+<div class="p1-main">
+
 ## Ce que vous allez faire
 
 Récupérer les vraies valeurs de données depuis DHIS2 pour vos indicateurs et la plage choisie. C'est la plus grosse opération de l'installation — selon la taille du pays, elle peut prendre 5 à 30 minutes.
 
-## Étapes
-
-### 1. Ouvrir l'importation HMIS Data
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir l'importation HMIS Data</span></h2>
 
 Depuis la page **Données**, cliquez sur **HMIS Data**, puis **Nouvelle importation**.
 
-### 2. Choisir « Importer depuis DHIS2 »
+<h2 class="step-h"><span class="step-n">2</span><span>Choisir « Importer depuis DHIS2 »</span></h2>
 
 Même option que pour les établissements. Cliquez sur **Sauvegarder**.
 
 > Si vous avez coché **Save credentials for this session** plus tôt (dans zones administratives ou indicateurs), la plateforme saute le formulaire de connexion ici. Sinon il s'affiche maintenant — mêmes champs qu'avant.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Sélectionner les indicateurs et la plage
+<h2 class="step-h"><span class="step-n">3</span><span>Sélectionner les indicateurs et la plage</span></h2>
 
 - Cochez chaque indicateur pour lequel vous voulez des données.
 - Définissez la **plage temporelle** avec le curseur — soyez délibéré (3 ans de données mensuelles ≈ 36 périodes × N établissements, ça monte vite).
@@ -48,7 +56,7 @@ Même option que pour les établissements. Cliquez sur **Sauvegarder**.
 
 Cliquez sur **Save selection**.
 
-### 4. Configurer la gestion des erreurs
+<h2 class="step-h"><span class="step-n">4</span><span>Configurer la gestion des erreurs</span></h2>
 
 Sur l'écran de configuration d'importation, vérifiez que **Abort the entire import attempt** est sélectionné. Cela garantit l'intégrité : si une combinaison indicateur-période échoue, *toute* l'importation est annulée. Vous n'aurez pas de données partielles.
 
@@ -60,13 +68,13 @@ Cliquez sur **Start fetching from DHIS2**.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 5. Suivre la progression
+<h2 class="step-h"><span class="step-n">5</span><span>Suivre la progression</span></h2>
 
 Un indicateur de progression montre le compteur de combinaisons indicateur-période récupérées.
 
 > ⚠ **Ne fermez pas l'onglet.** La récupération tourne dans votre session navigateur.
 
-### 6. Examiner le résumé
+<h2 class="step-h"><span class="step-n">6</span><span>Examiner le résumé</span></h2>
 
 Une fois la récupération terminée, cliquez sur **Import Summary** pour voir :
 
@@ -77,11 +85,11 @@ Une fois la récupération terminée, cliquez sur **Import Summary** pour voir :
 
 ![h:200](../../../resources/screenshots/m9a_setup/15_import_summary.jpeg)
 
-### 7. Intégrer
+<h2 class="step-h"><span class="step-n">7</span><span>Intégrer</span></h2>
 
 Si le résumé semble correct, cliquez sur **Integrate and finalize**. Patientez jusqu'à la fin de la barre de progression.
 
-### 8. Nettoyer
+<h2 class="step-h"><span class="step-n">8</span><span>Nettoyer</span></h2>
 
 Cliquez sur **Remove completed upload form** pour nettoyer l'interface. Vos données importées restent en place — vous masquez juste le formulaire.
 
@@ -95,7 +103,7 @@ La page HMIS Data affiche maintenant vos indicateurs sous forme de graphique, av
 
 ## Que faire si ça ne marche pas
 
-- **« Failed: X combinations »** — généralement, une combinaison établissement-indicateur n'a pas de données dans DHIS2 pour cette période. Si quelques-unes seulement, vous pouvez ré-importer avec une sélection plus étroite. Si beaucoup, vérifiez votre mapping d'indicateurs (Phase 3 de *Importer les indicateurs*).
+- **« Failed: X combinations »** — généralement, une combinaison établissement-indicateur n'a pas de données dans DHIS2 pour cette période. Si quelques-unes seulement, vous pouvez ré-importer avec une sélection plus étroite. Si beaucoup, vérifiez votre mapping d'indicateurs (étape 3 de *Importer les indicateurs*).
 - **Le navigateur fige / onglet ne répond plus** — les gros tirages (1000+ établissements × 36 mois × 10 indicateurs) sollicitent le navigateur. Réduisez le nombre d'indicateurs ou raccourcissez la plage temporelle et tirez par lots.
 - **Le réseau coupe en plein milieu** — le réglage *abort the entire import* vous protège ici. Relancez avec la même sélection.
 

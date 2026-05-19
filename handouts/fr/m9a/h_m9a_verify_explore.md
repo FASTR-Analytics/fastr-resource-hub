@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Configuration de l'instance"
 ---
 
@@ -13,49 +14,56 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~10 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété les quatre documents précédents (connexion / établissements / indicateurs / données)
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
 Faire un contrôle ponctuel de vos données importées, apprendre à naviguer dans l'explorateur de graphiques, et confirmer que tout est prêt pour les modules d'analyse.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Vérifications
-
-### 1. Voir les données importées sous forme de graphique
+<h2 class="step-h"><span class="step-n">1</span><span>Voir les données importées sous forme de graphique</span></h2>
 
 Sur la page **HMIS Data**, vos indicateurs apparaissent en séries temporelles. Le panneau de gauche liste chaque indicateur importé.
 
 ![h:200](../../../resources/screenshots/m9a_setup/16_chart_imported.jpeg)
 
-### 2. Activer/désactiver des indicateurs sur le graphique
+<h2 class="step-h"><span class="step-n">2</span><span>Activer/désactiver des indicateurs sur le graphique</span></h2>
 
 Dans le panneau de gauche, **cochez/décochez** les indicateurs pour les afficher ou les masquer. Utile pour comparer deux ou trois indicateurs à la fois sans encombrement.
 
-### 3. Ajuster l'échelle de l'axe Y
+<h2 class="step-h"><span class="step-n">3</span><span>Ajuster l'échelle de l'axe Y</span></h2>
 
 Utilisez le curseur **Scale** en bas pour passer entre une échelle linéaire et un axe Y plus large quand un indicateur domine les autres.
+
+</div>
+</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Contrôle ponctuel d'une valeur connue
+<h2 class="step-h"><span class="step-n">4</span><span>Contrôle ponctuel d'une valeur connue</span></h2>
 
 Choisissez une période (p. ex. le mois dernier) et un établissement que vous connaissez bien. Comparez mentalement la valeur reportée par FASTR à ce que vous attendriez de vos tableaux de bord DHIS2.
 
 > Si elles correspondent → tout va bien. Si elles divergent fortement → vérifiez votre mapping d'indicateurs (cause la plus fréquente) avant de lancer une analyse.
 
-### 5. Consulter l'historique d'importation
+<h2 class="step-h"><span class="step-n">5</span><span>Consulter l'historique d'importation</span></h2>
 
 Cliquez sur **View previous imports** pour voir toutes les importations passées — date, source, nombre de lignes insérées/mises à jour. Utile pour suivre ce qui est chargé et quand.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Vérification
 
@@ -67,10 +75,6 @@ De retour sur la page **Données**, vous devriez avoir :
 
 Vous êtes prêt à lancer les modules d'analyse — qualité des données, utilisation des services, estimation de la couverture, etc.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
 ## Que faire si ça ne marche pas
 
 - **Toutes les valeurs apparaissent plates / à zéro** — la plage temporelle ne recoupe peut-être pas la période où DHIS2 a des données. Vérifiez votre plage et ré-importez.
@@ -78,10 +82,6 @@ Vous êtes prêt à lancer les modules d'analyse — qualité des données, util
 - **Le graphique ne charge pas** — essayez un autre navigateur ; les graphiques FASTR utilisent des fonctionnalités web modernes que certains anciens navigateurs ne supportent pas.
 
 > 🔎 **Vérifiez dans votre interface actuelle** : contrôles de graphique et disposition peuvent différer des captures ; le flux reste le même.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Étape suivante
 
