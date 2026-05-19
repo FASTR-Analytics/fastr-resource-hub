@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Getting Started"
 ---
 
@@ -13,26 +14,33 @@ footer: "FASTR · Getting Started"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Getting Started</strong> · <strong>~5 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've completed **Log in to the platform** (you can see the main navigation tabs)
 - ☐ You're inside your country's project
+
+<p class="sb-label">Why it matters</p>
+
+The country project gets crowded fast. A dozen people saving charts and decks into a shared space without a system means nobody can find anything later. **One folder per person** is the simplest rule that works.
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
 Create two personal folders — one in **Slide Decks**, one in **Visualizations** — to keep your work organised. Everything you save here will be tagged with your name so the team can see who built what.
 
-## Why this matters
-
-The country project gets crowded fast. A dozen people saving charts and decks into a shared space without a system means nobody can find anything later. **One folder per person** is the simplest rule that works.
-
-## Steps
+</div>
+</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Folder 1 — Slide Decks tab
+<h2 class="step-h"><span class="step-n">1</span><span>Folder in the Slide Decks tab</span></h2>
 
 1. Click the **Slide Decks** tab in the top navigation.
 2. Switch the view to **By folder** (the toggle at the top — the other option is *Simple list*). You'll only see **+ New folder** when *By folder* is selected.
@@ -41,6 +49,7 @@ The country project gets crowded fast. A dozen people saving charts and decks in
 📷 <strong>View toggle showing "By folder" selected</strong><br>
 <code>resources/screenshots/m9b/view_toggle_by_folder.png</code>
 </div>
+
 3. Click **+ New folder**.
 4. Type your name (e.g., `Aïcha N.` or `John S.`).
 5. Click **Save**.
@@ -61,7 +70,7 @@ You should see your new folder appear in the list. Click on it to open it — it
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Folder 2 — Visualizations tab
+<h2 class="step-h"><span class="step-n">2</span><span>Folder in the Visualizations tab</span></h2>
 
 Same idea, different tab — and the view toggle has four options here:
 
@@ -70,10 +79,6 @@ Same idea, different tab — and the view toggle has four options here:
 3. Click **+ New folder**.
 4. Type your name (use the **same name** as in step 1 so your work is easy to find across tabs).
 5. Click **Save**.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Checkpoint
 

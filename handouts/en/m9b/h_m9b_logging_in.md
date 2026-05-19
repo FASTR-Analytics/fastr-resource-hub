@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Getting Started"
 ---
 
@@ -13,19 +14,23 @@ footer: "FASTR · Getting Started"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Getting Started</strong> · <strong>~10 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You watched the facilitator's platform demo
 - ☐ You have your **country platform URL** (your facilitator will share it)
 - ☐ You have a working email address you can check during the activity (you'll need to verify it)
 
+</aside>
+<div class="p1-main">
+
 ## What you'll do
 
 Create a FASTR account if you're new, sign in, and confirm you're in your country's project. This is your first time touching the platform — no data work yet.
 
-## Steps
-
-### 1. Open the platform URL
+<h2 class="step-h"><span class="step-n">1</span><span>Open the platform URL</span></h2>
 
 Go to your country's platform URL in a browser (your facilitator will share it; the format is usually `https://<country>.fastr-analytics.org`).
 
@@ -33,28 +38,27 @@ You should land on a login screen.
 
 ![h:180](../../../resources/screenshots/01_login_page.png)
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 2. Sign up or sign in
+<h2 class="step-h"><span class="step-n">2</span><span>Sign up or sign in</span></h2>
 
 - If this is your **first time**: click **Sign up**, enter your email + a password, and create the account.
 - If you already have an account: click **Sign in** and enter your credentials.
 
 ![h:180](../../../resources/screenshots/02_sign_up.png)
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### 3. Verify your email
+<h2 class="step-h"><span class="step-n">3</span><span>Verify your email</span></h2>
 
 Check your inbox for a verification email from FASTR. Click the link in it to confirm your account.
 
 > If you don't see it within 2 minutes, check your spam folder.
 
-### 4. Sign in
+<h2 class="step-h"><span class="step-n">4</span><span>Sign in</span></h2>
 
 Go back to the platform and sign in with your verified email + password.
 
@@ -62,7 +66,7 @@ Go back to the platform and sign in with your verified email + password.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 5. Find your project
+<h2 class="step-h"><span class="step-n">5</span><span>Find your project</span></h2>
 
 After login, you land on the **Projects** tab. You'll see the projects you have access to:
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Premiers pas"
 ---
 
@@ -13,26 +14,33 @@ footer: "FASTR · Premiers pas"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Premiers pas</strong> · <strong>~5 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété **Connexion à la plateforme** (vous voyez les onglets de navigation principaux)
 - ☐ Vous êtes dans le projet de votre pays
+
+<p class="sb-label">Pourquoi c'est important</p>
+
+Le projet pays se remplit vite. Une dizaine de personnes qui sauvegardent graphiques et présentations dans un espace partagé sans système signifie que personne ne retrouve rien plus tard. **Un dossier par personne** est la règle la plus simple qui fonctionne.
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
 Créer deux dossiers personnels — un dans **Présentations**, un dans **Visualisations** — pour garder votre travail organisé. Tout ce que vous y enregistrerez sera étiqueté avec votre nom pour que l'équipe voie qui a fait quoi.
 
-## Pourquoi c'est important
-
-Le projet pays se remplit vite. Une dizaine de personnes qui sauvegardent graphiques et présentations dans un espace partagé sans système signifie que personne ne retrouve rien plus tard. **Un dossier par personne** est la règle la plus simple qui fonctionne.
-
-## Étapes
+</div>
+</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Dossier 1 — Onglet Présentations
+<h2 class="step-h"><span class="step-n">1</span><span>Dossier dans l'onglet Présentations</span></h2>
 
 1. Cliquez sur l'onglet **Présentations** dans la navigation en haut.
 2. Basculez l'affichage sur **Par dossier** (la bascule en haut — l'autre option est *Liste simple*). **+ Nouveau dossier** n'apparaît qu'en vue *Par dossier*.
@@ -41,6 +49,7 @@ Le projet pays se remplit vite. Une dizaine de personnes qui sauvegardent graphi
 📷 <strong>Bascule d'affichage avec « Par dossier » sélectionné</strong><br>
 <code>resources/screenshots/m9b/view_toggle_by_folder.png</code>
 </div>
+
 3. Cliquez sur **+ Nouveau dossier**.
 4. Tapez votre nom (p. ex. `Aïcha N.` ou `Jean S.`).
 5. Cliquez sur **Enregistrer**.
@@ -61,7 +70,7 @@ Vous devriez voir votre nouveau dossier apparaître dans la liste. Cliquez dessu
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Dossier 2 — Onglet Visualisations
+<h2 class="step-h"><span class="step-n">2</span><span>Dossier dans l'onglet Visualisations</span></h2>
 
 Même idée, onglet différent — et la bascule d'affichage a quatre options ici :
 
@@ -70,10 +79,6 @@ Même idée, onglet différent — et la bascule d'affichage a quatre options ic
 3. Cliquez sur **+ Nouveau dossier**.
 4. Tapez votre nom (utilisez le **même nom** que dans l'étape 1 pour que votre travail soit facile à retrouver entre onglets).
 5. Cliquez sur **Enregistrer**.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Vérification
 
@@ -90,10 +95,6 @@ Les deux dossiers sont vides. C'est normal — les prochaines activités les rem
 
 - Évitez les noms génériques comme « mon dossier » ou « test » — vos collègues de l'équipe pays créeront aussi des dossiers, et « test » entrera en conflit avec celui des autres.
 - Les accents et espaces sont autorisés dans les noms de dossier.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Que faire si ça ne marche pas
 
