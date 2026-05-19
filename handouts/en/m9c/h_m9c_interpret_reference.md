@@ -61,5 +61,3 @@ Open the slide deck or report you've been working on with the AI Assistant. With
 ## What's next
 
 You'll build your own visualization next — first manually, then with the AI Assistant. Both end with this same six-step framework to interpret what you produced.
-
-> 🔎 **Verify in your current UI**: chart types and labels may differ slightly from screenshots elsewhere in this series. The framework above applies to any chart.

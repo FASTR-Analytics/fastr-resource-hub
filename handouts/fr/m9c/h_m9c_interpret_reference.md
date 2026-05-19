@@ -61,5 +61,3 @@ Ouvrez la présentation ou le rapport que vous avez construit avec l'Assistant I
 ## Étape suivante
 
 Vous allez maintenant construire votre propre visualisation — d'abord manuellement, puis avec l'Assistant IA. Les deux approches se terminent par le même cadre d'interprétation en six étapes que vous venez d'apprendre.
-
-> 🔎 **Vérifiez dans votre interface actuelle** : les types de graphiques et libellés peuvent légèrement différer des captures ailleurs dans cette série. Le cadre ci-dessus s'applique à tout graphique.
