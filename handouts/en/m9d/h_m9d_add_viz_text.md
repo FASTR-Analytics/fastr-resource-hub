@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Slide Decks"
 ---
 
@@ -13,19 +14,25 @@ footer: "FASTR · Slide Decks"
 
 <p class="meta-line"><strong>Reference</strong> · <strong>Slide Decks</strong> · <strong>~5 min</strong></p>
 
-## What this handout is
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-A short reference for the **layout of a content slide** — how to add a chart on one side and interpretation text on the other. Use this with the next two activities (adding a visualisation manually, or via the AI Assistant).
+<p class="sb-label">What this handout is</p>
+
+A short reference for the **layout of a content slide** — a chart on one side, interpretation text on the other. Use it alongside the next two activities (adding a visualisation manually, or via the AI Assistant).
+
+</aside>
+<div class="p1-main">
 
 ## The three building blocks
 
-### 1. Add a visualisation
+<h2 class="step-h"><span class="step-n">1</span><span>Add a visualisation</span></h2>
 
 In the slide editor, choose **Block** → **Visualisation** → **Select visualisation** → browse your saved charts → click **Select**.
 
 The chart appears on the slide. By default it takes the full slide width.
 
-### 2. Add text next to it
+<h2 class="step-h"><span class="step-n">2</span><span>Add text next to it</span></h2>
 
 Right-click in the slide preview → **Add → Col to right** → click the new text area and start typing.
 
@@ -36,9 +43,16 @@ Right-click in the slide preview → **Add → Col to right** → click the new 
 <code>resources/screenshots/m9d/col_to_right_menu.png</code>
 </div>
 
-### 3. Edit slide details and save
+<h2 class="step-h"><span class="step-n">3</span><span>Edit slide details and save</span></h2>
 
 Switch to the **Slide** tab (in the editor panel) → edit the slide title, subtitle, and date → click **Save**.
+
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Layout tips
 

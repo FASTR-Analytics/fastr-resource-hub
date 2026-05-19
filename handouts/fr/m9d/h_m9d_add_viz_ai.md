@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Présentations"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Présentations"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez créé votre présentation et ajouté une visualisation manuellement (voir activités précédentes)
 - ☐ Vous avez au moins une visualisation enregistrée dans l'onglet **Visualisations**
 - ☐ Le panneau Assistant IA est ouvert
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
@@ -40,6 +47,9 @@ L'IA devrait trouver votre visualisation enregistrée et montrer un aperçu dans
 <code>resources/screenshots/m9d/ai_add_to_deck.png</code>
 </div>
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
@@ -52,10 +62,6 @@ Faites-le maintenant avec l'une de **vos** visualisations :
 2. Quand l'aperçu apparaît, cliquez sur **Ajouter à la présentation**.
 3. Choisissez votre présentation et la diapositive cible.
 4. Enregistrez.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Vérification
 

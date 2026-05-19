@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Présentations"
 ---
 
@@ -13,23 +14,27 @@ footer: "FASTR · Présentations"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~10 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous êtes connecté au projet de votre pays sur la plateforme FASTR
 - ☐ Vous avez créé votre dossier personnel dans l'onglet **Présentations** (voir *Créer votre dossier personnel*)
 - ☐ Vous avez au moins une visualisation enregistrée que vous souhaitez utiliser (voir *Créer des visualisations*)
 
+</aside>
+<div class="p1-main">
+
 ## Ce que vous allez faire
 
 Créer votre première présentation et ajouter une diapositive de contenu. C'est le conteneur — les prochaines activités la rempliront de graphiques et d'interprétation.
 
-## Étapes
-
-### 1. Ouvrez votre dossier
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez votre dossier</span></h2>
 
 Allez dans l'onglet **Présentations** et cliquez dans votre dossier personnel.
 
-### 2. Créez la présentation
+<h2 class="step-h"><span class="step-n">2</span><span>Créez la présentation</span></h2>
 
 Cliquez sur **+ Créer une présentation** en haut du dossier. Donnez-lui un nom (p. ex. *Revue T1 2026* ou votre sujet), puis cliquez sur **Enregistrer**.
 
@@ -38,11 +43,14 @@ Cliquez sur **+ Créer une présentation** en haut du dossier. Donnez-lui un nom
 <code>resources/screenshots/m9d/create_deck_button.png</code>
 </div>
 
-### 3. Ajoutez votre première diapositive
+<h2 class="step-h"><span class="step-n">3</span><span>Ajoutez votre première diapositive</span></h2>
 
 Cliquez sur **Ajouter une diapositive** et choisissez **Diapositive de contenu** parmi les types proposés.
 
 Vous devriez voir une diapositive de contenu vide prête à recevoir une visualisation et du texte. Les prochaines activités la rempliront.
+
+</div>
+</div>
 
 ---
 

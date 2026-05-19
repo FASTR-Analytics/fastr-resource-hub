@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Slide Decks"
 ---
 
@@ -13,12 +14,18 @@ footer: "FASTR · Slide Decks"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've created your slide deck (see *Create your first slide deck*)
 - ☐ You have a saved visualisation you want to include
 - ☐ You've read *Add a visualisation + interpretation text* (the reference)
 - ☐ You're in the **Slide Decks** tab
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
@@ -38,6 +45,13 @@ As a group, walk through the same steps using a different visualisation:
 
 Pause here for questions before moving on.
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## You do — on your own
 
 Now do it in **your own** slide deck:
@@ -46,10 +60,6 @@ Now do it in **your own** slide deck:
 2. Click into the empty content slide.
 3. Add a visualisation **you** created (see *Creating visualisations* if you don't have one yet).
 4. Save.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Checkpoint
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Présentations"
 ---
 
@@ -13,35 +14,44 @@ footer: "FASTR · Présentations"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Votre présentation a au moins deux diapositives avec visualisations et texte d'interprétation
 - ☐ La présentation est enregistrée
 - ☐ Le facilitateur a fait la démo *Visite de l'éditeur* (vous savez où sont le séparateur de redimensionnement et les onglets Titre/Contenu)
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-L'IA génère le contenu, mais **la mise en page nécessite souvent des ajustements** : le texte peut paraître à l'étroit, un graphique peut avoir besoin de plus d'espace, le titre peut ne pas correspondre aux données. Une revue de deux minutes par diapositive fait la différence entre quelque chose d'utilisable et quelque chose de soigné.
+L'IA génère le contenu, mais **la mise en page nécessite souvent des ajustements** — texte à l'étroit, graphique à agrandir, titre qui ne colle pas aux données. Une revue de deux minutes par diapositive fait la différence entre utilisable et soigné.
+
+</aside>
+<div class="p1-main">
 
 ## Les quatre passes
 
 Parcourez chaque diapositive de votre présentation et faites ces quatre passes :
 
-### 1. Vérifiez l'exactitude
+<h2 class="step-h"><span class="step-n">1</span><span>Vérifiez l'exactitude</span></h2>
 
 Lisez chaque diapositive comme si vous n'aviez jamais vu l'analyse. Le titre correspond-il à ce que montre le graphique ? Le texte d'interprétation est-il correct ? Marquez les diapositives qui nécessitent une réécriture par l'IA.
 
-### 2. Redimensionnez les zones de texte
+<h2 class="step-h"><span class="step-n">2</span><span>Redimensionnez les zones de texte</span></h2>
 
 Vérifiez que le texte d'interprétation est entièrement visible. Faites glisser le séparateur vertical entre le graphique et le texte pour donner plus de place au texte s'il déborde.
 
-### 3. Redimensionnez et repositionnez les visualisations
+<h2 class="step-h"><span class="step-n">3</span><span>Redimensionnez et repositionnez les visualisations</span></h2>
 
 Vérifiez que chaque graphique est **clair**, **bien proportionné** et correctement aligné. Si un graphique paraît petit, faites glisser le séparateur dans l'autre sens (plus de graphique, moins de texte).
 
-### 4. Ajustez la mise en page
+<h2 class="step-h"><span class="step-n">4</span><span>Ajustez la mise en page</span></h2>
 
 Affinez : sauts de ligne, alignement, date et pied de page. Arrêtez-vous quand chaque diapositive pourrait être présentée à un Directeur sans vous gêner.
+
+</div>
+</div>
 
 ---
 

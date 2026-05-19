@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Présentations"
 ---
 
@@ -13,19 +14,25 @@ footer: "FASTR · Présentations"
 
 <p class="meta-line"><strong>Référence</strong> · <strong>Présentations</strong> · <strong>~5 min</strong></p>
 
-## À quoi sert ce document
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-Un guide bref sur la **mise en page d'une diapositive de contenu** — comment placer un graphique d'un côté et un texte d'interprétation de l'autre. Utilisez-le avec les deux activités suivantes (ajouter une visualisation manuellement ou via l'Assistant IA).
+<p class="sb-label">À quoi sert ce document</p>
+
+Un guide bref sur la **mise en page d'une diapositive de contenu** — un graphique d'un côté, un texte d'interprétation de l'autre. Utilisez-le avec les deux activités suivantes (ajouter une visualisation manuellement ou via l'Assistant IA).
+
+</aside>
+<div class="p1-main">
 
 ## Les trois éléments
 
-### 1. Ajouter une visualisation
+<h2 class="step-h"><span class="step-n">1</span><span>Ajouter une visualisation</span></h2>
 
 Dans l'éditeur de diapositive, choisissez **Bloc** → **Visualisation** → **Sélectionner une visualisation** → parcourez vos graphiques enregistrés → cliquez sur **Sélectionner**.
 
 Le graphique apparaît sur la diapositive. Par défaut, il occupe toute la largeur.
 
-### 2. Ajouter du texte à côté
+<h2 class="step-h"><span class="step-n">2</span><span>Ajouter du texte à côté</span></h2>
 
 Clic droit dans l'aperçu de la diapositive → **Ajouter → Col à droite** → cliquez dans la nouvelle zone de texte et tapez.
 
@@ -36,9 +43,12 @@ Clic droit dans l'aperçu de la diapositive → **Ajouter → Col à droite** �
 <code>resources/screenshots/m9d/col_to_right_menu.png</code>
 </div>
 
-### 3. Éditer les détails et enregistrer
+<h2 class="step-h"><span class="step-n">3</span><span>Éditer les détails et enregistrer</span></h2>
 
 Allez dans l'onglet **Diapositive** (dans le panneau de l'éditeur) → éditez le titre, le sous-titre et la date → cliquez sur **Enregistrer**.
+
+</div>
+</div>
 
 ---
 

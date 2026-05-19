@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Slide Decks"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Slide Decks"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've created your slide deck and added a visualisation manually (see prior activities)
 - ☐ You have at least one saved visualisation in the **Visualisations** tab
 - ☐ The AI Assistant panel is open
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
@@ -40,6 +47,13 @@ The AI should find your saved visualisation and show a preview in the chat. Belo
 <code>resources/screenshots/m9d/ai_add_to_deck.png</code>
 </div>
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## You do — on your own
 
 Now do the same with one of **your** visualisations:
@@ -48,10 +62,6 @@ Now do the same with one of **your** visualisations:
 2. When the preview appears, click **Add to slide deck**.
 3. Pick your deck and the slide you want it on.
 4. Save.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Checkpoint
 

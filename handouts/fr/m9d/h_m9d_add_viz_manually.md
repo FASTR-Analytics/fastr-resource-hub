@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Présentations"
 ---
 
@@ -13,12 +14,18 @@ footer: "FASTR · Présentations"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez créé votre présentation (voir *Créez votre première présentation*)
 - ☐ Vous avez une visualisation enregistrée que vous souhaitez inclure
 - ☐ Vous avez lu *Ajouter une visualisation + texte d'interprétation* (la référence)
 - ☐ Vous êtes dans l'onglet **Présentations**
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
@@ -38,6 +45,13 @@ En groupe, parcourez les mêmes étapes avec une visualisation différente :
 
 Pause ici pour les questions avant de continuer.
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Vous faites — seul
 
 Faites-le maintenant dans **votre** présentation :
@@ -46,10 +60,6 @@ Faites-le maintenant dans **votre** présentation :
 2. Cliquez dans la diapositive de contenu vide.
 3. Ajoutez une visualisation que **vous** avez créée (voir *Créer des visualisations* si vous n'en avez pas).
 4. Enregistrez.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Vérification
 

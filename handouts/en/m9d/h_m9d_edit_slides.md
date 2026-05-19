@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Slide Decks"
 ---
 
@@ -13,35 +14,44 @@ footer: "FASTR · Slide Decks"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ Your slide deck has at least two slides with visualisations and interpretation text
 - ☐ The deck is saved
 - ☐ The facilitator has run through the *Editor walkthrough* demo (so you know where the resize divider and the Header/Content tabs are)
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-The AI generates the content, but the **layout often needs adjusting**: text can appear squeezed, a chart may need more room, the headline may not match the data. A two-minute review per slide is the difference between something usable and something polished.
+The AI generates the content, but the **layout often needs adjusting** — text squeezed, a chart needing room, a headline that doesn't match the data. A two-minute review per slide is the difference between usable and polished.
+
+</aside>
+<div class="p1-main">
 
 ## The four passes
 
 Work through each slide in your deck and make these four passes:
 
-### 1. Review each slide for accuracy
+<h2 class="step-h"><span class="step-n">1</span><span>Review each slide for accuracy</span></h2>
 
 Read each slide as if you'd never seen the analysis. Does the headline match what the chart shows? Is the interpretation text correct? Mark any slide that needs an AI rewrite.
 
-### 2. Resize text boxes
+<h2 class="step-h"><span class="step-n">2</span><span>Resize text boxes</span></h2>
 
 Make sure interpretation text is fully visible. Drag the vertical divider between the chart and the text to give text more room if it's running off the edge.
 
-### 3. Resize and reposition visualisations
+<h2 class="step-h"><span class="step-n">3</span><span>Resize and reposition visualisations</span></h2>
 
 Ensure each chart is **clear**, **well-balanced**, and properly aligned. If a chart looks small, drag the divider the other way (more chart, less text).
 
-### 4. Adjust layout and spacing
+<h2 class="step-h"><span class="step-n">4</span><span>Adjust layout and spacing</span></h2>
 
 Fine-tune the overall slide: line breaks, alignment, the date and footer. Stop when each slide could be in front of a Director without you cringing.
+
+</div>
+</div>
 
 ---
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Slide Decks"
 ---
 
@@ -13,23 +14,27 @@ footer: "FASTR · Slide Decks"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~10 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You're signed in to your country's project on the FASTR platform
 - ☐ You've created your personal folder in the **Slide Decks** tab (see *Create your user folder*)
 - ☐ You have at least one visualisation saved that you'd like to use (see *Creating visualisations*)
 
+</aside>
+<div class="p1-main">
+
 ## What you'll do
 
 Create your first slide deck and add a content slide. This is the container — the next activities fill it with charts and interpretation.
 
-## Steps
-
-### 1. Open your folder
+<h2 class="step-h"><span class="step-n">1</span><span>Open your folder</span></h2>
 
 Go to the **Slide Decks** tab and click into your personal folder.
 
-### 2. Create the deck
+<h2 class="step-h"><span class="step-n">2</span><span>Create the deck</span></h2>
 
 Click **+ Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 review* or your topic), then click **Save**.
 
@@ -38,11 +43,14 @@ Click **+ Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 
 <code>resources/screenshots/m9d/create_deck_button.png</code>
 </div>
 
-### 3. Add your first slide
+<h2 class="step-h"><span class="step-n">3</span><span>Add your first slide</span></h2>
 
 Click **Add slide** and pick **Content slide** from the slide-type options.
 
 You should now see an empty content slide ready for a visualisation and text. The next activities will fill it.
+
+</div>
+</div>
 
 ---
 
