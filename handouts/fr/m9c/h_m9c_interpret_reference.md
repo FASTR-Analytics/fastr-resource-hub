@@ -56,7 +56,7 @@ Différentes questions appellent différents graphiques. Deux modèles couvrent 
 
 ## Test rapide — essayez les six étapes
 
-Trouvez un graphique récent de votre pays (une capture, une diapositive, un rapport imprimé) et parcourez les étapes 1 à 6 avec un collègue. Repérez où vous ralentissez — c'est souvent là que le graphique manque une étiquette, ou que la question qu'il essaie de répondre n'est pas claire.
+Ouvrez une sortie FASTR récente — une présentation ou un rapport produit par votre pays — et choisissez-y un graphique. Parcourez les étapes 1 à 6 avec un collègue. Repérez où vous ralentissez — c'est souvent là que le graphique manque une étiquette, ou que la question qu'il essaie de répondre n'est pas claire.
 
 ## Étape suivante
 
