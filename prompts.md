@@ -316,7 +316,7 @@ Always check if the user is in editing_slide_deck mode. If the user is not in th
 STEP 1: ASK THE USER
 You should already know which country this is from the platform context. If you don't know what country this is, use ask_user_questions to ask.
 
-Use ask_user_questions to ask each of the following one at a time:
+Use ONE ask_user_questions call presenting all three questions together — do NOT split them into separate calls:
 1. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
 2. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
 3. "When was this analysis completed?" — suggest the current month and year (e.g., "April 2026") but let the user confirm or change it. Use their answer as the report generation date.
@@ -331,8 +331,8 @@ Before generating the report, check what indicators are available in the platfor
 
 Each country instance has different indicator IDs (indicator_common_id) and labels. Do NOT assume a fixed list of codes — read them from the platform.
 
-1. Review all indicator IDs and their labels available in the platform for this country
-2. For each indicator, call get_metric_data with the analysis period to verify it contains data. Keep only indicators with actual data for the analysis period
+1. Call get_available_metrics to read all indicator IDs and their labels for this country
+2. Make ONE bulk call to get_metric_data for metric m3-01-01, disaggregated by indicator_common_id, with the analysis period applied and NO indicator filter — this returns every indicator at once. Keep only indicators with non-null, non-zero data for the period; discard the rest. Do NOT loop one get_metric_data call per indicator
 3. Present the filtered list to the user (ID + label)
 4. Propose groupings based on the indicator labels. Use these as a starting guide, but adapt to what actually exists:
    - Antenatal Care: indicators related to ANC visits (e.g., anc1, anc4, anc_trimester1)
@@ -354,7 +354,7 @@ ACCURACY REQUIREMENTS:
 2. Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
 4. Do not guess at dates, time periods, or magnitudes
-5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
+5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it. Call get_methodology_docs_list once and cache the result; fetch each methodology doc with get_methodology_doc_content only once — do not re-fetch a doc you already have
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
@@ -385,8 +385,8 @@ Negative quality indicators (increase = bad, decrease = good):
 
 When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
 
-VERIFICATION - Before finalizing each slide, cross-check:
-1. All numeric values match what the visualization shows
+VERIFICATION — As you write each slide (not as a separate pass afterward), check the interpretation against the metric data already retrieved in Step 2. Do NOT call get_metric_data again to verify — reuse what is already in context. Cross-check:
+1. All numeric values match the retrieved data
 2. Time periods and indicator names are correctly referenced
 3. Described trends (increases, decreases) match the actual data direction
 4. Numbers are consistent across slides (same indicator = same values)
@@ -439,7 +439,7 @@ For each confirmed indicator group from Step 2, create three consecutive slides:
 - Slide Type B: Quarterly service volume with quarter-to-quarter % change
 - Slide Type C: Disruption analysis
 
-Before creating slides for each group, call get_metric_data to verify data is available.
+Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. That m3-01-01 data also covers Slide Types A and B; reuse it. Only fetch a metric not yet in context (e.g. the disruption metric m3-02-01 for Slide Type C).
 
 SLIDE TYPE A: Monthly Service Utilization Trends
 
@@ -609,10 +609,10 @@ REPORT STANDARDS:
 4. Word count: keep interpretation text under 60 words per slide — the span-4 column is narrow
 
 METHODOLOGY REFERENCE:
-If you need additional context on how FASTR calculates data quality metrics, use get_methodology_docs_list and get_methodology_doc_content to look up the relevant methodology documentation. Use it to write accurate summaries and interpretations for each slide.
+If you need additional context on how FASTR calculates data quality metrics, use get_methodology_docs_list and get_methodology_doc_content to look up the relevant methodology documentation. Use it to write accurate summaries and interpretations for each slide. Call get_methodology_docs_list once and cache it; fetch each methodology doc only once — do not re-fetch.
 
 DATA QUALITY METRICS:
-The data quality metrics used in this annex are listed below. For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period. Before creating each slide, call get_metric_data to verify the metric has data — if it returns empty, skip that slide and note it in the final summary.
+The data quality metrics used in this annex are listed below. For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period. Before building the annex, make ONE pass calling get_metric_data once per DQ metric below to confirm which have data — skip slides for metrics that return empty and note them in the final summary. Do NOT re-check data availability per slide afterward.
 
 - m1-01-01: Proportion of outliers [percent] — preset: outlier-table — filters: indicator_common_id, admin_area_2
 - m1-02-02: Proportion of completed records [percent] — preset: completeness-table — filters: indicator_common_id, admin_area_2. ALWAYS use completeness-table preset for this metric (do NOT use completeness-timeseries)
@@ -620,7 +620,7 @@ The data quality metrics used in this annex are listed below. For each slide, cr
 - m1-04-01: Proportion of facilities with adequate data quality [percent] — preset: dqa-score-table — filters: admin_area_2
 - m1-04-02: Average data quality score across facilities [percent] — preset: mean-dqa-table — filters: admin_area_2
 
-VERIFICATION: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
+VERIFICATION — As you write each slide, check percentages and scores against the metric data already in context. Do NOT call get_metric_data again to verify.
 
 STRUCTURE:
 
@@ -760,7 +760,7 @@ Always check if the user is in editing_slide_deck mode. If the user is not in th
 STEP 1: ASK THE USER
 You should already know which country this is from the platform context. If you don't know what country this is, use ask_user_questions to ask.
 
-Use ask_user_questions to ask each of the following one at a time:
+Use ONE ask_user_questions call presenting all four questions together — do NOT split them into separate calls:
 1. "Which subnational area should this report focus on? (e.g., a zone, state, county, or district)" — ask as a free-text question, let the user type the area name
 2. "What analysis time period should I use? (start month/year to end month/year, e.g., January 2023 to September 2025)"
 3. "What would you like as the cover subtitle?" — offer these as selectable options: "Q3 2025", "2025 Annual", "January-June 2025" (the user can also type their own)
@@ -797,8 +797,8 @@ Before generating the report, check what indicators are available in the platfor
 
 Each country instance has different indicator IDs (indicator_common_id) and labels. Do NOT assume a fixed list of codes — read them from the platform.
 
-1. Review all indicator IDs and their labels available in the platform for this country
-2. For each indicator, call get_metric_data with the analysis period to verify it contains data. Keep only indicators with actual data for the analysis period
+1. Call get_available_metrics to read all indicator IDs and their labels for this country
+2. Make ONE bulk call to get_metric_data for metric m3-01-01, disaggregated by indicator_common_id, with the analysis period applied and NO indicator filter — this returns every indicator at once. Keep only indicators with non-null, non-zero data for the period; discard the rest. Do NOT loop one get_metric_data call per indicator
 3. Present the filtered list to the user (ID + label)
 4. Propose groupings based on the indicator labels. Use these as a starting guide, but adapt to what actually exists:
    - Antenatal Care: indicators related to ANC visits (e.g., anc1, anc4, anc_trimester1)
@@ -820,7 +820,7 @@ ACCURACY REQUIREMENTS:
 2. Do not invent statistics, percentages, or specific numbers - if data is not visible, say so
 3. If you cannot verify a claim from the data, mark it with [VERIFY]
 4. Do not guess at dates, time periods, or magnitudes
-5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
+5. NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it. Call get_methodology_docs_list once and cache the result; fetch each methodology doc with get_methodology_doc_content only once — do not re-fetch a doc you already have
 
 REPORT STANDARDS:
 1. Maintain cautious, analytical language - no causal claims
@@ -851,8 +851,8 @@ Negative quality indicators (increase = bad, decrease = good):
 
 When writing headlines and interpretations, always check: does this indicator measure something we WANT more of (services) or something we want LESS of (deaths, dropouts)? Frame your language accordingly.
 
-VERIFICATION - Before finalizing each slide, cross-check:
-1. All numeric values match what the visualization shows
+VERIFICATION — As you write each slide (not as a separate pass afterward), check the interpretation against the metric data already retrieved in Step 3. Do NOT call get_metric_data again to verify — reuse what is already in context. Cross-check:
+1. All numeric values match the retrieved data
 2. Time periods and indicator names are correctly referenced
 3. Described trends (increases, decreases) match the actual data direction
 4. Numbers are consistent across slides (same indicator = same values)
@@ -905,7 +905,7 @@ For each confirmed indicator group from Step 3, create three consecutive slides:
 - Slide Type B: Quarterly service volume with quarter-to-quarter % change
 - Slide Type C: Disruption analysis
 
-Before creating slides for each group, call get_metric_data to verify data is available.
+Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. That m3-01-01 data also covers Slide Types A and B; reuse it. Only fetch a metric not yet in context (e.g. the disruption metric m3-02-01 for Slide Type C).
 
 SLIDE TYPE A: Monthly Service Utilization Trends
 
@@ -1261,7 +1261,7 @@ STEP 1: INITIAL CHECKS AND BASIC INFORMATION
 - If not, ask the user to create a new deck or open an existing one
 
 1.2 Collect basic information
-Use ask_user_questions to ask one question at a time, in this order:
+Use ONE ask_user_questions call presenting all setup questions together (the analysis period and cover subtitle below, plus the analysis-completed date from step 1.3) — do NOT ask one question at a time:
 
 Question 1: Analysis period
 - Ask: "What analysis period should I use? (start month/year to end month/year, e.g.: January 2023 to September 2025)"
@@ -1295,8 +1295,8 @@ STEP 2: INDICATOR DISCOVERY AND ORGANIZATION
 
 2.1 Query the platform
 - Call get_available_metrics to retrieve all available indicators
-- For each indicator, call get_metric_data with the analysis period to verify it contains data
-- Keep only indicators with actual data for the analysis period
+- Make ONE bulk call to get_metric_data for metric m3-01-01, disaggregated by indicator_common_id, with the analysis period applied and NO indicator filter — this returns every indicator at once
+- Keep only indicators with non-null, non-zero data for the period; discard the rest. Do NOT loop one get_metric_data call per indicator
 
 2.2 Identify available indicators
 - Read the indicator_common_id values and their labels from the platform
@@ -1353,6 +1353,7 @@ Terminology and methodology verification
 BEFORE writing any acronym expansion, technical term definition, or methodology explanation:
 - Call get_methodology_docs_list to see available documentation
 - Call get_methodology_doc_content to verify official content
+- Call get_methodology_docs_list once and cache it; fetch each methodology doc only once — do not re-fetch a doc you already have
 - If it cannot be verified → do not include it
 - NEVER guess what acronyms stand for or invent methodology descriptions
 
@@ -1426,8 +1427,8 @@ Before writing any title or interpretation, ask:
 
 PRE-FINALIZATION VERIFICATION
 
-Before finalizing each slide, cross-check:
-- ✅ All numerical values match what the visualization shows
+As you write each slide (not as a separate pass afterward), check against the metric data already in context — do NOT call get_metric_data again to verify. Cross-check:
+- ✅ All numerical values match the retrieved data
 - ✅ Time periods and indicator names are correctly referenced
 - ✅ Described trends (increases, decreases) match the actual direction of the data
 - ✅ Figures are consistent across slides (same indicator = same values)
@@ -1435,7 +1436,7 @@ Before finalizing each slide, cross-check:
 
 OVERALL WORKFLOW
 - Verify mode → editing_slide_deck
-- Collect basic info → Questions 1–2 (one at a time)
+- Collect basic info → all setup questions in ONE ask_user_questions call
 - Generate cover → STOP and wait for confirmation
 - Discover indicators → get_available_metrics + get_metric_data
 - Propose groupings → Present to user
@@ -1480,7 +1481,7 @@ Accuracy Requirements
 - Base all analysis only on data visible in the platform
 - Do not invent statistics or specific numbers — if data is not visible, say so
 - If you cannot verify a claim from the data, mark it with [VERIFY]
-- NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it
+- NEVER guess what acronyms stand for or make up methodology descriptions. Before writing any acronym expansion, technical term definition, or methodology explanation, use get_methodology_docs_list and get_methodology_doc_content to verify against the official documentation. If you cannot verify it, do not include it. Call get_methodology_docs_list once and cache it; fetch each methodology doc only once — do not re-fetch
 
 Report Standards
 - Maintain cautious, analytical language
@@ -1501,7 +1502,7 @@ Use get_available_metrics to confirm available metrics and their preset visualiz
 
 For each slide, create the visualization using from_metric with the metricId and vizPresetId specified. Use periodFilterOverride matching the main report period.
 
-Verification: Before finalizing each slide, cross-check that all percentages and scores match what the visualization shows.
+Verification: As you write each slide, check percentages and scores against the metric data already in context. Do NOT call get_metric_data again to verify.
 
 Structure: Data Quality Assessment Slides
 
@@ -1637,7 +1638,7 @@ Visualization (right side): metricId: m3-02-01 | vizPresetId: disruption-chart |
 Interpretation (left side — target 50–100 words, max 180): For EACH indicator: specific time periods of disruptions/surpluses with approximate magnitudes. Cross-indicator patterns. Overall assessment. Only describe what is actually visible in the chart.
 
 Workflow
-Step 1: Verify data availability — call get_metric_data before creating slides. For monthly: disaggregations: indicator_common_id, period_id. For quarterly: disaggregations: indicator_common_id, quarter_id.
+Step 1: Reuse the m3-01-01 service-volume data already retrieved in the bulk call in Step 2.1 — it covers the monthly and quarterly slides. Do NOT re-call get_metric_data to re-verify availability. Only call get_metric_data again for a metric not yet in context (monthly disaggregations: indicator_common_id, period_id; quarterly: indicator_common_id, quarter_id).
 Step 2: Analyze the data — identify highs/lows, calculate quarter-to-quarter % changes, note indicator relationships.
 Step 3: Create slides — use create_slide for each type (A, B, C) per indicator group. Position sequentially.
 

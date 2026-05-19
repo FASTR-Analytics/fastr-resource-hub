@@ -316,7 +316,7 @@ Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisa
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
 Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la plateforme. Si vous ne savez pas de quel pays il s'agit, utiliser ask_user_questions pour demander.
 
-Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
+Utiliser UN SEUL appel ask_user_questions présentant toutes les questions suivantes ensemble — ne PAS les séparer en appels distincts :
 1. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
 2. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
 3. « Quand cette analyse a-t-elle été finalisée ? » — suggérer le mois et l'année en cours (par exemple « avril 2026 ») mais laisser l'utilisateur confirmer ou modifier. Utiliser sa réponse comme date de génération du rapport.
@@ -331,8 +331,8 @@ Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans
 
 Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et des libellés différents. Ne PAS supposer une liste fixe de codes — les lire depuis la plateforme.
 
-1. Passer en revue tous les identifiants d'indicateurs et leurs libellés disponibles dans la plateforme pour ce pays
-2. Pour chaque indicateur, appeler get_metric_data avec la période d'analyse pour vérifier qu'il contient des données. Ne conserver que les indicateurs ayant des données réelles pour la période d'analyse
+1. Appeler get_available_metrics pour lire tous les identifiants d'indicateurs et leurs libellés pour ce pays
+2. Faire UN SEUL appel groupé à get_metric_data pour la métrique m3-01-01, désagrégée par indicator_common_id, avec la période d'analyse appliquée et SANS filtre d'indicateur — cela retourne tous les indicateurs en une fois. Ne conserver que les indicateurs ayant des données non nulles et non vides pour la période ; écarter les autres. Ne PAS faire une boucle d'un appel get_metric_data par indicateur
 3. Présenter la liste filtrée à l'utilisateur (identifiant + libellé)
 4. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
    - Soins prénatals : indicateurs liés aux visites CPN (par exemple anc1, anc4, anc_trimester1)
@@ -356,7 +356,7 @@ EXIGENCES DE PRÉCISION :
 2. Ne pas inventer de statistiques, de pourcentages ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
 4. Ne pas deviner les dates, les périodes ou les magnitudes
-5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
+5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure. Appeler get_methodology_docs_list une seule fois et mettre le résultat en cache ; récupérer chaque document méthodologique avec get_methodology_doc_content une seule fois — ne pas re-télécharger un document déjà obtenu
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
@@ -387,7 +387,7 @@ Indicateurs négatifs de qualité (augmentation = mauvais, baisse = bon) :
 
 Lors de la rédaction des titres et des interprétations, toujours vérifier : cet indicateur mesure-t-il quelque chose dont nous voulons PLUS (services) ou MOINS (décès, abandons) ? Formuler en conséquence.
 
-VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
+VÉRIFICATION — Au fur et à mesure que vous rédigez chaque diapositive (pas en passe séparée ensuite), vérifier l'interprétation par rapport aux données de métrique déjà récupérées lors de l'appel groupé. Ne PAS rappeler get_metric_data pour vérifier — réutiliser ce qui est déjà en contexte. Contre-vérifier :
 1. Toutes les valeurs numériques correspondent à ce que montre la visualisation
 2. Les périodes et les noms d'indicateurs sont correctement référencés
 3. Les tendances décrites (hausses, baisses) correspondent à la direction réelle des données
@@ -442,7 +442,7 @@ Pour chaque groupe d'indicateurs confirmé à l'Étape 2, créer trois diapositi
 - Type B : Volume trimestriel avec variation en % d'un trimestre à l'autre
 - Type C : Analyse des perturbations
 
-Avant de créer les diapositives pour chaque groupe, appeler get_metric_data pour vérifier la disponibilité des données.
+La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Ces données m3-01-01 couvrent aussi les diapositives de type A et B ; les réutiliser. N'appeler get_metric_data que pour une métrique pas encore en contexte (p. ex. la métrique de perturbation m3-02-01 pour le type C).
 
 DIAPOSITIVE TYPE A : Tendances mensuelles d'utilisation des services
 
@@ -612,10 +612,10 @@ NORMES DU RAPPORT :
 4. Nombre de mots : limiter le texte d'interprétation à 60 mots maximum par diapositive — la colonne span-4 est étroite
 
 RÉFÉRENCE MÉTHODOLOGIQUE :
-Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, utiliser get_methodology_docs_list et get_methodology_doc_content pour consulter la documentation méthodologique pertinente. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive.
+Si vous avez besoin de contexte supplémentaire sur la façon dont FASTR calcule les indicateurs de qualité des données, utiliser get_methodology_docs_list et get_methodology_doc_content pour consulter la documentation méthodologique pertinente. Utilisez-la pour rédiger des résumés et des interprétations précis pour chaque diapositive. Appeler get_methodology_docs_list une seule fois et la mettre en cache ; récupérer chaque document méthodologique une seule fois — ne pas re-télécharger.
 
 INDICATEURS DE QUALITÉ DES DONNÉES :
-Les indicateurs de qualité des données utilisés dans cette annexe sont listés ci-dessous. Pour chaque diapositive, créer la visualisation avec from_metric en utilisant le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal. Avant de créer chaque diapositive, appeler get_metric_data pour vérifier que l'indicateur contient des données — s'il est vide, ignorer cette diapositive et le signaler dans le résumé final.
+Les indicateurs de qualité des données utilisés dans cette annexe sont listés ci-dessous. Pour chaque diapositive, créer la visualisation avec from_metric en utilisant le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal. Avant de construire l'annexe, faire UNE SEULE passe en appelant get_metric_data une fois par métrique de QD ci-dessous pour confirmer lesquelles ont des données — ignorer les diapositives des métriques vides et le signaler dans le résumé final. Ne PAS re-vérifier la disponibilité des données par diapositive ensuite.
 
 - m1-01-01 : Proportion de valeurs aberrantes [pourcentage] — préréglage : outlier-table — filtres : indicator_common_id, admin_area_2
 - m1-02-02 : Proportion de rapports complétés [pourcentage] — préréglage : completeness-table — filtres : indicator_common_id, admin_area_2. TOUJOURS utiliser le préréglage completeness-table pour cet indicateur (NE PAS utiliser completeness-timeseries)
@@ -623,7 +623,7 @@ Les indicateurs de qualité des données utilisés dans cette annexe sont listé
 - m1-04-01 : Proportion d'établissements avec une qualité de données adéquate [pourcentage] — préréglage : dqa-score-table — filtres : admin_area_2
 - m1-04-02 : Score moyen de qualité des données entre les établissements [pourcentage] — préréglage : mean-dqa-table — filtres : admin_area_2
 
-VÉRIFICATION : Avant de finaliser chaque diapositive, vérifier que tous les pourcentages et scores correspondent à ce que montre la visualisation.
+VÉRIFICATION — Au fur et à mesure que vous rédigez chaque diapositive, vérifier les pourcentages et scores par rapport aux données de métrique déjà en contexte. Ne PAS rappeler get_metric_data pour vérifier.
 
 STRUCTURE :
 
@@ -763,7 +763,7 @@ Toujours vérifier si l'utilisateur est en mode editing_slide_deck. Si l'utilisa
 ÉTAPE 1 : DEMANDER À L'UTILISATEUR
 Vous devriez déjà savoir de quel pays il s'agit à partir du contexte de la plateforme. Si vous ne savez pas de quel pays il s'agit, utiliser ask_user_questions pour demander.
 
-Utiliser ask_user_questions pour poser chacune des questions suivantes une à la fois :
+Utiliser UN SEUL appel ask_user_questions présentant toutes les questions suivantes ensemble — ne PAS les séparer en appels distincts :
 1. « Sur quelle zone infranationale ce rapport doit-il se concentrer ? (par exemple zone, État, comté ou district) » — poser comme question à texte libre, laisser l'utilisateur saisir le nom de la zone
 2. « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple janvier 2023 à septembre 2025) »
 3. « Quel sous-titre souhaitez-vous pour la couverture ? » — proposer ces options sélectionnables : « T3 2025 », « Annuel 2025 », « Janvier-juin 2025 » (l'utilisateur peut aussi saisir le sien)
@@ -800,8 +800,8 @@ Avant de générer le rapport, vérifier quels indicateurs sont disponibles dans
 
 Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et des libellés différents. Ne PAS supposer une liste fixe de codes — les lire depuis la plateforme.
 
-1. Passer en revue tous les identifiants d'indicateurs et leurs libellés disponibles dans la plateforme pour ce pays
-2. Pour chaque indicateur, appeler get_metric_data avec la période d'analyse pour vérifier qu'il contient des données. Ne conserver que les indicateurs ayant des données réelles pour la période d'analyse
+1. Appeler get_available_metrics pour lire tous les identifiants d'indicateurs et leurs libellés pour ce pays
+2. Faire UN SEUL appel groupé à get_metric_data pour la métrique m3-01-01, désagrégée par indicator_common_id, avec la période d'analyse appliquée et SANS filtre d'indicateur — cela retourne tous les indicateurs en une fois. Ne conserver que les indicateurs ayant des données non nulles et non vides pour la période ; écarter les autres. Ne PAS faire une boucle d'un appel get_metric_data par indicateur
 3. Présenter la liste filtrée à l'utilisateur (identifiant + libellé)
 4. Proposer des regroupements basés sur les libellés des indicateurs. Utiliser les exemples ci-dessous comme guide, mais adapter à ce qui existe réellement :
    - Soins prénatals : indicateurs liés aux visites CPN (par exemple anc1, anc4, anc_trimester1)
@@ -823,7 +823,7 @@ EXIGENCES DE PRÉCISION :
 2. Ne pas inventer de statistiques, de pourcentages ou de chiffres précis - si les données ne sont pas visibles, le signaler
 3. Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
 4. Ne pas deviner les dates, les périodes ou les magnitudes
-5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
+5. JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant d'écrire toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure. Appeler get_methodology_docs_list une seule fois et mettre le résultat en cache ; récupérer chaque document méthodologique avec get_methodology_doc_content une seule fois — ne pas re-télécharger un document déjà obtenu
 
 NORMES DU RAPPORT :
 1. Maintenir un langage prudent et analytique - pas d'affirmations causales
@@ -854,7 +854,7 @@ Indicateurs négatifs de qualité (augmentation = mauvais, baisse = bon) :
 
 Lors de la rédaction des titres et des interprétations, toujours vérifier : cet indicateur mesure-t-il quelque chose dont nous voulons PLUS (services) ou MOINS (décès, abandons) ? Formuler en conséquence.
 
-VÉRIFICATION - Avant de finaliser chaque diapositive, vérifier :
+VÉRIFICATION — Au fur et à mesure que vous rédigez chaque diapositive (pas en passe séparée ensuite), vérifier l'interprétation par rapport aux données de métrique déjà récupérées lors de l'appel groupé. Ne PAS rappeler get_metric_data pour vérifier — réutiliser ce qui est déjà en contexte. Contre-vérifier :
 1. Toutes les valeurs numériques correspondent à ce que montre la visualisation
 2. Les périodes et les noms d'indicateurs sont correctement référencés
 3. Les tendances décrites (hausses, baisses) correspondent à la direction réelle des données
@@ -909,7 +909,7 @@ Pour chaque groupe d'indicateurs confirmé à l'Étape 3, créer trois diapositi
 - Type B : Volume trimestriel avec variation en % d'un trimestre à l'autre
 - Type C : Analyse des perturbations
 
-Avant de créer les diapositives pour chaque groupe, appeler get_metric_data pour vérifier la disponibilité des données.
+La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Ces données m3-01-01 couvrent aussi les diapositives de type A et B ; les réutiliser. N'appeler get_metric_data que pour une métrique pas encore en contexte (p. ex. la métrique de perturbation m3-02-01 pour le type C).
 
 DIAPOSITIVE TYPE A : Tendances mensuelles d'utilisation des services
 
@@ -1265,7 +1265,7 @@ CONTEXTE : Ces instructions s'appliquent à tous les pays et toutes les langues.
 - Sinon, demander à l'utilisateur de créer un nouveau slide deck ou d'en ouvrir un existant
 
 1.2 Collecter les informations de base
-Utiliser ask_user_questions pour poser une question à la fois, dans cet ordre :
+Utiliser UN SEUL appel ask_user_questions présentant toutes les questions de configuration ensemble (la période d'analyse et le sous-titre de couverture ci-dessous, plus la date d'achèvement de l'analyse de l'étape 1.3) — ne PAS poser une question à la fois :
 
 Question 1 : Période d'analyse
 - Demander : « Quelle période d'analyse dois-je utiliser ? (mois/année de début au mois/année de fin, par exemple : janvier 2023 à septembre 2025) »
@@ -1299,8 +1299,8 @@ Date :
 
 2.1 Interroger la plateforme
 - Appeler get_available_metrics pour récupérer tous les indicateurs disponibles
-- Pour chaque indicateur, appeler get_metric_data avec la période d'analyse pour vérifier qu'il contient des données
-- Ne conserver que les indicateurs ayant des données réelles pour la période d'analyse
+- Faire UN SEUL appel groupé à get_metric_data pour la métrique m3-01-01, désagrégée par indicator_common_id, avec la période d'analyse appliquée et SANS filtre d'indicateur — cela retourne tous les indicateurs en une fois
+- Ne conserver que les indicateurs ayant des données non nulles et non vides pour la période ; écarter les autres. Ne PAS faire une boucle d'un appel get_metric_data par indicateur
 
 2.2 Identifier les indicateurs disponibles
 - Lire les valeurs indicator_common_id et leurs libellés depuis la plateforme
@@ -1357,6 +1357,7 @@ Vérification de la terminologie et de la méthodologie
 AVANT de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique :
 - Appeler get_methodology_docs_list pour consulter la documentation disponible
 - Appeler get_methodology_doc_content pour vérifier le contenu officiel
+- Appeler get_methodology_docs_list une seule fois et la mettre en cache ; récupérer chaque document méthodologique une seule fois — ne pas re-télécharger un document déjà obtenu
 - Si cela ne peut être vérifié → ne pas l'inclure
 - JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie
 
@@ -1430,7 +1431,7 @@ Avant de rédiger tout titre ou interprétation, se demander :
 
 VÉRIFICATION AVANT FINALISATION
 
-Avant de finaliser chaque diapositive, contre-vérifier :
+Au fur et à mesure que vous rédigez chaque diapositive (pas en passe séparée ensuite), vérifier par rapport aux données de métrique déjà en contexte — ne PAS rappeler get_metric_data pour vérifier. Contre-vérifier :
 - ✅ Toutes les valeurs numériques correspondent à ce que la visualisation montre
 - ✅ Les périodes et noms d'indicateurs sont correctement référencés
 - ✅ Les tendances décrites (augmentations, diminutions) correspondent à la direction réelle des données
@@ -1439,7 +1440,7 @@ Avant de finaliser chaque diapositive, contre-vérifier :
 
 DÉROULEMENT GÉNÉRAL
 - Vérifier le mode → editing_slide_deck
-- Collecter les informations de base → Questions 1–2 (une à la fois)
+- Collecter les informations de base → toutes les questions de configuration en UN SEUL appel ask_user_questions
 - Générer la couverture → S'ARRÊTER et attendre la confirmation
 - Découvrir les indicateurs → get_available_metrics + get_metric_data
 - Proposer les regroupements → Présenter à l'utilisateur
@@ -1484,7 +1485,7 @@ Exigences de précision
 - Baser toute l'analyse uniquement sur les données visibles dans la plateforme
 - Ne pas inventer de statistiques ou de chiffres précis — si les données ne sont pas visibles, le signaler
 - Si une affirmation ne peut être vérifiée à partir des données, la marquer avec [VÉRIFIER]
-- JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure
+- JAMAIS deviner ce que signifient les acronymes ni inventer des descriptions de méthodologie. Avant de rédiger toute expansion d'acronyme, définition de terme technique ou explication méthodologique, utiliser get_methodology_docs_list et get_methodology_doc_content pour vérifier dans la documentation officielle. Si vous ne pouvez pas le vérifier, ne pas l'inclure. Appeler get_methodology_docs_list une seule fois et la mettre en cache ; récupérer chaque document méthodologique une seule fois — ne pas re-télécharger
 
 Normes du rapport
 - Maintenir un langage prudent et analytique
@@ -1505,7 +1506,7 @@ Utiliser get_available_metrics pour confirmer les métriques disponibles et leur
 
 Pour chaque diapositive, créer la visualisation en utilisant from_metric avec le metricId et vizPresetId spécifiés. Utiliser periodFilterOverride correspondant à la période du rapport principal.
 
-Vérification : Avant de finaliser chaque diapositive, contre-vérifier que tous les pourcentages et scores correspondent à ce que la visualisation montre.
+Vérification : Au fur et à mesure que vous rédigez chaque diapositive, vérifier les pourcentages et scores par rapport aux données de métrique déjà en contexte. Ne PAS rappeler get_metric_data pour vérifier.
 
 Structure : Diapositives d'évaluation de la qualité des données
 
@@ -1641,7 +1642,7 @@ Visualisation (côté droit) : metricId : m3-02-01 | vizPresetId : disruption-ch
 Interprétation (côté gauche — cible 50–100 mots, max 180) : Pour CHAQUE indicateur : périodes spécifiques de perturbations/excédents avec magnitudes approximatives. Tendances inter-indicateurs. Évaluation globale. Ne décrire que ce qui est réellement visible dans le graphique.
 
 Déroulement
-Étape 1 : Vérifier la disponibilité des données — appeler get_metric_data avant de créer les diapositives. Pour le mensuel : disaggregations : indicator_common_id, period_id. Pour le trimestriel : disaggregations : indicator_common_id, quarter_id.
+Étape 1 : Réutiliser les données de volumes de services m3-01-01 déjà récupérées par l'appel groupé à l'étape 2.1 — elles couvrent les diapositives mensuelles et trimestrielles. Ne PAS rappeler get_metric_data pour re-vérifier la disponibilité. N'appeler get_metric_data que pour une métrique pas encore en contexte (mensuel : indicator_common_id, period_id ; trimestriel : indicator_common_id, quarter_id).
 Étape 2 : Analyser les données — identifier les hauts/bas, calculer les variations en % d'un trimestre à l'autre, noter les relations entre indicateurs.
 Étape 3 : Créer les diapositives — utiliser create_slide pour chaque type (A, B, C) par groupe d'indicateurs. Positionner de manière séquentielle.
 
