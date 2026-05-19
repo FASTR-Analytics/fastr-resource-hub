@@ -82,5 +82,3 @@ Quick scan before you call it done:
 ## What you should leave with
 
 A draft you would be comfortable putting your name on. **If you wouldn't put your name on it, it's not done.**
-
-> 🔎 **Verify in your current UI**: the FASTR AI Assistant panel layout may differ. The five-step structure — mark, sort, verify high, verify medium with AI, final scan — works in any tool.

@@ -82,5 +82,3 @@ Scan rapide avant de considérer que c'est fini :
 ## Ce avec quoi vous devriez repartir
 
 Un brouillon que vous seriez à l'aise de signer de votre nom. **Si vous ne le signeriez pas, c'est qu'il n'est pas fini.**
-
-> 🔎 **Vérifiez dans votre interface actuelle** : la disposition du panneau Assistant IA dans FASTR peut différer. La structure en cinq étapes — marquer, trier, vérifier élevé, vérifier moyen avec l'IA, scan final — fonctionne dans n'importe quel outil.
