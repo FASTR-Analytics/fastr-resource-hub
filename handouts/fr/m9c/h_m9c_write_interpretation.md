@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez un graphique dans votre dossier (construit manuellement ou via l'IA)
 - ☐ Vous avez le document de référence *Lire une viz* à côté de vous — le cadre en six étapes
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Un graphique seul n'est qu'une image. Le **texte d'interprétation** transforme l'image en quelque chose sur quoi un décideur peut agir. Ce document vous guide pour écrire ce texte — en utilisant le cadre en six étapes que vous venez d'apprendre.
+Un graphique seul n'est qu'une image. Le **texte d'interprétation** le transforme en quelque chose sur quoi un décideur peut agir.
+
+</aside>
+<div class="p1-main">
 
 ## La structure
 
@@ -38,29 +45,30 @@ Pour chaque graphique placé sur une diapositive, votre interprétation comporte
 >
 > **Ce que cela signifie :** Une baisse de 12 % est suffisamment importante pour être programmatique, pas un artefact de qualité des données. Les trois districts moteurs nécessitent un suivi — visites de supervision ciblées, plus un contrôle des scores de qualité des données de ces établissements.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Étapes
-
-### 1. Parcourir les six étapes avec un collègue
+<h2 class="step-h"><span class="step-n">1</span><span>Parcourir les six étapes avec un collègue</span></h2>
 
 Avant d'écrire quoi que ce soit, parcourez le graphique avec un collègue en utilisant le cadre *Lire une viz* : indicateur, niveau et période, ce qui est comparé, valeurs, ce qui ressort, et alors.
 
-### 2. Écrire le titre
+<h2 class="step-h"><span class="step-n">2</span><span>Écrire le titre</span></h2>
 
 Commencez par le **message**, pas une description. Si un directeur lisait seulement le titre, comprendrait-il le constat ?
 
-### 3. Écrire « ce que vous voyez »
+<h2 class="step-h"><span class="step-n">3</span><span>Écrire « ce que vous voyez »</span></h2>
 
 Décrivez le graphique en 1 à 3 phrases. Chiffres, tendances, comparaisons. **Pas encore d'interprétation** — juste les faits visibles sur le graphique.
 
-### 4. Écrire « ce que cela signifie »
+<h2 class="step-h"><span class="step-n">4</span><span>Écrire « ce que cela signifie »</span></h2>
 
 Le « et alors ». **Quelle action cela appellerait-il ?** Soyez précis. *« Visites de supervision dans 3 districts »* — pas *« améliorer la performance »*.
 
-### 5. Ajouter à votre diapositive
+<h2 class="step-h"><span class="step-n">5</span><span>Ajouter à votre diapositive</span></h2>
 
 Dans l'onglet Présentations, ouvrez votre présentation, ajoutez le graphique, collez votre texte à côté.
 

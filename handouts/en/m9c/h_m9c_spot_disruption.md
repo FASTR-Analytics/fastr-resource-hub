@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualizations & Interpretation"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Visualizations & Interpretation</strong> · <strong>~25 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've completed the previous 5 handouts (you know how to build, interpret, and AI-assist)
 - ☐ Your country team has an indicator in mind — one that someone has flagged a concern about
 - ☐ You're in the **Visualizations** tab, with your country's data loaded
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
@@ -35,6 +42,9 @@ Pick **one indicator** that matters for your country — ANC1, Penta3, instituti
 | 4. Read the values | Where do you see red? Where do you see green? |
 | 5. What stands out? | Sustained drop? One-month spike? Geographic pattern? |
 | 6. So what? | What does it mean? What would you do? |
+
+</div>
+</div>
 
 ---
 

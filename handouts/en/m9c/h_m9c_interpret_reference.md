@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualizations & Interpretation"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="meta-line"><strong>Reference</strong> · <strong>Visualizations & Interpretation</strong> · <strong>~10 min</strong></p>
 
-## What this handout is
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-A short reference you'll use over and over. A chart is a question rendered as a picture — before you build one, or ask the AI for one, you need to be able to *read* one. Otherwise you can't tell whether what came back actually answers your question.
+<p class="sb-label">What this handout is</p>
 
-Keep this handout next to you during the next activities.
+A short reference you'll use over and over. A chart is a question rendered as a picture — before you build one, or ask the AI for one, you need to be able to *read* one.
+
+Keep it next to you during the next activities.
+
+</aside>
+<div class="p1-main">
 
 ## The six-step framework
 
@@ -33,6 +40,9 @@ Use this every time you open a chart, whether you built it or someone else did:
 | **6. So what?** | What does this mean for service delivery? What action would it prompt? |
 
 > **Tip:** Always check the legend, axis labels, and any footnotes *before* you start interpreting. Misreading the y-axis is the single most common mistake.
+
+</div>
+</div>
 
 ---
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Référence</strong> · <strong>Visualisations et interprétation</strong> · <strong>~10 min</strong></p>
 
-## À quoi sert ce document
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-Une référence courte que vous utiliserez à plusieurs reprises. Un graphique est une question rendue en image — avant d'en construire un, ou d'en demander un à l'IA, vous devez savoir *lire* un graphique. Sinon, vous ne saurez pas si ce que vous obtenez répond vraiment à votre question.
+<p class="sb-label">À quoi sert ce document</p>
 
-Gardez ce document près de vous pendant les activités suivantes.
+Une référence courte que vous utiliserez à plusieurs reprises. Un graphique est une question rendue en image — avant d'en construire un, ou d'en demander un à l'IA, vous devez savoir *lire* un graphique.
+
+Gardez-le près de vous pendant les activités suivantes.
+
+</aside>
+<div class="p1-main">
 
 ## Le cadre en six étapes
 
@@ -33,6 +40,9 @@ Utilisez-le chaque fois que vous ouvrez un graphique, que vous l'ayez construit 
 | **6. Et alors ?** | Qu'est-ce que cela signifie pour la prestation de services ? Quelle action cela suggère-t-il ? |
 
 > **Astuce :** Vérifiez toujours la légende, les étiquettes des axes et les notes de bas de page *avant* de commencer l'interprétation. Mal lire l'axe Y est l'erreur la plus fréquente.
+
+</div>
+</div>
 
 ---
 

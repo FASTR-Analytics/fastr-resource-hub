@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,19 +14,23 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez construit au moins un graphique manuellement (document précédent)
 - ☐ Vous êtes connecté et votre dossier est ouvert
 - ☐ Vous savez quel indicateur vous voulez visualiser (CPN1, Penta3, …)
 
+</aside>
+<div class="p1-main">
+
 ## Ce que vous allez faire
 
 Demander à l'Assistant IA de créer le même type de graphique que vous venez de construire manuellement — mais en tapant une requête en langage courant. Même résultat final, autre chemin.
 
-## Étapes
-
-### 1. Ouvrir l'Assistant IA
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir l'Assistant IA</span></h2>
 
 Dans l'onglet **Visualisations**, ouvrez le panneau de chat IA (à droite de l'écran). Tapez une requête courte comme :
 
@@ -33,7 +38,14 @@ Dans l'onglet **Visualisations**, ouvrez le panneau de chat IA (à droite de l'�
 
 **Données ajustées** = données corrigées pour les rapports manquants (complétude) et les valeurs extrêmes (valeurs aberrantes). C'est la version plus propre des données de votre pays.
 
-### 2. Examiner ce que l'IA propose
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Examiner ce que l'IA propose</span></h2>
 
 L'IA propose un graphique avec l'indicateur, la période et le type de graphique qu'elle a déduits. **Vérifiez par rapport à ce que vous avez demandé :**
 
@@ -43,11 +55,7 @@ L'IA propose un graphique avec l'indicateur, la période et le type de graphique
 
 Si quelque chose ne va pas, **dites-le en langage simple** : *« Utilise les données brutes »* ou *« Passe en graphique en barres »*.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### 3. Itérer
+<h2 class="step-h"><span class="step-n">3</span><span>Itérer</span></h2>
 
 Ne vous attendez pas à ce que la première réponse soit parfaite. Affinez par courts allers-retours :
 
@@ -57,9 +65,13 @@ Ne vous attendez pas à ce que la première réponse soit parfaite. Affinez par 
 
 Chaque instruction est un petit pas. L'IA met à jour le graphique et vous continuez.
 
-### 4. Sauvegarder
+<h2 class="step-h"><span class="step-n">4</span><span>Sauvegarder</span></h2>
 
 Quand vous êtes satisfait, cliquez sur **Sauvegarder** et placez-le dans votre dossier. Donnez-lui un nom clair (l'IA peut en suggérer un — gardez-le ou renommez).
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Essayez avec trois indicateurs
 

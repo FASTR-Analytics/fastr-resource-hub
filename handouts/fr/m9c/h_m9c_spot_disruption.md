@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,11 +14,17 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~25 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez terminé les 5 documents précédents (vous savez construire, interpréter et utiliser l'IA)
 - ☐ Votre équipe pays a un indicateur en tête — un sur lequel quelqu'un a signalé une préoccupation
 - ☐ Vous êtes dans l'onglet **Visualisations**, avec les données de votre pays chargées
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
@@ -35,6 +42,9 @@ Choisissez **un indicateur** qui compte pour votre pays — CPN1, Penta3, accouc
 | 4. Lire les valeurs | Où voyez-vous du rouge ? Où voyez-vous du vert ? |
 | 5. Qu'est-ce qui ressort ? | Baisse soutenue ? Pic isolé ? Motif géographique ? |
 | 6. Et alors ? | Qu'est-ce que cela signifie ? Que feriez-vous ? |
+
+</div>
+</div>
 
 ---
 

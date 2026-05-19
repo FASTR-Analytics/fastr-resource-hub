@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualizations & Interpretation"
 ---
 
@@ -13,19 +14,23 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Visualizations & Interpretation</strong> · <strong>~15 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You're signed in and looking at your country's project
 - ☐ You're in the **Visualizations** tab
 - ☐ You have a folder of your own (or you can use the shared one)
 
+</aside>
+<div class="p1-main">
+
 ## What you'll do
 
 Build a simple time-series chart of one health indicator — month by month, over the last twelve months — and save it to a folder. You'll do this manually; the next activity covers the same thing using the AI Assistant.
 
-## Steps
-
-### 1. Open a new visualization
+<h2 class="step-h"><span class="step-n">1</span><span>Open a new visualization</span></h2>
 
 In the Visualizations tab, click **+ New visualization**. You'll see a setup panel on the left and an empty chart area on the right.
 
@@ -34,7 +39,14 @@ In the Visualizations tab, click **+ New visualization**. You'll see a setup pan
 <code>resources/screenshots/m9c/new_viz_button.png</code>
 </div>
 
-### 2. Pick what to show
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Pick what to show</span></h2>
 
 In the setup panel:
 
@@ -45,7 +57,7 @@ In the setup panel:
 
 The chart updates as you click.
 
-### 3. Save it
+<h2 class="step-h"><span class="step-n">3</span><span>Save it</span></h2>
 
 Click **Save**. Give the chart a clear name — something you'll recognise later: *ANC1 — monthly, last 12 months*. Put it in your folder.
 

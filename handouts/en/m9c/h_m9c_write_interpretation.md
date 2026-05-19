@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualizations & Interpretation"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Visualizations & Interpretation</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You have a chart in your folder (built manually or via the AI)
 - ☐ You have the *Reading a viz* reference handout next to you — the six-step framework
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-A chart on its own is just a picture. The **interpretation text** is what turns the picture into something a decision-maker can act on. The job of this handout is to walk you through writing that text — using the same six-step framework you just learned.
+A chart on its own is just a picture. The **interpretation text** is what turns it into something a decision-maker can act on.
+
+</aside>
+<div class="p1-main">
 
 ## The structure
 
@@ -38,29 +45,30 @@ For every chart you put on a slide, your interpretation has **three parts**:
 >
 > **What it means:** A 12% drop is large enough to be programmatic, not a data-quality artefact. The three driving districts need a follow-up — supportive supervision visits, plus a check on the data quality scores for those facilities.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Steps
-
-### 1. Walk the six steps with a teammate
+<h2 class="step-h"><span class="step-n">1</span><span>Walk the six steps with a teammate</span></h2>
 
 Before writing anything, talk through the chart with a teammate using the *Reading a viz* framework: indicator, level & period, what's being compared, values, what stands out, so what.
 
-### 2. Write the title
+<h2 class="step-h"><span class="step-n">2</span><span>Write the title</span></h2>
 
 Lead with the **message**, not a description. If a director read only the title, would they understand the finding?
 
-### 3. Write "what you see"
+<h2 class="step-h"><span class="step-n">3</span><span>Write "what you see"</span></h2>
 
 Describe the chart in 1–3 sentences. Numbers, trends, comparisons. **No interpretation yet** — just the facts visible on the chart.
 
-### 4. Write "what it means"
+<h2 class="step-h"><span class="step-n">4</span><span>Write "what it means"</span></h2>
 
 The so-what. **What action would this prompt?** Be specific. *"Supportive supervision visits in 3 districts"* — not *"improve performance"*.
 
-### 5. Add to your slide
+<h2 class="step-h"><span class="step-n">5</span><span>Add to your slide</span></h2>
 
 In the Slide Decks tab, open your deck, add the chart, paste your text alongside it.
 

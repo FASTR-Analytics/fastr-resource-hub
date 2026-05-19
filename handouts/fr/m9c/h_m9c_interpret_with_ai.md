@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,11 +14,21 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez un graphique sur une diapositive (de l'activité précédente)
 - ☐ Vous avez écrit une interprétation à la main — vous savez donc à quoi ressemble une « bonne » version
 - ☐ Vous avez le document de référence *Lire une viz* à côté de vous
+
+<p class="sb-label">Pourquoi c'est important</p>
+
+Le texte de l'IA est un **brouillon**, pas une réponse finale. **Vous êtes responsable** de ce qui se retrouve sur la diapositive.
+
+</aside>
+<div class="p1-main">
 
 ## Ce que vous allez faire
 
@@ -25,11 +36,16 @@ Utiliser l'Assistant IA pour rédiger une interprétation pour votre graphique �
 
 ## Comment ça fonctionne
 
-L'IA regarde votre graphique, lit les données sous-jacentes, et propose un texte. Le texte qu'elle génère est un **brouillon**, pas une réponse finale. **Vous êtes responsable** de ce qui se retrouve sur la diapositive.
+L'IA regarde votre graphique, lit les données sous-jacentes, et propose un texte. Elle s'occupe de **décrire** — vous vous occupez d'**expliquer** et de la vérification.
 
-## Étapes
+</div>
+</div>
 
-### 1. Demander une interprétation à l'IA
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">1</span><span>Demander une interprétation à l'IA</span></h2>
 
 Dans l'éditeur de diapositive, ouvrez le chat IA et tapez :
 
@@ -37,7 +53,7 @@ Dans l'éditeur de diapositive, ouvrez le chat IA et tapez :
 
 L'IA lit les données derrière le graphique et propose un titre + 2 à 3 phrases.
 
-### 2. Vérifier ce que l'IA a donné
+<h2 class="step-h"><span class="step-n">2</span><span>Vérifier ce que l'IA a donné</span></h2>
 
 **Lisez lentement.** Pour chaque affirmation de l'IA, demandez-vous :
 
@@ -46,7 +62,7 @@ L'IA lit les données derrière le graphique et propose un titre + 2 à 3 phrase
 - ☐ Le **« et alors » est-il réaliste** pour le contexte de votre pays ?
 - ☐ Le **titre porte-t-il le message**, ou est-ce juste une étiquette ?
 
-### 3. Affiner en langage simple
+<h2 class="step-h"><span class="step-n">3</span><span>Affiner en langage simple</span></h2>
 
 Si quelque chose est erroné ou vague, **dites-le** :
 
@@ -60,15 +76,13 @@ L'IA réécrit. Itérez jusqu'à ce que la sortie passe votre vérification.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Ajouter votre contexte local
+<h2 class="step-h"><span class="step-n">4</span><span>Ajouter votre contexte local</span></h2>
 
 L'IA ne sait pas ce qui se passe sur le terrain. Ajoutez :
 
 - **Événements locaux** (une grève, une rupture de stock, une campagne récente)
 - **Nuance programmatique** (est-ce un vrai problème ou un artefact ?)
 - **Recommandations** ancrées dans ce que votre équipe pays sait
-
-L'IA s'occupe de **décrire**. Vous vous occupez d'**expliquer**.
 
 ## Pièges à éviter
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualizations & Interpretation"
 ---
 
@@ -13,11 +14,21 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Visualizations & Interpretation</strong> · <strong>~15 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You have a chart on a slide (from the previous activity)
 - ☐ You've written one interpretation by hand — so you know what "good" looks like
 - ☐ You have the *Reading a viz* reference handout next to you
+
+<p class="sb-label">Why it matters</p>
+
+The AI's text is a **draft**, not a final answer. **You are responsible** for what gets put on the slide.
+
+</aside>
+<div class="p1-main">
 
 ## What you'll do
 
@@ -25,11 +36,16 @@ Use the AI Assistant to draft an interpretation for your chart — then verify a
 
 ## How this works
 
-The AI looks at your chart, reads the underlying data, and proposes text. The text it generates is a **draft**, not a final answer. **You are responsible** for what gets put on the slide.
+The AI looks at your chart, reads the underlying data, and proposes text. It handles the **describing** — you handle the **explaining** and the verification.
 
-## Steps
+</div>
+</div>
 
-### 1. Ask the AI for an interpretation
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">1</span><span>Ask the AI for an interpretation</span></h2>
 
 In the slide editor, open the AI chat and type:
 
@@ -37,7 +53,7 @@ In the slide editor, open the AI chat and type:
 
 The AI reads the data behind the chart and proposes a title + 2–3 sentences.
 
-### 2. Verify what the AI gave you
+<h2 class="step-h"><span class="step-n">2</span><span>Verify what the AI gave you</span></h2>
 
 **Read it slowly.** For every claim the AI makes, ask:
 
@@ -46,7 +62,7 @@ The AI reads the data behind the chart and proposes a title + 2–3 sentences.
 - ☐ Is the **so-what realistic** for your country context?
 - ☐ Does the **title carry the message**, or is it just a label?
 
-### 3. Refine in plain language
+<h2 class="step-h"><span class="step-n">3</span><span>Refine in plain language</span></h2>
 
 If something is wrong or vague, **say so**:
 
@@ -60,15 +76,13 @@ The AI rewrites. Iterate until the output passes your verification.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Add your local context
+<h2 class="step-h"><span class="step-n">4</span><span>Add your local context</span></h2>
 
 The AI doesn't know what's happening on the ground. Add:
 
 - **Local events** (a strike, a stockout, a recent campaign)
 - **Programmatic nuance** (is this a real problem or an artefact?)
 - **Recommendations** rooted in what your country team knows
-
-The AI handles the **describing**. You handle the **explaining**.
 
 ## Pitfalls to avoid
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Visualisations et interprétation"
 ---
 
@@ -13,19 +14,23 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous êtes connecté·e et sur le projet de votre pays
 - ☐ Vous êtes dans l'onglet **Visualisations**
 - ☐ Vous avez votre propre dossier (ou vous pouvez utiliser le dossier partagé)
 
+</aside>
+<div class="p1-main">
+
 ## Ce que vous allez faire
 
 Construire un simple graphique chronologique d'un indicateur de santé — mois par mois, sur les douze derniers mois — et l'enregistrer dans un dossier. Vous le ferez à la main ; l'activité suivante couvre la même chose avec l'Assistant IA.
 
-## Étapes
-
-### 1. Ouvrez une nouvelle visualisation
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez une nouvelle visualisation</span></h2>
 
 Dans l'onglet Visualisations, cliquez sur **+ Nouvelle visualisation**. Vous verrez un panneau de configuration à gauche et une zone de graphique vide à droite.
 
@@ -34,7 +39,14 @@ Dans l'onglet Visualisations, cliquez sur **+ Nouvelle visualisation**. Vous ver
 <code>resources/screenshots/m9c/new_viz_button.png</code>
 </div>
 
-### 2. Choisissez ce qu'il faut afficher
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Choisissez ce qu'il faut afficher</span></h2>
 
 Dans le panneau de configuration :
 
@@ -45,7 +57,7 @@ Dans le panneau de configuration :
 
 Le graphique se met à jour à chaque clic.
 
-### 3. Enregistrez-le
+<h2 class="step-h"><span class="step-n">3</span><span>Enregistrez-le</span></h2>
 
 Cliquez sur **Enregistrer**. Donnez au graphique un nom clair — quelque chose que vous reconnaîtrez plus tard : *CPN1 — mensuel, 12 derniers mois*. Mettez-le dans votre dossier.
 
