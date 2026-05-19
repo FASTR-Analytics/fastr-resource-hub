@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Prompting techniques"
 ---
 
@@ -13,16 +14,22 @@ footer: "FASTR · Prompting techniques"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting techniques</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've worked through **Build a clear prompt**
 - ☐ The AI Assistant panel is open in your country's project
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-Small changes to a prompt produce noticeably different outputs. This exercise builds intuition for that, in three steps: start with a base prompt, change one variable, then ask a follow-up.
+Small changes to a prompt produce noticeably different outputs. This exercise builds intuition for that — start with a base prompt, change one variable, then ask a follow-up.
 
-## Step 1 — Try this base prompt
+</aside>
+<div class="p1-main">
+
+<h2 class="step-h"><span class="step-n">1</span><span>Try this base prompt</span></h2>
 
 Type the prompt below into the AI Assistant. You can paste it exactly:
 
@@ -34,7 +41,7 @@ It works because it names three things explicitly:
 - **Where** — by region
 - **When** — last 12 months
 
-## Step 2 — Change one thing
+<h2 class="step-h"><span class="step-n">2</span><span>Change one thing</span></h2>
 
 Now run the prompt again, but change **one** element. Pick one variation:
 
@@ -44,11 +51,14 @@ Now run the prompt again, but change **one** element. Pick one variation:
 
 Notice how changing a single word changes the output.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Step 3 — Ask a follow-up
+<h2 class="step-h"><span class="step-n">3</span><span>Ask a follow-up</span></h2>
 
 Pick one of these follow-ups (or write your own). The conversation can keep going:
 

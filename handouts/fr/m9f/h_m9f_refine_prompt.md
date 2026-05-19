@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété **Construire un prompt clair**, **Explorer avec l'Assistant IA** et **Itératif vs prompt unique**
 - ☐ L'Assistant IA est ouvert dans le projet de votre pays
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Un bon prompt est rarement le premier que vous écrivez. Cet exercice vous fait passer par trois rondes sur un seul sujet — chaque ronde ajoute quelque chose de précis. À la fin, la différence entre la ronde 1 et la ronde 3 devrait être évidente.
+Un bon prompt est rarement le premier que vous écrivez. Cet exercice vous fait passer par trois rondes sur un seul sujet — chaque ronde ajoute quelque chose de précis.
+
+</aside>
+<div class="p1-main">
 
 ## Comment procéder
 
@@ -39,6 +46,9 @@ Lancez chaque ronde dans une **nouvelle** conversation IA pour voir la différen
 | **1. Commencez simple** | *Crée une diapositive sur [votre sujet].* | Qu'a inclus l'IA ? Est-ce que cela fonctionnerait dans une vraie réunion ? |
 | **2. Ajoutez du contexte** | *Crée une diapositive sur [sujet] pour une [type de réunion]. Montre [données spécifiques]. Explique quelles régions ont le plus de problèmes.* | Est-ce plus précis ? Les priorités sont-elles identifiées ? |
 | **3. Rendez-le actionnable** | *Crée une diapositive sur [sujet] pour [réunion]. Compare les zones — lesquelles ont besoin d'appui ? Suggère des raisons possibles.* | Les zones prioritaires sont-elles identifiées ? Y a-t-il des prochaines étapes ? |
+
+</div>
+</div>
 
 ---
 

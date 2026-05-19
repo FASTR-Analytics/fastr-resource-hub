@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,17 +14,23 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez un brouillon généré par l'IA dans les activités précédentes (ou fourni par le facilitateur)
 - ☐ Vous savez sur quel jeu de données ou document l'IA a travaillé
 - ☐ Vous avez ~20 minutes pour le faire correctement — ne vous précipitez pas
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-L'IA écrit avec fluidité, ce n'est pas un vérificateur de faits. Si vous insérez sa sortie dans un rapport ou une diapositive sans vérifier, vous devenez responsable de tout chiffre fabriqué ou citation inventée. Cette activité vous donne une méthode reproductible pour vérifier avant de livrer.
+L'IA écrit avec fluidité, ce n'est pas un vérificateur de faits. Insérez sa sortie sans vérifier et vous devenez responsable de tout chiffre fabriqué. Cette méthode vous donne une vérification reproductible avant de livrer.
 
-## Étape 1 — Lire une fois, marquer les affirmations (~5 min)
+</aside>
+<div class="p1-main">
+
+<h2 class="step-h"><span class="step-n">1</span><span>Lire une fois, marquer les affirmations (~5 min)</span></h2>
 
 Lisez le brouillon de l'IA lentement. Au fil de la lecture, **soulignez ou surlignez chaque affirmation factuelle** — tout ce qui pourrait être erroné :
 
@@ -34,7 +41,7 @@ Lisez le brouillon de l'IA lentement. Au fil de la lecture, **soulignez ou surli
 
 Pour le moment, ne vérifiez pas. Marquez seulement.
 
-## Étape 2 — Trier par risque (~3 min)
+<h2 class="step-h"><span class="step-n">2</span><span>Trier par risque (~3 min)</span></h2>
 
 Pour chaque affirmation marquée, attribuez un niveau de risque :
 
@@ -44,11 +51,14 @@ Pour chaque affirmation marquée, attribuez un niveau de risque :
 | **Moyen** | Un constat général lié à une source précise que vous avez chargée | Vérifier avec l'IA : demandez-lui de citer la source |
 | **Faible** | Un fait bien connu, ou soutenu par plusieurs sources fiables | Vérification ponctuelle si le temps le permet |
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Étape 3 — Vérifier les affirmations à risque élevé (~7 min)
+<h2 class="step-h"><span class="step-n">3</span><span>Vérifier les affirmations à risque élevé (~7 min)</span></h2>
 
 Choisissez les deux ou trois affirmations à risque élevé les plus importantes et vérifiez-les vous-même :
 
@@ -62,7 +72,7 @@ Choisissez les deux ou trois affirmations à risque élevé les plus importantes
 - Chiffres précis sans source — probablement fabriqués
 - Chiffres qui semblent plausibles mais que vous ne pouvez pas retracer
 
-## Étape 4 — Utiliser l'IA pour vérifier les affirmations à risque moyen (~3 min)
+<h2 class="step-h"><span class="step-n">4</span><span>Utiliser l'IA pour vérifier les affirmations à risque moyen (~3 min)</span></h2>
 
 Collez une affirmation à risque moyen dans l'Assistant IA avec ce prompt :
 
@@ -70,7 +80,7 @@ Collez une affirmation à risque moyen dans l'Assistant IA avec ce prompt :
 
 Si l'IA ne peut pas citer une source, retirez l'affirmation ou réécrivez-la.
 
-## Étape 5 — Vérification finale de cohérence (~2 min)
+<h2 class="step-h"><span class="step-n">5</span><span>Vérification finale de cohérence (~2 min)</span></h2>
 
 Scan rapide avant de considérer que c'est fini :
 

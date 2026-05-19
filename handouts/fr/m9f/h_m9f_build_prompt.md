@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous êtes connecté à la plateforme FASTR avec l'Assistant IA disponible
 - ☐ Vous avez en tête une vraie tâche d'atelier que vous feriez normalement (un graphique, un résumé, une diapositive pour une réunion)
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Un prompt clair produit une réponse utile. Un prompt vague produit une réponse générique. La différence vient de **ce que vous mettez dans le prompt** — pas de la puissance du modèle. La majeure partie de la valeur vient d'un pré-check de 30 secondes avant d'écrire.
+Un prompt clair produit une réponse utile ; un prompt vague produit une réponse générique. La différence vient de **ce que vous mettez dedans** — la majeure partie de la valeur vient d'un pré-check de 30 secondes avant d'écrire.
+
+</aside>
+<div class="p1-main">
 
 ## Quatre questions avant de taper
 
@@ -32,6 +39,13 @@ Choisissez une tâche que vous faites régulièrement. Avant de rédiger le prom
 | **2. C'est pour qui ?** Mon directeur ? Un bailleur ? Mon équipe pays ? | |
 | **3. Ça doit couvrir quoi ?** Quels indicateurs ? Quelles régions ? Quelle période ? | |
 | **4. À quoi ressemble un bon résultat ?** Saurais-je que l'IA s'est trompée ? | |
+
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Maintenant écrivez votre prompt
 

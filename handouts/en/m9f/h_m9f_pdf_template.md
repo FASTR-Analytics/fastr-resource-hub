@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Prompting techniques"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Prompting techniques"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting techniques</strong> · <strong>~10 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've worked through the earlier prompting activities
 - ☐ You have a previous report (PDF) you're satisfied with and would like to reproduce for a new period
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-Sometimes the easiest way to brief the AI is not to describe what you want — it's to **show** it. Uploading a prior report as a reference lets the AI match the structure, tone, and depth of an existing output rather than reinventing the format.
+Sometimes the easiest way to brief the AI is not to describe what you want — it's to **show** it. A prior report lets the AI match an existing structure rather than reinventing the format.
+
+</aside>
+<div class="p1-main">
 
 ## When to use this approach
 
@@ -28,23 +35,24 @@ Sometimes the easiest way to brief the AI is not to describe what you want — i
 - You want to keep a consistent format across time periods
 - You don't have a custom prompt available for this report type
 
-## Steps
-
-### 1. Upload the report to your Assets
+<h2 class="step-h"><span class="step-n">1</span><span>Upload the report to your Assets</span></h2>
 
 From the main page, go to **Assets** → **Upload assets** → select your PDF.
 
-### 2. Include the report in the AI conversation
+<h2 class="step-h"><span class="step-n">2</span><span>Include the report in the AI conversation</span></h2>
 
 Open a fresh AI conversation. Click the **three-dot menu** → **Include file** → select the report you just uploaded.
 
 The AI now has the PDF as context for everything in this conversation.
 
-### 3. Ask the AI to replicate the structure
+<h2 class="step-h"><span class="step-n">3</span><span>Ask the AI to replicate the structure</span></h2>
 
 A starter prompt:
 
 > Use this report as a template. Create a similar report covering [time period] for [country/region/scope].
+
+</div>
+</div>
 
 ---
 

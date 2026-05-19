@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,16 +14,22 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété **Construire un prompt clair**
 - ☐ Le panneau Assistant IA est ouvert dans le projet de votre pays
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-De petits changements dans un prompt produisent des sorties sensiblement différentes. Cet exercice construit cette intuition, en trois étapes : partir d'un prompt de base, changer une variable, puis poser une question de suivi.
+De petits changements dans un prompt produisent des sorties sensiblement différentes. Cet exercice construit cette intuition — partir d'un prompt de base, changer une variable, puis poser une question de suivi.
 
-## Étape 1 — Essayez ce prompt de base
+</aside>
+<div class="p1-main">
+
+<h2 class="step-h"><span class="step-n">1</span><span>Essayez ce prompt de base</span></h2>
 
 Saisissez le prompt ci-dessous dans l'Assistant IA. Vous pouvez le coller tel quel :
 
@@ -34,7 +41,7 @@ Il fonctionne parce qu'il nomme trois choses explicitement :
 - **Où** — par région
 - **Quand** — les 12 derniers mois
 
-## Étape 2 — Changez un élément
+<h2 class="step-h"><span class="step-n">2</span><span>Changez un élément</span></h2>
 
 Relancez le prompt en modifiant **un** seul élément. Choisissez une variante :
 
@@ -44,11 +51,14 @@ Relancez le prompt en modifiant **un** seul élément. Choisissez une variante :
 
 Remarquez comment changer un seul mot modifie la sortie.
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Étape 3 — Posez une question de suivi
+<h2 class="step-h"><span class="step-n">3</span><span>Posez une question de suivi</span></h2>
 
 Choisissez l'une de ces relances (ou écrivez la vôtre). La conversation peut continuer :
 

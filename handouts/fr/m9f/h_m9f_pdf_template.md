@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~10 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez parcouru les activités précédentes sur le prompting
 - ☐ Vous disposez d'un rapport précédent (PDF) qui vous satisfait et que vous aimeriez reproduire pour une nouvelle période
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Parfois, la façon la plus simple de briefer l'IA n'est pas de décrire ce que vous voulez — c'est de le **montrer**. Téléverser un rapport antérieur comme référence permet à l'IA de retrouver la structure, le ton et la profondeur d'une sortie existante au lieu de réinventer le format.
+Parfois, la façon la plus simple de briefer l'IA n'est pas de décrire ce que vous voulez — c'est de le **montrer**. Un rapport antérieur permet à l'IA de retrouver une structure existante au lieu de réinventer le format.
+
+</aside>
+<div class="p1-main">
 
 ## Quand utiliser cette approche
 
@@ -28,23 +35,24 @@ Parfois, la façon la plus simple de briefer l'IA n'est pas de décrire ce que v
 - Vous voulez garder un format cohérent dans le temps
 - Vous n'avez pas de prompt personnalisé disponible pour ce type de rapport
 
-## Étapes
-
-### 1. Téléverser le rapport dans vos Ressources
+<h2 class="step-h"><span class="step-n">1</span><span>Téléverser le rapport dans vos Ressources</span></h2>
 
 Depuis la page principale, allez dans **Ressources** → **Téléverser des ressources** → sélectionnez votre PDF.
 
-### 2. Inclure le rapport dans la conversation IA
+<h2 class="step-h"><span class="step-n">2</span><span>Inclure le rapport dans la conversation IA</span></h2>
 
 Ouvrez une nouvelle conversation IA. Cliquez sur le **menu à trois points** → **Inclure un fichier** → sélectionnez le rapport que vous venez de téléverser.
 
 L'IA dispose maintenant du PDF comme contexte pour toute cette conversation.
 
-### 3. Demander à l'IA de reproduire la structure
+<h2 class="step-h"><span class="step-n">3</span><span>Demander à l'IA de reproduire la structure</span></h2>
 
 Un prompt de départ :
 
 > Utilise ce rapport comme modèle. Crée un rapport similaire couvrant [période] pour [pays/région/portée].
+
+</div>
+</div>
 
 ---
 

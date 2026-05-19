@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Prompting Techniques"
 ---
 
@@ -13,17 +14,23 @@ footer: "FASTR · Prompting Techniques"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting Techniques</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You have an AI-generated draft from the previous activities (or one provided by the facilitator)
 - ☐ You know which dataset or document the AI was working from
 - ☐ You have ~20 minutes to do this properly — don't rush
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-The AI is a fluent writer, not a fact-checker. If you put its output into a report or a slide without checking, you become the person responsible for any fabricated number or invented citation. This activity gives you a repeatable way to check before you ship.
+The AI is a fluent writer, not a fact-checker. Put its output into a report unchecked and you own any fabricated number. This gives you a repeatable way to check before you ship.
 
-## Step 1 — Read once, mark the claims (~5 min)
+</aside>
+<div class="p1-main">
+
+<h2 class="step-h"><span class="step-n">1</span><span>Read once, mark the claims (~5 min)</span></h2>
 
 Read the AI's draft slowly. As you go, **underline or highlight every factual claim** — anything that could be wrong:
 
@@ -34,7 +41,7 @@ Read the AI's draft slowly. As you go, **underline or highlight every factual cl
 
 Don't try to verify yet. Just mark.
 
-## Step 2 — Sort by risk (~3 min)
+<h2 class="step-h"><span class="step-n">2</span><span>Sort by risk (~3 min)</span></h2>
 
 For each marked claim, assign a risk level:
 
@@ -44,11 +51,14 @@ For each marked claim, assign a risk level:
 | **Medium** | A general statement tied to a specific source you uploaded | Verify with the AI: ask it to quote the source |
 | **Low** | A well-known fact, or something supported by multiple sources you trust | Spot-check if you have time |
 
+</div>
+</div>
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Step 3 — Verify the high-risk claims (~7 min)
+<h2 class="step-h"><span class="step-n">3</span><span>Verify the high-risk claims (~7 min)</span></h2>
 
 Pick the top two or three high-risk claims and check them yourself:
 
@@ -62,7 +72,7 @@ Pick the top two or three high-risk claims and check them yourself:
 - Precise figures with no source — likely fabricated
 - Numbers that seem plausible but you can't trace
 
-## Step 4 — Use the AI to verify medium-risk claims (~3 min)
+<h2 class="step-h"><span class="step-n">4</span><span>Use the AI to verify medium-risk claims (~3 min)</span></h2>
 
 Paste a medium-risk claim back into the AI Assistant with this prompt:
 
@@ -70,7 +80,7 @@ Paste a medium-risk claim back into the AI Assistant with this prompt:
 
 If the AI cannot quote a source, remove the claim or rewrite it.
 
-## Step 5 — Final consistency check (~2 min)
+<h2 class="step-h"><span class="step-n">5</span><span>Final consistency check (~2 min)</span></h2>
 
 Quick scan before you call it done:
 

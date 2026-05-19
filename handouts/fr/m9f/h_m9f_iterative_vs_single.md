@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Techniques de prompting"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Techniques de prompting"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Techniques de prompting</strong> · <strong>~30 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez complété **Construire un prompt clair** et **Explorer avec l'Assistant IA**
 - ☐ L'Assistant IA est ouvert dans le projet de votre pays
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Il y a deux façons valables d'obtenir de l'IA une sortie structurée : la construire progressivement à travers plusieurs messages (itératif), ou tout mettre d'un coup dans un prompt unique bien structuré. Les deux fonctionnent. Le compromis est **contrôle vs rapidité**. Cet exercice vous permet de ressentir la différence sur la même tâche.
+Il y a deux façons valables d'obtenir de l'IA une sortie structurée : la construire progressivement à travers plusieurs messages (itératif), ou tout mettre d'un coup dans un prompt unique. Le compromis est **contrôle vs rapidité**.
+
+</aside>
+<div class="p1-main">
 
 ## Exercice A — Conversation itérative
 
@@ -30,6 +37,9 @@ Construisez un court rapport de qualité des données en envoyant ces quatre pro
 2. *Concentrons-nous sur la qualité globale, les différences régionales et les priorités d'amélioration.*
 3. *Quelle région a la qualité de données la plus faible ? Mets-la en évidence.*
 4. *Que devrions-nous faire à ce sujet ? Rends la dernière diapositive plus actionnable.*
+
+</div>
+</div>
 
 ---
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Prompting techniques"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Prompting techniques"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting techniques</strong> · <strong>~30 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've worked through **Build a clear prompt** and **Explore with the AI Assistant**
 - ☐ The AI Assistant is open in your country's project
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-There are two valid ways to get the AI to produce a structured output: build it up across several messages (iterative), or front-load everything into one well-structured prompt (single). Both work. The trade-off is **control vs speed**. This exercise lets you feel the difference on the same task.
+There are two valid ways to get a structured output: build it up across several messages (iterative), or front-load one well-structured prompt (single). Both work — the trade-off is **control vs speed**.
+
+</aside>
+<div class="p1-main">
 
 ## Exercise A — Iterative conversation
 
@@ -30,6 +37,9 @@ Build a short data quality report by stepping through these four prompts **in or
 2. *Let's focus on overall quality, regional differences, and priorities for improvement.*
 3. *Which region has the weakest data quality? Highlight that.*
 4. *What should we do about this? Make the final slide more actionable.*
+
+</div>
+</div>
 
 ---
 

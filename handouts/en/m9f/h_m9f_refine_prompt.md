@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Prompting techniques"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Prompting techniques"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Prompting techniques</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've completed **Build a clear prompt**, **Explore with the AI Assistant**, and **Iterative vs single-prompt**
 - ☐ The AI Assistant is open in your country's project
 
-## Why this matters
+<p class="sb-label">Why it matters</p>
 
-A good prompt is rarely the first one you write. This exercise walks you through three rounds on a single topic — each round adds something specific. By the end, the difference between round 1 and round 3 should be obvious.
+A good prompt is rarely the first one you write. This exercise walks through three rounds on one topic — each round adds something specific.
+
+</aside>
+<div class="p1-main">
 
 ## How to do this
 
@@ -39,6 +46,9 @@ Run each round in a **new** AI conversation so you see the difference from a cle
 | **1. Start simple** | *Create a slide about [your topic].* | What did the AI include? Would this work in a real meeting? |
 | **2. Add context** | *Create a slide about [topic] for a [meeting type]. Show [specific data]. Explain which regions have the most issues.* | Is it more specific? Does it identify priorities? |
 | **3. Make it actionable** | *Create a slide about [topic] for [meeting]. Compare areas — which need support? Suggest possible reasons.* | Does it prioritise areas? Point toward next steps? |
+
+</div>
+</div>
 
 ---
 
