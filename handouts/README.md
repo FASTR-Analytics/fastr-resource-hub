@@ -16,7 +16,10 @@ handouts/
 │   ├── m7/
 │   └── ...
 ├── fr/                   # French handouts, mirroring core_content_fr/
-└── _out/                 # rendered PDFs (gitignored — local only)
+├── _order.yaml           # display + booklet order, one ordered list per module
+└── _out/                 # rendered PDFs, organised for printing/binding
+    ├── en/<module>/NN_<name>.pdf
+    └── fr/<module>/NN_<name>.pdf
 ```
 
 Each handout lives at `handouts/<lang>/<module>/<filename>.md`. Filenames follow the audit doc convention: `h_<module>_<short_name>.md` (e.g., `h_m9a_admin_areas.md`).
@@ -47,25 +50,32 @@ Hybrid slides (audit-tagged HYBRID) usually become a participant activity handou
 
 ## Rendering to PDF
 
-Use the helper script at repo root:
+### Booklet build (recommended)
+
+`tools/build_handout_pdfs.py` renders every handout and organises the output for
+printing and binding — one folder per language, a sub-folder per module, and
+each PDF prefixed with a two-digit sequence number from `_order.yaml`:
 
 ```bash
-tools/render_handout.sh handouts/en/m9a/h_m9a_admin_areas.md
+python3 tools/build_handout_pdfs.py             # build everything
+python3 tools/build_handout_pdfs.py --lang en   # one language
+python3 tools/build_handout_pdfs.py --module m7 # one module folder
 ```
 
-Renders an A4 PDF next to the markdown file. To customise the output path:
+Output lands in `handouts/_out/<lang>/<module>/NN_<name>.pdf`. The numbering
+follows the workshop sequence, so a module folder can be printed and bound in
+order. The build clears stale output before writing.
+
+### Single file
+
+To render one handout while authoring, use the helper script at repo root:
 
 ```bash
-tools/render_handout.sh handouts/en/m9a/h_m9a_admin_areas.md handouts/_out/admin_areas_en.pdf
+tools/render_handout.sh handouts/en/m9a/h_m9a_admin_areas.md            # next to the .md
+tools/render_handout.sh handouts/en/m9a/h_m9a_admin_areas.md out.pdf    # custom path
 ```
 
 The script invokes `@marp-team/marp-cli` with the `fastr-handout.css` theme (at repo root). Marp's PDF mode requires Chromium; if you don't have it locally, the first run will download it via Puppeteer.
-
-To render all handouts in a folder:
-
-```bash
-for f in handouts/en/m9a/*.md; do tools/render_handout.sh "$f"; done
-```
 
 ## Pointer slides
 

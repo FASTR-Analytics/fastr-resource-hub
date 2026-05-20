@@ -2,10 +2,9 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: facilitator
 footer: "FASTR · Getting Started · Facilitator notes"
 ---
-
-<!-- _class: facilitator -->
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
@@ -19,11 +18,11 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 
 ## Setup checklist
 
-- [ ] Browser logged in to your country instance, with a demo project loaded
-- [ ] Main tabs visible: Data, Visualizations, Slide Decks, Reports, AI Assistant
-- [ ] At least one analysis already run, so charts/outputs are visible
-- [ ] Screen-share working if remote
-- [ ] Have the participant *Logging in* handout ready to hand out after this demo
+- ☐ Browser logged in to your country instance, with a demo project loaded
+- ☐ Main tabs visible: Data, Visualizations, Slide Decks, Reports, AI Assistant
+- ☐ At least one analysis already run, so charts/outputs are visible
+- ☐ Screen-share working if remote
+- ☐ Have the participant *Logging in* handout ready to hand out after this demo
 
 ## Demo script
 

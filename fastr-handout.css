@@ -505,6 +505,24 @@ footer {
   right: 20mm;
   border-top: 1px solid var(--border-light);
   padding-top: 4pt;
+  /* Footer sits above any overflowing content. */
+  z-index: 10;
+  background: white;
+}
+
+/* Opaque white "shield band" above the footer rule. Masks any content that
+   overflows the bottom safety zone (between content area end at bottom:38mm
+   and the footer rule at bottom:~22mm), so the footer is never visually
+   crowded or overlapped by content. Full page width via negative insets. */
+footer::before {
+  content: "";
+  position: absolute;
+  left: -20mm;
+  right: -20mm;
+  bottom: 100%;
+  height: 16mm;
+  background: white;
+  pointer-events: none;
 }
 
 /* Page number sits at the bottom-right (Marp's paginate) */
@@ -514,6 +532,8 @@ section::after {
   letter-spacing: 0.04em;
   bottom: 14mm;
   right: 20mm;
+  /* Match the footer's z-index so the page number sits above any overflow. */
+  z-index: 10;
 }
 
 /* ========================================

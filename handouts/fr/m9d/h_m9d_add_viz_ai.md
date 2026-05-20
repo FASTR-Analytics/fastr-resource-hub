@@ -28,19 +28,16 @@ footer: "FASTR · Présentations"
 
 ## Ce que vous allez faire
 
-Utiliser l'Assistant IA pour faire apparaître une visualisation enregistrée et l'ajouter directement à votre présentation — sans navigation dans les menus. Même structure **Je fais / On fait / Vous faites** que l'activité précédente.
+Utilisez l'Assistant IA pour faire apparaître une visualisation enregistrée et l'ajouter directement à votre présentation — sans navigation dans les menus. Votre facilitateur vient de le démontrer ; à vous maintenant.
 
-## Je fais — le facilitateur démontre
+## Étapes
 
-Le facilitateur saisit un prompt dans l'Assistant IA pour demander une visualisation existante. Quand l'IA la renvoie, le facilitateur utilise les boutons dans l'aperçu du chat pour ajouter le graphique directement à la présentation. Regardez l'aperçu du chat — c'est là que ça se passe.
+1. Dans l'Assistant IA, saisissez un prompt nommant l'une de **vos** visualisations enregistrées : *Affiche [nom de votre visualisation].*
+2. L'IA trouve le graphique et montre un aperçu dans le chat.
+3. Sous l'aperçu, cherchez le bouton pour **ajouter le graphique à une présentation** — choisissez la présentation que vous avez créée.
+4. Enregistrez.
 
-## On fait — ensemble
-
-Essayez ce prompt dans l'Assistant IA (vous pouvez le coller) :
-
-> Affiche la visualisation de variation trimestrielle des volumes de services.
-
-L'IA devrait trouver votre visualisation enregistrée et montrer un aperçu dans le chat. Sous l'aperçu, cherchez les boutons pour **ajouter le graphique à une présentation** — choisissez la présentation que vous avez créée.
+> **Pas encore de graphique enregistré ?** Utilisez plutôt ce prompt d'exemple partagé : *Affiche la visualisation de variation trimestrielle des volumes de services.*
 
 <div class="screenshot-placeholder">
 📷 <strong>Aperçu du chat IA avec bouton « Ajouter à la présentation »</strong><br>
@@ -53,15 +50,6 @@ L'IA devrait trouver votre visualisation enregistrée et montrer un aperçu dans
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Vous faites — seul
-
-Faites-le maintenant avec l'une de **vos** visualisations :
-
-1. Demandez à l'IA : *Affiche [nom de votre visualisation].*
-2. Quand l'aperçu apparaît, cliquez sur **Ajouter à la présentation**.
-3. Choisissez votre présentation et la diapositive cible.
-4. Enregistrez.
 
 ## Vérification
 

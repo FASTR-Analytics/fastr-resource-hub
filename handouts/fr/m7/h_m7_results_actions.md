@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Communication des résultats"
 ---
 
@@ -13,17 +14,23 @@ footer: "FASTR · Communication des résultats"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Communication des résultats</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez **au moins trois constats** de votre analyse FASTR rédigés (énoncés de constat de l'activité précédente)
 - ☐ Vous avez réfléchi à votre audience (activité de cartographie)
 - ☐ Une équipe pays partenaire est disponible pour vous donner un retour à la fin
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
-Un constat n'est qu'une observation tant que personne *n'agit* dessus. Le but de cette activité est de rendre chaque constat **actionnable** — en nommant un décideur précis, une prochaine étape concrète, et un calendrier réaliste.
+Un constat n'est qu'une observation tant que personne *n'agit* dessus. Cette activité rend chaque constat **actionnable** — en nommant un décideur précis, une prochaine étape concrète, et un calendrier réaliste.
 
-Un constat sans décideur dérive. Un constat avec « le ministère » comme décideur est trop vague pour dériver vers qui que ce soit en particulier. Un constat avec « Directeur des SSP, d'ici la fin du trimestre prochain » est suivi.
+Un constat sans décideur dérive. Un constat avec « Directeur des SSP, d'ici la fin du trimestre prochain » est suivi.
+
+</aside>
+<div class="p1-main">
 
 ## La feuille de travail
 
@@ -34,6 +41,9 @@ Pour vos **3 principaux constats**, remplissez ce tableau :
 | 1. |  |  |  |
 | 2. |  |  |  |
 | 3. |  |  |  |
+
+</div>
+</div>
 
 ---
 
@@ -66,10 +76,6 @@ Remarquez : chaque ligne nomme une personne, une action concrète, une date.
 - **« Partager avec les parties prenantes »** n'est pas une action. Les parties prenantes sont plurielles et vagues. Choisissez une partie prenante, donnez-lui une demande.
 - **« Améliorer la qualité des données »** n'est pas une action. Choisissez une intervention spécifique (formation, supervision, correction système) et une cible.
 - **« Dès que possible »** n'est pas un calendrier. Si vous ne pouvez pas le lier à une date, l'action n'est pas encore réelle.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Revue par les pairs
 

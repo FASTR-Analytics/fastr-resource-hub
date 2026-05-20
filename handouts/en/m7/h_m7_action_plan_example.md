@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Results Communication"
 ---
 
@@ -11,11 +12,28 @@ footer: "FASTR · Results Communication"
 
 <p class="meta-line"><strong>Reference</strong> · <strong>Results Communication</strong> · <strong>~10 min to read</strong></p>
 
-## What this handout is
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-A fully-filled example of a country action plan, built around one finding — **low rates of haemoglobin measurement during antenatal care**. Use it as a reference while you fill in your own action plan worksheet. Notice how each column gets a specific, concrete answer — not a vague one.
+<p class="sb-label">What this handout is</p>
 
-> **The finding** — Only **42%** of lower-level health facilities systematically record haemoglobin (Hb) measurement during antenatal care visits. Risk: undetected maternal anaemia.
+A fully-filled example of a country action plan, built around one finding — **low rates of haemoglobin measurement during antenatal care**.
+
+<p class="sb-label">How to use it</p>
+
+Keep it beside you while you fill in your own action plan worksheet. Notice how each column gets a specific, concrete answer — not a vague one.
+
+</aside>
+<div class="p1-main">
+
+## The finding
+
+> Only **42%** of lower-level health facilities systematically record haemoglobin (Hb) measurement during antenatal care visits. Risk: undetected maternal anaemia.
+
+The pages that follow show how this one finding becomes a complete plan — actions, dissemination, a timeline, named owners, and monitoring indicators.
+
+</div>
+</div>
 
 ---
 

@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Communication des résultats"
 ---
 
@@ -13,12 +14,15 @@ footer: "FASTR · Communication des résultats"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Communication des résultats</strong> · <strong>~15 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez devant vous une sortie d'analyse FASTR récente (graphique, tableau, note d'interprétation)
 - ☐ Vous avez identifié au moins un **constat intéressant** — un changement, une tendance, une valeur atypique
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
 Les constats bruts sont faciles à *voir* mais difficiles à *communiquer*. Un bon énoncé de constat fait trois choses en une ou deux phrases :
 
@@ -27,6 +31,9 @@ Les constats bruts sont faciles à *voir* mais difficiles à *communiquer*. Un b
 3. Ajoute une brève **interprétation** pour que le lecteur sache ce que cela peut signifier
 
 Sans cela, un constat arrive comme une « donnée intéressante » — pas comme quelque chose sur lequel un décideur peut agir.
+
+</aside>
+<div class="p1-main">
 
 ## La formule
 
@@ -37,6 +44,9 @@ Sans cela, un constat arrive comme une « donnée intéressante » — pas comme
 1. Choisissez **un constat** de votre analyse FASTR.
 2. Rédigez-le en utilisant la formule ci-dessus.
 3. Relisez-le : quelqu'un qui ne connaît pas vos données comprendrait-il ce qui s'est passé et pourquoi c'est important ?
+
+</div>
+</div>
 
 ---
 

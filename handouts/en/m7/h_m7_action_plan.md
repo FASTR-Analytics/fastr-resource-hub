@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Results Communication"
 ---
 
@@ -13,21 +14,23 @@ footer: "FASTR · Results Communication"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Results Communication</strong> · <strong>~30 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You've worked through the previous activities (user mapping, finding statements, linking to actions)
 - ☐ You have the workshop output (chart, deck, brief) you produced this week available for reference
 - ☐ Your country team is together — this activity benefits from multiple perspectives
 
-## Why this matters
+<p class="sb-label">Why this matters</p>
 
 FASTR isn't a one-off analysis. It's a **rhythm** — quarterly analyses, regular dissemination, follow-up, capacity strengthening over time. This activity turns "we did a workshop" into "we have a plan for how this continues".
 
-Three questions you'll answer:
+Three questions you'll answer: **what's the analysis cadence**, **where does the output go**, and **what does the team need**.
 
-1. **What's the analysis cadence?** Who runs it, when, how often?
-2. **Where does the output go?** Which forums or platforms will FASTR feed into?
-3. **What does the team need?** Training, tools, or support that's not yet in place.
+</aside>
+<div class="p1-main">
 
 ## The worksheet
 
@@ -44,6 +47,9 @@ Fill in the action plan table:
 |  |  |  |  |
 
 > **Use the blank rows for any country-specific steps** — e.g., "integrate FASTR output into the quarterly review meeting", "establish a data quality working group".
+
+</div>
+</div>
 
 ---
 

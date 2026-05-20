@@ -311,8 +311,8 @@ modules:
   folder: m9i_report_builder_basics
   theme: communication
   name:
-    en: Report Builder Basics
-    fr: Création de rapports — les bases
+    en: Standard FASTR Reports
+    fr: Rapports FASTR standards
   ai_context:
     description: Hands-on activity teaching participants to manually build a disruption
       report using the FASTR report builder. Covers report structure, adding visualizations,

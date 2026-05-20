@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Communication des résultats"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Communication des résultats"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Communication des résultats</strong> · <strong>~20 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous travaillez avec votre équipe pays (c'est une activité de discussion)
 - ☐ Vous avez en tête une sortie FASTR récente (un graphique, un rapport, une présentation) que vous prévoyez de partager
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
 La même analyse résonne très différemment selon qui se trouve dans la salle. Un Directeur des SSP veut le message clé et une décision ; un analyste de district veut les données sous-jacentes. Cartographier votre audience avant de communiquer **change ce que vous dites, combien de temps vous prenez, et ce que vous coupez**.
+
+</aside>
+<div class="p1-main">
 
 ## La feuille de travail
 
@@ -33,6 +40,9 @@ Remplissez ceci pour **une audience spécifique** à laquelle vous vous adressez
 | Quelles sont les 2-3 informations qui l'intéressent le plus ? | |
 | Quel format / quelle durée fonctionne le mieux pour cette audience ? | |
 | Quand et où allez-vous présenter à cette audience ? | |
+
+</div>
+</div>
 
 ---
 

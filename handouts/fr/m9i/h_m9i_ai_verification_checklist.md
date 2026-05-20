@@ -2,20 +2,29 @@
 marp: true
 theme: fastr-handout
 paginate: true
-footer: "FASTR · Constructeur de rapports"
+class: redesign
+footer: "FASTR · Rapports FASTR standards"
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 # Vérifier un rapport généré par l'IA
 
-<p class="meta-line"><strong>Référence</strong> · <strong>Constructeur de rapports</strong> · <strong>~20 min</strong></p>
+<p class="meta-line"><strong>Référence</strong> · <strong>Rapports FASTR standards</strong> · <strong>~20 min</strong></p>
 
-## Pourquoi c'est important
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-L'Assistant IA peut générer un rapport de perturbation complet en 5 à 10 minutes. **C'est vous** qui le validez. L'IA peut sembler sûre d'elle et se tromper — sur un chiffre, un nom de région, un regroupement d'indicateurs, une comparaison. La vérification est ce que vous faites **avant** que le rapport ne quitte l'équipe.
+<p class="sb-label">Pourquoi c'est important</p>
 
-La règle : chaque affirmation du rapport doit être vérifiable par rapport au graphique ou au tableau sous-jacent. Si vous ne pouvez pas relier une phrase à une donnée, signalez-la.
+L'Assistant IA peut générer un rapport de perturbation complet en 5 à 10 minutes. **C'est vous** qui le validez. L'IA peut sembler sûre d'elle et se tromper — sur un chiffre, un nom de région, un regroupement d'indicateurs, une comparaison.
+
+<p class="sb-label">La règle de base</p>
+
+Chaque affirmation du rapport doit être vérifiable par rapport au graphique ou au tableau sous-jacent. Si vous ne pouvez pas relier une phrase à une donnée, signalez-la. La vérification est ce que vous faites **avant** que le rapport ne quitte l'équipe.
+
+</aside>
+<div class="p1-main">
 
 ## Comment un rapport FASTR est construit — les prompts
 
@@ -32,6 +41,9 @@ La vérification se fait en deux passes, et il vous faut **les deux** :
 
 1. **Passe 1 — Auto-révision par l'IA.** Lancez le **Prompt 5** pour que l'IA vérifie sa propre sortie par rapport aux données.
 2. **Passe 2 — Révision par l'équipe.** L'IA ne peut pas tout détecter. L'équipe parcourt la liste de vérification manuelle.
+
+</div>
+</div>
 
 ---
 

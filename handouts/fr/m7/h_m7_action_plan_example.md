@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Communication des résultats"
 ---
 
@@ -11,11 +12,28 @@ footer: "FASTR · Communication des résultats"
 
 <p class="meta-line"><strong>Référence</strong> · <strong>Communication des résultats</strong> · <strong>~10 min de lecture</strong></p>
 
-## À quoi sert ce document
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-Un exemple entièrement rempli d'un plan d'action pays, construit autour d'un constat : **faible taux de mesure de l'hémoglobine pendant les consultations prénatales**. Utilisez-le comme référence pendant que vous remplissez votre propre plan d'action. Remarquez que chaque colonne reçoit une réponse précise et concrète — jamais une réponse vague.
+<p class="sb-label">À quoi sert ce document</p>
 
-> **Le constat** — Seuls **42 %** des établissements de niveau inférieur enregistrent systématiquement la mesure de l'hémoglobine (Hb) lors des consultations prénatales. Risque : anémie maternelle non détectée.
+Un exemple entièrement rempli d'un plan d'action pays, construit autour d'un constat : **faible taux de mesure de l'hémoglobine pendant les consultations prénatales**.
+
+<p class="sb-label">Comment l'utiliser</p>
+
+Gardez-le à côté de vous pendant que vous remplissez votre propre plan d'action. Remarquez que chaque colonne reçoit une réponse précise et concrète — jamais une réponse vague.
+
+</aside>
+<div class="p1-main">
+
+## Le constat
+
+> Seuls **42 %** des établissements de niveau inférieur enregistrent systématiquement la mesure de l'hémoglobine (Hb) lors des consultations prénatales. Risque : anémie maternelle non détectée.
+
+Les pages qui suivent montrent comment ce seul constat devient un plan complet — actions, diffusion, calendrier, responsables nommés, et indicateurs de suivi.
+
+</div>
+</div>
 
 ---
 

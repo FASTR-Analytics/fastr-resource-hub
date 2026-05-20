@@ -2,10 +2,9 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: facilitator
 footer: "FASTR · Présentations · Notes du facilitateur"
 ---
-
-<!-- _class: facilitator -->
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
@@ -19,9 +18,9 @@ Un court tour de l'éditeur de diapositive — trois choses que les participants
 
 ## Liste de préparation
 
-- [ ] Une présentation avec au moins une diapositive de contenu (graphique + texte) chargée
-- [ ] Zoom du navigateur à ~100 % pour que les participants voient bien l'interface
-- [ ] Partage d'écran fonctionnel si en distanciel
+- ☐ Une présentation avec au moins une diapositive de contenu (graphique + texte) chargée
+- ☐ Zoom du navigateur à ~100 % pour que les participants voient bien l'interface
+- ☐ Partage d'écran fonctionnel si en distanciel
 
 ## Script de démo
 

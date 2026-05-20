@@ -2,10 +2,9 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: facilitator
 footer: "FASTR · Premiers pas · Notes du facilitateur"
 ---
-
-<!-- _class: facilitator -->
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
@@ -19,11 +18,11 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 ## Liste de préparation
 
-- [ ] Navigateur connecté à l'instance de votre pays, avec un projet de démo chargé
-- [ ] Onglets principaux visibles : Données, Visualisations, Présentations, Rapports, Assistant IA
-- [ ] Au moins une analyse déjà lancée, pour que des graphiques/sorties soient visibles
-- [ ] Partage d'écran qui fonctionne si en distanciel
-- [ ] Le document participant *Connexion à la plateforme* prêt à être distribué après la démo
+- ☐ Navigateur connecté à l'instance de votre pays, avec un projet de démo chargé
+- ☐ Onglets principaux visibles : Données, Visualisations, Présentations, Rapports, Assistant IA
+- ☐ Au moins une analyse déjà lancée, pour que des graphiques/sorties soient visibles
+- ☐ Partage d'écran qui fonctionne si en distanciel
+- ☐ Le document participant *Connexion à la plateforme* prêt à être distribué après la démo
 
 ## Script de démo
 

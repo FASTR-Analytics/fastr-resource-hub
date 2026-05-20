@@ -28,19 +28,16 @@ footer: "FASTR · Slide Decks"
 
 ## What you'll do
 
-Use the AI Assistant to surface a saved visualisation and add it directly to your slide deck — no menu navigation needed. Same **I do / we do / you do** structure as the previous activity.
+Use the AI Assistant to surface a saved visualisation and add it directly to your slide deck — no menu navigation needed. Your facilitator has just demonstrated this; now do it yourself.
 
-## I do — the facilitator demonstrates
+## Steps
 
-The facilitator types a prompt into the AI Assistant asking for an existing visualisation. When the AI returns it, the facilitator uses the buttons in the chat preview to add the chart directly to the slide deck. Watch the chat preview — that's where the action happens.
+1. In the AI Assistant, type a prompt naming one of **your** saved visualisations: *Display [your visualisation name].*
+2. The AI finds the chart and shows a preview in the chat.
+3. Below the preview, look for the button to **add the chart to a slide deck** — pick the deck you created.
+4. Save.
 
-## We do — together
-
-Try this prompt in the AI Assistant (you can paste it):
-
-> Display the quarterly change in service volume visualisation.
-
-The AI should find your saved visualisation and show a preview in the chat. Below the preview, look for buttons to **add the chart to a slide deck** — pick the deck you created.
+> **No saved chart of your own yet?** Use this shared example prompt instead: *Display the quarterly change in service volume visualisation.*
 
 <div class="screenshot-placeholder">
 📷 <strong>AI chat preview with "Add to slide deck" button</strong><br>
@@ -53,15 +50,6 @@ The AI should find your saved visualisation and show a preview in the chat. Belo
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## You do — on your own
-
-Now do the same with one of **your** visualisations:
-
-1. Prompt the AI: *Display [your visualisation name].*
-2. When the preview appears, click **Add to slide deck**.
-3. Pick your deck and the slide you want it on.
-4. Save.
 
 ## Checkpoint
 

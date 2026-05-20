@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Results Communication"
 ---
 
@@ -13,14 +14,20 @@ footer: "FASTR · Results Communication"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Results Communication</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You're working with your country team (this is a discussion activity)
 - ☐ You have a recent FASTR output in mind (a chart, a report, a slide deck) that you're planning to share
 
-## Why this matters
+<p class="sb-label">Why this matters</p>
 
 The same analysis lands very differently depending on who's in the room. A Director of PHC wants the takeaway and a decision; a district analyst wants the underlying data. Mapping your audience before you communicate **changes what you say, how long you say it, and what you cut**.
+
+</aside>
+<div class="p1-main">
 
 ## The worksheet
 
@@ -33,6 +40,9 @@ Fill this in for **one specific audience** you're preparing for — not "everyon
 | What 2-3 pieces of information are they most interested in? | |
 | What format / length works best for this audience? | |
 | When and where will you present to them? | |
+
+</div>
+</div>
 
 ---
 

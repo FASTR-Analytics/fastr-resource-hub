@@ -2,20 +2,29 @@
 marp: true
 theme: fastr-handout
 paginate: true
-footer: "FASTR · Report Builder"
+class: redesign
+footer: "FASTR · Standard FASTR Reports"
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 # Verifying an AI-generated report
 
-<p class="meta-line"><strong>Reference</strong> · <strong>Report Builder</strong> · <strong>~20 min</strong></p>
+<p class="meta-line"><strong>Reference</strong> · <strong>Standard FASTR Reports</strong> · <strong>~20 min</strong></p>
 
-## Why this matters
+<div class="p1-grid">
+<aside class="p1-sidebar">
 
-The AI Assistant can generate a complete disruption report in 5–10 minutes. **You** sign off on it. The AI can sound confident and still be wrong — about a number, a region name, an indicator grouping, a comparison. Verification is what you do **before** the report leaves the team.
+<p class="sb-label">Why this matters</p>
 
-The rule: every claim in the report must be checkable against the underlying chart or table. If you can't trace a sentence back to data, flag it.
+The AI Assistant can generate a complete disruption report in 5–10 minutes. **You** sign off on it. The AI can sound confident and still be wrong — about a number, a region name, an indicator grouping, a comparison.
+
+<p class="sb-label">The core rule</p>
+
+Every claim in the report must be checkable against the underlying chart or table. If you can't trace a sentence back to data, flag it. Verification is what you do **before** the report leaves the team.
+
+</aside>
+<div class="p1-main">
 
 ## How a FASTR report is built — the prompts
 
@@ -32,6 +41,9 @@ Verification has two passes, and you need **both**:
 
 1. **Pass 1 — AI self-review.** Run **Prompt 5** so the AI checks its own output against the data.
 2. **Pass 2 — Team review.** The AI can't catch everything. The team runs the manual checklist.
+
+</div>
+</div>
 
 ---
 

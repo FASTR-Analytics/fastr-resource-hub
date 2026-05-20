@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Communication des résultats"
 ---
 
@@ -13,25 +14,23 @@ footer: "FASTR · Communication des résultats"
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Communication des résultats</strong> · <strong>~30 min</strong></p>
 
-## Avant de commencer
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez parcouru les activités précédentes (cartographie des utilisateurs, énoncés de constat, lien aux actions)
 - ☐ Vous avez sous la main le produit de l'atelier (graphique, présentation, note) que vous avez créé cette semaine
 - ☐ Votre équipe pays est ensemble — cette activité bénéficie de plusieurs perspectives
 
-## Pourquoi c'est important
+<p class="sb-label">Pourquoi c'est important</p>
 
 FASTR n'est pas une analyse ponctuelle. C'est un **rythme** — analyses trimestrielles, diffusion régulière, suivi, renforcement des capacités dans le temps. Cette activité transforme « nous avons fait un atelier » en « nous avons un plan pour que cela continue ».
 
-Trois questions auxquelles vous répondrez :
+Trois questions auxquelles vous répondrez : **quel rythme d'analyse**, **où vont les sorties**, et **de quoi l'équipe a besoin**.
 
-1. **Quel est le rythme d'analyse ?** Qui la lance, quand, à quelle fréquence ?
-2. **Où vont les sorties ?** Dans quels forums ou plateformes FASTR s'intégrera-t-il ?
-3. **De quoi l'équipe a-t-elle besoin ?** Formation, outils, ou soutien qui n'est pas encore en place.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+</aside>
+<div class="p1-main">
 
 ## La feuille de travail
 
@@ -48,6 +47,9 @@ Remplissez le tableau du plan d'action :
 |  |  |  |  |
 
 > **Utilisez les lignes vides pour toute étape spécifique à votre pays** — p. ex. « intégrer la sortie FASTR à la réunion de revue trimestrielle », « créer un groupe de travail sur la qualité des données ».
+
+</div>
+</div>
 
 ---
 

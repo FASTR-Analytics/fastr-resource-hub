@@ -2,10 +2,9 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: facilitator
 footer: "FASTR · Slide Decks · Facilitator notes"
 ---
-
-<!-- _class: facilitator -->
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
@@ -19,9 +18,9 @@ A short tour of the slide editor — three things participants need to find: how
 
 ## Setup checklist
 
-- [ ] A slide deck with at least one content slide (chart + text) loaded
-- [ ] Browser zoom set to ~100% so participants can see UI clearly
-- [ ] Screen-share working if remote
+- ☐ A slide deck with at least one content slide (chart + text) loaded
+- ☐ Browser zoom set to ~100% so participants can see UI clearly
+- ☐ Screen-share working if remote
 
 ## Demo script
 

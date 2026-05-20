@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Results Communication"
 ---
 
@@ -13,17 +14,23 @@ footer: "FASTR · Results Communication"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Results Communication</strong> · <strong>~20 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You have **at least three findings** from your FASTR analysis written up (finding statements from the previous activity)
 - ☐ You've thought about your audience (user mapping activity)
 - ☐ A peer country team is available to give you feedback at the end
 
-## Why this matters
+<p class="sb-label">Why this matters</p>
 
-A finding is just an observation until someone *does something* about it. The job of this activity is to make each finding **actionable** — by naming a specific decision-maker, a concrete next step, and a realistic timeline.
+A finding is just an observation until someone *does something* about it. This activity makes each finding **actionable** — by naming a specific decision-maker, a concrete next step, and a realistic timeline.
 
-A finding without a decision-maker drifts. A finding with "the ministry" as the decision-maker is too vague to drift to anyone in particular. A finding with "Director of PHC, by end of next quarter" gets followed up on.
+A finding without a decision-maker drifts. A finding with "Director of PHC, by end of next quarter" gets followed up on.
+
+</aside>
+<div class="p1-main">
 
 ## The worksheet
 
@@ -34,6 +41,9 @@ For your **top 3 findings**, fill in this table:
 | 1. |  |  |  |
 | 2. |  |  |  |
 | 3. |  |  |  |
+
+</div>
+</div>
 
 ---
 
@@ -66,10 +76,6 @@ Notice each row names one person, one concrete action, one date.
 - **"Share with stakeholders"** is not an action. Stakeholders is plural and vague. Pick one stakeholder, give them one ask.
 - **"Improve data quality"** is not an action. Pick a specific intervention (training, supervision, system fix) and a target.
 - **"As soon as possible"** is not a timeline. If you can't tie it to a date, the action isn't real yet.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Peer review
 

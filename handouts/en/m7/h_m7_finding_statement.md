@@ -2,6 +2,7 @@
 marp: true
 theme: fastr-handout
 paginate: true
+class: redesign
 footer: "FASTR · Results Communication"
 ---
 
@@ -13,12 +14,15 @@ footer: "FASTR · Results Communication"
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Results Communication</strong> · <strong>~15 min</strong></p>
 
-## Before you start
+<div class="p1-grid">
+<aside class="p1-sidebar">
+
+<p class="sb-label">Before you start</p>
 
 - ☐ You have a recent FASTR analysis output (chart, table, or interpretation note) in front of you
 - ☐ You've identified at least one **interesting finding** from it — a change, a pattern, an outlier
 
-## Why this matters
+<p class="sb-label">Why this matters</p>
 
 Raw findings are easy to *see* but hard to *communicate*. A good finding statement does three things in one or two sentences:
 
@@ -27,6 +31,9 @@ Raw findings are easy to *see* but hard to *communicate*. A good finding stateme
 3. Adds a brief **interpretation** so the reader knows what it might mean
 
 Without these, a finding lands as "interesting data" — not as something a decision-maker can act on.
+
+</aside>
+<div class="p1-main">
 
 ## The formula
 
@@ -37,6 +44,9 @@ Without these, a finding lands as "interesting data" — not as something a deci
 1. Pick **one finding** from your FASTR analysis.
 2. Write it out using the formula above.
 3. Read it back: would someone unfamiliar with your data understand what happened and why it matters?
+
+</div>
+</div>
 
 ---
 

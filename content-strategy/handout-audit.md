@@ -86,7 +86,7 @@ After these changes, EN and FR have **identical file lists** in both mai and m7 
 | M9f — Prompting Techniques | 11 | 3 | 5 | 2 | 1 | 8 |
 | M9g — FASTR Quiz | 6 | 1 | 5 | 0 | 0 | 5 |
 | M9h — Platform Demo | 1 | 0 | 0 | 1 | 0 | 1 |
-| M9i — Report Builder | 3 | 1 | 1 | 0 | 1 | 2 |
+| M9i — Standard FASTR Reports | 3 | 1 | 1 | 0 | 1 | 2 |
 | MAI — AI Assistant | 18 | 18 | 0 | 0 | 0 | 0 (deduped 2026-05-12) |
 | MW — Webinar | 20 | 13 | 3 | 1 | 3 | 7 |
 | **Total** | **293** | **200** | **43** | **34** | **15** | **~85** (post-dedup) |
@@ -461,7 +461,7 @@ Headline takeaway: roughly **30% of slides** are activity-, demo-, or hybrid-fla
 |------|-------|-----|--------------|--------------------|-------|
 | m9h_1_platform_access_roles.md | Live demo: platform access & roles | DEMO | h_m9h_platform_access_roles | "Demo: platform access & roles — see facilitator handout / 15 min" |  |
 
-### M9i — Report Builder Basics (3 slides)
+### M9i — Standard FASTR Reports (3 slides)
 
 | File | Title | Tag | Handout name | Pointer slide text | Notes |
 |------|-------|-----|--------------|--------------------|-------|

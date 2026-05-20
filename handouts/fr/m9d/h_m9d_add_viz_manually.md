@@ -29,21 +29,15 @@ footer: "FASTR · Présentations"
 
 ## Ce que vous allez faire
 
-Ajouter une visualisation à votre diapositive de contenu en la choisissant parmi vos graphiques enregistrés. La session utilise le format **Je fais / On fait / Vous faites** : le facilitateur démontre, le groupe pratique ensemble, puis vous le faites seul.
+Ajoutez une visualisation enregistrée à la diapositive de contenu de votre présentation. Votre facilitateur vient de le démontrer — les étapes ci-dessous sont là pour que vous puissiez le refaire seul.
 
-## Je fais — le facilitateur démontre
+## Étapes
 
-Le facilitateur prend une visualisation existante dans la liste enregistrée, l'ajoute à la présentation et montre le résultat. Regardez — ne cliquez pas encore.
-
-## On fait — ensemble
-
-En groupe, parcourez les mêmes étapes avec une visualisation différente :
-
-1. Ouvrez l'éditeur de diapositive.
-2. **Bloc** → **Visualisation** → **Sélectionner une visualisation** → parcourez → cliquez sur **Sélectionner**.
-3. Vérifiez que le graphique apparaît sur la diapositive.
-
-Pause ici pour les questions avant de continuer.
+1. Ouvrez la présentation que vous avez créée plus tôt et cliquez dans la diapositive de contenu vide.
+2. Dans l'éditeur : **Bloc** → **Visualisation** → **Sélectionner une visualisation**.
+3. Parcourez vos graphiques enregistrés, choisissez-en un que **vous** avez créé, et cliquez sur **Sélectionner**.
+4. Vérifiez que le graphique apparaît sur la diapositive.
+5. Enregistrez.
 
 </div>
 </div>
@@ -51,15 +45,6 @@ Pause ici pour les questions avant de continuer.
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Vous faites — seul
-
-Faites-le maintenant dans **votre** présentation :
-
-1. Ouvrez la présentation que vous avez créée plus tôt.
-2. Cliquez dans la diapositive de contenu vide.
-3. Ajoutez une visualisation que **vous** avez créée (voir *Créer des visualisations* si vous n'en avez pas).
-4. Enregistrez.
 
 ## Vérification
 
