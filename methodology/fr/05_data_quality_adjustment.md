@@ -36,17 +36,17 @@ En traitant systématiquement les valeurs aberrantes et les données manquantes 
 Le module applique un processus standardisé en plusieurs étapes pour ajuster les données de routine des établissements de santé tout en préservant les modèles de prestation de services sous-jacents :
 
 **Étape 1 : Chargement et préparation des données**
-Le module intègre trois entrées : les volumes de services déclarés au niveau de l'établissement, les indicateurs de valeurs aberrantes identifiant les valeurs anormales (du module 1) et les indicateurs de complétude indiquant les mois pour lesquels la déclaration est incomplète (du module 1). Les indicateurs pour lesquels l'ajustement n'est pas approprié (tels que les mesures liées à la mortalité) sont identifiés et exclus des étapes d'ajustement ultérieures.
+Le module intègre trois entrées : les volumes de services déclarés au niveau de l'établissement (`hmis_ISO3.csv`), les indicateurs de valeurs aberrantes identifiant les valeurs anormales (`M1_output_outliers.csv` du module 1) et les indicateurs de complétude indiquant les mois pour lesquels la déclaration est incomplète (`M1_output_completeness.csv` du module 1). Les indicateurs pour lesquels l'ajustement n'est pas approprié (tout indicateur dont le nom contient `death` ou `still_birth`, sans tenir compte de la casse) sont identifiés et exclus des étapes d'ajustement ultérieures.
 
 **Étape 2 : Identifier les indicateurs à faible volume**
-Avant d'appliquer tout ajustement, chaque indicateur est évalué afin de déterminer s'il présente une variation suffisante. Les indicateurs qui ne dépassent jamais 100 événements déclarés au cours d'un mois donné sur l'ensemble de la série chronologique sont signalés et exclus de l'ajustement, car les méthodes statistiques ne sont pas significatives pour les indicateurs à faible volume constant.
+Avant d'appliquer tout ajustement, chaque indicateur est évalué pour s'assurer qu'il présente un volume suffisant. Les indicateurs qui n'atteignent jamais 100 événements déclarés au cours d'un mois donné sur l'ensemble de la série chronologique (`count >= 100`) sont signalés et exclus de l'ajustement, car les méthodes statistiques de lissage ne sont pas significatives pour les indicateurs à faible volume constant. La liste des indicateurs à faible volume exclus est enregistrée dans `M2_low_volume_exclusions.csv`.
 
 **Étape 3 : Ajuster les valeurs aberrantes**
 Pour les observations signalées comme aberrantes, le module estime les valeurs de remplacement en se basant sur les modèles historiques de déclaration de l'établissement. Un ensemble hiérarchique de méthodes est appliqué séquentiellement :
 
 - Moyenne mobile centrée sur six mois (trois mois avant et trois mois après)
 
-- Moyenne roulante sur six mois (trois mois avant et trois mois après)
+- Moyenne mobile prospective sur six mois
 
 - Moyenne mobile rétrospective sur six mois
 
@@ -89,8 +89,8 @@ Le module applique des ajustements à deux catégories d'observations :
 
 Certains indicateurs sont explicitement exclus de l'ajustement :
 
-- Les indicateurs liés à la mortalité (y compris les décès d'enfants de moins de cinq ans, les décès maternels et les décès néonatals), car ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
-- Les indicateurs de faible volume qui ne dépassent jamais 100 événements déclarés au cours d'un mois donné, pour lesquels l'ajustement statistique n'est pas significatif
+- Les indicateurs liés à la mortalité et aux mortinaissances (tout `indicator_common_id` dont le nom contient `death` ou `still_birth`, sans tenir compte de la casse — couvrant les décès d'enfants de moins de cinq ans, les décès maternels, les décès néonatals, les mortinaissances, etc.), car ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
+- Les indicateurs de faible volume qui n'atteignent jamais 100 événements déclarés au cours d'un mois donné, pour lesquels l'ajustement statistique n'est pas significatif
 
 **Sélection du scénario d'ajustement**
 
@@ -171,30 +171,30 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ??? "Indicateurs exclus (codé en dur)"
 
-    Certains indicateurs sont exclus de tous les ajustements en raison de leur caractère sensible :
+    Certains indicateurs sont exclus de tous les ajustements en raison de leur caractère sensible. L'exclusion est effectuée via une expression régulière insensible à la casse sur `indicator_common_id` :
 
     ```r
-    EXCLUDED_FROM_ADJUSTMENT <- c("u5_deaths", "maternal_deaths", "neonatal_deaths")
+    EXCLUDED_PATTERN <- "death|still_birth"
     ```
 
-    **Justification** : Les comptes de décès ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendances épidémiologiques ou des signaux d'épidémies.
+    Ce motif correspond à tout indicateur dont le nom contient `death` (par exemple `u5_deaths`, `maternal_deaths`, `neonatal_deaths`) ou `still_birth`. Pour ces indicateurs, le `count` brut original est préservé dans toutes les colonnes de scénarios (`count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`).
+
+    **Justification** : Les comptes de décès et de mortinaissances ne doivent pas être lissés ou imputés car ils représentent des événements discrets qui peuvent présenter une véritable variation temporelle. Leur ajustement pourrait masquer d'importantes tendances épidémiologiques ou des signaux d'épidémies.
 
 ??? "Exclusions de faibles volumes (codé en dur)"
 
-    Les indicateurs sont également automatiquement exclus des **ajustements** s'ils n'ont aucune observation supérieure à 100 dans l'ensemble de la base de données. Cela permet d'éviter des ajustements statistiques inutiles sur des indicateurs dont le nombre d'observations est constamment faible.
+    Les indicateurs sont également automatiquement exclus des **ajustements** si aucune observation établissement-mois n'atteint jamais 100 (`count >= 100`) dans l'ensemble de la base de données. Cela permet d'éviter des ajustements statistiques inutiles sur des indicateurs dont le nombre d'observations est constamment faible. Pour les indicateurs à faible volume exclus, le `count` brut est préservé dans les quatre colonnes de scénarios, tout comme pour les indicateurs de mortalité/mortinaissance exclus.
 
     **Logique d'exclusion** :
 
     ```r
-    volume_check <- raw_data[, .(
-      above_100 = sum(count > 100, na.rm = TRUE),
-      total = .N
-    ), by = indicator_common_id]
-
-    no_outlier_adj <- volume_check[above_100 == 0, indicator_common_id]
+    low_volume_check <- raw_data[, .(has_volume = any(count >= 100, na.rm = TRUE)),
+                                 by = indicator_common_id]
+    low_volume_check[, low_volume_exclude := !has_volume]
+    LOW_VOLUME_INDICATORS <- low_volume_check[has_volume == FALSE, indicator_common_id]
     ```
 
-    Ces informations sont enregistrées dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
+    La liste complète (avec un indicateur `low_volume_exclude` TRUE/FALSE par indicateur) est enregistrée dans `M2_low_volume_exclusions.csv` pour des raisons de transparence.
 
 ??? "Configuration de la fenêtre roulante (codé en dur)"
 
@@ -293,9 +293,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Le module dépend des paquets R suivants :
 
-    -   `data.table` - Manipulation et agrégation de données haute performance
-    -   `zoo` - Calculs de fenêtres glissantes (`frollmean` pour les moyennes glissantes)
-    -   `lubridate` - Traitement et manipulation des dates
+    -   `data.table` - Manipulation, agrégation de données haute performance, et calculs de fenêtres glissantes (`frollmean` pour les moyennes glissantes)
+    -   `zoo` - Chargé pour les utilitaires de séries temporelles
+    -   `lubridate` - Traitement des dates (`month()`, `year()`) utilisé pour le repli même-mois-année-précédente
 
 ??? "1. `apply_adjustments()`"
 
@@ -353,8 +353,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Logique de traitement** :
 
     - Appelle `apply_adjustments()` une fois par scénario
-    - Préserve les valeurs originales pour les indicateurs exclus (décès)
-    - Fusionne tous les résultats des scénarios dans un seul tableau grand format
+    - Préserve le `count` brut pour les indicateurs correspondant à la regex `death|still_birth` et pour les indicateurs de faible volume (en écrasant tout `count_working` spécifique au scénario)
+    - Fusionne tous les résultats des scénarios dans un seul tableau au format large avec quatre colonnes `count_final_*`
 
 ### Méthodes statistiques et algorithmes
 
@@ -413,7 +413,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     4.  **Même mois que l'année précédente**
 
         -   S'il n'existe pas de moyenne valable sur 6 mois, la valeur du **même mois civil de l'année précédente** est utilisée (par exemple, janvier 2023 pour janvier 2024)
-        -   Ne s'applique que si la valeur précédente est valide (pas une valeur aberrante et > 0)
+        -   Ne s'applique que si la valeur précédente est valide (non signalée comme aberrante et non manquante) et uniquement lorsqu'un seul enregistrement de l'année précédente correspond
         -   Particulièrement utile pour les indicateurs saisonniers (par exemple, paludisme, infections respiratoires)
         -   Étiquette de la méthode : `same_month_last_year`
         -   **Mise en œuvre** :
@@ -435,20 +435,17 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     5.  **Moyenne de toutes les valeurs historiques (repli)**
 
-        -   Si toutes les méthodes précédentes échouent, la moyenne de toutes les valeurs historiques valides pour cet indicateur d'installation est utilisée
+        -   Si toutes les méthodes précédentes échouent, la moyenne de toutes les valeurs historiques valides pour cet indicateur dans cet établissement est utilisée
         -   Fournit une base de référence spécifique à l'établissement lorsqu'aucun modèle temporel n'est disponible
         -   Étiquette de la méthode : `fallback`
 
     **Cas de figure** :
 
-    Si aucune de ces méthodes ne permet de trouver un remplacement valide, la valeur aberrante d'origine est conservée.
+    Si même la moyenne de repli au niveau de l'établissement ne peut pas être calculée (par exemple, l'établissement n'a aucune observation valide non aberrante pour cet indicateur), la valeur aberrante reste à `NA` dans les colonnes de scénarios ajustées.
 
 ??? "Méthodologie d'ajustement de l'exhaustivité"
 
-    La correction pour exhaustivité est appliquée à tout mois-facilité pour lequel.. :
-
-    - Le mois est marqué comme incomplet (`completeness_flag != 1`) dans le module 1, OU
-    - La valeur est manquante (`is.na(count_working)`)
+    L'ajustement d'exhaustivité est appliqué à tout mois-établissement où le `count_working` est manquant (`is.na(count_working)`). Dans le scénario `completeness`, cela est déclenché par un `count` original `NA` (l'établissement n'a pas déclaré ce mois-là). Dans le scénario `both`, le `count_working` peut également être `NA` parce que l'étape de traitement des valeurs aberrantes n'a pas produit de remplacement. Le `completeness_flag` du module 1 est fusionné dans les données pour référence mais n'est pas utilisé comme déclencheur du remplacement.
 
     **Approche statistique** :
 
@@ -498,13 +495,13 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     4.  **Moyenne de toutes les valeurs historiques (repli)**
 
-        -   Si aucune moyenne mobile ne peut être calculée, utilise la moyenne de toutes les valeurs valides pour cet indicateur d'installation
+        -   Si aucune moyenne mobile ne peut être calculée, utilise la moyenne de toutes les valeurs valides pour cet indicateur dans cet établissement
         -   Fournit une base de référence spécifique à l'établissement
         -   Étiquette de la méthode : `fallback`
 
     **Cas de figure** :
 
-    Si aucun remplacement valide n'est trouvé, la valeur reste manquante (`NA`).
+    Si l'établissement n'a aucune valeur valide pour cet indicateur, la moyenne de repli est elle-même `NA` et la valeur reste manquante dans les colonnes de scénarios ajustées.
 
 ??? "Logique de traitement des scénarios"
 
@@ -545,11 +542,14 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Important** :
 
-    Après les ajustements spécifiques au scénario, les indicateurs exclus (décès) sont réinitialisés à leurs valeurs initiales :
+    Après les ajustements spécifiques au scénario, les indicateurs exclus sont réinitialisés à leur `count` brut original. Cela s'applique à la fois aux indicateurs de mortalité/mortinaissance (correspondant à la regex `EXCLUDED_PATTERN`) et aux indicateurs de faible volume :
 
     ```r
-    dat[indicator_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
+    dat[grepl(EXCLUDED_PATTERN, indicator_common_id, ignore.case = TRUE) |
+        indicator_common_id %in% LOW_VOLUME_INDICATORS, count_working := count]
     ```
+
+    Par conséquent, les quatre colonnes `count_final_*` pour ces indicateurs sont toutes égales à la valeur brute.
 
 ??? "Méthodes d'agrégation"
 
@@ -749,9 +749,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Causes possibles** :
 
-    - L'indicateur figure sur la liste des exclusions (décès)
-    - Indicateur marqué comme étant de faible volume
-    - Pas de valeurs aberrantes ou d'indicateurs d'exhaustivité dans les données d'entrée
+    - Le nom de l'indicateur correspond au motif d'exclusion `death|still_birth`
+    - Indicateur marqué comme étant de faible volume (aucune observation n'a jamais atteint `count >= 100`)
+    - Aucun indicateur aberrant (`outlier_flag == 1`) et aucune valeur manquante dans les données d'entrée
 
     **Solution** :
 
@@ -803,9 +803,9 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     Le module comprend plusieurs contrôles de qualité :
 
-    1. **Exclusions des faibles volumes** : Identifie et exclut automatiquement les indicateurs qui ne comportent aucune observation de grande valeur
-    2. **Suivi des ajustements** : Compte et rapporte le nombre de valeurs ajustées par chaque méthode
-    3. **Indicateurs exclus** : Assure que les décès ne sont jamais ajustés
+    1. **Exclusions des faibles volumes** : Identifie et exclut automatiquement les indicateurs qui n'atteignent jamais `count >= 100`
+    2. **Suivi des ajustements** : Compte et rapporte le nombre de valeurs ajustées par chaque méthode (`roll6`, `forward`, `backward`, `same_month_last_year`, `fallback`)
+    3. **Indicateurs exclus** : Assure que les indicateurs de mortalité et de mortinaissance (correspondant à la regex `death|still_birth`) ne sont jamais ajustés
     4. **Journalisation de la console** : Fournit des statistiques détaillées sur l'état d'avancement et des statistiques sommaires
 
     **Exemple de sortie de la console** :
@@ -862,7 +862,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ---
 
-**Dernière mise à jour** : 06-05-2026
+**Dernière mise à jour** : 20-05-2026
 **Contact** : <fastr@worldbank.org>
 
 ---
@@ -903,8 +903,8 @@ FASTR répond à ces limitations en remplaçant les valeurs problématiques par 
 
 Certains indicateurs sont exclus du processus d'ajustement :
 
-- **Indicateurs de mortalité** (décès maternels, décès néonatals, décès d'enfants de moins de 5 ans) : Ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
-- **Indicateurs de faible volume** : Les indicateurs qui ne dépassent jamais 100 événements déclarés au cours d'un mois donné sont exclus de l'ajustement
+- **Indicateurs de mortalité et de mortinaissance** (décès maternels, décès néonatals, décès d'enfants de moins de 5 ans, mortinaissances, etc. — tout indicateur dont le nom contient `death` ou `still_birth`) : Ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
+- **Indicateurs de faible volume** : Les indicateurs qui n'atteignent jamais 100 événements déclarés au cours d'un mois donné sont exclus de l'ajustement
 
 <!--
 PRESENTER NOTES:

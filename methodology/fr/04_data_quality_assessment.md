@@ -41,7 +41,7 @@ Le module applique une séquence structurée de contrôles de la qualité des do
 Les rapports mensuels des établissements sont chargés et organisés pour l'analyse. Les dates sont normalisées et les unités géographiques ainsi que les indicateurs de santé disponibles dans l'ensemble de données sont identifiés.
 
 **Étape 2 : Détection des valeurs aberrantes**
-Pour chaque établissement et chaque indicateur (par exemple, les doses de vaccin Pentavalent ou les visites de soins prénatals), le module identifie les valeurs anormalement élevées qui peuvent refléter des erreurs de déclaration ou de saisie des données. Deux approches complémentaires sont utilisées : la détection statistique des valeurs aberrantes, basée sur les écarts par rapport à l'historique des rapports d'un établissement, et les vérifications proportionnelles qui signalent les mois représentant une part invraisemblablement importante des volumes de services annuels.
+Pour chaque établissement et chaque indicateur (par exemple, les doses de vaccin Pentavalent ou les visites de soins prénatals), le module identifie les valeurs anormalement élevées qui peuvent refléter des erreurs de déclaration ou de saisie des données. Deux approches complémentaires sont utilisées : la détection statistique des valeurs aberrantes, basée sur les écarts par rapport à l'historique des rapports d'un établissement, et les vérifications proportionnelles qui signalent les mois représentant une part invraisemblablement importante du volume de services déclaré par l'établissement sur les 12 mois glissants précédents pour cet indicateur.
 
 **Étape 3 : Évaluation de l'exhaustivité**
 Le module évalue la cohérence des rapports de l'établissement au fil du temps en construisant une chronologie complète des rapports pour chaque combinaison établissement-indicateur et en identifiant les mois manquants. Les établissements qui n'ont pas fait de déclaration pendant de longues périodes (six mois ou plus) sont classés comme inactifs plutôt qu'incomplets.
@@ -69,7 +69,7 @@ Le module génère un ensemble de résultats structurés, y compris les indicate
 Les valeurs aberrantes sont identifiées en évaluant les variations au sein de l'établissement dans les rapports mensuels pour chaque indicateur. Une valeur est considérée comme aberrante si elle remplit **l'un ou l'autre** des critères suivants :
 
 1. La valeur dépasse 10 fois l'écart absolu médian (EAM) par rapport à la médiane mensuelle de l'indicateur ; **ou**
-2. La valeur représente plus de 80 % du volume total déclaré pour une installation, un indicateur et une année donnés **et** le nombre déclaré est supérieur à 100.
+2. La valeur représente plus de 80 % du volume total déclaré par l'établissement pour cet indicateur sur les 12 mois glissants se terminant à cette période **et** le nombre déclaré est supérieur à 100.
 
 L'écart absolu est calculé en utilisant uniquement les valeurs égales ou supérieures à la médiane, afin de concentrer la détection sur les valeurs inhabituellement élevées et d'éviter de signaler les observations portant sur de faibles volumes.
 
@@ -104,7 +104,7 @@ Le module traite les données en format long, avec un enregistrement par combina
 ---
 ### Résultats de l'analyse et visualisation
 
-L'analyse FASTR génère six principaux résultats visuels :
+L'analyse FASTR génère six principaux résultats visuels (chacun est également produit sous forme de carte sous-nationale correspondante, à l'exception de la complétude dans le temps) :
 
 **1. Heatmap des valeurs aberrantes**
 
@@ -207,10 +207,10 @@ Le module utilise plusieurs paramètres configurables qui contrôlent le comport
 
     ```r
     # Proportion threshold for outlier detection
-    OUTLIER_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of annual total
+    OUTLIER_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of the trailing 12-month total
 
     # Minimum count to consider for outlier flagging
-    MINIMUM_COUNT_THRESHOLD <- 100  # Only flag valeurs aberrantes with count >= 100
+    MINIMUM_COUNT_THRESHOLD <- 100  # Only flag valeurs aberrantes with count > 100
 
     # Number of median absolute deviations for statistical valeur aberrante detection
     MADS <- 10  # Flag if value > 10 MADs from median
@@ -454,7 +454,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `mad_volume` : MAD calculé sur les valeurs >= médiane
     - `mad_residual` : Résidu standardisé (|comptage - médiane| / MAD)
     - `outlier_mad` : Drapeau binaire (1 si mad_residual > MADS)
-    - `pc` : Contribution proportionnelle au total annuel
+    - `pc` : Contribution proportionnelle au total des 12 mois glissants (fenêtre se terminant à la période de la ligne)
     - `outlier_pc` : Indicateur binaire (1 si pc > seuil)
     - `outlier_flag` : Indicateur final (1 si l'un des indicateurs de la méthode ET le nombre > seuil minimum)
 
@@ -468,9 +468,10 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Drapeaux outlier_mad = 1 si mad_residual > paramètre MADS
 
     **Étape 3** : Calcul de la contribution proportionnelle
-    - Pour chaque installation-indicateur-année, additionner le nombre total annuel
-    - Calculer pc = count / annual_total
+    - Pour chaque établissement-indicateur-période, additionner le nombre sur les 12 mois glissants se terminant à cette période (fenêtre mobile par établissement × indicateur)
+    - Calculer pc = count / window_total (pc est NA si le total de la fenêtre vaut 0)
     - Drapeaux outlier_pc = 1 si pc > OUTLIER_PROPORTION_THRESHOLD
+    - Ce dénominateur glissant remplace un dénominateur d'année civile, qui signalait à tort les établissements dont la seule déclaration se situait en début d'année civile (leur unique mois était son propre dénominateur)
 
     **Étape 4** : Combiner les drapeaux
     - Indicateur de valeur aberrante finale = 1 si (outlier_mad = 1 OR outlier_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
@@ -765,25 +766,27 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ??? "Détection proportionnelle des valeurs aberrantes"
 
-    Cette méthode permet d'identifier les mois où une seule observation représente une proportion anormalement élevée du total annuel pour une combinaison installation-indicateur.
+    Cette méthode permet d'identifier les mois où une seule observation représente une proportion anormalement élevée du volume déclaré par l'établissement pour cet indicateur sur les 12 mois précédents.
 
     **Algorithme:**
-    1. Pour chaque année-indicateur d'établissement, additionner le nombre total annuel
-    2. Calculer la proportion : `pc = monthly_count / annual_total`
+    1. Pour chaque établissement-indicateur-période, additionner le nombre sur les 12 mois glissants se terminant à cette période (fenêtre mobile par établissement × indicateur)
+    2. Calculer la proportion : `pc = monthly_count / window_total` (NA si le total de la fenêtre vaut 0)
     3. Marquer comme aberration proportionnelle (`outlier_pc = 1`) si `pc > OUTLIER_PROPORTION_THRESHOLD` (par défaut 0,8)
     4. Le `outlier_flag` final requiert également un nombre > 100
 
     **Raison d'être:**
-    Une installation déclarant 80 % de son volume annuel en un seul mois indique probablement une erreur de saisie des données (par exemple, déclaration cumulative au lieu d'une déclaration mensuelle, chiffre supplémentaire saisi).
+    Un établissement déclarant 80 % de son volume des 12 derniers mois en un seul mois indique probablement une erreur de saisie des données (par exemple, déclaration cumulative au lieu d'une déclaration mensuelle, chiffre supplémentaire saisi). La fenêtre glissante de 12 mois remplace un dénominateur d'année civile : un établissement dont la seule déclaration tombait en début d'année civile était auparavant son propre dénominateur (pc ≈ 1,0) et se trouvait signalé à tort.
 
     **Exemple:**
 
     ```
-    Facility XYZ, Indicator: anc1, Year: 2024
-    Monthly counts: 15, 18, 12, 16, 890, 14, 17, 13, 16, 15, 14, 12
-    Annual total: 1052
+    Facility XYZ, Indicator: anc1
+    Monthly counts (Jun 2023 – May 2024):
+      Jun  Jul  Aug  Sep  Oct  Nov  Dec  Jan  Feb  Mar  Apr  May
+       15   18   12   16   14   17   13   16   15   14   12  890
 
-    For May (count=890):
+    For May 2024 (count=890):
+    window_total = 15+18+12+16+14+17+13+16+15+14+12+890 = 1052
     pc = 890 / 1052 = 0.846
     0.846 > 0.8 AND 890 > 100, therefore outlier_flag = 1
     ```
@@ -943,7 +946,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     ```r
     # Make outlier detection more sensitive (lower thresholds)
-    OUTLIER_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of annual volume (was 80%)
+    OUTLIER_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of trailing 12-month volume (was 80%)
     MINIMUM_COUNT_THRESHOLD <- 50         # Consider counts >=50 (was 100)
     MADS <- 8                             # Flag at 8 MADs (was 10)
 
@@ -1415,9 +1418,9 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 |-------------------------------|-------------|------------|---------------------------------------------------------------------------|
 | outlier_flag | Binaire | 0 ou 1 | 1 = Valeur aberrante détectée par l'une ou l'autre des méthodes (MAD ou proportionnelle) ET compte > 100 |
 | outlier_mad | Binaire | 0 ou 1 | 1 = Valeur aberrante statistique (basée sur MAD) |
-| outlier_pc | Binaire | 0 ou 1 | 1 = Valeur aberrante proportionnelle (>80% du volume annuel) |
+| outlier_pc | Binaire | 0 ou 1 | 1 = Valeur aberrante proportionnelle (>80% du volume des 12 mois glissants) |
 | mad_residual | Continu | 0 à ∞ | Écart standardisé par rapport à la médiane (plus élevé = plus extrême) |
-| pc | Continu | 0 à 1 | Proportion du volume annuel (plus proche de 1 = plus concentré) |
+| pc | Continu | 0 à 1 | Proportion du volume des 12 mois glissants se terminant à cette période (plus proche de 1 = plus concentré) |
 | completeness_flag | Catégorique | 0, 1, 2 | 0=Incomplet (manquant), 1=Complet (rapporté), 2=Inactif (supprimé) |
 | sconsistency | Binaire | 0, 1, NA | 1=Cohérent (réussit le test), 0=Incohérent, NA=Impossible à calculer |
 | consistency_ratio | Continu | 0 à ∞ | Rapport d'indicateurs appariés (l'interprétation dépend de l'appairage) |
@@ -1448,7 +1451,7 @@ Le module suit la séquence suivante :
 3. OUTLIER ANALYSIS
    ├─ Calculate median and MAD by établissement-indicateur
    ├─ Flag MAD-based valeurs aberrantes (>10 MADs from median)
-   ├─ Flag proportion-based valeurs aberrantes (>80% of annual volume)
+   ├─ Flag proportion-based valeurs aberrantes (>80% of trailing 12-month volume)
    └─ Combine flags (either method + count > 100)
 
 4. COMPLETENESS ANALYSIS
@@ -1724,7 +1727,7 @@ Une valeur supérieure à **10 fois l'écart absolu médian (EAM)** par rapport 
 <!--
 PRESENTER NOTES:
 - Pour l'analyse FASTR, la période considérée pour identifier les valeurs aberrantes en utilisant l'approche EAM couvre l'ensemble du jeu de données. Cela signifie que si le jeu de données comprend cinq ans de données, la valeur médiane pour chaque indicateur sera calculée sur l'ensemble de la période de cinq ans
-- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes est appliquée sur une base d'année civile. Cela signifie que toutes les données de l'année 2024 seront utilisées pour évaluer la contribution proportionnelle des volumes de services déclarés en 2024. Si l'analyse est effectuée en milieu d'année, seules les données disponibles jusqu'à ce point seront considérées, ce qui peut conduire à l'utilisation de données d'une année partielle dans l'évaluation
+- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes utilise une fenêtre glissante de 12 mois par établissement × indicateur. Chaque valeur mensuelle est comparée à la somme des comptages sur les 12 mois se terminant à cette période. Cela remplace un dénominateur antérieur basé sur l'année civile qui signalait à tort les établissements dont la seule déclaration tombait en début d'année civile
 - Cela restreint l'analyse FASTR aux valeurs aberrantes qui sont des valeurs anormalement élevées par rapport au volume habituel de services déclarés par un établissement
 - Les données manquantes d'un système DHIS2 peuvent être dues à l'absence de déclaration ou à la déclaration de zéro service fourni (les zéros ne sont souvent pas stockés dans DHIS2). Nous ne pouvons pas distinguer entre manquant dû à l'absence de déclaration et manquant dû à la déclaration de zéro service. En tant que tel, les valeurs manquantes sont exclues de l'analyse
 - Nous restreignons la détection des valeurs aberrantes aux volumes de services supérieurs à 100 car cela aide à se concentrer sur des données significatives, stables et opérationnellement importantes. Cela réduit le bruit dû à la volatilité des petits volumes et se concentre sur les valeurs aberrantes plus impactantes (par exemple, les grands volumes sont susceptibles d'avoir des implications plus significatives sur l'analyse)
@@ -1815,7 +1818,7 @@ En intégrant plusieurs dimensions de la qualité des données dans un score uni
 
 | Paramètre | Défaut | Description |
 |-----------|--------|-------------|
-| **Seuil de proportion pour la détection des valeurs aberrantes** | 0,8 | Un mois-établissement est aberrant s'il représente plus de cette part du volume annuel pour l'indicateur |
+| **Seuil de proportion pour la détection des valeurs aberrantes** | 0,8 | Un mois-établissement est aberrant s'il représente plus de cette part du volume de l'établissement pour l'indicateur sur les 12 mois glissants |
 | **Seuil de comptage minimum** | 100 | Comptage minimum déclaré requis pour qu'un mois-établissement soit éligible au signalement comme aberrant |
 | **Nombre d'EAM** | 10 | Une valeur est signalée si elle dépasse ce multiple de l'écart absolu médian par rapport à la médiane mensuelle |
 | **Indicateurs soumis à l'EQD** | `anc1, penta1, opd` | Indicateurs contribuant au score composite EQD |
@@ -1958,7 +1961,7 @@ PRESENTER NOTES:
 - Une valeur aberrante est définie comme : Une valeur supérieure à 10 fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%
 - ET pour laquelle : Le volume est supérieur ou égal à la médiane, le volume n'est pas manquant, et le volume est supérieur à 100
 - Pour l'analyse FASTR, la période considérée pour identifier les valeurs aberrantes en utilisant l'approche EAM couvre l'ensemble du jeu de données. Cela signifie que si le jeu de données comprend cinq ans de données, la valeur médiane pour chaque indicateur sera calculée sur l'ensemble de la période de cinq ans
-- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes est appliquée sur une base d'année civile. Cela signifie que toutes les données de l'année 2024 seront utilisées pour évaluer la contribution proportionnelle des volumes de services déclarés en 2024. Si l'analyse est effectuée en milieu d'année, seules les données disponibles jusqu'à ce point seront considérées
+- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes utilise une fenêtre glissante de 12 mois par établissement × indicateur. Chaque valeur mensuelle est comparée à la somme des comptages sur les 12 mois se terminant à cette période. Cela remplace un dénominateur antérieur basé sur l'année civile qui signalait à tort les établissements dont la seule déclaration tombait en début d'année civile
 - Cela restreint l'analyse FASTR aux valeurs aberrantes qui sont des valeurs anormalement élevées par rapport au volume habituel de services déclarés par un établissement
 - Les données manquantes d'un système DHIS2 peuvent être dues à l'absence de déclaration ou à la déclaration de zéro service fourni (les zéros ne sont souvent pas stockés dans DHIS2). Nous ne pouvons pas distinguer entre manquant dû à l'absence de déclaration et manquant dû à la déclaration de zéro service. En tant que tel, les valeurs manquantes sont exclues de l'analyse
 - Nous restreignons la détection des valeurs aberrantes aux volumes de services supérieurs à 100 car cela aide à se concentrer sur des données significatives, stables et opérationnellement importantes

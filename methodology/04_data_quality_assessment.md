@@ -42,7 +42,7 @@ The module applies a structured sequence of data quality checks, progressing fro
 Monthly facility reports are loaded and organized for analysis. Dates are standardized, and the geographic units and health indicators available in the dataset are identified.
 
 **Step 2: Outlier detection**  
-For each facility and indicator (for example, pentavalent vaccine doses or antenatal care visits), the module identifies unusually high values that may reflect reporting or data entry errors. Two complementary approaches are used: statistical outlier detection based on deviations from a facility’s historical reporting pattern, and proportional checks that flag months accounting for an implausibly large share of annual service volumes.
+For each facility and indicator (for example, pentavalent vaccine doses or antenatal care visits), the module identifies unusually high values that may reflect reporting or data entry errors. Two complementary approaches are used: statistical outlier detection based on deviations from a facility’s historical reporting pattern, and proportional checks that flag months accounting for an implausibly large share of the facility’s trailing 12-month service volume for that indicator.
 
 **Step 3: Completeness assessment**  
 The module evaluates the consistency of facility reporting over time by constructing a complete reporting timeline for each facility–indicator combination and identifying missing months. Facilities with extended periods of non-reporting (six months or more) are classified as inactive rather than incomplete.
@@ -105,7 +105,7 @@ The module processes data in long format, with one record per facility–indicat
 ---
 ### Analysis outputs and visualization
 
-The FASTR analysis generates six main visual outputs:
+The FASTR analysis generates six main visual outputs (each is also produced as a corresponding sub-national map, except for completeness over time):
 
 **1. Outliers heatmap**
 
@@ -208,10 +208,10 @@ The module uses several configurable parameters that control analysis behavior:
 
     ```r
     # Proportion threshold for outlier detection
-    OUTLIER_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of annual total
+    OUTLIER_PROPORTION_THRESHOLD <- 0.8  # Flag if single month > 80% of the trailing 12-month total
 
     # Minimum count to consider for outlier flagging
-    MINIMUM_COUNT_THRESHOLD <- 100  # Only flag outliers with count >= 100
+    MINIMUM_COUNT_THRESHOLD <- 100  # Only flag outliers with count > 100
 
     # Number of Median Absolute Deviations for statistical outlier detection
     MADS <- 10  # Flag if value > 10 MADs from median
@@ -455,7 +455,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `mad_volume`: MAD calculated on values >= median
     - `mad_residual`: Standardized residual (|count - median| / MAD)
     - `outlier_mad`: Binary flag (1 if mad_residual > MADS)
-    - `pc`: Proportional contribution to annual total
+    - `pc`: Proportional contribution to the trailing 12-month total (rolling window ending at the row's period)
     - `outlier_pc`: Binary flag (1 if pc > threshold)
     - `outlier_flag`: Final flag (1 if either method flags AND count > minimum threshold)
 
@@ -469,9 +469,10 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Flags outlier_mad = 1 if mad_residual > MADS parameter
 
     **Step 3**: Calculate proportional contribution
-    - For each facility-indicator-year, sum total annual count
-    - Calculate pc = count / annual_total
+    - For each facility-indicator-period, sum the count over the trailing 12 months ending at that period (rolling window)
+    - Calculate pc = count / window_total (pc is NA if the window total is 0)
     - Flags outlier_pc = 1 if pc > OUTLIER_PROPORTION_THRESHOLD
+    - This rolling-window denominator replaces a calendar-year denominator, which falsely flagged facilities whose only reporting fell early in a calendar year (their single month was its own denominator)
 
     **Step 4**: Combine flags
     - Final outlier_flag = 1 if (outlier_mad = 1 OR outlier_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
@@ -766,25 +767,27 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ??? "Proportional outlier detection"
 
-    This method identifies months where a single observation represents an unusually large proportion of the annual total for a facility-indicator combination.
+    This method identifies months where a single observation represents an unusually large proportion of the facility-indicator's reported volume over the preceding 12 months.
 
     **Algorithm:**
-    1. For each facility-indicator-year, sum the total annual count
-    2. Calculate the proportion: `pc = monthly_count / annual_total`
+    1. For each facility-indicator-period, sum the count over the trailing 12 months ending at that period (rolling window per facility × indicator)
+    2. Calculate the proportion: `pc = monthly_count / window_total` (set to NA if the window total is 0)
     3. Flag as proportional outlier (`outlier_pc = 1`) if `pc > OUTLIER_PROPORTION_THRESHOLD` (default 0.8)
     4. The final `outlier_flag` also requires count > 100
 
     **Rationale:**
-    A facility reporting 80% of its annual volume in a single month likely indicates a data entry error (e.g., cumulative reporting instead of monthly, extra digit entered).
+    A facility reporting 80% of its trailing-year volume in a single month likely indicates a data entry error (e.g., cumulative reporting instead of monthly, extra digit entered). The trailing 12-month window replaces an earlier calendar-year denominator: a facility whose only reporting fell early in a calendar year was previously its own denominator (pc ≈ 1.0) and was incorrectly flagged.
 
     **Example:**
 
     ```
-    Facility XYZ, Indicator: anc1, Year: 2024
-    Monthly counts: 15, 18, 12, 16, 890, 14, 17, 13, 16, 15, 14, 12
-    Annual total: 1052
+    Facility XYZ, Indicator: anc1
+    Monthly counts (Jun 2023 – May 2024):
+      Jun  Jul  Aug  Sep  Oct  Nov  Dec  Jan  Feb  Mar  Apr  May
+       15   18   12   16   14   17   13   16   15   14   12  890
 
-    For May (count=890):
+    For May 2024 (count=890):
+    window_total = 15+18+12+16+14+17+13+16+15+14+12+890 = 1052
     pc = 890 / 1052 = 0.846
     0.846 > 0.8 AND 890 > 100, therefore outlier_flag = 1
     ```
@@ -944,7 +947,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     ```r
     # Make outlier detection more sensitive (lower thresholds)
-    OUTLIER_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of annual volume (was 80%)
+    OUTLIER_PROPORTION_THRESHOLD <- 0.6   # Flag if >60% of trailing 12-month volume (was 80%)
     MINIMUM_COUNT_THRESHOLD <- 50         # Consider counts >=50 (was 100)
     MADS <- 8                             # Flag at 8 MADs (was 10)
 
@@ -1526,7 +1529,7 @@ A value greater than **10 times the median absolute deviation (MAD)** from the m
 <!--
 PRESENTER NOTES:
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
+- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
@@ -1617,7 +1620,7 @@ By integrating multiple dimensions of data quality into a single score, it simpl
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| **Proportion threshold for outlier detection** | 0.8 | A facility-month is an outlier if it accounts for more than this share of annual volume for the indicator |
+| **Proportion threshold for outlier detection** | 0.8 | A facility-month is an outlier if it accounts for more than this share of the facility's trailing 12-month volume for the indicator |
 | **Minimum count threshold for consideration** | 100 | Minimum reported count required for a facility-month to be eligible for outlier flagging |
 | **Number of MADs** | 10 | A value is flagged if it exceeds this multiple of the median absolute deviation from the monthly median |
 | **Indicators subjected to DQA** | `anc1, penta1, opd` | Which indicators contribute to the composite DQA score |
@@ -1760,7 +1763,7 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
+- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
@@ -1796,7 +1799,7 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
+- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)

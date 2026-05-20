@@ -23,8 +23,8 @@ Ce module applique une approche standardisée, basée sur les données, pour ide
 
 | Composante | Détails |
 |-----------|---------|
-| **Entrées** | Volumes de services ajustés du module 2 (`M2_adjusted_data.csv`)<br>Indicateurs de valeurs aberrantes du module 1 (`M1_output_outliers.csv`)<br>SIGS brut (`hmis_ISO3.csv`) - uniquement pour la recherche admin_area_1 |
-| **Sorties** | Indicateurs de perturbation (`M3_chartout.csv`)<br>Impacts quantifiés par niveau géographique (`M3_disruptions_analysis_*.csv`)<br>Résumés des déficits/excédents (`M3_all_indicators_shortfalls_*.csv`) |
+| **Entrées** | Volumes de services ajustés du module 2 (`M2_adjusted_data.csv` et `M2_adjusted_data_admin_area.csv`)<br>Indicateurs de valeurs aberrantes du module 1 (`M1_output_outliers.csv`)<br>SIGS brut (`hmis_ISO3.csv`) - uniquement pour la correspondance entre `facility_id` et `admin_area_1` |
+| **Sorties** | Données ajustées en passage direct (`M3_service_utilization.csv`)<br>Indicateurs de perturbation (`M3_chartout.csv`)<br>Impacts quantifiés par niveau géographique (`M3_disruptions_analysis_admin_area_1` à `_4.csv`)<br>Résumés des déficits/excédents (`M3_all_indicators_shortfalls_admin_area_1` à `_4.csv`) |
 | **Objectif** | Détecter et quantifier les perturbations dans la fourniture des services par une analyse en deux étapes : les cartes de contrôle identifient quand les perturbations se produisent, la régression par panel quantifie leur ampleur |
 
 ---
@@ -385,7 +385,7 @@ Pour le graphique de variation de volume (résultat 4) :
     count ~ date + factor(month) + tagged
     ```
 
-    Régression unique sur l'ensemble des établissements, erreurs standard groupées au niveau du district (`admin_area_3`)
+    Régression unique sur l'ensemble des établissements, avec erreurs standard groupées au niveau du district (`admin_area_3`) lorsque plus d'un district est disponible ; sinon, sans regroupement.
 
     **Modèles au niveau de la province** (admin_area_2) :
 
@@ -393,7 +393,7 @@ Pour le graphique de variation de volume (résultat 4) :
     count ~ date + factor(month) + tagged
     ```
 
-    Régression séparée pour chaque province, erreurs standard groupées au niveau du district
+    Régression séparée pour chaque province, avec erreurs standard groupées au niveau du district lorsque plus d'un district est disponible ; sinon, sans regroupement.
 
     **Modèles au niveau du district** (admin_area_3 - optionnel) :
 
@@ -401,7 +401,7 @@ Pour le graphique de variation de volume (résultat 4) :
     count ~ date + factor(month) + tagged
     ```
 
-    Régression séparée pour chaque district, erreurs standard groupées au niveau du quartier (`admin_area_4`)
+    Régression séparée pour chaque district (minimum 10 observations requises), avec erreurs standard groupées au niveau du quartier (`admin_area_4`) lorsque plus d'un quartier est disponible ; sinon, sans regroupement.
 
     **Modèles au niveau du quartier** (admin_area_4 - optionnel) :
 
@@ -409,7 +409,7 @@ Pour le graphique de variation de volume (résultat 4) :
     count ~ date + factor(month) + tagged
     ```
 
-    Régression séparée pour chaque quartier/unité finale (pas de regroupement)
+    Régression séparée pour chaque quartier/unité finale (minimum 8 observations requises, pas de regroupement).
 
     ### Fonctions de soutien
 
@@ -689,15 +689,25 @@ Pour le graphique de variation de volume (résultat 4) :
     - Le modèle contrôle les tendances historiques et la saisonnalité.
     - Lorsqu'une perturbation est identifiée, les volumes prédits sont ajustés pour isoler l'effet de la perturbation.
 
-    #### Étape 4 : Régression fine au niveau infranational (si activée)
+    #### Étape 4 : Régression fine au niveau infranational (si `RUN_DISTRICT_MODEL = TRUE`)
 
-    Pour chaque combinaison `indicator_common_id` × `admin_area_3`, des modèles infranationaux sont estimés, avec des erreurs standard regroupées à un niveau administratif plus fin.
+    Pour chaque combinaison `indicator_common_id` × `admin_area_3`, des modèles infranationaux sont estimés, avec des erreurs standard regroupées au niveau du quartier (`admin_area_4`) lorsque plus d'un quartier est disponible.
 
     - Un modèle de régression en panel à effets fixes est appliqué à un niveau infranational fin, estimant les volumes de service attendus (`expect_admin_area_3`).
+    - Les panels comportant moins de 10 observations sont ignorés.
     - Le modèle contrôle les tendances historiques et la saisonnalité.
     - Lorsqu'une perturbation est identifiée, les volumes prédits sont ajustés pour isoler l'effet de la perturbation.
 
-    #### Étape 5 : Préparer les résultats pour la visualisation
+    #### Étape 5 : Régression au niveau du quartier (si `RUN_ADMIN_AREA_4_ANALYSIS = TRUE`)
+
+    Pour chaque combinaison `indicator_common_id` × `admin_area_4`, des modèles au niveau du quartier sont estimés, sans regroupement.
+
+    - Un modèle de régression en panel est appliqué au niveau géographique le plus fin, estimant les volumes de service attendus (`expect_admin_area_4`).
+    - Les panels comportant moins de 8 observations sont ignorés.
+    - Le modèle contrôle les tendances historiques et la saisonnalité.
+    - Lorsqu'une perturbation est identifiée, les volumes prédits sont ajustés pour isoler l'effet de la perturbation.
+
+    #### Étape 6 : Préparer les résultats pour la visualisation
 
     Une fois que les valeurs attendues ont été calculées pour chaque niveau (pays, province, district), le pipeline compare les valeurs prédites et les valeurs réelles pour évaluer l'ampleur de la perturbation.
 

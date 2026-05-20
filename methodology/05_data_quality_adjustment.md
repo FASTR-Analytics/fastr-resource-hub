@@ -33,10 +33,10 @@ By systematically addressing outliers and missing data prior to analysis, this m
 The module applies a standardized, multi-step process to adjust routine health facility data while preserving underlying service delivery patterns:
 
 **Step 1: Load and prepare data**
-The module integrates three inputs: reported facility-level service volumes, outlier flags identifying anomalous values (from Module 1), and completeness flags indicating months with incomplete reporting (from Module 1). Indicators for which adjustment is not appropriate (such as mortality-related measures) are identified and excluded from subsequent adjustment steps.
+The module integrates three inputs: reported facility-level service volumes (`hmis_ISO3.csv`), outlier flags identifying anomalous values (`M1_output_outliers.csv` from Module 1), and completeness flags indicating months with incomplete reporting (`M1_output_completeness.csv` from Module 1). Indicators for which adjustment is not appropriate (any indicator whose name contains `death` or `still_birth`, case-insensitive) are identified and excluded from subsequent adjustment steps.
 
 **Step 2: Identify low-volume indicators**
-Before any adjustments are applied, each indicator is assessed for sufficient variation. Indicators that never exceed 100 reported events in any month across the full time series are flagged and excluded from adjustment, as statistical methods are not meaningful for consistently low-count indicators.
+Before any adjustments are applied, each indicator is assessed for sufficient volume. Indicators that never reach 100 reported events in any month across the full time series (`count >= 100`) are flagged and excluded from adjustment, as statistical smoothing methods are not meaningful for consistently low-count indicators. The list of excluded low-volume indicators is saved to `M2_low_volume_exclusions.csv`.
 
 **Step 3: Adjust outlier values**
 For observations flagged as outliers, the module estimates replacement values based on the facility’s own historical reporting patterns. A hierarchical set of methods is applied sequentially:
@@ -86,8 +86,8 @@ The module applies adjustments to two categories of observations:
 
 Certain indicators are explicitly excluded from adjustment:
 
-- Mortality-related indicators (including under-five deaths, maternal deaths, and neonatal deaths), as these represent discrete events for which smoothing or imputation is not appropriate  
-- Low-volume indicators that never exceed 100 reported events in any month, for which statistical adjustment is not meaningful  
+- Mortality and stillbirth indicators (any `indicator_common_id` whose name contains `death` or `still_birth`, case-insensitive — covering under-five deaths, maternal deaths, neonatal deaths, stillbirths, etc.), as these represent discrete events for which smoothing or imputation is not appropriate  
+- Low-volume indicators that never reach 100 reported events in any month, for which statistical adjustment is not meaningful  
 
 **Selection of adjustment scenario**
 
@@ -168,30 +168,30 @@ For the combined adjustment heatmap (output 3):
 
 ??? "Excluded indicators (hard-coded)"
 
-    Some indicators are excluded from all adjustments due to their sensitive nature:
+    Some indicators are excluded from all adjustments due to their sensitive nature. Exclusion is done via a case-insensitive regular expression match on `indicator_common_id`:
 
     ```r
-    EXCLUDED_FROM_ADJUSTMENT <- c("u5_deaths", "maternal_deaths", "neonatal_deaths")
+    EXCLUDED_PATTERN <- "death|still_birth"
     ```
 
-    **Rationale**: Death counts should not be smoothed or imputed as they represent discrete events that may have genuine temporal variation. Adjusting these could mask important epidemiological patterns or outbreak signals.
+    This matches any indicator whose name contains `death` (e.g. `u5_deaths`, `maternal_deaths`, `neonatal_deaths`) or `still_birth`. For these indicators, the original raw `count` is preserved in every scenario column (`count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`).
+
+    **Rationale**: Mortality and stillbirth counts should not be smoothed or imputed as they represent discrete events that may have genuine temporal variation. Adjusting these could mask important epidemiological patterns or outbreak signals.
 
 ??? "Low volume exclusions (hard-coded)"
 
-    Indicators are also automatically excluded from **adjustment** if they have zero observations above 100 across the entire dataset. This prevents meaningless statistical adjustment on indicators with consistently low counts.
+    Indicators are also automatically excluded from **adjustment** if no facility-month observation ever reaches 100 (`count >= 100`) anywhere in the dataset. This prevents meaningless statistical adjustment on indicators with consistently low counts. Excluded low-volume indicators have their raw `count` preserved across all four scenario columns, just like the excluded mortality/stillbirth indicators.
 
     **Exclusion logic**:
 
     ```r
-    volume_check <- raw_data[, .(
-      above_100 = sum(count > 100, na.rm = TRUE),
-      total = .N
-    ), by = indicator_common_id]
-
-    no_outlier_adj <- volume_check[above_100 == 0, indicator_common_id]
+    low_volume_check <- raw_data[, .(has_volume = any(count >= 100, na.rm = TRUE)),
+                                 by = indicator_common_id]
+    low_volume_check[, low_volume_exclude := !has_volume]
+    LOW_VOLUME_INDICATORS <- low_volume_check[has_volume == FALSE, indicator_common_id]
     ```
 
-    This information is saved to `M2_low_volume_exclusions.csv` for transparency.
+    The full list (with a `low_volume_exclude` TRUE/FALSE flag per indicator) is saved to `M2_low_volume_exclusions.csv` for transparency.
 
 ??? "Rolling window configuration (hard-coded)"
 
@@ -290,9 +290,9 @@ For the combined adjustment heatmap (output 3):
 
     The module depends on the following R packages:
 
-    -   `data.table` - High-performance data manipulation and aggregation
-    -   `zoo` - Rolling window calculations (`frollmean` for rolling averages)
-    -   `lubridate` - Date handling and manipulation
+    -   `data.table` - High-performance data manipulation, aggregation, and rolling window calculations (`frollmean` for rolling averages)
+    -   `zoo` - Loaded for time-series utilities
+    -   `lubridate` - Date handling (`month()`, `year()`) used for the same-month-last-year fallback
 
 ??? "1. `apply_adjustments()`"
 
@@ -350,8 +350,8 @@ For the combined adjustment heatmap (output 3):
     **Processing logic**:
 
     - Calls `apply_adjustments()` once per scenario
-    - Preserves original values for excluded indicators (deaths)
-    - Merges all scenario results into a single wide-format table
+    - Preserves the raw `count` for indicators matching the `death|still_birth` regex and for low-volume indicators (overwriting any scenario-specific `count_working`)
+    - Merges all scenario results into a single wide-format table with four `count_final_*` columns
 
 ### Statistical methods & algorithms
 
@@ -410,7 +410,7 @@ For the combined adjustment heatmap (output 3):
     4.  **Same month from previous year**
 
         -   If no valid 6-month average exists, the value from the **same calendar month in the previous year** is used (e.g., Jan 2023 for Jan 2024)
-        -   Only applied if that previous value is valid (not an outlier, and > 0)
+        -   Only applied if that previous value is valid (not flagged as an outlier and not missing) and only when exactly one matching prior-year record is found
         -   Particularly useful for seasonal indicators (e.g., malaria, respiratory infections)
         -   Method tag: `same_month_last_year`
         -   **Implementation**:
@@ -438,14 +438,11 @@ For the combined adjustment heatmap (output 3):
 
     **Edge case**:
 
-    If no valid replacement can be found from any of these methods, the original outlier value is retained.
+    If even the facility-level fallback mean cannot be computed (e.g., the facility has no valid non-outlier observations at all for that indicator), the outlier value remains as `NA` in the adjusted scenario columns.
 
 ??? "Completeness adjustment methodology"
 
-    Completeness adjustment is applied to any facility-month where:
-
-    - The month is flagged as incomplete (`completeness_flag != 1`) in Module 1, OR
-    - The value is missing (`is.na(count_working)`)
+    Completeness adjustment is applied to any facility-month where the working count is missing (`is.na(count_working)`). In the `completeness` scenario this is driven by the original `count` being `NA` (i.e., the facility did not report that month). In the `both` scenario, the working count may also be `NA` because the outlier step did not produce a replacement. The `completeness_flag` from Module 1 is merged in for reference but is not used as the replacement trigger.
 
     **Statistical approach**:
 
@@ -501,7 +498,7 @@ For the combined adjustment heatmap (output 3):
 
     **Edge case**:
 
-    If no valid replacement is found, the value remains missing (`NA`).
+    If the facility has no valid values at all for that indicator, the fallback mean itself is `NA` and the value remains missing in the adjusted scenario columns.
 
 ??? "Scenario processing logic"
 
@@ -542,11 +539,14 @@ For the combined adjustment heatmap (output 3):
 
     **Important**:
 
-    After scenario-specific adjustments, excluded indicators (deaths) are reset to their original values:
+    After scenario-specific adjustments, excluded indicators are reset to their original raw `count`. This applies to both mortality/stillbirth indicators (matched via the `EXCLUDED_PATTERN` regex) and low-volume indicators:
 
     ```r
-    dat[indicator_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
+    dat[grepl(EXCLUDED_PATTERN, indicator_common_id, ignore.case = TRUE) |
+        indicator_common_id %in% LOW_VOLUME_INDICATORS, count_working := count]
     ```
+
+    As a result, the four `count_final_*` columns for these indicators are all equal to the raw value.
 
 ??? "Aggregation methods"
 
@@ -746,9 +746,9 @@ For the combined adjustment heatmap (output 3):
 
     **Possible causes**:
 
-    - Indicator is in the excluded list (deaths)
-    - Indicator flagged as low-volume
-    - No outlier or completeness flags in input data
+    - Indicator name matches the `death|still_birth` exclusion pattern
+    - Indicator flagged as low-volume (no observation ever reached `count >= 100`)
+    - No outlier flags (`outlier_flag == 1`) and no missing values in the input data
 
     **Solution**:
 
@@ -800,9 +800,9 @@ For the combined adjustment heatmap (output 3):
 
     The module includes several quality checks:
 
-    1. **Low volume exclusions**: Automatically identifies and excludes indicators with zero high-value observations
-    2. **Adjustment tracking**: Counts and reports number of values adjusted by each method
-    3. **Excluded indicators**: Ensures deaths are never adjusted
+    1. **Low volume exclusions**: Automatically identifies and excludes indicators that never reach `count >= 100`
+    2. **Adjustment tracking**: Counts and reports the number of values adjusted by each method (`roll6`, `forward`, `backward`, `same_month_last_year`, `fallback`)
+    3. **Excluded indicators**: Ensures mortality and stillbirth indicators (matched via `death|still_birth` regex) are never adjusted
     4. **Console logging**: Provides detailed progress and summary statistics
 
     **Example console output**:
@@ -859,7 +859,7 @@ For the combined adjustment heatmap (output 3):
 
 ---
 
-**Last updated**: 06-05-2026
+**Last updated**: 20-05-2026
 **Contact**: <fastr@worldbank.org>
 
 ---
@@ -900,8 +900,8 @@ FASTR addresses these limitations by replacing problematic values with estimates
 
 Certain indicators are excluded from the adjustment process:
 
-- **Mortality indicators** (maternal deaths, neonatal deaths, under-5 deaths): These represent discrete events where smoothing or imputation is not appropriate
-- **Low-volume indicators**: Indicators that never exceed 100 reported events in any month are excluded from adjustment
+- **Mortality and stillbirth indicators** (maternal deaths, neonatal deaths, under-5 deaths, stillbirths, etc. — any indicator whose name contains `death` or `still_birth`): These represent discrete events where smoothing or imputation is not appropriate
+- **Low-volume indicators**: Indicators that never reach 100 reported events in any month are excluded from adjustment
 
 <!--
 PRESENTER NOTES:

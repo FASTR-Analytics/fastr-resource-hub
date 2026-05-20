@@ -42,25 +42,29 @@ This module addresses key challenges in estimating coverage, including:
 
 ### Part 1 and part 2 explained
 
-**Part 1: Denominator calculation and selection**
+Coverage estimation is split across **two modules** that always run in sequence: `m005` (Part 1) produces every denominator option, and `m006` (Part 2) picks one denominator chain and turns it into final coverage estimates.
 
-- Calculates target populations (denominators) using multiple approaches: HMIS-based (from ANC1, delivery, BCG, Penta1) and population-based (UN WPP)
+**Part 1 — `m005` denominator calculation and chain pre-selection**
 
-- Compares coverage estimates from each denominator against survey data
+- Requires: `m002` (adjusted HMIS data)
 
-- Automatically selects the "best" denominator for each indicator by minimizing error
+- Calculates target populations (denominators) using multiple approaches: HMIS-based (from ANC1, delivery, BCG, Penta1, live births) and population-based (UN WPP)
 
-- Outputs: Denominator datasets and combined results showing all options
+- Compares each HMIS-based chain to UN WPP and pre-selects the chain whose median ratio is closest to 1.0 (the `best` chain) — this is one chain applied to all indicators, not a per-indicator pick
 
-**Part 2: Denominator selection and survey projection**
+- Outputs all denominator values, plus a `M5_combined_results_*.csv` per geographic level with coverage estimated using every available denominator, the `best` chain's coverage, and the raw survey values
 
-- Allows users to override automatic selections and choose specific denominators
+- Outputs: `M5_denominators_national.csv`, `M5_denominators_admin2.csv`, `M5_denominators_admin3.csv`, `M5_combined_results_national.csv`, `M5_combined_results_admin2.csv`, `M5_combined_results_admin3.csv`, `M5_selected_denominator_per_indicator.csv`
 
-- Calculates year-over-year coverage trends from administrative data
+**Part 2 — `m006` denominator chain selection and survey projection**
 
-- Projects survey estimates forward using HMIS trends to fill temporal gaps
+- Requires: `m005` (`M5_combined_results_*.csv` for national / admin2 / admin3)
 
-- Outputs: Final coverage estimates combining HMIS, survey, and projected values
+- Single user parameter `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg`, `penta1`) — `auto` keeps the chain pre-selected by `m005`; any other value forces a single chain across all indicators and all geographic levels
+
+- Computes year-over-year coverage deltas from the selected chain and projects the most recent survey value forward using those deltas (additive method)
+
+- Outputs: `M6_coverage_estimation_national.csv`, `M6_coverage_estimation_admin2.csv`, `M6_coverage_estimation_admin3.csv` — each row carries HMIS coverage, original survey value, and projected survey value side by side
 
 ---
 
@@ -85,14 +89,14 @@ For each health indicator, the module calculates several possible target populat
 **Step 3: Calculate coverage for each denominator**
 The module computes coverage by dividing the service volume by each denominator option. This produces multiple coverage estimates per indicator, each based on a different population assumption.
 
-**Step 4: Compare to survey benchmarks**
-Each coverage estimate is compared to survey data using squared error calculation. The survey serves as the benchmark since it is based on representative household sampling.
+**Step 4: Pre-select a single denominator chain**
+At national level, the module compares each HMIS-based chain (ANC1, delivery, Penta1) to UN WPP population estimates for the same target populations (pregnancies, live births, infants eligible for DPT). For each chain it computes the median ratio of chain values to UN WPP values, then picks the chain whose median ratio is closest to 1.0. The BCG chain is national-only and is excluded from the auto comparison (it can still be forced as a manual override). UN WPP serves as an independent demographic anchor, not as the "best" coverage value.
 
-**Step 5: Select the best denominator**
-The denominator producing the lowest error (closest match to survey) is automatically selected as "best." The selection prioritizes HMIS-based denominators over population projections to ensure data is driven by observed service delivery.
+**Step 5: Apply the chain across geographies**
+The same chain selected at national level is reused for admin area 2 and admin area 3, ensuring that one consistent source feeds every geography. If the chain is national-only (BCG), subnational rows are dropped from that output.
 
 **Step 6: Generate outputs**
-The module saves denominator datasets for transparency and combined results files showing coverage from all denominators plus the selected best option.
+The module saves: per-indicator denominator values (`M5_denominators_*.csv`); combined results (`M5_combined_results_*.csv`) holding coverage for every denominator option, the `best` chain entries used by `m006`, and the raw survey values; and a summary table (`M5_selected_denominator_per_indicator.csv`) listing which denominator the chain assigns to each indicator at each level.
 
 **Step 7: Repeat for subnational levels**
 If subnational data is available, the process repeats for administrative level 2 (e.g., provinces) and level 3 (e.g., districts), with fallback mechanisms to handle missing local survey data.
@@ -100,10 +104,10 @@ If subnational data is available, the process repeats for administrative level 2
 #### Part 2: Denominator selection and survey projection
 
 **Step 1: User configuration**
-Users review Part 1 results and configure denominator selections for each indicator. Options include using the automatic "best" selection or overriding with a specific denominator based on programmatic knowledge.
+The user sets one parameter, `DENOMINATOR_CHAIN`. The default `auto` keeps Part 1's pre-selected chain (the `best` rows in `M5_combined_results_*.csv`). Any other value (`anc1`, `delivery`, `bcg`, `penta1`) forces that single chain to be used for every indicator and every geographic level.
 
-**Step 2: Filter to selected denominators**
-The module filters Part 1's combined results to include only user-selected denominators, creating a focused dataset for analysis.
+**Step 2: Filter to the selected chain**
+The module reads `M5_combined_results_*.csv` and keeps only the rows belonging to the selected chain, dropping the raw `survey` rows. This produces one coverage value per indicator × year × geography.
 
 **Step 3: Calculate coverage trends**
 Year-over-year changes (deltas) in HMIS-based coverage are calculated. This shows whether coverage is increasing, decreasing, or stable over time.
@@ -134,7 +138,7 @@ Results are saved with standardized column structures for each administrative le
 
 **1. Selection of denominators**
 
-In Part 1, the module automatically selects denominator options based on their alignment with available survey reference values. In Part 2, users may review and override these selections based on programmatic knowledge or analytical priorities. The choice of denominator determines whether coverage estimates are primarily anchored to observed service delivery patterns (HMIS-based denominators) or to demographic projections (population-based denominators).
+In Part 1 (`m005`), the module compares each HMIS-based denominator chain to UN WPP population estimates and pre-selects the chain whose median ratio to UN WPP is closest to 1.0. The same chain is then applied to every indicator and every geographic level for consistency. In Part 2 (`m006`), the user can either keep this auto-selected chain or force a specific chain (`anc1`, `delivery`, `bcg`, or `penta1`). The choice determines whether coverage estimates are primarily anchored to one set of HMIS service-based denominators (e.g., everything derived from ANC1 visits) or another (e.g., everything derived from Penta1 doses).
 
 **2. Treatment of gaps between surveys**
 
@@ -142,7 +146,15 @@ Household surveys are conducted at irregular intervals, typically every three to
 
 **3. Use of national versus subnational survey data**
 
-For immunization indicators only, when subnational survey estimates are not available, the module applies national survey values to subnational units as a fallback. This approach assumes that national immunization coverage rates are broadly representative at subnational levels, an assumption that may not hold in all settings. This fallback mechanism is not applied to other indicators, such as maternal or child health services, for which subnational analysis requires locally observed survey data.
+Coverage estimation at subnational levels requires both subnational HMIS service volumes (from Module 2) and subnational survey reference values (DHS/MICS). The module handles missing inputs at two distinct points:
+
+- **No subnational HMIS data for the country** — when `M2_adjusted_data_admin_area.csv` contains no usable subnational rows, or when no subnational survey data exists at all in the unified DHS/MICS dataset for the country, Part 1 falls back to `NATIONAL_ONLY` and Part 2 detects empty admin2/admin3 `M5_combined_results_*.csv` files and skips the corresponding block entirely. In that case `M6_coverage_estimation_admin2.csv` and/or `M6_coverage_estimation_admin3.csv` are still written, but as empty files with the correct column headers only.
+
+- **Subnational HMIS present but a given indicator has no subnational survey value** — the module does **not** carry the national survey value down to subnational areas as a substitute. The corresponding `*carry` column is left as `NA` for that geography-indicator-year, so no HMIS-implied denominator can be computed for that indicator at that level, and the indicator simply does not appear in subnational coverage outputs.
+
+- **Chain pre-selection has no admin2/admin3 result** — when `m005` cannot identify a best chain at national level (no overlapping HMIS and UN WPP data), the denominator-per-indicator entries fall back to `NOT_AVAILABLE`. When the selected chain is national-only (BCG), `denominator_admin2` and `denominator_admin3` in `M5_selected_denominator_per_indicator.csv` are explicitly set to `NOT_AVAILABLE` and no subnational rows are produced for that chain.
+
+Indicator-level fallbacks within the *survey* dataset itself are narrower and remain in place at every geographic level: when SBA is absent, the module reuses the delivery survey value; when `pnc1_mother` is absent, it reuses the `pnc1` survey value.
 
 **4. Adjustment of denominators for target populations**
 
@@ -161,7 +173,7 @@ Using the relationship between reported HMIS service volumes and survey-based co
 
 **Coverage calculation**
 
-Multiple coverage estimates are calculated by dividing service volumes by alternative denominator options, including population-based, HMIS-implied, and hybrid approaches. Each coverage estimate is evaluated against survey reference values to assess plausibility and to inform denominator selection for each indicator.
+Multiple coverage estimates are calculated by dividing service volumes by alternative denominator options, including population-based and HMIS-implied approaches. Squared error against carried-forward survey values is computed for diagnostic transparency, while the actual chain selection in `m005` is driven by proximity to UN WPP at the national level.
 
 **Temporal projection**
 
@@ -337,7 +349,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     3. **Fallback logic**
        - If `sba` missing, uses `delivery` values
        - If `pnc1_mother` missing, uses `pnc1` values
-       - Subnational areas use national values when local data unavailable (for BCG, Penta1, Penta3)
+       - At subnational levels, missing survey values for any indicator are left as `NA` — no national value is substituted (gaps are reported in the run log per indicator)
 
     4. **Forward-Filling**
        - Creates complete time series for each area
@@ -451,51 +463,37 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
     This classification ensures that when selecting "best" denominators, we avoid using reference-based denominators (which would artificially show 100% coverage equal to the survey value).
 
-??? "`compare_coverage_to_survey()`"
+??? "`select_best_chain()` and `compare_coverage_to_survey()`"
 
-    **Purpose**: Selects the best-performing denominator for each indicator
+    **Purpose**: `select_best_chain()` pre-selects a single denominator chain at national level. `compare_coverage_to_survey()` then filters all coverage estimates to that chain and joins survey values for diagnostic comparison.
 
-    **Input**:
+    **Input** (`select_best_chain`):
 
-    - Coverage estimates from all denominators
-    - Survey reference values (forward-filled)
+    - National denominator table (with `dwpp_*`, `danc1_*`, `ddelivery_*`, `dpenta1_*` columns)
+    - `DENOMINATOR_CHAIN` parameter (default `auto`)
 
-    **Selection algorithm**:
+    **Selection algorithm (auto mode)**:
 
-    1. **Calculate coverage**: For each denominator option
+    1. For each candidate chain (`anc1`, `delivery`, `penta1` — `bcg` is excluded from auto because it is national-only), and for each target population available in UN WPP (`pregnancy`, `livebirth`, `dpt`), compute the ratio of chain value to UN WPP value where both are positive
+    2. Take the median ratio across all years and target populations for each chain
+    3. Select the chain whose median ratio is closest to 1.0
+    4. If `DENOMINATOR_CHAIN` is set to a specific chain (e.g., `anc1`), skip the comparison and use that chain directly
 
-       ```
-       coverage = (service_volume / denominator) × 100
-       ```
+    **Output** (`select_best_chain`): the selected chain name (e.g. `delivery`) and prefix (e.g. `ddelivery_`)
 
-    2. **Calculate error**: Compare to survey benchmark
+    **`compare_coverage_to_survey()` then**:
 
-       ```
-       squared_error = (HMIS_coverage - survey_coverage)²
-       ```
+    1. Filters coverage rows to those whose denominator starts with the chain prefix
+    2. Joins forward-filled survey reference values
+    3. Computes `squared_error = (coverage - survey)²` as a diagnostic column (not used for selection)
+    4. Returns the filtered coverage and a denominator-mapping table listing the chain's denominator for each indicator
 
-    3. **Classify source type**: Label each denominator as independent, reference-based, or UNWPP
+    **Key design decisions**:
 
-    4. **Selection hierarchy**:
-
-       ```
-       Priority 1: Independent denominators (non-reference, non-UNWPP) → lowest error
-       Priority 2: Reference-based denominators (only if no independent available)
-       Priority 3: UNWPP denominators (last resort fallback)
-       ```
-
-    5. **Geographic consistency**: Best denominator selected per geographic area × indicator (not per year)
-
-    **Output**:
-
-    Coverage data filtered to only the best-performing denominator for each indicator, with ranking
-
-    **Key design decision**:
-
-    - UNWPP denominators excluded from "best" selection by default
-    - Prevents over-reliance on population projections
-    - Ensures HMIS data drives coverage when available
-    - UNWPP used only when no HMIS-based options exist
+    - Selection is **per chain** (one chain for all indicators and all geographies), not per indicator
+    - UN WPP serves as the anchor for chain selection; survey values are not used to pick the chain
+    - The same chain is applied to subnational levels for geographic consistency
+    - If the chain is national-only (BCG), subnational results are dropped
 
 ??? "`create_combined_results_table()`"
 
@@ -543,19 +541,22 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
     This assumes coverage remains constant until next observation.
 
-??? "Squared error minimization"
+??? "UN WPP-proximity chain selection (auto mode)"
 
-    To select the best denominator:
+    To pick the denominator chain to apply across all indicators:
 
     $$
-    \text{Best denominator} = \arg \min_d \sum_{t} (C_{d,t} - S_t)^2
+    \text{Selected chain} = \arg \min_{c} \left| \operatorname{median}_{t,p} \left( \frac{D_{c,p,t}}{D_{\text{wpp},p,t}} \right) - 1 \right|
     $$
 
     Where:
 
-    - $C_{d,t}$ = Coverage using denominator $d$ in year $t$
-    - $S_t$ = Survey coverage in year $t$
-    - Summation is across all years with survey data
+    - $D_{c,p,t}$ = denominator from chain $c$ for target population $p$ in year $t$ (only positive values)
+    - $D_{\text{wpp},p,t}$ = corresponding UN WPP denominator
+    - $c \in \{\text{anc1}, \text{delivery}, \text{penta1}\}$ (BCG excluded because it is national-only)
+    - $p$ iterates over the target populations available in UN WPP (`pregnancy`, `livebirth`, `dpt`)
+
+    The chain whose median ratio is closest to 1.0 across years and target populations is selected. Squared error against survey values is still computed and exposed in Part 1 outputs, but only as a diagnostic — it does not drive selection.
 
 #### Conceptual framework: Demographic cascades
 
@@ -893,13 +894,13 @@ Part 1 executes the following workflow for each administrative level (national, 
 - Create coverage estimates for all indicator-denominator combinations
 - Preserve survey-based coverage as benchmark
 
-**Step 6: Select best denominator**
+**Step 6: Pre-select denominator chain (chain-level, not per indicator)**
 
-- For each indicator, compare all denominator-based coverage estimates to survey data
-- Calculate squared error: `Σ(coverage_d,t - survey_t)²`
-- Select denominator with minimum error as "best"
-- Apply preference rules (HMIS-based preferred over WPP)
-- Flag denominators as "reference" if from same service
+- At national level, for each candidate HMIS chain (`anc1`, `delivery`, `penta1`) compute the median ratio of chain values to UN WPP values across `pregnancy`, `livebirth`, and `dpt` target populations
+- Select the chain whose median ratio is closest to 1.0; this becomes the `best` chain
+- Apply the same chain to admin area 2 and admin area 3 (drop subnational rows if the chain is BCG, which is national-only)
+- Flag the chain's denominator-per-indicator mapping in `M5_selected_denominator_per_indicator.csv`
+- Compute squared error against survey values as a diagnostic column (not used for selection)
 
 **Step 7: Format and save outputs**
 
@@ -937,29 +938,23 @@ Part 1 executes the following workflow for each administrative level (national, 
 
     **Combined results files**
 
-    **4. M5_combined_results_national.csv**
+    **4. M5_combined_results_national.csv** — columns: `admin_area_1, year, indicator_common_id, denominator_best_or_survey, value`
 
-    **5. M5_combined_results_admin2.csv**
+    **5. M5_combined_results_admin2.csv** — columns: `admin_area_1, admin_area_2, year, indicator_common_id, denominator_best_or_survey, value`
 
-    **6. M5_combined_results_admin3.csv**
-
-    **Structure**:
-
-    ```
-    admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value
-    ```
+    **6. M5_combined_results_admin3.csv** — columns: `admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value`
 
     **Fields**:
 
     - `indicator_common_id`: Health indicator (e.g., `anc1`, `penta3`)
-    - `denominator_best_or_survey`: Either `best`, `survey`, or specific denominator name
-    - `value`: Coverage percentage (0-100+)
+    - `denominator_best_or_survey`: Either `best` (the chain pre-selected by `m005`), `survey` (raw DHS/MICS observation), or a specific denominator name (e.g. `danc1_pregnancy`, `dwpp_livebirth`)
+    - `value`: Coverage percentage (0–100+) for denominator rows, or raw survey coverage for `survey` rows
 
-    **Special "best" Entry**: Duplicates the selected optimal denominator for easy filtering
+    **Special `best` entry**: Duplicates the chain's denominator for each indicator so that `m006` can filter on `denominator_best_or_survey == "best"` without needing to know which chain was selected.
 
     **7. M5_selected_denominator_per_indicator.csv**
 
-    **Purpose**: Summary of the best-performing denominator selected for each indicator at each geographic level
+    **Purpose**: Summary table listing the denominator from the pre-selected chain that is assigned to each indicator at each geographic level. Because `m005` selects a single chain and applies it to all geographies, the three columns usually carry the same chain (only the target-population variant differs by indicator).
 
     **Structure**:
 
@@ -970,9 +965,9 @@ Part 1 executes the following workflow for each administrative level (national, 
     **Fields**:
 
     - `indicator_common_id`: Health indicator (e.g., `anc1`, `penta3`)
-    - `denominator_national`: Best denominator for national-level coverage
-    - `denominator_admin2`: Best denominator for admin level 2 coverage
-    - `denominator_admin3`: Best denominator for admin level 3 coverage
+    - `denominator_national`: Chain denominator used at national level (e.g. `danc1_pregnancy` for `anc1` if the ANC1 chain was selected)
+    - `denominator_admin2`: Same denominator at admin level 2, or `NOT_AVAILABLE` when the chain is national-only (BCG)
+    - `denominator_admin3`: Same denominator at admin level 3, or `NOT_AVAILABLE` when the chain is national-only (BCG)
 
 ??? "Data safeguards and validation"
 
@@ -985,9 +980,10 @@ Part 1 executes the following workflow for each administrative level (national, 
        - Falls back to higher geographic level if mismatch detected
 
     3. **Fallback mechanisms**:
-       - Subnational → National if no local survey data
-       - SBA → Delivery if SBA missing
-       - PNC1_mother → PNC1 if missing
+       - If no subnational survey data exists at all for the country, the whole run falls back to `NATIONAL_ONLY`
+       - At subnational levels, per-indicator gaps in the survey are left as `NA` (no national-to-subnational substitution)
+       - SBA → Delivery if SBA missing (applied at every level)
+       - PNC1_mother → PNC1 if missing (applied at every level)
 
     4. **Edge case handling**: Detects when admin_area_3 should be used as admin_area_2 in certain country contexts
 
@@ -1072,7 +1068,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 Part 2 serves three key purposes:
 
-1. **User-driven denominator selection**: While Part 1 automatically selects the "best" denominator by minimizing error against survey data, Part 2 allows users to override this selection and choose specific denominators based on programmatic knowledge or policy priorities
+1. **User-driven denominator selection**: While Part 1 automatically pre-selects a single denominator chain based on proximity of HMIS-implied estimates to UN WPP population estimates at national level, Part 2 allows users to override this selection and force a different chain (`anc1`, `delivery`, `bcg`, or `penta1`) based on programmatic knowledge or policy priorities
 
 2. **Temporal trend analysis**: Computes year-over-year changes (deltas) in coverage to understand service delivery trends over time
 
@@ -1088,7 +1084,7 @@ DENOMINATOR_CHAIN <- "auto"   # Options: "auto", "anc1", "delivery", "bcg", "pen
 
 **Options:**
 
-- `"auto"` *(default)* — Use the `best` denominator selected per indicator and geographic level by Part 1 (`m005`). This applies the squared-error minimisation against survey benchmarks separately for each indicator.
+- `"auto"` *(default)* — Use the `best` chain pre-selected by Part 1 (`m005`) — a single chain chosen by UN WPP proximity at national level and reused for every indicator and every geographic level.
 - `"anc1"` — Force all coverage estimates to use the ANC1-derived denominator chain (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, etc.).
 - `"delivery"` — Force the delivery-derived chain (`ddelivery_*`).
 - `"bcg"` — Force the BCG-derived chain (`dbcg_*`, national level only).
@@ -1305,10 +1301,10 @@ When a fixed chain is selected, the module applies the same source across all in
     **Algorithm**:
 
     1. Read `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg`, or `penta1`).
-    2. If `auto`: keep rows where `denominator_best_or_survey == "best"` for each indicator.
-    3. If a specific chain (e.g., `anc1`): for each indicator, keep rows whose denominator belongs to that chain (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, `danc1_measles1`, etc.) and matches the indicator's expected target population.
-    4. Convert selected rows to coverage format (rename columns, drop survey entries).
-    5. Combine results across all indicators.
+    2. If `auto`: keep rows where `denominator_best_or_survey == "best"` (the chain pre-selected by `m005`).
+    3. If a specific chain (e.g., `anc1`): keep rows where `denominator_best_or_survey` starts with the chain prefix (e.g. `danc1_`). The mapping between indicator and target-population variant was already encoded by `m005` when it expanded denominators to indicators, so this step is a pure prefix filter.
+    4. Drop any remaining `survey` rows and rename `value` to `coverage`.
+    5. Return the filtered data frame.
 
     **Input**:
 
@@ -1392,12 +1388,10 @@ Part 2 (module `m006`) produces three output files:
 - `admin_area_1`: Country name
 - `year`: Year of estimate
 - `indicator_common_id`: Standardized indicator code
-- `denominator`: Selected denominator source
+- `denominator`: Denominator name from the chain selected by `DENOMINATOR_CHAIN` (e.g. `danc1_pregnancy`)
 - `coverage_original_estimate`: Original survey-based coverage (NA for years without surveys)
 - `coverage_avgsurveyprojection`: Projected survey coverage using HMIS trends
 - `coverage_cov`: HMIS-based coverage estimate
-- `survey_raw_source`: Survey source (e.g., "DHS 2018")
-- `survey_raw_source_detail`: Additional source details
 
 #### 2. Admin Level 2 Output: `M6_coverage_estimation_admin2.csv`
 
@@ -1416,29 +1410,31 @@ Same as national, plus:
 - `admin_area_3`: Third-level administrative division name (e.g., district)
 - `year`: Year of estimate
 - `indicator_common_id`: Standardized indicator code
-- `denominator`: Selected denominator source
+- `denominator`: Denominator name from the selected chain
 - `coverage_original_estimate`: Original survey coverage
 - `coverage_avgsurveyprojection`: Projected survey coverage
 - `coverage_cov`: HMIS-based coverage
-- `survey_raw_source`: Survey source
-- `survey_raw_source_detail`: Source details
+
+Note: although the `m006` results-object schema lists `survey_raw_source` and `survey_raw_source_detail`, the current `m006` write step retains only the eight columns above (national has seven). Survey source and detail metadata are available in `M5_combined_results_*.csv` from Part 1 if needed.
 
 #### Methodological considerations
 
-??? "1. Denominator selection strategy"
+??? "1. Denominator chain selection strategy"
 
-    **When to use "best"**:
+    **When to use `auto` (the default)**:
 
-    - Uncertain about which denominator is most appropriate
-    - Want to rely on data-driven selection from Part 1
-    - Starting point for analysis
+    - You want Part 1's UN WPP-proximity pre-selection to choose the chain
+    - Starting point for analysis or routine reporting
+    - You have no strong programmatic reason to prefer one source
 
-    **When to specify a denominator**:
+    **When to force a specific chain (`anc1`, `delivery`, `bcg`, `penta1`)**:
 
-    - Programmatic knowledge suggests a specific denominator is most accurate
-    - Policy requirements dictate use of specific population estimates
-    - Conducting sensitivity analyses
-    - Known issues with certain data sources
+    - Programmatic knowledge says one HMIS reporting stream (e.g. ANC1) is the most reliable in the country
+    - You want to ensure consistency in country comparisons by using the same source everywhere
+    - Conducting sensitivity analyses to see how the chain affects coverage
+    - Known issues with the auto-selected source (e.g. data quality concerns in that reporting stream)
+
+    Remember that the chain is applied to **all indicators and all geographic levels** — you cannot mix chains by indicator.
 
 ??? "2. Projection methodology"
 
@@ -1653,12 +1649,10 @@ Same as national, plus:
     | `admin_area_2` / `admin_area_3` | Subnational area (where applicable) |
     | `year` | Calendar year |
     | `indicator_common_id` | Health indicator code |
-    | `denominator` | Selected denominator type |
+    | `denominator` | Denominator name from the chain selected by `DENOMINATOR_CHAIN` |
     | `coverage_cov` | HMIS-derived coverage (numerator ÷ denominator × 100) |
     | `coverage_original_estimate` | Survey value where available |
     | `coverage_avgsurveyprojection` | Survey value projected using HMIS trends |
-    | `survey_raw_source` | Survey source (DHS/MICS) |
-    | `survey_raw_source_detail` | Specific survey name and year |
 
 ??? "Reviewing denominator options"
 
@@ -1674,11 +1668,11 @@ Same as national, plus:
 
 ??? "Subnational data requirements"
 
-    The module checks for subnational data availability:
+    The module checks for subnational data availability in two stages:
 
-    - If `ANALYSIS_LEVEL` is set to include admin2 or admin3, the module validates that matching survey data exists
-    - If no matching subnational survey data is found, the module falls back to a higher geographic level
-    - Console messages indicate which analysis levels are being processed
+    - **Stage 1 (Part 1, `m005`)**: If `ANALYSIS_LEVEL` is set to include admin2 or admin3, the module checks that the unified survey dataset contains any subnational rows for the country. If not, the whole analysis level is downgraded to `NATIONAL_ONLY`. If subnational survey data exists but the admin area names do not match HMIS admin area names, the corresponding subnational level is skipped and the analysis falls back to the next higher level (admin3 → admin2, admin2 → national only). An empty `M5_combined_results_*.csv` is still written for any skipped level.
+    - **Stage 2 (Part 2, `m006`)**: Reads the `M5_combined_results_*.csv` produced by Part 1. If a subnational file has zero rows, the corresponding `RUN_ADMIN2` / `RUN_ADMIN3` flag is set to `FALSE`, the whole admin2/admin3 block is skipped, and an empty `M6_coverage_estimation_*.csv` is written for that level.
+    - Console messages indicate which analysis levels are being processed and which were skipped.
 
 ??? "Validation checks"
 

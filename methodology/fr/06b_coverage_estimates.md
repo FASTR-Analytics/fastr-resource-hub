@@ -45,25 +45,29 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 
 ### Partie 1 et partie 2 expliquées
 
-**Partie 1 : Calcul et sélection du dénominateur**
+L'estimation de la couverture est répartie entre **deux modules** qui s'exécutent toujours en séquence : `m005` (partie 1) produit toutes les options de dénominateur, et `m006` (partie 2) sélectionne une chaîne de dénominateurs et la convertit en estimations de couverture finales.
 
-- Calcule les populations cibles (dénominateurs) à l'aide de plusieurs approches : SIGS (à partir de CPN1, accouchement, BCG, Penta1) et population (UN WPP)
+**Partie 1 — `m005` calcul des dénominateurs et pré-sélection de la chaîne**
 
-- Comparaison des estimations de couverture de chaque dénominateur avec les données de l'enquête
+- Requiert : `m002` (données SIGS ajustées)
 
-- Sélectionne automatiquement le "meilleur" dénominateur pour chaque indicateur en minimisant l'erreur
+- Calcule les populations cibles (dénominateurs) à l'aide de plusieurs approches : basées sur le SIGS (à partir de CPN1, accouchement, BCG, Penta1, naissances vivantes) et basées sur la population (UN WPP)
 
-- Résultats : Ensembles de données sur les dénominateurs et résultats combinés montrant toutes les options
+- Compare chaque chaîne SIGS au UN WPP et pré-sélectionne la chaîne dont le rapport médian est le plus proche de 1,0 (la chaîne `best`) — il s'agit d'une seule chaîne appliquée à tous les indicateurs, et non d'un choix par indicateur
 
-**Partie 2 : Sélection du dénominateur et projection de l'enquête**
+- Génère toutes les valeurs de dénominateurs, plus un fichier `M5_combined_results_*.csv` par niveau géographique contenant la couverture estimée avec chaque dénominateur disponible, la couverture de la chaîne `best` et les valeurs brutes de l'enquête
 
-- Permet aux utilisateurs d'ignorer les sélections automatiques et de choisir des dénominateurs spécifiques
+- Sorties : `M5_denominators_national.csv`, `M5_denominators_admin2.csv`, `M5_denominators_admin3.csv`, `M5_combined_results_national.csv`, `M5_combined_results_admin2.csv`, `M5_combined_results_admin3.csv`, `M5_selected_denominator_per_indicator.csv`
 
-- Calcul des tendances de couverture d'une année sur l'autre à partir des données administratives
+**Partie 2 — `m006` sélection de la chaîne et projection des enquêtes**
 
-- Projette les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS pour combler les lacunes temporelles
+- Requiert : `m005` (`M5_combined_results_*.csv` pour national / admin2 / admin3)
 
-- Résultats : Estimations finales de la couverture combinant les données du SIGS, de l'enquête et les valeurs projetées
+- Un seul paramètre utilisateur `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg`, `penta1`) — `auto` conserve la chaîne pré-sélectionnée par `m005` ; toute autre valeur force une chaîne unique pour tous les indicateurs et tous les niveaux géographiques
+
+- Calcule les deltas de couverture d'une année sur l'autre à partir de la chaîne sélectionnée et projette la valeur d'enquête la plus récente vers l'avant en utilisant ces deltas (méthode additive)
+
+- Sorties : `M6_coverage_estimation_national.csv`, `M6_coverage_estimation_admin2.csv`, `M6_coverage_estimation_admin3.csv` — chaque ligne contient côte à côte la couverture SIGS, la valeur d'enquête originale et la valeur d'enquête projetée
 
 ---
 
@@ -88,14 +92,14 @@ Pour chaque indicateur de santé, le module calcule plusieurs populations cibles
 **Étape 3 : Calculer la couverture pour chaque dénominateur**
 Le module calcule la couverture en divisant le volume de services par chaque option de dénominateur. Il en résulte plusieurs estimations de couverture par indicateur, chacune basée sur une hypothèse de population différente.
 
-**Étape 4 : Comparaison avec les données de référence de l'enquête**
-Chaque estimation de couverture est comparée aux données de l'enquête en utilisant le calcul de l'erreur quadratique. L'enquête sert de référence puisqu'elle est basée sur un échantillonnage représentatif des ménages.
+**Étape 4 : Pré-sélectionner une chaîne de dénominateurs unique**
+Au niveau national, le module compare chaque chaîne SIGS (CPN1, accouchement, Penta1) aux estimations de population du UN WPP pour les mêmes populations cibles (grossesses, naissances vivantes, nourrissons éligibles au DTC). Pour chaque chaîne, il calcule le rapport médian des valeurs de la chaîne aux valeurs UN WPP, puis sélectionne la chaîne dont le rapport médian est le plus proche de 1,0. La chaîne BCG est nationale uniquement et est exclue de la comparaison automatique (elle peut toujours être forcée comme dérogation manuelle). Le UN WPP sert d'ancrage démographique indépendant, et non de "meilleure" valeur de couverture.
 
-**Étape 5 : Sélection du meilleur dénominateur**
-Le dénominateur produisant l'erreur la plus faible (la plus proche de l'enquête) est automatiquement sélectionné comme "meilleur" La sélection donne la priorité aux dénominateurs basés sur le SIGS plutôt qu'aux projections démographiques afin de s'assurer que les données sont basées sur la prestation de services observée.
+**Étape 5 : Appliquer la chaîne à toutes les géographies**
+La même chaîne sélectionnée au niveau national est réutilisée pour la zone administrative 2 et la zone administrative 3, garantissant qu'une seule source cohérente alimente chaque géographie. Si la chaîne est nationale uniquement (BCG), les lignes infranationales sont supprimées de cette sortie.
 
 **Étape 6 : Générer des résultats**
-Le module enregistre les ensembles de données des dénominateurs pour la transparence et les fichiers de résultats combinés montrant la couverture de tous les dénominateurs plus la meilleure option sélectionnée.
+Le module enregistre : les valeurs de dénominateurs par indicateur (`M5_denominators_*.csv`) ; les résultats combinés (`M5_combined_results_*.csv`) contenant la couverture pour chaque option de dénominateur, les entrées de la chaîne `best` utilisées par `m006`, et les valeurs brutes de l'enquête ; et un tableau récapitulatif (`M5_selected_denominator_per_indicator.csv`) listant le dénominateur que la chaîne attribue à chaque indicateur à chaque niveau.
 
 **Étape 7 : Répéter pour les niveaux sous-nationaux**
 Si des données infranationales sont disponibles, le processus se répète pour les niveaux administratifs 2 (par exemple, les provinces) et 3 (par exemple, les districts), avec des mécanismes de repli pour gérer les données d'enquête locales manquantes.
@@ -103,10 +107,10 @@ Si des données infranationales sont disponibles, le processus se répète pour 
 #### Partie 2 : Sélection du dénominateur et projection de l'enquête
 
 **Étape 1 : Configuration par l'utilisateur**
-Les utilisateurs examinent les résultats de la partie 1 et configurent la sélection des dénominateurs pour chaque indicateur. Les options comprennent l'utilisation de la "meilleure" sélection automatique ou l'utilisation d'un dénominateur spécifique basé sur la connaissance du programme.
+L'utilisateur définit un seul paramètre, `DENOMINATOR_CHAIN`. La valeur par défaut `auto` conserve la chaîne pré-sélectionnée par la partie 1 (les lignes `best` dans `M5_combined_results_*.csv`). Toute autre valeur (`anc1`, `delivery`, `bcg`, `penta1`) force cette chaîne unique à être utilisée pour chaque indicateur et chaque niveau géographique.
 
-**Étape 2 : Filtrer sur les dénominateurs sélectionnés**
-Le module filtre les résultats combinés de la partie 1 pour n'inclure que les dénominateurs sélectionnés par l'utilisateur, créant ainsi un ensemble de données ciblé pour l'analyse.
+**Étape 2 : Filtrer sur la chaîne sélectionnée**
+Le module lit `M5_combined_results_*.csv` et ne conserve que les lignes appartenant à la chaîne sélectionnée, en supprimant les lignes brutes `survey`. Cela produit une valeur de couverture par indicateur × année × géographie.
 
 **Étape 3 : Calculer les tendances de la couverture**
 Les changements d'une année sur l'autre (deltas) dans la couverture basée sur le SIGS sont calculés. Cela permet de savoir si la couverture augmente, diminue ou est stable dans le temps.
@@ -137,7 +141,7 @@ Les resultats sont sauvegardes avec des structures de colonnes standardisées po
 
 **1. Sélection des dénominateurs**
 
-Dans la partie 1, le module sélectionne automatiquement les options de dénominateur en fonction de leur alignement sur les valeurs de référence disponibles pour l'enquête. Dans la partie 2, les utilisateurs peuvent revoir et remplacer ces sélections en fonction de leurs connaissances programmatiques ou de leurs priorités analytiques. Le choix du dénominateur détermine si les estimations de couverture sont principalement ancrées dans les modèles de prestation de services observés (dénominateurs basés sur le SIGS) ou dans les projections démographiques (dénominateurs basés sur la population).
+Dans la partie 1 (`m005`), le module compare chaque chaîne de dénominateurs SIGS aux estimations de population UN WPP et pré-sélectionne la chaîne dont le rapport médian au UN WPP est le plus proche de 1,0. La même chaîne est ensuite appliquée à chaque indicateur et à chaque niveau géographique pour assurer la cohérence. Dans la partie 2 (`m006`), l'utilisateur peut conserver cette chaîne sélectionnée automatiquement ou forcer une chaîne spécifique (`anc1`, `delivery`, `bcg` ou `penta1`). Le choix détermine si les estimations de couverture sont principalement ancrées dans un ensemble de dénominateurs SIGS basés sur les services (par exemple, tout dérivé des visites CPN1) ou dans un autre (par exemple, tout dérivé des doses Penta1).
 
 **2. Traitement des écarts entre les enquêtes**
 
@@ -145,7 +149,15 @@ Les enquêtes auprès des ménages sont menées à intervalles irréguliers, gé
 
 **3. Utilisation de données d'enquête nationales ou infranationales**
 
-Pour les indicateurs de vaccination uniquement, lorsque les estimations de l'enquête infranationale ne sont pas disponibles, le module applique les valeurs de l'enquête nationale aux unités infranationales comme solution de repli. Cette approche suppose que les taux de couverture vaccinale nationaux sont largement représentatifs au niveau infranational, ce qui n'est pas forcément le cas dans tous les contextes. Ce mécanisme de repli n'est pas appliqué à d'autres indicateurs, tels que les services de santé maternelle ou infantile, pour lesquels l'analyse infranationale nécessite des données d'enquête observées localement.
+L'estimation de la couverture aux niveaux infranationaux exige à la fois des volumes de services SIGS infranationaux (issus du Module 2) et des valeurs d'enquête de référence infranationales (EDS/MICS). Le module gère les données d'entrée manquantes à deux moments distincts :
+
+- **Aucune donnée SIGS infranationale pour le pays** — lorsque `M2_adjusted_data_admin_area.csv` ne contient aucune ligne infranationale exploitable, ou lorsque le jeu de données unifié EDS/MICS ne comporte aucune donnée d'enquête infranationale pour le pays, la partie 1 bascule en `NATIONAL_ONLY` et la partie 2 détecte les fichiers `M5_combined_results_*.csv` admin2/admin3 vides et saute entièrement le bloc correspondant. Dans ce cas, `M6_coverage_estimation_admin2.csv` et/ou `M6_coverage_estimation_admin3.csv` sont tout de même écrits, mais sous forme de fichiers vides ne contenant que les en-têtes de colonnes corrects.
+
+- **Données SIGS infranationales présentes, mais aucune valeur d'enquête infranationale pour un indicateur donné** — le module ne **substitue pas** la valeur d'enquête nationale aux zones infranationales. La colonne `*carry` correspondante reste à `NA` pour ce triplet géographie-indicateur-année, aucun dénominateur SIGS-implicite ne peut donc être calculé pour cet indicateur à ce niveau, et l'indicateur n'apparaît tout simplement pas dans les sorties de couverture infranationales.
+
+- **La pré-sélection de la chaîne n'a pas de résultat admin2/admin3** — lorsque `m005` ne parvient pas à identifier une meilleure chaîne au niveau national (aucun chevauchement entre données HMIS et UN WPP), les entrées dénominateur-par-indicateur basculent à `NOT_AVAILABLE`. Lorsque la chaîne sélectionnée est nationale uniquement (BCG), `denominator_admin2` et `denominator_admin3` dans `M5_selected_denominator_per_indicator.csv` sont explicitement positionnés à `NOT_AVAILABLE` et aucune ligne infranationale n'est produite pour cette chaîne.
+
+Les substitutions au niveau de l'indicateur dans le jeu de données *d'enquête* lui-même sont plus restreintes et restent en place à chaque niveau géographique : lorsque SBA est absent, le module réutilise la valeur d'enquête `delivery` ; lorsque `pnc1_mother` est absent, il réutilise la valeur d'enquête `pnc1`.
 
 **4. Ajustement des dénominateurs pour les populations cibles**
 
@@ -164,7 +176,7 @@ En utilisant la relation entre les volumes de services SIGS déclarés et les es
 
 **Calcul de la couverture**
 
-Les estimations de couverture multiples sont calculées en divisant les volumes de services par des options de dénominateur alternatives, y compris des approches basées sur la population, des approches implicites SIGS et des approches hybrides. Chaque estimation de couverture est évaluée par rapport aux valeurs de référence de l'enquête afin d'évaluer la plausibilité et d'informer la sélection du dénominateur pour chaque indicateur.
+Les estimations de couverture multiples sont calculées en divisant les volumes de services par des options de dénominateur alternatives, y compris des approches basées sur la population et des approches implicites SIGS. L'erreur quadratique par rapport aux valeurs d'enquête reportées est calculée pour la transparence diagnostique, tandis que la sélection effective de la chaîne dans `m005` est déterminée par la proximité au UN WPP au niveau national.
 
 **Projection temporelle**
 
@@ -341,7 +353,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
     3. **Logique de repli**
        - Si `sba` manque, utilise les valeurs de `delivery`
        - Si `pnc1_mother` manque, utilise les valeurs de `pnc1`
-       - Les zones infranationales utilisent les valeurs nationales lorsque les données locales ne sont pas disponibles (pour `bcg`, `penta1`, `penta3`)
+       - Aux niveaux infranationaux, les valeurs d'enquête manquantes pour un indicateur restent à `NA` — aucune valeur nationale n'est substituée (les lacunes sont rapportées dans le journal d'exécution par indicateur)
 
     4. **Remplissage en amont**
        - Crée des séries chronologiques complètes pour chaque zone
@@ -455,51 +467,37 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     Cette classification garantit que lors de la sélection des "meilleurs" dénominateurs, nous évitons d'utiliser des dénominateurs basés sur des références (qui montreraient artificiellement une couverture à 100% égale à la valeur de l'enquête).
 
-??? "`compare_coverage_to_survey()`"
+??? "`select_best_chain()` et `compare_coverage_to_survey()`"
 
-    **Objectif** : Sélectionne le dénominateur le plus performant pour chaque indicateur
+    **Objectif** : `select_best_chain()` pré-sélectionne une chaîne de dénominateurs unique au niveau national. `compare_coverage_to_survey()` filtre ensuite toutes les estimations de couverture sur cette chaîne et joint les valeurs d'enquête pour une comparaison diagnostique.
 
-    **Entrée** :
+    **Entrée** (`select_best_chain`) :
 
-    - Estimations de la couverture de tous les dénominateurs
-    - Valeurs de référence de l'enquête (remplies à l'avance)
+    - Tableau national des dénominateurs (avec colonnes `dwpp_*`, `danc1_*`, `ddelivery_*`, `dpenta1_*`)
+    - Paramètre `DENOMINATOR_CHAIN` (par défaut `auto`)
 
-    **Algorithme de sélection** :
+    **Algorithme de sélection (mode auto)** :
 
-    1. **Calculer la couverture** : Pour chaque option de dénominateur
+    1. Pour chaque chaîne candidate (`anc1`, `delivery`, `penta1` — `bcg` est exclu de l'auto car il est national uniquement), et pour chaque population cible disponible dans UN WPP (`pregnancy`, `livebirth`, `dpt`), calculer le rapport de la valeur de la chaîne à la valeur UN WPP lorsque les deux sont positives
+    2. Prendre le rapport médian sur toutes les années et populations cibles pour chaque chaîne
+    3. Sélectionner la chaîne dont le rapport médian est le plus proche de 1,0
+    4. Si `DENOMINATOR_CHAIN` est défini sur une chaîne spécifique (par ex. `anc1`), ignorer la comparaison et utiliser cette chaîne directement
 
-       ```
-       coverage = (service_volume / denominator) × 100
-       ```
+    **Sortie** (`select_best_chain`) : le nom de la chaîne sélectionnée (par ex. `delivery`) et son préfixe (par ex. `ddelivery_`)
 
-    2. **Calculer l'erreur** : Comparez à la référence de l'enquête
+    **`compare_coverage_to_survey()` ensuite** :
 
-       ```
-       squared_error = (HMIS_coverage - survey_coverage)²
-       ```
+    1. Filtre les lignes de couverture sur celles dont le dénominateur commence par le préfixe de la chaîne
+    2. Joint les valeurs de référence d'enquête reportées
+    3. Calcule `squared_error = (coverage - survey)²` comme colonne diagnostique (non utilisée pour la sélection)
+    4. Retourne la couverture filtrée et un tableau de correspondance des dénominateurs listant le dénominateur de la chaîne pour chaque indicateur
 
-    3. **Classer le type de source** : Étiqueter chaque dénominateur comme indépendant, basé sur des références ou UNWPP
+    **Décisions clés de conception** :
 
-    4. **Hiérarchie de la sélection** :
-
-       ```
-       Priority 1: Independent denominators (non-reference, non-UNWPP) → lowest error
-       Priority 2: Reference-based denominators (only if no independent available)
-       Priority 3: UNWPP denominators (last resort fallback)
-       ```
-
-    5. **Cohérence géographique** : Meilleur dénominateur sélectionné par zone géographique × indicateur (et non par année)
-
-    **Résultat** :
-
-    Données de couverture filtrées pour ne retenir que le dénominateur le plus performant pour chaque indicateur, avec classement
-
-    **Décision clé de conception** :
-
-    - Les dénominateurs des PPNU sont exclus de la "meilleure" sélection par défaut
-    - Évite une dépendance excessive à l'égard des projections démographiques
-    - Assure que les données SIGS déterminent la couverture lorsqu'elles sont disponibles
-    - Le PPNU n'est utilisé que lorsqu'il n'existe pas d'options basées sur le SIGS
+    - La sélection se fait **par chaîne** (une chaîne pour tous les indicateurs et toutes les géographies), pas par indicateur
+    - UN WPP sert d'ancrage pour la sélection de la chaîne ; les valeurs d'enquête ne sont pas utilisées pour choisir la chaîne
+    - La même chaîne est appliquée aux niveaux infranationaux pour la cohérence géographique
+    - Si la chaîne est nationale uniquement (BCG), les résultats infranationaux sont supprimés
 
 ??? "`create_combined_results_table()`"
 
@@ -547,19 +545,22 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     Cela suppose que la couverture reste constante jusqu'à la prochaine observation.
 
-??? "minimisation de l'erreur quadratique"
+??? "Sélection de chaîne par proximité au UN WPP (mode auto)"
 
-    Pour sélectionner le meilleur dénominateur :
+    Pour choisir la chaîne de dénominateurs à appliquer à tous les indicateurs :
 
     $$
-    \text{Meilleur dénominateur} = \arg \min_d \sum_{t} (C_{d,t} - S_t)^2
+    \text{Chaîne sélectionnée} = \arg \min_{c} \left| \operatorname{median}_{t,p} \left( \frac{D_{c,p,t}}{D_{\text{wpp},p,t}} \right) - 1 \right|
     $$
 
     Où :
 
-    - $C_{d,t}$ = Couverture utilisant le dénominateur $d$ dans l'année $t$
-    - $S_t$ = Couverture de l'enquête au cours de l'année $t$
-    - La somme est calculée pour toutes les années pour lesquelles des données d'enquête sont disponibles
+    - $D_{c,p,t}$ = dénominateur de la chaîne $c$ pour la population cible $p$ dans l'année $t$ (valeurs positives uniquement)
+    - $D_{\text{wpp},p,t}$ = dénominateur UN WPP correspondant
+    - $c \in \{\text{anc1}, \text{delivery}, \text{penta1}\}$ (BCG exclu car national uniquement)
+    - $p$ itère sur les populations cibles disponibles dans UN WPP (`pregnancy`, `livebirth`, `dpt`)
+
+    La chaîne dont le rapport médian est le plus proche de 1,0 à travers les années et les populations cibles est sélectionnée. L'erreur quadratique par rapport aux valeurs d'enquête est toujours calculée et exposée dans les sorties de la partie 1, mais uniquement à titre diagnostique — elle ne détermine pas la sélection.
 
 #### Cadre conceptuel : Cascades démographiques
 
@@ -897,13 +898,13 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 - Créer des estimations de couverture pour toutes les combinaisons indicateur-dénominateur
 - Conserver la couverture basée sur l'enquête comme référence
 
-**Étape 6 : Sélectionner le meilleur dénominateur**
+**Étape 6 : Pré-sélectionner la chaîne de dénominateurs (au niveau de la chaîne, pas par indicateur)**
 
-- Pour chaque indicateur, comparer toutes les estimations de couverture basées sur le dénominateur aux données de l'enquête
-- Calculer l'erreur quadratique : `Σ(coverage_d,t - survey_t)²`
-- Sélectionner le dénominateur avec l'erreur minimale comme "meilleur"
-- Appliquer les règles de préférence (préférer le SIGS au WPP)
-- Marquer les dénominateurs comme "référence" s'ils proviennent du même service
+- Au niveau national, pour chaque chaîne SIGS candidate (`anc1`, `delivery`, `penta1`), calculer le rapport médian des valeurs de la chaîne aux valeurs UN WPP pour les populations cibles `pregnancy`, `livebirth` et `dpt`
+- Sélectionner la chaîne dont le rapport médian est le plus proche de 1,0 ; elle devient la chaîne `best`
+- Appliquer la même chaîne à la zone administrative 2 et à la zone administrative 3 (supprimer les lignes infranationales si la chaîne est BCG, qui est nationale uniquement)
+- Enregistrer la correspondance dénominateur-par-indicateur de la chaîne dans `M5_selected_denominator_per_indicator.csv`
+- Calculer l'erreur quadratique par rapport aux valeurs d'enquête comme colonne diagnostique (non utilisée pour la sélection)
 
 **Étape 7 : Formatage et enregistrement des résultats**
 
@@ -941,29 +942,23 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     **Fichiers de résultats combinés**
 
-    **4. M5_combined_results_national.csv**
+    **4. M5_combined_results_national.csv** — colonnes : `admin_area_1, year, indicator_common_id, denominator_best_or_survey, value`
 
-    **5. M5_combined_results_admin2.csv**
+    **5. M5_combined_results_admin2.csv** — colonnes : `admin_area_1, admin_area_2, year, indicator_common_id, denominator_best_or_survey, value`
 
-    **6. M5_combined_results_admin3.csv**
-
-    **Structure** :
-
-    ```
-    admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value
-    ```
+    **6. M5_combined_results_admin3.csv** — colonnes : `admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value`
 
     **Champs** :
 
     - `indicator_common_id` : Indicateur de santé (par exemple, `anc1`, `penta3`)
-    - `denominator_best_or_survey` : Soit `best`, `survey`, soit un nom de dénominateur spécifique
-    - `value` : Pourcentage de couverture (0-100+)
+    - `denominator_best_or_survey` : Soit `best` (la chaîne pré-sélectionnée par `m005`), `survey` (observation brute EDS/MICS), soit un nom de dénominateur spécifique (par ex. `danc1_pregnancy`, `dwpp_livebirth`)
+    - `value` : Pourcentage de couverture (0–100+) pour les lignes de dénominateur, ou couverture brute d'enquête pour les lignes `survey`
 
-    **Entrée spéciale "meilleure "** : Duplique le dénominateur optimal sélectionné pour faciliter le filtrage
+    **Entrée spéciale `best`** : Duplique le dénominateur de la chaîne pour chaque indicateur afin que `m006` puisse filtrer sur `denominator_best_or_survey == "best"` sans avoir à connaître la chaîne sélectionnée.
 
     **7. M5_selected_denominator_per_indicator.csv**
 
-    **Objectif** : Résumé du dénominateur le plus performant sélectionné pour chaque indicateur à chaque niveau géographique
+    **Objectif** : Tableau récapitulatif listant le dénominateur de la chaîne pré-sélectionnée attribué à chaque indicateur à chaque niveau géographique. Comme `m005` sélectionne une seule chaîne et l'applique à toutes les géographies, les trois colonnes contiennent généralement la même chaîne (seule la variante de population cible diffère selon l'indicateur).
 
     **Structure** :
 
@@ -974,9 +969,9 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
     **Champs** :
 
     - `indicator_common_id` : Indicateur de santé (par exemple, `anc1`, `penta3`)
-    - `denominator_national` : Meilleur dénominateur pour la couverture au niveau national
-    - `denominator_admin2` : Meilleur dénominateur pour la couverture au niveau 2 de l'administration
-    - `denominator_admin3` : Meilleur dénominateur pour la couverture au niveau 3 de l'administration
+    - `denominator_national` : Dénominateur de la chaîne utilisé au niveau national (par ex. `danc1_pregnancy` pour `anc1` si la chaîne ANC1 a été sélectionnée)
+    - `denominator_admin2` : Même dénominateur au niveau admin 2, ou `NOT_AVAILABLE` lorsque la chaîne est nationale uniquement (BCG)
+    - `denominator_admin3` : Même dénominateur au niveau admin 3, ou `NOT_AVAILABLE` lorsque la chaîne est nationale uniquement (BCG)
 
 ??? "Sauvegarde et validation des données"
 
@@ -989,9 +984,10 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
        - Retourne au niveau géographique supérieur en cas de non-concordance
 
     3. **Mécanismes de repli** :
-       - Sous-national → national si aucune donnée d'enquête locale n'est disponible
-       - SBA → Livraison si SBA manquant
-       - PNC1_mother → PNC1 si données manquantes
+       - Si aucune donnée d'enquête infranationale n'existe pour le pays, l'exécution entière bascule en `NATIONAL_ONLY`
+       - Aux niveaux infranationaux, les lacunes par indicateur dans l'enquête restent à `NA` (aucune substitution national → infranational)
+       - SBA → Delivery si SBA manquant (appliqué à chaque niveau)
+       - PNC1_mother → PNC1 si manquant (appliqué à chaque niveau)
 
     4. **Traitement des cas de bordure** : Détecte quand admin_area_3 doit être utilisé comme admin_area_2 dans certains contextes nationaux
 
@@ -1076,7 +1072,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
 La partie 2 a trois objectifs principaux :
 
-1. **Sélection du dénominateur par l'utilisateur** : Alors que la partie 1 sélectionne automatiquement le "meilleur" dénominateur en minimisant l'erreur par rapport aux données de l'enquête, la partie 2 permet aux utilisateurs d'outrepasser cette sélection et de choisir des dénominateurs spécifiques sur la base de leurs connaissances programmatiques ou de leurs priorités politiques
+1. **Sélection du dénominateur par l'utilisateur** : Alors que la partie 1 pré-sélectionne automatiquement une chaîne de dénominateurs unique en fonction de la proximité des estimations SIGS-implicites aux estimations de population UN WPP au niveau national, la partie 2 permet aux utilisateurs d'outrepasser cette sélection et de forcer une autre chaîne (`anc1`, `delivery`, `bcg` ou `penta1`) sur la base de leurs connaissances programmatiques ou de leurs priorités politiques
 
 2. **Analyse des tendances temporelles** : Analyse des tendances temporelles** : calcule les changements d'une année sur l'autre (deltas) dans la couverture pour comprendre les tendances de la prestation de services au fil du temps
 
@@ -1092,7 +1088,7 @@ DENOMINATOR_CHAIN <- "auto"   # Options : "auto", "anc1", "delivery", "bcg", "pe
 
 **Options :**
 
-- `"auto"` *(par défaut)* — Utilise le dénominateur `best` sélectionné par indicateur et par niveau géographique par la partie 1 (`m005`). La sélection est faite par minimisation de l'erreur quadratique par rapport aux valeurs d'enquête, séparément pour chaque indicateur.
+- `"auto"` *(par défaut)* — Utilise la chaîne `best` pré-sélectionnée par la partie 1 (`m005`) — une chaîne unique choisie par proximité au UN WPP au niveau national et réutilisée pour chaque indicateur et chaque niveau géographique.
 - `"anc1"` — Force toutes les estimations de couverture à utiliser la chaîne de dénominateurs dérivée de la CPN1 (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, etc.).
 - `"delivery"` — Force la chaîne dérivée des accouchements (`ddelivery_*`).
 - `"bcg"` — Force la chaîne dérivée du BCG (`dbcg_*`, niveau national uniquement).
@@ -1309,10 +1305,10 @@ Lorsqu'une chaîne fixe est sélectionnée, le module applique la même source �
     **Algorithme** :
 
     1. Lire `DENOMINATOR_CHAIN` (`auto`, `anc1`, `delivery`, `bcg` ou `penta1`).
-    2. Si `auto` : conserver les lignes où `denominator_best_or_survey == "best"` pour chaque indicateur.
-    3. Si une chaîne spécifique (par exemple `anc1`) : pour chaque indicateur, conserver les lignes dont le dénominateur appartient à cette chaîne (`danc1_pregnancy`, `danc1_livebirth`, `danc1_dpt`, `danc1_measles1`, etc.) et qui correspond à la population cible attendue de l'indicateur.
-    4. Convertir les lignes sélectionnées au format de couverture (renommer les colonnes, supprimer les entrées d'enquête).
-    5. Combiner les résultats pour tous les indicateurs.
+    2. Si `auto` : conserver les lignes où `denominator_best_or_survey == "best"` (la chaîne pré-sélectionnée par `m005`).
+    3. Si une chaîne spécifique (par exemple `anc1`) : conserver les lignes où `denominator_best_or_survey` commence par le préfixe de la chaîne (par ex. `danc1_`). La correspondance entre indicateur et variante de population cible a déjà été encodée par `m005` lorsqu'il a étendu les dénominateurs aux indicateurs ; cette étape est donc un simple filtre sur préfixe.
+    4. Supprimer les lignes `survey` restantes et renommer `value` en `coverage`.
+    5. Retourner la trame de données filtrée.
 
     **Entrée** :
 
@@ -1396,12 +1392,10 @@ La partie 2 produit trois fichiers de sortie :
 - `admin_area_1` : Nom du pays
 - `year` : Année d'estimation
 - `indicator_common_id` : Code de l'indicateur standardisé
-- `denominator` : Source du dénominateur sélectionné
+- `denominator` : Nom du dénominateur issu de la chaîne sélectionnée par `DENOMINATOR_CHAIN` (par ex. `danc1_pregnancy`)
 - `coverage_original_estimate` : Couverture initiale basée sur l'enquête (NA pour les années sans enquête)
 - `coverage_avgsurveyprojection` : Projection de la couverture de l'enquête à l'aide des tendances SIGS
 - `coverage_cov` : Estimation de la couverture basée sur le SIGS
-- `survey_raw_source` : Source de l'enquête (par exemple, "DHS 2018")
-- `survey_raw_source_detail` : Détails supplémentaires sur la source
 
 #### 2. Résultats du niveau 2 de l'administration : `M6_coverage_estimation_admin2.csv`
 
@@ -1420,29 +1414,31 @@ Identique à la colonne nationale, plus :
 - `admin_area_3` : Nom de la division administrative de troisième niveau (par exemple, district)
 - `year` : Année d'estimation
 - `indicator_common_id` : Code de l'indicateur standardisé
-- `denominator` : Source du dénominateur sélectionné
+- `denominator` : Nom du dénominateur issu de la chaîne sélectionnée
 - `coverage_original_estimate` : Couverture de l'enquête initiale
 - `coverage_avgsurveyprojection` : Couverture projetée de l'enquête
 - `coverage_cov` : Couverture basée sur le SIGS
-- `survey_raw_source` : Source de l'enquête
-- `survey_raw_source_detail` : Détails de la source
+
+Note : bien que le schéma des résultats de `m006` liste `survey_raw_source` et `survey_raw_source_detail`, l'étape d'écriture actuelle de `m006` ne conserve que les huit colonnes ci-dessus (sept au niveau national). Les métadonnées de source et de détail d'enquête restent disponibles dans `M5_combined_results_*.csv` de la partie 1 si besoin.
 
 #### Considérations méthodologiques
 
-??? "1. stratégie de sélection du dénominateur"
+??? "1. Stratégie de sélection de la chaîne de dénominateurs"
 
-    **Quand utiliser le terme "meilleur "** :
+    **Quand utiliser `auto` (par défaut)** :
 
-    - Incertain quant au dénominateur le plus approprié
-    - Souhaite s'appuyer sur la sélection fondée sur les données de la partie 1
-    - Point de départ de l'analyse
+    - Vous souhaitez laisser la pré-sélection par proximité au UN WPP de la partie 1 choisir la chaîne
+    - Point de départ pour l'analyse ou les rapports de routine
+    - Vous n'avez pas de raison programmatique forte de préférer une source
 
-    **Quand spécifier un dénominateur** :
+    **Quand forcer une chaîne spécifique (`anc1`, `delivery`, `bcg`, `penta1`)** :
 
-    - Les connaissances programmatiques suggèrent qu'un dénominateur spécifique est le plus précis
-    - Les exigences politiques imposent l'utilisation d'estimations spécifiques de la population
-    - Réalisation d'analyses de sensibilité
-    - Problèmes connus avec certaines sources de données
+    - Les connaissances programmatiques indiquent qu'un flux de déclaration SIGS (par ex. CPN1) est le plus fiable dans le pays
+    - Vous souhaitez assurer la cohérence dans les comparaisons entre pays en utilisant la même source partout
+    - Réalisation d'analyses de sensibilité pour voir comment la chaîne affecte la couverture
+    - Problèmes connus avec la source sélectionnée automatiquement (par ex. préoccupations sur la qualité des données dans ce flux de déclaration)
+
+    Rappelez-vous que la chaîne s'applique à **tous les indicateurs et à tous les niveaux géographiques** — vous ne pouvez pas mélanger les chaînes par indicateur.
 
 ??? "2) Méthodologie de projection"
 
@@ -1657,12 +1653,10 @@ Identique à la colonne nationale, plus :
     | `admin_area_2` / `admin_area_3` | Zone sous-nationale (le cas échéant) |
     | `year` | Année civile |
     | `indicator_common_id` | Code de l'indicateur de santé |
-    | `denominator` | Type de dénominateur sélectionné |
+    | `denominator` | Nom du dénominateur issu de la chaîne sélectionnée par `DENOMINATOR_CHAIN` |
     | `coverage_cov` | Couverture dérivée du SIGS (numérateur ÷ dénominateur × 100) |
     | `coverage_original_estimate` | Valeur de l'enquête si disponible |
     | `coverage_avgsurveyprojection` | Valeur de l'enquête projetée à l'aide des tendances du SIGS |
-    | `survey_raw_source` | Source de l'enquête (DHS/MICS) |
-    | `survey_raw_source_detail` | Nom et année de l'enquête spécifique |
 
 ??? "Examen des options de dénominateur"
 
@@ -1678,11 +1672,11 @@ Identique à la colonne nationale, plus :
 
 ??? "Exigences en matière de données infranationales"
 
-    Le module vérifie la disponibilité des données infranationales :
+    Le module vérifie la disponibilité des données infranationales en deux étapes :
 
-    - Si `ANALYSIS_LEVEL` est défini pour inclure admin2 ou admin3, le module valide l'existence de données d'enquête correspondantes
-    - Si aucune donnée d'enquête infranationale correspondante n'est trouvée, le module passe à un niveau géographique supérieur
-    - Les messages de la console indiquent les niveaux d'analyse en cours de traitement
+    - **Étape 1 (partie 1, `m005`)** : Si `ANALYSIS_LEVEL` est défini pour inclure admin2 ou admin3, le module vérifie que le jeu de données d'enquête unifié contient des lignes infranationales pour le pays. Sinon, l'ensemble du niveau d'analyse est rétrogradé en `NATIONAL_ONLY`. Si des données d'enquête infranationales existent mais que les noms de zones administratives ne correspondent pas aux noms HMIS, le niveau infranational concerné est sauté et l'analyse passe au niveau supérieur suivant (admin3 → admin2, admin2 → national seul). Un fichier `M5_combined_results_*.csv` vide est tout de même écrit pour tout niveau sauté.
+    - **Étape 2 (partie 2, `m006`)** : Lit les fichiers `M5_combined_results_*.csv` produits par la partie 1. Si un fichier infranational a zéro ligne, le drapeau `RUN_ADMIN2` / `RUN_ADMIN3` correspondant est positionné à `FALSE`, l'ensemble du bloc admin2/admin3 est sauté, et un `M6_coverage_estimation_*.csv` vide est écrit pour ce niveau.
+    - Les messages de la console indiquent les niveaux d'analyse en cours de traitement et ceux qui ont été sautés.
 
 ??? "Contrôles de validation"
 

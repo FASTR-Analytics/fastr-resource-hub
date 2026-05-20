@@ -20,8 +20,8 @@ This module applies a standardized, data-driven approach to identify deviations 
 
 | Component | Details |
 |-----------|---------|
-| **Inputs** | Adjusted service volumes from Module 2 (`M2_adjusted_data.csv`)<br>Outlier flags from Module 1 (`M1_output_outliers.csv`)<br>Raw HMIS (`hmis_ISO3.csv`) - only for admin_area_1 lookup |
-| **Outputs** | Disruption flags (`M3_chartout.csv`)<br>Quantified impacts by geographic level (`M3_disruptions_analysis_*.csv`)<br>Shortfall/surplus summaries (`M3_all_indicators_shortfalls_*.csv`) |
+| **Inputs** | Adjusted service volumes from Module 2 (`M2_adjusted_data.csv` and `M2_adjusted_data_admin_area.csv`)<br>Outlier flags from Module 1 (`M1_output_outliers.csv`)<br>Raw HMIS (`hmis_ISO3.csv`) - only for `facility_id` to `admin_area_1` lookup |
+| **Outputs** | Pass-through adjusted data (`M3_service_utilization.csv`)<br>Disruption flags (`M3_chartout.csv`)<br>Quantified impacts by geographic level (`M3_disruptions_analysis_admin_area_1` to `_4.csv`)<br>Shortfall/surplus summaries (`M3_all_indicators_shortfalls_admin_area_1` to `_4.csv`) |
 | **Purpose** | Detect and quantify service delivery disruptions through two-stage analysis: control charts identify when disruptions occur, panel regression quantifies their magnitude |
 
 ---
@@ -382,7 +382,7 @@ For the volume change chart (output 4):
     count ~ date + factor(month) + tagged
     ```
 
-    Single regression across all facilities, clustered standard errors at district level (`admin_area_3`)
+    Single regression across all facilities, with standard errors clustered at district level (`admin_area_3`) when more than one district is available; otherwise unclustered.
 
     **Province-level Models** (Admin Area 2):
 
@@ -390,7 +390,7 @@ For the volume change chart (output 4):
     count ~ date + factor(month) + tagged
     ```
 
-    Separate regression run for each province, clustered standard errors at district level
+    Separate regression run for each province, with standard errors clustered at district level when more than one district is available; otherwise unclustered.
 
     **District-level Models** (Admin Area 3 - optional):
 
@@ -398,7 +398,7 @@ For the volume change chart (output 4):
     count ~ date + factor(month) + tagged
     ```
 
-    Separate regression run for each district, clustered standard errors at ward level (`admin_area_4`)
+    Separate regression run for each district (minimum 10 observations required), with standard errors clustered at ward level (`admin_area_4`) when more than one ward is available; otherwise unclustered.
 
     **Ward-level Models** (Admin Area 4 - optional):
 
@@ -406,7 +406,7 @@ For the volume change chart (output 4):
     count ~ date + factor(month) + tagged
     ```
 
-    Separate regression run for each ward/finest unit (no clustering)
+    Separate regression run for each ward/finest unit (minimum 8 observations required, no clustering).
 
     ### Supporting Functions
 
@@ -686,15 +686,25 @@ For the volume change chart (output 4):
     - The model controls for historical trends and seasonality.
     - When a disruption is identified, predicted volumes are adjusted to isolate the disruption effect.
 
-    #### Step 4: Fine Subnational-Level Regression (if enabled)
+    #### Step 4: Fine Subnational-Level Regression (if `RUN_DISTRICT_MODEL = TRUE`)
 
-    For each `indicator_common_id` × `admin_area_3` combination, subnational models are estimated, with standard errors clustered at a finer administrative level.
+    For each `indicator_common_id` × `admin_area_3` combination, subnational models are estimated, with standard errors clustered at the ward level (`admin_area_4`) when more than one ward is available.
 
     - A fixed-effects panel regression model is applied at a fine subnational level, estimating expected service volumes (`expect_admin_area_3`).
+    - Panels with fewer than 10 observations are skipped.
     - The model controls for historical trends and seasonality.
     - When a disruption is identified, predicted volumes are adjusted to isolate the disruption effect.
 
-    #### Step 5: Prepare Outputs for Visualization
+    #### Step 5: Ward-Level Regression (if `RUN_ADMIN_AREA_4_ANALYSIS = TRUE`)
+
+    For each `indicator_common_id` × `admin_area_4` combination, ward-level models are estimated without clustering.
+
+    - A panel regression model is applied at the finest geographic level, estimating expected service volumes (`expect_admin_area_4`).
+    - Panels with fewer than 8 observations are skipped.
+    - The model controls for historical trends and seasonality.
+    - When a disruption is identified, predicted volumes are adjusted to isolate the disruption effect.
+
+    #### Step 6: Prepare Outputs for Visualization
 
     Once expected values have been calculated for each level (country, province, district), the pipeline compares predicted and actual values to assess the magnitude of disruption.
 
