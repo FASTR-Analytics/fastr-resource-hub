@@ -10,7 +10,7 @@ footer: "FASTR · Visualizations & Interpretation · Facilitator"
 
 # Facilitator guide — Visualizations & Interpretation
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Visualizations & Interpretation</strong> · <strong>NOT FOR DISTRIBUTION</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Visualizations & Interpretation</strong></p>
 
 ## About these activities
 
@@ -21,9 +21,9 @@ These activities teach participants to **read a chart and say what it means** �
 ## How to run it
 
 - Start with the **reading framework** (handout 1) — it is the reference everything else builds on.
-- Handouts 2–3 are the two ways to **build a chart**; 4–5 are the two ways to **write an interpretation**; 6 is the capstone.
+- The sequence pairs **a full manual pass** (handouts 2 + 3) with **a full AI pass** (handouts 4 + 5), so participants complete the whole build-and-interpret loop themselves before they see the AI do it.
 - For each platform task, **demo it first**, then let participants follow the handout. The handout re-explains what you showed.
-- The through-line across these activities: the AI is fast, but the participant is accountable. Reinforce verification every time the AI appears.
+- The through-line: the AI is fast, but the participant is accountable. Reinforce verification every time the AI appears.
 
 ---
 
@@ -47,25 +47,25 @@ These activities teach participants to **read a chart and say what it means** �
 **What the handout covers** — + New visualization, pick indicator / period / chart type / level, save with a clear name to their folder, then repeat for two more indicators.
 **Watch for** — participants default to one chart type. Reinforce: **line** charts for trends over time, **bar** charts for comparing places.
 
-### 3. Build a visualization with the AI Assistant
-
-**Activity · ~15 min**
-
-**What it is** — a hands-on activity producing the same chart via plain-language AI requests.
-**What the handout covers** — type a chart request, review whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns, and save.
-**Watch for** — participants trust the first answer. They must verify indicator, period, chart type — and especially **adjusted vs raw data** — before saving.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### 4. Write an interpretation for a chart
+### 3. Write an interpretation for a chart
 
 **Activity · ~20 min**
 
 **What it is** — a writing activity teaching the three-part interpretation structure for a slide.
 **What the handout covers** — a message-carrying title, a facts-only "what you see", and an action-oriented "what it means", added alongside a chart on a slide.
 **Watch for** — titles that merely describe ("Coverage results"), facts mixed with interpretation, and vague so-whats that name no person or next step.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 4. Build a visualization with the AI Assistant
+
+**Activity · ~15 min**
+
+**What it is** — a hands-on activity producing the same chart via plain-language AI requests.
+**What the handout covers** — type a chart request, review whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns, and save.
+**Watch for** — participants trust the first answer. They must verify indicator, period, chart type — and especially **adjusted vs raw data** — before saving.
 
 ### 5. Let the AI draft the interpretation
 

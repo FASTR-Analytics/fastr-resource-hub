@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useWorkshopStore } from '../stores/workshop'
 import { t } from '../i18n/translations'
@@ -12,8 +12,6 @@ import {
   FileText,
   MessageSquare,
   Loader2,
-  List,
-  LayoutGrid,
   Compass,
   Database,
   BarChart3,
@@ -51,20 +49,6 @@ interface PreviewState {
   loading: boolean
 }
 
-function typeIcon(type: HandoutType) {
-  return type === 'facilitator'
-    ? <MessageSquare className="w-4 h-4" />
-    : <FileText className="w-4 h-4" />
-}
-
-function facilitatorBadge(lang: 'en' | 'fr') {
-  return (
-    <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 uppercase tracking-wide">
-      {lang === 'fr' ? 'Facilitateur' : 'Facilitator'}
-    </span>
-  )
-}
-
 function themeIcon(themeId: string) {
   switch (themeId) {
     case 'foundations':
@@ -84,20 +68,13 @@ function themeIcon(themeId: string) {
   }
 }
 
-// typeLabel removed — facilitator handouts get a badge, participant handouts have none
-
-interface HandoutsPanelProps {
-  defaultView?: 'list' | 'tiles'
-  showViewToggle?: boolean
-}
-
-export function HandoutsPanel({ defaultView = 'list', showViewToggle = false }: HandoutsPanelProps = {}) {
+export function HandoutsPanel() {
   const { contentLanguage } = useWorkshopStore()
   const [groups, setGroups] = useState<HandoutGroup[]>([])
   const [loading, setLoading] = useState(true)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [preview, setPreview] = useState<PreviewState | null>(null)
-  const [view, setView] = useState<'list' | 'tiles'>(defaultView)
+  const [audience, setAudience] = useState<HandoutType>('participant')
 
   useEffect(() => {
     let cancelled = false
@@ -110,7 +87,6 @@ export function HandoutsPanel({ defaultView = 'list', showViewToggle = false }: 
         if (response.ok && !cancelled) {
           const data = await response.json()
           setGroups(data)
-          // Expand all groups by default — the user came to this tab to find handouts.
           setExpanded(new Set(data.map((g: HandoutGroup) => g.moduleId)))
         }
       } catch (err) {
@@ -147,7 +123,6 @@ export function HandoutsPanel({ defaultView = 'list', showViewToggle = false }: 
       setPreview({ handout, pdfUrl: handout.pdfUrl, fallbackHtml: null, loading: false })
       return
     }
-    // Fallback: render the markdown source via the Marp render endpoint
     setPreview({ handout, pdfUrl: null, fallbackHtml: null, loading: true })
     try {
       const sourceResp = await fetch(handout.markdownUrl, { credentials: 'include' })
@@ -167,6 +142,68 @@ export function HandoutsPanel({ defaultView = 'list', showViewToggle = false }: 
       console.error('Failed to load handout preview:', err)
       setPreview({ handout, pdfUrl: null, fallbackHtml: null, loading: false })
     }
+  }
+
+  // Per-audience counts (computed once per fetch).
+  const { participantCount, facilitatorCount } = useMemo(() => {
+    let p = 0
+    let f = 0
+    for (const g of groups) {
+      for (const h of g.handouts) {
+        if (h.type === 'facilitator') f++
+        else p++
+      }
+    }
+    return { participantCount: p, facilitatorCount: f }
+  }, [groups])
+
+  // Filter groups by the active audience, drop empty modules, preserve order.
+  const filteredGroups = useMemo(() => {
+    return groups
+      .map((g) => ({
+        ...g,
+        handouts: g.handouts.filter((h) =>
+          audience === 'facilitator' ? h.type === 'facilitator' : h.type !== 'facilitator'
+        ),
+      }))
+      .filter((g) => g.handouts.length > 0)
+  }, [groups, audience])
+
+  // Bucket by theme, with workshop-activity modules (m9*) ordered before
+  // theory modules (m7, m8) inside each bucket. Matches the day-by-day flow
+  // (e.g., Communication & action: m9c → m9d → m9i → m7).
+  const themedGroups = useMemo(() => {
+    const buckets: Array<{ themeId: string; themeName: string; groups: HandoutGroup[] }> = []
+    const seen = new Map<string, { themeId: string; themeName: string; groups: HandoutGroup[] }>()
+    for (const g of filteredGroups) {
+      const tid = g.themeId || '_other'
+      const tname = g.themeName || (contentLanguage === 'fr' ? 'Autre' : 'Other')
+      if (!seen.has(tid)) {
+        const bucket = { themeId: tid, themeName: tname, groups: [] as HandoutGroup[] }
+        seen.set(tid, bucket)
+        buckets.push(bucket)
+      }
+      seen.get(tid)!.groups.push(g)
+    }
+    const isWorkshop = (mid: string) => /^m9/.test(mid)
+    for (const b of buckets) {
+      b.groups.sort((a, c) => {
+        const aw = isWorkshop(a.moduleId)
+        const cw = isWorkshop(c.moduleId)
+        if (aw !== cw) return aw ? -1 : 1
+        return a.moduleId.localeCompare(c.moduleId)
+      })
+    }
+    return buckets
+  }, [filteredGroups, contentLanguage])
+
+  // For the facilitator tab, drop the "Facilitator guide — <Module>"
+  // suffix from row titles — the module name is already the header above.
+  const displayTitle = (h: HandoutEntry): string => {
+    if (audience !== 'facilitator') return h.title
+    const m = h.title.match(/^(Facilitator guide|Guide du facilitateur)\s*[—\-]\s*/i)
+    if (m) return contentLanguage === 'fr' ? 'Guide du facilitateur' : 'Facilitator guide'
+    return h.title
   }
 
   if (loading) {
@@ -193,223 +230,220 @@ export function HandoutsPanel({ defaultView = 'list', showViewToggle = false }: 
     )
   }
 
-  // Bucket groups by theme, preserving server-side order
-  const themedGroups: Array<{ themeId: string; themeName: string; groups: HandoutGroup[] }> = []
-  const seen = new Map<string, { themeId: string; themeName: string; groups: HandoutGroup[] }>()
-  for (const g of groups) {
-    const tid = g.themeId || '_other'
-    const tname = g.themeName || (contentLanguage === 'fr' ? 'Autre' : 'Other')
-    if (!seen.has(tid)) {
-      const bucket = { themeId: tid, themeName: tname, groups: [] as HandoutGroup[] }
-      seen.set(tid, bucket)
-      themedGroups.push(bucket)
-    }
-    seen.get(tid)!.groups.push(g)
-  }
+  const labelParticipant = contentLanguage === 'fr' ? 'Participants' : 'Participants'
+  const labelFacilitator = contentLanguage === 'fr' ? 'Facilitateurs' : 'Facilitators'
 
   return (
     <div>
-      {showViewToggle && (
-        <div className="flex justify-end px-3 py-2 border-b border-slate-200 bg-white">
-          <div className="inline-flex items-center border border-slate-200 rounded-md overflow-hidden">
-            <button
-              onClick={() => setView('list')}
-              aria-pressed={view === 'list'}
-              className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium ${
-                view === 'list'
-                  ? 'bg-fastr-primary text-white'
-                  : 'bg-white text-slate-600 hover:bg-slate-50'
-              }`}
-              title={contentLanguage === 'fr' ? 'Vue liste' : 'List view'}
-            >
-              <List className="w-3.5 h-3.5" />
-              {contentLanguage === 'fr' ? 'Liste' : 'List'}
-            </button>
-            <button
-              onClick={() => setView('tiles')}
-              aria-pressed={view === 'tiles'}
-              className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium ${
-                view === 'tiles'
-                  ? 'bg-fastr-primary text-white'
-                  : 'bg-white text-slate-600 hover:bg-slate-50'
-              }`}
-              title={contentLanguage === 'fr' ? 'Vue tuiles' : 'Tile view'}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              {contentLanguage === 'fr' ? 'Tuiles' : 'Tiles'}
-            </button>
-          </div>
+      {/* Audience tabs — clear separation between participant and facilitator material */}
+      <div
+        role="tablist"
+        aria-label={contentLanguage === 'fr' ? 'Public' : 'Audience'}
+        className="flex gap-1 px-3 py-2 border-b border-slate-200 bg-white sticky top-0 z-10"
+      >
+        <button
+          role="tab"
+          aria-selected={audience === 'participant'}
+          onClick={() => setAudience('participant')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+            audience === 'participant'
+              ? 'bg-fastr-primary text-white'
+              : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <FileText className="w-4 h-4" />
+          {labelParticipant}
+          <span
+            className={`text-[11px] font-semibold px-1.5 py-0.5 rounded ${
+              audience === 'participant' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+            }`}
+          >
+            {participantCount}
+          </span>
+        </button>
+        <button
+          role="tab"
+          aria-selected={audience === 'facilitator'}
+          onClick={() => setAudience('facilitator')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+            audience === 'facilitator'
+              ? 'bg-amber-700 text-white'
+              : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <MessageSquare className="w-4 h-4" />
+          {labelFacilitator}
+          <span
+            className={`text-[11px] font-semibold px-1.5 py-0.5 rounded ${
+              audience === 'facilitator' ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'
+            }`}
+          >
+            {facilitatorCount}
+          </span>
+        </button>
+      </div>
+
+      {/* List view, themed sections */}
+      {themedGroups.length === 0 ? (
+        <div className="p-6 text-sm text-gray-500 text-center">
+          {audience === 'facilitator'
+            ? contentLanguage === 'fr'
+              ? 'Aucun document facilitateur dans cette langue.'
+              : 'No facilitator material in this language.'
+            : t('noHandoutsYet', contentLanguage)}
         </div>
-      )}
-
-      {view === 'tiles' ? (
-        // Tile view — themed sections with grids of cards
-        themedGroups.map((bucket) => (
-          <div key={bucket.themeId}>
-            <div className="px-4 py-2 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
-              <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
-              {bucket.themeName}
-            </div>
-            {bucket.groups.map((group) => (
-              <div key={group.moduleId} className="px-4 py-3 border-b border-gray-100">
-                <div className="flex items-baseline gap-2 mb-3">
-                  <span className="inline-flex items-center justify-center px-1.5 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold flex-shrink-0">
-                    {group.moduleId.toUpperCase()}
-                  </span>
-                  <span className="font-medium text-sm text-gray-700">{group.moduleName}</span>
-                  <span className="text-xs text-gray-400">
-                    · {group.handouts.length} {group.handouts.length === 1 ? 'handout' : 'handouts'}
-                  </span>
-                </div>
-                {(() => {
-                  const participantHandouts = group.handouts.filter(h => h.type !== 'facilitator')
-                  const facilitatorHandouts = group.handouts.filter(h => h.type === 'facilitator')
-                  const tile = (h: HandoutEntry, number: number | null) => (
-                    <button
-                      key={h.id}
-                      onClick={() => openPreview(h)}
-                      className="group text-left bg-white border border-slate-200 hover:border-fastr-primary hover:shadow-md rounded-lg p-4 transition-all relative min-h-[140px] flex flex-col"
-                    >
-                      {number !== null && (
-                        <span className="absolute top-2 right-2 inline-flex items-center justify-center w-5 h-5 rounded-full bg-fastr-primary/10 text-fastr-primary text-[10px] font-bold">
-                          {number}
-                        </span>
-                      )}
-                      <div className="flex items-start gap-2 mb-2 pr-7">
-                        {h.type === 'facilitator' && facilitatorBadge(contentLanguage)}
-                        {h.duration && (
-                          <span className="text-xs text-gray-400 flex-shrink-0">{h.duration}</span>
-                        )}
-                        {!h.pdfUrl && (
-                          <span className="text-xs text-amber-600 italic flex-shrink-0">PDF pending</span>
-                        )}
-                      </div>
-                      <div className="text-sm font-medium text-gray-800 line-clamp-3 flex-1">
-                        {h.title}
-                      </div>
-                      <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
-                        <span className="text-xs text-gray-400 flex items-center gap-1">
-                          <Eye className="w-3 h-3" />
-                          {contentLanguage === 'fr' ? 'Aperçu' : 'Preview'}
-                        </span>
-                        {h.pdfUrl && (
-                          <a
-                            href={h.pdfUrl}
-                            download
-                            onClick={(e) => e.stopPropagation()}
-                            className="p-1 text-gray-400 hover:text-fastr-primary hover:bg-gray-100 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                            title={t('downloadHandout', contentLanguage)}
-                          >
-                            <Download className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                    </button>
-                  )
-                  return (
-                    <>
-                      {participantHandouts.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                          {participantHandouts.map((h, i) => tile(h, i + 1))}
-                        </div>
-                      )}
-                      {facilitatorHandouts.length > 0 && (
-                        <div className="mt-4">
-                          <div className="text-[11px] uppercase tracking-wide font-semibold text-amber-800 mb-2">
-                            {contentLanguage === 'fr' ? 'Pour les facilitateurs' : 'For facilitators'}
-                          </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                            {facilitatorHandouts.map((h) => tile(h, null))}
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )
-                })()}
-              </div>
-            ))}
-          </div>
-        ))
       ) : (
-        // List view (original)
-        themedGroups.map((bucket) => (
-        <div key={bucket.themeId}>
-          <div className="px-3 py-1.5 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
-            <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
-            {bucket.themeName}
-          </div>
-          {bucket.groups.map((group) => {
-            const isOpen = expanded.has(group.moduleId)
+        themedGroups.map((bucket) => {
+          const isFacilitator = audience === 'facilitator'
+          if (isFacilitator) {
+            // Facilitator content is sparse (1-2 items per module). A 2-column
+            // grid of module cards with always-visible actions reads better than
+            // a tall flat list.
             return (
-          <div key={group.moduleId} className="border-b border-gray-100">
-            <button
-              onClick={() => toggleGroup(group.moduleId)}
-              className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
-            >
-              {isOpen ? (
-                <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              ) : (
-                <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-              )}
-              <span className="inline-flex items-center justify-center px-1.5 h-5 rounded bg-fastr-primary/10 text-fastr-primary text-xs font-bold flex-shrink-0">
-                {group.moduleId.toUpperCase()}
-              </span>
-              <div className="flex-1 min-w-0">
-                <div className="font-medium text-sm text-gray-700 truncate">
-                  {group.moduleName}
+              <div key={bucket.themeId}>
+                <div className="px-3 py-1.5 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
+                  <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
+                  {bucket.themeName}
                 </div>
-                <div className="text-xs text-gray-400">
-                  {group.handouts.length} {group.handouts.length === 1 ? 'handout' : 'handouts'}
-                </div>
-              </div>
-            </button>
-
-            {isOpen && (
-              <div className="bg-gray-50 border-t border-gray-100">
-                {group.handouts.map((h) => (
-                  <div
-                    key={h.id}
-                    className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-white border-l-2 border-l-transparent hover:border-l-fastr-secondary transition-all group"
-                  >
-                    <span className="text-gray-500 flex-shrink-0">{typeIcon(h.type)}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm text-gray-700 truncate" title={h.title}>
-                        {h.title}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3">
+                  {bucket.groups.map((group) => (
+                    <div
+                      key={group.moduleId}
+                      className="border border-slate-200 rounded-md bg-white hover:border-fastr-secondary hover:shadow-sm transition-all flex flex-col"
+                    >
+                      <div className="px-3 pt-2.5 pb-1.5 text-sm font-semibold text-gray-800 border-b border-slate-100">
+                        {group.moduleName}
                       </div>
-                      <div className="text-xs text-gray-400 flex items-center gap-1.5 flex-wrap">
-                        {h.type === 'facilitator' && facilitatorBadge(contentLanguage)}
-                        {h.duration && <span>{h.duration}</span>}
-                        {!h.pdfUrl && (
-                          <span className="text-amber-600 italic">PDF pending</span>
-                        )}
+                      <div className="flex-1 flex flex-col divide-y divide-slate-100">
+                        {group.handouts.map((h) => (
+                          <div
+                            key={h.id}
+                            className="flex items-center gap-2 px-3 py-2"
+                          >
+                            <div className="flex-1 min-w-0">
+                              <div className="text-sm text-gray-700 truncate" title={h.title}>
+                                {displayTitle(h)}
+                              </div>
+                              <div className="text-xs text-gray-400 flex items-center gap-1.5 flex-wrap">
+                                {h.duration && <span>{h.duration}</span>}
+                                {!h.pdfUrl && (
+                                  <span className="text-amber-600 italic">PDF pending</span>
+                                )}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => openPreview(h)}
+                              className="p-1.5 text-gray-500 hover:text-fastr-primary hover:bg-slate-50 rounded"
+                              title={t('previewHandout', contentLanguage)}
+                              aria-label={t('previewHandout', contentLanguage)}
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            {h.pdfUrl && (
+                              <a
+                                href={h.pdfUrl}
+                                download
+                                className="p-1.5 text-gray-500 hover:text-fastr-primary hover:bg-slate-50 rounded"
+                                title={t('downloadHandout', contentLanguage)}
+                                aria-label={t('downloadHandout', contentLanguage)}
+                              >
+                                <Download className="w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     </div>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+          // Participants tab — collapsible module groups (dense content).
+          return (
+            <div key={bucket.themeId}>
+              <div className="px-3 py-1.5 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
+                <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
+                {bucket.themeName}
+              </div>
+              {bucket.groups.map((group) => {
+                const isOpen = expanded.has(group.moduleId)
+                return (
+                  <div key={group.moduleId} className="border-b border-gray-100">
                     <button
-                      onClick={() => openPreview(h)}
-                      className="p-1 text-gray-500 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                      title={t('previewHandout', contentLanguage)}
+                      onClick={() => toggleGroup(group.moduleId)}
+                      className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 transition-colors text-left"
                     >
-                      <Eye className="w-4 h-4" />
+                      {isOpen ? (
+                        <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-sm text-gray-800 truncate">
+                          {group.moduleName}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {group.handouts.length}{' '}
+                          {group.handouts.length === 1
+                            ? contentLanguage === 'fr'
+                              ? 'document'
+                              : 'handout'
+                            : contentLanguage === 'fr'
+                              ? 'documents'
+                              : 'handouts'}
+                        </div>
+                      </div>
                     </button>
-                    {h.pdfUrl && (
-                      <a
-                        href={h.pdfUrl}
-                        download
-                        className="p-1 text-gray-500 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                        title={t('downloadHandout', contentLanguage)}
-                      >
-                        <Download className="w-4 h-4" />
-                      </a>
+
+                    {isOpen && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        {group.handouts.map((h, idx) => (
+                          <div
+                            key={h.id}
+                            className="flex items-center gap-2 px-3 py-2 pl-8 hover:bg-white border-l-2 border-l-transparent hover:border-l-fastr-secondary transition-all group"
+                          >
+                            <span className="text-gray-400 text-xs font-mono w-5 text-right flex-shrink-0">
+                              {String(idx + 1).padStart(2, '0')}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <div className="text-sm text-gray-700 truncate" title={h.title}>
+                                {displayTitle(h)}
+                              </div>
+                              <div className="text-xs text-gray-400 flex items-center gap-1.5 flex-wrap">
+                                {h.duration && <span>{h.duration}</span>}
+                                {!h.pdfUrl && (
+                                  <span className="text-amber-600 italic">PDF pending</span>
+                                )}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => openPreview(h)}
+                              className="p-1 text-gray-500 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                              title={t('previewHandout', contentLanguage)}
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            {h.pdfUrl && (
+                              <a
+                                href={h.pdfUrl}
+                                download
+                                className="p-1 text-gray-500 hover:text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                                title={t('downloadHandout', contentLanguage)}
+                              >
+                                <Download className="w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )
-      })}
-        </div>
-      ))
+                )
+              })}
+            </div>
+          )
+        })
       )}
 
       {preview && createPortal(

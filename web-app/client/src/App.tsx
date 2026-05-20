@@ -2355,7 +2355,7 @@ function App() {
       libraryChild = (
         <div className="h-full overflow-y-auto p-4">
           <div className="max-w-6xl mx-auto bg-white border border-slate-200 rounded-lg">
-            <HandoutsPanel defaultView="tiles" showViewToggle />
+            <HandoutsPanel />
           </div>
         </div>
       )

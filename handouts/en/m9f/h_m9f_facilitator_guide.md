@@ -10,7 +10,7 @@ footer: "FASTR · Prompting Techniques · Facilitator"
 
 # Facilitator guide — Prompting Techniques
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Prompting Techniques</strong> · <strong>NOT FOR DISTRIBUTION</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Prompting Techniques</strong></p>
 
 ## About these activities
 

@@ -8,7 +8,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Create deck</span> <span class="arrow">→</span> <span class="step">Viz + text</span> <span class="arrow">→</span> <span class="step">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step current">Create deck</span> <span class="arrow">→</span> <span class="step">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
 
 # Create your first slide deck
 
@@ -45,9 +45,15 @@ Click **+ Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 
 
 <h2 class="step-h"><span class="step-n">3</span><span>Add your first slide</span></h2>
 
-Click **Add slide** and pick **Content slide** from the slide-type options.
+Click **Add slide**. Three slide types appear — pick the one you need:
 
-You should now see an empty content slide ready for a visualisation and text. The next activities will fill it.
+- **Cover slide** — the title page at the start of the deck (deck name, date, your name). One per deck.
+- **Section slide** — a divider between parts of the deck (e.g. *"Coverage"*, *"Disruptions"*). Use sparingly.
+- **Content slide** — where a chart + interpretation lives. Most of your deck is content slides.
+
+For this activity, pick **Content slide** — that's the one the next activities fill.
+
+You should now see an empty content slide ready for a visualisation and text.
 
 </div>
 </div>
@@ -65,6 +71,6 @@ You should have:
 
 ## What's next
 
-Move on to **Add a visualisation and interpretation text** — the reference for how the content slide layout works.
+Your facilitator will demo how to add a chart and split the slide into chart + text. Then you'll repeat it in **Add a visualisation (manually)**.
 
 > 🔎 **Verify in your current UI**: button locations and labels (e.g., *Create*, *Add slide*) may differ slightly. The flow is the same.

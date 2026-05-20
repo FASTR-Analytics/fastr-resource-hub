@@ -758,10 +758,22 @@ const handoutsCacheByLang: Record<string, { data: HandoutGroup[]; timestamp: num
 const HANDOUTS_CACHE_TTL = 5 * 60 * 1000
 
 function classifyHandout(content: string): HandoutType {
+  // Frontmatter `class: facilitator` (applied globally to all pages — used
+  // by per-module facilitator guides and the demo handouts).
+  const fmMatch = content.match(/^---[\s\S]*?^---/m)
+  if (fmMatch && /^class:\s*[^\n]*\bfacilitator\b/m.test(fmMatch[0])) {
+    return 'facilitator'
+  }
+  // Marp per-slide `<!-- _class: facilitator -->` HTML directive (legacy).
+  if (/_class:\s*facilitator/.test(content)) {
+    return 'facilitator'
+  }
+  // Meta-line markers (EN + FR): "Demo", "Démo", "Facilitator notes",
+  // "Facilitator guide", "Notes du facilitateur", "Guide du facilitateur".
+  // The "facilitat" stem covers both EN ("facilitator") and FR ("facilitateur").
   const metaMatch = content.match(/<p\s+class=["']meta-line["'][^>]*>([\s\S]*?)<\/p>/i)
-  const meta = metaMatch ? metaMatch[1] : ''
-  // Facilitator-only: explicit class on slide OR "Demo" in meta-line
-  if (/_class:\s*facilitator/.test(content) || /\bDemo\b|\bDémo\b/i.test(meta)) {
+  const meta = metaMatch ? metaMatch[1].toLowerCase() : ''
+  if (/\bdemo\b|\bdémo\b|facilitat/.test(meta)) {
     return 'facilitator'
   }
   // Everything else lands on every participant's table
@@ -787,14 +799,62 @@ function extractFooter(content: string): string | null {
   return f ? f[1].trim() : null
 }
 
-function resolvePdfUrl(stem: string, language: 'en' | 'fr'): string | null {
+// URL-encode each path segment so spaces and special characters in folder
+// names (e.g. "Results Communication", "Facilitator") survive the round trip
+// to /handouts-pdf.
+function encodeRelPath(rel: string): string {
+  return rel.split(path.sep).map(encodeURIComponent).join('/')
+}
+
+// Locate a PDF within a single, known module folder.
+function findPdfInModuleDir(moduleDir: string, short: string): string | null {
+  if (!fs.existsSync(moduleDir)) return null
+  const suffix = `_${short}.pdf`
+  const match = fs.readdirSync(moduleDir).find(f => f.endsWith(suffix))
+  return match ? path.join(moduleDir, match) : null
+}
+
+// Resolve a handout's PDF URL in the booklet layout:
+//   _out/<lang>/<Module Name>/NN_<short>.pdf              (participant)
+//   _out/<lang>/Facilitator/<Module Name>/NN_<short>.pdf  (facilitator)
+//
+// Critically, we *scope by module folder* — multiple modules can produce
+// files with the same short name (e.g., every per-module facilitator guide
+// is "01_facilitator_guide.pdf"), so a global glob would pick the wrong one.
+function resolvePdfUrl(
+  stem: string,
+  language: 'en' | 'fr',
+  moduleId: string,
+  type: HandoutType,
+  moduleName: string | null
+): string | null {
   if (!fs.existsSync(HANDOUTS_OUT)) return null
-  // Try canonical form first: h_m9a_admin_areas_en.pdf
+
+  const langDir = path.join(HANDOUTS_OUT, language)
+  if (fs.existsSync(langDir) && moduleName) {
+    const short = stem.replace(/^h_m[a-z0-9]+_/, '')
+    const participantDir = path.join(langDir, moduleName)
+    const facilitatorDir = path.join(langDir, 'Facilitator', moduleName)
+
+    // Search the bucket that matches the handout's tagged type first; fall
+    // back to the other bucket only if nothing is found (defensive — should
+    // never happen if the build script and the classifier agree).
+    const primary = type === 'facilitator' ? facilitatorDir : participantDir
+    const fallback = type === 'facilitator' ? participantDir : facilitatorDir
+
+    const found = findPdfInModuleDir(primary, short) ?? findPdfInModuleDir(fallback, short)
+    if (found) {
+      const rel = path.relative(HANDOUTS_OUT, found)
+      return `/handouts-pdf/${encodeRelPath(rel)}`
+    }
+  }
+
+  // Legacy flat layout (pre-restructure) — kept as a fallback in case an
+  // older _out/ is mounted.
   const canonical = `${stem}_${language}.pdf`
   if (fs.existsSync(path.join(HANDOUTS_OUT, canonical))) {
     return `/handouts-pdf/${canonical}`
   }
-  // Legacy fallback: strip leading "h_{module}_" prefix (e.g., admin_areas_en.pdf)
   const stripped = stem.replace(/^h_m[a-z0-9]+_/, '')
   const legacy = `${stripped}_${language}.pdf`
   if (fs.existsSync(path.join(HANDOUTS_OUT, legacy))) {
@@ -810,10 +870,16 @@ router.get('/handouts', (req, res) => {
     const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
     const cacheKey = language
 
-    // Bust cache when _order.yaml changes
+    // Bust cache when _order.yaml or _out/ changes (so rebuilt PDFs surface).
     const orderMtime = fs.existsSync(HANDOUTS_ORDER_FILE) ? fs.statSync(HANDOUTS_ORDER_FILE).mtimeMs : 0
+    const outMtime = fs.existsSync(HANDOUTS_OUT) ? fs.statSync(HANDOUTS_OUT).mtimeMs : 0
     const cached = handoutsCacheByLang[cacheKey]
-    if (cached && Date.now() - cached.timestamp < HANDOUTS_CACHE_TTL && (cached as any).orderMtime === orderMtime) {
+    if (
+      cached &&
+      Date.now() - cached.timestamp < HANDOUTS_CACHE_TTL &&
+      (cached as any).orderMtime === orderMtime &&
+      (cached as any).outMtime === outMtime
+    ) {
       return res.json(cached.data)
     }
 
@@ -850,30 +916,33 @@ router.get('/handouts', (req, res) => {
 
       if (files.length === 0) continue
 
-      const handouts: HandoutEntry[] = []
-      for (const file of files) {
-        const content = fs.readFileSync(path.join(moduleDir, file), 'utf-8')
-        const stem = file.replace(/\.md$/, '')
-        handouts.push({
-          id: stem,
-          file,
-          moduleId,
-          title: extractTitle(content) || stem,
-          type: classifyHandout(content),
-          duration: extractDuration(content),
-          footer: extractFooter(content),
-          pdfUrl: resolvePdfUrl(stem, language),
-          markdownUrl: `/api/content/handouts/source/${encodeURIComponent(moduleId)}/${encodeURIComponent(file)}?language=${language}`,
-        })
-      }
-
-      // Module display name: try lookup by short id, with both numeric and prefixed forms
+      // Resolve the localised module display name UP FRONT — resolvePdfUrl
+      // needs it to scope the PDF lookup to the right module folder
+      // (collisions: every facilitator guide is "01_facilitator_guide.pdf").
       const shortId = moduleId.replace(/^m/, '')
       const moduleName =
         moduleNames[moduleId] ||
         moduleNames[shortId] ||
         moduleNames[/^\d+$/.test(shortId) ? parseInt(shortId) : shortId] ||
         `Module ${shortId.toUpperCase()}`
+
+      const handouts: HandoutEntry[] = []
+      for (const file of files) {
+        const content = fs.readFileSync(path.join(moduleDir, file), 'utf-8')
+        const stem = file.replace(/\.md$/, '')
+        const type = classifyHandout(content)
+        handouts.push({
+          id: stem,
+          file,
+          moduleId,
+          title: extractTitle(content) || stem,
+          type,
+          duration: extractDuration(content),
+          footer: extractFooter(content),
+          pdfUrl: resolvePdfUrl(stem, language, moduleId, type, moduleName),
+          markdownUrl: `/api/content/handouts/source/${encodeURIComponent(moduleId)}/${encodeURIComponent(file)}?language=${language}`,
+        })
+      }
 
       const themeId = moduleThemeById.get(moduleId) || null
       const themeName = themeId ? (themeNameById.get(themeId) || null) : null
@@ -889,7 +958,7 @@ router.get('/handouts', (req, res) => {
       return a.moduleId.localeCompare(b.moduleId)
     })
 
-    handoutsCacheByLang[cacheKey] = { data: groups, timestamp: Date.now(), orderMtime } as any
+    handoutsCacheByLang[cacheKey] = { data: groups, timestamp: Date.now(), orderMtime, outMtime } as any
     res.json(groups)
   } catch (error: any) {
     console.error('Error getting handouts:', error)

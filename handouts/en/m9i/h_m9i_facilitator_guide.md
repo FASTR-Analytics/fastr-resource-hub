@@ -10,7 +10,7 @@ footer: "FASTR · Standard FASTR Reports · Facilitator"
 
 # Facilitator guide — Standard FASTR Reports
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Standard FASTR Reports</strong> · <strong>NOT FOR DISTRIBUTION</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Standard FASTR Reports</strong></p>
 
 ## About this activity
 

@@ -10,7 +10,7 @@ footer: "FASTR · Instance Setup · Facilitator"
 
 # Facilitator guide — Instance Setup
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong> · <strong>NOT FOR DISTRIBUTION</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong></p>
 
 ## About these activities
 

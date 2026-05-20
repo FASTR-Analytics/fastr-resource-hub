@@ -10,7 +10,7 @@ footer: "FASTR · Results Communication · Facilitator"
 
 # Facilitator guide — Results Communication
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Results Communication</strong> · <strong>NOT FOR DISTRIBUTION</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Results Communication</strong></p>
 
 ## About these activities
 

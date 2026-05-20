@@ -74,8 +74,6 @@ Anything you produce that you'd want to keep — a chart, an interpretation — 
 
 > **One variable at a time.** Changing two things at once makes it hard to tell which change drove the difference. Vary one element, observe, then vary the next.
 
-> **Don't worry about being polite.** The AI doesn't need please-and-thank-you. Be direct.
-
 ## What's next
 
 Move on to **Iterative vs single-prompt** to compare two ways of building the same output.

@@ -10,7 +10,7 @@ footer: "FASTR · Configuration de l'instance · Facilitateur"
 
 # Guide du facilitateur — Configuration de l'instance
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Configuration de l'instance</strong> · <strong>NE PAS DISTRIBUER</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Configuration de l'instance</strong></p>
 
 ## À propos de ces activités
 

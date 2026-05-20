@@ -10,7 +10,7 @@ footer: "FASTR · Techniques de prompting · Facilitateur"
 
 # Guide du facilitateur — Techniques de prompting
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Techniques de prompting</strong> · <strong>NE PAS DISTRIBUER</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Techniques de prompting</strong></p>
 
 ## À propos de ces activités
 

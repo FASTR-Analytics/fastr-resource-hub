@@ -541,7 +541,7 @@ section::after {
    Swaps lime → navy accents to signal "not for participants"
    ======================================== */
 section.facilitator::before {
-  content: "FACILITATOR — not for distribution";
+  content: "Facilitator";
   background: var(--fastr-navy);
   color: white;
   font-family: 'Inter', sans-serif;

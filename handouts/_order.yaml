@@ -4,7 +4,7 @@
 # Order applies to both EN and FR (handouts/en/<m>/ and handouts/fr/<m>/).
 
 m7:
-- h_m7_facilitator_guide.md    # Facilitator guide — run-of-show (not for distribution)
+- h_m7_facilitator_guide.md    # Facilitator guide — run-of-show
 - h_m7_user_mapping.md         # 1. Identify your audience first
 - h_m7_finding_statement.md    # 2. Frame a finding
 - h_m7_results_actions.md      # 3. Link finding to actions
@@ -12,7 +12,7 @@ m7:
 - h_m7_action_plan_example.md  # 5. Worked-example reference (Hb at ANC)
 
 m9a:
-- h_m9a_facilitator_guide.md   # Facilitator guide — run-of-show (not for distribution)
+- h_m9a_facilitator_guide.md   # Facilitator guide — run-of-show
 - h_m9a_connect_platform.md    # 0. Before you begin (DHIS2 access)
 - h_m9a_admin_areas.md         # 1. Facility structure
 - h_m9a_indicators.md          # 2. Indicators
@@ -20,35 +20,32 @@ m9a:
 - h_m9a_verify_explore.md      # 4. Verify
 
 m9b:
-- h_m9b_facilitator_guide.md   # Facilitator guide — run-of-show (not for distribution)
-- h_m9b_platform_demo.md       # Facilitator demo (intro)
+- h_m9b_facilitator_guide.md   # Facilitator guide — run-of-show (includes platform demo appendix)
 - h_m9b_logging_in.md          # 1. Sign in
 - h_m9b_user_folder.md         # 2. Create your folder
 
 m9c:
-- h_m9c_facilitator_guide.md       # Facilitator guide — run-of-show (not for distribution)
+- h_m9c_facilitator_guide.md       # Facilitator guide — run-of-show
 - h_m9c_interpret_reference.md     # 1. Reference: how to read a viz (concept first)
 - h_m9c_create_viz_manually.md     # 2. Build one manually
-- h_m9c_create_viz_ai.md           # 3. Build one with the AI Assistant
-- h_m9c_write_interpretation.md    # 4. Add interpretation to a slide
+- h_m9c_write_interpretation.md    # 3. Write interpretation (manual)
+- h_m9c_create_viz_ai.md           # 4. Build one with the AI Assistant
 - h_m9c_interpret_with_ai.md       # 5. Let the AI draft the interpretation
 - h_m9c_spot_disruption.md         # 6. Apply: spot a disruption
 
 m9d:
-- h_m9d_facilitator_guide.md   # Facilitator guide — run-of-show (not for distribution)
-- h_m9d_create_slide_deck.md   # 1. Create the deck (the container)
-- h_m9d_add_viz_text.md        # 2. Reference: viz + text layout
-- h_m9d_demo_editing.md        # 3. Facilitator demo: editor walkthrough
-- h_m9d_add_viz_manually.md    # 4. Add a viz manually
-- h_m9d_add_viz_ai.md          # 5. Add a viz via the AI
-- h_m9d_edit_slides.md         # 6. Edit and finalise
+- h_m9d_facilitator_guide.md   # Facilitator guide — run-of-show (includes editor walkthrough demo appendix)
+- h_m9d_create_slide_deck.md   # 1. Create the deck + slide types
+- h_m9d_add_viz_manually.md    # 2. Add a viz manually (after the demo)
+- h_m9d_add_viz_ai.md          # 3. Add a viz via the AI
+- h_m9d_edit_slides.md         # 4. Edit and finalise
 
 m9i:
-- h_m9i_facilitator_guide.md           # Facilitator guide — run-of-show (not for distribution)
+- h_m9i_facilitator_guide.md           # Facilitator guide — run-of-show
 - h_m9i_ai_verification_checklist.md   # Reference: verify the AI's report output before sharing
 
 m9f:
-- h_m9f_facilitator_guide.md   # Facilitator guide — run-of-show (not for distribution)
+- h_m9f_facilitator_guide.md   # Facilitator guide — run-of-show
 - h_m9f_build_prompt.md        # 1. Build a clear prompt (foundation)
 - h_m9f_explore_ai.md          # 2. Explore — practice the foundation
 - h_m9f_iterative_vs_single.md # 3. Compare approaches

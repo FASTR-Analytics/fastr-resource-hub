@@ -8,7 +8,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Viz + text</span> <span class="arrow">→</span> <span class="step current">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step current">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
 
 # Add a visualisation (manually)
 
@@ -21,7 +21,7 @@ footer: "FASTR · Slide Decks"
 
 - ☐ You've created your slide deck (see *Create your first slide deck*)
 - ☐ You have a saved visualisation you want to include
-- ☐ You've read *Add a visualisation + interpretation text* (the reference)
+- ☐ The facilitator has demoed the editor (add a viz, split a slide into chart + text)
 - ☐ You're in the **Slide Decks** tab
 
 </aside>

@@ -74,8 +74,6 @@ Tout ce que vous produisez et que vous voulez garder — un graphique, une inter
 
 > **Une variable à la fois.** Changer deux choses à la fois rend difficile d'identifier ce qui a causé la différence. Variez un élément, observez, puis variez le suivant.
 
-> **Pas besoin de politesse.** L'IA n'a pas besoin de « s'il te plaît » ou de « merci ». Soyez direct.
-
 ## Étape suivante
 
 Passez à **Itératif vs prompt unique** pour comparer deux façons de construire la même sortie.

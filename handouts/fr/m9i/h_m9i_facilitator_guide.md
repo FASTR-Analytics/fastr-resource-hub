@@ -10,7 +10,7 @@ footer: "FASTR · Rapports FASTR standards · Facilitateur"
 
 # Guide du facilitateur — Rapports FASTR standards
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Rapports FASTR standards</strong> · <strong>NE PAS DISTRIBUER</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Rapports FASTR standards</strong></p>
 
 ## À propos de cette activité
 

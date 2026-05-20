@@ -6,8 +6,7 @@ Renders every handout markdown file to PDF and organises the output under
 
   * Participant handouts go in ``<lang>/<Module Name>/``.
   * Facilitator-only material (anything tagged "Facilitator notes" in its
-    meta-line) is kept out of the participant set, in a clearly-labelled
-    ``<lang>/FACILITATOR — not for distribution/<Module Name>/`` folder.
+    meta-line) is kept separate under ``<lang>/Facilitator/<Module Name>/``.
 
 Module folders use the human-readable names from ``modules.yaml`` (e.g.
 "Instance Setup", not "m9a"). Each PDF is prefixed with a two-digit sequence
@@ -34,7 +33,7 @@ MODULES_FILE = REPO / "modules.yaml"
 OUT = HANDOUTS / "_out"
 RENDER = REPO / "tools" / "render_handout.sh"
 LANGS = ("en", "fr")
-FACILITATOR_DIR = "FACILITATOR — not for distribution"
+FACILITATOR_DIR = "Facilitator"
 
 
 def module_names() -> dict:

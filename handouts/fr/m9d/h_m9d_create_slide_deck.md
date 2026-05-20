@@ -8,7 +8,7 @@ footer: "FASTR · Présentations"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Créer la présentation</span> <span class="arrow">→</span> <span class="step">Viz + texte</span> <span class="arrow">→</span> <span class="step">Ajouter manuellement</span> <span class="arrow">→</span> <span class="step">Ajouter avec l'IA</span> <span class="arrow">→</span> <span class="step">Éditer et finaliser</span></div>
+<div class="setup-breadcrumb"><span class="step current">Créer la présentation</span> <span class="arrow">→</span> <span class="step">Ajouter manuellement</span> <span class="arrow">→</span> <span class="step">Ajouter avec l'IA</span> <span class="arrow">→</span> <span class="step">Éditer et finaliser</span></div>
 
 # Créez votre première présentation
 
@@ -45,9 +45,15 @@ Cliquez sur **+ Créer une présentation** en haut du dossier. Donnez-lui un nom
 
 <h2 class="step-h"><span class="step-n">3</span><span>Ajoutez votre première diapositive</span></h2>
 
-Cliquez sur **Ajouter une diapositive** et choisissez **Diapositive de contenu** parmi les types proposés.
+Cliquez sur **Ajouter une diapositive**. Trois types apparaissent — choisissez celui dont vous avez besoin :
 
-Vous devriez voir une diapositive de contenu vide prête à recevoir une visualisation et du texte. Les prochaines activités la rempliront.
+- **Diapositive de couverture** — la page de titre au début de la présentation (nom, date, votre nom). Une par présentation.
+- **Diapositive de section** — un séparateur entre les parties (p. ex. *« Couverture »*, *« Perturbations »*). À utiliser avec parcimonie.
+- **Diapositive de contenu** — là où vit un graphique + interprétation. La majorité de votre présentation est en diapositives de contenu.
+
+Pour cette activité, choisissez **Diapositive de contenu** — c'est celle que les prochaines activités viennent remplir.
+
+Vous devriez voir une diapositive de contenu vide prête à recevoir une visualisation et du texte.
 
 </div>
 </div>
@@ -65,6 +71,6 @@ Vous devriez avoir :
 
 ## Étape suivante
 
-Passez à **Ajouter une visualisation + texte d'interprétation** — la référence pour comprendre la structure d'une diapositive de contenu.
+Votre facilitateur va démontrer comment ajouter un graphique et diviser la diapositive en graphique + texte. Vous le referez ensuite dans **Ajouter une visualisation (manuellement)**.
 
 > 🔎 **Vérifiez dans votre interface actuelle** : les emplacements et libellés des boutons (p. ex. *Créer*, *Ajouter une diapositive*) peuvent légèrement différer. Le flux est le même.

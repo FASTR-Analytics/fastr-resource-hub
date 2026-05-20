@@ -10,7 +10,7 @@ footer: "FASTR · Visualisations & Interprétation · Facilitateur"
 
 # Guide du facilitateur — Visualisations & Interprétation
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Visualisations & Interprétation</strong> · <strong>NE PAS DISTRIBUER</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Visualisations & Interprétation</strong></p>
 
 ## À propos de ces activités
 
@@ -21,9 +21,9 @@ Ces activités apprennent aux participants à **lire un graphique et à dire ce 
 ## Comment l'animer
 
 - Commencez par le **cadre de lecture** (document 1) — c'est la référence sur laquelle tout le reste s'appuie.
-- Les documents 2-3 sont les deux façons de **construire un graphique** ; 4-5 les deux façons de **rédiger une interprétation** ; 6 est l'activité finale.
+- La séquence associe **un passage manuel complet** (documents 2 + 3) à **un passage IA complet** (documents 4 + 5), pour que les participants fassent eux-mêmes toute la boucle construire-et-interpréter avant de voir l'IA la faire.
 - Pour chaque tâche sur la plateforme, **démontrez d'abord**, puis laissez les participants suivre le document. Le document réexplique ce que vous avez montré.
-- Le fil conducteur de ces activités : l'IA est rapide, mais le participant est responsable. Renforcez la vérification chaque fois que l'IA apparaît.
+- Le fil conducteur : l'IA est rapide, mais le participant est responsable. Renforcez la vérification chaque fois que l'IA apparaît.
 
 ---
 
@@ -47,25 +47,25 @@ Ces activités apprennent aux participants à **lire un graphique et à dire ce 
 **Ce que couvre le document** — + Nouvelle visualisation, choisir indicateur / période / type de graphique / niveau, enregistrer sous un nom clair dans son dossier, puis répéter pour deux autres indicateurs.
 **À surveiller** — les participants se rabattent sur un seul type de graphique. Renforcez : graphique en **courbes** pour les tendances dans le temps, en **barres** pour comparer des lieux.
 
-### 3. Construire une visualisation avec l'Assistant IA
-
-**Activité · ~15 min**
-
-**Ce que c'est** — une activité pratique pour produire le même graphique via des demandes en langage courant à l'IA.
-**Ce que couvre le document** — saisir une demande de graphique, vérifier si l'IA a respecté la demande (indicateur, période, données ajustées vs brutes), itérer en tours courts, et enregistrer.
-**À surveiller** — les participants font confiance à la première réponse. Ils doivent vérifier indicateur, période, type de graphique — et surtout **données ajustées vs brutes** — avant d'enregistrer.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### 4. Rédiger une interprétation pour un graphique
+### 3. Rédiger une interprétation pour un graphique
 
 **Activité · ~20 min**
 
 **Ce que c'est** — une activité de rédaction qui enseigne la structure d'interprétation en trois parties pour une diapositive.
 **Ce que couvre le document** — un titre porteur de message, un « ce que vous voyez » factuel, et un « ce que cela signifie » orienté action, ajoutés à côté d'un graphique sur une diapositive.
 **À surveiller** — des titres purement descriptifs (« Résultats de couverture »), des faits mélangés à l'interprétation, et des « et alors » vagues qui ne nomment ni personne ni prochaine étape.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 4. Construire une visualisation avec l'Assistant IA
+
+**Activité · ~15 min**
+
+**Ce que c'est** — une activité pratique pour produire le même graphique via des demandes en langage courant à l'IA.
+**Ce que couvre le document** — saisir une demande de graphique, vérifier si l'IA a respecté la demande (indicateur, période, données ajustées vs brutes), itérer en tours courts, et enregistrer.
+**À surveiller** — les participants font confiance à la première réponse. Ils doivent vérifier indicateur, période, type de graphique — et surtout **données ajustées vs brutes** — avant d'enregistrer.
 
 ### 5. Laisser l'IA rédiger l'interprétation
 
