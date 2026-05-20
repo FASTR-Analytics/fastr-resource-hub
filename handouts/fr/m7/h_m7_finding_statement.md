@@ -39,11 +39,7 @@ Sans cela, un constat arrive comme une « donnée intéressante » — pas comme
 
 > **[Indicateur] [tendance] de [valeur] à [valeur] dans [lieu/période]. Cela suggère [interprétation].**
 
-## Votre tâche
-
-1. Choisissez **un constat** de votre analyse FASTR.
-2. Rédigez-le en utilisant la formule ci-dessus.
-3. Relisez-le : quelqu'un qui ne connaît pas vos données comprendrait-il ce qui s'est passé et pourquoi c'est important ?
+Choisissez un constat de votre analyse FASTR et rédigez-le en utilisant la formule. Relisez-le ensuite — quelqu'un qui ne connaît pas vos données comprendrait-il ce qui s'est passé et pourquoi c'est important ?
 
 </div>
 </div>

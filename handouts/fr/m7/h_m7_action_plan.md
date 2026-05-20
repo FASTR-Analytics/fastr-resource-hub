@@ -25,28 +25,26 @@ footer: "FASTR · Communication des résultats"
 
 <p class="sb-label">Pourquoi c'est important</p>
 
-FASTR n'est pas une analyse ponctuelle. C'est un **rythme** — analyses trimestrielles, diffusion régulière, suivi, renforcement des capacités dans le temps. Cette activité transforme « nous avons fait un atelier » en « nous avons un plan pour que cela continue ».
-
-Trois questions auxquelles vous répondrez : **quel rythme d'analyse**, **où vont les sorties**, et **de quoi l'équipe a besoin**.
+Le plan d'action que vous construisez sert à orienter les activités FASTR à l'échelle nationale **au cours de l'année à venir**. Le passage de l'atelier à la pratique quotidienne se joue dans les semaines qui suivent — plus le plan est précis maintenant, plus il survivra à la routine.
 
 </aside>
 <div class="p1-main">
 
-## La feuille de travail
+## Les quatre dimensions
 
-Remplissez le tableau du plan d'action :
+Parcourez ces quatre dimensions en équipe pays. Répondez aux questions par écrit — un collègue qui lit le plan doit savoir précisément ce qui est attendu de qui.
 
-| Étape d'action | Personne responsable | Calendrier | Indicateur de succès |
-|----------------|---------------------|------------|---------------------|
-| Compléter l'analyse trimestrielle FASTR |  |  |  |
-| Diffuser au [forum] |  |  |  |
-| Suivre les problèmes identifiés |  |  |  |
-| Former des membres supplémentaires de l'équipe |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+### 1. Vos cas d'utilisation
 
-> **Utilisez les lignes vides pour toute étape spécifique à votre pays** — p. ex. « intégrer la sortie FASTR à la réunion de revue trimestrielle », « créer un groupe de travail sur la qualité des données ».
+*Comment allez-vous utiliser les analyses FASTR ? À quelles questions clés répondrez-vous ?*
+
+<div class="answer-box"></div>
+
+### 2. Finalisation du rapport
+
+*Le rapport que vous avez préparé pendant l'atelier est-il celui que vous souhaitez utiliser à l'avenir ? Sinon, comment allez-vous le finaliser — et pour quand ?*
+
+<div class="answer-box"></div>
 
 </div>
 </div>
@@ -55,57 +53,49 @@ Remplissez le tableau du plan d'action :
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Trois questions directrices
+### 3. Mise à jour et diffusion continues
 
-Utilisez-les pour mettre votre plan d'action à l'épreuve :
-
-### 1. Forums existants
-
-> *Quelle plateforme ou quel forum existant allez-vous intégrer à FASTR ?*
-
-Ne créez pas une nouvelle réunion. Branchez FASTR sur quelque chose qui existe déjà — réunion mensuelle de la direction, revue trimestrielle de programme, groupe de travail technique. Le rythme vient naturellement.
+*Qui sera chargé de téléverser les données vers la plateforme ? Qui rédigera les rapports trimestriels ? Qui les diffusera — à travers quel forum existant ?*
 
 <div class="answer-box"></div>
 
-### 2. Diffusion du produit de cette semaine
+### 4. Renforcement des compétences
 
-> *Quel est votre plan de diffusion pour le produit créé cette semaine ?*
-
-Soyez précis : qui le reçoit, dans quel format, à quelle date. Si la réponse est « on verra plus tard », c'est la même chose que « ça n'arrivera pas ».
+*Comment souhaitez-vous vous exercer — en solo, en groupe, en réunions hebdomadaires ? Qui d'autre doit comprendre ce contenu et a besoin d'une formation supplémentaire ?*
 
 <div class="answer-box"></div>
-
-### 3. Soutien des facilitateurs
-
-> *De quel soutien avez-vous besoin des facilitateurs au cours du prochain trimestre ?*
-
-Les demandes concrètes valent mieux que les vagues. *« Nous avons besoin d'aide pour configurer le module de perturbation »* est actionnable. *« Nous avons besoin d'aide »* ne l'est pas.
-
-<div class="answer-box"></div>
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Exemple : un plan pour le Pays B
 
-| Étape | Qui | Quand | Indicateur de succès |
-|-------|-----|-------|---------------------|
-| Compléter l'analyse FASTR T2 2026 | Responsable des données + Analyste (unité S&É) | Avant le 15 juillet | Rapport AQD + sortie utilisation des services produits |
-| Présenter à la réunion mensuelle de la Direction | Responsable des données | Première réunion après l'analyse | Le Directeur présente les constats ; au moins une action attribuée |
-| Suivre les problèmes identifiés avec les équipes de district | Unité S&É + responsables de programmes concernés | Dans les 30 jours suivant la diffusion | Journal des actions mis à jour ; visites de supervision planifiées |
-| Former 2 membres supplémentaires de l'équipe à FASTR | Point focal pays | Avant l'analyse T3 | Deux nouveaux membres mènent une analyse de bout en bout |
+| Dimension | Réponse du Pays B |
+|-----------|--------------------|
+| **1. Cas d'utilisation** | AQD trimestrielle + analyse d'utilisation des services. Rapport trimestriel sur les perturbations présenté au GTT SRMNEA-N. |
+| **2. Finalisation du rapport** | Ajouter un résumé narratif de 2 pages à la présentation de l'atelier. Finalisé d'ici le 15 juillet. Responsable : Responsable des données. |
+| **3. Mise à jour et diffusion continues** | Le Responsable des données téléverse les données mensuelles. L'unité S&É rédige le rapport trimestriel. Présenté à la réunion mensuelle de la Direction ; partagé avec le MdS de l'État. |
+| **4. Renforcement des compétences** | Clinique FASTR hebdomadaire d'une heure pour l'équipe. Former 2 membres supplémentaires de l'équipe avant le T3 (Point focal pays). |
+
+Remarquez : chaque ligne nomme un produit précis, une personne précise, et une cadence précise.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Revue par les pairs
 
 Échangez votre plan avec une autre équipe pays. Cherchez :
 
-- **Des calendriers réalistes** — le plan ne sur-promet-il pas pour le premier trimestre ?
-- **Des responsables nommés** — chaque ligne a-t-elle une personne précise, pas un service ?
-- **Une boucle de retour claire** — que se passe-t-il quand une action n'est pas faite ? Y a-t-il un mécanisme de suivi ?
+- **Précision** — chaque dimension nomme-t-elle une personne réelle (pas un service) et une cadence réelle (pas « en continu ») ?
+- **Réalisme** — le plan ne sur-promet-il pas pour le premier trimestre ? Pourrait-il survivre à la routine ?
+- **Le forum** — FASTR est-il branché sur une réunion qui existe déjà, ou sur une nouvelle qu'il faudrait inventer ?
+
+## Soutien des facilitateurs
+
+> **De quel soutien avez-vous besoin des facilitateurs au cours du prochain trimestre ?** Les demandes concrètes valent mieux que les vagues. *« Nous avons besoin d'aide pour configurer le module de perturbation »* est actionnable. *« Nous avons besoin d'aide »* ne l'est pas.
+
+<div class="answer-box"></div>
 
 ## Étape suivante
 
-Ce plan est le pont entre **l'atelier** et **la pratique quotidienne**. Gardez-le visible — affichez-le là où votre équipe travaille, révisez-le au début de chaque trimestre, mettez-le à jour à mesure que la réalité révèle ce qui fonctionne.
+Ce plan est le pont entre **l'atelier** et **la pratique quotidienne**. Gardez-le visible, révisez-le au début de chaque trimestre, mettez-le à jour à mesure que la réalité révèle ce qui fonctionne.
 
 La mise en place est terminée. Le travail commence maintenant.

@@ -57,6 +57,20 @@ Pour vos **3 principaux constats**, remplissez ce tableau :
 - **« Quelle décision / action ? »** — *pas* « améliorer la performance », *plutôt* « organiser des visites de supervision formative dans le District X le trimestre prochain ».
 - **« Pour quand ? »** — une vraie date, pas « bientôt ». Reliez-la à une réunion ou un cycle existant si possible.
 
+## Trois sphères d'influence
+
+Quand vous choisissez quoi mettre dans la colonne « Quelle décision / action ? », visez ce que vous pouvez réellement faire bouger. Le cadre divise le monde en trois cercles concentriques :
+
+- **Sphère de contrôle** — Actions que votre équipe peut mener directement (recherche d'abandons, revue de registres, coordination des sorties communautaires). Elles ont leur place dans la feuille.
+- **Sphère d'influence** — Actions qui demandent des partenaires ou une autorité supérieure (engager des partenaires, sécuriser les intrants, plaider pour une politique). Elles ont aussi leur place dans la feuille — avec un décideur nommé hors de votre équipe.
+- **Sphère de préoccupation** — Facteurs systémiques plus larges (politique nationale, financement, démographie). Notez-les comme contexte, mais ne les écrivez pas comme des actions dont vous serez responsable.
+
+> **Règle pratique :** si vous ne pouvez pas nommer une personne qui peut agir dessus, cela appartient probablement à la sphère de préoccupation — pas à la feuille.
+
+## La vue d'ensemble
+
+Cette feuille pose trois questions : **quelle action**, **qui doit savoir** et **pour quand**. Trois autres questions complètent le tableau — quels problèmes les données ont montrés, quelles contraintes existent, comment diffuser — et vous y répondrez dans votre **plan d'action pays**.
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>

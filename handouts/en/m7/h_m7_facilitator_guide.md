@@ -64,16 +64,16 @@ These activities close the workshop — participants take a FASTR analysis and t
 **Activity · ~30 min · team**
 
 **What it is** — a team activity that turns "we did a workshop" into an ongoing quarterly rhythm.
-**What the handout covers** — an action-plan table plus three guiding questions (existing forums, dissemination of this week's output, support needed from facilitators), and a worked example.
-**Watch for** — teams over-commit the first quarter and name departments instead of people. Also push them to plug FASTR into an *existing* meeting rather than inventing a new one.
+**What the handout covers** — a worksheet structured around the four dimensions from the *Post-workshop roadmap* slide: use cases, finalising the report, ongoing updates and dissemination, and skill building. Each dimension has a write-in box; a worked example follows.
+**Watch for** — teams answer with verbs but no nouns ("upload data", "share findings"). Push every dimension toward a named person, a real cadence, and an existing forum. The *use cases* dimension is skipped most often — make them name the questions FASTR will keep answering.
 
 ### 5. Worked example — country action plan
 
 **Reference · ~10 min**
 
 **What it is** — a fully-filled example plan, built around one finding (low haemoglobin measurement at ANC), used as a model.
-**What the handout covers** — a complete plan: actions, dissemination, timeline, named owners, and M&E indicators.
-**Watch for** — this is a reference, not a worksheet. Hand it out *with* Activity 4; don't let teams copy it — it's there to show the level of specificity expected.
+**What the handout covers** — the same four dimensions as Activity 4, each filled in: use cases (questions and M&E indicators tracked), report finalisation (what to add, by whom, by when), ongoing updates (responsibilities, forums, calendar), and skill building (training and capacity).
+**Watch for** — this is a reference, not a worksheet. Hand it out *with* Activity 4; don't let teams copy it — it's there to show the level of specificity expected for each dimension.
 
 ## Wrapping up
 

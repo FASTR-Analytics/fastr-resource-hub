@@ -69,6 +69,14 @@ Notice: the answer to "what do they care about" is **specific** — not "data qu
 - If your answer to "decision or action" is vague (e.g., "improve performance"), you don't yet know the audience well enough. Talk to them.
 - Different audiences = different outputs from the same analysis. Map each audience separately.
 
+## Turn the mapping into a prompt
+
+If you've already produced a disruption report or another FASTR output, use your mapping to refine it for this specific audience. In the AI Assistant, try a prompt like:
+
+> Read my disruption report and produce a presentation in **3 slides maximum** tailored to **[the user from your mapping above]**, focused on the decisions they need to make. Use plain language; cut anything they wouldn't act on.
+
+Adjust the audience and the decision to match your worksheet. **Verify** the AI's output before sharing — every claim should be traceable back to the original report.
+
 ## Share with the room
 
 After ~15 min of team discussion, **share one insight** about your audience with the larger group — something you realised that you hadn't noticed before mapping it out.

@@ -57,6 +57,20 @@ For your **top 3 findings**, fill in this table:
 - **"What decision / action?"** — *not* "improve performance", *yes* "conduct supportive supervision visits in District X next quarter".
 - **"By when?"** — a real date, not "soon". Tie it to an existing meeting or cycle if possible.
 
+## Three spheres of influence
+
+When you choose what to put in the "What decision / action?" column, point your actions at what you can actually move. The framework divides the world into three concentric circles:
+
+- **Sphere of control** — Actions your team can take directly (defaulter tracing, register reviews, outreach coordination). These belong in the worksheet.
+- **Sphere of influence** — Actions requiring partners or higher-level authority (engaging partners, securing supplies, advocating for policy change). These belong in the worksheet too — with a named decision-maker outside your team.
+- **Sphere of concern** — Broader systemic factors (national policy, financing, demographics). Note them as context, but don't write them as action steps you'll own.
+
+> **Rule of thumb:** if you can't name one person who can act on it, it probably belongs in the sphere of concern — not the worksheet.
+
+## The wider picture
+
+This worksheet asks three questions: **what action**, **who needs to know**, and **by when**. Three more questions complete the picture — what problems the data showed, what constraints exist, how you'll disseminate — and you'll answer those in your **country action plan**.
+
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>

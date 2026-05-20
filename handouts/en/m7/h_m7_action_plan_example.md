@@ -21,7 +21,7 @@ A fully-filled example of a country action plan, built around one finding — **
 
 <p class="sb-label">How to use it</p>
 
-Keep it beside you while you fill in your own action plan worksheet. Notice how each column gets a specific, concrete answer — not a vague one.
+Keep it beside you while you fill in your own plan. Notice how each of the four dimensions gets a specific, concrete answer — never a vague one.
 
 </aside>
 <div class="p1-main">
@@ -30,7 +30,7 @@ Keep it beside you while you fill in your own action plan worksheet. Notice how 
 
 > Only **42%** of lower-level health facilities systematically record haemoglobin (Hb) measurement during antenatal care visits. Risk: undetected maternal anaemia.
 
-The pages that follow show how this one finding becomes a complete plan — actions, dissemination, a timeline, named owners, and monitoring indicators.
+The pages that follow show how this one finding turns into a complete year-ahead plan, organised around the four dimensions: **use cases, finalising the report, ongoing updates and dissemination, and skill building**.
 
 </div>
 </div>
@@ -39,29 +39,58 @@ The pages that follow show how this one finding becomes a complete plan — acti
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## I. Actions and decisions
+## 1. Use cases
 
-| Column | Worked answer |
-|--------|---------------|
-| **Problem identified** | Low rate of Hb measurement at ANC: only 42% of lower-level facilities systematically record Hb. ⚠ Increased risk of undetected maternal anaemia. |
-| **Decisions and actions** | 1. Run targeted training on Hb-at-ANC protocols. 2. Equip priority facilities with hemocues + reagents. 3. Step up community education on Hb checks. |
-| **Constraints** | Low availability of hemocues + reagents · Incomplete ANC registers · Providers under-trained · Low community demand. |
-| **Solutions** | Include Hb measurement in the essential-inputs list · Set up a training + community-sensitisation plan. |
+The question this country will keep answering with FASTR: *Are facilities measuring Hb at ANC, and where is the gap closing?*
 
-## II. Dissemination and use
+**Quarterly FASTR analyses to run:**
 
-| Column | Worked answer |
-|--------|---------------|
-| **End user** | **National**: RMNCAH-N coordination platform, Directorate of Reproductive Health. **Regional/district**: district health managers, supervision teams. |
-| **Message objective** | Make decision-makers aware of the gap in Hb-at-ANC coverage · Mobilise resources for inputs and training. |
-| **Key messages** | 🔴 *"Only 42% of facilities measure Hb at ANC — thousands of anaemic pregnant women go undetected."* · 📊 Trends and district-level analysis · 📦 Documented input shortfall · 📋 Recommend: make Hb recording mandatory in the HMIS by Q3 2026. |
-| **Dissemination channels** | Quarterly RMNCAH-N meetings · District performance reviews · Monthly bulletins (PDF/email) · District debrief workshops · Parliament / donor reports. |
+- Hb-at-ANC measurement coverage by district (quarterly)
+- DQA: completeness of the ANC register (quarterly)
+- Disruption check on ANC1 volume (quarterly) — to rule out broader service disruption confounding the Hb story
+
+**M&E indicators tracked:**
+
+- **% of facilities recording Hb at ANC** — target ≥ 80% by March 2027
+- Number of facilities equipped with hemocues
+- Number of providers trained on the Hb protocol
+- % of quarterly reports presented in relevant forums
+
+## 2. Finalising the report
+
+The workshop output — a Hb-at-ANC disruption-report deck — becomes the artefact for the first round of dissemination.
+
+| What | Detail |
+|------|--------|
+| **What to add** | 2-page narrative summary · District priority list (the 10 lowest-performing districts) · Three key messages |
+| **By when** | 25 May, before the RMNCAH-N meeting |
+| **Lead** | Project lead (M&E unit) |
+| **Validation** | Director of Reproductive Health signs off on the deck and the key messages |
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Timeline
+## 3. Ongoing updates and dissemination
+
+**Responsibilities:**
+
+| Step | Owner | Cadence |
+|------|-------|---------|
+| Upload month-end HMIS data | Data Manager (M&E unit) | By the 5th of each month |
+| Draft the quarterly Hb-at-ANC report | M&E officer | First week of each quarter |
+| Present at RMNCAH-N coordination meeting | Project lead | Quarterly |
+| District-level dissemination | District health managers + supervision teams | Quarterly |
+
+**Existing forums to plug into:**
+
+- Quarterly RMNCAH-N coordination meetings
+- District performance reviews
+- Monthly bulletins (PDF / email)
+- District debrief workshops
+- Parliament and donor reports
+
+**Calendar — the year ahead:**
 
 | When | Milestone |
 |------|-----------|
@@ -70,35 +99,27 @@ The pages that follow show how this one finding becomes a complete plan — acti
 | **September 2026** | Mid-term review |
 | **December 2026** | Annual review and report |
 
-## Next steps + owners
-
-| Step | Owner |
-|------|-------|
-| Add to the 25 May RMNCAH-N meeting agenda | RMNCAH-N Director |
-| Finalise and validate the data presentation | Project lead |
-| Draft the hemocue-supply plan | Logistics unit |
-| Design the training module | MoH Training Division |
-
-## Monitoring + evaluation indicators
-
-- % of quarterly reports presented in relevant meetings
-- Number of facilities equipped with hemocues
-- Number of providers trained on the Hb protocol
-- **% of facilities recording Hb at ANC (target: ≥ 80% by March 2027)**
-
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## 4. Skill building
+
+| Activity | Who | When |
+|----------|-----|------|
+| Train 50 providers on Hb-at-ANC protocols | MoH Training Division | Before Q3 |
+| Train 2 more M&E team members on FASTR end-to-end | Country focal point | Before the Q3 analysis |
+| Weekly 1-hour FASTR clinic for the M&E team | M&E unit lead | Ongoing from Q2 |
 
 ## What to notice in this example
 
 Three things make this plan actionable, not aspirational:
 
-1. **One specific person owns each step**, not "the ministry" or "the unit".
+1. **One specific person owns each step** — not "the ministry" or "the unit".
 2. **Every action is checkable** — "train 50 providers", "equip 30 facilities" — you can tell next quarter whether it happened or didn't.
-3. **The timeline is real dates tied to existing meetings** — 25 May, June district debriefs, mid-term in September. No "as soon as possible".
+3. **The calendar uses real dates tied to existing meetings** — 25 May, June district debriefs, mid-term in September. No "as soon as possible".
 
-> **Use this as a model when you fill in your own action plan.** If your worksheet doesn't have a specific person, a checkable action, and a real date for each row — it isn't ready yet.
+> **Use this as a model when you fill in your own plan.** If your worksheet doesn't have a specific person, a checkable action, and a real date for each dimension — it isn't ready yet.
 
 ## What's next
 

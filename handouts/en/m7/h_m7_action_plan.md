@@ -25,28 +25,26 @@ footer: "FASTR · Results Communication"
 
 <p class="sb-label">Why this matters</p>
 
-FASTR isn't a one-off analysis. It's a **rhythm** — quarterly analyses, regular dissemination, follow-up, capacity strengthening over time. This activity turns "we did a workshop" into "we have a plan for how this continues".
-
-Three questions you'll answer: **what's the analysis cadence**, **where does the output go**, and **what does the team need**.
+The action plan you're building is meant to guide FASTR activities at country scale **over the year ahead**. The transition from workshop to everyday practice happens in the weeks that follow — the more specific the plan is now, the better it survives the routine.
 
 </aside>
 <div class="p1-main">
 
-## The worksheet
+## The four dimensions
 
-Fill in the action plan table:
+Work through these four dimensions as a country team. Answer the questions in writing — a colleague reading the plan should know exactly what's expected of whom.
 
-| Action step | Responsible person | Timeline | Success metric |
-|-------------|--------------------|----------|----------------|
-| Complete quarterly FASTR analysis |  |  |  |
-| Disseminate to [forum] |  |  |  |
-| Follow up on identified issues |  |  |  |
-| Train additional team members |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+### 1. Your use cases
 
-> **Use the blank rows for any country-specific steps** — e.g., "integrate FASTR output into the quarterly review meeting", "establish a data quality working group".
+*How will you use FASTR analyses? Which key questions will you answer?*
+
+<div class="answer-box"></div>
+
+### 2. Finalising the report
+
+*Is the report you built during the workshop the one you want to use going forward? If not, how will you finalise it — and by when?*
+
+<div class="answer-box"></div>
 
 </div>
 </div>
@@ -55,57 +53,49 @@ Fill in the action plan table:
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Three guiding questions
+### 3. Ongoing updates and dissemination
 
-Use these to pressure-test the rows in your action plan:
-
-### 1. Existing forums
-
-> *What existing platform or forum will you integrate FASTR into?*
-
-Don't create a new meeting. Plug FASTR into something that already happens — monthly directorate meeting, quarterly programme review, technical working group. The rhythm comes for free that way.
+*Who uploads data to the platform? Who drafts the quarterly reports? Who disseminates them — through which existing forum?*
 
 <div class="answer-box"></div>
 
-### 2. Dissemination of this week's output
+### 4. Skill building
 
-> *What's your dissemination plan for the output you created this week?*
-
-Be specific: who receives it, in what format, by what date. If the answer is "we'll figure it out later", that's the same as "it won't happen".
+*How will you practise — solo, as a group, in regular weekly meetings? Who else needs to understand this content and needs additional training?*
 
 <div class="answer-box"></div>
-
-### 3. Support from facilitators
-
-> *What support do you need from facilitators over the next quarter?*
-
-Concrete asks beat vague ones. *"We need help configuring the disruption module"* is actionable. *"We need help"* is not.
-
-<div class="answer-box"></div>
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Worked example: a Country B plan
 
-| Action step | Who | When | Success metric |
-|-------------|-----|------|----------------|
-| Complete Q2 2026 FASTR analysis | Data Manager + Analyst (M&E unit) | By 15 July | DQA report + service utilization output produced |
-| Present at monthly Directorate meeting | Data Manager | First meeting after analysis | Director presents findings; at least one action assigned |
-| Follow up on identified issues with district teams | M&E unit + relevant programme officers | Within 30 days of dissemination | Action log updated; supervision visits planned |
-| Train 2 more team members in FASTR | Country focal point | Before Q3 analysis | Two new team members run an analysis end-to-end |
+| Dimension | Country B's answer |
+|-----------|--------------------|
+| **1. Use cases** | Quarterly DQA + service utilisation analysis. Quarterly disruption report presented at the RMNCAH-N TWG. |
+| **2. Finalising the report** | Add a 2-page narrative summary to the workshop deck. Finalised by 15 July. Lead: Data Manager. |
+| **3. Ongoing updates and dissemination** | Data Manager uploads monthly data. M&E unit drafts the quarterly report. Presented at the monthly Directorate meeting; shared with the State MoH. |
+| **4. Skill building** | Weekly 1-hour FASTR clinic for the team. Train 2 more team members before Q3 (Country focal point). |
+
+Notice each row names a specific output, a specific person, and a specific cadence.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Peer review
 
 Trade plans with another country team. Look for:
 
-- **Realistic timelines** — does the plan over-commit to the first quarter?
-- **Named owners** — does every row have a specific person, not a department?
-- **A clear feedback loop** — what happens when an action doesn't get done? Is there a follow-up mechanism?
+- **Specificity** — does every dimension name a real person (not a department) and a real cadence (not "ongoing")?
+- **Realism** — does the plan over-commit to the first quarter? Could it survive the routine?
+- **The forum** — is FASTR being plugged into a meeting that already exists, or a new one that has to be invented?
+
+## Support from facilitators
+
+> **What support do you need from facilitators over the next quarter?** Concrete asks beat vague ones. *"We need help configuring the disruption module"* is actionable. *"We need help"* is not.
+
+<div class="answer-box"></div>
 
 ## What's next
 
-This plan is the bridge between **the workshop** and **everyday practice**. Keep it visible — pin it where your team works, review it at the start of each quarter, update it as reality reveals what works.
+This plan is the bridge between **the workshop** and **everyday practice**. Keep it visible, review it at the start of each quarter, update it as reality reveals what works.
 
 Setup is done. The work begins now.

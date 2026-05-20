@@ -21,7 +21,7 @@ Un exemple entièrement rempli d'un plan d'action pays, construit autour d'un co
 
 <p class="sb-label">Comment l'utiliser</p>
 
-Gardez-le à côté de vous pendant que vous remplissez votre propre plan d'action. Remarquez que chaque colonne reçoit une réponse précise et concrète — jamais une réponse vague.
+Gardez-le à côté de vous pendant que vous remplissez votre propre plan. Remarquez que chacune des quatre dimensions reçoit une réponse précise et concrète — jamais vague.
 
 </aside>
 <div class="p1-main">
@@ -30,7 +30,7 @@ Gardez-le à côté de vous pendant que vous remplissez votre propre plan d'acti
 
 > Seuls **42 %** des établissements de niveau inférieur enregistrent systématiquement la mesure de l'hémoglobine (Hb) lors des consultations prénatales. Risque : anémie maternelle non détectée.
 
-Les pages qui suivent montrent comment ce seul constat devient un plan complet — actions, diffusion, calendrier, responsables nommés, et indicateurs de suivi.
+Les pages qui suivent montrent comment ce seul constat se transforme en un plan complet pour l'année à venir, structuré autour des quatre dimensions : **cas d'utilisation, finalisation du rapport, mise à jour et diffusion continues, et renforcement des compétences**.
 
 </div>
 </div>
@@ -39,29 +39,58 @@ Les pages qui suivent montrent comment ce seul constat devient un plan complet �
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## I. Actions et décisions
+## 1. Cas d'utilisation
 
-| Colonne | Réponse remplie |
-|---------|-----------------|
-| **Problème identifié** | Faible taux de mesure de l'Hb en CPN : seuls 42 % des établissements de niveau inférieur enregistrent systématiquement la mesure Hb. ⚠ Risque accru d'anémie maternelle non détectée. |
-| **Décisions et actions** | 1. Organiser des formations ciblées sur les protocoles de mesure Hb en CPN. 2. Doter les établissements prioritaires en hemocues + réactifs. 3. Intensifier l'éducation communautaire sur l'importance du contrôle Hb. |
-| **Contraintes** | Faible disponibilité d'hemocues et réactifs · Registres CPN incomplets · Prestataires peu formés · Faible demande communautaire. |
-| **Solutions** | Intégrer la mesure Hb dans la liste des intrants essentiels · Mettre en place un plan de formation et de sensibilisation communautaire. |
+La question que ce pays continuera à se poser avec FASTR : *Les établissements mesurent-ils l'Hb à la CPN, et où l'écart se réduit-il ?*
 
-## II. Diffusion et utilisation
+**Analyses FASTR trimestrielles à mener :**
 
-| Colonne | Réponse remplie |
-|---------|-----------------|
-| **Utilisateur final** | **National** : Plateforme nationale de coordination SRMNEA-N, Direction de la Santé de la Reproduction. **Régional/district** : Directeurs sanitaires de district, équipes de supervision. |
-| **Objectif du message** | Sensibiliser les décideurs à l'écart de couverture en mesure Hb · Mobiliser les ressources pour corriger les déficits en intrants et en formation. |
-| **Messages clés** | 🔴 *« Seulement 42 % des établissements mesurent l'Hb à la CPN — des milliers de femmes enceintes anémiées ne sont pas détectées. »* · 📊 Tendances et analyse par district · 📦 Déficit en intrants documenté · 📋 Recommandation : rendre la saisie Hb obligatoire dans le SIS d'ici T3 2026. |
-| **Filières de diffusion** | Réunions trimestrielles de la plateforme SRMNEA-N · Réunions de revue de performance des districts · Bulletins mensuels (format PDF/email) · Ateliers de restitution au niveau district · Rapports au Parlement / bailleurs. |
+- Couverture de la mesure Hb à la CPN par district (trimestrielle)
+- AQD : complétude du registre CPN (trimestrielle)
+- Vérification de perturbation sur le volume CPN1 (trimestrielle) — pour exclure qu'une perturbation des services plus large confonde le constat sur l'Hb
+
+**Indicateurs S&É suivis :**
+
+- **% d'établissements enregistrant la mesure Hb à la CPN** — cible ≥ 80 % d'ici mars 2027
+- Nombre d'établissements dotés en hemocues
+- Nombre de prestataires formés au protocole Hb
+- % de rapports trimestriels présentés dans les forums pertinents
+
+## 2. Finalisation du rapport
+
+Le produit de l'atelier — une présentation sur la perturbation Hb à la CPN — devient l'artefact pour la première vague de diffusion.
+
+| Quoi | Détail |
+|------|--------|
+| **À ajouter** | Résumé narratif de 2 pages · Liste des districts prioritaires (les 10 moins performants) · Trois messages clés |
+| **Pour quand** | 25 mai, avant la réunion SRMNEA-N |
+| **Responsable** | Chargé de mission (unité S&É) |
+| **Validation** | Le Directeur de la Santé de la Reproduction valide la présentation et les messages clés |
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Calendrier
+## 3. Mise à jour et diffusion continues
+
+**Responsabilités :**
+
+| Étape | Responsable | Cadence |
+|-------|-------------|---------|
+| Téléverser les données SIS de fin de mois | Responsable des données (unité S&É) | Avant le 5 de chaque mois |
+| Rédiger le rapport trimestriel Hb à la CPN | Chargé S&É | Première semaine de chaque trimestre |
+| Présenter à la réunion de coordination SRMNEA-N | Chargé de mission | Trimestriel |
+| Diffusion au niveau district | Directeurs sanitaires de district + équipes de supervision | Trimestriel |
+
+**Forums existants à utiliser :**
+
+- Réunions de coordination SRMNEA-N trimestrielles
+- Revues de performance des districts
+- Bulletins mensuels (PDF / e-mail)
+- Ateliers de restitution au niveau district
+- Rapports au Parlement et aux bailleurs
+
+**Calendrier — l'année à venir :**
 
 | Quand | Étape |
 |-------|-------|
@@ -70,35 +99,27 @@ Les pages qui suivent montrent comment ce seul constat devient un plan complet �
 | **Septembre 2026** | Revue de mi-parcours |
 | **Décembre 2026** | Revue annuelle et rapport |
 
-## Prochaines étapes + responsables
-
-| Étape | Responsable |
-|-------|-------------|
-| Inscrire à l'ordre du jour de la réunion SRMNEA-N du 25 mai | Directeur SRMNEA-N |
-| Finaliser et valider la présentation des données | Chargé de mission |
-| Élaborer le plan de dotation en hemocues | Service logistique |
-| Concevoir le module de formation | Division Formation / MoH |
-
-## Indicateurs de suivi et d'évaluation
-
-- % de rapports trimestriels diffusés dans les réunions pertinentes
-- Nombre d'établissements dotés en hemocues
-- Nombre de prestataires formés sur le protocole Hb
-- **% d'établissements enregistrant la mesure Hb à la CPN (cible : ≥ 80 % d'ici mars 2027)**
-
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## 4. Renforcement des compétences
+
+| Activité | Qui | Quand |
+|----------|-----|-------|
+| Former 50 prestataires sur les protocoles Hb à la CPN | Division Formation / MoH | Avant le T3 |
+| Former 2 membres supplémentaires de l'équipe S&É à FASTR de bout en bout | Point focal pays | Avant l'analyse T3 |
+| Clinique FASTR hebdomadaire d'une heure pour l'équipe S&É | Responsable de l'unité S&É | En continu à partir du T2 |
 
 ## Ce qu'il faut remarquer dans cet exemple
 
 Trois choses rendent ce plan exploitable, pas aspirationnel :
 
-1. **Une personne précise est responsable de chaque étape**, pas « le ministère » ni « l'unité ».
+1. **Une personne précise est responsable de chaque étape** — pas « le ministère » ni « l'unité ».
 2. **Chaque action est vérifiable** — « former 50 prestataires », « équiper 30 établissements » — on peut dire au trimestre suivant si c'est fait ou non.
 3. **Le calendrier est en dates réelles liées à des réunions existantes** — 25 mai, restitutions districts en juin, mi-parcours en septembre. Pas de « dès que possible ».
 
-> **Utilisez cet exemple comme modèle quand vous remplissez votre propre plan d'action.** Si votre feuille n'a pas une personne précise, une action vérifiable, et une date réelle pour chaque ligne — elle n'est pas encore prête.
+> **Utilisez cet exemple comme modèle quand vous remplissez votre propre plan.** Si votre feuille n'a pas une personne précise, une action vérifiable, et une date réelle pour chaque dimension — elle n'est pas encore prête.
 
 ## Étape suivante
 

@@ -24,6 +24,14 @@ Standard FASTR Reports is the set of standard prompts that generate FASTR's GFF 
 - It is a **team activity**: country teams work the checklist together, with the source charts open on the platform next to the report.
 - There is nothing to demo. Your job is to make sure teams actually do **both** verification passes — and do not skip the manual one.
 
+## Setting up the build (before verification)
+
+Before participants reach the verification activity, they have built a report using the prompt library. Three facilitator moves make that build go well:
+
+- **Pilot / co-pilot roles.** Pick **one person per team** as the pilot — they run the prompts. The rest of the team observes, suggests corrections, and reviews. Rotate the role if time allows.
+- **Define the use case first.** Before opening the prompt library, ask each team to **agree out loud on the use case** — country, period, indicator groupings, who the report is for. Five minutes of group reflection saves thirty minutes of regenerating.
+- **Timing reality.** Prompt 1 takes **5–10 minutes** to build the deck slide by slide. **Tell participants not to click during generation** — interrupting can break the flow.
+
 ## The activity
 
 ### 1. Verifying an AI-generated report
@@ -33,6 +41,10 @@ Standard FASTR Reports is the set of standard prompts that generate FASTR's GFF 
 **What it is** — a reference and team checklist for verifying a generated disruption report.
 **What the handout covers** — the two-pass model (Pass 1: AI self-review via Prompt 5; Pass 2: team review), and section-by-section manual checklists — Section A (general checks), B (base disruption report), and C / D (optional regional and data-quality appendices).
 **Watch for** — teams stop after the AI pass. Prompt 5 only checks the deck against itself and the data; the **manual team review** is what catches what only the country team knows — whether a "disruption" is real or explained by a local event, and whether local context is missing. Make sure both passes happen.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Wrapping up
 

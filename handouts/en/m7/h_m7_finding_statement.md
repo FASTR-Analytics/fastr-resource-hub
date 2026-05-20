@@ -39,11 +39,7 @@ Without these, a finding lands as "interesting data" — not as something a deci
 
 > **[Indicator] [trend] from [value] to [value] in [place/period]. This suggests [interpretation].**
 
-## Your task
-
-1. Pick **one finding** from your FASTR analysis.
-2. Write it out using the formula above.
-3. Read it back: would someone unfamiliar with your data understand what happened and why it matters?
+Pick one finding from your FASTR analysis and write it out using the formula. Then read it back — would someone unfamiliar with your data understand what happened and why it matters?
 
 </div>
 </div>

@@ -69,6 +69,8 @@ Après avoir fait les deux exercices, répondez à :
 
 Les deux approches utilisent les mêmes données et méthodes — aucune n'est « meilleure » en général. Adaptez l'approche à la tâche.
 
+> **Règle pratique :** privilégiez l'approche **itérative** quand vous explorez une nouvelle analyse ou une question ponctuelle ; passez par la **bibliothèque de prompts** (un prompt unique structuré) quand vous produisez un rapport de routine, récurrent — un rapport trimestriel de perturbation, une analyse régionale, une annexe qualité des données.
+
 ## Étape suivante
 
 Passez à **Affiner votre prompt** pour un exercice en autonomie sur le resserrement d'un prompt unique en trois rondes.

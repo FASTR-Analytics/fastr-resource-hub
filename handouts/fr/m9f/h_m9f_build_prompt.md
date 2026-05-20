@@ -29,16 +29,21 @@ Un prompt clair produit une réponse utile ; un prompt vague produit une répons
 </aside>
 <div class="p1-main">
 
-## Quatre questions avant de taper
+## Six dimensions avant de taper
 
-Choisissez une tâche que vous faites régulièrement. Avant de rédiger le prompt, répondez à ces quatre questions :
+Choisissez une tâche que vous faites régulièrement. Avant de rédiger votre prompt, vérifiez qu'il couvre ces six dimensions.
 
-| Question | Votre réponse |
-|----------|---------------|
-| **1. De quoi ai-je besoin ?** Un graphique ? Un résumé ? Une diapositive pour une réunion ? | |
-| **2. C'est pour qui ?** Mon directeur ? Un bailleur ? Mon équipe pays ? | |
-| **3. Ça doit couvrir quoi ?** Quels indicateurs ? Quelles régions ? Quelle période ? | |
-| **4. À quoi ressemble un bon résultat ?** Saurais-je que l'IA s'est trompée ? | |
+**1. Objectif clair.** La tâche est-elle explicite (*interpréter, résumer, comparer, rédiger des diapos*) et le cas d'utilisation nommé (*évaluation de performance, mise à jour bailleur, formation*) ?
+
+**2. Public cible.** Pour qui ? À quel niveau technique ?
+
+**3. Géographie, période, portée.** National ou infranational ? Quelle période ? Quels indicateurs ou services prioritaires ?
+
+**4. Directives d'interprétation.** L'IA doit-elle décrire, comparer ou identifier des perturbations ? Description seule, ou inclure les implications ?
+
+**5. Format de sortie.** Puces ou narratif ? Texte prêt-pour-diapo ou prose ? Limite de longueur ?
+
+**6. Garde-fous.** Demandez à l'IA de s'en tenir aux données présentées et de signaler les incertitudes ou problèmes de qualité.
 
 </div>
 </div>
@@ -49,7 +54,7 @@ Choisissez une tâche que vous faites régulièrement. Avant de rédiger le prom
 
 ## Maintenant écrivez votre prompt
 
-Utilisez vos réponses ci-dessus pour écrire un prompt qui nomme **quoi**, **qui**, **portée** et **critère de succès**. Un paragraphe suffit.
+Utilisez les six dimensions ci-dessus pour écrire un prompt qui nomme **objectif**, **public**, **portée**, **directives d'interprétation**, **format** et **garde-fous**. Un paragraphe suffit.
 
 ```
 Votre prompt : ________________________________________________________
@@ -61,9 +66,11 @@ ____________________________________________________________________
 ____________________________________________________________________
 ```
 
-## Astuces
+## La règle d'or
 
-> **Affiner est normal.** Vous n'avez pas à formuler le prompt parfaitement du premier coup — vous pouvez continuer la conversation avec l'IA pour préciser. Les quatre questions ci-dessus donnent juste un premier message plus solide.
+> Avant d'appuyer sur Entrée, demandez-vous : *« Est-ce que ce que j'attends en retour est évident ? »* Sinon, ajoutez un détail de plus.
+
+**Affiner est normal aussi.** Vous n'avez pas à formuler le prompt parfaitement du premier coup — vous pouvez continuer la conversation avec l'IA pour préciser. Les six dimensions ci-dessus donnent juste un premier message plus solide.
 
 ## Étape suivante
 

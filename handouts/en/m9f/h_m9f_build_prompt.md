@@ -29,16 +29,21 @@ A clear prompt produces a useful answer; a vague prompt produces a generic one. 
 </aside>
 <div class="p1-main">
 
-## Four questions before you type
+## Six dimensions before you type
 
-Pick a task you do regularly. Before writing the prompt, answer these four questions:
+Pick a task you do regularly. Before writing your prompt, check it covers these six dimensions.
 
-| Question | Your answer |
-|----------|-------------|
-| **1. What do I need?** A chart? A summary? A slide for a meeting? | |
-| **2. Who is it for?** My director? A donor? My country team? | |
-| **3. What should it cover?** Which indicators? Which regions? What time period? | |
-| **4. What does a good result look like?** Would I recognise it if the AI got it wrong? | |
+**1. Clear objective.** Is the task explicit (*interpret, summarise, compare, draft slides*) and the use case named (*performance review, donor update, training*)?
+
+**2. Target audience.** Who's it for? At what technical level?
+
+**3. Geography, period, scope.** National or subnational? Time period? Priority indicators or services?
+
+**4. Interpretation guidance.** Should the AI describe, compare, or identify disruptions? Description only, or include implications?
+
+**5. Output format.** Bullets or narrative? Slide-ready or prose? Length limit?
+
+**6. Guardrails.** Tell the AI to stick to the data shown and flag uncertainties or data-quality issues.
 
 </div>
 </div>
@@ -49,7 +54,7 @@ Pick a task you do regularly. Before writing the prompt, answer these four quest
 
 ## Now write your prompt
 
-Use your answers above to write a prompt that names **what**, **who**, **scope**, and **success criterion**. One paragraph is fine.
+Use the six dimensions above to write a prompt that names **objective**, **audience**, **scope**, **interpretation guidance**, **format**, and **guardrails**. One paragraph is fine.
 
 ```
 Your prompt: __________________________________________________________
@@ -61,9 +66,11 @@ ____________________________________________________________________
 ____________________________________________________________________
 ```
 
-## Tips
+## The golden rule
 
-> **Refining is normal.** You don't have to get the prompt right in one go — you can keep talking to the AI to narrow it down. The four questions above just give you a stronger first message.
+> Before you press Enter, ask yourself: *"Is what I expect back obvious?"* If not, add one more detail.
+
+**Refining is normal too.** You don't have to get the prompt right in one go — you can keep talking to the AI to narrow it down. The six dimensions above just give you a stronger first message.
 
 ## What's next
 

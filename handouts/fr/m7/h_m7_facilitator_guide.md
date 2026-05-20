@@ -64,16 +64,16 @@ Ces activités closent l'atelier — les participants prennent une analyse FASTR
 **Activité · ~30 min · en équipe**
 
 **Ce que c'est** — une activité d'équipe qui transforme « nous avons fait un atelier » en un rythme trimestriel durable.
-**Ce que couvre le document** — un tableau de plan d'action plus trois questions directrices (forums existants, diffusion de la sortie de la semaine, soutien attendu des facilitateurs), et un exemple.
-**À surveiller** — les équipes sur-promettent pour le premier trimestre et nomment des services au lieu de personnes. Poussez-les aussi à brancher FASTR sur une réunion *existante* plutôt que d'en inventer une nouvelle.
+**Ce que couvre le document** — une feuille de travail structurée autour des quatre dimensions de la diapo *Feuille de route post-atelier* : cas d'utilisation, finalisation du rapport, mise à jour et diffusion continues, et renforcement des compétences. Chaque dimension a un encadré à remplir ; un exemple complété suit.
+**À surveiller** — les équipes répondent par des verbes sans nom propre (« téléverser les données », « partager les constats »). Poussez chaque dimension vers une personne nommée, une cadence réelle et un forum existant. La dimension *cas d'utilisation* est la plus souvent sautée — exigez qu'elles nomment les questions auxquelles FASTR continuera à répondre.
 
 ### 5. Exemple — plan d'action pays
 
 **Référence · ~10 min**
 
 **Ce que c'est** — un exemple de plan entièrement rempli, construit autour d'un constat (faible mesure de l'hémoglobine en CPN), à utiliser comme modèle.
-**Ce que couvre le document** — un plan complet : actions, diffusion, calendrier, responsables nommés, et indicateurs de S&É.
-**À surveiller** — c'est une référence, pas une feuille de travail. Distribuez-la *avec* l'activité 4 ; ne laissez pas les équipes la recopier — elle montre le niveau de précision attendu.
+**Ce que couvre le document** — les mêmes quatre dimensions que l'activité 4, chacune entièrement remplie : cas d'utilisation (questions à suivre et indicateurs S&É), finalisation du rapport (que ajouter, par qui, pour quand), mise à jour et diffusion continues (responsabilités, forums, calendrier), et renforcement des compétences (formation et capacité).
+**À surveiller** — c'est une référence, pas une feuille de travail. Distribuez-la *avec* l'activité 4 ; ne laissez pas les équipes la recopier — elle montre le niveau de précision attendu pour chaque dimension.
 
 ## Pour conclure
 

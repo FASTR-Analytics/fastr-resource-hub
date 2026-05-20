@@ -69,6 +69,8 @@ After running both exercises, answer:
 
 Both approaches use the same underlying data and methods — neither is "better" in general. Match the approach to the task.
 
+> **Rule of thumb:** reach for the **iterative** approach when you're exploring a new analysis or a one-off question; reach for the **prompt library** (a structured single prompt) when you're producing a routine, recurrent report — a quarterly disruption report, a regional analysis, a DQ appendix.
+
 ## What's next
 
 Move on to **Refine your prompt** for a self-paced exercise on tightening a single prompt across three rounds.
