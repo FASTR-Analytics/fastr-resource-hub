@@ -278,7 +278,11 @@ function LibraryMode() {
   useEffect(() => {
     fetch(`/api/content/themes?language=${contentLanguage}`, { credentials: 'include' })
       .then(r => r.ok ? r.json() : [])
-      .then(setThemes)
+      .then((data) => {
+        setThemes(data)
+        // Start with theme sections collapsed — show just the headers, expand on demand.
+        setCollapsedThemes(new Set([...data.map((t: any) => t.id), '_other']))
+      })
       .catch(err => console.warn('Failed to load themes:', err))
   }, [contentLanguage])
 
