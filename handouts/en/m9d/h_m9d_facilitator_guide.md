@@ -93,10 +93,7 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 - **Say:** *"Clicking the slide opens the editor. The preview is on the right; the editing options are on the left."*
 - **Watch for:** Participants ask "where's the editor?" — answer: it's not a separate window, it's the right-hand pane that just appeared.
 
-<div class="screenshot-placeholder">
-📷 <strong>Slide editor view with preview on right, options on left</strong><br>
-<code>resources/screenshots/m9d/editor_overview.png</code>
-</div>
+![Slide editor — options on the left, preview on the right h:280](../../../resources/screenshots/m9d/editor_overview.png)
 
 ### Step 2 — Add a visualisation block
 

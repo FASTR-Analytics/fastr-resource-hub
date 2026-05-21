@@ -93,10 +93,7 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 - **Dites :** *« Cliquer sur la diapositive ouvre l'éditeur. L'aperçu est à droite ; les options d'édition à gauche. »*
 - **Surveillez :** Les participants demandent « où est l'éditeur ? » — réponse : ce n'est pas une fenêtre séparée, c'est le panneau de droite qui vient d'apparaître.
 
-<div class="screenshot-placeholder">
-📷 <strong>Vue de l'éditeur avec aperçu à droite, options à gauche</strong><br>
-<code>resources/screenshots/m9d/editor_overview.png</code>
-</div>
+![Éditeur de diapositive — options à gauche, aperçu à droite h:280](../../../resources/screenshots/m9d/editor_overview.png)
 
 ### Étape 2 — Ajouter un bloc de visualisation
 

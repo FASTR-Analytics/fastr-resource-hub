@@ -38,10 +38,7 @@ Allez dans l'onglet **Présentations** et cliquez dans votre dossier personnel.
 
 Cliquez sur **+ Créer une présentation** en haut du dossier. Donnez-lui un nom (p. ex. *Revue T1 2026* ou votre sujet), puis cliquez sur **Enregistrer**.
 
-<div class="screenshot-placeholder">
-📷 <strong>Bouton « + Créer une présentation » dans un dossier utilisateur</strong><br>
-<code>resources/screenshots/m9d/create_deck_button.png</code>
-</div>
+![Le bouton « + Créer une présentation » h:34](../../../resources/screenshots/m9d/create_deck_button.png)
 
 <h2 class="step-h"><span class="step-n">3</span><span>Ajoutez votre première diapositive</span></h2>
 

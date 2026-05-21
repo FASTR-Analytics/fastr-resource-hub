@@ -34,10 +34,7 @@ Construire un simple graphique chronologique d'un indicateur de santé — mois 
 
 Dans l'onglet Visualisations, cliquez sur **+ Nouvelle visualisation**. Vous verrez un panneau de configuration à gauche et une zone de graphique vide à droite.
 
-<div class="screenshot-placeholder">
-📷 <strong>L'onglet Visualisations avec le bouton « + Nouvelle visualisation »</strong><br>
-<code>resources/screenshots/m9c/new_viz_button.png</code>
-</div>
+![Le bouton « + Créer une visualisation » h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
 </div>
 </div>

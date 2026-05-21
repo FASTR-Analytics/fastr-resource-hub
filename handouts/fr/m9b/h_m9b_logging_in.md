@@ -75,10 +75,7 @@ Après connexion, vous arrivez sur l'onglet **Projets**. Vous voyez les projets 
 
 Cliquez sur le projet de votre pays pour y entrer. Vous verrez alors les onglets de navigation principaux en haut : Données, Visualisations, Présentations, Rapports.
 
-<div class="screenshot-placeholder">
-📷 <strong>Onglet Projets après connexion, avec le projet pays mis en évidence</strong><br>
-<code>resources/screenshots/m9b/projects_tab.png</code>
-</div>
+![Onglet Projets après connexion h:280](../../../resources/screenshots/m9b/projects_tab.png)
 
 ## Vérification
 

@@ -39,10 +39,7 @@ Utilisez l'Assistant IA pour faire apparaître une visualisation enregistrée et
 
 > **Pas encore de graphique enregistré ?** Utilisez plutôt ce prompt d'exemple partagé : *Affiche la visualisation de variation trimestrielle des volumes de services.*
 
-<div class="screenshot-placeholder">
-📷 <strong>Aperçu du chat IA avec bouton « Ajouter à la présentation »</strong><br>
-<code>resources/screenshots/m9d/ai_add_to_deck.png</code>
-</div>
+![L'IA ajoute le graphique à la diapositive, puis invite à « Enregistrer » h:280](../../../resources/screenshots/m9d/ai_add_to_deck.png)
 
 </div>
 </div>

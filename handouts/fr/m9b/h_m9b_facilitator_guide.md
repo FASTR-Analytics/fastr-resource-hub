@@ -79,10 +79,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 - **Faites :** Montrez l'écran d'accueil avec la navigation principale en haut.
 - **Dites :** *« Ceci est l'instance FASTR de votre pays. Tout ce que vous verrez aujourd'hui se passe ici — pas de logiciel séparé à installer. »*
 
-<div class="screenshot-placeholder">
-📷 <strong>Page d'accueil de la plateforme avec tous les onglets visibles</strong><br>
-<code>resources/screenshots/m9b/platform_landing.png</code>
-</div>
+![Page d'accueil de la plateforme avec les onglets principaux h:280](../../../resources/screenshots/m9b/platform_landing.png)
 
 - **Surveillez :** Des participants demandent « c'est pareil que DHIS2 ? » — réponse : *« Non. FASTR lit depuis DHIS2 mais ajoute analyse, visualisation et reporting par-dessus. »*
 
@@ -96,10 +93,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 - **Faites :** Ouvrez l'onglet **Visualisations**. Montrez un graphique enregistré.
 
-<div class="screenshot-placeholder">
-📷 <strong>Onglet Visualisations avec un exemple de graphique ouvert</strong><br>
-<code>resources/screenshots/m9b/tab_visualizations.png</code>
-</div>
+![Onglet Visualisations avec des exemples de graphiques h:280](../../../resources/screenshots/m9b/tab_visualizations.png)
 
 - **Dites :** *« Une fois les données chargées, vous créez des graphiques ici. Vous pouvez aussi les sauvegarder dans votre dossier personnel — nous le ferons dans la prochaine activité. »*
 - **Surveillez :** Passez la souris sur un graphique pour mettre en évidence que les données sont interactives (valeurs au survol, filtres).
@@ -114,10 +108,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 - **Faites :** Ouvrez le panneau Assistant IA. Montrez brièvement la bibliothèque de prompts.
 
-<div class="screenshot-placeholder">
-📷 <strong>Panneau Assistant IA montrant la bibliothèque de prompts</strong><br>
-<code>resources/screenshots/m9b/tab_ai_assistant.png</code>
-</div>
+![Bibliothèque de prompts de l'Assistant IA h:280](../../../resources/screenshots/m9b/tab_ai_assistant.png)
 
 - **Dites :** *« Il y a un assistant IA qui peut vous aider à construire des graphiques, interpréter les sorties et rédiger des diapositives. Nous aurons une session entière dessus plus tard dans la semaine. »*
 - **Surveillez :** Ne démontrez pas un prompt ici — gardez la curiosité pour la session IA dédiée.

@@ -45,26 +45,17 @@ Créer deux dossiers personnels — un dans **Présentations**, un dans **Visual
 1. Cliquez sur l'onglet **Présentations** dans la navigation en haut.
 2. Basculez l'affichage sur **Par dossier** (la bascule en haut — l'autre option est *Liste simple*). **+ Nouveau dossier** n'apparaît qu'en vue *Par dossier*.
 
-<div class="screenshot-placeholder">
-📷 <strong>Bascule d'affichage avec « Par dossier » sélectionné</strong><br>
-<code>resources/screenshots/m9b/view_toggle_by_folder.png</code>
-</div>
+![Bascule d'affichage réglée sur « Par dossier » h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
 
 3. Cliquez sur **+ Nouveau dossier**.
 4. Tapez votre nom (p. ex. `Aïcha N.` ou `Jean S.`).
 5. Cliquez sur **Enregistrer**.
 
-<div class="screenshot-placeholder">
-📷 <strong>Boîte de dialogue « + Nouveau dossier » avec un nom saisi</strong><br>
-<code>resources/screenshots/m9b/new_folder_dialog.png</code>
-</div>
+![Boîte de dialogue « Nouveau dossier » avec un nom saisi h:300](../../../resources/screenshots/m9b/new_folder_dialog.png)
 
 Vous devriez voir votre nouveau dossier apparaître dans la liste. Cliquez dessus pour l'ouvrir — il est vide pour le moment, mais tout ce que vous créerez par la suite pourra y être enregistré.
 
-<div class="screenshot-placeholder">
-📷 <strong>Liste des dossiers après création (votre dossier visible)</strong><br>
-<code>resources/screenshots/m9b/folder_list.png</code>
-</div>
+![Liste des dossiers avec votre dossier visible h:240](../../../resources/screenshots/m9b/folder_list.png)
 
 ---
 

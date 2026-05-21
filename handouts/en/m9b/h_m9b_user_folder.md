@@ -45,26 +45,17 @@ Create two personal folders — one in **Slide Decks**, one in **Visualizations*
 1. Click the **Slide Decks** tab in the top navigation.
 2. Switch the view to **By folder** (the toggle at the top — the other option is *Simple list*). You'll only see **+ New folder** when *By folder* is selected.
 
-<div class="screenshot-placeholder">
-📷 <strong>View toggle showing "By folder" selected</strong><br>
-<code>resources/screenshots/m9b/view_toggle_by_folder.png</code>
-</div>
+![View toggle set to "By folder" h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
 
 3. Click **+ New folder**.
 4. Type your name (e.g., `Aïcha N.` or `John S.`).
 5. Click **Save**.
 
-<div class="screenshot-placeholder">
-📷 <strong>"+ New folder" dialog with a name typed in</strong><br>
-<code>resources/screenshots/m9b/new_folder_dialog.png</code>
-</div>
+![New folder dialog with a name typed in h:300](../../../resources/screenshots/m9b/new_folder_dialog.png)
 
 You should see your new folder appear in the list. Click on it to open it — it's empty for now, but everything you create going forward can be saved here.
 
-<div class="screenshot-placeholder">
-📷 <strong>Folder list after creation (your folder visible)</strong><br>
-<code>resources/screenshots/m9b/folder_list.png</code>
-</div>
+![Folder list with your folder visible h:240](../../../resources/screenshots/m9b/folder_list.png)
 
 ---
 

@@ -75,10 +75,7 @@ After login, you land on the **Projects** tab. You'll see the projects you have 
 
 Click your country's project to enter it. You'll then see the main navigation tabs at the top: Data, Visualizations, Slide Decks, Reports.
 
-<div class="screenshot-placeholder">
-📷 <strong>Projects tab after login, with the country project highlighted</strong><br>
-<code>resources/screenshots/m9b/projects_tab.png</code>
-</div>
+![Projects tab after login h:280](../../../resources/screenshots/m9b/projects_tab.png)
 
 ## Checkpoint
 

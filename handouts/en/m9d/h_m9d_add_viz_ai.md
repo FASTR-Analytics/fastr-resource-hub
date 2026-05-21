@@ -39,10 +39,7 @@ Use the AI Assistant to surface a saved visualisation and add it directly to you
 
 > **No saved chart of your own yet?** Use this shared example prompt instead: *Display the quarterly change in service volume visualisation.*
 
-<div class="screenshot-placeholder">
-📷 <strong>AI chat preview with "Add to slide deck" button</strong><br>
-<code>resources/screenshots/m9d/ai_add_to_deck.png</code>
-</div>
+![AI adds the chart to the slide, then prompts "Click Save" h:280](../../../resources/screenshots/m9d/ai_add_to_deck.png)
 
 </div>
 </div>

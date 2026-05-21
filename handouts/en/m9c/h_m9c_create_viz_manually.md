@@ -34,10 +34,7 @@ Build a simple time-series chart of one health indicator — month by month, ove
 
 In the Visualizations tab, click **+ New visualization**. You'll see a setup panel on the left and an empty chart area on the right.
 
-<div class="screenshot-placeholder">
-📷 <strong>The Visualizations tab with the "+ New visualization" button</strong><br>
-<code>resources/screenshots/m9c/new_viz_button.png</code>
-</div>
+![The "+ Create visualization" button h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
 </div>
 </div>

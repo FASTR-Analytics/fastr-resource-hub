@@ -79,10 +79,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 - **Do:** Show the landing screen with the main navigation across the top.
 - **Say:** *"This is your country's instance of FASTR. Everything you'll see today happens here — there's no separate software to install."*
 
-<div class="screenshot-placeholder">
-📷 <strong>Platform landing page with all main tabs visible</strong><br>
-<code>resources/screenshots/m9b/platform_landing.png</code>
-</div>
+![Platform landing page with the main tabs h:280](../../../resources/screenshots/m9b/platform_landing.png)
 
 - **Watch for:** Participants asking "is this the same as DHIS2?" — answer: *"No. FASTR reads from DHIS2 but adds analysis, visualization, and reporting on top."*
 
@@ -96,10 +93,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 
 - **Do:** Open the **Visualizations** tab. Show a saved chart.
 
-<div class="screenshot-placeholder">
-📷 <strong>Visualizations tab with an example chart open</strong><br>
-<code>resources/screenshots/m9b/tab_visualizations.png</code>
-</div>
+![Visualizations tab with example charts h:280](../../../resources/screenshots/m9b/tab_visualizations.png)
 
 - **Say:** *"Once data is loaded, you create charts here. You can also save them to your personal folder — we'll do that in the next activity."*
 - **Watch for:** Mouse over a chart to highlight that the data is interactive (hover values, filters).
@@ -114,10 +108,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 
 - **Do:** Open the AI Assistant panel. Show the prompt library briefly.
 
-<div class="screenshot-placeholder">
-📷 <strong>AI Assistant panel showing the prompt library</strong><br>
-<code>resources/screenshots/m9b/tab_ai_assistant.png</code>
-</div>
+![AI Assistant prompt library h:280](../../../resources/screenshots/m9b/tab_ai_assistant.png)
 
 - **Say:** *"There's an AI assistant that can help you build charts, interpret outputs, and draft slides. We'll have a whole session on this later in the week."*
 - **Watch for:** Don't demo a prompt here — keep curiosity for the dedicated AI session.

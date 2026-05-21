@@ -80,10 +80,7 @@ ________________________________________________________________________
 
 Remarquez ce que la meilleure version ajoute :
 
-<div class="screenshot-placeholder">
-📷 <strong>Exemple de sortie FASTR — tendance CPN1 montrant une perturbation (illustre l'exemple)</strong><br>
-<code>resources/screenshots/m7/sample_anc1_chart.png</code>
-</div>
+![Exemple de graphique CPN1 montrant une perturbation h:240](../../../resources/screenshots/m7/sample_anc1_chart.png)
 - Une **direction et une ampleur** (chute de 18 %)
 - Une **comparaison temporelle** (T1 2025 → T1 2026)
 - Un **lieu** (Région Nord)

@@ -80,10 +80,7 @@ ________________________________________________________________________
 
 Notice what the better version adds:
 
-<div class="screenshot-placeholder">
-📷 <strong>Sample FASTR output chart — ANC1 trend showing disruption (anchors the worked example)</strong><br>
-<code>resources/screenshots/m7/sample_anc1_chart.png</code>
-</div>
+![Sample ANC1 trend chart showing a disruption h:240](../../../resources/screenshots/m7/sample_anc1_chart.png)
 - A **direction and magnitude** (dropped 18%)
 - A **time comparison** (Q1 2025 → Q1 2026)
 - A **place** (Northern Region)
