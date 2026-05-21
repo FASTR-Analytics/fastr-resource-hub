@@ -95,6 +95,10 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 
 ![Slide editor — options on the left, preview on the right h:280](../../../resources/screenshots/m9d/editor_overview.png)
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Step 2 — Add a visualisation block
 
 - **Do:** **Block → Visualisation → Select visualisation** → pick a saved chart → **Select**. The chart fills the slide.
@@ -106,10 +110,6 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 <code>resources/screenshots/m9d/block_viz_select.png</code>
 </div>
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
 ### Step 3 — Split the slide into chart + text
 
 - **Do:** Right-click in the slide preview → **Add → Col to right** → click into the new text column and type a one-line takeaway.
@@ -120,6 +120,10 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 📷 <strong>Right-click menu showing "Add → Col to right"</strong><br>
 <code>resources/screenshots/m9d/col_to_right_menu.png</code>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Step 4 — Resize the chart and text areas
 

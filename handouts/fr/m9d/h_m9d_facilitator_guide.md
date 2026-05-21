@@ -95,6 +95,10 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 
 ![Éditeur de diapositive — options à gauche, aperçu à droite h:280](../../../resources/screenshots/m9d/editor_overview.png)
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Étape 2 — Ajouter un bloc de visualisation
 
 - **Faites :** **Bloc → Visualisation → Sélectionner une visualisation** → choisir un graphique enregistré → **Sélectionner**. Le graphique remplit la diapositive.
@@ -106,10 +110,6 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 <code>resources/screenshots/m9d/block_viz_select.png</code>
 </div>
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
 ### Étape 3 — Diviser la diapositive en graphique + texte
 
 - **Faites :** Clic droit dans l'aperçu de la diapositive → **Ajouter → Col à droite** → cliquer dans la nouvelle colonne de texte et taper un message d'une ligne.
@@ -120,6 +120,10 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 📷 <strong>Menu clic droit montrant « Ajouter → Col à droite »</strong><br>
 <code>resources/screenshots/m9d/col_to_right_menu.png</code>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Étape 4 — Redimensionner les zones graphique et texte
 
