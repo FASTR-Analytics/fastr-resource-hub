@@ -60,6 +60,10 @@ m9f:
 - h_m9f_pdf_template.md        # 5. Use a previous report as template
 - h_m9f_verify_output.md       # 6. Verify the output before sharing
 
+m9g:
+- h_m9g_facilitator_guide.md   # Facilitator guide + answer key
+- h_m9g_quiz.md                # Team answer sheet (5 questions)
+
 methodology:
 - h_methodology_dqa.md          # 1. Data quality assessment (M1)
 - h_methodology_adjustment.md   # 2. Data quality adjustment (M2)

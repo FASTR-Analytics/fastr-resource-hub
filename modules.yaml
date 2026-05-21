@@ -417,8 +417,10 @@ modules:
       materials:
         deck: m9g
         signpost: activity_divider
-        handouts: []
-      ai_notes: Assessment/energiser — best near the end or as a recap. No handouts.
+        handouts:
+        - quiz
+        facilitator_guide: facilitator_guide
+      ai_notes: Assessment/energiser — best near the end or as a recap. Teams may use the AI to find answers.
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
