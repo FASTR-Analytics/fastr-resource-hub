@@ -76,8 +76,19 @@ export function HandoutsPanel() {
   const [groups, setGroups] = useState<HandoutGroup[]>([])
   const [loading, setLoading] = useState(true)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
+  // Theme sections start collapsed (tidier; expand on demand). Tracks the open ones.
+  const [openThemes, setOpenThemes] = useState<Set<string>>(new Set())
   const [preview, setPreview] = useState<PreviewState | null>(null)
   const [audience, setAudience] = useState<HandoutType>('participant')
+
+  const toggleTheme = (themeId: string) => {
+    setOpenThemes(prev => {
+      const next = new Set(prev)
+      if (next.has(themeId)) next.delete(themeId)
+      else next.add(themeId)
+      return next
+    })
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -298,16 +309,22 @@ export function HandoutsPanel() {
       ) : (
         themedGroups.map((bucket) => {
           const isFacilitator = audience === 'facilitator'
+          const isThemeOpen = openThemes.has(bucket.themeId)
           if (isFacilitator) {
             // Facilitator content is sparse (1-2 items per module). A 2-column
             // grid of module cards with always-visible actions reads better than
             // a tall flat list.
             return (
               <div key={bucket.themeId}>
-                <div className="px-3 py-1.5 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
+                <button
+                  onClick={() => toggleTheme(bucket.themeId)}
+                  className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2 text-left transition-colors"
+                >
+                  {isThemeOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
                   <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
                   {bucket.themeName}
-                </div>
+                </button>
+                {isThemeOpen && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3">
                   {bucket.groups.map((group) => (
                     <div
@@ -359,17 +376,22 @@ export function HandoutsPanel() {
                     </div>
                   ))}
                 </div>
+                )}
               </div>
             )
           }
           // Participants tab — collapsible module groups (dense content).
           return (
             <div key={bucket.themeId}>
-              <div className="px-3 py-1.5 bg-slate-50 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2">
+              <button
+                onClick={() => toggleTheme(bucket.themeId)}
+                className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2 text-left transition-colors"
+              >
+                {isThemeOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
                 <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
                 {bucket.themeName}
-              </div>
-              {bucket.groups.map((group) => {
+              </button>
+              {isThemeOpen && bucket.groups.map((group) => {
                 const isOpen = expanded.has(group.moduleId)
                 return (
                   <div key={group.moduleId} className="border-b border-gray-100">
