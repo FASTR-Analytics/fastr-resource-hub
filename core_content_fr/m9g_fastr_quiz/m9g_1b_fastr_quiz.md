@@ -8,6 +8,6 @@ paginate: true
 
 **A.** Facility Assessment and Strategic Tracking Registry
 
-**B.** Frequent Assessments and Health System Tools for Resilience
+**B.** Frequent Assessments and System Tools for Resilience
 
 **C.** Framework for Analyzing Service Trends and Reporting

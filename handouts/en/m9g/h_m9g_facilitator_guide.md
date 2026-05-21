@@ -46,5 +46,3 @@ A short, team-based knowledge check on FASTR fundamentals — the framework, the
 **5. ANC1 coverage target population → A**
 *Pregnant women* (expected pregnancies) — the denominator for first antenatal visit coverage.
 
-<div class="callout-footer">Note: the slide for Q1 option B currently reads "Frequent Assessments and <strong>Health System</strong> Tools for Resilience". The canonical name is "Frequent Assessments and <strong>System</strong> Tools for Resilience" — worth correcting on the slide.</div>
-

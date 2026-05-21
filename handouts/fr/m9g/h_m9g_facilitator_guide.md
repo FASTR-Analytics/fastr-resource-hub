@@ -46,5 +46,3 @@ Un court contrôle de connaissances en équipe sur les fondamentaux de FASTR —
 **5. Population cible de la couverture CPN1 → A**
 *Femmes enceintes* (grossesses attendues) — le dénominateur de la couverture en première visite prénatale.
 
-<div class="callout-footer">Note : la diapo de la Q1, option B, indique actuellement « Frequent Assessments and <strong>Health System</strong> Tools for Resilience ». Le nom canonique est « Frequent Assessments and <strong>System</strong> Tools for Resilience » — à corriger sur la diapo.</div>
-
