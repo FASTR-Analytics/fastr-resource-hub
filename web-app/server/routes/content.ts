@@ -896,10 +896,13 @@ router.get('/handouts', (req, res) => {
     const themes = loadThemesRegistry()
     const themeNameById = new Map(themes.map(t => [t.id, t.name[language] || t.name.en]))
     const moduleThemeById = new Map(registryModules.map(m => [m.id, m.theme || null]))
+    // Internal/non-workshop folders that live under handouts/ but should not
+    // appear in the Content Library's Handouts tab.
+    const EXCLUDED_HANDOUT_DIRS = new Set(['onboarding'])
     const moduleDirs = fs.readdirSync(langPath)
       .filter(d => {
         const full = path.join(langPath, d)
-        return fs.statSync(full).isDirectory() && !d.startsWith('_') && !d.startsWith('.')
+        return fs.statSync(full).isDirectory() && !d.startsWith('_') && !d.startsWith('.') && !EXCLUDED_HANDOUT_DIRS.has(d)
       })
       .sort()
 

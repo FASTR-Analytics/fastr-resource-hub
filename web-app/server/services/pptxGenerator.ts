@@ -614,20 +614,24 @@ function getImageLayout(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
-  // Vertical accent line on the left of title
-  slide.addShape('rect', {
-    x: 0.5, y: 0.35, w: 0.06, h: 0.85,
-    fill: { color: COLORS.green },
-    line: { color: COLORS.green },
-  })
+  const clean = cleanMarkdownText(title)
 
   // Title in FASTR dark green, Poppins Bold
-  slide.addText(cleanMarkdownText(title), {
-    x: 0.7, y: 0.35, w: 12.13, h: 0.85,
+  slide.addText(clean, {
+    x: 0.5, y: 0.38, w: 12.33, h: 0.62,
     fontSize: FONTS.h2Size,
     fontFace: FONTS.titleFamily,
     color: COLORS.darkGreen,
     bold: true,
+    valign: 'top',
+  })
+
+  // Thin lime underline beneath the title, sized roughly to the title text
+  const underlineW = Math.min(9, Math.max(1.2, clean.length * 0.16))
+  slide.addShape('rect', {
+    x: 0.52, y: 1.04, w: underlineW, h: 0.045,
+    fill: { color: COLORS.lime },
+    line: { color: COLORS.lime },
   })
 }
 
