@@ -78,3 +78,6 @@ Indicator_Reference_Sheets_GFF_Measurement_Framework.pdf
 # Local-only onboarding primer (not distributed)
 handouts/en/onboarding/
 resources/screenshots/dhis2_demo_dashboard.png
+
+# Browser-automation working artifacts (Playwright MCP)
+.playwright-mcp/
