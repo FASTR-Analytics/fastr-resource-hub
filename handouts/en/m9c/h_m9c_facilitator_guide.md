@@ -43,9 +43,9 @@ These activities teach participants to **read a chart and say what it means** �
 
 **Activity · ~15 min**
 
-**What it is** — a hands-on activity building a time-series chart manually via the setup panel.
-**What the handout covers** — + New visualization, pick indicator / period / chart type / level, save with a clear name to their folder, then repeat for two more indicators.
-**Watch for** — participants default to one chart type. Reinforce: **line** charts for trends over time, **bar** charts for comparing places.
+**What it is** — a hands-on activity creating a chart with the built-in builder (the **Metric → Presets → Create** wizard).
+**What the handout covers** — + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a ready preset like *Service volume over time (monthly)* → Create. The handout also explains **filter vs disaggregate**.
+**Watch for** — participants confuse **filter** (show a slice, hide the rest — e.g. *only ANC1*) with **disaggregate** (break a total into its parts on one chart — e.g. *one line per district*). Reinforce the difference out loud — it underlies every chart they build. The quick path is metric → preset → Create; **Custom** is only needed for manual control (chart type + disaggregation). Also: line charts for trends, bar charts for comparing.
 
 ### 3. Write an interpretation for a chart
 

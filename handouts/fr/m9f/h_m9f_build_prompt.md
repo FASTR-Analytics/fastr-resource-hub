@@ -56,15 +56,9 @@ Choisissez une tâche que vous faites régulièrement. Avant de rédiger votre p
 
 Utilisez les six dimensions ci-dessus pour écrire un prompt qui nomme **objectif**, **public**, **portée**, **directives d'interprétation**, **format** et **garde-fous**. Un paragraphe suffit.
 
-```
-Votre prompt : ________________________________________________________
+**Votre prompt :**
 
-____________________________________________________________________
-
-____________________________________________________________________
-
-____________________________________________________________________
-```
+<div class="answer-box" style="min-height: 170pt"></div>
 
 ## La règle d'or
 

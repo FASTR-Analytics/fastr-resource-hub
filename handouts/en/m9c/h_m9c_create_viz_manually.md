@@ -28,11 +28,11 @@ footer: "FASTR · Visualizations & Interpretation"
 
 ## What you'll do
 
-Build a simple time-series chart of one health indicator — month by month, over the last twelve months — and save it to a folder. You'll do this manually; the next activity covers the same thing using the AI Assistant.
+Create your first chart using the built-in builder: pick a **metric**, choose a **ready-made chart**, and it's saved to the project. You'll click through the builder yourself; the next activity does the same with the AI Assistant.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open a new visualization</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Open the visualization builder</span></h2>
 
-In the Visualizations tab, click **+ New visualization**. You'll see a setup panel on the left and an empty chart area on the right.
+In the Visualizations tab, click **+ Create visualization**. A three-step builder opens: **Metric → Presets → Configure**.
 
 ![The "+ Create visualization" button h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
@@ -43,41 +43,51 @@ In the Visualizations tab, click **+ New visualization**. You'll see a setup pan
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Pick what to show</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Pick a metric</span></h2>
 
-In the setup panel:
+Metrics are grouped by module on the left (M1. Data quality, M3. Service utilization, M4. Coverage…). A metric is **what is measured** — e.g. *Number of services reported*, *Actual vs expected service volume*, *Coverage*.
 
-- **Indicator:** choose **ANC1** (or any indicator you want to look at)
-- **Period:** the last 12 months
-- **Chart type:** line chart (best for trends over time)
-- **Level:** national, or pick a region if you want to focus
+For a service-volume trend, open **M3. Service utilization** and pick a metric such as **Number of services reported**. Click **Next**.
 
-The chart updates as you click.
+<h2 class="step-h"><span class="step-n">3</span><span>Choose a ready-made chart</span></h2>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Save it</span></h2>
+You'll see a grid of **presets** — ready-made charts. Choose **Service volume over time (monthly)** — a line chart of monthly volume by indicator. Click **Create**.
 
-Click **Save**. Give the chart a clear name — something you'll recognise later: *ANC1 — monthly, last 12 months*. Put it in your folder.
+Your chart is created and appears in the **Visualizations** list. Use the **By folder** view to drop it into your folder.
+
+> The other presets give quarterly or annual **bar** charts. **Custom → Configure manually** lets you choose the chart type (table, time series, bar, map) and how to break the data down — see the next section.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Try it with three different indicators
+## Filter vs disaggregate — what's the difference?
 
-Repeat the steps with two more indicators of your choice. Pick ones from different programmes (an ANC indicator, an immunisation indicator, a delivery indicator) — you'll get a feel for how each looks.
+These two words come up a lot. They are not the same:
 
-> **Tip:** A line chart is the right choice for *trends over time*. For comparing places or districts at one point in time, a bar chart usually reads better. The next reference handout (*How to read a FASTR visualization*) goes deeper on this.
+- **Filter = show less.** Narrow the chart to a slice and hide the rest — e.g. *only ANC1*, *only Northern region*, *only the last 12 months*. Like a spotlight: you keep one thing, the rest disappears.
+- **Disaggregate = break it down.** Split one total into its parts so you can compare them on the same chart — e.g. *one line per indicator*, or *one line per district*. Nothing is hidden; the total is shown as its pieces.
+
+> **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → you now see only Northern's ANC1. **Disaggregate** "by district" → you see one line per district, side by side.
+
+In the builder, the ready presets pick sensible breakdowns for you. If you go **Custom**, the *Disaggregate by* options (Indicator, Admin area) are where you choose how the data splits.
+
+## Try a few options
+
+Repeat with a different metric or preset — a coverage metric under **M4**, or the quarterly-change bar chart — to see how each reads.
+
+> **Tip:** Line charts (*Service volume over time*) are best for trends over time. Bar charts (*quarterly / annual change*) are better for comparing periods or places. The reference handout *How to read a FASTR visualization* goes deeper.
 
 ## Check yourself
 
 You should now have:
 
-- At least one time-series chart saved in your folder
-- A clear name on each chart so you can find it later
-- A sense of which indicators move smoothly and which jump around
+- At least one chart created and visible in your **Visualizations** list
+- The path in muscle memory: **+ Create visualization → Metric → Presets → Create**
+- A sense of which presets suit trends vs comparisons
 
 ## What's next
 
-The next activity does the same thing using the AI Assistant — typing a request in plain language instead of clicking through the setup panel. Same end result, different path.
+The next activity does the same thing using the AI Assistant — typing a request in plain language instead of clicking through the builder. Same end result, different path.
 
-> 🔎 **Verify in your current UI**: button labels (*+ New visualization*, *Save*) may differ slightly. The three-step structure — pick indicator + period + chart type → preview → save — stays the same.
+> 🔎 **Verify in your current UI**: labels (*+ Create visualization*, *Create*) may differ slightly. The **Metric → Presets → Create** path is the key structure.

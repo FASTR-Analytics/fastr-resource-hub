@@ -33,16 +33,36 @@ La même analyse résonne très différemment selon qui se trouve dans la salle.
 
 Remplissez ceci pour **une audience spécifique** à laquelle vous vous adressez — pas « tout le monde ».
 
-| Question | Votre réponse |
-|----------|---------------|
-| Qui est l'utilisateur final principal de vos produits FASTR ? | |
-| Quelle décision ou action prendra-t-il sur la base de ces données ? | |
-| Quelles sont les 2-3 informations qui l'intéressent le plus ? | |
-| Quel format / quelle durée fonctionne le mieux pour cette audience ? | |
-| Quand et où allez-vous présenter à cette audience ? | |
+Utilisez l'espace sur la page suivante. Un exemple complété suit.
 
 </div>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Votre feuille de travail
+
+**1. Qui est l'utilisateur final principal de vos produits FASTR ?**
+
+<div class="answer-box"></div>
+
+**2. Quelle décision ou action prendra-t-il sur la base de ces données ?**
+
+<div class="answer-box"></div>
+
+**3. Quelles sont les 2-3 informations qui l'intéressent le plus ?**
+
+<div class="answer-box"></div>
+
+**4. Quel format / quelle durée fonctionne le mieux pour cette audience ?**
+
+<div class="answer-box"></div>
+
+**5. Quand et où allez-vous présenter à cette audience ?**
+
+<div class="answer-box"></div>
 
 ---
 

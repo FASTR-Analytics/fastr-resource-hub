@@ -33,16 +33,36 @@ The same analysis lands very differently depending on who's in the room. A Direc
 
 Fill this in for **one specific audience** you're preparing for — not "everyone".
 
-| Question | Your answer |
-|----------|-------------|
-| Who is the primary end user of your FASTR outputs? | |
-| What decision or action will they take based on this data? | |
-| What 2-3 pieces of information are they most interested in? | |
-| What format / length works best for this audience? | |
-| When and where will you present to them? | |
+Use the space on the next page. There's a filled-in example after it.
 
 </div>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Your worksheet
+
+**1. Who is the primary end user of your FASTR outputs?**
+
+<div class="answer-box"></div>
+
+**2. What decision or action will they take based on this data?**
+
+<div class="answer-box"></div>
+
+**3. What 2-3 pieces of information are they most interested in?**
+
+<div class="answer-box"></div>
+
+**4. What format / length works best for this audience?**
+
+<div class="answer-box"></div>
+
+**5. When and where will you present to them?**
+
+<div class="answer-box"></div>
 
 ---
 

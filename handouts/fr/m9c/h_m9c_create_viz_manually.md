@@ -28,11 +28,11 @@ footer: "FASTR · Visualisations et interprétation"
 
 ## Ce que vous allez faire
 
-Construire un simple graphique chronologique d'un indicateur de santé — mois par mois, sur les douze derniers mois — et l'enregistrer dans un dossier. Vous le ferez à la main ; l'activité suivante couvre la même chose avec l'Assistant IA.
+Créer votre premier graphique avec le constructeur intégré : choisir une **mesure**, choisir un **graphique prêt à l'emploi**, et il est enregistré dans le projet. Vous cliquerez vous-même dans le constructeur ; l'activité suivante fait la même chose avec l'Assistant IA.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez une nouvelle visualisation</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le constructeur de visualisation</span></h2>
 
-Dans l'onglet Visualisations, cliquez sur **+ Nouvelle visualisation**. Vous verrez un panneau de configuration à gauche et une zone de graphique vide à droite.
+Dans l'onglet Visualisations, cliquez sur **+ Créer une visualisation**. Un constructeur en trois étapes s'ouvre : **Mesure → Préréglages → Configurer**.
 
 ![Le bouton « + Créer une visualisation » h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
@@ -43,41 +43,51 @@ Dans l'onglet Visualisations, cliquez sur **+ Nouvelle visualisation**. Vous ver
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choisissez ce qu'il faut afficher</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Choisissez une mesure</span></h2>
 
-Dans le panneau de configuration :
+Les mesures sont groupées par module à gauche (M1. Qualité des données, M3. Utilisation des services, M4. Couverture…). Une mesure, c'est **ce qui est mesuré** — p. ex. *Nombre de services rapportés*, *Volume de services réel vs attendu*, *Couverture*.
 
-- **Indicateur :** choisissez **CPN1** (ou n'importe quel indicateur que vous voulez regarder)
-- **Période :** les 12 derniers mois
-- **Type de graphique :** graphique en ligne (idéal pour les tendances dans le temps)
-- **Niveau :** national, ou choisissez une région si vous voulez vous concentrer
+Pour une tendance de volume de services, ouvrez **M3. Utilisation des services** et choisissez une mesure comme **Nombre de services rapportés**. Cliquez sur **Suivant**.
 
-Le graphique se met à jour à chaque clic.
+<h2 class="step-h"><span class="step-n">3</span><span>Choisissez un graphique prêt à l'emploi</span></h2>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Enregistrez-le</span></h2>
+Vous verrez une grille de **préréglages** — des graphiques prêts à l'emploi. Choisissez **Volume de services dans le temps (mensuel)** — un graphique en ligne du volume mensuel par indicateur. Cliquez sur **Créer**.
 
-Cliquez sur **Enregistrer**. Donnez au graphique un nom clair — quelque chose que vous reconnaîtrez plus tard : *CPN1 — mensuel, 12 derniers mois*. Mettez-le dans votre dossier.
+Votre graphique est créé et apparaît dans la liste **Visualisations**. Utilisez la vue **Par dossier** pour le ranger dans votre dossier.
+
+> Les autres préréglages donnent des graphiques à **barres** trimestriels ou annuels. **Personnalisé → Configurer manuellement** permet de choisir le type de graphique (tableau, série temporelle, barres, carte) et la manière de décomposer les données — voir la section suivante.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Essayez avec trois indicateurs différents
+## Filtrer vs désagréger — quelle différence ?
 
-Refaites les étapes avec deux autres indicateurs de votre choix. Prenez-en de programmes différents (un indicateur CPN, un indicateur de vaccination, un indicateur d'accouchement) — vous aurez une idée de comment chacun se présente.
+Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
-> **Astuce :** Un graphique en ligne est le bon choix pour *les tendances dans le temps*. Pour comparer des lieux ou des districts à un même moment, un graphique à barres lit mieux. Le prochain document de référence (*Comment lire une visualisation FASTR*) approfondit le sujet.
+- **Filtrer = montrer moins.** Restreindre le graphique à une tranche et cacher le reste — p. ex. *seulement CPN1*, *seulement la région Nord*, *seulement les 12 derniers mois*. Comme un projecteur : vous gardez une chose, le reste disparaît.
+- **Désagréger = décomposer.** Diviser un total en ses parties pour les comparer sur le même graphique — p. ex. *une ligne par indicateur*, ou *une ligne par district*. Rien n'est caché ; le total est montré en morceaux.
+
+> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord. **Désagrégez** « par district » → vous voyez une ligne par district, côte à côte.
+
+Dans le constructeur, les préréglages choisissent des décompositions sensées pour vous. En **Personnalisé**, les options *Désagréger par* (Indicateur, Zone administrative) sont là où vous choisissez comment les données se divisent.
+
+## Essayez quelques options
+
+Refaites avec une autre mesure ou un autre préréglage — une mesure de couverture sous **M4**, ou le graphique à barres de variation trimestrielle — pour voir comment chacun se lit.
+
+> **Astuce :** Les graphiques en ligne (*Volume de services dans le temps*) sont les meilleurs pour les tendances dans le temps. Les graphiques à barres (*variation trimestrielle / annuelle*) sont meilleurs pour comparer des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
 
 ## Vérification
 
 Vous devriez maintenant avoir :
 
-- Au moins un graphique chronologique enregistré dans votre dossier
-- Un nom clair sur chaque graphique pour le retrouver plus tard
-- Une idée de quels indicateurs évoluent doucement et lesquels ont des sauts
+- Au moins un graphique créé et visible dans votre liste **Visualisations**
+- Le chemin en mémoire : **+ Créer une visualisation → Mesure → Préréglages → Créer**
+- Une idée de quels préréglages conviennent aux tendances vs aux comparaisons
 
 ## Étape suivante
 
-L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le panneau de configuration. Même résultat, autre chemin.
+L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le constructeur. Même résultat, autre chemin.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés des boutons (*+ Nouvelle visualisation*, *Enregistrer*) peuvent différer légèrement. La structure en trois étapes — choisir l'indicateur + la période + le type de graphique → aperçu → enregistrer — reste la même.
+> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*+ Créer une visualisation*, *Créer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Créer** est la structure clé.

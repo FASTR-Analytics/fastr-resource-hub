@@ -56,15 +56,9 @@ Pick a task you do regularly. Before writing your prompt, check it covers these 
 
 Use the six dimensions above to write a prompt that names **objective**, **audience**, **scope**, **interpretation guidance**, **format**, and **guardrails**. One paragraph is fine.
 
-```
-Your prompt: __________________________________________________________
+**Your prompt:**
 
-____________________________________________________________________
-
-____________________________________________________________________
-
-____________________________________________________________________
-```
+<div class="answer-box" style="min-height: 170pt"></div>
 
 ## The golden rule
 

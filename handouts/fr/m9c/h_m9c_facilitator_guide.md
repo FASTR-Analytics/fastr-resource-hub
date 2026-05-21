@@ -43,9 +43,9 @@ Ces activités apprennent aux participants à **lire un graphique et à dire ce 
 
 **Activité · ~15 min**
 
-**Ce que c'est** — une activité pratique pour construire un graphique de série temporelle manuellement via le panneau de configuration.
-**Ce que couvre le document** — + Nouvelle visualisation, choisir indicateur / période / type de graphique / niveau, enregistrer sous un nom clair dans son dossier, puis répéter pour deux autres indicateurs.
-**À surveiller** — les participants se rabattent sur un seul type de graphique. Renforcez : graphique en **courbes** pour les tendances dans le temps, en **barres** pour comparer des lieux.
+**Ce que c'est** — une activité pratique pour créer un graphique avec le constructeur intégré (l'assistant **Mesure → Préréglages → Créer**).
+**Ce que couvre le document** — + Créer une visualisation → choisir une mesure (p. ex. *M3. Utilisation des services → Nombre de services rapportés*) → choisir un préréglage prêt à l'emploi comme *Volume de services dans le temps (mensuel)* → Créer. Le document explique aussi **filtrer vs désagréger**.
+**À surveiller** — les participants confondent **filtrer** (montrer une tranche, cacher le reste — p. ex. *seulement CPN1*) et **désagréger** (décomposer un total en ses parties sur un même graphique — p. ex. *une ligne par district*). Renforcez la différence à voix haute — elle sous-tend chaque graphique. Le chemin rapide est mesure → préréglage → Créer ; **Personnalisé** ne sert qu'au contrôle manuel (type de graphique + désagrégation). Aussi : courbes pour les tendances, barres pour comparer.
 
 ### 3. Rédiger une interprétation pour un graphique
 
