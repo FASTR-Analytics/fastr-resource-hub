@@ -198,6 +198,26 @@ modules:
     - Installing and running modules
     - Creating a project
     duration: 90-120 min
+    activity:
+      covers: Set up a working FASTR instance — admin areas, data import, modules, and a project.
+      outcomes:
+      - Configure admin areas (the geographic hierarchy)
+      - Import HMIS data into the platform
+      - Install and run analysis modules
+      - Create a project and connect to it
+      order: 1
+      prerequisites: []
+      materials:
+        deck: m9a
+        signpost: activity_divider
+        handouts:
+        - connect_platform
+        - admin_areas
+        - import_data
+        - indicators
+        - verify_explore
+        facilitator_guide: facilitator_guide
+      ai_notes: Setup must succeed before any analysis activity — budget time for data-import troubleshooting.
 - id: m9b
   number: 9b
   folder: m9b_getting_started
@@ -274,6 +294,26 @@ modules:
     - Editing and finalizing slides
     - Report formatting and styling
     duration: 120-150 min
+    activity:
+      covers: Build a slide deck from your visualizations — add charts, edit the layout, and finalise.
+      outcomes:
+      - Create a slide deck
+      - Add a visualization to a slide (manually and with AI)
+      - Split a slide into rows or columns and edit the layout
+      - Finalise and format a deck (logos, styles)
+      order: 3
+      prerequisites:
+      - m9c
+      materials:
+        deck: m9d
+        signpost: activity_divider
+        handouts:
+        - create_slide_deck
+        - add_viz_manually
+        - add_viz_ai
+        - edit_slides
+        facilitator_guide: facilitator_guide
+      ai_notes: The editor is AI-first — show the manual path too. Most deck slides are pointer-stubs into the handouts.
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
@@ -291,6 +331,23 @@ modules:
     - Refining reports with additional analyses
     - Peer review and presenting reports
     duration: 180-240 min
+    activity:
+      covers: Produce a disruption report end-to-end with the AI — prompt, verify, refine, peer-review.
+      outcomes:
+      - Generate a disruption report with the AI assistant
+      - Customise the prompt for your context
+      - Verify the AI output against the data
+      - Refine the report with additional analyses
+      - Peer-review and present the report
+      order: 6
+      prerequisites:
+      - m9i
+      - m9f
+      materials:
+        deck: m9e
+        signpost: activity_divider
+        handouts: []   # GAP — no participant handouts exist yet for this 180-240 min activity
+      ai_notes: Builds on the manual report fundamentals (m9i) and prompting (m9f). No participant handouts yet — the biggest content gap.
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
@@ -307,6 +364,28 @@ modules:
     - Prompt refinement exercises
     - Prompt library organization
     duration: 90-120 min
+    activity:
+      covers: Practice effective prompting — iterative vs single prompts, refinement, and the prompt library.
+      outcomes:
+      - Use an iterative conversation instead of one perfect prompt
+      - Write a clear single prompt
+      - Refine a weak prompt into a strong one
+      - Organise and reuse the prompt library
+      order: 4
+      prerequisites:
+      - m9c
+      materials:
+        deck: m9f
+        signpost: activity_divider
+        handouts:
+        - explore_ai
+        - build_prompt
+        - iterative_vs_single
+        - refine_prompt
+        - verify_output
+        - pdf_template
+        facilitator_guide: facilitator_guide
+      ai_notes: Reinforce the 4 D's (Discernment, Description, Delegation, Diligence) and verifying output every time.
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
@@ -322,6 +401,19 @@ modules:
     - Data quality concepts
     - Indicator definitions
     duration: 30-45 min
+    activity:
+      covers: Quick knowledge check on FASTR fundamentals — data quality, pillars, indicators.
+      outcomes:
+      - Recall the FASTR framework and its pillars
+      - Distinguish the data-quality dimensions
+      - Define the core indicators
+      order: 7
+      prerequisites: []
+      materials:
+        deck: m9g
+        signpost: activity_divider
+        handouts: []
+      ai_notes: Assessment/energiser — best near the end or as a recap. No handouts.
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
@@ -358,6 +450,24 @@ modules:
     - Writing effective slide titles (findings, not descriptions)
     - Using the prompt library for AI-assisted drafting
     duration: 90-120 min
+    activity:
+      covers: Manually build a disruption report in the report builder — structure, viz, interpretation, titles.
+      outcomes:
+      - Build the report structure (cover, methodology, sections, conclusions)
+      - Add slides with visualizations
+      - Write interpretation (what you see vs what it means)
+      - Write finding-style slide titles (not descriptions)
+      - Use the prompt library to accelerate drafting
+      order: 5
+      prerequisites:
+      - m9c
+      materials:
+        deck: m9i
+        signpost: activity_divider
+        handouts:
+        - ai_verification_checklist
+        facilitator_guide: facilitator_guide
+      ai_notes: Teach these manual fundamentals BEFORE m9e (AI-assisted reports). Slide titles must be findings, not descriptions.
 - id: mw
   number: w
   folder: mw_webinar
