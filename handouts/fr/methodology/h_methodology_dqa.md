@@ -124,7 +124,7 @@ Seuls les indicateurs dont la moyenne dépasse 100 par mois sont vérifiés, pou
 
 Dans une **seule formation**, cela peut être rompu pour des raisons anodines — les chiffres sont petits, et un enfant peut recevoir une dose en stratégie avancée et la suivante dans une formation. FASTR additionne donc tout le **district** avant de vérifier ; là, les allées et venues se compensent et la relation devrait tenir.
 
-Si une règle reste **toujours** rompue une fois le district additionné — par ex. plus de 3es doses que de 1res — les deux chiffres ne peuvent pas être justes tous les deux : quelque chose a été mal enregistré.
+C'est pourquoi un échec ne compte qu'au niveau du **district** : un enfant ne peut pas recevoir une 3e dose sans la 1re, donc sur tout un district Penta1 ne peut jamais être réellement inférieur à Penta3. Si les chiffres déclarés disent le contraire, ce sont les données qui sont fausses — une valeur mal saisie ou comptée deux fois — pas la réalité.
 
 ![Dans une seule formation, Penta3 peut dépasser Penta1 car certains enfants ont eu leur 1re dose ailleurs ; additionné sur tout le district, Penta1 est supérieur à Penta3 comme il se doit w:100%](../../../resources/diagrams_fr/district_consistency.svg)
 

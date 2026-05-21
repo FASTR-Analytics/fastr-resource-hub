@@ -124,7 +124,7 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 At a **single clinic** these can break for innocent reasons — the numbers are small, and a child may get one dose at an outreach session and the next at a clinic. So FASTR adds up the **whole district** before checking; there, the comings and goings even out and the relationship should hold.
 
-If a rule **still** breaks once the district is summed — say 3rd doses outnumber 1st — the two numbers genuinely can't both be right, so something was mis-recorded.
+That's why a failure only counts at **district** level: a child can't get a 3rd dose without a 1st, so across a district Penta1 can never truly be lower than Penta3. If the reported numbers say it is, the data is wrong — a value mis-entered or counted twice — not reality.
 
 ![At one clinic Penta3 can outnumber Penta1 because some children had their 1st dose elsewhere; summed across the whole district, Penta1 is greater than Penta3 as it should be w:100%](../../../resources/diagrams/district_consistency.svg)
 
