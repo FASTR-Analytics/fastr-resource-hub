@@ -65,14 +65,14 @@ Votre graphique est créé et apparaît dans la liste **Visualisations**. Utilis
 
 Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
-- **Filtrer = montrer moins.** Restreindre le graphique à une tranche et cacher le reste — p. ex. *seulement CPN1*, *seulement la région Nord*, *seulement les 12 derniers mois*. Comme un projecteur : vous gardez une chose, le reste disparaît.
+- **Filtrer = choisir ce qu'on affiche.** Cochez les indicateurs, les lieux ou les mois que vous voulez — seuls ceux-là apparaissent. p. ex. *afficher seulement CPN1*, ou *seulement la région Nord*. Comme un projecteur : vous le pointez sur ce que vous voulez voir.
 - **Désagréger = décomposer.** Diviser un total en ses parties pour les comparer — p. ex. *une ligne par indicateur*, ou *une barre par district*. Rien n'est caché ; le total est montré en morceaux.
 
-![Filtrer retire des données : ne garder que CPN1, le reste est retiré h:140](../../../resources/diagrams_fr/m9c_filter.svg)
+![Filtrer = choisir ce qu'on affiche : cocher CPN1, et seul CPN1 apparaît h:140](../../../resources/diagrams_fr/m9c_filter.svg)
 
 ![Désagréger « CPN1 par district » affiché de quatre façons — Lines, Grid, Rows, Columns h:195](../../../resources/diagrams_fr/m9c_disaggregate.svg)
 
-> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord, le reste retiré. **Désagrégez** « par district » → le même total divisé en une barre (ou ligne) par district.
+> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord. **Désagrégez** « par district » → le même total divisé en une barre (ou ligne) par district.
 
 ---
 
@@ -82,7 +82,7 @@ Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
 Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau de gauche**, et il faut souvent **faire défiler** pour les trouver (c'est là que les gens se perdent). Deux sections font le travail :
 
-- **Filter (subset)** — restreindre les données : choisir la période, ou décocher des indicateurs pour ne garder que celui(ceux) voulu(s). C'est ainsi qu'on *retire des données*.
+- **Filter (subset)** — **choisir ce que vous voulez voir** : régler la période, et cocher le(s) indicateur(s) voulu(s). Seul ce que vous cochez apparaît.
 - **Display (disaggregate)** — choisir **comment les parties s'affichent**. Le menu déroulant offre quatre options :
   - **Lines** — une courbe par partie, toutes sur le même graphique
   - **Grid** — un petit graphique séparé pour chaque partie, côte à côte
@@ -91,7 +91,9 @@ Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau 
 
 ![Le panneau de gauche de l'éditeur de viz — faites défiler jusqu'à « Filter (subset) » et « Display (disaggregate) » h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
 
-> **Attention si vous utilisez les deux.** Filtrer et désagréger fonctionnent ensemble — mais ne filtrez pas la chose même que vous décomposez. Si vous décomposez **par district** mais filtrez sur **un seul district**, vous n'en verrez qu'un, sans rien à comparer. Règle simple : **filtrez ce dont vous n'avez pas besoin ; désagrégez ce que vous voulez comparer.**
+> **Attention quand vous utilisez les deux ensemble.** Voici le piège, avec un exemple. Vous décomposez un graphique **par district** parce que vous voulez comparer les districts. Puis vous le **filtrez** sur un seul district — les autres disparaissent. Il ne reste qu'un seul district, tout seul, et plus rien à comparer.
+>
+> **La règle simple :** utilisez **filtrer** pour choisir les données que vous voulez regarder, et **désagréger** pour les diviser en parties à comparer. Ne filtrez simplement pas jusqu'à une seule des choses que vous vouliez comparer.
 
 ---
 

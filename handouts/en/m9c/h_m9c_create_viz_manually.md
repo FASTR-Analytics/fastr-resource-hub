@@ -65,14 +65,14 @@ Your chart is created and appears in the **Visualizations** list. Use the **By f
 
 These two words come up a lot. They are not the same:
 
-- **Filter = show less.** Narrow the chart to a slice and hide the rest — e.g. *only ANC1*, *only Northern region*, *only the last 12 months*. Like a spotlight: you keep one thing, the rest disappears.
+- **Filter = pick what to show.** Choose the indicators, places, or months you want — only those appear. e.g. *show ANC1 only*, or *Northern region only*. Like a spotlight: you point it at what you want to see.
 - **Disaggregate = break it down.** Split one total into its parts so you can compare them — e.g. *one line per indicator*, or *one bar per district*. Nothing is hidden; the total is shown as its pieces.
 
-![Filter takes data out: keep only ANC1, the rest is removed h:140](../../../resources/diagrams/m9c_filter.svg)
+![Filter = choose what to show: tick ANC1, and only ANC1 appears h:140](../../../resources/diagrams/m9c_filter.svg)
 
 ![Disaggregate "ANC1 by district" shown four ways — Lines, Grid, Rows, Columns h:195](../../../resources/diagrams/m9c_disaggregate.svg)
 
-> **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → you now see only Northern's ANC1, the rest removed. **Disaggregate** "by district" → the same total split into one bar (or line) per district.
+> **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → now you see only Northern's ANC1. **Disaggregate** "by district" → the same total split into one bar (or line) per district.
 
 ---
 
@@ -82,7 +82,7 @@ These two words come up a lot. They are not the same:
 
 Open a saved visualization — the controls live in the **left panel**, and you'll often need to **scroll down** to find them (this is where people get lost). Two sections do the work:
 
-- **Filter (subset)** — narrow the data: set the time period, or untick indicators to keep only the one(s) you want. This is how you *take data out*.
+- **Filter (subset)** — **pick what you want to see**: set the time period, and tick the indicator(s) you want. Only what you tick appears.
 - **Display (disaggregate)** — choose **how the parts are shown**. The dropdown gives four options:
   - **Lines** — one line per part, all on the same chart
   - **Grid** — a separate little chart for each part, side by side
@@ -91,7 +91,9 @@ Open a saved visualization — the controls live in the **left panel**, and you'
 
 ![The viz editor's left panel — scroll to find "Filter (subset)" and "Display (disaggregate)" h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
 
-> **Careful when you use both.** Filtering and disaggregating work together — but don't filter away the very thing you're breaking down. If you break down **by district** but filter to **one district**, you'll see just that one, with nothing to compare. Simple rule: **filter the things you don't need; disaggregate the one you want to compare.**
+> **Watch out when you use both together.** Here's the trap, with an example. You split a chart **by district** because you want to compare the districts. Then you **filter** it down to just one district — so the others disappear. Now you're looking at a single district on its own, and there's nothing left to compare.
+>
+> **The simple rule:** use **filter** to pick the data you want to look at, and use **disaggregate** to split it into the parts you want to compare. Just don't filter down to only one of the things you wanted to compare.
 
 ---
 

@@ -45,12 +45,12 @@ Ces activités apprennent aux participants à **lire un graphique et à dire ce 
 
 **Ce que c'est** — une activité pratique pour créer un graphique avec le constructeur intégré (l'assistant **Mesure → Préréglages → Créer**).
 **Ce que couvre le document** — + Créer une visualisation → choisir une mesure (p. ex. *M3. Utilisation des services → Nombre de services rapportés*) → choisir un préréglage prêt à l'emploi → Créer. Il explique ensuite **filtrer vs désagréger**, où les trouver quand on édite une viz, et les quatre modes d'affichage (Lines / Grid / Rows / Columns).
-**À surveiller** — les participants confondent **filtrer** (retirer des données — montrer une tranche, cacher le reste) et **désagréger** (décomposer un total en ses parties). Renforcez la différence à voix haute ; elle sous-tend chaque graphique. Le chemin rapide est mesure → préréglage → Créer ; **Personnalisé** ne sert qu'au contrôle manuel. Aussi : courbes pour les tendances, barres pour comparer.
+**À surveiller** — les participants confondent **filtrer** (choisir ce qu'on affiche — vous cochez les indicateurs/la période voulus) et **désagréger** (décomposer un total en ses parties). Renforcez la différence à voix haute ; elle sous-tend chaque graphique. Le chemin rapide est mesure → préréglage → Créer ; **Personnalisé** ne sert qu'au contrôle manuel. Aussi : courbes pour les tendances, barres pour comparer.
 
 > **Démo — utiliser les deux, en direct (~3 min).** Ouvrez une viz enregistrée et montrez le **panneau de gauche** (signalez qu'il faut *faire défiler* pour y arriver — c'est là que les gens se perdent) :
 > 1. Partez d'un seul indicateur, total national. Dites en mots ce qu'il montre.
 > 2. Sous **Display (disaggregate)**, décomposez **par district** — passez de **Lines** à **Rows** puis **Grid** pour montrer les *mêmes données sous des formes différentes*.
-> 3. Sous **Filter (subset)**, décochez tout sauf deux districts — le graphique se restreint. Nommez-le : « je viens de *retirer des données* ».
+> 3. Sous **Filter (subset)**, cochez seulement deux districts — le graphique n'affiche que ceux-là. Nommez-le : « je *choisis ce que j'affiche* ».
 > 4. **Montrez le piège :** désagréger par district **et** filtrer sur un seul district → plus rien à comparer. Règle à répéter : *filtrez ce dont vous n'avez pas besoin, désagrégez ce que vous voulez comparer.*
 
 ### 3. Rédiger une interprétation pour un graphique
