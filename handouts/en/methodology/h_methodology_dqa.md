@@ -120,9 +120,9 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 ## Consistency — "do related numbers make sense together?"
 
-**How we check it.** Some indicators have to move together. You can't have more 4th antenatal visits than 1st visits, or more 3rd vaccine doses than 1st doses; and deliveries and BCG doses (a jab given at birth) should be roughly equal. FASTR checks these at **district level**, not at a single clinic — at one clinic the numbers are small and services get split between facilities (a woman may have her check-up in one place and deliver in another), so the rules only hold once a whole district is added up. Each district's pass/fail is then carried back to every facility inside it. When a rule breaks — say 4th visits outnumber 1st — the two numbers can't both be right, so something was mis-recorded.
+**How we check it.** Some indicators have to move together. You can't have more 4th antenatal visits than 1st visits, or more 3rd vaccine doses than 1st doses; and deliveries and BCG doses (a jab given at birth) should be roughly equal. FASTR checks these at **district level**, not at a single clinic — at one clinic the numbers are small and services get split between facilities (a child may get one vaccine dose at an outreach session and the next at a clinic), so the rules only hold once a whole district is added up. Each district's pass/fail is then carried back to every facility inside it. When a rule still breaks across the district — say 3rd doses outnumber 1st — the two numbers can't both be right, so something was mis-recorded.
 
-![At one clinic ANC4 can outnumber ANC1 (looks impossible); summed across the whole district, ANC1 is greater than ANC4 as it should be w:100%](../../../resources/diagrams/district_consistency.svg)
+![At one clinic Penta3 can outnumber Penta1 because some children had their 1st dose elsewhere; summed across the whole district, Penta1 is greater than Penta3 as it should be w:100%](../../../resources/diagrams/district_consistency.svg)
 
 ---
 

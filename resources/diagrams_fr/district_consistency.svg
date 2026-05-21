@@ -1,49 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" font-family="Inter, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 370" font-family="Inter, sans-serif">
   <defs>
     <style>
-      .panel-title { font-size: 15px; font-weight: 700; fill: #09544F; }
+      .big-title { font-size: 16px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-size: 11.5px; fill: #666; }
+      .panel-title { font-size: 15px; font-weight: 700; }
+      .reason { font-size: 10.5px; font-style: italic; fill: #777; }
       .val { font-size: 13px; font-weight: 700; fill: #09544F; }
       .axlab { font-size: 12px; font-weight: 600; fill: #555; }
       .rule { font-size: 12px; font-weight: 600; }
     </style>
   </defs>
 
-  <!-- ===== GAUCHE : une formation (semble impossible) ===== -->
-  <rect x="24" y="44" width="300" height="262" rx="12" fill="#FDE8E8"/>
-  <text class="panel-title" x="174" y="74" text-anchor="middle">Dans une formation</text>
+  <!-- la règle vérifiée -->
+  <text class="big-title" x="360" y="24" text-anchor="middle">La règle : Penta1 &#8805; Penta3</text>
+  <text class="subtitle" x="360" y="43" text-anchor="middle">Plus d'enfants reçoivent la 1re dose de vaccin que la 3e (certains abandonnent avant de finir)</text>
 
-  <line x1="70" y1="258" x2="290" y2="258" stroke="#F5C6C6" stroke-width="2"/>
-  <rect x="108" y="214" width="50" height="44" rx="3" fill="#1F9A9C"/>
-  <text class="val" x="133" y="206" text-anchor="middle">18</text>
-  <text class="axlab" x="133" y="278" text-anchor="middle">ANC1</text>
-  <rect x="196" y="112" width="50" height="146" rx="3" fill="#1F9A9C"/>
-  <text class="val" x="221" y="104" text-anchor="middle">55</text>
-  <text class="axlab" x="221" y="278" text-anchor="middle">ANC4</text>
+  <!-- ===== GAUCHE : une formation (règle non jugeable ici) ===== -->
+  <rect x="24" y="60" width="300" height="288" rx="12" fill="#F1F5F9"/>
+  <text class="panel-title" x="174" y="88" text-anchor="middle" fill="#475569">Une formation</text>
+  <text class="reason" x="174" y="106" text-anchor="middle">certains enfants ont eu leur 1re dose ailleurs</text>
 
-  <text class="rule" x="174" y="298" text-anchor="middle" fill="#C53030">ANC4 &gt; ANC1 &#8212; impossible ?!</text>
-  <circle cx="296" cy="66" r="15" fill="#C53030"/>
-  <line x1="290" y1="60" x2="302" y2="72" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-  <line x1="302" y1="60" x2="290" y2="72" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="70" y1="300" x2="290" y2="300" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="108" y="256" width="50" height="44" rx="3" fill="#1F9A9C"/>
+  <text class="val" x="133" y="248" text-anchor="middle">18</text>
+  <text class="axlab" x="133" y="320" text-anchor="middle">Penta1</text>
+  <rect x="196" y="156" width="50" height="144" rx="3" fill="#1F9A9C"/>
+  <text class="val" x="221" y="148" text-anchor="middle">55</text>
+  <text class="axlab" x="221" y="320" text-anchor="middle">Penta3</text>
+
+  <text class="rule" x="174" y="340" text-anchor="middle" fill="#94731A">Penta3 paraît plus élevé &#8212; non jugeable ici</text>
+  <circle cx="296" cy="82" r="15" fill="#94A3B8"/>
+  <text x="296" y="83" text-anchor="middle" dominant-baseline="central" font-size="17" font-weight="700" fill="#fff">?</text>
 
   <!-- ===== flèche : additionner le district ===== -->
-  <line x1="334" y1="175" x2="382" y2="175" stroke="#0C716B" stroke-width="4"/>
-  <polygon points="382,168 396,175 382,182" fill="#0C716B"/>
-  <text x="365" y="160" text-anchor="middle" font-size="11" font-weight="700" fill="#0C716B">additionner</text>
-  <text x="365" y="200" text-anchor="middle" font-size="11" font-weight="600" fill="#666">chaque formation</text>
+  <line x1="334" y1="200" x2="382" y2="200" stroke="#0C716B" stroke-width="4"/>
+  <polygon points="382,193 396,200 382,207" fill="#0C716B"/>
+  <text x="365" y="185" text-anchor="middle" font-size="11" font-weight="700" fill="#0C716B">additionner</text>
+  <text x="365" y="225" text-anchor="middle" font-size="11" font-weight="600" fill="#666">chaque formation</text>
 
-  <!-- ===== DROITE : tout le district (cohérent) ===== -->
-  <rect x="404" y="44" width="300" height="262" rx="12" fill="#E8F4F3"/>
-  <text class="panel-title" x="554" y="74" text-anchor="middle">Sur tout le district</text>
+  <!-- ===== DROITE : tout le district (la règle tient) ===== -->
+  <rect x="404" y="60" width="300" height="288" rx="12" fill="#E8F4F3"/>
+  <text class="panel-title" x="554" y="88" text-anchor="middle" fill="#09544F">Tout le district</text>
+  <text class="reason" x="554" y="106" text-anchor="middle">les déplacements entre formations se compensent</text>
 
-  <line x1="450" y1="258" x2="670" y2="258" stroke="#CAE6E9" stroke-width="2"/>
-  <rect x="488" y="112" width="50" height="146" rx="3" fill="#1F9A9C"/>
-  <text class="val" x="513" y="104" text-anchor="middle">520</text>
-  <text class="axlab" x="513" y="278" text-anchor="middle">ANC1</text>
-  <rect x="576" y="146" width="50" height="112" rx="3" fill="#1F9A9C"/>
-  <text class="val" x="601" y="138" text-anchor="middle">410</text>
-  <text class="axlab" x="601" y="278" text-anchor="middle">ANC4</text>
+  <line x1="450" y1="300" x2="670" y2="300" stroke="#CAE6E9" stroke-width="2"/>
+  <rect x="488" y="156" width="50" height="144" rx="3" fill="#1F9A9C"/>
+  <text class="val" x="513" y="148" text-anchor="middle">520</text>
+  <text class="axlab" x="513" y="320" text-anchor="middle">Penta1</text>
+  <rect x="576" y="190" width="50" height="110" rx="3" fill="#1F9A9C"/>
+  <text class="val" x="601" y="182" text-anchor="middle">410</text>
+  <text class="axlab" x="601" y="320" text-anchor="middle">Penta3</text>
 
-  <text class="rule" x="554" y="298" text-anchor="middle" fill="#0C716B">ANC1 &#8805; ANC4 &#8212; logique</text>
-  <circle cx="676" cy="66" r="15" fill="#0C716B"/>
-  <polyline points="669,66 674,72 683,60" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="rule" x="554" y="340" text-anchor="middle" fill="#0C716B">Penta1 &#8805; Penta3 &#8212; comme attendu</text>
+  <circle cx="676" cy="82" r="15" fill="#0C716B"/>
+  <polyline points="669,82 674,88 683,76" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
