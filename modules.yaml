@@ -346,8 +346,13 @@ modules:
       materials:
         deck: m9e
         signpost: activity_divider
-        handouts: []   # GAP — no participant handouts exist yet for this 180-240 min activity
-      ai_notes: Builds on the manual report fundamentals (m9i) and prompting (m9f). No participant handouts yet — the biggest content gap.
+        handouts:
+        - create_report_ai
+        - verify_output
+        - refine_report
+        - peer_review
+        facilitator_guide: facilitator_guide
+      ai_notes: Builds on the manual report fundamentals (m9i) and prompting (m9f). Reinforce verification — teams tend to trust confident-sounding AI output.
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques

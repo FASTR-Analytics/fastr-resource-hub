@@ -40,6 +40,13 @@ m9d:
 - h_m9d_add_viz_ai.md          # 3. Add a viz via the AI
 - h_m9d_edit_slides.md         # 4. Edit and finalise
 
+m9e:
+- h_m9e_facilitator_guide.md   # Facilitator guide — run-of-show
+- h_m9e_create_report_ai.md    # 1. Create the report with the AI
+- h_m9e_verify_output.md       # 2. Verify the AI output (checklist)
+- h_m9e_refine_report.md       # 3. Refine — formatting + Prompt 2/3
+- h_m9e_peer_review.md         # 4. Peer review & present
+
 m9i:
 - h_m9i_facilitator_guide.md           # Facilitator guide — run-of-show
 - h_m9i_ai_verification_checklist.md   # Reference: verify the AI's report output before sharing
