@@ -70,7 +70,7 @@ Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
 ![Filtrer retire des données : ne garder que CPN1, le reste est retiré h:140](../../../resources/diagrams_fr/m9c_filter.svg)
 
-![Désagréger décompose un total en parties, affichées en lignes de tableau, colonnes de tableau, ou un graphique avec une série par partie h:185](../../../resources/diagrams_fr/m9c_disaggregate.svg)
+![Désagréger « CPN1 par district » affiché de quatre façons — Lines, Grid, Rows, Columns h:195](../../../resources/diagrams_fr/m9c_disaggregate.svg)
 
 > **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord, le reste retiré. **Désagrégez** « par district » → le même total divisé en une barre (ou ligne) par district.
 
@@ -78,11 +78,20 @@ Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Où le faire dans le constructeur
+## Où le faire quand vous éditez une viz
 
-En **Personnalisé**, les options *Désagréger par* (Indicateur, Zone administrative, Année/Mois) sont là où vous choisissez comment les données se divisent. L'affichage suit le type de graphique : un **Tableau** montre les parties en lignes ou colonnes ; une **Série temporelle** ou un **Graphique à barres** les montre comme des séries séparées.
+Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau de gauche**, et il faut souvent **faire défiler** pour les trouver (c'est là que les gens se perdent). Deux sections font le travail :
 
-![Où désagréger dans la plateforme : la liste « Disaggregate by » de l'étape Configurer h:250](../../../resources/screenshots/m9c/disaggregate_controls.png)
+- **Filter (subset)** — restreindre les données : choisir la période, ou décocher des indicateurs pour ne garder que celui(ceux) voulu(s). C'est ainsi qu'on *retire des données*.
+- **Display (disaggregate)** — choisir **comment les parties s'affichent**. Le menu déroulant offre quatre options :
+  - **Lines** — une courbe par partie, toutes sur le même graphique
+  - **Grid** — un petit graphique séparé pour chaque partie, côte à côte
+  - **Rows** — une rangée de tableau par partie
+  - **Columns** — une colonne de tableau par partie
+
+![Le panneau de gauche de l'éditeur de viz — faites défiler jusqu'à « Filter (subset) » et « Display (disaggregate) » h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
+
+> **Attention si vous utilisez les deux.** Filtrer et désagréger fonctionnent ensemble — mais ne filtrez pas la chose même que vous décomposez. Si vous décomposez **par district** mais filtrez sur **un seul district**, vous n'en verrez qu'un, sans rien à comparer. Règle simple : **filtrez ce dont vous n'avez pas besoin ; désagrégez ce que vous voulez comparer.**
 
 ---
 

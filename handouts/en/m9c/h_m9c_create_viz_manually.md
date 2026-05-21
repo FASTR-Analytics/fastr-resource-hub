@@ -70,7 +70,7 @@ These two words come up a lot. They are not the same:
 
 ![Filter takes data out: keep only ANC1, the rest is removed h:140](../../../resources/diagrams/m9c_filter.svg)
 
-![Disaggregate breaks a total into parts, shown as table rows, table columns, or a chart with one series per part h:185](../../../resources/diagrams/m9c_disaggregate.svg)
+![Disaggregate "ANC1 by district" shown four ways — Lines, Grid, Rows, Columns h:195](../../../resources/diagrams/m9c_disaggregate.svg)
 
 > **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → you now see only Northern's ANC1, the rest removed. **Disaggregate** "by district" → the same total split into one bar (or line) per district.
 
@@ -78,11 +78,20 @@ These two words come up a lot. They are not the same:
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Where you do this in the builder
+## Where you do this when you edit a viz
 
-In the **Custom** path, the *Disaggregate by* options (Indicator, Admin area, Year/Month) are where you choose how the data splits. How it displays follows the chart type: a **Table** shows the parts as rows or columns; a **Time series** or **Bar chart** shows them as separate series.
+Open a saved visualization — the controls live in the **left panel**, and you'll often need to **scroll down** to find them (this is where people get lost). Two sections do the work:
 
-![Where to disaggregate in the platform: the Configure step's "Disaggregate by" checklist h:250](../../../resources/screenshots/m9c/disaggregate_controls.png)
+- **Filter (subset)** — narrow the data: set the time period, or untick indicators to keep only the one(s) you want. This is how you *take data out*.
+- **Display (disaggregate)** — choose **how the parts are shown**. The dropdown gives four options:
+  - **Lines** — one line per part, all on the same chart
+  - **Grid** — a separate little chart for each part, side by side
+  - **Rows** — one table row per part
+  - **Columns** — one table column per part
+
+![The viz editor's left panel — scroll to find "Filter (subset)" and "Display (disaggregate)" h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
+
+> **Careful when you use both.** Filtering and disaggregating work together — but don't filter away the very thing you're breaking down. If you break down **by district** but filter to **one district**, you'll see just that one, with nothing to compare. Simple rule: **filter the things you don't need; disaggregate the one you want to compare.**
 
 ---
 
