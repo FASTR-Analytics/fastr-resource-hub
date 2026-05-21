@@ -66,11 +66,27 @@ Votre graphique est créé et apparaît dans la liste **Visualisations**. Utilis
 Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
 - **Filtrer = montrer moins.** Restreindre le graphique à une tranche et cacher le reste — p. ex. *seulement CPN1*, *seulement la région Nord*, *seulement les 12 derniers mois*. Comme un projecteur : vous gardez une chose, le reste disparaît.
-- **Désagréger = décomposer.** Diviser un total en ses parties pour les comparer sur le même graphique — p. ex. *une ligne par indicateur*, ou *une ligne par district*. Rien n'est caché ; le total est montré en morceaux.
+- **Désagréger = décomposer.** Diviser un total en ses parties pour les comparer — p. ex. *une ligne par indicateur*, ou *une barre par district*. Rien n'est caché ; le total est montré en morceaux.
 
-> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord. **Désagrégez** « par district » → vous voyez une ligne par district, côte à côte.
+![Filtrer retire des données : ne garder que CPN1, le reste est retiré h:140](../../../resources/diagrams_fr/m9c_filter.svg)
 
-Dans le constructeur, les préréglages choisissent des décompositions sensées pour vous. En **Personnalisé**, les options *Désagréger par* (Indicateur, Zone administrative) sont là où vous choisissez comment les données se divisent.
+![Désagréger décompose un total en parties, affichées en lignes de tableau, colonnes de tableau, ou un graphique avec une série par partie h:185](../../../resources/diagrams_fr/m9c_disaggregate.svg)
+
+> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord, le reste retiré. **Désagrégez** « par district » → le même total divisé en une barre (ou ligne) par district.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Où le faire dans le constructeur
+
+En **Personnalisé**, les options *Désagréger par* (Indicateur, Zone administrative, Année/Mois) sont là où vous choisissez comment les données se divisent. L'affichage suit le type de graphique : un **Tableau** montre les parties en lignes ou colonnes ; une **Série temporelle** ou un **Graphique à barres** les montre comme des séries séparées.
+
+![Où désagréger dans la plateforme : la liste « Disaggregate by » de l'étape Configurer h:250](../../../resources/screenshots/m9c/disaggregate_controls.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Essayez quelques options
 

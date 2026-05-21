@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" font-family="Inter, sans-serif">
+  <text x="14" y="24" font-size="16" font-weight="700" fill="#09544F">DISAGGREGATE<tspan font-weight="400" fill="#5A6B6A"> = break one total into its parts</tspan></text>
+  <text x="14" y="42" font-size="9.5" fill="#6b7a78">Nothing is removed. The same total, broken down by a dimension (here: district).</text>
+
+  <!-- total block -->
+  <rect x="14" y="58" width="80" height="58" rx="5" fill="#1F9A9C"/>
+  <text x="54" y="83" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">ANC1</text>
+  <text x="54" y="98" font-size="9" fill="#ffffff" text-anchor="middle">total</text>
+  <text x="54" y="111" font-size="8" fill="#d6efee" text-anchor="middle">3,550</text>
+
+  <!-- arrow -->
+  <text x="138" y="82" font-size="9" font-weight="600" fill="#09544F" text-anchor="middle">by district</text>
+  <polyline points="100,90 168,90" fill="none" stroke="#09544F" stroke-width="3"/>
+  <polyline points="160,83 168,90 160,97" fill="none" stroke="#09544F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Panel 1: table rows -->
+  <rect x="180" y="58" width="138" height="88" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="180" y="58" width="138" height="16" fill="#E8F4F3"/>
+  <line x1="270" y1="58" x2="270" y2="146" stroke="#E6EFEE"/>
+  <text x="186" y="69" font-size="7.5" font-weight="700" fill="#09544F">District</text>
+  <text x="276" y="69" font-size="7.5" font-weight="700" fill="#09544F">Visits</text>
+  <text x="186" y="86" font-size="7.5" fill="#3f4f4d">Dist A</text><text x="276" y="86" font-size="7.5" fill="#3f4f4d">900</text>
+  <text x="186" y="103" font-size="7.5" fill="#3f4f4d">Dist B</text><text x="276" y="103" font-size="7.5" fill="#3f4f4d">850</text>
+  <text x="186" y="120" font-size="7.5" fill="#3f4f4d">Dist C</text><text x="276" y="120" font-size="7.5" fill="#3f4f4d">1,000</text>
+  <text x="186" y="137" font-size="7.5" fill="#3f4f4d">Dist D</text><text x="276" y="137" font-size="7.5" fill="#3f4f4d">800</text>
+  <text x="249" y="162" font-size="9" font-weight="600" fill="#0C716B" text-anchor="middle">table — rows</text>
+
+  <!-- Panel 2: table columns -->
+  <rect x="332" y="58" width="172" height="44" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="332" y="58" width="172" height="16" fill="#E8F4F3"/>
+  <line x1="375" y1="58" x2="375" y2="102" stroke="#E6EFEE"/>
+  <line x1="418" y1="58" x2="418" y2="102" stroke="#E6EFEE"/>
+  <line x1="461" y1="58" x2="461" y2="102" stroke="#E6EFEE"/>
+  <text x="353" y="69" font-size="7.5" font-weight="700" fill="#09544F" text-anchor="middle">Dist A</text>
+  <text x="396" y="69" font-size="7.5" font-weight="700" fill="#09544F" text-anchor="middle">Dist B</text>
+  <text x="439" y="69" font-size="7.5" font-weight="700" fill="#09544F" text-anchor="middle">Dist C</text>
+  <text x="482" y="69" font-size="7.5" font-weight="700" fill="#09544F" text-anchor="middle">Dist D</text>
+  <text x="353" y="91" font-size="7.5" fill="#3f4f4d" text-anchor="middle">900</text>
+  <text x="396" y="91" font-size="7.5" fill="#3f4f4d" text-anchor="middle">850</text>
+  <text x="439" y="91" font-size="7.5" fill="#3f4f4d" text-anchor="middle">1,000</text>
+  <text x="482" y="91" font-size="7.5" fill="#3f4f4d" text-anchor="middle">800</text>
+  <text x="418" y="162" font-size="9" font-weight="600" fill="#0C716B" text-anchor="middle">table — columns</text>
+
+  <!-- Panel 3: chart series (replicants) -->
+  <line x1="524" y1="138" x2="700" y2="138" stroke="#CAD6D4" stroke-width="1.5"/>
+  <rect x="536" y="86" width="26" height="52" rx="2" fill="#09544F"/>
+  <rect x="576" y="92" width="26" height="46" rx="2" fill="#1F9A9C"/>
+  <rect x="616" y="78" width="26" height="60" rx="2" fill="#4FB3B0"/>
+  <rect x="656" y="96" width="26" height="42" rx="2" fill="#86C9C6"/>
+  <text x="549" y="148" font-size="7" fill="#6b7a78" text-anchor="middle">A</text>
+  <text x="589" y="148" font-size="7" fill="#6b7a78" text-anchor="middle">B</text>
+  <text x="629" y="148" font-size="7" fill="#6b7a78" text-anchor="middle">C</text>
+  <text x="669" y="148" font-size="7" fill="#6b7a78" text-anchor="middle">D</text>
+  <text x="612" y="162" font-size="9" font-weight="600" fill="#0C716B" text-anchor="middle">chart — one series per part</text>
+
+  <!-- footnote -->
+  <text x="14" y="188" font-size="9.5" fill="#5A6B6A">In FASTR, each part shown as its own series is called a <tspan font-style="italic" font-weight="600" fill="#0C716B">replicant</tspan> — e.g. one bar or line per district.</text>
+</svg>

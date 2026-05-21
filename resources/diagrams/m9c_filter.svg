@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 150" font-family="Inter, sans-serif">
+  <text x="14" y="24" font-size="16" font-weight="700" fill="#09544F">FILTER<tspan font-weight="400" fill="#5A6B6A"> = take data out</tspan></text>
+
+  <!-- before table: all indicators -->
+  <text x="14" y="45" font-size="9.5" font-weight="600" fill="#6b7a78">Before — every indicator</text>
+  <rect x="14" y="50" width="128" height="82" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="14" y="50" width="128" height="18" fill="#E8F4F3"/>
+  <line x1="98" y1="50" x2="98" y2="132" stroke="#E6EFEE"/>
+  <line x1="14" y1="84" x2="142" y2="84" stroke="#EDF3F2"/>
+  <line x1="14" y1="100" x2="142" y2="100" stroke="#EDF3F2"/>
+  <line x1="14" y1="116" x2="142" y2="116" stroke="#EDF3F2"/>
+  <text x="20" y="63" font-size="8" font-weight="700" fill="#09544F">Indicator</text>
+  <text x="104" y="63" font-size="8" font-weight="700" fill="#09544F">Value</text>
+  <text x="20" y="80" font-size="8.5" fill="#3f4f4d">ANC1</text><text x="104" y="80" font-size="8.5" fill="#3f4f4d">1,200</text>
+  <text x="20" y="96" font-size="8.5" fill="#3f4f4d">ANC4</text><text x="104" y="96" font-size="8.5" fill="#3f4f4d">800</text>
+  <text x="20" y="112" font-size="8.5" fill="#3f4f4d">BCG</text><text x="104" y="112" font-size="8.5" fill="#3f4f4d">950</text>
+  <text x="20" y="128" font-size="8.5" fill="#3f4f4d">Penta</text><text x="104" y="128" font-size="8.5" fill="#3f4f4d">600</text>
+
+  <!-- arrow -->
+  <text x="186" y="84" font-size="9" font-weight="600" fill="#09544F" text-anchor="middle">filter to</text>
+  <text x="186" y="96" font-size="9" font-weight="700" fill="#09544F" text-anchor="middle">ANC1</text>
+  <polyline points="160,104 212,104" fill="none" stroke="#09544F" stroke-width="3"/>
+  <polyline points="204,97 212,104 204,111" fill="none" stroke="#09544F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- after table: only ANC1 kept -->
+  <text x="232" y="45" font-size="9.5" font-weight="600" fill="#09544F">After — only ANC1</text>
+  <rect x="232" y="50" width="128" height="82" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="232" y="50" width="128" height="18" fill="#E8F4F3"/>
+  <line x1="316" y1="50" x2="316" y2="132" stroke="#E6EFEE"/>
+  <text x="238" y="63" font-size="8" font-weight="700" fill="#09544F">Indicator</text>
+  <text x="322" y="63" font-size="8" font-weight="700" fill="#09544F">Value</text>
+  <text x="238" y="80" font-size="8.5" font-weight="700" fill="#09544F">ANC1</text><text x="322" y="80" font-size="8.5" font-weight="700" fill="#09544F">1,200</text>
+  <text x="238" y="96" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">ANC4</text><text x="322" y="96" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">800</text>
+  <text x="238" y="112" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">BCG</text><text x="322" y="112" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">950</text>
+  <text x="238" y="128" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">Penta</text><text x="322" y="128" font-size="8.5" fill="#c8d2d0" text-decoration="line-through">600</text>
+
+  <!-- caption -->
+  <text x="392" y="76" font-size="12" font-weight="700" fill="#0C716B">Keep the slice you want.</text>
+  <text x="392" y="96" font-size="10.5" fill="#5A6B6A">Everything else is removed —</text>
+  <text x="392" y="111" font-size="10.5" fill="#5A6B6A">like a spotlight: one lit, rest dark.</text>
+</svg>

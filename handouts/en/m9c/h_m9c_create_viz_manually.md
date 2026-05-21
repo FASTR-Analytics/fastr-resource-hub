@@ -66,11 +66,27 @@ Your chart is created and appears in the **Visualizations** list. Use the **By f
 These two words come up a lot. They are not the same:
 
 - **Filter = show less.** Narrow the chart to a slice and hide the rest — e.g. *only ANC1*, *only Northern region*, *only the last 12 months*. Like a spotlight: you keep one thing, the rest disappears.
-- **Disaggregate = break it down.** Split one total into its parts so you can compare them on the same chart — e.g. *one line per indicator*, or *one line per district*. Nothing is hidden; the total is shown as its pieces.
+- **Disaggregate = break it down.** Split one total into its parts so you can compare them — e.g. *one line per indicator*, or *one bar per district*. Nothing is hidden; the total is shown as its pieces.
 
-> **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → you now see only Northern's ANC1. **Disaggregate** "by district" → you see one line per district, side by side.
+![Filter takes data out: keep only ANC1, the rest is removed h:140](../../../resources/diagrams/m9c_filter.svg)
 
-In the builder, the ready presets pick sensible breakdowns for you. If you go **Custom**, the *Disaggregate by* options (Indicator, Admin area) are where you choose how the data splits.
+![Disaggregate breaks a total into parts, shown as table rows, table columns, or a chart with one series per part h:185](../../../resources/diagrams/m9c_disaggregate.svg)
+
+> **Example.** Start with *total ANC1 visits, nationally*. **Filter** to "Northern region" → you now see only Northern's ANC1, the rest removed. **Disaggregate** "by district" → the same total split into one bar (or line) per district.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Where you do this in the builder
+
+In the **Custom** path, the *Disaggregate by* options (Indicator, Admin area, Year/Month) are where you choose how the data splits. How it displays follows the chart type: a **Table** shows the parts as rows or columns; a **Time series** or **Bar chart** shows them as separate series.
+
+![Where to disaggregate in the platform: the Configure step's "Disaggregate by" checklist h:250](../../../resources/screenshots/m9c/disaggregate_controls.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Try a few options
 
