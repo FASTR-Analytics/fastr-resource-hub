@@ -11,8 +11,10 @@ interface PanelControls {
   setRightPanelOpen: (open: boolean) => void
 }
 
+type TourId = 'landing' | 'builder' | 'library' | 'settings'
+
 interface GuidedTourProps {
-  tour: 'landing' | 'builder'
+  tour: TourId
   language: Language
   workshopCount?: number
   panelControls?: PanelControls
@@ -81,6 +83,24 @@ function injectTheme() {
 function buildLandingSteps(language: Language, workshopCount: number): DriveStep[] {
   const steps: DriveStep[] = [
     {
+      element: '[data-tour="nav-workshops"]',
+      popover: {
+        title: t('tourNavWorkshopsTitle', language),
+        description: t('tourNavWorkshopsDesc', language),
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '[data-tour="nav-library"]',
+      popover: {
+        title: t('tourNavLibraryTitle', language),
+        description: t('tourNavLibraryDesc', language),
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
       element: '[data-tour="new-workshop"]',
       popover: {
         title: t('tourLandingCardsTitle', language),
@@ -103,15 +123,44 @@ function buildLandingSteps(language: Language, workshopCount: number): DriveStep
     })
   }
 
-  steps.push({
-    element: '[data-tour="language-toggle"]',
-    popover: {
-      title: t('tourLanguageToggleTitle', language),
-      description: t('tourLanguageToggleDesc', language),
-      side: 'bottom',
-      align: 'end',
+  steps.push(
+    {
+      element: '[data-tour="nav-settings"]',
+      popover: {
+        title: t('tourNavSettingsTitle', language),
+        description: t('tourNavSettingsDesc', language),
+        side: 'right',
+        align: 'start',
+      },
     },
-  })
+    {
+      element: '[data-tour="language-toggle"]',
+      popover: {
+        title: t('tourLanguageToggleTitle', language),
+        description: t('tourLanguageToggleDesc', language),
+        side: 'top',
+        align: 'start',
+      },
+    },
+    {
+      element: '[data-tour="sign-out"]',
+      popover: {
+        title: t('tourSignOutTitle', language),
+        description: t('tourSignOutDesc', language),
+        side: 'top',
+        align: 'end',
+      },
+    },
+    {
+      element: '[data-tour="help-button"]',
+      popover: {
+        title: t('tourHelpButtonTitle', language),
+        description: t('tourHelpButtonDesc', language),
+        side: 'left',
+        align: 'end',
+      },
+    },
+  )
 
   return steps
 }
@@ -166,6 +215,70 @@ function buildBuilderSteps(language: Language, panelControls?: PanelControls): D
   ]
 }
 
+function buildLibrarySteps(language: Language): DriveStep[] {
+  return [
+    {
+      element: '[data-tour="nav-library"]',
+      popover: {
+        title: t('tourNavLibraryTitle', language),
+        description: t('tourNavLibraryDesc', language),
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '[data-tour="library-views"]',
+      popover: {
+        title: t('helpLibBrowseTitle', language),
+        description: t('helpLibBrowseDesc', language),
+        side: 'bottom',
+        align: 'end',
+      },
+    },
+    {
+      element: '[data-tour="help-button"]',
+      popover: {
+        title: t('tourHelpButtonTitle', language),
+        description: t('tourHelpButtonDesc', language),
+        side: 'left',
+        align: 'end',
+      },
+    },
+  ]
+}
+
+function buildSettingsSteps(language: Language): DriveStep[] {
+  return [
+    {
+      element: '[data-tour="nav-settings"]',
+      popover: {
+        title: t('tourNavSettingsTitle', language),
+        description: t('tourNavSettingsDesc', language),
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '[data-tour="settings-subnav"]',
+      popover: {
+        title: t('settingsAbout', language),
+        description: t('settingsAboutDesc', language),
+        side: 'right',
+        align: 'start',
+      },
+    },
+    {
+      element: '[data-tour="help-button"]',
+      popover: {
+        title: t('tourHelpButtonTitle', language),
+        description: t('tourHelpButtonDesc', language),
+        side: 'left',
+        align: 'end',
+      },
+    },
+  ]
+}
+
 export const GuidedTour = forwardRef<GuidedTourHandle, GuidedTourProps>(
   ({ tour, language, workshopCount = 0, panelControls }, ref) => {
     const driverRef = useRef<Driver | null>(null)
@@ -185,7 +298,11 @@ export const GuidedTour = forwardRef<GuidedTourHandle, GuidedTourProps>(
       const steps =
         tour === 'landing'
           ? buildLandingSteps(language, workshopCount)
-          : buildBuilderSteps(language, panelControls)
+          : tour === 'builder'
+            ? buildBuilderSteps(language, panelControls)
+            : tour === 'library'
+              ? buildLibrarySteps(language)
+              : buildSettingsSteps(language)
 
       const driverInstance = driver({
         showProgress: true,
@@ -208,8 +325,10 @@ export const GuidedTour = forwardRef<GuidedTourHandle, GuidedTourProps>(
       driverInstance.drive()
     }
 
-    // Auto-launch on first visit
+    // Auto-launch on first visit (only the two primary tours; library/settings
+    // tours are launched manually from the help panel)
     useEffect(() => {
+      if (tour !== 'landing' && tour !== 'builder') return
       const seen = localStorage.getItem(TOUR_SEEN_KEY(tour))
       if (seen) return
 

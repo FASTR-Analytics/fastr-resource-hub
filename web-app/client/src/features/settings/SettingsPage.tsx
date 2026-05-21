@@ -37,7 +37,7 @@ export function SettingsPage() {
   return (
     <div className="h-full flex bg-slate-50">
       {/* Secondary sub-nav (sits beside the main AppShell sidebar) */}
-      <aside className="w-56 flex-shrink-0 bg-white border-r border-slate-200 p-3 space-y-1">
+      <aside className="w-56 flex-shrink-0 bg-white border-r border-slate-200 p-3 space-y-1" data-tour="settings-subnav">
         <SettingsNavItem
           label={t('settingsGeneral', contentLanguage)}
           active={tab === 'general'}

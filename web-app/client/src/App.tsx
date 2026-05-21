@@ -7,6 +7,7 @@ import { AIAssistant } from './components/AIAssistant'
 import { SlideImportWizard } from './components/SlideImportWizard'
 import { GuidedTour, type GuidedTourHandle } from './components/GuidedTour'
 import { HelpButton } from './components/HelpButton'
+import { HelpPanel } from './components/HelpPanel'
 import { HandoutsPanel } from './components/HandoutsPanel'
 import {
   Layers,
@@ -787,6 +788,64 @@ function LibraryMode() {
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
+  const { showToast } = useToast()
+  // Slide selection for download — slides keyed by topic id, templates by file.
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [selectedTemplates, setSelectedTemplates] = useState<Set<string>>(new Set())
+  const [templates, setTemplates] = useState<any[]>([])
+  const [isExporting, setIsExporting] = useState(false)
+  // Templates that depend on workshop settings — only meaningful in the workshop builder.
+  const workshopOnlyTemplates = new Set(['objectives', 'expected_outputs'])
+
+  const toggleSelect = (id: string) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const toggleTemplate = (file: string) => {
+    setSelectedTemplates(prev => {
+      const next = new Set(prev)
+      if (next.has(file)) next.delete(file)
+      else next.add(file)
+      return next
+    })
+  }
+
+  const selectedCount = selected.size + selectedTemplates.size
+
+  const exportSelection = async (format: 'pptx' | 'pdf') => {
+    if (selectedCount === 0) return
+    setIsExporting(true)
+    try {
+      const res = await fetch('/api/content/export/selection', {
+        credentials: 'include',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topicIds: Array.from(selected),
+          templateFiles: Array.from(selectedTemplates),
+          format,
+          title: 'Slide selection',
+          language: contentLanguage,
+        }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.downloadUrl) window.open(data.downloadUrl, '_blank')
+      } else {
+        showToast(contentLanguage === 'fr' ? "Échec de l'export. Réessayez." : 'Export failed. Please try again.', 'error')
+      }
+    } catch (err) {
+      console.error('Export failed:', err)
+      showToast(contentLanguage === 'fr' ? "Échec de l'export. Réessayez." : 'Export failed. Please try again.', 'error')
+    } finally {
+      setIsExporting(false)
+    }
+  }
 
   useEffect(() => {
     fetch(`/api/content/themes?language=${contentLanguage}`, { credentials: 'include' })
@@ -795,8 +854,53 @@ function LibraryMode() {
       .catch(err => console.warn('Failed to load themes:', err))
   }, [contentLanguage])
 
+  useEffect(() => {
+    fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
+      .then(r => r.ok ? r.json() : [])
+      .then(setTemplates)
+      .catch(err => console.warn('Failed to load templates:', err))
+  }, [contentLanguage])
+
   const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
   const searchInputRef = useRef<HTMLInputElement>(null)
+
+  const loadTemplatePreview = async (tmpl: any) => {
+    const synthetic = { id: `template-${tmpl.id}`, title: tmpl.name, slideCount: 1, _isTemplate: true }
+    setPreviewTopic(synthetic)
+    const cacheKey = `template_${tmpl.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
+    if (cached) {
+      setPreviewHtml(cached.html)
+      setPresenterNotes(cached.notes)
+      return
+    }
+    setPreviewHtml(null)
+    setPresenterNotes([])
+    setIsLoadingPreview(true)
+    try {
+      const response = await fetch(`/api/content/templates/${tmpl.id}?language=${contentLanguage}`, { credentials: 'include' })
+      if (response.ok) {
+        const data = await response.json()
+        const markdown = data.content.replace(/\n---\s*$/, '')
+        const renderResponse = await fetch('/api/content/render', {
+          credentials: 'include',
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ markdown }),
+        })
+        if (renderResponse.ok) {
+          const renderData = await renderResponse.json()
+          previewCache.current.set(cacheKey, { html: renderData.html, notes: renderData.presenterNotes || [] })
+          setPreviewHtml(renderData.html)
+          setPresenterNotes(renderData.presenterNotes || [])
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load template preview:', err)
+    } finally {
+      setIsLoadingPreview(false)
+    }
+  }
 
   useEffect(() => {
     if (contentLibrary.length === 0) {
@@ -1084,9 +1188,32 @@ function LibraryMode() {
               const moduleId = `module-${module.id}-full`
               const moduleCondId = `module-${module.id}-condensed`
               const isModulePreviewing = previewTopic?.id === moduleId || previewTopic?.id === moduleCondId
+              // Module pack = the full variant (fall back to the only variant present).
+              const packIds: string[] = ((module.fullTopics?.length ? module.fullTopics : module.topics) || []).map((tp: any) => tp.id)
+              const packAll = packIds.length > 0 && packIds.every(id => selected.has(id))
+              const packSome = !packAll && packIds.some(id => selected.has(id))
+              const togglePack = () => setSelected(prev => {
+                const next = new Set(prev)
+                if (packAll) packIds.forEach(id => next.delete(id))
+                else packIds.forEach(id => next.add(id))
+                return next
+              })
               return (
                 <div key={module.id} className="mb-0.5 group">
                   <div className={`w-full flex items-center gap-1 pr-2 ${isModulePreviewing ? 'bg-fastr-light' : ''}`}>
+                    <button
+                      onClick={togglePack}
+                      aria-pressed={packAll}
+                      title={contentLanguage === 'fr' ? 'Sélectionner le module complet' : 'Select full module'}
+                      aria-label={contentLanguage === 'fr' ? 'Sélectionner le module complet' : 'Select full module'}
+                      className="flex-shrink-0 pl-3 pr-0.5 py-2 text-slate-400 hover:text-fastr-primary focus-ring"
+                    >
+                      {packAll
+                        ? <Check className="w-4 h-4 text-fastr-primary" />
+                        : packSome
+                          ? <Check className="w-4 h-4 text-fastr-primary/40" />
+                          : <Square className="w-4 h-4" />}
+                    </button>
                     <button
                       onClick={() => {
                         const next = new Set(expandedModules)
@@ -1133,28 +1260,47 @@ function LibraryMode() {
                   </div>
                   {isExpanded && (
                     <div className="pb-1">
-                      {items.map(({ topic, variant }) => (
-                        <button
+                      {items.map(({ topic, variant }) => {
+                        const isChecked = selected.has(topic.id)
+                        return (
+                        <div
                           key={topic.id}
-                          onClick={() => loadPreview(topic)}
-                          className={`w-full text-left px-4 py-2 pl-9 transition-colors flex items-center gap-3 focus-ring ${
+                          className={`w-full flex items-center transition-colors ${
                             previewTopic?.id === topic.id
-                              ? 'bg-fastr-light text-fastr-primary border-l-2 border-l-fastr-primary'
+                              ? 'bg-fastr-light border-l-2 border-l-fastr-primary'
                               : 'hover:bg-slate-50 border-l-2 border-l-transparent'
                           }`}
                         >
-                          <div className="flex-1 min-w-0">
-                            <div className="text-body-sm text-slate-800 truncate">{topic.title}</div>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-caption text-slate-500">{topic.slideCount} {t('slides', contentLanguage)}</span>
-                              {variant === 'condensed' && (
-                                <span className="inline-flex items-center rounded-pill px-2 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('condensed', contentLanguage)}</span>
-                              )}
+                          <button
+                            onClick={() => toggleSelect(topic.id)}
+                            aria-pressed={isChecked}
+                            aria-label={contentLanguage === 'fr' ? 'Sélectionner la diapositive' : 'Select slide'}
+                            className="flex-shrink-0 pl-5 pr-1 py-2 text-slate-400 hover:text-fastr-primary focus-ring"
+                          >
+                            {isChecked
+                              ? <Check className="w-4 h-4 text-fastr-primary" />
+                              : <Square className="w-4 h-4" />}
+                          </button>
+                          <button
+                            onClick={() => loadPreview(topic)}
+                            className={`flex-1 min-w-0 text-left pl-1 pr-4 py-2 flex items-center gap-3 focus-ring ${
+                              previewTopic?.id === topic.id ? 'text-fastr-primary' : ''
+                            }`}
+                          >
+                            <div className="flex-1 min-w-0">
+                              <div className="text-body-sm text-slate-800 truncate">{topic.title}</div>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-caption text-slate-500">{topic.slideCount} {t('slides', contentLanguage)}</span>
+                                {variant === 'condensed' && (
+                                  <span className="inline-flex items-center rounded-pill px-2 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('condensed', contentLanguage)}</span>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
-                        </button>
-                      ))}
+                            <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
+                          </button>
+                        </div>
+                        )
+                      })}
                     </div>
                   )}
                 </div>
@@ -1164,7 +1310,114 @@ function LibraryMode() {
               )
             })
           )}
+
+          {/* Templates & structure — consolidated from the old export page */}
+          {templates.length > 0 && (() => {
+            const tplOpen = searchQuery.trim().length > 0 || !collapsedThemes.has('_templates')
+            return (
+              <div className="mb-1">
+                <button
+                  onClick={() => {
+                    const next = new Set(collapsedThemes)
+                    if (next.has('_templates')) next.delete('_templates')
+                    else next.add('_templates')
+                    setCollapsedThemes(next)
+                  }}
+                  className="w-full text-left px-4 py-1.5 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
+                >
+                  {tplOpen ? (
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+                  ) : (
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+                  )}
+                  <span className="text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex-1">
+                    {contentLanguage === 'fr' ? 'Modèles et structure' : 'Templates & structure'}
+                  </span>
+                </button>
+                {tplOpen && templates.map((category: any) => {
+                  const tpls = (category.templates || []).filter((tp: any) => !workshopOnlyTemplates.has(tp.id))
+                  if (!tpls.length) return null
+                  return (
+                    <div key={category.id} className="mb-0.5">
+                      <div className="px-4 pl-8 py-1.5 text-[11px] uppercase tracking-wide font-semibold text-slate-400">{category.name}</div>
+                      {tpls.map((tmpl: any) => {
+                        const isChecked = selectedTemplates.has(tmpl.file)
+                        const tplPreviewId = `template-${tmpl.id}`
+                        return (
+                          <div
+                            key={tmpl.id}
+                            className={`w-full flex items-center transition-colors ${
+                              previewTopic?.id === tplPreviewId
+                                ? 'bg-fastr-light border-l-2 border-l-fastr-primary'
+                                : 'hover:bg-slate-50 border-l-2 border-l-transparent'
+                            }`}
+                          >
+                            <button
+                              onClick={() => toggleTemplate(tmpl.file)}
+                              aria-pressed={isChecked}
+                              aria-label={contentLanguage === 'fr' ? 'Sélectionner le modèle' : 'Select template'}
+                              className="flex-shrink-0 pl-5 pr-1 py-2 text-slate-400 hover:text-fastr-primary focus-ring"
+                            >
+                              {isChecked
+                                ? <Check className="w-4 h-4 text-fastr-primary" />
+                                : <Square className="w-4 h-4" />}
+                            </button>
+                            <button
+                              onClick={() => loadTemplatePreview(tmpl)}
+                              className={`flex-1 min-w-0 text-left pl-1 pr-4 py-2 flex items-center gap-3 focus-ring ${
+                                previewTopic?.id === tplPreviewId ? 'text-fastr-primary' : ''
+                              }`}
+                            >
+                              <div className="flex-1 min-w-0">
+                                <div className="text-body-sm text-slate-800 truncate">{tmpl.name}</div>
+                                {tmpl.preview && <div className="text-caption text-slate-500 truncate mt-0.5">{tmpl.preview}</div>}
+                              </div>
+                              <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
+                            </button>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })()}
         </div>
+
+        {/* Selection footer — download the ticked slides */}
+        {selectedCount > 0 && (
+          <div className="border-t border-slate-200 bg-white px-4 py-3 flex-shrink-0 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-body-sm font-semibold text-slate-800">
+                {selectedCount} {contentLanguage === 'fr' ? 'sélectionné(s)' : 'selected'}
+              </span>
+              <button
+                onClick={() => { setSelected(new Set()); setSelectedTemplates(new Set()) }}
+                className="text-caption text-slate-500 hover:text-slate-800 focus-ring rounded"
+              >
+                {contentLanguage === 'fr' ? 'Effacer' : 'Clear'}
+              </button>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => exportSelection('pptx')}
+                disabled={isExporting}
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md bg-fastr-primary text-white text-body-sm font-semibold hover:bg-fastr-primary/90 disabled:opacity-50 focus-ring"
+              >
+                {isExporting ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+                PPTX
+              </button>
+              <button
+                onClick={() => exportSelection('pdf')}
+                disabled={isExporting}
+                className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-md border border-slate-300 text-slate-700 text-body-sm font-semibold hover:bg-slate-50 disabled:opacity-50 focus-ring"
+              >
+                PDF
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Right panel — slide preview */}
@@ -1309,6 +1562,9 @@ function App() {
   const [activeDragData, setActiveDragData] = useState<{ id: string; data: any } | null>(null)
   const landingTourRef = useRef<GuidedTourHandle>(null)
   const builderTourRef = useRef<GuidedTourHandle>(null)
+  const libraryTourRef = useRef<GuidedTourHandle>(null)
+  const settingsTourRef = useRef<GuidedTourHandle>(null)
+  const [showHelp, setShowHelp] = useState(false)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [pendingDeckType, setPendingDeckType] = useState<'workshop' | 'webinar'>('workshop')
   const [createMode, setCreateMode] = useState<'manual' | 'ai' | 'upload'>('manual')
@@ -2296,8 +2552,15 @@ function App() {
             workshopCount={workshops.length}
           />
           <HelpButton
-            onClick={() => landingTourRef.current?.startTour()}
+            onClick={() => setShowHelp(true)}
             language={contentLanguage}
+          />
+          <HelpPanel
+            open={showHelp}
+            onClose={() => setShowHelp(false)}
+            language={contentLanguage}
+            view="landing"
+            onStartTour={() => landingTourRef.current?.startTour()}
           />
         </div>
       ),
@@ -2314,7 +2577,7 @@ function App() {
       appMode === 'quick' ? 'select' : libraryView
 
     const libraryToggle = (
-      <div className="inline-flex items-stretch border border-slate-200 bg-white rounded-lg p-0.5">
+      <div className="inline-flex items-stretch border border-slate-200 bg-white rounded-lg p-0.5" data-tour="library-views">
         <button
           onClick={() => { setLibraryView('browse'); if (appMode === 'quick') setAppMode('library') }}
           aria-pressed={effectiveLibraryView === 'browse'}
@@ -2334,16 +2597,6 @@ function App() {
         >
           <FileText className="w-3.5 h-3.5" />
           {t('handoutsTab', contentLanguage)}
-        </button>
-        <button
-          onClick={() => { setLibraryView('select'); if (appMode === 'quick') setAppMode('library') }}
-          aria-pressed={effectiveLibraryView === 'select'}
-          className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-body-sm font-semibold transition-colors ${
-            effectiveLibraryView === 'select' ? 'bg-fastr-primary text-white' : 'text-slate-600 hover:bg-slate-50'
-          }`}
-        >
-          <Download className="w-3.5 h-3.5" />
-          {t('selectForExport', contentLanguage)}
         </button>
       </div>
     )
@@ -2366,7 +2619,20 @@ function App() {
     return renderShell({
       section: t('navLibrary', contentLanguage),
       topbarActions: libraryToggle,
-      children: libraryChild,
+      children: (
+        <>
+          {libraryChild}
+          <GuidedTour ref={libraryTourRef} tour="library" language={contentLanguage} />
+          <HelpButton onClick={() => setShowHelp(true)} language={contentLanguage} />
+          <HelpPanel
+            open={showHelp}
+            onClose={() => setShowHelp(false)}
+            language={contentLanguage}
+            view="library"
+            onStartTour={() => libraryTourRef.current?.startTour()}
+          />
+        </>
+      ),
     })
   }
 
@@ -2389,7 +2655,20 @@ function App() {
   if (appMode === 'settings') {
     return renderShell({
       section: t('navSettings', contentLanguage),
-      children: <SettingsPage />,
+      children: (
+        <>
+          <SettingsPage />
+          <GuidedTour ref={settingsTourRef} tour="settings" language={contentLanguage} />
+          <HelpButton onClick={() => setShowHelp(true)} language={contentLanguage} />
+          <HelpPanel
+            open={showHelp}
+            onClose={() => setShowHelp(false)}
+            language={contentLanguage}
+            view="settings"
+            onStartTour={() => settingsTourRef.current?.startTour()}
+          />
+        </>
+      ),
     })
   }
 
@@ -3797,8 +4076,15 @@ function App() {
             panelControls={{ setRightPanelOpen }}
           />
           <HelpButton
-            onClick={() => builderTourRef.current?.startTour()}
+            onClick={() => setShowHelp(true)}
             language={contentLanguage}
+          />
+          <HelpPanel
+            open={showHelp}
+            onClose={() => setShowHelp(false)}
+            language={contentLanguage}
+            view="builder"
+            onStartTour={() => builderTourRef.current?.startTour()}
           />
         </>
       )}

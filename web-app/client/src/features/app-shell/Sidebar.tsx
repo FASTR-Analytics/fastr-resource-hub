@@ -69,6 +69,7 @@ export function Sidebar({
             <button
               key={id}
               onClick={() => onNavChange(id)}
+              data-tour={`nav-${id}`}
               aria-current={isActive ? 'page' : undefined}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg text-body-sm font-semibold text-left transition-colors focus-ring ${
                 isActive
@@ -107,6 +108,7 @@ export function Sidebar({
           </div>
           <button
             onClick={onSignOut}
+            data-tour="sign-out"
             title={signOutLabel}
             aria-label={signOutLabel}
             className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors focus-ring"
