@@ -16,10 +16,25 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
 
+export interface ActivityContext {
+  covers: string
+  outcomes?: string[]
+  order?: number
+  prerequisites?: string[]
+  materials?: {
+    deck?: string
+    signpost?: string
+    handouts?: string[]
+    facilitator_guide?: string
+  }
+  ai_notes?: string
+}
+
 export interface AIContext {
   description: string
   topics: string[]
   duration: string
+  activity?: ActivityContext
 }
 
 export interface ModuleDefinition {

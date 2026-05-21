@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import {
   loadModulesRegistry,
   loadModuleMeta,
+  type ActivityContext,
 } from '../services/moduleRegistry.js'
 import { generateDiagram, type DiagramRequest } from '../services/diagramTemplates.js'
 import { saveCustomSlide } from '../db/database.js'
@@ -41,9 +42,9 @@ const getClient = () => {
 
 // Module details loaded from modules.yaml via registry
 // Helper to build a MODULE_DETAILS dict on demand from registry (includes all modules with ai_context)
-function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { name: string; description: string; topics: string[]; duration: string }> {
+function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> {
   const modules = loadModulesRegistry()
-  const dict: Record<string, { name: string; description: string; topics: string[]; duration: string }> = {}
+  const dict: Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> = {}
   for (const mod of modules) {
     if (!mod.ai_context) continue  // Skip modules without AI context
     const ai = mod.ai_context
@@ -52,6 +53,7 @@ function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { na
       description: ai?.description || '',
       topics: ai?.topics || [],
       duration: ai?.duration || '',
+      activity: ai?.activity,
     }
   }
   return dict
@@ -1176,7 +1178,11 @@ ${Object.entries(getModuleDetailsDict()).map(([num, mod]) => `
 - **Description**: ${mod.description}
 - **Topics**: ${mod.topics.join(', ')}
 - **Duration**: ${mod.duration}
-${/^\d+$/.test(num) ? '- **Has condensed version**: yes (~30-50% of full)' : /^9/.test(num) ? '- **Type**: Hands-on activity (full only)' : '- **Has condensed version**: yes'}
+${mod.activity ? `- **Activity covers**: ${mod.activity.covers}` +
+  (mod.activity.outcomes?.length ? `\n- **Outcomes**: ${mod.activity.outcomes.join('; ')}` : '') +
+  (mod.activity.order ? `\n- **Sequence order**: ${mod.activity.order}` : '') +
+  (mod.activity.prerequisites?.length ? `\n- **Prerequisites**: ${mod.activity.prerequisites.join(', ')}` : '') +
+  (mod.activity.ai_notes ? `\n- **Facilitation notes**: ${mod.activity.ai_notes}` : '') + '\n' : ''}${/^\d+$/.test(num) ? '- **Has condensed version**: yes (~30-50% of full)' : /^9/.test(num) ? '- **Type**: Hands-on activity (full only)' : '- **Has condensed version**: yes'}
 `).join('\n')}
 
 # CURRENT WORKSHOP

@@ -20,6 +20,10 @@ themes:
   name:
     en: Platform skills
     fr: Compétences plateforme
+- id: methodology
+  name:
+    en: Methodology
+    fr: Méthodologie
 - id: workshop
   name:
     en: Workshop & assessment
@@ -228,6 +232,32 @@ modules:
     - Creating interpretations with AI Assistant
     - Disruption detection
     duration: 120-150 min
+    # Activity definition — single source of truth for what this activity covers,
+    # its place in the sequence, and the materials that go with it.
+    activity:
+      covers: Create a chart from a metric, then say what it means — manually and with the AI.
+      outcomes:
+      - Build a visualization via Metric → Presets → Create
+      - Use filter (pick what to show) vs disaggregate (break a total into parts) correctly
+      - Write a 2-sentence finding (what changed · why it matters)
+      - Spot a disruption in a trend
+      - Draft an interpretation with the AI, then verify it against the data
+      order: 2
+      prerequisites:
+      - m9a
+      materials:
+        deck: m9c
+        signpost: activity_divider
+        handouts:
+        - interpret_reference
+        - create_viz_manually
+        - write_interpretation
+        - create_viz_ai
+        - interpret_with_ai
+        - spot_disruption
+        facilitator_guide: facilitator_guide
+      ai_notes: Most common confusion is filter vs disaggregate — reinforce out loud.
+        Push the 2-sentence finding format; don't accept a chart description without a "so what".
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
@@ -347,3 +377,15 @@ modules:
     - AI assistant introduction
     - Country progress
     duration: 30-90 min
+# Methodology recap handouts only — not a slide-deck module.
+# `deprecated: true` keeps it out of the Content Library/export picker and the
+# slide library (no core_content folder), while still giving the Handouts tab a
+# display name and theme for the `handouts/<lang>/methodology/` folder.
+- id: methodology
+  number: methodology
+  folder: methodology
+  theme: methodology
+  deprecated: true
+  name:
+    en: Analytics pipeline
+    fr: Pipeline d'analyse
