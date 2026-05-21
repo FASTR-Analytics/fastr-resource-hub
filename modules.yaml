@@ -198,6 +198,7 @@ modules:
   number: 9b
   folder: m9b_getting_started
   theme: platform
+  deprecated: true   # husk — all slides are activity-pointer stubs; content lives in handouts
   name:
     en: Getting Started
     fr: Prise en main
@@ -295,6 +296,7 @@ modules:
   number: 9h
   folder: m9h_platform_demo
   theme: platform
+  deprecated: true   # thin (1 slide), overlaps m3 + m9b
   name:
     en: Platform Demo
     fr: Démo de la plateforme

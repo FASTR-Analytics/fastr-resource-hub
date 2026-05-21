@@ -27,6 +27,7 @@ export interface ModuleDefinition {
   number: string       // e.g., '4', '3b', 'overview'
   folder: string       // e.g., 'm4_data_quality_assessment'
   theme?: string       // theme id from themes registry (e.g., 'foundations')
+  deprecated?: boolean // if true, hidden from the Content Library / export picker
   name: {
     en: string
     fr: string

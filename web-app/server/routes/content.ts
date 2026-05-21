@@ -159,6 +159,7 @@ router.get('/modules', async (req, res) => {
     const moduleNames = getModuleNamesDict(language)
 
     for (const regMod of registryModules) {
+      if (regMod.deprecated) continue   // hidden from the export picker
       const modulePath = path.join(coreContentPath, regMod.folder)
       if (!fs.existsSync(modulePath) || !fs.statSync(modulePath).isDirectory()) continue
 
@@ -200,15 +201,10 @@ router.get('/modules', async (req, res) => {
             title = title.charAt(0).toUpperCase() + title.slice(1)
           }
 
-          // Derive topic ID from filename
-          let topicId: string
-          const topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+[a-z]?)_/)
-          if (topicMatch) {
-            topicId = topicMatch[1]
-          } else {
-            // Custom module files (01_xxx.md) — use filename stem
-            topicId = file.replace('.md', '')
-          }
+          // Topic ID = full filename stem (unique). Using a truncated prefix
+          // here caused prefix-colliding files (e.g. m4_1b_*, m4_1c_*) to share
+          // an ID and get silently dropped by dedupeById.
+          const topicId = file.replace(/\.md$/, '')
 
           // Extract slide titles
           const slideTitles = content.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, '')) || []
@@ -251,15 +247,10 @@ router.get('/modules', async (req, res) => {
 
         for (const file of files) {
           let topicMatch = file.match(/^(m\d+[a-z]?_s?\d+[a-z]*\d*)_/) || file.match(/^(mai_\d+[a-z]?)_/)
-          let topicId: string
-          let isCondensed = false
-
-          if (topicMatch) {
-            topicId = topicMatch[1]
-            isCondensed = topicId.includes('_s')
-          } else {
-            continue
-          }
+          if (!topicMatch) continue
+          // Topic ID = full filename stem (unique); condensed detected from the prefix.
+          const topicId = file.replace(/\.md$/, '')
+          const isCondensed = topicMatch[1].includes('_s')
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
@@ -445,8 +436,9 @@ router.get('/topic/:id', (req, res) => {
     let moduleFolder: string | undefined
     let filePrefix: string
 
-    // Determine module ID from topic ID
-    const aiMatch = topicId.match(/^mai_(\d+[a-z]?)$/)
+    // Determine module ID from topic ID. topicId is the full filename stem
+    // (e.g. mai_3_capabilities, m4_1_overview) or a legacy prefix (mai_3, m4_1).
+    const aiMatch = /^mai_/.test(topicId)
     const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
 
     if (aiMatch) {
@@ -488,7 +480,9 @@ router.get('/topic/:id', (req, res) => {
       return res.status(404).json({ error: 'Module not found' })
     }
 
-    filePrefix = `${topicId}_`
+    // startsWith handles both forms: a stem matches its own file exactly;
+    // a legacy prefix matches the first file under it.
+    filePrefix = topicId
     const modulePath = path.join(contentPath, moduleFolder)
     if (!fs.existsSync(modulePath)) {
       return res.status(404).json({ error: 'Module folder not found' })
@@ -1293,11 +1287,14 @@ router.post('/export/selection', async (req, res) => {
       let filePrefix: string
 
       // Handle mai_ prefix (AI assistant module)
+      // topicId is the full filename stem (new) or a legacy prefix (old saved
+      // selections). startsWith handles both: a stem matches its own file
+      // exactly; a prefix matches the first file under it.
       if (topicId.startsWith('mai_')) {
         moduleFolder = getModuleFolder('m3b') || getModuleFolder('mai') || 'mai_ai_assistant'
-        filePrefix = `${topicId}_`
+        filePrefix = topicId
       } else {
-        // Standard module topic (m4_1, m4_s1, m9a_1, etc.)
+        // Standard module topic (m4_1_..., m4_s1_..., m9a_1_..., etc.)
         const modNumMatch = topicId.match(/^m(\d+[a-z]?)_/)
         if (!modNumMatch) continue
 
@@ -1309,7 +1306,7 @@ router.post('/export/selection', async (req, res) => {
           contentPath = CORE_CONTENT_PATH
         }
 
-        filePrefix = `${topicId}_`
+        filePrefix = topicId
       }
 
       if (!moduleFolder) continue
