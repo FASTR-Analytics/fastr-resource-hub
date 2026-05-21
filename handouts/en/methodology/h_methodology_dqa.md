@@ -124,7 +124,7 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 At a **single clinic** these can break for innocent reasons — the numbers are small, and a child may get one dose at an outreach session and the next at a clinic. So FASTR adds up the **whole district** before checking; there, the comings and goings even out and the relationship should hold.
 
-That's why a failure only counts at **district** level: a child can't get a 3rd dose without a 1st, so across a district Penta1 can never truly be lower than Penta3. If the reported numbers say it is, the data is wrong — a value mis-entered or counted twice — not reality.
+The check itself is just a **ratio**: FASTR compares each pair across the district — Penta1 against Penta3, ANC1 against ANC4 — and flags any that falls outside the plausible range. That's the whole point: a district reporting more 3rd doses than 1st is impossible in real life (no child gets a 3rd dose without a 1st), so the ratio flags it as an error.
 
 ![At one clinic Penta3 can outnumber Penta1 because some children had their 1st dose elsewhere; summed across the whole district, Penta1 is greater than Penta3 as it should be w:100%](../../../resources/diagrams/district_consistency.svg)
 
