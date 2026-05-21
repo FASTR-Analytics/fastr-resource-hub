@@ -112,7 +112,7 @@
   <text class="legend-text" x="278" y="223">Missing</text>
 
   <!-- Stats box - below grid, aligned with facility labels -->
-  <rect x="140" y="240" width="290" height="50" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
+  <rect x="140" y="240" width="330" height="50" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
   <text class="stat-text" x="155" y="262">5 facilities × 12 months = 60 expected</text>
-  <text class="stat-text" x="155" y="280">48 reported → 80% completeness</text>
+  <text class="stat-text" x="155" y="280">48 reported → 80% complete overall</text>
 </svg>

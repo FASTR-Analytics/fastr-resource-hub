@@ -52,3 +52,9 @@ m9f:
 - h_m9f_refine_prompt.md       # 4. Refine iteratively
 - h_m9f_pdf_template.md        # 5. Use a previous report as template
 - h_m9f_verify_output.md       # 6. Verify the output before sharing
+
+methodology:
+- h_methodology_dqa.md          # 1. Data quality assessment (M1)
+- h_methodology_adjustment.md   # 2. Data quality adjustment (M2)
+- h_methodology_service_use.md  # 3. Service utilization (M3)
+- h_methodology_coverage.md     # 4. Coverage estimates (M5 + M6)

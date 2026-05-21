@@ -31,12 +31,15 @@
   <path d="M100,220 L180,190 L260,210 L340,180 L420,170 L500,160 L580,175 L660,155"
         stroke="#09544F" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
 
-  <!-- Shortfall area (red) -->
-  <path d="M340,180 L420,170 L500,160 L580,175 L580,240 L500,250 L420,260 L340,180"
+  <!-- Disruption area (red): the band between expected (upper edge) and the
+       lower actual line, where observed runs below expected (Q4 2024 → Q3 2025).
+       Upper edge follows the expected line; lower edge traces the actual line back. -->
+  <path d="M340,180 L420,170 L500,160 L580,175 L660,155 L660,160 L580,240 L500,250 L420,260 Z"
         fill="#FDE8E8" stroke="none" opacity="0.7"/>
 
-  <!-- Surplus area (green) -->
-  <path d="M100,220 L180,190 L260,210 L260,180 L180,160 L100,200 Z"
+  <!-- Surplus area (green): the band between the actual line (upper edge) and the
+       expected line (lower edge), where observed runs above expected (Q1 → Q4 2024). -->
+  <path d="M100,200 L180,160 L260,180 L340,180 L260,210 L180,190 L100,220 Z"
         fill="#E8F4F3" stroke="none" opacity="0.7"/>
 
   <!-- Actual line (solid) -->

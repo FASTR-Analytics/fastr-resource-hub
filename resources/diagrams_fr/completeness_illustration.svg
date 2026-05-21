@@ -114,5 +114,5 @@
   <!-- Stats box - below grid, aligned with facility labels -->
   <rect x="140" y="240" width="340" height="50" fill="#f8f9fa" stroke="#dee2e6" rx="4"/>
   <text class="stat-text" x="155" y="262">5 formations × 12 mois = 60 attendus</text>
-  <text class="stat-text" x="155" y="280">48 rapportés → 80% de complétude</text>
+  <text class="stat-text" x="155" y="280">48 rapportés → 80% de complétude au total</text>
 </svg>

@@ -31,12 +31,12 @@
   <path d="M100,220 L180,190 L260,210 L340,180 L420,170 L500,160 L580,175 L660,155"
         stroke="#09544F" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
 
-  <!-- Shortfall area (red) -->
-  <path d="M340,180 L420,170 L500,160 L580,175 L580,240 L500,250 L420,260 L340,180"
+  <!-- Disruption area (red): band between expected (upper) and the lower actual line -->
+  <path d="M340,180 L420,170 L500,160 L580,175 L660,155 L660,160 L580,240 L500,250 L420,260 Z"
         fill="#FDE8E8" stroke="none" opacity="0.7"/>
 
-  <!-- Surplus area (green) -->
-  <path d="M100,220 L180,190 L260,210 L260,180 L180,160 L100,200 Z"
+  <!-- Surplus area (green): band between the actual line (upper) and the expected line (lower) -->
+  <path d="M100,200 L180,160 L260,180 L340,180 L260,210 L180,190 L100,220 Z"
         fill="#E8F4F3" stroke="none" opacity="0.7"/>
 
   <!-- Actual line (solid) -->

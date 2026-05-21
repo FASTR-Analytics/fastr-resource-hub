@@ -18,6 +18,7 @@ import {
   Megaphone,
   Settings,
   Users,
+  FlaskConical,
 } from 'lucide-react'
 
 type HandoutType = 'participant' | 'facilitator'
@@ -61,6 +62,8 @@ function themeIcon(themeId: string) {
       return <Megaphone className="w-3.5 h-3.5" />
     case 'platform':
       return <Settings className="w-3.5 h-3.5" />
+    case 'methodology':
+      return <FlaskConical className="w-3.5 h-3.5" />
     case 'workshop':
       return <Users className="w-3.5 h-3.5" />
     default:
