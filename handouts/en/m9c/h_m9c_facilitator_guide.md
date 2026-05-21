@@ -44,8 +44,14 @@ These activities teach participants to **read a chart and say what it means** �
 **Activity · ~15 min**
 
 **What it is** — a hands-on activity creating a chart with the built-in builder (the **Metric → Presets → Create** wizard).
-**What the handout covers** — + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a ready preset like *Service volume over time (monthly)* → Create. The handout also explains **filter vs disaggregate**.
-**Watch for** — participants confuse **filter** (show a slice, hide the rest — e.g. *only ANC1*) with **disaggregate** (break a total into its parts on one chart — e.g. *one line per district*). Reinforce the difference out loud — it underlies every chart they build. The quick path is metric → preset → Create; **Custom** is only needed for manual control (chart type + disaggregation). Also: line charts for trends, bar charts for comparing.
+**What the handout covers** — + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a ready preset like *Service volume over time (monthly)* → Create. It then explains **filter vs disaggregate**, where to find them when editing a viz, and the four display modes (Lines / Grid / Rows / Columns).
+**Watch for** — participants confuse **filter** (take data out — show a slice, hide the rest) with **disaggregate** (break a total into its parts). Reinforce the difference out loud; it underlies every chart they build. The quick path is metric → preset → Create; **Custom** is only for manual control. Also: line charts for trends, bar charts for comparing.
+
+> **Demo — use both, live (~3 min).** Open a saved viz and show the **left panel** (point out you have to *scroll* to reach these — this is where people get lost):
+> 1. Start with one indicator, national total. Say in words what it shows.
+> 2. Under **Display (disaggregate)**, break it down **by district** — switch between **Lines**, then **Rows**, then **Grid** so they see the *same data in different shapes*.
+> 3. Under **Filter (subset)**, untick all but two districts — the chart narrows. Name it: "I just *took data out*."
+> 4. **Show the trap:** disaggregate by district **and** filter to a single district → nothing left to compare. Rule to repeat: *filter what you don't need, disaggregate what you want to compare.*
 
 ### 3. Write an interpretation for a chart
 
