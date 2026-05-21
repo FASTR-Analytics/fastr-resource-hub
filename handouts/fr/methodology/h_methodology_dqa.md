@@ -120,7 +120,11 @@ Seuls les indicateurs dont la moyenne dépasse 100 par mois sont vérifiés, pou
 
 ## Cohérence — « les chiffres liés sont-ils plausibles ensemble ? »
 
-**Comment on la vérifie.** Certains indicateurs doivent évoluer ensemble. On ne peut pas avoir plus de 4es visites prénatales que de 1res, ni plus de 3es doses de vaccin que de 1res ; et les accouchements et les doses de BCG (un vaccin administré à la naissance) doivent être à peu près égaux. FASTR vérifie cela au **niveau du district**, pas dans une seule formation — dans une formation les chiffres sont petits et les services se répartissent entre formations (un enfant peut recevoir une dose de vaccin en stratégie avancée et la suivante dans une formation), de sorte que les règles ne tiennent qu'une fois tout un district additionné. Le résultat de chaque district est ensuite reporté sur chaque formation qu'il contient. Quand une règle reste rompue sur tout le district — par ex. plus de 3es doses que de 1res — les deux chiffres ne peuvent pas être justes tous les deux : quelque chose a été mal enregistré.
+**Comment on la vérifie.** Des indicateurs liés doivent garder un ordre logique : plus d'enfants reçoivent la 1re dose de vaccin que la 3e (**Penta1 ≥ Penta3**), plus de femmes une 1re visite prénatale qu'une 4e (**ANC1 ≥ ANC4**), et les accouchements correspondent à peu près aux doses de BCG (le vaccin administré à la naissance).
+
+Dans une **seule formation**, cela peut être rompu pour des raisons anodines — les chiffres sont petits, et un enfant peut recevoir une dose en stratégie avancée et la suivante dans une formation. FASTR additionne donc tout le **district** avant de vérifier ; là, les allées et venues se compensent et la relation devrait tenir.
+
+Si une règle reste **toujours** rompue une fois le district additionné — par ex. plus de 3es doses que de 1res — les deux chiffres ne peuvent pas être justes tous les deux : quelque chose a été mal enregistré.
 
 ![Dans une seule formation, Penta3 peut dépasser Penta1 car certains enfants ont eu leur 1re dose ailleurs ; additionné sur tout le district, Penta1 est supérieur à Penta3 comme il se doit w:100%](../../../resources/diagrams_fr/district_consistency.svg)
 

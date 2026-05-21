@@ -120,7 +120,11 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 ## Consistency — "do related numbers make sense together?"
 
-**How we check it.** Some indicators have to move together. You can't have more 4th antenatal visits than 1st visits, or more 3rd vaccine doses than 1st doses; and deliveries and BCG doses (a jab given at birth) should be roughly equal. FASTR checks these at **district level**, not at a single clinic — at one clinic the numbers are small and services get split between facilities (a child may get one vaccine dose at an outreach session and the next at a clinic), so the rules only hold once a whole district is added up. Each district's pass/fail is then carried back to every facility inside it. When a rule still breaks across the district — say 3rd doses outnumber 1st — the two numbers can't both be right, so something was mis-recorded.
+**How we check it.** Related indicators must keep a sensible order: more children get the 1st vaccine dose than the 3rd (**Penta1 ≥ Penta3**), more women a 1st antenatal visit than a 4th (**ANC1 ≥ ANC4**), and deliveries roughly match BCG doses (the jab given at birth).
+
+At a **single clinic** these can break for innocent reasons — the numbers are small, and a child may get one dose at an outreach session and the next at a clinic. So FASTR adds up the **whole district** before checking; there, the comings and goings even out and the relationship should hold.
+
+If a rule **still** breaks once the district is summed — say 3rd doses outnumber 1st — the two numbers genuinely can't both be right, so something was mis-recorded.
 
 ![At one clinic Penta3 can outnumber Penta1 because some children had their 1st dose elsewhere; summed across the whole district, Penta1 is greater than Penta3 as it should be w:100%](../../../resources/diagrams/district_consistency.svg)
 
