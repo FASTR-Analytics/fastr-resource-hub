@@ -34,7 +34,15 @@ To make methodology source a module's slides with a **byte-exact round-trip**:
 
 **Wrinkle:** `build_meta_yaml` only emits `file/order/variant/title` — it **drops custom `_meta` fields** like `status: new` and `last_reviewed`. So a re-extraction strips those. For m8 we kept the committed `_meta` (didn't commit the stripped version). Decide whether those fields matter before enabling routine re-extraction.
 
-**Remaining to back-fill:** m0 (6), m3 (3), m4 (15), m5 (3), m6 (26, incl. id collisions like two `m6_s1b_*`), m7 (12, incl. two `m7_2a2_*`), mai (1). Collisions: check the logical order, then assign unique ids (renames the core file + `_meta`).
+**Back-fill progress:**
+- ✅ **Done & verified (byte-exact round-trip, EN+FR):** m8, m0, m5, m3.
+  - m3 also dropped 6 obsolete FR-only markers (`m3_2/2d/4/6/7/8`) and fixed repurposed `TOPIC_NAMES` slugs.
+- ⏳ **Remaining (the hard cases):**
+  - **m4** (15 unsourced) — check for collisions before back-fill.
+  - **m6** (26 unsourced, incl. id collisions like two `m6_s1b_*`).
+  - **m7** (12 unsourced, incl. two `m7_2a2_*`).
+  - **mai** — messy: orphaned markers BOTH langs (EN `mai_3a/6/6a`; FR `mai_6/7/9/10/11/12/13`) + unsourced files (EN `mai_2b`; FR `mai_2b/4a/5a/8a/8b`). Has filename↔title drift. Needs its own focused investigation (drop-vs-add per marker).
+  - Collisions: check the logical order, then assign unique ids (renames the core file + `_meta`).
 
 **Each module has its own EN/FR quirk — it is NOT a mechanical pass:**
 - **m8 (done):** FR `m8_1` was a *sourced-but-drifted* slide — methodology block had less than FR core. The replace-or-append sync fixed it.
