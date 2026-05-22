@@ -1310,15 +1310,18 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 -->
 
 <!-- SLIDE:m4_0 -->
-## FASTR analytical pipeline
+## How FASTR analyzes your data
 
-The FASTR analysis follows a sequential workflow:
+FASTR runs **4 modules in order**. Each one sets the stage for the next:
 
-1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
-2. **Adjust for quality issues** - Apply corrections to improve data reliability
-3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+| | Module | What it does | Why |
+|---|--------|-------------|-----|
+| 1️⃣ | **Check quality** | Spots data entry errors, missing reports, and inconsistencies | You can't analyze unreliable data |
+| 2️⃣ | **Fix problems** | Replaces extreme values and fills in missing months | Clean data for reliable results |
+| 3️⃣ | **Analyze services** | Compares observed volumes to what was expected to detect disruptions | Know where and when services changed |
+| 4️⃣ | **Estimate coverage** | Calculates % of population covered from reported data | Move from raw numbers to indicators that guide action |
 
-![Analytical Pipeline h:280](resources/diagrams/analytical_pipeline.svg)
+You will run all 4 modules on the platform during this workshop.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
@@ -1333,8 +1336,9 @@ The FASTR analysis follows a sequential workflow:
 - We believe that using the data and providing feedback is the first step to improving the data
 
 We will discuss each of these areas over the next sessions.
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_1b -->
 ## Rationale for data quality assessment
 
 **Challenge:** Routine health facility data may contain quality limitations:
@@ -1348,9 +1352,9 @@ We will discuss each of these areas over the next sessions.
 - Inaccurate assessments of service delivery trends
 - Misidentification of areas requiring intervention
 - Suboptimal resource allocation
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_1c -->
 ## Assessing and adjusting for data quality
 
 Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
@@ -1369,11 +1373,12 @@ Data quality assessment enables ongoing monitoring to:
 - Inform indicator selection based on quality profiles across the HMIS
 - Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
 - Evaluate the effectiveness of data quality improvement initiatives over time
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_1d -->
 ## Measures of data quality
 
-![Measures of data quality](resources/diagrams/measures_data_quality.svg)
+![Measures of data quality](../resources/diagrams/measures_data_quality.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1403,7 +1408,7 @@ td { vertical-align: top; }
 | **Accuracy** | Do data faithfully reflect the actual level of service delivery conducted in the health facility? | • Assess the accuracy for selected indicators through the review of source documents in health facilities and comparison to monthly reports and HMIS values (data verification factor) |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1b -->
+<!-- SLIDE:m4_1e -->
 ## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
 
 <div style="font-size: 0.8em;">
@@ -1428,7 +1433,7 @@ td { vertical-align: top; }
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1c -->
+<!-- SLIDE:m4_1f -->
 ## How does the FASTR data quality analysis differ from the DQA analysis done in DHIS2?
 
 <div style="font-size: 0.8em;">
@@ -1503,15 +1508,15 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_3b -->
 ## Why adjust for outliers?
 
-![Outlier Impact](resources/diagrams/outlier_impact.svg)
+![Outlier Impact](../resources/diagrams/outlier_impact.svg)
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_3c -->
 ## Outlier detection methodology
 
 Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
@@ -1529,12 +1534,37 @@ A value greater than **10 times the median absolute deviation (MAD)** from the m
 <!--
 PRESENTER NOTES:
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
+- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
 -->
+<!-- /SLIDE -->
 
+<!-- SLIDE:m4_3a -->
+## Investigating a flagged outlier
+
+When FASTR flags a value as an outlier, ask these five questions before deciding what to do:
+
+| # | Question | What to look for |
+|---|----------|------------------|
+| 1 | **Data entry error?** | Typo, extra zero, value in wrong field |
+| 2 | **Reporting issue?** | Missing reports from other facilities changing the total |
+| 3 | **Real event?** | Campaign, outbreak, new facility opened |
+| 4 | **Definition change?** | Indicator was redefined or aggregation changed |
+| 5 | **Should we exclude it?** | Does it distort the overall picture? |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_3ab -->
+## Making the call
+
+Based on your investigation:
+
+- **Severe problem** (clear data entry error, implausible value) — Exclude from analysis
+- **Moderate concern** (plausible but uncertain) — Include with a note explaining the caveat
+- **Minor or explainable** (campaign, real event) — Include — it reflects reality
+
+**Try it:** Find one outlier flagged in your data. Walk through the 5 questions. What is your conclusion — exclude, include with caveat, or include?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
@@ -1576,13 +1606,15 @@ PRESENTER NOTES:
 - BCG vs deliveries allows 30% tolerance because not all births happen in facilities
 - Ask: In your context, do patients commonly seek different services at different facilities?
 -->
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_4b -->
+<!-- _class: two-panel -->
 
 ## Why assess consistency at district level?
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 Patients often access different services at different facilities within a district:
 
@@ -1592,9 +1624,9 @@ Patients often access different services at different facilities within a distri
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
 
 </div>
-<div style="flex: 2;">
+<div>
 
-![District consistency](resources/diagrams/district_consistency.svg)
+![District consistency](../resources/diagrams/district_consistency.svg)
 
 </div>
 </div>
@@ -1612,20 +1644,30 @@ By integrating multiple dimensions of data quality into a single score, it simpl
 - No missing indicator data for OPD, Penta1, and ANC1, where available
 - No outliers for OPD, Penta1, and ANC1, where available
 - Consistent reporting between Penta1/Penta3 and ANC1/ANC4
+<!-- /SLIDE -->
 
+<!-- SLIDE:m4_5b -->
+## Quick interpretation guide
+
+| Score range | What it means | What to do |
+|-------------|---------------|------------|
+| **Above 80%** | Reliable — use confidently for analysis | Proceed with analysis |
+| **60-80%** | Usable with caution — some quality gaps | Note limitations, investigate weak dimensions |
+| **Below 60%** | Investigate before using | Identify which dimension (completeness, outliers, consistency) is pulling the score down |
+
+**Try it:** Check your region's overall DQA score. Is it above or below 80%? If below, look at the individual dimension scores — which one needs the most attention?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_6 -->
 ## DQA module: Configuration parameters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **Proportion threshold for outlier detection** | 0.8 | A facility-month is an outlier if it accounts for more than this share of the facility's trailing 12-month volume for the indicator |
-| **Minimum count threshold for consideration** | 100 | Minimum reported count required for a facility-month to be eligible for outlier flagging |
-| **Number of MADs** | 10 | A value is flagged if it exceeds this multiple of the median absolute deviation from the monthly median |
-| **Indicators subjected to DQA** | `anc1, penta1, opd` | Which indicators contribute to the composite DQA score |
-| **Consistency pairs used** | `penta, anc, delivery` | Which indicator pairs are used for consistency analysis (also accepts `malaria`) |
-| **Admin level for consistency** | `admin_area_3` | Geographic level at which consistency ratios are calculated (admin_area_2 / 3 / 4) |
+| Parameter | Description |
+|-----------|-------------|
+| **Proportion threshold for outlier detection** | Adjusts the threshold for proportional contribution to flag a facility-month as an outlier |
+| **Minimum count threshold for consideration** | Defines the minimum count required for a facility-month to be considered an outlier |
+| **Number of MADs** | Outliers are defined as observations which are greater than X times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period |
+| **Indicators subjected to DQA** | Defines which indicators are included for assessment of outliers and completeness for inclusion in the DQA score |
+| **Consistency pairs used** | Defines which indicator pairs are used for consistency analysis and the expected ratio ranges |
 
 <!--
 PRESENTER NOTES:
@@ -1634,7 +1676,6 @@ PRESENTER NOTES:
 - MAD multiplier of 10 is conservative - only flags extreme outliers
 - Minimum count of 100 prevents low-volume facilities from being over-flagged
 - Consistency pairs can be modified based on which indicators you're analyzing
-- The admin level for consistency defaults to district (admin_area_3) — coarser levels (2) are more stable, finer (4) are more granular
 -->
 <!-- /SLIDE -->
 
@@ -1642,6 +1683,20 @@ PRESENTER NOTES:
      CONDENSED SLIDES: Methods + Interpretation Combined
      For workshops requiring shorter, high-level overview
 ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- SLIDE:m4_s0 -->
+## Data quality: what does FASTR check?
+
+Before analyzing, FASTR checks if the data is reliable — like an accountant verifying the numbers before preparing a report.
+
+**Three checks:**
+
+- **Extreme values** — A facility suddenly reports 10× more than usual? Probably a data entry error
+- **Missing reports** — A facility didn't submit a report for 3 months? Its data is missing
+- **Logical consistency** — More 4th antenatal visits than 1st visits? Something is wrong
+
+Each check produces a **quality score** that helps decide if data can be used as-is or needs adjustment.
+<!-- /SLIDE -->
 
 <!-- SLIDE:m4_s1 -->
 ## FASTR analytical pipeline
@@ -1652,10 +1707,10 @@ The FASTR analysis follows a sequential workflow:
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
-![Analytical Pipeline h:280](resources/diagrams/analytical_pipeline.svg)
+![Analytical Pipeline h:280](../resources/diagrams/analytical_pipeline.svg)
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s1b -->
 ## FASTR approach to data quality
 
 FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**.
@@ -1666,7 +1721,6 @@ FASTR takes a multi-pronged approach, based on the belief that **data quality sh
 - Interpret results collaboratively with in-country decision-makers
 
 **Using data and providing feedback is viewed as the first step toward improving data quality.**
-
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s2 -->
@@ -1681,9 +1735,9 @@ FASTR takes a multi-pronged approach, based on the belief that **data quality sh
 - Inaccurate assessment of service delivery trends
 - Misidentification of areas needing intervention
 - Suboptimal resource allocation
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s2b -->
 ## Objectives of data quality assessment
 
 **Objective 1: Enable analytical adjustment**
@@ -1714,18 +1768,19 @@ Higher and stable completeness improves data reliability.
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator.
 
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s3c -->
+<!-- _class: output -->
 ## Indicator completeness output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Completeness output](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing completeness by indicator and region over time.
 
@@ -1763,23 +1818,24 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
+- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s3bb -->
+<!-- _class: output -->
 ## Outlier detection output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Outliers output](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing proportion of values flagged as outliers by indicator and region.
 
@@ -1799,11 +1855,17 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 - For the FASTR analysis, the time period considered for identifying outliers using the MAD approach spans the entire dataset. This means that if the dataset includes five years of data, the median value for each indicator will be calculated across the entire five-year period
-- For the FASTR analysis, the proportional allocation approach to identifying outliers uses a trailing 12-month rolling window per facility × indicator. Each monthly value is compared to the sum of counts in the 12 months ending at that period. This replaces an earlier calendar-year denominator that falsely flagged facilities whose only reporting fell early in a calendar year
+- For the FASTR analysis, the proportional allocation approach to identifying outliers is applied on a calendar-year basis. This means that all data from the year 2024 will be used to assess the proportional contribution of service volumes reported in 2024. If the analysis is conducted mid-year, only the available data up to that point will be considered, potentially leading to a partial year's data being used in the assessment
 - This restricts the FASTR analysis to outliers which are suspiciously high values compared to the usual volume of services reported by a facility
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
 -->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s3a -->
+## Why adjust for outliers?
+
+![Why adjust for outliers](../resources/diagrams/outlier_impact.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s4 -->
@@ -1826,18 +1888,19 @@ BCG is a birth dose vaccine so we expect that BCG and facility delivery will be 
 FASTR assesses consistency at the **district level** rather than facility level. This is because patients frequently seek care from different facilities within the same district - a woman may have her ANC1 visit at a health post but travel to the district hospital for ANC4. Assessing at district level accounts for this patient movement.
 
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s4b -->
+<!-- _class: output -->
 ## Internal consistency output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Consistency output](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap showing the % of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
 
@@ -1847,7 +1910,6 @@ FASTR assesses consistency at the **district level** rather than facility level.
 
 </div>
 </div>
-
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s5 -->
@@ -1870,45 +1932,47 @@ PRESENTER NOTES:
 - Use the heatmap to identify priority areas for data quality improvement
 - This completes the DQA module - next we'll look at how to adjust for these issues
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s5b -->
+<!-- _class: output -->
 ## Overall data quality score output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![DQA score output](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
-**What you see:** Heatmap showing overall DQA score by indicator and region, color-coded from red (poor) to green (good).
+**What you see:** Heatmap showing the percentage of facility-months that pass **all** quality checks, by indicator and region.
 
-**Formula:** DQA % = (values that are complete, not outliers, and consistent) / (total values) × 100
+**Score:** Binary — each facility-month is either adequate (passes all checks) or not. The percentage reflects the share that pass.
 
-**Interpretation:** 100% = passes all checks. Use this to prioritize data quality improvement efforts by region and indicator.
+**Interpretation:** A strict measure. Low scores indicate many facility-months fail at least one check. Use this to identify regions and indicators needing data quality improvement.
 
 </div>
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s5c -->
+<!-- _class: output -->
 ## Mean DQA score output
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Mean DQA score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
-**What you see:** Heatmap showing mean DQA score across facilities by indicator and region.
+**What you see:** Heatmap showing the average DQA score across facility-months, by indicator and region.
 
-**Formula:** Mean DQA = (values that are complete, not outliers, and consistent) / (total values) × 100
+**Score:** Average of the completeness-outlier score and the consistency score. Ranges from 0% to 100%.
 
-**Interpretation:** Shows how close facilities are to meeting all quality criteria. A score of 100% means the data passes all DQA checks.
+**Interpretation:** A more nuanced measure than the overall score. Captures partial progress — a region can score 75% even if not all checks pass. Use this to track improvement over time.
 
 </div>
 </div>
@@ -1921,4 +1985,3 @@ PRESENTER NOTES:
 - This completes the DQA module - next we'll look at how to adjust for these issues
 -->
 <!-- /SLIDE -->
-

@@ -24,4 +24,3 @@ paginate: true
 - DHIS2 permet la configuration d'un tableau de bord AQD pour toute sélection d'indicateurs dans DHIS2 ; FASTR sélectionne les indicateurs qui seront utilisés dans une analyse spécifique
 - L'AQD de DHIS2 inclut la ponctualité comme mesure de la qualité des données. FASTR n'inclut pas la ponctualité. La ponctualité est une considération importante pour renforcer le rapportage de routine mais elle est moins importante pour faire une analyse avec les données dont nous disposons aujourd'hui
 - L'AQD de DHIS2 inclut la complétude du rapportage (ex. un rapport a-t-il été soumis) et la complétude de l'indicateur (ex. une valeur a-t-elle été enregistrée pour un élément de données individuel) tandis que FASTR se concentre uniquement sur la complétude de l'indicateur
-

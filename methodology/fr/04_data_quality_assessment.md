@@ -1508,15 +1508,18 @@ Le module suit la séquence suivante :
 -->
 
 <!-- SLIDE:m4_0 -->
-## Pipeline analytique FASTR
+## Comment FASTR analyse vos données
 
-L'analyse FASTR suit un processus séquentiel :
+FASTR exécute **4 modules dans l'ordre**. Chacun prépare le terrain pour le suivant :
 
-1. **Évaluer la qualité des données** - Identifier les problèmes d'exhaustivité, de valeurs aberrantes et de cohérence
-2. **Ajuster les problèmes de qualité** - Appliquer des corrections pour améliorer la fiabilité des données
-3. **Analyser les données ajustées** - Générer des estimations sur l'utilisation et la couverture des services
+| | Module | Ce qu'il fait | Pourquoi |
+|---|--------|-------------|----------|
+| 1️⃣ | **Vérifier la qualité** | Repère les erreurs de saisie, les rapports manquants et les incohérences | On ne peut pas analyser des données peu fiables |
+| 2️⃣ | **Corriger les problèmes** | Remplace les valeurs extrêmes et comble les mois manquants | Des données propres pour des résultats fiables |
+| 3️⃣ | **Analyser les services** | Compare les volumes observés à ce qui était attendu pour détecter les perturbations | Savoir où et quand les services ont changé |
+| 4️⃣ | **Estimer la couverture** | Calcule le % de la population couverte à partir des données rapportées | Passer des chiffres bruts aux indicateurs qui guident l'action |
 
-![Pipeline analytique h:280](resources/diagrams_fr/analytical_pipeline.svg)
+Vous allez exécuter ces 4 modules sur la plateforme pendant l'atelier.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
@@ -1531,8 +1534,9 @@ L'analyse FASTR suit un processus séquentiel :
 - Nous pensons que l'utilisation des données et la fourniture de retours d'information constituent la première étape vers l'amélioration des données
 
 Nous aborderons chacun de ces domaines au cours des prochaines sessions.
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_1b -->
 ## Raison d'être de l'évaluation de la qualité des données
 
 **Défi :** Les données de routine des établissements de santé peuvent présenter des limites de qualité :
@@ -1546,9 +1550,9 @@ Nous aborderons chacun de ces domaines au cours des prochaines sessions.
 - Évaluations inexactes des tendances en matière de prestation de services
 - Mauvaise identification des domaines nécessitant une intervention
 - Affectation sous-optimale des ressources
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_1c -->
 ## Évaluer et ajuster la qualité des données
 
 Les évaluations de la qualité identifient les problèmes les plus prioritaires et les ajustements analytiques nécessaires, afin que les problèmes de qualité ne deviennent pas un obstacle à l'analyse et à l'utilisation des données.
@@ -1567,11 +1571,12 @@ L'évaluation de la qualité des données permet un suivi continu pour :
 - Éclairer la sélection des indicateurs sur la base des profils de qualité dans l'ensemble du SIGS
 - Orienter les interventions ciblées sur la qualité des données et la supervision de soutien dans les domaines où la qualité des données est plus faible
 - Évaluer l'efficacité des initiatives d'amélioration de la qualité des données au fil du temps
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_1d -->
 ## Mesures de la qualité des données
 
-![Mesures de la qualité des données](resources/diagrams_fr/measures_data_quality.svg)
+![Mesures de la qualité des données](../resources/diagrams_fr/measures_data_quality.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1584,12 +1589,7 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1a -->
-<style scoped>
-table { font-size: 0.48em; }
-td, th { padding: 10px 12px !important; line-height: 1.4; }
-th { background: #0d7377; color: white; }
-td { vertical-align: top; }
-</style>
+<!-- _class: dense-table -->
 
 ## Mesures de la qualité des données - détaillé
 
@@ -1601,10 +1601,10 @@ td { vertical-align: top; }
 | **Exactitude** | Les données reflètent-elles fidèlement le niveau réel de prestation de services effectué dans l'établissement de santé ? | • Évaluer l'exactitude pour des indicateurs sélectionnés par l'examen des documents sources dans les établissements de santé et la comparaison avec les rapports mensuels et les valeurs du SIGS (facteur de vérification des données) |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1b -->
-## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse EQD effectuée dans DHIS2 ?
+<!-- SLIDE:m4_1e -->
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 
 **Objectif de l'évaluation de la qualité des données**
 
@@ -1616,38 +1616,34 @@ td { vertical-align: top; }
 - **DHIS2 :** l'accent est mis sur l'identification des problèmes de qualité des données et le travail avec les établissements pour améliorer les pratiques de rapportage
 - **FASTR :** l'accent est mis sur l'application de techniques d'ajustement analytique pour tenir compte des problèmes de qualité des données dans l'analyse ; l'objectif est de générer les estimations les plus robustes malgré les défis de qualité des données
 
-**Sélection des indicateurs, mesures et seuils** - FASTR se concentre sur les éléments de l'EQD les plus pertinents pour l'analyse
+**Sélection des indicateurs, mesures et seuils** - FASTR se concentre sur les éléments de l'AQD les plus pertinents pour l'analyse
 
 - L'objectif de l'évaluation de la qualité des données guide la sélection des indicateurs, mesures et seuils
-- DHIS2 permet la configuration d'un tableau de bord EQD pour toute sélection d'indicateurs dans DHIS2 ; FASTR sélectionne les indicateurs qui seront utilisés dans une analyse spécifique
-- L'EQD de DHIS2 inclut la ponctualité comme mesure de la qualité des données. FASTR n'inclut pas la ponctualité. La ponctualité est une considération importante pour renforcer le rapportage de routine mais elle est moins importante pour faire une analyse avec les données dont nous disposons aujourd'hui
-- L'EQD de DHIS2 inclut la complétude du rapportage (ex. un rapport a-t-il été soumis) et la complétude de l'indicateur (ex. une valeur a-t-elle été enregistrée pour un élément de données individuel) tandis que FASTR se concentre uniquement sur la complétude de l'indicateur
-
-</div>
+- DHIS2 permet la configuration d'un tableau de bord AQD pour toute sélection d'indicateurs dans DHIS2 ; FASTR sélectionne les indicateurs qui seront utilisés dans une analyse spécifique
+- L'AQD de DHIS2 inclut la ponctualité comme mesure de la qualité des données. FASTR n'inclut pas la ponctualité. La ponctualité est une considération importante pour renforcer le rapportage de routine mais elle est moins importante pour faire une analyse avec les données dont nous disposons aujourd'hui
+- L'AQD de DHIS2 inclut la complétude du rapportage (ex. un rapport a-t-il été soumis) et la complétude de l'indicateur (ex. une valeur a-t-elle été enregistrée pour un élément de données individuel) tandis que FASTR se concentre uniquement sur la complétude de l'indicateur
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1c -->
-## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse EQD effectuée dans DHIS2 ?
+<!-- SLIDE:m4_1f -->
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## En quoi l'analyse de la qualité des données FASTR diffère-t-elle de l'analyse AQD effectuée dans DHIS2 ?
 
 **Sélection des indicateurs, mesures et seuils (suite)**
 
 L'objectif de l'évaluation de la qualité des données guide la sélection des indicateurs, mesures et seuils.
 
-- L'EQD de DHIS2 évalue quatre mesures de cohérence interne : présence de valeurs aberrantes, cohérence dans le temps, cohérence entre indicateurs connexes, et cohérence entre les données déclarées et les registres originaux (cette métrique nécessite une évaluation sur site / collecte de données). FASTR se concentre sur deux de ces mesures : présence de valeurs aberrantes et cohérence entre indicateurs connexes car celles-ci sont importantes pour l'analyse et peuvent être effectuées de manière routinière et à distance sans visites aux établissements de santé.
+- L'AQD de DHIS2 évalue quatre mesures de cohérence interne : présence de valeurs aberrantes, cohérence dans le temps, cohérence entre indicateurs connexes, et cohérence entre les données déclarées et les registres originaux (cette métrique nécessite une évaluation sur site / collecte de données). FASTR se concentre sur deux de ces mesures : présence de valeurs aberrantes et cohérence entre indicateurs connexes car celles-ci sont importantes pour l'analyse et peuvent être effectuées de manière routinière et à distance sans visites aux établissements de santé.
 
-- FASTR et l'EQD de DHIS2 utilisent différentes méthodes de détection des valeurs aberrantes (EAM vs écarts-types) ; FASTR se concentre sur l'identification des valeurs aberrantes TRÈS importantes qui ont une influence indue sur l'analyse et pour lesquelles des ajustements seront effectués ; l'EQD de DHIS2 se concentre sur l'identification des valeurs aberrantes qui doivent faire l'objet d'un suivi au niveau de l'établissement, sans impact négatif significatif même si quelques valeurs correctes sont signalées comme valeurs aberrantes potentielles, car celles-ci feront l'objet d'une enquête approfondie.
+- FASTR et l'AQD de DHIS2 utilisent différentes méthodes de détection des valeurs aberrantes (EAM vs écarts-types) ; FASTR se concentre sur l'identification des valeurs aberrantes TRÈS importantes qui ont une influence indue sur l'analyse et pour lesquelles des ajustements seront effectués ; l'AQD de DHIS2 se concentre sur l'identification des valeurs aberrantes qui doivent faire l'objet d'un suivi au niveau de l'établissement, sans impact négatif significatif même si quelques valeurs correctes sont signalées comme valeurs aberrantes potentielles, car celles-ci feront l'objet d'une enquête approfondie.
 
-- L'EQD de DHIS2 peut évaluer l'accord avec des sources de données externes telles que les enquêtes périodiques en population et la cohérence des données de population qui servent de dénominateur pour l'analyse de couverture. FASTR n'inclut pas cela dans l'évaluation de la qualité des données mais l'intègre plutôt dans notre analyse de couverture.
-
-</div>
+- L'AQD de DHIS2 peut évaluer l'accord avec des sources de données externes telles que les enquêtes périodiques en population et la cohérence des données de population qui servent de dénominateur pour l'analyse de couverture. FASTR n'inclut pas cela dans l'évaluation de la qualité des données mais l'intègre plutôt dans notre analyse de couverture.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
-## Complétude de l'indicateur
+<!-- _class: compact -->
 
-<div style="font-size: 0.8em;">
+## Complétude de l'indicateur
 
 **Ce qui est mesuré :** La mesure dans laquelle les établissements rapportent des données sur des indicateurs de base sélectionnés
 
@@ -1662,7 +1658,9 @@ L'objectif de l'évaluation de la qualité des données guide la sélection des 
 - Un établissement est censé déclarer s'il a déclaré un volume quelconque pour cet indicateur à tout moment au cours de l'année
 - Les établissements qui ne déclarent pas pendant six mois consécutifs ou plus au début ou à la fin de leur période de déclaration sont classés comme **inactifs** plutôt qu'incomplets. Cela permet de ne pas pénaliser les établissements qui n'ont pas encore commencé à déclarer ou qui ont définitivement cessé leurs activités
 
-</div>
+**Notes :**
+- Un niveau élevé de complétude n'indique pas nécessairement que le SIGS est représentatif de l'ensemble de la prestation de services — certains services peuvent ne pas être fournis dans les établissements, ou certains établissements peuvent ne pas déclarer
+- Pour les pays où DHIS2 ne stocke pas les 0, la complétude des indicateurs peut être sous-estimée s'il y a beaucoup d'établissements à faible volume
 
 <!--
 PRESENTER NOTES:
@@ -1678,9 +1676,9 @@ PRESENTER NOTES:
 <!-- SLIDE:m4_2a -->
 ## Notes sur la complétude
 
-- Un niveau élevé de complétude n'indique pas nécessairement que le SIGS est représentatif de l'ensemble de la prestation de services dans le pays, car certains services peuvent ne pas être fournis dans les établissements, ou certains établissements peuvent ne pas déclarer
+- Un niveau élevé de complétude n'indique pas nécessairement que le SIGS est représentatif de l'ensemble des prestations de services dans le pays, car certains services peuvent ne pas être délivrés dans les établissements, ou certains établissements peuvent ne pas notifier
 
-- Pour les pays où le système DHIS2 ne stocke pas les 0, la complétude des indicateurs peut être sous-estimée s'il y a beaucoup d'établissements à faible volume pour un indicateur donné
+- Pour les pays où le système DHIS2 ne stocke pas les zéros, la complétude des indicateurs peut être sous-estimée s'il existe de nombreux établissements à faible volume pour un indicateur donné
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3 -->
@@ -1701,15 +1699,15 @@ PRESENTER NOTES:
 - Une valeur aberrante est définie comme : Une valeur supérieure à 10 fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%
 - ET pour laquelle : Le volume est supérieur ou égal à la médiane, le volume n'est pas manquant, et le volume est supérieur à 100
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_3b -->
 ## Pourquoi ajuster pour les valeurs aberrantes ?
 
-![Impact des valeurs aberrantes](resources/diagrams_fr/outlier_impact.svg)
+![Impact des valeurs aberrantes](../resources/diagrams_fr/outlier_impact.svg)
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_3c -->
 ## Méthodologie de détection des valeurs aberrantes
 
 Les valeurs aberrantes sont identifiées en évaluant la variation au sein de l'établissement des rapports mensuels pour chaque indicateur.
@@ -1717,6 +1715,8 @@ Les valeurs aberrantes sont identifiées en évaluant la variation au sein de l'
 Une valeur aberrante est définie comme :
 
 Une valeur supérieure à **10 fois l'écart absolu médian (EAM)** par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, **OU** une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est **supérieure à 80 %**
+
+*L'EAM (Mean Absolute Deviation / MAD en anglais) mesure la dispersion d'un jeu de données en calculant la moyenne des écarts absolus par rapport à la médiane. Robuste face aux valeurs aberrantes, il exprime la variabilité dans les unités d'origine.*
 
 **ET** pour laquelle :
 
@@ -1727,25 +1727,47 @@ Une valeur supérieure à **10 fois l'écart absolu médian (EAM)** par rapport 
 <!--
 PRESENTER NOTES:
 - Pour l'analyse FASTR, la période considérée pour identifier les valeurs aberrantes en utilisant l'approche EAM couvre l'ensemble du jeu de données. Cela signifie que si le jeu de données comprend cinq ans de données, la valeur médiane pour chaque indicateur sera calculée sur l'ensemble de la période de cinq ans
-- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes utilise une fenêtre glissante de 12 mois par établissement × indicateur. Chaque valeur mensuelle est comparée à la somme des comptages sur les 12 mois se terminant à cette période. Cela remplace un dénominateur antérieur basé sur l'année civile qui signalait à tort les établissements dont la seule déclaration tombait en début d'année civile
+- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes est appliquée sur une base d'année civile. Cela signifie que toutes les données de l'année 2024 seront utilisées pour évaluer la contribution proportionnelle des volumes de services déclarés en 2024. Si l'analyse est effectuée en milieu d'année, seules les données disponibles jusqu'à ce point seront considérées, ce qui peut conduire à l'utilisation de données d'une année partielle dans l'évaluation
 - Cela restreint l'analyse FASTR aux valeurs aberrantes qui sont des valeurs anormalement élevées par rapport au volume habituel de services déclarés par un établissement
 - Les données manquantes d'un système DHIS2 peuvent être dues à l'absence de déclaration ou à la déclaration de zéro service fourni (les zéros ne sont souvent pas stockés dans DHIS2). Nous ne pouvons pas distinguer entre manquant dû à l'absence de déclaration et manquant dû à la déclaration de zéro service. En tant que tel, les valeurs manquantes sont exclues de l'analyse
 - Nous restreignons la détection des valeurs aberrantes aux volumes de services supérieurs à 100 car cela aide à se concentrer sur des données significatives, stables et opérationnellement importantes. Cela réduit le bruit dû à la volatilité des petits volumes et se concentre sur les valeurs aberrantes plus impactantes (par exemple, les grands volumes sont susceptibles d'avoir des implications plus significatives sur l'analyse)
 -->
+<!-- /SLIDE -->
 
+<!-- SLIDE:m4_3a -->
+## Investiguer une valeur aberrante signalée
+
+Lorsque FASTR signale une valeur comme aberrante, posez ces cinq questions avant de décider quoi faire :
+
+| # | Question | Que rechercher |
+|---|----------|----------------|
+| 1 | **Erreur de saisie ?** | Faute de frappe, zéro en trop, valeur dans le mauvais champ |
+| 2 | **Problème de rapportage ?** | Rapports manquants d'autres établissements modifiant le total |
+| 3 | **Événement réel ?** | Campagne, épidémie, nouvel établissement ouvert |
+| 4 | **Changement de définition ?** | L'indicateur a été redéfini ou l'agrégation a changé |
+| 5 | **Faut-il l'exclure ?** | Est-ce que cela déforme le tableau d'ensemble ? |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_3ab -->
+## Prendre la décision
+
+En fonction de votre investigation :
+
+- **Problème sévère** (erreur de saisie évidente, valeur non plausible) — Exclure de l'analyse
+- **Préoccupation modérée** (plausible mais incertain) — Inclure avec une note explicative
+- **Mineur ou explicable** (campagne, événement réel) — Inclure — cela reflète la réalité
+
+**Essayez :** Trouvez une valeur aberrante signalée dans vos données. Parcourez les 5 questions. Quelle est votre conclusion — exclure, inclure avec réserve, ou inclure ?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
-<style scoped>
-table { font-size: 0.7em; }
-td, th { padding: 4px 8px !important; }
-</style>
+<!-- _class: dense-table -->
 
 ## Cohérence entre les indicateurs connexes
 
 Les indicateurs du programme ayant une relation prévisible sont examinés afin de déterminer si la relation attendue existe entre eux. En d'autres termes, ce processus examine si la relation observée entre les indicateurs, telle qu'elle apparaît dans les données rapportées, est celle qui est attendue.
 
-<div class="columns">
+<div class="columns-image-right">
 <div>
 
 | Paire d'indicateurs | Relation attendue |
@@ -1774,13 +1796,15 @@ PRESENTER NOTES:
 - BCG vs accouchements permet une tolerance de 30% car tous les accouchements n'ont pas lieu dans les établissements
 - Question : Dans votre contexte, les patients cherchent-ils couramment différents services dans différents établissements ?
 -->
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m4_4b -->
+<!-- _class: two-panel -->
 
 ## Pourquoi évaluer la cohérence au niveau du district ?
 
-<div style="display: flex; gap: 1.5em; align-items: flex-start;">
-<div style="flex: 1;">
+<div class="panel-layout">
+<div>
 
 Les patients ont souvent accès à différents services dans différents établissements au sein d'un même district :
 
@@ -1790,9 +1814,9 @@ Les patients ont souvent accès à différents services dans différents établi
 La vérification de la cohérence au niveau de l'établissement ne tiendrait pas compte de ces schémas. L'agrégation au niveau du district permet d'obtenir une image complète de l'utilisation des services dans une zone géographique.
 
 </div>
-<div style="flex: 2;">
+<div>
 
-![Cohérence des districts](resources/diagrams_fr/district_consistency.svg)
+![Cohérence des districts](../resources/diagrams_fr/district_consistency.svg)
 
 </div>
 </div>
@@ -1801,29 +1825,42 @@ La vérification de la cohérence au niveau de l'établissement ne tiendrait pas
 <!-- SLIDE:m4_5 -->
 ## Score résumé de la qualité des données
 
-Une mesure composite de la qualité des données donne une vue d'ensemble de la manière dont un ensemble de données répond aux normes de qualité.
+Les résultats des contrôles de valeurs aberrantes, de complétude et de cohérence sont combinés en un score AQD global pour un ensemble d'indicateurs clés (Penta1, CPN1, OPD).
 
-En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Cela permet aux systèmes de santé d'évaluer rapidement la fiabilité des données, facilitant l'identification des tendances et des problèmes en un coup d'œil.
+**Deux mesures complémentaires :**
 
-**Définition d'une qualité de données adéquate :**
+- **Score AQD global :** Pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
+- **Score AQD moyen :** Moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
 
-- Pas de données d'indicateur manquantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Pas de valeurs aberrantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4
+**Un établissement-mois a une qualité de données adéquate lorsque :**
 
+- Toutes les données des indicateurs clés sont rapportées (complets)
+- Aucune valeur n'est signalée comme aberrante
+- Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_5b -->
+## Guide d'interprétation rapide
+
+| Plage de score | Ce que cela signifie | Que faire |
+|----------------|----------------------|-----------|
+| **Au-dessus de 80 %** | Fiable — utiliser en confiance pour l'analyse | Procéder à l'analyse |
+| **60-80 %** | Utilisable avec prudence — quelques lacunes de qualité | Noter les limites, investiguer les dimensions faibles |
+| **En dessous de 60 %** | Investiguer avant d'utiliser | Identifier quelle dimension (complétude, valeurs aberrantes, cohérence) tire le score vers le bas |
+
+**Essayez :** Vérifiez le score AQD global de votre région. Est-il au-dessus ou en dessous de 80 % ? Si en dessous, examinez les scores par dimension — laquelle nécessite le plus d'attention ?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_6 -->
-## Module EQD : Paramètres de configuration
+## Module AQD : Paramètres de configuration
 
-| Paramètre | Défaut | Description |
-|-----------|--------|-------------|
-| **Seuil de proportion pour la détection des valeurs aberrantes** | 0,8 | Un mois-établissement est aberrant s'il représente plus de cette part du volume de l'établissement pour l'indicateur sur les 12 mois glissants |
-| **Seuil de comptage minimum** | 100 | Comptage minimum déclaré requis pour qu'un mois-établissement soit éligible au signalement comme aberrant |
-| **Nombre d'EAM** | 10 | Une valeur est signalée si elle dépasse ce multiple de l'écart absolu médian par rapport à la médiane mensuelle |
-| **Indicateurs soumis à l'EQD** | `anc1, penta1, opd` | Indicateurs contribuant au score composite EQD |
-| **Paires de cohérence utilisées** | `penta, anc, delivery` | Paires d'indicateurs utilisées pour l'analyse de cohérence (accepte également `malaria`) |
-| **Niveau administratif pour la cohérence** | `admin_area_3` | Niveau géographique auquel les ratios de cohérence sont calculés (admin_area_2 / 3 / 4) |
+| Paramètre | Description |
+|-----------|-------------|
+| **Seuil de proportion pour la détection des valeurs aberrantes** | Ajuste le seuil de contribution proportionnelle pour signaler un mois d'établissement comme aberrant |
+| **Seuil de comptage minimum** | Définit le comptage minimum requis pour qu'un mois d'établissement soit considéré comme une valeur aberrante |
+| **Nombre d'EAM** | Les valeurs aberrantes sont définies comme des observations supérieures à X fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période |
+| **Indicateurs soumis à l'AQD** | Définit quels indicateurs sont inclus pour l'évaluation des valeurs aberrantes et de la complétude pour l'inclusion dans le score de l'AQD |
+| **Paires de cohérence utilisées** | Définit les paires d'indicateurs utilisées pour l'analyse de cohérence et les fourchettes de ratios attendues |
 
 <!--
 PRESENTER NOTES:
@@ -1832,28 +1869,32 @@ PRESENTER NOTES:
 - Le multiplicateur EAM de 10 est conservateur - ne signale que les valeurs aberrantes extrêmes
 - Le comptage minimum de 100 empêche les établissements à faible volume d'être trop signalés
 - Les paires de cohérence peuvent être modifiées en fonction des indicateurs que vous analysez
-- Le niveau administratif pour la cohérence est par défaut le district (admin_area_3) — les niveaux plus larges (2) sont plus stables, les plus fins (4) plus granulaires
 -->
 <!-- /SLIDE -->
 
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     DIAPOSITIVES CONDENSÉES : Méthodes + Interprétation combinées
-     Pour les ateliers nécessitant un aperçu plus court et de haut niveau
-═══════════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE:m4_s0 -->
+## Qualité des données : que vérifie FASTR ?
+
+Avant d'analyser, FASTR vérifie si les données sont fiables — comme un comptable qui vérifie les chiffres avant de préparer un rapport.
+
+**Trois vérifications :**
+
+- **Valeurs extrêmes** — Un établissement rapporte soudainement 10× plus que d'habitude ? C'est probablement une erreur de saisie
+- **Rapports manquants** — Un établissement n'a pas soumis de rapport pendant 3 mois ? Ses données manquent à l'appel
+- **Cohérence logique** — Plus de 4ème visites prénatales que de 1ères visites ? Quelque chose ne va pas
+
+Chaque vérification produit un **score de qualité** qui aide à décider si les données peuvent être utilisées telles quelles ou doivent être ajustées.
+<!-- /SLIDE -->
 
 <!-- SLIDE:m4_s1 -->
 ## Pipeline analytique FASTR
 
-L'analyse FASTR suit un processus séquentiel :
+L'analyse FASTR suit un processus séquentiel, de l'évaluation de la qualité des données jusqu'à l'analyse des données ajustées.
 
-1. **Évaluer la qualité des données** - Identifier les problèmes de complétude, de valeurs aberrantes et de cohérence
-2. **Ajuster les problèmes de qualité** - Appliquer des corrections pour améliorer la fiabilité des données
-3. **Analyser les données ajustées** - Générer des estimations sur l'utilisation et la couverture des services
+![Pipeline analytique h:350](../resources/diagrams_fr/analytical_pipeline.svg)
+<!-- /SLIDE -->
 
-![Pipeline analytique h:280](resources/diagrams_fr/analytical_pipeline.svg)
-
----
-
+<!-- SLIDE:m4_s1b -->
 ## Approche FASTR de la qualité des données
 
 FASTR adopte une approche multidimensionnelle, basée sur la conviction que **la qualité des données ne doit pas être un obstacle à leur utilisation**.
@@ -1864,7 +1905,6 @@ FASTR adopte une approche multidimensionnelle, basée sur la conviction que **la
 - Interpréter les résultats en collaboration avec les décideurs nationaux
 
 **L'utilisation des données et la fourniture de retours d'information sont considérées comme la première étape vers l'amélioration de la qualité des données.**
-
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s2 -->
@@ -1879,9 +1919,9 @@ FASTR adopte une approche multidimensionnelle, basée sur la conviction que **la
 - Évaluation inexacte des tendances de prestation de services
 - Mauvaise identification des zones nécessitant une intervention
 - Allocation sous-optimale des ressources
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s2b -->
 ## Objectifs de l'évaluation de la qualité des données
 
 **Objectif 1 : Permettre l'ajustement analytique**
@@ -1894,6 +1934,8 @@ L'évaluation systématique permet des ajustements ciblés, améliorant l'utilit
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s3 -->
+<!-- _class: compact -->
+
 ## Complétude de l'indicateur
 
 La complétude de l'indicateur mesure si les établissements qui devraient déclarer des données sur des indicateurs spécifiques le font effectivement. Ceci est différent de la complétude globale du rapportage - nous examinons des éléments de données spécifiques, pas seulement si le formulaire mensuel a été soumis.
@@ -1904,7 +1946,7 @@ La complétude de l'indicateur mesure si les établissements qui devraient décl
 
 Une complétude plus élevée et stable améliore la fiabilité des données.
 
-<div style="background: #E8F4F3; border-left: 4px solid #1A8A8A; padding: 0.5em 1em; font-size: 0.75em; margin-top: 0.5em;">
+<div class="highlight">
 
 **Notes sur la complétude :**
 
@@ -1912,18 +1954,19 @@ Une complétude plus élevée et stable améliore la fiabilité des données.
 - Pour les pays où le système DHIS2 ne stocke pas les 0, la complétude des indicateurs peut être sous-estimée s'il y a beaucoup d'établissements à faible volume pour un indicateur donné.
 
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s3c -->
+<!-- _class: output -->
 ## Sortie de la complétude de l'indicateur
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie complétude](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant la complétude par indicateur et région au fil du temps.
 
@@ -1952,6 +1995,8 @@ Les valeurs aberrantes sont des valeurs anormalement **élevées** par rapport a
 
 **Comment les valeurs aberrantes sont identifiées :** Pour chaque établissement et indicateur, nous évaluons la variation au sein de l'établissement des rapports mensuels. Une valeur est signalée si elle s'écarte significativement du schéma typique de l'établissement (en utilisant des seuils statistiques basés sur l'écart absolu médian).
 
+*L'EAM (Mean Absolute Deviation / MAD en anglais) mesure la dispersion d'un jeu de données en calculant la moyenne des écarts absolus par rapport à la médiane. Robuste face aux valeurs aberrantes, il exprime la variabilité dans les unités d'origine.*
+
 <!--
 PRESENTER NOTES:
 - La présence de valeurs aberrantes examine si un point de données dans une série de valeurs est extrême (anormalement élevé ou bas) par rapport aux autres de la série
@@ -1961,23 +2006,24 @@ PRESENTER NOTES:
 - Une valeur aberrante est définie comme : Une valeur supérieure à 10 fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%
 - ET pour laquelle : Le volume est supérieur ou égal à la médiane, le volume n'est pas manquant, et le volume est supérieur à 100
 - Pour l'analyse FASTR, la période considérée pour identifier les valeurs aberrantes en utilisant l'approche EAM couvre l'ensemble du jeu de données. Cela signifie que si le jeu de données comprend cinq ans de données, la valeur médiane pour chaque indicateur sera calculée sur l'ensemble de la période de cinq ans
-- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes utilise une fenêtre glissante de 12 mois par établissement × indicateur. Chaque valeur mensuelle est comparée à la somme des comptages sur les 12 mois se terminant à cette période. Cela remplace un dénominateur antérieur basé sur l'année civile qui signalait à tort les établissements dont la seule déclaration tombait en début d'année civile
+- Pour l'analyse FASTR, l'approche d'allocation proportionnelle pour identifier les valeurs aberrantes est appliquée sur une base d'année civile. Cela signifie que toutes les données de l'année 2024 seront utilisées pour évaluer la contribution proportionnelle des volumes de services déclarés en 2024. Si l'analyse est effectuée en milieu d'année, seules les données disponibles jusqu'à ce point seront considérées
 - Cela restreint l'analyse FASTR aux valeurs aberrantes qui sont des valeurs anormalement élevées par rapport au volume habituel de services déclarés par un établissement
 - Les données manquantes d'un système DHIS2 peuvent être dues à l'absence de déclaration ou à la déclaration de zéro service fourni (les zéros ne sont souvent pas stockés dans DHIS2). Nous ne pouvons pas distinguer entre manquant dû à l'absence de déclaration et manquant dû à la déclaration de zéro service. En tant que tel, les valeurs manquantes sont exclues de l'analyse
 - Nous restreignons la détection des valeurs aberrantes aux volumes de services supérieurs à 100 car cela aide à se concentrer sur des données significatives, stables et opérationnellement importantes
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s3bb -->
+<!-- _class: output -->
 ## Sortie de la détection des valeurs aberrantes
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie valeurs aberrantes](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant la proportion de valeurs signalées comme aberrantes par indicateur et région.
 
@@ -1999,10 +2045,15 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_s4 -->
-## Cohérence interne
+<!-- SLIDE:m4_s3a -->
+## Pourquoi ajuster pour les valeurs aberrantes ?
 
-<div style="font-size: 0.9em;">
+![Pourquoi ajuster pour les valeurs aberrantes](../resources/diagrams_fr/outlier_impact.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_s4 -->
+<!-- _class: compact -->
+## Cohérence interne
 
 La cohérence interne vérifie si les indicateurs connexes maintiennent les relations logiques attendues. FASTR évalue les paires d'indicateurs suivantes pour mesurer la cohérence interne :
 
@@ -2017,20 +2068,19 @@ Nous nous attendons à ce que le nombre de femmes enceintes recevant une premiè
 Le BCG est un vaccin administré à la naissance, nous nous attendons donc à ce que le BCG et les accouchements en établissement soient égaux. Cependant, nous reconnaissons qu'il peut y avoir plus de variabilité dans cette relation prédite, nous définissons donc une fourchette de 30%.
 
 FASTR évalue la cohérence au **niveau du district** plutôt qu'au niveau de l'établissement. C'est parce que les patients cherchent fréquemment des soins dans différents établissements au sein du même district - une femme peut avoir sa visite CPN1 au poste de santé mais se rendre à l'hôpital de district pour CPN4. L'évaluation au niveau du district tient compte de ce mouvement des patients.
+<!-- /SLIDE -->
 
-</div>
-
----
-
+<!-- SLIDE:m4_s4b -->
+<!-- _class: output -->
 ## Sortie de la cohérence interne
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Sortie cohérence](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant le % de districts où les paires d'indicateurs respectent les relations attendues (ex. CPN1 ≥ CPN4).
 
@@ -2040,70 +2090,80 @@ FASTR évalue la cohérence au **niveau du district** plutôt qu'au niveau de l'
 
 </div>
 </div>
-
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s5 -->
+<!-- _class: compact -->
+
 ## Score résumé de la qualité des données
 
-Une mesure composite de la qualité des données donne une vue d'ensemble de la manière dont un ensemble de données répond aux normes de qualité.
+Les résultats des contrôles de valeurs aberrantes, de complétude et de cohérence sont combinés en un score AQD global pour un ensemble d'indicateurs clés (Penta1, CPN1, OPD).
 
-En intégrant plusieurs dimensions de la qualité des données dans un score unique, elle simplifie l'interprétation des informations détaillées provenant de plusieurs mesures. Cela permet aux systèmes de santé d'évaluer rapidement la fiabilité des données, facilitant l'identification des tendances et des problèmes en un coup d'œil.
+**Deux mesures complémentaires :**
 
-**Définition d'une qualité de données adéquate :**
+- **Score AQD global :** Pourcentage d'établissements-mois passant **tous** les contrôles de qualité. Un établissement-mois obtient 100% uniquement si tous les indicateurs clés sont complets, sans valeurs aberrantes et cohérents
+- **Score AQD moyen :** Moyenne du score complétude-valeurs aberrantes et du score de cohérence. Capture les progrès partiels même lorsque tous les contrôles ne sont pas réussis
 
-- Pas de données d'indicateur manquantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Pas de valeurs aberrantes pour OPD, Penta1 et CPN1, lorsque disponibles
-- Rapportage cohérent entre Penta1/Penta3 et CPN1/CPN4
+**Un établissement-mois a une qualité de données adéquate lorsque :**
+
+- Toutes les données des indicateurs clés sont rapportées (complets)
+- Aucune valeur n'est signalée comme aberrante
+- Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)
+
+**Guide rapide :** Au-dessus de 80 % = fiable pour l'analyse. 60-80 % = utilisable avec prudence. En dessous de 60 % = investiguer avant d'utiliser.
+
+**Essayez :** Vérifiez le score AQD de votre région. Est-il au-dessus ou en dessous de 80 % ? Si en dessous, quelle dimension le tire vers le bas ?
 
 <!--
 PRESENTER NOTES:
-- Le score EQD combine toutes les dimensions en un seul score résumé
-- 100% = complet + pas de valeurs aberrantes + cohérent - l'objectif pour des données de qualité
-- Utilisez la heatmap pour identifier les domaines prioritaires pour l'amélioration de la qualité des données
-- Cela complète le module EQD - ensuite nous verrons comment ajuster pour ces problèmes
+- Le score AQD global est strict : tout ou rien. Un seul contrôle échoué = 0%
+- Le score AQD moyen est plus nuancé : montre à quel point les établissements sont proches de répondre à tous les critères
+- Exemple : si le score complétude-valeurs aberrantes est 1.0 mais la cohérence est 0.5, AQD moyen = 0.75 (75%)
+- Utilisez le score global pour identifier les zones problématiques ; utilisez le score moyen pour suivre les améliorations
+- Cela complète le module AQD - ensuite nous verrons comment ajuster pour ces problèmes
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m4_s5b -->
+<!-- _class: output -->
 ## Sortie du score global de qualité des données
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Sortie score EQD](../resources/default_outputs/Default_5._Overall_DQA_score.png)
-
-</div>
-<div style="flex: 1; font-size: 0.85em;">
-
-**Ce que vous voyez :** Heatmap montrant le score EQD global par indicateur et région, codé par couleur du rouge (mauvais) au vert (bon).
-
-**Formule :** % EQD = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (total des valeurs) × 100
-
-**Interprétation :** 100% = passe tous les contrôles. Utilisez ceci pour prioriser les efforts d'amélioration de la qualité des données par région et indicateur.
+![Sortie score AQD](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 </div>
-</div>
+<div class="output-text">
 
----
+**Ce que vous voyez :** Heatmap montrant le pourcentage d'établissements-mois qui passent **tous** les contrôles de qualité, par indicateur et région.
 
-## Sortie du score EQD moyen
+**Score :** Binaire — chaque établissement-mois est soit adéquat (passe tous les contrôles) soit non. Le pourcentage reflète la part qui réussit.
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
-
-![Score EQD moyen](../resources/default_outputs/Default_6._Mean_DQA_score.png)
-
-</div>
-<div style="flex: 1; font-size: 0.85em;">
-
-**Ce que vous voyez :** Heatmap montrant le score EQD moyen des établissements par indicateur et région.
-
-**Formule :** EQD moyen = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (total des valeurs) × 100
-
-**Interprétation :** Montre à quel point les établissements sont proches de répondre à tous les critères de qualité. Un score de 100% signifie que les données passent tous les contrôles EQD.
+**Interprétation :** Une mesure stricte. Des scores bas indiquent que de nombreux établissements-mois échouent à au moins un contrôle. Utilisez ceci pour identifier les régions et indicateurs nécessitant une amélioration.
 
 </div>
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m4_s5c -->
+<!-- _class: output -->
+## Sortie du score AQD moyen
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Score AQD moyen](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Heatmap montrant le score AQD moyen des établissements-mois, par indicateur et région.
+
+**Score :** Moyenne du score complétude-valeurs aberrantes et du score de cohérence. Varie de 0% à 100%.
+
+**Interprétation :** Une mesure plus nuancée que le score global. Capture les progrès partiels — une région peut obtenir 75% même si tous les contrôles ne sont pas réussis. Utilisez ceci pour suivre les améliorations au fil du temps.
+
+</div>
+</div>
+<!-- /SLIDE -->
