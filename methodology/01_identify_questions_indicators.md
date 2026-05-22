@@ -337,5 +337,4 @@ While statistical methods such as imputation can be used to address incomplete d
 
 ---
 
-**Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>

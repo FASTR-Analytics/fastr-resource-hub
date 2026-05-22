@@ -60,5 +60,4 @@ Analytical outputs are translated into policy-relevant insights through structur
 
 ---
 
-**Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>

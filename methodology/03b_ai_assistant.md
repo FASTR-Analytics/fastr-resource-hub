@@ -384,5 +384,4 @@ In August 2023, volumes dropped significantly below expected levels (12% shortfa
 
 ---
 
-**Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>

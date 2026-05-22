@@ -141,6 +141,11 @@ plugins:
             Coverage Estimates: Estimations de couverture
             FASTR Platform User Guide: Guide de l'utilisateur de la plateforme FASTR
             Disclaimer: Avertissement
+  # Auto last-updated date from git history (must be declared AFTER i18n).
+  - git-revision-date-localized:
+      enable_creation_date: false
+      type: date
+      fallback_to_build_date: true
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'

@@ -859,7 +859,6 @@ For the combined adjustment heatmap (output 3):
 
 ---
 
-**Last updated**: 20-05-2026
 **Contact**: <fastr@worldbank.org>
 
 ---

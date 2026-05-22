@@ -300,7 +300,6 @@ A country may only need one project, or multiple projects can be used for:
 
 ---
 
-**Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>
 
 <!-- SLIDE:m3_0 -->

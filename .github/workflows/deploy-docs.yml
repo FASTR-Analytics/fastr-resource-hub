@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history so git-revision-date-localized can read commit dates
 
       - name: Setup Python
         uses: actions/setup-python@v5
