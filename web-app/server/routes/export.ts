@@ -398,11 +398,12 @@ router.post('/:id/pptx', async (req, res) => {
     // Generate PPTX
     const langSuffix = language && language !== 'en' ? `_${language}` : ''
     const pptxPath = path.join(OUTPUT_DIR, `${workshopId}_deck${langSuffix}.pptx`)
-    await generatePPTX(markdown, config, pptxPath)
+    const { warnings } = await generatePPTX(markdown, config, pptxPath)
 
     res.json({
       success: true,
       path: pptxPath,
+      warnings,
     })
   } catch (error: any) {
     console.error('Error building PPTX:', error)

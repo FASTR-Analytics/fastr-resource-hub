@@ -35,8 +35,12 @@ const COLORS = {
 }
 
 const FONTS = {
+  // System-safe only: pptxgenjs cannot embed fonts, so a .pptx renders whatever
+  // is installed on the opener's machine (SharePoint, fresh laptops…). Both ship
+  // with Office on Windows + Mac. Poppins (the brand deck font) is NOT a default
+  // Office font and silently fell back — it stays on the Marp/PDF path only.
   family: 'Calibri',
-  titleFamily: 'Poppins',  // Titles use Poppins Bold
+  titleFamily: 'Calibri Light',  // Office theme's default heading font
   h1Size: 36,
   h2Size: 32,
   h3Size: 22,
@@ -53,6 +57,16 @@ const LAYOUT = {
   marginTop: 0.6,
   contentWidth: 11.833,
   contentLeft: 0.75,
+}
+
+// Warnings collected during a single generatePPTX run (e.g. missing images),
+// reset at the start of each run and returned to the caller so the UI can surface them.
+let buildWarnings: string[] = []
+
+// Every image must carry alt text (accessibility + SharePoint). This wrapper sets a
+// safe default and lets callers override via opts.altText for a meaningful description.
+function addSlideImage(slide: PptxGenJS.Slide, opts: PptxGenJS.ImageProps): void {
+  slide.addImage({ altText: 'FASTR slide graphic', ...opts })
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -390,6 +404,7 @@ function resolveImagePath(imgPath: string): string | null {
   }
 
   console.warn(`[PPTX] Image not found: ${imgPath}`)
+  buildWarnings.push(`Image not found: ${imgPath}`)
   return null
 }
 
@@ -649,7 +664,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   if (bgMatch) {
     const bgPath = resolveImagePath(bgMatch[1].split(/\s/)[0])
     if (bgPath) {
-      slide.addImage({ path: bgPath, x: 0, y: 0, w: LAYOUT.width, h: LAYOUT.height })
+      addSlideImage(slide,{ path: bgPath, x: 0, y: 0, w: LAYOUT.width, h: LAYOUT.height })
       hasBgImage = true
     }
   }
@@ -728,10 +743,10 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       const aspect = dims.width / dims.height
       if (/GFF_Logo/i.test(img.path)) {
         const h = 0.4
-        slide.addImage({ path: imgPath, x: 0.6, y: 0.3, w: h * aspect, h })
+        addSlideImage(slide,{ path: imgPath, x: 0.6, y: 0.3, w: h * aspect, h })
       } else if (/FASTR.*White/i.test(img.path)) {
         const h = 0.5
-        slide.addImage({ path: imgPath, x: 0.6, y: 6.85, w: h * aspect, h })
+        addSlideImage(slide,{ path: imgPath, x: 0.6, y: 6.85, w: h * aspect, h })
       }
     } catch {}
   }
@@ -747,7 +762,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   if (bgMatch) {
     const bgPath = resolveImagePath(bgMatch[1].split(/\s/)[0])
     if (bgPath) {
-      slide.addImage({ path: bgPath, x: 0, y: 0, w: LAYOUT.width, h: LAYOUT.height })
+      addSlideImage(slide,{ path: bgPath, x: 0, y: 0, w: LAYOUT.width, h: LAYOUT.height })
       hasBgImage = true
     }
   }
@@ -783,7 +798,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       const widthMatch = decorativeIcon.alt.match(/w:(\d+)/)
       const iconWidth = widthMatch ? parseInt(widthMatch[1]) / 96 : 1.5  // Convert px to inches
       const iconX = (LAYOUT.width - iconWidth) / 2
-      slide.addImage({ path: iconPath, x: iconX, y: 4.0, w: iconWidth })
+      addSlideImage(slide,{ path: iconPath, x: iconX, y: 4.0, w: iconWidth })
     }
   }
 
@@ -954,6 +969,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         w: LAYOUT.contentWidth,
         h: estimatedTextHeight,
         valign: 'top',
+        fit: 'shrink',
       })
       tableTop = 1.5 + estimatedTextHeight + 0.2
     }
@@ -1002,7 +1018,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         if (imgPath) {
           const imgLayout = getImageLayout(imgPath, availableWidth, availableHeight, LAYOUT.contentLeft, tableEndY)
           if (imgLayout) {
-            slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+            addSlideImage(slide,{ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
           }
         }
       } else {
@@ -1015,7 +1031,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           if (imgPath) {
             const imgLayout = getImageLayout(imgPath, imgWidth, availableHeight, imgX, tableEndY)
             if (imgLayout) {
-              slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+              addSlideImage(slide,{ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
             }
             imgX += imgWidth + 0.3
           }
@@ -1303,6 +1319,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       slide.addText(textItems, {
         x, y: currentY, w, h: 5,
         valign: 'top',
+        fit: 'shrink',
       })
     }
   }
@@ -1315,9 +1332,9 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       if (imgPath) {
         const imgLayout = getImageLayout(imgPath, leftColWidth, 5, LAYOUT.marginLeft, contentTop)
         if (imgLayout) {
-          slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+          addSlideImage(slide,{ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
         } else {
-          slide.addImage({ path: imgPath, x: LAYOUT.marginLeft, y: contentTop, w: leftColWidth })
+          addSlideImage(slide,{ path: imgPath, x: LAYOUT.marginLeft, y: contentTop, w: leftColWidth })
         }
       }
     }
@@ -1333,9 +1350,9 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       if (imgPath) {
         const imgLayout = getImageLayout(imgPath, rightColWidth, 5, rightColStart, contentTop)
         if (imgLayout) {
-          slide.addImage({ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+          addSlideImage(slide,{ path: imgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
         } else {
-          slide.addImage({ path: imgPath, x: rightColStart, y: contentTop, w: rightColWidth })
+          addSlideImage(slide,{ path: imgPath, x: rightColStart, y: contentTop, w: rightColWidth })
         }
       }
     }
@@ -1441,15 +1458,16 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           w: LAYOUT.contentWidth,
           h: 2,
           valign: 'top',
+          fit: 'shrink',
         })
       }
 
       // Wide image below text - calculate proper size
       const wideLayout = getImageLayout(mainImgPath, 11, 3.8, 1.15, 3.5)
       if (wideLayout) {
-        slide.addImage({ path: mainImgPath, x: wideLayout.x, y: wideLayout.y, w: wideLayout.w, h: wideLayout.h })
+        addSlideImage(slide,{ path: mainImgPath, x: wideLayout.x, y: wideLayout.y, w: wideLayout.w, h: wideLayout.h })
       } else {
-        slide.addImage({ path: mainImgPath, x: 1.15, y: 3.5, w: 11 })
+        addSlideImage(slide,{ path: mainImgPath, x: 1.15, y: 3.5, w: 11 })
       }
     } else {
       // Normal/tall image: side by side - text left, image right
@@ -1498,23 +1516,24 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           w: 5.5,
           h: 5.5,
           valign: 'top',
+          fit: 'shrink',
         })
       }
 
       // Image on right - smart sized
       if (imgLayout) {
-        slide.addImage({ path: mainImgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+        addSlideImage(slide,{ path: mainImgPath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
       } else {
-        slide.addImage({ path: mainImgPath, x: 6.3, y: 1.6, w: 6.5 })
+        addSlideImage(slide,{ path: mainImgPath, x: 6.3, y: 1.6, w: 6.5 })
       }
     }
   } else {
     // No text - center the image with smart sizing
     const centerLayout = getImageLayout(mainImgPath, 11, 5.5, 1.15, 1.5)
     if (centerLayout) {
-      slide.addImage({ path: mainImgPath, x: centerLayout.x, y: centerLayout.y, w: centerLayout.w, h: centerLayout.h })
+      addSlideImage(slide,{ path: mainImgPath, x: centerLayout.x, y: centerLayout.y, w: centerLayout.w, h: centerLayout.h })
     } else {
-      slide.addImage({ path: mainImgPath, x: 1.5, y: 1.6, w: 10 })
+      addSlideImage(slide,{ path: mainImgPath, x: 1.5, y: 1.6, w: 10 })
     }
   }
 
@@ -1582,7 +1601,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       }
 
       contentTop = 1.5 + iconSize + 0.3
-      slide.addImage(imgOpts)
+      addSlideImage(slide,imgOpts)
       iconRendered = true
     }
   }
@@ -1673,6 +1692,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       h: textHeight,
       valign: 'top',
       align: textAlign,
+      fit: 'shrink',
     })
   }
 
@@ -1682,17 +1702,17 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       // Vertical layout: image below text, centered, using full width
       const imgLayout = getImageLayout(contentImagePath, 11, 3.5, 1.15, 3.8)
       if (imgLayout) {
-        slide.addImage({ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+        addSlideImage(slide,{ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
       } else {
-        slide.addImage({ path: contentImagePath, x: 1.15, y: 3.8, w: 11 })
+        addSlideImage(slide,{ path: contentImagePath, x: 1.15, y: 3.8, w: 11 })
       }
     } else {
       // Side-by-side layout: image on right
       const imgLayout = getImageLayout(contentImagePath, 6, 5, 6.5, 1.6)
       if (imgLayout) {
-        slide.addImage({ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
+        addSlideImage(slide,{ path: contentImagePath, x: imgLayout.x, y: imgLayout.y, w: imgLayout.w, h: imgLayout.h })
       } else {
-        slide.addImage({ path: contentImagePath, x: 6.5, y: 1.8, w: 6 })
+        addSlideImage(slide,{ path: contentImagePath, x: 6.5, y: 1.8, w: 6 })
       }
     }
   }
@@ -1708,7 +1728,8 @@ export async function generatePPTX(
   markdown: string,
   config: WorkshopConfig,
   outputPath: string
-): Promise<void> {
+): Promise<{ warnings: string[] }> {
+  buildWarnings = []
   const pptx = new PptxGenJS()
 
   // Set presentation properties
@@ -1764,4 +1785,6 @@ export async function generatePPTX(
 
   // Save
   await pptx.writeFile({ fileName: outputPath })
+
+  return { warnings: buildWarnings }
 }
