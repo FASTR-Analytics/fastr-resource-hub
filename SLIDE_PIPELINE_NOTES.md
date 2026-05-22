@@ -36,6 +36,11 @@ To make methodology source a module's slides with a **byte-exact round-trip**:
 
 **Remaining to back-fill:** m0 (6), m3 (3), m4 (15), m5 (3), m6 (26, incl. id collisions like two `m6_s1b_*`), m7 (12, incl. two `m7_2a2_*`), mai (1). Collisions: check the logical order, then assign unique ids (renames the core file + `_meta`).
 
+**Each module has its own EN/FR quirk — it is NOT a mechanical pass:**
+- **m8 (done):** FR `m8_1` was a *sourced-but-drifted* slide — methodology block had less than FR core. The replace-or-append sync fixed it.
+- **m3 (attempted, reverted):** EN round-trips clean, but FR `methodology/03` has **6 orphaned markers** (`m3_2`, `m3_2d`, `m3_4`, `m3_6`, `m3_7`, `m3_8`) — markers whose slides aren't in FR core, so FR extraction emits 6 phantom files. Also `TOPIC_NAMES` had **stale/repurposed ids**: `m3_3`/`m3_5` pointed at `setting_up_structure`/`installing_running_modules` but the current files are `next_steps`/`roadmap_2026`. Before committing m3: fix those two `TOPIC_NAMES` slugs + add `m3_0`, AND decide on the 6 FR orphaned markers (remove them, or add the missing FR slides). EN-vs-FR marker sets differ — check both.
+- **Lesson:** per module, diff the EN marker set vs the FR marker set vs both core folders; resolve orphaned-markers (marker, no file) and unsourced-files (file, no marker) together, then verify a zero round-trip diff in *both* langs.
+
 ## Already fixed / done
 
 - Web-app had the same prefix-collision in topic IDs → fixed in `content.ts` (stem-based IDs).
