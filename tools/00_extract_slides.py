@@ -116,13 +116,14 @@ TOPIC_NAMES = {
     'm2_2h': 'data_downloader_facility_map',
 
     # m3 - FASTR Analytics Platform (from 03_fastr_analytics_platform.md)
+    'm3_0': 'learning_objectives',
     'm3_1': 'overview_of_platform',
     'm3_2': 'accessing_platform',
     'm3_2f': 'analytical_pipeline',
     'm3_2e': 'configuring_platform_intro',
-    'm3_3': 'setting_up_structure',
+    'm3_3': 'next_steps',
     'm3_4': 'importing_dataset',
-    'm3_5': 'installing_running_modules',
+    'm3_5': 'roadmap_2026',
     'm3_6': 'creating_new_project',
     'm3_7': 'creating_visualizations',
     'm3_8': 'creating_reports',

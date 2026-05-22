@@ -179,7 +179,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
 
-![h:180](resources/screenshots/platform/platform_overview_1.png) ![h:180](resources/screenshots/platform/platform_overview_2.png) ![h:180](resources/screenshots/platform/platform_overview_3.png)
+![h:180](../resources/screenshots/platform/platform_overview_1.png) ![h:180](../resources/screenshots/platform/platform_overview_2.png) ![h:180](../resources/screenshots/platform/platform_overview_3.png)
 
 </div>
 <!-- /SLIDE -->
@@ -302,3 +302,44 @@ A country may only need one project, or multiple projects can be used for:
 
 **Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>
+
+<!-- SLIDE:m3_0 -->
+## What you'll learn
+
+In this module, you will learn about:
+
+- What the **FASTR analytics platform** is and what it can do
+- How the platform is organized — **instances**, **projects**, and **user roles**
+- Who does what — the difference between **administrators**, **editors**, and **viewers**
+- How the platform is configured for your country
+
+*After this overview, you'll get hands-on practice in the Getting started activity.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_3 -->
+## Getting started with the platform
+
+Now that you understand how the platform is organized, you'll get hands-on experience in the **Getting started** activity module.
+
+You will:
+
+- **Log in** to your country's FASTR instance
+- **Navigate** the interface — projects, modules, and visualizations
+- **Explore** a sample project to see how data, analyses, and reports fit together
+
+*Your facilitator will guide you through each step.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_5 -->
+## Platform roadmap
+
+![Roadmap 2025-2028 h:450](../resources/diagrams/platform_roadmap_2026.svg)
+
+<!--
+PRESENTER NOTES:
+- The platform is evolving based on real user feedback
+- We're not building in isolation — country teams shape the roadmap
+- Data source expansion means richer analyses without changing workflows
+- The long-term goal: countries can run their own analyses independently
+-->
+<!-- /SLIDE -->

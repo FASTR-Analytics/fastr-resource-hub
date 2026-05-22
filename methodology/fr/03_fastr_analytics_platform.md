@@ -180,9 +180,9 @@ Elle permet aux utilisateurs de télécharger et d'analyser des données provena
 
 La plateforme fournit une interface conviviale pour l'exécution des analyses et offre des options flexibles pour la visualisation et l'exportation des résultats.
 
-<div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+<div class="image-row">
 
-![h:180](resources/screenshots/platform/platform_overview_1.png) ![h:180](resources/screenshots/platform/platform_overview_2.png) ![h:180](resources/screenshots/platform/platform_overview_3.png)
+![h:180](../resources/screenshots/platform/platform_overview_1.png) ![h:180](../resources/screenshots/platform/platform_overview_2.png) ![h:180](../resources/screenshots/platform/platform_overview_3.png)
 
 </div>
 <!-- /SLIDE -->
@@ -190,43 +190,23 @@ La plateforme fournit une interface conviviale pour l'exécution des analyses et
 <!-- SLIDE:m3_1b -->
 ## Capacités de la plateforme
 
-<div class="columns">
-<div>
+La plateforme couvre l'ensemble du processus analytique — de l'importation de vos données à la production d'un rapport final :
 
 ![Capacités de la plateforme](../resources/diagrams_fr/platform_capabilities.svg)
-
-</div>
-<div>
-
-**Gestion des données** — Importer les listes d'établissements et les données d'indicateurs depuis DHIS2 ou fichiers
-
-**Analyse des données** — Exécuter des modules statistiques pour l'évaluation et l'ajustement de la qualité
-
-**Visualisation** — Explorer les résultats avec des graphiques et tableaux interactifs
-
-**Rapports** — Exporter les résultats en PowerPoint ou PDF pour les parties prenantes
-
-**Collaboration** — Travailler ensemble avec votre équipe sur des projets partagés
-
-**Assistant IA** — Obtenir de l'aide pour interpréter les résultats et comprendre vos données
-
-</div>
-</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
 ## Instance pays
 
-Chaque pays possède sa propre **instance** de la plateforme analytique FASTR.
+Chaque pays possède sa propre **instance** de la plateforme analytique FASTR — un déploiement spécifique au pays qui sert de hub centralisé pour l'analyse des données de santé.
 
-Une instance contient :
+Chaque instance :
 
-- Tous les utilisateurs enregistrés et leurs comptes
-- La structure administrative partagée (régions, districts, établissements)
-- Les définitions des indicateurs et les sources de données
-- Tous les projets créés pour ce pays
+- **Intègre les données** du rapportage de routine des établissements (DHIS2) et des enquêtes auprès des ménages (EDS, MICS)
+- **Maintient les configurations spécifiques au pays** — structure géographique (régions, districts, établissements), définitions des indicateurs et règles de qualité des données
+- **Fournit un environnement analytique unifié** où les utilisateurs peuvent explorer les données de routine et d'enquête sans expertise technique
 
-**Pensez à une instance comme à l'espace de travail dédié à votre pays.**
+*Pensez à une instance comme la plateforme intégrée de données de santé de votre pays.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
@@ -270,154 +250,72 @@ Il existe deux niveaux de permissions dans la plateforme :
 </div>
 <div class="text-col">
 
-Chaque instance de pays peut contenir **plusieurs projets**.
+Un projet est un **espace de travail analytique** au sein d'une instance, organisé autour d'un objectif de rapportage spécifique.
 
-Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
+Chaque projet contient des **métriques**, des **visualisations**, des **présentations** et des **modules d'analyse** — tout ce qu'il faut pour passer des données brutes à un rapport finalisé.
 
-- Différentes versions d'analyses
-- Un projet de démonstration ou de test
-- Des projets distincts pour différentes équipes ou différents programmes
-
-**Questions clés lors de la mise en place :**
-
-- Qui est l'administrateur ?
-- Qui peut modifier ?
-- Qui peut consulter ?
+Un pays peut avoir besoin d'un seul projet ou de plusieurs — par exemple, des projets distincts pour les rapports annuels, l'analyse des enquêtes ou différentes équipes.
 
 </div>
 </div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_2d -->
-## Pratique : Connexion à la plateforme
-
-<style scoped>
-table { border: none !important; background: transparent !important; width: 100% !important; }
-table td, table th { border: none !important; background: transparent !important; padding: 8px !important; vertical-align: top !important; width: 50% !important; }
-table img { max-height: 280px !important; width: auto !important; }
-</style>
-
-| | |
-|:---|:---|
-| ![Page de connexion](resources/screenshots/01_login_page.png) | ![Formulaire d'inscription](resources/screenshots/02_sign_up.png) |
-| **1.** Accédez à {{PLATFORM_URL}} | **2.** Cliquez sur S'inscrire et entrez vos coordonnées |
-| **3.** Saisissez vos informations (vérifiez l'email) | **4.** Après vous être connecté, vous serez ajouté à un projet |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_2 -->
-## Démonstration en direct : Accès à la plateforme et rôles
-
-![demo h:40](../resources/icons/demo.svg) **Dans cette démo, nous allons :**
-
-- Naviguer vers la plateforme FASTR
-- Explorer les rôles des utilisateurs : Administrateur, Éditeur, Visualisateur
-- Examiner la gestion des utilisateurs et les permissions
-- Comprendre le flux de travail pour télécharger des données et prendre des décisions analytiques
-
-*Le facilitateur fera une démonstration sur la plateforme en direct*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2e -->
 ## Configuration de la plateforme d'analyse
 
-- La configuration de la plateforme d'analyse est une fonctionnalité d'administration
+La configuration est effectuée par un **administrateur d'instance** — tous les utilisateurs n'ont pas besoin de faire cette étape.
 
-- Nous travaillerons ensemble pour configurer les éléments suivants :
-  - Zones administratives (régions, districts)
-  - Structure des établissements
-  - Définitions des indicateurs
+Pendant l'atelier, un participant sera désigné avec les droits d'administrateur pour parcourir les étapes de configuration avec l'équipe de facilitation.
 
-- Notez que comme il s'agit d'une fonctionnalité d'administration, tous les participants ne feront PAS cette étape. Vous sélectionnerez une personne pour avoir les droits d'administrateur, et elle nous aidera à parcourir ces étapes.
+La configuration comprend :
+
+- **Zones administratives** — les niveaux géographiques de votre système de santé (régions, districts)
+- **Structure des établissements** — la liste des établissements de santé et leur organisation
+- **Définitions des indicateurs** — les métriques de santé que vous souhaitez suivre (par ex., visites CPN, vaccinations)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_3 -->
-## Activité : Configuration des zones administratives
+## Prise en main de la plateforme
 
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons configurer :**
+Maintenant que vous comprenez comment la plateforme est organisée, vous allez pratiquer dans l'activité **Prise en main**.
 
-- Les zones administratives (régions, districts)
-- La structure des établissements
-- Les définitions des indicateurs
+Vous allez :
 
-*Les participants travailleront directement dans la plateforme*
-<!-- /SLIDE -->
+- **Vous connecter** à l'instance FASTR de votre pays
+- **Naviguer** dans l'interface — projets, modules, et visualisations
+- **Explorer** un exemple de projet pour voir comment les données, analyses et rapports s'articulent
 
-<!-- SLIDE:m3_4 -->
-## Activité : Importer des données
-
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
-
-- Passer en revue les exigences en matière de format de données
-- Parcourir le processus d'importation
-- Gérer la validation et le contrôle des erreurs
-
-*Les participants importeront les données de leur pays*
+*Votre facilitateur vous guidera à chaque étape.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_5 -->
-## Activité : Installation et exécution des modules
+## Feuille de route de la plateforme
 
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
+![Feuille de route 2025-2028 h:450](../resources/diagrams_fr/platform_roadmap_2026.svg)
 
-- Passer en revue les modules d'analyse disponibles
-- Installer les modules requis
-- Exécuter les premières analyses
-
-*Les participants configureront et exécuteront les modules sur leurs données*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_6 -->
-## Activité : Création d'un projet
-
-![pratique h:40](../resources/icons/hands_on.svg) **Dans cette session pratique, nous allons :**
-
-- Créer un nouveau projet
-- Configurer les paramètres du projet
-- Sélectionner les indicateurs et les périodes
-- Appliquer les meilleures pratiques pour l'organisation du projet
-
-*Les participants créeront leur premier projet*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_7 -->
-## Activité : Création de visualisations
-
-![pratique h:40](../resources/icons/hands_on.svg) **Je fais, nous faisons, vous faites**
-
-**Je fais :** Le facilitateur démontre la création d'un graphique de séries temporelles pour CPN1
-
-**Nous faisons :** Ensemble, nous créons une deuxième visualisation (diagramme à barres comparant les régions)
-
-**Vous faites :** Créez une visualisation de votre choix et exportez-la pour votre rapport
-
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_8 -->
-## Activité : Création de rapports
-
-![pratique h:40](../resources/icons/hands_on.svg) **Je fais, nous faisons, vous faites**
-
-**Je fais :** Le facilitateur démontre la création d'un rapport à l'aide du modèle
-
-**Nous faisons :** Ensemble, nous utilisons l'assistant IA pour générer du texte de rapport à partir de nos visualisations
-
-**Vous faites :** Complétez votre projet de rapport avec votre propre contenu et exportez-le
-
----
-
-## Utilisation de l'assistant IA
-
-**Pour interpréter une visualisation :**
-> *« Décrivez ce que montre ce graphique et rédigez 2-3 phrases résumant les principales conclusions pour un rapport trimestriel du ministère de la Santé. »*
-
-**Pour analyser les variations infranationales :**
-> *« Comparez les régions présentées dans ce graphique. Quelles provinces ont de bonnes performances et lesquelles nécessitent une attention particulière ? Suggérez des raisons possibles pour ces différences. »*
-
-L'IA analysera votre graphique et générera du texte que vous pourrez modifier pour votre rapport.
-
+<!--
+PRESENTER NOTES:
+- La plateforme évolue en fonction des retours réels des utilisateurs
+- Nous ne construisons pas en isolation — les équipes pays façonnent la feuille de route
+- L'élargissement des sources de données signifie des analyses plus riches sans changer les flux de travail
+- L'objectif à long terme : les pays peuvent mener leurs propres analyses de manière autonome
+-->
 <!-- /SLIDE -->
 
 ---
 
 **Dernière mise à jour** : 06-05-2026
 **Contact** : <fastr@worldbank.org>
+
+<!-- SLIDE:m3_0 -->
+## Ce que vous allez apprendre
+
+Dans ce module, vous allez apprendre :
+
+- Ce qu'est la **plateforme analytique FASTR** et ce qu'elle peut faire
+- Comment la plateforme est organisée — **instances**, **projets**, et **rôles utilisateurs**
+- Qui fait quoi — la différence entre **administrateurs**, **éditeurs**, et **visualisateurs**
+- Comment la plateforme est configurée pour votre pays
+
+*Après cette vue d'ensemble, vous pratiquerez dans l'activité Prise en main.*
+<!-- /SLIDE -->
