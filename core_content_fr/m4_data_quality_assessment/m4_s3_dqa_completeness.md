@@ -11,7 +11,7 @@ paginate: true
 La complétude de l'indicateur mesure si les établissements qui devraient déclarer des données sur des indicateurs spécifiques le font effectivement. Ceci est différent de la complétude globale du rapportage - nous examinons des éléments de données spécifiques, pas seulement si le formulaire mensuel a été soumis.
 
 **Définition :** Pourcentage d'établissements déclarants chaque mois par rapport aux établissements censés déclarer.
-- Un établissement est "déclarant" s'il y a une valeur non manquante et non nulle pour l'indicateur ce mois-là
+- Un établissement est "déclarant" s'il y a une valeur non manquante pour l'indicateur ce mois-là
 - Un établissement est "censé déclarer" s'il a déclaré un volume quelconque pour cet indicateur au cours de l'année écoulée
 
 Une complétude plus élevée et stable améliore la fiabilité des données.

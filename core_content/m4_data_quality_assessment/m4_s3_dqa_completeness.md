@@ -9,7 +9,7 @@ paginate: true
 Indicator completeness measures whether facilities that should be reporting data on specific indicators are actually doing so. This is different from overall reporting completeness - we're looking at specific data elements, not just whether the monthly form was submitted.
 
 **Definition:** Percentage of facilities reporting each month out of facilities expected to report.
-- A facility is "reporting" if there is a non-missing, non-zero value for the indicator that month
+- A facility is "reporting" if there is a non-missing value for the indicator that month
 - A facility is "expected to report" if it has reported any volume for that indicator within the past year
 
 Higher and stable completeness improves data reliability.
