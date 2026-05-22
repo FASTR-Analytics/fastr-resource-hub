@@ -181,19 +181,17 @@ La plate-forme d'analyse FASTR comprend cinq modules automatisés :
 <!-- SLIDE:m0_0 -->
 ## Qu'essayons-nous d'accomplir ?
 
-L'analyse à cycle rapide accélère l'amélioration des résultats en matière de SRMNIA-N en renforçant l'utilisation systématique des données pour la prise de décision
+L'analyse à cycle rapide accélère l'amélioration des résultats en matière de **SRMNIA-N** (Santé Reproductive, Maternelle, Néonatale, Infantile et de l'Adolescent et Nutrition) en renforçant l'utilisation systématique des données pour la prise de décision
 
-![w:700](resources/diagrams/rapid_cycle_analytics.png)
-
+![w:700](../resources/diagrams_fr/rapid_cycle_analytics.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_1 -->
 ## Comment y parvenir ?
 
-Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systèmes de SSP, soutenues par le renforcement des capacités et l'appui à l'utilisation des données, en adéquation avec la demande et les besoins des pays
+Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systèmes de **SSP** (Soins de Santé Primaires), soutenues par le renforcement des capacités et l'appui à l'utilisation des données, en adéquation avec la demande et les besoins des pays
 
-![w:800](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
-
+![w:800](../resources/diagrams_fr/Technical-Rapid-cycle-analytics--V3.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
@@ -201,7 +199,7 @@ Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systè
 
 Une approche visant à catalyser des cycles continus « analyser, apprendre, renforcer, agir » pour favoriser l'utilisation systématique de données actualisées pour la prise de décision.
 
-![w:700](resources/diagrams/what_is_fastr.png)
+![w:700](../resources/diagrams_fr/what_is_fastr.png)
 
 <!--
 PRESENTER NOTES:
@@ -220,7 +218,7 @@ PRESENTER NOTES:
 <div class="columns-image-right">
 <div>
 
-Analyses trimestrielles des données DHIS2, axées sur les indicateurs nationaux prioritaires
+Analyses trimestrielles des données **DHIS2** (District Health Information Software 2), axées sur les indicateurs nationaux prioritaires
 
 Développement d'outils durables pour garantir que les parties prenantes qui ont besoin d'utiliser les données puissent générer les analyses et visualisations appropriées, au bon moment, sur leurs indicateurs d'intérêt
 
@@ -229,7 +227,7 @@ Combinaison de l'analyse et de la visualisation avec le renforcement des capacit
 </div>
 <div>
 
-![Étapes de mise en œuvre du suivi de l'utilisation des services SRMNIA-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Processus de suivi de l'utilisation des services SRMNIA-N h:350](../resources/diagrams_fr/steps_to_implement_rmncahn_service_chart.png)
 
 </div>
 </div>
@@ -239,3 +237,176 @@ Combinaison de l'analyse et de la visualisation avec le renforcement des capacit
 
 **Dernière mise à jour** : 06-05-2026
 **Contact** : <fastr@worldbank.org>
+
+<!-- SLIDE:m0_3a -->
+## Comment les pays utilisent-ils FASTR ?
+
+FASTR est conçu pour répondre à des **questions de politique définies par les pays** à partir de données de routine et d'enquêtes.
+
+**Différents points d'entrée selon les pays :**
+
+- **Suivi des perturbations de services :** La Sierra Leone, le Burkina Faso, la Zambie et le Libéria ont commencé par le suivi de la continuité des services, déclenché par des changements dans le financement extérieur du secteur de la santé
+- **Autres priorités d'abord :** Le Nigéria, le Ghana et la RDC ont initié FASTR pour d'autres questions, avec l'analyse des perturbations comme complément
+
+**Tous les pays peuvent utiliser FASTR pour répondre à des questions pertinentes pour les politiques, notamment :**
+
+- Le suivi de la continuité et de la reprise des services
+- L'identification des défis géographiques ou spécifiques à certains services
+- L'appui à la priorisation, la planification et le dialogue politique
+
+<!--
+PRESENTER NOTES:
+- FASTR est flexible — les pays définissent leurs propres questions prioritaires
+- Les perturbations de services ne sont qu'un point d'entrée, pas le seul cas d'utilisation
+- Certains pays commencent par les perturbations, d'autres l'ajoutent plus tard
+- La méthodologie (AQD, ajustement, analyse) s'applique à tous les cas d'utilisation
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_3b -->
+## De l'analyse à l'action
+
+Les résultats de FASTR — qu'il s'agisse de scores AQD, de tendances d'utilisation des services ou d'estimations de couverture — sont des **points de départ, pas des conclusions**. Ils déclenchent l'investigation et éclairent les décisions.
+
+![w:850](../resources/diagrams_fr/from_analysis_to_action.svg)
+
+<!--
+PRESENTER NOTES:
+- Ce cycle s'applique à TOUS les résultats de FASTR, pas seulement aux perturbations
+- Résultats AQD → investiguer les systèmes de données → améliorer le rapportage
+- Changements d'utilisation → investiguer la prestation de services → lever les obstacles
+- Écarts de couverture → investiguer les barrières d'accès → cibler les interventions
+- FASTR fournit les preuves ; les parties prenantes apportent le contexte, le jugement et l'action
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_4 -->
+<!-- _class: compact two-panel -->
+
+## Analytique FASTR : suite de produits et résultats
+
+<div class="panel-layout">
+<div>
+
+### SNIS (Données de routine des services)
+
+**Rapport SNIS FASTR standard**
+- Tendances principales d'utilisation des services
+- Ajustements de la qualité des données (complétude, valeurs aberrantes)
+- Analyses nationales et infranationales
+
+**Notes brèves sur les perturbations de services**
+- Analyse ciblée des changements de volume de services
+- Conçues pour une interprétation et une discussion rapides
+
+**Rapports SNIS spécifiques aux pays**
+- Indicateurs, géographies et priorités adaptés
+- Visuels et narratifs personnalisés alignés sur les besoins du pays
+
+</div>
+<div>
+
+### EES (Évaluation des établissements de santé)
+
+**Rapport complet d'enquête EES**
+- Disponibilité des établissements, disponibilité des services et intrants
+- Résultats standardisés entre les cycles d'enquête
+
+**Résultats axés sur les perturbations** (le cas échéant)
+- Vues ciblées sur les interruptions de services ou les facteurs de stress du système
+- Peuvent être produits comme résultats autonomes ou annexes
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- FASTR produit différents produits pour différents besoins
+- Les résultats SNIS sont routiniers/trimestriels, les résultats EES liés aux cycles d'enquête
+- Les pays peuvent combiner selon leurs priorités
+- Tous les résultats suivent une méthodologie et une image de marque cohérentes
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5 -->
+## Triangulation des données : combiner plusieurs sources
+
+Chaque source répond à des questions différentes — ensemble, elles racontent l'histoire complète.
+
+![Couches de triangulation des données h:420](../resources/diagrams_fr/data_triangulation_layers.svg)
+
+<!--
+PRESENTER NOTES:
+- Le DHIS2 est le fondement : disponible trimestriellement, couvre tous les établissements
+- Les estimations de couverture ajoutent la perspective populationnelle
+- Les EES et enquêtes ménages ajoutent de la profondeur quand elles sont disponibles
+- Tous les pays ne disposent pas de toutes les sources — FASTR fonctionne avec ce qui est disponible
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5a -->
+## Pourquoi FASTR ?
+
+De nombreux pays font face à des défis communs avec les données de santé :
+
+- **Données collectées mais sous-utilisées** — Les données de routine restent dans DHIS2 sans orienter les décisions
+- **Cycles analytiques lents** — Les revues annuelles ratent les opportunités d'action rapide
+- **Sources de données fragmentées** — SNIS, enquêtes et évaluations analysés en silos
+
+**FASTR répond à ces défis** en fournissant aux pays des outils et méthodes pour une analyse rapide et régulière de sources multiples — transformant les données en décisions pour des systèmes de SSP plus solides.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5b -->
+## Contexte
+
+De nombreux pays connaissent des **réductions soudaines et spectaculaires du financement** provenant de sources externes.
+
+Cela aboutit à :
+- Des **trous critiques** dans les programmes et les systèmes de santé
+- Des **effets potentiellement graves** sur la prestation de services et les résultats sanitaires pour les femmes, les enfants et les adolescents
+
+**Questions clés qui se posent :**
+- Quelle est l'ampleur des réductions, et quel effet ont-elles sur la prestation des services ?
+- Quelle est la meilleure façon de hiérarchiser les ressources restantes ?
+- Quelles adaptations peuvent protéger et renforcer la prestation de services essentiels ?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_6 -->
+## Pourquoi maintenant ? Répondre aux perturbations du financement
+
+![Perturbations et questions clés h:450](../resources/diagrams_fr/disruptions_questions.svg)
+
+<!--
+PRESENTER NOTES:
+- Ce contexte s'applique à de nombreux pays actuellement — ce n'est pas hypothétique
+- FASTR ne crée pas de nouvelle collecte de données — il maximise l'utilisation des données DHIS2 existantes
+- L'objectif est de passer de la réaction à la proactivité : voir les perturbations tôt, répondre rapidement
+- Les pays peuvent utiliser les analyses FASTR pour plaider en faveur des ressources et éclairer la planification
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_7 -->
+## Communauté de pratique FASTR
+
+Rejoignez l'espace de collaboration FASTR sur le **Portail de connaissances du GFF** :
+
+**https://gffklportal.org/collaboration/forum/fastr**
+
+**Ce que vous y trouverez :**
+- Mises à jour par pays et analyses partagées
+- Forums de discussion techniques et bonnes pratiques
+- Matériel de formation et ressources
+
+**Pourquoi participer ?**
+- Apprendre des expériences d'autres pays
+- Partager vos analyses et leçons apprises
+- Bénéficier du soutien de l'équipe FASTR et du réseau de pairs
+
+<!--
+PRESENTER NOTES:
+- La communauté de pratique est sur le Portail de connaissances du GFF — une plateforme sécurisée et partagée
+- La participation est volontaire mais encouragée
+- Les pays qui partagent activement ont tendance à apprendre plus vite et à recevoir plus de soutien
+- L'équipe FASTR surveille le forum et répond aux questions techniques
+-->
+<!-- /SLIDE -->

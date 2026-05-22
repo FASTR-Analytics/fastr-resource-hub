@@ -190,8 +190,7 @@ The FASTR analytics platform includes five automated modules:
 
 Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasing the systematic use of data for decision making
 
-![w:700](resources/diagrams/rapid_cycle_analytics.png)
-
+![w:700](../resources/diagrams/rapid_cycle_analytics.png)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_1 -->
@@ -199,8 +198,7 @@ Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasin
 
 Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
 
-![w:800](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
-
+![w:800](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
@@ -208,7 +206,7 @@ Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned
 
 An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
 
-![w:700](resources/diagrams/what_is_fastr.png)
+![w:700](../resources/diagrams/what_is_fastr.png)
 
 <!--
 PRESENTER NOTES:
@@ -236,7 +234,7 @@ Combining analysis and visualization with capacity strengthening and data use su
 </div>
 <div>
 
-![Steps to implement RMNCAH-N service use monitoring](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Steps to implement RMNCAH-N service use monitoring](../resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
 
 </div>
 </div>
@@ -272,7 +270,7 @@ PRESENTER NOTES:
 
 FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are **starting points, not endpoints**. They trigger investigation and inform decisions.
 
-![w:600](resources/diagrams/from_analysis_to_action.svg)
+![w:600](../resources/diagrams/from_analysis_to_action.svg)
 
 <!--
 PRESENTER NOTES:
@@ -288,3 +286,134 @@ PRESENTER NOTES:
 
 **Last updated**: 06-05-2026
 **Contact**: <fastr@worldbank.org>
+
+<!-- SLIDE:m0_4 -->
+<!-- _class: compact two-panel -->
+
+## FASTR analytics: suite of outputs and products
+
+<div class="panel-layout">
+<div>
+
+### HMIS (Routine service data)
+
+**Standard FASTR HMIS report**
+- Core service-use trends
+- Data quality adjustments (completeness, outliers)
+- National and subnational analyses
+
+**Short service disruptions briefs**
+- Focused analysis of service volume changes
+- Designed for rapid interpretation and discussion
+
+**Country-specific HMIS reports**
+- Tailored indicators, geographies, and priorities
+- Customized visuals and narratives aligned with country needs
+
+</div>
+<div>
+
+### HFA (Health Facility Assessment)
+
+**Full HFA survey report**
+- Facility readiness, service availability, and inputs
+- Standardized outputs across survey rounds
+
+**Disruptions-focused outputs** (when applicable)
+- Targeted views on service interruptions or system stressors
+- Can be produced as stand-alone outputs or annexes
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- FASTR produces different products for different needs
+- HMIS outputs are routine/quarterly, HFA outputs tied to survey cycles
+- Countries can mix and match based on their priorities
+- All outputs follow consistent methodology and branding
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5 -->
+## Data triangulation: bringing together multiple sources
+
+Each source answers different questions — together they tell the full story.
+
+![Data triangulation layers h:420](../resources/diagrams/data_triangulation_layers.svg)
+
+<!--
+PRESENTER NOTES:
+- DHIS2 is the foundation: available quarterly, covers all facilities
+- Coverage estimates add the population perspective
+- HFA and household surveys add depth when available
+- Not every country has all sources — FASTR works with what's available
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5a -->
+## Why FASTR?
+
+Many countries face common challenges with health data:
+
+- **Data collected but underused** — Routine data sits in DHIS2 without driving decisions
+- **Slow analytical cycles** — Annual reviews miss opportunities for timely action
+- **Fragmented data sources** — HMIS, surveys, and facility assessments analyzed in silos
+
+**FASTR addresses this** by providing countries with tools and methods for rapid, routine analysis of multiple data sources — turning data into timely decisions for stronger PHC systems.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5b -->
+## Context
+
+Many countries are experiencing **sudden and dramatic reductions in funding** from external sources.
+
+This is leading to:
+- **Critical gaps** in health programs and systems
+- **Potentially severe effects** on service delivery and health outcomes for women, children, and adolescents
+
+**Key questions arising:**
+- How large are the reductions, and what effect are they having on service delivery?
+- How best to prioritize remaining resources?
+- What adaptations can protect and strengthen essential service delivery?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_6 -->
+## Why now? Responding to disruptions in health financing
+
+![Disruptions and key questions h:450](../resources/diagrams/disruptions_questions.svg)
+
+<!--
+PRESENTER NOTES:
+- This context applies to many countries right now — it's not hypothetical
+- FASTR doesn't create new data collection — it maximizes use of existing DHIS2 data
+- The goal is to move from reactive to proactive: see disruptions early, respond quickly
+- Countries can use FASTR analyses to advocate for resources and inform planning
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_7 -->
+## FASTR community of practice
+
+Join the FASTR collaboration space on the **GFF Knowledge Portal**:
+
+**https://gffklportal.org/collaboration/forum/fastr**
+
+**What you'll find:**
+- Country updates and shared analyses
+- Discussion forums for technical questions and best practices
+- Training materials and resources
+
+**Why participate?**
+- Learn from other countries' experiences
+- Share your own analyses and lessons learned
+- Get support from the FASTR team and peer network
+
+<!--
+PRESENTER NOTES:
+- The CoP is on the GFF Knowledge Portal — a secure, shared platform
+- Participation is voluntary but encouraged
+- Countries that actively share tend to learn faster and get more support
+- The FASTR team monitors the forum and responds to technical questions
+-->
+<!-- /SLIDE -->

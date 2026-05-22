@@ -82,6 +82,12 @@ TOPIC_NAMES = {
     'm0_3': 'fastr_approach_rmncahn',
     'm0_3a': 'how_countries_use_fastr',
     'm0_3b': 'from_analysis_to_action',
+    'm0_4': 'fastr_outputs',
+    'm0_5': 'data_triangulation',
+    'm0_5a': 'why_fastr',
+    'm0_5b': 'disruptions_text',
+    'm0_6': 'disruptions_context',
+    'm0_7': 'community_of_practice',
 
     # m1 - Identify Questions & Indicators (from 01_identify_questions_indicators.md)
     'm1_1': 'what_is_data_use_case',
@@ -160,12 +166,15 @@ TOPIC_NAMES = {
 
     # m5 - Data Quality Adjustment (from 05_data_quality_adjustment.md)
     'm5_1': 'approach_to_dq_adjustment',
+    'm5_1b': 'approach_to_dq_adjustment',
     'm5_2': 'adjustment_for_outliers',
     'm5_3': 'adjustment_for_completeness',
     # Condensed DQ Adjustment slides (methods + interpretation)
+    'm5_s0': 'adjustment_how_it_works',
     'm5_s1': 'dq_adjustment_overview',
     'm5_s1a': 'why_adjust_for_outliers',
     'm5_s2': 'dq_adjustment_interpretation',
+    'm5_s2b': 'dq_adjustment_interpretation',
 
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization_analysis',

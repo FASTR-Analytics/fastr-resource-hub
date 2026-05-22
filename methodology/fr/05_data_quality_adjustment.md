@@ -894,26 +894,8 @@ FASTR répond à ces limitations en remplaçant les valeurs problématiques par 
 **Scénarios d'ajustement :** Pour favoriser la transparence et l'analyse de sensibilité, FASTR produit quatre ensembles de données parallèles :
 - **Non ajusté :** Valeurs déclarées originales
 - **Valeurs aberrantes ajustées :** Valeurs extrêmes remplacées
-- **Exhaustivité ajustée :** Valeurs manquantes imputées
+- **Complétude ajustée :** Valeurs manquantes imputées
 - **Les deux ajustés :** Toutes les corrections appliquées
-
----
-
-## Indicateurs exclus de l'ajustement
-
-Certains indicateurs sont exclus du processus d'ajustement :
-
-- **Indicateurs de mortalité et de mortinaissance** (décès maternels, décès néonatals, décès d'enfants de moins de 5 ans, mortinaissances, etc. — tout indicateur dont le nom contient `death` ou `still_birth`) : Ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
-- **Indicateurs de faible volume** : Les indicateurs qui n'atteignent jamais 100 événements déclarés au cours d'un mois donné sont exclus de l'ajustement
-
-<!--
-PRESENTER NOTES:
-- Ce module traite les problèmes identifiés dans l'évaluation de la qualité des données
-- Concept clé : nous remplaçons les valeurs problématiques par des estimations basées sur l'historique propre de l'établissement
-- Quatre ensembles de données parallèles permettent l'analyse de sensibilité - dans quelle mesure les résultats changent-ils ?
-- La mortalité est exclue car le lissage d'événements rares et discrets n'est pas approprié
-- Les faibles volumes sont exclus car l'ajustement ajoute du bruit à des données déjà éparses
--->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_2 -->
@@ -931,7 +913,7 @@ Les valeurs aberrantes sont remplacées par des données historiques spécifique
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
-## Méthodologie de l'ajustement d'exhaustivité
+## Méthodologie de l'ajustement de la complétude
 
 Pour les mois identifiés comme incomplets ou manquants, les valeurs sont imputées en utilisant la même approche de moyenne mobile sur 6 mois que celle appliquée à l'ajustement des valeurs aberrantes.
 
@@ -957,7 +939,7 @@ Cette approche permet d'éviter que des lacunes temporaires dans les rapports ne
 
 **Comment ?** Les valeurs aberrantes et les valeurs manquantes sont remplacées à l'aide de moyennes mobiles sur 6 mois calculées à partir des données historiques de l'établissement.
 
-**Quatre ensembles de données parallèles :** FASTR produit des versions non ajustées, ajustées pour les valeurs aberrantes uniquement, ajustées pour l'exhaustivité uniquement et ajustées pour les deux. Cela permet une analyse de sensibilité - comparer les résultats entre les scénarios pour évaluer dans quelle mesure les conclusions dépendent des choix d'ajustement.
+**Quatre ensembles de données parallèles :** FASTR produit des versions non ajustées, ajustées pour les valeurs aberrantes uniquement, ajustées pour la complétude uniquement et ajustées pour les deux. Cela permet une analyse de sensibilité - comparer les résultats entre les scénarios pour évaluer dans quelle mesure les conclusions dépendent des choix d'ajustement.
 
 **Exclus de l'ajustement :** Les indicateurs de mortalité (événements discrets qui ne doivent pas être lissés) et les indicateurs de faible volume (<100 événements/mois, où l'ajustement ajoute du bruit).
 
@@ -971,15 +953,16 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_s2 -->
+<!-- _class: output -->
 ## Résultat de l'ajustement des valeurs aberrantes
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
 ![Ajustement des valeurs aberrantes](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant dans quelle mesure le volume de services a changé après le remplacement des valeurs aberrantes par des moyennes mobiles.
 
@@ -989,35 +972,89 @@ PRESENTER NOTES:
 
 </div>
 </div>
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m5_1b -->
+## Indicateurs exclus de l'ajustement
 
-## Résultat de l'ajustement de l'exhaustivité
+Certains indicateurs sont exclus du processus d'ajustement :
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1.2;">
+- **Indicateurs de mortalité** (décès maternels, décès néonatals, décès d'enfants de moins de 5 ans) : Ils représentent des événements discrets pour lesquels le lissage ou l'imputation ne sont pas appropriés
+- **Indicateurs de faible volume** : Les indicateurs qui ne dépassent jamais 100 événements déclarés au cours d'un mois donné sont exclus de l'ajustement
 
-![Ajustement de l'exhaustivité](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+<!--
+PRESENTER NOTES:
+- Ce module traite les problèmes identifiés dans l'évaluation de la qualité des données
+- Concept clé : nous remplaçons les valeurs problématiques par des estimations basées sur l'historique propre de l'établissement
+- Quatre ensembles de données parallèles permettent l'analyse de sensibilité - dans quelle mesure les résultats changent-ils ?
+- La mortalité est exclue car le lissage d'événements rares et discrets n'est pas approprié
+- Les faibles volumes sont exclus car l'ajustement ajoute du bruit à des données déjà éparses
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_s0 -->
+## Correction des données : comment FASTR répare les problèmes
+
+Plutôt que de jeter les données problématiques, FASTR les **remplace par des estimations raisonnables** — comme remplacer une lecture de compteur défaillante par la moyenne des mois voisins.
+
+**Valeurs extrêmes →** Remplacées par la moyenne des 6 mois autour
+**Mois manquants →** Comblés avec la tendance historique de l'établissement
+
+FASTR produit **4 versions** des données pour comparaison :
+
+| Version | Ce qu'elle contient |
+|---------|-------------------|
+| Données brutes | Aucune modification |
+| Aberrantes corrigées | Pics extrêmes lissés |
+| Complétude ajustée | Mois manquants comblés |
+| Les deux ajustements | Aberrantes lissées + mois manquants comblés |
+
+Vous pouvez comparer les résultats entre les 4 versions. Si vos conclusions changent, c'est un signal que la qualité des données mérite attention.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_s1a -->
+## Pourquoi ajuster les valeurs aberrantes ?
+
+![Pourquoi ajuster les valeurs aberrantes — avant et après](../resources/diagrams_fr/why_adjust_outliers.svg)
+
+<!--
+PRESENTER NOTES:
+- Exemple visuel montrant l'impact de l'ajustement des valeurs aberrantes
+- Le panneau de gauche montre les données brutes avec un pic causé par une erreur de saisie
+- Le panneau de droite montre les mêmes données après ajustement en utilisant des moyennes mobiles
+- Point clé : la tendance sous-jacente est préservée tandis que le pic artificiel est supprimé
+- Cela rend les estimations d'utilisation des services et de couverture plus fiables
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_s2b -->
+<!-- _class: output -->
+## Résultat de l'ajustement de la complétude
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Ajustement de la complétude](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Heatmap montrant dans quelle mesure le volume de services a changé après l'imputation des données manquantes par des moyennes mobiles.
 
 **Formule :** % de changement = (ajusté - original) / original × 100
 
-**Interprétation :** Les valeurs sont généralement positives (l'imputation ajoute du volume). Les ajustements importants indiquent les zones nécessitant une amélioration de l'exhaustivité.
+**Interprétation :** Les valeurs sont généralement positives (l'imputation ajoute du volume). Les ajustements importants indiquent les zones nécessitant une amélioration de la complétude.
 
 </div>
 </div>
 
 <!--
 PRESENTER NOTES:
-- Deux résultats présentés : ajustement des valeurs aberrantes et ajustement de l'exhaustivité
+- Deux résultats présentés : ajustement des valeurs aberrantes et ajustement de la complétude
 - Heatmap des valeurs aberrantes : les valeurs négatives signifient que les valeurs aberrantes ont été supprimées (réduction des comptages gonflés)
-- Heatmap de l'exhaustivité : les valeurs positives signifient que les lacunes ont été comblées (augmentation du volume total)
+- Heatmap de la complétude : les valeurs positives signifient que les lacunes ont été comblées (augmentation du volume total)
 - Les ajustements importants (couleurs foncées) indiquent les zones/indicateurs avec des problèmes de qualité des données
 - Utilisez ces résultats pour identifier où concentrer les efforts d'amélioration de la qualité des données
-- Comparez les régions : lesquelles ont plus de problèmes de valeurs aberrantes vs de problèmes d'exhaustivité ?
+- Comparez les régions : lesquelles ont plus de problèmes de valeurs aberrantes vs de problèmes de complétude ?
 -->
 <!-- /SLIDE -->
