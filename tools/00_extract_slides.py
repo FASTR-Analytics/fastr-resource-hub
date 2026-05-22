@@ -211,10 +211,17 @@ TOPIC_NAMES = {
     'm7_6b': 'three_spheres_of_influence',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
+    'm8_0': 'hfa_implementation_status',
+    'm8_0a': 'fastr_hfa_approach',
     'm8_1': 'rapid_cycle_facility_survey',
     'm8_1a': 'hfa_survey_design',
     'm8_1b': 'adaptive_survey_content',
     'm8_1c': 'four_types_of_indicators',
+    'm8_2': 'validity_phone_surveys',
+    'm8_3': 'snis_hfa_integration',
+    'm8_3a': 'triangulation_example',
+    'm8_3b': 'dhis2_chain',
+    'm8_3c': 'complete_results_chain',
 
     # m9 - Workshop Activities (from 09_workshop_activities.md)
     'm9_0a': 'creating_user_folder',
