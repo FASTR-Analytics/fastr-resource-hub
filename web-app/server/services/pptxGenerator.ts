@@ -136,10 +136,10 @@ function parseMarkdown(content: string): ParsedSlide[] {
 
     // Extract CSS class directive FIRST
     let cssClass: string | null = null
-    const classMatch = raw.match(/<!--\s*_class:\s*(\w+)\s*-->/)
+    const classMatch = raw.match(/<!--\s*_class:\s*([\w-]+)\s*-->/)
     if (classMatch) {
       cssClass = classMatch[1]
-      raw = raw.replace(/<!--\s*_class:\s*\w+\s*-->/, '')
+      raw = raw.replace(/<!--\s*_class:\s*[\w-]+\s*-->/, '')
     }
 
     // Header/footer directives — persistent (`<!-- header: -->`) carry forward to
@@ -794,9 +794,10 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     })
   }
 
-  // Date line
+  // Date line — skip the line already shown as location (it often carries the date too).
+  const usedLocation = locationMatch ? locationMatch[0].trim() : ''
   const lines = data.raw.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('<!--') && !l.startsWith('**'))
-  const dateLine = lines.find(l => /\d/.test(l) && (/jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec/i.test(l) || /\d{4}/.test(l)))
+  const dateLine = lines.find(l => l !== usedLocation && /\d/.test(l) && (/jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec/i.test(l) || /\d{4}/.test(l)))
   if (dateLine) {
     slide.addText(cleanMarkdownText(dateLine), {
       x: 1, y: titleTop + 2.5, w: 11.333, h: 0.4,
