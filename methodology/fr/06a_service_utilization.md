@@ -1142,9 +1142,9 @@ Pour le graphique de variation de volume (résultat 4) :
 L'analyse de l'utilisation des services mesure les changements dans les volumes de services de santé au fil du temps. En comparant la prestation de services sur des années consécutives, cette analyse identifie les augmentations ou les diminutions des schémas d'utilisation selon les régions et les indicateurs.
 
 La mesure principale est le **pourcentage de variation d'une année sur l'autre**, qui quantifie les changements dans la prestation de services entre deux années consécutives. La formule calcule la différence entre les volumes de l'année en cours et de l'année précédente, exprimée en pourcentage de l'année précédente. Les changements dépassant ±10% sont signalés pour examen, car ils représentent généralement des changements significatifs dans la prestation de services plutôt que des variations normales.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_1b -->
 ## Comparaison de l'utilisation des services avec DHIS2
 
 Les tendances d'utilisation des services sont couramment produites dans DHIS2. L'approche FASTR diffère de trois manières importantes :
@@ -1154,19 +1154,26 @@ Les tendances d'utilisation des services sont couramment produites dans DHIS2. L
 - Examine les tendances, mais utilise également les données d'utilisation des services ajustées pour des analyses supplémentaires plus complexes
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_1c -->
+## Directionnalité des indicateurs
+
+Avant d'interpréter une tendance, demandez-vous : **une augmentation est-elle bonne ou mauvaise ?**
+
+![Directionnalité des indicateurs](../resources/diagrams_fr/indicator_directionality.svg)
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_1a -->
+<!-- _class: compact -->
 ## Utilisation des services et perturbations : comparaison avec DHIS2
 
 Les tendances d'utilisation des services sont couramment produites dans DHIS2
 
 **Principales différences entre l'approche DHIS2 et FASTR**
 
-- L'approche FASTR ajuste pour la qualité des données (valeurs aberrantes et/ou complétude)
-- L'approche FASTR visualise les données avec l'approche du pourcentage de variation pour faciliter l'identification des fluctuations significatives dans la prestation de services
+- FASTR ajuste pour la qualité des données (valeurs aberrantes et/ou complétude)
+- FASTR visualise les données avec l'approche du pourcentage de variation pour faciliter l'identification des fluctuations significatives
 
-**Extension de l'analyse de l'utilisation des services**, utilisant des approches statistiques plus complexes non disponibles dans DHIS2
-
-En utilisant un cadre de régression, nous sommes en mesure de :
+**Extension de l'analyse de l'utilisation des services** — approches statistiques plus complexes non disponibles dans DHIS2. En utilisant un cadre de régression, nous sommes en mesure de :
 
 - Tenir compte de la saisonnalité
 - Exclure les changements inhabituels pour s'assurer que les événements ponctuels n'influencent pas les tendances normales
@@ -1174,7 +1181,7 @@ En utilisant un cadre de régression, nous sommes en mesure de :
 - Détecter les perturbations et les schémas de reprise
 - Quantifier les changements avec une méthodologie robuste par rapport à la simple observation des fluctuations dans une ligne de tendance
 
-Cela améliore la capacité à interpréter et comparer les données de comptage ou d'utilisation dans les zones nationales et infranationales sans avoir besoin de dénominateurs de population.
+Cela améliore la capacité à interpréter et comparer les données d'utilisation dans les zones nationales et infranationales sans avoir besoin de dénominateurs de population.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1182,27 +1189,28 @@ Cela améliore la capacité à interpréter et comparer les données de comptage
 
 L'approche FASTR pour détecter les perturbations et excédents de services utilise la **régression de séries temporelles interrompues (ITS)** avec des effets fixes au niveau de l'établissement. Ce cadre statistique permet une interprétation et une comparaison plus significatives des données de comptage entre les zones infranationales, permettant des analyses que les données brutes seules ne peuvent fournir.
 
-En se concentrant sur les changements et tendances significatifs plutôt que sur les chiffres bruts, cette approche soutient une analyse plus précise et comparable. Les changements importants et inattendus antérieurs dans les données historiques sont supprimés pour établir une référence propre. Les changements de volume inattendus sont ensuite estimés en comparant les volumes observés aux volumes attendus basés sur les tendances historiques et la saisonnalité.
+En se concentrant sur les changements et tendances significatifs plutôt que sur les chiffres bruts, cette approche soutient une analyse plus précise et comparable. Les changements importants et inattendus antérieurs dans les données historiques sont supprimés pour établir une référence propre. Les changements de volume inattendus sont estimés en comparant les volumes observés aux volumes attendus basés sur les tendances historiques et la saisonnalité.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_2b -->
+<!-- _class: output -->
 ## Fonctionnement de la détection des perturbations
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
-L'analyse se déroule en quatre étapes. Premièrement, nous **utilisons les données passées pour établir des attentes** en examinant plusieurs années de données historiques pour comprendre le schéma typique de chaque mois, en tenant compte des changements saisonniers réguliers.
+L'analyse se déroule en quatre étapes. Premièrement, nous **utilisons les données passées pour établir des attentes** en examinant plusieurs années de données historiques pour comprendre les schémas mensuels typiques et les variations saisonnières.
 
-Deuxièmement, nous **repérons les changements inhabituels** en comparant les volumes de services actuels à ces attentes. Les volumes nettement supérieurs ou inférieurs aux attentes sont signalés comme des changements inhabituels nécessitant une investigation.
+Deuxièmement, nous **repérons les changements inhabituels** en comparant les volumes de services actuels aux attentes. Les écarts importants sont signalés pour investigation.
 
-Troisièmement, nous **gérons les perturbations passées** en ajustant les données historiques pour supprimer les changements importants et inattendus antérieurs. Cela garantit que les événements ponctuels ne faussent pas notre compréhension de ce qui constitue une prestation de services "normale".
+Troisièmement, nous **gérons les perturbations passées** en ajustant les données historiques pour supprimer les changements importants et inattendus. Cela empêche les événements ponctuels de fausser notre référence de prestation « normale ».
 
-Quatrièmement, nous **détectons les perturbations dans le temps** en examinant les tendances pour identifier les changements clairs dans l'utilisation des services de santé sur plusieurs mois, en distinguant les fluctuations temporaires des changements durables.
+Quatrièmement, nous **détectons les perturbations dans le temps** en examinant les tendances sur plusieurs mois pour distinguer les fluctuations temporaires des changements durables.
 
 </div>
-<div style="flex: 1;">
+<div class="output-viz">
 
-![Détection des perturbations](resources/diagrams/disruption_chart.png)
+![Détection des perturbations](../resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
@@ -1214,9 +1222,9 @@ PRESENTER NOTES:
 3. Gérer les perturbations passées : Pour maintenir notre analyse précise, nous ajustons nos données historiques en supprimant les grands changements inattendus antérieurs. Cela garantit que les événements ponctuels du passé ne faussent pas notre compréhension de ce qui est "normal" aujourd'hui.
 4. Détecter les perturbations dans le temps : Enfin, nous examinons les tendances au fil du temps pour voir s'il y a des changements clairs dans l'utilisation des services de santé. Par exemple, s'il y a une baisse des vaccinations de routine sur plusieurs mois, nous pouvons l'identifier comme une perturbation à plus long terme. En surveillant ces tendances, nous obtenons une meilleure idée de si les changements sont simplement saisonniers ou pourraient être dus à des problèmes plus importants et durables qui nécessitent une attention.
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_2c -->
 ## Comparaison de la détection des perturbations avec DHIS2
 
 La détection des perturbations étend l'analyse de l'utilisation des services en utilisant des approches statistiques non disponibles dans DHIS2. Le cadre de régression permet plusieurs capacités qui améliorent la simple visualisation des tendances.
@@ -1226,12 +1234,19 @@ Le modèle **tient compte de la saisonnalité** lors du calcul des valeurs atten
 Plus important encore, cette approche **quantifie les changements avec une méthodologie robuste** plutôt que de s'appuyer sur l'observation visuelle des fluctuations de tendance. Cela améliore la capacité à interpréter et comparer les données d'utilisation entre les zones nationales et infranationales **sans nécessiter de dénominateurs de population**.
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_2a -->
+## Pourquoi détecter les perturbations est important
+
+La détection des perturbations ne consiste pas seulement à signaler des problèmes — elle déclenche une investigation sur les causes profondes.
+
+![Disruptions framing](../resources/diagrams_fr/disruptions_framing.svg)
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_5a -->
+<!-- _class: compact -->
 ## Module d'utilisation des services : Paramètres de configuration
 
 **Note :** Ces paramètres s'appliquent uniquement à l'analyse des perturbations. L'analyse de l'utilisation des services d'une année sur l'autre ne nécessite pas de configuration.
-
-<div style="font-size: 0.8em;">
 
 | Paramètre | Description |
 |-----------|-------------|
@@ -1243,8 +1258,6 @@ Plus important encore, cette approche **quantifie les changements avec une méth
 | **Fenêtre de lissage (k)** | Taille de la fenêtre en mois pour le lissage par médiane mobile. Doit être impair. Par défaut 7 |
 | **Seuil de baisse** | Signaler si la valeur réelle tombe en dessous de cette proportion de la valeur attendue. Par défaut 0,9 (baisse >= 10%) ; utiliser 0,8 pour ne signaler que les baisses importantes |
 | **Seuil de différence en pourcentage** | Mettre en évidence les points où la valeur réelle diffère de la valeur attendue de plus de ce pourcentage. Par défaut 10 |
-
-</div>
 
 <!--
 PRESENTER NOTES:
@@ -1258,22 +1271,53 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- ═══════════════════════════════════════════════════════════════════════════
-     DIAPOSITIVES CONDENSÉES : Méthodes + Interprétation Combinées
-═══════════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE:m6_s0 -->
+## Utilisation des services : détecter les changements
+
+Les volumes de services montent et descendent naturellement — plus de cas de paludisme en saison des pluies, par exemple. Comment distinguer une **variation normale** d'une **vraie perturbation** ?
+
+**FASTR apprend le rythme normal** de chaque indicateur dans chaque zone :
+- Tendance à long terme (les services augmentent-ils ou diminuent-ils ?)
+- Saisonnalité (quels mois sont habituellement plus élevés ?)
+
+Puis il compare les **volumes observés** aux **volumes attendus** :
+
+- **En dessous** de l'attendu → perturbation potentielle (rupture de stock ? grève ? conflit ?)
+- **Au-dessus** de l'attendu → hausse inhabituelle (campagne de vaccination ? nouveau programme ?)
+
+Le module mesure **combien de services ont été perdus ou gagnés** et sur quelle durée.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s0b -->
+## Lire un graphique de perturbation
+
+![w:750](../resources/diagrams_fr/disruption_chart_annotated.svg)
+
+<!--
+PRESENTER NOTES:
+- La ligne noire = ce qui s'est réellement passé (volumes observés)
+- La ligne pointillée = ce que FASTR attendait (basé sur la tendance et la saisonnalité)
+- Zone rouge = les services étaient en dessous de l'attendu (perturbation)
+- Zone verte = les services étaient au-dessus de l'attendu (surplus)
+- La taille de la zone colorée = l'ampleur de l'impact
+- Demandez-vous : qu'est-ce qui a causé cette perturbation ? Était-ce un problème de données ou un vrai changement ?
+-->
+<!-- /SLIDE -->
 
 <!-- SLIDE:m6_s1 -->
 ## Analyse de l'utilisation des services
 
 L'analyse de l'utilisation des services suit le nombre de services de santé fournis au fil du temps, identifiant les tendances, les anomalies et les comparaisons entre les zones.
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<!-- _class: output -->
 
-![Nombre de services déclarés h:300](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+<div class="output-layout">
+<div class="output-viz">
+
+![Nombre de services déclarés h:300](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Graphique linéaire montrant les volumes de services absolus au fil du temps par indicateur.
 
@@ -1283,20 +1327,21 @@ L'analyse de l'utilisation des services suit le nombre de services de santé fou
 
 </div>
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s1b -->
+<!-- _class: output -->
 ## Résultat de la variation d'une année sur l'autre
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Changement du volume de service h:300](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Changement du volume de service h:300](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
-**Ce que vous voyez :** Carte thermique comparant la période actuelle à la même période l'année dernière, avec les changements > ±10% signalés.
+**Ce que vous voyez :** Heatmap comparant la période actuelle à la même période l'année dernière, avec les changements > ±10% signalés.
 
 **Formule :** Changement annuel % = (cette année - année dernière) / année dernière × 100
 
@@ -1316,6 +1361,56 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s1c -->
+## Essayez par vous-même
+
+Examinez la variation d'une année sur l'autre de votre indicateur prioritaire. Posez-vous ces questions :
+
+- Le changement est-il **positif** (augmentation) ou **négatif** (diminution) ?
+- Pour cet indicateur, ce changement est-il **bon** ou **mauvais** pour les résultats de santé ?
+- Qu'est-ce qui pourrait expliquer ce changement — un vrai changement de programme, un problème de données ou un événement externe ?
+
+*Conseil : N'oubliez pas que toutes les augmentations ne sont pas bonnes. Une hausse des décès maternels est un résultat négatif même si le nombre a augmenté.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s1d -->
+## Directionnalité des indicateurs
+
+Avant d'interpréter une tendance, demandez-vous : **une augmentation est-elle bonne ou mauvaise ?**
+
+![Directionnalité des indicateurs](../resources/diagrams_fr/indicator_directionality.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s1a -->
+<!-- _class: output -->
+## Variation trimestrielle
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Variation trimestrielle h:300](../resources/default_outputs/Module3_QoQ_change.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Heatmap comparant le trimestre en cours au trimestre précédent, avec les variations >±10 % signalées.
+
+**Formule :** Variation trimestrielle % = (trimestre en cours – trimestre précédent) / trimestre précédent × 100
+
+**Interprétation :** Les variations signalées nécessitent un suivi — s'agit-il d'un changement réel du programme, d'un problème de données ou d'un événement attendu ?
+
+</div>
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Les variations trimestrielles >±10 % sont signalées — mais le seuil est configurable
+- Pour les variations signalées, demandez : problème de qualité des données, changement réel du programme ou événement externe ?
+- Ces résultats ne nécessitent pas de dénominateurs de population — utile lorsque les dénominateurs sont incertains
+- Complémentaire à la vue annuelle : capture les changements plus récents
+-->
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s2 -->
 ## Détection des perturbations de services
 
@@ -1327,18 +1422,19 @@ Au-delà des comparaisons d'une année sur l'autre, nous voulons savoir : **La p
 
 - **Perturbation :** Volume observé significativement inférieur à l'attendu
 - **Excédent :** Volume observé significativement supérieur à l'attendu
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s2b -->
+<!-- _class: output -->
 ## Résultat de perturbation de service
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Résultat de perturbation h:300](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Résultat de perturbation h:300](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **Ce que vous voyez :** Graphique comparant le volume de service réel au volume attendu prédit par le modèle, en tenant compte de la saisonnalité.
 
@@ -1359,92 +1455,4 @@ PRESENTER NOTES:
 - Les écarts persistants justifient une investigation plus approfondie des causes
 - Peut être exécuté au niveau national, provincial ou du district selon la qualité des données
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3 -->
-## Pourquoi l'analyse des perturbations est importante
-
-FASTR est conçu pour soutenir de multiples questions politiques définies par les pays. **L'analyse des perturbations** est un cas d'utilisation clé dans le programme de travail FASTR plus large.
-
-**Les pays utilisent l'analyse des perturbations pour :**
-
-- Surveiller la continuité et la reprise des services
-- Identifier les vulnérabilités géographiques ou spécifiques aux services
-- Informer la priorisation, la planification et l'allocation des ressources
-- Suivre si les services se stabilisent ou rattrapent après les chocs
-
-**Les points d'entrée varient selon les pays :**
-
-- Certains pays (Sierra Leone, Burkina Faso, Zambie) utilisent les perturbations comme point d'entrée principal
-- D'autres (Nigeria, Somalie) ont initié FASTR pour différentes priorités, avec les perturbations comme analyse complémentaire
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s4 -->
-## La stabilité nationale peut masquer des différences infranationales
-
-**Idée clé :** Les tendances au niveau national peuvent sembler stables alors que des perturbations significatives se produisent dans des régions spécifiques.
-
-<div style="display: flex; gap: 1em; font-size: 0.85em;">
-<div style="flex: 1;">
-
-**Exemple du Burkina Faso :**
-
-- Les consultations externes nationales semblent stables
-- Mais l'analyse régionale révèle des variations significatives
-- CPN1 et accouchements en établissement montrent des schémas différents par région
-- L'analyse infranationale est essentielle pour l'interprétation
-
-</div>
-<div style="flex: 1;">
-
-**Exemple de la Sierra Leone :**
-
-- La couverture Penta1 nationale est stable
-- Mais Western Area Urban et le district de Bo montrent des perturbations
-- Un suivi ciblé est nécessaire dans des zones spécifiques
-- FASTR suit si les services se stabilisent dans les trimestres suivants
-
-</div>
-</div>
-
-**Implication :** Examinez toujours les données infranationales avant de conclure que les services sont stables.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s5 -->
-## Exemple de pays : Nigeria
-
-Le Ministère fédéral de la Santé du Nigeria a adopté FASTR comme outil clé pour la gestion des performances au niveau fédéral et étatique du système de soins de santé primaires.
-
-**Détection des perturbations dans un environnement de polycrises :**
-
-- A quantifié l'impact d'une grève des agents de santé dans le Territoire de la Capitale Fédérale
-- A identifié les baisses de vaccination BCG dans sept États
-- A suivi l'augmentation des admissions pour malnutrition aiguë sévère pendant une épidémie de choléra dans l'État de Zamfara
-
-**Utilisation pour le suivi de routine :**
-
-- Évaluations trimestrielles de suivi des performances SRMNIA+N
-- Suivi de l'adoption des services de santé maternelle dans le cadre de l'Initiative de Renouvellement du Secteur de la Santé du Nigeria
-- Comparaison de la disponibilité des vaccins dans les établissements recevant un financement direct par rapport à ceux non couverts
-
-FASTR permet une **identification rapide** et un **suivi rapide** dans tout le pays.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s6 -->
-## Point clé à retenir
-
-> "FASTR ne vous donnera pas toutes les réponses, mais il peut vous dire **où chercher**."
-
-**Ce que FASTR peut faire :**
-
-- Analyser l'utilisation des services et les tendances de couverture entre les zones infranationales et dans le temps
-- Évaluer la préparation des services des CSP et obtenir des retours rapides des gestionnaires d'établissements
-- Identifier les "signaux d'alerte" qui nécessitent un suivi rapide
-
-**Ces données vous permettent de :**
-
-- **Orienter les ressources** vers les programmes, services ou districts en retard
-- **Effectuer des corrections de cap** quand les programmes n'atteignent pas les résultats prévus
-- **Identifier les déviants positifs** pour en tirer des leçons
-- **Comprendre les causes profondes** en triangulant avec d'autres sources de données
 <!-- /SLIDE -->

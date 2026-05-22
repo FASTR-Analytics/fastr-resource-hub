@@ -1050,9 +1050,9 @@ In addition to year-over-year comparisons, FASTR generates quarter-on-quarter (Q
 Service utilization analysis measures changes in health service volumes over time. By comparing service delivery across consecutive years, this analysis identifies increases or decreases in utilization patterns across regions and indicators.
 
 The primary metric is **year-over-year percent change**, which quantifies shifts in service delivery between consecutive years. The formula calculates the difference between current and previous year volumes, expressed as a percentage of the previous year. Changes exceeding ±10% are flagged for review, as these typically represent meaningful shifts in service delivery rather than normal variation.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_1b -->
 ## Service utilization comparison to DHIS2
 
 Service utilization trends are commonly produced in DHIS2. The FASTR approach differs in three important ways:
@@ -1060,6 +1060,14 @@ Service utilization trends are commonly produced in DHIS2. The FASTR approach di
 - Adjusts for data quality (outliers and/or completeness)
 - Visualizes data with the percent change approach to make it easier to identify meaningful fluctuations in service delivery
 - Looks at trends, but also uses the adjusted service utilization data for additional, more complex analyses
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_1c -->
+## Indicator directionality
+
+Before interpreting a trend, ask: **is an increase good or bad?**
+
+![Indicator directionality](../resources/diagrams/indicator_directionality.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_1a -->
@@ -1091,13 +1099,14 @@ This improves the ability to interpret and compare 'count' or utilization data n
 The FASTR approach to detecting service disruptions and surpluses uses **interrupted time series (ITS) regression** with facility-level fixed effects. This statistical framework allows for more meaningful interpretation and comparison of count data across subnational areas, enabling insights that raw data alone cannot provide.
 
 By focusing on meaningful changes and trends rather than raw numbers, this approach supports more accurate and comparable analysis. Previous large and unexpected changes in historical data are removed to establish a clean baseline. Unexpected volume changes are then estimated by comparing observed volumes to expected volumes based on historical trends and seasonality.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_2b -->
+<!-- _class: output -->
 ## How disruption detection works
 
-<div style="display: flex; gap: 1em; align-items: flex-start;">
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-layout">
+<div class="output-text">
 
 The analysis proceeds through four steps. First, we **use past data to set expectations** by examining several years of historical data to understand the typical pattern for each month, accounting for regular seasonal changes.
 
@@ -1108,9 +1117,9 @@ Third, we **handle past disruptions** by adjusting historical data to remove pre
 Fourth, we **detect disruptions over time** by examining trends to identify clear shifts in health service use over several months, distinguishing between temporary fluctuations and sustained changes.
 
 </div>
-<div style="flex: 1;">
+<div class="output-viz">
 
-![Disruption detection](resources/diagrams/disruption_chart.png)
+![Disruption detection](../resources/diagrams/disruption_chart.png)
 
 </div>
 </div>
@@ -1122,9 +1131,9 @@ PRESENTER NOTES:
 3. Handling past disruptions: To keep our analysis accurate, we adjust our historical data by removing previous big, unexpected changes. This makes sure that one-off events from the past don't skew our understanding of what's "normal" today.
 4. Detecting disruptions over time: Finally, we look at trends over time to see if there are clear shifts in health service use. For example, if there's a drop in routine vaccinations over several months, we can identify that as a longer-term disruption. By monitoring these trends, we get a better sense of whether changes are just seasonal or might be due to larger, lasting issues that need attention.
 -->
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_2c -->
 ## Disruption detection comparison to DHIS2
 
 Disruption detection extends service utilization analysis using statistical approaches not available in DHIS2. The regression framework enables several capabilities that improve upon simple trend visualization.
@@ -1132,6 +1141,14 @@ Disruption detection extends service utilization analysis using statistical appr
 The model **accounts for seasonality** when calculating expected values, ensuring that seasonal patterns are not mistaken for disruptions. It **excludes unusual historical changes** so that one-off events do not influence the baseline. **Historical data serves as context** for establishing expected service levels, and the framework systematically **detects both disruptions and recovery patterns**.
 
 Most importantly, this approach **quantifies changes with a robust methodology** rather than relying on visual observation of trend fluctuations. This improves the ability to interpret and compare utilization data across national and subnational areas **without requiring population denominators**.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2a -->
+## Why detecting disruptions matters
+
+Disruption detection isn't just about flagging problems — it triggers investigation into root causes.
+
+![Disruptions framing](../resources/diagrams/disruptions_framing.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->
@@ -1170,6 +1187,39 @@ PRESENTER NOTES:
      CONDENSED SLIDES: Methods + Interpretation Combined
 ═══════════════════════════════════════════════════════════════════════════ -->
 
+<!-- SLIDE:m6_s0 -->
+## Service utilization: detecting changes
+
+Service volumes naturally go up and down — more malaria cases in the rainy season, for example. How do you tell a **normal variation** from a **real disruption**?
+
+**FASTR learns the normal rhythm** of each indicator in each area:
+- Long-term trend (are services growing or shrinking?)
+- Seasonality (which months are usually higher?)
+
+Then it compares **observed volumes** to **expected volumes**:
+
+- **Below** expected → potential disruption (stockout? strike? conflict?)
+- **Above** expected → unusual increase (vaccination campaign? new program?)
+
+The module measures **how many services were lost or gained** and over what period.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s0b -->
+## Reading a disruption chart
+
+![w:750](../resources/diagrams/disruption_chart_annotated.svg)
+
+<!--
+PRESENTER NOTES:
+- Black line = what actually happened (observed volumes)
+- Dashed line = what FASTR expected (based on trend and seasonality)
+- Red area = services were below expected (disruption)
+- Green area = services were above expected (surplus)
+- The size of the colored area = the magnitude of the impact
+- Ask yourself: what caused this disruption? Was it a data problem or a real change?
+-->
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s1 -->
 ## Service utilization analysis
 
@@ -1178,7 +1228,7 @@ Service utilization analysis tracks how many health services are being delivered
 <div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Number of services reported h:300](resources/default_outputs/Module3_5_Number_of_services_reported.png)
+![Number of services reported h:300](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -1191,18 +1241,19 @@ Service utilization analysis tracks how many health services are being delivered
 
 </div>
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s1b -->
+<!-- _class: output -->
 ## Year-over-year change output
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Change in service volume h:300](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Change in service volume h:300](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Heatmap comparing current period to same period last year, with changes >±10% flagged.
 
@@ -1224,13 +1275,33 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s1c -->
+## Try it yourself
+
+Look at your priority indicator's year-over-year change. Ask yourself:
+
+- Is the change **positive** (increase) or **negative** (decrease)?
+- For this indicator, is that change **good** or **bad** for health outcomes?
+- What might explain this change — a real program shift, a data issue, or an external event?
+
+*Tip: Remember, not all increases are good. A rise in maternal deaths is a negative outcome even though the number went up.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s1d -->
+## Indicator directionality
+
+Before interpreting a trend, ask: **is an increase good or bad?**
+
+![Indicator directionality](../resources/diagrams/indicator_directionality.svg)
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s1a -->
 ## Quarter-on-quarter change
 
 <div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Quarter-on-quarter change h:300](resources/default_outputs/Module3_QoQ_change.png)
+![Quarter-on-quarter change h:300](../resources/default_outputs/Module3_QoQ_change.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -1264,18 +1335,19 @@ Beyond year-over-year comparisons, we want to know: **Is service delivery on tra
 
 - **Disruption:** Observed volume significantly below expected
 - **Surplus:** Observed volume significantly above expected
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s2b -->
+<!-- _class: output -->
 ## Service disruption output
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Disruption output h:300](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![Disruption output h:300](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Chart comparing actual service volume to model-predicted expected volume, accounting for seasonality.
 
@@ -1297,92 +1369,3 @@ PRESENTER NOTES:
 - Can run at national, provincial, or district level depending on data quality
 -->
 <!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3 -->
-## Why disruption analysis matters
-
-FASTR is designed to support multiple country-defined policy questions. **Disruption analysis** is one key use case within the broader FASTR work program.
-
-**Countries use disruption analysis to:**
-
-- Monitor service continuity and recovery
-- Identify geographic or service-specific vulnerabilities
-- Inform prioritization, planning, and resource allocation
-- Track whether services stabilize or catch up after shocks
-
-**Entry points vary by country:**
-
-- Some countries (Sierra Leone, Burkina Faso, Zambia) use disruptions as the primary entry point
-- Others (Nigeria, Somalia) initiated FASTR for different priorities, with disruptions as complementary analysis
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s4 -->
-## National stability can mask subnational differences
-
-**Key insight:** National-level trends may look stable while significant disruptions occur in specific regions.
-
-<div style="display: flex; gap: 1em; font-size: 0.85em;">
-<div style="flex: 1;">
-
-**Burkina Faso example:**
-
-- National outpatient visits appear stable
-- But regional analysis reveals significant variation
-- ANC1 and institutional deliveries show different patterns by region
-- Subnational analysis essential for interpretation
-
-</div>
-<div style="flex: 1;">
-
-**Sierra Leone example:**
-
-- National Penta1 coverage stable
-- But Western Area Urban and Bo District show disruptions
-- Targeted follow-up needed in specific areas
-- FASTR tracks whether services stabilize in subsequent quarters
-
-</div>
-</div>
-
-**Implication:** Always examine subnational data before concluding services are stable.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s5 -->
-## Country example: Nigeria
-
-Nigeria's Federal Ministry of Health has adopted FASTR as a key tool for federal and state-level performance management of the primary health care system.
-
-**Disruption detection in a polycrisis environment:**
-
-- Quantified the impact of a health worker strike in the Federal Capital Territory
-- Pinpointed BCG vaccination declines in seven states
-- Tracked increased severe acute malnutrition admissions during a cholera outbreak in Zamfara state
-
-**Routine monitoring use:**
-
-- Quarterly RMNCAH+N performance monitoring assessments
-- Tracking maternal health service uptake under the Nigeria Health Sector Renewal Initiative
-- Comparing vaccine availability in facilities receiving direct financing vs those not covered
-
-FASTR enables **timely identification** and **quick follow-up** across the country.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s6 -->
-## Key takeaway
-
-> "FASTR will not give you all the answers, but it can tell you **where to look**."
-
-**What FASTR can do:**
-
-- Analyze service use and coverage trends across subnational areas and over time
-- Assess service readiness of PHCs and get timely feedback from facility managers
-- Identify 'red flags' or signals that need prompt follow-up
-
-**This data allows you to:**
-
-- **Guide resources** to programs, services, or districts that are lagging
-- **Make course corrections** when programs aren't achieving intended results
-- **Identify positive deviants** to learn from
-- **Understand root causes** by triangulating with other data sources
-<!-- /SLIDE -->
-

@@ -1707,14 +1707,14 @@ While DHIS2 provides a robust foundation for data collection, storage, and basic
 <!-- SLIDE:m6_6 -->
 ## Service coverage estimation
 
-![Coverage equation h:180](resources/diagrams/coverage_equation.svg)
+![Coverage equation h:180](../resources/diagrams/coverage_equation.svg)
 
 **Coverage** = services delivered ÷ target population
 
 HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every ~5 or more years.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_6b -->
 ## Our approach to service coverage analysis
 
 Our approach derives and validates population denominators, significantly improving coverage estimates reported from HMIS systems.
@@ -1722,9 +1722,9 @@ Our approach derives and validates population denominators, significantly improv
 In countries with accurate data, this approach helps identify subnational inequities and updates outdated estimates, while in countries with less precise data, the trends still provide valuable insights into performance.
 
 We use these estimates to track recent trends and subnational disparities in the coverage of selected health services.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_6c -->
 ## Two-part analytical process
 
 The coverage estimation module operates in two sequential parts:
@@ -1736,7 +1736,7 @@ The coverage estimation module operates in two sequential parts:
 
 <!--
 PRESENTER NOTES:
-- Coverage estimation (Modules 5 & 6) converts service volumes into coverage percentages
+- Module 4 converts service volumes into coverage percentages
 - Coverage = services / target population - the challenge is knowing target population
 - HMIS typically uses catchment populations which are often inaccurate
 - Our approach: derive denominators from HMIS data validated against surveys
@@ -1748,7 +1748,7 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_7 -->
 ## Service coverage example
 
-![Coverage example ANC4+ h:420](resources/diagrams/coverage_example_anc4.svg)
+![Coverage example ANC4+ h:420](../resources/diagrams/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
@@ -1779,7 +1779,7 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_9 -->
 ## Expected relationships which help with estimating denominators
 
-![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
+![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1805,10 +1805,47 @@ At provincial level, we use all default values!
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_9a -->
+## Service cascade and dropout analysis
+
+A service cascade shows the journey patients take through a series of related health services. At each step, some patients don't continue to the next one — this is called **dropout**.
+
+For example, in maternal health: **ANC1 → ANC4 → Facility delivery → PNC**
+
+Each step should ideally retain as many patients as possible, but in practice, numbers decrease along the way. Understanding where and why patients drop out helps target interventions.
+
+![Service cascade](../resources/diagrams/service_cascade_funnel.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_9ab -->
+<!-- _class: compact -->
+
+## Calculating and interpreting dropout
+
+**Dropout formula:**
+
+> Dropout % = (Earlier step - Later step) / Earlier step × 100
+
+**Example:** If 1,000 women attend ANC1 but only 700 complete ANC4:
+
+> Dropout = (1,000 - 700) / 1,000 × 100 = **30%**
+
+**Interpretation scale:**
+
+| Dropout rate | Interpretation |
+|---|---|
+| < 10% | Excellent — strong continuity of care |
+| 10–25% | Acceptable — monitor regularly |
+| 25–50% | Investigate further — identify barriers |
+| > 50% | Critical — requires immediate action |
+
+**Try it:** Find Penta1 and Penta3 for your region. What is the dropout rate? What might explain it?
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_10 -->
 ## Estimating denominators from ANC-1
 
-![Denominator cascade example](resources/diagrams/denominator_cascade_example.svg)
+![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
 
 <!--
 PRESENTER NOTES:
@@ -1869,7 +1906,7 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_13a -->
 ## Which denominator provides more plausible estimates?
 
-![Denominator comparison](resources/diagrams/denominator_comparison.svg)
+![Denominator comparison](../resources/diagrams/denominator_comparison.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_14 -->
@@ -1877,7 +1914,7 @@ PRESENTER NOTES:
 
 The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
 
-![Coverage projection method](resources/diagrams/coverage_projection.svg)
+![Coverage projection method](../resources/diagrams/coverage_projection.svg)
 
 Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
 
@@ -1894,43 +1931,35 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
-## Coverage modules: Configuration parameters
+## Coverage module: Configuration parameters
 
-<div style="font-size: 0.75em;">
+<div style="font-size: 0.8em;">
 
-**Part 1 — `m005` (denominator calculation)**
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **Count value to use** | `count_final_outliers` | Which adjusted count from Module 2 to use |
-| **Level to calculate coverage for** | National + admin area 2 | National only / +admin area 2 / +admin area 2 and 3 |
-| **Pregnancy loss rate** | 0.03 | Proportion of pregnancies ending in loss before delivery |
-| **Twin rate** | 0.015 | Proportion of deliveries resulting in twins |
-| **Stillbirth rate** | 0.02 | Proportion of births that are stillbirths |
-| **Neonatal mortality rate** | 0.039 | Deaths in first 28 days per live birth |
-| **Postneonatal mortality rate** | 0.028 | Deaths from 28 days to 1 year per live birth |
-| **Infant mortality rate** | 0.067 | Deaths before age 1 per live birth |
-| **Under 5 mortality rate** | 0.103 | Deaths before age 5 per live birth |
-
-**Part 2 — `m006` (coverage estimation)**
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **Denominator chain** | `auto` | `auto` uses the best denominator per indicator (from Part 1); or force a single chain: `anc1`, `delivery`, `bcg`, or `penta1` |
+| Parameter | Description |
+|-----------|-------------|
+| **Count value to use** | Which adjusted count to use for coverage calculation |
+| **Level to calculate coverage for** | Geographic levels for coverage estimation: national, provincial (admin area 2), or district (admin area 3) |
+| **Pregnancy loss rate** | Proportion of pregnancies ending in loss before delivery |
+| **Twin rate** | Proportion of deliveries resulting in twins |
+| **Stillbirth rate** | Proportion of births that are stillbirths |
+| **Neonatal mortality rate** | Deaths in first 28 days per live birth |
+| **Postneonatal mortality rate** | Deaths from 28 days to 1 year per live birth |
+| **Infant mortality rate** | Deaths before age 1 per live birth |
+| **Under 5 mortality rate** | Deaths before age 5 per live birth |
 
 </div>
 
-Country-specific demographic rates may be obtained from DHS reports, UN IGME, or national vital statistics.
+Country-specific mortality rates may be obtained from DHS reports, UN IGME, or national vital statistics.
 
 <!--
 PRESENTER NOTES:
-- Coverage estimation runs in two modules: m005 (Part 1, denominators) and m006 (Part 2, coverage)
-- m005 parameters control how denominators are constructed
-- Count variable: which adjusted data to use (default: outlier-adjusted)
+- Configuration parameters control denominator calculations
+- Count variable: which adjusted data to use (recommend "both")
 - Analysis levels: national, provincial, district - choose based on data quality
-- Demographic rates: defaults provided but should use country-specific values when available
-- m006 has a single parameter: denominator chain (auto vs forced source)
-- "auto" lets each indicator pick its best denominator; forcing a chain ensures consistency across indicators
+- Demographic rates: defaults provided but should use country-specific values
+- Sources for rates: DHS reports, UN IGME estimates, national vital statistics
+- Mortality rates affect denominator calculations significantly
+- Higher mortality = smaller surviving population denominators
 -->
 <!-- /SLIDE -->
 
@@ -1938,17 +1967,85 @@ PRESENTER NOTES:
      CONDENSED SLIDES: Methods + Interpretation Combined
 ═══════════════════════════════════════════════════════════════════════════ -->
 
+<!-- SLIDE:m6_s0c -->
+## Coverage: the denominator problem
+
+The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2.
+
+![Coverage equation h:280](../resources/diagrams/coverage_equation.svg)
+
+A wrong denominator → coverage that exceeds 100% or doesn't reflect reality.
+
+---
+
+## How FASTR deduces the denominator from HMIS
+
+FASTR starts from what facilities report and **works back up the chain** to estimate the target population for each indicator.
+
+**Example**: the survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits. → So there are roughly **10,000 ÷ 0.80 = 12,500 pregnancies**.
+
+From there, FASTR calculates deliveries, births, live births, and eligible infants — adjusting for pregnancy losses, twins, stillbirths, etc.
+
+![The denominator calculation chain h:300](../resources/diagrams/denominator_cascade_example.svg)
+
+---
+
+## Not just ANC1 — multiple entry points
+
+The formula is always the same: **HMIS volumes ÷ survey coverage = target population**
+
+FASTR applies this formula with **4 different indicators**:
+
+- **ANC1** ÷ ANC1 coverage → estimates **pregnancies**
+- **Skilled birth attendance** ÷ SBA coverage → estimates **deliveries**
+- **BCG** ÷ BCG coverage → estimates **live births**
+- **Penta1** ÷ Penta1 coverage → estimates **DPT1-eligible infants**
+
+Each estimate is independent. From each one, FASTR applies demographic adjustments (pregnancy losses, twins, stillbirths, neonatal deaths) to calculate all other populations.
+
+FASTR tests all 4 chains and keeps the one that **best matches survey data** (DHS/MICS).
+
+---
+
+## Which denominator to choose?
+
+The choice of denominator **completely changes** the results. Here is the same indicator (ANC4+) with two different denominators:
+
+![Denominator comparison h:350](../resources/diagrams/denominator_comparison.svg)
+
+FASTR tests several denominators and keeps the one that **best matches national surveys** (DHS/MICS). For years without a survey, it projects estimates by following HMIS trends.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s0d -->
+## Reading a coverage chart
+
+FASTR coverage charts combine **three sources**:
+
+- **Black dots** = National surveys (DHS/MICS) — the most reliable reference
+- **Grey line** = Coverage calculated from DHIS2 — available every quarter
+- **Red line** = Projection — estimate for years without a survey
+
+**How to interpret:**
+
+| What you see | What it means |
+|-------------|--------------|
+| Grey and black lines close | DHIS2 data is reliable |
+| Grey line well above black dots | Denominator is probably too small |
+| Coverage > 100% | Actual population is larger than the estimate |
+| Large differences between regions | Geographic inequities to investigate |
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s3 -->
 ## Service coverage estimation
 
 **Coverage** = services delivered ÷ target population
 
-![Coverage equation h:100](resources/diagrams/coverage_equation.svg)
+![Coverage equation h:100](../resources/diagrams/coverage_equation.svg)
 
 HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years.
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s3b -->
 ## How FASTR estimates coverage
 
 **Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
@@ -1969,13 +2066,52 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s3a -->
+## Service coverage example
+
+![Coverage example ANC4+ h:420](../resources/diagrams/coverage_example_anc4.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3f -->
+## Expected relationships which help with estimating denominators
+
+![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3c -->
+## Estimating denominators from ANC-1
+
+![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3d -->
+## Five denominator options for FASTR analysis
+
+- **UN projections of live births** (available only at national level)
+- **Service utilization (DHIS2) derived denominators:**
+  - Adjustment to ANC1 service utilization
+  - Adjustment to delivery service utilization
+  - Adjustment to BCG service utilization (only calculated at national level)
+  - Adjustment to Penta1 service utilization (only calculated at national level)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3e -->
+## How FASTR estimates coverage
+
+**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
+
+**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
+
+**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s4 -->
 ## Coverage output: National trends
 
 <div style="display: flex; gap: 1em;">
 <div style="flex: 1.2;">
 
-![Coverage national h:320](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+![Coverage national h:320](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
 <div style="flex: 1; font-size: 0.85em;">
@@ -1988,18 +2124,19 @@ PRESENTER NOTES:
 
 </div>
 </div>
+<!-- /SLIDE -->
 
----
-
+<!-- SLIDE:m6_s4b -->
+<!-- _class: output -->
 ## Coverage output: Subnational comparison
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1.2;">
+<div class="output-layout">
+<div class="output-viz">
 
-![Coverage subnational h:320](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+![Coverage subnational h:320](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 </div>
-<div style="flex: 1; font-size: 0.85em;">
+<div class="output-text">
 
 **What you see:** Coverage estimates by subnational area, enabling geographic comparison.
 
@@ -2022,7 +2159,39 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s4c -->
+## Drill down for the full picture
+
+National coverage can hide big differences between regions. If the national number looks good, dig deeper:
+
+- Break coverage down by **region or district**
+- Find the **biggest gap** between the best- and worst-performing areas
+- Ask: is the gap narrowing over time, or getting wider?
+
+*If national ANC4 coverage is 75%, but one region is at 45% while another is at 95%, the national average tells an incomplete story.*
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s5 -->
+## Country example: Nigeria
+
+Nigeria's Federal Ministry of Health has adopted FASTR as a key tool for federal and state-level performance management of the primary health care system.
+
+**Disruption detection in a polycrisis environment:**
+
+- Quantified the impact of a health worker strike in the Federal Capital Territory
+- Pinpointed BCG vaccination declines in seven states
+- Tracked increased severe acute malnutrition admissions during a cholera outbreak in Zamfara state
+
+**Routine monitoring use:**
+
+- Quarterly RMNCAH+N performance monitoring assessments
+- Tracking maternal health service uptake under the Nigeria Health Sector Renewal Initiative
+- Comparing vaccine availability in facilities receiving direct financing vs those not covered
+
+FASTR enables **timely identification** and **quick follow-up** across the country.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s6 -->
 ## Why FASTR? Value add beyond standard DHIS2 analysis
 
 **DHIS2 provides the foundation** — robust data collection, storage, and basic visualization.
@@ -2045,3 +2214,21 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s7 -->
+## Key takeaway
+
+> "FASTR will not give you all the answers, but it can tell you **where to look**."
+
+**What FASTR can do:**
+
+- Analyze service use and coverage trends across subnational areas and over time
+- Assess service readiness of PHCs and get timely feedback from facility managers
+- Identify 'red flags' or signals that need prompt follow-up
+
+**This data allows you to:**
+
+- **Guide resources** to programs, services, or districts that are lagging
+- **Make course corrections** when programs aren't achieving intended results
+- **Identify positive deviants** to learn from
+- **Understand root causes** by triangulating with other data sources
+<!-- /SLIDE -->

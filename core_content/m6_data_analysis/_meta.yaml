@@ -7,7 +7,7 @@ slides:
   order: 1.001
   variant: full
   title: Service utilization comparison to DHIS2
-- file: m6_1b_indicator_directionality.md
+- file: m6_1c_indicator_directionality.md
   order: 1.005
   variant: full
   title: 'Indicator directionality: not every increase is good'
@@ -119,7 +119,7 @@ slides:
   order: 1.002
   variant: condensed
   title: Try it yourself
-- file: m6_s1b_indicator_directionality.md
+- file: m6_s1d_indicator_directionality.md
   order: 1.005
   variant: condensed
   title: 'Indicator directionality: not every increase is good'
@@ -148,7 +148,7 @@ slides:
   order: 3.01
   variant: condensed
   title: Service coverage example
-- file: m6_s3b_expected_relationships.md
+- file: m6_s3f_expected_relationships.md
   order: 3.02
   variant: condensed
   title: Expected relationships which help with estimating denominators

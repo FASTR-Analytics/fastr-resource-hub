@@ -8,7 +8,7 @@ slides:
   variant: full
   title: Comparaison de l'utilisation des services avec DHIS2
   status: new
-- file: m6_1b_indicator_directionality.md
+- file: m6_1c_indicator_directionality.md
   order: 1.005
   variant: full
   title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
@@ -127,7 +127,7 @@ slides:
   variant: condensed
   title: Essayez par vous-même
   status: new
-- file: m6_s1b_indicator_directionality.md
+- file: m6_s1d_indicator_directionality.md
   order: 1.005
   variant: condensed
   title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
@@ -158,7 +158,7 @@ slides:
   order: 3.01
   variant: condensed
   title: Exemple de couverture des services
-- file: m6_s3b_expected_relationships.md
+- file: m6_s3f_expected_relationships.md
   order: 3.02
   variant: condensed
   title: Relations attendues qui aident à estimer les dénominateurs
