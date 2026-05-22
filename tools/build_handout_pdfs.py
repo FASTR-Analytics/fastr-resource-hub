@@ -32,7 +32,7 @@ ORDER_FILE = HANDOUTS / "_order.yaml"
 MODULES_FILE = REPO / "modules.yaml"
 OUT = HANDOUTS / "_out"
 RENDER = REPO / "tools" / "render_handout.sh"
-LANGS = ("en", "fr")
+LANGS = ("en", "fr", "pt")
 FACILITATOR_DIR = "Facilitator"
 
 
@@ -42,7 +42,8 @@ def module_names() -> dict:
     names = {}
     for mod in data.get("modules", []):
         name = mod.get("name", {})
-        names[mod["id"]] = {"en": name.get("en", mod["id"]), "fr": name.get("fr", mod["id"])}
+        en = name.get("en", mod["id"])
+        names[mod["id"]] = {"en": en, "fr": name.get("fr", en), "pt": name.get("pt", en)}
     return names
 
 
@@ -57,13 +58,13 @@ def ordered_files(module_dir: Path, order: list) -> list:
 def is_facilitator(md_path: Path) -> bool:
     """True if the handout is facilitator-only (tagged in its meta-line).
 
-    Matches the "facilitat" stem so it catches both English ("Facilitator
-    notes", "Facilitator guide") and French ("Notes du facilitateur",
-    "Guide du facilitateur") meta-line tags.
+    Matches the "facilita" stem so it catches English ("Facilitator guide"),
+    French ("Guide du facilitateur") and Portuguese ("Guia do facilitador")
+    meta-line tags.
     """
     for line in md_path.read_text().splitlines():
         if "meta-line" in line:
-            return "facilitat" in line.lower()
+            return "facilita" in line.lower()
     return False
 
 
