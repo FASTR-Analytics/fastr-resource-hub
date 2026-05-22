@@ -64,7 +64,7 @@ section {
   background-color: var(--bg-white);
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--ink);
-  padding: 56px 72px 52px;
+  padding: 84px 72px 52px;  /* extra top padding clears the absolute kicker/header */
   font-size: 21px;
   line-height: 1.45;
   letter-spacing: -0.005em;

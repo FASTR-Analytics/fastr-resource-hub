@@ -78,6 +78,7 @@ function sessionChrome(
   sessionNumber: number | undefined,
   config: WorkshopConfig,
   lang: Language,
+  withHeader: boolean,
 ): string {
   const locale = lang === 'fr' ? 'fr-FR' : 'en-US'
   const esc = (s: string) => (s || '').replace(/'/g, '’').trim()
@@ -90,7 +91,10 @@ function sessionChrome(
   const date = formatDayDate((config.workshop as any).start_date, day, locale)
     || (config.workshop as any).date || ''
   const footer = esc(['FASTR', (config.workshop as any).country, date].filter(Boolean).join(' · '))
-  const header = `<span class="kick">${kicker}</span><span class="loc">${locator}</span>`
+  // Header only for content (module) sessions — on standalone slides (agenda,
+  // icebreaker, break…) the kicker just repeats the slide title. Empty header
+  // clears any persisted kicker from the previous session.
+  const header = withHeader ? `<span class="kick">${kicker}</span><span class="loc">${locator}</span>` : ''
   return `<!-- header: '${header}' -->\n<!-- footer: '${footer}' -->\n\n`
 }
 
@@ -140,7 +144,7 @@ paginate: true
         // Prepend the dynamic chrome (kicker · locator · footer). As Marp
         // persistent directives, they carry through the session's slides until
         // the next session overrides them.
-        const chrome = sessionChrome(session, day, numDays, isContentSession ? sessionNumber : undefined, config, lang)
+        const chrome = sessionChrome(session, day, numDays, isContentSession ? sessionNumber : undefined, config, lang, isContentSession)
         slides.push(chrome + slideContent)
       }
     }

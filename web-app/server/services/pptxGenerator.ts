@@ -667,26 +667,39 @@ function getImageLayout(
 // SLIDE BUILDERS
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
+// Title width available for the heading (full content width).
+const TITLE_W = 12.33
+/** Draws the title + lime rule and returns the Y where body content should start
+ *  (below the rule) — so long/wrapped titles push content down instead of overlapping. */
+function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   const clean = cleanMarkdownText(title)
 
-  // Title in FASTR dark green, Poppins Bold
+  // Title sits below the kicker chrome (~0.6"), giving it breathing room.
+  // Estimate wrapped lines (h2 ~32pt over ~12.3" ≈ ~40 chars/line) so the lime
+  // rule lands under the LAST line, however long the title is.
+  const titleY = 0.82
+  const lineH = 0.6
+  const lineCount = Math.max(1, Math.ceil(clean.length / 40))
+  const titleH = lineCount * lineH
+
   slide.addText(clean, {
-    x: 0.5, y: 0.38, w: 12.33, h: 0.62,
+    x: 0.5, y: titleY, w: TITLE_W, h: titleH,
     fontSize: FONTS.h2Size,
     fontFace: FONTS.titleFamily,
-    color: COLORS.darkGreen,
+    color: COLORS.deepGreen,
     bold: true,
     valign: 'top',
   })
 
-  // Thin lime underline beneath the title, sized roughly to the title text
-  const underlineW = Math.min(9, Math.max(1.2, clean.length * 0.16))
+  // Fixed short lime rule under the title's last line (the brand signature) —
+  // never length-scaled, so long/wrapped titles still get a clean short bar.
   slide.addShape('rect', {
-    x: 0.52, y: 1.04, w: underlineW, h: 0.045,
+    x: 0.52, y: titleY + titleH + 0.04, w: 1.25, h: 0.05,
     fill: { color: COLORS.lime },
-    line: { color: COLORS.lime },
-  })
+    line: { type: 'none' },
+  } as any)
+
+  return titleY + titleH + 0.28  // content starts below the lime rule
 }
 
 function addFooterBar(slide: PptxGenJS.Slide): void {
@@ -937,7 +950,7 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.background = { color: COLORS.white }
 
   const title = data.headers[0]?.text || 'Workshop Agenda'
-  addHeaderBar(slide, title)
+  const agendaTop = addHeaderBar(slide, title)
 
   if (data.table && data.table.length > 0) {
     const rows = data.table.length
@@ -976,7 +989,7 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
     slide.addTable(tableRows, {
       x: LAYOUT.contentLeft,
-      y: 1.5,
+      y: agendaTop,
       w: LAYOUT.contentWidth,
       rowH: rowHeight,
       border: TABLE_BORDER,
@@ -992,9 +1005,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.background = { color: COLORS.white }
 
   const title = data.headers[0]?.text || 'Table'
-  addHeaderBar(slide, title)
-
-  let tableTop = 1.5
+  let tableTop = addHeaderBar(slide, title)
 
   // Check if there's paragraph content before the table - render it first
   const hasTextContent = data.content.length > 0
@@ -1040,15 +1051,16 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     if (textItems.length > 0) {
       // Estimate text height - roughly 0.3 inches per line
       const estimatedTextHeight = Math.min(2, textItems.length * 0.25)
+      const textTop = tableTop
       slide.addText(textItems, {
         x: LAYOUT.contentLeft,
-        y: 1.5,
+        y: textTop,
         w: LAYOUT.contentWidth,
         h: estimatedTextHeight,
         valign: 'top',
         fit: 'shrink',
       })
-      tableTop = 1.5 + estimatedTextHeight + 0.2
+      tableTop = textTop + estimatedTextHeight + 0.2
     }
   }
 
@@ -1125,13 +1137,11 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.background = { color: COLORS.white }
 
   const title = data.headers[0]?.text || ''
-  if (title) {
-    addHeaderBar(slide, title)
-  }
+  const titleBottom = title ? addHeaderBar(slide, title) : 1.6
 
   if (!data.columns) return
 
-  let contentTop = 1.6
+  let contentTop = titleBottom
 
   // --- Render content BEFORE the columns div (intro text) ---
   // Find text in raw markdown that appears before the columns div
@@ -1463,9 +1473,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.background = { color: COLORS.white }
 
   const title = data.headers[0]?.text || ''
-  if (title) {
-    addHeaderBar(slide, title)
-  }
+  const imgTop = title ? addHeaderBar(slide, title) : 1.5
 
   // Find the main image
   let mainImgPath: string | null = null
@@ -1531,7 +1539,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       if (textItems.length > 0) {
         slide.addText(textItems, {
           x: LAYOUT.contentLeft,
-          y: 1.5,
+          y: imgTop,
           w: LAYOUT.contentWidth,
           h: 2,
           valign: 'top',
@@ -1589,7 +1597,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       if (textItems.length > 0) {
         slide.addText(textItems, {
           x: LAYOUT.contentLeft,
-          y: 1.5,
+          y: imgTop,
           w: 5.5,
           h: 5.5,
           valign: 'top',
@@ -1622,9 +1630,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.background = { color: COLORS.white }
 
   const title = data.headers[0]?.text || ''
-  if (title) {
-    addHeaderBar(slide, title)
-  }
+  const titleBottom = title ? addHeaderBar(slide, title) : 1.5
 
   // Separate decorative icons from content images
   const decorativeIcon = data.images.find(img => !isBackgroundImage(img) && isDecorativeIcon(img))
@@ -1633,7 +1639,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
   // Calculate layout based on what we have
   let contentWidth = LAYOUT.contentWidth
-  let contentTop = 1.5
+  let contentTop = titleBottom
   let iconRendered = false
 
   // If we have a decorative icon, render it below the title
