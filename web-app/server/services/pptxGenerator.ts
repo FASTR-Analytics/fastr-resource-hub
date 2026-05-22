@@ -32,6 +32,13 @@ const COLORS = {
   textDark: '2c3e50',
   darkGray: '333333',
   white: 'FFFFFF',
+  // 2026 refresh tokens (mirror fastr-theme.css :root)
+  ink: '1A1F1E',          // body text
+  ink2: '5A6562',         // secondary
+  ink3: '97A09D',         // tertiary / chrome
+  paper2: 'F6F5EF',       // warm panel (breaks, callouts)
+  green900: '063D39',     // dark slides
+  rule: 'E4E7E5',         // hairline
 }
 
 const FONTS = {
@@ -58,6 +65,11 @@ const LAYOUT = {
   contentWidth: 11.833,
   contentLeft: 0.75,
 }
+
+// Clean table borders (mirror the CSS): every cell gets only a hairline bottom
+// rule; header cells override with a 2pt green underline. No box, no fills.
+const TABLE_BORDER: any = [{ type: 'none' }, { type: 'none' }, { type: 'solid', pt: 0.5, color: COLORS.rule }, { type: 'none' }]
+const TABLE_BORDER_HEADER: any = [{ type: 'none' }, { type: 'none' }, { type: 'solid', pt: 1.5, color: COLORS.deepGreen }, { type: 'none' }]
 
 // Warnings collected during a single generatePPTX run (e.g. missing images),
 // reset at the start of each run and returned to the caller so the UI can surface them.
@@ -340,12 +352,13 @@ function detectSlideType(slide: ParsedSlide, index: number): SlideType {
   }
 
   // Break
+  if (slide.cssClass === 'break') return 'break'
   const breakEmojis = ['☕', '🍽', '🌙', '🎉', '👋', '⏰']
   if (breakEmojis.some(e => h1Text.includes(e))) return 'break'
   if (/\b(break|lunch|tea)\b/i.test(h1Text)) return 'break'
 
   // Section
-  if (slide.cssClass === 'section-cover') return 'section'
+  if (slide.cssClass === 'section-cover' || slide.cssClass === 'section') return 'section'
   const nonIconImages = slide.images.filter(img => !isIconImage(img))
   const hasContent = slide.bullets.length > 0 || slide.paragraphs.length > 0 || nonIconImages.length > 0
   if (slide.headers[0]?.level === 1 && !hasContent) {
@@ -812,42 +825,39 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
 function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const slide = pptx.addSlide()
-  slide.background = { color: COLORS.darkGreen }  // FASTR teal
+  slide.background = { color: COLORS.paper2 }  // warm off-white field
 
-  const title = data.headers[0]?.text || 'Break'
+  // New structure: kind label + big duration (h1) + "we resume at" line.
+  // Fall back to the old "**N minutes** / resume at HH:MM" prose if present.
+  const kindMatch = data.raw.match(/<div class="kind">([\s\S]*?)<\/div>/i)
+  const backMatch = data.raw.match(/<div class="back">([\s\S]*?)<\/div>/i)
+  let kind = kindMatch ? cleanMarkdownText(kindMatch[1]) : ''
+  let big = cleanMarkdownText(data.headers[0]?.text || 'Break')
+  let back = backMatch ? cleanMarkdownText(backMatch[1]) : ''
 
-  slide.addText(cleanMarkdownText(title), {
-    x: 1, y: 2.8, w: 11.333, h: 1.5,
-    fontSize: 56,
-    fontFace: FONTS.titleFamily,
-    color: COLORS.white,
-    bold: true,
-    align: 'center',
-    valign: 'middle',
-  })
-
-  // Time info - extract duration and resume time
-  const timeMatch = data.raw.match(/\*\*(\d+)\s*minutes?\*\*/i)
-  const resumeMatch = data.raw.match(/resume at \*\*(\d{1,2}:\d{2})\*\*/i)
-  // Also match template placeholders like {{TEA_RESUME_TIME}}
-  const resumePlaceholderMatch = data.raw.match(/resume at \{\{(\w+)\}\}/i)
-    || data.raw.match(/reprendrons à \{\{(\w+)\}\}/i)
-
-  const subtitleParts: string[] = []
-  if (timeMatch) subtitleParts.push(`${timeMatch[1]} minutes`)
-  if (resumeMatch) {
-    subtitleParts.push(`Back at ${resumeMatch[1]}`)
-  } else if (resumePlaceholderMatch) {
-    subtitleParts.push(`We'll resume at {{${resumePlaceholderMatch[1]}}}`)
+  if (!backMatch) {
+    const resumeMatch = data.raw.match(/resume at\s*\**(\d{1,2}:\d{2})/i)
+    if (resumeMatch) back = `We resume at ${resumeMatch[1]}`
   }
 
-  if (subtitleParts.length > 0) {
-    slide.addText(subtitleParts.join(' • '), {
-      x: 1, y: 4.3, w: 11.333, h: 0.6,
-      fontSize: FONTS.h2Size,
-      fontFace: FONTS.family,
-      color: COLORS.lime,
-      align: 'center',
+  if (kind) {
+    slide.addText(kind.toUpperCase(), {
+      x: 0.5, y: 2.35, w: 12.33, h: 0.5,
+      fontSize: 16, fontFace: FONTS.family, color: COLORS.deepGreen,
+      bold: true, charSpacing: 3, align: 'center',
+    })
+  }
+
+  slide.addText(big, {
+    x: 0.5, y: 2.75, w: 12.33, h: 2.1,
+    fontSize: 130, fontFace: FONTS.titleFamily, color: COLORS.deepGreen,
+    bold: true, align: 'center', valign: 'middle',
+  })
+
+  if (back) {
+    slide.addText(back, {
+      x: 0.5, y: 5.1, w: 12.33, h: 0.6,
+      fontSize: 24, fontFace: FONTS.family, color: COLORS.ink, align: 'center',
     })
   }
 }
@@ -875,14 +885,11 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           options: {
             fontSize: fontSize,
             fontFace: FONTS.family,
-            color: rIdx === 0 ? COLORS.navy : COLORS.textDark,
+            color: rIdx === 0 ? COLORS.deepGreen : COLORS.ink,
             bold: rIdx === 0 || isBoldCell,
             valign: 'middle',
+            border: rIdx === 0 ? TABLE_BORDER_HEADER : TABLE_BORDER,
           },
-        }
-        // Add fill for header row
-        if (rIdx === 0) {
-          cellObj.options!.fill = { color: COLORS.lightBlue }
         }
         return cellObj
       })
@@ -902,7 +909,7 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       y: 1.5,
       w: LAYOUT.contentWidth,
       rowH: rowHeight,
-      border: { type: 'solid', pt: 0.5, color: 'CCCCCC' },
+      border: TABLE_BORDER,
       colW,
     })
   }
@@ -930,7 +937,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           options: {
             fontSize: FONTS.h3Size,
             fontFace: FONTS.family,
-            color: COLORS.orchid,
+            color: COLORS.darkGreen,
             bold: true,
             breakLine: true,
             paraSpaceAfter: 6,
@@ -988,9 +995,9 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         options: {
           fontSize,
           fontFace: FONTS.family,
-          color: rIdx === 0 ? COLORS.navy : COLORS.textDark,
+          color: rIdx === 0 ? COLORS.deepGreen : COLORS.ink,
           bold: rIdx === 0,
-          fill: rIdx === 0 ? { color: COLORS.lightBlue } : undefined,
+          border: rIdx === 0 ? TABLE_BORDER_HEADER : TABLE_BORDER,
         },
       }))
     })
@@ -1000,7 +1007,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       y: tableTop,
       w: 12.3,
       rowH: rowHeight,
-      border: { pt: 0.5, color: 'CCCCCC' },
+      border: TABLE_BORDER,
     })
 
     // Calculate where the table ends for positioning images below
@@ -1241,7 +1248,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         slide.addTable(tableData, {
           x, y: currentY, w,
           fontSize: FONTS.tableSize,
-          border: { type: 'solid', pt: 0.5, color: 'CCCCCC' },
+          border: TABLE_BORDER,
           colW: Array(tableData[0]?.length || 2).fill(w / (tableData[0]?.length || 2)),
           rowH: 0.35,
           autoPage: false,
@@ -1256,7 +1263,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           options: {
             fontSize: item.level === 4 ? FONTS.bodySize : FONTS.h3Size,
             fontFace: FONTS.family,
-            color: item.level === 4 ? COLORS.darkGreen : COLORS.orchid,
+            color: item.level === 4 ? COLORS.darkGreen : COLORS.darkGreen,
             bold: true,
             breakLine: true,
             paraSpaceAfter: 8,
@@ -1306,7 +1313,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       slide.addTable(tableData, {
         x, y: currentY, w,
         fontSize: FONTS.tableSize,
-        border: { type: 'solid', pt: 0.5, color: 'CCCCCC' },
+        border: TABLE_BORDER,
         colW: Array(tableData[0]?.length || 2).fill(w / (tableData[0]?.length || 2)),
         rowH: 0.35,
         autoPage: false,
@@ -1421,7 +1428,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             options: {
               fontSize: FONTS.h3Size,
               fontFace: FONTS.family,
-              color: COLORS.orchid,
+              color: COLORS.darkGreen,
               bold: true,
               breakLine: true,
               paraSpaceAfter: 6,
@@ -1479,7 +1486,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             options: {
               fontSize: FONTS.h3Size,
               fontFace: FONTS.family,
-              color: COLORS.orchid,
+              color: COLORS.darkGreen,
               bold: true,
               breakLine: true,
               paraSpaceAfter: 10,
@@ -1639,7 +1646,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         options: {
           fontSize: FONTS.h3Size,
           fontFace: FONTS.family,
-          color: COLORS.orchid,
+          color: COLORS.darkGreen,
           bold: true,
           breakLine: true,
           paraSpaceAfter: 10,

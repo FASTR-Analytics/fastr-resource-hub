@@ -53,6 +53,44 @@ interface Session {
  * @param config - Workshop configuration
  * @param language - Language for content ('en' or 'fr', defaults to config.workshop.language or 'en')
  */
+
+/** Calendar date of a given workshop day (1-based). Day 1 of a 20-23 May
+ *  workshop → "20 May 2026". Empty string if no start date. */
+function formatDayDate(startDate: string | undefined, dayNumber: number, locale: string): string {
+  if (!startDate) return ''
+  try {
+    const d = new Date(startDate)
+    d.setDate(d.getDate() + (dayNumber - 1))
+    return d.toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' })
+  } catch {
+    return ''
+  }
+}
+
+/** Dynamic per-slide chrome for a session, as Marp persistent directives:
+ *  kicker (topic, top-left) + locator (Day x/y · Session n, top-right) + footer
+ *  (FASTR · country · the date of this day). Persists until the next session
+ *  overrides it; covers suppress it via CSS. */
+function sessionChrome(
+  session: Session,
+  day: number,
+  numDays: number,
+  sessionNumber: number | undefined,
+  config: WorkshopConfig,
+  lang: Language,
+): string {
+  const locale = lang === 'fr' ? 'fr-FR' : 'en-US'
+  const esc = (s: string) => (s || '').replace(/'/g, '’').trim()
+  // Strip a leading "Module 04 ·" — the kicker is just the topic.
+  const kicker = esc((session.session || '').replace(/^\s*module\s+\d+\s*[—\-·:.]*\s*/i, ''))
+  const dayWord = lang === 'fr' ? 'Jour' : 'Day'
+  const locator = `${dayWord} ${day}/${numDays}` + (sessionNumber ? ` · Session ${sessionNumber}` : '')
+  const date = formatDayDate((config.workshop as any).start_date, day, locale)
+  const footer = esc(['FASTR', (config.workshop as any).country, date].filter(Boolean).join(' · '))
+  const header = `<span class="kick">${kicker}</span><span class="loc">${locator}</span>`
+  return `<!-- header: '${header}' -->\n<!-- footer: '${footer}' -->\n\n`
+}
+
 export async function buildMarkdown(workshopId: string, config: WorkshopConfig, language?: Language): Promise<string> {
   // Use provided language, or fall back to workshop config, or default to English
   const lang: Language = language || (config.workshop as any).language || 'en'
@@ -61,8 +99,7 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   // Marp frontmatter — select theme based on workshop config
   const themeSetting = (config.workshop as any).theme || 'classic'
   const marpTheme = themeSetting === 'clean' ? 'fastr-clean'
-    : themeSetting === 'bold' ? 'fastr-bold'
-    : themeSetting === 'workshop' ? 'fastr-workshop' : 'fastr'
+    : themeSetting === 'bold' ? 'fastr-bold' : 'fastr'
 
   slides.push(`---
 marp: true
@@ -97,7 +134,11 @@ paginate: true
 
       const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined, lang, customSlideMap)
       if (slideContent) {
-        slides.push(slideContent)
+        // Prepend the dynamic chrome (kicker · locator · footer). As Marp
+        // persistent directives, they carry through the session's slides until
+        // the next session overrides them.
+        const chrome = sessionChrome(session, day, numDays, isContentSession ? sessionNumber : undefined, config, lang)
+        slides.push(chrome + slideContent)
       }
     }
   }
@@ -879,23 +920,22 @@ function buildBreakSlide(session: Session, language: Language = 'en'): string {
   const duration = session.duration || (isLunch ? 60 : 15)
   const resumeTime = calculateResumeTime(session)
 
-  const title = isLunch
-    ? (isFr ? '🍽️ Pause déjeuner' : '🍽️ Lunch Break')
-    : (isFr ? '☕ Pause café' : '☕ Tea Break')
+  const kind = isLunch
+    ? (isFr ? 'Pause déjeuner' : 'Lunch break')
+    : (isFr ? 'Pause café' : 'Coffee break')
 
-  const durationLabel = isFr ? `**${duration} minutes**` : `**${duration} minutes**`
-  const resumeLabel = resumeTime
-    ? (isFr ? `Reprise à **${resumeTime}**` : `We resume at **${resumeTime}**`)
+  const back = resumeTime
+    ? (isFr ? `<div class="back">Reprise à <b>${resumeTime}</b></div>` : `<div class="back">We resume at <b>${resumeTime}</b></div>`)
     : ''
 
+  // Design-style break: warm field, kind label, big duration, resume line — no emoji.
   return `<!-- _class: break -->
-![bg](../../resources/backgrounds/break_slide.png)
 
-# ${title}
+<div class="kind">${kind}</div>
 
-${durationLabel}
+# ${duration} min
 
-${resumeLabel}
+${back}
 `
 }
 

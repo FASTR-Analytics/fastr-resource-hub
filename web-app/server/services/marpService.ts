@@ -23,7 +23,6 @@ const THEME_FILES: Record<string, string> = {
   'fastr': 'fastr-theme.css',
   'fastr-clean': 'fastr-clean.css',
   'fastr-bold': 'fastr-bold.css',
-  'fastr-workshop': 'fastr-workshop.css',
 }
 
 /**
@@ -77,8 +76,7 @@ export function getThemeCSS(): string {
  */
 export function getThemeCSSByName(theme: string): string {
   const marpThemeName = theme === 'clean' ? 'fastr-clean'
-    : theme === 'bold' ? 'fastr-bold'
-    : theme === 'workshop' ? 'fastr-workshop' : 'fastr'
+    : theme === 'bold' ? 'fastr-bold' : 'fastr'
   return themeCSS[marpThemeName] || fastrThemeCSS
 }
 
