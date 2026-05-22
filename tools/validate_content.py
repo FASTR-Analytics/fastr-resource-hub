@@ -322,6 +322,49 @@ def main():
     else:
         print('  OK: All SLIDE markers have matching core_content files')
 
+    # 1b. Reverse check (drift guard): core_content slides with NO methodology
+    #     marker. These exist in core_content but not in methodology, so the
+    #     docs are out of date and a re-extraction would lose them.
+    print('\n--- Checking every core_content slide has a methodology source ---')
+
+    def _mod_of(name):
+        m = re.match(r'^(mai|m\d+)', name)
+        return m.group(1) if m else None
+
+    extracted_mods = {_mod_of(sid) for sid in markers}
+    extracted_mods.discard(None)
+    unsourced = []
+    matches_per_marker = {}
+    for rel_path in en_files:
+        filename = Path(rel_path).name
+        mod = _mod_of(filename)
+        if mod not in extracted_mods:
+            continue  # manually-managed module (e.g. m9*) — no methodology source expected
+        matched = [sid for sid in markers
+                   if filename.startswith(sid + '_') or filename == sid + '.md']
+        if not matched:
+            unsourced.append(rel_path)
+        else:
+            best = max(matched, key=len)
+            matches_per_marker[best] = matches_per_marker.get(best, 0) + 1
+
+    collisions = {sid: c for sid, c in matches_per_marker.items() if c > 1}
+    if unsourced or collisions:
+        if unsourced:
+            print(f'\n  WARNING: {len(unsourced)} core_content slide(s) have NO methodology marker')
+            print('  These live in core_content but not in methodology — methodology is out of date.')
+            print('  Add a <!-- SLIDE:id --> block in the matching methodology/*.md (back-fill).\n')
+            for rel_path in sorted(unsourced):
+                print(f'    {rel_path}')
+            issues += len(unsourced)
+        if collisions:
+            print(f'\n  WARNING: {len(collisions)} marker(s) map to multiple core_content files (id collision)')
+            for sid, c in sorted(collisions.items()):
+                print(f'    SLIDE:{sid} -> {c} files (each needs a unique id)')
+            issues += len(collisions)
+    else:
+        print('  OK: every core_content slide has a methodology marker')
+
     # 2. Check for duplicate headings
     print('\n--- Checking for duplicate slides ---')
     duplicates = find_duplicates(en_files)
