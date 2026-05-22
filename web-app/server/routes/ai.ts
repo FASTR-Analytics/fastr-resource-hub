@@ -46,6 +46,7 @@ function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { na
   const modules = loadModulesRegistry()
   const dict: Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> = {}
   for (const mod of modules) {
+    if (mod.deprecated) continue  // Skip deprecated modules — never expose them to the AI
     if (!mod.ai_context) continue  // Skip modules without AI context
     const ai = mod.ai_context
     dict[mod.number] = {
@@ -1663,12 +1664,33 @@ function postProcessWorkshopConfig(
         totalMinutes -= saved
       }
 
+      // Still over after condensing (e.g. activity-heavy days, where m9
+      // activities can't be compressed) → drop the lowest-priority TRAILING
+      // module sessions until it fits. Keep breaks and custom placeholders
+      // (opening reflection, way-forward, country presentations).
       if (totalMinutes > maxDayMinutes) {
-        const overBy = totalMinutes - maxDayMinutes
-        if (workshopLanguage === 'fr') {
-          warnings.push(`Jour ${dayNum} dépasse l'horaire de ~${overBy} minutes. Envisagez de retirer une session.`)
-        } else {
-          warnings.push(`Day ${dayNum} runs ~${overBy} minutes over schedule. Consider removing a session.`)
+        const dropped: string[] = []
+        for (let i = sessions.length - 1; i >= 0 && totalMinutes > maxDayMinutes; i--) {
+          const s = sessions[i]
+          if (!s.module || s.type === 'break' || s.type === 'custom') continue
+          totalMinutes -= (s.duration || 0)
+          dropped.unshift(s.session || `Module ${s.module}`)
+          sessions.splice(i, 1)
+        }
+        if (dropped.length) {
+          if (workshopLanguage === 'fr') {
+            warnings.push(`Jour ${dayNum} : ${dropped.length} session(s) retirée(s) pour tenir dans l'horaire — ${dropped.join(', ')}. Rajoutez-les au besoin.`)
+          } else {
+            warnings.push(`Day ${dayNum}: dropped ${dropped.length} session(s) to fit the schedule — ${dropped.join(', ')}. Re-add any you need.`)
+          }
+        }
+        if (totalMinutes > maxDayMinutes) {
+          const overBy = totalMinutes - maxDayMinutes
+          if (workshopLanguage === 'fr') {
+            warnings.push(`Jour ${dayNum} dépasse encore l'horaire de ~${overBy} minutes.`)
+          } else {
+            warnings.push(`Day ${dayNum} still runs ~${overBy} minutes over after trimming.`)
+          }
         }
       }
     }
