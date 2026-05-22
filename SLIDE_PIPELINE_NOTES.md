@@ -38,7 +38,7 @@ To make methodology source a module's slides with a **byte-exact round-trip**:
 - ✅ **Done & verified (byte-exact round-trip, EN+FR):** m8, m0, m5, m3.
   - m3 also dropped 6 obsolete FR-only markers (`m3_2/2d/4/6/7/8`) and fixed repurposed `TOPIC_NAMES` slugs.
 - ⏳ **Remaining (the hard cases):**
-  - **m4** (15 unsourced) — check for collisions before back-fill.
+  - **m4** — NOT a simple back-fill (attempted, reverted). Three problems stacked: (1) **15 unsourced** slides; (2) **3 id collisions** (`m4_1b`, `m4_1c`, `m4_s3b` each map to 2 files); (3) **multi-slide `---` markers** — the parent methodology markers (`m4_4`, `m4_5`, `m4_s3`, `m4_s5`) contain several slides separated by `---`, but core has them **split into separate files** (`m4_5` + `m4_5b` + `m4_5c`, etc.). The extractor does NOT split on `---`, so it can't reproduce the split files, and adding separate markers duplicates the inline content. **Fix:** restructure the m4 methodology so there's **one marker per core slide** (break the `---` blocks into discrete `<!-- SLIDE -->` markers), then back-fill the rest + resolve the 3 collisions. The 15-unsourced back-fill alone round-trips fine; the drift is entirely in the `---`/split parent slides. Focused effort, not mechanical.
   - **m6** (26 unsourced, incl. id collisions like two `m6_s1b_*`).
   - **m7** (12 unsourced, incl. two `m7_2a2_*`).
   - **mai** — messy: orphaned markers BOTH langs (EN `mai_3a/6/6a`; FR `mai_6/7/9/10/11/12/13`) + unsourced files (EN `mai_2b`; FR `mai_2b/4a/5a/8a/8b`). Has filename↔title drift. Needs its own focused investigation (drop-vs-add per marker).
