@@ -96,6 +96,8 @@ interface ParsedSlide {
   columns: { left: string; right: string } | null
   cssClass: string | null
   presenterNotes?: string
+  header?: string   // Marp header directive in effect for this slide (kicker · locator)
+  footer?: string   // Marp footer directive in effect for this slide
 }
 
 type SlideType = 'title' | 'agenda' | 'break' | 'section' | 'two_column' | 'table' | 'image' | 'content'
@@ -104,11 +106,20 @@ type SlideType = 'title' | 'agenda' | 'break' | 'section' | 'two_column' | 'tabl
 // MARKDOWN PARSER (ported from Python)
 // ═══════════════════════════════════════════════════════════════════════════════
 
+const stripQuotes = (s: string) => s.trim().replace(/^['"]/, '').replace(/['"]$/, '')
+
 function parseMarkdown(content: string): ParsedSlide[] {
-  // Strip YAML frontmatter
+  // Strip YAML frontmatter — but first read global header/footer (chrome) from it.
+  let currentHeader = ''
+  let currentFooter = ''
   const frontmatterMatch = content.match(/^---\n[\s\S]*?\n---\n?/)
   if (frontmatterMatch) {
-    content = content.slice(frontmatterMatch[0].length)
+    const fm = frontmatterMatch[0]
+    const gh = fm.match(/^header:\s*(.+?)\s*$/m)
+    const gf = fm.match(/^footer:\s*(.+?)\s*$/m)
+    if (gh) currentHeader = stripQuotes(gh[1])
+    if (gf) currentFooter = stripQuotes(gf[1])
+    content = content.slice(fm.length)
   }
 
   // Strip style blocks
@@ -130,6 +141,19 @@ function parseMarkdown(content: string): ParsedSlide[] {
       cssClass = classMatch[1]
       raw = raw.replace(/<!--\s*_class:\s*\w+\s*-->/, '')
     }
+
+    // Header/footer directives — persistent (`<!-- header: -->`) carry forward to
+    // later slides; local (`<!-- _header: -->`) apply to this slide only. Parse
+    // BEFORE the generic comment-strip below removes them.
+    const hPersist = raw.match(/<!--\s*header:\s*(.+?)\s*-->/)
+    const hLocal = raw.match(/<!--\s*_header:\s*(.+?)\s*-->/)
+    const fPersist = raw.match(/<!--\s*footer:\s*(.+?)\s*-->/)
+    const fLocal = raw.match(/<!--\s*_footer:\s*(.+?)\s*-->/)
+    if (hPersist) currentHeader = stripQuotes(hPersist[1])
+    if (fPersist) currentFooter = stripQuotes(fPersist[1])
+    const slideHeader = hLocal ? stripQuotes(hLocal[1]) : currentHeader
+    const slideFooter = fLocal ? stripQuotes(fLocal[1]) : currentFooter
+    raw = raw.replace(/<!--\s*_?header:[\s\S]*?-->/g, '').replace(/<!--\s*_?footer:[\s\S]*?-->/g, '')
 
     // Extract and remove presenter notes (HTML comments with PRESENTER NOTES)
     // Must happen BEFORE creating slide object so cleaned raw is stored
@@ -161,6 +185,8 @@ function parseMarkdown(content: string): ParsedSlide[] {
       columns: null,
       cssClass,
       presenterNotes,
+      header: slideHeader,
+      footer: slideFooter,
     }
 
     // Extract headers
@@ -665,6 +691,49 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): void {
 
 function addFooterBar(slide: PptxGenJS.Slide): void {
   // No footer bar - clean design
+}
+
+// Slide chrome (mirrors fastr-theme.css): kicker (topic) top-left with a lime
+// dash, locator (Day x/y · Session n) top-right, and a thin footer rule with
+// "FASTR · country · date" left + page number right. Driven by the deck's
+// header/footer directives. Covers and breaks are self-contained → no chrome.
+const CHROME_BARE = new Set(['title', 'title-cover', 'section', 'section-cover', 'break', 'lead'])
+function addChrome(slide: PptxGenJS.Slide, data: ParsedSlide, pageNum: number): void {
+  if (data.cssClass && CHROME_BARE.has(data.cssClass)) return
+
+  const header = data.header || ''
+  const kickMatch = header.match(/<span class="kick">([\s\S]*?)<\/span>/i)
+  const locMatch = header.match(/<span class="loc">([\s\S]*?)<\/span>/i)
+  const kick = kickMatch ? cleanMarkdownText(kickMatch[1]) : (header.includes('<span') ? '' : cleanMarkdownText(header))
+  const loc = locMatch ? cleanMarkdownText(locMatch[1]) : ''
+
+  if (kick) {
+    slide.addShape('rect', { x: 0.5, y: 0.43, w: 0.22, h: 0.025, fill: { color: COLORS.lime }, line: { type: 'none' } } as any)
+    slide.addText(kick.toUpperCase(), {
+      x: 0.8, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      color: COLORS.deepGreen, bold: true, charSpacing: 2, valign: 'middle',
+    })
+  }
+  if (loc) {
+    slide.addText(loc.toUpperCase(), {
+      x: 5.33, y: 0.28, w: 7.5, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      color: COLORS.ink3, bold: true, charSpacing: 2, align: 'right', valign: 'middle',
+    })
+  }
+
+  // Footer rule + text + page number.
+  slide.addShape('line', { x: 0.5, y: 7.04, w: 12.33, h: 0, line: { color: COLORS.rule, width: 0.75 } } as any)
+  const footer = data.footer ? cleanMarkdownText(data.footer) : ''
+  if (footer) {
+    slide.addText(footer.toUpperCase(), {
+      x: 0.5, y: 7.1, w: 9, h: 0.3, fontSize: 9, fontFace: FONTS.family,
+      color: COLORS.ink3, charSpacing: 1.5, valign: 'middle',
+    })
+  }
+  slide.addText(String(pageNum), {
+    x: 11.5, y: 7.1, w: 1.33, h: 0.3, fontSize: 9, fontFace: FONTS.family,
+    color: COLORS.ink3, align: 'right', valign: 'middle',
+  })
 }
 
 function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
@@ -1766,6 +1835,7 @@ export async function generatePPTX(
 
   const typeCounts: Record<string, number> = {}
 
+  let pageNum = 0
   for (let i = 0; i < slides.length; i++) {
     const slideType = detectSlideType(slides[i], i)
     typeCounts[slideType] = (typeCounts[slideType] || 0) + 1
@@ -1773,13 +1843,16 @@ export async function generatePPTX(
     try {
       builders[slideType](pptx, slides[i])
 
+      const pptxSlides = (pptx as any).slides as PptxGenJS.Slide[]
+      const currentSlide = pptxSlides[pptxSlides.length - 1]
+
+      // Slide chrome (kicker · locator · footer · page number); content slides only.
+      const cls = slides[i].cssClass
+      if (!(cls && CHROME_BARE.has(cls))) pageNum++
+      addChrome(currentSlide, slides[i], pageNum)
+
       // Add presenter notes to the slide if present
-      const notes = slides[i].presenterNotes
-      if (notes) {
-        const pptxSlides = (pptx as any).slides as PptxGenJS.Slide[]
-        const currentSlide = pptxSlides[pptxSlides.length - 1]
-        currentSlide.addNotes(notes)
-      }
+      if (slides[i].presenterNotes) currentSlide.addNotes(slides[i].presenterNotes!)
     } catch (e) {
       console.warn(`Error building slide ${i + 1} (${slideType}):`, e)
       try {
