@@ -24,6 +24,18 @@ methodology has **150 SLIDE markers** but core_content (extracted modules m0–m
 5. **Never hand-edit `core_content`** — it's generated; edit `methodology/` then extract. (Done wrong once for the m4 completeness fix — consistent, but not the proper path.)
 6. **m9 `_meta.yaml` must be protected** during extraction — m9 slides are manually managed, but the extractor regenerates their `_meta` and scrambles the ordering. Restore `m9*/_meta.yaml` after any extraction.
 
+## Back-fill method (proven on m8 — d480972)
+
+To make methodology source a module's slides with a **byte-exact round-trip**:
+1. **Sync each slide's block** into the methodology file: for every core_content slide, replace its `<!-- SLIDE:id -->…<!-- /SLIDE -->` block body with the core body (strip the marp frontmatter), or append a new block if absent. This also refreshes *sourced-but-drifted* slides (e.g. FR `m8_1`), not just missing ones.
+2. **Add `TOPIC_NAMES[id] = slug`** in `00_extract_slides.py` for each new slide (slug = the committed filename minus `id_` minus `.md`). Without it the extractor emits generic `m8_0_topic_0.md` dupes instead of reproducing the real filename.
+3. **Verify:** run extraction, `git diff core_content/<module>` (excl `_meta`) must be **empty**, no untracked dupes, and the guard reports the module 0-unsourced.
+4. Images: the m8 slides had none. For modules WITH images, the block body must use methodology-relative paths (`resources/…`), i.e. reverse `fix_image_paths` (`../../resources/` → `../resources/` / `resources/`).
+
+**Wrinkle:** `build_meta_yaml` only emits `file/order/variant/title` — it **drops custom `_meta` fields** like `status: new` and `last_reviewed`. So a re-extraction strips those. For m8 we kept the committed `_meta` (didn't commit the stripped version). Decide whether those fields matter before enabling routine re-extraction.
+
+**Remaining to back-fill:** m0 (6), m3 (3), m4 (15), m5 (3), m6 (26, incl. id collisions like two `m6_s1b_*`), m7 (12, incl. two `m7_2a2_*`), mai (1). Collisions: check the logical order, then assign unique ids (renames the core file + `_meta`).
+
 ## Already fixed / done
 
 - Web-app had the same prefix-collision in topic IDs → fixed in `content.ts` (stem-based IDs).
