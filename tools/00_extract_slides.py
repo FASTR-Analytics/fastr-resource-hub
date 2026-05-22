@@ -416,7 +416,7 @@ def fix_image_paths(content, source_file):
     return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_image, content)
 
 
-def extract_slides(base_dir, language='en'):
+def extract_slides(base_dir, language='en', prune=False):
     """
     Main extraction function.
 
@@ -425,6 +425,11 @@ def extract_slides(base_dir, language='en'):
     Args:
         base_dir: Base directory of the fastr-resource-hub
         language: Language code ('en' for English, 'fr' for French, etc.)
+        prune: If True, delete core_content slide files no longer produced by
+            methodology markers. OFF by default — only safe once methodology is
+            fully reconciled with core_content (today methodology has fewer
+            markers than core_content has slides, so pruning would delete real
+            content).
     """
     # Determine methodology directory based on language
     if language == 'en':
@@ -455,6 +460,8 @@ def extract_slides(base_dir, language='en'):
     print(f"📁 Output directory: {output_dir_name}/\n")
 
     total_extracted = 0
+    # Track which files we wrote, per module folder, so we can prune stale ones.
+    written_by_folder = {}
 
     for md_file in sorted(md_files):
         filename = md_file.name
@@ -488,11 +495,26 @@ def extract_slides(base_dir, language='en'):
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(final_content)
 
+            written_by_folder.setdefault(os.path.dirname(output_path), set()).add(os.path.basename(output_path))
             print(f"   ✓ {slide_id} → {os.path.basename(output_path)}")
             total_extracted += 1
 
+    # Prune stale slide files (opt-in via --prune): in any folder we wrote to,
+    # remove .md files we did NOT write this run. Only touches folders that were
+    # extracted — manually-managed modules (m9*) get no markers, so their folders
+    # are never in this set. WARNING: only safe once methodology fully covers
+    # core_content; otherwise it deletes real, un-marked slides.
+    pruned = 0
+    if prune:
+        for folder, kept in written_by_folder.items():
+            for path in Path(folder).glob('*.md'):
+                if path.name not in kept:
+                    path.unlink()
+                    print(f"   🗑  pruned stale: {os.path.relpath(path, base_dir)}")
+                    pruned += 1
+
     print("\n" + "─" * 70)
-    print(f"✅ Extracted {total_extracted} slide(s) to {output_dir_name}/")
+    print(f"✅ Extracted {total_extracted} slide(s) to {output_dir_name}/" + (f"  ·  pruned {pruned} stale" if pruned else ""))
     print("─" * 70 + "\n")
 
     return True
@@ -573,6 +595,13 @@ Examples:
         choices=['en', 'fr'],
         help='Language(s) to extract (default: en). Can be specified multiple times.'
     )
+    parser.add_argument(
+        '--prune',
+        action='store_true',
+        help='Delete core_content slide files no longer produced by methodology '
+             'markers. OFF by default — only safe once methodology fully covers '
+             'core_content (otherwise it deletes real, un-marked slides).'
+    )
     args = parser.parse_args()
 
     # Default to English if no language specified
@@ -584,7 +613,7 @@ Examples:
 
     all_success = True
     for language in languages:
-        success = extract_slides(base_dir, language)
+        success = extract_slides(base_dir, language, prune=args.prune)
         if not success:
             all_success = False
 

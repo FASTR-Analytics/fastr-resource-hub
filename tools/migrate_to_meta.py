@@ -212,56 +212,44 @@ def determine_variant(filename, mod_id):
     return 'full'
 
 
+def _suffix_to_sub(suffix):
+    """Convert an order-suffix ('a', 'a2', 'b', 'ab', 'bb', ...) to a small,
+    monotonic fraction. Keeps the legacy values for the common single-letter
+    (+ trailing digits) case, and extends to multi-letter suffixes instead of
+    crashing — the old code did int('b') on 'ab' and silently fell through to 0."""
+    if not suffix:
+        return 0.0
+    sub = (ord(suffix[0]) - 96) * 0.01 if suffix[0].isalpha() else 0.0
+    rest = suffix[1:]
+    m = re.match(r'^(\d+)', rest)          # trailing digits as a number: a2 -> +0.002
+    if m:
+        sub += int(m.group(1)) * 0.001
+        rest = rest[m.end():]
+    for j, ch in enumerate(rest):          # any further letters: shrinking increments
+        if ch.isalpha():
+            sub += (ord(ch) - 96) * (0.0001 / (10 ** j))
+    return sub
+
+
 def extract_order(filename, mod_id):
-    """Extract sort order number from filename."""
-    # Overview module: 01_xxx.md, 04b_xxx.md
+    """Sort-order from filename: integer base + suffix fraction.
+
+    Two files sharing a prefix (e.g. m4_1b_approach + m4_1b_fastr) get the SAME
+    value here — those exact ties are broken in build_meta_yaml so every slide
+    ends up with a unique order."""
     if mod_id == 'overview':
-        match = re.match(r'^(\d+)([a-z])?_', filename)
-        if match:
-            base = int(match.group(1))
-            suffix = match.group(2) or ''
-            # e.g., 04 -> 4.0, 04b -> 4.02
-            sub = (ord(suffix) - 96) * 0.01 if suffix else 0
-            return base + sub
-        return 0
-
-    # AI module: mai_1_xxx.md, mai_5a_xxx.md
-    if mod_id == 'mai':
-        match = re.match(r'^mai_(\d+)([a-z]?)_', filename)
-        if match:
-            base = int(match.group(1))
-            suffix = match.group(2) or ''
-            sub = (ord(suffix) - 96) * 0.01 if suffix else 0
-            return base + sub
-        return 0
-
-    # Condensed: m4_s1_xxx.md, m4_s3b_xxx.md
-    match = re.match(r'^m\d+[a-z]?_s(\d+)([a-z]?)_', filename)
-    if match:
-        base = int(match.group(1))
-        suffix = match.group(2) or ''
-        sub = (ord(suffix) - 96) * 0.01 if suffix else 0
-        return base + sub
-
-    # Standard: m4_0_xxx.md, m4_1a_xxx.md, m4_1a2_xxx.md
-    match = re.match(r'^m\d+[a-z]?_(\d+)([a-z]?\d*)_', filename)
-    if match:
-        base = int(match.group(1))
-        suffix = match.group(2) or ''
-        # Parse suffix like 'a' -> 0.01, 'a2' -> 0.012, 'b' -> 0.02
-        sub = 0
-        if suffix:
-            sub = (ord(suffix[0]) - 96) * 0.01
-            if len(suffix) > 1:
-                sub += int(suffix[1:]) * 0.001
-        return base + sub
-
-    # m9a_0_xxx.md pattern
-    match = re.match(r'^m\d+[a-z]_(\d+)_', filename)
-    if match:
-        return int(match.group(1))
-
-    return 0
+        m = re.match(r'^(\d+)([a-z0-9]*)_', filename)
+    elif mod_id == 'mai':
+        m = re.match(r'^mai_(\d+)([a-z0-9]*)_', filename)
+    else:
+        m = (re.match(r'^m\d+[a-z]?_s(\d+)([a-z0-9]*)_', filename)    # condensed
+             or re.match(r'^m\d+[a-z]?_(\d+)([a-z0-9]*)_', filename)  # standard
+             or re.match(r'^m\d+[a-z]_(\d+)_', filename))             # m9a_0_
+    if not m:
+        return 0.0
+    base = int(m.group(1))
+    suffix = (m.group(2) or '') if m.re.groups >= 2 else ''
+    return base + _suffix_to_sub(suffix)
 
 
 def build_meta_yaml(module_dir, mod_id):
@@ -284,8 +272,17 @@ def build_meta_yaml(module_dir, mod_id):
             'title': title,
         })
 
-    # Sort by variant then order
-    slides.sort(key=lambda s: (0 if s['variant'] == 'full' else 1, s['order']))
+    # Sort by variant, then order, then filename (stable, deterministic ties)
+    slides.sort(key=lambda s: (0 if s['variant'] == 'full' else 1, s['order'], s['file']))
+
+    # Break ties so every slide has a UNIQUE order within its variant — two
+    # files sharing a prefix (e.g. m4_1b_*) would otherwise collide.
+    last = {}
+    for s in slides:
+        v = s['variant']
+        if v in last and s['order'] <= last[v]:
+            s['order'] = round(last[v] + 0.001, 6)
+        last[v] = s['order']
 
     return {'slides': slides}
 
