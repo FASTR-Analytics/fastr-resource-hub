@@ -61,7 +61,8 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   // Marp frontmatter — select theme based on workshop config
   const themeSetting = (config.workshop as any).theme || 'classic'
   const marpTheme = themeSetting === 'clean' ? 'fastr-clean'
-    : themeSetting === 'bold' ? 'fastr-bold' : 'fastr'
+    : themeSetting === 'bold' ? 'fastr-bold'
+    : themeSetting === 'workshop' ? 'fastr-workshop' : 'fastr'
 
   slides.push(`---
 marp: true

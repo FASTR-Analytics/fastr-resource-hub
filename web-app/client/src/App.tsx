@@ -3118,11 +3118,12 @@ function App() {
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
                   {t('slideTheme', contentLanguage)}
                 </h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   {([
-                    { value: 'classic' as const, Icon: AlignJustify, label: t('themeClassic', contentLanguage), desc: t('themeClassicDesc', contentLanguage) },
-                    { value: 'clean'   as const, Icon: Circle,        label: t('themeClean',   contentLanguage), desc: t('themeCleanDesc',   contentLanguage) },
-                    { value: 'bold'    as const, Icon: Square,        label: t('themeBold',    contentLanguage), desc: t('themeBoldDesc',    contentLanguage) },
+                    { value: 'classic'  as const, Icon: AlignJustify, label: t('themeClassic',  contentLanguage), desc: t('themeClassicDesc',  contentLanguage) },
+                    { value: 'clean'    as const, Icon: Circle,        label: t('themeClean',    contentLanguage), desc: t('themeCleanDesc',    contentLanguage) },
+                    { value: 'bold'     as const, Icon: Square,        label: t('themeBold',     contentLanguage), desc: t('themeBoldDesc',     contentLanguage) },
+                    { value: 'workshop' as const, Icon: Presentation,  label: t('themeWorkshop', contentLanguage), desc: t('themeWorkshopDesc', contentLanguage) },
                   ]).map((theme) => {
                     const isSelected = ((currentConfig.workshop as any).theme || 'classic') === theme.value
                     const ThemeIcon = theme.Icon

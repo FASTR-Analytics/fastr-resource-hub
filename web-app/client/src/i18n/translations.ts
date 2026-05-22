@@ -347,6 +347,8 @@ export const translations = {
     themeCleanDesc: 'Minimal and spacious',
     themeBold: 'Bold',
     themeBoldDesc: 'High impact with strong colors',
+    themeWorkshop: 'Workshop',
+    themeWorkshopDesc: 'New 2026 workshop deck system',
 
     // Slide Import
     importSlides: 'Import Slides',
@@ -882,6 +884,8 @@ export const translations = {
     themeCleanDesc: 'Minimaliste et aéré',
     themeBold: 'Audacieux',
     themeBoldDesc: 'Impact fort avec couleurs vives',
+    themeWorkshop: 'Atelier',
+    themeWorkshopDesc: 'Nouveau système de diapositives 2026',
 
     // Slide Import
     importSlides: 'Importer des diapositives',

@@ -1,0 +1,793 @@
+/* @theme fastr-workshop
+ * =================================================================
+ * FASTR · Marp theme (tightened, 2026 revision)
+ * -----------------------------------------------------------------
+ * Goals
+ *   - One typeface (Poppins), one accent (lime), one primary (deep green)
+ *   - Every slide has the same chrome: kicker · H1 + lime rule · body · footer
+ *   - Section dividers and covers are full-bleed green
+ *   - No purple, no navy emphasis, no rounded card clutter
+ *   - Every visual signature here is REBUILDABLE in pptxGenerator.ts
+ *     using only: solid fills, text, rectangles, tables, images
+ * =================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --green-900:#063D39;
+  --green-700:#09544F;   /* primary type & rules        */
+  --green-600:#0C716B;   /* cover & section dividers    */
+  --green-500:#1F9A9C;   /* mid-teal, charts only       */
+  --lime:     #D0CB17;   /* the spark – tiny doses only */
+  --ink:      #1A1F1E;   /* body type                   */
+  --ink-2:    #5A6562;   /* secondary                   */
+  --ink-3:    #97A09D;   /* tertiary, footer            */
+  --rule:     #E4E7E5;   /* hairline                    */
+  --paper:    #FFFFFF;
+  --paper-2:  #F6F5EF;   /* warm off-white panels       */
+}
+
+/* ----------------------------------------------------------------
+   Marp section = one slide (1280×720)
+   ---------------------------------------------------------------- */
+section {
+  font-family:'Poppins', system-ui, sans-serif;
+  font-weight:400;
+  font-size:22px;
+  line-height:1.45;
+  color:var(--ink);
+  background:var(--paper);
+  padding:64px 80px 56px;
+  position:relative;
+  letter-spacing:-0.005em;
+}
+
+/* ----------------------------------------------------------------
+   Slide chrome — kicker top, footer bottom, on every slide
+   In Marp this is added via the theme's ::before / ::after.
+   Authors set the kicker text by writing:
+     <!-- _header: 'Module 04 · Data quality' -->
+     <!-- _footer: 'FASTR · Rwanda · May 2026' -->
+   Marp renders these as <header>/<footer> elements automatically.
+   ---------------------------------------------------------------- */
+section > header {
+  position:absolute;
+  top:36px; left:80px; right:80px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--green-700);
+  border:none;
+  background:none;
+  padding:0;
+  margin:0;
+}
+section > header::before {
+  content:"";
+  display:inline-block;
+  width:18px; height:2px;
+  background:var(--lime);
+  margin-right:14px;
+  vertical-align:middle;
+  transform:translateY(-2px);
+}
+
+section > footer {
+  position:absolute;
+  left:80px; right:80px; bottom:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:14px;
+  border-top:1px solid var(--rule);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  background:none;
+  margin:0;
+}
+
+section::after { /* page number — Marp injects this for `paginate: true` */
+  position:absolute;
+  bottom:28px; right:80px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.16em;
+  color:var(--ink-3);
+  font-family:'Poppins',sans-serif;
+}
+
+/* ----------------------------------------------------------------
+   Headings
+   ---------------------------------------------------------------- */
+section h1 {
+  font-size:46px;
+  font-weight:700;
+  line-height:1.1;
+  color:var(--green-700);
+  letter-spacing:-0.015em;
+  margin:28px 0 32px;
+  padding:0 0 22px;
+  position:relative;
+  max-width:1080px;
+  /* lime rule — background-image so it survives every renderer */
+  background-image:linear-gradient(var(--lime),var(--lime));
+  background-size:96px 6px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+section h1::after { content:none; }
+
+section h2 {
+  font-size:28px;
+  font-weight:600;
+  line-height:1.2;
+  color:var(--green-700);
+  margin:24px 0 12px;
+  letter-spacing:-0.01em;
+}
+
+section h3 {
+  font-size:20px;
+  font-weight:600;
+  color:var(--green-600);
+  margin:18px 0 6px;
+  text-transform:none;
+  letter-spacing:0;
+}
+
+/* ----------------------------------------------------------------
+   Body content
+   ---------------------------------------------------------------- */
+section p { margin:.5em 0; max-width:1040px; }
+section strong { color:var(--green-700); font-weight:600; }
+section em { font-style:italic; color:var(--green-600); }
+
+section ul, section ol { margin:14px 0; padding-left:0; list-style:none; }
+section li {
+  position:relative;
+  padding-left:28px;
+  margin:.55em 0;
+  line-height:1.45;
+}
+section ul > li::before {
+  content:"";
+  position:absolute;
+  left:0; top:.62em;
+  width:14px; height:3px;
+  background:var(--lime);
+}
+section ol { counter-reset: olc; }
+section ol > li { counter-increment: olc; }
+section ol > li::before {
+  content: counter(olc, decimal-leading-zero);
+  position:absolute;
+  left:0; top:.1em;
+  font-size:13px;
+  font-weight:700;
+  color:var(--green-700);
+  letter-spacing:.04em;
+}
+
+section li li { margin:.25em 0; }
+section li li::before { background:var(--ink-3); }
+
+section a {
+  color:var(--green-600);
+  text-decoration:none;
+  border-bottom:2px solid var(--lime);
+}
+
+section code {
+  font-family:'Menlo','Monaco',monospace;
+  font-size:.85em;
+  background:var(--paper-2);
+  color:var(--green-700);
+  padding:.12em .4em;
+  border-radius:3px;
+}
+
+section blockquote {
+  border-left:4px solid var(--lime);
+  margin:18px 0;
+  padding:6px 0 6px 22px;
+  color:var(--ink-2);
+  font-style:italic;
+}
+
+/* ----------------------------------------------------------------
+   Tables — thin, sentence-case-friendly
+   ---------------------------------------------------------------- */
+section table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:18px;
+  margin:18px 0;
+}
+section th {
+  text-align:left;
+  font-weight:600;
+  color:var(--green-700);
+  padding:10px 14px 8px;
+  border-bottom:2px solid var(--green-700);
+  text-transform:none;
+  letter-spacing:0;
+}
+section td {
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule);
+  vertical-align:top;
+}
+section tr:last-child td { border-bottom:1px solid var(--rule); }
+
+/* ----------------------------------------------------------------
+   Layout helpers — driven by Marp's `<!-- _class: ... -->` directive
+   The PPTX parser already recognises this directive.
+   ---------------------------------------------------------------- */
+
+/* Two-column body — write `<!-- _class: columns -->` on the slide,
+   then split markdown across two `<div>` blocks OR rely on the
+   parser's own column split (it splits on the first `---` inside
+   a slide, or on h2 boundaries — see pptxGenerator parser). */
+section.columns .content,
+section.columns > div {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:start;
+}
+
+/* 60/40 chart + interpretation. */
+section.output > div,
+section.output .content {
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:40px;
+  align-items:start;
+}
+
+/* ----------------------------------------------------------------
+   COVER / TITLE — `<!-- _class: title -->`
+   Full-bleed deep green. Tiny chrome. Big sentence-case title.
+   ---------------------------------------------------------------- */
+section.title {
+  background:var(--green-600);
+  color:#fff;
+  padding:72px 80px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+section.title > header,
+section.title > footer { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.16); }
+section.title > header { color:#fff; }
+section.title > header::before { background:var(--lime); }
+section.title::after { color:rgba(255,255,255,.45); }
+
+section.title h1 {
+  color:#fff;
+  font-size:60px;
+  font-weight:700;
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  max-width:1040px;
+  margin:0 0 20px;
+  padding:0;
+  background:none;
+}
+
+section.title .lime-rule,
+section.title > hr {
+  width:72px;
+  height:4px;
+  background:var(--lime);
+  border:none;
+  margin:0 0 28px;
+}
+
+section.title p,
+section.title h2 {
+  color:rgba(255,255,255,.9);
+  font-size:22px;
+  font-weight:400;
+  max-width:780px;
+  margin:.2em 0;
+  border:none;
+  padding:0;
+}
+section.title strong { color:#fff; font-weight:600; }
+section.title em { color:var(--lime); font-style:normal; font-weight:500; }
+
+/* ----------------------------------------------------------------
+   SECTION DIVIDER — `<!-- _class: section -->`
+   Same green field. The slide IS a chapter marker.
+   ---------------------------------------------------------------- */
+section.section {
+  background:var(--green-600);
+  color:#fff;
+  padding:80px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:end;
+}
+section.section > header,
+section.section > footer { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.16); }
+section.section > header { color:#fff; }
+section.section::after { color:rgba(255,255,255,.45); }
+section.section h1 {
+  color:#fff;
+  font-size:64px;
+  font-weight:700;
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  max-width:880px;
+  margin:0;
+  padding:0 0 36px;
+  align-self:end;
+  background-image:linear-gradient(var(--lime),var(--lime));
+  background-size:96px 6px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+section.section h1::after { content:none; }
+section.section h2 {
+  color:var(--lime);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin:0 0 28px;
+  padding:0;
+  border:none;
+}
+section.section p { color:rgba(255,255,255,.78); max-width:520px; margin-top:18px; }
+
+/* ----------------------------------------------------------------
+   STAT — `<!-- _class: stat -->`
+   One number. One sentence. Lime + green.
+   ---------------------------------------------------------------- */
+section.stat { display:flex; flex-direction:column; justify-content:center; }
+section.stat .num,
+section.stat h1 {
+  font-size:200px;
+  font-weight:700;
+  line-height:.9;
+  letter-spacing:-0.05em;
+  color:var(--green-700);
+  margin:0;
+  padding:0;
+  max-width:none;
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  background:none;
+}
+section.stat h1::after { content:none; }
+section.stat .num small,
+section.stat h1 small {
+  font-size:84px;
+  color:var(--lime);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1;
+  padding-bottom:24px;
+}
+section.stat h2 {
+  font-size:32px;
+  font-weight:600;
+  color:var(--ink);
+  margin:20px 0 0;
+  max-width:900px;
+  line-height:1.2;
+  letter-spacing:-0.01em;
+  border:none;
+  padding:0;
+}
+section.stat p {
+  color:var(--ink-2);
+  font-size:20px;
+  max-width:760px;
+  margin-top:16px;
+}
+
+/* ----------------------------------------------------------------
+   QUOTE — `<!-- _class: quote -->`
+   ---------------------------------------------------------------- */
+section.quote { display:flex; flex-direction:column; justify-content:center; padding:80px 120px; }
+section.quote blockquote {
+  border:none;
+  padding:0;
+  margin:0 0 28px;
+  font-style:normal;
+  font-size:44px;
+  font-weight:500;
+  line-height:1.2;
+  letter-spacing:-0.015em;
+  color:var(--green-700);
+  position:relative;
+  max-width:1040px;
+}
+section.quote blockquote::before {
+  content:"\201C";
+  position:absolute;
+  left:-46px; top:-30px;
+  font-size:120px;
+  color:var(--lime);
+  line-height:1;
+  font-weight:700;
+}
+section.quote cite {
+  font-style:normal;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+}
+section.quote cite::before { content:"— "; color:var(--lime); }
+
+/* ----------------------------------------------------------------
+   DARK — `<!-- _class: dark -->`
+   Generic invert when you want a beat of contrast.
+   ---------------------------------------------------------------- */
+section.dark {
+  background:var(--green-900);
+  color:#fff;
+}
+section.dark h1 { color:#fff; background-image:linear-gradient(var(--lime),var(--lime)); background-size:96px 6px; background-repeat:no-repeat; background-position:0 100%; }
+section.dark h1::after { content:none; }
+section.dark h2, section.dark h3 { color:var(--lime); }
+section.dark strong { color:#fff; }
+section.dark em { color:var(--lime); font-style:normal; }
+section.dark ul > li::before { background:var(--lime); }
+section.dark > header { color:#fff; }
+section.dark > footer { color:rgba(255,255,255,.55); border-color:rgba(255,255,255,.16); }
+section.dark::after { color:rgba(255,255,255,.45); }
+section.dark table th { color:#fff; border-color:var(--lime); }
+section.dark table td { border-color:rgba(255,255,255,.12); }
+
+/* ----------------------------------------------------------------
+   AGENDA / CLOSING — minor tweaks
+   ---------------------------------------------------------------- */
+section.agenda table { font-size:20px; }
+section.agenda th { color:var(--green-700); letter-spacing:.08em; text-transform:uppercase; font-size:13px; }
+section.agenda td:first-child { width:130px; font-weight:600; color:var(--green-600); font-variant-numeric:tabular-nums; }
+
+/* ----------------------------------------------------------------
+   IMAGES — full-bleed, captioned, or inline
+   ---------------------------------------------------------------- */
+section img { max-width:100%; display:block; }
+section figure { margin:18px 0; }
+section figcaption {
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-top:8px;
+  font-weight:500;
+}
+
+/* ----------------------------------------------------------------
+   DAY COVER — `<!-- _class: day -->`
+   Used at the start of each day (Day 1, Day 2 ...).
+   ---------------------------------------------------------------- */
+section.day {
+  background:var(--green-600);
+  color:#fff;
+  padding:80px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:80px;
+  align-items:end;
+}
+section.day > header,
+section.day > footer { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.16); }
+section.day > header { color:#fff; }
+section.day::after { color:rgba(255,255,255,.45); }
+section.day .daynum {
+  font-size:280px;
+  font-weight:700;
+  line-height:.85;
+  letter-spacing:-0.05em;
+  color:var(--lime);
+  align-self:end;
+}
+section.day .body { align-self:end; }
+section.day h1 {
+  color:#fff;
+  font-size:54px;
+  font-weight:700;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  margin:0 0 18px;
+  padding:0;
+  background:none;
+  max-width:680px;
+}
+section.day h2 {
+  color:var(--lime);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin:0 0 18px;
+  padding:0;
+  border:none;
+}
+section.day p { color:rgba(255,255,255,.85); font-size:21px; max-width:560px; margin:0 0 8px; }
+section.day .meta { display:flex; gap:32px; margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.16); }
+section.day .meta .cell label {
+  display:block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.55); font-weight:600; margin-bottom:6px;
+}
+section.day .meta .cell value,
+section.day .meta .cell span {
+  display:block; font-size:18px; font-weight:600; color:#fff;
+}
+
+/* ----------------------------------------------------------------
+   SESSION OPENER — `<!-- _class: opener -->`
+   Transition between sessions; carries presenter credits.
+   ---------------------------------------------------------------- */
+section.opener {
+  background:var(--paper);
+  padding:64px 80px 56px;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+section.opener .locator {
+  font-size:13px; letter-spacing:.2em; text-transform:uppercase;
+  font-weight:600; color:var(--green-700); margin:0 0 24px;
+}
+section.opener .locator b { color:var(--lime); margin-right:6px; }
+section.opener h1 {
+  font-size:58px;
+  font-weight:700;
+  line-height:1.04;
+  color:var(--green-700);
+  letter-spacing:-0.02em;
+  margin:auto 0;
+  padding:0 0 26px;
+  background-image:linear-gradient(var(--lime),var(--lime));
+  background-size:96px 6px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+  max-width:1040px;
+}
+section.opener .presenters {
+  display:flex; gap:40px; margin-top:48px; padding-top:24px;
+  border-top:1px solid var(--rule);
+}
+section.opener .presenters .p label {
+  display:block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; margin-bottom:6px;
+}
+section.opener .presenters .p name,
+section.opener .presenters .p span {
+  display:block; font-size:19px; font-weight:600; color:var(--ink); margin:0;
+}
+section.opener .presenters .p role {
+  display:block; font-size:14px; color:var(--ink-2); margin-top:2px;
+}
+section.opener .duration {
+  margin-left:auto; text-align:right;
+}
+section.opener .duration big {
+  display:block; font-size:32px; font-weight:700; color:var(--green-700);
+  letter-spacing:-0.01em; line-height:1;
+}
+section.opener .duration small {
+  display:block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; margin-top:6px;
+}
+
+/* ----------------------------------------------------------------
+   BREAK — `<!-- _class: break -->`
+   Coffee / lunch / tea. Centered, big time. Warm off-white field.
+   ---------------------------------------------------------------- */
+section.break {
+  background:var(--paper-2);
+  padding:80px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+}
+section.break .kind {
+  font-size:14px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--green-700); font-weight:600; margin:0 0 24px;
+}
+section.break h1 {
+  font-size:160px;
+  font-weight:700;
+  line-height:.9;
+  color:var(--green-700);
+  letter-spacing:-0.04em;
+  margin:0;
+  padding:0;
+  background:none;
+  max-width:none;
+}
+section.break .back {
+  margin-top:36px;
+  font-size:24px;
+  color:var(--ink);
+  max-width:none;
+}
+section.break .back b { color:var(--green-700); }
+section.break .room {
+  margin-top:18px;
+  font-size:14px;
+  color:var(--ink-2);
+  letter-spacing:.04em;
+}
+
+/* ----------------------------------------------------------------
+   ACTIVITY — `<!-- _class: activity -->`
+   Hands-on / your-turn / small-group / country present-back.
+   Uses an explicit activity-kind label, instructions, and timer.
+   ---------------------------------------------------------------- */
+section.activity {
+  background:var(--paper);
+  padding:64px 80px 56px;
+  display:grid;
+  grid-template-rows:auto auto 1fr auto;
+  gap:8px;
+}
+section.activity .kind {
+  display:inline-block;
+  align-self:start;
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:700;
+  color:var(--green-700);
+  padding:8px 14px;
+  border:2px solid var(--green-700);
+  border-radius:0;
+  margin:0 0 16px;
+  justify-self:start;
+}
+section.activity .kind.handson { color:var(--green-700); border-color:var(--green-700); }
+section.activity .kind.demo    { color:#fff; background:var(--green-700); border-color:var(--green-700); }
+section.activity .kind.group   { color:var(--green-700); border-color:var(--lime); border-width:2px; box-shadow:inset 0 -6px 0 var(--lime); padding-bottom:4px; }
+section.activity .kind.discuss { color:var(--ink); border-color:var(--ink); }
+section.activity .kind.present { color:#fff; background:var(--ink); border-color:var(--ink); }
+section.activity h1 {
+  font-size:42px; font-weight:700; line-height:1.08;
+  color:var(--green-700); letter-spacing:-0.015em;
+  margin:0 0 24px; padding:0 0 22px;
+  background-image:linear-gradient(var(--lime),var(--lime));
+  background-size:96px 6px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+}
+section.activity .body { display:grid; grid-template-columns:1.6fr 1fr; gap:48px; align-items:start; }
+section.activity .body h3 {
+  font-size:14px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600;
+  margin:0 0 12px; padding:0; color:var(--ink-3);
+}
+section.activity .body ol, section.activity .body ul { margin-top:0; }
+section.activity .body .meta {
+  background:var(--paper-2); padding:24px 26px;
+  border-left:4px solid var(--lime);
+}
+section.activity .body .meta dl { margin:0; }
+section.activity .body .meta dt {
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  font-weight:600; color:var(--ink-3); margin-top:14px;
+}
+section.activity .body .meta dt:first-child { margin-top:0; }
+section.activity .body .meta dd {
+  margin:4px 0 0; font-size:17px; font-weight:600; color:var(--green-700);
+}
+section.activity .body .meta .time {
+  font-size:42px; font-weight:700; color:var(--green-700); line-height:1;
+  letter-spacing:-0.02em;
+}
+
+/* ----------------------------------------------------------------
+   RECAP — `<!-- _class: recap -->`
+   Yesterday's takeaways. 3-up grid of numbered notes.
+   ---------------------------------------------------------------- */
+section.recap .row {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  margin-top:28px;
+}
+section.recap .row .card {
+  background:var(--paper-2); padding:28px 26px;
+  border-top:4px solid var(--lime);
+}
+section.recap .row .card .n {
+  font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--green-700); font-weight:700; margin:0 0 12px;
+}
+section.recap .row .card h3 {
+  font-size:22px; font-weight:600; color:var(--green-700);
+  line-height:1.2; margin:0 0 10px; padding:0; border:none;
+}
+section.recap .row .card p {
+  font-size:16px; color:var(--ink-2); line-height:1.45; margin:0;
+}
+
+/* ----------------------------------------------------------------
+   LOGISTICS — `<!-- _class: logistics -->`
+   Hotel, wifi, materials. 2-column key/value pairs.
+   ---------------------------------------------------------------- */
+section.logistics .grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:24px 60px;
+  margin-top:28px;
+}
+section.logistics .grid .row {
+  display:grid; grid-template-columns:180px 1fr;
+  gap:18px; padding:18px 0;
+  border-top:1px solid var(--rule);
+}
+section.logistics .grid .row:first-child,
+section.logistics .grid .row:nth-child(2) { border-top:1px solid var(--green-700); }
+section.logistics .grid .row label {
+  font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; align-self:start; padding-top:4px;
+}
+section.logistics .grid .row value,
+section.logistics .grid .row span {
+  display:block; font-size:19px; color:var(--ink);
+}
+section.logistics .grid .row value b,
+section.logistics .grid .row span b { color:var(--green-700); font-weight:600; }
+
+/* ----------------------------------------------------------------
+   PERSISTENT LOCATOR — top-right of every content slide
+   Add markup like `<aside class="locator">Day 2 · Session 3</aside>`
+   inside any section (Marp will preserve raw HTML in MD).
+   ---------------------------------------------------------------- */
+section > aside.locator {
+  position:absolute;
+  top:36px; right:80px;
+  font-size:12px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+section > aside.locator b {
+  color:var(--green-700);
+}
+section.day > aside.locator,
+section.title > aside.locator,
+section.section > aside.locator,
+section.dark > aside.locator { color:rgba(255,255,255,.7); }
+section.day > aside.locator b,
+section.title > aside.locator b,
+section.section > aside.locator b,
+section.dark > aside.locator b { color:var(--lime); }
+
+/* Callout — minimal, no rounded card. Just a lime rail. */
+section .callout,
+section .note {
+  border-left:4px solid var(--lime);
+  background:var(--paper-2);
+  padding:16px 22px;
+  margin:18px 0;
+  font-size:19px;
+  line-height:1.4;
+  color:var(--ink);
+}
+section .callout strong { color:var(--green-700); }
+
+/* ----------------------------------------------------------------
+   COMPACT — `<!-- _class: compact -->` (composes: `_class: "columns compact"`)
+   Density release-valve for legitimately dense slides. Smaller type,
+   tighter rhythm, less padding. The overflow linter flags a slide; the
+   author either adds `compact` (fits) or splits it.
+   Rebuildable in PPTX by scaling the FONTS constants for this class.
+   ---------------------------------------------------------------- */
+section.compact { font-size:19px; line-height:1.35; padding:48px 80px 44px; }
+section.compact h1 { font-size:38px; margin:14px 0 22px; padding-bottom:16px; }
+section.compact h2 { font-size:24px; margin:16px 0 8px; }
+section.compact h3 { font-size:18px; }
+section.compact p { margin:.35em 0; }
+section.compact li { margin:.32em 0; padding-left:24px; }
+section.compact ul, section.compact ol { margin:10px 0; }
+section.compact table { font-size:16px; margin:12px 0; }
+section.compact th { padding:8px 12px 6px; }
+section.compact td { padding:7px 12px; }
+section.compact .callout, section.compact .note { font-size:16px; padding:12px 18px; margin:12px 0; }

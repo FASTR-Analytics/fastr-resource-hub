@@ -38,7 +38,7 @@ export interface LocalWorkshopConfig {
     scope_of_work?: string
     expected_outputs?: string
     // Slide theme
-    theme?: 'classic' | 'clean' | 'bold'
+    theme?: 'classic' | 'clean' | 'bold' | 'workshop'
     // Deck type
     deckType?: 'workshop' | 'webinar'
     // Webinar-specific fields
