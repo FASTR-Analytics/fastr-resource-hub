@@ -4,6 +4,8 @@ Build workshop presentations from the FASTR RMNCAH-N Service Use Monitoring Reso
 
 **Methodology Documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
 
+**Content catalog:** see [`CATALOG.md`](CATALOG.md) — every module (with slide counts), the activities and their order, and all handouts. It's generated from the source files (`python3 tools/generate_catalog.py`), so it never goes stale.
+
 ---
 
 ## How It Works
@@ -69,9 +71,10 @@ cd methodology && mkdocs serve
 
 | Tool | What it does |
 |------|--------------|
-| `tools/00_extract_slides.py` | Extract slides from methodology files |
+| `tools/00_extract_slides.py` | Extract slides from methodology files (`--prune` removes stale files; off by default) |
 | `tools/migrate_to_meta.py` | Generate/regenerate module metadata (modules.yaml, _meta.yaml) |
-| `tools/validate_content.py` | Validate content consistency and metadata |
+| `tools/validate_content.py` | Validate content + **drift guard**: flags any core_content slide with no methodology source, plus id collisions |
+| `tools/generate_catalog.py` | Regenerate [`CATALOG.md`](CATALOG.md) — the content index |
 
 ---
 
@@ -79,15 +82,17 @@ cd methodology && mkdocs serve
 
 ```
 fastr-resource-hub/
-├── methodology/           # Source content (edit here!)
-├── core_content/          # Auto-generated slides
-├── core_content_fr/       # French translations
-├── modules.yaml           # Module definitions (single source of truth)
+├── methodology/           # Source content (edit here!) — docs + SLIDE markers
+├── core_content/          # Auto-generated slides (en) — do not hand-edit
+├── core_content_fr/       # Auto-generated slides (fr)
+├── handouts/              # Participant + facilitator handouts (en/ + fr/), _order.yaml
+├── archived_slides/       # Retired slide content (en/ + fr/)
+├── modules.yaml           # Module definitions + activity catalog (single source of truth)
+├── CATALOG.md             # Generated content index (tools/generate_catalog.py)
 ├── web-app/               # Deck Builder web application
-├── templates/             # Slide templates
-├── templates_fr/          # French templates
+├── templates/             # Slide templates (+ templates_fr/)
 ├── resources/             # Images, diagrams, backgrounds
-└── tools/                 # Extraction and validation scripts
+└── tools/                 # Extraction, validation, catalog scripts
 ```
 
 ---

@@ -85,13 +85,15 @@ The web-app loads these via `moduleRegistry.ts` (60s TTL cache). Falls back to r
 
 | File | Purpose |
 |------|---------|
-| `modules.yaml` | Single source of truth for module definitions |
+| `modules.yaml` | Single source of truth for module definitions + the activity catalog (order, prerequisites, materials) |
+| `CATALOG.md` | Generated content index — modules, activities, handouts (regenerate with `tools/generate_catalog.py`) |
 | `web-app/server/services/moduleRegistry.ts` | Loads and caches module metadata for the web-app |
 | `web-app/server/routes/content.ts` | API for modules, templates, exports |
 | `web-app/server/services/deckBuilder.ts` | Builds workshop decks from YAML |
-| `tools/00_extract_slides.py` | Extracts slides from methodology to core_content |
+| `tools/00_extract_slides.py` | Extracts slides from methodology to core_content (`--prune` deletes stale files; off by default) |
 | `tools/migrate_to_meta.py` | Generates/regenerates modules.yaml and _meta.yaml |
-| `tools/validate_content.py` | Validates content consistency and metadata |
+| `tools/validate_content.py` | Validates content + **drift guard**: flags core_content slides with no methodology source + id collisions |
+| `tools/generate_catalog.py` | Regenerates `CATALOG.md` from the source files |
 | `methodology/mkdocs.yml` | MkDocs site configuration |
 
 ## Running the Web-App
