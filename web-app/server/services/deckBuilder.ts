@@ -85,7 +85,10 @@ function sessionChrome(
   const kicker = esc((session.session || '').replace(/^\s*module\s+\d+\s*[—\-·:.]*\s*/i, ''))
   const dayWord = lang === 'fr' ? 'Jour' : 'Day'
   const locator = `${dayWord} ${day}/${numDays}` + (sessionNumber ? ` · Session ${sessionNumber}` : '')
+  // Smart per-day date when start_date is set; otherwise fall back to the
+  // workshop's free-text date so the footer still carries a date.
   const date = formatDayDate((config.workshop as any).start_date, day, locale)
+    || (config.workshop as any).date || ''
   const footer = esc(['FASTR', (config.workshop as any).country, date].filter(Boolean).join(' · '))
   const header = `<span class="kick">${kicker}</span><span class="loc">${locator}</span>`
   return `<!-- header: '${header}' -->\n<!-- footer: '${footer}' -->\n\n`
