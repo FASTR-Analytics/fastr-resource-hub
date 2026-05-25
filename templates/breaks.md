@@ -4,18 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-# Tea Break
+<!-- _class: break -->
 
-**15 minutes**
+<div class="kind">Tea break</div>
 
-We'll resume at {{TEA_RESUME_TIME}}
+# 15 min
+
+<div class="back">We resume at <b>{{TEA_RESUME_TIME}}</b></div>
 
 ---
 
-# Lunch Break
+<!-- _class: break -->
 
-**60 minutes**
+<div class="kind">Lunch break</div>
 
-We'll resume at {{LUNCH_RESUME_TIME}}
+# 60 min
+
+<div class="back">We resume at <b>{{LUNCH_RESUME_TIME}}</b></div>
 
 ---

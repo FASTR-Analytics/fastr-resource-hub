@@ -41,8 +41,8 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    // Theme path — load all theme files so Marp CLI can resolve any theme
-    const themeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
+    // Theme path — the single FASTR deck theme
+    const themeFiles = ['fastr-theme.css']
 
     // Build args — use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
     const themePaths = themeFiles
@@ -127,7 +127,7 @@ export async function generateHTML(mdPath: string, htmlPath: string): Promise<vo
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    const htmlThemeFiles = ['fastr-theme.css', 'fastr-clean.css', 'fastr-bold.css']
+    const htmlThemeFiles = ['fastr-theme.css']
 
     // Use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
     const htmlThemePaths = htmlThemeFiles

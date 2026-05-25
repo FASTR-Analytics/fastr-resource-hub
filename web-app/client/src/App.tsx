@@ -35,8 +35,6 @@ import {
   AlertTriangle,
   Upload,
   Monitor,
-  AlignJustify,
-  Circle,
   Square,
 } from 'lucide-react'
 import {
@@ -3110,38 +3108,6 @@ function App() {
                       placeholder={contentLanguage === 'fr' ? 'Sous-titre de la couverture' : 'Subtitle on cover slide'}
                     />
                   </div>
-                </div>
-              </section>
-
-              {/* Slide Theme Section */}
-              <section>
-                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                  {t('slideTheme', contentLanguage)}
-                </h3>
-                <div className="grid grid-cols-3 gap-3">
-                  {([
-                    { value: 'classic' as const, Icon: AlignJustify, label: t('themeClassic', contentLanguage), desc: t('themeClassicDesc', contentLanguage) },
-                    { value: 'clean'   as const, Icon: Circle,        label: t('themeClean',   contentLanguage), desc: t('themeCleanDesc',   contentLanguage) },
-                    { value: 'bold'    as const, Icon: Square,        label: t('themeBold',    contentLanguage), desc: t('themeBoldDesc',    contentLanguage) },
-                  ]).map((theme) => {
-                    const isSelected = ((currentConfig.workshop as any).theme || 'classic') === theme.value
-                    const ThemeIcon = theme.Icon
-                    return (
-                      <button
-                        key={theme.value}
-                        onClick={() => updateWorkshopSettings({ theme: theme.value } as any)}
-                        className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all text-center ${
-                          isSelected
-                            ? 'border-fastr-primary bg-fastr-primary/5 ring-1 ring-fastr-primary/20'
-                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                        }`}
-                      >
-                        <ThemeIcon className={`w-6 h-6 mb-1.5 ${isSelected ? 'text-fastr-primary' : 'text-slate-500'}`} aria-hidden />
-                        <span className={`text-sm font-semibold ${isSelected ? 'text-fastr-primary' : 'text-gray-700'}`}>{theme.label}</span>
-                        <span className="text-xs text-gray-500 mt-0.5">{theme.desc}</span>
-                      </button>
-                    )
-                  })}
                 </div>
               </section>
 

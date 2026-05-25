@@ -21,8 +21,6 @@ const themeCSS: Record<string, string> = {}
 // Theme file mapping
 const THEME_FILES: Record<string, string> = {
   'fastr': 'fastr-theme.css',
-  'fastr-clean': 'fastr-clean.css',
-  'fastr-bold': 'fastr-bold.css',
 }
 
 /**
@@ -71,13 +69,11 @@ export function getThemeCSS(): string {
 }
 
 /**
- * Get theme CSS by config name ('classic', 'clean', 'bold')
- * Returns the corresponding theme CSS string
+ * Get the FASTR deck theme CSS. (A `theme` arg is accepted for call-site
+ * compatibility; there is a single deck theme now.)
  */
-export function getThemeCSSByName(theme: string): string {
-  const marpThemeName = theme === 'clean' ? 'fastr-clean'
-    : theme === 'bold' ? 'fastr-bold' : 'fastr'
-  return themeCSS[marpThemeName] || fastrThemeCSS
+export function getThemeCSSByName(_theme?: string): string {
+  return themeCSS['fastr'] || fastrThemeCSS
 }
 
 /**

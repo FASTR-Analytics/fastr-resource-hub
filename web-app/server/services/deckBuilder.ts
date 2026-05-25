@@ -30,6 +30,48 @@ function getCoreContentPath(language: Language = 'en'): string {
 // Default to English for backward compatibility
 const CORE_CONTENT_PATH = getCoreContentPath('en')
 
+// --- Auto-compact tier -------------------------------------------------------
+// tools/measure_overflow.mjs renders every slide and records which ones overflow
+// the 720px box but fit once the `.compact` density class is applied. We apply
+// that class here at build time so source files in core_content stay untouched.
+// Re-run the tool after editing slide content or the theme to refresh the map.
+interface OverflowMap { [lang: string]: { compact: string[]; split: string[]; flag: string[] } }
+let _compactSets: Record<string, Set<string>> | null = null
+function getCompactSet(language: Language): Set<string> {
+  if (!_compactSets) {
+    _compactSets = {}
+    try {
+      const raw = fs.readFileSync(path.join(REPO_ROOT, 'tools', 'overflow_map.json'), 'utf-8')
+      const map: OverflowMap = JSON.parse(raw)
+      for (const lang of Object.keys(map)) {
+        if (map[lang]?.compact) _compactSets[lang] = new Set(map[lang].compact)
+      }
+    } catch {
+      // No map yet — auto-compact is simply a no-op.
+    }
+  }
+  return _compactSets[language] || new Set()
+}
+
+/** Merge the `compact` class into a slide's local `_class` directive, or add
+ *  one. Must stay symmetric with tools/measure_overflow.mjs `applyCompact`. */
+function applyCompactClass(body: string): string {
+  const m = body.match(/^<!--\s*_class:\s*(.+?)\s*-->/m)
+  if (m) {
+    const classes = m[1].replace(/['"]/g, '').trim().split(/\s+/)
+    if (!classes.includes('compact')) classes.push('compact')
+    return body.replace(m[0], `<!-- _class: ${classes.join(' ')} -->`)
+  }
+  return `<!-- _class: compact -->\n\n${body}`
+}
+
+/** Apply the auto-compact tier to a slide's content when the overflow map flags
+ *  its file; otherwise return the content unchanged. */
+function maybeCompact(filename: string, content: string, language: Language): string {
+  if (!getCompactSet(language).has(path.basename(filename))) return content
+  return applyCompactClass(content)
+}
+
 // Module folder names loaded from modules.yaml via registry
 // (replaces hardcoded MODULE_FOLDERS dict)
 // Use getModuleFolder(id) for single lookups, getModuleFoldersDict() for bulk
@@ -103,14 +145,9 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   const lang: Language = language || (config.workshop as any).language || 'en'
   const slides: string[] = []
 
-  // Marp frontmatter — select theme based on workshop config
-  const themeSetting = (config.workshop as any).theme || 'classic'
-  const marpTheme = themeSetting === 'clean' ? 'fastr-clean'
-    : themeSetting === 'bold' ? 'fastr-bold' : 'fastr'
-
   slides.push(`---
 marp: true
-theme: ${marpTheme}
+theme: fastr
 paginate: true
 ---
 `)
@@ -431,7 +468,7 @@ async function buildModuleSlides(
     let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
     // Remove frontmatter from module files (we have our own)
     content = content.replace(/^---[\s\S]*?---\s*/m, '')
-    contents.push(content.trim())
+    contents.push(maybeCompact(file, content.trim(), language))
   }
 
   return contents.join('\n\n---\n\n')
@@ -689,7 +726,7 @@ async function loadSlideContent(
 
   content = substituteVariables(content, config, dayNumber, session, language)
 
-  return content.trim()
+  return maybeCompact(slideFile, content.trim(), language)
 }
 
 /**
@@ -958,7 +995,7 @@ function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber:
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
-![w:200](../../resources/icons/thought.png)
+![w:200](../../resources/icons/thought.svg)
 
 </div>
 `
@@ -981,7 +1018,7 @@ function buildDayEndSlide(session: Session, dayNumber: number, language: Languag
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
-![w:200](../../resources/icons/communication.png)
+![w:200](../../resources/icons/communication.svg)
 
 </div>
 `

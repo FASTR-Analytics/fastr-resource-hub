@@ -4,10 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-# Pause café
+<!-- _class: break -->
 
-**15 minutes**
+<div class="kind">Pause café</div>
 
-Nous reprendrons à {{TEA_RESUME_TIME}}
+# 15 min
+
+<div class="back">Nous reprendrons à <b>{{TEA_RESUME_TIME}}</b></div>
 
 ---

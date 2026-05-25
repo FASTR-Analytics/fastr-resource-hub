@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-05-25T04:02:24.278Z",
+  "theme": "fastr-theme.css",
+  "threshold": 8,
+  "en": {
+    "compact": [
+      "m4_1c_approach_to_dqa.md",
+      "m4_1e_fastr_vs_dhis2_dqa.md",
+      "m4_1f_fastr_vs_dhis2_dqa_continued.md",
+      "m4_2_indicator_completeness.md",
+      "m4_4_internal_consistency.md",
+      "m4_s3_dqa_completeness.md",
+      "m4_s4_dqa_internal_consistency.md",
+      "m5_s0_adjustment_how_it_works.md",
+      "m6_19_coverage_configuration_parameters.md",
+      "m6_1a_service_utilization_comparison_dhis2.md",
+      "m9f_4b_introducing_prompt_library.md",
+      "mai_2_ai_accelerator_not_decider.md",
+      "mai_3_ai_assistant_capabilities.md",
+      "mai_5a_ai_helpful_example.md"
+    ],
+    "split": [
+      "m6_5a_service_utilization_configuration_parameters.md"
+    ],
+    "flag": []
+  },
+  "fr": {
+    "compact": [
+      "m0_3_fastr_approach_rmncahn.md",
+      "m2_2_tools_for_data_extraction.md",
+      "m3_2b_accessing_platform_continued.md",
+      "m4_1_approach_to_dqa.md",
+      "m4_1c_approach_to_dqa.md",
+      "m5_1_approach_to_dq_adjustment.md",
+      "m5_s0_adjustment_how_it_works.md",
+      "m6_s5_country_example_nigeria.md",
+      "m6_s6_fastr_value_beyond_dhis2.md",
+      "m6_s7_key_takeaway.md",
+      "m7_7b_post_workshop_roadmap.md",
+      "m8_3b_dhis2_chain.md",
+      "m9e_1_manual_to_ai_reporting.md",
+      "m9e_4_confirm_ai_builds.md",
+      "m9e_6_refine_disruption_report.md",
+      "m9f_4b_introducing_prompt_library.md",
+      "m9i_2a_markdown_cheatsheet.md",
+      "mai_3_ai_assistant_capabilities.md",
+      "mai_4_ai_how_it_works.md",
+      "mai_5a_ai_helpful_example.md"
+    ],
+    "split": [
+      "m6_19_coverage_configuration_parameters.md",
+      "m6_5a_service_utilization_configuration_parameters.md",
+      "m7_6b_three_spheres_of_influence.md"
+    ],
+    "flag": []
+  }
+}

@@ -675,11 +675,13 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   const clean = cleanMarkdownText(title)
 
   // Title sits below the kicker chrome (~0.6"), giving it breathing room.
-  // Estimate wrapped lines (h2 ~32pt over ~12.3" ≈ ~40 chars/line) so the lime
-  // rule lands under the LAST line, however long the title is.
+  // Estimate wrapped lines so the lime rule lands just under the LAST line.
+  // h2 is 32pt Calibri Light over ~12.3" — line 1 holds ~58-62 chars, so a too-
+  // low divisor (e.g. 40) over-counts lines and reserves a phantom blank line
+  // below the title (a tall gap that also pushes body content off the slide).
   const titleY = 0.82
-  const lineH = 0.6
-  const lineCount = Math.max(1, Math.ceil(clean.length / 40))
+  const lineH = 0.55
+  const lineCount = Math.max(1, Math.ceil(clean.length / 58))
   const titleH = lineCount * lineH
 
   slide.addText(clean, {
@@ -1657,8 +1659,10 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       // Check if slide has text content - if so, left-align icon with text
       const hasTextContent = data.content.length > 0
 
-      // Build image options - only set dimensions that are specified to maintain aspect ratio
-      const imgOpts: any = { path: iconPath, y: 1.5 }
+      // Build image options - only set dimensions that are specified to maintain
+      // aspect ratio. Anchor below the actual title (titleBottom), not a fixed Y,
+      // so 2-line titles don't overlap the icon.
+      const imgOpts: any = { path: iconPath, y: titleBottom }
 
       // Determine icon size
       let iconSize = 1.0  // default
@@ -1683,7 +1687,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         imgOpts.x = (LAYOUT.width - (iconWidth || iconHeight || 1.0)) / 2
       }
 
-      contentTop = 1.5 + iconSize + 0.3
+      contentTop = titleBottom + iconSize + 0.3
       addSlideImage(slide,imgOpts)
       iconRendered = true
     }

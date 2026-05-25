@@ -94,18 +94,17 @@ const CURATED_DIAGRAMS: Array<{ file: string; label: string }> = [
   { file: 'rapid_cycle_analytics.png', label: 'Rapid Cycle Analytics' },
 ]
 
-// Curated selection of icons
+// Curated selection of icons (the FASTR deep-green SVG set)
 const CURATED_ICONS: Array<{ file: string; label: string }> = [
-  { file: 'hands_on.png', label: 'Hands-on Activity' },
-  { file: 'demo.png', label: 'Demo' },
-  { file: 'lecture.png', label: 'Lecture' },
-  { file: 'coffee.png', label: 'Coffee Break' },
-  { file: 'lunch.png', label: 'Lunch' },
-  { file: 'debrief.png', label: 'Debrief' },
-  { file: 'thought.png', label: 'Discussion' },
-  { file: 'globe.png', label: 'Global/World' },
-  { file: 'communication.png', label: 'Communication' },
-  { file: 'raise-hand.png', label: 'Questions' },
+  { file: 'hands_on.svg', label: 'Hands-on activity' },
+  { file: 'demo.svg', label: 'Demo' },
+  { file: 'lecture.svg', label: 'Lecture' },
+  { file: 'communication.svg', label: 'Communication' },
+  { file: 'thought.svg', label: 'Discussion / reflect' },
+  { file: 'people_group.svg', label: 'Group' },
+  { file: 'hospital_clinic.svg', label: 'Health facility' },
+  { file: 'pinned-notes.svg', label: 'Pinned notes' },
+  { file: 'raise-hand.svg', label: 'Questions' },
 ]
 
 // Curated selection of logos

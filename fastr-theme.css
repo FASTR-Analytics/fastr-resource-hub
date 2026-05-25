@@ -80,16 +80,9 @@ h1 {
   font-weight: 700;
   font-size: 44px;
   line-height: 1.1;
-  margin: 0 0 0.55em;
-  padding-bottom: 20px;
+  margin: 0 0 0.5em;
   letter-spacing: -0.015em;
-  /* Short lime rule (the FASTR signature), drawn as a background image so it
-     survives every renderer instead of a full-width border. */
   border-bottom: none;
-  background-image: linear-gradient(var(--fastr-lime), var(--fastr-lime));
-  background-size: 88px 5px;
-  background-repeat: no-repeat;
-  background-position: 0 100%;
 }
 
 h2 {
@@ -98,18 +91,41 @@ h2 {
   font-weight: 700;
   font-size: 36px;
   line-height: 1.12;
-  margin: 0 0 0.6em;
+  margin: 0 0 0.55em;
   width: fit-content;
   max-width: 100%;
   align-self: flex-start;
-  padding-bottom: 18px;
   letter-spacing: -0.012em;
   border-bottom: none;
-  background-image: linear-gradient(var(--fastr-lime), var(--fastr-lime));
-  background-size: 84px 5px;
-  background-repeat: no-repeat;
-  background-position: 0 100%;
 }
+
+/* Short lime rule (the FASTR signature): a block element that always sits a
+   fixed gap below the title's TEXT box. Because it flows right after the text,
+   its distance from the title is identical on every slide and unaffected by how
+   many lines the title wraps to (1-line and 2-line titles get the same gap).
+   Pseudo-element verified to render in Marp HTML/PDF; PPTX draws its own rule. */
+h1::after,
+h2::after {
+  content: "";
+  display: block;
+  height: 5px;
+  background: var(--fastr-lime);
+  margin-top: 0.34em;
+}
+h1::after { width: 88px; }
+h2::after { width: 84px; }
+
+/* Covers and the break field carry their own title treatment (a full-width
+   border or none) — suppress the signature rule there to avoid a double line. */
+section.lead h1::after,
+section.lead h2::after,
+section.title-cover h1::after,
+section.section-cover h1::after,
+section.break h1::after { display: none; }
+
+/* Centered slides: center the signature rule under the centered title. */
+section.centered h1::after,
+section.centered h2::after { margin-left: auto; margin-right: auto; }
 
 h3 {
   color: var(--fastr-purple);
@@ -753,7 +769,7 @@ section.section-cover p {
 section.compact {
   font-size: 16px;
   line-height: 1.35;
-  padding: 30px 50px;
+  padding: 84px 50px 36px;  /* keep top clearance for the kicker; reclaim space via font + sides/bottom */
 }
 
 section.compact h2 {

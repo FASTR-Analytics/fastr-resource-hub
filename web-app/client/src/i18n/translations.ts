@@ -339,14 +339,6 @@ export const translations = {
     generateWebinar: 'Generate Webinar',
     webinarAndEngagement: 'Webinar & Engagement',
 
-    // Slide theme
-    slideTheme: 'Slide Theme',
-    themeClassic: 'Classic',
-    themeClassicDesc: 'Standard styling with colored borders',
-    themeClean: 'Clean',
-    themeCleanDesc: 'Minimal and spacious',
-    themeBold: 'Bold',
-    themeBoldDesc: 'High impact with strong colors',
 
     // Slide Import
     importSlides: 'Import Slides',
@@ -873,15 +865,6 @@ export const translations = {
     webinarAiPlaceholder: 'Exemple : Webinaire de 90 minutes sur FASTR pour les analystes de santé du Sénégal. Focus sur la qualité des données et la plateforme analytique. Inclure des moments interactifs.',
     generateWebinar: 'Générer le webinaire',
     webinarAndEngagement: 'Webinaire & Engagement',
-
-    // Slide theme
-    slideTheme: 'Thème des diapositives',
-    themeClassic: 'Classique',
-    themeClassicDesc: 'Style standard avec bordures colorées',
-    themeClean: 'Épuré',
-    themeCleanDesc: 'Minimaliste et aéré',
-    themeBold: 'Audacieux',
-    themeBoldDesc: 'Impact fort avec couleurs vives',
 
     // Slide Import
     importSlides: 'Importer des diapositives',

@@ -4,10 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-# Pause déjeuner
+<!-- _class: break -->
 
-**60 minutes**
+<div class="kind">Pause déjeuner</div>
 
-Nous reprendrons à {{LUNCH_RESUME_TIME}}
+# 60 min
+
+<div class="back">Nous reprendrons à <b>{{LUNCH_RESUME_TIME}}</b></div>
 
 ---

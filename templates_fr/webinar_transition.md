@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: engagement -->
+<!-- _class: centered -->
 
 # Passons à la suite...
 

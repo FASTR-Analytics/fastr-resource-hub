@@ -189,11 +189,9 @@ router.post('/:id/slides', async (req, res) => {
         cacheMisses++
 
         // Render to HTML using shared Marp service
-        const marpTheme = themeSetting === 'clean' ? 'fastr-clean'
-          : themeSetting === 'bold' ? 'fastr-bold' : 'fastr'
         const fullMarkdown = `---
 marp: true
-theme: ${marpTheme}
+theme: fastr
 paginate: true
 ---
 
