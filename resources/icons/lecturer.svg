@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#09544F">
-  <!-- Person head -->
-  <circle cx="32" cy="12" r="10"/>
-  <!-- Person shoulders/upper body -->
-  <path d="M18 26 C18 22 24 20 32 20 C40 20 46 22 46 26 L46 34 C46 36 44 38 42 38 L22 38 C20 38 18 36 18 34 Z"/>
-  <!-- Podium/lectern -->
-  <path d="M14 42 L12 58 C12 60 14 62 16 62 L48 62 C50 62 52 60 52 58 L50 42 C50 40 48 38 46 38 L18 38 C16 38 14 40 14 42 Z"/>
-</svg>
