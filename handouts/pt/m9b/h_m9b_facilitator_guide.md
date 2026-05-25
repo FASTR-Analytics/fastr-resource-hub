@@ -10,19 +10,37 @@ footer: "FASTR · Primeiros passos · Facilitador"
 
 # Guia do facilitador — Primeiros passos
 
-<p class="meta-line"><strong>Guia do facilitador</strong> · <strong>Primeiros passos</strong></p>
+<p class="meta-line"><strong>Guia do facilitador</strong> · <strong>Primeiros passos</strong> · <strong>3 atividades · ~15 min + demonstração</strong></p>
 
-## Sobre estas atividades
+## Objetivo
 
-Os Primeiros passos põem cada participante na plataforma e configurados para manter o trabalho organizado. É **curto** — uma demonstração conduzida pelo facilitador, depois duas atividades rápidas.
+Os Primeiros passos põem cada participante na plataforma e configurados para manter o trabalho organizado. É um módulo curto — uma demonstração conduzida pelo facilitador seguida de duas atividades rápidas — mas é um ponto de passagem: um participante que não esteja com sessão iniciada, dentro do projeto do seu país, com uma pasta nomeada em ambos os separadores, ficará bloqueado o resto da formação. Os obstáculos aqui são contas e acessos, não competências.
 
-**Três fichas.** **~15 min** de tempo de participante, mais uma demonstração de ~10 min. Os bloqueios aqui são contas e acessos, não competências.
+No final, cada participante deve estar com sessão iniciada, dentro do projeto do seu país, com uma pasta pessoal do mesmo nome nos separadores Slide Decks e Visualizations.
 
-## Como conduzir
+## A sessão num relance
 
-- Comece pela **demonstração da plataforma** — é o apêndice no fim deste guia.
-- Depois os participantes iniciam sessão e criam as suas pastas.
-- **Resolva contas e acesso ao projeto antes da sessão, se puder.** O maior sorvedouro de tempo aqui são os emails de verificação e as contas por aprovar — nada que os participantes possam resolver sozinhos.
+| # | Atividade | Duração | Formato |
+|---|-----------|---------|---------|
+| — | Demonstração da plataforma FASTR | ~10 min | Conduzida pelo facilitador (apêndice) |
+| 1 | Iniciar sessão na plataforma | ~10 min | Prática, individual |
+| 2 | Criar a sua pasta de utilizador | ~5 min | Prática, individual |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Conduzir a sessão
+
+**Preparação.** Resolva contas e acesso ao projeto *antes* da sessão, se possível. O sorvedouro de tempo recorrente aqui são os emails de verificação e as contas por aprovar — que o participante não pode corrigir sozinho, e que bloqueiam a sala. Tenha a demonstração da plataforma pronta (apêndice) e a ficha *Iniciar sessão* pronta a distribuir depois.
+
+**Como demonstrar.** Comece pela demonstração da plataforma (apêndice) — uma visita breve e de alto nível aos separadores principais antes de alguém iniciar sessão. Mantenha-a curta e evite aprofundar; a configuração detalhada é uma sessão posterior. Depois deixe os participantes iniciar sessão e criar as suas pastas a partir das fichas.
+
+**Agrupamento.** As duas atividades são individuais. Junte os participantes em pares para se entreajudarem se alguém ficar preso num acesso.
+
+**Ritmo.** Este módulo é curto, mas não o dê por terminado cedo demais. Verifique que cada participante passou o ponto de passagem (sessão iniciada, no projeto, pastas criadas) antes de avançar — um problema de acesso por resolver só fica mais caro depois.
+
+**A mensagem a transmitir.** Organizar agora evita o caos depois: uma pasta por pessoa, o mesmo nome em ambos os separadores, é o hábito simples que mantém navegável um projeto de país cheio.
 
 ---
 
@@ -30,33 +48,38 @@ Os Primeiros passos põem cada participante na plataforma e configurados para ma
 
 ## As atividades
 
-### 1. Demonstração da plataforma FASTR
+### 1. Iniciar sessão na plataforma · ~10 min · prática
 
-**Demonstração · conduzida pelo facilitador · ~10 min**
+**O que acontece.** A primeira atividade prática: os participantes abrem o URL do seu país, registam-se ou iniciam sessão, verificam o email, iniciam sessão e clicam no projeto do seu país no separador Projects.
 
-**O que é** — uma visita guiada de orientação, conduzida pelo facilitador, aos cinco separadores principais da plataforma, antes de os participantes iniciarem sessão.
-**O que a ficha cobre** — um guião do tipo fazer / dizer para os separadores Data, Visualizations, Slide Decks e AI Assistant, mais perguntas frequentes e um plano de recurso com capturas de ecrã. *Guião completo da demonstração no apêndice abaixo.*
-**Atenção a** — mantenha-a curta e de alto nível; o guião avisa repetidamente para não aprofundar (sem prompt de IA ao vivo, sem detalhes de configuração). A pergunta recorrente é *«isto é o mesmo que o DHIS2?»* — tenha uma resposta pronta.
+**Demonstrar.** Coberto pela demonstração da plataforma (apêndice). Depois dela, encaminhe os participantes para a ficha *Iniciar sessão* e deixe-os trabalhar.
 
-### 2. Iniciar sessão na plataforma
+**Diga algo como.** *«Se o email de verificação não chegar em dois minutos, vejam no spam. Se o projeto do vosso país não estiver listado após o login, digam-me — é um acesso que tenho de conceder, não algo que possam resolver.»*
 
-**Atividade · ~10 min**
+**Como é um bom resultado.** Cada participante dentro do projeto do seu país, com o seu nome no canto superior direito e os separadores de navegação visíveis.
 
-**O que é** — a primeira atividade prática: os participantes criam uma conta e entram no projeto do seu país.
-**O que a ficha cobre** — abrir o URL do país, registar-se ou iniciar sessão, verificar o email, iniciar sessão e clicar no projeto do país no separador Projects.
-**Atenção a** — emails de verificação a cair no spam, e «conta não aprovada» / projeto em falta. Ambos precisam de **si** para conceder acesso ao projeto ou reenviar o email — antecipe-os antes de a sessão começar.
+**Atenção a.**
+- Emails de verificação a cair no spam.
+- «Conta não aprovada» ou projeto em falta — ambos precisam de *si* para conceder acesso ao projeto ou reenviar o email. Antecipe-os antes da sessão.
 
-### 3. Criar a sua pasta de utilizador
+### 2. Criar a sua pasta de utilizador · ~5 min · prática
 
-**Atividade · ~5 min**
+**O que acontece.** Uma curta atividade de configuração: os participantes criam uma pasta pessoal com o seu nome no separador Slide Decks, e outra com o **nome idêntico** no separador Visualizations.
 
-**O que é** — uma curta atividade de configuração para criar pastas pessoais e manter os resultados do workshop organizados.
-**O que a ficha cobre** — criar uma pasta com o nome do participante no separador Slide Decks, e outra com o **nome idêntico** no separador Visualizations.
-**Atenção a** — «+ New folder» só aparece na vista **«By folder»**; o nome tem de coincidir exatamente entre os dois separadores. Desencoraje nomes genéricos como «teste» — tornam o trabalho impossível de encontrar mais tarde.
+**Demonstrar.** Mostre que **+ New folder** só aparece na vista **By folder**, e que os nomes têm de ser exatamente os mesmos nos dois separadores.
+
+**Diga algo como.** *«Usem o vosso próprio nome, e o mesmo nome nos dois separadores. Evitem "teste" — o "teste" de toda a gente colide, e nunca mais encontram o vosso trabalho.»*
+
+**Como é um bom resultado.** Uma pasta com o nome do participante nos dois separadores, nomeada de forma idêntica.
+
+**Atenção a.**
+- O botão **+ New folder** ausente — não estão na vista **By folder**.
+- Nomes diferentes entre os dois separadores, que dificultam encontrar o trabalho.
+- Nomes genéricos como «teste» — desencoraje-os.
 
 ## Para encerrar
 
-Cada participante deve sair destas atividades com sessão iniciada, dentro do projeto do seu país, com uma pasta nomeada em ambos os separadores. Quem não estiver ficará bloqueado o resto do workshop — verifique antes de avançar.
+Cada participante deve terminar com sessão iniciada, dentro do projeto do seu país, com uma pasta nomeada em ambos os separadores. Quem não estiver ficará bloqueado o resto da formação — verifique antes de avançar.
 
 ---
 
