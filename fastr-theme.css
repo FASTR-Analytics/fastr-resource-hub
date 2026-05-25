@@ -412,6 +412,10 @@ img {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
+  /* Marp's imported 'default' theme paints a white card + shadow behind every
+     image, which boxes transparent logos/icons on dark covers. Neutralise it. */
+  background: transparent;
+  box-shadow: none;
 }
 
 /* Inline icons - no shadow/border */

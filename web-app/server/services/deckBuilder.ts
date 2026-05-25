@@ -145,12 +145,16 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   const lang: Language = language || (config.workshop as any).language || 'en'
   const slides: string[] = []
 
-  slides.push(`---
+  // Frontmatter is prepended (not joined as a slide) so the first real slide
+  // follows it directly — joining it would insert a `---` separator and produce
+  // an empty leading slide (a blank first page).
+  const frontmatter = `---
 marp: true
 theme: fastr
 paginate: true
 ---
-`)
+
+`
 
   const numDays = config.schedule.days || 1
 
@@ -187,7 +191,7 @@ paginate: true
     }
   }
 
-  return slides.join('\n\n---\n\n')
+  return frontmatter + slides.join('\n\n---\n\n')
 }
 
 /**
