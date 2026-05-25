@@ -10,20 +10,40 @@ footer: "FASTR · Visualizations & Interpretation · Facilitator"
 
 # Facilitator guide — Visualizations & Interpretation
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Visualizations & Interpretation</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Visualizations & Interpretation</strong> · <strong>6 activities · ~100 min</strong></p>
 
-## About these activities
+## Purpose
 
-These activities teach participants to **read a chart and say what it means** — first manually, then with the AI, ending in a real apply activity on country data. They deliberately pair a "do it yourself" path with an "AI does it, you verify" path, for both building charts and writing interpretations.
+This module teaches participants to read a chart and say what it means — first by hand, then with the AI, ending in a real apply activity on their own country data. It deliberately pairs a "do it yourself" path with an "AI does it, you verify" path, for both building charts and writing interpretations, so participants complete the full loop themselves before they let the AI take it on.
 
-**Six handouts.** **~100 min** of participant time.
+By the end, a participant should be able to: read any FASTR chart with a consistent framework; build a chart and choose the right type; write a three-part interpretation; produce the same outputs with the AI and verify them; and identify a genuine disruption in real data.
 
-## How to run it
+## Session at a glance
 
-- Start with the **reading framework** (handout 1) — it is the reference everything else builds on.
-- The sequence pairs **a full manual pass** (handouts 2 + 3) with **a full AI pass** (handouts 4 + 5), so participants complete the whole build-and-interpret loop themselves before they see the AI do it.
-- For each platform task, **demo it first**, then let participants follow the handout. The handout re-explains what you showed.
-- The through-line: the AI is fast, but the participant is accountable. Reinforce verification every time the AI appears.
+| # | Activity | Time | Format |
+|---|----------|------|--------|
+| 1 | How to read a FASTR visualization | ~10 min | Individual, then pairs |
+| 2 | Create your first visualization | ~15 min | Hands-on, individual |
+| 3 | Write an interpretation for a chart | ~20 min | Individual |
+| 4 | Build a visualization with the AI | ~15 min | Hands-on, individual |
+| 5 | Let the AI draft the interpretation | ~15 min | Hands-on, individual |
+| 6 | Apply — spot a disruption | ~25 min | Country teams |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Running the session
+
+**Preparation.** Have a saved visualisation and an existing deck ready in the demo account so you can show charts immediately. Confirm participants completed Instance Setup — activity 6 uses real country data, which must already be loaded.
+
+**How to demonstrate.** Every platform task should be demonstrated first, then practised from the handout, which re-explains what you showed. The detailed live demo for the chart builder (activity 2) is the one to rehearse — it carries the filter/disaggregate distinction the rest of the module depends on.
+
+**Grouping.** Activities 1–5 are individual, with sharing in pairs. Activity 6 is the country-team capstone — seat teams together for it.
+
+**Pacing.** Activity 1 is the reference the rest builds on; do not skip it. If time is short, tighten activities 4 and 5 (the AI pass) rather than the manual pass (2 and 3) — participants must form their own judgement before seeing the AI work.
+
+**The message to carry through.** The AI is fast, but the participant is accountable. Reinforce verification every time the AI appears.
 
 ---
 
@@ -31,64 +51,99 @@ These activities teach participants to **read a chart and say what it means** �
 
 ## The activities
 
-### 1. How to read a FASTR visualization
+### 1. How to read a FASTR visualization · ~10 min · individual → pairs
 
-**Reference · ~10 min**
+**What happens.** Participants learn a six-step framework for reading any chart — indicator, level/period, comparison, values, what stands out, so-what — see how to choose chart types, and practise on an existing deck with a teammate.
 
-**What it is** — a reusable reference: a six-step framework for reading any chart.
-**What the handout covers** — the six steps (indicator, level/period, comparison, values, what stands out, so-what), how to choose chart types, and practice on an existing deck with a teammate.
-**Watch for** — misreading the y-axis is the single most common mistake. Remind participants to check the legend, axes and footnotes *before* interpreting.
+**Demonstrate.** Walk the six steps once on a real chart, naming each step aloud, before participants try it on their own.
 
-### 2. Create your first visualization
+**What a good result looks like.** A participant who checks the legend, axes and footnotes *before* interpreting, and can state a chart's "so-what" in one sentence.
 
-**Activity · ~15 min**
+**Watch for.**
+- Misreading the y-axis — the single most common mistake. Have them read the axis aloud first.
+- Jumping to "what it means" before establishing "what it shows".
 
-**What it is** — a hands-on activity creating a chart with the built-in builder (the **Metric → Presets → Create** wizard).
-**What the handout covers** — + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a ready preset like *Service volume over time (monthly)* → Create. It then explains **filter vs disaggregate**, where to find them when editing a viz, and the four display modes (Lines / Grid / Rows / Columns).
-**Watch for** — participants confuse **filter** (pick what to show — you tick the indicators/period you want) with **disaggregate** (break a total into its parts). Reinforce the difference out loud; it underlies every chart they build. The quick path is metric → preset → Create; **Custom** is only for manual control. Also: line charts for trends, bar charts for comparing.
+### 2. Create your first visualization · ~15 min · hands-on
 
-> **Demo — use both, live (~3 min).** Open a saved viz and show the **left panel** (point out you have to *scroll* to reach these — this is where people get lost):
-> 1. Start with one indicator, national total. Say in words what it shows.
-> 2. Under **Display (disaggregate)**, break it down **by district** — switch between **Lines**, then **Rows**, then **Grid** so they see the *same data in different shapes*.
-> 3. Under **Filter (subset)**, tick just two districts — the chart shows only those. Name it: "I'm *choosing what to show*."
-> 4. **Show the trap:** disaggregate by district **and** filter to a single district → nothing left to compare. Rule to repeat: *filter what you don't need, disaggregate what you want to compare.*
+**What happens.** Participants build a chart with the built-in builder (the **Metric → Presets → Create** wizard): + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a preset like *Service volume over time (monthly)* → Create. The handout then explains **filter vs disaggregate** and the four display modes (Lines / Grid / Rows / Columns).
 
-### 3. Write an interpretation for a chart
+**Demonstrate (~3 min, live).** Open a saved viz and use the **left panel** — point out you must *scroll* to reach these controls, which is where people get lost:
+1. Start with one indicator, national total; say in words what it shows.
+2. Under **Display (disaggregate)**, break it down **by district** — switch between **Lines**, **Rows**, then **Grid** so they see the *same data in different shapes*.
+3. Under **Filter (subset)**, tick just two districts — the chart shows only those. Name it: *"I'm choosing what to show."*
+4. **Show the trap:** disaggregate by district *and* filter to a single district → nothing left to compare.
 
-**Activity · ~20 min**
+**Say something like.** *"Filter what you don't need; disaggregate what you want to compare. And line charts for trends, bar charts for comparing."*
 
-**What it is** — a writing activity teaching the three-part interpretation structure for a slide.
-**What the handout covers** — a message-carrying title, a facts-only "what you see", and an action-oriented "what it means", added alongside a chart on a slide.
-**Watch for** — titles that merely describe ("Coverage results"), facts mixed with interpretation, and vague so-whats that name no person or next step.
+**What a good result looks like.** A saved chart, and a participant who can explain the difference between filtering and disaggregating in their own words.
+
+**Watch for.**
+- Confusing **filter** (pick what to show) with **disaggregate** (break a total into parts) — the distinction underlies every chart they build.
+- Reaching for **Custom** when a preset would do; metric → preset → Create is the quick path.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Build a visualization with the AI Assistant
+### 3. Write an interpretation for a chart · ~20 min · individual
 
-**Activity · ~15 min**
+**What happens.** A writing activity teaching the three-part interpretation structure: a message-carrying title, a facts-only "what you see", and an action-oriented "what it means", added alongside a chart on a slide.
 
-**What it is** — a hands-on activity producing the same chart via plain-language AI requests.
-**What the handout covers** — type a chart request, review whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns, and save.
-**Watch for** — participants trust the first answer. They must verify indicator, period, chart type — and especially **adjusted vs raw data** — before saving.
+**Demonstrate.** Show a weak title and a strong one side by side — *"Coverage results"* versus a title that states the finding — so the difference between describing and concluding is concrete.
 
-### 5. Let the AI draft the interpretation
+**Say something like.** *"The title is your conclusion, not your topic. 'What you see' is facts only. 'What it means' has to name a person or a next step."*
 
-**Activity · ~15 min**
+**What a good result looks like.** A three-part interpretation whose title carries the message and whose "so-what" points to a specific action.
 
-**What it is** — a hands-on activity using the AI to draft interpretation text, then verifying it.
-**What the handout covers** — prompt the AI for an interpretation, verify each claim against the chart, refine in plain language, and add local context the AI cannot know.
-**Watch for** — trusting confident-sounding AI text. Every claim must be checked against the chart, and the recommended action must be owned by the participant.
+**Watch for.**
+- Titles that merely describe ("Coverage results").
+- Facts mixed with interpretation in the "what you see".
+- Vague so-whats that name no person and no next step.
 
-### 6. Apply — spot a disruption
+### 4. Build a visualization with the AI · ~15 min · hands-on
 
-**Activity · ~25 min**
+**What happens.** Participants produce the same chart through plain-language AI requests: type a chart request, check whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns, and save.
 
-**What it is** — a capstone apply activity using real country data to identify a disruption and write a finding.
-**What the handout covers** — country teams pick a flagged indicator, open its disruption chart, work the six-step framework, add local context, write a three-part finding, and share it with the room.
-**Watch for** — a disruption is rarely a single-month dip. Steer teams toward sustained drops (3+ months); remind them that stable volumes can still mean falling coverage if population is growing.
+**Demonstrate.** Type one chart request live, then point out where to confirm the AI used the right indicator, period, and — critically — **adjusted vs raw** data.
 
-## Wrapping up
+**Say something like.** *"Before you save, check the AI used adjusted data, not raw, and the period you actually asked for. It often guesses."*
 
-Activity 6 is the proof these activities worked: a team that can pick a real disruption and state it clearly has the core FASTR skill. Use the share-back to surface and correct weak findings.
+**What a good result looks like.** A saved chart that matches the request on indicator, period, chart type, and adjusted/raw.
+
+**Watch for.**
+- Trusting the first answer. Verify before saving — especially **adjusted vs raw data**.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 5. Let the AI draft the interpretation · ~15 min · hands-on
+
+**What happens.** Participants use the AI to draft interpretation text, then verify it: prompt for an interpretation, check each claim against the chart, refine in plain language, and add local context the AI cannot know.
+
+**Demonstrate.** Generate one interpretation on screen, then check a single claim against the chart aloud — showing that "it sounds right" is not the test.
+
+**Say something like.** *"The AI can describe the chart, but it doesn't know your context. Check every claim against the chart, and you own the recommended action."*
+
+**What a good result looks like.** An interpretation in which every claim has been checked against the chart and local context has been added.
+
+**Watch for.**
+- Trusting confident-sounding text. Every claim is checked against the chart; the recommended action is owned by the participant.
+
+### 6. Apply — spot a disruption · ~25 min · country teams
+
+**What happens.** The capstone: using real country data, teams pick a flagged indicator, open its disruption chart, work the six-step framework, add local context, write a three-part finding, and share it with the room.
+
+**Demonstrate.** Nothing new to demonstrate — this applies the whole module. Set it up by reminding teams of the six steps and the three-part finding structure.
+
+**Say something like.** *"A one-month dip is usually noise. Look for a sustained drop — three months or more — and remember stable volumes can still mean falling coverage if the population is growing."*
+
+**What a good result looks like.** A clearly stated finding about a genuine, sustained disruption, defensible in front of the room.
+
+**Watch for.**
+- Teams calling a single-month dip a disruption. Steer them to sustained drops (3+ months).
+- Use the share-back to surface and correct weak findings — it is the proof the module worked.
+
+## Closing the session
+
+Activity 6 is the evidence these activities landed: a team that can pick a real disruption from its own data and state it clearly has the core FASTR skill. Everything earlier in the module exists to make that final share-back possible.

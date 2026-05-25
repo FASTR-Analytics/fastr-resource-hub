@@ -10,19 +10,39 @@ footer: "FASTR · Slide Decks · Facilitator"
 
 # Facilitator guide — Slide Decks
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Slide Decks</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Slide Decks</strong> · <strong>4 activities · ~60 min + demo</strong></p>
 
-## About these activities
+## Purpose
 
-Slide Decks teaches participants to assemble what they have built — charts and interpretations — into a presentation. It is a **build-then-polish arc**: create the deck container, see the editor demoed, then add charts two ways and finalise.
+Slide Decks teaches participants to assemble what they have already built — charts and interpretations — into a presentation. It follows a build-then-polish arc: create the deck container, watch the editor demonstrated, add charts two ways (manually and with the AI), then finalise. The output is the artefact participants will actually show decision-makers, so the standard to hold is presentation-ready, not merely complete.
 
-**Four handouts.** **~60 min** of participant time, plus a ~5 min facilitator demo (editor walkthrough — script in the appendix).
+By the end, each participant should have a saved, polished two-slide deck, built from charts they created earlier, that they would be willing to show to a Director.
 
-## How to run it
+## Session at a glance
 
-- The sequence is **container → demo → do (manual) → do (AI) → polish.** Slide 1 sets up the deck and teaches slide types; you then run the editor demo (appendix) live before participants touch the editor themselves.
-- The **editor walkthrough demo** is the gating moment for activities 2 and 3 — without it participants will not know how to add a viz or split a slide into chart + text. Run the appendix script as written.
-- Activities 2 and 3 are the same task two ways: the handouts re-explain what you demoed. They are not self-teaching scripts.
+| # | Activity | Time | Format |
+|---|----------|------|--------|
+| — | Editor walkthrough demo | ~5 min | Facilitator-led (appendix) |
+| 1 | Create your first slide deck | ~10 min | Hands-on, individual |
+| 2 | Add a visualisation (manually) | ~15 min | Hands-on, individual |
+| 3 | Add a visualisation (with the AI) | ~15 min | Hands-on, individual |
+| 4 | Edit and finalise your slides | ~20 min | Hands-on, individual |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Running the session
+
+**Preparation.** Have a deck with one empty content slide and at least one saved visualisation ready in the demo account, so the editor demo runs without a hitch. Set browser zoom to ~100% so the interface is legible on the shared screen.
+
+**How to demonstrate.** The sequence is **container → demo → do (manual) → do (AI) → polish.** Activity 1 sets up the deck; you then run the editor walkthrough (appendix) live *before* participants touch the editor. That demo is the gating moment for activities 2 and 3 — without it, participants will not know how to add a chart or split a slide. Run the appendix script as written; the activity handouts re-explain what you showed, they are not self-teaching.
+
+**Grouping.** All four activities are individual hands-on work. Pair participants only for help when someone is stuck.
+
+**Pacing.** Protect the demo and activity 4. If time runs short, let activity 3 (the AI route to the same result as activity 2) be the one that slips.
+
+**The message to carry through.** Reuse, don't recreate: charts are built in the Visualisations tab and placed into slides here. The slide editor is for assembly and polish, not for building charts from scratch.
 
 ---
 
@@ -30,47 +50,70 @@ Slide Decks teaches participants to assemble what they have built — charts and
 
 ## The activities
 
-### 1. Create your first slide deck
+### 1. Create your first slide deck · ~10 min · hands-on
 
-**Activity · ~10 min**
+**What happens.** A short activity creating the deck container and a first content slide, which also teaches the three slide types: open the personal folder → + Create slide deck and name it → Add slide → choose **Cover** (title page), **Section** (divider), or **Content** (chart + text). Participants pick Content.
 
-**What it is** — a short activity creating the deck container and a first content slide. Also teaches the **three slide types**.
-**What the handout covers** — open the personal folder, + Create slide deck and name it, Add slide, choose between **Cover** (title page), **Section** (divider) and **Content** (chart + text) — pick Content.
-**Watch for** — participants create the deck *outside* their personal folder, or pick Cover/Section instead of Content — leaving them with nothing editable for the chart activities that follow.
+**Demonstrate.** Show where the deck is created — *inside* the personal folder — and the slide-type chooser, calling out that only **Content** holds a chart and text.
 
-> **Run the editor demo here** — before activity 2. Use the appendix script.
+**Say something like.** *"Create the deck inside your own folder, and pick Content — a Cover or Section slide has nowhere to put your chart."*
 
-### 2. Add a visualisation (manually)
+**What a good result looks like.** A named deck in the participant's personal folder with one editable content slide.
 
-**Activity · ~15 min**
+**Watch for.**
+- The deck created *outside* the personal folder.
+- Cover or Section chosen instead of Content — leaving nothing editable for the activities that follow.
 
-**What it is** — a hands-on activity adding a saved chart to a slide via the editor menus, repeating what you just demoed.
-**What the handout covers** — open the deck, click into the content slide, Block → Visualisation → Select, pick a chart the participant created, save.
-**Watch for** — participants try to rebuild charts inside the slide editor. Reinforce **"reuse, don't recreate"**; a missing chart simply isn't saved in a visible Visualisations folder.
+> **Run the editor walkthrough demo now**, before activity 2. Use the appendix script.
+
+### 2. Add a visualisation (manually) · ~15 min · hands-on
+
+**What happens.** A hands-on activity adding a saved chart to a slide via the editor menus, repeating what you demonstrated: open the deck → click into the content slide → Block → Visualisation → Select → pick a chart the participant created → save.
+
+**Demonstrate.** Covered in the appendix walkthrough (Step 2). No new demo needed; point participants back to what they saw.
+
+**Say something like.** *"You're not building a chart here — you're picking one you already saved. If it's not in the list, it wasn't saved to Visualisations."*
+
+**What a good result looks like.** A content slide showing one of the participant's own saved charts.
+
+**Watch for.**
+- Participants trying to rebuild charts inside the slide editor — reinforce "reuse, don't recreate".
+- A chart missing from the picker — it simply was not saved to a Visualisations folder.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Add a visualisation (with the AI Assistant)
+### 3. Add a visualisation (with the AI) · ~15 min · hands-on
 
-**Activity · ~15 min**
+**What happens.** The same task by a different route: participants prompt the AI to surface a saved visualisation, then use the chat preview's **Add to slide deck** button, ending with a two-slide deck.
 
-**What it is** — a hands-on activity adding a saved chart to a deck via an AI prompt.
-**What the handout covers** — prompt the AI to surface a saved visualisation, use the chat preview's "Add to slide deck" button, ending with a two-slide deck.
-**Watch for** — the AI can only find charts already saved in Visualisations. If it returns the wrong chart or no "Add to deck" button, participants must save first and name the chart more specifically.
+**Demonstrate.** Show one AI request that surfaces a saved chart and the **Add to slide deck** button in the preview, so participants recognise it when it appears.
 
-### 4. Edit and finalise your slides
+**Say something like.** *"The AI can only find charts you've already saved. If it shows the wrong one, save the chart you want and give it a clearer name."*
 
-**Activity · ~20 min**
+**What a good result looks like.** A two-slide deck, the second slide added through the AI route.
 
-**What it is** — a polishing activity reviewing and finalising every slide in the deck.
-**What the handout covers** — four passes per slide (accuracy review, resize text boxes, resize/reposition charts, adjust layout/spacing); slides can be sent back to the AI for rewrites.
-**Watch for** — the resize divider only appears after clicking into a slide. A chart still cramped after resizing needs to be simplified back in the **Visualisations** tab, not in the slide editor.
+**Watch for.**
+- The AI returning the wrong chart or no "Add to deck" button — the chart must be saved first and named specifically.
 
-## Wrapping up
+### 4. Edit and finalise your slides · ~20 min · hands-on
 
-By the end, every participant has a saved, polished two-slide deck. The bar to hold them to: each slide could be shown to a Director without an apology.
+**What happens.** A polishing pass: four reviews per slide — accuracy check, resize text boxes, resize/reposition charts, adjust layout and spacing. Slides can be sent back to the AI for rewrites.
+
+**Demonstrate.** Show where the resize divider appears (only after clicking into a slide) and one small text edit versus a structural rewrite that goes back to the AI.
+
+**Say something like.** *"Small fixes you make here; structural rewrites go back to the AI. The bar is: could you show this slide to a Director without an apology?"*
+
+**What a good result looks like.** Every slide reviewed for accuracy, with charts and text sized to fit and a clean layout.
+
+**Watch for.**
+- The resize divider not found — it only appears after clicking into a slide.
+- A chart still cramped after resizing — it must be simplified back in the **Visualisations** tab, not the slide editor.
+
+## Closing the session
+
+By the end, every participant has a saved, polished two-slide deck built from their own charts. Hold them to one bar: each slide could be shown to a Director without an apology.
 
 ---
 
@@ -102,8 +145,8 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 ### Step 2 — Add a visualisation block
 
 - **Do:** **Block → Visualisation → Select visualisation** → pick a saved chart → **Select**. The chart fills the slide.
-- **Say:** *"This is how you put a saved chart on a slide. You're not building a new chart here — you're picking one you already saved in the Visualisations tab."*
-- **Watch for:** Reinforce **"reuse, don't recreate"** — the chart must already be saved in Visualisations. If a participant's chart isn't appearing in the picker, they need to go back and save it there first.
+- **Say:** *"This is how you put a saved chart on a slide. You're not building a new chart here — you're picking one you already saved in the Visualizations tab."*
+- **Watch for:** Reinforce **"reuse, don't recreate"** — the chart must already be saved in Visualizations. If a participant's chart isn't appearing in the picker, they need to go back and save it there first.
 
 <div class="screenshot-placeholder">
 📷 <strong>Block → Visualisation → Select menu</strong><br>

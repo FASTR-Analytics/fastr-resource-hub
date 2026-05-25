@@ -10,20 +10,39 @@ footer: "FASTR · Instance Setup · Facilitator"
 
 # Facilitator guide — Instance Setup
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong> · <strong>5 activities · ~90 min</strong></p>
 
-## About these activities
+## Purpose
 
-Instance Setup is the hands-on configuration sequence — participants connect a country's DHIS2 data into a FASTR instance. The five activities run in a **strict order**: each step depends on the one before it, and mistakes cascade — a wrong indicator mapping in step 3 surfaces as a wrong number in step 5.
+Instance Setup is the configuration sequence that connects a country's DHIS2 data into a FASTR instance. Participants import the facility structure, define and map indicators, pull the HMIS data, and verify the result. Every later activity in the workshop runs on the data loaded here, so the module is a prerequisite rather than a topic in its own right.
 
-**Five handouts**, run in order. **~90 min** of participant time. Most failures here are credential or mapping mistakes, not conceptual ones.
+The five activities run in a **strict order**: each step depends on the one before it, and errors cascade — a wrong indicator mapping in step 3 surfaces as a wrong number in step 5. By the end, each team should have a verified instance whose spot-checked values match DHIS2.
 
-## How to run it
+## Session at a glance
 
-- This is a **guided sequence** — keep the room together, step by step. Don't let people race ahead.
-- The handouts are detailed procedures. Demo the first few clicks of each step, then let participants follow the handout at their own pace.
-- Have **DHIS2 credentials** and each team's **Data Prep Checklist** confirmed *before* you start — missing access stalls the whole room.
-- If anyone falls behind, **pause the room**. Later steps will not work without the earlier ones completed.
+| # | Activity | Time | Format |
+|---|----------|------|--------|
+| 1 | Before you begin | ~5 min | Guided, whole room |
+| 2 | Import facility structure | ~20 min | Guided, whole room |
+| 3 | Import and map indicators | ~30 min | Guided, whole room |
+| 4 | Import HMIS data | ~25 min | Guided, whole room |
+| 5 | Verify and explore your setup | ~10 min | Guided, whole room |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Running the session
+
+**Preparation.** Confirm two things for every team *before* the session starts: working DHIS2 credentials (URL, username, password) and a completed Data Prep Checklist. Missing access is the single biggest time sink here, and it is something only you or an administrator can resolve — not the participant.
+
+**How to demonstrate.** The handouts are detailed click-by-click procedures. Demonstrate the first few clicks of each step on the shared screen so participants recognise where they are, then let them follow the handout at their own pace. The fiddly moments worth showing slowly are flagged under **Demonstrate** below.
+
+**Grouping.** This is a guided sequence, not independent work — keep the room together and move step by step. Do not let faster participants race ahead; later steps fail silently if an earlier one was done wrong.
+
+**Pacing.** If anyone falls behind, pause the whole room. The cost of waiting is far lower than the cost of a team discovering at step 5 that step 3 was wrong and having to redo the sequence.
+
+**The message to carry through.** Setup is "done" only when the verification step passes. A green tile is not proof; a spot-checked value matching DHIS2 is.
 
 ---
 
@@ -31,50 +50,80 @@ Instance Setup is the hands-on configuration sequence — participants connect a
 
 ## The activities
 
-### 1. Before you begin
+### 1. Before you begin · ~5 min · whole room
 
-**Orientation · ~5 min**
+**What happens.** An orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled. Participants gather what they need — a completed Data Prep Checklist, DHIS2 URL/username/password, a stable browser. There is no separate "connect" step; credentials are entered on the first import.
 
-**What it is** — an orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled.
-**What the handout covers** — participants gather what they need (filled Data Prep Checklist, DHIS2 URL / username / password, a stable browser); there is no separate "connect" step — credentials are entered on the first import.
-**Watch for** — tell participants to tick **"Save credentials for this session"** on the first prompt, or they will be re-prompted on every later import.
+**Say something like.** *"On the first import you'll be asked for your DHIS2 login. Tick 'Save credentials for this session' — otherwise you'll re-enter them at every step."*
 
-### 2. Import facility structure
+**What a good result looks like.** Every team has its checklist and credentials in hand before anyone clicks Import.
 
-**Setup procedure · ~20 min**
+**Watch for.**
+- Teams without confirmed DHIS2 access. Resolve this before starting, not mid-sequence.
+- The "Save credentials for this session" tick being missed, causing repeated prompts later.
 
-**What it is** — a step-by-step procedure to pull the country admin hierarchy into FASTR.
-**What the handout covers** — Data → Structure & maps → Admin areas → import directly from DHIS2 → select the **Facility** level → finalize until the Structure & maps tile turns green.
-**Watch for** — an empty facility list or a wrong-looking hierarchy usually means the wrong DHIS2 level was picked, or the user lacks org-unit read access. Auth failures are typically a malformed URL.
+### 2. Import facility structure · ~20 min · whole room
 
-### 3. Import and map indicators
+**What happens.** A step-by-step procedure to pull the country's administrative hierarchy into FASTR: Data → Structure & maps → Admin areas → import directly from DHIS2 → select the **Facility** level → finalize, until the Structure & maps tile turns green.
 
-**Setup procedure · ~30 min**
+**Demonstrate.** Show the path to Structure & maps and the point where the DHIS2 **level** is chosen — selecting the wrong level here is the most common failure, and it is hard to spot afterwards.
 
-**What it is** — a three-phase procedure to define and map indicators. The longest and most error-prone step.
-**What the handout covers** — create common indicators, import the country's DHIS2 indicator names, then map each DHIS2 indicator to its common counterpart.
-**Watch for** — a rejected Common ID means a space, accent, or special character was used: insist on lowercase letters and underscores only. Each DHIS2 indicator maps to **exactly one** common indicator.
+**What a good result looks like.** A facility list that matches the country's real structure, and a green Structure & maps tile.
+
+**Watch for.**
+- An empty facility list or an odd-looking hierarchy — usually the wrong DHIS2 level, or the user lacks org-unit read access.
+- Authentication failures — typically a malformed URL rather than a wrong password.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 4. Import HMIS data
+### 3. Import and map indicators · ~30 min · whole room
 
-**Setup procedure · ~25 min**
+**What happens.** The longest and most error-prone step, in three phases: create the common indicators, import the country's DHIS2 indicator names, then map each DHIS2 indicator to its common counterpart.
 
-**What it is** — the largest data operation in setup: pulling actual HMIS data values from DHIS2.
-**What the handout covers** — select indicators and a time range, set error handling to **"Abort the entire import attempt"**, fetch, review the import summary, then integrate and finalize.
-**Watch for** — large pulls can freeze the browser. Warn participants not to close the tab mid-fetch; for large countries, narrow the indicators / time range and import in batches.
+**Demonstrate.** Show one full mapping — one DHIS2 indicator linked to one common indicator — and the Common ID naming rule, before teams work through their own list.
 
-### 5. Verify and explore your setup
+**Say something like.** *"Common IDs are lowercase letters and underscores only. No spaces, no accents. And each DHIS2 indicator maps to exactly one common indicator."*
 
-**Setup procedure · ~10 min**
+**What a good result looks like.** Every priority indicator mapped, with no rejected IDs and no DHIS2 indicator left mapped to two common ones.
 
-**What it is** — a verification step to spot-check imported data and learn the chart explorer.
-**What the handout covers** — view indicators as time series, toggle indicators, adjust the y-axis scale, spot-check a known facility value against DHIS2, and review import history.
-**Watch for** — flat or zero values usually mean the period range does not overlap DHIS2 data. A mismatched spot-check almost always traces back to **incomplete indicator mapping in step 3** — send them back there.
+**Watch for.**
+- A rejected Common ID — a space, accent, or special character was used.
+- Mapping confusion — remind them the relationship is one-to-one. A mistake here is what surfaces as a wrong number in step 5.
 
-## Wrapping up
+### 4. Import HMIS data · ~25 min · whole room
 
-The setup is only "done" when the verify step passes. If a spot-check fails, do not move on — the rest of the workshop runs on this data.
+**What happens.** The largest data operation in setup: pulling actual HMIS values from DHIS2. Participants select indicators and a time range, set error handling to **"Abort the entire import attempt"**, fetch, review the import summary, then integrate and finalize.
+
+**Demonstrate.** Show the error-handling setting and the import summary screen, so teams know what a healthy summary looks like before they integrate.
+
+**Say something like.** *"Don't close the tab while it's fetching. For a large country, narrow the indicators or the time range and import in batches rather than all at once."*
+
+**What a good result looks like.** A clean import summary, integrated and finalized, with no abort errors.
+
+**Watch for.**
+- Large pulls freezing the browser — warn against closing the tab mid-fetch.
+- Very large countries timing out — have them batch the import.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 5. Verify and explore your setup · ~10 min · whole room
+
+**What happens.** A verification step that doubles as an introduction to the chart explorer. Participants view indicators as time series, toggle indicators, adjust the y-axis scale, spot-check a known facility value against DHIS2, and review the import history.
+
+**Demonstrate.** Show one spot-check end to end: pick a facility and month whose value you know, find it in FASTR, and compare it to DHIS2. This is the moment that proves the setup.
+
+**Say something like.** *"A green tile means the import ran. A spot-check that matches DHIS2 means the import is correct. We need the second one."*
+
+**What a good result looks like.** A spot-checked value that matches DHIS2 exactly.
+
+**Watch for.**
+- Flat or zero values — usually the period range does not overlap the DHIS2 data.
+- A mismatched spot-check — almost always incomplete indicator mapping in step 3. Send the team back there rather than continuing.
+
+## Closing the session
+
+Do not move on until every team's verification passes. A failed spot-check is not a detail to fix later — the rest of the workshop runs on this data, and a quiet mapping error will reappear as a wrong finding in a participant's report.

@@ -10,19 +10,37 @@ footer: "FASTR · Getting Started · Facilitator"
 
 # Facilitator guide — Getting Started
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong> · <strong>3 activities · ~15 min + demo</strong></p>
 
-## About these activities
+## Purpose
 
-Getting Started gets every participant onto the platform and set up to keep their work organised. It is **short** — one facilitator-led demo, then two quick activities.
+Getting Started puts every participant onto the platform and set up to keep their work organised. It is a short module — one facilitator-led demo followed by two quick activities — but it is a gate: a participant who is not logged in, inside their country project, with a named folder in both tabs will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
 
-**Three handouts.** **~15 min** of participant time, plus a ~10 min demo. The blockers here are accounts and access, not skills.
+By the end, every participant should be signed in, inside their country project, with a personal folder of the same name in both the Slide Decks and Visualizations tabs.
 
-## How to run it
+## Session at a glance
 
-- Start with the **platform demo** — that's the appendix at the end of this guide.
-- Then participants log in and create their folders.
-- **Sort out accounts and project access before the session if you can.** The most common time sink here is verification emails and un-approved accounts — none of which participants can fix themselves.
+| # | Activity | Time | Format |
+|---|----------|------|--------|
+| — | FASTR platform demo | ~10 min | Facilitator-led (appendix) |
+| 1 | Log in to the platform | ~10 min | Hands-on, individual |
+| 2 | Create your user folder | ~5 min | Hands-on, individual |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Running the session
+
+**Preparation.** Resolve accounts and project access *before* the session if at all possible. The recurring time sink here is verification emails and un-approved accounts — neither of which a participant can fix themselves, and both of which stall the room. Have the platform demo loaded (appendix) and the *Logging in* handout ready to distribute after it.
+
+**How to demonstrate.** Start with the platform demo (appendix) — a brief, high-level tour of the main tabs before anyone logs in. Keep it short and resist going deep; detailed setup is a later session. Then let participants log in and create their folders from the handouts.
+
+**Grouping.** Both activities are individual. Pair participants for help if someone is stuck on access.
+
+**Pacing.** This module is short, but do not declare it finished early. Check every participant has cleared the gate (logged in, in project, folders made) before moving on — an unresolved access problem only gets more expensive later.
+
+**The message to carry through.** Organisation now prevents chaos later: one folder per person, the same name in both tabs, is the simple habit that keeps a crowded country project navigable.
 
 ---
 
@@ -30,33 +48,38 @@ Getting Started gets every participant onto the platform and set up to keep thei
 
 ## The activities
 
-### 1. FASTR platform demo
+### 1. Log in to the platform · ~10 min · hands-on
 
-**Demo · facilitator-led · ~10 min**
+**What happens.** The first hands-on activity: participants open their country URL, sign up or sign in, verify their email, log in, and click into their country's project on the Projects tab.
 
-**What it is** — a facilitator-led orientation tour of the platform's five main tabs, before participants log in themselves.
-**What the handout covers** — a do / say script for the Data, Visualizations, Slide Decks and AI Assistant tabs, plus common Q&A and a screenshot-based backup plan. *Full demo script in the appendix below.*
-**Watch for** — keep it short and high-level; the script repeatedly warns against going deep (no live AI prompt, no setup detail). The recurring participant question is *"is this the same as DHIS2?"* — have an answer ready.
+**Demonstrate.** Covered by the platform demo (appendix). After it, point participants to the *Logging in* handout and let them work.
 
-### 2. Log in to the platform
+**Say something like.** *"If your verification email hasn't arrived in two minutes, check spam. If your country project isn't listed after login, tell me — that's an access grant I need to make, not something you can fix."*
 
-**Activity · ~10 min**
+**What a good result looks like.** Each participant inside their country project, with their name in the top-right and the navigation tabs visible.
 
-**What it is** — the first hands-on activity: participants create an account and enter their country project.
-**What the handout covers** — open the country URL, sign up or sign in, verify the email, log in, and click into the country's project on the Projects tab.
-**Watch for** — verification emails landing in spam, and "account not approved" / missing project. Both need **you** to grant project access or re-trigger the email — pre-empt these before the session starts.
+**Watch for.**
+- Verification emails landing in spam.
+- "Account not approved" or a missing project — both need *you* to grant project access or re-trigger the email. Pre-empt these before the session.
 
-### 3. Create your user folder
+### 2. Create your user folder · ~5 min · hands-on
 
-**Activity · ~5 min**
+**What happens.** A short setup activity: participants create one personal folder named after themselves in the Slide Decks tab, and another with the **identical name** in the Visualizations tab.
 
-**What it is** — a short setup activity to create personal folders so workshop output stays organised.
-**What the handout covers** — create one folder named after the participant in the Slide Decks tab, and another with the **identical name** in the Visualizations tab.
-**Watch for** — "+ New folder" only appears in the **"By folder"** view; the name must match exactly across both tabs. Discourage generic names like "test" — they make work impossible to find later.
+**Demonstrate.** Show that **+ New folder** appears only in the **By folder** view, and that the names must match exactly across both tabs.
+
+**Say something like.** *"Use your own name, and the same name in both tabs. Avoid 'test' — everyone's 'test' folder collides, and you'll never find your work again."*
+
+**What a good result looks like.** A folder with the participant's name in both tabs, identically named.
+
+**Watch for.**
+- The **+ New folder** button missing — they are not in the **By folder** view.
+- Mismatched names across the two tabs, which makes work hard to find later.
+- Generic names like "test" — discourage them.
 
 ## Wrapping up
 
-Every participant should leave these activities logged in, inside their country project, with a named folder in both tabs. Anyone who isn't will be stuck for the rest of the workshop — check before moving on.
+Every participant should leave logged in, inside their country project, with a named folder in both tabs. Anyone who is not will be blocked for the rest of the workshop — check before moving on.
 
 ---
 
