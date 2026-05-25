@@ -78,9 +78,16 @@ def main() -> int:
     names = module_names()
     langs = (args.lang,) if args.lang else LANGS
 
-    # Full rebuilds start from a clean slate.
-    if not args.lang and not args.module and OUT.exists():
-        shutil.rmtree(OUT)
+    # Start from a clean slate so renamed modules don't leave orphan folders
+    # (e.g. an old English-named PT folder lingering after pt names were added).
+    # A whole-language build clears that language's tree; a full build clears all.
+    if not args.module:
+        if args.lang:
+            lang_out = OUT / args.lang
+            if lang_out.exists():
+                shutil.rmtree(lang_out)
+        elif OUT.exists():
+            shutil.rmtree(OUT)
     OUT.mkdir(parents=True, exist_ok=True)
     for stale in OUT.glob("*.pdf"):  # legacy flat layout
         stale.unlink()

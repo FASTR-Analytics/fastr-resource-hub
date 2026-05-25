@@ -31,7 +31,20 @@ if [[ ! -f "$THEME" ]]; then
 fi
 
 echo "Rendering: $INPUT → $OUTPUT"
-exec npx -y @marp-team/marp-cli "$INPUT" \
+
+# Prefer an already-installed marp binary (local node_modules, then global) over
+# `npx`, which re-resolves the package each call and — when several renders run
+# concurrently — can deadlock spawning Chrome. Fall back to npx only if neither
+# binary is present.
+if [[ -x "$REPO_ROOT/node_modules/.bin/marp" ]]; then
+  MARP=("$REPO_ROOT/node_modules/.bin/marp")
+elif command -v marp >/dev/null 2>&1; then
+  MARP=(marp)
+else
+  MARP=(npx -y @marp-team/marp-cli)
+fi
+
+exec "${MARP[@]}" "$INPUT" \
   --theme-set "$THEME" \
   --pdf \
   --allow-local-files \
