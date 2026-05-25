@@ -10,19 +10,37 @@ footer: "FASTR · Prise en main · Facilitateur"
 
 # Guide du facilitateur — Prise en main
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Prise en main</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Prise en main</strong> · <strong>3 activités · ~15 min + démo</strong></p>
 
-## À propos de ces activités
+## Objectif
 
-Prise en main permet à chaque participant d'accéder à la plateforme et de s'organiser pour la suite. C'est **court** — une démo animée par le facilitateur, puis deux activités rapides.
+Prise en main permet à chaque participant d'accéder à la plateforme et de s'organiser pour la suite. C'est un module court — une démo animée par le facilitateur suivie de deux activités rapides — mais c'est un point de passage : un participant qui n'est pas connecté, dans le projet de son pays, avec un dossier nommé dans les deux onglets, sera bloqué pour le reste de l'atelier. Les obstacles ici sont les comptes et les accès, pas les compétences.
 
-**Trois documents.** **~15 min** de temps participant, plus une démo de ~10 min. Les obstacles ici sont les comptes et les accès, pas les compétences.
+À la fin, chaque participant devrait être connecté, dans le projet de son pays, avec un dossier personnel du même nom dans les onglets Présentations et Visualisations.
 
-## Comment l'animer
+## La session en bref
 
-- Commencez par la **démo de la plateforme** — c'est l'annexe à la fin de ce guide.
-- Ensuite les participants se connectent et créent leurs dossiers.
-- **Réglez les comptes et l'accès aux projets avant la session si possible.** La perte de temps la plus fréquente ici vient des e-mails de vérification et des comptes non approuvés — que les participants ne peuvent pas corriger eux-mêmes.
+| # | Activité | Durée | Format |
+|---|----------|-------|--------|
+| — | Démo de la plateforme FASTR | ~10 min | Animée par le facilitateur (annexe) |
+| 1 | Se connecter à la plateforme | ~10 min | Pratique, individuel |
+| 2 | Créer votre dossier utilisateur | ~5 min | Pratique, individuel |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Animer la session
+
+**Préparation.** Réglez les comptes et l'accès aux projets *avant* la session si possible. La perte de temps récurrente ici vient des e-mails de vérification et des comptes non approuvés — que le participant ne peut pas corriger lui-même, et qui bloquent la salle. Ayez la démo de la plateforme prête (annexe) et le document *Connexion à la plateforme* prêt à distribuer après.
+
+**Comment démontrer.** Commencez par la démo de la plateforme (annexe) — un tour bref et de haut niveau des onglets principaux avant que quiconque ne se connecte. Restez court et évitez d'aller en profondeur ; la configuration détaillée est une session ultérieure. Ensuite, laissez les participants se connecter et créer leurs dossiers à partir des documents.
+
+**Regroupement.** Les deux activités sont individuelles. Mettez les participants en binôme pour s'entraider si quelqu'un bloque sur un accès.
+
+**Rythme.** Ce module est court, mais ne le déclarez pas fini trop tôt. Vérifiez que chaque participant a franchi le point de passage (connecté, dans le projet, dossiers créés) avant de continuer — un problème d'accès non résolu ne fait que coûter plus cher plus tard.
+
+**Le message à faire passer.** S'organiser maintenant évite le chaos plus tard : un dossier par personne, le même nom dans les deux onglets, est l'habitude simple qui garde un projet pays encombré navigable.
 
 ---
 
@@ -30,33 +48,38 @@ Prise en main permet à chaque participant d'accéder à la plateforme et de s'o
 
 ## Les activités
 
-### 1. Démo de la plateforme FASTR
+### 1. Se connecter à la plateforme · ~10 min · pratique
 
-**Démo · animée par le facilitateur · ~10 min**
+**Le déroulé.** La première activité pratique : les participants ouvrent l'URL de leur pays, s'inscrivent ou se connectent, vérifient leur e-mail, se connectent, et cliquent dans le projet de leur pays sur l'onglet Projets.
 
-**Ce que c'est** — une visite d'orientation, animée par le facilitateur, des cinq onglets principaux de la plateforme, avant que les participants ne se connectent eux-mêmes.
-**Ce que couvre le document** — un script à faire / à dire pour les onglets Données, Visualisations, Présentations et Assistant IA, plus les questions fréquentes et un plan de secours à base de captures d'écran. *Script complet en annexe ci-dessous.*
-**À surveiller** — gardez la démo courte et de haut niveau ; le script met en garde à plusieurs reprises contre l'envie d'aller en profondeur (pas de prompt IA en direct, pas de détail de configuration). La question récurrente : *« est-ce la même chose que DHIS2 ? »* — préparez une réponse.
+**Démontrer.** Couvert par la démo de la plateforme (annexe). Après elle, orientez les participants vers le document *Connexion à la plateforme* et laissez-les travailler.
 
-### 2. Se connecter à la plateforme
+**Formulez-le ainsi.** *« Si votre e-mail de vérification n'arrive pas en deux minutes, regardez dans les spams. Si le projet de votre pays n'est pas listé après connexion, dites-le-moi — c'est un accès que je dois accorder, pas quelque chose que vous pouvez régler. »*
 
-**Activité · ~10 min**
+**À quoi ressemble un bon résultat.** Chaque participant dans le projet de son pays, avec son nom en haut à droite et les onglets de navigation visibles.
 
-**Ce que c'est** — la première activité pratique : les participants créent un compte et entrent dans le projet de leur pays.
-**Ce que couvre le document** — ouvrir l'URL du pays, s'inscrire ou se connecter, vérifier l'e-mail, se connecter, et cliquer dans le projet du pays sur l'onglet Projets.
-**À surveiller** — les e-mails de vérification qui arrivent dans les spams, et « compte non approuvé » / projet manquant. Les deux exigent que **vous** accordiez l'accès au projet ou relanciez l'e-mail — anticipez-les avant le début de la session.
+**À surveiller.**
+- Les e-mails de vérification qui arrivent dans les spams.
+- « Compte non approuvé » ou projet manquant — les deux exigent que *vous* accordiez l'accès au projet ou relanciez l'e-mail. Anticipez-les avant la session.
 
-### 3. Créer votre dossier utilisateur
+### 2. Créer votre dossier utilisateur · ~5 min · pratique
 
-**Activité · ~5 min**
+**Le déroulé.** Une courte activité de configuration : les participants créent un dossier personnel à leur nom dans l'onglet Présentations, et un autre avec le **nom identique** dans l'onglet Visualisations.
 
-**Ce que c'est** — une courte activité de configuration pour créer des dossiers personnels afin que les productions de l'atelier restent organisées.
-**Ce que couvre le document** — créer un dossier au nom du participant dans l'onglet Présentations, et un autre avec le **nom identique** dans l'onglet Visualisations.
-**À surveiller** — « + Nouveau dossier » n'apparaît que dans la vue **« Par dossier »** ; le nom doit être exactement le même dans les deux onglets. Découragez les noms génériques comme « test » — ils rendent le travail introuvable plus tard.
+**Démontrer.** Montrez que **+ Nouveau dossier** n'apparaît que dans la vue **Par dossier**, et que les noms doivent être exactement les mêmes dans les deux onglets.
+
+**Formulez-le ainsi.** *« Utilisez votre propre nom, et le même nom dans les deux onglets. Évitez "test" — le "test" de tout le monde se télescope, et vous ne retrouverez plus votre travail. »*
+
+**À quoi ressemble un bon résultat.** Un dossier au nom du participant dans les deux onglets, nommé à l'identique.
+
+**À surveiller.**
+- Le bouton **+ Nouveau dossier** absent — ils ne sont pas dans la vue **Par dossier**.
+- Des noms différents entre les deux onglets, qui rendent le travail difficile à retrouver.
+- Des noms génériques comme « test » — découragez-les.
 
 ## Pour conclure
 
-Chaque participant doit terminer ces activités connecté, dans le projet de son pays, avec un dossier nommé dans les deux onglets. Quiconque ne l'est pas sera bloqué pour le reste de l'atelier — vérifiez avant de continuer.
+Chaque participant doit terminer connecté, dans le projet de son pays, avec un dossier nommé dans les deux onglets. Quiconque ne l'est pas sera bloqué pour le reste de l'atelier — vérifiez avant de continuer.
 
 ---
 

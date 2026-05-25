@@ -10,19 +10,39 @@ footer: "FASTR · Présentations · Facilitateur"
 
 # Guide du facilitateur — Présentations
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Présentations</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Présentations</strong> · <strong>4 activités · ~60 min + démo</strong></p>
 
-## À propos de ces activités
+## Objectif
 
-Présentations apprend aux participants à assembler ce qu'ils ont construit — graphiques et interprétations — en une présentation. C'est un **parcours construire-puis-peaufiner** : créer le conteneur, voir la démo de l'éditeur, puis ajouter des graphiques de deux façons et finaliser.
+Présentations apprend aux participants à assembler ce qu'ils ont déjà construit — graphiques et interprétations — en une présentation. Le module suit un parcours construire-puis-peaufiner : créer le conteneur, voir la démo de l'éditeur, ajouter des graphiques de deux façons (manuellement et avec l'IA), puis finaliser. La sortie est l'objet que les participants montreront réellement aux décideurs ; le critère à tenir est donc « prêt à présenter », pas seulement « terminé ».
 
-**Quatre documents.** **~60 min** de temps participant, plus une démo facilitateur de ~5 min (visite de l'éditeur — script en annexe).
+À la fin, chaque participant devrait avoir une présentation de deux diapositives enregistrée et soignée, construite à partir des graphiques qu'il a créés plus tôt, qu'il serait prêt à montrer à un Directeur.
 
-## Comment l'animer
+## La session en bref
 
-- La séquence est **conteneur → démo → faire (manuellement) → faire (IA) → peaufiner.** Le document 1 crée la présentation et enseigne les types de diapositives ; vous animez ensuite la démo de l'éditeur (annexe) en direct avant que les participants ne touchent eux-mêmes l'éditeur.
-- La **démo de visite de l'éditeur** est le moment-clé pour les activités 2 et 3 — sans elle, les participants ne sauront pas comment ajouter une viz ni diviser une diapositive en graphique + texte. Animez le script de l'annexe tel quel.
-- Les activités 2 et 3 sont la même tâche de deux façons : les documents réexpliquent ce que vous avez démontré. Ce ne sont pas des scripts d'auto-apprentissage.
+| # | Activité | Durée | Format |
+|---|----------|-------|--------|
+| — | Démo de visite de l'éditeur | ~5 min | Animée par le facilitateur (annexe) |
+| 1 | Créez votre première présentation | ~10 min | Pratique, individuel |
+| 2 | Ajouter une visualisation (manuellement) | ~15 min | Pratique, individuel |
+| 3 | Ajouter une visualisation (avec l'IA) | ~15 min | Pratique, individuel |
+| 4 | Éditer et finaliser vos diapositives | ~20 min | Pratique, individuel |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Animer la session
+
+**Préparation.** Ayez une présentation avec une diapositive de contenu vide et au moins une visualisation enregistrée prêtes dans le compte de démo, pour que la démo de l'éditeur se déroule sans accroc. Réglez le zoom du navigateur à ~100 % pour que l'interface soit lisible à l'écran partagé.
+
+**Comment démontrer.** La séquence est **conteneur → démo → faire (manuellement) → faire (IA) → peaufiner.** L'activité 1 crée la présentation ; vous animez ensuite la visite de l'éditeur (annexe) en direct *avant* que les participants ne touchent l'éditeur. Cette démo est le moment-clé pour les activités 2 et 3 — sans elle, les participants ne sauront pas ajouter un graphique ni diviser une diapositive. Animez le script de l'annexe tel quel ; les documents d'activité réexpliquent ce que vous avez montré, ce ne sont pas des scripts d'auto-apprentissage.
+
+**Regroupement.** Les quatre activités sont des travaux pratiques individuels. Mettez les participants en binôme seulement pour s'entraider en cas de blocage.
+
+**Rythme.** Protégez la démo et l'activité 4. Si le temps presse, laissez l'activité 3 (la voie IA vers le même résultat que l'activité 2) être celle qui glisse.
+
+**Le message à faire passer.** Réutilisez, ne recréez pas : les graphiques se construisent dans l'onglet Visualisations et se placent dans les diapositives ici. L'éditeur de diapositives sert à l'assemblage et au peaufinage, pas à construire des graphiques de zéro.
 
 ---
 
@@ -30,47 +50,70 @@ Présentations apprend aux participants à assembler ce qu'ils ont construit —
 
 ## Les activités
 
-### 1. Créez votre première présentation
+### 1. Créez votre première présentation · ~10 min · pratique
 
-**Activité · ~10 min**
+**Le déroulé.** Une courte activité pour créer le conteneur de présentation et une première diapositive de contenu, qui enseigne aussi les trois types de diapositives : ouvrir le dossier personnel → + Créer une présentation et la nommer → Ajouter une diapositive → choisir **Couverture** (page de titre), **Section** (séparateur) ou **Contenu** (graphique + texte). Les participants prennent Contenu.
 
-**Ce que c'est** — une courte activité pour créer le conteneur de présentation et une première diapositive de contenu. Enseigne aussi les **trois types de diapositives**.
-**Ce que couvre le document** — ouvrir le dossier personnel, + Créer une présentation et la nommer, Ajouter une diapositive, choisir entre **Couverture** (page de titre), **Section** (séparateur) et **Contenu** (graphique + texte) — prendre Contenu.
-**À surveiller** — les participants créent la présentation *en dehors* de leur dossier personnel, ou choisissent Couverture/Section au lieu de Contenu — ce qui les laisse sans rien à éditer pour les activités suivantes.
+**Démontrer.** Montrez où la présentation se crée — *dans* le dossier personnel — et le sélecteur de type de diapositive, en signalant que seule **Contenu** accueille un graphique et du texte.
 
-> **Animez la démo de l'éditeur ici** — avant l'activité 2. Utilisez le script de l'annexe.
+**Formulez-le ainsi.** *« Créez la présentation dans votre propre dossier, et choisissez Contenu — une diapositive Couverture ou Section n'a nulle part où mettre votre graphique. »*
 
-### 2. Ajouter une visualisation (manuellement)
+**À quoi ressemble un bon résultat.** Une présentation nommée dans le dossier personnel du participant avec une diapositive de contenu éditable.
 
-**Activité · ~15 min**
+**À surveiller.**
+- La présentation créée *en dehors* du dossier personnel.
+- Couverture ou Section choisie au lieu de Contenu — ce qui ne laisse rien à éditer pour les activités suivantes.
 
-**Ce que c'est** — une activité pratique pour ajouter un graphique enregistré à une diapositive via les menus de l'éditeur, en reproduisant ce que vous venez de démontrer.
-**Ce que couvre le document** — ouvrir la présentation, cliquer dans la diapositive de contenu, Bloc → Visualisation → Sélectionner, choisir un graphique que le participant a créé, enregistrer.
-**À surveiller** — les participants tentent de reconstruire des graphiques dans l'éditeur de diapositives. Renforcez **« réutilisez, ne recréez pas »** ; un graphique manquant n'est tout simplement pas enregistré dans un dossier Visualisations visible.
+> **Animez la démo de l'éditeur maintenant**, avant l'activité 2. Utilisez le script de l'annexe.
+
+### 2. Ajouter une visualisation (manuellement) · ~15 min · pratique
+
+**Le déroulé.** Une activité pratique pour ajouter un graphique enregistré à une diapositive via les menus de l'éditeur, en reproduisant ce que vous avez démontré : ouvrir la présentation → cliquer dans la diapositive de contenu → Bloc → Visualisation → Sélectionner → choisir un graphique que le participant a créé → enregistrer.
+
+**Démontrer.** Couvert dans la visite de l'annexe (Étape 2). Pas de nouvelle démo nécessaire ; renvoyez les participants à ce qu'ils ont vu.
+
+**Formulez-le ainsi.** *« Vous ne construisez pas un graphique ici — vous en choisissez un déjà enregistré. S'il n'est pas dans la liste, c'est qu'il n'a pas été enregistré dans Visualisations. »*
+
+**À quoi ressemble un bon résultat.** Une diapositive de contenu affichant un des graphiques que le participant a lui-même enregistrés.
+
+**À surveiller.**
+- Les participants qui tentent de reconstruire des graphiques dans l'éditeur — renforcez « réutilisez, ne recréez pas ».
+- Un graphique absent du sélecteur — il n'a tout simplement pas été enregistré dans un dossier Visualisations.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Ajouter une visualisation (avec l'Assistant IA)
+### 3. Ajouter une visualisation (avec l'IA) · ~15 min · pratique
 
-**Activité · ~15 min**
+**Le déroulé.** La même tâche par une autre voie : les participants demandent à l'IA de faire apparaître une visualisation enregistrée, puis utilisent le bouton **Ajouter à la présentation** de l'aperçu du chat, pour aboutir à une présentation de deux diapositives.
 
-**Ce que c'est** — une activité pratique pour ajouter un graphique enregistré à une présentation via un prompt IA.
-**Ce que couvre le document** — demander à l'IA de faire apparaître une visualisation enregistrée, utiliser le bouton « Ajouter à la présentation » de l'aperçu du chat, pour aboutir à une présentation de deux diapositives.
-**À surveiller** — l'IA ne trouve que les graphiques déjà enregistrés dans Visualisations. Si elle renvoie le mauvais graphique ou aucun bouton « Ajouter à la présentation », les participants doivent enregistrer d'abord et nommer le graphique plus précisément.
+**Démontrer.** Montrez une demande IA qui fait apparaître un graphique enregistré et le bouton **Ajouter à la présentation** dans l'aperçu, pour que les participants le reconnaissent.
 
-### 4. Éditer et finaliser vos diapositives
+**Formulez-le ainsi.** *« L'IA ne trouve que les graphiques que vous avez déjà enregistrés. Si elle affiche le mauvais, enregistrez celui que vous voulez et donnez-lui un nom plus clair. »*
 
-**Activité · ~20 min**
+**À quoi ressemble un bon résultat.** Une présentation de deux diapositives, la seconde ajoutée par la voie IA.
 
-**Ce que c'est** — une activité de peaufinage qui passe en revue et finalise chaque diapositive de la présentation.
-**Ce que couvre le document** — quatre passes par diapositive (revue d'exactitude, redimensionner les zones de texte, redimensionner/repositionner les graphiques, ajuster mise en page/espacement) ; les diapositives peuvent être renvoyées à l'IA pour réécriture.
-**À surveiller** — le séparateur de redimensionnement n'apparaît qu'après avoir cliqué dans une diapositive. Un graphique encore à l'étroit après redimensionnement doit être simplifié dans l'onglet **Visualisations**, pas dans l'éditeur de diapositives.
+**À surveiller.**
+- L'IA qui renvoie le mauvais graphique ou aucun bouton « Ajouter à la présentation » — le graphique doit être enregistré d'abord et nommé précisément.
+
+### 4. Éditer et finaliser vos diapositives · ~20 min · pratique
+
+**Le déroulé.** Une passe de peaufinage : quatre revues par diapositive — contrôle d'exactitude, redimensionner les zones de texte, redimensionner/repositionner les graphiques, ajuster mise en page et espacement. Les diapositives peuvent être renvoyées à l'IA pour réécriture.
+
+**Démontrer.** Montrez où apparaît le séparateur de redimensionnement (seulement après avoir cliqué dans une diapositive) et une petite correction de texte par rapport à une réécriture structurelle renvoyée à l'IA.
+
+**Formulez-le ainsi.** *« Les petites corrections, vous les faites ici ; les réécritures structurelles retournent à l'IA. Le critère : pourriez-vous montrer cette diapositive à un Directeur sans vous excuser ? »*
+
+**À quoi ressemble un bon résultat.** Chaque diapositive revue pour son exactitude, graphiques et texte dimensionnés pour tenir et une mise en page propre.
+
+**À surveiller.**
+- Le séparateur de redimensionnement introuvable — il n'apparaît qu'après avoir cliqué dans une diapositive.
+- Un graphique encore à l'étroit après redimensionnement — il doit être simplifié dans l'onglet **Visualisations**, pas dans l'éditeur.
 
 ## Pour conclure
 
-À la fin, chaque participant a une présentation de deux diapositives enregistrée et soignée. Le critère à tenir : chaque diapositive pourrait être montrée à un Directeur sans s'excuser.
+À la fin, chaque participant a une présentation de deux diapositives enregistrée et soignée, construite à partir de ses propres graphiques. Tenez-les à un seul critère : chaque diapositive pourrait être montrée à un Directeur sans s'excuser.
 
 ---
 
