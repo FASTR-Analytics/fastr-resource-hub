@@ -5,7 +5,7 @@
 
 ## Introduction à FASTR
 
-Le Mécanisme de financement mondial (GFF) soutient les efforts menés par les pays pour améliorer l'utilisation opportune des données pour la prise de décision, conduisant finalement à des systèmes de soins de santé primaires (SSP) plus forts et à de meilleurs résultats en matière de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N). Cet ensemble d'initiatives et de soutien technique est appelé **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
+Le Mécanisme de financement mondial (GFF) soutient les efforts menés par les pays pour améliorer la génération et l'utilisation opportune des données pour la prise de décision, conduisant finalement à des systèmes de soins de santé primaires (SSP) plus forts et à de meilleurs résultats en matière de santé reproductive, maternelle, néonatale, infantile et adolescente et de nutrition (SRMNIA-N). Cet ensemble d'initiatives et de soutien technique est appelé **Frequent Assessments and System Tools for Resilience (FASTR)**.
 
 FASTR englobe quatre approches techniques : (1) le suivi de l'utilisation des services du SRMNIA-N à l'aide des données du système d'information sur la gestion de la santé (SIGS), (2) des enquêtes téléphoniques à cycle rapide auprès des établissements de santé, (3) des enquêtes téléphoniques à haute fréquence auprès des ménages, et (4) des analyses de suivi. **Cette documentation méthodologique se concentre spécifiquement sur la première approche : Le suivi de l'utilisation des services du SRMNIA-N**
 
