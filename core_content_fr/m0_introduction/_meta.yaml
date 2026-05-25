@@ -54,8 +54,3 @@ slides:
   variant: full
   title: Pourquoi maintenant ? Répondre aux perturbations du financement
   last_reviewed: *id001
-- file: m0_7_community_of_practice.md
-  order: 7
-  variant: full
-  title: Communauté de pratique FASTR
-  last_reviewed: *id001
