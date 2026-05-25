@@ -4,30 +4,37 @@ themes:
   name:
     en: Setup & foundations
     fr: Bases et fondations
+    pt: Configuração e fundamentos
 - id: data
   name:
     en: Data pipeline
     fr: Pipeline de données
+    pt: Pipeline de dados
 - id: analysis
   name:
     en: Analysis
     fr: Analyse
+    pt: Análise
 - id: communication
   name:
     en: Communication & action
     fr: Communication et action
+    pt: Comunicação e ação
 - id: platform
   name:
     en: Platform skills
     fr: Compétences plateforme
+    pt: Competências na plataforma
 - id: methodology
   name:
     en: Methodology
     fr: Méthodologie
+    pt: Metodologia
 - id: workshop
   name:
     en: Workshop & assessment
     fr: Atelier et évaluation
+    pt: Workshop e avaliação
 
 modules:
 - id: m0
@@ -37,6 +44,7 @@ modules:
   name:
     en: Introduction to FASTR
     fr: Introduction à FASTR
+    pt: Introdução ao FASTR
   ai_context:
     description: Overview of the FASTR methodology, why rapid-cycle analytics matters
       for RMNCAH-N programs.
@@ -52,6 +60,7 @@ modules:
   name:
     en: Identify Questions & Indicators
     fr: Identifier les questions et indicateurs
+    pt: Identificar questões e indicadores
   ai_context:
     description: How to identify priority analytical questions, develop data use cases,
       and prepare indicator frameworks.
@@ -67,6 +76,7 @@ modules:
   name:
     en: Data Extraction
     fr: Extraction des données
+    pt: Extração de dados
   ai_context:
     description: Technical module on extracting data from DHIS2 and other health information
       systems.
@@ -83,6 +93,7 @@ modules:
   name:
     en: FASTR Analytics Platform
     fr: Plateforme analytique FASTR
+    pt: Plataforma analítica FASTR
   ai_context:
     description: Hands-on introduction to the FASTR Analytics Platform.
     topics:
@@ -98,6 +109,7 @@ modules:
   name:
     en: AI Assistant
     fr: Assistant IA
+    pt: Assistente de IA
   ai_context:
     description: Training on the FASTR AI assistant — capabilities, effective prompting,
       prompt library, team collaboration, and privacy.
@@ -114,6 +126,7 @@ modules:
   name:
     en: Data Quality Assessment
     fr: Évaluation de la qualité des données
+    pt: Avaliação da qualidade dos dados
   ai_context:
     description: 'Systematic approach to assessing data quality: completeness, outliers,
       internal consistency.'
@@ -130,6 +143,7 @@ modules:
   name:
     en: Data Quality Adjustment
     fr: Ajustement de la qualité des données
+    pt: Ajuste da qualidade dos dados
   ai_context:
     description: Methods for adjusting data to account for quality issues before analysis.
     topics:
@@ -144,6 +158,7 @@ modules:
   name:
     en: Data Analysis
     fr: Analyse des données
+    pt: Análise de dados
   ai_context:
     description: 'Core analytical methods: service utilization trends, coverage estimation.'
     topics:
@@ -159,6 +174,7 @@ modules:
   name:
     en: Results Communication
     fr: Communication des résultats
+    pt: Comunicação de resultados
   ai_context:
     description: How to interpret findings, create visualizations, and communicate
       results.
@@ -174,6 +190,7 @@ modules:
   name:
     en: Survey & HFA
     fr: Enquêtes et EFS
+    pt: Inquéritos e AUS
   ai_context:
     description: Integration of survey data and health facility assessments with routine
       data.
@@ -189,6 +206,7 @@ modules:
   name:
     en: Instance Setup
     fr: Configuration de l'instance
+    pt: Configuração da instância
   ai_context:
     description: Hands-on activities for configuring FASTR platform instances — admin
       areas, data import, running modules, creating projects.
@@ -226,6 +244,7 @@ modules:
   name:
     en: Getting Started
     fr: Prise en main
+    pt: Primeiros passos
   ai_context:
     description: Getting started with the FASTR platform — logging in, navigating
       the interface, creating user folders.
@@ -241,6 +260,7 @@ modules:
   name:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
+    pt: Visualizações e interpretação
   ai_context:
     description: Hands-on creation and interpretation of visualizations — manual and
       AI-assisted, with disruption analysis practice.
@@ -285,6 +305,7 @@ modules:
   name:
     en: Slide Decks
     fr: Présentations
+    pt: Apresentações
   ai_context:
     description: Building and customizing slide decks — adding visualizations, editing
       layouts, formatting reports with logos and styles.
@@ -321,6 +342,7 @@ modules:
   name:
     en: Disruption Report
     fr: Rapport de perturbations
+    pt: Relatório de perturbações
   ai_context:
     description: Creating disruption reports with AI assistance — from prompt to final
       output, with peer review and refinement.
@@ -360,6 +382,7 @@ modules:
   name:
     en: Prompting Techniques
     fr: Techniques de prompting
+    pt: Técnicas de prompting
   ai_context:
     description: Developing effective prompting skills — iterative vs single prompts,
       prompt refinement, and using the prompt library.
@@ -398,6 +421,7 @@ modules:
   name:
     en: FASTR Quiz
     fr: Quiz FASTR
+    pt: Quiz FASTR
   ai_context:
     description: Interactive quiz covering FASTR fundamentals — data quality dimensions,
       technical pillars, indicator definitions.
@@ -429,6 +453,7 @@ modules:
   name:
     en: Platform Demo
     fr: Démo de la plateforme
+    pt: Demonstração da plataforma
   ai_context:
     description: Live demonstration of the FASTR platform — access, user roles, and
       basic workflow.
@@ -444,6 +469,7 @@ modules:
   name:
     en: Standard FASTR Reports
     fr: Rapports FASTR standards
+    pt: Relatórios FASTR padrão
   ai_context:
     description: Hands-on activity teaching participants to manually build a disruption
       report using the FASTR report builder. Covers report structure, adding visualizations,
@@ -482,6 +508,7 @@ modules:
   name:
     en: Webinar Content
     fr: Contenu webinaire
+    pt: Conteúdo do webinar
   ai_context:
     description: Visual, webinar-optimized slides designed for remote audiences — concise
       overviews of FASTR topics ideal for short virtual events.
@@ -506,3 +533,4 @@ modules:
   name:
     en: Analytics pipeline
     fr: Pipeline d'analyse
+    pt: Pipeline de análise
