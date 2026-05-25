@@ -1,87 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340">
-  <defs>
-    <style>
-      .box { rx: 10; stroke-width: 2; }
-      .box-trigger { fill: #C53030; stroke: #9B2C2C; }
-      .box-q { fill: #E8F4F3; stroke: #0C716B; }
-      .box-fastr { fill: #09544F; stroke: #073B38; }
-      .title-text { font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: central; }
-      .title-dark { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
-      .q-text { font-family: Inter, sans-serif; font-size: 11.5px; fill: #09544F; text-anchor: middle; }
-      .fastr-text { font-family: Inter, sans-serif; font-size: 12px; fill: #fff; text-anchor: middle; }
-      .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arr); }
-    </style>
-    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ DÉROULÉ : du choc à la réponse ============ -->
 
-  <!-- Trigger box -->
-  <rect class="box box-trigger" x="220" y="15" width="340" height="45"/>
-  <text class="title-text" x="390" y="38">Changements majeurs du financement externe</text>
+  <!-- chevrons de liaison entre les cartes -->
+  <path d="M243 163 L255 175 L243 187" fill="none" stroke="#C53030" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M494 161 L508 175 L494 189" fill="none" stroke="#0C716B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M745 163 L757 175 L745 187" fill="none" stroke="#1F9A9C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Tree connector: trigger → question boxes -->
-  <line x1="390" y1="60" x2="390" y2="75" stroke="#1F9A9C" stroke-width="2.5"/>
-  <line x1="102" y1="75" x2="675" y2="75" stroke="#1F9A9C" stroke-width="2.5"/>
-  <line x1="102" y1="75" x2="102" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
-  <line x1="292" y1="75" x2="292" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
-  <line x1="482" y1="75" x2="482" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
-  <line x1="675" y1="75" x2="675" y2="85" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="96,85 102,92 108,85" fill="#1F9A9C"/>
-  <polygon points="286,85 292,92 298,85" fill="#1F9A9C"/>
-  <polygon points="476,85 482,92 488,85" fill="#1F9A9C"/>
-  <polygon points="669,85 675,92 681,85" fill="#1F9A9C"/>
+  <!-- ===== Carte 1 — Le financement change ===== -->
+  <rect x="16" y="58" width="215" height="234" rx="16" fill="#FDE8E8" stroke="#C53030" stroke-width="1.5"/>
+  <circle cx="123.5" cy="116" r="27" fill="#C53030"/>
+  <path d="M123.5 102 V128 M113.5 119 L123.5 130 L133.5 119" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="123.5" y="184" text-anchor="middle" font-size="17" font-weight="700" fill="#C53030">Le financement change</text>
+  <text x="123.5" y="220" text-anchor="middle" font-size="14.5" fill="#5A6562">
+    <tspan x="123.5" dy="0">Financement externe</tspan>
+    <tspan x="123.5" dy="22">de la santé</tspan>
+  </text>
 
-  <!-- 4 question boxes in a row -->
-  <rect class="box box-q" x="15" y="90" width="175" height="80"/>
-  <text class="title-dark" x="102" y="115">Quelle ampleur ?</text>
-  <text class="q-text" x="102" y="135">Quels programmes</text>
-  <text class="q-text" x="102" y="150">et zones touchés ?</text>
+  <!-- ===== Carte 2 — Qu'est-ce qui change ? ===== -->
+  <rect x="267" y="58" width="215" height="234" rx="16" fill="#F8D7D5" stroke="#C53030" stroke-width="1.5"/>
+  <circle cx="374.5" cy="116" r="27" fill="#C53030"/>
+  <text x="374.5" y="117" text-anchor="middle" dominant-baseline="central" font-size="30" font-weight="800" fill="#fff">?</text>
+  <text x="374.5" y="184" text-anchor="middle" font-size="17" font-weight="700" fill="#C53030">Qu'est-ce qui change ?</text>
+  <text x="374.5" y="216" text-anchor="middle" font-size="14.5" fill="#5A6562">
+    <tspan x="374.5" dy="0">Quels services et</tspan>
+    <tspan x="374.5" dy="22">zones SRMNIA-N</tspan>
+    <tspan x="374.5" dy="22">sont concernés</tspan>
+  </text>
 
-  <rect class="box box-q" x="205" y="90" width="175" height="80"/>
-  <text class="title-dark" x="292" y="115">Quels effets ?</text>
-  <text class="q-text" x="292" y="135">Volumes de services</text>
-  <text class="q-text" x="292" y="150">en baisse ? Où ?</text>
+  <!-- ===== Carte 3 — FASTR (le tournant) ===== -->
+  <rect x="518" y="58" width="215" height="234" rx="16" fill="#09544F"/>
+  <circle cx="625.5" cy="116" r="27" fill="#D0CB17"/>
+  <g fill="#09544F">
+    <rect x="612" y="114" width="6.5" height="14" rx="1"/>
+    <rect x="622.25" y="106" width="6.5" height="22" rx="1"/>
+    <rect x="632.5" y="119" width="6.5" height="9" rx="1"/>
+  </g>
+  <text x="625.5" y="186" text-anchor="middle" font-size="25" font-weight="800" fill="#ffffff" letter-spacing="0.5">FASTR</text>
+  <text x="625.5" y="218" text-anchor="middle" font-size="14.5" fill="#CAE6E9">
+    <tspan x="625.5" dy="0">Analyse les données DHIS2</tspan>
+    <tspan x="625.5" dy="22">que vous collectez déjà.</tspan>
+    <tspan x="625.5" dy="22">Aucune nouvelle enquête.</tspan>
+  </text>
 
-  <rect class="box box-q" x="395" y="90" width="175" height="80"/>
-  <text class="title-dark" x="482" y="115">Comment prioriser ?</text>
-  <text class="q-text" x="482" y="135">Services et populations</text>
-  <text class="q-text" x="482" y="150">les plus vulnérables ?</text>
-
-  <rect class="box box-q" x="585" y="90" width="180" height="80"/>
-  <text class="title-dark" x="675" y="115">Comment protéger ?</text>
-  <text class="q-text" x="675" y="135">Actions pour préserver</text>
-  <text class="q-text" x="675" y="150">les services SRMNIA-N ?</text>
-
-  <!-- Arrows down to FASTR (explicit polygons for precise placement) -->
-  <line x1="102" y1="170" x2="102" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="96,198 102,205 108,198" fill="#1F9A9C"/>
-  <line x1="292" y1="170" x2="292" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="286,198 292,205 298,198" fill="#1F9A9C"/>
-  <line x1="482" y1="170" x2="482" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="476,198 482,205 488,198" fill="#1F9A9C"/>
-  <line x1="675" y1="170" x2="675" y2="198" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="669,198 675,205 681,198" fill="#1F9A9C"/>
-
-  <!-- FASTR response bar -->
-  <rect class="box box-fastr" x="15" y="205" width="750" height="50"/>
-  <text class="title-text" x="390" y="225">FASTR : socle analytique avec les données existantes</text>
-  <text class="fastr-text" x="390" y="243">Réponses rapides à partir des données DHIS2 déjà collectées</text>
-
-  <!-- Bottom: what FASTR enables (arrows point to box centers) -->
-  <line x1="195" y1="255" x2="195" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="189,278 195,285 201,278" fill="#1F9A9C"/>
-  <line x1="460" y1="255" x2="460" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="454,278 460,285 466,278" fill="#1F9A9C"/>
-  <line x1="680" y1="255" x2="680" y2="278" stroke="#1F9A9C" stroke-width="2.5"/>
-  <polygon points="674,278 680,285 686,278" fill="#1F9A9C"/>
-
-  <rect class="box" x="65" y="285" width="260" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
-  <text class="q-text" x="195" y="309">Détecter les perturbations tôt</text>
-
-  <rect class="box" x="345" y="285" width="230" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
-  <text class="q-text" x="460" y="309">Éclairer l'allocation des ressources</text>
-
-  <rect class="box" x="595" y="285" width="170" height="40" fill="#CAE6E9" stroke="#1F9A9C"/>
-  <text class="q-text" x="680" y="309">Plaider avec des preuves</text>
+  <!-- ===== Carte 4 — Agir à temps ===== -->
+  <rect x="769" y="58" width="215" height="234" rx="16" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <circle cx="876.5" cy="116" r="27" fill="#0C716B"/>
+  <path d="M864 116 L872.5 125 L889 107" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="876.5" y="184" text-anchor="middle" font-size="17" font-weight="700" fill="#09544F">Agir à temps</text>
+  <g font-size="14" fill="#5A6562">
+    <circle cx="786" cy="211" r="3" fill="#D0CB17"/><text x="797" y="216">Repérer les perturbations</text>
+    <circle cx="786" cy="233" r="3" fill="#D0CB17"/><text x="797" y="238">Prioriser l'essentiel</text>
+    <circle cx="786" cy="255" r="3" fill="#D0CB17"/><text x="797" y="260">Planifier et plaider</text>
+  </g>
 </svg>
