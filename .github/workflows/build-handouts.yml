@@ -55,14 +55,26 @@ jobs:
 
       - name: Commit + push rebuilt PDFs
         run: |
-          if [ -n "$(git status --porcelain handouts/_out/)" ]; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add handouts/_out/
-            git commit -m "handouts: auto-rebuild PDFs from CI [skip ci]
+          if [ -z "$(git status --porcelain handouts/_out/)" ]; then
+            echo "No PDF changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add handouts/_out/
+          git commit -m "handouts: auto-rebuild PDFs from CI [skip ci]
 
           Co-Authored-By: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-            git push origin main
-          else
-            echo "No PDF changes — nothing to commit."
-          fi
+
+          # Retry with rebase if humans pushed to main during the build.
+          for attempt in 1 2 3 4 5; do
+            if git push origin main; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt). Rebasing onto fresh main."
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "::error::Could not push rebuilt PDFs after 5 attempts."
+          exit 1
