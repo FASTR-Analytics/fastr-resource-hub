@@ -1,82 +1,78 @@
 slides:
 - file: m6_1_service_utilization_analysis.md
-  order: 1
+  order: 1.0
   variant: full
   title: Service utilization analysis
-- file: m6_1b_service_utilization_analysis.md
-  order: 1.001
-  variant: full
-  title: Service utilization comparison to DHIS2
-- file: m6_1c_indicator_directionality.md
-  order: 1.005
-  variant: full
-  title: 'Indicator directionality: not every increase is good'
 - file: m6_1a_service_utilization_comparison_dhis2.md
   order: 1.01
   variant: full
   title: 'Service utilization and disruptions: comparison to DHIS2'
+- file: m6_1b_service_utilization_analysis.md
+  order: 1.02
+  variant: full
+  title: Service utilization comparison to DHIS2
+- file: m6_1c_indicator_directionality.md
+  order: 1.03
+  variant: full
+  title: Indicator directionality
 - file: m6_2_service_disruptions_surpluses_detection.md
-  order: 2
+  order: 2.0
   variant: full
   title: Service disruptions and surpluses detection
-- file: m6_2b_service_disruptions_surpluses_detection.md
-  order: 2.001
-  variant: full
-  title: How disruption detection works
-- file: m6_2c_service_disruptions_surpluses_detection.md
-  order: 2.002
-  variant: full
-  title: Disruption detection comparison to DHIS2
 - file: m6_2a_why_detecting_disruptions_matters.md
   order: 2.01
   variant: full
   title: Why detecting disruptions matters
+- file: m6_2b_service_disruptions_surpluses_detection.md
+  order: 2.02
+  variant: full
+  title: How disruption detection works
+- file: m6_2c_service_disruptions_surpluses_detection.md
+  order: 2.03
+  variant: full
+  title: Disruption detection comparison to DHIS2
 - file: m6_5a_service_utilization_configuration_parameters.md
   order: 5.01
   variant: full
   title: 'Service utilization module: Configuration parameters'
 - file: m6_6_service_coverage_introduction.md
-  order: 6
+  order: 6.0
   variant: full
   title: Service coverage estimation
 - file: m6_6b_service_coverage_introduction.md
-  order: 6.001
+  order: 6.02
   variant: full
   title: Our approach to service coverage analysis
 - file: m6_6c_service_coverage_introduction.md
-  order: 6.002
+  order: 6.03
   variant: full
   title: Two-part analytical process
 - file: m6_7_definition_of_coverage.md
-  order: 7
+  order: 7.0
   variant: full
   title: Service coverage example
 - file: m6_8_denominators_by_service_type.md
-  order: 8
+  order: 8.0
   variant: full
   title: Denominators by service type
 - file: m6_9_demographic_cascade.md
-  order: 9
+  order: 9.0
   variant: full
   title: Expected relationships which help with estimating denominators
 - file: m6_9a_cascade_dropout.md
   order: 9.01
   variant: full
   title: Service cascade and dropout analysis
-- file: m6_9ab_cascade_dropout.md
-  order: 9.011
-  variant: full
-  title: Calculating and interpreting dropout
 - file: m6_10_denominator_cascade_illustration.md
-  order: 10
+  order: 10.0
   variant: full
   title: Estimating denominators from ANC-1
 - file: m6_11_deriving_denominators_from_entry_points.md
-  order: 11
+  order: 11.0
   variant: full
   title: Deriving denominators from entry points
 - file: m6_13_denominator_selection_methodology.md
-  order: 13
+  order: 13.0
   variant: full
   title: Denominator selection methodology
 - file: m6_13a_denominator_comparison.md
@@ -84,74 +80,65 @@ slides:
   variant: full
   title: Which denominator provides more plausible estimates?
 - file: m6_14_coverage_projection_methodology.md
-  order: 14
+  order: 14.0
   variant: full
   title: Coverage projection methodology
 - file: m6_19_coverage_configuration_parameters.md
-  order: 19
+  order: 19.0
   variant: full
   title: 'Coverage module: Configuration parameters'
 - file: m6_s0_utilization_detecting_changes.md
-  order: 0
+  order: 0.0
   variant: condensed
   title: 'Service utilization: detecting changes'
 - file: m6_s0b_reading_disruption_chart.md
-  order: 0.001
+  order: 0.02
   variant: condensed
   title: Reading a disruption chart
 - file: m6_s0c_coverage_methods.md
-  order: 0.01
+  order: 0.03
   variant: condensed
-  title: 'Coverage: from volumes to percentages'
+  title: 'Coverage: the denominator problem'
 - file: m6_s0d_reading_coverage_chart.md
-  order: 0.011
+  order: 0.04
   variant: condensed
   title: Reading a coverage chart
 - file: m6_s1_utilization_overview.md
-  order: 1
+  order: 1.0
   variant: condensed
   title: Service utilization analysis
-- file: m6_s1b_utilization_overview.md
-  order: 1.001
-  variant: condensed
-  title: Year-over-year change output
-- file: m6_s1c_utilization_overview.md
-  order: 1.002
-  variant: condensed
-  title: Try it yourself
-- file: m6_s1d_indicator_directionality.md
-  order: 1.005
-  variant: condensed
-  title: 'Indicator directionality: not every increase is good'
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed
   title: Quarter-on-quarter change
-  last_reviewed: 2026-05-13
+- file: m6_s1b_utilization_overview.md
+  order: 1.02
+  variant: condensed
+  title: Year-over-year change output
+- file: m6_s1d_indicator_directionality.md
+  order: 1.04
+  variant: condensed
+  title: Indicator directionality
 - file: m6_s2_disruption_interpretation.md
-  order: 2
+  order: 2.0
   variant: condensed
   title: Detecting service disruptions
 - file: m6_s2b_disruption_interpretation.md
-  order: 2.001
+  order: 2.02
   variant: condensed
   title: Service disruption output
 - file: m6_s3_coverage_overview.md
-  order: 3
+  order: 3.0
   variant: condensed
   title: Service coverage estimation
-- file: m6_s3b_coverage_overview.md
-  order: 3.001
-  variant: condensed
-  title: How FASTR estimates coverage
 - file: m6_s3a_coverage_example.md
   order: 3.01
   variant: condensed
   title: Service coverage example
-- file: m6_s3f_expected_relationships.md
+- file: m6_s3b_coverage_overview.md
   order: 3.02
   variant: condensed
-  title: Expected relationships which help with estimating denominators
+  title: How FASTR estimates coverage
 - file: m6_s3c_estimating_denominators.md
   order: 3.03
   variant: condensed
@@ -164,28 +151,31 @@ slides:
   order: 3.05
   variant: condensed
   title: How FASTR estimates coverage
+- file: m6_s3f_expected_relationships.md
+  order: 3.06
+  variant: condensed
+  title: Expected relationships which help with estimating denominators
 - file: m6_s4_coverage_interpretation.md
-  order: 4
+  order: 4.0
   variant: condensed
   title: 'Coverage output: National trends'
 - file: m6_s4b_coverage_interpretation.md
-  order: 4.001
+  order: 4.02
   variant: condensed
   title: 'Coverage output: Subnational comparison'
 - file: m6_s4c_coverage_interpretation.md
-  order: 4.002
+  order: 4.03
   variant: condensed
   title: Drill down for the full picture
 - file: m6_s5_country_example_nigeria.md
-  order: 5
+  order: 5.0
   variant: condensed
   title: 'Country example: Nigeria'
 - file: m6_s6_fastr_value_beyond_dhis2.md
-  order: 6
+  order: 6.0
   variant: condensed
   title: Why FASTR? Value add beyond standard DHIS2 analysis
-  last_reviewed: 2026-05-13
 - file: m6_s7_key_takeaway.md
-  order: 7
+  order: 7.0
   variant: condensed
   title: Key takeaway

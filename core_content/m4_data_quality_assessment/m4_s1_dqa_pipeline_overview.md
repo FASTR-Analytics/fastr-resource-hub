@@ -12,4 +12,4 @@ The FASTR analysis follows a sequential workflow:
 2. **Adjust for quality issues** - Apply corrections to improve data reliability
 3. **Analyze adjusted data** - Generate service utilization and coverage estimates
 
-![Analytical Pipeline h:280](../../resources/diagrams/analytical_pipeline.svg)
+![Analytical Pipeline w:1000](../../resources/diagrams/analytical_pipeline.svg)

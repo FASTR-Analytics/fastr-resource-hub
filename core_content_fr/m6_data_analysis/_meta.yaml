@@ -1,88 +1,78 @@
 slides:
 - file: m6_1_service_utilization_analysis.md
-  order: 1
+  order: 1.0
   variant: full
   title: Analyse de l'utilisation des services
-- file: m6_1b_service_utilization_analysis.md
-  order: 1.001
-  variant: full
-  title: Comparaison de l'utilisation des services avec DHIS2
-  status: new
-- file: m6_1c_indicator_directionality.md
-  order: 1.005
-  variant: full
-  title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
 - file: m6_1a_service_utilization_comparison_dhis2.md
   order: 1.01
   variant: full
   title: 'Utilisation des services et perturbations : comparaison avec DHIS2'
+- file: m6_1b_service_utilization_analysis.md
+  order: 1.02
+  variant: full
+  title: Comparaison de l'utilisation des services avec DHIS2
+- file: m6_1c_indicator_directionality.md
+  order: 1.03
+  variant: full
+  title: Directionnalité des indicateurs
 - file: m6_2_service_disruptions_surpluses_detection.md
-  order: 2
+  order: 2.0
   variant: full
   title: Détection des perturbations et excédents de services
-- file: m6_2b_service_disruptions_surpluses_detection.md
-  order: 2.001
-  variant: full
-  title: Fonctionnement de la détection des perturbations
-  status: new
-- file: m6_2c_service_disruptions_surpluses_detection.md
-  order: 2.002
-  variant: full
-  title: Comparaison de la détection des perturbations avec DHIS2
-  status: new
 - file: m6_2a_why_detecting_disruptions_matters.md
   order: 2.01
   variant: full
   title: Pourquoi détecter les perturbations est important
+- file: m6_2b_service_disruptions_surpluses_detection.md
+  order: 2.02
+  variant: full
+  title: Fonctionnement de la détection des perturbations
+- file: m6_2c_service_disruptions_surpluses_detection.md
+  order: 2.03
+  variant: full
+  title: Comparaison de la détection des perturbations avec DHIS2
 - file: m6_5a_service_utilization_configuration_parameters.md
   order: 5.01
   variant: full
   title: 'Module d''utilisation des services : Paramètres de configuration'
 - file: m6_6_service_coverage_introduction.md
-  order: 6
+  order: 6.0
   variant: full
   title: Estimation de la couverture des services
 - file: m6_6b_service_coverage_introduction.md
-  order: 6.001
+  order: 6.02
   variant: full
   title: Notre approche de l'analyse de la couverture des services
-  status: new
 - file: m6_6c_service_coverage_introduction.md
-  order: 6.002
+  order: 6.03
   variant: full
   title: Processus analytique en deux parties
-  status: new
 - file: m6_7_definition_of_coverage.md
-  order: 7
+  order: 7.0
   variant: full
   title: Exemple de couverture des services
 - file: m6_8_denominators_by_service_type.md
-  order: 8
+  order: 8.0
   variant: full
   title: Dénominateurs par type de service
 - file: m6_9_demographic_cascade.md
-  order: 9
+  order: 9.0
   variant: full
   title: Relations attendues qui aident à estimer les dénominateurs
 - file: m6_9a_cascade_dropout.md
   order: 9.01
   variant: full
   title: Cascade de services et analyse de l'abandon
-- file: m6_9ab_cascade_dropout.md
-  order: 9.011
-  variant: full
-  title: Calculer et interpréter l'abandon
-  status: new
 - file: m6_10_denominator_cascade_illustration.md
-  order: 10
+  order: 10.0
   variant: full
   title: Estimation des dénominateurs à partir de CPN1
 - file: m6_11_deriving_denominators_from_entry_points.md
-  order: 11
+  order: 11.0
   variant: full
   title: Dérivation des dénominateurs à partir des points d'entrée
 - file: m6_13_denominator_selection_methodology.md
-  order: 13
+  order: 13.0
   variant: full
   title: Méthodologie de sélection du dénominateur
 - file: m6_13a_denominator_comparison.md
@@ -90,78 +80,65 @@ slides:
   variant: full
   title: Quel dénominateur fournit des estimations plus plausibles ?
 - file: m6_14_coverage_projection_methodology.md
-  order: 14
+  order: 14.0
   variant: full
   title: Méthodologie de projection de la couverture
 - file: m6_19_coverage_configuration_parameters.md
-  order: 19
+  order: 19.0
   variant: full
   title: 'Module de couverture : Paramètres de configuration'
 - file: m6_s0_utilization_detecting_changes.md
-  order: 0
+  order: 0.0
   variant: condensed
   title: 'Utilisation des services : détecter les changements'
 - file: m6_s0b_reading_disruption_chart.md
-  order: 0.001
+  order: 0.02
   variant: condensed
   title: Lire un graphique de perturbation
 - file: m6_s0c_coverage_methods.md
-  order: 0.01
+  order: 0.03
   variant: condensed
-  title: 'Couverture : des volumes aux pourcentages'
+  title: 'Couverture : le problème du dénominateur'
 - file: m6_s0d_reading_coverage_chart.md
-  order: 0.011
+  order: 0.04
   variant: condensed
   title: Lire un graphique de couverture
 - file: m6_s1_utilization_overview.md
-  order: 1
+  order: 1.0
   variant: condensed
   title: Analyse de l'utilisation des services
-- file: m6_s1b_utilization_overview.md
-  order: 1.001
-  variant: condensed
-  title: Résultat de la variation d'une année sur l'autre
-  status: new
-- file: m6_s1c_utilization_overview.md
-  order: 1.002
-  variant: condensed
-  title: Essayez par vous-même
-  status: new
-- file: m6_s1d_indicator_directionality.md
-  order: 1.005
-  variant: condensed
-  title: 'Directionnalité des indicateurs : toutes les augmentations ne sont pas bonnes'
 - file: m6_s1a_quarter_on_quarter_change.md
   order: 1.01
   variant: condensed
   title: Variation trimestrielle
-  last_reviewed: 2026-05-13
+- file: m6_s1b_utilization_overview.md
+  order: 1.02
+  variant: condensed
+  title: Résultat de la variation d'une année sur l'autre
+- file: m6_s1d_indicator_directionality.md
+  order: 1.04
+  variant: condensed
+  title: Directionnalité des indicateurs
 - file: m6_s2_disruption_interpretation.md
-  order: 2
+  order: 2.0
   variant: condensed
   title: Détection des perturbations de services
 - file: m6_s2b_disruption_interpretation.md
-  order: 2.001
+  order: 2.02
   variant: condensed
   title: Résultat de perturbation de service
-  status: new
 - file: m6_s3_coverage_overview.md
-  order: 3
+  order: 3.0
   variant: condensed
   title: Estimation de la couverture des services
-- file: m6_s3b_coverage_overview.md
-  order: 3.001
-  variant: condensed
-  title: Comment FASTR estime la couverture
-  status: new
 - file: m6_s3a_coverage_example.md
   order: 3.01
   variant: condensed
   title: Exemple de couverture des services
-- file: m6_s3f_expected_relationships.md
+- file: m6_s3b_coverage_overview.md
   order: 3.02
   variant: condensed
-  title: Relations attendues qui aident à estimer les dénominateurs
+  title: Comment FASTR estime la couverture
 - file: m6_s3c_estimating_denominators.md
   order: 3.03
   variant: condensed
@@ -174,30 +151,31 @@ slides:
   order: 3.05
   variant: condensed
   title: Comment FASTR estime la couverture
+- file: m6_s3f_expected_relationships.md
+  order: 3.06
+  variant: condensed
+  title: Relations attendues qui aident à estimer les dénominateurs
 - file: m6_s4_coverage_interpretation.md
-  order: 4
+  order: 4.0
   variant: condensed
   title: 'Résultats de couverture : Tendances nationales'
 - file: m6_s4b_coverage_interpretation.md
-  order: 4.001
+  order: 4.02
   variant: condensed
   title: 'Résultats de couverture : Comparaison infranationale'
-  status: new
 - file: m6_s4c_coverage_interpretation.md
-  order: 4.002
+  order: 4.03
   variant: condensed
   title: Approfondir pour avoir une vue complète
-  status: new
 - file: m6_s5_country_example_nigeria.md
-  order: 5
+  order: 5.0
   variant: condensed
   title: 'Exemple de pays : Nigeria'
 - file: m6_s6_fastr_value_beyond_dhis2.md
-  order: 6
+  order: 6.0
   variant: condensed
   title: Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
-  last_reviewed: 2026-05-13
 - file: m6_s7_key_takeaway.md
-  order: 7
+  order: 7.0
   variant: condensed
   title: Point clé à retenir

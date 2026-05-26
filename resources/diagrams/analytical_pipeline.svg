@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 295">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 250">
   <defs>
     <style>
       .box { rx: 10; stroke-width: 2; }
@@ -12,7 +12,7 @@
       .text-sub-dark { font-family: Inter, sans-serif; font-size: 10.5px; fill: #09544F; text-anchor: middle; opacity: 0.8; }
       .module-label { font-family: Inter, sans-serif; font-size: 9px; fill: #888; text-anchor: middle; font-style: italic; }
       .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
-      .arrow-label { font-family: Inter, sans-serif; font-size: 9.5px; fill: #555; text-anchor: middle; font-style: italic; }
+      .arrow-label { font-family: Inter, sans-serif; font-size: 9.5px; fill: #555; text-anchor: start; font-style: italic; }
     </style>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
@@ -20,38 +20,36 @@
   </defs>
 
   <!-- Step 1: Data Quality Assessment -->
-  <rect class="box box-assess" x="200" y="10" width="400" height="55"/>
-  <text class="text-white" x="400" y="31">Data Quality Assessment</text>
-  <text class="text-sub" x="400" y="49">Completeness, outliers, consistency</text>
-  <text class="module-label" x="400" y="78">Module 1</text>
+  <rect class="box box-assess" x="20" y="90" width="230" height="55"/>
+  <text class="text-white" x="135" y="112">Data Quality Assessment</text>
+  <text class="text-sub" x="135" y="130">Completeness, outliers, consistency</text>
+  <text class="module-label" x="135" y="158">Module 1</text>
 
-  <!-- Arrow down -->
-  <line class="arrow" x1="400" y1="65" x2="400" y2="95"/>
+  <!-- Arrow M1 to M2 -->
+  <line class="arrow" x1="250" y1="118" x2="280" y2="118"/>
 
   <!-- Step 2: Data Quality Adjustment -->
-  <rect class="box box-adjust" x="200" y="100" width="400" height="55"/>
-  <text class="text-white" x="400" y="121">Data Quality Adjustment</text>
-  <text class="text-sub" x="400" y="139">Outlier replacement, completeness correction</text>
-  <text class="module-label" x="400" y="168">Module 2</text>
+  <rect class="box box-adjust" x="285" y="90" width="230" height="55"/>
+  <text class="text-white" x="400" y="112">Data Quality Adjustment</text>
+  <text class="text-sub" x="400" y="130">Outlier replacement, completeness correction</text>
+  <text class="module-label" x="400" y="158">Module 2</text>
 
-  <!-- Arrows splitting left and right -->
-  <path class="arrow" d="M 400 155 L 400 190 L 200 190 L 200 215"/>
-  <path class="arrow" d="M 400 155 L 400 190 L 600 190 L 600 215"/>
+  <!-- Arrows splitting up and down -->
+  <path class="arrow" d="M 515 118 L 565 118 L 565 38 L 595 38"/>
+  <path class="arrow" d="M 515 118 L 565 118 L 565 198 L 595 198"/>
 
-  <!-- Label between arrows -->
-  <text class="arrow-label" x="400" y="207">Adjusted and non-adjusted data</text>
+  <!-- Label between branches -->
+  <text class="arrow-label" x="572" y="115">Adjusted and non-adjusted data</text>
 
-  <!-- Step 3a: Service Utilization -->
-  <rect class="box box-util" x="20" y="220" width="360" height="55"/>
-  <text class="text-white" x="200" y="241">Service Utilization</text>
-  <text class="text-white" x="200" y="258">&amp; Disruption Detection</text>
-  <text class="text-sub" x="200" y="271">Volumes, trends, significant deviations</text>
-  <text class="module-label" x="200" y="288">Module 3</text>
+  <!-- Step 3: Service Utilization -->
+  <rect class="box box-util" x="600" y="10" width="480" height="55"/>
+  <text class="text-white" x="840" y="31">Service Utilization &amp; Disruption Detection</text>
+  <text class="text-sub" x="840" y="49">Volumes, trends, significant deviations</text>
+  <text class="module-label" x="840" y="78">Module 3</text>
 
-  <!-- Step 3b: Coverage Estimation -->
-  <rect class="box box-coverage" x="420" y="220" width="360" height="55"/>
-  <text class="text-dark" x="600" y="241">Coverage Estimation</text>
-  <text class="text-sub-dark" x="600" y="258">Denominator estimation</text>
-  <text class="text-sub-dark" x="600" y="271">&amp; coverage calculation</text>
-  <text class="module-label" x="600" y="288">Module 4</text>
+  <!-- Step 4: Coverage Estimation -->
+  <rect class="box box-coverage" x="600" y="170" width="480" height="55"/>
+  <text class="text-dark" x="840" y="191">Coverage Estimation</text>
+  <text class="text-sub-dark" x="840" y="208">Denominator estimation &amp; coverage calculation</text>
+  <text class="module-label" x="840" y="238">Modules 5 &amp; 6 (denominator + coverage)</text>
 </svg>
