@@ -52,7 +52,7 @@ Présentations apprend aux participants à assembler ce qu'ils ont déjà constr
 
 ### 1. Créez votre première présentation · ~10 min · pratique
 
-**Le déroulé.** Une courte activité pour créer le conteneur de présentation et une première diapositive de contenu, qui enseigne aussi les trois types de diapositives : ouvrir le dossier personnel → + Créer une présentation et la nommer → Ajouter une diapositive → choisir **Couverture** (page de titre), **Section** (séparateur) ou **Contenu** (graphique + texte). Les participants prennent Contenu.
+**Le déroulé.** Une courte activité pour créer le conteneur de présentation et une première diapositive de contenu, qui enseigne aussi les trois types de diapositives : ouvrir le dossier personnel → Créer une présentation et la nommer → Ajouter une diapositive → choisir **Couverture** (page de titre), **Section** (séparateur) ou **Contenu** (graphique + texte). Les participants prennent Contenu.
 
 **Démontrer.** Montrez où la présentation se crée — *dans* le dossier personnel — et le sélecteur de type de diapositive, en signalant que seule **Contenu** accueille un graphique et du texte.
 

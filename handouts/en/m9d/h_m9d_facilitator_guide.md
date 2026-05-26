@@ -52,7 +52,7 @@ By the end, each participant should have a saved, polished two-slide deck, built
 
 ### 1. Create your first slide deck · ~10 min · hands-on
 
-**What happens.** A short activity creating the deck container and a first content slide, which also teaches the three slide types: open the personal folder → + Create slide deck and name it → Add slide → choose **Cover** (title page), **Section** (divider), or **Content** (chart + text). Participants pick Content.
+**What happens.** A short activity creating the deck container and a first content slide, which also teaches the three slide types: open the personal folder → Create slide deck and name it → Add slide → choose **Cover** (title page), **Section** (divider), or **Content** (chart + text). Participants pick Content.
 
 **Demonstrate.** Show where the deck is created — *inside* the personal folder — and the slide-type chooser, calling out that only **Content** holds a chart and text.
 
@@ -144,7 +144,7 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 
 ### Step 2 — Add a visualisation block
 
-- **Do:** **Block → Visualisation → Select visualisation** → pick a saved chart → **Select**. The chart fills the slide.
+- **Do:** **Block → Visualization → Select visualization** → pick a saved chart → **Select**. The chart fills the slide.
 - **Say:** *"This is how you put a saved chart on a slide. You're not building a new chart here — you're picking one you already saved in the Visualizations tab."*
 - **Watch for:** Reinforce **"reuse, don't recreate"** — the chart must already be saved in Visualizations. If a participant's chart isn't appearing in the picker, they need to go back and save it there first.
 

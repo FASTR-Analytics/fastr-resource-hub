@@ -34,7 +34,7 @@ Add a saved visualisation to the content slide in your deck. Your facilitator ha
 ## Steps
 
 1. Open the deck you created earlier and click into the empty content slide.
-2. In the editor: **Block** → **Visualisation** → **Select visualisation**.
+2. In the editor: **Block** → **Visualization** → **Select visualization**.
 3. Browse your saved charts, pick one **you** created, and click **Select**.
 4. Confirm the chart appears on the slide.
 5. Save.

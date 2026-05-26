@@ -36,9 +36,9 @@ Go to the **Slide Decks** tab and click into your personal folder.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Create the deck</span></h2>
 
-Click **+ Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 review* or your topic), then click **Save**.
+Click **Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 review* or your topic), then click **Save**.
 
-![The "+ Create slide deck" button h:34](../../../resources/screenshots/m9d/create_deck_button.png)
+![The "Create slide deck" button h:34](../../../resources/screenshots/m9d/create_deck_button.png)
 
 <h2 class="step-h"><span class="step-n">3</span><span>Add your first slide</span></h2>
 
