@@ -30,7 +30,7 @@ Existing health systems data sources are critical but often come with challenges
 
 Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
 
-![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 *Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
 

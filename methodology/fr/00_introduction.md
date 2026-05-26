@@ -33,7 +33,7 @@ Les sources de données des systèmes de santé existants sont essentielles, mai
 
 Les approches analytiques à cycle rapide fournissent des données opportunes, rigoureuses et prioritaires qui répondent aux priorités spécifiques de chaque pays et aux besoins en matière d'utilisation des données. Ce cycle continu d'analyse-apprentissage-renforcement-action vise à améliorer l'utilisation systématique des données pour la prise de décision en vue d'améliorer les résultats du SRMNIA-N.
 
-![Cadre analytique à cycle rapide FASTR](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+![Cadre analytique à cycle rapide FASTR](resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 *Figure 2. L'approche analytique à cycle rapide de la FASTR : Analyser, apprendre, renforcer, agir*
 

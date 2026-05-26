@@ -53,7 +53,7 @@ referenced from related handouts and the methodology docs.
 | `Technical-Rapid-cycle-analytics--V3.svg` | The four technical approaches — **old style**, to be replaced by `Technical_approaches_image.svg` | slide `m0_1`, methodology Fig 3 |
 | `Technical_approaches_image.svg` | Four technical approaches — **new GFF design**, translatable (EN/FR/PT) | not yet wired (replacement queued for `m0_1` + Fig 3) |
 | `what_is_fastr.png` | "Analyze → learn → strengthen → act" loop, single-frame | slide `m0_2` |
-| `GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg` | The full analyze/learn/strengthen/act cycle | methodology Fig 2 (replacement available in `fastr_gff/FASTR_rapid_cycle_analytics_approach.svg`) |
+| `FASTR_rapid_cycle_analytics_approach.svg` | The full analyze/learn/strengthen/act cycle — **new GFF design**, translatable (EN/FR/PT) | methodology Fig 2 |
 | `steps_to_implement_rmncahn_service_chart.svg` | Implementation steps for RMNCAH-N service-use monitoring | slide `m0_3`, methodology Fig 1 |
 | `from_analysis_to_action.svg` | Analysis → action arc | slide `m0_3b` |
 | `data_triangulation_layers.svg` | Triangulating multiple data sources | slide `m0_5` |
@@ -160,6 +160,7 @@ referenced from related handouts and the methodology docs.
 | Source (in `fastr_gff/`) | Generated EN/FR/PT (in `diagrams{,_fr,_pt}/`) | Replaces |
 |---|---|---|
 | `Technical_approaches_image.svg` | `Technical_approaches_image.svg` (×3 languages) | `Technical-Rapid-cycle-analytics--V3.svg` (Fig 3 + slide `m0_1`) — wiring not yet done |
+| `FASTR_rapid_cycle_analytics_approach.svg` | `FASTR_rapid_cycle_analytics_approach.svg` (×3 languages) | `GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg` (methodology Fig 2) — wired; old SVG deleted |
 
 ## GFF source library — `fastr_gff/`
 
@@ -202,7 +203,5 @@ edit the generator's recipe instead.
 
 - `Technical-Rapid-cycle-analytics--V3.svg` will be retired once
   `Technical_approaches_image.svg` is wired into Fig 3 + slide `m0_1`.
-- `GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg` will be replaced by
-  `FASTR_rapid_cycle_analytics_approach.svg` at Fig 2 (not yet wired).
 - `core_content_fr/` slides occasionally reference `.png` versions of diagrams
   that exist as `.svg` in EN. Consolidate on `.svg` when time allows.
