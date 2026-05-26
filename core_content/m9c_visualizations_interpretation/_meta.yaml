@@ -1,29 +1,25 @@
 slides:
-- file: m9c_3_interpreting_visualizations.md
-  order: 1.0
-  variant: full
-  title: 'Activity: How to read a FASTR visualisation'
 - file: m9c_1_creating_visualizations_manually.md
-  order: 2.0
+  order: 1.0
   variant: full
   title: 'Activity: Create your first visualisation'
 - file: m9c_2_creating_visualizations_ai.md
-  order: 3.0
+  order: 2.0
   variant: full
   title: 'Activity: Build a visualisation with the AI Assistant'
+- file: m9c_3_interpreting_visualizations.md
+  order: 3.0
+  variant: full
+  title: 'Activity: How to read a FASTR visualisation'
 - file: m9c_3b_interpreting_activity.md
-  order: 4.0
+  order: 3.02
   variant: full
   title: 'Activity: Write an interpretation'
 - file: m9c_4_interpreting_with_ai.md
-  order: 5.0
+  order: 4.0
   variant: full
   title: 'Activity: Let the AI draft an interpretation'
 - file: m9c_5_disruption_exercise.md
-  order: 6.0
+  order: 5.0
   variant: full
-  title: Has there been a disruption?
-- file: m9c_5a_dig_deeper.md
-  order: 6.01
-  variant: full
-  title: 'Dig deeper: is it real or a data issue?'
+  title: 'Activity: Apply — spot a disruption'

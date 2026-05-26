@@ -1,25 +1,25 @@
 slides:
-- file: m9c_3_interpreting_visualizations.md
-  order: 1.0
-  variant: full
-  title: 'Activité : Lire une visualisation FASTR'
 - file: m9c_1_creating_visualizations_manually.md
-  order: 2.0
+  order: 1.0
   variant: full
   title: 'Activité : Créez votre première visualisation'
 - file: m9c_2_creating_visualizations_ai.md
-  order: 3.0
+  order: 2.0
   variant: full
   title: 'Activité : Construire une visualisation avec l''Assistant IA'
+- file: m9c_3_interpreting_visualizations.md
+  order: 3.0
+  variant: full
+  title: 'Activité : Lire une visualisation FASTR'
 - file: m9c_3b_interpreting_activity.md
-  order: 4.0
+  order: 3.02
   variant: full
   title: 'Activité : Rédiger une interprétation'
 - file: m9c_4_interpreting_with_ai.md
-  order: 5.0
+  order: 4.0
   variant: full
   title: 'Activité : Laisser l''IA rédiger une interprétation'
 - file: m9c_5_disruption_exercise.md
-  order: 6.0
+  order: 5.0
   variant: full
   title: 'Activité : Application — repérer une perturbation'
