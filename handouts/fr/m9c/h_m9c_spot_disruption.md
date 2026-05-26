@@ -90,4 +90,3 @@ Quand chaque équipe pays a terminé, partagez un constat avec le groupe. Écout
 
 C'est la fin de la série visualisations et interprétation. Le module suivant couvre la **construction de rapports** — mettre vos graphiques, interprétations et constats dans un document partageable.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les contrôles du graphique de perturbation et le code couleur peuvent légèrement différer. L'approche « chercher des motifs soutenus » est inchangée.

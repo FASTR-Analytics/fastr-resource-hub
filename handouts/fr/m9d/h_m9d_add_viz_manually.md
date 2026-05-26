@@ -65,4 +65,3 @@ Votre diapositive doit maintenant montrer :
 
 Passez à **Ajouter une visualisation (avec l'Assistant IA)** — la même tâche, mais en utilisant l'IA comme raccourci.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés peuvent différer. Le flux (ouvrir l'éditeur → Bloc → Visualisation → Sélectionner) est le même.

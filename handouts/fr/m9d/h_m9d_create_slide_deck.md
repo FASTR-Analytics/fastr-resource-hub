@@ -70,4 +70,3 @@ Vous devriez avoir :
 
 Votre facilitateur va démontrer comment ajouter un graphique et diviser la diapositive en graphique + texte. Vous le referez ensuite dans **Ajouter une visualisation (manuellement)**.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les emplacements et libellés des boutons (p. ex. *Créer*, *Ajouter une diapositive*) peuvent légèrement différer. Le flux est le même.

@@ -97,8 +97,6 @@ Both folders are empty. That's fine — the next activities will fill them.
 - **Folder doesn't save** — the network may have dropped. Refresh the page and try again. If the folder already exists with your name, it'll show in the list.
 - **You see other people's folders** — that's expected. The whole country team works in the same project, so everyone's personal folders are visible. Yours is just one row in that list.
 
-> 🔎 **Verify in your current UI**: tab names + the "New folder" button location may differ from older screenshots. The flow is the same.
-
 ## What's next
 
 Setup complete. From here, you'll start running real analyses — the next module covers **Creating visualizations**.

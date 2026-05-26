@@ -94,4 +94,3 @@ L'IA ne sait pas ce qui se passe sur le terrain. Ajoutez :
 
 Le dernier document de cette série rassemble tout — **repérer une perturbation** dans les données de votre pays et écrire une interprétation complète qui la relie à l'action.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : la disposition du chat IA et le placement du prompt peuvent légèrement différer. La boucle vérifier-puis-affiner est la même.

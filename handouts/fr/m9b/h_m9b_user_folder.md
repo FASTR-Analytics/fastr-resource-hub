@@ -93,8 +93,6 @@ Les deux dossiers sont vides. C'est normal — les prochaines activités les rem
 - **Le dossier ne s'enregistre pas** — le réseau a peut-être coupé. Rafraîchissez la page et réessayez. Si le dossier existe déjà à votre nom, il s'affichera dans la liste.
 - **Vous voyez les dossiers d'autres personnes** — c'est attendu. Toute l'équipe pays travaille dans le même projet, donc les dossiers personnels de chacun sont visibles. Le vôtre n'est qu'une ligne dans cette liste.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les noms d'onglets et l'emplacement du bouton « Nouveau dossier » peuvent différer des anciennes captures. Le flux reste le même.
-
 ## Étape suivante
 
 Configuration terminée. À partir d'ici, vous commencerez à lancer de vraies analyses — le prochain module couvre **Créer des visualisations**.

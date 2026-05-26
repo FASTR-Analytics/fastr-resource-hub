@@ -88,4 +88,3 @@ Refaites le même flux avec trois indicateurs différents — choisissez dans di
 
 Le document suivant porte sur **l'écriture de l'interprétation** — le texte qui accompagne votre graphique sur une diapositive. Utilisez le cadre en six étapes du document *Lire une viz*.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés de boutons et la disposition du chat IA peuvent légèrement différer. Le flux (demander → examiner → itérer → sauvegarder) est le même.

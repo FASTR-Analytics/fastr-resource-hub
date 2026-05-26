@@ -81,8 +81,6 @@ Vous êtes prêt à lancer les modules d'analyse — qualité des données, util
 - **Certains indicateurs apparaissent, d'autres non** — le mapping est incomplet. Retournez à la page des indicateurs et vérifiez que chaque indicateur DHIS2 a un lien d'indicateur commun.
 - **Le graphique ne charge pas** — essayez un autre navigateur ; les graphiques FASTR utilisent des fonctionnalités web modernes que certains anciens navigateurs ne supportent pas.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : contrôles de graphique et disposition peuvent différer des captures ; le flux reste le même.
-
 ## Étape suivante
 
 Installation terminée. Passez à **Premiers pas** (M9b) pour apprendre l'interface en profondeur, ou lancez directement votre premier module d'analyse.

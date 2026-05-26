@@ -88,4 +88,3 @@ Run the same flow with three different indicators — pick from different progra
 
 The next handout is about **writing the interpretation** — the text that goes next to your chart on a slide. Use the six-step framework from the *Reading a viz* reference.
 
-> 🔎 **Verify in your current UI**: button labels and the AI chat layout may differ slightly. The flow (ask → review → iterate → save) is the same.

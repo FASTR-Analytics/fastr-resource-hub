@@ -70,8 +70,6 @@ Your slide should now have:
 - **Everything is bolded** — `**` wrap only the phrase you want to emphasise, not whole paragraphs.
 - **Bullets run into each other** — leave a blank line between bullets and the next paragraph to add spacing.
 
-> 🔎 **Verify in your current UI**: the same symbols work in the slide editor and in the AI Assistant chat. Use them either place.
-
 ## What's next
 
 The next activity covers report settings: name, style, logos, and page numbers.

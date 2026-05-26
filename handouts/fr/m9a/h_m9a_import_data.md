@@ -107,8 +107,6 @@ La page HMIS Data affiche maintenant vos indicateurs sous forme de graphique, av
 - **Le navigateur fige / onglet ne répond plus** — les gros tirages (1000+ établissements × 36 mois × 10 indicateurs) sollicitent le navigateur. Réduisez le nombre d'indicateurs ou raccourcissez la plage temporelle et tirez par lots.
 - **Le réseau coupe en plein milieu** — le réglage *abort the entire import* vous protège ici. Relancez avec la même sélection.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les écrans d'importation et libellés peuvent différer des captures ; le flux reste le même.
-
 ## Étape suivante
 
 Dernière étape : **Vérifier et explorer** — confirmer que tout est correct et apprendre à naviguer dans vos données.

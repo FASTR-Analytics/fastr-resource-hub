@@ -107,8 +107,6 @@ The HMIS Data page now shows your indicators as a chart, with values flowing thr
 - **Browser freezes / tab unresponsive** — large pulls (1000+ facilities × 36 months × 10 indicators) stress the browser. Reduce indicators or shorten the time range and pull in batches.
 - **Network drops mid-fetch** — the *abort the entire import* setting protects you here. Re-run with the same selection.
 
-> 🔎 **Verify in your current UI**: import screens and labels may differ from the screenshots; the flow is the same.
-
 ## What's next
 
 Final step: **Verify and explore** — confirm everything looks right and learn how to navigate your data.

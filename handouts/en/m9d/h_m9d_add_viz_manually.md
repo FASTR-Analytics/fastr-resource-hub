@@ -65,4 +65,3 @@ Your slide should now show:
 
 Move on to **Add a visualisation (with the AI Assistant)** — the same task, but using the AI as a shortcut.
 
-> 🔎 **Verify in your current UI**: menu labels may differ. The flow (open editor → Block → Visualisation → Select) is unchanged.

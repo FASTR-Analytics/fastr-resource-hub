@@ -116,8 +116,6 @@ De retour sur la page des indicateurs, vous devez voir chaque indicateur DHIS2 a
 - **Pas d'indicateur commun dans le menu déroulant** — retournez à l'étape 1 et créez-le d'abord.
 - **Même indicateur DHIS2 mappé à deux indicateurs communs** — en général une erreur. Chaque indicateur DHIS2 doit pointer vers exactement un indicateur commun.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : libellés et emplacements peuvent différer ; le flux reste le même.
-
 ## Étape suivante
 
 Avec les établissements et les indicateurs en place, vous êtes prêt à récupérer les vraies valeurs de données. Passez à **Importer les données HMIS**.

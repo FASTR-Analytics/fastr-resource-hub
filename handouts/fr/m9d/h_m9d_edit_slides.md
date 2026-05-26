@@ -80,8 +80,6 @@ Chaque diapositive doit maintenant :
 - **Le graphique reste à l'étroit après redimensionnement** — le graphique lui-même peut être trop chargé pour le format diapositive. Ouvrez-le dans l'onglet **Visualisations**, simplifiez (moins de séries, moins de texte), enregistrez, et ré-ajoutez-le à la diapositive.
 - **Vous perdez des modifications** — l'éditeur enregistre automatiquement, mais le bouton **Enregistrer** en haut de la présentation est le filet de sécurité. Utilisez-le après des modifications importantes.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : la mise en page de l'éditeur et les noms d'onglets (*Diapositive*, *Contenu*, *En-tête/Pied de page*) peuvent différer. Les quatre passes restent valables.
-
 ## Étape suivante
 
 Votre présentation est prête à être partagée. Le prochain module (ou la prochaine session) couvre l'export et la diffusion.

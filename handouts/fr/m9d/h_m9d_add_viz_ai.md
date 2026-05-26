@@ -73,4 +73,3 @@ Aucune n'est « meilleure ». Choisissez celle qui semble plus rapide pour la t�
 
 Passez à **Éditer et finaliser vos diapositives** — relire et peaufiner ce que vous avez construit.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les contrôles de l'aperçu IA peuvent différer. L'action (demander → aperçu → ajouter à la présentation) reste la même.

@@ -104,8 +104,6 @@ Après l'intégration :
 - **L'authentification échoue** — généralement la mauvaise URL (oubli de `https://` ou slash final) ou une faute dans le mot de passe. Réouvrez le flux d'importation pour ramener le formulaire de connexion.
 - **L'importation reste bloquée** — les grands pays (1000+ établissements) prennent plus de temps. Attendez au moins 5 min avant de réessayer.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les emplacements des panneaux et libellés peuvent différer des captures ; le flux reste le même.
-
 ## Étape suivante
 
 Passez à **Importer et mapper les indicateurs**.

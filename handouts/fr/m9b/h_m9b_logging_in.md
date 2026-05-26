@@ -96,8 +96,6 @@ Si oui, vous êtes connecté. Passez à l'activité suivante.
 - **« E-mail ou mot de passe invalide »** après l'inscription — revérifiez l'e-mail saisi. Les fautes sont fréquentes. Vous pouvez généralement demander une réinitialisation de mot de passe.
 - **Aucun projet visible sur l'onglet Projets (ou projet pays absent)** — vous n'êtes pas administrateur de l'instance et n'avez pas encore reçu d'accès. Demandez à votre facilitateur ou administrateur de l'instance d'accorder l'accès au projet de votre pays.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les écrans de connexion et d'inscription peuvent avoir évolué ; les libellés peuvent différer des captures. Le flux reste le même.
-
 ## Étape suivante
 
 Passez à **Créer votre dossier personnel** — configurez des dossiers personnels dans les onglets Présentations et Visualisations pour garder votre travail organisé.

@@ -77,8 +77,6 @@ Settings also holds the **Delete Report** button. Use it to remove drafts or tes
 
 - **Changes are not on the slide** — you forgot to save. Reopen Settings and confirm.
 - **Logos missing** — the logo files were not uploaded to the project assets. Add them in Assets, then return to Settings.
-> 🔎 **Verify in your current UI**: the Settings panel layout may differ slightly. The sections above apply regardless.
-
 ## What's next
 
 The deck is now ready to share. The next module covers exporting and dissemination.

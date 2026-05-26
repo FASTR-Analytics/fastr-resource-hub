@@ -94,4 +94,3 @@ The AI doesn't know what's happening on the ground. Add:
 
 The final handout in this series puts it all together — **spotting a disruption** in your country's data and writing a full interpretation that links it to action.
 
-> 🔎 **Verify in your current UI**: the AI chat layout and prompt placement may differ slightly. The verify-then-refine loop is the same.

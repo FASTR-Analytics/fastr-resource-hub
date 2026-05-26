@@ -117,4 +117,3 @@ Vous devriez maintenant avoir :
 
 L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le constructeur. Même résultat, autre chemin.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*Créer une visualisation*, *Configurer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Configurer** est la structure clé.

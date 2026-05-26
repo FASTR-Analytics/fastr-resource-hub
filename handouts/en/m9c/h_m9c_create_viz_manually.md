@@ -129,6 +129,51 @@ Open a saved visualization — the controls live in the **left panel**, and you'
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+## Exercise: split your ANC1 chart by region
+
+Right now your ANC1 chart shows one line: the national total over the last 12 months. You'll turn it into one line per **region** so you can compare regions side by side.
+
+<h2 class="step-h"><span class="step-n">1</span><span>Open the chart</span></h2>
+
+In the **Visualizations** list, open your saved ANC1 chart (the one you named *ANC1 — monthly, last 12 months*).
+
+<h2 class="step-h"><span class="step-n">2</span><span>Disaggregate by region</span></h2>
+
+In the chart editor's **left panel**, scroll down to **Display (disaggregate)**.
+
+- Set the dimension to **Region** (the dropdown that asks *what to break the chart down by*).
+- Leave the Display style on **Lines** for now — one line per region, all on the same chart.
+
+The chart redraws. Instead of one national line, you should now see **one line per region**.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Try the other Display styles</span></h2>
+
+Same data, different shape:
+
+- **Grid** — a separate little chart per region, side by side. Useful when there are many regions and the lines overlap.
+- **Rows** — a table with one row per region. Useful when you want the exact values rather than the shape.
+- **Columns** — a table with one column per region.
+
+Pick whichever reads best for your data.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Save it as a new chart</span></h2>
+
+Click **Save as new viz** — name it e.g. *ANC1 — monthly, by region* and save it into **your folder**.
+
+> **Don't overwrite the national chart.** Save *as new viz*, not just *save*, so you keep both: the national trend and the regional split.
+
+### Watch out
+
+You set both Filter and Display in step 2 of the original walkthrough (filter to ANC1, last 12 months) and step 2 of this exercise (disaggregate by region). That's fine. The trap is **filtering down to one of the things you said you wanted to compare** — e.g. disaggregate by region *and then* filter to a single region. You'd be left with one line, nothing to compare.
+
+### Now do it for BCG
+
+Repeat the same three steps on your saved BCG chart. You should end up with **two regional charts** in your folder: one for ANC1, one for BCG.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Try a few more options
 
 Once your three charts are saved, try a different metric or preset:
@@ -150,4 +195,3 @@ You should now have:
 
 The next activity does the same thing using the AI Assistant — typing the request in plain language instead of clicking through the dialog. Same end result, different path.
 
-> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Save as new viz*) may differ slightly. The **Metric → Presets → Configure** path is the key structure.

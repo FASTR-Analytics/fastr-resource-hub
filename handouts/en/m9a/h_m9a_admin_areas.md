@@ -104,8 +104,6 @@ After integration:
 - **Authentication fails** — usually the wrong URL (missing `https://` or trailing slash) or a typo in the password. Re-open the import flow to get the connect form back.
 - **Import hangs** — large countries (1000+ facilities) take longer. Wait at least 5 min before retrying.
 
-> 🔎 **Verify in your current UI**: panel locations and button labels may differ from the screenshots; the flow is the same.
-
 ## What's next
 
 Move on to **Import and map indicators**.

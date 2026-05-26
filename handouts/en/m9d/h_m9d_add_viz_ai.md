@@ -73,4 +73,3 @@ Neither is "better." Pick whichever feels faster for the task.
 
 Move on to **Edit and finalise your slides** — review and polish what you've built.
 
-> 🔎 **Verify in your current UI**: the AI chat preview controls may differ. The action (prompt → preview → add to deck) is the same.

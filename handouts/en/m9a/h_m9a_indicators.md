@@ -114,8 +114,6 @@ When you go back to the indicators page, you should see every DHIS2 indicator wi
 - **No matching common indicator in the dropdown** — go back to Phase 1 and create it first.
 - **Same DHIS2 indicator mapped to two common indicators** — usually wrong. Each DHIS2 indicator should map to exactly one common indicator.
 
-> 🔎 **Verify in your current UI**: button labels and panel locations may differ; the flow is the same.
-
 ## What's next
 
 With facilities and indicators in place, you're ready to pull actual data values. Move on to **Import HMIS data**.

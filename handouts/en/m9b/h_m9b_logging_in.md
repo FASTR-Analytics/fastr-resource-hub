@@ -100,8 +100,6 @@ If yes, you're in. Move to the next activity.
 - **"Invalid email or password"** after sign-up — double-check the email you entered. Typos are common. You can usually request a password reset.
 - **No projects visible on the Projects tab (or your country's project is missing)** — you're not an instance admin and haven't been granted project access yet. Ask your facilitator or instance admin to grant you access to your country's project.
 
-> 🔎 **Verify in your current UI**: the login + sign-up screens may have evolved; field labels can differ from the screenshots. The flow is the same.
-
 ## What's next
 
 Move on to **Create your user folder** — set up personal folders in the Slide Decks and Visualizations tabs so your work stays organised.

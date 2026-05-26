@@ -70,4 +70,3 @@ You should have:
 
 Your facilitator will demo how to add a chart and split the slide into chart + text. Then you'll repeat it in **Add a visualisation (manually)**.
 
-> 🔎 **Verify in your current UI**: button locations and labels (e.g., *Create*, *Add slide*) may differ slightly. The flow is the same.

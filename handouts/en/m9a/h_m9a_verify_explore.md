@@ -81,8 +81,6 @@ You're ready to run analysis modules — data quality, service utilization, cove
 - **Some indicators appear, others don't** — mapping was incomplete. Go back to the indicators page and verify every DHIS2 indicator has a common-indicator link.
 - **Chart won't load** — try a different browser; FASTR's charts use modern web features that older browsers may not handle.
 
-> 🔎 **Verify in your current UI**: chart controls and panel layout may differ from the screenshots; the flow is the same.
-
 ## What's next
 
 Setup complete. Move on to **Getting Started** (M9b) to learn the platform interface in depth, or jump to running your first analysis module.

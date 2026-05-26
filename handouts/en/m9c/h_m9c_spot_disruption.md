@@ -90,4 +90,3 @@ When each country team is done, share one finding with the larger group. Listen 
 
 This is the end of the visualisations & interpretation series. The next module covers **building reports** — putting your charts, interpretations, and findings into a sharable document.
 
-> 🔎 **Verify in your current UI**: disruption-chart controls and the colour scheme may differ slightly. The look-for-sustained-patterns approach is unchanged.

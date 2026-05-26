@@ -80,8 +80,6 @@ Each slide in your deck should now:
 - **Chart still looks cramped after resizing** — the chart itself may be too detailed for slide format. Open it in the **Visualisations** tab, simplify (fewer series, less text), save, and re-add to the slide.
 - **You lose changes** — the editor saves automatically, but the **Save** button at the top of the deck is the safety net. Use it after major edits.
 
-> 🔎 **Verify in your current UI**: editor panel layout and tab names (*Slide*, *Content*, *Header/Footer*) may differ. The four passes apply regardless.
-
 ## What's next
 
 Your deck is ready to share. The next module (or next session) covers exporting and dissemination.
