@@ -26,7 +26,7 @@ The AI follows a "read before responding" principle — it never guesses.
 </div>
 <div>
 
-![AI tools diagram](../../resources/diagrams/ai_on_rails.svg)
+![AI tools diagram h:440](../../resources/diagrams/ai_on_rails.svg)
 
 </div>
 </div>

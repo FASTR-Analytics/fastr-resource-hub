@@ -81,3 +81,8 @@ python3 tools/validate_content.py                  # drift guard
   coordinating with `sync-methodology.ts` will break the public site.
 - FR content is the actual translation — don't leave English placeholders in
   `methodology/fr/`.
+- **Image embeds in slides need an `h:` height constraint** — Marp scales
+  unconstrained images to slide width, which usually clips the bottom on the
+  1280×720 canvas. Use `![alt h:480](path.svg)` syntax. See
+  [`help and instructions/07_style_guide.md`](../help%20and%20instructions/07_style_guide.md#images-in-slides--the-h-constraint)
+  for the height guidelines per layout.

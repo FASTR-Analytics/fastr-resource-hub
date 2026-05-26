@@ -308,6 +308,49 @@ Naming convention: `m[module]_[section][subsection]`
 
 ---
 
+## Images in slides — the `h:` constraint
+
+When you embed an image (SVG, PNG) inside a `<!-- SLIDE -->` block, always set a
+**height constraint** unless the image is genuinely tiny. Without one, Marp scales
+the image to the slide width — which on the 1280×720 slide canvas usually pushes
+the image taller than the title leaves room for, and the bottom gets clipped.
+
+**Syntax:** put `h:<pixels>` inside the alt-text, after the description:
+
+```markdown
+![Measures of data quality h:480](../resources/diagrams/measures_data_quality.svg)
+```
+
+That sets the image to render at 480px tall (width scales to preserve aspect ratio).
+
+### Height guidelines
+
+The slide canvas is **1280 × 720 px**. The title (`##`) eats ~80 px and the slide
+chrome (header/footer/page number) eats ~60 px, leaving roughly **560 px** of
+usable image area at full width.
+
+| Layout | Recommended max `h:` |
+|--------|----------------------|
+| Full-width image (single column) | `h:480` (comfortable) — `h:540` (tight) |
+| Two-column layout (`<div class="columns">`) | `h:360`–`h:440` |
+| Image alongside a paragraph (≤½ width) | `h:300`–`h:380` |
+
+Pick a value that fits the slide canvas first, then look at how the image renders
+intrinsically. If the SVG `viewBox` is portrait-oriented, the same `h:` value will
+render narrower (and may fit even in a two-column layout).
+
+### When in doubt
+
+- Open the slide in `core_content/` after running `tools/00_extract_slides.py`
+- Render it via the deck builder (`localhost:5173`) or `tools/build_handout_pdfs.py`
+- If the image touches the bottom edge or gets clipped, drop the `h:` by 40–80 px
+
+The same rule applies to handout SVGs (`handouts/en/**/*.md` and `handouts/fr/...`),
+though handouts give you more room than slides — clipping there usually only
+happens for diagrams over 600 px tall.
+
+---
+
 ## File structure
 
 Each methodology file should include:

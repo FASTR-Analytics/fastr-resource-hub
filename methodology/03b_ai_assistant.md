@@ -281,7 +281,7 @@ The AI follows a "read before responding" principle — it never guesses.
 </div>
 <div>
 
-![AI tools diagram](../resources/diagrams/ai_on_rails.svg)
+![AI tools diagram h:440](../resources/diagrams/ai_on_rails.svg)
 
 </div>
 </div>
@@ -293,7 +293,7 @@ The AI follows a "read before responding" principle — it never guesses.
 <div class="columns">
 <div>
 
-![AI accelerator diagram](../resources/diagrams/ai_accelerator.svg)
+![AI accelerator diagram h:360](../resources/diagrams/ai_accelerator.svg)
 
 </div>
 <div>

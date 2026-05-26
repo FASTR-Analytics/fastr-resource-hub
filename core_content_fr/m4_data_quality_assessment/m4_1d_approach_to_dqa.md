@@ -6,7 +6,7 @@ paginate: true
 
 ## Mesures de la qualité des données
 
-![Mesures de la qualité des données](../../resources/diagrams_fr/measures_data_quality.svg)
+![Mesures de la qualité des données h:480](../../resources/diagrams_fr/measures_data_quality.svg)
 
 <!--
 PRESENTER NOTES:

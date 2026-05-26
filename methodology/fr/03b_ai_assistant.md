@@ -244,7 +244,7 @@ L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais
 </div>
 <div>
 
-![Diagramme des outils IA](../resources/diagrams_fr/ai_on_rails.svg)
+![Diagramme des outils IA h:440](../resources/diagrams_fr/ai_on_rails.svg)
 
 </div>
 </div>
@@ -256,7 +256,7 @@ L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais
 <div class="columns">
 <div>
 
-![Diagramme accélérateur IA](../resources/diagrams_fr/ai_accelerator.svg)
+![Diagramme accélérateur IA h:360](../resources/diagrams_fr/ai_accelerator.svg)
 
 </div>
 <div>
