@@ -43,11 +43,11 @@ Create two personal folders — one in **Slide Decks**, one in **Visualizations*
 <h2 class="step-h"><span class="step-n">1</span><span>Folder in the Slide Decks tab</span></h2>
 
 1. Click the **Slide Decks** tab in the top navigation.
-2. Switch the view to **By folder** (the toggle at the top — the other option is *Simple list*). You'll only see **+ New folder** when *By folder* is selected.
+2. Switch the view to **By folder** (the toggle at the top — the other option is *Flat list*). You'll only see **New folder** when *By folder* is selected.
 
 ![View toggle set to "By folder" h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
 
-3. Click **+ New folder**.
+3. Click **New folder**.
 4. Type your name (e.g., `Aïcha N.` or `John S.`).
 5. Click **Save**.
 
@@ -66,8 +66,8 @@ You should see your new folder appear in the list. Click on it to open it — it
 Same idea, different tab — and the view toggle has four options here:
 
 1. Click the **Visualizations** tab.
-2. Switch the view to **By folder** (the toggle offers *By module*, *By folder*, *By metric*, and *Simple list*). **+ New folder** is only visible in *By folder*.
-3. Click **+ New folder**.
+2. Switch the view to **By folder** (the toggle offers *By module*, *By folder*, *By metric*, and *Flat list*). **New folder** is only visible in *By folder*.
+3. Click **New folder**.
 4. Type your name (use the **same name** as in step 1 so your work is easy to find across tabs).
 5. Click **Save**.
 
@@ -89,11 +89,11 @@ Both folders are empty. That's fine — the next activities will fill them.
 
 ## What could go wrong
 
-- **"+ New folder" button doesn't appear** — you're most likely in the wrong view. Switch the view toggle to **By folder** (not *Simple list* / *By module* / *By metric*). If it still doesn't appear, you may not have permission — ask your facilitator to check your role.
+- **"New folder" button doesn't appear** — you're most likely in the wrong view. Switch the view toggle to **By folder** (not *Flat list* / *By module* / *By metric*). If it still doesn't appear, you may not have permission — ask your facilitator to check your role.
 - **Folder doesn't save** — the network may have dropped. Refresh the page and try again. If the folder already exists with your name, it'll show in the list.
 - **You see other people's folders** — that's expected. The whole country team works in the same project, so everyone's personal folders are visible. Yours is just one row in that list.
 
-> 🔎 **Verify in your current UI**: tab names + the "+ New folder" button location may differ from older screenshots. The flow is the same.
+> 🔎 **Verify in your current UI**: tab names + the "New folder" button location may differ from older screenshots. The flow is the same.
 
 ## What's next
 

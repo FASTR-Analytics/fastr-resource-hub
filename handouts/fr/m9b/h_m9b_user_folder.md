@@ -43,11 +43,11 @@ Créer deux dossiers personnels — un dans **Présentations**, un dans **Visual
 <h2 class="step-h"><span class="step-n">1</span><span>Dossier dans l'onglet Présentations</span></h2>
 
 1. Cliquez sur l'onglet **Présentations** dans la navigation en haut.
-2. Basculez l'affichage sur **Par dossier** (la bascule en haut — l'autre option est *Liste simple*). **+ Nouveau dossier** n'apparaît qu'en vue *Par dossier*.
+2. Basculez l'affichage sur **Par dossier** (la bascule en haut — l'autre option est *Liste simple*). **Nouveau dossier** n'apparaît qu'en vue *Par dossier*.
 
 ![Bascule d'affichage réglée sur « Par dossier » h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
 
-3. Cliquez sur **+ Nouveau dossier**.
+3. Cliquez sur **Nouveau dossier**.
 4. Tapez votre nom (p. ex. `Aïcha N.` ou `Jean S.`).
 5. Cliquez sur **Enregistrer**.
 
@@ -66,8 +66,8 @@ Vous devriez voir votre nouveau dossier apparaître dans la liste. Cliquez dessu
 Même idée, onglet différent — et la bascule d'affichage a quatre options ici :
 
 1. Cliquez sur l'onglet **Visualisations**.
-2. Basculez l'affichage sur **Par dossier** (la bascule propose *Par module*, *Par dossier*, *Par métrique* et *Liste simple*). **+ Nouveau dossier** n'est visible qu'en *Par dossier*.
-3. Cliquez sur **+ Nouveau dossier**.
+2. Basculez l'affichage sur **Par dossier** (la bascule propose *Par module*, *Par dossier*, *Par métrique* et *Liste plate*). **Nouveau dossier** n'est visible qu'en *Par dossier*.
+3. Cliquez sur **Nouveau dossier**.
 4. Tapez votre nom (utilisez le **même nom** que dans l'étape 1 pour que votre travail soit facile à retrouver entre onglets).
 5. Cliquez sur **Enregistrer**.
 
@@ -89,11 +89,11 @@ Les deux dossiers sont vides. C'est normal — les prochaines activités les rem
 
 ## Que faire si ça ne marche pas
 
-- **Le bouton « + Nouveau dossier » n'apparaît pas** — vous êtes probablement dans la mauvaise vue. Basculez l'affichage sur **Par dossier** (et non *Liste simple* / *Par module* / *Par métrique*). S'il n'apparaît toujours pas, vous n'avez peut-être pas la permission — demandez à votre facilitateur de vérifier votre rôle.
+- **Le bouton « Nouveau dossier » n'apparaît pas** — vous êtes probablement dans la mauvaise vue. Basculez l'affichage sur **Par dossier** (et non *Liste plate* / *Par module* / *Par métrique*). S'il n'apparaît toujours pas, vous n'avez peut-être pas la permission — demandez à votre facilitateur de vérifier votre rôle.
 - **Le dossier ne s'enregistre pas** — le réseau a peut-être coupé. Rafraîchissez la page et réessayez. Si le dossier existe déjà à votre nom, il s'affichera dans la liste.
 - **Vous voyez les dossiers d'autres personnes** — c'est attendu. Toute l'équipe pays travaille dans le même projet, donc les dossiers personnels de chacun sont visibles. Le vôtre n'est qu'une ligne dans cette liste.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les noms d'onglets et l'emplacement du bouton « + Nouveau dossier » peuvent différer des anciennes captures. Le flux reste le même.
+> 🔎 **Vérifiez dans votre interface actuelle** : les noms d'onglets et l'emplacement du bouton « Nouveau dossier » peuvent différer des anciennes captures. Le flux reste le même.
 
 ## Étape suivante
 
