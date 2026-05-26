@@ -1933,24 +1933,56 @@ function App() {
                     {expandedCountries.has(country) && (
                       <div className="bg-slate-50 border-t border-slate-100">
                         {workshopsByCountry[country].map(workshop => (
-                          <button
+                          <div
                             key={workshop.id}
-                            onClick={() => {
-                              selectWorkshop(workshop.id)
-                              setPendingDeckType((workshop as any).deckType || 'workshop')
-                              setAppMode('workshop')
-                            }}
-                            className="w-full px-4 py-2 pl-12 flex items-center gap-3 hover:bg-slate-100 transition-colors text-left focus-ring"
+                            className="group flex items-center hover:bg-slate-100 transition-colors"
                           >
-                            <FileText className="w-4 h-4 text-slate-400" />
-                            <span className="text-body-sm text-slate-700">{workshop.name}</span>
-                            {(workshop as any).deckType === 'webinar' && (
-                              <span className="inline-flex items-center rounded-pill px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-indigo-50 text-indigo-700">
-                                {t('webinarBadge', contentLanguage)}
-                              </span>
+                            <button
+                              onClick={() => {
+                                selectWorkshop(workshop.id)
+                                setPendingDeckType((workshop as any).deckType || 'workshop')
+                                setAppMode('workshop')
+                              }}
+                              className="flex-1 px-4 py-2 pl-12 flex items-center gap-3 text-left focus-ring"
+                            >
+                              <FileText className="w-4 h-4 text-slate-400" />
+                              <span className="text-body-sm text-slate-700">{workshop.name}</span>
+                              {(workshop as any).deckType === 'webinar' && (
+                                <span className="inline-flex items-center rounded-pill px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide bg-indigo-50 text-indigo-700">
+                                  {t('webinarBadge', contentLanguage)}
+                                </span>
+                              )}
+                              {workshop.locked && <Lock className="w-3 h-3 text-amber-500 ml-auto" />}
+                            </button>
+                            {!workshop.locked && (
+                              <button
+                                onClick={async (e) => {
+                                  e.stopPropagation()
+                                  const confirmMsg = contentLanguage === 'fr'
+                                    ? `Supprimer le deck « ${workshop.name} » ? Cette action est irréversible.`
+                                    : `Delete the deck "${workshop.name}"? This cannot be undone.`
+                                  if (!window.confirm(confirmMsg)) return
+                                  try {
+                                    await deleteWorkshop(workshop.id)
+                                    showToast(
+                                      contentLanguage === 'fr' ? 'Deck supprimé' : 'Deck deleted',
+                                      'success'
+                                    )
+                                  } catch (err) {
+                                    showToast(
+                                      contentLanguage === 'fr' ? 'Échec de la suppression' : 'Delete failed',
+                                      'error'
+                                    )
+                                  }
+                                }}
+                                className="px-3 py-2 mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 hover:text-red-600 focus-ring rounded"
+                                title={contentLanguage === 'fr' ? 'Supprimer ce deck' : 'Delete this deck'}
+                                aria-label={contentLanguage === 'fr' ? 'Supprimer ce deck' : 'Delete this deck'}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
                             )}
-                            {workshop.locked && <Lock className="w-3 h-3 text-amber-500 ml-auto" />}
-                          </button>
+                          </div>
                         ))}
                       </div>
                     )}
