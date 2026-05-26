@@ -92,8 +92,8 @@ The mkdocs-static-i18n plugin uses suffix-based file structure:
 methodology/
 ├── index.md                    # English (default)
 ├── index.fr.md                 # French
-├── executive_summary.md        # English
-├── executive_summary.fr.md     # French
+├── 00_introduction.md          # English
+├── fr/00_introduction.md       # French (via i18n folder structure)
 └── ...
 ```
 

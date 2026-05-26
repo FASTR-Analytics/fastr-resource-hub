@@ -28,8 +28,7 @@ methodology/
 ├── 01_identify_questions_indicators.md
 ├── …
 ├── 11_user_guide.md
-├── executive_summary.md           # site-level pages
-├── disclaimer.md
+├── disclaimer.md                  # site-level pages
 ├── index.md
 ├── mkdocs.yml                     # MkDocs site config
 ├── javascripts/                   # site enhancements

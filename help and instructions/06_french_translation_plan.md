@@ -54,8 +54,8 @@ python3 tools/translate.py --check
 
 ```
 methodology/
-├── executive_summary.md        # English (source)
-├── executive_summary.fr.md     # French (translated)
+├── 00_introduction.md          # English (source)
+├── fr/00_introduction.md       # French (translated)
 └── ...
 
 translations/

@@ -7,7 +7,7 @@ repo_url: https://data.gffportal.org/key-theme/FASTR
 repo_name: FASTR Website
 
 # Navigation
-# Note: Executive Summary, Module 7, and Module 8 are hidden but still available for workshops
+# Note: Module 7 and Module 8 are hidden but still available for workshops
 nav:
   - Overview: index.md
   - Getting Started:
@@ -110,7 +110,6 @@ plugins:
         - 07_results_communication.md
         - 08_survey_hfa.md
         - 09_workshop_activities.md
-        - executive_summary*.md
   - i18n:
       docs_structure: folder  # Uses fr/ folder for French files
       fallback_to_default: true
