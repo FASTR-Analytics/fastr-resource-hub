@@ -1864,12 +1864,22 @@ export async function generatePPTX(
 
       // Activity-pointer slides get the dot-grid background — mirrors the
       // .activity-pointer style in fastr-theme.css so PPT exports carry the
-      // workbook-page look instead of falling back to plain white. The PNG
-      // overrides any solid color the builder set.
+      // workbook-page look instead of falling back to plain white.
+      //
+      // We read the PNG to base64 and pass it as `{ data: 'data:image/png;base64,...' }`
+      // rather than `{ path }` — the path form writes a brittle slide-relationship XML
+      // that PowerPoint sometimes flags as "needs repair". The data form embeds the
+      // bytes directly with no relationship.
       if (cls === 'activity-pointer') {
-        const dotGridPath = path.join(REPO_ROOT, 'resources', 'backgrounds', 'activity_dotgrid.png')
-        if (fs.existsSync(dotGridPath)) {
-          currentSlide.background = { path: dotGridPath }
+        try {
+          const dotGridPath = path.join(REPO_ROOT, 'resources', 'backgrounds', 'activity_dotgrid.png')
+          if (fs.existsSync(dotGridPath)) {
+            const b64 = fs.readFileSync(dotGridPath).toString('base64')
+            currentSlide.background = { data: `data:image/png;base64,${b64}` }
+          }
+        } catch (e) {
+          // If anything goes wrong, leave the builder's default background in place.
+          console.warn('activity-pointer dot-grid background failed:', e)
         }
       }
 
