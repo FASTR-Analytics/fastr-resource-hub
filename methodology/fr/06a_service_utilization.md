@@ -1154,14 +1154,6 @@ Les tendances d'utilisation des services sont couramment produites dans DHIS2. L
 - Examine les tendances, mais utilise également les données d'utilisation des services ajustées pour des analyses supplémentaires plus complexes
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1c -->
-## Directionnalité des indicateurs
-
-Avant d'interpréter une tendance, demandez-vous : **une augmentation est-elle bonne ou mauvaise ?**
-
-![Directionnalité des indicateurs](../resources/diagrams_fr/indicator_directionality.svg)
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_1a -->
 <!-- _class: compact -->
 ## Utilisation des services et perturbations : comparaison avec DHIS2

@@ -1967,7 +1967,7 @@ PRESENTER NOTES:
      CONDENSED SLIDES: Methods + Interpretation Combined
 ═══════════════════════════════════════════════════════════════════════════ -->
 
-<!-- SLIDE:m6_s0c -->
+<!-- SLIDE:m6_s3 -->
 ## Coverage: the denominator problem
 
 The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2.
@@ -2016,7 +2016,7 @@ The choice of denominator **completely changes** the results. Here is the same i
 FASTR tests several denominators and keeps the one that **best matches national surveys** (DHS/MICS). For years without a survey, it projects estimates by following HMIS trends.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0d -->
+<!-- SLIDE:m6_s3a -->
 ## Reading a coverage chart
 
 FASTR coverage charts combine **three sources**:
@@ -2035,7 +2035,7 @@ FASTR coverage charts combine **three sources**:
 | Large differences between regions | Geographic inequities to investigate |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3 -->
+<!-- SLIDE:m6_s3b -->
 ## Service coverage estimation
 
 **Coverage** = services delivered ÷ target population
@@ -2045,7 +2045,7 @@ FASTR coverage charts combine **three sources**:
 HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3b -->
+<!-- SLIDE:m6_s3d -->
 ## How FASTR estimates coverage
 
 **Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
@@ -2066,25 +2066,25 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3a -->
+<!-- SLIDE:m6_s3c -->
 ## Service coverage example
 
 ![Coverage example ANC4+ h:420](../resources/diagrams/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3f -->
+<!-- SLIDE:m6_s3h -->
 ## Expected relationships which help with estimating denominators
 
 ![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3c -->
+<!-- SLIDE:m6_s3e -->
 ## Estimating denominators from ANC-1
 
 ![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3d -->
+<!-- SLIDE:m6_s3f -->
 ## Five denominator options for FASTR analysis
 
 - **UN projections of live births** (available only at national level)
@@ -2095,7 +2095,7 @@ PRESENTER NOTES:
   - Adjustment to Penta1 service utilization (only calculated at national level)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3e -->
+<!-- SLIDE:m6_s3g -->
 ## How FASTR estimates coverage
 
 **Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.

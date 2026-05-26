@@ -11,10 +11,6 @@ slides:
   order: 1.02
   variant: full
   title: Comparaison de l'utilisation des services avec DHIS2
-- file: m6_1c_indicator_directionality.md
-  order: 1.03
-  variant: full
-  title: Directionnalité des indicateurs
 - file: m6_2_service_disruptions_surpluses_detection.md
   order: 2.0
   variant: full
@@ -99,14 +95,6 @@ slides:
   order: 0.02
   variant: condensed
   title: Lire un graphique de perturbation
-- file: m6_s0c_coverage_methods.md
-  order: 0.03
-  variant: condensed
-  title: 'Couverture : le problème du dénominateur'
-- file: m6_s0d_reading_coverage_chart.md
-  order: 0.04
-  variant: condensed
-  title: Lire un graphique de couverture
 - file: m6_s1_utilization_overview.md
   order: 1.0
   variant: condensed
@@ -131,32 +119,40 @@ slides:
   order: 2.02
   variant: condensed
   title: Résultat de perturbation de service
-- file: m6_s3_coverage_overview.md
+- file: m6_s3_coverage_methods.md
   order: 3.0
   variant: condensed
-  title: Estimation de la couverture des services
-- file: m6_s3a_coverage_example.md
+  title: 'Couverture : le problème du dénominateur'
+- file: m6_s3a_reading_coverage_chart.md
   order: 3.01
   variant: condensed
-  title: Exemple de couverture des services
+  title: Lire un graphique de couverture
 - file: m6_s3b_coverage_overview.md
   order: 3.02
   variant: condensed
-  title: Comment FASTR estime la couverture
-- file: m6_s3c_estimating_denominators.md
+  title: Estimation de la couverture des services
+- file: m6_s3c_coverage_example.md
   order: 3.03
   variant: condensed
-  title: Estimation des dénominateurs à partir de CPN1
-- file: m6_s3d_five_denominator_options.md
+  title: Exemple de couverture des services
+- file: m6_s3d_coverage_overview.md
   order: 3.04
   variant: condensed
-  title: Cinq options de dénominateur pour l'analyse FASTR
-- file: m6_s3e_how_fastr_estimates_coverage.md
+  title: Comment FASTR estime la couverture
+- file: m6_s3e_estimating_denominators.md
   order: 3.05
   variant: condensed
-  title: Comment FASTR estime la couverture
-- file: m6_s3f_expected_relationships.md
+  title: Estimation des dénominateurs à partir de CPN1
+- file: m6_s3f_five_denominator_options.md
   order: 3.06
+  variant: condensed
+  title: Cinq options de dénominateur pour l'analyse FASTR
+- file: m6_s3g_how_fastr_estimates_coverage.md
+  order: 3.07
+  variant: condensed
+  title: Comment FASTR estime la couverture
+- file: m6_s3h_expected_relationships.md
+  order: 3.08
   variant: condensed
   title: Relations attendues qui aident à estimer les dénominateurs
 - file: m6_s4_coverage_interpretation.md

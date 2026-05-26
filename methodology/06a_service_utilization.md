@@ -1062,14 +1062,6 @@ Service utilization trends are commonly produced in DHIS2. The FASTR approach di
 - Looks at trends, but also uses the adjusted service utilization data for additional, more complex analyses
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1c -->
-## Indicator directionality
-
-Before interpreting a trend, ask: **is an increase good or bad?**
-
-![Indicator directionality](../resources/diagrams/indicator_directionality.svg)
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_1a -->
 ## Service utilization and disruptions: comparison to DHIS2
 

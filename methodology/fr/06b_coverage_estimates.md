@@ -1970,7 +1970,7 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0c -->
+<!-- SLIDE:m6_s3 -->
 ## Couverture : le problème du dénominateur
 
 Le numérateur est facile — c'est ce que les formations sanitaires rapportent dans le DHIS2. Mais le **dénominateur** (combien de personnes avaient besoin du service) n'est pas dans le DHIS2.
@@ -2019,7 +2019,7 @@ Le choix du dénominateur change **complètement** les résultats. Voici le mêm
 FASTR teste plusieurs dénominateurs et garde celui qui **colle le mieux aux enquêtes nationales** (EDS/MICS). Pour les années sans enquête, il projette les estimations en suivant les tendances du HMIS.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0d -->
+<!-- SLIDE:m6_s3a -->
 ## Lire un graphique de couverture
 
 Les graphiques de couverture FASTR combinent **trois sources** :
@@ -2038,7 +2038,7 @@ Les graphiques de couverture FASTR combinent **trois sources** :
 | Grandes différences entre régions | Des inégalités géographiques à investiguer |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3 -->
+<!-- SLIDE:m6_s3b -->
 ## Estimation de la couverture des services
 
 **Couverture** = services fournis ÷ population cible
@@ -2048,7 +2048,7 @@ Les graphiques de couverture FASTR combinent **trois sources** :
 Le SIGS nous indique combien de services ont été fournis (numérateur), mais pas la taille de la population cible (dénominateur). La couverture SIGS standard utilise les populations de zones de desserte, qui sont souvent inexactes. Les enquêtes (EDS/MICS) fournissent une couverture fiable mais seulement tous les 3-5 ans.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3b -->
+<!-- SLIDE:m6_s3d -->
 ## Comment FASTR estime la couverture
 
 **Calculer les dénominateurs de plusieurs façons :** A partir des données du SNIS, utiliser les volumes de services combinés aux résultats d'enquêtes de couverture pour estimer rétrospectivement les populations cibles. Par exemple, si 10 000 visites CPN1 et l'enquête indique 80 % de couverture, cela signifie environ 12 500 grossesses. On calcule aussi les dénominateurs a partir des projections de population de l'ONU en utilisant les taux de natalite et des ajustements demographiques.
@@ -2069,25 +2069,25 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3a -->
+<!-- SLIDE:m6_s3c -->
 ## Exemple de couverture des services
 
 ![Exemple de couverture CPN4+ h:420](../resources/diagrams_fr/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3f -->
+<!-- SLIDE:m6_s3h -->
 ## Relations attendues qui aident à estimer les dénominateurs
 
 ![Organigramme de la cascade du dénominateur](../resources/diagrams_fr/denominator_cascade.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3c -->
+<!-- SLIDE:m6_s3e -->
 ## Estimation des dénominateurs à partir de CPN1
 
 ![Exemple de cascade de dénominateurs](../resources/diagrams_fr/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3d -->
+<!-- SLIDE:m6_s3f -->
 ## Cinq options de dénominateur pour l'analyse FASTR
 
 - **Projections ONU des naissances vivantes** (disponibles uniquement au niveau national)
@@ -2098,7 +2098,7 @@ PRESENTER NOTES:
   - Ajustement à l'utilisation des services Penta1 (calculé uniquement au niveau national)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3e -->
+<!-- SLIDE:m6_s3g -->
 ## Comment FASTR estime la couverture
 
 **Calculer les dénominateurs de plusieurs façons :** À partir des données SIGS, utiliser les volumes de services combinés avec la couverture d'enquête pour calculer rétroactivement les populations cibles. Par exemple, si 10 000 visites CPN1 et l'enquête indique 80% de couverture, cela implique ~12 500 grossesses. Calculer également les dénominateurs à partir des projections de population ONU en utilisant les taux de natalité et les ajustements démographiques.
