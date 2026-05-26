@@ -1114,9 +1114,9 @@ section[data-class~="activity-pointer"] {
 .activity-pointer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   height: 100%;
   gap: 0.6em;
 }
