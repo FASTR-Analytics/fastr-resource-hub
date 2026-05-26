@@ -14,7 +14,7 @@ slides:
 - file: m9c_3b_interpreting_activity.md
   order: 3.02
   variant: full
-  title: 'Activity: Write an interpretation'
+  title: 'Activity: Write an interpretation for a chart'
 - file: m9c_4_interpreting_with_ai.md
   order: 4.0
   variant: full
@@ -22,4 +22,4 @@ slides:
 - file: m9c_5_disruption_exercise.md
   order: 5.0
   variant: full
-  title: 'Activity: Apply — spot a disruption'
+  title: 'Activity: Spot a disruption in your country''s data'

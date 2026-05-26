@@ -2,15 +2,15 @@ slides:
 - file: m9d_1_creating_slide_decks.md
   order: 1.0
   variant: full
-  title: 'Activité: Créez votre première présentation'
+  title: 'Activité : Créez votre première présentation'
 - file: m9d_1b_adding_viz_manually.md
   order: 1.02
   variant: full
-  title: 'Activité: Ajouter une visualisation (manuellement)'
+  title: 'Activité : Ajouter une visualisation à une diapo'
 - file: m9d_1c_adding_viz_ai.md
   order: 1.03
   variant: full
-  title: 'Activité: Ajouter une visualisation (avec l''Assistant IA)'
+  title: 'Activité : Ajouter une visualisation à une diapo avec l''IA'
 - file: m9d_2_editing_formatting_slides.md
   order: 2.0
   variant: full
