@@ -1,0 +1,68 @@
+name: Build Handout PDFs
+
+# Triggers whenever a handout markdown file (or the build pipeline itself) is
+# changed on main. Does NOT trigger on handouts/_out/** so the bot's own PDF
+# commits don't loop.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'handouts/en/**/*.md'
+      - 'handouts/fr/**/*.md'
+      - 'handouts/pt/**/*.md'
+      - 'handouts/_order.yaml'
+      - 'fastr-handout.css'
+      - 'tools/build_handout_pdfs.py'
+      - 'tools/render_handout.sh'
+      - '.github/workflows/build-handouts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to commit rebuilt PDFs back to main
+
+concurrency:
+  group: handouts-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need HEAD~1 so --auto can diff the last commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: pip install pyyaml
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Build affected handout PDFs
+        run: python3 tools/build_handout_pdfs.py --auto
+
+      - name: Commit + push rebuilt PDFs
+        run: |
+          if [ -n "$(git status --porcelain handouts/_out/)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add handouts/_out/
+            git commit -m "handouts: auto-rebuild PDFs from CI [skip ci]
+
+          Co-Authored-By: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+            git push origin main
+          else
+            echo "No PDF changes — nothing to commit."
+          fi

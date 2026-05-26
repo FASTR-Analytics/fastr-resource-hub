@@ -19,6 +19,7 @@ Usage:
     python3 tools/build_handout_pdfs.py --module m7 # one module folder
 """
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -55,6 +56,33 @@ def ordered_files(module_dir: Path, order: list) -> list:
     return result
 
 
+_HANDOUT_RE = re.compile(r"^handouts/(?:en|fr|pt)/([^/]+)/.*\.md$")
+
+
+def detect_changed_modules() -> set:
+    """Return module ids touched by uncommitted changes + the last commit.
+
+    Used by --auto so a CI run (which only has the last commit's diff) and a
+    local pre-commit run (which has working-tree changes) both work.
+    """
+    files: set = set()
+    for cmd in (
+        ["git", "status", "--porcelain"],
+        ["git", "diff", "--name-only", "HEAD~1", "HEAD"],
+    ):
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, check=False, cwd=str(REPO))
+            for line in r.stdout.splitlines():
+                # `git status --porcelain` prefixes with status flags + space;
+                # `git diff --name-only` gives bare paths. Strip both safely.
+                f = line[3:].strip().strip('"') if cmd[1] == "status" else line.strip()
+                if f:
+                    files.add(f)
+        except Exception:
+            pass
+    return {m.group(1) for f in files if (m := _HANDOUT_RE.match(f))}
+
+
 def is_facilitator(md_path: Path) -> bool:
     """True if the handout is facilitator-only (tagged in its meta-line).
 
@@ -72,7 +100,19 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Build booklet-ready handout PDFs.")
     ap.add_argument("--lang", choices=LANGS, help="build only this language")
     ap.add_argument("--module", help="build only this module folder (e.g. m7)")
+    ap.add_argument(
+        "--auto", action="store_true",
+        help="auto-detect changed modules from git (uncommitted + last commit) and build only those",
+    )
     args = ap.parse_args()
+
+    auto_modules: set | None = None
+    if args.auto:
+        auto_modules = detect_changed_modules()
+        if not auto_modules:
+            print("No handout .md changes detected in working tree or last commit — nothing to rebuild.")
+            return 0
+        print(f"Auto-detected changed modules: {', '.join(sorted(auto_modules))}\n")
 
     order = yaml.safe_load(ORDER_FILE.read_text()) or {}
     names = module_names()
@@ -81,7 +121,9 @@ def main() -> int:
     # Start from a clean slate so renamed modules don't leave orphan folders
     # (e.g. an old English-named PT folder lingering after pt names were added).
     # A whole-language build clears that language's tree; a full build clears all.
-    if not args.module:
+    # Skip the clean slate for scoped builds (--module / --auto): they only touch
+    # the folders they rebuild, so wiping everything would be destructive.
+    if not args.module and not auto_modules:
         if args.lang:
             lang_out = OUT / args.lang
             if lang_out.exists():
@@ -100,6 +142,8 @@ def main() -> int:
         for module_dir in sorted(d for d in lang_src.iterdir() if d.is_dir()):
             module = module_dir.name
             if args.module and module != args.module:
+                continue
+            if auto_modules is not None and module not in auto_modules:
                 continue
             files = ordered_files(module_dir, order.get(module, []))
             if not files:
