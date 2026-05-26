@@ -13,7 +13,7 @@
     var NEW = 'https://fastr-analytics.org';
     var isFr = /\/fr(\/|$)/.test(window.location.pathname);
     // replace() so the retired URL doesn't pollute back-history.
-    window.location.replace(NEW + (isFr ? '/fr/methodology/' : '/methodology/'));
+    window.location.replace(NEW + (isFr ? '/fr/' : '/'));
   };
   if (typeof document$ !== 'undefined' && document$.subscribe) {
     document$.subscribe(redirect);
