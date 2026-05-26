@@ -1,77 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 30 680 315">
-  <defs>
-    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#1F9A9C;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0C716B;stop-opacity:1" />
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 500" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ IA SUR RAILS — colonne verticale étroite ============ -->
 
+  <rect x="30" y="28" width="320" height="56" rx="28" fill="#09544F"/>
+  <text x="190" y="55" text-anchor="middle" font-size="15" font-weight="800" fill="#ffffff" letter-spacing="0.3">Assistant IA FASTR</text>
+  <text x="190" y="74" text-anchor="middle" font-size="11.5" fill="#CAE6E9">Ancré dans votre projet</text>
 
-  <!-- Center: AI Assistant -->
-  <g transform="translate(340, 95)">
-    <circle cx="60" cy="50" r="60" fill="url(#aiGradient)" stroke="#09544F" stroke-width="2"/>
-    <text x="60" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">Assistant</text>
-    <text x="60" y="62" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">IA FASTR</text>
+  <rect x="30" y="110" width="320" height="356" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+
+  <text x="190" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">QUATRE SOURCES</text>
+
+  <g stroke="#E4E7E5" stroke-width="1">
+    <line x1="50" y1="226" x2="330" y2="226"/>
+    <line x1="50" y1="306" x2="330" y2="306"/>
+    <line x1="50" y1="386" x2="330" y2="386"/>
   </g>
 
-  <!-- Tool 1: Analysis Results (top left) - using lime -->
-  <g transform="translate(70, 40)">
-    <rect x="0" y="0" width="140" height="70" rx="8" fill="#f7f7e6" stroke="#D0CB17" stroke-width="2"/>
-    <text x="70" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#09544F">Vos résultats</text>
-    <text x="70" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Scores de qualité</text>
-    <text x="70" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Estimations de couverture</text>
-    <text x="70" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Alertes de perturbation</text>
-  </g>
-  <line x1="210" y1="75" x2="340" y2="120" stroke="#D0CB17" stroke-width="2" stroke-dasharray="5,3"/>
+  <rect x="30" y="146" width="4" height="306" fill="#D0CB17"/>
 
-  <!-- Tool 2: Visualizations (top right) - using blue -->
-  <g transform="translate(590, 40)">
-    <rect x="0" y="0" width="140" height="70" rx="8" fill="#CAE6E9" stroke="#1A90C0" stroke-width="2"/>
-    <text x="70" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#21568C">Vos graphiques</text>
-    <text x="70" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#21568C">Séries temporelles</text>
-    <text x="70" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#21568C">Diagrammes en barres</text>
-    <text x="70" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#21568C">Tableaux de données</text>
-  </g>
-  <line x1="590" y1="75" x2="460" y2="120" stroke="#1A90C0" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="50" y="174" font-size="14" font-weight="700" fill="#09544F">Vos données</text>
+  <text x="50" y="196" font-size="12" fill="#5A6562">Scores AQD · Estimations de couverture</text>
+  <text x="50" y="213" font-size="12" fill="#5A6562">· Indicateurs de perturbation</text>
 
-  <!-- Tool 3: R Code & Methods (bottom left) - using gold -->
-  <g transform="translate(70, 180)">
-    <rect x="0" y="0" width="140" height="70" rx="8" fill="#fdf6e3" stroke="#D8A822" stroke-width="2"/>
-    <text x="70" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#09544F">Le code</text>
-    <text x="70" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Scripts R utilisés</text>
-    <text x="70" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Formules appliquées</text>
-    <text x="70" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#0C716B">Paramètres définis</text>
-  </g>
-  <line x1="210" y1="215" x2="340" y2="170" stroke="#D8A822" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="50" y="254" font-size="14" font-weight="700" fill="#09544F">Vos graphiques</text>
+  <text x="50" y="276" font-size="12" fill="#5A6562">Séries temporelles · Graphiques à barres</text>
+  <text x="50" y="293" font-size="12" fill="#5A6562">· Tableaux de données</text>
 
-  <!-- Tool 4: Documentation (bottom right) - using orchid/purple -->
-  <g transform="translate(590, 180)">
-    <rect x="0" y="0" width="140" height="70" rx="8" fill="#f9e8f4" stroke="#BD5091" stroke-width="2"/>
-    <text x="70" y="20" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#7A1F6E">Les méthodes</text>
-    <text x="70" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#7A1F6E">Définitions d'indicateurs</text>
-    <text x="70" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#7A1F6E">Guides méthodologiques</text>
-    <text x="70" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#7A1F6E">Conseils d'interprétation</text>
-  </g>
-  <line x1="590" y1="215" x2="460" y2="170" stroke="#BD5091" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="50" y="334" font-size="14" font-weight="700" fill="#09544F">Le code</text>
+  <text x="50" y="356" font-size="12" fill="#5A6562">Scripts R · Formules appliquées</text>
+  <text x="50" y="373" font-size="12" fill="#5A6562">· Paramètres définis</text>
 
-  <!-- Example question -->
-  <g transform="translate(230, 265)">
-    <rect x="0" y="0" width="340" height="32" rx="16" fill="#CAE6E9" stroke="#1F9A9C" stroke-width="1.5"/>
-    <text x="170" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#09544F" font-style="italic">"Quels États montrent des perturbations CPN4 ce trimestre ?"</text>
-    <text x="170" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#0C716B">→ L'IA interroge les alertes et retourne la liste</text>
-  </g>
-
-  <!-- Bottom comparison -->
-  <g transform="translate(85, 305)">
-    <rect x="0" y="0" width="280" height="30" rx="6" fill="#ffe5e5" stroke="#FF6462" stroke-width="1.5"/>
-    <text x="140" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#cc3330">IA générique</text>
-    <text x="140" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#cc3330">Invente des réponses plausibles</text>
-  </g>
-
-  <g transform="translate(435, 305)">
-    <rect x="0" y="0" width="280" height="30" rx="6" fill="#e6f5f5" stroke="#1F9A9C" stroke-width="1.5"/>
-    <text x="140" y="13" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#09544F">IA FASTR</text>
-    <text x="140" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#09544F">Vérifie la source avant de répondre</text>
-  </g>
-
+  <text x="50" y="414" font-size="14" font-weight="700" fill="#09544F">Les méthodes</text>
+  <text x="50" y="436" font-size="12" fill="#5A6562">Définitions d'indicateurs · Guides</text>
+  <text x="50" y="453" font-size="12" fill="#5A6562">· Conseils d'interprétation</text>
 </svg>
