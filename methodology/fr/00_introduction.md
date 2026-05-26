@@ -19,7 +19,7 @@ Le GFF collabore avec les ministères de la santé pour effectuer des analyses d
 
 Ces analyses se concentrent sur les indicateurs prioritaires liés aux réformes nationales en matière de santé et aux investissements de la Banque mondiale, et les résultats informent les processus de planification nationale et les cycles de mise en œuvre des projets. Pendant la pandémie de COVID-19, le GFF a aidé les ministères de la santé de plus de 20 pays à surveiller l'impact de la pandémie sur les services de santé essentiels en utilisant cette approche.
 
-![Étapes de mise en œuvre du SRMNIA-N](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+![Étapes de mise en œuvre du SRMNIA-N](resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
 
 *Figure 1. Étapes de la mise en œuvre du contrôle de l'utilisation des services du SRMNIA-N*
 
