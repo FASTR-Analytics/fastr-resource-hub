@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Éditer et finaliser vos diapositives
 
 **Ce que vous apprendrez**
-Les diapos générées par l'IA demandent presque toujours du nettoyage — texte et graphiques ont souvent besoin d'être redimensionnés et repositionnés avant d'être présentables.
+Les diapos générées par l'IA demandent presque toujours du nettoyage. Le texte et les graphiques ont souvent besoin d'être redimensionnés et repositionnés avant que la diapo soit présentable.
 
 **Ce que vous pratiquerez**
 - Revoir une diapo contre les données

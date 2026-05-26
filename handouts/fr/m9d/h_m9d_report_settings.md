@@ -24,7 +24,7 @@ footer: "FASTR · Présentations"
 
 <p class="sb-label">Pourquoi c'est important</p>
 
-Les paramètres font passer un brouillon à un rapport partageable. Un nom clair, un style cohérent, les bons logos, des numéros de page et un filigrane : une présentation privée devient quelque chose qu'un collègue ou un partenaire peut ouvrir sans poser de questions.
+Les paramètres font passer un brouillon à un rapport partageable. Un nom clair, un style cohérent, les bons logos et des numéros de page : une présentation privée devient quelque chose qu'un collègue ou un partenaire peut ouvrir sans poser de questions.
 
 </aside>
 <div class="p1-main">
@@ -47,7 +47,7 @@ Ajoutez les logos que votre public s'attend à voir. Utilisez les ressources té
 
 <h2 class="step-h"><span class="step-n">4</span><span>Détails de page</span></h2>
 
-Activez les numéros de page. Ajoutez un filigrane si la présentation est un brouillon, ou si les données ne doivent pas circuler.
+Activez les numéros de page si la présentation va être imprimée ou partagée en PDF.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Enregistrer</span></h2>
 
@@ -67,7 +67,7 @@ Toujours enregistrer avant de quitter le panneau. Les paramètres ne s'enregistr
 - Avoir un nom clair que votre équipe peut retrouver
 - Utiliser un schéma de couleurs cohérent sur toutes les diapositives
 - Afficher les logos attendus
-- Afficher les numéros de page, avec un filigrane si la présentation est encore un brouillon
+- Afficher les numéros de page si la présentation va être imprimée ou partagée en PDF
 
 ## Supprimer le rapport
 
@@ -77,9 +77,7 @@ Les paramètres contiennent aussi le bouton **Supprimer le rapport**. Utilisez-l
 
 - **Les changements n'apparaissent pas sur la diapositive** — vous avez oublié d'enregistrer. Rouvrez Paramètres et confirmez.
 - **Logos manquants** — les fichiers de logos n'ont pas été téléversés dans les ressources du projet. Ajoutez-les dans Ressources, puis revenez aux Paramètres.
-- **Filigrane trop foncé** — ajustez l'opacité dans Détails de page, ou retirez-le avant le partage final.
-
-> 🔎 **Vérifier dans votre interface actuelle** : la disposition du panneau Paramètres peut varier légèrement. Les cinq sections ci-dessus s'appliquent quoi qu'il en soit.
+> 🔎 **Vérifier dans votre interface actuelle** : la disposition du panneau Paramètres peut varier légèrement. Les sections ci-dessus s'appliquent quoi qu'il en soit.
 
 ## Et ensuite
 

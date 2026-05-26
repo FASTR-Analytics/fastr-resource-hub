@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Lire une visualisation FASTR
 
 **Ce que vous apprendrez**
-Un cadre en 6 étapes pour lire n'importe quel graphique FASTR — indicateur, géographie et période, ce qui est comparé, valeurs, ce qui ressort, et alors ?
+Un cadre en 6 étapes pour lire n'importe quel graphique FASTR. Les étapes couvrent l'indicateur affiché, la géographie et la période, ce qui est comparé, les valeurs réelles, ce qui ressort, et ce que cela signifie pour la prestation de services.
 
 **Ce que vous pratiquerez**
 - Parcourir les 6 étapes sur un graphique seul

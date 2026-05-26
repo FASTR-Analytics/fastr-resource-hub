@@ -74,4 +74,4 @@ Votre diapositive doit maintenant avoir :
 
 ## Et ensuite
 
-L'activité suivante couvre les paramètres du rapport : nom, logos, numéros de page et filigrane.
+L'activité suivante couvre les paramètres du rapport : nom, style, logos et numéros de page.

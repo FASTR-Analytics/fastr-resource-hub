@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Ajouter une visualisation à une diapo
 
 **Ce que vous apprendrez**
-Comment une visualisation arrive sur une diapo à la main — choisir la diapo, choisir le graphique, le placer.
+Comment ajouter vous-même une visualisation à une diapo. Vous sélectionnez la diapo, puis vous choisissez un graphique parmi vos visualisations enregistrées.
 
 **Ce que vous pratiquerez**
 - Ouvrir l'éditeur de diapos

@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Ajouter une visualisation à une diapo avec l'IA
 
 **Ce que vous apprendrez**
-Comment demander à l'IA de placer un graphique précis sur une diapo précise — et que vérifier avant de garder son choix.
+Comment demander à l'IA de placer un graphique précis sur une diapo précise. L'IA ne choisit pas toujours le graphique que vous aviez en tête, vous vérifiez le résultat avant de le garder.
 
 **Ce que vous pratiquerez**
 - Demander à l'IA d'ajouter une visualisation à une diapo cible

@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Formater le texte de votre rapport
 
 **Ce que vous apprendrez**
-Les mêmes raccourcis markdown qui fonctionnent dans le chat fonctionnent aussi dans l'éditeur de diapos — titres, gras, listes à puces.
+Les mêmes raccourcis markdown qui fonctionnent dans le chat fonctionnent aussi dans l'éditeur de diapos. Vous pouvez ajouter des titres, du texte en gras et des listes à puces.
 
 **Ce que vous pratiquerez**
 - Ajouter un titre à votre diapo

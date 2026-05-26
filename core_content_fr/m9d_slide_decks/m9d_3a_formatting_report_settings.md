@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Configurer les paramètres de votre rapport
 
 **Ce que vous apprendrez**
-Où régler les options qui s'appliquent à toutes les diapos — nom, couleurs, logos, numéros de page.
+Où régler les options qui s'appliquent à toutes les diapos. Le panneau Paramètres couvre le nom du rapport, la couleur des diapos, les logos et les numéros de page.
 
 **Ce que vous pratiquerez**
 - Ouvrir les Paramètres du rapport

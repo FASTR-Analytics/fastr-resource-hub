@@ -12,7 +12,7 @@ paginate: true
 ## Démo : Comment éditer une diapositive
 
 **Ce que vous verrez**
-Les cinq étapes dans l'éditeur — ouvrir l'éditeur, ajouter un bloc visualisation, séparer la diapo en graphique + texte, redimensionner, enregistrer.
+Les cinq étapes pour éditer une diapo dans FASTR. Vous ouvrez l'éditeur, ajoutez un bloc visualisation, séparez la diapo en zone graphique et zone texte, redimensionnez chaque zone, et enregistrez.
 
 **À surveiller**
 - Le curseur change quand on passe sur la séparation redimensionnable

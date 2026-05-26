@@ -89,6 +89,10 @@ After clicking into your project, you should see:
 
 If yes, you're in. Move to the next activity.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## What could go wrong
 
 - **"Account not approved"** — your account needs to be added to the country project by an administrator. Ask your facilitator to add you.

@@ -74,4 +74,4 @@ Your slide should now have:
 
 ## What's next
 
-The next activity covers report settings: name, logos, page numbers, and the watermark.
+The next activity covers report settings: name, style, logos, and page numbers.

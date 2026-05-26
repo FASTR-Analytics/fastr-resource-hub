@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Laisser l'IA rédiger une interprétation
 
 **Ce que vous apprendrez**
-L'IA peut décrire un graphique mais ne connaît pas votre contexte — chaque affirmation doit être vérifiée avant que vous y mettiez votre nom.
+L'IA peut décrire un graphique mais ne connaît pas votre contexte. Chaque affirmation doit être vérifiée avant que vous y mettiez votre nom.
 
 **Ce que vous pratiquerez**
 - Générer une diapo avec une visualisation de votre choix

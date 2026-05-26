@@ -24,7 +24,7 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Why it matters</p>
 
-Settings is where a working draft becomes a shareable report. A clear name, consistent style, the right logos, page numbers, and a watermark turn a private deck into something a colleague or partner can open without questions.
+Settings is where a working draft becomes a shareable report. A clear name, consistent style, the right logos, and page numbers turn a private deck into something a colleague or partner can open without questions.
 
 </aside>
 <div class="p1-main">
@@ -47,7 +47,7 @@ Add the logos your audience expects to see on the slide. Use the assets that wer
 
 <h2 class="step-h"><span class="step-n">4</span><span>Page details</span></h2>
 
-Turn on page numbers. Add a watermark if the deck is a draft, or if the data should not be circulated.
+Turn on page numbers if the deck will be printed or shared as a PDF.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Save</span></h2>
 
@@ -67,7 +67,7 @@ When you close the Settings panel, your deck should:
 - Have a clear name your team can find again
 - Use one consistent colour scheme across all slides
 - Show the expected logos
-- Show page numbers, with a watermark if the deck is still a draft
+- Show page numbers if the deck will be printed or shared as a PDF
 
 ## Delete report
 
@@ -77,9 +77,7 @@ Settings also holds the **Delete Report** button. Use it to remove drafts or tes
 
 - **Changes are not on the slide** — you forgot to save. Reopen Settings and confirm.
 - **Logos missing** — the logo files were not uploaded to the project assets. Add them in Assets, then return to Settings.
-- **Watermark too dark** — adjust the opacity in Page details, or remove it before the final share.
-
-> 🔎 **Verify in your current UI**: the Settings panel layout may differ slightly. The five sections above apply regardless.
+> 🔎 **Verify in your current UI**: the Settings panel layout may differ slightly. The sections above apply regardless.
 
 ## What's next
 

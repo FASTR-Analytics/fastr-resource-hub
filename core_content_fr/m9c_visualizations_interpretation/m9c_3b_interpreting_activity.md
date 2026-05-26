@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Rédiger une interprétation pour un graphique
 
 **Ce que vous apprendrez**
-Une structure en trois parties pour toute interprétation — titre (la conclusion), ce que vous voyez (faits seulement), ce que cela signifie (et alors + qui agit).
+Une structure en trois parties pour toute interprétation. Le titre énonce la conclusion. « Ce que vous voyez » liste les faits. « Ce que cela signifie » nomme l'implication et la personne qui doit agir.
 
 **Ce que vous pratiquerez**
 - Rédiger une interprétation en trois parties d'un graphique de votre choix

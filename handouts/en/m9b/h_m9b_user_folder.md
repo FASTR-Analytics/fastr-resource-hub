@@ -87,6 +87,10 @@ Both folders are empty. That's fine — the next activities will fill them.
 - Avoid generic names like "my folder" or "test" — your country teammates will create folders too, and "test" will overlap with others.
 - Accents and spaces are fine in folder names.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## What could go wrong
 
 - **"New folder" button doesn't appear** — you're most likely in the wrong view. Switch the view toggle to **By folder** (not *Flat list* / *By module* / *By metric*). If it still doesn't appear, you may not have permission — ask your facilitator to check your role.

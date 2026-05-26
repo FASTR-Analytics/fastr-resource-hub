@@ -74,4 +74,4 @@ O seu diapositivo deve agora ter:
 
 ## E a seguir
 
-A próxima atividade trata das definições do relatório: nome, logótipos, números de página e marca de água.
+A próxima atividade trata das definições do relatório: nome, estilo, logótipos e números de página.

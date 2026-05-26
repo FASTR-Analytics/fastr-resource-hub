@@ -24,7 +24,7 @@ footer: "FASTR · Apresentações"
 
 <p class="sb-label">Porque é importante</p>
 
-As definições transformam um rascunho num relatório partilhável. Um nome claro, um estilo coerente, os logótipos certos, números de página e uma marca de água: uma apresentação privada torna-se algo que um colega ou parceiro pode abrir sem fazer perguntas.
+As definições transformam um rascunho num relatório partilhável. Um nome claro, um estilo coerente, os logótipos certos e números de página: uma apresentação privada torna-se algo que um colega ou parceiro pode abrir sem fazer perguntas.
 
 </aside>
 <div class="p1-main">
@@ -47,7 +47,7 @@ Adicione os logótipos que o seu público espera ver. Use os ficheiros carregado
 
 <h2 class="step-h"><span class="step-n">4</span><span>Detalhes da página</span></h2>
 
-Ative os números de página. Adicione uma marca de água se a apresentação for um rascunho, ou se os dados não puderem ser divulgados.
+Ative os números de página se a apresentação for impressa ou partilhada em PDF.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Guardar</span></h2>
 
@@ -67,7 +67,7 @@ Ao fechar o painel Definições, a sua apresentação deve:
 - Ter um nome claro que a sua equipa consiga encontrar
 - Usar um esquema de cores coerente em todos os diapositivos
 - Mostrar os logótipos esperados
-- Mostrar números de página, com uma marca de água se a apresentação ainda for um rascunho
+- Mostrar números de página se a apresentação for impressa ou partilhada em PDF
 
 ## Eliminar relatório
 
@@ -77,9 +77,7 @@ As Definições também contêm o botão **Eliminar relatório**. Use-o para ret
 
 - **As alterações não estão no diapositivo** — esqueceu de guardar. Reabra Definições e confirme.
 - **Logótipos em falta** — os ficheiros de logótipo não foram carregados nos recursos do projeto. Adicione-os em Recursos e regresse a Definições.
-- **Marca de água demasiado escura** — ajuste a opacidade em Detalhes da página, ou retire-a antes da partilha final.
-
-> 🔎 **Verificar na sua interface atual**: a disposição do painel Definições pode variar ligeiramente. As cinco secções acima aplicam-se de qualquer forma.
+> 🔎 **Verificar na sua interface atual**: a disposição do painel Definições pode variar ligeiramente. As secções acima aplicam-se de qualquer forma.
 
 ## E a seguir
 

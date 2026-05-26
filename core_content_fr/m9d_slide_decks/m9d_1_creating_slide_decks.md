@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Créez votre première présentation
 
 **Ce que vous apprendrez**
-Comment les présentations, les diapos et les visualisations s'articulent dans FASTR — et qu'une présentation enregistrée reste éditable.
+Comment les présentations, les diapos et les visualisations s'articulent dans FASTR. Une présentation enregistrée reste éditable, vous pouvez y revenir plus tard.
 
 **Ce que vous pratiquerez**
 - Ouvrir l'onglet Présentations
