@@ -21,7 +21,7 @@ footer: "FASTR · Disruption Report"
 
 - ☐ Your core report is built and verified
 - ☐ You know who the report is for
-- ☐ The Prompt Library is open
+- ☐ The Prompt library is open
 
 </aside>
 <div class="p1-main">
@@ -45,7 +45,7 @@ You have the core report. Now make it fit your audience and add any extra sectio
 
 <h2 class="step-h"><span class="step-n">2</span><span>Add extra sections with the AI</span></h2>
 
-In the Prompt Library, pick one or both. The AI **appends** the section to your report.
+In the Prompt library, pick one or both. The AI **appends** the section to your report.
 
 - **Prompt 2 — Regional Disruptions Analysis** — one slide per region, actual vs expected service volume. *(See the methodology recap: Service use.)*
 - **Prompt 3 — Data Quality Assessment** — an annex of DQA visualizations and interpretation. *(See the methodology recap: Data quality assessment.)*

@@ -36,7 +36,7 @@ You did it by hand last time. Now you'll have the **AI Assistant** build the sam
 
 <h2 class="step-h"><span class="step-n">1</span><span>Create the slide deck</span></h2>
 
-Open the **Slide decks** tab → **+ Create slide deck** → give it a name (e.g. *Disruption Report — {country}*). This empty deck is where the AI will write.
+Open the **Slide decks** tab → **Create slide deck** → give it a name (e.g. *Disruption Report — {country}*). This empty deck is where the AI will write.
 
 </div>
 </div>
@@ -49,7 +49,7 @@ Open the **Slide decks** tab → **+ Create slide deck** → give it a name (e.g
 
 Open the **AI Assistant**. If you're already in a conversation, start a **new** one.
 
-Open the **Prompt Library**, scroll to the bottom, and choose the prompt for your case:
+Open the **Prompt library**, scroll to the bottom, and choose the prompt for your case:
 
 - **Prompt 1 — FASTR Disruptions Report** — national level
 - **Prompt 4 — Subnational Disruptions Report** — by region / district

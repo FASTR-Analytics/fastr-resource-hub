@@ -33,9 +33,9 @@ C'est l'aboutissement des activités d'analyse. Les équipes produisent un rappo
 
 ## Animer la session
 
-**Préparation.** Confirmez que chaque équipe a une instance chargée et a terminé les activités de prompting et de rapport manuel. Ayez la Prompt Library ouverte dans le compte de démo pour montrer le premier lancement en direct. C'est l'activité la plus longue de l'atelier — prévoyez 3 à 4 heures et protégez-la de toute compression.
+**Préparation.** Confirmez que chaque équipe a une instance chargée et a terminé les activités de prompting et de rapport manuel. Ayez la Bibliothèque de prompts ouverte dans le compte de démo pour montrer le premier lancement en direct. C'est l'activité la plus longue de l'atelier — prévoyez 3 à 4 heures et protégez-la de toute compression.
 
-**Comment démontrer.** Démontrez le premier lancement de prompt avant que les équipes ne commencent : ouvrez la Prompt Library, lancez le Prompt 1, et répondez aux questions de l'IA à l'écran. Laissez ensuite les équipes travailler. La génération prend 5 à 10 minutes par construction ; intégrez donc la discussion de la liste de vérification dans ce temps d'attente plutôt que de laisser la salle inactive.
+**Comment démontrer.** Démontrez le premier lancement de prompt avant que les équipes ne commencent : ouvrez la Bibliothèque de prompts, lancez le Prompt 1, et répondez aux questions de l'IA à l'écran. Laissez ensuite les équipes travailler. La génération prend 5 à 10 minutes par construction ; intégrez donc la discussion de la liste de vérification dans ce temps d'attente plutôt que de laisser la salle inactive.
 
 **Regroupement.** Les équipes travaillent en petits groupes avec un **pilote** au clavier et les autres en relecture. Faites tourner le pilote entre les sections si le temps le permet, pour que plus d'une personne pratique les prompts.
 

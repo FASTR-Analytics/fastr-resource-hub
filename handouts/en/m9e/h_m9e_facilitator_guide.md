@@ -33,9 +33,9 @@ By the end, each team should have a verified, refined disruption report they cou
 
 ## Running the session
 
-**Preparation.** Confirm each team has a loaded instance and has completed the prompting and manual-report activities. Have the Prompt Library open in the demo account so you can show the first run live. This is the longest activity in the workshop — plan for 3–4 hours and protect it from being squeezed.
+**Preparation.** Confirm each team has a loaded instance and has completed the prompting and manual-report activities. Have the Prompt library open in the demo account so you can show the first run live. This is the longest activity in the workshop — plan for 3–4 hours and protect it from being squeezed.
 
-**How to demonstrate.** Demonstrate the first prompt run before teams start: open the Prompt Library, run Prompt 1, and answer the AI's questions on screen. Then let teams work. Generation takes 5–10 minutes per build, so build the verify-checklist discussion into that waiting time rather than letting the room go idle.
+**How to demonstrate.** Demonstrate the first prompt run before teams start: open the Prompt library, run Prompt 1, and answer the AI's questions on screen. Then let teams work. Generation takes 5–10 minutes per build, so build the verify-checklist discussion into that waiting time rather than letting the room go idle.
 
 **Grouping.** Teams work in small groups with one **driver** at the keyboard and everyone else reviewing. Rotate the driver between sections if time allows, so more than one person practises the prompts.
 

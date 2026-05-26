@@ -21,7 +21,7 @@ footer: "FASTR · Rapport de perturbations"
 
 - ☐ Votre rapport de base est construit et vérifié
 - ☐ Vous savez à qui s'adresse le rapport
-- ☐ La Prompt Library est ouverte
+- ☐ La Bibliothèque de prompts est ouverte
 
 </aside>
 <div class="p1-main">
@@ -45,7 +45,7 @@ Vous avez le rapport de base. Adaptez-le maintenant à votre public et ajoutez l
 
 <h2 class="step-h"><span class="step-n">2</span><span>Ajouter des sections avec l'IA</span></h2>
 
-Dans la Prompt Library, choisissez l'un ou les deux. L'IA **ajoute** la section à votre rapport.
+Dans la Bibliothèque de prompts, choisissez l'un ou les deux. L'IA **ajoute** la section à votre rapport.
 
 - **Prompt 2 — Regional Disruptions Analysis** — une diapositive par région, volume réel vs attendu. *(Voir le récap méthodologie : Utilisation des services.)*
 - **Prompt 3 — Data Quality Assessment** — une annexe de visualisations et d'interprétation de la qualité des données. *(Voir le récap méthodologie : Évaluation de la qualité des données.)*

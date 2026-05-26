@@ -36,7 +36,7 @@ Vous l'avez fait à la main la dernière fois. Maintenant, l'**Assistant IA** co
 
 <h2 class="step-h"><span class="step-n">1</span><span>Créer le deck de diapositives</span></h2>
 
-Ouvrez l'onglet **Slide decks** → **+ Create slide deck** → donnez-lui un nom (p. ex. *Rapport de perturbation — {pays}*). Ce deck vide est l'endroit où l'IA va écrire.
+Ouvrez l'onglet **Présentations** → **Créer une présentation** → donnez-lui un nom (p. ex. *Rapport de perturbation — {pays}*). Cette présentation vide est l'endroit où l'IA va écrire.
 
 </div>
 </div>
@@ -49,7 +49,7 @@ Ouvrez l'onglet **Slide decks** → **+ Create slide deck** → donnez-lui un no
 
 Ouvrez l'**Assistant IA**. Si vous êtes déjà dans une conversation, démarrez-en une **nouvelle**.
 
-Ouvrez la **Prompt Library**, descendez tout en bas, et choisissez le prompt adapté :
+Ouvrez la **Bibliothèque de prompts**, descendez tout en bas, et choisissez le prompt adapté :
 
 - **Prompt 1 — FASTR Disruptions Report** — niveau national
 - **Prompt 4 — Subnational Disruptions Report** — par région / district
