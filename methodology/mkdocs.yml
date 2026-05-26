@@ -109,7 +109,6 @@ plugins:
       glob:
         - 07_results_communication.md
         - 08_survey_hfa.md
-        - 09_workshop_activities.md
   - i18n:
       docs_structure: folder  # Uses fr/ folder for French files
       fallback_to_default: true
