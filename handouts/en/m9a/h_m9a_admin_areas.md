@@ -83,7 +83,7 @@ Click **Save**, then **Start import**.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Confirm and integrate</span></h2>
 
-- Select **Add new facilities and update existing ones if needed**.
+- Select **Add new facilities and update existing ones as needed**.
 - Click **Finalize and integrate**.
 
 Wait for the import to complete — a progress bar shows; usually 30 sec to a few minutes depending on country size.

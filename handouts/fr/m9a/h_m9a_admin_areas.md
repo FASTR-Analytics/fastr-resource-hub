@@ -83,7 +83,7 @@ Cliquez sur **Sauvegarder**, puis **Start import**.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Confirmer et intégrer</span></h2>
 
-- Sélectionnez **Ajouter de nouveaux établissements et mettre à jour les établissements existants si nécessaire**.
+- Sélectionnez **Ajouter de nouvelles formations sanitaires et mettre à jour celles existantes si nécessaire**.
 - Cliquez sur **Finaliser et intégrer**.
 
 Patientez jusqu'à la fin de l'importation — une barre de progression s'affiche ; généralement 30 secondes à quelques minutes selon la taille du pays.

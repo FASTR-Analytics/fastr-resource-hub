@@ -89,7 +89,7 @@ Set up indicators in three rounds:
 For each imported DHIS2 indicator, link it to its common counterpart:
 
 1. Click the **pencil (edit) icon** next to the DHIS2 indicator.
-2. In the panel that opens, click the **+ icon** under *Associated common indicators*.
+2. In the panel that opens, click the **+ icon** under *Mapped Common Indicators*.
 
    ![h:200](../../../resources/screenshots/m9a_setup/11_mapping_panel.jpeg)
 

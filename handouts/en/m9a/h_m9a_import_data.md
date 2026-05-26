@@ -32,7 +32,7 @@ Pull the actual data values from DHIS2 for your chosen indicators and time perio
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open HMIS Data import</span></h2>
 
-From the **Data** page, click **HMIS Data**, then **New import**.
+From the **Data** page, click **HMIS Data**, then **Start new import**.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Choose "Import directly from DHIS2"</span></h2>
 
