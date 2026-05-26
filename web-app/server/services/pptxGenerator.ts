@@ -1862,6 +1862,17 @@ export async function generatePPTX(
       if (!(cls && CHROME_BARE.has(cls))) pageNum++
       addChrome(currentSlide, slides[i], pageNum)
 
+      // Activity-pointer slides get the dot-grid background — mirrors the
+      // .activity-pointer style in fastr-theme.css so PPT exports carry the
+      // workbook-page look instead of falling back to plain white. The PNG
+      // overrides any solid color the builder set.
+      if (cls === 'activity-pointer') {
+        const dotGridPath = path.join(REPO_ROOT, 'resources', 'backgrounds', 'activity_dotgrid.png')
+        if (fs.existsSync(dotGridPath)) {
+          currentSlide.background = { path: dotGridPath }
+        }
+      }
+
       // Add presenter notes to the slide if present
       if (slides[i].presenterNotes) currentSlide.addNotes(slides[i].presenterNotes!)
     } catch (e) {
