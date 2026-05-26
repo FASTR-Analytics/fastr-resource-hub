@@ -48,7 +48,7 @@ FASTR's four technical approaches, underpinned by capacity strengthening and dat
 
 Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
 
-![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical_approaches_image.svg)
 
 *Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
 
@@ -198,7 +198,7 @@ Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasin
 
 Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
 
-![w:800](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![w:600](../resources/diagrams/Technical_approaches_image.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->

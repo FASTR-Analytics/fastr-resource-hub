@@ -51,7 +51,7 @@ Les quatre approches techniques du FASTR, étayées par le renforcement des capa
 
 Parmi les activités de renforcement des capacités, on peut citer le soutien à l'automatisation de l'extraction, du nettoyage et de l'analyse des données de routine, ainsi que le soutien à l'institutionnalisation des méthodes de collecte et d'analyse des données issues des enquêtes téléphoniques rapides. Le soutien à l'utilisation des données donne la priorité à l'intégration de l'analyse en cycle rapide dans les mécanismes existants d'examen des données et de retour d'information aux niveaux national et infranational, afin de renforcer l'utilisation systématique des données pour la prise de décision.
 
-![Analyse en cycle rapide FASTR](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![Analyse en cycle rapide FASTR](resources/diagrams/Technical_approaches_image.svg)
 
 *Figure 3. Analyse en cycle rapide dans le cadre de l'initiative FASTR (Frequent Assessments and System Tools for Resilience)*
 
@@ -191,7 +191,7 @@ L'analyse à cycle rapide accélère l'amélioration des résultats en matière 
 
 Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systèmes de **SSP** (Soins de Santé Primaires), soutenues par le renforcement des capacités et l'appui à l'utilisation des données, en adéquation avec la demande et les besoins des pays
 
-![w:800](../resources/diagrams_fr/Technical-Rapid-cycle-analytics--V3.png)
+![w:600](../resources/diagrams_fr/Technical_approaches_image.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->

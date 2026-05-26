@@ -43,7 +43,7 @@ Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasin
 
 Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
 
-![w:800](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![w:800](resources/diagrams/Technical_approaches_image.svg)
 
 <!-- SLIDE:overview_what_is_fastr -->
 ## What is FASTR?

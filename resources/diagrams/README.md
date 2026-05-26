@@ -50,8 +50,7 @@ referenced from related handouts and the methodology docs.
 | File | Shows | Primary use |
 |---|---|---|
 | `rapid_cycle_analytics.png` | Continuous rapid-cycle analytics, conceptual | slide `m0_0` |
-| `Technical-Rapid-cycle-analytics--V3.svg` | The four technical approaches — **old style**, to be replaced by `Technical_approaches_image.svg` | slide `m0_1`, methodology Fig 3 |
-| `Technical_approaches_image.svg` | Four technical approaches — **new GFF design**, translatable (EN/FR/PT) | not yet wired (replacement queued for `m0_1` + Fig 3) |
+| `Technical_approaches_image.svg` | Four technical approaches — **new GFF design**, translatable (EN/FR/PT) | slide `m0_1`, methodology Fig 3 |
 | `what_is_fastr.png` | "Analyze → learn → strengthen → act" loop, single-frame | slide `m0_2` |
 | `FASTR_rapid_cycle_analytics_approach.svg` | The full analyze/learn/strengthen/act cycle — **new GFF design**, translatable (EN/FR/PT) | methodology Fig 2 |
 | `steps_to_implement_rmncahn_service_chart.svg` | Implementation steps for RMNCAH-N service-use monitoring | slide `m0_3`, methodology Fig 1 |
@@ -159,7 +158,7 @@ referenced from related handouts and the methodology docs.
 
 | Source (in `fastr_gff/`) | Generated EN/FR/PT (in `diagrams{,_fr,_pt}/`) | Replaces |
 |---|---|---|
-| `Technical_approaches_image.svg` | `Technical_approaches_image.svg` (×3 languages) | `Technical-Rapid-cycle-analytics--V3.svg` (Fig 3 + slide `m0_1`) — wiring not yet done |
+| `Technical_approaches_image.svg` | `Technical_approaches_image.svg` (×3 languages) | `Technical-Rapid-cycle-analytics--V3.svg` (Fig 3 + slide `m0_1`) — wired; old SVG deleted |
 | `FASTR_rapid_cycle_analytics_approach.svg` | `FASTR_rapid_cycle_analytics_approach.svg` (×3 languages) | `GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg` (methodology Fig 2) — wired; old SVG deleted |
 
 ## GFF source library — `fastr_gff/`
@@ -201,7 +200,5 @@ edit the generator's recipe instead.
 
 ## Known issues / pending
 
-- `Technical-Rapid-cycle-analytics--V3.svg` will be retired once
-  `Technical_approaches_image.svg` is wired into Fig 3 + slide `m0_1`.
 - `core_content_fr/` slides occasionally reference `.png` versions of diagrams
   that exist as `.svg` in EN. Consolidate on `.svg` when time allows.

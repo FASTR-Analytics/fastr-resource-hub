@@ -1,56 +1,45 @@
 slides:
 - file: m0_0_what_are_we_trying_to_achieve.md
-  order: 0
+  order: 0.0
   variant: full
   title: What are we trying to achieve?
-  last_reviewed: &id001 2026-05-13
 - file: m0_1_how_can_this_be_achieved.md
-  order: 1
+  order: 1.0
   variant: full
   title: How can this be achieved?
-  last_reviewed: *id001
 - file: m0_2_what_is_fastr.md
-  order: 2
+  order: 2.0
   variant: full
   title: What is FASTR?
-  last_reviewed: *id001
 - file: m0_3_fastr_approach_rmncahn.md
-  order: 3
+  order: 3.0
   variant: full
   title: What is the FASTR approach to RMNCAH-N service use monitoring?
-  last_reviewed: 2026-05-13
 - file: m0_3a_how_countries_use_fastr.md
   order: 3.01
   variant: full
   title: How do countries use FASTR?
-  last_reviewed: *id001
 - file: m0_3b_from_analysis_to_action.md
   order: 3.02
   variant: full
   title: From analysis to action
-  last_reviewed: *id001
 - file: m0_4_fastr_outputs.md
-  order: 4
+  order: 4.0
   variant: full
   title: 'FASTR analytics: suite of outputs and products'
-  last_reviewed: *id001
 - file: m0_5_data_triangulation.md
-  order: 5
+  order: 5.0
   variant: full
   title: 'Data triangulation: bringing together multiple sources'
-  last_reviewed: *id001
 - file: m0_5a_why_fastr.md
   order: 5.01
   variant: full
   title: Why FASTR?
-  last_reviewed: *id001
 - file: m0_5b_disruptions_text.md
   order: 5.02
   variant: full
   title: Context
-  last_reviewed: *id001
 - file: m0_6_disruptions_context.md
-  order: 6
+  order: 6.0
   variant: full
   title: Why now? Responding to disruptions in health financing
-  last_reviewed: *id001
