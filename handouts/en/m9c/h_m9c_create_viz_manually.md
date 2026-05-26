@@ -28,13 +28,15 @@ footer: "FASTR · Visualizations & Interpretation"
 
 ## What you'll do
 
-Create your first chart using the built-in builder: pick a **metric**, choose a **ready-made chart**, and it's saved to the project. You'll click through the builder yourself; the next activity does the same with the AI Assistant.
+Build three time-series charts: first **ANC1**, then **BCG**, then **one indicator of your choice**. Each chart is saved into your folder in the project's Visualizations list. The next activity does the same task with the AI Assistant.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open the visualization builder</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Open the Create visualization dialog</span></h2>
 
-In the Visualizations tab, click **Create visualization**. A three-step builder opens: **Metric → Presets → Configure**.
+In the **Visualizations** tab, click the green **+ Create visualization** button in the top right.
 
-![The Create visualization dialog — step 1, Metric picker (modules listed on the left, metrics in the grid) h:380](../../../resources/screenshots/m9c/create_viz_dialog.png)
+A three-step dialog opens: **Metric → Presets → Configure**.
+
+![The Create visualization dialog at step 1 — modules listed on the left, metric tiles in the grid, Cancel/Next at the bottom right h:340](../../../resources/screenshots/m9c/create_viz_dialog.png)
 
 </div>
 </div>
@@ -45,17 +47,45 @@ In the Visualizations tab, click **Create visualization**. A three-step builder 
 
 <h2 class="step-h"><span class="step-n">2</span><span>Pick a metric</span></h2>
 
-Metrics are grouped by module on the left: **M1. Data quality assessment**, **M2. Data quality adjustment**, **M3. Service utilization**, **M5. Coverage estimation** (denominators), **M6. Coverage estimation** (estimates). A metric is **what is measured** — e.g. *Number of services reported*, *Actual vs expected service volume*, *Coverage*.
+In the left panel of the dialog, click **M3. Service utilization**. The grid on the right now lists only M3 metrics.
 
-For a service-volume trend, open **M3. Service utilization** and pick a metric such as **Number of services reported**. Click **Next**.
+Click the tile **Number of services reported, by adjustment type**.
 
-<h2 class="step-h"><span class="step-n">3</span><span>Choose a ready-made chart</span></h2>
+Click **Next** at the bottom right.
 
-You'll see a grid of **presets** — ready-made charts. Choose **Service volume over time (monthly)** — a line chart of monthly volume by indicator. Click **Create**.
+> Metrics are grouped by module: **M1** (Data quality assessment), **M2** (Data quality adjustment), **M3** (Service utilization), **M5** (Coverage — denominators), **M6** (Coverage — estimates). There is no M4. A metric is *what is measured*. A preset is *one ready-made way to draw it*.
 
-Your chart is created and appears in the **Visualizations** list. Use the **By folder** view to drop it into your folder.
+<h2 class="step-h"><span class="step-n">3</span><span>Pick a preset</span></h2>
 
-> The other presets give quarterly or annual **bar** charts. **Custom → Configure manually** lets you choose the chart type (table, time series, bar, map) and how to break the data down — see the next section.
+You're now on the **Presets** step. Click **Service volume over time (monthly)** — a line chart of monthly volume.
+
+The chart opens in the editor.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Filter to ANC1, last 12 months</span></h2>
+
+The chart opens with all indicators shown across the full available time period. You'll narrow it to **ANC1, last 12 months**.
+
+In the chart editor's **left panel**, scroll down to **Filter (subset)**:
+
+- Under **Indicators**, tick **ANC1** only (untick the rest, or use the search box).
+- Under **Time period**, set the range to the **last 12 months**.
+
+The chart updates as you tick.
+
+<h2 class="step-h"><span class="step-n">5</span><span>Save it to your folder</span></h2>
+
+Click **Save as new viz** at the top of the editor. Give it a clear name (e.g. *ANC1 — monthly, last 12 months*) and save it into **your folder**.
+
+It now appears in the Visualizations list under your folder.
+
+## Now do it twice more
+
+Repeat the same five steps for:
+
+1. **BCG** — same path, but tick **BCG** at Step 4 instead of ANC1.
+2. **An indicator of your choice** — anything that interests you (Penta1, ANC4, IPD admissions…).
+
+You should end up with **three saved charts in your folder**.
 
 ---
 
@@ -99,9 +129,12 @@ Open a saved visualization — the controls live in the **left panel**, and you'
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Try a few options
+## Try a few more options
 
-Repeat with a different metric or preset — a coverage metric under **M6**, or the quarterly-change bar chart — to see how each reads.
+Once your three charts are saved, try a different metric or preset:
+
+- A coverage metric under **M6** (a coverage curve, not a volume trend).
+- The quarterly-change bar chart preset (compares periods instead of plotting a continuous trend).
 
 > **Tip:** Line charts (*Service volume over time*) are best for trends over time. Bar charts (*quarterly / annual change*) are better for comparing periods or places. The reference handout *How to read a FASTR visualization* goes deeper.
 
@@ -109,12 +142,12 @@ Repeat with a different metric or preset — a coverage metric under **M6**, or 
 
 You should now have:
 
-- At least one chart created and visible in your **Visualizations** list
-- The path: **+ Create visualization → Metric → Presets → Configure**
-- A sense of which presets suit trends vs comparisons
+- **Three saved charts** in your folder: ANC1, BCG, and one of your choice.
+- The path memorised: **+ Create visualization → M3 → metric → preset → filter → Save as new viz**.
+- A sense of which presets suit trends vs comparisons.
 
 ## What's next
 
-The next activity does the same thing using the AI Assistant — typing a request in plain language instead of clicking through the builder. Same end result, different path.
+The next activity does the same thing using the AI Assistant — typing the request in plain language instead of clicking through the dialog. Same end result, different path.
 
-> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Configure*) may differ slightly. The **Metric → Presets → Configure** path is the key structure.
+> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Save as new viz*) may differ slightly. The **Metric → Presets → Configure** path is the key structure.
