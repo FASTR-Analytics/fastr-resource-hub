@@ -32,9 +32,9 @@ Create your first chart using the built-in builder: pick a **metric**, choose a 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the visualization builder</span></h2>
 
-In the Visualizations tab, click **+ Create visualization**. A three-step builder opens: **Metric → Presets → Configure**.
+In the Visualizations tab, click **Create visualization**. A three-step builder opens: **Metric → Presets → Configure**.
 
-![The "+ Create visualization" button h:34](../../../resources/screenshots/m9c/new_viz_button.png)
+![The "Create visualization" button h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
 </div>
 </div>
@@ -110,11 +110,11 @@ Repeat with a different metric or preset — a coverage metric under **M4**, or 
 You should now have:
 
 - At least one chart created and visible in your **Visualizations** list
-- The path in muscle memory: **+ Create visualization → Metric → Presets → Create**
+- The path in muscle memory: **Create visualization → Metric → Presets → Create**
 - A sense of which presets suit trends vs comparisons
 
 ## What's next
 
 The next activity does the same thing using the AI Assistant — typing a request in plain language instead of clicking through the builder. Same end result, different path.
 
-> 🔎 **Verify in your current UI**: labels (*+ Create visualization*, *Create*) may differ slightly. The **Metric → Presets → Create** path is the key structure.
+> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Create*) may differ slightly. The **Metric → Presets → Create** path is the key structure.

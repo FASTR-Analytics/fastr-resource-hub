@@ -32,9 +32,9 @@ Créer votre premier graphique avec le constructeur intégré : choisir une **me
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le constructeur de visualisation</span></h2>
 
-Dans l'onglet Visualisations, cliquez sur **+ Créer une visualisation**. Un constructeur en trois étapes s'ouvre : **Mesure → Préréglages → Configurer**.
+Dans l'onglet Visualisations, cliquez sur **Créer une visualisation**. Un constructeur en trois étapes s'ouvre : **Mesure → Préréglages → Configurer**.
 
-![Le bouton « + Créer une visualisation » h:34](../../../resources/screenshots/m9c/new_viz_button.png)
+![Le bouton « Créer une visualisation » h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
 </div>
 </div>
@@ -110,11 +110,11 @@ Refaites avec une autre mesure ou un autre préréglage — une mesure de couver
 Vous devriez maintenant avoir :
 
 - Au moins un graphique créé et visible dans votre liste **Visualisations**
-- Le chemin en mémoire : **+ Créer une visualisation → Mesure → Préréglages → Créer**
+- Le chemin en mémoire : **Créer une visualisation → Mesure → Préréglages → Créer**
 - Une idée de quels préréglages conviennent aux tendances vs aux comparaisons
 
 ## Étape suivante
 
 L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le constructeur. Même résultat, autre chemin.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*+ Créer une visualisation*, *Créer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Créer** est la structure clé.
+> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*Créer une visualisation*, *Créer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Créer** est la structure clé.

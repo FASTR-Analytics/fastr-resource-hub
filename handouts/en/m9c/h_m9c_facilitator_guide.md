@@ -65,7 +65,7 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ### 2. Create your first visualization · ~15 min · hands-on
 
-**What happens.** Participants build a chart with the built-in builder (the **Metric → Presets → Create** wizard): + Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a preset like *Service volume over time (monthly)* → Create. The handout then explains **filter vs disaggregate** and the four display modes (Lines / Grid / Rows / Columns).
+**What happens.** Participants build a chart with the built-in builder (the **Metric → Presets → Create** wizard): Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a preset like *Service volume over time (monthly)* → Create. The handout then explains **filter vs disaggregate** and the four display modes (Lines / Grid / Rows / Columns).
 
 **Demonstrate (~3 min, live).** Open a saved viz and use the **left panel** — point out you must *scroll* to reach these controls, which is where people get lost:
 1. Start with one indicator, national total; say in words what it shows.

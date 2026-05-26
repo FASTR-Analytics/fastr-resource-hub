@@ -65,7 +65,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 2. Créez votre première visualisation · ~15 min · pratique
 
-**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré (l'assistant **Mesure → Préréglages → Créer**) : + Créer une visualisation → choisir une mesure (p. ex. *M3. Utilisation des services → Nombre de services rapportés*) → choisir un préréglage comme *Volume de services au fil du temps (mensuel)* → Créer. Le document explique ensuite **filtrer vs désagréger** et les quatre modes d'affichage (Lines / Grid / Rows / Columns).
+**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré (l'assistant **Mesure → Préréglages → Créer**) : Créer une visualisation → choisir une mesure (p. ex. *M3. Utilisation des services → Nombre de services rapportés*) → choisir un préréglage comme *Volume de services au fil du temps (mensuel)* → Créer. Le document explique ensuite **filtrer vs désagréger** et les quatre modes d'affichage (Lines / Grid / Rows / Columns).
 
 **Démontrer (~3 min, en direct).** Ouvrez une viz enregistrée et utilisez le **panneau de gauche** — signalez qu'il faut *faire défiler* pour atteindre ces contrôles, c'est là que les gens se perdent :
 1. Partez d'un seul indicateur, total national ; dites en mots ce qu'il montre.
