@@ -214,6 +214,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed". MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
         session_title: { type: 'string', description: 'Custom title for this session (e.g., "Data Quality Part 1"). If not specified, uses module name.' },
+        presenter: { type: 'string', description: 'Optional: name(s) of the facilitator/presenter for this session (e.g., "Claire Boulange" or "Kirsten Sebold, Daniel Kamara"). Shown in the agenda Facilitator column and on the section cover slide.' },
         topic_range: {
           type: 'object',
           properties: {
@@ -248,6 +249,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
         day: { type: 'number', description: 'Which day to add the session to' },
         session_name: { type: 'string', description: 'Name of the session' },
         duration: { type: 'number', description: 'Duration in minutes' },
+        presenter: { type: 'string', description: 'Optional: name(s) of the facilitator/presenter for this session. Shown in the agenda Facilitator column.' },
       },
       required: ['day', 'session_name', 'duration'],
     },
@@ -510,7 +512,7 @@ function addSessionToDay(config: any, dayKey: string, session: any): void {
 }
 
 function executeAddModule(config: any, input: any): { success: boolean; message: string } {
-  const { day, version, duration, session_title, topic_range } = input
+  const { day, version, duration, session_title, topic_range, presenter } = input
   const module_number = String(input.module_number)  // Normalize to string
   const dayKey = `day${day}`
 
@@ -589,10 +591,12 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     version: version,
     topic_range: topic_range || null,  // null means all topics
     duration: sessionDuration,
+    ...(presenter ? { speaker: presenter } : {}),
   })
 
   const rangeMsg = topic_range ? ` (topics ${topic_range.start}-${topic_range.end})` : ''
-  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name}${rangeMsg} to Day ${day}` }
+  const presenterMsg = presenter ? ` (presenter: ${presenter})` : ''
+  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name}${rangeMsg}${presenterMsg} to Day ${day}` }
 }
 
 function executeAddBreak(config: any, input: any): { success: boolean; message: string } {
@@ -624,7 +628,7 @@ function executeAddBreak(config: any, input: any): { success: boolean; message: 
 }
 
 function executeAddCustomSession(config: any, input: any): { success: boolean; message: string } {
-  const { day, session_name, duration } = input
+  const { day, session_name, duration, presenter } = input
   const dayKey = `day${day}`
 
   if (!config.schedule[dayKey]) {
@@ -643,9 +647,11 @@ function executeAddCustomSession(config: any, input: any): { success: boolean; m
     session: session_name,
     type: 'custom',
     duration: duration,
+    ...(presenter ? { speaker: presenter } : {}),
   })
 
-  return { success: true, message: `Added "${session_name}" (${duration}min) to Day ${day}` }
+  const presenterMsg = presenter ? ` (presenter: ${presenter})` : ''
+  return { success: true, message: `Added "${session_name}" (${duration}min)${presenterMsg} to Day ${day}` }
 }
 
 function executeUpdateSettings(config: any, input: any): { success: boolean; message: string } {
