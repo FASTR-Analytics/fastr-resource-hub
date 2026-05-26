@@ -3,16 +3,25 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Has there been a disruption?
+<div class="activity-pointer">
 
-**Quick exercise**
+![h:90](../../resources/icons/hands_on.svg)
 
-Service volumes remain largely steady thus far in 2025. But stability may reflect temporary continuity in funding and staffing.
+## Activity: Apply — spot a disruption
 
-**Consider:**
-- The simple measure of service utilization is less commodity-dependent — uptake may be stable, but quality may have declined
-- Context matters — understanding how financing, workforce, and quality constraints interact is key
-- Ongoing facility surveys help assess whether essential commodities and service readiness are in place
+**Handout:** *Apply — spot a disruption*
 
-*Look at your country's ANC1 disruption chart. Has there been a disruption? What additional context would you need to interpret this pattern?*
+**~25 min**
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- Activity 6 (capstone) from the m9c facilitator guide. Country teams, hands-on.
+- Nothing new to demonstrate. Set it up by reminding teams of the 6-step framework and the three-part finding structure.
+- Key message: a one-month dip is usually noise. Look for sustained drops, three months or more. Stable volumes can still mean falling coverage if the population is growing.
+- Watch for: teams calling a single-month dip a disruption. Steer them to sustained drops (3+ months). Use the share-back to surface and correct weak findings.
+- Closing this activity is the proof the module worked.
+-->

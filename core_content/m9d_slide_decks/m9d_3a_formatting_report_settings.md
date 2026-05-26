@@ -3,15 +3,23 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Formatting your report: settings
+<div class="activity-pointer">
 
-**Report Settings:**
+![h:90](../../resources/icons/hands_on.svg)
 
-- **General:** Update report name
-- **Style:** Update slide color, change background details
-- **Logos:** Add slide logos from uploaded assets
-- **Page details:** Show page numbers, add watermark
-- **Delete Report:** Delete report within a project
+## Activity: Configure your report settings
 
-*Be sure to save settings*
+**Handout:** *Configure your report settings*
+
+**~10 min**
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- Activity adapted from the m9d facilitator guide. Handout: h_m9d_report_settings.
+- Five sections to walk through: General (report name), Style (slide colour and background), Logos (from uploaded assets), Page details (page numbers, watermark), Save.
+- Always save before leaving the panel. Settings do not autosave.
+-->

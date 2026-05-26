@@ -11,10 +11,8 @@ paginate: true
 
 ## Activité: Ajouter une visualisation (manuellement)
 
-**Voir le document distribué :** *Ajouter une visualisation (manuellement)*
+**Document :** *Ajouter une visualisation (manuellement)*
 
 **~15 min**
-
-*Les exemplaires imprimés sont distribués à ce moment de la session.*
 
 </div>

@@ -9,12 +9,19 @@ paginate: true
 
 ![h:90](../../resources/icons/demo.svg)
 
-## Demo: Editor walkthrough (Step 1: open editor)
+## Demo: How to edit a slide
 
-**Facilitator notes:** *Editor walkthrough (facilitator notes)*
+**Facilitator-led**
 
 **~5 min**
 
-*Facilitator notes — not distributed to participants.*
-
 </div>
+
+<!--
+PRESENTER NOTES:
+- Run the 5-step editor walkthrough from the m9d facilitator guide appendix: open the editor, add a visualisation block, split the slide into chart + text, resize the chart and text areas, edit slide details and save.
+- Keep momentum: 5 minutes total, not 5 minutes per step.
+- This demo gates Activity 2 — participants need to have seen it before they touch the editor.
+- Backup if the platform is down: walk through the appendix screenshots.
+-->
+

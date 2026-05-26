@@ -11,10 +11,8 @@ paginate: true
 
 ## Activity: Create your first slide deck
 
-**See the participant handout:** *Create your first slide deck*
+**Handout:** *Create your first slide deck*
 
 **~10 min**
-
-*Print copies are distributed at this point in the session.*
 
 </div>

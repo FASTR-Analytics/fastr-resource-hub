@@ -11,10 +11,8 @@ paginate: true
 
 ## Activity: Add a visualisation (manually)
 
-**See the participant handout:** *Add a visualisation (manually)*
+**Handout:** *Add a visualisation (manually)*
 
 **~15 min**
-
-*Print copies are distributed at this point in the session.*
 
 </div>

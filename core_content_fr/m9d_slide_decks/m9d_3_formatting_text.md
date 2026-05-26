@@ -3,15 +3,23 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Formater le texte de votre rapport
+<div class="activity-pointer">
 
-Vous pouvez formater le texte en utilisant des symboles simples, comme pour écrire un message.
+![h:90](../../resources/icons/hands_on.svg)
 
-| Symbole | Résultat |
-|---------|----------|
-| `# Titre` | Grand titre |
-| `## Sous-titre` | Titre plus petit |
-| `**gras**` | **gras** |
-| Commencer une ligne par `-` (un tiret) | Point de puce |
-| Laisser une ligne vide | Ajouter de l'espacement |
+## Activité : Formater le texte de votre rapport
+
+**Document :** *Formater le texte de votre rapport*
+
+**~10 min**
+
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Activité adaptée du guide du facilitateur m9d. Document : h_m9d_format_text.
+- Une diapo de référence avec les raccourcis markdown (m9d_3_ref_markdown_shortcuts) suit ; gardez-la projetée pendant que les participants travaillent.
+- Montrer aux participants que les mêmes symboles fonctionnent dans l'éditeur de diapos et dans le chat.
+-->

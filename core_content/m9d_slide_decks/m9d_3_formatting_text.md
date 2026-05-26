@@ -3,15 +3,23 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Formatting your report text
+<div class="activity-pointer">
 
-You can format text using simple symbols, just like writing a message.
+![h:90](../../resources/icons/hands_on.svg)
 
-| Symbol | Result |
-|--------|--------|
-| `# Heading` | Large heading |
-| `## Subheading` | Smaller heading |
-| `**bold**` | **bold** |
-| Start a line with `-` (a hyphen) | Bullet point |
-| Leave a blank line | Add spacing |
+## Activity: Format your report text
+
+**Handout:** *Format your report text*
+
+**~10 min**
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- Activity adapted from the m9d facilitator guide. Handout: h_m9d_format_text.
+- A reference slide with the markdown shortcuts (m9d_3_ref_markdown_shortcuts) follows; keep it projected while participants work.
+- Show participants the same symbols work in the slide editor as in the chat.
+-->

@@ -3,19 +3,28 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Creating interpretations with the AI Assistant
+<div class="activity-pointer">
 
-**I do, we do, you do**
+![h:90](../../resources/icons/hands_on.svg)
 
-**I do:** Facilitator uses the AI Assistant to create a slide with a visualization and interpretation, then refines the prompt and checks the output against the data
+## Activity: Let the AI draft an interpretation
 
-**We do:** Together, we create a slide and refine the prompt as a group to improve clarity and accuracy
+**Handout:** *Let the AI draft an interpretation*
 
-**You do:** Create a slide with a visualization of your choice, review the AI's output, and refine the prompt to improve it
+**~15 min**
 
-**Prompt 1:** *"Create a slide showing reporting completeness for BCG, Penta1, Penta3 by region for 2024. Note which regions are above/below 80%."*
+</div>
 
-**Prompt 2:** *"Simplify the text on this slide for a policymaker audience. Keep the table."*
-
-*We are in the Slide Decks tab*
+<!--
+PRESENTER NOTES:
+- Activity 5 from the m9c facilitator guide. Hands-on, individual. Working tab: Slide Decks.
+- Live demo first: generate one interpretation on screen, then check a single claim against the chart aloud. The point is to show that "it sounds right" is not the test.
+- I do / we do / you do scaffolding belongs in the handout.
+  - I do: build a slide with the AI, then refine the prompt and check the output against the data.
+  - We do: refine a prompt as a group to improve clarity and accuracy.
+  - You do: build a slide with a viz of your choice, review the AI output, and refine the prompt.
+- Suggested prompts: "Create a slide showing reporting completeness for BCG, Penta1, Penta3 by region for 2024. Note which regions are above/below 80%." Then: "Simplify the text on this slide for a policymaker audience. Keep the table."
+- Key message: the AI can describe the chart, but it does not know your context. Check every claim against the chart, and the recommended action is yours to own.
+-->

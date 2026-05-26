@@ -3,15 +3,23 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Formater votre rapport : paramètres
+<div class="activity-pointer">
 
-**Paramètres du rapport :**
+![h:90](../../resources/icons/hands_on.svg)
 
-- **Général :** Mettre à jour le nom du rapport
-- **Style :** Mettre à jour la couleur des diapositives, modifier les détails de l'arrière-plan
-- **Logos :** Ajouter des logos de diapositives depuis les ressources téléchargées
-- **Détails de page :** Afficher les numéros de page, ajouter un filigrane
-- **Supprimer le rapport :** Supprimer un rapport au sein d'un projet
+## Activité : Configurer les paramètres de votre rapport
 
-*N'oubliez pas de sauvegarder les paramètres*
+**Document :** *Configurer les paramètres de votre rapport*
+
+**~10 min**
+
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Activité adaptée du guide du facilitateur m9d. Document : h_m9d_report_settings.
+- Cinq sections à parcourir : Général (nom du rapport), Style (couleur et arrière-plan), Logos (depuis les ressources téléversées), Détails de page (numéros, filigrane), Enregistrer.
+- Toujours enregistrer avant de quitter le panneau. Les paramètres ne s'enregistrent pas automatiquement.
+-->

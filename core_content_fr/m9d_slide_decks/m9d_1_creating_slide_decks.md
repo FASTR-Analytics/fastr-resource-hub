@@ -11,10 +11,8 @@ paginate: true
 
 ## Activité: Créez votre première présentation
 
-**Voir le document distribué :** *Créez votre première présentation*
+**Document :** *Créez votre première présentation*
 
 **~10 min**
-
-*Les exemplaires imprimés sont distribués à ce moment de la session.*
 
 </div>

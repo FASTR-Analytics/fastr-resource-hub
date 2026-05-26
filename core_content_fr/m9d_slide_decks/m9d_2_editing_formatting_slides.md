@@ -9,12 +9,19 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activité: Éditer et finaliser vos diapositives
+## Activité : Éditer et finaliser vos diapositives
 
-**Voir le document distribué :** *Éditer et finaliser vos diapositives*
+**Document :** *Éditer et finaliser vos diapositives*
 
 **~20 min**
 
-*Les exemplaires imprimés sont distribués à ce moment de la session.*
-
 </div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- L'IA génère le contenu, mais la mise en page demande souvent un ajustement : le texte peut sembler tassé, les graphiques peuvent avoir besoin de plus de place. L'éditeur de diapositives sert à corriger cela.
+- Faire un avant/après rapide : montrer une diapo avec une visualisation tassée, ouvrir l'éditeur, glisser le séparateur de redimensionnement pour donner plus de place au graphique, enregistrer.
+- Quatre passes de revue par diapo : vérification d'exactitude, redimensionner les zones de texte, redimensionner/repositionner les graphiques, ajuster mise en page et espacement. Les réécritures structurelles retournent à l'IA ; les petits ajustements se font dans l'éditeur.
+- Le critère : pourriez-vous montrer cette diapo à un Directeur sans vous excuser ?
+- À surveiller : les participants qui ne voient pas le changement de curseur sur le séparateur — le signaler explicitement. Un graphique encore tassé après redimensionnement doit être simplifié dans l'onglet Visualisations, pas dans l'éditeur de diapos.
+-->

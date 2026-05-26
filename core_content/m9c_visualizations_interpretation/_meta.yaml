@@ -1,53 +1,29 @@
 slides:
-- file: m9c_0a_creating_visualizations_intro.md
-  order: 0.01
-  variant: full
-  title: Creating visualizations
-- file: m9c_0b_choosing_chart_type.md
-  order: 0.02
-  variant: full
-  title: Choosing the right chart type
-- file: m9c_1_creating_visualizations_manually.md
+- file: m9c_3_interpreting_visualizations.md
   order: 1.0
   variant: full
-  title: 'Activity: Creating visualizations manually'
-- file: m9c_2_creating_visualizations_ai.md
+  title: 'Activity: How to read a FASTR visualisation'
+- file: m9c_1_creating_visualizations_manually.md
   order: 2.0
   variant: full
-  title: 'Activity: Creating visualizations using AI Assistant & save to user folder'
-- file: m9c_2a_explore_with_ai.md
-  order: 2.01
-  variant: full
-  title: Explore with the AI Assistant
-- file: m9c_3_interpreting_visualizations.md
+  title: 'Activity: Create your first visualisation'
+- file: m9c_2_creating_visualizations_ai.md
   order: 3.0
   variant: full
-  title: How to interpret a FASTR visualization
-- file: m9c_3a_interpreting_example.md
-  order: 3.01
-  variant: full
-  title: 'Example: Interpreting a visualization'
-- file: m9c_3a2_interpreting_narrative.md
-  order: 3.012
-  variant: full
-  title: 'Example narrative: ANC1 and ANC4 trends'
+  title: 'Activity: Build a visualisation with the AI Assistant'
 - file: m9c_3b_interpreting_activity.md
-  order: 3.02
-  variant: full
-  title: 'Activity: Interpreting visualizations in slide decks'
-- file: m9c_3c_try_it_yourself.md
-  order: 3.03
-  variant: full
-  title: Try it yourself
-- file: m9c_4_interpreting_with_ai.md
   order: 4.0
   variant: full
-  title: 'Activity: Creating interpretations with the AI Assistant'
-- file: m9c_5_disruption_exercise.md
+  title: 'Activity: Write an interpretation'
+- file: m9c_4_interpreting_with_ai.md
   order: 5.0
+  variant: full
+  title: 'Activity: Let the AI draft an interpretation'
+- file: m9c_5_disruption_exercise.md
+  order: 6.0
   variant: full
   title: Has there been a disruption?
 - file: m9c_5a_dig_deeper.md
-  order: 5.01
+  order: 6.01
   variant: full
   title: 'Dig deeper: is it real or a data issue?'

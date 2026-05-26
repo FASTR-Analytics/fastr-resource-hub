@@ -3,16 +3,25 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Y a-t-il eu une perturbation ?
+<div class="activity-pointer">
 
-**Exercice rapide**
+![h:90](../../resources/icons/hands_on.svg)
 
-Les volumes de services restent largement stables jusqu'à présent en 2025. Mais cette stabilité peut refléter une continuité temporaire du financement et du personnel.
+## Activité : Application — repérer une perturbation
 
-**À considérer :**
-- La mesure simple de l'utilisation des services est moins dépendante des intrants — la fréquentation peut être stable, mais la qualité peut avoir diminué
-- Le contexte est essentiel — comprendre comment le financement, les ressources humaines et les contraintes de qualité interagissent est primordial
-- Les enquêtes régulières dans les établissements aident à évaluer si les intrants essentiels et la capacité opérationnelle sont en place
+**Document :** *Application — repérer une perturbation*
 
-*Consultez le graphique de perturbation CPN1 de votre pays. Y a-t-il eu une perturbation ? De quel contexte supplémentaire auriez-vous besoin pour interpréter cette tendance ?*
+**~25 min**
+
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Activité 6 (synthèse) du guide du facilitateur m9c. Équipes pays, en pratique.
+- Rien de nouveau à démontrer. Mettre en place en rappelant aux équipes le cadre en 6 étapes et la structure de constat en trois parties.
+- Message clé : une baisse d'un seul mois est généralement du bruit. Cherchez une baisse soutenue, trois mois ou plus. Des volumes stables peuvent quand même signifier une couverture en baisse si la population croît.
+- À surveiller : les équipes qui qualifient une baisse d'un seul mois de perturbation. Orientez-les vers des baisses soutenues (3 mois et plus). Utilisez le partage avec le groupe pour faire ressortir et corriger les constats faibles.
+- C'est la preuve que le module a fonctionné.
+-->

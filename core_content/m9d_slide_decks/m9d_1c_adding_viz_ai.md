@@ -11,10 +11,8 @@ paginate: true
 
 ## Activity: Add a visualisation (with the AI Assistant)
 
-**See the participant handout:** *Add a visualisation (with the AI Assistant)*
+**Handout:** *Add a visualisation (with the AI Assistant)*
 
 **~15 min**
-
-*Print copies are distributed at this point in the session.*
 
 </div>

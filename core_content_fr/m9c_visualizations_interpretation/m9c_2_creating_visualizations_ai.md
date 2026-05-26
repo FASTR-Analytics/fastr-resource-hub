@@ -3,19 +3,28 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Création de visualisations avec l'assistant IA et sauvegarde dans le dossier utilisateur
+<div class="activity-pointer">
 
-**Je fais, nous faisons, vous faites**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Je fais :** Le facilitateur crée un graphique linéaire de séries temporelles des volumes mensuels CPN1 (12 derniers mois) à l'aide de l'assistant IA et l'enregistre dans un dossier
+## Activité : Construire une visualisation avec l'Assistant IA
 
-**Nous faisons :** Ensemble, nous créons un graphique linéaire de séries temporelles des volumes mensuels BCG (12 derniers mois) à l'aide de l'assistant IA et l'enregistrons dans un dossier
+**Document :** *Construire une visualisation avec l'Assistant IA*
 
-**Vous faites :** Créez un graphique de séries temporelles pour un indicateur de votre choix (12 derniers mois) à l'aide de l'assistant IA et enregistrez-le dans votre propre dossier
+**~15 min**
 
-**Prompt :** *"Montre-moi un graphique de séries temporelles des visites CPN1 sur les 12 derniers mois en utilisant les données ajustées (après ajustement des valeurs aberrantes et de la complétude)"*
+</div>
 
-*Données ajustées = données corrigées pour les rapports manquants (complétude) et les valeurs extrêmes (valeurs aberrantes) afin de donner une image plus fidèle.*
-
-*Nous sommes dans l'onglet Visualisations*
+<!--
+NOTES DU PRÉSENTATEUR :
+- Activité 4 du guide du facilitateur m9c. Pratique, individuelle. Onglet : Visualisations.
+- Démo en direct d'abord : taper une demande de graphique et montrer où vérifier que l'IA a utilisé le bon indicateur, la bonne période et, surtout, les données ajustées vs brutes.
+- La trame « je fais, nous faisons, vous faites » est dans le document.
+  - Je fais : construire une série temporelle des volumes mensuels CPN1 (12 derniers mois) avec l'IA et l'enregistrer.
+  - Nous faisons : faire la même chose pour BCG (12 derniers mois) et l'enregistrer.
+  - Vous faites : construire un graphique pour un indicateur de votre choix et l'enregistrer.
+- Prompt de départ : « Montre-moi un graphique de séries temporelles des visites CPN1 sur les 12 derniers mois en utilisant les données ajustées ».
+- Message clé : avant d'enregistrer, vérifiez que l'IA a utilisé les données ajustées (pas brutes) et la période demandée. L'IA devine souvent.
+-->

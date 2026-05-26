@@ -3,15 +3,29 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activité : Interprétation de visualisations dans les diaporamas
+<div class="activity-pointer">
 
-**Je fais, nous faisons, vous faites**
+![h:90](../../resources/icons/hands_on.svg)
 
-**Je fais :** Le facilitateur crée une diapositive en insérant une visualisation et en ajoutant une interprétation — en tenant compte de l'indicateur, des valeurs, du contexte et des conclusions
+## Activité : Rédiger une interprétation
 
-**Nous faisons :** Ensemble, nous interprétons une visualisation et ajoutons l'interprétation dans un diaporama
+**Document :** *Rédiger une interprétation pour un graphique*
 
-**Vous faites :** Interprétez une visualisation de votre choix et ajoutez-la à votre présentation
+**~20 min**
 
-*Nous sommes dans l'onglet Présentations*
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Activité 3 du guide du facilitateur m9c. Exercice d'écriture individuel.
+- Démo d'abord : montrer un titre faible et un titre fort côte à côte. « Résultats de couverture » contre un titre qui énonce le constat. Rend concrète la différence entre décrire et conclure.
+- La trame « je fais, nous faisons, vous faites » est dans le document.
+  - Je fais : insérer une viz sur une diapo et rédiger une interprétation en trois parties (titre, ce que vous voyez, ce que cela signifie).
+  - Nous faisons : interpréter ensemble une seconde viz et l'ajouter à un diaporama.
+  - Vous faites : interpréter une viz de votre choix et l'ajouter à votre propre présentation.
+- Onglet : Présentations.
+- Message clé : le titre est la conclusion, pas le sujet. « Ce que vous voyez » est factuel. « Ce que cela signifie » nomme une personne ou une prochaine étape.
+- À surveiller : des titres purement descriptifs ; faits mélangés à l'interprétation ; « et alors » vagues.
+-->

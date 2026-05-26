@@ -11,10 +11,8 @@ paginate: true
 
 ## Activité: Ajouter une visualisation (avec l'Assistant IA)
 
-**Voir le document distribué :** *Ajouter une visualisation (avec l'Assistant IA)*
+**Document :** *Ajouter une visualisation (avec l'Assistant IA)*
 
 **~15 min**
-
-*Les exemplaires imprimés sont distribués à ce moment de la session.*
 
 </div>

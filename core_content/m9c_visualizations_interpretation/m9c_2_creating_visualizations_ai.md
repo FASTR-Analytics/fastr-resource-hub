@@ -3,19 +3,28 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## Activity: Creating visualizations using AI Assistant & save to user folder
+<div class="activity-pointer">
 
-**I do, we do, you do**
+![h:90](../../resources/icons/hands_on.svg)
 
-**I do:** Facilitator creates a time-series line chart of ANC1 monthly volumes (past 12 months) using the AI Assistant and saves it to a folder
+## Activity: Build a visualisation with the AI Assistant
 
-**We do:** Together, we create a time-series line chart of BCG monthly volumes (past 12 months) using the AI Assistant and save it to a folder
+**Handout:** *Build a visualisation with the AI Assistant*
 
-**You do:** Create a time-series chart for an indicator of your choice (past 12 months) using the AI Assistant and save it to your own folder
+**~15 min**
 
-**Prompt:** *"Show me a time-series chart showing ANC1 visits in the last 12 months using the adjusted data (after outlier and completeness adjustments)"*
+</div>
 
-*Adjusted data = data that has been corrected for missing reports (completeness) and extreme values (outliers) to give a more accurate picture.*
-
-*We are in the Visualizations tab*
+<!--
+PRESENTER NOTES:
+- Activity 4 from the m9c facilitator guide. Hands-on, individual. Working tab: Visualisations.
+- Live demo first: type one chart request and point out where to confirm the AI used the right indicator, period, and (critically) adjusted vs raw data.
+- I do / we do / you do scaffolding belongs in the handout.
+  - I do: build a time-series of ANC1 monthly volumes (past 12 months) with the AI and save it.
+  - We do: build the same for BCG (past 12 months) and save it.
+  - You do: build a chart for an indicator of your choice and save it.
+- Default starter prompt: "Show me a time-series chart of ANC1 visits in the last 12 months using the adjusted data".
+- Key message: before saving, check the AI used adjusted data (not raw) and the period you actually asked for. The AI often guesses.
+-->

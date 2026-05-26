@@ -3,18 +3,32 @@ marp: true
 theme: fastr
 paginate: true
 ---
+<!-- _class: activity-pointer -->
 
-## How to interpret a FASTR visualization
+<div class="activity-pointer">
 
-A step-by-step framework for reading any figure:
+![h:90](../../resources/icons/hands_on.svg)
 
-| Step | Question |
-|------|----------|
-| **1. What indicator?** | Identify the health indicator or metric being shown |
-| **2. What level & period?** | Note the geographic level and the time period covered |
-| **3. What is being compared?** | Actual vs. expected (what was predicted based on past trends)? Districts vs. each other? Changes over time? |
-| **4. Read the values** | What are the magnitudes? Are they high, low, or changing? |
-| **5. What stands out?** | Identify trends, gaps, spikes, disruptions, or anomalies |
-| **6. So what?** | What does this mean for service delivery? What action does it suggest? |
+## Activity: How to read a FASTR visualisation
 
-*Tip: Always check the legend, axis labels, and any footnotes before interpreting.*
+**Handout:** *How to read a FASTR visualisation*
+
+**~10 min**
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- Activity 1 from the m9c facilitator guide. Individual, then pairs.
+- Walk the 6-step framework once on a real chart, naming each step aloud, before participants try it on their own.
+- The 6 steps (live in the handout):
+  1. What indicator is shown?
+  2. What geographic level and time period?
+  3. What is being compared (actual vs expected, districts, time)?
+  4. What are the actual values?
+  5. What stands out (trends, spikes, gaps)?
+  6. So what — what does this mean for service delivery?
+- The worked example (ANC1 and ANC4 trends) lives in the handout, not on a slide.
+- Key message: check the legend, axes, and footnotes before interpreting. Read the y-axis aloud first — misreading it is the most common mistake.
+- Watch for: jumping to "what it means" before establishing "what it shows".
+-->
