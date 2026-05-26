@@ -1,49 +1,36 @@
 slides:
-# Module intro
 - file: m9f_0_intro.md
-  order: 0.4
+  order: 0.0
   variant: full
   title: Get useful answers from the AI — without surprises
-  status: new
-
-# Phase 1 — Build a clear prompt (the foundation)
 - file: m9f_0b_good_vs_vague_prompt.md
-  order: 0.5
+  order: 0.02
   variant: full
-  title: Try it yourself — build a prompt
+  title: 'Activity: Build a clear prompt'
+- file: m9f_1_explore_with_ai_assistant.md
+  order: 1.0
+  variant: full
+  title: 'Activity: Explore with the AI Assistant'
 - file: m9f_1a_hallucination.md
-  order: 0.6
+  order: 1.01
   variant: full
   title: When the AI makes things up
-  status: new
 - file: m9f_1b_editing_vs_generating.md
-  order: 0.7
+  order: 1.02
   variant: full
   title: Two ways to ask for help
-  status: new
-
-# Phase 2 — Ground the AI + practice
-- file: m9f_2a_source_grounding.md
-  order: 1.5
-  variant: full
-  title: Hand the AI the right materials
-  status: new
-- file: m9f_1_explore_with_ai_assistant.md
-  order: 1.7
-  variant: full
-  title: Explore with the AI Assistant
-
-# Phase 3 — Iterating with the AI
 - file: m9f_2_iterative_vs_single_prompts.md
   order: 2.0
   variant: full
-  title: 'Exercise: AI & iterative conversation'
+  title: 'Activity: Iterative vs single-prompt'
+- file: m9f_2a_source_grounding.md
+  order: 2.01
+  variant: full
+  title: Hand the AI the right materials
 - file: m9f_3_refining_a_prompt.md
   order: 3.0
   variant: full
-  title: 'Self-paced exercise: Refining a prompt'
-
-# Phase 4 — Production tools + verification
+  title: 'Activity: Refine your prompt (self-paced)'
 - file: m9f_4_introducing_prompt_library.md
   order: 4.0
   variant: full
@@ -55,7 +42,7 @@ slides:
 - file: m9f_5_working_from_pdf_template.md
   order: 5.0
   variant: full
-  title: 'Alternative: Working from a PDF template'
+  title: 'Activity: Use a previous report as a template'
 - file: m9f_6_example_prompts.md
   order: 6.0
   variant: full
@@ -64,9 +51,7 @@ slides:
   order: 7.0
   variant: full
   title: Give the AI's answer a quick read
-  status: new
 - file: m9f_7a_verify_output.md
-  order: 7.5
+  order: 7.01
   variant: full
   title: 'Activity: Verify the output'
-  status: new

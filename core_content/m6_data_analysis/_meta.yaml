@@ -63,6 +63,10 @@ slides:
   order: 9.01
   variant: full
   title: Service cascade and dropout analysis
+- file: m6_9ab_calculating_interpreting_dropout.md
+  order: 9.0102
+  variant: full
+  title: Calculating and interpreting dropout
 - file: m6_10_denominator_cascade_illustration.md
   order: 10.0
   variant: full

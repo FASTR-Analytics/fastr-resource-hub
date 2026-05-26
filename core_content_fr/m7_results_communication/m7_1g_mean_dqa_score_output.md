@@ -4,22 +4,21 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
-## Sortie du score AQD moyen
+## Sortie du score EQD moyen
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
-![Score AQD moyen](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+![Score EQD moyen](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
-**Ce que vous voyez :** Heatmap montrant le score AQD moyen des établissements par indicateur et par région.
+**Ce que vous voyez :** Carte thermique montrant le score EQD moyen des établissements par indicateur et par région.
 
-**Formule :** AQD moyen = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (valeurs totales) × 100
+**Formule :** EQD moyen = (valeurs complètes, sans valeurs aberrantes et cohérentes) / (valeurs totales) × 100
 
-**Interprétation :** Montre à quel point les établissements sont proches de répondre à tous les critères de qualité. Un score de 100% signifie que les données passent toutes les vérifications AQD.
+**Interprétation :** Montre à quel point les établissements sont proches de répondre à tous les critères de qualité. Un score de 100% signifie que les données passent toutes les vérifications EQD.
 
 </div>
 </div>

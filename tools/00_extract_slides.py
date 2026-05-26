@@ -100,6 +100,7 @@ TOPIC_NAMES = {
     # m2 - Data Extraction (from 02_data_extraction.md)
     'm2_0': 'show_of_hands_extraction',
     'm2_1': 'why_extract_data',
+    'm2_1a': 'extract_counts_not_percentages',
     'm2_2': 'tools_for_data_extraction',
     'm2_2a': 'fastr_direct_import',
     'm2_2b': 'data_downloader',
@@ -256,8 +257,19 @@ TOPIC_NAMES = {
     'm7_1n': 'coverage_output_national',
     'm7_1o': 'coverage_output_subnational',
     'm7_2': 'data_visualization_communication',
+    'm4_3ab': 'outlier_making_the_call',
+    'm4_s3bb': 'outlier_detection_output',
+    'm6_9ab': 'calculating_interpreting_dropout',
     'm7_3': 'using_data_for_decision_making',
+    'm7_4': 'understanding_audience_user_mapping',
+    'm7_4a': 'activity_map_your_users',
+    'm7_5': 'storytelling_with_data',
+    'm7_5a': 'from_data_to_story_example',
+    'm7_6': 'linking_results_to_actions',
+    'm7_6a': 'activity_link_results_to_actions',
     'm7_6b': 'three_spheres_of_influence',
+    'm7_7': 'building_roadmap_sustained_use',
+    'm7_7a': 'activity_country_action_planning',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_0': 'hfa_implementation_status',
@@ -368,18 +380,18 @@ def parse_slide_id(slide_id):
 
     Returns (module_num, topic_num, suffix) or (None, None, None) if invalid.
     """
-    # AI Assistant format: mai_1, mai_2, etc.
-    match = re.match(r'^mai_(\d+)([a-z]?\d*)$', slide_id)
+    # AI Assistant format: mai_1, mai_2, mai_1a, mai_1ab, etc.
+    match = re.match(r'^mai_(\d+)([a-z]*\d*)$', slide_id)
     if match:
         return 'ai', int(match.group(1)), match.group(2)
 
-    # Standard format: m4_1, m4_1a, or m4_1a2
-    match = re.match(r'^m(\d+)_(\d+)([a-z]?\d*)$', slide_id)
+    # Standard format: m4_1, m4_1a, m4_1a2, m4_3ab, etc.
+    match = re.match(r'^m(\d+)_(\d+)([a-z]*\d*)$', slide_id)
     if match:
         return int(match.group(1)), int(match.group(2)), match.group(3)
 
-    # Summary/condensed format: m4_s1, m5_s2, m4_s3b, etc.
-    match = re.match(r'^m(\d+)_(s\d+[a-z]?)$', slide_id)
+    # Summary/condensed format: m4_s1, m5_s2, m4_s3b, m4_s3bb, etc.
+    match = re.match(r'^m(\d+)_(s\d+[a-z]*)$', slide_id)
     if match:
         return int(match.group(1)), match.group(2), ''
 

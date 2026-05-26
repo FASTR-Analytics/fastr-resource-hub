@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie de couverture : Comparaison infranationale
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Couverture infranationale](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **Ce que vous voyez :** Estimations de couverture par zone infranationale, permettant une comparaison géographique.
 

@@ -8,11 +8,11 @@ slides:
   variant: full
   title: Choosing the right chart type
 - file: m9c_1_creating_visualizations_manually.md
-  order: 1
+  order: 1.0
   variant: full
   title: 'Activity: Creating visualizations manually'
 - file: m9c_2_creating_visualizations_ai.md
-  order: 2
+  order: 2.0
   variant: full
   title: 'Activity: Creating visualizations using AI Assistant & save to user folder'
 - file: m9c_2a_explore_with_ai.md
@@ -20,7 +20,7 @@ slides:
   variant: full
   title: Explore with the AI Assistant
 - file: m9c_3_interpreting_visualizations.md
-  order: 3
+  order: 3.0
   variant: full
   title: How to interpret a FASTR visualization
 - file: m9c_3a_interpreting_example.md
@@ -40,11 +40,11 @@ slides:
   variant: full
   title: Try it yourself
 - file: m9c_4_interpreting_with_ai.md
-  order: 4
+  order: 4.0
   variant: full
   title: 'Activity: Creating interpretations with the AI Assistant'
 - file: m9c_5_disruption_exercise.md
-  order: 5
+  order: 5.0
   variant: full
   title: Has there been a disruption?
 - file: m9c_5a_dig_deeper.md

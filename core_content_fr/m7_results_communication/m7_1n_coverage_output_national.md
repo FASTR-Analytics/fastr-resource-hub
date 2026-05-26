@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie de couverture : Tendances nationales
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Couverture nationale](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **Ce que vous voyez :** Graphique linéaire montrant la couverture dans le temps. Noir = enquête, Gris = dérivé du SIGS, Rouge = projeté.
 

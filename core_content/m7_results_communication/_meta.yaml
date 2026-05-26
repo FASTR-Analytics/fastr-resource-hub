@@ -1,6 +1,6 @@
 slides:
 - file: m7_1_analytical_thinking_interpretation.md
-  order: 1
+  order: 1.0
   variant: full
   title: Analytical thinking & interpretation
 - file: m7_1a_analytical_thinking_interpretation_continued.md
@@ -15,10 +15,6 @@ slides:
   order: 1.03
   variant: full
   title: Interpreting FASTR module outputs
-- file: m7_1d2_completeness_output.md
-  order: 1.035
-  variant: full
-  title: Indicator completeness output
 - file: m7_1d_outliers_output.md
   order: 1.04
   variant: full
@@ -64,7 +60,7 @@ slides:
   variant: full
   title: 'Disruption output: Actual vs expected (subnational)'
 - file: m7_1n_coverage_output_national.md
-  order: 1.14
+  order: 1.1400000000000001
   variant: full
   title: 'Coverage output: National trends'
 - file: m7_1o_coverage_output_subnational.md
@@ -72,25 +68,13 @@ slides:
   variant: full
   title: 'Coverage output: Subnational comparison'
 - file: m7_2_data_visualization_communication.md
-  order: 2
+  order: 2.0
   variant: full
   title: Moving from data to key messages
-- file: m7_2b_data_visualization_communication.md
-  order: 2.001
-  variant: full
-  title: Try it yourself
 - file: m7_2a_data_visualization_communication_continued.md
   order: 2.01
   variant: full
   title: 'Example: result vs key takeaway'
-- file: m7_2a2_finding_statement_formula.md
-  order: 2.015
-  variant: full
-  title: Writing a finding statement
-- file: m7_2a2_finding_statement_formulab.md
-  order: 2.016
-  variant: full
-  title: Try it yourself
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
@@ -99,92 +83,51 @@ slides:
   order: 2.03
   variant: full
   title: Storytelling with data
-- file: m7_2cb_data_visualization_communication_continued.md
-  order: 2.031
-  variant: full
-  title: Structure your presentation like a story
 - file: m7_2d_data_visualization_communication_continued.md
   order: 2.04
   variant: full
   title: 'Example: developing a data story'
 - file: m7_3_using_data_for_decision_making.md
-  order: 3
+  order: 3.0
   variant: full
   title: Dissemination and data use roadmap
 - file: m7_3a_using_data_for_decision_making_continued.md
   order: 3.01
   variant: full
   title: Action plan for FASTR moving forward
-- file: m7_4_topic_4.md
-  order: 4
+- file: m7_4_understanding_audience_user_mapping.md
+  order: 4.0
   variant: full
   title: 'Understanding your audience: User mapping'
-- file: m7_4a_map_your_users.md
+- file: m7_4a_activity_map_your_users.md
   order: 4.01
   variant: full
   title: 'Activity: Map your users'
-  last_reviewed: &id001 2026-05-13
-- file: m7_5_topic_5.md
-  order: 5
+- file: m7_5_storytelling_with_data.md
+  order: 5.0
   variant: full
   title: Storytelling with data
-- file: m7_5a_topic_5a.md
+- file: m7_5a_from_data_to_story_example.md
   order: 5.01
   variant: full
   title: 'From data to story: Example'
-- file: m7_6_topic_6.md
-  order: 6
+- file: m7_6_linking_results_to_actions.md
+  order: 6.0
   variant: full
   title: Linking results to actions
-- file: m7_6a_link_results_to_actions.md
+- file: m7_6a_activity_link_results_to_actions.md
   order: 6.01
   variant: full
   title: 'Activity: Link your results to actions'
-  last_reviewed: *id001
 - file: m7_6b_three_spheres_of_influence.md
   order: 6.02
   variant: full
   title: Three spheres of influence
-  last_reviewed: 2026-05-13
-- file: m7_7_topic_7.md
-  order: 7
+- file: m7_7_building_roadmap_sustained_use.md
+  order: 7.0
   variant: full
   title: Building a roadmap for sustained use
-- file: m7_7a_country_action_planning.md
+- file: m7_7a_activity_country_action_planning.md
   order: 7.01
   variant: full
   title: 'Activity: Country action planning'
-  last_reviewed: *id001
-- file: m7_7b_post_workshop_roadmap.md
-  order: 7.02
-  variant: full
-  title: Post-workshop roadmap for FASTR
-  status: new
-- file: m7_s1_from_data_to_key_messages.md
-  order: 1
-  variant: condensed
-  title: From data to key messages
-- file: m7_s2a_finding_statement_formula.md
-  order: 1.5
-  variant: condensed
-  title: Writing a finding statement
-- file: m7_s2ab_finding_statement_formula.md
-  order: 1.501
-  variant: condensed
-  title: Try it yourself
-- file: m7_s2_storytelling_with_data.md
-  order: 2
-  variant: condensed
-  title: Storytelling with data
-- file: m7_s3_choosing_report_format.md
-  order: 3
-  variant: condensed
-  title: Choosing the right report format
-- file: m7_s4_linking_results_to_actions.md
-  order: 4
-  variant: condensed
-  title: Linking results to actions
-- file: m7_s5_three_spheres_of_influence.md
-  order: 5
-  variant: condensed
-  title: Three spheres of influence

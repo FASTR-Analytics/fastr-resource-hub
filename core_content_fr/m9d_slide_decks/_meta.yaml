@@ -4,27 +4,25 @@ slides:
   variant: full
   title: Créer des présentations
 - file: m9d_1_creating_slide_decks.md
-  order: 1
+  order: 1.0
   variant: full
-  title: 'Activité : Créer des diaporamas'
-- file: m9d_1b_adding_viz_manually.md
-  order: 1.005
-  variant: full
-  title: 'Activité : Ajouter des visualisations manuellement'
-  status: new
-- file: m9d_1c_adding_viz_ai.md
-  order: 1.006
-  variant: full
-  title: 'Activité : Ajouter des visualisations avec l''assistant IA'
-  status: new
+  title: 'Activité: Créez votre première présentation'
 - file: m9d_1a_adding_viz_interpretation_guide.md
   order: 1.01
   variant: full
-  title: Ajouter une visualisation et un texte d'interprétation à votre diapositive
-- file: m9d_2_editing_formatting_slides.md
-  order: 2
+  title: 'Référence: Ajouter une visualisation + texte d''interprétation'
+- file: m9d_1b_adding_viz_manually.md
+  order: 1.02
   variant: full
-  title: 'Votre prochaine tâche : Modifier et finaliser vos diapositives'
+  title: 'Activité: Ajouter une visualisation (manuellement)'
+- file: m9d_1c_adding_viz_ai.md
+  order: 1.03
+  variant: full
+  title: 'Activité: Ajouter une visualisation (avec l''Assistant IA)'
+- file: m9d_2_editing_formatting_slides.md
+  order: 2.0
+  variant: full
+  title: 'Activité: Éditer et finaliser vos diapositives'
 - file: m9d_2a_editing_why_it_matters.md
   order: 2.01
   variant: full
@@ -32,17 +30,17 @@ slides:
 - file: m9d_2b_open_slide_editor.md
   order: 2.02
   variant: full
-  title: 'Étape 1 : Ouvrir l''éditeur de diapositives'
+  title: 'Démo: Visite de l''éditeur (Étape 1 : ouvrir l''éditeur)'
 - file: m9d_2c_resize_text_visualization.md
   order: 2.03
   variant: full
-  title: 'Étape 2 : Redimensionner les zones de texte et de visualisation'
+  title: 'Démo: Visite de l''éditeur (Étape 2 : redimensionner)'
 - file: m9d_2d_other_edits.md
   order: 2.04
   variant: full
-  title: Autres modifications possibles
+  title: 'Démo: Visite de l''éditeur (autres éditions)'
 - file: m9d_3_formatting_text.md
-  order: 3
+  order: 3.0
   variant: full
   title: Formater le texte de votre rapport
 - file: m9d_3a_formatting_report_settings.md

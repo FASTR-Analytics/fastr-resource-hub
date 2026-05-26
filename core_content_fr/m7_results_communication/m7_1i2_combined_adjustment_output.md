@@ -4,18 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie d'ajustement combiné
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Ajustement combiné](../../resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
-**Ce que vous voyez :** Heatmap montrant l'effet net de la suppression des valeurs aberrantes et de l'imputation de la complétude sur les volumes de services.
+**Ce que vous voyez :** Carte thermique montrant l'effet net de la suppression des valeurs aberrantes et de l'imputation de la complétude sur les volumes de services.
 
 **Formule :** % de changement = (ajusté - original) / original × 100
 

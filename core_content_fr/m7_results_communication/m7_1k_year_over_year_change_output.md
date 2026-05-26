@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie d'utilisation des services : Variation d'une année sur l'autre
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Variation du volume de services](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **Ce que vous voyez :** Les barres montrent les volumes de services annuels par région. Les pourcentages indiquent la variation d'une année sur l'autre.
 

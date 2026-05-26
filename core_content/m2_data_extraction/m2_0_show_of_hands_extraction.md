@@ -6,7 +6,7 @@ paginate: true
 
 ## Show of hands...
 
-![w:120](../../resources/icons/raise-hand.svg)
+![w:120](../../resources/icons/raise-hand.png)
 
 Do you regularly extract data from DHIS2?
 

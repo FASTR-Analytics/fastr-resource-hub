@@ -1,56 +1,49 @@
 slides:
 - file: mai_1_ai_assistant_overview.md
-  order: 1
+  order: 1.0
   variant: full
   title: L'assistant IA
-  last_reviewed: &id001 2026-05-13
-- file: mai_3_ai_assistant_capabilities.md
-  order: 2
+- file: mai_2_ai_assistant_capabilities.md
+  order: 2.0
   variant: full
   title: Ce que l'assistant IA peut faire
-  last_reviewed: *id001
-- file: mai_4_ai_how_it_works.md
-  order: 2.02
+- file: mai_3_ai_ask_questions.md
+  order: 3.0
   variant: full
-  title: Comment fonctionne l'assistant IA
-  last_reviewed: *id001
-- file: mai_2_ai_accelerator_not_decider.md
-  order: 3
-  variant: full
-  title: L'IA est un accélérateur, pas un décideur
-  last_reviewed: *id001
-- file: mai_2b_four_skills_in_practice.md
-  order: 3.02
-  variant: full
-  title: Quatre habitudes pour vraiment bien travailler avec l'IA
-  last_reviewed: *id001
-- file: mai_4a_ai_conversations.md
-  order: 4
+  title: Posez des questions, obtenez des réponses
+- file: mai_4_ai_conversations.md
+  order: 4.0
   variant: full
   title: Comment fonctionnent les conversations
-  last_reviewed: *id001
-- file: mai_5_ai_little_value_example.md
-  order: 5
+- file: mai_5_ai_tips_better_answers.md
+  order: 5.0
   variant: full
-  title: Quand l'IA n'apporte que peu de valeur
-  last_reviewed: *id001
-- file: mai_5a_ai_helpful_example.md
-  order: 5.01
+  title: Conseils pour de meilleures réponses
+- file: mai_6_ai_capabilities_table.md
+  order: 6.0
   variant: full
-  title: Quand l'IA est utile
-  last_reviewed: *id001
-- file: mai_8_ai_what_happens_log_off.md
-  order: 8
+  title: Capacités de l'assistant IA
+- file: mai_7_ai_what_happens_log_off.md
+  order: 7.0
   variant: full
   title: Que se passe-t-il quand vous vous déconnectez
-  last_reviewed: *id001
-- file: mai_8a_ai_private_vs_shared.md
-  order: 8.01
+- file: mai_8_ai_private_vs_shared.md
+  order: 8.0
   variant: full
   title: Privé vs partagé sur les projets d'équipe
-  last_reviewed: *id001
-- file: mai_8b_ai_team_collaboration.md
-  order: 8.02
+- file: mai_9_ai_team_collaboration.md
+  order: 9.0
   variant: full
   title: Comment les équipes collaborent
-  last_reviewed: *id001
+- file: mai_10_ai_how_it_works.md
+  order: 10.0
+  variant: full
+  title: Comment fonctionne l'assistant IA
+- file: mai_11_ai_accelerator_not_decider.md
+  order: 11.0
+  variant: full
+  title: L'IA est un accélérateur, pas un décideur
+- file: mai_13_ai_practice_activity.md
+  order: 13.0
+  variant: full
+  title: 'Pratique : Utilisation de l''assistant IA'

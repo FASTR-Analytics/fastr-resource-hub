@@ -12,7 +12,17 @@ etc.), always do this **before** you write anything:
    - Both are bilingual; the FR mirror lives at `.../docs/fr/admin-guide/` and `.../docs/fr/user-guide/`.
 
 2. **Verify every claim against the platform code** before shipping:
-   - **Platform repo:** https://github.com/FASTR-Analytics/platform
+   - **Platform repo (web app, API, UI):** https://github.com/FASTR-Analytics/platform
+   - **Analytical modules repo (R/TS code that runs DQA, adjustment, service
+     utilization, denominators, coverage):**
+     https://github.com/FASTR-Analytics/modules
+     - `m001/` — Module 1: Data Quality Assessment (DQA)
+     - `m002/` — Module 2: Data Quality Adjustment
+     - `m003/` — Module 3: Service Utilization & Disruption Detection
+     - `m005/` — Module 5: Denominator calculation (Part 1 of coverage)
+     - `m006/` — Module 6: Coverage Estimation (Part 2 of coverage)
+     - There is no platform M4 — the numbering skips 4. Use M1/M2/M3/M5/M6
+       explicitly when writing about platform modules.
    - Do not trust assumptions, memory, or prior conversations — confirm in the
      docs and the code.
 
@@ -21,7 +31,7 @@ etc.), always do this **before** you write anything:
    the error into new material.
 
 Quick lookups: `gh api repos/FASTR-Analytics/<repo>/contents/<path>` (and `gh
-search code --repo FASTR-Analytics/platform <query>`). Clone locally if you need
+search code --repo FASTR-Analytics/<repo> <query>`). Clone locally if you need
 to grep or read heavily.
 
 ## Subsystem READMEs — where to look next

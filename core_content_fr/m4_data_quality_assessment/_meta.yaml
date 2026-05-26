@@ -52,6 +52,10 @@ slides:
   order: 3.01
   variant: full
   title: Investiguer une valeur aberrante signalée
+- file: m4_3ab_outlier_making_the_call.md
+  order: 3.0102
+  variant: full
+  title: Prendre la décision
 - file: m4_3b_outliers.md
   order: 3.02
   variant: full
@@ -112,6 +116,10 @@ slides:
   order: 3.02
   variant: condensed
   title: Détection des valeurs aberrantes
+- file: m4_s3bb_outlier_detection_output.md
+  order: 3.0202
+  variant: condensed
+  title: Sortie de la détection des valeurs aberrantes
 - file: m4_s3c_dqa_completeness.md
   order: 3.03
   variant: condensed

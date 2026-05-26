@@ -1,47 +1,37 @@
 slides:
 - file: m3_0_learning_objectives.md
-  order: 0.5
+  order: 0.0
   variant: full
   title: Ce que vous allez apprendre
-  status: new
-  last_reviewed: &id001 2026-05-13
 - file: m3_1_overview_of_platform.md
-  order: 1
+  order: 1.0
   variant: full
   title: Plateforme analytique FASTR
-  last_reviewed: *id001
 - file: m3_1b_overview_of_platform_continued.md
   order: 1.02
   variant: full
   title: Capacités de la plateforme
-  last_reviewed: *id001
 - file: m3_2a_accessing_platform_continued.md
   order: 2.01
   variant: full
   title: Instance pays
-  last_reviewed: *id001
-- file: m3_2c_accessing_platform_continued.md
+- file: m3_2b_accessing_platform_continued.md
   order: 2.02
   variant: full
-  title: Projets au sein d'une instance
-  last_reviewed: *id001
-- file: m3_2b_accessing_platform_continued.md
+  title: Rôles et autorisations des utilisateurs
+- file: m3_2c_accessing_platform_continued.md
   order: 2.03
   variant: full
-  title: Rôles et autorisations des utilisateurs
-  last_reviewed: *id001
+  title: Projets au sein d'une instance
 - file: m3_2e_configuring_platform_intro.md
   order: 2.05
   variant: full
   title: Configuration de la plateforme d'analyse
-  last_reviewed: *id001
 - file: m3_3_next_steps.md
-  order: 3
+  order: 3.0
   variant: full
   title: Prise en main de la plateforme
-  status: new
-  last_reviewed: *id001
 - file: m3_5_roadmap_2026.md
-  order: 5
+  order: 5.0
   variant: full
-  title: 'Feuille de route de la plateforme : ce qui arrive en 2026 et au-delà'
+  title: Feuille de route de la plateforme

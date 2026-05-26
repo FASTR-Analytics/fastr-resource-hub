@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader : Liste des établissements
 
-<div class="columns-image-right">
+<div class="columns">
 <div>
 
 ![Data Downloader facility list h:380](../../resources/screenshots/data_downloader/05_facility_list.png)

@@ -1,19 +1,16 @@
 slides:
 - file: m8_0_hfa_implementation_status.md
-  order: 0.5
+  order: 0.0
   variant: full
   title: HFA surveys across GFF partner countries
-  status: new
 - file: m8_0a_fastr_hfa_approach.md
-  order: 0.6
+  order: 0.01
   variant: full
   title: The FASTR approach to health facility surveys
-  status: new
 - file: m8_1_rapid_cycle_facility_survey.md
-  order: 1
+  order: 1.0
   variant: full
   title: Rapid-cycle facility survey
-  last_reviewed: 2026-05-13
 - file: m8_1a_hfa_survey_design.md
   order: 1.01
   variant: full
@@ -27,27 +24,22 @@ slides:
   variant: full
   title: Four types of indicators
 - file: m8_2_validity_phone_surveys.md
-  order: 1.5
+  order: 2.0
   variant: full
   title: Do phone surveys produce reliable results?
-  status: new
 - file: m8_3_snis_hfa_integration.md
-  order: 2
+  order: 3.0
   variant: full
   title: Why integrate HMIS and HFA surveys?
-  status: new
 - file: m8_3a_triangulation_example.md
-  order: 2.01
+  order: 3.01
   variant: full
   title: 'Example: is maternal mortality likely to improve?'
-  status: new
 - file: m8_3b_dhis2_chain.md
-  order: 2.02
+  order: 3.02
   variant: full
   title: What DHIS2 lets you measure
-  status: new
 - file: m8_3c_complete_results_chain.md
-  order: 2.03
+  order: 3.03
   variant: full
   title: The complete results chain
-  status: new

@@ -1,33 +1,29 @@
 slides:
 - file: m9i_1_report_overview.md
-  order: 1
+  order: 1.0
   variant: full
-  title: "What we're building"
+  title: What we're building
 - file: m9i_2_create_report.md
-  order: 2
+  order: 2.0
   variant: full
-  title: "Creating a report step by step"
+  title: 'Step 1: Create a report'
 - file: m9i_2a_markdown_cheatsheet.md
-  order: 2.5
+  order: 2.01
   variant: full
-  title: "Formatting cheatsheet"
-  status: new
+  title: Formatting cheatsheet
 - file: m9i_3_ai_draft.md
-  order: 3
+  order: 3.0
   variant: full
-  title: "Speed up with the AI assistant"
+  title: Speed up with the AI assistant
 - file: m9i_4_report_settings.md
-  order: 4
+  order: 4.0
   variant: full
-  title: "Report settings"
-  status: new
+  title: Report settings
 - file: m9i_5_expanding_report.md
-  order: 5
+  order: 5.0
   variant: full
-  title: "Expanding your report with more prompts"
-  status: new
+  title: Expanding your report with more prompts
 - file: m9i_5a_ai_verification_checklist.md
-  order: 5.1
+  order: 5.01
   variant: full
-  title: "Verification checklist — AI output"
-  status: new
+  title: Verification checklist — AI output

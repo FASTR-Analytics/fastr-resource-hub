@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie d'utilisation des services : Tendances dans le temps
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Utilisation des services dans le temps](../../resources/default_outputs/Module3_5_Number_of_services_reported.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **Ce que vous voyez :** Graphique linéaire montrant les volumes de services dans le temps par indicateur.
 

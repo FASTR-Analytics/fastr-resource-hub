@@ -1,39 +1,37 @@
 slides:
 - file: m5_1_approach_to_dq_adjustment.md
-  order: 1
+  order: 1.0
   variant: full
   title: Justification de l'ajustement de la qualité des données
 - file: m5_1b_approach_to_dq_adjustment.md
-  order: 1.001
+  order: 1.02
   variant: full
   title: Indicateurs exclus de l'ajustement
-  status: new
 - file: m5_2_adjustment_for_outliers.md
-  order: 2
+  order: 2.0
   variant: full
   title: Méthodologie d'ajustement des valeurs aberrantes
 - file: m5_3_adjustment_for_completeness.md
-  order: 3
+  order: 3.0
   variant: full
   title: Méthodologie de l'ajustement de la complétude
 - file: m5_s0_adjustment_how_it_works.md
-  order: 0
+  order: 0.0
   variant: condensed
   title: 'Correction des données : comment FASTR répare les problèmes'
 - file: m5_s1_dq_adjustment_overview.md
-  order: 1
+  order: 1.0
   variant: condensed
   title: Ajustement de la qualité des données
 - file: m5_s1a_why_adjust_for_outliers.md
   order: 1.01
   variant: condensed
-  title: Pourquoi ajuster pour les valeurs aberrantes ?
+  title: Pourquoi ajuster les valeurs aberrantes ?
 - file: m5_s2_dq_adjustment_interpretation.md
-  order: 2
+  order: 2.0
   variant: condensed
   title: Résultat de l'ajustement des valeurs aberrantes
 - file: m5_s2b_dq_adjustment_interpretation.md
-  order: 2.001
+  order: 2.02
   variant: condensed
   title: Résultat de l'ajustement de la complétude
-  status: new

@@ -4,16 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie de perturbation : Réel vs attendu (national)
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Réel vs attendu national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
 **Ce que vous voyez :** Comparaison nationale des volumes observés (réels) et prédits par le modèle (attendus).
 

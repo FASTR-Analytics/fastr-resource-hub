@@ -4,15 +4,15 @@ slides:
   variant: full
   title: Créer des visualisations
 - file: m9c_0b_choosing_chart_type.md
-  order: 0.5
+  order: 0.02
   variant: full
   title: Choisir le bon type de graphique
 - file: m9c_1_creating_visualizations_manually.md
-  order: 1
+  order: 1.0
   variant: full
   title: 'Activité : Création manuelle de visualisations'
 - file: m9c_2_creating_visualizations_ai.md
-  order: 2
+  order: 2.0
   variant: full
   title: 'Activité : Création de visualisations avec l''assistant IA et sauvegarde
     dans le dossier utilisateur'
@@ -21,7 +21,7 @@ slides:
   variant: full
   title: Explorer avec l'assistant IA
 - file: m9c_3_interpreting_visualizations.md
-  order: 3
+  order: 3.0
   variant: full
   title: Comment interpréter une visualisation FASTR
 - file: m9c_3a_interpreting_example.md
@@ -29,30 +29,26 @@ slides:
   variant: full
   title: 'Exemple : Interpréter une visualisation'
 - file: m9c_3a2_interpreting_narrative.md
-  order: 3.02
+  order: 3.012
   variant: full
   title: 'Exemple narratif : Tendances CPN1 et CPN4'
-  status: new
 - file: m9c_3b_interpreting_activity.md
-  order: 3.03
+  order: 3.02
   variant: full
   title: 'Activité : Interprétation de visualisations dans les diaporamas'
-  status: new
 - file: m9c_3c_try_it_yourself.md
-  order: 3.04
+  order: 3.03
   variant: full
   title: Essayez par vous-même
-  status: new
 - file: m9c_4_interpreting_with_ai.md
-  order: 4
+  order: 4.0
   variant: full
   title: 'Activité : Création d''interprétations avec l''assistant IA'
 - file: m9c_5_disruption_exercise.md
-  order: 5
+  order: 5.0
   variant: full
   title: Y a-t-il eu une perturbation ?
 - file: m9c_5a_dig_deeper.md
   order: 5.01
   variant: full
   title: 'Creuser davantage : est-ce réel ou un problème de données ?'
-  status: new

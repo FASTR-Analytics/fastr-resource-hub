@@ -1,6 +1,6 @@
 slides:
 - file: m5_1_approach_to_dq_adjustment.md
-  order: 1
+  order: 1.0
   variant: full
   title: Rationale for data quality adjustment
 - file: m5_1b_approach_to_dq_adjustment.md
@@ -8,19 +8,19 @@ slides:
   variant: full
   title: Indicators excluded from adjustment
 - file: m5_2_adjustment_for_outliers.md
-  order: 2
+  order: 2.0
   variant: full
   title: Outlier adjustment methodology
 - file: m5_3_adjustment_for_completeness.md
-  order: 3
+  order: 3.0
   variant: full
   title: Completeness adjustment methodology
 - file: m5_s0_adjustment_how_it_works.md
-  order: 0
+  order: 0.0
   variant: condensed
   title: 'Data correction: how FASTR fixes problems'
 - file: m5_s1_dq_adjustment_overview.md
-  order: 1
+  order: 1.0
   variant: condensed
   title: Data quality adjustment
 - file: m5_s1a_why_adjust_for_outliers.md
@@ -28,7 +28,7 @@ slides:
   variant: condensed
   title: Why adjust for outliers?
 - file: m5_s2_dq_adjustment_interpretation.md
-  order: 2
+  order: 2.0
   variant: condensed
   title: Outlier adjustment output
 - file: m5_s2b_dq_adjustment_interpretation.md

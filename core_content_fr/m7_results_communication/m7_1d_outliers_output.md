@@ -4,18 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: output -->
 ## Sortie de détection des valeurs aberrantes
 
-<div class="output-layout">
-<div class="output-viz">
+<div style="display: flex; gap: 1em; align-items: flex-start;">
+<div style="flex: 1.2;">
 
 ![Sortie valeurs aberrantes](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 </div>
-<div class="output-text">
+<div style="flex: 1; font-size: 0.85em;">
 
-**Ce que vous voyez :** Heatmap montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
+**Ce que vous voyez :** Carte thermique montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
 
 **Formule :** % de valeurs aberrantes = (valeurs signalées / valeurs totales) × 100
 

@@ -4,25 +4,25 @@ slides:
   variant: full
   title: Creating slide decks
 - file: m9d_1_creating_slide_decks.md
-  order: 1
+  order: 1.0
   variant: full
-  title: 'Activity: Creating slide decks'
+  title: 'Activity: Create your first slide deck'
 - file: m9d_1a_adding_viz_interpretation_guide.md
   order: 1.01
   variant: full
-  title: Add a visualization and interpretation text to your content slide
+  title: 'Reference: Add a visualisation + interpretation text'
 - file: m9d_1b_adding_viz_manually.md
   order: 1.02
   variant: full
-  title: 'Activity: Adding visualizations manually'
+  title: 'Activity: Add a visualisation (manually)'
 - file: m9d_1c_adding_viz_ai.md
   order: 1.03
   variant: full
-  title: 'Activity: Adding visualizations using AI Assistant'
+  title: 'Activity: Add a visualisation (with the AI Assistant)'
 - file: m9d_2_editing_formatting_slides.md
-  order: 2
+  order: 2.0
   variant: full
-  title: 'Your next task: Edit and finalize your slides'
+  title: 'Activity: Edit and finalise your slides'
 - file: m9d_2a_editing_why_it_matters.md
   order: 2.01
   variant: full
@@ -30,17 +30,17 @@ slides:
 - file: m9d_2b_open_slide_editor.md
   order: 2.02
   variant: full
-  title: 'Step 1: Open the slide editor'
+  title: 'Demo: Editor walkthrough (Step 1: open editor)'
 - file: m9d_2c_resize_text_visualization.md
   order: 2.03
   variant: full
-  title: 'Step 2: Resize the text and visualization areas'
+  title: 'Demo: Editor walkthrough (Step 2: resize)'
 - file: m9d_2d_other_edits.md
   order: 2.04
   variant: full
-  title: Other edits you can make
+  title: 'Demo: Editor walkthrough (other edits)'
 - file: m9d_3_formatting_text.md
-  order: 3
+  order: 3.0
   variant: full
   title: Formatting your report text
 - file: m9d_3a_formatting_report_settings.md

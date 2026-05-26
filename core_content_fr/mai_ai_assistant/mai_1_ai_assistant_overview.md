@@ -6,16 +6,16 @@ paginate: true
 
 ## L'assistant IA
 
-La plateforme FASTR inclut un assistant IA — un outil intégré à qui vous pouvez poser des questions et donner des tâches, en langage courant.
+La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 
-**Pourquoi c'est important :** Les équipes de santé ont souvent plus de données que de temps pour les analyser
+**Contexte :** De nombreux systèmes de santé disposent de plus de données que de capacité à les analyser
 
-- Il y a beaucoup de données, mais pas toujours assez de temps pour les examiner en détail
-- Les différentes équipes ont des niveaux d'expérience variés en analyse de données
-- Rédiger des rapports et expliquer ce que les données signifient prend du temps et des compétences
+- Le personnel S&E a souvent peu de temps pour des analyses approfondies
+- Les compétences analytiques varient selon les équipes et les régions
+- Transformer les données en insights narratifs nécessite des connaissances techniques et contextuelles
 
-**Ce qu'il fait :** L'assistant IA vous aide en :
+**Ce qu'il fait :** L'assistant IA aide à combler cet écart en :
 
-- Expliquant ce qui se passe dans vos données, en langage clair
-- Créant des ébauches de rapports et des messages clés que vous pouvez vérifier
-- Répondant à vos questions sur les données ou le fonctionnement de la plateforme
+- Expliquant les tendances et les patterns en langage clair
+- Générant des ébauches de rapports et des messages clés
+- Répondant aux questions sur les données ou la méthodologie

@@ -1,6 +1,6 @@
 slides:
 - file: m9g_1_fastr_quiz.md
-  order: 1
+  order: 1.0
   variant: full
   title: FASTR quiz
 - file: m9g_1b_fastr_quiz.md

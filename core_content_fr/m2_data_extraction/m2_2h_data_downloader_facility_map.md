@@ -6,7 +6,7 @@ paginate: true
 
 ## Data Downloader : Carte des établissements
 
-<div class="columns-image-right">
+<div class="columns">
 <div>
 
 ![Data Downloader facility map h:380](../../resources/screenshots/data_downloader/06_facility_map.png)
