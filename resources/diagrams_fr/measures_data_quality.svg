@@ -1,88 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
-  <style>
-    .title { font-family: Arial, sans-serif; font-size: 24px; fill: #4a5568; }
-    .title-teal { font-family: Arial, sans-serif; font-size: 24px; fill: #0d7377; }
-    .center-text { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #1e3a5f; }
-    .circle-text { font-family: Arial, sans-serif; font-size: 14px; fill: #4a5568; }
-    .annotation { font-family: Arial, sans-serif; font-size: 11px; fill: #4a5568; }
-    .box-text { font-family: Arial, sans-serif; font-size: 16px; fill: white; font-weight: 500; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ MESURES DE QUALITÉ DES DONNÉES — comparaison à deux panneaux ============ -->
 
-  <!-- LEFT DIAGRAM: Mesures générales -->
+  <!-- ===== PANNEAU GAUCHE — Mesures générales ===== -->
+  <text x="175" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">MESURES GÉNÉRALES</text>
 
-  <!-- Title -->
-  <text x="250" y="35" text-anchor="middle" class="title">Mesures générales</text>
+  <rect x="15" y="50" width="320" height="368" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="15" y="64" width="4" height="340" fill="#D0CB17"/>
 
-  <!-- Outer gray arc/ring -->
-  <circle cx="250" cy="240" r="130" fill="none" stroke="#9ca3af" stroke-width="12"/>
+  <g stroke="#E4E7E5" stroke-width="1">
+    <line x1="40" y1="140" x2="320" y2="140"/>
+    <line x1="40" y1="232" x2="320" y2="232"/>
+    <line x1="40" y1="324" x2="320" y2="324"/>
+  </g>
 
-  <!-- Center circle with Qualité des données -->
-  <circle cx="250" cy="240" r="65" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="225" text-anchor="middle" class="center-text">Qualité des</text>
-  <text x="250" y="255" text-anchor="middle" class="center-text">données</text>
+  <text x="40" y="92" font-size="14" font-weight="700" fill="#09544F">Exactitude</text>
+  <text x="40" y="115" font-size="12" font-style="italic" fill="#5A6562">Les données reflètent-elles la réalité ?</text>
 
-  <!-- Exactitude circle (top) -->
-  <circle cx="250" cy="110" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="115" text-anchor="middle" class="circle-text">Exactitude</text>
+  <text x="40" y="184" font-size="14" font-weight="700" fill="#09544F">Complétude</text>
+  <text x="40" y="207" font-size="12" font-style="italic" fill="#5A6562">Toutes les données sont-elles présentes ?</text>
 
-  <!-- Cohérence circle (right) -->
-  <circle cx="380" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="380" y="245" text-anchor="middle" class="circle-text">Cohérence</text>
+  <text x="40" y="276" font-size="14" font-weight="700" fill="#09544F">Cohérence</text>
+  <text x="40" y="299" font-size="12" font-style="italic" fill="#5A6562">Les relations sont-elles cohérentes ?</text>
 
-  <!-- Ponctualité circle (bottom) -->
-  <circle cx="250" cy="370" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="375" text-anchor="middle" class="circle-text">Ponctualité</text>
+  <text x="40" y="368" font-size="14" font-weight="700" fill="#09544F">Ponctualité</text>
+  <text x="40" y="391" font-size="12" font-style="italic" fill="#5A6562">Les données arrivent-elles à temps ?</text>
 
-  <!-- Complétude circle (left) -->
-  <circle cx="120" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="120" y="245" text-anchor="middle" class="circle-text">Complétude</text>
+  <!-- ===== PANNEAU DROIT — Mesures FASTR ===== -->
+  <text x="545" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">MESURES FASTR</text>
 
-  <!-- Annotations -->
-  <!-- Exactitude annotation -->
-  <text x="330" y="75" class="annotation">Les données reflètent-</text>
-  <text x="330" y="88" class="annotation">elles la réalité sur</text>
-  <text x="330" y="101" class="annotation">le terrain ?</text>
+  <rect x="385" y="50" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Complétude des indicateurs</text>
+  <text x="545" y="94" text-anchor="middle" font-size="11.5" fill="#5A6562">Les valeurs sont-elles présentes par indicateur ?</text>
 
-  <!-- Cohérence annotation -->
-  <text x="435" y="220" class="annotation">Les relations sont-</text>
-  <text x="435" y="233" class="annotation">elles cohérentes ?</text>
+  <rect x="385" y="118" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="144" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Présence de valeurs aberrantes</text>
+  <text x="545" y="162" text-anchor="middle" font-size="11.5" fill="#5A6562">Y a-t-il des valeurs extrêmes ou improbables ?</text>
 
-  <!-- Ponctualité annotation -->
-  <text x="310" y="380" class="annotation">Les données sont-elles</text>
-  <text x="310" y="393" class="annotation">régulièrement soumises</text>
-  <text x="310" y="406" class="annotation">à temps ?</text>
+  <rect x="385" y="186" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Cohérence entre indicateurs</text>
+  <text x="545" y="230" text-anchor="middle" font-size="11.5" fill="#5A6562">Les indicateurs liés concordent-ils ?</text>
 
-  <!-- Complétude annotation -->
-  <text x="15" y="200" class="annotation">Toutes les données</text>
-  <text x="15" y="213" class="annotation">sont-elles présentes ?</text>
+  <path d="M545 256 V286 M533 274 L545 286 L557 274" fill="none" stroke="#0C716B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="567" y="278" font-size="11" font-weight="600" fill="#0C716B">agrège vers</text>
 
-  <!-- RIGHT DIAGRAM: Mesures FASTR -->
-
-  <!-- Title -->
-  <text x="700" y="35" text-anchor="middle" class="title-teal">Mesures FASTR</text>
-
-  <!-- Connecting lines -->
-  <line x1="700" y1="135" x2="700" y2="185" stroke="#0d7377" stroke-width="2"/>
-  <line x1="700" y1="255" x2="605" y2="295" stroke="#0d7377" stroke-width="2"/>
-  <line x1="700" y1="255" x2="795" y2="295" stroke="#0d7377" stroke-width="2"/>
-
-  <!-- Complétude des indicateurs box (top) -->
-  <rect x="600" y="60" width="200" height="75" rx="12" ry="12" fill="#0d7377"/>
-  <text x="700" y="93" text-anchor="middle" class="box-text">Complétude des</text>
-  <text x="700" y="115" text-anchor="middle" class="box-text">indicateurs</text>
-
-  <!-- Score AQD box (center) -->
-  <rect x="620" y="185" width="160" height="70" rx="12" ry="12" fill="#0d7377"/>
-  <text x="700" y="227" text-anchor="middle" class="box-text">Score AQD</text>
-
-  <!-- Présence de valeurs aberrantes box (bottom left) -->
-  <rect x="510" y="295" width="150" height="80" rx="12" ry="12" fill="#0d7377"/>
-  <text x="585" y="320" text-anchor="middle" class="box-text">Présence de</text>
-  <text x="585" y="342" text-anchor="middle" class="box-text">valeurs aberrantes</text>
-
-  <!-- Cohérence entre indicateurs liés box (bottom right) -->
-  <rect x="740" y="295" width="140" height="80" rx="12" ry="12" fill="#0d7377"/>
-  <text x="810" y="320" text-anchor="middle" class="box-text">Cohérence entre</text>
-  <text x="810" y="342" text-anchor="middle" class="box-text">indicateurs</text>
-  <text x="810" y="364" text-anchor="middle" class="box-text">liés</text>
+  <rect x="385" y="300" width="320" height="74" rx="12" fill="#09544F"/>
+  <text x="545" y="328" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">SCORE AQD</text>
+  <text x="545" y="352" text-anchor="middle" font-size="11.5" fill="#CAE6E9">Une lecture composite unique de</text>
+  <text x="545" y="367" text-anchor="middle" font-size="11.5" fill="#CAE6E9">la fiabilité de vos données</text>
 </svg>

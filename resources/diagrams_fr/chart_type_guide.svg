@@ -1,95 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 260">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ TYPES DE GRAPHIQUE — 4 cartes propres, monochrome FASTR ============ -->
 
-  <!-- Card 1: Graphique linéaire -->
-  <g transform="translate(15, 15)">
-    <rect x="0" y="0" width="160" height="220" rx="10" fill="#E8F4F3"/>
-    <!-- Icon area -->
-    <rect x="0" y="0" width="160" height="70" rx="10" fill="#09544F"/>
-    <rect x="0" y="40" width="160" height="30" fill="#09544F"/>
-    <!-- Mini line chart icon -->
-    <polyline points="30,50 55,30 80,40 105,20 130,35" stroke="#CAE6E9" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Text -->
-    <text x="80" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Graphique</text>
-    <text x="80" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">linéaire</text>
-    <line x1="20" y1="116" x2="140" y2="116" stroke="#CAE6E9" stroke-width="1.5"/>
-    <text x="80" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Comment ça évolue</text>
-    <text x="80" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">dans le temps ?</text>
-    <line x1="20" y1="162" x2="140" y2="162" stroke="#CAE6E9" stroke-width="1"/>
-    <text x="80" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Tendances, schémas</text>
-    <text x="80" y="193" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">saisonniers, progrès</text>
-    <text x="80" y="206" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">vers les objectifs</text>
+  <rect x="15" y="20" width="160" height="280" rx="10" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <path d="M40 80 L65 60 L90 70 L115 50 L140 65" fill="none" stroke="#09544F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#09544F">
+    <circle cx="40" cy="80" r="3"/><circle cx="65" cy="60" r="3"/><circle cx="90" cy="70" r="3"/><circle cx="115" cy="50" r="3"/><circle cx="140" cy="65" r="3"/>
   </g>
+  <text x="95" y="130" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Graphique linéaire</text>
+  <text x="95" y="158" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">Comment ça évolue</text>
+  <text x="95" y="174" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">dans le temps ?</text>
+  <line x1="35" y1="195" x2="155" y2="195" stroke="#E4E7E5"/>
+  <text x="95" y="222" text-anchor="middle" font-size="11.5" fill="#5A6562">Tendances</text>
+  <text x="95" y="240" text-anchor="middle" font-size="11.5" fill="#5A6562">Schémas saisonniers</text>
+  <text x="95" y="258" text-anchor="middle" font-size="11.5" fill="#5A6562">Progrès vers les cibles</text>
 
-  <!-- Card 2: Diagramme en barres -->
-  <g transform="translate(185, 15)">
-    <rect x="0" y="0" width="160" height="220" rx="10" fill="#E8F4F3"/>
-    <rect x="0" y="0" width="160" height="70" rx="10" fill="#0C716B"/>
-    <rect x="0" y="40" width="160" height="30" fill="#0C716B"/>
-    <!-- Mini bar chart icon -->
-    <rect x="35" y="45" width="18" height="20" rx="2" fill="#CAE6E9"/>
-    <rect x="60" y="30" width="18" height="35" rx="2" fill="#CAE6E9"/>
-    <rect x="85" y="38" width="18" height="27" rx="2" fill="#CAE6E9"/>
-    <rect x="110" y="25" width="18" height="40" rx="2" fill="#CAE6E9"/>
-    <!-- Text -->
-    <text x="80" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Diagramme</text>
-    <text x="80" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">en barres</text>
-    <line x1="20" y1="116" x2="140" y2="116" stroke="#CAE6E9" stroke-width="1.5"/>
-    <text x="80" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Quelle zone fait</text>
-    <text x="80" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">le mieux ou le moins ?</text>
-    <line x1="20" y1="162" x2="140" y2="162" stroke="#CAE6E9" stroke-width="1"/>
-    <text x="80" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Comparer régions,</text>
-    <text x="80" y="193" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">établissements ou</text>
-    <text x="80" y="206" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">indicateurs côte à côte</text>
+  <rect x="195" y="20" width="160" height="280" rx="10" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <g fill="#09544F">
+    <rect x="225" y="60" width="16" height="35" rx="1"/>
+    <rect x="251" y="50" width="16" height="45" rx="1"/>
+    <rect x="277" y="68" width="16" height="27" rx="1"/>
+    <rect x="303" y="42" width="16" height="53" rx="1"/>
   </g>
+  <line x1="222" y1="98" x2="325" y2="98" stroke="#09544F" stroke-width="1.5"/>
+  <text x="275" y="130" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Diagramme à barres</text>
+  <text x="275" y="158" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">Quelle zone fait</text>
+  <text x="275" y="174" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">le mieux ou le pire ?</text>
+  <line x1="215" y1="195" x2="335" y2="195" stroke="#E4E7E5"/>
+  <text x="275" y="222" text-anchor="middle" font-size="11.5" fill="#5A6562">Comparer régions,</text>
+  <text x="275" y="240" text-anchor="middle" font-size="11.5" fill="#5A6562">établissements ou</text>
+  <text x="275" y="258" text-anchor="middle" font-size="11.5" fill="#5A6562">indicateurs côte à côte</text>
 
-  <!-- Card 3: Tableau -->
-  <g transform="translate(355, 15)">
-    <rect x="0" y="0" width="160" height="220" rx="10" fill="#E8F4F3"/>
-    <rect x="0" y="0" width="160" height="70" rx="10" fill="#1F9A9C"/>
-    <rect x="0" y="40" width="160" height="30" fill="#1F9A9C"/>
-    <!-- Mini table icon -->
-    <rect x="35" y="22" width="90" height="42" rx="3" fill="none" stroke="#CAE6E9" stroke-width="1.5"/>
-    <line x1="35" y1="35" x2="125" y2="35" stroke="#CAE6E9" stroke-width="1"/>
-    <line x1="35" y1="48" x2="125" y2="48" stroke="#CAE6E9" stroke-width="1"/>
-    <line x1="70" y1="22" x2="70" y2="64" stroke="#CAE6E9" stroke-width="1"/>
-    <line x1="100" y1="22" x2="100" y2="64" stroke="#CAE6E9" stroke-width="1"/>
-    <!-- Text -->
-    <text x="80" y="98" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Tableau</text>
-    <line x1="20" y1="116" x2="140" y2="116" stroke="#CAE6E9" stroke-width="1.5"/>
-    <text x="80" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Quels sont les</text>
-    <text x="80" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">chiffres exacts ?</text>
-    <line x1="20" y1="162" x2="140" y2="162" stroke="#CAE6E9" stroke-width="1"/>
-    <text x="80" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Valeurs précises,</text>
-    <text x="80" y="193" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">données de référence,</text>
-    <text x="80" y="206" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">ventilations détaillées</text>
+  <rect x="375" y="20" width="160" height="280" rx="10" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="408" y="48" width="94" height="18" fill="#E8F4F3"/>
+  <g stroke="#09544F" stroke-width="1.8" fill="none">
+    <rect x="408" y="48" width="94" height="54" rx="2"/>
+    <line x1="408" y1="66" x2="502" y2="66"/>
+    <line x1="408" y1="84" x2="502" y2="84"/>
+    <line x1="439" y1="48" x2="439" y2="102"/>
+    <line x1="471" y1="48" x2="471" y2="102"/>
   </g>
+  <text x="455" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#09544F">Tableau</text>
+  <text x="455" y="158" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">Quels sont les</text>
+  <text x="455" y="174" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">chiffres exacts ?</text>
+  <line x1="395" y1="195" x2="515" y2="195" stroke="#E4E7E5"/>
+  <text x="455" y="222" text-anchor="middle" font-size="11.5" fill="#5A6562">Valeurs précises,</text>
+  <text x="455" y="240" text-anchor="middle" font-size="11.5" fill="#5A6562">données de référence,</text>
+  <text x="455" y="258" text-anchor="middle" font-size="11.5" fill="#5A6562">détails complets</text>
 
-  <!-- Card 4: Heatmap -->
-  <g transform="translate(525, 15)">
-    <rect x="0" y="0" width="160" height="220" rx="10" fill="#E8F4F3"/>
-    <rect x="0" y="0" width="160" height="70" rx="10" fill="#09544F"/>
-    <rect x="0" y="40" width="160" height="30" fill="#09544F"/>
-    <!-- Mini heatmap icon -->
-    <rect x="35" y="22" width="20" height="14" rx="2" fill="#C53030" opacity="0.7"/>
-    <rect x="58" y="22" width="20" height="14" rx="2" fill="#1F9A9C"/>
-    <rect x="81" y="22" width="20" height="14" rx="2" fill="#09544F"/>
-    <rect x="104" y="22" width="20" height="14" rx="2" fill="#1F9A9C"/>
-    <rect x="35" y="40" width="20" height="14" rx="2" fill="#1F9A9C"/>
-    <rect x="58" y="40" width="20" height="14" rx="2" fill="#09544F"/>
-    <rect x="81" y="40" width="20" height="14" rx="2" fill="#C53030" opacity="0.7"/>
-    <rect x="104" y="40" width="20" height="14" rx="2" fill="#CAE6E9"/>
-    <!-- Text -->
-    <text x="80" y="98" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Heatmap</text>
-    <line x1="20" y1="116" x2="140" y2="116" stroke="#CAE6E9" stroke-width="1.5"/>
-    <text x="80" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">Où est la tendance</text>
-    <text x="80" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#09544F">parmi plusieurs ?</text>
-    <line x1="20" y1="162" x2="140" y2="162" stroke="#CAE6E9" stroke-width="1"/>
-    <text x="80" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">Plusieurs indicateurs</text>
-    <text x="80" y="193" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">par région, repérer</text>
-    <text x="80" y="206" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#555">rapidement les anomalies</text>
+  <rect x="555" y="20" width="160" height="280" rx="10" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <g>
+    <rect x="585" y="48" width="20" height="18" fill="#09544F"/>
+    <rect x="608" y="48" width="20" height="18" fill="#1F9A9C"/>
+    <rect x="631" y="48" width="20" height="18" fill="#C53030"/>
+    <rect x="654" y="48" width="20" height="18" fill="#E8F4F3"/>
+    <rect x="585" y="69" width="20" height="18" fill="#1F9A9C"/>
+    <rect x="608" y="69" width="20" height="18" fill="#E8F4F3"/>
+    <rect x="631" y="69" width="20" height="18" fill="#09544F"/>
+    <rect x="654" y="69" width="20" height="18" fill="#1F9A9C"/>
+    <rect x="585" y="90" width="20" height="18" fill="#E8F4F3"/>
+    <rect x="608" y="90" width="20" height="18" fill="#C53030"/>
+    <rect x="631" y="90" width="20" height="18" fill="#1F9A9C"/>
+    <rect x="654" y="90" width="20" height="18" fill="#09544F"/>
   </g>
-
-  <!-- Bottom note -->
-  <text x="350" y="252" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#777" font-style="italic">Commencez par la question à laquelle vous voulez répondre, puis choisissez le graphique adapté</text>
-
+  <text x="635" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#09544F">Heatmap</text>
+  <text x="635" y="158" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">Où est le motif sur de</text>
+  <text x="635" y="174" text-anchor="middle" font-size="12" font-style="italic" fill="#5A6562">nombreux éléments ?</text>
+  <line x1="575" y1="195" x2="695" y2="195" stroke="#E4E7E5"/>
+  <text x="635" y="222" text-anchor="middle" font-size="11.5" fill="#5A6562">Plusieurs indicateurs</text>
+  <text x="635" y="240" text-anchor="middle" font-size="11.5" fill="#5A6562">sur les régions —</text>
+  <text x="635" y="258" text-anchor="middle" font-size="11.5" fill="#5A6562">repérer les anomalies</text>
 </svg>

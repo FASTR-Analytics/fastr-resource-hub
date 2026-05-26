@@ -1,89 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450">
-  <style>
-    .title { font-family: Arial, sans-serif; font-size: 24px; fill: #4a5568; }
-    .title-teal { font-family: Arial, sans-serif; font-size: 24px; fill: #0d7377; }
-    .center-text { font-family: Arial, sans-serif; font-size: 22px; font-weight: bold; fill: #1e3a5f; }
-    .circle-text { font-family: Arial, sans-serif; font-size: 14px; fill: #4a5568; }
-    .annotation { font-family: Arial, sans-serif; font-size: 11px; fill: #4a5568; }
-    .box-text { font-family: Arial, sans-serif; font-size: 16px; fill: white; font-weight: 500; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ MEASURES OF DATA QUALITY — two-panel comparison ============ -->
+  <!-- LEFT: 4 general DQ dimensions. RIGHT: FASTR's 3 measures + aggregated DQ Score. -->
 
-  <!-- LEFT DIAGRAM: General measures -->
+  <!-- ===== LEFT PANEL — Common DQ measures ===== -->
+  <text x="175" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">COMMON DQ MEASURES</text>
 
-  <!-- Title -->
-  <text x="250" y="35" text-anchor="middle" class="title">General measures</text>
+  <rect x="15" y="50" width="320" height="368" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="15" y="64" width="4" height="340" fill="#D0CB17"/>
 
-  <!-- Outer gray arc/ring -->
-  <circle cx="250" cy="240" r="130" fill="none" stroke="#9ca3af" stroke-width="12"/>
+  <g stroke="#E4E7E5" stroke-width="1">
+    <line x1="40" y1="140" x2="320" y2="140"/>
+    <line x1="40" y1="232" x2="320" y2="232"/>
+    <line x1="40" y1="324" x2="320" y2="324"/>
+  </g>
 
-  <!-- Center circle with Data Quality -->
-  <circle cx="250" cy="240" r="65" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="232" text-anchor="middle" class="center-text">Data</text>
-  <text x="250" y="258" text-anchor="middle" class="center-text">Quality</text>
+  <text x="40" y="92" font-size="14" font-weight="700" fill="#09544F">Accuracy</text>
+  <text x="40" y="115" font-size="12" font-style="italic" fill="#5A6562">Do data reflect reality?</text>
 
-  <!-- Accuracy circle (top) -->
-  <circle cx="250" cy="110" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="115" text-anchor="middle" class="circle-text">Accuracy</text>
+  <text x="40" y="184" font-size="14" font-weight="700" fill="#09544F">Completeness</text>
+  <text x="40" y="207" font-size="12" font-style="italic" fill="#5A6562">Are all data present?</text>
 
-  <!-- Consistency circle (right) -->
-  <circle cx="380" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="380" y="245" text-anchor="middle" class="circle-text">Consistency</text>
+  <text x="40" y="276" font-size="14" font-weight="700" fill="#09544F">Consistency</text>
+  <text x="40" y="299" font-size="12" font-style="italic" fill="#5A6562">Are relations consistent?</text>
 
-  <!-- Timeliness circle (bottom) -->
-  <circle cx="250" cy="370" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="250" y="375" text-anchor="middle" class="circle-text">Timeliness</text>
+  <text x="40" y="368" font-size="14" font-weight="700" fill="#09544F">Timeliness</text>
+  <text x="40" y="391" font-size="12" font-style="italic" fill="#5A6562">Are data submitted on time?</text>
 
-  <!-- Completeness circle (left) -->
-  <circle cx="120" cy="240" r="45" fill="white" stroke="#e5e7eb" stroke-width="2"/>
-  <text x="120" y="245" text-anchor="middle" class="circle-text">Completeness</text>
+  <!-- ===== RIGHT PANEL — FASTR measures ===== -->
+  <text x="545" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">FASTR MEASURES</text>
 
-  <!-- Annotations -->
-  <!-- Accuracy annotation -->
-  <text x="330" y="75" class="annotation">Do data reflect</text>
-  <text x="330" y="88" class="annotation">what's going on</text>
-  <text x="330" y="101" class="annotation">in the real-</text>
-  <text x="330" y="114" class="annotation">world?</text>
+  <!-- 3 source measures stacked at top -->
+  <rect x="385" y="50" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Indicator completeness</text>
+  <text x="545" y="94" text-anchor="middle" font-size="11.5" fill="#5A6562">Are values present per indicator?</text>
 
-  <!-- Consistency annotation -->
-  <text x="435" y="220" class="annotation">Are relations</text>
-  <text x="435" y="233" class="annotation">consistent?</text>
+  <rect x="385" y="118" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="144" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Presence of outliers</text>
+  <text x="545" y="162" text-anchor="middle" font-size="11.5" fill="#5A6562">Are any values extreme or implausible?</text>
 
-  <!-- Timeliness annotation -->
-  <text x="310" y="380" class="annotation">Are the data</text>
-  <text x="310" y="393" class="annotation">regularly submitted on</text>
-  <text x="310" y="406" class="annotation">time?</text>
+  <rect x="385" y="186" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Consistency between indicators</text>
+  <text x="545" y="230" text-anchor="middle" font-size="11.5" fill="#5A6562">Do related indicators line up?</text>
 
-  <!-- Completeness annotation -->
-  <text x="15" y="200" class="annotation">Are all data</text>
-  <text x="15" y="213" class="annotation">present?</text>
+  <!-- Arrow down to aggregate -->
+  <path d="M545 256 V286 M533 274 L545 286 L557 274" fill="none" stroke="#0C716B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="567" y="278" font-size="11" font-weight="600" fill="#0C716B">aggregates into</text>
 
-  <!-- RIGHT DIAGRAM: FASTR measures -->
-
-  <!-- Title -->
-  <text x="700" y="35" text-anchor="middle" class="title-teal">FASTR measures</text>
-
-  <!-- Connecting lines -->
-  <line x1="700" y1="135" x2="700" y2="185" stroke="#0d7377" stroke-width="2"/>
-  <line x1="700" y1="255" x2="605" y2="295" stroke="#0d7377" stroke-width="2"/>
-  <line x1="700" y1="255" x2="795" y2="295" stroke="#0d7377" stroke-width="2"/>
-
-  <!-- Indicator completeness box (top) -->
-  <rect x="600" y="60" width="200" height="75" rx="12" ry="12" fill="#0d7377"/>
-  <text x="700" y="93" text-anchor="middle" class="box-text">Indicator</text>
-  <text x="700" y="115" text-anchor="middle" class="box-text">completeness</text>
-
-  <!-- DQ Score box (center) -->
-  <rect x="620" y="185" width="160" height="70" rx="12" ry="12" fill="#0d7377"/>
-  <text x="700" y="227" text-anchor="middle" class="box-text">DQ Score</text>
-
-  <!-- Presence of outliers box (bottom left) -->
-  <rect x="520" y="295" width="140" height="80" rx="12" ry="12" fill="#0d7377"/>
-  <text x="590" y="328" text-anchor="middle" class="box-text">Presence of</text>
-  <text x="590" y="350" text-anchor="middle" class="box-text">outliers</text>
-
-  <!-- Consistency between related indicators box (bottom right) -->
-  <rect x="740" y="295" width="140" height="80" rx="12" ry="12" fill="#0d7377"/>
-  <text x="810" y="320" text-anchor="middle" class="box-text">Consistency</text>
-  <text x="810" y="342" text-anchor="middle" class="box-text">between</text>
-  <text x="810" y="364" text-anchor="middle" class="box-text">related indicators</text>
+  <!-- DQ Score aggregate (hero) -->
+  <rect x="385" y="300" width="320" height="74" rx="12" fill="#09544F"/>
+  <text x="545" y="328" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">DQ SCORE</text>
+  <text x="545" y="352" text-anchor="middle" font-size="11.5" fill="#CAE6E9">A single composite read of</text>
+  <text x="545" y="367" text-anchor="middle" font-size="11.5" fill="#CAE6E9">your data's reliability</text>
 </svg>
