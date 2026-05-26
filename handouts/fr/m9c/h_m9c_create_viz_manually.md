@@ -45,7 +45,7 @@ Dans l'onglet Visualisations, cliquez sur **Créer une visualisation**. Un const
 
 <h2 class="step-h"><span class="step-n">2</span><span>Choisissez une mesure</span></h2>
 
-Les mesures sont groupées par module à gauche (M1. Qualité des données, M3. Utilisation des services, M4. Couverture…). Une mesure, c'est **ce qui est mesuré** — p. ex. *Nombre de services rapportés*, *Volume de services réel vs attendu*, *Couverture*.
+Les mesures sont groupées par module à gauche : **M1. Évaluation de la qualité des données**, **M2. Ajustement de la qualité des données**, **M3. Utilisation des services**, **M5. Estimation de la couverture** (dénominateurs), **M6. Estimation de la couverture** (estimations). Une mesure, c'est **ce qui est mesuré** — p. ex. *Nombre de services rapportés*, *Volume de services réel vs attendu*, *Couverture*.
 
 Pour une tendance de volume de services, ouvrez **M3. Utilisation des services** et choisissez une mesure comme **Nombre de services rapportés**. Cliquez sur **Suivant**.
 
@@ -101,7 +101,7 @@ Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau 
 
 ## Essayez quelques options
 
-Refaites avec une autre mesure ou un autre préréglage — une mesure de couverture sous **M4**, ou le graphique à barres de variation trimestrielle — pour voir comment chacun se lit.
+Refaites avec une autre mesure ou un autre préréglage — une mesure de couverture sous **M6**, ou le graphique à barres de variation trimestrielle — pour voir comment chacun se lit.
 
 > **Astuce :** Les graphiques en ligne (*Volume de services dans le temps*) sont les meilleurs pour les tendances dans le temps. Les graphiques à barres (*variation trimestrielle / annuelle*) sont meilleurs pour comparer des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
 
@@ -110,11 +110,11 @@ Refaites avec une autre mesure ou un autre préréglage — une mesure de couver
 Vous devriez maintenant avoir :
 
 - Au moins un graphique créé et visible dans votre liste **Visualisations**
-- Le chemin en mémoire : **Créer une visualisation → Mesure → Préréglages → Créer**
+- Le chemin : **+ Créer une visualisation → Mesure → Préréglages → Configurer**
 - Une idée de quels préréglages conviennent aux tendances vs aux comparaisons
 
 ## Étape suivante
 
 L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le constructeur. Même résultat, autre chemin.
 
-> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*Créer une visualisation*, *Créer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Créer** est la structure clé.
+> 🔎 **Vérifiez dans votre interface actuelle** : les libellés (*Créer une visualisation*, *Configurer*) peuvent différer légèrement. Le chemin **Mesure → Préréglages → Configurer** est la structure clé.

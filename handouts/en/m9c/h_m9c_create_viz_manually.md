@@ -45,7 +45,7 @@ In the Visualizations tab, click **Create visualization**. A three-step builder 
 
 <h2 class="step-h"><span class="step-n">2</span><span>Pick a metric</span></h2>
 
-Metrics are grouped by module on the left (M1. Data quality, M3. Service utilization, M4. Coverage…). A metric is **what is measured** — e.g. *Number of services reported*, *Actual vs expected service volume*, *Coverage*.
+Metrics are grouped by module on the left: **M1. Data quality assessment**, **M2. Data quality adjustment**, **M3. Service utilization**, **M5. Coverage estimation** (denominators), **M6. Coverage estimation** (estimates). A metric is **what is measured** — e.g. *Number of services reported*, *Actual vs expected service volume*, *Coverage*.
 
 For a service-volume trend, open **M3. Service utilization** and pick a metric such as **Number of services reported**. Click **Next**.
 
@@ -101,7 +101,7 @@ Open a saved visualization — the controls live in the **left panel**, and you'
 
 ## Try a few options
 
-Repeat with a different metric or preset — a coverage metric under **M4**, or the quarterly-change bar chart — to see how each reads.
+Repeat with a different metric or preset — a coverage metric under **M6**, or the quarterly-change bar chart — to see how each reads.
 
 > **Tip:** Line charts (*Service volume over time*) are best for trends over time. Bar charts (*quarterly / annual change*) are better for comparing periods or places. The reference handout *How to read a FASTR visualization* goes deeper.
 
@@ -110,11 +110,11 @@ Repeat with a different metric or preset — a coverage metric under **M4**, or 
 You should now have:
 
 - At least one chart created and visible in your **Visualizations** list
-- The path in muscle memory: **Create visualization → Metric → Presets → Create**
+- The path: **+ Create visualization → Metric → Presets → Configure**
 - A sense of which presets suit trends vs comparisons
 
 ## What's next
 
 The next activity does the same thing using the AI Assistant — typing a request in plain language instead of clicking through the builder. Same end result, different path.
 
-> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Create*) may differ slightly. The **Metric → Presets → Create** path is the key structure.
+> 🔎 **Verify in your current UI**: labels (*Create visualization*, *Configure*) may differ slightly. The **Metric → Presets → Configure** path is the key structure.
