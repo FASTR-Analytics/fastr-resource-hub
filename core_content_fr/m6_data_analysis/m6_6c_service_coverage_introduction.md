@@ -15,7 +15,7 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 <!--
 PRESENTER NOTES:
-- Le module 4 convertit les volumes de services en pourcentages de couverture
+- Les modules 5 et 6 convertissent les volumes de services en pourcentages de couverture (M5 = dénominateurs, M6 = estimations)
 - Couverture = services / population cible - le défi est de connaître la population cible
 - Le SIGS utilise généralement les populations de zones de desserte qui sont souvent inexactes
 - Notre approche : dériver les dénominateurs des données SIGS validées par rapport aux enquêtes

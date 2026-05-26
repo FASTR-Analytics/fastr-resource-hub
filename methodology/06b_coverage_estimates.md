@@ -1736,7 +1736,7 @@ The coverage estimation module operates in two sequential parts:
 
 <!--
 PRESENTER NOTES:
-- Module 4 converts service volumes into coverage percentages
+- Modules 5 and 6 convert service volumes into coverage percentages (M5 = denominators, M6 = estimates)
 - Coverage = services / target population - the challenge is knowing target population
 - HMIS typically uses catchment populations which are often inaccurate
 - Our approach: derive denominators from HMIS data validated against surveys
