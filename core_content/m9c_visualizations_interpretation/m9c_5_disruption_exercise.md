@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Spot a disruption in your country's data
 
 **What you'll learn**
-How to tell a real disruption (3+ months of sustained drop) from one-month noise, and how to frame a finding that points to action.
+How to tell a real disruption from one-month noise. A real disruption is a sustained drop of three months or more. You also learn how to write up the finding so it points to a specific action.
 
 **What you'll practice**
 - Pick an indicator and a region in your country's data

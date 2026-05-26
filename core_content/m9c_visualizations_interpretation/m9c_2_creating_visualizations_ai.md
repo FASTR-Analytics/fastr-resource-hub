@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Build a visualisation with the AI Assistant
 
 **What you'll learn**
-How to prompt the AI for a chart, and how to verify it picked the right indicator, period and adjusted data before saving.
+How to prompt the AI for a chart. Before saving, you check that the AI used the right indicator, the right period, and the adjusted data rather than the raw data.
 
 **What you'll practice**
 - Prompt the AI for an ANC1 time-series

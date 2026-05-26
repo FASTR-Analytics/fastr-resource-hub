@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Write an interpretation for a chart
 
 **What you'll learn**
-A three-part structure for any interpretation — title (the conclusion), what you see (facts only), what it means (so what + who acts).
+A three-part structure for any interpretation. The title states the conclusion. "What you see" lists the facts. "What it means" names the implication and the person who should act.
 
 **What you'll practice**
 - Write a three-part interpretation of a chart you choose

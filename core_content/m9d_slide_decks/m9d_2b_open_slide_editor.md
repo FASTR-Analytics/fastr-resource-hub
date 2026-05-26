@@ -12,7 +12,7 @@ paginate: true
 ## Demo: How to edit a slide
 
 **What you'll see**
-The five steps in the editor — open it, add a visualisation block, split the slide into chart + text, resize, save.
+The five steps for editing a slide in FASTR. You open the editor, add a visualisation block, split the slide into a chart area and a text area, resize each area, and save.
 
 **What to watch for**
 - The cursor change on the resize divider

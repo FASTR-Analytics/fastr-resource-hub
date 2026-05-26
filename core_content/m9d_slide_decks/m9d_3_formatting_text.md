@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Format your report text
 
 **What you'll learn**
-The same markdown shortcuts that work in the chat also work in the slide editor — headings, bold, bullets.
+The same markdown shortcuts that work in the chat also work in the slide editor. You can add headings, bold text, and bullet lists.
 
 **What you'll practice**
 - Add a heading to your slide

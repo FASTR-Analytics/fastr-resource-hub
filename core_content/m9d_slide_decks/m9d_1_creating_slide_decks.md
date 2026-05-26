@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Create your first slide deck
 
 **What you'll learn**
-How decks, slides and visualisations connect inside FASTR — and that a saved deck stays editable.
+How decks, slides and visualisations connect inside FASTR. A saved deck stays editable, so you can come back to it later.
 
 **What you'll practice**
 - Open the Slide Decks tab

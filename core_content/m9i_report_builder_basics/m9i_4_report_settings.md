@@ -27,6 +27,5 @@ Once your report is created, you can adjust its appearance. Everything lives in 
 ### Page details
 
 - Show **page numbers**
-- Add a **watermark**
 
 > ⚠ Make sure to **save** the settings after each change — otherwise your edits will be lost.

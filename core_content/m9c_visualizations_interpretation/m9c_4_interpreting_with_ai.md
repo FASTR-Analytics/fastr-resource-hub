@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Let the AI draft an interpretation
 
 **What you'll learn**
-The AI can describe a chart but doesn't know your context — every claim has to be checked before you put your name on it.
+The AI can describe a chart but does not know your context. Every claim has to be checked before you put your name on it.
 
 **What you'll practice**
 - Generate a slide with a viz of your choice

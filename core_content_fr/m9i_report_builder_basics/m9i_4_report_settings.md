@@ -27,6 +27,5 @@ Une fois votre rapport créé, vous pouvez en ajuster l'apparence. Tout se trouv
 ### Détails de page
 
 - Affichage des **numéros de pages**
-- Ajout d'un **filigrane**
 
 > ⚠ Veillez à **sauvegarder** les paramètres après chaque modification — sinon vos changements seront perdus.

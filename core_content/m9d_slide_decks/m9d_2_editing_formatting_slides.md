@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Edit and finalise your slides
 
 **What you'll learn**
-AI-generated slides usually need cleanup — text and charts often need resizing and reflow before they're ready to show.
+AI-generated slides usually need cleanup. Text and charts often need resizing and repositioning before the slide is ready to show.
 
 **What you'll practice**
 - Review one slide against the data

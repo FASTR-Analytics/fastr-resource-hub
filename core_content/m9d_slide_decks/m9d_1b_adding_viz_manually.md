@@ -12,7 +12,7 @@ paginate: true
 ## Activity: Add a visualisation to a slide
 
 **What you'll learn**
-How a visualisation lands on a slide by hand — pick the slide, pick the chart, place it.
+How to add a visualisation to a slide yourself. You select the slide, then pick a chart from your saved visualisations.
 
 **What you'll practice**
 - Open the slide editor
