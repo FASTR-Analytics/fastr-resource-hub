@@ -188,28 +188,37 @@ Le choix entre DHIS2 et l'approche FASTR doit être guidé par l'objectif spéci
 <!-- SLIDE:m2_1a -->
 ## Extraire des volumes, pas des pourcentages
 
-FASTR analyse des **volumes bruts de services** — le nombre réel de services déclarés par chaque établissement chaque mois. Il **n'accepte pas** de pourcentages, de proportions ou de chiffres de couverture pré-calculés.
+FASTR analyse des **volumes bruts de services**, pas des pourcentages, des proportions ou des chiffres de couverture pré-calculés.
+
+<div class="columns">
+<div>
 
 | À extraire | À **ne pas** extraire |
 |------------|------------------------|
-| Nombre de visites CPN1 par établissement et par mois | Taux de couverture CPN1 (%) |
-| Nombre de doses Penta1 administrées | Proportion de couverture vaccinale |
-| Nombre d'accouchements en établissement | Indicateurs de couverture pré-calculés |
+| Visites CPN1 par établissement par mois | Taux de couverture CPN1 (%) |
+| Doses Penta1 administrées | Proportion de couverture vaccinale |
+| Accouchements en établissement | Indicateurs de couverture pré-calculés |
 
-**Pourquoi ?**
+</div>
+<div>
 
-- On ne peut pas détecter une valeur aberrante sur un pourcentage — il est plafonné à 100 et masque le volume sous-jacent de l'établissement.
-- On ne peut pas additionner des pourcentages entre établissements de tailles différentes pour obtenir un total régional.
-- La plateforme calcule elle-même la couverture en divisant les volumes par les dénominateurs de population dans les **modules 5 et 6**.
-- Les ajustements pour valeurs aberrantes et complétude (**modules 1 et 2**) sont des méthodes statistiques qui exigent des volumes bruts.
+**Pourquoi des volumes, pas des pourcentages ?**
+
+- Une valeur aberrante ne se détecte pas sur un pourcentage : il est plafonné à 100 et masque le volume sous-jacent.
+- Des pourcentages ne s'additionnent pas entre établissements de tailles différentes pour obtenir un total régional.
+- La plateforme construit elle-même la couverture à partir des volumes et des dénominateurs de population (**modules 5 et 6**).
+- Les ajustements pour valeurs aberrantes et complétude (**modules 1 et 2**) ont besoin de volumes bruts pour fonctionner.
+
+</div>
+</div>
 
 <!--
-PRESENTER NOTES:
-- C'est la règle la plus importante pour l'extraction des données
-- Erreur fréquente : extraire des « data elements » DHIS2 qui contiennent déjà la couverture en %
-- Toujours extraire le numérateur (volume de services) — la plateforme s'occupe du reste
-- Si votre indicateur DHIS2 contient « taux », « % » ou « proportion », ce n'est pas le bon
-- Montrer un exemple concret aux participants : visites CPN1 (volume) vs taux de couverture CPN1 (%)
+NOTES DU PRÉSENTATEUR :
+- C'est la règle la plus importante pour l'extraction des données.
+- Erreur fréquente : extraire des « data elements » DHIS2 qui contiennent déjà la couverture en %.
+- Toujours extraire le numérateur (volume de services) ; la plateforme s'occupe du reste.
+- Si l'indicateur DHIS2 contient « taux », « % » ou « proportion », ce n'est pas le bon champ.
+- Exemple concret à utiliser : visites CPN1 (volume) vs taux de couverture CPN1 (%).
 -->
 <!-- /SLIDE -->
 
