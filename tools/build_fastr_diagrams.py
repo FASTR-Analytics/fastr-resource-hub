@@ -96,9 +96,74 @@ FOUR_APPROACHES = {
     },
 }
 
+FOUR_APPROACHES["type"] = "four_approaches"
+
+# --- Cycle diagram (Analyze → Learn → Strengthen → Act) ----------------------
+# Different geometry from the four-approaches diagram: 4 nodes around a circle,
+# each with a coloured label box. Text classes are simpler — only cls-9 (grey).
+# Coordinates are in the source's viewBox (703.499 × 767.5481).
+
+CYCLE = {
+    "type": "cycle",
+    "source": "FASTR_rapid_cycle_analytics_approach.svg",
+    "strip_classes": ("cls-9",),
+    # Each node: (x_left of label box + padding, y of title baseline) — title
+    # left-aligned, description follows below.
+    "node_positions": (
+        (256.5, 222),  # Analyze (top, teal box)
+        (389.1, 387),  # Learn   (right, navy box)
+        (123.5, 387),  # Act     (left,  coral box)
+        (256.5, 545),  # Strengthen (bottom, gold box)
+    ),
+    "main_title_x": 351.75,
+    "main_title_y1": 18, "main_title_y2": 40,
+    "main_title_size": 18,
+    "node_title_size": 16, "desc_size": 11.5, "desc_lh": 14, "desc_offset": 20,
+    "lang": {
+        "en": {
+            "main_title": ["FASTR's rapid-cycle analytics approach:",
+                           "Analyze, learn, strengthen, act"],
+            "node_titles": ["Analyze", "Learn", "Act", "Strengthen"],
+            "node_descs": [
+                ["Analyze timely PHC", "and RMNCAH-N data"],
+                ["Learn from the data", "to prioritize health", "systems gaps"],
+                ["Translate data into", "action for stronger PHC", "and improved", "RMNCAH-N outcomes"],
+                ["Strengthen within-country", "M&E capacity and", "data quality"],
+            ],
+        },
+        "fr": {
+            "main_title": ["Approche d'analyse en cycle rapide FASTR :",
+                           "Analyser, Apprendre, Renforcer, Agir"],
+            "node_titles": ["Analyser", "Apprendre", "Agir", "Renforcer"],
+            "node_descs": [
+                ["Analyser des données SSP", "et SRMNIA-N opportunes"],
+                ["Apprendre des données", "pour prioriser les lacunes", "des systèmes de santé"],
+                ["Traduire les données en", "actions pour des SSP", "renforcés et de meilleurs", "résultats SRMNIA-N"],
+                ["Renforcer la capacité de", "S&É et la qualité des", "données dans le pays"],
+            ],
+            "main_title_size": 17,
+        },
+        "pt": {
+            "main_title": ["Abordagem analítica de ciclo rápido do FASTR:",
+                           "Analisar, Aprender, Reforçar, Agir"],
+            "node_titles": ["Analisar", "Aprender", "Agir", "Reforçar"],
+            "node_descs": [
+                ["Analisar dados oportunos", "de CSP e SRMNIA-N"],
+                ["Aprender dos dados", "para priorizar lacunas", "dos sistemas de saúde"],
+                ["Traduzir dados em ação", "para CSP mais fortes", "e melhores resultados", "SRMNIA-N"],
+                ["Reforçar a capacidade de", "M&A e qualidade dos", "dados no país"],
+            ],
+            "main_title_size": 16,
+        },
+    },
+}
+
 # Output filename matches the GFF source name (sans .svg), so the same diagram
 # carries the same name across resources/diagrams{,_fr,_pt}/.
-RECIPES = {"Technical_approaches_image": FOUR_APPROACHES}
+RECIPES = {
+    "Technical_approaches_image": FOUR_APPROACHES,
+    "FASTR_rapid_cycle_analytics_approach": CYCLE,
+}
 
 # All languages are regenerated from one template so EN/FR/PT share identical
 # typography, card fills, and outlines (the GFF original's flattened text renders
@@ -159,6 +224,33 @@ def outline_cards(svg: str, stroke_width: float = 1.5) -> str:
     return re.sub(r'<path class="cls-6"[^>]*/>', repl, svg)
 
 
+def _bold_label(x: float, y: float, txt: str, size: float, anchor: str = "start",
+                fill: str = INK) -> str:
+    """Same-colour stroke ensures the title visibly renders bold in any renderer
+    (cairosvg PNG previews, Chrome via <img>, MkDocs, etc.)."""
+    return (f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-family=\'{FONT}\' '
+            f'font-size="{size}" font-weight="bold" fill="{fill}" '
+            f'stroke="{fill}" stroke-width="0.6" paint-order="stroke">{_esc(txt)}</text>')
+
+
+def build_text_cycle(rec: dict, L: dict) -> str:
+    main_size = L.get("main_title_size", rec["main_title_size"])
+    x0 = rec["main_title_x"]
+    parts = ['<g id="cycle-text">']
+    parts.append(_bold_label(x0, rec["main_title_y1"], L["main_title"][0], main_size, "middle"))
+    parts.append(_bold_label(x0, rec["main_title_y2"], L["main_title"][1], main_size, "middle"))
+    for (xl, ty), title, descs in zip(rec["node_positions"], L["node_titles"], L["node_descs"]):
+        parts.append(_bold_label(xl, ty, title, rec["node_title_size"]))
+        dy = ty + rec["desc_offset"]
+        parts.append(f'<text x="{xl}" y="{dy}" text-anchor="start" font-family=\'{FONT}\' '
+                     f'font-size="{rec["desc_size"]}" fill="{GREY}">')
+        for i, line in enumerate(descs):
+            parts.append(f'<tspan x="{xl}" dy="{0 if i == 0 else rec["desc_lh"]}">{_esc(line)}</tspan>')
+        parts.append('</text>')
+    parts.append('</g>')
+    return "\n".join(parts)
+
+
 def build_text(rec: dict, L: dict) -> str:
     p = ['<g id="fastr-text">']
     for cx, title, desc in zip(rec["cols_x"], L["titles"], L["descs"]):
@@ -185,19 +277,35 @@ def build_text(rec: dict, L: dict) -> str:
     return "\n".join(p)
 
 
+def _prep_four_approaches(src: str, rec: dict) -> str:
+    return add_white_bg(outline_cards(strip_text(src, rec["strip"])))
+
+
+def _prep_cycle(src: str, rec: dict) -> str:
+    pat = r'<path class="(?:%s)"[^>]*/>' % "|".join(rec["strip_classes"])
+    return re.sub(pat, "", src)
+
+
+HANDLERS = {
+    "four_approaches": (_prep_four_approaches, build_text),
+    "cycle":           (_prep_cycle,           build_text_cycle),
+}
+
+
 def main() -> int:
     built = 0
     for name, rec in RECIPES.items():
+        prep, build = HANDLERS[rec["type"]]
         src = (SRC / rec["source"]).read_text()
-        template = add_white_bg(outline_cards(strip_text(src, rec["strip"])))
+        template = prep(src, rec)
         for lang, L in rec["lang"].items():
             dest = OUT_DIR[lang] / f"{name}.svg"
             dest.parent.mkdir(parents=True, exist_ok=True)
             if lang in PASSTHROUGH:
-                dest.write_text(src)  # exact GFF original
+                dest.write_text(src)
                 print(f"[{lang}] {dest.relative_to(REPO)}  (GFF original, verbatim)")
             else:
-                dest.write_text(template.replace("</svg>", build_text(rec, L) + "</svg>"))
+                dest.write_text(template.replace("</svg>", build(rec, L) + "</svg>"))
                 print(f"[{lang}] {dest.relative_to(REPO)}  (rebuilt, translated)")
             built += 1
     print(f"\nDone — {built} diagram(s) written.")
