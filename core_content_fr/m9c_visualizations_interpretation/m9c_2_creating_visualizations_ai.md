@@ -11,9 +11,14 @@ paginate: true
 
 ## Activité : Construire une visualisation avec l'Assistant IA
 
-**Document :** *Construire une visualisation avec l'Assistant IA*
+**Ce que vous apprendrez**
+Comment demander un graphique à l'IA, et comment vérifier qu'elle a pris le bon indicateur, la bonne période et les données ajustées avant d'enregistrer.
 
-**~15 min**
+**Ce que vous pratiquerez**
+- Demander à l'IA une série temporelle CPN1
+- Répéter pour BCG
+- Construire un graphique pour un indicateur de votre choix
+- Vérifier chaque graphique contre les données avant de le garder
 
 </div>
 

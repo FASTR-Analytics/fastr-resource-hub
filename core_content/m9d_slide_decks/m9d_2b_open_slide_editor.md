@@ -11,9 +11,13 @@ paginate: true
 
 ## Demo: How to edit a slide
 
-**Facilitator-led**
+**What you'll see**
+The five steps in the editor — open it, add a visualisation block, split the slide into chart + text, resize, save.
 
-**~5 min**
+**What to watch for**
+- The cursor change on the resize divider
+- Which fixes belong in the editor vs back in the Visualisations tab
+- How the chart and text reflow after a resize
 
 </div>
 

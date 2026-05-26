@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Build a visualisation with the AI Assistant
 
-**Handout:** *Build a visualisation with the AI Assistant*
+**What you'll learn**
+How to prompt the AI for a chart, and how to verify it picked the right indicator, period and adjusted data before saving.
 
-**~15 min**
+**What you'll practice**
+- Prompt the AI for an ANC1 time-series
+- Repeat for BCG
+- Build a chart for an indicator of your choice
+- Check each chart against the data before you keep it
 
 </div>
 

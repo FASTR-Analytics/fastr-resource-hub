@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Let the AI draft an interpretation
 
-**Handout:** *Let the AI draft an interpretation*
+**What you'll learn**
+The AI can describe a chart but doesn't know your context — every claim has to be checked before you put your name on it.
 
-**~15 min**
+**What you'll practice**
+- Generate a slide with a viz of your choice
+- Read the AI text and check each claim against the chart
+- Refine the prompt and re-generate
+- Edit anything the AI got wrong before you keep it
 
 </div>
 

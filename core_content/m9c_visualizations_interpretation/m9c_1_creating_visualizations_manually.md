@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Create your first visualisation
 
-**Handout:** *Create your first visualisation*
+**What you'll learn**
+How filter and disaggregate change what a chart says, and when to reach for a preset vs Custom.
 
-**~15 min**
+**What you'll practice**
+- Build a time-series of ANC1 monthly volumes
+- Build the same for BCG
+- Build a chart for an indicator of your choice
+- Save each one to your own folder
 
 </div>
 

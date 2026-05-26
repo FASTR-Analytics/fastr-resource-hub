@@ -11,9 +11,14 @@ paginate: true
 
 ## Activité : Laisser l'IA rédiger une interprétation
 
-**Document :** *Laisser l'IA rédiger une interprétation*
+**Ce que vous apprendrez**
+L'IA peut décrire un graphique mais ne connaît pas votre contexte — chaque affirmation doit être vérifiée avant que vous y mettiez votre nom.
 
-**~15 min**
+**Ce que vous pratiquerez**
+- Générer une diapo avec une visualisation de votre choix
+- Lire le texte de l'IA et vérifier chaque affirmation contre le graphique
+- Affiner le prompt et regénérer
+- Corriger ce que l'IA a mal interprété avant de le garder
 
 </div>
 

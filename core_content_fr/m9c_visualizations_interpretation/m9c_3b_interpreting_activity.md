@@ -9,11 +9,15 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activité : Rédiger une interprétation
+## Activité : Rédiger une interprétation pour un graphique
 
-**Document :** *Rédiger une interprétation pour un graphique*
+**Ce que vous apprendrez**
+Une structure en trois parties pour toute interprétation — titre (la conclusion), ce que vous voyez (faits seulement), ce que cela signifie (et alors + qui agit).
 
-**~20 min**
+**Ce que vous pratiquerez**
+- Rédiger une interprétation en trois parties d'un graphique de votre choix
+- Déposer la visualisation et votre texte sur une diapo
+- Partager avec un voisin et resserrer la formulation
 
 </div>
 

@@ -11,9 +11,14 @@ paginate: true
 
 ## Activité : Créez votre première visualisation
 
-**Document :** *Créez votre première visualisation*
+**Ce que vous apprendrez**
+Comment filtre et désagrégation changent ce que dit un graphique, et quand utiliser un preset plutôt que Custom.
 
-**~15 min**
+**Ce que vous pratiquerez**
+- Construire une série temporelle des volumes mensuels CPN1
+- Faire la même chose pour BCG
+- Construire un graphique pour un indicateur de votre choix
+- Enregistrer chacun dans votre propre dossier
 
 </div>
 

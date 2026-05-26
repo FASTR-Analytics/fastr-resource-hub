@@ -11,9 +11,13 @@ paginate: true
 
 ## Démo : Comment éditer une diapositive
 
-**Animé par le facilitateur**
+**Ce que vous verrez**
+Les cinq étapes dans l'éditeur — ouvrir l'éditeur, ajouter un bloc visualisation, séparer la diapo en graphique + texte, redimensionner, enregistrer.
 
-**~5 min**
+**À surveiller**
+- Le curseur change quand on passe sur la séparation redimensionnable
+- Quelles corrections se font dans l'éditeur et lesquelles retournent dans l'onglet Visualisations
+- Comment le graphique et le texte se réorganisent après un redimensionnement
 
 </div>
 

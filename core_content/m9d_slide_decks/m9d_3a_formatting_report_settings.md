@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Configure your report settings
 
-**Handout:** *Configure your report settings*
+**What you'll learn**
+Where to set the report-wide options that affect every slide — name, colours, logos, page numbers.
 
-**~10 min**
+**What you'll practice**
+- Open Report settings
+- Rename your report
+- Pick a slide colour
+- Save and preview
 
 </div>
 

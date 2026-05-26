@@ -9,11 +9,15 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activity: Write an interpretation
+## Activity: Write an interpretation for a chart
 
-**Handout:** *Write an interpretation for a chart*
+**What you'll learn**
+A three-part structure for any interpretation — title (the conclusion), what you see (facts only), what it means (so what + who acts).
 
-**~20 min**
+**What you'll practice**
+- Write a three-part interpretation of a chart you choose
+- Drop the viz and your text onto a slide
+- Share with a neighbour and tighten the wording
 
 </div>
 

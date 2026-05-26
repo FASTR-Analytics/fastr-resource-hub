@@ -9,11 +9,16 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activity: Apply — spot a disruption
+## Activity: Spot a disruption in your country's data
 
-**Handout:** *Apply — spot a disruption*
+**What you'll learn**
+How to tell a real disruption (3+ months of sustained drop) from one-month noise, and how to frame a finding that points to action.
 
-**~25 min**
+**What you'll practice**
+- Pick an indicator and a region in your country's data
+- Find a candidate disruption
+- Write a three-part interpretation of what you see
+- Share back with the room and refine
 
 </div>
 

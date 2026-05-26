@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Format your report text
 
-**Handout:** *Format your report text*
+**What you'll learn**
+The same markdown shortcuts that work in the chat also work in the slide editor — headings, bold, bullets.
 
-**~10 min**
+**What you'll practice**
+- Add a heading to your slide
+- Bold a key phrase
+- Add a bullet list
+- Save and preview
 
 </div>
 

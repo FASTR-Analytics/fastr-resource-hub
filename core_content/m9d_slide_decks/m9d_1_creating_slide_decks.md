@@ -11,8 +11,13 @@ paginate: true
 
 ## Activity: Create your first slide deck
 
-**Handout:** *Create your first slide deck*
+**What you'll learn**
+How decks, slides and visualisations connect inside FASTR — and that a saved deck stays editable.
 
-**~10 min**
+**What you'll practice**
+- Open the Slide Decks tab
+- Create a new deck
+- Add a slide
+- Save the deck
 
 </div>

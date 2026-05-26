@@ -11,9 +11,14 @@ paginate: true
 
 ## Activity: Edit and finalise your slides
 
-**Handout:** *Edit and finalise your slides*
+**What you'll learn**
+AI-generated slides usually need cleanup — text and charts often need resizing and reflow before they're ready to show.
 
-**~20 min**
+**What you'll practice**
+- Review one slide against the data
+- Resize cramped text boxes
+- Resize and reposition the chart
+- Adjust spacing until the slide reads cleanly
 
 </div>
 

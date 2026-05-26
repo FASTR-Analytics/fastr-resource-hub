@@ -11,9 +11,14 @@ paginate: true
 
 ## Activité : Éditer et finaliser vos diapositives
 
-**Document :** *Éditer et finaliser vos diapositives*
+**Ce que vous apprendrez**
+Les diapos générées par l'IA demandent presque toujours du nettoyage — texte et graphiques ont souvent besoin d'être redimensionnés et repositionnés avant d'être présentables.
 
-**~20 min**
+**Ce que vous pratiquerez**
+- Revoir une diapo contre les données
+- Redimensionner les blocs de texte trop serrés
+- Redimensionner et repositionner le graphique
+- Ajuster les espaces jusqu'à ce que la diapo se lise proprement
 
 </div>
 

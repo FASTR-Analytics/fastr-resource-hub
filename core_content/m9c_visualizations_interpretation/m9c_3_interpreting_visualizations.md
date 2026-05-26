@@ -11,9 +11,13 @@ paginate: true
 
 ## Activity: How to read a FASTR visualisation
 
-**Handout:** *How to read a FASTR visualisation*
+**What you'll learn**
+A 6-step framework for reading any FASTR chart — indicator, geography and period, what's compared, values, what stands out, so what.
 
-**~10 min**
+**What you'll practice**
+- Walk the 6 steps through a chart on your own
+- Pair up and apply the steps to a second chart
+- Compare interpretations with your neighbour
 
 </div>
 

@@ -11,9 +11,14 @@ paginate: true
 
 ## Activité : Configurer les paramètres de votre rapport
 
-**Document :** *Configurer les paramètres de votre rapport*
+**Ce que vous apprendrez**
+Où régler les options qui s'appliquent à toutes les diapos — nom, couleurs, logos, numéros de page.
 
-**~10 min**
+**Ce que vous pratiquerez**
+- Ouvrir les Paramètres du rapport
+- Renommer votre rapport
+- Choisir une couleur de diapo
+- Enregistrer et prévisualiser
 
 </div>
 

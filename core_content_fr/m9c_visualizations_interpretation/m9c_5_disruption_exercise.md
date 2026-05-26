@@ -9,11 +9,16 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activité : Application — repérer une perturbation
+## Activité : Repérer une perturbation dans les données de votre pays
 
-**Document :** *Application — repérer une perturbation*
+**Ce que vous apprendrez**
+Comment distinguer une vraie perturbation (chute soutenue de 3 mois ou plus) d'un bruit ponctuel, et formuler un constat qui mène à l'action.
 
-**~25 min**
+**Ce que vous pratiquerez**
+- Choisir un indicateur et une région dans les données de votre pays
+- Trouver une perturbation candidate
+- Rédiger une interprétation en trois parties
+- Restituer à la salle et affiner
 
 </div>
 

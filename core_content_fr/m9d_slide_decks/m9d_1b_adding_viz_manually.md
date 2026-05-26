@@ -9,10 +9,15 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activité: Ajouter une visualisation (manuellement)
+## Activité : Ajouter une visualisation à une diapo
 
-**Document :** *Ajouter une visualisation (manuellement)*
+**Ce que vous apprendrez**
+Comment une visualisation arrive sur une diapo à la main — choisir la diapo, choisir le graphique, le placer.
 
-**~15 min**
+**Ce que vous pratiquerez**
+- Ouvrir l'éditeur de diapos
+- Ajouter un bloc visualisation à une diapo
+- Choisir un graphique parmi vos visualisations enregistrées
+- Enregistrer la présentation
 
 </div>
