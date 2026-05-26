@@ -127,10 +127,12 @@ function computeTimeBudget(params: {
     const end = dayEndTimes[d] || dayEndTime
     const dayLengthMinutes = timeToMinutes(end) - timeToMinutes(start)
 
-    // Day 1: lunch + tea + opening sessions (welcome, intros, agenda, objectives, expectations, outputs) ~55min
+    // Day 1: lunch + tea + welcome (~15min). Anything beyond a welcome (intros,
+    // agenda, objectives, expectations, expected outputs) is up to the user to
+    // request explicitly; do not pre-budget for them.
     // Day 2+: lunch + tea + recap/agenda ~20min
     const overhead = d === 1
-      ? lunchDuration + teaBreakOverhead + 55
+      ? lunchDuration + teaBreakOverhead + 15
       : lunchDuration + teaBreakOverhead + 20
 
     const available = Math.max(0, dayLengthMinutes - overhead)
@@ -1236,6 +1238,7 @@ CRITICAL RULES:
 - If the user asks a question without wanting changes, just answer without using tools
 - ALWAYS actually execute the changes - don't just describe what you would do
 - If you need to add a break in the middle of content, add the module ONCE, then add a break as a separate session
+- **Follow the user's session list exactly.** When the user provides a numbered list of sessions (e.g., "1. Welcome, 2. Module X, 3. Break, ..."), build exactly that list and nothing else. Do NOT add framing sessions the user did not ask for: no separate "Introductions", "Day 1 Agenda", "Workshop Objectives", "Expectations", "Expected Outputs", "End of Day", or generic recap/closing sessions. The user's Welcome session IS the opening; the user's wrap-up session IS the close.
 
 # STRUCTURAL RULES
 - Day title slide is ALWAYS first in each day — never move or add sessions before it
@@ -1455,10 +1458,10 @@ SELECTED MODULES:
 ${moduleDescriptions}
 
 REQUIREMENTS:
-- Day 1 morning: Opening, Introductions, Expectations, then start content
+- Day 1 starts with a single Welcome session (~15 min). Do not add separate Introductions, Day 1 Agenda, Workshop Objectives, Expectations, Expected Outputs sessions unless the user has explicitly asked for them.
 - Include tea breaks (15min) mid-morning and mid-afternoon
 - Include lunch break (60min) around 12:30-13:30
-- End each day by 17:00
+- End each day at the user's specified end time
 - Logical flow: Introduction first, then extraction, then platform, then analysis modules
 - Day 2+: Start with brief recap of previous day
 
