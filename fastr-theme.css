@@ -893,8 +893,9 @@ section.dense-table table {
 }
 
 section.dense-table th {
-  background: var(--fastr-deep-green);
-  color: white;
+  background: var(--fastr-deep-green) !important;
+  color: white !important;
+  border-bottom: none !important;
   font-size: 0.95em;
 }
 

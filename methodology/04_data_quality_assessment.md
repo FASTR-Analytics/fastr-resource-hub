@@ -1392,12 +1392,7 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1a -->
-<style scoped>
-table { font-size: 0.48em; }
-td, th { padding: 10px 12px !important; line-height: 1.4; }
-th { background: #0d7377; color: white; }
-td { vertical-align: top; }
-</style>
+<!-- _class: dense-table -->
 
 ## Measures of data quality - detailed
 
