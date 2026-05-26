@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{# This MkDocs site is being retired. Documentation now lives at
+   https://fastr-analytics.org/. The redirect happens three ways:
+   1. javascripts/redirect.js — immediate JS redirect (extra_javascript)
+   2. <meta http-equiv="refresh"> below — no-JS fallback
+   3. The announce banner — visible notice during the brief moment before redirect
+#}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta http-equiv="refresh" content="5; url=https://fastr-analytics.org/methodology/">
+  <style>
+    .moved-banner {
+      background: #C53030;
+      color: #fff;
+      padding: 0.85rem 1.25rem;
+      text-align: center;
+      font: 500 0.95rem/1.5 Roboto, system-ui, sans-serif;
+    }
+    .moved-banner a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+  </style>
+{% endblock %}
+
+{% block announce %}
+  <div class="moved-banner">
+    <strong>This site has moved.</strong>
+    Documentation now lives at
+    <a href="https://fastr-analytics.org/">fastr-analytics.org</a> —
+    redirecting you automatically.
+  </div>
+{% endblock %}
