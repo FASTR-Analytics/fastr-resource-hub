@@ -1106,7 +1106,9 @@ section.spacious p {
    ======================================== */
 section.activity-pointer,
 section[data-class~="activity-pointer"] {
-  background: var(--fastr-light-blue, #E8F4F3);
+  background-color: #ffffff;
+  background-image: radial-gradient(circle, var(--fastr-light-blue) 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
 }
 
 .activity-pointer {
