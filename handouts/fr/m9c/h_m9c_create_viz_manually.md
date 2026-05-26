@@ -28,13 +28,15 @@ footer: "FASTR · Visualisations et interprétation"
 
 ## Ce que vous allez faire
 
-Créer votre premier graphique avec le constructeur intégré : choisir une **mesure**, choisir un **graphique prêt à l'emploi**, et il est enregistré dans le projet. Vous cliquerez vous-même dans le constructeur ; l'activité suivante fait la même chose avec l'Assistant IA.
+Construire trois graphiques temporels : d'abord **CPN1**, puis **BCG**, puis **un indicateur de votre choix**. Chaque graphique est enregistré dans votre dossier dans la liste Visualisations du projet. L'activité suivante fait la même chose avec l'Assistant IA.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le constructeur de visualisation</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez la boîte de dialogue Créer une visualisation</span></h2>
 
-Dans l'onglet Visualisations, cliquez sur **Créer une visualisation**. Un constructeur en trois étapes s'ouvre : **Mesure → Préréglages → Configurer**.
+Dans l'onglet **Visualisations**, cliquez sur le bouton vert **+ Créer une visualisation** en haut à droite.
 
-![La boîte de dialogue Créer une visualisation — étape 1, sélection de Mesure (modules à gauche, métriques dans la grille) h:380](../../../resources/screenshots/m9c/create_viz_dialog.png)
+Une boîte de dialogue en trois étapes s'ouvre : **Métrique → Préréglages → Configurer**.
+
+![La boîte de dialogue Créer une visualisation à l'étape 1 — modules à gauche, tuiles de métriques dans la grille, Annuler/Suivant en bas à droite h:340](../../../resources/screenshots/m9c/create_viz_dialog.png)
 
 </div>
 </div>
@@ -43,19 +45,49 @@ Dans l'onglet Visualisations, cliquez sur **Créer une visualisation**. Un const
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choisissez une mesure</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Choisissez une métrique</span></h2>
 
-Les mesures sont groupées par module à gauche : **M1. Évaluation de la qualité des données**, **M2. Ajustement de la qualité des données**, **M3. Utilisation des services**, **M5. Estimation de la couverture** (dénominateurs), **M6. Estimation de la couverture** (estimations). Une mesure, c'est **ce qui est mesuré** — p. ex. *Nombre de services rapportés*, *Volume de services réel vs attendu*, *Couverture*.
+Dans le panneau de gauche de la boîte de dialogue, cliquez sur **M3. Service utilization**. La grille de droite ne liste plus que les métriques de M3.
 
-Pour une tendance de volume de services, ouvrez **M3. Utilisation des services** et choisissez une mesure comme **Nombre de services rapportés**. Cliquez sur **Suivant**.
+Cliquez sur la tuile **Number of services reported, by adjustment type**.
 
-<h2 class="step-h"><span class="step-n">3</span><span>Choisissez un graphique prêt à l'emploi</span></h2>
+Cliquez sur **Suivant** en bas à droite.
 
-Vous verrez une grille de **préréglages** — des graphiques prêts à l'emploi. Choisissez **Volume de services dans le temps (mensuel)** — un graphique en ligne du volume mensuel par indicateur. Cliquez sur **Créer**.
+> Les métriques sont groupées par module : **M1** (Évaluation de la qualité des données), **M2** (Ajustement de la qualité des données), **M3** (Utilisation des services), **M5** (Couverture — dénominateurs), **M6** (Couverture — estimations). Il n'y a pas de M4. Une métrique, c'est *ce qui est mesuré*. Un préréglage, c'est *une façon prête à l'emploi de la dessiner*.
+>
+> *Note : les libellés de modules et de métriques apparaissent en anglais dans l'interface, même en mode français.*
 
-Votre graphique est créé et apparaît dans la liste **Visualisations**. Utilisez la vue **Par dossier** pour le ranger dans votre dossier.
+<h2 class="step-h"><span class="step-n">3</span><span>Choisissez un préréglage</span></h2>
 
-> Les autres préréglages donnent des graphiques à **barres** trimestriels ou annuels. **Personnalisé → Configurer manuellement** permet de choisir le type de graphique (tableau, série temporelle, barres, carte) et la manière de décomposer les données — voir la section suivante.
+Vous êtes maintenant à l'étape **Préréglages**. Cliquez sur **Service volume over time (monthly)** — un graphique en ligne du volume mensuel.
+
+Le graphique s'ouvre dans l'éditeur.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Filtrez sur CPN1, 12 derniers mois</span></h2>
+
+Le graphique s'ouvre avec tous les indicateurs sur toute la période disponible. Vous allez le réduire à **CPN1, 12 derniers mois**.
+
+Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Filter (subset)** :
+
+- Sous **Indicators**, cochez **CPN1** uniquement (décochez les autres, ou utilisez la barre de recherche). Dans certains jeux de données il s'appelle **ANC1**.
+- Sous **Time period**, réglez la plage sur les **12 derniers mois**.
+
+Le graphique se met à jour à chaque clic.
+
+<h2 class="step-h"><span class="step-n">5</span><span>Enregistrez-le dans votre dossier</span></h2>
+
+Cliquez sur **Save as new viz** en haut de l'éditeur. Donnez-lui un nom clair (p. ex. *CPN1 — mensuel, 12 derniers mois*) et enregistrez-le dans **votre dossier**.
+
+Il apparaît maintenant dans la liste Visualisations sous votre dossier.
+
+## Refaites-le deux fois de plus
+
+Refaites les cinq mêmes étapes pour :
+
+1. **BCG** — même chemin, mais cochez **BCG** à l'étape 4 au lieu de CPN1.
+2. **Un indicateur de votre choix** — ce qui vous intéresse (Penta1, CPN4, admissions hospitalières…).
+
+Vous devriez avoir au final **trois graphiques enregistrés dans votre dossier**.
 
 ---
 
@@ -99,21 +131,69 @@ Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Essayez quelques options
+## Exercice : décomposez votre graphique CPN1 par région
 
-Refaites avec une autre mesure ou un autre préréglage — une mesure de couverture sous **M6**, ou le graphique à barres de variation trimestrielle — pour voir comment chacun se lit.
+En ce moment, votre graphique CPN1 montre une seule ligne : le total national sur les 12 derniers mois. Vous allez le transformer en une ligne par **région** pour comparer les régions côte à côte.
 
-> **Astuce :** Les graphiques en ligne (*Volume de services dans le temps*) sont les meilleurs pour les tendances dans le temps. Les graphiques à barres (*variation trimestrielle / annuelle*) sont meilleurs pour comparer des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le graphique</span></h2>
+
+Dans la liste **Visualisations**, ouvrez votre graphique CPN1 enregistré (celui que vous avez nommé *CPN1 — mensuel, 12 derniers mois*).
+
+<h2 class="step-h"><span class="step-n">2</span><span>Désagrégez par région</span></h2>
+
+Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Display (disaggregate)**.
+
+- Réglez la dimension sur **Region** (le menu déroulant qui demande *par quoi décomposer le graphique*).
+- Laissez le style Display sur **Lines** pour l'instant — une ligne par région, toutes sur le même graphique.
+
+Le graphique se redessine. Au lieu d'une seule ligne nationale, vous devriez voir **une ligne par région**.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Essayez les autres styles Display</span></h2>
+
+Mêmes données, formes différentes :
+
+- **Grid** — un petit graphique séparé par région, côte à côte. Utile quand il y a beaucoup de régions et que les lignes se chevauchent.
+- **Rows** — un tableau avec une ligne par région. Utile quand vous voulez les valeurs exactes plutôt que la forme.
+- **Columns** — un tableau avec une colonne par région.
+
+Choisissez celui qui se lit le mieux pour vos données.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Enregistrez-le comme nouveau graphique</span></h2>
+
+Cliquez sur **Save as new viz** — nommez-le p. ex. *CPN1 — mensuel, par région* et enregistrez-le dans **votre dossier**.
+
+> **N'écrasez pas le graphique national.** Enregistrez *comme nouveau graphique*, pas seulement *sauvegarder*, pour garder les deux : la tendance nationale et la décomposition régionale.
+
+### Attention
+
+Vous réglez à la fois Filter et Display à l'étape 4 du parcours original (filtrer sur CPN1, 12 derniers mois) et à l'étape 2 de cet exercice (désagréger par région). C'est correct. Le piège, c'est de **filtrer jusqu'à l'une des choses que vous disiez vouloir comparer** — p. ex. désagréger par région *puis* filtrer sur une seule région. Il ne resterait qu'une seule ligne, plus rien à comparer.
+
+### Refaites-le pour BCG
+
+Refaites les mêmes trois étapes sur votre graphique BCG enregistré. Vous devriez avoir au final **deux graphiques régionaux** dans votre dossier : un pour CPN1, un pour BCG.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Essayez quelques options de plus
+
+Une fois vos trois graphiques enregistrés, essayez une autre métrique ou un autre préréglage :
+
+- Une métrique de couverture sous **M6** (une courbe de couverture, pas une tendance de volume).
+- Le préréglage de variation trimestrielle (compare des périodes au lieu de tracer une tendance continue).
+
+> **Astuce :** Les graphiques en ligne (*Service volume over time*) sont les meilleurs pour les tendances dans le temps. Les graphiques à barres (*variation trimestrielle / annuelle*) sont meilleurs pour comparer des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
 
 ## Vérification
 
 Vous devriez maintenant avoir :
 
-- Au moins un graphique créé et visible dans votre liste **Visualisations**
-- Le chemin : **+ Créer une visualisation → Mesure → Préréglages → Configurer**
-- Une idée de quels préréglages conviennent aux tendances vs aux comparaisons
+- **Trois graphiques enregistrés** dans votre dossier : CPN1, BCG, et un de votre choix.
+- Le chemin mémorisé : **+ Créer une visualisation → M3 → métrique → préréglage → filtre → Save as new viz**.
+- Une idée de quels préréglages conviennent aux tendances vs aux comparaisons.
 
 ## Étape suivante
 
-L'activité suivante fait la même chose avec l'Assistant IA — en tapant une demande en langage naturel au lieu de cliquer dans le constructeur. Même résultat, autre chemin.
+L'activité suivante fait la même chose avec l'Assistant IA — en tapant la demande en langage naturel au lieu de cliquer dans la boîte de dialogue. Même résultat, autre chemin.
 
