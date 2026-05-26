@@ -34,7 +34,7 @@ Créer votre premier graphique avec le constructeur intégré : choisir une **me
 
 Dans l'onglet Visualisations, cliquez sur **Créer une visualisation**. Un constructeur en trois étapes s'ouvre : **Mesure → Préréglages → Configurer**.
 
-![Le bouton « Créer une visualisation » h:34](../../../resources/screenshots/m9c/new_viz_button.png)
+![La boîte de dialogue Créer une visualisation — étape 1, sélection de Mesure (modules à gauche, métriques dans la grille) h:380](../../../resources/screenshots/m9c/create_viz_dialog.png)
 
 </div>
 </div>

@@ -34,7 +34,7 @@ Create your first chart using the built-in builder: pick a **metric**, choose a 
 
 In the Visualizations tab, click **Create visualization**. A three-step builder opens: **Metric → Presets → Configure**.
 
-![The "Create visualization" button h:34](../../../resources/screenshots/m9c/new_viz_button.png)
+![The Create visualization dialog — step 1, Metric picker (modules listed on the left, metrics in the grid) h:380](../../../resources/screenshots/m9c/create_viz_dialog.png)
 
 </div>
 </div>
