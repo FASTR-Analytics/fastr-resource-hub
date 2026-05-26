@@ -412,7 +412,13 @@
       "Bash(cp /tmp/cat/*.png ~/Desktop/fastr_gff_updated_diagrams/)",
       "Bash(cp /tmp/cat/Technical_approaches_image.png ~/Desktop/fastr_gff_updated_diagrams/)",
       "Bash(open ~/Desktop/fastr_gff_updated_diagrams)",
-      "Bash(awk '{print $9, \"\\(\"$5\"B\\)\"}')"
+      "Bash(awk '{print $9, \"\\(\"$5\"B\\)\"}')",
+      "Bash(gh search *)",
+      "Bash(.venv/bin/python -c ' *)",
+      "Bash(awk '/SLIDE:mai___TRACKED_VAR__ /{flag=1} /## /&&flag{print; flag=0}' /Users/claireboulange/Desktop/fastr-resource-hub/methodology/fr/03b_ai_assistant.md)",
+      "Bash(cd *)",
+      "Bash(.venv/bin/python *)",
+      "Bash(awk '/variant: condensed/,/^$/' core_content/m6_data_analysis/_meta.yaml)"
     ]
   }
 }
