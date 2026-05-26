@@ -888,6 +888,26 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     valign: 'middle',
   })
 
+  // "Presented by <name>" subtitle — pulled from the first italic paragraph
+  // emitted by deckBuilder when session.speaker is set. Match either the EN
+  // ("Presented by …") or FR ("Présenté par …") form so the section cover
+  // mirrors the agenda's facilitator column.
+  const presenterPara = data.paragraphs.find(p =>
+    /^\*?(Presented by|Présenté par)\s+/i.test(p)
+  )
+  if (presenterPara) {
+    const presenterText = presenterPara.replace(/^\*|\*$/g, '').trim()
+    slide.addText(cleanMarkdownText(presenterText), {
+      x: 1, y: titleY + 1.4, w: 11.333, h: 0.5,
+      fontSize: 18,
+      fontFace: FONTS.titleFamily,
+      color: COLORS.lightBlue,
+      italic: true,
+      align: 'center',
+      valign: 'middle',
+    })
+  }
+
   // Add decorative icon centered below title
   if (hasIcon && decorativeIcon) {
     const iconPath = resolveImagePath(decorativeIcon.path)

@@ -239,7 +239,7 @@ async function buildSessionSlides(
   // MODULE CONTENT - load SECOND
   // Uses full or condensed version based on session.version
   if (session.module) {
-    const moduleSlides = await buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language)
+    const moduleSlides = await buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language, session.speaker)
     if (moduleSlides) {
       allSlideContents.push(moduleSlides)
     }
@@ -251,7 +251,10 @@ async function buildSessionSlides(
   if (session.topics && Array.isArray(session.topics) && session.topics.length > 0) {
     // Add section cover slide if no module already generated one
     if (!session.module && session.session) {
-      const titleSlide = `<!-- _class: section-cover -->\n![bg](../../resources/backgrounds/section_slide.png)\n\n# ${session.session}`
+      const presenter = session.speaker
+        ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${session.speaker}*`
+        : ''
+      const titleSlide = `<!-- _class: section-cover -->\n![bg](../../resources/backgrounds/section_slide.png)\n\n# ${session.session}${presenter}`
       allSlideContents.push(titleSlide)
     }
     const loadedFiles = new Set<string>()
@@ -317,9 +320,9 @@ async function buildSessionSlides(
     }
     // For sections with duration, add a placeholder slide after the cover
     if (session.duration && session.duration > 0) {
-      return buildSectionSlide(session) + '\n---\n\n' + buildGenericSessionSlide(session)
+      return buildSectionSlide(session, language) + '\n---\n\n' + buildGenericSessionSlide(session)
     }
-    return buildSectionSlide(session)
+    return buildSectionSlide(session, language)
   }
 
   // Generic session (no specific slides)
@@ -345,16 +348,17 @@ async function buildModuleSlides(
   topicRange?: { start: number; end: number } | null,
   excludedSlides?: string[],
   version?: 'full' | 'condensed',
-  language: Language = 'en'
+  language: Language = 'en',
+  speaker?: string
 ): Promise<string | null> {
   // Handle imported modules (stored in database, not filesystem)
   if (moduleId.startsWith('imported_')) {
-    return await buildImportedModuleSlides(moduleId, sessionName, sessionNumber)
+    return await buildImportedModuleSlides(moduleId, sessionName, sessionNumber, language, speaker)
   }
 
   // Handle external decks (PDF pages stored as images)
   if (moduleId.startsWith('external_')) {
-    return await buildExternalDeckSlides(moduleId, sessionName, sessionNumber)
+    return await buildExternalDeckSlides(moduleId, sessionName, sessionNumber, language, speaker)
   }
 
   const folderName = getModuleFolder(moduleId)
@@ -462,10 +466,13 @@ async function buildModuleSlides(
   // Start with a session title slide
   const moduleName = getModuleName(moduleId) || sessionName || 'Session'
   const displayName = sessionName || moduleName
+  const presenter = speaker
+    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# ${displayName}`
+# ${displayName}${presenter}`
 
   const contents: string[] = [titleSlide]
   for (const file of files) {
@@ -484,7 +491,9 @@ async function buildModuleSlides(
 async function buildImportedModuleSlides(
   moduleId: string,
   sessionName?: string,
-  sessionNumber?: number
+  sessionNumber?: number,
+  language: Language = 'en',
+  speaker?: string
 ): Promise<string | null> {
   const dbId = moduleId.replace(/^imported_/, '')
   const mod = await getImportedModule(dbId)
@@ -495,10 +504,13 @@ async function buildImportedModuleSlides(
 
   const displayName = sessionName || mod.name
   const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
+  const presenter = speaker
+    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# ${sessionLabel}: ${displayName}`
+# ${sessionLabel}: ${displayName}${presenter}`
 
   const contents: string[] = [titleSlide]
   for (const slide of slides) {
@@ -516,7 +528,9 @@ async function buildImportedModuleSlides(
 async function buildExternalDeckSlides(
   moduleId: string,
   sessionName?: string,
-  sessionNumber?: number
+  sessionNumber?: number,
+  language: Language = 'en',
+  speaker?: string
 ): Promise<string | null> {
   const dbId = moduleId.replace(/^external_/, '')
   const deck = await getExternalDeck(dbId)
@@ -527,10 +541,13 @@ async function buildExternalDeckSlides(
 
   const displayName = sessionName || deck.name
   const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
+  const presenter = speaker
+    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# ${sessionLabel}: ${displayName}`
+# ${sessionLabel}: ${displayName}${presenter}`
 
   const contents: string[] = [titleSlide]
   for (const page of pages) {
@@ -1031,12 +1048,15 @@ function buildDayEndSlide(session: Session, dayNumber: number, language: Languag
 /**
  * Build a section/agenda slide
  */
-function buildSectionSlide(session: Session): string {
+function buildSectionSlide(session: Session, language: Language = 'en'): string {
+  const presenter = session.speaker
+    ? `\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${session.speaker}*\n`
+    : ''
   return `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
 # ${session.session}
-`
+${presenter}`
 }
 
 /**
