@@ -178,209 +178,153 @@ La plate-forme d'analyse FASTR comprend cinq modules automatisés :
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m0_0 -->
-## Qu'essayons-nous d'accomplir ?
-
-L'analyse à cycle rapide accélère l'amélioration des résultats en matière de **SRMNIA-N** (Santé Reproductive, Maternelle, Néonatale, Infantile et de l'Adolescent et Nutrition) en renforçant l'utilisation systématique des données pour la prise de décision
-
-![w:700](../resources/diagrams_fr/rapid_cycle_analytics.png)
-<!-- /SLIDE -->
-
 <!-- SLIDE:m0_1 -->
-## Comment y parvenir ?
+## Qu'est-ce que FASTR ?
 
-Des approches opportunes, rigoureuses et peu coûteuses pour le suivi des systèmes de **SSP** (Soins de Santé Primaires), soutenues par le renforcement des capacités et l'appui à l'utilisation des données, en adéquation avec la demande et les besoins des pays
+**Frequent Assessments and System Tools for Resilience**
 
-![w:600](../resources/diagrams_fr/Technical_approaches_image.svg)
+Le GFF soutient les efforts pilotés par les pays pour améliorer la production et l'utilisation rapides des données dans la prise de décision. Cet ensemble d'initiatives et d'appui technique est désigné sous le nom de **FASTR**.
+
+FASTR repose sur quatre piliers complémentaires, soutenus par le renforcement des capacités et l'appui à l'utilisation des données.
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Lire l'acronyme à voix haute. La plupart des participants n'auront jamais entendu épeler « Frequent Assessments and System Tools for Resilience », et les mots eux-mêmes expliquent ce qu'est FASTR.
+- Le paragraphe d'ouverture reprend la formulation officielle du GFF. Rester proche du texte.
+- La phrase sur les quatre piliers en bas est un pointeur vers la diapo 4. Ne pas énumérer les piliers ici ; la diapo dédiée s'en charge.
+- Si on demande ce qui distingue FASTR de l'analyse SIGS existante : la combinaison de cycles rapides, de méthodes complémentaires multiples et d'un appui aux capacités intégré, et non une technique unique.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
-## Qu'est-ce que FASTR ?
+## Qu'essayons-nous d'accomplir ?
 
-Une approche visant à catalyser des cycles continus « analyser, apprendre, renforcer, agir » pour favoriser l'utilisation systématique de données actualisées pour la prise de décision.
+Les analyses à cycle rapide accélèrent les progrès de la SRMNIA-N en renforçant la disponibilité et l'utilisation systématique et rapide des données pour la prise de décisions stratégiques.
 
-![w:700](../resources/diagrams_fr/what_is_fastr.png)
+![w:700](../resources/diagrams_fr/rapid_cycle_analytics.png)
 
 <!--
-PRESENTER NOTES:
-- Les systèmes d'information sanitaire de routine sont une source de données essentielle, mais souvent sous-utilisée en raison des préoccupations concernant la qualité des données et des longs délais entre la collecte et l'analyse des données
-- Les enquêtes traditionnelles auprès des ménages et des établissements, bien qu'essentielles, sont gourmandes en ressources et peu fréquentes
-- L'analyse à cycle rapide de FASTR comble cette lacune en fournissant :
-  - Des informations opportunes alignées sur les cycles de décision des pays
-  - Un apprentissage continu plutôt que des évaluations ponctuelles
-  - Des boucles de rétroaction directes entre les données, l'analyse et l'action
+NOTES DU PRÉSENTATEUR :
+- L'objectif de cette diapo est l'écart. Les données SIGS de routine sont disponibles maintenant ; les enquêtes en personne auprès des ménages et des établissements arrivent tous les cinq ans. Les décisions ne peuvent pas attendre la prochaine enquête.
+- « Utilisation systématique et rapide des données » est l'objectif. « Rapide » est la partie facile. « Systématique » signifie que la revue des données devient une habitude, pas un événement ponctuel.
+- Le diagramme oppose le modèle « enquête seule » (un point d'interrogation dans les années entre enquêtes) au modèle FASTR (des données continues et rapides en complément des enquêtes).
+- Si on demande si FASTR remplace les enquêtes : non. FASTR comble les années intermédiaires et utilise les données d'enquête quand elles arrivent.
 -->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_3 -->
+## Une approche : analyser, apprendre, renforcer, agir
+
+<div class="columns-image-right">
+<div>
+
+FASTR catalyse des cycles continus d'analyse, d'apprentissage, de renforcement des systèmes et d'action, afin que des données disponibles à temps orientent les décisions à chaque niveau.
+
+</div>
+<div>
+
+![Approche d'analyse en cycle rapide FASTR h:520](../resources/diagrams_fr/FASTR_rapid_cycle_analytics_approach.svg)
+
+</div>
+</div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Énoncer le cycle à voix haute : analyser les données, apprendre ce qu'elles disent, renforcer le système à partir de ce que l'on a appris, agir sur les priorités, puis recommencer.
+- Insister sur le caractère continu, pas ponctuel. Chaque tour de cycle doit laisser le système de données et les décisions un peu meilleurs que le précédent.
+- Un seul rapport FASTR ne change pas la donne. Le cycle, oui. C'est pourquoi « systématique » compte autant que « rapide ».
+- Si on demande quelle étape est la plus importante : les quatre. Sauter « renforcer » est le mode d'échec le plus fréquent ; l'analyse arrive mais le système ne s'améliore pas.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_4 -->
+## Quatre piliers complémentaires
+
+FASTR est une approche intégrée reposant sur quatre méthodes rigoureuses, rapides et peu coûteuses pour le suivi des systèmes de soins de santé primaires, soutenues par le renforcement des capacités et l'appui à l'utilisation des données, adaptés aux besoins du pays.
+
+![Quatre approches techniques FASTR w:620](../resources/diagrams_fr/Technical_approaches_image.svg)
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Chaque pilier est une méthode. Ils sont conçus pour se compléter, pas pour se dupliquer.
+- Le suivi de l'utilisation des services via le SIGS est le pilier de travail. Il est disponible en routine et couvre tous les territoires où il y a des établissements qui rapportent. C'est le pilier sur lequel porte l'atelier.
+- Les trois autres apportent de la profondeur là où le SIGS ne peut pas aller : les enquêtes téléphoniques en établissement pour la disponibilité et le suivi des réformes, les enquêtes auprès des ménages et clients pour le côté demande (recours aux soins, soins non sollicités, expérience), et les analyses de suivi pour les causes profondes.
+- Le renforcement des capacités et l'appui à l'utilisation des données est la bande sous les quatre piliers. Sans cela, les produits analytiques ne sont pas utilisés.
+- Le dire explicitement : cet atelier enseigne le premier pilier. Les trois autres sont introduits pour le contexte, afin que les participants connaissent l'offre FASTR plus large.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5 -->
+## Comment les pays utilisent-ils FASTR ?
+
+FASTR répond à des questions de politique définies par les pays à partir de données de routine et d'enquêtes. Les pays y entrent par des voies différentes selon leurs priorités.
+
+- **Le suivi des perturbations de services** a été le point de départ pour la Sierra Leone, le Burkina Faso, la Zambie et le Libéria, déclenché par des changements dans le financement extérieur.
+- **D'autres priorités analytiques** ont conduit le Nigéria, le Ghana et la RDC à entrer dans FASTR pour d'autres questions, l'analyse des perturbations venant en complément.
+
+Dans tous les cas, FASTR permet aux pays de :
+
+- Suivre la continuité et la reprise des services
+- Identifier les disparités géographiques ou par type de service
+- Éclairer la planification, la priorisation et le dialogue politique
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- Différents points d'entrée, même méthodologie sous-jacente. L'équipe pays décide quelles questions de politique sont prioritaires ; les méthodes FASTR s'adaptent à ces questions.
+- Le suivi des perturbations est un point d'entrée, pas l'offre complète. Certains pays commencent par là à cause de changements de financement extérieur ; d'autres entrent pour d'autres raisons.
+- Les quatre piliers s'appliquent à tous les cas. Un pays peut faire tourner le pilier SIGS sans enquête ménages, ou l'inverse.
+- Les trois puces « dans tous les cas » sont le fil rouge. Quel que soit le point d'entrée, FASTR finit par servir le suivi de la continuité, l'identification des disparités et le dialogue de planification.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_6 -->
 ## Quelle est l'approche FASTR pour le suivi de l'utilisation des services SRMNIA-N ?
 
 <div class="columns-image-right">
 <div>
 
-Analyses trimestrielles des données **DHIS2** (District Health Information Software 2), axées sur les indicateurs nationaux prioritaires
+Analyses trimestrielles des données DHIS2, axées sur les indicateurs nationaux prioritaires.
 
-Développement d'outils durables pour garantir que les parties prenantes qui ont besoin d'utiliser les données puissent générer les analyses et visualisations appropriées, au bon moment, sur leurs indicateurs d'intérêt
+Construction d'outils durables pour que les parties prenantes qui ont besoin d'utiliser les données puissent produire la bonne analyse et les bonnes visualisations, au bon moment, sur leurs indicateurs d'intérêt.
 
-Combinaison de l'analyse et de la visualisation avec le renforcement des capacités et l'appui à l'utilisation des données pour assurer la durabilité et l'institutionnalisation
+Combinaison de l'analyse et de la visualisation avec le renforcement des capacités et l'appui à l'utilisation des données, pour la durabilité et l'institutionnalisation.
 
 </div>
 <div>
 
-![Processus de suivi de l'utilisation des services SRMNIA-N h:350](../resources/diagrams_fr/steps_to_implement_rmncahn_service_chart.png)
+![Processus de suivi de l'utilisation des services SRMNIA-N](../resources/diagrams_fr/steps_to_implement_rmncahn_service_chart.png)
 
 </div>
 </div>
+
+<!--
+NOTES DU PRÉSENTATEUR :
+- C'est la méthodologie que cet atelier enseigne. Les trois autres piliers de la diapo précédente sont introduits pour le contexte ; celui-ci est le cœur des six prochains modules.
+- Cadence trimestrielle, indicateurs prioritaires, outillage durable : ces trois points sont le modèle opérationnel.
+- Le diagramme à droite est le parcours du reste de l'atelier. Identifier les questions, extraire les données, évaluer la qualité, ajuster pour les problèmes de qualité, analyser, communiquer. Chaque étape a son propre module.
+- Ne pas approfondir ici. Pointer le diagramme et dire « voici le reste de l'atelier ».
+- Si on demande pourquoi trimestriel : cela correspond au cycle de décision typique des districts et des ministères. Plus rapide est possible mais rarement utile ; plus lent annule l'intérêt.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_7 -->
+## De l'analyse à l'action
+
+Les résultats de FASTR, qu'il s'agisse de scores AQD, de tendances d'utilisation des services ou d'estimations de couverture, sont des **points de départ, pas des conclusions**. Ils déclenchent l'investigation et éclairent les décisions.
+
+![w:600](../resources/diagrams_fr/from_analysis_to_action.svg)
+
+<!--
+PRESENTER NOTES:
+- Ce cycle s'applique à tous les résultats de FASTR, pas seulement aux perturbations.
+- Les résultats AQD déclenchent l'investigation des systèmes de données et l'amélioration du rapportage.
+- Les changements d'utilisation déclenchent l'investigation de la prestation de services et la levée des obstacles.
+- Les écarts de couverture déclenchent l'investigation des barrières d'accès et le ciblage des interventions.
+- FASTR fournit les preuves ; les parties prenantes apportent le contexte, le jugement et l'action.
+-->
 <!-- /SLIDE -->
 
 ---
 
-**Dernière mise à jour** : 06-05-2026
+**Dernière mise à jour** : 26-05-2026
 **Contact** : <fastr@worldbank.org>
-
-<!-- SLIDE:m0_3a -->
-## Comment les pays utilisent-ils FASTR ?
-
-FASTR est conçu pour répondre à des **questions de politique définies par les pays** à partir de données de routine et d'enquêtes.
-
-**Différents points d'entrée selon les pays :**
-
-- **Suivi des perturbations de services :** La Sierra Leone, le Burkina Faso, la Zambie et le Libéria ont commencé par le suivi de la continuité des services, déclenché par des changements dans le financement extérieur du secteur de la santé
-- **Autres priorités d'abord :** Le Nigéria, le Ghana et la RDC ont initié FASTR pour d'autres questions, avec l'analyse des perturbations comme complément
-
-**Tous les pays peuvent utiliser FASTR pour répondre à des questions pertinentes pour les politiques, notamment :**
-
-- Le suivi de la continuité et de la reprise des services
-- L'identification des défis géographiques ou spécifiques à certains services
-- L'appui à la priorisation, la planification et le dialogue politique
-
-<!--
-PRESENTER NOTES:
-- FASTR est flexible — les pays définissent leurs propres questions prioritaires
-- Les perturbations de services ne sont qu'un point d'entrée, pas le seul cas d'utilisation
-- Certains pays commencent par les perturbations, d'autres l'ajoutent plus tard
-- La méthodologie (AQD, ajustement, analyse) s'applique à tous les cas d'utilisation
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_3b -->
-## De l'analyse à l'action
-
-Les résultats de FASTR — qu'il s'agisse de scores AQD, de tendances d'utilisation des services ou d'estimations de couverture — sont des **points de départ, pas des conclusions**. Ils déclenchent l'investigation et éclairent les décisions.
-
-![w:850](../resources/diagrams_fr/from_analysis_to_action.svg)
-
-<!--
-PRESENTER NOTES:
-- Ce cycle s'applique à TOUS les résultats de FASTR, pas seulement aux perturbations
-- Résultats AQD → investiguer les systèmes de données → améliorer le rapportage
-- Changements d'utilisation → investiguer la prestation de services → lever les obstacles
-- Écarts de couverture → investiguer les barrières d'accès → cibler les interventions
-- FASTR fournit les preuves ; les parties prenantes apportent le contexte, le jugement et l'action
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_4 -->
-<!-- _class: compact two-panel -->
-
-## Analytique FASTR : suite de produits et résultats
-
-<div class="panel-layout">
-<div>
-
-### SNIS (Données de routine des services)
-
-**Rapport SNIS FASTR standard**
-- Tendances principales d'utilisation des services
-- Ajustements de la qualité des données (complétude, valeurs aberrantes)
-- Analyses nationales et infranationales
-
-**Notes brèves sur les perturbations de services**
-- Analyse ciblée des changements de volume de services
-- Conçues pour une interprétation et une discussion rapides
-
-**Rapports SNIS spécifiques aux pays**
-- Indicateurs, géographies et priorités adaptés
-- Visuels et narratifs personnalisés alignés sur les besoins du pays
-
-</div>
-<div>
-
-### EES (Évaluation des établissements de santé)
-
-**Rapport complet d'enquête EES**
-- Disponibilité des établissements, disponibilité des services et intrants
-- Résultats standardisés entre les cycles d'enquête
-
-**Résultats axés sur les perturbations** (le cas échéant)
-- Vues ciblées sur les interruptions de services ou les facteurs de stress du système
-- Peuvent être produits comme résultats autonomes ou annexes
-
-</div>
-</div>
-
-<!--
-PRESENTER NOTES:
-- FASTR produit différents produits pour différents besoins
-- Les résultats SNIS sont routiniers/trimestriels, les résultats EES liés aux cycles d'enquête
-- Les pays peuvent combiner selon leurs priorités
-- Tous les résultats suivent une méthodologie et une image de marque cohérentes
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5 -->
-## Triangulation des données : combiner plusieurs sources
-
-Chaque source répond à des questions différentes — ensemble, elles racontent l'histoire complète.
-
-![Couches de triangulation des données h:420](../resources/diagrams_fr/data_triangulation_layers.svg)
-
-<!--
-PRESENTER NOTES:
-- Le DHIS2 est le fondement : disponible trimestriellement, couvre tous les établissements
-- Les estimations de couverture ajoutent la perspective populationnelle
-- Les EES et enquêtes ménages ajoutent de la profondeur quand elles sont disponibles
-- Tous les pays ne disposent pas de toutes les sources — FASTR fonctionne avec ce qui est disponible
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5a -->
-## Pourquoi FASTR ?
-
-De nombreux pays font face à des défis communs avec les données de santé :
-
-- **Données collectées mais sous-utilisées** — Les données de routine restent dans DHIS2 sans orienter les décisions
-- **Cycles analytiques lents** — Les revues annuelles ratent les opportunités d'action rapide
-- **Sources de données fragmentées** — SNIS, enquêtes et évaluations analysés en silos
-
-**FASTR répond à ces défis** en fournissant aux pays des outils et méthodes pour une analyse rapide et régulière de sources multiples — transformant les données en décisions pour des systèmes de SSP plus solides.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5b -->
-## Contexte
-
-De nombreux pays connaissent des **réductions soudaines et spectaculaires du financement** provenant de sources externes.
-
-Cela aboutit à :
-- Des **trous critiques** dans les programmes et les systèmes de santé
-- Des **effets potentiellement graves** sur la prestation de services et les résultats sanitaires pour les femmes, les enfants et les adolescents
-
-**Questions clés qui se posent :**
-- Quelle est l'ampleur des réductions, et quel effet ont-elles sur la prestation des services ?
-- Quelle est la meilleure façon de hiérarchiser les ressources restantes ?
-- Quelles adaptations peuvent protéger et renforcer la prestation de services essentiels ?
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_6 -->
-## Pourquoi maintenant ? Répondre aux perturbations du financement
-
-![Perturbations et questions clés h:450](../resources/diagrams_fr/disruptions_questions.svg)
-
-<!--
-PRESENTER NOTES:
-- Ce contexte s'applique à de nombreux pays actuellement — ce n'est pas hypothétique
-- FASTR ne crée pas de nouvelle collecte de données — il maximise l'utilisation des données DHIS2 existantes
-- L'objectif est de passer de la réaction à la proactivité : voir les perturbations tôt, répondre rapidement
-- Les pays peuvent utiliser les analyses FASTR pour plaider en faveur des ressources et éclairer la planification
--->
-<!-- /SLIDE -->

@@ -76,18 +76,13 @@ MODULE_FOLDERS = {
 # Topic names for generating filenames
 TOPIC_NAMES = {
     # m0 - Introduction (from 00_introduction.md)
-    'm0_0': 'what_are_we_trying_to_achieve',
-    'm0_1': 'how_can_this_be_achieved',
-    'm0_2': 'what_is_fastr',
-    'm0_3': 'fastr_approach_rmncahn',
-    'm0_3a': 'how_countries_use_fastr',
-    'm0_3b': 'from_analysis_to_action',
-    'm0_4': 'fastr_outputs',
-    'm0_5': 'data_triangulation',
-    'm0_5a': 'why_fastr',
-    'm0_5b': 'disruptions_text',
-    'm0_6': 'disruptions_context',
-    'm0_7': 'community_of_practice',
+    'm0_1': 'what_is_fastr',
+    'm0_2': 'what_are_we_trying_to_achieve',
+    'm0_3': 'analyze_learn_strengthen_act',
+    'm0_4': 'four_complementary_pillars',
+    'm0_5': 'how_countries_use_fastr',
+    'm0_6': 'fastr_approach_rmncahn',
+    'm0_7': 'from_analysis_to_action',
 
     # m1 - Identify Questions & Indicators (from 01_identify_questions_indicators.md)
     'm1_1': 'what_is_data_use_case',
@@ -341,10 +336,15 @@ def find_slide_markers(content):
     """
     Find all <!-- SLIDE:xxx --> ... <!-- /SLIDE --> blocks in content.
 
+    Strips fenced code blocks first so documentation examples (e.g. the
+    `<!-- SLIDE:m4_2 -->` example in methodology/README.md) are not picked up
+    and used to overwrite real slide files.
+
     Returns list of (slide_id, content) tuples.
     """
+    content_no_fences = re.sub(r'```.*?```', '', content, flags=re.DOTALL)
     pattern = r'<!--\s*SLIDE:(\w+)\s*-->(.*?)<!--\s*/SLIDE\s*-->'
-    matches = re.findall(pattern, content, re.DOTALL)
+    matches = re.findall(pattern, content_no_fences, re.DOTALL)
 
     results = []
     for slide_id, slide_content in matches:

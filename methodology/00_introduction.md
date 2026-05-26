@@ -185,51 +185,116 @@ The FASTR analytics platform includes five automated modules:
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m0_0 -->
-## What are we trying to achieve?
-
-Rapid cycle analytics accelerates improvements in RMNCAH-N outcomes by increasing the systematic use of data for decision making
-
-![w:700](../resources/diagrams/rapid_cycle_analytics.png)
-<!-- /SLIDE -->
-
 <!-- SLIDE:m0_1 -->
-## How can this be achieved?
-
-Timely, rigorous, and low-cost approaches to monitoring PHC systems, underpinned by capacity building and data use support aligned with country demand and needs
-
-![w:600](../resources/diagrams/Technical_approaches_image.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_2 -->
 ## What is FASTR?
 
-An approach to catalyzing continuous 'analyze, learn, strengthen, act' cycles to drive the systematic use of timely data for decision making.
+**Frequent Assessments and System Tools for Resilience**
 
-![w:700](../resources/diagrams/what_is_fastr.png)
+The GFF supports country-led efforts to improve the timely generation and use of data for decision-making. This set of initiatives and technical support is referred to as **FASTR**.
+
+FASTR rests on four complementary pillars, underpinned by capacity strengthening and data-use support.
 
 <!--
 PRESENTER NOTES:
-- Routine health information systems are a critical source of data, but often underused due to concerns about data quality and long delays between data collection and analysis
-- Traditional household and facility surveys, while essential, are resource-intensive and infrequent
-- FASTR's rapid-cycle analytics address this gap by providing:
-  - Timely insights aligned with country decision cycles
-  - Continuous learning rather than one-off assessments
-  - Direct feedback loops between data, analysis, and action
+- Read the acronym aloud. Most participants will not have heard "Frequent Assessments and System Tools for Resilience" spelled out before, and the words themselves explain what FASTR is.
+- The opening paragraph is the official GFF wording. Keep it close to verbatim.
+- The four-pillar line at the bottom is a pointer to slide 4. Do not enumerate the pillars here; the dedicated slide does that.
+- If asked what makes FASTR different from existing HMIS analysis: it is the combination of timely cycles, multiple complementary methods, and embedded capacity support, not any single technique.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_2 -->
+## What are we trying to achieve?
+
+Rapid-cycle analytics accelerate progress on RMNCAH-N outcomes by strengthening the availability and systematic, timely use of data for decision-making.
+
+![w:700](../resources/diagrams/rapid_cycle_analytics.png)
+
+<!--
+PRESENTER NOTES:
+- The point of this slide is the gap. Routine HMIS data is available now; in-person household and facility surveys arrive every five years. Decisions cannot wait for the next survey.
+- "Systematic and timely use of data" is the goal. Timely is the easy half. Systematic means data review becomes part of the routine, not a one-off.
+- The diagram contrasts the survey-only model (a question mark in the years between surveys) with the FASTR model (continuous, timely data alongside the surveys).
+- If asked whether FASTR replaces surveys: no. FASTR fills the years between them, and uses survey data when it arrives.
 -->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_3 -->
+## An approach: analyze, learn, strengthen, act
+
+<div class="columns-image-right">
+<div>
+
+FASTR catalyzes continuous cycles of analysis, learning, system strengthening, and action, so that timely data drives decision-making at every level.
+
+</div>
+<div>
+
+![FASTR rapid-cycle analytics approach h:520](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Walk the cycle aloud: analyze the data, learn what it tells you, strengthen the system based on what you learned, act on the priorities, then loop back to analyze again.
+- Emphasize this is continuous, not one-and-done. Each turn of the cycle should leave both the data system and the decisions a little better than the last.
+- A single FASTR report does not move the needle. The cycle does. That is why "systematic" matters as much as "timely".
+- If asked which step is most important: all four. Skipping "strengthen" is the most common failure mode; analysis lands but the system never improves.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_4 -->
+## Four complementary pillars
+
+FASTR is an integrated approach built on four rigorous, rapid, and low-cost methods for monitoring primary health care systems, underpinned by capacity strengthening and data-use support adapted to country needs.
+
+![Four FASTR technical approaches w:620](../resources/diagrams/Technical_approaches_image.svg)
+
+<!--
+PRESENTER NOTES:
+- Each pillar is one method. They are designed to complement each other, not duplicate.
+- HMIS service-use monitoring is the workhorse. It runs routinely and covers everywhere with reporting facilities. This is the pillar the workshop focuses on.
+- The other three add depth where HMIS cannot reach: facility phone surveys for readiness and reform tracking, household and client surveys for the demand side (care-seeking, foregone care, experience), and follow-on analyses for root causes.
+- Capacity strengthening and data-use support is the band underneath all four. Without it, the analytical outputs do not get used.
+- Make explicit: this workshop teaches the first pillar. The other three are introduced for context so participants know what the wider FASTR offer is.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_5 -->
+## How do countries use FASTR?
+
+FASTR supports country-defined policy questions using routine and survey data. Countries enter through different pathways depending on their priorities.
+
+- **Service disruption monitoring** was the starting point for Sierra Leone, Burkina Faso, Zambia, and Liberia, triggered by changes in external financing.
+- **Other analytic priorities** drove Nigeria, Ghana, and DRC into FASTR first, with disruption analysis added as complementary work.
+
+In all cases, FASTR enables countries to:
+
+- Track service continuity and recovery
+- Identify geographic or service-specific disparities
+- Inform planning, prioritization, and policy dialogue
+
+<!--
+PRESENTER NOTES:
+- Different entry points, same underlying methodology. The country team decides which policy questions matter; the FASTR methods adapt to those questions.
+- Disruption monitoring is one entry point, not the whole offer. Some countries lead with it because of external financing changes; others come in for other reasons.
+- The four pillars apply across all use cases. A country can run the HMIS pillar without a household survey, or vice versa.
+- The three "in all cases" bullets are the through-line. Whatever the entry point, FASTR ends up serving continuity tracking, disparity identification, and planning dialogue.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m0_6 -->
 ## What is the FASTR approach to RMNCAH-N service use monitoring?
 
 <div class="columns-image-right">
 <div>
 
-Quarterly analyses of DHIS2 data, focusing on prioritized national indicators
+Quarterly analyses of DHIS2 data, focusing on prioritized national indicators.
 
-Building sustainable tools to ensure that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest
+Building sustainable tools so that stakeholders who need to use data can generate the right analysis and visualizations, at the right time, on their indicators of interest.
 
-Combining analysis and visualization with capacity strengthening and data use support for sustainability and institutionalization
+Combining analysis and visualization with capacity strengthening and data-use support for sustainability and institutionalization.
 
 </div>
 <div>
@@ -238,155 +303,34 @@ Combining analysis and visualization with capacity strengthening and data use su
 
 </div>
 </div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_3a -->
-## How do countries use FASTR?
-
-FASTR is designed to support **country-defined policy questions** using routine and survey data.
-
-**Different entry points for different countries:**
-
-- **Monitoring service disruptions:** Sierra Leone, Burkina Faso, Zambia, and Liberia began with service continuity monitoring, triggered by changes in external financing for the health sector
-- **Other priorities first:** Nigeria, Ghana, and DRC initiated FASTR for different questions, with disruptions as complementary analysis
-
-**All countries can engage with FASTR to answer policy-relevant questions including:**
-
-- Monitoring service continuity and recovery
-- Identifying geographic or service-specific challenges
-- Informing prioritization, planning, and policy dialogue
 
 <!--
 PRESENTER NOTES:
-- FASTR is flexible — countries define their own priority questions
-- Service disruptions is just one entry point, not the only use case
-- Some countries start with disruptions, others add it later
-- The methodology (DQA, adjustment, analysis) applies to all use cases
+- This is the methodology this workshop teaches. The other three pillars on the previous slide are introduced for context; this one is the meat of the next six modules.
+- Quarterly cadence, prioritized indicators, sustainable tooling: those three points are the operating model.
+- The diagram on the right is the journey for the rest of the workshop. Identify questions, extract data, assess quality, adjust for quality issues, analyze, communicate. Each step has its own module.
+- Avoid going deep here. Point at the diagram and say "this is the rest of the workshop".
+- If asked why quarterly: it matches the typical decision cycle for districts and ministries. Faster is possible but rarely useful; slower defeats the point.
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m0_3b -->
+<!-- SLIDE:m0_7 -->
 ## From analysis to action
 
-FASTR outputs — whether DQA scores, service use trends, or coverage estimates — are **starting points, not endpoints**. They trigger investigation and inform decisions.
+FASTR outputs, whether DQA scores, service use trends, or coverage estimates, are **starting points, not endpoints**. They trigger investigation and inform decisions.
 
 ![w:600](../resources/diagrams/from_analysis_to_action.svg)
 
 <!--
 PRESENTER NOTES:
-- This cycle applies to ALL FASTR outputs, not just disruptions
-- DQA findings → investigate data systems → improve reporting
-- Utilization changes → investigate service delivery → address bottlenecks
-- Coverage gaps → investigate access barriers → target interventions
-- FASTR provides evidence; stakeholders provide context, judgement, and action
+- This cycle applies to all FASTR outputs, not just disruptions.
+- DQA findings prompt investigation of data systems and improvements to reporting.
+- Utilization changes prompt investigation of service delivery and address bottlenecks.
+- Coverage gaps prompt investigation of access barriers and targeted interventions.
+- FASTR provides the evidence; stakeholders provide context, judgement, and action.
 -->
 <!-- /SLIDE -->
 
 ---
 
 **Contact**: <fastr@worldbank.org>
-
-<!-- SLIDE:m0_4 -->
-<!-- _class: compact two-panel -->
-
-## FASTR analytics: suite of outputs and products
-
-<div class="panel-layout">
-<div>
-
-### HMIS (Routine service data)
-
-**Standard FASTR HMIS report**
-- Core service-use trends
-- Data quality adjustments (completeness, outliers)
-- National and subnational analyses
-
-**Short service disruptions briefs**
-- Focused analysis of service volume changes
-- Designed for rapid interpretation and discussion
-
-**Country-specific HMIS reports**
-- Tailored indicators, geographies, and priorities
-- Customized visuals and narratives aligned with country needs
-
-</div>
-<div>
-
-### HFA (Health Facility Assessment)
-
-**Full HFA survey report**
-- Facility readiness, service availability, and inputs
-- Standardized outputs across survey rounds
-
-**Disruptions-focused outputs** (when applicable)
-- Targeted views on service interruptions or system stressors
-- Can be produced as stand-alone outputs or annexes
-
-</div>
-</div>
-
-<!--
-PRESENTER NOTES:
-- FASTR produces different products for different needs
-- HMIS outputs are routine/quarterly, HFA outputs tied to survey cycles
-- Countries can mix and match based on their priorities
-- All outputs follow consistent methodology and branding
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5 -->
-## Data triangulation: bringing together multiple sources
-
-Each source answers different questions — together they tell the full story.
-
-![Data triangulation layers h:420](../resources/diagrams/data_triangulation_layers.svg)
-
-<!--
-PRESENTER NOTES:
-- DHIS2 is the foundation: available quarterly, covers all facilities
-- Coverage estimates add the population perspective
-- HFA and household surveys add depth when available
-- Not every country has all sources — FASTR works with what's available
--->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5a -->
-## Why FASTR?
-
-Many countries face common challenges with health data:
-
-- **Data collected but underused** — Routine data sits in DHIS2 without driving decisions
-- **Slow analytical cycles** — Annual reviews miss opportunities for timely action
-- **Fragmented data sources** — HMIS, surveys, and facility assessments analyzed in silos
-
-**FASTR addresses this** by providing countries with tools and methods for rapid, routine analysis of multiple data sources — turning data into timely decisions for stronger PHC systems.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_5b -->
-## Context
-
-Many countries are experiencing **sudden and dramatic reductions in funding** from external sources.
-
-This is leading to:
-- **Critical gaps** in health programs and systems
-- **Potentially severe effects** on service delivery and health outcomes for women, children, and adolescents
-
-**Key questions arising:**
-- How large are the reductions, and what effect are they having on service delivery?
-- How best to prioritize remaining resources?
-- What adaptations can protect and strengthen essential service delivery?
-<!-- /SLIDE -->
-
-<!-- SLIDE:m0_6 -->
-## Why now? Responding to disruptions in health financing
-
-![Disruptions and key questions h:450](../resources/diagrams/disruptions_questions.svg)
-
-<!--
-PRESENTER NOTES:
-- This context applies to many countries right now — it's not hypothetical
-- FASTR doesn't create new data collection — it maximizes use of existing DHIS2 data
-- The goal is to move from reactive to proactive: see disruptions early, respond quickly
-- Countries can use FASTR analyses to advocate for resources and inform planning
--->
-<!-- /SLIDE -->
