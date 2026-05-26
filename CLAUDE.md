@@ -1,5 +1,66 @@
 # Instructions for Claude
 
+## Writing about the FASTR platform — sources of truth
+
+When writing or editing anything that describes the FASTR platform or how it
+works (methodology, handouts, slide decks, prompts, primers, deck-builder copy,
+etc.), always do this **before** you write anything:
+
+1. **Read the published docs first** — they are the user-facing source of truth:
+   - **Admin guide:** https://github.com/FASTR-Analytics/site/tree/main/src/content/docs/admin-guide
+   - **User guide:** https://github.com/FASTR-Analytics/site/tree/main/src/content/docs/user-guide
+   - Both are bilingual; the FR mirror lives at `.../docs/fr/admin-guide/` and `.../docs/fr/user-guide/`.
+
+2. **Verify every claim against the platform code** before shipping:
+   - **Platform repo:** https://github.com/FASTR-Analytics/platform
+   - Do not trust assumptions, memory, or prior conversations — confirm in the
+     docs and the code.
+
+3. If the published docs disagree with the platform code, the **code wins** —
+   flag the discrepancy so the docs can be fixed upstream rather than carrying
+   the error into new material.
+
+Quick lookups: `gh api repos/FASTR-Analytics/<repo>/contents/<path>` (and `gh
+search code --repo FASTR-Analytics/platform <query>`). Clone locally if you need
+to grep or read heavily.
+
+## Subsystem READMEs — where to look next
+
+Each major folder has its own README with the everyday workflow for that area.
+Read those before this file's `Key Files` table — they're more current and less
+abstract.
+
+**Repo overview & contribution**
+- [`README.md`](README.md) — repo overview and quickstart
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — contribution workflow + commit conventions
+- [`help and instructions/README.md`](help%20and%20instructions/README.md) — onboarding guide + style guide
+
+**Content (source → extracted)**
+- [`methodology/README.md`](methodology/README.md) — slide content source of truth (EN + `fr/`), MkDocs site
+- [`core_content/README.md`](core_content/README.md) — auto-generated slide library — **DO NOT HAND-EDIT**
+
+**Building & rendering**
+- [`tools/README.md`](tools/README.md) — index of build / validate / render scripts
+- [`templates/README.md`](templates/README.md) — workshop slide templates (EN + FR mirror)
+- [`web-app/README.md`](web-app/README.md) — Deck Builder app (also `web-app/ABOUT.md`, `web-app/ARCHITECTURE.md`)
+- [`handouts/README.md`](handouts/README.md) — handout source, templates, render commands
+
+**Assets & brand**
+- [`resources/README.md`](resources/README.md) — diagrams, icons, logos, backgrounds, screenshots
+- [`FASTR Design System/README.md`](FASTR%20Design%20System/README.md) — brand tokens, slide templates, web UI kit
+- [`GeoJSON/README.md`](GeoJSON/README.md) — country admin-boundary files used by maps
+
+**Reference & planning**
+- [`data_received/README.md`](data_received/README.md) — input materials received from partners
+- [`content-strategy/README.md`](content-strategy/README.md) — handout audit + planning notes
+
+**Archived**
+- [`archive/README.md`](archive/README.md) and [`archived_slides/README.md`](archived_slides/README.md) — retired material; do not link from active content
+
+Any new top-level subsystem ships with its own `README.md` following
+[`.docs/README.template.md`](.docs/README.template.md) (5 sections: what / layout
+/ how to edit / key commands / gotchas) and gets a link in this index.
+
 ## Repository Structure
 
 ```

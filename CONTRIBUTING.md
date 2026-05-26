@@ -15,6 +15,20 @@ This guide covers how to update methodology content and work with the web app.
 
 ---
 
+## Documenting subsystems
+
+Every top-level subdirectory ships with a `README.md` so contributors can orient
+themselves in 60 seconds. When you add a new top-level subsystem (or notice one
+without a README), copy [`.docs/README.template.md`](.docs/README.template.md)
+and fill in the five sections: **what / layout / how to edit / key commands /
+gotchas**.
+
+Add the new README to the master index in
+[`CLAUDE.md`](CLAUDE.md#subsystem-readmes--where-to-look-next) so it's
+discoverable from the top.
+
+---
+
 ## Understanding the File Structure
 
 ### Each methodology file has two parts:
