@@ -241,6 +241,10 @@ extra_css:
 
 # Additional JavaScript
 extra_javascript:
+  # Site retired — redirect to https://fastr-analytics.org/ (loaded first so it
+  # runs before the rest of the page settles). overrides/main.html provides the
+  # no-JS meta-refresh fallback and the "this site has moved" banner.
+  - javascripts/redirect.js
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/pdf-print.js

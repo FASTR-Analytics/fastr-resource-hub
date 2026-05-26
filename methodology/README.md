@@ -7,14 +7,18 @@ everywhere else.
 
 The canonical methodology documentation, authored in Markdown. From this folder:
 
-- The **MkDocs site** is built (config in `mkdocs.yml`).
+- The public documentation site at **<https://fastr-analytics.org>** is built
+  from [`FASTR-Analytics/site`](https://github.com/FASTR-Analytics/site), which
+  vendors this folder via `pnpm sync:methodology` (see `sync-methodology.ts` in
+  that repo).
 - The workshop **slide library** (`core_content/` and `core_content_fr/`) is
   extracted by `tools/00_extract_slides.py`.
-- The methodology section of the **marketing site**
-  ([`FASTR-Analytics/site`](https://github.com/FASTR-Analytics/site)) is vendored
-  via `pnpm sync:methodology` from this same source.
+- **The local MkDocs build is retired.** `mkdocs.yml` still exists, but it now
+  serves a redirect to fastr-analytics.org (`javascripts/redirect.js` +
+  `overrides/main.html`). Don't add new MkDocs features — fix content here and
+  it lands on the new site on the next sync.
 
-So a change here flows into three downstream surfaces — fix once, ripple out.
+So a change here flows into two live downstream surfaces — fix once, ripple out.
 
 ## Layout
 
@@ -54,18 +58,18 @@ The marker id (`m4_2`) becomes the slide filename in `core_content/`.
    python3 tools/00_extract_slides.py
    python3 tools/00_extract_slides.py --lang fr
    ```
-4. Preview the MkDocs site locally:
-   ```bash
-   cd methodology && mkdocs serve     # http://localhost:8000
-   ```
+4. To preview your edit, push and watch the
+   [site repo's](https://github.com/FASTR-Analytics/site) next
+   `pnpm sync:methodology` pick it up, or run the site locally per its README.
 
 ## Key commands
 
 ```bash
-mkdocs serve                                       # local docs preview (from methodology/)
 python3 tools/00_extract_slides.py [--lang fr]     # re-extract slides
 python3 tools/validate_content.py                  # drift guard
 ```
+
+(Local docs preview now lives in the [site repo](https://github.com/FASTR-Analytics/site) — see its README.)
 
 ## Gotchas
 

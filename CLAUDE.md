@@ -36,7 +36,7 @@ abstract.
 - [`help and instructions/README.md`](help%20and%20instructions/README.md) — onboarding guide + style guide
 
 **Content (source → extracted)**
-- [`methodology/README.md`](methodology/README.md) — slide content source of truth (EN + `fr/`), MkDocs site
+- [`methodology/README.md`](methodology/README.md) — slide content source of truth (EN + `fr/`); vendored by fastr-analytics.org
 - [`core_content/README.md`](core_content/README.md) — auto-generated slide library — **DO NOT HAND-EDIT**
 
 **Building & rendering**
@@ -65,7 +65,7 @@ Any new top-level subsystem ships with its own `README.md` following
 
 ```
 fastr-resource-hub/
-├── methodology/          # Source content for docs website (MkDocs)
+├── methodology/          # Methodology source (vendored by fastr-analytics.org via the site repo's sync)
 ├── core_content/         # Extracted slides for web-app (auto-generated + custom)
 ├── core_content_fr/      # French translations
 ├── web-app/              # Deck Builder web application
@@ -78,11 +78,18 @@ fastr-resource-hub/
 
 ## Two Systems
 
-### 1. Documentation Website (MkDocs)
-- Lives in `methodology/` folder
-- Built with MkDocs Material
-- Run: `cd methodology && mkdocs serve`
-- Config: `methodology/mkdocs.yml`
+### 1. Methodology source (consumed by fastr-analytics.org)
+- Markdown lives in `methodology/` (EN) and `methodology/fr/` (FR).
+- The public documentation site at **https://fastr-analytics.org** is built
+  from [`FASTR-Analytics/site`](https://github.com/FASTR-Analytics/site), which
+  vendors this folder via `pnpm sync:methodology` (see `sync-methodology.ts`
+  in that repo). The sync ignores `mkdocs.yml`, `javascripts/`, `overrides/`,
+  `plugins/`, and `stylesheets/`, so MkDocs config never leaks into the
+  Starlight site.
+- **The local MkDocs build is retired.** Its config (`methodology/mkdocs.yml`)
+  now serves a redirect to fastr-analytics.org via
+  `methodology/javascripts/redirect.js` + `methodology/overrides/main.html`.
+- See [`methodology/README.md`](methodology/README.md) for the edit/sync flow.
 
 ### 2. Web App - Deck Builder
 - Lives in `web-app/` folder
@@ -155,7 +162,7 @@ The web-app loads these via `moduleRegistry.ts` (60s TTL cache). Falls back to r
 | `tools/migrate_to_meta.py` | Generates/regenerates modules.yaml and _meta.yaml |
 | `tools/validate_content.py` | Validates content + **drift guard**: flags core_content slides with no methodology source + id collisions |
 | `tools/generate_catalog.py` | Regenerates `CATALOG.md` from the source files |
-| `methodology/mkdocs.yml` | MkDocs site configuration |
+| `methodology/mkdocs.yml` | Retired MkDocs config — now drives the redirect to fastr-analytics.org |
 
 ## Running the Web-App
 

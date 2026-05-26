@@ -12,7 +12,7 @@ Build workshop presentations from the FASTR RMNCAH-N Service Use Monitoring Reso
 
 All content lives in the `methodology/` folder. Each file has two parts:
 
-1. **Documentation content** (top) → Becomes the methodology website
+1. **Documentation content** (top) → Vendored into [fastr-analytics.org](https://fastr-analytics.org) by the site repo
 2. **Slide content** (after ASCII separator) → Becomes workshop presentations
 
 ```
@@ -58,12 +58,15 @@ git add methodology/ core_content/ modules.yaml
 git commit -m "Update content"
 ```
 
-### Documentation website
+### Documentation site
 
-```bash
-cd methodology && mkdocs serve
-# Open http://localhost:8000
-```
+The public methodology documentation lives at **<https://fastr-analytics.org>**,
+built from [`FASTR-Analytics/site`](https://github.com/FASTR-Analytics/site)
+which vendors `methodology/` from this repo via `pnpm sync:methodology`.
+
+The local MkDocs build is retired — its URL now redirects to the new site.
+Edit methodology files here and push; the site repo picks them up on its next
+sync.
 
 ---
 
