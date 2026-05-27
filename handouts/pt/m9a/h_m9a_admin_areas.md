@@ -38,6 +38,13 @@ Extrair toda a hierarquia administrativa do seu país (regiões → distritos �
 
 ![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 <h2 class="step-h"><span class="step-n">2</span><span>Escolher «Import from DHIS2»</span></h2>
 
 Verá duas opções. Escolha a **segunda — Import directly from DHIS2**. (A primeira serve para carregamentos manuais a partir de uma folha de cálculo — mais lento e mais sujeito a erros.)
@@ -45,13 +52,6 @@ Verá duas opções. Escolha a **segunda — Import directly from DHIS2**. (A pr
 ![h:170](../../../resources/screenshots/m9a_setup/04_import_from_dhis2.jpeg)
 
 Clique em **Continue**.
-
-</div>
-</div>
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">3</span><span>Ligar ao DHIS2 (só na primeira vez)</span></h2>
 
@@ -68,6 +68,10 @@ Marque **Save credentials for this session** — não voltará a ser solicitado 
 Clique em **Confirm and continue**.
 
 > Se já guardou as credenciais nesta sessão (ex.: numa importação anterior), este passo é ignorado automaticamente.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">4</span><span>Selecionar o nível de unidade sanitária</span></h2>
 

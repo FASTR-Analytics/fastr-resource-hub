@@ -87,6 +87,10 @@ Depois de entrar no seu projeto, deverá ver:
 
 Se sim, está dentro. Passe à atividade seguinte.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## O que pode correr mal
 
 - **«Conta não aprovada»** — a sua conta precisa de ser adicionada ao projeto do país por um administrador. Peça ao facilitador para o adicionar.

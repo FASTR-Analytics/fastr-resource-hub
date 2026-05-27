@@ -89,6 +89,10 @@ Repare: a resposta a «o que lhes importa» é **específica** — não «qualid
 - Se a sua resposta a «decisão ou ação» for vaga (ex.: «melhorar o desempenho»), ainda não conhece bem o público. Fale com ele.
 - Públicos diferentes = resultados diferentes da mesma análise. Mapeie cada público em separado.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Transforme o mapeamento num prompt
 
 Se já produziu um relatório de perturbações ou outro resultado FASTR, use o seu mapeamento para o adequar a este público específico. No Assistente de IA, experimente um prompt como:

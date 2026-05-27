@@ -51,7 +51,7 @@ Open **M3. Service utilization**. Scroll until you see the group titled **Actual
 
 <h2 class="step-h"><span class="step-n">2</span><span>Read the default view</span></h2>
 
-The default chart shows every core indicator as a small chart in a grid. The black line is the **actual** monthly service volume. The pink shaded area is the **expected** range derived from past trends. Where the pink dips below or rises above the line, that is a candidate disruption or surplus.
+The default chart shows every core indicator as a small chart in a grid. Two black lines run across each chart: a **solid** line for **actual** monthly service volume, and a **dashed** line for the **expected** volume predicted from past trends. The area between them is filled — **red** where actual sits **below** expected (a disruption), **green** where actual sits **above** expected (a surplus).
 
 ![Default disruptions and surpluses grid, all indicators visible h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
 
@@ -81,8 +81,8 @@ On your filtered chart, walk the six-step framework from *Reading a viz*:
 |------|----------------|
 | 1. What indicator? | The one you filtered to |
 | 2. What level & period? | National. The period you chose. |
-| 3. What is being compared? | Actual monthly volume (black line) vs **expected** (pink shaded area, predicted from past trends) |
-| 4. Read the values | Where does the black line drop below the pink? By how much? |
+| 3. What is being compared? | Actual monthly volume (solid black line) vs **expected** (dashed black line, predicted from past trends) |
+| 4. Read the values | Where does the gap fill red (actual below expected)? By how much? |
 | 5. What stands out? | A sustained drop, three months or more? A single spike? A pattern? |
 | 6. So what? | What action would this prompt? |
 
@@ -117,7 +117,7 @@ When each country team is done, one person shares the finding. Listen for:
 ## What to watch out for
 
 - **A one-month dip is usually noise.** Look for a sustained drop, three months or more.
-- **Pink shading is the expected range, not a target.** A volume sitting comfortably inside the pink is performing as the model predicted.
+- **A green fill is not "good", a red fill is not "bad".** They just show direction: green = actual above expected, red = actual below expected. A small red fill for one month is normal noise; a sustained red over several months is what to investigate.
 
 ## What's next
 

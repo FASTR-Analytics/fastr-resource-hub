@@ -146,6 +146,10 @@ No final, um participante deve conseguir: escrever um prompt que indique o seu o
 - Confiar numa formulação confiante. Sinalize os indícios: números redondos, números precisos sem fonte, números plausíveis que não se conseguem rastrear.
 - O princípio com que ficam: quem entrega o trabalho é responsável por cada número nele — um rascunho não está terminado até o assinarem.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Para encerrar
 
 Termine na verificação. Fazer bons prompts dá um rascunho rápido; verificar bem é o que torna esse rascunho trabalho próprio e defensável do participante. Este par — gerar, depois verificar — é o hábito sobre o qual assenta o resto da formação.

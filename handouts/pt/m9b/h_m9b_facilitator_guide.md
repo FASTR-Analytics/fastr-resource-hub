@@ -106,11 +106,19 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 
 - **Atenção a:** Participantes a perguntar «isto é o mesmo que o DHIS2?» — resposta: *«Não. O FASTR lê a partir do DHIS2 mas acrescenta análise, visualização e relatórios por cima.»*
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Passo 2: Separador Data (onde vivem os dados das suas unidades)
 
 - **Fazer:** Clique no separador **Data**. Mostre **Structure & maps** (áreas administrativas + unidades) e **HMIS Data**.
 - **Dizer:** *«É aqui que os dados do seu país são guardados. Vamos preencher isto amanhã durante a atividade de configuração da instância.»*
 - **Atenção a:** Não aprofunde aqui — apenas oriente. A configuração detalhada é uma sessão própria.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Passo 3: Separador Visualizations
 
@@ -127,6 +135,10 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 - **Dizer:** *«É aqui que vai construir os resultados que partilha com os decisores. Cada diapositivo tem um gráfico e uma interpretação — ambos editáveis.»*
 - **Atenção a:** Participantes perguntam se é como o PowerPoint — resposta: *«Mesma ideia, mas os gráficos mantêm-se ligados aos seus dados.»*
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Passo 5: AI Assistant
 
 - **Fazer:** Abra o painel AI Assistant. Mostre a Prompt Library brevemente.
@@ -135,6 +147,10 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 
 - **Dizer:** *«Há um assistente de IA que pode ajudar a construir gráficos, interpretar resultados e redigir diapositivos. Teremos uma sessão inteira sobre isto mais tarde na semana.»*
 - **Atenção a:** Não demonstre um prompt aqui — guarde a curiosidade para a sessão dedicada de IA.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Perguntas comuns
 

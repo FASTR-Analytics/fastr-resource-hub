@@ -87,6 +87,10 @@ Ambas as pastas estão vazias. Não há problema — as próximas atividades vã
 - Evite nomes genéricos como «a minha pasta» ou «teste» — os seus colegas de país também criarão pastas, e «teste» sobrepor-se-á a outros.
 - Acentos e espaços são aceites nos nomes das pastas.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## O que pode correr mal
 
 - **O botão «+ New folder» não aparece** — está muito provavelmente na vista errada. Mude o seletor de vista para **By folder** (não *Simple list* / *By module* / *By metric*). Se ainda assim não aparecer, pode não ter permissão — peça ao facilitador para verificar o seu papel.

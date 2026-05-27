@@ -87,6 +87,10 @@ Les deux dossiers sont vides. C'est normal — les prochaines activités les rem
 - Évitez les noms génériques comme « mon dossier » ou « test » — vos collègues de l'équipe pays créeront aussi des dossiers, et « test » entrera en conflit avec celui des autres.
 - Les accents et espaces sont autorisés dans les noms de dossier.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Que faire si ça ne marche pas
 
 - **Le bouton « Nouveau dossier » n'apparaît pas** — vous êtes probablement dans la mauvaise vue. Basculez l'affichage sur **Par dossier** (et non *Liste plate* / *Par module* / *Par métrique*). S'il n'apparaît toujours pas, vous n'avez peut-être pas la permission — demandez à votre facilitateur de vérifier votre rôle.

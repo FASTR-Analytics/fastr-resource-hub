@@ -51,7 +51,7 @@ Abra **M3. Service utilization**. Desça até ao grupo **Actual vs expected serv
 
 <h2 class="step-h"><span class="step-n">2</span><span>Ler a vista por defeito</span></h2>
 
-O gráfico por defeito mostra cada indicador-base num pequeno gráfico em grelha. A linha preta é o **volume mensal observado**. A zona rosa é o **intervalo esperado** calculado a partir das tendências passadas. Onde a linha sai da zona rosa, é uma perturbação ou um excedente provável.
+O gráfico por defeito mostra cada indicador-base num pequeno gráfico em grelha. Duas linhas pretas atravessam cada gráfico: uma linha **contínua** para o **volume mensal observado**, e uma linha **tracejada** para o volume **esperado**, previsto a partir das tendências passadas. A área entre as duas é preenchida — **vermelha** onde o observado fica **abaixo** do esperado (uma perturbação), **verde** onde o observado fica **acima** do esperado (um excedente).
 
 ![Grelha por defeito das perturbações e excedentes, todos os indicadores visíveis h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
 
@@ -81,8 +81,8 @@ No gráfico filtrado, percorra o quadro de seis passos do documento *Ler uma viz
 |-------|-------------------|
 | 1. Que indicador? | O que filtrou |
 | 2. Que nível e período? | Nacional. O período que escolheu. |
-| 3. O que se compara? | Volume mensal observado (linha preta) vs **esperado** (zona rosa, prevista a partir das tendências passadas) |
-| 4. Ler os valores | Onde é que a linha preta cai abaixo da zona rosa? Em quanto? |
+| 3. O que se compara? | Volume mensal observado (linha contínua preta) vs **esperado** (linha tracejada preta, previsto a partir das tendências passadas) |
+| 4. Ler os valores | Onde é que a área entre as duas linhas se enche de vermelho (observado abaixo do esperado)? Em quanto? |
 | 5. O que se destaca? | Uma queda sustentada, três meses ou mais? Um pico isolado? Um padrão? |
 | 6. E então? | Que ação isto sugere? |
 
@@ -117,7 +117,7 @@ Quando cada equipa-país terminar, uma pessoa partilha o achado. Atenção a:
 ## A observar
 
 - **Uma queda de um único mês é, em regra, ruído.** Procure uma queda sustentada, três meses ou mais.
-- **A zona rosa é o intervalo esperado, não uma meta.** Um volume que fica confortavelmente dentro do rosa está a comportar-se como o modelo previu.
+- **Verde não é "bom" nem vermelho é "mau".** Apenas indicam direção: verde = observado acima do esperado, vermelho = observado abaixo. Uma pequena zona vermelha de um mês é ruído normal; uma zona vermelha sustentada ao longo de vários meses é o que importa investigar.
 
 ## A seguir
 

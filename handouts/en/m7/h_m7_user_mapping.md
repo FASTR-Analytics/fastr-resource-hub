@@ -89,6 +89,10 @@ Notice: the answer to "what do they care about" is **specific** — not "data qu
 - If your answer to "decision or action" is vague (e.g., "improve performance"), you don't yet know the audience well enough. Talk to them.
 - Different audiences = different outputs from the same analysis. Map each audience separately.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Turn the mapping into a prompt
 
 If you've already produced a disruption report or another FASTR output, use your mapping to refine it for this specific audience. In the AI Assistant, try a prompt like:

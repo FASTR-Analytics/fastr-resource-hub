@@ -39,6 +39,13 @@ Escolha **um** tema dos seus dados e mantenha-se nele nas três rondas:
 
 Corra cada ronda numa **nova** conversa com a IA para ver a diferença a partir do zero, e não como seguimento.
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Três rondas
 
 | Ronda | Prompt a experimentar | Pergunte a si mesmo depois da resposta da IA |
@@ -46,9 +53,6 @@ Corra cada ronda numa **nova** conversa com a IA para ver a diferença a partir 
 | **1. Comece simples** | *Cria um diapositivo sobre [o teu tema].* | O que incluiu a IA? Funcionaria numa reunião real? |
 | **2. Acrescente contexto** | *Cria um diapositivo sobre [tema] para uma [tipo de reunião]. Mostra [dados específicos]. Explica que regiões têm mais problemas.* | É mais específico? Identifica prioridades? |
 | **3. Torne-o acionável** | *Cria um diapositivo sobre [tema] para [reunião]. Compara áreas — quais precisam de apoio? Sugere razões possíveis.* | Prioriza áreas? Aponta para próximos passos? |
-
-</div>
-</div>
 
 ---
 

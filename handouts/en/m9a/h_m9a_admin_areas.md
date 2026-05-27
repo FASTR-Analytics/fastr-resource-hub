@@ -38,6 +38,13 @@ Pull your country's full administrative hierarchy (regions → districts → fac
 
 ![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 <h2 class="step-h"><span class="step-n">2</span><span>Choose "Import from DHIS2"</span></h2>
 
 You'll see two options. Pick the **second one — Import directly from DHIS2**. (The first is for manual uploads from a spreadsheet — slower and more error-prone.)
@@ -45,13 +52,6 @@ You'll see two options. Pick the **second one — Import directly from DHIS2**. 
 ![h:170](../../../resources/screenshots/m9a_setup/04_import_from_dhis2.jpeg)
 
 Click **Continue**.
-
-</div>
-</div>
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">3</span><span>Connect to DHIS2 (first time only)</span></h2>
 
@@ -68,6 +68,10 @@ Tick **Save credentials for this session** — you won't be prompted again durin
 Click **Confirm and continue**.
 
 > If you've already saved credentials in this session (e.g., from a previous import), this step is skipped automatically.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">4</span><span>Select the facility level</span></h2>
 

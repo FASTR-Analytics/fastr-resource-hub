@@ -150,6 +150,10 @@ Le chiffre du haut (8 000) est un **comptage** que nous avons déjà. Le chiffre
 | **Perturbation** | Une baisse significative du volume de services (choc, coupe de financement, etc.) |
 | **Module (Mx)** | Une étape du pipeline |
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Pour aller plus loin
 
 - **Docs de méthodologie** — une page par module du pipeline (EQD, ajustement, utilisation des services, couverture), avec toute la logique et les paramètres

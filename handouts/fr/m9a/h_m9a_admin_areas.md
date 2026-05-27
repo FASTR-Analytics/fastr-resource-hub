@@ -38,6 +38,13 @@ Importer directement depuis DHIS2 la hiérarchie administrative complète de vot
 
 ![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
 
+</div>
+</div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 <h2 class="step-h"><span class="step-n">2</span><span>Choisir « Importer depuis DHIS2 »</span></h2>
 
 Vous verrez deux options. Choisissez la **deuxième — Importer directement depuis DHIS2**. (La première sert aux téléversements manuels depuis un tableur — plus lent et plus sujet aux erreurs.)
@@ -45,13 +52,6 @@ Vous verrez deux options. Choisissez la **deuxième — Importer directement dep
 ![h:170](../../../resources/screenshots/m9a_setup/04_import_from_dhis2.jpeg)
 
 Cliquez sur **Continue**.
-
-</div>
-</div>
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">3</span><span>Se connecter à DHIS2 (la première fois seulement)</span></h2>
 
@@ -68,6 +68,10 @@ Cochez **Save credentials for this session** — vous ne serez plus invité à l
 Cliquez sur **Confirm and continue**.
 
 > Si vous avez déjà sauvegardé vos identifiants dans cette session (p. ex. lors d'une importation précédente), cette étape est automatiquement sautée.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">4</span><span>Sélectionner le niveau d'établissement</span></h2>
 

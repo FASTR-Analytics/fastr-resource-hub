@@ -89,6 +89,10 @@ Remarquez : la réponse à « ce qui l'intéresse » est **spécifique** — pas
 - Si votre réponse à « décision ou action » est vague (p. ex. « améliorer la performance »), vous ne connaissez pas encore assez bien l'audience. Parlez-lui.
 - Différentes audiences = différentes sorties à partir de la même analyse. Cartographiez chaque audience séparément.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Transformez la cartographie en prompt
 
 Si vous avez déjà produit un rapport de perturbation ou une autre sortie FASTR, utilisez votre cartographie pour l'affiner pour cette audience précise. Dans l'Assistant IA, essayez un prompt comme :

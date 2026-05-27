@@ -51,7 +51,7 @@ Ouvrez **M3. Utilisation des services**. Faites défiler jusqu'au groupe **Volum
 
 <h2 class="step-h"><span class="step-n">2</span><span>Lire la vue par défaut</span></h2>
 
-Le graphique par défaut montre chaque indicateur principal sous forme de petit graphique dans une grille. La ligne noire est le **volume mensuel observé**. La zone rose est la **plage attendue** calculée à partir des tendances passées. Là où la ligne sort de la zone rose, c'est une perturbation ou un surplus possible.
+Le graphique par défaut montre chaque indicateur principal sous forme de petit graphique dans une grille. Deux courbes noires traversent chaque graphique : une courbe **pleine** pour le **volume mensuel observé**, et une courbe **pointillée** pour le volume **attendu** prédit à partir des tendances passées. L'aire entre les deux est remplie — **rouge** là où l'observé est **en dessous** de l'attendu (une perturbation), **vert** là où l'observé est **au-dessus** de l'attendu (un surplus).
 
 ![Grille par défaut des perturbations et surplus, tous indicateurs visibles h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
 
@@ -81,8 +81,8 @@ Sur votre graphique filtré, parcourez le cadre en six étapes du document *Lire
 |-------|------------------|
 | 1. Quel indicateur ? | Celui que vous avez filtré |
 | 2. Quel niveau et quelle période ? | National. La période que vous avez choisie. |
-| 3. Que compare-t-on ? | Volume mensuel observé (ligne noire) vs **attendu** (zone rose, prédit à partir des tendances passées) |
-| 4. Lire les valeurs | Où la ligne noire descend-elle sous la zone rose ? De combien ? |
+| 3. Que compare-t-on ? | Volume mensuel observé (courbe pleine noire) vs **attendu** (courbe pointillée noire, prédit à partir des tendances passées) |
+| 4. Lire les valeurs | Où l'aire entre les deux courbes se remplit-elle en rouge (observé en dessous de l'attendu) ? De combien ? |
 | 5. Qu'est-ce qui ressort ? | Une baisse soutenue, trois mois ou plus ? Un pic unique ? Un motif ? |
 | 6. Et alors ? | Quelle action cela appelle-t-il ? |
 
@@ -117,7 +117,7 @@ Quand chaque équipe pays a terminé, une personne partage le constat. Écoutez 
 ## À surveiller
 
 - **Une baisse d'un seul mois est en général du bruit.** Cherchez une baisse soutenue, trois mois ou plus.
-- **La zone rose est la plage attendue, pas une cible.** Un volume qui reste confortablement dans le rose correspond à ce que le modèle prédisait.
+- **Vert n'est pas « bon », rouge n'est pas « mauvais ».** Ils indiquent juste le sens : vert = observé au-dessus de l'attendu, rouge = observé en dessous. Une petite zone rouge sur un seul mois, c'est du bruit normal ; une zone rouge soutenue sur plusieurs mois, c'est ce qu'il faut creuser.
 
 ## Et ensuite
 

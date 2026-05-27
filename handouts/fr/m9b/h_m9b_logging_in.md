@@ -89,6 +89,10 @@ Après avoir cliqué dans votre projet, vous devriez voir :
 
 Si oui, vous êtes connecté. Passez à l'activité suivante.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Que faire si ça ne marche pas
 
 - **« Compte non approuvé »** — votre compte doit être ajouté au projet pays par un administrateur. Demandez à votre facilitateur de vous ajouter.

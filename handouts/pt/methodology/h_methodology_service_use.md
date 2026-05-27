@@ -73,6 +73,13 @@ O intervalo sombreado é a distância entre o que aconteceu realmente e o que o 
 
 - **O que mostra** — um painel por indicador. A **linha preta** é o volume real reportado em cada mês. Por trás dela está o nível **esperado** que o FASTR calculou para essa área — um caminho que já incorpora a tendência de longo prazo *e* o padrão sazonal, por isso «esperado» significa *normal para este lugar, este serviço, esta época do ano*. Onde o real e o esperado se afastam, o intervalo é sombreado: **verde** quando o real corre acima do esperado (um excedente), **vermelho** quando corre abaixo (uma perturbação)
 - **Como ler** — em três passagens. **(1) Forma:** siga a linha preta para a trajetória geral — a subir, plana, ou a descer ao longo dos anos. **(2) Quebras:** procure manchas sombreadas; cada uma é um período em que a realidade deixou o caminho esperado, e quanto **maior e mais longa** a mancha, mais grave — um bloco vermelho fundo ao longo de vários meses é uma perturbação sustentada, uma faixa fina é menor. **(3) Entre indicadores:** se aparecer vermelho nos *mesmos* meses em vários painéis, algo atingiu o sistema todo (uma greve, uma rutura de stock, um choque); vermelho num só painel aponta para uma causa específica desse serviço
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<span class="eyebrow">Resultado 1 · a tendência (continuação)</span>
+
 - **Atenção a** — um único mês estranho é geralmente ruído; espere por uma série sustentada antes de agir. Verde não é automaticamente bom (pode ser uma campanha de recuperação ou dupla contagem) e vermelho não é automaticamente mau — ambos merecem um «porquê?». Confronte as manchas vermelhas com eventos conhecidos (cortes de financiamento, eleições, vagas epidémicas) para passar de «algo mudou» a «foi isto que o mudou»
 
 <div class="callout-footer">Exemplo trabalhado — no painel da <strong>4.ª visita pré-natal</strong>, o bloco verde de 2020–2021 é um longo período em que as visitas correram acima da linha esperada. As pequenas marcas vermelhas perto de 2019 são quebras curtas e pontuais — não uma perturbação sustentada.</div>

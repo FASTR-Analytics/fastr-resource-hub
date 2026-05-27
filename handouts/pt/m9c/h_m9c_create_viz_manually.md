@@ -91,6 +91,10 @@ Abra uma visualização guardada — os controlos estão no **painel esquerdo**,
 
 ![O painel esquerdo do editor de visualizações — desça até "Filter (subset)" e "Display (disaggregate)" h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 > **Atenção quando usa os dois em conjunto.** Eis a armadilha, com um exemplo. Dividiu um gráfico **por distrito** porque quer comparar os distritos. Depois **filtra-o** para apenas um distrito — e os outros desaparecem. Agora está a olhar para um único distrito isolado, e não resta nada para comparar.
 >
 > **A regra simples:** use o **filter** para escolher os dados que quer ver, e use o **disaggregate** para os dividir nas partes que quer comparar. Só não filtre até ficar com apenas uma das coisas que queria comparar.

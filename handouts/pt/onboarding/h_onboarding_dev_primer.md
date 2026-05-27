@@ -150,6 +150,10 @@ O número de cima (8 000) é uma **contagem** que já temos. O número de baixo 
 | **Perturbação** | Uma queda significativa no volume de serviços (choque, corte de financiamento, etc.) |
 | **Módulo (Mx)** | Uma etapa no pipeline |
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Aprofundar
 
 - **Documentação de metodologia** — uma página por módulo do pipeline (AQD, ajustamento, utilização de serviços, cobertura), com toda a lógica e parâmetros

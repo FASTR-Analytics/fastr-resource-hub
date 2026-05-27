@@ -112,6 +112,10 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 - **Dites :** *« C'est ici que les données de votre pays sont stockées. Nous remplirons cela demain pendant l'activité Configuration de l'instance. »*
 - **Surveillez :** N'allez pas en profondeur ici — juste orientation. La configuration détaillée est sa propre session.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Étape 3 : Onglet Visualisations
 
 - **Faites :** Ouvrez l'onglet **Visualisations**. Montrez un graphique enregistré.
@@ -127,6 +131,10 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 - **Dites :** *« C'est ici que vous construisez les sorties que vous partagerez avec les décideurs. Chaque diapositive a un graphique et une interprétation — les deux modifiables. »*
 - **Surveillez :** Les participants demandent si c'est comme PowerPoint — réponse : *« Même idée, mais les graphiques restent liés à vos données. »*
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Étape 5 : Assistant IA
 
 - **Faites :** Ouvrez le panneau Assistant IA. Montrez brièvement la bibliothèque de prompts.
@@ -135,6 +143,10 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 - **Dites :** *« Il y a un assistant IA qui peut vous aider à construire des graphiques, interpréter les sorties et rédiger des diapositives. Nous aurons une session entière dessus plus tard dans la semaine. »*
 - **Surveillez :** Ne démontrez pas un prompt ici — gardez la curiosité pour la session IA dédiée.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Questions fréquentes
 

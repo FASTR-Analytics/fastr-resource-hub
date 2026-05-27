@@ -146,6 +146,10 @@ Ce module développe une compétence pratique unique : donner à l'Assistant IA 
 - Faire confiance à une formulation assurée. Signalez les indices : chiffres ronds, chiffres précis sans source, chiffres plausibles mais introuvables.
 - Le principe à leur laisser : celui qui remet le travail est responsable de chaque chiffre — un brouillon n'est pas fini tant qu'ils ne le signeraient pas.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Pour conclure
 
 Terminez sur la vérification. Bien prompter donne un brouillon rapide ; bien vérifier est ce qui en fait le travail propre et défendable du participant. Ce couple — générer, puis vérifier — est l'habitude sur laquelle repose le reste de l'atelier.

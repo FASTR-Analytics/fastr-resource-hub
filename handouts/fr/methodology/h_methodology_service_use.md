@@ -73,6 +73,13 @@ L'écart coloré est la distance entre ce qui s'est réellement passé et ce que
 
 - **Ce qu'il montre** — un panneau par indicateur. La **ligne noire** est le volume réellement déclaré chaque mois. Derrière, le niveau **attendu** calculé par FASTR pour cette zone — un tracé qui intègre déjà la tendance de fond *et* le motif saisonnier, donc « attendu » veut dire *normal pour ce lieu, ce service, cette période*. Là où réel et attendu s'écartent, l'écart est coloré : **vert** quand le réel dépasse l'attendu (surplus), **rouge** quand il est en dessous (perturbation)
 - **Comment le lire** — en trois passes. **(1) Forme :** suivez la ligne noire pour la trajectoire générale — montante, plate, descendante. **(2) Ruptures :** repérez les zones colorées ; chacune est une période où le réel a quitté le tracé attendu, et **plus la zone est grande et longue**, plus c'est sérieux — un bloc rouge épais sur plusieurs mois est une perturbation soutenue, un fin liseré est mineur. **(3) Entre indicateurs :** si du rouge apparaît aux *mêmes* mois sur plusieurs panneaux, c'est tout le système qui a été touché (grève, rupture de stock, choc) ; du rouge sur un seul panneau pointe une cause propre à ce service
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<span class="eyebrow">Résultat 1 · la tendance (suite)</span>
+
 - **À surveiller** — un seul mois étrange est généralement du bruit ; attendez une série soutenue avant d'agir. Le vert n'est pas automatiquement bon (campagne de rattrapage ou double comptage) et le rouge pas automatiquement mauvais — les deux méritent un « pourquoi ? ». Rapprochez les zones rouges d'événements connus (coupes de financement, élections, vagues épidémiques) pour passer de « quelque chose a changé » à « voici ce qui l'a changé »
 
 <div class="callout-footer">Exemple — sur le panneau <strong>Antenatal client 4th visit</strong>, le bloc vert en 2020–2021 est une longue période où les visites ont dépassé la ligne attendue. Les petites marques rouges vers 2019 sont des creux ponctuels — pas une perturbation soutenue.</div>

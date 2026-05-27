@@ -112,6 +112,10 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 - **Say:** *"This is where your country's data is stored. We'll fill this in tomorrow during the Instance Setup activity."*
 - **Watch for:** Don't go deep here — just orient. Detailed setup is its own session.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### Step 3: Visualizations tab
 
 - **Do:** Open the **Visualizations** tab. Show a saved chart.
@@ -126,6 +130,10 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 - **Do:** Open **Slide Decks**. Show an existing deck and a content slide with a chart + interpretation.
 - **Say:** *"This is where you'll build the outputs you share with decision-makers. Each slide has a chart and an interpretation — both editable."*
 - **Watch for:** Participants ask whether it's like PowerPoint — answer: *"Same idea, but the charts stay linked to your data."*
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Step 5: AI Assistant
 

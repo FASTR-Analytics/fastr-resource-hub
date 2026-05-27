@@ -61,6 +61,10 @@ You're now on the **Presets** step. Click **Service volume over time (monthly)**
 
 The chart opens in the editor.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 <h2 class="step-h"><span class="step-n">4</span><span>Filter to ANC1, last 12 months</span></h2>
 
 The chart opens with all indicators shown across the full available time period. You'll narrow it to **ANC1, last 12 months**.
@@ -165,6 +169,10 @@ Click **Save as new viz** — name it e.g. *ANC1 — monthly, by region* and sav
 ### Watch out
 
 You set both Filter and Display in step 2 of the original walkthrough (filter to ANC1, last 12 months) and step 2 of this exercise (disaggregate by region). That's fine. The trap is **filtering down to one of the things you said you wanted to compare** — e.g. disaggregate by region *and then* filter to a single region. You'd be left with one line, nothing to compare.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Now do it for BCG
 

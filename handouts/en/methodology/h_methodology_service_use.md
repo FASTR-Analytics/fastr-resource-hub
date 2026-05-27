@@ -73,6 +73,13 @@ The shaded gap is the distance between what actually happened and what FASTR exp
 
 - **What it shows** — one panel per indicator. The **black line** is the actual reported volume each month. Behind it sits the **expected** level FASTR computed for that area — a path that already builds in the long-term trend *and* the seasonal pattern, so "expected" means *normal for this place, this service, this time of year*. Where actual and expected pull apart, the gap is shaded: **green** when actual runs above expected (a surplus), **red** when it runs below (a disruption)
 - **How to read it** — in three passes. **(1) Shape:** follow the black line for the overall trajectory — rising, flat, or falling across the years. **(2) Breaks:** scan for shaded patches; each is a stretch where reality left the expected path, and the **bigger and longer** the patch, the more serious — a deep red block over several months is a sustained disruption, a thin sliver is minor. **(3) Across indicators:** if red appears in the *same* months on several panels, something hit the whole system (a strike, a stock-out, a shock); red on one panel only points to a cause specific to that service
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<span class="eyebrow">Output 1 · the trend (continued)</span>
+
 - **Watch for** — a single odd month is usually noise; wait for a sustained run before acting. Green isn't automatically good (it can be a catch-up campaign or double-counting) and red isn't automatically bad — both deserve a "why?". Line the red patches up against known events (funding cuts, elections, epidemic waves) to move from "something changed" to "this is what changed it"
 
 <div class="callout-footer">Worked example — in the <strong>Antenatal 4th visit</strong> panel, the green block across 2020–2021 is a long stretch where visits ran above the expected line. The small red marks near 2019 are short, one-off dips — not a sustained disruption.</div>
