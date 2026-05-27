@@ -83,7 +83,6 @@ Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **
 
 Après avoir cliqué dans votre projet, vous devriez voir :
 
-- Votre nom (ou e-mail) en haut à droite
 - La barre latérale gauche d'icônes (Visualisations, Présentations, Données, Paramètres)
 - Le nom du projet dans l'en-tête (p. ex. « Pays X — Projet atelier »)
 

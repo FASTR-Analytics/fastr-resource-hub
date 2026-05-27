@@ -81,7 +81,6 @@ Clique no projeto do seu país para entrar. Verá então os separadores de naveg
 
 Depois de entrar no seu projeto, deverá ver:
 
-- O seu nome (ou email) no canto superior direito
 - Os separadores de navegação principais ao longo do topo
 - O nome do projeto no cabeçalho (ex.: «País X — Projeto de workshop»)
 

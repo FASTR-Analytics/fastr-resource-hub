@@ -83,7 +83,6 @@ Click your country's project to enter it. The project opens with a **left sideba
 
 After clicking into your project, you should see:
 
-- Your name (or email) in the top-right corner
 - The left sidebar of project icons (Visualizations, Slide Decks, Data, Settings)
 - The project name in the header (e.g., "Country X — Workshop project")
 
