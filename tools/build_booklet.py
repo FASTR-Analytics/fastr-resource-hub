@@ -57,44 +57,53 @@ def _resolve_pdf(path_str: str) -> Path:
     return p
 
 
-TOC_INLINE_CSS = """
+TOC_INLINE_CSS_TEMPLATE = """
 <style>
-section.redesign h1 {
-  font-size: 28px;
-  margin-bottom: 14px;
-}
-.toc {
-  margin-top: 4px;
-  font-size: 12px;
-  line-height: 1.35;
-}
-.toc-section {
-  margin: 12px 0 4px;
-  font-size: 13px;
+section {{ overflow: visible !important; }}
+section.redesign h1 {{
+  font-size: 22px;
+  margin-bottom: 10px;
+}}
+.toc {{
+  margin-top: 2px;
+  font-size: {item_fs}pt;
+  line-height: {item_lh};
+}}
+.toc-section {{
+  margin: {sec_mt}pt 0 2pt;
+  font-size: {sec_fs}pt;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #09544F;
   border-bottom: 1px solid #CAE6E9;
-  padding-bottom: 3px;
-}
-.toc-item {
-  margin: 1px 0;
-  padding-left: 20px;
-}
-.toc-num {
+  padding-bottom: 2pt;
+}}
+.toc-item {{
+  margin: 0;
+  padding-left: 18pt;
+}}
+.toc-num {{
   display: inline-block;
-  min-width: 28px;
+  min-width: 26pt;
   text-align: right;
   font-variant-numeric: tabular-nums;
   color: #1F9A9C;
   font-weight: 600;
-  margin-right: 10px;
-}
-.toc-section .toc-num {
-  color: #09544F;
-}
+  margin-right: 8pt;
+}}
+.toc-section .toc-num {{ color: #09544F; }}
 </style>
 """
+
+
+def _toc_css(num_items: int) -> str:
+    """Pick a CSS density that fits up to num_items + sections on one page."""
+    if num_items <= 24:
+        return TOC_INLINE_CSS_TEMPLATE.format(item_fs=10.5, item_lh=1.30, sec_mt=10, sec_fs=11)
+    if num_items <= 32:
+        return TOC_INLINE_CSS_TEMPLATE.format(item_fs=9.5, item_lh=1.20, sec_mt=8, sec_fs=10)
+    # 33+ items
+    return TOC_INLINE_CSS_TEMPLATE.format(item_fs=8.5, item_lh=1.15, sec_mt=6, sec_fs=9.5)
 
 
 def _render_toc_pdf(title: str, footer: str, sections: list[dict], page_offsets: list[int], tmp: Path) -> Path:
@@ -109,7 +118,7 @@ def _render_toc_pdf(title: str, footer: str, sections: list[dict], page_offsets:
         f'footer: "{footer}"',
         "---",
         "",
-        TOC_INLINE_CSS.strip(),
+        _toc_css(sum(len(s["items"]) for s in sections)).strip(),
         "",
         f'<div class="brand-line"><span class="rule"></span>'
         f'<img src="{logo_uri}" alt="FASTR" height="28"></div>',

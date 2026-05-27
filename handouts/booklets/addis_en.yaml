@@ -1,0 +1,62 @@
+title: "Addis Workshop · Participant Booklet"
+footer: "FASTR · Addis Workshop"
+output: "~/Desktop/Addis Workshop/Addis_Workshop_Booklet_EN.pdf"
+sections:
+  - title: "Day 1 · Welcome, login & FASTR orientation"
+    items:
+      - { title: "Logging in",                          pdf: "en/Getting Started/01_logging_in.pdf" }
+      - { title: "Your folder",                         pdf: "en/Getting Started/02_user_folder.pdf" }
+
+  - title: "Day 1 · Introduction to FASTR & HMIS methods"
+    items:
+      - { title: "Data quality assessment",             pdf: "en/Analytics pipeline/01_dqa.pdf" }
+      - { title: "Data quality adjustment",             pdf: "en/Analytics pipeline/02_adjustment.pdf" }
+      - { title: "Service utilization",                 pdf: "en/Analytics pipeline/03_service_use.pdf" }
+      - { title: "Coverage estimates",                  pdf: "en/Analytics pipeline/04_coverage.pdf" }
+
+  - title: "Day 1 · Practice: outputs, visualizations & AI Assistant"
+    items:
+      - { title: "How to read a FASTR viz",             pdf: "en/Visualizations & Interpretation/01_interpret_reference.pdf" }
+      - { title: "Build a viz manually",                pdf: "en/Visualizations & Interpretation/02_create_viz_manually.pdf" }
+      - { title: "Write an interpretation",             pdf: "en/Visualizations & Interpretation/03_write_interpretation.pdf" }
+      - { title: "Build a viz with the AI",             pdf: "en/Visualizations & Interpretation/04_create_viz_ai.pdf" }
+      - { title: "Interpret with the AI",               pdf: "en/Visualizations & Interpretation/05_interpret_with_ai.pdf" }
+      - { title: "Spot a disruption",                   pdf: "en/Visualizations & Interpretation/06_spot_disruption.pdf" }
+
+  - title: "Day 2 · Creating country reports"
+    items:
+      - { title: "Create a slide deck",                 pdf: "en/Slide Decks/01_create_slide_deck.pdf" }
+      - { title: "Add a viz manually",                  pdf: "en/Slide Decks/02_add_viz_manually.pdf" }
+      - { title: "Add a viz with the AI",               pdf: "en/Slide Decks/03_add_viz_ai.pdf" }
+      - { title: "Edit your slides",                    pdf: "en/Slide Decks/04_edit_slides.pdf" }
+      - { title: "Format text",                         pdf: "en/Slide Decks/05_format_text.pdf" }
+      - { title: "Report settings",                     pdf: "en/Slide Decks/06_report_settings.pdf" }
+      - { title: "Create a disruption report with AI",  pdf: "en/Disruption Report/01_create_report_ai.pdf" }
+      - { title: "Verify the AI report output",         pdf: "en/Disruption Report/02_verify_output.pdf" }
+      - { title: "Refine the report",                   pdf: "en/Disruption Report/03_refine_report.pdf" }
+      - { title: "Peer review your report",             pdf: "en/Disruption Report/04_peer_review.pdf" }
+      - { title: "AI verification checklist",           pdf: "en/Standard FASTR Reports/01_ai_verification_checklist.pdf" }
+
+  - title: "Day 2 · Understanding your audience & storytelling"
+    items:
+      - { title: "User mapping",                        pdf: "en/Results Communication/01_user_mapping.pdf" }
+      - { title: "Write a finding statement",           pdf: "en/Results Communication/02_finding_statement.pdf" }
+
+  - title: "Day 3 · Linking results with actions"
+    items:
+      - { title: "From results to actions",             pdf: "en/Results Communication/03_results_actions.pdf" }
+      - { title: "Action planning",                     pdf: "en/Results Communication/04_action_plan.pdf" }
+      - { title: "Action plan example",                 pdf: "en/Results Communication/05_action_plan_example.pdf" }
+
+  - title: "Reference · AI prompting techniques"
+    items:
+      - { title: "Build a good prompt",                 pdf: "en/Prompting Techniques/01_build_prompt.pdf" }
+      - { title: "Explore with the AI",                 pdf: "en/Prompting Techniques/02_explore_ai.pdf" }
+      - { title: "Iterative vs single-shot prompting",  pdf: "en/Prompting Techniques/03_iterative_vs_single.pdf" }
+      - { title: "Refine a prompt",                     pdf: "en/Prompting Techniques/04_refine_prompt.pdf" }
+      - { title: "PDF prompt template",                 pdf: "en/Prompting Techniques/05_pdf_template.pdf" }
+      - { title: "Verify the AI output",                pdf: "en/Prompting Techniques/06_verify_output.pdf" }
+
+  - title: "Day 3 · Post-workshop assessment"
+    items:
+      - { title: "FASTR quiz",                          pdf: "en/FASTR Quiz/01_quiz.pdf" }

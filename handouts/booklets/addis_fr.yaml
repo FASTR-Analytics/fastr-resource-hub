@@ -1,0 +1,62 @@
+title: "Atelier Addis · Livret participant"
+footer: "FASTR · Atelier Addis"
+output: "~/Desktop/Addis Workshop/Addis_Workshop_Booklet_FR.pdf"
+sections:
+  - title: "Jour 1 · Accueil, connexion & orientation FASTR"
+    items:
+      - { title: "Se connecter à la plateforme",        pdf: "fr/Prise en main/01_logging_in.pdf" }
+      - { title: "Votre dossier",                       pdf: "fr/Prise en main/02_user_folder.pdf" }
+
+  - title: "Jour 1 · Introduction à FASTR & méthodes HMIS"
+    items:
+      - { title: "Évaluation de la qualité des données", pdf: "fr/Pipeline d'analyse/01_dqa.pdf" }
+      - { title: "Ajustement de la qualité des données", pdf: "fr/Pipeline d'analyse/02_adjustment.pdf" }
+      - { title: "Utilisation des services",            pdf: "fr/Pipeline d'analyse/03_service_use.pdf" }
+      - { title: "Estimations de couverture",           pdf: "fr/Pipeline d'analyse/04_coverage.pdf" }
+
+  - title: "Jour 1 · Pratique : sorties, visualisations & assistant IA"
+    items:
+      - { title: "Comment lire une viz FASTR",          pdf: "fr/Visualisations & Interprétation/01_interpret_reference.pdf" }
+      - { title: "Construire une viz manuellement",     pdf: "fr/Visualisations & Interprétation/02_create_viz_manually.pdf" }
+      - { title: "Rédiger une interprétation",          pdf: "fr/Visualisations & Interprétation/03_write_interpretation.pdf" }
+      - { title: "Construire une viz avec l'IA",        pdf: "fr/Visualisations & Interprétation/04_create_viz_ai.pdf" }
+      - { title: "Interpréter avec l'IA",               pdf: "fr/Visualisations & Interprétation/05_interpret_with_ai.pdf" }
+      - { title: "Repérer une perturbation",            pdf: "fr/Visualisations & Interprétation/06_spot_disruption.pdf" }
+
+  - title: "Jour 2 · Création de rapports pays"
+    items:
+      - { title: "Créer une présentation",              pdf: "fr/Présentations/01_create_slide_deck.pdf" }
+      - { title: "Ajouter une viz manuellement",        pdf: "fr/Présentations/02_add_viz_manually.pdf" }
+      - { title: "Ajouter une viz avec l'IA",           pdf: "fr/Présentations/03_add_viz_ai.pdf" }
+      - { title: "Éditer vos diapositives",             pdf: "fr/Présentations/04_edit_slides.pdf" }
+      - { title: "Mettre en forme le texte",            pdf: "fr/Présentations/05_format_text.pdf" }
+      - { title: "Paramètres du rapport",               pdf: "fr/Présentations/06_report_settings.pdf" }
+      - { title: "Créer un rapport de perturbations avec l'IA", pdf: "fr/Rapport de perturbations/01_create_report_ai.pdf" }
+      - { title: "Vérifier la sortie IA",               pdf: "fr/Rapport de perturbations/02_verify_output.pdf" }
+      - { title: "Affiner le rapport",                  pdf: "fr/Rapport de perturbations/03_refine_report.pdf" }
+      - { title: "Revue par les pairs",                 pdf: "fr/Rapport de perturbations/04_peer_review.pdf" }
+      - { title: "Liste de vérification IA",            pdf: "fr/Rapports FASTR standards/01_ai_verification_checklist.pdf" }
+
+  - title: "Jour 2 · Comprendre votre public & storytelling"
+    items:
+      - { title: "Cartographie des utilisateurs",       pdf: "fr/Communication des résultats/01_user_mapping.pdf" }
+      - { title: "Rédiger un constat",                  pdf: "fr/Communication des résultats/02_finding_statement.pdf" }
+
+  - title: "Jour 3 · Des résultats aux actions"
+    items:
+      - { title: "Des résultats aux actions",           pdf: "fr/Communication des résultats/03_results_actions.pdf" }
+      - { title: "Planification des actions",           pdf: "fr/Communication des résultats/04_action_plan.pdf" }
+      - { title: "Exemple de plan d'action",            pdf: "fr/Communication des résultats/05_action_plan_example.pdf" }
+
+  - title: "Référence · Techniques de prompting IA"
+    items:
+      - { title: "Construire un bon prompt",            pdf: "fr/Techniques de prompting/01_build_prompt.pdf" }
+      - { title: "Explorer avec l'IA",                  pdf: "fr/Techniques de prompting/02_explore_ai.pdf" }
+      - { title: "Itératif vs prompt unique",           pdf: "fr/Techniques de prompting/03_iterative_vs_single.pdf" }
+      - { title: "Affiner un prompt",                   pdf: "fr/Techniques de prompting/04_refine_prompt.pdf" }
+      - { title: "Modèle de prompt PDF",                pdf: "fr/Techniques de prompting/05_pdf_template.pdf" }
+      - { title: "Vérifier la sortie IA",               pdf: "fr/Techniques de prompting/06_verify_output.pdf" }
+
+  - title: "Jour 3 · Évaluation post-atelier"
+    items:
+      - { title: "Quiz FASTR",                          pdf: "fr/Quiz FASTR/01_quiz.pdf" }
