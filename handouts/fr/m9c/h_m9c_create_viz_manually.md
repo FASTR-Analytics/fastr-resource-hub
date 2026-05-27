@@ -151,7 +151,7 @@ Dans la liste **Visualisations**, ouvrez votre graphique CPN1 enregistré (celui
 
 Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Affichage (désagréger)**.
 
-- Cochez le niveau administratif à comparer. Dans FASTR les niveaux ont un nom générique — **Unité administrative 2** correspond généralement à la *région*, **Unité administrative 3** au *district*, **Unité administrative 4** à l'*établissement*. Cochez *Unité administrative 2* pour avoir une ligne par région.
+- Cochez le niveau administratif à comparer. Dans FASTR les niveaux ont un nom générique — **Unité administrative 2** correspond généralement à la *région*, **Unité administrative 3** au *district*. Cochez *Unité administrative 2* pour avoir une ligne par région.
 - Laissez le style d'affichage sur **Lignes** pour l'instant — une ligne par région, toutes sur le même graphique.
 
 Le graphique se redessine. Au lieu d'une seule ligne nationale, vous devriez voir **une ligne par région**.
