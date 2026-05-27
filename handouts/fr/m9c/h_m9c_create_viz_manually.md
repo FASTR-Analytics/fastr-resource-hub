@@ -57,7 +57,13 @@ Cliquez sur la tuile **Nombre de services déclarés, par type d'ajustement**, p
 
 À l'étape **Préréglages**, cliquez sur **Volume de services dans le temps (mensuel)** — un graphique linéaire du volume mensuel — puis sur **Créer**.
 
+![Étape Préréglages — cinq préréglages nommés plus Personnalisé, chacun avec une vignette h:280](../../../resources/screenshots/m9c/create_viz_presets_fr.png)
+
 Le graphique s'ouvre dans l'éditeur.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">4</span><span>Filtrez sur CPN1, 12 derniers mois</span></h2>
 

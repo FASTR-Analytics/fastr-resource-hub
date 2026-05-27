@@ -38,9 +38,7 @@ The AI chat panel sits on the right side of the **Visualizations** tab. Type a s
 
 The AI returns a chart in the panel with three buttons under it — **fullscreen**, **Save as new visualization**, **Add to slide deck** — and a short narrative explaining what it built and what it could change next.
 
-![AI panel after the first request — chart, action buttons, narrative and next-step suggestions h:360](../../../resources/screenshots/m9c/ai_first_response.png)
-
-> **Be specific about the adjustment.** *"Adjusted data"* on its own is ambiguous — the metric exposes four versions: no adjustment, outliers only, completeness only, or both. Say which one in the prompt, or the AI will pick one for you (usually outliers only).
+![AI panel after the first request — chart, action buttons, narrative and next-step suggestions h:320](../../../resources/screenshots/m9c/ai_first_response.png)
 
 </div>
 </div>
@@ -48,6 +46,8 @@ The AI returns a chart in the panel with three buttons under it — **fullscreen
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+> **Be specific about the adjustment.** *"Adjusted data"* on its own is ambiguous — the metric exposes four versions: no adjustment, outliers only, completeness only, or both. Say which one in the prompt, or the AI will pick one for you (usually outliers only).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Review what the AI returns</span></h2>
 

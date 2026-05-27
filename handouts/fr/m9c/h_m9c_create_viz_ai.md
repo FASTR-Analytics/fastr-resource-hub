@@ -38,9 +38,7 @@ Le panneau de chat IA est à droite de l'onglet **Visualisations**. Tapez une re
 
 L'IA renvoie un graphique dans le panneau avec trois boutons en dessous — **plein écran**, **Sauver comme nouvelle viz.**, **Ajouter à un deck** — et un court texte qui explique ce qu'elle a construit et ce qu'elle pourrait modifier ensuite.
 
-![Le panneau IA après la première requête — graphique + boutons + explication + suggestions h:360](../../../resources/screenshots/m9c/ai_first_response_fr.png)
-
-> **Soyez précis sur l'ajustement.** *« Données ajustées »* tout seul est ambigu — la métrique expose quatre versions : sans ajustement, valeurs aberrantes seules, complétude seule, ou les deux. Dites laquelle dans le prompt, sinon l'IA choisira pour vous (en général les valeurs aberrantes seules).
+![Le panneau IA après la première requête — graphique + boutons + explication + suggestions h:320](../../../resources/screenshots/m9c/ai_first_response_fr.png)
 
 </div>
 </div>
@@ -48,6 +46,8 @@ L'IA renvoie un graphique dans le panneau avec trois boutons en dessous — **pl
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+> **Soyez précis sur l'ajustement.** *« Données ajustées »* tout seul est ambigu — la métrique expose quatre versions : sans ajustement, valeurs aberrantes seules, complétude seule, ou les deux. Dites laquelle dans le prompt, sinon l'IA choisira pour vous (en général les valeurs aberrantes seules).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Examiner ce que l'IA propose</span></h2>
 

@@ -96,11 +96,14 @@ def _extract_pages(pdf_path: Path) -> list[list[Word]]:
     return parser.pages
 
 
-def _is_footer_word(word: Word, footer_line_y_min: float | None) -> bool:
-    """A word is part of the footer if it shares a line with FASTR · ... or
-    is an isolated page number in the footer Y band."""
-    if footer_line_y_min is not None and abs(word.y_min - footer_line_y_min) < 4:
-        return True
+def _is_footer_word(word: Word, footer_mid_y: float | None) -> bool:
+    """A word is part of the footer if it sits on the same baseline as
+    'FASTR · ...' (matched on line middle-Y within 1.5pt) or is an isolated
+    page number in the footer Y band."""
+    if footer_mid_y is not None:
+        word_mid_y = (word.y_min + word.y_max) / 2
+        if abs(word_mid_y - footer_mid_y) < 1.5:
+            return True
     if _FOOTER_PREFIX.match(word.text):
         return True
     if _PAGE_NUM.match(word.text) and word.y_min > SAFE_Y_MAX:
@@ -109,12 +112,13 @@ def _is_footer_word(word: Word, footer_line_y_min: float | None) -> bool:
 
 
 def _find_footer_y(words: list[Word]) -> float | None:
-    """Return the y_min of the footer line ('FASTR · ...' anchor word)."""
+    """Return the middle-Y of the footer line (anchored on 'FASTR · ...')."""
     candidates = [w for w in words if w.text == "FASTR" and w.y_min > SAFE_Y_MAX]
     if not candidates:
         return None
     # Use the lowest (largest y) FASTR occurrence in the footer band.
-    return max(candidates, key=lambda w: w.y_min).y_min
+    anchor = max(candidates, key=lambda w: w.y_min)
+    return (anchor.y_min + anchor.y_max) / 2
 
 
 def check_pdf(pdf_path: Path) -> list[PageReport]:

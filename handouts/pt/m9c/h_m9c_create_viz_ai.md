@@ -38,9 +38,7 @@ O painel de conversa da IA fica do lado direito do separador **Visualizations**.
 
 A IA devolve um gráfico no painel com três botões por baixo — **ecrã inteiro**, **Save as new visualization**, **Add to slide deck** — e um texto curto a explicar o que construiu e o que poderia mudar a seguir.
 
-![O painel da IA depois do primeiro pedido — gráfico, botões de ação, explicação e sugestões h:360](../../../resources/screenshots/m9c/ai_first_response.png)
-
-> **Seja específico quanto ao ajustamento.** *«Dados ajustados»* sozinho é ambíguo — a métrica expõe quatro versões: sem ajustamento, valores atípicos só, completude só, ou ambos. Diga qual no pedido, ou a IA escolhe por si (normalmente valores atípicos só).
+![O painel da IA depois do primeiro pedido — gráfico, botões de ação, explicação e sugestões h:320](../../../resources/screenshots/m9c/ai_first_response.png)
 
 </div>
 </div>
@@ -48,6 +46,8 @@ A IA devolve um gráfico no painel com três botões por baixo — **ecrã intei
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+> **Seja específico quanto ao ajustamento.** *«Dados ajustados»* sozinho é ambíguo — a métrica expõe quatro versões: sem ajustamento, valores atípicos só, completude só, ou ambos. Diga qual no pedido, ou a IA escolhe por si (normalmente valores atípicos só).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Rever o que a IA devolve</span></h2>
 

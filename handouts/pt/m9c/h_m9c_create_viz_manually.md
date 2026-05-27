@@ -53,6 +53,8 @@ Para uma tendência de volume de serviços, abra **M3. Service utilization** e e
 
 Verá uma grelha de **presets** — gráficos prontos. Escolha **Service volume over time (monthly)** — um gráfico de linhas do volume mensal por indicador. Clique em **Create**.
 
+![Etapa Presets — cinco presets nomeados mais Custom, cada um com uma miniatura h:280](../../../resources/screenshots/m9c/create_viz_presets.png)
+
 O seu gráfico é criado e aparece na lista **Visualizations**. Use a vista **By folder** para o colocar na sua pasta.
 
 > Os outros presets dão gráficos de **barras** trimestrais ou anuais. **Custom → Configure manually** permite escolher o tipo de gráfico (tabela, série temporal, barras, mapa) e como decompor os dados — ver a secção seguinte.

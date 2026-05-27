@@ -57,6 +57,8 @@ Click the tile **Number of services reported, by adjustment type**, then **Next*
 
 On the **Presets** step, click **Service volume over time (monthly)** — a line chart of monthly volume — then **Create**.
 
+![Presets step — five named presets plus Custom, each with a small chart thumbnail h:280](../../../resources/screenshots/m9c/create_viz_presets.png)
+
 The chart opens in the editor.
 
 ---
