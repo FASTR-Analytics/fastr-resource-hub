@@ -78,7 +78,7 @@ The chart updates each time you tick.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Save it to your folder</span></h2>
 
-Click **Save as new viz** at the top of the editor. Give it a clear name (e.g. *ANC1 — monthly, last 12 months*) and save it into **your folder**.
+Click **Save as new visualization** at the top of the editor. Give it a clear name (e.g. *ANC1 — monthly, last 12 months*) and save it into **your folder**.
 
 It now appears in the Visualizations list under your folder.
 
@@ -164,9 +164,9 @@ Pick whichever reads best for your data.
 
 <h2 class="step-h"><span class="step-n">4</span><span>Save it as a new chart</span></h2>
 
-Click **Save as new viz** — name it e.g. *ANC1 — monthly, by region* and save it into **your folder**.
+Click **Save as new visualization** — name it e.g. *ANC1 — monthly, by region* and save it into **your folder**.
 
-> **Don't overwrite the national chart.** Save *as new viz*, not just *save*, so you keep both: the national trend and the regional split.
+> **Don't overwrite the national chart.** Save *as new visualization*, not just *save*, so you keep both: the national trend and the regional split.
 
 ---
 
@@ -198,7 +198,7 @@ Once your three charts are saved, try a different metric or preset:
 You should now have:
 
 - **Three saved charts** in your folder: ANC1, BCG, and one of your choice.
-- The path memorised: **+ Create visualization → M3 → metric → preset → filter → Save as new viz**.
+- The path memorised: **+ Create visualization → M3 → metric → preset → filter → Save as new visualization**.
 - A sense of which presets suit trends vs comparisons.
 
 ## What's next

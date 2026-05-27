@@ -36,7 +36,9 @@ The AI chat panel sits on the right side of the **Visualizations** tab. Type a s
 
 > *"Show me a time-series chart of ANC1 visits over the last 12 months, using outlier-adjusted data."*
 
-The AI returns a chart in the panel with three buttons under it — **fullscreen**, **Save as new viz**, **Add to a deck** — and a short narrative explaining what it built and what it could change next.
+The AI returns a chart in the panel with three buttons under it — **fullscreen**, **Save as new visualization**, **Add to slide deck** — and a short narrative explaining what it built and what it could change next.
+
+![AI panel after the first request — chart, action buttons, narrative and next-step suggestions h:360](../../../resources/screenshots/m9c/ai_first_response.png)
 
 > **Be specific about the adjustment.** *"Adjusted data"* on its own is ambiguous — the metric exposes four versions: no adjustment, outliers only, completeness only, or both. Say which one in the prompt, or the AI will pick one for you (usually outliers only).
 
@@ -69,7 +71,7 @@ Each instruction is a small step. The AI also volunteers next-action suggestions
 
 <h2 class="step-h"><span class="step-n">4</span><span>Save it</span></h2>
 
-When you like what you see, click **Save as new viz** under the chart and put it in your folder. The neighbouring **Add to a deck** button does both in one move if you already have a deck open.
+When you like what you see, click **Save as new visualization** under the chart and put it in your folder. The neighbouring **Add to slide deck** button does both in one move if you already have a deck open.
 
 ---
 

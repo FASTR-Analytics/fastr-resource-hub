@@ -36,7 +36,9 @@ O painel de conversa da IA fica do lado direito do separador **Visualizations**.
 
 > *«Mostra-me um gráfico de série temporal das visitas de CPN1 nos últimos 12 meses, usando dados ajustados aos valores atípicos.»*
 
-A IA devolve um gráfico no painel com três botões por baixo — **ecrã inteiro**, **Save as new viz**, **Add to a deck** — e um texto curto a explicar o que construiu e o que poderia mudar a seguir.
+A IA devolve um gráfico no painel com três botões por baixo — **ecrã inteiro**, **Save as new visualization**, **Add to slide deck** — e um texto curto a explicar o que construiu e o que poderia mudar a seguir.
+
+![O painel da IA depois do primeiro pedido — gráfico, botões de ação, explicação e sugestões h:360](../../../resources/screenshots/m9c/ai_first_response.png)
 
 > **Seja específico quanto ao ajustamento.** *«Dados ajustados»* sozinho é ambíguo — a métrica expõe quatro versões: sem ajustamento, valores atípicos só, completude só, ou ambos. Diga qual no pedido, ou a IA escolhe por si (normalmente valores atípicos só).
 
@@ -69,7 +71,7 @@ Cada instrução é um pequeno passo. A IA também propõe ações seguintes no 
 
 <h2 class="step-h"><span class="step-n">4</span><span>Guardar</span></h2>
 
-Quando gostar do que vê, clique em **Save as new viz** por baixo do gráfico e coloque-o na sua pasta. O botão ao lado **Add to a deck** faz as duas coisas de uma vez se já tiver uma apresentação aberta.
+Quando gostar do que vê, clique em **Save as new visualization** por baixo do gráfico e coloque-o na sua pasta. O botão ao lado **Add to slide deck** faz as duas coisas de uma vez se já tiver uma apresentação aberta.
 
 ---
 
