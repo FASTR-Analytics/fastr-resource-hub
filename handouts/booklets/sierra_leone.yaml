@@ -1,0 +1,42 @@
+title: "Sierra Leone Workshop · Participant Booklet"
+footer: "FASTR · Sierra Leone Workshop"
+output: "~/Desktop/Sierra Leone Workshop/Sierra_Leone_Workshop_Booklet.pdf"
+sections:
+  - title: "Welcome, login & navigation"
+    items:
+      - { title: "Logging in",                   pdf: "en/Getting Started/01_logging_in.pdf" }
+      - { title: "Your folder",                  pdf: "en/Getting Started/02_user_folder.pdf" }
+
+  - title: "FASTR introduction & HMIS methods"
+    items:
+      - { title: "Data quality assessment",      pdf: "en/Analytics pipeline/01_dqa.pdf" }
+      - { title: "Data quality adjustment",      pdf: "en/Analytics pipeline/02_adjustment.pdf" }
+      - { title: "Service utilization",          pdf: "en/Analytics pipeline/03_service_use.pdf" }
+      - { title: "Coverage estimates",           pdf: "en/Analytics pipeline/04_coverage.pdf" }
+
+  - title: "Hands-on: visualizations & interpretation"
+    items:
+      - { title: "How to read a FASTR viz",      pdf: "en/Visualizations & Interpretation/01_interpret_reference.pdf" }
+      - { title: "Build a viz manually",         pdf: "en/Visualizations & Interpretation/02_create_viz_manually.pdf" }
+      - { title: "Write an interpretation",      pdf: "en/Visualizations & Interpretation/03_write_interpretation.pdf" }
+      - { title: "Build a viz with the AI",      pdf: "en/Visualizations & Interpretation/04_create_viz_ai.pdf" }
+      - { title: "Interpret with the AI",        pdf: "en/Visualizations & Interpretation/05_interpret_with_ai.pdf" }
+      - { title: "Spot a disruption",            pdf: "en/Visualizations & Interpretation/06_spot_disruption.pdf" }
+
+  - title: "Hands-on: slide decks"
+    items:
+      - { title: "Create a slide deck",          pdf: "en/Slide Decks/01_create_slide_deck.pdf" }
+      - { title: "Add a viz manually",           pdf: "en/Slide Decks/02_add_viz_manually.pdf" }
+      - { title: "Add a viz with the AI",        pdf: "en/Slide Decks/03_add_viz_ai.pdf" }
+      - { title: "Edit your slides",             pdf: "en/Slide Decks/04_edit_slides.pdf" }
+      - { title: "Format text",                  pdf: "en/Slide Decks/05_format_text.pdf" }
+      - { title: "Report settings",              pdf: "en/Slide Decks/06_report_settings.pdf" }
+      - { title: "AI verification checklist",    pdf: "en/Standard FASTR Reports/01_ai_verification_checklist.pdf" }
+
+  - title: "Country use cases & way forward"
+    items:
+      - { title: "User mapping",                 pdf: "en/Results Communication/01_user_mapping.pdf" }
+      - { title: "Write a finding statement",    pdf: "en/Results Communication/02_finding_statement.pdf" }
+      - { title: "From results to actions",      pdf: "en/Results Communication/03_results_actions.pdf" }
+      - { title: "Action planning",              pdf: "en/Results Communication/04_action_plan.pdf" }
+      - { title: "Action plan example",          pdf: "en/Results Communication/05_action_plan_example.pdf" }
