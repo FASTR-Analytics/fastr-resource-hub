@@ -36,6 +36,9 @@ RENDER = REPO / "tools" / "render_handout.sh"
 LANGS = ("en", "fr", "pt")
 FACILITATOR_DIR = "Facilitator"
 
+# Imported lazily so the script still runs if check_handout_overflow.py is missing.
+_OVERFLOW_CHECKER = REPO / "tools" / "check_handout_overflow.py"
+
 
 def module_names() -> dict:
     """Return {module_id: {'en': name, 'fr': name}} from modules.yaml."""
@@ -103,6 +106,14 @@ def main() -> int:
     ap.add_argument(
         "--auto", action="store_true",
         help="auto-detect changed modules from git (uncommitted + last commit) and build only those",
+    )
+    ap.add_argument(
+        "--no-overflow-check", action="store_true",
+        help="skip the post-render check that flags content rendered past the footer",
+    )
+    ap.add_argument(
+        "--strict", action="store_true",
+        help="exit non-zero if any built PDF has content overflowing the footer reserve",
     )
     args = ap.parse_args()
 
@@ -178,6 +189,20 @@ def main() -> int:
                     built += 1
 
     print(f"\nDone — {built} PDF(s) written under {OUT.relative_to(REPO)}/")
+
+    overflow_exit = 0
+    if not args.no_overflow_check and _OVERFLOW_CHECKER.exists() and built > 0:
+        scope = OUT
+        if args.lang or args.module or auto_modules:
+            scope = OUT
+        print("\nChecking for content overflowing the footer reserve...")
+        r = subprocess.run(
+            ["python3", str(_OVERFLOW_CHECKER), "--dir", str(scope), "--quiet"],
+        )
+        overflow_exit = r.returncode
+        if overflow_exit and args.strict:
+            return overflow_exit
+
     return 0
 
 

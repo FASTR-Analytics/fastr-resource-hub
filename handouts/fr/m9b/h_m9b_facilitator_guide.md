@@ -102,7 +102,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 - **Faites :** Montrez l'écran d'accueil avec la navigation principale en haut.
 - **Dites :** *« Ceci est l'instance FASTR de votre pays. Tout ce que vous verrez aujourd'hui se passe ici — pas de logiciel séparé à installer. »*
 
-![Page d'accueil de la plateforme avec les onglets principaux h:280](../../../resources/screenshots/m9b/platform_landing.png)
+![Page d'accueil de la plateforme avec les projets listés h:280](../../../resources/screenshots/m9b/platform_landing_fr.png)
 
 - **Surveillez :** Des participants demandent « c'est pareil que DHIS2 ? » — réponse : *« Non. FASTR lit depuis DHIS2 mais ajoute analyse, visualisation et reporting par-dessus. »*
 
@@ -116,7 +116,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 - **Faites :** Ouvrez l'onglet **Visualisations**. Montrez un graphique enregistré.
 
-![Onglet Visualisations avec des exemples de graphiques h:280](../../../resources/screenshots/m9b/tab_visualizations.png)
+![Onglet Visualisations avec des exemples de graphiques h:280](../../../resources/screenshots/m9b/tab_visualizations_fr.png)
 
 - **Dites :** *« Une fois les données chargées, vous créez des graphiques ici. Vous pouvez aussi les sauvegarder dans votre dossier personnel — nous le ferons dans la prochaine activité. »*
 - **Surveillez :** Passez la souris sur un graphique pour mettre en évidence que les données sont interactives (valeurs au survol, filtres).

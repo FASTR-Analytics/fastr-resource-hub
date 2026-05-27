@@ -73,18 +73,18 @@ Après connexion, vous arrivez sur l'onglet **Projets**. Vous voyez les projets 
 - **Si vous êtes administrateur de l'instance**, tous les projets de l'instance sont listés.
 - **Sinon**, vous ne voyez que les projets auxquels un administrateur vous a accordé l'accès. Si le projet de votre pays est absent, demandez à votre facilitateur (ou administrateur de l'instance) d'accorder l'accès.
 
-Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **barre latérale gauche d'icônes** — Assistant IA (étincelle), **Visualizations** (graphique), **Slide Decks** (crochets), **Data** (base de données) et **Settings** (engrenage). Survolez une icône pour voir son libellé.
+Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **barre latérale gauche d'icônes** — Assistant IA (étincelle), **Visualisations** (graphique), **Présentations** (crochets), **Données** (base de données) et **Paramètres** (engrenage). Survolez une icône pour voir son libellé.
 
-![Vue projet — barre latérale gauche avec icônes, Visualizations ouvert, Assistant IA à droite h:280](../../../resources/screenshots/m9b/project_sidebar_nav.png)
+![Vue projet — barre latérale gauche avec icônes, onglet Présentations ouvert, panneau Assistant IA à droite h:280](../../../resources/screenshots/m9b/project_sidebar_nav_fr.png)
 
-> Note : la **navigation du haut** (Projects · Data · Assets · Users · Settings) est destinée aux **administrateurs de l'instance** qui gèrent l'ensemble du site. À l'intérieur d'un projet, les icônes de la barre latérale sont ce que vous utiliserez au quotidien.
+> Note : la **navigation du haut** (Projets · Données · Ressources · Utilisateurs · Paramètres) est destinée aux **administrateurs de l'instance** qui gèrent l'ensemble du site. À l'intérieur d'un projet, les icônes de la barre latérale sont ce que vous utiliserez au quotidien.
 
 ## Vérification
 
 Après avoir cliqué dans votre projet, vous devriez voir :
 
 - Votre nom (ou e-mail) en haut à droite
-- La barre latérale gauche d'icônes (Visualizations, Slide Decks, Data, Settings)
+- La barre latérale gauche d'icônes (Visualisations, Présentations, Données, Paramètres)
 - Le nom du projet dans l'en-tête (p. ex. « Pays X — Projet atelier »)
 
 Si oui, vous êtes connecté. Passez à l'activité suivante.
