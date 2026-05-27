@@ -57,6 +57,6 @@ sections:
       - { title: "PDF prompt template",                 pdf: "en/Prompting Techniques/05_pdf_template.pdf" }
       - { title: "Verify the AI output",                pdf: "en/Prompting Techniques/06_verify_output.pdf" }
 
-  - title: "Day 3 · Post-workshop assessment"
+  - title: "Optional · FASTR quiz (fun recap, time permitting)"
     items:
       - { title: "FASTR quiz",                          pdf: "en/FASTR Quiz/01_quiz.pdf" }

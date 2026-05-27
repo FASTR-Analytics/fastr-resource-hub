@@ -57,6 +57,6 @@ sections:
       - { title: "Modèle de prompt PDF",                pdf: "fr/Techniques de prompting/05_pdf_template.pdf" }
       - { title: "Vérifier la sortie IA",               pdf: "fr/Techniques de prompting/06_verify_output.pdf" }
 
-  - title: "Jour 3 · Évaluation post-atelier"
+  - title: "Optionnel · Quiz FASTR (récap ludique, si le temps le permet)"
     items:
       - { title: "Quiz FASTR",                          pdf: "fr/Quiz FASTR/01_quiz.pdf" }
