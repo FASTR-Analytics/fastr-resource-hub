@@ -2,7 +2,7 @@
 
 Build workshop presentations from the FASTR RMNCAH-N Service Use Monitoring Resource Package.
 
-**Methodology documentation:** <https://fastr-analytics.org/methodology/> (the old `fastr-analytics.github.io` URL redirects here automatically)
+**Methodology documentation:** <https://fastr-analytics.org/> (the old `fastr-analytics.github.io` URL redirects here automatically)
 
 **Content catalog:** see [`CATALOG.md`](CATALOG.md) — every module (with slide counts), the activities and their order, and all handouts. It's generated from the source files (`python3 tools/generate_catalog.py`), so it never goes stale.
 
