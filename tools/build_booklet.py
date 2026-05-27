@@ -37,8 +37,12 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+import io
 import yaml
 from pypdf import PdfReader, PdfWriter
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm
+from reportlab.pdfgen import canvas
 
 REPO = Path(__file__).resolve().parent.parent
 HANDOUTS_OUT = REPO / "handouts" / "_out"
@@ -178,6 +182,21 @@ def _page_offsets(toc_pages: int, flat: list[tuple[str, Path, str]]) -> list[int
     return offsets
 
 
+def _make_page_number_overlay(page_num: int, total: int, page_w: float, page_h: float) -> PdfReader:
+    """Create a single-page PDF with the booklet page number stamped in the
+    bottom-right corner. Returned as a PdfReader for easy merge_page()."""
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=(page_w, page_h))
+    c.setFont("Helvetica", 9)
+    c.setFillGray(0.45)
+    # Bottom-right corner, ~12mm from edges, well clear of the handout's own footer rule
+    text = f"{page_num} / {total}"
+    c.drawRightString(page_w - 12 * mm, 6 * mm, text)
+    c.save()
+    buf.seek(0)
+    return PdfReader(buf)
+
+
 def build(manifest_path: Path) -> Path:
     manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
     title = manifest["title"]
@@ -201,7 +220,7 @@ def build(manifest_path: Path) -> Path:
             sys.exit("TOC rendered more than 3 pages — narrow it down or split sections")
 
         writer = PdfWriter()
-        # 1. TOC
+        # 1. TOC (no page-number stamp — the TOC IS the index)
         for page in PdfReader(str(toc_pdf)).pages:
             writer.add_page(page)
         toc_outline = writer.add_outline_item("Table of Contents", 0)
@@ -221,6 +240,15 @@ def build(manifest_path: Path) -> Path:
                     section_outline = writer.add_outline_item(section["title"], section_start_idx)
                     first_item = False
                 writer.add_outline_item(item["title"], item_first_idx, parent=section_outline)
+
+        # 2. Stamp continuous booklet page numbers on every page (TOC + handouts).
+        total = len(writer.pages)
+        for i, page in enumerate(writer.pages, start=1):
+            box = page.mediabox
+            page_w = float(box.width)
+            page_h = float(box.height)
+            overlay = _make_page_number_overlay(i, total, page_w, page_h)
+            page.merge_page(overlay.pages[0])
 
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with out_path.open("wb") as f:
