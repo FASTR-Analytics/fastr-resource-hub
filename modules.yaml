@@ -240,7 +240,6 @@ modules:
   number: 9b
   folder: m9b_getting_started
   theme: platform
-  deprecated: true   # husk — all slides are activity-pointer stubs; content lives in handouts
   name:
     en: Getting Started
     fr: Prise en main
