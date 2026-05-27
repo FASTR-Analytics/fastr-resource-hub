@@ -20,26 +20,23 @@ footer: "FASTR · Apresentações"
 <p class="sb-label">Antes de começar</p>
 
 - ☐ Criou a sua apresentação e adicionou uma visualização manualmente (ver atividades anteriores)
-- ☐ Tem pelo menos uma visualização guardada no separador **Visualisations**
-- ☐ O painel do Assistente de IA está aberto
+- ☐ Tem pelo menos uma visualização guardada no separador **Visualizations**
+- ☐ A sua apresentação está aberta — o painel da IA à direita está ligado a ela
 
 </aside>
 <div class="p1-main">
 
 ## O que vai fazer
 
-Usar o Assistente de IA para trazer uma visualização guardada e adicioná-la diretamente à sua apresentação — sem navegar por menus. O seu facilitador acabou de demonstrar isto; agora faça-o você.
+Pedir ao Assistente de IA que adicione um gráfico guardado à sua apresentação aberta — num único pedido. Sem navegação, sem trocar tipo de bloco. Mesmo resultado que o caminho manual.
 
-## Passos
+<h2 class="step-h"><span class="step-n">1</span><span>Peça à IA para adicionar o gráfico</span></h2>
 
-1. No Assistente de IA, escreva um pedido nomeando uma das **suas** visualizações guardadas: *Mostra [nome da tua visualização].*
-2. A IA encontra o gráfico e mostra uma pré-visualização na conversa.
-3. Por baixo da pré-visualização, procure o botão para **adicionar o gráfico a uma apresentação** — escolha a apresentação que criou.
-4. Guarde.
+No painel da IA (à direita), escreva um pedido que nomeie o gráfico e a intenção:
 
-> **Ainda não tem um gráfico seu guardado?** Use antes este pedido de exemplo partilhado: *Mostra a visualização da variação trimestral do volume de serviços.*
+> *«Adiciona o gráfico [nome do teu gráfico] à minha apresentação.»*
 
-![A IA adiciona o gráfico ao diapositivo, depois pede "Clique em Save" h:280](../../../resources/screenshots/m9d/ai_add_to_deck.png)
+A IA executa as ferramentas, encontra o gráfico, cria um novo diapositivo de conteúdo no final da apresentação e confirma na conversa. Não há botão "add to deck" separado — o pedido faz tudo.
 
 </div>
 </div>
@@ -48,29 +45,49 @@ Usar o Assistente de IA para trazer uma visualização guardada e adicioná-la d
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<h2 class="step-h"><span class="step-n">2</span><span>Verifique o que ficou</span></h2>
+
+Olhe para a pré-visualização — deve haver um novo diapositivo no fim com o gráfico que nomeou.
+
+Abra-o e confirme:
+
+- Gráfico certo? (A IA pode escolher um vizinho se o pedido for vago.)
+- Título do diapositivo faz sentido?
+- O gráfico aparece, sem erro?
+
+Se alguma coisa estiver errada, diga-o na mesma conversa: *«Não é esse — usa a versão desagregada por região.»* A IA atualiza o diapositivo.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Guarde</span></h2>
+
+A apresentação grava automaticamente enquanto a IA trabalha, mas abra o diapositivo e clique em **Save and close** para confirmar.
+
+> **Ainda não tem um gráfico seu guardado?** Use este pedido de exemplo partilhado: *«Adiciona o gráfico da variação trimestral do volume de serviços à minha apresentação.»*
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Ponto de verificação
 
-A sua apresentação deverá ter agora **dois diapositivos**: um gráfico adicionado manualmente (atividade anterior), um adicionado com o Assistente de IA. Podem ser o mesmo gráfico ou diferentes — o objetivo é ter usado ambos os caminhos.
+A sua apresentação deverá ter agora **dois diapositivos**: um adicionado manualmente (atividade anterior), um adicionado pela IA. Mesmo gráfico ou diferente — o objetivo é ter usado os dois caminhos.
 
 ## Comparar os dois caminhos
 
 | Caminho manual | Caminho com Assistente de IA |
-|-------------|-------------------|
-| Procurar → Select → Inserir | Pedir → Clicar em "Add to deck" |
-| Útil quando sabe exatamente que gráfico quer | Útil quando não se lembra do nome ou quer que a IA sugira candidatos |
-| Um gráfico de cada vez | Pode pedir vários gráficos num só pedido |
+|---------------|-------------------|
+| Adicionar diapositivo → clicar → clique direito → Add row → mudar Content type → Select Visualization | Um único pedido: *«Adiciona [gráfico] à minha apresentação.»* |
+| Útil quando sabe exatamente que gráfico quer, e clicar é mais rápido do que escrever | Útil quando não se lembra do nome exato, ou quer que a IA escolha um padrão sensato |
+| Um gráfico de cada vez | Vários de uma vez: *«Adiciona os gráficos CPN1 e BCG mensais.»* |
 
 Nenhum é «melhor». Escolha o que for mais rápido para a tarefa.
 
 ## Dicas
 
-> **A IA vê o que você guardou.** Se um gráfico não estiver nas suas Visualisations guardadas, a IA não o encontra. Guarde primeiro, depois peça.
+> **A IA vê o que você guardou.** Se um gráfico não estiver nas suas Visualizations, a IA não o encontra. Guarde primeiro, depois peça.
 
-- Se a IA devolver o gráfico errado: nomeie o gráfico de forma mais específica no pedido, ou inclua o indicador + região.
-- Se o botão **Add to deck** não aparecer: a IA não reconheceu a resposta como um pedido de adicionar gráfico. Tente reformular (*«Adiciona o gráfico de CPN1 à minha apresentação»*).
+- Se a IA devolver o gráfico errado: nomeie-o de forma mais específica, ou inclua o indicador + a região.
+- A IA também pode criar um gráfico do zero e adicioná-lo num só pedido — *«Cria um gráfico CPN1 mensal e adiciona-o à minha apresentação.»* Combina *Construir com IA* do módulo anterior com este.
 
 ## A seguir
 
 Avance para **Editar e finalizar os seus diapositivos** — rever e polir o que construiu.
-
-> 🔎 **Confirme na sua interface atual**: os controlos de pré-visualização da conversa da IA podem diferir. A ação (pedir → pré-visualizar → adicionar à apresentação) é a mesma.

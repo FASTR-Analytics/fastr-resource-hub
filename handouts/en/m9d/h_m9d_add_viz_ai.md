@@ -20,26 +20,23 @@ footer: "FASTR · Slide Decks"
 <p class="sb-label">Before you start</p>
 
 - ☐ You've created your slide deck and added a visualisation manually (see prior activities)
-- ☐ You have at least one saved visualisation in the **Visualisations** tab
-- ☐ The AI Assistant panel is open
+- ☐ You have at least one saved visualisation in the **Visualizations** tab
+- ☐ Your deck is open — the AI panel on the right is scoped to it
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Use the AI Assistant to surface a saved visualisation and add it directly to your slide deck — no menu navigation needed. Your facilitator has just demonstrated this; now do it yourself.
+Tell the AI Assistant to add a saved chart to your open deck — in one prompt. No menu navigation, no block-type switch. Same result as the manual path.
 
-## Steps
+<h2 class="step-h"><span class="step-n">1</span><span>Ask the AI to add the chart</span></h2>
 
-1. In the AI Assistant, type a prompt naming one of **your** saved visualisations: *Display [your visualisation name].*
-2. The AI finds the chart and shows a preview in the chat.
-3. Below the preview, look for the button to **add the chart to a slide deck** — pick the deck you created.
-4. Save.
+In the AI panel (right side), type a prompt that names your chart and your intent:
 
-> **No saved chart of your own yet?** Use this shared example prompt instead: *Display the quarterly change in service volume visualisation.*
+> *"Add the [your chart name] chart to my deck."*
 
-![AI adds the chart to the slide, then prompts "Click Save" h:280](../../../resources/screenshots/m9d/ai_add_to_deck.png)
+The AI runs its tools, finds the chart, creates a new content slide at the end of the deck, and confirms in the chat. No separate "add to deck" button — the prompt does the whole thing.
 
 </div>
 </div>
@@ -48,28 +45,49 @@ Use the AI Assistant to surface a saved visualisation and add it directly to you
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<h2 class="step-h"><span class="step-n">2</span><span>Check what landed</span></h2>
+
+Look at the deck preview — there should now be a new slide at the end with the chart you named.
+
+Open it and confirm:
+
+- Right chart? (Sometimes the AI grabs a close-but-different one if your prompt is vague.)
+- Slide title makes sense?
+- Chart renders, not an error?
+
+If anything's off, say so in the same chat: *"That's not the right one — use the regional split instead."* The AI updates the slide.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Save</span></h2>
+
+The deck auto-saves as the AI works, but it's worth opening the slide and clicking **Save and close** to confirm.
+
+> **No saved chart of your own yet?** Use this shared example prompt instead: *"Add the quarterly change in service volume chart to my deck."*
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Checkpoint
 
-Your deck should now have **two slides**: one chart added manually (previous activity), one added via the AI Assistant. They can be the same chart or different — the point is you've used both paths.
+Your deck should now have **two slides**: one chart added manually (previous activity), one added via the AI Assistant. Same chart or different — the point is you've used both paths.
 
 ## Comparing the two paths
 
 | Manual path | AI Assistant path |
 |-------------|-------------------|
-| Browse → Select → Insert | Prompt → Click "Add to deck" |
-| Useful when you know exactly which chart you want | Useful when you don't remember the name or want the AI to surface candidates |
-| One chart at a time | Can ask for multiple charts in one prompt |
+| Add slide → click slide → right-click → Add row → switch Content type → Select Visualization | Type one prompt: *"Add [chart] to my deck."* |
+| Useful when you know exactly which chart, and clicking is faster than typing | Useful when you don't remember the exact name, or want the AI to pick a sensible default |
+| One chart at a time | Can ask for several at once: *"Add the ANC1 and BCG monthly charts."* |
 
 Neither is "better." Pick whichever feels faster for the task.
 
 ## Tips
 
-> **The AI sees what you've saved.** If a chart isn't in your saved Visualisations, the AI won't find it. Save first, then prompt.
+> **The AI sees what you've saved.** If a chart isn't in your saved Visualizations, the AI can't find it. Save first, then prompt.
 
-- If the AI returns the wrong chart: name the chart more specifically in your prompt, or include the indicator + region in the request.
-- If the **Add to deck** button doesn't appear: the AI didn't recognise the response as a chart-add request. Try rephrasing (*"Add the ANC1 chart to my deck"*).
+- If the AI returns the wrong chart: name it more specifically in your prompt, or include the indicator + region.
+- The AI can also create a chart from scratch and add it in one go — *"Make a monthly ANC1 chart and add it to my deck."* This combines the previous module's *Build with AI* with this one.
 
 ## What's next
 
 Move on to **Edit and finalise your slides** — review and polish what you've built.
-

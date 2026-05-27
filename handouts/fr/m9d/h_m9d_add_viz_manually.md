@@ -21,26 +21,51 @@ footer: "FASTR · Présentations"
 
 - ☐ Vous avez créé votre présentation (voir *Créez votre première présentation*)
 - ☐ Vous avez une visualisation enregistrée que vous souhaitez inclure
-- ☐ Le facilitateur a démontré l'éditeur (ajouter une viz, diviser une diapositive en graphique + texte)
-- ☐ Vous êtes dans l'onglet **Présentations**
+- ☐ Vous êtes dans l'onglet **Présentations** et dans votre présentation
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Ajoutez une visualisation enregistrée à la diapositive de contenu de votre présentation. Votre facilitateur vient de le démontrer — les étapes ci-dessous sont là pour que vous puissiez le refaire seul.
+Ajouter une visualisation enregistrée à une diapositive de contenu. Le chemin a quelques étapes non évidentes la première fois — elles deviennent rapides ensuite.
 
-## Étapes
+<h2 class="step-h"><span class="step-n">1</span><span>Ajoutez une diapositive de contenu</span></h2>
 
-1. Ouvrez la présentation que vous avez créée plus tôt et cliquez dans la diapositive de contenu vide.
-2. Dans l'éditeur : **Bloc** → **Visualisation** → **Sélectionner une visualisation**.
-3. Parcourez vos graphiques enregistrés, choisissez-en un que **vous** avez créé, et cliquez sur **Sélectionner**.
-4. Vérifiez que le graphique apparaît sur la diapositive.
-5. Enregistrez.
+Si la présentation est vide, cliquez sur **+ Ajouter une diapositive** en haut, puis choisissez **Diapositive de contenu** parmi les trois options (Couverture / Section / Contenu).
+
+La diapositive apparaît dans l'aperçu.
 
 </div>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Ouvrez l'éditeur de diapositive</span></h2>
+
+Cliquez sur l'aperçu de la diapositive. L'éditeur s'ouvre avec les onglets **En-tête / Pied de page** et **Contenu** dans le panneau de gauche.
+
+Passez sur l'onglet **Contenu**. Il indique *« Cliquez sur un bloc dans le canevas pour le modifier »* — le canevas est vide, donc vous allez ajouter un bloc d'abord.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Ajoutez un bloc, réglez-le sur Visualisation</span></h2>
+
+**Clic droit** sur le canevas vide. Un petit menu s'ouvre — **Convertir en / Diviser / Ajouter**.
+
+Survolez **Ajouter** et choisissez **Ligne en dessous** (ou l'une des quatre directions). Un nouveau bloc apparaît avec **Type de contenu** réglé sur **Texte** par défaut.
+
+Dans le panneau de gauche, changez le menu déroulant **Type de contenu** de **Texte** à **Visualisation**. Deux boutons apparaissent : **Sélectionner une visualisation** et **Créer une nouvelle visualisation**.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Choisissez le graphique enregistré</span></h2>
+
+Cliquez sur **Sélectionner une visualisation**. Un sélecteur s'ouvre — modules à gauche, cartes des graphiques enregistrés au milieu.
+
+Naviguez jusqu'à **M3. Utilisation des services** (ou là où vit votre graphique), cliquez sur la carte voulue, puis cliquez sur **Sélectionner** en haut à droite. La boîte de dialogue se ferme et le graphique apparaît sur la diapositive.
+
+<h2 class="step-h"><span class="step-n">5</span><span>Enregistrez</span></h2>
+
+Cliquez sur **Sauvegarder et quitter** en haut à gauche de l'éditeur. Vous revenez à la vue de la présentation, avec votre graphique sur la diapositive 1.
 
 ---
 
@@ -58,10 +83,10 @@ Votre diapositive doit maintenant montrer :
 
 > **Réutilisez, ne recréez pas.** Si vous avez déjà construit une visualisation dans l'onglet **Visualisations**, ajoutez l'existante — ne la reconstruisez pas dans l'éditeur de diapositive.
 
-- Si vous ne trouvez pas votre visualisation : vérifiez l'onglet **Visualisations** et confirmez qu'elle est enregistrée dans un dossier visible.
+- Si vous ne trouvez pas votre graphique dans le sélecteur : vérifiez l'onglet **Visualisations** et confirmez qu'il est dans un dossier visible. Utilisez la barre de recherche en haut du sélecteur.
 - Si le graphique paraît à l'étroit : c'est normal à ce stade. L'activité *Éditer et finaliser* couvre le redimensionnement.
+- Le **Type de contenu** d'un bloc peut aussi être réglé sur **Texte** ou **Image** si vous voulez du texte narratif ou une image fixe.
 
 ## Étape suivante
 
-Passez à **Ajouter une visualisation (avec l'Assistant IA)** — la même tâche, mais en utilisant l'IA comme raccourci.
-
+Passez à **Ajouter une visualisation (avec l'Assistant IA)** — la même tâche, mais en un seul prompt.

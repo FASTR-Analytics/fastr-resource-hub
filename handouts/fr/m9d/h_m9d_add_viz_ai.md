@@ -21,25 +21,22 @@ footer: "FASTR · Présentations"
 
 - ☐ Vous avez créé votre présentation et ajouté une visualisation manuellement (voir activités précédentes)
 - ☐ Vous avez au moins une visualisation enregistrée dans l'onglet **Visualisations**
-- ☐ Le panneau Assistant IA est ouvert
+- ☐ Votre présentation est ouverte — le panneau IA à droite y est rattaché
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Utilisez l'Assistant IA pour faire apparaître une visualisation enregistrée et l'ajouter directement à votre présentation — sans navigation dans les menus. Votre facilitateur vient de le démontrer ; à vous maintenant.
+Demandez à l'Assistant IA d'ajouter un graphique enregistré à votre présentation ouverte — en un seul prompt. Pas de navigation, pas de changement de type de bloc. Même résultat que la voie manuelle.
 
-## Étapes
+<h2 class="step-h"><span class="step-n">1</span><span>Demandez à l'IA d'ajouter le graphique</span></h2>
 
-1. Dans l'Assistant IA, saisissez un prompt nommant l'une de **vos** visualisations enregistrées : *Affiche [nom de votre visualisation].*
-2. L'IA trouve le graphique et montre un aperçu dans le chat.
-3. Sous l'aperçu, cherchez le bouton pour **ajouter le graphique à une présentation** — choisissez la présentation que vous avez créée.
-4. Enregistrez.
+Dans le panneau IA (à droite), tapez un prompt qui nomme votre graphique et votre intention :
 
-> **Pas encore de graphique enregistré ?** Utilisez plutôt ce prompt d'exemple partagé : *Affiche la visualisation de variation trimestrielle des volumes de services.*
+> *« Ajoute le graphique [nom de votre graphique] à ma présentation. »*
 
-![L'IA ajoute le graphique à la diapositive, puis invite à « Enregistrer » h:280](../../../resources/screenshots/m9d/ai_add_to_deck.png)
+L'IA exécute ses outils, retrouve le graphique, crée une nouvelle diapositive de contenu à la fin de la présentation et confirme dans le chat. Pas de bouton « ajouter à la présentation » séparé — le prompt fait tout.
 
 </div>
 </div>
@@ -48,28 +45,49 @@ Utilisez l'Assistant IA pour faire apparaître une visualisation enregistrée et
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<h2 class="step-h"><span class="step-n">2</span><span>Vérifiez ce qui a été ajouté</span></h2>
+
+Regardez l'aperçu — une nouvelle diapositive doit apparaître à la fin avec le graphique nommé.
+
+Ouvrez-la et confirmez :
+
+- Bon graphique ? (L'IA peut attraper un voisin si le prompt est vague.)
+- Titre de diapositive cohérent ?
+- Le graphique s'affiche, pas une erreur ?
+
+Si quelque chose ne va pas, dites-le dans le même chat : *« Ce n'est pas le bon — utilise la version désagrégée par région. »* L'IA met la diapositive à jour.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Enregistrez</span></h2>
+
+La présentation s'enregistre automatiquement pendant que l'IA travaille, mais ouvrez la diapositive et cliquez sur **Sauvegarder et quitter** pour confirmer.
+
+> **Pas encore de graphique à vous ?** Utilisez ce prompt d'exemple partagé : *« Ajoute le graphique de variation trimestrielle des volumes à ma présentation. »*
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Vérification
 
-Votre présentation doit maintenant avoir **deux diapositives** : une avec un graphique ajouté manuellement (activité précédente), une ajoutée via l'Assistant IA. Ce peut être le même graphique ou un différent — l'important est que vous ayez utilisé les deux voies.
+Votre présentation doit maintenant avoir **deux diapositives** : une ajoutée manuellement (activité précédente), une ajoutée par l'IA. Même graphique ou différent — l'important est que vous ayez utilisé les deux voies.
 
 ## Comparer les deux voies
 
 | Voie manuelle | Voie Assistant IA |
 |---------------|-------------------|
-| Parcourir → Sélectionner → Insérer | Demander → Cliquer « Ajouter à la présentation » |
-| Utile quand vous savez exactement quel graphique vous voulez | Utile quand vous n'avez plus le nom en tête ou que vous voulez que l'IA propose des candidats |
-| Un graphique à la fois | Possibilité de demander plusieurs graphiques en un seul prompt |
+| Ajouter diapositive → cliquer → clic droit → Ajouter ligne → changer Type de contenu → Sélectionner une visualisation | Un seul prompt : *« Ajoute [graphique] à ma présentation. »* |
+| Utile quand vous savez exactement quel graphique, et cliquer va plus vite que taper | Utile quand vous n'avez plus le nom exact, ou que vous laissez l'IA proposer un défaut sensé |
+| Un graphique à la fois | Plusieurs en un coup : *« Ajoute les graphiques CPN1 et BCG mensuels. »* |
 
 Aucune n'est « meilleure ». Choisissez celle qui semble plus rapide pour la tâche.
 
 ## Astuces
 
-> **L'IA voit ce que vous avez enregistré.** Si un graphique n'est pas dans vos Visualisations enregistrées, l'IA ne le trouvera pas. Enregistrez d'abord, demandez ensuite.
+> **L'IA voit ce que vous avez enregistré.** Si un graphique n'est pas dans vos Visualisations, l'IA ne peut pas le trouver. Enregistrez d'abord, demandez ensuite.
 
-- Si l'IA renvoie le mauvais graphique : nommez-le plus précisément dans votre prompt, ou ajoutez l'indicateur + la région dans la demande.
-- Si le bouton **Ajouter à la présentation** n'apparaît pas : l'IA n'a pas reconnu la demande comme un ajout de graphique. Reformulez (*« Ajoute le graphique CPN1 à ma présentation »*).
+- Si l'IA renvoie le mauvais graphique : nommez-le plus précisément, ou ajoutez l'indicateur + la région.
+- L'IA peut aussi créer un graphique à partir de zéro et l'ajouter en un coup — *« Crée un graphique CPN1 mensuel et ajoute-le à ma présentation. »* Cela combine *Construire avec l'IA* du module précédent avec celui-ci.
 
 ## Étape suivante
 
 Passez à **Éditer et finaliser vos diapositives** — relire et peaufiner ce que vous avez construit.
-

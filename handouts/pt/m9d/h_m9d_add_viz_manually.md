@@ -21,26 +21,51 @@ footer: "FASTR · Apresentações"
 
 - ☐ Criou a sua apresentação (ver *Criar a sua primeira apresentação*)
 - ☐ Tem uma visualização guardada que quer incluir
-- ☐ O facilitador demonstrou o editor (adicionar uma viz, dividir um diapositivo em gráfico + texto)
-- ☐ Está no separador **Slide Decks**
+- ☐ Está no separador **Slide Decks** e dentro da sua apresentação
 
 </aside>
 <div class="p1-main">
 
 ## O que vai fazer
 
-Adicionar uma visualização guardada ao diapositivo de conteúdo da sua apresentação. O seu facilitador acabou de demonstrar isto — os passos abaixo estão aqui para o repetir sozinho.
+Adicionar uma visualização guardada a um diapositivo de conteúdo. O caminho tem alguns passos não óbvios da primeira vez — depois fica rápido.
 
-## Passos
+<h2 class="step-h"><span class="step-n">1</span><span>Adicione um diapositivo de conteúdo</span></h2>
 
-1. Abra a apresentação que criou antes e clique no diapositivo de conteúdo vazio.
-2. No editor: **Block** → **Visualisation** → **Select visualisation**.
-3. Percorra os seus gráficos guardados, escolha um que **você** criou, e clique em **Select**.
-4. Confirme que o gráfico aparece no diapositivo.
-5. Guarde.
+Se a apresentação está vazia, clique em **+ Add slide** no topo, depois escolha **Content slide** entre as três opções (Cover / Section / Content).
+
+O diapositivo aparece na pré-visualização.
 
 </div>
 </div>
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Abra o editor de diapositivos</span></h2>
+
+Clique na pré-visualização do diapositivo. O editor abre com os separadores **Header / Footer** e **Content** no painel da esquerda.
+
+Mude para o separador **Content**. Diz *"Click a block on the canvas to edit it"* — o canvas está vazio, por isso vai adicionar um bloco primeiro.
+
+<h2 class="step-h"><span class="step-n">3</span><span>Adicione um bloco e mude-o para Visualization</span></h2>
+
+**Clique com o botão direito** no canvas vazio. Aparece um pequeno menu — **Change to / Split / Add**.
+
+Passe o rato sobre **Add** e escolha **Row below** (ou qualquer das quatro direções). Surge um novo bloco com **Content type** definido como **Text** por defeito.
+
+No painel da esquerda, mude o menu pendente **Content type** de **Text** para **Visualization**. Aparecem dois botões: **Select Visualization** e **Create New Visualization**.
+
+<h2 class="step-h"><span class="step-n">4</span><span>Escolha o gráfico guardado</span></h2>
+
+Clique em **Select Visualization**. Abre um seletor — módulos à esquerda, cartões dos gráficos guardados ao centro.
+
+Navegue até **M3. Service utilization** (ou onde estiver o seu gráfico), clique no cartão pretendido, depois clique em **Select** no canto superior direito. A caixa fecha e o gráfico aparece no diapositivo.
+
+<h2 class="step-h"><span class="step-n">5</span><span>Guarde</span></h2>
+
+Clique em **Save and close** no canto superior esquerdo do editor. Volta à vista da apresentação, com o seu gráfico no diapositivo 1.
 
 ---
 
@@ -56,13 +81,12 @@ O seu diapositivo deverá mostrar agora:
 
 ## Dicas
 
-> **Reutilize, não recrie.** Se já construiu uma visualização no separador **Visualisations**, adicione a existente — não a reconstrua dentro do editor de diapositivos.
+> **Reutilize, não recrie.** Se já construiu uma visualização no separador **Visualizations**, adicione a existente — não a reconstrua dentro do editor de diapositivos.
 
-- Se não encontrar a sua visualização: verifique o separador **Visualisations** e confirme que está guardada numa pasta que consegue ver.
-- Se o gráfico parecer apertado no diapositivo: é esperado nesta fase. A atividade *Editar e finalizar* trata do redimensionamento.
+- Se não encontrar o gráfico no seletor: verifique o separador **Visualizations** e confirme que está numa pasta visível. Use a barra de pesquisa no topo do seletor.
+- Se o gráfico parecer apertado: é esperado nesta fase. A atividade *Editar e finalizar* trata do redimensionamento.
+- O **Content type** do bloco também pode ser **Text** ou **Image** se quiser texto narrativo ou uma imagem fixa.
 
 ## A seguir
 
-Avance para **Adicionar uma visualização (com o Assistente de IA)** — a mesma tarefa, mas usando a IA como atalho.
-
-> 🔎 **Confirme na sua interface atual**: os nomes dos menus podem diferir. O fluxo (abrir editor → Block → Visualisation → Select) mantém-se.
+Avance para **Adicionar uma visualização (com o Assistente de IA)** — a mesma tarefa, num único prompt.
