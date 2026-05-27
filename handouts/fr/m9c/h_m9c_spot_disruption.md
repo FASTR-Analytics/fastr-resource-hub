@@ -3,45 +3,36 @@ marp: true
 theme: fastr-handout
 paginate: true
 class: redesign
-footer: "FASTR · Visualisations et interprétation"
+footer: "FASTR · Visualisations & Interprétation"
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Lire une viz</span> <span class="arrow">→</span> <span class="step done">Construire manuellement</span> <span class="arrow">→</span> <span class="step done">Construire avec l'IA</span> <span class="arrow">→</span> <span class="step done">Écrire l'interprétation</span> <span class="arrow">→</span> <span class="step done">Interprétation IA</span> <span class="arrow">→</span> <span class="step current">Repérer une perturbation</span></div>
+<div class="setup-breadcrumb"><span class="step done">Lire une viz</span> <span class="arrow">→</span> <span class="step done">Construire à la main</span> <span class="arrow">→</span> <span class="step done">Construire avec l'IA</span> <span class="arrow">→</span> <span class="step done">Rédiger l'interprétation</span> <span class="arrow">→</span> <span class="step done">Interprétation IA</span> <span class="arrow">→</span> <span class="step current">Repérer une perturbation</span></div>
 
 # Application — repérer une perturbation
 
-<p class="meta-line"><strong>Activité</strong> · <strong>Visualisations et interprétation</strong> · <strong>~25 min</strong></p>
+<p class="meta-line"><strong>Activité</strong> · <strong>Visualisations & Interprétation</strong> · <strong>~25 min</strong></p>
 
 <div class="p1-grid">
 <aside class="p1-sidebar">
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous avez terminé les 5 documents précédents (vous savez construire, interpréter et utiliser l'IA)
-- ☐ Votre équipe pays a un indicateur en tête — un sur lequel quelqu'un a signalé une préoccupation
-- ☐ Vous êtes dans l'onglet **Visualisations**, avec les données de votre pays chargées
+- ☐ Vous avez terminé les 5 documents précédents
+- ☐ Vous êtes connecté à la plateforme, dans le projet de votre pays
+- ☐ Vous êtes sur l'onglet **Visualisations**
+
+<p class="sb-label">Pourquoi c'est important</p>
+
+Les cinq premiers documents enseignaient la technique. C'est ici que vous l'utilisez : ouvrir un vrai graphique de perturbations pour votre pays, appliquer le cadre en six étapes, et produire un constat qu'un décideur pourrait réellement utiliser.
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Reprenez tout ce que vous avez pratiqué et appliquez-le à une vraie question. Ouvrez le graphique de perturbation pour un indicateur, parcourez le cadre en six étapes et produisez un énoncé de constat que votre équipe pays utiliserait réellement.
-
-## L'exercice
-
-Choisissez **un indicateur** qui compte pour votre pays — CPN1, Penta3, accouchements institutionnels, BCG. Ouvrez son graphique de perturbation sur la plateforme. Puis parcourez les six étapes de *Lire une viz*.
-
-| Étape | Pour ce graphique |
-|-------|-------------------|
-| 1. Quel indicateur ? |  |
-| 2. Quel niveau et quelle période ? |  |
-| 3. Qu'est-ce qui est comparé ? | Volumes observés vs **attendus** (prédits à partir des tendances passées) |
-| 4. Lire les valeurs | Où voyez-vous du rouge ? Où voyez-vous du vert ? |
-| 5. Qu'est-ce qui ressort ? | Baisse soutenue ? Pic isolé ? Motif géographique ? |
-| 6. Et alors ? | Qu'est-ce que cela signifie ? Que feriez-vous ? |
+Ouvrir le graphique Perturbations et surplus (national), le réduire à un indicateur et une période d'intérêt, parcourir le cadre en six étapes, puis rédiger un constat en trois parties à partager avec la salle.
 
 </div>
 </div>
@@ -50,43 +41,84 @@ Choisissez **un indicateur** qui compte pour votre pays — CPN1, Penta3, accouc
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Ce qu'il faut chercher
+<h2 class="step-h"><span class="step-n">1</span><span>Trouver le graphique de perturbation</span></h2>
 
-Une perturbation est rarement une baisse d'un seul mois. **Cherchez :**
+Sur l'onglet **Visualisations**, basculez l'affichage (en haut à gauche de la liste) sur **Par module**. Cela regroupe les visualisations selon le module qui les produit.
 
-- **Baisses soutenues** — trois mois ou plus en dessous des attentes
-- **Concentration géographique** — quels districts portent la tendance ?
-- **Stabilité vs changement** — l'indicateur est-il plat, en croissance, en baisse ?
+Ouvrez **M3. Utilisation des services**. Faites défiler jusqu'au groupe **Volume de services observé vs attendu — National**. La première carte du groupe est **Perturbations et surplus (national)**. Cliquez pour l'ouvrir.
 
-> *Les volumes peuvent sembler stables et masquer un problème.* Si l'utilisation est stable mais que la population croît, la couverture baisse en réalité. Recoupez avec la vue couverture si disponible.
+![Onglet Visualisations en vue Par module, M3 Utilisation des services sélectionné h:300](../../../resources/screenshots/m9c/spot_disruption_01_m3_module_list.png)
 
-## Le contexte à ajouter
+<h2 class="step-h"><span class="step-n">2</span><span>Lire la vue par défaut</span></h2>
 
-Une fois un motif identifié, ajoutez ce que vous savez et que le graphique ne montre pas :
+Le graphique par défaut montre chaque indicateur principal sous forme de petit graphique dans une grille. La ligne noire est le **volume mensuel observé**. La zone rose est la **plage attendue** calculée à partir des tendances passées. Là où la ligne sort de la zone rose, c'est une perturbation ou un surplus possible.
 
-- Y a-t-il eu **continuité du financement et du personnel** sur cette période ?
-- Des enquêtes auprès des établissements ont-elles signalé des **lacunes de préparation** (médicaments, équipement) ?
-- La qualité des soins se maintient-elle, même si les volumes le font ?
+![Grille par défaut des perturbations et surplus, tous indicateurs visibles h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
 
-Le graphique montre le *quoi*. Votre équipe pays apporte le *pourquoi*.
+---
 
-## Écrire votre constat
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-Utilisez la structure d'interprétation en trois parties du document précédent :
+<h2 class="step-h"><span class="step-n">3</span><span>Filtrer à un indicateur</span></h2>
+
+Sur l'onglet **Data** à gauche, trouvez la section **Filter (subset)** et cochez la case **Indicator**. Une liste de pastilles d'indicateurs apparaît (ANC1, ANC4, BCG, DELIVERY, OPD, PENTA1, PENTA3, PNC1_MOTHER, PNC1_NEWBORN). Cliquez sur une pastille pour filtrer le graphique sur cet indicateur. Cliquez sur plusieurs pour en ajouter.
+
+![Filtre Indicator déployé avec la liste de pastilles h:340](../../../resources/screenshots/m9c/spot_disruption_03_indicator_filter_open.png)
+
+Quand un seul indicateur est sélectionné, la grille se réduit à un graphique plein écran. Vous pouvez aussi cocher **Time period** pour réduire la fenêtre temporelle.
+
+![Filtré sur ANC1, graphique unique plein écran h:340](../../../resources/screenshots/m9c/spot_disruption_04_filtered_anc1.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">4</span><span>Appliquer les six étapes</span></h2>
+
+Sur votre graphique filtré, parcourez le cadre en six étapes du document *Lire une viz* :
+
+| Étape | Sur ce graphique |
+|-------|------------------|
+| 1. Quel indicateur ? | Celui que vous avez filtré |
+| 2. Quel niveau et quelle période ? | National. La période que vous avez choisie. |
+| 3. Que compare-t-on ? | Volume mensuel observé (ligne noire) vs **attendu** (zone rose, prédit à partir des tendances passées) |
+| 4. Lire les valeurs | Où la ligne noire descend-elle sous la zone rose ? De combien ? |
+| 5. Qu'est-ce qui ressort ? | Une baisse soutenue, trois mois ou plus ? Un pic unique ? Un motif ? |
+| 6. Et alors ? | Quelle action cela appelle-t-il ? |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">5</span><span>Ajouter le contexte que le graphique ne montre pas</span></h2>
+
+Le graphique montre le *quoi*. Votre équipe pays apporte le *pourquoi*. Une fois un motif identifié, ajoutez ce que vous savez :
+
+- Y a-t-il eu un **changement de financement ou de personnel** sur cette période ?
+- Y a-t-il des **manques connus en intrants ou en ressources humaines** (médicaments, équipements, personnel) ?
+- Même si les **chiffres semblent bons**, la qualité des soins a-t-elle baissé ?
+
+<h2 class="step-h"><span class="step-n">6</span><span>Rédiger votre constat</span></h2>
+
+Utilisez la structure en trois parties du document *Rédiger une interprétation* :
 
 1. **Titre** — le message en une phrase
-2. **Ce que vous voyez** — faits visibles dans le graphique
-3. **Ce que cela signifie** — le « et alors », lié à une prochaine étape concrète
+2. **Ce que vous voyez** — les faits visibles sur le graphique
+3. **Ce que cela signifie** — le « et alors », rattaché à une prochaine étape concrète
 
-## Partager en plénière
+<h2 class="step-h"><span class="step-n">7</span><span>Partager avec la salle</span></h2>
 
-Quand chaque équipe pays a terminé, partagez un constat avec le groupe. Écoutez :
+Quand chaque équipe pays a terminé, une personne partage le constat. Écoutez :
 
-- Les constats sont-ils **précis** ? (Un indicateur, une période, une action.)
-- Les « et alors » sont-ils **liés à un vrai décideur** dans le pays de l'équipe ?
-- L'équipe pays a-t-elle apporté un **contexte local** que le graphique seul ne pouvait pas donner ?
+- Le constat est-il **précis** ? Un indicateur, une période, une action.
+- Le « et alors » est-il **rattaché à un vrai décideur** ?
+- L'équipe a-t-elle **apporté le contexte local** que le graphique seul ne pouvait pas donner ?
 
-## Étape suivante
+## À surveiller
 
-C'est la fin de la série visualisations et interprétation. Le module suivant couvre la **construction de rapports** — mettre vos graphiques, interprétations et constats dans un document partageable.
+- **Une baisse d'un seul mois est en général du bruit.** Cherchez une baisse soutenue, trois mois ou plus.
+- **La zone rose est la plage attendue, pas une cible.** Un volume qui reste confortablement dans le rose correspond à ce que le modèle prédisait.
 
+## Et ensuite
+
+Ceci clôt la série *Visualisations & Interprétation*. Le module suivant traite de la construction de rapports — assembler vos graphiques, interprétations et constats dans un document partageable.

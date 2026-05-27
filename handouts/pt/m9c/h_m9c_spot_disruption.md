@@ -3,45 +3,36 @@ marp: true
 theme: fastr-handout
 paginate: true
 class: redesign
-footer: "FASTR · Visualizações e interpretação"
+footer: "FASTR · Visualizações & Interpretação"
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Ler uma visualização</span> <span class="arrow">→</span> <span class="step done">Construir manualmente</span> <span class="arrow">→</span> <span class="step done">Construir com IA</span> <span class="arrow">→</span> <span class="step done">Escrever interpretação</span> <span class="arrow">→</span> <span class="step done">Interpretação com IA</span> <span class="arrow">→</span> <span class="step current">Detetar perturbação</span></div>
+<div class="setup-breadcrumb"><span class="step done">Ler uma viz</span> <span class="arrow">→</span> <span class="step done">Construir manualmente</span> <span class="arrow">→</span> <span class="step done">Construir com IA</span> <span class="arrow">→</span> <span class="step done">Escrever interpretação</span> <span class="arrow">→</span> <span class="step done">Interpretação IA</span> <span class="arrow">→</span> <span class="step current">Identificar perturbação</span></div>
 
-# Aplicar — detetar uma perturbação
+# Aplicação — identificar uma perturbação
 
-<p class="meta-line"><strong>Atividade</strong> · <strong>Visualizações e interpretação</strong> · <strong>~25 min</strong></p>
+<p class="meta-line"><strong>Atividade</strong> · <strong>Visualizações & Interpretação</strong> · <strong>~25 min</strong></p>
 
 <div class="p1-grid">
 <aside class="p1-sidebar">
 
 <p class="sb-label">Antes de começar</p>
 
-- ☐ Concluiu as 5 fichas anteriores (sabe construir, interpretar e usar a IA)
-- ☐ A sua equipa de país tem um indicador em mente — um sobre o qual alguém sinalizou uma preocupação
-- ☐ Está no separador **Visualizations**, com os dados do seu país carregados
+- ☐ Concluiu os 5 documentos anteriores
+- ☐ Está autenticado na plataforma, dentro do projeto do seu país
+- ☐ Está no separador **Visualizations**
+
+<p class="sb-label">Porque é importante</p>
+
+Os primeiros cinco documentos ensinaram a técnica. É aqui que a usa: abrir um gráfico de perturbações real do seu país, aplicar o quadro de seis passos, e produzir um achado que um decisor possa de facto utilizar.
 
 </aside>
 <div class="p1-main">
 
 ## O que vai fazer
 
-Pegar em tudo o que praticou e aplicá-lo a uma pergunta real. Abra o gráfico de perturbações de um indicador, percorra o quadro de seis passos e produza uma declaração de conclusão que a sua equipa de país usaria de facto.
-
-## O exercício
-
-Escolha **um indicador** que importe para o seu país — CPN1, Penta3, partos institucionais, BCG. Abra o seu gráfico de perturbações na plataforma. Depois percorra os seis passos de *Ler uma visualização*.
-
-| Passo | Para este gráfico |
-|------|----------------|
-| 1. Que indicador? |  |
-| 2. Que nível e período? |  |
-| 3. O que está a ser comparado? | Volumes observados vs **esperados** (previstos a partir de tendências passadas) |
-| 4. Ler os valores | Onde vê vermelho? Onde vê verde? |
-| 5. O que se destaca? | Queda sustentada? Pico de um mês? Padrão geográfico? |
-| 6. E então? | O que significa? O que faria? |
+Abrir o gráfico Disruptions and surpluses (national), restringi-lo a um indicador e a um período de interesse, percorrer o quadro de seis passos, e depois escrever um achado em três partes para partilhar com a sala.
 
 </div>
 </div>
@@ -50,44 +41,84 @@ Escolha **um indicador** que importe para o seu país — CPN1, Penta3, partos i
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## O que procurar
+<h2 class="step-h"><span class="step-n">1</span><span>Encontrar o gráfico de perturbações</span></h2>
 
-Uma perturbação raramente é uma quebra de um único mês. **Procure:**
+No separador **Visualizations**, mude o seletor de vista (no topo esquerdo da lista) para **By module**. Isto agrupa as visualizações pelo módulo que as produz.
 
-- **Quedas sustentadas** — três ou mais meses abaixo do esperado
-- **Concentração geográfica** — que distritos impulsionam a tendência?
-- **Estabilidade vs mudança** — o indicador está estável, a crescer, a diminuir?
+Abra **M3. Service utilization**. Desça até ao grupo **Actual vs expected service volume — National**. O primeiro cartão do grupo é **Disruptions and surpluses (national)**. Clique para abrir.
 
-> *Os volumes podem parecer estáveis e ainda assim ser um problema.* Se a procura é constante mas a população está a crescer, a cobertura está na verdade a cair. Cruze com a vista de cobertura, se disponível.
+![Separador Visualizations em vista By module, M3 Service utilization selecionado h:300](../../../resources/screenshots/m9c/spot_disruption_01_m3_module_list.png)
 
-## Contexto a acrescentar
+<h2 class="step-h"><span class="step-n">2</span><span>Ler a vista por defeito</span></h2>
 
-Depois de identificar um padrão, acrescente o que sabe e o gráfico não pode mostrar:
+O gráfico por defeito mostra cada indicador-base num pequeno gráfico em grelha. A linha preta é o **volume mensal observado**. A zona rosa é o **intervalo esperado** calculado a partir das tendências passadas. Onde a linha sai da zona rosa, é uma perturbação ou um excedente provável.
 
-- Houve **continuidade de financiamento ou de pessoal** neste período?
-- Os inquéritos a unidades sinalizaram **lacunas de prontidão** (medicamentos, equipamento)?
-- A qualidade dos cuidados mantém-se mesmo que os volumes se mantenham?
+![Grelha por defeito das perturbações e excedentes, todos os indicadores visíveis h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
 
-O gráfico mostra o *quê*. A sua equipa de país traz o *porquê*.
+---
 
-## Escreva a sua conclusão
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-Use a estrutura de interpretação em três partes da ficha anterior:
+<h2 class="step-h"><span class="step-n">3</span><span>Filtrar a um indicador</span></h2>
+
+No separador **Data** à esquerda, encontre a secção **Filter (subset)** e marque a caixa **Indicator**. Surge uma lista de chips de indicadores (ANC1, ANC4, BCG, DELIVERY, OPD, PENTA1, PENTA3, PNC1_MOTHER, PNC1_NEWBORN). Clique num chip para filtrar o gráfico a esse indicador. Clique em mais para adicionar outros.
+
+![Filtro Indicator expandido com a lista de chips h:340](../../../resources/screenshots/m9c/spot_disruption_03_indicator_filter_open.png)
+
+Quando só um indicador está selecionado, a grelha colapsa num gráfico único em tamanho real. Também pode marcar **Time period** para restringir a janela temporal.
+
+![Filtrado a ANC1, gráfico único em tamanho real h:340](../../../resources/screenshots/m9c/spot_disruption_04_filtered_anc1.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">4</span><span>Aplicar os seis passos</span></h2>
+
+No gráfico filtrado, percorra o quadro de seis passos do documento *Ler uma viz*:
+
+| Passo | Para este gráfico |
+|-------|-------------------|
+| 1. Que indicador? | O que filtrou |
+| 2. Que nível e período? | Nacional. O período que escolheu. |
+| 3. O que se compara? | Volume mensal observado (linha preta) vs **esperado** (zona rosa, prevista a partir das tendências passadas) |
+| 4. Ler os valores | Onde é que a linha preta cai abaixo da zona rosa? Em quanto? |
+| 5. O que se destaca? | Uma queda sustentada, três meses ou mais? Um pico isolado? Um padrão? |
+| 6. E então? | Que ação isto sugere? |
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">5</span><span>Adicionar contexto que o gráfico não mostra</span></h2>
+
+O gráfico mostra o *quê*. A sua equipa-país traz o *porquê*. Identificado um padrão, junte o que sabe:
+
+- Houve alguma **mudança no financiamento ou nos recursos humanos** nesse período?
+- Há **lacunas conhecidas em insumos ou recursos humanos** (medicamentos, equipamento, pessoal)?
+- Mesmo que os **números pareçam bons**, a qualidade dos cuidados caiu?
+
+<h2 class="step-h"><span class="step-n">6</span><span>Escrever o seu achado</span></h2>
+
+Use a estrutura em três partes do documento *Escrever uma interpretação*:
 
 1. **Título** — a mensagem numa frase
-2. **O que vê** — factos visíveis no gráfico
-3. **O que significa** — o «e então», ligado a um próximo passo concreto
+2. **O que se vê** — os factos visíveis no gráfico
+3. **O que significa** — o "e então", ligado a um próximo passo concreto
 
-## Partilhe com a sala
+<h2 class="step-h"><span class="step-n">7</span><span>Partilhar com a sala</span></h2>
 
-Quando cada equipa de país terminar, partilhe uma conclusão com o grupo. Repare:
+Quando cada equipa-país terminar, uma pessoa partilha o achado. Atenção a:
 
-- As conclusões são **específicas**? (Um indicador, um período, uma ação.)
-- Os «e então» estão **ligados a um decisor real** no país da equipa?
-- A equipa de país **trouxe contexto local** que o gráfico sozinho não conseguiria?
+- O achado é **específico**? Um indicador, um período, uma ação.
+- O "e então" está **ligado a um decisor real**?
+- A equipa **trouxe contexto local** que o gráfico sozinho não mostrava?
+
+## A observar
+
+- **Uma queda de um único mês é, em regra, ruído.** Procure uma queda sustentada, três meses ou mais.
+- **A zona rosa é o intervalo esperado, não uma meta.** Um volume que fica confortavelmente dentro do rosa está a comportar-se como o modelo previu.
 
 ## A seguir
 
-Este é o fim da série de visualizações e interpretação. O próximo módulo cobre a **construção de relatórios** — colocar os seus gráficos, interpretações e conclusões num documento partilhável.
-
-> 🔎 **Confirme na sua interface atual**: os controlos do gráfico de perturbações e o esquema de cores podem diferir ligeiramente. A abordagem de procurar padrões sustentados mantém-se.
+Termina aqui a série *Visualizações & Interpretação*. O módulo seguinte trata da construção de relatórios — juntar os gráficos, interpretações e achados num documento partilhável.
