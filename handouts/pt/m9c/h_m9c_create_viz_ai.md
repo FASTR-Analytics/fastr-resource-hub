@@ -32,11 +32,13 @@ Pedir ao Assistente de IA que crie o mesmo tipo de gráfico que acabou de constr
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir o Assistente de IA</span></h2>
 
-No separador **Visualizations**, abra o painel de conversa da IA (lado direito do ecrã). Escreva um pedido curto, como:
+O painel de conversa da IA fica do lado direito do separador **Visualizations**. Escreva um pedido curto, como:
 
-> *«Mostra-me um gráfico de série temporal das visitas de CPN1 nos últimos 12 meses, usando os dados ajustados.»*
+> *«Mostra-me um gráfico de série temporal das visitas de CPN1 nos últimos 12 meses, usando dados ajustados aos valores atípicos.»*
 
-**Dados ajustados** = dados corrigidos para relatórios em falta (completude) e valores extremos (valores atípicos). É a versão mais limpa dos dados do seu país.
+A IA devolve um gráfico no painel com três botões por baixo — **ecrã inteiro**, **Save as new viz**, **Add to a deck** — e um texto curto a explicar o que construiu e o que poderia mudar a seguir.
+
+> **Seja específico quanto ao ajustamento.** *«Dados ajustados»* sozinho é ambíguo — a métrica expõe quatro versões: sem ajustamento, valores atípicos só, completude só, ou ambos. Diga qual no pedido, ou a IA escolhe por si (normalmente valores atípicos só).
 
 </div>
 </div>
@@ -47,27 +49,27 @@ No separador **Visualizations**, abra o painel de conversa da IA (lado direito d
 
 <h2 class="step-h"><span class="step-n">2</span><span>Rever o que a IA devolve</span></h2>
 
-A IA propõe um gráfico com o indicador, o período e o tipo de gráfico que inferiu. **Confronte-o com o que pediu:**
+O gráfico aparece no topo do painel; o texto por baixo nomeia o indicador, o período e qual o ajustamento usado. **Confronte-o com o que pediu:**
 
 - Indicador certo? Período certo?
-- Gráfico de linhas (para tendências) ou outra coisa? Escolheu o que faz sentido?
-- Ajustados vs brutos — usou a versão que pediu?
+- Gráfico de linhas para uma tendência, ou outra coisa? Faz sentido?
+- Qual o ajustamento? O texto nomeia-o explicitamente (p. ex. *ajustado aos valores atípicos*).
 
-Se algo estiver errado, **diga-o em linguagem comum**: *«Usa antes os dados brutos»* ou *«Muda para um gráfico de barras»*.
+Se algo estiver errado, diga-o em linguagem comum na mesma conversa — *«Usa antes os dados brutos»*, *«Muda para gráfico de barras»*, *«Cobre só os últimos 6 meses»*.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Iterar</span></h2>
 
-Não espere que a primeira resposta seja perfeita. Refine em pequenos passos:
+A primeira resposta raramente entrega o gráfico exato que quer. Refine em pequenos passos:
 
 - *«Desagrega por região.»*
 - *«Acrescenta Penta3 no mesmo eixo.»*
 - *«Mostra só os últimos 6 meses.»*
 
-Cada instrução é um pequeno passo. A IA atualiza o gráfico e você continua.
+Cada instrução é um pequeno passo. A IA também propõe ações seguintes no fim de cada resposta — use-as ou ignore-as.
 
 <h2 class="step-h"><span class="step-n">4</span><span>Guardar</span></h2>
 
-Quando gostar do que vê, clique em **Save** e coloque-o na sua pasta. Dê-lhe um nome claro (a IA pode sugerir um — fique com ele ou renomeie).
+Quando gostar do que vê, clique em **Save as new viz** por baixo do gráfico e coloque-o na sua pasta. O botão ao lado **Add to a deck** faz as duas coisas de uma vez se já tiver uma apresentação aberta.
 
 ---
 

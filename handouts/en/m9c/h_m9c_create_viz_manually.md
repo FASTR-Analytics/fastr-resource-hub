@@ -32,11 +32,11 @@ Build three time-series charts: first **ANC1**, then **BCG**, then **one indicat
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the Create visualization dialog</span></h2>
 
-In the **Visualizations** tab, click the green **+ Create visualization** button in the top right.
+In the **Visualizations** tab, click the **+ Create visualization** button in the top right.
 
-A three-step dialog opens: **Metric → Presets → Configure**.
+A dialog opens that walks you through two steps — **Metric** then **Presets**. Picking a named preset opens the chart in the editor; picking **Custom** adds a third **Configure** step instead.
 
-![The Create visualization dialog at step 1 — modules listed on the left, metric tiles in the grid, Cancel/Next at the bottom right h:340](../../../resources/screenshots/m9c/create_viz_dialog.png)
+![The Create visualization dialog at step 1, M3 selected — modules listed on the left, metric tiles on the right, Cancel/Next at the bottom right h:320](../../../resources/screenshots/m9c/create_viz_dialog.png)
 
 </div>
 </div>
@@ -49,15 +49,13 @@ A three-step dialog opens: **Metric → Presets → Configure**.
 
 In the left panel of the dialog, click **M3. Service utilization**. The grid on the right now lists only M3 metrics.
 
-Click the tile **Number of services reported, by adjustment type**.
+Click the tile **Number of services reported, by adjustment type**, then **Next** at the bottom right.
 
-Click **Next** at the bottom right.
-
-> Metrics are grouped by module: **M1** (Data quality assessment), **M2** (Data quality adjustment), **M3** (Service utilization), **M5** (Coverage — denominators), **M6** (Coverage — estimates). There is no M4. A metric is *what is measured*. A preset is *one ready-made way to draw it*.
+> A metric is *what is measured*. A preset is *one ready-made way to draw it*. Each module groups the metrics it produces.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Pick a preset</span></h2>
 
-You're now on the **Presets** step. Click **Service volume over time (monthly)** — a line chart of monthly volume.
+On the **Presets** step, click **Service volume over time (monthly)** — a line chart of monthly volume — then **Create**.
 
 The chart opens in the editor.
 
@@ -67,14 +65,16 @@ The chart opens in the editor.
 
 <h2 class="step-h"><span class="step-n">4</span><span>Filter to ANC1, last 12 months</span></h2>
 
-The chart opens with all indicators shown across the full available time period. You'll narrow it to **ANC1, last 12 months**.
+The chart opens with every indicator drawn across the full date range. You'll narrow it to **ANC1, last 12 months**.
 
-In the chart editor's **left panel**, scroll down to **Filter (subset)**:
+In the chart editor's **left panel**, scroll down to **Filter (subset)** and do two things:
 
-- Under **Indicators**, tick **ANC1** only (untick the rest, or use the search box).
-- Under **Time period**, set the range to the **last 12 months**.
+- Tick **Indicator** — a row of chips appears (ANC1, ANC4, BCG, …). The chips start unselected; click **ANC1** to add it. Only the chips you add show in the chart.
+- Tick **Time period** — the default is *Last N months* with N = 12, so the window is already correct. Use the slider if you want a different length.
 
-The chart updates as you tick.
+The chart updates each time you tick.
+
+> The metric also exposes four **Data values** chips (`count_final_none`, `_outliers`, `_completeness`, `_both`). The default `count_final_both` means *adjusted for both outliers and completeness* — the cleaner version of your country's data. Leave it as is unless you specifically want a different adjustment.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Save it to your folder</span></h2>
 
@@ -116,12 +116,13 @@ These two words come up a lot. They are not the same:
 
 Open a saved visualization — the controls live in the **left panel**, and you'll often need to **scroll down** to find them (this is where people get lost). Two sections do the work:
 
-- **Filter (subset)** — **pick what you want to see**: set the time period, and tick the indicator(s) you want. Only what you tick appears.
-- **Display (disaggregate)** — choose **how the parts are shown**. The dropdown gives four options:
+- **Filter (subset)** — **pick what you want to see**: tick **Time period**, **Indicator**, and any admin level. Only the items you select appear.
+- **Display (disaggregate)** — choose **how the parts are shown**. The dropdown gives five options:
   - **Lines** — one line per part, all on the same chart
   - **Grid** — a separate little chart for each part, side by side
   - **Rows** — one table row per part
   - **Columns** — one table column per part
+  - **Multi-chart (replicants)** — one full-size chart per part, stacked
 
 ![The viz editor's left panel — scroll to find "Filter (subset)" and "Display (disaggregate)" h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
 
@@ -133,20 +134,20 @@ Open a saved visualization — the controls live in the **left panel**, and you'
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Exercise: split your ANC1 chart by region
+## Exercise: split your ANC1 chart by admin level
 
-Right now your ANC1 chart shows one line: the national total over the last 12 months. You'll turn it into one line per **region** so you can compare regions side by side.
+Right now your ANC1 chart shows one line: the national total over the last 12 months. You'll turn it into one line per **admin area** so you can compare them side by side.
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the chart</span></h2>
 
 In the **Visualizations** list, open your saved ANC1 chart (the one you named *ANC1 — monthly, last 12 months*).
 
-<h2 class="step-h"><span class="step-n">2</span><span>Disaggregate by region</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Disaggregate by admin level</span></h2>
 
 In the chart editor's **left panel**, scroll down to **Display (disaggregate)**.
 
-- Set the dimension to **Region** (the dropdown that asks *what to break the chart down by*).
-- Leave the Display style on **Lines** for now — one line per region, all on the same chart.
+- Tick the admin level you want to compare. In FASTR the levels are labelled generically — **Admin area 2** is typically *Region*, **Admin area 3** is *District*, **Admin area 4** is *Facility*. Pick *Admin area 2* to see one line per region.
+- Leave the display style on **Lines** for now — one line per region, all on the same chart.
 
 The chart redraws. Instead of one national line, you should now see **one line per region**.
 
@@ -157,6 +158,7 @@ Same data, different shape:
 - **Grid** — a separate little chart per region, side by side. Useful when there are many regions and the lines overlap.
 - **Rows** — a table with one row per region. Useful when you want the exact values rather than the shape.
 - **Columns** — a table with one column per region.
+- **Multi-chart (replicants)** — one full-size chart per region, stacked. Useful when each region deserves a full read.
 
 Pick whichever reads best for your data.
 
@@ -166,13 +168,13 @@ Click **Save as new viz** — name it e.g. *ANC1 — monthly, by region* and sav
 
 > **Don't overwrite the national chart.** Save *as new viz*, not just *save*, so you keep both: the national trend and the regional split.
 
-### Watch out
-
-You set both Filter and Display in step 2 of the original walkthrough (filter to ANC1, last 12 months) and step 2 of this exercise (disaggregate by region). That's fine. The trap is **filtering down to one of the things you said you wanted to compare** — e.g. disaggregate by region *and then* filter to a single region. You'd be left with one line, nothing to compare.
-
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### Watch out
+
+You set both Filter and Display in step 2 of the original walkthrough (filter to ANC1, last 12 months) and step 2 of this exercise (disaggregate by region). That's fine. The trap is **filtering down to one of the things you said you wanted to compare** — e.g. disaggregate by region *and then* filter to a single region. You'd be left with one line, nothing to compare.
 
 ### Now do it for BCG
 

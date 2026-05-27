@@ -32,11 +32,15 @@ Demander à l'Assistant IA de créer le même type de graphique que vous venez d
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir l'Assistant IA</span></h2>
 
-Dans l'onglet **Visualisations**, ouvrez le panneau de chat IA (à droite de l'écran). Tapez une requête courte comme :
+Le panneau de chat IA est à droite de l'onglet **Visualisations**. Tapez une requête courte comme :
 
-> *« Montre-moi un graphique en ligne des visites CPN1 sur les 12 derniers mois, avec les données ajustées. »*
+> *« Montre-moi un graphique chronologique des visites CPN1 sur les 12 derniers mois, en utilisant les données ajustées aux valeurs aberrantes. »*
 
-**Données ajustées** = données corrigées pour les rapports manquants (complétude) et les valeurs extrêmes (valeurs aberrantes). C'est la version plus propre des données de votre pays.
+L'IA renvoie un graphique dans le panneau avec trois boutons en dessous — **plein écran**, **Sauver comme nouvelle viz.**, **Ajouter à un deck** — et un court texte qui explique ce qu'elle a construit et ce qu'elle pourrait modifier ensuite.
+
+![Le panneau IA après la première requête — graphique + boutons + explication + suggestions h:360](../../../resources/screenshots/m9c/ai_first_response_fr.png)
+
+> **Soyez précis sur l'ajustement.** *« Données ajustées »* tout seul est ambigu — la métrique expose quatre versions : sans ajustement, valeurs aberrantes seules, complétude seule, ou les deux. Dites laquelle dans le prompt, sinon l'IA choisira pour vous (en général les valeurs aberrantes seules).
 
 </div>
 </div>
@@ -47,27 +51,27 @@ Dans l'onglet **Visualisations**, ouvrez le panneau de chat IA (à droite de l'�
 
 <h2 class="step-h"><span class="step-n">2</span><span>Examiner ce que l'IA propose</span></h2>
 
-L'IA propose un graphique avec l'indicateur, la période et le type de graphique qu'elle a déduits. **Vérifiez par rapport à ce que vous avez demandé :**
+Le graphique apparaît en haut du panneau ; le texte en dessous précise l'indicateur, la période et l'ajustement utilisé. **Vérifiez par rapport à ce que vous avez demandé :**
 
 - Bon indicateur ? Bonne période ?
-- Graphique en ligne (pour les tendances) ou autre chose ? Le choix a-t-il du sens ?
-- Données ajustées vs brutes — a-t-elle utilisé la version demandée ?
+- Graphique en ligne pour une tendance, ou autre chose ? Le choix a-t-il du sens ?
+- Quel ajustement a-t-elle utilisé ? Le texte le nomme explicitement (p. ex. *ajusté aux valeurs aberrantes*).
 
-Si quelque chose ne va pas, **dites-le en langage simple** : *« Utilise les données brutes »* ou *« Passe en graphique en barres »*.
+Si quelque chose ne va pas, dites-le en langage simple dans la même conversation — *« Utilise les données brutes »*, *« Passe en graphique en barres »*, *« Couvre seulement les 6 derniers mois »*.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Itérer</span></h2>
 
-Ne vous attendez pas à ce que la première réponse soit parfaite. Affinez par courts allers-retours :
+La première réponse cadre rarement le graphique exact que vous voulez. Affinez par courts allers-retours :
 
 - *« Désagrège par région. »*
 - *« Ajoute Penta3 sur le même axe. »*
 - *« Montre seulement les 6 derniers mois. »*
 
-Chaque instruction est un petit pas. L'IA met à jour le graphique et vous continuez.
+Chaque instruction est un petit pas. L'IA propose aussi des actions suivantes à la fin de chaque réponse — utilisez-les ou ignorez-les.
 
 <h2 class="step-h"><span class="step-n">4</span><span>Sauvegarder</span></h2>
 
-Quand vous êtes satisfait, cliquez sur **Sauvegarder** et placez-le dans votre dossier. Donnez-lui un nom clair (l'IA peut en suggérer un — gardez-le ou renommez).
+Quand vous êtes satisfait, cliquez sur **Sauver comme nouvelle viz.** sous le graphique et placez-le dans votre dossier. Le bouton voisin **Ajouter à un deck** fait les deux d'un coup si vous avez déjà une présentation ouverte.
 
 ---
 

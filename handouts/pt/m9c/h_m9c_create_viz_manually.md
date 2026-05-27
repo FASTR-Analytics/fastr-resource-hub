@@ -32,7 +32,7 @@ Criar o seu primeiro gráfico com o construtor integrado: escolher uma **métric
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir o construtor de visualizações</span></h2>
 
-No separador Visualizations, clique em **+ Create visualization**. Abre-se um construtor de três passos: **Metric → Presets → Configure**.
+No separador Visualizations, clique em **+ Create visualization**. Abre-se um construtor com dois passos — **Metric** depois **Presets**. Escolher um preset com nome abre o gráfico no editor; escolher **Custom** acrescenta um terceiro passo **Configure**.
 
 ![O botão "+ Create visualization" h:34](../../../resources/screenshots/m9c/new_viz_button.png)
 
@@ -82,12 +82,13 @@ Estas duas palavras surgem muito. Não são o mesmo:
 
 Abra uma visualização guardada — os controlos estão no **painel esquerdo**, e muitas vezes terá de **descer (scroll)** para os encontrar (é aqui que as pessoas se perdem). Duas secções fazem o trabalho:
 
-- **Filter (subset)** — **escolha o que quer ver**: defina o período e marque o(s) indicador(es) que quer. Só o que marcar aparece.
-- **Display (disaggregate)** — escolha **como as partes são mostradas**. A lista pendente dá quatro opções:
+- **Filter (subset)** — **escolha o que quer ver**: marque **Time period**, **Indicator** e o nível administrativo. Só os valores marcados aparecem.
+- **Display (disaggregate)** — escolha **como as partes são mostradas**. A lista pendente dá cinco opções:
   - **Lines** — uma linha por parte, todas no mesmo gráfico
   - **Grid** — um pequeno gráfico separado para cada parte, lado a lado
   - **Rows** — uma linha de tabela por parte
   - **Columns** — uma coluna de tabela por parte
+  - **Multi-chart (replicants)** — um gráfico em tamanho real por parte, empilhados
 
 ![O painel esquerdo do editor de visualizações — desça até "Filter (subset)" e "Display (disaggregate)" h:400](../../../resources/screenshots/m9c/edit_viz_panel.png)
 

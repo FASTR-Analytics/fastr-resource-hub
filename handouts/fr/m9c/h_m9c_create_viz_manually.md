@@ -32,11 +32,11 @@ Construire trois graphiques temporels : d'abord **CPN1**, puis **BCG**, puis **u
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrez la boîte de dialogue Créer une visualisation</span></h2>
 
-Dans l'onglet **Visualisations**, cliquez sur le bouton vert **+ Créer une visualisation** en haut à droite.
+Dans l'onglet **Visualisations**, cliquez sur le bouton **+ Créer une visualisation** en haut à droite.
 
-Une boîte de dialogue en trois étapes s'ouvre : **Métrique → Préréglages → Configurer**.
+Une boîte de dialogue s'ouvre et vous guide en deux étapes — **Métrique** puis **Préréglages**. Choisir un préréglage nommé ouvre directement le graphique dans l'éditeur ; choisir **Personnalisé** ajoute une troisième étape **Configurer**.
 
-![La boîte de dialogue « Créer une visualisation » à l'étape 1 — modules à gauche, tuiles de métriques dans la grille, Annuler/Suivant en bas à droite h:340](../../../resources/screenshots/m9c/create_viz_dialog_fr.png)
+![La boîte de dialogue « Créer une visualisation » à l'étape 1, M3 sélectionné — modules à gauche, tuiles de métriques à droite, Annuler/Suivant en bas à droite h:320](../../../resources/screenshots/m9c/create_viz_dialog_fr.png)
 
 </div>
 </div>
@@ -49,15 +49,13 @@ Une boîte de dialogue en trois étapes s'ouvre : **Métrique → Préréglages 
 
 Dans le panneau de gauche de la boîte de dialogue, cliquez sur **M3. Utilisation des services**. La grille de droite ne liste plus que les métriques de M3.
 
-Cliquez sur la tuile **Nombre de services déclarés, par type d'ajustement**.
+Cliquez sur la tuile **Nombre de services déclarés, par type d'ajustement**, puis sur **Suivant** en bas à droite.
 
-Cliquez sur **Suivant** en bas à droite.
-
-> Les métriques sont groupées par module : **M1** (Évaluation de la qualité des données), **M2** (Ajustements de la qualité des données), **M3** (Utilisation des services), **M4–M6** (Estimations de couverture). Une métrique, c'est *ce qui est mesuré*. Un préréglage, c'est *une façon prête à l'emploi de la dessiner*.
+> Une métrique, c'est *ce qui est mesuré*. Un préréglage, c'est *une façon prête à l'emploi de la dessiner*. Chaque module regroupe les métriques qu'il produit.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Choisissez un préréglage</span></h2>
 
-Vous êtes maintenant à l'étape **Préréglages**. Choisissez le préréglage qui trace le volume des services dans le temps (graphique en ligne mensuel).
+À l'étape **Préréglages**, cliquez sur **Volume de services dans le temps (mensuel)** — un graphique linéaire du volume mensuel — puis sur **Créer**.
 
 Le graphique s'ouvre dans l'éditeur.
 
@@ -65,12 +63,18 @@ Le graphique s'ouvre dans l'éditeur.
 
 Le graphique s'ouvre avec tous les indicateurs sur toute la période disponible. Vous allez le réduire à **CPN1, 12 derniers mois**.
 
-Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Filtre (sous-ensemble)** :
+Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Filtre (sous-ensemble)** et faites deux choses :
 
-- Sous **Indicateur**, cochez **CPN1** uniquement (décochez les autres, ou utilisez la barre de recherche). Dans certains jeux de données il s'appelle **ANC1**.
-- Sous **Période**, réglez la plage sur les **12 derniers mois**.
+- Cochez **Indicateur** — une rangée de pastilles apparaît (ANC1, ANC4, BCG, …). Les pastilles sont vides au départ ; cliquez sur **ANC1** pour l'ajouter (dans certains jeux de données l'indicateur s'appelle **CPN1**). Seules les pastilles que vous ajoutez s'affichent.
+- Cochez **Période** — la valeur par défaut est *Derniers N mois* avec N = 12, donc la fenêtre est déjà correcte. Utilisez le curseur pour la changer si besoin.
 
 Le graphique se met à jour à chaque clic.
+
+> La métrique expose aussi quatre pastilles **Valeurs des données** (`count_final_none`, `_outliers`, `_completeness`, `_both`). La valeur par défaut `count_final_both` veut dire *ajusté pour les valeurs aberrantes et pour la complétude* — la version la plus propre des données de votre pays. Laissez-la telle quelle sauf si vous voulez explicitement un autre ajustement.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 <h2 class="step-h"><span class="step-n">5</span><span>Enregistrez-le dans votre dossier</span></h2>
 
@@ -107,14 +111,19 @@ Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
 Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau de gauche**, et il faut souvent **faire défiler** pour les trouver (c'est là que les gens se perdent). Deux sections font le travail :
 
-- **Filtre (sous-ensemble)** — **choisir ce que vous voulez voir** : régler la période, et cocher le(s) indicateur(s) voulu(s). Seul ce que vous cochez apparaît.
-- **Affichage (désagréger)** — choisir **comment les parties s'affichent**. Le menu déroulant offre quatre options :
+- **Filtre (sous-ensemble)** — **choisir ce que vous voulez voir** : cocher **Période**, **Indicateur** et le niveau administratif voulu. Seules les valeurs sélectionnées apparaissent.
+- **Affichage (désagréger)** — choisir **comment les parties s'affichent**. Le menu déroulant offre cinq options :
   - **Lignes** — une courbe par partie, toutes sur le même graphique
   - **Grille** — un petit graphique séparé pour chaque partie, côte à côte
   - **Rangées** — une rangée de tableau par partie
   - **Colonnes** — une colonne de tableau par partie
+  - **Graphiques multiples (réplicants)** — un graphique en taille réelle par partie, empilés
 
 ![Le panneau de gauche de l'éditeur de viz — faites défiler jusqu'à « Filtre (sous-ensemble) » et « Affichage (désagréger) » h:400](../../../resources/screenshots/m9c/edit_viz_panel_fr.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 > **Attention quand vous utilisez les deux ensemble.** Voici le piège, avec un exemple. Vous décomposez un graphique **par district** parce que vous voulez comparer les districts. Puis vous le **filtrez** sur un seul district — les autres disparaissent. Il ne reste qu'un seul district, tout seul, et plus rien à comparer.
 >
@@ -124,19 +133,19 @@ Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Exercice : décomposez votre graphique CPN1 par région
+## Exercice : décomposez votre graphique CPN1 par niveau administratif
 
-En ce moment, votre graphique CPN1 montre une seule ligne : le total national sur les 12 derniers mois. Vous allez le transformer en une ligne par **région** pour comparer les régions côte à côte.
+En ce moment, votre graphique CPN1 montre une seule ligne : le total national sur les 12 derniers mois. Vous allez le transformer en une ligne par **zone administrative** pour les comparer côte à côte.
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le graphique</span></h2>
 
 Dans la liste **Visualisations**, ouvrez votre graphique CPN1 enregistré (celui que vous avez nommé *CPN1 — mensuel, 12 derniers mois*).
 
-<h2 class="step-h"><span class="step-n">2</span><span>Désagrégez par région</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Désagrégez par niveau administratif</span></h2>
 
 Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Affichage (désagréger)**.
 
-- Réglez la dimension sur **Région** (le menu déroulant qui demande *par quoi décomposer le graphique*).
+- Cochez le niveau administratif à comparer. Dans FASTR les niveaux ont un nom générique — **Unité administrative 2** correspond généralement à la *région*, **Unité administrative 3** au *district*, **Unité administrative 4** à l'*établissement*. Cochez *Unité administrative 2* pour avoir une ligne par région.
 - Laissez le style d'affichage sur **Lignes** pour l'instant — une ligne par région, toutes sur le même graphique.
 
 Le graphique se redessine. Au lieu d'une seule ligne nationale, vous devriez voir **une ligne par région**.
@@ -148,6 +157,7 @@ Mêmes données, formes différentes :
 - **Grille** — un petit graphique séparé par région, côte à côte. Utile quand il y a beaucoup de régions et que les lignes se chevauchent.
 - **Rangées** — un tableau avec une rangée par région. Utile quand vous voulez les valeurs exactes plutôt que la forme.
 - **Colonnes** — un tableau avec une colonne par région.
+- **Graphiques multiples (réplicants)** — un graphique en taille réelle par région, empilés. Utile quand chaque région mérite une lecture complète.
 
 Choisissez celui qui se lit le mieux pour vos données.
 
