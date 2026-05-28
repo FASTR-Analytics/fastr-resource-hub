@@ -6,23 +6,19 @@ paginate: true
 
 ## Three spheres of influence
 
-The Three Spheres of Influence framework helps direct attention to the actions we can take from our data.
+The Three Spheres framework directs attention to the actions you can actually take from your data.
 
 <div class="columns">
 <div>
 
-**Sphere of control** — areas where you have full authority over your actions and decisions.
-- Defaulter tracing, register review, outreach coordination
-- Within your team's immediate capacity to deliver
+**Sphere of control** — areas where you have full authority over your decisions.
+*Defaulter tracing, register review, outreach coordination.*
 
-**Sphere of influence** — actions and decisions that aren't fully under your control, but where you can still change the outcome.
-- Engaging partners, securing logistics, advocating for policy changes
-- You can influence but not decide alone
+**Sphere of influence** — actions you don't decide alone, but where you can still change the outcome.
+*Engaging partners, securing logistics, advocating for policy.*
 
-**Sphere of concern** — activities you have no control over.
-- National policy environment, external financing, population dynamics
-- Often actions taken by others, or cascading consequences across the wider system
-- Important context, but outside your direct reach
+**Sphere of concern** — activities outside your control.
+*National policy, external financing, population dynamics. Context to note, not actions to own.*
 
 </div>
 <div>
@@ -32,4 +28,4 @@ The Three Spheres of Influence framework helps direct attention to the actions w
 </div>
 </div>
 
-*When planning actions from your FASTR findings, focus first on what you can control, then on what you can influence.*
+*Focus your action plans on what you control. Note influence and concern as context.*
