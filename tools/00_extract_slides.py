@@ -271,7 +271,7 @@ TOPIC_NAMES = {
     'm8_1': 'rapid_cycle_facility_survey',
     'm8_1a': 'hfa_survey_design',
     'm8_1b': 'adaptive_survey_content',
-    'm8_1c': 'four_types_of_indicators',
+    'm8_1c': 'survey_structure_modules',
     'm8_2': 'validity_phone_surveys',
     'm8_3': 'snis_hfa_integration',
     'm8_3a': 'triangulation_example',

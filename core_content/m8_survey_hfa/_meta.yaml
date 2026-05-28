@@ -7,6 +7,10 @@ slides:
   order: 0.01
   variant: full
   title: The FASTR approach to health facility surveys
+- file: m8_1_rapid_cycle_facility_survey.md
+  order: 1.0
+  variant: full
+  title: Why rapid-cycle facility surveys
 - file: m8_1a_hfa_survey_design.md
   order: 1.01
   variant: full
@@ -15,7 +19,23 @@ slides:
   order: 1.02
   variant: full
   title: Adaptive survey content with RMNCAH-N focus
+- file: m8_1c_survey_structure_modules.md
+  order: 1.03
+  variant: full
+  title: Survey structure — 10 modules
 - file: m8_3_snis_hfa_integration.md
   order: 3.0
   variant: full
   title: Why integrate HMIS and HFA surveys?
+- file: m8_3a_triangulation_example.md
+  order: 3.01
+  variant: full
+  title: A triangulation example — institutional maternal mortality
+- file: m8_3b_dhis2_chain.md
+  order: 3.02
+  variant: full
+  title: What DHIS2 alone already lets you measure
+- file: m8_3c_complete_results_chain.md
+  order: 3.03
+  variant: full
+  title: The complete results chain with HFA

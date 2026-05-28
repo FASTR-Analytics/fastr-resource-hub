@@ -203,6 +203,19 @@ Les résultats informent la prise de décisions et d'actions concrètes pour ren
 > Les analyses des enquêtes FOSA peuvent désormais être effectuées directement sur la plateforme analytique FASTR.
 <!-- /SLIDE -->
 
+<!-- SLIDE:m8_1 -->
+## Pourquoi des enquêtes rapides auprès des formations sanitaires ?
+
+Les données SNIS de routine mesurent le *volume* des services délivrés, mais n'expliquent pas *pourquoi* un chiffre a bougé. Les **enquêtes FOSA** (Formations Sanitaires) — enquêtes téléphoniques rapides — comblent cet écart. Elles sont conçues pour :
+
+- **Comprendre les contraintes côté offre** de la prestation de services dans les formations de soins de santé primaires
+- **Mesurer la mise en œuvre des réformes** au fil du temps, et non a posteriori
+- **Évaluer l'effet des chocs** sur les systèmes de santé — épidémies, conflits, ruptures d'intrants
+- **Améliorer la rapidité et la pertinence** des enquêtes en établissements comme outil de gestion adaptative
+
+> Les enquêtes téléphoniques complètent les données SNIS avec l'information sur la préparation, la capacité et le contexte que le rapportage de routine ne capte pas.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m8_1a -->
 <!-- _class: compact -->
 ## Conception de l'enquête auprès des établissements de santé
@@ -238,6 +251,51 @@ Les enquêtes rapides auprès des établissements peuvent identifier les lacunes
 \* Posé uniquement aux établissements de remplacement | \*\* Questions supplémentaires localement pertinentes générées lors de l'adaptation
 <!-- /SLIDE -->
 
+<!-- SLIDE:m8_1c -->
+<!-- _class: two-panel -->
+
+## Structure de l'enquête — 10 modules
+
+Les questions sont issues du cadre PHCMFI de l'OMS et harmonisées avec les outils HHFA, SARA, SPA et SDI d'évaluation des formations. Le résultat est un instrument modulaire que les pays adaptent à leur contexte.
+
+<div class="panel-layout">
+
+<div>
+
+### Ce que couvrent les modules
+
+- Chocs externes
+- Résilience aux chocs
+- Offre de services
+- Infrastructure
+- Financement
+- Ressources humaines
+- Fournitures médicales
+- Direction et coordination
+- Participation communautaire
+- Processus d'amélioration de la qualité des soins
+
+</div>
+
+<div>
+
+### Ce que l'outil apporte
+
+- Aperçu actualisé des performances des soins de santé primaires
+- Capacité opérationnelle des formations primaires
+- Lacunes principales dans la prestation des services
+- Effet des chocs externes ou des réformes sur les services
+- Fréquence et pertinence supérieures aux enquêtes traditionnelles en établissement
+
+*Modules optionnels disponibles : préparation et réponse aux urgences, vaccination (avec Gavi), capacité opérationnelle CPN, capacité opérationnelle accouchements/SONUB.*
+
+</div>
+
+</div>
+
+> L'instrument est **100 % adaptable** par les pays — les modules peuvent être ajoutés, retirés ou séquencés selon les priorités locales.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m8_3 -->
 <!-- _class: two-panel -->
 
@@ -260,7 +318,7 @@ Aucune des deux sources ne répond seule à la question. Le SNIS dit quels servi
 
 <div>
 
-### EES — enquête téléphonique
+### Enquête FOSA — enquête téléphonique
 *Trimestrielle*
 
 - Mesure la **préparation** : personnel, intrants, infrastructure.
@@ -271,5 +329,67 @@ Aucune des deux sources ne répond seule à la question. Le SNIS dit quels servi
 
 </div>
 
-> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (EES) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.
+> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (enquête FOSA) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_3a -->
+## Un exemple de triangulation — mortalité maternelle institutionnelle
+
+Pour répondre à *« la mortalité maternelle est-elle susceptible de s'améliorer ? »*, les données du SNIS et des FOSA doivent être triangulées avec d'autres sources. Aucune source seule ne suffit.
+
+<div class="columns">
+
+<div>
+
+### Indicateur d'impact
+
+**Mortalité maternelle institutionnelle**
+
+</div>
+
+<div>
+
+### Sources de triangulation
+
+- **SRDMP** — surveillance et réponse aux décès maternels
+- **DHIS2** — données SNIS de routine
+- **Enquêtes ménages** — EDS ou équivalent
+
+</div>
+
+</div>
+
+> On ne peut pas agir pour réduire la mortalité maternelle sans comprendre ce qui se passe au sein des formations sanitaires elles-mêmes.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_3b -->
+<!-- _class: dense-table -->
+
+## Ce que le DHIS2 seul permet déjà de mesurer
+
+Avec les seules données SNIS de routine, vous pouvez déjà répondre à des questions essentielles : *La couverture des accouchements institutionnels évolue-t-elle en hausse ou en baisse ? Y a-t-il des hausses significatives au fil du temps ?* Ce qu'il ne peut pas dire, c'est *pourquoi*.
+
+| | SORTIE | RÉSULTAT | IMPACT |
+|---|--------|----------|--------|
+| **Indicateur** | **Nombre d'accouchements en établissement** | **% d'accouchements en établissement** | **Mortalité maternelle institutionnelle** |
+| **Analyse** | Analyse de l'utilisation des services | Estimation de couverture | Triangulation multi-sources |
+| **Sources** | DHIS2 (trimestriel) | DHIS2 + enquêtes ménages | SRDMP · DHIS2 · EDS |
+
+> Le DHIS2 dit le *quoi*. Pour comprendre le *pourquoi*, il faut une source complémentaire.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_3c -->
+<!-- _class: dense-table -->
+
+## La chaîne complète des résultats avec les enquêtes FOSA
+
+L'ajout des données d'enquêtes FOSA boucle la chaîne — on peut désormais répondre au *pourquoi* d'un mouvement dans la prestation de services.
+
+| | ENTRÉE | SORTIE | RÉSULTAT | IMPACT |
+|---|-------|--------|----------|--------|
+| **Indicateur** | **Capacité opérationnelle SONUB** | **Nombre d'accouchements en établissement** | **Couverture des accouchements institutionnels** | **Mortalité maternelle institutionnelle** |
+| **Ce qui est mesuré** | Médicaments, personnel qualifié, équipement | Analyse de l'utilisation des services | Estimation de couverture | Triangulation multi-sources |
+| **Source** | *Enquête téléphonique rapide (trimestrielle)* | *DHIS2 (trimestriel)* | *DHIS2 + enquêtes ménages (EDS)* | *SRDMP · DHIS2 · EDS* |
+
+> Les formations sanitaires sont-elles **« prêtes »** à fournir des soins SONUB de qualité ? Cette question est désormais au début de la chaîne, plus à la fin.
 <!-- /SLIDE -->

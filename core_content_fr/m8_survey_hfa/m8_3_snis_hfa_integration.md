@@ -25,7 +25,7 @@ Aucune des deux sources ne répond seule à la question. Le SNIS dit quels servi
 
 <div>
 
-### EES — enquête téléphonique
+### Enquête FOSA — enquête téléphonique
 *Trimestrielle*
 
 - Mesure la **préparation** : personnel, intrants, infrastructure.
@@ -36,4 +36,4 @@ Aucune des deux sources ne répond seule à la question. Le SNIS dit quels servi
 
 </div>
 
-> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (EES) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.
+> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (enquête FOSA) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.
