@@ -110,35 +110,7 @@ slides:
 - file: m6_s3_coverage_methods.md
   order: 3.0
   variant: condensed
-  title: 'Coverage: the denominator problem'
-- file: m6_s3a_reading_coverage_chart.md
-  order: 3.01
-  variant: condensed
-  title: Reading a coverage chart
-- file: m6_s3b_coverage_overview.md
-  order: 3.02
-  variant: condensed
-  title: Service coverage estimation
-- file: m6_s3c_coverage_example.md
-  order: 3.03
-  variant: condensed
-  title: Service coverage example
-- file: m6_s3d_coverage_overview.md
-  order: 3.04
-  variant: condensed
-  title: How FASTR estimates coverage
-- file: m6_s3e_estimating_denominators.md
-  order: 3.05
-  variant: condensed
-  title: Estimating denominators from ANC-1
-- file: m6_s3f_five_denominator_options.md
-  order: 3.06
-  variant: condensed
-  title: Denominator options used by FASTR
-- file: m6_s3g_how_fastr_estimates_coverage.md
-  order: 3.07
-  variant: condensed
-  title: How FASTR estimates coverage
+  title: 'Coverage'
 - file: m6_s3ga_demographic_relationships_intro.md
   order: 3.075
   variant: condensed

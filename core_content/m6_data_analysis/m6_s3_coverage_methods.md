@@ -6,13 +6,11 @@ paginate: true
 
 ## What is coverage?
 
-In plain language, **coverage** tells you what share of the people who needed a service actually received it. It is a percentage:
-
-**coverage (%) = services delivered ÷ target population × 100**
+In plain language, **coverage** tells you what share of the people who needed a service actually received it. It is a percentage: services delivered divided by the target population, times 100.
 
 A high coverage means the system is reaching most of who it should. A low coverage means people who needed the service did not get it — either it was not available, not accessible, or not used.
 
-Coverage matters because it is the language donors, ministries and partners use to compare programmes and decide where to put resources next.
+![Coverage formula for ANC4+ h:240](../../resources/diagrams/coverage_example_anc4.svg)
 
 ---
 
@@ -24,39 +22,25 @@ The numerator is easy — it's what facilities report in DHIS2. But the **denomi
 
 ---
 
-## How FASTR deduces the denominator from HMIS
+## How FASTR deduces the denominator
 
-FASTR starts from what facilities report and **works back up the chain** to estimate the target population for each indicator.
+FASTR works back up the chain to estimate the target population from what facilities already report.
 
-**Example**: the survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits. → So there are roughly **10,000 ÷ 0.80 = 12,500 pregnancies**.
+**Example.** A survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits. So there are roughly **10,000 ÷ 0.80 = 12,500 pregnancies** in that period.
 
-From there, FASTR calculates deliveries, births, live births, and eligible infants — adjusting for pregnancy losses, twins, stillbirths, etc.
+From the pregnancy count, the demographic cascade gives deliveries, live births, and surviving infants — using country-specific rates for pregnancy losses, stillbirths, twins and infant mortality.
 
-![The denominator calculation chain h:300](../../resources/diagrams/denominator_cascade_example.svg)
-
----
-
-## Not just ANC1 — multiple entry points
-
-The formula is always the same: **HMIS volumes ÷ survey coverage = target population**
-
-FASTR applies this formula with **4 different indicators**:
-
-- **ANC1** ÷ ANC1 coverage → estimates **pregnancies**
-- **Skilled birth attendance** ÷ SBA coverage → estimates **deliveries**
-- **BCG** ÷ BCG coverage → estimates **live births**
-- **Penta1** ÷ Penta1 coverage → estimates **DPT1-eligible infants**
-
-Each estimate is independent. From each one, FASTR applies demographic adjustments (pregnancy losses, twins, stillbirths, neonatal deaths) to calculate all other populations.
-
-FASTR tests all 4 chains and keeps the one that **best matches survey data** (DHS/MICS).
+![The denominator calculation chain h:280](../../resources/diagrams/denominator_cascade_example.svg)
 
 ---
 
-## Which denominator to choose?
+## Four parallel chains, best fit wins
 
-The choice of denominator **completely changes** the results. Here is the same indicator (ANC4+) with two different denominators:
+ANC1 is not the only entry point. FASTR runs the same back-calculation from **four different services**:
 
-![Denominator comparison h:350](../../resources/diagrams/denominator_comparison.svg)
+- **ANC1** → estimates pregnancies
+- **Skilled birth attendance** → estimates deliveries
+- **BCG** → estimates live births
+- **Penta1** → estimates DPT-eligible infants
 
-FASTR tests several denominators and keeps the one that **best matches national surveys** (DHS/MICS). For years without a survey, it projects estimates by following HMIS trends.
+Each entry point produces a complete cascade. FASTR then compares all four against UN World Population Prospects and **keeps the chain whose median ratio is closest to 1.0**. That selected chain is then applied uniformly to every indicator, so coverage estimates across the country are internally consistent.
