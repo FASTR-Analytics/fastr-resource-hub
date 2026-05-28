@@ -22,7 +22,7 @@ The numerator is easy — it's what facilities report in DHIS2. But the **denomi
 
 ## Denominators by service type
 
-Each service measures coverage against a different target population. Pick the wrong denominator and the percentage answers a different question.
+The denominator is not one number — it is a different group for every service. ANC measures against pregnancies, BCG against live births, Penta against surviving infants.
 
 <div style="font-size: 0.85em;">
 
@@ -35,11 +35,8 @@ Each service measures coverage against a different target population. Pick the w
 | **PENTA1, PENTA3** | Surviving infants in the age-eligible cohort |
 | **Measles 1 (9 months)** | Surviving infants aged 9–12 months |
 | **PNC1 — newborn** | Live births |
-| **General outpatient** | Total population |
 
 </div>
-
-FASTR derives each of these from a single entry point in the data, so the denominators in this table are internally consistent for one country and one period.
 
 ---
 
@@ -51,4 +48,4 @@ FASTR works back up the chain to estimate the target population from what facili
 
 From the pregnancy count, the demographic cascade gives deliveries, live births, and surviving infants — using country-specific rates for pregnancy losses, stillbirths, twins and infant mortality.
 
-![The denominator calculation chain h:280](../../resources/diagrams/denominator_cascade_example.svg)
+![The denominator calculation chain h:220](../../resources/diagrams/denominator_cascade_example.svg)
