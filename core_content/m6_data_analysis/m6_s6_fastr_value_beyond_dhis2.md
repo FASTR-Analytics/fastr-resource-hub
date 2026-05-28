@@ -4,23 +4,20 @@ theme: fastr
 paginate: true
 ---
 
-## Why FASTR? Value add beyond standard DHIS2 analysis
+## What the FASTR pipeline adds on top of DHIS2
 
-**DHIS2 provides the foundation** — robust data collection, storage, and basic visualization.
+DHIS2 holds the data; FASTR turns it into the analyses you've just seen. Three additions, matching the three sub-topics of this section:
 
-**FASTR builds on this foundation with:**
+- **Quality-adjusted volumes.** Outliers and reporting gaps are corrected before any analysis runs, so the trends, changes, and disruptions you read reflect service delivery — not data noise.
+- **Disruption detection.** Service volumes are compared against the expected rhythm of each indicator (long-term trend + seasonality). Real drops and surpluses are flagged automatically; one-month noise is not.
+- **Coverage with a derived denominator.** Denominators are back-calculated from HMIS entry points and benchmarked against UN World Population Prospects, giving a more defensible coverage figure than relying on catchment populations alone.
 
-- **Data quality adjustment** — Automatically adjusts for outliers and completeness gaps before analysis
-- **Advanced analytical methods** — Disruption detection, coverage projection, and sensitivity analysis
-- **Standardized visualizations** — Percent change approach to identify meaningful fluctuations across indicators
-- **Improved coverage estimation** — Back-calculates denominators from surveys rather than relying solely on catchment populations
-- **Faster analytics cycles** — Pre-built analytical pipeline aligned with country decision-making timelines
-- **Built-in capacity strengthening** — Reproducible methods that build local analytical skills
+The same pipeline runs every quarter, so countries get findings on a routine rhythm rather than waiting for a one-off analysis.
 
 <!--
 PRESENTER NOTES:
-- DHIS2 is excellent for data collection and basic visualization — FASTR complements it
-- Key differentiator: data quality adjustment before analysis
-- Coverage methodology goes beyond simple HMIS/population ratios
-- Goal is to enable faster, more rigorous analysis for decision-making
+- Frame this as the closer of the analysis section
+- DHIS2 = raw data source; FASTR = analytics layer on top
+- The three bullets map 1:1 to what was just covered (service utilization, disruption, coverage)
+- Stress the quarterly rhythm: FASTR is designed for a cadence, not a one-shot study
 -->

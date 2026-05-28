@@ -130,8 +130,16 @@ slides:
 - file: m6_s6_fastr_value_beyond_dhis2.md
   order: 6.0
   variant: condensed
-  title: Why FASTR? Value add beyond standard DHIS2 analysis
+  title: What the FASTR pipeline adds on top of DHIS2
+- file: m6_s6_fastr_value_beyond_dhis2.md
+  order: 20.0
+  variant: full
+  title: What the FASTR pipeline adds on top of DHIS2
 - file: m6_s7_key_takeaway.md
   order: 7.0
   variant: condensed
+  title: Key takeaway
+- file: m6_s7_key_takeaway.md
+  order: 21.0
+  variant: full
   title: Key takeaway
