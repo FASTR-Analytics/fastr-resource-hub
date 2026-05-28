@@ -6,6 +6,8 @@ paginate: true
 
 ## Pièges courants de l'interprétation
 
+Quatre pièges nous attrapent le plus souvent quand on lit les résultats FASTR. Chacun peut transformer un graphique utile en message trompeur s'il passe inaperçu.
+
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 

@@ -6,8 +6,13 @@ paginate: true
 
 ## Moving from data to key messages
 
-### What is a result?
-Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
+A FASTR analysis produces dozens of **results** — DQA scores, outlier rates by district, coverage estimates by indicator, disruption flags. None of those is yet a message.
 
-### What is a key takeaway?
-Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
+A **key takeaway** is what someone should decide, act on, or remember after they see those results. It is the "so what" condensed into one or two sentences.
+
+| | Result | Key takeaway |
+|---|---|---|
+| **Source** | What the analysis found | What the result means for the program |
+| **Quantity** | Dozens per report | Two or three per audience |
+| **Form** | A chart or a table | A sentence in plain language |
+| **Used by** | The analyst | The decision-maker |

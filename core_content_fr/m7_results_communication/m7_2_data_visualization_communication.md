@@ -6,8 +6,13 @@ paginate: true
 
 ## Passer des données aux messages clés
 
-### Qu'est-ce qu'un résultat ?
-Les résultats sont ce que l'analyse a trouvé (scores de qualité des données, estimations de couverture, chiffres d'utilisation des services). Ils sont souvent nombreux, complexes, difficiles à comprendre "en un coup d'œil" et manquent d'interprétation.
+Une analyse FASTR produit des dizaines de **résultats** — scores d'EQD, taux de valeurs aberrantes par district, estimations de couverture par indicateur, signaux de perturbation. Aucun d'entre eux n'est encore un message.
 
-### Qu'est-ce qu'un enseignement clé ?
-Les enseignements clés sont ce que les résultats nous apprennent — pourquoi les résultats sont importants, le "et alors". Ils doivent être peu nombreux, simples et clairs, faciles à retenir et exploitables.
+Un **message clé** est ce que quelqu'un doit décider, faire ou retenir après avoir vu ces résultats. C'est le « et alors ? » condensé en une ou deux phrases.
+
+| | Résultat | Message clé |
+|---|---|---|
+| **Source** | Ce que l'analyse a trouvé | Ce que le résultat veut dire pour le programme |
+| **Quantité** | Des dizaines par rapport | Deux ou trois par audience |
+| **Forme** | Un graphique ou un tableau | Une phrase en langage simple |
+| **Utilisé par** | L'analyste | Le décideur |

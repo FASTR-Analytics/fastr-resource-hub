@@ -238,15 +238,15 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 <!-- SLIDE:m7_1 -->
 ## Analytical thinking & interpretation
 
-Interpretation connects **data patterns** to **programmatic meaning**.
+A FASTR chart shows a pattern. Interpretation is the leap from **what the data shows** to **what it means** for the program.
 
-For every FASTR output, ask three questions:
+For every FASTR output, work through three questions:
 
-1. **What does it show?** — Describe the pattern accurately
-2. **Why might that be?** — Consider multiple explanations
-3. **What should we do?** — Identify next steps or actions
+1. **What does it show?** Describe the pattern accurately — indicator, direction, magnitude, when, where.
+2. **Why might that be?** Surface multiple explanations before settling on one. Is this a data-quality artefact, a real programmatic change, normal seasonality, or an external shock?
+3. **What should we do?** Identify the next step — investigate further, raise it with a specific decision-maker, or take direct action.
 
-<small>*Moving from numbers to insights requires context, critical thinking, and programmatic knowledge.*</small>
+<small>*The numbers themselves don't tell you what to do. Context, programmatic knowledge, and disciplined questioning do.*</small>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_1a -->
@@ -263,6 +263,8 @@ Before drawing conclusions from FASTR outputs, ask:
 
 <!-- SLIDE:m7_1b -->
 ## Common interpretation pitfalls
+
+Four traps catch us most often when we read FASTR outputs. Each one can turn a useful chart into a misleading message if it goes unnoticed.
 
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
@@ -293,6 +295,8 @@ Short-term fluctuations may be normal variation. Focus on sustained trends and s
 <!-- SLIDE:m7_1c -->
 ## Interpreting FASTR module outputs
 
+Each FASTR module has its own interpretation reflex. Knowing which one applies stops you from drawing the wrong conclusion from the right chart.
+
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 
@@ -322,21 +326,32 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 <!-- SLIDE:m7_2 -->
 ## Moving from data to key messages
 
-### What is a result?
-Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
+A FASTR analysis produces dozens of **results** — DQA scores, outlier rates by district, coverage estimates by indicator, disruption flags. None of those is yet a message.
 
-### What is a key takeaway?
-Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
+A **key takeaway** is what someone should decide, act on, or remember after they see those results. It is the "so what" condensed into one or two sentences.
+
+| | Result | Key takeaway |
+|---|---|---|
+| **Source** | What the analysis found | What the result means for the program |
+| **Quantity** | Dozens per report | Two or three per audience |
+| **Form** | A chart or a table | A sentence in plain language |
+| **Used by** | The analyst | The decision-maker |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2a -->
-## Example: result vs key takeaway
+## Example: result → key takeaway
 
-**Result:**
-> In Q3 2022, the volume of ANC1 visits increased by 15% from the previous quarter—the largest quarterly rise in the period—followed by a 12% drop in Q1 2023. Since then, ANC1 volumes have remained relatively stable.
+The same data can be told in two registers — the analytical one and the actionable one.
 
-**Key takeaway:**
-> The relative stability observed from mid-2023 onward suggests improvements in the consistency of service delivery. This trend may reflect strengthened systems or more predictable care-seeking patterns — providing a stronger foundation for sustained antenatal care coverage.
+**Result** *(what the analysis shows)*
+
+> Outliers were flagged in 4.2% of facility-month-indicator values nationally in Q1 2026, concentrated in Northern Region (8.7%) and Western Region (6.1%), with 11 districts above the 10% threshold.
+
+**Key takeaway** *(what to do about it)*
+
+> Outlier rates doubled in two regions this quarter, and eleven districts need register review before we can trust their reported volumes.
+
+The result belongs in the report. The takeaway belongs in the director's three-minute briefing.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2b -->
@@ -355,7 +370,7 @@ Key takeaways are what the results are telling us — why the results matter, th
 | General public and advocacy groups | Infographics + posters |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_3 -->
+<!-- SLIDE:m7_6d -->
 ## Dissemination and data use roadmap
 
 A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
@@ -387,22 +402,6 @@ Before creating outputs, clarify who will use them and how.
 Different audiences need different outputs from the same data.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4a -->
-## Activity: Map your users
-
-![hands-on h:40](../resources/icons/hands_on.svg) **For your country team, identify:**
-
-| Question | Your Answer |
-|----------|-------------|
-| Who is the primary end user of your FASTR outputs? | |
-| What decision or action will they take based on this data? | |
-| What 2-3 pieces of information are they most interested in? | |
-| What format/length works best for this audience? | |
-| When and where will you present to them? | |
-
-*Discuss in your country team. Share one insight with the group.*
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_5 -->
 ## Storytelling with data
 
@@ -422,17 +421,21 @@ Storytelling translates data and visualizations into compelling narratives that 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_5a -->
-## From data to story: Example
+## From data to story: example
 
-**The data:** ANC1 coverage increased 15% in Q3 2022, dropped 12% in Q1 2023, then stabilized through 2025.
+**The data**
 
-**Just the result:**
-> "ANC1 volumes fluctuated between 2022-2023 before stabilizing in 2024-2025."
+ANC1 volumes in Northern Region dropped 18% in Q1 2026, the steepest fall in three years. Penta1 and BCG dropped in parallel by 10–12% over the same quarter.
 
-**The story:**
-> "After significant disruption during 2022-2023, our antenatal care services have recovered and stabilized. The consistent delivery over the past 18 months suggests our health system has built resilience. This foundation positions us to focus on quality improvements rather than crisis response."
+**Just the result** *(stops at description)*
 
-*The story answers "so what?" and points toward action.*
+> ANC1 volumes in Northern Region declined 18% in Q1 2026, with Penta1 and BCG showing similar drops.
+
+**The story** *(audience: Director of PHC, decision: where to send supervisory teams)*
+
+> Maternal and child services in Northern Region took a coordinated hit this quarter. Three indicators dropped together, and that pattern points to a system-level disruption rather than a data-quality issue. The three districts driving the regional drop should receive a supervisory visit before Q2 closes.
+
+The story names the audience, frames the issue as system-level rather than data-level, and ends on a specific implication with timing.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_6 -->
@@ -451,25 +454,6 @@ Data is only valuable if it leads to decisions and actions.
 | "Data quality poor in 2 facilities" | Provide data quality training, investigate reporting barriers |
 
 **Key question:** For each finding, ask "What decision or action does this inform?"
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_6a -->
-## Activity: Link your results to actions
-
-![hands-on h:40](../resources/icons/hands_on.svg) **For your top 3 findings, complete this table:**
-
-| Finding | Who needs to know? | What decision/action? | By when? |
-|---------|-------------------|----------------------|----------|
-| 1. | | | |
-| 2. | | | |
-| 3. | | | |
-
-**Guidance:**
-- Be specific about the decision-maker (not "the ministry" but "Director of PHC")
-- Be specific about the action (not "improve" but "conduct supportive supervision in X district")
-- Set a realistic timeline
-
-*Present your action-linked findings to a peer country for feedback.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_6b -->
@@ -543,26 +527,6 @@ Linking individual results to actions is the first step. A roadmap turns that in
 | **Feedback loop** | How will you track whether data is being used for decisions? |
 
 **Goal:** FASTR becomes part of routine M&E, not a special project.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_7a -->
-## Activity: Country action planning
-
-![hands-on h:40](../resources/icons/hands_on.svg) **Develop your country's FASTR action plan:**
-
-| Action Step | Responsible Person | Timeline | Success Metric |
-|-------------|-------------------|----------|----------------|
-| Complete quarterly analysis | | | |
-| Disseminate to [forum] | | | |
-| Follow up on identified issues | | | |
-| Train additional team members | | | |
-
-**Also consider:**
-- What existing platform/forum will you integrate FASTR into?
-- What's your dissemination plan for the output you created this week?
-- What support do you need from facilitators over the next quarter?
-
-*Share your action plan with another country team for peer review.*
 <!-- /SLIDE -->
 
 ---

@@ -6,6 +6,8 @@ paginate: true
 
 ## Interpreting FASTR module outputs
 
+Each FASTR module has its own interpretation reflex. Knowing which one applies stops you from drawing the wrong conclusion from the right chart.
+
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 

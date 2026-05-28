@@ -4,10 +4,16 @@ theme: fastr
 paginate: true
 ---
 
-## Exemple : résultat vs enseignement clé
+## Exemple : résultat → message clé
 
-**Résultat :**
-> Au troisième trimestre 2022, le volume des visites CPN1 a augmenté de 15 % par rapport au trimestre précédent — la plus forte hausse trimestrielle de la période — suivie d'une baisse de 12 % au premier trimestre 2023. Depuis, les volumes de CPN1 sont restés relativement stables.
+Les mêmes données peuvent se raconter dans deux registres — l'analytique et l'actionnable.
 
-**Enseignement clé :**
-> La stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendance peut refléter des systèmes renforcés ou des schémas de recherche de soins plus prévisibles — fournissant une base plus solide pour une couverture durable des soins prénataux.
+**Résultat** *(ce que montre l'analyse)*
+
+> 4,2 % des valeurs établissement-mois-indicateur ont été signalées comme aberrantes au niveau national au T1 2026, concentrées dans la région du Nord (8,7 %) et la région de l'Ouest (6,1 %), avec 11 districts au-dessus du seuil de 10 %.
+
+**Message clé** *(ce qu'il faut en faire)*
+
+> Le taux de valeurs aberrantes a doublé dans deux régions ce trimestre, et onze districts doivent passer en revue leurs registres avant que l'on puisse faire confiance aux volumes rapportés.
+
+Le résultat va dans le rapport. Le message clé va dans le briefing de trois minutes au directeur.

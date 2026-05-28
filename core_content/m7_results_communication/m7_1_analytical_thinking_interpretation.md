@@ -6,12 +6,12 @@ paginate: true
 
 ## Analytical thinking & interpretation
 
-Interpretation connects **data patterns** to **programmatic meaning**.
+A FASTR chart shows a pattern. Interpretation is the leap from **what the data shows** to **what it means** for the program.
 
-For every FASTR output, ask three questions:
+For every FASTR output, work through three questions:
 
-1. **What does it show?** — Describe the pattern accurately
-2. **Why might that be?** — Consider multiple explanations
-3. **What should we do?** — Identify next steps or actions
+1. **What does it show?** Describe the pattern accurately — indicator, direction, magnitude, when, where.
+2. **Why might that be?** Surface multiple explanations before settling on one. Is this a data-quality artefact, a real programmatic change, normal seasonality, or an external shock?
+3. **What should we do?** Identify the next step — investigate further, raise it with a specific decision-maker, or take direct action.
 
-<small>*Moving from numbers to insights requires context, critical thinking, and programmatic knowledge.*</small>
+<small>*The numbers themselves don't tell you what to do. Context, programmatic knowledge, and disciplined questioning do.*</small>

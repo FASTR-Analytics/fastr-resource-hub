@@ -22,23 +22,15 @@ slides:
 - file: m7_2a_data_visualization_communication_continued.md
   order: 2.01
   variant: full
-  title: 'Exemple : résultat vs enseignement clé'
+  title: 'Exemple : résultat → message clé'
 - file: m7_2b_data_visualization_communication_continued.md
   order: 2.02
   variant: full
   title: Choisir le bon format de rapport
-- file: m7_3_using_data_for_decision_making.md
-  order: 3.0
-  variant: full
-  title: Feuille de route pour la diffusion et l'utilisation des données
 - file: m7_4_understanding_audience_user_mapping.md
   order: 4.0
   variant: full
   title: 'Comprendre votre audience : Cartographie des utilisateurs'
-- file: m7_4a_activity_map_your_users.md
-  order: 4.01
-  variant: full
-  title: 'Activité : Cartographiez vos utilisateurs'
 - file: m7_5_storytelling_with_data.md
   order: 5.0
   variant: full
@@ -46,15 +38,11 @@ slides:
 - file: m7_5a_from_data_to_story_example.md
   order: 5.01
   variant: full
-  title: 'Des données à l''histoire : Exemple'
+  title: 'Du résultat à l''histoire : exemple'
 - file: m7_6_linking_results_to_actions.md
   order: 6.0
   variant: full
   title: Relier les résultats aux actions
-- file: m7_6a_activity_link_results_to_actions.md
-  order: 6.01
-  variant: full
-  title: 'Activité : Reliez vos résultats aux actions'
 - file: m7_6b_three_spheres_of_influence.md
   order: 6.02
   variant: full
@@ -63,11 +51,11 @@ slides:
   order: 6.03
   variant: full
   title: Six questions pour transformer les résultats en actions
+- file: m7_6d_dissemination_and_data_use_roadmap.md
+  order: 6.04
+  variant: full
+  title: Feuille de route pour la diffusion et l'utilisation des données
 - file: m7_7_building_roadmap_sustained_use.md
   order: 7.0
   variant: full
   title: Construire une feuille de route pour une utilisation durable
-- file: m7_7a_activity_country_action_planning.md
-  order: 7.01
-  variant: full
-  title: 'Activité : Planification d''action pays'

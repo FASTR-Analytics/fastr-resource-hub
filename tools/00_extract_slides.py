@@ -260,16 +260,13 @@ TOPIC_NAMES = {
     'm4_3ab': 'outlier_making_the_call',
     'm4_s3bb': 'outlier_detection_output',
     'm6_9ab': 'calculating_interpreting_dropout',
-    'm7_3': 'using_data_for_decision_making',
     'm7_4': 'understanding_audience_user_mapping',
-    'm7_4a': 'activity_map_your_users',
     'm7_5': 'storytelling_with_data',
     'm7_5a': 'from_data_to_story_example',
     'm7_6': 'linking_results_to_actions',
-    'm7_6a': 'activity_link_results_to_actions',
     'm7_6b': 'three_spheres_of_influence',
+    'm7_6d': 'dissemination_and_data_use_roadmap',
     'm7_7': 'building_roadmap_sustained_use',
-    'm7_7a': 'activity_country_action_planning',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_0': 'hfa_implementation_status',

@@ -4,10 +4,16 @@ theme: fastr
 paginate: true
 ---
 
-## Example: result vs key takeaway
+## Example: result → key takeaway
 
-**Result:**
-> In Q3 2022, the volume of ANC1 visits increased by 15% from the previous quarter—the largest quarterly rise in the period—followed by a 12% drop in Q1 2023. Since then, ANC1 volumes have remained relatively stable.
+The same data can be told in two registers — the analytical one and the actionable one.
 
-**Key takeaway:**
-> The relative stability observed from mid-2023 onward suggests improvements in the consistency of service delivery. This trend may reflect strengthened systems or more predictable care-seeking patterns — providing a stronger foundation for sustained antenatal care coverage.
+**Result** *(what the analysis shows)*
+
+> Outliers were flagged in 4.2% of facility-month-indicator values nationally in Q1 2026, concentrated in Northern Region (8.7%) and Western Region (6.1%), with 11 districts above the 10% threshold.
+
+**Key takeaway** *(what to do about it)*
+
+> Outlier rates doubled in two regions this quarter, and eleven districts need register review before we can trust their reported volumes.
+
+The result belongs in the report. The takeaway belongs in the director's three-minute briefing.

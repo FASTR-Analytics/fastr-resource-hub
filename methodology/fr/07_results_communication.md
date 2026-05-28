@@ -237,15 +237,15 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 <!-- SLIDE:m7_1 -->
 ## Réflexion analytique et interprétation
 
-L'interprétation relie les **modèles de données** à la **signification programmatique**.
+Un graphique FASTR montre un schéma. L'interprétation, c'est le saut entre **ce que les données montrent** et **ce que cela veut dire** pour le programme.
 
-Pour chaque sortie FASTR, posez trois questions :
+Pour chaque résultat FASTR, posez trois questions :
 
-1. **Qu'est-ce que cela montre ?** — Décrire le modèle avec précision
-2. **Pourquoi cela pourrait-il être ?** — Envisagez plusieurs explications
-3. **Que devrions-nous faire ?** — Identifier les prochaines étapes ou actions
+1. **Qu'est-ce que cela montre ?** Décrivez le schéma avec précision — indicateur, sens, ampleur, quand, où.
+2. **Pourquoi cela pourrait-il être ?** Faites émerger plusieurs explications avant de trancher. Est-ce un artéfact de qualité des données, un vrai changement programmatique, une saisonnalité normale ou un choc externe ?
+3. **Que devrions-nous faire ?** Identifiez la prochaine étape — enquêter plus avant, remonter l'information à un décideur précis, ou agir directement.
 
-<small>*Passer des chiffres aux idées nécessite un contexte, une réflexion critique et des connaissances programmatiques.*</small>
+<small>*Les chiffres seuls ne disent pas quoi faire. Le contexte, les connaissances programmatiques et un questionnement discipliné, eux, le font.*</small>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_1a -->
@@ -262,6 +262,8 @@ Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les
 
 <!-- SLIDE:m7_1b -->
 ## Pièges courants de l'interprétation
+
+Quatre pièges nous attrapent le plus souvent quand on lit les résultats FASTR. Chacun peut transformer un graphique utile en message trompeur s'il passe inaperçu.
 
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
@@ -292,6 +294,8 @@ Les fluctuations à court terme peuvent être des variations normales. Se concen
 <!-- SLIDE:m7_1c -->
 ## Interprétation des sorties du module FASTR
 
+Chaque module FASTR a son propre réflexe d'interprétation. Connaître celui qui s'applique vous évite de tirer la mauvaise conclusion d'un bon graphique.
+
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 
@@ -321,21 +325,32 @@ Examiner les tendances à plusieurs niveaux géographiques — la désagrégatio
 <!-- SLIDE:m7_2 -->
 ## Passer des données aux messages clés
 
-### Qu'est-ce qu'un résultat ?
-Les résultats sont ce que l'analyse a trouvé (scores de qualité des données, estimations de couverture, chiffres d'utilisation des services). Ils sont souvent nombreux, complexes, difficiles à comprendre "en un coup d'œil" et manquent d'interprétation.
+Une analyse FASTR produit des dizaines de **résultats** — scores d'EQD, taux de valeurs aberrantes par district, estimations de couverture par indicateur, signaux de perturbation. Aucun d'entre eux n'est encore un message.
 
-### Qu'est-ce qu'un enseignement clé ?
-Les enseignements clés sont ce que les résultats nous apprennent — pourquoi les résultats sont importants, le "et alors". Ils doivent être peu nombreux, simples et clairs, faciles à retenir et exploitables.
+Un **message clé** est ce que quelqu'un doit décider, faire ou retenir après avoir vu ces résultats. C'est le « et alors ? » condensé en une ou deux phrases.
+
+| | Résultat | Message clé |
+|---|---|---|
+| **Source** | Ce que l'analyse a trouvé | Ce que le résultat veut dire pour le programme |
+| **Quantité** | Des dizaines par rapport | Deux ou trois par audience |
+| **Forme** | Un graphique ou un tableau | Une phrase en langage simple |
+| **Utilisé par** | L'analyste | Le décideur |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2a -->
-## Exemple : résultat vs enseignement clé
+## Exemple : résultat → message clé
 
-**Résultat :**
-> Au troisième trimestre 2022, le volume des visites CPN1 a augmenté de 15 % par rapport au trimestre précédent — la plus forte hausse trimestrielle de la période — suivie d'une baisse de 12 % au premier trimestre 2023. Depuis, les volumes de CPN1 sont restés relativement stables.
+Les mêmes données peuvent se raconter dans deux registres — l'analytique et l'actionnable.
 
-**Enseignement clé :**
-> La stabilité relative observée à partir de la mi-2023 suggère des améliorations dans la cohérence de la prestation de services. Cette tendance peut refléter des systèmes renforcés ou des schémas de recherche de soins plus prévisibles — fournissant une base plus solide pour une couverture durable des soins prénataux.
+**Résultat** *(ce que montre l'analyse)*
+
+> 4,2 % des valeurs établissement-mois-indicateur ont été signalées comme aberrantes au niveau national au T1 2026, concentrées dans la région du Nord (8,7 %) et la région de l'Ouest (6,1 %), avec 11 districts au-dessus du seuil de 10 %.
+
+**Message clé** *(ce qu'il faut en faire)*
+
+> Le taux de valeurs aberrantes a doublé dans deux régions ce trimestre, et onze districts doivent passer en revue leurs registres avant que l'on puisse faire confiance aux volumes rapportés.
+
+Le résultat va dans le rapport. Le message clé va dans le briefing de trois minutes au directeur.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_2b -->
@@ -354,7 +369,7 @@ Les enseignements clés sont ce que les résultats nous apprennent — pourquoi 
 | Grand public et groupes de défense | Infographies + affiches |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_3 -->
+<!-- SLIDE:m7_6d -->
 ## Feuille de route pour la diffusion et l'utilisation des données
 
 Une feuille de route pour l'utilisation des données est un plan stratégique qui décrit comment les données seront utilisées, partagées et diffusées de manière efficace.
@@ -386,22 +401,6 @@ Avant de créer des produits, clarifiez qui les utilisera et comment.
 Différentes audiences ont besoin de différents produits à partir des mêmes données.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4a -->
-## Activité : Cartographiez vos utilisateurs
-
-![pratique h:40](../resources/icons/hands_on.svg) **Pour votre équipe pays, identifiez :**
-
-| Question | Votre réponse |
-|----------|---------------|
-| Qui est l'utilisateur final principal de vos produits FASTR ? | |
-| Quelle décision ou action prendra-t-il sur la base de ces données ? | |
-| Quelles sont les 2-3 informations qui l'intéressent le plus ? | |
-| Quel format/quelle durée fonctionne le mieux pour cette audience ? | |
-| Quand et où allez-vous présenter à cette audience ? | |
-
-*Discutez au sein de votre équipe pays. Partagez un aperçu avec le groupe.*
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_5 -->
 ## Raconter une histoire avec des données
 
@@ -421,17 +420,21 @@ La narration traduit les données et les visualisations en récits convaincants 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_5a -->
-## Des données à l'histoire : Exemple
+## Du résultat à l'histoire : exemple
 
-**Les données :** La couverture CPN1 a augmenté de 15 % au T3 2022, a chuté de 12 % au T1 2023, puis s'est stabilisée jusqu'en 2025.
+**Les données**
 
-**Juste le résultat :**
-> "Les volumes de CPN1 ont fluctué entre 2022-2023 avant de se stabiliser en 2024-2025."
+Les volumes CPN1 de la région du Nord ont chuté de 18 % au T1 2026, la plus forte baisse en trois ans. Penta1 et BCG ont également baissé en parallèle de 10 à 12 % sur le même trimestre.
 
-**L'histoire :**
-> "Après une perturbation significative en 2022-2023, nos services de soins prénataux se sont rétablis et stabilisés. La prestation constante au cours des 18 derniers mois suggère que notre système de santé a développé une résilience. Cette base nous positionne pour nous concentrer sur l'amélioration de la qualité plutôt que sur la réponse aux crises."
+**Le résultat brut** *(s'arrête à la description)*
 
-*L'histoire répond à "et alors ?" et oriente vers l'action.*
+> Les volumes CPN1 de la région du Nord ont diminué de 18 % au T1 2026, avec Penta1 et BCG affichant des baisses similaires.
+
+**L'histoire** *(audience : Directeur des SSP, décision : où envoyer les équipes de supervision)*
+
+> Les services maternels et infantiles de la région du Nord ont subi un coup coordonné ce trimestre. Trois indicateurs ont chuté ensemble, et ce schéma indique une perturbation au niveau du système plutôt qu'un problème de qualité des données. Les trois districts à l'origine de la baisse régionale devraient recevoir une visite de supervision avant la fin du T2.
+
+L'histoire nomme l'audience, cadre le problème comme étant systémique et non lié aux données, et se conclut sur une implication précise assortie d'un calendrier.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_6 -->
@@ -450,25 +453,6 @@ Les données n'ont de valeur que si elles conduisent à des décisions et des ac
 | "Mauvaise qualité des données dans 2 établissements" | Former à la qualité des données, enquêter sur les obstacles au rapportage |
 
 **Question clé :** Pour chaque résultat, demandez "Quelle décision ou action cela éclaire-t-il ?"
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_6a -->
-## Activité : Reliez vos résultats aux actions
-
-![pratique h:40](../resources/icons/hands_on.svg) **Pour vos 3 principaux résultats, complétez ce tableau :**
-
-| Résultat | Qui doit savoir ? | Quelle décision/action ? | Pour quand ? |
-|----------|-------------------|--------------------------|--------------|
-| 1. | | | |
-| 2. | | | |
-| 3. | | | |
-
-**Conseils :**
-- Soyez précis sur le décideur (pas "le ministère" mais "Directeur des SSP")
-- Soyez précis sur l'action (pas "améliorer" mais "conduire une supervision formative dans le district X")
-- Fixez un calendrier réaliste
-
-*Présentez vos résultats liés aux actions à un pays pair pour obtenir un retour.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m7_6b -->
@@ -542,26 +526,6 @@ Relier des résultats individuels à des actions, c'est la première étape. Une
 | **Boucle de rétroaction** | Comment allez-vous suivre si les données sont utilisées pour les décisions ? |
 
 **Objectif :** FASTR devient partie intégrante du suivi-évaluation de routine, pas un projet spécial.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_7a -->
-## Activité : Planification d'action pays
-
-![pratique h:40](../resources/icons/hands_on.svg) **Développez le plan d'action FASTR de votre pays :**
-
-| Étape d'action | Personne responsable | Calendrier | Indicateur de succès |
-|----------------|---------------------|------------|---------------------|
-| Compléter l'analyse trimestrielle | | | |
-| Diffuser au [forum] | | | |
-| Suivre les problèmes identifiés | | | |
-| Former des membres supplémentaires de l'équipe | | | |
-
-**Considérez également :**
-- Quelle plateforme/forum existant allez-vous intégrer à FASTR ?
-- Quel est votre plan de diffusion pour le produit créé cette semaine ?
-- De quel soutien avez-vous besoin des facilitateurs au cours du prochain trimestre ?
-
-*Partagez votre plan d'action avec une autre équipe pays pour une revue par les pairs.*
 <!-- /SLIDE -->
 
 ---

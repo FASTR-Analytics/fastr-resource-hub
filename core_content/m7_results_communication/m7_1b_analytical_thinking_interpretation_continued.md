@@ -6,6 +6,8 @@ paginate: true
 
 ## Common interpretation pitfalls
 
+Four traps catch us most often when we read FASTR outputs. Each one can turn a useful chart into a misleading message if it goes unnoticed.
+
 <div style="display: flex; gap: 2em;">
 <div style="flex: 1;">
 
