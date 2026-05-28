@@ -10,8 +10,6 @@ In plain language, **coverage** tells you what share of the people who needed a 
 
 A high coverage means the system is reaching most of who it should. A low coverage means people who needed the service did not get it — either it was not available, not accessible, or not used.
 
-![Coverage formula for ANC4+ h:240](../../resources/diagrams/coverage_example_anc4.svg)
-
 ---
 
 ## Coverage: the denominator problem
