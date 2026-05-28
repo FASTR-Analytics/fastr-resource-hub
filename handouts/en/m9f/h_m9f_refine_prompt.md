@@ -45,7 +45,7 @@ Run each round in a **new** AI conversation so you see the difference from a cle
 |-------|---------------|------------------------------------|
 | **1. Start simple** | *Create a slide about [your topic].* | What did the AI include? Would this work in a real meeting? |
 | **2. Add context** | *Create a slide about [topic] for a [meeting type]. Show [specific data]. Explain which regions have the most issues.* | Is it more specific? Does it identify priorities? |
-| **3. Make it actionable** | *Create a slide about [topic] for [meeting]. Compare areas — which need support? Suggest possible reasons.* | Does it prioritise areas? Point toward next steps? |
+| **3. Make it actionable** | *Create a slide about [topic] for [meeting]. Compare areas — which need support? Suggest possible reasons.* | Does it prioritize areas? Point toward next steps? |
 
 </div>
 </div>

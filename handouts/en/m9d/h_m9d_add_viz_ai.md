@@ -8,9 +8,9 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step current">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step current">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalize</span></div>
 
-# Add a visualisation (with the AI Assistant)
+# Add a visualization (with the AI Assistant)
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>
 
@@ -19,8 +19,8 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You've created your slide deck and added a visualisation manually (see prior activities)
-- ☐ You have at least one saved visualisation in the **Visualizations** tab
+- ☐ You've created your slide deck and added a visualization manually (see prior activities)
+- ☐ You have at least one saved visualization in the **Visualizations** tab
 - ☐ Your deck is open — the AI panel on the right is scoped to it
 
 </aside>
@@ -90,4 +90,4 @@ Neither is "better." Pick whichever feels faster for the task.
 
 ## What's next
 
-Move on to **Edit and finalise your slides** — review and polish what you've built.
+Move on to **Edit and finalize your slides** — review and polish what you've built.

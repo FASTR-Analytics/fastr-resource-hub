@@ -60,7 +60,7 @@ A starter prompt:
 
 ## Tips
 
-> **Verify, don't trust.** Even when given a template, the AI can drift — it may simplify a chart, drop a section, or summarise loosely. Walk through the output side-by-side with the template before sharing.
+> **Verify, don't trust.** Even when given a template, the AI can drift — it may simplify a chart, drop a section, or summarize loosely. Walk through the output side-by-side with the template before sharing.
 
 > **Save your "good" examples.** As your team produces reports you're proud of, save them to Assets. Each one becomes a template you (or a colleague) can reuse.
 
@@ -72,4 +72,4 @@ A starter prompt:
 
 ## What's next
 
-This finishes the prompting techniques module. From here you'll move into using these skills in real workshop activities — building visualisations, slide decks, and disruption reports with the AI as your collaborator.
+This finishes the prompting techniques module. From here you'll move into using these skills in real workshop activities — building visualizations, slide decks, and disruption reports with the AI as your collaborator.

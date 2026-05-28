@@ -26,7 +26,7 @@ The AI generates **one slide per region** showing observed service volumes vs ex
 ### For data quality
 **Prompt 3 — Data quality assessment**
 
-The AI adds an **appendix** with visualisations and interpretation of data quality.
+The AI adds an **appendix** with visualizations and interpretation of data quality.
 
 *Select it from the prompt library.*
 

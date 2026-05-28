@@ -92,10 +92,10 @@ The shaded gap is the distance between what actually happened and what FASTR exp
 
 ## Year-on-year change — how much moved
 
-![Service volume by year and year-on-year change: bars per indicator per year, coloured for large jumps or drops w:100%](../../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![Service volume by year and year-on-year change: bars per indicator per year, colored for large jumps or drops w:100%](../../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
-- **What it shows** — each indicator's **total annual volume** as bars across the years, with the year-on-year change labelled. A bar turns **green** when volume rose more than 10% on the year before, **red** when it fell more than 10%, and stays grey when it held roughly steady
-- **How to read it** — this is the bird's-eye companion to the trend chart: that one shows *within-year* timing, this shows *between-year* magnitude. Read across a row to see whether a service is growing, shrinking, or stable, and read the labelled % on any coloured bar to size the move. A **red bar in the most recent year** is the one to act on — the service ended the period materially lower than it started
+- **What it shows** — each indicator's **total annual volume** as bars across the years, with the year-on-year change labeled. A bar turns **green** when volume rose more than 10% on the year before, **red** when it fell more than 10%, and stays grey when it held roughly steady
+- **How to read it** — this is the bird's-eye companion to the trend chart: that one shows *within-year* timing, this shows *between-year* magnitude. Read across a row to see whether a service is growing, shrinking, or stable, and read the labeled % on any colored bar to size the move. A **red bar in the most recent year** is the one to act on — the service ended the period materially lower than it started
 - **Why you can trust it** — it's built on the adjusted data, so a red bar is a real fall in services, not an artefact of a missing month or a removed spike
 
 <div class="callout-footer">Worked example — <strong>Antenatal 1st visit ends 2025 at −13.6%</strong> (red): it finished the period well below the year before. An earlier green bar (+19.5%) was a rebound; the recent red is the one to act on. Together, the trend chart shows <em>when and where</em> services broke from expectation, and this one shows <em>how much</em> they moved.</div>

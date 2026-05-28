@@ -56,7 +56,7 @@ Open the **Prompt library**, scroll to the bottom, and choose the prompt for you
 
 The prompt text appears in the input field. Read it.
 
-> **What the prompt does.** It's a set of instructions telling the AI how to build the report: ask you for basic details, look up which indicators your country has, group them into categories for you to confirm, then build the report slide by slide. The structure, layout, and methodology wording are standardised — only your country's indicators, period, and findings change.
+> **What the prompt does.** It's a set of instructions telling the AI how to build the report: ask you for basic details, look up which indicators your country has, group them into categories for you to confirm, then build the report slide by slide. The structure, layout, and methodology wording are standardized — only your country's indicators, period, and findings change.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Run it and answer the AI's questions</span></h2>
 

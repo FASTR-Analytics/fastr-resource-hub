@@ -8,7 +8,7 @@ paginate: true
 
 In the AI Assistant module you learned **what the AI is** and how to think about working with one. This module is the practice.
 
-In the activities ahead you'll get the AI to do real work for you — pulling a chart, summarising a finding, drafting a slide — and learn the few habits that separate a useful answer from a frustrating one.
+In the activities ahead you'll get the AI to do real work for you — pulling a chart, summarizing a finding, drafting a slide — and learn the few habits that separate a useful answer from a frustrating one.
 
 **By the end you'll know how to:**
 

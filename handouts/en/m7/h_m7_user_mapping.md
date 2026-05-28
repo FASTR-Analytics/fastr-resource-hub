@@ -103,7 +103,7 @@ Adjust the audience and the decision to match your worksheet. **Verify** the AI'
 
 ## Share with the room
 
-After ~15 min of team discussion, **share one insight** about your audience with the larger group — something you realised that you hadn't noticed before mapping it out.
+After ~15 min of team discussion, **share one insight** about your audience with the larger group — something you realized that you hadn't noticed before mapping it out.
 
 ## What's next
 

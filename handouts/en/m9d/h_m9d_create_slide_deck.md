@@ -8,7 +8,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Create deck</span> <span class="arrow">→</span> <span class="step">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step current">Create deck</span> <span class="arrow">→</span> <span class="step">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalize</span></div>
 
 # Create your first slide deck
 
@@ -21,7 +21,7 @@ footer: "FASTR · Slide Decks"
 
 - ☐ You're signed in to your country's project on the FASTR platform
 - ☐ You've created your personal folder in the **Slide Decks** tab (see *Create your user folder*)
-- ☐ You have at least one visualisation saved that you'd like to use (see *Creating visualisations*)
+- ☐ You have at least one visualization saved that you'd like to use (see *Creating visualizations*)
 
 </aside>
 <div class="p1-main">
@@ -50,7 +50,7 @@ Click **Add slide**. Three slide types appear — pick the one you need:
 
 For this activity, pick **Content slide** — that's the one the next activities fill.
 
-You should now see an empty content slide ready for a visualisation and text.
+You should now see an empty content slide ready for a visualization and text.
 
 </div>
 </div>
@@ -68,5 +68,5 @@ You should have:
 
 ## What's next
 
-Your facilitator will demo how to add a chart and split the slide into chart + text. Then you'll repeat it in **Add a visualisation (manually)**.
+Your facilitator will demo how to add a chart and split the slide into chart + text. Then you'll repeat it in **Add a visualization (manually)**.
 

@@ -29,7 +29,7 @@ After the AI generates your report, review each section **as a team** using this
 
 - ☐ The appendix is **numbered correctly** (1 or 2)
 - ☐ Slides on **completeness, outliers, and consistency** are present
-- ☐ The **colour code** is logical (green = good, red = alert)
+- ☐ The **color code** is logical (green = good, red = alert)
 - ☐ Areas or indicators with **poor quality** are flagged
 
 </div>

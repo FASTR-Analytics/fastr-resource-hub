@@ -9,7 +9,7 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activity: Build a visualisation with the AI Assistant
+## Activity: Build a visualization with the AI Assistant
 
 **What you'll learn**
 How to prompt the AI for a chart. Before saving, you check that the AI used the right indicator, the right period, and the adjusted data rather than the raw data.

@@ -30,7 +30,7 @@ Keep it beside you while you fill in your own plan. Notice how each of the four 
 
 > Only **42%** of lower-level health facilities systematically record haemoglobin (Hb) measurement during antenatal care visits. Risk: undetected maternal anaemia.
 
-The pages that follow show how this one finding turns into a complete year-ahead plan, organised around the four dimensions: **use cases, finalising the report, ongoing updates and dissemination, and skill building**.
+The pages that follow show how this one finding turns into a complete year-ahead plan, organized around the four dimensions: **use cases, finalizing the report, ongoing updates and dissemination, and skill building**.
 
 </div>
 </div>

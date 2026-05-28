@@ -8,7 +8,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step done">Edit & finalise</span> <span class="arrow">→</span> <span class="step current">Format text</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step done">Edit & finalize</span> <span class="arrow">→</span> <span class="step current">Format text</span></div>
 
 # Format your report text
 
@@ -67,7 +67,7 @@ Your slide should now have:
 ## What could go wrong
 
 - **The symbols still show on the rendered slide** — you probably forgot the space after the `#` or `-`. The shortcut needs the space (`# Heading`, not `#Heading`).
-- **Everything is bolded** — `**` wrap only the phrase you want to emphasise, not whole paragraphs.
+- **Everything is bolded** — `**` wrap only the phrase you want to emphasize, not whole paragraphs.
 - **Bullets run into each other** — leave a blank line between bullets and the next paragraph to add spacing.
 
 ## What's next

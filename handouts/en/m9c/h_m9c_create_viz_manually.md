@@ -148,7 +148,7 @@ In the **Visualizations** list, open your saved ANC1 chart (the one you named *A
 
 In the chart editor's **left panel**, scroll down to **Display (disaggregate)**.
 
-- Tick the admin level you want to compare. In FASTR the levels are labelled generically — **Admin area 2** is typically *Region*, **Admin area 3** is *District*. Pick *Admin area 2* to see one line per region.
+- Tick the admin level you want to compare. In FASTR the levels are labeled generically — **Admin area 2** is typically *Region*, **Admin area 3** is *District*. Pick *Admin area 2* to see one line per region.
 - Leave the display style on **Lines** for now — one line per region, all on the same chart.
 
 The chart redraws. Instead of one national line, you should now see **one line per region**.

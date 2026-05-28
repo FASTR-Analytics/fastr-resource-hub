@@ -37,7 +37,7 @@ By the end, each team should have a verified, refined disruption report they cou
 
 **How to demonstrate.** Demonstrate the first prompt run before teams start: open the Prompt library, run Prompt 1, and answer the AI's questions on screen. Then let teams work. Generation takes 5–10 minutes per build, so build the verify-checklist discussion into that waiting time rather than letting the room go idle.
 
-**Grouping.** Teams work in small groups with one **driver** at the keyboard and everyone else reviewing. Rotate the driver between sections if time allows, so more than one person practises the prompts.
+**Grouping.** Teams work in small groups with one **driver** at the keyboard and everyone else reviewing. Rotate the driver between sections if time allows, so more than one person practices the prompts.
 
 **Pacing.** Activity 1 (generation) sets up everything else; do not rush the groupings step within it. If the session runs long, compress activity 3 (refine) rather than activity 2 (verify) — an unverified report is worse than a less-polished one.
 

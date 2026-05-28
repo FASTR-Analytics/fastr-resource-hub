@@ -167,7 +167,7 @@ For the volume change chart (output 4):
     | Parameter | Default | Type | Description | Tuning Guidance |
     |-----------|---------|------|-------------|-----------------|
     | `COUNTRY_ISO3` | "ISO3" | String | Three-letter country code | Set to your country code (e.g., "RWA", "UGA", "ZMB") |
-    | `SELECTEDCOUNT` | "count_final_outliers" | String | Data column used for regression modelling | Options: `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both` |
+    | `SELECTEDCOUNT` | "count_final_outliers" | String | Data column used for regression modeling | Options: `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both` |
     | `VISUALIZATIONCOUNT` | "count_final_outliers" | String | Data column used for visualization | Same options as `SELECTEDCOUNT`; can differ if you want to model on one and plot another |
 
 ??? "Control chart parameters"
@@ -1049,7 +1049,7 @@ In addition to year-over-year comparisons, FASTR generates quarter-on-quarter (Q
 
 Module 2 produced the adjusted dataset — outliers replaced, gaps imputed. Module 3 is where that work pays off.
 
-Within Module 3, users can analyse **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
+Within Module 3, users can analyze **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
 
 The next slides cover two views of service delivery:
 

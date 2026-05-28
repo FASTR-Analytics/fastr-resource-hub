@@ -14,7 +14,7 @@ footer: "FASTR · Getting Started · Facilitator"
 
 ## Purpose
 
-Getting Started puts every participant onto the platform and set up to keep their work organised. It is a short module — one facilitator-led demo followed by two quick activities — but it is a gate: a participant who is not logged in, inside their country project, with a named folder in both tabs will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
+Getting Started puts every participant onto the platform and set up to keep their work organized. It is a short module — one facilitator-led demo followed by two quick activities — but it is a gate: a participant who is not logged in, inside their country project, with a named folder in both tabs will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
 
 By the end, every participant should be signed in, inside their country project, with a personal folder of the same name in both the Slide Decks and Visualizations tabs.
 
@@ -40,7 +40,7 @@ By the end, every participant should be signed in, inside their country project,
 
 **Pacing.** This module is short, but do not declare it finished early. Check every participant has cleared the gate (logged in, in project, folders made) before moving on — an unresolved access problem only gets more expensive later.
 
-**The message to carry through.** Organisation now prevents chaos later: one folder per person, the same name in both tabs, is the simple habit that keeps a crowded country project navigable.
+**The message to carry through.** Organization now prevents chaos later: one folder per person, the same name in both tabs, is the simple habit that keeps a crowded country project navigable.
 
 ---
 

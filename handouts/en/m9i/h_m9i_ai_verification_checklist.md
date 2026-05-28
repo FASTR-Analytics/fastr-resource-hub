@@ -142,7 +142,7 @@ That's what the manual checklist below is for. Work through it **as a team**, wi
 |---|-------|-------|
 | ☐ | The appendix is **numbered correctly** (Annex 1 or 2) |  |
 | ☐ | All three DQ dimensions present: **completeness, outliers, consistency** |  |
-| ☐ | The **colour code is logical**: green = good, red = alert |  |
+| ☐ | The **color code is logical**: green = good, red = alert |  |
 | ☐ | Low-quality areas or indicators are **explicitly flagged** in the text |  |
 | ☐ | DQ scores **match the platform** — open the DQA module side-by-side |  |
 
@@ -171,4 +171,4 @@ If you can't say that yet, keep iterating.
 
 ## What's next
 
-Once the report passes both verification passes, finalise the formatting (titles, page numbers, logos), export, and disseminate using your country action plan.
+Once the report passes both verification passes, finalize the formatting (titles, page numbers, logos), export, and disseminate using your country action plan.

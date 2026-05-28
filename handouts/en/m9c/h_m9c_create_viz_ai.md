@@ -79,7 +79,7 @@ When you like what you see, click **Save as new visualization** under the chart 
 
 ## Try it with three indicators
 
-Run the same flow with three different indicators — pick from different programmes (ANC, immunisation, delivery). You'll get a feel for how the AI interprets short requests.
+Run the same flow with three different indicators — pick from different programs (ANC, immunisation, delivery). You'll get a feel for how the AI interprets short requests.
 
 ## Manual vs AI — when to use which
 

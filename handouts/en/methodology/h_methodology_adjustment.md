@@ -70,7 +70,7 @@ Each flagged value is swapped for the facility's own normal level, so the spike 
 
 ## How much did the data change?
 
-![Percent change in volume due to outlier adjustment: a table of districts by indicator, each cell coloured green, gold or red w:100%](../../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment: a table of districts by indicator, each cell colored green, gold or red w:100%](../../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 - **What each cell is** — pick a district (a row) and an indicator (a column). The number is how much that indicator's total **changed** once the suspicious spikes were removed. 0% = nothing needed fixing; a big number = big spikes were taken out
 - **How to read it** — **green = the raw data was already clean; red = it needed a lot of correcting.** A red cell is a warning that the *raw* total there was inflated and would have overstated activity

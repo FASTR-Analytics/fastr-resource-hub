@@ -33,7 +33,7 @@ A clear prompt produces a useful answer; a vague prompt produces a generic one. 
 
 Pick a task you do regularly. Before writing your prompt, check it covers these six dimensions.
 
-**1. Clear objective.** Is the task explicit (*interpret, summarise, compare, draft slides*) and the use case named (*performance review, donor update, training*)?
+**1. Clear objective.** Is the task explicit (*interpret, summarize, compare, draft slides*) and the use case named (*performance review, donor update, training*)?
 
 **2. Target audience.** Who's it for? At what technical level?
 

@@ -42,7 +42,7 @@ Work through these four dimensions as a country team. Answer the questions in wr
 
 ### 2. Finalising the report
 
-*Is the report you built during the workshop the one you want to use going forward? If not, how will you finalise it — and by when?*
+*Is the report you built during the workshop the one you want to use going forward? If not, how will you finalize it — and by when?*
 
 <div class="answer-box"></div>
 
@@ -61,7 +61,7 @@ Work through these four dimensions as a country team. Answer the questions in wr
 
 ### 4. Skill building
 
-*How will you practise — solo, as a group, in regular weekly meetings? Who else needs to understand this content and needs additional training?*
+*How will you practice — solo, as a group, in regular weekly meetings? Who else needs to understand this content and needs additional training?*
 
 <div class="answer-box"></div>
 

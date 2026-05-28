@@ -8,7 +8,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step done">Edit & finalise</span> <span class="arrow">→</span> <span class="step done">Format text</span> <span class="arrow">→</span> <span class="step current">Deck settings</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step done">Edit & finalize</span> <span class="arrow">→</span> <span class="step done">Format text</span> <span class="arrow">→</span> <span class="step current">Deck settings</span></div>
 
 # Configure your slide deck settings
 
@@ -19,7 +19,7 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ Your slide deck has at least one finalised content slide
+- ☐ Your slide deck has at least one finalized content slide
 - ☐ Any custom logos you want to use are already uploaded to **Assets** (see Pre-step below)
 
 <p class="sb-label">Why it matters</p>
@@ -113,7 +113,7 @@ Click **Save** at the top right of the panel. Settings do not autosave the way s
 When you close the panel, your deck should:
 
 - Have a clear name your team can find again
-- Use one consistent colour theme + font + layout across all slides
+- Use one consistent color theme + font + layout across all slides
 - Show the logos you intend in each slot
 - Carry the global footer and page numbers if you turned them on
 

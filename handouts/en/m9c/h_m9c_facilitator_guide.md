@@ -35,9 +35,9 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ## Running the session
 
-**Preparation.** Have a saved visualisation and an existing deck ready in the demo account so you can show charts immediately. Confirm participants completed Instance Setup — activity 6 uses real country data, which must already be loaded.
+**Preparation.** Have a saved visualization and an existing deck ready in the demo account so you can show charts immediately. Confirm participants completed Instance Setup — activity 6 uses real country data, which must already be loaded.
 
-**How to demonstrate.** Every platform task should be demonstrated first, then practised from the handout, which re-explains what you showed. The detailed live demo for the chart builder (activity 2) is the one to rehearse — it carries the filter/disaggregate distinction the rest of the module depends on.
+**How to demonstrate.** Every platform task should be demonstrated first, then practiced from the handout, which re-explains what you showed. The detailed live demo for the chart builder (activity 2) is the one to rehearse — it carries the filter/disaggregate distinction the rest of the module depends on.
 
 **Grouping.** Activities 1–5 are individual, with sharing in pairs. Activity 6 is the country-team capstone — seat teams together for it.
 
@@ -53,7 +53,7 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ### 1. How to read a FASTR visualization · ~10 min · individual → pairs
 
-**What happens.** Participants learn a six-step framework for reading any chart — indicator, level/period, comparison, values, what stands out, so-what — see how to choose chart types, and practise on an existing deck with a teammate.
+**What happens.** Participants learn a six-step framework for reading any chart — indicator, level/period, comparison, values, what stands out, so-what — see how to choose chart types, and practice on an existing deck with a teammate.
 
 **Demonstrate.** Walk the six steps once on a real chart, naming each step aloud, before participants try it on their own.
 

@@ -19,7 +19,7 @@ footer: "FASTR · Visualizations & Interpretation"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You have at least one chart saved in your Visualisations folder
+- ☐ You have at least one chart saved in your Visualizations folder
 - ☐ The *Reading a viz* handout is next to you for the six-step framework
 
 <p class="sb-label">Why it matters</p>
@@ -52,7 +52,7 @@ Pick a chart, read it carefully, then write a three-part interpretation next to 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Pick a chart from your folder</span></h2>
 
-Open the **Visualisations** tab and choose one of the charts you saved earlier. Pick one that shows movement (a trend, a drop, a regional contrast) — not a flat line. A flat chart is hard to write about and harder to act on.
+Open the **Visualizations** tab and choose one of the charts you saved earlier. Pick one that shows movement (a trend, a drop, a regional contrast) — not a flat line. A flat chart is hard to write about and harder to act on.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Read the chart with the six-step framework</span></h2>
 

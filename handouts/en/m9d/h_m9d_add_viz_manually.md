@@ -8,9 +8,9 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step current">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step current">Add manually</span> <span class="arrow">→</span> <span class="step">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalize</span></div>
 
-# Add a visualisation (manually)
+# Add a visualization (manually)
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>
 
@@ -20,7 +20,7 @@ footer: "FASTR · Slide Decks"
 <p class="sb-label">Before you start</p>
 
 - ☐ You've created your slide deck (see *Create your first slide deck*)
-- ☐ You have a saved visualisation you want to include
+- ☐ You have a saved visualization you want to include
 - ☐ You're in the **Slide Decks** tab inside your deck
 
 </aside>
@@ -28,7 +28,7 @@ footer: "FASTR · Slide Decks"
 
 ## What you'll do
 
-Add a saved visualisation to a content slide in your deck. The path has a few non-obvious steps the first time — they get fast once you've done it once.
+Add a saved visualization to a content slide in your deck. The path has a few non-obvious steps the first time — they get fast once you've done it once.
 
 <h2 class="step-h"><span class="step-n">1</span><span>Add a content slide</span></h2>
 
@@ -75,18 +75,18 @@ Click **Save and close** at the top left of the slide editor. You're back in the
 
 Your slide should now show:
 
-- One of your saved visualisations
+- One of your saved visualizations
 - The slide title and date filled in
 - The deck is saved
 
 ## Tips
 
-> **Reuse, don't recreate.** If you've already built a visualisation in the **Visualizations** tab, add the existing one — don't rebuild it inside the slide editor.
+> **Reuse, don't recreate.** If you've already built a visualization in the **Visualizations** tab, add the existing one — don't rebuild it inside the slide editor.
 
 - If you can't find your chart in the picker: check the **Visualizations** tab and confirm it's saved in a folder you can see. Use the search box at the top of the picker.
-- If the chart looks cramped on the slide: that's expected at this stage. The *Edit and finalise* activity covers resizing.
+- If the chart looks cramped on the slide: that's expected at this stage. The *Edit and finalize* activity covers resizing.
 - The block's Content type can also be set to **Text** or **Image** if you want narrative or a static picture instead.
 
 ## What's next
 
-Move on to **Add a visualisation (with the AI Assistant)** — the same task, but as a single prompt.
+Move on to **Add a visualization (with the AI Assistant)** — the same task, but as a single prompt.

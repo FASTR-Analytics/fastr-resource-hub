@@ -12,12 +12,12 @@ paginate: true
 ## Activity: Configure your report settings
 
 **What you'll learn**
-Where to set the report-wide options that affect every slide. The Settings panel covers the report name, slide colour, logos, and page numbers.
+Where to set the report-wide options that affect every slide. The Settings panel covers the report name, slide color, logos, and page numbers.
 
 **What you'll practice**
 - Open Report settings
 - Rename your report
-- Pick a slide colour
+- Pick a slide color
 - Save and preview
 
 </div>
@@ -25,6 +25,6 @@ Where to set the report-wide options that affect every slide. The Settings panel
 <!--
 PRESENTER NOTES:
 - Activity adapted from the m9d facilitator guide. Handout: h_m9d_report_settings.
-- Four sections to walk through: General (report name), Style (slide colour and background), Logos (from uploaded assets), Page details (page numbers), Save.
+- Four sections to walk through: General (report name), Style (slide color and background), Logos (from uploaded assets), Page details (page numbers), Save.
 - Always save before leaving the panel. Settings do not autosave.
 -->

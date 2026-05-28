@@ -28,7 +28,7 @@ By the end, each team should have run a report through both verification passes 
 
 Before participants reach the verification activity, they build a report using the prompt library. Three facilitator moves make that build go well:
 
-**Pilot / co-pilot roles.** Choose one person per team as the pilot, who runs the prompts; the rest observe, suggest corrections, and review. Rotate the role if time allows so more than one person practises.
+**Pilot / co-pilot roles.** Choose one person per team as the pilot, who runs the prompts; the rest observe, suggest corrections, and review. Rotate the role if time allows so more than one person practices.
 
 **Define the use case first.** Before opening the prompt library, have each team agree out loud on the use case — country, period, indicator groupings, and who the report is for. Five minutes of agreement here saves thirty minutes of regeneration later.
 

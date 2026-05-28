@@ -32,7 +32,7 @@ You have the core report. Now make it fit your audience and add any extra sectio
 
 <h2 class="step-h"><span class="step-n">1</span><span>Polish what you have</span></h2>
 
-- Apply your formatting (fonts, colours, layout)
+- Apply your formatting (fonts, colors, layout)
 - Adjust the language for your **audience** — a minister reads differently from a data team
 - Decide which extra sections (below) are worth adding
 
@@ -69,7 +69,7 @@ In the Prompt library, pick one or both. The AI **appends** the section to your 
 
 - ☐ Annex numbered correctly
 - ☐ Completeness, outlier, consistency slides present
-- ☐ Colours make sense (green good, red concern)
+- ☐ Colors make sense (green good, red concern)
 - ☐ Weak data areas/indicators flagged
 
 </div>

@@ -36,7 +36,7 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 **Preparation.** Confirm two things for every team *before* the session starts: working DHIS2 credentials (URL, username, password) and a completed Data Prep Checklist. Missing access is the single biggest time sink here, and it is something only you or an administrator can resolve — not the participant.
 
-**How to demonstrate.** The handouts are detailed click-by-click procedures. Demonstrate the first few clicks of each step on the shared screen so participants recognise where they are, then let them follow the handout at their own pace. The fiddly moments worth showing slowly are flagged under **Demonstrate** below.
+**How to demonstrate.** The handouts are detailed click-by-click procedures. Demonstrate the first few clicks of each step on the shared screen so participants recognize where they are, then let them follow the handout at their own pace. The fiddly moments worth showing slowly are flagged under **Demonstrate** below.
 
 **Grouping.** This is a guided sequence, not independent work — keep the room together and move step by step. Do not let faster participants race ahead; later steps fail silently if an earlier one was done wrong.
 

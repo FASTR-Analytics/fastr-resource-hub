@@ -31,7 +31,7 @@ The country project gets crowded fast. A dozen people saving charts and decks in
 
 ## What you'll do
 
-Create two personal folders — one in **Slide Decks**, one in **Visualizations** — to keep your work organised. Everything you save here will be tagged with your name so the team can see who built what.
+Create two personal folders — one in **Slide Decks**, one in **Visualizations** — to keep your work organized. Everything you save here will be tagged with your name so the team can see who built what.
 
 </div>
 </div>

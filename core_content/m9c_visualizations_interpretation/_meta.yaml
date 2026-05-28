@@ -2,15 +2,15 @@ slides:
 - file: m9c_1_creating_visualizations_manually.md
   order: 1.0
   variant: full
-  title: 'Activity: Create your first visualisation'
+  title: 'Activity: Create your first visualization'
 - file: m9c_2_creating_visualizations_ai.md
   order: 2.0
   variant: full
-  title: 'Activity: Build a visualisation with the AI Assistant'
+  title: 'Activity: Build a visualization with the AI Assistant'
 - file: m9c_3_interpreting_visualizations.md
   order: 3.0
   variant: full
-  title: 'Activity: How to read a FASTR visualisation'
+  title: 'Activity: How to read a FASTR visualization'
 - file: m9c_3b_interpreting_activity.md
   order: 3.02
   variant: full

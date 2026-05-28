@@ -8,7 +8,7 @@ paginate: true
 
 Module 2 produced the adjusted dataset — outliers replaced, gaps imputed. Module 3 is where that work pays off.
 
-Within Module 3, users can analyse **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
+Within Module 3, users can analyze **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
 
 The next slides cover two views of service delivery:
 

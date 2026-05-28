@@ -13,7 +13,7 @@ paginate: true
 
 Patients often access different services at different facilities within a district:
 
-- A woman may attend **ANC1** at a nearby health post, but travel to a health centre for **ANC4**
+- A woman may attend **ANC1** at a nearby health post, but travel to a health center for **ANC4**
 - A child may receive **Penta1** at a local clinic, but complete **Penta3** at a district hospital
 
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.

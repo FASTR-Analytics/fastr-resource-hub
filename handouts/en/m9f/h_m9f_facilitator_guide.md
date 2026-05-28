@@ -14,7 +14,7 @@ footer: "FASTR · Prompting Techniques · Facilitator"
 
 ## Purpose
 
-This module develops a single practical skill: instructing the AI Assistant clearly enough to get a useful result. Participants progress from writing one well-formed prompt, through exploring how the AI responds to small changes, to refining and verifying outputs. The skills established here are assumed by every later AI-assisted activity in the workshop — building visualisations, slide decks, and disruption reports — so the module functions as the foundation for that work.
+This module develops a single practical skill: instructing the AI Assistant clearly enough to get a useful result. Participants progress from writing one well-formed prompt, through exploring how the AI responds to small changes, to refining and verifying outputs. The skills established here are assumed by every later AI-assisted activity in the workshop — building visualizations, slide decks, and disruption reports — so the module functions as the foundation for that work.
 
 By the end, a participant should be able to: write a prompt that states its objective, audience, scope, and format; adjust a prompt deliberately and observe the effect; choose between an iterative conversation and a single structured prompt; and apply a consistent check to an AI-generated draft before using it.
 
@@ -37,7 +37,7 @@ By the end, a participant should be able to: write a prompt that states its obje
 
 **Preparation.** Confirm before the session that each table can sign in to the platform and open the AI Assistant within its country project. Generation takes up to a minute per request, so a reliable connection matters more here than in most modules. Prepare one prompt of your own in advance so you can demonstrate from a known-good example rather than improvising.
 
-**How to demonstrate.** Most activities are hands-on. For each, show the first step on the shared screen — enough that participants recognise the interface — then let them work from the handout at their own pace. Resist working through a whole activity on screen: participants learn prompting by writing prompts, not by watching you write them. The on-screen moments that matter most are flagged under **Demonstrate** in each activity below.
+**How to demonstrate.** Most activities are hands-on. For each, show the first step on the shared screen — enough that participants recognize the interface — then let them work from the handout at their own pace. Resist working through a whole activity on screen: participants learn prompting by writing prompts, not by watching you write them. The on-screen moments that matter most are flagged under **Demonstrate** in each activity below.
 
 **Grouping.** Activities 2, 3 and 5 work well in pairs or small teams, where participants compare outputs and discuss why they differ. Activities 1 and 4 are individual; participants need to form their own judgement before comparing notes.
 
@@ -135,7 +135,7 @@ By the end, a participant should be able to: write a prompt that states its obje
 
 **What happens.** Participants apply a repeatable check to an AI-generated draft: read once and mark every factual claim, sort claims by risk, verify high-risk claims manually against the data, ask the AI to quote its source for medium-risk claims, and finish with a short consistency scan.
 
-**Demonstrate.** Take a short AI draft on screen and mark two or three claims aloud — a number, a cause-and-effect statement — then show the risk table and place those claims into it. Modelling the marking step removes most of the hesitation.
+**Demonstrate.** Take a short AI draft on screen and mark two or three claims aloud — a number, a cause-and-effect statement — then show the risk table and place those claims into it. Modeling the marking step removes most of the hesitation.
 
 **Say something like.** *"The AI writes fluently, which makes wrong numbers sound right. Fluent is not the same as correct — every figure has to trace back to the data."*
 

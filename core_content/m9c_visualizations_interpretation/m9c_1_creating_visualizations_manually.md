@@ -9,7 +9,7 @@ paginate: true
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activity: Create your first visualisation
+## Activity: Create your first visualization
 
 **What you'll learn**
 What filtering and disaggregation do to a chart, and when to use a preset instead of the Custom option.

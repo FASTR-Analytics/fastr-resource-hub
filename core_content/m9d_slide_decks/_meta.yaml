@@ -6,15 +6,15 @@ slides:
 - file: m9d_1b_adding_viz_manually.md
   order: 1.02
   variant: full
-  title: 'Activity: Add a visualisation to a slide'
+  title: 'Activity: Add a visualization to a slide'
 - file: m9d_1c_adding_viz_ai.md
   order: 1.03
   variant: full
-  title: 'Activity: Add a visualisation to a slide using AI'
+  title: 'Activity: Add a visualization to a slide using AI'
 - file: m9d_2_editing_formatting_slides.md
   order: 2.0
   variant: full
-  title: 'Activity: Edit and finalise your slides'
+  title: 'Activity: Edit and finalize your slides'
 - file: m9d_2b_open_slide_editor.md
   order: 2.02
   variant: full

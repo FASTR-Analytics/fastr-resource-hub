@@ -89,7 +89,7 @@ The single recurring failure across all five handouts is vagueness. By the end, 
 
 ### 4. Country action plan · ~30 min · team
 
-**What happens.** A team activity that turns "we did a workshop" into an ongoing quarterly rhythm. The worksheet is structured around four dimensions from the post-workshop roadmap — use cases, finalising the report, ongoing updates and dissemination, and skill building — each with a write-in box, followed by a worked example.
+**What happens.** A team activity that turns "we did a workshop" into an ongoing quarterly rhythm. The worksheet is structured around four dimensions from the post-workshop roadmap — use cases, finalizing the report, ongoing updates and dissemination, and skill building — each with a write-in box, followed by a worked example.
 
 **Say something like.** *"Every box needs a name, a cadence, and an existing meeting to plug into. 'Upload data' isn't a plan; 'the data manager uploads by the 5th, presented at the monthly review' is."*
 

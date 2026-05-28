@@ -8,9 +8,9 @@ footer: "FASTR · Slide Decks"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step current">Edit & finalise</span></div>
+<div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step current">Edit & finalize</span></div>
 
-# Edit and finalise your slides
+# Edit and finalize your slides
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~20 min</strong></p>
 
@@ -19,7 +19,7 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ Your deck has at least one content slide with a visualisation and some text
+- ☐ Your deck has at least one content slide with a visualization and some text
 - ☐ The deck is saved
 - ☐ Your facilitator has shown the editor demo on screen
 
@@ -52,19 +52,19 @@ The top-right dropdown switches the slide TYPE between **Cover**, **Section**, a
 
 ## Right-click is your friend
 
-The slide canvas is built from cells. Each cell can hold a visualisation or text. To change a cell — its content, its layout, or its place — **right-click on it**. A context menu opens.
+The slide canvas is built from cells. Each cell can hold a visualization or text. To change a cell — its content, its layout, or its place — **right-click on it**. A context menu opens.
 
-![Right-click context menu on a visualisation cell h:340](../../../resources/screenshots/m9d/edit_slides_03_right_click_menu.png)
+![Right-click context menu on a visualization cell h:340](../../../resources/screenshots/m9d/edit_slides_03_right_click_menu.png)
 
 The menu has nine items, grouped:
 
 | Action | What it does |
 |--------|-------------|
-| **Edit visualization** | Open the chart in the viz editor (same as Visualisations tab). |
+| **Edit visualization** | Open the chart in the viz editor (same as Visualizations tab). |
 | **Switch visualization** | Replace this chart with a different saved viz. |
 | **Create new visualization** | Build a new chart and drop it in here. |
 | **Remove visualization** | Empty the cell, keep the cell. |
-| **Change to** | Convert the cell type (text ↔ visualisation, etc.). |
+| **Change to** | Convert the cell type (text ↔ visualization, etc.). |
 | **Split ▸** | Split THIS cell into sub-cells (e.g. Into columns). |
 | **Add ▸** | Add a new neighbouring cell: **Col to left**, **Col to right**, **Row above**, **Row below**. |
 | **Move ▸** | Move this cell around: **Left**, **Right**, **Up**, **Down** (only the directions that make sense). |
@@ -121,7 +121,7 @@ When you click into a cell, a vertical divider appears between cells in the same
 
 If the slide is too cramped, right-click and use **Add** to introduce a new column or row, or **Move** to push a cell to a different position. Use **Delete this cell** to remove anything that does not earn its place.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Finalise header, footer, save</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Finalize header, footer, save</span></h2>
 
 Switch to the **Header / Footer** tab. Fill in the slide title, sub-header, and date if needed. Save the deck (a small Save button at the deck-toolbar level — autosave catches most edits, but Save is the safety net for big restructures).
 
@@ -142,7 +142,7 @@ Every slide should:
 
 - **Right-click menu does not appear** — make sure you clicked into the slide editor first (you should see "Edit Slide" in the top-left).
 - **Resize divider not visible** — it only appears once you have clicked on a cell. The cursor changes to a resize handle when you hover the line between two cells.
-- **Chart still cramped after resizing** — the chart itself may be too detailed. Open it from **Edit visualization** in the right-click menu (or back in the Visualisations tab), simplify, save, return.
+- **Chart still cramped after resizing** — the chart itself may be too detailed. Open it from **Edit visualization** in the right-click menu (or back in the Visualizations tab), simplify, save, return.
 - **Cell stuck in the wrong place** — use **Move ▸ Left / Right / Up / Down** to reposition, or **Delete this cell** and re-add a new one in the right slot.
 
 ## What's next

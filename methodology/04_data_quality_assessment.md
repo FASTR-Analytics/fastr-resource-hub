@@ -28,7 +28,7 @@ FASTR takes a multi-pronged approach, based on the belief that data quality shou
 
 !!! warning "Reminder: input must be counts, not percentages"
 
-    This module expects **raw service counts** (e.g. number of visits, doses, deliveries reported by each facility each month). Percentages, rates, or pre-calculated coverage figures cannot be analysed here — outlier detection compares values against a facility's own volume distribution (a percentage capped at 100 has no signal), and completeness flags depend on whether a count was reported. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
+    This module expects **raw service counts** (e.g. number of visits, doses, deliveries reported by each facility each month). Percentages, rates, or pre-calculated coverage figures cannot be analyzed here — outlier detection compares values against a facility's own volume distribution (a percentage capped at 100 has no signal), and completeness flags depend on whether a count was reported. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
 
 ---
 
@@ -1314,7 +1314,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ![Analytical pipeline w:1000](../resources/diagrams/analytical_pipeline.svg)
 
-FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyse** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
+FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyze** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
 
 We'll look at how each step works in turn.
 <!-- /SLIDE -->
@@ -1610,7 +1610,7 @@ PRESENTER NOTES:
 
 Patients often access different services at different facilities within a district:
 
-- A woman may attend **ANC1** at a nearby health post, but travel to a health centre for **ANC4**
+- A woman may attend **ANC1** at a nearby health post, but travel to a health center for **ANC4**
 - A child may receive **Penta1** at a local clinic, but complete **Penta3** at a district hospital
 
 Checking consistency at the facility level would miss these patterns. Aggregating to district level captures the complete picture of service utilization within a geographic area.
@@ -1751,7 +1751,7 @@ PRESENTER NOTES:
 
 ![Analytical pipeline w:1000](../resources/diagrams/analytical_pipeline.svg)
 
-FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyse** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
+FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyze** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
 
 We'll look at how each step works in turn.
 <!-- /SLIDE -->

@@ -101,4 +101,4 @@ If yes, you're in. Move to the next activity.
 
 ## What's next
 
-Move on to **Create your user folder** — set up personal folders in the Slide Decks and Visualizations tabs so your work stays organised.
+Move on to **Create your user folder** — set up personal folders in the Slide Decks and Visualizations tabs so your work stays organized.

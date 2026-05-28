@@ -17,7 +17,7 @@ Once your report is created, you can adjust its appearance. Everything lives in 
 
 ### Style
 
-- Slide **colour**
+- Slide **color**
 - Edit **background details**
 
 ### Logos

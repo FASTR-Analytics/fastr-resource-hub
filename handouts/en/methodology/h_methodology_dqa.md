@@ -42,9 +42,9 @@ Every table in this module uses the same **traffic light**:
 - **Gold** — borderline; check it
 - **Red** — falls short; this data needs attention
 
-**What's behind each box.** Every check works the same way underneath. Take one facility, one month, one indicator — that single report either passes the check or it doesn't. That's **one test**. Each coloured box then gathers all those tests for an area and shows the **share that passed** (for outliers, the share that *failed*). So a box really answers: *of all the reports behind it, how many were OK?*
+**What's behind each box.** Every check works the same way underneath. Take one facility, one month, one indicator — that single report either passes the check or it doesn't. That's **one test**. Each colored box then gathers all those tests for an area and shows the **share that passed** (for outliers, the share that *failed*). So a box really answers: *of all the reports behind it, how many were OK?*
 
-Read each table closely — the colours guide your eye, but the number in every box matters: it tells you **which indicator** and **which area** you can rely on, and where you can't.
+Read each table closely — the colors guide your eye, but the number in every box matters: it tells you **which indicator** and **which area** you can rely on, and where you can't.
 
 Each check looks at the data from a different angle — are the values realistic (outliers), are the reports arriving (completeness), and do related numbers agree (consistency). Together they tell you how far to trust each indicator.
 
@@ -78,7 +78,7 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 ## Outliers — reading the table
 
-![Proportion of outliers: a table of regions by indicator, each cell coloured green, gold or red w:100%](../../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![Proportion of outliers: a table of regions by indicator, each cell colored green, gold or red w:100%](../../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 - **What each cell is** — pick a region (a row) and an indicator (a column). The number is how often that indicator's monthly reports looked **too high to be real** in that region. 0.5% means it almost never happened; 3% means about 1 report in every 33
 - **How to read it** — **green is good** (hardly any suspicious months); **red means a lot**. A whole **red row** means that region enters careless numbers across many indicators. A whole **red column** means that one indicator is hard to report correctly everywhere
@@ -105,7 +105,7 @@ Only indicators averaging more than 100 a month are checked, so small clinics ar
 
 ## Completeness — reading the table
 
-![Indicator completeness: a table of districts by indicator, each cell coloured green, gold or red w:100%](../../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![Indicator completeness: a table of districts by indicator, each cell colored green, gold or red w:100%](../../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 - **What each cell is** — pick a district (a row) and an indicator (a column). The number is how many of the months that district *should* have reported actually arrived. 92% means 92 of every 100 expected reports came in
 - **How to read it** — **green is good** (almost all reports arrived); **red means many are missing**. A whole **red column** is an indicator hardly anyone reports (maybe new, or unclear how). A whole **red row** is a district that reports weakly across the board
@@ -153,7 +153,7 @@ The check itself is just a **ratio**: FASTR compares each pair across the distri
 
 **How it's built.** Look at one facility in a single month. It counts as **clean** only when every check passes there: the core indicators (outpatient visits, Penta1, ANC1) have no missing reports and no outliers, and the related pairs (Penta1/Penta3, ANC1/ANC4) line up. The DQA score is just the share of those facility-months that come out clean — so **84% means 84 of every 100 were clean and trustworthy.**
 
-![Overall DQA score: a table of regions by year, each cell coloured green, gold or red w:100%](../../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA score: a table of regions by year, each cell colored green, gold or red w:100%](../../../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 - **How to read it** — **green is good** (most facility-months are clean). Read **left to right** to see whether a region is improving year on year, and **top to bottom** to compare regions in one year
 
