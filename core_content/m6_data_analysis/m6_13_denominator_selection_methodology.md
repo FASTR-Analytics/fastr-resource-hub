@@ -6,18 +6,23 @@ paginate: true
 
 ## Denominator selection methodology
 
-The FASTR platform selects the denominator method that produces coverage estimates **closest to survey benchmarks** (DHS/MICS). It calculates coverage using all available denominator methods, compares each result to survey coverage estimates, and selects the denominator with the **smallest error** compared to the survey. This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
+FASTR builds **four candidate denominator chains**, each anchored on a different HMIS entry-point service (ANC1, deliveries, BCG, Penta1). For each chain, the platform:
 
-Each indicator (ANC1, ANC4, deliveries, etc.) may use a **different denominator method**. However, for a given indicator, the **same method is used across all timepoints and all subnational areas** for consistency. Selection is performed at the **national level**, then applied uniformly to all geographic levels.
+1. **Back-calculates the entry-point population** by combining the HMIS service volume with the most recent survey coverage for that service. (Example: ANC1 volume ÷ ANC1 survey coverage → estimated pregnancies.)
+2. **Extends through the demographic cascade** using country-specific parameters — pregnancy loss, stillbirth, neonatal and post-neonatal mortality — to derive the other target populations a chain needs (live births, surviving infants, etc.).
+
+To pick between the four chains, the platform compares each to **UN World Population Prospects (UN WPP)** at national level and selects the chain whose median ratio to UN WPP is closest to 1.0.
+
+**One chain, applied uniformly.** The chosen chain is then used for all indicators and all geographic levels.
+
+**User override.** In Part 2 (m006), an analyst can override the auto-selection by setting `DENOMINATOR_CHAIN` to a specific chain (`anc1`, `delivery`, `bcg`, or `penta1`) if programmatic considerations argue for a different choice.
 
 <!--
 PRESENTER NOTES:
-- We have multiple ways to calculate denominators - which one is best?
-- Survey data (DHS/MICS) is our gold standard for coverage
-- We test each denominator method and pick the one closest to survey
-- Selection is done at the national level using national survey data
-- The selected method is then applied to all subnational areas
-- This ensures consistency: same method for all regions and timepoints within an indicator
-- Different indicators can use different methods (ANC1 might use one, Penta1 another)
-- Users can override automatic selections if needed
+- The selection logic lives in m005's select_best_chain() function.
+- UN WPP is the *anchor* used to compare chains; surveys are NOT the selection criterion.
+- Median ratio closest to 1.0 = chain whose calculated population matches UN WPP most closely on average.
+- One chain applies to ALL indicators in the analysis — not different chains per indicator.
+- Same chain applies to ALL geographic levels (national, admin2, admin3).
+- Users can manually override via the DENOMINATOR_CHAIN parameter in m006.
 -->

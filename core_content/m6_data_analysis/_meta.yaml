@@ -1,4 +1,8 @@
 slides:
+- file: m6_0_from_adjusted_data_to_analysis.md
+  order: 0.0
+  variant: full
+  title: From adjusted data to analysis
 - file: m6_1_service_utilization_analysis.md
   order: 1.0
   variant: full
@@ -15,10 +19,6 @@ slides:
   order: 2.0
   variant: full
   title: Service disruptions and surpluses detection
-- file: m6_2a_why_detecting_disruptions_matters.md
-  order: 2.01
-  variant: full
-  title: Why detecting disruptions matters
 - file: m6_2b_service_disruptions_surpluses_detection.md
   order: 2.02
   variant: full
@@ -31,6 +31,10 @@ slides:
   order: 5.01
   variant: full
   title: 'Service utilization module: Configuration parameters'
+- file: m6_5b_coverage_section_opener.md
+  order: 5.02
+  variant: full
+  title: Coverage estimation
 - file: m6_6_service_coverage_introduction.md
   order: 6.0
   variant: full
@@ -55,14 +59,6 @@ slides:
   order: 9.0
   variant: full
   title: Expected relationships which help with estimating denominators
-- file: m6_9a_cascade_dropout.md
-  order: 9.01
-  variant: full
-  title: Service cascade and dropout analysis
-- file: m6_9ab_calculating_interpreting_dropout.md
-  order: 9.0102
-  variant: full
-  title: Calculating and interpreting dropout
 - file: m6_10_denominator_cascade_illustration.md
   order: 10.0
   variant: full
@@ -79,10 +75,6 @@ slides:
   order: 13.01
   variant: full
   title: Which denominator provides more plausible estimates?
-- file: m6_14_coverage_projection_methodology.md
-  order: 14.0
-  variant: full
-  title: Coverage projection methodology
 - file: m6_19_coverage_configuration_parameters.md
   order: 19.0
   variant: full
@@ -91,10 +83,6 @@ slides:
   order: 0.0
   variant: condensed
   title: 'Service utilization: detecting changes'
-- file: m6_s0b_reading_disruption_chart.md
-  order: 0.02
-  variant: condensed
-  title: Reading a disruption chart
 - file: m6_s1_utilization_overview.md
   order: 1.0
   variant: condensed
@@ -146,15 +134,23 @@ slides:
 - file: m6_s3f_five_denominator_options.md
   order: 3.06
   variant: condensed
-  title: Five denominator options for FASTR analysis
+  title: Denominator options used by FASTR
 - file: m6_s3g_how_fastr_estimates_coverage.md
   order: 3.07
   variant: condensed
   title: How FASTR estimates coverage
+- file: m6_s3ga_demographic_relationships_intro.md
+  order: 3.075
+  variant: condensed
+  title: Using demographic relationships to estimate denominators
 - file: m6_s3h_expected_relationships.md
   order: 3.08
   variant: condensed
   title: Expected relationships which help with estimating denominators
+- file: m6_s3i_denominators_by_service_type.md
+  order: 3.09
+  variant: condensed
+  title: Denominators by service type
 - file: m6_s4_coverage_interpretation.md
   order: 4.0
   variant: condensed

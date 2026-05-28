@@ -6,11 +6,14 @@ paginate: true
 
 ## How FASTR estimates coverage
 
-**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
+**1. Back-calculate at the entry point.** For each HMIS entry-point service (ANC1, deliveries, BCG, Penta1), combine the service volume with the most recent survey coverage for that service to back-calculate the target population.
+*Example: 10,000 ANC1 visits ÷ 80% ANC1 survey coverage → ~12,500 pregnancies.*
 
-**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
+**2. Extend through the demographic cascade.** Apply country-specific parameters — pregnancy loss, stillbirth, neonatal and post-neonatal mortality — to derive the other populations needed by the chain (live births, surviving infants, etc.). This produces four parallel chains, one per entry point.
 
-**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+**3. Select the best chain against UN WPP.** Compare each chain to UN World Population Prospects at national level and pick the chain whose median ratio to UN WPP is closest to 1.0. The selected chain is then applied uniformly to all indicators and geographic levels.
+
+**4. Project coverage forward.** For years between surveys, anchor to the last survey value and apply year-on-year HMIS coverage deltas (additive method).
 
 <!--
 PRESENTER NOTES:

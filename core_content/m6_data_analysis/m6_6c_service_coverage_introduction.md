@@ -10,8 +10,8 @@ The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|
-| **Part 1: Denominator calculation** | Calculate target populations using multiple methods; compare against survey benchmarks; select optimal denominator for each indicator |
-| **Part 2: Coverage estimation** | Apply denominator selections; project survey estimates forward using HMIS trends; generate final coverage estimates |
+| **Part 1: Denominator calculation** | Build four candidate denominator chains by combining HMIS volumes with survey coverage at each entry point, then extending via demographic parameters. Compare chains against UN WPP and select the chain whose median ratio to UN WPP is closest to 1.0. |
+| **Part 2: Coverage estimation** | Apply the selected chain to all indicators. Project survey values forward into post-survey years using HMIS year-on-year deltas. Generate final coverage estimates at national and subnational levels. |
 
 <!--
 PRESENTER NOTES:

@@ -6,10 +6,10 @@ paginate: true
 
 ## Indicator directionality
 
-Every indicator has a desired direction, and a trend can only be interpreted once that direction is established.
+A flagged change only becomes a finding once you know which direction you want the indicator to move.
 
-- **Service utilization indicators** (antenatal care visits, skilled birth attendance, immunization coverage) are generally expected to **increase** as systems strengthen.
-- **Morbidity and mortality indicators** (maternal deaths, severe malnutrition, disease incidence) are expected to **decrease**.
-- **Some indicators sit within a desired range** rather than moving in one direction. The C-section rate is the canonical example: too low signals under-access to emergency obstetric care; too high signals over-medicalization.
+- **Service-use indicators** (ANC visits, skilled birth attendance, immunisations) should **rise** as systems strengthen.
+- **Morbidity and mortality indicators** (maternal deaths, severe malnutrition, disease incidence) should **fall**.
+- **Range indicators** sit between two thresholds. The C-section rate is the canonical case — too low means under-access, too high means over-medicalisation.
 
-Before acting on a flagged change, confirm which category the indicator belongs to. A 15% rise in postnatal care visits is good news; a 15% rise in maternal deaths is not. The same statistical signal can carry the opposite meaning depending on the indicator.
+A 15% rise in postnatal care is good news; the same rise in maternal deaths is not. Always check the direction before reading the signal.
