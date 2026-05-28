@@ -354,33 +354,6 @@ Les enseignements clés sont ce que les résultats nous apprennent — pourquoi 
 | Grand public et groupes de défense | Infographies + affiches |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2c -->
-## Raconter une histoire avec des données
-
-La narration est un outil de communication puissant qui permet de traduire les données en récits convaincants pour guider la prise de décision.
-
-### Éléments d'un récit de données
-- **Intrigue** : Quelles sont les questions auxquelles vous allez répondre à partir des données ?
-- **Contexte** : Quel est le cadre ?
-- **Public** : Qui est votre public cible ?
-- **Problématique** : Quel est le principal problème de santé ?
-- **Implications** : Quelles sont les actions/recommandations ?
-
-Soyez créatif et n'oubliez pas d'adapter l'histoire à votre public.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_2d -->
-## Exemple : élaboration d'un récit de données
-
-**Cadre :** L'examen de la qualité des données de routine est essentiel pour permettre au ministère de la santé de prendre des mesures ciblées
-
-**Problématique :** En Somalie, la qualité des données varie d'un indicateur à l'autre : CPN4, les accouchements en établissement et le vaccin BCG présentaient moins de valeurs aberrantes que Penta 3 et OPD.
-
-**Contexte :** L'État de Hirshabelle présente une qualité de données plus faible avec plus de 3 % de valeurs aberrantes pour les consultations externes. L'État du Puntland avait 2,5 % de valeurs aberrantes pour les vaccins Penta 3.
-
-**Appel à l'action :** Une enquête plus approfondie est nécessaire pour identifier les domaines/établissements spécifiques qui nécessitent une attention particulière afin d'améliorer la qualité des données.
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_3 -->
 ## Feuille de route pour la diffusion et l'utilisation des données
 
@@ -393,36 +366,22 @@ Une feuille de route pour l'utilisation des données est un plan stratégique qu
 - Anticiper les défis potentiels et élaborer des stratégies pour les résoudre
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_3a -->
-## Plan d'action pour l'avenir de FASTR
-
-Tenez compte de ces domaines clés :
-
-**Vos cas d'utilisation** - Y a-t-il quelque chose que vous voulez changer ou ajouter ?
-
-**Finalisation du rapport** - Le rapport que vous avez créé est-il celui que vous souhaitez utiliser à l'avenir ?
-
-**Processus pour les mises à jour trimestrielles** - Qui sera responsable du téléchargement des données ? De la création des rapports ?
-
-**Renforcement des compétences** - Comment aimeriez-vous vous entraîner ? Qui d'autre a besoin de cette formation ?
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_4 -->
 ## Comprendre votre audience : Cartographie des utilisateurs
 
 Avant de créer des produits, clarifiez qui les utilisera et comment.
 
-**Questions clés pour la cartographie des utilisateurs :**
+**Cinq questions pour la cartographie des utilisateurs :**
 
-1. **Qui est mon utilisateur final ?** (Chef de bureau de santé régional, décideur politique national, responsable de programme ?)
+1. **Qui est mon utilisateur final ?** (Chef d'un bureau régional de la santé, autorité sanitaire d'un État, décideur politique national, responsable de programme ?)
 
-2. **Que doit-il accomplir ?** (Prendre une décision, discuter lors d'une réunion, allouer des ressources ?)
+2. **Que doit accomplir l'utilisateur final avec le rapport ?** (Prendre une décision, discuter en réunion, allouer des ressources, informer un ministre ?)
 
-3. **Quelles informations l'intéressent le plus ?** (Tendances de haut niveau, informations détaillées, comparaisons entre districts ?)
+3. **Quelles sont les informations qui l'intéressent le plus ?** (Tendances de haut niveau, analyses détaillées, comparaisons entre États / régions / districts ?)
 
-4. **Quel format fonctionne le mieux pour lui ?** (Bref diaporama, rapport détaillé, infographie ?)
+4. **Que voulez-vous qu'il fasse avec les informations ?** (Se faire le champion d'une action, intégrer les conclusions dans des discussions futures, ou simplement être informé ?)
 
-5. **De combien de temps dispose-t-il ?** (Briefing de 2 minutes, présentation de 15 minutes, atelier approfondi ?)
+5. **Comment souhaite-t-il recevoir les informations ?** (Diaporama, note de synthèse, messages clés, graphiques, cartes, tableaux de bord ?)
 
 Différentes audiences ont besoin de différents produits à partir des mêmes données.
 <!-- /SLIDE -->
@@ -512,10 +471,65 @@ Les données n'ont de valeur que si elles conduisent à des décisions et des ac
 *Présentez vos résultats liés aux actions à un pays pair pour obtenir un retour.*
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_6b -->
+## Les trois sphères d'influence
+
+Le cadre des trois sphères d'influence aide à orienter l'attention vers les actions que nous pouvons tirer de nos données.
+
+<div class="columns">
+<div>
+
+**Sphère de contrôle** — domaines dans lesquels vous avez un contrôle total sur vos actions et vos décisions.
+- Suivi des perdues de vue, revue des registres, coordination des activités de proximité
+- Dans la capacité immédiate de votre équipe
+
+**Sphère d'influence** — actions et décisions qui ne sont pas totalement sous votre contrôle, mais où vous avez le pouvoir de changer les résultats.
+- Mobiliser les partenaires, sécuriser la logistique, plaider pour des changements de politique
+- Vous pouvez influencer sans décider seul
+
+**Sphère de préoccupation** — activités sur lesquelles vous n'avez aucun contrôle.
+- Environnement politique national, financement externe, dynamique de la population
+- Souvent des actions menées par d'autres, ou les conséquences en cascade à travers le système
+- Contexte important, mais hors de votre portée directe
+
+</div>
+<div>
+
+![Les trois sphères d'influence](../../resources/diagrams_fr/three_spheres_of_influence.svg)
+
+</div>
+</div>
+
+*Lorsque vous planifiez des actions à partir de vos résultats FASTR, concentrez-vous d'abord sur ce que vous contrôlez, puis sur ce que vous pouvez influencer.*
+<!-- /SLIDE -->
+
+<!-- SLIDE:m7_6c -->
+## Six questions pour transformer les résultats en actions
+
+Passez de « voici ce que montrent les données » à « voici ce que nous allons en faire ».
+
+1. **Quel est le problème que vous avez identifié à partir de vos résultats ?**
+   *Par exemple : faible couverture CPN1, taux élevé d'anémie lors de la première CPN, faible taux de mesure de l'hémoglobine.*
+
+2. **Comment comprenez-vous les facteurs contextuels à l'origine de ces résultats ?**
+   *Par exemple : les tests d'hémoglobine sont régulièrement en rupture de stock ; les femmes enceintes ne reviennent pas pour les contrôles.*
+
+3. **Quelles décisions peut-on prendre à partir de ces résultats ?**
+   *Par exemple : intensifier l'éducation communautaire sur l'importance des contrôles d'hémoglobine pendant la grossesse ; organiser des formations sur le calendrier des contrôles.*
+
+4. **Quelles contraintes pourraient entraver vos efforts ?**
+   *Par exemple : faible disponibilité des hémoglobinomètres et des registres CPN aux niveaux inférieurs ; construire la confiance avec les femmes enceintes de la communauté.*
+
+5. **Que pouvez-vous régler vous-même, ou via votre service, sans approbations externes ?**
+   *Par exemple : effectuer des visites de supervision dans les établissements de niveau inférieur pour vérifier les mesures d'hémoglobine.*
+
+6. **Quand pouvez-vous entreprendre cette action ? Qui est responsable ? Comment mesurerez-vous les résultats ?**
+<!-- /SLIDE -->
+
 <!-- SLIDE:m7_7 -->
 ## Construire une feuille de route pour une utilisation durable
 
-Passez d'une analyse ponctuelle à une **utilisation routinière des données**.
+Relier des résultats individuels à des actions, c'est la première étape. Une feuille de route transforme ce réflexe en habitude — passer d'une analyse ponctuelle à une **utilisation routinière des données**.
 
 **Composantes clés d'une feuille de route de durabilité :**
 

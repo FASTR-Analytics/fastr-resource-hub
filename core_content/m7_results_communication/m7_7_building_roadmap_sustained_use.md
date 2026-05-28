@@ -6,7 +6,7 @@ paginate: true
 
 ## Building a roadmap for sustained use
 
-Move from one-off analysis to **routine data use**.
+Linking individual results to actions is the first step. A roadmap turns that into a habit — moving from one-off analysis to **routine data use**.
 
 **Key components of a sustainability roadmap:**
 

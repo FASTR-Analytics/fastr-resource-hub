@@ -355,33 +355,6 @@ Key takeaways are what the results are telling us — why the results matter, th
 | General public and advocacy groups | Infographics + posters |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2c -->
-## Storytelling with data
-
-Storytelling is a powerful communication tool to help translate data into compelling narratives to guide decision-making.
-
-### Elements of a data story
-- **Plot**: What questions will you answer from the data?
-- **Setting**: What is the context?
-- **Audience**: Who is your target audience?
-- **Issue**: What is the main health issue?
-- **Implication**: What are the actions/recommendations?
-
-Be creative and remember to tailor the story to your audience.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m7_2d -->
-## Example: developing a data story
-
-**Setting:** Examining routine data quality is critical to inform targeted action by the Ministry of Health
-
-**Issue:** In Somalia, data quality varies across indicators: ANC4, institutional deliveries and BCG vaccine had fewer outliers, compared to Penta 3 and OPD.
-
-**Context:** Hirshabelle State exhibits poorer data quality with more than 3% outliers for outpatient visits. Puntland State had 2.5% outliers for Penta 3 vaccines.
-
-**Call to action:** Further investigation is needed to identify specific areas/facilities that need attention to improve data quality.
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_3 -->
 ## Dissemination and data use roadmap
 
@@ -394,36 +367,22 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 - Anticipates potential challenges and develops strategies to solve for them
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_3a -->
-## Action plan for FASTR moving forward
-
-Consider these key areas:
-
-**Your use cases** - Is there anything you want to change or add?
-
-**Report finalization** - Is the report you made the one you want to use moving forward?
-
-**Process for quarterly updates** - Who will be responsible for uploading data? Creating reports?
-
-**Competency building** - How would you like to practice? Who else needs this training?
-<!-- /SLIDE -->
-
 <!-- SLIDE:m7_4 -->
 ## Understanding your audience: User mapping
 
 Before creating outputs, clarify who will use them and how.
 
-**Key questions for user mapping:**
+**Five questions for user mapping:**
 
-1. **Who is my end user?** (Regional health bureau head, national policy maker, program manager?)
+1. **Who is my end user?** (Regional health bureau head, state health authority, national policy maker, program manager?)
 
-2. **What do they need to accomplish?** (Make a decision, discuss in a meeting, allocate resources?)
+2. **What does this end user need to accomplish with the report?** (Make a decision, discuss in a meeting, allocate resources, brief a minister?)
 
-3. **What information are they most interested in?** (High-level trends, detailed insights, comparisons across districts?)
+3. **What information are they most interested in?** (High-level trends, detailed insights, comparisons across states/regions/districts?)
 
-4. **What format works best for them?** (Brief slide deck, detailed report, infographic?)
+4. **What do you want them to do with the information?** (Champion an action, integrate findings into future discussions, just be informed?)
 
-5. **How much time do they have?** (2-minute brief, 15-minute presentation, deep-dive workshop?)
+5. **How do they want to receive the information?** (Slide deck, briefing note, key messages, charts, maps, dashboards?)
 
 Different audiences need different outputs from the same data.
 <!-- /SLIDE -->
@@ -521,17 +480,18 @@ The Three Spheres of Influence framework helps direct attention to the actions w
 <div class="columns">
 <div>
 
-**Sphere of control** — Actions you can take directly
-- Defaulter tracing, register reviews, outreach coordination
-- These are within your team's immediate capacity
+**Sphere of control** — areas where you have full authority over your actions and decisions.
+- Defaulter tracing, register review, outreach coordination
+- Within your team's immediate capacity to deliver
 
-**Sphere of influence** — Actions requiring collaboration
+**Sphere of influence** — actions and decisions that aren't fully under your control, but where you can still change the outcome.
 - Engaging partners, securing logistics, advocating for policy changes
-- You can influence but not unilaterally decide
+- You can influence but not decide alone
 
-**Sphere of concern** — Broader systemic factors
+**Sphere of concern** — activities you have no control over.
 - National policy environment, external financing, population dynamics
-- Important context, but outside your direct control
+- Often actions taken by others, or cascading consequences across the wider system
+- Important context, but outside your direct reach
 
 </div>
 <div>
@@ -544,10 +504,33 @@ The Three Spheres of Influence framework helps direct attention to the actions w
 *When planning actions from your FASTR findings, focus first on what you can control, then on what you can influence.*
 <!-- /SLIDE -->
 
+<!-- SLIDE:m7_6c -->
+## Six questions to turn results into actions
+
+Move from "here's what the data shows" to "here's what we'll do about it".
+
+1. **What is the problem you identified from your findings?**
+   *e.g., low ANC1 coverage, high anaemia rates at first ANC, low haemoglobin testing rates.*
+
+2. **What contextual factors are driving these results?**
+   *e.g., haemoglobin tests are consistently out of stock; pregnant women don't return for follow-up checks.*
+
+3. **What decisions can be taken based on these findings?**
+   *e.g., intensify community education on the importance of haemoglobin checks; run trainings on the testing schedule.*
+
+4. **What constraints might block your efforts?**
+   *e.g., low availability of haemoglobinometers and ANC registers at lower-level facilities; trust-building with pregnant women in the community.*
+
+5. **What can you fix yourself, or through your service, without external approvals?**
+   *e.g., conduct supervisory visits to lower-level facilities to provide haemoglobin verification.*
+
+6. **When can you take this action? Who is responsible? How will you measure success?**
+<!-- /SLIDE -->
+
 <!-- SLIDE:m7_7 -->
 ## Building a roadmap for sustained use
 
-Move from one-off analysis to **routine data use**.
+Linking individual results to actions is the first step. A roadmap turns that into a habit — moving from one-off analysis to **routine data use**.
 
 **Key components of a sustainability roadmap:**
 

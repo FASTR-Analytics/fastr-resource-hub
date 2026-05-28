@@ -11,17 +11,18 @@ The Three Spheres of Influence framework helps direct attention to the actions w
 <div class="columns">
 <div>
 
-**Sphere of control** — Actions you can take directly
-- Defaulter tracing, register reviews, outreach coordination
-- These are within your team's immediate capacity
+**Sphere of control** — areas where you have full authority over your actions and decisions.
+- Defaulter tracing, register review, outreach coordination
+- Within your team's immediate capacity to deliver
 
-**Sphere of influence** — Actions requiring collaboration
+**Sphere of influence** — actions and decisions that aren't fully under your control, but where you can still change the outcome.
 - Engaging partners, securing logistics, advocating for policy changes
-- You can influence but not unilaterally decide
+- You can influence but not decide alone
 
-**Sphere of concern** — Broader systemic factors
+**Sphere of concern** — activities you have no control over.
 - National policy environment, external financing, population dynamics
-- Important context, but outside your direct control
+- Often actions taken by others, or cascading consequences across the wider system
+- Important context, but outside your direct reach
 
 </div>
 <div>

@@ -27,22 +27,10 @@ slides:
   order: 2.02
   variant: full
   title: Choosing the right report format
-- file: m7_2c_data_visualization_communication_continued.md
-  order: 2.03
-  variant: full
-  title: Storytelling with data
-- file: m7_2d_data_visualization_communication_continued.md
-  order: 2.04
-  variant: full
-  title: 'Example: developing a data story'
 - file: m7_3_using_data_for_decision_making.md
   order: 3.0
   variant: full
   title: Dissemination and data use roadmap
-- file: m7_3a_using_data_for_decision_making_continued.md
-  order: 3.01
-  variant: full
-  title: Action plan for FASTR moving forward
 - file: m7_4_understanding_audience_user_mapping.md
   order: 4.0
   variant: full
@@ -71,6 +59,10 @@ slides:
   order: 6.02
   variant: full
   title: Three spheres of influence
+- file: m7_6c_linking_results_to_actions_continued.md
+  order: 6.03
+  variant: full
+  title: Six questions to turn results into actions
 - file: m7_7_building_roadmap_sustained_use.md
   order: 7.0
   variant: full

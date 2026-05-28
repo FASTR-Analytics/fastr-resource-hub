@@ -6,7 +6,7 @@ paginate: true
 
 ## Construire une feuille de route pour une utilisation durable
 
-Passez d'une analyse ponctuelle à une **utilisation routinière des données**.
+Relier des résultats individuels à des actions, c'est la première étape. Une feuille de route transforme ce réflexe en habitude — passer d'une analyse ponctuelle à une **utilisation routinière des données**.
 
 **Composantes clés d'une feuille de route de durabilité :**
 
