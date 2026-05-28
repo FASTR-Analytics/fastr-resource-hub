@@ -103,10 +103,6 @@ slides:
   order: 1.005
   variant: condensed
   title: Indicator directionality
-- file: m6_s2_disruption_interpretation.md
-  order: 2.0
-  variant: condensed
-  title: Detecting service disruptions
 - file: m6_s2b_disruption_interpretation.md
   order: 2.02
   variant: condensed
