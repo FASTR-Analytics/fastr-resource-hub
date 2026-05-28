@@ -164,7 +164,7 @@ Cette section couvrira :
 <!-- SLIDE:m2_0 -->
 ## À main levée...
 
-![w:120](../resources/icons/raise-hand.png)
+![w:120](../resources/icons/raise-hand.svg)
 
 Extrayez-vous régulièrement des données du DHIS2 ?
 

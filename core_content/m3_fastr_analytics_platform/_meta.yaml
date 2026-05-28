@@ -1,8 +1,4 @@
 slides:
-- file: m3_0_learning_objectives.md
-  order: 0.0
-  variant: full
-  title: What you'll learn
 - file: m3_1_overview_of_platform.md
   order: 1.0
   variant: full
@@ -23,15 +19,3 @@ slides:
   order: 2.03
   variant: full
   title: Projects Within an Instance
-- file: m3_2e_configuring_platform_intro.md
-  order: 2.05
-  variant: full
-  title: Configuring the analysis platform
-- file: m3_3_next_steps.md
-  order: 3.0
-  variant: full
-  title: Getting started with the platform
-- file: m3_5_roadmap_2026.md
-  order: 5.0
-  variant: full
-  title: Platform roadmap

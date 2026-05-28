@@ -260,62 +260,7 @@ Un pays peut avoir besoin d'un seul projet ou de plusieurs — par exemple, des 
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m3_2e -->
-## Configuration de la plateforme d'analyse
-
-La configuration est effectuée par un **administrateur d'instance** — tous les utilisateurs n'ont pas besoin de faire cette étape.
-
-Pendant l'atelier, un participant sera désigné avec les droits d'administrateur pour parcourir les étapes de configuration avec l'équipe de facilitation.
-
-La configuration comprend :
-
-- **Zones administratives** — les niveaux géographiques de votre système de santé (régions, districts)
-- **Structure des établissements** — la liste des établissements de santé et leur organisation
-- **Définitions des indicateurs** — les métriques de santé que vous souhaitez suivre (par ex., visites CPN, vaccinations)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_3 -->
-## Prise en main de la plateforme
-
-Maintenant que vous comprenez comment la plateforme est organisée, vous allez pratiquer dans l'activité **Prise en main**.
-
-Vous allez :
-
-- **Vous connecter** à l'instance FASTR de votre pays
-- **Naviguer** dans l'interface — projets, modules, et visualisations
-- **Explorer** un exemple de projet pour voir comment les données, analyses et rapports s'articulent
-
-*Votre facilitateur vous guidera à chaque étape.*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m3_5 -->
-## Feuille de route de la plateforme
-
-![Feuille de route 2025-2028 h:450](../resources/diagrams_fr/platform_roadmap_2026.svg)
-
-<!--
-PRESENTER NOTES:
-- La plateforme évolue en fonction des retours réels des utilisateurs
-- Nous ne construisons pas en isolation — les équipes pays façonnent la feuille de route
-- L'élargissement des sources de données signifie des analyses plus riches sans changer les flux de travail
-- L'objectif à long terme : les pays peuvent mener leurs propres analyses de manière autonome
--->
-<!-- /SLIDE -->
-
 ---
 
 **Dernière mise à jour** : 06-05-2026
 **Contact** : <fastr@worldbank.org>
-
-<!-- SLIDE:m3_0 -->
-## Ce que vous allez apprendre
-
-Dans ce module, vous allez apprendre :
-
-- Ce qu'est la **plateforme analytique FASTR** et ce qu'elle peut faire
-- Comment la plateforme est organisée — **instances**, **projets**, et **rôles utilisateurs**
-- Qui fait quoi — la différence entre **administrateurs**, **éditeurs**, et **visualisateurs**
-- Comment la plateforme est configurée pour votre pays
-
-*Après cette vue d'ensemble, vous pratiquerez dans l'activité Prise en main.*
-<!-- /SLIDE -->
