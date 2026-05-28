@@ -79,6 +79,10 @@ slides:
   order: 19.0
   variant: full
   title: 'Coverage module: Configuration parameters'
+- file: m6_s00_module_overview.md
+  order: -0.01
+  variant: condensed
+  title: 'Module 6 — Data analysis: what we''ll cover'
 - file: m6_s0_utilization_detecting_changes.md
   order: 0.0
   variant: condensed
