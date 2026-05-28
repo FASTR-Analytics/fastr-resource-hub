@@ -883,48 +883,112 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 -->
 
 <!-- SLIDE:m5_1 -->
-## Justification de l'ajustement de la qualité des données
+## De la détection à la correction
 
-Les données de routine du SIGS présentent deux limites communes qui peuvent fausser les résultats analytiques :
-- **Valeurs aberrantes :** Les valeurs extrêmes créent des pics artificiels dans les volumes de services
-- **Rapports incomplets :** Les données manquantes créent des baisses artificielles qui ne reflètent pas la prestation réelle de services
+Le module 1 a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module 2 prend le relais.
 
-FASTR répond à ces limitations en remplaçant les valeurs problématiques par des estimations dérivées des modèles de rapports historiques de chaque établissement.
+FASTR remplace les valeurs signalées par des estimations raisonnables tirées de l'historique de chaque établissement, pour que les analyses d'utilisation des services et de couverture en aval travaillent à partir de données plus propres.
 
-**Scénarios d'ajustement :** Pour favoriser la transparence et l'analyse de sensibilité, FASTR produit quatre ensembles de données parallèles :
-- **Non ajusté :** Valeurs déclarées originales
-- **Valeurs aberrantes ajustées :** Valeurs extrêmes remplacées
-- **Complétude ajustée :** Valeurs manquantes imputées
-- **Les deux ajustés :** Toutes les corrections appliquées
-<!-- /SLIDE -->
+Pour assurer la transparence, FASTR produit **quatre jeux de données parallèles** :
 
-<!-- SLIDE:m5_2 -->
-## Méthodologie d'ajustement des valeurs aberrantes
+- **Non ajusté** — valeurs déclarées initiales
+- **Valeurs aberrantes ajustées** — valeurs extrêmes remplacées
+- **Complétude ajustée** — valeurs manquantes imputées
+- **Les deux ajustements** — toutes les corrections appliquées
 
-Les valeurs aberrantes sont remplacées par des données historiques spécifiques à l'établissement. L'ajustement suit une approche hiérarchique :
-
-| Priorité | Méthode | Application |
-|----------|--------|-------------|
-| 1 | Moyenne centrée sur 6 mois | 3 mois avant + 3 mois après la valeur aberrante |
-| 2 | Moyenne sur 6 mois vers l'avant | Lorsque les données précédentes sont insuffisantes (par exemple, début de série) |
-| 3 | Moyenne sur 6 mois vers l'arrière | Lorsque les données suivantes sont insuffisantes (par exemple, fin de série) |
-| 4 | Même mois, année précédente | Lorsque les moyennes glissantes ne sont pas disponibles ; utile pour les indicateurs saisonniers |
-| 5 | Moyenne historique de l'établissement | Moyenne de toutes les valeurs valides pour cet indicateur dans cet établissement |
+Les diapositives suivantes présentent chaque ajustement et sa sortie.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
-## Méthodologie de l'ajustement de la complétude
+## Pourquoi ajuster les valeurs aberrantes ?
 
-Pour les mois identifiés comme incomplets ou manquants, les valeurs sont imputées en utilisant la même approche de moyenne mobile sur 6 mois que celle appliquée à l'ajustement des valeurs aberrantes.
+![Pourquoi ajuster les valeurs aberrantes — avant et après](../resources/diagrams_fr/outlier_impact.svg)
 
-| Priorité | Méthode | Application |
-|----------|--------|-------------|
-| 1 | Moyenne centrée sur 6 mois | Lorsque des données suffisantes existent avant et après la lacune |
-| 2 | Moyenne sur 6 mois vers l'avant | Pour les lacunes au début de la série temporelle |
-| 3 | Moyenne sur 6 mois vers l'arrière | Pour les lacunes à la fin de la série temporelle |
-| 4 | Moyenne historique de l'établissement | Moyenne de toutes les valeurs valides pour cet indicateur dans cet établissement |
+<!--
+PRESENTER NOTES:
+- Exemple visuel illustrant l'impact de l'ajustement des valeurs aberrantes.
+- Le panneau de gauche montre les données brutes avec un pic dû à une erreur de saisie.
+- Le panneau de droite montre les mêmes données après ajustement par moyennes mobiles.
+- La tendance sous-jacente est préservée tandis que le pic artificiel est retiré.
+- Les estimations d'utilisation des services et de couverture en aval gagnent en fiabilité.
+-->
+<!-- /SLIDE -->
 
-Cette approche permet d'éviter que des lacunes temporaires dans les rapports ne créent des baisses artificielles dans les volumes de services.
+<!-- SLIDE:m5_3a -->
+## Comment fonctionne l'ajustement des valeurs aberrantes
+
+Pour chaque valeur signalée, FASTR calcule une **moyenne mobile** à partir des mois voisins — une fenêtre de six mois qui capte le niveau de rapportage habituel de l'établissement sans être faussée par la valeur aberrante elle-même. La valeur aberrante est ensuite remplacée par cette moyenne.
+
+Lorsqu'une fenêtre centrée de six mois n'est pas possible (par exemple, la valeur se situe près du début ou de la fin de la série), FASTR recourt à une hiérarchie d'alternatives :
+
+| Priorité | Méthode | Quand l'appliquer |
+|---|---|---|
+| 1 | Moyenne centrée sur 6 mois | 3 mois avant + 3 mois après la valeur aberrante |
+| 2 | Moyenne sur 6 mois vers l'avant | Données précédentes insuffisantes (valeur près du début de la série) |
+| 3 | Moyenne sur 6 mois vers l'arrière | Données suivantes insuffisantes (valeur près de la fin de la série) |
+| 4 | Même mois, année précédente | Quand les moyennes mobiles ne sont pas possibles ; utile pour les indicateurs fortement saisonniers |
+| 5 | Moyenne historique de l'établissement | Solution de repli finale quand aucune donnée comparable récente n'est disponible |
+
+Le remplacement reste toujours ancré dans l'historique propre à l'établissement — jamais importé d'un autre établissement ou d'une moyenne nationale.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_3b -->
+<!-- _class: output -->
+## Sortie de l'ajustement des valeurs aberrantes
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Ajustement des valeurs aberrantes](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant l'évolution du volume de services après remplacement des valeurs aberrantes par des moyennes mobiles.
+
+**Formule :** % de variation = (ajusté − initial) / initial × 100
+
+**Interprétation :** Les valeurs sont généralement négatives — retirer les valeurs aberrantes réduit le volume. De larges ajustements justifient une enquête sur leur origine.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_2 -->
+## Comment fonctionne l'ajustement de la complétude
+
+Un établissement qui omet un mois de rapportage apparaît, dans les données brutes, comme une chute soudaine à zéro — une baisse de services qui n'a en réalité pas eu lieu. FASTR comble ces lacunes par des estimations issues d'un cadre de moyenne mobile sur six mois, ancré dans l'historique propre à l'établissement.
+
+| Priorité | Méthode | Quand l'appliquer |
+|---|---|---|
+| 1 | Moyenne centrée sur 6 mois | Données suffisantes avant et après la lacune |
+| 2 | Moyenne sur 6 mois vers l'avant | Lacune située au début de la série |
+| 3 | Moyenne sur 6 mois vers l'arrière | Lacune située à la fin de la série |
+| 4 | Moyenne historique de l'établissement | Solution de repli quand aucune fenêtre mobile n'est possible |
+
+Résultat : les lacunes temporaires de rapportage ne se traduisent plus par des baisses artificielles du volume de services mesuré.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m5_2a -->
+<!-- _class: output -->
+## Sortie de l'ajustement de la complétude
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Ajustement de la complétude](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant l'évolution du volume de services après imputation des données manquantes par des moyennes mobiles.
+
+**Formule :** % de variation = (ajusté − initial) / initial × 100
+
+**Interprétation :** Les valeurs sont généralement positives — l'imputation ajoute du volume. De larges ajustements signalent des zones où la complétude doit être améliorée à la source.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 
@@ -933,23 +997,27 @@ Cette approche permet d'éviter que des lacunes temporaires dans les rapports ne
 ═══════════════════════════════════════════════════════════════════════════ -->
 
 <!-- SLIDE:m5_s1 -->
-## Ajustement de la qualité des données
+## Comment fonctionne l'ajustement
 
-**Pourquoi ajuster ?** Les valeurs aberrantes et les lacunes de rapportage identifiées dans l'évaluation de la qualité des données fausseront les estimations d'utilisation des services et de couverture si elles ne sont pas corrigées. L'objectif est de remplacer les valeurs problématiques par des estimations raisonnables basées sur les modèles historiques propres à chaque établissement.
+Les valeurs aberrantes et les valeurs manquantes sont remplacées par des **moyennes mobiles sur 6 mois** tirées de l'historique propre à chaque établissement. La même approche hiérarchique s'applique aux deux ajustements :
 
-**Comment ?** Les valeurs aberrantes et les valeurs manquantes sont remplacées à l'aide de moyennes mobiles sur 6 mois calculées à partir des données historiques de l'établissement.
+| Priorité | Méthode | Quand l'appliquer |
+|---|---|---|
+| 1 | Moyenne centrée sur 6 mois | Données suffisantes avant et après la valeur |
+| 2 | Moyenne sur 6 mois vers l'avant | La valeur se situe en début de série |
+| 3 | Moyenne sur 6 mois vers l'arrière | La valeur se situe en fin de série |
+| 4 | Moyenne historique de l'établissement | Solution de repli si les moyennes mobiles ne sont pas possibles |
 
-**Quatre ensembles de données parallèles :** FASTR produit des versions non ajustées, ajustées pour les valeurs aberrantes uniquement, ajustées pour la complétude uniquement et ajustées pour les deux. Cela permet une analyse de sensibilité - comparer les résultats entre les scénarios pour évaluer dans quelle mesure les conclusions dépendent des choix d'ajustement.
+Le remplacement repose sur le profil propre à chaque établissement, donc chaque ajustement reste ancré dans ce que cet établissement déclare habituellement.
+<!-- /SLIDE -->
 
-**Exclus de l'ajustement :** Les indicateurs de mortalité (événements discrets qui ne doivent pas être lissés) et les indicateurs de faible volume (<100 événements/mois, où l'ajustement ajoute du bruit).
+<!-- SLIDE:m5_s0a -->
+## Indicateurs exclus de l'ajustement
 
-<!--
-PRESENTER NOTES:
-- Vue d'ensemble condensée de la justification et des méthodes d'ajustement
-- Message clé : l'ajustement permet l'analyse malgré les limitations de qualité des données
-- Quatre scénarios soutiennent l'analyse de sensibilité - important pour la transparence
-- Tout ne doit pas être ajusté - mortalité et faible volume exclus
--->
+Deux catégories d'indicateurs sont exclues du processus d'ajustement :
+
+- **Indicateurs de mortalité** (décès maternels, néonataux, infanto-juvéniles) — événements discrets pour lesquels lissage et imputation ne sont pas appropriés.
+- **Indicateurs à faible volume** — indicateurs qui ne dépassent jamais 100 événements rapportés par mois. L'ajustement ajouterait du bruit à des données déjà clairsemées.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_s2 -->
@@ -974,7 +1042,7 @@ PRESENTER NOTES:
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m5_1b -->
+<!-- SLIDE:m5_1a -->
 ## Indicateurs exclus de l'ajustement
 
 Certains indicateurs sont exclus du processus d'ajustement :
@@ -993,29 +1061,26 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_s0 -->
-## Correction des données : comment FASTR répare les problèmes
+## De la détection à la correction
 
-Plutôt que de jeter les données problématiques, FASTR les **remplace par des estimations raisonnables** — comme remplacer une lecture de compteur défaillante par la moyenne des mois voisins.
+Le module 1 a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module 2 prend le relais.
 
-**Valeurs extrêmes →** Remplacées par la moyenne des 6 mois autour
-**Mois manquants →** Comblés avec la tendance historique de l'établissement
+FASTR remplace les valeurs signalées par des estimations raisonnables tirées de l'historique de chaque établissement, pour que les analyses d'utilisation des services et de couverture en aval travaillent à partir de données plus propres.
 
-FASTR produit **4 versions** des données pour comparaison :
+Pour assurer la transparence, FASTR produit **quatre jeux de données parallèles** :
 
-| Version | Ce qu'elle contient |
-|---------|-------------------|
-| Données brutes | Aucune modification |
-| Aberrantes corrigées | Pics extrêmes lissés |
-| Complétude ajustée | Mois manquants comblés |
-| Les deux ajustements | Aberrantes lissées + mois manquants comblés |
+- **Non ajusté** — valeurs déclarées initiales
+- **Valeurs aberrantes ajustées** — valeurs extrêmes remplacées
+- **Complétude ajustée** — valeurs manquantes imputées
+- **Les deux ajustements** — toutes les corrections appliquées
 
-Vous pouvez comparer les résultats entre les 4 versions. Si vos conclusions changent, c'est un signal que la qualité des données mérite attention.
+Les diapositives suivantes présentent chaque ajustement et sa sortie.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_s1a -->
 ## Pourquoi ajuster les valeurs aberrantes ?
 
-![Pourquoi ajuster les valeurs aberrantes — avant et après](../resources/diagrams_fr/why_adjust_outliers.svg)
+![Pourquoi ajuster les valeurs aberrantes — avant et après](../resources/diagrams_fr/outlier_impact.svg)
 
 <!--
 PRESENTER NOTES:

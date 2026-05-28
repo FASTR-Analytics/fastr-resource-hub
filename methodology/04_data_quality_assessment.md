@@ -1310,33 +1310,24 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 -->
 
 <!-- SLIDE:m4_0 -->
-## How FASTR analyzes your data
+## FASTR analytical pipeline
 
-FASTR runs through **5 platform modules in order**. Each one sets the stage for the next:
+![Analytical pipeline w:1000](../resources/diagrams/analytical_pipeline.svg)
 
-| | Module | What it does | Why |
-|---|--------|-------------|-----|
-| 1️⃣ | **Check quality** (M1) | Spots data entry errors, missing reports, and inconsistencies | You can't analyze unreliable data |
-| 2️⃣ | **Fix problems** (M2) | Replaces extreme values and fills in missing months | Clean data for reliable results |
-| 3️⃣ | **Analyze services** (M3) | Compares observed volumes to what was expected to detect disruptions | Know where and when services changed |
-| 4️⃣ | **Build the denominator** (M5) | Estimates the target population for each indicator | Coverage needs a denominator |
-| 5️⃣ | **Estimate coverage** (M6) | Calculates % of population covered from reported data | Move from raw numbers to indicators that guide action |
+FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyse** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
 
-You will work with each of these modules on the platform during this workshop.
+We'll look at how each step works in turn.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
-## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
+## FASTR approach to data quality
 
-- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**. Using data and providing feedback is itself the first step toward improving data quality.
 
-- We use only high-volume indicators, because the most-used services provide more stable estimates
-
-- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
-
-- We believe that using the data and providing feedback is the first step to improving the data
-
-We will discuss each of these areas over the next sessions.
+- We assess and adjust data quality at the facility level, drawing on HMIS records via API access.
+- We focus on high-volume indicators, because the most-used services produce more stable estimates.
+- We emphasize variation across time and space rather than precise point estimates.
+- We interpret results collaboratively with in-country decision-makers, so findings translate into action.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1b -->
@@ -1355,53 +1346,17 @@ We will discuss each of these areas over the next sessions.
 - Suboptimal resource allocation
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1c -->
-## Assessing and adjusting for data quality
-
-Quality assessments identify the highest priority issues and necessary analytical adjustments, so quality issues do not become a barrier to data analysis and use.
-
-&nbsp;
-
-**Objective 1: Enable analytical adjustment**
-
-Systematic data quality assessment supports the application of targeted adjustments, enhancing the utility of HMIS data for evidence-based decision-making.
-
-&nbsp;
-
-**Objective 2: Monitor data quality trends**
-
-Data quality assessment enables ongoing monitoring to:
-- Inform indicator selection based on quality profiles across the HMIS
-- Guide targeted data quality interventions and supportive supervision in areas with weaker data quality
-- Evaluate the effectiveness of data quality improvement initiatives over time
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_1d -->
-## Measures of data quality
-
-![Measures of data quality h:480](../resources/diagrams/measures_data_quality.svg)
-
-<!--
-PRESENTER NOTES:
-- Indicator completeness – completeness
-- Outliers – consistency
-- Consistency between related indicators – consistency
-- Accuracy – requires additional data collection
-- Timeliness – important for routine data quality improvements but not relevant for FASTR analysis at a single point in time
--->
-<!-- /SLIDE -->
-
 <!-- SLIDE:m4_1a -->
 <!-- _class: dense-table -->
 
-## Measures of data quality - detailed
+## Measures of data quality — detailed
 
 | Data quality domain | What does it measure? | How is it assessed? |
-|---------------------|----------------------|---------------------|
-| **Completeness** | Are all data present? Is there sufficient information available to make decisions about the health of the population and to target resources to improve health-system coverage, efficiency and quality? | • Assessed by measuring whether all units that are supposed to report actually do (reporting completeness)<br>• Assessed by measuring the completeness of indicator data (no missing values); this is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form (indicator completeness) |
-| **Timeliness** | Are data regularly submitted on time? | • Assessed by measuring whether the units that submitted reports did so before a set deadline (timeliness) |
-| **Consistency** | Are data plausible in view of what has been previously reported? | • Trends are evaluated to determine whether reported values are extreme relative to other values reported during the year or across several years (presence of outliers)<br>• Assess trends in program indicators to determine whether reported values are extreme in relation to other values that are reported during the year or over several years (consistency over time)<br>• Assess program indicators which have a predictable relationship to determine whether the expected relationship exists between those 2 indicators (consistency between related indicators)<br>• Assess the level of agreement between two sources of data measuring the same health indicator (external comparison with other data sources)<br>• Determine the adequacy of the population data used in evaluating the performance of health indicators (consistency of population data) |
-| **Accuracy** | Do data faithfully reflect the actual level of service delivery conducted in the health facility? | • Assess the accuracy for selected indicators through the review of source documents in health facilities and comparison to monthly reports and HMIS values (data verification factor) |
+|---|---|---|
+| **Completeness** | Are all expected data present? | • Reporting completeness — were the monthly forms submitted by all expected facilities?<br>• Indicator completeness — are the specific data elements present, not just the form? |
+| **Timeliness** | Are data submitted on time? | • Whether units submitted their reports before a set deadline. |
+| **Consistency** | Are reported values plausible? | • Outliers — values extreme relative to others in the series<br>• Consistency over time — trends in the same indicator across periods<br>• Consistency between related indicators (e.g. ANC1 ≥ ANC4)<br>• Agreement with other data sources<br>• Consistency of underlying population data |
+| **Accuracy** | Do data reflect actual service delivery? | • Review of facility source documents and comparison against HMIS values (data verification factor). |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1e -->
@@ -1486,6 +1441,36 @@ PRESENTER NOTES:
 - For countries where the DHIS2 system does not store 0's, indicator completeness may be underestimated if there are many low-volume facilities for a given indicator
 <!-- /SLIDE -->
 
+<!-- SLIDE:m4_2b -->
+<!-- _class: output -->
+## Indicator completeness output
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Completeness output](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap showing completeness by indicator and region over time.
+
+**Formula:** Completeness % = (facilities reporting / facilities expected) × 100
+
+**Interpretation:** Look for systematic gaps by region or indicator, declining trends, or seasonal patterns. Low completeness suggests reporting barriers needing attention.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Walk through the heatmap: rows are indicators, columns are time periods
+- Color intensity shows completeness level — darker = more complete
+- Point out any patterns: seasonal dips? Specific indicators with issues?
+- Emphasize: we're looking at indicator completeness, not form submission
+-->
+<!-- /SLIDE -->
+
 <!-- SLIDE:m4_3 -->
 ## Outliers
 
@@ -1504,12 +1489,6 @@ PRESENTER NOTES:
 - An outlier is defined as: A value greater than 10 times the median absolute deviation (MAD) from the monthly median value for the indicator in each time period, OR a value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 - AND for which: The volume is greater than or equal to the median, the volume is not missing, and the volume is greater than 100
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_3b -->
-## Why adjust for outliers?
-
-![Outlier Impact](../resources/diagrams/outlier_impact.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3c -->
@@ -1551,16 +1530,33 @@ When FASTR flags a value as an outlier, ask these five questions before deciding
 | 5 | **Should we exclude it?** | Does it distort the overall picture? |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_3ab -->
-## Making the call
+<!-- SLIDE:m4_3d -->
+<!-- _class: output -->
+## Outlier detection output
 
-Based on your investigation:
+<div class="output-layout">
+<div class="output-viz">
 
-- **Severe problem** (clear data entry error, implausible value) — Exclude from analysis
-- **Moderate concern** (plausible but uncertain) — Include with a note explaining the caveat
-- **Minor or explainable** (campaign, real event) — Include — it reflects reality
+![Outliers output](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
-**Try it:** Find one outlier flagged in your data. Walk through the 5 questions. What is your conclusion — exclude, include with caveat, or include?
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap showing the proportion of values flagged as outliers by indicator and region.
+
+**Formula:** Outlier % = (values flagged / total values) × 100
+
+**Interpretation:** High rates may indicate data entry errors or legitimate events like campaigns. Review facility registers to distinguish between the two.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Outliers are values that are extreme relative to a facility's usual reporting volume; only suspiciously high values are flagged.
+- High outlier rates can reflect data entry errors OR real programmatic events (campaigns, surges). Investigation distinguishes the two — see m4_3a "Investigating a flagged outlier".
+- The formula and method follow m4_3c "Outlier detection methodology".
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
@@ -1628,6 +1624,28 @@ Checking consistency at the facility level would miss these patterns. Aggregatin
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m4_4c -->
+<!-- _class: output -->
+## Internal consistency output
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Consistency output](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap showing the percentage of districts where indicator pairs meet expected relationships (e.g., ANC1 ≥ ANC4).
+
+**Formula:** Consistency % = (districts meeting criteria / total districts) × 100
+
+**Interpretation:** Low consistency may indicate data-flow problems, double-counting, or systematic under-reporting at the district level.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m4_5 -->
 ## Data quality summary score
 
@@ -1642,7 +1660,7 @@ By integrating multiple dimensions of data quality into a single score, it simpl
 - Consistent reporting between Penta1/Penta3 and ANC1/ANC4
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_5b -->
+<!-- SLIDE:m4_5e -->
 ## Quick interpretation guide
 
 | Score range | What it means | What to do |
@@ -1650,8 +1668,56 @@ By integrating multiple dimensions of data quality into a single score, it simpl
 | **Above 80%** | Reliable — use confidently for analysis | Proceed with analysis |
 | **60-80%** | Usable with caution — some quality gaps | Note limitations, investigate weak dimensions |
 | **Below 60%** | Investigate before using | Identify which dimension (completeness, outliers, consistency) is pulling the score down |
+<!-- /SLIDE -->
 
-**Try it:** Check your region's overall DQA score. Is it above or below 80%? If below, look at the individual dimension scores — which one needs the most attention?
+<!-- SLIDE:m4_5c -->
+<!-- _class: output -->
+## Overall data quality score output
+
+<div class="output-layout">
+<div class="output-viz">
+
+![DQA score output](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap showing the percentage of facility-months that pass **all** quality checks, by indicator and region.
+
+**Score:** Binary — each facility-month is either adequate (passes every check) or not. The percentage reflects the share that pass.
+
+**Interpretation:** A strict measure. Low scores indicate many facility-months fail at least one check. Use this to identify regions and indicators needing data-quality improvement.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_5d -->
+<!-- _class: output -->
+## Mean DQA score output
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Mean DQA score](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap showing the average DQA score across facility-months, by indicator and region.
+
+**Score:** Average of the completeness-outlier score and the consistency score. Ranges from 0% to 100%.
+
+**Interpretation:** A more nuanced measure than the overall score. Captures partial progress — a region can score 75% even if not every check passes. Use this to track improvement over time.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- The mean DQA score captures partial credit — useful for tracking improvement quarter to quarter.
+- This wraps up the DQA module. Next we look at how FASTR adjusts for the issues this module surfaces.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_6 -->
@@ -1681,29 +1747,13 @@ PRESENTER NOTES:
 ═══════════════════════════════════════════════════════════════════════════ -->
 
 <!-- SLIDE:m4_s0 -->
-## Data quality: what does FASTR check?
-
-Before analyzing, FASTR checks if the data is reliable — like an accountant verifying the numbers before preparing a report.
-
-**Three checks:**
-
-- **Extreme values** — A facility suddenly reports 10× more than usual? Probably a data entry error
-- **Missing reports** — A facility didn't submit a report for 3 months? Its data is missing
-- **Logical consistency** — More 4th antenatal visits than 1st visits? Something is wrong
-
-Each check produces a **quality score** that helps decide if data can be used as-is or needs adjustment.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_s1 -->
 ## FASTR analytical pipeline
 
-The FASTR analysis follows a sequential workflow:
+![Analytical pipeline w:1000](../resources/diagrams/analytical_pipeline.svg)
 
-1. **Assess data quality** - Identify issues with completeness, outliers, and consistency
-2. **Adjust for quality issues** - Apply corrections to improve data reliability
-3. **Analyze adjusted data** - Generate service utilization and coverage estimates
+FASTR runs through five sequential modules: **assess** data quality, **adjust** for the issues found, **analyse** adjusted service volumes, **build** target-population denominators, then **estimate** coverage.
 
-![Analytical Pipeline w:1000](../resources/diagrams/analytical_pipeline.svg)
+We'll look at how each step works in turn.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s1b -->
@@ -1766,7 +1816,7 @@ Higher and stable completeness improves data reliability.
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_s3c -->
+<!-- SLIDE:m4_s3a -->
 <!-- _class: output -->
 ## Indicator completeness output
 
@@ -1856,12 +1906,6 @@ PRESENTER NOTES:
 - Missing data from a DHIS2 system can be due to non-reporting or reporting of zero services delivered (zeros are often not stored in DHIS2). We cannot distinguish between missing due to non-reporting and missing due to reporting zero services. As such, missing values are excluded from the analysis
 - We restrict outlier detection to service volumes greater than 100 as this helps in focusing on meaningful, stable, and operationally significant data. It reduces noise due to small volume volatility and focuses on more impactful outliers (e.g. large volumes are likely to have more significant implications of the analysis)
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_s3a -->
-## Why adjust for outliers?
-
-![Why adjust for outliers](../resources/diagrams/outlier_impact.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s4 -->

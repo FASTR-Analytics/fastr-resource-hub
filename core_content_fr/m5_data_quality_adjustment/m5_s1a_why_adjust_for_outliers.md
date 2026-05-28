@@ -6,7 +6,7 @@ paginate: true
 
 ## Pourquoi ajuster les valeurs aberrantes ?
 
-![Pourquoi ajuster les valeurs aberrantes — avant et après](../../resources/diagrams_fr/why_adjust_outliers.svg)
+![Pourquoi ajuster les valeurs aberrantes — avant et après](../../resources/diagrams_fr/outlier_impact.svg)
 
 <!--
 PRESENTER NOTES:

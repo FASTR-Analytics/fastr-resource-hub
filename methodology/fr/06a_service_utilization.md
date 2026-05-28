@@ -1136,6 +1136,21 @@ Pour le graphique de variation de volume (résultat 4) :
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m6_0 -->
+## Des données ajustées à l'analyse
+
+Le module 2 a produit le jeu de données ajustées — valeurs aberrantes remplacées, lacunes comblées. Le module 3 est l'étape où ce travail porte ses fruits.
+
+Au sein du module 3, les utilisateurs peuvent analyser **soit les données ajustées, soit les données non ajustées**, selon la question posée. Les données ajustées révèlent les tendances de fond ; les données non ajustées montrent ce qui a été effectivement rapporté.
+
+Les diapositives suivantes couvrent deux regards sur la prestation de services :
+
+- **Utilisation des services** — volumes au fil du temps, comparaisons trimestre-sur-trimestre et année-sur-année
+- **Détection des perturbations** — un modèle statistique qui signale quand les volumes réels s'écartent de ce que l'historique de l'établissement laisserait prévoir
+
+L'estimation de la couverture, qui rapporte les services à une population cible, vient ensuite.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_1 -->
 ## Analyse de l'utilisation des services
 
@@ -1226,13 +1241,6 @@ Le modèle **tient compte de la saisonnalité** lors du calcul des valeurs atten
 Plus important encore, cette approche **quantifie les changements avec une méthodologie robuste** plutôt que de s'appuyer sur l'observation visuelle des fluctuations de tendance. Cela améliore la capacité à interpréter et comparer les données d'utilisation entre les zones nationales et infranationales **sans nécessiter de dénominateurs de population**.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_2a -->
-## Pourquoi détecter les perturbations est important
-
-La détection des perturbations ne consiste pas seulement à signaler des problèmes — elle déclenche une investigation sur les causes profondes.
-
-![Disruptions framing](../resources/diagrams_fr/disruptions_framing.svg)
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->
 <!-- _class: compact -->
@@ -1280,21 +1288,6 @@ Puis il compare les **volumes observés** aux **volumes attendus** :
 Le module mesure **combien de services ont été perdus ou gagnés** et sur quelle durée.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0b -->
-## Lire un graphique de perturbation
-
-![w:750](../resources/diagrams_fr/disruption_chart_annotated.svg)
-
-<!--
-PRESENTER NOTES:
-- La ligne noire = ce qui s'est réellement passé (volumes observés)
-- La ligne pointillée = ce que FASTR attendait (basé sur la tendance et la saisonnalité)
-- Zone rouge = les services étaient en dessous de l'attendu (perturbation)
-- Zone verte = les services étaient au-dessus de l'attendu (surplus)
-- La taille de la zone colorée = l'ampleur de l'impact
-- Demandez-vous : qu'est-ce qui a causé cette perturbation ? Était-ce un problème de données ou un vrai changement ?
--->
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_s1 -->
 ## Analyse de l'utilisation des services
@@ -1356,13 +1349,13 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_s1d -->
 ## Directionnalité des indicateurs
 
-Chaque indicateur a une direction souhaitée, et une tendance ne peut être interprétée qu'une fois cette direction établie.
+Un changement signalé ne devient un résultat utile qu'une fois connue la direction dans laquelle l'indicateur doit évoluer.
 
-- **Indicateurs d'utilisation des services** (consultations prénatales, accouchement assisté, couverture vaccinale) : généralement attendus **à la hausse** à mesure que les systèmes se renforcent.
-- **Indicateurs de morbidité et de mortalité** (décès maternels, malnutrition sévère, incidence des maladies) : attendus **à la baisse**.
-- **Certains indicateurs s'inscrivent dans une plage souhaitée** plutôt que dans une direction unique. Le taux de césarienne en est l'exemple type : trop bas, il signale un manque d'accès aux soins obstétricaux d'urgence ; trop élevé, il signale une médicalisation excessive.
+- **Indicateurs d'utilisation des services** (CPN, accouchement assisté, vaccinations) : devraient **monter** quand les systèmes se renforcent.
+- **Indicateurs de morbidité et de mortalité** (décès maternels, malnutrition sévère, incidence des maladies) : devraient **baisser**.
+- **Indicateurs à plage** : se situent entre deux seuils. Le taux de césarienne en est l'exemple type — trop bas signale un manque d'accès, trop élevé signale une médicalisation excessive.
 
-Avant d'agir sur un changement signalé, vérifiez à quelle catégorie appartient l'indicateur. Une hausse de 15 % des consultations postnatales est une bonne nouvelle ; une hausse de 15 % des décès maternels ne l'est pas. Le même signal statistique peut porter le sens opposé selon l'indicateur.
+Une hausse de 15 % des consultations postnatales est une bonne nouvelle ; la même hausse pour les décès maternels ne l'est pas. Toujours vérifier la direction avant de lire le signal.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s1a -->

@@ -1,37 +1,53 @@
 slides:
-- file: m5_1_approach_to_dq_adjustment.md
+- file: m5_1_from_detection_to_correction.md
   order: 1.0
   variant: full
-  title: Rationale for data quality adjustment
-- file: m5_1b_approach_to_dq_adjustment.md
-  order: 1.02
+  title: From detection to correction
+- file: m5_1a_indicators_excluded_from_adjustment.md
+  order: 1.01
   variant: full
   title: Indicators excluded from adjustment
-- file: m5_2_adjustment_for_outliers.md
+- file: m5_2_how_completeness_adjustment_works.md
   order: 2.0
   variant: full
-  title: Outlier adjustment methodology
-- file: m5_3_adjustment_for_completeness.md
+  title: How completeness adjustment works
+- file: m5_2a_completeness_adjustment_output.md
+  order: 2.01
+  variant: full
+  title: Completeness adjustment output
+- file: m5_3_why_adjust_for_outliers.md
   order: 3.0
   variant: full
-  title: Completeness adjustment methodology
-- file: m5_s0_adjustment_how_it_works.md
+  title: Why adjust for outliers?
+- file: m5_3a_how_outlier_adjustment_works.md
+  order: 3.01
+  variant: full
+  title: How outlier adjustment works
+- file: m5_3b_outlier_adjustment_output.md
+  order: 3.02
+  variant: full
+  title: Outlier adjustment output
+- file: m5_s0_from_detection_to_correction.md
   order: 0.0
   variant: condensed
-  title: 'Data correction: how FASTR fixes problems'
-- file: m5_s1_dq_adjustment_overview.md
+  title: From detection to correction
+- file: m5_s0a_indicators_excluded_from_adjustment.md
+  order: 0.01
+  variant: condensed
+  title: Indicators excluded from adjustment
+- file: m5_s1_adjustment_how_it_works.md
   order: 1.0
   variant: condensed
-  title: Data quality adjustment
+  title: How the adjustment works
 - file: m5_s1a_why_adjust_for_outliers.md
   order: 1.01
   variant: condensed
   title: Why adjust for outliers?
-- file: m5_s2_dq_adjustment_interpretation.md
+- file: m5_s2_outlier_adjustment_output.md
   order: 2.0
   variant: condensed
   title: Outlier adjustment output
-- file: m5_s2b_dq_adjustment_interpretation.md
+- file: m5_s2b_completeness_adjustment_output.md
   order: 2.02
   variant: condensed
   title: Completeness adjustment output

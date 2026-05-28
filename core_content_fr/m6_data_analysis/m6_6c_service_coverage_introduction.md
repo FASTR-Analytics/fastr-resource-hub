@@ -10,8 +10,8 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 | Partie | Composants |
 |------|------------|
-| **Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur |
-| **Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture |
+| **Partie 1 : Calcul du dénominateur** | Construire quatre chaînes candidates en combinant les volumes SIGS et la couverture d'enquête à chaque point d'entrée, puis étendre via les paramètres démographiques. Comparer les chaînes à UN WPP et retenir celle dont le ratio médian à UN WPP est le plus proche de 1,0. |
+| **Partie 2 : Estimation de la couverture** | Appliquer la chaîne retenue à tous les indicateurs. Projeter les valeurs d'enquête dans les années post-enquête à l'aide des écarts SIGS d'une année sur l'autre. Générer les estimations finales de couverture aux niveaux national et infranational. |
 
 <!--
 PRESENTER NOTES:

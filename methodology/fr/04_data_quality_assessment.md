@@ -1508,33 +1508,24 @@ Le module suit la séquence suivante :
 -->
 
 <!-- SLIDE:m4_0 -->
-## Comment FASTR analyse vos données
+## Pipeline analytique FASTR
 
-FASTR exécute **5 modules de la plateforme dans l'ordre**. Chacun prépare le terrain pour le suivant :
+![Pipeline analytique w:1000](../resources/diagrams_fr/analytical_pipeline.svg)
 
-| | Module | Ce qu'il fait | Pourquoi |
-|---|--------|-------------|----------|
-| 1️⃣ | **Vérifier la qualité** (M1) | Repère les erreurs de saisie, les rapports manquants et les incohérences | On ne peut pas analyser des données peu fiables |
-| 2️⃣ | **Corriger les problèmes** (M2) | Remplace les valeurs extrêmes et comble les mois manquants | Des données propres pour des résultats fiables |
-| 3️⃣ | **Analyser les services** (M3) | Compare les volumes observés à ce qui était attendu pour détecter les perturbations | Savoir où et quand les services ont changé |
-| 4️⃣ | **Construire le dénominateur** (M5) | Estime la population cible pour chaque indicateur | La couverture a besoin d'un dénominateur |
-| 5️⃣ | **Estimer la couverture** (M6) | Calcule le % de la population couverte à partir des données rapportées | Passer des chiffres bruts aux indicateurs qui guident l'action |
+FASTR exécute cinq modules séquentiels : **évaluer** la qualité des données, **ajuster** les problèmes détectés, **analyser** les volumes de services ajustés, **construire** les dénominateurs de population cible, puis **estimer** la couverture.
 
-Vous allez travailler avec chacun de ces modules sur la plateforme pendant l'atelier.
+Nous allons regarder comment chaque étape fonctionne.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1 -->
-## FASTR adopte une approche multidimensionnelle de la qualité des données, en partant du principe que la qualité des données ne doit pas être un obstacle à leur utilisation - avec les bons mécanismes de retour d'information, l'utilisation des données peut contribuer à améliorer leur qualité
+## Approche FASTR de la qualité des données
 
-- Nous effectuons des évaluations et des ajustements granulaires de la qualité des données basés sur les données au niveau des établissements en exploitant l'accès au SIGS via une API
+FASTR adopte une approche multidimensionnelle, fondée sur le principe que **la qualité des données ne doit pas être un obstacle à leur utilisation**. L'utilisation des données et le retour d'information constituent eux-mêmes la première étape vers l'amélioration de leur qualité.
 
-- Nous n'utilisons que des indicateurs à haut volume, car les services les plus utilisés fournissent des estimations plus stables
-
-- Nous nous concentrons sur les variations dans le temps et l'espace plutôt que sur des estimations ponctuelles spécifiques et discutons de l'interprétation et de la pertinence pour la prise de décision avec les décideurs nationaux
-
-- Nous pensons que l'utilisation des données et la fourniture de retours d'information constituent la première étape vers l'amélioration des données
-
-Nous aborderons chacun de ces domaines au cours des prochaines sessions.
+- Nous évaluons et ajustons la qualité au niveau des établissements, en exploitant les enregistrements SIGS via un accès API.
+- Nous nous concentrons sur les indicateurs à haut volume, car les services les plus utilisés produisent des estimations plus stables.
+- Nous mettons l'accent sur les variations dans le temps et l'espace plutôt que sur des estimations ponctuelles précises.
+- Nous interprétons les résultats en collaboration avec les décideurs nationaux, pour que les conclusions se traduisent en actions.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1b -->
@@ -1553,53 +1544,17 @@ Nous aborderons chacun de ces domaines au cours des prochaines sessions.
 - Affectation sous-optimale des ressources
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_1c -->
-## Évaluer et ajuster la qualité des données
-
-Les évaluations de la qualité identifient les problèmes les plus prioritaires et les ajustements analytiques nécessaires, afin que les problèmes de qualité ne deviennent pas un obstacle à l'analyse et à l'utilisation des données.
-
-&nbsp;
-
-**Objectif 1 : Permettre l'ajustement analytique**
-
-L'évaluation systématique de la qualité des données permet d'appliquer des ajustements ciblés, améliorant ainsi l'utilité des données du SIGS pour la prise de décision fondée sur des données probantes.
-
-&nbsp;
-
-**Objectif 2 : Surveiller les tendances en matière de qualité des données**
-
-L'évaluation de la qualité des données permet un suivi continu pour :
-- Éclairer la sélection des indicateurs sur la base des profils de qualité dans l'ensemble du SIGS
-- Orienter les interventions ciblées sur la qualité des données et la supervision de soutien dans les domaines où la qualité des données est plus faible
-- Évaluer l'efficacité des initiatives d'amélioration de la qualité des données au fil du temps
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_1d -->
-## Mesures de la qualité des données
-
-![Mesures de la qualité des données h:480](../resources/diagrams_fr/measures_data_quality.svg)
-
-<!--
-PRESENTER NOTES:
-- Complétude de l'indicateur - complétude
-- Valeurs aberrantes - cohérence
-- Cohérence entre indicateurs connexes - cohérence
-- Exactitude - nécessite une collecte de données supplémentaire
-- Ponctualité - importante pour les améliorations de routine de la qualité des données mais non pertinente pour l'analyse FASTR à un moment donné
--->
-<!-- /SLIDE -->
-
 <!-- SLIDE:m4_1a -->
 <!-- _class: dense-table -->
 
-## Mesures de la qualité des données - détaillé
+## Mesures de la qualité des données — détaillé
 
-| Domaine de qualité des données | Que mesure-t-il ? | Comment est-il évalué ? |
-|---------------------|----------------------|---------------------|
-| **Complétude** | Toutes les données sont-elles présentes ? Y a-t-il suffisamment d'informations disponibles pour prendre des décisions sur la santé de la population et cibler les ressources pour améliorer la couverture, l'efficacité et la qualité du système de santé ? | • Évalué en mesurant si toutes les unités censées déclarer le font effectivement (complétude du rapportage)<br>• Évalué en mesurant la complétude des données d'indicateurs (pas de valeurs manquantes) ; ceci est différent de la complétude globale du rapportage car on examine la complétude d'éléments de données spécifiques et pas seulement la réception du formulaire mensuel (complétude de l'indicateur) |
-| **Ponctualité** | Les données sont-elles régulièrement soumises à temps ? | • Évalué en mesurant si les unités ayant soumis des rapports l'ont fait avant une date limite définie (ponctualité) |
-| **Cohérence** | Les données sont-elles plausibles compte tenu de ce qui a été précédemment déclaré ? | • Les tendances sont évaluées pour déterminer si les valeurs déclarées sont extrêmes par rapport aux autres valeurs déclarées au cours de l'année ou sur plusieurs années (présence de valeurs aberrantes)<br>• Évaluer les tendances des indicateurs de programme pour déterminer si les valeurs déclarées sont extrêmes par rapport aux autres valeurs déclarées au cours de l'année ou sur plusieurs années (cohérence dans le temps)<br>• Évaluer les indicateurs de programme ayant une relation prévisible pour déterminer si la relation attendue existe entre ces 2 indicateurs (cohérence entre indicateurs connexes)<br>• Évaluer le niveau d'accord entre deux sources de données mesurant le même indicateur de santé (comparaison externe avec d'autres sources de données)<br>• Déterminer l'adéquation des données de population utilisées pour évaluer la performance des indicateurs de santé (cohérence des données de population) |
-| **Exactitude** | Les données reflètent-elles fidèlement le niveau réel de prestation de services effectué dans l'établissement de santé ? | • Évaluer l'exactitude pour des indicateurs sélectionnés par l'examen des documents sources dans les établissements de santé et la comparaison avec les rapports mensuels et les valeurs du SIGS (facteur de vérification des données) |
+| Domaine de qualité | Que mesure-t-il ? | Comment est-il évalué ? |
+|---|---|---|
+| **Complétude** | Toutes les données attendues sont-elles présentes ? | • Complétude du rapportage — les formulaires mensuels ont-ils été soumis par tous les établissements attendus ?<br>• Complétude des indicateurs — les éléments de données spécifiques sont-ils présents, et pas seulement le formulaire ? |
+| **Ponctualité** | Les données sont-elles soumises à temps ? | • Si les unités ont soumis leurs rapports avant une date limite définie. |
+| **Cohérence** | Les valeurs déclarées sont-elles plausibles ? | • Valeurs aberrantes — valeurs extrêmes par rapport aux autres dans la série<br>• Cohérence dans le temps — tendances du même indicateur d'une période à l'autre<br>• Cohérence entre indicateurs connexes (par ex. CPN1 ≥ CPN4)<br>• Concordance avec d'autres sources de données<br>• Cohérence des données de population sous-jacentes |
+| **Exactitude** | Les données reflètent-elles la prestation de services réelle ? | • Examen des documents sources dans les établissements et comparaison avec les valeurs SIGS (facteur de vérification des données). |
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_1e -->
@@ -1682,6 +1637,28 @@ PRESENTER NOTES:
 - Pour les pays où le système DHIS2 ne stocke pas les zéros, la complétude des indicateurs peut être sous-estimée s'il existe de nombreux établissements à faible volume pour un indicateur donné
 <!-- /SLIDE -->
 
+<!-- SLIDE:m4_2b -->
+<!-- _class: output -->
+## Sortie : complétude des indicateurs
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Sortie complétude](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant la complétude par indicateur et par région dans le temps.
+
+**Formule :** Complétude % = (établissements déclarants / établissements attendus) × 100
+
+**Interprétation :** Repérez les lacunes systématiques par région ou indicateur, les tendances à la baisse, ou les motifs saisonniers. Une faible complétude indique des obstacles au rapportage qui demandent attention.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m4_3 -->
 ## Valeurs aberrantes
 
@@ -1700,12 +1677,6 @@ PRESENTER NOTES:
 - Une valeur aberrante est définie comme : Une valeur supérieure à 10 fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%
 - ET pour laquelle : Le volume est supérieur ou égal à la médiane, le volume n'est pas manquant, et le volume est supérieur à 100
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_3b -->
-## Pourquoi ajuster pour les valeurs aberrantes ?
-
-![Impact des valeurs aberrantes](../resources/diagrams_fr/outlier_impact.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3c -->
@@ -1749,16 +1720,26 @@ Lorsque FASTR signale une valeur comme aberrante, posez ces cinq questions avant
 | 5 | **Faut-il l'exclure ?** | Est-ce que cela déforme le tableau d'ensemble ? |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_3ab -->
-## Prendre la décision
+<!-- SLIDE:m4_3d -->
+<!-- _class: output -->
+## Sortie : détection des valeurs aberrantes
 
-En fonction de votre investigation :
+<div class="output-layout">
+<div class="output-viz">
 
-- **Problème sévère** (erreur de saisie évidente, valeur non plausible) — Exclure de l'analyse
-- **Préoccupation modérée** (plausible mais incertain) — Inclure avec une note explicative
-- **Mineur ou explicable** (campagne, événement réel) — Inclure — cela reflète la réalité
+![Sortie valeurs aberrantes](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
-**Essayez :** Trouvez une valeur aberrante signalée dans vos données. Parcourez les 5 questions. Quelle est votre conclusion — exclure, inclure avec réserve, ou inclure ?
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant la proportion de valeurs signalées comme aberrantes par indicateur et par région.
+
+**Formule :** Valeurs aberrantes % = (valeurs signalées / total des valeurs) × 100
+
+**Interprétation :** Des taux élevés peuvent indiquer des erreurs de saisie ou des événements légitimes comme des campagnes. Examinez les registres des établissements pour distinguer les deux.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
@@ -1823,6 +1804,28 @@ La vérification de la cohérence au niveau de l'établissement ne tiendrait pas
 </div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m4_4c -->
+<!-- _class: output -->
+## Sortie : cohérence interne
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Sortie cohérence](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant le pourcentage de districts où les paires d'indicateurs respectent les relations attendues (par ex. CPN1 ≥ CPN4).
+
+**Formule :** Cohérence % = (districts respectant le critère / total des districts) × 100
+
+**Interprétation :** Une faible cohérence peut indiquer des problèmes de flux de données, des doubles comptages, ou un sous-rapportage systématique au niveau du district.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m4_5 -->
 ## Score résumé de la qualité des données
 
@@ -1840,7 +1843,7 @@ Les résultats des contrôles de valeurs aberrantes, de complétude et de cohér
 - Les seuils de cohérence sont atteints pour les paires d'indicateurs disponibles (ex. Penta1/Penta3, CPN1/CPN4)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_5b -->
+<!-- SLIDE:m4_5e -->
 ## Guide d'interprétation rapide
 
 | Plage de score | Ce que cela signifie | Que faire |
@@ -1848,8 +1851,56 @@ Les résultats des contrôles de valeurs aberrantes, de complétude et de cohér
 | **Au-dessus de 80 %** | Fiable — utiliser en confiance pour l'analyse | Procéder à l'analyse |
 | **60-80 %** | Utilisable avec prudence — quelques lacunes de qualité | Noter les limites, investiguer les dimensions faibles |
 | **En dessous de 60 %** | Investiguer avant d'utiliser | Identifier quelle dimension (complétude, valeurs aberrantes, cohérence) tire le score vers le bas |
+<!-- /SLIDE -->
 
-**Essayez :** Vérifiez le score AQD global de votre région. Est-il au-dessus ou en dessous de 80 % ? Si en dessous, examinez les scores par dimension — laquelle nécessite le plus d'attention ?
+<!-- SLIDE:m4_5c -->
+<!-- _class: output -->
+## Sortie : score global de qualité des données
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Sortie score AQD](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant le pourcentage de mois-établissement qui passent **tous** les contrôles qualité, par indicateur et par région.
+
+**Score :** Binaire — chaque mois-établissement est soit adéquat (passe tous les contrôles), soit non. Le pourcentage reflète la part qui passe.
+
+**Interprétation :** Mesure stricte. De faibles scores indiquent que de nombreux mois-établissement échouent à au moins un contrôle. À utiliser pour identifier les régions et indicateurs nécessitant une amélioration de la qualité des données.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m4_5d -->
+<!-- _class: output -->
+## Sortie : score moyen de qualité des données
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Sortie score moyen AQD](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur montrant le score AQD moyen par mois-établissement, par indicateur et par région.
+
+**Score :** Moyenne entre le score complétude-aberrants et le score de cohérence. Varie de 0 % à 100 %.
+
+**Interprétation :** Mesure plus nuancée que le score global. Reflète les progrès partiels — une région peut atteindre 75 % même si tous les contrôles ne passent pas. À utiliser pour suivre l'amélioration dans le temps.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Le score moyen AQD capte le progrès partiel — utile pour suivre l'amélioration d'un trimestre à l'autre.
+- Cela clôt le module AQD. Nous regardons ensuite comment FASTR ajuste pour les problèmes que ce module met en lumière.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_6 -->
@@ -1874,25 +1925,13 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s0 -->
-## Qualité des données : que vérifie FASTR ?
-
-Avant d'analyser, FASTR vérifie si les données sont fiables — comme un comptable qui vérifie les chiffres avant de préparer un rapport.
-
-**Trois vérifications :**
-
-- **Valeurs extrêmes** — Un établissement rapporte soudainement 10× plus que d'habitude ? C'est probablement une erreur de saisie
-- **Rapports manquants** — Un établissement n'a pas soumis de rapport pendant 3 mois ? Ses données manquent à l'appel
-- **Cohérence logique** — Plus de 4ème visites prénatales que de 1ères visites ? Quelque chose ne va pas
-
-Chaque vérification produit un **score de qualité** qui aide à décider si les données peuvent être utilisées telles quelles ou doivent être ajustées.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_s1 -->
 ## Pipeline analytique FASTR
 
-L'analyse FASTR suit un processus séquentiel, de l'évaluation de la qualité des données jusqu'à l'analyse des données ajustées.
-
 ![Pipeline analytique w:1000](../resources/diagrams_fr/analytical_pipeline.svg)
+
+FASTR exécute cinq modules séquentiels : **évaluer** la qualité des données, **ajuster** les problèmes détectés, **analyser** les volumes de services ajustés, **construire** les dénominateurs de population cible, puis **estimer** la couverture.
+
+Nous allons regarder comment chaque étape fonctionne.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s1b -->
@@ -1957,7 +1996,7 @@ Une complétude plus élevée et stable améliore la fiabilité des données.
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m4_s3c -->
+<!-- SLIDE:m4_s3a -->
 <!-- _class: output -->
 ## Sortie de la complétude de l'indicateur
 
@@ -2044,12 +2083,6 @@ PRESENTER NOTES:
 - Une valeur aberrante est définie comme : Une valeur supérieure à 10 fois l'écart absolu médian (EAM) par rapport à la valeur médiane mensuelle de l'indicateur pour chaque période, OU une valeur pour laquelle la contribution proportionnelle en volume pour un établissement, un indicateur et une période est supérieure à 80%
 - ET pour laquelle : Le volume est supérieur ou égal à la médiane, le volume n'est pas manquant, et le volume est supérieur à 100
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m4_s3a -->
-## Pourquoi ajuster pour les valeurs aberrantes ?
-
-![Pourquoi ajuster pour les valeurs aberrantes](../resources/diagrams_fr/outlier_impact.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_s4 -->

@@ -6,9 +6,16 @@ paginate: true
 
 ## Méthodologie de sélection du dénominateur
 
-La plateforme FASTR sélectionne la méthode de dénominateur qui produit des estimations de couverture **les plus proches des références d'enquête** (EDS/MICS). Elle calcule la couverture en utilisant toutes les méthodes de dénominateur disponibles, compare chaque résultat aux estimations de couverture de l'enquête, et sélectionne le dénominateur avec la **plus petite erreur** par rapport à l'enquête. Cette approche minimise l'écart entre les estimations basées sur le SIGS et celles basées sur l'enquête, faisant du dénominateur sélectionné le plus fiable pour estimer la couverture réelle.
+FASTR construit **quatre chaînes de dénominateurs candidates**, chacune ancrée sur un service d'entrée HMIS différent (CPN1, accouchements, BCG, Penta1). Pour chaque chaîne, la plateforme :
 
-Chaque indicateur (CPN1, CPN4, accouchements, etc.) peut utiliser une **méthode de dénominateur différente**. Cependant, pour un indicateur donné, la **même méthode est utilisée pour tous les points temporels et toutes les zones infranationales** pour assurer la cohérence. La sélection est effectuée au **niveau national**, puis appliquée uniformément à tous les niveaux géographiques.
+1. **Rétro-calcule la population du point d'entrée** en combinant le volume de service SIGS avec la couverture d'enquête la plus récente pour ce service. (Exemple : volume CPN1 ÷ couverture CPN1 d'enquête → estimation des grossesses.)
+2. **Étend la chaîne via la cascade démographique** en appliquant des paramètres propres au pays — perte de grossesse, mortinatalité, mortalité néonatale et post-néonatale — pour dériver les autres populations cibles dont la chaîne a besoin (naissances vivantes, nourrissons survivants, etc.).
+
+Pour choisir entre les quatre chaînes, la plateforme compare chacune aux estimations de **UN World Population Prospects (UN WPP)** au niveau national et retient celle dont le ratio médian à UN WPP est le plus proche de 1,0.
+
+**Une seule chaîne, appliquée uniformément.** La chaîne retenue est ensuite utilisée pour tous les indicateurs et tous les niveaux géographiques de l'analyse.
+
+**Surcharge utilisateur.** Dans la partie 2 (m006), un analyste peut surcharger la sélection automatique en fixant `DENOMINATOR_CHAIN` à une chaîne spécifique (`anc1`, `delivery`, `bcg` ou `penta1`) si des considérations programmatiques justifient un autre choix.
 
 <!--
 PRESENTER NOTES:

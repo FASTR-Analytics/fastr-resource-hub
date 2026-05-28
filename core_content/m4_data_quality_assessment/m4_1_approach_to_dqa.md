@@ -4,14 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## FASTR takes a multi-pronged approach to data quality, with the belief that data quality should not be a barrier to data use – with the right feedback loops, use of data can contribute to improved quality
+## FASTR approach to data quality
 
-- We do granular data quality assessments and adjustments based on facility-level data leveraging HMIS access with an API
+FASTR takes a multi-pronged approach, based on the belief that **data quality should not be a barrier to data use**. Using data and providing feedback is itself the first step toward improving data quality.
 
-- We use only high-volume indicators, because the most-used services provide more stable estimates
-
-- We focus on variations across time and space rather than specific point estimates and discuss the interpretation and relevance for decision-making with in-country decision-makers
-
-- We believe that using the data and providing feedback is the first step to improving the data
-
-We will discuss each of these areas over the next sessions.
+- We assess and adjust data quality at the facility level, drawing on HMIS records via API access.
+- We focus on high-volume indicators, because the most-used services produce more stable estimates.
+- We emphasize variation across time and space rather than precise point estimates.
+- We interpret results collaboratively with in-country decision-makers, so findings translate into action.

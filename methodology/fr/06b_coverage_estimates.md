@@ -1714,6 +1714,19 @@ DHIS2 constitue une base solide pour la collecte, le stockage et la visualisatio
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m6_5b -->
+## Estimation de la couverture
+
+Nous avons traité l'utilisation des services — ce qui a été rapporté et où les volumes évoluent. L'estimation de la couverture répond à une autre question : **quelle part de la population cible a effectivement reçu chaque service**.
+
+La couverture est construite comme un **module en deux parties** dans FASTR :
+
+- **Partie 1** construit et valide les chaînes de dénominateurs
+- **Partie 2** applique la chaîne retenue pour calculer la couverture, et projette entre les enquêtes
+
+Les versions antérieures de la plateforme combinaient ces étapes en un seul module. La division en deux parties permet de revoir et de surcharger indépendamment la sélection de la chaîne. Certaines instances pays affichent encore l'ancienne structure étiquetée « Module 4 — Couverture » ; la méthodologie sous-jacente est la même.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_6 -->
 ## Estimation de la couverture des services
 
@@ -1741,8 +1754,8 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 | Partie | Composants |
 |------|------------|
-| **Partie 1 : Calcul du dénominateur** | Calcul des populations cibles à l'aide de plusieurs méthodes ; comparaison avec les références de l'enquête ; sélection du dénominateur optimal pour chaque indicateur |
-| **Partie 2 : Estimation de la couverture** | Appliquer les choix de dénominateurs ; projeter les estimations de l'enquête vers l'avant en utilisant les tendances du SIGS ; générer les estimations finales de la couverture |
+| **Partie 1 : Calcul du dénominateur** | Construire quatre chaînes candidates en combinant les volumes SIGS et la couverture d'enquête à chaque point d'entrée, puis étendre via les paramètres démographiques. Comparer les chaînes à UN WPP et retenir celle dont le ratio médian à UN WPP est le plus proche de 1,0. |
+| **Partie 2 : Estimation de la couverture** | Appliquer la chaîne retenue à tous les indicateurs. Projeter les valeurs d'enquête dans les années post-enquête à l'aide des écarts SIGS d'une année sur l'autre. Générer les estimations finales de couverture aux niveaux national et infranational. |
 
 <!--
 PRESENTER NOTES:
@@ -1815,42 +1828,7 @@ Au niveau provincial, nous utilisons toutes les valeurs par défaut !
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_9a -->
-## Cascade de services et analyse de l'abandon
 
-Une cascade de services montre le parcours que suivent les patients à travers une série de services de santé liés. À chaque étape, certains patients ne passent pas à l'étape suivante — c'est ce qu'on appelle l'**abandon**.
-
-Par exemple, en santé maternelle : **CPN1 → CPN4 → Accouchement en établissement → Soins postnatals**
-
-Idéalement, chaque étape devrait retenir le plus de patients possible, mais en pratique, les nombres diminuent en cours de route. Comprendre où et pourquoi les patients abandonnent aide à cibler les interventions.
-
-![Cascade de services](../resources/diagrams_fr/service_cascade_funnel.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_9ab -->
-<!-- _class: compact -->
-
-## Calculer et interpréter l'abandon
-
-**Formule de l'abandon :**
-
-> Taux d'abandon % = (Étape précédente - Étape suivante) / Étape précédente × 100
-
-**Exemple :** Si 1 000 femmes assistent à la CPN1 mais seulement 700 complètent la CPN4 :
-
-> Abandon = (1 000 - 700) / 1 000 × 100 = **30 %**
-
-**Échelle d'interprétation :**
-
-| Taux d'abandon | Interprétation |
-|---|---|
-| < 10 % | Excellent — forte continuité des soins |
-| 10–25 % | Acceptable — à surveiller régulièrement |
-| 25–50 % | À approfondir — identifier les obstacles |
-| > 50 % | Critique — nécessite une action immédiate |
-
-**Essayez :** Trouvez les données Penta1 et Penta3 pour votre région. Quel est le taux d'abandon ? Qu'est-ce qui pourrait l'expliquer ?
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
 ## Estimation des dénominateurs à partir de CPN1
@@ -1896,9 +1874,16 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_13 -->
 ## Méthodologie de sélection du dénominateur
 
-La plateforme FASTR sélectionne la méthode de dénominateur qui produit des estimations de couverture **les plus proches des références d'enquête** (EDS/MICS). Elle calcule la couverture en utilisant toutes les méthodes de dénominateur disponibles, compare chaque résultat aux estimations de couverture de l'enquête, et sélectionne le dénominateur avec la **plus petite erreur** par rapport à l'enquête. Cette approche minimise l'écart entre les estimations basées sur le SIGS et celles basées sur l'enquête, faisant du dénominateur sélectionné le plus fiable pour estimer la couverture réelle.
+FASTR construit **quatre chaînes de dénominateurs candidates**, chacune ancrée sur un service d'entrée HMIS différent (CPN1, accouchements, BCG, Penta1). Pour chaque chaîne, la plateforme :
 
-Chaque indicateur (CPN1, CPN4, accouchements, etc.) peut utiliser une **méthode de dénominateur différente**. Cependant, pour un indicateur donné, la **même méthode est utilisée pour tous les points temporels et toutes les zones infranationales** pour assurer la cohérence. La sélection est effectuée au **niveau national**, puis appliquée uniformément à tous les niveaux géographiques.
+1. **Rétro-calcule la population du point d'entrée** en combinant le volume de service SIGS avec la couverture d'enquête la plus récente pour ce service. (Exemple : volume CPN1 ÷ couverture CPN1 d'enquête → estimation des grossesses.)
+2. **Étend la chaîne via la cascade démographique** en appliquant des paramètres propres au pays — perte de grossesse, mortinatalité, mortalité néonatale et post-néonatale — pour dériver les autres populations cibles dont la chaîne a besoin (naissances vivantes, nourrissons survivants, etc.).
+
+Pour choisir entre les quatre chaînes, la plateforme compare chacune aux estimations de **UN World Population Prospects (UN WPP)** au niveau national et retient celle dont le ratio médian à UN WPP est le plus proche de 1,0.
+
+**Une seule chaîne, appliquée uniformément.** La chaîne retenue est ensuite utilisée pour tous les indicateurs et tous les niveaux géographiques de l'analyse.
+
+**Surcharge utilisateur.** Dans la partie 2 (m006), un analyste peut surcharger la sélection automatique en fixant `DENOMINATOR_CHAIN` à une chaîne spécifique (`anc1`, `delivery`, `bcg` ou `penta1`) si des considérations programmatiques justifient un autre choix.
 
 <!--
 PRESENTER NOTES:
@@ -1919,26 +1904,6 @@ PRESENTER NOTES:
 ![Comparaison des dénominateurs](../resources/diagrams_fr/denominator_comparison.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_14 -->
-## Méthodologie de projection de la couverture
-
-Le module projette la valeur de l'enquête la plus récente en utilisant les tendances observées dans la couverture dérivée du SIGS :
-
-![Méthode de projection de la couverture](../resources/diagrams_fr/coverage_projection.svg)
-
-Les changements d'une année sur l'autre (deltas) dans la couverture SIGS sont calculés et appliqués à la dernière valeur de l'enquête. Cette approche préserve la base de référence de l'enquête tout en incorporant les tendances observées en matière de prestation de services.
-
-<!--
-PRESENTER NOTES:
-- Les enquêtes sont peu fréquentes (3-5 ans) - il faut combler les lacunes
-- Méthode de projection : dernière valeur d'enquête + tendance SIGS depuis l'enquête
-- Formule : Projetée = Base d'enquête + (SIGS actuel - SIGS année d'enquête)
-- Préserve le calibrage par rapport à l'enquête tout en incorporant les changements observés
-- L'approche additive évite les erreurs cumulées
-- Les projections doivent être validées lorsque de nouvelles données d'enquête sont disponibles
-- Plus le temps depuis l'enquête est long = projection moins fiable
--->
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
 <!-- _class: compact -->
@@ -2088,14 +2053,16 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3f -->
-## Cinq options de dénominateur pour l'analyse FASTR
+## Options de dénominateur utilisées par FASTR
 
-- **Projections ONU des naissances vivantes** (disponibles uniquement au niveau national)
-- **Dénominateurs dérivés de l'utilisation des services (DHIS2) :**
-  - Ajustement à l'utilisation des services CPN1
-  - Ajustement à l'utilisation des services d'accouchement
-  - Ajustement à l'utilisation des services BCG (calculé uniquement au niveau national)
-  - Ajustement à l'utilisation des services Penta1 (calculé uniquement au niveau national)
+FASTR construit **quatre chaînes de dénominateurs candidates** à partir des volumes de services SIGS, chacune ancrée sur un service différent :
+
+- **Chaîne dérivée de CPN1** — ancrée sur les premières visites prénatales
+- **Chaîne dérivée des accouchements** — ancrée sur les accouchements rapportés
+- **Chaîne dérivée du BCG** — ancrée sur les vaccinations BCG (niveau national uniquement)
+- **Chaîne dérivée de Penta1** — ancrée sur la première dose de Penta (niveau national uniquement)
+
+Les estimations de **UN World Population Prospects (UN WPP)** sont chargées en parallèle. UN WPP n'est pas un dénominateur sélectionnable — il sert de **point de repère** pour comparer les quatre chaînes et présélectionner celle dont le ratio à UN WPP est le plus proche de 1,0.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3g -->
