@@ -13,11 +13,3 @@ DHIS2 holds the data; FASTR turns it into the analyses you've just seen. Three a
 - **Coverage with a derived denominator.** Denominators are back-calculated from HMIS entry points and benchmarked against UN World Population Prospects, giving a more defensible coverage figure than relying on catchment populations alone.
 
 The same pipeline runs every quarter, so countries get findings on a routine rhythm rather than waiting for a one-off analysis.
-
-<!--
-PRESENTER NOTES:
-- Frame this as the closer of the analysis section
-- DHIS2 = raw data source; FASTR = analytics layer on top
-- The three bullets map 1:1 to what was just covered (service utilization, disruption, coverage)
-- Stress the quarterly rhythm: FASTR is designed for a cadence, not a one-shot study
--->

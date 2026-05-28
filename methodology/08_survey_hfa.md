@@ -142,26 +142,6 @@ Depending on country needs and resources, HFA surveys may be conducted:
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m8_1 -->
-## Rapid-cycle facility survey
-
-<div style="display: flex; gap: 2em; align-items: center;">
-<div style="flex: 2;">
-
-- Understand service delivery constraints in PHC facilities
-- Measure the implementation of reforms
-- Assess the effect of shocks on health systems
-- Improve timeliness and relevance of facility surveys
-
-</div>
-<div style="flex: 1;">
-
-![Hospital icon](../../resources/icons/hospital_clinic.svg)
-
-</div>
-</div>
-<!-- /SLIDE -->
-
 <!-- SLIDE:m8_1a -->
 ## Health facility survey design
 
@@ -197,14 +177,6 @@ Rapid facility surveys can identify gaps in service delivery and monitor reforms
 </div>
 
 <p style="font-size: 0.7em;">* Asked only to replacement facilities | ** Additional locally-relevant questions generated during adaptation</p>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_1c -->
-## Four types of indicators
-
-<p style="font-size: 0.85em;">*Questions are either directly mapped to validated health facility assessments or proxies.</p>
-
-![HFA indicator types](../../resources/diagrams/hfa_indicator_types.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_0 -->
@@ -265,134 +237,38 @@ Results inform decisions and concrete actions to strengthen the health system.
 > HFA survey analyses can now be run directly on the FASTR analytics platform.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_2 -->
-## Do phone surveys produce reliable results?
-
-**Yes** — phone-survey results align with in-person survey results.
-
-### Example: Ghana
-
-Across a sample of **63 health facilities** in Ghana, **no significant difference** was observed between mean scores from phone surveys and in-person surveys.
-
-<div class="success">
-
-A well-designed phone survey captures the essential information at a fraction of the cost and time of a field visit.
-
-</div>
-<!-- /SLIDE -->
-
 <!-- SLIDE:m8_3 -->
 <!-- _class: two-panel -->
 
 ## Why integrate HMIS and HFA surveys?
 
-Integration between HMIS data (DHIS2) and HFA survey data is **necessary** to measure priority health indicators.
+Neither dataset alone answers the question. HMIS tells you what services were delivered. HFA tells you what services *could* be delivered. Read together, they tell you why a number moved and where to act.
 
 <div class="panel-layout">
 
 <div>
 
-### 1 · HMIS — DHIS2
-*Routine monthly data*
+### HMIS — DHIS2
+*Routine, monthly*
 
-Captures **what was delivered** — visits, doses, deliveries.
-
-</div>
-
-<div>
-
-### 2 · HFA surveys
-*Quarterly phone surveys*
-
-Captures **what can be delivered** — staffing, supplies, infrastructure.
-
-</div>
-
-</div>
-
-> Triangulating data lets us measure what really matters for maternal and newborn health.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3a -->
-## Example: is maternal mortality likely to improve?
-
-To answer this, HMIS and HFA data have to be triangulated with other sources to measure what actually matters.
-
-### Impact indicator: institutional maternal mortality
-
-**Triangulation sources:**
-
-- **MPDSR** — mortality surveillance
-- **DHIS2** — HMIS routine data on services
-- **Household surveys** — DHS or other
-
-<div class="highlight">
-
-You can't act to reduce maternal mortality without understanding what's happening inside health facilities.
-
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3b -->
-## What DHIS2 lets you measure
-
-With DHIS2 data alone, you can already answer essential questions:
-
-- *Is institutional delivery coverage trending up or down?*
-- *Are facility deliveries increasing significantly over time?*
-
-<div class="columns-3">
-
-<div>
-
-### Output
-*Service utilisation analysis*
-
-**Number of institutional deliveries**
-
-DHIS2 (quarterly)
+- Captures **volume**: visits, doses, deliveries.
+- Picks up changes in service delivery as they happen.
+- Does **not** explain why a change occurred.
 
 </div>
 
 <div>
 
-### Outcome
-*Coverage estimation*
+### HFA — phone survey
+*Quarterly*
 
-**% institutional deliveries**
-
-DHIS2 + household surveys
-
-</div>
-
-<div>
-
-### Impact
-*Multi-source triangulation*
-
-**Institutional maternal mortality**
-
-MPDSR · DHIS2 · DHS
+- Captures **readiness**: staffing, supplies, infrastructure.
+- Picks up gaps on the supply side, facility by facility.
+- Does **not** measure whether the gap hurt service delivery.
 
 </div>
 
 </div>
 
-> DHIS2 tells us the "what" — but to understand the "why", you need an additional data source.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3c -->
-<!-- _class: dense-table -->
-
-## The complete results chain
-
-*Adding HFA survey data lets us answer the "why".*
-
-| INPUT | OUTPUT | OUTCOME | IMPACT |
-|-------|--------|---------|--------|
-| **BEmONC operational capacity** | **Number of institutional deliveries** | **Institutional delivery coverage** | **Institutional maternal mortality** |
-| Drugs, qualified staff, equipment | Service utilisation analysis | Coverage estimation | Multi-source triangulation |
-| *Rapid phone survey (quarterly)* | *DHIS2 (quarterly)* | *DHIS2 + household surveys (DHS)* | *MPDSR · DHIS2 · DHS* |
-
-> Are health facilities "ready" to deliver quality BEmONC care?
+> **Worked example.** A 20% drop in ANC1 visits in one region (HMIS) plus 60% of facilities in that region reporting no ANC supplies (HFA) ⇒ supply-driven decline. Neither figure alone supports that conclusion.
 <!-- /SLIDE -->

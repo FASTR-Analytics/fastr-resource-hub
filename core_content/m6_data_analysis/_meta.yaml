@@ -76,17 +76,17 @@ slides:
   variant: full
   title: 'Coverage module: Configuration parameters'
 - file: m6_s00_module_overview.md
-  order: -0.01
+  order: 0.0
   variant: condensed
-  title: 'Data analysis'
-- file: m6_s0b_what_is_service_utilization.md
-  order: 0.5
-  variant: condensed
-  title: 'What is service utilization?'
+  title: Data analysis
 - file: m6_s0_utilization_detecting_changes.md
-  order: 1.99
+  order: 0.001
   variant: condensed
-  title: 'Detecting changes: observed vs expected'
+  title: 'Service utilization: detecting changes'
+- file: m6_s0b_what_is_service_utilization.md
+  order: 0.02
+  variant: condensed
+  title: What is service utilization?
 - file: m6_s1_utilization_overview.md
   order: 1.0
   variant: condensed
@@ -100,9 +100,13 @@ slides:
   variant: condensed
   title: Year-over-year change output
 - file: m6_s1d_indicator_directionality.md
-  order: 1.005
+  order: 1.04
   variant: condensed
   title: Indicator directionality
+- file: m6_s2_disruption_interpretation.md
+  order: 2.0
+  variant: condensed
+  title: Detecting service disruptions
 - file: m6_s2b_disruption_interpretation.md
   order: 2.02
   variant: condensed
@@ -110,13 +114,21 @@ slides:
 - file: m6_s3_coverage_methods.md
   order: 3.0
   variant: condensed
-  title: 'Coverage'
+  title: What is coverage?
+- file: m6_s3c_coverage_example.md
+  order: 3.03
+  variant: condensed
+  title: 'Service coverage example: ANC4+'
+- file: m6_s3ga_demographic_relationships_intro.md
+  order: 3.0701
+  variant: condensed
+  title: Using demographic relationships to estimate denominators
 - file: m6_s3h_expected_relationships.md
-  order: 3.05
+  order: 3.08
   variant: condensed
   title: Expected relationships which help with estimating denominators
 - file: m6_s3j_four_parallel_chains.md
-  order: 3.06
+  order: 3.1
   variant: condensed
   title: Four parallel chains, best fit wins
 - file: m6_s4_coverage_interpretation.md
@@ -131,15 +143,7 @@ slides:
   order: 6.0
   variant: condensed
   title: What the FASTR pipeline adds on top of DHIS2
-- file: m6_s6_fastr_value_beyond_dhis2.md
-  order: 20.0
-  variant: full
-  title: What the FASTR pipeline adds on top of DHIS2
 - file: m6_s7_key_takeaway.md
   order: 7.0
   variant: condensed
-  title: Key takeaway
-- file: m6_s7_key_takeaway.md
-  order: 21.0
-  variant: full
   title: Key takeaway

@@ -13,10 +13,3 @@ The numerator is easy: facilities report it every month. The denominator is the 
 The next few slides explain how FASTR builds that denominator from the data it does have.
 
 ![Coverage formula for ANC4+ h:280](../../resources/diagrams/coverage_example_anc4.svg)
-
-<!--
-PRESENTER NOTES:
-- Use this slide to set up "the denominator problem" on the next slide
-- Numerator is HMIS, denominator is NOT — that asymmetry is the whole reason FASTR derives the denominator
-- Stress: a percentage with the wrong denominator is worse than no number
--->

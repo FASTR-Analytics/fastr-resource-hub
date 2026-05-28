@@ -6,7 +6,7 @@ paginate: true
 
 ## Two-part analytical process
 
-Coverage estimation runs in two sequential parts:
+The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|

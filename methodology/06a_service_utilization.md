@@ -1044,6 +1044,21 @@ In addition to year-over-year comparisons, FASTR generates quarter-on-quarter (Q
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m6_0 -->
+## From adjusted data to analysis
+
+Module 2 produced the adjusted dataset — outliers replaced, gaps imputed. Module 3 is where that work pays off.
+
+Within Module 3, users can analyse **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
+
+The next slides cover two views of service delivery:
+
+- **Service utilization** — volumes over time, quarter-on-quarter and year-on-year comparisons
+- **Disruption detection** — a statistical model that flags when actual volumes deviate from what the facility's history would predict
+
+Coverage estimation, which divides services by a target population, comes after.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_1 -->
 ## Service utilization analysis
 
@@ -1135,31 +1150,24 @@ The model **accounts for seasonality** when calculating expected values, ensurin
 Most importantly, this approach **quantifies changes with a robust methodology** rather than relying on visual observation of trend fluctuations. This improves the ability to interpret and compare utilization data across national and subnational areas **without requiring population denominators**.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_2a -->
-## Why detecting disruptions matters
-
-Disruption detection isn't just about flagging problems — it triggers investigation into root causes.
-
-![Disruptions framing](../resources/diagrams/disruptions_framing.svg)
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_5a -->
 ## Service utilization module: Configuration parameters
 
 **Note:** These parameters apply only to the disruption analysis. Year-over-year service utilization analysis does not require configuration.
 
-<div style="font-size: 0.8em;">
+<div style="font-size: 0.75em;">
 
 | Parameter | Description |
 |-----------|-------------|
-| **Count variable to use for modeling** | Which adjusted count to use for calculating expected values |
-| **Count variable to use for visualization** | Which adjusted count to use as actual observed values |
-| **Run district-level model** | Run regressions at admin_area_3 level. Set to Yes for detailed analysis, No for faster runtime |
-| **Run admin_area_4 analysis** | Run finest-level analysis. Warning: can be very slow for large datasets |
-| **Threshold for MAD-based control limits** | Number of MADs to flag sharp deviations. Default 1.5; higher = less sensitive |
-| **Smoothing window (k)** | Window size in months for rolling median smoothing. Must be odd. Default 7 |
-| **Dip threshold** | Flag if actual falls below this proportion of expected. Default 0.9 (≥10% drop); use 0.8 to flag only big drops |
-| **Difference percent threshold** | Highlight points where actual differs from expected by more than this percent. Default 10 |
+| **Count variable for modeling** | Adjusted count used to compute expected values |
+| **Count variable for visualization** | Adjusted count plotted as actual observed |
+| **Run district-level model** | Regressions at admin area 3. Yes = detailed; No = faster |
+| **Run admin area 4 analysis** | Finest-level analysis. Slow on large datasets |
+| **MAD threshold** | MADs flagging sharp deviations. Default 1.5; higher = less sensitive |
+| **Smoothing window (k)** | Months in the rolling median (odd). Default 7 |
+| **Dip threshold** | Flag if actual < X × expected. Default 0.9 (≥10% drop); 0.8 = big drops only |
+| **Difference % threshold** | Flag where actual differs from expected by > X%. Default 10 |
 
 </div>
 
@@ -1179,6 +1187,28 @@ PRESENTER NOTES:
      CONDENSED SLIDES: Methods + Interpretation Combined
 ═══════════════════════════════════════════════════════════════════════════ -->
 
+<!-- SLIDE:m6_s00 -->
+## Data analysis
+
+Three things FASTR does with your data:
+
+1. **Service utilization** — how many services were delivered, how that changed quarter-on-quarter and year-on-year, and what direction "good" means for each indicator.
+2. **Disruption detection** — separating real drops in service from normal seasonal variation by learning the expected rhythm of each indicator.
+3. **Coverage** — combining the numerator (HMIS volume) with a defensible denominator (target population) to estimate the share of people who needed a service and received it.
+
+Each sub-topic ends with the FASTR outputs you'll see in the platform, and how to read them.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s0b -->
+## What is service utilization?
+
+Service utilization measures **how many health services are being delivered** — antenatal visits, vaccinations, deliveries, outpatient consultations — by who, where, and over time.
+
+Tracking it tells you whether the system is meeting demand. A rising trend may show better access; a falling one may signal a stockout, a strike, a shock, or a real drop in need.
+
+FASTR computes service utilization from HMIS data, broken down by indicator, geography and time period. The outputs that follow show the volume itself, how it has changed quarter-on-quarter and year-on-year, and which direction is good news for each indicator.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s0 -->
 ## Service utilization: detecting changes
 
@@ -1196,21 +1226,6 @@ Then it compares **observed volumes** to **expected volumes**:
 The module measures **how many services were lost or gained** and over what period.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0b -->
-## Reading a disruption chart
-
-![w:750](../resources/diagrams/disruption_chart_annotated.svg)
-
-<!--
-PRESENTER NOTES:
-- Black line = what actually happened (observed volumes)
-- Dashed line = what FASTR expected (based on trend and seasonality)
-- Red area = services were below expected (disruption)
-- Green area = services were above expected (surplus)
-- The size of the colored area = the magnitude of the impact
-- Ask yourself: what caused this disruption? Was it a data problem or a real change?
--->
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_s1 -->
 ## Service utilization analysis
@@ -1270,13 +1285,13 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_s1d -->
 ## Indicator directionality
 
-Every indicator has a desired direction, and a trend can only be interpreted once that direction is established.
+A flagged change only becomes a finding once you know which direction you want the indicator to move.
 
-- **Service utilization indicators** (antenatal care visits, skilled birth attendance, immunization coverage) are generally expected to **increase** as systems strengthen.
-- **Morbidity and mortality indicators** (maternal deaths, severe malnutrition, disease incidence) are expected to **decrease**.
-- **Some indicators sit within a desired range** rather than moving in one direction. The C-section rate is the canonical example: too low signals under-access to emergency obstetric care; too high signals over-medicalization.
+- **Service-use indicators** (ANC visits, skilled birth attendance, immunisations) should **rise** as systems strengthen.
+- **Morbidity and mortality indicators** (maternal deaths, severe malnutrition, disease incidence) should **fall**.
+- **Range indicators** sit between two thresholds. The C-section rate is the canonical case — too low means under-access, too high means over-medicalisation.
 
-Before acting on a flagged change, confirm which category the indicator belongs to. A 15% rise in postnatal care visits is good news; a 15% rise in maternal deaths is not. The same statistical signal can carry the opposite meaning depending on the indicator.
+A 15% rise in postnatal care is good news; the same rise in maternal deaths is not. Always check the direction before reading the signal.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s1a -->

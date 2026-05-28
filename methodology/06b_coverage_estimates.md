@@ -1704,6 +1704,19 @@ While DHIS2 provides a robust foundation for data collection, storage, and basic
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m6_5b -->
+## Coverage estimation
+
+We've covered service utilization — what was reported and where the volumes are changing. Coverage estimation answers a different question: **what share of the target population actually received each service**.
+
+FASTR builds coverage in two parts:
+
+- First, it constructs and validates the denominator chains.
+- Then it applies the chosen chain to compute coverage, and projects values between surveys.
+
+Splitting the two parts lets the denominator chain be reviewed and overridden independently.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_6 -->
 ## Service coverage estimation
 
@@ -1731,16 +1744,15 @@ The coverage estimation module operates in two sequential parts:
 
 | Part | Components |
 |------|------------|
-| **Part 1: Denominator calculation** | Calculate target populations using multiple methods; compare against survey benchmarks; select optimal denominator for each indicator |
-| **Part 2: Coverage estimation** | Apply denominator selections; project survey estimates forward using HMIS trends; generate final coverage estimates |
+| **Part 1: Denominator calculation** | Build four candidate denominator chains by combining HMIS volumes with survey coverage at each entry point, then extending via demographic parameters. Compare chains against UN WPP and select the chain whose median ratio to UN WPP is closest to 1.0. |
+| **Part 2: Coverage estimation** | Apply the selected chain to all indicators. Project survey values forward into post-survey years using HMIS year-on-year deltas. Generate final coverage estimates at national and subnational levels. |
 
 <!--
 PRESENTER NOTES:
-- Modules 5 and 6 convert service volumes into coverage percentages (M5 = denominators, M6 = estimates)
 - Coverage = services / target population - the challenge is knowing target population
 - HMIS typically uses catchment populations which are often inaccurate
 - Our approach: derive denominators from HMIS data validated against surveys
-- Two-part process: Part 1 calculates and validates denominators, Part 2 generates estimates
+- Part 1 calculates and validates denominators, Part 2 generates estimates
 - This enables tracking trends and subnational disparities in coverage
 -->
 <!-- /SLIDE -->
@@ -1805,57 +1817,22 @@ At provincial level, we use all default values!
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_9a -->
-## Service cascade and dropout analysis
 
-A service cascade shows the journey patients take through a series of related health services. At each step, some patients don't continue to the next one — this is called **dropout**.
-
-For example, in maternal health: **ANC1 → ANC4 → Facility delivery → PNC**
-
-Each step should ideally retain as many patients as possible, but in practice, numbers decrease along the way. Understanding where and why patients drop out helps target interventions.
-
-![Service cascade](../resources/diagrams/service_cascade_funnel.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_9ab -->
-<!-- _class: compact -->
-
-## Calculating and interpreting dropout
-
-**Dropout formula:**
-
-> Dropout % = (Earlier step - Later step) / Earlier step × 100
-
-**Example:** If 1,000 women attend ANC1 but only 700 complete ANC4:
-
-> Dropout = (1,000 - 700) / 1,000 × 100 = **30%**
-
-**Interpretation scale:**
-
-| Dropout rate | Interpretation |
-|---|---|
-| < 10% | Excellent — strong continuity of care |
-| 10–25% | Acceptable — monitor regularly |
-| 25–50% | Investigate further — identify barriers |
-| > 50% | Critical — requires immediate action |
-
-**Try it:** Find Penta1 and Penta3 for your region. What is the dropout rate? What might explain it?
-<!-- /SLIDE -->
 
 <!-- SLIDE:m6_10 -->
 ## Estimating denominators from ANC-1
 
-![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
+Worked example. The survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits in the period, so 10,000 ÷ 0.80 ≈ 12,500 pregnancies. From pregnancies, FASTR walks the cascade: pregnancies → deliveries (apply pregnancy-loss rate) → live births (apply still-birth rate) → infants surviving to each age band (apply neonatal and infant mortality). Each step uses country-specific rates from the most recent DHS or vital statistics. The chain ends with the population eligible for any downstream service — DPT, measles, growth monitoring — without needing to ask the survey for each one.
+
+![Denominator cascade example h:340](../resources/diagrams/denominator_cascade_example.svg)
 
 <!--
 PRESENTER NOTES:
-- Concrete example: 10,000 ANC1 visits with 80% survey coverage
-- Back-calculate: 10,000 ÷ 0.80 = 12,500 pregnancies
-- Apply demographic factors step by step
-- Each step reduces population slightly due to losses/deaths
-- End with ~9,067 children eligible for DPT vaccination
-- These derived denominators can be used for coverage of other services
-- Numbers are illustrative - actual rates vary by country
+- Walk the example slowly: ANC1 visits → coverage rate → pregnancies → cascade steps
+- The 80% is from the survey, the 10,000 is from HMIS — that's the marriage of the two data sources
+- Each step's rate is country-specific; the numbers above the arrows in the diagram are illustrative
+- End point: ~9,067 children eligible for DPT vaccination (from 12,500 pregnancies)
+- Numbers are illustrative — actual rates vary by country
 -->
 <!-- /SLIDE -->
 
@@ -1886,47 +1863,25 @@ PRESENTER NOTES:
 <!-- SLIDE:m6_13 -->
 ## Denominator selection methodology
 
-The FASTR platform selects the denominator method that produces coverage estimates **closest to survey benchmarks** (DHS/MICS). It calculates coverage using all available denominator methods, compares each result to survey coverage estimates, and selects the denominator with the **smallest error** compared to the survey. This approach minimizes the discrepancy between HMIS and survey-based estimates, making the selected denominator the most reliable for estimating true coverage.
+FASTR builds **four candidate denominator chains**, each anchored on a different HMIS entry-point service (ANC1, deliveries, BCG, Penta1). For each chain, the platform:
 
-Each indicator (ANC1, ANC4, deliveries, etc.) may use a **different denominator method**. However, for a given indicator, the **same method is used across all timepoints and all subnational areas** for consistency. Selection is performed at the **national level**, then applied uniformly to all geographic levels.
+1. **Back-calculates the entry-point population** by combining the HMIS service volume with the most recent survey coverage for that service. (Example: ANC1 volume ÷ ANC1 survey coverage → estimated pregnancies.)
+2. **Extends through the demographic cascade** using country-specific parameters — pregnancy loss, stillbirth, neonatal and post-neonatal mortality — to derive the other target populations a chain needs (live births, surviving infants, etc.).
 
-<!--
-PRESENTER NOTES:
-- We have multiple ways to calculate denominators - which one is best?
-- Survey data (DHS/MICS) is our gold standard for coverage
-- We test each denominator method and pick the one closest to survey
-- Selection is done at the national level using national survey data
-- The selected method is then applied to all subnational areas
-- This ensures consistency: same method for all regions and timepoints within an indicator
-- Different indicators can use different methods (ANC1 might use one, Penta1 another)
-- Users can override automatic selections if needed
--->
-<!-- /SLIDE -->
+To pick between the four chains, the platform compares each to **UN World Population Prospects (UN WPP)** at national level and selects the chain whose median ratio to UN WPP is closest to 1.0.
 
-<!-- SLIDE:m6_13a -->
-## Which denominator provides more plausible estimates?
+**One chain, applied uniformly.** The chosen chain is then used for all indicators and all geographic levels.
 
-![Denominator comparison](../resources/diagrams/denominator_comparison.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_14 -->
-## Coverage projection methodology
-
-The module projects the most recent survey value forward using trends observed in HMIS-derived coverage:
-
-![Coverage projection method](../resources/diagrams/coverage_projection.svg)
-
-Year-over-year changes (deltas) in HMIS coverage are calculated and applied to the last survey value. This approach preserves the survey baseline while incorporating observed service delivery trends.
+**User override.** In Part 2 (m006), an analyst can override the auto-selection by setting `DENOMINATOR_CHAIN` to a specific chain (`anc1`, `delivery`, `bcg`, or `penta1`) if programmatic considerations argue for a different choice.
 
 <!--
 PRESENTER NOTES:
-- Surveys are infrequent (3-5 years) - need to fill gaps
-- Projection method: last survey value + HMIS trend since survey
-- Formula: Projected = Survey baseline + (Current HMIS - Survey year HMIS)
-- Preserves calibration to survey while incorporating observed changes
-- Additive approach avoids compounding errors
-- Projections should be validated when new survey data available
-- Longer time since survey = less reliable projection
+- The selection logic lives in m005's select_best_chain() function.
+- UN WPP is the *anchor* used to compare chains; surveys are NOT the selection criterion.
+- Median ratio closest to 1.0 = chain whose calculated population matches UN WPP most closely on average.
+- One chain applies to ALL indicators in the analysis — not different chains per indicator.
+- Same chain applies to ALL geographic levels (national, admin2, admin3).
+- Users can manually override via the DENOMINATOR_CHAIN parameter in m006.
 -->
 <!-- /SLIDE -->
 
@@ -1968,108 +1923,75 @@ PRESENTER NOTES:
 ═══════════════════════════════════════════════════════════════════════════ -->
 
 <!-- SLIDE:m6_s3 -->
+## What is coverage?
+
+In plain language, **coverage** tells you what share of the people who needed a service actually received it. It is a percentage: services delivered divided by the target population, times 100.
+
+A high coverage means the system is reaching most of who it should. A low coverage means people who needed the service did not get it — either it was not available, not accessible, or not used.
+
+---
+
 ## Coverage: the denominator problem
 
-The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2.
+The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2. Without it, you can count services delivered but you cannot say what share of the population that represents.
 
 ![Coverage equation h:280](../resources/diagrams/coverage_equation.svg)
 
-A wrong denominator → coverage that exceeds 100% or doesn't reflect reality.
+---
+
+## Denominators by service type
+
+The denominator is not one number — it is a different group for every service. ANC measures against pregnancies, BCG against live births, Penta against surviving infants.
+
+<div style="font-size: 0.85em;">
+
+| Service | Target population (denominator) |
+|---|---|
+| **ANC1, ANC4** | Pregnant women in the period |
+| **Skilled delivery** | Pregnant women (expected deliveries) |
+| **Postnatal care — mother** | Recent live births / postpartum women |
+| **BCG (at birth)** | Live births |
+| **PENTA1, PENTA3** | Surviving infants in the age-eligible cohort |
+| **Measles 1 (9 months)** | Surviving infants aged 9–12 months |
+| **PNC1 — newborn** | Live births |
+
+</div>
 
 ---
 
-## How FASTR deduces the denominator from HMIS
+## How FASTR deduces the denominator
 
-FASTR starts from what facilities report and **works back up the chain** to estimate the target population for each indicator.
+FASTR works back up the chain to estimate the target population from what facilities already report.
 
-**Example**: the survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits. → So there are roughly **10,000 ÷ 0.80 = 12,500 pregnancies**.
+**Example.** A survey says 80% of pregnant women receive ANC1. The HMIS reports 10,000 ANC1 visits. So there are roughly **10,000 ÷ 0.80 = 12,500 pregnancies** in that period.
 
-From there, FASTR calculates deliveries, births, live births, and eligible infants — adjusting for pregnancy losses, twins, stillbirths, etc.
+From the pregnancy count, the demographic cascade gives deliveries, live births, and surviving infants — using country-specific rates for pregnancy losses, stillbirths, twins and infant mortality.
 
-![The denominator calculation chain h:300](../resources/diagrams/denominator_cascade_example.svg)
-
----
-
-## Not just ANC1 — multiple entry points
-
-The formula is always the same: **HMIS volumes ÷ survey coverage = target population**
-
-FASTR applies this formula with **4 different indicators**:
-
-- **ANC1** ÷ ANC1 coverage → estimates **pregnancies**
-- **Skilled birth attendance** ÷ SBA coverage → estimates **deliveries**
-- **BCG** ÷ BCG coverage → estimates **live births**
-- **Penta1** ÷ Penta1 coverage → estimates **DPT1-eligible infants**
-
-Each estimate is independent. From each one, FASTR applies demographic adjustments (pregnancy losses, twins, stillbirths, neonatal deaths) to calculate all other populations.
-
-FASTR tests all 4 chains and keeps the one that **best matches survey data** (DHS/MICS).
-
----
-
-## Which denominator to choose?
-
-The choice of denominator **completely changes** the results. Here is the same indicator (ANC4+) with two different denominators:
-
-![Denominator comparison h:350](../resources/diagrams/denominator_comparison.svg)
-
-FASTR tests several denominators and keeps the one that **best matches national surveys** (DHS/MICS). For years without a survey, it projects estimates by following HMIS trends.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3a -->
-## Reading a coverage chart
-
-FASTR coverage charts combine **three sources**:
-
-- **Black dots** = National surveys (DHS/MICS) — the most reliable reference
-- **Grey line** = Coverage calculated from DHIS2 — available every quarter
-- **Red line** = Projection — estimate for years without a survey
-
-**How to interpret:**
-
-| What you see | What it means |
-|-------------|--------------|
-| Grey and black lines close | DHIS2 data is reliable |
-| Grey line well above black dots | Denominator is probably too small |
-| Coverage > 100% | Actual population is larger than the estimate |
-| Large differences between regions | Geographic inequities to investigate |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3b -->
-## Service coverage estimation
-
-**Coverage** = services delivered ÷ target population
-
-![Coverage equation h:100](../resources/diagrams/coverage_equation.svg)
-
-HMIS tells us how many services were delivered (numerator), but not the target population size (denominator). Standard HMIS coverage uses catchment populations, which are often inaccurate. Surveys (DHS/MICS) provide reliable coverage but only every 3-5 years.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3d -->
-## How FASTR estimates coverage
-
-**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
-
-**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
-
-**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
-
-<!--
-PRESENTER NOTES:
-- Condensed overview of coverage estimation methodology
-- Key insight: standard HMIS denominators (catchment populations) often inaccurate
-- FASTR approach: derive denominators from data, validate against surveys
-- Example calculation: 10,000 ANC1 / 80% coverage = 12,500 pregnancies
-- Multiple denominator options compared to select best fit
-- Projections extend surveys forward using HMIS trends
-- Result: more reliable coverage estimates for monitoring
--->
+![The denominator calculation chain h:220](../resources/diagrams/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3c -->
-## Service coverage example
+## Service coverage example: ANC4+
 
-![Coverage example ANC4+ h:420](../resources/diagrams/coverage_example_anc4.svg)
+What goes into the coverage rate for one indicator. **Numerator** = the number of pregnant women with four or more antenatal visits, taken directly from DHIS-2. **Denominator** = the total number of pregnancies in the population over the same period.
+
+The numerator is easy: facilities report it every month. The denominator is the hard part: DHIS-2 does not hold a count of pregnancies. Without a defensible denominator the coverage percentage is meaningless.
+
+The next few slides explain how FASTR builds that denominator from the data it does have.
+
+![Coverage formula for ANC4+ h:280](../resources/diagrams/coverage_example_anc4.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3ga -->
+## Using demographic relationships to estimate denominators
+
+Once you have one entry point — for example, the number of pregnancies from ANC1 — you can chain demographic ratios to work out the target population for every other service. Each arrow in the cascade is a ratio drawn from a national source (DHS, census, vital statistics):
+
+- Pregnancies → live births uses fetal and early-loss rates
+- Live births → surviving infants uses neonatal and infant mortality
+- Surviving infants → age-eligible cohorts uses age-specific survival
+
+Combine the chain and FASTR can back out the denominator for any service from any single input.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3h -->
@@ -2078,31 +2000,17 @@ PRESENTER NOTES:
 ![Denominator cascade flowchart](../resources/diagrams/denominator_cascade.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3e -->
-## Estimating denominators from ANC-1
+<!-- SLIDE:m6_s3j -->
+## Four parallel chains, best fit wins
 
-![Denominator cascade example](../resources/diagrams/denominator_cascade_example.svg)
-<!-- /SLIDE -->
+ANC1 is not the only entry point. FASTR runs the same back-calculation from **four different services**:
 
-<!-- SLIDE:m6_s3f -->
-## Five denominator options for FASTR analysis
+- **ANC1** → estimates pregnancies
+- **Skilled birth attendance** → estimates deliveries
+- **BCG** → estimates live births
+- **Penta1** → estimates DPT-eligible infants
 
-- **UN projections of live births** (available only at national level)
-- **Service utilization (DHIS2) derived denominators:**
-  - Adjustment to ANC1 service utilization
-  - Adjustment to delivery service utilization
-  - Adjustment to BCG service utilization (only calculated at national level)
-  - Adjustment to Penta1 service utilization (only calculated at national level)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3g -->
-## How FASTR estimates coverage
-
-**Calculate denominators multiple ways:** From HMIS data, use service volumes combined with survey coverage to back-calculate target populations. For example, if 10,000 ANC1 visits and survey says 80% coverage, this implies ~12,500 pregnancies. Also calculate denominators from UN population projections using birth rates and demographic adjustments.
-
-**Validate against surveys:** Calculate coverage using each denominator option, compare to survey benchmarks, and select the denominator with lowest error.
-
-**Project coverage forward:** Anchor to the last survey value and apply year-over-year HMIS trends to extend estimates into post-survey years.
+Each entry point produces a complete cascade. FASTR then compares all four against UN World Population Prospects and **keeps the chain whose median ratio is closest to 1.0**. That selected chain is then applied uniformly to every indicator, so coverage estimates across the country are internally consistent.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s4 -->
@@ -2159,59 +2067,16 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s4c -->
-## Drill down for the full picture
-
-National coverage can hide big differences between regions. If the national number looks good, dig deeper:
-
-- Break coverage down by **region or district**
-- Find the **biggest gap** between the best- and worst-performing areas
-- Ask: is the gap narrowing over time, or getting wider?
-
-*If national ANC4 coverage is 75%, but one region is at 45% while another is at 95%, the national average tells an incomplete story.*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s5 -->
-## Country example: Nigeria
-
-Nigeria's Federal Ministry of Health has adopted FASTR as a key tool for federal and state-level performance management of the primary health care system.
-
-**Disruption detection in a polycrisis environment:**
-
-- Quantified the impact of a health worker strike in the Federal Capital Territory
-- Pinpointed BCG vaccination declines in seven states
-- Tracked increased severe acute malnutrition admissions during a cholera outbreak in Zamfara state
-
-**Routine monitoring use:**
-
-- Quarterly RMNCAH+N performance monitoring assessments
-- Tracking maternal health service uptake under the Nigeria Health Sector Renewal Initiative
-- Comparing vaccine availability in facilities receiving direct financing vs those not covered
-
-FASTR enables **timely identification** and **quick follow-up** across the country.
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_s6 -->
-## Why FASTR? Value add beyond standard DHIS2 analysis
+## What the FASTR pipeline adds on top of DHIS2
 
-**DHIS2 provides the foundation** — robust data collection, storage, and basic visualization.
+DHIS2 holds the data; FASTR turns it into the analyses you've just seen. Three additions, matching the three sub-topics of this section:
 
-**FASTR builds on this foundation with:**
+- **Quality-adjusted volumes.** Outliers and reporting gaps are corrected before any analysis runs, so the trends, changes, and disruptions you read reflect service delivery — not data noise.
+- **Disruption detection.** Service volumes are compared against the expected rhythm of each indicator (long-term trend + seasonality). Real drops and surpluses are flagged automatically; one-month noise is not.
+- **Coverage with a derived denominator.** Denominators are back-calculated from HMIS entry points and benchmarked against UN World Population Prospects, giving a more defensible coverage figure than relying on catchment populations alone.
 
-- **Data quality adjustment** — Automatically adjusts for outliers and completeness gaps before analysis
-- **Advanced analytical methods** — Disruption detection, coverage projection, and sensitivity analysis
-- **Standardized visualizations** — Percent change approach to identify meaningful fluctuations across indicators
-- **Improved coverage estimation** — Back-calculates denominators from surveys rather than relying solely on catchment populations
-- **Faster analytics cycles** — Pre-built analytical pipeline aligned with country decision-making timelines
-- **Built-in capacity strengthening** — Reproducible methods that build local analytical skills
-
-<!--
-PRESENTER NOTES:
-- DHIS2 is excellent for data collection and basic visualization — FASTR complements it
-- Key differentiator: data quality adjustment before analysis
-- Coverage methodology goes beyond simple HMIS/population ratios
-- Goal is to enable faster, more rigorous analysis for decision-making
--->
+The same pipeline runs every quarter, so countries get findings on a routine rhythm rather than waiting for a one-off analysis.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s7 -->

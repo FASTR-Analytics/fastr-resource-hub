@@ -37,11 +37,3 @@ Neither dataset alone answers the question. HMIS tells you what services were de
 </div>
 
 > **Worked example.** A 20% drop in ANC1 visits in one region (HMIS) plus 60% of facilities in that region reporting no ANC supplies (HFA) ⇒ supply-driven decline. Neither figure alone supports that conclusion.
-
-<!--
-PRESENTER NOTES:
-- Frame as "two cameras pointed at the same system from different angles"
-- HMIS = what happened; HFA = could it have happened
-- The worked example is the punchline — keep it concrete, no abstract language about triangulation
-- If pressed: triangulation is the formal name, but the value is diagnostic — knowing what caused the change, not just that it happened
--->
