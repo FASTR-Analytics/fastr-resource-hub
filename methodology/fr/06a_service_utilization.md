@@ -1159,36 +1159,80 @@ L'analyse de l'utilisation des services mesure les changements dans les volumes 
 La mesure principale est le **pourcentage de variation d'une année sur l'autre**, qui quantifie les changements dans la prestation de services entre deux années consécutives. La formule calcule la différence entre les volumes de l'année en cours et de l'année précédente, exprimée en pourcentage de l'année précédente. Les changements dépassant ±10% sont signalés pour examen, car ils représentent généralement des changements significatifs dans la prestation de services plutôt que des variations normales.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1b -->
-## Comparaison de l'utilisation des services avec DHIS2
+<!-- SLIDE:m6_1c -->
+## Sortie de l'utilisation des services
 
-Les tendances d'utilisation des services sont couramment produites dans DHIS2. L'approche FASTR diffère de trois manières importantes :
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
-- Ajuste pour la qualité des données (valeurs aberrantes et/ou complétude)
-- Visualise les données avec l'approche du pourcentage de variation pour faciliter l'identification des fluctuations significatives dans la prestation de services
-- Examine les tendances, mais utilise également les données d'utilisation des services ajustées pour des analyses supplémentaires plus complexes
+![Nombre de services déclarés h:300](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**Ce que vous voyez :** Graphique linéaire montrant les volumes de services absolus dans le temps par indicateur.
+
+**Ce que cela représente :** Nombre de services délivrés chaque mois/trimestre.
+
+**Interprétation :** Repérez les tendances globales (croissance/baisse) et les chutes ou pics soudains qui nécessitent une investigation.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1a -->
-<!-- _class: compact -->
-## Utilisation des services et perturbations : comparaison avec DHIS2
+<!-- SLIDE:m6_1d -->
+## Variation trimestre par trimestre
 
-Les tendances d'utilisation des services sont couramment produites dans DHIS2
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
-**Principales différences entre l'approche DHIS2 et FASTR**
+![Variation trimestre par trimestre h:300](../resources/default_outputs/Module3_QoQ_change.png)
 
-- FASTR ajuste pour la qualité des données (valeurs aberrantes et/ou complétude)
-- FASTR visualise les données avec l'approche du pourcentage de variation pour faciliter l'identification des fluctuations significatives
+</div>
+<div style="flex: 1; font-size: 0.85em;">
 
-**Extension de l'analyse de l'utilisation des services** — approches statistiques plus complexes non disponibles dans DHIS2. En utilisant un cadre de régression, nous sommes en mesure de :
+**Ce que vous voyez :** Carte de chaleur comparant le trimestre en cours au précédent, avec les variations >±10% signalées.
 
-- Tenir compte de la saisonnalité
-- Exclure les changements inhabituels pour s'assurer que les événements ponctuels n'influencent pas les tendances normales
-- Utiliser les données historiques comme référence pour le contexte
-- Détecter les perturbations et les schémas de reprise
-- Quantifier les changements avec une méthodologie robuste par rapport à la simple observation des fluctuations dans une ligne de tendance
+**Formule :** Variation TT % = (trimestre actuel – trimestre précédent) / trimestre précédent × 100
 
-Cela améliore la capacité à interpréter et comparer les données d'utilisation dans les zones nationales et infranationales sans avoir besoin de dénominateurs de population.
+**Interprétation :** Les variations signalées appellent un suivi — s'agit-il d'un vrai changement programmatique, d'un problème de données ou d'un événement attendu ?
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_1e -->
+<!-- _class: output -->
+## Variation annuelle
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Variation du volume de services h:300](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Carte de chaleur comparant la période actuelle à la même période l'an dernier, avec les variations >±10% signalées.
+
+**Formule :** Variation AA % = (cette année - l'an dernier) / l'an dernier × 100
+
+**Interprétation :** Les variations signalées appellent un suivi — vrai changement programmatique, problème de données ou événement attendu ?
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_1f -->
+## Directionnalité des indicateurs
+
+Une variation signalée ne devient un constat qu'une fois la direction souhaitée connue.
+
+- **Indicateurs d'utilisation de services** (visites CPN, accouchements assistés, vaccinations) doivent **augmenter** quand le système se renforce.
+- **Indicateurs de morbidité et mortalité** (décès maternels, malnutrition sévère, incidence des maladies) doivent **diminuer**.
+- **Indicateurs à plage** se situent entre deux seuils. Le taux de césarienne en est le cas typique — trop bas signifie sous-accès, trop élevé signifie sur-médicalisation.
+
+Une hausse de 15% des soins postnatals est une bonne nouvelle ; la même hausse des décès maternels ne l'est pas. Vérifiez toujours la direction avant de lire le signal.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1231,16 +1275,27 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_2c -->
-## Comparaison de la détection des perturbations avec DHIS2
+<!-- SLIDE:m6_2d -->
+<!-- _class: output -->
+## Sortie des perturbations de service
 
-La détection des perturbations étend l'analyse de l'utilisation des services en utilisant des approches statistiques non disponibles dans DHIS2. Le cadre de régression permet plusieurs capacités qui améliorent la simple visualisation des tendances.
+<div class="output-layout">
+<div class="output-viz">
 
-Le modèle **tient compte de la saisonnalité** lors du calcul des valeurs attendues, garantissant que les schémas saisonniers ne sont pas confondus avec des perturbations. Il **exclut les changements historiques inhabituels** afin que les événements ponctuels n'influencent pas la référence. **Les données historiques servent de contexte** pour établir les niveaux de service attendus, et le cadre **détecte systématiquement les schémas de perturbation et de reprise**.
+![Sortie des perturbations h:300](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-Plus important encore, cette approche **quantifie les changements avec une méthodologie robuste** plutôt que de s'appuyer sur l'observation visuelle des fluctuations de tendance. Cela améliore la capacité à interpréter et comparer les données d'utilisation entre les zones nationales et infranationales **sans nécessiter de dénominateurs de population**.
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Graphique comparant le volume réel de services au volume attendu prédit par le modèle, en tenant compte de la saisonnalité.
+
+**Ce que cela représente :** Écarts par rapport à l'attendu — perturbations (en dessous) ou excédents (au-dessus).
+
+**Interprétation :** Considérez les facteurs externes : COVID, grèves, ruptures de stock, campagnes. Les écarts persistants justifient une enquête.
+
+</div>
+</div>
 <!-- /SLIDE -->
-
 
 <!-- SLIDE:m6_5a -->
 <!-- _class: compact -->
@@ -1248,16 +1303,20 @@ Plus important encore, cette approche **quantifie les changements avec une méth
 
 **Note :** Ces paramètres s'appliquent uniquement à l'analyse des perturbations. L'analyse de l'utilisation des services d'une année sur l'autre ne nécessite pas de configuration.
 
+<div style="font-size: 0.75em;">
+
 | Paramètre | Description |
 |-----------|-------------|
-| **Variable de comptage pour la modélisation** | Quel comptage ajusté utiliser pour calculer les valeurs attendues |
-| **Variable de comptage pour la visualisation** | Quel comptage ajusté utiliser comme valeurs observées réelles |
-| **Exécuter le modèle au niveau du district** | Exécuter les régressions au niveau admin_area_3. Mettre à Oui pour une analyse détaillée, Non pour une exécution plus rapide |
-| **Exécuter l'analyse admin_area_4** | Exécuter l'analyse au niveau le plus fin. Avertissement : peut être très lent pour les grands ensembles de données |
-| **Seuil pour les limites de contrôle basées sur MAD** | Nombre de MAD pour signaler les écarts importants. Par défaut 1,5 ; plus élevé = moins sensible |
-| **Fenêtre de lissage (k)** | Taille de la fenêtre en mois pour le lissage par médiane mobile. Doit être impair. Par défaut 7 |
-| **Seuil de baisse** | Signaler si la valeur réelle tombe en dessous de cette proportion de la valeur attendue. Par défaut 0,9 (baisse >= 10%) ; utiliser 0,8 pour ne signaler que les baisses importantes |
-| **Seuil de différence en pourcentage** | Mettre en évidence les points où la valeur réelle diffère de la valeur attendue de plus de ce pourcentage. Par défaut 10 |
+| **Variable de comptage pour modélisation** | Comptage ajusté utilisé pour calculer les valeurs attendues |
+| **Variable de comptage pour visualisation** | Comptage ajusté tracé comme valeur observée réelle |
+| **Modèle au niveau du district** | Régressions à l'unité administrative 3. Oui = détaillé ; Non = plus rapide |
+| **Analyse à l'unité administrative 4** | Niveau le plus fin. Lent sur les grands jeux de données |
+| **Seuil MAD** | Nombre de MAD signalant les écarts importants. Par défaut 1,5 ; plus élevé = moins sensible |
+| **Fenêtre de lissage (k)** | Mois dans la médiane mobile (impair). Par défaut 7 |
+| **Seuil de baisse** | Signaler si réel < X × attendu. Par défaut 0,9 (baisse ≥10%) ; 0,8 = baisses importantes seulement |
+| **Seuil de différence %** | Signaler si réel diffère de l'attendu de > X%. Par défaut 10 |
+
+</div>
 
 <!--
 PRESENTER NOTES:
@@ -1271,7 +1330,29 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0 -->
+<!-- SLIDE:m6_s00 -->
+## Analyse des données
+
+Trois choses que FASTR fait avec vos données :
+
+1. **Utilisation des services** — combien de services ont été délivrés, comment cela a changé trimestre par trimestre et d'une année à l'autre, et quelle direction est « bonne » pour chaque indicateur.
+2. **Détection des perturbations** — séparer les vraies baisses de services des variations saisonnières normales en apprenant le rythme attendu de chaque indicateur.
+3. **Couverture** — combiner le numérateur (volumes SNIS) avec un dénominateur défendable (population cible) pour estimer la part des personnes qui avaient besoin d'un service et l'ont reçu.
+
+Chaque sous-thème se termine par les sorties FASTR que vous verrez dans la plateforme, et comment les lire.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s0b -->
+## Qu'est-ce que l'utilisation des services ?
+
+L'utilisation des services mesure **combien de services de santé sont délivrés** — visites prénatales, vaccinations, accouchements, consultations externes — par qui, où, et dans le temps.
+
+La suivre vous dit si le système répond à la demande. Une tendance à la hausse peut indiquer un meilleur accès ; une baisse peut signaler une rupture de stock, une grève, un choc, ou une vraie baisse du besoin.
+
+FASTR calcule l'utilisation des services à partir des données SNIS, ventilées par indicateur, géographie et période. Les sorties qui suivent montrent le volume lui-même, comment il a varié trimestre par trimestre et d'une année à l'autre, et quelle direction est bonne pour chaque indicateur.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2 -->
 ## Utilisation des services : détecter les changements
 
 Les volumes de services montent et descendent naturellement — plus de cas de paludisme en saison des pluies, par exemple. Comment distinguer une **variation normale** d'une **vraie perturbation** ?
@@ -1346,7 +1427,7 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s1d -->
+<!-- SLIDE:m6_s0c -->
 ## Directionnalité des indicateurs
 
 Un changement signalé ne devient un résultat utile qu'une fois connue la direction dans laquelle l'indicateur doit évoluer.
@@ -1386,19 +1467,6 @@ NOTES DU PRÉSENTATEUR :
 - Ces résultats ne nécessitent pas de dénominateurs de population — utile lorsque les dénominateurs sont incertains
 - Complémentaire à la vue annuelle : capture les changements plus récents
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s2 -->
-## Détection des perturbations de services
-
-Au-delà des comparaisons d'une année sur l'autre, nous voulons savoir : **La prestation de services est-elle sur la bonne voie, ou quelque chose l'a-t-elle perturbée ?**
-
-**Le défi :** Les comptages bruts de services sont difficiles à interpréter. Une baisse des services pourrait être une vraie perturbation, ou simplement une variation saisonnière normale. Différentes zones ont des volumes de référence différents, rendant la comparaison directe difficile.
-
-**La solution FASTR :** Utiliser la modélisation statistique pour estimer quel volume de service nous *attendrions* basé sur les tendances historiques et la saisonnalité, puis comparer le volume réel à cette attente.
-
-- **Perturbation :** Volume observé significativement inférieur à l'attendu
-- **Excédent :** Volume observé significativement supérieur à l'attendu
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s2b -->

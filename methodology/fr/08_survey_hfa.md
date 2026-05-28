@@ -145,26 +145,6 @@ En fonction des besoins et des ressources du pays, les enquêtes sur l'EPT peuve
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m8_1 -->
-## Enquête à cycle rapide auprès des établissements de santé
-
-<div style="display: flex; gap: 2em; align-items: center;">
-<div style="flex: 2;">
-
-- Comprendre les contraintes de prestation de services dans les établissements de SSP
-- Mesurer la mise en œuvre des réformes
-- Évaluer l'effet des chocs sur les systèmes de santé
-- Améliorer la rapidité et la pertinence des enquêtes en établissements
-
-</div>
-<div style="flex: 1;">
-
-![Hospital icon](../../resources/icons/hospital_clinic.svg)
-
-</div>
-</div>
-<!-- /SLIDE -->
-
 <!-- SLIDE:m8_0 -->
 <!-- _class: compact -->
 
@@ -258,143 +238,38 @@ Les enquêtes rapides auprès des établissements peuvent identifier les lacunes
 \* Posé uniquement aux établissements de remplacement | \*\* Questions supplémentaires localement pertinentes générées lors de l'adaptation
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_1c -->
-<!-- _class: compact -->
-## Quatre types d'indicateurs
-
-*Les questions sont soit directement issues d'évaluations validées des établissements de santé, soit des indicateurs de substitution.*
-
-![Types d'indicateurs EES](../../resources/diagrams_fr/hfa_indicator_types.svg)
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_2 -->
-## Les enquêtes téléphoniques donnent-elles des résultats fiables ?
-
-**Oui** — les résultats des enquêtes téléphoniques concordent avec ceux des enquêtes en présentiel.
-
-### Exemple : Ghana
-
-Sur un échantillon de **63 formations sanitaires** au Ghana, **aucune différence significative** n'a été observée entre les scores moyens des enquêtes téléphoniques et ceux des enquêtes présentielles.
-
-<div class="success">
-
-Une enquête téléphonique bien conçue capture l'information essentielle à une fraction du coût et du délai d'une visite sur le terrain.
-
-</div>
-<!-- /SLIDE -->
-
 <!-- SLIDE:m8_3 -->
 <!-- _class: two-panel -->
 
 ## Pourquoi intégrer SNIS et enquêtes FOSA ?
 
-L'intégration entre les données du SNIS (DHIS2) et des enquêtes FOSA est **nécessaire** pour mesurer les indicateurs prioritaires de la santé.
+Aucune des deux sources ne répond seule à la question. Le SNIS dit quels services ont été délivrés. Les enquêtes FOSA disent quels services *pouvaient* l'être. Lus ensemble, ils expliquent pourquoi un chiffre a bougé et où agir.
 
 <div class="panel-layout">
 
 <div>
 
-### 1 · SNIS — DHIS2
+### SNIS — DHIS2
 *Données de routine, mensuelles*
 
-Capturent **ce qui a été délivré** — visites, doses, accouchements.
+- Mesure le **volume** : visites, doses, accouchements.
+- Détecte les changements de prestation à mesure qu'ils surviennent.
+- N'explique **pas** pourquoi un changement s'est produit.
 
 </div>
 
 <div>
 
-### 2 · Enquêtes FOSA
-*Enquêtes téléphoniques trimestrielles*
+### EES — enquête téléphonique
+*Trimestrielle*
 
-Capturent **ce qui peut être délivré** — personnel, intrants, infrastructure.
-
-</div>
-
-</div>
-
-> La triangulation des données nous permet de mesurer ce qui compte vraiment pour la santé maternelle et néonatale.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3a -->
-## Exemple : la mortalité maternelle est-elle susceptible de s'améliorer ?
-
-Pour répondre à cette question, les données du SNIS et des FOSA doivent être triangulées avec d'autres sources afin de mesurer ce qui compte vraiment.
-
-### Indicateur d'impact : mortalité maternelle institutionnelle
-
-**Sources de triangulation :**
-
-- **SRDMP** — surveillance de la mortalité
-- **DHIS2** — données du SNIS sur les services
-- **Enquêtes ménages** — EDS ou autres
-
-<div class="highlight">
-
-On ne peut pas agir pour réduire la mortalité maternelle sans comprendre ce qui se passe au sein des formations sanitaires.
-
-</div>
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3b -->
-## Ce que le DHIS2 nous permet de mesurer
-
-Avec les seules données DHIS2, vous pouvez déjà répondre à des questions essentielles :
-
-- *La couverture des accouchements institutionnels évolue-t-elle en hausse ou en baisse ?*
-- *Observe-t-on des augmentations significatives des accouchements en établissement au fil du temps ?*
-
-<div class="columns-3">
-
-<div>
-
-### Sortie
-*Analyse de l'utilisation des services*
-
-**Nombre d'accouchements en établissement**
-
-DHIS2 (trimestriel)
-
-</div>
-
-<div>
-
-### Résultat
-*Estimation de couverture*
-
-**% d'accouchements en établissement**
-
-DHIS2 + enquêtes ménages
-
-</div>
-
-<div>
-
-### Impact
-*Triangulation multi-sources*
-
-**Mortalité maternelle en institution**
-
-SRDMP · DHIS2 · EDS
+- Mesure la **préparation** : personnel, intrants, infrastructure.
+- Détecte les manques côté offre, formation par formation.
+- Ne mesure **pas** si le manque a affecté la prestation.
 
 </div>
 
 </div>
 
-> Le DHIS2 nous dit le « quoi » — mais pour comprendre le « pourquoi », il faut une source de données supplémentaire.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m8_3c -->
-<!-- _class: dense-table -->
-
-## La chaîne complète des résultats
-
-*L'ajout des données d'enquêtes FOSA nous permet de répondre au « pourquoi ».*
-
-| ENTRÉE | SORTIE | RÉSULTAT | IMPACT |
-|--------|--------|----------|--------|
-| **Capacité opérationnelle SONUB** | **Nombre d'accouchements en établissement** | **Couverture des accouchements institutionnels** | **Mortalité maternelle institutionnelle** |
-| Médicaments, personnel qualifié, équipement | Analyse de l'utilisation des services | Estimation de couverture | Triangulation multi-sources |
-| *Enquête téléphonique rapide (trimestrielle)* | *DHIS2 (trimestriel)* | *DHIS2 + enquêtes ménages (EDS)* | *MPDSR · DHIS2 · EDS* |
-
-> Les formations sanitaires sont-elles « prêtes » à fournir des soins SONUB de qualité ?
+> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (EES) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.
 <!-- /SLIDE -->

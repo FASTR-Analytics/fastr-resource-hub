@@ -1719,12 +1719,12 @@ DHIS2 constitue une base solide pour la collecte, le stockage et la visualisatio
 
 Nous avons traité l'utilisation des services — ce qui a été rapporté et où les volumes évoluent. L'estimation de la couverture répond à une autre question : **quelle part de la population cible a effectivement reçu chaque service**.
 
-La couverture est construite comme un **module en deux parties** dans FASTR :
+FASTR construit la couverture en deux parties :
 
-- **Partie 1** construit et valide les chaînes de dénominateurs
-- **Partie 2** applique la chaîne retenue pour calculer la couverture, et projette entre les enquêtes
+- D'abord, il construit et valide les chaînes de dénominateurs.
+- Ensuite, il applique la chaîne retenue pour calculer la couverture, et projette les valeurs entre les enquêtes.
 
-Les versions antérieures de la plateforme combinaient ces étapes en un seul module. La division en deux parties permet de revoir et de surcharger indépendamment la sélection de la chaîne. Certaines instances pays affichent encore l'ancienne structure étiquetée « Module 4 — Couverture » ; la méthodologie sous-jacente est la même.
+Diviser en deux parties permet de revoir et surcharger la chaîne de dénominateur indépendamment.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_6 -->
@@ -1759,11 +1759,10 @@ Le module d'estimation de la couverture fonctionne en deux parties séquentielle
 
 <!--
 PRESENTER NOTES:
-- Les modules 5 et 6 convertissent les volumes de services en pourcentages de couverture (M5 = dénominateurs, M6 = estimations)
 - Couverture = services / population cible - le défi est de connaître la population cible
 - Le SIGS utilise généralement les populations de zones de desserte qui sont souvent inexactes
 - Notre approche : dériver les dénominateurs des données SIGS validées par rapport aux enquêtes
-- Processus en deux parties : la partie 1 calcule et valide les dénominateurs, la partie 2 génère les estimations
+- La partie 1 calcule et valide les dénominateurs, la partie 2 génère les estimations
 - Cela permet de suivre les tendances et les disparités infranationales de la couverture
 -->
 <!-- /SLIDE -->
@@ -1833,18 +1832,9 @@ Au niveau provincial, nous utilisons toutes les valeurs par défaut !
 <!-- SLIDE:m6_10 -->
 ## Estimation des dénominateurs à partir de CPN1
 
-![Exemple de cascade de dénominateurs](../resources/diagrams_fr/denominator_cascade_example.svg)
+Exemple travaillé. L'enquête dit que 80% des femmes enceintes reçoivent une visite CPN1. Le SIGS rapporte 10 000 visites CPN1 sur la période, donc 10 000 ÷ 0,80 ≈ 12 500 grossesses. À partir des grossesses, FASTR parcourt la cascade : grossesses → accouchements (appliquer le taux de perte de grossesse) → naissances vivantes (appliquer le taux de mortinatalité) → nourrissons survivant à chaque tranche d'âge (appliquer la mortalité néonatale et infantile). Chaque étape utilise des taux propres au pays issus de l'EDS la plus récente ou des statistiques d'état civil. La chaîne se termine par la population éligible pour tout service en aval — DTC, rougeole, suivi de croissance — sans avoir à interroger l'enquête pour chacun.
 
-<!--
-PRESENTER NOTES:
-- Exemple concret : 10 000 visites CPN1 avec 80% de couverture selon l'enquête
-- Calcul inverse : 10 000 ÷ 0,80 = 12 500 grossesses
-- Appliquer les facteurs démographiques étape par étape
-- Chaque étape réduit légèrement la population en raison des pertes/décès
-- Résultat : environ 9 067 enfants éligibles à la vaccination DTC
-- Ces dénominateurs dérivés peuvent être utilisés pour la couverture d'autres services
-- Les chiffres sont illustratifs - les taux réels varient selon les pays
--->
+![Exemple de cascade de dénominateurs h:340](../resources/diagrams_fr/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_11 -->
@@ -1898,12 +1888,48 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_13a -->
-## Quel dénominateur fournit des estimations plus plausibles ?
+<!-- SLIDE:m6_14 -->
+## Sortie de couverture : tendances nationales
 
-![Comparaison des dénominateurs](../resources/diagrams_fr/denominator_comparison.svg)
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Couverture nationale h:320](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**Ce que vous voyez :** Graphique linéaire de la couverture dans le temps. Noir = enquête, Gris = dérivé SIGS, Rouge = projeté.
+
+**Formule :** Couverture % = (services / population cible) × 100
+
+**Interprétation :** Comparez les valeurs SIGS et enquête — les écarts importants suggèrent des problèmes de dénominateur. Les valeurs projetées étendent les enquêtes en utilisant les tendances SIGS.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_14b -->
+<!-- _class: output -->
+## Sortie de couverture : comparaison infranationale
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Couverture infranationale h:320](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** Estimations de couverture par zone infranationale, permettant la comparaison géographique.
+
+**Formule :** Couverture % = (services / population cible) × 100
+
+**Interprétation :** Identifiez les zones à faible couverture pour les prioriser. Une couverture >100% suggère une sous-estimation du dénominateur ou un double-comptage.
+
+</div>
+</div>
+<!-- /SLIDE -->
 
 <!-- SLIDE:m6_19 -->
 <!-- _class: compact -->
@@ -1936,13 +1962,51 @@ PRESENTER NOTES:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3 -->
+## Qu'est-ce que la couverture ?
+
+En termes simples, la **couverture** vous dit quelle part des personnes qui avaient besoin d'un service l'ont effectivement reçu. C'est un pourcentage : services délivrés divisé par la population cible, multiplié par 100.
+
+Une couverture élevée signifie que le système atteint la plupart de ceux qu'il devrait. Une couverture faible signifie que des gens qui avaient besoin du service ne l'ont pas eu — soit qu'il n'était pas disponible, pas accessible, ou pas utilisé.
+
+---
+
 ## Couverture : le problème du dénominateur
 
-Le numérateur est facile — c'est ce que les formations sanitaires rapportent dans le DHIS2. Mais le **dénominateur** (combien de personnes avaient besoin du service) n'est pas dans le DHIS2.
+Le numérateur est facile — c'est ce que les formations sanitaires rapportent dans le SIGS. Mais le **dénominateur** (combien de personnes avaient besoin du service) n'est pas dans le SIGS. Sans lui, vous pouvez compter les services délivrés mais vous ne pouvez pas dire quelle part de la population cela représente.
 
 ![Équation de couverture h:280](../resources/diagrams_fr/coverage_equation.svg)
 
-Un mauvais dénominateur → une couverture qui dépasse 100% ou qui ne reflète pas la réalité.
+---
+
+## Dénominateurs par type de service
+
+Le dénominateur n'est pas un seul nombre — c'est un groupe différent pour chaque service. CPN mesure contre les grossesses, BCG contre les naissances vivantes, Penta contre les nourrissons survivants.
+
+<div style="font-size: 0.85em;">
+
+| Service | Population cible (dénominateur) |
+|---|---|
+| **CPN1, CPN4** | Femmes enceintes sur la période |
+| **Accouchement assisté** | Femmes enceintes (accouchements attendus) |
+| **Soins postnatals — mère** | Naissances vivantes récentes / femmes en postpartum |
+| **BCG (à la naissance)** | Naissances vivantes |
+| **PENTA1, PENTA3** | Nourrissons survivants dans la cohorte d'âge éligible |
+| **Rougeole 1 (9 mois)** | Nourrissons survivants âgés de 9 à 12 mois |
+| **PNC1 — nouveau-né** | Naissances vivantes |
+
+</div>
+
+---
+
+## Comment FASTR déduit le dénominateur
+
+FASTR remonte la chaîne pour estimer la population cible à partir de ce que les formations sanitaires rapportent déjà.
+
+**Exemple.** Une enquête dit que 80% des femmes enceintes reçoivent une visite CPN1. Le SIGS rapporte 10 000 visites CPN1. Donc il y a approximativement **10 000 ÷ 0,80 = 12 500 grossesses** sur cette période.
+
+À partir du nombre de grossesses, la cascade démographique donne les accouchements, naissances vivantes et nourrissons survivants — en utilisant des taux propres au pays pour pertes de grossesse, mort-nés, jumeaux et mortalité infantile.
+
+![La chaîne de calcul des dénominateurs h:220](../resources/diagrams_fr/denominator_cascade_example.svg)
 
 ---
 
@@ -1954,90 +2018,31 @@ FASTR part de ce que les formations sanitaires rapportent et **remonte la chaîn
 
 À partir de ce chiffre, FASTR calcule les accouchements, naissances, naissances vivantes, et nourrissons éligibles — en ajustant pour les pertes de grossesse, les jumeaux, les mort-nés, etc.
 
-![La chaîne de calcul des dénominateurs h:300](../resources/diagrams_fr/denominator_cascade_example.svg)
-
----
-
-## Pas seulement la CPN1 — plusieurs points d'entrée
-
-La formule est toujours la même : **volumes HMIS ÷ couverture enquête = population cible**
-
-FASTR applique cette formule avec **4 indicateurs différents** :
-
-- **CPN1** ÷ couverture CPN1 → estime les **grossesses**
-- **Accouchement assisté** ÷ couverture SBA → estime les **accouchements**
-- **BCG** ÷ couverture BCG → estime les **naissances vivantes**
-- **Penta1** ÷ couverture Penta1 → estime les **nourrissons éligibles DTC1**
-
-Chaque estimation est indépendante. À partir de chacune, FASTR applique les ajustements démographiques (pertes de grossesse, jumeaux, mort-nés, décès néonatals) pour calculer toutes les autres populations.
-
-FASTR teste les 4 chaînes et garde celle qui **colle le mieux aux enquêtes** (EDS/MICS).
-
----
-
-## Quel dénominateur choisir ?
-
-Le choix du dénominateur change **complètement** les résultats. Voici le même indicateur (CPN4+) avec deux dénominateurs différents :
-
-![Comparaison des dénominateurs h:350](../resources/diagrams_fr/denominator_comparison.svg)
-
-FASTR teste plusieurs dénominateurs et garde celui qui **colle le mieux aux enquêtes nationales** (EDS/MICS). Pour les années sans enquête, il projette les estimations en suivant les tendances du HMIS.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3a -->
-## Lire un graphique de couverture
-
-Les graphiques de couverture FASTR combinent **trois sources** :
-
-- **Points noirs** = Enquêtes nationales (EDS/MICS) — la référence la plus fiable
-- **Ligne grise** = Couverture calculée à partir du DHIS2 — disponible chaque trimestre
-- **Ligne rouge** = Projection — estimation pour les années sans enquête
-
-**Comment interpréter :**
-
-| Ce que vous voyez | Ce que ça veut dire |
-|-------------------|-------------------|
-| Lignes grise et noire proches | Les données DHIS2 sont fiables |
-| Ligne grise bien au-dessus des points noirs | Le dénominateur est probablement trop petit |
-| Couverture > 100% | Le nombre réel de personnes est plus grand que l'estimation |
-| Grandes différences entre régions | Des inégalités géographiques à investiguer |
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3b -->
-## Estimation de la couverture des services
-
-**Couverture** = services fournis ÷ population cible
-
-![Équation de la couverture h:100](../resources/diagrams_fr/coverage_equation.svg)
-
-Le SIGS nous indique combien de services ont été fournis (numérateur), mais pas la taille de la population cible (dénominateur). La couverture SIGS standard utilise les populations de zones de desserte, qui sont souvent inexactes. Les enquêtes (EDS/MICS) fournissent une couverture fiable mais seulement tous les 3-5 ans.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3d -->
-## Comment FASTR estime la couverture
-
-**Calculer les dénominateurs de plusieurs façons :** A partir des données du SNIS, utiliser les volumes de services combinés aux résultats d'enquêtes de couverture pour estimer rétrospectivement les populations cibles. Par exemple, si 10 000 visites CPN1 et l'enquête indique 80 % de couverture, cela signifie environ 12 500 grossesses. On calcule aussi les dénominateurs a partir des projections de population de l'ONU en utilisant les taux de natalite et des ajustements demographiques.
-
-**Valider par rapport aux enquêtes :** Calculer la couverture avec chaque option de dénominateur, comparer aux valeurs de référence des enquêtes, et sélectionner le dénominateur avec l'erreur la plus faible.
-
-**Projeter la couverture :** S'appuyer sur la dernière valeur d'enquête et appliquer les tendances annuelles du SNIS pour prolonger les estimations au-dela des années d'enquête.
-
-<!--
-PRESENTER NOTES:
-- Vue d'ensemble condensée de la méthodologie d'estimation de la couverture
-- Point clé : les dénominateurs standard du SNIS (populations de zone de desserte) sont souvent inexacts
-- Approche FASTR : dériver les dénominateurs à partir des données, valider par rapport aux enquêtes
-- Exemple de calcul : 10 000 CPN1 / 80 % de couverture = 12 500 grossesses
-- Plusieurs options de dénominateur comparées pour sélectionner le meilleur
-- Les projections prolongent les enquêtes en utilisant les tendances du SNIS
-- Résultat : des estimations de couverture plus fiables pour le suivi
--->
+![La chaîne de calcul des dénominateurs h:220](../resources/diagrams_fr/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3c -->
-## Exemple de couverture des services
+## Exemple de couverture : CPN4+
 
-![Exemple de couverture CPN4+ h:420](../resources/diagrams_fr/coverage_example_anc4.svg)
+Ce qui entre dans le taux de couverture d'un indicateur. **Numérateur** = le nombre de femmes enceintes ayant fait quatre visites prénatales ou plus, pris directement dans DHIS-2. **Dénominateur** = le nombre total de grossesses dans la population sur la même période.
+
+Le numérateur est facile : les formations sanitaires le rapportent chaque mois. Le dénominateur est la partie difficile : DHIS-2 ne contient pas de comptage des grossesses. Sans un dénominateur défendable, le pourcentage de couverture n'a pas de sens.
+
+Les diapositives suivantes expliquent comment FASTR construit ce dénominateur à partir des données dont il dispose.
+
+![Formule de couverture pour CPN4+ h:280](../resources/diagrams_fr/coverage_example_anc4.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3ga -->
+## Utiliser les relations démographiques pour estimer les dénominateurs
+
+Une fois qu'on a un point d'entrée — par exemple, le nombre de grossesses dérivé de CPN1 — on peut enchaîner des ratios démographiques pour calculer la population cible de chaque autre service. Chaque flèche de la cascade est un ratio tiré d'une source nationale (EDS, recensement, statistiques d'état civil) :
+
+- Grossesses → naissances vivantes utilise les taux de pertes fœtales et précoces
+- Naissances vivantes → nourrissons survivants utilise la mortalité néonatale et infantile
+- Nourrissons survivants → cohortes éligibles selon l'âge utilise la survie spécifique à l'âge
+
+Combinez la chaîne et FASTR peut déduire le dénominateur de n'importe quel service à partir d'une seule entrée.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3h -->
@@ -2046,33 +2051,17 @@ PRESENTER NOTES:
 ![Organigramme de la cascade du dénominateur](../resources/diagrams_fr/denominator_cascade.svg)
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s3e -->
-## Estimation des dénominateurs à partir de CPN1
+<!-- SLIDE:m6_s3j -->
+## Quatre chaînes parallèles, la meilleure gagne
 
-![Exemple de cascade de dénominateurs](../resources/diagrams_fr/denominator_cascade_example.svg)
-<!-- /SLIDE -->
+CPN1 n'est pas le seul point d'entrée. FASTR exécute le même calcul rétrospectif à partir de **quatre services différents** :
 
-<!-- SLIDE:m6_s3f -->
-## Options de dénominateur utilisées par FASTR
+- **CPN1** → estime les grossesses
+- **Accouchement assisté** → estime les accouchements
+- **BCG** → estime les naissances vivantes
+- **Penta1** → estime les nourrissons éligibles DTC
 
-FASTR construit **quatre chaînes de dénominateurs candidates** à partir des volumes de services SIGS, chacune ancrée sur un service différent :
-
-- **Chaîne dérivée de CPN1** — ancrée sur les premières visites prénatales
-- **Chaîne dérivée des accouchements** — ancrée sur les accouchements rapportés
-- **Chaîne dérivée du BCG** — ancrée sur les vaccinations BCG (niveau national uniquement)
-- **Chaîne dérivée de Penta1** — ancrée sur la première dose de Penta (niveau national uniquement)
-
-Les estimations de **UN World Population Prospects (UN WPP)** sont chargées en parallèle. UN WPP n'est pas un dénominateur sélectionnable — il sert de **point de repère** pour comparer les quatre chaînes et présélectionner celle dont le ratio à UN WPP est le plus proche de 1,0.
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s3g -->
-## Comment FASTR estime la couverture
-
-**Calculer les dénominateurs de plusieurs façons :** À partir des données SIGS, utiliser les volumes de services combinés avec la couverture d'enquête pour calculer rétroactivement les populations cibles. Par exemple, si 10 000 visites CPN1 et l'enquête indique 80% de couverture, cela implique ~12 500 grossesses. Calculer également les dénominateurs à partir des projections de population ONU en utilisant les taux de natalité et les ajustements démographiques.
-
-**Valider par rapport aux enquêtes :** Calculer la couverture en utilisant chaque option de dénominateur, comparer aux références d'enquête, et sélectionner le dénominateur avec la plus petite erreur.
-
-**Projeter la couverture en avant :** S'ancrer à la dernière valeur d'enquête et appliquer les tendances interannuelles du SIGS pour prolonger les estimations dans les années post-enquête.
+Chaque point d'entrée produit une cascade complète. FASTR compare ensuite les quatre à UN World Population Prospects et **garde la chaîne dont le ratio médian est le plus proche de 1,0**. Cette chaîne retenue est ensuite appliquée uniformément à tous les indicateurs, pour que les estimations de couverture à travers le pays restent internement cohérentes.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s4 -->
@@ -2130,54 +2119,50 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s4c -->
-## Approfondir pour avoir une vue complète
-
-La couverture nationale peut masquer de grandes différences entre les régions. Si le chiffre national semble bon, creusez davantage :
-
-- Décomposez la couverture par **région ou district**
-- Trouvez le **plus grand écart** entre les zones les plus et les moins performantes
-- Demandez-vous : l'écart se réduit-il avec le temps, ou s'élargit-il ?
-
-*Si la couverture nationale CPN4 est de 75 %, mais qu'une région est à 45 % tandis qu'une autre est à 95 %, la moyenne nationale raconte une histoire incomplète.*
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s5 -->
-## Exemple de pays : Nigeria
-
-Le Ministère fédéral de la Santé du Nigeria a adopté FASTR comme outil clé pour la gestion des performances au niveau fédéral et étatique du système de soins de santé primaires.
-
-**Détection des perturbations dans un environnement de polycrises :**
-
-- A quantifié l'impact d'une grève des agents de santé dans le Territoire de la Capitale Fédérale
-- A identifié les baisses de vaccination BCG dans sept États
-- A suivi l'augmentation des admissions pour malnutrition aiguë sévère pendant une épidémie de choléra dans l'État de Zamfara
-
-**Utilisation pour le suivi de routine :**
-
-- Évaluations trimestrielles de suivi des performances SRMNIA+N
-- Suivi de l'adoption des services de santé maternelle dans le cadre de l'Initiative de Renouvellement du Secteur de la Santé du Nigeria
-- Comparaison de la disponibilité des vaccins dans les établissements recevant un financement direct par rapport à ceux non couverts
-
-FASTR permet une **identification rapide** et un **suivi rapide** dans tout le pays.
-<!-- /SLIDE -->
-
 <!-- SLIDE:m6_s6 -->
-## Pourquoi FASTR ? Valeur ajoutée au-delà de l'analyse standard DHIS2
+## Ce que le pipeline FASTR ajoute par-dessus DHIS2
 
-**DHIS2 fournit la base** — collecte de données robuste, stockage et visualisation de base.
+DHIS2 contient les données ; FASTR les transforme en analyses comme celles que vous venez de voir. Trois ajouts, qui correspondent aux trois sous-thèmes de cette section :
 
-**FASTR complète cette base avec :**
+- **Volumes ajustés pour la qualité.** Valeurs aberrantes et lacunes de reporting sont corrigées avant toute analyse, donc les tendances, variations et perturbations que vous lisez reflètent la prestation de services — pas du bruit dans les données.
+- **Détection des perturbations.** Les volumes de services sont comparés au rythme attendu de chaque indicateur (tendance à long terme + saisonnalité). Les vraies baisses et excédents sont signalés automatiquement ; le bruit d'un seul mois ne l'est pas.
+- **Couverture avec un dénominateur dérivé.** Les dénominateurs sont calculés rétrospectivement à partir des points d'entrée SIGS et comparés à UN World Population Prospects, donnant une couverture plus défendable que celle obtenue avec les populations des aires de desserte seules.
 
-- **Ajustement de la qualité des données** — Ajuste automatiquement les valeurs aberrantes et les lacunes de complétude avant l'analyse
-- **Méthodes analytiques avancées** — Détection des perturbations, projection de la couverture et analyse de sensibilité
-- **Visualisations standardisées** — Approche par variation en pourcentage pour identifier les fluctuations significatives entre indicateurs
-- **Estimation améliorée de la couverture** — Calcul rétrospectif des dénominateurs à partir des enquêtes plutôt que de s'appuyer uniquement sur les populations des aires de desserte
-- **Cycles analytiques plus rapides** — Pipeline analytique pré-construit aligné sur les calendriers de prise de décision des pays
-- **Renforcement des capacités intégré** — Méthodes reproductibles qui développent les compétences analytiques locales
+Le même pipeline tourne chaque trimestre, donc les pays obtiennent des résultats à un rythme régulier plutôt que d'attendre une analyse ponctuelle.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s7 -->
+## Point clé à retenir
+
+> "FASTR ne vous donnera pas toutes les réponses, mais il peut vous dire **où chercher**."
+
+**Ce que FASTR peut faire :**
+
+- Analyser l'utilisation des services et les tendances de couverture entre les zones infranationales et dans le temps
+- Évaluer la préparation des services des CSP et obtenir des retours rapides des gestionnaires d'établissements
+- Identifier les "signaux d'alerte" qui nécessitent un suivi rapide
+
+**Ces données vous permettent de :**
+
+- **Orienter les ressources** vers les programmes, services ou districts en retard
+- **Effectuer des corrections de cap** quand les programmes n'atteignent pas les résultats prévus
+- **Identifier les déviants positifs** pour en tirer des leçons
+- **Comprendre les causes profondes** en triangulant avec d'autres sources de données
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_20 -->
+## Ce que le pipeline FASTR ajoute par-dessus DHIS2
+
+DHIS2 contient les données ; FASTR les transforme en analyses comme celles que vous venez de voir. Trois ajouts, qui correspondent aux trois sous-thèmes de cette section :
+
+- **Volumes ajustés pour la qualité.** Valeurs aberrantes et lacunes de reporting sont corrigées avant toute analyse, donc les tendances, variations et perturbations que vous lisez reflètent la prestation de services — pas du bruit dans les données.
+- **Détection des perturbations.** Les volumes de services sont comparés au rythme attendu de chaque indicateur (tendance à long terme + saisonnalité). Les vraies baisses et excédents sont signalés automatiquement ; le bruit d'un seul mois ne l'est pas.
+- **Couverture avec un dénominateur dérivé.** Les dénominateurs sont calculés rétrospectivement à partir des points d'entrée SIGS et comparés à UN World Population Prospects, donnant une couverture plus défendable que celle obtenue avec les populations des aires de desserte seules.
+
+Le même pipeline tourne chaque trimestre, donc les pays obtiennent des résultats à un rythme régulier plutôt que d'attendre une analyse ponctuelle.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_21 -->
 ## Point clé à retenir
 
 > "FASTR ne vous donnera pas toutes les réponses, mais il peut vous dire **où chercher**."

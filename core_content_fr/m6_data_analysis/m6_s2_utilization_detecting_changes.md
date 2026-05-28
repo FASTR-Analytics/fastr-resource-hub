@@ -4,13 +4,17 @@ theme: fastr
 paginate: true
 ---
 
-## Détection des perturbations de services
+## Utilisation des services : détecter les changements
 
-Au-delà des comparaisons d'une année sur l'autre, nous voulons savoir : **La prestation de services est-elle sur la bonne voie, ou quelque chose l'a-t-elle perturbée ?**
+Les volumes de services montent et descendent naturellement — plus de cas de paludisme en saison des pluies, par exemple. Comment distinguer une **variation normale** d'une **vraie perturbation** ?
 
-**Le défi :** Les comptages bruts de services sont difficiles à interpréter. Une baisse des services pourrait être une vraie perturbation, ou simplement une variation saisonnière normale. Différentes zones ont des volumes de référence différents, rendant la comparaison directe difficile.
+**FASTR apprend le rythme normal** de chaque indicateur dans chaque zone :
+- Tendance à long terme (les services augmentent-ils ou diminuent-ils ?)
+- Saisonnalité (quels mois sont habituellement plus élevés ?)
 
-**La solution FASTR :** Utiliser la modélisation statistique pour estimer quel volume de service nous *attendrions* basé sur les tendances historiques et la saisonnalité, puis comparer le volume réel à cette attente.
+Puis il compare les **volumes observés** aux **volumes attendus** :
 
-- **Perturbation :** Volume observé significativement inférieur à l'attendu
-- **Excédent :** Volume observé significativement supérieur à l'attendu
+- **En dessous** de l'attendu → perturbation potentielle (rupture de stock ? grève ? conflit ?)
+- **Au-dessus** de l'attendu → hausse inhabituelle (campagne de vaccination ? nouveau programme ?)
+
+Le module mesure **combien de services ont été perdus ou gagnés** et sur quelle durée.

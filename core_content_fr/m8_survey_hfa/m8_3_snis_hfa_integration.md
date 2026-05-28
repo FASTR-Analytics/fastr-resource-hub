@@ -8,28 +8,32 @@ paginate: true
 
 ## Pourquoi intégrer SNIS et enquêtes FOSA ?
 
-L'intégration entre les données du SNIS (DHIS2) et des enquêtes FOSA est **nécessaire** pour mesurer les indicateurs prioritaires de la santé.
+Aucune des deux sources ne répond seule à la question. Le SNIS dit quels services ont été délivrés. Les enquêtes FOSA disent quels services *pouvaient* l'être. Lus ensemble, ils expliquent pourquoi un chiffre a bougé et où agir.
 
 <div class="panel-layout">
 
 <div>
 
-### 1 · SNIS — DHIS2
+### SNIS — DHIS2
 *Données de routine, mensuelles*
 
-Capturent **ce qui a été délivré** — visites, doses, accouchements.
+- Mesure le **volume** : visites, doses, accouchements.
+- Détecte les changements de prestation à mesure qu'ils surviennent.
+- N'explique **pas** pourquoi un changement s'est produit.
 
 </div>
 
 <div>
 
-### 2 · Enquêtes FOSA
-*Enquêtes téléphoniques trimestrielles*
+### EES — enquête téléphonique
+*Trimestrielle*
 
-Capturent **ce qui peut être délivré** — personnel, intrants, infrastructure.
+- Mesure la **préparation** : personnel, intrants, infrastructure.
+- Détecte les manques côté offre, formation par formation.
+- Ne mesure **pas** si le manque a affecté la prestation.
 
 </div>
 
 </div>
 
-> La triangulation des données nous permet de mesurer ce qui compte vraiment pour la santé maternelle et néonatale.
+> **Exemple concret.** Une baisse de 20 % des CPN1 dans une région (SNIS) combinée à 60 % des formations de cette région signalant des ruptures d'intrants de CPN (EES) ⇒ baisse liée à l'offre. Aucun des deux chiffres seul ne soutient cette conclusion.

@@ -9,16 +9,20 @@ paginate: true
 
 **Note :** Ces paramètres s'appliquent uniquement à l'analyse des perturbations. L'analyse de l'utilisation des services d'une année sur l'autre ne nécessite pas de configuration.
 
+<div style="font-size: 0.75em;">
+
 | Paramètre | Description |
 |-----------|-------------|
-| **Variable de comptage pour la modélisation** | Quel comptage ajusté utiliser pour calculer les valeurs attendues |
-| **Variable de comptage pour la visualisation** | Quel comptage ajusté utiliser comme valeurs observées réelles |
-| **Exécuter le modèle au niveau du district** | Exécuter les régressions au niveau admin_area_3. Mettre à Oui pour une analyse détaillée, Non pour une exécution plus rapide |
-| **Exécuter l'analyse admin_area_4** | Exécuter l'analyse au niveau le plus fin. Avertissement : peut être très lent pour les grands ensembles de données |
-| **Seuil pour les limites de contrôle basées sur MAD** | Nombre de MAD pour signaler les écarts importants. Par défaut 1,5 ; plus élevé = moins sensible |
-| **Fenêtre de lissage (k)** | Taille de la fenêtre en mois pour le lissage par médiane mobile. Doit être impair. Par défaut 7 |
-| **Seuil de baisse** | Signaler si la valeur réelle tombe en dessous de cette proportion de la valeur attendue. Par défaut 0,9 (baisse >= 10%) ; utiliser 0,8 pour ne signaler que les baisses importantes |
-| **Seuil de différence en pourcentage** | Mettre en évidence les points où la valeur réelle diffère de la valeur attendue de plus de ce pourcentage. Par défaut 10 |
+| **Variable de comptage pour modélisation** | Comptage ajusté utilisé pour calculer les valeurs attendues |
+| **Variable de comptage pour visualisation** | Comptage ajusté tracé comme valeur observée réelle |
+| **Modèle au niveau du district** | Régressions à l'unité administrative 3. Oui = détaillé ; Non = plus rapide |
+| **Analyse à l'unité administrative 4** | Niveau le plus fin. Lent sur les grands jeux de données |
+| **Seuil MAD** | Nombre de MAD signalant les écarts importants. Par défaut 1,5 ; plus élevé = moins sensible |
+| **Fenêtre de lissage (k)** | Mois dans la médiane mobile (impair). Par défaut 7 |
+| **Seuil de baisse** | Signaler si réel < X × attendu. Par défaut 0,9 (baisse ≥10%) ; 0,8 = baisses importantes seulement |
+| **Seuil de différence %** | Signaler si réel diffère de l'attendu de > X%. Par défaut 10 |
+
+</div>
 
 <!--
 PRESENTER NOTES:
