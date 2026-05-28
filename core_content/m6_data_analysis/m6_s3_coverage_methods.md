@@ -8,7 +8,7 @@ paginate: true
 
 In plain language, **coverage** tells you what share of the people who needed a service actually received it. It is a percentage:
 
-$$\text{coverage} = \frac{\text{services delivered}}{\text{target population}} \times 100$$
+**coverage (%) = services delivered ÷ target population × 100**
 
 A high coverage means the system is reaching most of who it should. A low coverage means people who needed the service did not get it — either it was not available, not accessible, or not used.
 
@@ -18,11 +18,9 @@ Coverage matters because it is the language donors, ministries and partners use 
 
 ## Coverage: the denominator problem
 
-The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2.
+The numerator is easy — it's what facilities report in DHIS2. But the **denominator** (how many people needed the service) is not in DHIS2. Without it, you can count services delivered but you cannot say what share of the population that represents.
 
 ![Coverage equation h:280](../../resources/diagrams/coverage_equation.svg)
-
-A wrong denominator → coverage that exceeds 100% or doesn't reflect reality.
 
 ---
 

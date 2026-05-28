@@ -4,18 +4,19 @@ theme: fastr
 paginate: true
 ---
 
-## Service coverage example
+## Service coverage example: ANC4+
 
-ANC4+ coverage over time: the chart shows the percentage of pregnant women who received at least four antenatal visits, in this country and at this admin level. The horizontal axis is time; the vertical axis is the coverage rate. Where the line dips, fewer women completed all four visits than the model expected. Where it climbs, coverage improved.
+What goes into the coverage rate for one indicator. **Numerator** = the number of pregnant women with four or more antenatal visits, taken directly from DHIS-2. **Denominator** = the total number of pregnancies in the population over the same period.
 
-The line is built from two things on every point: the numerator (ANC4 visits reported in DHIS2) and the denominator (estimated pregnancies for that period, derived from the demographic cascade). Reading the chart is a question of trend, not a single point — a single low quarter is rarely meaningful, a multi-quarter downturn usually is.
+The numerator is easy: facilities report it every month. The denominator is the hard part: DHIS-2 does not hold a count of pregnancies. Without a defensible denominator the coverage percentage is meaningless.
 
-![Coverage example ANC4+ h:300](../../resources/diagrams/coverage_example_anc4.svg)
+The next few slides explain how FASTR builds that denominator from the data it does have.
+
+![Coverage formula for ANC4+ h:280](../../resources/diagrams/coverage_example_anc4.svg)
 
 <!--
 PRESENTER NOTES:
-- Anchor the reader on what the axis means before they read the line
-- Stress that coverage = numerator / denominator, both have to be plausible
-- ANC4+ in particular is sensitive to whether the survey-based denominator is fresh
-- If the line is bumpy, suspect denominator noise before service-delivery change
+- Use this slide to set up "the denominator problem" on the next slide
+- Numerator is HMIS, denominator is NOT — that asymmetry is the whole reason FASTR derives the denominator
+- Stress: a percentage with the wrong denominator is worse than no number
 -->
