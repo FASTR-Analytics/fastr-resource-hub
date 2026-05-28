@@ -1209,7 +1209,7 @@ Tracking it tells you whether the system is meeting demand. A rising trend may s
 FASTR computes service utilization from HMIS data, broken down by indicator, geography and time period. The outputs that follow show the volume itself, how it has changed quarter-on-quarter and year-on-year, and which direction is good news for each indicator.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s0 -->
+<!-- SLIDE:m6_s2 -->
 ## Service utilization: detecting changes
 
 Service volumes naturally go up and down — more malaria cases in the rainy season, for example. How do you tell a **normal variation** from a **real disruption**?
@@ -1282,7 +1282,7 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_s1d -->
+<!-- SLIDE:m6_s0c -->
 ## Indicator directionality
 
 A flagged change only becomes a finding once you know which direction you want the indicator to move.
@@ -1321,19 +1321,6 @@ PRESENTER NOTES:
 - These outputs don't require population denominators — useful when denominators uncertain
 - Complementary to the year-over-year view: captures more recent changes
 -->
-<!-- /SLIDE -->
-
-<!-- SLIDE:m6_s2 -->
-## Detecting service disruptions
-
-Beyond year-over-year comparisons, we want to know: **Is service delivery on track, or has something disrupted it?**
-
-**The challenge:** Raw service counts are hard to interpret. A drop in services could be a real disruption, or just normal seasonal variation. Different areas have different baseline volumes, making direct comparison difficult.
-
-**FASTR's solution:** Use statistical modeling to estimate what service volume we would *expect* based on historical trends and seasonality, then compare actual volume to this expectation.
-
-- **Disruption:** Observed volume significantly below expected
-- **Surplus:** Observed volume significantly above expected
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s2b -->

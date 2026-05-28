@@ -79,14 +79,14 @@ slides:
   order: 0.0
   variant: condensed
   title: Data analysis
-- file: m6_s0_utilization_detecting_changes.md
-  order: 0.001
-  variant: condensed
-  title: 'Service utilization: detecting changes'
 - file: m6_s0b_what_is_service_utilization.md
   order: 0.02
   variant: condensed
   title: What is service utilization?
+- file: m6_s0c_indicator_directionality.md
+  order: 0.03
+  variant: condensed
+  title: Indicator directionality
 - file: m6_s1_utilization_overview.md
   order: 1.0
   variant: condensed
@@ -99,14 +99,10 @@ slides:
   order: 1.02
   variant: condensed
   title: Year-over-year change output
-- file: m6_s1d_indicator_directionality.md
-  order: 1.04
-  variant: condensed
-  title: Indicator directionality
-- file: m6_s2_disruption_interpretation.md
+- file: m6_s2_utilization_detecting_changes.md
   order: 2.0
   variant: condensed
-  title: Detecting service disruptions
+  title: 'Service utilization: detecting changes'
 - file: m6_s2b_disruption_interpretation.md
   order: 2.02
   variant: condensed
