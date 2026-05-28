@@ -20,6 +20,29 @@ The numerator is easy — it's what facilities report in DHIS2. But the **denomi
 
 ---
 
+## Denominators by service type
+
+Each service measures coverage against a different target population. Pick the wrong denominator and the percentage answers a different question.
+
+<div style="font-size: 0.85em;">
+
+| Service | Target population (denominator) |
+|---|---|
+| **ANC1, ANC4** | Pregnant women in the period |
+| **Skilled delivery** | Pregnant women (expected deliveries) |
+| **Postnatal care — mother** | Recent live births / postpartum women |
+| **BCG (at birth)** | Live births |
+| **PENTA1, PENTA3** | Surviving infants in the age-eligible cohort |
+| **Measles 1 (9 months)** | Surviving infants aged 9–12 months |
+| **PNC1 — newborn** | Live births |
+| **General outpatient** | Total population |
+
+</div>
+
+FASTR derives each of these from a single entry point in the data, so the denominators in this table are internally consistent for one country and one period.
+
+---
+
 ## How FASTR deduces the denominator
 
 FASTR works back up the chain to estimate the target population from what facilities already report.
@@ -29,16 +52,3 @@ FASTR works back up the chain to estimate the target population from what facili
 From the pregnancy count, the demographic cascade gives deliveries, live births, and surviving infants — using country-specific rates for pregnancy losses, stillbirths, twins and infant mortality.
 
 ![The denominator calculation chain h:280](../../resources/diagrams/denominator_cascade_example.svg)
-
----
-
-## Four parallel chains, best fit wins
-
-ANC1 is not the only entry point. FASTR runs the same back-calculation from **four different services**:
-
-- **ANC1** → estimates pregnancies
-- **Skilled birth attendance** → estimates deliveries
-- **BCG** → estimates live births
-- **Penta1** → estimates DPT-eligible infants
-
-Each entry point produces a complete cascade. FASTR then compares all four against UN World Population Prospects and **keeps the chain whose median ratio is closest to 1.0**. That selected chain is then applied uniformly to every indicator, so coverage estimates across the country are internally consistent.

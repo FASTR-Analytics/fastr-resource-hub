@@ -111,18 +111,14 @@ slides:
   order: 3.0
   variant: condensed
   title: 'Coverage'
-- file: m6_s3ga_demographic_relationships_intro.md
-  order: 3.075
-  variant: condensed
-  title: Using demographic relationships to estimate denominators
 - file: m6_s3h_expected_relationships.md
-  order: 3.08
+  order: 3.05
   variant: condensed
   title: Expected relationships which help with estimating denominators
-- file: m6_s3i_denominators_by_service_type.md
-  order: 3.09
+- file: m6_s3j_four_parallel_chains.md
+  order: 3.06
   variant: condensed
-  title: Denominators by service type
+  title: Four parallel chains, best fit wins
 - file: m6_s4_coverage_interpretation.md
   order: 4.0
   variant: condensed
@@ -131,14 +127,6 @@ slides:
   order: 4.02
   variant: condensed
   title: 'Coverage output: Subnational comparison'
-- file: m6_s4c_coverage_interpretation.md
-  order: 4.03
-  variant: condensed
-  title: Drill down for the full picture
-- file: m6_s5_country_example_nigeria.md
-  order: 5.0
-  variant: condensed
-  title: 'Country example: Nigeria'
 - file: m6_s6_fastr_value_beyond_dhis2.md
   order: 6.0
   variant: condensed
