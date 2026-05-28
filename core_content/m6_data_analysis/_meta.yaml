@@ -100,7 +100,7 @@ slides:
   variant: condensed
   title: Year-over-year change output
 - file: m6_s1d_indicator_directionality.md
-  order: 1.04
+  order: 1.005
   variant: condensed
   title: Indicator directionality
 - file: m6_s2_disruption_interpretation.md
