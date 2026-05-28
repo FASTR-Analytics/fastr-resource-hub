@@ -4,11 +4,19 @@ theme: fastr
 paginate: true
 ---
 
-## Capacités de l'assistant IA
+## Conseils pour de meilleures réponses
 
-| Domaine | Ce qu'il permet |
-|---------|-----------------|
-| **Exploration des données** | Interroger les métriques des modules d'analyse ; filtrer par géographie, temps, démographie ; voir les données CSV brutes ; explorer différentes périodes et localisations |
-| **Visualisation** | Afficher les visualisations du projet ; créer des graphiques à barres, courbes, tableaux ; combiner graphiques, tableaux et texte narratif |
-| **Connaissances** | Accéder à la documentation FASTR ; expliquer les indicateurs et calculs ; interpréter les résultats avec contexte sur la qualité des données et les limites |
-| **Communication** | Construire des récits combinant visuels et texte ; mettre en évidence les résultats clés ; créer des vues ciblées ; fournir des analyses basées sur les données |
+**Soyez précis sur :**
+
+- Quel service — « CPN1 » au lieu de « services de soins prénataux »
+- Quelle période — « 12 derniers mois » ou « 2024 »
+- Quel lieu — « Banadir » ou « toutes les régions »
+
+**Vous pouvez demander :** graphiques, explications, comparaisons, rapports, tableaux de données
+
+**Les questions de suivi fonctionnent très bien :**
+
+1. Commencez large : « Montrez-moi les scores de qualité par région »
+2. Affinez : « Et pour les indicateurs CPN seulement ? »
+3. Approfondissez : « Pourquoi la région Nord est-elle si basse ? »
+4. Passez à l'action : « Créez une diapositive à ce sujet pour ma présentation »

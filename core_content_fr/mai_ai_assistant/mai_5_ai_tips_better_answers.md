@@ -4,19 +4,21 @@ theme: fastr
 paginate: true
 ---
 
-## Conseils pour de meilleures réponses
+## Quand l'IA apporte peu de valeur
 
-**Soyez précis sur :**
+<div class="columns">
+<div>
 
-- Quel service — « CPN1 » au lieu de « services de soins prénataux »
-- Quelle période — « 12 derniers mois » ou « 2024 »
-- Quel lieu — « Banadir » ou « toutes les régions »
+**Votre interprétation du graphique :**
 
-**Vous pouvez demander :** Graphiques, explications, comparaisons, rapports, tableaux de données
+Sur l'ensemble des districts, les valeurs aberrantes sont très faibles, tous les indicateurs en dessous de 1 % en moyenne, ce qui suggère une qualité de rapportage cohérente.
 
-**Les questions de suivi fonctionnent très bien :**
+***Quand les patterns sont évidents, plus d'explication n'améliore pas la compréhension.***
 
-1. Commencez large : « Montrez-moi les scores de qualité par région »
-2. Affinez : « Et pour les indicateurs CPN seulement ? »
-3. Approfondissez : « Pourquoi la région Nord est-elle si basse ? »
-4. Passez à l'action : « Créez une diapositive à ce sujet pour ma présentation »
+</div>
+<div>
+
+![Quand l'IA apporte peu de valeur](../../resources/screenshots/ai_little_value_obvious.png)
+
+</div>
+</div>

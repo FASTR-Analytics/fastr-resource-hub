@@ -4,22 +4,27 @@ theme: fastr
 paginate: true
 ---
 
-## Ce que l'assistant IA peut faire
+## L'IA est un accélérateur, pas un décideur
 
-**Répondre aux questions sur vos données**
+<div class="columns">
+<div>
 
-- « Quelles régions ont le plus de valeurs aberrantes ? »
-- « Comment la complétude des rapports a-t-elle évolué ? »
-- Crée des graphiques et explications à la volée
+![Diagramme accélérateur IA h:360](../../resources/diagrams_fr/ai_accelerator.svg)
 
-**Expliquer la méthodologie**
+</div>
+<div>
 
-- « Comment les valeurs aberrantes sont-elles détectées ? »
-- « Que signifie ce score de qualité des données ? »
-- S'appuie sur la documentation de la plateforme
+**Vous gardez le contrôle de :**
 
-**Aider à construire des rapports**
+- Jugement — décider ce qui compte
+- Interprétation — comprendre le contexte
+- Action — prendre des décisions
 
-- Générer des présentations à partir de vos données
-- Combiner graphiques sauvegardés et texte narratif
-- Créer des présentations pour différents publics
+**Les chiffres viennent de méthodes validées**
+
+Tous les calculs (détection des valeurs aberrantes, estimations de couverture, scores de qualité) utilisent des formules statistiques éprouvées — pas l'IA.
+
+L'IA interprète et explique. Vous décidez et agissez.
+
+</div>
+</div>

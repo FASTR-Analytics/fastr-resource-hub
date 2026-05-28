@@ -4,17 +4,29 @@ theme: fastr
 paginate: true
 ---
 
-## Comment fonctionnent les conversations
+## Comment fonctionne l'assistant IA
 
-**Exemple de conversation :**
+<div class="columns">
+<div>
 
-Vous : « Quelles régions ont le plus de problèmes de qualité des données ? »
-IA : *Crée un graphique montrant les scores de qualité par région*
+L'IA suit un principe de « lire avant de répondre » — elle ne devine jamais.
 
-Vous : « Qu'est-ce qui cause le faible score dans la région Nord ? »
-IA : *Détaille les problèmes : valeurs aberrantes, lacunes de complétude, problèmes de cohérence*
+**Pour les questions sur les données :**
 
-Vous : « Créez un résumé pour mon directeur »
-IA : *Construit une diapositive mettant en évidence les domaines prioritaires pour l'amélioration de la qualité des données*
+1. Trouve la métrique pertinente
+2. Lit les valeurs réelles
+3. Répond avec une visualisation
 
-**Pensez à l'IA comme un analyste de données dans votre équipe** — quelqu'un qui peut instantanément extraire des rapports, créer des graphiques et répondre à vos questions sur vos données de santé.
+**Pour les questions méthodologiques :**
+
+1. Consulte la documentation
+2. Lit les détails
+3. Explique en langage clair
+
+</div>
+<div>
+
+![Diagramme des outils IA h:440](../../resources/diagrams_fr/ai_on_rails.svg)
+
+</div>
+</div>

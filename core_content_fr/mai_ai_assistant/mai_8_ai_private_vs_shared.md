@@ -4,30 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## Privé vs partagé sur les projets d'équipe
+## Que se passe-t-il quand vous vous déconnectez
 
-<div class="columns">
-<div>
-
-**Privé pour vous :**
-
-- Votre conversation avec l'IA
-- Vos explorations sur le tableau blanc
-- Les questions que vous posez et les réponses reçues
-
-Les autres membres de l'équipe ne peuvent pas voir ce que vous explorez.
-
-</div>
-<div>
-
-**Partagé avec l'équipe :**
-
-- Les données sous-jacentes (mêmes données SNIS)
-- Visualisations sauvegardées dans la bibliothèque
-- Présentations que vous créez et sauvegardez
-- Paramètres du projet et résultats des modules
-
-Tout le monde peut voir le contenu sauvegardé.
-
-</div>
-</div>
+| Contenu | Sauvegardé ? | Notes |
+|---------|--------------|-------|
+| Votre conversation IA | Temporaire | Les conversations IA sont sauvegardées localement dans le navigateur et visibles uniquement par la personne qui utilise ce navigateur. Rafraîchir la page ou fermer l'onglet n'efface pas la conversation. L'historique disparaît seulement si le cache du navigateur est vidé ou qu'un autre navigateur ou appareil est utilisé. |
+| Présentations / rapports que vous créez | Permanent | Sauvegardés dans le projet, visibles par l'équipe |
+| Visualisations sauvegardées | Permanent | Restent dans la bibliothèque du projet |
+| Exports téléchargés | Permanent | Sauvegardés sur votre ordinateur |

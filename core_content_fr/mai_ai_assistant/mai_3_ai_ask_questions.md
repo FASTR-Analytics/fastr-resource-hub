@@ -4,15 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-## Posez des questions, obtenez des réponses
+## Ce que l'assistant IA peut faire
 
-Tapez vos questions en langage naturel. L'IA analyse vos données et vous montre les résultats.
+**Répondre aux questions sur vos données**
 
-| Sujet | Exemples de questions |
-|-------|----------------------|
-| **Qualité des données** | « Quelles régions ont le plus de valeurs aberrantes ? » / « Où sont les lacunes de complétude ? » |
-| **Tendances** | « Comment CPN1 a-t-il évolué au fil du temps ? » / « Montrez-moi les volumes de services pour 2024 » |
-| **Perturbations** | « Y a-t-il eu des baisses de services récemment ? » / « Quelque chose a-t-il changé ce trimestre ? » |
-| **Régional** | « Quelles zones ont de faibles taux de rapportage ? » / « Où devons-nous concentrer notre soutien ? » |
+- « Quelles régions ont le plus de valeurs aberrantes ? »
+- « Comment la complétude des rapports a-t-elle évolué ? »
+- Crée des graphiques et des explications à la volée
 
-Pas de programmation requise. Pas de jargon technique. Posez simplement vos questions comme à un collègue.
+**Expliquer la méthodologie**
+
+- « Comment les valeurs aberrantes sont-elles détectées ? »
+- « Que signifie ce score de qualité des données ? »
+- S'appuie sur la documentation de la plateforme
+
+**Aider à construire des rapports**
+
+- Générer des présentations à partir de vos données
+- Combiner graphiques sauvegardés et texte narratif
+- Créer des présentations pour différents publics
