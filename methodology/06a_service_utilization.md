@@ -1067,37 +1067,80 @@ Service utilization analysis measures changes in health service volumes over tim
 The primary metric is **year-over-year percent change**, which quantifies shifts in service delivery between consecutive years. The formula calculates the difference between current and previous year volumes, expressed as a percentage of the previous year. Changes exceeding ±10% are flagged for review, as these typically represent meaningful shifts in service delivery rather than normal variation.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1b -->
-## Service utilization comparison to DHIS2
+<!-- SLIDE:m6_1c -->
+## Service utilization output
 
-Service utilization trends are commonly produced in DHIS2. The FASTR approach differs in three important ways:
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
-- Adjusts for data quality (outliers and/or completeness)
-- Visualizes data with the percent change approach to make it easier to identify meaningful fluctuations in service delivery
-- Looks at trends, but also uses the adjusted service utilization data for additional, more complex analyses
+![Number of services reported h:300](../resources/default_outputs/Module3_5_Number_of_services_reported.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing absolute service volumes over time by indicator.
+
+**What it shows:** Count of services delivered each month/quarter.
+
+**Interpretation:** Look for overall trends (increasing/decreasing) and sudden drops or spikes that may need investigation.
+
+</div>
+</div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_1a -->
-## Service utilization and disruptions: comparison to DHIS2
+<!-- SLIDE:m6_1d -->
+## Quarter-on-quarter change
 
-Service utilization trends are commonly produced in DHIS2
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
 
-**Main differences between DHIS2 and FASTR approach**
+![Quarter-on-quarter change h:300](../resources/default_outputs/Module3_QoQ_change.png)
 
-- FASTR approach adjusts for data quality (outliers and/or completeness)
-- FASTR approach visualizes data with the percent change approach to make it easier to identify meaningful fluctuations in service delivery
+</div>
+<div style="flex: 1; font-size: 0.85em;">
 
-**Extension of service utilization analysis**, using more complex statistical approaches not available in DHIS2
+**What you see:** Heatmap comparing current quarter to the previous quarter, with changes >±10% flagged.
 
-Using a regression framework, we are able to:
+**Formula:** QoQ change % = (current quarter – previous quarter) / previous quarter × 100
 
-- Account for seasonality
-- Exclude unusual changes to ensure one-off events aren't influencing normal trends
-- Use historical data as a baseline for context
-- Detect disruptions and recovery patterns
-- Quantify changes with a robust methodology as compared to just observing simple fluctuations in a trend line.
+**Interpretation:** Flagged changes require follow-up — is this a real program change, data issue, or expected event?
 
-This improves the ability to interpret and compare 'count' or utilization data national and sub-national areas without needing population denominators.
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_1e -->
+<!-- _class: output -->
+## Year-over-year change output
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Change in service volume h:300](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Heatmap comparing current period to same period last year, with changes >±10% flagged.
+
+**Formula:** YoY change % = (this year - last year) / last year × 100
+
+**Interpretation:** Flagged changes require follow-up — is this a real program change, data issue, or expected event?
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_1f -->
+## Indicator directionality
+
+A flagged change only becomes a finding once you know which direction you want the indicator to move.
+
+- **Service-use indicators** (ANC visits, skilled birth attendance, immunisations) should **rise** as systems strengthen.
+- **Morbidity and mortality indicators** (maternal deaths, severe malnutrition, disease incidence) should **fall**.
+- **Range indicators** sit between two thresholds. The C-section rate is the canonical case — too low means under-access, too high means over-medicalisation.
+
+A 15% rise in postnatal care is good news; the same rise in maternal deaths is not. Always check the direction before reading the signal.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
@@ -1140,16 +1183,27 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6_2c -->
-## Disruption detection comparison to DHIS2
+<!-- SLIDE:m6_2d -->
+<!-- _class: output -->
+## Service disruption output
 
-Disruption detection extends service utilization analysis using statistical approaches not available in DHIS2. The regression framework enables several capabilities that improve upon simple trend visualization.
+<div class="output-layout">
+<div class="output-viz">
 
-The model **accounts for seasonality** when calculating expected values, ensuring that seasonal patterns are not mistaken for disruptions. It **excludes unusual historical changes** so that one-off events do not influence the baseline. **Historical data serves as context** for establishing expected service levels, and the framework systematically **detects both disruptions and recovery patterns**.
+![Disruption output h:300](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
-Most importantly, this approach **quantifies changes with a robust methodology** rather than relying on visual observation of trend fluctuations. This improves the ability to interpret and compare utilization data across national and subnational areas **without requiring population denominators**.
+</div>
+<div class="output-text">
+
+**What you see:** Chart comparing actual service volume to model-predicted expected volume, accounting for seasonality.
+
+**What it shows:** Deviations from expected — disruptions (below) or surpluses (above).
+
+**Interpretation:** Consider external factors: COVID, strikes, stockouts, campaigns. Persistent deviations warrant program investigation.
+
+</div>
+</div>
 <!-- /SLIDE -->
-
 
 <!-- SLIDE:m6_5a -->
 ## Service utilization module: Configuration parameters

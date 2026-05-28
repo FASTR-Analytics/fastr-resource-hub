@@ -1885,6 +1885,49 @@ PRESENTER NOTES:
 -->
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_14 -->
+## Coverage output: National trends
+
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1.2;">
+
+![Coverage national h:320](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+</div>
+<div style="flex: 1; font-size: 0.85em;">
+
+**What you see:** Line chart showing coverage over time. Black = survey, Grey = HMIS-derived, Red = projected.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Compare HMIS and survey values — large gaps suggest denominator issues. Projected values extend surveys using HMIS trends.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_14b -->
+<!-- _class: output -->
+## Coverage output: Subnational comparison
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Coverage subnational h:320](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+</div>
+<div class="output-text">
+
+**What you see:** Coverage estimates by subnational area, enabling geographic comparison.
+
+**Formula:** Coverage % = (services / target population) × 100
+
+**Interpretation:** Identify low-coverage areas for prioritization. Coverage >100% suggests denominator underestimate or double-counting.
+
+</div>
+</div>
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_19 -->
 ## Coverage module: Configuration parameters
 
@@ -2080,6 +2123,37 @@ The same pipeline runs every quarter, so countries get findings on a routine rhy
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s7 -->
+## Key takeaway
+
+> "FASTR will not give you all the answers, but it can tell you **where to look**."
+
+**What FASTR can do:**
+
+- Analyze service use and coverage trends across subnational areas and over time
+- Assess service readiness of PHCs and get timely feedback from facility managers
+- Identify 'red flags' or signals that need prompt follow-up
+
+**This data allows you to:**
+
+- **Guide resources** to programs, services, or districts that are lagging
+- **Make course corrections** when programs aren't achieving intended results
+- **Identify positive deviants** to learn from
+- **Understand root causes** by triangulating with other data sources
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_20 -->
+## What the FASTR pipeline adds on top of DHIS2
+
+DHIS2 holds the data; FASTR turns it into the analyses you've just seen. Three additions, matching the three sub-topics of this section:
+
+- **Quality-adjusted volumes.** Outliers and reporting gaps are corrected before any analysis runs, so the trends, changes, and disruptions you read reflect service delivery — not data noise.
+- **Disruption detection.** Service volumes are compared against the expected rhythm of each indicator (long-term trend + seasonality). Real drops and surpluses are flagged automatically; one-month noise is not.
+- **Coverage with a derived denominator.** Denominators are back-calculated from HMIS entry points and benchmarked against UN World Population Prospects, giving a more defensible coverage figure than relying on catchment populations alone.
+
+The same pipeline runs every quarter, so countries get findings on a routine rhythm rather than waiting for a one-off analysis.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_21 -->
 ## Key takeaway
 
 > "FASTR will not give you all the answers, but it can tell you **where to look**."

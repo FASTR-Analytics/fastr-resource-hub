@@ -7,26 +7,34 @@ slides:
   order: 1.0
   variant: full
   title: Service utilization analysis
-- file: m6_1a_service_utilization_comparison_dhis2.md
-  order: 1.01
+- file: m6_1c_service_utilization_output.md
+  order: 1.03
   variant: full
-  title: 'Service utilization and disruptions: comparison to DHIS2'
-- file: m6_1b_service_utilization_analysis.md
-  order: 1.02
+  title: Service utilization output
+- file: m6_1d_quarter_on_quarter_change.md
+  order: 1.04
   variant: full
-  title: Service utilization comparison to DHIS2
+  title: Quarter-on-quarter change
+- file: m6_1e_year_over_year_change.md
+  order: 1.05
+  variant: full
+  title: Year-over-year change output
+- file: m6_1f_indicator_directionality.md
+  order: 1.06
+  variant: full
+  title: Indicator directionality
 - file: m6_2_service_disruptions_surpluses_detection.md
   order: 2.0
   variant: full
   title: Service disruptions and surpluses detection
-- file: m6_2b_service_disruptions_surpluses_detection.md
+- file: m6_2b_how_disruption_detection_works.md
   order: 2.02
   variant: full
   title: How disruption detection works
-- file: m6_2c_service_disruptions_surpluses_detection.md
-  order: 2.03
+- file: m6_2d_service_disruption_output.md
+  order: 2.04
   variant: full
-  title: Disruption detection comparison to DHIS2
+  title: Service disruption output
 - file: m6_5a_service_utilization_configuration_parameters.md
   order: 5.01
   variant: full
@@ -71,10 +79,26 @@ slides:
   order: 13.0
   variant: full
   title: Denominator selection methodology
+- file: m6_14_coverage_output_national.md
+  order: 14.0
+  variant: full
+  title: 'Coverage output: National trends'
+- file: m6_14b_coverage_output_subnational.md
+  order: 14.02
+  variant: full
+  title: 'Coverage output: Subnational comparison'
 - file: m6_19_coverage_configuration_parameters.md
   order: 19.0
   variant: full
   title: 'Coverage module: Configuration parameters'
+- file: m6_20_fastr_pipeline_adds_on_top_of_dhis2.md
+  order: 20.0
+  variant: full
+  title: What the FASTR pipeline adds on top of DHIS2
+- file: m6_21_key_takeaway.md
+  order: 21.0
+  variant: full
+  title: Key takeaway
 - file: m6_s00_module_overview.md
   order: 0.0
   variant: condensed
