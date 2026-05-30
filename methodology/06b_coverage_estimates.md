@@ -2025,6 +2025,20 @@ The next few slides explain how FASTR builds that denominator from the data it d
 ![Coverage formula for ANC4+ h:280](../resources/diagrams/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s3f -->
+## Five denominator options for FASTR analysis
+
+FASTR builds the denominator from the data it does have. Four of the five options anchor on a routine HMIS service whose target population is known from surveys; the fifth uses UN demographic projections.
+
+- **ANC1** → back-calculates pregnancies
+- **Skilled birth attendance** → back-calculates deliveries
+- **BCG immunization** → back-calculates live births *(national only)*
+- **Penta1 immunization** → back-calculates DPT-eligible infants *(national only)*
+- **UN World Population Prospects** → demographic projections of live births *(national only)*
+
+Each option produces a complete denominator cascade for every other indicator. FASTR computes all five and selects the best fit — see the next slides.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s3ga -->
 ## Using demographic relationships to estimate denominators
 
@@ -2054,6 +2068,20 @@ ANC1 is not the only entry point. FASTR runs the same back-calculation from **fo
 - **Penta1** → estimates DPT-eligible infants
 
 Each entry point produces a complete cascade. FASTR then compares all four against UN World Population Prospects and **keeps the chain whose median ratio is closest to 1.0**. That selected chain is then applied uniformly to every indicator, so coverage estimates across the country are internally consistent.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3g -->
+## How FASTR estimates coverage
+
+Putting the pieces together, FASTR estimates coverage in three steps:
+
+1. **Build denominators multiple ways.** Back-calculate target populations from each routine HMIS entry point (ANC1, SBA, BCG, Penta1) by combining service volumes with survey coverage values. *Example: 10,000 ANC1 visits at a surveyed coverage of 80% imply ~12,500 pregnancies.* In parallel, derive denominators from UN demographic projections.
+
+2. **Select the best chain.** Compute coverage with each denominator option and compare the median ratio of HMIS-derived to UN-projected denominators. The chain whose median ratio sits closest to 1.0 is kept and applied uniformly across all indicators.
+
+3. **Project coverage forward.** Anchor to the last available survey value and apply year-over-year HMIS trends to extend coverage estimates into post-survey years.
+
+> Surveys anchor the back-calculation; UN WPP arbitrates between chains; HMIS trends carry the estimate forward.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s4 -->

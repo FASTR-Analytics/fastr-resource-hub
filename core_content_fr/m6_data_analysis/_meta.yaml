@@ -139,6 +139,14 @@ slides:
   order: 3.03
   variant: condensed
   title: 'Exemple de couverture : CPN4+'
+- file: m6_s3f_five_denominator_options.md
+  order: 3.06
+  variant: condensed
+  title: Cinq options de dénominateur pour l'analyse FASTR
+- file: m6_s3g_how_fastr_estimates_coverage.md
+  order: 3.07
+  variant: condensed
+  title: Comment FASTR estime la couverture
 - file: m6_s3ga_demographic_relationships_intro.md
   order: 3.0701
   variant: condensed

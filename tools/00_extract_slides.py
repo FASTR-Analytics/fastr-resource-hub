@@ -231,6 +231,8 @@ TOPIC_NAMES = {
     'm6_s2b': 'disruption_interpretation',
     'm6_s3': 'coverage_methods',
     'm6_s3c': 'coverage_example',
+    'm6_s3f': 'five_denominator_options',
+    'm6_s3g': 'how_fastr_estimates_coverage',
     'm6_s3ga': 'demographic_relationships_intro',
     'm6_s3h': 'expected_relationships',
     'm6_s3j': 'four_parallel_chains',
@@ -264,6 +266,7 @@ TOPIC_NAMES = {
     'm7_6b': 'three_spheres_of_influence',
     'm7_6d': 'dissemination_and_data_use_roadmap',
     'm7_7': 'building_roadmap_sustained_use',
+    'm7_7a': 'peer_review_action_plans',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_0': 'hfa_implementation_status',

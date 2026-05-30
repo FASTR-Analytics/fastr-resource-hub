@@ -59,3 +59,7 @@ slides:
   order: 7.0
   variant: full
   title: Building a roadmap for sustained use
+- file: m7_7a_peer_review_action_plans.md
+  order: 7.01
+  variant: full
+  title: Peer review on action plans

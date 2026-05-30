@@ -59,3 +59,7 @@ slides:
   order: 7.0
   variant: full
   title: Construire une feuille de route pour une utilisation durable
+- file: m7_7a_peer_review_action_plans.md
+  order: 7.01
+  variant: full
+  title: Revue par les pairs des plans d'action

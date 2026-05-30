@@ -2033,6 +2033,20 @@ Les diapositives suivantes expliquent comment FASTR construit ce dénominateur �
 ![Formule de couverture pour CPN4+ h:280](../resources/diagrams_fr/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_s3f -->
+## Cinq options de dénominateur pour l'analyse FASTR
+
+FASTR construit le dénominateur à partir des données disponibles. Quatre des cinq options s'ancrent sur un service SNIS de routine dont la population cible est connue par enquête ; la cinquième utilise les projections démographiques de l'ONU.
+
+- **CPN1** → recalcule rétrospectivement les grossesses
+- **Accouchement assisté** → recalcule rétrospectivement les accouchements
+- **Vaccination BCG** → recalcule rétrospectivement les naissances vivantes *(national uniquement)*
+- **Vaccination Penta1** → recalcule rétrospectivement les nourrissons éligibles DPT *(national uniquement)*
+- **World Population Prospects (ONU)** → projections démographiques des naissances vivantes *(national uniquement)*
+
+Chaque option produit une cascade complète de dénominateurs pour tous les autres indicateurs. FASTR calcule les cinq et retient la meilleure — voir les diapositives suivantes.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_s3ga -->
 ## Utiliser les relations démographiques pour estimer les dénominateurs
 
@@ -2062,6 +2076,20 @@ CPN1 n'est pas le seul point d'entrée. FASTR exécute le même calcul rétrospe
 - **Penta1** → estime les nourrissons éligibles DTC
 
 Chaque point d'entrée produit une cascade complète. FASTR compare ensuite les quatre à UN World Population Prospects et **garde la chaîne dont le ratio médian est le plus proche de 1,0**. Cette chaîne retenue est ensuite appliquée uniformément à tous les indicateurs, pour que les estimations de couverture à travers le pays restent internement cohérentes.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s3g -->
+## Comment FASTR estime la couverture
+
+En assemblant les pièces, FASTR estime la couverture en trois étapes :
+
+1. **Construire les dénominateurs de plusieurs façons.** Recalculer rétrospectivement les populations cibles à partir de chaque point d'entrée SNIS (CPN1, accouchement assisté, BCG, Penta1) en combinant les volumes de services avec les valeurs de couverture issues d'enquêtes. *Exemple : 10 000 visites CPN1 à une couverture mesurée de 80 % impliquent ~12 500 grossesses.* En parallèle, dériver des dénominateurs à partir des projections démographiques de l'ONU.
+
+2. **Sélectionner la meilleure chaîne.** Calculer la couverture avec chaque option de dénominateur et comparer le ratio médian entre dénominateurs SNIS et dénominateurs ONU. La chaîne dont le ratio médian est le plus proche de 1,0 est retenue et appliquée uniformément à tous les indicateurs.
+
+3. **Projeter la couverture en avant.** S'ancrer à la dernière valeur d'enquête disponible et appliquer les tendances interannuelles SNIS pour prolonger les estimations de couverture dans les années post-enquête.
+
+> Les enquêtes ancrent le calcul rétrospectif ; UN WPP arbitre entre les chaînes ; les tendances SNIS portent l'estimation vers l'avant.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s4 -->
