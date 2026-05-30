@@ -56,7 +56,8 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // Day 1 Agenda
         { _id: 'd1-agenda', session: fr ? 'Agenda Jour 1' : 'Day 1 Agenda', type: 'section', duration: 0 },
 
-        // Session 2 · Host country — single placeholder slide (no divider; the placeholder title IS the divider)
+        // Session 2 · Host country — section cover (no time) + placeholder body (time in agenda)
+        { _id: 's2-cover', session: fr ? 'Session 2 · Pleins feux sur le pays hôte' : 'Session 2 · Host country spotlight', type: 'section', duration: 0 },
         { _id: 's2-host', session: fr ? 'Session 2 · Pleins feux sur le pays hôte' : 'Session 2 · Host country spotlight', slides: [], duration: 45 },
 
         // Session 3 · Introduction to FASTR
@@ -73,7 +74,8 @@ export function addisFullConfig(language: 'en' | 'fr') {
             'm0_6_fastr_approach_rmncahn.md',
             'm0_7_from_analysis_to_action.md',
           ],
-          duration: 20,
+          // Session 3 total time including all sub-sessions (orientation 25 + DQA 25 + adjust 15 + SUC 30 = 95) + this opener (20) = 115
+          duration: 115,
         },
 
         // Workshop-owned closers for Session 3 — emit as PLACEHOLDER slots so the deck
@@ -91,9 +93,12 @@ export function addisFullConfig(language: 'en' | 'fr') {
         { _id: 's3-methods-divider', session: fr ? "Introduction aux méthodes FASTR et à l'analyse des perturbations" : 'Introduction to FASTR methods and disruption analysis', type: 'section', duration: 0 },
 
         // Session 3 continued — Orientation to FASTR Analytics Platform
+        // Sub-sessions named "Session 3 · X" so the kicker chrome shows X and
+        // the locator shows "Session 3". Duration=0 hides them from the agenda
+        // (the Session 3 opener entry above accounts for the time).
         {
           _id: 's3-orientation',
-          session: fr ? 'Orientation à la plateforme analytique FASTR' : 'Orientation to the FASTR Analytics Platform',
+          session: fr ? 'Session 3 · Orientation à la plateforme analytique FASTR' : 'Session 3 · Orientation to the FASTR Analytics Platform',
           slides: [
             'm3_1_overview_of_platform.md',
             'm3_2a_accessing_platform_continued.md',     // Country instance
@@ -101,13 +106,13 @@ export function addisFullConfig(language: 'en' | 'fr') {
             'm3_2b_accessing_platform_continued.md',     // User roles
             'm3_1b_overview_of_platform_continued.md',   // Platform capabilities
           ],
-          duration: 25,
+          duration: 0,
         },
 
         // Session 3 continued — Methods · DQA
         {
           _id: 's3-dqa',
-          session: fr ? 'Méthodes — Évaluation de la qualité des données' : 'Methods — Data Quality Assessment',
+          session: fr ? 'Session 3 · Méthodes — Évaluation de la qualité des données' : 'Session 3 · Methods — Data Quality Assessment',
           slides: [
             'm4_0_fastr_analytical_pipeline.md',
             'm4_1_approach_to_dqa.md',
@@ -123,26 +128,26 @@ export function addisFullConfig(language: 'en' | 'fr') {
             'm4_5c_overall_dqa_score_output.md',
             'm4_5d_mean_dqa_score_output.md',
           ],
-          duration: 25,
+          duration: 0,
         },
 
         // Session 3 continued — Methods · DQ Adjustment
         {
           _id: 's3-dqadj',
-          session: fr ? 'Méthodes — Ajustement de la qualité des données' : 'Methods — Data Quality Adjustment',
+          session: fr ? 'Session 3 · Méthodes — Ajustement de la qualité des données' : 'Session 3 · Methods — Data Quality Adjustment',
           slides: [
             'm5_1_from_detection_to_correction.md',  // "Data quality adjustment" overview slide
             'm5_3_why_adjust_for_outliers.md',
             'm5_3b_outlier_adjustment_output.md',
             'm5_2a_completeness_adjustment_output.md',
           ],
-          duration: 15,
+          duration: 0,
         },
 
         // Session 3 continued — Methods · Service Utilization & Coverage
         {
           _id: 's3-suc',
-          session: fr ? 'Méthodes — Utilisation des services et couverture' : 'Methods — Service Utilization and Coverage',
+          session: fr ? 'Session 3 · Méthodes — Utilisation des services et couverture' : 'Session 3 · Methods — Service Utilization and Coverage',
           slides: [
             'm6_1_service_utilization_analysis.md',
             'm6_1d_quarter_on_quarter_change.md',
@@ -160,7 +165,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
             'm6_20_fastr_pipeline_adds_on_top_of_dhis2.md', // Why FASTR? Value add beyond DHIS2
             'm6_21_key_takeaway.md',
           ],
-          duration: 30,
+          duration: 0,
         },
 
         // Session 4 · Orientation to FASTR Platform (AI Assistant)
@@ -226,7 +231,8 @@ export function addisFullConfig(language: 'en' | 'fr') {
         { _id: 'd2-recap', session: fr ? 'Récapitulatif du Jour 1 — aperçu du Jour 2' : 'Recap of Day 1 — overview of Day 2', slides: [], duration: 10 },
         { _id: 'd2-agenda', session: fr ? 'Agenda Jour 2' : 'Day 2 Agenda', type: 'section', duration: 0 },
 
-        // Session 7 · Mentor countries — single placeholder slide
+        // Session 7 · Mentor countries — section cover + placeholder body
+        { _id: 's7-cover', session: fr ? 'Session 7 · Expériences des pays mentors' : 'Session 7 · Experiences from mentor countries', type: 'section', duration: 0 },
         { _id: 's7-mentor', session: fr ? 'Session 7 · Expériences des pays mentors' : 'Session 7 · Experiences from mentor countries', slides: [], duration: 60 },
 
         // Session 8 · Practice — Creating presentations (spans coffee break)
@@ -245,7 +251,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
         { _id: 'd2-break-am', session: fr ? 'Pause santé' : 'Health break', type: 'break', duration: 20 },
         {
           _id: 's8-presentations-b',
-          session: fr ? 'Session 8 (suite)' : 'Session 8 continued',
+          session: fr ? 'Session 8 · suite' : 'Session 8 · continued',
           slides: [
             'm9d_2b_open_slide_editor.md',
             'm9d_3_formatting_text.md',
@@ -271,8 +277,9 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // Lunch
         { _id: 'd2-lunch', session: fr ? 'Pause déjeuner' : 'Lunch break', type: 'break', duration: 60 },
 
-        // Session 10 · Understanding audience — single placeholder slide
-        { _id: 's10-audience', session: fr ? 'Session 10 · Comprendre votre public — cartographie et narration' : 'Session 10 · Understanding your audience — user mapping and storytelling', slides: [], duration: 30 },
+        // Session 10 · Understanding audience — section cover + placeholder body
+        { _id: 's10-cover', session: fr ? 'Session 10 · Comprendre votre public — cartographie et narration' : 'Session 10 · Understanding your audience — user mapping and storytelling', type: 'section', duration: 0 },
+        { _id: 's10-audience', session: fr ? 'Session 10 · Comprendre votre public' : 'Session 10 · Understanding your audience', slides: [], duration: 30 },
 
         // Session 11 · Refining disruption reports
         { _id: 's11-divider', session: fr ? 'Session 11 · Affiner les rapports de perturbations et ajouter des analyses spécifiques au pays' : 'Session 11 · Refining disruption reports and adding country-specific analyses', type: 'section', duration: 0 },

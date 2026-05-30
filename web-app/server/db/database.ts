@@ -342,6 +342,35 @@ export async function deleteCustomSlide(workshopId: string, filename: string) {
   })
 }
 
+// Clone a workshop: duplicate the source row (with its custom_slides) under a
+// new id. Top-level workshop fields (name, country, location, date) can be
+// overridden — useful when forking a blueprint for a new country. New clones
+// are unlocked, even if the source was locked.
+export async function cloneWorkshop(
+  srcId: string,
+  newId: string,
+  overrides?: { name?: string; country?: string; location?: string; date?: string }
+): Promise<WorkshopConfig | null> {
+  const src = await getWorkshop(srcId)
+  if (!src) return null
+
+  const cloned: WorkshopConfig = JSON.parse(JSON.stringify(src))
+  if (overrides?.name) cloned.workshop.name = overrides.name
+  if (overrides?.country) cloned.workshop.country = overrides.country
+  if (overrides?.location) cloned.workshop.location = overrides.location
+  if (overrides?.date) cloned.workshop.date = overrides.date
+
+  await createWorkshop(newId, cloned)
+
+  // Copy any per-workshop custom slides so the clone is self-contained.
+  const customSlides = await getCustomSlides(srcId)
+  for (const slide of customSlides) {
+    await saveCustomSlide(newId, slide.filename, slide.content)
+  }
+
+  return cloned
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Imported Modules Operations
 // ─────────────────────────────────────────────────────────────────────────────

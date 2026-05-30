@@ -184,6 +184,22 @@ export const workshopAPI = {
   },
 
   /**
+   * Clone a workshop: fork the source under a new id, optionally overriding
+   * top-level workshop fields (name, country, location, date). Custom slides
+   * are copied; the clone starts unlocked.
+   */
+  async clone(
+    srcId: string,
+    newId: string,
+    overrides?: { name?: string; country?: string; location?: string; date?: string }
+  ): Promise<{ id: string; config: WorkshopConfig }> {
+    return fetchJSON(`/workshops/${srcId}/clone`, {
+      method: 'POST',
+      body: JSON.stringify({ newId, ...overrides }),
+    })
+  },
+
+  /**
    * Lock or unlock a workshop
    */
   async setLocked(id: string, locked: boolean): Promise<void> {
@@ -740,6 +756,7 @@ const api = {
   createWorkshop: workshopAPI.create,
   updateWorkshop: workshopAPI.update,
   deleteWorkshop: workshopAPI.delete,
+  cloneWorkshop: workshopAPI.clone,
   setWorkshopLocked: workshopAPI.setLocked,
   saveCustomSlide: workshopAPI.saveCustomSlide,
   getCustomSlides: workshopAPI.getCustomSlides,

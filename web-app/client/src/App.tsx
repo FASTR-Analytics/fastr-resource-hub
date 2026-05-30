@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
+import type { WorkshopInfo } from '../../lib/api'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
 import { SlideSorter } from './components/SlideSorter'
@@ -26,6 +27,7 @@ import {
   Lock,
   Unlock,
   Plus,
+  Copy,
   Trash2,
   ArrowLeft,
   Folder,
@@ -979,6 +981,9 @@ function App() {
   const [addContentDayNum, setAddContentDayNum] = useState<number | undefined>(undefined)
   const [libraryView, setLibraryView] = useState<'browse' | 'handouts'>('browse')
   const [showWorkshopSelector, setShowWorkshopSelector] = useState(false)
+  const [cloneSource, setCloneSource] = useState<WorkshopInfo | null>(null)
+  const [cloneForm, setCloneForm] = useState({ newId: '', name: '', country: '', date: '' })
+  const [cloneBusy, setCloneBusy] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [showExportMenu, setShowExportMenu] = useState(false)
@@ -1027,7 +1032,7 @@ function App() {
   )
 
   // Get store actions
-  const { reorderSession, updateSession, removeSession, moveSessionToDay, createWorkshop, deleteWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
+  const { reorderSession, updateSession, removeSession, moveSessionToDay, createWorkshop, deleteWorkshop, cloneWorkshop, setWorkshopLocked, updateWorkshopSettings } = useWorkshopStore()
 
   // Load data only after authentication
   useEffect(() => {
@@ -3049,6 +3054,25 @@ function App() {
                               {workshop.location && ` • ${workshop.location}`}
                             </div>
                           </button>
+                          {/* Clone button — fork the workshop's structure into a new id */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setCloneSource(workshop)
+                              const slug = workshop.id.replace(/[-_]\d{4}.*$/, '') // strip trailing year/qualifier if present
+                              const year = new Date().getFullYear()
+                              setCloneForm({
+                                newId: `${slug}-copy-${year}`,
+                                name: `${workshop.name} (copy)`,
+                                country: workshop.country || '',
+                                date: '',
+                              })
+                            }}
+                            className="p-2 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-all"
+                            title="Clone this workshop as a starting point"
+                          >
+                            <Copy className="w-4 h-4" />
+                          </button>
                           {/* Lock/Unlock button */}
                           <button
                             onClick={(e) => {
@@ -3094,6 +3118,110 @@ function App() {
                 })()}
               </div>
             )}
+        </Modal>
+      )}
+
+      {/* Clone Workshop Modal */}
+      {cloneSource && (
+        <Modal
+          open
+          onClose={() => { if (!cloneBusy) setCloneSource(null) }}
+          title="Clone workshop"
+          size="md"
+        >
+          <div className="p-6 space-y-4">
+            <p className="text-sm text-gray-600">
+              Fork <span className="font-medium text-gray-900">{cloneSource.name}</span> into a new workshop.
+              The session structure, slide order, breaks, and any custom slides come with you.
+              Override the country and date for the new context.
+            </p>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">New workshop ID</label>
+              <input
+                type="text"
+                value={cloneForm.newId}
+                onChange={(e) => setCloneForm({ ...cloneForm, newId: e.target.value.replace(/\s+/g, '-').toLowerCase() })}
+                placeholder="e.g. addis-burkina-2027"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                disabled={cloneBusy}
+              />
+              <p className="text-xs text-gray-500 mt-1">Lowercase, hyphens, no spaces. Must be unique.</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Display name</label>
+              <input
+                type="text"
+                value={cloneForm.name}
+                onChange={(e) => setCloneForm({ ...cloneForm, name: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={cloneBusy}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                <input
+                  type="text"
+                  value={cloneForm.country}
+                  onChange={(e) => setCloneForm({ ...cloneForm, country: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled={cloneBusy}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                <input
+                  type="text"
+                  value={cloneForm.date}
+                  onChange={(e) => setCloneForm({ ...cloneForm, date: e.target.value })}
+                  placeholder="(optional)"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled={cloneBusy}
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2">
+              <button
+                onClick={() => setCloneSource(null)}
+                disabled={cloneBusy}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  if (!cloneForm.newId.trim()) {
+                    showToast('New workshop ID is required', 'error')
+                    return
+                  }
+                  setCloneBusy(true)
+                  try {
+                    await cloneWorkshop(cloneSource.id, cloneForm.newId.trim(), {
+                      name: cloneForm.name.trim() || undefined,
+                      country: cloneForm.country.trim() || undefined,
+                      date: cloneForm.date.trim() || undefined,
+                    })
+                    showToast(`Cloned to "${cloneForm.newId.trim()}"`, 'success')
+                    setCloneSource(null)
+                    setShowWorkshopSelector(false)
+                  } catch (err: any) {
+                    showToast(err?.message || 'Clone failed', 'error')
+                  } finally {
+                    setCloneBusy(false)
+                  }
+                }}
+                disabled={cloneBusy || !cloneForm.newId.trim()}
+                className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 inline-flex items-center gap-2"
+              >
+                <Copy className="w-4 h-4" />
+                {cloneBusy ? 'Cloning…' : 'Clone'}
+              </button>
+            </div>
+          </div>
         </Modal>
       )}
 

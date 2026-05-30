@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import imageSize from 'image-size'
+import JSZip from 'jszip'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -47,7 +48,10 @@ const FONTS = {
   // with Office on Windows + Mac. Poppins (the brand deck font) is NOT a default
   // Office font and silently fell back — it stays on the Marp/PDF path only.
   family: 'Calibri',
-  titleFamily: 'Calibri Light',  // Office theme's default heading font
+  // Calibri (not Calibri Light) for titles — bolded weight visually balances
+  // the new vertical deep-green accent bar; Calibri Light bold read thinner
+  // than the bar and made titles look anemic on content slides.
+  titleFamily: 'Calibri',
   h1Size: 36,
   h2Size: 32,
   h3Size: 22,
@@ -667,25 +671,36 @@ function getImageLayout(
 // SLIDE BUILDERS
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// Title width available for the heading (full content width).
-const TITLE_W = 12.33
-/** Draws the title + lime rule and returns the Y where body content should start
- *  (below the rule) — so long/wrapped titles push content down instead of overlapping. */
+// Vertical accent bar: deep-green, sits to the LEFT of the title, height matches
+// the wrapped title block. Width / gap mirror the CSS (.h2 border-left: 6px,
+// padding-left: 16px → 0.08" bar + 0.17" gap).
+const BAR_X = 0.5
+const BAR_W = 0.08
+const TITLE_X = 0.75            // bar + gap; also aligns with body's contentLeft
+const TITLE_W = 12.08           // contentWidth less the bar shift
+/** Draws the title + a short vertical deep-green bar on the left, returns the Y
+ *  where body content should start. Bar height tracks the (estimated) wrapped
+ *  title height, so 2-line titles get a taller bar. */
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   const clean = cleanMarkdownText(title)
 
   // Title sits below the kicker chrome (~0.6"), giving it breathing room.
-  // Estimate wrapped lines so the lime rule lands just under the LAST line.
-  // h2 is 32pt Calibri Light over ~12.3" — line 1 holds ~58-62 chars, so a too-
-  // low divisor (e.g. 40) over-counts lines and reserves a phantom blank line
-  // below the title (a tall gap that also pushes body content off the slide).
+  // h2 is 32pt Calibri Light over ~12" — line 1 holds ~58-62 chars; a too-low
+  // divisor over-counts lines and reserves a phantom blank line below the title.
   const titleY = 0.82
   const lineH = 0.55
   const lineCount = Math.max(1, Math.ceil(clean.length / 58))
   const titleH = lineCount * lineH
 
+  // Vertical accent bar (replaces the old horizontal lime rule).
+  slide.addShape('rect', {
+    x: BAR_X, y: titleY, w: BAR_W, h: titleH,
+    fill: { color: COLORS.deepGreen },
+    line: { type: 'none' },
+  } as any)
+
   slide.addText(clean, {
-    x: 0.5, y: titleY, w: TITLE_W, h: titleH,
+    x: TITLE_X, y: titleY, w: TITLE_W, h: titleH,
     fontSize: FONTS.h2Size,
     fontFace: FONTS.titleFamily,
     color: COLORS.deepGreen,
@@ -693,15 +708,7 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
     valign: 'top',
   })
 
-  // Fixed short lime rule under the title's last line (the brand signature) —
-  // never length-scaled, so long/wrapped titles still get a clean short bar.
-  slide.addShape('rect', {
-    x: 0.52, y: titleY + titleH + 0.04, w: 1.25, h: 0.05,
-    fill: { color: COLORS.lime },
-    line: { type: 'none' },
-  } as any)
-
-  return titleY + titleH + 0.28  // content starts below the lime rule
+  return titleY + titleH + 0.25  // content starts below the title block
 }
 
 function addFooterBar(slide: PptxGenJS.Slide): void {
@@ -723,9 +730,8 @@ function addChrome(slide: PptxGenJS.Slide, data: ParsedSlide, pageNum: number): 
   const loc = locMatch ? cleanMarkdownText(locMatch[1]) : ''
 
   if (kick) {
-    slide.addShape('rect', { x: 0.5, y: 0.43, w: 0.22, h: 0.025, fill: { color: COLORS.lime }, line: { type: 'none' } } as any)
     slide.addText(kick.toUpperCase(), {
-      x: 0.8, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      x: 0.5, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
       color: COLORS.deepGreen, bold: true, charSpacing: 2, valign: 'middle',
     })
   }
@@ -823,13 +829,6 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     })
   }
 
-  // Lime underline
-  slide.addShape('rect', {
-    x: 4, y: titleTop + 3.0, w: 5.333, h: 0.04,
-    fill: { color: COLORS.lime },
-    line: { color: COLORS.lime },
-  })
-
   // Add logos (GFF top-left, FASTR bottom-left) with correct aspect ratios
   for (const img of data.images) {
     if (isBackgroundImage(img)) continue
@@ -888,26 +887,6 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     valign: 'middle',
   })
 
-  // "Presented by <name>" subtitle — pulled from the first italic paragraph
-  // emitted by deckBuilder when session.speaker is set. Match either the EN
-  // ("Presented by …") or FR ("Présenté par …") form so the section cover
-  // mirrors the agenda's facilitator column.
-  const presenterPara = data.paragraphs.find(p =>
-    /^\*?(Presented by|Présenté par)\s+/i.test(p)
-  )
-  if (presenterPara) {
-    const presenterText = presenterPara.replace(/^\*|\*$/g, '').trim()
-    slide.addText(cleanMarkdownText(presenterText), {
-      x: 1, y: titleY + 1.4, w: 11.333, h: 0.5,
-      fontSize: 18,
-      fontFace: FONTS.titleFamily,
-      color: COLORS.lightBlue,
-      italic: true,
-      align: 'center',
-      valign: 'middle',
-    })
-  }
-
   // Add decorative icon centered below title
   if (hasIcon && decorativeIcon) {
     const iconPath = resolveImagePath(decorativeIcon.path)
@@ -920,12 +899,29 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     }
   }
 
-  // Underline
-  slide.addShape('rect', {
-    x: 4, y: hasIcon ? 5.5 : 4.5, w: 5.333, h: 0.03,
-    fill: { color: COLORS.lime },
-    line: { color: COLORS.lime },
-  })
+  // Vertical anchor for the optional "Presented by" subtitle — kept where the
+  // lime rule used to sit so the subtitle still drops below the icon when present.
+  const subtitleAnchorY = hasIcon ? 5.5 : 4.5
+
+  // "Presented by <name>" subtitle — pulled from the first italic paragraph
+  // emitted by deckBuilder when session.speaker is set. Match either the EN
+  // ("Presented by …") or FR ("Présenté par …") form so the section cover
+  // mirrors the agenda's facilitator column.
+  const presenterPara = data.paragraphs.find(p =>
+    /^\*?(Presented by|Présenté par)\s+/i.test(p)
+  )
+  if (presenterPara) {
+    const presenterText = presenterPara.replace(/^\*|\*$/g, '').trim()
+    slide.addText(cleanMarkdownText(presenterText), {
+      x: 1, y: subtitleAnchorY + 0.2, w: 11.333, h: 0.5,
+      fontSize: 18,
+      fontFace: FONTS.titleFamily,
+      color: COLORS.lightBlue,
+      italic: true,
+      align: 'center',
+      valign: 'middle',
+    })
+  }
 }
 
 function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
@@ -1684,18 +1680,31 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       // so 2-line titles don't overlap the icon.
       const imgOpts: any = { path: iconPath, y: titleBottom }
 
-      // Determine icon size
+      // Determine icon size. When only one of w/h is set, pptxgenjs defaults
+      // the missing dimension to 1.0" — fine for square icons but disastrous
+      // for landscape diagrams (e.g. 1100×250 SVGs render as 10.42 × 1.0
+      // instead of 10.42 × 2.37). Read the natural aspect and fill in the
+      // missing dimension so the image keeps its proportions.
       let iconSize = 1.0  // default
       if (iconWidth && iconHeight) {
         imgOpts.w = iconWidth
         imgOpts.h = iconHeight
         iconSize = iconHeight
-      } else if (iconWidth) {
-        imgOpts.w = iconWidth
-        iconSize = iconWidth
-      } else if (iconHeight) {
-        imgOpts.h = iconHeight
-        iconSize = iconHeight
+      } else if (iconWidth || iconHeight) {
+        let aspect: number | null = null
+        try {
+          const dim = imageSize(iconPath)
+          if (dim.width && dim.height) aspect = dim.width / dim.height
+        } catch { /* keep aspect=null; fall back to pptxgenjs default */ }
+        if (iconWidth) {
+          imgOpts.w = iconWidth
+          imgOpts.h = aspect ? iconWidth / aspect : undefined
+          iconSize = imgOpts.h ?? iconWidth
+        } else {
+          imgOpts.h = iconHeight
+          imgOpts.w = aspect ? iconHeight! * aspect : undefined
+          iconSize = iconHeight!
+        }
       } else {
         imgOpts.w = 1.0
       }
@@ -1882,27 +1891,6 @@ export async function generatePPTX(
       if (!(cls && CHROME_BARE.has(cls))) pageNum++
       addChrome(currentSlide, slides[i], pageNum)
 
-      // Activity-pointer slides get the dot-grid background — mirrors the
-      // .activity-pointer style in fastr-theme.css so PPT exports carry the
-      // workbook-page look instead of falling back to plain white.
-      //
-      // We read the PNG to base64 and pass it as `{ data: 'data:image/png;base64,...' }`
-      // rather than `{ path }` — the path form writes a brittle slide-relationship XML
-      // that PowerPoint sometimes flags as "needs repair". The data form embeds the
-      // bytes directly with no relationship.
-      if (cls === 'activity-pointer') {
-        try {
-          const dotGridPath = path.join(REPO_ROOT, 'resources', 'backgrounds', 'activity_dotgrid.png')
-          if (fs.existsSync(dotGridPath)) {
-            const b64 = fs.readFileSync(dotGridPath).toString('base64')
-            currentSlide.background = { data: `data:image/png;base64,${b64}` }
-          }
-        } catch (e) {
-          // If anything goes wrong, leave the builder's default background in place.
-          console.warn('activity-pointer dot-grid background failed:', e)
-        }
-      }
-
       // Add presenter notes to the slide if present
       if (slides[i].presenterNotes) currentSlide.addNotes(slides[i].presenterNotes!)
     } catch (e) {
@@ -1918,5 +1906,167 @@ export async function generatePPTX(
   // Save
   await pptx.writeFile({ fileName: outputPath })
 
+  // pptxgenjs 3.12 leaves the produced .pptx in a state PowerPoint flags as
+  // corruption for two reasons we've seen in production:
+  //   1. duplicate <p:cNvPr id="N"> on the same slide (a table can collide
+  //      with an earlier text/shape — Office insists they be unique per slide)
+  //   2. stub parts it never populates: `ppt/embeddings/` and
+  //      `ppt/charts/_rels/`. The directories show up as zip entries with
+  //      no payload, which PowerPoint flags during strict open. JSZip stores
+  //      these as zero-length directory entries — we drop them.
+  await sanitizePptx(outputPath)
+
+  // Final pass: LibreOffice round-trip. pptxgenjs occasionally produces XML
+  // that PowerPoint flags with "found a problem with content … attempt to
+  // repair" — we have not isolated the exact element after deep bisection, but
+  // a `soffice --convert-to pptx` re-saves the file in a form PowerPoint
+  // accepts without complaint. Best-effort: if soffice isn't installed or the
+  // conversion fails, we leave the file as-is (the warning is annoying but
+  // doesn't break the deck).
+  await libreofficeRoundTrip(outputPath)
+
   return { warnings: buildWarnings }
+}
+
+/**
+ * Re-save the .pptx through LibreOffice headless to normalise the XML. This
+ * removes the "needs repair" prompt PowerPoint sometimes shows on pptxgenjs
+ * output. Side effects: file size grows (LibreOffice's zip is less aggressive
+ * about compression) and we spend ~5-10s per export. Worth it for clean opens.
+ */
+async function libreofficeRoundTrip(pptxPath: string): Promise<void> {
+  const { execFile } = await import('child_process')
+  const { promisify } = await import('util')
+  const execFileP = promisify(execFile)
+  try {
+    const outDir = path.dirname(pptxPath)
+    const tmpStamp = `_rt_${Date.now()}`
+    const stagedDir = path.join(outDir, tmpStamp)
+    await fs.promises.mkdir(stagedDir, { recursive: true })
+    // soffice writes to <outDir>/<basename>.pptx — to avoid overwriting the
+    // input mid-read we stage to a sibling dir, then atomically swap in.
+    await execFileP(
+      'soffice',
+      ['--headless', '--convert-to', 'pptx', '--outdir', stagedDir, pptxPath],
+      { timeout: 120_000 }
+    )
+    const staged = path.join(stagedDir, path.basename(pptxPath))
+    if (fs.existsSync(staged)) {
+      await fs.promises.rename(staged, pptxPath)
+      console.log('pptx post-process: LibreOffice round-trip applied')
+    }
+    await fs.promises.rm(stagedDir, { recursive: true, force: true })
+  } catch (e: any) {
+    // Don't fail the export over this — the deck still works, user just
+    // sees the repair prompt and clicks through.
+    console.warn('pptx post-process (libreofficeRoundTrip) skipped:', e?.message || e)
+  }
+}
+
+/**
+ * Post-process the produced .pptx to remove issues that make PowerPoint show
+ * a "needs repair" prompt:
+ *   - duplicate `<p:cNvPr id="N">` values within a single slide (renumbered)
+ *   - empty/stub parts pptxgenjs leaves behind in `ppt/embeddings/` and
+ *     `ppt/charts/` when those features aren't actually used (dropped)
+ *
+ * Mutates the file in place. Best-effort: any error is logged and swallowed
+ * so a failed post-process can't break export.
+ */
+async function sanitizePptx(pptxPath: string): Promise<void> {
+  try {
+    const buf = await fs.promises.readFile(pptxPath)
+    const zip = await JSZip.loadAsync(buf)
+
+    // ── 1. Renumber duplicate cNvPr ids ────────────────────────────────
+    const slideFiles = Object.keys(zip.files).filter(
+      (n) => /^ppt\/slides\/slide\d+\.xml$/.test(n)
+    )
+    let changedSlides = 0
+    for (const name of slideFiles) {
+      const file = zip.file(name)
+      if (!file) continue
+      const xml = await file.async('string')
+      const seen = new Set<number>()
+      let next = 1
+      let mutated = false
+      const fixed = xml.replace(/<p:cNvPr id="(\d+)"/g, (_m, raw: string) => {
+        let id = parseInt(raw, 10)
+        if (Number.isNaN(id)) id = next
+        if (seen.has(id)) {
+          while (seen.has(next)) next++
+          id = next
+          mutated = true
+        }
+        seen.add(id)
+        if (id >= next) next = id + 1
+        return `<p:cNvPr id="${id}"`
+      })
+      if (mutated) {
+        zip.file(name, fixed)
+        changedSlides++
+      }
+    }
+
+    // ── 2. Drop stub parts that pptxgenjs creates but never populates.
+    // PowerPoint reads these strictly; an unused chart/embedding dir with no
+    // referenced content triggers the repair prompt.
+    const stubPatterns = [
+      /^ppt\/embeddings(?:\/.*)?$/,
+      /^ppt\/charts(?:\/.*)?$/,
+    ]
+    let droppedParts = 0
+    for (const name of Object.keys(zip.files)) {
+      if (!stubPatterns.some((re) => re.test(name))) continue
+      const entry = zip.files[name]
+      // Drop the whole subtree unless it has real referenced content.
+      // pptxgenjs only emits these dirs (and an empty `_rels/`) when no chart
+      // is actually used. Keep the file only if it's > 0 bytes AND not a dir.
+      if (entry.dir) {
+        delete zip.files[name]
+        droppedParts++
+      } else {
+        const body = await entry.async('uint8array')
+        if (body.byteLength === 0) {
+          delete zip.files[name]
+          droppedParts++
+        }
+      }
+    }
+
+    // ── 3. Clean SVG media payloads. Lucide-static and similar SVG sources
+    // ship with a leading `<!-- @license ... -->` comment BEFORE the root
+    // `<svg>` element and with no `<?xml ?>` declaration. PowerPoint's strict
+    // SVG part reader flags that as content corruption. Re-write any SVG to
+    // start with an XML declaration immediately followed by the `<svg>` root.
+    const svgFiles = Object.keys(zip.files).filter((n) =>
+      /^ppt\/media\/.*\.svg$/i.test(n)
+    )
+    let fixedSvgs = 0
+    for (const name of svgFiles) {
+      const file = zip.file(name)
+      if (!file) continue
+      const text = await file.async('string')
+      const svgStart = text.indexOf('<svg')
+      if (svgStart < 0) continue // not a real SVG; leave it
+      // Strip everything before <svg>, prepend a clean XML declaration.
+      const cleaned = '<?xml version="1.0" encoding="UTF-8"?>\n' + text.slice(svgStart)
+      if (cleaned !== text) {
+        zip.file(name, cleaned)
+        fixedSvgs++
+      }
+    }
+
+    if (changedSlides > 0 || droppedParts > 0 || fixedSvgs > 0) {
+      const out = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' })
+      await fs.promises.writeFile(pptxPath, out)
+      const msgs: string[] = []
+      if (changedSlides > 0) msgs.push(`renumbered duplicate cNvPr ids on ${changedSlides} slide(s)`)
+      if (droppedParts > 0) msgs.push(`dropped ${droppedParts} empty stub part(s)`)
+      if (fixedSvgs > 0) msgs.push(`normalised ${fixedSvgs} svg media payload(s)`)
+      console.log(`pptx post-process: ${msgs.join(' · ')}`)
+    }
+  } catch (e) {
+    console.warn('pptx post-process (sanitizePptx) failed:', e)
+  }
 }

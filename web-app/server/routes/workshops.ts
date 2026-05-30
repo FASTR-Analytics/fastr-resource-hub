@@ -13,6 +13,7 @@ import {
   getCustomSlides,
   saveCustomSlide,
   deleteCustomSlide,
+  cloneWorkshop,
   WorkshopConfig
 } from '../db/database.js'
 import { resolveLibrarySlideContent, type Language } from '../services/deckBuilder.js'
@@ -126,6 +127,35 @@ router.post('/', async (req, res) => {
     res.status(201).json({ success: true, id })
   } catch (error: any) {
     console.error('Error creating workshop:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+// POST /api/workshops/:id/clone - Fork a workshop (deck builder UI's
+// "Clone…" button). Body: { newId, name?, country?, location?, date? }.
+// Copies the config and any custom_slides; sets newId workshop to unlocked.
+router.post('/:id/clone', async (req, res) => {
+  try {
+    const srcId = req.params.id
+    const { newId, name, country, location, date } = req.body as {
+      newId: string; name?: string; country?: string; location?: string; date?: string
+    }
+    if (!newId) {
+      return res.status(400).json({ error: 'Missing newId' })
+    }
+    if (newId === srcId) {
+      return res.status(400).json({ error: 'newId must differ from source id' })
+    }
+    if (await getWorkshop(newId)) {
+      return res.status(409).json({ error: `Workshop "${newId}" already exists` })
+    }
+    const cloned = await cloneWorkshop(srcId, newId, { name, country, location, date })
+    if (!cloned) {
+      return res.status(404).json({ error: 'Source workshop not found' })
+    }
+    res.status(201).json({ success: true, id: newId, config: cloned })
+  } catch (error: any) {
+    console.error('Error cloning workshop:', error)
     res.status(500).json({ error: error.message })
   }
 })

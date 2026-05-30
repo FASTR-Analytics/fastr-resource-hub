@@ -93,6 +93,7 @@ interface WorkshopStore {
   saveCurrentWorkshop: () => Promise<void>
   createWorkshop: (workshopId: string, config: LocalWorkshopConfig) => Promise<void>
   deleteWorkshop: (workshopId: string) => Promise<void>
+  cloneWorkshop: (srcId: string, newId: string, overrides?: { name?: string; country?: string; location?: string; date?: string }) => Promise<string>
   setWorkshopLocked: (workshopId: string, locked: boolean) => Promise<void>
   loadContentLibrary: (language?: Language) => Promise<void>
   setContentLanguage: (language: Language) => void
@@ -187,6 +188,22 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       await get().selectWorkshop(workshopId)
     } catch (error: any) {
       set({ error: error.message, isLoading: false })
+    }
+  },
+
+  // Clone workshop — fork the source under a new id and select the clone.
+  cloneWorkshop: async (srcId, newId, overrides) => {
+    set({ isLoading: true, error: null })
+    try {
+      await api.cloneWorkshop(srcId, newId, overrides)
+      await get().loadWorkshops()
+      await get().selectWorkshop(newId)
+      return newId
+    } catch (error: any) {
+      set({ error: error.message })
+      throw error
+    } finally {
+      set({ isLoading: false })
     }
   },
 
