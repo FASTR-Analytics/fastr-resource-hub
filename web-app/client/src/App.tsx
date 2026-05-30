@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
-import type { WorkshopInfo } from '../../lib/api'
+import type { WorkshopInfo } from '../lib/api'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
 import { SlideSorter } from './components/SlideSorter'

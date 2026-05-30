@@ -12,8 +12,9 @@ paginate: true
   <img src="../../resources/logos/GFF_Logo_trimmed.png" style="height: 40px;">
 </div>
 
-<div style="position: absolute; bottom: 40px; left: 80px;">
+<div style="position: absolute; bottom: 40px; left: 80px; display: flex; gap: 28px; align-items: center;">
   <img src="../../resources/logos/FASTR_White_Horiz.png" style="height: 50px;">
+  <img src="../../resources/logos/UsefulData.png" style="height: 50px;">
 </div>
 
 # {{TITLE}}
