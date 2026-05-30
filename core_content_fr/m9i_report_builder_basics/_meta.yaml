@@ -2,7 +2,7 @@ slides:
 - file: m9i_1_report_overview.md
   order: 1.0
   variant: full
-  title: Ce que nous allons construire
+  title: Structure du rapport de perturbations
 - file: m9i_2_create_report.md
   order: 2.0
   variant: full

@@ -4,24 +4,6 @@ theme: fastr
 paginate: true
 ---
 
-## Ce que nous allons construire
-
-Votre objectif pour cet atelier : produire un **rapport trimestriel** pour votre pays, comme celui-ci :
-
-<!-- PLACEHOLDER — capture d'écran d'une diapositive type du rapport Cameroun (page 6 ou 7) montrant titre + texte d'interprétation + graphiques -->
-
-Chaque diapositive du rapport suit le même modèle :
-
-| Élément | Rôle |
-|---------|------|
-| **Titre en gras** | Le message clé — ce qu'il faut retenir |
-| **Texte à gauche** | Votre interprétation des résultats |
-| **Graphiques à droite** | Les visualisations FASTR (perturbations, couverture, etc.) |
-
-À la fin de l'atelier, votre rapport sera **~70% prêt**. Vous le finaliserez de retour chez vous.
-
----
-
 ## Structure du rapport de perturbations
 
 FASTR utilise ce format pour les rapports de perturbations :
