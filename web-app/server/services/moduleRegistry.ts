@@ -159,7 +159,13 @@ export function getModuleFolder(id: string): string | null {
   const mod = modules.find(m =>
     m.id === id ||
     m.number === id ||
-    `m${m.number}` === id
+    `m${m.number}` === id ||
+    // Folder-name prefix match — e.g. id="mai" resolves to folder "mai_ai_assistant"
+    // and id="mw" resolves to "mw_webinar". Files are named by folder prefix
+    // (mai_1_*.md, mw_11_*.md) and that's also what slide refs use, so this lets
+    // refs work without forcing scripts to know the modules.yaml id.
+    m.folder === id ||
+    m.folder.startsWith(`${id}_`)
   )
   return mod?.folder || null
 }
