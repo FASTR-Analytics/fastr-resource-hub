@@ -38,10 +38,14 @@ export function addisFullConfig(language: 'en' | 'fr') {
 
       // ─── DAY 1 ──────────────────────────────────────────────────────────────
       day1: [
-        { _id: 'd1-title', session: fr ? 'Jour 1' : 'Day 1', type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+        // Workshop cover (logos + title + date + location) — appears once, before everything
+        { _id: 'd0-workshop-cover', session: fr ? "Couverture de l'atelier" : 'Workshop cover', slides: ['title_slide.md'], duration: 0 },
 
         // Pre-workshop assessment
         { _id: 'd1-preworkshop', session: fr ? 'Évaluation avant atelier' : 'FASTR Pre-Workshop Assessment', slides: [], duration: 15 },
+
+        // Day 1 cover (just "Day 1" / "Jour 1" on a section-cover background)
+        { _id: 'd1-title', session: fr ? 'Jour 1' : 'Day 1', type: 'day_title', slides: ['day_title.md'], duration: 0 },
 
         // Session 1 · Opening — uses workshop templates
         { _id: 's1-divider', session: fr ? "Session 1 · Session d'ouverture" : 'Session 1 · Opening session', type: 'section', duration: 0 },
@@ -68,10 +72,14 @@ export function addisFullConfig(language: 'en' | 'fr') {
             'm0_5_how_countries_use_fastr.md',
             'm0_6_fastr_approach_rmncahn.md',
             'm0_7_from_analysis_to_action.md',
-            // GAP — no library file: "The Learning Journey" + "What participants will learn"
           ],
           duration: 20,
         },
+
+        // Workshop-owned closers for Session 3 — emit as PLACEHOLDER slots so the deck
+        // mirrors the master structure. Fill via the UI's custom_slides for per-workshop content.
+        { _id: 's3-learning-journey', session: fr ? "Le parcours d'apprentissage" : 'The Learning Journey', slides: [], duration: 5 },
+        { _id: 's3-participant-outcomes', session: fr ? 'Ce que les participants apprendront et feront pendant l\'atelier' : 'What participants will learn and do during the workshop', slides: [], duration: 5 },
 
         // Group photograph (custom)
         { _id: 'd1-photo', session: fr ? 'Photo de groupe' : 'Group photograph', slides: [], duration: 0 },
@@ -214,7 +222,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
 
       // ─── DAY 2 ──────────────────────────────────────────────────────────────
       day2: [
-        { _id: 'd2-title', session: fr ? 'Jour 2' : 'Day 2', type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+        { _id: 'd2-title', session: fr ? 'Jour 2' : 'Day 2', type: 'day_title', slides: ['day_title.md'], duration: 0 },
         { _id: 'd2-recap', session: fr ? 'Récapitulatif du Jour 1 — aperçu du Jour 2' : 'Recap of Day 1 — overview of Day 2', slides: [], duration: 10 },
         { _id: 'd2-agenda', session: fr ? 'Agenda Jour 2' : 'Day 2 Agenda', type: 'section', duration: 0 },
 
@@ -284,7 +292,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
 
       // ─── DAY 3 ──────────────────────────────────────────────────────────────
       day3: [
-        { _id: 'd3-title', session: fr ? 'Jour 3' : 'Day 3', type: 'day_title', slides: ['title_slide.md'], duration: 0 },
+        { _id: 'd3-title', session: fr ? 'Jour 3' : 'Day 3', type: 'day_title', slides: ['day_title.md'], duration: 0 },
         { _id: 'd3-recap', session: fr ? 'Récapitulatif du Jour 2 — aperçu du Jour 3' : 'Recap of Day 2 — overview of Day 3', slides: [], duration: 10 },
         { _id: 'd3-agenda', session: fr ? 'Agenda Jour 3' : 'Day 3 Agenda', type: 'section', duration: 0 },
 
