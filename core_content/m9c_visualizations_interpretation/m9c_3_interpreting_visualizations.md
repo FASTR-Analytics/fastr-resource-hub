@@ -17,7 +17,7 @@ A 6-step framework for reading any FASTR chart. The steps cover the indicator sh
 **What you'll practice**
 - Walk the 6 steps through a chart on your own
 - Pair up and apply the steps to a second chart
-- Compare interpretations with your neighbour
+- Compare interpretations with your neighbor
 
 </div>
 

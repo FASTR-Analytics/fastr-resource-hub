@@ -17,7 +17,7 @@ A three-part structure for any interpretation. The title states the conclusion. 
 **What you'll practice**
 - Write a three-part interpretation of a chart you choose
 - Drop the viz and your text onto a slide
-- Share with a neighbour and tighten the wording
+- Share with a neighbor and tighten the wording
 
 </div>
 

@@ -27,7 +27,7 @@ paginate: true
 <!--
 PRESENTER NOTES:
 - Two outputs shown: national trends and subnational comparison
-- National: compare HMIS (grey), survey (black), projected (red)
+- National: compare HMIS (gray), survey (black), projected (red)
 - Gap between HMIS and survey indicates denominator accuracy
 - Subnational: identify geographic disparities for prioritization
 - Coverage >100%: denominator too small or services double-counted
