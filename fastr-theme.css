@@ -99,33 +99,25 @@ h2 {
   border-bottom: none;
 }
 
-/* Short lime rule (the FASTR signature): a block element that always sits a
-   fixed gap below the title's TEXT box. Because it flows right after the text,
-   its distance from the title is identical on every slide and unaffected by how
-   many lines the title wraps to (1-line and 2-line titles get the same gap).
-   Pseudo-element verified to render in Marp HTML/PDF; PPTX draws its own rule. */
-h1::after,
-h2::after {
-  content: "";
-  display: block;
-  height: 5px;
-  background: var(--fastr-lime);
-  margin-top: 0.34em;
+/* Vertical deep-green accent bar to the LEFT of the title (replaces the old
+   horizontal lime rule). border-left + padding-left automatically tracks the
+   wrapped title height — 2-line titles get a taller bar. PPTX mirrors this in
+   addHeaderBar with an explicit rect sized off the title height estimate. */
+h1, h2 {
+  border-left: 6px solid var(--fastr-deep-green);
+  padding-left: 16px;
 }
-h1::after { width: 88px; }
-h2::after { width: 84px; }
 
-/* Covers and the break field carry their own title treatment (a full-width
-   border or none) — suppress the signature rule there to avoid a double line. */
-section.lead h1::after,
-section.lead h2::after,
-section.title-cover h1::after,
-section.section-cover h1::after,
-section.break h1::after { display: none; }
-
-/* Centered slides: center the signature rule under the centered title. */
-section.centered h1::after,
-section.centered h2::after { margin-left: auto; margin-right: auto; }
+/* Covers, breaks, centered, and activity-pointer slides carry their own title
+   treatment — suppress the bar so we don't get a stray vertical mark. */
+section.lead h1,
+section.lead h2,
+section.title-cover h1,
+section.section-cover h1,
+section.break h1,
+section.centered h1,
+section.centered h2,
+.activity-pointer h2 { border-left: none; padding-left: 0; }
 
 h3 {
   color: var(--fastr-purple);
@@ -308,15 +300,6 @@ header {
   text-transform: uppercase;
 }
 header .kick { color: var(--fastr-deep-green); }
-header .kick::before {
-  content: "";
-  display: inline-block;
-  width: 18px; height: 2px;
-  background: var(--fastr-lime);
-  margin-right: 12px;
-  vertical-align: middle;
-  transform: translateY(-2px);
-}
 header .loc { color: var(--ink-3); }
 header .loc b { color: var(--fastr-deep-green); font-weight: 700; }
 
@@ -389,7 +372,7 @@ section.lead {
 
 section.lead h1 {
   color: var(--bg-white);
-  border-bottom: 4px solid var(--fastr-lime);
+  border-bottom: none;
   font-size: 3em;
 }
 
@@ -715,7 +698,7 @@ section.title-cover {
 
 section.title-cover h1 {
   color: #ffffff;
-  border-bottom: 4px solid var(--fastr-lime);
+  border-bottom: none;
   font-size: 1.8em;
   margin-bottom: 0.3em;
   background: none;
@@ -754,7 +737,7 @@ section.section-cover {
 
 section.section-cover h1 {
   color: #ffffff;
-  border-bottom: 4px solid var(--fastr-lime);
+  border-bottom: none;
   font-size: 2em;
   margin-bottom: 0.3em;
   background: none;
@@ -1107,8 +1090,6 @@ section.spacious p {
 section.activity-pointer,
 section[data-class~="activity-pointer"] {
   background-color: #ffffff;
-  background-image: radial-gradient(circle, var(--fastr-light-blue) 1.2px, transparent 1.4px);
-  background-size: 22px 22px;
 }
 
 .activity-pointer {
