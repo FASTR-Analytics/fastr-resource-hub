@@ -829,7 +829,31 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     })
   }
 
-  // Add logos (GFF top-left, FASTR bottom-left) with correct aspect ratios
+  // Add logos with correct aspect ratios.
+  // - GFF (partner badge): top-left
+  // - FASTR white wordmark: bottom-left
+  // - UsefulData wordmark: bottom-left, immediately right of FASTR (matched height)
+  // Layout is order-independent in the markdown — we place each logo at its
+  // designated slot based on the filename.
+  const FASTR_LOGO_H = 0.5
+  const FASTR_LOGO_X = 0.6
+  const FASTR_LOGO_Y = 6.85
+  // Reserve space for FASTR wordmark first so we can place UsefulData beside it.
+  // Compute FASTR width from its aspect once if it's present, else fall back.
+  let fastrWidth = 0
+  for (const img of data.images) {
+    if (/FASTR.*White/i.test(img.path)) {
+      const imgPath = resolveImagePath(img.path)
+      if (!imgPath) continue
+      try {
+        const dims = imageSize(imgPath)
+        if (dims.width && dims.height) fastrWidth = FASTR_LOGO_H * (dims.width / dims.height)
+      } catch {}
+      break
+    }
+  }
+  const LOGO_GAP = 0.3
+
   for (const img of data.images) {
     if (isBackgroundImage(img)) continue
     const imgPath = resolveImagePath(img.path)
@@ -840,10 +864,16 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       const aspect = dims.width / dims.height
       if (/GFF_Logo/i.test(img.path)) {
         const h = 0.4
-        addSlideImage(slide,{ path: imgPath, x: 0.6, y: 0.3, w: h * aspect, h })
+        addSlideImage(slide, { path: imgPath, x: 0.6, y: 0.3, w: h * aspect, h })
       } else if (/FASTR.*White/i.test(img.path)) {
-        const h = 0.5
-        addSlideImage(slide,{ path: imgPath, x: 0.6, y: 6.85, w: h * aspect, h })
+        addSlideImage(slide, { path: imgPath, x: FASTR_LOGO_X, y: FASTR_LOGO_Y, w: FASTR_LOGO_H * aspect, h: FASTR_LOGO_H })
+      } else if (/UsefulData/i.test(img.path)) {
+        // UsefulData wordmark is much wider than FASTR's; render shorter so it
+        // doesn't visually dominate. Vertically centered with the FASTR baseline.
+        const h = 0.36
+        const x = FASTR_LOGO_X + (fastrWidth || 2) + LOGO_GAP
+        const y = FASTR_LOGO_Y + (FASTR_LOGO_H - h) / 2
+        addSlideImage(slide, { path: imgPath, x, y, w: h * aspect, h })
       }
     } catch {}
   }

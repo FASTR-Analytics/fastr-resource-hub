@@ -14,7 +14,7 @@ paginate: true
 
 <div style="position: absolute; bottom: 40px; left: 80px; display: flex; gap: 28px; align-items: center;">
   <img src="../../resources/logos/FASTR_White_Horiz.png" style="height: 50px;">
-  <img src="../../resources/logos/UsefulData.png" style="height: 50px;">
+  <img src="../../resources/logos/usefuldata600w.png" style="height: 34px;">
 </div>
 
 # {{TITLE}}
