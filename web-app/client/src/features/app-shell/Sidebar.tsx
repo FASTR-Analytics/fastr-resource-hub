@@ -16,8 +16,8 @@ interface SidebarProps {
   libraryLabel: string
   settingsLabel: string
   // Footer
-  language: 'en' | 'fr' | 'pt' | 'pt'
-  onLanguageChange: (lang: 'en' | 'fr' | 'pt' | 'pt') => void
+  language: 'en' | 'fr' | 'pt'
+  onLanguageChange: (lang: 'en' | 'fr' | 'pt') => void
   signOutLabel: string
   onSignOut: () => void
   // Optional extra footer content (rendered above lang/signout row)
@@ -104,6 +104,14 @@ export function Sidebar({
               }`}
             >
               FR
+            </button>
+            <button
+              onClick={() => onLanguageChange('pt')}
+              className={`px-2 py-0.5 text-[11px] font-semibold rounded transition-colors ${
+                language === 'pt' ? 'bg-fastr-primary text-white' : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              PT
             </button>
           </div>
           <button
