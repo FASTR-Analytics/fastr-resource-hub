@@ -14,7 +14,7 @@ import { addisFullConfig } from './_addisFullConfig.js'
 const SCRIPT_DIR = path.dirname(new URL(import.meta.url).pathname)
 const WEB_APP = path.resolve(SCRIPT_DIR, '..')
 
-for (const lang of ['en', 'fr'] as const) {
+for (const lang of ['en', 'fr', 'pt'] as const) {
   const config = addisFullConfig(lang)
   const id = `addis_full_${lang}`
   console.log(`Building ${id}…`)

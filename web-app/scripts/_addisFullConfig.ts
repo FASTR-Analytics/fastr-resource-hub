@@ -5,20 +5,30 @@
 
 export const ADDIS_WORKSHOP_ID = 'addis_multi_country_jun2026'
 
-export function addisFullConfig(language: 'en' | 'fr') {
+export function addisFullConfig(language: 'en' | 'fr' | 'pt') {
   const fr = language === 'fr'
+  const pt = language === 'pt'
+  // t(en, fr, pt) — pick the right string for the language. Falls back to EN
+  // if a PT or FR variant is missing (passed as undefined).
+  const t = (en: string, frV?: string, ptV?: string): string => {
+    if (pt && ptV) return ptV
+    if (fr && frV) return frV
+    return en
+  }
   return {
     workshop: {
-      name: fr
-        ? "Échange d'apprentissage collaboratif multi-pays FASTR"
-        : 'FASTR Multi-Country Collaborative Learning Exchange',
-      title: fr
-        ? "Échange d'apprentissage multi-pays FASTR"
-        : 'FASTR Multi-Country Collaborative Learning Exchange',
-      subtitle: fr ? 'Addis-Abeba · 24–26 juin 2026' : 'Addis Ababa · 24–26 June 2026',
-      country: fr ? 'Éthiopie' : 'Ethiopia',
+      name: t('FASTR Multi-Country Collaborative Learning Exchange',
+              "Échange d'apprentissage collaboratif multi-pays FASTR",
+              'Intercâmbio de Aprendizagem Colaborativa Multipaíses FASTR'),
+      title: t('FASTR Multi-Country Collaborative Learning Exchange',
+               "Échange d'apprentissage multi-pays FASTR",
+               'Intercâmbio de Aprendizagem Multipaíses FASTR'),
+      subtitle: t('Addis Ababa · 24–26 June 2026',
+                  'Addis-Abeba · 24–26 juin 2026',
+                  'Adis Abeba · 24–26 de junho de 2026'),
+      country: t('Ethiopia', 'Éthiopie', 'Etiópia'),
       location: 'Addis Ababa',
-      date: fr ? '24–26 juin 2026' : 'June 24–26, 2026',
+      date: t('June 24–26, 2026', '24–26 juin 2026', '24–26 de junho de 2026'),
       start_date: '2026-06-24',
       end_date: '2026-06-26',
       facilitators: '',
@@ -29,9 +39,9 @@ export function addisFullConfig(language: 'en' | 'fr') {
     schedule: {
       days: 3,
       day_titles: {
-        '1': fr ? 'Jour 1' : 'Day 1',
-        '2': fr ? 'Jour 2' : 'Day 2',
-        '3': fr ? 'Jour 3' : 'Day 3',
+        '1': t('Day 1', 'Jour 1', 'Dia 1'),
+        '2': t('Day 2', 'Jour 2', 'Dia 2'),
+        '3': t('Day 3', 'Jour 3', 'Dia 3'),
       },
       day_start_times: { '1': '09:00', '2': '09:00', '3': '09:00' },
       day_end_times:   { '1': '15:35', '2': '16:30', '3': '17:00' },
@@ -39,32 +49,32 @@ export function addisFullConfig(language: 'en' | 'fr') {
       // ─── DAY 1 ──────────────────────────────────────────────────────────────
       day1: [
         // Workshop cover (logos + title + date + location) — appears once, before everything
-        { _id: 'd0-workshop-cover', session: fr ? "Couverture de l'atelier" : 'Workshop cover', slides: ['title_slide.md'], duration: 0 },
+        { _id: 'd0-workshop-cover', session: t('Workshop cover', 'Couverture de l\'atelier', 'Capa do workshop'), slides: ['title_slide.md'], duration: 0 },
 
         // Pre-workshop assessment
-        { _id: 'd1-preworkshop', session: fr ? 'Évaluation avant atelier' : 'FASTR Pre-Workshop Assessment', slides: [], duration: 15 },
+        { _id: 'd1-preworkshop', session: t('FASTR Pre-Workshop Assessment', 'Évaluation avant atelier', 'Avaliação pré-workshop FASTR'), slides: [], duration: 15 },
 
         // Day 1 cover (just "Day 1" / "Jour 1" on a section-cover background)
-        { _id: 'd1-title', session: fr ? 'Jour 1' : 'Day 1', type: 'day_title', slides: ['day_title.md'], duration: 0 },
+        { _id: 'd1-title', session: t('Day 1', 'Jour 1', 'Dia 1'), type: 'day_title', slides: ['day_title.md'], duration: 0 },
 
         // Session 1 · Opening — uses workshop templates
-        { _id: 's1-divider', session: fr ? "Session 1 · Session d'ouverture" : 'Session 1 · Opening session', type: 'section', duration: 0 },
-        { _id: 's1-welcome', session: fr ? 'Bienvenue et introductions' : 'Welcome, introductions and opening remarks', slides: ['welcome_slide.md'], duration: 15 },
-        { _id: 's1-icebreaker', session: fr ? 'Brise-glace' : 'Ice breaker', slides: [], duration: 15 },
-        { _id: 's1-norms', session: fr ? 'Règles de la réunion' : 'Meeting norms', slides: ['meeting_norms.md'], duration: 10 },
+        { _id: 's1-divider', session: t('Session 1 · Opening session', 'Session 1 · Session d\'ouverture', 'Sessão 1 · Sessão de abertura'), type: 'section', duration: 0 },
+        { _id: 's1-welcome', session: t('Welcome, introductions and opening remarks', 'Bienvenue et introductions', 'Boas-vindas, apresentações e abertura'), slides: ['welcome_slide.md'], duration: 15 },
+        { _id: 's1-icebreaker', session: t('Ice breaker', 'Brise-glace', 'Quebra-gelo'), slides: [], duration: 15 },
+        { _id: 's1-norms', session: t('Meeting norms', 'Règles de la réunion', 'Regras da reunião'), slides: ['meeting_norms.md'], duration: 10 },
 
         // Day 1 Agenda
-        { _id: 'd1-agenda', session: fr ? 'Agenda Jour 1' : 'Day 1 Agenda', type: 'section', duration: 0 },
+        { _id: 'd1-agenda', session: t('Day 1 Agenda', 'Agenda Jour 1', 'Agenda Dia 1'), type: 'section', duration: 0 },
 
         // Session 2 · Host country — section cover (no time) + placeholder body (time in agenda)
-        { _id: 's2-cover', session: fr ? 'Session 2 · Pleins feux sur le pays hôte' : 'Session 2 · Host country spotlight', type: 'section', duration: 0 },
-        { _id: 's2-host', session: fr ? 'Session 2 · Pleins feux sur le pays hôte' : 'Session 2 · Host country spotlight', slides: [], duration: 45 },
+        { _id: 's2-cover', session: t('Session 2 · Host country spotlight', 'Session 2 · Pleins feux sur le pays hôte', 'Sessão 2 · Foco no país anfitrião'), type: 'section', duration: 0 },
+        { _id: 's2-host', session: t('Session 2 · Host country spotlight', 'Session 2 · Pleins feux sur le pays hôte', 'Sessão 2 · Foco no país anfitrião'), slides: [], duration: 45 },
 
         // Session 3 · Introduction to FASTR
-        { _id: 's3-divider', session: fr ? 'Session 3 · Introduction à FASTR' : 'Session 3 · Introduction to FASTR', type: 'section', duration: 0 },
+        { _id: 's3-divider', session: t('Session 3 · Introduction to FASTR', 'Session 3 · Introduction à FASTR', 'Sessão 3 · Introdução ao FASTR'), type: 'section', duration: 0 },
         {
           _id: 's3-intro',
-          session: fr ? 'Session 3 · Introduction à FASTR' : 'Session 3 · Introduction to FASTR',
+          session: t('Session 3 · Introduction to FASTR', 'Session 3 · Introduction à FASTR', 'Sessão 3 · Introdução ao FASTR'),
           slides: [
             'm0_1_what_is_fastr.md',
             'm0_2_what_are_we_trying_to_achieve.md',
@@ -80,17 +90,17 @@ export function addisFullConfig(language: 'en' | 'fr') {
 
         // Workshop-owned closers for Session 3 — emit as PLACEHOLDER slots so the deck
         // mirrors the master structure. Fill via the UI's custom_slides for per-workshop content.
-        { _id: 's3-learning-journey', session: fr ? "Le parcours d'apprentissage" : 'The Learning Journey', slides: [], duration: 5 },
-        { _id: 's3-participant-outcomes', session: fr ? 'Ce que les participants apprendront et feront pendant l\'atelier' : 'What participants will learn and do during the workshop', slides: [], duration: 5 },
+        { _id: 's3-learning-journey', session: t('The Learning Journey', "Le parcours d'apprentissage", 'O percurso de aprendizagem'), slides: [], duration: 5 },
+        { _id: 's3-participant-outcomes', session: t('What participants will learn and do during the workshop', "Ce que les participants apprendront et feront pendant l'atelier", 'O que os participantes vão aprender e fazer durante o workshop'), slides: [], duration: 5 },
 
         // Group photograph (custom)
-        { _id: 'd1-photo', session: fr ? 'Photo de groupe' : 'Group photograph', slides: [], duration: 0 },
+        { _id: 'd1-photo', session: t('Group photograph', 'Photo de groupe', 'Fotografia de grupo'), slides: [], duration: 0 },
 
         // Coffee break
-        { _id: 'd1-break-am', session: fr ? 'Pause santé' : 'Health break', type: 'break', duration: 30 },
+        { _id: 'd1-break-am', session: t('Health break', 'Pause santé', 'Pausa'), type: 'break', duration: 30 },
 
         // Methods + Disruption analysis section opener (matches ref slide 23)
-        { _id: 's3-methods-divider', session: fr ? "Introduction aux méthodes FASTR et à l'analyse des perturbations" : 'Introduction to FASTR methods and disruption analysis', type: 'section', duration: 0 },
+        { _id: 's3-methods-divider', session: t('Introduction to FASTR methods and disruption analysis', "Introduction aux méthodes FASTR et à l'analyse des perturbations", 'Introdução aos métodos FASTR e à análise de perturbações'), type: 'section', duration: 0 },
 
         // Session 3 continued — Orientation to FASTR Analytics Platform
         // Sub-sessions named "Session 3 · X" so the kicker chrome shows X and
@@ -98,7 +108,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // (the Session 3 opener entry above accounts for the time).
         {
           _id: 's3-orientation',
-          session: fr ? 'Session 3 · Orientation à la plateforme analytique FASTR' : 'Session 3 · Orientation to the FASTR Analytics Platform',
+          session: t('Session 3 · Orientation to the FASTR Analytics Platform', 'Session 3 · Orientation à la plateforme analytique FASTR', 'Sessão 3 · Orientação à plataforma analítica FASTR'),
           slides: [
             'm3_1_overview_of_platform.md',
             'm3_2a_accessing_platform_continued.md',     // Country instance
@@ -112,7 +122,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // Session 3 continued — Methods · DQA
         {
           _id: 's3-dqa',
-          session: fr ? 'Session 3 · Méthodes — Évaluation de la qualité des données' : 'Session 3 · Methods — Data Quality Assessment',
+          session: t('Session 3 · Methods — Data Quality Assessment', 'Session 3 · Méthodes — Évaluation de la qualité des données', 'Sessão 3 · Métodos — Avaliação da qualidade dos dados'),
           slides: [
             'm4_0_fastr_analytical_pipeline.md',
             'm4_1_approach_to_dqa.md',
@@ -134,7 +144,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // Session 3 continued — Methods · DQ Adjustment
         {
           _id: 's3-dqadj',
-          session: fr ? 'Session 3 · Méthodes — Ajustement de la qualité des données' : 'Session 3 · Methods — Data Quality Adjustment',
+          session: t('Session 3 · Methods — Data Quality Adjustment', 'Session 3 · Méthodes — Ajustement de la qualité des données', 'Sessão 3 · Métodos — Ajustamento da qualidade dos dados'),
           slides: [
             'm5_1_from_detection_to_correction.md',  // "Data quality adjustment" overview slide
             'm5_3_why_adjust_for_outliers.md',
@@ -147,7 +157,7 @@ export function addisFullConfig(language: 'en' | 'fr') {
         // Session 3 continued — Methods · Service Utilization & Coverage
         {
           _id: 's3-suc',
-          session: fr ? 'Session 3 · Méthodes — Utilisation des services et couverture' : 'Session 3 · Methods — Service Utilization and Coverage',
+          session: t('Session 3 · Methods — Service Utilization and Coverage', 'Session 3 · Méthodes — Utilisation des services et couverture', 'Sessão 3 · Métodos — Utilização dos serviços e cobertura'),
           slides: [
             'm6_1_service_utilization_analysis.md',
             'm6_1d_quarter_on_quarter_change.md',
@@ -169,10 +179,10 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Session 4 · Orientation to FASTR Platform (AI Assistant)
-        { _id: 's4-divider', session: fr ? 'Session 4 · Orientation à la plateforme analytique FASTR' : 'Session 4 · Orientation to the FASTR Analytics Platform', type: 'section', duration: 0 },
+        { _id: 's4-divider', session: t('Session 4 · Orientation to the FASTR Analytics Platform', 'Session 4 · Orientation à la plateforme analytique FASTR', 'Sessão 4 · Orientação à plataforma analítica FASTR'), type: 'section', duration: 0 },
         {
           _id: 's4-ai',
-          session: fr ? "Session 4 · Assistant IA" : 'Session 4 · AI Assistant',
+          session: t('Session 4 · AI Assistant', 'Session 4 · Assistant IA', 'Sessão 4 · Assistente IA'),
           slides: [
             'mai_1_ai_assistant_overview.md',
             'mai_3_ai_ask_questions.md',
@@ -187,13 +197,13 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Lunch
-        { _id: 'd1-lunch', session: fr ? 'Pause déjeuner' : 'Lunch break', type: 'break', duration: 60 },
+        { _id: 'd1-lunch', session: t('Lunch break', 'Pause déjeuner', 'Pausa para almoço'), type: 'break', duration: 60 },
 
         // Session 5 · Practice — Exploring outputs
-        { _id: 's5-divider', session: fr ? 'Session 5 · Explorer les résultats FASTR, visualisations et assistant IA' : 'Session 5 · Exploring FASTR outputs, visualizations and AI Assistant', type: 'section', duration: 0 },
+        { _id: 's5-divider', session: t('Session 5 · Exploring FASTR outputs, visualizations and AI Assistant', 'Session 5 · Explorer les résultats FASTR, visualisations et assistant IA', 'Sessão 5 · Explorar resultados FASTR, visualizações e Assistente IA'), type: 'section', duration: 0 },
         {
           _id: 's5-practice-outputs',
-          session: fr ? 'Session 5 · Pratique — Explorer les résultats FASTR' : 'Session 5 · Practice — Exploring FASTR outputs',
+          session: t('Session 5 · Practice — Exploring FASTR outputs', 'Session 5 · Pratique — Explorer les résultats FASTR', 'Sessão 5 · Prática — Explorar resultados FASTR'),
           slides: [
             'm9b_1_login_folder_activity.md',
             'm9c_1_creating_visualizations_manually.md',
@@ -206,10 +216,10 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Session 6 · Practice — Policy-relevant questions
-        { _id: 's6-divider', session: fr ? 'Session 6 · Utiliser FASTR pour des questions politiques' : 'Session 6 · Using FASTR for policy-relevant questions', type: 'section', duration: 0 },
+        { _id: 's6-divider', session: t('Session 6 · Using FASTR for policy-relevant questions', 'Session 6 · Utiliser FASTR pour des questions politiques', 'Sessão 6 · Usar FASTR para questões políticas'), type: 'section', duration: 0 },
         {
           _id: 's6-practice-policy',
-          session: fr ? 'Session 6 · Utiliser FASTR pour des questions politiques' : 'Session 6 · Using FASTR for policy-relevant questions',
+          session: t('Session 6 · Using FASTR for policy-relevant questions', 'Session 6 · Utiliser FASTR pour des questions politiques', 'Sessão 6 · Usar FASTR para questões políticas'),
           slides: [
             'm1_1_what_is_data_use_case.md',
             'm1_1a_nigeria_quarterly_monitoring.md',
@@ -221,25 +231,25 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Wrap-up + plenary
-        { _id: 'd1-wrap', session: fr ? 'Messages clés et conclusion' : 'Key messages and wrap-up', slides: [], duration: 15 },
-        { _id: 'd1-plenary', session: fr ? 'Discussion en plénière' : 'Plenary discussion', slides: [], duration: 15 },
+        { _id: 'd1-wrap', session: t('Key messages and wrap-up', 'Messages clés et conclusion', 'Mensagens-chave e conclusão'), slides: [], duration: 15 },
+        { _id: 'd1-plenary', session: t('Plenary discussion', 'Discussion en plénière', 'Discussão em plenário'), slides: [], duration: 15 },
       ],
 
       // ─── DAY 2 ──────────────────────────────────────────────────────────────
       day2: [
-        { _id: 'd2-title', session: fr ? 'Jour 2' : 'Day 2', type: 'day_title', slides: ['day_title.md'], duration: 0 },
-        { _id: 'd2-recap', session: fr ? 'Récapitulatif du Jour 1 — aperçu du Jour 2' : 'Recap of Day 1 — overview of Day 2', slides: [], duration: 10 },
-        { _id: 'd2-agenda', session: fr ? 'Agenda Jour 2' : 'Day 2 Agenda', type: 'section', duration: 0 },
+        { _id: 'd2-title', session: t('Day 2', 'Jour 2', 'Dia 2'), type: 'day_title', slides: ['day_title.md'], duration: 0 },
+        { _id: 'd2-recap', session: t('Recap of Day 1 — overview of Day 2', 'Récapitulatif du Jour 1 — aperçu du Jour 2', 'Resumo do Dia 1 — perspetiva do Dia 2'), slides: [], duration: 10 },
+        { _id: 'd2-agenda', session: t('Day 2 Agenda', 'Agenda Jour 2', 'Agenda Dia 2'), type: 'section', duration: 0 },
 
         // Session 7 · Mentor countries — section cover + placeholder body
-        { _id: 's7-cover', session: fr ? 'Session 7 · Expériences des pays mentors' : 'Session 7 · Experiences from mentor countries', type: 'section', duration: 0 },
-        { _id: 's7-mentor', session: fr ? 'Session 7 · Expériences des pays mentors' : 'Session 7 · Experiences from mentor countries', slides: [], duration: 60 },
+        { _id: 's7-cover', session: t('Session 7 · Experiences from mentor countries', 'Session 7 · Expériences des pays mentors', 'Sessão 7 · Experiências dos países mentores'), type: 'section', duration: 0 },
+        { _id: 's7-mentor', session: t('Session 7 · Experiences from mentor countries', 'Session 7 · Expériences des pays mentors', 'Sessão 7 · Experiências dos países mentores'), slides: [], duration: 60 },
 
         // Session 8 · Practice — Creating presentations (spans coffee break)
-        { _id: 's8-divider', session: fr ? 'Session 8 · Pratique — Créer des présentations sur la plateforme' : 'Session 8 · Practice — creating presentations in the platform', type: 'section', duration: 0 },
+        { _id: 's8-divider', session: t('Session 8 · Practice — creating presentations in the platform', 'Session 8 · Pratique — Créer des présentations sur la plateforme', 'Sessão 8 · Prática — criar apresentações na plataforma'), type: 'section', duration: 0 },
         {
           _id: 's8-presentations-a',
-          session: fr ? 'Session 8 · Pratique — Créer des présentations' : 'Session 8 · Practice — creating presentations',
+          session: t('Session 8 · Practice — creating presentations', 'Session 8 · Pratique — Créer des présentations', 'Sessão 8 · Prática — criar apresentações'),
           slides: [
             'm9d_1_creating_slide_decks.md',
             'm9d_1b_adding_viz_manually.md',
@@ -248,10 +258,10 @@ export function addisFullConfig(language: 'en' | 'fr') {
           ],
           duration: 60,
         },
-        { _id: 'd2-break-am', session: fr ? 'Pause santé' : 'Health break', type: 'break', duration: 20 },
+        { _id: 'd2-break-am', session: t('Health break', 'Pause santé', 'Pausa'), type: 'break', duration: 20 },
         {
           _id: 's8-presentations-b',
-          session: fr ? 'Session 8 · suite' : 'Session 8 · continued',
+          session: t('Session 8 · continued', 'Session 8 · suite', 'Sessão 8 · continuação'),
           slides: [
             'm9d_2b_open_slide_editor.md',
             'm9d_3_formatting_text.md',
@@ -262,10 +272,10 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Session 9 · Creating Country Disruptions Reports
-        { _id: 's9-divider', session: fr ? 'Session 9 · Créer des rapports nationaux de perturbations' : 'Session 9 · Creating Country Disruptions Reports', type: 'section', duration: 0 },
+        { _id: 's9-divider', session: t('Session 9 · Creating Country Disruptions Reports', 'Session 9 · Créer des rapports nationaux de perturbations', 'Sessão 9 · Criar relatórios de perturbações dos países'), type: 'section', duration: 0 },
         {
           _id: 's9-disruptions',
-          session: fr ? 'Session 9 · Créer des rapports nationaux de perturbations' : 'Session 9 · Creating Country Disruptions Reports',
+          session: t('Session 9 · Creating Country Disruptions Reports', 'Session 9 · Créer des rapports nationaux de perturbations', 'Sessão 9 · Criar relatórios de perturbações dos países'),
           slides: [
             'm9f_4_introducing_prompt_library.md',
             'm9f_4b_introducing_prompt_library.md',
@@ -275,17 +285,17 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Lunch
-        { _id: 'd2-lunch', session: fr ? 'Pause déjeuner' : 'Lunch break', type: 'break', duration: 60 },
+        { _id: 'd2-lunch', session: t('Lunch break', 'Pause déjeuner', 'Pausa para almoço'), type: 'break', duration: 60 },
 
         // Session 10 · Understanding audience — section cover + placeholder body
-        { _id: 's10-cover', session: fr ? 'Session 10 · Comprendre votre public — cartographie et narration' : 'Session 10 · Understanding your audience — user mapping and storytelling', type: 'section', duration: 0 },
-        { _id: 's10-audience', session: fr ? 'Session 10 · Comprendre votre public' : 'Session 10 · Understanding your audience', slides: [], duration: 30 },
+        { _id: 's10-cover', session: t('Session 10 · Understanding your audience — user mapping and storytelling', 'Session 10 · Comprendre votre public — cartographie et narration', 'Sessão 10 · Compreender o público — mapeamento de utilizadores e narrativa'), type: 'section', duration: 0 },
+        { _id: 's10-audience', session: t('Session 10 · Understanding your audience', 'Session 10 · Comprendre votre public', 'Sessão 10 · Compreender o público'), slides: [], duration: 30 },
 
         // Session 11 · Refining disruption reports
-        { _id: 's11-divider', session: fr ? 'Session 11 · Affiner les rapports de perturbations et ajouter des analyses spécifiques au pays' : 'Session 11 · Refining disruption reports and adding country-specific analyses', type: 'section', duration: 0 },
+        { _id: 's11-divider', session: t('Session 11 · Refining disruption reports and adding country-specific analyses', 'Session 11 · Affiner les rapports de perturbations et ajouter des analyses spécifiques au pays', 'Sessão 11 · Afinar relatórios de perturbações e adicionar análises específicas do país'), type: 'section', duration: 0 },
         {
           _id: 's11-refining',
-          session: fr ? 'Session 11 · Affiner les rapports de perturbations' : 'Session 11 · Refining disruption reports',
+          session: t('Session 11 · Refining disruption reports', 'Session 11 · Affiner les rapports de perturbations', 'Sessão 11 · Afinar relatórios de perturbações'),
           slides: [
             'm9e_6_refine_disruption_report.md',
             'm9e_7_peer_review_checklist.md',
@@ -294,20 +304,20 @@ export function addisFullConfig(language: 'en' | 'fr') {
           duration: 60,
         },
 
-        { _id: 'd2-wrap', session: fr ? 'Messages clés et conclusion' : 'Key messages and wrap-up', slides: [], duration: 10 },
+        { _id: 'd2-wrap', session: t('Key messages and wrap-up', 'Messages clés et conclusion', 'Mensagens-chave e conclusão'), slides: [], duration: 10 },
       ],
 
       // ─── DAY 3 ──────────────────────────────────────────────────────────────
       day3: [
-        { _id: 'd3-title', session: fr ? 'Jour 3' : 'Day 3', type: 'day_title', slides: ['day_title.md'], duration: 0 },
-        { _id: 'd3-recap', session: fr ? 'Récapitulatif du Jour 2 — aperçu du Jour 3' : 'Recap of Day 2 — overview of Day 3', slides: [], duration: 10 },
-        { _id: 'd3-agenda', session: fr ? 'Agenda Jour 3' : 'Day 3 Agenda', type: 'section', duration: 0 },
+        { _id: 'd3-title', session: t('Day 3', 'Jour 3', 'Dia 3'), type: 'day_title', slides: ['day_title.md'], duration: 0 },
+        { _id: 'd3-recap', session: t('Recap of Day 2 — overview of Day 3', 'Récapitulatif du Jour 2 — aperçu du Jour 3', 'Resumo do Dia 2 — perspetiva do Dia 3'), slides: [], duration: 10 },
+        { _id: 'd3-agenda', session: t('Day 3 Agenda', 'Agenda Jour 3', 'Agenda Dia 3'), type: 'section', duration: 0 },
 
         // Session 12 · HFA
-        { _id: 's12-divider', session: fr ? 'Session 12 · Enquêtes auprès des formations sanitaires (FOSA)' : 'Session 12 · Health Facility Assessment (HFA)', type: 'section', duration: 0 },
+        { _id: 's12-divider', session: t('Session 12 · Health Facility Assessment (HFA)', 'Session 12 · Enquêtes auprès des formations sanitaires (FOSA)', 'Sessão 12 · Avaliação de unidades de saúde (HFA)'), type: 'section', duration: 0 },
         {
           _id: 's12-hfa',
-          session: fr ? 'Session 12 · Enquêtes FOSA' : 'Session 12 · Health Facility Assessment',
+          session: t('Session 12 · Health Facility Assessment', 'Session 12 · Enquêtes FOSA', 'Sessão 12 · Avaliação de unidades de saúde'),
           slides: [
             'm8_0_hfa_implementation_status.md',
             'm8_0a_fastr_hfa_approach.md',
@@ -323,13 +333,13 @@ export function addisFullConfig(language: 'en' | 'fr') {
           duration: 60,
         },
 
-        { _id: 'd3-break-am', session: fr ? 'Pause santé' : 'Health break', type: 'break', duration: 20 },
+        { _id: 'd3-break-am', session: t('Health break', 'Pause santé', 'Pausa'), type: 'break', duration: 20 },
 
         // Session 13 · Incorporate peer-review feedback + finalize
-        { _id: 's13-divider', session: fr ? 'Session 13 · Intégrer la revue par les pairs et finaliser les produits' : 'Session 13 · Incorporate peer-review feedback and finalize knowledge products', type: 'section', duration: 0 },
+        { _id: 's13-divider', session: t('Session 13 · Incorporate peer-review feedback and finalize knowledge products', 'Session 13 · Intégrer la revue par les pairs et finaliser les produits', 'Sessão 13 · Integrar feedback da revisão por pares e finalizar produtos de conhecimento'), type: 'section', duration: 0 },
         {
           _id: 's13-incorporate',
-          session: fr ? 'Session 13 · Intégrer la revue par les pairs' : 'Session 13 · Incorporate peer-review feedback',
+          session: t('Session 13 · Incorporate peer-review feedback', 'Session 13 · Intégrer la revue par les pairs', 'Sessão 13 · Integrar feedback da revisão por pares'),
           slides: [
             'm9e_6b_refine_disruption_report.md',  // Prompt 2 & 3 checklist
           ],
@@ -337,10 +347,10 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Session 14 · Linking results with actions
-        { _id: 's14-divider', session: fr ? 'Session 14 · Lier les résultats aux actions' : 'Session 14 · Linking results with actions', type: 'section', duration: 0 },
+        { _id: 's14-divider', session: t('Session 14 · Linking results with actions', 'Session 14 · Lier les résultats aux actions', 'Sessão 14 · Ligar resultados a ações'), type: 'section', duration: 0 },
         {
           _id: 's14-linking',
-          session: fr ? 'Session 14 · Lier les résultats aux actions' : 'Session 14 · Linking results with actions',
+          session: t('Session 14 · Linking results with actions', 'Session 14 · Lier les résultats aux actions', 'Sessão 14 · Ligar resultados a ações'),
           slides: [
             'm7_6_linking_results_to_actions.md',
             'm7_6b_three_spheres_of_influence.md',
@@ -349,13 +359,13 @@ export function addisFullConfig(language: 'en' | 'fr') {
           duration: 60,
         },
 
-        { _id: 'd3-lunch', session: fr ? 'Pause déjeuner' : 'Lunch break', type: 'break', duration: 60 },
+        { _id: 'd3-lunch', session: t('Lunch break', 'Pause déjeuner', 'Pausa para almoço'), type: 'break', duration: 60 },
 
         // Session 15 · Roadmap + action planning + peer review on action plans
-        { _id: 's15-divider', session: fr ? 'Session 15 · Construire une feuille de route pour une utilisation durable' : 'Session 15 · Building a roadmap for sustained use', type: 'section', duration: 0 },
+        { _id: 's15-divider', session: t('Session 15 · Building a roadmap for sustained use', 'Session 15 · Construire une feuille de route pour une utilisation durable', 'Sessão 15 · Construir um roteiro para uma utilização sustentada'), type: 'section', duration: 0 },
         {
           _id: 's15-roadmap',
-          session: fr ? 'Session 15 · Feuille de route' : 'Session 15 · Roadmap',
+          session: t('Session 15 · Roadmap', 'Session 15 · Feuille de route', 'Sessão 15 · Roteiro'),
           slides: [
             'm7_7_building_roadmap_sustained_use.md',
             'm7_6d_dissemination_and_data_use_roadmap.md',
@@ -365,9 +375,9 @@ export function addisFullConfig(language: 'en' | 'fr') {
         },
 
         // Final plenary + post-workshop + closing
-        { _id: 'd3-final', session: fr ? 'Plénière finale et retours' : 'Final plenary and feedback', slides: [], duration: 60 },
-        { _id: 'd3-post', session: fr ? 'Évaluation post-atelier' : 'Post-workshop assessment and evaluation', slides: [], duration: 30 },
-        { _id: 'd3-close', session: fr ? 'Cérémonie des certificats et clôture' : 'Certificate ceremony and closing remarks', slides: [], duration: 30 },
+        { _id: 'd3-final', session: t('Final plenary and feedback', 'Plénière finale et retours', 'Plenário final e feedback'), slides: [], duration: 60 },
+        { _id: 'd3-post', session: t('Post-workshop assessment and evaluation', 'Évaluation post-atelier', 'Avaliação pós-workshop'), slides: [], duration: 30 },
+        { _id: 'd3-close', session: t('Certificate ceremony and closing remarks', 'Cérémonie des certificats et clôture', 'Cerimónia de certificados e encerramento'), slides: [], duration: 30 },
       ],
     },
   }
