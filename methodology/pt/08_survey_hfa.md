@@ -282,20 +282,29 @@ Burkina Faso
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_0a -->
-## A abordagem FASTR para inquéritos a unidades de saúde
+<!-- _class: two-panel -->
 
-**Inquéritos telefónicos trimestrais** com um painel representativo de unidades de saúde primárias. Análises regulares abrangem o desempenho, a disponibilidade e a capacidade operacional dos serviços - centradas nos indicadores do plano estratégico da RMNCAH-N.
+## A abordagem FASTR para a avaliação rápida de unidades de saúde
 
-Os resultados informam decisões e acções concretas para reforçar o sistema de saúde.
+<div class="panel-layout">
 
-### O ciclo em quatro etapas
+<div>
 
-1. **Planeamento** - Conceber o inquérito: módulos, amostragem, modalidades de implementação.
-2. **Recolha** - Chamadas telefónicas com representantes dos estabelecimentos (30-45 minutos cada).
-3. **Analisar** - As análises são efectuadas diretamente na plataforma de análise FASTR.
-4. **Resultados e utilização** - Divulgação aos decisores e ação sobre os constrangimentos identificados.
+Concebemos e implementamos **inquéritos telefónicos trimestrais** a unidades de saúde primárias.
 
-> As análises do inquérito HFA podem agora ser executadas diretamente na plataforma de análise FASTR.
+Estes inquéritos produzem análises regulares do desempenho dos cuidados primários, da disponibilidade e da capacidade operacional dos serviços — centradas em indicadores prioritários ligados ao plano estratégico SRMNIA-N.
+
+Os resultados informam a tomada de decisão e ações concretas para reforçar o sistema de saúde.
+
+</div>
+
+<div>
+
+![Ciclo de inquérito FOSA h:380](../resources/diagrams_pt/hfa_survey_cycle.svg)
+
+</div>
+
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_3 -->

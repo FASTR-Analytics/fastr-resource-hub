@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" font-family="Inter, Helvetica, Arial, sans-serif">
-  <path d="M 66.17 165.00 A 270 270 0 0 1 300.00 30.00 L 300.00 170.00 A 130 130 0 0 0 187.42 235.00 Z" fill="#095548"/>
-  <text x="182.50" y="96.48" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30.00 182.50 96.48)">1.</text>
-  <text x="200.00" y="110.79" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30.00 200.00 126.79)">Identificar</text>
-  <text x="200.00" y="126.79" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30.00 200.00 126.79)">questões e</text>
-  <text x="200.00" y="142.79" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30.00 200.00 126.79)">indicadores</text>
-  <path d="M 300.00 30.00 A 270 270 0 0 1 533.83 165.00 L 412.58 235.00 A 130 130 0 0 0 300.00 170.00 Z" fill="#0F716B"/>
-  <text x="417.50" y="96.48" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(30.00 417.50 96.48)">2.</text>
-  <text x="400.00" y="126.79" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(30.00 400.00 126.79)">Extração de dados</text>
-  <path d="M 533.83 165.00 A 270 270 0 0 1 533.83 435.00 L 412.58 365.00 A 130 130 0 0 0 412.58 235.00 Z" fill="#1F9A9C"/>
-  <text x="535.00" y="300.00" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.00 535.00 300.00)">3.</text>
-  <text x="500.00" y="284.00" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.00 500.00 300.00)">Avaliação da</text>
-  <text x="500.00" y="300.00" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.00 500.00 300.00)">qualidade dos</text>
-  <text x="500.00" y="316.00" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.00 500.00 300.00)">dados</text>
-  <path d="M 533.83 435.00 A 270 270 0 0 1 300.00 570.00 L 300.00 430.00 A 130 130 0 0 0 412.58 365.00 Z" fill="#1990C0"/>
-  <text x="417.50" y="503.52" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(330.00 417.50 503.52)">4.</text>
-  <text x="400.00" y="457.21" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(330.00 400.00 473.21)">Ajustamento da</text>
-  <text x="400.00" y="473.21" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(330.00 400.00 473.21)">qualidade dos</text>
-  <text x="400.00" y="489.21" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(330.00 400.00 473.21)">dados</text>
-  <path d="M 300.00 570.00 A 270 270 0 0 1 66.17 435.00 L 187.42 365.00 A 130 130 0 0 0 300.00 430.00 Z" fill="#6AAFB5"/>
-  <text x="182.50" y="503.52" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(390.00 182.50 503.52)">5.</text>
-  <text x="200.00" y="473.21" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" transform="rotate(390.00 200.00 473.21)">Análise de dados</text>
-  <path d="M 66.17 435.00 A 270 270 0 0 1 66.17 165.00 L 187.42 235.00 A 130 130 0 0 0 187.42 365.00 Z" fill="#C9DFDF"/>
-  <text x="65.00" y="300.00" font-size="22" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle" transform="rotate(270.00 65.00 300.00)">6.</text>
-  <text x="100.00" y="284.00" font-size="13" font-weight="600" fill="#0E433D" text-anchor="middle" dominant-baseline="middle" transform="rotate(270.00 100.00 300.00)">Comunicação dos</text>
-  <text x="100.00" y="300.00" font-size="13" font-weight="600" fill="#0E433D" text-anchor="middle" dominant-baseline="middle" transform="rotate(270.00 100.00 300.00)">resultados e</text>
-  <text x="100.00" y="316.00" font-size="13" font-weight="600" fill="#0E433D" text-anchor="middle" dominant-baseline="middle" transform="rotate(270.00 100.00 300.00)">utilização dos</text>
-  <text x="300" y="278.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">Processo de monitorização</text>
-  <text x="300" y="300.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">da utilização dos serviços</text>
-  <text x="300" y="322.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">SRMNIA-N</text>
+  <path d="M 66.17 165.00 A 270 270 0 0 1 300.00 30.00 L 300.00 170.00 A 130 130 0 0 0 187.42 235.00 Z" fill="#09554F"/>
+  <path d="M 300.00 30.00 A 270 270 0 0 1 533.83 165.00 L 412.58 235.00 A 130 130 0 0 0 300.00 170.00 Z" fill="#0C716B"/>
+  <path d="M 533.83 165.00 A 270 270 0 0 1 533.83 435.00 L 412.58 365.00 A 130 130 0 0 0 412.58 235.00 Z" fill="#1FA29C"/>
+  <path d="M 533.83 435.00 A 270 270 0 0 1 300.00 570.00 L 300.00 430.00 A 130 130 0 0 0 412.58 365.00 Z" fill="#1A90C0"/>
+  <path d="M 300.00 570.00 A 270 270 0 0 1 66.17 435.00 L 187.42 365.00 A 130 130 0 0 0 300.00 430.00 Z" fill="#9AD3D4"/>
+  <path d="M 66.17 435.00 A 270 270 0 0 1 66.17 165.00 L 187.42 235.00 A 130 130 0 0 0 187.42 365.00 Z" fill="#CAE6E9"/>
+  <circle cx="300.0" cy="300.0" r="130" fill="#FFFFFF"/>
+  <text x="200.00" y="109.79" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">1. Identificar</text>
+  <text x="200.00" y="126.79" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">questões e</text>
+  <text x="200.00" y="143.79" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">indicadores</text>
+  <text x="400.00" y="118.29" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">2. Extração de</text>
+  <text x="400.00" y="135.29" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">dados</text>
+  <text x="500.00" y="283.00" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">3. Avaliação da</text>
+  <text x="500.00" y="300.00" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">qualidade dos</text>
+  <text x="500.00" y="317.00" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">dados</text>
+  <text x="400.00" y="456.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">4. Ajustamento da</text>
+  <text x="400.00" y="473.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">qualidade dos</text>
+  <text x="400.00" y="490.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">dados</text>
+  <text x="200.00" y="464.71" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">5. Análise de</text>
+  <text x="200.00" y="481.71" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">dados</text>
+  <text x="100.00" y="283.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">6. Comunicação dos</text>
+  <text x="100.00" y="300.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">resultados e</text>
+  <text x="100.00" y="317.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">utilização dos</text>
+  <text x="300.00" y="258.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">Processo de</text>
+  <text x="300.00" y="279.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">monitorização</text>
+  <text x="300.00" y="300.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">da utilização</text>
+  <text x="300.00" y="321.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">dos serviços</text>
+  <text x="300.00" y="342.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">SRMNIA-N</text>
 </svg>

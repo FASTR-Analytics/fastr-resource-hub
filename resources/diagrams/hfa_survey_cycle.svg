@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" font-family="Inter, Helvetica, Arial, sans-serif">
+  <path d="M 109.08 109.08 A 270 270 0 0 1 490.92 109.08 L 391.92 208.08 A 130 130 0 0 0 208.08 208.08 Z" fill="#0C716B"/>
+  <path d="M 490.92 109.08 A 270 270 0 0 1 490.92 490.92 L 391.92 391.92 A 130 130 0 0 0 391.92 208.08 Z" fill="#1FA29C"/>
+  <path d="M 490.92 490.92 A 270 270 0 0 1 109.08 490.92 L 208.08 391.92 A 130 130 0 0 0 391.92 391.92 Z" fill="#1A90C0"/>
+  <path d="M 109.08 490.92 A 270 270 0 0 1 109.08 109.08 L 208.08 208.08 A 130 130 0 0 0 208.08 391.92 Z" fill="#CAE6E9"/>
+  <circle cx="300.0" cy="300.0" r="130" fill="#FFFFFF"/>
+  <text x="300.00" y="100.00" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">1. Survey planning</text>
+  <text x="500.00" y="300.00" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">2. Data collection</text>
+  <text x="300.00" y="500.00" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">3. Data analysis</text>
+  <text x="100.00" y="290.00" font-size="16" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">4. Results and data</text>
+  <text x="100.00" y="310.00" font-size="16" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">uses</text>
+  <text x="300.00" y="278.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">Rapid-cycle</text>
+  <text x="300.00" y="300.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">telephone survey</text>
+  <text x="300.00" y="322.00" font-size="18" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">of health facilities</text>
+</svg>
