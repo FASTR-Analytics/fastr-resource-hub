@@ -6,7 +6,7 @@ paginate: true
 
 ## Estimativa de cobertura de serviço
 
-![Coverage equation h:180](../../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:180](../../resources/diagrams_pt/coverage_equation.svg)
 
 **Cobertura** = serviços prestados ÷ população-alvo
 

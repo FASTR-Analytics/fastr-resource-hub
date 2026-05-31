@@ -23,7 +23,7 @@ A estrutura das Três Esferas dirige a atenção para as acções que pode realm
 </div>
 <div>
 
-![Três esferas de influência](../../resources/diagrams/three_spheres_of_influence.svg)
+![Três esferas de influência](../../resources/diagrams_pt/three_spheres_of_influence.svg)
 
 </div>
 </div>

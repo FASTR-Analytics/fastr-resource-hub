@@ -8,7 +8,7 @@ paginate: true
 
 Um único valor extremo - digamos, um pico de 10× no relatório causado por um erro de entrada de dados - pode distorcer a tendência de serviço subjacente para toda uma instalação. O gráfico mostra os mesmos dados antes e depois do ajuste de outliers: o pico é removido, o padrão subjacente é preservado.
 
-![Outlier impact h:340](../../resources/diagrams/outlier_impact.svg)
+![Outlier impact h:340](../../resources/diagrams_pt/outlier_impact.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

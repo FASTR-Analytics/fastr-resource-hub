@@ -9,7 +9,7 @@ paginate: true
 <div class="columns">
 <div>
 
-![Diagrama do acelerador de IA h:360](../../resources/diagrams/ai_accelerator.svg)
+![Diagrama do acelerador de IA h:360](../../resources/diagrams_pt/ai_accelerator.svg)
 
 </div>
 <div>

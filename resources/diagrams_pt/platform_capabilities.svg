@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 960 460">
+
+  <!-- Connecting line -->
+  <line x1="96" y1="130" x2="864" y2="130" stroke="#CAE6E9" stroke-width="3" stroke-dasharray="8,4"/>
+
+  <!-- Flow arrows -->
+  <g fill="#1F9A9C">
+    <polygon points="248,125 258,130 248,135"/>
+    <polygon points="440,125 450,130 440,135"/>
+    <polygon points="632,125 642,130 632,135"/>
+    <polygon points="824,125 834,130 824,135"/>
+  </g>
+
+  <!-- 1. Data Management -->
+  <g transform="translate(51, 65)">
+    <circle cx="45" cy="65" r="44" fill="#E8F4F3"/>
+    <g transform="translate(45, 65)" fill="none" stroke="#0C716B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="0" cy="-16" rx="18" ry="6"/>
+      <path d="M -18 -16 L -18 16 C -18 20 -9 23 0 23 C 9 23 18 20 18 16 L 18 -16"/>
+      <path d="M -18 0 C -18 4 -9 7 0 7 C 9 7 18 4 18 0" opacity="0.6"/>
+    </g>
+  </g>
+  <text x="96" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Dados</text>
+  <text x="96" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Gestão</text>
+  <text x="96" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Importar listas de instalações</text>
+  <text x="96" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e dados de indicadores</text>
+  <text x="96" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">do DHIS2 ou ficheiros</text>
+
+  <!-- 2. Data Analysis -->
+  <g transform="translate(243, 65)">
+    <circle cx="45" cy="65" r="44" fill="#E8F4F3"/>
+    <g transform="translate(45, 65)" fill="none" stroke="#0C716B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="-14,-12 -22,0 -14,12"/>
+      <polyline points="14,-12 22,0 14,12"/>
+      <line x1="6" y1="-16" x2="-6" y2="16"/>
+    </g>
+  </g>
+  <text x="288" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Dados</text>
+  <text x="288" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Análise</text>
+  <text x="288" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Executar módulos estatísticos</text>
+  <text x="288" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">para avaliação da qualidade</text>
+  <text x="288" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e ajustamento</text>
+
+  <!-- 3. Visualization -->
+  <g transform="translate(435, 65)">
+    <circle cx="45" cy="65" r="44" fill="#E8F4F3"/>
+    <g transform="translate(45, 65)" fill="none" stroke="#0C716B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="-20,14 -7,-4 4,7 20,-14"/>
+      <circle cx="20" cy="-14" r="3" fill="#0C716B"/>
+    </g>
+  </g>
+  <text x="480" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Visualização</text>
+  <text x="480" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Explorar resultados com</text>
+  <text x="480" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">gráficos interactivos</text>
+  <text x="480" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e tabelas</text>
+
+  <!-- 4. Reporting -->
+  <g transform="translate(627, 65)">
+    <circle cx="45" cy="65" r="44" fill="#E8F4F3"/>
+    <g transform="translate(45, 65)" fill="none" stroke="#0C716B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="-14" y="-20" width="28" height="36" rx="3"/>
+      <rect x="-6" y="-24" width="12" height="6" rx="2"/>
+      <line x1="-8" y1="-4" x2="8" y2="-4"/>
+      <line x1="-8" y1="4" x2="8" y2="4"/>
+      <line x1="-8" y1="12" x2="3" y2="12"/>
+    </g>
+  </g>
+  <text x="672" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Relatórios</text>
+  <text x="672" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Redigir um relatório e</text>
+  <text x="672" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">exportar os resultados para</text>
+  <text x="672" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">PowerPoint ou PDF</text>
+
+  <!-- 5. Collaboration -->
+  <g transform="translate(819, 65)">
+    <circle cx="45" cy="65" r="44" fill="#E8F4F3"/>
+    <g transform="translate(45, 65)" fill="none" stroke="#0C716B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="0" cy="-9" r="6"/>
+      <path d="M -10 14 C -10 6 -6 2 0 2 C 6 2 10 6 10 14"/>
+      <circle cx="-16" cy="-5" r="4.5" opacity="0.5"/>
+      <path d="M -24 11 C -24 6 -21 3 -16 3 C -11 3 -8 6 -8 11" opacity="0.5"/>
+      <circle cx="16" cy="-5" r="4.5" opacity="0.5"/>
+      <path d="M 8 11 C 8 6 11 3 16 3 C 21 3 24 6 24 11" opacity="0.5"/>
+    </g>
+  </g>
+  <text x="864" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Colaboração</text>
+  <text x="864" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Trabalhar em conjunto com</text>
+  <text x="864" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">a sua equipa em</text>
+  <text x="864" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">projectos partilhados</text>
+
+  <!-- AI Assistant - bracket connecting Analysis, Visualization, Reporting -->
+  <path d="M 288 270 L 288 300 L 480 320 L 672 300 L 672 270"
+        fill="none" stroke="#CAE6E9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- AI Assistant circle and icon -->
+  <g transform="translate(435, 315)">
+    <circle cx="45" cy="45" r="38" fill="#F3E8F3"/>
+    <!-- Sparkle/AI icon -->
+    <g transform="translate(45, 45)" fill="none" stroke="#8B5E8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 0 -16 L 0 16 M -16 0 L 16 0"/>
+      <path d="M -10 -10 L 10 10 M 10 -10 L -10 10"/>
+      <circle cx="0" cy="-16" r="2" fill="#8B5E8B"/>
+      <circle cx="0" cy="16" r="2" fill="#8B5E8B"/>
+      <circle cx="-16" cy="0" r="2" fill="#8B5E8B"/>
+      <circle cx="16" cy="0" r="2" fill="#8B5E8B"/>
+      <circle cx="0" cy="0" r="3" fill="#8B5E8B"/>
+    </g>
+  </g>
+  <text x="480" y="410" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Assistente de IA</text>
+  <text x="480" y="430" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Obter ajuda para interpretar os resultados</text>
+  <text x="480" y="443" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e compreender os seus dados</text>
+
+  <!-- Thin line showing AI spans across Analysis, Visualization, Reporting -->
+  <line x1="288" y1="465" x2="672" y2="465" stroke="#E0D0E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="480" y="478" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#999" font-style="italic">Disponível em análises, visualizações e relatórios</text>
+
+</svg>

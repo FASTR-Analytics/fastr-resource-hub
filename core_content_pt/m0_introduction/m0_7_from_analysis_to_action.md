@@ -8,7 +8,7 @@ paginate: true
 
 Os resultados do FASTR, quer sejam pontuações DQA, tendências de utilização de serviços ou estimativas de cobertura, são **pontos de partida, não pontos finais**. Desencadeiam a investigação e informam as decisões.
 
-![w:600](../../resources/diagrams/from_analysis_to_action.svg)
+![w:600](../../resources/diagrams_pt/from_analysis_to_action.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

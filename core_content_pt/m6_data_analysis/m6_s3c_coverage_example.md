@@ -12,4 +12,4 @@ O numerador é fácil: os estabelecimentos comunicam-no todos os meses. O denomi
 
 Os próximos slides explicam como o FASTR constrói esse denominador a partir dos dados que possui.
 
-![Fórmula de cobertura para ANC4+ h:280](../../resources/diagrams/coverage_example_anc4.svg)
+![Fórmula de cobertura para ANC4+ h:280](../../resources/diagrams_pt/coverage_example_anc4.svg)

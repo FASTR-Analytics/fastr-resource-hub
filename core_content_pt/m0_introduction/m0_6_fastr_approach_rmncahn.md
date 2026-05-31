@@ -18,7 +18,7 @@ Combinar a análise e a visualização com o reforço de capacidades e o apoio �
 </div>
 <div>
 
-![Passos para implementar a monitorização da utilização dos serviços da RMNCAH-N](../../resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
+![Passos para implementar a monitorização da utilização dos serviços da RMNCAH-N](../../resources/diagrams_pt/steps_to_implement_rmncahn_service_chart.svg)
 
 </div>
 </div>

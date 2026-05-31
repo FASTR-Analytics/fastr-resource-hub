@@ -9,7 +9,7 @@ paginate: true
 
 ## Análise da utilização dos serviços RMNCAH-N
 
-![Pipeline de análise](../../resources/diagrams/mw_17_pipeline.svg)
+![Pipeline de análise](../../resources/diagrams_pt/mw_17_pipeline.svg)
 
 ### Indicadores principais do FASTR
 

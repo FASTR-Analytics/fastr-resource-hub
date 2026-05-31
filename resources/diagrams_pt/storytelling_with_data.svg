@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+
+  <!-- Step 1 -->
+  <g transform="translate(20, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
+    <circle cx="100" cy="50" r="24" fill="#09544F"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">1</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">O que é que está a acontecer?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">Indicar a principal conclusão</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">claramente</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"Cobertura da vacinação</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">caiu em 3 distritos"</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <polyline points="228,120 242,130 228,140" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(250, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
+    <circle cx="100" cy="50" r="24" fill="#0C716B"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">2</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Porque é que isso é importante?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">Ligar a</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">impacto no mundo real</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"400.000 crianças em risco</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">de surtos evitáveis"</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <polyline points="458,120 472,130 458,140" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(480, 30)">
+    <rect x="0" y="0" width="200" height="200" rx="12" fill="#E8F4F3"/>
+    <circle cx="100" cy="50" r="24" fill="#1F9A9C"/>
+    <text x="100" y="57" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#fff">3</text>
+    <text x="100" y="95" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">O que é que devemos fazer?</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">Apontar para uma decisão</text>
+    <text x="100" y="134" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#555">ou ação</text>
+    <line x1="30" y1="155" x2="170" y2="155" stroke="#CAE6E9" stroke-width="1.5"/>
+    <text x="100" y="175" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">"A sensibilização direcionada poderia</text>
+    <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#777" font-style="italic">inverter a tendência"</text>
+  </g>
+
+
+</svg>

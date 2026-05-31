@@ -21,7 +21,7 @@ A verificação da consistência ao nível do estabelecimento de saúde não det
 </div>
 <div>
 
-![Consistência do distrito](../../resources/diagrams/district_consistency.svg)
+![Consistência do distrito](../../resources/diagrams_pt/district_consistency.svg)
 
 </div>
 </div>

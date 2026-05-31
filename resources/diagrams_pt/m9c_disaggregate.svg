@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" font-family="Inter, sans-serif">
+  <text x="14" y="20" font-size="14" font-weight="700" fill="#09544F">DISAGGREGATE “ANC1 by district”<tspan font-weight="400" fill="#5A6B6A"> - quatro formas de apresentar as peças</tspan></text>
+
+  <!-- ===== Panel 1: Lines ===== -->
+  <rect x="10" y="34" width="166" height="130" rx="4" fill="#F7FBFA" stroke="#E0E8E7"/>
+  <line x1="26" y1="44" x2="26" y2="138" stroke="#CAD6D4"/>
+  <line x1="26" y1="138" x2="166" y2="138" stroke="#CAD6D4"/>
+  <polyline points="30,116 64,104 98,114 132,92 162,104" fill="none" stroke="#09544F" stroke-width="2"/>
+  <polyline points="30,126 64,122 98,116 132,120 162,110" fill="none" stroke="#1F9A9C" stroke-width="2"/>
+  <polyline points="30,132 64,128 98,130 132,124 162,126" fill="none" stroke="#4FB3B0" stroke-width="2"/>
+  <polyline points="30,134 64,132 98,128 132,130 162,122" fill="none" stroke="#86C9C6" stroke-width="2"/>
+  <text x="93" y="183" font-size="10" font-weight="700" fill="#0C716B" text-anchor="middle">Linhas</text>
+  <text x="93" y="196" font-size="8" fill="#5A6B6A" text-anchor="middle">uma linha por distrito</text>
+
+  <!-- ===== Panel 2: Grid (small multiples) ===== -->
+  <rect x="186" y="34" width="166" height="130" rx="4" fill="#F7FBFA" stroke="#E0E8E7"/>
+  <!-- 4 mini charts -->
+  <g>
+    <rect x="196" y="44" width="70" height="52" rx="2" fill="#ffffff" stroke="#DCE6E4"/>
+    <rect x="204" y="74" width="9" height="14" fill="#09544F"/><rect x="218" y="66" width="9" height="22" fill="#09544F"/><rect x="232" y="70" width="9" height="18" fill="#09544F"/><rect x="246" y="60" width="9" height="28" fill="#09544F"/>
+    <text x="231" y="56" font-size="6.5" fill="#6b7a78" text-anchor="middle">Dist A</text>
+  </g>
+  <g>
+    <rect x="272" y="44" width="70" height="52" rx="2" fill="#ffffff" stroke="#DCE6E4"/>
+    <rect x="280" y="72" width="9" height="16" fill="#1F9A9C"/><rect x="294" y="68" width="9" height="20" fill="#1F9A9C"/><rect x="308" y="76" width="9" height="12" fill="#1F9A9C"/><rect x="322" y="64" width="9" height="24" fill="#1F9A9C"/>
+    <text x="307" y="56" font-size="6.5" fill="#6b7a78" text-anchor="middle">Dist B</text>
+  </g>
+  <g>
+    <rect x="196" y="102" width="70" height="52" rx="2" fill="#ffffff" stroke="#DCE6E4"/>
+    <rect x="204" y="132" width="9" height="14" fill="#4FB3B0"/><rect x="218" y="126" width="9" height="20" fill="#4FB3B0"/><rect x="232" y="130" width="9" height="16" fill="#4FB3B0"/><rect x="246" y="122" width="9" height="24" fill="#4FB3B0"/>
+    <text x="231" y="114" font-size="6.5" fill="#6b7a78" text-anchor="middle">Dist C</text>
+  </g>
+  <g>
+    <rect x="272" y="102" width="70" height="52" rx="2" fill="#ffffff" stroke="#DCE6E4"/>
+    <rect x="280" y="130" width="9" height="16" fill="#86C9C6"/><rect x="294" y="134" width="9" height="12" fill="#86C9C6"/><rect x="308" y="126" width="9" height="20" fill="#86C9C6"/><rect x="322" y="132" width="9" height="14" fill="#86C9C6"/>
+    <text x="307" y="114" font-size="6.5" fill="#6b7a78" text-anchor="middle">Dist D</text>
+  </g>
+  <text x="269" y="183" font-size="10" font-weight="700" fill="#0C716B" text-anchor="middle">Grelha</text>
+  <text x="269" y="196" font-size="8" fill="#5A6B6A" text-anchor="middle">uma mini-ficha para cada</text>
+
+  <!-- ===== Panel 3: Rows ===== -->
+  <rect x="362" y="44" width="150" height="110" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="362" y="44" width="150" height="18" fill="#E8F4F3"/>
+  <line x1="452" y1="44" x2="452" y2="154" stroke="#E6EFEE"/>
+  <text x="368" y="57" font-size="8" font-weight="700" fill="#09544F">Distrito</text>
+  <text x="458" y="57" font-size="8" font-weight="700" fill="#09544F">Visitas</text>
+  <text x="368" y="77" font-size="8" fill="#3f4f4d">Dist A</text><text x="458" y="77" font-size="8" fill="#3f4f4d">900</text>
+  <text x="368" y="98" font-size="8" fill="#3f4f4d">Dist B</text><text x="458" y="98" font-size="8" fill="#3f4f4d">850</text>
+  <text x="368" y="119" font-size="8" fill="#3f4f4d">Dist C</text><text x="458" y="119" font-size="8" fill="#3f4f4d">1,000</text>
+  <text x="368" y="140" font-size="8" fill="#3f4f4d">Dist D</text><text x="458" y="140" font-size="8" fill="#3f4f4d">800</text>
+  <text x="437" y="183" font-size="10" font-weight="700" fill="#0C716B" text-anchor="middle">Filas</text>
+  <text x="437" y="196" font-size="8" fill="#5A6B6A" text-anchor="middle">uma linha por distrito</text>
+
+  <!-- ===== Panel 4: Columns ===== -->
+  <rect x="524" y="60" width="184" height="44" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <rect x="524" y="60" width="184" height="18" fill="#E8F4F3"/>
+  <line x1="570" y1="60" x2="570" y2="104" stroke="#E6EFEE"/>
+  <line x1="616" y1="60" x2="616" y2="104" stroke="#E6EFEE"/>
+  <line x1="662" y1="60" x2="662" y2="104" stroke="#E6EFEE"/>
+  <text x="547" y="73" font-size="8" font-weight="700" fill="#09544F" text-anchor="middle">Dist A</text>
+  <text x="593" y="73" font-size="8" font-weight="700" fill="#09544F" text-anchor="middle">Dist B</text>
+  <text x="639" y="73" font-size="8" font-weight="700" fill="#09544F" text-anchor="middle">Dist C</text>
+  <text x="685" y="73" font-size="8" font-weight="700" fill="#09544F" text-anchor="middle">Dist D</text>
+  <text x="547" y="95" font-size="8" fill="#3f4f4d" text-anchor="middle">900</text>
+  <text x="593" y="95" font-size="8" fill="#3f4f4d" text-anchor="middle">850</text>
+  <text x="639" y="95" font-size="8" fill="#3f4f4d" text-anchor="middle">1,000</text>
+  <text x="685" y="95" font-size="8" fill="#3f4f4d" text-anchor="middle">800</text>
+  <text x="616" y="183" font-size="10" font-weight="700" fill="#0C716B" text-anchor="middle">Colunas</text>
+  <text x="616" y="196" font-size="8" fill="#5A6B6A" text-anchor="middle">uma coluna por distrito</text>
+</svg>

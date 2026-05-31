@@ -903,7 +903,7 @@ Os próximos slides apresentam cada ajuste e seu resultado.
 
 Um único valor extremo - digamos, um pico de 10× no relatório causado por um erro de entrada de dados - pode distorcer a tendência de serviço subjacente para toda uma instalação. O gráfico mostra os mesmos dados antes e depois do ajuste de outliers: o pico é removido, o padrão subjacente é preservado.
 
-![Outlier impact h:340](../resources/diagrams/outlier_impact.svg)
+![Outlier impact h:340](../resources/diagrams_pt/outlier_impact.svg)
 
 <!--
 NOTAS DO APRESENTADOR:
@@ -1014,7 +1014,7 @@ A substituição é baseada no próprio padrão do estabelecimento, de modo que 
 <!-- SLIDE:m5_s1a -->
 ## Por que ajustar para outliers?
 
-![Porquê ajustar para outliers - antes e depois](../resources/diagrams/outlier_impact.svg)
+![Porquê ajustar para outliers - antes e depois](../resources/diagrams_pt/outlier_impact.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

@@ -9,7 +9,7 @@ paginate: true
 
 ## Conclusão e próximos passos
 
-![Próximos passos](../../resources/diagrams/mw_19_next_steps.svg)
+![Próximos passos](../../resources/diagrams_pt/mw_19_next_steps.svg)
 
 <!--
 Antes do seminário em {{COUNTRY}}:

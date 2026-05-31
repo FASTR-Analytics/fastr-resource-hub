@@ -29,7 +29,7 @@ A BCG é uma vacina de dose à nascença, pelo que esperamos que estes indicador
 </div>
 <div>
 
-![Ilustração de consistência h:280](../../resources/diagrams/consistency_illustration.svg)
+![Ilustração de consistência h:280](../../resources/diagrams_pt/consistency_illustration.svg)
 
 </div>
 </div>

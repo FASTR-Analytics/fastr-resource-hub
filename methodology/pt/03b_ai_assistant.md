@@ -284,7 +284,7 @@ A IA segue o princípio "ler antes de responder" - nunca adivinha.
 </div>
 <div>
 
-![AI tools diagram h:440](../resources/diagrams/ai_on_rails.svg)
+![AI tools diagram h:440](../resources/diagrams_pt/ai_on_rails.svg)
 
 </div>
 </div>
@@ -296,7 +296,7 @@ A IA segue o princípio "ler antes de responder" - nunca adivinha.
 <div class="columns">
 <div>
 
-![Diagrama do acelerador de IA h:360](../resources/diagrams/ai_accelerator.svg)
+![Diagrama do acelerador de IA h:360](../resources/diagrams_pt/ai_accelerator.svg)
 
 </div>
 <div>

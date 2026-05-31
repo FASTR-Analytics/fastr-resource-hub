@@ -9,7 +9,7 @@ paginate: true
 <div class="columns">
 <div>
 
-![Capacidades da plataforma](../../resources/diagrams/platform_capabilities.svg)
+![Capacidades da plataforma](../../resources/diagrams_pt/platform_capabilities.svg)
 
 </div>
 <div>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ MEASURES OF DATA QUALITY — two-panel comparison ============ -->
+  <!-- LEFT: 4 general DQ dimensions. RIGHT: FASTR's 3 measures + aggregated DQ Score. -->
+
+  <!-- ===== LEFT PANEL — Common DQ measures ===== -->
+  <text x="175" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">MEDIDAS DE QD COMUNS</text>
+
+  <rect x="15" y="50" width="320" height="368" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="15" y="64" width="4" height="340" fill="#D0CB17"/>
+
+  <g stroke="#E4E7E5" stroke-width="1">
+    <line x1="40" y1="140" x2="320" y2="140"/>
+    <line x1="40" y1="232" x2="320" y2="232"/>
+    <line x1="40" y1="324" x2="320" y2="324"/>
+  </g>
+
+  <text x="40" y="92" font-size="14" font-weight="700" fill="#09544F">Exatidão</text>
+  <text x="40" y="115" font-size="12" font-style="italic" fill="#5A6562">Os dados reflectem a realidade?</text>
+
+  <text x="40" y="184" font-size="14" font-weight="700" fill="#09544F">Completude</text>
+  <text x="40" y="207" font-size="12" font-style="italic" fill="#5A6562">Todos os dados estão presentes?</text>
+
+  <text x="40" y="276" font-size="14" font-weight="700" fill="#09544F">Consistência</text>
+  <text x="40" y="299" font-size="12" font-style="italic" fill="#5A6562">As relações são coerentes?</text>
+
+  <text x="40" y="368" font-size="14" font-weight="700" fill="#09544F">Atualidade</text>
+  <text x="40" y="391" font-size="12" font-style="italic" fill="#5A6562">Os dados são apresentados atempadamente?</text>
+
+  <!-- ===== RIGHT PANEL — FASTR measures ===== -->
+  <text x="545" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">MEDIDAS FASTR</text>
+
+  <!-- 3 source measures stacked at top -->
+  <rect x="385" y="50" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Completude do indicador</text>
+  <text x="545" y="94" text-anchor="middle" font-size="11.5" fill="#5A6562">Os valores estão presentes por indicador?</text>
+
+  <rect x="385" y="118" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="144" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Presença de valores anómalos</text>
+  <text x="545" y="162" text-anchor="middle" font-size="11.5" fill="#5A6562">Alguns valores são extremos ou implausíveis?</text>
+
+  <rect x="385" y="186" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="545" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Coerência entre indicadores</text>
+  <text x="545" y="230" text-anchor="middle" font-size="11.5" fill="#5A6562">Os indicadores relacionados estão alinhados?</text>
+
+  <!-- Arrow down to aggregate -->
+  <path d="M545 256 V286 M533 274 L545 286 L557 274" fill="none" stroke="#0C716B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="567" y="278" font-size="11" font-weight="600" fill="#0C716B">agregados em</text>
+
+  <!-- DQ Score aggregate (hero) -->
+  <rect x="385" y="300" width="320" height="74" rx="12" fill="#09544F"/>
+  <text x="545" y="328" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">PONTUAÇÃO DQ</text>
+  <text x="545" y="352" text-anchor="middle" font-size="11.5" fill="#CAE6E9">Uma única leitura composta de</text>
+  <text x="545" y="367" text-anchor="middle" font-size="11.5" fill="#CAE6E9">a fiabilidade dos seus dados</text>
+</svg>

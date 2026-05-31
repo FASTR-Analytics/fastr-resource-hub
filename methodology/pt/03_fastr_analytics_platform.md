@@ -7,7 +7,7 @@
 
 A plataforma analítica FASTR é uma ferramenta baseada na Web concebida para apoiar a avaliação, o ajustamento e a análise da qualidade dos dados de saúde de rotina. Permite aos utilizadores carregar e analisar dados de várias fontes, incluindo o DHIS2, com métodos estatísticos integrados para gerar um conjunto de dados ajustados e executar análises prioritárias sobre indicadores selecionados. A plataforma fornece uma interface de fácil utilização para a execução de análises e oferece opções flexíveis para visualizar e exportar resultados.
 
-capacidades da plataforma](resources/diagrams/platform_capabilities.svg)
+capacidades da plataforma](resources/diagrams_pt/platform_capabilities.svg)
 
 ## Principais capacidades
 
@@ -59,7 +59,7 @@ A **instância** serve como o espaço de trabalho principal da organização den
 
 **Os projectos** proporcionam espaços de trabalho de análise específicos dentro de uma instância. Cada projeto permite aos utilizadores selecionar os dados a incluir, definindo períodos de tempo, instalações e indicadores específicos. Dentro de um projeto, os utilizadores podem ativar módulos analíticos, criar visualizações e construir relatórios adaptados a objectivos analíticos específicos.
 
-![Projectos dentro da instância](resources/diagrams/projects_within_instance.svg)
+![Projectos dentro da instância](resources/diagrams_pt/projects_within_instance.svg)
 
 
 ### Fluxo de dados
@@ -193,7 +193,7 @@ A plataforma fornece uma interface de fácil utilização para executar análise
 <div class="columns">
 <div>
 
-![Capacidades da plataforma](../resources/diagrams/platform_capabilities.svg)
+![Capacidades da plataforma](../resources/diagrams_pt/platform_capabilities.svg)
 
 </div>
 <div>
@@ -265,7 +265,7 @@ Existem dois níveis de permissões na plataforma:
 <div class="contentor">
 <div class="img-col">
 
-![Projectos dentro da instância](../resources/diagrams/projects_within_instance.svg)
+![Projectos dentro da instância](../resources/diagrams_pt/projects_within_instance.svg)
 
 </div>
 <div class="text-col">

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 150" font-family="Inter, sans-serif">
+  <text x="14" y="24" font-size="16" font-weight="700" fill="#09544F">FILTER<tspan font-weight="400" fill="#5A6B6A"> = escolher o que mostrar</tspan></text>
+
+  <!-- before table: all indicators, with tick boxes (none picked yet) -->
+  <text x="14" y="45" font-size="9.5" font-weight="600" fill="#6b7a78">Todos os indicadores estão disponíveis</text>
+  <rect x="14" y="50" width="150" height="82" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <line x1="14" y1="84" x2="164" y2="84" stroke="#EDF3F2"/>
+  <line x1="14" y1="106" x2="164" y2="106" stroke="#EDF3F2"/>
+  <line x1="14" y1="60" x2="164" y2="60" stroke="#EDF3F2"/>
+  <g stroke="#9fb3b0" fill="#ffffff">
+    <rect x="22" y="56" width="9" height="9" rx="1.5"/>
+    <rect x="22" y="78" width="9" height="9" rx="1.5"/>
+    <rect x="22" y="100" width="9" height="9" rx="1.5"/>
+    <rect x="22" y="122" width="9" height="9" rx="1.5"/>
+  </g>
+  <text x="40" y="64" font-size="8.5" fill="#3f4f4d">ANC1</text>
+  <text x="40" y="86" font-size="8.5" fill="#3f4f4d">ANC4</text>
+  <text x="40" y="108" font-size="8.5" fill="#3f4f4d">BCG</text>
+  <text x="40" y="130" font-size="8.5" fill="#3f4f4d">Penta</text>
+
+  <!-- arrow -->
+  <text x="200" y="84" font-size="9" font-weight="600" fill="#09544F" text-anchor="middle">carrapato</text>
+  <text x="200" y="96" font-size="9" font-weight="700" fill="#09544F" text-anchor="middle">ANC1</text>
+  <polyline points="176,104 226,104" fill="none" stroke="#09544F" stroke-width="3"/>
+  <polyline points="218,97 226,104 218,111" fill="none" stroke="#09544F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- after table: ANC1 ticked, only ANC1 shows -->
+  <text x="246" y="45" font-size="9.5" font-weight="600" fill="#09544F">Escolheu ANC1 → só aparece ANC1</text>
+  <rect x="246" y="50" width="150" height="82" rx="3" fill="#ffffff" stroke="#D6E6E4"/>
+  <line x1="246" y1="60" x2="396" y2="60" stroke="#EDF3F2"/>
+  <line x1="246" y1="84" x2="396" y2="84" stroke="#EDF3F2"/>
+  <line x1="246" y1="106" x2="396" y2="106" stroke="#EDF3F2"/>
+  <!-- ANC1 ticked -->
+  <rect x="254" y="56" width="9" height="9" rx="1.5" fill="#1F9A9C" stroke="#1F9A9C"/>
+  <polyline points="256,60.5 258,62.5 261.5,57.5" fill="none" stroke="#ffffff" stroke-width="1.3"/>
+  <text x="272" y="64" font-size="8.5" font-weight="700" fill="#09544F">ANC1</text>
+  <!-- others unticked, greyed (not shown) -->
+  <g stroke="#d8e0de" fill="#ffffff"><rect x="254" y="78" width="9" height="9" rx="1.5"/><rect x="254" y="100" width="9" height="9" rx="1.5"/><rect x="254" y="122" width="9" height="9" rx="1.5"/></g>
+  <text x="272" y="86" font-size="8.5" fill="#cdd6d4">ANC4</text>
+  <text x="272" y="108" font-size="8.5" fill="#cdd6d4">BCG</text>
+  <text x="272" y="130" font-size="8.5" fill="#cdd6d4">Penta</text>
+
+  <!-- caption -->
+  <text x="424" y="74" font-size="11.5" font-weight="700" fill="#0C716B">Escolhe-se o que se quer ver.</text>
+  <text x="424" y="93" font-size="10.5" fill="#5A6B6A">O que não assinalar simplesmente</text>
+  <text x="424" y="108" font-size="10.5" fill="#5A6B6A">não é mostrado - como um holofote.</text>
+</svg>

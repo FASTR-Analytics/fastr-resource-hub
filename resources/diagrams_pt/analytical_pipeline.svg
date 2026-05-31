@@ -43,13 +43,13 @@
 
   <!-- Step 3: Service Utilization -->
   <rect class="box box-util" x="600" y="10" width="480" height="55"/>
-  <text class="text-white" x="840" y="31">Utilização do serviço e deteção de interrupções</text>
+  <text class="text-white" x="840" y="31">Utilização do serviço &amp; Deteção de interrupções</text>
   <text class="text-sub" x="840" y="49">Volumes, tendências, desvios significativos</text>
   <text class="module-label" x="840" y="78">Módulo 3</text>
 
   <!-- Step 4: Coverage Estimation -->
   <rect class="box box-coverage" x="600" y="170" width="480" height="55"/>
   <text class="text-dark" x="840" y="191">Estimativa de cobertura</text>
-  <text class="text-sub-dark" x="840" y="208">Estimativa do denominador e cálculo da cobertura</text>
-  <text class="module-label" x="840" y="238">Módulos 5 e 6 (denominador + cobertura)</text>
+  <text class="text-sub-dark" x="840" y="208">Estimativa do denominador &amp; cálculo da cobertura</text>
+  <text class="module-label" x="840" y="238">Módulos 5 &amp; 6 (denominador + cobertura)</text>
 </svg>

@@ -12,7 +12,7 @@
   </defs>
 
   <!-- the rule being checked -->
-  <text class="big-title" x="360" y="24" text-anchor="middle">A regra: Penta1 &amp;#8805; Penta3</text>
+  <text class="big-title" x="360" y="24" text-anchor="middle">A regra: Penta1 &#8805; Penta3</text>
   <text class="subtitle" x="360" y="43" text-anchor="middle">Mais crianças recebem a 1ª dose de vacina do que a 3ª (algumas desistem antes de terminar)</text>
 
   <!-- ===== LEFT: one clinic (rule can't be judged here) ===== -->
@@ -51,7 +51,7 @@
   <text class="val" x="601" y="182" text-anchor="middle">410</text>
   <text class="axlab" x="601" y="320" text-anchor="middle">Penta3</text>
 
-  <text class="rule" x="554" y="340" text-anchor="middle" fill="#0C716B">Penta1 &amp;#8805; Penta3 &amp;#8212; como esperado</text>
+  <text class="rule" x="554" y="340" text-anchor="middle" fill="#0C716B">Penta1 &#8805; Penta3 &#8212; como esperado</text>
   <circle cx="676" cy="82" r="15" fill="#0C716B"/>
   <polyline points="669,82 674,88 683,76" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

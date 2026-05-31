@@ -13,7 +13,7 @@ paginate: true
 li { margin-bottom: 6px; font-size: 0.92em; }
 </style>
 
-![Objectivos do webinar](../../resources/diagrams/mw_8_objectives.svg)
+![Objectivos do webinar](../../resources/diagrams_pt/mw_8_objectives.svg)
 
 <!--
 No final deste webinar, os participantes serão capazes de:

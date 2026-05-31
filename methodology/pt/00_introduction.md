@@ -19,7 +19,7 @@ O GFF colabora com os Ministérios da Saúde para efetuar análises de ciclo rá
 
 Estas análises centram-se em indicadores prioritários ligados às reformas nacionais da saúde e aos investimentos do Banco Mundial, com resultados que informam os processos de planeamento nacional e os ciclos de implementação de projectos. Durante a pandemia da COVID-19, o GFF apoiou os Ministérios da Saúde em mais de 20 países para monitorizar o impacto da pandemia nos serviços de saúde essenciais utilizando esta abordagem.
 
-passos para implementar a monitorização da utilização dos serviços RMNCAH-N (resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
+passos para implementar a monitorização da utilização dos serviços RMNCAH-N (resources/diagrams_pt/steps_to_implement_rmncahn_service_chart.svg)
 
 *Figura 1. Passos para implementar a monitorização da utilização dos serviços da RMNCAH-N*
 
@@ -33,7 +33,7 @@ As fontes de dados dos sistemas de saúde existentes são essenciais, mas muitas
 
 As abordagens analíticas de ciclo rápido fornecem dados atempados, rigorosos e de alta prioridade que respondem às prioridades específicas de cada país e às necessidades de utilização de dados. Este ciclo contínuo de analisar-aprender-reforçar-agir procura melhorar a utilização sistemática de dados para a tomada de decisões com vista a melhorar os resultados da RMNCAH-N.
 
-quadro analítico de ciclo rápido FASTR que mostra o ciclo contínuo de analisar, aprender, reforçar e atuar](resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+quadro analítico de ciclo rápido FASTR que mostra o ciclo contínuo de analisar, aprender, reforçar e atuar](resources/diagrams_pt/FASTR_rapid_cycle_analytics_approach.svg)
 
 *Figura 2. Abordagem analítica de ciclo rápido do FASTR: Analisar, aprender, reforçar, atuar*
 
@@ -51,7 +51,7 @@ As quatro abordagens técnicas do FASTR, sustentadas pelo reforço das capacidad
 
 As actividades ilustrativas de desenvolvimento de capacidades incluem apoio para automatizar a extração, limpeza e análise de dados de rotina e apoio para institucionalizar abordagens de recolha e análise de dados de inquéritos telefónicos rápidos. O apoio à utilização de dados dá prioridade à integração da análise de ciclo rápido nos mecanismos de revisão e feedback de dados existentes a nível nacional e subnacional para reforçar a utilização sistemática de dados para a tomada de decisões.
 
-análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)](resources/diagrams/Technical_approaches_image.svg)
+análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)](resources/diagrams_pt/Technical_approaches_image.svg)
 
 *Figura 3. Análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)*
 
@@ -233,7 +233,7 @@ O FASTR catalisa ciclos contínuos de análise, aprendizagem, fortalecimento do 
 </div>
 <div>
 
-![Abordagem analítica de ciclo rápido do FASTR h:520](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![Abordagem analítica de ciclo rápido do FASTR h:520](../resources/diagrams_pt/FASTR_rapid_cycle_analytics_approach.svg)
 
 </div>
 </div>
@@ -252,7 +252,7 @@ NOTAS DO APRESENTADOR:
 
 O FASTR é uma abordagem integrada baseada em quatro métodos rigorosos, rápidos e de baixo custo para monitorizar os sistemas de cuidados de saúde primários, sustentados pelo reforço de capacidades e apoio à utilização de dados adaptados às necessidades do país.
 
-![Quatro abordagens técnicas FASTR w:620](../resources/diagrams/Technical_approaches_image.svg)
+![Quatro abordagens técnicas FASTR w:620](../resources/diagrams_pt/Technical_approaches_image.svg)
 
 <!--
 NOTAS DO APRESENTADOR:
@@ -302,7 +302,7 @@ Combinar a análise e a visualização com o reforço de capacidades e o apoio �
 </div>
 <div>
 
-![Passos para implementar a monitorização da utilização dos serviços da RMNCAH-N](../resources/diagrams/steps_to_implement_rmncahn_service_chart.svg)
+![Passos para implementar a monitorização da utilização dos serviços da RMNCAH-N](../resources/diagrams_pt/steps_to_implement_rmncahn_service_chart.svg)
 
 </div>
 </div>
@@ -322,7 +322,7 @@ NOTAS DO APRESENTADOR:
 
 Os resultados do FASTR, quer sejam pontuações DQA, tendências de utilização de serviços ou estimativas de cobertura, são **pontos de partida, não pontos finais**. Desencadeiam a investigação e informam as decisões.
 
-![w:600](../resources/diagrams/from_analysis_to_action.svg)
+![w:600](../resources/diagrams_pt/from_analysis_to_action.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

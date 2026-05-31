@@ -1,0 +1,184 @@
+<svg viewBox="0 0 900 365" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .chart-title { font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #1a5276; }
+    .axis-label { font-family: Arial, sans-serif; font-size: 9px; fill: #666; }
+    .axis-title { font-family: Arial, sans-serif; font-size: 9px; fill: #666; }
+    .legend-text { font-family: Arial, sans-serif; font-size: 9px; fill: #333; }
+    .caption { font-family: Arial, sans-serif; font-size: 10px; fill: #e67e22; font-style: italic; }
+    .outlier-label { font-family: Arial, sans-serif; font-size: 9px; fill: #c0392b; font-weight: bold; }
+  </style>
+
+  <!-- Left Chart: With outlier -->
+  <g transform="translate(30, 30)">
+    <!-- Title -->
+    <text x="175" y="-5" text-anchor="middle" class="chart-title">Proporção de partos institucionais monitorizados</text>
+    <text x="175" y="8" text-anchor="middle" class="chart-title">com um partograma, Região Sudoeste</text>
+
+    <!-- Y-axis title -->
+    <text x="12" y="130" text-anchor="middle" transform="rotate(-90, 12, 130)" class="axis-title">Valor total (%)</text>
+
+    <!-- Y-axis -->
+    <line x1="50" y1="30" x2="50" y2="230" stroke="#ccc" stroke-width="1"/>
+    <text x="45" y="35" text-anchor="end" class="axis-label">2500</text>
+    <text x="45" y="75" text-anchor="end" class="axis-label">2000</text>
+    <text x="45" y="115" text-anchor="end" class="axis-label">1500</text>
+    <text x="45" y="155" text-anchor="end" class="axis-label">1000</text>
+    <text x="45" y="195" text-anchor="end" class="axis-label">500</text>
+    <text x="45" y="232" text-anchor="end" class="axis-label">0</text>
+
+    <!-- X-axis -->
+    <line x1="50" y1="230" x2="330" y2="230" stroke="#ccc" stroke-width="1"/>
+    <text x="78" y="245" text-anchor="middle" class="axis-label">2023-Q3</text>
+    <text x="134" y="245" text-anchor="middle" class="axis-label">2023-Q4</text>
+    <text x="190" y="245" text-anchor="middle" class="axis-label">2024-Q1</text>
+    <text x="246" y="245" text-anchor="middle" class="axis-label">2024-Q2</text>
+    <text x="302" y="245" text-anchor="middle" class="axis-label">2024-Q3</text>
+
+    <!-- Grid lines -->
+    <line x1="50" y1="75" x2="330" y2="75" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="115" x2="330" y2="115" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="155" x2="330" y2="155" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="195" x2="330" y2="195" stroke="#f0f0f0" stroke-width="1"/>
+
+    <!-- Ekiti State (blue) - spike at Q2, back down at Q3 -->
+    <polyline points="78,222 134,222 190,220 246,35 302,222" fill="none" stroke="#3498db" stroke-width="2"/>
+    <circle cx="78" cy="222" r="3" fill="#3498db"/>
+    <circle cx="134" cy="222" r="3" fill="#3498db"/>
+    <circle cx="190" cy="220" r="3" fill="#3498db"/>
+    <circle cx="302" cy="222" r="3" fill="#3498db"/>
+
+    <!-- Outlier highlight -->
+    <circle cx="246" cy="35" r="8" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <circle cx="246" cy="35" r="3" fill="#c0392b"/>
+    <text x="260" y="28" class="outlier-label">2568%</text>
+
+    <!-- Lagos State (orange) - flat at bottom -->
+    <polyline points="78,225 134,224 190,225 246,224 302,225" fill="none" stroke="#e67e22" stroke-width="2"/>
+
+    <!-- Ogun State (green) - flat at bottom -->
+    <polyline points="78,227 134,226 190,227 246,226 302,227" fill="none" stroke="#27ae60" stroke-width="2"/>
+
+    <!-- Ondo State (red) - flat at bottom -->
+    <polyline points="78,224 134,225 190,224 246,225 302,224" fill="none" stroke="#c0392b" stroke-width="2"/>
+
+    <!-- Osun State (purple) - flat at bottom -->
+    <polyline points="78,226 134,227 190,226 246,227 302,226" fill="none" stroke="#9b59b6" stroke-width="2"/>
+
+    <!-- Oyo State (brown) - flat at bottom -->
+    <polyline points="78,225 134,226 190,225 246,226 302,225" fill="none" stroke="#795548" stroke-width="2"/>
+
+    <!-- Caption -->
+    <text x="190" y="310" text-anchor="middle" class="caption">Um único outlier inflaciona a escala, comprimindo</text>
+    <text x="190" y="323" text-anchor="middle" class="caption">variação significativa noutros Estados.</text>
+  </g>
+
+  <!-- Right Chart: Without outlier -->
+  <!-- Y-axis scale: 100% at y=30, 0% at y=230. Range=100%, height=200px, so 1%=2px -->
+  <g transform="translate(470, 30)">
+    <!-- Title -->
+    <text x="175" y="-5" text-anchor="middle" class="chart-title">Proporção de partos institucionais monitorizados</text>
+    <text x="175" y="8" text-anchor="middle" class="chart-title">com um partograma, Região Sudoeste</text>
+
+    <!-- Y-axis title -->
+    <text x="12" y="130" text-anchor="middle" transform="rotate(-90, 12, 130)" class="axis-title">Valor total (%)</text>
+
+    <!-- Y-axis: 100 at top (y=30), 0 at bottom (y=230) -->
+    <line x1="50" y1="30" x2="50" y2="230" stroke="#ccc" stroke-width="1"/>
+    <text x="45" y="35" text-anchor="end" class="axis-label">100</text>
+    <text x="45" y="70" text-anchor="end" class="axis-label">80</text>
+    <text x="45" y="110" text-anchor="end" class="axis-label">60</text>
+    <text x="45" y="150" text-anchor="end" class="axis-label">40</text>
+    <text x="45" y="190" text-anchor="end" class="axis-label">20</text>
+    <text x="45" y="232" text-anchor="end" class="axis-label">0</text>
+
+    <!-- X-axis -->
+    <line x1="50" y1="230" x2="330" y2="230" stroke="#ccc" stroke-width="1"/>
+    <text x="78" y="245" text-anchor="middle" class="axis-label">2023-Q3</text>
+    <text x="134" y="245" text-anchor="middle" class="axis-label">2023-Q4</text>
+    <text x="190" y="245" text-anchor="middle" class="axis-label">2024-Q1</text>
+    <text x="246" y="245" text-anchor="middle" class="axis-label">2024-Q2</text>
+    <text x="302" y="245" text-anchor="middle" class="axis-label">2024-Q3</text>
+
+    <!-- Grid lines -->
+    <line x1="50" y1="70" x2="330" y2="70" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="110" x2="330" y2="110" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="150" x2="330" y2="150" stroke="#f0f0f0" stroke-width="1"/>
+    <line x1="50" y1="190" x2="330" y2="190" stroke="#f0f0f0" stroke-width="1"/>
+
+    <!-- Formula: y = 230 - (value * 2) -->
+
+    <!-- Ekiti State (blue): 51, 49, 46, 52, 49 -->
+    <polyline points="78,128 134,132 190,138 246,126 302,132" fill="none" stroke="#3498db" stroke-width="2"/>
+    <circle cx="78" cy="128" r="3" fill="#3498db"/>
+    <circle cx="134" cy="132" r="3" fill="#3498db"/>
+    <circle cx="190" cy="138" r="3" fill="#3498db"/>
+    <circle cx="246" cy="126" r="3" fill="#3498db"/>
+    <circle cx="302" cy="132" r="3" fill="#3498db"/>
+
+    <!-- Lagos State (orange): 78, 76, 75, 80, 80 -->
+    <polyline points="78,74 134,78 190,80 246,70 302,70" fill="none" stroke="#e67e22" stroke-width="2"/>
+    <circle cx="78" cy="74" r="3" fill="#e67e22"/>
+    <circle cx="134" cy="78" r="3" fill="#e67e22"/>
+    <circle cx="190" cy="80" r="3" fill="#e67e22"/>
+    <circle cx="246" cy="70" r="3" fill="#e67e22"/>
+    <circle cx="302" cy="70" r="3" fill="#e67e22"/>
+
+    <!-- Ogun State (green): 18, 17, 15, 36, 45 -->
+    <polyline points="78,194 134,196 190,200 246,158 302,140" fill="none" stroke="#27ae60" stroke-width="2"/>
+    <circle cx="78" cy="194" r="3" fill="#27ae60"/>
+    <circle cx="134" cy="196" r="3" fill="#27ae60"/>
+    <circle cx="190" cy="200" r="3" fill="#27ae60"/>
+    <circle cx="246" cy="158" r="3" fill="#27ae60"/>
+    <circle cx="302" cy="140" r="3" fill="#27ae60"/>
+
+    <!-- Ondo State (red): 70, 71, 69, 71, 65 -->
+    <polyline points="78,90 134,88 190,92 246,88 302,100" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <circle cx="78" cy="90" r="3" fill="#c0392b"/>
+    <circle cx="134" cy="88" r="3" fill="#c0392b"/>
+    <circle cx="190" cy="92" r="3" fill="#c0392b"/>
+    <circle cx="246" cy="88" r="3" fill="#c0392b"/>
+    <circle cx="302" cy="100" r="3" fill="#c0392b"/>
+
+    <!-- Osun State (purple): 20, 22, 30, 27, 29 -->
+    <polyline points="78,190 134,186 190,170 246,176 302,172" fill="none" stroke="#9b59b6" stroke-width="2"/>
+    <circle cx="78" cy="190" r="3" fill="#9b59b6"/>
+    <circle cx="134" cy="186" r="3" fill="#9b59b6"/>
+    <circle cx="190" cy="170" r="3" fill="#9b59b6"/>
+    <circle cx="246" cy="176" r="3" fill="#9b59b6"/>
+    <circle cx="302" cy="172" r="3" fill="#9b59b6"/>
+
+    <!-- Oyo State (brown): 22, 22, 22, 26, 30 -->
+    <polyline points="78,186 134,186 190,186 246,178 302,170" fill="none" stroke="#795548" stroke-width="2"/>
+    <circle cx="78" cy="186" r="3" fill="#795548"/>
+    <circle cx="134" cy="186" r="3" fill="#795548"/>
+    <circle cx="190" cy="186" r="3" fill="#795548"/>
+    <circle cx="246" cy="178" r="3" fill="#795548"/>
+    <circle cx="302" cy="170" r="3" fill="#795548"/>
+
+    <!-- Caption -->
+    <text x="190" y="310" text-anchor="middle" class="caption">A exclusão de valores anómalos revela tendências subjacentes</text>
+    <text x="190" y="323" text-anchor="middle" class="caption">e permite uma comparação significativa.</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(250, 290)">
+    <line x1="0" y1="0" x2="15" y2="0" stroke="#3498db" stroke-width="2"/>
+    <text x="20" y="3" class="legend-text">Estado de Ekiti</text>
+
+    <line x1="85" y1="0" x2="100" y2="0" stroke="#e67e22" stroke-width="2"/>
+    <text x="105" y="3" class="legend-text">Estado de Lagos</text>
+
+    <line x1="170" y1="0" x2="185" y2="0" stroke="#27ae60" stroke-width="2"/>
+    <text x="190" y="3" class="legend-text">Estado de Ogun</text>
+
+    <line x1="255" y1="0" x2="270" y2="0" stroke="#c0392b" stroke-width="2"/>
+    <text x="275" y="3" class="legend-text">Estado de Ondo</text>
+
+    <line x1="340" y1="0" x2="355" y2="0" stroke="#9b59b6" stroke-width="2"/>
+    <text x="360" y="3" class="legend-text">Estado de Osun</text>
+
+    <line x1="425" y1="0" x2="440" y2="0" stroke="#795548" stroke-width="2"/>
+    <text x="445" y="3" class="legend-text">Estado de Oyo</text>
+  </g>
+
+</svg>

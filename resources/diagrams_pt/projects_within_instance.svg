@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380">
+  <defs>
+    <style>
+      .card { fill: #ffffff; stroke: #1F9A9C; stroke-width: 1.5; }
+      .card-head { fill: #1F9A9C; }
+      .card-head-alt { fill: #0C716B; }
+      .t-title { font-family: Inter, -apple-system, sans-serif; font-weight: 700; fill: #fff; text-anchor: middle; font-size: 11px; }
+      .t-ind { font-family: Inter, -apple-system, sans-serif; font-size: 9px; fill: #555; }
+      .t-label { font-family: Inter, -apple-system, sans-serif; font-size: 9px; fill: #0C716B; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Country platform container -->
+  <rect x="20" y="20" width="660" height="340" rx="14" fill="#F8F9FA" stroke="#09544F" stroke-width="2.5"/>
+  <rect x="20" y="20" width="220" height="32" rx="8" fill="#09544F"/>
+  <text x="130" y="41" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#fff">Plataforma nacional</text>
+
+  <!-- Subtitle -->
+  <text x="350" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#666">No âmbito da plataforma, cada projeto agrupa um conjunto de indicadores para um fim específico</text>
+
+  <!-- ===== Project 1: Department ===== -->
+  <g transform="translate(45, 100)">
+    <rect class="card" width="190" height="220" rx="10"/>
+    <rect class="card-head" width="190" height="30" rx="10"/>
+    <rect class="card-head" x="0" y="20" width="190" height="10"/>
+    <text class="t-title" x="95" y="22">Nutrição</text>
+
+    <!-- Type label -->
+    <rect x="55" y="38" width="80" height="18" rx="9" fill="#E8F4F3"/>
+    <text class="t-label" x="95" y="50" text-anchor="middle">Departamento</text>
+
+    <!-- Indicators -->
+    <text class="t-ind" x="20" y="78">Indicadores para este projeto:</text>
+    <circle cx="26" cy="96" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="99">Prevalência do atraso de crescimento</text>
+    <circle cx="26" cy="114" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="117">Prevalência de desperdício</text>
+    <circle cx="26" cy="132" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="135">Cobertura de vitamina A</text>
+    <circle cx="26" cy="150" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="153">Baixo peso à nascença</text>
+    <circle cx="26" cy="168" r="3" fill="#CAE6E9"/>
+    <text class="t-ind" x="35" y="171" fill="#999">...</text>
+
+    <!-- Team note -->
+    <rect x="10" y="188" width="170" height="22" rx="4" fill="#F0FAF9"/>
+    <text font-family="Inter, sans-serif" font-size="8" fill="#0C716B" x="95" y="203" text-anchor="middle">A equipa de nutrição trabalha aqui</text>
+  </g>
+
+  <!-- ===== Project 2: Product ===== -->
+  <g transform="translate(255, 100)">
+    <rect class="card" width="190" height="220" rx="10" stroke="#0C716B"/>
+    <rect class="card-head-alt" width="190" height="30" rx="10"/>
+    <rect class="card-head-alt" x="0" y="20" width="190" height="10"/>
+    <text class="t-title" x="95" y="22">Boletim trimestral</text>
+
+    <!-- Type label -->
+    <rect x="60" y="38" width="70" height="18" rx="9" fill="#E8F4F3"/>
+    <text class="t-label" x="95" y="50" text-anchor="middle">Produto</text>
+
+    <!-- Indicators -->
+    <text class="t-ind" x="20" y="78">Indicadores para este projeto:</text>
+    <circle cx="26" cy="96" r="3" fill="#0C716B"/>
+    <text class="t-ind" x="35" y="99">Cobertura ANC4</text>
+    <circle cx="26" cy="114" r="3" fill="#0C716B"/>
+    <text class="t-ind" x="35" y="117">Cobertura Penta3</text>
+    <circle cx="26" cy="132" r="3" fill="#0C716B"/>
+    <text class="t-ind" x="35" y="135">Entregas institucionais</text>
+    <circle cx="26" cy="150" r="3" fill="#0C716B"/>
+    <text class="t-ind" x="35" y="153">Consultas médicas</text>
+    <circle cx="26" cy="168" r="3" fill="#CAE6E9"/>
+    <text class="t-ind" x="35" y="171" fill="#999">...</text>
+
+    <!-- Team note -->
+    <rect x="10" y="188" width="170" height="22" rx="4" fill="#F0FAF9"/>
+    <text font-family="Inter, sans-serif" font-size="8" fill="#0C716B" x="95" y="203" text-anchor="middle">Todos os programas, um relatório</text>
+  </g>
+
+  <!-- ===== Project 3: M&amp;E ===== -->
+  <g transform="translate(465, 100)">
+    <rect class="card" width="190" height="220" rx="10"/>
+    <rect class="card-head" width="190" height="30" rx="10"/>
+    <rect class="card-head" x="0" y="20" width="190" height="10"/>
+    <text class="t-title" x="95" y="22">Acompanhamento & amp; avaliação</text>
+
+    <!-- Type label -->
+    <rect x="50" y="38" width="90" height="18" rx="9" fill="#E8F4F3"/>
+    <text class="t-label" x="95" y="50" text-anchor="middle">Ferramenta de rastreio</text>
+
+    <!-- Indicators -->
+    <text class="t-ind" x="20" y="78">Indicadores para este projeto:</text>
+    <circle cx="26" cy="96" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="99">Indicadores de resultados</text>
+    <circle cx="26" cy="114" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="117">Indicadores de processo</text>
+    <circle cx="26" cy="132" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="135">Marcadores de capital</text>
+    <circle cx="26" cy="150" r="3" fill="#1F9A9C"/>
+    <text class="t-ind" x="35" y="153">Indicadores de cobertura</text>
+    <circle cx="26" cy="168" r="3" fill="#CAE6E9"/>
+    <text class="t-ind" x="35" y="171" fill="#999">...</text>
+
+    <!-- Team note -->
+    <rect x="10" y="188" width="170" height="22" rx="4" fill="#F0FAF9"/>
+    <text font-family="Inter, sans-serif" font-size="8" fill="#0C716B" x="95" y="203" text-anchor="middle">A equipa M&amp;E trabalha aqui</text>
+  </g>
+
+</svg>

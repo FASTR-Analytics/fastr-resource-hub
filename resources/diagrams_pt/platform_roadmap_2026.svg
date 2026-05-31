@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 360">
+  <defs>
+    <style>
+      .box { rx: 10; stroke-width: 2; }
+      .phase { fill: #E8F4F3; stroke: #0C716B; }
+      .phase-future { fill: #CAE6E9; stroke: #1F9A9C; }
+      .phase-lbl { font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .item { font-family: Inter, sans-serif; font-size: 11px; fill: #09544F; }
+      .timeline { stroke: #09544F; stroke-width: 3; }
+      .dot { fill: #09544F; }
+      .dot-future { fill: #1F9A9C; }
+      .year { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
+      .arrow-line { stroke: #09544F; stroke-width: 3; fill: none; marker-end: url(#arr2); }
+    </style>
+    <marker id="arr2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#09544F"/>
+    </marker>
+  </defs>
+
+  <!-- Timeline -->
+  <line class="arrow-line" x1="30" y1="55" x2="760" y2="55"/>
+
+  <!-- Phase markers -->
+  <circle class="dot" cx="120" cy="55" r="8"/>
+  <text class="year" x="120" y="30">2025</text>
+
+  <circle class="dot" cx="330" cy="55" r="8"/>
+  <text class="year" x="330" y="30">2026</text>
+
+  <circle class="dot" cx="540" cy="55" r="8"/>
+  <text class="year" x="540" y="30">2027</text>
+
+  <circle class="dot-future" cx="680" cy="55" r="8"/>
+  <text class="year" x="680" y="30">2028+</text>
+
+  <!-- Phase 1: Test at scale -->
+  <rect class="box phase" x="40" y="80" width="210" height="125"/>
+  <text class="phase-lbl" x="145" y="103" text-anchor="middle">Teste em escala</text>
+  <text class="item" x="145" y="125" text-anchor="middle">Reacções do Ministério da Saúde de mais de 20 países</text>
+  <text class="item" x="145" y="143" text-anchor="middle">Identificar o que funciona bem</text>
+  <text class="item" x="145" y="161" text-anchor="middle">Dar prioridade às melhorias</text>
+  <line x1="120" y1="63" x2="120" y2="80" stroke="#09544F" stroke-width="1.5"/>
+
+  <!-- Phase 2: Learn & refine -->
+  <rect class="box phase" x="265" y="80" width="210" height="125"/>
+  <text class="phase-lbl" x="370" y="103" text-anchor="middle">Aprender e aperfeiçoar</text>
+  <text class="item" x="370" y="125" text-anchor="middle">Respostas mais inteligentes da IA</text>
+  <text class="item" x="370" y="143" text-anchor="middle">Interface mais clara</text>
+  <text class="item" x="370" y="161" text-anchor="middle">Fluxos de trabalho guiados</text>
+  <text class="item" x="370" y="179" text-anchor="middle">Novas fontes de dados (LMIS, MPDSR)</text>
+  <line x1="330" y1="63" x2="330" y2="80" stroke="#09544F" stroke-width="1.5"/>
+
+  <!-- Phase 3: Scale & automate -->
+  <rect class="box phase-future" x="490" y="80" width="270" height="125"/>
+  <text class="phase-lbl" x="625" y="103" text-anchor="middle">Escalar e automatizar</text>
+  <text class="item" x="625" y="125" text-anchor="middle">Agentes de IA para monitorização automatizada</text>
+  <text class="item" x="625" y="143" text-anchor="middle">Dados integrados entre sistemas</text>
+  <text class="item" x="625" y="161" text-anchor="middle">Configuração de autosserviço do país</text>
+  <text class="item" x="625" y="179" text-anchor="middle">Integração de dados do lado da procura</text>
+  <line x1="540" y1="63" x2="540" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
+
+  <!-- Bottom bar: guiding principle -->
+  <rect class="box" x="40" y="230" width="720" height="40" fill="#09544F" stroke="#073B38" rx="10"/>
+  <text font-family="Inter, sans-serif" font-size="14px" font-weight="600" fill="#fff" text-anchor="middle" x="400" y="255">As equipas nacionais moldam o roteiro - construído a partir de feedback real dos utilizadores</text>
+</svg>

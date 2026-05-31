@@ -16,7 +16,7 @@ Uma cobertura elevada significa que o sistema está a chegar à maioria das pess
 
 O numerador é fácil - é o que os estabelecimentos reportam no DHIS2. Mas o **denominador** (quantas pessoas precisaram do serviço) não está no DHIS2. Sem ele, é possível contar os serviços prestados, mas não se pode dizer que percentagem da população isso representa.
 
-![Coverage equation h:280](../../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:280](../../resources/diagrams_pt/coverage_equation.svg)
 
 ---
 
@@ -48,4 +48,4 @@ O FASTR trabalha para trás na cadeia para estimar a população-alvo a partir d
 
 A partir da contagem de gravidezes, a cascata demográfica fornece partos, nados-vivos e crianças sobreviventes - utilizando taxas específicas do país para perdas de gravidez, nados-mortos, gémeos e mortalidade infantil.
 
-![A cadeia de cálculo do denominador h:220](../../resources/diagrams/denominator_cascade_example.svg)
+![A cadeia de cálculo do denominador h:220](../../resources/diagrams_pt/denominator_cascade_example.svg)

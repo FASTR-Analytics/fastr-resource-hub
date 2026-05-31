@@ -32,5 +32,5 @@
   <!-- Checkmark and result -->
   <circle cx="95" cy="225" r="12" fill="#1F9A9C"/>
   <path d="M 89 225 L 93 229 L 101 221" stroke="#ffffff" stroke-width="2" fill="none"/>
-  <text class="result-text" x="115" y="229">Passa no controlo de coerência (ANC1 &gt; ANC4)</text>
+  <text class="result-text" x="115" y="229">Passa no controlo de coerência (ANC1 > ANC4)</text>
 </svg>

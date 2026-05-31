@@ -6,7 +6,7 @@ paginate: true
 
 ## Por que ajustar para outliers?
 
-![Porquê ajustar para outliers - antes e depois](../../resources/diagrams/outlier_impact.svg)
+![Porquê ajustar para outliers - antes e depois](../../resources/diagrams_pt/outlier_impact.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

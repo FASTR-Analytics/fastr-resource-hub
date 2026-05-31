@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 296" font-family="Inter, Arial, sans-serif">
+  <!-- Stepper connector line -->
+  <line x1="30" y1="58" x2="30" y2="232" stroke="#CAE6E9" stroke-width="2"/>
+  <!-- Column divider -->
+  <line x1="260" y1="20" x2="260" y2="276" stroke="#E8F4F3" stroke-width="1.5"/>
+
+  <!-- Item 1 -->
+  <circle cx="30" cy="40" r="18" fill="#09544F"/>
+  <text x="30" y="40" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">1</text>
+  <text x="62" y="40" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Monitorização do serviço</text>
+  <text x="276" y="40" dominant-baseline="central" fill="#555" font-size="12.5">Análise dos dados de rotina do HMIS: qualidade, tendências e cobertura</text>
+
+  <!-- Item 2 -->
+  <circle cx="30" cy="110" r="18" fill="#09544F"/>
+  <text x="30" y="110" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">2</text>
+  <text x="62" y="110" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Inquéritos telefónicos</text>
+  <text x="276" y="110" dominant-baseline="central" fill="#555" font-size="12.5">Acompanhamento de ciclo rápido da preparação dos CSP e dos progressos da reforma</text>
+
+  <!-- Item 3 -->
+  <circle cx="30" cy="180" r="18" fill="#09544F"/>
+  <text x="30" y="180" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">3</text>
+  <text x="62" y="180" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Inquéritos aos agregados familiares</text>
+  <text x="276" y="180" dominant-baseline="central" fill="#555" font-size="12.5">Dados do lado da procura: acesso, proteção financeira, experiência</text>
+
+  <!-- Item 4 -->
+  <circle cx="30" cy="250" r="18" fill="#09544F"/>
+  <text x="30" y="250" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">4</text>
+  <text x="62" y="250" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Análises de acompanhamento</text>
+  <text x="276" y="250" dominant-baseline="central" fill="#555" font-size="12.5">Análise da causa raiz e investigação da implementação</text>
+</svg>

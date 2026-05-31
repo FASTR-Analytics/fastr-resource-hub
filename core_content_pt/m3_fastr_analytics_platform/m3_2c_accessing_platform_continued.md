@@ -16,7 +16,7 @@ paginate: true
 <div class="contentor">
 <div class="img-col">
 
-![Projectos dentro da instância](../../resources/diagrams/projects_within_instance.svg)
+![Projectos dentro da instância](../../resources/diagrams_pt/projects_within_instance.svg)
 
 </div>
 <div class="text-col">

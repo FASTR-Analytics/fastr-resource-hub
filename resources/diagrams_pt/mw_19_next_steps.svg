@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="Inter, Arial, sans-serif">
+  <!-- Stepper connector line -->
+  <line x1="30" y1="54" x2="30" y2="338" stroke="#CAE6E9" stroke-width="2"/>
+  <!-- Column divider -->
+  <line x1="260" y1="14" x2="260" y2="398" stroke="#E8F4F3" stroke-width="1.5"/>
+
+  <!-- Item 1 -->
+  <circle cx="30" cy="36" r="18" fill="#09544F"/>
+  <text x="30" y="36" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">1</text>
+  <text x="62" y="36" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Viagens</text>
+  <text x="276" y="36" dominant-baseline="central" fill="#555" font-size="12.5">Finalizar os preparativos e confirmar o itinerário</text>
+
+  <!-- Item 2 -->
+  <circle cx="30" cy="100" r="18" fill="#09544F"/>
+  <text x="30" y="100" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">2</text>
+  <text x="62" y="100" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Convites</text>
+  <text x="276" y="100" dominant-baseline="central" fill="#555" font-size="12.5">Cartas de convite do Ministério da Saúde</text>
+
+  <!-- Item 3 -->
+  <circle cx="30" cy="164" r="18" fill="#09544F"/>
+  <text x="30" y="164" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">3</text>
+  <text x="62" y="164" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Plataforma</text>
+  <text x="276" y="164" dominant-baseline="central" fill="#555" font-size="12.5">Registar e iniciar sessão antes do seminário</text>
+
+  <!-- Item 4 -->
+  <circle cx="30" cy="228" r="18" fill="#09544F"/>
+  <text x="30" y="228" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">4</text>
+  <text x="62" y="228" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Colaboração</text>
+  <text x="276" y="228" dominant-baseline="central" fill="#555" font-size="12.5">Aderir à página de colaboração da FASTR</text>
+
+  <!-- Item 5 -->
+  <circle cx="30" cy="292" r="18" fill="#09544F"/>
+  <text x="30" y="292" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">5</text>
+  <text x="62" y="292" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Avaliação</text>
+  <text x="276" y="292" dominant-baseline="central" fill="#555" font-size="12.5">Completar a autoavaliação de competências no início da oficina</text>
+
+  <!-- Item 6 -->
+  <circle cx="30" cy="356" r="18" fill="#09544F"/>
+  <text x="30" y="356" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="14" font-weight="bold">6</text>
+  <text x="62" y="356" dominant-baseline="central" fill="#09544F" font-size="14" font-weight="bold">Cartazes</text>
+  <text x="276" y="356" dominant-baseline="central" fill="#555" font-size="12.5">Criar cartazes nacionais para a aprendizagem entre países</text>
+</svg>

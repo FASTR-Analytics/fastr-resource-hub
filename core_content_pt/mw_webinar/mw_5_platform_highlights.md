@@ -13,7 +13,7 @@ paginate: true
 li { margin-bottom: 4px; }
 </style>
 
-![Recursos da plataforma](../../resources/diagrams/mw_5_platform.svg)
+![Recursos da plataforma](../../resources/diagrams_pt/mw_5_platform.svg)
 
 <!--
 - Análise automatizada - Qualidade dos dados, tendências e cobertura em minutos

@@ -1264,7 +1264,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 <!-- SLIDE:m4_0 -->
 ## Pipeline analítico FASTR
 
-![Pipeline analítico w:1000](../resources/diagrams/analytical_pipeline.svg)
+![Pipeline analítico w:1000](../resources/diagrams_pt/analytical_pipeline.svg)
 
 O FASTR passa por cinco módulos sequenciais: **avaliar** a qualidade dos dados, **ajustar** os problemas encontrados, **analisar** os volumes de serviços ajustados, **construir** os denominadores da população-alvo e, em seguida, **estimar** a cobertura.
 
@@ -1537,7 +1537,7 @@ A BCG é uma vacina de dose à nascença, pelo que esperamos que estes indicador
 </div>
 <div>
 
-![Ilustração de consistência h:280](../resources/diagrams/consistency_illustration.svg)
+![Ilustração de consistência h:280](../resources/diagrams_pt/consistency_illustration.svg)
 
 </div>
 </div>
@@ -1570,7 +1570,7 @@ A verificação da consistência ao nível do estabelecimento de saúde não det
 </div>
 <div>
 
-![Consistência do distrito](../resources/diagrams/district_consistency.svg)
+![Consistência do distrito](../resources/diagrams_pt/district_consistency.svg)
 
 </div>
 </div>
@@ -1701,7 +1701,7 @@ NOTAS DO APRESENTADOR:
 <!-- SLIDE:m4_s0 -->
 ## Pipeline analítico FASTR
 
-![Pipeline analítico w:1000](../resources/diagrams/analytical_pipeline.svg)
+![Pipeline analítico w:1000](../resources/diagrams_pt/analytical_pipeline.svg)
 
 O FASTR passa por cinco módulos sequenciais: **avaliar** a qualidade dos dados, **ajustar** os problemas encontrados, **analisar** os volumes de serviço ajustados, **construir** os denominadores da população-alvo e, em seguida, **estimar** a cobertura.
 

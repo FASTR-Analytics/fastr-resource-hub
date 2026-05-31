@@ -6,7 +6,7 @@ paginate: true
 
 ## Relações esperadas que ajudam na estimativa de denominadores
 
-![Fluxograma da cascata de denominadores](../../resources/diagrams/denominator_cascade.svg)
+![Fluxograma da cascata de denominadores](../../resources/diagrams_pt/denominator_cascade.svg)
 
 <!--
 NOTAS DO APRESENTADOR:

@@ -1723,7 +1723,7 @@ A divisão das duas partes permite que a cadeia de denominadores seja revista e 
 <!-- SLIDE:m6_6 -->
 ## Estimativa de cobertura de serviço
 
-![Coverage equation h:180](../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:180](../resources/diagrams_pt/coverage_equation.svg)
 
 **Cobertura** = serviços prestados ÷ população-alvo
 
@@ -1763,7 +1763,7 @@ NOTAS DO APRESENTADOR:
 <!-- SLIDE:m6_7 -->
 ## Exemplo de cobertura de serviços
 
-![Exemplo de cobertura ANC4+ h:420](../resources/diagrams/coverage_example_anc4.svg)
+![Exemplo de cobertura ANC4+ h:420](../resources/diagrams_pt/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_8 -->
@@ -1794,7 +1794,7 @@ NOTAS DO APRESENTADOR:
 <!-- SLIDE:m6_9 -->
 ## Relações esperadas que ajudam na estimativa de denominadores
 
-![Fluxograma da cascata de denominadores](../resources/diagrams/denominator_cascade.svg)
+![Fluxograma da cascata de denominadores](../resources/diagrams_pt/denominator_cascade.svg)
 
 <!--
 NOTAS DO APRESENTADOR:
@@ -1827,7 +1827,7 @@ A nível provincial, utilizamos todos os valores por defeito!
 
 Exemplo prático. O inquérito diz que 80% das mulheres grávidas recebem ANC1. O HMIS reporta 10.000 consultas ANC1 no período, portanto 10.000 ÷ 0,80 ≈ 12.500 gravidezes. A partir das gravidezes, o FASTR percorre a cascata: gravidezes → partos (aplicar a taxa de perda de gravidez) → nados-vivos (aplicar a taxa de nados-mortos) → crianças que sobrevivem a cada faixa etária (aplicar a mortalidade neonatal e infantil). Cada etapa utiliza as taxas específicas de cada país, obtidas a partir do DHS ou das estatísticas vitais mais recentes. A cadeia termina com a população elegível para qualquer serviço a jusante - DPT, sarampo, controlo do crescimento - sem necessidade de solicitar o inquérito para cada um deles.
 
-![Exemplo de cascata de denominadores h:340](../resources/diagrams/denominator_cascade_example.svg)
+![Exemplo de cascata de denominadores h:340](../resources/diagrams_pt/denominator_cascade_example.svg)
 
 <!--
 NOTAS DO APRESENTADOR:
@@ -1981,7 +1981,7 @@ Uma cobertura elevada significa que o sistema está a chegar à maioria das pess
 
 O numerador é fácil - é o que os estabelecimentos reportam no DHIS2. Mas o **denominador** (quantas pessoas precisaram do serviço) não está no DHIS2. Sem ele, é possível contar os serviços prestados, mas não se pode dizer que percentagem da população isso representa.
 
-![Coverage equation h:280](../resources/diagrams/coverage_equation.svg)
+![Coverage equation h:280](../resources/diagrams_pt/coverage_equation.svg)
 
 ---
 
@@ -2013,7 +2013,7 @@ O FASTR trabalha para trás na cadeia para estimar a população-alvo a partir d
 
 A partir da contagem de gravidezes, a cascata demográfica fornece partos, nados-vivos e crianças sobreviventes - utilizando taxas específicas do país para perdas de gravidez, nados-mortos, gémeos e mortalidade infantil.
 
-![A cadeia de cálculo do denominador h:220](../resources/diagrams/denominator_cascade_example.svg)
+![A cadeia de cálculo do denominador h:220](../resources/diagrams_pt/denominator_cascade_example.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3c -->
@@ -2025,7 +2025,7 @@ O numerador é fácil: os estabelecimentos comunicam-no todos os meses. O denomi
 
 Os próximos slides explicam como o FASTR constrói esse denominador a partir dos dados que possui.
 
-![Fórmula de cobertura para ANC4+ h:280](../resources/diagrams/coverage_example_anc4.svg)
+![Fórmula de cobertura para ANC4+ h:280](../resources/diagrams_pt/coverage_example_anc4.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3f -->
@@ -2057,7 +2057,7 @@ Combine a cadeia e o FASTR pode retornar o denominador para qualquer serviço a 
 <!-- SLIDE:m6_s3h -->
 ## Relações esperadas que ajudam na estimativa de denominadores
 
-![Fluxograma da cascata de denominadores](../resources/diagrams/denominator_cascade.svg)
+![Fluxograma da cascata de denominadores](../resources/diagrams_pt/denominator_cascade.svg)
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_s3j -->

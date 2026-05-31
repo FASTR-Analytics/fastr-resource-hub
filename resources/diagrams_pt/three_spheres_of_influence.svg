@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+
+  <!-- Outer ring: Sphere of Concern — palest cool wash -->
+  <circle cx="200" cy="200" r="180" fill="#F2F7F8" stroke="#A0C8CE" stroke-width="1.2"/>
+
+  <!-- Middle ring: Sphere of Influence — pale teal -->
+  <circle cx="200" cy="200" r="120" fill="#DEEEED" stroke="#1F9A9C" stroke-width="1.5"/>
+
+  <!-- Inner ring: Sphere of Control — light teal-blue, strong deep-green stroke -->
+  <circle cx="200" cy="200" r="65" fill="#B6DCE0" stroke="#09544F" stroke-width="2.5"/>
+
+  <!-- Outer label — sits in top crescent of outer ring -->
+  <text x="200" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#5A7A7D" letter-spacing="2.5">ESFERA DE ACÇÃO</text>
+
+  <!-- Middle label — sits in top crescent of middle ring -->
+  <text x="200" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0C716B" letter-spacing="2.5">ESFERA DE INFLUÊNCIA</text>
+
+  <!-- Inner label — centered inside inner sphere, two-line stack -->
+  <text x="200" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#09544F" letter-spacing="2.5">ESFERA DE</text>
+  <text x="200" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#09544F" letter-spacing="2.5">CONTROLO</text>
+</svg>

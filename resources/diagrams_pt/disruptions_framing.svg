@@ -52,7 +52,7 @@
   <g transform="translate(1000, 60)">
     <rect x="0" y="0" width="120" height="120" rx="12" fill="#09544F"/>
     <text x="60" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">ACT</text>
-    <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Política e</text>
+    <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Política &amp;</text>
     <text x="60" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">ação do programa</text>
   </g>
 
