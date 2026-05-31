@@ -18,7 +18,10 @@ RUN npm run build
 # Production stage
 FROM node:20-slim
 
-# Install dependencies for Puppeteer/Marp PDF generation
+# Install dependencies for Puppeteer/Marp PDF generation + LibreOffice
+# (libreoffice-impress is used as a post-process round-trip step in
+# pptxGenerator.libreofficeRoundTrip — re-saves pptxgenjs output in a form
+# PowerPoint opens without the "needs repair" prompt).
 RUN apt-get update && apt-get install -y \
     chromium \
     fonts-liberation \
@@ -34,6 +37,8 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
+    libreoffice-impress \
+    libreoffice-core \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
