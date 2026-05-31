@@ -77,7 +77,7 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Supported languages
-type Language = 'en' | 'fr'
+type Language = 'en' | 'fr' | 'pt' | 'pt'
 
 // POST /api/export/:id/markdown - Build markdown deck
 // Query params: ?language=fr (default: from workshop config or 'en')

@@ -46,6 +46,7 @@ export interface ModuleDefinition {
   name: {
     en: string
     fr: string
+    pt?: string  // European Portuguese — optional during rollout; falls back to en
   }
   ai_context?: AIContext
 }
@@ -55,6 +56,7 @@ export interface ThemeDefinition {
   name: {
     en: string
     fr: string
+    pt?: string
   }
 }
 
@@ -70,7 +72,7 @@ export interface ModuleMeta {
   slides: SlideEntry[]
 }
 
-type Language = 'en' | 'fr'
+type Language = 'en' | 'fr' | 'pt' | 'pt'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Cache

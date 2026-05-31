@@ -1,46 +1,7 @@
-# Themes group the modules for display. Order here is display order.
-themes:
-- id: foundations
-  name:
-    en: Setup & foundations
-    fr: Bases et fondations
-    pt: Configuração e fundamentos
-- id: data
-  name:
-    en: Data pipeline
-    fr: Pipeline de données
-    pt: Pipeline de dados
-- id: analysis
-  name:
-    en: Analysis
-    fr: Analyse
-    pt: Análise
-- id: communication
-  name:
-    en: Communication & action
-    fr: Communication et action
-    pt: Comunicação e ação
-- id: platform
-  name:
-    en: Platform skills
-    fr: Compétences plateforme
-    pt: Competências na plataforma
-- id: methodology
-  name:
-    en: Methodology
-    fr: Méthodologie
-    pt: Metodologia
-- id: workshop
-  name:
-    en: Workshop & assessment
-    fr: Atelier et évaluation
-    pt: Workshop e avaliação
-
 modules:
 - id: m0
   number: '0'
   folder: m0_introduction
-  theme: foundations
   name:
     en: Introduction to FASTR
     fr: Introduction à FASTR
@@ -56,7 +17,6 @@ modules:
 - id: m1
   number: '1'
   folder: m1_identify_questions_indicators
-  theme: foundations
   name:
     en: Identify Questions & Indicators
     fr: Identifier les questions et indicateurs
@@ -72,7 +32,6 @@ modules:
 - id: m2
   number: '2'
   folder: m2_data_extraction
-  theme: data
   name:
     en: Data Extraction
     fr: Extraction des données
@@ -89,7 +48,6 @@ modules:
 - id: m3
   number: '3'
   folder: m3_fastr_analytics_platform
-  theme: foundations
   name:
     en: FASTR Analytics Platform
     fr: Plateforme analytique FASTR
@@ -105,24 +63,13 @@ modules:
 - id: m3b
   number: 3b
   folder: mai_ai_assistant
-  theme: platform
   name:
     en: AI Assistant
     fr: Assistant IA
-    pt: Assistente de IA
-  ai_context:
-    description: Training on the FASTR AI assistant — capabilities, effective prompting,
-      prompt library, team collaboration, and privacy.
-    topics:
-    - AI assistant role and capabilities
-    - Effective prompting techniques
-    - Prompt library and organization
-    - Team collaboration and privacy
-    duration: 150-180 min
+    pt: Assistente IA
 - id: m4
   number: '4'
   folder: m4_data_quality_assessment
-  theme: data
   name:
     en: Data Quality Assessment
     fr: Évaluation de la qualité des données
@@ -139,11 +86,10 @@ modules:
 - id: m5
   number: '5'
   folder: m5_data_quality_adjustment
-  theme: data
   name:
     en: Data Quality Adjustment
     fr: Ajustement de la qualité des données
-    pt: Ajuste da qualidade dos dados
+    pt: Ajustamento da qualidade dos dados
   ai_context:
     description: Methods for adjusting data to account for quality issues before analysis.
     topics:
@@ -154,7 +100,6 @@ modules:
 - id: m6
   number: '6'
   folder: m6_data_analysis
-  theme: analysis
   name:
     en: Data Analysis
     fr: Analyse des données
@@ -170,7 +115,6 @@ modules:
 - id: m7
   number: '7'
   folder: m7_results_communication
-  theme: communication
   name:
     en: Results Communication
     fr: Communication des résultats
@@ -186,11 +130,10 @@ modules:
 - id: m8
   number: '8'
   folder: m8_survey_hfa
-  theme: analysis
   name:
     en: Survey & HFA
     fr: Enquêtes et EFS
-    pt: Inquéritos e AUS
+    pt: Inquérito e EES
   ai_context:
     description: Integration of survey data and health facility assessments with routine
       data.
@@ -202,334 +145,63 @@ modules:
 - id: m9a
   number: 9a
   folder: m9a_instance_setup
-  theme: platform
   name:
     en: Instance Setup
     fr: Configuration de l'instance
     pt: Configuração da instância
-  ai_context:
-    description: Hands-on activities for configuring FASTR platform instances — admin
-      areas, data import, running modules, creating projects.
-    topics:
-    - Setting up admin areas
-    - Importing data
-    - Installing and running modules
-    - Creating a project
-    duration: 90-120 min
-    activity:
-      covers: Set up a working FASTR instance — admin areas, data import, modules, and a project.
-      outcomes:
-      - Configure admin areas (the geographic hierarchy)
-      - Import HMIS data into the platform
-      - Install and run analysis modules
-      - Create a project and connect to it
-      order: 1
-      prerequisites: []
-      materials:
-        deck: m9a
-        signpost: activity_divider
-        handouts:
-        - connect_platform
-        - admin_areas
-        - import_data
-        - indicators
-        - verify_explore
-        facilitator_guide: facilitator_guide
-      ai_notes: Setup must succeed before any analysis activity — budget time for data-import troubleshooting.
 - id: m9b
   number: 9b
   folder: m9b_getting_started
-  theme: platform
   name:
     en: Getting Started
     fr: Prise en main
     pt: Primeiros passos
-  ai_context:
-    description: Getting started with the FASTR platform — logging in, navigating
-      the interface, creating user folders.
-    topics:
-    - Platform demo and walkthrough
-    - Logging into the platform
-    - Creating user folders
-    duration: 30-45 min
 - id: m9c
   number: 9c
   folder: m9c_visualizations_interpretation
-  theme: communication
   name:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
     pt: Visualizações e interpretação
-  ai_context:
-    description: Hands-on creation and interpretation of visualizations — manual and
-      AI-assisted, with disruption analysis practice.
-    topics:
-    - Creating visualizations manually
-    - Creating visualizations with AI Assistant
-    - How to interpret a FASTR visualization
-    - Interpreting visualizations in slide decks
-    - Creating interpretations with AI Assistant
-    - Disruption detection
-    duration: 120-150 min
-    # Activity definition — single source of truth for what this activity covers,
-    # its place in the sequence, and the materials that go with it.
-    activity:
-      covers: Create a chart from a metric, then say what it means — manually and with the AI.
-      outcomes:
-      - Build a visualization via Metric → Presets → Create
-      - Use filter (pick what to show) vs disaggregate (break a total into parts) correctly
-      - Write a 2-sentence finding (what changed · why it matters)
-      - Spot a disruption in a trend
-      - Draft an interpretation with the AI, then verify it against the data
-      order: 2
-      prerequisites:
-      - m9a
-      materials:
-        deck: m9c
-        signpost: activity_divider
-        handouts:
-        - interpret_reference
-        - create_viz_manually
-        - write_interpretation
-        - create_viz_ai
-        - interpret_with_ai
-        - spot_disruption
-        facilitator_guide: facilitator_guide
-      ai_notes: Most common confusion is filter vs disaggregate — reinforce out loud.
-        Push the 2-sentence finding format; don't accept a chart description without a "so what".
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
-  theme: communication
   name:
     en: Slide Decks
     fr: Présentations
     pt: Apresentações
-  ai_context:
-    description: Building and customizing slide decks — adding visualizations, editing
-      layouts, formatting reports with logos and styles.
-    topics:
-    - Creating slide decks
-    - Adding visualizations manually and with AI
-    - Editing and finalizing slides
-    - Report formatting and styling
-    duration: 120-150 min
-    activity:
-      covers: Build a slide deck from your visualizations — add charts, edit the layout, and finalise.
-      outcomes:
-      - Create a slide deck
-      - Add a visualization to a slide (manually and with AI)
-      - Split a slide into rows or columns and edit the layout
-      - Finalise and format a deck (logos, styles)
-      order: 3
-      prerequisites:
-      - m9c
-      materials:
-        deck: m9d
-        signpost: activity_divider
-        handouts:
-        - create_slide_deck
-        - add_viz_manually
-        - add_viz_ai
-        - edit_slides
-        facilitator_guide: facilitator_guide
-      ai_notes: The editor is AI-first — show the manual path too. Most deck slides are pointer-stubs into the handouts.
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
-  theme: communication
   name:
     en: Disruption Report
     fr: Rapport de perturbations
     pt: Relatório de perturbações
-  ai_context:
-    description: Creating disruption reports with AI assistance — from prompt to final
-      output, with peer review and refinement.
-    topics:
-    - Building a disruption report with AI
-    - Understanding and customizing prompts
-    - Reviewing and verifying AI output
-    - Refining reports with additional analyses
-    - Peer review and presenting reports
-    duration: 180-240 min
-    activity:
-      covers: Produce a disruption report end-to-end with the AI — prompt, verify, refine, peer-review.
-      outcomes:
-      - Generate a disruption report with the AI assistant
-      - Customise the prompt for your context
-      - Verify the AI output against the data
-      - Refine the report with additional analyses
-      - Peer-review and present the report
-      order: 6
-      prerequisites:
-      - m9i
-      - m9f
-      materials:
-        deck: m9e
-        signpost: activity_divider
-        handouts:
-        - create_report_ai
-        - verify_output
-        - refine_report
-        - peer_review
-        facilitator_guide: facilitator_guide
-      ai_notes: Builds on the manual report fundamentals (m9i) and prompting (m9f). Reinforce verification — teams tend to trust confident-sounding AI output.
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
-  theme: platform
   name:
     en: Prompting Techniques
     fr: Techniques de prompting
     pt: Técnicas de prompting
-  ai_context:
-    description: Developing effective prompting skills — iterative vs single prompts,
-      prompt refinement, and using the prompt library.
-    topics:
-    - Iterative conversation strategies
-    - Single prompt design
-    - Prompt refinement exercises
-    - Prompt library organization
-    duration: 90-120 min
-    activity:
-      covers: Practice effective prompting — iterative vs single prompts, refinement, and the prompt library.
-      outcomes:
-      - Use an iterative conversation instead of one perfect prompt
-      - Write a clear single prompt
-      - Refine a weak prompt into a strong one
-      - Organise and reuse the prompt library
-      order: 4
-      prerequisites:
-      - m9c
-      materials:
-        deck: m9f
-        signpost: activity_divider
-        handouts:
-        - explore_ai
-        - build_prompt
-        - iterative_vs_single
-        - refine_prompt
-        - verify_output
-        - pdf_template
-        facilitator_guide: facilitator_guide
-      ai_notes: Reinforce the 4 D's (Discernment, Description, Delegation, Diligence) and verifying output every time.
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
-  theme: workshop
   name:
     en: FASTR Quiz
     fr: Quiz FASTR
     pt: Quiz FASTR
-  ai_context:
-    description: Interactive quiz covering FASTR fundamentals — data quality dimensions,
-      technical pillars, indicator definitions.
-    topics:
-    - FASTR framework knowledge check
-    - Data quality concepts
-    - Indicator definitions
-    duration: 30-45 min
-    activity:
-      covers: Quick knowledge check on FASTR fundamentals — data quality, pillars, indicators.
-      outcomes:
-      - Recall the FASTR framework and its pillars
-      - Distinguish the data-quality dimensions
-      - Define the core indicators
-      order: 7
-      prerequisites: []
-      materials:
-        deck: m9g
-        signpost: activity_divider
-        handouts:
-        - quiz
-        facilitator_guide: facilitator_guide
-      ai_notes: Assessment/energiser — best near the end or as a recap. Teams may use the AI to find answers.
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
-  theme: platform
-  deprecated: true   # thin (1 slide), overlaps m3 + m9b
   name:
     en: Platform Demo
     fr: Démo de la plateforme
     pt: Demonstração da plataforma
-  ai_context:
-    description: Live demonstration of the FASTR platform — access, user roles, and
-      basic workflow.
-    topics:
-    - Platform access and authentication
-    - User roles (Administrator, Editor, Viewer)
-    - Platform navigation
-    duration: 45-60 min
 - id: m9i
   number: 9i
   folder: m9i_report_builder_basics
-  theme: communication
   name:
-    en: Standard FASTR Reports
-    fr: Rapports FASTR standards
-    pt: Relatórios FASTR padrão
-  ai_context:
-    description: Hands-on activity teaching participants to manually build a disruption
-      report using the FASTR report builder. Covers report structure, adding visualizations,
-      writing interpretation text, and using the prompt library to accelerate drafting.
-      This is distinct from m9e (AI-assisted report generation) — here participants
-      learn the fundamentals before automating.
-    topics:
-    - Report structure (cover, methodology, sections, conclusions)
-    - Adding slides with visualizations
-    - Writing interpretation (what you see vs what it means)
-    - Writing effective slide titles (findings, not descriptions)
-    - Using the prompt library for AI-assisted drafting
-    duration: 90-120 min
-    activity:
-      covers: Manually build a disruption report in the report builder — structure, viz, interpretation, titles.
-      outcomes:
-      - Build the report structure (cover, methodology, sections, conclusions)
-      - Add slides with visualizations
-      - Write interpretation (what you see vs what it means)
-      - Write finding-style slide titles (not descriptions)
-      - Use the prompt library to accelerate drafting
-      order: 5
-      prerequisites:
-      - m9c
-      materials:
-        deck: m9i
-        signpost: activity_divider
-        handouts:
-        - ai_verification_checklist
-        facilitator_guide: facilitator_guide
-      ai_notes: Teach these manual fundamentals BEFORE m9e (AI-assisted reports). Slide titles must be findings, not descriptions.
-- id: mw
-  number: w
-  folder: mw_webinar
-  theme: workshop
-  name:
-    en: Webinar Content
-    fr: Contenu webinaire
-    pt: Conteúdo do webinar
-  ai_context:
-    description: Visual, webinar-optimized slides designed for remote audiences — concise
-      overviews of FASTR topics ideal for short virtual events.
-    topics:
-    - FASTR overview
-    - Data sources
-    - Key indicators
-    - Data quality snapshot
-    - Platform highlights
-    - AI assistant introduction
-    - Country progress
-    duration: 30-90 min
-# Methodology recap handouts only — not a slide-deck module.
-# `deprecated: true` keeps it out of the Content Library/export picker and the
-# slide library (no core_content folder), while still giving the Handouts tab a
-# display name and theme for the `handouts/<lang>/methodology/` folder.
-- id: methodology
-  number: methodology
-  folder: methodology
-  theme: methodology
-  deprecated: true
-  name:
-    en: Analytics pipeline
-    fr: Pipeline d'analyse
-    pt: Pipeline de análise
+    en: Module 9i
+    fr: Module 9i
+    pt: Módulo 9i

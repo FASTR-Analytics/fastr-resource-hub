@@ -1,0 +1,53 @@
+slides:
+- file: mai_1_ai_assistant_overview.md
+  order: 1.0
+  variant: full
+  title: O assistente de IA
+- file: mai_2_ai_assistant_capabilities.md
+  order: 2.0
+  variant: full
+  title: A IA é um acelerador, não um tomador de decisões
+- file: mai_3_ai_ask_questions.md
+  order: 3.0
+  variant: full
+  title: O que o assistente de IA pode fazer
+- file: mai_3a_ai_ask_questions_continued.md
+  order: 3.01
+  variant: full
+  title: Onde a IA oferece maior valor
+- file: mai_4_ai_conversations.md
+  order: 4.0
+  variant: full
+  title: Como funciona o assistente de IA
+- file: mai_4a_ai_conversations_continued.md
+  order: 4.01
+  variant: full
+  title: Como funcionam as conversas
+- file: mai_5_ai_tips_better_answers.md
+  order: 5.0
+  variant: full
+  title: Quando a IA acrescenta pouco valor
+- file: mai_5a_ai_good_prompt_checklist.md
+  order: 5.01
+  variant: full
+  title: Quando a IA é útil
+- file: mai_6_ai_capabilities_table.md
+  order: 6.0
+  variant: full
+  title: Dicas para melhores respostas
+- file: mai_6a_ai_capabilities_table_continued.md
+  order: 6.01
+  variant: full
+  title: O que é que faz uma boa apresentação?
+- file: mai_8_ai_private_vs_shared.md
+  order: 8.0
+  variant: full
+  title: O que acontece quando se desliga
+- file: mai_8a_ai_private_vs_shared_continued.md
+  order: 8.01
+  variant: full
+  title: Privado vs partilhado em projectos de equipa
+- file: mai_8b_ai_private_vs_shared_continued.md
+  order: 8.02
+  variant: full
+  title: Como as equipas trabalham em conjunto

@@ -42,7 +42,7 @@ const getClient = () => {
 
 // Module details loaded from modules.yaml via registry
 // Helper to build a MODULE_DETAILS dict on demand from registry (includes all modules with ai_context)
-function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> {
+function getModuleDetailsDict(language: 'en' | 'fr' | 'pt' = 'en'): Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> {
   const modules = loadModulesRegistry()
   const dict: Record<string, { name: string; description: string; topics: string[]; duration: string; activity?: ActivityContext }> = {}
   for (const mod of modules) {
@@ -61,7 +61,7 @@ function getModuleDetailsDict(language: 'en' | 'fr' = 'en'): Record<string, { na
 }
 
 // Detect if a prompt is for a French workshop
-function detectLanguage(text: string): 'en' | 'fr' {
+function detectLanguage(text: string): 'en' | 'fr' | 'pt' {
   const frenchPattern = /fran[cç]ais|atelier\s+FASTR|francophone|en\s+fran[cç]ais/i
   const francophoneCountries = /\b(Sénégal|Senegal|Burkina|Congo|Cameroun|Mali|Guinée|Guinee|Niger[^i]|Tchad|Chad|Bénin|Benin|Togo|Madagascar|Haïti|Haiti|Côte d'Ivoire|Cote d'Ivoire|Ivory Coast|Mauritani[ea]|Comor[eo]s|Djibouti|Gabon|Burundi|Rwanda)\b/i
   // Check if the prompt itself is in French (common French words)
@@ -214,7 +214,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed". MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
         session_title: { type: 'string', description: 'Custom title for this session (e.g., "Data Quality Part 1"). If not specified, uses module name.' },
-        presenter: { type: 'string', description: 'Optional: name(s) of the facilitator/presenter for this session (e.g., "Claire Boulange" or "Kirsten Sebold, Daniel Kamara"). Shown in the agenda Facilitator column and on the section cover slide.' },
+        presenter: { type: 'string', description: 'Name(s) of the facilitator/presenter for this session (e.g., "Claire Boulange" or "Kirsten Sebold, Daniel Kamara"). Shown in the agenda Facilitator column and on the section cover slide. REQUIRED whenever the user has named a presenter/facilitator for this session — never drop it.' },
         topic_range: {
           type: 'object',
           properties: {
@@ -249,7 +249,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
         day: { type: 'number', description: 'Which day to add the session to' },
         session_name: { type: 'string', description: 'Name of the session' },
         duration: { type: 'number', description: 'Duration in minutes' },
-        presenter: { type: 'string', description: 'Optional: name(s) of the facilitator/presenter for this session. Shown in the agenda Facilitator column.' },
+        presenter: { type: 'string', description: 'Name(s) of the facilitator/presenter for this session. Shown in the agenda Facilitator column. REQUIRED whenever the user has named a presenter/facilitator for this session — never drop it.' },
       },
       required: ['day', 'session_name', 'duration'],
     },
@@ -1244,7 +1244,9 @@ CRITICAL RULES:
 - If the user asks a question without wanting changes, just answer without using tools
 - ALWAYS actually execute the changes - don't just describe what you would do
 - If you need to add a break in the middle of content, add the module ONCE, then add a break as a separate session
-- **Follow the user's session list exactly.** When the user provides a numbered list of sessions (e.g., "1. Welcome, 2. Module X, 3. Break, ..."), build exactly that list and nothing else. Do NOT add framing sessions the user did not ask for: no separate "Introductions", "Day 1 Agenda", "Workshop Objectives", "Expectations", "Expected Outputs", "End of Day", or generic recap/closing sessions. The user's Welcome session IS the opening; the user's wrap-up session IS the close.
+- **Follow the user's session list exactly.** When the user provides a numbered list of sessions (e.g., "1. Welcome, 2. Module X, 3. Break, ..."), build exactly that list and nothing else. Do NOT add framing sessions the user did not ask for: no separate "Introductions", "Day 1 Agenda", "Workshop Objectives", "Expectations", "Expected Outputs", "End of Day", "Logistics", "Opening Remarks", or generic recap/closing sessions. The user's Welcome session IS the opening; the user's wrap-up session IS the close. If you find yourself about to add a session that is NOT in the user's numbered list, STOP — re-read the list and add only what is there.
+- **Do NOT collapse separate module sessions into a single combined session.** If the user names "FASTR overview (m0)", "DQA (m4)", "DQ adjustment (m5)", and "Service utilization (m6)" as four distinct rows, you MUST issue four separate \`add_module\` calls — one per module — never one custom session named "FASTR Introduction & HMIS Methods Recap" that conflates them.
+- **Presenters/facilitators are mandatory when the user lists them.** When the user provides a "Presenter" or "Facilitator" column in their agenda, or names presenters per session, you MUST pass the \`presenter\` parameter on EVERY \`add_module\` and \`add_custom_session\` call. Map each session to its presenter from the user's table. If a session is a break, no presenter is needed. If the user lists multiple presenters for one session (e.g., "Kirsten Sebold, Daniel Kamara, Rachel Neill"), pass the full comma-separated string. Do not silently drop the presenter argument.
 
 # STRUCTURAL RULES
 - Day title slide is ALWAYS first in each day — never move or add sessions before it
@@ -1523,7 +1525,7 @@ ONLY output valid JSON, nothing else.`
 // ─────────────────────────────────────────────────────────────────────────────
 function postProcessWorkshopConfig(
   workshopConfig: any,
-  workshopLanguage: 'en' | 'fr',
+  workshopLanguage: 'en' | 'fr' | 'pt',
   fallbackStartTime: string = '09:00',
   fallbackEndTime: string = '17:00',
   fallbackDayStartTimes: Record<number, string> = {},
@@ -2214,7 +2216,7 @@ Return ONLY valid JSON, no explanation.`,
  * Build a slide-level catalog of all available content for webinar generation.
  * Returns module info with individual slide titles + available engagement templates.
  */
-function getSlidesCatalog(language: 'en' | 'fr' = 'en'): string {
+function getSlidesCatalog(language: 'en' | 'fr' | 'pt' = 'en'): string {
   const modules = loadModulesRegistry()
   const contentPath = language === 'fr'
     ? path.join(REPO_ROOT, 'core_content_fr')
@@ -2269,7 +2271,7 @@ function getSlidesCatalog(language: 'en' | 'fr' = 'en'): string {
  */
 function postProcessWebinarConfig(
   config: any,
-  language: 'en' | 'fr',
+  language: 'en' | 'fr' | 'pt',
 ): void {
   const contentPath = language === 'fr'
     ? path.join(REPO_ROOT, 'core_content_fr')

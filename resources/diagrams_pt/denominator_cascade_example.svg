@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 650">
+  <defs>
+    <style>
+      /* FASTR Brand Colors */
+      .box-anc { fill: #1F9A9C; stroke: #09544F; stroke-width: 2; }
+      .box-main { fill: #D8A822; stroke: #09544F; stroke-width: 2; }
+      .box-adjustment { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
+      .box-formula { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
+
+      .text-white { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-formula { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #ffffff; text-anchor: middle; }
+
+      .arrow-forward { stroke: #0C716B; stroke-width: 3; fill: none; marker-end: url(#arrowhead-teal); }
+      .arrow-down { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead-teal-small); }
+
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 28px; font-weight: 700; fill: #0C716B; }
+      .default-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .default-value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #09544F; }
+      .footnote { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #666; }
+    </style>
+    <marker id="arrowhead-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0C716B"/>
+    </marker>
+    <marker id="arrowhead-teal-small" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0C716B"/>
+    </marker>
+  </defs>
+
+  <!-- Background (transparent) -->
+
+
+
+  <!-- Big arrow - outline only -->
+  <polygon points="40,80 1280,80 1280,70 1330,95 1280,120 1280,110 40,110" fill="none" stroke="#0C716B" stroke-width="3"/>
+
+  <!-- ==================== ROW 1: Main flow boxes ==================== -->
+
+  <!-- Box 0: #ANC-1 (green, center=100) -->
+  <rect class="box-anc" x="45" y="140" width="110" height="70" rx="6"/>
+  <text class="text-white" x="100" y="180">#ANC-1</text>
+
+  <!-- Forward arrow 0 -->
+  <line class="arrow-forward" x1="155" y1="175" x2="225" y2="175"/>
+
+  <!-- Box 1: Pregnancies (center=290) -->
+  <rect class="box-main" x="235" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="290" y="180">#Gravidez</text>
+
+  <!-- Forward arrow 1 -->
+  <line class="arrow-forward" x1="345" y1="175" x2="415" y2="175"/>
+
+  <!-- Box 2: Deliveries (center=480) -->
+  <rect class="box-main" x="425" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="480" y="180">#Entregas</text>
+
+  <!-- Forward arrow 2 -->
+  <line class="arrow-forward" x1="535" y1="175" x2="605" y2="175"/>
+
+  <!-- Box 3: Births (center=670) -->
+  <rect class="box-main" x="615" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="670" y="180">#Nascimentos</text>
+
+  <!-- Forward arrow 3 -->
+  <line class="arrow-forward" x1="725" y1="175" x2="795" y2="175"/>
+
+  <!-- Box 4: Live births (center=860) -->
+  <rect class="box-main" x="805" y="140" width="110" height="70" rx="6"/>
+  <text class="text-dark" x="860" y="180"># Nascidos vivos</text>
+
+  <!-- Forward arrow 4 -->
+  <line class="arrow-forward" x1="915" y1="175" x2="985" y2="175"/>
+
+  <!-- Box 5: Infants eligible for DPT1 (center=1060) -->
+  <rect class="box-main" x="995" y="140" width="130" height="70" rx="6"/>
+  <text class="text-dark" x="1060" y="168"># Bebés</text>
+  <text class="text-dark" x="1060" y="185">elegível para</text>
+  <text class="text-dark" x="1060" y="202">DPT1</text>
+
+  <!-- ==================== ROW 2: Adjustment boxes ==================== -->
+
+  <!-- Down arrow under #ANC-1 -->
+  <line class="arrow-down" x1="100" y1="210" x2="100" y2="245"/>
+
+  <!-- Adjustment box 0: Divide by ANC-1 coverage (center=100) -->
+  <rect class="box-adjustment" x="35" y="255" width="130" height="70" rx="6"/>
+  <text class="text-white" x="100" y="275">Dividir #ANC-1</text>
+  <text class="text-white" x="100" y="291">por ANC-1</text>
+  <text class="text-white" x="100" y="307">cobertura</text>
+  <text class="text-white" x="100" y="320" style="font-size:11px;font-style:italic">(do inquérito)</text>
+
+  <!-- Down arrow between Pregnancies and Deliveries -->
+  <line class="arrow-down" x1="385" y1="210" x2="385" y2="245"/>
+
+  <!-- Adjustment box 1: Remove pregnancy losses (center=385) -->
+  <rect class="box-adjustment" x="320" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="385" y="278">Remover</text>
+  <text class="text-white" x="385" y="294">#gravidez</text>
+  <text class="text-white" x="385" y="310">perdas</text>
+
+  <!-- Down arrow between Deliveries and Births -->
+  <line class="arrow-down" x1="575" y1="210" x2="575" y2="245"/>
+
+  <!-- Adjustment box 2: Add twins (center=575) -->
+  <rect class="box-adjustment" x="510" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="575" y="285">Adicionar #gémeos</text>
+
+  <!-- Down arrow between Births and Live births -->
+  <line class="arrow-down" x1="765" y1="210" x2="765" y2="245"/>
+
+  <!-- Adjustment box 3: Remove Stillbirths (center=765) -->
+  <rect class="box-adjustment" x="700" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="765" y="282">Remover</text>
+  <text class="text-white" x="765" y="298">#Nascimentos de fetos</text>
+
+  <!-- Down arrow between Live births and DPT1 -->
+  <line class="arrow-down" x1="955" y1="210" x2="955" y2="245"/>
+
+  <!-- Adjustment box 4: Remove neonatal (center=955) -->
+  <rect class="box-adjustment" x="890" y="255" width="130" height="60" rx="6"/>
+  <text class="text-white" x="955" y="282">Remover</text>
+  <text class="text-white" x="955" y="298">#neonatal</text>
+
+  <!-- ==================== ROW 3: Formula boxes (under corresponding main boxes) ==================== -->
+
+  <!-- Formula box 0: Pregnancies formula (center=290, under Pregnancies) -->
+  <rect class="box-formula" x="200" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="290" y="395">#Gravidez</text>
+  <text class="text-formula" x="290" y="411">=#ANC-1/ANC-1</text>
+  <text class="text-formula" x="290" y="427">cobertura</text>
+
+  <!-- Formula box 1: Deliveries formula (center=480, under Deliveries) -->
+  <rect class="box-formula" x="390" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="480" y="392">#Entregas =</text>
+  <text class="text-formula" x="480" y="408">#Pregnancies* (1-</text>
+  <text class="text-formula" x="480" y="424">Taxa de perda de gravidez)</text>
+
+  <!-- Formula box 2: Births formula (center=670, under Births) -->
+  <rect class="box-formula" x="580" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="670" y="392">#Nascimentos =</text>
+  <text class="text-formula" x="670" y="408">#Entregas/(1-</text>
+  <text class="text-formula" x="670" y="424">(tarifa dupla/2))</text>
+
+  <!-- Formula box 3: Live births formula (center=860, under Live births) -->
+  <rect class="box-formula" x="770" y="370" width="180" height="70" rx="6"/>
+  <text class="text-formula" x="860" y="392">#Nascidos vivos</text>
+  <text class="text-formula" x="860" y="408">#Nascimentos* (1-</text>
+  <text class="text-formula" x="860" y="424">Taxa de nados-mortos)</text>
+
+  <!-- Formula box 4: DPT1 formula (center=1060, under DPT1) -->
+  <rect class="box-formula" x="965" y="370" width="190" height="70" rx="6"/>
+  <text class="text-formula" x="1060" y="392">#Bebés elegíveis</text>
+  <text class="text-formula" x="1060" y="408">para DPT1 = #Live</text>
+  <text class="text-formula" x="1060" y="424">nascimentos * (1- NMR)</text>
+
+  <!-- ==================== Default values section ==================== -->
+
+  <!-- Background for defaults -->
+  <rect x="40" y="470" width="1120" height="70" fill="#CAE6E9" rx="6"/>
+
+  <!-- Default values label -->
+  <text class="default-label" x="60" y="500">Predefinição</text>
+  <text class="default-label" x="60" y="520">valores</text>
+
+  <!-- Separator line -->
+  <line x1="130" y1="480" x2="130" y2="530" stroke="#0C716B" stroke-width="2"/>
+
+  <!-- Default values (aligned with formula boxes above) -->
+  <text class="default-value" x="290" y="505" text-anchor="middle">Perda de gravidez</text>
+  <text class="default-value" x="290" y="525" text-anchor="middle">taxa = 0,03</text>
+
+  <text class="default-value" x="480" y="510" text-anchor="middle">Taxa de geminação = 0,015</text>
+
+  <text class="default-value" x="670" y="505" text-anchor="middle">Taxa de nados-mortos =</text>
+  <text class="default-value" x="670" y="525" text-anchor="middle">0.02</text>
+
+  <text class="default-value" x="860" y="510" text-anchor="middle">NMR = 0,03</text>
+
+  <text class="default-value" x="1060" y="510" text-anchor="middle">PNMR=0,02</text>
+
+</svg>

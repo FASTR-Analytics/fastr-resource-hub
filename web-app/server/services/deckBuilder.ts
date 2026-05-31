@@ -19,12 +19,36 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
 
 // Supported languages
-export type Language = 'en' | 'fr'
+export type Language = 'en' | 'fr' | 'pt' | 'pt'
 
 // Get core content path for a specific language
 function getCoreContentPath(language: Language = 'en'): string {
   const suffix = language === 'en' ? '' : `_${language}`
   return path.join(REPO_ROOT, `core_content${suffix}`)
+}
+
+// ─── Workshop-chrome strings ──────────────────────────────────────────────
+// Strings the deck builder writes into agenda/break/recap slides. EN is the
+// source of truth; FR + PT are added per language. Keep keys stable — if a
+// new key is needed, fill all three languages.
+const CHROME_I18N = {
+  day:           { en: 'Day',                fr: 'Jour',                       pt: 'Dia' },
+  agendaSuffix:  { en: 'Agenda',             fr: 'Agenda',                     pt: 'Agenda' },
+  noSessions:    { en: 'No sessions scheduled', fr: 'Aucune session programmée', pt: 'Nenhuma sessão agendada' },
+  timeCol:       { en: 'Time',               fr: 'Heure',                      pt: 'Hora' },
+  sessionCol:    { en: 'Session',            fr: 'Session',                    pt: 'Sessão' },
+  facilitatorCol:{ en: 'Facilitator',        fr: 'Facilitateur',               pt: 'Facilitador' },
+  lunchBreak:    { en: 'Lunch break',        fr: 'Pause déjeuner',             pt: 'Pausa para almoço' },
+  coffeeBreak:   { en: 'Coffee break',       fr: 'Pause café',                 pt: 'Pausa para café' },
+  resumeAt:      { en: 'We resume at',       fr: 'Reprise à',                  pt: 'Retomamos às' },
+  dayRecap:      { en: 'Day {n} Recap',      fr: 'Récapitulatif : Jour {n}',   pt: 'Resumo do Dia {n}' },
+  presentedBy:   { en: 'Presented by',       fr: 'Présenté par',               pt: 'Apresentado por' },
+} as const
+type ChromeKey = keyof typeof CHROME_I18N
+function t(key: ChromeKey, lang: Language, vars?: Record<string, string | number>): string {
+  let s: string = CHROME_I18N[key][lang]
+  if (vars) for (const [k, v] of Object.entries(vars)) s = s.replace(`{${k}}`, String(v))
+  return s
 }
 
 // Default to English for backward compatibility
@@ -122,11 +146,16 @@ function sessionChrome(
   lang: Language,
   withHeader: boolean,
 ): string {
-  const locale = lang === 'fr' ? 'fr-FR' : 'en-US'
+  const locale = lang === 'fr' ? 'fr-FR' : lang === 'pt' ? 'pt-PT' : 'en-US'
   const esc = (s: string) => (s || '').replace(/'/g, '’').trim()
-  // Strip a leading "Module 04 ·" — the kicker is just the topic.
-  const kicker = esc((session.session || '').replace(/^\s*module\s+\d+\s*[—\-·:.]*\s*/i, ''))
-  const dayWord = lang === 'fr' ? 'Jour' : 'Day'
+  // Strip a leading "Module 04 ·" or "Session 02 ·" — the kicker is just the
+  // topic; the locator already carries the session number.
+  const kicker = esc(
+    (session.session || '')
+      .replace(/^\s*module\s+\d+\s*[—\-·:.]*\s*/i, '')
+      .replace(/^\s*session\s+\d+\s*[—\-·:.]*\s*/i, '')
+  )
+  const dayWord = t('day', lang)
   const locator = `${dayWord} ${day}/${numDays}` + (sessionNumber ? ` · Session ${sessionNumber}` : '')
   // Smart per-day date when start_date is set; otherwise fall back to the
   // workshop's free-text date so the footer still carries a date.
@@ -165,7 +194,12 @@ paginate: true
     customSlideRows.map(r => [r.filename, r.content])
   )
 
-  // Track cumulative session number across all days (only count content sessions, not breaks/structure)
+  // A session counts as "content" (gets the kicker · locator chrome + a
+  // session number) when it references a module OR its title starts with an
+  // explicit "Session N:" prefix. Welcome / icebreaker / agenda template
+  // sessions stay non-content even if they have a speaker, so they don't
+  // inflate the count.
+  const SESSION_PREFIX_RE = /^\s*Session\s+(\d+)\s*[:.\-—·]/i
   let sessionNumber = 0
 
   // Build each day
@@ -174,18 +208,27 @@ paginate: true
     const sessions: Session[] = config.schedule[dayKey] || []
 
     for (const session of sessions) {
-      // Increment session number only for content sessions (modules)
-      const isContentSession = !!session.module
+      const prefixMatch = (session.session || '').match(SESSION_PREFIX_RE)
+      const isContentSession = !!session.module || !!prefixMatch
+
+      // Honour an explicit "Session N:" prefix in the title — keep manual
+      // numbering aligned with what the user wrote. Otherwise auto-increment.
+      let currentNum: number | undefined
       if (isContentSession) {
-        sessionNumber++
+        if (prefixMatch) {
+          sessionNumber = parseInt(prefixMatch[1], 10)
+        } else {
+          sessionNumber++
+        }
+        currentNum = sessionNumber
       }
 
-      const slideContent = await buildSessionSlides(session, config, day, isContentSession ? sessionNumber : undefined, lang, customSlideMap)
+      const slideContent = await buildSessionSlides(session, config, day, currentNum, lang, customSlideMap)
       if (slideContent) {
         // Prepend the dynamic chrome (kicker · locator · footer). As Marp
         // persistent directives, they carry through the session's slides until
         // the next session overrides them.
-        const chrome = sessionChrome(session, day, numDays, isContentSession ? sessionNumber : undefined, config, lang, isContentSession)
+        const chrome = sessionChrome(session, day, numDays, currentNum, config, lang, isContentSession)
         slides.push(chrome + slideContent)
       }
     }
@@ -252,7 +295,7 @@ async function buildSessionSlides(
     // Add section cover slide if no module already generated one
     if (!session.module && session.session) {
       const presenter = session.speaker
-        ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${session.speaker}*`
+        ? `\n\n*${t('presentedBy', language)} ${session.speaker}*`
         : ''
       const titleSlide = `<!-- _class: section-cover -->\n![bg](../../resources/backgrounds/section_slide.png)\n\n# ${session.session}${presenter}`
       allSlideContents.push(titleSlide)
@@ -467,7 +510,7 @@ async function buildModuleSlides(
   const moduleName = getModuleName(moduleId) || sessionName || 'Session'
   const displayName = sessionName || moduleName
   const presenter = speaker
-    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    ? `\n\n*${t('presentedBy', language)} ${speaker}*`
     : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
@@ -505,7 +548,7 @@ async function buildImportedModuleSlides(
   const displayName = sessionName || mod.name
   const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
   const presenter = speaker
-    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    ? `\n\n*${t('presentedBy', language)} ${speaker}*`
     : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
@@ -542,7 +585,7 @@ async function buildExternalDeckSlides(
   const displayName = sessionName || deck.name
   const sessionLabel = sessionNumber ? `Session ${sessionNumber}` : 'Session'
   const presenter = speaker
-    ? `\n\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${speaker}*`
+    ? `\n\n*${t('presentedBy', language)} ${speaker}*`
     : ''
   const titleSlide = `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
@@ -754,15 +797,14 @@ async function loadSlideContent(
  * Build a day agenda slide with schedule table
  */
 function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language: Language = 'en'): string {
-  const isFr = language === 'fr'
   const dayKey = `day${dayNumber}` as keyof typeof config.schedule
   const sessions = config.schedule[dayKey] as Session[] | undefined
-  const dayTitle = config.schedule.day_titles?.[dayNumber] || (isFr ? `Jour ${dayNumber}` : `Day ${dayNumber}`)
+  const dayTitle = config.schedule.day_titles?.[dayNumber] || `${t('day', language)} ${dayNumber}`
 
   if (!sessions || sessions.length === 0) {
-    return `# ${isFr ? `Jour ${dayNumber} - Agenda` : `Day ${dayNumber} - Agenda`}
+    return `# ${t('day', language)} ${dayNumber} - ${t('agendaSuffix', language)}
 
-*${isFr ? 'Aucune session programmée' : 'No sessions scheduled'}*
+*${t('noSessions', language)}*
 `
   }
 
@@ -780,9 +822,7 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language
 
   // Build table rows with Time, Session, and Facilitator columns
   const rows: string[] = []
-  rows.push(isFr
-    ? '| Heure | Session | Facilitateur |'
-    : '| Time | Session | Facilitator |')
+  rows.push(`| ${t('timeCol', language)} | ${t('sessionCol', language)} | ${t('facilitatorCol', language)} |`)
   rows.push('|------|---------|-------------|')
 
   let sessionNumber = 1
@@ -826,7 +866,7 @@ function buildDayAgendaSlide(config: WorkshopConfig, dayNumber: number, language
 
   return `<!-- _class: agenda -->
 
-# ${isFr ? `Jour ${dayNumber} - Agenda` : `Day ${dayNumber} - Agenda`}
+# ${t('day', language)} ${dayNumber} - ${t('agendaSuffix', language)}
 
 **${dayTitle}**
 
@@ -848,7 +888,7 @@ function substituteVariables(
   const workshop = config.workshop as any
 
   // Format dates nicely
-  const locale = language === 'fr' ? 'fr-FR' : 'en-US'
+  const locale = language === 'fr' ? 'fr-FR' : language === 'pt' ? 'pt-PT' : 'en-US'
   const formatDateRange = (startDate?: string, endDate?: string): string => {
     if (!startDate) return ''
     try {
@@ -979,18 +1019,15 @@ function calculateResumeTime(session: Session): string {
  * Build a break slide
  */
 function buildBreakSlide(session: Session, language: Language = 'en'): string {
-  const isFr = language === 'fr'
-  const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi/i
+  const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi|almoço|almoco/i
   const isLunch = lunchPattern.test(session.session)
   const duration = session.duration || (isLunch ? 60 : 15)
   const resumeTime = calculateResumeTime(session)
 
-  const kind = isLunch
-    ? (isFr ? 'Pause déjeuner' : 'Lunch break')
-    : (isFr ? 'Pause café' : 'Coffee break')
+  const kind = isLunch ? t('lunchBreak', language) : t('coffeeBreak', language)
 
   const back = resumeTime
-    ? (isFr ? `<div class="back">Reprise à <b>${resumeTime}</b></div>` : `<div class="back">We resume at <b>${resumeTime}</b></div>`)
+    ? `<div class="back">${t('resumeAt', language)} <b>${resumeTime}</b></div>`
     : ''
 
   // Design-style break: warm field, kind label, big duration, resume line — no emoji.
@@ -1009,10 +1046,9 @@ ${back}
  * Simple slide with thought icon, facilitator fills in verbally
  */
 function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber: number, language: Language = 'en'): string {
-  const isFr = language === 'fr'
   const previousDay = dayNumber - 1
 
-  return `## ${isFr ? `Récapitulatif : Jour ${previousDay}` : `Day ${previousDay} Recap`}
+  return `## ${t('dayRecap', language, { n: previousDay })}
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
@@ -1026,16 +1062,17 @@ function buildDayRecapSlide(session: Session, config: WorkshopConfig, dayNumber:
  * Build day end slides
  */
 function buildDayEndSlide(session: Session, dayNumber: number, language: Language = 'en'): string {
-  const isFr = language === 'fr'
+  const keyMessages = { en: 'Key messages and wrap-up', fr: 'Messages clés et conclusion', pt: 'Mensagens-chave e conclusão' }[language]
+  const reflections = { en: 'Reflections from Participants', fr: 'Réflexions des participants', pt: 'Reflexões dos participantes' }[language]
 
   return `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# ${isFr ? 'Messages clés et conclusion' : 'Key messages and wrap-up'}
+# ${keyMessages}
 
 ---
 
-## ${isFr ? 'Réflexions des participants' : 'Reflections from Participants'}
+## ${reflections}
 
 <div style="display: flex; justify-content: center; align-items: center; height: 60%;">
 
@@ -1050,7 +1087,7 @@ function buildDayEndSlide(session: Session, dayNumber: number, language: Languag
  */
 function buildSectionSlide(session: Session, language: Language = 'en'): string {
   const presenter = session.speaker
-    ? `\n*${language === 'fr' ? 'Présenté par' : 'Presented by'} ${session.speaker}*\n`
+    ? `\n*${t('presentedBy', language)} ${session.speaker}*\n`
     : ''
   return `<!-- _class: section-cover -->
 ![bg](../../resources/backgrounds/section_slide.png)

@@ -1,0 +1,53 @@
+slides:
+- file: m5_1_from_detection_to_correction.md
+  order: 1.0
+  variant: full
+  title: Da deteção à correção
+- file: m5_1a_indicators_excluded_from_adjustment.md
+  order: 1.01
+  variant: full
+  title: Indicadores excluídos do ajustamento
+- file: m5_2_how_completeness_adjustment_works.md
+  order: 2.0
+  variant: full
+  title: Como funciona o ajuste de completude
+- file: m5_2a_completeness_adjustment_output.md
+  order: 2.01
+  variant: full
+  title: Resultado do ajustamento de exaustividade
+- file: m5_3_why_adjust_for_outliers.md
+  order: 3.0
+  variant: full
+  title: Por que ajustar para outliers?
+- file: m5_3a_how_outlier_adjustment_works.md
+  order: 3.01
+  variant: full
+  title: Como funciona o ajuste de outlier
+- file: m5_3b_outlier_adjustment_output.md
+  order: 3.02
+  variant: full
+  title: Saída de ajuste de outlier
+- file: m5_s0_from_detection_to_correction.md
+  order: 0.0
+  variant: condensed
+  title: Da deteção à correção
+- file: m5_s0a_indicators_excluded_from_adjustment.md
+  order: 0.01
+  variant: condensed
+  title: Indicadores excluídos do ajuste
+- file: m5_s1_adjustment_how_it_works.md
+  order: 1.0
+  variant: condensed
+  title: Como funciona o ajuste
+- file: m5_s1a_why_adjust_for_outliers.md
+  order: 1.01
+  variant: condensed
+  title: Por que ajustar para outliers?
+- file: m5_s2_outlier_adjustment_output.md
+  order: 2.0
+  variant: condensed
+  title: Saída do ajuste de outlier
+- file: m5_s2b_completeness_adjustment_output.md
+  order: 2.02
+  variant: condensed
+  title: Saída do ajuste de completude

@@ -98,3 +98,94 @@ fr:
   "hands-on": "pratique"
   "exercise": "exercice"
   "group work": "travail de groupe"
+
+# ───────────────────────────────────────────────────────────────────────────
+# Portuguese — European (PT-PT)
+# ───────────────────────────────────────────────────────────────────────────
+# Source of truth for FASTR jargon in PT-PT translations. DeepL Free tier
+# does not enforce glossaries server-side, so this is a reference list for
+# human review (`--lang pt` runs DeepL with PT-PT target, then humans verify).
+pt:
+  # Program names and acronyms (keep as-is or use official translations)
+  "FASTR": "FASTR"
+  "RMNCAH-N": "SRMNIA-N"
+  "Global Financing Facility": "Mecanismo de Financiamento Global"
+  "GFF": "GFF"
+
+  # Health system terms
+  "Health Management Information System": "Sistema de Informação para a Gestão da Saúde"
+  "HMIS": "SIGS"
+  "DHIS2": "DHIS2"
+  "routine data": "dados de rotina"
+  "facility": "estabelecimento"
+  "health facility": "estabelecimento de saúde"
+  "district": "distrito"
+  "region": "região"
+  "subnational": "infranacional"
+
+  # Service delivery indicators
+  "coverage": "cobertura"
+  "coverage estimate": "estimativa de cobertura"
+  "service utilization": "utilização dos serviços"
+  "service delivery": "prestação de serviços"
+  "indicator": "indicador"
+
+  # Maternal health
+  "ANC": "CPN"
+  "ANC1": "CPN1"
+  "ANC4": "CPN4"
+  "antenatal care": "cuidados pré-natais"
+  "postnatal care": "cuidados pós-natais"
+  "skilled birth attendance": "parto assistido por pessoal qualificado"
+  "institutional delivery": "parto institucional"
+  "facility delivery": "parto em estabelecimento de saúde"
+
+  # Child health
+  "immunization": "vacinação"
+  "vaccination": "vacinação"
+  "DPT": "DTP"
+  "Penta": "Penta"
+  "BCG": "BCG"
+  "measles": "sarampo"
+  "OPV": "VOP"
+
+  # Data quality terms
+  "Data Quality Assessment": "Avaliação da Qualidade dos Dados"
+  "Data Quality Adjustment": "Ajustamento da Qualidade dos Dados"
+  "data quality": "qualidade dos dados"
+  "outlier": "valor atípico"
+  "outliers": "valores atípicos"
+  "missing data": "dados em falta"
+  "completeness": "completude"
+  "reporting rate": "taxa de reporte"
+  "internal consistency": "consistência interna"
+  "median absolute deviation": "desvio absoluto mediano"
+
+  # Analysis terms
+  "denominator": "denominador"
+  "numerator": "numerador"
+  "baseline": "valor de referência"
+  "trend": "tendência"
+  "disruption": "perturbação"
+  "seasonality": "sazonalidade"
+
+  # Survey references
+  "Demographic and Health Survey": "Inquérito Demográfico e de Saúde"
+  "DHS": "IDS"
+  "MICS": "MICS"
+  "household survey": "inquérito aos agregados familiares"
+
+  # Platform/technical terms
+  "platform": "plataforma"
+  "analytics platform": "plataforma analítica"
+  "module": "módulo"
+  "dashboard": "painel"
+  "visualization": "visualização"
+
+  # Workshop terms
+  "workshop": "workshop"
+  "participant": "participante"
+  "facilitator": "facilitador"
+  "hands-on": "prática"
+  "exercise": "exercício"
+  "group work": "trabalho em grupo"

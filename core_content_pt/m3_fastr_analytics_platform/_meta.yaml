@@ -1,0 +1,21 @@
+slides:
+- file: m3_1_overview_of_platform.md
+  order: 1.0
+  variant: full
+  title: Plataforma de análise FASTR
+- file: m3_1b_overview_of_platform_continued.md
+  order: 1.02
+  variant: full
+  title: Capacidades da plataforma
+- file: m3_2a_accessing_platform_continued.md
+  order: 2.01
+  variant: full
+  title: País Instância
+- file: m3_2b_accessing_platform_continued.md
+  order: 2.02
+  variant: full
+  title: Funções e permissões do utilizador
+- file: m3_2c_accessing_platform_continued.md
+  order: 2.03
+  variant: full
+  title: Projectos dentro de uma instância

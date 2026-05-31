@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 250" width="1100" height="250">
+  <defs>
+    <style>
+      .box { rx: 10; stroke-width: 2; }
+      .box-assess { fill: #1A90C0; stroke: #21568C; }
+      .box-adjust { fill: #BD5091; stroke: #7A1F6E; }
+      .box-util { fill: #1F9A9C; stroke: #0C716B; }
+      .box-coverage { fill: #D8A822; stroke: #09544F; }
+      .text-white { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+      .text-dark { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-sub { font-family: Inter, sans-serif; font-size: 10.5px; fill: #ffffff; text-anchor: middle; opacity: 0.9; }
+      .text-sub-dark { font-family: Inter, sans-serif; font-size: 10.5px; fill: #09544F; text-anchor: middle; opacity: 0.8; }
+      .module-label { font-family: Inter, sans-serif; font-size: 9px; fill: #888; text-anchor: middle; font-style: italic; }
+      .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { font-family: Inter, sans-serif; font-size: 9.5px; fill: #555; text-anchor: start; font-style: italic; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: Data Quality Assessment -->
+  <rect class="box box-assess" x="20" y="90" width="230" height="55"/>
+  <text class="text-white" x="135" y="112">Avaliação da qualidade dos dados</text>
+  <text class="text-sub" x="135" y="130">Exaustividade, valores anómalos, consistência</text>
+  <text class="module-label" x="135" y="158">Módulo 1</text>
+
+  <!-- Arrow M1 to M2 -->
+  <line class="arrow" x1="250" y1="118" x2="280" y2="118"/>
+
+  <!-- Step 2: Data Quality Adjustment -->
+  <rect class="box box-adjust" x="285" y="90" width="230" height="55"/>
+  <text class="text-white" x="400" y="112">Ajustamento da qualidade dos dados</text>
+  <text class="text-sub" x="400" y="130">Substituição de outliers, correção da integralidade</text>
+  <text class="module-label" x="400" y="158">Módulo 2</text>
+
+  <!-- Arrows splitting up and down -->
+  <path class="arrow" d="M 515 118 L 565 118 L 565 38 L 595 38"/>
+  <path class="arrow" d="M 515 118 L 565 118 L 565 198 L 595 198"/>
+
+  <!-- Label between branches -->
+  <text class="arrow-label" x="572" y="115">Dados ajustados e não ajustados</text>
+
+  <!-- Step 3: Service Utilization -->
+  <rect class="box box-util" x="600" y="10" width="480" height="55"/>
+  <text class="text-white" x="840" y="31">Utilização do serviço e deteção de interrupções</text>
+  <text class="text-sub" x="840" y="49">Volumes, tendências, desvios significativos</text>
+  <text class="module-label" x="840" y="78">Módulo 3</text>
+
+  <!-- Step 4: Coverage Estimation -->
+  <rect class="box box-coverage" x="600" y="170" width="480" height="55"/>
+  <text class="text-dark" x="840" y="191">Estimativa de cobertura</text>
+  <text class="text-sub-dark" x="840" y="208">Estimativa do denominador e cálculo da cobertura</text>
+  <text class="module-label" x="840" y="238">Módulos 5 e 6 (denominador + cobertura)</text>
+</svg>

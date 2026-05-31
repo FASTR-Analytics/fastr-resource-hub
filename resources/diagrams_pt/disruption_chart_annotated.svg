@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 380">
+  <defs>
+    <style>
+      text { font-family: Inter, sans-serif; }
+      .axis-label { font-size: 11px; fill: #666; }
+      .title { font-size: 14px; font-weight: 700; fill: #09544F; }
+      .annotation { font-size: 11px; fill: #09544F; font-weight: 600; }
+      .annotation-light { font-size: 10px; fill: #666; font-style: italic; }
+    </style>
+  </defs>
+
+  <!-- Y axis -->
+  <line x1="80" y1="40" x2="80" y2="300" stroke="#ccc" stroke-width="1"/>
+  <text class="axis-label" x="40" y="175" text-anchor="middle" transform="rotate(-90,40,175)">Volume de serviços</text>
+
+  <!-- X axis -->
+  <line x1="80" y1="300" x2="700" y2="300" stroke="#ccc" stroke-width="1"/>
+
+  <!-- X axis labels -->
+  <text class="axis-label" x="140" y="318" text-anchor="middle">Q1</text>
+  <text class="axis-label" x="220" y="318" text-anchor="middle">Q2</text>
+  <text class="axis-label" x="300" y="318" text-anchor="middle">Q3</text>
+  <text class="axis-label" x="380" y="318" text-anchor="middle">Q4</text>
+  <text class="axis-label" x="460" y="318" text-anchor="middle">Q1</text>
+  <text class="axis-label" x="540" y="318" text-anchor="middle">Q2</text>
+  <text class="axis-label" x="620" y="318" text-anchor="middle">Q3</text>
+  <text class="axis-label" x="260" y="335" text-anchor="middle" style="font-weight:600">2024</text>
+  <text class="axis-label" x="540" y="335" text-anchor="middle" style="font-weight:600">2025</text>
+
+  <!-- Expected line (dashed) -->
+  <path d="M100,220 L180,190 L260,210 L340,180 L420,170 L500,160 L580,175 L660,155"
+        stroke="#09544F" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+
+  <!-- Disruption area (red): the band between expected (upper edge) and the
+       lower actual line, where observed runs below expected (Q4 2024 → Q3 2025).
+       Upper edge follows the expected line; lower edge traces the actual line back. -->
+  <path d="M340,180 L420,170 L500,160 L580,175 L660,155 L660,160 L580,240 L500,250 L420,260 Z"
+        fill="#FDE8E8" stroke="none" opacity="0.7"/>
+
+  <!-- Surplus area (green): the band between the actual line (upper edge) and the
+       expected line (lower edge), where observed runs above expected (Q1 → Q4 2024). -->
+  <path d="M100,200 L180,160 L260,180 L340,180 L260,210 L180,190 L100,220 Z"
+        fill="#E8F4F3" stroke="none" opacity="0.7"/>
+
+  <!-- Actual line (solid) -->
+  <path d="M100,200 L180,160 L260,180 L340,180 L420,260 L500,250 L580,240 L660,160"
+        stroke="#09544F" stroke-width="2.5" fill="none"/>
+
+  <!-- Dots on actual line -->
+  <circle cx="100" cy="200" r="4" fill="#09544F"/>
+  <circle cx="180" cy="160" r="4" fill="#09544F"/>
+  <circle cx="260" cy="180" r="4" fill="#09544F"/>
+  <circle cx="340" cy="180" r="4" fill="#09544F"/>
+  <circle cx="420" cy="260" r="4" fill="#C53030"/>
+  <circle cx="500" cy="250" r="4" fill="#C53030"/>
+  <circle cx="580" cy="240" r="4" fill="#C53030"/>
+  <circle cx="660" cy="160" r="4" fill="#09544F"/>
+
+  <!-- Legend -->
+  <line x1="100" y1="355" x2="130" y2="355" stroke="#09544F" stroke-width="2.5"/>
+  <circle cx="115" cy="355" r="3" fill="#09544F"/>
+  <text class="axis-label" x="135" y="359">Observado (real)</text>
+
+  <line x1="280" y1="355" x2="310" y2="355" stroke="#09544F" stroke-width="2" stroke-dasharray="6,4"/>
+  <text class="axis-label" x="315" y="359">Previsto (previsto pelo FASTR)</text>
+
+  <rect x="510" y="349" width="14" height="14" fill="#FDE8E8" stroke="#C53030" stroke-width="0.5" rx="2"/>
+  <text class="axis-label" x="530" y="359">Perturbação</text>
+
+  <rect x="620" y="349" width="14" height="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="0.5" rx="2"/>
+  <text class="axis-label" x="640" y="359">Excedente</text>
+
+  <!-- Annotation arrows -->
+  <line x1="480" y1="95" x2="470" y2="245" stroke="#C53030" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text class="annotation" x="485" y="85" fill="#C53030">Perturbação detectada</text>
+  <text class="annotation-light" x="485" y="100">Serviços abaixo do previsto</text>
+
+  <line x1="175" y1="120" x2="178" y2="158" stroke="#0C716B" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text class="annotation" x="120" y="112" fill="#0C716B">Excedente</text>
+  <text class="annotation-light" x="100" y="127">Acima do esperado</text>
+</svg>

@@ -37,7 +37,7 @@ router.post('/save', (req, res) => {
     const { config, filename, language } = req.body as {
       config: DiagramRequest
       filename: string
-      language: 'en' | 'fr' | 'both'
+      language: 'en' | 'fr' | 'pt' | 'both'
     }
 
     if (!config || !filename) {

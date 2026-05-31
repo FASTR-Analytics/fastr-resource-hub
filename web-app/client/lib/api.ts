@@ -243,7 +243,7 @@ export const workshopAPI = {
   async getSlideContent(
     workshopId: string,
     ref: string,
-    language?: 'en' | 'fr',
+    language?: 'en' | 'fr' | 'pt',
   ): Promise<{ ref: string; filename: string; content: string; source: 'custom' | 'template' | 'library' }> {
     const params = new URLSearchParams({ ref })
     if (language) params.set('language', language)
@@ -256,7 +256,7 @@ export const workshopAPI = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Supported languages
-export type Language = 'en' | 'fr'
+export type Language = 'en' | 'fr' | 'pt'
 
 export const contentAPI = {
   /**
@@ -686,7 +686,7 @@ export const diagramAPI = {
     })
   },
 
-  async save(config: any, filename: string, language: 'en' | 'fr' | 'both'): Promise<{ paths: string[]; filename: string }> {
+  async save(config: any, filename: string, language: 'en' | 'fr' | 'pt' | 'both'): Promise<{ paths: string[]; filename: string }> {
     return fetchJSON('/diagrams/save', {
       method: 'POST',
       body: JSON.stringify({ config, filename, language }),

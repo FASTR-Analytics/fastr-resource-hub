@@ -9,11 +9,12 @@ Step 0: Extract slide content from methodology documentation.
 USAGE:
     python3 tools/00_extract_slides.py              # English (default)
     python3 tools/00_extract_slides.py --lang fr    # French
+    python3 tools/00_extract_slides.py --lang pt    # Portuguese (European)
 
 This script:
 1. Scans methodology/*.md files for <!-- SLIDE:xxx --> markers
 2. Extracts content between markers
-3. Generates/updates slide files in core_content/ (or core_content_fr/ for French)
+3. Generates/updates slide files in core_content/ (or core_content_{lang}/ for translations)
 
 Run this ONCE when setting up, or whenever methodology docs change.
 
@@ -662,7 +663,7 @@ Examples:
         '--lang', '-l',
         action='append',
         dest='languages',
-        choices=['en', 'fr'],
+        choices=['en', 'fr', 'pt'],
         help='Language(s) to extract (default: en). Can be specified multiple times.'
     )
     parser.add_argument(

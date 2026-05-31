@@ -109,7 +109,7 @@ function getTemplatesPath(language: Language = 'en'): string {
 }
 
 // Supported languages
-type Language = 'en' | 'fr'
+type Language = 'en' | 'fr' | 'pt' | 'pt'
 
 // Get core content path for a specific language
 function getCoreContentPath(language: Language = 'en'): string {
@@ -376,7 +376,7 @@ router.get('/modules', async (req, res) => {
 // Query params: ?language=fr (default: en)
 router.get('/themes', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
     const themes = loadThemesRegistry()
     res.json(themes.map(t => ({
       id: t.id,
@@ -531,7 +531,10 @@ router.get('/topic/:id', (req, res) => {
 // Templates
 // ─────────────────────────────────────────────────────────────────────────────
 
-const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
+// EN + FR have curated template categories. PT reuses EN as a fallback until
+// translated descriptions are added (the file references resolve via the
+// templates_pt/ folder, so PT users see the right template content).
+const TEMPLATE_CATEGORIES_BASE: Partial<Record<Language, any[]>> = {
   en: [
     {
       id: 'structure',
@@ -628,6 +631,15 @@ const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
       ]
     }
   ]
+}
+
+// EN is the source of truth for template categories. FR has translated labels.
+// PT falls back to EN labels until the catalog is translated (file references
+// still resolve through templates_pt/, so the actual slide content is PT).
+const TEMPLATE_CATEGORIES: Record<Language, any[]> = {
+  en: TEMPLATE_CATEGORIES_BASE.en!,
+  fr: TEMPLATE_CATEGORIES_BASE.fr!,
+  pt: TEMPLATE_CATEGORIES_BASE.en!,
 }
 
 // GET /api/content/templates - Get all templates
@@ -819,7 +831,7 @@ function findPdfInModuleDir(moduleDir: string, short: string): string | null {
 // is "01_facilitator_guide.pdf"), so a global glob would pick the wrong one.
 function resolvePdfUrl(
   stem: string,
-  language: 'en' | 'fr',
+  language: 'en' | 'fr' | 'pt' | 'pt',
   moduleId: string,
   type: HandoutType,
   moduleName: string | null
@@ -863,7 +875,7 @@ function resolvePdfUrl(
 // Query params: ?language=fr (default: en)
 router.get('/handouts', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
     const cacheKey = language
 
     // Bust cache when _order.yaml or _out/ changes (so rebuilt PDFs surface).
@@ -968,7 +980,7 @@ router.get('/handouts', (req, res) => {
 // GET /api/content/handouts/source/:moduleId/:file - Read handout markdown source
 router.get('/handouts/source/:moduleId/:file', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr'
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
     const moduleId = req.params.moduleId
     const file = req.params.file
 

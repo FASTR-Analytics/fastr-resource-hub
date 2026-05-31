@@ -1,0 +1,47 @@
+slides:
+- file: m1_1_what_is_data_use_case.md
+  order: 1.0
+  variant: full
+  title: O que é um caso de utilização de dados?
+- file: m1_1a_nigeria_quarterly_monitoring.md
+  order: 1.01
+  variant: full
+  title: 'Nigéria: Monitorização trimestral do desempenho'
+- file: m1_1a2_guinea_investment_tracking.md
+  order: 1.012
+  variant: full
+  title: 'Guiné: Acompanhamento do progresso do caso de investimento'
+- file: m1_1a3_ethiopia_program_monitoring.md
+  order: 1.013
+  variant: full
+  title: 'Etiópia: Monitorização dos resultados do programa do governo'
+- file: m1_1b_common_data_use_case.md
+  order: 1.02
+  variant: full
+  title: Qual é o nosso caso comum de utilização de dados que será o foco deste workshop?
+- file: m1_1c_how_select_indicators.md
+  order: 1.03
+  variant: full
+  title: Como seleccionamos os indicadores? O que é que faz um bom indicador para
+    a análise FASTR?
+- file: m1_2_fastr_core_indicators.md
+  order: 2.0
+  variant: full
+  title: Indicadores principais do FASTR
+- file: m1_2a_country_indicator_selection.md
+  order: 2.01
+  variant: full
+  title: Os países selecionaram indicadores para se alinharem com o contexto das perturbações
+    e as prioridades nacionais
+- file: m1_3_high_volume_indicators.md
+  order: 3.0
+  variant: full
+  title: Porquê concentrar-se em indicadores de grande volume?
+- file: m1_3a_high_completeness_indicators.md
+  order: 3.01
+  variant: full
+  title: Por que se concentrar em indicadores de alta completude?
+- file: m1_3b_count_indicators.md
+  order: 3.02
+  variant: full
+  title: Porquê concentrar-se em indicadores de contagem?

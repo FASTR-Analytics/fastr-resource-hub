@@ -1,0 +1,58 @@
+slides:
+- file: m2_0_show_of_hands_extraction.md
+  order: 0.0
+  variant: full
+  title: Mostra as mãos...
+- file: m2_1_why_extract_data.md
+  order: 1.0
+  variant: full
+  title: Porque é que extrairia dados do DHIS2? Porque não fazer a análise no próprio
+    DHIS2?
+- file: m2_1a_extract_counts_not_percentages.md
+  order: 1.01
+  variant: full
+  title: Extrair contagens, não percentagens
+- file: m2_1b_why_extract_data_continued.md
+  order: 1.02
+  variant: full
+  title: Formato e granularidade dos dados
+- file: m2_1d_why_extract_data_continued.md
+  order: 1.04
+  variant: full
+  title: Quantos dados?
+- file: m2_2_tools_for_data_extraction.md
+  order: 2.0
+  variant: full
+  title: Extração de dados
+- file: m2_2a_fastr_direct_import.md
+  order: 2.01
+  variant: full
+  title: Extração de dados
+- file: m2_2b_data_downloader.md
+  order: 2.02
+  variant: full
+  title: Descarregador de dados DHIS2
+- file: m2_2c_data_downloader_login.md
+  order: 2.03
+  variant: full
+  title: 'Descarregador de dados: Iniciar sessão'
+- file: m2_2d_data_downloader_overview.md
+  order: 2.04
+  variant: full
+  title: 'Descarregador de dados: Visão geral'
+- file: m2_2e_data_downloader_history.md
+  order: 2.05
+  variant: full
+  title: 'Descarregador de dados: Histórico de downloads'
+- file: m2_2f_data_downloader_dictionary.md
+  order: 2.06
+  variant: full
+  title: 'Descarregador de dados: Dicionário de dados'
+- file: m2_2g_data_downloader_facility_list.md
+  order: 2.07
+  variant: full
+  title: 'Descarregador de dados: Lista de instalações'
+- file: m2_2h_data_downloader_facility_map.md
+  order: 2.08
+  variant: full
+  title: 'Descarregador de dados: Mapa das instalações'

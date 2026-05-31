@@ -16,8 +16,8 @@ interface SidebarProps {
   libraryLabel: string
   settingsLabel: string
   // Footer
-  language: 'en' | 'fr'
-  onLanguageChange: (lang: 'en' | 'fr') => void
+  language: 'en' | 'fr' | 'pt' | 'pt'
+  onLanguageChange: (lang: 'en' | 'fr' | 'pt' | 'pt') => void
   signOutLabel: string
   onSignOut: () => void
   // Optional extra footer content (rendered above lang/signout row)

@@ -1,6 +1,6 @@
 // UI Translations for FASTR Deck Builder
 
-export type Language = 'en' | 'fr'
+export type Language = 'en' | 'fr' | 'pt' | 'pt'
 
 export const translations = {
   en: {
@@ -1061,5 +1061,8 @@ export const translations = {
 export type TranslationKey = keyof typeof translations.en
 
 export function t(key: TranslationKey, language: Language): string {
-  return translations[language][key] || translations.en[key] || key
+  // EN + FR have full coverage; PT is added incrementally — fall back to EN
+  // until a PT string is defined for a given key.
+  const langTable = (translations as Record<string, Record<string, string>>)[language] || translations.en
+  return langTable[key] || translations.en[key] || key
 }

@@ -1,0 +1,177 @@
+slides:
+- file: m6_0_from_adjusted_data_to_analysis.md
+  order: 0.0
+  variant: full
+  title: Dos dados ajustados à análise
+- file: m6_1_service_utilization_analysis.md
+  order: 1.0
+  variant: full
+  title: Análise da utilização de serviços
+- file: m6_1c_service_utilization_output.md
+  order: 1.03
+  variant: full
+  title: Produção de utilização de serviços
+- file: m6_1d_quarter_on_quarter_change.md
+  order: 1.04
+  variant: full
+  title: Variação trimestral em relação ao trimestre anterior
+- file: m6_1e_year_over_year_change.md
+  order: 1.05
+  variant: full
+  title: Mudança de ano para ano output
+- file: m6_1f_indicator_directionality.md
+  order: 1.06
+  variant: full
+  title: Direccionalidade do indicador
+- file: m6_2_service_disruptions_surpluses_detection.md
+  order: 2.0
+  variant: full
+  title: Deteção de interrupções e excedentes nos serviços
+- file: m6_2b_how_disruption_detection_works.md
+  order: 2.02
+  variant: full
+  title: Como funciona a deteção de interrupções
+- file: m6_2d_service_disruption_output.md
+  order: 2.04
+  variant: full
+  title: Saída de interrupção de serviço
+- file: m6_5a_service_utilization_configuration_parameters.md
+  order: 5.01
+  variant: full
+  title: 'Módulo de utilização de serviços: Parâmetros de configuração'
+- file: m6_5b_coverage_section_opener.md
+  order: 5.02
+  variant: full
+  title: Estimativa de cobertura
+- file: m6_6_service_coverage_introduction.md
+  order: 6.0
+  variant: full
+  title: Estimativa de cobertura de serviço
+- file: m6_6b_service_coverage_introduction.md
+  order: 6.02
+  variant: full
+  title: A nossa abordagem à análise da cobertura dos serviços
+- file: m6_6c_service_coverage_introduction.md
+  order: 6.03
+  variant: full
+  title: Processo analítico em duas partes
+- file: m6_7_definition_of_coverage.md
+  order: 7.0
+  variant: full
+  title: Exemplo de cobertura de serviços
+- file: m6_8_denominators_by_service_type.md
+  order: 8.0
+  variant: full
+  title: Denominadores por tipo de serviço
+- file: m6_9_demographic_cascade.md
+  order: 9.0
+  variant: full
+  title: Relações esperadas que ajudam na estimativa de denominadores
+- file: m6_10_denominator_cascade_illustration.md
+  order: 10.0
+  variant: full
+  title: Estimando denominadores a partir de ANC-1
+- file: m6_11_deriving_denominators_from_entry_points.md
+  order: 11.0
+  variant: full
+  title: Derivando denominadores de pontos de entrada
+- file: m6_13_denominator_selection_methodology.md
+  order: 13.0
+  variant: full
+  title: Metodologia de seleção do denominador
+- file: m6_14_coverage_output_national.md
+  order: 14.0
+  variant: full
+  title: 'Saída de cobertura: Tendências nacionais'
+- file: m6_14b_coverage_output_subnational.md
+  order: 14.02
+  variant: full
+  title: 'Saída de cobertura: Comparação subnacional'
+- file: m6_19_coverage_configuration_parameters.md
+  order: 19.0
+  variant: full
+  title: 'Módulo de cobertura: Parâmetros de configuração'
+- file: m6_20_fastr_pipeline_adds_on_top_of_dhis2.md
+  order: 20.0
+  variant: full
+  title: O que o pipeline FASTR acrescenta ao DHIS2
+- file: m6_21_key_takeaway.md
+  order: 21.0
+  variant: full
+  title: Principais conclusões
+- file: m6_s00_module_overview.md
+  order: 0.0
+  variant: condensed
+  title: Análise de dados
+- file: m6_s0b_what_is_service_utilization.md
+  order: 0.02
+  variant: condensed
+  title: O que é utilização de serviço?
+- file: m6_s0c_indicator_directionality.md
+  order: 0.03
+  variant: condensed
+  title: Direccionalidade do indicador
+- file: m6_s1_utilization_overview.md
+  order: 1.0
+  variant: condensed
+  title: Análise da utilização de serviços
+- file: m6_s1a_quarter_on_quarter_change.md
+  order: 1.01
+  variant: condensed
+  title: Variação trimestral
+- file: m6_s1b_utilization_overview.md
+  order: 1.02
+  variant: condensed
+  title: Mudança de ano para ano output
+- file: m6_s2_utilization_detecting_changes.md
+  order: 2.0
+  variant: condensed
+  title: 'Utilização de serviços: detectando mudanças'
+- file: m6_s2b_disruption_interpretation.md
+  order: 2.02
+  variant: condensed
+  title: Saída de interrupção de serviço
+- file: m6_s3_coverage_methods.md
+  order: 3.0
+  variant: condensed
+  title: O que é cobertura?
+- file: m6_s3c_coverage_example.md
+  order: 3.03
+  variant: condensed
+  title: 'Exemplo de cobertura de serviço: ANC4+'
+- file: m6_s3f_five_denominator_options.md
+  order: 3.06
+  variant: condensed
+  title: Cinco opções de denominador para análise FASTR
+- file: m6_s3g_how_fastr_estimates_coverage.md
+  order: 3.07
+  variant: condensed
+  title: Como o FASTR estima a cobertura
+- file: m6_s3ga_demographic_relationships_intro.md
+  order: 3.0701
+  variant: condensed
+  title: Usando relações demográficas para estimar denominadores
+- file: m6_s3h_expected_relationships.md
+  order: 3.08
+  variant: condensed
+  title: Relações esperadas que ajudam na estimativa de denominadores
+- file: m6_s3j_four_parallel_chains.md
+  order: 3.1
+  variant: condensed
+  title: Quatro cadeias paralelas, o melhor ajuste vence
+- file: m6_s4_coverage_interpretation.md
+  order: 4.0
+  variant: condensed
+  title: 'Saída de cobertura: Tendências nacionais'
+- file: m6_s4b_coverage_interpretation.md
+  order: 4.02
+  variant: condensed
+  title: 'Saída de cobertura: Comparação subnacional'
+- file: m6_s6_fastr_value_beyond_dhis2.md
+  order: 6.0
+  variant: condensed
+  title: O que o pipeline FASTR acrescenta ao DHIS2
+- file: m6_s7_key_takeaway.md
+  order: 7.0
+  variant: condensed
+  title: Principais conclusões

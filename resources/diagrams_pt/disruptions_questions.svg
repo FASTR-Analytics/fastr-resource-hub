@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ STORYLINE: from shock to response ============ -->
+
+  <!-- connecting chevrons between cards -->
+  <path d="M243 163 L255 175 L243 187" fill="none" stroke="#C53030" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M494 161 L508 175 L494 189" fill="none" stroke="#0C716B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M745 163 L757 175 L745 187" fill="none" stroke="#1F9A9C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== Card 1 — Funding shifts ===== -->
+  <rect x="16" y="58" width="215" height="234" rx="16" fill="#FDE8E8" stroke="#C53030" stroke-width="1.5"/>
+  <circle cx="123.5" cy="116" r="27" fill="#C53030"/>
+  <path d="M123.5 102 V128 M113.5 119 L123.5 130 L133.5 119" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="123.5" y="184" text-anchor="middle" font-size="20" font-weight="700" fill="#C53030">Mudanças de financiamento</text>
+  <text x="123.5" y="220" text-anchor="middle" font-size="14.5" fill="#5A6562">
+    <tspan x="123.5" dy="0">Saúde externa</tspan>
+    <tspan x="123.5" dy="22">o financiamento está a mudar</tspan>
+  </text>
+
+  <!-- ===== Card 2 — What's affected? ===== -->
+  <rect x="267" y="58" width="215" height="234" rx="16" fill="#F8D7D5" stroke="#C53030" stroke-width="1.5"/>
+  <circle cx="374.5" cy="116" r="27" fill="#C53030"/>
+  <text x="374.5" y="117" text-anchor="middle" dominant-baseline="central" font-size="30" font-weight="800" fill="#fff">?</text>
+  <text x="374.5" y="184" text-anchor="middle" font-size="20" font-weight="700" fill="#C53030">O que é afetado?</text>
+  <text x="374.5" y="216" text-anchor="middle" font-size="14.5" fill="#5A6562">
+    <tspan x="374.5" dy="0">Que RMNCAH-N</tspan>
+    <tspan x="374.5" dy="22">serviços e domínios</tspan>
+    <tspan x="374.5" dy="22">estão a mudar</tspan>
+  </text>
+
+  <!-- ===== Card 3 — FASTR (the turn) ===== -->
+  <rect x="518" y="58" width="215" height="234" rx="16" fill="#09544F"/>
+  <circle cx="625.5" cy="116" r="27" fill="#D0CB17"/>
+  <g fill="#09544F">
+    <rect x="612" y="114" width="6.5" height="14" rx="1"/>
+    <rect x="622.25" y="106" width="6.5" height="22" rx="1"/>
+    <rect x="632.5" y="119" width="6.5" height="9" rx="1"/>
+  </g>
+  <text x="625.5" y="186" text-anchor="middle" font-size="25" font-weight="800" fill="#ffffff" letter-spacing="0.5">FASTR</text>
+  <text x="625.5" y="218" text-anchor="middle" font-size="14.5" fill="#CAE6E9">
+    <tspan x="625.5" dy="0">Lê os dados DHIS2</tspan>
+    <tspan x="625.5" dy="22">que já colecciona.</tspan>
+    <tspan x="625.5" dy="22">Não há novos inquéritos.</tspan>
+  </text>
+
+  <!-- ===== Card 4 — Act in time ===== -->
+  <rect x="769" y="58" width="215" height="234" rx="16" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <circle cx="876.5" cy="116" r="27" fill="#0C716B"/>
+  <path d="M864 116 L872.5 125 L889 107" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="876.5" y="184" text-anchor="middle" font-size="20" font-weight="700" fill="#09544F">Agir a tempo</text>
+  <g font-size="14.5" fill="#5A6562">
+    <circle cx="800" cy="211" r="3" fill="#D0CB17"/><text x="811" y="216">Detetar precocemente as perturbações</text>
+    <circle cx="800" cy="233" r="3" fill="#D0CB17"/><text x="811" y="238">Dar prioridade ao que é importante</text>
+    <circle cx="800" cy="255" r="3" fill="#D0CB17"/><text x="811" y="260">Planear e defender</text>
+  </g>
+</svg>

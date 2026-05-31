@@ -88,7 +88,7 @@ function mapModeToNav(mode: AppMode): SidebarNavId {
 // ─────────────────────────────────────────────────────────────────────────────
 // Slide Preview with prev/next navigation — shows one slide at a time
 // ─────────────────────────────────────────────────────────────────────────────
-function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: string[]; contentLanguage: 'en' | 'fr' }) {
+function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: string[]; contentLanguage: 'en' | 'fr' | 'pt' }) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slideCount, setSlideCount] = useState(0)

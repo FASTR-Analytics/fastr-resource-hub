@@ -14,7 +14,7 @@ interface DiagramBuilderProps {
    * caller uses it as the slide's H1 and (when undefined) falls back to a
    * placeholder derived from the filename. */
   onSaved?: (paths: string[], title?: string) => void
-  language: 'en' | 'fr'
+  language: 'en' | 'fr' | 'pt'
 }
 
 type TemplateType =
@@ -29,7 +29,7 @@ type TemplateType =
 
 interface TemplateOption {
   type: TemplateType
-  name: { en: string; fr: string }
+  name: { en: string; fr: string; pt?: string }
   thumbnail: JSX.Element
 }
 

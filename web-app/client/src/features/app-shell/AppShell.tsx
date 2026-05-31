@@ -9,8 +9,8 @@ interface AppShellProps {
   workshopsLabel: string
   libraryLabel: string
   settingsLabel: string
-  language: 'en' | 'fr'
-  onLanguageChange: (lang: 'en' | 'fr') => void
+  language: 'en' | 'fr' | 'pt'
+  onLanguageChange: (lang: 'en' | 'fr' | 'pt') => void
   signOutLabel: string
   onSignOut: () => void
   sidebarFooterExtra?: ReactNode

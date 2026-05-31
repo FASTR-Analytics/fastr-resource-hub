@@ -1,0 +1,65 @@
+slides:
+- file: m7_1_analytical_thinking_interpretation.md
+  order: 1.0
+  variant: full
+  title: Pensamento analítico e interpretação
+- file: m7_1a_analytical_thinking_interpretation_continued.md
+  order: 1.01
+  variant: full
+  title: Lista de verificação do pensamento crítico
+- file: m7_1b_analytical_thinking_interpretation_continued.md
+  order: 1.02
+  variant: full
+  title: Armadilhas comuns de interpretação
+- file: m7_1c_analytical_thinking_interpretation_continued.md
+  order: 1.03
+  variant: full
+  title: Interpretando as saídas do módulo FASTR
+- file: m7_2_data_visualization_communication.md
+  order: 2.0
+  variant: full
+  title: Passando dos dados para as mensagens-chave
+- file: m7_2a_data_visualization_communication_continued.md
+  order: 2.01
+  variant: full
+  title: 'Exemplo: resultado → conclusão principal'
+- file: m7_2b_data_visualization_communication_continued.md
+  order: 2.02
+  variant: full
+  title: Escolher o formato de relatório correto
+- file: m7_4_understanding_audience_user_mapping.md
+  order: 4.0
+  variant: full
+  title: 'Compreender o seu público: Mapeamento do utilizador'
+- file: m7_5_storytelling_with_data.md
+  order: 5.0
+  variant: full
+  title: Contar histórias com dados
+- file: m7_5a_from_data_to_story_example.md
+  order: 5.01
+  variant: full
+  title: 'Dos dados à história: exemplo'
+- file: m7_6_linking_results_to_actions.md
+  order: 6.0
+  variant: full
+  title: Ligar resultados a acções
+- file: m7_6b_three_spheres_of_influence.md
+  order: 6.02
+  variant: full
+  title: Três esferas de influência
+- file: m7_6c_linking_results_to_actions_continued.md
+  order: 6.03
+  variant: full
+  title: Seis perguntas para transformar resultados em acções
+- file: m7_6d_dissemination_and_data_use_roadmap.md
+  order: 6.04
+  variant: full
+  title: Roteiro de divulgação e utilização de dados
+- file: m7_7_building_roadmap_sustained_use.md
+  order: 7.0
+  variant: full
+  title: Construir um roteiro para uma utilização sustentada
+- file: m7_7a_peer_review_action_plans.md
+  order: 7.01
+  variant: full
+  title: Revisão pelos pares dos planos de ação

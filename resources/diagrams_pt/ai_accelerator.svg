@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" font-family="Inter, Helvetica, Arial, sans-serif">
+  <!-- ============ AI ACCELERATOR — narrow, monochrome-teal, hierarchical ============ -->
+
+  <!-- DECIDES band label (top-left, subtle) -->
+  <text x="40" y="34" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">DECIDE</text>
+
+  <!-- Human card (top, big, white with deep-green border) -->
+  <rect x="180" y="44" width="360" height="116" rx="14" fill="#ffffff" stroke="#09544F" stroke-width="2"/>
+  <!-- Human icon: head + shoulders, deep-green -->
+  <g transform="translate(360, 70)" fill="#09544F">
+    <circle cx="0" cy="0" r="11"/>
+    <path d="M-18 26 Q-18 12 0 12 Q18 12 18 26 Z"/>
+  </g>
+  <text x="360" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#09544F">Decisor humano</text>
+  <text x="360" y="146" text-anchor="middle" font-size="13" fill="#5A6562">Julgamento - Responsabilidade - Ação</text>
+
+  <!-- Divider line (hairline) -->
+  <line x1="40" y1="200" x2="680" y2="200" stroke="#E4E7E5" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Upward arrow from FASTR to human (signals "supports") -->
+  <path d="M360 192 V232 M348 204 L360 192 L372 204" fill="none" stroke="#0C716B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="382" y="218" font-size="11" font-weight="600" fill="#0C716B" letter-spacing="0.5">apoios</text>
+
+  <!-- SUPPORTS band label -->
+  <text x="40" y="222" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">APOIOS</text>
+
+  <!-- FASTR AI Assistant pill (deep-green, hero element) -->
+  <rect x="220" y="244" width="280" height="62" rx="31" fill="#09544F"/>
+  <text x="360" y="270" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">Assistente de IA FASTR</text>
+  <text x="360" y="291" text-anchor="middle" font-size="12" fill="#CAE6E9">Baseado nos seus dados</text>
+
+  <!-- Branch lines from FASTR pill down to three children -->
+  <path d="M360 306 V336 H140 V356 M360 336 H360 V356 M360 336 H580 V356"
+        fill="none" stroke="#0C716B" stroke-width="1.5"/>
+
+  <!-- Three children, identical light-teal style (no rainbow) -->
+  <!-- 1. Interpretation -->
+  <rect x="40" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="140" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Interpretação</text>
+  <text x="140" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Explica o</text>
+  <text x="140" y="425" text-anchor="middle" font-size="12" fill="#5A6562">padrões que vê</text>
+
+  <!-- 2. Querying (centered under FASTR) -->
+  <rect x="260" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="360" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Consulta</text>
+  <text x="360" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Achados e superfícies</text>
+  <text x="360" y="425" text-anchor="middle" font-size="12" fill="#5A6562">dados relevantes</text>
+
+  <!-- 3. Outputs -->
+  <rect x="480" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <text x="580" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Saídas</text>
+  <text x="580" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Rascunhos de gráficos,</text>
+  <text x="580" y="425" text-anchor="middle" font-size="12" fill="#5A6562">diapositivos, relatórios</text>
+</svg>

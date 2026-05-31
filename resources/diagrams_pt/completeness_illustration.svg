@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="103 34 436 188" font-family="'Poppins', sans-serif">
+  <defs>
+    <style>
+      .cell-reported { fill: #1F9A9C; }
+      .cell-missing { fill: #E5E5E5; }
+      .axis { font-size: 12px; font-weight: 600; fill: #555; }
+      .tick { font-size: 11px; fill: #888; }
+      .legend { font-size: 12px; fill: #444; }
+      .big { font-size: 30px; font-weight: 700; fill: #09544F; }
+      .small { font-size: 11px; fill: #777; }
+    </style>
+  </defs>
+
+  <!-- Row A — fully reported -->
+  <rect class="cell-reported" x="120" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="154" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="188" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="222" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="256" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="290" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="324" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="358" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="392" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="426" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="460" y="46" width="28" height="18" rx="2"/><rect class="cell-reported" x="494" y="46" width="28" height="18" rx="2"/>
+
+  <!-- Row B — 2 missing -->
+  <rect class="cell-reported" x="120" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="154" y="71" width="28" height="18" rx="2"/><rect class="cell-missing" x="188" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="222" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="256" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="290" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="324" y="71" width="28" height="18" rx="2"/><rect class="cell-missing" x="358" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="392" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="426" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="460" y="71" width="28" height="18" rx="2"/><rect class="cell-reported" x="494" y="71" width="28" height="18" rx="2"/>
+
+  <!-- Row C — 4 missing -->
+  <rect class="cell-reported" x="120" y="96" width="28" height="18" rx="2"/><rect class="cell-missing" x="154" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="188" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="222" y="96" width="28" height="18" rx="2"/><rect class="cell-missing" x="256" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="290" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="324" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="358" y="96" width="28" height="18" rx="2"/><rect class="cell-missing" x="392" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="426" y="96" width="28" height="18" rx="2"/><rect class="cell-missing" x="460" y="96" width="28" height="18" rx="2"/><rect class="cell-reported" x="494" y="96" width="28" height="18" rx="2"/>
+
+  <!-- Row D — fully reported -->
+  <rect class="cell-reported" x="120" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="154" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="188" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="222" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="256" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="290" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="324" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="358" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="392" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="426" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="460" y="121" width="28" height="18" rx="2"/><rect class="cell-reported" x="494" y="121" width="28" height="18" rx="2"/>
+
+  <!-- Row E — 6 missing -->
+  <rect class="cell-missing" x="120" y="146" width="28" height="18" rx="2"/><rect class="cell-missing" x="154" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="188" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="222" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="256" y="146" width="28" height="18" rx="2"/><rect class="cell-missing" x="290" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="324" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="358" y="146" width="28" height="18" rx="2"/><rect class="cell-reported" x="392" y="146" width="28" height="18" rx="2"/><rect class="cell-missing" x="426" y="146" width="28" height="18" rx="2"/><rect class="cell-missing" x="460" y="146" width="28" height="18" rx="2"/><rect class="cell-missing" x="494" y="146" width="28" height="18" rx="2"/>
+
+  <!-- legend -->
+  <rect class="cell-reported" x="120" y="192" width="14" height="14" rx="2"/>
+  <text class="legend" x="140" y="203">comunicada</text>
+  <rect class="cell-missing" x="210" y="192" width="14" height="14" rx="2"/>
+  <text class="legend" x="230" y="203">em falta</text>
+
+  <!-- result -->
+  <text class="big" x="522" y="200" text-anchor="end">80% concluído</text>
+  <text class="small" x="522" y="218" text-anchor="end">chegaram 48 dos 60 relatórios mensais</text>
+</svg>

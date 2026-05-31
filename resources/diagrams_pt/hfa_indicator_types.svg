@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 580" width="1400" height="580">
+  <style>
+    .header { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #1A8A8A; }
+    .subtext { font-family: Arial, sans-serif; font-size: 14px; fill: #666666; }
+    .frequency { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .question { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .select-type { font-family: Arial, sans-serif; font-size: 16px; font-style: italic; fill: #1A8A8A; }
+    .options { font-family: Arial, sans-serif; font-size: 16px; fill: #333333; }
+    .line { stroke: #1A8A8A; stroke-width: 2; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1400" height="580" fill="white"/>
+
+  <!-- Column 1: Health Facility Assessment -->
+  <g transform="translate(40, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">Estabelecimento de saúde</tspan>
+      <tspan x="130" dy="28">Avaliação*</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="90">
+      <tspan x="0" dy="0">Extraído de HFAs validados;</tspan>
+      <tspan x="0" dy="18">sem que se espere um elevado</tspan>
+      <tspan x="0" dy="18">variação de frequência</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Pergunta anual</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">É a principal fonte de</tspan>
+      <tspan x="0" dy="22">abastecimento de água situado em</tspan>
+      <tspan x="0" dy="22">as instalações do estabelecimento (no</tspan>
+      <tspan x="0" dy="22">edifício, ou dentro de uma instalação</tspan>
+      <tspan x="0" dy="22">motivos)?</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[seleção única]</text>
+
+    <!-- Options -->
+    <text class="options" x="0" y="400">
+      <tspan x="0" dy="0">1.Sim</tspan>
+      <tspan x="0" dy="24">2.Não</tspan>
+      <tspan x="0" dy="24">-99 Não sabe</tspan>
+    </text>
+  </g>
+
+  <!-- Column 2: High variance tracer -->
+  <g transform="translate(360, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">Variação elevada</tspan>
+      <tspan x="130" dy="28">rastreador*</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="90">
+      <tspan x="0" dy="0">Extraído de HFAs validados;</tspan>
+      <tspan x="0" dy="18">esperar que os traçadores mudem</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Pergunta trimestral</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Nos últimos 7 dias, foi</tspan>
+      <tspan x="0" dy="22">em qualquer altura em que o</tspan>
+      <tspan x="0" dy="22">as instalações não dispunham de água</tspan>
+      <tspan x="0" dy="22">disponível?</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[seleção única]</text>
+
+    <!-- Options -->
+    <text class="options" x="0" y="400">
+      <tspan x="0" dy="0">1.Sim</tspan>
+      <tspan x="0" dy="24">2. Não</tspan>
+      <tspan x="0" dy="24">-99 Não sabe</tspan>
+    </text>
+  </g>
+
+  <!-- Column 3: Perception -->
+  <g transform="translate(680, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="130">
+      <tspan x="130" dy="0">Perceção</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="62">
+      <tspan x="0" dy="0">Perspectivas da linha da frente</tspan>
+      <tspan x="0" dy="18">gestores</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="260" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" x="0" y="175">Pergunta trimestral</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Descrever como o</tspan>
+      <tspan x="0" dy="22">desafios em matéria de infra-estruturas</tspan>
+      <tspan x="0" dy="22">afectaram a saúde</tspan>
+      <tspan x="0" dy="22">e a sua capacidade de</tspan>
+      <tspan x="0" dy="22">prestar serviços.</tspan>
+    </text>
+
+    <!-- Select type -->
+    <text class="select-type" text-anchor="middle" x="130" y="360">[texto descritivo]</text>
+  </g>
+
+  <!-- Column 4: Exploratory -->
+  <g transform="translate(1000, 40)">
+    <!-- Header -->
+    <text class="header" text-anchor="middle" x="160">
+      <tspan x="160" dy="0">Exploratório</tspan>
+    </text>
+
+    <!-- Subtext -->
+    <text class="subtext" x="0" y="62">
+      <tspan x="0" dy="0">Identificar lacunas para a próxima ronda</tspan>
+      <tspan x="0" dy="18">adaptação</tspan>
+    </text>
+
+    <!-- Line -->
+    <line class="line" x1="0" y1="150" x2="320" y2="150"/>
+
+    <!-- Frequency -->
+    <text class="frequency" text-anchor="middle" x="160" y="175">Varia</text>
+
+    <!-- Question -->
+    <text class="question" x="0" y="215">
+      <tspan x="0" dy="0">Por vezes, as instalações sofrem</tspan>
+      <tspan x="0" dy="22">rupturas de stock de medicamentos ou de fornecimentos em</tspan>
+      <tspan x="0" dy="22">nos últimos três meses, para cada um dos</tspan>
+      <tspan x="0" dy="22">as seguintes categorias de serviços,</tspan>
+      <tspan x="0" dy="22">com que frequência o faz:</tspan>
+    </text>
+
+    <!-- Options -->
+    <text class="options" x="40" y="360">
+      <tspan x="40" dy="0">a.   Rutura de stocks de produtos para as DNT</tspan>
+      <tspan x="40" dy="24">b.   Faltas de stock de material para</tspan>
+      <tspan x="70" dy="22">doença infecciosa</tspan>
+      <tspan x="40" dy="24">c.   Faltas de stock de material para</tspan>
+      <tspan x="70" dy="22">Serviços RMNCA</tspan>
+    </text>
+  </g>
+</svg>

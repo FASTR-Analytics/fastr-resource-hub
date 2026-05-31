@@ -1,0 +1,30 @@
+slides:
+- file: m0_1_what_is_fastr.md
+  order: 1.0
+  variant: full
+  title: O que é FASTR?
+- file: m0_2_what_are_we_trying_to_achieve.md
+  order: 2.0
+  variant: full
+  title: O que estamos a tentar alcançar?
+- file: m0_3_analyze_learn_strengthen_act.md
+  order: 3.0
+  variant: full
+  title: 'Uma abordagem: analisar, aprender, reforçar, agir'
+- file: m0_4_four_complementary_pillars.md
+  order: 4.0
+  variant: full
+  title: Quatro pilares complementares
+- file: m0_5_how_countries_use_fastr.md
+  order: 5.0
+  variant: full
+  title: Como é que os países usam o FASTR?
+- file: m0_6_fastr_approach_rmncahn.md
+  order: 6.0
+  variant: full
+  title: Qual é a abordagem do FASTR à monitorização da utilização dos serviços da
+    RMNCAH-N?
+- file: m0_7_from_analysis_to_action.md
+  order: 7.0
+  variant: full
+  title: Da análise à ação

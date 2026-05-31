@@ -1,0 +1,139 @@
+slides:
+- file: m4_0_fastr_analytical_pipeline.md
+  order: 0.0
+  variant: full
+  title: Pipeline analítico FASTR
+- file: m4_1_approach_to_dqa.md
+  order: 1.0
+  variant: full
+  title: Abordagem FASTR à qualidade dos dados
+- file: m4_1a_measures_data_quality_detailed.md
+  order: 1.01
+  variant: full
+  title: Medidas de qualidade dos dados - detalhadas
+- file: m4_1b_approach_to_dqa.md
+  order: 1.02
+  variant: full
+  title: Fundamentação para a avaliação da qualidade dos dados
+- file: m4_1e_fastr_vs_dhis2_dqa.md
+  order: 1.05
+  variant: full
+  title: Como é que a análise da qualidade dos dados FASTR difere da análise DQA feita
+    no DHIS2?
+- file: m4_1f_fastr_vs_dhis2_dqa_continued.md
+  order: 1.06
+  variant: full
+  title: Como é que a análise da qualidade dos dados FASTR difere da análise DQA feita
+    no DHIS2?
+- file: m4_2_indicator_completeness.md
+  order: 2.0
+  variant: full
+  title: Completude do indicador
+- file: m4_2a_notes_on_completeness.md
+  order: 2.01
+  variant: full
+  title: Notas sobre a exaustividade
+- file: m4_2b_indicator_completeness_output.md
+  order: 2.02
+  variant: full
+  title: Indicador de completude de saída
+- file: m4_3_outliers.md
+  order: 3.0
+  variant: full
+  title: Outliers
+- file: m4_3a_outlier_investigation.md
+  order: 3.01
+  variant: full
+  title: Investigando um outlier sinalizado
+- file: m4_3c_outlier_detection_methodology.md
+  order: 3.03
+  variant: full
+  title: Metodologia de deteção de outlier
+- file: m4_3d_outlier_detection_output.md
+  order: 3.04
+  variant: full
+  title: Saída de deteção de outlier
+- file: m4_4_internal_consistency.md
+  order: 4.0
+  variant: full
+  title: Consistência entre indicadores relacionados
+- file: m4_4b_internal_consistency.md
+  order: 4.02
+  variant: full
+  title: Porquê avaliar a consistência a nível distrital?
+- file: m4_4c_internal_consistency_output.md
+  order: 4.03
+  variant: full
+  title: Saída de consistência interna
+- file: m4_5_overall_dqa_score.md
+  order: 5.0
+  variant: full
+  title: Pontuação resumida da qualidade dos dados
+- file: m4_5c_overall_dqa_score_output.md
+  order: 5.03
+  variant: full
+  title: Resultado da pontuação geral da qualidade dos dados
+- file: m4_5d_mean_dqa_score_output.md
+  order: 5.04
+  variant: full
+  title: Saída da pontuação média do DQA
+- file: m4_5e_quick_interpretation_guide.md
+  order: 5.05
+  variant: full
+  title: Guia de interpretação rápida
+- file: m4_6_dqa_configuration_parameters.md
+  order: 6.0
+  variant: full
+  title: 'Módulo DQA: Parâmetros de configuração'
+- file: m4_s0_fastr_analytical_pipeline.md
+  order: 0.0
+  variant: condensed
+  title: Pipeline analítico FASTR
+- file: m4_s1b_dqa_pipeline_overview.md
+  order: 1.02
+  variant: condensed
+  title: Abordagem FASTR para a qualidade dos dados
+- file: m4_s2_dqa_rationale_objectives.md
+  order: 2.0
+  variant: condensed
+  title: Fundamentação para a avaliação da qualidade dos dados
+- file: m4_s2b_dqa_rationale_objectives.md
+  order: 2.02
+  variant: condensed
+  title: Objectivos da avaliação da qualidade dos dados
+- file: m4_s3_dqa_completeness.md
+  order: 3.0
+  variant: condensed
+  title: Completude do indicador
+- file: m4_s3a_dqa_completeness_output.md
+  order: 3.01
+  variant: condensed
+  title: Indicador de completude de saída
+- file: m4_s3b_dqa_outliers.md
+  order: 3.02
+  variant: condensed
+  title: Deteção de outlier
+- file: m4_s3bb_outlier_detection_output.md
+  order: 3.0202
+  variant: condensed
+  title: Saída de deteção de outlier
+- file: m4_s4_dqa_internal_consistency.md
+  order: 4.0
+  variant: condensed
+  title: Consistência interna
+- file: m4_s4b_dqa_internal_consistency.md
+  order: 4.02
+  variant: condensed
+  title: Saída de consistência interna
+- file: m4_s5_dqa_score_summary.md
+  order: 5.0
+  variant: condensed
+  title: Pontuação resumida da qualidade dos dados
+- file: m4_s5b_dqa_score_summary.md
+  order: 5.02
+  variant: condensed
+  title: Resultado da pontuação geral da qualidade dos dados
+- file: m4_s5c_dqa_score_summary.md
+  order: 5.03
+  variant: condensed
+  title: Saída da pontuação média do DQA

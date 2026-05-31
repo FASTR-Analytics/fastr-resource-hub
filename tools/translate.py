@@ -429,6 +429,11 @@ def translate_content(
         return text
 
     target_lang = target_lang.upper()
+    # Aliases: callers passing 'PT' (the folder-name convention) get European
+    # Portuguese — Brazilian Portuguese is opt-in via explicit 'PT-BR'. DeepL's
+    # API rejects bare 'PT', so the alias is mandatory, not a convenience.
+    LANG_ALIASES = {'PT': 'PT-PT'}
+    target_lang = LANG_ALIASES.get(target_lang, target_lang)
 
     # Check cache first
     if use_cache:

@@ -544,24 +544,62 @@ web-app/
 ### Content Pipeline
 
 ```
-methodology/*.md          # Source of truth (you edit this)
+methodology/*.md          # English source of truth (you edit this)
        │
-       ▼ (python tools/00_extract_slides.py)
+       ├──────────────────▼ (python tools/translate_docs.py --lang fr / pt)
+       │                  │
+       │           methodology/fr/*.md, methodology/pt/*.md
+       │                  │     DeepL-translated, AUTO-TRANSLATED marker,
+       │                  │     promoted to REVIEWED after human pass
+       │                  │
+       ▼ (python tools/00_extract_slides.py [--lang en|fr|pt])
        │
-core_content/             # Extracted slides per module
+core_content/             # EN — extracted slides per module
+core_content_fr/          # FR — extracted slides per module
+core_content_pt/          # PT — extracted slides per module (European)
        │
        ▼ (server reads on startup)
        │
-Content Library API       # Serves to frontend
+Content Library API       # Serves to frontend, language-aware
        │
-       ▼ (user browses & selects)
+       ▼ (user browses & selects, picks workshop language)
        │
 Workshop Config           # Saved to Turso database
        │
-       ▼ (user clicks Export)
+       ▼ (user clicks Export — buildMarkdown(id, config, lang))
        │
-Final Deck (PPTX/PDF)     # Built from config + content
+Final Deck (PPTX/PDF)     # Built from config + per-language content
 ```
+
+### Languages (i18n)
+
+The app supports three workshop languages:
+
+| Code | Language | Content folders | Workshop-chrome strings |
+|------|----------|-----------------|------------------------|
+| `en` | English (American) | `core_content/`, `templates/` | EN — source |
+| `fr` | French | `core_content_fr/`, `templates_fr/` | FR — manually maintained |
+| `pt` | Portuguese (European, PT-PT) | `core_content_pt/`, `templates_pt/` | PT — manually maintained |
+
+**Per-language content lives in parallel folders:**
+- `methodology/`, `methodology/fr/`, `methodology/pt/` — methodology source (Markdown)
+- `core_content/`, `core_content_fr/`, `core_content_pt/` — extracted slides
+- `templates/`, `templates_fr/`, `templates_pt/` — workshop scaffolding (title, day_title, breaks, agenda, day_recap, day_end, welcome, meeting_norms, etc.)
+- `resources/diagrams/`, `resources/diagrams_fr/`, `resources/diagrams_pt/` — language-specific diagrams. EN is the default; FR and PT have partial sets — when a language-specific diagram is missing the slide should reference the EN copy explicitly (we don't yet auto-fallback at render time).
+
+**Workshop-chrome strings** (agenda headers, "Coffee break", "Day N Recap", "Resume at", "Presented by", etc.) live in a single `CHROME_I18N` table at the top of `server/services/deckBuilder.ts`. Adding a new key requires filling EN + FR + PT.
+
+**The deck builder picks the language at render time:**
+```ts
+buildMarkdown(workshopId, config, language)   // language: 'en' | 'fr' | 'pt'
+```
+The `language` arg overrides `config.workshop.language` so the same workshop config can be exported in any language. Adding a fourth language requires:
+1. Adding it to `Language` type in `deckBuilder.ts`
+2. Adding entries to `CHROME_I18N`
+3. Creating `core_content_<lang>/` and `templates_<lang>/`
+4. Adding the locale to the date/time formatter
+5. Adding it to `--lang` choices in `tools/00_extract_slides.py` and `tools/translate.py`
+6. Adding `<lang>:` names to `modules.yaml`
 
 ### Request Flow Example
 
