@@ -8,29 +8,29 @@
 
 | # | id | Module | Theme | Full | Condensed | Status |
 |---|----|--------|-------|-----:|----------:|--------|
-| 0 | `m0` | Introduction to FASTR |  | 7 | — | active |
-| 1 | `m1` | Identify Questions & Indicators |  | 11 | — | active |
-| 2 | `m2` | Data Extraction |  | 14 | — | active |
-| 3 | `m3` | FASTR Analytics Platform |  | 5 | — | active |
-| 3b | `m3b` | AI Assistant |  | 13 | — | active |
-| 4 | `m4` | Data Quality Assessment |  | 21 | 13 | active |
-| 5 | `m5` | Data Quality Adjustment |  | 7 | 6 | active |
-| 6 | `m6` | Data Analysis |  | 25 | 19 | active |
-| 7a | `m7a` | Analytical thinking & interpretation |  | 4 | — | active |
-| 7b | `m7b` | Data visualization & communication |  | 3 | — | active |
-| 7c | `m7c` | Understanding your audience |  | 1 | — | active |
-| 7d | `m7d` | Storytelling with data |  | 2 | — | active |
-| 7e | `m7e` | Linking results to actions |  | 4 | — | active |
-| 7f | `m7f` | Roadmap for sustained use |  | 2 | — | active |
-| 8 | `m8` | Survey & HFA |  | 10 | — | active |
-| 9a | `m9a` | Instance Setup |  | 4 | — | active |
-| 9b | `m9b` | Getting Started |  | 1 | — | active |
-| 9c | `m9c` | Visualizations & Interpretation |  | 6 | — | active |
-| 9d | `m9d` | Slide Decks |  | 8 | — | active |
-| 9e | `m9e` | Disruption Report |  | 17 | — | active |
-| 9f | `m9f` | Prompting Techniques |  | 14 | — | active |
-| 9g | `m9g` | FASTR Quiz |  | 6 | — | active |
-| 9h | `m9h` | Platform Demo |  | — | — | active |
+| 0 | `m0` | Introduction to FASTR | foundations | 7 | — | active |
+| 1 | `m1` | Identify Questions & Indicators | foundations | 11 | — | active |
+| 2 | `m2` | Data Extraction | foundations | 14 | — | active |
+| 3 | `m3` | FASTR Analytics Platform | platform | 5 | — | active |
+| 3b | `m3b` | AI Assistant | platform | 13 | — | active |
+| 4 | `m4` | Data Quality Assessment | methodology | 21 | 13 | active |
+| 5 | `m5` | Data Quality Adjustment | methodology | 7 | 6 | active |
+| 6 | `m6` | Data Analysis | methodology | 25 | 19 | active |
+| 7a | `m7a` | Analytical thinking & interpretation | communication | 4 | — | active |
+| 7b | `m7b` | Data visualization & communication | communication | 3 | — | active |
+| 7c | `m7c` | Understanding your audience | communication | 1 | — | active |
+| 7d | `m7d` | Storytelling with data | communication | 2 | — | active |
+| 7e | `m7e` | Linking results to actions | communication | 4 | — | active |
+| 7f | `m7f` | Roadmap for sustained use | communication | 2 | — | active |
+| 8 | `m8` | Survey & HFA | methodology | 10 | — | active |
+| 9a | `m9a` | Instance Setup | platform | 4 | — | active |
+| 9b | `m9b` | Getting Started | platform | 1 | — | active |
+| 9c | `m9c` | Visualizations & Interpretation | analysis | 6 | — | active |
+| 9d | `m9d` | Slide Decks | communication | 8 | — | active |
+| 9e | `m9e` | Disruption Report | communication | 17 | — | active |
+| 9f | `m9f` | Prompting Techniques | analysis | 14 | — | active |
+| 9g | `m9g` | FASTR Quiz | workshop | 6 | — | active |
+| 9h | `m9h` | Platform Demo | analysis | — | — | active |
 
 ## Activities — logical order
 

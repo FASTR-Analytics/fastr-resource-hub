@@ -1,7 +1,40 @@
+themes:
+- id: foundations
+  name:
+    en: Foundations
+    fr: Fondamentaux
+    pt: Fundamentos
+- id: platform
+  name:
+    en: The FASTR platform
+    fr: La plateforme FASTR
+    pt: A plataforma FASTR
+- id: methodology
+  name:
+    en: Methods
+    fr: Méthodes
+    pt: Métodos
+- id: analysis
+  name:
+    en: Analysis & exploration
+    fr: Analyse et exploration
+    pt: Análise e exploração
+- id: communication
+  name:
+    en: Communication & action
+    fr: Communication et action
+    pt: Comunicação e ação
+- id: workshop
+  name:
+    en: Workshop tools
+    fr: Outils d'atelier
+    pt: Ferramentas de workshop
+
 modules:
 - id: m0
   number: '0'
   folder: m0_introduction
+  theme: foundations
   name:
     en: Introduction to FASTR
     fr: Introduction à FASTR
@@ -17,6 +50,7 @@ modules:
 - id: m1
   number: '1'
   folder: m1_identify_questions_indicators
+  theme: foundations
   name:
     en: Identify Questions & Indicators
     fr: Identifier les questions et indicateurs
@@ -32,6 +66,7 @@ modules:
 - id: m2
   number: '2'
   folder: m2_data_extraction
+  theme: foundations
   name:
     en: Data Extraction
     fr: Extraction des données
@@ -48,6 +83,7 @@ modules:
 - id: m3
   number: '3'
   folder: m3_fastr_analytics_platform
+  theme: platform
   name:
     en: FASTR Analytics Platform
     fr: Plateforme analytique FASTR
@@ -63,6 +99,7 @@ modules:
 - id: m3b
   number: 3b
   folder: mai_ai_assistant
+  theme: platform
   name:
     en: AI Assistant
     fr: Assistant IA
@@ -70,6 +107,7 @@ modules:
 - id: m4
   number: '4'
   folder: m4_data_quality_assessment
+  theme: methodology
   name:
     en: Data Quality Assessment
     fr: Évaluation de la qualité des données
@@ -86,6 +124,7 @@ modules:
 - id: m5
   number: '5'
   folder: m5_data_quality_adjustment
+  theme: methodology
   name:
     en: Data Quality Adjustment
     fr: Ajustement de la qualité des données
@@ -100,6 +139,7 @@ modules:
 - id: m6
   number: '6'
   folder: m6_data_analysis
+  theme: methodology
   name:
     en: Data Analysis
     fr: Analyse des données
@@ -115,6 +155,7 @@ modules:
 - id: m7a
   number: 7a
   folder: m7a_analytical_thinking
+  theme: communication
   name:
     en: Analytical thinking & interpretation
     fr: Pensée analytique et interprétation
@@ -130,6 +171,7 @@ modules:
 - id: m7b
   number: 7b
   folder: m7b_data_visualization
+  theme: communication
   name:
     en: Data visualization & communication
     fr: Visualisation et communication des données
@@ -145,6 +187,7 @@ modules:
 - id: m7c
   number: 7c
   folder: m7c_understanding_audience
+  theme: communication
   name:
     en: Understanding your audience
     fr: Comprendre votre public
@@ -159,6 +202,7 @@ modules:
 - id: m7d
   number: 7d
   folder: m7d_storytelling_with_data
+  theme: communication
   name:
     en: Storytelling with data
     fr: Raconter une histoire avec les données
@@ -172,6 +216,7 @@ modules:
 - id: m7e
   number: 7e
   folder: m7e_linking_to_actions
+  theme: communication
   name:
     en: Linking results to actions
     fr: Lier les résultats aux actions
@@ -187,6 +232,7 @@ modules:
 - id: m7f
   number: 7f
   folder: m7f_sustained_use_roadmap
+  theme: communication
   name:
     en: Roadmap for sustained use
     fr: Feuille de route pour un usage durable
@@ -201,6 +247,7 @@ modules:
 - id: m8
   number: '8'
   folder: m8_survey_hfa
+  theme: methodology
   name:
     en: Survey & HFA
     fr: Enquêtes et EFS
@@ -216,6 +263,7 @@ modules:
 - id: m9a
   number: 9a
   folder: m9a_instance_setup
+  theme: platform
   name:
     en: Instance Setup
     fr: Configuration de l'instance
@@ -223,6 +271,7 @@ modules:
 - id: m9b
   number: 9b
   folder: m9b_getting_started
+  theme: platform
   name:
     en: Getting Started
     fr: Prise en main
@@ -230,6 +279,7 @@ modules:
 - id: m9c
   number: 9c
   folder: m9c_visualizations_interpretation
+  theme: analysis
   name:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
@@ -237,6 +287,7 @@ modules:
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
+  theme: communication
   name:
     en: Slide Decks
     fr: Présentations
@@ -244,6 +295,7 @@ modules:
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
+  theme: communication
   name:
     en: Disruption Report
     fr: Rapport de perturbations
@@ -251,6 +303,7 @@ modules:
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
+  theme: analysis
   name:
     en: Prompting Techniques
     fr: Techniques de prompting
@@ -258,6 +311,7 @@ modules:
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
+  theme: workshop
   name:
     en: FASTR Quiz
     fr: Quiz FASTR
@@ -265,6 +319,7 @@ modules:
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
+  theme: analysis
   name:
     en: Platform Demo
     fr: Démo de la plateforme
