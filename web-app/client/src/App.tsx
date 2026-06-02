@@ -661,40 +661,61 @@ function LibraryMode() {
                       <span className="text-body-sm font-semibold text-slate-800 flex-1 truncate">{module.name}</span>
                       <span className="text-caption text-slate-400">{items.length}</span>
                     </button>
-                    {hasFull && (
+                    {hasFull && hasCondensed ? (
+                      <>
+                        <button
+                          onClick={() => loadModulePreview(module, 'full')}
+                          title={t('previewFullModule', contentLanguage)}
+                          aria-label={t('previewFullModule', contentLanguage)}
+                          className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
+                            previewTopic?.id === moduleId
+                              ? 'bg-fastr-primary text-white'
+                              : 'bg-fastr-light text-fastr-primary hover:bg-fastr-primary hover:text-white'
+                          }`}
+                        >
+                          {contentLanguage === 'fr' ? 'Complet' : contentLanguage === 'pt' ? 'Completo' : 'Full'}
+                        </button>
+                        <button
+                          onClick={() => loadModulePreview(module, 'condensed')}
+                          title={t('previewCondensedModule', contentLanguage)}
+                          aria-label={t('previewCondensedModule', contentLanguage)}
+                          className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
+                            previewTopic?.id === moduleCondId
+                              ? 'bg-amber-500 text-white'
+                              : 'bg-amber-50 text-amber-700 hover:bg-amber-500 hover:text-white'
+                          }`}
+                        >
+                          {contentLanguage === 'fr' ? 'Condensé' : contentLanguage === 'pt' ? 'Condensado' : 'Condensed'}
+                        </button>
+                      </>
+                    ) : hasFull ? (
                       <button
                         onClick={() => loadModulePreview(module, 'full')}
                         title={t('previewFullModule', contentLanguage)}
                         aria-label={t('previewFullModule', contentLanguage)}
-                        className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
+                        className={`flex-shrink-0 p-1.5 rounded-md transition-colors focus-ring ${
                           previewTopic?.id === moduleId
                             ? 'bg-fastr-primary text-white'
-                            : 'bg-fastr-light text-fastr-primary hover:bg-fastr-primary hover:text-white'
+                            : 'text-slate-400 hover:text-fastr-primary hover:bg-white opacity-0 group-hover:opacity-100'
                         }`}
                       >
-                        {contentLanguage === 'fr' ? 'Complet' : contentLanguage === 'pt' ? 'Completo' : 'Full'}
+                        <Eye className="w-3.5 h-3.5" />
                       </button>
-                    )}
-                    {hasCondensed && (
-                      <button
-                        onClick={() => loadModulePreview(module, 'condensed')}
-                        title={t('previewCondensedModule', contentLanguage)}
-                        aria-label={t('previewCondensedModule', contentLanguage)}
-                        className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
-                          previewTopic?.id === moduleCondId
-                            ? 'bg-amber-500 text-white'
-                            : 'bg-amber-50 text-amber-700 hover:bg-amber-500 hover:text-white'
-                        }`}
-                      >
-                        {contentLanguage === 'fr' ? 'Condensé' : contentLanguage === 'pt' ? 'Condensado' : 'Condensed'}
-                      </button>
-                    )}
+                    ) : null}
                   </div>
-                  {isExpanded && (
-                    <div className="pb-1">
-                      {items.map(({ topic, variant }) => {
-                        const isChecked = selected.has(topic.id)
-                        return (
+                  {isExpanded && (() => {
+                    const isActivityTopic = (topic: any) =>
+                      /^(activity|activité|atividade)\s*:/i.test(topic.title || '')
+                    const activities = items.filter(it => isActivityTopic(it.topic))
+                    const contentItems = items.filter(it => !isActivityTopic(it.topic))
+                    const showHeaders = activities.length > 0 && contentItems.length > 0
+                    const headerActivities = contentLanguage === 'fr' ? 'Activités'
+                      : contentLanguage === 'pt' ? 'Atividades' : 'Activities'
+                    const headerContent = contentLanguage === 'fr' ? 'Contenu'
+                      : contentLanguage === 'pt' ? 'Conteúdo' : 'Content'
+                    const renderRow = ({ topic, variant }: typeof items[number]) => {
+                      const isChecked = selected.has(topic.id)
+                      return (
                         <div
                           key={topic.id}
                           className={`w-full flex items-center transition-colors ${
@@ -731,10 +752,23 @@ function LibraryMode() {
                             <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
                           </button>
                         </div>
-                        )
-                      })}
-                    </div>
-                  )}
+                      )
+                    }
+                    return (
+                      <div className="pb-1">
+                        {showHeaders ? (
+                          <>
+                            <div className="pl-8 pr-4 pt-1.5 pb-0.5 text-[10px] uppercase tracking-wide font-semibold text-slate-400">{headerActivities}</div>
+                            {activities.map(renderRow)}
+                            <div className="pl-8 pr-4 pt-2 pb-0.5 text-[10px] uppercase tracking-wide font-semibold text-slate-400">{headerContent}</div>
+                            {contentItems.map(renderRow)}
+                          </>
+                        ) : (
+                          items.map(renderRow)
+                        )}
+                      </div>
+                    )
+                  })()}
                 </div>
               )
             })}
