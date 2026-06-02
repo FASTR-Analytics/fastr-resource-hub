@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Structure du rapport de perturbations
+## À quoi ressemble un rapport de perturbations FASTR
 
-FASTR utilise ce format pour les rapports de perturbations :
+Avant d'en construire un, voici le format que l'IA va produire :
 
 | # | Section | Contenu |
 |---|---------|---------|

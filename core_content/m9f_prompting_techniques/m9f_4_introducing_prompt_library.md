@@ -6,7 +6,7 @@ paginate: true
 
 ## The FASTR prompt library — start from a real prompt, not a blank page
 
-You've spent the last hour writing prompts, iterating, refining. That's the skill — and it stays useful for the unique question only you can ask.
+You've been writing prompts, iterating, refining. That's the skill — and it stays useful for the unique question only you can ask.
 
 **For the questions that come up again and again** (a quarterly trends review, a data-quality snapshot, a director briefing), the FASTR team has already written the prompts. They live in the **prompt library inside the FASTR Analytics Platform**, ready to use from the AI Assistant panel.
 

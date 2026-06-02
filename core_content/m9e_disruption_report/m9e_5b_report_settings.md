@@ -28,4 +28,4 @@ Once your report is created, you can adjust its appearance. Everything lives in 
 
 - Show **page numbers**
 
-> ⚠ Make sure to **save** the settings after each change — otherwise your edits will be lost.
+> Make sure to **save** the settings after each change — otherwise your edits will be lost.

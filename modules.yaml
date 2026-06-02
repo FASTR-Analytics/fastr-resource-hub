@@ -198,10 +198,3 @@ modules:
     en: Platform Demo
     fr: Démo de la plateforme
     pt: Demonstração da plataforma
-- id: m9i
-  number: 9i
-  folder: m9i_report_builder_basics
-  name:
-    en: Module 9i
-    fr: Module 9i
-    pt: Módulo 9i

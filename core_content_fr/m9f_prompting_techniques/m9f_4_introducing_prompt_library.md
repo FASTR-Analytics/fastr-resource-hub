@@ -6,7 +6,7 @@ paginate: true
 
 ## La bibliothèque de prompts FASTR — partez d'un vrai prompt, pas d'une page blanche
 
-Vous venez de passer une heure à rédiger des prompts, à itérer, à affiner. C'est ça, la compétence — et elle reste utile pour la question unique que vous seul·e pouvez poser.
+Vous avez rédigé des prompts, itéré, affiné. C'est ça, la compétence — et elle reste utile pour la question unique que vous seul·e pouvez poser.
 
 **Pour les questions qui reviennent encore et encore** (une revue trimestrielle des tendances, un état des lieux de la qualité des données, un briefing au directeur), l'équipe FASTR a déjà écrit les prompts. Ils vivent dans la **bibliothèque de prompts intégrée à la Plateforme analytique FASTR**, prête à l'emploi depuis le panneau Assistant IA.
 

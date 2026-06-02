@@ -9,7 +9,7 @@ paginate: true
 
 ## A biblioteca de prompt FASTR - comece a partir de um prompt real, não de uma página em branco
 
-Passou a última hora a escrever perguntas, a iterar, a refinar. Essa é a habilidade - e ela permanece útil para a pergunta única que só você pode fazer.
+Tem estado a escrever prompts, a iterar, a refinar. Essa é a competência — e mantém-se útil para a pergunta única que só você pode fazer.
 
 **Para as perguntas que surgem repetidamente** (uma análise trimestral das tendências, um instantâneo da qualidade dos dados, um briefing para o diretor), a equipa FASTR já escreveu os prompts. Estes encontram-se na **biblioteca de prompts dentro da FASTR Analytics Platform**, prontos a serem utilizados a partir do painel do AI Assistant.
 

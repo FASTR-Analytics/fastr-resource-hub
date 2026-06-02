@@ -43,13 +43,10 @@ m9d:
 m9e:
 - h_m9e_facilitator_guide.md   # Facilitator guide — run-of-show
 - h_m9e_create_report_ai.md    # 1. Create the report with the AI
-- h_m9e_verify_output.md       # 2. Verify the AI output (checklist)
+- h_m9e_verify_output.md       # 2. Verify the AI output (two-pass: Prompt 5 + team review)
 - h_m9e_refine_report.md       # 3. Refine — formatting + Prompt 2/3
+- h_m9e_markdown_cheatsheet.md # Reference: formatting symbols for editing report text
 - h_m9e_peer_review.md         # 4. Peer review & present
-
-m9i:
-- h_m9i_facilitator_guide.md           # Facilitator guide — run-of-show
-- h_m9i_ai_verification_checklist.md   # Reference: verify the AI's report output before sharing
 
 m9f:
 - h_m9f_facilitator_guide.md   # Facilitator guide — run-of-show

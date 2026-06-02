@@ -63,18 +63,20 @@ C'est l'aboutissement des activités d'analyse. Les équipes produisent un rappo
 - Les équipes qui cliquent une diapo pendant la génération — dites-leur d'attendre.
 - Des regroupements bâclés — passez-y du temps réel.
 - Tout le groupe qui parle par-dessus le pilote — une personne tape les réponses convenues.
+- Les équipes qui ouvrent la bibliothèque de prompts sans préparation. Demandez à chaque équipe de s'accorder à voix haute sur pays, période, regroupements d'indicateurs et public *avant* d'ouvrir le prompt. Cinq minutes d'accord ici évitent trente minutes de régénération plus tard.
 
 ### 2. Vérifier le résultat · ~20 min · équipe
 
-**Le déroulé.** Une liste de vérification en deux parties que toute l'équipe parcourt avant d'utiliser le rapport : vérifications générales (toutes les diapos présentes, pays, période, pas d'espaces réservés oubliés) et vérifications du rapport (groupes corrects, graphiques chargés, interprétations conformes aux graphiques, titres = constats).
+**Le déroulé.** Une vérification en deux passes avant d'utiliser le rapport. **Passe 1** : lancer le **Prompt 5 : Réviser le jeu de diapositives** — l'IA vérifie son propre deck par rapport aux données (chiffres, noms d'indicateurs, nuance, cohérence). **Passe 2** : l'équipe parcourt la liste manuelle pour ce que seule elle peut savoir — si les regroupements ont du sens, si une perturbation est réelle ou expliquée par un événement local, si du contexte local manque.
 
-**Démontrer.** Montrez une interprétation lue à voix haute par rapport à son graphique — modélisez la vérification des mots contre la courbe, pas le ton de la rédaction.
+**Démontrer.** Lancez une fois le Prompt 5 à l'écran pour que les équipes voient à quoi ressemble l'auto-révision de l'IA. Montrez ensuite une interprétation lue à voix haute par rapport à son graphique — modélisez la vérification des mots contre la courbe, pas le ton de la rédaction.
 
-**Formulez-le ainsi.** *« Lisez chaque interprétation à voix haute en regardant le graphique. Si les mots disent "forte baisse" et que la courbe bouge à peine, corrigez les mots. »*
+**Formulez-le ainsi.** *« Le Prompt 5 attrape les erreurs mécaniques. Il ne peut pas savoir si une "perturbation" est réelle ou simplement un centre qui a fermé pour rénovation — c'est votre travail, dans la deuxième passe. Les deux passes comptent. »*
 
-**À quoi ressemble un bon résultat.** Chaque diapo vérifiée, les écarts entre texte et graphique repérés et notés pour l'étape d'affinage.
+**À quoi ressemble un bon résultat.** Le Prompt 5 a été lancé et ses problèmes signalés corrigés ; puis chaque diapo a été lue par l'équipe, les écarts entre texte et graphique repérés et notés pour l'étape d'affinage.
 
 **À surveiller.**
+- Les équipes qui s'arrêtent après le Prompt 5 — la passe IA ne vérifie le deck que par rapport à lui-même. La passe manuelle est celle qui attrape le contexte local.
 - Les équipes qui font confiance à l'IA parce qu'elle sonne assurée — faites-leur lire les interprétations à voix haute et comparer au graphique.
 
 ---

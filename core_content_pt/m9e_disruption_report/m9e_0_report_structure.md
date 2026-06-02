@@ -1,20 +1,17 @@
-<!-- AUTO-TRANSLATED from core_content/m9i_report_builder_basics/m9i_1_report_overview.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
 paginate: true
 ---
 
-## Estrutura do relatório de perturbações
+## Como é um relatório de perturbações FASTR
 
-A FASTR utiliza este formato para os relatórios de perturbações:
+Antes de o construir, eis o formato que a IA vai produzir:
 
 | # | Secção | Conteúdo |
 |---|---------|---------|
 | 1 | **Página de rosto** | Título, país, trimestre, data |
-| 2 | **Introdução** | Contexto e objetivo da análise
+| 2 | **Introdução** | Contexto e objetivo da análise |
 | 3 | **Metodologia** | Como foram produzidos os resultados + indicadores selecionados |
 | 4 | **Secção 1: Utilização dos serviços** | Perturbações e excedentes por grupo de indicadores |
 | 5 | **Secção 2: Cobertura** | Estimativas de cobertura nacional e subnacional |

@@ -63,18 +63,20 @@ By the end, each team should have a verified, refined disruption report they cou
 - Teams clicking a slide mid-generation — tell them to wait.
 - Rushed groupings — spend real time here.
 - The whole group talking over the driver — one person types the agreed answers.
+- Teams opening the prompt library cold. Have each team agree out loud on country, period, indicator groupings, and audience *before* opening the prompt. Five minutes of agreement here saves thirty minutes of regeneration later.
 
 ### 2. Verify the output · ~20 min · team
 
-**What happens.** A two-part checklist the whole team works before the report is used: general checks (all slides present, country, period, no leftover placeholders) and report checks (groupings correct, charts loading, interpretations match the charts, titles are findings).
+**What happens.** A two-pass verification before the report is used. **Pass 1**: run **Prompt 5: Review slide deck** — the AI checks its own deck against the data (numbers, indicator names, hedging, consistency). **Pass 2**: the team works the manual checklist for what only they can know — whether groupings make sense, whether a disruption is real or explained by a local event, whether local context is missing.
 
-**Demonstrate.** Show one interpretation read aloud against its chart — model checking the words against the line, not the tone of the writing.
+**Demonstrate.** Run Prompt 5 once on screen so teams see what the AI self-check looks like. Then show one interpretation read aloud against its chart — model checking the words against the line, not the tone of the writing.
 
-**Say something like.** *"Read each interpretation aloud and look at the chart while you do. If the words say 'sharp drop' and the line barely moves, fix the words."*
+**Say something like.** *"Prompt 5 catches mechanical errors. It can't know whether a 'disruption' is real or just a clinic that closed for renovation — that's your job, in the second pass. Both passes matter."*
 
-**What a good result looks like.** Every slide checked, with mismatches between text and chart caught and noted for the refine step.
+**What a good result looks like.** Prompt 5 has been run and its flagged issues fixed; then every slide has been read by the team with mismatches between text and chart caught and noted for the refine step.
 
 **Watch for.**
+- Teams stopping after Prompt 5 — the AI pass only checks the deck against itself. The manual pass is what catches local context.
 - Teams trusting the AI because it sounds confident — make them read interpretations aloud and check against the chart.
 
 ---

@@ -2,68 +2,68 @@ slides:
 - file: m9e_0_report_structure.md
   order: 0.5
   variant: full
-  title: À quoi ressemble un rapport de perturbations FASTR
+  title: Como é um relatório de perturbações FASTR
 - file: m9e_1_manual_to_ai_reporting.md
   order: 1.0
   variant: full
-  title: Place à la création de votre produit final
+  title: Hora de construir a sua saída final
 - file: m9e_2_creating_disruption_report_ai.md
   order: 2.0
   variant: full
-  title: 'Activité : Créer un rapport sur les perturbations avec l''assistant IA'
+  title: 'Atividade: Criar um relatório de perturbação com o Assistente de IA'
 - file: m9e_2a_alternative_approach.md
   order: 2.01
   variant: full
-  title: 'Approche alternative : Travailler sans prompt personnalisé'
+  title: 'Abordagem alternativa: Trabalhar sem um prompt personalizado'
 - file: m9e_2ab_alternative_approach.md
   order: 2.0102
   variant: full
-  title: 'Étape 1 : Télécharger le rapport dans vos Ressources'
+  title: 'Passo 1: Carregar o relatório para os seus Activos'
 - file: m9e_2ac_alternative_approach.md
   order: 2.0103
   variant: full
-  title: 'Étape 2 : Inclure le rapport dans votre conversation IA'
+  title: 'Passo 2: Incluir o relatório na sua conversa de IA'
 - file: m9e_2b_creating_disruption_report_ai.md
   order: 2.02
   variant: full
-  title: 'Comprendre le prompt : que fait-il ?'
+  title: 'Compreender o prompt: o que é que ele faz?'
 - file: m9e_2c_creating_disruption_report_ai.md
   order: 2.03
   variant: full
-  title: L'assistant IA vous demandera les détails de votre rapport
+  title: O Assistente de IA pedirá os detalhes do seu relatório
 - file: m9e_3_ai_proposes_groupings.md
   order: 3.0
   variant: full
-  title: L'IA va proposer des regroupements d'indicateurs
+  title: A IA proporá agrupamentos de indicadores
 - file: m9e_4_confirm_ai_builds.md
   order: 4.0
   variant: full
-  title: Confirmez et l'IA construit vos diapositives
+  title: Confirmar e a IA constrói os seus diapositivos
 - file: m9e_5_review_checklist.md
   order: 5.0
   variant: full
-  title: 'Liste de vérification : Vérifier le résultat de l''IA'
+  title: 'Lista de verificação de revisão: Verificando a saída da IA'
 - file: m9e_5a_writing_analytical_titles.md
   order: 5.01
   variant: full
-  title: Rédiger des titres de diapositive analytiques
+  title: Escrever títulos de diapositivo analíticos
 - file: m9e_5b_report_settings.md
   order: 5.02
   variant: full
-  title: Paramètres du rapport
+  title: Definições do relatório
 - file: m9e_6_refine_disruption_report.md
   order: 6.0
   variant: full
-  title: 'Activité : Affiner votre rapport de perturbations'
+  title: 'Atividade: Aperfeiçoar o seu relatório de perturbação'
 - file: m9e_6b_refine_disruption_report.md
   order: 6.02
   variant: full
-  title: 'Liste de vérification : Prompt 2 & Prompt 3'
+  title: 'Lista de verificação de revisão: Exercício 2 e Exercício 3'
 - file: m9e_7_peer_review_checklist.md
   order: 7.0
   variant: full
-  title: 'Revue par les pairs : retour sur le rapport de perturbations'
+  title: 'Revisão pelos pares: feedback do relatório de perturbação'
 - file: m9e_8_presenting_reports.md
   order: 8.0
   variant: full
-  title: Présentation des rapports et retours de groupe
+  title: Apresentação de relatórios e feedback do grupo

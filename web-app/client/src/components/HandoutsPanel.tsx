@@ -185,7 +185,7 @@ export function HandoutsPanel() {
 
   // Bucket by theme, with workshop-activity modules (m9*) ordered before
   // theory modules (m7, m8) inside each bucket. Matches the day-by-day flow
-  // (e.g., Communication & action: m9c → m9d → m9i → m7).
+  // (e.g., Communication & action: m9c → m9d → m9e → m7).
   const themedGroups = useMemo(() => {
     const buckets: Array<{ themeId: string; themeName: string; groups: HandoutGroup[] }> = []
     const seen = new Map<string, { themeId: string; themeName: string; groups: HandoutGroup[] }>()

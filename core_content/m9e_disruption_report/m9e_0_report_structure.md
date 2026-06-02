@@ -4,9 +4,9 @@ theme: fastr
 paginate: true
 ---
 
-## Structure of the disruption report
+## What a FASTR disruption report looks like
 
-FASTR uses this format for disruption reports:
+Before you build one, here is the format the AI will produce:
 
 | # | Section | Content |
 |---|---------|---------|

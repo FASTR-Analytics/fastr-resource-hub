@@ -1,4 +1,8 @@
 slides:
+- file: m9e_0_report_structure.md
+  order: 0.5
+  variant: full
+  title: What a FASTR disruption report looks like
 - file: m9e_1_manual_to_ai_reporting.md
   order: 1.0
   variant: full
@@ -39,6 +43,14 @@ slides:
   order: 5.0
   variant: full
   title: 'Review checklist: Verifying the AI output'
+- file: m9e_5a_writing_analytical_titles.md
+  order: 5.01
+  variant: full
+  title: Writing analytical slide titles
+- file: m9e_5b_report_settings.md
+  order: 5.02
+  variant: full
+  title: Report settings
 - file: m9e_6_refine_disruption_report.md
   order: 6.0
   variant: full

@@ -28,4 +28,4 @@ Une fois votre rapport créé, vous pouvez en ajuster l'apparence. Tout se trouv
 
 - Affichage des **numéros de pages**
 
-> ⚠ Veillez à **sauvegarder** les paramètres après chaque modification — sinon vos changements seront perdus.
+> Veillez à **sauvegarder** les paramètres après chaque modification — sinon vos changements seront perdus.

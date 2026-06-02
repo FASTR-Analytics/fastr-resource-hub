@@ -63,18 +63,20 @@ No final, cada equipa deve ter um relatório de perturbações verificado e refi
 - Equipas a clicar num diapositivo a meio da geração — diga-lhes para aguardar.
 - Agrupamentos apressados — dediquem-lhes tempo real.
 - Todo o grupo a falar por cima do condutor — uma pessoa escreve as respostas acordadas.
+- Equipas a abrir a biblioteca de prompts sem preparação. Peça a cada equipa que acorde em voz alta país, período, agrupamentos de indicadores e público *antes* de abrir o prompt. Cinco minutos de acordo aqui poupam trinta minutos de regeneração mais tarde.
 
 ### 2. Verificar o resultado · ~20 min · equipa
 
-**O que acontece.** Uma lista de verificação em duas partes que toda a equipa percorre antes de usar o relatório: verificações gerais (todos os diapositivos presentes, país, período, sem marcadores esquecidos) e verificações do relatório (agrupamentos corretos, gráficos a carregar, interpretações batem certo com os gráficos, títulos são conclusões).
+**O que acontece.** Uma verificação em duas passagens antes de o relatório ser usado. **Passagem 1**: corra o **Prompt 5: Review slide deck** — a IA verifica a sua própria apresentação contra os dados (números, nomes de indicadores, hedging, consistência). **Passagem 2**: a equipa percorre a lista manual para o que só ela pode saber — se os agrupamentos fazem sentido, se uma perturbação é real ou explicada por um acontecimento local, se falta contexto local.
 
-**Demonstrar.** Mostre uma interpretação lida em voz alta contra o seu gráfico — modele a verificação das palavras contra a linha, não o tom da escrita.
+**Demonstrar.** Corra o Prompt 5 uma vez no ecrã para as equipas verem como é a auto-revisão da IA. Depois mostre uma interpretação lida em voz alta contra o seu gráfico — modele a verificação das palavras contra a linha, não o tom da escrita.
 
-**Diga algo como.** *«Leiam cada interpretação em voz alta a olhar para o gráfico. Se as palavras dizem "queda acentuada" e a linha mal se mexe, corrijam as palavras.»*
+**Diga algo como.** *«O Prompt 5 apanha erros mecânicos. Não pode saber se uma "perturbação" é real ou apenas um centro que fechou para obras — esse é o vosso trabalho, na segunda passagem. As duas passagens importam.»*
 
-**Como é um bom resultado.** Cada diapositivo verificado, com as discrepâncias entre texto e gráfico apanhadas e anotadas para o passo de refinamento.
+**Como é um bom resultado.** O Prompt 5 foi corrido e os problemas sinalizados corrigidos; depois cada diapositivo foi lido pela equipa com as discrepâncias entre texto e gráfico apanhadas e anotadas para o passo de refinamento.
 
 **Atenção a.**
+- Equipas a parar depois do Prompt 5 — a passagem da IA só verifica a apresentação contra si própria. A passagem manual é que apanha o contexto local.
 - Equipas a confiar na IA por soar confiante — façam-nas ler as interpretações em voz alta e confrontar com o gráfico.
 
 ---
