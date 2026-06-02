@@ -666,13 +666,13 @@ function LibraryMode() {
                         onClick={() => loadModulePreview(module, 'full')}
                         title={t('previewFullModule', contentLanguage)}
                         aria-label={t('previewFullModule', contentLanguage)}
-                        className={`flex-shrink-0 p-1.5 rounded-md transition-colors focus-ring ${
+                        className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
                           previewTopic?.id === moduleId
                             ? 'bg-fastr-primary text-white'
-                            : 'text-slate-400 hover:text-fastr-primary hover:bg-white opacity-0 group-hover:opacity-100'
+                            : 'bg-fastr-light text-fastr-primary hover:bg-fastr-primary hover:text-white'
                         }`}
                       >
-                        <Eye className="w-3.5 h-3.5" />
+                        {contentLanguage === 'fr' ? 'Complet' : contentLanguage === 'pt' ? 'Completo' : 'Full'}
                       </button>
                     )}
                     {hasCondensed && (
@@ -680,13 +680,13 @@ function LibraryMode() {
                         onClick={() => loadModulePreview(module, 'condensed')}
                         title={t('previewCondensedModule', contentLanguage)}
                         aria-label={t('previewCondensedModule', contentLanguage)}
-                        className={`flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
+                        className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
                           previewTopic?.id === moduleCondId
                             ? 'bg-amber-500 text-white'
-                            : 'bg-amber-50 text-amber-700 hover:bg-amber-100 opacity-0 group-hover:opacity-100'
+                            : 'bg-amber-50 text-amber-700 hover:bg-amber-500 hover:text-white'
                         }`}
                       >
-                        S
+                        {contentLanguage === 'fr' ? 'Condensé' : contentLanguage === 'pt' ? 'Condensado' : 'Condensed'}
                       </button>
                     )}
                   </div>
