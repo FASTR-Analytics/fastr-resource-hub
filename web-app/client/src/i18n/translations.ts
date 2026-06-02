@@ -1,6 +1,6 @@
 // UI Translations for FASTR Deck Builder
 
-export type Language = 'en' | 'fr' | 'pt' | 'pt'
+export type Language = 'en' | 'fr' | 'pt'
 
 export const translations = {
   en: {

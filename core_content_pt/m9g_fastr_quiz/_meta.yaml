@@ -1,0 +1,26 @@
+slides:
+- file: m9g_1_fastr_quiz.md
+  order: 1.0
+  variant: full
+  title: FASTR quiz
+- file: m9g_1b_fastr_quiz.md
+  order: 1.02
+  variant: full
+  title: 1. O que é que FASTR significa?
+- file: m9g_1c_fastr_quiz.md
+  order: 1.03
+  variant: full
+  title: 2. Quais são as 3 dimensões de qualidade de dados do FASTR?
+- file: m9g_1d_fastr_quiz.md
+  order: 1.04
+  variant: full
+  title: 3. Quais são os 4 pilares técnicos do FASTR?
+- file: m9g_1e_fastr_quiz.md
+  order: 1.05
+  variant: full
+  title: 4. Um distrito regista 200 consultas ANC1 mas 350 consultas ANC4. Isto demonstra
+    um desafio com que métrica de qualidade de dados?
+- file: m9g_1f_fastr_quiz.md
+  order: 1.06
+  variant: full
+  title: 5. Cobertura de ANC1 - qual é a população-alvo?

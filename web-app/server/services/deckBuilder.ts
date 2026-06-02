@@ -19,7 +19,7 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
 const TEMPLATES_PATH = path.join(REPO_ROOT, 'templates')
 
 // Supported languages
-export type Language = 'en' | 'fr' | 'pt' | 'pt'
+export type Language = 'en' | 'fr' | 'pt'
 
 // Get core content path for a specific language
 function getCoreContentPath(language: Language = 'en'): string {

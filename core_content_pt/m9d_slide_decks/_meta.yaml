@@ -1,0 +1,33 @@
+slides:
+- file: m9d_1_creating_slide_decks.md
+  order: 1.0
+  variant: full
+  title: 'Atividade: Criar o seu primeiro conjunto de diapositivos'
+- file: m9d_1b_adding_viz_manually.md
+  order: 1.02
+  variant: full
+  title: 'Atividade: Adicionar uma visualização a um slide'
+- file: m9d_1c_adding_viz_ai.md
+  order: 1.03
+  variant: full
+  title: 'Atividade: Adicionar uma visualização a um slide usando IA'
+- file: m9d_2_editing_formatting_slides.md
+  order: 2.0
+  variant: full
+  title: 'Atividade: Editar e finalizar os seus diapositivos'
+- file: m9d_2b_open_slide_editor.md
+  order: 2.02
+  variant: full
+  title: 'Demonstração: Como editar um diapositivo'
+- file: m9d_3_formatting_text.md
+  order: 3.0
+  variant: full
+  title: 'Atividade: Formatar o texto do relatório'
+- file: m9d_3_ref_markdown_shortcuts.md
+  order: 3.001
+  variant: full
+  title: Formatar o texto do relatório - referência rápida
+- file: m9d_3a_formatting_report_settings.md
+  order: 3.01
+  variant: full
+  title: 'Atividade: Configurar as definições do seu relatório'
