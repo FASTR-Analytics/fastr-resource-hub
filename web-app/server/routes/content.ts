@@ -254,8 +254,6 @@ router.get('/modules', async (req, res) => {
           const filePath = path.join(modulePath, file)
           const content = fs.readFileSync(filePath, 'utf-8')
 
-          if (content.includes('_class: activity-pointer')) continue
-
           const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
           const slideCount = slides.length
 
