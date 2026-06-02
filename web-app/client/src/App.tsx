@@ -386,20 +386,34 @@ function LibraryMode() {
     setPresenterNotes([])
   }, [contentLanguage])
 
+  // moduleVariant[moduleId] = 'full' | 'condensed' for modules that have both.
+  // Modules with only one variant ignore this map.
+  const [moduleVariant, setModuleVariant] = useState<Map<string, 'full' | 'condensed'>>(new Map())
+
   // Build a flat list of all topics with their module info, then filter by search.
-  // Condensed (_s) variants are not surfaced in the library — only m4/m5/m6 have them
-  // and they duplicate the full topic count. They remain available via the workshop
-  // builder for sessions that want a shorter version.
+  // For modules that have both Full and Condensed variants (m4/m5/m6), show only the
+  // currently-selected variant. The per-module toggle lives on the module sub-header
+  // inside each expanded session.
   const allTopics = React.useMemo(() => {
     const items: Array<{ topic: any; module: any; variant: 'full' | 'condensed' | null }> = []
     for (const module of contentLibrary) {
       const full = module.fullTopics || []
-      const fallback = !full.length && !(module.condensedTopics?.length) ? (module.topics || []) : []
-      for (const topic of full) items.push({ topic, module, variant: null })
+      const condensed = module.condensedTopics || []
+      const fallback = !full.length && !condensed.length ? (module.topics || []) : []
+      const hasBoth = full.length > 0 && condensed.length > 0
+      if (hasBoth) {
+        const choice = moduleVariant.get(module.id) || 'full'
+        const picked = choice === 'condensed' ? condensed : full
+        for (const topic of picked) items.push({ topic, module, variant: choice })
+      } else if (full.length > 0) {
+        for (const topic of full) items.push({ topic, module, variant: null })
+      } else if (condensed.length > 0) {
+        for (const topic of condensed) items.push({ topic, module, variant: 'condensed' })
+      }
       for (const topic of fallback) items.push({ topic, module, variant: null })
     }
     return items
-  }, [contentLibrary])
+  }, [contentLibrary, moduleVariant])
 
   const filteredTopics = React.useMemo(() => {
     if (!searchQuery.trim()) return allTopics
@@ -607,12 +621,43 @@ function LibraryMode() {
                         <div className="px-4 py-1.5 text-[10px] uppercase tracking-wide font-semibold text-slate-500 bg-slate-50/50 border-b border-slate-100">
                           {headerTheory} <span className="text-slate-400 font-normal">({sessionGroup.theoryCount})</span>
                         </div>
-                        {sessionGroup.modules.flatMap(({ module, theory }) => (
-                          theory.length === 0 ? [] : [
-                            <div key={`${module.id}-th-h`} className="px-4 pt-2 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">{module.name}</div>,
+                        {sessionGroup.modules.flatMap(({ module, theory }) => {
+                          if (theory.length === 0) return []
+                          const hasBoth = (module.fullTopics?.length || 0) > 0 && (module.condensedTopics?.length || 0) > 0
+                          const currentVariant = moduleVariant.get(module.id) || 'full'
+                          return [
+                            <div key={`${module.id}-th-h`} className="flex items-center gap-2 px-4 pt-2 pb-0.5">
+                              <span className="text-[10px] font-semibold uppercase tracking-wide text-slate-400 flex-1 truncate">{module.name}</span>
+                              {hasBoth && (
+                                <div className="flex items-center gap-0.5 rounded bg-slate-100 p-0.5">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      setModuleVariant(prev => { const next = new Map(prev); next.set(module.id, 'full'); return next })
+                                    }}
+                                    className={`px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors ${
+                                      currentVariant === 'full' ? 'bg-white text-fastr-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                                    }`}
+                                  >
+                                    {contentLanguage === 'fr' ? 'Complet' : contentLanguage === 'pt' ? 'Completo' : 'Full'}
+                                  </button>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      setModuleVariant(prev => { const next = new Map(prev); next.set(module.id, 'condensed'); return next })
+                                    }}
+                                    className={`px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors ${
+                                      currentVariant === 'condensed' ? 'bg-white text-amber-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                                    }`}
+                                  >
+                                    {contentLanguage === 'fr' ? 'Condensé' : contentLanguage === 'pt' ? 'Condensado' : 'Cond.'}
+                                  </button>
+                                </div>
+                              )}
+                            </div>,
                             ...theory.map(it => renderSlideRow(it as any)),
                           ]
-                        ))}
+                        })}
                         {sessionGroup.theoryCount === 0 && (
                           <div className="px-4 py-3 text-caption text-slate-300 italic">—</div>
                         )}
