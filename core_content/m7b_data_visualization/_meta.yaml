@@ -1,0 +1,13 @@
+slides:
+- file: m7b_1_data_visualization_communication.md
+  order: 1.0
+  variant: full
+  title: Moving from data to key messages
+- file: m7b_1a_data_visualization_communication_continued.md
+  order: 1.01
+  variant: full
+  title: 'Example: result → key takeaway'
+- file: m7b_1b_data_visualization_communication_continued.md
+  order: 1.02
+  variant: full
+  title: Choosing the right report format

@@ -68,7 +68,13 @@ MODULE_FOLDERS = {
     4: 'm4_data_quality_assessment',
     5: 'm5_data_quality_adjustment',
     6: 'm6_data_analysis',
-    7: 'm7_results_communication',
+    # m7 is split into 6 sub-modules (m7a–m7f). All driven by methodology/07_results_communication.md.
+    '7a': 'm7a_analytical_thinking',
+    '7b': 'm7b_data_visualization',
+    '7c': 'm7c_understanding_audience',
+    '7d': 'm7d_storytelling_with_data',
+    '7e': 'm7e_linking_to_actions',
+    '7f': 'm7f_sustained_use_roadmap',
     8: 'm8_survey_hfa',
     # Note: m9 activities are manually managed in m9a/b/c/d sub-folders, not auto-extracted
     'ai': 'mai_ai_assistant',  # AI Assistant module (separate from m3)
@@ -243,31 +249,27 @@ TOPIC_NAMES = {
     'm6_s6': 'fastr_value_beyond_dhis2',
     'm6_s7': 'key_takeaway',
 
-    # m7 - Results Communication (from 07_results_communication.md)
-    'm7_1': 'analytical_thinking_interpretation',
-    'm7_1d': 'outliers_output',
-    'm7_1e': 'internal_consistency_output',
-    'm7_1f': 'overall_dqa_score_output',
-    'm7_1g': 'mean_dqa_score_output',
-    'm7_1h': 'outlier_adjustment_output',
-    'm7_1i': 'completeness_adjustment_output',
-    'm7_1i2': 'combined_adjustment_output',
-    'm7_1j': 'service_utilization_output',
-    'm7_1k': 'year_over_year_change_output',
-    'm7_1l': 'disruption_output_national',
-    'm7_1m': 'disruption_output_subnational',
-    'm7_1n': 'coverage_output_national',
-    'm7_1o': 'coverage_output_subnational',
-    'm7_2': 'data_visualization_communication',
+    # m4 leftover (extracted alongside m7 historically)
     'm4_s3bb': 'outlier_detection_output',
-    'm7_4': 'understanding_audience_user_mapping',
-    'm7_5': 'storytelling_with_data',
-    'm7_5a': 'from_data_to_story_example',
-    'm7_6': 'linking_results_to_actions',
-    'm7_6b': 'three_spheres_of_influence',
-    'm7_6d': 'dissemination_and_data_use_roadmap',
-    'm7_7': 'building_roadmap_sustained_use',
-    'm7_7a': 'peer_review_action_plans',
+
+    # m7 - Results Communication (split into m7a–m7f sub-modules,
+    # all sourced from methodology/07_results_communication.md)
+    # m7a — Analytical thinking & interpretation
+    'm7a_1': 'analytical_thinking_interpretation',
+    # m7b — Data visualization & communication
+    'm7b_1': 'data_visualization_communication',
+    # m7c — Understanding your audience
+    'm7c_1': 'understanding_audience_user_mapping',
+    # m7d — Storytelling with data
+    'm7d_1': 'storytelling_with_data',
+    'm7d_1a': 'from_data_to_story_example',
+    # m7e — Linking results to actions
+    'm7e_1': 'linking_results_to_actions',
+    'm7e_1a': 'three_spheres_of_influence',
+    'm7e_1c': 'dissemination_and_data_use_roadmap',
+    # m7f — Roadmap for sustained use
+    'm7f_1': 'building_roadmap_sustained_use',
+    'm7f_1a': 'peer_review_action_plans',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
     'm8_0': 'hfa_implementation_status',
@@ -374,6 +376,8 @@ def parse_slide_id(slide_id):
     - m4_1a -> (4, 1, 'a')
     - m4_1a2 -> (4, 1, 'a2')
     - m4_s1 -> (4, 's1', '') - condensed/summary slides
+    - m7a_1 -> ('7a', 1, '') - sub-module letter (m7a–m7f)
+    - m7a_1a -> ('7a', 1, 'a')
     - mai_1 -> ('ai', 1, '') - AI Assistant module
 
     Returns (module_num, topic_num, suffix) or (None, None, None) if invalid.
@@ -382,6 +386,12 @@ def parse_slide_id(slide_id):
     match = re.match(r'^mai_(\d+)([a-z]*\d*)$', slide_id)
     if match:
         return 'ai', int(match.group(1)), match.group(2)
+
+    # Sub-module letter format: m7a_1, m7b_1a, etc. (digit + letter for module).
+    # Must come before the standard format to take precedence.
+    match = re.match(r'^m(\d+[a-z])_(\d+)([a-z]*\d*)$', slide_id)
+    if match:
+        return match.group(1), int(match.group(2)), match.group(3)
 
     # Standard format: m4_1, m4_1a, m4_1a2, m4_3ab, etc.
     match = re.match(r'^m(\d+)_(\d+)([a-z]*\d*)$', slide_id)

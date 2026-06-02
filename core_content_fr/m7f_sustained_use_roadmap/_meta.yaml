@@ -1,0 +1,9 @@
+slides:
+- file: m7f_1_building_roadmap_sustained_use.md
+  order: 1.0
+  variant: full
+  title: Construire une feuille de route pour une utilisation durable
+- file: m7f_1a_peer_review_action_plans.md
+  order: 1.01
+  variant: full
+  title: Revue par les pairs des plans d'action

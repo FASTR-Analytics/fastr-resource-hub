@@ -6,7 +6,7 @@ slides:
 - file: m8_0a_fastr_hfa_approach.md
   order: 0.01
   variant: full
-  title: The FASTR approach to health facility surveys
+  title: The FASTR approach to rapid health facility assessment
 - file: m8_1_rapid_cycle_facility_survey.md
   order: 1.0
   variant: full

@@ -1,0 +1,17 @@
+slides:
+- file: m7a_1_analytical_thinking_interpretation.md
+  order: 1.0
+  variant: full
+  title: Analytical thinking & interpretation
+- file: m7a_1a_analytical_thinking_interpretation_continued.md
+  order: 1.01
+  variant: full
+  title: Critical thinking checklist
+- file: m7a_1b_analytical_thinking_interpretation_continued.md
+  order: 1.02
+  variant: full
+  title: Common interpretation pitfalls
+- file: m7a_1c_analytical_thinking_interpretation_continued.md
+  order: 1.03
+  variant: full
+  title: Interpreting FASTR module outputs

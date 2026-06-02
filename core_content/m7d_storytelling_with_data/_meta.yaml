@@ -1,0 +1,9 @@
+slides:
+- file: m7d_1_storytelling_with_data.md
+  order: 1.0
+  variant: full
+  title: Storytelling with data
+- file: m7d_1a_from_data_to_story_example.md
+  order: 1.01
+  variant: full
+  title: 'From data to story: example'

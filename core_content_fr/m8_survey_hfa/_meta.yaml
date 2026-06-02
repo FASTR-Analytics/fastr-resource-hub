@@ -6,7 +6,7 @@ slides:
 - file: m8_0a_fastr_hfa_approach.md
   order: 0.01
   variant: full
-  title: L'approche FASTR pour les enquêtes auprès des formations sanitaires
+  title: L'approche FASTR pour l'évaluation rapide des formations sanitaires
 - file: m8_1_rapid_cycle_facility_survey.md
   order: 1.0
   variant: full

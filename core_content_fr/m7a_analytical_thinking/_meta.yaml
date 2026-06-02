@@ -1,0 +1,17 @@
+slides:
+- file: m7a_1_analytical_thinking_interpretation.md
+  order: 1.0
+  variant: full
+  title: Réflexion analytique et interprétation
+- file: m7a_1a_analytical_thinking_interpretation_continued.md
+  order: 1.01
+  variant: full
+  title: Liste de contrôle de la pensée critique
+- file: m7a_1b_analytical_thinking_interpretation_continued.md
+  order: 1.02
+  variant: full
+  title: Pièges courants de l'interprétation
+- file: m7a_1c_analytical_thinking_interpretation_continued.md
+  order: 1.03
+  variant: full
+  title: Interprétation des sorties du module FASTR

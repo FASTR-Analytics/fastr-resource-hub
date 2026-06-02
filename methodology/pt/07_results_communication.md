@@ -238,7 +238,7 @@ O mapeamento do utilizador final ajuda a garantir que os nossos resultados satis
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m7_1 -->
+<!-- SLIDE:m7a_1 -->
 ## Pensamento analítico e interpretação
 
 Um gráfico FASTR mostra um padrão. A interpretação é o salto do **que os dados mostram** para o **que isso significa** para o programa.
@@ -252,7 +252,7 @@ Para cada saída FASTR, trabalhe com três perguntas:
 <small>*Os números em si não nos dizem o que fazer. O contexto, o conhecimento programático e o questionamento disciplinado é que dizem.*</small>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1a -->
+<!-- SLIDE:m7a_1a -->
 ## Lista de verificação do pensamento crítico
 
 Antes de tirar conclusões dos resultados do FASTR, pergunte:
@@ -264,7 +264,7 @@ Antes de tirar conclusões dos resultados do FASTR, pergunte:
 - **Que informação adicional é necessária? Que contexto reforçaria ou desafiaria esta interpretação?
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1b -->
+<!-- SLIDE:m7a_1b -->
 ## Armadilhas comuns de interpretação
 
 Há quatro armadilhas que nos apanham mais frequentemente quando lemos os resultados FASTR. Cada uma delas pode transformar um gráfico útil numa mensagem enganadora se passar despercebida.
@@ -295,7 +295,7 @@ As flutuações a curto prazo podem ser variações normais. Concentrar-se nas t
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1c -->
+<!-- SLIDE:m7a_1c -->
 ## Interpretando as saídas do módulo FASTR
 
 Cada módulo FASTR tem o seu próprio reflexo de interpretação. Saber qual deles se aplica impede-o de tirar a conclusão errada a partir do gráfico certo.
@@ -326,7 +326,7 @@ Examinar os padrões a vários níveis geográficos - a desagregação subnacion
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2 -->
+<!-- SLIDE:m7b_1 -->
 ## Passando dos dados para as mensagens-chave
 
 Uma análise FASTR produz dezenas de **resultados** - pontuações DQA, taxas de outlier por distrito, estimativas de cobertura por indicador, sinalizadores de perturbação. Nenhum destes resultados é ainda uma mensagem.
@@ -341,7 +341,7 @@ Um **resultado-chave** é o que alguém deve decidir, atuar ou recordar depois d
 | Usado por** | O analista | O tomador de decisões |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2a -->
+<!-- SLIDE:m7b_1a -->
 ## Exemplo: resultado → conclusão principal
 
 Os mesmos dados podem ser apresentados em dois registos - o analítico e o acionável.
@@ -357,7 +357,7 @@ Os mesmos dados podem ser apresentados em dois registos - o analítico e o acion
 O resultado deve constar do relatório. A conclusão pertence ao briefing de três minutos do diretor.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2b -->
+<!-- SLIDE:m7b_1b -->
 ## Escolher o formato de relatório correto
 
 ### Considerações chave
@@ -373,7 +373,7 @@ O resultado deve constar do relatório. A conclusão pertence ao briefing de tr�
 | Público em geral e grupos de defesa | Infografias + cartazes |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6d -->
+<!-- SLIDE:m7e_1c -->
 ## Roteiro de divulgação e utilização de dados
 
 Um roteiro de utilização de dados é um plano estratégico que descreve como os dados serão utilizados, partilhados e divulgados eficazmente.
@@ -385,7 +385,7 @@ Um roteiro de utilização de dados é um plano estratégico que descreve como o
 - Antecipa potenciais desafios e desenvolve estratégias para os resolver
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4 -->
+<!-- SLIDE:m7c_1 -->
 ## Compreender o seu público: Mapeamento do utilizador
 
 Antes de criar resultados, esclareça quem os vai utilizar e como.
@@ -405,7 +405,7 @@ Antes de criar resultados, esclareça quem os vai utilizar e como.
 Públicos diferentes precisam de resultados diferentes dos mesmos dados.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5 -->
+<!-- SLIDE:m7d_1 -->
 ## Contar histórias com dados
 
 A narração de histórias traduz dados e visualizações em narrativas convincentes que orientam a tomada de decisões.
@@ -423,7 +423,7 @@ A narração de histórias traduz dados e visualizações em narrativas convince
 **Lembre-se: A história não é apenas *o que* os dados mostram, mas *por que é importante* e *o que fazer sobre isso*.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5a -->
+<!-- SLIDE:m7d_1a -->
 ## Dos dados à história: exemplo
 
 **Os dados**
@@ -441,7 +441,7 @@ Os volumes ANC1 na Região Norte caíram 18% no 1º trimestre de 2026, a queda m
 A história nomeia o público, enquadra a questão como sendo a nível do sistema e não a nível dos dados, e termina com uma implicação específica em termos de calendário.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6 -->
+<!-- SLIDE:m7e_1 -->
 ## Ligar resultados a acções
 
 Os dados só são valiosos se conduzirem a decisões e acções.
@@ -459,7 +459,7 @@ Os dados só são valiosos se conduzirem a decisões e acções.
 **Pergunta-chave:** Para cada descoberta, perguntar "Que decisão ou ação é que isto informa?"
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6b -->
+<!-- SLIDE:m7e_1a -->
 ## Três esferas de influência
 
 A estrutura das Três Esferas dirige a atenção para as acções que pode realmente realizar a partir dos seus dados.
@@ -487,7 +487,7 @@ A estrutura das Três Esferas dirige a atenção para as acções que pode realm
 *Concentre os seus planos de ação naquilo que controla. Note a influência e a preocupação como contexto.*
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6c -->
+<!-- SLIDE:m7e_1b -->
 ## Seis perguntas para transformar resultados em acções
 
 Passar de "eis o que os dados mostram" para "eis o que vamos fazer em relação a isso".
@@ -510,7 +510,7 @@ Passar de "eis o que os dados mostram" para "eis o que vamos fazer em relação 
 6. **Quando é que pode tomar esta medida? Quem é o responsável? Como é que vai medir o sucesso?**
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7 -->
+<!-- SLIDE:m7f_1 -->
 ## Construir um roteiro para uma utilização sustentada
 
 Ligar resultados individuais a acções é o primeiro passo. Um roteiro transforma isso num hábito - passando de uma análise pontual para uma **utilização rotineira dos dados**.
@@ -528,7 +528,7 @@ Ligar resultados individuais a acções é o primeiro passo. Um roteiro transfor
 **Objetivo: O FASTR torna-se parte da rotina de M&A e não um projeto especial.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7a -->
+<!-- SLIDE:m7f_1a -->
 ## Revisão pelos pares dos planos de ação
 
 **Emparelhar** com outra equipa do país.

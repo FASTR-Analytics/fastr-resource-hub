@@ -234,7 +234,7 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m7_1 -->
+<!-- SLIDE:m7a_1 -->
 ## Réflexion analytique et interprétation
 
 Un graphique FASTR montre un schéma. L'interprétation, c'est le saut entre **ce que les données montrent** et **ce que cela veut dire** pour le programme.
@@ -248,7 +248,7 @@ Pour chaque résultat FASTR, posez trois questions :
 <small>*Les chiffres seuls ne disent pas quoi faire. Le contexte, les connaissances programmatiques et un questionnement discipliné, eux, le font.*</small>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1a -->
+<!-- SLIDE:m7a_1a -->
 ## Liste de contrôle de la pensée critique
 
 Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les questions suivantes :
@@ -260,7 +260,7 @@ Avant de tirer des conclusions à partir des résultats de FASTR, posez-vous les
 - **Quelles informations supplémentaires sont nécessaires ?** Quel contexte pourrait renforcer ou remettre en question cette interprétation ?
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1b -->
+<!-- SLIDE:m7a_1b -->
 ## Pièges courants de l'interprétation
 
 Quatre pièges nous attrapent le plus souvent quand on lit les résultats FASTR. Chacun peut transformer un graphique utile en message trompeur s'il passe inaperçu.
@@ -291,7 +291,7 @@ Les fluctuations à court terme peuvent être des variations normales. Se concen
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1c -->
+<!-- SLIDE:m7a_1c -->
 ## Interprétation des sorties du module FASTR
 
 Chaque module FASTR a son propre réflexe d'interprétation. Connaître celui qui s'applique vous évite de tirer la mauvaise conclusion d'un bon graphique.
@@ -322,7 +322,7 @@ Examiner les tendances à plusieurs niveaux géographiques — la désagrégatio
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2 -->
+<!-- SLIDE:m7b_1 -->
 ## Passer des données aux messages clés
 
 Une analyse FASTR produit des dizaines de **résultats** — scores d'EQD, taux de valeurs aberrantes par district, estimations de couverture par indicateur, signaux de perturbation. Aucun d'entre eux n'est encore un message.
@@ -337,7 +337,7 @@ Un **message clé** est ce que quelqu'un doit décider, faire ou retenir après 
 | **Utilisé par** | L'analyste | Le décideur |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2a -->
+<!-- SLIDE:m7b_1a -->
 ## Exemple : résultat → message clé
 
 Les mêmes données peuvent se raconter dans deux registres — l'analytique et l'actionnable.
@@ -353,7 +353,7 @@ Les mêmes données peuvent se raconter dans deux registres — l'analytique et 
 Le résultat va dans le rapport. Le message clé va dans le briefing de trois minutes au directeur.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2b -->
+<!-- SLIDE:m7b_1b -->
 ## Choisir le bon format de rapport
 
 ### Principales considérations
@@ -369,7 +369,7 @@ Le résultat va dans le rapport. Le message clé va dans le briefing de trois mi
 | Grand public et groupes de défense | Infographies + affiches |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6d -->
+<!-- SLIDE:m7e_1c -->
 ## Feuille de route pour la diffusion et l'utilisation des données
 
 Une feuille de route pour l'utilisation des données est un plan stratégique qui décrit comment les données seront utilisées, partagées et diffusées de manière efficace.
@@ -381,7 +381,7 @@ Une feuille de route pour l'utilisation des données est un plan stratégique qu
 - Anticiper les défis potentiels et élaborer des stratégies pour les résoudre
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4 -->
+<!-- SLIDE:m7c_1 -->
 ## Comprendre votre audience : Cartographie des utilisateurs
 
 Avant de créer des produits, clarifiez qui les utilisera et comment.
@@ -401,7 +401,7 @@ Avant de créer des produits, clarifiez qui les utilisera et comment.
 Différentes audiences ont besoin de différents produits à partir des mêmes données.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5 -->
+<!-- SLIDE:m7d_1 -->
 ## Raconter une histoire avec des données
 
 La narration traduit les données et les visualisations en récits convaincants qui guident la prise de décision.
@@ -419,7 +419,7 @@ La narration traduit les données et les visualisations en récits convaincants 
 **Rappelez-vous :** L'histoire n'est pas seulement *ce que* les données montrent, mais *pourquoi c'est important* et *ce qu'il faut faire*.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5a -->
+<!-- SLIDE:m7d_1a -->
 ## Du résultat à l'histoire : exemple
 
 **Les données**
@@ -437,7 +437,7 @@ Les volumes CPN1 de la région du Nord ont chuté de 18 % au T1 2026, la plus fo
 L'histoire nomme l'audience, cadre le problème comme étant systémique et non lié aux données, et se conclut sur une implication précise assortie d'un calendrier.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6 -->
+<!-- SLIDE:m7e_1 -->
 ## Relier les résultats aux actions
 
 Les données n'ont de valeur que si elles conduisent à des décisions et des actions.
@@ -455,7 +455,7 @@ Les données n'ont de valeur que si elles conduisent à des décisions et des ac
 **Question clé :** Pour chaque résultat, demandez "Quelle décision ou action cela éclaire-t-il ?"
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6b -->
+<!-- SLIDE:m7e_1a -->
 ## Les trois sphères d'influence
 
 Le cadre des trois sphères oriente l'attention vers les actions que vous pouvez réellement tirer de vos données.
@@ -483,7 +483,7 @@ Le cadre des trois sphères oriente l'attention vers les actions que vous pouvez
 *Concentrez vos plans d'action sur ce que vous contrôlez. Notez l'influence et la préoccupation comme contexte.*
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6c -->
+<!-- SLIDE:m7e_1b -->
 ## Six questions pour transformer les résultats en actions
 
 Passez de « voici ce que montrent les données » à « voici ce que nous allons en faire ».
@@ -506,7 +506,7 @@ Passez de « voici ce que montrent les données » à « voici ce que nous allon
 6. **Quand pouvez-vous entreprendre cette action ? Qui est responsable ? Comment mesurerez-vous les résultats ?**
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7 -->
+<!-- SLIDE:m7f_1 -->
 ## Construire une feuille de route pour une utilisation durable
 
 Relier des résultats individuels à des actions, c'est la première étape. Une feuille de route transforme ce réflexe en habitude — passer d'une analyse ponctuelle à une **utilisation routinière des données**.
@@ -524,7 +524,7 @@ Relier des résultats individuels à des actions, c'est la première étape. Une
 **Objectif :** FASTR devient partie intégrante du suivi-évaluation de routine, pas un projet spécial.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7a -->
+<!-- SLIDE:m7f_1a -->
 ## Revue par les pairs des plans d'action
 
 **Formez des binômes** avec une autre équipe pays.

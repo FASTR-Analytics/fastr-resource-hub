@@ -1,6 +1,6 @@
 slides:
 - file: m9e_0_report_structure.md
-  order: 0.5
+  order: 0.0
   variant: full
   title: What a FASTR disruption report looks like
 - file: m9e_1_manual_to_ai_reporting.md

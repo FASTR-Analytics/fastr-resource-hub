@@ -3,13 +3,19 @@
 # Filenames not listed here fall to the end, sorted alphabetically.
 # Order applies to both EN and FR (handouts/en/<m>/ and handouts/fr/<m>/).
 
-m7:
-- h_m7_facilitator_guide.md    # Facilitator guide — run-of-show
-- h_m7_user_mapping.md         # 1. Identify your audience first
-- h_m7_finding_statement.md    # 2. Frame a finding
-- h_m7_results_actions.md      # 3. Link finding to actions
-- h_m7_action_plan.md          # 4. Build the country action plan
-- h_m7_action_plan_example.md  # 5. Worked-example reference (Hb at ANC)
+m7c:
+- h_m7c_facilitator_guide.md   # Session facilitator guide — covers m7c → m7f
+- h_m7c_user_mapping.md        # 1. Identify your audience first
+
+m7d:
+- h_m7d_finding_statement.md   # 1. Frame a finding
+
+m7e:
+- h_m7e_results_actions.md     # 1. Link finding to actions
+
+m7f:
+- h_m7f_action_plan.md         # 1. Build the country action plan
+- h_m7f_action_plan_example.md # 2. Worked-example reference (Hb at ANC)
 
 m9a:
 - h_m9a_facilitator_guide.md   # Facilitator guide — run-of-show

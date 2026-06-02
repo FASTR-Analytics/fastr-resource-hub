@@ -1,0 +1,13 @@
+slides:
+- file: m7b_1_data_visualization_communication.md
+  order: 1.0
+  variant: full
+  title: Passer des données aux messages clés
+- file: m7b_1a_data_visualization_communication_continued.md
+  order: 1.01
+  variant: full
+  title: 'Exemple : résultat → message clé'
+- file: m7b_1b_data_visualization_communication_continued.md
+  order: 1.02
+  variant: full
+  title: Choisir le bon format de rapport

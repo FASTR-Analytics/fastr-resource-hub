@@ -1,0 +1,17 @@
+slides:
+- file: m7e_1_linking_results_to_actions.md
+  order: 1.0
+  variant: full
+  title: Linking results to actions
+- file: m7e_1a_three_spheres_of_influence.md
+  order: 1.01
+  variant: full
+  title: Three spheres of influence
+- file: m7e_1b_linking_results_to_actions_continued.md
+  order: 1.02
+  variant: full
+  title: Six questions to turn results into actions
+- file: m7e_1c_dissemination_and_data_use_roadmap.md
+  order: 1.03
+  variant: full
+  title: Dissemination and data use roadmap

@@ -235,7 +235,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m7_1 -->
+<!-- SLIDE:m7a_1 -->
 ## Analytical thinking & interpretation
 
 A FASTR chart shows a pattern. Interpretation is the leap from **what the data shows** to **what it means** for the program.
@@ -249,7 +249,7 @@ For every FASTR output, work through three questions:
 <small>*The numbers themselves don't tell you what to do. Context, programmatic knowledge, and disciplined questioning do.*</small>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1a -->
+<!-- SLIDE:m7a_1a -->
 ## Critical thinking checklist
 
 Before drawing conclusions from FASTR outputs, ask:
@@ -261,7 +261,7 @@ Before drawing conclusions from FASTR outputs, ask:
 - **What additional information is needed?** What context would strengthen or challenge this interpretation?
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1b -->
+<!-- SLIDE:m7a_1b -->
 ## Common interpretation pitfalls
 
 Four traps catch us most often when we read FASTR outputs. Each one can turn a useful chart into a misleading message if it goes unnoticed.
@@ -292,7 +292,7 @@ Short-term fluctuations may be normal variation. Focus on sustained trends and s
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_1c -->
+<!-- SLIDE:m7a_1c -->
 ## Interpreting FASTR module outputs
 
 Each FASTR module has its own interpretation reflex. Knowing which one applies stops you from drawing the wrong conclusion from the right chart.
@@ -323,7 +323,7 @@ Examine patterns at multiple geographic levels — subnational disaggregation of
 </div>
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2 -->
+<!-- SLIDE:m7b_1 -->
 ## Moving from data to key messages
 
 A FASTR analysis produces dozens of **results** — DQA scores, outlier rates by district, coverage estimates by indicator, disruption flags. None of those is yet a message.
@@ -338,7 +338,7 @@ A **key takeaway** is what someone should decide, act on, or remember after they
 | **Used by** | The analyst | The decision-maker |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2a -->
+<!-- SLIDE:m7b_1a -->
 ## Example: result → key takeaway
 
 The same data can be told in two registers — the analytical one and the actionable one.
@@ -354,7 +354,7 @@ The same data can be told in two registers — the analytical one and the action
 The result belongs in the report. The takeaway belongs in the director's three-minute briefing.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_2b -->
+<!-- SLIDE:m7b_1b -->
 ## Choosing the right report format
 
 ### Key considerations
@@ -370,7 +370,7 @@ The result belongs in the report. The takeaway belongs in the director's three-m
 | General public and advocacy groups | Infographics + posters |
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6d -->
+<!-- SLIDE:m7e_1c -->
 ## Dissemination and data use roadmap
 
 A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
@@ -382,7 +382,7 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 - Anticipates potential challenges and develops strategies to solve for them
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_4 -->
+<!-- SLIDE:m7c_1 -->
 ## Understanding your audience: User mapping
 
 Before creating outputs, clarify who will use them and how.
@@ -402,7 +402,7 @@ Before creating outputs, clarify who will use them and how.
 Different audiences need different outputs from the same data.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5 -->
+<!-- SLIDE:m7d_1 -->
 ## Storytelling with data
 
 Storytelling translates data and visualizations into compelling narratives that guide decision-making.
@@ -420,7 +420,7 @@ Storytelling translates data and visualizations into compelling narratives that 
 **Remember:** The story is not just *what* the data shows, but *why it matters* and *what to do about it*.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_5a -->
+<!-- SLIDE:m7d_1a -->
 ## From data to story: example
 
 **The data**
@@ -438,7 +438,7 @@ ANC1 volumes in Northern Region dropped 18% in Q1 2026, the steepest fall in thr
 The story names the audience, frames the issue as system-level rather than data-level, and ends on a specific implication with timing.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6 -->
+<!-- SLIDE:m7e_1 -->
 ## Linking results to actions
 
 Data is only valuable if it leads to decisions and actions.
@@ -456,7 +456,7 @@ Data is only valuable if it leads to decisions and actions.
 **Key question:** For each finding, ask "What decision or action does this inform?"
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6b -->
+<!-- SLIDE:m7e_1a -->
 ## Three spheres of influence
 
 The Three Spheres framework directs attention to the actions you can actually take from your data.
@@ -484,7 +484,7 @@ The Three Spheres framework directs attention to the actions you can actually ta
 *Focus your action plans on what you control. Note influence and concern as context.*
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_6c -->
+<!-- SLIDE:m7e_1b -->
 ## Six questions to turn results into actions
 
 Move from "here's what the data shows" to "here's what we'll do about it".
@@ -507,7 +507,7 @@ Move from "here's what the data shows" to "here's what we'll do about it".
 6. **When can you take this action? Who is responsible? How will you measure success?**
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7 -->
+<!-- SLIDE:m7f_1 -->
 ## Building a roadmap for sustained use
 
 Linking individual results to actions is the first step. A roadmap turns that into a habit — moving from one-off analysis to **routine data use**.
@@ -525,7 +525,7 @@ Linking individual results to actions is the first step. A roadmap turns that in
 **Goal:** FASTR becomes part of routine M&E, not a special project.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m7_7a -->
+<!-- SLIDE:m7f_1a -->
 ## Peer review on action plans
 
 **Pair up** with another country team.

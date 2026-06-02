@@ -112,21 +112,92 @@ modules:
     - Coverage introduction
     - Interpreting outputs
     duration: 180-240 min
-- id: m7
-  number: '7'
-  folder: m7_results_communication
+- id: m7a
+  number: 7a
+  folder: m7a_analytical_thinking
   name:
-    en: Results Communication
-    fr: Communication des résultats
-    pt: Comunicação de resultados
+    en: Analytical thinking & interpretation
+    fr: Pensée analytique et interprétation
+    pt: Pensamento analítico e interpretação
   ai_context:
-    description: How to interpret findings, create visualizations, and communicate
-      results.
+    description: How to interpret FASTR outputs critically — reading charts, checking
+      against context, avoiding common pitfalls.
     topics:
-    - Analytical thinking
-    - Data visualization principles
-    - Using data for decisions
-    duration: 90-120 min
+    - Critical thinking checklist
+    - Common interpretation pitfalls
+    - Interpreting FASTR module outputs
+    duration: 30-45 min
+- id: m7b
+  number: 7b
+  folder: m7b_data_visualization
+  name:
+    en: Data visualization & communication
+    fr: Visualisation et communication des données
+    pt: Visualização e comunicação de dados
+  ai_context:
+    description: Principles for visualizing FASTR results — chart types, what to highlight,
+      what to leave out.
+    topics:
+    - Chart types
+    - Highlighting findings
+    - Visual hierarchy
+    duration: 30-45 min
+- id: m7c
+  number: 7c
+  folder: m7c_understanding_audience
+  name:
+    en: Understanding your audience
+    fr: Comprendre votre public
+    pt: Compreender o público
+  ai_context:
+    description: User mapping — knowing who reads the report, what they need, and how
+      they make decisions.
+    topics:
+    - User mapping
+    - Audience needs
+    duration: 20-30 min
+- id: m7d
+  number: 7d
+  folder: m7d_storytelling_with_data
+  name:
+    en: Storytelling with data
+    fr: Raconter une histoire avec les données
+    pt: Contar uma história com dados
+  ai_context:
+    description: Turning findings into a narrative — finding statements, examples, structure.
+    topics:
+    - Finding statements
+    - Data-to-story example
+    duration: 30-45 min
+- id: m7e
+  number: 7e
+  folder: m7e_linking_to_actions
+  name:
+    en: Linking results to actions
+    fr: Lier les résultats aux actions
+    pt: Ligar resultados a ações
+  ai_context:
+    description: From finding to action — three spheres of influence, six questions, dissemination
+      roadmap.
+    topics:
+    - Three spheres of influence
+    - Six questions to turn results into actions
+    - Dissemination and data use roadmap
+    duration: 45-60 min
+- id: m7f
+  number: 7f
+  folder: m7f_sustained_use_roadmap
+  name:
+    en: Roadmap for sustained use
+    fr: Feuille de route pour un usage durable
+    pt: Roteiro para uso sustentado
+  ai_context:
+    description: Building a country action plan and peer-reviewing it for sustained use
+      of FASTR.
+    topics:
+    - Building a roadmap
+    - Peer review of action plans
+    duration: 30-45 min
 - id: m8
   number: '8'
   folder: m8_survey_hfa
