@@ -272,8 +272,8 @@ TOPIC_NAMES = {
     'm7f_1a': 'peer_review_action_plans',
 
     # m8 - Survey & HFA (from 08_survey_hfa.md)
-    'm8_0': 'hfa_implementation_status',
-    'm8_0a': 'fastr_hfa_approach',
+    'm8_0': 'fastr_hfa_approach',
+    'm8_0a': 'hfa_implementation_status',
     'm8_1': 'rapid_cycle_facility_survey',
     'm8_1a': 'hfa_survey_design',
     'm8_1b': 'adaptive_survey_content',

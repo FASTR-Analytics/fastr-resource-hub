@@ -240,7 +240,7 @@ As perguntas são retiradas da estrutura PHCMFI da OMS e harmonizadas com as fer
 > O instrumento é **100% adaptável** pelos países - os módulos podem ser acrescentados, eliminados ou sequenciados de acordo com as prioridades locais.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_0 -->
+<!-- SLIDE:m8_0a -->
 <!-- _classe: compacto -->
 
 ## Inquéritos HFA nos países parceiros do GFF
@@ -281,7 +281,7 @@ Burkina Faso
 > A abordagem foi concebida para se adaptar ao contexto de cada país - a duração, a frequência e o conteúdo do inquérito são definidos localmente.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_0a -->
+<!-- SLIDE:m8_0 -->
 <!-- _class: two-panel -->
 
 ## A abordagem FASTR para a avaliação rápida de unidades de saúde

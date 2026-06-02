@@ -1,12 +1,12 @@
 slides:
-- file: m8_0_hfa_implementation_status.md
+- file: m8_0_fastr_hfa_approach.md
   order: 0.0
   variant: full
-  title: Inquéritos HFA nos países parceiros do GFF
-- file: m8_0a_fastr_hfa_approach.md
+  title: A abordagem FASTR para a avaliação rápida de unidades de saúde
+- file: m8_0a_hfa_implementation_status.md
   order: 0.01
   variant: full
-  title: A abordagem FASTR para inquéritos a unidades de saúde
+  title: Inquéritos HFA nos países parceiros do GFF
 - file: m8_1_rapid_cycle_facility_survey.md
   order: 1.0
   variant: full

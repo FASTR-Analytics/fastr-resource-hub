@@ -237,7 +237,7 @@ Questions are drawn from the WHO PHCMFI framework and harmonized with the HHFA, 
 > The instrument is **100% adaptable** by countries — modules can be added, dropped, or sequenced to fit local priorities.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_0 -->
+<!-- SLIDE:m8_0a -->
 <!-- _class: compact -->
 
 ## HFA surveys across GFF partner countries
@@ -278,7 +278,7 @@ Burkina Faso
 > The approach is designed to adapt to each country's context — survey duration, frequency, and content are defined locally.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_0a -->
+<!-- SLIDE:m8_0 -->
 <!-- _class: two-panel -->
 
 ## The FASTR approach to rapid health facility assessment

@@ -145,7 +145,7 @@ En fonction des besoins et des ressources du pays, les enquêtes sur l'EPT peuve
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m8_0 -->
+<!-- SLIDE:m8_0a -->
 <!-- _class: compact -->
 
 ## Les enquêtes FOSA dans les pays partenaires du GFF
@@ -186,7 +186,7 @@ Burkina Faso
 > L'approche est conçue pour s'adapter au contexte de chaque pays — durée, fréquence, et contenu de l'enquête sont définis localement.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m8_0a -->
+<!-- SLIDE:m8_0 -->
 <!-- _class: two-panel -->
 
 ## L'approche FASTR pour l'évaluation rapide des formations sanitaires
