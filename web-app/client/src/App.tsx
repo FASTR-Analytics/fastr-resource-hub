@@ -212,6 +212,7 @@ function LibraryMode() {
   const [sessions, setSessions] = useState<Array<{ id: string; name: string }>>([])
   const [expandedSessions, setExpandedSessions] = useState<Set<string>>(new Set())
   const [templatesCollapsed, setTemplatesCollapsed] = useState(true)
+  const [showCondensed, setShowCondensed] = useState(false)
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
@@ -386,7 +387,9 @@ function LibraryMode() {
     setPresenterNotes([])
   }, [contentLanguage])
 
-  // Build a flat list of all topics with their module info, then filter by search
+  // Build a flat list of all topics with their module info, then filter by search.
+  // Condensed (_s) variants are hidden by default — only m4/m5/m6 have them and they
+  // duplicate the full topic count. Users can opt in with the "Show condensed" toggle.
   const allTopics = React.useMemo(() => {
     const items: Array<{ topic: any; module: any; variant: 'full' | 'condensed' | null }> = []
     for (const module of contentLibrary) {
@@ -394,11 +397,13 @@ function LibraryMode() {
       const condensed = module.condensedTopics || []
       const fallback = !full.length && !condensed.length ? (module.topics || []) : []
       for (const topic of full) items.push({ topic, module, variant: full.length && condensed.length ? 'full' : null })
-      for (const topic of condensed) items.push({ topic, module, variant: 'condensed' })
+      if (showCondensed) {
+        for (const topic of condensed) items.push({ topic, module, variant: 'condensed' })
+      }
       for (const topic of fallback) items.push({ topic, module, variant: null })
     }
     return items
-  }, [contentLibrary])
+  }, [contentLibrary, showCondensed])
 
   const filteredTopics = React.useMemo(() => {
     if (!searchQuery.trim()) return allTopics
@@ -514,6 +519,17 @@ function LibraryMode() {
               {filteredTopics.length} {filteredTopics.length === 1 ? t('result', contentLanguage) : t('results', contentLanguage)}
             </p>
           )}
+          <label className="flex items-center gap-2 mt-2 text-caption text-slate-500 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={showCondensed}
+              onChange={(e) => setShowCondensed(e.target.checked)}
+              className="w-3.5 h-3.5 rounded border-slate-300 text-fastr-primary focus:ring-fastr-secondary/30"
+            />
+            <span>
+              {contentLanguage === 'fr' ? 'Afficher les versions condensées' : contentLanguage === 'pt' ? 'Mostrar versões condensadas' : 'Show condensed versions'}
+            </span>
+          </label>
         </div>
 
         {/* Module/topic list */}
