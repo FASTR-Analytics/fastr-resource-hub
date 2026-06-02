@@ -182,10 +182,6 @@ router.get('/modules', async (req, res) => {
 
           const content = fs.readFileSync(filePath, 'utf-8')
 
-          // Filter out activity-pointer slides — they're placeholders that point
-          // to handouts; users find them through the Handouts tab now.
-          if (content.includes('_class: activity-pointer')) continue
-
           // Count slides
           const slides = content.split(/^---$/m).filter(s => s.trim() && !s.trim().startsWith('marp:'))
           const slideCount = slides.length
