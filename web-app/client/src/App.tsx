@@ -209,9 +209,9 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
 function LibraryMode() {
   const { contentLibrary, loadContentLibrary, contentLanguage } = useWorkshopStore()
   const [searchQuery, setSearchQuery] = useState('')
-  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
-  const [themes, setThemes] = useState<Array<{ id: string; name: string }>>([])
-  const [collapsedThemes, setCollapsedThemes] = useState<Set<string>>(new Set())
+  const [sessions, setSessions] = useState<Array<{ id: string; name: string }>>([])
+  const [expandedSessions, setExpandedSessions] = useState<Set<string>>(new Set())
+  const [templatesCollapsed, setTemplatesCollapsed] = useState(true)
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
@@ -276,14 +276,12 @@ function LibraryMode() {
   }
 
   useEffect(() => {
-    fetch(`/api/content/themes?language=${contentLanguage}`, { credentials: 'include' })
+    fetch(`/api/content/sessions?language=${contentLanguage}`, { credentials: 'include' })
       .then(r => r.ok ? r.json() : [])
       .then((data) => {
-        setThemes(data)
-        // Start with theme sections collapsed — show just the headers, expand on demand.
-        setCollapsedThemes(new Set([...data.map((t: any) => t.id), '_other']))
+        setSessions(data)
       })
-      .catch(err => console.warn('Failed to load themes:', err))
+      .catch(err => console.warn('Failed to load sessions:', err))
   }, [contentLanguage])
 
   useEffect(() => {
@@ -498,30 +496,37 @@ function LibraryMode() {
     return groups
   }, [filteredTopics, contentLibrary])
 
-  // Group modules under themes. Modules without a theme (imported/external) bucket under '_other'.
-  const themedGroups = React.useMemo(() => {
-    type ModuleGroup = { module: any; items: typeof filteredTopics }
-    const themeOrder: Array<{ id: string; name: string }> = [
-      ...themes,
-      { id: '_other', name: contentLanguage === 'fr' ? 'Autre contenu' : 'Other content' },
-    ]
-    const byTheme = new Map<string, ModuleGroup[]>()
-    for (const g of groupedByModule) {
-      const tid = (g.module as any).theme || '_other'
-      if (!byTheme.has(tid)) byTheme.set(tid, [])
-      byTheme.get(tid)!.push(g)
+  // Group modules under curriculum sessions. Within each session, slides are
+  // split into theory[] and activities[] by title prefix (Activity / Activité / Atividade).
+  const sessionGroups = React.useMemo(() => {
+    const isActivity = (topic: any) =>
+      /^(activity|activité|atividade)\s*:/i.test(topic.title || '')
+    type ModuleSlides = {
+      module: any
+      theory: typeof filteredTopics
+      activities: typeof filteredTopics
     }
-    return themeOrder
-      .map(t => ({
-        id: t.id,
-        name: t.name,
-        modules: byTheme.get(t.id) || [],
-        totalSlides: (byTheme.get(t.id) || []).reduce(
-          (sum, mg) => sum + (mg.module.totalSlides || 0), 0
-        ),
-      }))
-      .filter(t => t.modules.length > 0)
-  }, [groupedByModule, themes, contentLanguage])
+    const bySession = new Map<string, ModuleSlides[]>()
+    for (const g of groupedByModule) {
+      const sid = (g.module as any).session || '_other'
+      const theory = g.items.filter(it => !isActivity(it.topic))
+      const activities = g.items.filter(it => isActivity(it.topic))
+      if (!bySession.has(sid)) bySession.set(sid, [])
+      bySession.get(sid)!.push({ module: g.module, theory, activities })
+    }
+    const sessionOrder: Array<{ id: string; name: string }> = [
+      ...sessions,
+      { id: '_other', name: contentLanguage === 'fr' ? 'Autre contenu' : contentLanguage === 'pt' ? 'Outro conteúdo' : 'Other content' },
+    ]
+    return sessionOrder
+      .map(s => {
+        const mods = bySession.get(s.id) || []
+        const theoryCount = mods.reduce((sum, m) => sum + m.theory.length, 0)
+        const activityCount = mods.reduce((sum, m) => sum + m.activities.length, 0)
+        return { id: s.id, name: s.name, modules: mods, theoryCount, activityCount }
+      })
+      .filter(s => s.modules.length > 0)
+  }, [groupedByModule, sessions, contentLanguage])
 
   if (contentLibrary.length === 0) {
     // Skeleton — left panel module rows, right panel empty hint
@@ -586,192 +591,116 @@ function LibraryMode() {
               {t('noResultsFound', contentLanguage)}
             </div>
           ) : (
-            themedGroups.map((themeGroup) => {
+            sessionGroups.map((sessionGroup) => {
               const isSearching = searchQuery.trim().length > 0
-              const themeOpen = isSearching || !collapsedThemes.has(themeGroup.id)
-              return (
-                <div key={themeGroup.id} className="mb-1">
-                  <button
-                    onClick={() => {
-                      const next = new Set(collapsedThemes)
-                      if (next.has(themeGroup.id)) next.delete(themeGroup.id)
-                      else next.add(themeGroup.id)
-                      setCollapsedThemes(next)
-                    }}
-                    className="w-full text-left px-4 py-1.5 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
+              const isExpanded = isSearching || expandedSessions.has(sessionGroup.id)
+              const labelTheory = contentLanguage === 'fr' ? 'théorie' : contentLanguage === 'pt' ? 'teoria' : 'theory'
+              const labelActivities = contentLanguage === 'fr' ? 'activités' : contentLanguage === 'pt' ? 'atividades' : 'activities'
+              const headerTheory = contentLanguage === 'fr' ? 'Théorie' : contentLanguage === 'pt' ? 'Teoria' : 'Theory'
+              const headerActivities = contentLanguage === 'fr' ? 'Activités' : contentLanguage === 'pt' ? 'Atividades' : 'Activities'
+              const renderSlideRow = ({ topic, variant }: { topic: any; variant: 'full' | 'condensed' | null }) => {
+                const isChecked = selected.has(topic.id)
+                return (
+                  <div
+                    key={topic.id}
+                    className={`w-full flex items-center transition-colors ${
+                      previewTopic?.id === topic.id
+                        ? 'bg-fastr-light border-l-2 border-l-fastr-primary'
+                        : 'hover:bg-slate-50 border-l-2 border-l-transparent'
+                    }`}
                   >
-                    {themeOpen ? (
-                      <ChevronDown className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
-                    ) : (
-                      <ChevronRight className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
-                    )}
-                    <span className="text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex-1">
-                      {themeGroup.name}
-                    </span>
-                    <span className="text-caption text-slate-400">
-                      {themeGroup.modules.length} · {themeGroup.totalSlides}
-                    </span>
-                  </button>
-                  {themeOpen && themeGroup.modules.map(({ module, items }) => {
-              const isSearching = searchQuery.trim().length > 0
-              const isExpanded = isSearching || expandedModules.has(module.id)
-              const hasFull = (module.fullTopics?.length || module.topics?.length || 0) > 0
-              const hasCondensed = (module.condensedTopics?.length || 0) > 0
-              const moduleId = `module-${module.id}-full`
-              const moduleCondId = `module-${module.id}-condensed`
-              const isModulePreviewing = previewTopic?.id === moduleId || previewTopic?.id === moduleCondId
-              // Module pack = the full variant (fall back to the only variant present).
-              const packIds: string[] = ((module.fullTopics?.length ? module.fullTopics : module.topics) || []).map((tp: any) => tp.id)
-              const packAll = packIds.length > 0 && packIds.every(id => selected.has(id))
-              const packSome = !packAll && packIds.some(id => selected.has(id))
-              const togglePack = () => setSelected(prev => {
-                const next = new Set(prev)
-                if (packAll) packIds.forEach(id => next.delete(id))
-                else packIds.forEach(id => next.add(id))
-                return next
-              })
-              return (
-                <div key={module.id} className="mb-0.5 group">
-                  <div className={`w-full flex items-center gap-1 pr-2 ${isModulePreviewing ? 'bg-fastr-light' : ''}`}>
                     <button
-                      onClick={togglePack}
-                      aria-pressed={packAll}
-                      title={contentLanguage === 'fr' ? 'Sélectionner le module complet' : 'Select full module'}
-                      aria-label={contentLanguage === 'fr' ? 'Sélectionner le module complet' : 'Select full module'}
-                      className="flex-shrink-0 pl-3 pr-0.5 py-2 text-slate-400 hover:text-fastr-primary focus-ring"
+                      onClick={() => toggleSelect(topic.id)}
+                      aria-pressed={isChecked}
+                      aria-label={contentLanguage === 'fr' ? 'Sélectionner la diapositive' : 'Select slide'}
+                      className="flex-shrink-0 pl-4 pr-1 py-1.5 text-slate-400 hover:text-fastr-primary focus-ring"
                     >
-                      {packAll
+                      {isChecked
                         ? <Check className="w-4 h-4 text-fastr-primary" />
-                        : packSome
-                          ? <Check className="w-4 h-4 text-fastr-primary/40" />
-                          : <Square className="w-4 h-4" />}
+                        : <Square className="w-4 h-4" />}
                     </button>
                     <button
-                      onClick={() => {
-                        const next = new Set(expandedModules)
-                        if (next.has(module.id)) next.delete(module.id)
-                        else next.add(module.id)
-                        setExpandedModules(next)
-                      }}
-                      className={`flex-1 text-left px-4 py-2 flex items-center gap-2 transition-colors focus-ring ${
-                        isModulePreviewing ? 'text-fastr-primary' : 'hover:bg-slate-50'
+                      onClick={() => loadPreview(topic)}
+                      className={`flex-1 min-w-0 text-left pl-1 pr-3 py-1.5 flex items-center gap-2 focus-ring ${
+                        previewTopic?.id === topic.id ? 'text-fastr-primary' : ''
                       }`}
                     >
-                      <ChevronRight className={`w-3.5 h-3.5 text-slate-400 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : ''}`} aria-hidden />
-                      <span className="text-body-sm font-semibold text-slate-800 flex-1 truncate">{module.name}</span>
-                      <span className="text-caption text-slate-400">{items.length}</span>
-                    </button>
-                    {hasFull && hasCondensed ? (
-                      <>
-                        <button
-                          onClick={() => loadModulePreview(module, 'full')}
-                          title={t('previewFullModule', contentLanguage)}
-                          aria-label={t('previewFullModule', contentLanguage)}
-                          className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
-                            previewTopic?.id === moduleId
-                              ? 'bg-fastr-primary text-white'
-                              : 'bg-fastr-light text-fastr-primary hover:bg-fastr-primary hover:text-white'
-                          }`}
-                        >
-                          {contentLanguage === 'fr' ? 'Complet' : contentLanguage === 'pt' ? 'Completo' : 'Full'}
-                        </button>
-                        <button
-                          onClick={() => loadModulePreview(module, 'condensed')}
-                          title={t('previewCondensedModule', contentLanguage)}
-                          aria-label={t('previewCondensedModule', contentLanguage)}
-                          className={`flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide transition-colors focus-ring ${
-                            previewTopic?.id === moduleCondId
-                              ? 'bg-amber-500 text-white'
-                              : 'bg-amber-50 text-amber-700 hover:bg-amber-500 hover:text-white'
-                          }`}
-                        >
-                          {contentLanguage === 'fr' ? 'Condensé' : contentLanguage === 'pt' ? 'Condensado' : 'Condensed'}
-                        </button>
-                      </>
-                    ) : hasFull ? (
-                      <button
-                        onClick={() => loadModulePreview(module, 'full')}
-                        title={t('previewFullModule', contentLanguage)}
-                        aria-label={t('previewFullModule', contentLanguage)}
-                        className={`flex-shrink-0 p-1.5 rounded-md transition-colors focus-ring ${
-                          previewTopic?.id === moduleId
-                            ? 'bg-fastr-primary text-white'
-                            : 'text-slate-400 hover:text-fastr-primary hover:bg-white opacity-0 group-hover:opacity-100'
-                        }`}
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                      </button>
-                    ) : null}
-                  </div>
-                  {isExpanded && (() => {
-                    const isActivityTopic = (topic: any) =>
-                      /^(activity|activité|atividade)\s*:/i.test(topic.title || '')
-                    const activities = items.filter(it => isActivityTopic(it.topic))
-                    const contentItems = items.filter(it => !isActivityTopic(it.topic))
-                    const showHeaders = activities.length > 0 && contentItems.length > 0
-                    const headerActivities = contentLanguage === 'fr' ? 'Activités'
-                      : contentLanguage === 'pt' ? 'Atividades' : 'Activities'
-                    const headerContent = contentLanguage === 'fr' ? 'Contenu'
-                      : contentLanguage === 'pt' ? 'Conteúdo' : 'Content'
-                    const renderRow = ({ topic, variant }: typeof items[number]) => {
-                      const isChecked = selected.has(topic.id)
-                      return (
-                        <div
-                          key={topic.id}
-                          className={`w-full flex items-center transition-colors ${
-                            previewTopic?.id === topic.id
-                              ? 'bg-fastr-light border-l-2 border-l-fastr-primary'
-                              : 'hover:bg-slate-50 border-l-2 border-l-transparent'
-                          }`}
-                        >
-                          <button
-                            onClick={() => toggleSelect(topic.id)}
-                            aria-pressed={isChecked}
-                            aria-label={contentLanguage === 'fr' ? 'Sélectionner la diapositive' : 'Select slide'}
-                            className="flex-shrink-0 pl-5 pr-1 py-2 text-slate-400 hover:text-fastr-primary focus-ring"
-                          >
-                            {isChecked
-                              ? <Check className="w-4 h-4 text-fastr-primary" />
-                              : <Square className="w-4 h-4" />}
-                          </button>
-                          <button
-                            onClick={() => loadPreview(topic)}
-                            className={`flex-1 min-w-0 text-left pl-1 pr-4 py-2 flex items-center gap-3 focus-ring ${
-                              previewTopic?.id === topic.id ? 'text-fastr-primary' : ''
-                            }`}
-                          >
-                            <div className="flex-1 min-w-0">
-                              <div className="text-body-sm text-slate-800 truncate">{topic.title}</div>
-                              <div className="flex items-center gap-2 mt-0.5">
-                                <span className="text-caption text-slate-500">{topic.slideCount} {t('slides', contentLanguage)}</span>
-                                {variant === 'condensed' && (
-                                  <span className="inline-flex items-center rounded-pill px-2 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('condensed', contentLanguage)}</span>
-                                )}
-                              </div>
-                            </div>
-                            <Eye className="w-4 h-4 text-slate-300 flex-shrink-0" aria-hidden />
-                          </button>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-body-sm text-slate-800 truncate leading-tight">{topic.title}</div>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-caption text-slate-500">{topic.slideCount} {t('slides', contentLanguage)}</span>
+                          {variant === 'condensed' && (
+                            <span className="inline-flex items-center rounded-pill px-1.5 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('condensed', contentLanguage)}</span>
+                          )}
                         </div>
-                      )
-                    }
-                    return (
-                      <div className="pb-1">
-                        {showHeaders ? (
-                          <>
-                            <div className="pl-8 pr-4 pt-1.5 pb-0.5 text-[10px] uppercase tracking-wide font-semibold text-slate-400">{headerActivities}</div>
-                            {activities.map(renderRow)}
-                            <div className="pl-8 pr-4 pt-2 pb-0.5 text-[10px] uppercase tracking-wide font-semibold text-slate-400">{headerContent}</div>
-                            {contentItems.map(renderRow)}
-                          </>
-                        ) : (
-                          items.map(renderRow)
+                      </div>
+                    </button>
+                  </div>
+                )
+              }
+              return (
+                <div key={sessionGroup.id} className="mb-0.5">
+                  <button
+                    onClick={() => {
+                      const next = new Set(expandedSessions)
+                      if (next.has(sessionGroup.id)) next.delete(sessionGroup.id)
+                      else next.add(sessionGroup.id)
+                      setExpandedSessions(next)
+                    }}
+                    className="w-full text-left px-4 py-2 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
+                  >
+                    <ChevronRight className={`w-3.5 h-3.5 text-slate-500 flex-shrink-0 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                    <span className="text-body-sm font-semibold text-slate-800 flex-1 truncate">{sessionGroup.name}</span>
+                    <span className="text-caption text-slate-500 flex items-center gap-2 flex-shrink-0">
+                      {sessionGroup.theoryCount > 0 && (
+                        <span className="inline-flex items-center gap-1">
+                          <span className="font-semibold text-slate-700">{sessionGroup.theoryCount}</span>
+                          <span>{labelTheory}</span>
+                        </span>
+                      )}
+                      {sessionGroup.theoryCount > 0 && sessionGroup.activityCount > 0 && <span className="text-slate-300">·</span>}
+                      {sessionGroup.activityCount > 0 && (
+                        <span className="inline-flex items-center gap-1">
+                          <span className="font-semibold text-amber-700">{sessionGroup.activityCount}</span>
+                          <span>{labelActivities}</span>
+                        </span>
+                      )}
+                    </span>
+                  </button>
+                  {isExpanded && (
+                    <div className="grid grid-cols-2 gap-0 border-b border-slate-100 bg-white">
+                      {/* Theory column */}
+                      <div className="border-r border-slate-100 min-h-[40px]">
+                        <div className="px-4 py-1.5 text-[10px] uppercase tracking-wide font-semibold text-slate-500 bg-slate-50/50 border-b border-slate-100">
+                          {headerTheory} <span className="text-slate-400 font-normal">({sessionGroup.theoryCount})</span>
+                        </div>
+                        {sessionGroup.modules.flatMap(({ module, theory }) => (
+                          theory.length === 0 ? [] : [
+                            <div key={`${module.id}-th-h`} className="px-4 pt-2 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">{module.name}</div>,
+                            ...theory.map(it => renderSlideRow(it as any)),
+                          ]
+                        ))}
+                        {sessionGroup.theoryCount === 0 && (
+                          <div className="px-4 py-3 text-caption text-slate-300 italic">—</div>
                         )}
                       </div>
-                    )
-                  })()}
-                </div>
-              )
-            })}
+                      {/* Activities column */}
+                      <div className="min-h-[40px]">
+                        <div className="px-4 py-1.5 text-[10px] uppercase tracking-wide font-semibold text-amber-700 bg-amber-50/30 border-b border-amber-100">
+                          {headerActivities} <span className="text-amber-600/70 font-normal">({sessionGroup.activityCount})</span>
+                        </div>
+                        {sessionGroup.modules.flatMap(({ module, activities }) => (
+                          activities.length === 0 ? [] : [
+                            <div key={`${module.id}-ac-h`} className="px-4 pt-2 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-400">{module.name}</div>,
+                            ...activities.map(it => renderSlideRow(it as any)),
+                          ]
+                        ))}
+                        {sessionGroup.activityCount === 0 && (
+                          <div className="px-4 py-3 text-caption text-slate-300 italic">—</div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             })
@@ -779,16 +708,11 @@ function LibraryMode() {
 
           {/* Templates & structure — consolidated from the old export page */}
           {templates.length > 0 && (() => {
-            const tplOpen = searchQuery.trim().length > 0 || !collapsedThemes.has('_templates')
+            const tplOpen = searchQuery.trim().length > 0 || !templatesCollapsed
             return (
               <div className="mb-1">
                 <button
-                  onClick={() => {
-                    const next = new Set(collapsedThemes)
-                    if (next.has('_templates')) next.delete('_templates')
-                    else next.add('_templates')
-                    setCollapsedThemes(next)
-                  }}
+                  onClick={() => setTemplatesCollapsed(!templatesCollapsed)}
                   className="w-full text-left px-4 py-1.5 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
                 >
                   {tplOpen ? (

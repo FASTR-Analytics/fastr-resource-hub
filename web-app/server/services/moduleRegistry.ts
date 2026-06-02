@@ -41,7 +41,7 @@ export interface ModuleDefinition {
   id: string           // e.g., 'm4', 'm3b', 'mai', 'overview'
   number: string       // e.g., '4', '3b', 'overview'
   folder: string       // e.g., 'm4_data_quality_assessment'
-  theme?: string       // theme id from themes registry (e.g., 'foundations')
+  session?: string     // session id from sessions registry (e.g., 'methods')
   deprecated?: boolean // if true, hidden from the Content Library / export picker
   name: {
     en: string
@@ -51,7 +51,7 @@ export interface ModuleDefinition {
   ai_context?: AIContext
 }
 
-export interface ThemeDefinition {
+export interface SessionDefinition {
   id: string
   name: {
     en: string
@@ -72,7 +72,7 @@ export interface ModuleMeta {
   slides: SlideEntry[]
 }
 
-type Language = 'en' | 'fr' | 'pt' | 'pt'
+type Language = 'en' | 'fr' | 'pt'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Cache
@@ -86,7 +86,7 @@ interface CacheEntry<T> {
 const CACHE_TTL = 60 * 1000  // 60 seconds
 
 let modulesCache: CacheEntry<ModuleDefinition[]> | null = null
-let themesCache: CacheEntry<ThemeDefinition[]> | null = null
+let sessionsCache: CacheEntry<SessionDefinition[]> | null = null
 const metaCache = new Map<string, CacheEntry<ModuleMeta>>()
 
 function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
@@ -112,26 +112,28 @@ export function loadModulesRegistry(): ModuleDefinition[] {
   }
 
   const raw = fs.readFileSync(modulesPath, 'utf-8')
-  const parsed = yaml.load(raw) as { modules: ModuleDefinition[]; themes?: ThemeDefinition[] }
+  const parsed = yaml.load(raw) as { modules: ModuleDefinition[]; sessions?: SessionDefinition[] }
   const modules = parsed?.modules || []
-  const themes = parsed?.themes || []
+  const sessions = parsed?.sessions || []
 
   modulesCache = { data: modules, timestamp: Date.now() }
-  themesCache = { data: themes, timestamp: Date.now() }
+  sessionsCache = { data: sessions, timestamp: Date.now() }
   return modules
 }
 
 /**
- * Load theme definitions from modules.yaml (themes section).
- * Themes group modules in the content library UI.
+ * Load session definitions from modules.yaml (sessions section).
+ * Sessions are the curriculum-level grouping for the content library
+ * (e.g., "Methods", "Slide decks", "Action planning & roadmap"). Each
+ * module declares one session via the `session:` field.
  */
-export function loadThemesRegistry(): ThemeDefinition[] {
-  if (isFresh(themesCache)) {
-    return themesCache.data
+export function loadSessionsRegistry(): SessionDefinition[] {
+  if (isFresh(sessionsCache)) {
+    return sessionsCache.data
   }
-  // Re-parse modules.yaml — also populates themesCache as a side effect
+  // Re-parse modules.yaml — also populates sessionsCache as a side effect
   loadModulesRegistry()
-  const c = themesCache as CacheEntry<ThemeDefinition[]> | null
+  const c = sessionsCache as CacheEntry<SessionDefinition[]> | null
   return c?.data || []
 }
 
@@ -263,6 +265,6 @@ export async function loadImportedModules(): Promise<Array<{
  */
 export function invalidateRegistryCache(): void {
   modulesCache = null
-  themesCache = null
+  sessionsCache = null
   metaCache.clear()
 }

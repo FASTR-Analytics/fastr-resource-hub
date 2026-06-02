@@ -10,7 +10,7 @@ import { renderMarkdown, getThemeCSS } from '../services/marpService.js'
 import {
   loadModulesRegistry,
   loadModuleMeta,
-  loadThemesRegistry,
+  loadSessionsRegistry,
   getModuleNamesDict,
   getModuleFolder,
   invalidateRegistryCache,
@@ -109,7 +109,7 @@ function getTemplatesPath(language: Language = 'en'): string {
 }
 
 // Supported languages
-type Language = 'en' | 'fr' | 'pt' | 'pt'
+type Language = 'en' | 'fr' | 'pt'
 
 // Get core content path for a specific language
 function getCoreContentPath(language: Language = 'en'): string {
@@ -298,7 +298,7 @@ router.get('/modules', async (req, res) => {
         id: modId,
         name: regMod.name[language] || regMod.name.en || `Module ${modNum}`,
         folder: regMod.folder,
-        theme: regMod.theme,
+        session: regMod.session,
         topics: dedupeById(allTopics),
         fullTopics: dedupeById(fullTopics),
         condensedTopics: dedupeById(condensedTopics),
@@ -372,18 +372,18 @@ router.get('/modules', async (req, res) => {
   }
 })
 
-// GET /api/content/themes - Get theme definitions for grouping modules in UI
+// GET /api/content/sessions - Get session definitions for grouping modules in UI
 // Query params: ?language=fr (default: en)
-router.get('/themes', (req, res) => {
+router.get('/sessions', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
-    const themes = loadThemesRegistry()
-    res.json(themes.map(t => ({
-      id: t.id,
-      name: t.name[language] || t.name.en,
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt'
+    const sessions = loadSessionsRegistry()
+    res.json(sessions.map(s => ({
+      id: s.id,
+      name: s.name[language] || s.name.en,
     })))
   } catch (error: any) {
-    console.error('Error getting themes:', error)
+    console.error('Error getting sessions:', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
@@ -757,8 +757,8 @@ interface HandoutEntry {
 interface HandoutGroup {
   moduleId: string
   moduleName: string
-  themeId: string | null
-  themeName: string | null
+  sessionId: string | null
+  sessionName: string | null
   handouts: HandoutEntry[]
 }
 
@@ -831,7 +831,7 @@ function findPdfInModuleDir(moduleDir: string, short: string): string | null {
 // is "01_facilitator_guide.pdf"), so a global glob would pick the wrong one.
 function resolvePdfUrl(
   stem: string,
-  language: 'en' | 'fr' | 'pt' | 'pt',
+  language: 'en' | 'fr' | 'pt',
   moduleId: string,
   type: HandoutType,
   moduleName: string | null
@@ -875,7 +875,7 @@ function resolvePdfUrl(
 // Query params: ?language=fr (default: en)
 router.get('/handouts', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt'
     const cacheKey = language
 
     // Bust cache when _order.yaml or _out/ changes (so rebuilt PDFs surface).
@@ -901,9 +901,9 @@ router.get('/handouts', (req, res) => {
     const moduleNames = getModuleNamesDict(language)
     const orderSpec = loadHandoutOrder()
     const registryModules = loadModulesRegistry()
-    const themes = loadThemesRegistry()
-    const themeNameById = new Map(themes.map(t => [t.id, t.name[language] || t.name.en]))
-    const moduleThemeById = new Map(registryModules.map(m => [m.id, m.theme || null]))
+    const sessions = loadSessionsRegistry()
+    const sessionNameById = new Map(sessions.map(s => [s.id, s.name[language] || s.name.en]))
+    const moduleSessionById = new Map(registryModules.map(m => [m.id, m.session || null]))
     // Internal/non-workshop folders that live under handouts/ but should not
     // appear in the Content Library's Handouts tab.
     const EXCLUDED_HANDOUT_DIRS = new Set(['onboarding'])
@@ -955,16 +955,16 @@ router.get('/handouts', (req, res) => {
         })
       }
 
-      const themeId = moduleThemeById.get(moduleId) || null
-      const themeName = themeId ? (themeNameById.get(themeId) || null) : null
-      groups.push({ moduleId, moduleName, themeId, themeName, handouts })
+      const sessionId = moduleSessionById.get(moduleId) || null
+      const sessionName = sessionId ? (sessionNameById.get(sessionId) || null) : null
+      groups.push({ moduleId, moduleName, sessionId, sessionName, handouts })
     }
 
-    // Sort groups by theme order (foundations → data → analysis → communication → platform → workshop)
-    const themeOrder = new Map(themes.map((t, i) => [t.id, i]))
+    // Sort groups by session order from modules.yaml
+    const sessionOrder = new Map(sessions.map((s, i) => [s.id, i]))
     groups.sort((a, b) => {
-      const ai = a.themeId ? (themeOrder.get(a.themeId) ?? 999) : 999
-      const bi = b.themeId ? (themeOrder.get(b.themeId) ?? 999) : 999
+      const ai = a.sessionId ? (sessionOrder.get(a.sessionId) ?? 999) : 999
+      const bi = b.sessionId ? (sessionOrder.get(b.sessionId) ?? 999) : 999
       if (ai !== bi) return ai - bi
       return a.moduleId.localeCompare(b.moduleId)
     })
@@ -980,7 +980,7 @@ router.get('/handouts', (req, res) => {
 // GET /api/content/handouts/source/:moduleId/:file - Read handout markdown source
 router.get('/handouts/source/:moduleId/:file', (req, res) => {
   try {
-    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt' | 'pt'
+    const language = ((req.query.language as Language) || 'en') as 'en' | 'fr' | 'pt'
     const moduleId = req.params.moduleId
     const file = req.params.file
 

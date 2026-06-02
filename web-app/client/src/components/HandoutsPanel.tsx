@@ -38,8 +38,8 @@ interface HandoutEntry {
 interface HandoutGroup {
   moduleId: string
   moduleName: string
-  themeId: string | null
-  themeName: string | null
+  sessionId: string | null
+  sessionName: string | null
   handouts: HandoutEntry[]
 }
 
@@ -50,21 +50,30 @@ interface PreviewState {
   loading: boolean
 }
 
-function themeIcon(themeId: string) {
-  switch (themeId) {
-    case 'foundations':
+function sessionIcon(sessionId: string) {
+  switch (sessionId) {
+    case 'intro':
+    case 'questions':
       return <Compass className="w-3.5 h-3.5" />
-    case 'data':
+    case 'extraction':
       return <Database className="w-3.5 h-3.5" />
-    case 'analysis':
+    case 'methods':
+      return <FlaskConical className="w-3.5 h-3.5" />
+    case 'viz':
       return <BarChart3 className="w-3.5 h-3.5" />
+    case 'decks':
+    case 'reports':
     case 'communication':
       return <Megaphone className="w-3.5 h-3.5" />
     case 'platform':
+    case 'setup':
+    case 'ai':
+    case 'prompting':
       return <Settings className="w-3.5 h-3.5" />
-    case 'methodology':
+    case 'hfa':
       return <FlaskConical className="w-3.5 h-3.5" />
-    case 'workshop':
+    case 'action':
+    case 'tools':
       return <Users className="w-3.5 h-3.5" />
     default:
       return null
@@ -76,16 +85,16 @@ export function HandoutsPanel() {
   const [groups, setGroups] = useState<HandoutGroup[]>([])
   const [loading, setLoading] = useState(true)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
-  // Theme sections start collapsed (tidier; expand on demand). Tracks the open ones.
-  const [openThemes, setOpenThemes] = useState<Set<string>>(new Set())
+  // Session sections start collapsed (tidier; expand on demand). Tracks the open ones.
+  const [openSessions, setOpenSessions] = useState<Set<string>>(new Set())
   const [preview, setPreview] = useState<PreviewState | null>(null)
   const [audience, setAudience] = useState<HandoutType>('participant')
 
-  const toggleTheme = (themeId: string) => {
-    setOpenThemes(prev => {
+  const toggleSession = (sessionId: string) => {
+    setOpenSessions(prev => {
       const next = new Set(prev)
-      if (next.has(themeId)) next.delete(themeId)
-      else next.add(themeId)
+      if (next.has(sessionId)) next.delete(sessionId)
+      else next.add(sessionId)
       return next
     })
   }
@@ -183,17 +192,17 @@ export function HandoutsPanel() {
       .filter((g) => g.handouts.length > 0)
   }, [groups, audience])
 
-  // Bucket by theme, with workshop-activity modules (m9*) ordered before
+  // Bucket by session, with workshop-activity modules (m9*) ordered before
   // theory modules (m7*, m8) inside each bucket. Matches the day-by-day flow
   // (e.g., Communication & action: m9c → m9d → m9e → m7c…m7f).
-  const themedGroups = useMemo(() => {
-    const buckets: Array<{ themeId: string; themeName: string; groups: HandoutGroup[] }> = []
-    const seen = new Map<string, { themeId: string; themeName: string; groups: HandoutGroup[] }>()
+  const sessionGroups = useMemo(() => {
+    const buckets: Array<{ sessionId: string; sessionName: string; groups: HandoutGroup[] }> = []
+    const seen = new Map<string, { sessionId: string; sessionName: string; groups: HandoutGroup[] }>()
     for (const g of filteredGroups) {
-      const tid = g.themeId || '_other'
-      const tname = g.themeName || (contentLanguage === 'fr' ? 'Autre' : 'Other')
+      const tid = g.sessionId || '_other'
+      const tname = g.sessionName || (contentLanguage === 'fr' ? 'Autre' : 'Other')
       if (!seen.has(tid)) {
-        const bucket = { themeId: tid, themeName: tname, groups: [] as HandoutGroup[] }
+        const bucket = { sessionId: tid, sessionName: tname, groups: [] as HandoutGroup[] }
         seen.set(tid, bucket)
         buckets.push(bucket)
       }
@@ -297,8 +306,8 @@ export function HandoutsPanel() {
         </button>
       </div>
 
-      {/* List view, themed sections */}
-      {themedGroups.length === 0 ? (
+      {/* List view, grouped by curriculum session */}
+      {sessionGroups.length === 0 ? (
         <div className="p-6 text-sm text-gray-500 text-center">
           {audience === 'facilitator'
             ? contentLanguage === 'fr'
@@ -307,24 +316,24 @@ export function HandoutsPanel() {
             : t('noHandoutsYet', contentLanguage)}
         </div>
       ) : (
-        themedGroups.map((bucket) => {
+        sessionGroups.map((bucket) => {
           const isFacilitator = audience === 'facilitator'
-          const isThemeOpen = openThemes.has(bucket.themeId)
+          const isSessionOpen = openSessions.has(bucket.sessionId)
           if (isFacilitator) {
             // Facilitator content is sparse (1-2 items per module). A 2-column
             // grid of module cards with always-visible actions reads better than
             // a tall flat list.
             return (
-              <div key={bucket.themeId}>
+              <div key={bucket.sessionId}>
                 <button
-                  onClick={() => toggleTheme(bucket.themeId)}
+                  onClick={() => toggleSession(bucket.sessionId)}
                   className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2 text-left transition-colors"
                 >
-                  {isThemeOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
-                  <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
-                  {bucket.themeName}
+                  {isSessionOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
+                  <span className="text-fastr-primary">{sessionIcon(bucket.sessionId)}</span>
+                  {bucket.sessionName}
                 </button>
-                {isThemeOpen && (
+                {isSessionOpen && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3">
                   {bucket.groups.map((group) => (
                     <div
@@ -382,16 +391,16 @@ export function HandoutsPanel() {
           }
           // Participants tab — collapsible module groups (dense content).
           return (
-            <div key={bucket.themeId}>
+            <div key={bucket.sessionId}>
               <button
-                onClick={() => toggleTheme(bucket.themeId)}
+                onClick={() => toggleSession(bucket.sessionId)}
                 className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border-y border-slate-200 text-[11px] uppercase tracking-wide font-semibold text-slate-600 flex items-center gap-2 text-left transition-colors"
               >
-                {isThemeOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
-                <span className="text-fastr-primary">{themeIcon(bucket.themeId)}</span>
-                {bucket.themeName}
+                {isSessionOpen ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
+                <span className="text-fastr-primary">{sessionIcon(bucket.sessionId)}</span>
+                {bucket.sessionName}
               </button>
-              {isThemeOpen && bucket.groups.map((group) => {
+              {isSessionOpen && bucket.groups.map((group) => {
                 const isOpen = expanded.has(group.moduleId)
                 return (
                   <div key={group.moduleId} className="border-b border-gray-100">
