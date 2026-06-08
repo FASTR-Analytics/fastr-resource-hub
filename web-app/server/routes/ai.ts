@@ -522,11 +522,36 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
 
   const moduleInfo = getModuleDetailsDict()[module_number]
   if (!moduleInfo) {
-    return { success: false, message: `Module ${module_number} not found` }
+    // Map common stale references to their replacements so the AI can recover.
+    if (module_number === '7') {
+      return {
+        success: false,
+        message: `Module 7 was split into six sub-modules: 7a Analytical thinking, 7b Data visualization, 7c Understanding audience, 7d Storytelling, 7e Linking results to actions, 7f Roadmap. Call add_module again with one of "7a"–"7f".`,
+      }
+    }
+    if (module_number === '9i') {
+      return {
+        success: false,
+        message: `Module 9i (Standard FASTR Reports) was retired and its content merged into Module 9e (Disruption Report). Call add_module again with "9e".`,
+      }
+    }
+    const validIds = Object.keys(getModuleDetailsDict()).sort()
+    return {
+      success: false,
+      message: `Module ${module_number} not found. Valid module numbers: ${validIds.join(', ')}.`,
+    }
   }
 
   // Build module ID: "m" + number (e.g., "m0", "m9a", "m3b")
   const moduleId = `m${module_number}`
+
+  // Guard: condensed is only available for m4, m5, m6, m8. For everything
+  // else, force the version back to "full" — there is no condensed deck.
+  const MODULES_WITH_CONDENSED = new Set(['4', '5', '6', '8'])
+  let effectiveVersion: 'full' | 'condensed' = version
+  if (version === 'condensed' && !MODULES_WITH_CONDENSED.has(module_number)) {
+    effectiveVersion = 'full'
+  }
 
   // Check for overlapping topic ranges if this module already exists
   const existingRanges: Array<{start: number, end: number, day: string}> = []
@@ -575,7 +600,7 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     ? `${moduleInfo.name} (Topics ${topic_range.start}-${topic_range.end})`
     : moduleInfo.name)
 
-  const sessionDuration = duration || (version === 'condensed' ? 45 : 90)
+  const sessionDuration = duration || (effectiveVersion === 'condensed' ? 45 : 90)
 
   // Validate session fits within day
   const validation = validateSessionFits(config, day, sessionDuration)
@@ -588,7 +613,7 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
     _id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     session: sessionName,
     module: moduleId,
-    version: version,
+    version: effectiveVersion,
     topic_range: topic_range || null,  // null means all topics
     duration: sessionDuration,
     ...(presenter ? { speaker: presenter } : {}),
@@ -596,7 +621,9 @@ function executeAddModule(config: any, input: any): { success: boolean; message:
 
   const rangeMsg = topic_range ? ` (topics ${topic_range.start}-${topic_range.end})` : ''
   const presenterMsg = presenter ? ` (presenter: ${presenter})` : ''
-  return { success: true, message: `Added ${version} version of Module ${module_number}: ${moduleInfo.name}${rangeMsg}${presenterMsg} to Day ${day}` }
+  const downgradeMsg = (version === 'condensed' && effectiveVersion === 'full')
+    ? ` (note: condensed not available for m${module_number} — using full)` : ''
+  return { success: true, message: `Added ${effectiveVersion} version of Module ${module_number}: ${moduleInfo.name}${rangeMsg}${presenterMsg}${downgradeMsg} to Day ${day}` }
 }
 
 function executeAddBreak(config: any, input: any): { success: boolean; message: string } {
@@ -1163,14 +1190,18 @@ FASTR (Frequent Assessments and System Tools for Resilience) is the GFF approach
 # MODULE TYPES
 There are two categories of modules:
 
-## Theory Modules (0-8, 3b)
-Conceptual/methodological content. Each has TWO versions:
-- **FULL version**: Complete content with all slides. Takes 60-180 minutes.
-- **CONDENSED version**: Key points only. Takes 30-60 minutes.
+## Theory Modules
+Conceptual/methodological content:
+- **Modules 4, 5, 6, 8** (methodology): have BOTH a "full" version (60-180 min, all slides) and a "condensed" version (30-60 min, key points).
+- **Modules 0, 1, 2, 3, 3b** and **7a–7f**: "full" version ONLY. There is no condensed deck for these — calling add_module with version: "condensed" on any of them will be downgraded to full. Shorten by dropping topics or whole modules instead.
 
-## Activity Modules (9a-9h)
+## Activity Modules (9a–9h)
 Hands-on platform activities and exercises. Only have FULL version (use version: "full").
 These are CRITICAL for practical workshops — always pair theory with activities.
+
+## Retired / renamed modules — IMPORTANT
+- **Module 7** was split into six sub-modules: 7a (Analytical thinking & interpretation), 7b (Data visualization), 7c (Understanding your audience), 7d (Storytelling with data), 7e (Linking results to actions), 7f (Roadmap for sustained use). If the user says "Module 7", clarify which sub-module(s) they want.
+- **Module 9i** (Standard FASTR Reports) was retired. Its unique content was merged into **Module 9e** (Disruption Report) — including the report-structure overview, title-as-finding rule, and report-settings reference. If the user asks for 9i, offer 9e instead.
 
 **RULES:**
 1. NEVER add both full and condensed versions of the same module

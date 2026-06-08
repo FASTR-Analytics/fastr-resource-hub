@@ -65,6 +65,23 @@ def check_absent(haystack, needles):
     return (len(bad) == 0, bad)
 
 
+def chat(messages, workshop_config=None, workshop_id="test-pressure-workshop"):
+    """Hit /api/ai/chat with a message + minimal workshop config."""
+    if workshop_config is None:
+        workshop_config = {"workshop": {"name": "Pressure Test"}, "schedule": {"day1": []}}
+    r = session.post(
+        f"{BASE}/api/ai/chat",
+        json={
+            "messages": messages,
+            "workshopConfig": workshop_config,
+            "workshopId": workshop_id,
+        },
+    )
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+
 def generate_workshop(prompt):
     """Hit /api/ai/generate-workshop, skipping clarification phase if returned."""
     r = session.post(f"{BASE}/api/ai/generate-workshop", json={"prompt": prompt})
@@ -243,14 +260,150 @@ def phase_3_generation():
 
 # ─────────────────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 4 — tool-execution edge cases on /api/ai/chat
+#
+# Tests that the executeAddModule guard rails behave correctly. The AI is asked
+# to do something that exercises a guard, and we inspect the toolResults +
+# updatedConfig to confirm the right behavior.
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _find_tool_call(response, tool_name):
+    """Return all toolResults entries with the given tool name."""
+    if not response:
+        return []
+    return [tr for tr in response.get("toolResults", []) if tr.get("tool") == tool_name]
+
+
+def _added_sessions(response):
+    """Return all sessions from updatedConfig.schedule.day*."""
+    if not response:
+        return []
+    cfg = response.get("updatedConfig") or {}
+    schedule = cfg.get("schedule", {})
+    sessions = []
+    for day_key, day_list in schedule.items():
+        if isinstance(day_list, list):
+            for s in day_list:
+                if isinstance(s, dict):
+                    sessions.append(s)
+    return sessions
+
+
+def phase_4_tool_execution():
+    print("\n" + "=" * 70)
+    print("PHASE 4 — tool-execution guard rails")
+    print("=" * 70)
+
+    failures = []
+
+    def text_mentions(msg, *needles):
+        m = (msg or "").lower()
+        return all(n.lower() in m for n in needles)
+
+    # ─── T4.1: "Add Module 7" — AI should clarify sub-modules or call one ─────
+    print("\n→ T4.1 — 'Add Module 7' should clarify or route to a sub-module")
+    resp = chat(
+        [{"role": "user", "content": "Add Module 7 to Day 1, full version, 90 min."}],
+    )
+    message = (resp or {}).get("message", "")
+    add_module_calls = _find_tool_call(resp, "add_module")
+    print(f"  add_module calls: {len(add_module_calls)}, message len: {len(message)}")
+    saw_clarification = text_mentions(message, "7a", "7f") or text_mentions(message, "7e") or text_mentions(message, "sub-module")
+    saw_helpful_error = any(
+        not c.get("result", {}).get("success") and text_mentions(c.get("result", {}).get("message", ""), "7a", "7f")
+        for c in add_module_calls
+    )
+    saw_subdmod_call = any(
+        c.get("result", {}).get("success") and c.get("input", {}).get("module_number", "").startswith("7") and len(c.get("input", {}).get("module_number", "")) > 1
+        for c in add_module_calls
+    )
+    if saw_clarification or saw_helpful_error or saw_subdmod_call:
+        print(f"  ✓ pass (clarification={saw_clarification}, helpful_error={saw_helpful_error}, recovered={saw_subdmod_call})")
+    else:
+        print(f"  ✗ AI did not clarify, error informatively, or call a sub-module")
+        failures.append("T4.1")
+
+    # ─── T4.2: "Add Module 9i" — AI should mention m9e ────────────────────────
+    print("\n→ T4.2 — 'Add Module 9i' should redirect to m9e")
+    resp = chat(
+        [{"role": "user", "content": "Add Module 9i (Standard FASTR Reports) to Day 1, full version, 60 min."}],
+    )
+    message = (resp or {}).get("message", "")
+    add_module_calls = _find_tool_call(resp, "add_module")
+    print(f"  add_module calls: {len(add_module_calls)}, message len: {len(message)}")
+    saw_clarification = text_mentions(message, "9e")
+    saw_helpful_error = any(
+        not c.get("result", {}).get("success") and "9e" in (c.get("result", {}).get("message", "") or "").lower()
+        for c in add_module_calls
+    )
+    saw_recovery = any(s.get("module") == "m9e" for s in _added_sessions(resp))
+    if saw_clarification or saw_helpful_error or saw_recovery:
+        print(f"  ✓ pass (clarification={saw_clarification}, helpful_error={saw_helpful_error}, recovered={saw_recovery})")
+    else:
+        print(f"  ✗ AI did not redirect to m9e (neither in message nor tool result nor session add)")
+        failures.append("T4.2")
+
+    # ─── T4.3: condensed of m7e — either AI clarifies, OR tool downgrades ────
+    print("\n→ T4.3 — condensed of m7e should be clarified or auto-downgraded")
+    resp = chat(
+        [{"role": "user", "content": "Add Module 7e to Day 1 with version condensed, 30 min."}],
+    )
+    message = (resp or {}).get("message", "")
+    sessions = _added_sessions(resp)
+    m7e_sessions = [s for s in sessions if s.get("module") == "m7e"]
+    # Acceptable outcomes: (a) AI clarifies (no session yet), (b) tool downgraded to full
+    saw_clarification = text_mentions(message, "no condensed") or text_mentions(message, "only", "full") or text_mentions(message, "doesn't have a condensed")
+    if m7e_sessions:
+        version = m7e_sessions[0].get("version")
+        if version == "full":
+            print(f"  ✓ pass — m7e added as version='full' (auto-downgraded)")
+        else:
+            print(f"  ✗ m7e session ended up with version='{version}' — should be 'full'")
+            failures.append("T4.3")
+    elif saw_clarification:
+        print(f"  ✓ pass — AI clarified that condensed not available")
+    else:
+        print(f"  ✗ no m7e session AND no clarification")
+        failures.append("T4.3")
+
+    # ─── T4.4: condensed of m4 should stay condensed ─────────────────────────
+    print("\n→ T4.4 — Condensed of m4 should stay condensed")
+    resp = chat(
+        [{"role": "user", "content": "Add Module 4 to Day 1 with version condensed, 45 min duration."}],
+    )
+    sessions = _added_sessions(resp)
+    m4_sessions = [s for s in sessions if s.get("module") == "m4"]
+    if not m4_sessions:
+        print(f"  ✗ no m4 session added")
+        failures.append("T4.4")
+    else:
+        version = m4_sessions[0].get("version")
+        if version == "condensed":
+            print(f"  ✓ pass — m4 session kept version='condensed'")
+        else:
+            print(f"  ✗ m4 session ended up with version='{version}' — should be 'condensed'")
+            failures.append("T4.4")
+
+    print(f"\n→ Phase 4 result: {4 - len(failures)}/4 passed")
+    if failures:
+        print(f"  failures: {failures}")
+    return len(failures) == 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
     login()
     p2 = phase_2_knowledge()
     p3 = phase_3_generation()
+    p4 = phase_4_tool_execution()
     print("\n" + "=" * 70)
     print(
-        f"SUMMARY: Phase 2 {'PASS' if p2 else 'FAIL'} · "
-        f"Phase 3 {'PASS' if p3 else 'FAIL'} (structural — required)"
+        f"SUMMARY: Phase 2 {'PASS' if p2 else 'FAIL'} (knowledge) · "
+        f"Phase 3 {'PASS' if p3 else 'FAIL'} (structural — required) · "
+        f"Phase 4 {'PASS' if p4 else 'FAIL'} (tool guards — required)"
     )
     print("=" * 70)
-    sys.exit(0 if p3 else 1)  # Phase 3 gates the exit code
+    # Phase 3 + Phase 4 gate the exit code (structural + guard correctness).
+    sys.exit(0 if (p3 and p4) else 1)
