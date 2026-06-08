@@ -149,6 +149,15 @@ modules:
     en: AI Assistant
     fr: Assistant IA
     pt: Assistente IA
+  ai_context:
+    description: How the FASTR AI Assistant works, what it can and can't do, and how to
+      get useful answers from it.
+    topics:
+    - What the AI Assistant does
+    - Asking good questions
+    - Iterative conversations
+    - Private vs shared spaces
+    duration: 60-90 min
 - id: m4
   number: '4'
   folder: m4_data_quality_assessment
@@ -313,6 +322,15 @@ modules:
     en: Instance Setup
     fr: Configuration de l'instance
     pt: Configuração da instância
+  ai_context:
+    description: Admin-track hands-on activities for setting up a FASTR platform instance
+      (admin areas, importing data, installing & running modules, creating a project).
+    topics:
+    - Setting up admin areas
+    - Importing data
+    - Installing and running modules
+    - Creating a project
+    duration: 60-90 min
 - id: m9b
   number: 9b
   folder: m9b_getting_started
@@ -321,6 +339,13 @@ modules:
     en: Getting Started
     fr: Prise en main
     pt: Primeiros passos
+  ai_context:
+    description: First-login orientation activity — sign into the platform and create
+      a personal folder for the rest of the workshop.
+    topics:
+    - Logging in
+    - Creating a personal folder
+    duration: 15-20 min
 - id: m9c
   number: 9c
   folder: m9c_visualizations_interpretation
@@ -329,6 +354,16 @@ modules:
     en: Visualizations & Interpretation
     fr: Visualisations & Interprétation
     pt: Visualizações e interpretação
+  ai_context:
+    description: Hands-on visualization activities — build charts manually and with the
+      AI Assistant, write interpretations, spot disruptions.
+    topics:
+    - Create a visualization manually
+    - Build a visualization with AI
+    - Read a FASTR visualization
+    - Write an interpretation
+    - Spot a disruption
+    duration: 90-120 min
 - id: m9d
   number: 9d
   folder: m9d_slide_decks
@@ -337,6 +372,16 @@ modules:
     en: Slide Decks
     fr: Présentations
     pt: Apresentações
+  ai_context:
+    description: Hands-on slide-deck activities — create a deck, add visualizations
+      (manually and via AI), edit and format slides, configure report settings.
+    topics:
+    - Create a slide deck
+    - Add a visualization to a slide
+    - Edit and finalize slides
+    - Format report text
+    - Configure report settings
+    duration: 90-120 min
 - id: m9e
   number: 9e
   folder: m9e_disruption_report
@@ -345,6 +390,16 @@ modules:
     en: Disruption Report
     fr: Rapport de perturbations
     pt: Relatório de perturbações
+  ai_context:
+    description: End-to-end activity — create a disruption report with the AI Assistant
+      (Prompt 1), verify with Prompt 5 + team review, refine with Prompt 2/3, peer review.
+    topics:
+    - Create the report with the AI
+    - Verify (two-pass — AI + team)
+    - Writing analytical slide titles
+    - Refine with Prompt 2 / Prompt 3
+    - Peer review and present
+    duration: 180-240 min
 - id: m9f
   number: 9f
   folder: m9f_prompting_techniques
@@ -353,6 +408,18 @@ modules:
     en: Prompting Techniques
     fr: Techniques de prompting
     pt: Técnicas de prompting
+  ai_context:
+    description: Hands-on prompting practice — building clear prompts, exploring with the
+      AI Assistant, iterative vs single-prompt, using a previous report as a template,
+      verifying AI output.
+    topics:
+    - Build a clear prompt
+    - Explore with the AI Assistant
+    - Iterative vs single-prompt
+    - Refine a prompt
+    - Use a PDF as template
+    - Verify the output
+    duration: 90-120 min
 - id: m9g
   number: 9g
   folder: m9g_fastr_quiz
@@ -361,6 +428,12 @@ modules:
     en: FASTR Quiz
     fr: Quiz FASTR
     pt: Quiz FASTR
+  ai_context:
+    description: Team-based quiz activity to consolidate FASTR concepts at the end of a
+      workshop. Five questions, team answer sheet.
+    topics:
+    - Team answer sheet
+    duration: 30-45 min
 - id: m9h
   number: 9h
   folder: m9h_platform_demo
@@ -369,3 +442,9 @@ modules:
     en: Platform Demo
     fr: Démo de la plateforme
     pt: Demonstração da plataforma
+  ai_context:
+    description: Live walkthrough of the FASTR platform — used as a generic demo / orientation
+      session when the audience needs platform-fluency before activities begin.
+    topics:
+    - Platform walkthrough
+    duration: 30-45 min

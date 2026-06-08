@@ -392,18 +392,82 @@ def phase_4_tool_execution():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Phase 5 — natural-language routing (the real user vocabulary)
+#
+# Users don't say "Add Module 9e". They say "Add the disruption reports", "Add
+# visualization activities", "Add storytelling". Verify the AI maps each phrase
+# to the right module ID — either by calling add_module with that ID, or by
+# clearly naming it in the clarification message.
+# ─────────────────────────────────────────────────────────────────────────────
+
+def phase_5_natural_language():
+    print("\n" + "=" * 70)
+    print("PHASE 5 — natural-language module routing")
+    print("=" * 70)
+
+    cases = [
+        ("Add a session on disruption reports to Day 1, full version, 60 min.",          {"m9e"}),
+        ("Add the slide decks module to Day 1, full, 90 min.",                            {"m9d"}),
+        ("Add the visualization activities to Day 1, full, 60 min.",                      {"m9c"}),
+        ("Add the AI assistant module to Day 1, full, 75 min.",                           {"m3b", "mai"}),
+        ("Add a session on data quality assessment to Day 1, full, 90 min.",              {"m4"}),
+        ("Add the storytelling module to Day 1, full, 30 min.",                           {"m7d"}),
+        ("Add user mapping / understanding the audience to Day 1, full, 30 min.",         {"m7c"}),
+        ("Add a session on linking results to actions to Day 1, full, 45 min.",           {"m7e"}),
+        ("Add the action planning roadmap module to Day 1, full, 45 min.",                {"m7f"}),
+        ("Add the survey & health facility assessment module to Day 1, full, 60 min.",    {"m8"}),
+        ("Add a prompting techniques session to Day 1, full, 60 min.",                    {"m9f"}),
+        ("Add the data extraction module to Day 1, full, 90 min.",                        {"m2"}),
+    ]
+
+    failures = []
+    for prompt, valid_modules in cases:
+        label = prompt.split(",")[0]
+        print(f"\n→ {label}")
+        resp = chat([{"role": "user", "content": prompt}])
+        message = (resp or {}).get("message", "")
+        sessions = _added_sessions(resp)
+        calls = _find_tool_call(resp, "add_module")
+
+        # Outcome A: a session was added with one of the valid module IDs
+        added_module = next((s.get("module") for s in sessions if s.get("module") in valid_modules), None)
+        # Outcome B: the AI's text/clarification names one of the valid module IDs
+        named_module = next((m for m in valid_modules if m in message.lower()), None)
+        # Outcome C: a tool call was made with one of the valid module IDs (even if error)
+        call_module = None
+        for c in calls:
+            input_mod = "m" + str(c.get("input", {}).get("module_number", ""))
+            if input_mod in valid_modules:
+                call_module = input_mod
+
+        winner = added_module or call_module or named_module
+        if winner:
+            print(f"  ✓ routed to {winner} (added={added_module}, call={call_module}, named={named_module})")
+        else:
+            print(f"  ✗ no routing to any of {valid_modules}. message={message[:120]!r}")
+            failures.append(label)
+
+    print(f"\n→ Phase 5 result: {len(cases) - len(failures)}/{len(cases)} passed")
+    if failures:
+        print(f"  failures: {failures}")
+    return len(failures) == 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     login()
     p2 = phase_2_knowledge()
     p3 = phase_3_generation()
     p4 = phase_4_tool_execution()
+    p5 = phase_5_natural_language()
     print("\n" + "=" * 70)
     print(
         f"SUMMARY: Phase 2 {'PASS' if p2 else 'FAIL'} (knowledge) · "
         f"Phase 3 {'PASS' if p3 else 'FAIL'} (structural — required) · "
-        f"Phase 4 {'PASS' if p4 else 'FAIL'} (tool guards — required)"
+        f"Phase 4 {'PASS' if p4 else 'FAIL'} (tool guards — required) · "
+        f"Phase 5 {'PASS' if p5 else 'FAIL'} (natural-lang routing — required)"
     )
     print("=" * 70)
-    # Phase 3 + Phase 4 gate the exit code (structural + guard correctness).
-    sys.exit(0 if (p3 and p4) else 1)
+    # Phase 3 + Phase 4 + Phase 5 gate the exit code.
+    sys.exit(0 if (p3 and p4 and p5) else 1)
