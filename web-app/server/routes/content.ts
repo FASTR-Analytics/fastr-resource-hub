@@ -558,24 +558,9 @@ const TEMPLATE_CATEGORIES_BASE: Partial<Record<Language, any[]>> = {
         { id: 'lunch', file: 'lunch_break.md', name: 'Lunch Break', icon: 'lunch', preview: '60-minute lunch break' },
       ]
     },
-    {
-      id: 'webinar',
-      name: 'Webinar & Engagement',
-      description: 'Interactive engagement slides for webinars',
-      templates: [
-        { id: 'webinar_icebreaker', file: 'webinar_icebreaker.md', name: 'Icebreaker', icon: 'people', preview: 'Opening engagement activity' },
-        { id: 'webinar_poll', file: 'webinar_poll.md', name: 'Poll', icon: 'target', preview: 'Poll with placeholder question' },
-        { id: 'webinar_chat_prompt', file: 'webinar_chat_prompt.md', name: 'Chat Prompt', icon: 'demo', preview: '"Share in the chat..." prompt' },
-        { id: 'webinar_qa', file: 'webinar_qa.md', name: 'Q&A Moment', icon: 'demo', preview: 'Dedicated Q&A pause' },
-        { id: 'webinar_discussion', file: 'webinar_discussion.md', name: 'Discussion', icon: 'demo', preview: 'Open discussion or breakout prompt' },
-        { id: 'webinar_reflection', file: 'webinar_reflection.md', name: 'Reflection', icon: 'demo', preview: 'Pause for individual reflection' },
-        { id: 'webinar_transition', file: 'webinar_transition.md', name: 'Section Transition', icon: 'divider', preview: 'Recap + preview between sections' },
-        { id: 'webinar_closing_cta', file: 'webinar_closing_cta.md', name: 'Closing & Next Steps', icon: 'end', preview: 'Closing with action items' },
-        { id: 'webinar_logistics', file: 'webinar_logistics.md', name: 'Virtual Logistics', icon: 'target', preview: 'Meeting setup and participation rules' },
-        { id: 'webinar_next_steps', file: 'webinar_next_steps.md', name: 'Next Steps', icon: 'end', preview: 'Follow-up actions and resources' },
-        { id: 'learning_exchange', file: 'learning_exchange_overview.md', name: 'Learning Exchange', icon: 'demo', preview: 'Learning exchange overview' },
-      ]
-    }
+    // Webinar & Engagement templates are temporarily not exposed in the
+    // library while the webinar builder is being redesigned. The files still
+    // live in templates/ for the eventual relaunch.
   ],
   fr: [
     {
@@ -606,24 +591,7 @@ const TEMPLATE_CATEGORIES_BASE: Partial<Record<Language, any[]>> = {
         { id: 'lunch', file: 'lunch_break.md', name: 'Pause déjeuner', icon: 'lunch', preview: 'Pause déjeuner de 60 minutes' },
       ]
     },
-    {
-      id: 'webinar',
-      name: 'Webinaire & Engagement',
-      description: 'Diapositives interactives pour webinaires',
-      templates: [
-        { id: 'webinar_icebreaker', file: 'webinar_icebreaker.md', name: 'Brise-glace', icon: 'people', preview: 'Activité d\'ouverture engageante' },
-        { id: 'webinar_poll', file: 'webinar_poll.md', name: 'Sondage', icon: 'target', preview: 'Sondage avec question' },
-        { id: 'webinar_chat_prompt', file: 'webinar_chat_prompt.md', name: 'Prompt chat', icon: 'demo', preview: '"Partagez dans le chat..." prompt' },
-        { id: 'webinar_qa', file: 'webinar_qa.md', name: 'Questions & réponses', icon: 'demo', preview: 'Pause Q&R dédiée' },
-        { id: 'webinar_discussion', file: 'webinar_discussion.md', name: 'Discussion', icon: 'demo', preview: 'Discussion ouverte ou sous-groupes' },
-        { id: 'webinar_reflection', file: 'webinar_reflection.md', name: 'Réflexion', icon: 'demo', preview: 'Pause pour réflexion individuelle' },
-        { id: 'webinar_transition', file: 'webinar_transition.md', name: 'Transition de section', icon: 'divider', preview: 'Récap + aperçu entre sections' },
-        { id: 'webinar_closing_cta', file: 'webinar_closing_cta.md', name: 'Clôture & Prochaines étapes', icon: 'end', preview: 'Clôture avec actions à suivre' },
-        { id: 'webinar_logistics', file: 'webinar_logistics.md', name: 'Logistique virtuelle', icon: 'target', preview: 'Configuration et règles de participation' },
-        { id: 'webinar_next_steps', file: 'webinar_next_steps.md', name: 'Prochaines étapes', icon: 'end', preview: 'Actions de suivi et ressources' },
-        { id: 'learning_exchange', file: 'learning_exchange_overview.md', name: 'Échange d\'apprentissage', icon: 'demo', preview: 'Vue d\'ensemble de l\'échange' },
-      ]
-    }
+    // Webinaire & Engagement — masqué pendant la refonte du générateur de webinaires.
   ]
 }
 
