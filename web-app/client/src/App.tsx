@@ -937,6 +937,10 @@ function App() {
   const settingsTourRef = useRef<GuidedTourHandle>(null)
   const [showHelp, setShowHelp] = useState(false)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
+  // Webinar deck type is paused (coming back later). New builds default to
+  // 'workshop'; the webinar button shows a "coming soon" toast instead of
+  // flipping this state. The state is kept (rather than hard-removed) so
+  // legacy webinar workshops in the DB still render with their badge.
   const [pendingDeckType, setPendingDeckType] = useState<'workshop' | 'webinar'>('workshop')
   const [createMode, setCreateMode] = useState<'manual' | 'ai' | 'upload'>('manual')
   const [aiPrompt, setAiPrompt] = useState('')
@@ -978,20 +982,14 @@ function App() {
     }
   }, [isAuthenticated])
 
-  // Show workshop selector if no workshop is selected (only in workshop mode)
-  // Skip while loading — selectWorkshop is async and currentWorkshopId is still null during fetch
-  // For webinars: skip the selector list and go straight to the create form
+  // Show workshop selector if no workshop is selected (only in workshop mode).
+  // Skip while loading — selectWorkshop is async and currentWorkshopId is still
+  // null during fetch.
   useEffect(() => {
     if (appMode === 'workshop' && !currentWorkshopId && !isLoading && workshops.length > 0) {
-      if (pendingDeckType === 'webinar') {
-        setShowWorkshopSelector(true)
-        setShowCreateWorkshop(true)
-        setCreateMode('manual')
-      } else {
-        setShowWorkshopSelector(true)
-      }
+      setShowWorkshopSelector(true)
     }
-  }, [currentWorkshopId, workshops, appMode, isLoading, pendingDeckType])
+  }, [currentWorkshopId, workshops, appMode, isLoading])
 
   // Close export menu when clicking outside
   useEffect(() => {
@@ -1241,71 +1239,10 @@ function App() {
     setShowWorkshopSelector(false)
   }
 
-  // Build webinar deck from AI response
-  const buildWebinarFromAIResponse = async (data: any) => {
-    const year = new Date().getFullYear()
-    const nameSlug = (data.name || 'webinar').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-    const workshopId = `${year}-${nameSlug}-webinar`
-
-    const ts = Date.now()
-    const sessions: any[] = []
-
-    if (Array.isArray(data.slides)) {
-      for (let i = 0; i < data.slides.length; i++) {
-        const slide = data.slides[i]
-        const sessionObj: any = {
-          _id: slide._id || `webinar-${i}-${ts}`,
-          session: slide.session || slide.name || '',
-          slides: slide.slides || (slide.file ? [slide.file] : []),
-          duration: slide.duration || 5,
-        }
-        // Don't set module — webinar sessions reference individual slides via the slides array.
-        // Setting module would cause deckBuilder to load ALL slides from that module.
-        if (slide.type === 'engagement') {
-          sessionObj.icon = 'demo'
-        }
-        sessions.push(sessionObj)
-      }
-    }
-
-    const schedule: any = {
-      days: 1,
-      day_start_times: { 1: '10:00' },
-      day1: sessions,
-    }
-
-    const config = {
-      workshop: {
-        name: data.name || 'Webinar',
-        country: data.country || '',
-        location: '',
-        date: '',
-        facilitators: '',
-        deckType: 'webinar' as const,
-        time: '10:00',
-        duration: data.duration || 90,
-        language: data.language || 'en',
-      },
-      schedule,
-      content: {
-        modules: [],
-        custom_slides: [],
-      },
-    }
-
-    if (data.language === 'fr') {
-      setContentLanguage('fr')
-    }
-
-    await createWorkshop(workshopId, config)
-    setShowCreateWorkshop(false)
-    setShowWorkshopSelector(false)
-  }
-
   // Handle AI workshop generation - creates workshop directly
   const handleAIGenerate = async () => {
     if (!aiPrompt.trim()) {
-      setError(pendingDeckType === 'webinar' ? t('describeWebinar', contentLanguage) : t('pleaseDescribeWorkshop', contentLanguage))
+      setError(t('pleaseDescribeWorkshop', contentLanguage))
       return
     }
 
@@ -1320,16 +1257,13 @@ function App() {
         }))
       }
 
-      // Use different endpoint for webinars vs workshops
-      const endpoint = pendingDeckType === 'webinar' ? '/api/ai/generate-webinar' : '/api/ai/generate-workshop'
-
-      const response = await fetch(endpoint, { credentials: 'include',
+      const response = await fetch('/api/ai/generate-workshop', { credentials: 'include',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
 
-      if (!response.ok) throw new Error(pendingDeckType === 'webinar' ? 'Failed to generate webinar' : 'Failed to generate workshop')
+      if (!response.ok) throw new Error('Failed to generate workshop')
 
       const data = await response.json()
 
@@ -1341,12 +1275,7 @@ function App() {
         return
       }
 
-      // Use appropriate builder
-      if (pendingDeckType === 'webinar') {
-        await buildWebinarFromAIResponse(data)
-      } else {
-        await buildWorkshopFromAIResponse(data)
-      }
+      await buildWorkshopFromAIResponse(data)
       setAiPrompt('')
       setAiQuestions([])
       setAiAnswers({})
@@ -1408,54 +1337,14 @@ function App() {
       return
     }
 
-    const isWebinar = pendingDeckType === 'webinar'
-
-    // Generate workshop ID from year and name slug
+    // Generate workshop ID from year and country slug
     const year = new Date().getFullYear()
-    const nameSlug = newWorkshop.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-    const workshopId = isWebinar
-      ? `${year}-${nameSlug}-webinar`
-      : `${year}-${newWorkshop.country.toLowerCase().replace(/\s+/g, '-')}`
+    const workshopId = `${year}-${newWorkshop.country.toLowerCase().replace(/\s+/g, '-')}`
 
     const ts = Date.now()
 
-    if (isWebinar) {
-      // ── Webinar creation: flat single-day with just a title slide ──
-      const schedule: any = {
-        days: 1,
-        day_start_times: { 1: newWorkshop.time || '10:00' },
-        day1: [
-          {
-            _id: `title-slide-${ts}`,
-            session: newWorkshop.name || 'Webinar',
-            slides: ['title_slide.md'],
-            duration: 0,
-            icon: 'cover',
-          },
-        ],
-      }
-
-      const config = {
-        workshop: {
-          name: newWorkshop.name,
-          country: newWorkshop.country,
-          location: newWorkshop.location,
-          date: newWorkshop.date || '',
-          facilitators: '',
-          deckType: 'webinar' as const,
-          time: newWorkshop.time || '10:00',
-          duration: newWorkshop.duration || 90,
-        },
-        schedule,
-        content: {
-          modules: [],
-          custom_slides: [],
-        },
-      }
-
-      await createWorkshop(workshopId, config)
-    } else {
-      // ── Workshop creation (existing logic) ──
+    {
+      // ── Workshop creation (single supported deck type) ──
       // Create initial schedule with empty days
       const schedule: any = {
         days: newWorkshop.days,
@@ -1829,15 +1718,17 @@ function App() {
             <button
               onClick={() => {
                 setShowNewDeckMenu(false)
-                setPendingDeckType('webinar')
-                setAppMode('workshop')
+                showToast(t('webinarComingSoon', contentLanguage), 'info')
               }}
               className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 focus-ring"
             >
-              <Monitor className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
+              <Monitor className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
               <div className="flex-1 min-w-0">
-                <div className="text-body-sm font-semibold text-slate-900">{t('buildWebinar', contentLanguage)}</div>
-                <div className="text-caption text-slate-500 mt-0.5">{t('webinarDeckDesc', contentLanguage)}</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-body-sm font-semibold text-slate-500">{t('buildWebinar', contentLanguage)}</span>
+                  <span className="inline-flex items-center rounded-pill px-1.5 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('comingSoonBadge', contentLanguage)}</span>
+                </div>
+                <div className="text-caption text-slate-500 mt-0.5">{t('webinarDeckDescComingSoon', contentLanguage)}</div>
               </div>
             </button>
           </div>
@@ -2540,15 +2431,8 @@ function App() {
             setAiAnswers({})
             setUploadFile(null)
             setUploadText('')
-            if (pendingDeckType === 'webinar' && !currentWorkshopId) {
-              setAppMode('select')
-            }
           }}
-          title={
-            showCreateWorkshop
-              ? (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('createNewWorkshop', contentLanguage))
-              : (pendingDeckType === 'webinar' ? t('buildWebinar', contentLanguage) : t('selectWorkshop', contentLanguage))
-          }
+          title={showCreateWorkshop ? t('createNewWorkshop', contentLanguage) : t('selectWorkshop', contentLanguage)}
           size="md"
           closeOnBackdrop={false}
         >
@@ -2568,7 +2452,6 @@ function App() {
                     <Sparkles className="w-4 h-4" />
                     {t('aiSetup', contentLanguage)}
                   </button>
-                  {pendingDeckType !== 'webinar' && (
                   <button
                     onClick={() => setCreateMode('upload')}
                     className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
@@ -2580,7 +2463,6 @@ function App() {
                     <Upload className="w-4 h-4" />
                     {t('uploadOrPaste', contentLanguage)}
                   </button>
-                  )}
                   <button
                     onClick={() => setCreateMode('manual')}
                     className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${

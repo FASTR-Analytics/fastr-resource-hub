@@ -2397,7 +2397,19 @@ function postProcessWebinarConfig(
 }
 
 // POST /api/ai/generate-webinar - Generate webinar config from natural language
+// Webinar generation is paused — the route is being redesigned. The frontend
+// surfaces a "coming soon" toast on the Build Webinar button, so this code
+// path should never be reached from the UI. Direct callers get a 503 with a
+// clear message.
+const WEBINAR_PAUSED = true
+
 router.post('/generate-webinar', async (req, res) => {
+  if (WEBINAR_PAUSED) {
+    return res.status(503).json({
+      error: 'webinar_generator_paused',
+      message: 'The webinar generator is being redesigned and will be back soon. For now, use POST /api/ai/generate-workshop.',
+    })
+  }
   try {
     const { prompt, clarifications } = req.body
 
