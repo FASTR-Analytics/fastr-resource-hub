@@ -205,12 +205,12 @@ function computeTimeBudget(params: {
 const AI_TOOLS: Anthropic.Tool[] = [
   {
     name: 'add_module',
-    description: 'Add a module (or part of a module) to the workshop deck. Each module has "full" and "condensed" versions. You can split a module across multiple sessions by specifying different topic ranges.',
+    description: 'Add a module (or part of a module) to the workshop deck. Most modules have a "full" version only; the methodology theory modules (m4, m5, m6, m8) also have a "condensed" version. You can split a module across multiple sessions by specifying different topic ranges.',
     input_schema: {
       type: 'object' as const,
       properties: {
         day: { type: 'number', description: 'Which day to add the module to (1, 2, 3, etc.)' },
-        module_number: { type: 'string', description: 'Module number/ID: "0" through "8" for theory modules, "3b" for AI Assistant, "9a" through "9h" for hands-on activity modules' },
+        module_number: { type: 'string', description: 'Module number/ID. Theory: "0", "1", "2", "3" (Platform), "3b" (AI Assistant), "4" (DQA), "5" (DQ Adjustment), "6" (Data Analysis), "8" (Survey & HFA). Results communication: "7a" (Analytical thinking), "7b" (Data viz), "7c" (Audience), "7d" (Storytelling), "7e" (Linking to actions), "7f" (Roadmap). Hands-on activities: "9a" (Instance Setup), "9b" (Getting Started), "9c" (Visualizations), "9d" (Slide Decks), "9e" (Disruption Report), "9f" (Prompting), "9g" (Quiz), "9h" (Platform Demo).' },
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed". MUST be specified.' },
         duration: { type: 'number', description: 'Duration in minutes' },
         session_title: { type: 'string', description: 'Custom title for this session (e.g., "Data Quality Part 1"). If not specified, uses module name.' },
@@ -338,7 +338,7 @@ const AI_TOOLS: Anthropic.Tool[] = [
       properties: {
         day: { type: 'number', description: 'Day number (1-indexed)' },
         session_position: { type: 'number', description: 'Position of the session in the day (0-indexed)' },
-        module_number: { type: 'string', description: 'Module number/ID (e.g., "0" through "8", "3b", "9a" through "9h")' },
+        module_number: { type: 'string', description: 'Module number/ID. Theory: "0"–"6", "8", "3b" (AI). Results communication sub-modules: "7a"–"7f". Activities: "9a"–"9h".' },
         topic_number: { type: 'number', description: 'Topic number within the module (1-indexed)' },
         version: { type: 'string', enum: ['full', 'condensed'], description: 'Which version: "full" or "condensed"' },
       },
@@ -1191,7 +1191,7 @@ ${mod.activity ? `- **Activity covers**: ${mod.activity.covers}` +
   (mod.activity.outcomes?.length ? `\n- **Outcomes**: ${mod.activity.outcomes.join('; ')}` : '') +
   (mod.activity.order ? `\n- **Sequence order**: ${mod.activity.order}` : '') +
   (mod.activity.prerequisites?.length ? `\n- **Prerequisites**: ${mod.activity.prerequisites.join(', ')}` : '') +
-  (mod.activity.ai_notes ? `\n- **Facilitation notes**: ${mod.activity.ai_notes}` : '') + '\n' : ''}${/^\d+$/.test(num) ? '- **Has condensed version**: yes (~30-50% of full)' : /^9/.test(num) ? '- **Type**: Hands-on activity (full only)' : '- **Has condensed version**: yes'}
+  (mod.activity.ai_notes ? `\n- **Facilitation notes**: ${mod.activity.ai_notes}` : '') + '\n' : ''}${/^[4568]$/.test(num) ? '- **Has condensed version**: yes (~30-50% of full)' : /^9/.test(num) ? '- **Type**: Hands-on activity (full only)' : '- **Has condensed version**: no (full only)'}
 `).join('\n')}
 
 # CURRENT WORKSHOP
@@ -1941,18 +1941,22 @@ ${timeBudget.perDayBudgets.map(db => `- Day ${db.day} (${db.startTime}–${db.en
 
 IMPORTANT - MODULE TYPES:
 
-Theory modules (0-8, 3b) have TWO versions:
+Methodology theory modules (4, 5, 6, 8) have TWO versions:
 - "full": Complete content with all slides (longer duration)
 - "condensed": Key points only (shorter duration, ~30-50% of full)
 
-Activity modules (9a-9h) are hands-on platform exercises. Only have "full" version.
+Other theory modules (0, 1, 2, 3, 3b, 7a–7f) have a "full" version only.
+
+The old Module 7 (Results Communication) is split into six sub-modules: 7a Analytical thinking, 7b Data visualization, 7c Understanding audience, 7d Storytelling, 7e Linking results to actions, 7f Roadmap for sustained use. Each is a standalone session.
+
+Activity modules (9a–9h) are hands-on platform exercises. Only have "full" version.
 These are CRITICAL for practical workshops. Always pair theory with relevant activities.
 
 Typical pairings:
 - Module 3 (Platform) → 9a (Instance Setup) + 9b (Getting Started) + 9h (Platform Demo)
 - Module 4-5 (Data Quality) → 9c (Visualizations & Interpretation)
 - Module 6 (Data Analysis) → 9c (Visualizations) + 9d (Slide Decks)
-- Module 7 (Results Communication) → 9d (Slide Decks) + 9e (Disruption Report)
+- Modules 7a–7f (Results communication) → 9d (Slide Decks) + 9e (Disruption Report)
 - Module 3b (AI Assistant) → 9f (Prompting Techniques)
 
 Version choice:
@@ -1979,7 +1983,7 @@ Generate a JSON object with this structure:
   "module_version": "full",
   "objectives": "- Objective 1\\n- Objective 2\\n- Objective 3",
   "expected_outputs": "- Output 1\\n- Output 2\\n- Output 3",
-  "modules": ["0", "1", "2", "4", "5", "6", "7", "9a", "9c"],
+  "modules": ["0", "1", "2", "4", "5", "6", "7e", "7f", "9a", "9c"],
   "schedule": {
     "day1": [
       {"session": "Introduction to FASTR", "module": "m0", "version": "full", "duration": 60},
