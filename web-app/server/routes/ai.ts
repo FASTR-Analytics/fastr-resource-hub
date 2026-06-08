@@ -1175,7 +1175,7 @@ These are CRITICAL for practical workshops — always pair theory with activitie
 **RULES:**
 1. NEVER add both full and condensed versions of the same module
 2. If user does not specify version for theory modules, ASK before adding
-3. "quick overview" or "high-level" → use condensed
+3. "quick overview" or "high-level" → use condensed FOR MODULES 4/5/6/8 ONLY. Other modules stay "full" — shorten by dropping topics or whole modules, never by flipping their version to "condensed" (they don't have one).
 4. "detailed" or "comprehensive" or "full training" → use full
 5. Activity modules (9a-9h) only have full version — always use "full"
 6. For practical workshops, PREFER activity modules over custom sessions for hands-on work
@@ -1533,6 +1533,20 @@ function postProcessWorkshopConfig(
 ): void {
   if (!workshopConfig.schedule) return
 
+  // Pass 0: Force version='full' on any session whose module has no condensed
+  // variant. The model occasionally ignores the system-prompt rule and stamps
+  // "condensed" everywhere; this guard makes the result correct regardless.
+  // Modules that DO have a condensed deck: m4, m5, m6, m8.
+  const MODULES_WITH_CONDENSED = new Set(['m4', 'm5', 'm6', 'm8'])
+  for (const dayKey of Object.keys(workshopConfig.schedule)) {
+    if (!dayKey.startsWith('day') || !Array.isArray(workshopConfig.schedule[dayKey])) continue
+    for (const session of workshopConfig.schedule[dayKey]) {
+      if (session?.module && session?.version === 'condensed' && !MODULES_WITH_CONDENSED.has(session.module)) {
+        session.version = 'full'
+      }
+    }
+  }
+
   // Pass 1-2: Remove duplicate modules
   const seenModules = new Set<string>()
   for (const dayKey of Object.keys(workshopConfig.schedule)) {
@@ -1658,11 +1672,16 @@ function postProcessWorkshopConfig(
 
     if (totalMinutes > maxDayMinutes) {
       const moduleDetailsMap = getModuleDetailsDict()
+      // Auto-condensing only works for modules that actually have a condensed
+      // deck (the methodology modules). For everything else, the overflow is
+      // resolved by dropping topics or whole modules upstream — never by
+      // setting "condensed" on a module that doesn't have one.
+      const HAS_CONDENSED_DECK = new Set(['4', '5', '6', '8'])
       for (let i = sessions.length - 1; i >= 0 && totalMinutes > maxDayMinutes; i--) {
         const s = sessions[i]
         if (!s.module) continue
         const modNum = s.module.replace(/^m/, '')
-        if (modNum.startsWith('9')) continue
+        if (!HAS_CONDENSED_DECK.has(modNum)) continue
         if (s.version === 'condensed') continue
         if (s.type === 'break' || s.type === 'custom') continue
         const mod = moduleDetailsMap[modNum]
@@ -1796,7 +1815,7 @@ Nice to have (do NOT ask if missing, just use defaults):
 
 TIME BUDGET AWARENESS:
 - A ${roughDays}-day workshop has roughly ${roughBudget.totalAvailableMinutes} minutes (~${Math.round(roughBudget.totalAvailableMinutes / 60)}h) of available content time (after breaks, opening ceremonies, recaps)
-- If the user requests modules whose total duration clearly exceeds the available time, you MUST include a question warning them: "You've requested approximately Xh of content but only have ~Yh available. Would you like to: (a) use condensed/shorter versions for theory modules, (b) prioritize certain modules and drop others, or (c) add more days?"
+- If the user requests modules whose total duration clearly exceeds the available time, you MUST include a question warning them: "You've requested approximately Xh of content but only have ~Yh available. Would you like to: (a) use condensed versions for the methodology modules (4/5/6/8) that have one, (b) prioritize certain modules and drop others, or (c) add more days?"
 - Module durations are listed above — sum them to check feasibility
 
 RULES:
@@ -1937,7 +1956,7 @@ HARD SCHEDULING RULES:
 ${timeBudget.perDayBudgets.map(db => `- Day ${db.day} (${db.startTime}–${db.endTime}): max ${db.totalMinutes} min total, ~${db.availableMinutes} min for content`).join('\n')}
 - BEFORE generating each day, note its budget. As you add sessions, subtract durations. STOP adding content when remaining budget < 30 min.
 - Activity modules (9a-9h) MUST keep their full duration. Never compress.
-- If content doesn't fit: use condensed for theory modules, or drop lower-priority modules.
+- If content doesn't fit: use condensed for modules 4/5/6/8 ONLY, or drop lower-priority modules. Never set condensed on any other module — it has no condensed deck.
 
 IMPORTANT - MODULE TYPES:
 
@@ -1960,10 +1979,9 @@ Typical pairings:
 - Module 3b (AI Assistant) → 9f (Prompting Techniques)
 
 Version choice:
-- "quick", "overview", "high-level" → use "condensed" for theory
-- "detailed", "comprehensive", "full training" → use "full"
-- Short days → prefer "condensed" for theory
-- Activity modules → always use "full"
+- "condensed" is ONLY available for modules 4, 5, 6, 8. NEVER set "version": "condensed" for any other module — there is no condensed deck for them and the build will fail.
+- For modules 0, 1, 2, 3, 3b, 7a–7f, 9a–9h: ALWAYS "full". Even if the user asks for a "quick" or "high-level" workshop, the version stays "full" for these modules — shorten by dropping topics or whole modules instead.
+- For modules 4, 5, 6, 8: "quick"/"overview"/"high-level" or short days → "condensed". "detailed"/"comprehensive"/"full training" → "full".
 
 Generate a JSON object with this structure:
 {
@@ -1992,7 +2010,7 @@ Generate a JSON object with this structure:
       {"session": "Lunch Break", "type": "break", "duration": 60},
       {"session": "Instance Setup", "module": "m9a", "version": "full", "duration": 90},
       {"session": "Registration", "type": "custom", "duration": 30},
-      {"session": "Optional: Data Extraction", "module": "m2", "version": "condensed", "duration": 60, "optional": true}
+      {"session": "Optional: Data Extraction", "module": "m2", "version": "full", "duration": 60, "optional": true}
     ],
     "day2": [
       {"session": "Data Quality Assessment", "module": "m4", "version": "condensed", "duration": 45},
@@ -2004,6 +2022,7 @@ Generate a JSON object with this structure:
 
 CRITICAL RULES:
 1. NEVER include both "full" and "condensed" versions of the same theory module
+1b. The "condensed" version exists ONLY for modules 4, 5, 6, 8. For every other module (including 0, 1, 2, 3, 3b, 7a–7f, 9a–9h), use "version": "full" — there is no condensed deck for them. Setting "version": "condensed" on any other module is a build error.
 2. Select modules that match the workshop focus
 3. Spread modules logically across days with breaks
 4. Day 1 should typically include Module 0 (Introduction) FIRST
@@ -2014,7 +2033,7 @@ CRITICAL RULES:
    - Module sessions: {"session": "Name", "module": "m0", "version": "full", "duration": 60}
    - Break sessions: {"session": "Tea Break", "type": "break", "duration": 15}
    - Custom sessions: {"session": "Country Presentations", "type": "custom", "duration": 60}
-   - Optional after-hours sessions: {"session": "Name", "module": "m2", "version": "condensed", "duration": 60, "optional": true}
+   - Optional after-hours sessions: {"session": "Name", "module": "m4", "version": "condensed", "duration": 60, "optional": true}
 9. Use custom sessions ONLY for non-module activities (registration, opening remarks, country presentations, group discussion, action planning)
 10. PREFER activity modules (9a-9h) over custom sessions for hands-on platform work
 21. OPTIONAL AFTER-HOURS SESSIONS: If a session is marked as optional or after-hours in the user's request, set "optional": true on that session. These sessions are placed AFTER the day_end marker and do NOT count toward the day's time budget. Use this for bonus/supplementary content that participants can attend voluntarily.
@@ -2145,7 +2164,7 @@ MATCHING RULES:
 - If a session clearly maps to a FASTR module, use the module reference with "module": "m4", "version": "full"
 - If unsure whether a session matches a module, keep it as "type": "custom"
 - Activity/hands-on sessions about the FASTR platform should map to modules 9a-9h
-- Use "condensed" version if the agenda allocates significantly less time than the module's full duration
+- Use "condensed" version ONLY for modules 4, 5, 6, 8 — and only if the agenda allocates significantly less time than the full duration. All other modules MUST use "version": "full" because they have no condensed deck.
 
 Generate a JSON object with this structure:
 {
