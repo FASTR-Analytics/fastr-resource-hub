@@ -434,17 +434,21 @@ modules:
     topics:
     - Team answer sheet
     duration: 30-45 min
-- id: m9h
-  number: 9h
-  folder: m9h_platform_demo
-  session: setup
+# Webinar content lives on disk (core_content/mw_webinar/) but the webinar
+# builder is paused — see web-app/server/routes/ai.ts WEBINAR_PAUSED. Tagged
+# deprecated so the registry knows about the folder but the library doesn't
+# expose it.
+- id: mw
+  number: mw
+  folder: mw_webinar
+  session: tools
+  deprecated: true
   name:
-    en: Platform Demo
-    fr: Démo de la plateforme
-    pt: Demonstração da plataforma
+    en: Webinar (paused)
+    fr: Webinaire (en pause)
+    pt: Webinar (em pausa)
   ai_context:
-    description: Live walkthrough of the FASTR platform — used as a generic demo / orientation
-      session when the audience needs platform-fluency before activities begin.
+    description: Webinar content — content authoring on hold while the webinar builder is being redesigned.
     topics:
-    - Platform walkthrough
-    duration: 30-45 min
+    - Webinar slides
+    duration: 60-90 min
