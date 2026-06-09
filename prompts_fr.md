@@ -347,9 +347,9 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple VIH/TB, MNT, Mortalité)
 5. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
 6. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
-7. Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour suggérer de le scinder en sous-groupes logiques. Chaque sous-groupe aura son propre ensemble de diapositives.
+7. Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour suggérer de le scinder en sous-groupes logiques. Chaque sous-groupe aura sa propre diapositive de perturbations.
 
-Chaque groupe/sous-groupe confirmé deviendra un ensemble de diapositives dans la section d'analyse nationale (tendances mensuelles, variation trimestrielle et analyse des perturbations). Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant).
+Chaque groupe/sous-groupe confirmé deviendra une diapositive d'analyse des perturbations dans la section d'analyse nationale. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant).
 
 EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme - ne pas recourir à des connaissances externes
@@ -436,51 +436,12 @@ DIAPOSITIVE 5 - Diapositive d'en-tête de section
 - Titre : « Section 1 : Utilisation des services »
 - Sous-titre : « Évaluation des volumes projetés sur la base des tendances historiques pour identifier les surplus et les perturbations dans les services de santé »
 
-DIAPOSITIVES 6+ - Diapositives d'analyse nationale (trois diapositives par GROUPE d'indicateurs)
-Pour chaque groupe d'indicateurs confirmé à l'Étape 2, créer trois diapositives consécutives :
-- Type A : Tendances mensuelles d'utilisation des services
-- Type B : Volume trimestriel avec variation en % d'un trimestre à l'autre
-- Type C : Analyse des perturbations
+DIAPOSITIVES 6+ - Diapositives nationales de perturbations (une diapositive par GROUPE d'indicateurs)
+Pour chaque groupe d'indicateurs confirmé à l'Étape 2, créer une diapositive d'analyse des perturbations. Le rapport court FASTR ne contient que la visualisation des perturbations pour chaque groupe — ne PAS générer de graphiques mensuels d'utilisation des services ni de graphiques de variation trimestrielle.
 
-La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Ces données m3-01-01 couvrent aussi les diapositives de type A et B ; les réutiliser. N'appeler get_metric_data que pour une métrique pas encore en contexte (p. ex. la métrique de perturbation m3-02-01 pour le type C).
+La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Appeler get_metric_data une fois pour la métrique de perturbation m3-02-01 pour la visualisation des perturbations.
 
-DIAPOSITIVE TYPE A : Tendances mensuelles d'utilisation des services
-
-Titre : « Tendances en [description du groupe] » — utiliser une phrase descriptive pour le domaine de service, PAS une liste de codes d'indicateurs
-- Bon : « Tendances en soins prénatals »
-- Mauvais : « Tendances en anc1, anc4 »
-
-Interprétation (côté gauche, span 4 — 60-100 mots, max 130) : Utiliser des listes à puces :
-- Une puce par indicateur décrivant les fluctuations mensuelles
-- Observation croisée entre indicateurs : schémas, écarts
-- Implications : une phrase avec une recommandation concrète
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-monthly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Use startDate/endDate covering last 12 complete quarters (36 months)
-
-DIAPOSITIVE TYPE B : Variation trimestrielle du volume de services
-
-Titre : Une phrase analytique résumant la conclusion trimestrielle principale. Au passé, 1-2 phrases maximum.
-- Bon : « Les services prénatals ont montré une croissance progressive, les quatrièmes visites augmentant plus nettement que les premières en 2025 »
-- Mauvais : « Variation trimestrielle des services prénatals »
-
-Interprétation (côté gauche, span 4 — 50-80 mots, max 100) :
-- Un paragraphe autonome : résumé de la tendance globale
-- Par indicateur : variations spécifiques d'un trimestre à l'autre avec pourcentages
-- Ne mentionner que les trimestres avec >10 % de variation. Si aucune variation >10 % : « [INDICATEUR] est resté stable depuis [DATE]... »
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-quarterly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Show data labels, indicator in columns not lines
-
-DIAPOSITIVE TYPE C : Analyse des perturbations
+DIAPOSITIVE D'ANALYSE DES PERTURBATIONS
 
 Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion principale pour ce groupe d'indicateurs. Le titre doit décrire ce que montrent les données, pas simplement nommer les indicateurs.
 - Bon exemple : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise à la mi-2025, avec quelques perturbations pour le BCG »
@@ -814,9 +775,9 @@ Chaque instance pays a des identifiants d'indicateurs (indicator_common_id) et d
    - Autres groupes selon les besoins basés sur ce qui existe (par exemple Nutrition, VIH/TB, MNT, Mortalité)
 5. Utiliser ask_user_questions pour présenter les regroupements proposés pour examen. Lister chaque groupe avec ses indicateurs (identifiant + libellé). Demander : « Voici les regroupements d'indicateurs proposés. Souhaitez-vous modifier quelque chose — déplacer des indicateurs entre groupes, créer de nouveaux groupes ou en exclure certains ? »
 6. Après confirmation des regroupements principaux, vérifier les indicateurs de mortalité (par exemple maternal_deaths, neonatal_deaths, stillbirths). Toujours utiliser ask_user_questions pour demander : « La plateforme dispose de ces indicateurs de mortalité : [liste]. Les données de mortalité impliquent des comptages d'événements faibles et une interprétation différente (les augmentations = négatif). Souhaitez-vous les inclure dans le rapport ou les exclure ? »
-7. Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour suggérer de le scinder en sous-groupes logiques. Chaque sous-groupe aura son propre ensemble de diapositives.
+7. Si un groupe confirmé contient plus de 3 indicateurs, utiliser ask_user_questions pour suggérer de le scinder en sous-groupes logiques. Chaque sous-groupe aura sa propre diapositive de perturbations.
 
-Chaque groupe/sous-groupe confirmé deviendra un ensemble de diapositives dans la section d'analyse (tendances mensuelles, variation trimestrielle et analyse des perturbations). Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant).
+Chaque groupe/sous-groupe confirmé deviendra une diapositive d'analyse des perturbations dans la section d'analyse. Utiliser les valeurs exactes de indicator_common_id de la plateforme pour tous les paramètres techniques (filterOverrides, selectedReplicant).
 
 EXIGENCES DE PRÉCISION :
 1. Baser toute l'analyse uniquement sur les données visibles dans la plateforme - ne pas recourir à des connaissances externes
@@ -903,51 +864,12 @@ DIAPOSITIVE 5 - Diapositive d'en-tête de section
 - Titre : « Utilisation des services à/au/en [NOM DE LA ZONE] »
 - Sous-titre : « Évaluation des volumes projetés sur la base des tendances historiques pour identifier les surplus et les perturbations dans les services de santé »
 
-DIAPOSITIVES 6+ - Diapositives d'analyse au niveau de la zone (trois diapositives par GROUPE d'indicateurs)
-Pour chaque groupe d'indicateurs confirmé à l'Étape 3, créer trois diapositives consécutives :
-- Type A : Tendances mensuelles d'utilisation des services
-- Type B : Volume trimestriel avec variation en % d'un trimestre à l'autre
-- Type C : Analyse des perturbations
+DIAPOSITIVES 6+ - Diapositives de perturbations au niveau de la zone (une diapositive par GROUPE d'indicateurs)
+Pour chaque groupe d'indicateurs confirmé à l'Étape 3, créer une diapositive d'analyse des perturbations. Le rapport court FASTR ne contient que la visualisation des perturbations pour chaque groupe — ne PAS générer de graphiques mensuels d'utilisation des services ni de graphiques de variation trimestrielle.
 
-La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Ces données m3-01-01 couvrent aussi les diapositives de type A et B ; les réutiliser. N'appeler get_metric_data que pour une métrique pas encore en contexte (p. ex. la métrique de perturbation m3-02-01 pour le type C).
+La disponibilité des données pour chaque indicateur a déjà été établie par l'appel groupé à l'étape de découverte des indicateurs — ne PAS rappeler get_metric_data pour re-vérifier par groupe. Appeler get_metric_data une fois pour la métrique de perturbation de la zone (AREA_METRIC_ID définie à l'Étape 2) pour la visualisation des perturbations.
 
-DIAPOSITIVE TYPE A : Tendances mensuelles d'utilisation des services
-
-Titre : « Tendances en [description du groupe] » — utiliser une phrase descriptive pour le domaine de service, PAS une liste de codes d'indicateurs
-- Bon : « Tendances en soins prénatals »
-- Mauvais : « Tendances en anc1, anc4 »
-
-Interprétation (côté gauche, span 4 — 60-100 mots, max 130) : Utiliser des listes à puces :
-- Une puce par indicateur décrivant les fluctuations mensuelles
-- Observation croisée entre indicateurs : schémas, écarts
-- Implications : une phrase avec une recommandation concrète
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-monthly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Use startDate/endDate covering last 12 complete quarters (36 months)
-
-DIAPOSITIVE TYPE B : Variation trimestrielle du volume de services
-
-Titre : Une phrase analytique résumant la conclusion trimestrielle principale. Au passé, 1-2 phrases maximum.
-- Bon : « Les services prénatals ont montré une croissance progressive, les quatrièmes visites augmentant plus nettement que les premières en 2025 »
-- Mauvais : « Variation trimestrielle des services prénatals »
-
-Interprétation (côté gauche, span 4 — 50-80 mots, max 100) :
-- Un paragraphe autonome : résumé de la tendance globale
-- Par indicateur : variations spécifiques d'un trimestre à l'autre avec pourcentages
-- Ne mentionner que les trimestres avec >10 % de variation. Si aucune variation >10 % : « [INDICATEUR] est resté stable depuis [DATE]... »
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-quarterly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Show data labels, indicator in columns not lines
-
-DIAPOSITIVE TYPE C : Analyse des perturbations
+DIAPOSITIVE D'ANALYSE DES PERTURBATIONS
 
 Titre : Rédiger un titre analytique (1-2 phrases) résumant la conclusion principale pour ce groupe d'indicateurs. Le titre doit décrire ce que montrent les données, pas simplement nommer les indicateurs.
 - Bon exemple : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise à la mi-2025, avec quelques perturbations pour le BCG »
@@ -1575,43 +1497,13 @@ Titre : « Section 2 : Utilisation des services, au niveau national »
 Sous-titre (anglais) : Service utilization over time and assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services at national level.
 Sous-titre (français) : Utilisation des services au fil du temps et évaluation des volumes projetés en fonction des tendances historiques afin d'identifier les excédents et les perturbations dans les services de santé.
 
-MODÈLE UNIVERSEL : Diapositives d'utilisation nationale des services par groupe d'indicateurs
+MODÈLE UNIVERSEL : Diapositives nationales de perturbations par groupe d'indicateurs
 
-Pour chaque groupe d'indicateurs, créer trois diapositives consécutives :
-- Type de diapositive A : Tendances mensuelles d'utilisation des services
-- Type de diapositive B : Volume trimestriel des services avec variation en % d'un trimestre à l'autre
-- Type de diapositive C : Analyse des perturbations
+Pour chaque groupe d'indicateurs, créer une diapositive d'analyse des perturbations. Le rapport court FASTR ne contient que la visualisation des perturbations pour chaque groupe — ne PAS générer de graphiques mensuels d'utilisation des services ni de graphiques de variation trimestrielle.
 
-Les deux diapositives utilisent une mise en page cohérente : interprétation textuelle (span=4) à gauche, visualisation (span=8) à droite.
+Mise en page : interprétation textuelle (span=4) à gauche, visualisation (span=8) à droite.
 
-TYPE DE DIAPOSITIVE A : Tendances mensuelles d'utilisation des services
-
-Format de l'en-tête : « Tendances de [description du groupe] »
-Règles :
-- Utiliser une phrase descriptive pour le domaine de service, PAS une liste de codes d'indicateurs
-- ✅ Bon : « Tendances des soins prénatals »
-- ✅ Bon : « Tendances des services d'accouchement »
-- ❌ Mauvais : « Tendances de BCG, Penta1, Penta3 »
-
-Bloc gauche — Interprétation textuelle (span=4) :
-Structure : [Titre évolution de l'utilisation des services] : [INDICATEUR 1] : [décrire les fluctuations mensuelles] | [INDICATEUR 2] : [décrire la tendance] | [Observation inter-indicateurs] : [tendances, écarts] | [Titre implications] : [une phrase d'analyse actionnable]
-Directives : Utiliser des titres en gras, une puce par indicateur, inclure les mois/périodes spécifiques et les chiffres approximatifs. Nombre de mots : 60–100, max 130. Ne décrire que ce qui est visible dans les données réelles.
-
-Bloc droit — Visualisation (span=8) : metricId : m3-01-01 | vizPresetId : volume-monthly | valuesFilter : count_final_both | startDate/endDate : 12 derniers trimestres complets (36 mois)
-
-TYPE DE DIAPOSITIVE B : Variation trimestrielle du volume de services
-
-En-tête de la diapositive : Une phrase analytique résumant le constat principal. Au passé, 1–2 phrases maximum. Se concentre sur la tendance globale du groupe.
-✅ Bon : « Les services prénatals ont montré une croissance progressive, avec les quatrièmes visites augmentant plus notablement que les premières en 2025 »
-❌ Mauvais : « Variation trimestrielle des services prénatals »
-
-Bloc gauche — Interprétation textuelle (span=4) :
-Structure : [Un paragraphe autonome : résumé de la tendance globale] | [INDICATEUR 1] [variations spécifiques d'un trimestre à l'autre avec pourcentages] | [INDICATEUR 2] [variations spécifiques]
-Directives : Ne mentionner que les trimestres avec une variation > 10%. Si aucune variation > 10% : « [INDICATEUR] est resté stable depuis [DATE]... » Nombre de mots : 50–80, max 100.
-
-Bloc droit : metricId : m3-01-01 | vizPresetId : volume-quarterly | valuesFilter : count_final_both | Afficher les étiquettes de données, indicateur en colonnes et non en lignes
-
-TYPE DE DIAPOSITIVE C : Analyse des perturbations
+DIAPOSITIVE D'ANALYSE DES PERTURBATIONS
 
 Titre : Rédiger un titre analytique (1–2 phrases) résumant le constat principal pour ce groupe d'indicateurs.
 ✅ Bon : « Malgré des déficits généralisés en 2024, les services de vaccination montrent des signes de reprise vers mi-2025 »
@@ -1622,11 +1514,9 @@ Visualisation (côté droit) : metricId : m3-02-01 | vizPresetId : disruption-ch
 Interprétation (côté gauche — cible 50–100 mots, max 180) : Pour CHAQUE indicateur : périodes spécifiques de perturbations/excédents avec magnitudes approximatives. Tendances inter-indicateurs. Évaluation globale. Ne décrire que ce qui est réellement visible dans le graphique.
 
 Déroulement
-Étape 1 : Réutiliser les données de volumes de services m3-01-01 déjà récupérées par l'appel groupé à l'étape 2.1 — elles couvrent les diapositives mensuelles et trimestrielles. Ne PAS rappeler get_metric_data pour re-vérifier la disponibilité. N'appeler get_metric_data que pour une métrique pas encore en contexte (mensuel : indicator_common_id, period_id ; trimestriel : indicator_common_id, quarter_id).
-Étape 2 : Analyser les données — identifier les hauts/bas, calculer les variations en % d'un trimestre à l'autre, noter les relations entre indicateurs.
-Étape 3 : Créer les diapositives — utiliser create_slide pour chaque type (A, B, C) par groupe d'indicateurs. Positionner de manière séquentielle.
-
-Type d'ajustement pour valuesFilter : par défaut count_final_both ; alternatives : count_final_none, count_final_outliers, count_final_completeness.
+Étape 1 : Appeler get_metric_data une fois pour la métrique de perturbation m3-02-01 (désagrégations : indicator_common_id, period_id). Ne PAS rappeler get_metric_data par groupe.
+Étape 2 : Analyser les données — identifier les périodes de perturbations et d'excédents, noter les relations entre indicateurs au sein de chaque groupe.
+Étape 3 : Créer les diapositives — utiliser create_slide pour chaque groupe d'indicateurs. Positionner de manière séquentielle.
 
 DIAPOSITIVE SUIVANTE — En-tête de la Section 3
 Titre : « Section 3 : Estimation de la couverture des services »

@@ -345,9 +345,9 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
 5. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
 6. After the main groupings are confirmed, check for mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths). Always use ask_user_questions to ask: "The platform has these mortality indicators: [list]. Mortality data involves low event counts and different interpretation (increases = bad). Would you like to include them in the report or exclude them?"
-7. If any confirmed group contains more than 3 indicators, use ask_user_questions to suggest splitting it into logical subgroups. Each subgroup will have its own set of slides.
+7. If any confirmed group contains more than 3 indicators, use ask_user_questions to suggest splitting it into logical subgroups. Each subgroup will have its own disruption slide.
 
-Each confirmed group/subgroup will become a set of slides in the national analysis section (monthly trends, quarterly change, and disruption analysis). Use the exact indicator_common_id values from the platform for all technical parameters (filterOverrides, selectedReplicant).
+Each confirmed group/subgroup will become one disruption analysis slide in the national analysis section. Use the exact indicator_common_id values from the platform for all technical parameters (filterOverrides, selectedReplicant).
 
 ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform - do not draw on external knowledge
@@ -433,51 +433,12 @@ SLIDE 5 - Section header slide
 - Title: "Section 1: Service Utilization"
 - Subtitle: "Assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services"
 
-SLIDES 6+ - National analysis slides (three slides per indicator GROUP)
-For each confirmed indicator group from Step 2, create three consecutive slides:
-- Slide Type A: Monthly service utilization trends
-- Slide Type B: Quarterly service volume with quarter-to-quarter % change
-- Slide Type C: Disruption analysis
+SLIDES 6+ - National disruption slides (one slide per indicator GROUP)
+For each confirmed indicator group from Step 2, create one disruption analysis slide. The FASTR short report includes only the disruption visualization for each group — do NOT generate monthly service utilization line graphs or quarter-to-quarter change charts.
 
-Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. That m3-01-01 data also covers Slide Types A and B; reuse it. Only fetch a metric not yet in context (e.g. the disruption metric m3-02-01 for Slide Type C).
+Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. Fetch the disruption metric m3-02-01 once for the disruption visualization.
 
-SLIDE TYPE A: Monthly Service Utilization Trends
-
-Title: "Trends in [group description]" — use a descriptive phrase for the service area, NOT a list of indicator codes
-- Good: "Trends in antenatal care"
-- Bad: "Trends in anc1, anc4"
-
-Interpretation (left side, span 4 — 60-100 words, max 130): Use bullet points:
-- One bullet per indicator describing monthly fluctuations
-- Cross-indicator insight: patterns, gaps
-- Implications: one sentence actionable insight
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-monthly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Use startDate/endDate covering last 12 complete quarters (36 months)
-
-SLIDE TYPE B: Quarterly Change in Service Volume
-
-Title: One analytical sentence summarizing the key quarterly finding. Past tense, 1-2 sentences max.
-- Good: "Antenatal services showed gradual growth, with fourth visits increasing more notably than first visits in 2025"
-- Bad: "Quarter-to-quarter change in antenatal services"
-
-Interpretation (left side, span 4 — 50-80 words, max 100):
-- One standalone paragraph: overall trend summary
-- Per indicator: specific quarter-to-quarter changes with percentages
-- Only mention quarters with >10% change. If no >10% changes: "[INDICATOR] remained consistent since [DATE]..."
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-quarterly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Show data labels, indicator in columns not lines
-
-SLIDE TYPE C: Disruption Analysis
+DISRUPTION ANALYSIS SLIDE
 
 Title: Write an analytical headline (1-2 sentences) that summarizes the key finding for this group of indicators. The headline should describe what the data shows, not just name the indicators.
 - Good example: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025, with some disruption in BCG"
@@ -811,9 +772,9 @@ Each country instance has different indicator IDs (indicator_common_id) and labe
    - Other groups as needed based on what exists (e.g., Nutrition, HIV/TB, NCDs, Mortality)
 5. Use ask_user_questions to present the proposed groupings for review. List each group with its indicators (ID + label). Ask: "Here are the proposed indicator groupings. Would you like to change anything — move indicators between groups, create new groups, or exclude any?"
 6. After the main groupings are confirmed, check for mortality indicators (e.g., maternal_deaths, neonatal_deaths, stillbirths). Always use ask_user_questions to ask: "The platform has these mortality indicators: [list]. Mortality data involves low event counts and different interpretation (increases = bad). Would you like to include them in the report or exclude them?"
-7. If any confirmed group contains more than 3 indicators, use ask_user_questions to suggest splitting it into logical subgroups. Each subgroup will have its own set of slides.
+7. If any confirmed group contains more than 3 indicators, use ask_user_questions to suggest splitting it into logical subgroups. Each subgroup will have its own disruption slide.
 
-Each confirmed group/subgroup will become a set of slides in the analysis section (monthly trends, quarterly change, and disruption analysis). Use the exact indicator_common_id values from the platform for all technical parameters (filterOverrides, selectedReplicant).
+Each confirmed group/subgroup will become one disruption analysis slide in the analysis section. Use the exact indicator_common_id values from the platform for all technical parameters (filterOverrides, selectedReplicant).
 
 ACCURACY REQUIREMENTS:
 1. Base all analysis only on data visible in the platform - do not draw on external knowledge
@@ -899,51 +860,12 @@ SLIDE 5 - Section header slide
 - Title: "Service Utilization in [AREA NAME]"
 - Subtitle: "Assessment of projected volumes based on historical trends to identify surpluses and disruptions in health services"
 
-SLIDES 6+ - Area-level analysis slides (three slides per indicator GROUP)
-For each confirmed indicator group from Step 3, create three consecutive slides:
-- Slide Type A: Monthly service utilization trends
-- Slide Type B: Quarterly service volume with quarter-to-quarter % change
-- Slide Type C: Disruption analysis
+SLIDES 6+ - Area-level disruption slides (one slide per indicator GROUP)
+For each confirmed indicator group from Step 3, create one disruption analysis slide. The FASTR short report includes only the disruption visualization for each group — do NOT generate monthly service utilization line graphs or quarter-to-quarter change charts.
 
-Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. That m3-01-01 data also covers Slide Types A and B; reuse it. Only fetch a metric not yet in context (e.g. the disruption metric m3-02-01 for Slide Type C).
+Data availability for every indicator was already established by the bulk call in the indicator-discovery step — do NOT call get_metric_data again to re-verify per group. Fetch the area disruption metric (AREA_METRIC_ID from Step 2) once for the disruption visualization.
 
-SLIDE TYPE A: Monthly Service Utilization Trends
-
-Title: "Trends in [group description]" — use a descriptive phrase for the service area, NOT a list of indicator codes
-- Good: "Trends in antenatal care"
-- Bad: "Trends in anc1, anc4"
-
-Interpretation (left side, span 4 — 60-100 words, max 130): Use bullet points:
-- One bullet per indicator describing monthly fluctuations
-- Cross-indicator insight: patterns, gaps
-- Implications: one sentence actionable insight
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-monthly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Use startDate/endDate covering last 12 complete quarters (36 months)
-
-SLIDE TYPE B: Quarterly Change in Service Volume
-
-Title: One analytical sentence summarizing the key quarterly finding. Past tense, 1-2 sentences max.
-- Good: "Antenatal services showed gradual growth, with fourth visits increasing more notably than first visits in 2025"
-- Bad: "Quarter-to-quarter change in antenatal services"
-
-Interpretation (left side, span 4 — 50-80 words, max 100):
-- One standalone paragraph: overall trend summary
-- Per indicator: specific quarter-to-quarter changes with percentages
-- Only mention quarters with >10% change. If no >10% changes: "[INDICATOR] remained consistent since [DATE]..."
-
-Visualization (right side, span 8): Create using from_metric with:
-- metricId: "m3-01-01"
-- vizPresetId: "volume-quarterly"
-- valuesFilter: "count_final_both"
-- filterOverrides: all indicator codes in the group
-- Show data labels, indicator in columns not lines
-
-SLIDE TYPE C: Disruption Analysis
+DISRUPTION ANALYSIS SLIDE
 
 Title: Write an analytical headline (1-2 sentences) that summarizes the key finding for this group of indicators. The headline should describe what the data shows, not just name the indicators.
 - Good example: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025, with some disruption in BCG"
@@ -1573,41 +1495,11 @@ Subtitle (French): Utilisation des services au fil du temps et évaluation des v
 
 UNIVERSAL TEMPLATE: National Service Utilization Slides by Indicator Group
 
-For each indicator group, create three consecutive slides:
-- Slide Type A: Monthly service utilization trends
-- Slide Type B: Quarterly service volume with quarter-to-quarter % change
-- Slide Type C: Service disruption
+For each indicator group, create one disruption analysis slide. The FASTR short report includes only the disruption visualization for each group — do NOT generate monthly service utilization line graphs or quarter-to-quarter change charts.
 
-Both slides use consistent layout: text interpretation (span=4) on left, visualization (span=8) on right.
+Layout: text interpretation (span=4) on left, visualization (span=8) on right.
 
-SLIDE TYPE A: Monthly Service Utilization Trends
-
-Slide Header Format: "Trends in [group description]"
-Rules:
-- Use a descriptive phrase for the service area, NOT a list of indicator codes
-- ✅ Good: "Trends in antenatal care"
-- ✅ Good: "Trends in delivery services"
-- ❌ Bad: "Trends in BCG, Penta1, Penta3"
-
-Left Block — Text Interpretation (span=4):
-Structure: [Service utilization evolution heading]: [INDICATOR 1]: [describe monthly fluctuations] | [INDICATOR 2]: [describe pattern] | [Cross-indicator insight]: [patterns, gaps] | [Implications heading]: [one sentence actionable insight]
-Guidelines: Use bold headings, one bullet per indicator, include specific months/periods and approximate numbers. Word count: 60–100 words, max 130. Only describe what is visible in actual data.
-
-Right Block — Visualization (span=8): metricId: m3-01-01 | vizPresetId: volume-monthly | valuesFilter: count_final_both | startDate/endDate: last 12 complete quarters (36 months)
-
-SLIDE TYPE B: Quarterly Change in Service Volume
-
-Slide Header: One analytical sentence summarizing the key finding. Past tense, 1–2 sentences maximum. Focuses on overall trend across the group.
-✅ Good: "Antenatal services showed gradual growth, with fourth visits increasing more notably than first visits in 2025"
-❌ Bad: "Quarter-to-quarter change in antenatal services"
-
-Left Block — Text Interpretation (span=4):
-Structure: [One standalone paragraph: overall trend summary] | [INDICATOR 1] [specific quarter-to-quarter changes with percentages] | [INDICATOR 2] [specific changes]
-Guidelines: Only mention quarters with >10% change. If no >10% changes: "[INDICATOR] remained consistent since [DATE]..." Word count: 50–80 words, max 100.
-
-Right Block: metricId: m3-01-01 | vizPresetId: volume-quarterly | valuesFilter: count_final_both | Show data labels, indicator in columns not lines
-
-SLIDE TYPE C: Disruption Analysis
+DISRUPTION ANALYSIS SLIDE
 
 Title: Write an analytical headline (1–2 sentences) summarizing the key finding for this group of indicators.
 ✅ Good: "Despite widespread shortfalls in 2024, immunization services show signs of recovery by mid-2025"
@@ -1618,11 +1510,9 @@ Visualization (right side): metricId: m3-02-01 | vizPresetId: disruption-chart |
 Interpretation (left side — target 50–100 words, max 180): For EACH indicator: specific time periods of disruptions/surpluses with approximate magnitudes. Cross-indicator patterns. Overall assessment. Only describe what is actually visible in the chart.
 
 Workflow
-Step 1: Reuse the m3-01-01 service-volume data already retrieved in the bulk call in Step 2.1 — it covers the monthly and quarterly slides. Do NOT re-call get_metric_data to re-verify availability. Only call get_metric_data again for a metric not yet in context (monthly disaggregations: indicator_common_id, period_id; quarterly: indicator_common_id, quarter_id).
-Step 2: Analyze the data — identify highs/lows, calculate quarter-to-quarter % changes, note indicator relationships.
-Step 3: Create slides — use create_slide for each type (A, B, C) per indicator group. Position sequentially.
-
-Adjustment type for valuesFilter: default count_final_both; alternatives are count_final_none, count_final_outliers, count_final_completeness.
+Step 1: Fetch the disruption metric m3-02-01 once (disaggregations: indicator_common_id, period_id). Do NOT re-call get_metric_data per group.
+Step 2: Analyze the data — identify disruption and surplus periods, note indicator relationships within each group.
+Step 3: Create slides — use create_slide for each indicator group. Position sequentially.
 
 NEXT SLIDE — Section 3 Header
 Title: "Section 3: Service Coverage Estimates"
