@@ -129,7 +129,12 @@ Use pattern: `m{module}_{number}`
 | DQA (m4) | `m4_1`, `m4_2`, `m4_3` |
 | Adjustment (m5) | `m5_1`, `m5_2` |
 | Analysis (m6) | `m6_1`, `m6_2`, ... `m6_5` |
-| Results (m7) | `m7_1`, `m7_2` |
+| Analytical thinking (m7a) | `m7a_1`, `m7a_1a` |
+| Data visualization (m7b) | `m7b_1` |
+| Understanding audience (m7c) | `m7c_1` |
+| Storytelling (m7d) | `m7d_1`, `m7d_1a` |
+| Linking to actions (m7e) | `m7e_1`, `m7e_1a` |
+| Roadmap (m7f) | `m7f_1`, `m7f_1a` |
 | AI Assistant (mai) | `mai_1`, `mai_2`, ... |
 | Condensed (any) | `m4_s1`, `m4_s2` (prefix with `_s`) |
 
