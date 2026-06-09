@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { X, Library, Plus, PenLine, Bookmark, Shapes, Upload, ChevronRight } from 'lucide-react'
+import { X, Library, Plus, PenLine, Bookmark, Shapes, Upload, ChevronRight, Zap } from 'lucide-react'
 import { ContentLibrary } from '../../components/ContentLibrary'
 import { CustomSlideEditor } from '../../components/CustomSlideEditor'
 import DiagramBuilder from '../../components/DiagramBuilder'
@@ -141,17 +141,59 @@ paginate: true
                 </p>
               )}
 
-              {/* SECTION: Create new slide — text / section / diagram are all slide layouts */}
-              <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+              {/* SECTION: Quick text slide — inline, the most common path */}
+              <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Zap className="w-3 h-3" />
+                {t('layoutTextSlide', contentLanguage)}
+              </h3>
+              <QuickTextSlideForm
+                contentLanguage={contentLanguage}
+                onSave={async (title, bullets) => {
+                  if (!currentWorkshopId) return false
+                  const slideContent = `---
+marp: true
+theme: fastr
+paginate: true
+---
+
+## ${title}
+
+${bullets.filter(b => b.trim()).map(b => `- ${b}`).join('\n')}
+`
+                  const slideFilename = `text_${Date.now()}.md`
+                  try {
+                    const res = await fetch(`/api/workshops/${currentWorkshopId}/custom-slides`, {
+                      method: 'POST',
+                      credentials: 'include',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ filename: slideFilename, content: slideContent }),
+                    })
+                    if (!res.ok) throw new Error('Failed to save slide')
+                    addSession(dayNum, {
+                      session: title,
+                      slides: [`custom_slides/${slideFilename}`],
+                      duration: 5,
+                    })
+                    showToast(
+                      contentLanguage === 'fr'
+                        ? `Diapositive ajoutée au jour ${dayNum}`
+                        : `Slide added to day ${dayNum}`,
+                      'success',
+                    )
+                    return true
+                  } catch (err: any) {
+                    showToast(err.message || 'Failed to save slide', 'error')
+                    return false
+                  }
+                }}
+                onOpenAdvanced={() => setSlideCreatorType('content')}
+              />
+
+              {/* SECTION: Other layouts */}
+              <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-6">
                 {t('createSlideHeading', contentLanguage)}
               </h3>
               <div className="space-y-2 mb-6">
-                <CreateActionRow
-                  icon={PenLine}
-                  title={t('layoutTextSlide', contentLanguage)}
-                  description={t('layoutTextSlideDesc', contentLanguage)}
-                  onClick={() => setSlideCreatorType('content')}
-                />
                 <CreateActionRow
                   icon={Bookmark}
                   title={t('layoutSectionDivider', contentLanguage)}
@@ -262,5 +304,78 @@ function CreateActionRow({ icon: Icon, title, description, onClick }: CreateActi
       </div>
       <ChevronRight className="w-4 h-4 text-slate-300 mt-2 flex-shrink-0" aria-hidden />
     </button>
+  )
+}
+
+interface QuickTextSlideFormProps {
+  contentLanguage: 'en' | 'fr' | 'pt'
+  onSave: (title: string, bullets: string[]) => Promise<boolean>
+  onOpenAdvanced: () => void
+}
+
+function QuickTextSlideForm({ contentLanguage, onSave, onOpenAdvanced }: QuickTextSlideFormProps) {
+  const [title, setTitle] = useState('')
+  const [bulletsText, setBulletsText] = useState('')
+  const [saving, setSaving] = useState(false)
+  const titleRef = useRef<HTMLInputElement>(null)
+
+  const handleSave = async () => {
+    if (!title.trim() || saving) return
+    setSaving(true)
+    const bullets = bulletsText.split('\n').map(b => b.trim()).filter(Boolean)
+    const ok = await onSave(title.trim(), bullets)
+    setSaving(false)
+    if (ok) {
+      setTitle('')
+      setBulletsText('')
+      titleRef.current?.focus()
+    }
+  }
+
+  const onKey = (e: React.KeyboardEvent) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      e.preventDefault()
+      handleSave()
+    }
+  }
+
+  return (
+    <div className="rounded-2xl bg-white border border-slate-200 ring-1 ring-black/5 shadow-sm p-4 mb-6">
+      <p className="text-caption text-slate-500 mb-3">{t('quickTextSlideHint', contentLanguage)}</p>
+      <input
+        ref={titleRef}
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={onKey}
+        placeholder={t('quickTextSlideTitle', contentLanguage)}
+        className="w-full px-3 py-2 mb-2 text-body-sm bg-slate-50 border border-slate-200 rounded-lg placeholder-slate-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/20"
+        disabled={saving}
+      />
+      <textarea
+        value={bulletsText}
+        onChange={(e) => setBulletsText(e.target.value)}
+        onKeyDown={onKey}
+        placeholder={t('quickTextSlideBullets', contentLanguage)}
+        rows={4}
+        className="w-full px-3 py-2 text-body-sm bg-slate-50 border border-slate-200 rounded-lg placeholder-slate-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/20 resize-none"
+        disabled={saving}
+      />
+      <div className="flex items-center justify-between mt-3 gap-2">
+        <button
+          onClick={onOpenAdvanced}
+          className="text-caption text-slate-500 hover:text-fastr-primary underline-offset-2 hover:underline transition-colors focus-ring"
+        >
+          {t('quickTextSlideAdvanced', contentLanguage)}
+        </button>
+        <button
+          onClick={handleSave}
+          disabled={!title.trim() || saving}
+          className="px-4 py-1.5 rounded-lg bg-fastr-primary text-white text-body-sm font-semibold hover:bg-fastr-secondary disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed transition-colors focus-ring"
+        >
+          {t('quickTextSlideSave', contentLanguage)}
+        </button>
+      </div>
+    </div>
   )
 }

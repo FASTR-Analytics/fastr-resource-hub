@@ -185,7 +185,7 @@ export function SortableSessionCard({
           {...listeners}
           title={t('dragToReorder', contentLanguage)}
           aria-label={t('dragToReorder', contentLanguage)}
-          className="cursor-move active:cursor-grabbing opacity-50 group-hover:opacity-100 hover:bg-black/5 rounded p-0.5 transition-all"
+          className="cursor-move active:cursor-grabbing opacity-70 group-hover:opacity-100 hover:bg-black/5 rounded p-0.5 transition-all"
         >
           <GripVertical className="w-4 h-4 text-slate-400" aria-hidden />
         </div>
