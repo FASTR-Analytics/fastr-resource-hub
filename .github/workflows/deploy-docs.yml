@@ -40,7 +40,21 @@ jobs:
           sudo apt-get install -y pandoc
 
       - name: Install dependencies
+        # MkDocs is retired as the live methodology site (now served from
+        # fastr-analytics.org built by FASTR-Analytics/site). The MkDocs
+        # build kept here only deploys a redirect page to GitHub Pages so
+        # any link to the old URL bounces to the new site. These deps live
+        # inline rather than in requirements.txt so collaborator setups
+        # aren't bloated with MkDocs they'll never use.
         run: |
+          pip install \
+            'mkdocs>=1.5.0' \
+            'mkdocs-material>=9.0.0' \
+            'mkdocs-bibtex>=2.11.0' \
+            'mkdocs-minify-plugin>=0.7.0' \
+            'mkdocs-static-i18n>=1.0.0' \
+            'mkdocs-exclude>=1.0.2' \
+            'mkdocs-git-revision-date-localized-plugin>=1.2.0'
           pip install -r requirements.txt
           pip install -e methodology/plugins/
 
