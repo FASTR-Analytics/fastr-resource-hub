@@ -14,19 +14,24 @@ To contribute to methodology content AND slide content, you only need to work in
 
 ## What is this project?
 
-The `methodology/` folder contains the entire **FASTR RMNCAH-N Service Use Monitoring Resource Package**. The 9 module files cover the complete FASTR methodology:
+The `methodology/` folder contains the entire **FASTR RMNCAH-N Service Use Monitoring Resource Package**. The methodology chapters are:
 
-| File | Module |
-|------|--------|
+| File | Chapter |
+|------|---------|
 | `00_introduction.md` | Introduction to FASTR |
-| `01_identify_questions_indicators.md` | Identify Questions & Indicators |
-| `02_data_extraction.md` | Data Extraction |
-| `03_fastr_analytics_platform.md` | The FASTR Analytics Platform |
-| `04_data_quality_assessment.md` | Data Quality Assessment |
-| `05_data_quality_adjustment.md` | Data Quality Adjustment |
-| `06a_service_utilization.md` | Service Utilization Analysis |
-| `06b_coverage_estimates.md` | Coverage Estimates |
-| `07_results_communication.md` | Results Communication |
+| `01_identify_questions_indicators.md` | Identify questions & indicators |
+| `02_data_extraction.md` | Data extraction |
+| `03_fastr_analytics_platform.md` | The FASTR analytics platform |
+| `03b_ai_assistant.md` | AI Assistant |
+| `04_data_quality_assessment.md` | Data quality assessment |
+| `05_data_quality_adjustment.md` | Data quality adjustment |
+| `06a_service_utilization.md` | Service utilization analysis |
+| `06b_coverage_estimates.md` | Coverage estimates |
+| `07_results_communication.md` | Results communication |
+| `08_survey_hfa.md` | Survey & HFA |
+| `11_user_guide.md` | Platform user guide |
+
+The same chapter files exist in `methodology/fr/` (French) and `methodology/pt/` (Portuguese), mirroring the English source. The workshop deck library on top of these chapters is broken down further into smaller modules — see `modules.yaml` at the repo root for the full module registry.
 
 ---
 
@@ -68,7 +73,7 @@ Each methodology file has **two parts** that serve different purposes:
 ### Part 1: Documentation (top of file)
 
 Everything **above** the ASCII art separator becomes the **documentation website**:
-- https://fastr-analytics.github.io/fastr-resource-hub/
+- https://fastr-analytics.org
 - Full explanations, context, references
 - All the detail needed for self-study
 
@@ -117,12 +122,13 @@ The web app lets you create workshops, build schedules (with AI assistance), and
 | Guide | Skill level | When to read it |
 |-------|-------------|-----------------|
 | [01 Editing Content](01_editing_content.md) | Everyone | Markdown syntax & SLIDE markers |
-| [03 Local Setup](03_local_setup.md) | Beginner | Installing Git, Python, VS Code on your computer |
-| [04 Codespaces Setup](04_codespaces_setup.md) | Everyone | Working in browser (no install needed) |
-| [05 Content Action Plan](05_content_action_plan.md) | Everyone | Slide content status & tasks to delegate |
-| [07 Style Guide](07_style_guide.md) | Everyone | Formatting conventions for methodology docs |
-| [08 Code Reference](08_code_reference.md) | Developer | R module code reference for AI assistants |
-| [09 Translation Workflow](09_translation_workflow.md) | Developer | French translation process |
+| [02 Local Setup](02_local_setup.md) | Beginner | Installing Git, Python, VS Code on your computer |
+| [03 Codespaces Setup](03_codespaces_setup.md) | Everyone | Working in browser (no install needed) |
+| [04 Content Action Plan](04_content_action_plan.md) | Everyone | Slide content status & tasks to delegate |
+| [05 Style Guide](05_style_guide.md) | Everyone | Formatting conventions for methodology docs |
+| [06 Code Reference](06_code_reference.md) | Developer | Map from methodology chapters to the FASTR-Analytics/modules code repo |
+| [07 Translation Workflow](07_translation_workflow.md) | Everyone | DeepL-backed FR + PT translation process + REVIEWED marker |
+| [08 Handouts Collaborator Guide](08_handouts_collaborator_guide.md) | Collaborator | Drafting condensed handouts with Claude Code |
 
 ---
 
@@ -132,12 +138,16 @@ The web app lets you create workshops, build schedules (with AI assistance), and
 
 | Folder | What's in it |
 |--------|--------------|
-| `methodology/` | Module source files you edit |
-| `core_content/` | Auto-generated slides (don't edit directly) |
-| `core_content_fr/` | French translations |
+| `methodology/` | Methodology chapters you edit (EN source) |
+| `methodology/fr/`, `methodology/pt/` | French and Portuguese mirrors |
+| `core_content/` | Auto-generated slide library (don't edit directly) |
+| `core_content_fr/`, `core_content_pt/` | French and Portuguese slide mirrors |
+| `templates/`, `templates_fr/`, `templates_pt/` | Slide templates (title, breaks, etc.) per language |
+| `handouts/` | Participant + facilitator handouts (EN, FR, PT) |
 | `modules.yaml` | Module definitions (single source of truth) |
 | `web-app/` | Deck Builder web application |
-| `tools/` | Extraction and validation scripts |
+| `tools/` | Extraction, validation, translation, and render scripts |
+| `FASTR Design System/` | Brand tokens, slide templates, web UI kit |
 
 ### Tools
 
@@ -158,5 +168,5 @@ cd web-app && ./dev.sh start
 
 ## Need Help?
 
-- **Documentation website:** https://fastr-analytics.github.io/fastr-resource-hub/
+- **Documentation website:** https://fastr-analytics.org
 - **Questions:** Contact the FASTR team

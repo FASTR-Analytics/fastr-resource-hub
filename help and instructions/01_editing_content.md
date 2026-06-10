@@ -57,18 +57,21 @@ More content...
 
 ### Slide ID Format
 
-Use pattern: `m{module}_{number}`
+Use pattern: `m{module}_{number}`. The full list of registered modules lives in [`modules.yaml`](../modules.yaml) at the repo root — that's the single source of truth. A quick map:
 
 | Module | IDs |
 |--------|-----|
-| Module 0 (Introduction) | `m0_1`, `m0_2`, `m0_3`... |
-| Module 1 (Questions) | `m1_1`, `m1_2`... |
-| Module 2 (Extraction) | `m2_1`, `m2_2`... |
-| Module 3 (Platform) | `m3_1`, `m3_2`... |
-| Module 4 (DQA) | `m4_1`, `m4_2`... |
-| Module 5 (Adjustment) | `m5_1`, `m5_2`... |
-| Module 6 (Analysis) | `m6_1`, `m6_2`... |
-| Module 7 (Results) | `m7_1`, `m7_2`... |
+| m0 — Introduction to FASTR | `m0_1`, `m0_2`… |
+| m1 — Identify questions & indicators | `m1_1`, `m1_2`… |
+| m2 — Data extraction | `m2_1`… |
+| m3 — FASTR Analytics Platform | `m3_1`… |
+| m3b — AI Assistant | `m3b_1`, `mai_1`… |
+| m4 — Data Quality Assessment | `m4_1`… |
+| m5 — Data Quality Adjustment | `m5_1`… |
+| m6 — Data Analysis (service use + coverage) | `m6_1`… |
+| m7a–m7f — Results communication (six sub-modules) | `m7a_1`, `m7b_1`… |
+| m8 — Survey & HFA | `m8_1`… |
+| m9a–m9g — Platform setup & workshop activities | `m9a_1`… `m9g_5` |
 
 ### Rules
 
@@ -88,7 +91,9 @@ This extracts SLIDE-marked content into `core_content/` for workshops.
 
 ---
 
-## Marp Slide Syntax (For Workshop Decks)
+## Marp Slide Syntax (Legacy reference)
+
+> **Legacy.** The day-to-day workflow for building workshop decks is the **Deck Builder web app** (`cd web-app && ./dev.sh start`), which assembles decks from `core_content/` and exports PDF/PPTX directly. The Marp-CLI authoring path documented in the rest of this section is no longer the primary route — it remains here as a reference for anyone hand-editing a generated deck or producing a one-off Marp render.
 
 The content below applies to the **generated workshop decks** (in `outputs/`), not the methodology files.
 
@@ -288,15 +293,15 @@ python3 tools/validate_content.py
 
 **Example:**
 ```markdown
-![FASTR Approach](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
-![HMIS Data](../assets/screenshots/hmis-csv-required-fields.png)
+![FASTR Approach](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![HMIS Data](../resources/screenshots/hmis-csv-required-fields.png)
 ```
 
 ### Image Paths
 
-**For images in `assets/` folder:**
+**For images in `resources/` folder:**
 ```markdown
-![FASTR Approach](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Approach](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 ```
 
 **For images in workshop folder:**
@@ -306,7 +311,7 @@ python3 tools/validate_content.py
 ```
 
 **Tips:**
-- Use `../assets/` when referencing shared images
+- Use `../resources/` when referencing shared images
 - Use `./` or just filename for workshop-specific images
 - Use descriptive alt text (the part in `[]`)
 - Supported formats: PNG, JPG, SVG, GIF
@@ -454,8 +459,8 @@ paginate: true
 **Location:** Abuja, Nigeria
 **Facilitators:** Dr. Smith, Dr. Jones
 
-<!-- ![FASTR Logo](../assets/logos/fastr_logo.png) -->
-<!-- Note: Add logo to assets/logos/ folder -->
+<!-- ![FASTR Logo](../resources/logos/fastr_logo.png) -->
+<!-- Note: Add logo to resources/logos/ folder -->
 ```
 
 ### Example 2: Content Slide with Lists
@@ -485,7 +490,7 @@ paginate: true
 
 # FASTR Workflow
 
-![FASTR Process](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Process](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 **Four main stages:** Data Extraction → Quality Assessment → Analysis → Insights
 ```
@@ -546,14 +551,14 @@ paginate: true
 ### 3. Incorrect Image Paths
 **Wrong:**
 ```markdown
-![Logo](assets/logo.png)  <!-- Missing ../ -->
-![Diagram](../assets/old_file.png)  <!-- File moved to subfolder -->
+![Logo](resources/logo.png)  <!-- Missing ../ -->
+![Diagram](../resources/old_file.png)  <!-- File moved to subfolder -->
 ```
 
 **Right:**
 ```markdown
-![Logo](../assets/logos/logo.png)  <!-- Use subfolder structure -->
-![Diagram](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![Logo](../resources/logos/logo.png)  <!-- Use subfolder structure -->
+![Diagram](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 ```
 
 ### 4. Too Much Content on One Slide

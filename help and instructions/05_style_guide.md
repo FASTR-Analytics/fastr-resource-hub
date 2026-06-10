@@ -1,8 +1,31 @@
 # Style guide
 
-> **Note:** This is the current working style guide (January 2026). Follow these conventions for consistency, but they are not set in stone. If you find something that doesn't work or have suggestions for improvement, flag it for discussion and we can update the guide.
+> **Note:** Follow these conventions for consistency, but they are not set in stone. If you find something that doesn't work or have suggestions for improvement, flag it for discussion and we can update the guide.
 
 This document defines the typographic and formatting conventions for FASTR methodology documentation.
+
+---
+
+## Language and spelling
+
+### American English for all English content
+
+All English content in this repo uses American spelling: **visualization** (not visualisation), **finalize** (not finalise), **color** (not colour), **analyze** (not analyse), **organize** (not organise), and so on.
+
+| American (use) | British (do not use) |
+|---|---|
+| visualization | visualisation |
+| analyze (verb) | analyse |
+| finalize | finalise |
+| color | colour |
+| organize | organise |
+| optimize | optimise |
+| utilize | utilise |
+
+Two exceptions:
+
+- **DHIS2 field names** stay as the platform writes them — e.g. the column `organisationunitid` keeps the British "s" because that's the literal API identifier.
+- **The plural noun `analyses`** is the same in American and British English (it's the plural of `analysis`). Use it freely — only the verb form differs.
 
 ---
 

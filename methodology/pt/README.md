@@ -87,5 +87,5 @@ python3 tools/validate_content.py                  # drift guard
 - **As imagens incorporadas nos diapositivos necessitam de uma restrição de altura `h:`** - O Marp dimensiona as imagens
   imagens sem restrições à largura do diapositivo, o que normalmente corta a parte inferior da
   tela de 1280×720. Utilize a sintaxe `![alt h:480](path.svg)`. Veja
-  [`help and instructions/07_style_guide.md`](../help%20and%20instructions/07_style_guide.md#images-in-slides--the-h-constraint)
+  [`help and instructions/05_style_guide.md`](../help%20and%20instructions/05_style_guide.md#images-in-slides--the-h-constraint)
   para as diretrizes de altura por esquema.

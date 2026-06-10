@@ -4,7 +4,7 @@ Complete installation instructions for setting up the FASTR Resource Hub on your
 
 > **Skill level:** Beginner-friendly for content editing (steps 1-7). The web app setup (step 9) requires comfort with the terminal but instructions are provided.
 
-> **Note:** Most contributors don't need local setup! Use the [GitHub web editor](../CONTRIBUTING.md#editing-on-githubcom) for simple edits or [GitHub Codespaces](04_codespaces_setup.md) for a full environment without any installation.
+> **Note:** Most contributors don't need local setup! Use the [GitHub web editor](../CONTRIBUTING.md#editing-on-githubcom) for simple edits or [GitHub Codespaces](03_codespaces_setup.md) for a full environment without any installation.
 
 This guide is for users who prefer to work locally. Follow these step-by-step instructions to install all necessary software.
 
@@ -256,9 +256,9 @@ Node.js is needed to install and run Marp CLI, which converts slides to PDF.
 
 ---
 
-## 5. Installing Marp CLI
+## 5. Installing Marp CLI (optional)
 
-Marp CLI is the tool that converts markdown slides into beautiful PDFs.
+Marp CLI is the tool that converts markdown slides into PDFs. **It's only needed if you want to render handouts or one-off slide files from the command line.** The web app (step 9) exports PDF and PPTX directly, so for most workflows you can skip this section.
 
 ### Windows
 
@@ -597,11 +597,11 @@ Congratulations! You now have a complete local development environment.
 
 - **Learn markdown:** See [Editing Content](01_editing_content.md)
 - **Contribute content:** See [CONTRIBUTING.md](../CONTRIBUTING.md)
-- **View methodology docs:** https://fastr-analytics.github.io/fastr-resource-hub/
+- **View methodology docs:** https://fastr-analytics.org
 
 ### Getting Help
 
-- **Online documentation:** https://fastr-analytics.github.io/fastr-resource-hub/
+- **Online documentation:** https://fastr-analytics.org
 - **Help guides:** Browse this folder
 - **Team:** Contact the FASTR team for support
 

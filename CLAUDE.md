@@ -190,7 +190,7 @@ Logs:
 
 ## Style Guidelines
 
-See `help and instructions/07_style_guide.md` for full guide.
+See `help and instructions/05_style_guide.md` for full guide.
 
 **Key rules:**
 - **Headings**: Sentence case (only capitalize first word and proper nouns)

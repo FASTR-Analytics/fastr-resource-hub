@@ -106,8 +106,8 @@ fastr-resource-hub/
 |-------|----------------|
 | [00 Start Here](help%20and%20instructions/00_start_here.md) | Overview and key concepts |
 | [01 Editing Content](help%20and%20instructions/01_editing_content.md) | Markdown syntax & SLIDE markers |
-| [03 Local Setup](help%20and%20instructions/03_local_setup.md) | Install on your computer |
-| [07 Style Guide](help%20and%20instructions/07_style_guide.md) | Formatting conventions |
+| [02 Local Setup](help%20and%20instructions/02_local_setup.md) | Install on your computer |
+| [05 Style Guide](help%20and%20instructions/05_style_guide.md) | Formatting conventions |
 
 ---
 

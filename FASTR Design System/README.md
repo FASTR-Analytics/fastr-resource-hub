@@ -22,7 +22,7 @@ Everything in this system was derived from materials the user provided:
 - **GitHub repository** — `FASTR-Analytics/fastr-resource-hub` (private; the org is at https://github.com/FASTR-Analytics)
   - `fastr-theme.css`, `fastr-clean.css`, `fastr-bold.css` — Marp deck themes (source of truth for slide colors / type)
   - `templates/*.md` — Marp slide templates (title, section divider, agenda, welcome, …)
-  - `methodology/*.md` — long-form documentation; canonical style guide at `help and instructions/07_style_guide.md`
+  - `methodology/*.md` — long-form documentation; canonical style guide at `help and instructions/05_style_guide.md`
   - `resources/logos`, `resources/icons`, `resources/backgrounds`, `resources/diagrams` — the brand asset library
   - `web-app/client/` — React + Vite + Tailwind Deck Builder
   - `web-app/client/tailwind.config.js` — source of truth for web-app palette

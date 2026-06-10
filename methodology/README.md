@@ -84,5 +84,5 @@ python3 tools/validate_content.py                  # drift guard
 - **Image embeds in slides need an `h:` height constraint** — Marp scales
   unconstrained images to slide width, which usually clips the bottom on the
   1280×720 canvas. Use `![alt h:480](path.svg)` syntax. See
-  [`help and instructions/07_style_guide.md`](../help%20and%20instructions/07_style_guide.md#images-in-slides--the-h-constraint)
+  [`help and instructions/05_style_guide.md`](../help%20and%20instructions/05_style_guide.md#images-in-slides--the-h-constraint)
   for the height guidelines per layout.

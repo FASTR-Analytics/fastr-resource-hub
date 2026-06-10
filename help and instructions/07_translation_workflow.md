@@ -3,9 +3,19 @@
 ## Overview
 
 The FASTR project supports multilingual documentation using:
-- **mkdocs-static-i18n plugin** for site structure (`.fr.md` suffix convention)
+- **Per-language subfolders** (`methodology/fr/`, `methodology/pt/`) mirroring the English source files
 - **DeepL API** via `tools/translate_docs.py` for automated translation
 - **REVIEWED marker system** to protect human-edited content from overwrite
+
+## How it fits with the public site
+
+The public methodology site at https://fastr-analytics.org is built by the [FASTR-Analytics/site](https://github.com/FASTR-Analytics/site) repo (Starlight), which vendors `methodology/` from here via `pnpm sync:methodology`. Bilingual + trilingual content lives in:
+
+- `methodology/<NN>_<topic>.md` — English source
+- `methodology/fr/<NN>_<topic>.md` — French mirror
+- `methodology/pt/<NN>_<topic>.md` — Portuguese mirror
+
+The Starlight site picks all three up automatically. Translation tooling in this repo handles populating `fr/` and `pt/`; the public site has no translation pipeline of its own.
 
 ## Quick Start
 
@@ -55,13 +65,13 @@ The `<!-- REVIEWED -->` marker protects human-edited translations from being ove
 
 | File State | What Happens on Re-run |
 |------------|------------------------|
-| No `.fr.md` exists | Full translation created |
-| `.fr.md` exists, no marker | Complete re-translation (overwrites) |
-| `.fr.md` with `<!-- REVIEWED -->` | New sections appended, existing content preserved |
+| No `fr/<file>.md` exists | Full translation created |
+| `fr/<file>.md` exists, no marker | Complete re-translation (overwrites) |
+| `fr/<file>.md` with `<!-- REVIEWED -->` | New sections appended, existing content preserved |
 
 ### Workflow
 
-1. **Initial Translation**: Run `translate_docs.py` to create `.fr.md` files
+1. **Initial Translation**: Run `translate_docs.py` to create the `fr/<file>.md` mirrors
 2. **Human Review**: Check the French translation for:
    - Technical accuracy (FASTR terminology)
    - Natural French phrasing
@@ -86,16 +96,18 @@ The `<!-- REVIEWED -->` marker protects human-edited translations from being ove
 
 ## File Naming Convention
 
-The mkdocs-static-i18n plugin uses suffix-based file structure:
+Translations live in per-language subfolders that mirror the English source filename one-for-one:
 
 ```
 methodology/
-├── index.md                    # English (default)
-├── index.fr.md                 # French
-├── 00_introduction.md          # English
-├── fr/00_introduction.md       # French (via i18n folder structure)
-└── ...
+├── 00_introduction.md          # English (source)
+├── fr/
+│   └── 00_introduction.md      # French
+└── pt/
+    └── 00_introduction.md      # Portuguese
 ```
+
+Same pattern applies for `core_content/` (workshop slide library) and `templates/` (slide templates) — each has `core_content_fr/`, `core_content_pt/`, `templates_fr/`, `templates_pt/`.
 
 ---
 
@@ -104,8 +116,6 @@ methodology/
 | Code | Language | Command |
 |------|----------|---------|
 | `fr` | French | `--lang fr` |
-| `es` | Spanish | `--lang es` |
-| `de` | German | `--lang de` |
 | `pt` | Portuguese | `--lang pt` |
 
 ---
@@ -157,5 +167,4 @@ python3 tools/translate_docs.py --lang fr --force
 ## References
 
 - [DeepL API Documentation](https://www.deepl.com/docs-api)
-- [mkdocs-static-i18n Plugin](https://ultrabug.github.io/mkdocs-static-i18n/)
-- [Material for MkDocs i18n](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/)
+- [FASTR-Analytics/site](https://github.com/FASTR-Analytics/site) — the Starlight repo that builds https://fastr-analytics.org from `methodology/` (vendored via `pnpm sync:methodology`)
