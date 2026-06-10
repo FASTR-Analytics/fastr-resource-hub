@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "marp-team.marp-vscode",
-    "ms-python.python"
+    "ms-python.python",
+    "anthropic.claude-code"
   ]
 }

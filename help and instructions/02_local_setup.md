@@ -34,7 +34,8 @@ You'll need to install:
 6. [Cloning the Repository](#6-cloning-the-repository)
 7. [Opening in VS Code](#7-opening-the-repository-in-vs-code)
 8. [Installing VS Code Extensions](#8-installing-recommended-vs-code-extensions)
-9. [Setting Up the Web App](#9-setting-up-the-web-app)
+9. [Installing Project Dependencies + Starting the Web App](#9-installing-project-dependencies--starting-the-web-app)
+10. [Setting Up Claude Code + Playwright MCP](#10-setting-up-claude-code--playwright-mcp) (for handout work)
 
 ---
 
@@ -438,11 +439,35 @@ If you don't see the notification:
 
 ---
 
-## 9. Setting Up the Web App
+## 9. Installing Project Dependencies + Starting the Web App
 
-The web app is where you build workshops, preview slides, and export to PDF/PowerPoint.
+The repository has two sets of dependencies — Python packages for the
+scripts in `tools/`, and Node.js packages for the web app. Install both
+before anything else.
 
-### Install dependencies
+### Step 1: Install Python packages (for the FASTR tools)
+
+From the **repository root** (not from `web-app/`), open a terminal and run:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+This installs the small set of libraries the scripts in `tools/` use
+(PyYAML for module metadata, requests for the DeepL translation API,
+cairosvg for diagram rendering, pypdf + reportlab for booklet assembly).
+It only needs to run once per machine.
+
+**Verify:**
+
+```bash
+python3 tools/validate_content.py
+```
+
+If the script runs (it may print warnings about content but should not
+crash with `ModuleNotFoundError`), the Python packages installed correctly.
+
+### Step 2: Install Web App dependencies (Node.js packages)
 
 ```bash
 # Navigate to the web app folder
@@ -452,18 +477,23 @@ cd web-app
 npm install
 ```
 
-### Start the web app
+This installs the React frontend and Express backend dependencies. It
+takes 2–5 minutes the first time.
+
+### Step 3: Start the web app
+
+Still inside `web-app/`, run:
 
 ```bash
 ./dev.sh start
 ```
 
-Then open http://localhost:5173 in your browser.
+Then open **http://localhost:5173** in your browser.
 
 ### Verify everything works
 
 1. The web app should load showing the Content Library
-2. Browse modules - you should see all FASTR modules with their slides
+2. Browse modules — you should see all FASTR modules with their slides
 3. Try the Workshop Builder to create a test workshop
 4. Export to Markdown, PDF, or PowerPoint
 
@@ -477,13 +507,79 @@ cd web-app
 ./dev.sh status   # Check server status
 ```
 
-### Also verify content tools
+### Verify the content tools work
 
 ```bash
-# From the repository root
+# From the repository root (not web-app/)
 python3 tools/00_extract_slides.py    # Extract slides from methodology
 python3 tools/validate_content.py     # Validate content consistency
 ```
+
+---
+
+## 10. Setting Up Claude Code + Playwright MCP
+
+Skip this step if you're only editing methodology or slide content. **Do this step if you'll be working on handouts** — see [`08_handouts_collaborator_guide.md`](08_handouts_collaborator_guide.md). Claude Code is the AI assistant we drive through the handout work; Playwright MCP is what lets it take real screenshots of the FASTR platform demo site.
+
+### Step 1: Install the Claude Code VS Code extension
+
+1. **Open VS Code.**
+
+2. **Click the Extensions icon** in the left sidebar (it looks like four squares, third icon down).
+
+3. **In the search box at the top, type:** `Claude Code`
+
+4. **Look for the extension published by Anthropic** (it will say "Anthropic" under the title).
+
+5. **Click the blue "Install" button.**
+
+6. Wait until the button changes to "Disable" / "Uninstall" — that means it installed.
+
+7. The Claude Code panel now appears in VS Code's right sidebar. You can open it any time from **View → Open View… → Claude Code**, or by clicking the Claude icon in the sidebar.
+
+### Step 2: Open the VS Code terminal
+
+You'll need a terminal for the next command. **Use the terminal that's built into VS Code** — it's already pointed at your repository folder, so you don't have to `cd` anywhere.
+
+**Option A: Keyboard shortcut**
+- Mac: press `Ctrl + ` ` (Control + backtick — the key above Tab)
+- Windows: press `Ctrl + ` ` (Control + backtick)
+
+**Option B: Menu**
+- Click **Terminal → New Terminal** in the top menu bar.
+
+A terminal panel opens at the bottom of VS Code. The prompt should already show the `fastr-resource-hub` folder (something like `claireboulange@MacBook fastr-resource-hub %`).
+
+### Step 3: Install the Playwright MCP server
+
+In that VS Code terminal, **type or paste this command and press Enter**:
+
+```bash
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+You should see a confirmation message that the `playwright` server has been added.
+
+> **What this does:** registers a small local helper called Playwright MCP that Claude Code can use to drive a real web browser. Claude Code on its own can't open websites — Playwright MCP is what makes screenshots possible.
+
+### Step 4: First-run browser download (one-time)
+
+The first time Claude Code uses Playwright, it downloads a Chromium browser binary (~150 MB). This happens automatically when you ask it to take a screenshot — no command needed. Just expect the first screenshot request to take 30–60 seconds longer than usual.
+
+### Step 5: Verify it's working
+
+1. Open the Claude Code panel in VS Code (sidebar icon or **View → Open View… → Claude Code**).
+
+2. Type this message:
+   > Use the Playwright MCP to open `https://demo.fastr-analytics.org` and take a screenshot of the homepage.
+
+3. Press Enter and watch the panel.
+
+4. **If it's working:** Claude tells you it's opening the browser, you see the screenshot tool run, and Claude returns the captured image.
+
+5. **If it says "tool not found" or similar:** the install didn't register. Re-run the command from Step 3 and restart VS Code.
+
+You're done. From here, the [handouts collaborator guide](08_handouts_collaborator_guide.md) walks through using Claude Code to draft, trim, and screenshot handouts.
 
 ---
 

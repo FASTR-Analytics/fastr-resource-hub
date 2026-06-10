@@ -232,41 +232,10 @@ For the local install (Git, Python, Node, Marp) see
 
 ## 6. VS Code + Claude Code + Playwright MCP
 
-Recommended editor setup. **Every collaborator should do this once.**
-
-### VS Code extensions
-
-Open the repo in VS Code. The workspace already recommends two extensions
-(`marp-team.marp-vscode`, `ms-python.python`) — VS Code will prompt you
-to install them. Accept.
-
-You also want the Claude Code VS Code extension:
-
-- Install from the VS Code marketplace: **Claude Code** (publisher:
-  Anthropic). It runs Claude Code inside a side panel and respects the
-  same `CLAUDE.md` and MCP config as the CLI.
-
-### Playwright MCP — for screenshots
-
-Handouts use real platform screenshots from `demo.fastr-analytics.org`.
-Claude Code captures them via the **Playwright MCP server**, which drives
-a headless browser. It's an extra MCP server you have to install
-separately — Claude Code on its own can't open browsers.
-
-**One-time install** (in any terminal):
-
-```bash
-claude mcp add playwright npx @playwright/mcp@latest
-```
-
-That registers a local Playwright MCP server with Claude Code. The first
-time Claude uses it, it downloads a Chromium binary (~150 MB) — that's
-normal.
-
-Verify it's working: open Claude Code in the repo and ask
-*"Use the Playwright MCP to open `https://demo.fastr-analytics.org` and
-take a screenshot."* You should see Claude open the browser and return a
-screenshot tool result.
+The full step-by-step install (Claude Code VS Code extension, VS Code
+terminal, Playwright MCP server, verification) is in
+[`02_local_setup.md` — step 10](02_local_setup.md#10-setting-up-claude-code--playwright-mcp).
+Do that once before you start handout work.
 
 ### Workflow for capturing a real screenshot
 
