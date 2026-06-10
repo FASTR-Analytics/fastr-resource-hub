@@ -78,7 +78,38 @@ Use pattern: `m{module}_{number}`. The full list of registered modules lives in 
 1. **Unique IDs** - Each slide ID must be unique
 2. **Matching tags** - Every `<!-- SLIDE:xxx -->` needs a `<!-- /SLIDE -->`
 3. **No nesting** - Don't put markers inside other markers
-4. **Images** - Use `resources/...` paths
+4. **Images** - Use `../resources/...` paths (see "Images and other assets" below)
+
+### Images and other assets
+
+Shared images, diagrams, screenshots, logos, and icons live under `resources/` at the repo root. Reference them from methodology files with a path relative to the markdown file's directory:
+
+```markdown
+![FASTR approach](../resources/diagrams/fastr_rapid_cycle_analytics_approach.svg)
+![Platform login](../resources/screenshots/platform/01_login.png)
+```
+
+**Per-language mirrors:** diagrams have separate language trees so EN / FR / PT can be visually localized.
+
+- From `methodology/<file>.md` (English) — use `../resources/diagrams/<name>.svg`
+- From `methodology/fr/<file>.md` — use `../../resources/diagrams_fr/<name>.svg`
+- From `methodology/pt/<file>.md` — use `../../resources/diagrams_pt/<name>.svg`
+
+Screenshots, icons, logos, and backgrounds are shared across all languages — no `_fr` or `_pt` mirrors.
+
+**Folder shortcuts:**
+
+| Folder | What's there |
+|---|---|
+| `resources/diagrams/` (+ `_fr`, `_pt`) | Brand SVG diagrams (FASTR colors, Inter font) |
+| `resources/screenshots/` | Platform screenshots, organized by topic (`m9a_setup/`, `platform/`, etc.) |
+| `resources/icons/` | Deep-green SVG icon set (hands_on, demo, thought, …) |
+| `resources/logos/` | FASTR + GFF + World Bank logos |
+| `resources/backgrounds/` | Cover and section-cover backgrounds |
+
+The full asset library — folder layout, naming conventions, how to add/edit each type, Marp + PPTX gotchas — is in [`resources/README.md`](../resources/README.md). When in doubt, that's the source of truth.
+
+For the slide image height constraint (the `h:480` syntax that keeps images from being clipped on the 1280×720 slide canvas), see [`05_style_guide.md`](05_style_guide.md#images-in-slides--the-h-constraint).
 
 ### Extracting Slides
 

@@ -333,6 +333,13 @@ Naming convention: `m[module]_[section][subsection]`
 
 ## Images in slides — the `h:` constraint
 
+> **Where images live:** all shared visual assets (diagrams, screenshots,
+> icons, logos, backgrounds) are under `resources/` at the repo root.
+> See [`resources/README.md`](../resources/README.md) for the folder
+> layout and the per-language diagram mirrors (`resources/diagrams_fr/`,
+> `resources/diagrams_pt/`). Path conventions per content type
+> (methodology vs. handouts vs. templates) are documented there too.
+
 When you embed an image (SVG, PNG) inside a `<!-- SLIDE -->` block, always set a
 **height constraint** unless the image is genuinely tiny. Without one, Marp scales
 the image to the slide width — which on the 1280×720 slide canvas usually pushes

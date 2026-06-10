@@ -144,6 +144,9 @@ The web app lets you create workshops, build schedules (with AI assistance), and
 | `core_content_fr/`, `core_content_pt/` | French and Portuguese slide mirrors |
 | `templates/`, `templates_fr/`, `templates_pt/` | Slide templates (title, breaks, etc.) per language |
 | `handouts/` | Participant + facilitator handouts (EN, FR, PT) |
+| `resources/` | Shared visual assets used by slides, handouts, and the web app — diagrams, screenshots, icons, logos, backgrounds. **See [`resources/README.md`](../resources/README.md)** for the folder layout and naming conventions. |
+| `resources/diagrams/`, `resources/diagrams_fr/`, `resources/diagrams_pt/` | Brand diagrams (SVG, FASTR colors). Diagrams are mirrored per language; screenshots and logos are shared. |
+| `resources/screenshots/` | Platform screenshots organized by topic (e.g. `m9a_setup/`, `platform/`, `country_examples/`) |
 | `modules.yaml` | Module definitions (single source of truth) |
 | `web-app/` | Deck Builder web application |
 | `tools/` | Extraction, validation, translation, and render scripts |
