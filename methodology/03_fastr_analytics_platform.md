@@ -22,11 +22,15 @@ An integrated AI assistant helps users understand and interpret their data. The 
 
 ### Visualization
 
-The platform offers robust visualization tools for presenting analytical results. Users can create charts, maps, and tables from processed data, with options to filter and disaggregate by multiple dimensions. Visualizations can be customized in terms of appearance and styling, and exported as images or data files for use in external applications.
+The platform offers robust visualization tools for presenting analytical results. Users can create charts, maps, and tables from processed data, with options to filter and disaggregate by multiple dimensions. Visualizations can be customized in appearance and styling and exported as images or data files for use in external applications.
 
-### Reporting
+### Sharing results
 
-Reporting functionality enables users to combine multiple visualizations into comprehensive reports. Reports can be exported as PowerPoint presentations or PDF documents. Users can organize and reorder report pages to meet specific communication needs and share completed reports with stakeholders.
+Once users have built visualizations, the platform offers three ways to share them, suited to different audiences:
+
+- **Dashboards** — live, shareable pages that bundle visualizations into a single view. Charts update whenever data refreshes, and the dashboard can be published at a public link so stakeholders open it in a browser without a FASTR account.
+- **Presentations** — slide-deck-style outputs designed for live meetings and workshops. Export to PowerPoint or PDF for in-person delivery.
+- **Reports** — long-form narrative documents that combine written analysis with live figures. Export to Word or PDF for stakeholders reading a document end-to-end.
 
 ### Collaboration
 
@@ -61,7 +65,7 @@ The **instance** serves as the organization's primary workspace within the platf
 
 ### Data flow
 
-The platform follows a structured data flow: **Data Import → Module Processing → Visualizations → Reports**. Users first upload health facility data at the instance level. Projects are then created with specific data windows that define the scope of analysis. Analytical modules process and analyze the selected data, producing outputs that can be used to create charts, maps, and tables. Finally, visualizations are combined into exportable reports for dissemination.
+The platform follows a structured data flow: **Data Import → Module Processing → Visualizations → Dashboards, Presentations, and Reports**. Users first upload health facility data at the instance level. Projects are then created with specific data windows that define the scope of analysis. Analytical modules process and analyze the selected data, producing outputs that can be turned into charts, maps, and tables. Visualizations can then be assembled into dashboards for live sharing, presentations for live delivery, or narrative reports for written dissemination.
 
 
 ## Technical requirements
@@ -106,7 +110,13 @@ Health Facility Assessment (HFA) data contains information about facility charac
 
 ### Indicators
 
-**Indicators** are measurable health metrics used within the platform. These can be either **Common Indicators**, which are defined and shared across the instance for consistent measurement, or **DHIS2 Indicators**, which are imported from external DHIS2 systems and may follow different naming conventions or calculation methods.
+**Indicators** are measurable health metrics used within the platform. Three types exist:
+
+- **Common indicators** are defined and shared across the instance for consistent measurement.
+- **DHIS2 indicators** are imported from external DHIS2 systems and may follow different naming conventions or calculation methods.
+- **Calculated indicators** are derived metrics that combine two values — typically a numerator indicator divided by a denominator (another indicator, or a population-based figure). For example, ANC1 visits divided by the target pregnant-women population gives an ANC1 coverage estimate. Calculated indicators can be displayed as a percent, a count, or a rate per 10,000, and they support traffic-light thresholds for quick performance review (e.g., green at or above 80%, yellow 70–79%, red below 70%).
+
+Calculated indicators are snapshotted into a project at HMIS-import time, so changing a definition forces a re-import to take effect. Population-based denominators require a population CSV to be uploaded at the instance level before they can be used.
 
 ### Datasets and versions
 
@@ -118,15 +128,29 @@ A **dataset** is a collection of health data, either HMIS or HFA. Each time data
 
 The platform distinguishes between two module types. A **Module Definition** is the template or blueprint for a type of analysis, defining the analytical methods and parameters available. A **Module Instance** is a module that has been enabled and configured within a specific project. Some modules have prerequisites, meaning that other modules must be enabled first before they can be used.
 
-### Visualizations (presentation objects)
+### Visualizations
 
-**Visualizations**, also referred to as presentation objects, are visual representations of data generated from module outputs. The platform supports three main visualization types: charts (including bar charts, line graphs, and pie charts), maps (geographic visualizations showing data across administrative areas), and tables (tabular data displays).
+**Visualizations** are visual representations of data generated from module outputs. The platform supports three main visualization types: charts (including bar charts, line graphs, and pie charts), maps (geographic visualizations showing data across administrative areas), and tables (tabular data displays).
 
-Visualizations can be filtered by various dimensions and disaggregated by factors such as facility type, time period, or administrative level. Users can customize the appearance and styling of visualizations, and export them for use in external applications or include them directly in reports.
+Visualizations can be filtered by various dimensions and disaggregated by factors such as facility type, time period, or administrative level. Users can customize the appearance and styling of visualizations, and export them for use in external applications or include them directly in dashboards, presentations, or reports.
+
+### Dashboards
+
+**Dashboards** are live, shareable pages that bundle saved visualizations into one view. Each tile on a dashboard is a chart, map, or table that updates automatically whenever the underlying data refreshes — so a dashboard always shows the current state of the data without re-exporting.
+
+Dashboards can be published at a public URL (with optional access controls) so stakeholders open them in a browser without needing a FASTR account. Two layouts are available: a **grid** arranges tiles in rows and columns, and a **sidebar** organizes tiles into a left-side menu for navigation.
+
+Dashboards also support **replicant groups** — a single tile can hold many variants of the same chart (for example, one per district), with a dropdown that lets the viewer switch between them. This keeps the dashboard compact when the same analysis needs to be shown for many areas.
+
+### Presentations
+
+**Presentations** are slide-deck-style outputs designed for live workshops or stakeholder meetings. The editor lays out one chart, title, or text block per slide, similar to PowerPoint. Presentations export to PowerPoint (.pptx) or PDF and are best suited for findings that will be projected in a room while someone walks the audience through them.
 
 ### Reports
 
-**Reports** are collections of visualization pages designed for export and sharing with stakeholders. Reports can be exported as PowerPoint presentations or PDF documents, and can be organized with multiple pages configured with custom layouts and orientations. Each page in a report is a **report item** that contains a visualization.
+**Reports** are long-form narrative documents that combine your written analysis with live figures from the platform. The editor works like a word processor with markdown formatting: users write commentary, embed visualizations that update automatically when data refreshes, and add static images for context.
+
+Reports export to **Word (.docx) or PDF** and are designed for stakeholders reading a document end-to-end, rather than sitting through a presentation. Use a presentation when the deliverable will be projected in a meeting; use a report when the deliverable will be read on a desk or in an inbox.
 
 ### Windowing
 
@@ -201,7 +225,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 **Visualization** — Explore results with interactive charts and tables
 
-**Reporting** — Export findings to PowerPoint or PDF for stakeholders
+**Sharing results** — Build live dashboards, slide presentations, or narrative reports for stakeholders
 
 **Collaboration** — Work together with your team on shared projects
 

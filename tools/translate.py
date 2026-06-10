@@ -16,6 +16,15 @@ Setup:
     1. Sign up at https://www.deepl.com/pro-api (free tier available)
     2. Set environment variable: export DEEPL_API_KEY=your-key-here
 
+Before committing changes to this file (especially to apply_glossary or the
+caching logic), run the unit tests:
+
+    python3 tools/test_translate.py
+
+They guard against the substring-glossary regression of 2026-06-10 (ANC →
+CPN matching inside "instance" → "instCPNe") and verify the cache
+invalidates on glossary or code changes.
+
 Author: FASTR Project
 """
 
@@ -23,6 +32,7 @@ import os
 import sys
 import json
 import hashlib
+import inspect
 import re
 from datetime import datetime
 from pathlib import Path
@@ -138,10 +148,45 @@ def compute_hash(text: str) -> str:
     return hashlib.sha256(text.encode('utf-8')).hexdigest()[:16]
 
 
+_postprocess_sig_cache: Dict[str, str] = {}
+
+
+def get_postprocess_signature(target_lang: str) -> str:
+    """
+    Short hash capturing the current state of the post-translation pipeline
+    (glossary content + apply_glossary source). Cached entries created with a
+    different signature are treated as stale so a glossary or code fix
+    automatically invalidates the affected cache without manual --clear-cache.
+    """
+    cache_key = target_lang.upper()
+    if cache_key in _postprocess_sig_cache:
+        return _postprocess_sig_cache[cache_key]
+
+    h = hashlib.sha256()
+    # apply_glossary source — if the regex or logic changes, invalidate.
+    try:
+        h.update(inspect.getsource(apply_glossary).encode('utf-8'))
+    except (OSError, TypeError):
+        # Source not available (e.g. compiled): fall through to just glossary.
+        pass
+    # Glossary file content.
+    if GLOSSARY_FILE.exists():
+        h.update(GLOSSARY_FILE.read_bytes())
+    # Language scope (in case the same source/glossary file maps to different
+    # behavior per target language).
+    h.update(target_lang.upper().encode('utf-8'))
+
+    sig = h.hexdigest()[:8]
+    _postprocess_sig_cache[cache_key] = sig
+    return sig
+
+
 def get_cached_translation(text: str, target_lang: str) -> Optional[str]:
     """
     Check if translation exists in cache.
-    Returns translated text if found, None otherwise.
+    Returns translated text if found, None otherwise. Entries saved with a
+    different postprocess_signature (glossary or apply_glossary code has
+    changed) are treated as stale and ignored.
     """
     content_hash = compute_hash(text)
     cache_path = get_cache_path(content_hash, target_lang)
@@ -150,6 +195,9 @@ def get_cached_translation(text: str, target_lang: str) -> Optional[str]:
         try:
             with open(cache_path, 'r', encoding='utf-8') as f:
                 cache_entry = json.load(f)
+                # Stale if the post-processing pipeline has changed since save.
+                if cache_entry.get('postprocess_signature') != get_postprocess_signature(target_lang):
+                    return None
                 return cache_entry.get('translated_text')
         except (json.JSONDecodeError, IOError):
             # Invalid cache file, ignore
@@ -159,7 +207,7 @@ def get_cached_translation(text: str, target_lang: str) -> Optional[str]:
 
 
 def save_to_cache(text: str, translated_text: str, target_lang: str) -> None:
-    """Save translation to cache."""
+    """Save translation to cache, stamped with the current postprocess signature."""
     content_hash = compute_hash(text)
     cache_path = get_cache_path(content_hash, target_lang)
 
@@ -168,7 +216,8 @@ def save_to_cache(text: str, translated_text: str, target_lang: str) -> None:
         "target_lang": target_lang,
         "translated_text": translated_text,
         "timestamp": datetime.now().isoformat(),
-        "char_count": len(text)
+        "char_count": len(text),
+        "postprocess_signature": get_postprocess_signature(target_lang),
     }
 
     with open(cache_path, 'w', encoding='utf-8') as f:
@@ -360,9 +409,10 @@ def apply_glossary(text: str, target_lang: str) -> str:
     sorted_terms = sorted(glossary.items(), key=lambda x: len(x[0]), reverse=True)
 
     for en_term, translated_term in sorted_terms:
-        # Case-insensitive replacement while preserving boundaries
-        # Use word boundaries to avoid replacing partial words
-        pattern = re.compile(re.escape(en_term), re.IGNORECASE)
+        # Case-insensitive replacement with word boundaries so a short term
+        # like "ANC" doesn't get matched inside unrelated words (e.g. the
+        # substring "anc" inside "instance" → "instCPNe").
+        pattern = re.compile(r'\b' + re.escape(en_term) + r'\b', re.IGNORECASE)
         text = pattern.sub(translated_term, text)
 
     return text

@@ -5,180 +5,204 @@
 
 ## Visão geral
 
-A plataforma analítica FASTR é uma ferramenta baseada na Web concebida para apoiar a avaliação, o ajustamento e a análise da qualidade dos dados de saúde de rotina. Permite aos utilizadores carregar e analisar dados de várias fontes, incluindo o DHIS2, com métodos estatísticos integrados para gerar um conjunto de dados ajustados e executar análises prioritárias sobre indicadores selecionados. A plataforma fornece uma interface de fácil utilização para a execução de análises e oferece opções flexíveis para visualizar e exportar resultados.
+A plataforma de análise FASTR é uma ferramenta baseada na Web concebida para apoiar a avaliação da qualidade, o ajuste e a análise de dados de saúde de rotina. Permite aos utilizadores carregar e analisar dados de várias fontes, incluindo o DHIS2, com métodos estatísticos integrados para gerar um conjunto de dados ajustado e realizar análises prioritárias sobre indicadores selecionados. A plataforma oferece uma interface intuitiva para a realização de análises e disponibiliza opções flexíveis para a visualização e exportação de resultados.
 
-capacidades da plataforma](resources/diagrams_pt/platform_capabilities.svg)
+![Capacidades da plataforma](resources/diagrams/platform_capabilities.svg)
 
 ## Principais capacidades
 
 ### Gestão de dados
 
-A plataforma oferece uma funcionalidade abrangente de gestão de dados. Os utilizadores podem importar e gerir estruturas de unidades de saúde, incluindo áreas administrativas e unidades individuais. O sistema suporta a importação de dados dos Sistemas de Informação de Gestão da Saúde (HMIS) e das Avaliações das Unidades Sanitárias (HFA), permitindo aos utilizadores gerir indicadores de múltiplas fontes enquanto acompanham as versões dos conjuntos de dados ao longo do tempo.
+A plataforma oferece funcionalidades abrangentes de gestão de dados. Os utilizadores podem importar e gerir estruturas de unidades de saúde, incluindo áreas administrativas e unidades individuais. O sistema suporta a importação de dados de Sistemas de Informação de Gestão de Saúde (HMIS) e Avaliações de Unidades de Saúde (HFA), permitindo aos utilizadores gerir indicadores de múltiplas fontes enquanto acompanham as versões dos conjuntos de dados ao longo do tempo.
 
 ### Análise de dados
 
-As capacidades analíticas são fornecidas através de módulos configuráveis. Os utilizadores podem ativar e configurar módulos analíticos que processam dados utilizando scripts estatísticos baseados em R. Estes módulos podem ser encadeados para suportar análises complexas de vários passos, com ferramentas integradas para monitorizar o estado do processamento e rever os registos.
+As capacidades analíticas são fornecidas através de módulos configuráveis. Os utilizadores podem ativar e configurar módulos analíticos que processam dados utilizando scripts estatísticos baseados em R. Estes módulos podem ser encadeados para suportar análises complexas e em várias etapas, com ferramentas integradas para monitorizar o estado do processamento e rever registos.
 
 ### Assistente de IA
 
-Um assistente de IA integrado ajuda os utilizadores a compreender e interpretar os seus dados. O assistente pode explicar os resultados do módulo, descrever tendências e padrões de dados, fornecer informações sobre visualizações e ajudar a gerar conteúdo narrativo para relatórios. Os utilizadores podem fazer perguntas sobre os dados do seu projeto em linguagem natural e receber orientação contextual sobre análise e interpretação.
+Um assistente de IA integrado ajuda os utilizadores a compreender e interpretar os seus dados. O assistente pode explicar os resultados dos módulos, descrever tendências e padrões de dados, fornecer insights sobre visualizações e ajudar a gerar conteúdo narrativo para relatórios. Os utilizadores podem fazer perguntas sobre os dados dos seus projetos em linguagem natural e receber orientação contextual sobre análise e interpretação.
 
 ### Visualização
 
-A plataforma oferece ferramentas de visualização robustas para apresentar resultados analíticos. Os utilizadores podem criar gráficos, mapas e tabelas a partir de dados processados, com opções para filtrar e desagregar por várias dimensões. As visualizações podem ser personalizadas em termos de aspeto e estilo, e exportadas como imagens ou ficheiros de dados para utilização em aplicações externas.
+A plataforma oferece ferramentas de visualização robustas para apresentar resultados analíticos. Os utilizadores podem criar gráficos, mapas e tabelas a partir de dados processados, com opções para filtrar e desagregar por múltiplas dimensões. As visualizações podem ser personalizadas em termos de aparência e estilo e exportadas como imagens ou ficheiros de dados para utilização em aplicações externas.
 
-### Relatórios
+### Partilha de resultados
 
-A funcionalidade de relatórios permite aos utilizadores combinar várias visualizações em relatórios abrangentes. Os relatórios podem ser exportados como apresentações em PowerPoint ou documentos PDF. Os utilizadores podem organizar e reordenar as páginas dos relatórios para satisfazer necessidades de comunicação específicas e partilhar os relatórios concluídos com os intervenientes.
+Depois de os utilizadores terem criado visualizações, a plataforma oferece três formas de as partilhar, adequadas a diferentes públicos:
+
+- **Painéis** — páginas em tempo real e partilháveis que agrupam visualizações numa única vista. Os gráficos atualizam-se sempre que os dados são atualizados, e o painel de controlo pode ser publicado através de um link público para que as partes interessadas o abram num navegador sem uma conta FASTR.
+- **Apresentações** — resultados em formato de apresentação de slides concebidos para reuniões e workshops ao vivo. Exporte para PowerPoint ou PDF para apresentação presencial.
+- **Relatórios** — documentos narrativos extensos que combinam análises escritas com dados em tempo real. Exporte para Word ou PDF para que as partes interessadas possam ler o documento na íntegra.
 
 ### Colaboração
 
-A plataforma suporta o trabalho colaborativo através de uma estrutura baseada em projectos. Os utilizadores podem organizar o seu trabalho em projectos distintos e atribuir aos membros da equipa diferentes funções, incluindo permissões de visualizador, editor e administrador. Os controlos de acesso funcionam ao nível do projeto e os projectos podem ser bloqueados para evitar alterações não intencionais.
+A plataforma suporta o trabalho colaborativo através de uma estrutura baseada em projetos. Os utilizadores podem organizar o seu trabalho em projetos distintos e atribuir aos membros da equipa diferentes funções, incluindo permissões de visualizador, editor e administrador. Os controlos de acesso funcionam ao nível do projeto, e os projetos podem ser bloqueados para evitar alterações indesejadas.
 
 ## Quem deve utilizar esta aplicação?
 
 ### Analistas de dados
 
-Os analistas de dados acharão a plataforma valiosa para analisar tendências de dados de saúde, criar visualizações e gerar relatórios para os decisores. Os módulos analíticos e as ferramentas de visualização foram concebidos para suportar fluxos de trabalho de análise de dados rigorosos.
+Os analistas de dados irão considerar a plataforma valiosa para analisar tendências de dados de saúde, criar visualizações e gerar relatórios para os decisores. Os módulos analíticos e as ferramentas de visualização foram concebidos para apoiar fluxos de trabalho rigorosos de análise de dados.
 
 ### Gestores de programas de saúde
 
-Os gestores de programas de saúde podem utilizar a plataforma para monitorizar o desempenho do programa, acompanhar os principais indicadores e partilhar informações com as suas equipas. A funcionalidade de elaboração de relatórios permite a comunicação regular de resultados para apoiar a gestão de programas baseada em factos.
+Os gestores de programas de saúde podem utilizar a plataforma para monitorizar o desempenho dos programas, acompanhar indicadores-chave e partilhar insights com as suas equipas. A funcionalidade de relatórios permite a comunicação regular de resultados para apoiar a gestão de programas baseada em evidências.
 
-### Administradores do sistema
+### Administradores de sistema
 
-Os administradores do sistema são responsáveis pela configuração da plataforma, gestão de utilizadores, importação de dados e configuração do sistema para satisfazer as necessidades da organização. As ferramentas administrativas permitem controlar o acesso dos utilizadores, as fontes de dados e as definições da plataforma.
+Os administradores de sistema são responsáveis pela configuração da plataforma, gestão de utilizadores, importação de dados e configuração do sistema para satisfazer as necessidades organizacionais. As ferramentas administrativas proporcionam controlo sobre o acesso dos utilizadores, as fontes de dados e as definições da plataforma.
 
 ## Como funciona a aplicação
 
 ### Nível da organização (instância)
 
-A **instância** serve como o espaço de trabalho principal da organização dentro da plataforma. Cada instância contém todos os utilizadores registados, a estrutura administrativa partilhada (incluindo áreas administrativas e unidades de saúde), definições de indicadores partilhados, fontes de dados (tanto HMIS como HFA) e todos os projectos criados na organização.
+A **instância** funciona como o principal espaço de trabalho da organização dentro da plataforma. Cada instância contém todos os utilizadores registados, a estrutura administrativa partilhada (incluindo áreas administrativas e unidades de saúde), definições de indicadores partilhadas, fontes de dados (tanto HMIS como HFA) e todos os projetos criados dentro da organização.
 
 ### Nível do projeto
 
-**Os projectos** proporcionam espaços de trabalho de análise específicos dentro de uma instância. Cada projeto permite aos utilizadores selecionar os dados a incluir, definindo períodos de tempo, instalações e indicadores específicos. Dentro de um projeto, os utilizadores podem ativar módulos analíticos, criar visualizações e construir relatórios adaptados a objectivos analíticos específicos.
+Os **projetos** fornecem espaços de trabalho de análise específicos dentro de uma instância. Cada projeto permite aos utilizadores selecionar quais os dados a incluir, definindo períodos de tempo, unidades e indicadores específicos. Dentro de um projeto, os utilizadores podem ativar módulos analíticos, criar visualizações e elaborar relatórios adaptados a objetivos analíticos específicos.
 
-![Projectos dentro da instância](resources/diagrams_pt/projects_within_instance.svg)
+![Projetos dentro da instância](resources/diagrams/projects_within_instance.svg)
 
 
 ### Fluxo de dados
 
-A plataforma segue um fluxo de dados estruturado: **Importação de dados → Processamento de módulos → Visualizações → Relatórios**. Os utilizadores começam por carregar os dados da unidade de saúde ao nível da instância. Os projectos são então criados com janelas de dados específicas que definem o âmbito da análise. Os módulos analíticos processam e analisam os dados selecionados, produzindo resultados que podem ser utilizados para criar gráficos, mapas e tabelas. Finalmente, as visualizações são combinadas em relatórios exportáveis para divulgação.
+A plataforma segue um fluxo de dados estruturado: **Importação de dados → Processamento de módulos → Visualizações → Painéis, apresentações e relatórios**. Os utilizadores carregam primeiro os dados das unidades de saúde ao nível da instância. Em seguida, são criados projetos com janelas de dados específicas que definem o âmbito da análise. Os módulos analíticos processam e analisam os dados selecionados, produzindo resultados que podem ser transformados em gráficos, mapas e tabelas. As visualizações podem então ser reunidas em painéis para partilha em tempo real, apresentações para exibição ao vivo ou relatórios narrativos para divulgação por escrito.
 
 
 ## Requisitos técnicos
 
 ### Idiomas suportados
 
-A aplicação suporta atualmente o inglês e o francês. As definições de idioma podem ser configuradas ao nível da instância para satisfazer as necessidades de diferentes comunidades de utilizadores.
+A aplicação suporta atualmente inglês e francês. As definições de idioma podem ser configuradas ao nível da instância para satisfazer as necessidades de diferentes comunidades de utilizadores.
 
 ### Requisitos do navegador
 
-A aplicação foi concebida para funcionar com navegadores Web modernos. O Chrome é recomendado para um desempenho ótimo, embora o Firefox, o Safari e o Edge também sejam suportados. O JavaScript deve estar ativado para uma funcionalidade completa.
+A aplicação foi concebida para funcionar com navegadores web modernos. Recomenda-se o Chrome para um desempenho ideal, embora o Firefox, o Safari e o Edge também sejam suportados. O JavaScript deve estar ativado para uma funcionalidade completa.
 
 ## Conceitos básicos
 
-A compreensão destes conceitos básicos ajudará os utilizadores a trabalhar eficazmente com a aplicação.
+Compreender estes conceitos fundamentais ajudará os utilizadores a trabalhar eficazmente com a aplicação.
 
 ### Instância
 
-Uma **instância** é o espaço de trabalho principal da organização dentro da plataforma. Funciona como o contentor de nível superior para todos os utilizadores, a estrutura administrativa partilhada, as fontes de dados e os projectos. Cada organização opera normalmente numa única instância que fornece a base para todo o trabalho analítico.
+Uma **instância** é o espaço de trabalho principal da organização dentro da plataforma. Funciona como o contentor de nível superior para todos os utilizadores, a estrutura administrativa partilhada, as fontes de dados e os projetos. Cada organização opera normalmente dentro de uma única instância que fornece a base para todo o trabalho analítico.
 
-### Projectos
+### Projetos
 
-Um **projeto** é um espaço de trabalho de análise focado dentro de uma instância. Os projectos permitem aos utilizadores trabalhar com subconjuntos específicos de dados, definindo períodos de tempo, instalações e indicadores relevantes para um determinado objetivo analítico. Em cada projeto, os utilizadores podem ativar módulos analíticos, criar visualizações, gerar relatórios e colaborar com membros da equipa. Podem existir vários projectos numa única instância, cada um com diferentes âmbitos de dados e configurações de acesso do utilizador.
+Um **projeto** é um espaço de trabalho de análise específico dentro de uma instância. Os projetos permitem aos utilizadores trabalhar com subconjuntos específicos de dados, definindo períodos de tempo, instalações e indicadores relevantes para um determinado objetivo analítico. Dentro de cada projeto, os utilizadores podem ativar módulos analíticos, criar visualizações, gerar relatórios e colaborar com os membros da equipa. Podem existir vários projetos dentro de uma instância, cada um com diferentes âmbitos de dados e configurações de acesso de utilizadores.
 
 ### Estrutura
 
-A **estrutura** define a organização hierárquica das áreas administrativas e dos estabelecimentos de saúde na plataforma.
+A **estrutura** define a organização hierárquica das áreas administrativas e das instalações de saúde dentro da plataforma.
 
-**As áreas administrativas** representam os limites geográficos organizados em até quatro níveis. A área administrativa 1 representa os limites do país. A área administrativa 2 corresponde às maiores unidades subnacionais, como províncias ou regiões. A área administrativa 3 engloba unidades de nível intermédio, como distritos ou departamentos, enquanto a área administrativa 4 representa unidades mais pequenas, como comunas ou subdistritos. Nem todos os casos exigem os quatro níveis administrativos.
+**As áreas administrativas** representam limites geográficos organizados em até quatro níveis. A Área Administrativa 1 representa as fronteiras do país. A Área Administrativa 2 corresponde às maiores unidades subnacionais, como províncias ou regiões. A Área Administrativa 3 abrange unidades de nível médio, como distritos ou departamentos, enquanto a Área Administrativa 4 representa unidades menores, como comunas ou subdistritos. Nem todas as instâncias requerem os quatro níveis administrativos.
 
-**As instalações de saúde** são os pontos de prestação de serviços de saúde - incluindo hospitais, clínicas e postos de saúde - que estão ligados a áreas administrativas dentro da estrutura. As instalações podem ter atributos adicionais, como o tipo de instalação (hospital, centro de saúde ou dispensário) e a categoria de propriedade (pública, privada ou religiosa).
+**Unidades de saúde** são os pontos de prestação de serviços de saúde — incluindo hospitais, clínicas e postos de saúde — que estão ligados a áreas administrativas dentro da estrutura. As unidades podem ter atributos adicionais, tais como o tipo de unidade (hospital, centro de saúde ou dispensário) e a categoria de propriedade (pública, privada ou religiosa).
 
 ### Fontes de dados
 
 #### Dados do HMIS
 
-Os dados do Sistema de Informação de Gestão da Saúde (HMIS) contêm estatísticas de rotina dos serviços de saúde recolhidas nos estabelecimentos. Isto inclui indicadores de prestação de serviços, dados de vigilância de doenças e métricas de desempenho do programa. Os dados do HMIS são normalmente comunicados numa base mensal e constituem a base para a maioria das análises de rotina do sistema de saúde.
+Os dados do Sistema de Informação de Gestão de Saúde (HMIS) contêm estatísticas de rotina dos serviços de saúde recolhidas nas unidades. Isto inclui indicadores de prestação de serviços, dados de vigilância de doenças e métricas de desempenho dos programas. Os dados do HMIS são normalmente reportados mensalmente e constituem a base para a maioria das análises de rotina do sistema de saúde.
 
 #### Dados HFA
 
-Os dados da Avaliação dos Estabelecimentos de Saúde (HFA) contêm informações sobre as caraterísticas e a capacidade dos estabelecimentos. Incluem dados sobre a disponibilidade de infra-estruturas, equipamento e materiais, níveis de pessoal e prontidão dos serviços. Os dados do HFA complementam os dados do HMIS, fornecendo contexto sobre as instalações a partir das quais os dados de rotina são comunicados.
+Os dados da Avaliação de Unidades de Saúde (HFA) contêm informações sobre as características e a capacidade das unidades. Isto inclui dados sobre a disponibilidade de infraestruturas, equipamento e consumíveis, níveis de pessoal e prontidão dos serviços. Os dados HFA complementam os dados HMIS, fornecendo contexto sobre as unidades a partir das quais os dados de rotina são reportados.
 
 ### Indicadores
 
-**Os indicadores** são métricas de saúde mensuráveis utilizadas na plataforma. Estes podem ser **Indicadores Comuns**, que são definidos e partilhados em toda a instância para uma medição consistente, ou **Indicadores DHIS2**, que são importados de sistemas DHIS2 externos e podem seguir diferentes convenções de nomenclatura ou métodos de cálculo.
+**Os indicadores** são métricas de saúde mensuráveis utilizadas na plataforma. Existem três tipos:
+
+- **Os indicadores comuns** são definidos e partilhados em toda a instância para uma medição consistente.
+- **Os indicadores DHIS2** são importados de sistemas DHIS2 externos e podem seguir diferentes convenções de nomenclatura ou métodos de cálculo.
+- **Os indicadores calculados** são métricas derivadas que combinam dois valores — tipicamente um indicador numerador dividido por um denominador (outro indicador ou um valor baseado na população). Por exemplo, as consultas de ANC1 divididas pela população-alvo de mulheres grávidas fornecem uma estimativa da cobertura de ANC1. Os indicadores calculados podem ser apresentados como uma percentagem, uma contagem ou uma taxa por 10 000, e suportam limiares de semáforo para uma análise rápida do desempenho (por exemplo, verde a partir de 80%, amarelo entre 70% e 79%, vermelho abaixo de 70%).
+
+Os indicadores calculados são capturados num projeto no momento da importação do HMIS, pelo que a alteração de uma definição obriga a uma reimportação para que a alteração tenha efeito. Os denominadores baseados na população requerem que um ficheiro CSV da população seja carregado ao nível da instância antes de poderem ser utilizados.
 
 ### Conjuntos de dados e versões
 
-Um **conjunto de dados** é uma coleção de dados de saúde, seja HMIS ou HFA. Cada vez que os dados são importados para a plataforma, é criada uma nova versão. Este sistema de versões permite aos utilizadores acompanhar as alterações ao longo do tempo, alternar entre versões, se necessário, e manter um histórico de dados completo para efeitos de auditoria e comparação.
+Um **conjunto de dados** é uma coleção de dados de saúde, sejam eles HMIS ou HFA. Cada vez que os dados são importados para a plataforma, é criada uma nova versão. Este sistema de versões permite aos utilizadores acompanhar as alterações ao longo do tempo, alternar entre versões, se necessário, e manter um histórico completo dos dados para fins de auditoria e comparação.
 
 ### Módulos
 
-**Os módulos** são unidades de processamento de dados que executam scripts R analíticos na plataforma. Cada módulo recebe dados de entrada de conjuntos de dados ou dos resultados de outros módulos, processa e analisa os dados de acordo com métodos estatísticos definidos e produz objectos de resultados como ficheiros de saída. Os módulos podem ser encadeados para suportar fluxos de trabalho analíticos complexos em que um módulo utiliza os resultados de outro como entradas.
+**Módulos** são unidades de processamento de dados que executam scripts R analíticos dentro da plataforma. Cada módulo recebe dados de entrada de conjuntos de dados ou dos resultados de outros módulos, processa e analisa os dados de acordo com métodos estatísticos definidos e produz objetos de resultados como ficheiros de saída. Os módulos podem ser encadeados para suportar fluxos de trabalho analíticos complexos, nos quais um módulo utiliza os resultados de outro como entradas.
 
-A plataforma distingue dois tipos de módulos. Uma **Definição de módulo** é o modelo ou projeto para um tipo de análise, definindo os métodos analíticos e os parâmetros disponíveis. Uma **instância de módulo** é um módulo que foi ativado e configurado num projeto específico. Alguns módulos têm pré-requisitos, o que significa que outros módulos têm de ser activados primeiro antes de poderem ser utilizados.
+A plataforma distingue entre dois tipos de módulos. Uma **Definição de Módulo** é o modelo ou plano para um tipo de análise, definindo os métodos analíticos e os parâmetros disponíveis. Uma **Instância de Módulo** é um módulo que foi ativado e configurado dentro de um projeto específico. Alguns módulos têm pré-requisitos, o que significa que outros módulos devem ser ativados primeiro antes de poderem ser utilizados.
 
-### Visualizações (objectos de apresentação)
+### Visualizações
 
-**As visualizações**, também designadas por objectos de apresentação, são representações visuais de dados gerados a partir de resultados de módulos. A plataforma suporta três tipos principais de visualização: gráficos (incluindo gráficos de barras, gráficos de linhas e gráficos de tartes), mapas (visualizações geográficas que mostram dados em áreas administrativas) e tabelas (apresentações de dados tabulares).
+**Visualizações** são representações visuais de dados gerados a partir dos resultados dos módulos. A plataforma suporta três tipos principais de visualização: gráficos (incluindo gráficos de barras, gráficos de linhas e gráficos circulares), mapas (visualizações geográficas que mostram dados em áreas administrativas) e tabelas (apresentações de dados em tabelas).
 
-As visualizações podem ser filtradas por várias dimensões e desagregadas por factores como o tipo de estabelecimento, o período de tempo ou o nível administrativo. Os utilizadores podem personalizar o aspeto e o estilo das visualizações e exportá-las para utilização em aplicações externas ou incluí-las diretamente em relatórios.
+As visualizações podem ser filtradas por várias dimensões e desagregadas por fatores como tipo de instalação, período de tempo ou nível administrativo. Os utilizadores podem personalizar a aparência e o estilo das visualizações, bem como exportá-las para utilização em aplicações externas ou incluí-las diretamente em painéis, apresentações ou relatórios.
+
+### Painéis
+
+**Os painéis** são páginas ativas e partilháveis que agrupam visualizações guardadas numa única vista. Cada mosaico num painel é um gráfico, mapa ou tabela que se atualiza automaticamente sempre que os dados subjacentes são atualizados — pelo que um painel mostra sempre o estado atual dos dados sem necessidade de reexportação.
+
+Os painéis podem ser publicados num URL público (com controlos de acesso opcionais) para que as partes interessadas os abram num navegador sem precisarem de uma conta FASTR. Estão disponíveis dois layouts: uma **grelha** que organiza os blocos em linhas e colunas e uma **barra lateral** que organiza os blocos num menu do lado esquerdo para navegação.
+
+Os painéis também suportam **grupos de réplicas** — um único bloco pode conter muitas variantes do mesmo gráfico (por exemplo, uma por distrito), com um menu suspenso que permite ao utilizador alternar entre elas. Isto mantém o painel compacto quando a mesma análise precisa de ser apresentada para muitas áreas.
+
+### Apresentações
+
+**Apresentações** são resultados no estilo de apresentações de slides, concebidas para workshops ao vivo ou reuniões com partes interessadas. O editor dispõe um gráfico, título ou bloco de texto por slide, semelhante ao PowerPoint. As apresentações são exportadas para PowerPoint (.pptx) ou PDF e são mais adequadas para resultados que serão projetados numa sala enquanto alguém os explica ao público.
 
 ### Relatórios
 
-*os *Relatórios** são colecções de páginas de visualização concebidas para exportação e partilha com as partes interessadas. Os relatórios podem ser exportados como apresentações do PowerPoint ou documentos PDF e podem ser organizados com várias páginas configuradas com layouts e orientações personalizados. Cada página de um relatório é um **item de relatório** que contém uma visualização.
+**Os relatórios** são documentos narrativos extensos que combinam a sua análise escrita com dados em tempo real da plataforma. O editor funciona como um processador de texto com formatação Markdown: os utilizadores escrevem comentários, incorporam visualizações que se atualizam automaticamente quando os dados são atualizados e adicionam imagens estáticas para contextualizar.
 
-### Janela
+Os relatórios são exportados para **Word (.docx) ou PDF** e foram concebidos para que as partes interessadas leiam um documento na íntegra, em vez de assistirem a uma apresentação. Utilize uma apresentação quando o produto final for projetado numa reunião; utilize um relatório quando o produto final for lido numa secretária ou numa caixa de entrada.
 
-**Windowing** refere-se ao processo de seleção de um subconjunto de dados de instância para utilização num projeto. Os utilizadores podem filtrar dados por período de tempo (selecionando meses ou anos específicos), por indicadores (incluindo todos ou apenas indicadores específicos), por áreas administrativas (incluindo todas ou regiões específicas) e por instalações (filtrando por tipo de instalação ou propriedade). Esta funcionalidade permite que os projectos se concentrem nos dados mais relevantes para os seus objectivos analíticos sem carregar todo o conjunto de dados.
+### Janelas
+
+**Janelas** refere-se ao processo de selecionar um subconjunto de dados de instâncias para utilização num projeto. Os utilizadores podem filtrar dados por período de tempo (selecionando meses ou anos específicos), por indicadores (incluindo todos ou apenas indicadores específicos), por áreas administrativas (incluindo todas ou regiões específicas) e por instalações (filtrando por tipo de instalação ou propriedade). Esta funcionalidade permite que os projetos se concentrem nos dados mais relevantes para os seus objetivos analíticos sem carregar o conjunto de dados completo.
 
 ### Desagregação
 
-**A desagregação** refere-se ao processo de decompor os dados por dimensões para identificar padrões e variações. Os dados podem ser desagregados por período de tempo (mensal, trimestral ou anual), por nível de área administrativa, por tipo de estabelecimento, por propriedade do estabelecimento ou por categorias de indicadores. Esta capacidade permite uma análise mais pormenorizada e ajuda a identificar disparidades em diferentes dimensões.
+**Desagregação** refere-se ao processo de decompor os dados por dimensões para identificar padrões e variações. Os dados podem ser desagregados por período de tempo (mensal, trimestral ou anual), por nível de área administrativa, por tipo de instalação, por propriedade da instalação ou por categorias de indicadores. Esta capacidade permite uma análise mais matizada e ajuda a identificar disparidades entre diferentes dimensões.
 
-### Funções do utilizador
+### Funções dos utilizadores
 
-Podem ser atribuídas aos utilizadores diferentes funções que determinam as suas permissões dentro da plataforma. Ao nível da **instância**, os Administradores globais têm acesso total a todas as definições e projectos da instância. Ao nível do **projeto**, estão disponíveis três funções: Os administradores podem modificar as definições, módulos, visualizações e relatórios do projeto; os editores podem criar e modificar visualizações e relatórios; e os visualizadores podem ver o conteúdo do projeto, mas não podem fazer modificações.
+Podem ser atribuídas diferentes funções aos utilizadores, que determinam as suas permissões dentro da plataforma. Ao **nível da instância**, os Administradores Globais têm acesso total a todas as definições da instância e projetos. Ao **nível do projeto**, estão disponíveis três funções: os Administradores podem modificar as definições do projeto, módulos, visualizações e relatórios; Os editores podem criar e modificar visualizações e relatórios; e Os visualizadores podem visualizar o conteúdo do projeto, mas não podem fazer modificações.
 
-### Pontuações de qualidade de dados
+### Pontuações de qualidade dos dados
 
-A plataforma avalia automaticamente a integridade e a precisão dos dados, gerando pontuações de qualidade que ajudam os utilizadores a identificar potenciais problemas com os dados. Estas pontuações apoiam os processos de revisão da qualidade dos dados e ajudam a dar prioridade às áreas que requerem atenção.
+A plataforma avalia automaticamente a integridade e a precisão dos dados, gerando pontuações de qualidade que ajudam os utilizadores a identificar potenciais problemas nos dados. Estas pontuações apoiam os processos de revisão da qualidade dos dados e ajudam a priorizar áreas que requerem atenção.
 
-### Estado do bloqueio
+### Estado de bloqueio
 
-Os projectos podem ser **bloqueados** para evitar modificações na sua configuração, permitindo ainda que os utilizadores visualizem relatórios. Quando um projeto está bloqueado, os módulos e as definições de dados não podem ser alterados, fornecendo um mecanismo para preservar as configurações analíticas depois de terem sido finalizadas.
+Os projetos podem ser **bloqueados** para impedir modificações na sua configuração, permitindo ainda assim que os utilizadores visualizem relatórios. Quando um projeto está bloqueado, os módulos e as definições de dados não podem ser alterados, proporcionando um mecanismo para preservar as configurações analíticas depois de estas terem sido finalizadas.
 
 !!! dica "Guia do utilizador"
-    Para obter tutoriais passo a passo sobre a utilização da plataforma, consulte o [Guia do utilizador FASTR](11_user_guide.md).
+    Para tutoriais passo a passo sobre a utilização da plataforma, consulte o [Guia do utilizador do FASTR](11_user_guide.md).
 
 ---
 
 <!--
 ////////////////////////////////////////////////////////////////////
 // //
-// _____ _ _____ ____ _____ ____ ___ _ _ _____ _ _ //
-// / ____| | |_ _| _ \| ____| / ___/ _ \| \ | |_ _| \ | |//
-// | (___ | | | | | | | | |__ | | | | | | \| | | | | \| |//
-// \___ \| | | | | | | | | | | __| | | | | | | . ` | | | | . ` |//
-// ____) | |___ _| |_| |_| | |____ | |__| |_| | |\ | | | | |\ |//
-// |_____/|_____|_____|____/|______| \____\___/|_| \_|| |_| |_| \_|//
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
 // //
-// Editar os diapositivos do workshop abaixo desta linha //
+// Editar slides do workshop abaixo desta linha //
 // //
 ////////////////////////////////////////////////////////////////////
 -->
 
 <!-- SLIDE:m3_1 -->
-## Plataforma de análise FASTR
+## Plataforma analítica FASTR
 
-A **plataforma analítica FASTR** é uma ferramenta baseada na Web concebida para apoiar a avaliação, o ajustamento e a análise da qualidade dos dados de saúde de rotina.
+A **plataforma analítica FASTR** é uma ferramenta baseada na web concebida para apoiar a avaliação da qualidade, o ajuste e a análise de dados de saúde de rotina.
 
-Permite aos utilizadores carregar e analisar dados de várias fontes, incluindo o DHIS2, com métodos estatísticos incorporados para gerar um conjunto de dados ajustados e executar análises prioritárias em indicadores selecionados.
+Permite aos utilizadores carregar e analisar dados de várias fontes, incluindo o DHIS2, com métodos estatísticos integrados para gerar um conjunto de dados ajustado e realizar análises prioritárias sobre indicadores selecionados.
 
-A plataforma fornece uma interface de fácil utilização para executar análises e oferece opções flexíveis para visualizar e exportar resultados.
+A plataforma oferece uma interface intuitiva para a realização de análises e disponibiliza opções flexíveis para a visualização e exportação de resultados.
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
 
@@ -193,29 +217,29 @@ A plataforma fornece uma interface de fácil utilização para executar análise
 <div class="columns">
 <div>
 
-![Capacidades da plataforma](../resources/diagrams_pt/platform_capabilities.svg)
+![Capacidades da plataforma](../resources/diagrams/platform_capabilities.svg)
 
 </div>
 <div>
 
-**Gestão de dados** - Importar listas de estabelecimentos e dados de indicadores do DHIS2 ou de ficheiros
+**Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
 
-**Análise de dados** - Executar módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
 
-**Visualização** - Explore os resultados com gráficos e tabelas interactivos
+**Visualização** — Explore os resultados com gráficos e tabelas interativos
 
-**Relatórios** - Exportar resultados para PowerPoint ou PDF para as partes interessadas
+**Partilha de resultados** — Crie painéis em tempo real, apresentações de slides ou relatórios narrativos para as partes interessadas
 
-**Colaboração** - Trabalhe em conjunto com a sua equipa em projectos partilhados
+**Colaboração** — Trabalhe em conjunto com a sua equipa em projetos partilhados
 
-**Assistente de IA** - Obtenha ajuda para interpretar resultados e compreender os seus dados
+**Assistente de IA** — Obtenha ajuda para interpretar resultados e compreender os seus dados
 
 </div>
 </div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->
-## País Instância
+## Instância do país
 
 Cada país tem a sua própria **instância** da plataforma de análise FASTR.
 
@@ -224,13 +248,13 @@ Uma instância contém:
 - Todos os utilizadores registados e as suas contas
 - A estrutura administrativa partilhada (regiões, distritos, instalações)
 - Definições de indicadores e fontes de dados
-- Todos os projectos criados para esse país
+- Todos os projetos criados para esse país
 
-**Pense numa instância como o espaço de trabalho dedicado ao seu país
+**Pense numa instância como o espaço de trabalho dedicado ao seu país.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
-## Funções e permissões do utilizador
+## Funções e permissões dos utilizadores
 
 Existem dois níveis de permissões na plataforma:
 
@@ -238,51 +262,51 @@ Existem dois níveis de permissões na plataforma:
 
 **Funções ao nível da instância:**
 
-- os **Administradores de instância** podem adicionar utilizadores, criar projectos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
+- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
 
 &nbsp;
 
 **Funções ao nível do projeto:**
 
-- **Project Editors** pode criar visualizações, criar relatórios e descarregar/exportar resultados
-- **Project Viewers** podem ver visualizações, ver relatórios e descarregar/exportar resultados
+- **Editores de projeto** podem criar visualizações, criar relatórios e descarregar/exportar resultados
+- **Visualizadores de projeto** podem visualizar visualizações, visualizar relatórios e descarregar/exportar resultados
 
 &nbsp;
 
-*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto*
+*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto.*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
-## Projectos dentro de uma instância
+## Projetos dentro de uma instância
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
 .container .img-col { flex: 2; }
 .container .img-col img { width: 100%; height: auto; }
-.content .text-col { flex: 1; font-size: 0.85em; }
+.container .text-col { flex: 1; font-size: 0.85em; }
 </style>
 
-<div class="contentor">
+<div class="container">
 <div class="img-col">
 
-![Projectos dentro da instância](../resources/diagrams_pt/projects_within_instance.svg)
+![Projetos dentro da instância](../resources/diagrams/projects_within_instance.svg)
 
 </div>
 <div class="text-col">
 
-Cada instância de país pode conter **múltiplos projectos**.
+Cada instância de país pode conter **vários projetos**.
 
-Um país pode necessitar apenas de um projeto, ou podem ser utilizados vários projectos para:
+Um país pode precisar apenas de um projeto, ou podem ser utilizados vários projetos para:
 
 - Diferentes versões de análises
-- Um projeto de demonstração ou de recreio
-- Projectos separados para diferentes equipas ou programas
+- Um projeto de demonstração ou de teste
+- Projetos separados para diferentes equipas ou programas
 
-**Questões-chave aquando da criação:**
+**Questões-chave ao configurar:**
 
 - Quem é o administrador?
 - Quem pode editar?
-- Quem pode ver?
+- Quem pode visualizar?
 
 </div>
 </div>

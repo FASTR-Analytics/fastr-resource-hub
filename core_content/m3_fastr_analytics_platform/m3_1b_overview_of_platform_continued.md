@@ -20,7 +20,7 @@ paginate: true
 
 **Visualization** — Explore results with interactive charts and tables
 
-**Reporting** — Export findings to PowerPoint or PDF for stakeholders
+**Sharing results** — Build live dashboards, slide presentations, or narrative reports for stakeholders
 
 **Collaboration** — Work together with your team on shared projects
 
