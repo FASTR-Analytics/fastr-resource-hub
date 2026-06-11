@@ -95,7 +95,97 @@ slide expects in handout form.
 
 ---
 
-## 3. The Claude Code prompt
+## 3. Layout and formatting
+
+Handouts render via [Marp](https://marp.app/) with [`fastr-handout.css`](../fastr-handout.css) (at the repo root) as the theme. A4 portrait (210 × 297 mm). Each `---` separator in the markdown creates a new page.
+
+### Frontmatter
+
+Every handout starts with the same Marp frontmatter:
+
+```markdown
+---
+marp: true
+theme: fastr-handout
+paginate: true
+class: redesign
+footer: "FASTR · <module name>"
+---
+```
+
+- `theme: fastr-handout` — picks up the brand theme at `fastr-handout.css`
+- `class: redesign` — uses the current visual mode (drops the older lime-underline H1 from earlier versions)
+- `paginate: true` — page numbers in the bottom-right
+- `footer:` — the strip at the bottom of every page
+
+### Layout vocabulary
+
+The CSS theme exposes a small set of class names you compose by wrapping markdown in `<div class="...">` or `<p class="...">`. These are the ones you'll actually use:
+
+| Class | What it does |
+|---|---|
+| `.brand-line` | Lime accent strip + FASTR logo at the top of page 1 |
+| `.meta-line` | Module + duration under the H1 (e.g. *"Instance Setup · ~20 min"*) |
+| `.p1-grid`, `.p1-sidebar`, `.p1-main` | Two-column page-1 layout — light-filled sidebar (checklist, prerequisites) next to main content |
+| `.step-h` + `.step-n` | Numbered step heading with a filled deep-green circle (1, 2, 3 of click-through demos) |
+| `.eyebrow` | Small uppercase caption above a heading |
+| `.data-pill-navy`, `.data-pill-deep-green`, `.data-pill-green`, `.data-pill-gold` | Colored pills for tagging values |
+| `.answer-box` | Empty box for participants to write in |
+| `.setup-breadcrumb` + `.step.current` / `.step.done` | Multi-step nav breadcrumb (e.g. *Facility structure → Indicators → Data → Verify*) |
+| `.callout-footer` | Boxed note pinned at the page bottom |
+| `.screenshot-placeholder` | Dashed-border placeholder for a real platform screenshot to drop in later |
+| `.shield-band` | Opaque mask above the footer rule so content can't bleed into it |
+
+Sample composition from `handouts/en/m9a/h_m9a_admin_areas.md`:
+
+```markdown
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<div class="setup-breadcrumb"><span class="step current">Facility structure</span> <span class="arrow">→</span> <span class="step">Indicators</span> <span class="arrow">→</span> <span class="step">Data</span> <span class="arrow">→</span> <span class="step">Verify</span></div>
+
+# Import facility structure
+
+<p class="meta-line"><strong>Instance Setup</strong> · <strong>~20 min</strong></p>
+
+<div class="p1-grid">
+<aside class="p1-sidebar">
+<p class="sb-label">Before you start</p>
+
+- ☐ You've read **Before you begin**
+- ☐ You know your DHIS2 URL + credentials
+</aside>
+<div class="p1-main">
+
+## What you'll do
+Pull your country's full administrative hierarchy from DHIS2 into FASTR.
+
+<h2 class="step-h"><span class="step-n">1</span><span>Open the import flow</span></h2>
+
+1. Click the **Data** tab.
+2. Go to **Structure & maps**.
+…
+</div>
+</div>
+```
+
+### Page sizing — hard A4
+
+Anything that overflows the bottom of a page gets clipped silently. After every render, **read the PDF and check every page's bottom edge.** If a sentence, table row, or image is cut off, fix it (shorten copy, drop a row, reduce image height, add a `---` page break) and re-render.
+
+### Where to find more
+
+- **The theme itself:** [`fastr-handout.css`](../fastr-handout.css) — open it and search by class name; each class has a comment block above it explaining what it's for.
+- **Existing handouts as worked examples:**
+    - Page-1 grid + breadcrumb + step-numbered demo → `handouts/en/m9a/h_m9a_admin_areas.md`
+    - Pure activity worksheet → `handouts/en/m9c/h_m9c_write_interpretation.md`
+    - Facilitator demo with click-through script → `handouts/en/m9c/h_m9c_facilitator_guide.md`
+- **The three starting templates** in `handouts/templates/` (`participant_activity.md`, `facilitator_demo.md`, `webinar_worksheet.md`) already include the frontmatter, brand-line, and a layout scaffold.
+
+When you're not sure which class to use, copy a similar published handout and adapt it. Don't invent new classes — if a layout you want isn't in the theme, flag it for a CSS update rather than working around it.
+
+---
+
+## 4. The Claude Code prompt
 
 Open Claude Code from inside the repo so it picks up `CLAUDE.md`
 automatically. Paste this as the **first message**, then describe the
@@ -112,6 +202,11 @@ actual task you're working on:
 >   library (read-only source material)
 > - `handouts/templates/` — three starting templates for brand-new
 >   handouts
+> - `fastr-handout.css` — the Marp theme. Use the existing class
+>   vocabulary (`.p1-grid`, `.p1-sidebar`, `.step-h`, `.meta-line`,
+>   `.callout-footer`, `.data-pill-*`, `.answer-box`,
+>   `.setup-breadcrumb`, `.screenshot-placeholder`, etc.) — don't
+>   invent new classes. See section 3 above for the full list.
 > - `content-strategy/handout-audit.md` — the audit that tags every
 >   workshop slide as THEORY / ACTIVITY / DEMO / HYBRID and says what
 >   handout shape it expects
@@ -175,7 +270,7 @@ clipping.
 
 ---
 
-## 4. Languages — EN, FR, PT
+## 5. Languages — EN, FR, PT
 
 The FR and PT drafts come from `tools/translate.py`, which calls DeepL and
 applies the FASTR glossary at `translations/glossary.yml`:
@@ -203,7 +298,7 @@ has a shared key.
 
 ---
 
-## 5. Keeping drafts off the live app
+## 6. Keeping drafts off the live app
 
 Two things go live the moment something lands on `main`:
 
@@ -230,7 +325,7 @@ For the local install (Git, Python, Node, Marp) see
 
 ---
 
-## 6. VS Code + Claude Code + Playwright MCP
+## 7. VS Code + Claude Code + Playwright MCP
 
 The full step-by-step install (Claude Code VS Code extension, VS Code
 terminal, Playwright MCP server, verification) is in

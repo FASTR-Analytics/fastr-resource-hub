@@ -96,8 +96,8 @@ Now the easy part: **coverage = HMIS count ÷ that population**, every indicator
 
 ![Coverage estimates over time for one indicator: an HMIS line, survey points, and a projected line w:100%](../../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-- **The lines** — **black** = HMIS coverage (count ÷ estimated population), every year; **red dots** = actual survey results; **grey** = the survey projected forward on the HMIS trend where no survey exists
-- **How to read it** — where the black line and red dots sit close, the denominator is sound and the trend is trustworthy; then read the direction — rising, flat, or slipping
+- **The lines** — **grey** = HMIS coverage (count ÷ estimated population), every year, labelled *Administrative data* in the platform; **black** = actual survey results (MICS/DHS), labelled *Survey-based estimate*; **red** = the survey level projected forward on the HMIS trend where no survey exists, labelled *Projected estimate*
+- **How to read it** — where the grey HMIS line and the black survey points sit close, the denominator is sound and the trend is trustworthy; then read the direction — rising, flat, or slipping
 - **Watch for** — coverage **above 100%** is a warning sign (denominator too low or count inflated), not real over-coverage
 
 <div class="callout-footer">The same chart is produced at national, region and district level — read them together: a healthy national trend can still hide a struggling district.</div>

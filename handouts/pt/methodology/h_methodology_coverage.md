@@ -96,8 +96,8 @@ Agora a parte fácil: **cobertura = contagem HMIS ÷ essa população**, para ca
 
 ![Estimativas de cobertura ao longo do tempo para um indicador: uma linha HMIS, pontos de inquérito e uma linha projetada w:100%](../../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-- **As linhas** — **preto** = cobertura HMIS (contagem ÷ população estimada), todos os anos; **pontos vermelhos** = resultados reais de inquérito; **cinzento** = o inquérito projetado para a frente sobre a tendência HMIS onde não existe inquérito
-- **Como ler** — onde a linha preta e os pontos vermelhos ficam próximos, o denominador é sólido e a tendência é fiável; depois leia a direção — a subir, plana ou a escorregar
+- **As linhas** — **cinzento** = cobertura HMIS (contagem ÷ população estimada), todos os anos, rotulada *Dados administrativos* na plataforma; **preto** = resultados reais de inquérito (MICS/DHS), rotulados *Estimativa baseada em inquéritos*; **vermelho** = o nível de inquérito projetado para a frente sobre a tendência HMIS onde não existe inquérito, rotulado *Estimativa projetada*
+- **Como ler** — onde a linha cinzenta do HMIS e os pontos pretos do inquérito ficam próximos, o denominador é sólido e a tendência é fiável; depois leia a direção — a subir, plana ou a escorregar
 - **Atenção a** — cobertura **acima de 100%** é um sinal de aviso (denominador demasiado baixo ou contagem inflacionada), não cobertura real acima do total
 
 <div class="callout-footer">O mesmo gráfico é produzido a nível nacional, regional e distrital — leia-os em conjunto: uma tendência nacional saudável pode ainda esconder um distrito em dificuldades.</div>

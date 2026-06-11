@@ -96,8 +96,8 @@ Maintenant le plus simple : **couverture = comptage SIGS ÷ cette population**, 
 
 ![Estimations de couverture dans le temps pour un indicateur : une ligne SIGS, des points d'enquête et une ligne projetée w:100%](../../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-- **Les lignes** — **noir** = couverture SIGS (comptage ÷ population estimée), chaque année ; **points rouges** = résultats d'enquête réels ; **gris** = l'enquête projetée selon la tendance SIGS là où aucune enquête n'existe
-- **Comment le lire** — là où la ligne noire et les points rouges sont proches, le dénominateur est solide et la tendance fiable ; lisez ensuite la direction — en hausse, stable ou en baisse
+- **Les lignes** — **gris** = couverture SIGS (comptage ÷ population estimée), chaque année, libellée *Données administratives* dans la plateforme ; **noir** = résultats d'enquête réels (MICS/DHS), libellés *Estimation basée sur des enquêtes* ; **rouge** = le niveau d'enquête projeté selon la tendance SIGS là où aucune enquête n'existe, libellé *Estimation projetée*
+- **Comment le lire** — là où la ligne grise SIGS et les points d'enquête noirs sont proches, le dénominateur est solide et la tendance fiable ; lisez ensuite la direction — en hausse, stable ou en baisse
 - **À surveiller** — une couverture **supérieure à 100 %** est un signal d'alerte (dénominateur trop bas ou comptage gonflé), pas une vraie sur-couverture
 
 <div class="callout-footer">Le même graphique est produit aux niveaux national, régional et district — lisez-les ensemble : une tendance nationale saine peut masquer un district en difficulté.</div>
