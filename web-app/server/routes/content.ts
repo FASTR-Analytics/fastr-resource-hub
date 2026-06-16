@@ -801,10 +801,21 @@ function resolvePdfUrl(
   if (!fs.existsSync(HANDOUTS_OUT)) return null
 
   const langDir = path.join(HANDOUTS_OUT, language)
-  if (fs.existsSync(langDir) && moduleName) {
-    const short = stem.replace(/^h_m[a-z0-9]+_/, '')
-    const participantDir = path.join(langDir, moduleName)
-    const facilitatorDir = path.join(langDir, 'Facilitator', moduleName)
+  // The PDF output folder name is keyed by the LOCALISED module display name
+  // (e.g. "Disruption Report", "Pipeline d'analyse"). Special folders that
+  // aren't tied to a single module use the raw folder id instead — their
+  // PDFs sit under `_out/{lang}/{moduleId}/` directly.
+  const SPECIAL_FOLDER_IDS = new Set(['methodology'])
+  const folderName = SPECIAL_FOLDER_IDS.has(moduleId) ? moduleId : moduleName
+
+  if (fs.existsSync(langDir) && folderName) {
+    // Strip the leading `h_<moduleId-segment>_` from the stem. For m-modules
+    // it's `h_m4_`, for the methodology folder it's `h_methodology_`.
+    const short = stem
+      .replace(/^h_m[a-z0-9]+_/, '')
+      .replace(/^h_methodology_/, '')
+    const participantDir = path.join(langDir, folderName)
+    const facilitatorDir = path.join(langDir, 'Facilitator', folderName)
 
     // Search the bucket that matches the handout's tagged type first; fall
     // back to the other bucket only if nothing is found (defensive — should
@@ -825,7 +836,9 @@ function resolvePdfUrl(
   if (fs.existsSync(path.join(HANDOUTS_OUT, canonical))) {
     return `/handouts-pdf/${canonical}`
   }
-  const stripped = stem.replace(/^h_m[a-z0-9]+_/, '')
+  const stripped = stem
+    .replace(/^h_m[a-z0-9]+_/, '')
+    .replace(/^h_methodology_/, '')
   const legacy = `${stripped}_${language}.pdf`
   if (fs.existsSync(path.join(HANDOUTS_OUT, legacy))) {
     return `/handouts-pdf/${legacy}`
