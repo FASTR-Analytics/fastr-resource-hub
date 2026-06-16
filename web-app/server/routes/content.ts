@@ -892,12 +892,29 @@ router.get('/handouts', (req, res) => {
       // Resolve the localised module display name UP FRONT — resolvePdfUrl
       // needs it to scope the PDF lookup to the right module folder
       // (collisions: every facilitator guide is "01_facilitator_guide.pdf").
-      const shortId = moduleId.replace(/^m/, '')
-      const moduleName =
-        moduleNames[moduleId] ||
-        moduleNames[shortId] ||
-        moduleNames[/^\d+$/.test(shortId) ? parseInt(shortId) : shortId] ||
-        `Module ${shortId.toUpperCase()}`
+      //
+      // moduleId is normally `m4`, `m9c`, etc., but `methodology` is a
+      // special-cased shared folder. For real module IDs we strip the leading
+      // `m` to look up the human name in modulesNames. For special folders
+      // we use a hand-mapped label.
+      const SPECIAL_FOLDER_NAMES: Record<string, Record<string, string>> = {
+        methodology: {
+          en: 'FASTR methodology (shared)',
+          fr: 'Méthodologie FASTR (partagée)',
+          pt: 'Metodologia FASTR (partilhada)',
+        },
+      }
+      let moduleName: string
+      if (SPECIAL_FOLDER_NAMES[moduleId]) {
+        moduleName = SPECIAL_FOLDER_NAMES[moduleId][language] || SPECIAL_FOLDER_NAMES[moduleId].en
+      } else {
+        const shortId = moduleId.replace(/^m/, '')
+        moduleName =
+          moduleNames[moduleId] ||
+          moduleNames[shortId] ||
+          moduleNames[/^\d+$/.test(shortId) ? parseInt(shortId) : shortId] ||
+          `Module ${shortId.toUpperCase()}`
+      }
 
       const handouts: HandoutEntry[] = []
       for (const file of files) {
@@ -917,7 +934,13 @@ router.get('/handouts', (req, res) => {
         })
       }
 
-      const sessionId = moduleSessionById.get(moduleId) || null
+      // The shared `methodology/` folder isn't tied to a single module — it
+      // surfaces under the Methods session because it covers DQA, adjustment,
+      // service use, and coverage (all methods modules).
+      const SPECIAL_FOLDER_SESSIONS: Record<string, string> = {
+        methodology: 'methods',
+      }
+      const sessionId = moduleSessionById.get(moduleId) || SPECIAL_FOLDER_SESSIONS[moduleId] || null
       const sessionName = sessionId ? (sessionNameById.get(sessionId) || null) : null
       groups.push({ moduleId, moduleName, sessionId, sessionName, handouts })
     }
@@ -946,8 +969,12 @@ router.get('/handouts/source/:moduleId/:file', (req, res) => {
     const moduleId = req.params.moduleId
     const file = req.params.file
 
-    // Guard against path traversal
-    if (!/^m[a-z0-9]+$/i.test(moduleId) || !/^h_[a-z0-9_]+\.md$/i.test(file)) {
+    // Guard against path traversal. The `methodology/` folder is an exception
+    // to the m{number} convention — it groups the four shared methodology
+    // handouts (DQA, adjustment, service use, coverage) that aren't tied to a
+    // single module.
+    if ((!/^m[a-z0-9]+$/i.test(moduleId) && moduleId !== 'methodology') ||
+        !/^h_[a-z0-9_]+\.md$/i.test(file)) {
       return res.status(400).json({ error: 'Invalid path' })
     }
 
