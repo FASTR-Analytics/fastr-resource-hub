@@ -16,16 +16,24 @@ paginate: true
 <div class="container">
 <div class="img-col">
 
-![Projets au sein de l'instance](../../resources/diagrams_fr/projects_within_instance.svg)
+![Projets au sein d'une instance](../../resources/diagrams/projects_within_instance.svg)
 
 </div>
 <div class="text-col">
 
-Un projet est un **espace de travail analytique** au sein d'une instance, organisé autour d'un objectif de rapportage spécifique.
+Chaque instance de pays peut contenir **plusieurs projets**.
 
-Chaque projet contient des **métriques**, des **visualisations**, des **présentations** et des **modules d'analyse** — tout ce qu'il faut pour passer des données brutes à un rapport finalisé.
+Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
 
-Un pays peut avoir besoin d'un seul projet ou de plusieurs — par exemple, des projets distincts pour les rapports annuels, l'analyse des enquêtes ou différentes équipes.
+- Différentes versions d'analyses
+- Un projet de démonstration ou d'expérimentation
+- Des projets distincts pour différentes équipes ou différents programmes
+
+**Questions clés lors de la configuration :**
+
+- Qui est l'administrateur ?
+- Qui peut modifier ?
+- Qui peut consulter ?
 
 </div>
 </div>

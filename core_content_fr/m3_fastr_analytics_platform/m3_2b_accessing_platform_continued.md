@@ -6,21 +6,21 @@ paginate: true
 
 ## Rôles et autorisations des utilisateurs
 
-Il existe deux niveaux de permissions dans la plateforme :
+Il existe deux niveaux d'autorisations sur la plateforme :
 
 &nbsp;
 
 **Rôles au niveau de l'instance :**
 
-- **Les administrateurs de l'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules et effectuer des analyses
+- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules, et exécuter des analyses
 
 &nbsp;
 
 **Rôles au niveau du projet :**
 
-- **Les éditeurs de projets** peuvent créer des visualisations, des rapports et télécharger/exporter des résultats
-- **Les visualisateurs de projets** peuvent afficher des visualisations, consulter des rapports et télécharger/exporter des résultats
+- **Les éditeurs de projet** peuvent créer des visualisations, générer des rapports et télécharger/exporter les résultats
+- **Les lecteurs de projet** peuvent consulter les visualisations, consulter les rapports et télécharger/exporter les résultats
 
 &nbsp;
 
-*Les administrateurs sont assignés par instance ; les éditeurs et les visualisateurs sont assignés par projet.*
+*Les administrateurs sont affectés par instance ; les éditeurs et les lecteurs sont affectés par projet.*

@@ -6,6 +6,25 @@ paginate: true
 
 ## Capacités de la plateforme
 
-La plateforme couvre l'ensemble du processus analytique — de l'importation de vos données à la production d'un rapport final :
+<div class="columns">
+<div>
 
-![Capacités de la plateforme](../../resources/diagrams_fr/platform_capabilities.svg)
+![Capacités de la plateforme](../../resources/diagrams/platform_capabilities.svg)
+
+</div>
+<div>
+
+**Gestion des données** — Importez des listes d'établissements et des données d'indicateurs depuis DHIS2 ou des fichiers
+
+**Analyse des données** — Exécutez des modules statistiques pour l'évaluation et l'ajustement de la qualité
+
+**Visualisation** — Explorez les résultats à l'aide de graphiques et de tableaux interactifs
+
+**Partage des résultats** — Créez des tableaux de bord en temps réel, des présentations PowerPoint ou des rapports narratifs à l'intention des parties prenantes
+
+**Collaboration** — Travaillez avec votre équipe sur des projets communs
+
+**Assistant IA** — Bénéficiez d'une aide pour interpréter les résultats et comprendre vos données
+
+</div>
+</div>

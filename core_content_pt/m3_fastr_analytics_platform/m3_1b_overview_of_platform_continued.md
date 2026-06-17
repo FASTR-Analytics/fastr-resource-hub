@@ -9,22 +9,22 @@ paginate: true
 <div class="columns">
 <div>
 
-![Capacidades da plataforma](../../resources/diagrams_pt/platform_capabilities.svg)
+![Capacidades da plataforma](../../resources/diagrams/platform_capabilities.svg)
 
 </div>
 <div>
 
-**Gestão de dados** - Importar listas de estabelecimentos e dados de indicadores do DHIS2 ou de ficheiros
+**Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
 
-**Análise de dados** - Executar módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
 
-**Visualização** - Explore os resultados com gráficos e tabelas interactivos
+**Visualização** — Explore os resultados com gráficos e tabelas interativos
 
-**Relatórios** - Exportar resultados para PowerPoint ou PDF para as partes interessadas
+**Partilha de resultados** — Crie painéis em tempo real, apresentações de slides ou relatórios narrativos para as partes interessadas
 
-**Colaboração** - Trabalhe em conjunto com a sua equipa em projectos partilhados
+**Colaboração** — Trabalhe em conjunto com a sua equipa em projetos partilhados
 
-**Assistente de IA** - Obtenha ajuda para interpretar resultados e compreender os seus dados
+**Assistente de IA** — Obtenha ajuda para interpretar resultados e compreender os seus dados
 
 </div>
 </div>

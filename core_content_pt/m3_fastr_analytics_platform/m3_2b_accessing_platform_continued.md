@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Funções e permissões do utilizador
+## Funções e permissões dos utilizadores
 
 Existem dois níveis de permissões na plataforma:
 
@@ -12,15 +12,15 @@ Existem dois níveis de permissões na plataforma:
 
 **Funções ao nível da instância:**
 
-- os **Administradores de instância** podem adicionar utilizadores, criar projectos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
+- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
 
 &nbsp;
 
 **Funções ao nível do projeto:**
 
-- **Project Editors** pode criar visualizações, criar relatórios e descarregar/exportar resultados
-- **Project Viewers** podem ver visualizações, ver relatórios e descarregar/exportar resultados
+- **Editores de projeto** podem criar visualizações, criar relatórios e descarregar/exportar resultados
+- **Visualizadores de projeto** podem visualizar visualizações, visualizar relatórios e descarregar/exportar resultados
 
 &nbsp;
 
-*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto*
+*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto.*

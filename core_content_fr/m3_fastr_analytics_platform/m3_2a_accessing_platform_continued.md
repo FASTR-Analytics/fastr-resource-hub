@@ -4,14 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Instance pays
+## Instance nationale
 
-Chaque pays possède sa propre **instance** de la plateforme analytique FASTR — un déploiement spécifique au pays qui sert de hub centralisé pour l'analyse des données de santé.
+Chaque pays dispose de sa propre **instance** de la plateforme d'analyse FASTR.
 
-Chaque instance :
+Une instance contient :
 
-- **Intègre les données** du rapportage de routine des établissements (DHIS2) et des enquêtes auprès des ménages (EDS, MICS)
-- **Maintient les configurations spécifiques au pays** — structure géographique (régions, districts, établissements), définitions des indicateurs et règles de qualité des données
-- **Fournit un environnement analytique unifié** où les utilisateurs peuvent explorer les données de routine et d'enquête sans expertise technique
+- Tous les utilisateurs enregistrés et leurs comptes
+- La structure administrative partagée (régions, districts, établissements)
+- Les définitions des indicateurs et les sources de données
+- Tous les projets créés pour ce pays
 
-*Pensez à une instance comme la plateforme intégrée de données de santé de votre pays.*
+**Considérez une instance comme l'espace de travail dédié à votre pays.**

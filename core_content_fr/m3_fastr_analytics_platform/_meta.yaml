@@ -2,7 +2,7 @@ slides:
 - file: m3_1_overview_of_platform.md
   order: 1.0
   variant: full
-  title: Plateforme analytique FASTR
+  title: Plateforme d'analyse FASTR
 - file: m3_1b_overview_of_platform_continued.md
   order: 1.02
   variant: full
@@ -10,7 +10,7 @@ slides:
 - file: m3_2a_accessing_platform_continued.md
   order: 2.01
   variant: full
-  title: Instance pays
+  title: Instance nationale
 - file: m3_2b_accessing_platform_continued.md
   order: 2.02
   variant: full
