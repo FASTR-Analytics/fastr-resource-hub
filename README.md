@@ -48,15 +48,37 @@ The web app provides:
 
 ### To update methodology content
 
-```bash
-# 1. Edit files in methodology/
-# 2. Extract slides (also regenerates metadata)
-python3 tools/00_extract_slides.py
+**You don't need to install Python or run any build scripts** — CI does
+that for you when you push. The only tools you need are git and a
+Markdown editor. We recommend **VS Code** because it has built-in git,
+Markdown preview, and works the same on Mac, Windows and Linux.
 
-# 3. Commit both
-git add methodology/ core_content/ modules.yaml
-git commit -m "Update content"
-```
+**One-time setup (~10 min):**
+
+1. Install [VS Code](https://code.visualstudio.com/) (free).
+2. Sign in to GitHub from VS Code (Accounts → Sign in with browser).
+3. Open VS Code → **Source Control** panel → **Clone Repository** → paste
+   `https://github.com/FASTR-Analytics/fastr-resource-hub.git`.
+4. When prompted, install the suggested Markdown extensions.
+
+**Day-to-day workflow:**
+
+1. Open `methodology/04_data_quality_assessment.md` (or whichever module).
+2. Edit. Press <kbd>Ctrl/Cmd + Shift + V</kbd> to see a live Markdown
+   preview next to your edits.
+3. **Source Control** panel → type a short message → click ✓ **Commit** →
+   click ↑ **Sync Changes**.
+
+That's it. CI takes over from there:
+- Re-extracts slides into `core_content/`
+- Rebuilds handout PDFs
+- [fastr-analytics.org](https://fastr-analytics.org) picks up the change
+  on its next sync
+- The deck-builder web app redeploys with your changes
+
+**Power-user shortcut** — if you want to preview the extracted slides
+locally before pushing, you can install Python 3 and run
+`python3 tools/00_extract_slides.py`. Not required.
 
 ### Documentation site
 
