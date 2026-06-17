@@ -7,13 +7,6 @@ not need to install Python, run scripts, or use a terminal.
 Everything is in Markdown, which is a simple text format. If you know how
 to write a Word document, you can write Markdown.
 
-> **Prefer to watch instead of read?**
-> A short walkthrough video is coming soon — it shows the whole
-> clone-edit-commit-sync loop in under a minute.
-<!-- TODO Claire: when you've recorded the screencast, drop the link here:
-     `[Watch the 1-minute walkthrough](https://… loom or youtube unlisted)` -->
-
-
 ## What you need
 
 - A **GitHub account** (free, sign up at <https://github.com/join>).
