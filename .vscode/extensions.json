@@ -1,5 +1,8 @@
 {
   "recommendations": [
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "streetsidesoftware.code-spell-checker",
     "marp-team.marp-vscode",
     "ms-python.python",
     "anthropic.claude-code"
