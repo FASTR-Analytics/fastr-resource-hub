@@ -84,3 +84,8 @@ resources/screenshots/dhis2_demo_dashboard.png
 
 # Country-specific or one-off handout bundles (built locally, not shipped)
 handouts/_out/_bundles/
+
+# methodology onboarding guide PDF — built locally on demand from
+# methodology/EDITING.md via methodology/build_editing_pdf.sh, shared
+# with collaborators directly (Drive / email) rather than via git.
+methodology/_out/
