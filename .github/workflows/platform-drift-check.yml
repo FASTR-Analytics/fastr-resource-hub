@@ -1,0 +1,66 @@
+name: Platform drift check
+
+# Daily 06:00 UTC sweep of FASTR-Analytics/platform and
+# FASTR-Analytics/modules. When new CHANGELOG entries or commits appear on
+# either upstream repo, opens a categorized triage issue here so we know
+# to review whether methodology, prompts, or handouts need updating.
+#
+# Also runnable on-demand via "Run workflow" in the Actions tab.
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to push the updated state file back to main
+  issues: write     # to open the drift issue
+
+concurrency:
+  group: platform-drift-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run drift check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/check_platform_drift.py
+
+      - name: Commit updated state file
+        run: |
+          if [ -z "$(git status --porcelain .github/platform_watch_state.json)" ]; then
+            echo "State unchanged — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/platform_watch_state.json
+          git commit -m "platform-drift: update last-seen state [skip ci]
+
+          Co-Authored-By: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+
+          # Retry with rebase if humans pushed to main during the run.
+          for attempt in 1 2 3 4 5; do
+            if git push origin main; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt). Rebasing onto fresh main."
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "::error::Could not push state file after 5 attempts."
+          exit 1
