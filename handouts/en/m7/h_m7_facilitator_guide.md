@@ -10,7 +10,7 @@ footer: "FASTR · Results Communication · Facilitator"
 
 # Facilitator guide — Results Communication
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Results Communication</strong> · <strong>4 activities + 1 reference · ~95 min</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Covers Understanding your audience (m7c), Storytelling (m7d), Linking results to actions (m7e), Roadmap for sustained use (m7f)</strong> · <strong>4 activities + 1 reference · ~95 min</strong></p>
 
 ## Purpose
 

@@ -805,12 +805,13 @@ function resolvePdfUrl(
   // (e.g. "Disruption Report", "Pipeline d'analyse"). Special folders that
   // aren't tied to a single module use the raw folder id instead — their
   // PDFs sit under `_out/{lang}/{moduleId}/` directly.
-  const SPECIAL_FOLDER_IDS = new Set(['methodology'])
+  const SPECIAL_FOLDER_IDS = new Set(['methodology', 'm7'])
   const folderName = SPECIAL_FOLDER_IDS.has(moduleId) ? moduleId : moduleName
 
   if (fs.existsSync(langDir) && folderName) {
     // Strip the leading `h_<moduleId-segment>_` from the stem. For m-modules
-    // it's `h_m4_`, for the methodology folder it's `h_methodology_`.
+    // it's `h_m4_`, for the methodology folder it's `h_methodology_`,
+    // for the shared m7 folder it's `h_m7_`.
     const short = stem
       .replace(/^h_m[a-z0-9]+_/, '')
       .replace(/^h_methodology_/, '')
@@ -916,6 +917,11 @@ router.get('/handouts', (req, res) => {
           fr: 'Méthodologie FASTR (partagée)',
           pt: 'Metodologia FASTR (partilhada)',
         },
+        m7: {
+          en: 'Results Communication (m7c–m7f shared)',
+          fr: 'Communication des résultats (m7c–m7f partagés)',
+          pt: 'Comunicação de resultados (m7c–m7f partilhados)',
+        },
       }
       let moduleName: string
       if (SPECIAL_FOLDER_NAMES[moduleId]) {
@@ -952,6 +958,10 @@ router.get('/handouts', (req, res) => {
       // service use, and coverage (all methods modules).
       const SPECIAL_FOLDER_SESSIONS: Record<string, string> = {
         methodology: 'methods',
+        // The shared m7 facilitator guide covers m7c (Audience), m7d (Storytelling),
+        // m7e (Linking to actions) and m7f (Roadmap). Bucketed under
+        // Communication & audience since that's where the arc begins.
+        m7: 'communication',
       }
       const sessionId = moduleSessionById.get(moduleId) || SPECIAL_FOLDER_SESSIONS[moduleId] || null
       const sessionName = sessionId ? (sessionNameById.get(sessionId) || null) : null

@@ -3,8 +3,10 @@
 # Filenames not listed here fall to the end, sorted alphabetically.
 # Order applies to both EN and FR (handouts/en/<m>/ and handouts/fr/<m>/).
 
+m7:
+- h_m7_facilitator_guide.md    # Shared facilitator guide — covers m7c → m7f
+
 m7c:
-- h_m7c_facilitator_guide.md   # Session facilitator guide — covers m7c → m7f
 - h_m7c_user_mapping.md        # 1. Identify your audience first
 
 m7d:

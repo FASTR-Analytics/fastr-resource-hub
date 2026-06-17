@@ -10,7 +10,7 @@ footer: "FASTR · Communication des résultats · Facilitateur"
 
 # Guide du facilitateur — Communication des résultats
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Communication des résultats</strong> · <strong>4 activités + 1 référence · ~95 min</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Couvre Comprendre votre public (m7c), Raconter une histoire avec les données (m7d), Lier les résultats aux actions (m7e), Feuille de route pour un usage durable (m7f)</strong> · <strong>4 activités + 1 référence · ~95 min</strong></p>
 
 ## Objectif
 
