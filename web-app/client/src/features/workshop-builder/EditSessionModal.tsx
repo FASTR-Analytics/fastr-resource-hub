@@ -136,7 +136,7 @@ export function EditSessionModal({
     <Modal
       open
       onClose={onClose}
-      title={t('editSession', contentLanguage)}
+      title={t('sessionSettings', contentLanguage)}
       size="md"
       footer={
         <div className="flex w-full items-center justify-between">

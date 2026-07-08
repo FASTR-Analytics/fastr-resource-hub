@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Loader2, GitFork, RotateCcw } from 'lucide-react'
+import { Loader2, GitFork, RotateCcw, ImagePlus, Minus, Plus, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react'
 import { useWorkshopStore, Session } from '../stores/workshop'
 import { t } from '../i18n/translations'
-import { workshopAPI, Language } from '../../lib/api'
+import api, { workshopAPI, Language, Asset } from '../../lib/api'
 import { useToast } from './Toast'
 import { Modal } from './ui/Modal'
 import { Button } from './ui/Button'
@@ -31,6 +31,38 @@ const FRONTMATTER_RE = /^---\r?\n[\s\S]*?\r?\n---\s*/
 // A `---` slide separator on its own line, after a blank line (setext-safe enough
 // for a UI hint; the server owns the authoritative count).
 const SEPARATOR_RE = /\n\s*\n {0,3}---\s*(\n|$)/
+const IMAGE_RE = /!\[([^\]]*)\]\(([^)]+)\)/g
+
+interface SlideImage {
+  alt: string
+  url: string
+  start: number
+  end: number
+  width: number | null
+  isBackground: boolean
+}
+
+function parseImages(content: string): SlideImage[] {
+  const images: SlideImage[] = []
+  for (const m of content.matchAll(IMAGE_RE)) {
+    const alt = m[1]
+    const widthMatch = alt.match(/w:(\d+)/)
+    images.push({
+      alt,
+      url: m[2],
+      start: m.index!,
+      end: m.index! + m[0].length,
+      width: widthMatch ? parseInt(widthMatch[1], 10) : null,
+      isBackground: /(^|\s)bg(\s|$)/.test(alt),
+    })
+  }
+  return images
+}
+
+/** Repo-relative image paths (../../resources/…) → the static mount the app serves. */
+function displayUrl(url: string): string {
+  return url.replace(/^(\.\.\/)+resources\//, '/resources/')
+}
 
 /**
  * Modal markdown editor for any editable slide in the preview grid.
@@ -52,7 +84,78 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
   const [dirty, setDirty] = useState(false)
   const [previewHtml, setPreviewHtml] = useState('')
 
+  // Asset picker: 'add' appends a new image; a number replaces that image's URL
+  const [pickerMode, setPickerMode] = useState<'add' | number | null>(null)
+  const [assets, setAssets] = useState<Asset[]>([])
+  const [assetsLoading, setAssetsLoading] = useState(false)
+  const [uploadingAsset, setUploadingAsset] = useState(false)
+
   const isMultiSlide = useMemo(() => SEPARATOR_RE.test(content), [content])
+  const images = useMemo(() => parseImages(content), [content])
+
+  const updateContent = (next: string) => {
+    setContent(next)
+    setDirty(true)
+  }
+
+  const openPicker = async (mode: 'add' | number) => {
+    setPickerMode(mode)
+    setAssetsLoading(true)
+    try {
+      setAssets(await api.listAssets(workshopId))
+    } catch (err) {
+      console.error('Failed to load assets:', err)
+    } finally {
+      setAssetsLoading(false)
+    }
+  }
+
+  const handleUploadAsset = async (files: FileList | null) => {
+    if (!files) return
+    setUploadingAsset(true)
+    try {
+      for (const file of Array.from(files)) {
+        await api.uploadAsset(workshopId, file)
+      }
+      setAssets(await api.listAssets(workshopId))
+    } catch (err: any) {
+      showToast(`Upload failed: ${err.message}`, 'error')
+    } finally {
+      setUploadingAsset(false)
+    }
+  }
+
+  const handlePickAsset = (asset: Asset) => {
+    if (pickerMode === 'add') {
+      const md = `![w:700](${asset.url})`
+      updateContent(content.trim() ? `${content.replace(/\s*$/, '')}\n\n${md}\n` : `${md}\n`)
+    } else if (typeof pickerMode === 'number') {
+      const img = images[pickerMode]
+      if (img) {
+        // Swap the URL only — keep the alt directives (w:, bg, etc.)
+        updateContent(content.slice(0, img.start) + `![${img.alt}](${asset.url})` + content.slice(img.end))
+      }
+    }
+    setPickerMode(null)
+  }
+
+  const handleResizeImage = (index: number, delta: number) => {
+    const img = images[index]
+    if (!img || img.isBackground) return
+    const next = Math.min(1200, Math.max(100, (img.width ?? 700) + delta))
+    const newAlt = img.width !== null
+      ? img.alt.replace(/w:\d+/, `w:${next}`)
+      : `w:${next}${img.alt ? ' ' + img.alt : ''}`
+    updateContent(content.slice(0, img.start) + `![${newAlt}](${img.url})` + content.slice(img.end))
+  }
+
+  const handleRemoveImage = (index: number) => {
+    const img = images[index]
+    if (!img) return
+    const before = content.slice(0, img.start).replace(/[ \t]*$/, '')
+    const after = content.slice(img.end).replace(/^[ \t]*\r?\n/, '')
+    updateContent(before + after)
+  }
 
   // Load the current markdown (the fork when one exists, else the source)
   useEffect(() => {
@@ -188,7 +291,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
         </div>
       }
     >
-      <div className="flex flex-col gap-2 h-[70vh]">
+      <div className="relative flex flex-col gap-2 h-[70vh]">
         {!forkRef && !isCustom && (
           <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 px-3 py-2 text-caption text-amber-900">
             <GitFork className="w-4 h-4 mt-0.5 flex-shrink-0" />
@@ -200,6 +303,67 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
         {isMultiSlide && (
           <div className="text-caption text-slate-500">{t('multiSlideFile', contentLanguage)}</div>
         )}
+
+        {/* Image strip: swap, resize or remove images without touching markdown */}
+        {!loading && (
+          <div className="flex items-center gap-3 overflow-x-auto pb-1">
+            {images.map((img, i) => (
+              <div key={`${img.url}-${i}`} className="flex-shrink-0 flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 p-1.5">
+                <img
+                  src={displayUrl(img.url)}
+                  alt={img.alt}
+                  className="w-20 h-12 object-contain bg-white rounded border border-slate-200"
+                />
+                <div className="flex flex-col gap-1">
+                  {img.isBackground ? (
+                    <span className="text-caption text-slate-400 px-1">background</span>
+                  ) : (
+                    <div className="flex items-center gap-1 text-caption text-slate-600">
+                      <button
+                        onClick={() => handleResizeImage(i, -100)}
+                        className="p-0.5 rounded hover:bg-slate-200"
+                        title="Smaller"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="w-10 text-center">{img.width ?? 700}px</span>
+                      <button
+                        onClick={() => handleResizeImage(i, 100)}
+                        className="p-0.5 rounded hover:bg-slate-200"
+                        title="Larger"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => openPicker(i)}
+                      className="text-caption px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-600 hover:border-fastr-secondary hover:text-fastr-secondary"
+                    >
+                      {t('replaceImage', contentLanguage)}
+                    </button>
+                    <button
+                      onClick={() => handleRemoveImage(i)}
+                      className="p-0.5 rounded text-slate-400 hover:text-red-600 hover:bg-red-50"
+                      title={t('removeImage', contentLanguage)}
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button
+              onClick={() => openPicker('add')}
+              className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-dashed border-slate-300 text-caption text-slate-500 hover:border-fastr-secondary hover:text-fastr-secondary transition-colors"
+            >
+              <ImagePlus className="w-4 h-4" />
+              {t('addImage', contentLanguage)}
+            </button>
+          </div>
+        )}
+
         <div className="flex gap-4 flex-1 min-h-0">
           <div className="w-1/2 flex flex-col min-h-0">
             {loading ? (
@@ -230,6 +394,76 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
             )}
           </div>
         </div>
+
+        {/* Asset picker — side panel, same flow as CustomSlideEditor's */}
+        {pickerMode !== null && (
+          <div className="absolute top-0 right-0 bottom-0 w-80 bg-white border-l border-slate-200 shadow-elevated flex flex-col z-10 rounded-r-lg">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
+              <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4" />
+                {typeof pickerMode === 'number' ? t('replaceImage', contentLanguage) : t('addImage', contentLanguage)}
+              </h3>
+              <button
+                onClick={() => setPickerMode(null)}
+                className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-auto p-3">
+              <div
+                className="border-2 border-dashed border-slate-300 rounded-lg p-3 mb-3 text-center hover:border-slate-400 transition-colors"
+                onDragOver={(e) => { e.preventDefault(); e.stopPropagation() }}
+                onDrop={(e) => { e.preventDefault(); e.stopPropagation(); handleUploadAsset(e.dataTransfer.files) }}
+              >
+                {uploadingAsset ? (
+                  <div className="flex items-center justify-center gap-2 text-slate-500">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span className="text-caption">Uploading...</span>
+                  </div>
+                ) : (
+                  <>
+                    <Upload className="w-5 h-5 mx-auto text-slate-400 mb-1" />
+                    <label className="text-caption text-fastr-secondary hover:underline cursor-pointer">
+                      Drag & drop or browse files
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className="hidden"
+                        onChange={(e) => handleUploadAsset(e.target.files)}
+                      />
+                    </label>
+                  </>
+                )}
+              </div>
+              {assetsLoading ? (
+                <div className="text-center py-8">
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto text-fastr-secondary" />
+                </div>
+              ) : assets.length === 0 ? (
+                <div className="text-center text-slate-400 py-10 text-caption">
+                  No images uploaded yet for this workshop
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  {assets.map((asset) => (
+                    <button
+                      key={asset.filename}
+                      onClick={() => handlePickAsset(asset)}
+                      className="group relative aspect-video bg-slate-50 rounded-lg overflow-hidden border-2 border-slate-200 hover:border-fastr-secondary transition-colors"
+                    >
+                      <img src={asset.url} alt={asset.filename} className="w-full h-full object-contain" />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-1.5 py-0.5">
+                        <p className="text-[10px] text-white truncate">{asset.filename}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </Modal>
   )

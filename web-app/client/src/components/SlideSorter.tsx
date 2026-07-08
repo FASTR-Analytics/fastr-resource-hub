@@ -14,6 +14,7 @@ import {
   Lock,
   ArrowLeft,
   GitFork,
+  SlidersHorizontal,
 } from 'lucide-react'
 
 // Compulsory session types that are locked
@@ -147,9 +148,9 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 onEditClick(session)
               }}
               className="p-1 hover:bg-white/20 rounded transition-colors"
-              title="Edit session"
+              title="Session settings (name, presenter, duration)"
             >
-              <Pencil className="w-3.5 h-3.5" />
+              <SlidersHorizontal className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={(e) => {
@@ -193,10 +194,11 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                     e.stopPropagation()
                     onSlideEdit(slide)
                   }}
-                  className="absolute top-1 right-1 z-10 p-1 rounded bg-black/70 text-white opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
-                  title="Edit slide"
+                  className="absolute top-1 right-1 z-10 flex items-center gap-1 px-1.5 py-1 rounded bg-black/70 text-white text-xs font-medium opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
+                  title="Edit slide content"
                 >
                   <Pencil className="w-3.5 h-3.5" />
+                  {zoom >= 0.8 && <span>Edit</span>}
                 </button>
               )}
 
@@ -337,7 +339,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
       <div className="bg-gray-800 rounded-xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto ring-1 ring-white/10" onClick={(e) => e.stopPropagation()}>
-        <h3 className="text-lg font-semibold text-white mb-4">Edit Session</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">Session settings</h3>
 
         <div className="space-y-4">
           <div>

@@ -1,7 +1,7 @@
 import { ReactNode, useState, KeyboardEvent } from 'react'
 import {
   GripVertical,
-  Pencil,
+  SlidersHorizontal,
   Lock,
   Coffee,
   Calendar,
@@ -255,10 +255,10 @@ export function SortableSessionCard({
             onEdit(session, dayNum, index)
           }}
           className="p-1 rounded text-slate-300 hover:text-slate-700 hover:bg-black/10 transition-colors"
-          title={t('editSession', contentLanguage)}
-          aria-label={t('editSession', contentLanguage)}
+          title={t('sessionSettings', contentLanguage)}
+          aria-label={t('sessionSettings', contentLanguage)}
         >
-          <Pencil className="w-3.5 h-3.5" />
+          <SlidersHorizontal className="w-3.5 h-3.5" />
         </button>
       </div>
 
