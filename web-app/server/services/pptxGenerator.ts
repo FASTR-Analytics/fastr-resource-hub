@@ -938,7 +938,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   // ("Presented by …") or FR ("Présenté par …") form so the section cover
   // mirrors the agenda's facilitator column.
   const presenterPara = data.paragraphs.find(p =>
-    /^\*?(Presented by|Présenté par)\s+/i.test(p)
+    /^\*?(Presented by|Présenté par|Apresentado por)\s+/i.test(p)
   )
   if (presenterPara) {
     const presenterText = presenterPara.replace(/^\*|\*$/g, '').trim()
