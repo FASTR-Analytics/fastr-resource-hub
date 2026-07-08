@@ -45,6 +45,15 @@
   --fastr-orchid:      #BD5091; /* purple accent */
   --fastr-coral:       #FF6462; /* errors, coral theme */
 
+  /* 2026 refresh — calmer ink + warm panels + a darker green for dark slides
+     (mirror fastr-theme.css :root; guarded by themeTokens.test.ts) */
+  --ink:           #1A1F1E;
+  --ink-2:         #5A6562;
+  --ink-3:         #97A09D;
+  --paper-2:       #F6F5EF;
+  --green-900:     #063D39;
+  --rule-hairline: #E4E7E5;
+
   /* Aliases (mirror the source theme) */
   --fastr-primary:       var(--fastr-dark-green);
   --fastr-primary-dark:  var(--fastr-deep-green);

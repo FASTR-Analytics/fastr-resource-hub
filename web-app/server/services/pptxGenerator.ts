@@ -5,6 +5,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import imageSize from 'image-size'
 import JSZip from 'jszip'
+import { COLORS } from './themeTokens.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -14,33 +15,11 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
   : path.resolve(__dirname, '../../..')
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// FASTR BRAND CONSTANTS (from Python tool)
+// FASTR BRAND CONSTANTS
 // ═══════════════════════════════════════════════════════════════════════════════
-
-const COLORS = {
-  deepGreen: '09544F',    // H1
-  darkGreen: '0C716B',    // primary
-  green: '1F9A9C',
-  lime: 'D0CB17',         // accent/underline
-  navy: '21568C',         // H2
-  blue: '1A90C0',         // H2 underline
-  lightBlue: 'CAE6E9',    // table headers
-  lightGreen: 'E8F4F3',   // session headers
-  gold: 'D8A822',
-  purple: '7A1F6E',
-  orchid: 'BD5091',
-  coral: 'FF6462',
-  textDark: '2c3e50',
-  darkGray: '333333',
-  white: 'FFFFFF',
-  // 2026 refresh tokens (mirror fastr-theme.css :root)
-  ink: '1A1F1E',          // body text
-  ink2: '5A6562',         // secondary
-  ink3: '97A09D',         // tertiary / chrome
-  paper2: 'F6F5EF',       // warm panel (breaks, callouts)
-  green900: '063D39',     // dark slides
-  rule: 'E4E7E5',         // hairline
-}
+// COLORS is the canonical palette in ./themeTokens.ts (shared source of truth;
+// themeTokens.test.ts guards the CSS copies against drift). FONTS/LAYOUT stay
+// here — fonts deliberately differ from the deck CSS (see note below).
 
 const FONTS = {
   // System-safe only: pptxgenjs cannot embed fonts, so a .pptx renders whatever
