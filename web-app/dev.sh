@@ -5,6 +5,11 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
+# Keep logs inside the repo — macOS periodically purges /tmp, which used to
+# delete the log files out from under long-running servers.
+LOG_DIR="$SCRIPT_DIR/.logs"
+mkdir -p "$LOG_DIR"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -22,24 +27,24 @@ stop_servers() {
 
 start_servers() {
     echo -e "${YELLOW}Starting backend (port 3001)...${NC}"
-    npm run dev > /tmp/fastr-backend.log 2>&1 &
+    npm run dev > $LOG_DIR/backend.log 2>&1 &
     sleep 2
 
     if lsof -i:3001 > /dev/null 2>&1; then
         echo -e "${GREEN}✓ Backend running on http://localhost:3001${NC}"
     else
-        echo -e "${RED}✗ Backend failed to start. Check /tmp/fastr-backend.log${NC}"
+        echo -e "${RED}✗ Backend failed to start. Check $LOG_DIR/backend.log${NC}"
         return 1
     fi
 
     echo -e "${YELLOW}Starting frontend (port 5173)...${NC}"
-    cd client && npm run dev > /tmp/fastr-frontend.log 2>&1 &
+    cd client && npm run dev > $LOG_DIR/frontend.log 2>&1 &
     sleep 2
 
     if lsof -i:5173 > /dev/null 2>&1; then
         echo -e "${GREEN}✓ Frontend running on http://localhost:5173${NC}"
     else
-        echo -e "${RED}✗ Frontend failed to start. Check /tmp/fastr-frontend.log${NC}"
+        echo -e "${RED}✗ Frontend failed to start. Check $LOG_DIR/frontend.log${NC}"
         return 1
     fi
 
@@ -48,8 +53,8 @@ start_servers() {
     echo -e "Open ${GREEN}http://localhost:5173/${NC} in your browser"
     echo ""
     echo "Logs:"
-    echo "  Backend:  tail -f /tmp/fastr-backend.log"
-    echo "  Frontend: tail -f /tmp/fastr-frontend.log"
+    echo "  Backend:  tail -f $LOG_DIR/backend.log"
+    echo "  Frontend: tail -f $LOG_DIR/frontend.log"
 }
 
 show_status() {

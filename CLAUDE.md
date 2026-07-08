@@ -185,8 +185,8 @@ cd web-app
 ```
 
 Logs:
-- Backend: `tail -f /tmp/fastr-backend.log`
-- Frontend: `tail -f /tmp/fastr-frontend.log`
+- Backend: `tail -f web-app/.logs/backend.log`
+- Frontend: `tail -f web-app/.logs/frontend.log`
 
 ## Style Guidelines
 

@@ -20,8 +20,8 @@ cd web-app
 Tail logs:
 
 ```bash
-tail -f /tmp/fastr-backend.log
-tail -f /tmp/fastr-frontend.log
+tail -f .logs/backend.log
+tail -f .logs/frontend.log
 ```
 
 Build a single deck from the CLI (no UI):
