@@ -210,12 +210,19 @@ export const workshopAPI = {
   },
 
   /**
-   * Save custom slide content
+   * Save custom slide content. Pass sourceRef when forking a library slide so
+   * the server can record a hash of the source (in the workshop's language) for
+   * stale-fork detection.
    */
-  async saveCustomSlide(workshopId: string, filename: string, content: string): Promise<void> {
+  async saveCustomSlide(
+    workshopId: string,
+    filename: string,
+    content: string,
+    sourceRef?: string,
+  ): Promise<void> {
     await fetchJSON(`/workshops/${workshopId}/custom-slides`, {
       method: 'POST',
-      body: JSON.stringify({ filename, content }),
+      body: JSON.stringify({ filename, content, sourceRef }),
     })
   },
 

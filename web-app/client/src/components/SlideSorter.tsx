@@ -62,6 +62,7 @@ interface SlideData {
   sourceKind: string
   editable: boolean
   overridden: boolean
+  stale?: boolean
   html: string
 }
 
@@ -81,11 +82,12 @@ interface SortableSessionProps {
   workshopLocked: boolean
   onSlideClick: (slide: SlideData) => void
   onSlideEdit: (slide: SlideData) => void
+  onOpenSettings?: () => void
   onEditClick: (session: SessionGroup) => void
   onDeleteClick: (session: SessionGroup) => void
 }
 
-function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideEdit, onEditClick, onDeleteClick }: SortableSessionProps) {
+function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
   const isLocked = isSessionLocked(session.sessionName, session.sessionType)
 
   const {
@@ -202,14 +204,40 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 </button>
               )}
 
-              {/* Edited-for-this-workshop badge */}
-              {slide.overridden && (
-                <div
-                  className="absolute bottom-1 right-1 z-10 p-1 rounded bg-amber-500/90 text-white"
-                  title="Edited for this workshop"
+              {/* Cover slide: content lives in Workshop Settings, so route there
+                  instead of offering a raw-markdown editor */}
+              {slide.sourceKind === 'cover' && !workshopLocked && onOpenSettings && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onOpenSettings()
+                  }}
+                  className="absolute top-1 right-1 z-10 flex items-center gap-1 px-1.5 py-1 rounded bg-black/70 text-white text-xs font-medium opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
+                  title="The cover is set in Workshop settings"
                 >
-                  <GitFork className="w-3 h-3" />
-                </div>
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  {zoom >= 0.8 && <span>Settings</span>}
+                </button>
+              )}
+
+              {/* Edited-for-this-workshop badge; the stale variant flags that the
+                  library version changed since the edit */}
+              {slide.overridden && (
+                slide.stale ? (
+                  <div
+                    className="absolute bottom-1 right-1 z-10 p-1 rounded bg-orange-600 text-white"
+                    title="Library version changed since you edited this"
+                  >
+                    <RefreshCw className="w-3 h-3" />
+                  </div>
+                ) : (
+                  <div
+                    className="absolute bottom-1 right-1 z-10 p-1 rounded bg-amber-500/90 text-white"
+                    title="Edited for this workshop"
+                  >
+                    <GitFork className="w-3 h-3" />
+                  </div>
+                )
               )}
 
               {/* Slide preview iframe */}
@@ -474,9 +502,10 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
 
 interface SlideSorterProps {
   onBack?: () => void
+  onOpenSettings?: () => void
 }
 
-export function SlideSorter({ onBack }: SlideSorterProps) {
+export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
   const { currentWorkshopId, currentConfig, workshops, loadWorkshops, reorderSession, moveSessionToDay, addSession, updateSession, removeSession } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
   const [loading, setLoading] = useState(true)
@@ -811,6 +840,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
                         workshopLocked={workshopLocked}
                         onSlideClick={setSelectedSlide}
                         onSlideEdit={setEditingSlide}
+                        onOpenSettings={onOpenSettings}
                         onEditClick={setEditingSession}
                         onDeleteClick={(s) => {
                           if (confirm(`Delete "${s.sessionName}"? This cannot be undone.`)) {
@@ -931,6 +961,7 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
             sourceRef: editingSlide.sourceRef,
             sourceKind: editingSlide.sourceKind,
             overridden: editingSlide.overridden,
+            stale: editingSlide.stale,
             sessionName: editingSlide.sessionName,
             dayNumber: editingSlide.dayNumber,
             sessionIndex: editingSlide.sessionIndex,

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { WorkshopConfig } from '../db/database.js'
 import {
@@ -114,8 +115,11 @@ interface Session {
   [key: string]: any
 }
 
-/** Where a rendered slide's markdown came from, for the in-app slide editor. */
-export type SlideSourceKind = 'library' | 'template' | 'custom' | 'computed' | 'generated' | 'imported' | 'external'
+/** Where a rendered slide's markdown came from, for the in-app slide editor.
+ *  'cover' = the workshop cover, whose content (title, subtitle, date, logos)
+ *  is driven by Workshop Settings — editing its raw markdown is a foot-gun, so
+ *  the UI routes users to Settings instead. */
+export type SlideSourceKind = 'library' | 'template' | 'custom' | 'computed' | 'generated' | 'imported' | 'external' | 'cover'
 
 export interface SlideChunkSource {
   /** The ref to pass to slide-content / slideOverrides — null when not source-backed */
@@ -340,9 +344,13 @@ async function buildSessionSlides(
 }
 
 /** Classify a `session.slides[]` ref without loading it. */
-function classifySlideRef(ref: string): SlideSourceKind {
+function classifySlideRef(ref: string, sessionType?: string): SlideSourceKind {
   if (/^day\d+_(agenda|recap)$/.test(ref)) return 'computed'
   if (ref.startsWith('custom_slides/')) return 'custom'
+  // The workshop cover: its content is driven by Workshop Settings (title,
+  // subtitle, date, logos), so it's not editable as raw markdown — the UI
+  // routes users to Settings instead.
+  if (sessionType === 'day_title') return 'cover'
   return 'library'
 }
 
@@ -381,8 +389,8 @@ async function buildSessionChunks(
   // e.g., Add m4_0_fastr_methods_overview.md before condensed content
   if (session.slides && session.slides.length > 0) {
     for (const slideFile of session.slides) {
-      const kind = classifySlideRef(slideFile)
-      const overrideContent = kind === 'computed' ? null : loadOverride(slideFile)
+      const kind = classifySlideRef(slideFile, session.type)
+      const overrideContent = (kind === 'computed' || kind === 'cover') ? null : loadOverride(slideFile)
       const content = overrideContent
         ?? await loadSlideContent(slideFile, config, dayNumber, session, language, customSlideMap)
       if (content) {
@@ -927,6 +935,39 @@ export function resolveLibrarySlideContent(
   }
 
   return null
+}
+
+/** Frontmatter strip used for fork source hashing — must match the strip the
+ *  editor applies so capture and comparison hash the same bytes. */
+function stripFrontmatterForHash(content: string): string {
+  return content.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '').trim()
+}
+
+/**
+ * Hash the CURRENT library source for a slide ref, for stale-fork detection.
+ * Resolves the ref (library/template on disk, or an imported: DB slide) and
+ * returns an md5 of the frontmatter-stripped content, or null if the ref isn't
+ * source-backed (computed slides, missing files). `imported:<dbId>:<slideId>`
+ * refs are read from the imported_slides table.
+ */
+export async function hashLibrarySource(
+  ref: string,
+  language: Language = 'en',
+): Promise<string | null> {
+  let content: string | null = null
+
+  const importedMatch = ref.match(/^imported:([^:]+):(\d+)$/)
+  if (importedMatch) {
+    const slides = await getImportedSlides(importedMatch[1])
+    content = slides.find(s => String(s.id) === importedMatch[2])?.markdown ?? null
+  } else {
+    // Library/template refs resolve from disk; custom_slides refs aren't a
+    // "library source" so they're excluded (no map passed).
+    content = resolveLibrarySlideContent(ref, language)?.content ?? null
+  }
+
+  if (content === null) return null
+  return crypto.createHash('md5').update(stripFrontmatterForHash(content)).digest('hex')
 }
 
 /**

@@ -4,7 +4,7 @@ import path from 'path'
 import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { getWorkshop, getCustomSlides, WorkshopConfig } from '../db/database.js'
-import { buildMarkdown, materializeExternalImages, countRenderedSlides, SlideChunkSource } from '../services/deckBuilder.js'
+import { buildMarkdown, materializeExternalImages, countRenderedSlides, hashLibrarySource, SlideChunkSource } from '../services/deckBuilder.js'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS, getThemeCSSByName, getRepoRoot } from '../services/marpService.js'
@@ -146,6 +146,17 @@ router.post('/:id/slides', async (req, res) => {
       customSlideRows.map(r => [r.filename, r.content])
     )
 
+    // Stale-fork detection: for each fork that recorded its source hash, compare
+    // against the current library source. A differing hash means the library
+    // slide changed since it was forked. Keyed by the original source ref.
+    const staleByRef = new Map<string, boolean>()
+    for (const row of customSlideRows) {
+      if (row.source_ref && row.source_hash) {
+        const current = await hashLibrarySource(row.source_ref, effectiveLang)
+        if (current !== null) staleByRef.set(row.source_ref, current !== row.source_hash)
+      }
+    }
+
     for (let day = 1; day <= numDays; day++) {
       const dayKey = `day${day}`
       const sessions = config.schedule[dayKey] || []
@@ -183,6 +194,10 @@ router.post('/:id/slides', async (req, res) => {
           }
           return flatSources[slideIndex] ?? UNKNOWN_SOURCE
         }
+        // A fork is stale only if it's overridden AND its source ref recorded a
+        // now-differing hash (unknown/null-hash forks are never stale).
+        const staleForSource = (source: SlideChunkSource): boolean =>
+          !!(source.overridden && source.ref && staleByRef.get(source.ref))
 
         // Check cache for this session's rendered slides
         const cacheKey = getSessionCacheKey(sessionMarkdown + fastrThemeCSS)
@@ -206,6 +221,7 @@ router.post('/:id/slides', async (req, res) => {
               sourceKind: source.kind,
               editable: source.editable,
               overridden: source.overridden,
+              stale: staleForSource(source),
             })
           }
           cached.timestamp = Date.now()  // Keep it fresh
@@ -285,6 +301,7 @@ ${sessionMarkdown}`
             sourceKind: source.kind,
             editable: source.editable,
             overridden: source.overridden,
+            stale: staleForSource(source),
             html: slideHtml,
           }
 

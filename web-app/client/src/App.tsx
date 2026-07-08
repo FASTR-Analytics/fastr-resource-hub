@@ -2141,7 +2141,10 @@ function App() {
         >
           {currentWorkshopId ? (
             showPreview ? (
-              <SlideSorter onBack={() => setShowPreview(false)} />
+              <SlideSorter
+                onBack={() => setShowPreview(false)}
+                onOpenSettings={() => { setShowPreview(false); setShowSettings(true) }}
+              />
             ) : (
               <>
                   <div className="h-full overflow-auto p-4">

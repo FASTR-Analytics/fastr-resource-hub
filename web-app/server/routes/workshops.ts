@@ -17,7 +17,7 @@ import {
   cloneWorkshop,
   WorkshopConfig
 } from '../db/database.js'
-import { resolveLibrarySlideContent, type Language } from '../services/deckBuilder.js'
+import { resolveLibrarySlideContent, hashLibrarySource, type Language } from '../services/deckBuilder.js'
 
 const router = Router()
 
@@ -232,15 +232,27 @@ router.get('/:id/custom-slides', async (req, res) => {
 })
 
 // POST /api/workshops/:id/custom-slides - Save custom slide
+// Optional sourceRef captures which library slide a fork came from so stale-fork
+// detection can later compare against the current library source. The language
+// is taken from the workshop config (not the request) so capture and compare
+// always hash the same-language source.
 router.post('/:id/custom-slides', async (req, res) => {
   try {
-    const { filename, content } = req.body
+    const { filename, content, sourceRef } = req.body
 
     if (!filename || !content) {
       return res.status(400).json({ error: 'Missing filename or content' })
     }
 
-    await saveCustomSlide(req.params.id, filename, content)
+    let sourceHash: string | null = null
+    if (sourceRef) {
+      const config = await getWorkshop(req.params.id)
+      const configLang = (config?.workshop as any)?.language
+      const lang: Language = (configLang === 'fr' || configLang === 'pt') ? configLang : 'en'
+      sourceHash = await hashLibrarySource(sourceRef, lang)
+    }
+
+    await saveCustomSlide(req.params.id, filename, content, sourceRef ?? null, sourceHash)
     res.json({ success: true })
   } catch (error: any) {
     console.error('Error saving custom slide:', error)

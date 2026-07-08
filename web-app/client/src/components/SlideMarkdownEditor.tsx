@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Loader2, GitFork, RotateCcw, ImagePlus, Minus, Plus, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react'
+import { Loader2, GitFork, RotateCcw, ImagePlus, Minus, Plus, Trash2, Upload, X, Image as ImageIcon, RefreshCw } from 'lucide-react'
 import { useWorkshopStore, Session } from '../stores/workshop'
 import { t } from '../i18n/translations'
 import api, { workshopAPI, Language, Asset } from '../../lib/api'
@@ -13,6 +13,7 @@ export interface EditableSlideTarget {
   sourceRef: string
   sourceKind: string
   overridden: boolean
+  stale?: boolean
   sessionName: string
   dayNumber: number
   sessionIndex: number
@@ -224,9 +225,10 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
         await workshopAPI.saveCustomSlide(workshopId, forkRef.slice('custom_slides/'.length), content)
         showToast('Slide content saved', 'success')
       } else {
-        // First edit of a library/template/imported slide: fork it
+        // First edit of a library/template/imported slide: fork it, recording
+        // the source ref so stale-fork detection can compare against it later.
         const forkFilename = await buildForkFilename()
-        await workshopAPI.saveCustomSlide(workshopId, forkFilename, content)
+        await workshopAPI.saveCustomSlide(workshopId, forkFilename, content, slide.sourceRef)
         setSlideOverride(slide.dayNumber, slide.sessionIndex, slide.sourceRef, `custom_slides/${forkFilename}`)
         showToast('Library slide forked for this workshop', 'success')
       }
@@ -298,6 +300,12 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
             <span>
               {t('forkBanner', contentLanguage)} {t('forkAndEditHint', contentLanguage)}
             </span>
+          </div>
+        )}
+        {slide.stale && (
+          <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-300 px-3 py-2 text-caption text-amber-900">
+            <RefreshCw className="w-4 h-4 mt-0.5 flex-shrink-0" />
+            <span>{t('staleForkBanner', contentLanguage)}</span>
           </div>
         )}
         {isMultiSlide && (

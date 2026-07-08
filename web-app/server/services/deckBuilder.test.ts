@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSessionMarkdown, buildSessionMarkdownWithSources, countRenderedSlides, resolveLibrarySlideContent } from './deckBuilder'
+import { buildSessionMarkdown, buildSessionMarkdownWithSources, countRenderedSlides, resolveLibrarySlideContent, hashLibrarySource } from './deckBuilder'
 import type { WorkshopConfig } from '../db/database'
 
 /**
@@ -295,6 +295,36 @@ describe('buildSessionMarkdownWithSources — slide overrides + provenance', () 
     expect(topicResult!.chunks[0].source).toMatchObject({ ref: null, kind: 'generated', editable: false })
     expect(topicResult!.chunks[1].source.editable).toBe(true)
     expect(topicResult!.chunks[1].source.overridden).toBe(false)
+  })
+
+  it('classifies a day_title cover slide as non-editable (edit in Settings)', async () => {
+    const result = await buildSessionMarkdownWithSources(
+      { session: 'Cover', type: 'day_title', slides: ['title_slide.md'] },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+    )
+    expect(result).toBeTruthy()
+    expect(result!.chunks[0].source).toMatchObject({ kind: 'cover', editable: false })
+  })
+})
+
+describe('hashLibrarySource — stale-fork detection', () => {
+  it('returns a stable md5 for a real library slide, invariant to frontmatter', async () => {
+    const a = await hashLibrarySource('m0_1_what_is_fastr.md', 'en')
+    const b = await hashLibrarySource('m0_1_what_is_fastr.md', 'en')
+    expect(a).toBeTruthy()
+    expect(a).toMatch(/^[0-9a-f]{32}$/)
+    expect(a).toBe(b)
+  })
+
+  it('returns null for an unresolvable ref', async () => {
+    expect(await hashLibrarySource('does_not_exist_xyz.md', 'en')).toBeNull()
+  })
+
+  it('returns null for a computed ref (not source-backed)', async () => {
+    expect(await hashLibrarySource('day1_agenda', 'en')).toBeNull()
   })
 })
 

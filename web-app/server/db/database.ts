@@ -139,6 +139,21 @@ export async function initializeDatabase() {
     // Index already exists
   }
 
+  // Column additions for existing DBs (SQLite has no ADD COLUMN IF NOT EXISTS;
+  // the ALTER throws on an already-migrated DB, which we ignore — same idempotent
+  // pattern as the indexes above). Tracks the library source a fork came from so
+  // stale forks (library changed since the edit) can be detected.
+  try {
+    await db.execute('ALTER TABLE custom_slides ADD COLUMN source_ref TEXT')
+  } catch (e) {
+    // Column already exists
+  }
+  try {
+    await db.execute('ALTER TABLE custom_slides ADD COLUMN source_hash TEXT')
+  } catch (e) {
+    // Column already exists
+  }
+
   console.log('Database schema initialized')
 
   // Auto-import workshops from file system
@@ -313,25 +328,38 @@ export async function setWorkshopLocked(id: string, locked: boolean) {
 
 export async function getCustomSlides(workshopId: string) {
   const result = await db.execute({
-    sql: 'SELECT filename, content FROM custom_slides WHERE workshop_id = ?',
+    sql: 'SELECT filename, content, source_ref, source_hash FROM custom_slides WHERE workshop_id = ?',
     args: [workshopId]
   })
   return result.rows.map((row: any) => ({
     filename: row.filename,
-    content: row.content
+    content: row.content,
+    source_ref: row.source_ref ?? null,
+    source_hash: row.source_hash ?? null,
   }))
 }
 
-export async function saveCustomSlide(workshopId: string, filename: string, content: string) {
+// source_ref/source_hash capture which library slide a fork came from and a
+// hash of that source at fork time. Passing undefined leaves them untouched on
+// update (so a plain content re-save doesn't wipe the provenance).
+export async function saveCustomSlide(
+  workshopId: string,
+  filename: string,
+  content: string,
+  sourceRef?: string | null,
+  sourceHash?: string | null,
+) {
   await db.execute({
     sql: `
-      INSERT INTO custom_slides (workshop_id, filename, content)
-      VALUES (?, ?, ?)
+      INSERT INTO custom_slides (workshop_id, filename, content, source_ref, source_hash)
+      VALUES (?, ?, ?, ?, ?)
       ON CONFLICT(workshop_id, filename) DO UPDATE SET
         content = excluded.content,
+        source_ref = COALESCE(excluded.source_ref, custom_slides.source_ref),
+        source_hash = COALESCE(excluded.source_hash, custom_slides.source_hash),
         updated_at = CURRENT_TIMESTAMP
     `,
-    args: [workshopId, filename, content]
+    args: [workshopId, filename, content, sourceRef ?? null, sourceHash ?? null]
   })
 }
 
