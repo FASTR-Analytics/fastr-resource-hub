@@ -780,6 +780,34 @@ export function materializeExternalImages(markdown: string): { markdown: string;
     return _match
   })
 
+  // Rewrite per-workshop uploaded assets (inserted by the slide editors as
+  // /api/assets/<workshopId>/file/<name>) — Marp CLI and PptxGenJS read from
+  // disk and can't fetch server routes.
+  const assetRegex = /!\[([^\]]*)\]\(\/api\/assets\/([^/)]+)\/file\/([^)]+)\)/g
+  rewritten = rewritten.replace(assetRegex, (_match, alt, workshopId, filename) => {
+    const imagePath = path.join(
+      REPO_ROOT, 'workshops',
+      path.basename(decodeURIComponent(workshopId)), 'assets',
+      path.basename(decodeURIComponent(filename)),
+    )
+    if (fs.existsSync(imagePath)) {
+      hasMatches = true
+      return `![${alt}](${imagePath})`
+    }
+    return _match
+  })
+
+  // Rewrite root-absolute /resources/... URLs (shared asset library) the same way
+  const resourceRegex = /!\[([^\]]*)\]\((\/resources\/[^)]+)\)/g
+  rewritten = rewritten.replace(resourceRegex, (_match, alt, urlPath) => {
+    const imagePath = path.join(REPO_ROOT, decodeURIComponent(urlPath))
+    if (fs.existsSync(imagePath)) {
+      hasMatches = true
+      return `![${alt}](${imagePath})`
+    }
+    return _match
+  })
+
   return { markdown: rewritten, tempDir: hasMatches ? DATA_DIR : null }
 }
 
