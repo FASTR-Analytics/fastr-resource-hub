@@ -859,19 +859,21 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
         })}
       </div>
 
-      {/* Zoomed slide modal */}
+      {/* Zoomed slide modal — inset below the app header (h-14) so the top
+          ribbon stays visible and usable while a slide is open */}
       {selectedSlide && (
         <div
-          className="fixed inset-0 bg-black/95 flex items-center justify-center z-50"
+          className="fixed inset-x-0 bottom-0 top-14 bg-black/95 flex items-center justify-center z-40"
           onClick={() => setSelectedSlide(null)}
         >
-          {/* Close button */}
+          {/* Close button — visible pill so the exit is obvious */}
           <button
             onClick={() => setSelectedSlide(null)}
             aria-label="Close slide view"
-            className="absolute top-4 right-4 p-2 text-white/60 hover:text-white"
+            className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium"
           >
-            <X className="w-8 h-8" />
+            <X className="w-4 h-4" />
+            Close
           </button>
 
           {/* Navigation */}
@@ -894,7 +896,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           </button>
 
           {/* Slide */}
-          <div className="max-w-6xl w-full mx-8" onClick={(e) => e.stopPropagation()}>
+          <div className="max-w-5xl w-full mx-8 py-4" onClick={(e) => e.stopPropagation()}>
             <div className="text-center text-white mb-4">
               <span className="text-2xl font-medium">
                 {selectedSlide.sessionName}
