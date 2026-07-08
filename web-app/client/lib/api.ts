@@ -379,7 +379,31 @@ export const aiAPI = {
 // Export API
 // ─────────────────────────────────────────────────────────────────────────────
 
+export interface PreflightFinding {
+  severity: 'error' | 'warning'
+  code: 'placeholder' | 'unsubstituted-var' | 'missing-image' | 'overflow' | 'stale-fork'
+  message: string
+  dayNumber?: number
+  sessionName?: string
+  detail?: string
+}
+export interface PreflightResult {
+  findings: PreflightFinding[]
+  slideCount: number
+}
+
 export const exportAPI = {
+  /**
+   * Deck health check — run before an export to surface placeholder slides,
+   * unfilled variables, missing images, overflow-flagged and stale slides.
+   */
+  async preflight(workshopId: string, language?: Language): Promise<PreflightResult> {
+    const langParam = language ? `?language=${language}` : ''
+    return fetchJSON(`/export/${workshopId}/preflight${langParam}`, {
+      method: 'POST',
+    })
+  },
+
   /**
    * Build markdown deck
    * @param language - Optional language override

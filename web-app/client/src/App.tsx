@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useWorkshopStore, Session } from './stores/workshop'
-import type { WorkshopInfo } from '../lib/api'
+import type { WorkshopInfo, PreflightResult } from '../lib/api'
+import { exportAPI } from '../lib/api'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
+import { PreflightDialog } from './components/PreflightDialog'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
 import { SlideImportWizard } from './components/SlideImportWizard'
@@ -24,6 +26,7 @@ import {
   RefreshCw,
   FileText,
   Presentation,
+  CheckCircle2,
   Lock,
   Unlock,
   Plus,
@@ -925,6 +928,7 @@ function App() {
   const [showExportMenu, setShowExportMenu] = useState(false)
   const [showNewDeckMenu, setShowNewDeckMenu] = useState(false)
   const [isBuilding, setIsBuilding] = useState(false)
+  const [preflight, setPreflight] = useState<{ result: PreflightResult | null; loading: boolean; pendingFormat: 'html' | 'pdf' | 'pptx' | null } | null>(null)
   const [editingSession, setEditingSession] = useState<{
     session: Session
     dayNum: number
@@ -1521,10 +1525,43 @@ function App() {
   }
 
   // Build deck
+  // Deck health check gates export: run preflight first; if it finds anything,
+  // show the dialog (blocking only on errors — warnings can Export anyway).
   const handleBuild = async (format: 'html' | 'pdf' | 'pptx') => {
     if (!currentWorkshopId) return
-    setIsBuilding(true)
     setShowExportMenu(false)
+    setPreflight({ result: null, loading: true, pendingFormat: format })
+    try {
+      const result = await exportAPI.preflight(currentWorkshopId)
+      if (result.findings.length === 0) {
+        setPreflight(null)
+        await doExport(format)
+      } else {
+        setPreflight({ result, loading: false, pendingFormat: format })
+      }
+    } catch (error: any) {
+      setPreflight(null)
+      showToast(`Deck check failed: ${error.message}`, 'error')
+    }
+  }
+
+  // Standalone "Check deck" — informational, no export queued.
+  const handleCheckDeck = async () => {
+    if (!currentWorkshopId) return
+    setShowExportMenu(false)
+    setPreflight({ result: null, loading: true, pendingFormat: null })
+    try {
+      const result = await exportAPI.preflight(currentWorkshopId)
+      setPreflight({ result, loading: false, pendingFormat: null })
+    } catch (error: any) {
+      setPreflight(null)
+      showToast(`Deck check failed: ${error.message}`, 'error')
+    }
+  }
+
+  const doExport = async (format: 'html' | 'pdf' | 'pptx') => {
+    if (!currentWorkshopId) return
+    setIsBuilding(true)
 
     try {
       let downloadUrl = ''
@@ -2076,6 +2113,11 @@ function App() {
           <button onClick={() => handleBuild('pptx')} className="w-full flex items-center gap-2 px-4 py-2 text-body-sm text-slate-700 hover:bg-slate-50">
             <Presentation className="w-4 h-4 text-slate-400" />
             <span>{t('exportPowerPoint', contentLanguage)}</span>
+          </button>
+          <div className="my-1 border-t border-slate-100" />
+          <button onClick={handleCheckDeck} className="w-full flex items-center gap-2 px-4 py-2 text-body-sm text-slate-700 hover:bg-slate-50">
+            <CheckCircle2 className="w-4 h-4 text-slate-400" />
+            <span>{t('checkDeck', contentLanguage)}</span>
           </button>
         </div>
       )}
@@ -3044,6 +3086,21 @@ function App() {
             </div>
           </div>
         </Modal>
+      )}
+
+      {/* Deck health-check dialog (before export, or standalone "Check deck") */}
+      {preflight && (
+        <PreflightDialog
+          result={preflight.result}
+          loading={preflight.loading}
+          pendingFormat={preflight.pendingFormat}
+          onExportAnyway={() => {
+            const fmt = preflight.pendingFormat
+            setPreflight(null)
+            if (fmt) doExport(fmt)
+          }}
+          onClose={() => setPreflight(null)}
+        />
       )}
 
       {/* Workshop Details Modal */}

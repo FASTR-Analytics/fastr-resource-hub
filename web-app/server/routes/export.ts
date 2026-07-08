@@ -81,6 +81,22 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 // Supported languages
 type Language = 'en' | 'fr' | 'pt'
 
+// POST /api/export/:id/preflight - Deck health check (run before export)
+router.post('/:id/preflight', async (req, res) => {
+  try {
+    const language = (req.query.language as Language) || undefined
+    const config = await getWorkshop(req.params.id)
+    if (!config) return res.status(404).json({ error: 'Workshop not found' })
+
+    const { runPreflight } = await import('../services/deckPreflight.js')
+    const result = await runPreflight(req.params.id, config, language)
+    res.json(result)
+  } catch (error: any) {
+    console.error('Error running preflight:', error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
 // POST /api/export/:id/markdown - Build markdown deck
 // Query params: ?language=fr (default: from workshop config or 'en')
 router.post('/:id/markdown', async (req, res) => {

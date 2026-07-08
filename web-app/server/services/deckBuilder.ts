@@ -819,6 +819,69 @@ export function materializeExternalImages(markdown: string): { markdown: string;
   return { markdown: rewritten, tempDir: hasMatches ? DATA_DIR : null }
 }
 
+/** The overflow map's `flag` (needs manual attention) and `split` (likely
+ *  overflows) lists for a language — the health check's overflow signals.
+ *  Absent map → empty sets (degrade silently). */
+let _overflowFlags: Record<string, { flag: Set<string>; split: Set<string> }> | null = null
+export function getOverflowFlags(language: Language): { flag: Set<string>; split: Set<string> } {
+  if (!_overflowFlags) {
+    _overflowFlags = {}
+    try {
+      const raw = fs.readFileSync(path.join(REPO_ROOT, 'tools', 'overflow_map.json'), 'utf-8')
+      const map: OverflowMap = JSON.parse(raw)
+      for (const lang of Object.keys(map)) {
+        _overflowFlags[lang] = {
+          flag: new Set(map[lang]?.flag || []),
+          split: new Set(map[lang]?.split || []),
+        }
+      }
+    } catch {
+      // No map yet — no overflow signals.
+    }
+  }
+  return _overflowFlags[language] || { flag: new Set(), split: new Set() }
+}
+
+/**
+ * Report image references in a built deck/chunk whose files don't exist on
+ * disk. Mirrors the resolution in materializeExternalImages plus relative
+ * ../resources paths; skips http(s)/data URIs (external, assumed reachable).
+ */
+export function findMissingImages(markdown: string): string[] {
+  const DATA_DIR = path.resolve(__dirname, '../../data')
+  const missing: string[] = []
+  const seen = new Set<string>()
+
+  for (const m of markdown.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) {
+    const url = m[1]
+    if (seen.has(url)) continue
+    seen.add(url)
+    if (/^(https?:|data:)/.test(url)) continue
+
+    let filePath: string | null = null
+    let mm: RegExpMatchArray | null
+    if ((mm = url.match(/^\/api\/import\/external\/([^/]+)\/pages\/(\d+)/))) {
+      filePath = path.join(DATA_DIR, 'external', `${mm[1]}_page_${mm[2]}.png`)
+    } else if ((mm = url.match(/^\/api\/import\/modules\/([^/]+)\/images\/(.+)$/))) {
+      filePath = path.join(DATA_DIR, 'imports', path.basename(mm[1]), path.basename(decodeURIComponent(mm[2])))
+    } else if ((mm = url.match(/^\/api\/assets\/([^/]+)\/file\/(.+)$/))) {
+      filePath = path.join(REPO_ROOT, 'workshops', path.basename(decodeURIComponent(mm[1])), 'assets', path.basename(decodeURIComponent(mm[2])))
+    } else if (url.startsWith('/resources/')) {
+      filePath = path.join(REPO_ROOT, decodeURIComponent(url))
+    } else if (url.startsWith('/')) {
+      filePath = path.join(REPO_ROOT, decodeURIComponent(url.slice(1)))
+    } else if (path.isAbsolute(url)) {
+      filePath = url
+    } else {
+      // Relative (../../resources/…): strip leading ../ and resolve from repo root
+      filePath = path.join(REPO_ROOT, url.replace(/^(\.\.\/)+/, ''))
+    }
+
+    if (filePath && !fs.existsSync(filePath)) missing.push(url)
+  }
+  return missing
+}
+
 /**
  * Get list of all slide files for a module (for UI to display)
  * @param moduleId - Module ID (e.g., "m4")
