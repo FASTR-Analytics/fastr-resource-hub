@@ -13,6 +13,7 @@ import {
   getCustomSlides,
   saveCustomSlide,
   deleteCustomSlide,
+  getImportedSlides,
   cloneWorkshop,
   WorkshopConfig
 } from '../db/database.js'
@@ -264,7 +265,7 @@ router.delete('/:id/custom-slides/:filename', async (req, res) => {
 // forking a library slide.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// GET /api/workshops/:id/slide-content?ref=...&language=en|fr
+// GET /api/workshops/:id/slide-content?ref=...&language=en|fr|pt
 router.get('/:id/slide-content', async (req, res) => {
   try {
     const ref = String(req.query.ref || '')
@@ -275,9 +276,18 @@ router.get('/:id/slide-content', async (req, res) => {
 
     const queryLang = req.query.language ? String(req.query.language) : null
     const configLang = (config.workshop as any).language
-    const language: Language = (queryLang === 'fr' || queryLang === 'en')
+    const language: Language = (queryLang === 'fr' || queryLang === 'en' || queryLang === 'pt')
       ? queryLang
-      : (configLang === 'fr' ? 'fr' : 'en')
+      : (configLang === 'fr' || configLang === 'pt' ? configLang : 'en')
+
+    // Imported-module slides live in the DB, not on disk: imported:<dbId>:<slideId>
+    const importedMatch = ref.match(/^imported:([^:]+):(\d+)$/)
+    if (importedMatch) {
+      const slides = await getImportedSlides(importedMatch[1])
+      const slide = slides.find(s => String(s.id) === importedMatch[2])
+      if (!slide) return res.status(404).json({ error: 'Slide not resolvable' })
+      return res.json({ ref, filename: ref, content: slide.markdown, source: 'imported' })
+    }
 
     // For `custom_slides/...` refs, pre-build the lookup map from DB.
     let customSlideMap: Map<string, string> | undefined

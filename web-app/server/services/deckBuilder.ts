@@ -105,12 +105,63 @@ interface Session {
   module?: string
   slides?: string[]
   excludedSlides?: string[]  // Slide files to exclude from module content
+  slideOverrides?: Record<string, string>  // Source ref → custom_slides/<fork> (per-workshop slide edits)
   type?: string
   duration?: number
   time?: string
   topic_range?: { start: number; end: number } | null  // For splitting modules across sessions
   version?: 'full' | 'condensed'  // Which content version to use
   [key: string]: any
+}
+
+/** Where a rendered slide's markdown came from, for the in-app slide editor. */
+export type SlideSourceKind = 'library' | 'template' | 'custom' | 'computed' | 'generated' | 'imported' | 'external'
+
+export interface SlideChunkSource {
+  /** The ref to pass to slide-content / slideOverrides — null when not source-backed */
+  ref: string | null
+  kind: SlideSourceKind
+  editable: boolean
+  overridden: boolean
+}
+
+/** One source unit of a session's markdown (a file, an imported slide, a computed slide).
+ *  May render to several slides if the content has internal `---` separators. */
+export interface SessionChunk {
+  content: string
+  source: SlideChunkSource
+}
+
+const EDITABLE_KINDS: ReadonlySet<SlideSourceKind> = new Set(['library', 'template', 'custom', 'imported'])
+
+/**
+ * How many slides a session chunk renders to: 1 + its internal slide
+ * separators. Fence-aware line scan; a `---` directly after a paragraph line
+ * is a setext heading (not a separator), so it only counts after a blank
+ * line or at the chunk start. Divergence from Marp's tokenizer is caught by
+ * the count fail-safe in the slides endpoint.
+ */
+export function countRenderedSlides(content: string): number {
+  let inFence = false
+  let prevBlank = true
+  let separators = 0
+  for (const line of content.split('\n')) {
+    if (/^\s*(```|~~~)/.test(line.trimEnd())) {
+      inFence = !inFence
+      prevBlank = false
+      continue
+    }
+    if (!inFence && /^ {0,3}(-{3,}|\*{3,}|_{3,})\s*$/.test(line)) {
+      const isDashes = /^ {0,3}-{3,}\s*$/.test(line)
+      if (!isDashes || prevBlank) separators++
+    }
+    prevBlank = line.trim() === ''
+  }
+  return separators + 1
+}
+
+function chunkSource(ref: string | null, kind: SlideSourceKind, overridden = false): SlideChunkSource {
+  return { ref, kind, editable: ref !== null && EDITABLE_KINDS.has(kind), overridden }
 }
 
 /**
@@ -254,6 +305,25 @@ export async function buildSessionMarkdown(
 }
 
 /**
+ * Like buildSessionMarkdown, but also returns per-chunk source provenance so
+ * the slides endpoint can tell the client which slides are editable and where
+ * their markdown lives.
+ */
+export async function buildSessionMarkdownWithSources(
+  session: Session,
+  config: WorkshopConfig,
+  dayNumber: number,
+  sessionNumber?: number,
+  language?: Language,
+  customSlideMap?: Map<string, string>,
+): Promise<{ markdown: string; chunks: SessionChunk[] } | null> {
+  const lang: Language = language || (config.workshop as any).language || 'en'
+  const chunks = await buildSessionChunks(session, config, dayNumber, sessionNumber, lang, customSlideMap)
+  if (!chunks) return null
+  return { markdown: chunks.map(c => c.content).join('\n\n---\n\n'), chunks }
+}
+
+/**
  * Build slides for a single session
  */
 async function buildSessionSlides(
@@ -264,17 +334,59 @@ async function buildSessionSlides(
   language: Language = 'en',
   customSlideMap?: Map<string, string>,
 ): Promise<string | null> {
-  const allSlideContents: string[] = []
+  const chunks = await buildSessionChunks(session, config, dayNumber, sessionNumber, language, customSlideMap)
+  if (!chunks) return null
+  return chunks.map(c => c.content).join('\n\n---\n\n')
+}
+
+/** Classify a `session.slides[]` ref without loading it. */
+function classifySlideRef(ref: string): SlideSourceKind {
+  if (/^day\d+_(agenda|recap)$/.test(ref)) return 'computed'
+  if (ref.startsWith('custom_slides/')) return 'custom'
+  return 'library'
+}
+
+async function buildSessionChunks(
+  session: Session,
+  config: WorkshopConfig,
+  dayNumber: number,
+  sessionNumber?: number,
+  language: Language = 'en',
+  customSlideMap?: Map<string, string>,
+): Promise<SessionChunk[] | null> {
+  const chunks: SessionChunk[] = []
   const coreContentPath = getCoreContentPath(language)
+  const overrides = session.slideOverrides
+
+  // Strip frontmatter + trailing separator and substitute variables — the
+  // treatment override (forked) content gets in the module/topics paths.
+  const prepareOverrideContent = (raw: string): string => {
+    let content = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '')
+    content = content.replace(/\n---\s*$/, '')
+    return substituteVariables(content, config, dayNumber, session, language).trim()
+  }
+
+  /** Resolve an override ref (custom_slides/<file>) to prepared content, or null. */
+  const loadOverride = (sourceRef: string): string | null => {
+    const forkRef = overrides?.[sourceRef]
+    if (!forkRef || !forkRef.startsWith('custom_slides/')) return null
+    const content = customSlideMap?.get(forkRef.slice('custom_slides/'.length))
+    if (content === undefined) return null
+    const prepared = prepareOverrideContent(content)
+    return prepared || null
+  }
 
   // PREFIX SLIDES (from slides array) - load FIRST
   // This allows adding intro slides before module content
   // e.g., Add m4_0_fastr_methods_overview.md before condensed content
   if (session.slides && session.slides.length > 0) {
     for (const slideFile of session.slides) {
-      const content = await loadSlideContent(slideFile, config, dayNumber, session, language, customSlideMap)
+      const kind = classifySlideRef(slideFile)
+      const overrideContent = kind === 'computed' ? null : loadOverride(slideFile)
+      const content = overrideContent
+        ?? await loadSlideContent(slideFile, config, dayNumber, session, language, customSlideMap)
       if (content) {
-        allSlideContents.push(content)
+        chunks.push({ content, source: chunkSource(slideFile, kind, overrideContent !== null) })
       }
     }
   }
@@ -282,9 +394,13 @@ async function buildSessionSlides(
   // MODULE CONTENT - load SECOND
   // Uses full or condensed version based on session.version
   if (session.module) {
-    const moduleSlides = await buildModuleSlides(session.module, session.session, sessionNumber, session.topic_range, session.excludedSlides, session.version, language, session.speaker)
-    if (moduleSlides) {
-      allSlideContents.push(moduleSlides)
+    const moduleChunks = await buildModuleSlides(
+      session.module, session.session, sessionNumber, session.topic_range,
+      session.excludedSlides, session.version, language, session.speaker,
+      overrides, loadOverride,
+    )
+    if (moduleChunks) {
+      chunks.push(...moduleChunks)
     }
   }
 
@@ -298,7 +414,7 @@ async function buildSessionSlides(
         ? `\n\n*${t('presentedBy', language)} ${session.speaker}*`
         : ''
       const titleSlide = `<!-- _class: section-cover -->\n![bg](../../resources/backgrounds/section_slide.png)\n\n# ${session.session}${presenter}`
-      allSlideContents.push(titleSlide)
+      chunks.push({ content: titleSlide, source: chunkSource(null, 'generated') })
     }
     const loadedFiles = new Set<string>()
     for (const topicId of session.topics) {
@@ -316,13 +432,18 @@ async function buildSessionSlides(
             for (const file of files) {
               if (loadedFiles.has(file)) continue
               loadedFiles.add(file)
-              let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
-              // Remove frontmatter
-              content = content.replace(/^---[\s\S]*?---\s*/m, '')
-              content = content.replace(/\n---\s*$/, '')
-              content = substituteVariables(content, config, dayNumber, session, language)
-              if (content.trim()) {
-                allSlideContents.push(content.trim())
+              const overrideContent = loadOverride(file)
+              let content = overrideContent
+              if (content === null) {
+                content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
+                // Remove frontmatter (anchored to the string start — a multiline
+                // `^` would eat the content between two internal `---` separators)
+                content = content.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '')
+                content = content.replace(/\n---\s*$/, '')
+                content = substituteVariables(content, config, dayNumber, session, language).trim()
+              }
+              if (content) {
+                chunks.push({ content, source: chunkSource(file, 'library', overrideContent !== null) })
               }
             }
           }
@@ -332,23 +453,26 @@ async function buildSessionSlides(
   }
 
   // If we have any content, return it
-  if (allSlideContents.length > 0) {
-    return allSlideContents.join('\n\n---\n\n')
+  if (chunks.length > 0) {
+    return chunks
   }
+
+  const computed = (content: string | null): SessionChunk[] | null =>
+    content ? [{ content, source: chunkSource(null, 'computed') }] : null
 
   // Break slides
   if (session.type === 'break') {
-    return buildBreakSlide(session, language)
+    return computed(buildBreakSlide(session, language))
   }
 
   // Day recap
   if (session.type === 'day_recap') {
-    return buildDayRecapSlide(session, config, dayNumber, language)
+    return computed(buildDayRecapSlide(session, config, dayNumber, language))
   }
 
   // Day end
   if (session.type === 'day_end') {
-    return buildDayEndSlide(session, dayNumber, language)
+    return computed(buildDayEndSlide(session, dayNumber, language))
   }
 
   // Section/Agenda - check if this is an agenda section
@@ -359,17 +483,17 @@ async function buildSessionSlides(
       || session.session.match(/Agenda\s*(?:Jour|Day)\s*(\d+)/i)
     if (agendaMatch) {
       const agendaDay = parseInt(agendaMatch[1])
-      return buildDayAgendaSlide(config, agendaDay, language)
+      return computed(buildDayAgendaSlide(config, agendaDay, language))
     }
     // For sections with duration, add a placeholder slide after the cover
     if (session.duration && session.duration > 0) {
-      return buildSectionSlide(session, language) + '\n---\n\n' + buildGenericSessionSlide(session)
+      return computed(buildSectionSlide(session, language) + '\n---\n\n' + buildGenericSessionSlide(session))
     }
-    return buildSectionSlide(session, language)
+    return computed(buildSectionSlide(session, language))
   }
 
   // Generic session (no specific slides)
-  return buildGenericSessionSlide(session)
+  return computed(buildGenericSessionSlide(session))
 }
 
 // Module names loaded from modules.yaml via registry
@@ -392,11 +516,14 @@ async function buildModuleSlides(
   excludedSlides?: string[],
   version?: 'full' | 'condensed',
   language: Language = 'en',
-  speaker?: string
-): Promise<string | null> {
+  speaker?: string,
+  overrides?: Record<string, string>,
+  /** Resolves a source ref to prepared per-workshop override content, or null. */
+  loadOverride?: (sourceRef: string) => string | null,
+): Promise<SessionChunk[] | null> {
   // Handle imported modules (stored in database, not filesystem)
   if (moduleId.startsWith('imported_')) {
-    return await buildImportedModuleSlides(moduleId, sessionName, sessionNumber, language, speaker)
+    return await buildImportedModuleSlides(moduleId, sessionName, sessionNumber, language, speaker, loadOverride)
   }
 
   // Handle external decks (PDF pages stored as images)
@@ -517,15 +644,23 @@ async function buildModuleSlides(
 
 # ${displayName}${presenter}`
 
-  const contents: string[] = [titleSlide]
+  const chunks: SessionChunk[] = [{ content: titleSlide, source: chunkSource(null, 'generated') }]
   for (const file of files) {
+    const overrideContent = loadOverride?.(file) ?? null
+    if (overrideContent !== null) {
+      // Per-workshop edited copy: already stripped/substituted; skip the
+      // auto-compact tier so the editor stays WYSIWYG.
+      chunks.push({ content: overrideContent, source: chunkSource(file, 'library', true) })
+      continue
+    }
     let content = fs.readFileSync(path.join(modulePath, file), 'utf-8')
-    // Remove frontmatter from module files (we have our own)
-    content = content.replace(/^---[\s\S]*?---\s*/m, '')
-    contents.push(maybeCompact(file, content.trim(), language))
+    // Remove frontmatter from module files (we have our own); anchored to the
+    // string start — a multiline `^` would eat content between internal `---`s
+    content = content.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '')
+    chunks.push({ content: maybeCompact(file, content.trim(), language), source: chunkSource(file, 'library') })
   }
 
-  return contents.join('\n\n---\n\n')
+  return chunks
 }
 
 /**
@@ -536,8 +671,9 @@ async function buildImportedModuleSlides(
   sessionName?: string,
   sessionNumber?: number,
   language: Language = 'en',
-  speaker?: string
-): Promise<string | null> {
+  speaker?: string,
+  loadOverride?: (sourceRef: string) => string | null,
+): Promise<SessionChunk[] | null> {
   const dbId = moduleId.replace(/^imported_/, '')
   const mod = await getImportedModule(dbId)
   if (!mod) return null
@@ -555,14 +691,17 @@ async function buildImportedModuleSlides(
 
 # ${sessionLabel}: ${displayName}${presenter}`
 
-  const contents: string[] = [titleSlide]
+  const chunks: SessionChunk[] = [{ content: titleSlide, source: chunkSource(null, 'generated') }]
   for (const slide of slides) {
-    if (slide.markdown.trim()) {
-      contents.push(slide.markdown.trim())
+    const ref = `imported:${dbId}:${slide.id}`
+    const overrideContent = loadOverride?.(ref) ?? null
+    const content = overrideContent ?? slide.markdown.trim()
+    if (content) {
+      chunks.push({ content, source: chunkSource(ref, 'imported', overrideContent !== null) })
     }
   }
 
-  return contents.join('\n\n---\n\n')
+  return chunks
 }
 
 /**
@@ -574,7 +713,7 @@ async function buildExternalDeckSlides(
   sessionNumber?: number,
   language: Language = 'en',
   speaker?: string
-): Promise<string | null> {
+): Promise<SessionChunk[] | null> {
   const dbId = moduleId.replace(/^external_/, '')
   const deck = await getExternalDeck(dbId)
   if (!deck) return null
@@ -592,13 +731,16 @@ async function buildExternalDeckSlides(
 
 # ${sessionLabel}: ${displayName}${presenter}`
 
-  const contents: string[] = [titleSlide]
+  const chunks: SessionChunk[] = [{ content: titleSlide, source: chunkSource(null, 'generated') }]
   for (const page of pages) {
-    contents.push(`<!-- _class: external-slide -->
-![bg contain](/api/import/external/${dbId}/pages/${page.page_number})`)
+    chunks.push({
+      content: `<!-- _class: external-slide -->
+![bg contain](/api/import/external/${dbId}/pages/${page.page_number})`,
+      source: chunkSource(null, 'external'),
+    })
   }
 
-  return contents.join('\n\n---\n\n')
+  return chunks
 }
 
 /**
@@ -784,8 +926,9 @@ async function loadSlideContent(
   }
 
   // Strip frontmatter and trailing separator so the slide composes cleanly
-  // with the deck's outer frontmatter and `---` joiners.
-  let content = resolved.content.replace(/^---[\s\S]*?---\s*/m, '')
+  // with the deck's outer frontmatter and `---` joiners. Anchored to the string
+  // start — a multiline `^` would eat content between internal `---` separators.
+  let content = resolved.content.replace(/^---\r?\n[\s\S]*?\r?\n---\s*/, '')
   content = content.replace(/\n---\s*$/, '')
 
   content = substituteVariables(content, config, dayNumber, session, language)

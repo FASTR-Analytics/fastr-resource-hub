@@ -4,7 +4,7 @@ import path from 'path'
 import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import { getWorkshop, getCustomSlides, WorkshopConfig } from '../db/database.js'
-import { buildMarkdown, materializeExternalImages } from '../services/deckBuilder.js'
+import { buildMarkdown, materializeExternalImages, countRenderedSlides, SlideChunkSource } from '../services/deckBuilder.js'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS, getThemeCSSByName, getRepoRoot } from '../services/marpService.js'
@@ -55,6 +55,8 @@ function cleanupSessionCache() {
 }
 
 setInterval(cleanupSessionCache, 5 * 60 * 1000)
+
+const UNKNOWN_SOURCE: SlideChunkSource = { ref: null, kind: 'generated', editable: false, overridden: false }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -135,7 +137,7 @@ router.post('/:id/slides', async (req, res) => {
 
     // Track cumulative session number across all days
     let sessionNumber = 0
-    const { buildSessionMarkdown } = await import('../services/deckBuilder.js')
+    const { buildSessionMarkdownWithSources } = await import('../services/deckBuilder.js')
 
     // Pre-fetch workshop-scoped custom slides so each per-session build can
     // resolve `custom_slides/{filename}` refs without per-slide DB queries.
@@ -158,10 +160,29 @@ router.post('/:id/slides', async (req, res) => {
           sessionNumber++
         }
 
-        // Build markdown for this session
-        const sessionMarkdown = await buildSessionMarkdown(session, config, day, isContentSession ? sessionNumber : undefined, effectiveLang, customSlideMap)
+        // Build markdown for this session (with per-chunk source provenance)
+        const built = await buildSessionMarkdownWithSources(session, config, day, isContentSession ? sessionNumber : undefined, effectiveLang, customSlideMap)
 
-        if (!sessionMarkdown) continue
+        if (!built) continue
+        const { markdown: sessionMarkdown, chunks } = built
+
+        // One provenance entry per expected rendered slide. If the expected
+        // count disagrees with what Marp actually renders, mark the whole
+        // session non-editable rather than risk targeting the wrong source.
+        const flatSources: SlideChunkSource[] = []
+        for (const chunk of chunks) {
+          const n = countRenderedSlides(chunk.content)
+          for (let i = 0; i < n; i++) flatSources.push(chunk.source)
+        }
+        const sourceForSlide = (slideIndex: number, totalSlides: number): SlideChunkSource => {
+          if (flatSources.length !== totalSlides) {
+            if (slideIndex === 0) {
+              console.warn(`Slide/source count mismatch for session "${session.session}" (expected ${flatSources.length}, rendered ${totalSlides}) — marking non-editable`)
+            }
+            return UNKNOWN_SOURCE
+          }
+          return flatSources[slideIndex] ?? UNKNOWN_SOURCE
+        }
 
         // Check cache for this session's rendered slides
         const cacheKey = getSessionCacheKey(sessionMarkdown + fastrThemeCSS)
@@ -171,6 +192,7 @@ router.post('/:id/slides', async (req, res) => {
           // Use cached slides, but update metadata (sessionId, dayNumber, etc. may have changed)
           cacheHits++
           for (const cachedSlide of cached.slides) {
+            const source = sourceForSlide(cachedSlide.slideIndex, cached.slides.length)
             slidesData.push({
               ...cachedSlide,
               id: `${sessionId}-slide${cachedSlide.slideIndex}`,
@@ -180,6 +202,10 @@ router.post('/:id/slides', async (req, res) => {
               sessionName: session.session,
               sessionType: session.type || (session.module ? 'module' : 'custom'),
               moduleId: session.module || null,
+              sourceRef: source.ref,
+              sourceKind: source.kind,
+              editable: source.editable,
+              overridden: source.overridden,
             })
           }
           cached.timestamp = Date.now()  // Keep it fresh
@@ -201,13 +227,13 @@ ${sessionMarkdown}`
 
         // Marp renders slides as SVG elements - extract each one
         const svgRegex = /<svg[^>]*data-marpit-svg[^>]*>[\s\S]*?<\/svg>/g
-        let match
+        const svgMatches = html.match(svgRegex) || []
         let slideIdx = 0
         const sessionSlides: any[] = []
 
-        while ((match = svgRegex.exec(html)) !== null) {
+        for (const svgMatch of svgMatches) {
           // Fix relative image paths to absolute URLs
-          let svgHtml = match[0]
+          let svgHtml = svgMatch
           svgHtml = svgHtml.replace(/\.\.\/\.\.\/resources\//g, '/resources/')
           svgHtml = svgHtml.replace(/\.\.\/resources\//g, '/resources/')
           svgHtml = svgHtml.replace(/&quot;\.\.\/\.\.\/resources\//g, '&quot;/resources/')
@@ -245,6 +271,7 @@ ${sessionMarkdown}`
 </body>
 </html>`
 
+          const source = sourceForSlide(slideIdx, svgMatches.length)
           const slideData = {
             id: `${sessionId}-slide${slideIdx}`,
             sessionId: sessionId,
@@ -254,6 +281,10 @@ ${sessionMarkdown}`
             sessionName: session.session,
             sessionType: session.type || (session.module ? 'module' : 'custom'),
             moduleId: session.module || null,
+            sourceRef: source.ref,
+            sourceKind: source.kind,
+            editable: source.editable,
+            overridden: source.overridden,
             html: slideHtml,
           }
 

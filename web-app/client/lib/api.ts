@@ -244,7 +244,7 @@ export const workshopAPI = {
     workshopId: string,
     ref: string,
     language?: 'en' | 'fr' | 'pt',
-  ): Promise<{ ref: string; filename: string; content: string; source: 'custom' | 'template' | 'library' }> {
+  ): Promise<{ ref: string; filename: string; content: string; source: 'custom' | 'template' | 'library' | 'imported' }> {
     const params = new URLSearchParams({ ref })
     if (language) params.set('language', language)
     return fetchJSON(`/workshops/${workshopId}/slide-content?${params.toString()}`)

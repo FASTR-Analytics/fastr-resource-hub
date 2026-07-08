@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSessionMarkdown, resolveLibrarySlideContent } from './deckBuilder'
+import { buildSessionMarkdown, buildSessionMarkdownWithSources, countRenderedSlides, resolveLibrarySlideContent } from './deckBuilder'
 import type { WorkshopConfig } from '../db/database'
 
 /**
@@ -69,6 +69,45 @@ describe('buildSessionMarkdown — custom slide resolution', () => {
     expect(result).not.toContain('theme: fastr')
     expect(result).not.toContain('paginate: true')
     expect(result).toContain('# Body only')
+  })
+
+  it('keeps all slides of a multi-slide file without frontmatter (regression: the old multiline regex ate the content between the first two internal --- separators)', async () => {
+    const customSlideMap = new Map<string, string>([
+      ['multi.md', '# Slide one\n\nFirst body\n\n---\n\n# Slide two\n\nSecond body\n\n---\n\n# Slide three\n\nThird body\n'],
+    ])
+
+    const result = await buildSessionMarkdown(
+      { session: 'Multi', slides: ['custom_slides/multi.md'] },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+      customSlideMap,
+    )
+
+    expect(result).toContain('# Slide one')
+    expect(result).toContain('# Slide two')
+    expect(result).toContain('# Slide three')
+    expect(result).toContain('Second body')
+  })
+
+  it('still strips frontmatter from a multi-slide file that has it', async () => {
+    const customSlideMap = new Map<string, string>([
+      ['multi_fm.md', '---\nmarp: true\n---\n\n# Slide one\n\n---\n\n# Slide two\n'],
+    ])
+
+    const result = await buildSessionMarkdown(
+      { session: 'Multi', slides: ['custom_slides/multi_fm.md'] },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+      customSlideMap,
+    )
+
+    expect(result).not.toContain('marp: true')
+    expect(result).toContain('# Slide one')
+    expect(result).toContain('# Slide two')
   })
 
   it('strips a trailing slide separator so deck joining stays clean', async () => {
@@ -155,6 +194,130 @@ describe('buildSessionMarkdown — custom slide resolution', () => {
 
     expect(result).toBeTruthy()
     expect(result).toContain('PLACEHOLDER')
+  })
+})
+
+describe('buildSessionMarkdownWithSources — slide overrides + provenance', () => {
+  it('applies a slideOverride in the slides[] path and flags the chunk overridden', async () => {
+    const customSlideMap = new Map<string, string>([
+      ['fork_welcome_slide.md', '# Edited welcome\n\nPer-workshop version'],
+    ])
+
+    const result = await buildSessionMarkdownWithSources(
+      {
+        session: 'Welcome',
+        slides: ['welcome_slide.md'],
+        slideOverrides: { 'welcome_slide.md': 'custom_slides/fork_welcome_slide.md' },
+      },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+      customSlideMap,
+    )
+
+    expect(result).toBeTruthy()
+    expect(result!.markdown).toContain('# Edited welcome')
+    expect(result!.chunks).toHaveLength(1)
+    expect(result!.chunks[0].source).toMatchObject({
+      ref: 'welcome_slide.md',
+      kind: 'library',
+      editable: true,
+      overridden: true,
+    })
+  })
+
+  it('substitutes {{VAR}} placeholders inside override content', async () => {
+    const customSlideMap = new Map<string, string>([
+      ['fork_welcome_slide.md', '# {{WORKSHOP_NAME}}\n\nEdited'],
+    ])
+
+    const result = await buildSessionMarkdownWithSources(
+      {
+        session: 'Welcome',
+        slides: ['welcome_slide.md'],
+        slideOverrides: { 'welcome_slide.md': 'custom_slides/fork_welcome_slide.md' },
+      },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+      customSlideMap,
+    )
+
+    expect(result!.markdown).toContain('# Rwanda 2026')
+    expect(result!.markdown).not.toContain('{{WORKSHOP_NAME}}')
+  })
+
+  it('applies a slideOverride in the topics path (library module file)', async () => {
+    const customSlideMap = new Map<string, string>([
+      ['fork_m0_1_what_is_fastr.md', '# What is FASTR (edited)\n\nWorkshop-specific framing'],
+    ])
+
+    const result = await buildSessionMarkdownWithSources(
+      {
+        session: 'Intro',
+        topics: ['m0_1'],
+        slideOverrides: { 'm0_1_what_is_fastr.md': 'custom_slides/fork_m0_1_what_is_fastr.md' },
+      },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+      customSlideMap,
+    )
+
+    expect(result).toBeTruthy()
+    expect(result!.markdown).toContain('# What is FASTR (edited)')
+    const topicChunk = result!.chunks.find(c => c.source.ref === 'm0_1_what_is_fastr.md')
+    expect(topicChunk?.source).toMatchObject({ kind: 'library', editable: true, overridden: true })
+  })
+
+  it('marks computed and generated chunks non-editable', async () => {
+    const result = await buildSessionMarkdownWithSources(
+      { session: 'Break', type: 'break', duration: 15 },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+    )
+    expect(result!.chunks).toHaveLength(1)
+    expect(result!.chunks[0].source).toMatchObject({ ref: null, kind: 'computed', editable: false })
+
+    const topicResult = await buildSessionMarkdownWithSources(
+      { session: 'Intro', topics: ['m0_1'] },
+      baseConfig,
+      1,
+      undefined,
+      'en',
+    )
+    // Section cover chunk is generated/non-editable; the topic file chunk is editable
+    expect(topicResult!.chunks[0].source).toMatchObject({ ref: null, kind: 'generated', editable: false })
+    expect(topicResult!.chunks[1].source.editable).toBe(true)
+    expect(topicResult!.chunks[1].source.overridden).toBe(false)
+  })
+})
+
+describe('countRenderedSlides — chunk → rendered-slide mapping', () => {
+  it('counts 1 for a chunk with no separators', () => {
+    expect(countRenderedSlides('# One slide\n\nBody text')).toBe(1)
+  })
+
+  it('counts internal --- separators', () => {
+    expect(countRenderedSlides('# A\n\n---\n\n# B\n\n---\n\n# C')).toBe(3)
+  })
+
+  it('ignores --- inside code fences', () => {
+    expect(countRenderedSlides('# A\n\n```\n---\n```\n\n# still slide A')).toBe(1)
+  })
+
+  it('treats --- directly after text as a setext heading, not a separator', () => {
+    expect(countRenderedSlides('Heading text\n---\n\nBody')).toBe(1)
+  })
+
+  it('counts *** and ___ as separators', () => {
+    expect(countRenderedSlides('# A\n\n***\n\n# B')).toBe(2)
+    expect(countRenderedSlides('# A\n\n___\n\n# B')).toBe(2)
   })
 })
 

@@ -10,6 +10,8 @@ export interface Session {
   module?: string
   topics?: string[]
   slides?: string[]
+  /** Per-workshop slide edits: source ref → custom_slides/<fork> */
+  slideOverrides?: Record<string, string>
   speaker?: string
   duration?: number
   icon?: string
@@ -100,6 +102,8 @@ interface WorkshopStore {
 
   // Config mutations (auto-save)
   updateSession: (dayNum: number, sessionIdx: number, updates: Partial<Session>) => void
+  setSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string, forkRef: string) => void
+  removeSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string) => void
   addSession: (dayNum: number, session: Session) => void
   removeSession: (dayNum: number, sessionIdx: number) => void
   reorderSession: (dayNum: number, fromIdx: number, toIdx: number) => void
@@ -274,6 +278,29 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       set({ currentConfig: newConfig })
       get().saveCurrentWorkshop()
     }
+  },
+
+  // Record a per-workshop slide edit: sourceRef now renders from forkRef
+  setSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string, forkRef: string) => {
+    const { currentConfig } = get()
+    if (!currentConfig) return
+    const session: Session | undefined = (currentConfig.schedule[`day${dayNum}`] || [])[sessionIdx]
+    if (!session) return
+    get().updateSession(dayNum, sessionIdx, {
+      slideOverrides: { ...session.slideOverrides, [sourceRef]: forkRef }
+    })
+  },
+
+  // Drop a per-workshop slide edit (reset to the library version)
+  removeSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string) => {
+    const { currentConfig } = get()
+    if (!currentConfig) return
+    const session: Session | undefined = (currentConfig.schedule[`day${dayNum}`] || [])[sessionIdx]
+    if (!session?.slideOverrides) return
+    const { [sourceRef]: _removed, ...rest } = session.slideOverrides
+    get().updateSession(dayNum, sessionIdx, {
+      slideOverrides: Object.keys(rest).length > 0 ? rest : undefined
+    })
   },
 
   // Add a session

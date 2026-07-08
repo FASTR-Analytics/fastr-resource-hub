@@ -13,6 +13,7 @@ import {
   Trash2,
   Lock,
   ArrowLeft,
+  GitFork,
 } from 'lucide-react'
 
 // Compulsory session types that are locked
@@ -28,6 +29,7 @@ function isSessionLocked(sessionName: string, sessionType: string): boolean {
   return false
 }
 import { CustomSlideEditor } from './CustomSlideEditor'
+import { SlideMarkdownEditor } from './SlideMarkdownEditor'
 import {
   DndContext,
   closestCenter,
@@ -55,6 +57,10 @@ interface SlideData {
   sessionName: string
   sessionType: string
   moduleId: string | null
+  sourceRef: string | null
+  sourceKind: string
+  editable: boolean
+  overridden: boolean
   html: string
 }
 
@@ -71,12 +77,14 @@ interface SessionGroup {
 interface SortableSessionProps {
   session: SessionGroup
   zoom: number
+  workshopLocked: boolean
   onSlideClick: (slide: SlideData) => void
+  onSlideEdit: (slide: SlideData) => void
   onEditClick: (session: SessionGroup) => void
   onDeleteClick: (session: SessionGroup) => void
 }
 
-function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteClick }: SortableSessionProps) {
+function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideEdit, onEditClick, onDeleteClick }: SortableSessionProps) {
   const isLocked = isSessionLocked(session.sessionName, session.sessionType)
 
   const {
@@ -177,6 +185,30 @@ function SortableSession({ session, zoom, onSlideClick, onEditClick, onDeleteCli
               <div className="absolute top-1 left-1 z-10 bg-black/70 text-white text-xs font-bold px-1.5 py-0.5 rounded">
                 {idx + 1}
               </div>
+
+              {/* Edit slide (hover) */}
+              {slide.editable && !workshopLocked && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onSlideEdit(slide)
+                  }}
+                  className="absolute top-1 right-1 z-10 p-1 rounded bg-black/70 text-white opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
+                  title="Edit slide"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+              )}
+
+              {/* Edited-for-this-workshop badge */}
+              {slide.overridden && (
+                <div
+                  className="absolute bottom-1 right-1 z-10 p-1 rounded bg-amber-500/90 text-white"
+                  title="Edited for this workshop"
+                >
+                  <GitFork className="w-3 h-3" />
+                </div>
+              )}
 
               {/* Slide preview iframe */}
               <iframe
@@ -443,7 +475,7 @@ interface SlideSorterProps {
 }
 
 export function SlideSorter({ onBack }: SlideSorterProps) {
-  const { currentWorkshopId, currentConfig, reorderSession, moveSessionToDay, addSession, updateSession, removeSession } = useWorkshopStore()
+  const { currentWorkshopId, currentConfig, workshops, loadWorkshops, reorderSession, moveSessionToDay, addSession, updateSession, removeSession } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -454,6 +486,14 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
   const [showSlideEditor, setShowSlideEditor] = useState(false)
   const [editorDay, setEditorDay] = useState(1)
   const [editingSession, setEditingSession] = useState<SessionGroup | null>(null)
+  const [editingSlide, setEditingSlide] = useState<SlideData | null>(null)
+
+  // Locked workshops are read-only: no per-slide editing
+  const workshopLocked = workshops.find((w) => w.id === currentWorkshopId)?.locked ?? false
+  useEffect(() => {
+    if (workshops.length === 0) loadWorkshops()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -766,7 +806,9 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
                         key={session.sessionId}
                         session={session}
                         zoom={zoom}
+                        workshopLocked={workshopLocked}
                         onSlideClick={setSelectedSlide}
+                        onSlideEdit={setEditingSlide}
                         onEditClick={setEditingSession}
                         onDeleteClick={(s) => {
                           if (confirm(`Delete "${s.sessionName}"? This cannot be undone.`)) {
@@ -829,6 +871,18 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
               <span className="text-gray-400">
                 Slide {selectedSlide.slideIndex + 1}
               </span>
+              {selectedSlide.editable && !workshopLocked && (
+                <button
+                  onClick={() => {
+                    setEditingSlide(selectedSlide)
+                    setSelectedSlide(null)
+                  }}
+                  className="ml-4 inline-flex items-center gap-1.5 px-3 py-1 text-sm bg-gray-700 text-gray-300 hover:text-white hover:bg-fastr-secondary rounded-lg transition-colors align-middle"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                  Edit slide
+                </button>
+              )}
             </div>
 
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
@@ -864,6 +918,23 @@ export function SlideSorter({ onBack }: SlideSorterProps) {
             // Rebuild slides after a short delay
             setTimeout(() => buildSlides(), 500)
           }}
+        />
+      )}
+
+      {/* Per-slide Markdown Editor */}
+      {editingSlide && editingSlide.sourceRef && currentWorkshopId && (
+        <SlideMarkdownEditor
+          workshopId={currentWorkshopId}
+          slide={{
+            sourceRef: editingSlide.sourceRef,
+            sourceKind: editingSlide.sourceKind,
+            overridden: editingSlide.overridden,
+            sessionName: editingSlide.sessionName,
+            dayNumber: editingSlide.dayNumber,
+            sessionIndex: editingSlide.sessionIndex,
+          }}
+          onSaved={() => setTimeout(() => buildSlides(), 300)}
+          onClose={() => setEditingSlide(null)}
         />
       )}
 
