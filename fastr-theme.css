@@ -532,6 +532,41 @@ img.icon {
   align-items: center;
 }
 
+/* Split panel: text on the left, a solid deep-green feature panel on the right
+   that bleeds to the slide edges (mockup 2a). Right-panel bold text uses lime
+   as the accent. PPTX mirrors this in buildTwoColumnSlide (isSplitPanel). */
+.split-panel {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 0;
+  align-items: stretch;
+  margin-top: 0.5em;
+}
+.split-panel > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 44px;
+}
+.split-panel > div:last-child {
+  background: var(--fastr-deep-green);
+  color: #ffffff;
+  padding: 44px 52px;
+  /* bleed to the right and bottom edges (section padding is 72px / 52px) */
+  margin: -8px -72px -52px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.split-panel > div:last-child h1,
+.split-panel > div:last-child h2,
+.split-panel > div:last-child h3,
+.split-panel > div:last-child p,
+.split-panel > div:last-child li { color: #ffffff; border: none; padding-left: 0; }
+.split-panel > div:last-child strong { color: var(--fastr-lime); font-weight: 600; }
+.split-panel > div:last-child ul > li::marker { color: var(--fastr-lime); }
+
 /* ========================================
    ACCENT COLOR THEMES
    ======================================== */

@@ -1283,9 +1283,28 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const isOutputLayout = data.raw.includes('class="output-layout"')
   const isImageRight = data.raw.includes('class="columns-image-right"')
   const isTextLeft = data.raw.includes('class="columns-text-left"')
-  const leftColWidth = isOutputLayout ? 6.8 : isTextLeft ? 6.8 : isImageRight ? 4.5 : 5.5
+  const isSplitPanel = data.raw.includes('class="split-panel"')
+  const leftColWidth = isSplitPanel ? 6.9 : isOutputLayout ? 6.8 : isTextLeft ? 6.8 : isImageRight ? 4.5 : 5.5
   const rightColStart = LAYOUT.marginLeft + leftColWidth + 0.5
   const rightColWidth = LAYOUT.contentWidth - leftColWidth - 0.5
+
+  // Split panel: draw the deep-green feature panel bleeding to the right and
+  // bottom edges before rendering the (white) right-column content on top.
+  let panelTextX = rightColStart
+  let panelContentTop = contentTop
+  let panelWidth = rightColWidth
+  if (isSplitPanel) {
+    const panelX = LAYOUT.marginLeft + leftColWidth + 0.35
+    const panelY = Math.max(contentTop - 0.25, 1.05)
+    slide.addShape('rect', {
+      x: panelX, y: panelY, w: LAYOUT.width - panelX, h: LAYOUT.height - panelY,
+      fill: { color: COLORS.deepGreen },
+      line: { type: 'none' },
+    } as any)
+    panelTextX = panelX + 0.5
+    panelContentTop = panelY + 0.5
+    panelWidth = LAYOUT.width - panelTextX - 0.4
+  }
 
   // Parse column content into text items (bullets, paragraphs, headers, table rows)
   interface ColumnContent {
@@ -1368,8 +1387,12 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const leftHasImage = /!\[/.test(data.columns.left) || /<img/.test(data.columns.left)
   const rightHasImage = /!\[/.test(data.columns.right) || /<img/.test(data.columns.right)
 
-  // Helper to render column content (bullets, paragraphs, headers, tables)
-  function renderColumnContent(columnContent: string, x: number, y: number, w: number): void {
+  // Helper to render column content (bullets, paragraphs, headers, tables).
+  // opts overrides text/header colors (used by the split-panel right column,
+  // which is white text with lime headers over a deep-green panel).
+  function renderColumnContent(columnContent: string, x: number, y: number, w: number, opts?: { textColor?: string; headerColor?: string }): void {
+    const textColor = opts?.textColor ?? COLORS.textDark
+    const headerColor = opts?.headerColor ?? COLORS.darkGreen
     const items = parseColumnContent(columnContent)
     if (items.length === 0) return
 
@@ -1419,7 +1442,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           options: {
             fontSize: item.level === 4 ? FONTS.bodySize : FONTS.h3Size,
             fontFace: FONTS.family,
-            color: item.level === 4 ? COLORS.darkGreen : COLORS.darkGreen,
+            color: headerColor,
             bold: true,
             breakLine: true,
             paraSpaceAfter: 8,
@@ -1431,7 +1454,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           options: {
             fontSize: FONTS.bodySize,
             fontFace: FONTS.family,
-            color: COLORS.textDark,
+            color: textColor,
             bullet: true,
             breakLine: true,
             paraSpaceAfter: 6,
@@ -1441,7 +1464,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         const baseOptions = {
           fontSize: FONTS.bodySize,
           fontFace: FONTS.family,
-          color: COLORS.textDark,
+          color: textColor,
           paraSpaceAfter: 10,
         }
         const runs = parseInlineFormatting(item.text, baseOptions)
@@ -1519,6 +1542,11 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         }
       }
     }
+  } else if (isSplitPanel) {
+    // White text on the deep-green panel; bold/headers pick up lime.
+    renderColumnContent(data.columns.right, panelTextX, panelContentTop, panelWidth, {
+      textColor: COLORS.white, headerColor: COLORS.lime,
+    })
   } else {
     renderColumnContent(data.columns.right, rightColStart, contentTop, rightColWidth)
   }
