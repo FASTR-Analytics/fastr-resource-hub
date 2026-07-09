@@ -986,9 +986,16 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
 function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const slide = pptx.addSlide()
-  // classic/minimal: warm off-white field; fastr2026: dark deep-green field
+  // classic/minimal: warm off-white field. fastr2026: the waves ![bg] (deep
+  // green baked in), falling back to a solid deep-green if the image is missing.
   const dark = currentTheme.breakStyle === 'dark'
-  slide.background = { color: dark ? COLORS.deepGreen : COLORS.paper2 }
+  const bgMatch = dark ? data.raw.match(/!\[bg\]\(([^)]+)\)/) : null
+  const bgPath = bgMatch ? resolveImagePath(bgMatch[1].split(/\s/)[0]) : null
+  if (bgPath) {
+    addSlideImage(slide, { path: bgPath, x: 0, y: 0, w: LAYOUT.width, h: LAYOUT.height })
+  } else {
+    slide.background = { color: dark ? COLORS.deepGreen : COLORS.paper2 }
+  }
 
   // New structure: kind label + big duration (h1) + "we resume at" line.
   // Fall back to the old "**N minutes** / resume at HH:MM" prose if present.

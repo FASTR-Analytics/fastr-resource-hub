@@ -51,9 +51,10 @@ section.lead h2 {
   padding-bottom: 0;
 }
 
-/* Break slides go dark: deep-green field, lime kind label and duration rule. */
+/* Break slides go dark: the waves ![bg] provides the deep-green field, so the
+   section itself stays transparent (an opaque colour would hide the image). */
 section.break {
-  background: var(--fastr-deep-green);
+  background: transparent;
 }
 section.break .kind {
   color: var(--fastr-lime);

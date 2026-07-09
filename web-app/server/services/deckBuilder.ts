@@ -491,7 +491,8 @@ async function buildSessionChunks(
 
   // Break slides
   if (session.type === 'break') {
-    return computed(buildBreakSlide(session, language))
+    const darkBreak = getThemeSpec((config.workshop as any).theme).breakStyle === 'dark'
+    return computed(buildBreakSlide(session, language, darkBreak))
   }
 
   // Day recap
@@ -1314,7 +1315,7 @@ function calculateResumeTime(session: Session): string {
 /**
  * Build a break slide
  */
-function buildBreakSlide(session: Session, language: Language = 'en'): string {
+function buildBreakSlide(session: Session, language: Language = 'en', darkBreak = false): string {
   const lunchPattern = /lunch|déjeuner|dejeuner|dîner|diner|midi|almoço|almoco/i
   const isLunch = lunchPattern.test(session.session)
   const duration = session.duration || (isLunch ? 60 : 15)
@@ -1326,10 +1327,15 @@ function buildBreakSlide(session: Session, language: Language = 'en'): string {
     ? `<div class="back">${t('resumeAt', language)} <b>${resumeTime}</b></div>`
     : ''
 
-  // Design-style break: warm field, kind label, big duration, resume line — no emoji.
+  // Dark-break themes (e.g. FASTR 2026) put the waves field behind the break;
+  // applyThemeAssets swaps section_slide.png → the theme's sectionBg. Paper
+  // themes get no background image (the CSS warm field shows).
+  const bg = darkBreak ? '![bg](../../resources/backgrounds/section_slide.png)\n\n' : ''
+
+  // Design-style break: kind label, big duration, resume line — no emoji.
   return `<!-- _class: break -->
 
-<div class="kind">${kind}</div>
+${bg}<div class="kind">${kind}</div>
 
 # ${duration} min
 

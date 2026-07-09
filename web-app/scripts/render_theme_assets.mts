@@ -24,12 +24,10 @@ const field = (extra = '') => `
     <img src="${WAVES}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
   </div>`
 
+// Cover and section divider both use the clean waves field over deep green.
 const pages: Record<string, string> = {
   'section_slide_2026.png': field(),
-  // Cover: a soft darker sweep top-right for depth, then the waves on top.
-  'cover_slide_2026.png': field(
-    `<div style="position:absolute;top:-400px;right:-400px;width:1400px;height:1400px;border-radius:50%;background:#063D39;opacity:.5;"></div>`,
-  ),
+  'cover_slide_2026.png': field(),
 }
 
 const browser = await puppeteer.launch({
