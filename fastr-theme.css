@@ -69,7 +69,20 @@ section {
   line-height: 1.45;
   letter-spacing: -0.005em;
   position: relative;
+  /* Pin content to the top so the title sits in a fixed position under the
+     kicker (matching the PPTX), instead of Marp's default vertical centering
+     that floats the title into the middle. Covers/breaks re-center below. */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
+
+/* Self-contained slide types keep vertical centering. */
+section.lead,
+section.title-cover,
+section.section-cover,
+section.break,
+section.centered { justify-content: center; }
 
 
 /* ========================================
