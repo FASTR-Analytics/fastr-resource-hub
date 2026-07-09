@@ -7,6 +7,42 @@ slides:
   order: 1.0
   variant: full
   title: 'Activity: Importing data'
+- file: m9a_1a_adding_indicators_overview.md
+  order: 1.01
+  variant: full
+  title: Adding indicators to your instance
+- file: m9a_1b_phase1_identify_dhis2.md
+  order: 1.02
+  variant: full
+  title: 'Phase 1: Identify the indicator in DHIS2'
+- file: m9a_1c_phase2_document_excel.md
+  order: 1.03
+  variant: full
+  title: 'Phase 2: Document your indicators'
+- file: m9a_1d_phase3_create_common_indicator.md
+  order: 1.04
+  variant: full
+  title: 'Phase 3: Create the common indicator'
+- file: m9a_1e_naming_conventions.md
+  order: 1.05
+  variant: full
+  title: Naming conventions for common indicators
+- file: m9a_1f_phase4_import_dhis2_indicator.md
+  order: 1.06
+  variant: full
+  title: 'Phase 4: Import the DHIS2 indicator'
+- file: m9a_1g_phase5_map_indicator.md
+  order: 1.07
+  variant: full
+  title: 'Phase 5: Map to the common indicator'
+- file: m9a_1h_download_data.md
+  order: 1.08
+  variant: full
+  title: Download the data for your new indicators
+- file: m9a_1i_practice_adding_indicators.md
+  order: 1.09
+  variant: full
+  title: 'Practice: adding indicators as a team'
 - file: m9a_2_installing_running_modules.md
   order: 2.0
   variant: full

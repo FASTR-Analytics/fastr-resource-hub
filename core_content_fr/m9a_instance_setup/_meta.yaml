@@ -7,6 +7,42 @@ slides:
   order: 1.0
   variant: full
   title: 'Activité : Importer des données'
+- file: m9a_1a_adding_indicators_overview.md
+  order: 1.01
+  variant: full
+  title: Ajouter des indicateurs à votre instance
+- file: m9a_1b_phase1_identify_dhis2.md
+  order: 1.02
+  variant: full
+  title: 'Phase 1 : Identifier l''indicateur dans DHIS2'
+- file: m9a_1c_phase2_document_excel.md
+  order: 1.03
+  variant: full
+  title: 'Phase 2 : Documenter vos indicateurs'
+- file: m9a_1d_phase3_create_common_indicator.md
+  order: 1.04
+  variant: full
+  title: 'Phase 3 : Créer l''indicateur commun'
+- file: m9a_1e_naming_conventions.md
+  order: 1.05
+  variant: full
+  title: Conventions de nommage des indicateurs communs
+- file: m9a_1f_phase4_import_dhis2_indicator.md
+  order: 1.06
+  variant: full
+  title: 'Phase 4 : Importer l''indicateur DHIS2'
+- file: m9a_1g_phase5_map_indicator.md
+  order: 1.07
+  variant: full
+  title: 'Phase 5 : Mapper vers l''indicateur commun'
+- file: m9a_1h_download_data.md
+  order: 1.08
+  variant: full
+  title: Télécharger les données de vos nouveaux indicateurs
+- file: m9a_1i_practice_adding_indicators.md
+  order: 1.09
+  variant: full
+  title: 'Séance pratique : ajouter des indicateurs en équipe'
 - file: m9a_2_installing_running_modules.md
   order: 2.0
   variant: full
