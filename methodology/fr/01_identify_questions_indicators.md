@@ -234,6 +234,24 @@ Au Nigeria, FASTR permet le suivi trimestriel des performances dans le cadre de 
 ![Suivi FASTR Éthiopie h:440](resources/screenshots/country_examples/ethiopia_example.png)
 <!-- /SLIDE -->
 
+<!-- SLIDE:m1_1a4 -->
+## Ghana : Évaluation mensuelle de la qualité et retour aux régions
+
+Deux cas d'utilisation du Ghana montrent comment les résultats de FASTR nourrissent de vraies décisions.
+
+**Évaluation mensuelle de la qualité et retour aux régions**
+
+- Question : Comment FASTR peut-il fournir des évaluations mensuelles automatisées de la qualité des données et un retour exploitable à chaque région ?
+- Audience : Directions régionales de la santé, responsables régionaux de l'information sanitaire, équipes de suivi
+- Résultat : Tableaux de bord régionaux mensuels de qualité des données, assortis de recommandations d'amélioration précises
+
+**Suivi de la mise en œuvre de la politique de gratuité des SSP**
+
+- Question : Le déploiement de la gratuité des soins de santé primaires a-t-il augmenté l'utilisation des établissements dans les régions ?
+- Audience : Direction de la PPMED et directeurs régionaux de la santé
+- Résultat : Note trimestrielle de tendance comparant les volumes de services avant et après la politique
+<!-- /SLIDE -->
+
 <!-- SLIDE:m1_1b -->
 ## Quel est notre cas d'utilisation commun des données qui sera au centre de cet atelier ?
 
@@ -247,6 +265,60 @@ Suite à d'importants changements dans la disponibilité des ressources provenan
 - Quelle est l'ampleur des coupes, et quel effet ont-elles sur la prestation de services ?
 - Quelle est la meilleure façon de prioriser les ressources restantes ?
 - Quelles autres adaptations peuvent protéger et renforcer la prestation de services essentiels pour les femmes, les enfants et les adolescents ?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b2 -->
+## Comment FASTR et la cartographie des ressources (RMET) se complètent
+
+FASTR s'intéresse à la **prestation de services** — la qualité des données, l'évolution de l'utilisation des services (à la hausse ou à la baisse), la capacité des établissements à fournir les services, et la variation de la performance selon les services, les zones géographiques et le temps. En général chaque trimestre.
+
+La cartographie des ressources et le suivi des dépenses (**RMET**) s'intéressent à **l'argent** — l'enveloppe de ressources disponibles par rapport aux besoins, le financement des programmes, l'alignement des investissements sur les priorités et leur allocation équitable, et l'efficacité de l'exécution des budgets engagés. En général chaque année.
+
+Réunis, ils appuient la priorisation et l'adaptation, en répondant à une question centrale : **la disponibilité des financements correspond-elle à la performance des programmes ?**
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b3 -->
+## Trianguler FASTR et RMET
+
+Les résultats de FASTR et de RMET donnent une image cohérente de la prestation de services et peuvent être triangulés pour cerner les causes profondes plausibles des perturbations des systèmes de santé — mais seulement si quatre éléments sont alignés de manière intentionnelle :
+
+- **Périodes** — les analyses couvrent des périodes comparables
+- **Désagrégation** — les données sont ventilées de la même façon (géographie, service)
+- **Voies de diffusion** — les résultats atteignent les mêmes instances de décision
+- **Besoins d'utilisation** — les deux répondent aux mêmes décisions et processus
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b4 -->
+## Activité : identifiez vos cas d'utilisation
+
+Pensez aux décisions que votre équipe prend régulièrement. Quelles questions revenez-vous poser sans parvenir à y répondre avec les données ?
+
+**Discussion guidée, en petit groupe :**
+
+- Quelles sont les 2 à 3 priorités de santé principales dans votre pays, région ou district en ce moment ?
+- Quelles questions de données reviennent le plus souvent dans vos réunions de revue ?
+- Quand vous recevez les données DHIS2, que regardez-vous en premier, et pourquoi ?
+- Que décideriez-vous différemment avec une analyse meilleure ou plus rapide ?
+- Qui sont les décideurs clés qui ont besoin des résultats analytiques de votre équipe ?
+
+**Remue-méninges ouvert — 5 minutes :** listez autant de cas d'utilisation potentiels que possible. Ne filtrez pas et ne jugez pas encore — pensez largement au suivi, à l'évaluation, à la planification et à la redevabilité.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b5 -->
+## Activité : développez vos cas d'utilisation
+
+En petit groupe, sélectionnez 1 à 2 cas d'utilisation issus de votre remue-méninges et développez chacun à l'aide de ce cadre. Soyez aussi précis que possible.
+
+**Pour chaque cas d'utilisation, définissez :**
+
+- **Question de politique** — la question précise, en une phrase
+- **Pourquoi c'est important** — la décision ou l'action qui dépend de cette analyse
+- **Audience cible** — qui recevra le résultat et agira dessus
+- **Données requises** — les indicateurs et sources de données que vous utiliserez
+- **Format du résultat** — une note, un tableau de bord ou une fiche de score
+- **Calendrier** — quand l'analyse est nécessaire, et à quelle fréquence la mettre à jour
+
+**Conseils pour de bons cas d'utilisation :** partez d'une vraie décision que quelqu'un doit prendre ; soyez assez précis pour commencer l'analyse dès demain ; restez réaliste avec les données et outils dont vous disposez ; et pensez à qui portera l'utilisation des résultats.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1c -->

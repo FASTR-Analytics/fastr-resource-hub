@@ -15,11 +15,31 @@ slides:
   order: 1.013
   variant: full
   title: 'Éthiopie : Suivi des résultats des programmes gouvernementaux'
+- file: m1_1a4_ghana_quality_feedback.md
+  order: 1.014
+  variant: full
+  title: 'Ghana : Évaluation mensuelle de la qualité et retour aux régions'
 - file: m1_1b_common_data_use_case.md
   order: 1.02
   variant: full
   title: Quel est notre cas d'utilisation commun des données qui sera au centre de
     cet atelier ?
+- file: m1_1b2_rmet_triangulation.md
+  order: 1.022
+  variant: full
+  title: Comment FASTR et la cartographie des ressources (RMET) se complètent
+- file: m1_1b3_rmet_alignment.md
+  order: 1.023
+  variant: full
+  title: Trianguler FASTR et RMET
+- file: m1_1b4_activity_identify_use_cases.md
+  order: 1.024
+  variant: full
+  title: 'Activité : identifiez vos cas d''utilisation'
+- file: m1_1b5_activity_develop_use_cases.md
+  order: 1.025
+  variant: full
+  title: 'Activité : développez vos cas d''utilisation'
 - file: m1_1c_how_select_indicators.md
   order: 1.03
   variant: full

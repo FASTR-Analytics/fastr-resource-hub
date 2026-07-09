@@ -230,6 +230,24 @@ In Nigeria, FASTR is enabling quarterly performance monitoring for the National 
 ![Ethiopia FASTR monitoring h:440](resources/screenshots/country_examples/ethiopia_example.png)
 <!-- /SLIDE -->
 
+<!-- SLIDE:m1_1a4 -->
+## Ghana: Monthly quality assessment and feedback
+
+Two use cases from Ghana show how FASTR outputs feed real decisions.
+
+**Monthly quality assessment and feedback to regions**
+
+- Question: How can FASTR deliver automated monthly data quality assessments and actionable feedback to each region?
+- Audience: Regional health directorates, health information officers, monitoring teams
+- Output: Monthly regional data quality scorecards with specific improvement recommendations
+
+**Monitoring Free PHC policy implementation**
+
+- Question: Has the rollout of Free Primary Healthcare increased facility utilization across regions?
+- Audience: PPMED leadership and regional health directors
+- Output: Quarterly trend brief comparing pre- and post-policy service volumes
+<!-- /SLIDE -->
+
 <!-- SLIDE:m1_1b -->
 ## What is our common data use case that will be the focus of this workshop?
 
@@ -243,6 +261,60 @@ Following large shifts in resource availability from external sources, many coun
 - What is the magnitude of the cuts, and what effect are they having on service delivery?
 - What is the optimal way to prioritize remaining resources?
 - What other adaptations can safeguard and strengthen essential service delivery for women, children and adolescents?
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b2 -->
+## How FASTR and resource mapping (RMET) work together
+
+FASTR looks at **service delivery** — data quality, whether service use is rising or falling, whether facilities are ready to deliver services, and how performance varies across services, geographies, and time. Usually quarterly.
+
+Resource mapping and expenditure tracking (**RMET**) looks at **the money** — the envelope of resources available versus needed, how programs are financed, whether investments are aligned to priorities and equitably allocated, and whether committed budgets are spent efficiently. Usually annually.
+
+Brought together, they support prioritization and adaptation, answering one central question: **does funding availability line up with program performance?**
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b3 -->
+## Triangulating FASTR and RMET
+
+Findings from FASTR and RMET give a cohesive picture of service delivery and can be triangulated to drill down into the plausible root causes of health-system disruptions — but only if four things are intentionally aligned:
+
+- **Time periods** — the analyses cover comparable periods
+- **Disaggregation** — data is broken down the same way (geography, service)
+- **Dissemination pathways** — findings reach the same decision forums
+- **Data-use needs** — both speak to the same decisions and processes
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b4 -->
+## Activity: identify your use cases
+
+Think about the decisions your team makes regularly. What questions do you keep asking but struggle to answer with data?
+
+**Guided discussion, in your small group:**
+
+- What are the top 2–3 health priorities in your country, region, or district right now?
+- What data questions come up most often in your review meetings?
+- When you receive DHIS2 data, what do you look at first, and why?
+- What would you decide differently with better or faster analysis?
+- Who are the key decision-makers who need analytical outputs from your team?
+
+**Open brainstorm — 5 minutes:** list as many potential use cases as you can. Do not filter or judge yet — think broadly about monitoring, evaluation, planning, and accountability.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m1_1b5 -->
+## Activity: develop your use cases
+
+In your small group, select 1–2 use cases from your brainstorm and develop each one using this framework. Be as specific as possible.
+
+**For each use case, define:**
+
+- **Policy question** — the specific question, in one sentence
+- **Why it matters** — the decision or action that depends on this analysis
+- **Target audience** — who will receive and act on the output
+- **Data required** — the indicators and data sources you will use
+- **Output format** — a brief, a dashboard, or a scorecard
+- **Timeline** — when the analysis is needed, and how often to update it
+
+**Tips for strong use cases:** start with a real decision someone needs to make; be specific enough to start the analysis tomorrow; keep it feasible with the data and tools you have; and think about who will champion the findings.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_1c -->

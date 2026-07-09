@@ -15,10 +15,30 @@ slides:
   order: 1.013
   variant: full
   title: 'Ethiopia: Monitoring government program results'
+- file: m1_1a4_ghana_quality_feedback.md
+  order: 1.014
+  variant: full
+  title: 'Ghana: Monthly quality assessment and feedback'
 - file: m1_1b_common_data_use_case.md
   order: 1.02
   variant: full
   title: What is our common data use case that will be the focus of this workshop?
+- file: m1_1b2_rmet_triangulation.md
+  order: 1.022
+  variant: full
+  title: How FASTR and resource mapping (RMET) work together
+- file: m1_1b3_rmet_alignment.md
+  order: 1.023
+  variant: full
+  title: Triangulating FASTR and RMET
+- file: m1_1b4_activity_identify_use_cases.md
+  order: 1.024
+  variant: full
+  title: 'Activity: identify your use cases'
+- file: m1_1b5_activity_develop_use_cases.md
+  order: 1.025
+  variant: full
+  title: 'Activity: develop your use cases'
 - file: m1_1c_how_select_indicators.md
   order: 1.03
   variant: full
