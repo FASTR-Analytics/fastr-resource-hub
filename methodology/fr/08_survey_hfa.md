@@ -54,17 +54,28 @@ Les enquêtes téléphoniques sont menées par des enquêteurs formés à l'aide
 - **Fréquence** : Trimestrielle ou selon les besoins
 - **Contrôle de la qualité** Rappels, contrôle par le superviseur, validation des données
 
+### Validité des enquêtes téléphoniques
+
+Les enquêtes téléphoniques ont été validées par rapport aux enquêtes en présentiel et donnent des résultats concordants. Dans une comparaison au Ghana (n = 63 établissements), aucune différence significative des scores moyens n'a été observée entre l'approche téléphonique et l'approche en présentiel, et les vérifications au niveau des items — comme les effectifs moyens de personnel — n'ont montré aucune différence significative. La plupart des items donnent de bons résultats par téléphone ; quelques items liés aux approvisionnements et aux infrastructures se vérifient mieux en présentiel et peuvent être signalés pour une visite de suivi.
+
 ### Structure du questionnaire
 
-Le questionnaire standard de la FASTR HFA couvre :
+Le questionnaire de la FASTR HFA est un instrument modulaire fondé sur le **cadre PHCMFI de l'OMS** (Primary Health Care Measurement Framework and Indicators) et harmonisé avec les outils d'évaluation des établissements HHFA, SARA, SPA et SDI. Les pays l'adaptent à leur contexte.
 
-1. **Identification de l'installation** - Vérification des détails de l'installation
-2. **Statut opérationnel** - Fonctionnement actuel, fermetures éventuelles
-3. **Disponibilité des services** - Quels sont les services actuellement offerts ?
-4. **Effectifs** - Présence actuelle du personnel par cadre
-5. **Fournitures de première nécessité** - état des stocks de médicaments et de produits de base essentiels
-6. **Infrastructure** - Services publics de base (eau, électricité)
-7. **Défis récents** - questions ouvertes sur les problèmes actuels
+L'instrument couvre dix modules :
+
+1. **Chocs externes** - Exposition aux perturbations récentes (coupes de financement, urgences, événements climatiques)
+2. **Résilience aux chocs** - Comment les établissements font face et s'adaptent
+3. **Offre de services** - Quels services sont actuellement offerts
+4. **Infrastructure** - Eau, électricité et services de base
+5. **Financement** - Financement au niveau de l'établissement et frais d'utilisation
+6. **Personnel** - Présence du personnel et effectifs par cadre
+7. **Fournitures médicales** - État des stocks de médicaments et produits essentiels
+8. **Leadership et coordination**
+9. **Engagement communautaire**
+10. **Processus d'amélioration de la qualité des soins**
+
+Les modules optionnels comprennent la préparation aux urgences, la vaccination (avec Gavi), la capacité opérationnelle pour les CPN, et la capacité opérationnelle pour les accouchements/SONU.
 
 ---
 
@@ -96,6 +107,10 @@ Tester le questionnaire adapté auprès d'un petit échantillon d'établissement
 
 **Étape 5 : Finalisation**
 Incorporer les commentaires du pré-test et préparer la version finale pour la formation.
+
+### Conception adaptative de cycle en cycle
+
+Au-delà de l'adaptation ponctuelle par pays, le contenu de l'enquête s'adapte de cycle en cycle. Un ensemble de modules de base est administré chaque trimestre pour suivre l'évolution de façon cohérente dans le temps, tandis que d'autres modules alternent d'un cycle à l'autre — offrant de nouvelles perspectives à chaque cycle et permettant un apprentissage continu sans allonger une seule enquête.
 
 ---
 
@@ -303,6 +318,18 @@ Les questions sont issues du cadre PHCMFI de l'OMS et harmonisées avec les outi
 </div>
 
 > L'instrument est **100 % adaptable** par les pays — les modules peuvent être ajoutés, retirés ou séquencés selon les priorités locales.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_2 -->
+## Peut-on faire confiance à une enquête par téléphone ?
+
+Une question légitime — une enquête menée par téléphone est-elle aussi fiable qu'une visite en présentiel ? Les données montrent que les deux sont concordantes.
+
+**Comparaison au Ghana (n = 63 établissements) :** aucune différence significative des scores moyens entre l'enquête téléphonique et l'enquête en présentiel.
+
+Les vérifications au niveau des items vont dans le même sens — par exemple, les effectifs moyens de personnel ne présentent aucune différence significative entre l'enquête téléphonique et les visites en présentiel.
+
+La plupart des items donnent de bons résultats par téléphone. Quelques items liés aux approvisionnements et aux infrastructures se vérifient mieux en présentiel, et les pays peuvent les signaler pour une visite de suivi.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_3 -->

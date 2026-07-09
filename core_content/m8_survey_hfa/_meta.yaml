@@ -23,6 +23,10 @@ slides:
   order: 1.03
   variant: full
   title: Survey structure — 10 modules
+- file: m8_2_validity_phone_surveys.md
+  order: 2.0
+  variant: full
+  title: Can a survey done by phone be trusted?
 - file: m8_3_snis_hfa_integration.md
   order: 3.0
   variant: full

@@ -23,6 +23,10 @@ slides:
   order: 1.03
   variant: full
   title: Structure de l'enquête — 10 modules
+- file: m8_2_validity_phone_surveys.md
+  order: 2.0
+  variant: full
+  title: Peut-on faire confiance à une enquête par téléphone ?
 - file: m8_3_snis_hfa_integration.md
   order: 3.0
   variant: full

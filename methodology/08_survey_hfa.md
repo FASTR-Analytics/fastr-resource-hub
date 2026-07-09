@@ -51,17 +51,28 @@ Phone surveys are conducted by trained enumerators using a standardized question
 - **Frequency**: Quarterly or as needed
 - **Quality control**: Call-backs, supervisor monitoring, data validation
 
+### Validity of phone surveys
+
+Phone surveys have been validated against in-person surveys and give consistent results. In a comparison in Ghana (n = 63 facilities), there was no significant difference in mean scores between the phone and in-person approaches, and item-level checks such as mean staffing numbers showed no significant difference. Most items perform strongly by phone; a few supply- and infrastructure-related items are better verified in person and can be flagged for a follow-up visit.
+
 ### Questionnaire structure
 
-The standard FASTR HFA questionnaire covers:
+The FASTR HFA questionnaire is a modular instrument built on the **WHO Primary Health Care Measurement Framework and Indicators (PHCMFI)** and harmonized with the HHFA, SARA, SPA, and SDI facility-assessment tools. Countries adapt it to their context.
 
-1. **Facility identification** - Verification of facility details
-2. **Operational status** - Current functioning, any closures
-3. **Service availability** - Which services are currently offered
-4. **Staffing** - Current staff presence by cadre
-5. **Essential supplies** - Stock status of key medicines and commodities
-6. **Infrastructure** - Basic utilities (water, electricity)
-7. **Recent challenges** - Open-ended on current issues
+The instrument covers ten modules:
+
+1. **External shocks** - Exposure to recent disruptions (funding cuts, emergencies, climate events)
+2. **Resilience to shocks** - How facilities cope and adapt
+3. **Service delivery** - Which services are currently offered
+4. **Infrastructure** - Water, electricity, and basic utilities
+5. **Financing** - Facility-level financing and user fees
+6. **Workforce** - Staff presence and staffing levels by cadre
+7. **Medical supplies** - Stock status of key medicines and commodities
+8. **Leadership and coordination**
+9. **Community engagement**
+10. **Quality-of-care improvement processes**
+
+Optional modules include emergency preparedness, immunization (with Gavi), ANC operational capacity, and delivery/EmONC operational capacity.
 
 ---
 
@@ -93,6 +104,10 @@ Test adapted questionnaire with a small sample of facilities.
 
 **Step 5: Finalize**
 Incorporate pre-test feedback and prepare final version for training.
+
+### Adaptive round-to-round design
+
+Beyond one-time country adaptation, the survey content adapts from round to round. A set of core modules runs every quarter to track change consistently over time, while other modules rotate in and out across rounds — giving fresh perspectives each cycle and enabling continuous learning without lengthening any single survey.
 
 ---
 
@@ -235,6 +250,18 @@ Questions are drawn from the WHO PHCMFI framework and harmonized with the HHFA, 
 </div>
 
 > The instrument is **100% adaptable** by countries — modules can be added, dropped, or sequenced to fit local priorities.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m8_2 -->
+## Can a survey done by phone be trusted?
+
+A fair question — is a survey done over the phone as reliable as an in-person visit? The evidence says the two are consistent.
+
+**Ghana comparison (n = 63 facilities):** no significant difference in mean scores between the phone survey and the in-person survey.
+
+Item-level checks point the same way — for example, mean staffing numbers showed no significant difference between the phone survey and in-person visits.
+
+Most items perform strongly by phone. A few supply- and infrastructure-related items are better verified in person, and countries can flag those for a follow-up visit.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_0a -->
