@@ -64,6 +64,39 @@ export interface ThemeSpec {
   coverBg: string
   /** resources/backgrounds/<file> used for section covers */
   sectionBg: string
+  /** Design font families (the CSS/deck typeface). The PPTX path maps these to
+   *  embeddable system fonts via mapFontForPptx (Poppins→Calibri, serif→Georgia,
+   *  …) so PPTX never silently falls back. */
+  titleFont: string
+  bodyFont: string
+}
+
+// PPTX cannot embed webfonts, so every deck typeface maps to a system font that
+// ships with Office on Windows + Mac. Adopted from the FASTR platform's own
+// PPTX renderer (panther/_122_pptx/font_mapping.ts) so the two stay aligned.
+const PPTX_FONT_MAP: Record<string, string> = {
+  // Sans-serif → Calibri
+  Poppins: 'Calibri',
+  Inter: 'Calibri',
+  Roboto: 'Calibri',
+  'Fira Sans': 'Calibri',
+  'Noto Sans': 'Calibri',
+  'Source Sans 3': 'Calibri',
+  // Condensed → Arial Narrow
+  'Roboto Condensed': 'Arial Narrow',
+  'Fira Sans Condensed': 'Arial Narrow',
+  // Serif → Georgia (for a future editorial/serif theme)
+  Merriweather: 'Georgia',
+  'Source Serif 4': 'Georgia',
+  'Tiempos Text': 'Georgia',
+  // Monospace → Consolas
+  'Roboto Mono': 'Consolas',
+  'Fira Mono': 'Consolas',
+}
+
+/** Map a design font family to a PPTX-safe system font (unknown → unchanged). */
+export function mapFontForPptx(fontFamily: string): string {
+  return PPTX_FONT_MAP[fontFamily] ?? fontFamily
 }
 
 export const THEMES: Record<string, ThemeSpec> = {
@@ -76,6 +109,8 @@ export const THEMES: Record<string, ThemeSpec> = {
     breakStyle: 'paper',
     coverBg: 'cover_slide_clean.png',
     sectionBg: 'section_slide.png',
+    titleFont: 'Poppins',
+    bodyFont: 'Poppins',
   },
   fastr2026: {
     id: 'fastr2026',
@@ -86,6 +121,8 @@ export const THEMES: Record<string, ThemeSpec> = {
     breakStyle: 'dark',
     coverBg: 'cover_slide_2026.png',
     sectionBg: 'section_slide_2026.png',
+    titleFont: 'Poppins',
+    bodyFont: 'Poppins',
   },
   minimal: {
     id: 'minimal',
@@ -96,6 +133,8 @@ export const THEMES: Record<string, ThemeSpec> = {
     breakStyle: 'paper',
     coverBg: 'cover_slide_clean.png',
     sectionBg: 'section_slide.png',
+    titleFont: 'Poppins',
+    bodyFont: 'Poppins',
   },
 }
 

@@ -5,7 +5,20 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import imageSize from 'image-size'
 import JSZip from 'jszip'
-import { COLORS, getThemeSpec, type ThemeSpec } from './themeTokens.js'
+import { COLORS, getThemeSpec, mapFontForPptx, type ThemeSpec } from './themeTokens.js'
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Slide geometry unit helpers (from the FASTR platform's PPTX renderer,
+// panther/_122_pptx/pptx_units.ts). Slides are designed in a 1280×720 pixel
+// space that matches the deck CSS canvas; these convert to the inches/points
+// pptxgenjs expects. Prefer authoring NEW geometry in px via these helpers so
+// PPTX coordinates stay aligned with the CSS rather than drifting as raw inches.
+// ─────────────────────────────────────────────────────────────────────────────
+const DPI = 96
+const SLIDE_W_PX = 1280
+const SLIDE_H_PX = 720
+const pxToIn = (px: number): number => px / DPI
+const pxToPt = (px: number): number => (px / DPI) * 72
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -22,15 +35,9 @@ const REPO_ROOT = process.env.NODE_ENV === 'production'
 // here — fonts deliberately differ from the deck CSS (see note below).
 
 const FONTS = {
-  // System-safe only: pptxgenjs cannot embed fonts, so a .pptx renders whatever
-  // is installed on the opener's machine (SharePoint, fresh laptops…). Both ship
-  // with Office on Windows + Mac. Poppins (the brand deck font) is NOT a default
-  // Office font and silently fell back — it stays on the Marp/PDF path only.
-  family: 'Calibri',
-  // Calibri (not Calibri Light) for titles — bolded weight visually balances
-  // the new vertical deep-green accent bar; Calibri Light bold read thinner
-  // than the bar and made titles look anemic on content slides.
-  titleFamily: 'Calibri',
+  // Font FACES are resolved per run from the active theme via mapFontForPptx
+  // (see titleFace/bodyFace above) — pptxgenjs can't embed webfonts, so the
+  // brand Poppins maps to system-safe Calibri. Only sizes live here.
   h1Size: 36,
   h2Size: 32,
   h3Size: 22,
@@ -62,6 +69,12 @@ let buildWarnings: string[] = []
 // pattern as buildWarnings). Set from the workshop config at the start of each
 // run; the chrome builders branch on it. Defaults to classic.
 let currentTheme: ThemeSpec = getThemeSpec()
+
+// PPTX-safe font faces for the current run, resolved from the theme's design
+// fonts via mapFontForPptx (all current themes use Poppins → Calibri). Set in
+// generatePPTX alongside currentTheme.
+let titleFace = mapFontForPptx(currentTheme.titleFont)
+let bodyFace = mapFontForPptx(currentTheme.bodyFont)
 
 // Every image must carry alt text (accessibility + SharePoint). This wrapper sets a
 // safe default and lets callers override via opts.altText for a meaningful description.
@@ -689,7 +702,7 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   slide.addText(clean, {
     x: TITLE_X, y: titleY, w: TITLE_W, h: titleH,
     fontSize: FONTS.h2Size,
-    fontFace: FONTS.titleFamily,
+    fontFace: titleFace,
     color: COLORS.deepGreen,
     bold: true,
     valign: 'top',
@@ -743,13 +756,13 @@ function addChrome(slide: PptxGenJS.Slide, data: ParsedSlide, pageNum: number): 
       kickX = 0.86
     }
     slide.addText(kick.toUpperCase(), {
-      x: kickX, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      x: kickX, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: bodyFace,
       color: COLORS.deepGreen, bold: true, charSpacing: 2, valign: 'middle',
     })
   }
   if (loc) {
     slide.addText(loc.toUpperCase(), {
-      x: 5.33, y: 0.28, w: 7.5, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      x: 5.33, y: 0.28, w: 7.5, h: 0.32, fontSize: 10, fontFace: bodyFace,
       color: COLORS.ink3, bold: true, charSpacing: 2, align: 'right', valign: 'middle',
     })
   }
@@ -759,12 +772,12 @@ function addChrome(slide: PptxGenJS.Slide, data: ParsedSlide, pageNum: number): 
   const footer = data.footer ? cleanMarkdownText(data.footer) : ''
   if (footer) {
     slide.addText(footer.toUpperCase(), {
-      x: 0.5, y: 7.1, w: 9, h: 0.3, fontSize: 9, fontFace: FONTS.family,
+      x: 0.5, y: 7.1, w: 9, h: 0.3, fontSize: 9, fontFace: bodyFace,
       color: COLORS.ink3, charSpacing: 1.5, valign: 'middle',
     })
   }
   slide.addText(String(pageNum), {
-    x: 11.5, y: 7.1, w: 1.33, h: 0.3, fontSize: 9, fontFace: FONTS.family,
+    x: 11.5, y: 7.1, w: 1.33, h: 0.3, fontSize: 9, fontFace: bodyFace,
     color: COLORS.ink3, align: 'right', valign: 'middle',
   })
 }
@@ -796,7 +809,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.addText(cleanMarkdownText(title), {
     x: 0.8, y: titleTop, w: 11.733, h: 1.4,
     fontSize: hasBgImage ? 32 : FONTS.h1Size,
-    fontFace: FONTS.titleFamily,
+    fontFace: titleFace,
     color: titleColor,
     bold: true,
     align: 'center',
@@ -809,7 +822,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     slide.addText(cleanMarkdownText(subtitleMatch[1]), {
       x: 1, y: titleTop + 1.5, w: 11.333, h: 0.5,
       fontSize: hasBgImage ? 18 : 20,
-      fontFace: FONTS.family,
+      fontFace: bodyFace,
       color: hasBgImage ? 'F5F5F5' : COLORS.lime,
       align: 'center',
     })
@@ -826,7 +839,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     slide.addText(cleanMarkdownText(locationLine), {
       x: 1, y: titleTop + 2.1, w: 11.333, h: 0.4,
       fontSize: hasBgImage ? 16 : 18,
-      fontFace: FONTS.family,
+      fontFace: bodyFace,
       color: hasBgImage ? 'E8E8E8' : COLORS.white,
       align: 'center',
     })
@@ -840,7 +853,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     slide.addText(cleanMarkdownText(dateLine), {
       x: 1, y: titleTop + 2.5, w: 11.333, h: 0.4,
       fontSize: hasBgImage ? 14 : 16,
-      fontFace: FONTS.family,
+      fontFace: bodyFace,
       color: hasBgImage ? 'D0D0D0' : COLORS.white,
       align: 'center',
     })
@@ -927,7 +940,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   slide.addText(cleanMarkdownText(title), {
     x: 1, y: titleY, w: 11.333, h: 1.5,
     fontSize: 44,
-    fontFace: FONTS.titleFamily,
+    fontFace: titleFace,
     color: COLORS.white,
     bold: true,
     align: 'center',
@@ -962,7 +975,7 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     slide.addText(cleanMarkdownText(presenterText), {
       x: 1, y: subtitleAnchorY + 0.2, w: 11.333, h: 0.5,
       fontSize: 18,
-      fontFace: FONTS.titleFamily,
+      fontFace: titleFace,
       color: COLORS.lightBlue,
       italic: true,
       align: 'center',
@@ -993,14 +1006,14 @@ function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   if (kind) {
     slide.addText(kind.toUpperCase(), {
       x: 0.5, y: 2.35, w: 12.33, h: 0.5,
-      fontSize: 16, fontFace: FONTS.family, color: dark ? COLORS.lime : COLORS.deepGreen,
+      fontSize: 16, fontFace: bodyFace, color: dark ? COLORS.lime : COLORS.deepGreen,
       bold: true, charSpacing: 3, align: 'center',
     })
   }
 
   slide.addText(big, {
     x: 0.5, y: 2.75, w: 12.33, h: 2.1,
-    fontSize: 130, fontFace: FONTS.titleFamily, color: dark ? COLORS.white : COLORS.deepGreen,
+    fontSize: 130, fontFace: titleFace, color: dark ? COLORS.white : COLORS.deepGreen,
     bold: true, align: 'center', valign: 'middle',
   })
 
@@ -1016,7 +1029,7 @@ function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   if (back) {
     slide.addText(back, {
       x: 0.5, y: 5.1, w: 12.33, h: 0.6,
-      fontSize: 24, fontFace: FONTS.family, color: dark ? 'E6F0EF' : COLORS.ink, align: 'center',
+      fontSize: 24, fontFace: bodyFace, color: dark ? 'E6F0EF' : COLORS.ink, align: 'center',
     })
   }
 }
@@ -1043,7 +1056,7 @@ function buildAgendaSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: cleanMarkdownText(cell),
           options: {
             fontSize: fontSize,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: rIdx === 0 ? COLORS.deepGreen : COLORS.ink,
             bold: rIdx === 0 || isBoldCell,
             valign: 'middle',
@@ -1093,7 +1106,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: cleanMarkdownText(item.text),
           options: {
             fontSize: FONTS.h3Size,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: COLORS.darkGreen,
             bold: true,
             breakLine: true,
@@ -1105,7 +1118,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: cleanMarkdownText(item.text),
           options: {
             fontSize: FONTS.bodySize - 2,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: COLORS.textDark,
             bullet: true,
             breakLine: true,
@@ -1115,7 +1128,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       } else if (item.type === 'paragraph') {
         const baseOptions = {
           fontSize: FONTS.bodySize - 2,
-          fontFace: FONTS.family,
+          fontFace: bodyFace,
           color: COLORS.darkGray,
           paraSpaceAfter: 6,
         }
@@ -1152,7 +1165,7 @@ function buildTableSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         text: cleanMarkdownText(cell),
         options: {
           fontSize,
-          fontFace: FONTS.family,
+          fontFace: bodyFace,
           color: rIdx === 0 ? COLORS.deepGreen : COLORS.ink,
           bold: rIdx === 0,
           border: rIdx === 0 ? TABLE_BORDER_HEADER : TABLE_BORDER,
@@ -1241,7 +1254,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       const introText = introLines.map(l => cleanMarkdownText(l)).join(' ')
       const runs = parseInlineFormatting(introText, {
         fontSize: FONTS.bodySize,
-        fontFace: FONTS.family,
+        fontFace: bodyFace,
         color: COLORS.textDark,
       })
       slide.addText(runs, {
@@ -1294,7 +1307,9 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   let panelContentTop = contentTop
   let panelWidth = rightColWidth
   if (isSplitPanel) {
-    const panelX = LAYOUT.marginLeft + leftColWidth + 0.35
+    // Panel starts at 60% of the 1280px canvas (matches the CSS grid split) and
+    // bleeds to the right + bottom edges.
+    const panelX = pxToIn(SLIDE_W_PX * 0.6)
     const panelY = Math.max(contentTop - 0.25, 1.05)
     slide.addShape('rect', {
       x: panelX, y: panelY, w: LAYOUT.width - panelX, h: LAYOUT.height - panelY,
@@ -1414,7 +1429,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             text: cell,
             options: {
               fontSize: FONTS.tableSize,
-              fontFace: FONTS.family,
+              fontFace: bodyFace,
               color: row.isHeader ? COLORS.white : COLORS.textDark,
               bold: row.isHeader,
             } as PptxGenJS.TextPropsOptions,
@@ -1441,7 +1456,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: item.text,
           options: {
             fontSize: item.level === 4 ? FONTS.bodySize : FONTS.h3Size,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: headerColor,
             bold: true,
             breakLine: true,
@@ -1453,7 +1468,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: item.text,
           options: {
             fontSize: FONTS.bodySize,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: textColor,
             bullet: true,
             breakLine: true,
@@ -1463,7 +1478,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       } else if (item.type === 'paragraph') {
         const baseOptions = {
           fontSize: FONTS.bodySize,
-          fontFace: FONTS.family,
+          fontFace: bodyFace,
           color: textColor,
           paraSpaceAfter: 10,
         }
@@ -1483,7 +1498,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
           text: cell,
           options: {
             fontSize: FONTS.tableSize,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: row.isHeader ? COLORS.white : COLORS.textDark,
             bold: row.isHeader,
           } as PptxGenJS.TextPropsOptions,
@@ -1556,7 +1571,7 @@ function buildTwoColumnSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     const isQuote = data.raw.includes('> "') || data.raw.includes('> *"') || data.raw.includes('> —')
     const runs = parseInlineFormatting(afterColsText, {
       fontSize: isQuote ? FONTS.smallSize + 2 : FONTS.bodySize - 2,
-      fontFace: FONTS.family,
+      fontFace: bodyFace,
       color: isQuote ? COLORS.darkGreen : COLORS.textDark,
       italic: isQuote,
     })
@@ -1609,7 +1624,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             text: cleanMarkdownText(item.text),
             options: {
               fontSize: FONTS.h3Size,
-              fontFace: FONTS.family,
+              fontFace: bodyFace,
               color: COLORS.darkGreen,
               bold: true,
               breakLine: true,
@@ -1621,7 +1636,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             text: cleanMarkdownText(item.text),
             options: {
               fontSize: FONTS.bodySize - 2,
-              fontFace: FONTS.family,
+              fontFace: bodyFace,
               color: COLORS.textDark,
               bullet: true,
               breakLine: true,
@@ -1631,7 +1646,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         } else if (item.type === 'paragraph') {
           const baseOptions = {
             fontSize: FONTS.bodySize - 2,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: COLORS.darkGray,
             paraSpaceAfter: 6,
           }
@@ -1667,7 +1682,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             text: cleanMarkdownText(item.text),
             options: {
               fontSize: FONTS.h3Size,
-              fontFace: FONTS.family,
+              fontFace: bodyFace,
               color: COLORS.darkGreen,
               bold: true,
               breakLine: true,
@@ -1679,7 +1694,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
             text: cleanMarkdownText(item.text),
             options: {
               fontSize: FONTS.bodySize,
-              fontFace: FONTS.family,
+              fontFace: bodyFace,
               color: COLORS.textDark,
               bullet: true,
               breakLine: true,
@@ -1689,7 +1704,7 @@ function buildImageSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         } else if (item.type === 'paragraph') {
           const baseOptions = {
             fontSize: FONTS.bodySize,
-            fontFace: FONTS.family,
+            fontFace: bodyFace,
             color: COLORS.darkGray,
             paraSpaceAfter: 14,
           }
@@ -1840,7 +1855,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         text: cleanMarkdownText(item.text),
         options: {
           fontSize: FONTS.h3Size,
-          fontFace: FONTS.family,
+          fontFace: bodyFace,
           color: COLORS.darkGreen,
           bold: true,
           breakLine: true,
@@ -1852,7 +1867,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
         text: cleanMarkdownText(item.text),
         options: {
           fontSize: FONTS.bodySize,
-          fontFace: FONTS.family,
+          fontFace: bodyFace,
           color: COLORS.textDark,
           bullet: true,
           breakLine: true,
@@ -1863,7 +1878,7 @@ function buildContentSlide(pptx: PptxGenJS, data: ParsedSlide): void {
       // Parse inline bold formatting
       const baseOptions = {
         fontSize: FONTS.bodySize,
-        fontFace: FONTS.family,
+        fontFace: bodyFace,
         color: COLORS.darkGray,
         paraSpaceAfter: 14,
       }
@@ -1933,6 +1948,8 @@ export async function generatePPTX(
 ): Promise<{ warnings: string[] }> {
   buildWarnings = []
   currentTheme = getThemeSpec((config.workshop as any).theme)
+  titleFace = mapFontForPptx(currentTheme.titleFont)
+  bodyFace = mapFontForPptx(currentTheme.bodyFont)
   const pptx = new PptxGenJS()
 
   // Set presentation properties

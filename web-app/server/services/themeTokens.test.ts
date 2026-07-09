@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { COLORS, CSS_VAR_MAP, ColorToken, THEMES, getThemeSpec } from './themeTokens'
+import { COLORS, CSS_VAR_MAP, ColorToken, THEMES, getThemeSpec, mapFontForPptx } from './themeTokens'
 
 /**
  * Drift guard: the FASTR palette is necessarily duplicated across render
@@ -75,6 +75,30 @@ describe('getThemeSpec — theme resolution', () => {
           `${spec.id}: ${bg}`,
         ).toBe(true)
       }
+    }
+  })
+})
+
+describe('mapFontForPptx — deck font → PPTX-safe system font', () => {
+  it('maps the brand Poppins to Calibri (matches the platform)', () => {
+    expect(mapFontForPptx('Poppins')).toBe('Calibri')
+  })
+
+  it('maps serif and mono families to their system fallbacks', () => {
+    expect(mapFontForPptx('Merriweather')).toBe('Georgia')
+    expect(mapFontForPptx('Roboto Mono')).toBe('Consolas')
+    expect(mapFontForPptx('Roboto Condensed')).toBe('Arial Narrow')
+  })
+
+  it('passes unknown families through unchanged', () => {
+    expect(mapFontForPptx('Calibri')).toBe('Calibri')
+    expect(mapFontForPptx('Some Custom Face')).toBe('Some Custom Face')
+  })
+
+  it('every theme resolves to a PPTX-safe face (all current themes → Calibri)', () => {
+    for (const spec of Object.values(THEMES)) {
+      expect(mapFontForPptx(spec.titleFont)).toBe('Calibri')
+      expect(mapFontForPptx(spec.bodyFont)).toBe('Calibri')
     }
   })
 })
