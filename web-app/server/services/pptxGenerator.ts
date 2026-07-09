@@ -815,10 +815,15 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
     })
   }
 
-  // Location, Country line
-  const locationMatch = data.raw.match(/^([^,\n]+),\s*([^\n]+)$/m)
-  if (locationMatch) {
-    slide.addText(`${locationMatch[1].trim()}, ${locationMatch[2].trim()}`, {
+  // Location, Country line — first plain "X, Y" line. Must skip bold-only
+  // lines: the **subtitle** often contains a comma and would otherwise be
+  // re-rendered verbatim (with literal asterisks) as the location.
+  const locationLine = data.raw.split('\n').map(l => l.trim()).find(l =>
+    l && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('<') && !l.startsWith('**')
+    && /^[^,]+,\s*.+$/.test(l)
+  )
+  if (locationLine) {
+    slide.addText(cleanMarkdownText(locationLine), {
       x: 1, y: titleTop + 2.1, w: 11.333, h: 0.4,
       fontSize: hasBgImage ? 16 : 18,
       fontFace: FONTS.family,
@@ -828,7 +833,7 @@ function buildTitleSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   }
 
   // Date line — skip the line already shown as location (it often carries the date too).
-  const usedLocation = locationMatch ? locationMatch[0].trim() : ''
+  const usedLocation = locationLine || ''
   const lines = data.raw.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('<!--') && !l.startsWith('**'))
   const dateLine = lines.find(l => l !== usedLocation && /\d/.test(l) && (/jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec/i.test(l) || /\d{4}/.test(l)))
   if (dateLine) {
