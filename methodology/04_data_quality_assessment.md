@@ -1772,6 +1772,8 @@ FASTR takes a multi-pronged approach, based on the belief that **data quality sh
 <!-- SLIDE:m4_s2 -->
 ## Rationale for data quality assessment
 
+Before analyzing, FASTR checks whether the data is reliable — like an accountant who checks the figures before preparing a report.
+
 **Challenge:** Routine health facility data may contain quality limitations:
 - Reported values outside plausible ranges
 - Reporting gaps affecting completeness

@@ -6,6 +6,8 @@ paginate: true
 
 ## Raison d'être de l'évaluation de la qualité des données
 
+Avant d'analyser, FASTR vérifie si les données sont fiables — comme un comptable qui vérifie les chiffres avant de préparer un rapport.
+
 **Défi :** Les données de routine des établissements de santé peuvent contenir des limites de qualité :
 - Valeurs déclarées en dehors des fourchettes plausibles
 - Lacunes de rapportage affectant la complétude

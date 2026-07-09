@@ -8,7 +8,7 @@ paginate: true
 
 Module 1 flagged the data-quality problems — extreme values, missing reports, internal inconsistencies. Module 2 picks up from there.
 
-FASTR replaces the flagged values with reasonable estimates from each facility's own historical patterns, so the service-utilization and coverage analyses downstream work from cleaner data.
+Rather than discarding the flagged values, FASTR replaces them with reasonable estimates from each facility's own historical patterns — like replacing an illegible meter reading with the average of the neighboring months — so the service-utilization and coverage analyses downstream work from cleaner data.
 
 To support transparency, FASTR produces **four parallel datasets**:
 
