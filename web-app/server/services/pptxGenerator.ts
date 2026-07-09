@@ -5,7 +5,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import imageSize from 'image-size'
 import JSZip from 'jszip'
-import { COLORS } from './themeTokens.js'
+import { COLORS, getThemeSpec, type ThemeSpec } from './themeTokens.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -57,6 +57,11 @@ const TABLE_BORDER_HEADER: any = [{ type: 'none' }, { type: 'none' }, { type: 's
 // Warnings collected during a single generatePPTX run (e.g. missing images),
 // reset at the start of each run and returned to the caller so the UI can surface them.
 let buildWarnings: string[] = []
+
+// Active deck theme for the current generatePPTX run (same module-level
+// pattern as buildWarnings). Set from the workshop config at the start of each
+// run; the chrome builders branch on it. Defaults to classic.
+let currentTheme: ThemeSpec = getThemeSpec()
 
 // Every image must carry alt text (accessibility + SharePoint). This wrapper sets a
 // safe default and lets callers override via opts.altText for a meaningful description.
@@ -657,9 +662,10 @@ const BAR_X = 0.5
 const BAR_W = 0.08
 const TITLE_X = 0.75            // bar + gap; also aligns with body's contentLeft
 const TITLE_W = 12.08           // contentWidth less the bar shift
-/** Draws the title + a short vertical deep-green bar on the left, returns the Y
- *  where body content should start. Bar height tracks the (estimated) wrapped
- *  title height, so 2-line titles get a taller bar. */
+/** Draws the title with the active theme's accent treatment, returns the Y
+ *  where body content should start. classic: vertical deep-green bar left of
+ *  the title; fastr2026: tonal-green underline hugging the title; minimal:
+ *  clean title (the accent lives in the kicker tick, see addChrome). */
 function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   const clean = cleanMarkdownText(title)
 
@@ -671,12 +677,14 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
   const lineCount = Math.max(1, Math.ceil(clean.length / 58))
   const titleH = lineCount * lineH
 
-  // Vertical accent bar (replaces the old horizontal lime rule).
-  slide.addShape('rect', {
-    x: BAR_X, y: titleY, w: BAR_W, h: titleH,
-    fill: { color: COLORS.deepGreen },
-    line: { type: 'none' },
-  } as any)
+  if (currentTheme.accent === 'bar') {
+    // Vertical accent bar (replaces the old horizontal lime rule).
+    slide.addShape('rect', {
+      x: BAR_X, y: titleY, w: BAR_W, h: titleH,
+      fill: { color: COLORS.deepGreen },
+      line: { type: 'none' },
+    } as any)
+  }
 
   slide.addText(clean, {
     x: TITLE_X, y: titleY, w: TITLE_W, h: titleH,
@@ -687,7 +695,22 @@ function addHeaderBar(slide: PptxGenJS.Slide, title: string): number {
     valign: 'top',
   })
 
-  return titleY + titleH + 0.25  // content starts below the title block
+  let contentY = titleY + titleH + 0.25
+  if (currentTheme.accent === 'underline-green') {
+    // Tonal green underline hugging the title text (mirrors the CSS
+    // fit-content border-bottom). Width from the same char estimate the line
+    // count uses; last line for wrapped titles.
+    const lastLineChars = clean.length - (lineCount - 1) * 58 || 58
+    const ruleW = Math.min(Math.max(lastLineChars * 0.19, 1.2), TITLE_W)
+    slide.addShape('rect', {
+      x: TITLE_X, y: titleY + titleH + 0.04, w: ruleW, h: 0.035,
+      fill: { color: COLORS.green },
+      line: { type: 'none' },
+    } as any)
+    contentY += 0.12
+  }
+
+  return contentY  // content starts below the title block
 }
 
 function addFooterBar(slide: PptxGenJS.Slide): void {
@@ -709,8 +732,18 @@ function addChrome(slide: PptxGenJS.Slide, data: ParsedSlide, pageNum: number): 
   const loc = locMatch ? cleanMarkdownText(locMatch[1]) : ''
 
   if (kick) {
+    let kickX = 0.5
+    if (currentTheme.accent === 'kicker-only') {
+      // Minimal theme: the accent is a short lime tick before the kicker.
+      slide.addShape('rect', {
+        x: 0.5, y: 0.415, w: 0.26, h: 0.045,
+        fill: { color: COLORS.lime },
+        line: { type: 'none' },
+      } as any)
+      kickX = 0.86
+    }
     slide.addText(kick.toUpperCase(), {
-      x: 0.5, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
+      x: kickX, y: 0.28, w: 8, h: 0.32, fontSize: 10, fontFace: FONTS.family,
       color: COLORS.deepGreen, bold: true, charSpacing: 2, valign: 'middle',
     })
   }
@@ -935,7 +968,9 @@ function buildSectionSlide(pptx: PptxGenJS, data: ParsedSlide): void {
 
 function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   const slide = pptx.addSlide()
-  slide.background = { color: COLORS.paper2 }  // warm off-white field
+  // classic/minimal: warm off-white field; fastr2026: dark deep-green field
+  const dark = currentTheme.breakStyle === 'dark'
+  slide.background = { color: dark ? COLORS.deepGreen : COLORS.paper2 }
 
   // New structure: kind label + big duration (h1) + "we resume at" line.
   // Fall back to the old "**N minutes** / resume at HH:MM" prose if present.
@@ -953,21 +988,30 @@ function buildBreakSlide(pptx: PptxGenJS, data: ParsedSlide): void {
   if (kind) {
     slide.addText(kind.toUpperCase(), {
       x: 0.5, y: 2.35, w: 12.33, h: 0.5,
-      fontSize: 16, fontFace: FONTS.family, color: COLORS.deepGreen,
+      fontSize: 16, fontFace: FONTS.family, color: dark ? COLORS.lime : COLORS.deepGreen,
       bold: true, charSpacing: 3, align: 'center',
     })
   }
 
   slide.addText(big, {
     x: 0.5, y: 2.75, w: 12.33, h: 2.1,
-    fontSize: 130, fontFace: FONTS.titleFamily, color: COLORS.deepGreen,
+    fontSize: 130, fontFace: FONTS.titleFamily, color: dark ? COLORS.white : COLORS.deepGreen,
     bold: true, align: 'center', valign: 'middle',
   })
+
+  if (dark) {
+    // Short lime rule under the duration (mirrors the CSS underline)
+    slide.addShape('rect', {
+      x: 5.67, y: 4.95, w: 2, h: 0.045,
+      fill: { color: COLORS.lime },
+      line: { type: 'none' },
+    } as any)
+  }
 
   if (back) {
     slide.addText(back, {
       x: 0.5, y: 5.1, w: 12.33, h: 0.6,
-      fontSize: 24, fontFace: FONTS.family, color: COLORS.ink, align: 'center',
+      fontSize: 24, fontFace: FONTS.family, color: dark ? 'E6F0EF' : COLORS.ink, align: 'center',
     })
   }
 }
@@ -1855,6 +1899,7 @@ export async function generatePPTX(
   outputPath: string
 ): Promise<{ warnings: string[] }> {
   buildWarnings = []
+  currentTheme = getThemeSpec((config.workshop as any).theme)
   const pptx = new PptxGenJS()
 
   // Set presentation properties

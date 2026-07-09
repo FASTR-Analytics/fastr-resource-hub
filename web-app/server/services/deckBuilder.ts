@@ -9,6 +9,7 @@ import {
   loadModuleMeta,
 } from './moduleRegistry.js'
 import { getImportedSlides, getImportedModule, getExternalDeck, getExternalPages, getCustomSlides } from '../db/database.js'
+import { getThemeSpec, type ThemeSpec } from './themeTokens.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -227,6 +228,7 @@ function sessionChrome(
 export async function buildMarkdown(workshopId: string, config: WorkshopConfig, language?: Language): Promise<string> {
   // Use provided language, or fall back to workshop config, or default to English
   const lang: Language = language || (config.workshop as any).language || 'en'
+  const theme = getThemeSpec((config.workshop as any).theme)
   const slides: string[] = []
 
   // Frontmatter is prepended (not joined as a slide) so the first real slide
@@ -234,7 +236,7 @@ export async function buildMarkdown(workshopId: string, config: WorkshopConfig, 
   // an empty leading slide (a blank first page).
   const frontmatter = `---
 marp: true
-theme: fastr
+theme: ${theme.marpTheme}
 paginate: true
 ---
 
@@ -322,9 +324,10 @@ export async function buildSessionMarkdownWithSources(
   customSlideMap?: Map<string, string>,
 ): Promise<{ markdown: string; chunks: SessionChunk[] } | null> {
   const lang: Language = language || (config.workshop as any).language || 'en'
+  const theme = getThemeSpec((config.workshop as any).theme)
   const chunks = await buildSessionChunks(session, config, dayNumber, sessionNumber, lang, customSlideMap)
   if (!chunks) return null
-  return { markdown: chunks.map(c => c.content).join('\n\n---\n\n'), chunks }
+  return { markdown: applyThemeAssets(chunks.map(c => c.content).join('\n\n---\n\n'), theme), chunks }
 }
 
 /**
@@ -340,7 +343,25 @@ async function buildSessionSlides(
 ): Promise<string | null> {
   const chunks = await buildSessionChunks(session, config, dayNumber, sessionNumber, language, customSlideMap)
   if (!chunks) return null
-  return chunks.map(c => c.content).join('\n\n---\n\n')
+  const theme = getThemeSpec((config.workshop as any).theme)
+  return applyThemeAssets(chunks.map(c => c.content).join('\n\n---\n\n'), theme)
+}
+
+/**
+ * Swap the default cover/section background images for the workshop theme's.
+ * Runs on built session markdown so the swap flows identically to the HTML
+ * preview, PDF (Marp), and PPTX (which reads ![bg] from the same markdown).
+ * Classic is a no-op — its spec names the default assets.
+ */
+export function applyThemeAssets(markdown: string, theme: ThemeSpec): string {
+  let out = markdown
+  if (theme.sectionBg !== 'section_slide.png') {
+    out = out.replaceAll('backgrounds/section_slide.png', `backgrounds/${theme.sectionBg}`)
+  }
+  if (theme.coverBg !== 'cover_slide_clean.png') {
+    out = out.replaceAll('backgrounds/cover_slide_clean.png', `backgrounds/${theme.coverBg}`)
+  }
+  return out
 }
 
 /** Classify a `session.slides[]` ref without loading it. */

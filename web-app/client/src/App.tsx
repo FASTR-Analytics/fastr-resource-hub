@@ -3146,6 +3146,22 @@ function App() {
                       placeholder={contentLanguage === 'fr' ? 'Sous-titre de la couverture' : 'Subtitle on cover slide'}
                     />
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('slideStyle', contentLanguage)}
+                    </label>
+                    <select
+                      value={currentConfig.workshop.theme || 'classic'}
+                      onChange={(e) => updateWorkshopSettings({ theme: e.target.value })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm bg-white"
+                    >
+                      <option value="classic">{contentLanguage === 'fr' ? 'FASTR classique' : 'FASTR classic'}</option>
+                      <option value="fastr2026">FASTR 2026</option>
+                      <option value="minimal">Minimal</option>
+                    </select>
+                    <p className="text-xs text-gray-500 mt-1">{t('slideStyleHint', contentLanguage)}</p>
+                  </div>
                 </div>
               </section>
 

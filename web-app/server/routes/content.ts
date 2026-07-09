@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS } from '../services/marpService.js'
+import { getThemeSpec } from '../services/themeTokens.js'
 import {
   loadModulesRegistry,
   loadModuleMeta,
@@ -1070,10 +1071,17 @@ router.get('/slide/*', (req, res) => {
 // POST /api/content/render - Render markdown to HTML (with caching)
 router.post('/render', async (req, res) => {
   try {
-    let { markdown } = req.body
+    let { markdown, theme } = req.body
 
     if (!markdown) {
       return res.status(400).json({ error: 'Markdown content required' })
+    }
+
+    // Optional workshop theme id ('classic' | 'fastr2026' | …): rewrite the
+    // frontmatter theme so previews match the workshop's selected look.
+    if (theme) {
+      const spec = getThemeSpec(String(theme))
+      markdown = markdown.replace(/^(theme:\s*)\S+$/m, `$1${spec.marpTheme}`)
     }
 
     // Check cache first

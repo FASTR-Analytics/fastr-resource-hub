@@ -8,6 +8,7 @@ import { buildMarkdown, materializeExternalImages, countRenderedSlides, hashLibr
 import { generatePDF } from '../services/pdfGenerator.js'
 import { generatePPTX } from '../services/pptxGenerator.js'
 import { renderMarkdown, getThemeCSS, getThemeCSSByName, getRepoRoot } from '../services/marpService.js'
+import { getThemeSpec } from '../services/themeTokens.js'
 
 const router = Router()
 
@@ -141,9 +142,10 @@ router.post('/:id/slides', async (req, res) => {
     const effectiveLang: Language = language || (config.workshop as any).language || 'en'
 
     // Use shared Marp service (initialized at startup, ~100ms faster)
-    // Select theme CSS based on workshop config
-    const themeSetting = (config.workshop as any).theme || 'classic'
-    const fastrThemeCSS = getThemeCSSByName(themeSetting)
+    // Select theme based on workshop config; the raw theme CSS is injected
+    // after Marp's resolved CSS (overrides win) and salts the render cache.
+    const themeSpec = getThemeSpec((config.workshop as any).theme)
+    const fastrThemeCSS = getThemeCSSByName(themeSpec.id)
 
     // Build slides for each session with metadata
     const slidesData: any[] = []
@@ -249,7 +251,7 @@ router.post('/:id/slides', async (req, res) => {
         // Render to HTML using shared Marp service
         const fullMarkdown = `---
 marp: true
-theme: fastr
+theme: ${themeSpec.marpTheme}
 paginate: true
 ---
 

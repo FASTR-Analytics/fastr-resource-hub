@@ -39,8 +39,9 @@ export interface LocalWorkshopConfig {
     // Additional content
     scope_of_work?: string
     expected_outputs?: string
-    // Slide theme
-    theme?: 'classic' | 'clean' | 'bold'
+    // Slide style/theme id ('classic' | 'fastr2026' | 'minimal'); unknown
+    // values fall back to classic server-side
+    theme?: string
     // Deck type
     deckType?: 'workshop' | 'webinar'
     // Webinar-specific fields

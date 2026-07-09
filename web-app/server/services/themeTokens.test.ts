@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { COLORS, CSS_VAR_MAP, ColorToken } from './themeTokens'
+import { COLORS, CSS_VAR_MAP, ColorToken, THEMES, getThemeSpec } from './themeTokens'
 
 /**
  * Drift guard: the FASTR palette is necessarily duplicated across render
@@ -41,6 +41,39 @@ describe('themeTokens — CSS palette drift guard', () => {
     for (const varMap of Object.values(CSS_VAR_MAP)) {
       for (const token of Object.keys(varMap)) {
         expect(COLORS).toHaveProperty(token)
+      }
+    }
+  })
+})
+
+describe('getThemeSpec — theme resolution', () => {
+  it('resolves known theme ids', () => {
+    expect(getThemeSpec('classic').marpTheme).toBe('fastr')
+    expect(getThemeSpec('fastr2026').marpTheme).toBe('fastr-2026')
+    expect(getThemeSpec('minimal').marpTheme).toBe('fastr-minimal')
+  })
+
+  it('falls back to classic for legacy/unknown/absent ids', () => {
+    expect(getThemeSpec(undefined).id).toBe('classic')
+    expect(getThemeSpec(null).id).toBe('classic')
+    expect(getThemeSpec('clean').id).toBe('classic')   // legacy stub value
+    expect(getThemeSpec('bold').id).toBe('classic')    // legacy stub value
+    expect(getThemeSpec('nonsense').id).toBe('classic')
+  })
+
+  it('every theme CSS file exists at the repo root', () => {
+    for (const spec of Object.values(THEMES)) {
+      expect(fs.existsSync(path.join(REPO_ROOT, spec.cssFile)), spec.cssFile).toBe(true)
+    }
+  })
+
+  it('every theme background asset exists', () => {
+    for (const spec of Object.values(THEMES)) {
+      for (const bg of [spec.coverBg, spec.sectionBg]) {
+        expect(
+          fs.existsSync(path.join(REPO_ROOT, 'resources', 'backgrounds', bg)),
+          `${spec.id}: ${bg}`,
+        ).toBe(true)
       }
     }
   })

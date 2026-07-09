@@ -1,0 +1,31 @@
+/* ========================================
+   FASTR MARP THEME — "MINIMAL"
+   ========================================
+   Selectable deck look (workshop.theme = 'minimal').
+   Delta over the base fastr theme: no title accent at all — the accent lives
+   in a small lime tick before the kicker eyebrow. Everything else (covers,
+   breaks, backgrounds) stays as the classic look. The PPTX generator mirrors
+   this via the ThemeSpec in themeTokens.ts.
+*/
+
+/* @theme fastr-minimal */
+
+@import 'fastr';
+
+/* Headings stay clean: no bar, no rule. */
+h1, h2 {
+  border-left: none;
+  padding-left: 0;
+}
+
+/* The accent moves to the kicker eyebrow: a short lime tick before the topic. */
+header .kick::before {
+  content: '';
+  display: inline-block;
+  width: 26px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--fastr-lime);
+  margin-right: 10px;
+  vertical-align: 2px;
+}

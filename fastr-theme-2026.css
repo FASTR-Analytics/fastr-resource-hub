@@ -1,0 +1,74 @@
+/* ========================================
+   FASTR MARP THEME — "FASTR 2026"
+   ========================================
+   Selectable deck look (workshop.theme = 'fastr2026').
+   Delta over the base fastr theme: tonal-green title underline instead of the
+   vertical bar, lime-accented dark covers and break slides, and the deep-green
+   arc backgrounds (swapped in by deckBuilder.applyThemeAssets). The PPTX
+   generator mirrors these choices via the ThemeSpec in themeTokens.ts.
+*/
+
+/* @theme fastr-2026 */
+
+@import 'fastr';
+
+/* Title accent: replace the vertical deep-green bar with a restrained
+   teal-green underline that hugs the heading text (fit-content keeps the
+   heading a block, so following content still flows below it). */
+h1, h2 {
+  border-left: none;
+  padding-left: 0;
+  width: fit-content;
+  border-bottom: 3px solid var(--fastr-green);
+  padding-bottom: 0.15em;
+}
+
+/* Slides with their own title treatment don't get the underline. */
+section.centered h1,
+section.centered h2,
+section.break h1,
+.activity-pointer h2 {
+  border-bottom: none;
+  width: auto;
+  padding-bottom: 0;
+}
+
+/* Covers: white title with a lime underline over the dark arc background. */
+section.title-cover h1,
+section.section-cover h1 {
+  border-bottom: 4px solid var(--fastr-lime);
+  padding-bottom: 0.22em;
+  width: fit-content;
+}
+section.section-cover h1 {
+  margin-left: auto;
+  margin-right: auto;
+}
+section.lead h1,
+section.lead h2 {
+  border-bottom: none;
+  width: auto;
+  padding-bottom: 0;
+}
+
+/* Break slides go dark: deep-green field, lime kind label and duration rule. */
+section.break {
+  background: var(--fastr-deep-green);
+}
+section.break .kind {
+  color: var(--fastr-lime);
+}
+section.break h1 {
+  color: #ffffff;
+  border-bottom: 4px solid var(--fastr-lime);
+  padding-bottom: 0.16em;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+section.break .back {
+  color: rgba(255, 255, 255, 0.88);
+}
+section.break .back b {
+  color: var(--fastr-lime);
+}

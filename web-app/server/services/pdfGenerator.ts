@@ -2,6 +2,7 @@ import { spawn } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { THEMES } from './themeTokens.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -10,6 +11,10 @@ const __dirname = path.dirname(__filename)
 const REPO_ROOT = process.env.NODE_ENV === 'production'
   ? path.resolve(__dirname, '../../../..')
   : path.resolve(__dirname, '../../..')
+
+// All deck theme CSS files — Marp CLI gets the full set via --theme-set and
+// the deck's frontmatter picks which registered theme applies.
+const ALL_THEME_FILES = [...new Set(Object.values(THEMES).map(t => t.cssFile))]
 
 /**
  * Generate PDF from markdown using Marp CLI
@@ -41,11 +46,8 @@ export async function generatePDF(mdPath: string, pdfPath: string): Promise<void
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    // Theme path — the single FASTR deck theme
-    const themeFiles = ['fastr-theme.css']
-
-    // Build args — use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
-    const themePaths = themeFiles
+    // All deck themes — frontmatter in the markdown selects the active one
+    const themePaths = ALL_THEME_FILES
       .map(tf => path.join(REPO_ROOT, tf))
       .filter(tp => fs.existsSync(tp))
 
@@ -127,10 +129,8 @@ export async function generateHTML(mdPath: string, htmlPath: string): Promise<vo
       throw new Error('Marp CLI not found. Install with: npm install @marp-team/marp-cli')
     }
 
-    const htmlThemeFiles = ['fastr-theme.css']
-
-    // Use --theme-set (array) instead of multiple --theme flags (Marp CLI v4+)
-    const htmlThemePaths = htmlThemeFiles
+    // All deck themes — frontmatter in the markdown selects the active one
+    const htmlThemePaths = ALL_THEME_FILES
       .map(tf => path.join(REPO_ROOT, tf))
       .filter(tp => fs.existsSync(tp))
 

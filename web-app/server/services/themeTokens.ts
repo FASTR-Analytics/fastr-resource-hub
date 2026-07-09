@@ -41,6 +41,69 @@ export const COLORS = {
 
 export type ColorToken = keyof typeof COLORS
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Deck themes ("looks") — selectable per workshop, rendered by BOTH pipelines:
+// the Marp CSS path (HTML preview + PDF) via cssFile/marpTheme, and the native
+// PPTX generator via the accent/breakStyle fields. Cover/section backgrounds
+// are swapped in the built markdown (deckBuilder.applyThemeAssets) so the same
+// image drives all three formats.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface ThemeSpec {
+  id: string
+  label: { en: string; fr: string }
+  /** Registered Marp theme name — goes into the deck frontmatter */
+  marpTheme: string
+  /** CSS filename at repo root, registered into the Marp theme set */
+  cssFile: string
+  /** PPTX title treatment (the CSS side handles this via the theme file) */
+  accent: 'bar' | 'underline-green' | 'kicker-only'
+  /** PPTX break-slide treatment */
+  breakStyle: 'paper' | 'dark'
+  /** resources/backgrounds/<file> used for title covers */
+  coverBg: string
+  /** resources/backgrounds/<file> used for section covers */
+  sectionBg: string
+}
+
+export const THEMES: Record<string, ThemeSpec> = {
+  classic: {
+    id: 'classic',
+    label: { en: 'FASTR classic', fr: 'FASTR classique' },
+    marpTheme: 'fastr',
+    cssFile: 'fastr-theme.css',
+    accent: 'bar',
+    breakStyle: 'paper',
+    coverBg: 'cover_slide_clean.png',
+    sectionBg: 'section_slide.png',
+  },
+  fastr2026: {
+    id: 'fastr2026',
+    label: { en: 'FASTR 2026', fr: 'FASTR 2026' },
+    marpTheme: 'fastr-2026',
+    cssFile: 'fastr-theme-2026.css',
+    accent: 'underline-green',
+    breakStyle: 'dark',
+    coverBg: 'cover_slide_2026.png',
+    sectionBg: 'section_slide_2026.png',
+  },
+  minimal: {
+    id: 'minimal',
+    label: { en: 'Minimal', fr: 'Minimal' },
+    marpTheme: 'fastr-minimal',
+    cssFile: 'fastr-theme-minimal.css',
+    accent: 'kicker-only',
+    breakStyle: 'paper',
+    coverBg: 'cover_slide_clean.png',
+    sectionBg: 'section_slide.png',
+  },
+}
+
+/** Resolve a workshop's theme id to a spec; unknown/legacy/absent → classic. */
+export function getThemeSpec(themeId?: string | null): ThemeSpec {
+  return (themeId && THEMES[themeId]) || THEMES.classic
+}
+
 // Where each token appears as a CSS custom property, per file, for the drift
 // guard. Tokens with no CSS counterpart (PPTX-only, e.g. lightGreen/darkGray)
 // are simply absent here. Keyed by token → CSS var name in that file.

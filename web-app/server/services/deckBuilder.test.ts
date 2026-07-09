@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { buildSessionMarkdown, buildSessionMarkdownWithSources, countRenderedSlides, resolveLibrarySlideContent, hashLibrarySource } from './deckBuilder'
+import { buildSessionMarkdown, buildSessionMarkdownWithSources, countRenderedSlides, resolveLibrarySlideContent, hashLibrarySource, applyThemeAssets } from './deckBuilder'
+import { getThemeSpec } from './themeTokens'
 import type { WorkshopConfig } from '../db/database'
 
 /**
@@ -325,6 +326,33 @@ describe('hashLibrarySource — stale-fork detection', () => {
 
   it('returns null for a computed ref (not source-backed)', async () => {
     expect(await hashLibrarySource('day1_agenda', 'en')).toBeNull()
+  })
+})
+
+describe('applyThemeAssets — theme background swap', () => {
+  const md = '![bg](../../resources/backgrounds/section_slide.png)\n\n# Title\n\n![bg](../../resources/backgrounds/cover_slide_clean.png)'
+
+  it('is a no-op for classic', () => {
+    expect(applyThemeAssets(md, getThemeSpec('classic'))).toBe(md)
+  })
+
+  it('swaps section and cover backgrounds for fastr2026', () => {
+    const out = applyThemeAssets(md, getThemeSpec('fastr2026'))
+    expect(out).toContain('backgrounds/section_slide_2026.png')
+    expect(out).toContain('backgrounds/cover_slide_2026.png')
+    expect(out).not.toContain('backgrounds/section_slide.png')
+    expect(out).not.toContain('backgrounds/cover_slide_clean.png')
+  })
+
+  it('themed session markdown carries the swapped background', async () => {
+    const result = await buildSessionMarkdown(
+      { session: 'Break', type: 'section' },
+      { ...baseConfig, workshop: { ...baseConfig.workshop, theme: 'fastr2026' } as any },
+      1,
+      undefined,
+      'en',
+    )
+    expect(result).toContain('section_slide_2026.png')
   })
 })
 
