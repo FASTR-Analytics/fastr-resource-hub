@@ -866,15 +866,31 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           className="fixed inset-x-0 bottom-0 top-14 bg-black/95 flex items-center justify-center z-40"
           onClick={() => setSelectedSlide(null)}
         >
-          {/* Close button — visible pill so the exit is obvious */}
-          <button
-            onClick={() => setSelectedSlide(null)}
-            aria-label="Close slide view"
-            className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium"
-          >
-            <X className="w-4 h-4" />
-            Close
-          </button>
+          {/* Top-right actions — Edit slide (prominent) + Close, in the same
+              obvious corner so the edit action isn't lost against the slide */}
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+            {selectedSlide.editable && !workshopLocked && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setEditingSlide(selectedSlide)
+                  setSelectedSlide(null)
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-fastr-secondary hover:bg-fastr-secondary/90 text-white text-sm font-semibold shadow-lg"
+              >
+                <Pencil className="w-4 h-4" />
+                Edit slide
+              </button>
+            )}
+            <button
+              onClick={() => setSelectedSlide(null)}
+              aria-label="Close slide view"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium"
+            >
+              <X className="w-4 h-4" />
+              Close
+            </button>
+          </div>
 
           {/* Navigation */}
           <button
@@ -896,7 +912,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           </button>
 
           {/* Slide */}
-          <div className="max-w-5xl w-full mx-8 py-4" onClick={(e) => e.stopPropagation()}>
+          <div className="max-w-4xl w-full mx-8 py-4" onClick={(e) => e.stopPropagation()}>
             <div className="text-center text-white mb-4">
               <span className="text-2xl font-medium">
                 {selectedSlide.sessionName}
@@ -905,18 +921,6 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
               <span className="text-gray-400">
                 Slide {selectedSlide.slideIndex + 1}
               </span>
-              {selectedSlide.editable && !workshopLocked && (
-                <button
-                  onClick={() => {
-                    setEditingSlide(selectedSlide)
-                    setSelectedSlide(null)
-                  }}
-                  className="ml-4 inline-flex items-center gap-1.5 px-3 py-1 text-sm bg-gray-700 text-gray-300 hover:text-white hover:bg-fastr-secondary rounded-lg transition-colors align-middle"
-                >
-                  <Pencil className="w-3.5 h-3.5" />
-                  Edit slide
-                </button>
-              )}
             </div>
 
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
