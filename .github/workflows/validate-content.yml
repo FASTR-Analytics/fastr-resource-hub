@@ -1,0 +1,62 @@
+name: Validate Content
+
+# Runs the internal drift guard (tools/validate_content.py) on every pull
+# request that touches content, and on pushes to main, so broken image refs,
+# EN/FR coverage gaps, orphaned slide markers, and _meta.yaml drift are caught
+# before (or right after) they land.
+#
+# NOTE: continue-on-error is ON while known pre-existing issues are being
+# fixed by the content-refresh batches (see the refresh plan). Flip it to
+# false — and mark this check required in branch protection — once batch C
+# lands and validate_content.py reports zero broken refs.
+on:
+  pull_request:
+    paths:
+      - 'methodology/**'
+      - 'core_content/**'
+      - 'core_content_fr/**'
+      - 'core_content_pt/**'
+      - 'handouts/**'
+      - 'resources/**'
+      - 'decks/**'
+      - 'modules.yaml'
+      - 'tools/validate_content.py'
+      - '.github/workflows/validate-content.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'methodology/**'
+      - 'core_content/**'
+      - 'core_content_fr/**'
+      - 'core_content_pt/**'
+      - 'handouts/**'
+      - 'resources/**'
+      - 'decks/**'
+      - 'modules.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-content-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    continue-on-error: true   # TODO: flip to false after refresh batch C (zero broken refs)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: pip install pyyaml
+
+      - name: Validate content
+        run: python3 tools/validate_content.py
