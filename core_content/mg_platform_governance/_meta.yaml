@@ -1,0 +1,41 @@
+slides:
+- file: mg_1_what_data_platform_holds.md
+  order: 1
+  variant: full
+  title: What data does the platform hold?
+- file: mg_2_who_can_access.md
+  order: 2
+  variant: full
+  title: Who can access the data?
+- file: mg_3_data_isolation.md
+  order: 3
+  variant: full
+  title: Each country is fully separate
+- file: mg_4_infrastructure_security.md
+  order: 4
+  variant: full
+  title: Protection in transit and on the server
+- file: mg_5_backups_recovery.md
+  order: 5
+  variant: full
+  title: Backups and recovery
+- file: mg_6_ai_data_boundaries.md
+  order: 6
+  variant: full
+  title: What the AI assistant can and cannot see
+- file: mg_7_running_costs.md
+  order: 7
+  variant: full
+  title: What it costs to run
+- file: mg_8_ai_usage_costs.md
+  order: 8
+  variant: full
+  title: AI costs and how they scale
+- file: mg_9_hosting_today_tomorrow.md
+  order: 9
+  variant: full
+  title: 'Hosting: today and tomorrow'
+- file: mg_10_path_to_ownership.md
+  order: 10
+  variant: full
+  title: The path to country ownership

@@ -452,3 +452,33 @@ modules:
     topics:
     - Webinar slides
     duration: 60-90 min
+# Custom module — government-facing slides on platform security, running costs,
+# and the path to country ownership. No methodology source: edit these slides
+# directly in core_content/mg_platform_governance/ (the mg_ prefix is exempt
+# from the validate_content.py drift guard, and --prune never touches folders
+# the extractor does not write to). Sources: the platform security / tech stack
+# / AI documentation by Useful Data (Nick, 2026). Cost figures are [TBC]
+# placeholders pending Tim Roberton's costing work.
+- id: mg
+  number: mg
+  folder: mg_platform_governance
+  session: platform
+  name:
+    en: Platform security & sustainability
+    fr: Sécurité et pérennité de la plateforme
+    pt: Segurança e sustentabilidade da plataforma
+  ai_context:
+    description: Slides for government-facing conversations about institutionalizing
+      the FASTR platform — how data is secured and protected (slides 1-6), and what
+      the platform costs to run plus the transition from central hosting to country
+      ownership (slides 7-10). Cost figures are placeholders until confirmed.
+    topics:
+    - What data the platform holds
+    - Access control and permissions
+    - Country and project isolation
+    - Encryption, server access, sandboxed analyses
+    - Backups and recovery
+    - AI data boundaries and audit logging
+    - Running costs (hosting, AI usage, operations)
+    - Path to country hosting and ownership
+    duration: 20-30 min
