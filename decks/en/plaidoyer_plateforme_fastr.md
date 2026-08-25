@@ -237,7 +237,7 @@ Storing data answers no question. FASTR goes further: it **analyzes**.
 
 **Modules** process the data automatically — quality, adjustment, service utilization, coverage. Each runs proven methods and produces results ready to visualize.
 
-The user **writes no code**. They enable a module, and the results compute.
+The user **writes no code**. The results compute in a results package; they attach it and work.
 
 </div>
 </div>

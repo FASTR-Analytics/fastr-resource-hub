@@ -448,7 +448,7 @@ FR = [
     {"type": "output", "title": "Un moteur d'analyse intégré", "image": "platform_fr/modules_fr.png", "paras": [
         "Stocker des données ne répond à aucune question. FASTR va plus loin : il **analyse**.",
         "Des **modules** traitent les données automatiquement — qualité, ajustement, utilisation des services, couverture. Chacun exécute des méthodes éprouvées et produit des résultats prêts à visualiser.",
-        "L'utilisateur **n'écrit aucune ligne de code**. Il active un module, et les résultats se calculent.",
+        "L'utilisateur **n'écrit aucune ligne de code**. Les résultats se calculent dans un paquet de résultats ; il le rattache et travaille.",
     ]},
     {"type": "two_col", "title": "Des méthodes reconnues, intégrées à l'outil", "cols": [
         {"head": "Ce que les modules produisent", "items": [
@@ -580,7 +580,7 @@ EN = [
     {"type": "output", "title": "A built-in analysis engine", "image": "platform_en/modules_en.png", "paras": [
         "Storing data answers no question. FASTR goes further: it **analyzes**.",
         "**Modules** process the data automatically — quality, adjustment, service utilization, coverage. Each runs proven methods and produces results ready to visualize.",
-        "The user **writes no code**. They enable a module, and the results compute.",
+        "The user **writes no code**. The results compute in a results package; they attach it and work.",
     ]},
     {"type": "two_col", "title": "Recognized methods, built into the tool", "cols": [
         {"head": "What the modules produce", "items": [

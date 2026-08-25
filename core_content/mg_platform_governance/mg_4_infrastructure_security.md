@@ -14,5 +14,5 @@ paginate: true
 <!--
 - TLS termination via nginx with certbot-managed certificates; SSH access is key-based only, for two named users.
 - Secrets (database passwords, API keys) are injected at startup and never hardcoded; the system refuses to start if any are missing.
-- R analysis modules run in short-lived sandboxed containers that can only see their own project's working folder.
+- R analysis modules run in short-lived sandboxed containers during results-package generation; each container sees only the working folder of its own run.
 -->

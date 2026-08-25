@@ -14,5 +14,5 @@ paginate: true
 <!--
 - Terminaison TLS via nginx avec certificats gérés par certbot ; l'accès SSH se fait uniquement par clé, pour deux utilisateurs nommés.
 - Les secrets (mots de passe de base de données, clés d'API) sont injectés au démarrage et jamais codés en dur ; le système refuse de démarrer s'il en manque un.
-- Les modules d'analyse R s'exécutent dans des conteneurs éphémères isolés qui ne voient que le dossier de travail de leur propre projet.
+- Les modules d'analyse R s'exécutent dans des conteneurs éphémères isolés pendant la génération des paquets de résultats ; chaque conteneur ne voit que le dossier de travail de sa propre exécution.
 -->

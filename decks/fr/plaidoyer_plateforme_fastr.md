@@ -240,7 +240,7 @@ Stocker des données ne répond à aucune question. FASTR va plus loin : il **an
 
 Des **modules** traitent les données automatiquement — qualité, ajustement, utilisation des services, couverture. Chacun exécute des méthodes éprouvées et produit des résultats prêts à visualiser.
 
-L'utilisateur **n'écrit aucune ligne de code**. Il active un module, et les résultats se calculent.
+L'utilisateur **n'écrit aucune ligne de code**. Les résultats se calculent dans un paquet de résultats ; il le rattache et travaille.
 
 </div>
 </div>
