@@ -44,8 +44,17 @@ else
   MARP=(npx -y @marp-team/marp-cli)
 fi
 
-exec "${MARP[@]}" "$INPUT" \
+"${MARP[@]}" "$INPUT" \
   --theme-set "$THEME" \
   --pdf \
   --allow-local-files \
   -o "$OUTPUT"
+
+# Marp silently runs content past the page edge instead of erroring, so check the
+# rendered PDF here too — not just in build_handout_pdfs.py. Most handouts are
+# iterated on via this script, which is exactly when overflow gets introduced.
+# Warn but don't fail: a mid-edit render is often expected to be over-long.
+CHECKER="$REPO_ROOT/tools/check_handout_overflow.py"
+if [[ "${SKIP_OVERFLOW_CHECK:-}" != "1" && -f "$CHECKER" ]]; then
+  python3 "$CHECKER" "$OUTPUT" --quiet || true
+fi

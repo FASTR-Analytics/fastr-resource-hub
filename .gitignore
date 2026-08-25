@@ -89,3 +89,9 @@ handouts/_out/_bundles/
 # methodology/EDITING.md via methodology/build_editing_pdf.sh, shared
 # with collaborators directly (Drive / email) rather than via git.
 methodology/_out/
+
+# Scratch YAMLs from ad-hoc working sessions at the repo root — kept locally,
+# never published (decided 2026-08-25).
+/calc_form.yml
+/import_dialog.yml
+/search_results.yml

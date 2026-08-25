@@ -54,6 +54,7 @@ abstract.
 - [`templates/README.md`](templates/README.md) — workshop slide templates (EN + FR mirror)
 - [`web-app/README.md`](web-app/README.md) — Deck Builder app (also `web-app/ABOUT.md`, `web-app/ARCHITECTURE.md`)
 - [`handouts/README.md`](handouts/README.md) — handout source, templates, render commands
+- [`decks/README.md`](decks/README.md) — standalone one-off decks (plaidoyers, briefings). **PDF from the `.md` via Marp; editable PPTX from `decks/build_deck_pptx.py` (python-pptx) — never `marp --pptx*`, PowerPoint rejects it.**
 
 **Assets & brand**
 - [`resources/README.md`](resources/README.md) — diagrams, icons, logos, backgrounds, screenshots
