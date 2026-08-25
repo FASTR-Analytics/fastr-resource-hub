@@ -52,15 +52,15 @@ FASTR does not collect data itself. It **copies the data from DHIS2**, through a
 | 1 | Tell FASTR the DHIS2 code exists | Instance → **Data** → **Indicators** → **Raw DHIS2 Indicators** tab |
 | 2 | Give it a name people understand | Same page, **Common Indicators** tab |
 | 3 | Create the calculated indicator | Same page, **Calculated indicators** tab |
-| 4 | Copy the numbers over from DHIS2 | Instance → **Data** → HMIS **Data** → **Import from DHIS2** |
-| 5 | Update your project | Project → **Data** → **Update data** |
+| 4 | Copy the numbers over from DHIS2 | Instance → **Data** → HMIS **Data** → **Imports** |
+| 5 | Generate a results package and attach it | Instance → **Results** → **Generate a new results package** |
 | 6 | The new column appears on the scorecard | Happens by itself after step 5 |
 
 Some steps may already be done. If the code is already in FASTR, start at step 2. If the name already exists and has data, start at step 3.
 
 **The example used in this guide.** We follow one request from start to finish: the Safe Motherhood Coordinator wants **ANC1 coverage** on the scorecard — out of all pregnant women, how many came for their first antenatal visit? Look for **Our example** on each page.
 
-> **Steps 1–3 happen in the shared part of FASTR.** Your project only sees them after you click **Update data** in step 5. Created something and it's not showing? Changed a color cutoff and nothing moved? Do step 5.
+> **Steps 1–3 happen in the shared part of FASTR.** Your project only sees them after a **new results package** is generated and the project switches to it (step 5). Created something and it's not showing? Changed a color cutoff and nothing moved? Do step 5.
 
 ---
 
@@ -234,14 +234,14 @@ The scorecard shows columns in the order of the indicator list — not the order
 
 Everything you made so far is empty labels and rules. No numbers have moved yet. Now copy them over.
 
-1. Click the **Data** icon in the top bar, then the **Data** card in the **HMIS** section. Click **Import from DHIS2** and start a new import.
-2. The saved DHIS2 connection appears. Confirm it.
-3. Tick the indicators to copy, **including the new ones**.
-4. Choose to run it now. Set the time period. Start the import.
+1. Click the **Data** icon in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**, then **New DHIS2 import**.
+2. The wizard has five steps. **Credentials** — the saved DHIS2 connection appears. Confirm it.
+3. **Indicators** — tick the indicators to copy, **including the new ones**.
+4. **Time** — choose **Now**. **Configuration** — set the period range. **Review & launch** — check the summary and start the import.
 
    ![h:185](../../../resources/screenshots/scorecard_en/05_import_wizard.png)
 
-The import runs in the background. It can take a few minutes or much longer. You can leave the page and come back.
+The import runs on the server. It can take a few minutes or much longer. You can close the tab and come back — the **History** tab on the Imports page tells you when it is done.
 
 > **Set the period to match your old data.** Your other indicators go back years. If you only copy this year for the new ones, every chart that looks back further will have a hole in it. Copy the same period as the rest.
 
@@ -251,19 +251,22 @@ The import runs in the background. It can take a few minutes or much longer. You
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Update your project</span></h2>
+<h2 class="step-h"><span class="step-n">5</span><span>Generate a results package and attach it</span></h2>
 
-The numbers are in FASTR's central store now. But your project doesn't look at the central store. It works on **its own copy**. The warehouse is full — your shelf doesn't fill itself. Go get the boxes:
+The numbers are in FASTR's central store now. But no analysis has re-run, and your project doesn't read the central store directly. It reads a **results package** — a prepared set of computed results. The warehouse is full; now it packs a fresh package, and your project's shelf points at it:
 
 ![h:150](../../../resources/diagrams/scorecard_warehouse_shelf.svg)
 
-1. Click the **Projects** icon in the top bar. Open the project with the scorecard.
-2. Go to **Data**. A banner tells you the project's data is out of date.
-3. Click **Update data**.
+1. Click **Results** in the top bar. The **Results packages** page lists the existing packages, each with its date and the projects using it.
+2. Click **Generate a new results package**. The wizard has three steps.
+3. **Data** — tick **HMIS data**. **Modules** — tick the usual modules for your instance, including **Scorecard**. If a module needs another one first, FASTR adds it by itself.
+4. **Confirm and launch** — keep the suggested label or name the package clearly. Under **Attach to projects**, **tick the project with the scorecard.** Click **Launch generation**.
 
-   ![h:185](../../../resources/screenshots/scorecard_en/06_update_data.png)
+<div class="screenshot-placeholder">
+Screenshot: Results packages page + generation wizard (EN) — capture in Session 1 → resources/screenshots/scorecard_en/06_generate_package.png
+</div>
 
-This one click does everything: the project takes a fresh copy of the data, picks up your new indicators and rules, and re-runs the scorecard.
+The generation runs in the background; progress shows on the Results packages page. When it finishes, the ticked projects switch to the new package — your new indicators, rules, and colors included — and the scorecard re-runs.
 
 ## Check that it worked
 
@@ -271,7 +274,7 @@ Open the scorecard. Your new column is there, in the position you chose, with yo
 
 **Our example:** the scorecard now has an "ANC1 coverage (%)" column in the Reproductive health group — green, yellow, and red by state.
 
-> **The trap to know.** Some projects are set to take only a **fixed list** of indicators. Your new indicators are not on that list — the list was made before they existed. **Update data** will not add them by itself. Open the project's data settings, tick the new indicators, then click **Update data** again.
+> **Forgot a project?** Open that project, go to its **Results package** tab, pick the new package from the list, and click **Use this package**. A project left on an old package keeps showing the old numbers — without warning anyone. The setting that simplifies this: on the Results page, **Pin** the reference package, and in each project tick **"Always use the instance's pinned package"** (it is not on by default). From then on, the routine is: import, generate, pin — the projects follow.
 
 ---
 
@@ -279,10 +282,10 @@ Open the scorecard. Your new column is there, in the position you chose, with yo
 
 ## No scorecard in the project yet? Create one
 
-The scorecard comes from the **scorecard module** — look for "Scorecard" in the project's list of modules. Two things to know:
+The scorecard comes from the **scorecard module** — tick it in the **Modules** step when generating the results package (step 5). Two things to know:
 
-- It needs the **data quality adjustment module** to have run first. The platform keeps the order for you.
-- When you add it, it **creates a scorecard table by itself**: one row per state, indicators as columns, the last 12 months.
+- It needs the **data quality adjustment module** to have run first. FASTR keeps the order for you — tick Scorecard and the prerequisite comes along.
+- When a package with the scorecard module attaches to the project, it **creates a scorecard table by itself**: one row per state, indicators as columns, the last 12 months.
 
    ![h:185](../../../resources/screenshots/scorecard_en/07_default_scorecard.png)
 
@@ -302,10 +305,10 @@ The finished scorecard behaves like any other table. You can put it in dashboard
 
 ## If something is not working
 
-- **My new column is not on the scorecard.** The project has not been updated since you created the indicator. Go to the project, click **Update data**.
-- **I changed a cutoff and the colors didn't move.** Same cause: click **Update data**.
+- **My new column is not on the scorecard.** No results package has been generated since you created the indicator — or the project is still on an old package. Generate a new package (step 5), or open the project's **Results package** tab and switch it.
+- **I changed a cutoff and the colors didn't move.** Same cause: the change reaches the scorecard through a new results package. Generate one and attach it.
 - **My common indicator is not in the Numerator dropdown.** Its ID breaks the rules — a capital, a space, a dash. IDs cannot be changed. Make a new common indicator with a correct ID, link the same DHIS2 codes to it, and use that one.
-- **Update data fails and mentions calculated indicators.** One of your calculated indicators points at an indicator that has no data in this project. Copy its data over (step 4), or tick it in the project's data settings. Then update again.
+- **Package generation fails and mentions calculated indicators.** One of your calculated indicators points at an indicator that has no data. Copy its data over (step 4), wait for the import to finish, then generate the package again.
 - **A population-based column is empty.** Check the calculated indicator: in Nigeria the population type must be **Total population**, with the multiplier carrying the group's share. If that's already the case, flag it to the FASTR team.
 - **FASTR won't let me delete a common indicator.** A calculated indicator still uses it. The message tells you which one. Change or delete that calculated indicator first.
 - **I made a typo in an ID.** IDs cannot be changed. Delete the item and make it again. Everything else — labels, links, cutoffs — can be changed at any time.
@@ -368,12 +371,12 @@ One line per request. Fill the full form later for the ones that go ahead.
 1. **Search DHIS2** — *Raw DHIS2 Indicators → Import DHIS2 indicator*. Find the code and save it. FASTR now knows it exists. No name, no numbers.
 2. **Create the container** — *Common Indicators → Create Common Indicator*. A labeled box with a proper name, like `ipd_discharges`. Still empty.
 3. **Link the two** — *Mapped DHIS2 Indicators (JSON IDs) → +*. Now FASTR knows which code fills which box. Link several codes and FASTR adds them together.
-4. **Copy the numbers over** — *Import from DHIS2*, ticking your new indicators, matching the old data's period. Now the boxes fill up — in the warehouse.
-5. **Update the project** — *Project → Data → Update data*. Your shelf takes fresh boxes from the warehouse and the scorecard re-runs. Before this click, the project sees nothing of the above.
-6. **The rule** — *Calculated indicators tab*. One box divided by one box (or by a population group, or by nothing), a format, and two color cutoffs. That is the scorecard column. Write the rule any time — it reaches the scorecard with the same **Update data** click.
+4. **Copy the numbers over** — *Imports → New DHIS2 import*, ticking your new indicators, matching the old data's period. Now the boxes fill up — in the warehouse.
+5. **Generate and attach a results package** — *Results → Generate a new results package*, ticking the scorecard module and the project. The warehouse packs a fresh package, the project's shelf points at it, and the scorecard re-runs. Before this, the project sees nothing of the above.
+6. **The rule** — *Calculated indicators tab*. One box divided by one box (or by a population group, or by nothing), a format, and two color cutoffs. That is the scorecard column. Write the rule any time — it reaches the scorecard with the next **results package**.
 
 **And the population file:** dividing by population uses `population.csv`, already loaded on the instance. It holds each area's total population — use the **Multiplier** to take your group's share (0.22 for women of reproductive age, 0.04 for infants, 0.05 for pregnancies).
 
-Something missing at the end? Walk backwards: did you update the project (5)? Did you copy the numbers (4)? Is the box linked to the right code (3)? Does FASTR know the code at all (1)?
+Something missing at the end? Walk backwards: did you generate and attach a package (5)? Did you copy the numbers (4)? Is the box linked to the right code (3)? Does FASTR know the code at all (1)?
 
-**Between day 1 and day 2 of the training:** collect the forms, create the common and calculated indicators that evening (steps 1–3), and start the copy from DHIS2 (step 4) before you leave, so it has time to finish. In the morning, click **Update data** (step 5).
+**Between day 1 and day 2 of the training:** collect the forms, create the common and calculated indicators that evening (steps 1–3), and start the copy from DHIS2 (step 4) before you leave, so it has time to finish. In the morning, generate a results package and attach it to the training project (step 5).

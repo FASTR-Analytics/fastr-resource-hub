@@ -251,26 +251,25 @@ Utile pour vérifier que vous avez bien importé le bon élément — le nom qui
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-# Et après ? Récupérer les données, puis mettre à jour le projet
+# Et après ? Récupérer les données, puis générer un paquet de résultats
 
-<p class="meta-line"><strong>Deuxième partie</strong> · <strong>~15 min</strong></p>
+<p class="meta-line"><strong>Deuxième partie</strong> · <strong>~15 min + le temps des traitements</strong></p>
 
 Créer un indicateur ne récupère **aucune donnée**. Vous n'avez posé qu'une étiquette vide : FASTR sait désormais que `cpn1_faf` existe et à quel code DHIS2 il correspond, mais aucun chiffre n'a encore été téléchargé.
 
 Il reste deux gestes, et l'ordre compte.
 
-## Comprendre : l'instance et les projets
+## Comprendre : l'instance, le paquet, les projets
 
-FASTR range les données à deux niveaux.
+FASTR range les données à trois niveaux.
 
 - L'**instance** (Madagascar) contient **la base centrale**. C'est là qu'arrivent les données téléchargées depuis DHIS2. Il y en a une seule.
-- Chaque **projet** travaille sur **sa propre copie**, prise depuis cette base centrale. Un projet ne lit jamais la base centrale en direct.
+- Le **paquet de résultats** est un ensemble d'analyses **déjà calculées** sur ces données, généré au niveau de l'instance.
+- Chaque **projet** lit ses chiffres dans **le paquet qu'on lui a rattaché**. Un projet ne lit jamais la base centrale en direct.
 
-> **L'analogie :** l'instance est l'entrepôt, le projet est votre étagère. Une livraison arrive à l'entrepôt, mais votre étagère ne se remplit pas toute seule — il faut aller chercher les cartons.
+> **L'analogie :** l'instance est l'entrepôt, le projet est votre étagère. Une livraison arrive à l'entrepôt, mais votre étagère ne se remplit pas toute seule — l'entrepôt prépare un **carton complet** (le paquet), et votre étagère reçoit ce carton.
 
-Cette copie n'est pas une simple duplication : chaque projet prend un **extrait filtré** — sa période, ses indicateurs, ses zones. Deux projets de la même instance peuvent donc contenir des données différentes, et c'est normal.
-
-La conséquence pratique : **tout ce que vous changez au niveau de l'instance reste invisible dans les projets** jusqu'à ce que vous les mettiez à jour. Vos quatre nouveaux indicateurs ne font pas exception.
+La conséquence pratique : **tout ce que vous changez au niveau de l'instance reste invisible dans les projets** jusqu'à ce qu'un **nouveau paquet de résultats** soit généré et rattaché. Vos quatre nouveaux indicateurs ne font pas exception.
 
 ---
 
@@ -278,43 +277,43 @@ La conséquence pratique : **tout ce que vous changez au niveau de l'instance re
 
 <h2 class="step-h"><span class="step-n">4</span><span>Télécharger les données depuis DHIS2</span></h2>
 
-1. Depuis l'accueil de l'instance, section **SNIS**, cliquez sur **Contient des données**.
+1. Cliquez sur **Données** dans la barre du haut, puis, dans la section **SNIS**, sur la carte **Données**.
 
-   ![h:195](../../../resources/screenshots/dhis2_import/02_contient_donnees.jpeg)
+   ![h:170](../../../resources/screenshots/dhis2_import_v2/01_donnees.png)
 
-2. Cliquez sur **Importer depuis DHIS2**, puis sur **Nouvelle importation**.
+2. Cliquez sur **Importations**, puis sur **Nouvelle importation DHIS2**. L'assistant compte cinq étapes : **Identifiants**, **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**.
 
-   ![h:195](../../../resources/screenshots/dhis2_import/04_nouvelle_importation.jpeg)
+   ![h:170](../../../resources/screenshots/dhis2_import_v2/03_importations.png)
 
-3. La connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant** pour la confirmer.
+3. **Identifiants** — la connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant**.
 
-   ![h:195](../../../resources/screenshots/dhis2_import/05_connexion_suivant.jpeg)
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-4. Cochez les indicateurs à télécharger — **y compris vos quatre nouveaux**. Puis **Suivant**.
-
-   ![h:260](../../../resources/screenshots/dhis2_import/06_selection_indicateurs.jpeg)
+   ![h:150](../../../resources/screenshots/dhis2_import_v2/04_wizard_identifiants.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-5. Choisissez **Maintenant** pour lancer l'importation tout de suite, puis **Suivant**.
+4. **Indicateurs** — cochez les indicateurs à télécharger, **y compris vos quatre nouveaux**. Puis **Suivant**.
 
-   ![h:150](../../../resources/screenshots/dhis2_import/08_maintenant.jpeg)
+   ![h:260](../../../resources/screenshots/dhis2_import_v2/05_wizard_indicateurs.png)
 
-6. Réglez la **période** avec le curseur : la fenêtre de temps à télécharger. Puis **Suivant**.
+---
 
-   ![h:150](../../../resources/screenshots/dhis2_import/10_periode_slider.jpeg)
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-7. Vérifiez le récapitulatif, puis cliquez sur **Démarrer l'importation**.
+5. **Heure** — choisissez **Maintenant** pour lancer l'importation tout de suite, puis **Suivant**.
 
-   ![h:150](../../../resources/screenshots/dhis2_import/12_demarrer_importation.jpeg)
+   ![h:130](../../../resources/screenshots/dhis2_import_v2/06_wizard_heure.png)
 
-L'importation tourne en arrière-plan. Selon la période et le nombre d'indicateurs, comptez de quelques minutes à beaucoup plus. Vous pouvez quitter la page.
+6. **Configuration** — réglez la **plage de périodes** avec les deux curseurs : la fenêtre de mois à télécharger. Puis **Suivant**.
+
+   ![h:140](../../../resources/screenshots/dhis2_import_v2/07_wizard_periode.png)
+
+7. **Vérifier et lancer** — relisez le récapitulatif, puis cliquez sur **Démarrer l'importation**.
+
+   ![h:150](../../../resources/screenshots/dhis2_import_v2/08_wizard_lancer.png)
+
+L'importation tourne sur le serveur. Selon la période et le nombre d'indicateurs, comptez de quelques minutes à beaucoup plus. Vous pouvez fermer l'onglet : la page **Importations** → **Historique** vous dit quand elle est terminée. **Attendez la fin avant le geste suivant** — un paquet généré trop tôt calculerait sur les anciennes données.
 
 > **Prenez la même période que les données existantes.** Un indicateur ajouté aujourd'hui n'a pas d'historique tant que vous ne l'avez pas téléchargé. Si vos autres indicateurs remontent à 2019 et que vous n'importez que 2026 pour les nouveaux, les graphiques comparatifs auront des trous.
 
@@ -322,45 +321,51 @@ L'importation tourne en arrière-plan. Selon la période et le nombre d'indicate
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Mettre à jour le projet</span></h2>
+<h2 class="step-h"><span class="step-n">5</span><span>Générer un paquet de résultats et le rattacher</span></h2>
 
-Les données sont maintenant dans la base centrale. Il reste à les faire descendre dans le projet.
+Les données sont maintenant dans la base centrale, mais aucune analyse ne s'est recalculée. C'est le rôle du paquet.
 
-1. Cliquez sur l'icône **Projets** dans la barre de navigation en haut.
+1. Cliquez sur **Résultats** dans la barre du haut. La page **Paquets de résultats** liste les paquets existants, avec la date de chacun et les projets qui l'utilisent.
 
-   ![h:150](../../../resources/screenshots/dhis2_import/13_projets_nav.jpeg)
+   ![h:160](../../../resources/screenshots/dhis2_import_v2/09_resultats.png)
 
-2. Ouvrez le projet concerné — pour nous, **Données SRMNIA-N**.
+2. Cliquez sur **Générer un nouveau paquet de résultats**. L'assistant compte trois étapes.
+3. **Données** — cochez **Données HMIS**. Puis **Suivant**.
 
-   ![h:150](../../../resources/screenshots/dhis2_import/14_carte_projet.jpeg)
+   ![h:140](../../../resources/screenshots/dhis2_import_v2/10_generer_donnees.png)
 
-3. Allez dans **Données**. Un bandeau signale que **les données du projet ne sont plus à jour**, avec la raison — ici *Indicateurs ou correspondances modifiés*.
-4. Cliquez sur **Mettre à jour les données**.
+4. **Modules** — cochez les modules d'analyse habituels de votre instance. Si un module en nécessite un autre, FASTR l'ajoute tout seul. Puis **Suivant**.
 
-   ![h:150](../../../resources/screenshots/dhis2_import/15_mettre_a_jour.jpeg)
-
-Le projet reprend alors un extrait frais depuis la base centrale, et **réexécute les modules d'analyse** sur ces nouvelles données. C'est le comportement par défaut, et celui que vous voulez.
+   ![h:150](../../../resources/screenshots/dhis2_import_v2/11_generer_modules.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Vérifier ce que le projet a réellement pris
+5. **Confirmer et lancer** — gardez le libellé proposé, ou nommez le paquet plus clairement. Sous **Rattacher aux projets**, **cochez les projets qui doivent voir les nouveaux indicateurs** — pour nous, **Données SRMNIA-N**. Cliquez sur **Lancer la génération**.
 
-Cliquez sur **Paramètres** pour voir la configuration de l'extrait du projet.
+   ![h:190](../../../resources/screenshots/dhis2_import_v2/12_generer_confirmer.png)
 
-![h:195](../../../resources/screenshots/dhis2_import/16_parametres.jpeg)
+La génération tourne en arrière-plan ; la progression s'affiche sur la page Paquets de résultats. Dès qu'elle réussit, les projets cochés basculent sur le nouveau paquet — vos quatre indicateurs compris.
 
-C'est ici que se règlent les filtres : **Période**, **Indicateurs**, **Unités administratives**, types et catégories d'établissements. La page affiche aussi la date de la **dernière exportation de l'instance vers le projet** et le nombre total de lignes.
+## Vérifier que le projet a bien basculé
 
-> **Le piège à connaître.** Si le projet est configuré sur une **liste précise d'indicateurs** plutôt que sur *Tous les indicateurs*, vos quatre nouveaux n'y seront pas — ils n'existaient pas quand la liste a été établie. Mettre à jour les données ne les ajoutera pas. Il faut d'abord les cocher dans les **Paramètres**, puis relancer **Mettre à jour les données**.
+Ouvrez le projet et allez dans son onglet **Paquet de résultats** : le nom du paquet utilisé et sa date de génération s'affichent. Vos nouveaux indicateurs apparaissent maintenant dans les listes du projet.
+
+![h:160](../../../resources/screenshots/dhis2_import_v2/13_projet_paquet.png)
+
+> **Un projet oublié ?** Ouvrez-le, onglet **Paquet de résultats**, choisissez le nouveau paquet et cliquez sur **Utiliser ce paquet**. Et le réglage qui simplifie tout : sur la page **Résultats**, **épinglez** le paquet de référence, puis cochez dans chaque projet **« Toujours utiliser le paquet épinglé de l'instance »** — la routine devient : importer, générer, épingler.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Récapitulatif
 
 | Étape | Où | Effet |
 |---|---|---|
 | Créer l'indicateur | Instance → Indicateurs | Crée l'étiquette, aucune donnée |
-| Importer depuis DHIS2 | Instance → Données SNIS | Remplit la base centrale |
-| Mettre à jour les données | Projet → Données | Copie l'extrait et relance les analyses |
+| Importer depuis DHIS2 | Données → SNIS → Données → Importations | Remplit la base centrale |
+| Générer un paquet et le rattacher | Résultats → Générer un nouveau paquet | Recalcule les analyses ; les projets basculent |
 
-Si un chiffre manque à l'arrivée, reprenez ce tableau de bas en haut : le projet est-il à jour, la donnée est-elle dans l'instance, l'indicateur est-il bien associé à son code DHIS2 ?
+Si un chiffre manque à l'arrivée, reprenez ce tableau de bas en haut : le projet est-il sur le bon paquet, la donnée est-elle dans l'instance, l'indicateur est-il bien associé à son code DHIS2 ?
