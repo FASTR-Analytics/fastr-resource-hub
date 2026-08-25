@@ -24,6 +24,16 @@ change content.
 Language subfolders (`fr/`, `en/`, …) mirror the rest of the repo. Image paths
 in a deck point at the shared assets with `../../resources/...`.
 
+## Rendered-from-library decks
+
+`en/platform_security_sustainability.pdf` and `fr/platform_security_sustainability.pdf`
+are **not** hand-authored here — they are rendered from the `mg` slide-library
+module (`core_content/mg_platform_governance/` + `core_content_fr/`), which is
+the source of truth. Edit the slides there (or assemble them in the deck-builder
+app), then regenerate: concatenate the module's slides per `_meta.yaml` order
+into one Marp file and render with `npx @marp-team/marp-cli <combined.md> -o
+decks/<lang>/platform_security_sustainability.pdf --allow-local-files`.
+
 ## How to edit
 
 - Each deck is a single Marp markdown file using `theme: fastr` (the shared
