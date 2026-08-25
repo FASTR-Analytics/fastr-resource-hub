@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="Inter, sans-serif">
+  <!-- What the AI can and cannot see -->
+  <!-- Left: aggregated chart (allowed) -->
+  <g transform="translate(40,40)">
+    <rect x="0" y="0" width="330" height="150" rx="12" fill="#FFFFFF" stroke="#0C716B" stroke-width="2"/>
+    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="600">The numbers on your charts</text>
+    <g fill="#1F9A9C">
+      <rect x="50" y="100" width="30" height="30" rx="3"/>
+      <rect x="95" y="80" width="30" height="50" rx="3"/>
+      <rect x="140" y="60" width="30" height="70" rx="3"/>
+      <rect x="185" y="90" width="30" height="40" rx="3"/>
+      <rect x="230" y="70" width="30" height="60" rx="3"/>
+    </g>
+    <text x="165" y="47" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="13">totals per district, per month</text>
+  </g>
+  <g transform="translate(40,220)">
+    <rect x="0" y="0" width="330" height="150" rx="12" fill="#FDE8E8" stroke="#C53030" stroke-width="2"/>
+    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#C53030" font-size="16" font-weight="600">The underlying records</text>
+    <g stroke="#F5C6C6" stroke-width="1.5">
+      <line x1="40" y1="62" x2="290" y2="62"/>
+      <line x1="40" y1="88" x2="290" y2="88"/>
+      <line x1="40" y1="114" x2="290" y2="114"/>
+    </g>
+    <g fill="#C53030" font-size="13">
+      <text x="48" y="53" dominant-baseline="central">facility rows</text>
+      <text x="48" y="76" dominant-baseline="central">line-by-line entries</text>
+      <text x="48" y="102" dominant-baseline="central">detailed lists</text>
+    </g>
+  </g>
+  <!-- Arrows to the AI -->
+  <polyline points="380,115 470,115 462,107 470,115 462,123" fill="none" stroke="#0C716B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g>
+    <line x1="380" y1="295" x2="470" y2="295" stroke="#C53030" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="10 8"/>
+    <g stroke="#C53030" stroke-width="4" stroke-linecap="round">
+      <line x1="412" y1="277" x2="440" y2="313"/>
+      <line x1="440" y1="277" x2="412" y2="313"/>
+    </g>
+  </g>
+  <!-- AI panel -->
+  <g transform="translate(490,120)">
+    <rect x="0" y="0" width="180" height="160" rx="16" fill="#09544F"/>
+    <text x="90" y="66" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
+    <text x="90" y="100" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
+  </g>
+  <!-- Right: consequences -->
+  <g transform="translate(710,90)">
+    <rect x="0" y="0" width="220" height="220" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
+    <text x="110" y="36" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">It also…</text>
+    <g fill="#0C716B" font-size="14">
+      <text x="20" y="72" dominant-baseline="central">• sees only what YOU are</text>
+      <text x="28" y="92" dominant-baseline="central">allowed to see</text>
+      <text x="20" y="126" dominant-baseline="central">• can search the public internet</text>
+      <text x="20" y="160" dominant-baseline="central">• every question is logged —</text>
+      <text x="28" y="180" dominant-baseline="central">user, project, usage</text>
+    </g>
+  </g>
+</svg>

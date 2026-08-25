@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="Inter, sans-serif">
+  <!-- Three cost blocks, utility-bill analogy -->
+  <g transform="translate(40,40)">
+    <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+    <rect x="0" y="0" width="270" height="56" rx="14" fill="#09544F"/>
+    <rect x="0" y="28" width="270" height="28" fill="#09544F"/>
+    <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Hébergement</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Comme un loyer</text>
+    <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Un montant mensuel fixe</text>
+    <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">pour le serveur du pays</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">[coût mensuel — à confirmer]</text>
+  </g>
+  <g transform="translate(345,40)">
+    <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+    <rect x="0" y="0" width="270" height="56" rx="14" fill="#0C716B"/>
+    <rect x="0" y="28" width="270" height="28" fill="#0C716B"/>
+    <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Assistant IA</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Comme l'électricité</text>
+    <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Au compteur — vous ne payez</text>
+    <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">que ce qui est utilisé</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">[fourchette mensuelle — à confirmer]</text>
+  </g>
+  <g transform="translate(650,40)">
+    <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+    <rect x="0" y="0" width="270" height="56" rx="14" fill="#1F9A9C"/>
+    <rect x="0" y="28" width="270" height="28" fill="#1F9A9C"/>
+    <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Personnes</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Comme l'entretien</text>
+    <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Mises à jour, supervision,</text>
+    <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">sauvegardes, appui aux utilisateurs</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">équipe partagée aujourd'hui</text>
+  </g>
+  <text x="480" y="322" text-anchor="middle" fill="#0C716B" font-size="16" font-style="italic">Pas de licence par personne — ajouter des utilisateurs ne coûte rien de plus</text>
+</svg>

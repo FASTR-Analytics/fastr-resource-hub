@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="Inter, sans-serif">
+  <!-- Three fully separate country installations, no pathway between them -->
+  <g>
+    <!-- Pays A -->
+    <g transform="translate(30,40)">
+      <rect x="0" y="0" width="260" height="280" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+      <rect x="0" y="0" width="260" height="52" rx="14" fill="#09544F"/>
+      <rect x="0" y="26" width="260" height="26" fill="#09544F"/>
+      <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays A</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+    </g>
+    <!-- Pays B -->
+    <g transform="translate(350,40)">
+      <rect x="0" y="0" width="260" height="280" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+      <rect x="0" y="0" width="260" height="52" rx="14" fill="#0C716B"/>
+      <rect x="0" y="26" width="260" height="26" fill="#0C716B"/>
+      <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays B</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+    </g>
+    <!-- Pays C -->
+    <g transform="translate(670,40)">
+      <rect x="0" y="0" width="260" height="280" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
+      <rect x="0" y="0" width="260" height="52" rx="14" fill="#1F9A9C"/>
+      <rect x="0" y="26" width="260" height="26" fill="#1F9A9C"/>
+      <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays C</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+    </g>
+    <!-- No-connection marks between the buildings -->
+    <g stroke="#C53030" stroke-width="3" stroke-linecap="round">
+      <line x1="310" y1="165" x2="330" y2="195"/>
+      <line x1="330" y1="165" x2="310" y2="195"/>
+      <line x1="630" y1="165" x2="650" y2="195"/>
+      <line x1="650" y1="165" x2="630" y2="195"/>
+    </g>
+    <text x="480" y="352" text-anchor="middle" fill="#0C716B" font-size="16" font-style="italic">Aucune connexion entre les pays — par conception</text>
+  </g>
+</svg>

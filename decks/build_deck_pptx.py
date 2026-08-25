@@ -142,7 +142,9 @@ def _fit(img_path, max_w, max_h):
 
 
 def _title(slide, text, *, color=DEEP_GREEN, rule=GREEN, y=0.55):
-    lines = max(1, -(-len(text) // 46))  # ceil
+    # ~54 chars fit on one line at 30pt Poppins bold across CW; titles in the
+    # 48-56 char zone are ambiguous — keep deck titles out of that range.
+    lines = max(1, -(-len(text) // 54))  # ceil
     th = 0.62 * lines
     _tb(slide, LEFT, y, CW, th + 0.15)[1] and None
     tb, tf = _tb(slide, LEFT, y, CW, th + 0.2)
@@ -373,11 +375,30 @@ def _callout(slide, text):
           space=0, line=1.1)
 
 
+def s_image(prs, c):
+    """Title + optional lead sentence + one large centered image
+    (path relative to resources/)."""
+    s = _new(prs)
+    by = _title(s, c["title"])
+    if c.get("lead"):
+        tb, tf = _tb(s, LEFT, by, CW, 0.75)
+        _para(tf, c["lead"], size=14.5, color=INK, first=True, space=0, line=1.2)
+        by += 0.85
+    img = RES / c["image"]
+    pad = 0.75 if c.get("footer") else 0.45
+    max_w, max_h = CW, SH - by - pad
+    w, h = _fit(img, max_w, max_h)
+    s.shapes.add_picture(str(img), Inches(LEFT + (max_w - w) / 2),
+                         Inches(by + (max_h - h) / 2), Inches(w), Inches(h))
+    if c.get("footer"):
+        _callout(s, c["footer"])
+
+
 BUILDERS = {
     "cover": s_cover, "section": s_section, "content": s_content,
     "centered": s_centered, "two_col": s_two_col, "columns3": s_columns3,
     "split": s_split, "output": s_output, "architecture": s_architecture,
-    "results_chain": s_results_chain, "closing": s_closing,
+    "results_chain": s_results_chain, "closing": s_closing, "image": s_image,
 }
 
 
@@ -658,14 +679,109 @@ EN = [
 
 CONTENT = {"fr": FR, "en": EN}
 
+# ---- governance deck (mirrors decks/<lang>/platform_security_sustainability.md)
+GOV_EN = [
+    {"type": "cover", "title": "Security, costs, and ownership",
+     "subtitle": "How the FASTR platform protects a country's data — and what it takes to run it"},
+    {"type": "section", "title": "Data security"},
+    {"type": "content", "title": "What the platform holds", "blocks": [
+        {"t": "**Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March", "bullet": True},
+        {"t": "The **same figures as the DHIS2 reports** the ministry already produces", "bullet": True},
+        {"t": "**No patient records** — no names, no addresses, nothing individual", "bullet": True},
+    ]},
+    {"type": "image", "title": "Each country is fully separate",
+     "lead": "Sharing between countries is not restricted — it is **technically impossible**. Each country runs its own installation.",
+     "image": "diagrams/gov_country_isolation.png"},
+    {"type": "content", "title": "Who can see what", "blocks": [
+        {"t": "The ministry decides **who gets an account**, and each person's role", "bullet": True},
+        {"t": "Roles set what a person can do — **view, edit, or administer** — and in which projects", "bullet": True},
+        {"t": "Identity is **re-checked on every request**, not just at login", "bullet": True},
+        {"t": "Only a **small, named group of administrators** can change the setup", "bullet": True},
+    ]},
+    {"type": "image", "title": "How the data is protected",
+     "lead": "The platform checks who you are at every step, scrambles everything it sends, and saves copies automatically.",
+     "image": "diagrams/gov_security_layers.png"},
+    {"type": "image", "title": "What the AI can see",
+     "lead": "Aggregated totals only — the numbers a user could already see on screen, within that user's permissions. **Never the underlying rows.**",
+     "image": "diagrams/gov_ai_boundary.png"},
+    {"type": "section", "title": "Costs and ownership"},
+    {"type": "image", "title": "Running costs",
+     "lead": "Three lines: **server hosting** (fixed), **AI use** (metered), **support** (shared team). No per-user fees.",
+     "image": "diagrams/gov_cost_structure.png"},
+    {"type": "content", "title": "Hosting — today and tomorrow", "blocks": [
+        {"t": "Hosted **centrally today**, while the platform is in active development — every country receives fixes and new features the same day", "bullet": True},
+        {"t": "Built **portable**: the same platform can run on a ministry's own servers", "bullet": True},
+        {"t": "**Moving later requires no rebuild** — the same software runs in either place", "bullet": True},
+    ]},
+    {"type": "image", "title": "The path to country ownership",
+     "image": "diagrams/gov_ownership_roadmap.png"},
+    {"type": "content", "title": "The essentials", "blocks": [
+        {"t": "**Monthly totals only** — never patient records", "bullet": True},
+        {"t": "**One installation per country** — no pathway between countries", "bullet": True},
+        {"t": "**Three known cost lines** — hosting, metered AI, support; no per-user fees", "bullet": True},
+        {"t": "**Country hosting by 2030** — the stated transition goal", "bullet": True},
+    ]},
+]
+
+GOV_FR = [
+    {"type": "cover", "title": "Sécurité, coûts et appropriation",
+     "subtitle": "Comment la plateforme FASTR protège les données d'un pays — et ce qu'il faut pour la faire tourner"},
+    {"type": "section", "title": "Sécurité des données"},
+    {"type": "content", "title": "Ce que contient la plateforme", "blocks": [
+        {"t": "Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars", "bullet": True},
+        {"t": "Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà", "bullet": True},
+        {"t": "**Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel", "bullet": True},
+    ]},
+    {"type": "image", "title": "Chaque pays est entièrement séparé",
+     "lead": "Le partage entre pays n'est pas restreint — il est **techniquement impossible**. Chaque pays fonctionne sur sa propre installation.",
+     "image": "diagrams_fr/gov_country_isolation.png"},
+    {"type": "content", "title": "Qui voit quoi", "blocks": [
+        {"t": "Le ministère décide **qui reçoit un compte**, et le rôle de chaque personne", "bullet": True},
+        {"t": "Le rôle fixe ce qu'une personne peut faire — **consulter, éditer ou administrer** — et dans quels projets", "bullet": True},
+        {"t": "L'identité est **revérifiée à chaque requête**, pas seulement à la connexion", "bullet": True},
+        {"t": "Seul un **petit groupe d'administrateurs identifiés** peut modifier la configuration", "bullet": True},
+    ]},
+    {"type": "image", "title": "Comment les données sont protégées",
+     "lead": "La plateforme vérifie qui vous êtes à chaque étape, brouille tout ce qu'elle transmet et enregistre des copies automatiquement.",
+     "image": "diagrams_fr/gov_security_layers.png"},
+    {"type": "image", "title": "Ce que l'IA peut voir",
+     "lead": "Des totaux agrégés uniquement — les chiffres qu'un utilisateur verrait déjà à l'écran, dans la limite de ses permissions. **Jamais les lignes en dessous.**",
+     "image": "diagrams_fr/gov_ai_boundary.png"},
+    {"type": "section", "title": "Coûts et appropriation"},
+    {"type": "image", "title": "Coûts de fonctionnement",
+     "lead": "Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteur), **appui** (équipe partagée). Pas de frais par utilisateur.",
+     "image": "diagrams_fr/gov_cost_structure.png"},
+    {"type": "content", "title": "Hébergement — aujourd'hui et demain", "blocks": [
+        {"t": "Hébergée **de façon centralisée aujourd'hui**, pendant le développement actif — chaque pays reçoit correctifs et nouveautés le jour même", "bullet": True},
+        {"t": "Construite **portable** : le même logiciel peut tourner sur les serveurs d'un ministère", "bullet": True},
+        {"t": "**Migrer plus tard n'exige aucune reconstruction** — le même logiciel tourne dans les deux cas", "bullet": True},
+    ]},
+    {"type": "image", "title": "Le chemin vers l'appropriation par le pays",
+     "image": "diagrams_fr/gov_ownership_roadmap.png"},
+    {"type": "content", "title": "L'essentiel", "blocks": [
+        {"t": "**Des totaux mensuels uniquement** — jamais de dossiers patients", "bullet": True},
+        {"t": "**Une installation par pays** — aucun passage entre pays", "bullet": True},
+        {"t": "**Trois lignes de coûts connues** — hébergement, IA au compteur, appui ; pas de frais par utilisateur", "bullet": True},
+        {"t": "**Hébergement par le pays d'ici 2030** — l'objectif de transition affiché", "bullet": True},
+    ]},
+]
+
+DECKS = {
+    "plaidoyer": {"content": CONTENT, "file": "plaidoyer_plateforme_fastr.pptx"},
+    "governance": {"content": {"en": GOV_EN, "fr": GOV_FR},
+                   "file": "platform_security_sustainability.pptx"},
+}
+
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--lang", default="fr", choices=sorted(CONTENT))
+    ap.add_argument("--lang", default="fr", choices=("en", "fr"))
+    ap.add_argument("--deck", default="plaidoyer", choices=sorted(DECKS))
     ap.add_argument("--out")
     args = ap.parse_args()
-    out = args.out or str(REPO / "decks" / args.lang / "plaidoyer_plateforme_fastr.pptx")
-    n = build(CONTENT[args.lang], out)
+    deck = DECKS[args.deck]
+    out = args.out or str(REPO / "decks" / args.lang / deck["file"])
+    n = build(deck["content"][args.lang], out)
     print(f"Wrote {n} slides -> {out}")
 
 

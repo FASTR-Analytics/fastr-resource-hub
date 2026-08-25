@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Inter, sans-serif">
+  <text x="480" y="34" text-anchor="middle" fill="#09544F" font-size="19" font-weight="600">Three checks stand between a user and the data</text>
+
+  <!-- User -->
+  <g transform="translate(30,110)">
+    <circle cx="45" cy="30" r="16" fill="#0C716B"/>
+    <path d="M 15 85 Q 15 52 45 52 Q 75 52 75 85 Z" fill="#0C716B"/>
+    <text x="45" y="108" text-anchor="middle" fill="#09544F" font-size="15" font-weight="600">A user</text>
+  </g>
+
+  <polyline points="120,165 152,165 145,158 152,165 145,172" fill="none" stroke="#0C716B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Check 1 -->
+  <g transform="translate(160,95)">
+    <rect x="0" y="0" width="200" height="140" rx="12" fill="#09544F"/>
+    <text x="100" y="32" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">1 · Sign-in</text>
+    <text x="100" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Identity is verified —</text>
+    <text x="100" y="86" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">again at every request,</text>
+    <text x="100" y="106" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">not just at login</text>
+  </g>
+
+  <polyline points="368,165 400,165 393,158 400,165 393,172" fill="none" stroke="#0C716B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Check 2 -->
+  <g transform="translate(408,95)">
+    <rect x="0" y="0" width="200" height="140" rx="12" fill="#0C716B"/>
+    <text x="100" y="32" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">2 · Permissions</text>
+    <text x="100" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Their role decides</text>
+    <text x="100" y="86" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">what they can open —</text>
+    <text x="100" y="106" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">and in which projects</text>
+  </g>
+
+  <polyline points="616,165 648,165 641,158 648,165 641,172" fill="none" stroke="#0C716B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Check 3 -->
+  <g transform="translate(656,95)">
+    <rect x="0" y="0" width="200" height="140" rx="12" fill="#1F9A9C"/>
+    <text x="100" y="32" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">3 · Encryption</text>
+    <text x="100" y="66" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">Everything travels</text>
+    <text x="100" y="86" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">scrambled — unreadable</text>
+    <text x="100" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">if intercepted</text>
+  </g>
+
+  <polyline points="864,165 890,165 883,158 890,165 883,172" fill="none" stroke="#0C716B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Data cylinder -->
+  <g transform="translate(896,115)">
+    <path d="M 0 14 Q 0 0 27 0 Q 54 0 54 14 L 54 86 Q 54 100 27 100 Q 0 100 0 86 Z" fill="#E8F4F3" stroke="#09544F" stroke-width="2"/>
+    <ellipse cx="27" cy="14" rx="27" ry="12" fill="#FFFFFF" stroke="#09544F" stroke-width="2"/>
+    <text x="27" y="126" text-anchor="middle" fill="#09544F" font-size="14" font-weight="600">The data</text>
+  </g>
+
+  <!-- Backups band -->
+  <g transform="translate(30,290)">
+    <rect x="0" y="0" width="900" height="100" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
+    <text x="450" y="34" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="600">Separately: protection against loss</text>
+    <text x="450" y="66" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="15">The database is backed up every 30 minutes, the full installation daily — if a server fails, everything can be rebuilt</text>
+  </g>
+</svg>

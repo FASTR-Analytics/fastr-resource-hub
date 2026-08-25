@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" font-family="Inter, sans-serif">
+  <!-- Three-stage path to country ownership -->
+  <g>
+    <path d="M 40 60 L 300 60 L 340 130 L 300 200 L 40 200 Z" fill="#09544F"/>
+    <text x="180" y="105" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Aujourd'hui</text>
+    <text x="180" y="138" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Hébergée de façon centralisée</text>
+    <text x="180" y="158" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">pendant le développement</text>
+  </g>
+  <g>
+    <path d="M 320 60 L 600 60 L 640 130 L 600 200 L 320 200 L 360 130 Z" fill="#0C716B"/>
+    <text x="480" y="105" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Ensuite</text>
+    <text x="480" y="138" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Les équipes du ministère gèrent</text>
+    <text x="480" y="158" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">utilisateurs, imports et mises à jour</text>
+  </g>
+  <g>
+    <path d="M 620 60 L 880 60 L 920 130 L 880 200 L 620 200 L 660 130 Z" fill="#1F9A9C"/>
+    <text x="775" y="98" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Objectif — 2030</text>
+    <text x="775" y="131" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">Hébergée et gérée</text>
+    <text x="775" y="151" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">par le pays</text>
+    <text x="775" y="175" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="12" font-style="italic">fin de la période stratégique du GFF</text>
+  </g>
+  <g transform="translate(40,240)">
+    <rect x="0" y="0" width="880" height="70" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
+    <text x="440" y="24" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Ce qu'il faut au pays pour prendre le relais</text>
+    <text x="440" y="49" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Un serveur (le sien ou loué dans le cloud) · une équipe informatique pour l'entretenir · un budget hébergement et IA</text>
+  </g>
+</svg>
