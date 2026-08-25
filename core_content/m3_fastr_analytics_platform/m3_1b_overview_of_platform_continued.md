@@ -16,7 +16,7 @@ paginate: true
 
 **Data Management** — Import facility lists and indicator data from DHIS2 or files
 
-**Data Analysis** — Run statistical modules for quality assessment and adjustment
+**Data Analysis** — Built-in statistical modules for quality assessment, adjustment, and coverage
 
 **Visualization** — Explore results with interactive charts and tables
 

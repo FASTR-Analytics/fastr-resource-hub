@@ -43,7 +43,9 @@ To request a country instance for your organization, contact Ashley Sheffel at a
 
 ??? "2.1 Understanding modules"
 
-    Available analysis modules, module installation, and running analyses.
+    Available analysis modules and how they run when a results package is generated.
+
+    *Note: this walkthrough was recorded on an earlier platform version, before results packages. Modules are now selected in the results-package generation wizard rather than installed per project.*
 
     <iframe src="https://scribehow.com/page-embed/21_Understanding_Modules__WuxRH16OStKherxJbQu8Lw" width="100%" height="800" allow="fullscreen" style="border: 0; min-height: 640px"></iframe>
 
@@ -78,8 +80,8 @@ Project setup workflow, configuration options, and best practices.
 
 *Tutorials coming soon.*
 
-## 8. Administration: Modules
+## 8. Administration: Results packages
 
-Available analysis modules, module installation, and running analyses.
+Selecting and configuring analysis modules, generating results packages, and pinning or attaching them to projects.
 
 *Tutorials coming soon.*
