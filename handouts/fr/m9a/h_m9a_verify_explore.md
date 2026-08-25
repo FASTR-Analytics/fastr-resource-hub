@@ -57,7 +57,7 @@ Choisissez une période (p. ex. le mois dernier) et un établissement que vous c
 
 <h2 class="step-h"><span class="step-n">5</span><span>Consulter l'historique d'importation</span></h2>
 
-Cliquez sur **View previous imports** pour voir toutes les importations passées — date, source, nombre de lignes insérées/mises à jour. Utile pour suivre ce qui est chargé et quand.
+Ouvrez l'onglet **Historique** de la page Importations pour voir toutes les importations passées, et l'onglet **Par indicateur** pour les mois de données et la dernière importation de chaque indicateur. Utile pour suivre ce qui est chargé et quand.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 
@@ -83,4 +83,4 @@ Vous êtes prêt à lancer les modules d'analyse — qualité des données, util
 
 ## Étape suivante
 
-Installation terminée. Passez à **Premiers pas** (M9b) pour apprendre l'interface en profondeur, ou lancez directement votre premier module d'analyse.
+Installation terminée. Un administrateur peut maintenant **générer un paquet de résultats** (Résultats → Générer un nouveau paquet) pour que les projets utilisent les données. Passez ensuite à **Premiers pas** (M9b) pour apprendre l'interface en profondeur.

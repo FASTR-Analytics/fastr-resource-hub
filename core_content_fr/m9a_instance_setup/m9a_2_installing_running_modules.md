@@ -4,12 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Activité : Installation et exécution des modules
+## Activité : Générer un paquet de résultats
 
 **Dans cette session pratique, nous allons :**
 
 - Passer en revue les modules d'analyse disponibles
-- Installer les modules requis
-- Exécuter les premières analyses
+- Sélectionner les modules et configurer leurs paramètres dans l'assistant de génération
+- Générer un paquet de résultats et le rattacher à un projet
 
-*Les participants configureront et exécuteront les modules sur leurs données*
+*Les participants généreront un paquet de résultats à partir de leurs données importées*

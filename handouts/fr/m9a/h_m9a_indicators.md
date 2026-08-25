@@ -70,7 +70,7 @@ Configurer les indicateurs en trois étapes :
 
    ![h:160](../../../resources/screenshots/m9a_setup/09_import_dhis2_btn.jpeg)
 
-> Si vous n'avez pas encore sauvegardé vos identifiants DHIS2 dans cette session, le formulaire de connexion apparaît ici — mêmes champs que dans *Importer la structure des établissements*. Cochez **Save credentials for this session**.
+> La **connexion DHIS2 enregistrée** de l'instance est utilisée automatiquement. S'il n'y en a pas encore, ajoutez-la une fois via **Gérer la connexion** sur la page Importations — mêmes champs que dans *Importer la structure des établissements*.
 
 2. Dans le champ de recherche, tapez un terme issu de la colonne **G — NOM OFFICIEL DE L'INDICATEUR DANS DHIS2** de votre *Modèle de cartographie* (p. ex. `antenatal` pour les soins prénatals).
 3. Cliquez sur **Search**. Les résultats apparaissent dans la liste.

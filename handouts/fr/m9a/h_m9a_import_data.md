@@ -12,14 +12,14 @@ footer: "FASTR · Configuration de l'instance"
 
 # Importer les données HMIS
 
-<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~25 min</strong></p>
+<p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~15 min + le temps du serveur</strong></p>
 
 <div class="p1-grid">
 <aside class="p1-sidebar">
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Établissements importés (la page des unités administratives est verte)
+- ☐ Établissements importés (la carte Établissements affiche vos effectifs)
 - ☐ Indicateurs importés et mappés (chaque indicateur DHIS2 a un lien vers un indicateur commun)
 - ☐ Vous avez décidé de la **plage temporelle** à importer (p. ex. 36 derniers mois — discutez avec votre équipe)
 
@@ -28,85 +28,90 @@ footer: "FASTR · Configuration de l'instance"
 
 ## Ce que vous allez faire
 
-Récupérer les vraies valeurs de données depuis DHIS2 pour vos indicateurs et la plage choisie. C'est la plus grosse opération de l'installation — selon la taille du pays, elle peut prendre 5 à 30 minutes.
+Télécharger les valeurs réelles depuis DHIS2 pour vos indicateurs et votre période. C'est la plus grosse opération de données de la configuration — selon la taille du pays, comptez 5 à 30 minutes. L'importation tourne **sur le serveur** : une fois lancée, vous pouvez fermer l'onglet et revenir plus tard.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir l'importation HMIS Data</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la page Importations</span></h2>
 
-Depuis la page **Données**, cliquez sur **HMIS Data**, puis **Nouvelle importation**.
+Cliquez sur **Données** dans la barre du haut, puis sur la carte **Données** de la section **SNIS**. Cliquez sur **Importations**.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choisir « Importer depuis DHIS2 »</span></h2>
-
-Même option que pour les établissements. Cliquez sur **Sauvegarder**.
-
-> Si vous avez coché **Save credentials for this session** plus tôt (dans zones administratives ou indicateurs), la plateforme saute le formulaire de connexion ici. Sinon il s'affiche maintenant — mêmes champs qu'avant.
+La page compte quatre onglets — **En cours**, **À venir**, **Historique**, **Par indicateur** — et les boutons **Nouvelle importation DHIS2**, **Téléverser un fichier CSV** et **Gérer la connexion**.
 
 </div>
 </div>
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">3</span><span>Sélectionner les indicateurs et la plage</span></h2>
-
-- Cochez chaque indicateur pour lequel vous voulez des données.
-- Définissez la **plage temporelle** avec le curseur — soyez délibéré (3 ans de données mensuelles ≈ 36 périodes × N établissements, ça monte vite).
-
-![h:200](../../../resources/screenshots/m9a_setup/13_select_indicators_period.jpeg)
-
-Cliquez sur **Save selection**.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Configurer la gestion des erreurs</span></h2>
-
-Sur l'écran de configuration d'importation, vérifiez que **Abort the entire import attempt** est sélectionné. Cela garantit l'intégrité : si une combinaison indicateur-période échoue, *toute* l'importation est annulée. Vous n'aurez pas de données partielles.
-
-Cliquez sur **Start fetching from DHIS2**.
-
-![h:200](../../../resources/screenshots/m9a_setup/14_abort_start_fetching.jpeg)
+![h:190](../../../resources/screenshots/m9a_setup/22_imports_page.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Suivre la progression</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Lancer l'assistant — Identifiants</span></h2>
 
-Un indicateur de progression montre le compteur de combinaisons indicateur-période récupérées.
+Cliquez sur **Nouvelle importation DHIS2**. L'assistant compte cinq étapes : **Identifiants**, **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**.
 
-> ⚠ **Ne fermez pas l'onglet.** La récupération tourne dans votre session navigateur.
+À l'étape **Identifiants**, la connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant**.
 
-<h2 class="step-h"><span class="step-n">6</span><span>Examiner le résumé</span></h2>
+![h:170](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
 
-Une fois la récupération terminée, cliquez sur **Import Summary** pour voir :
+> Pas encore de connexion enregistrée ? Configurez-la une fois via **Gérer la connexion** sur la page Importations — elle est sauvegardée pour toute l'instance, chiffrée, et personne ne retape les identifiants à chaque importation.
 
-- Source (URL DHIS2)
-- Date
-- Récupérations réussies vs échouées
-- Total de lignes en attente d'intégration
+<h2 class="step-h"><span class="step-n">3</span><span>Indicateurs</span></h2>
 
-![h:200](../../../resources/screenshots/m9a_setup/15_import_summary.jpeg)
+Cochez tous les indicateurs voulus — la case tout en haut sélectionne tout. Puis **Suivant**.
 
-<h2 class="step-h"><span class="step-n">7</span><span>Intégrer</span></h2>
-
-Si le résumé semble correct, cliquez sur **Integrate and finalize**. Patientez jusqu'à la fin de la barre de progression.
-
-<h2 class="step-h"><span class="step-n">8</span><span>Nettoyer</span></h2>
-
-Cliquez sur **Remove completed upload form** pour nettoyer l'interface. Vos données importées restent en place — vous masquez juste le formulaire.
-
-## Vérification
-
-La page HMIS Data affiche maintenant vos indicateurs sous forme de graphique, avec les valeurs qui défilent dans le temps.
+![h:200](../../../resources/screenshots/m9a_setup/26_wizard_indicators.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Que faire si ça ne marche pas
+<h2 class="step-h"><span class="step-n">4</span><span>Heure</span></h2>
 
-- **« Failed: X combinations »** — généralement, une combinaison établissement-indicateur n'a pas de données dans DHIS2 pour cette période. Si quelques-unes seulement, vous pouvez ré-importer avec une sélection plus étroite. Si beaucoup, vérifiez votre mapping d'indicateurs (étape 3 de *Importer les indicateurs*).
-- **Le navigateur fige / onglet ne répond plus** — les gros tirages (1000+ établissements × 36 mois × 10 indicateurs) sollicitent le navigateur. Réduisez le nombre d'indicateurs ou raccourcissez la plage temporelle et tirez par lots.
-- **Le réseau coupe en plein milieu** — le réglage *abort the entire import* vous protège ici. Relancez avec la même sélection.
+Choisissez **Maintenant**, puis **Suivant**.
 
-## Étape suivante
+![h:140](../../../resources/screenshots/m9a_setup/27_wizard_time.png)
 
-Dernière étape : **Vérifier et explorer** — confirmer que tout est correct et apprendre à naviguer dans vos données.
+> **À noter pour plus tard :** l'option **Récurrente** programme cette importation pour qu'elle se répète toute seule — par exemple chaque mois. Une fois la configuration stabilisée, c'est une tâche de routine en moins.
+
+<h2 class="step-h"><span class="step-n">5</span><span>Configuration — la plage de périodes</span></h2>
+
+Réglez la **plage de périodes** avec les deux curseurs. Soyez délibéré : 3 ans de données mensuelles ≈ 36 périodes × N établissements, et cela grimpe vite. Puis **Suivant**.
+
+![h:150](../../../resources/screenshots/m9a_setup/28_wizard_config.png)
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">6</span><span>Vérifier et lancer</span></h2>
+
+Relisez le récapitulatif — connexion, nombre d'indicateurs, fenêtre, et le nombre de paires (indicateur, mois) à télécharger. Cliquez sur **Démarrer l'importation**.
+
+![h:180](../../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
+
+<h2 class="step-h"><span class="step-n">7</span><span>Laisser le serveur travailler</span></h2>
+
+L'importation tourne sur le serveur. L'onglet **En cours** affiche la progression ; vous pouvez fermer l'onglet, travailler ailleurs ou vous déconnecter — l'importation continue. L'onglet **Historique** vous dit quand elle est terminée.
+
+![h:170](../../../resources/screenshots/m9a_setup/23_imports_history.png)
+
+## Point de contrôle
+
+La page Données SNIS affiche maintenant vos indicateurs sous forme de graphique, avec les valeurs dans le temps. L'onglet **Par indicateur** liste chaque indicateur avec ses mois de données et sa dernière importation.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## En cas de problème
+
+- **Des paires (indicateur, mois) ont échoué** — l'importation conserve tout ce qui a réussi ; rien n'est annulé. Ouvrez l'onglet **Par indicateur** pour voir les mois en échec par indicateur et relancer uniquement ces paires. Quelques échecs signifient généralement qu'aucune donnée n'existe dans DHIS2 pour cette combinaison ; beaucoup d'échecs pointent vers le mapping des indicateurs (voir *Importer les indicateurs*).
+
+![h:170](../../../resources/screenshots/m9a_setup/24_imports_by_indicator.png)
+
+- **Le réseau coupe pendant l'importation** — rien à protéger de votre côté : le téléchargement tourne sur le serveur, pas dans votre navigateur. Consultez l'onglet Historique plus tard.
+- **La fenêtre était trop étroite** — relancez l'assistant avec une plage plus large. Les mois réimportés sont simplement rafraîchis avec les valeurs actuelles de DHIS2.
+
+## La suite
+
+Dernière étape : **Vérifier et explorer** — confirmer que tout est en ordre et apprendre à naviguer dans vos données. Ensuite, un administrateur **génère un paquet de résultats** pour que les projets utilisent les nouvelles données.

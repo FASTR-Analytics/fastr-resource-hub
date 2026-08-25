@@ -52,23 +52,23 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 ### 1. Before you begin · ~5 min · whole room
 
-**What happens.** An orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled. Participants gather what they need — a completed Data Prep Checklist, DHIS2 URL/username/password, a stable browser. There is no separate "connect" step; credentials are entered on the first import.
+**What happens.** An orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled. Participants gather what they need — a completed Data Prep Checklist, DHIS2 URL/username/password, a stable browser. The DHIS2 connection is stored **once per instance** (encrypted), via **Manage connection** on the Imports page; after that, nobody re-types credentials.
 
-**Say something like.** *"On the first import you'll be asked for your DHIS2 login. Tick 'Save credentials for this session' — otherwise you'll re-enter them at every step."*
+**Say something like.** *"We set up the DHIS2 connection once, for the whole instance. From then on every import — including the scheduled ones — uses that stored connection."*
 
-**What a good result looks like.** Every team has its checklist and credentials in hand before anyone clicks Import.
+**What a good result looks like.** Every team has its checklist in hand, and the instance's stored connection is set up before anyone clicks Import.
 
 **Watch for.**
 - Teams without confirmed DHIS2 access. Resolve this before starting, not mid-sequence.
-- The "Save credentials for this session" tick being missed, causing repeated prompts later.
+- Someone replacing the stored connection with personal credentials mid-session — it is instance-wide, so one change affects everyone.
 
 ### 2. Import facility structure · ~20 min · whole room
 
-**What happens.** A step-by-step procedure to pull the country's administrative hierarchy into FASTR: Data → Structure & maps → Admin areas → import directly from DHIS2 → select the **Facility** level → finalize, until the Structure & maps tile turns green.
+**What happens.** A step-by-step procedure to pull the country's facility registry into FASTR: Data → **HMIS** section → **Facilities** card → import from DHIS2 → select the **Facility** level → finish, until the Facilities card shows the expected counts. Admin areas are **derived automatically from the facility rows** — there is no separate admin-area import.
 
-**Demonstrate.** Show the path to Structure & maps and the point where the DHIS2 **level** is chosen — selecting the wrong level here is the most common failure, and it is hard to spot afterwards.
+**Demonstrate.** Show the path to the Facilities card and the point where the DHIS2 **level** is chosen — selecting the wrong level here is the most common failure, and it is hard to spot afterwards.
 
-**What a good result looks like.** A facility list that matches the country's real structure, and a green Structure & maps tile.
+**What a good result looks like.** A facility list that matches the country's real structure, with the Facilities card showing plausible facility and admin-area counts.
 
 **Watch for.**
 - An empty facility list or an odd-looking hierarchy — usually the wrong DHIS2 level, or the user lacks org-unit read access.
@@ -94,17 +94,17 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 ### 4. Import HMIS data · ~25 min · whole room
 
-**What happens.** The largest data operation in setup: pulling actual HMIS values from DHIS2. Participants select indicators and a time range, set error handling to **"Abort the entire import attempt"**, fetch, review the import summary, then integrate and finalize.
+**What happens.** The largest data operation in setup: pulling actual HMIS values from DHIS2. Participants walk the five-step wizard — **Credentials, Indicators, Time, Config, Review & launch** — and the import then runs on the server. Progress shows on the Imports page (Current tab); completion shows in History.
 
-**Demonstrate.** Show the error-handling setting and the import summary screen, so teams know what a healthy summary looks like before they integrate.
+**Demonstrate.** Show the Review & launch summary — the (indicator, month) pair count tells you how big the pull is — and the **By indicator** tab, so teams know where failed pairs appear and how to retry them.
 
-**Say something like.** *"Don't close the tab while it's fetching. For a large country, narrow the indicators or the time range and import in batches rather than all at once."*
+**Say something like.** *"Once you click Start import, the server does the work. You can close the tab — check the History tab in a few minutes. Whatever succeeds is kept; failed months can be retried on their own."*
 
-**What a good result looks like.** A clean import summary, integrated and finalized, with no abort errors.
+**What a good result looks like.** The import finished in History, with the By indicator tab showing the expected months of data and zero (or explainable) failed months.
 
 **Watch for.**
-- Large pulls freezing the browser — warn against closing the tab mid-fetch.
-- Very large countries timing out — have them batch the import.
+- Teams moving on before the import finishes — the verify step (and later the results package) needs the data to be in.
+- Failed (indicator, month) pairs being ignored — a few are normal (no data in DHIS2); many point back at the mapping in step 3.
 
 ---
 

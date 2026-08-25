@@ -86,7 +86,7 @@ Shared images, diagrams, screenshots, logos, and icons live under `resources/` a
 
 ```markdown
 ![FASTR approach](../resources/diagrams/fastr_rapid_cycle_analytics_approach.svg)
-![Platform login](../resources/screenshots/platform/01_login.png)
+![Platform login](../resources/screenshots/01_login_page.png)
 ```
 
 **Per-language mirrors:** diagrams have separate language trees so EN / FR / PT can be visually localized.
@@ -325,7 +325,7 @@ python3 tools/validate_content.py
 **Example:**
 ```markdown
 ![FASTR Approach](../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
-![HMIS Data](../resources/screenshots/hmis-csv-required-fields.png)
+![HMIS Data imports](../resources/screenshots/m9a_setup/22_imports_page.png)
 ```
 
 ### Image Paths

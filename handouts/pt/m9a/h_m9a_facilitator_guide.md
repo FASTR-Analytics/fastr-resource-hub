@@ -52,23 +52,23 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 ### 1. Antes de começar · ~5 min · sala toda
 
-**O que acontece.** Uma página de orientação que apresenta a sequência de quatro passos e explica como são tratadas as credenciais DHIS2. Os participantes reúnem o que precisam — Lista de verificação preenchida, URL/nome de utilizador/palavra-passe do DHIS2, navegador estável. Não há um passo de «ligação» separado; as credenciais introduzem-se na primeira importação.
+**O que acontece.** Uma página de orientação que apresenta a sequência de quatro passos e explica como são tratadas as credenciais DHIS2. Os participantes reúnem o que precisam — Lista de verificação preenchida, URL/nome de utilizador/palavra-passe do DHIS2, navegador estável. A ligação DHIS2 guarda-se **uma vez para toda a instância** (encriptada), em **Gerir ligação** na página Importações; depois disso, ninguém volta a digitar credenciais.
 
-**Diga algo como.** *«Na primeira importação ser-lhe-á pedido o seu login do DHIS2. Marque "Save credentials for this session" — senão terá de o reintroduzir a cada passo.»*
+**Diga algo como.** *«Configuramos a ligação DHIS2 uma única vez, para toda a instância. A partir daí, cada importação — incluindo as agendadas — usa essa ligação guardada.»*
 
-**Como é um bom resultado.** Cada equipa com a sua lista e credenciais em mão antes de alguém clicar em importar.
+**Como é um bom resultado.** Cada equipa com a sua lista em mão, e a ligação guardada da instância configurada antes de alguém clicar em importar.
 
 **Atenção a.**
 - Equipas sem acesso DHIS2 confirmado. Resolva isto antes de começar, não a meio da sequência.
-- A caixa «Save credentials for this session» esquecida, que provoca pedidos repetidos.
+- Alguém substituir a ligação guardada pelas suas credenciais pessoais a meio da sessão — é da instância inteira, uma alteração afeta todos.
 
 ### 2. Importar a estrutura de unidades · ~20 min · sala toda
 
-**O que acontece.** Um procedimento passo a passo para extrair a hierarquia administrativa do país para o FASTR: Data → Structure & maps → Admin areas → import directly from DHIS2 → selecionar o nível **Facility** → finalizar até o mosaico Structure & maps ficar verde.
+**O que acontece.** Um procedimento passo a passo para extrair o registo de unidades do país para o FASTR: Dados → secção **HMIS** → cartão **Unidades** → importar do DHIS2 → selecionar o nível **Facility** → terminar, até o cartão Unidades mostrar as contagens esperadas. As áreas administrativas são **derivadas automaticamente das linhas de unidades** — não há importação separada de áreas.
 
-**Demonstrar.** Mostre o caminho até Structure & maps e o ponto onde se escolhe o **nível** DHIS2 — selecionar o nível errado aqui é a falha mais comum, e é difícil de detetar depois.
+**Demonstrar.** Mostre o caminho até ao cartão Unidades e o ponto onde se escolhe o **nível** DHIS2 — selecionar o nível errado aqui é a falha mais comum, e é difícil de detetar depois.
 
-**Como é um bom resultado.** Uma lista de unidades conforme à estrutura real do país, e um mosaico Structure & maps verde.
+**Como é um bom resultado.** Uma lista de unidades conforme à estrutura real do país, com contagens plausíveis de unidades e áreas no cartão Unidades.
 
 **Atenção a.**
 - Uma lista de unidades vazia ou uma hierarquia com aspeto errado — normalmente o nível DHIS2 errado, ou falta de acesso de leitura às unidades organizacionais.
@@ -94,17 +94,17 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 ### 4. Importar dados do HMIS · ~25 min · sala toda
 
-**O que acontece.** A maior operação de dados da configuração: extrair os valores reais do HMIS do DHIS2. Os participantes selecionam indicadores e um intervalo de tempo, definem o tratamento de erros para **«Abort the entire import attempt»**, extraem, revêm o resumo da importação, depois integram e finalizam.
+**O que acontece.** A maior operação de dados da configuração: extrair os valores reais do HMIS do DHIS2. Os participantes percorrem o assistente de cinco passos — **Credenciais, Indicadores, Hora, Configuração, Rever e lançar** — e a importação corre depois no servidor. O progresso aparece na página Importações (separador Atuais); a conclusão, no Histórico.
 
-**Demonstrar.** Mostre o tratamento de erros e o ecrã de resumo da importação, para as equipas saberem como é um resumo saudável antes de integrarem.
+**Demonstrar.** Mostre o resumo do passo Rever e lançar — o número de pares (indicador, mês) dá a dimensão da extração — e o separador **Por indicador**, para as equipas saberem onde aparecem os pares falhados e como repeti-los.
 
-**Diga algo como.** *«Não fechem o separador durante a extração. Para um país grande, restrinjam os indicadores ou o intervalo de tempo e importem por lotes em vez de tudo de uma vez.»*
+**Diga algo como.** *«Depois de clicar em Iniciar importação, o servidor faz o trabalho. Podem fechar o separador — vejam o Histórico daqui a uns minutos. O que tiver êxito fica guardado; os meses falhados repetem-se à parte.»*
 
-**Como é um bom resultado.** Um resumo de importação limpo, integrado e finalizado, sem erros de abandono.
+**Como é um bom resultado.** A importação concluída no Histórico, com o separador Por indicador a mostrar os meses de dados esperados e zero falhas (ou falhas explicáveis).
 
 **Atenção a.**
-- Extrações grandes que bloqueiam o navegador — avise para não fechar o separador a meio.
-- Países muito grandes que excedem o tempo — façam importar por lotes.
+- Equipas que avançam antes de a importação terminar — o passo de verificação (e mais tarde o pacote de resultados) precisa de os dados terem chegado.
+- Pares (indicador, mês) falhados ignorados — alguns são normais (sem dados no DHIS2); muitos apontam para o mapeamento do passo 3.
 
 ---
 

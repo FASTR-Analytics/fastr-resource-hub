@@ -4,12 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Activity: Installing and running modules
+## Activity: Generating a results package
 
 **In this hands-on session, we will:**
 
-- Review available analysis modules
-- Install required modules
-- Run initial analyses
+- Review the available analysis modules
+- Select modules and configure their parameters in the generation wizard
+- Generate a results package and attach it to a project
 
-*Participants will configure and run modules on their data*
+*Participants will generate a results package from their imported data*

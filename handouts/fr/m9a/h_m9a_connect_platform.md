@@ -49,9 +49,9 @@ Il n'y a plus d'étape de « connexion » séparée. La première fois que vous 
 - URL DHIS2
 - Nom d'utilisateur DHIS2
 - Mot de passe DHIS2
-- ☐ Save credentials for this session
+- ☐ Connexion enregistrée configurée (une fois par instance)
 
-> **Astuce :** Cochez **Save credentials for this session** au premier prompt. La plateforme retient votre connexion DHIS2 jusqu'à la déconnexion — pas besoin de les ressaisir pour les imports suivants.
+> **Astuce :** la connexion DHIS2 s'enregistre **une fois pour toute l'instance** — un administrateur la configure via **Gérer la connexion** sur la page Importations, chiffrée. Ensuite, chaque importation l'utilise ; personne ne ressaisit d'identifiants.
 
 ## Comment utiliser ces documents
 

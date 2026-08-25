@@ -73,17 +73,17 @@ After login, you land on the **Projects** tab. You'll see the projects you have 
 - **If you're an instance admin**, every project on the instance is listed.
 - **Otherwise**, you only see projects an admin has granted you access to. If your country's project is missing, ask your facilitator (or instance admin) to grant access.
 
-Click your country's project to enter it. The project opens with a **left sidebar of icons** — AI Assistant (sparkle), **Visualizations** (chart), **Slide Decks** (brackets), **Data** (database), and **Settings** (gear). Hover an icon to see its label.
+Click your country's project to enter it. The project opens with a **left sidebar of icons** — **Reports**, **Decks**, **Dashboards**, **Visualizations**, **Metrics**, and **Results package**. Hover an icon to see its label; the **AI** button sits at the top right.
 
 ![Project view — left sidebar with icons, Visualizations open, AI Assistant on the right h:280](../../../resources/screenshots/m9b/project_sidebar_nav.png)
 
-> Note: the **top navigation** (Projects · Data · Assets · Users · Settings) is for **instance admins** managing the whole site. Inside a project the left-sidebar icons are what you'll use day to day.
+> Note: the **top navigation** (Projects · Data · Results · Assets · Users) is for **instance admins** managing the whole site. Inside a project the left-sidebar icons are what you'll use day to day.
 
 ## Checkpoint
 
 After clicking into your project, you should see:
 
-- The left sidebar of project icons (Visualizations, Slide Decks, Data, Settings)
+- The left sidebar of project icons (Reports, Decks, Dashboards, Visualizations, Metrics, Results package)
 - The project name in the header (e.g., "Country X — Workshop project")
 
 If yes, you're in. Move to the next activity.

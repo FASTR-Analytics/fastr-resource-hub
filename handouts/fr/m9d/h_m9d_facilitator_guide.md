@@ -148,10 +148,7 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 - **Dites :** *« C'est ainsi qu'on met un graphique enregistré sur une diapositive. Vous ne construisez pas un nouveau graphique ici — vous en choisissez un déjà sauvegardé dans l'onglet Visualisations. »*
 - **Surveillez :** Renforcez **« réutilisez, ne recréez pas »** — le graphique doit déjà être enregistré dans Visualisations. Si le graphique d'un participant n'apparaît pas dans la sélection, il doit retourner l'enregistrer d'abord.
 
-<div class="screenshot-placeholder">
-📷 <strong>Menu Bloc → Visualisation → Sélectionner</strong><br>
-<code>resources/screenshots/m9d/block_viz_select.png</code>
-</div>
+![Sélecteur de visualisation h:180](../../../resources/screenshots/m9d/block_viz_select.png)
 
 ### Étape 3 — Diviser la diapositive en graphique + texte
 
@@ -159,10 +156,7 @@ Une visite en direct de 5 minutes de l'éditeur. Les participants viennent de cr
 - **Dites :** *« Deux colonnes est le format FASTR : le graphique d'un côté, l'idée à retenir de l'autre. S'il faut plus, divisez sur une autre diapositive. »*
 - **Surveillez :** Les participants tentent d'entasser quatre colonnes. Ramenez-les à deux — le contenu en plus va sur la diapositive suivante.
 
-<div class="screenshot-placeholder">
-📷 <strong>Menu clic droit montrant « Ajouter → Col à droite »</strong><br>
-<code>resources/screenshots/m9d/col_to_right_menu.png</code>
-</div>
+![Menu Ajouter → Col à droite h:180](../../../resources/screenshots/m9d/col_to_right_menu.png)
 
 ---
 

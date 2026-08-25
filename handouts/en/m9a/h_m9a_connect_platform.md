@@ -49,9 +49,9 @@ There is no separate "connect" step. The first time you trigger an import (admin
 - DHIS2 URL
 - DHIS2 Username
 - DHIS2 Password
-- ☐ Save credentials for this session
+- ☐ Stored connection set up (once per instance)
 
-> **Tip:** Tick **Save credentials for this session** on the first prompt. The platform remembers your DHIS2 connection until you log out — no need to re-enter for the next imports.
+> **Tip:** the DHIS2 connection is stored **once for the whole instance** — an administrator sets it up via **Manage connection** on the Imports page, encrypted. After that, every import uses it; nobody re-types credentials.
 
 ## How to use these handouts
 

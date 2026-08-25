@@ -66,7 +66,7 @@ Set up indicators in three rounds:
 
    ![h:160](../../../resources/screenshots/m9a_setup/09_import_dhis2_btn.jpeg)
 
-> If you haven't saved DHIS2 credentials yet this session, the connection form appears now — same fields as in *Import facility structure*. Tick **Save credentials for this session**.
+> The instance's **stored DHIS2 connection** is used automatically. If none is set up yet, add it once via **Manage connection** on the Imports page — same fields as in *Import facility structure*.
 
 2. In the search field, type a term from column **G — OFFICIAL INDICATOR NAME IN DHIS2** of your *Indicator mapping template* (e.g., `antenatal` for antenatal care).
 3. Click **Search**. Results appear in the list.

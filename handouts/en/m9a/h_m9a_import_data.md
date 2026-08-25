@@ -12,14 +12,14 @@ footer: "FASTR · Instance Setup"
 
 # Import HMIS data
 
-<p class="meta-line"><strong>Instance Setup</strong> · <strong>~25 min</strong></p>
+<p class="meta-line"><strong>Instance Setup</strong> · <strong>~15 min + server time</strong></p>
 
 <div class="p1-grid">
 <aside class="p1-sidebar">
 
 <p class="sb-label">Before you start</p>
 
-- ☐ Facilities imported (admin units page is green)
+- ☐ Facilities imported (the Facilities card shows your counts)
 - ☐ Indicators imported and mapped (every DHIS2 indicator has a common-indicator link)
 - ☐ You've decided which **time period** to pull (e.g., last 36 months — discuss with your team)
 
@@ -28,74 +28,76 @@ footer: "FASTR · Instance Setup"
 
 ## What you'll do
 
-Pull the actual data values from DHIS2 for your chosen indicators and time period. This is the largest data operation in the setup — depending on country size, it can take 5–30 minutes to run.
+Pull the actual data values from DHIS2 for your chosen indicators and time period. This is the largest data operation in the setup — depending on country size, it can take 5–30 minutes to run. The import runs **on the server**, so once it's launched you can close the tab and come back.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open HMIS Data import</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Open the Imports page</span></h2>
 
-From the **Data** page, click **HMIS Data**, then **Start new import**.
+Click **Data** in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choose "Import directly from DHIS2"</span></h2>
-
-Same option you used for facilities. Click **Save**.
-
-> If you ticked **Save credentials for this session** earlier (in admin areas or indicators), the platform skips the connection form here. Otherwise it shows up now — same fields as before.
+The page has four tabs — **Current**, **Future**, **History**, **By indicator** — plus the buttons **New DHIS2 import**, **Upload CSV file**, and **Manage connection**.
 
 </div>
 </div>
+
+![h:190](../../../resources/screenshots/m9a_setup/22_imports_page.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Select indicators and time range</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Start the wizard — Credentials</span></h2>
 
-- Tick every indicator you want data for.
-- Set the **time range** with the slider — be deliberate (3 years of monthly data ≈ 36 periods × N facilities, which scales fast).
+Click **New DHIS2 import**. The wizard has five steps: **Credentials**, **Indicators**, **Time**, **Config**, **Review & launch**.
 
-![h:200](../../../resources/screenshots/m9a_setup/13_select_indicators_period.jpeg)
+On **Credentials**, the stored DHIS2 connection appears. Click **Next**.
 
-Click **Save selection**.
+![h:170](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
 
-<h2 class="step-h"><span class="step-n">4</span><span>Configure error handling</span></h2>
+> No stored connection yet? Set one up once with **Manage connection** on the Imports page — it is saved for the whole instance, encrypted, so nobody re-types credentials for every import.
 
-On the import-config screen, make sure **Abort the entire import attempt** is selected. This guarantees data integrity: if any indicator-period combination fails, the *whole* import is rolled back. You won't end up with half-loaded data.
+<h2 class="step-h"><span class="step-n">3</span><span>Indicators</span></h2>
 
-Click **Start fetching from DHIS2**.
+Tick every indicator you want data for — the top checkbox selects all. Click **Next**.
 
-![h:200](../../../resources/screenshots/m9a_setup/14_abort_start_fetching.jpeg)
+![h:200](../../../resources/screenshots/m9a_setup/26_wizard_indicators.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Watch progress</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Time</span></h2>
 
-A progress indicator shows the running count of fetched indicator-period combinations.
+Choose **Now**, then **Next**.
 
-> ⚠ **Don't close the tab.** The fetch runs in your browser session.
+![h:140](../../../resources/screenshots/m9a_setup/27_wizard_time.png)
 
-<h2 class="step-h"><span class="step-n">6</span><span>Review the summary</span></h2>
+> **Worth knowing for later:** **Recurring** schedules this import to repeat by itself — for example every month. Once your setup is stable, that's one routine task gone.
 
-When the fetch finishes, click **Import Summary** to see:
+<h2 class="step-h"><span class="step-n">5</span><span>Config — the period range</span></h2>
 
-- Source (DHIS2 URL)
-- Date
-- Successful vs failed fetches
-- Total rows waiting for integration
+Set the **period range** with the two sliders. Be deliberate: 3 years of monthly data ≈ 36 periods × N facilities, which scales fast. Click **Next**.
 
-![h:200](../../../resources/screenshots/m9a_setup/15_import_summary.jpeg)
+![h:150](../../../resources/screenshots/m9a_setup/28_wizard_config.png)
 
-<h2 class="step-h"><span class="step-n">7</span><span>Integrate</span></h2>
+---
 
-If the summary looks correct, click **Integrate and finalize**. Wait for the integration bar to complete.
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">8</span><span>Clean up</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>Review & launch</span></h2>
 
-Click **Remove completed upload form** to clear the interface. Your imported data stays in place — you're just hiding the form.
+Check the summary — connection, indicator count, window, and the number of (indicator, month) pairs to fetch. Click **Start import**.
+
+![h:180](../../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
+
+<h2 class="step-h"><span class="step-n">7</span><span>Let the server work</span></h2>
+
+The import runs on the server. The **Current** tab shows progress; you can close the tab, work elsewhere, or log off — the import keeps running. The **History** tab tells you when it is done.
+
+![h:170](../../../resources/screenshots/m9a_setup/23_imports_history.png)
 
 ## Checkpoint
 
-The HMIS Data page now shows your indicators as a chart, with values flowing through time.
+The HMIS Data page now shows your indicators as a chart, with values flowing through time. The **By indicator** tab lists every indicator with its months of data and when it was last imported.
 
 ---
 
@@ -103,10 +105,13 @@ The HMIS Data page now shows your indicators as a chart, with values flowing thr
 
 ## What could go wrong
 
-- **"Failed: X combinations"** — usually means a facility-indicator combination has no data in DHIS2 for that period. If only a few, you can re-import with a narrower set. If many, check your indicator mapping (Phase 3 of *Import indicators*).
-- **Browser freezes / tab unresponsive** — large pulls (1000+ facilities × 36 months × 10 indicators) stress the browser. Reduce indicators or shorten the time range and pull in batches.
-- **Network drops mid-fetch** — the *abort the entire import* setting protects you here. Re-run with the same selection.
+- **Some (indicator, month) pairs failed** — the import keeps everything that succeeded; nothing is rolled back. Open the **By indicator** tab to see failed months per indicator and retry just those pairs. A few failures usually mean no data exists in DHIS2 for that combination; many failures point to the indicator mapping (see *Import indicators*).
+
+![h:170](../../../resources/screenshots/m9a_setup/24_imports_by_indicator.png)
+
+- **Network drops mid-import** — nothing to protect on your side: the fetch runs on the server, not in your browser. Check the History tab later.
+- **The window was too narrow** — re-run the wizard with a wider period range. Re-imported months are simply refreshed with the current DHIS2 values.
 
 ## What's next
 
-Final step: **Verify and explore** — confirm everything looks right and learn how to navigate your data.
+Final step: **Verify and explore** — confirm everything looks right and learn how to navigate your data. Then an administrator **generates a results package** so projects can use the new data.

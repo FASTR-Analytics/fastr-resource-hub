@@ -254,9 +254,10 @@ actual task you're working on:
 >   `<div class="screenshot-placeholder">` block where a real platform
 >   screenshot will go. When I'm ready for a real shot, use the Playwright
 >   MCP against `demo.fastr-analytics.org` (or `demo-fr.fastr-analytics.org`
->   for FR). Save under `resources/screenshots/<path>/<filename>.jpeg` and
->   replace the placeholder with
->   `![alt h:160](../../../resources/screenshots/<path>/<filename>.jpeg)`.
+>   for FR). Save under `resources/screenshots/<path>/<filename>.png`
+>   (PNG is the standard since Aug 2026; older folders still hold .jpeg)
+>   and replace the placeholder with
+>   `![alt h:160](../../../resources/screenshots/<path>/<filename>.png)`.
 > - **Don't push or commit to `main`.** I work on my own branch — check
 >   with `git branch --show-current` before any commit.
 >

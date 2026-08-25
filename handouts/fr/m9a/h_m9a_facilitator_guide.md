@@ -52,23 +52,23 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 ### 1. Avant de commencer · ~5 min · toute la salle
 
-**Le déroulé.** Une page d'orientation qui présente la séquence en quatre étapes et explique la gestion des identifiants DHIS2. Les participants rassemblent ce qu'il leur faut — Check-list de préparation remplie, URL/nom d'utilisateur/mot de passe DHIS2, navigateur stable. Il n'y a pas d'étape « connexion » séparée ; les identifiants sont saisis au premier import.
+**Le déroulé.** Une page d'orientation qui présente la séquence en quatre étapes et explique la gestion des identifiants DHIS2. Les participants rassemblent ce qu'il leur faut — Check-list de préparation remplie, URL/nom d'utilisateur/mot de passe DHIS2, navigateur stable. La connexion DHIS2 s'enregistre **une fois pour toute l'instance** (chiffrée), via **Gérer la connexion** sur la page Importations ; ensuite, personne ne ressaisit d'identifiants.
 
-**Formulez-le ainsi.** *« Au premier import, on vous demandera votre identifiant DHIS2. Cochez "Enregistrer les identifiants pour cette session" — sinon vous les ressaisirez à chaque étape. »*
+**Formulez-le ainsi.** *« On configure la connexion DHIS2 une seule fois, pour toute l'instance. Ensuite, chaque importation — y compris les importations programmées — utilise cette connexion enregistrée. »*
 
-**À quoi ressemble un bon résultat.** Chaque équipe a sa check-list et ses identifiants en main avant de cliquer sur Importer.
+**À quoi ressemble un bon résultat.** Chaque équipe a sa check-list en main, et la connexion enregistrée de l'instance est configurée avant de cliquer sur Importer.
 
 **À surveiller.**
 - Les équipes sans accès DHIS2 confirmé. Réglez cela avant de commencer, pas en cours de séquence.
-- La case « Enregistrer les identifiants pour cette session » oubliée, qui provoque des invites répétées.
+- Quelqu'un qui remplace la connexion enregistrée par ses identifiants personnels en pleine séance — elle vaut pour toute l'instance, un changement affecte tout le monde.
 
 ### 2. Importer la structure des établissements · ~20 min · toute la salle
 
-**Le déroulé.** Une procédure pas à pas pour récupérer la hiérarchie administrative du pays dans FASTR : Données → Structure et cartes → Zones administratives → importer directement depuis DHIS2 → sélectionner le niveau **Établissement** → finaliser jusqu'à ce que la tuile Structure et cartes passe au vert.
+**Le déroulé.** Une procédure pas à pas pour récupérer le registre des établissements du pays dans FASTR : Données → section **SNIS** → carte **Établissements** → importer depuis DHIS2 → sélectionner le niveau **Établissement** → terminer, jusqu'à ce que la carte Établissements affiche les effectifs attendus. Les zones administratives sont **dérivées automatiquement des lignes d'établissements** — il n'y a pas d'import séparé des zones.
 
-**Démontrer.** Montrez le chemin vers Structure et cartes et le moment où l'on choisit le **niveau** DHIS2 — sélectionner le mauvais niveau ici est l'échec le plus fréquent, et il est difficile à repérer ensuite.
+**Démontrer.** Montrez le chemin vers la carte Établissements et le moment où l'on choisit le **niveau** DHIS2 — sélectionner le mauvais niveau ici est l'échec le plus fréquent, et il est difficile à repérer ensuite.
 
-**À quoi ressemble un bon résultat.** Une liste d'établissements conforme à la structure réelle du pays, et une tuile Structure et cartes verte.
+**À quoi ressemble un bon résultat.** Une liste d'établissements conforme à la structure réelle du pays, avec des effectifs d'établissements et de zones plausibles sur la carte Établissements.
 
 **À surveiller.**
 - Une liste d'établissements vide ou une hiérarchie inattendue — généralement le mauvais niveau DHIS2, ou un manque d'accès en lecture aux unités d'organisation.
@@ -94,17 +94,17 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 ### 4. Importer les données SIS · ~25 min · toute la salle
 
-**Le déroulé.** La plus grande opération de données de la configuration : récupérer les valeurs réelles des données SIS depuis DHIS2. Les participants sélectionnent les indicateurs et une plage de temps, règlent la gestion des erreurs sur **« Abandonner toute la tentative d'import »**, récupèrent, examinent le résumé d'import, puis intègrent et finalisent.
+**Le déroulé.** La plus grande opération de données de la configuration : récupérer les valeurs réelles des données SIS depuis DHIS2. Les participants suivent l'assistant en cinq étapes — **Identifiants, Indicateurs, Heure, Configuration, Vérifier et lancer** — puis l'importation tourne sur le serveur. La progression s'affiche sur la page Importations (onglet En cours) ; la fin, dans l'Historique.
 
-**Démontrer.** Montrez le réglage de gestion des erreurs et l'écran de résumé d'import, pour que les équipes sachent à quoi ressemble un résumé sain avant d'intégrer.
+**Démontrer.** Montrez le récapitulatif de l'étape Vérifier et lancer — le nombre de paires (indicateur, mois) donne la taille du téléchargement — et l'onglet **Par indicateur**, pour que les équipes sachent où apparaissent les paires en échec et comment les relancer.
 
-**Formulez-le ainsi.** *« Ne fermez pas l'onglet pendant la récupération. Pour un grand pays, restreignez les indicateurs ou la plage de temps et importez par lots plutôt que tout d'un coup. »*
+**Formulez-le ainsi.** *« Une fois "Démarrer l'importation" cliqué, c'est le serveur qui travaille. Vous pouvez fermer l'onglet — regardez l'Historique dans quelques minutes. Tout ce qui réussit est conservé ; les mois en échec se relancent séparément. »*
 
-**À quoi ressemble un bon résultat.** Un résumé d'import propre, intégré et finalisé, sans erreur d'abandon.
+**À quoi ressemble un bon résultat.** L'importation terminée dans l'Historique, avec l'onglet Par indicateur montrant les mois de données attendus et zéro échec (ou des échecs explicables).
 
 **À surveiller.**
-- Les gros imports qui figent le navigateur — prévenez de ne pas fermer l'onglet en cours de récupération.
-- Les très grands pays qui dépassent le délai — faites-leur importer par lots.
+- Les équipes qui passent à la suite avant la fin de l'importation — l'étape de vérification (et plus tard le paquet de résultats) a besoin que les données soient arrivées.
+- Les paires (indicateur, mois) en échec ignorées — quelques-unes sont normales (pas de données dans DHIS2) ; beaucoup renvoient au mapping de l'étape 3.
 
 ---
 

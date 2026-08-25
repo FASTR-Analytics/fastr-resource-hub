@@ -66,7 +66,7 @@ Configurar os indicadores em três rondas:
 
    ![h:160](../../../resources/screenshots/m9a_setup/09_import_dhis2_btn.jpeg)
 
-> Se ainda não guardou as credenciais DHIS2 nesta sessão, o formulário de ligação aparece agora — os mesmos campos de *Importar a estrutura de unidades*. Marque **Save credentials for this session**.
+> A **ligação DHIS2 guardada** da instância é usada automaticamente. Se ainda não existir, adicione-a uma vez em **Gerir ligação**, na página Importações — os mesmos campos de *Importar a estrutura de unidades*.
 
 2. No campo de pesquisa, escreva um termo da coluna **G — OFFICIAL INDICATOR NAME IN DHIS2** do seu *Modelo de mapeamento de indicadores* (ex.: `antenatal` para cuidados pré-natais).
 3. Clique em **Search**. Os resultados aparecem na lista.

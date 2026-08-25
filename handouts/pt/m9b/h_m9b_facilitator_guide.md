@@ -92,7 +92,7 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 ### Lista de preparação
 
 - ☐ Navegador com sessão iniciada na instância do seu país, com um projeto de demonstração carregado
-- ☐ Separadores principais visíveis: Data, Visualizations, Slide Decks, Reports, AI Assistant
+- ☐ Projeto aberto, barra lateral visível: Relatórios, Apresentações, Painéis, Visualizações, Métricas, Pacote de resultados (botão IA no canto superior direito)
 - ☐ Pelo menos uma análise já executada, para que gráficos/resultados estejam visíveis
 - ☐ Partilha de ecrã a funcionar, se à distância
 - ☐ Tenha a ficha *Iniciar sessão* pronta para distribuir depois desta demonstração
@@ -110,11 +110,11 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Passo 2: Separador Data (onde vivem os dados das suas unidades)
+### Passo 2: Onde vivem os dados (nível da instância)
 
-- **Fazer:** Clique no separador **Data**. Mostre **Structure & maps** (áreas administrativas + unidades) e **HMIS Data**.
-- **Dizer:** *«É aqui que os dados do seu país são guardados. Vamos preencher isto amanhã durante a atividade de configuração da instância.»*
-- **Atenção a:** Não aprofunde aqui — apenas oriente. A configuração detalhada é uma sessão própria.
+- **Fazer:** Mostre brevemente a **navegação do topo** (Projetos · Dados · Resultados · Recursos · Utilizadores) e clique em **Dados** — a página ao nível da instância com os cartões **HMIS** (Unidades, Indicadores, Dados).
+- **Dizer:** *«Os dados vivem ao nível da instância — os administradores importam-nos aqui. Os projetos não guardam dados: cada projeto lê um **pacote de resultados**, um conjunto de análises já calculadas. Vamos configurar tudo isto na atividade de configuração da instância.»*
+- **Atenção a:** Não aprofunde aqui — apenas oriente. A configuração detalhada é uma sessão própria, e a maioria dos participantes nunca precisará das páginas da instância.
 
 ---
 

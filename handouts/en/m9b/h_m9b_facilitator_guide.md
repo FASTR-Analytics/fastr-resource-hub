@@ -92,7 +92,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 ### Setup checklist
 
 - ☐ Browser logged in to your country instance, with a demo project loaded
-- ☐ Main tabs visible: Data, Visualizations, Slide Decks, Reports, AI Assistant
+- ☐ Project open, left sidebar visible: Reports, Decks, Dashboards, Visualizations, Metrics, Results package (AI button top right)
 - ☐ At least one analysis already run, so charts/outputs are visible
 - ☐ Screen-share working if remote
 - ☐ Have the participant *Logging in* handout ready to hand out after this demo
@@ -106,11 +106,11 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 
 - **Watch for:** Participants asking "is this the same as DHIS2?" — answer: *"No. FASTR reads from DHIS2 but adds analysis, visualization, and reporting on top."*
 
-### Step 2: Data tab (where your facility data lives)
+### Step 2: Where the data lives (instance level)
 
-- **Do:** Click the **Data** tab. Show **Structure & maps** (admin areas + facilities) and **HMIS Data**.
-- **Say:** *"This is where your country's data is stored. We'll fill this in tomorrow during the Instance Setup activity."*
-- **Watch for:** Don't go deep here — just orient. Detailed setup is its own session.
+- **Do:** Briefly show the **top navigation** (Projects · Data · Results · Assets · Users) and click **Data** — the instance-level page with the **HMIS** cards.
+- **Say:** *"Admins import data here, at the instance level. Projects don't hold data — each reads a **results package** of already-computed analyses."*
+- **Watch for:** Don't go deep here — just orient. Setup is its own session.
 
 ---
 

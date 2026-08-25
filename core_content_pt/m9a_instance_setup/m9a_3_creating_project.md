@@ -1,6 +1,3 @@
-<!-- AUTO-TRANSLATED from core_content/m9a_instance_setup/m9a_3_creating_project.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
@@ -9,11 +6,11 @@ paginate: true
 
 ## Atividade: Criar um projeto
 
-**Nesta sessão prática, nós iremos:**
+**Nesta sessão prática, vamos:**
 
-- Configurar um novo projeto
-- Configurar as definições do projeto
-- Selecionar indicadores e períodos de tempo
-- Aplicar as melhores práticas de organização de projectos
+- Criar um novo projeto (só é necessário um nome)
+- Anexar um pacote de resultados — é daí que vêm os números do projeto
+- Atribuir membros da equipa e funções
+- Aplicar boas práticas de organização do projeto
 
-*Os participantes criarão o seu primeiro projeto*
+*Os participantes vão criar o seu primeiro projeto*

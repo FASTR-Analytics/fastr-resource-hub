@@ -92,7 +92,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 ### Liste de préparation
 
 - ☐ Navigateur connecté à l'instance de votre pays, avec un projet de démo chargé
-- ☐ Onglets principaux visibles : Données, Visualisations, Présentations, Rapports, Assistant IA
+- ☐ Projet ouvert, barre latérale visible : Rapports, Présentations, Tableaux de bord, Visualisations, Métriques, Paquet de résultats (bouton IA en haut à droite)
 - ☐ Au moins une analyse déjà lancée, pour que des graphiques/sorties soient visibles
 - ☐ Partage d'écran qui fonctionne si en distanciel
 - ☐ Le document participant *Connexion à la plateforme* prêt à être distribué après la démo
@@ -106,11 +106,11 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 - **Surveillez :** Des participants demandent « c'est pareil que DHIS2 ? » — réponse : *« Non. FASTR lit depuis DHIS2 mais ajoute analyse, visualisation et reporting par-dessus. »*
 
-### Étape 2 : Onglet Données (où vivent les données de vos établissements)
+### Étape 2 : Où vivent les données (niveau instance)
 
-- **Faites :** Cliquez sur l'onglet **Données**. Montrez **Structure & maps** (zones administratives + établissements) et **HMIS Data**.
-- **Dites :** *« C'est ici que les données de votre pays sont stockées. Nous remplirons cela demain pendant l'activité Configuration de l'instance. »*
-- **Surveillez :** N'allez pas en profondeur ici — juste orientation. La configuration détaillée est sa propre session.
+- **Faites :** Montrez brièvement la **navigation du haut** (Projets · Données · Résultats · Ressources · Utilisateurs) et cliquez sur **Données** — la page au niveau instance avec les cartes **SNIS**.
+- **Dites :** *« Les administrateurs importent les données ici, au niveau de l'instance. Les projets ne stockent rien : chacun lit un **paquet de résultats**, des analyses déjà calculées. »*
+- **Surveillez :** N'allez pas en profondeur ici — juste orientation. La configuration est sa propre session.
 
 ---
 

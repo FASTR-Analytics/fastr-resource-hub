@@ -3,3 +3,7 @@ slides:
   order: 1.0
   variant: full
   title: 'Activité : entrer dans la plateforme et créer votre dossier'
+- file: m9b_2_results_packages_concept.md
+  order: 2.0
+  variant: full
+  title: "D'où viennent les chiffres d'un projet"

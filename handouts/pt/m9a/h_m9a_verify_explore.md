@@ -57,7 +57,7 @@ Escolha um período (ex.: o mês passado) e uma unidade sanitária que conheça 
 
 <h2 class="step-h"><span class="step-n">5</span><span>Rever o histórico de importações</span></h2>
 
-Clique em **View previous imports** para ver todas as importações realizadas — data, fonte, linhas inseridas/atualizadas. Útil para acompanhar o que foi carregado e quando.
+Abra o separador **Histórico** da página Importações para ver todas as importações realizadas, e o separador **Por indicador** para os meses de dados e a última importação de cada indicador. Útil para acompanhar o que foi carregado e quando.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 
@@ -85,4 +85,4 @@ Está pronto para correr os módulos de análise — qualidade dos dados, utiliz
 
 ## A seguir
 
-Configuração concluída. Avance para **Getting Started** (M9b) para conhecer a interface da plataforma em profundidade, ou passe diretamente a correr o seu primeiro módulo de análise.
+Configuração concluída. Um administrador pode agora **gerar um pacote de resultados** (Resultados → Gerar novo pacote de resultados) para que os projetos usem os dados. Depois avance para **Getting Started** (M9b) para conhecer a interface da plataforma em profundidade.

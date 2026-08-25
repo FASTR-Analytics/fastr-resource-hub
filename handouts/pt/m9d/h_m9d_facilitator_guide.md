@@ -148,10 +148,7 @@ Um passeio ao vivo de 5 minutos pelo editor de diapositivos. Os participantes ac
 - **Diga:** *«É assim que se coloca um gráfico guardado num diapositivo. Não está a construir um gráfico novo aqui — está a escolher um que já guardou no separador Visualisations.»*
 - **Atenção a:** reforce **«reutilize, não recrie»** — o gráfico tem de estar já guardado em Visualisations. Se o gráfico de um participante não aparecer no seletor, ele tem de voltar atrás e guardá-lo lá primeiro.
 
-<div class="screenshot-placeholder">
-📷 <strong>Menu Block → Visualisation → Select</strong><br>
-<code>resources/screenshots/m9d/block_viz_select.png</code>
-</div>
+![Seletor de visualização h:180](../../../resources/screenshots/m9d/block_viz_select.png)
 
 ### Passo 3 — Dividir o diapositivo em gráfico + texto
 
@@ -159,10 +156,7 @@ Um passeio ao vivo de 5 minutos pelo editor de diapositivos. Os participantes ac
 - **Diga:** *«Duas colunas são o padrão FASTR: gráfico de um lado, a única coisa que quer que o leitor retenha do outro. Se precisar de mais, divida noutro diapositivo.»*
 - **Atenção a:** participantes tentam meter quatro colunas. Reconduza-os a duas — o conteúdo extra vai para o diapositivo seguinte.
 
-<div class="screenshot-placeholder">
-📷 <strong>Menu do botão direito com "Add → Col to right"</strong><br>
-<code>resources/screenshots/m9d/col_to_right_menu.png</code>
-</div>
+![Menu Adicionar → Col à direita h:180](../../../resources/screenshots/m9d/col_to_right_menu.png)
 
 ---
 

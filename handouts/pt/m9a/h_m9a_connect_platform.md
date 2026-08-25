@@ -49,9 +49,9 @@ Não existe um passo de «ligação» separado. Na primeira vez que despoletar u
 - URL do DHIS2
 - Nome de utilizador do DHIS2
 - Palavra-passe do DHIS2
-- ☐ Guardar credenciais para esta sessão
+- ☐ Ligação guardada configurada (uma vez por instância)
 
-> **Dica:** marque **Guardar credenciais para esta sessão** no primeiro pedido. A plataforma memoriza a sua ligação ao DHIS2 até terminar sessão — não precisa de reintroduzir nas importações seguintes.
+> **Dica:** a ligação DHIS2 guarda-se **uma vez para toda a instância** — um administrador configura-a em **Gerir ligação**, na página Importações, encriptada. Depois disso, todas as importações a usam; ninguém volta a digitar credenciais.
 
 ## Como usar estas fichas
 

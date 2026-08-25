@@ -1,18 +1,15 @@
-<!-- AUTO-TRANSLATED from core_content/m9a_instance_setup/m9a_2_installing_running_modules.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
 paginate: true
 ---
 
-## Atividade: Instalar e executar módulos
+## Atividade: Gerar um pacote de resultados
 
-**Nesta sessão prática, nós iremos:**
+**Nesta sessão prática, vamos:**
 
-- Revisar os módulos de análise disponíveis
-- Instalar os módulos necessários
-- Executar análises iniciais
+- Rever os módulos de análise disponíveis
+- Selecionar os módulos e configurar os seus parâmetros no assistente de geração
+- Gerar um pacote de resultados e anexá-lo a um projeto
 
-*Os participantes irão configurar e executar os módulos nos seus dados*
+*Os participantes vão gerar um pacote de resultados a partir dos seus dados importados*

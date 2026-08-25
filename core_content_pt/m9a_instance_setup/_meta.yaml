@@ -10,7 +10,7 @@ slides:
 - file: m9a_2_installing_running_modules.md
   order: 2.0
   variant: full
-  title: 'Atividade: Instalar e executar módulos'
+  title: 'Atividade: Gerar um pacote de resultados'
 - file: m9a_3_creating_project.md
   order: 3.0
   variant: full

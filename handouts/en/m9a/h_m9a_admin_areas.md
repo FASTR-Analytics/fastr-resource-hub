@@ -27,16 +27,14 @@ footer: "FASTR · Instance Setup"
 
 ## What you'll do
 
-Pull your country's full administrative hierarchy (regions → districts → facilities) directly from DHIS2 into FASTR. After this, every analysis can disaggregate results by region, district, or facility.
+Pull your country's facility registry — every facility with its region and district — directly from DHIS2 into FASTR. The administrative areas are **derived automatically from the facility rows**: you never manage admin areas separately. After this, every analysis can disaggregate results by region, district, or facility.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open the import flow</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Open the Facilities registry</span></h2>
 
-1. Click the **Data** tab in the top navigation.
-2. Go to **Structure & maps**.
-3. Click **Admin areas and facilities**.
-4. Click **Add admin areas and facilities**.
+1. Click **Data** in the top navigation. The page is organized into **General**, **HMIS**, **HFA**, and **ICEH** sections.
+2. In the **HMIS** section, click the **Facilities** card.
 
-![h:160](../../../resources/screenshots/m9a_setup/03_admin_units_menu.jpeg)
+![h:180](../../../resources/screenshots/m9a_setup/20_data_page.png)
 
 </div>
 </div>
@@ -45,68 +43,35 @@ Pull your country's full administrative hierarchy (regions → districts → fac
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choose "Import from DHIS2"</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Import from DHIS2</span></h2>
 
-You'll see two options. Pick the **second one — Import directly from DHIS2**. (The first is for manual uploads from a spreadsheet — slower and more error-prone.)
+Start a DHIS2 import from the Facilities page. The **stored DHIS2 connection** appears — the one set up once for the whole instance via **Manage connection**. Confirm it.
 
-![h:170](../../../resources/screenshots/m9a_setup/04_import_from_dhis2.jpeg)
+> No stored connection yet? An administrator sets it up once — URL (with `https://`), username, password — and it is saved encrypted for the whole instance. Nobody re-types credentials after that.
 
-Click **Continue**.
-
-<h2 class="step-h"><span class="step-n">3</span><span>Connect to DHIS2 (first time only)</span></h2>
-
-The platform now shows a small DHIS2 connection form. Fill three fields:
-
-- **DHIS2 URL** — your DHIS2 instance address (include `https://`)
-- **DHIS2 Username**
-- **DHIS2 Password**
-
-Tick **Save credentials for this session** — you won't be prompted again during the next imports.
-
-![h:220](../../../resources/screenshots/m9a_setup/02_credentials_form.jpeg)
-
-Click **Confirm and continue**.
-
-> If you've already saved credentials in this session (e.g., from a previous import), this step is skipped automatically.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">4</span><span>Select the facility level</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Select the facility level</span></h2>
 
 Select **Facility**. FASTR's analysis modules require facility-level data — they aggregate up from facilities to districts and regions internally, not the other way around. Selecting *Facility* brings all the levels above it (district, region, …) along automatically.
 
-![h:160](../../../resources/screenshots/m9a_setup/05_select_facility_level.jpeg)
-
-Click **Save**, then **Start import**.
+Launch the import and wait for it to complete — usually 30 seconds to a few minutes depending on country size.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Confirm and integrate</span></h2>
-
-- Select **Add new facilities and update existing ones as needed**.
-- Click **Finalize and integrate**.
-
-Wait for the import to complete — a progress bar shows; usually 30 sec to a few minutes depending on country size.
-
 ## Checkpoint
 
-After integration:
+- The **Facilities** page lists your country's facilities with their admin areas.
+- Back on the **Data** page, the Facilities card shows the counts — facilities, and admin areas at each level. Check they are plausible for your country.
 
-- The Admin areas and facilities page lists your country's hierarchy.
-- Back on the **Data** page, Structure & maps appears as **green**.
-
-![h:200](../../../resources/screenshots/m9a_setup/06_facilities_green.jpeg)
+![h:190](../../../resources/screenshots/m9a_setup/35_hmis_facilities.png)
 
 ## What could go wrong
 
-- **Empty facility list** — your DHIS2 user may not have read access to org units. Check with the DHIS2 admin.
-- **Hierarchy looks wrong** — you picked the wrong level. Re-import; the *update existing* option keeps modifications non-destructive.
-- **Authentication fails** — usually the wrong URL (missing `https://` or trailing slash) or a typo in the password. Re-open the import flow to get the connect form back.
-- **Import hangs** — large countries (1000+ facilities) take longer. Wait at least 5 min before retrying.
+- **Empty facility list** — the DHIS2 user behind the stored connection may not have read access to org units. Check with the DHIS2 admin.
+- **Hierarchy looks wrong** — the wrong level was picked. Re-import with the right level; existing facilities are updated, not duplicated.
+- **Authentication fails** — usually a malformed URL (missing `https://` or a trailing slash) rather than a wrong password. Fix it via **Manage connection** on the Imports page.
+- **Import hangs** — large countries (1000+ facilities) take longer. Wait at least 5 minutes before retrying.
 
 ## What's next
 

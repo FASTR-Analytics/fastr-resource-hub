@@ -148,10 +148,7 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 - **Say:** *"This is how you put a saved chart on a slide. You're not building a new chart here — you're picking one you already saved in the Visualizations tab."*
 - **Watch for:** Reinforce **"reuse, don't recreate"** — the chart must already be saved in Visualizations. If a participant's chart isn't appearing in the picker, they need to go back and save it there first.
 
-<div class="screenshot-placeholder">
-📷 <strong>Block → Visualization → Select menu</strong><br>
-<code>resources/screenshots/m9d/block_viz_select.png</code>
-</div>
+![Select visualization picker h:180](../../../resources/screenshots/m9d/block_viz_select.png)
 
 ### Step 3 — Split the slide into chart + text
 
@@ -159,10 +156,7 @@ A 5-minute live tour of the slide editor. Participants have just created an empt
 - **Say:** *"Two columns is the FASTR pattern: chart on one side, the one thing you want the reader to take away on the other. If you need more, split into another slide."*
 - **Watch for:** Participants try to fit four columns. Steer them back to two — extra content goes on the next slide.
 
-<div class="screenshot-placeholder">
-📷 <strong>Right-click menu showing "Add → Col to right"</strong><br>
-<code>resources/screenshots/m9d/col_to_right_menu.png</code>
-</div>
+![Add → Col to right menu h:180](../../../resources/screenshots/m9d/col_to_right_menu.png)
 
 ---
 
