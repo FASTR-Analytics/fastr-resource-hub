@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150" font-family="Inter, sans-serif">
+  <!-- Box 1: DHIS2 code -->
+  <rect x="8" y="30" width="160" height="78" rx="10" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
+  <text x="88" y="52" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#09544F">DHIS2 code</text>
+  <text x="88" y="74" text-anchor="middle" dominant-baseline="central" font-size="12" font-family="monospace" fill="#0C716B">N70qtdTZ21W</text>
+  <text x="88" y="94" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#436b68">a machine name</text>
+
+  <!-- Arrow 1 -->
+  <polyline points="176,69 200,69" fill="none" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polyline points="193,62 201,69 193,76" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Box 2: Common indicator -->
+  <rect x="208" y="30" width="160" height="78" rx="10" fill="#CAE6E9" stroke="#0C716B" stroke-width="1.5"/>
+  <text x="288" y="52" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#09544F">Common indicator</text>
+  <text x="288" y="74" text-anchor="middle" dominant-baseline="central" font-size="12" font-family="monospace" fill="#0C716B">delivery</text>
+  <text x="288" y="94" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#436b68">the copied data</text>
+
+  <!-- Arrow 2 -->
+  <polyline points="376,69 400,69" fill="none" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polyline points="393,62 401,69 393,76" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Box 3: Calculated indicator -->
+  <rect x="408" y="30" width="170" height="78" rx="10" fill="#0C716B"/>
+  <text x="493" y="52" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#FFFFFF">Calculated indicator</text>
+  <text x="493" y="74" text-anchor="middle" dominant-baseline="central" font-size="11.5" fill="#E8F4F3">sba ÷ delivery</text>
+  <text x="493" y="94" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#CAE6E9">the calculation</text>
+
+  <!-- Arrow 3 -->
+  <polyline points="586,69 610,69" fill="none" stroke="#1F9A9C" stroke-width="2.5"/>
+  <polyline points="603,62 611,69 603,76" fill="none" stroke="#1F9A9C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Box 4: Scorecard column -->
+  <rect x="618" y="30" width="134" height="78" rx="10" fill="#FFFFFF" stroke="#09544F" stroke-width="1.5"/>
+  <text x="685" y="50" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#09544F">Scorecard</text>
+  <text x="685" y="66" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#09544F">column</text>
+  <rect x="638" y="80" width="26" height="16" rx="3" fill="#2F9E44"/>
+  <rect x="672" y="80" width="26" height="16" rx="3" fill="#F5B301"/>
+  <rect x="706" y="80" width="26" height="16" rx="3" fill="#C53030"/>
+
+  <!-- Step labels -->
+  <text x="88" y="126" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="700" fill="#1F9A9C">STEP 1</text>
+  <text x="288" y="126" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="700" fill="#1F9A9C">STEP 2</text>
+  <text x="493" y="126" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="700" fill="#1F9A9C">STEP 3</text>
+  <text x="685" y="126" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="700" fill="#1F9A9C">STEPS 4–5</text>
+</svg>
