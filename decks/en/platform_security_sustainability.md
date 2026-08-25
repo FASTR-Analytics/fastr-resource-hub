@@ -102,7 +102,7 @@ Sharing between countries is not restricted — it is **technically impossible**
 
 ## How the data is protected
 
-The platform checks who you are at every step, scrambles everything it sends, and saves copies automatically.
+The platform checks who you are at every step, makes everything unreadable while it travels, and keeps automatic backup copies.
 
 ![w:1020](../../resources/diagrams/gov_security_layers.svg)
 

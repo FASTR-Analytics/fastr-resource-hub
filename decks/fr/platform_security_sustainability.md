@@ -102,7 +102,7 @@ Le partage entre pays n'est pas restreint — il est **techniquement impossible*
 
 ## Comment les données sont protégées
 
-La plateforme vérifie qui vous êtes à chaque étape, brouille tout ce qu'elle transmet et enregistre des copies automatiquement.
+La plateforme vérifie qui vous êtes à chaque étape, rend tout illisible pendant le transport et garde des copies de sécurité automatiques.
 
 ![w:1020](../../resources/diagrams_fr/gov_security_layers.svg)
 

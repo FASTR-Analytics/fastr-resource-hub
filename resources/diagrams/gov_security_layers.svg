@@ -36,9 +36,9 @@
   <g transform="translate(656,95)">
     <rect x="0" y="0" width="200" height="140" rx="12" fill="#1F9A9C"/>
     <text x="100" y="32" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">3 · Encryption</text>
-    <text x="100" y="66" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">Everything travels</text>
-    <text x="100" y="86" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">scrambled — unreadable</text>
-    <text x="100" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">if intercepted</text>
+    <text x="100" y="66" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">Unreadable to anyone</text>
+    <text x="100" y="86" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">who intercepts it</text>
+    <text x="100" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">on the way</text>
   </g>
 
   <polyline points="864,165 890,165 883,158 890,165 883,172" fill="none" stroke="#0C716B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
