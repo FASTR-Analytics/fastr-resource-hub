@@ -8,7 +8,7 @@
     <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like rent</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">A fixed monthly amount</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">for the country's server</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">[monthly cost — TBC]</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 500–800 / year</text>
   </g>
   <g transform="translate(345,40)">
     <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
@@ -18,7 +18,7 @@
     <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like electricity</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Metered — you pay only</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">for what people use</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">[monthly range — TBC]</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 350 / month</text>
   </g>
   <g transform="translate(650,40)">
     <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
@@ -28,7 +28,7 @@
     <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like maintenance</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Updates, monitoring,</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">backups, user support</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">shared team today</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 7–10k / year, shared</text>
   </g>
-  <text x="480" y="322" text-anchor="middle" fill="#0C716B" font-size="16" font-style="italic">No license fee per person — adding users costs nothing extra</text>
+  <text x="480" y="322" text-anchor="middle" fill="#0C716B" font-size="16" font-style="italic">Planning estimates, 2026 prices — no license fees, no per-user charges</text>
 </svg>

@@ -139,15 +139,33 @@ Des totaux agrégés uniquement — les chiffres qu'un utilisateur verrait déj�
 
 ## Coûts de fonctionnement
 
-Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteur), **appui** (équipe partagée). Pas de frais par utilisateur.
+Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteur), **maintenance** (équipe partagée). Pas de licence, pas de frais par utilisateur — le logiciel est open source.
 
 ![w:1020](../../resources/diagrams_fr/gov_cost_structure.svg)
 
 <!--
-- Hébergement : un serveur dédié par pays, montant mensuel fixe. [Chiffre à confirmer — ne pas présenter sans.]
-- IA : pas de licence ; chaque requête est journalisée avec son coût exact — la dépense se suit et se plafonne. Déterminant = utilisateurs actifs, pas volume de données. [Fourchette à confirmer.]
-- Appui : mises à jour, supervision, sauvegardes, aide aux utilisateurs — une équipe partagée aujourd'hui.
+- La diapositive suivante porte les chiffres réels. Celle-ci pose la structure.
+- La dépense IA est journalisée par requête : elle se suit et se plafonne. Déterminant = utilisateurs actifs, pas volume de données.
 - Ajouter des comptes ne coûte rien.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Les chiffres — estimations de planification
+
+Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
+
+- **Hébergement** de l'instance d'un pays : environ **500 à 800 USD par an** — les grands pays vers le haut de la fourchette
+- **Usage de l'IA** : environ **350 USD par mois** (~4 000 USD par an) pour un pays typique ; plusieurs fois plus pour les plus grands pays, et cela croît avec l'usage
+- **Maintenance partagée de la plateforme** (ingénierie, supervision, sauvegardes) : environ **7 000 à 10 000 USD par pays et par an** aujourd'hui — cela baisse à mesure que des pays rejoignent
+- **Appui optionnel** (actualisation des données, contrôles qualité, analyses) : environ **5 000 à 15 000 USD par an** selon le niveau
+- **Total : environ 12 000 USD par an** — jusqu'à 20 000–30 000 USD avec l'appui
+
+<!--
+- Cadrer clairement : estimations de planification, pas un devis — et la ligne maintenance est financée centralement aujourd'hui.
+- La ligne qui bouge est l'IA : au compteur, elle suit l'usage et croîtra avec les fonctions IA.
 -->
 
 ---
@@ -159,10 +177,12 @@ Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteu
 - Hébergée **de façon centralisée aujourd'hui**, pendant le développement actif — chaque pays reçoit correctifs et nouveautés le jour même
 - Construite **portable** : le même logiciel peut tourner sur les serveurs d'un ministère
 - **Migrer plus tard n'exige aucune reconstruction** — le même logiciel tourne dans les deux cas
+- **Toutes les données d'un pays peuvent être exportées intégralement à tout moment**, quel que soit l'hébergement
 
 <!--
 - « Portable » = conteneurisation Docker. Documentation technique de la plateforme : déployer une instance pays sur une autre infrastructure, y compris sur site, est relativement simple.
 - L'hébergement centralisé est un choix de phase de développement, pas une dépendance permanente.
+- L'auto-hébergement demande un vrai effort du ministère : une équipe pour serveurs, sauvegardes et mises à niveau, plus la passation de marchés pour l'hébergement et les services d'IA (achetés auprès d'un fournisseur commercial comme Anthropic).
 -->
 
 ---
@@ -185,7 +205,7 @@ Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteu
 
 - **Des totaux mensuels uniquement** — jamais de dossiers patients
 - **Une installation par pays** — aucun passage entre pays
-- **Trois lignes de coûts connues** — hébergement, IA au compteur, appui ; pas de frais par utilisateur
+- **Environ 12 000 USD par an** de fonctionnement — hébergement, IA au compteur, maintenance partagée ; ni licence ni frais par utilisateur
 - **Hébergement par le pays d'ici 2030** — l'objectif de transition affiché
 
 <!--
@@ -193,3 +213,87 @@ Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteu
 - Si un seul fait doit rester : zéro dossier patient dans la plateforme.
 - Prochaines étapes à proposer : arrêter les chiffres de coûts ; établir la liste de préparation du pays.
 -->
+
+---
+
+<!-- _class: section-cover -->
+
+![bg](../../resources/backgrounds/section_slide.png)
+
+# Annexe technique — pour les équipes informatiques et DHIS2
+
+---
+
+<!-- _class: spacious -->
+
+## Architecture et isolation
+
+- Chaque instance pays est un **déploiement Docker séparé** : son conteneur applicatif, sa base **PostgreSQL**, son cache **Valkey**, son volume de stockage, sur un réseau privé
+- Au sein d'une instance, chaque projet a sa **propre base** (`project_{uuid}`) pour le contenu d'édition
+- Les résultats calculés résident dans des **paquets de résultats versionnés** (fichiers parquet, interrogés via DuckDB) — les projets lisent le paquet qui leur est rattaché, jamais celui des autres
+
+<!--
+- L'isolation entre pays et entre projets est structurelle : ni base, ni cache, ni chemin de fichiers partagés.
+- Source : documentation technique et code de la plateforme (github.com/FASTR-Analytics/platform).
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Authentification et contrôle d'accès
+
+- L'identité est gérée par **Clerk** (fournisseur d'identité géré) ; les jetons de session sont **vérifiés par middleware à chaque requête** — le contournement d'authentification n'existe qu'en développement local, désactivé en production
+- **RBAC à deux niveaux** : permissions d'instance et rôles par projet, résolus en base à chaque requête
+- Accès aux serveurs : **SSH par clé cryptographique uniquement**, restreint à deux ingénieurs nommés — pas de connexion par mot de passe
+
+<!--
+- La plateforme ne stocke jamais de mots de passe ; Clerk gère identifiants, MFA et sessions.
+- Le périmètre projet est appliqué côté serveur via un en-tête Project-Id confronté aux rôles par projet.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Protection des données et exploitation
+
+- **TLS terminé sur nginx**, certificats provisionnés et renouvelés via certbot ; les secrets sont injectés en variables d'environnement à l'exécution — jamais dans les images, jamais côté navigateur
+- **Les modules R s'exécutent dans des conteneurs éphémères** (supprimés à la fin) qui ne montent que le répertoire de travail de leur exécution
+- Sauvegardes : **pg_dump toutes les 30 minutes** (fenêtre glissante de 3 jours) plus **instantanés de volume quotidiens / hebdomadaires / mensuels** ; la restauration est contrôlée par permission (`can_restore_backups`) et par une clé côté serveur en plus d'une session valide
+
+<!--
+- La restauration valide les chemins contre la traversée de répertoires et réinitialise entièrement la base cible avant chargement — les sauvegardes sont une voie de récupération, pas une surface d'attaque.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## L'intégration IA, précisément
+
+- Claude (Anthropic) est atteint via un **proxy côté serveur** ; la clé d'API ne quitte jamais le serveur
+- Les appels d'outils s'exécutent **dans la session authentifiée de l'utilisateur** — l'IA n'a aucune permission propre
+- Les outils de données renvoient **uniquement des sorties métriques agrégées** : il n'existe **aucune dimension identifiant d'établissement** dans l'interface de requête, et toute dimension de plus de 20 valeurs est résumée en nombre
+- La **recherche web côté serveur (hébergée par Anthropic) est activée** dans le chat projet pour les questions générales
+- Chaque requête est journalisée (utilisateur, projet, modèle, jetons) ; **des limites quotidiennes par utilisateur et hebdomadaires par instance** s'appliquent
+
+<!--
+- Ces affirmations ont été vérifiées directement dans le code source de la plateforme, pas seulement dans la documentation.
+- Si la question vient sur les outils web : les recherches s'exécutent sur l'infrastructure d'Anthropic dans le cadre de la requête IA ; elles ne partent ni du serveur de la plateforme ni du navigateur de l'utilisateur.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Données et interopérabilité
+
+- Données source : **numérateurs DHIS2 agrégés** (totaux établissement-mois) — importés côté serveur, avec remplacement par paire (indicateur, mois) et un registre d'importation par indicateur
+- **Export intégral à tout moment** : les données et résultats d'un pays sont exportables quel que soit l'hébergement
+- Le code est **open source** : github.com/FASTR-Analytics/platform
+
+<!--
+- Le registre d'importation (onglet Par indicateur) montre les mois de données, la dernière importation et les mois en échec par indicateur — une traçabilité auditable pour l'équipe DHIS2.
+-->
+
