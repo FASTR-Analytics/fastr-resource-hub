@@ -189,7 +189,9 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 
 ## The path to country ownership
 
-![w:1020](../../resources/diagrams/gov_ownership_roadmap.svg)
+For countries that want to host themselves, real effort is required from the Ministry of Health: a team to run servers, backups, and upgrades, and procurement in place for hosting and for AI services, bought from a commercial provider (such as Anthropic).
+
+![w:940](../../resources/diagrams/gov_ownership_roadmap.svg)
 
 <!--
 - Stage 2 is already partly real: country admins manage users and data imports today.

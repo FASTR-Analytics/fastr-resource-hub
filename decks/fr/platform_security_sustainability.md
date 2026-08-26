@@ -189,7 +189,9 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 
 ## Le chemin vers l'appropriation par le pays
 
-![w:1020](../../resources/diagrams_fr/gov_ownership_roadmap.svg)
+Pour les pays qui souhaitent s'héberger eux-mêmes, un réel effort du ministère de la Santé sera nécessaire : une équipe pour faire tourner serveurs, sauvegardes et mises à niveau, et des marchés en place pour l'hébergement et pour les services d'IA, achetés auprès d'un fournisseur commercial (comme Anthropic).
+
+![w:940](../../resources/diagrams_fr/gov_ownership_roadmap.svg)
 
 <!--
 - L'étape 2 est déjà en partie réelle : les administrateurs pays gèrent aujourd'hui utilisateurs et imports.

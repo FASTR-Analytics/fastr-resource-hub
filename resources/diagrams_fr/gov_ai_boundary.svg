@@ -37,10 +37,10 @@
     </g>
   </g>
   <!-- AI panel -->
-  <g transform="translate(490,120)">
-    <rect x="0" y="0" width="180" height="160" rx="16" fill="#09544F"/>
-    <text x="90" y="66" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
-    <text x="90" y="100" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
+  <g transform="translate(490,75)">
+    <rect x="0" y="0" width="180" height="250" rx="16" fill="#09544F"/>
+    <text x="90" y="108" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
+    <text x="90" y="142" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
   </g>
   <!-- Right: consequences -->
   <g transform="translate(710,90)">
