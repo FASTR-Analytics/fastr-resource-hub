@@ -37,21 +37,20 @@
     </g>
   </g>
   <!-- AI panel -->
-  <g transform="translate(490,75)">
-    <rect x="0" y="0" width="180" height="250" rx="16" fill="#09544F"/>
-    <text x="90" y="108" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
-    <text x="90" y="142" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
+  <g transform="translate(490,40)">
+    <rect x="0" y="0" width="180" height="330" rx="16" fill="#09544F"/>
+    <text x="90" y="150" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
+    <text x="90" y="185" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
   </g>
-  <!-- Right: consequences -->
-  <g transform="translate(710,90)">
-    <rect x="0" y="0" width="220" height="220" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
-    <text x="110" y="36" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">It also…</text>
+  <g transform="translate(710,40)">
+    <rect x="0" y="0" width="220" height="330" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
+    <text x="110" y="44" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">It also…</text>
     <g fill="#0C716B" font-size="14">
-      <text x="20" y="72" dominant-baseline="central">• sees only what YOU are</text>
-      <text x="28" y="92" dominant-baseline="central">allowed to see</text>
-      <text x="20" y="126" dominant-baseline="central">• can search the public internet</text>
-      <text x="20" y="160" dominant-baseline="central">• every question is logged —</text>
-      <text x="28" y="180" dominant-baseline="central">user, project, usage</text>
+      <text x="20" y="100" dominant-baseline="central">• sees only what YOU are</text>
+      <text x="28" y="120" dominant-baseline="central">allowed to see</text>
+      <text x="20" y="180" dominant-baseline="central">• can search the public internet</text>
+      <text x="20" y="240" dominant-baseline="central">• every question is logged —</text>
+      <text x="28" y="260" dominant-baseline="central">user, project, usage</text>
     </g>
   </g>
 </svg>

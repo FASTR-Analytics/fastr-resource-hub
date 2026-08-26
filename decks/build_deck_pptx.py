@@ -723,7 +723,7 @@ GOV_EN = [
         {"t": "**All of a country's data can be exported in full at any time**, now or later, regardless of hosting", "bullet": True},
     ]},
     {"type": "image", "title": "The path to country ownership",
-     "lead": "For countries that want to host themselves, real effort is required from the Ministry of Health: a team to run servers, backups, and upgrades, and procurement in place for hosting and for AI services, bought from a commercial provider (such as Anthropic).",
+     "lead": "For countries who do want to host themselves, there will be effort required from the Ministry of Health. A team will need to run servers, backups, and upgrades; and procurement in place for hosting and for AI services, which are bought from a commercial provider (e.g. Anthropic, OpenAI).",
      "image": "diagrams/gov_ownership_roadmap.png"},
     {"type": "content", "title": "The essentials", "blocks": [
         {"t": "**Monthly totals only** — never patient records", "bullet": True},
@@ -803,7 +803,7 @@ GOV_FR = [
         {"t": "**Toutes les données d'un pays peuvent être exportées intégralement à tout moment**, quel que soit l'hébergement", "bullet": True},
     ]},
     {"type": "image", "title": "Le chemin vers l'appropriation par le pays",
-     "lead": "Pour les pays qui souhaitent s'héberger eux-mêmes, un réel effort du ministère de la Santé sera nécessaire : une équipe pour serveurs, sauvegardes et mises à niveau, et des marchés en place pour l'hébergement et les services d'IA, achetés auprès d'un fournisseur commercial (comme Anthropic).",
+     "lead": "Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de la Santé sera nécessaire. Une équipe devra faire tourner serveurs, sauvegardes et mises à niveau ; et des marchés devront être en place pour l'hébergement et pour les services d'IA, achetés auprès d'un fournisseur commercial (par ex. Anthropic, OpenAI).",
      "image": "diagrams_fr/gov_ownership_roadmap.png"},
     {"type": "content", "title": "L'essentiel", "blocks": [
         {"t": "**Des totaux mensuels uniquement** — jamais de dossiers patients", "bullet": True},
