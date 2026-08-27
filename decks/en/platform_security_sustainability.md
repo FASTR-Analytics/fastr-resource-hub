@@ -70,27 +70,22 @@ footer: "FASTR · Analytics platform"
 
 ---
 
-<!-- _class: spacious -->
+## What "secure" means for a platform like this
 
-## Four questions any government should ask
+In software and data hosting, security is not one thing — it is five. The next slides take them one at a time: the risk, then what answers it.
 
-- **Could our data leave the country's control?**
-- **Could the wrong person get in?**
-- **Could data be intercepted on the way — or lost in a failure?**
-- **Could the AI expose what it sees?**
-
-The next four slides take these one at a time: the risk, then what answers it.
+![w:940](../../resources/diagrams/gov_security_dimensions.svg)
 
 <!--
-- This is the frame Ashley asked for: name the security issues first, then demonstrate how each is addressed.
-- Invite the room to add their own concerns — anything not on this list can be taken to the technical annex or followed up.
+- This is the standard frame (confidentiality / integrity / availability, plus sovereignty and accountability for government data) in plain words.
+- Invite the room to add their own concerns — anything not covered here goes to the technical annex or follow-up.
 -->
 
 ---
 
 ## Could our data leave the country's control?
 
-**The risk:** data flowing into a shared pool, or visible to another country. **The answer:** there is no shared pool — each country runs its own installation, and sharing is technically impossible.
+**Sovereignty.** The risk: data flowing into a shared pool, or visible to another country. The answer: there is no shared pool — each country runs its own installation, sharing is technically impossible, and everything can be exported in full at any time.
 
 ![w:1020](../../resources/diagrams/gov_country_isolation.svg)
 
@@ -103,9 +98,9 @@ The next four slides take these one at a time: the risk, then what answers it.
 
 <!-- _class: spacious -->
 
-## Could the wrong person get in?
+## Could someone gain unauthorized access?
 
-**The risk:** a leaked password, or an insider reaching beyond their role. **The answer:** accounts, roles, and identity re-checked at every single request.
+**Confidentiality.** The risk: a leaked password, or an insider reaching beyond their role. The answer: accounts, roles, and identity re-checked at every single request.
 
 - The ministry decides **who gets an account**, and each person's role
 - Roles set what a person can do — **view, edit, or administer** — and in which projects
@@ -122,7 +117,7 @@ The next four slides take these one at a time: the risk, then what answers it.
 
 ## Could data be intercepted — or lost?
 
-**The risk:** interception on the network, or a server failure taking the data with it. **The answer:** nothing readable leaves the platform, and automatic copies mean everything can be rebuilt.
+**Confidentiality and availability.** The risk: interception on the network, or a server failure taking the data with it. The answer: nothing readable leaves the platform, and automatic copies mean everything can be rebuilt.
 
 ![w:1020](../../resources/diagrams/gov_security_layers.svg)
 
@@ -134,9 +129,27 @@ The next four slides take these one at a time: the risk, then what answers it.
 
 ---
 
+<!-- _class: spacious -->
+
+## Could the figures be altered?
+
+**Integrity.** The risk: figures altered without record, or analyses that cannot be reproduced. The answer: one source of truth, recorded imports, versioned results.
+
+- **DHIS2 remains the source of truth** — the platform imports from it, and re-imported months are refreshed to match it
+- **Every import is recorded**: an indicator-by-indicator ledger shows the months loaded, when, and any failures
+- **Results come in versioned, dated packages** — the same package gives the same numbers to everyone; new numbers require a new package
+- Analysis methods and parameters are **documented and logged with each package**
+
+<!--
+- This is the trust argument for analysts and directors alike: the numbers in a report can be traced back to a dated package, its module parameters, and the DHIS2 import behind it.
+- Nobody edits a figure in place — change flows through a new import and a new package, both recorded.
+-->
+
+---
+
 ## Could the AI expose what it sees?
 
-**The risk:** an assistant that sees too much. **The answer:** it is handed aggregated totals only — the numbers a user could already see, within that user's own permissions. **Never the underlying rows.**
+**Confidentiality and accountability.** The risk: an assistant that sees too much. The answer: it is handed aggregated totals only — the numbers a user could already see, within that user's own permissions, and every question it is asked is logged. **Never the underlying rows.**
 
 ![w:1020](../../resources/diagrams/gov_ai_boundary.svg)
 

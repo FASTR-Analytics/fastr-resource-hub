@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Inter, sans-serif">
+  <text x="480" y="34" text-anchor="middle" fill="#09544F" font-size="19" font-weight="600">« Est-ce sécurisé ? » recouvre cinq questions distinctes</text>
+  <g transform="translate(30,70)">
+    <rect x="0" y="0" width="290" height="150" rx="12" fill="#09544F"/>
+    <text x="145" y="34" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">Confidentialité</text>
+    <text x="145" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Seules les personnes autorisées voient les données</text>
+    <text x="145" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="13" font-style="italic">Qui peut y accéder ?</text>
+  </g>
+  <g transform="translate(335,70)">
+    <rect x="0" y="0" width="290" height="150" rx="12" fill="#0C716B"/>
+    <text x="145" y="34" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">Intégrité</text>
+    <text x="145" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Les chiffres ne peuvent être altérés à l'insu de tous</text>
+    <text x="145" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="13" font-style="italic">Peut-on se fier aux chiffres ?</text>
+  </g>
+  <g transform="translate(640,70)">
+    <rect x="0" y="0" width="290" height="150" rx="12" fill="#1F9A9C"/>
+    <text x="145" y="34" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">Disponibilité</text>
+    <text x="145" y="66" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="14">Accessibles quand il le faut</text>
+    <text x="145" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="13" font-style="italic">Que se passe-t-il si un serveur tombe ?</text>
+  </g>
+  <g transform="translate(185,250)">
+    <rect x="0" y="0" width="290" height="150" rx="12" fill="#0C716B"/>
+    <text x="145" y="34" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">Souveraineté</text>
+    <text x="145" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Sous contrôle national</text>
+    <text x="145" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="13" font-style="italic">Qui détient les données, in fine ?</text>
+  </g>
+  <g transform="translate(490,250)">
+    <rect x="0" y="0" width="290" height="150" rx="12" fill="#09544F"/>
+    <text x="145" y="34" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="17" font-weight="600">Traçabilité</text>
+    <text x="145" y="66" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">Chaque action est journalisée</text>
+    <text x="145" y="106" text-anchor="middle" dominant-baseline="central" fill="#E8F4F3" font-size="13" font-style="italic">Qui a fait quoi, et quand ?</text>
+  </g>
+</svg>

@@ -70,27 +70,22 @@ footer: "FASTR · Plateforme d'analyse"
 
 ---
 
-<!-- _class: spacious -->
+## Ce que « sécurisé » veut dire pour une telle plateforme
 
-## Quatre questions que tout gouvernement devrait poser
+En logiciel et en hébergement de données, la sécurité n'est pas une chose — c'en est cinq. Les diapositives suivantes les prennent une à une : le risque, puis ce qui y répond.
 
-- **Nos données peuvent-elles échapper au contrôle du pays ?**
-- **La mauvaise personne peut-elle entrer ?**
-- **Les données peuvent-elles être interceptées en chemin — ou perdues ?**
-- **L'IA peut-elle exposer ce qu'elle voit ?**
-
-Les quatre diapositives suivantes les prennent une à une : le risque, puis ce qui y répond.
+![w:940](../../resources/diagrams_fr/gov_security_dimensions.svg)
 
 <!--
-- Le cadre demandé : nommer d'abord les enjeux de sécurité, puis démontrer comment chacun est traité.
-- Inviter la salle à ajouter ses propres inquiétudes — ce qui n'est pas dans la liste peut aller à l'annexe technique ou en suivi.
+- C'est le cadre standard (confidentialité / intégrité / disponibilité, plus souveraineté et traçabilité pour des données publiques), en termes simples.
+- Inviter la salle à ajouter ses inquiétudes — ce qui n'est pas couvert va à l'annexe technique ou en suivi.
 -->
 
 ---
 
 ## Nos données peuvent-elles échapper au contrôle du pays ?
 
-**Le risque :** des données versées dans un pot commun, ou visibles d'un autre pays. **La réponse :** il n'y a pas de pot commun — chaque pays fonctionne sur sa propre installation, et le partage est techniquement impossible.
+**Souveraineté.** Le risque : des données versées dans un espace partagé, ou visibles d'un autre pays. La réponse : il n'existe aucun espace partagé — chaque pays fonctionne sur sa propre installation, le partage est techniquement impossible, et tout peut être exporté intégralement à tout moment.
 
 ![w:1020](../../resources/diagrams_fr/gov_country_isolation.svg)
 
@@ -103,9 +98,9 @@ Les quatre diapositives suivantes les prennent une à une : le risque, puis ce q
 
 <!-- _class: spacious -->
 
-## La mauvaise personne peut-elle entrer ?
+## Un accès non autorisé est-il possible ?
 
-**Le risque :** un mot de passe qui fuite, ou un initié qui dépasse son rôle. **La réponse :** des comptes, des rôles, et une identité revérifiée à chaque requête.
+**Confidentialité.** Le risque : un mot de passe qui fuite, ou un initié qui dépasse son rôle. La réponse : des comptes, des rôles, et une identité revérifiée à chaque requête.
 
 - Le ministère décide **qui reçoit un compte**, et le rôle de chaque personne
 - Le rôle fixe ce qu'une personne peut faire — **consulter, éditer ou administrer** — et dans quels projets
@@ -122,7 +117,7 @@ Les quatre diapositives suivantes les prennent une à une : le risque, puis ce q
 
 ## Les données peuvent-elles être interceptées — ou perdues ?
 
-**Le risque :** une interception sur le réseau, ou une panne de serveur qui emporte les données. **La réponse :** rien de lisible ne quitte la plateforme, et des copies automatiques permettent de tout reconstruire.
+**Confidentialité et disponibilité.** Le risque : une interception sur le réseau, ou une panne de serveur qui emporte les données. La réponse : rien de lisible ne quitte la plateforme, et des copies automatiques permettent de tout reconstruire.
 
 ![w:1020](../../resources/diagrams_fr/gov_security_layers.svg)
 
@@ -134,9 +129,27 @@ Les quatre diapositives suivantes les prennent une à une : le risque, puis ce q
 
 ---
 
+<!-- _class: spacious -->
+
+## Les chiffres peuvent-ils être altérés ?
+
+**Intégrité.** Le risque : des chiffres modifiés sans trace, ou des analyses impossibles à reproduire. La réponse : une seule source de vérité, des importations enregistrées, des résultats versionnés.
+
+- **DHIS2 reste la source de vérité** — la plateforme importe depuis DHIS2, et les mois réimportés sont rafraîchis pour y correspondre
+- **Chaque importation est enregistrée** : un registre indicateur par indicateur montre les mois chargés, quand, et les échecs éventuels
+- **Les résultats arrivent en paquets versionnés et datés** — le même paquet donne les mêmes chiffres à tous ; de nouveaux chiffres exigent un nouveau paquet
+- Les méthodes d'analyse et leurs paramètres sont **documentés et consignés avec chaque paquet**
+
+<!--
+- C'est l'argument de confiance, pour les analystes comme pour les directions : un chiffre d'un rapport se retrace jusqu'à un paquet daté, ses paramètres de modules et l'importation DHIS2 derrière.
+- Personne ne corrige un chiffre à la main — tout changement passe par une nouvelle importation et un nouveau paquet, tous deux enregistrés.
+-->
+
+---
+
 ## L'IA peut-elle exposer ce qu'elle voit ?
 
-**Le risque :** un assistant qui en voit trop. **La réponse :** il ne reçoit que des totaux agrégés — les chiffres qu'un utilisateur verrait déjà, dans la limite de ses propres permissions. **Jamais les lignes en dessous.**
+**Confidentialité et traçabilité.** Le risque : un assistant qui en voit trop. La réponse : il ne reçoit que des totaux agrégés — les chiffres qu'un utilisateur verrait déjà, dans la limite de ses propres permissions, et chaque question posée est journalisée. **Jamais les lignes en dessous.**
 
 ![w:1020](../../resources/diagrams_fr/gov_ai_boundary.svg)
 
