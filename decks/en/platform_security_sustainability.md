@@ -54,23 +54,6 @@ footer: "FASTR · Analytics platform"
 
 ---
 
-<!-- _class: spacious -->
-
-## What the platform holds
-
-- **Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March
-- The **same figures as the DHIS2 reports** the ministry already produces
-- **No patient records** — no names, no addresses, nothing individual
-- **Current scope, by design**: hosting individual-level records remains possible in future, subject to the additional safeguards set out in the technical annex
-
-<!--
-- Answer the question behind the security question first: what is even in there.
-- The platform imports aggregated numerators from DHIS2 (facility-month counts). Nothing more granular exists in it today.
-- If pressed: today, even a full breach could not expose a single patient's record, because none are there. If the scope ever grows to individual-level data, the security bar grows with it — the annex slide lists what that bar is.
--->
-
----
-
 ## What "secure" means for a platform like this
 
 Data security for a hosted platform spans five distinct dimensions. The following slides address each in turn: the risk, and the measures in place.
@@ -78,63 +61,48 @@ Data security for a hosted platform spans five distinct dimensions. The followin
 ![w:940](../../resources/diagrams/gov_security_dimensions.svg)
 
 <!--
-- This is the standard frame (confidentiality / integrity / availability, plus sovereignty and accountability for government data) in plain words.
-- Invite the room to add their own concerns — anything not covered here goes to the technical annex or follow-up.
--->
-
----
-
-## Could our data leave the country's control?
-
-**Sovereignty.** The risk: data flowing into a shared pool, or visible to another country. The answer: each country runs a fully isolated installation — no shared components exist, cross-country access is technically impossible, and all data can be exported in full at any time.
-
-![w:1020](../../resources/diagrams/gov_country_isolation.svg)
-
-<!--
-- Separate application, separate database, separate storage per country. Nothing shared.
-- Same principle inside a country: each project team sees its own workspace, reading only the results package attached to it.
+- The standard frame (confidentiality / integrity / availability, plus sovereignty and accountability for government data).
+- Invite the room to add concerns — anything not covered goes to the technical annex or follow-up.
 -->
 
 ---
 
 <!-- _class: spacious -->
 
-## Could someone gain unauthorized access?
+## The starting point: what the platform holds
 
-**Confidentiality.** The risk: a leaked password, or an insider reaching beyond their role. The answer: accounts, roles, and identity re-checked at every single request.
-
-- The ministry decides **who gets an account**, and each person's role
-- Roles set what a person can do — **view, edit, or administer** — and in which projects
-- Identity is **re-checked on every request**, not just at login
-- Only a **small, named group of administrators** can change the setup
+- **Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March
+- The **same figures as the DHIS2 reports** the ministry already produces
+- **No patient records** — no names, no addresses, nothing individual
+- **Current scope, by design**: hosting individual-level records remains possible in future, subject to the additional safeguards set out in the technical annex
 
 <!--
-- Sign-in runs through a specialist identity service (Clerk); the platform never stores passwords itself. No back doors in production.
-- Two role levels: instance-wide and per-project. Permissions live in the database and are checked on every request.
-- The server itself: two named engineers, cryptographic keys only.
+- Data minimization is the first security measure: the exposure of a system is bounded by what it contains.
+- The platform imports aggregated numerators from DHIS2 (facility-month counts). Nothing more granular exists in it today.
+- If the scope grows to individual-level data, the security bar grows with it — the annex lists that bar.
 -->
 
 ---
 
-## Could data be intercepted — or lost?
+## Confidentiality — who can access the data
 
-**Confidentiality and availability.** The risk: interception on the network, or a server failure taking the data with it. The answer: nothing readable leaves the platform, and automatic copies mean everything can be rebuilt.
+The risk: unauthorized access, from outside or inside. The measures: named accounts and roles, identity re-checked on every request, encryption in transit.
 
-![w:1020](../../resources/diagrams/gov_security_layers.svg)
+![w:940](../../resources/diagrams/gov_security_layers.svg)
 
 <!--
-- HTTPS everywhere, certificates renewed automatically; secrets never reach the browser.
-- Database snapshot every 30 minutes (kept 3 days) plus full daily/weekly/monthly snapshots.
-- Creating or restoring a backup needs explicit permission on top of a valid login.
+- The ministry decides who gets an account and each person's role: view, edit, or administer — per project.
+- Sign-in runs through a specialist identity service (Clerk); the platform never stores passwords. No back doors in production.
+- Everything travels encrypted; the server itself is reachable by two named engineers with cryptographic keys only.
 -->
 
 ---
 
 <!-- _class: spacious -->
 
-## Could the figures be altered?
+## Integrity — can the figures be trusted
 
-**Integrity.** The risk: figures altered without record, or analyses that cannot be reproduced. The answer: one source of truth, recorded imports, versioned results.
+The risk: figures altered without record, or analyses that cannot be reproduced. The measures: one source of truth, recorded imports, versioned results.
 
 - **DHIS2 remains the source of truth** — the platform imports from it, and re-imported months are refreshed to match it
 - **Every import is recorded**: an indicator-by-indicator ledger shows the months loaded, when, and any failures
@@ -142,23 +110,71 @@ Data security for a hosted platform spans five distinct dimensions. The followin
 - Analysis methods and parameters are **documented and logged with each package**
 
 <!--
-- This is the trust argument for analysts and directors alike: the numbers in a report can be traced back to a dated package, its module parameters, and the DHIS2 import behind it.
+- The trust argument for analysts and directors alike: any figure in a report traces back to a dated package, its module parameters, and the DHIS2 import behind it.
 - Nobody edits a figure in place — change flows through a new import and a new package, both recorded.
 -->
 
 ---
 
-## Could the AI expose what it sees?
+<!-- _class: spacious -->
 
-**Confidentiality and accountability.** The risk: an assistant that sees too much. The answer: the AI can only see what the signed-in user is permitted to see, and every question is logged. Today that means aggregated results; as facility-level analysis is introduced, **the same permission boundary applies**.
+## Availability — what if a server fails
 
-![w:1020](../../resources/diagrams/gov_ai_boundary.svg)
+The risk: hardware failure, accidental deletion, or a corrupted import. The measures: layered automatic backups and a tested recovery path.
+
+- The **database is backed up every 30 minutes**, with a three-day rolling window
+- **Full installation snapshots** are kept on a daily, weekly, and monthly cycle
+- An **entire country instance can be rebuilt** from these snapshots
+- Creating or restoring a backup requires **explicit permission** in addition to a valid login
 
 <!--
-- The AI is Claude, by Anthropic; the access key stays on the server.
-- The platform computes the aggregated answer first and sends only that; identifier lists are collapsed to counts. There is no facility-name dimension the AI can query.
-- Fixed, read-only toolset: no code execution, no database access. Web search IS available (runs on Anthropic's servers) for general questions — do not claim "no internet."
-- Every request is logged: user, project, model, token usage. Daily per-user and weekly per-instance limits are enforced.
+- Two independent layers: application-level database snapshots for fine-grained recovery, infrastructure-level volume snapshots for full disaster recovery.
+- The restore process validates paths and fully resets the target database before loading — backups are a recovery path, not an attack surface.
+-->
+
+---
+
+## Sovereignty — the data remains the country's
+
+The risk: data flowing into a shared pool, or visible to another country. The measures: fully isolated installations, and full export at any time.
+
+![w:940](../../resources/diagrams/gov_country_isolation.svg)
+
+<!--
+- Each country: its own application, database, and storage — no shared components, so cross-country access is technically impossible.
+- All of a country's data and results can be exported in full at any time, regardless of hosting arrangement.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Accountability — every action attributable
+
+The risk: changes or access nobody can trace. The measures: every request tied to a named account, and operational logs across the platform.
+
+- Every request runs under a **named, verified account** — there are no anonymous actions
+- **Imports are recorded** per indicator and month; **results packages are dated and versioned**
+- **Backup and restore actions are permission-gated** and attributable
+- **Every AI question is logged**: who asked, on which project, with what usage
+
+<!--
+- Overlaps deliberately with integrity: the same ledgers that protect the figures also answer "who did what, when".
+- AI usage limits (daily per user, weekly per instance) ride on the same logs.
+-->
+
+---
+
+## Applied to the AI assistant
+
+The AI can only see what the signed-in user is permitted to see, and every question is logged. Today that means aggregated results; as facility-level analysis is introduced, **the same permission boundary applies**.
+
+![w:940](../../resources/diagrams/gov_ai_boundary.svg)
+
+<!--
+- The AI is Claude, by Anthropic; the access key stays on the server; the AI holds no permissions of its own.
+- The platform computes the answer first and sends only that; identifier lists are collapsed to counts.
+- Server-side web search is available for general questions — do not claim "no internet".
 -->
 
 ---
@@ -213,8 +229,7 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 - Hosted **centrally today**, while the platform is in active development — every country receives fixes and new features the same day
 - Built **portable**: the same software runs unchanged on a ministry's own servers — no rebuild needed
 - **Migration is a structured project**: readiness assessment, server procurement, team training, a parallel-run period, then cutover — a **timeline of months, planned jointly**
-- **Self-hosting transfers the shared functions to the ministry**: maintenance, monitoring, upgrades, and fixes become the ministry team's responsibility
-- **Update distribution changes too**: today the central team deploys updates to all countries at once; a self-hosted instance must receive and apply each update itself — supporting self-hosted instances one by one would carry additional cost
+- **Self-hosting transfers the shared functions to the ministry**: maintenance, monitoring, and applying each update — deployed centrally to all countries at once today — become the ministry team's responsibility, and one-by-one support carries additional cost
 - **All of a country's data can be exported in full at any time**, now or later, regardless of hosting
 
 <!--
@@ -243,10 +258,10 @@ For countries who do want to host themselves, there will be effort required from
 
 ## The essentials
 
-- **Aggregated totals today** — no patient records; any future individual-level hosting comes with added safeguards
-- **One installation per country** — no pathway between countries
+- **Aggregated totals today** — no patient records; future individual-level hosting is conditional on added safeguards
+- **Security on five dimensions** — isolated installations per country, role-based access, recorded imports and versioned results, layered backups, full audit trails
 - **About USD 12,000 per year** to run — hosting, metered AI, shared maintenance; no license or per-user fees
-- **Country hosting by 2030** — the stated transition goal; it shifts updates and maintenance to the ministry, with likely additional per-country cost
+- **Country hosting by 2030** — the stated goal; a structured migration that shifts updates and maintenance to the ministry, with likely additional per-country cost
 
 <!--
 - One-slide recap for the official who reads only one slide.

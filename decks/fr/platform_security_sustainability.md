@@ -54,23 +54,6 @@ footer: "FASTR · Plateforme d'analyse"
 
 ---
 
-<!-- _class: spacious -->
-
-## Ce que contient la plateforme
-
-- Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars
-- Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà
-- **Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel
-- **Périmètre actuel, par conception** : l'hébergement de données individuelles reste possible à l'avenir, sous réserve des garanties supplémentaires détaillées dans l'annexe technique
-
-<!--
-- Répondre d'abord à la question derrière la question de sécurité : qu'y a-t-il dedans.
-- La plateforme importe des numérateurs agrégés depuis DHIS2 (totaux établissement-mois). Rien de plus fin n'y existe aujourd'hui.
-- Si on insiste : aujourd'hui, même une intrusion complète ne pourrait exposer le dossier d'un seul patient — il n'y en a aucun. Si le périmètre s'étend un jour aux données individuelles, l'exigence de sécurité s'élève avec lui — la diapositive d'annexe en dresse la liste.
--->
-
----
-
 ## Ce que « sécurisé » veut dire pour une telle plateforme
 
 La sécurité d'une plateforme de données recouvre cinq dimensions distinctes. Les diapositives suivantes traitent chacune d'elles : le risque, et les mesures en place.
@@ -78,63 +61,48 @@ La sécurité d'une plateforme de données recouvre cinq dimensions distinctes. 
 ![w:940](../../resources/diagrams_fr/gov_security_dimensions.svg)
 
 <!--
-- C'est le cadre standard (confidentialité / intégrité / disponibilité, plus souveraineté et traçabilité pour des données publiques), en termes simples.
-- Inviter la salle à ajouter ses inquiétudes — ce qui n'est pas couvert va à l'annexe technique ou en suivi.
--->
-
----
-
-## Nos données peuvent-elles échapper au contrôle du pays ?
-
-**Souveraineté.** Le risque : des données versées dans un espace partagé, ou visibles d'un autre pays. La réponse : chaque pays fonctionne sur une installation entièrement isolée — aucun composant partagé n'existe, l'accès entre pays est techniquement impossible, et toutes les données sont exportables intégralement à tout moment.
-
-![w:1020](../../resources/diagrams_fr/gov_country_isolation.svg)
-
-<!--
-- Application, base de données et stockage séparés par pays. Rien de partagé.
-- Même principe à l'intérieur d'un pays : chaque équipe projet voit son propre espace et ne lit que le paquet de résultats qui lui est rattaché.
+- Le cadre standard (confidentialité / intégrité / disponibilité, plus souveraineté et traçabilité pour des données publiques).
+- Inviter la salle à ajouter ses préoccupations — ce qui n'est pas couvert va à l'annexe technique ou en suivi.
 -->
 
 ---
 
 <!-- _class: spacious -->
 
-## Un accès non autorisé est-il possible ?
+## Le point de départ : ce que contient la plateforme
 
-**Confidentialité.** Le risque : un mot de passe qui fuite, ou un initié qui dépasse son rôle. La réponse : des comptes, des rôles, et une identité revérifiée à chaque requête.
-
-- Le ministère décide **qui reçoit un compte**, et le rôle de chaque personne
-- Le rôle fixe ce qu'une personne peut faire — **consulter, éditer ou administrer** — et dans quels projets
-- L'identité est **revérifiée à chaque requête**, pas seulement à la connexion
-- Seul un **petit groupe d'administrateurs identifiés** peut modifier la configuration
+- Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars
+- Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà
+- **Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel
+- **Périmètre actuel, par conception** : l'hébergement de données individuelles reste possible à l'avenir, sous réserve des garanties supplémentaires détaillées dans l'annexe technique
 
 <!--
+- La minimisation des données est la première mesure de sécurité : l'exposition d'un système est bornée par ce qu'il contient.
+- La plateforme importe des numérateurs agrégés depuis DHIS2 (totaux établissement-mois). Rien de plus fin n'y existe aujourd'hui.
+- Si le périmètre s'étend aux données individuelles, l'exigence de sécurité s'élève avec lui — l'annexe en dresse la liste.
+-->
+
+---
+
+## Confidentialité — qui peut accéder aux données
+
+Le risque : un accès non autorisé, de l'extérieur comme de l'intérieur. Les mesures : des comptes nommés et des rôles, une identité revérifiée à chaque requête, le chiffrement en transit.
+
+![w:940](../../resources/diagrams_fr/gov_security_layers.svg)
+
+<!--
+- Le ministère décide qui reçoit un compte et le rôle de chacun : consulter, éditer ou administrer — par projet.
 - La connexion passe par un service d'identité spécialisé (Clerk) ; la plateforme ne stocke jamais les mots de passe. Aucune porte dérobée en production.
-- Deux niveaux de rôles : instance et projet. Les permissions sont en base et vérifiées à chaque requête.
-- Le serveur lui-même : deux ingénieurs nommés, clés cryptographiques uniquement.
--->
-
----
-
-## Les données peuvent-elles être interceptées — ou perdues ?
-
-**Confidentialité et disponibilité.** Le risque : une interception sur le réseau, ou une panne de serveur qui emporte les données. La réponse : rien de lisible ne quitte la plateforme, et des copies automatiques permettent de tout reconstruire.
-
-![w:1020](../../resources/diagrams_fr/gov_security_layers.svg)
-
-<!--
-- HTTPS partout, certificats renouvelés automatiquement ; les secrets n'atteignent jamais le navigateur.
-- Instantané de la base toutes les 30 minutes (3 jours) plus instantanés complets quotidiens/hebdomadaires/mensuels.
-- Créer ou restaurer une sauvegarde exige une permission explicite en plus d'une connexion valide.
+- Tout circule chiffré ; le serveur lui-même n'est accessible qu'à deux ingénieurs nommés, par clés cryptographiques.
 -->
 
 ---
 
 <!-- _class: spacious -->
 
-## Les chiffres peuvent-ils être altérés ?
+## Intégrité — peut-on se fier aux chiffres
 
-**Intégrité.** Le risque : des chiffres modifiés sans trace, ou des analyses impossibles à reproduire. La réponse : une seule source de vérité, des importations enregistrées, des résultats versionnés.
+Le risque : des chiffres modifiés sans trace, ou des analyses impossibles à reproduire. Les mesures : une source de vérité, des importations enregistrées, des résultats versionnés.
 
 - **DHIS2 reste la source de vérité** — la plateforme importe depuis DHIS2, et les mois réimportés sont rafraîchis pour y correspondre
 - **Chaque importation est enregistrée** : un registre indicateur par indicateur montre les mois chargés, quand, et les échecs éventuels
@@ -142,23 +110,71 @@ La sécurité d'une plateforme de données recouvre cinq dimensions distinctes. 
 - Les méthodes d'analyse et leurs paramètres sont **documentés et consignés avec chaque paquet**
 
 <!--
-- C'est l'argument de confiance, pour les analystes comme pour les directions : un chiffre d'un rapport se retrace jusqu'à un paquet daté, ses paramètres de modules et l'importation DHIS2 derrière.
+- L'argument de confiance, pour les analystes comme pour les directions : tout chiffre d'un rapport se retrace jusqu'à un paquet daté, ses paramètres et l'importation DHIS2 derrière.
 - Personne ne corrige un chiffre à la main — tout changement passe par une nouvelle importation et un nouveau paquet, tous deux enregistrés.
 -->
 
 ---
 
-## L'IA peut-elle exposer ce qu'elle voit ?
+<!-- _class: spacious -->
 
-**Confidentialité et traçabilité.** Le risque : un assistant qui en voit trop. La réponse : l'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et chaque question est journalisée. Aujourd'hui, des résultats agrégés ; à mesure que l'analyse au niveau des établissements sera introduite, **la même limite de permissions s'appliquera**.
+## Disponibilité — que se passe-t-il si un serveur tombe
 
-![w:1020](../../resources/diagrams_fr/gov_ai_boundary.svg)
+Le risque : une panne matérielle, une suppression accidentelle ou une importation corrompue. Les mesures : des sauvegardes automatiques en couches et un chemin de récupération éprouvé.
+
+- La **base de données est sauvegardée toutes les 30 minutes**, avec une fenêtre glissante de trois jours
+- Des **instantanés complets de l'installation** sont conservés selon un cycle quotidien, hebdomadaire et mensuel
+- Une **instance pays entière peut être reconstruite** à partir de ces instantanés
+- Créer ou restaurer une sauvegarde exige une **permission explicite** en plus d'une connexion valide
 
 <!--
-- L'IA est Claude, d'Anthropic ; la clé d'accès reste sur le serveur.
-- La plateforme calcule d'abord la réponse agrégée et n'envoie que cela ; les listes d'identifiants sont réduites à des nombres. Aucune dimension « nom d'établissement » n'est interrogeable par l'IA.
-- Outils fixes, en lecture seule : pas d'exécution de code, pas d'accès à la base. La recherche web EST disponible (côté serveurs Anthropic) pour les questions générales — ne pas affirmer « pas d'Internet ».
-- Chaque requête est journalisée : utilisateur, projet, modèle, usage en jetons. Des limites quotidiennes par utilisateur et hebdomadaires par instance s'appliquent.
+- Deux couches indépendantes : instantanés de base au niveau applicatif pour la récupération fine, instantanés de volume au niveau infrastructure pour la reprise complète.
+- La restauration valide les chemins et réinitialise entièrement la base cible avant chargement — les sauvegardes sont une voie de récupération, pas une surface d'attaque.
+-->
+
+---
+
+## Souveraineté — les données restent celles du pays
+
+Le risque : des données versées dans un espace partagé, ou visibles d'un autre pays. Les mesures : des installations entièrement isolées, et l'export intégral à tout moment.
+
+![w:940](../../resources/diagrams_fr/gov_country_isolation.svg)
+
+<!--
+- Chaque pays : sa propre application, sa base et son stockage — aucun composant partagé, l'accès entre pays est techniquement impossible.
+- Toutes les données et résultats d'un pays sont exportables intégralement à tout moment, quel que soit l'hébergement.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Traçabilité — chaque action est attribuable
+
+Le risque : des modifications ou des accès que personne ne peut retracer. Les mesures : chaque requête liée à un compte nommé, et des journaux opérationnels sur toute la plateforme.
+
+- Chaque requête s'exécute sous un **compte nommé et vérifié** — aucune action anonyme
+- **Les importations sont enregistrées** par indicateur et par mois ; **les paquets de résultats sont datés et versionnés**
+- **Les sauvegardes et restaurations sont contrôlées par permission** et attribuables
+- **Chaque question posée à l'IA est journalisée** : qui, sur quel projet, avec quel usage
+
+<!--
+- Recouvre volontairement l'intégrité : les mêmes registres qui protègent les chiffres répondent aussi à « qui a fait quoi, quand ».
+- Les limites d'usage de l'IA (quotidiennes par utilisateur, hebdomadaires par instance) s'appuient sur ces mêmes journaux.
+-->
+
+---
+
+## Application à l'assistant IA
+
+L'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et chaque question est journalisée. Aujourd'hui, des résultats agrégés ; à mesure que l'analyse au niveau des établissements sera introduite, **la même limite de permissions s'appliquera**.
+
+![w:940](../../resources/diagrams_fr/gov_ai_boundary.svg)
+
+<!--
+- L'IA est Claude, d'Anthropic ; la clé d'accès reste sur le serveur ; l'IA n'a aucune permission propre.
+- La plateforme calcule d'abord la réponse et n'envoie que cela ; les listes d'identifiants sont réduites à des nombres.
+- La recherche web côté serveur est disponible pour les questions générales — ne pas affirmer « pas d'Internet ».
 -->
 
 ---
@@ -213,8 +229,7 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 - Hébergée **de façon centralisée aujourd'hui**, pendant le développement actif — chaque pays reçoit correctifs et nouveautés le jour même
 - Construite **portable** : le même logiciel tourne tel quel sur les serveurs d'un ministère — aucune reconstruction
 - **La migration est un projet structuré** : évaluation de préparation, achat des serveurs, formation de l'équipe, période de fonctionnement en parallèle, puis bascule — un **calendrier en mois, planifié conjointement**
-- **L'auto-hébergement transfère au ministère les fonctions partagées** : maintenance, supervision, mises à niveau et correctifs relèvent alors de l'équipe du ministère
-- **La distribution des mises à jour change aussi** : aujourd'hui, l'équipe centrale déploie les mises à jour pour tous les pays à la fois ; une instance auto-hébergée doit les recevoir et les appliquer elle-même — un appui instance par instance entraînerait un coût supplémentaire
+- **L'auto-hébergement transfère au ministère les fonctions partagées** : maintenance, supervision et application de chaque mise à jour — déployée aujourd'hui centralement pour tous les pays à la fois — relèvent alors de l'équipe du ministère, et un appui instance par instance entraîne un coût supplémentaire
 - **Toutes les données d'un pays peuvent être exportées intégralement à tout moment**, quel que soit l'hébergement
 
 <!--
@@ -243,10 +258,10 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 
 ## L'essentiel
 
-- **Des totaux agrégés aujourd'hui** — aucun dossier patient ; tout hébergement futur de données individuelles s'accompagnerait de garanties supplémentaires
-- **Une installation par pays** — aucun passage entre pays
+- **Des totaux agrégés aujourd'hui** — aucun dossier patient ; l'hébergement futur de données individuelles est conditionné à des garanties supplémentaires
+- **La sécurité sur cinq dimensions** — installations isolées par pays, accès par rôles, importations enregistrées et résultats versionnés, sauvegardes en couches, journaux d'audit complets
 - **Environ 12 000 USD par an** de fonctionnement — hébergement, IA au compteur, maintenance partagée ; ni licence ni frais par utilisateur
-- **Hébergement par le pays d'ici 2030** — l'objectif de transition affiché ; il transfère mises à jour et maintenance au ministère, avec un coût supplémentaire probable par pays
+- **Hébergement par le pays d'ici 2030** — l'objectif affiché ; une migration structurée qui transfère mises à jour et maintenance au ministère, avec un coût supplémentaire probable par pays
 
 <!--
 - Récapitulatif en une diapositive pour le responsable qui n'en lira qu'une.
