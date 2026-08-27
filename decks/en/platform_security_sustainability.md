@@ -61,7 +61,8 @@ Data security for a hosted platform spans five distinct dimensions. The followin
 ![w:940](../../resources/diagrams/gov_security_dimensions.svg)
 
 <!--
-- The standard frame (confidentiality / integrity / availability, plus sovereignty and accountability for government data).
+- Sourcing, if asked: confidentiality / integrity / availability is the definition of information security in ISO/IEC 27000 — the same triad the HIPAA Security Rule is built on for health data. Accountability is listed in the same standard (and NIST's Audit & Accountability controls). Sovereignty comes from the data-governance side: the African Union Data Policy Framework (2022) treats citizens' data as a sovereign national asset under state control.
+- One-liner: "the international security standard, plus accountability from that standard, plus sovereignty from the AU's own data policy framework."
 - Invite the room to add concerns — anything not covered goes to the technical annex or follow-up.
 -->
 

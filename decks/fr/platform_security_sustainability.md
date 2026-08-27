@@ -61,7 +61,8 @@ La sécurité d'une plateforme de données recouvre cinq dimensions distinctes. 
 ![w:940](../../resources/diagrams_fr/gov_security_dimensions.svg)
 
 <!--
-- Le cadre standard (confidentialité / intégrité / disponibilité, plus souveraineté et traçabilité pour des données publiques).
+- Sources, si la question vient : confidentialité / intégrité / disponibilité est la définition de la sécurité de l'information dans ISO/IEC 27000 — le même triptyque qui fonde la règle de sécurité HIPAA pour les données de santé. La traçabilité (accountability) figure dans la même norme (et dans les contrôles d'audit du NIST). La souveraineté vient de la gouvernance des données : le Cadre politique des données de l'Union africaine (2022) traite les données des citoyens comme un actif national souverain sous contrôle de l'État.
+- En une phrase : « la norme internationale de sécurité, plus la traçabilité issue de cette norme, plus la souveraineté issue du cadre de données de l'UA lui-même ».
 - Inviter la salle à ajouter ses préoccupations — ce qui n'est pas couvert va à l'annexe technique ou en suivi.
 -->
 
