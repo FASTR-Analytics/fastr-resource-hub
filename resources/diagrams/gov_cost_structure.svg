@@ -5,7 +5,7 @@
     <rect x="0" y="0" width="270" height="56" rx="14" fill="#09544F"/>
     <rect x="0" y="28" width="270" height="28" fill="#09544F"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Hosting</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like rent</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Fixed annual fee</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">A fixed monthly amount</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">for the country's server</text>
     <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 500–800 / year</text>
@@ -15,7 +15,7 @@
     <rect x="0" y="0" width="270" height="56" rx="14" fill="#0C716B"/>
     <rect x="0" y="28" width="270" height="28" fill="#0C716B"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">AI assistant</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like electricity</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Metered by use</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Metered — you pay only</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">for what people use</text>
     <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 350 / month</text>
@@ -25,7 +25,7 @@
     <rect x="0" y="0" width="270" height="56" rx="14" fill="#1F9A9C"/>
     <rect x="0" y="28" width="270" height="28" fill="#1F9A9C"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">People</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Like maintenance</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Shared across countries</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Updates, monitoring,</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">backups, user support</text>
     <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ USD 7–10k / year, shared</text>

@@ -189,7 +189,7 @@ The AI can only see what the signed-in user is permitted to see, and every quest
 
 ## Running costs
 
-Three lines: **server hosting** (fixed), **AI use** (metered), **maintenance** (shared team). No license fees, no per-user fees — the software is open source.
+Running costs fall into three lines: a **fixed hosting fee** for the country's server, **metered AI use** (the Anthropic API), and **shared platform maintenance**, which also covers external services such as the **Clerk login service**. The software itself is open source — there are no license or per-user fees.
 
 ![w:1020](../../resources/diagrams/gov_cost_structure.svg)
 
@@ -205,15 +205,13 @@ Three lines: **server hosting** (fixed), **AI use** (metered), **maintenance** (
 
 ## The figures — planning estimates
 
-Estimates at 2026 prices and today's usage. **Not a quote.**
+These are planning estimates at 2026 prices and current usage levels — **not a quote**.
 
 - **Hosting** a country's instance: about **USD 500–800 per year** — larger countries toward the top
-- **AI use**: about **USD 350 per month** (~USD 4,000 per year) for a typical country; the largest countries several times this, and it grows with use
-- **Shared platform maintenance** (engineering, monitoring, backups): roughly **USD 7,000–10,000 per country per year** today — it falls as more countries join
+- **AI use** (the Anthropic API): about **USD 350 per month** (~USD 4,000 per year) for a typical country; the largest countries several times this, growing with use
+- **Shared platform maintenance** (engineering, monitoring, backups, the Clerk login service): roughly **USD 7,000–10,000 per country per year**, falling as more countries join — an economy of scale forgone under self-hosting
 - **Optional support** (data refresh, quality checks, analysis): about **USD 5,000–15,000 per year**, depending on level
-- **Total: about USD 12,000 per year** — up to USD 20,000–30,000 with support
-- No further subscriptions: the **AI line is the Anthropic API cost**, and the **login service (Clerk) is covered within shared maintenance**
-- **Economies of scale apply**: one team and one codebase serve every country, so the per-country maintenance share falls as more countries join — and is forgone under self-hosting
+- **Total: about USD 12,000 per year** — up to USD 20,000–30,000 with support; no other subscriptions
 
 <!--
 - Frame clearly: planning estimates, not a quote — and the maintenance line is financed centrally today.

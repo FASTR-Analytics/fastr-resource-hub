@@ -189,7 +189,7 @@ L'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et c
 
 ## Coûts de fonctionnement
 
-Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteur), **maintenance** (équipe partagée). Pas de licence, pas de frais par utilisateur — le logiciel est open source.
+Les coûts de fonctionnement tiennent en trois lignes : un **hébergement fixe** pour le serveur du pays, l'**usage de l'IA au compteur** (l'API Anthropic), et la **maintenance partagée** de la plateforme, qui couvre aussi les services externes comme le **service de connexion Clerk**. Le logiciel lui-même est open source — ni licence ni frais par utilisateur.
 
 ![w:1020](../../resources/diagrams_fr/gov_cost_structure.svg)
 
@@ -205,15 +205,13 @@ Trois lignes : **hébergement du serveur** (fixe), **usage de l'IA** (au compteu
 
 ## Les chiffres — estimations de planification
 
-Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
+Ce sont des estimations de planification, aux prix 2026 et à l'usage actuel — **non un devis**.
 
-- **Hébergement** de l'instance d'un pays : environ **500 à 800 USD par an** — les grands pays vers le haut de la fourchette
-- **Usage de l'IA** : environ **350 USD par mois** (~4 000 USD par an) pour un pays typique ; plusieurs fois plus pour les plus grands pays, et cela croît avec l'usage
-- **Maintenance partagée de la plateforme** (ingénierie, supervision, sauvegardes) : environ **7 000 à 10 000 USD par pays et par an** aujourd'hui — cela baisse à mesure que des pays rejoignent
+- **Hébergement** de l'instance : environ **500 à 800 USD par an** — les grands pays vers le haut de la fourchette
+- **Usage de l'IA** (l'API Anthropic) : environ **350 USD par mois** (~4 000 USD par an) pour un pays typique ; plusieurs fois plus pour les plus grands, en croissance avec l'usage
+- **Maintenance partagée** (ingénierie, supervision, sauvegardes, service de connexion Clerk) : environ **7 000 à 10 000 USD par pays et par an**, en baisse à mesure que des pays rejoignent — une économie d'échelle qui disparaît en auto-hébergement
 - **Appui optionnel** (actualisation des données, contrôles qualité, analyses) : environ **5 000 à 15 000 USD par an** selon le niveau
-- **Total : environ 12 000 USD par an** — jusqu'à 20 000–30 000 USD avec l'appui
-- Aucun autre abonnement : la **ligne IA correspond au coût de l'API Anthropic**, et le **service de connexion (Clerk) est couvert par la maintenance partagée**
-- **Les économies d'échelle s'appliquent** : une seule équipe et un seul code servent tous les pays, la part de maintenance par pays baisse à mesure que des pays rejoignent — et disparaît en auto-hébergement
+- **Total : environ 12 000 USD par an** — jusqu'à 20 000–30 000 USD avec l'appui ; aucun autre abonnement
 
 <!--
 - Cadrer clairement : estimations de planification, pas un devis — et la ligne maintenance est financée centralement aujourd'hui.
