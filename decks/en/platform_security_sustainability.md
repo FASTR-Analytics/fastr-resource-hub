@@ -70,9 +70,27 @@ footer: "FASTR · Analytics platform"
 
 ---
 
-## Each country is fully separate
+<!-- _class: spacious -->
 
-Sharing between countries is not restricted — it is **technically impossible**. Each country runs its own installation.
+## Four questions any government should ask
+
+- **Could our data leave the country's control?**
+- **Could the wrong person get in?**
+- **Could data be intercepted on the way — or lost in a failure?**
+- **Could the AI expose what it sees?**
+
+The next four slides take these one at a time: the risk, then what answers it.
+
+<!--
+- This is the frame Ashley asked for: name the security issues first, then demonstrate how each is addressed.
+- Invite the room to add their own concerns — anything not on this list can be taken to the technical annex or followed up.
+-->
+
+---
+
+## Could our data leave the country's control?
+
+**The risk:** data flowing into a shared pool, or visible to another country. **The answer:** there is no shared pool — each country runs its own installation, and sharing is technically impossible.
 
 ![w:1020](../../resources/diagrams/gov_country_isolation.svg)
 
@@ -85,7 +103,9 @@ Sharing between countries is not restricted — it is **technically impossible**
 
 <!-- _class: spacious -->
 
-## Who can see what
+## Could the wrong person get in?
+
+**The risk:** a leaked password, or an insider reaching beyond their role. **The answer:** accounts, roles, and identity re-checked at every single request.
 
 - The ministry decides **who gets an account**, and each person's role
 - Roles set what a person can do — **view, edit, or administer** — and in which projects
@@ -100,9 +120,9 @@ Sharing between countries is not restricted — it is **technically impossible**
 
 ---
 
-## How the data is protected
+## Could data be intercepted — or lost?
 
-The platform checks who you are at every step, makes everything unreadable while it travels, and keeps automatic backup copies.
+**The risk:** interception on the network, or a server failure taking the data with it. **The answer:** nothing readable leaves the platform, and automatic copies mean everything can be rebuilt.
 
 ![w:1020](../../resources/diagrams/gov_security_layers.svg)
 
@@ -114,9 +134,9 @@ The platform checks who you are at every step, makes everything unreadable while
 
 ---
 
-## What the AI can see
+## Could the AI expose what it sees?
 
-Aggregated totals only — the numbers a user could already see on screen, within that user's permissions. **Never the underlying rows.**
+**The risk:** an assistant that sees too much. **The answer:** it is handed aggregated totals only — the numbers a user could already see, within that user's own permissions. **Never the underlying rows.**
 
 ![w:1020](../../resources/diagrams/gov_ai_boundary.svg)
 
@@ -162,6 +182,8 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 - **Shared platform maintenance** (engineering, monitoring, backups): roughly **USD 7,000–10,000 per country per year** today — it falls as more countries join
 - **Optional support** (data refresh, quality checks, analysis): about **USD 5,000–15,000 per year**, depending on level
 - **Total: about USD 12,000 per year** — up to USD 20,000–30,000 with support
+- The lines include the external services: the **login service (Clerk)** and the **AI API (Anthropic)** — no hidden subscriptions
+- **Economies of scale are already working**: one team and one codebase serve every country, so the per-country maintenance share falls as more countries join — economics a country gives up by hosting alone
 
 <!--
 - Frame clearly: planning estimates, not a quote — and the maintenance line is financed centrally today.
@@ -172,11 +194,12 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 
 <!-- _class: spacious -->
 
-## Hosting — today and tomorrow
+## Hosting — and what moving really takes
 
 - Hosted **centrally today**, while the platform is in active development — every country receives fixes and new features the same day
-- Built **portable**: the same platform can run on a ministry's own servers
-- **Moving later requires no rebuild** — the same software runs in either place
+- Built **portable**: the same software runs unchanged on a ministry's own servers — no rebuild needed
+- **But migration is a project, not a switch**: readiness assessment, server procurement, team training, a parallel-run period, then cutover — measured in **months, and planned jointly**
+- **And hosting alone means carrying alone** what is shared today: maintenance, monitoring, upgrades, and same-day fixes become the ministry team's own workload
 - **All of a country's data can be exported in full at any time**, now or later, regardless of hosting
 
 <!--

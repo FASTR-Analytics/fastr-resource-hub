@@ -70,9 +70,27 @@ footer: "FASTR · Plateforme d'analyse"
 
 ---
 
-## Chaque pays est entièrement séparé
+<!-- _class: spacious -->
 
-Le partage entre pays n'est pas restreint — il est **techniquement impossible**. Chaque pays fonctionne sur sa propre installation.
+## Quatre questions que tout gouvernement devrait poser
+
+- **Nos données peuvent-elles échapper au contrôle du pays ?**
+- **La mauvaise personne peut-elle entrer ?**
+- **Les données peuvent-elles être interceptées en chemin — ou perdues ?**
+- **L'IA peut-elle exposer ce qu'elle voit ?**
+
+Les quatre diapositives suivantes les prennent une à une : le risque, puis ce qui y répond.
+
+<!--
+- Le cadre demandé : nommer d'abord les enjeux de sécurité, puis démontrer comment chacun est traité.
+- Inviter la salle à ajouter ses propres inquiétudes — ce qui n'est pas dans la liste peut aller à l'annexe technique ou en suivi.
+-->
+
+---
+
+## Nos données peuvent-elles échapper au contrôle du pays ?
+
+**Le risque :** des données versées dans un pot commun, ou visibles d'un autre pays. **La réponse :** il n'y a pas de pot commun — chaque pays fonctionne sur sa propre installation, et le partage est techniquement impossible.
 
 ![w:1020](../../resources/diagrams_fr/gov_country_isolation.svg)
 
@@ -85,7 +103,9 @@ Le partage entre pays n'est pas restreint — il est **techniquement impossible*
 
 <!-- _class: spacious -->
 
-## Qui voit quoi
+## La mauvaise personne peut-elle entrer ?
+
+**Le risque :** un mot de passe qui fuite, ou un initié qui dépasse son rôle. **La réponse :** des comptes, des rôles, et une identité revérifiée à chaque requête.
 
 - Le ministère décide **qui reçoit un compte**, et le rôle de chaque personne
 - Le rôle fixe ce qu'une personne peut faire — **consulter, éditer ou administrer** — et dans quels projets
@@ -100,9 +120,9 @@ Le partage entre pays n'est pas restreint — il est **techniquement impossible*
 
 ---
 
-## Comment les données sont protégées
+## Les données peuvent-elles être interceptées — ou perdues ?
 
-La plateforme vérifie qui vous êtes à chaque étape, rend tout illisible pendant le transport et garde des copies de sécurité automatiques.
+**Le risque :** une interception sur le réseau, ou une panne de serveur qui emporte les données. **La réponse :** rien de lisible ne quitte la plateforme, et des copies automatiques permettent de tout reconstruire.
 
 ![w:1020](../../resources/diagrams_fr/gov_security_layers.svg)
 
@@ -114,9 +134,9 @@ La plateforme vérifie qui vous êtes à chaque étape, rend tout illisible pend
 
 ---
 
-## Ce que l'IA peut voir
+## L'IA peut-elle exposer ce qu'elle voit ?
 
-Des totaux agrégés uniquement — les chiffres qu'un utilisateur verrait déjà à l'écran, dans la limite de ses permissions. **Jamais les lignes en dessous.**
+**Le risque :** un assistant qui en voit trop. **La réponse :** il ne reçoit que des totaux agrégés — les chiffres qu'un utilisateur verrait déjà, dans la limite de ses propres permissions. **Jamais les lignes en dessous.**
 
 ![w:1020](../../resources/diagrams_fr/gov_ai_boundary.svg)
 
@@ -162,6 +182,8 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 - **Maintenance partagée de la plateforme** (ingénierie, supervision, sauvegardes) : environ **7 000 à 10 000 USD par pays et par an** aujourd'hui — cela baisse à mesure que des pays rejoignent
 - **Appui optionnel** (actualisation des données, contrôles qualité, analyses) : environ **5 000 à 15 000 USD par an** selon le niveau
 - **Total : environ 12 000 USD par an** — jusqu'à 20 000–30 000 USD avec l'appui
+- Les lignes incluent les services externes : le **service de connexion (Clerk)** et l'**API d'IA (Anthropic)** — aucun abonnement caché
+- **Les économies d'échelle jouent déjà** : une seule équipe et un seul code servent tous les pays, la part de maintenance par pays baisse à mesure que des pays rejoignent — des économies qu'un pays abandonne en s'hébergeant seul
 
 <!--
 - Cadrer clairement : estimations de planification, pas un devis — et la ligne maintenance est financée centralement aujourd'hui.
@@ -172,11 +194,12 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 
 <!-- _class: spacious -->
 
-## Hébergement — aujourd'hui et demain
+## Hébergement — et ce que migrer demande vraiment
 
 - Hébergée **de façon centralisée aujourd'hui**, pendant le développement actif — chaque pays reçoit correctifs et nouveautés le jour même
-- Construite **portable** : le même logiciel peut tourner sur les serveurs d'un ministère
-- **Migrer plus tard n'exige aucune reconstruction** — le même logiciel tourne dans les deux cas
+- Construite **portable** : le même logiciel tourne tel quel sur les serveurs d'un ministère — aucune reconstruction
+- **Mais migrer est un projet, pas un interrupteur** : évaluation de préparation, achat des serveurs, formation de l'équipe, période de fonctionnement en parallèle, puis bascule — cela se compte en **mois, planifiés ensemble**
+- **Et s'héberger seul, c'est porter seul** ce qui est partagé aujourd'hui : maintenance, supervision, mises à niveau et correctifs deviennent la charge de l'équipe du ministère
 - **Toutes les données d'un pays peuvent être exportées intégralement à tout moment**, quel que soit l'hébergement
 
 <!--
