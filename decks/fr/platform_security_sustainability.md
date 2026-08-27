@@ -61,11 +61,12 @@ footer: "FASTR · Plateforme d'analyse"
 - Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars
 - Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà
 - **Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel
+- C'est **le périmètre d'aujourd'hui, pas un plafond** : héberger plus tard des données individuelles n'est pas exclu — cela viendrait avec un ensemble supplémentaire de garanties, définies (annexe technique)
 
 <!--
 - Répondre d'abord à la question derrière la question de sécurité : qu'y a-t-il dedans.
-- La plateforme importe des numérateurs agrégés depuis DHIS2 (totaux établissement-mois). Rien de plus fin n'y existe.
-- Si on insiste : même une intrusion complète ne pourrait exposer le dossier d'un seul patient — il n'y en a aucun.
+- La plateforme importe des numérateurs agrégés depuis DHIS2 (totaux établissement-mois). Rien de plus fin n'y existe aujourd'hui.
+- Si on insiste : aujourd'hui, même une intrusion complète ne pourrait exposer le dossier d'un seul patient — il n'y en a aucun. Si le périmètre s'étend un jour aux données individuelles, l'exigence de sécurité s'élève avec lui — la diapositive d'annexe en dresse la liste.
 -->
 
 ---
@@ -241,7 +242,7 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 
 ## L'essentiel
 
-- **Des totaux mensuels uniquement** — jamais de dossiers patients
+- **Des totaux agrégés aujourd'hui** — aucun dossier patient ; tout hébergement futur de données individuelles s'accompagnerait de garanties supplémentaires
 - **Une installation par pays** — aucun passage entre pays
 - **Environ 12 000 USD par an** de fonctionnement — hébergement, IA au compteur, maintenance partagée ; ni licence ni frais par utilisateur
 - **Hébergement par le pays d'ici 2030** — l'objectif de transition affiché
@@ -333,5 +334,24 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 
 <!--
 - Le registre d'importation (onglet Par indicateur) montre les mois de données, la dernière importation et les mois en échec par indicateur — une traçabilité auditable pour l'équipe DHIS2.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## Si des données patients étaient hébergées : les exigences
+
+Le périmètre agrégé est un choix de conception, valable aujourd'hui. Héberger des données individuelles n'est pas exclu — et serait conditionné à un ensemble supplémentaire de garanties :
+
+- **La base légale d'abord** : conformité au droit national de protection des données et des données de santé, accords de partage — et possiblement **l'hébergement dans le pays** comme précondition
+- **Chiffrement au repos** en plus du chiffrement en transit ; **pseudonymisation** partout où l'analyse le permet
+- **Accès au strict nécessaire** : rôles plus fins, restrictions par champ, et journaux d'audit sur chaque accès à un enregistrement
+- Des procédures formelles de **réponse aux incidents et de notification des violations**, des tests de sécurité indépendants et des pratiques de niveau certification
+- **Gouvernance ministérielle** : une autorité désignée d'accès aux données décidant qui peut voir quoi, et pourquoi
+
+<!--
+- Rien d'exotique ici — c'est l'exigence standard pour des données de santé individuelles, partout.
+- La conception agrégée maintient un profil de risque bas aujourd'hui tout en laissant cette voie ouverte ; la décision et son calendrier appartiennent au pays.
 -->
 

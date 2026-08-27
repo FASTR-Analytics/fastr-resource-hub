@@ -61,11 +61,12 @@ footer: "FASTR · Analytics platform"
 - **Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March
 - The **same figures as the DHIS2 reports** the ministry already produces
 - **No patient records** — no names, no addresses, nothing individual
+- This is **today's scope, not a ceiling**: hosting individual-level records later is not excluded — it would come with a further, defined set of safeguards (technical annex)
 
 <!--
 - Answer the question behind the security question first: what is even in there.
-- The platform imports aggregated numerators from DHIS2 (facility-month counts). Nothing more granular exists in it.
-- If pressed: even a full breach could not expose a single patient's record, because none are there.
+- The platform imports aggregated numerators from DHIS2 (facility-month counts). Nothing more granular exists in it today.
+- If pressed: today, even a full breach could not expose a single patient's record, because none are there. If the scope ever grows to individual-level data, the security bar grows with it — the annex slide lists what that bar is.
 -->
 
 ---
@@ -241,7 +242,7 @@ For countries who do want to host themselves, there will be effort required from
 
 ## The essentials
 
-- **Monthly totals only** — never patient records
+- **Aggregated totals today** — no patient records; any future individual-level hosting comes with added safeguards
 - **One installation per country** — no pathway between countries
 - **About USD 12,000 per year** to run — hosting, metered AI, shared maintenance; no license or per-user fees
 - **Country hosting by 2030** — the stated transition goal
@@ -333,5 +334,24 @@ For countries who do want to host themselves, there will be effort required from
 
 <!--
 - The import ledger (By indicator tab) shows months of data, last import, and failed months per indicator — auditable data lineage for the DHIS2 team.
+-->
+
+---
+
+<!-- _class: spacious -->
+
+## If patient-level data were hosted: the requirements
+
+Aggregated-only is today's design choice. Individual-level hosting is not excluded — and would be conditional on meeting a further set of safeguards:
+
+- **Legal basis first**: compliance with national data-protection and health-data law, data-sharing agreements — and possibly **in-country hosting** as a precondition
+- **Encryption at rest** in addition to encryption in transit; **pseudonymization** wherever the analysis allows
+- **Minimum-necessary access**: finer roles, per-field restrictions, and audit trails on every record access
+- Formal **incident-response and breach-notification** procedures, independent security testing and certification-level practices
+- **Ministry governance**: a designated data-access authority deciding who may see what, and why
+
+<!--
+- None of this is exotic — it is the standard bar for individual-level health data anywhere.
+- The aggregated design keeps today's risk profile low while leaving this path open; the decision and its timing belong to the country.
 -->
 

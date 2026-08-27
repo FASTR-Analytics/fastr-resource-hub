@@ -688,6 +688,7 @@ GOV_EN = [
         {"t": "**Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March", "bullet": True},
         {"t": "The **same figures as the DHIS2 reports** the ministry already produces", "bullet": True},
         {"t": "**No patient records** — no names, no addresses, nothing individual", "bullet": True},
+        {"t": "This is **today's scope, not a ceiling**: hosting individual-level records later is not excluded — it would come with a further, defined set of safeguards (technical annex)", "bullet": True},
     ]},
     {"type": "image", "title": "What \"secure\" means for a platform like this",
      "lead": "In software and data hosting, security is not one thing — it is five. The next slides take them one at a time: the risk, then what answers it.",
@@ -740,7 +741,7 @@ GOV_EN = [
      "lead": "For countries who do want to host themselves, there will be effort required from the Ministry of Health. A team will need to run servers, backups, and upgrades; and procurement in place for hosting and for AI services, which are bought from a commercial provider (e.g. Anthropic, OpenAI).",
      "image": "diagrams/gov_ownership_roadmap.png"},
     {"type": "content", "title": "The essentials", "blocks": [
-        {"t": "**Monthly totals only** — never patient records", "bullet": True},
+        {"t": "**Aggregated totals today** — no patient records; any future individual-level hosting comes with added safeguards", "bullet": True},
         {"t": "**One installation per country** — no pathway between countries", "bullet": True},
         {"t": "**About USD 12,000 per year** to run — hosting, metered AI, shared maintenance; no license or per-user fees", "bullet": True},
         {"t": "**Country hosting by 2030** — the stated transition goal", "bullet": True},
@@ -772,6 +773,14 @@ GOV_EN = [
         {"t": "**Full export at any time**, regardless of hosting arrangement", "bullet": True},
         {"t": "The codebase is **open source**: github.com/FASTR-Analytics/platform", "bullet": True},
     ]},
+    {"type": "content", "title": "If patient-level data were hosted: the requirements", "blocks": [
+        {"t": "Aggregated-only is today's design choice. Individual-level hosting is not excluded — and would be conditional on a further set of safeguards:"},
+        {"t": "**Legal basis first**: national data-protection and health-data law, data-sharing agreements — possibly **in-country hosting** as a precondition", "bullet": True},
+        {"t": "**Encryption at rest** in addition to transit; **pseudonymization** wherever analysis allows", "bullet": True},
+        {"t": "**Minimum-necessary access**: finer roles, per-field restrictions, audit trails on every record access", "bullet": True},
+        {"t": "Formal **incident-response and breach-notification** procedures, independent security testing, certification-level practices", "bullet": True},
+        {"t": "**Ministry governance**: a designated data-access authority deciding who may see what, and why", "bullet": True},
+    ]},
 ]
 
 GOV_FR = [
@@ -782,6 +791,7 @@ GOV_FR = [
         {"t": "Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars", "bullet": True},
         {"t": "Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà", "bullet": True},
         {"t": "**Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel", "bullet": True},
+        {"t": "C'est **le périmètre d'aujourd'hui, pas un plafond** : héberger plus tard des données individuelles n'est pas exclu — cela viendrait avec un ensemble supplémentaire de garanties, définies (annexe technique)", "bullet": True},
     ]},
     {"type": "image", "title": "Ce que « sécurisé » veut dire pour une telle plateforme",
      "lead": "En logiciel et en hébergement de données, la sécurité n'est pas une chose — c'en est cinq. Les diapositives suivantes les prennent une à une : le risque, puis ce qui y répond.",
@@ -834,7 +844,7 @@ GOV_FR = [
      "lead": "Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de la Santé sera nécessaire. Une équipe devra faire tourner serveurs, sauvegardes et mises à niveau ; et des marchés devront être en place pour l'hébergement et pour les services d'IA, achetés auprès d'un fournisseur commercial (par ex. Anthropic, OpenAI).",
      "image": "diagrams_fr/gov_ownership_roadmap.png"},
     {"type": "content", "title": "L'essentiel", "blocks": [
-        {"t": "**Des totaux mensuels uniquement** — jamais de dossiers patients", "bullet": True},
+        {"t": "**Des totaux agrégés aujourd'hui** — aucun dossier patient ; tout hébergement futur de données individuelles s'accompagnerait de garanties supplémentaires", "bullet": True},
         {"t": "**Une installation par pays** — aucun passage entre pays", "bullet": True},
         {"t": "**Environ 12 000 USD par an** de fonctionnement — hébergement, IA au compteur, maintenance partagée ; ni licence ni frais par utilisateur", "bullet": True},
         {"t": "**Hébergement par le pays d'ici 2030** — l'objectif de transition affiché", "bullet": True},
@@ -865,6 +875,14 @@ GOV_FR = [
         {"t": "Données source : **numérateurs DHIS2 agrégés** (totaux établissement-mois), importés côté serveur avec registre d'importation par indicateur", "bullet": True},
         {"t": "**Export intégral à tout moment**, quel que soit l'hébergement", "bullet": True},
         {"t": "Code **open source** : github.com/FASTR-Analytics/platform", "bullet": True},
+    ]},
+    {"type": "content", "title": "Si des données patients étaient hébergées : les exigences", "blocks": [
+        {"t": "Le périmètre agrégé est un choix de conception, valable aujourd'hui. Héberger des données individuelles n'est pas exclu — et serait conditionné à des garanties supplémentaires :"},
+        {"t": "**La base légale d'abord** : droit national des données de santé, accords de partage — possiblement **l'hébergement dans le pays** comme précondition", "bullet": True},
+        {"t": "**Chiffrement au repos** en plus du transit ; **pseudonymisation** partout où l'analyse le permet", "bullet": True},
+        {"t": "**Accès au strict nécessaire** : rôles plus fins, restrictions par champ, journaux d'audit sur chaque accès", "bullet": True},
+        {"t": "Procédures formelles de **réponse aux incidents et de notification des violations**, tests de sécurité indépendants, pratiques de niveau certification", "bullet": True},
+        {"t": "**Gouvernance ministérielle** : une autorité désignée d'accès aux données décidant qui voit quoi, et pourquoi", "bullet": True},
     ]},
 ]
 
