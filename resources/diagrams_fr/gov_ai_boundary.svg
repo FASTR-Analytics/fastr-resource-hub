@@ -3,7 +3,7 @@
   <!-- Left: aggregated chart (allowed) -->
   <g transform="translate(40,40)">
     <rect x="0" y="0" width="330" height="150" rx="12" fill="#FFFFFF" stroke="#0C716B" stroke-width="2"/>
-    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="600">Les chiffres de vos graphiques</text>
+    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="600">Ce que l'utilisateur connecté peut voir</text>
     <g fill="#1F9A9C">
       <rect x="50" y="100" width="30" height="30" rx="3"/>
       <rect x="95" y="80" width="30" height="50" rx="3"/>
@@ -11,20 +11,20 @@
       <rect x="185" y="90" width="30" height="40" rx="3"/>
       <rect x="230" y="70" width="30" height="60" rx="3"/>
     </g>
-    <text x="165" y="47" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="13">totaux par district, par mois</text>
+    <text x="165" y="47" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="13">les résultats et totaux de ses projets</text>
   </g>
   <g transform="translate(40,220)">
     <rect x="0" y="0" width="330" height="150" rx="12" fill="#FDE8E8" stroke="#C53030" stroke-width="2"/>
-    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#C53030" font-size="16" font-weight="600">Les enregistrements sous-jacents</text>
+    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#C53030" font-size="16" font-weight="600">Au-delà de ses permissions</text>
     <g stroke="#F5C6C6" stroke-width="1.5">
       <line x1="40" y1="62" x2="290" y2="62"/>
       <line x1="40" y1="88" x2="290" y2="88"/>
       <line x1="40" y1="114" x2="290" y2="114"/>
     </g>
     <g fill="#C53030" font-size="13">
-      <text x="48" y="53" dominant-baseline="central">lignes par établissement</text>
-      <text x="48" y="76" dominant-baseline="central">saisies ligne par ligne</text>
-      <text x="48" y="102" dominant-baseline="central">listes détaillées</text>
+      <text x="48" y="53" dominant-baseline="central">le contenu d'autres projets</text>
+      <text x="48" y="76" dominant-baseline="central">les données d'autres pays</text>
+      <text x="48" y="102" dominant-baseline="central">les rouages du système</text>
     </g>
   </g>
   <!-- Arrows to the AI -->
@@ -46,8 +46,8 @@
     <rect x="0" y="0" width="220" height="330" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
     <text x="110" y="44" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Il est aussi…</text>
     <g fill="#0C716B" font-size="14">
-      <text x="20" y="100" dominant-baseline="central">• limité à ce que VOUS avez</text>
-      <text x="28" y="120" dominant-baseline="central">le droit de voir</text>
+      <text x="20" y="100" dominant-baseline="central">• borné aux permissions</text>
+      <text x="28" y="120" dominant-baseline="central">de l'utilisateur</text>
       <text x="20" y="180" dominant-baseline="central">• capable de chercher sur le web public</text>
       <text x="20" y="240" dominant-baseline="central">• journalisé : chaque question —</text>
       <text x="28" y="260" dominant-baseline="central">utilisateur, projet, usage</text>

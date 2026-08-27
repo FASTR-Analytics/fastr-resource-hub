@@ -61,7 +61,7 @@ footer: "FASTR · Analytics platform"
 - **Monthly service totals per facility** — for example, 45 first antenatal visits at one clinic in March
 - The **same figures as the DHIS2 reports** the ministry already produces
 - **No patient records** — no names, no addresses, nothing individual
-- This is **today's scope, not a ceiling**: hosting individual-level records later is not excluded — it would come with a further, defined set of safeguards (technical annex)
+- **Current scope, by design**: hosting individual-level records remains possible in future, subject to the additional safeguards set out in the technical annex
 
 <!--
 - Answer the question behind the security question first: what is even in there.
@@ -73,7 +73,7 @@ footer: "FASTR · Analytics platform"
 
 ## What "secure" means for a platform like this
 
-In software and data hosting, security is not one thing — it is five. The next slides take them one at a time: the risk, then what answers it.
+Data security for a hosted platform spans five distinct dimensions. The following slides address each in turn: the risk, and the measures in place.
 
 ![w:940](../../resources/diagrams/gov_security_dimensions.svg)
 
@@ -86,7 +86,7 @@ In software and data hosting, security is not one thing — it is five. The next
 
 ## Could our data leave the country's control?
 
-**Sovereignty.** The risk: data flowing into a shared pool, or visible to another country. The answer: there is no shared pool — each country runs its own installation, sharing is technically impossible, and everything can be exported in full at any time.
+**Sovereignty.** The risk: data flowing into a shared pool, or visible to another country. The answer: each country runs a fully isolated installation — no shared components exist, cross-country access is technically impossible, and all data can be exported in full at any time.
 
 ![w:1020](../../resources/diagrams/gov_country_isolation.svg)
 
@@ -150,7 +150,7 @@ In software and data hosting, security is not one thing — it is five. The next
 
 ## Could the AI expose what it sees?
 
-**Confidentiality and accountability.** The risk: an assistant that sees too much. The answer: it is handed aggregated totals only — the numbers a user could already see, within that user's own permissions, and every question it is asked is logged. **Never the underlying rows.**
+**Confidentiality and accountability.** The risk: an assistant that sees too much. The answer: the AI can only see what the signed-in user is permitted to see, and every question is logged. Today that means aggregated results; as facility-level analysis is introduced, **the same permission boundary applies**.
 
 ![w:1020](../../resources/diagrams/gov_ai_boundary.svg)
 
@@ -196,8 +196,8 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 - **Shared platform maintenance** (engineering, monitoring, backups): roughly **USD 7,000–10,000 per country per year** today — it falls as more countries join
 - **Optional support** (data refresh, quality checks, analysis): about **USD 5,000–15,000 per year**, depending on level
 - **Total: about USD 12,000 per year** — up to USD 20,000–30,000 with support
-- The lines include the external services: the **login service (Clerk)** and the **AI API (Anthropic)** — no hidden subscriptions
-- **Economies of scale are already working**: one team and one codebase serve every country, so the per-country maintenance share falls as more countries join — economics a country gives up by hosting alone
+- No further subscriptions: the **AI line is the Anthropic API cost**, and the **login service (Clerk) is covered within shared maintenance**
+- **Economies of scale apply**: one team and one codebase serve every country, so the per-country maintenance share falls as more countries join — and is forgone under self-hosting
 
 <!--
 - Frame clearly: planning estimates, not a quote — and the maintenance line is financed centrally today.
@@ -212,8 +212,9 @@ Estimates at 2026 prices and today's usage. **Not a quote.**
 
 - Hosted **centrally today**, while the platform is in active development — every country receives fixes and new features the same day
 - Built **portable**: the same software runs unchanged on a ministry's own servers — no rebuild needed
-- **But migration is a project, not a switch**: readiness assessment, server procurement, team training, a parallel-run period, then cutover — measured in **months, and planned jointly**
-- **And hosting alone means carrying alone** what is shared today: maintenance, monitoring, upgrades, and same-day fixes become the ministry team's own workload
+- **Migration is a structured project**: readiness assessment, server procurement, team training, a parallel-run period, then cutover — a **timeline of months, planned jointly**
+- **Self-hosting transfers the shared functions to the ministry**: maintenance, monitoring, upgrades, and fixes become the ministry team's responsibility
+- **Update distribution changes too**: today the central team deploys updates to all countries at once; a self-hosted instance must receive and apply each update itself — supporting self-hosted instances one by one would carry additional cost
 - **All of a country's data can be exported in full at any time**, now or later, regardless of hosting
 
 <!--
@@ -245,7 +246,7 @@ For countries who do want to host themselves, there will be effort required from
 - **Aggregated totals today** — no patient records; any future individual-level hosting comes with added safeguards
 - **One installation per country** — no pathway between countries
 - **About USD 12,000 per year** to run — hosting, metered AI, shared maintenance; no license or per-user fees
-- **Country hosting by 2030** — the stated transition goal
+- **Country hosting by 2030** — the stated transition goal; it shifts updates and maintenance to the ministry, with likely additional per-country cost
 
 <!--
 - One-slide recap for the official who reads only one slide.
@@ -313,7 +314,7 @@ For countries who do want to host themselves, there will be effort required from
 
 - Claude (Anthropic) is reached through a **server-side proxy**; the API key never leaves the server
 - Tool calls run **inside the user's authenticated session** — the AI holds no permissions of its own
-- Data tools return **aggregated metric outputs only**: there is **no facility-identifier dimension** in the query interface, and any dimension with more than 20 values is summarized as a count
+- Data tools currently return **aggregated metric outputs** (no facility-identifier dimension as of v1.67; long dimensions summarized as counts); planned facility-level access will operate under the **same session-permission model**
 - **Server-side web search/fetch (Anthropic-hosted) is enabled** in the project chat for general questions
 - Every request is logged (user, project, model, tokens); **daily per-user and weekly per-instance limits** are enforced
 
@@ -342,7 +343,7 @@ For countries who do want to host themselves, there will be effort required from
 
 ## If patient-level data were hosted: the requirements
 
-Aggregated-only is today's design choice. Individual-level hosting is not excluded — and would be conditional on meeting a further set of safeguards:
+The aggregated scope is a design decision, not a technical limit. Hosting individual-level data would be conditional on the following safeguards:
 
 - **Legal basis first**: compliance with national data-protection and health-data law, data-sharing agreements — and possibly **in-country hosting** as a precondition
 - **Encryption at rest** in addition to encryption in transit; **pseudonymization** wherever the analysis allows

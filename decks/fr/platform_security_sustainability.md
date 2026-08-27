@@ -61,7 +61,7 @@ footer: "FASTR · Plateforme d'analyse"
 - Des **totaux mensuels de services par établissement** — par exemple, 45 premières consultations prénatales dans une clinique en mars
 - Les **mêmes chiffres que les rapports DHIS2** que le ministère produit déjà
 - **Aucun dossier patient** — pas de noms, pas d'adresses, rien d'individuel
-- C'est **le périmètre d'aujourd'hui, pas un plafond** : héberger plus tard des données individuelles n'est pas exclu — cela viendrait avec un ensemble supplémentaire de garanties, définies (annexe technique)
+- **Périmètre actuel, par conception** : l'hébergement de données individuelles reste possible à l'avenir, sous réserve des garanties supplémentaires détaillées dans l'annexe technique
 
 <!--
 - Répondre d'abord à la question derrière la question de sécurité : qu'y a-t-il dedans.
@@ -73,7 +73,7 @@ footer: "FASTR · Plateforme d'analyse"
 
 ## Ce que « sécurisé » veut dire pour une telle plateforme
 
-En logiciel et en hébergement de données, la sécurité n'est pas une chose — c'en est cinq. Les diapositives suivantes les prennent une à une : le risque, puis ce qui y répond.
+La sécurité d'une plateforme de données recouvre cinq dimensions distinctes. Les diapositives suivantes traitent chacune d'elles : le risque, et les mesures en place.
 
 ![w:940](../../resources/diagrams_fr/gov_security_dimensions.svg)
 
@@ -86,7 +86,7 @@ En logiciel et en hébergement de données, la sécurité n'est pas une chose �
 
 ## Nos données peuvent-elles échapper au contrôle du pays ?
 
-**Souveraineté.** Le risque : des données versées dans un espace partagé, ou visibles d'un autre pays. La réponse : il n'existe aucun espace partagé — chaque pays fonctionne sur sa propre installation, le partage est techniquement impossible, et tout peut être exporté intégralement à tout moment.
+**Souveraineté.** Le risque : des données versées dans un espace partagé, ou visibles d'un autre pays. La réponse : chaque pays fonctionne sur une installation entièrement isolée — aucun composant partagé n'existe, l'accès entre pays est techniquement impossible, et toutes les données sont exportables intégralement à tout moment.
 
 ![w:1020](../../resources/diagrams_fr/gov_country_isolation.svg)
 
@@ -150,7 +150,7 @@ En logiciel et en hébergement de données, la sécurité n'est pas une chose �
 
 ## L'IA peut-elle exposer ce qu'elle voit ?
 
-**Confidentialité et traçabilité.** Le risque : un assistant qui en voit trop. La réponse : il ne reçoit que des totaux agrégés — les chiffres qu'un utilisateur verrait déjà, dans la limite de ses propres permissions, et chaque question posée est journalisée. **Jamais les lignes en dessous.**
+**Confidentialité et traçabilité.** Le risque : un assistant qui en voit trop. La réponse : l'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et chaque question est journalisée. Aujourd'hui, des résultats agrégés ; à mesure que l'analyse au niveau des établissements sera introduite, **la même limite de permissions s'appliquera**.
 
 ![w:1020](../../resources/diagrams_fr/gov_ai_boundary.svg)
 
@@ -196,8 +196,8 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 - **Maintenance partagée de la plateforme** (ingénierie, supervision, sauvegardes) : environ **7 000 à 10 000 USD par pays et par an** aujourd'hui — cela baisse à mesure que des pays rejoignent
 - **Appui optionnel** (actualisation des données, contrôles qualité, analyses) : environ **5 000 à 15 000 USD par an** selon le niveau
 - **Total : environ 12 000 USD par an** — jusqu'à 20 000–30 000 USD avec l'appui
-- Les lignes incluent les services externes : le **service de connexion (Clerk)** et l'**API d'IA (Anthropic)** — aucun abonnement caché
-- **Les économies d'échelle jouent déjà** : une seule équipe et un seul code servent tous les pays, la part de maintenance par pays baisse à mesure que des pays rejoignent — des économies qu'un pays abandonne en s'hébergeant seul
+- Aucun autre abonnement : la **ligne IA correspond au coût de l'API Anthropic**, et le **service de connexion (Clerk) est couvert par la maintenance partagée**
+- **Les économies d'échelle s'appliquent** : une seule équipe et un seul code servent tous les pays, la part de maintenance par pays baisse à mesure que des pays rejoignent — et disparaît en auto-hébergement
 
 <!--
 - Cadrer clairement : estimations de planification, pas un devis — et la ligne maintenance est financée centralement aujourd'hui.
@@ -212,8 +212,9 @@ Estimations aux prix 2026 et à l'usage actuel. **Ce n'est pas un devis.**
 
 - Hébergée **de façon centralisée aujourd'hui**, pendant le développement actif — chaque pays reçoit correctifs et nouveautés le jour même
 - Construite **portable** : le même logiciel tourne tel quel sur les serveurs d'un ministère — aucune reconstruction
-- **Mais migrer est un projet, pas un interrupteur** : évaluation de préparation, achat des serveurs, formation de l'équipe, période de fonctionnement en parallèle, puis bascule — cela se compte en **mois, planifiés ensemble**
-- **Et s'héberger seul, c'est porter seul** ce qui est partagé aujourd'hui : maintenance, supervision, mises à niveau et correctifs deviennent la charge de l'équipe du ministère
+- **La migration est un projet structuré** : évaluation de préparation, achat des serveurs, formation de l'équipe, période de fonctionnement en parallèle, puis bascule — un **calendrier en mois, planifié conjointement**
+- **L'auto-hébergement transfère au ministère les fonctions partagées** : maintenance, supervision, mises à niveau et correctifs relèvent alors de l'équipe du ministère
+- **La distribution des mises à jour change aussi** : aujourd'hui, l'équipe centrale déploie les mises à jour pour tous les pays à la fois ; une instance auto-hébergée doit les recevoir et les appliquer elle-même — un appui instance par instance entraînerait un coût supplémentaire
 - **Toutes les données d'un pays peuvent être exportées intégralement à tout moment**, quel que soit l'hébergement
 
 <!--
@@ -245,7 +246,7 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 - **Des totaux agrégés aujourd'hui** — aucun dossier patient ; tout hébergement futur de données individuelles s'accompagnerait de garanties supplémentaires
 - **Une installation par pays** — aucun passage entre pays
 - **Environ 12 000 USD par an** de fonctionnement — hébergement, IA au compteur, maintenance partagée ; ni licence ni frais par utilisateur
-- **Hébergement par le pays d'ici 2030** — l'objectif de transition affiché
+- **Hébergement par le pays d'ici 2030** — l'objectif de transition affiché ; il transfère mises à jour et maintenance au ministère, avec un coût supplémentaire probable par pays
 
 <!--
 - Récapitulatif en une diapositive pour le responsable qui n'en lira qu'une.
@@ -313,7 +314,7 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 
 - Claude (Anthropic) est atteint via un **proxy côté serveur** ; la clé d'API ne quitte jamais le serveur
 - Les appels d'outils s'exécutent **dans la session authentifiée de l'utilisateur** — l'IA n'a aucune permission propre
-- Les outils de données renvoient **uniquement des sorties métriques agrégées** : il n'existe **aucune dimension identifiant d'établissement** dans l'interface de requête, et toute dimension de plus de 20 valeurs est résumée en nombre
+- Les outils de données renvoient actuellement des **sorties métriques agrégées** (aucune dimension identifiant d'établissement en v1.67 ; longues dimensions résumées en nombres) ; l'accès prévu au niveau des établissements suivra le **même modèle de permissions de session**
 - La **recherche web côté serveur (hébergée par Anthropic) est activée** dans le chat projet pour les questions générales
 - Chaque requête est journalisée (utilisateur, projet, modèle, jetons) ; **des limites quotidiennes par utilisateur et hebdomadaires par instance** s'appliquent
 
@@ -342,7 +343,7 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 
 ## Si des données patients étaient hébergées : les exigences
 
-Le périmètre agrégé est un choix de conception, valable aujourd'hui. Héberger des données individuelles n'est pas exclu — et serait conditionné à un ensemble supplémentaire de garanties :
+Le périmètre agrégé est une décision de conception, non une limite technique. L'hébergement de données individuelles serait conditionné aux garanties suivantes :
 
 - **La base légale d'abord** : conformité au droit national de protection des données et des données de santé, accords de partage — et possiblement **l'hébergement dans le pays** comme précondition
 - **Chiffrement au repos** en plus du chiffrement en transit ; **pseudonymisation** partout où l'analyse le permet

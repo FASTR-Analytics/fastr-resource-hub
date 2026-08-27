@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Inter, sans-serif">
-  <text x="480" y="34" text-anchor="middle" fill="#09544F" font-size="19" font-weight="600">"Is it secure?" covers five distinct questions</text>
+  <text x="480" y="34" text-anchor="middle" fill="#09544F" font-size="19" font-weight="600">Five dimensions of platform and data security</text>
   <!-- top row: 3 cards -->
   <g transform="translate(30,70)">
     <rect x="0" y="0" width="290" height="150" rx="12" fill="#09544F"/>
