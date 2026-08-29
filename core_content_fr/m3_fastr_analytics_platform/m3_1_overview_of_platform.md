@@ -14,6 +14,6 @@ La plateforme offre une interface conviviale pour effectuer des analyses et prop
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
 
-![h:180](../../resources/screenshots/plateforme/platform_overview_1.png) ![h:180](../../resources/screenshots/plateforme/platform_overview_2.png) ![h:180](../../resources/screenshots/plateforme/platform_overview_3.png)
+![h:180](../../resources/screenshots/platform_fr/example-viz-timeseries-fr.png) ![h:180](../../resources/screenshots/platform_fr/creating-a-report-fr.png) ![h:180](../../resources/screenshots/platform_fr/modules_fr.png)
 
 </div>

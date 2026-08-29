@@ -16,7 +16,7 @@ paginate: true
 
 **Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
 
-**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Módulos estatísticos integrados para avaliação da qualidade, ajuste e cobertura
 
 **Visualização** — Explore os resultados com gráficos e tabelas interativos
 

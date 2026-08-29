@@ -17,7 +17,7 @@ A plataforma oferece funcionalidades abrangentes de gestão de dados. Os utiliza
 
 ### Análise de dados
 
-As capacidades analíticas são fornecidas através de módulos configuráveis. Os utilizadores podem ativar e configurar módulos analíticos que processam dados utilizando scripts estatísticos baseados em R. Estes módulos podem ser encadeados para suportar análises complexas e em várias etapas, com ferramentas integradas para monitorizar o estado do processamento e rever registos.
+As capacidades analíticas são fornecidas através de módulos configuráveis. Os administradores selecionam e configuram os módulos ao gerar um **pacote de resultados** — um conjunto versionado de resultados calculados, produzido ao nível da instância. Os módulos processam dados utilizando scripts estatísticos baseados em R e podem ser encadeados para suportar análises complexas e em várias etapas, com ferramentas integradas para monitorizar o estado do processamento e rever registos. Todos os projetos anexados a um pacote leem os mesmos resultados calculados.
 
 ### Assistente de IA
 
@@ -61,14 +61,14 @@ A **instância** funciona como o principal espaço de trabalho da organização 
 
 ### Nível do projeto
 
-Os **projetos** fornecem espaços de trabalho de análise específicos dentro de uma instância. Cada projeto permite aos utilizadores selecionar quais os dados a incluir, definindo períodos de tempo, unidades e indicadores específicos. Dentro de um projeto, os utilizadores podem ativar módulos analíticos, criar visualizações e elaborar relatórios adaptados a objetivos analíticos específicos.
+Os **projetos** fornecem espaços de trabalho de autoria específicos dentro de uma instância. Cada projeto lê os seus números no **pacote de resultados** que lhe está anexado — os projetos não processam dados por si próprios. Dentro de um projeto, os utilizadores criam visualizações, painéis, apresentações e relatórios adaptados a objetivos analíticos específicos. Criar um projeto requer apenas um nome, e um projeto pode ser limitado a uma única área administrativa.
 
 ![Projetos dentro da instância](resources/diagrams/projects_within_instance.svg)
 
 
 ### Fluxo de dados
 
-A plataforma segue um fluxo de dados estruturado: **Importação de dados → Processamento de módulos → Visualizações → Painéis, apresentações e relatórios**. Os utilizadores carregam primeiro os dados das unidades de saúde ao nível da instância. Em seguida, são criados projetos com janelas de dados específicas que definem o âmbito da análise. Os módulos analíticos processam e analisam os dados selecionados, produzindo resultados que podem ser transformados em gráficos, mapas e tabelas. As visualizações podem então ser reunidas em painéis para partilha em tempo real, apresentações para exibição ao vivo ou relatórios narrativos para divulgação por escrito.
+A plataforma segue um fluxo de dados estruturado: **Importação de dados → Geração de um pacote de resultados → Visualizações → Painéis, apresentações e relatórios**. Os administradores importam primeiro os dados das unidades de saúde ao nível da instância. Em seguida, é gerado um pacote de resultados: os módulos analíticos selecionados processam os dados e guardam os seus resultados em conjunto, como um pacote versionado. Os projetos anexam um pacote — vários projetos podem ler o mesmo — e transformam os seus resultados em gráficos, mapas e tabelas. As visualizações podem então ser reunidas em painéis para partilha em tempo real, apresentações para exibição ao vivo ou relatórios narrativos para divulgação por escrito.
 
 
 ## Requisitos técnicos
@@ -91,7 +91,7 @@ Uma **instância** é o espaço de trabalho principal da organização dentro da
 
 ### Projetos
 
-Um **projeto** é um espaço de trabalho de análise específico dentro de uma instância. Os projetos permitem aos utilizadores trabalhar com subconjuntos específicos de dados, definindo períodos de tempo, instalações e indicadores relevantes para um determinado objetivo analítico. Dentro de cada projeto, os utilizadores podem ativar módulos analíticos, criar visualizações, gerar relatórios e colaborar com os membros da equipa. Podem existir vários projetos dentro de uma instância, cada um com diferentes âmbitos de dados e configurações de acesso de utilizadores.
+Um **projeto** é um espaço de trabalho de autoria específico dentro de uma instância. Cada projeto lê os seus números no pacote de resultados que lhe está anexado. Dentro de cada projeto, os utilizadores criam visualizações, geram relatórios e colaboram com os membros da equipa. Podem existir vários projetos dentro de uma instância, cada um com a sua própria configuração de acesso de utilizadores — e, se necessário, limitado a uma única área administrativa.
 
 ### Estrutura
 
@@ -119,7 +119,7 @@ Os dados da Avaliação de Unidades de Saúde (HFA) contêm informações sobre 
 - **Os indicadores DHIS2** são importados de sistemas DHIS2 externos e podem seguir diferentes convenções de nomenclatura ou métodos de cálculo.
 - **Os indicadores calculados** são métricas derivadas que combinam dois valores — tipicamente um indicador numerador dividido por um denominador (outro indicador ou um valor baseado na população). Por exemplo, as consultas de ANC1 divididas pela população-alvo de mulheres grávidas fornecem uma estimativa da cobertura de ANC1. Os indicadores calculados podem ser apresentados como uma percentagem, uma contagem ou uma taxa por 10 000, e suportam limiares de semáforo para uma análise rápida do desempenho (por exemplo, verde a partir de 80%, amarelo entre 70% e 79%, vermelho abaixo de 70%).
 
-Os indicadores calculados são capturados num projeto no momento da importação do HMIS, pelo que a alteração de uma definição obriga a uma reimportação para que a alteração tenha efeito. Os denominadores baseados na população requerem que um ficheiro CSV da população seja carregado ao nível da instância antes de poderem ser utilizados.
+As definições dos indicadores calculados são aplicadas no momento da geração de um pacote de resultados, pelo que uma definição alterada tem efeito no pacote seguinte. Os denominadores baseados na população requerem que um ficheiro CSV da população seja carregado ao nível da instância antes de poderem ser utilizados.
 
 ### Conjuntos de dados e versões
 
@@ -129,7 +129,7 @@ Um **conjunto de dados** é uma coleção de dados de saúde, sejam eles HMIS ou
 
 **Módulos** são unidades de processamento de dados que executam scripts R analíticos dentro da plataforma. Cada módulo recebe dados de entrada de conjuntos de dados ou dos resultados de outros módulos, processa e analisa os dados de acordo com métodos estatísticos definidos e produz objetos de resultados como ficheiros de saída. Os módulos podem ser encadeados para suportar fluxos de trabalho analíticos complexos, nos quais um módulo utiliza os resultados de outro como entradas.
 
-A plataforma distingue entre dois tipos de módulos. Uma **Definição de Módulo** é o modelo ou plano para um tipo de análise, definindo os métodos analíticos e os parâmetros disponíveis. Uma **Instância de Módulo** é um módulo que foi ativado e configurado dentro de um projeto específico. Alguns módulos têm pré-requisitos, o que significa que outros módulos devem ser ativados primeiro antes de poderem ser utilizados.
+Os módulos são selecionados e configurados no assistente de geração de pacotes de resultados, ao nível da instância. Alguns módulos têm pré-requisitos — outros módulos cujos resultados utilizam — e a plataforma adiciona-os automaticamente quando um módulo dependente é selecionado.
 
 ### Visualizações
 
@@ -155,9 +155,11 @@ Os painéis também suportam **grupos de réplicas** — um único bloco pode co
 
 Os relatórios são exportados para **Word (.docx) ou PDF** e foram concebidos para que as partes interessadas leiam um documento na íntegra, em vez de assistirem a uma apresentação. Utilize uma apresentação quando o produto final for projetado numa reunião; utilize um relatório quando o produto final for lido numa secretária ou numa caixa de entrada.
 
-### Janelas
+### Pacotes de resultados
 
-**Janelas** refere-se ao processo de selecionar um subconjunto de dados de instâncias para utilização num projeto. Os utilizadores podem filtrar dados por período de tempo (selecionando meses ou anos específicos), por indicadores (incluindo todos ou apenas indicadores específicos), por áreas administrativas (incluindo todas ou regiões específicas) e por instalações (filtrando por tipo de instalação ou propriedade). Esta funcionalidade permite que os projetos se concentrem nos dados mais relevantes para os seus objetivos analíticos sem carregar o conjunto de dados completo.
+Um **pacote de resultados** é um conjunto versionado de resultados calculados, gerado ao nível da instância. Gerar um pacote executa os módulos analíticos selecionados sobre os conjuntos de dados escolhidos e guarda os seus resultados em conjunto. Os projetos não processam dados por si próprios: cada projeto anexa um pacote e lê nele todos os seus números, pelo que vários projetos podem trabalhar sobre os mesmos resultados consistentes.
+
+Um administrador pode **fixar** um pacote como referência da instância, e cada projeto pode ser configurado para seguir sempre o pacote fixado. A atualização mensal de rotina resume-se então a três passos: importar os novos dados, gerar um pacote e fixá-lo — os projetos acompanham.
 
 ### Desagregação
 
@@ -173,7 +175,7 @@ A plataforma avalia automaticamente a integridade e a precisão dos dados, geran
 
 ### Estado de bloqueio
 
-Os projetos podem ser **bloqueados** para impedir modificações na sua configuração, permitindo ainda assim que os utilizadores visualizem relatórios. Quando um projeto está bloqueado, os módulos e as definições de dados não podem ser alterados, proporcionando um mecanismo para preservar as configurações analíticas depois de estas terem sido finalizadas.
+Os projetos podem ser **bloqueados** para impedir modificações, permitindo ainda assim que os utilizadores visualizem relatórios. Quando um projeto está bloqueado, as suas visualizações e definições não podem ser alteradas, proporcionando um mecanismo para preservar o trabalho depois de finalizado.
 
 !!! dica "Guia do utilizador"
     Para tutoriais passo a passo sobre a utilização da plataforma, consulte o [Guia do utilizador do FASTR](11_user_guide.md).
@@ -224,7 +226,7 @@ A plataforma oferece uma interface intuitiva para a realização de análises e 
 
 **Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
 
-**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Módulos estatísticos integrados para avaliação da qualidade, ajuste e cobertura
 
 **Visualização** — Explore os resultados com gráficos e tabelas interativos
 
@@ -248,6 +250,7 @@ Uma instância contém:
 - Todos os utilizadores registados e as suas contas
 - A estrutura administrativa partilhada (regiões, distritos, instalações)
 - Definições de indicadores e fontes de dados
+- Os pacotes de resultados — as análises calculadas que os projetos leem
 - Todos os projetos criados para esse país
 
 **Pense numa instância como o espaço de trabalho dedicado ao seu país.**
@@ -262,7 +265,7 @@ Existem dois níveis de permissões na plataforma:
 
 **Funções ao nível da instância:**
 
-- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
+- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, importar dados e gerar pacotes de resultados
 
 &nbsp;
 

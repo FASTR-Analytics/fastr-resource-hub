@@ -12,7 +12,7 @@ Existem dois níveis de permissões na plataforma:
 
 **Funções ao nível da instância:**
 
-- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
+- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, importar dados e gerar pacotes de resultados
 
 &nbsp;
 

@@ -13,6 +13,7 @@ Uma instância contém:
 - Todos os utilizadores registados e as suas contas
 - A estrutura administrativa partilhada (regiões, distritos, instalações)
 - Definições de indicadores e fontes de dados
+- Os pacotes de resultados — as análises calculadas que os projetos leem
 - Todos os projetos criados para esse país
 
 **Pense numa instância como o espaço de trabalho dedicado ao seu país.**

@@ -1,5 +1,5 @@
 <!-- AUTO-TRANSLATED from 03_fastr_analytics_platform.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
+<!-- REVIEWED: results-packages rewrite 2026-08-25 — keep in sync with EN by hand -->
 
 # La plateforme d'analyse de données FASTR
 
@@ -17,7 +17,7 @@ La plateforme offre des fonctionnalités complètes de gestion des données. Les
 
 ### Analyse des données
 
-Les capacités d'analyse sont fournies par le biais de modules configurables. Les utilisateurs peuvent activer et configurer des modules d'analyse qui traitent les données à l'aide de scripts statistiques basés sur R. Ces modules peuvent être enchaînés pour prendre en charge des analyses complexes en plusieurs étapes, avec des outils intégrés permettant de surveiller l'état du traitement et de consulter les journaux.
+Les capacités d'analyse sont fournies par le biais de modules configurables. Les administrateurs sélectionnent et configurent les modules lors de la génération d'un **paquet de résultats** — un ensemble versionné de résultats calculés, produit au niveau de l'instance. Les modules traitent les données à l'aide de scripts statistiques basés sur R et peuvent être enchaînés pour prendre en charge des analyses complexes en plusieurs étapes, avec des outils intégrés permettant de surveiller l'état du traitement et de consulter les journaux. Tous les projets rattachés à un paquet lisent les mêmes résultats calculés.
 
 ### Assistant IA
 
@@ -61,14 +61,14 @@ L'**instance** sert d'espace de travail principal de l'organisation au sein de l
 
 ### Niveau du projet
 
-Les **projets** fournissent des espaces de travail d'analyse ciblés au sein d'une instance. Chaque projet permet aux utilisateurs de sélectionner les données à inclure en définissant des périodes, des établissements et des indicateurs spécifiques. Au sein d'un projet, les utilisateurs peuvent activer des modules d'analyse, créer des visualisations et générer des rapports adaptés à des objectifs analytiques spécifiques.
+Les **projets** fournissent des espaces de travail d'édition ciblés au sein d'une instance. Chaque projet lit ses chiffres dans le **paquet de résultats** qui lui est rattaché — les projets ne traitent pas eux-mêmes les données. Au sein d'un projet, les utilisateurs créent des visualisations, des tableaux de bord, des présentations et des rapports adaptés à des objectifs analytiques spécifiques. La création d'un projet ne demande qu'un nom, et un projet peut être limité à une seule zone administrative.
 
 ![Projets au sein d'une instance](resources/diagrams/projects_within_instance.svg)
 
 
 ### Flux de données
 
-La plateforme suit un flux de données structuré : **Importation des données → Traitement par les modules → Visualisations → Tableaux de bord, présentations et rapports**. Les utilisateurs commencent par télécharger les données des établissements de santé au niveau de l’instance. Des projets sont ensuite créés avec des fenêtres de données spécifiques qui définissent le champ d’application de l’analyse. Les modules analytiques traitent et analysent les données sélectionnées, produisant des résultats qui peuvent être transformés en graphiques, cartes et tableaux. Les visualisations peuvent ensuite être assemblées dans des tableaux de bord pour un partage en direct, des présentations pour une diffusion en direct ou des rapports narratifs pour une diffusion écrite.
+La plateforme suit un flux de données structuré : **Importation des données → Génération d'un paquet de résultats → Visualisations → Tableaux de bord, présentations et rapports**. Les administrateurs commencent par importer les données des établissements de santé au niveau de l'instance. Un paquet de résultats est ensuite généré : les modules analytiques sélectionnés traitent les données et enregistrent leurs résultats ensemble, sous forme de paquet versionné. Les projets rattachent un paquet — plusieurs projets peuvent lire le même — et transforment ses résultats en graphiques, cartes et tableaux. Les visualisations peuvent ensuite être assemblées dans des tableaux de bord pour un partage en direct, des présentations pour une diffusion en direct ou des rapports narratifs pour une diffusion écrite.
 
 
 ## Configuration technique requise
@@ -91,7 +91,7 @@ Une **instance** est l'espace de travail principal de l'organisation au sein de 
 
 ### Projets
 
-Un **projet** est un espace de travail d'analyse ciblé au sein d'une instance. Les projets permettent aux utilisateurs de travailler avec des sous-ensembles spécifiques de données en définissant des périodes, des installations et des indicateurs pertinents pour un objectif analytique particulier. Au sein de chaque projet, les utilisateurs peuvent activer des modules d'analyse, créer des visualisations, générer des rapports et collaborer avec les membres de l'équipe. Une instance peut contenir plusieurs projets, chacun avec des périmètres de données et des configurations d'accès utilisateur différents.
+Un **projet** est un espace de travail d'édition ciblé au sein d'une instance. Chaque projet lit ses chiffres dans le paquet de résultats qui lui est rattaché. Au sein de chaque projet, les utilisateurs créent des visualisations, génèrent des rapports et collaborent avec les membres de l'équipe. Une instance peut contenir plusieurs projets, chacun avec sa propre configuration d'accès utilisateur — et, si besoin, limité à une seule zone administrative.
 
 ### Structure
 
@@ -119,7 +119,7 @@ Les **indicateurs** sont des mesures de santé quantifiables utilisées au sein 
 - Les **indicateurs DHIS2** sont importés depuis des systèmes DHIS2 externes et peuvent suivre des conventions de nommage ou des méthodes de calcul différentes.
 - Les **indicateurs calculés** sont des mesures dérivées qui combinent deux valeurs — généralement un indicateur numérateur divisé par un dénominateur (un autre indicateur ou un chiffre basé sur la population). Par exemple, le nombre de consultations prénatales de premier trimestre (CPN1) divisé par la population cible de femmes enceintes donne une estimation de la couverture CPN1. Les indicateurs calculés peuvent être affichés sous forme de pourcentage, de nombre ou de taux pour 10 000, et ils prennent en charge des seuils de type « feu tricolore » pour une évaluation rapide des performances (par exemple, vert à 80 % ou plus, jaune entre 70 et 79 %, rouge en dessous de 70 %).
 
-Les indicateurs calculés sont enregistrés dans un projet au moment de l’importation SIGS ; par conséquent, la modification d’une définition nécessite une réimportation pour prendre effet. Les dénominateurs basés sur la population nécessitent le téléchargement d’un fichier CSV de population au niveau de l’instance avant de pouvoir être utilisés.
+Les définitions des indicateurs calculés sont appliquées au moment de la génération d'un paquet de résultats ; une définition modifiée prend donc effet dans le paquet suivant. Les dénominateurs basés sur la population nécessitent le téléchargement d'un fichier CSV de population au niveau de l'instance avant de pouvoir être utilisés.
 
 ### Ensembles de données et versions
 
@@ -129,7 +129,7 @@ Un **ensemble de données** est un recueil de données de santé, qu'il s'agisse
 
 Les **modules** sont des unités de traitement des données qui exécutent des scripts R analytiques au sein de la plateforme. Chaque module utilise des données d'entrée provenant d'ensembles de données ou des résultats d'autres modules, traite et analyse les données selon des méthodes statistiques définies, et produit des objets de résultats sous forme de fichiers de sortie. Les modules peuvent être enchaînés pour prendre en charge des flux de travail analytiques complexes où un module utilise les résultats d'un autre comme données d'entrée.
 
-La plateforme distingue deux types de modules. Une **définition de module** est le modèle ou le schéma d'un type d'analyse, définissant les méthodes et paramètres analytiques disponibles. Une **instance de module** est un module qui a été activé et configuré au sein d'un projet spécifique. Certains modules ont des prérequis, ce qui signifie que d'autres modules doivent d'abord être activés avant qu'ils puissent être utilisés.
+Les modules sont sélectionnés et configurés dans l'assistant de génération des paquets de résultats, au niveau de l'instance. Certains modules ont des prérequis — d'autres modules dont ils utilisent les résultats — et la plateforme les ajoute automatiquement lorsqu'un module dépendant est sélectionné.
 
 ### Visualisations
 
@@ -155,9 +155,11 @@ Les **rapports** sont des documents narratifs détaillés qui combinent votre an
 
 Les rapports s'exportent au format **Word (.docx) ou PDF** et sont conçus pour les parties prenantes qui lisent un document de bout en bout, plutôt que d'assister à une présentation. Utilisez une présentation lorsque le document sera projeté lors d'une réunion ; utilisez un rapport lorsque le document sera lu sur un bureau ou dans une boîte de réception.
 
-### Fenêtrage
+### Paquets de résultats
 
-Le **fenêtrage** désigne le processus de sélection d'un sous-ensemble de données d'instance à utiliser dans le cadre d'un projet. Les utilisateurs peuvent filtrer les données par période (en sélectionnant des mois ou des années spécifiques), par indicateurs (en incluant tous les indicateurs ou seulement certains), par zones administratives (en incluant toutes les régions ou certaines d’entre elles) et par établissements (filtrage par type d’établissement ou par propriété). Cette fonctionnalité permet aux projets de se concentrer sur les données les plus pertinentes pour leurs objectifs analytiques sans charger l’ensemble du jeu de données.
+Un **paquet de résultats** est un ensemble versionné de résultats calculés, généré au niveau de l'instance. Générer un paquet exécute les modules analytiques sélectionnés sur les jeux de données choisis et enregistre leurs résultats ensemble. Les projets ne traitent pas eux-mêmes les données : chaque projet rattache un paquet et y lit tous ses chiffres, de sorte que plusieurs projets peuvent travailler sur les mêmes résultats cohérents.
+
+Un administrateur peut **épingler** un paquet comme référence de l'instance, et chaque projet peut être réglé pour toujours suivre le paquet épinglé. La mise à jour mensuelle de routine se résume alors à trois gestes : importer les nouvelles données, générer un paquet, l'épingler — les projets suivent.
 
 ### Désagrégation
 
@@ -173,7 +175,7 @@ La plateforme évalue automatiquement l'exhaustivité et l'exactitude des donné
 
 ### Statut de verrouillage
 
-Les projets peuvent être **verrouillés** afin d'empêcher toute modification de leur configuration tout en permettant aux utilisateurs de consulter les rapports. Lorsqu'un projet est verrouillé, les modules et les paramètres de données ne peuvent pas être modifiés, ce qui permet de préserver les configurations analytiques une fois qu'elles ont été finalisées.
+Les projets peuvent être **verrouillés** afin d'empêcher toute modification tout en permettant aux utilisateurs de consulter les rapports. Lorsqu'un projet est verrouillé, ses visualisations et ses paramètres ne peuvent pas être modifiés, ce qui permet de préserver le travail une fois finalisé.
 
 !!! conseil « Guide de l'utilisateur »
     Pour des tutoriels étape par étape sur l'utilisation de la plateforme, consultez le [guide de l'utilisateur FASTR](11_user_guide.md).
@@ -206,7 +208,7 @@ La plateforme offre une interface conviviale pour effectuer des analyses et prop
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
 
-![h:180](../resources/screenshots/plateforme/platform_overview_1.png) ![h:180](../resources/screenshots/plateforme/platform_overview_2.png) ![h:180](../resources/screenshots/plateforme/platform_overview_3.png)
+![h:180](../resources/screenshots/platform_fr/example-viz-timeseries-fr.png) ![h:180](../resources/screenshots/platform_fr/creating-a-report-fr.png) ![h:180](../resources/screenshots/platform_fr/modules_fr.png)
 
 </div>
 <!-- /SLIDE -->
@@ -224,7 +226,7 @@ La plateforme offre une interface conviviale pour effectuer des analyses et prop
 
 **Gestion des données** — Importez des listes d'établissements et des données d'indicateurs depuis DHIS2 ou des fichiers
 
-**Analyse des données** — Exécutez des modules statistiques pour l'évaluation et l'ajustement de la qualité
+**Analyse des données** — Modules statistiques intégrés pour l'évaluation de la qualité, l'ajustement et la couverture
 
 **Visualisation** — Explorez les résultats à l'aide de graphiques et de tableaux interactifs
 
@@ -248,6 +250,7 @@ Une instance contient :
 - Tous les utilisateurs enregistrés et leurs comptes
 - La structure administrative partagée (régions, districts, établissements)
 - Les définitions des indicateurs et les sources de données
+- Les paquets de résultats — les analyses calculées que lisent les projets
 - Tous les projets créés pour ce pays
 
 **Considérez une instance comme l'espace de travail dédié à votre pays.**
@@ -262,7 +265,7 @@ Il existe deux niveaux d'autorisations sur la plateforme :
 
 **Rôles au niveau de l'instance :**
 
-- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules, et exécuter des analyses
+- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, importer des données et générer des paquets de résultats
 
 &nbsp;
 

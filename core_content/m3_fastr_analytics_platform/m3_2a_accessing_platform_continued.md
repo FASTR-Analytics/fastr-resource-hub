@@ -13,6 +13,7 @@ An instance contains:
 - All registered users and their accounts
 - The shared administrative structure (regions, districts, facilities)
 - Indicator definitions and data sources
+- Results packages — the computed analyses that projects read
 - All projects created for that country
 
 **Think of an instance as your country's dedicated workspace.**
