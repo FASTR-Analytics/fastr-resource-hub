@@ -168,13 +168,17 @@ Le risque : des modifications ou des accès que personne ne peut retracer. Les m
 
 ## Application à l'assistant IA
 
-L'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et chaque question est journalisée. Aujourd'hui, des résultats agrégés ; à mesure que l'analyse au niveau des établissements sera introduite, **la même limite de permissions s'appliquera**.
+L'IA ne voit que ce que l'utilisateur connecté peut voir, et chaque question est journalisée. Elle reçoit des chiffres agrégés, calculés par la plateforme pour cette question, jamais la base de données. Selon les conditions commerciales d'Anthropic, ces chiffres **ne servent pas à entraîner les modèles** et sont **supprimés sous 30 jours**. L'analyse par établissement, une fois introduite, gardera la même limite de permissions.
 
 ![w:940](../../resources/diagrams_fr/gov_ai_boundary.svg)
 
 <!--
 - L'IA est Claude, d'Anthropic ; la clé d'accès reste sur le serveur ; l'IA n'a aucune permission propre.
-- La plateforme calcule d'abord la réponse et n'envoie que cela ; les listes d'identifiants sont réduites à des nombres.
+- Chemin des données : pour chaque question, la plateforme exécute la requête sur le paquet de résultats et envoie le tableau agrégé à l'API d'Anthropic dans cette requête. Grain le plus fin accessible à l'IA : zone administrative x indicateur x mois x type ou statut d'établissement. Le nom d'établissement n'est pas une dimension interrogeable (retirée en v1.22). La plateforme ne détient que des totaux mensuels par établissement, jamais de données patients.
+- Sources de la phrase sur les conditions : Conditions commerciales d'Anthropic (« Anthropic may not train models on Customer Content » ; le client conserve ses droits sur les entrées et possède les sorties ; le contenu client est une information confidentielle ; Anthropic peut modifier les conditions avec un préavis de 30 jours). Centre de confidentialité d'Anthropic : entrées et sorties de l'API supprimées sous 30 jours par défaut ; accord de rétention zéro disponible ; données stockées aux États-Unis ; SOC 2 Type II, ISO 27001, ISO 42001, configuration compatible HIPAA ; DPA disponible à la signature.
+- Si l'on demande si le compte du GFF a signé un DPA ou un accord de rétention zéro : vérifier auprès de la personne qui gère le compte Anthropic avant de répondre.
+- Si l'on demande pour les connecteurs claude.ai : les données lues par ce biais passent par le compte Claude de l'utilisateur et les conditions de son abonnement. Les usages API, Team et Enterprise ne servent pas à l'entraînement ; un compte personnel dépend du réglage de confidentialité de l'utilisateur.
+- Les PDF joints dans le chat sont envoyés à l'API Files d'Anthropic et y restent jusqu'à suppression.
 - La recherche web côté serveur est disponible pour les questions générales — ne pas affirmer « pas d'Internet ».
 -->
 
@@ -329,6 +333,7 @@ Pour les pays qui souhaitent s'héberger eux-mêmes, un effort du ministère de 
 - Claude (Anthropic) est atteint via un **proxy côté serveur** ; la clé d'API ne quitte jamais le serveur
 - Les appels d'outils s'exécutent **dans la session authentifiée de l'utilisateur** — l'IA n'a aucune permission propre
 - Les outils de données renvoient actuellement des **sorties métriques agrégées** (aucune dimension identifiant d'établissement en v1.67 ; longues dimensions résumées en nombres) ; l'accès prévu au niveau des établissements suivra le **même modèle de permissions de session**
+- **Conditions commerciales d'Anthropic** : le contenu client ne sert pas à entraîner les modèles, est confidentiel et est supprimé sous 30 jours par défaut ; accord de rétention zéro et DPA disponibles ; données stockées aux États-Unis
 - La **recherche web côté serveur (hébergée par Anthropic) est activée** dans le chat projet pour les questions générales
 - Chaque requête est journalisée (utilisateur, projet, modèle, jetons) ; **des limites quotidiennes par utilisateur et hebdomadaires par instance** s'appliquent
 

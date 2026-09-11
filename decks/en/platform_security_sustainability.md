@@ -168,13 +168,17 @@ The risk: changes or access nobody can trace. The measures: every request tied t
 
 ## Applied to the AI assistant
 
-The AI can only see what the signed-in user is permitted to see, and every question is logged. Today that means aggregated results; as facility-level analysis is introduced, **the same permission boundary applies**.
+The AI sees only what the signed-in user may see, and every question is logged. It receives aggregated figures computed by the platform for that question, never the database. Under Anthropic's commercial terms those figures are **not used to train models** and are **deleted within 30 days**. Facility-level analysis, when introduced, keeps the same permission boundary.
 
 ![w:940](../../resources/diagrams/gov_ai_boundary.svg)
 
 <!--
 - The AI is Claude, by Anthropic; the access key stays on the server; the AI holds no permissions of its own.
-- The platform computes the answer first and sends only that; identifier lists are collapsed to counts.
+- Data path: for each question the platform runs the query on the results package and sends the aggregated table to Anthropic's API as part of that request. Finest grain available to the AI: admin area x indicator x month x facility type or ownership. Facility name is not a queryable dimension (removed in v1.22). The platform holds monthly facility totals only, never patient records.
+- Sources for the terms line: Anthropic Commercial Terms of Service ("Anthropic may not train models on Customer Content"; the customer retains rights to inputs and owns outputs; Customer Content is Confidential Information; Anthropic may update the terms with 30 days' notice). Anthropic privacy center: API inputs and outputs deleted within 30 days by default; zero-data-retention agreement available; data stored in the US; SOC 2 Type II, ISO 27001, ISO 42001, HIPAA-ready; DPA available to sign.
+- If asked whether the GFF account has a signed DPA or zero-retention agreement: confirm with whoever manages the Anthropic account before answering.
+- If asked about the claude.ai connectors: data read through them goes through the user's own Claude account and plan terms. API, Team and Enterprise use is not used for training; a personal account depends on the user's own privacy setting.
+- PDFs attached in the chat are uploaded to Anthropic's Files API and persist there until deleted.
 - Server-side web search is available for general questions — do not claim "no internet".
 -->
 
@@ -329,6 +333,7 @@ For countries who do want to host themselves, there will be effort required from
 - Claude (Anthropic) is reached through a **server-side proxy**; the API key never leaves the server
 - Tool calls run **inside the user's authenticated session** — the AI holds no permissions of its own
 - Data tools currently return **aggregated metric outputs** (no facility-identifier dimension as of v1.67; long dimensions summarized as counts); planned facility-level access will operate under the **same session-permission model**
+- **Anthropic commercial terms**: customer content is not used to train models, is confidential, and is deleted within 30 days by default; a zero-data-retention agreement and a DPA are available; data is stored in the US
 - **Server-side web search/fetch (Anthropic-hosted) is enabled** in the project chat for general questions
 - Every request is logged (user, project, model, tokens); **daily per-user and weekly per-instance limits** are enforced
 
