@@ -4,7 +4,7 @@
 
   <!-- Box 1: Detect -->
   <g transform="translate(100, 60)">
-    <rect x="0" y="0" width="220" height="120" rx="12" fill="#1F9A9C"/>
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#1FA29C"/>
     <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">DÉTECTER</text>
     <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">FASTR identifie un changement</text>
     <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">(perturbation de service, hausse,</text>
@@ -19,7 +19,7 @@
 
   <!-- Box 2: Investigate -->
   <g transform="translate(400, 60)">
-    <rect x="0" y="0" width="220" height="120" rx="12" fill="#D8A822"/>
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#FFB09F"/>
     <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">INVESTIGUER</text>
     <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">Déclenche une investigation</text>
     <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fff8e6">Qu'est-ce qui cause le changement ?</text>
@@ -49,7 +49,7 @@
 
   <!-- Box 4: Act -->
   <g transform="translate(1000, 60)">
-    <rect x="0" y="0" width="120" height="120" rx="12" fill="#09544F"/>
+    <rect x="0" y="0" width="120" height="120" rx="12" fill="#0A544F"/>
     <text x="60" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">AGIR</text>
     <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Actions</text>
     <text x="60" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">programmatiques</text>
@@ -62,41 +62,41 @@
 
   <!-- Left: What disruptions trigger -->
   <g transform="translate(100, 250)">
-    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#1F9A9C" stroke-width="2"/>
-    <rect x="0" y="0" width="480" height="45" rx="10" fill="#1F9A9C"/>
-    <rect x="0" y="30" width="480" height="15" fill="#1F9A9C"/>
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#1FA29C" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#1FA29C"/>
+    <rect x="0" y="30" width="480" height="15" fill="#1FA29C"/>
     <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">Quand FASTR signale une perturbation, demandez :</text>
 
-    <circle cx="35" cy="80" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="80" r="4" fill="#1FA29C"/>
     <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">L'utilisation ou la prestation des services a-t-elle changé ?</text>
 
-    <circle cx="35" cy="115" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="115" r="4" fill="#1FA29C"/>
     <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Est-ce un vrai changement ou un problème de qualité des données ?</text>
 
-    <circle cx="35" cy="150" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="150" r="4" fill="#1FA29C"/>
     <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">Qu'est-ce qui pourrait expliquer cette tendance ?</text>
 
-    <circle cx="35" cy="185" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="185" r="4" fill="#1FA29C"/>
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Quelles actions pourraient y remédier ?</text>
   </g>
 
   <!-- Right: What you can investigate -->
   <g transform="translate(620, 250)">
-    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#D8A822" stroke-width="2"/>
-    <rect x="0" y="0" width="480" height="45" rx="10" fill="#D8A822"/>
-    <rect x="0" y="30" width="480" height="15" fill="#D8A822"/>
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#FFB09F" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#FFB09F"/>
+    <rect x="0" y="30" width="480" height="15" fill="#FFB09F"/>
     <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">Approfondir les causes plausibles :</text>
 
-    <circle cx="35" cy="80" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="80" r="4" fill="#FFB09F"/>
     <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">Comparer entre zones géographiques et formations sanitaires</text>
 
-    <circle cx="35" cy="115" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="115" r="4" fill="#FFB09F"/>
     <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Examiner les tendances dans le temps</text>
 
-    <circle cx="35" cy="150" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="150" r="4" fill="#FFB09F"/>
     <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">Vérifier les indicateurs connexes pour des tendances</text>
 
-    <circle cx="35" cy="185" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="185" r="4" fill="#FFB09F"/>
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Trianguler avec les connaissances locales</text>
   </g>
 

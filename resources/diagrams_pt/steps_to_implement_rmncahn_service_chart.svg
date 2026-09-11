@@ -3,7 +3,7 @@
   <path d="M 66.17 165.00 A 270 270 0 0 1 300.00 30.00 L 300.00 170.00 A 130 130 0 0 0 187.42 235.00 Z" fill="#09554F"/>
   <path d="M 300.00 30.00 A 270 270 0 0 1 533.83 165.00 L 412.58 235.00 A 130 130 0 0 0 300.00 170.00 Z" fill="#0C716B"/>
   <path d="M 533.83 165.00 A 270 270 0 0 1 533.83 435.00 L 412.58 365.00 A 130 130 0 0 0 412.58 235.00 Z" fill="#1FA29C"/>
-  <path d="M 533.83 435.00 A 270 270 0 0 1 300.00 570.00 L 300.00 430.00 A 130 130 0 0 0 412.58 365.00 Z" fill="#1A90C0"/>
+  <path d="M 533.83 435.00 A 270 270 0 0 1 300.00 570.00 L 300.00 430.00 A 130 130 0 0 0 412.58 365.00 Z" fill="#91C2E8"/>
   <path d="M 300.00 570.00 A 270 270 0 0 1 66.17 435.00 L 187.42 365.00 A 130 130 0 0 0 300.00 430.00 Z" fill="#9AD3D4"/>
   <path d="M 66.17 435.00 A 270 270 0 0 1 66.17 165.00 L 187.42 235.00 A 130 130 0 0 0 187.42 365.00 Z" fill="#CAE6E9"/>
   <circle cx="300.0" cy="300.0" r="130" fill="#FFFFFF"/>
@@ -18,14 +18,14 @@
   <text x="400.00" y="456.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">4. Ajustamento da</text>
   <text x="400.00" y="473.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">qualidade dos</text>
   <text x="400.00" y="490.21" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">dados</text>
-  <text x="200.00" y="464.71" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">5. Análise de</text>
-  <text x="200.00" y="481.71" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">dados</text>
-  <text x="100.00" y="283.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">6. Comunicação dos</text>
-  <text x="100.00" y="300.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">resultados e</text>
-  <text x="100.00" y="317.00" font-size="13" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">utilização dos</text>
-  <text x="300.00" y="258.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">Processo de</text>
-  <text x="300.00" y="279.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">monitorização</text>
-  <text x="300.00" y="300.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">da utilização</text>
-  <text x="300.00" y="321.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">dos serviços</text>
-  <text x="300.00" y="342.00" font-size="17" font-weight="700" fill="#0E433D" text-anchor="middle" dominant-baseline="middle">SRMNIA-N</text>
+  <text x="200.00" y="464.71" font-size="13" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">5. Análise de</text>
+  <text x="200.00" y="481.71" font-size="13" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">dados</text>
+  <text x="100.00" y="283.00" font-size="13" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">6. Comunicação dos</text>
+  <text x="100.00" y="300.00" font-size="13" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">resultados e</text>
+  <text x="100.00" y="317.00" font-size="13" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">utilização dos</text>
+  <text x="300.00" y="258.00" font-size="17" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">Processo de</text>
+  <text x="300.00" y="279.00" font-size="17" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">monitorização</text>
+  <text x="300.00" y="300.00" font-size="17" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">da utilização</text>
+  <text x="300.00" y="321.00" font-size="17" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">dos serviços</text>
+  <text x="300.00" y="342.00" font-size="17" font-weight="700" fill="#00413C" text-anchor="middle" dominant-baseline="middle">SRMNIA-N</text>
 </svg>

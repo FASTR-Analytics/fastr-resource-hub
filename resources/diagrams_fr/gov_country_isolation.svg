@@ -4,15 +4,15 @@
     <!-- Pays A -->
     <g transform="translate(30,40)">
       <rect x="0" y="0" width="260" height="280" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
-      <rect x="0" y="0" width="260" height="52" rx="14" fill="#09544F"/>
-      <rect x="0" y="26" width="260" height="26" fill="#09544F"/>
+      <rect x="0" y="0" width="260" height="52" rx="14" fill="#0A544F"/>
+      <rect x="0" y="26" width="260" height="26" fill="#0A544F"/>
       <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays A</text>
-      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
-      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
-      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Ses propres fichiers</text>
     </g>
     <!-- Pays B -->
     <g transform="translate(350,40)">
@@ -20,25 +20,25 @@
       <rect x="0" y="0" width="260" height="52" rx="14" fill="#0C716B"/>
       <rect x="0" y="26" width="260" height="26" fill="#0C716B"/>
       <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays B</text>
-      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
-      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
-      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Ses propres fichiers</text>
     </g>
     <!-- Pays C -->
     <g transform="translate(670,40)">
       <rect x="0" y="0" width="260" height="280" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
-      <rect x="0" y="0" width="260" height="52" rx="14" fill="#1F9A9C"/>
-      <rect x="0" y="26" width="260" height="26" fill="#1F9A9C"/>
+      <rect x="0" y="0" width="260" height="52" rx="14" fill="#1FA29C"/>
+      <rect x="0" y="26" width="260" height="26" fill="#1FA29C"/>
       <text x="130" y="26" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="19" font-weight="600">Pays C</text>
-      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre plateforme</text>
-      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Sa propre base de données</text>
-      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1F9A9C" stroke-width="1.5"/>
-      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16">Ses propres fichiers</text>
+      <rect x="24" y="76" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="102" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre plateforme</text>
+      <rect x="24" y="142" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="168" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Sa propre base de données</text>
+      <rect x="24" y="208" width="212" height="52" rx="9" fill="#FFFFFF" stroke="#1FA29C" stroke-width="1.5"/>
+      <text x="130" y="234" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16">Ses propres fichiers</text>
     </g>
     <!-- No-connection marks between the buildings -->
     <g stroke="#C53030" stroke-width="3" stroke-linecap="round">

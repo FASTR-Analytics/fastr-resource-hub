@@ -2,16 +2,16 @@
   <defs>
     <style>
       .layer { rx: 10; stroke-width: 2; }
-      .layer-dhis2 { fill: #09544F; stroke: #073B38; }
-      .layer-coverage { fill: #0C716B; stroke: #09544F; }
-      .layer-hfa { fill: #1F9A9C; stroke: #0C716B; }
-      .layer-household { fill: #CAE6E9; stroke: #1F9A9C; }
+      .layer-dhis2 { fill: #0A544F; stroke: #073B38; }
+      .layer-coverage { fill: #0C716B; stroke: #0A544F; }
+      .layer-hfa { fill: #1FA29C; stroke: #0C716B; }
+      .layer-household { fill: #CAE6E9; stroke: #1FA29C; }
       .lbl { font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; fill: #fff; }
-      .lbl-dark { font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; fill: #09544F; }
+      .lbl-dark { font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; fill: #0A544F; }
       .sub { font-family: Inter, sans-serif; font-size: 11.5px; fill: #fff; opacity: 0.9; }
-      .sub-dark { font-family: Inter, sans-serif; font-size: 11.5px; fill: #09544F; opacity: 0.75; }
+      .sub-dark { font-family: Inter, sans-serif; font-size: 11.5px; fill: #0A544F; opacity: 0.75; }
       .q { font-family: Inter, sans-serif; font-size: 11px; fill: #fff; font-style: italic; opacity: 0.8; }
-      .q-dark { font-family: Inter, sans-serif; font-size: 11px; fill: #09544F; font-style: italic; opacity: 0.65; }
+      .q-dark { font-family: Inter, sans-serif; font-size: 11px; fill: #0A544F; font-style: italic; opacity: 0.65; }
       .freq { font-family: Inter, sans-serif; font-size: 10px; fill: #888; font-style: italic; }
     </style>
   </defs>

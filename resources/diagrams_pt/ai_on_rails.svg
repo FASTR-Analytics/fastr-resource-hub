@@ -3,12 +3,12 @@
   <!-- The FASTR AI is grounded in four project sources, presented as a stack. -->
 
   <!-- FASTR AI pill (hero) -->
-  <rect x="30" y="28" width="320" height="56" rx="28" fill="#09544F"/>
+  <rect x="30" y="28" width="320" height="56" rx="28" fill="#0A544F"/>
   <text x="190" y="55" text-anchor="middle" font-size="15" font-weight="800" fill="#ffffff" letter-spacing="0.3">Assistente de IA FASTR</text>
   <text x="190" y="74" text-anchor="middle" font-size="11.5" fill="#CAE6E9">Fundamentado no seu projeto</text>
 
   <!-- Outer card containing the 4 sources -->
-  <rect x="30" y="110" width="320" height="356" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="30" y="110" width="320" height="356" rx="12" fill="#ffffff" stroke="#1FA29C" stroke-width="1.5"/>
 
   <!-- Section caption -->
   <text x="190" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">QUATRO FONTES</text>
@@ -24,22 +24,22 @@
   <rect x="30" y="146" width="4" height="306" fill="#D0CB17"/>
 
   <!-- Row 1 — Your data -->
-  <text x="50" y="174" font-size="14" font-weight="700" fill="#09544F">Os seus dados</text>
+  <text x="50" y="174" font-size="14" font-weight="700" fill="#0A544F">Os seus dados</text>
   <text x="50" y="196" font-size="12" fill="#5A6562">Pontuações DQA - Estimativas de cobertura</text>
   <text x="50" y="213" font-size="12" fill="#5A6562">- Bandeiras de perturbação</text>
 
   <!-- Row 2 — Your charts -->
-  <text x="50" y="254" font-size="14" font-weight="700" fill="#09544F">Os seus gráficos</text>
+  <text x="50" y="254" font-size="14" font-weight="700" fill="#0A544F">Os seus gráficos</text>
   <text x="50" y="276" font-size="12" fill="#5A6562">Séries cronológicas - Gráficos de barras</text>
   <text x="50" y="293" font-size="12" fill="#5A6562">- Tabelas de dados</text>
 
   <!-- Row 3 — The code -->
-  <text x="50" y="334" font-size="14" font-weight="700" fill="#09544F">O código</text>
+  <text x="50" y="334" font-size="14" font-weight="700" fill="#0A544F">O código</text>
   <text x="50" y="356" font-size="12" fill="#5A6562">Scripts R - Fórmulas aplicadas</text>
   <text x="50" y="373" font-size="12" fill="#5A6562">- Parâmetros definidos</text>
 
   <!-- Row 4 — The methods -->
-  <text x="50" y="414" font-size="14" font-weight="700" fill="#09544F">Os métodos</text>
+  <text x="50" y="414" font-size="14" font-weight="700" fill="#0A544F">Os métodos</text>
   <text x="50" y="436" font-size="12" fill="#5A6562">Definições de indicadores - Guias</text>
   <text x="50" y="453" font-size="12" fill="#5A6562">- Dicas de interpretação</text>
 </svg>

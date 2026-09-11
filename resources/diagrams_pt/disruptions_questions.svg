@@ -4,7 +4,7 @@
   <!-- connecting chevrons between cards -->
   <path d="M243 163 L255 175 L243 187" fill="none" stroke="#C53030" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M494 161 L508 175 L494 189" fill="none" stroke="#0C716B" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M745 163 L757 175 L745 187" fill="none" stroke="#1F9A9C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M745 163 L757 175 L745 187" fill="none" stroke="#1FA29C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- ===== Card 1 — Funding shifts ===== -->
   <rect x="16" y="58" width="215" height="234" rx="16" fill="#FDE8E8" stroke="#C53030" stroke-width="1.5"/>
@@ -28,9 +28,9 @@
   </text>
 
   <!-- ===== Card 3 — FASTR (the turn) ===== -->
-  <rect x="518" y="58" width="215" height="234" rx="16" fill="#09544F"/>
+  <rect x="518" y="58" width="215" height="234" rx="16" fill="#0A544F"/>
   <circle cx="625.5" cy="116" r="27" fill="#D0CB17"/>
-  <g fill="#09544F">
+  <g fill="#0A544F">
     <rect x="612" y="114" width="6.5" height="14" rx="1"/>
     <rect x="622.25" y="106" width="6.5" height="22" rx="1"/>
     <rect x="632.5" y="119" width="6.5" height="9" rx="1"/>
@@ -43,10 +43,10 @@
   </text>
 
   <!-- ===== Card 4 — Act in time ===== -->
-  <rect x="769" y="58" width="215" height="234" rx="16" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="769" y="58" width="215" height="234" rx="16" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
   <circle cx="876.5" cy="116" r="27" fill="#0C716B"/>
   <path d="M864 116 L872.5 125 L889 107" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="876.5" y="184" text-anchor="middle" font-size="20" font-weight="700" fill="#09544F">Agir a tempo</text>
+  <text x="876.5" y="184" text-anchor="middle" font-size="20" font-weight="700" fill="#0A544F">Agir a tempo</text>
   <g font-size="14.5" fill="#5A6562">
     <circle cx="800" cy="211" r="3" fill="#D0CB17"/><text x="811" y="216">Detetar precocemente as perturbações</text>
     <circle cx="800" cy="233" r="3" fill="#D0CB17"/><text x="811" y="238">Dar prioridade ao que é importante</text>

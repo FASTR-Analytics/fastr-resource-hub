@@ -51,3 +51,8 @@ resources/
   base theme's `img` background is `transparent` (it is — see `fastr-theme.css`).
 - Don't delete a file referenced by `outputs/`, the site, or a handout without
   checking — generated artifacts there hold real paths.
+
+
+## GFF logo (2026 refresh)
+
+`logos/GFF_Logo_trimmed.png` and `logos/GFF_Logo_Horizontal_White_En.png` now carry the 2026 GFF + World Bank lockup (white). Full-color lockups (`GFF_WBG_Color_{En,Fr,Es,Pt}.png`), the stacked lockup and the standalone GFF logo were added alongside. The previous artwork is in `logos/legacy_2025/`. Per the GFF guidelines, request official logo files from the GFF Comms team before external use.

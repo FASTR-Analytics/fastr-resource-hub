@@ -26,21 +26,21 @@ export type DiagramRequest =
 
 // FASTR brand palette
 const BRAND = {
-  deepGreen: '#09544F',
+  deepGreen: '#0A544F',
   darkGreen: '#0C716B',
-  green: '#1F9A9C',
+  green: '#1FA29C',
   lime: '#D0CB17',
   navy: '#21568C',
-  blue: '#1A90C0',
+  blue: '#91C2E8',
   lightBlue: '#CAE6E9',
-  gold: '#D8A822',
-  purple: '#7A1F6E',
-  orchid: '#BD5091',
+  gold: '#FFB09F',
+  purple: '#501E50',
+  orchid: '#B673A2',
   coral: '#FF6462',
   // Semantic aliases
-  dark: '#09544F',
+  dark: '#0A544F',
   medium: '#0C716B',
-  light: '#1F9A9C',
+  light: '#1FA29C',
   bg: '#E8F4F3',
   accent: '#CAE6E9',
   text: '#555',
@@ -50,23 +50,23 @@ const BRAND = {
   redAccent: '#FFD4D3',
 }
 
-const CHEVRON_COLORS = ['#09544F', '#0C716B', '#1F9A9C', '#1A90C0', '#21568C', '#D8A822', '#BD5091', '#7A1F6E']
+const CHEVRON_COLORS = ['#0A544F', '#0C716B', '#1FA29C', '#91C2E8', '#21568C', '#FFB09F', '#B673A2', '#501E50']
 
-const CARD_COLORS = ['#09544F', '#0C716B', '#1F9A9C', '#1A90C0', '#21568C', '#D8A822']
+const CARD_COLORS = ['#0A544F', '#0C716B', '#1FA29C', '#91C2E8', '#21568C', '#FFB09F']
 
-const TIMELINE_COLORS = ['#09544F', '#0C716B', '#1F9A9C', '#1A90C0', '#21568C', '#D8A822']
+const TIMELINE_COLORS = ['#0A544F', '#0C716B', '#1FA29C', '#91C2E8', '#21568C', '#FFB09F']
 
-const LAYER_DEFAULT_COLORS = ['#09544F', '#0C716B', '#1F9A9C', '#CAE6E9', '#E8F4F3']
+const LAYER_DEFAULT_COLORS = ['#0A544F', '#0C716B', '#1FA29C', '#CAE6E9', '#E8F4F3']
 
 const CHEVRON_CIRCLE_STYLES: Record<string, { bg: string; stroke: string }> = {
-  '#09544F': { bg: '#E8F4F3', stroke: '#CAE6E9' },
+  '#0A544F': { bg: '#E8F4F3', stroke: '#CAE6E9' },
   '#0C716B': { bg: '#E6F5F0', stroke: '#B0DDD0' },
-  '#1F9A9C': { bg: '#E4F5F5', stroke: '#B5E0E0' },
-  '#1A90C0': { bg: '#E6F2FA', stroke: '#B0D8EE' },
+  '#1FA29C': { bg: '#E4F5F5', stroke: '#B5E0E0' },
+  '#91C2E8': { bg: '#EAF3FB', stroke: '#B8D8F0' },
   '#21568C': { bg: '#EBF0F7', stroke: '#C0D0E4' },
-  '#D8A822': { bg: '#FBF6E6', stroke: '#EDD99A' },
-  '#BD5091': { bg: '#F9ECF4', stroke: '#E4B5D3' },
-  '#7A1F6E': { bg: '#F5EAF4', stroke: '#D4ADD0' },
+  '#FFB09F': { bg: '#FFF1EC', stroke: '#FFD3C6' },
+  '#B673A2': { bg: '#F7EEF4', stroke: '#E3C7DB' },
+  '#501E50': { bg: '#F0EAF0', stroke: '#CDB8CD' },
 }
 
 const SHADOW_FILTER = '<defs><filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.08"/></filter></defs>'
@@ -105,7 +105,7 @@ function renderIconAt(
   r: number,
   fallbackFontSize: number,
   textFill: string,
-  iconStroke = '#09544F',
+  iconStroke = '#0A544F',
 ): string {
   if (!value) return ''
   if (isDiagramIconId(value)) {

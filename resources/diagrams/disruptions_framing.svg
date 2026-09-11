@@ -5,7 +5,7 @@
 
   <!-- Box 1: Detect -->
   <g transform="translate(100, 60)">
-    <rect x="0" y="0" width="220" height="120" rx="12" fill="#1F9A9C"/>
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#1FA29C"/>
     <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">DETECT</text>
     <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">FASTR identifies a change</text>
     <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">(service disruption, increase,</text>
@@ -20,7 +20,7 @@
 
   <!-- Box 2: Investigate -->
   <g transform="translate(400, 60)">
-    <rect x="0" y="0" width="220" height="120" rx="12" fill="#D8A822"/>
+    <rect x="0" y="0" width="220" height="120" rx="12" fill="#FFB09F"/>
     <text x="110" y="40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">INVESTIGATE</text>
     <text x="110" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="white">Triggers an investigation</text>
     <text x="110" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#fff8e6">What's driving the change?</text>
@@ -50,7 +50,7 @@
 
   <!-- Box 4: Act -->
   <g transform="translate(1000, 60)">
-    <rect x="0" y="0" width="120" height="120" rx="12" fill="#09544F"/>
+    <rect x="0" y="0" width="120" height="120" rx="12" fill="#0A544F"/>
     <text x="60" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">ACT</text>
     <text x="60" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">Policy &amp;</text>
     <text x="60" y="95" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#CAE6E9">program action</text>
@@ -63,41 +63,41 @@
 
   <!-- Left: What disruptions trigger -->
   <g transform="translate(100, 250)">
-    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#1F9A9C" stroke-width="2"/>
-    <rect x="0" y="0" width="480" height="45" rx="10" fill="#1F9A9C"/>
-    <rect x="0" y="30" width="480" height="15" fill="#1F9A9C"/>
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#1FA29C" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#1FA29C"/>
+    <rect x="0" y="30" width="480" height="15" fill="#1FA29C"/>
     <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">When FASTR flags a disruption, ask:</text>
 
-    <circle cx="35" cy="80" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="80" r="4" fill="#1FA29C"/>
     <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">Has service use or delivery changed?</text>
 
-    <circle cx="35" cy="115" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="115" r="4" fill="#1FA29C"/>
     <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Is this a real change or a data quality issue?</text>
 
-    <circle cx="35" cy="150" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="150" r="4" fill="#1FA29C"/>
     <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">What could be driving this pattern?</text>
 
-    <circle cx="35" cy="185" r="4" fill="#1F9A9C"/>
+    <circle cx="35" cy="185" r="4" fill="#1FA29C"/>
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">What actions could address it?</text>
   </g>
 
   <!-- Right: What you can investigate -->
   <g transform="translate(620, 250)">
-    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#D8A822" stroke-width="2"/>
-    <rect x="0" y="0" width="480" height="45" rx="10" fill="#D8A822"/>
-    <rect x="0" y="30" width="480" height="15" fill="#D8A822"/>
+    <rect x="0" y="0" width="480" height="220" rx="10" fill="white" stroke="#FFB09F" stroke-width="2"/>
+    <rect x="0" y="0" width="480" height="45" rx="10" fill="#FFB09F"/>
+    <rect x="0" y="30" width="480" height="15" fill="#FFB09F"/>
     <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="white">Drill down into plausible root causes:</text>
 
-    <circle cx="35" cy="80" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="80" r="4" fill="#FFB09F"/>
     <text x="50" y="85" font-family="system-ui, sans-serif" font-size="15" fill="#333">Compare across geographies and facilities</text>
 
-    <circle cx="35" cy="115" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="115" r="4" fill="#FFB09F"/>
     <text x="50" y="120" font-family="system-ui, sans-serif" font-size="15" fill="#333">Examine trends over time</text>
 
-    <circle cx="35" cy="150" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="150" r="4" fill="#FFB09F"/>
     <text x="50" y="155" font-family="system-ui, sans-serif" font-size="15" fill="#333">Check related indicators for patterns</text>
 
-    <circle cx="35" cy="185" r="4" fill="#D8A822"/>
+    <circle cx="35" cy="185" r="4" fill="#FFB09F"/>
     <text x="50" y="190" font-family="system-ui, sans-serif" font-size="15" fill="#333">Triangulate with local knowledge</text>
   </g>
 

@@ -4,10 +4,10 @@
   <circle cx="200" cy="200" r="180" fill="#F2F7F8" stroke="#A0C8CE" stroke-width="1.2"/>
 
   <!-- Cercle intermédiaire : Sphère d'influence — teal pâle -->
-  <circle cx="200" cy="200" r="120" fill="#DEEEED" stroke="#1F9A9C" stroke-width="1.5"/>
+  <circle cx="200" cy="200" r="120" fill="#DEEEED" stroke="#1FA29C" stroke-width="1.5"/>
 
   <!-- Cercle intérieur : Sphère de contrôle — bleu-teal clair, contour vert profond -->
-  <circle cx="200" cy="200" r="65" fill="#B6DCE0" stroke="#09544F" stroke-width="2.5"/>
+  <circle cx="200" cy="200" r="65" fill="#B6DCE0" stroke="#0A544F" stroke-width="2.5"/>
 
   <!-- Étiquette extérieure -->
   <text x="200" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#5A7A7D" letter-spacing="2">SPHÈRE DE PRÉOCCUPATION</text>
@@ -16,6 +16,6 @@
   <text x="200" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0C716B" letter-spacing="2">SPHÈRE D'INFLUENCE</text>
 
   <!-- Étiquette intérieure — deux lignes centrées -->
-  <text x="200" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F" letter-spacing="2">SPHÈRE DE</text>
-  <text x="200" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F" letter-spacing="2">CONTRÔLE</text>
+  <text x="200" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A544F" letter-spacing="2">SPHÈRE DE</text>
+  <text x="200" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A544F" letter-spacing="2">CONTRÔLE</text>
 </svg>

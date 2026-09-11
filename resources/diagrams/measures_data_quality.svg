@@ -5,7 +5,7 @@
   <!-- ===== LEFT PANEL — Common DQ measures ===== -->
   <text x="175" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">COMMON DQ MEASURES</text>
 
-  <rect x="15" y="50" width="320" height="368" rx="12" fill="#ffffff" stroke="#1F9A9C" stroke-width="1.5"/>
+  <rect x="15" y="50" width="320" height="368" rx="12" fill="#ffffff" stroke="#1FA29C" stroke-width="1.5"/>
   <rect x="15" y="64" width="4" height="340" fill="#D0CB17"/>
 
   <g stroke="#E4E7E5" stroke-width="1">
@@ -14,32 +14,32 @@
     <line x1="40" y1="324" x2="320" y2="324"/>
   </g>
 
-  <text x="40" y="92" font-size="14" font-weight="700" fill="#09544F">Accuracy</text>
+  <text x="40" y="92" font-size="14" font-weight="700" fill="#0A544F">Accuracy</text>
   <text x="40" y="115" font-size="12" font-style="italic" fill="#5A6562">Do data reflect reality?</text>
 
-  <text x="40" y="184" font-size="14" font-weight="700" fill="#09544F">Completeness</text>
+  <text x="40" y="184" font-size="14" font-weight="700" fill="#0A544F">Completeness</text>
   <text x="40" y="207" font-size="12" font-style="italic" fill="#5A6562">Are all data present?</text>
 
-  <text x="40" y="276" font-size="14" font-weight="700" fill="#09544F">Consistency</text>
+  <text x="40" y="276" font-size="14" font-weight="700" fill="#0A544F">Consistency</text>
   <text x="40" y="299" font-size="12" font-style="italic" fill="#5A6562">Are relations consistent?</text>
 
-  <text x="40" y="368" font-size="14" font-weight="700" fill="#09544F">Timeliness</text>
+  <text x="40" y="368" font-size="14" font-weight="700" fill="#0A544F">Timeliness</text>
   <text x="40" y="391" font-size="12" font-style="italic" fill="#5A6562">Are data submitted on time?</text>
 
   <!-- ===== RIGHT PANEL — FASTR measures ===== -->
   <text x="545" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">FASTR MEASURES</text>
 
   <!-- 3 source measures stacked at top -->
-  <rect x="385" y="50" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="545" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Indicator completeness</text>
+  <rect x="385" y="50" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="545" y="76" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0A544F">Indicator completeness</text>
   <text x="545" y="94" text-anchor="middle" font-size="11.5" fill="#5A6562">Are values present per indicator?</text>
 
-  <rect x="385" y="118" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="545" y="144" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Presence of outliers</text>
+  <rect x="385" y="118" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="545" y="144" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0A544F">Presence of outliers</text>
   <text x="545" y="162" text-anchor="middle" font-size="11.5" fill="#5A6562">Are any values extreme or implausible?</text>
 
-  <rect x="385" y="186" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="545" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#09544F">Consistency between indicators</text>
+  <rect x="385" y="186" width="320" height="58" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="545" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0A544F">Consistency between indicators</text>
   <text x="545" y="230" text-anchor="middle" font-size="11.5" fill="#5A6562">Do related indicators line up?</text>
 
   <!-- Arrow down to aggregate -->
@@ -47,7 +47,7 @@
   <text x="567" y="278" font-size="11" font-weight="600" fill="#0C716B">aggregates into</text>
 
   <!-- DQ Score aggregate (hero) -->
-  <rect x="385" y="300" width="320" height="74" rx="12" fill="#09544F"/>
+  <rect x="385" y="300" width="320" height="74" rx="12" fill="#0A544F"/>
   <text x="545" y="328" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">DQ SCORE</text>
   <text x="545" y="352" text-anchor="middle" font-size="11.5" fill="#CAE6E9">A single composite read of</text>
   <text x="545" y="367" text-anchor="middle" font-size="11.5" fill="#CAE6E9">your data's reliability</text>

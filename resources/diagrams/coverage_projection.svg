@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 230">
   <defs>
     <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #0A544F; }
       .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #21568C; text-anchor: middle; }
-      .value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 600; fill: #0A544F; text-anchor: middle; }
       .formula-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #7f8c8d; text-anchor: middle; }
       .axis { stroke: #dee2e6; stroke-width: 1; }
       .axis-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #7f8c8d; }
-      .projected-line { stroke: #1F9A9C; stroke-width: 2; stroke-dasharray: 5,3; }
-      .hmis-line { stroke: #1A90C0; stroke-width: 2; }
+      .projected-line { stroke: #1FA29C; stroke-width: 2; stroke-dasharray: 5,3; }
+      .hmis-line { stroke: #91C2E8; stroke-width: 2; }
       .legend-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #21568C; }
     </style>
   </defs>
@@ -53,20 +53,20 @@
   <polyline class="hmis-line" points="140,153 260,139 380,118 460,97" fill="none"/>
 
   <!-- HMIS points on ALL years with values -->
-  <circle cx="140" cy="153" r="4" fill="#1A90C0" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="140" cy="153" r="4" fill="#91C2E8" stroke="#ffffff" stroke-width="1"/>
   <text class="formula-text" x="125" y="165">78%</text>
 
-  <circle cx="260" cy="139" r="4" fill="#1A90C0" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="260" cy="139" r="4" fill="#91C2E8" stroke="#ffffff" stroke-width="1"/>
   <text class="formula-text" x="245" y="150">80%</text>
 
-  <circle cx="380" cy="118" r="4" fill="#1A90C0" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="380" cy="118" r="4" fill="#91C2E8" stroke="#ffffff" stroke-width="1"/>
   <text class="formula-text" x="365" y="128">83%</text>
 
-  <circle cx="460" cy="97" r="4" fill="#1A90C0" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="460" cy="97" r="4" fill="#91C2E8" stroke="#ffffff" stroke-width="1"/>
   <text class="formula-text" x="475" y="107">85%</text>
 
   <!-- Survey anchor point (2020 = 82%, gold) -->
-  <circle cx="140" cy="125" r="6" fill="#D8A822" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="140" cy="125" r="6" fill="#FFB09F" stroke="#ffffff" stroke-width="2"/>
   <text class="value" x="155" y="120">82%</text>
   <text class="label" x="140" y="113">Survey</text>
 
@@ -75,21 +75,21 @@
   <polyline class="projected-line" points="140,125 260,111 380,90 460,69" fill="none"/>
 
   <!-- Projected points on each year -->
-  <circle cx="260" cy="111" r="5" fill="#1F9A9C" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="260" cy="111" r="5" fill="#1FA29C" stroke="#ffffff" stroke-width="1"/>
   <text class="value" x="275" y="105" style="fill: #0C716B;">84%</text>
 
-  <circle cx="380" cy="90" r="5" fill="#1F9A9C" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="380" cy="90" r="5" fill="#1FA29C" stroke="#ffffff" stroke-width="1"/>
   <text class="value" x="395" y="84" style="fill: #0C716B;">87%</text>
 
-  <circle cx="460" cy="69" r="5" fill="#1F9A9C" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="460" cy="69" r="5" fill="#1FA29C" stroke="#ffffff" stroke-width="1"/>
   <text class="value" x="475" y="63" style="fill: #0C716B;">89%</text>
 
   <!-- Legend -->
-  <circle cx="560" cy="55" r="5" fill="#D8A822" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="560" cy="55" r="5" fill="#FFB09F" stroke="#ffffff" stroke-width="1"/>
   <text class="legend-text" x="572" y="59">Survey</text>
-  <circle cx="560" cy="75" r="4" fill="#1A90C0" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="560" cy="75" r="4" fill="#91C2E8" stroke="#ffffff" stroke-width="1"/>
   <text class="legend-text" x="572" y="79">HMIS coverage</text>
-  <circle cx="560" cy="95" r="5" fill="#1F9A9C" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="560" cy="95" r="5" fill="#1FA29C" stroke="#ffffff" stroke-width="1"/>
   <text class="legend-text" x="572" y="99">Projected</text>
 
 </svg>

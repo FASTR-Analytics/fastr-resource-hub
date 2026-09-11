@@ -5,13 +5,13 @@
   <text x="40" y="34" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">DECIDES</text>
 
   <!-- Human card (top, big, white with deep-green border) -->
-  <rect x="180" y="44" width="360" height="116" rx="14" fill="#ffffff" stroke="#09544F" stroke-width="2"/>
+  <rect x="180" y="44" width="360" height="116" rx="14" fill="#ffffff" stroke="#0A544F" stroke-width="2"/>
   <!-- Human icon: head + shoulders, deep-green -->
-  <g transform="translate(360, 70)" fill="#09544F">
+  <g transform="translate(360, 70)" fill="#0A544F">
     <circle cx="0" cy="0" r="11"/>
     <path d="M-18 26 Q-18 12 0 12 Q18 12 18 26 Z"/>
   </g>
-  <text x="360" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#09544F">Human decision-maker</text>
+  <text x="360" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#0A544F">Human decision-maker</text>
   <text x="360" y="146" text-anchor="middle" font-size="13" fill="#5A6562">Judgement &#183; Accountability &#183; Action</text>
 
   <!-- Divider line (hairline) -->
@@ -25,7 +25,7 @@
   <text x="40" y="222" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">SUPPORTS</text>
 
   <!-- FASTR AI Assistant pill (deep-green, hero element) -->
-  <rect x="220" y="244" width="280" height="62" rx="31" fill="#09544F"/>
+  <rect x="220" y="244" width="280" height="62" rx="31" fill="#0A544F"/>
   <text x="360" y="270" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">FASTR AI Assistant</text>
   <text x="360" y="291" text-anchor="middle" font-size="12" fill="#CAE6E9">Grounded in your data</text>
 
@@ -35,20 +35,20 @@
 
   <!-- Three children, identical light-teal style (no rainbow) -->
   <!-- 1. Interpretation -->
-  <rect x="40" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="140" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Interpretation</text>
+  <rect x="40" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="140" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Interpretation</text>
   <text x="140" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Explains the</text>
   <text x="140" y="425" text-anchor="middle" font-size="12" fill="#5A6562">patterns it sees</text>
 
   <!-- 2. Querying (centered under FASTR) -->
-  <rect x="260" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="360" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Querying</text>
+  <rect x="260" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="360" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Querying</text>
   <text x="360" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Finds and surfaces</text>
   <text x="360" y="425" text-anchor="middle" font-size="12" fill="#5A6562">relevant data</text>
 
   <!-- 3. Outputs -->
-  <rect x="480" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="580" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Outputs</text>
+  <rect x="480" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="580" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Outputs</text>
   <text x="580" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Drafts charts,</text>
   <text x="580" y="425" text-anchor="middle" font-size="12" fill="#5A6562">slides, reports</text>
 </svg>

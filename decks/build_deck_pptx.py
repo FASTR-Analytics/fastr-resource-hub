@@ -32,13 +32,13 @@ RES = REPO / "resources"
 FONT = "Poppins"
 
 # ---- FASTR palette -------------------------------------------------------
-DEEP_GREEN = RGBColor(0x09, 0x54, 0x4F)
+DEEP_GREEN = RGBColor(0x0A, 0x54, 0x4F)
 DARK_GREEN = RGBColor(0x0C, 0x71, 0x6B)
-GREEN = RGBColor(0x1F, 0x9A, 0x9C)
+GREEN = RGBColor(0x1F, 0xA2, 0x9C)
 LIME = RGBColor(0xD0, 0xCB, 0x17)
 NAVY = RGBColor(0x21, 0x56, 0x8C)
-GOLD = RGBColor(0xD8, 0xA8, 0x22)
-PURPLE = RGBColor(0x7A, 0x1F, 0x6E)
+PLUM = RGBColor(0x50, 0x1E, 0x50)  # GFF Purple
+PURPLE = RGBColor(0x50, 0x1E, 0x50)
 INK = RGBColor(0x1A, 0x1F, 0x1E)
 INK2 = RGBColor(0x5A, 0x65, 0x62)
 INK3 = RGBColor(0x97, 0xA0, 0x9D)
@@ -49,8 +49,8 @@ SW, SH = 13.333, 7.5
 LEFT = 0.62
 CW = SW - 2 * LEFT
 
-PILL_COLORS = {"navy": NAVY, "deep_green": DEEP_GREEN, "green": GREEN, "gold": GOLD}
-RC_COLORS = {"navy": NAVY, "deep_green": DEEP_GREEN, "green": GREEN, "gold": GOLD}
+PILL_COLORS = {"navy": NAVY, "deep_green": DEEP_GREEN, "green": GREEN, "gold": PLUM}
+RC_COLORS = {"navy": NAVY, "deep_green": DEEP_GREEN, "green": GREEN, "gold": PLUM}
 
 
 # ---- low-level helpers ---------------------------------------------------
@@ -381,9 +381,13 @@ def s_image(prs, c):
     s = _new(prs)
     by = _title(s, c["title"])
     if c.get("lead"):
-        tb, tf = _tb(s, LEFT, by, CW, 0.75)
+        # ~110 chars per line at 14.5pt across the content width; size the
+        # box to the text so a long lead never runs under the image.
+        lines = max(2, -(-len(c["lead"]) // 110))
+        lh = 0.3 * lines
+        tb, tf = _tb(s, LEFT, by, CW, lh)
         _para(tf, c["lead"], size=14.5, color=INK, first=True, space=0, line=1.2)
-        by += 0.85
+        by += lh + 0.2
     img = RES / c["image"]
     pad = 0.75 if c.get("footer") else 0.45
     max_w, max_h = CW, SH - by - pad
@@ -446,7 +450,7 @@ FR = [
         {"eyebrow": "Établissements", "head": "Enquêtes FOSA", "accent": DEEP_GREEN,
          "text": "L'évaluation des formations sanitaires : disponibilité des services, équipements, personnel.",
          "pill": ("HFA", "deep_green")},
-        {"eyebrow": "Équité", "head": "Enquêtes ménages", "accent": GOLD,
+        {"eyebrow": "Équité", "head": "Enquêtes ménages", "accent": PLUM,
          "text": "Les estimations de couverture par quintile de richesse, issues des enquêtes DHS et MICS.",
          "pill": ("ICEH", "gold")},
     ], "footer": "Des sources qui se complètent : le routinier, le structurel et l'équité, côte à côte."},
@@ -509,7 +513,7 @@ FR = [
          "text": "Plusieurs visualisations sur une page, toujours à jour. Publiables via un lien public : les partenaires les ouvrent dans un navigateur, sans compte FASTR."},
         {"eyebrow": "En réunion", "head": "Présentations", "accent": GREEN,
          "text": "Des diaporamas assemblés dans la plateforme, avec pages de titre et sections. Export vers PowerPoint ou PDF pour une présentation en personne."},
-        {"eyebrow": "À l'écrit", "head": "Rapports", "accent": GOLD,
+        {"eyebrow": "À l'écrit", "head": "Rapports", "accent": PLUM,
          "text": "Des documents narratifs mêlant texte et chiffres en direct. Export vers Word ou PDF pour une lecture complète."},
     ], "footer": "Un même jeu de données alimente les trois. On ne refait pas le travail à chaque format."},
     {"type": "output", "title": "Le fil rouge : des chiffres toujours à jour",
@@ -578,7 +582,7 @@ EN = [
         {"eyebrow": "Facilities", "head": "Facility surveys (HFA)", "accent": DEEP_GREEN,
          "text": "The health facility assessment: service availability, equipment, staffing.",
          "pill": ("HFA", "deep_green")},
-        {"eyebrow": "Equity", "head": "Household surveys", "accent": GOLD,
+        {"eyebrow": "Equity", "head": "Household surveys", "accent": PLUM,
          "text": "Coverage estimates by wealth quintile, drawn from DHS and MICS surveys.",
          "pill": ("ICEH", "gold")},
     ], "footer": "Sources that complement each other: the routine, the structural, and the equity view, side by side."},
@@ -641,7 +645,7 @@ EN = [
          "text": "Several visualizations on one page, always current. Publishable via a public link: partners open them in a browser, with no FASTR account."},
         {"eyebrow": "In the room", "head": "Presentations", "accent": GREEN,
          "text": "Slide decks assembled in the platform, with title and section pages. Export to PowerPoint or PDF for an in-person talk."},
-        {"eyebrow": "In writing", "head": "Reports", "accent": GOLD,
+        {"eyebrow": "In writing", "head": "Reports", "accent": PLUM,
          "text": "Narrative documents blending prose and live figures. Export to Word or PDF for a full read."},
     ], "footer": "One dataset feeds all three. You don't redo the work for each format."},
     {"type": "output", "title": "The through-line: figures always current",
@@ -721,7 +725,7 @@ GOV_EN = [
         {"t": "**Every AI question is logged**: who asked, on which project, with what usage", "bullet": True},
     ]},
     {"type": "image", "title": "Applied to the AI assistant",
-     "lead": "The AI can only see what the signed-in user is permitted to see, and every question is logged. Today that means aggregated results; as facility-level analysis is introduced, **the same permission boundary applies**.",
+     "lead": "The AI sees only what the signed-in user may see, and every question is logged. It receives aggregated figures computed by the platform for that question, never the database. Under Anthropic's commercial terms those figures are **not used to train models** and are **deleted within 30 days**. Facility-level analysis, when introduced, keeps the same permission boundary.",
      "image": "diagrams/gov_ai_boundary.png"},
     {"type": "section", "title": "Costs and ownership"},
     {"type": "image", "title": "Running costs",
@@ -771,6 +775,7 @@ GOV_EN = [
         {"t": "Claude (Anthropic) reached through a **server-side proxy**; the API key never leaves the server", "bullet": True},
         {"t": "Tool calls run **in the user's authenticated session** — the AI holds no permissions of its own", "bullet": True},
         {"t": "Data tools currently return **aggregated metric outputs** (no facility-identifier dimension as of v1.67); planned facility-level access follows the **same session-permission model**", "bullet": True},
+        {"t": "**Anthropic commercial terms**: customer content not used to train models, confidential, deleted within 30 days by default; zero-data-retention agreement and DPA available; data stored in the US", "bullet": True},
         {"t": "**Server-side web search/fetch (Anthropic-hosted) is enabled** in the project chat; every request logged (user, project, model, tokens) with daily and weekly limits", "bullet": True},
     ]},
     {"type": "content", "title": "Data and interoperability", "blocks": [
@@ -829,7 +834,7 @@ GOV_FR = [
         {"t": "**Chaque question posée à l'IA est journalisée** : qui, sur quel projet, avec quel usage", "bullet": True},
     ]},
     {"type": "image", "title": "Application à l'assistant IA",
-     "lead": "L'IA ne peut voir que ce que l'utilisateur connecté est autorisé à voir, et chaque question est journalisée. Aujourd'hui, des résultats agrégés ; l'analyse au niveau des établissements suivra **la même limite de permissions**.",
+     "lead": "L'IA ne voit que ce que l'utilisateur connecté peut voir, et chaque question est journalisée. Elle reçoit des chiffres agrégés, calculés par la plateforme pour cette question, jamais la base de données. Selon les conditions commerciales d'Anthropic, ces chiffres **ne servent pas à entraîner les modèles** et sont **supprimés sous 30 jours**. L'analyse par établissement, une fois introduite, gardera la même limite de permissions.",
      "image": "diagrams_fr/gov_ai_boundary.png"},
     {"type": "section", "title": "Coûts et appropriation"},
     {"type": "image", "title": "Coûts de fonctionnement",
@@ -879,6 +884,7 @@ GOV_FR = [
         {"t": "Claude (Anthropic) atteint via un **proxy côté serveur** ; la clé d'API ne quitte jamais le serveur", "bullet": True},
         {"t": "Les appels d'outils s'exécutent **dans la session authentifiée de l'utilisateur** — l'IA n'a aucune permission propre", "bullet": True},
         {"t": "Outils de données : **sorties métriques agrégées** actuellement (aucune dimension établissement en v1.67) ; l'accès prévu au niveau des établissements suivra le **même modèle de permissions**", "bullet": True},
+        {"t": "**Conditions commerciales d'Anthropic** : contenu client non utilisé pour l'entraînement, confidentiel, supprimé sous 30 jours par défaut ; accord de rétention zéro et DPA disponibles ; données stockées aux États-Unis", "bullet": True},
         {"t": "**Recherche web côté serveur (Anthropic) activée** dans le chat projet ; chaque requête journalisée (utilisateur, projet, modèle, jetons) avec limites quotidiennes et hebdomadaires", "bullet": True},
     ]},
     {"type": "content", "title": "Données et interopérabilité", "blocks": [

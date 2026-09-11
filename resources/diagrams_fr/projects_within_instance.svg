@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380">
   <defs>
     <style>
-      .card { fill: #ffffff; stroke: #1F9A9C; stroke-width: 1.5; }
-      .card-head { fill: #1F9A9C; }
+      .card { fill: #ffffff; stroke: #1FA29C; stroke-width: 1.5; }
+      .card-head { fill: #1FA29C; }
       .card-head-alt { fill: #0C716B; }
       .t-title { font-family: Inter, -apple-system, sans-serif; font-weight: 700; fill: #fff; text-anchor: middle; font-size: 11px; }
       .t-ind { font-family: Inter, -apple-system, sans-serif; font-size: 9px; fill: #555; }
@@ -11,8 +11,8 @@
   </defs>
 
   <!-- Country platform container -->
-  <rect x="20" y="20" width="660" height="340" rx="14" fill="#F8F9FA" stroke="#09544F" stroke-width="2.5"/>
-  <rect x="20" y="20" width="220" height="32" rx="8" fill="#09544F"/>
+  <rect x="20" y="20" width="660" height="340" rx="14" fill="#F8F9FA" stroke="#0A544F" stroke-width="2.5"/>
+  <rect x="20" y="20" width="220" height="32" rx="8" fill="#0A544F"/>
   <text x="130" y="41" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#fff">Plateforme pays</text>
 
   <!-- Subtitle -->
@@ -31,13 +31,13 @@
 
     <!-- Indicators -->
     <text class="t-ind" x="20" y="78">Indicateurs du projet :</text>
-    <circle cx="26" cy="96" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="96" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="99">Prévalence retard de croissance</text>
-    <circle cx="26" cy="114" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="114" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="117">Prévalence émaciation</text>
-    <circle cx="26" cy="132" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="132" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="135">Couverture vitamine A</text>
-    <circle cx="26" cy="150" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="150" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="153">Faible poids de naissance</text>
     <circle cx="26" cy="168" r="3" fill="#CAE6E9"/>
     <text class="t-ind" x="35" y="171" fill="#999">...</text>
@@ -89,13 +89,13 @@
 
     <!-- Indicators -->
     <text class="t-ind" x="20" y="78">Indicateurs du projet :</text>
-    <circle cx="26" cy="96" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="96" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="99">Indicateurs de résultat</text>
-    <circle cx="26" cy="114" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="114" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="117">Indicateurs de processus</text>
-    <circle cx="26" cy="132" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="132" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="135">Marqueurs d'équité</text>
-    <circle cx="26" cy="150" r="3" fill="#1F9A9C"/>
+    <circle cx="26" cy="150" r="3" fill="#1FA29C"/>
     <text class="t-ind" x="35" y="153">Indicateurs de couverture</text>
     <circle cx="26" cy="168" r="3" fill="#CAE6E9"/>
     <text class="t-ind" x="35" y="171" fill="#999">...</text>

@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="103 34 436 188" font-family="'Poppins', sans-serif">
   <defs>
     <style>
-      .cell-reported { fill: #1F9A9C; }
+      .cell-reported { fill: #1FA29C; }
       .cell-missing { fill: #E5E5E5; }
       .axis { font-size: 12px; font-weight: 600; fill: #555; }
       .tick { font-size: 11px; fill: #888; }
       .legend { font-size: 12px; fill: #444; }
-      .big { font-size: 30px; font-weight: 700; fill: #09544F; }
+      .big { font-size: 30px; font-weight: 700; fill: #0A544F; }
       .small { font-size: 11px; fill: #777; }
     </style>
   </defs>

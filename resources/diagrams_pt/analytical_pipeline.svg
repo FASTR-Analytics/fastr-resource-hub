@@ -2,20 +2,20 @@
   <defs>
     <style>
       .box { rx: 10; stroke-width: 2; }
-      .box-assess { fill: #1A90C0; stroke: #21568C; }
-      .box-adjust { fill: #BD5091; stroke: #7A1F6E; }
-      .box-util { fill: #1F9A9C; stroke: #0C716B; }
-      .box-coverage { fill: #D8A822; stroke: #09544F; }
+      .box-assess { fill: #91C2E8; stroke: #21568C; }
+      .box-adjust { fill: #B673A2; stroke: #501E50; }
+      .box-util { fill: #1FA29C; stroke: #0C716B; }
+      .box-coverage { fill: #FFB09F; stroke: #0A544F; }
       .text-white { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
-      .text-dark { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-dark { font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; fill: #0A544F; text-anchor: middle; }
       .text-sub { font-family: Inter, sans-serif; font-size: 10.5px; fill: #ffffff; text-anchor: middle; opacity: 0.9; }
-      .text-sub-dark { font-family: Inter, sans-serif; font-size: 10.5px; fill: #09544F; text-anchor: middle; opacity: 0.8; }
+      .text-sub-dark { font-family: Inter, sans-serif; font-size: 10.5px; fill: #0A544F; text-anchor: middle; opacity: 0.8; }
       .module-label { font-family: Inter, sans-serif; font-size: 9px; fill: #888; text-anchor: middle; font-style: italic; }
-      .arrow { stroke: #1F9A9C; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow { stroke: #1FA29C; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
       .arrow-label { font-family: Inter, sans-serif; font-size: 9.5px; fill: #555; text-anchor: start; font-style: italic; }
     </style>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#1F9A9C"/>
+      <polygon points="0 0, 8 3, 0 6" fill="#1FA29C"/>
     </marker>
   </defs>
 

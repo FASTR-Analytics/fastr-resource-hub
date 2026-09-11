@@ -8,10 +8,12 @@ This system serves two surfaces:
 
 | Surface | Where it lives | Typeface | Primary palette |
 |---|---|---|---|
-| **Workshop decks** (Marp → PDF/PPTX) | `slides/`, `fastr-theme.css` upstream | Poppins | Deep green `#09544F` + lime `#D0CB17` |
+| **Workshop decks** (Marp → PDF/PPTX) | `slides/`, `fastr-theme.css` upstream | Poppins | Deep green `#0A544F` (GFF logo green) + lime `#D0CB17` |
 | **Deck Builder web app** | `ui_kits/web/` | Inter | Navy `#1B365D` + teal `#00A9CE` + orange `#F7941D` |
 
 Both palettes are tokenized in `colors_and_type.css`.
+
+> **GFF brand refresh, September 2026.** Tokens follow the *GFF Branding Guidelines 2026 Edition*: the shared greens use the exact GFF codes (`#00413C` deep, `#0A544F` logo green, `#1FA29C` teal, `#21568C` blue), the warm paper is GFF Tone `#FEF7F1`, and the old gold / coral / sky-blue / purple / orchid accents map to GFF Blush `#FFB09F`, Maroon `#68152B`, Sky `#91C2E8`, Purple `#501E50` and Orchid `#B673A2`. The full GFF palette is exposed as `--gff-*` tokens in `colors_and_type.css`. Lime `#D0CB17` and mid green `#0C716B` come from the FASTR logo itself and are kept. The GFF + World Bank lockup was replaced with the 2026 artwork (weave symbol, new wordmark) under the same file names; the 2025 files sit in `assets/logos/legacy_2025/`. Official logo files should still be requested from the GFF Comms team.
 
 ---
 

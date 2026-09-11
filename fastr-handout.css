@@ -13,13 +13,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-  --fastr-deep-green: #09544F;
+  --fastr-deep-green: #0A544F;
   --fastr-dark-green: #0C716B;
-  --fastr-green: #1F9A9C;
+  --fastr-green: #1FA29C;
   --fastr-lime: #D0CB17;
   --fastr-navy: #21568C;
   --fastr-light-bg: #F4F8F7;
-  --fastr-warm-bg: #FFFBEC;
+  --fastr-warm-bg: #FEF7F1;
   --text-dark: #1F2937;
   --text-medium: #4B5563;
   --text-light: #6B7280;
@@ -358,8 +358,8 @@ td:empty {
 }
 .data-pill-navy       { background: #21568C; }
 .data-pill-deep-green { background: var(--fastr-deep-green); }
-.data-pill-green      { background: #1F9A9C; }
-.data-pill-gold       { background: #D8A822; }
+.data-pill-green      { background: #1FA29C; }
+.data-pill-gold       { background: #FFB09F; }
 
 /* ========================================
    CALLOUT FOOTER

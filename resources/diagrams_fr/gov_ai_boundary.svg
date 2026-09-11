@@ -3,8 +3,8 @@
   <!-- Left: aggregated chart (allowed) -->
   <g transform="translate(40,40)">
     <rect x="0" y="0" width="330" height="150" rx="12" fill="#FFFFFF" stroke="#0C716B" stroke-width="2"/>
-    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="600">Ce que l'utilisateur connecté peut voir</text>
-    <g fill="#1F9A9C">
+    <text x="165" y="28" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16" font-weight="600">Ce que l'utilisateur connecté peut voir</text>
+    <g fill="#1FA29C">
       <rect x="50" y="100" width="30" height="30" rx="3"/>
       <rect x="95" y="80" width="30" height="50" rx="3"/>
       <rect x="140" y="60" width="30" height="70" rx="3"/>
@@ -38,13 +38,13 @@
   </g>
   <!-- AI panel -->
   <g transform="translate(490,40)">
-    <rect x="0" y="0" width="180" height="330" rx="16" fill="#09544F"/>
+    <rect x="0" y="0" width="180" height="330" rx="16" fill="#0A544F"/>
     <text x="90" y="150" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="26" font-weight="700">AI</text>
     <text x="90" y="185" text-anchor="middle" dominant-baseline="central" fill="#CAE6E9" font-size="14">assistant</text>
   </g>
   <g transform="translate(710,40)">
     <rect x="0" y="0" width="220" height="330" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
-    <text x="110" y="44" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Il est aussi…</text>
+    <text x="110" y="44" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="15" font-weight="600">Il est aussi…</text>
     <g fill="#0C716B" font-size="14">
       <text x="20" y="100" dominant-baseline="central">• borné aux permissions</text>
       <text x="28" y="120" dominant-baseline="central">de l'utilisateur</text>

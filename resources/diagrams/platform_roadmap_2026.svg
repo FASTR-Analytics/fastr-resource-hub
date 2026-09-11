@@ -3,17 +3,17 @@
     <style>
       .box { rx: 10; stroke-width: 2; }
       .phase { fill: #E8F4F3; stroke: #0C716B; }
-      .phase-future { fill: #CAE6E9; stroke: #1F9A9C; }
-      .phase-lbl { font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
-      .item { font-family: Inter, sans-serif; font-size: 11px; fill: #09544F; }
-      .timeline { stroke: #09544F; stroke-width: 3; }
-      .dot { fill: #09544F; }
-      .dot-future { fill: #1F9A9C; }
-      .year { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #09544F; text-anchor: middle; }
-      .arrow-line { stroke: #09544F; stroke-width: 3; fill: none; marker-end: url(#arr2); }
+      .phase-future { fill: #CAE6E9; stroke: #1FA29C; }
+      .phase-lbl { font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; fill: #0A544F; }
+      .item { font-family: Inter, sans-serif; font-size: 11px; fill: #0A544F; }
+      .timeline { stroke: #0A544F; stroke-width: 3; }
+      .dot { fill: #0A544F; }
+      .dot-future { fill: #1FA29C; }
+      .year { font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; fill: #0A544F; text-anchor: middle; }
+      .arrow-line { stroke: #0A544F; stroke-width: 3; fill: none; marker-end: url(#arr2); }
     </style>
     <marker id="arr2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#09544F"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0A544F"/>
     </marker>
   </defs>
 
@@ -39,7 +39,7 @@
   <text class="item" x="145" y="125" text-anchor="middle">MoH feedback from 20+ countries</text>
   <text class="item" x="145" y="143" text-anchor="middle">Identify what works well</text>
   <text class="item" x="145" y="161" text-anchor="middle">Prioritize improvements</text>
-  <line x1="120" y1="63" x2="120" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <line x1="120" y1="63" x2="120" y2="80" stroke="#0A544F" stroke-width="1.5"/>
 
   <!-- Phase 2: Learn & refine -->
   <rect class="box phase" x="265" y="80" width="210" height="125"/>
@@ -48,7 +48,7 @@
   <text class="item" x="370" y="143" text-anchor="middle">Clearer interface</text>
   <text class="item" x="370" y="161" text-anchor="middle">Guided workflows</text>
   <text class="item" x="370" y="179" text-anchor="middle">New data sources (LMIS, MPDSR)</text>
-  <line x1="330" y1="63" x2="330" y2="80" stroke="#09544F" stroke-width="1.5"/>
+  <line x1="330" y1="63" x2="330" y2="80" stroke="#0A544F" stroke-width="1.5"/>
 
   <!-- Phase 3: Scale & automate -->
   <rect class="box phase-future" x="490" y="80" width="270" height="125"/>
@@ -57,9 +57,9 @@
   <text class="item" x="625" y="143" text-anchor="middle">Integrated cross-system data</text>
   <text class="item" x="625" y="161" text-anchor="middle">Country self-service configuration</text>
   <text class="item" x="625" y="179" text-anchor="middle">Demand-side data integration</text>
-  <line x1="540" y1="63" x2="540" y2="80" stroke="#1F9A9C" stroke-width="1.5"/>
+  <line x1="540" y1="63" x2="540" y2="80" stroke="#1FA29C" stroke-width="1.5"/>
 
   <!-- Bottom bar: guiding principle -->
-  <rect class="box" x="40" y="230" width="720" height="40" fill="#09544F" stroke="#073B38" rx="10"/>
+  <rect class="box" x="40" y="230" width="720" height="40" fill="#0A544F" stroke="#073B38" rx="10"/>
   <text font-family="Inter, sans-serif" font-size="14px" font-weight="600" fill="#fff" text-anchor="middle" x="400" y="255">Country teams shape the roadmap — built from real user feedback</text>
 </svg>

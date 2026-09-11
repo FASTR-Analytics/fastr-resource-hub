@@ -12,23 +12,39 @@
 
 :root {
   /* ========================================
+     GFF BRAND PALETTE — 2026 guidelines (exact codes)
+     ======================================== */
+  --gff-deep-green: #00413C;
+  --gff-logo-green: #0A544F;
+  --gff-teal:       #1FA29C;
+  --gff-blue:       #21568C;
+  --gff-tone:       #FEF7F1;
+  --gff-pink:       #FFE2D9;
+  --gff-sky:        #91C2E8;
+  --gff-navy:       #2D2C63;
+  --gff-blush:      #FFB09F;
+  --gff-orchid:     #B673A2;
+  --gff-purple:     #501E50;
+  --gff-maroon:     #68152B;
+
+  /* ========================================
      PRIMARY COLORS
      ======================================== */
-  --fastr-deep-green: #09544F;
+  --fastr-deep-green: #0A544F;
   --fastr-dark-green: #0C716B;
-  --fastr-green: #1F9A9C;
+  --fastr-green: #1FA29C;
   --fastr-lime: #D0CB17;
   --fastr-navy: #21568C;
-  --fastr-blue: #1A90C0;
+  --fastr-blue: #21568C;
   --fastr-light-blue: #CAE6E9;
 
   /* ========================================
      SECONDARY COLORS
      ======================================== */
-  --fastr-gold: #D8A822;
-  --fastr-purple: #7A1F6E;
-  --fastr-orchid: #BD5091;
-  --fastr-coral: #FF6462;
+  --fastr-gold: #FFB09F;
+  --fastr-purple: #501E50;
+  --fastr-orchid: #B673A2;
+  --fastr-coral: #68152B;
 
   /* ========================================
      THEME ALIASES
@@ -55,8 +71,8 @@
   --ink: #1A1F1E;
   --ink-2: #5A6562;
   --ink-3: #97A09D;
-  --paper-2: #F6F5EF;
-  --green-900: #063D39;
+  --paper-2: #FEF7F1;
+  --green-900: #00413C;
   --rule-hairline: #E4E7E5;
 }
 

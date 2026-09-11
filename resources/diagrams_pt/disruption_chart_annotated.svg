@@ -3,8 +3,8 @@
     <style>
       text { font-family: Inter, sans-serif; }
       .axis-label { font-size: 11px; fill: #666; }
-      .title { font-size: 14px; font-weight: 700; fill: #09544F; }
-      .annotation { font-size: 11px; fill: #09544F; font-weight: 600; }
+      .title { font-size: 14px; font-weight: 700; fill: #0A544F; }
+      .annotation { font-size: 11px; fill: #0A544F; font-weight: 600; }
       .annotation-light { font-size: 10px; fill: #666; font-style: italic; }
     </style>
   </defs>
@@ -29,7 +29,7 @@
 
   <!-- Expected line (dashed) -->
   <path d="M100,220 L180,190 L260,210 L340,180 L420,170 L500,160 L580,175 L660,155"
-        stroke="#09544F" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+        stroke="#0A544F" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
 
   <!-- Disruption area (red): the band between expected (upper edge) and the
        lower actual line, where observed runs below expected (Q4 2024 → Q3 2025).
@@ -44,24 +44,24 @@
 
   <!-- Actual line (solid) -->
   <path d="M100,200 L180,160 L260,180 L340,180 L420,260 L500,250 L580,240 L660,160"
-        stroke="#09544F" stroke-width="2.5" fill="none"/>
+        stroke="#0A544F" stroke-width="2.5" fill="none"/>
 
   <!-- Dots on actual line -->
-  <circle cx="100" cy="200" r="4" fill="#09544F"/>
-  <circle cx="180" cy="160" r="4" fill="#09544F"/>
-  <circle cx="260" cy="180" r="4" fill="#09544F"/>
-  <circle cx="340" cy="180" r="4" fill="#09544F"/>
+  <circle cx="100" cy="200" r="4" fill="#0A544F"/>
+  <circle cx="180" cy="160" r="4" fill="#0A544F"/>
+  <circle cx="260" cy="180" r="4" fill="#0A544F"/>
+  <circle cx="340" cy="180" r="4" fill="#0A544F"/>
   <circle cx="420" cy="260" r="4" fill="#C53030"/>
   <circle cx="500" cy="250" r="4" fill="#C53030"/>
   <circle cx="580" cy="240" r="4" fill="#C53030"/>
-  <circle cx="660" cy="160" r="4" fill="#09544F"/>
+  <circle cx="660" cy="160" r="4" fill="#0A544F"/>
 
   <!-- Legend -->
-  <line x1="100" y1="355" x2="130" y2="355" stroke="#09544F" stroke-width="2.5"/>
-  <circle cx="115" cy="355" r="3" fill="#09544F"/>
+  <line x1="100" y1="355" x2="130" y2="355" stroke="#0A544F" stroke-width="2.5"/>
+  <circle cx="115" cy="355" r="3" fill="#0A544F"/>
   <text class="axis-label" x="135" y="359">Observado (real)</text>
 
-  <line x1="280" y1="355" x2="310" y2="355" stroke="#09544F" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="280" y1="355" x2="310" y2="355" stroke="#0A544F" stroke-width="2" stroke-dasharray="6,4"/>
   <text class="axis-label" x="315" y="359">Previsto (previsto pelo FASTR)</text>
 
   <rect x="510" y="349" width="14" height="14" fill="#FDE8E8" stroke="#C53030" stroke-width="0.5" rx="2"/>

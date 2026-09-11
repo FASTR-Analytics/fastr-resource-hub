@@ -5,13 +5,13 @@
   <text x="40" y="34" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">DECIDE</text>
 
   <!-- Human card (top, big, white with deep-green border) -->
-  <rect x="180" y="44" width="360" height="116" rx="14" fill="#ffffff" stroke="#09544F" stroke-width="2"/>
+  <rect x="180" y="44" width="360" height="116" rx="14" fill="#ffffff" stroke="#0A544F" stroke-width="2"/>
   <!-- Human icon: head + shoulders, deep-green -->
-  <g transform="translate(360, 70)" fill="#09544F">
+  <g transform="translate(360, 70)" fill="#0A544F">
     <circle cx="0" cy="0" r="11"/>
     <path d="M-18 26 Q-18 12 0 12 Q18 12 18 26 Z"/>
   </g>
-  <text x="360" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#09544F">Decisor humano</text>
+  <text x="360" y="124" text-anchor="middle" font-size="18" font-weight="700" fill="#0A544F">Decisor humano</text>
   <text x="360" y="146" text-anchor="middle" font-size="13" fill="#5A6562">Julgamento &#183; Responsabilidade &#183; Ação</text>
 
   <!-- Divider line (hairline) -->
@@ -25,7 +25,7 @@
   <text x="40" y="222" font-size="11" font-weight="700" fill="#5A6562" letter-spacing="1.4">APOIOS</text>
 
   <!-- FASTR AI Assistant pill (deep-green, hero element) -->
-  <rect x="220" y="244" width="280" height="62" rx="31" fill="#09544F"/>
+  <rect x="220" y="244" width="280" height="62" rx="31" fill="#0A544F"/>
   <text x="360" y="270" text-anchor="middle" font-size="17" font-weight="800" fill="#ffffff" letter-spacing="0.3">Assistente de IA FASTR</text>
   <text x="360" y="291" text-anchor="middle" font-size="12" fill="#CAE6E9">Baseado nos seus dados</text>
 
@@ -35,20 +35,20 @@
 
   <!-- Three children, identical light-teal style (no rainbow) -->
   <!-- 1. Interpretation -->
-  <rect x="40" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="140" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Interpretação</text>
+  <rect x="40" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="140" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Interpretação</text>
   <text x="140" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Explica o</text>
   <text x="140" y="425" text-anchor="middle" font-size="12" fill="#5A6562">padrões que vê</text>
 
   <!-- 2. Querying (centered under FASTR) -->
-  <rect x="260" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="360" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Consulta</text>
+  <rect x="260" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="360" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Consulta</text>
   <text x="360" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Achados e superfícies</text>
   <text x="360" y="425" text-anchor="middle" font-size="12" fill="#5A6562">dados relevantes</text>
 
   <!-- 3. Outputs -->
-  <rect x="480" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1F9A9C" stroke-width="1.5"/>
-  <text x="580" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#09544F">Saídas</text>
+  <rect x="480" y="356" width="200" height="86" rx="10" fill="#E8F4F3" stroke="#1FA29C" stroke-width="1.5"/>
+  <text x="580" y="386" text-anchor="middle" font-size="15" font-weight="700" fill="#0A544F">Saídas</text>
   <text x="580" y="409" text-anchor="middle" font-size="12" fill="#5A6562">Rascunhos de gráficos,</text>
   <text x="580" y="425" text-anchor="middle" font-size="12" fill="#5A6562">diapositivos, relatórios</text>
 </svg>

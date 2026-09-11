@@ -35,11 +35,11 @@ REPO = Path(__file__).resolve().parent.parent
 RES = REPO / "resources"
 FONT = "Poppins"
 
-DEEP_GREEN = RGBColor(0x09, 0x54, 0x4F)
-GREEN = RGBColor(0x1F, 0x9A, 0x9C)
+DEEP_GREEN = RGBColor(0x0A, 0x54, 0x4F)
+GREEN = RGBColor(0x1F, 0xA2, 0x9C)
 LIME = RGBColor(0xD0, 0xCB, 0x17)
 NAVY = RGBColor(0x21, 0x56, 0x8C)
-GOLD = RGBColor(0xD8, 0xA8, 0x22)
+PLUM = RGBColor(0x50, 0x1E, 0x50)  # GFF Purple
 INK = RGBColor(0x1A, 0x1F, 0x1E)
 INK2 = RGBColor(0x5A, 0x65, 0x62)
 INK3 = RGBColor(0x97, 0xA0, 0x9D)
@@ -49,9 +49,9 @@ EMU_IN = 914400
 SW, SH = 13.333, 7.5
 LEFT = 0.62
 CW = SW - 2 * LEFT
-STEP_COLORS = [NAVY, DEEP_GREEN, GREEN, GOLD]
+STEP_COLORS = [NAVY, DEEP_GREEN, GREEN, PLUM]
 TINT = {NAVY: RGBColor(0xED, 0xF1, 0xF7), DEEP_GREEN: RGBColor(0xE8, 0xF1, 0xF0),
-        GREEN: RGBColor(0xE9, 0xF4, 0xF4), GOLD: RGBColor(0xF9, 0xF3, 0xE4)}
+        GREEN: RGBColor(0xE9, 0xF4, 0xF4), PLUM: RGBColor(0xF0, 0xEA, 0xF0)}
 CENTER = PP_ALIGN.CENTER
 MID = MSO_ANCHOR.MIDDLE
 
@@ -427,13 +427,13 @@ def s_cascade(prs, c):
     _blocks(lf, [{"t": c["lead"], "size": 12.5, "space": 0, "line": 1.2}])
     ey = by + 0.98
     ew = 4.1
-    _rect(s, LEFT, ey, ew, 0.52, fill=None, line=GOLD, line_w=1.25)
-    _rect(s, LEFT, ey, 0.06, 0.52, fill=GOLD)
+    _rect(s, LEFT, ey, ew, 0.52, fill=None, line=PLUM, line_w=1.25)
+    _rect(s, LEFT, ey, 0.06, 0.52, fill=PLUM)
     _, ef = _tb(s, LEFT + 0.24, ey, ew - 0.4, 0.52)
     ef.vertical_anchor = MID
     _para(ef, c["entry"], size=11, color=INK, first=True, space=0, line=1.12)
     _, df = _tb(s, LEFT + 0.55, ey + 0.52, 0.5, 0.36)
-    _para(df, "↓", size=15, color=GOLD, first=True, bold=True, align=CENTER, space=0)
+    _para(df, "↓", size=15, color=PLUM, first=True, bold=True, align=CENTER, space=0)
     nodes, ops = c["nodes"], c["ops"]
     n = len(nodes)
     aw = 0.82
@@ -490,13 +490,13 @@ def s_projection(prs, c):
     lastx, lastv = 4, refs[4]
     proj = [lastv, lastv + (hmis[5] - hmis[4]), lastv + (hmis[6] - hmis[4])]
     for i in range(2):
-        _seg(s, xs[lastx + i], Y(proj[i]), xs[lastx + i + 1], Y(proj[i + 1]), GOLD, w=2.4, dash=True)
+        _seg(s, xs[lastx + i], Y(proj[i]), xs[lastx + i + 1], Y(proj[i + 1]), PLUM, w=2.4, dash=True)
     _seg(s, xs[lastx], Y(refs[4]) + 0.07, xs[lastx], Y(hmis[4]) - 0.02, INK3, w=1.0, dash=True)
     _, gf = _tb(s, xs[lastx] + 0.06, (Y(refs[4]) + Y(hmis[4])) / 2 - 0.11, 1.35, 0.3)
     _para(gf, "gap retained", size=8, color=INK2, first=True, italic=True, space=0)
     ly = cy + ch + 0.12
     legend = [("Reference estimates (points)", NAVY), ("HMIS-derived coverage", GREEN),
-              ("Projection", GOLD)]
+              ("Projection", PLUM)]
     lx = cx
     for label, col in legend:
         _rect(s, lx, ly + 0.07, 0.26, 0.05, fill=col)
@@ -837,7 +837,7 @@ CONTENT = [
      ],
      "cards": [
         ("The anchor indicator",
-         "Suppose ANC1 is the anchor: pregnancies are the ANC1 count divided by ANC1 survey coverage. Dividing the ANC1 count back by that denominator just returns the survey value, since the count cancels. The anchor's own series is still produced, but it only returns the survey value, whereas every other indicator yields an independent estimate.", GOLD),
+         "Suppose ANC1 is the anchor: pregnancies are the ANC1 count divided by ANC1 survey coverage. Dividing the ANC1 count back by that denominator just returns the survey value, since the count cancels. The anchor's own series is still produced, but it only returns the survey value, whereas every other indicator yields an independent estimate.", PLUM),
      ],
      "notes": "Where UN WPP data are missing or no years overlap, no chain is proposed automatically and the affected outputs are reported as unavailable. Agreement between chain-based coverage and survey values is computed as a diagnostic but does not enter the proposal."},
 

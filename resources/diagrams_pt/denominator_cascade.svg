@@ -2,14 +2,14 @@
   <defs>
     <style>
       /* FASTR Brand Colors */
-      .box-main { fill: #D8A822; stroke: #09544F; stroke-width: 2; }
-      .box-dpt { fill: #1F9A9C; stroke: #09544F; stroke-width: 2; }
-      .box-measles { fill: #1F9A9C; stroke: #09544F; stroke-width: 2; }
-      .box-adjustment { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
-      .box-formula { fill: #0C716B; stroke: #09544F; stroke-width: 2; }
+      .box-main { fill: #FFB09F; stroke: #0A544F; stroke-width: 2; }
+      .box-dpt { fill: #1FA29C; stroke: #0A544F; stroke-width: 2; }
+      .box-measles { fill: #1FA29C; stroke: #0A544F; stroke-width: 2; }
+      .box-adjustment { fill: #0C716B; stroke: #0A544F; stroke-width: 2; }
+      .box-formula { fill: #0C716B; stroke: #0A544F; stroke-width: 2; }
 
       .text-white { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
-      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #09544F; text-anchor: middle; }
+      .text-dark { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #0A544F; text-anchor: middle; }
       .text-teal { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
       .text-formula { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #ffffff; text-anchor: middle; }
 
@@ -17,8 +17,8 @@
       .arrow-back { stroke: #FF6462; stroke-width: 2; fill: none; marker-end: url(#arrowhead-coral); stroke-dasharray: 6,3; }
       .arrow-down { stroke: #0C716B; stroke-width: 2; fill: none; marker-end: url(#arrowhead-teal-small); }
 
-      .default-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
-      .default-value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #09544F; }
+      .default-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #0A544F; }
+      .default-value { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #0A544F; }
       .footnote { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #666; }
     </style>
     <marker id="arrowhead-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">

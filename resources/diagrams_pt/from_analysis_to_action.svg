@@ -3,48 +3,48 @@
   <!-- Step 1: Analyze -->
   <g transform="translate(50, 90)">
     <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
-    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Analisar</text>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A544F">Analisar</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">DQA, utilização,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">estimativas de cobertura</text>
   </g>
 
   <!-- Arrow 1→2 -->
-  <g fill="#1F9A9C">
-    <line x1="195" y1="130" x2="225" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+  <g fill="#1FA29C">
+    <line x1="195" y1="130" x2="225" y2="130" stroke="#1FA29C" stroke-width="2.5"/>
     <polygon points="225,125 235,130 225,135"/>
   </g>
 
   <!-- Step 2: Identify -->
   <g transform="translate(240, 90)">
     <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
-    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Identificar</text>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A544F">Identificar</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Tendências, lacunas,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">prioridades</text>
   </g>
 
   <!-- Arrow 2→3 -->
-  <g fill="#1F9A9C">
-    <line x1="385" y1="130" x2="415" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+  <g fill="#1FA29C">
+    <line x1="385" y1="130" x2="415" y2="130" stroke="#1FA29C" stroke-width="2.5"/>
     <polygon points="415,125 425,130 415,135"/>
   </g>
 
   <!-- Step 3: Investigate -->
   <g transform="translate(430, 90)">
     <rect width="140" height="80" rx="12" fill="#E8F4F3" stroke="#0C716B" stroke-width="1.5"/>
-    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#09544F">Investigar</text>
+    <text x="70" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#0A544F">Investigar</text>
     <text x="70" y="55" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Causas profundas,</text>
     <text x="70" y="67" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">contexto, qualidade dos dados</text>
   </g>
 
   <!-- Arrow 3→4 -->
-  <g fill="#1F9A9C">
-    <line x1="575" y1="130" x2="605" y2="130" stroke="#1F9A9C" stroke-width="2.5"/>
+  <g fill="#1FA29C">
+    <line x1="575" y1="130" x2="605" y2="130" stroke="#1FA29C" stroke-width="2.5"/>
     <polygon points="605,125 615,130 605,135"/>
   </g>
 
   <!-- Step 4: Act -->
   <g transform="translate(620, 90)">
-    <rect width="80" height="80" rx="12" fill="#09544F" stroke="#073B38" stroke-width="1.5"/>
+    <rect width="80" height="80" rx="12" fill="#0A544F" stroke="#073B38" stroke-width="1.5"/>
     <text x="40" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white">Ato</text>
     <text x="40" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">Decidir &amp;</text>
     <text x="40" y="69" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#CAE6E9">responder</text>

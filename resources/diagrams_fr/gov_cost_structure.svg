@@ -2,33 +2,33 @@
   <!-- Three cost blocks, utility-bill analogy -->
   <g transform="translate(40,40)">
     <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
-    <rect x="0" y="0" width="270" height="56" rx="14" fill="#09544F"/>
-    <rect x="0" y="28" width="270" height="28" fill="#09544F"/>
+    <rect x="0" y="0" width="270" height="56" rx="14" fill="#0A544F"/>
+    <rect x="0" y="28" width="270" height="28" fill="#0A544F"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Hébergement</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Montant annuel fixe</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="15" font-weight="600">Montant annuel fixe</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Un montant mensuel fixe</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">pour le serveur du pays</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ 500–800 USD / an</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16" font-weight="700">≈ 500–800 USD / an</text>
   </g>
   <g transform="translate(345,40)">
     <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
     <rect x="0" y="0" width="270" height="56" rx="14" fill="#0C716B"/>
     <rect x="0" y="28" width="270" height="28" fill="#0C716B"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Assistant IA</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Facturé à l'usage</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="15" font-weight="600">Facturé à l'usage</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Au compteur — vous ne payez</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">que ce qui est utilisé</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ 350 USD / mois</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16" font-weight="700">≈ 350 USD / mois</text>
   </g>
   <g transform="translate(650,40)">
     <rect x="0" y="0" width="270" height="240" rx="14" fill="#E8F4F3" stroke="#0C716B" stroke-width="2"/>
-    <rect x="0" y="0" width="270" height="56" rx="14" fill="#1F9A9C"/>
-    <rect x="0" y="28" width="270" height="28" fill="#1F9A9C"/>
+    <rect x="0" y="0" width="270" height="56" rx="14" fill="#1FA29C"/>
+    <rect x="0" y="28" width="270" height="28" fill="#1FA29C"/>
     <text x="135" y="28" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="18" font-weight="600">Personnes</text>
-    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="15" font-weight="600">Partagée entre pays</text>
+    <text x="135" y="92" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="15" font-weight="600">Partagée entre pays</text>
     <text x="135" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">Mises à jour, supervision,</text>
     <text x="135" y="146" text-anchor="middle" dominant-baseline="central" fill="#0C716B" font-size="14">sauvegardes, appui aux utilisateurs</text>
-    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#09544F" font-size="16" font-weight="700">≈ 7–10 k USD / an, partagé</text>
+    <text x="135" y="196" text-anchor="middle" dominant-baseline="central" fill="#0A544F" font-size="16" font-weight="700">≈ 7–10 k USD / an, partagé</text>
   </g>
   <text x="480" y="322" text-anchor="middle" fill="#0C716B" font-size="16" font-style="italic">Estimations de planification, prix 2026 — ni licences ni frais par utilisateur</text>
 </svg>

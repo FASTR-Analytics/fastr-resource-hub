@@ -4,7 +4,7 @@
   <line x1="96" y1="130" x2="864" y2="130" stroke="#CAE6E9" stroke-width="3" stroke-dasharray="8,4"/>
 
   <!-- Flow arrows -->
-  <g fill="#1F9A9C">
+  <g fill="#1FA29C">
     <polygon points="248,125 258,130 248,135"/>
     <polygon points="440,125 450,130 440,135"/>
     <polygon points="632,125 642,130 632,135"/>
@@ -20,8 +20,8 @@
       <path d="M -18 0 C -18 4 -9 7 0 7 C 9 7 18 4 18 0" opacity="0.6"/>
     </g>
   </g>
-  <text x="96" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Dados</text>
-  <text x="96" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Gestão</text>
+  <text x="96" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Dados</text>
+  <text x="96" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Gestão</text>
   <text x="96" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Importar listas de instalações</text>
   <text x="96" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e dados de indicadores</text>
   <text x="96" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">do DHIS2 ou ficheiros</text>
@@ -35,8 +35,8 @@
       <line x1="6" y1="-16" x2="-6" y2="16"/>
     </g>
   </g>
-  <text x="288" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Dados</text>
-  <text x="288" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Análise</text>
+  <text x="288" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Dados</text>
+  <text x="288" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Análise</text>
   <text x="288" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Executar módulos estatísticos</text>
   <text x="288" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">para avaliação da qualidade</text>
   <text x="288" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e ajustamento</text>
@@ -49,7 +49,7 @@
       <circle cx="20" cy="-14" r="3" fill="#0C716B"/>
     </g>
   </g>
-  <text x="480" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Visualização</text>
+  <text x="480" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Visualização</text>
   <text x="480" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Explorar resultados com</text>
   <text x="480" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">gráficos interactivos</text>
   <text x="480" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e tabelas</text>
@@ -65,7 +65,7 @@
       <line x1="-8" y1="12" x2="3" y2="12"/>
     </g>
   </g>
-  <text x="672" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Relatórios</text>
+  <text x="672" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Relatórios</text>
   <text x="672" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Redigir um relatório e</text>
   <text x="672" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">exportar os resultados para</text>
   <text x="672" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">PowerPoint ou PDF</text>
@@ -82,7 +82,7 @@
       <path d="M 8 11 C 8 6 11 3 16 3 C 21 3 24 6 24 11" opacity="0.5"/>
     </g>
   </g>
-  <text x="864" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Colaboração</text>
+  <text x="864" y="202" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Colaboração</text>
   <text x="864" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Trabalhar em conjunto com</text>
   <text x="864" y="243" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">a sua equipa em</text>
   <text x="864" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">projectos partilhados</text>
@@ -105,7 +105,7 @@
       <circle cx="0" cy="0" r="3" fill="#8B5E8B"/>
     </g>
   </g>
-  <text x="480" y="410" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#09544F">Assistente de IA</text>
+  <text x="480" y="410" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Assistente de IA</text>
   <text x="480" y="430" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">Obter ajuda para interpretar os resultados</text>
   <text x="480" y="443" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#555">e compreender os seus dados</text>
 
