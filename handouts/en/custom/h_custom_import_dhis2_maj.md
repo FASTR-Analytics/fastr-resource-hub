@@ -103,7 +103,7 @@ The wizard opens. It has five steps: **Credentials**, **Indicators**, **Time**, 
 
    ![h:170](../../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
 
-The import runs in the background — from a few minutes to much longer, depending on the window and the number of indicators. The **History** tab of the Imports page tells you when it is finished. **Wait for it to finish before move 2**: a package generated too early would compute on the old data.
+The import runs in the background — from a few minutes to much longer, depending on the window and the number of indicators. The **History** tab of the Imports page tells you when it is finished. **Wait for it to finish before move 2**: a package generated too early would compute on the old data — the generation wizard blocks HMIS data while an import is still running, so you can't skip ahead by mistake.
 
 ---
 

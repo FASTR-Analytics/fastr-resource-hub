@@ -103,7 +103,7 @@ L'assistant s'ouvre. Il compte cinq étapes : **Identifiants**, **Indicateurs**,
 
    ![h:170](../../../resources/screenshots/dhis2_import_v2/08_wizard_lancer.png)
 
-L'importation tourne en arrière-plan — de quelques minutes à beaucoup plus, selon la fenêtre et le nombre d'indicateurs. L'onglet **Historique** de la page Importations vous dit quand elle est terminée. **Attendez qu'elle soit finie avant de passer au geste 2** : un paquet généré trop tôt calculerait sur les anciennes données.
+L'importation tourne en arrière-plan — de quelques minutes à beaucoup plus, selon la fenêtre et le nombre d'indicateurs. L'onglet **Historique** de la page Importations vous dit quand elle est terminée. **Attendez qu'elle soit finie avant de passer au geste 2** : un paquet généré trop tôt calculerait sur les anciennes données — l'assistant de génération bloque les données HMIS tant qu'une importation est en cours, impossible donc de brûler cette étape par erreur.
 
 ---
 
