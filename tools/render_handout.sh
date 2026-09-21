@@ -44,11 +44,14 @@ else
   MARP=(npx -y @marp-team/marp-cli)
 fi
 
+# Marp reads markdown from stdin whenever stdin is not a TTY and, if that stream
+# is open but idle (e.g. a shell whose stdin is a pipe, or right after a heredoc),
+# it waits for EOF forever instead of rendering the file. Always detach stdin.
 "${MARP[@]}" "$INPUT" \
   --theme-set "$THEME" \
   --pdf \
   --allow-local-files \
-  -o "$OUTPUT"
+  -o "$OUTPUT" < /dev/null
 
 # Marp silently runs content past the page edge instead of erroring, so check the
 # rendered PDF here too — not just in build_handout_pdfs.py. Most handouts are
@@ -56,5 +59,5 @@ fi
 # Warn but don't fail: a mid-edit render is often expected to be over-long.
 CHECKER="$REPO_ROOT/tools/check_handout_overflow.py"
 if [[ "${SKIP_OVERFLOW_CHECK:-}" != "1" && -f "$CHECKER" ]]; then
-  python3 "$CHECKER" "$OUTPUT" --quiet || true
+  python3 "$CHECKER" "$OUTPUT" --quiet < /dev/null || true
 fi

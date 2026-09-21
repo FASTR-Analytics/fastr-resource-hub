@@ -165,6 +165,7 @@ def _render_toc_pdf(title: str, footer: str, sections: list[dict], page_offsets:
         ],
         cwd=REPO,
         capture_output=True, text=True,
+        stdin=subprocess.DEVNULL,  # marp waits on an open non-TTY stdin forever
     )
     if result.returncode != 0:
         sys.stderr.write(result.stdout + "\n" + result.stderr + "\n")
