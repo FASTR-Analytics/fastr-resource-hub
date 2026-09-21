@@ -117,6 +117,43 @@ Dans DHIS2, un même élément est souvent découpé en sous-groupes. Ces décou
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+## Dénombrement ou taux ? Les deux familles d'indicateurs
+
+| | **Dénombrement** | **Taux** |
+|---|---|---|
+| Ce que c'est | Un nombre de services par établissement et par mois : CPN1, accouchements, doses BCG | Un rapport entre deux chiffres : CPN4 / CPN1, accouchements / grossesses attendues |
+| Types dans FASTR | **Élément DHIS2**, **Téléversé**, **Somme** | **Calculé** |
+| D'où viennent les chiffres | Téléchargés depuis DHIS2 (étape 4) | Calculés par FASTR à partir d'autres indicateurs, rien à télécharger |
+| Qualité des données | Vérifiés et ajustés par les modules de qualité | Calculés **après** l'ajustement, sur les totaux agrégés |
+| Format | Toujours un nombre | Nombre, **pourcentage** ou taux pour 10 000, au choix |
+
+> **Règle simple.** Tout ce qui se compte se télécharge (étapes 1 à 4). Tout ce qui se divise se calcule : créez-le avec **Créer**, il n'a pas besoin d'importation, seulement d'un nouveau paquet de résultats (étape 5).
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+## Créer un taux (indicateur calculé)
+
+1. Dans la liste des indicateurs, cliquez sur **Créer**.
+2. Choisissez le type **Calculé**.
+3. Donnez un **ID** et un **libellé**, mêmes règles qu'à l'étape 3.
+4. Écrivez la **formule** avec les ID des autres indicateurs et `+ - * /`, par exemple `anc4 / anc1`. Les boutons **Insérer un indicateur** et **Insérer une population** écrivent les ID à votre place.
+5. Choisissez le **format** : **Pourcentage** pour un taux de 0 à 100 %.
+6. Cliquez sur **Sauvegarder**.
+
+![w:400](../../../resources/screenshots/indicateurs_v2/07_creer_calcule.png)
+
+Le message orange « Ne peut pas être calculé : … n'a aucune donnée » veut dire qu'un ingrédient de la formule n'a pas encore été téléchargé. Vous pouvez enregistrer quand même ; le taux se calculera dès que les données seront là.
+
+> **Un dénominateur de population ?** Pour un taux de couverture (accouchements / grossesses attendues), la formule divise par un **terme de population**, par exemple `delivery / population_pregnancies`. Ces termes viennent de la page **Population** de l'instance ; s'ils ne sont pas renseignés, l'indicateur affiche « aucune donnée » et ne se calcule pas.
+
+**Deux cas fréquents.** Un indicateur DHIS2 qui est déjà une formule dans DHIS2 : ajoutez-le avec **Ajouter depuis DHIS2**, FASTR crée ses ingrédients et l'indicateur calculé d'un coup. Deux sous-groupes à additionner : créez une **Somme**, pas un calculé.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 <h2 class="step-h"><span class="step-n">4</span><span>Télécharger les données</span></h2>
 
 Créer l'indicateur ne télécharge **aucun chiffre**. FASTR sait maintenant qu'il existe ; il faut aller chercher ses données dans DHIS2.
