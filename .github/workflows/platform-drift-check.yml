@@ -17,6 +17,11 @@ on:
   schedule:
     - cron: '0 6 * * 1'   # Mondays 06:00 UTC
   workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Re-run the Claude triage on an existing drift issue (skips the upstream check)"
+        required: false
+        default: ""
 
 permissions:
   contents: write   # to push the updated state file back to main
@@ -28,6 +33,7 @@ concurrency:
 
 jobs:
   check:
+    if: github.event.inputs.issue_number == ''
     runs-on: ubuntu-latest
     outputs:
       issue_number: ${{ steps.drift.outputs.issue_number }}
@@ -76,8 +82,10 @@ jobs:
 
   triage:
     needs: check
-    if: needs.check.outputs.issue_number != ''
+    if: always() && (needs.check.outputs.issue_number != '' || github.event.inputs.issue_number != '')
     runs-on: ubuntu-latest
+    env:
+      TRIAGE_ISSUE: ${{ github.event.inputs.issue_number || needs.check.outputs.issue_number }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -95,12 +103,12 @@ jobs:
         if: steps.gate.outputs.enabled == 'true'
         uses: anthropics/claude-code-action@v1
         env:
-          ISSUE_NUMBER: ${{ needs.check.outputs.issue_number }}
+          ISSUE_NUMBER: ${{ env.TRIAGE_ISSUE }}
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
-            Triage issue #${{ needs.check.outputs.issue_number }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first). Fetch the issue body once with `gh issue view ${{ needs.check.outputs.issue_number }} --json body -q .body`. You have a hard budget of about 60 tool calls: batch your greps (one Grep with alternation per area), do not list directories or open screenshots, and post the comment before the budget runs out even if some entries are left unchecked (say so in "Not affected").
+            Triage issue #${{ env.TRIAGE_ISSUE }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first). Fetch the issue body once with `gh issue view ${{ env.TRIAGE_ISSUE }} --json body -q .body`. You have a hard budget of about 60 tool calls: batch your greps (one Grep with alternation per area), do not list directories or open screenshots, and post the comment before the budget runs out even if some entries are left unchecked (say so in "Not affected").
           claude_args: |
             --model claude-sonnet-5
             --max-turns 80
