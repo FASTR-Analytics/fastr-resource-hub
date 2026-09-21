@@ -14,9 +14,9 @@ footer: "FASTR · Configuração da instância · Facilitador"
 
 ## Objetivo
 
-A Configuração da instância é a sequência que liga os dados DHIS2 de um país a uma instância FASTR. Os participantes importam a estrutura de unidades, definem e mapeiam os indicadores, extraem os dados do HMIS, e verificam o resultado. Todas as atividades posteriores da formação assentam nos dados carregados aqui, por isso o módulo é um pré-requisito e não um tema em si.
+A Configuração da instância é a sequência que liga os dados DHIS2 de um país a uma instância FASTR. Os participantes importam a estrutura de unidades, adicionam os indicadores, extraem os dados do HMIS, e verificam o resultado. Todas as atividades posteriores da formação assentam nos dados carregados aqui, por isso o módulo é um pré-requisito e não um tema em si.
 
-As cinco atividades correm por uma **ordem estrita**: cada passo depende do anterior, e os erros propagam-se — um mapeamento de indicador errado no passo 3 reaparece como um número errado no passo 5. No final, cada equipa deve ter uma instância verificada cujos valores conferidos batem certo com o DHIS2.
+As cinco atividades correm por uma **ordem estrita**: cada passo depende do anterior, e os erros propagam-se — um código DHIS2 errado num indicador no passo 3 reaparece como um número errado no passo 5. No final, cada equipa deve ter uma instância verificada cujos valores conferidos batem certo com o DHIS2.
 
 ## A sessão num relance
 
@@ -24,7 +24,7 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 |---|-----------|---------|---------|
 | 1 | Antes de começar | ~5 min | Guiada, sala toda |
 | 2 | Importar a estrutura de unidades | ~20 min | Guiada, sala toda |
-| 3 | Importar e mapear indicadores | ~30 min | Guiada, sala toda |
+| 3 | Adicionar indicadores | ~30 min | Guiada, sala toda |
 | 4 | Importar dados do HMIS | ~25 min | Guiada, sala toda |
 | 5 | Verificar e explorar a sua configuração | ~10 min | Guiada, sala toda |
 
@@ -78,19 +78,20 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Importar e mapear indicadores · ~30 min · sala toda
+### 3. Adicionar indicadores · ~30 min · sala toda
 
-**O que acontece.** O passo mais longo e mais sujeito a erros, em três fases: criar os indicadores comuns, importar os nomes dos indicadores DHIS2 do país, depois mapear cada indicador DHIS2 ao seu correspondente comum.
+**O que acontece.** O passo mais longo. A partir da lista de indicadores, os participantes clicam em **Adicionar do DHIS2**, pesquisam no seu DHIS2 cada indicador da folha de preparação, adicionam-no, depois dão a cada um o seu ID e rótulo FASTR no passo de nomeação e guardam. Cada indicador fica numa única tabela, como linha **Elemento DHIS2** com o seu código DHIS2.
 
-**Demonstrar.** Mostre um mapeamento completo — um indicador DHIS2 ligado a um indicador comum — e a regra de nomenclatura do Common ID, antes de as equipas tratarem a sua própria lista.
+**Demonstrar.** Mostre uma volta completa — pesquisa, Adicionar, Seguinte: nomear indicadores, substituir o ID proposto pelo ID padrão FASTR, Guardar — e a regra de nomenclatura do ID, antes de as equipas tratarem a sua própria lista. Aponte para o distintivo **Especial**: esses IDs são lidos pelos módulos de análise e devem ser reutilizados, não duplicados.
 
-**Diga algo como.** *«Os Common IDs são só letras minúsculas e sublinhados. Sem espaços, sem acentos. E cada indicador DHIS2 mapeia-se a exatamente um indicador comum.»*
+**Diga algo como.** *«Os IDs são só minúsculas, algarismos e sublinhados. Sem espaços, sem acentos. Um código DHIS2 por indicador. Se for preciso somar dois códigos, isso é uma Soma, criada depois.»*
 
-**Como é um bom resultado.** Cada indicador prioritário mapeado, sem IDs rejeitados nem indicador DHIS2 mapeado a dois indicadores comuns.
+**Como é um bom resultado.** Cada indicador prioritário na lista com o distintivo Elemento DHIS2, o seu código em Definido por e o ID padrão FASTR quando existe.
 
 **Atenção a.**
-- Um Common ID rejeitado — usou-se um espaço, acento ou carácter especial.
-- Confusão de mapeamento — lembre que a relação é um-para-um. Um erro aqui reaparece como número errado no passo 5.
+- Um ID rejeitado — usou-se um espaço, acento, carácter especial ou palavra reservada.
+- Manter o ID longo proposto automaticamente em vez do ID padrão (`anc1`, `penta1`…): os módulos especiais correm então sobre um indicador vazio. Um erro aqui reaparece como número errado no passo 5.
+- Adicionar a linha DHIS2 principal quando era preciso um subgrupo COC (uma faixa etária). A seta abre os subgrupos.
 
 ### 4. Importar dados do HMIS · ~25 min · sala toda
 
@@ -104,7 +105,7 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 **Atenção a.**
 - Equipas que avançam antes de a importação terminar — o passo de verificação (e mais tarde o pacote de resultados) precisa de os dados terem chegado.
-- Pares (indicador, mês) falhados ignorados — alguns são normais (sem dados no DHIS2); muitos apontam para o mapeamento do passo 3.
+- Pares (indicador, mês) falhados ignorados — alguns são normais (sem dados no DHIS2); muitos apontam para os códigos DHIS2 escolhidos no passo 3.
 
 ---
 
@@ -122,8 +123,8 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 **Atenção a.**
 - Valores planos ou a zero — normalmente o intervalo de períodos não coincide com os dados do DHIS2.
-- Uma verificação que não bate certo — quase sempre mapeamento de indicadores incompleto no passo 3. Reencaminhe a equipa para lá em vez de continuar.
+- Uma verificação que não bate certo — quase sempre um indicador em falta ou com o código DHIS2 errado do passo 3. Reencaminhe a equipa para lá em vez de continuar.
 
 ## Para encerrar
 
-Não avance até a verificação de cada equipa passar. Uma verificação falhada não é um detalhe a corrigir depois — o resto da formação assenta nestes dados, e um erro de mapeamento silencioso reaparecerá como uma conclusão errada no relatório de um participante.
+Não avance até a verificação de cada equipa passar. Uma verificação falhada não é um detalhe a corrigir depois — o resto da formação assenta nestes dados, e um código DHIS2 errado que passou despercebido reaparecerá como uma conclusão errada no relatório de um participante.

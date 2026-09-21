@@ -14,9 +14,9 @@ footer: "FASTR · Instance Setup · Facilitator"
 
 ## Purpose
 
-Instance Setup is the configuration sequence that connects a country's DHIS2 data into a FASTR instance. Participants import the facility structure, define and map indicators, pull the HMIS data, and verify the result. Every later activity in the workshop runs on the data loaded here, so the module is a prerequisite rather than a topic in its own right.
+Instance Setup is the configuration sequence that connects a country's DHIS2 data into a FASTR instance. Participants import the facility structure, add the indicators, pull the HMIS data, and verify the result. Every later activity in the workshop runs on the data loaded here, so the module is a prerequisite rather than a topic in its own right.
 
-The five activities run in a **strict order**: each step depends on the one before it, and errors cascade — a wrong indicator mapping in step 3 surfaces as a wrong number in step 5. By the end, each team should have a verified instance whose spot-checked values match DHIS2.
+The five activities run in a **strict order**: each step depends on the one before it, and errors cascade — a wrong DHIS2 code on an indicator in step 3 surfaces as a wrong number in step 5. By the end, each team should have a verified instance whose spot-checked values match DHIS2.
 
 ## Session at a glance
 
@@ -24,7 +24,7 @@ The five activities run in a **strict order**: each step depends on the one befo
 |---|----------|------|--------|
 | 1 | Before you begin | ~5 min | Guided, whole room |
 | 2 | Import facility structure | ~20 min | Guided, whole room |
-| 3 | Import and map indicators | ~30 min | Guided, whole room |
+| 3 | Add indicators | ~30 min | Guided, whole room |
 | 4 | Import HMIS data | ~25 min | Guided, whole room |
 | 5 | Verify and explore your setup | ~10 min | Guided, whole room |
 
@@ -78,19 +78,20 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Import and map indicators · ~30 min · whole room
+### 3. Add indicators · ~30 min · whole room
 
-**What happens.** The longest and most error-prone step, in three phases: create the common indicators, import the country's DHIS2 indicator names, then map each DHIS2 indicator to its common counterpart.
+**What happens.** The longest step. From the indicator list, participants click **Add from DHIS2**, search their DHIS2 for each indicator on their prep sheet, add it, then give each one its FASTR ID and label in the naming step and save. Every indicator lands in one table as a **DHIS2 element** row carrying its DHIS2 code.
 
-**Demonstrate.** Show one full mapping — one DHIS2 indicator linked to one common indicator — and the Common ID naming rule, before teams work through their own list.
+**Demonstrate.** Show one complete round — search, Add, Next: name indicators, rename the proposed ID to the FASTR standard ID, Save — and the ID naming rule, before teams work through their own list. Point at the **Special** badge: those IDs are read by the analysis modules and must be reused, not duplicated.
 
-**Say something like.** *"Common IDs are lowercase letters and underscores only. No spaces, no accents. And each DHIS2 indicator maps to exactly one common indicator."*
+**Say something like.** *"IDs are lowercase letters, digits and underscores only. No spaces, no accents. One DHIS2 code per indicator. If you need two codes added together, that's a Sum, made after."*
 
-**What a good result looks like.** Every priority indicator mapped, with no rejected IDs and no DHIS2 indicator left mapped to two common ones.
+**What a good result looks like.** Every priority indicator in the list with the DHIS2 element badge, its code under Defined by, and the standard FASTR ID where one exists.
 
 **Watch for.**
-- A rejected Common ID — a space, accent, or special character was used.
-- Mapping confusion — remind them the relationship is one-to-one. A mistake here is what surfaces as a wrong number in step 5.
+- A rejected ID — a space, accent, special character, or a reserved word was used.
+- Keeping the long auto-proposed ID instead of the standard one (`anc1`, `penta1`…): the special modules then run on an empty indicator. A mistake here is what surfaces as a wrong number in step 5.
+- Adding the main DHIS2 line when they needed a COC subgroup (an age band). The chevron unfolds the subgroups.
 
 ### 4. Import HMIS data · ~25 min · whole room
 
@@ -104,7 +105,7 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 **Watch for.**
 - Teams moving on before the import finishes — the verify step (and later the results package) needs the data to be in.
-- Failed (indicator, month) pairs being ignored — a few are normal (no data in DHIS2); many point back at the mapping in step 3.
+- Failed (indicator, month) pairs being ignored — a few are normal (no data in DHIS2); many point back at the DHIS2 codes chosen in step 3.
 
 ---
 
@@ -122,8 +123,8 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 **Watch for.**
 - Flat or zero values — usually the period range does not overlap the DHIS2 data.
-- A mismatched spot-check — almost always incomplete indicator mapping in step 3. Send the team back there rather than continuing.
+- A mismatched spot-check — almost always an indicator missing or on the wrong DHIS2 code from step 3. Send the team back there rather than continuing.
 
 ## Closing the session
 
-Do not move on until every team's verification passes. A failed spot-check is not a detail to fix later — the rest of the workshop runs on this data, and a quiet mapping error will reappear as a wrong finding in a participant's report.
+Do not move on until every team's verification passes. A failed spot-check is not a detail to fix later — the rest of the workshop runs on this data, and a quiet wrong DHIS2 code will reappear as a wrong finding in a participant's report.

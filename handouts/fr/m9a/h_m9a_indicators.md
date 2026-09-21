@@ -8,9 +8,9 @@ footer: "FASTR · Configuration de l'instance"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Établissements</span> <span class="arrow">→</span> <span class="step current">Indicateurs</span> <span class="arrow">→</span> <span class="step">Données</span> <span class="arrow">→</span> <span class="step">Vérifier</span></div>
+<div class="setup-breadcrumb"><span class="step done">Structure des établissements</span> <span class="arrow">→</span> <span class="step current">Indicateurs</span> <span class="arrow">→</span> <span class="step">Données</span> <span class="arrow">→</span> <span class="step">Vérifier</span></div>
 
-# Importer et mapper les indicateurs
+# Ajouter les indicateurs
 
 <p class="meta-line"><strong>Configuration de l'instance</strong> · <strong>~30 min</strong></p>
 
@@ -19,23 +19,25 @@ footer: "FASTR · Configuration de l'instance"
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous avez complété **Se connecter à la plateforme** et **Importer la structure des établissements**
-- ☐ Votre **Liste de vérification pour la préparation des données FASTR** est ouverte à l'onglet *Modèle de cartographie* — vous utiliserez la colonne **C — INDICATEUR D'INTÉRÊT** (p. ex. ANC1, ANC4) et la colonne **G — NOM OFFICIEL DE L'INDICATEUR DANS DHIS2**
+- ☐ Vous avez terminé **Se connecter à la plateforme** et **Importer la structure des établissements**
+- ☐ Votre **Liste de préparation des données FASTR** est ouverte à la feuille *Modèle de correspondance des indicateurs* : vous utiliserez la colonne **C — INDICATEUR D'INTÉRÊT** (ex. CPN1, CPN4) et la colonne **G — NOM OFFICIEL DANS DHIS2**
 
 <p class="sb-label">Pourquoi c'est important</p>
 
-Sans mapping, FASTR peut tirer les données mais ne saura pas comment comparer entre pays ou entre analyses.
+Sans indicateurs, FASTR ne sait pas quoi télécharger depuis DHIS2 ni sous quel nom l'analyser.
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Configurer les indicateurs en trois étapes :
+Pour chaque indicateur de votre liste, trois gestes dans un seul écran :
 
-1. **Créer des indicateurs communs** — noms génériques utilisés en interne par FASTR (p. ex. `anc1`, `anc4`)
-2. **Importer les indicateurs DHIS2** — les noms spécifiques au pays issus de DHIS2 (p. ex. « Antenatal client 1st visit »)
-3. **Mapper** chaque indicateur DHIS2 à son indicateur commun correspondant
+1. **Le chercher** dans DHIS2, depuis FASTR
+2. **Lui donner un nom** : un ID court (ex. `anc1`) et un libellé lisible (ex. « CPN 1ère visite »)
+3. **Enregistrer**
+
+Tous les indicateurs vivent dans **un seul tableau**. Chaque ligne porte un type : **Élément DHIS2** (récupéré depuis DHIS2), **Téléversé** (fichier CSV), **Somme** ou **Calculé** (formule). Ici, vous créez des éléments DHIS2.
 
 </div>
 </div>
@@ -44,78 +46,65 @@ Configurer les indicateurs en trois étapes :
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Créer les indicateurs communs</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la liste des indicateurs</span></h2>
 
-1. Dans la section **Données** (panneau de gauche), cliquez sur **Indicateurs**.
+1. Cliquez sur **Données** dans la barre du haut, puis, dans la section **SNIS**, sur la carte **Indicateurs**.
+2. Regardez la **liste par défaut**. Chaque ligne affiche l'**ID de l'indicateur**, son **libellé**, son **type** et la colonne **Défini par** (le code DHIS2 et son nom d'origine). Si un indicateur de votre liste existe déjà, passez-le.
 
-   ![h:160](../../../resources/screenshots/m9a_setup/07_indicators_page.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/02_liste_indicateurs.png)
 
-2. Consultez la **liste des indicateurs par défaut** — si vos indicateurs y sont déjà, passez à l'étape 2. Vous pouvez renommer un indicateur par défaut via l'icône crayon si nécessaire.
-3. Pour ajouter un nouvel indicateur, cliquez sur **Créer un indicateur commun** (en haut à gauche).
-4. Dans le formulaire, remplissez :
-   - **ID commun** — le nom de la variable. **Pas d'accents, pas d'espaces**. Tirets bas (_) acceptés (p. ex. `mam_nouveau`).
-   - **Libellé** — le nom affiché (accents et espaces autorisés ; utilisez la colonne **C — INDICATEUR D'INTÉRÊT** de votre *Modèle de cartographie*).
-
-   ![h:200](../../../resources/screenshots/m9a_setup/08_create_common_form.jpeg)
-
-5. **Répétez pour chaque indicateur** de votre *Modèle de cartographie*.
+> **Les lignes marquées « Spécial »** sont lues par leur ID par les modules d'analyse (`anc1`, `delivery`, `bcg`…). Gardez ces ID tels quels : remplissez-les avec le bon code DHIS2 plutôt que d'en créer d'autres.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Importer les noms d'indicateurs DHIS2</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Chercher dans DHIS2</span></h2>
 
-1. Cliquez sur **Import DHIS2 indicator**.
+1. Cliquez sur **Ajouter depuis DHIS2**, en haut à droite de la liste. FASTR utilise la **connexion DHIS2 enregistrée** de l'instance (carte **Connexion DHIS2** de la page Données, la même qu'à l'étape précédente).
+2. Dans le champ de recherche, tapez un terme de la colonne **G — NOM OFFICIEL DANS DHIS2** (ex. `prénatal`) ou collez l'ID DHIS2. Cliquez sur **Recherche**.
+3. Dans les résultats, cliquez sur **Ajouter** à côté de chaque élément voulu. Il passe dans la colonne **Éléments sélectionnés**.
 
-   ![h:160](../../../resources/screenshots/m9a_setup/09_import_dhis2_btn.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/03_recherche_dhis2.png)
 
-> La **connexion DHIS2 enregistrée** de l'instance est utilisée automatiquement. S'il n'y en a pas encore, ajoutez-la une fois via **Gérer la connexion** sur la page Importations — mêmes champs que dans *Importer la structure des établissements*.
+4. Cherchez un autre terme si besoin ; la sélection est conservée. Puis cliquez sur **Suivant : nommer les indicateurs (N)**.
 
-2. Dans le champ de recherche, tapez un terme issu de la colonne **G — NOM OFFICIEL DE L'INDICATEUR DANS DHIS2** de votre *Modèle de cartographie* (p. ex. `antenatal` pour les soins prénatals).
-3. Cliquez sur **Search**. Les résultats apparaissent dans la liste.
-4. Cliquez sur l'icône **Ajouter** à côté de chaque indicateur souhaité. La colonne de droite (« Selected ») se remplit.
-
-   ![h:200](../../../resources/screenshots/m9a_setup/10_dhis2_search_results.jpeg)
-
-5. Répétez pour chaque indicateur (changez de terme de recherche selon les besoins). Une fois terminé, cliquez sur **Save Selected (N)** en haut à droite.
-
-> **Astuce :** Cherchez des termes larges (p. ex. `vaccine`, `delivery`) pour voir tous les indicateurs DHIS2 liés d'un coup — plus rapide qu'un par un.
+> **Astuce :** un mot large (`vaccin`, `accouchement`) ramène toute la famille d'un coup. Les lignes grisées « Ne peut pas être ajouté » ne sont pas des dénombrements mensuels. **Sous-groupe** (tranche d'âge, sexe) ? Déroulez le **chevron** de la ligne et ajoutez la ligne **COC** voulue, pas la ligne principale.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Mapper les indicateurs DHIS2 aux indicateurs communs</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Nommer, puis enregistrer</span></h2>
 
-Pour chaque indicateur DHIS2 importé, liez-le à son correspondant commun :
+FASTR propose un **ID** et un **libellé** pour chaque élément, à partir du nom DHIS2. Remplacez-les :
 
-1. Cliquez sur l'**icône crayon (modifier)** à côté de l'indicateur DHIS2.
-2. Dans le panneau qui s'ouvre, cliquez sur l'**icône +** sous *Indicateurs communs associés*.
+- **ID de l'indicateur** : le nom technique. **Minuscules, chiffres et tirets bas seulement**, pas d'accent, pas d'espace (ex. `mam_nouveau`). Pour un indicateur de la liste FASTR, utilisez son ID standard (`anc1`, `anc4`, `penta1`…).
+- **Libellé** : le nom affiché dans les graphiques. Accents et espaces autorisés ; prenez la colonne **C — INDICATEUR D'INTÉRÊT**.
 
-   ![h:200](../../../resources/screenshots/m9a_setup/11_mapping_panel.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/04_nommer.png)
 
-3. Sélectionnez l'indicateur commun correspondant dans le menu déroulant.
-4. Cliquez sur **Save**.
-5. **Répétez pour chaque indicateur DHIS2.**
+Cliquez sur **Enregistrer**. Répétez les étapes 2 et 3 jusqu'à ce que toute votre liste soit couverte.
 
-## Vérification
+## Point de contrôle
 
-De retour sur la page des indicateurs, vous devez voir chaque indicateur DHIS2 avec son indicateur commun mappé à côté.
+De retour sur la liste, chaque nouvel indicateur apparaît avec le badge **Élément DHIS2**, son code DHIS2 dans **Défini par** et une coche dans **Inclure**. Le compteur **Indicateurs (N)** a augmenté d'autant.
 
-![h:200](../../../resources/screenshots/m9a_setup/12_all_mapped.jpeg)
+![w:400](../../../resources/screenshots/indicateurs_v2/05_verification.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Que faire si ça ne marche pas
+## Ce qui peut mal tourner
 
-- **« ID commun rejeté »** — l'ID contient un espace, un accent ou un caractère spécial. Limitez-vous aux lettres minuscules et tirets bas.
-- **La recherche DHIS2 ne retourne rien** — essayez un autre terme, ou vérifiez que votre utilisateur DHIS2 a accès aux métadonnées d'indicateurs.
-- **Pas d'indicateur commun dans le menu déroulant** — retournez à l'étape 1 et créez-le d'abord.
-- **Même indicateur DHIS2 mappé à deux indicateurs communs** — en général une erreur. Chaque indicateur DHIS2 doit pointer vers exactement un indicateur commun.
+- **« … existe déjà ; choisissez un autre identifiant »** : l'ID est déjà pris. Ouvrez l'indicateur existant avec le crayon et changez son code DHIS2, ou choisissez un autre ID.
+- **« Déjà ajouté sous … »** : ce code DHIS2 est déjà dans FASTR. Rien à créer.
+- **L'ID est refusé** : accent, espace, virgule, crochet, ou mot réservé. Minuscules, chiffres et tirets bas.
+- **La recherche DHIS2 ne renvoie rien** : autre terme, ou vérifiez que l'utilisateur DHIS2 de la connexion a accès aux métadonnées.
+- **« Aucune connexion DHIS2 n'est enregistrée »** : page **Données**, carte **Connexion DHIS2**, saisissez l'URL et les identifiants.
+- **Deux codes DHIS2 pour un même indicateur** (deux tranches d'âge à additionner) : ajoutez les deux comme éléments, puis **Créer** → type **Somme**.
 
-## Étape suivante
+## Et ensuite
 
-Avec les établissements et les indicateurs en place, vous êtes prêt à récupérer les vraies valeurs de données. Passez à **Importer les données HMIS**.
+Les indicateurs sont définis mais **aucun chiffre n'a encore été téléchargé**. Passez à **Importer les données HMIS**.

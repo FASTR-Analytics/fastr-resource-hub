@@ -14,9 +14,9 @@ footer: "FASTR · Configuration de l'instance · Facilitateur"
 
 ## Objectif
 
-Configuration de l'instance est la séquence qui connecte les données DHIS2 d'un pays à une instance FASTR. Les participants importent la structure des établissements, définissent et mappent les indicateurs, récupèrent les données SIS, et vérifient le résultat. Toutes les activités ultérieures de l'atelier tournent sur les données chargées ici ; ce module est donc un prérequis plutôt qu'un sujet en soi.
+Configuration de l'instance est la séquence qui connecte les données DHIS2 d'un pays à une instance FASTR. Les participants importent la structure des établissements, ajoutent les indicateurs, récupèrent les données SIS, et vérifient le résultat. Toutes les activités ultérieures de l'atelier tournent sur les données chargées ici ; ce module est donc un prérequis plutôt qu'un sujet en soi.
 
-Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépend de la précédente, et les erreurs se propagent — un mauvais mappage d'indicateur à l'étape 3 ressort comme un mauvais chiffre à l'étape 5. À la fin, chaque équipe devrait avoir une instance vérifiée dont les valeurs contrôlées correspondent à DHIS2.
+Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépend de la précédente, et les erreurs se propagent — un mauvais code DHIS2 sur un indicateur à l'étape 3 ressort comme un mauvais chiffre à l'étape 5. À la fin, chaque équipe devrait avoir une instance vérifiée dont les valeurs contrôlées correspondent à DHIS2.
 
 ## La session en bref
 
@@ -24,7 +24,7 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 |---|----------|-------|--------|
 | 1 | Avant de commencer | ~5 min | Guidé, toute la salle |
 | 2 | Importer la structure des établissements | ~20 min | Guidé, toute la salle |
-| 3 | Importer et mapper les indicateurs | ~30 min | Guidé, toute la salle |
+| 3 | Ajouter les indicateurs | ~30 min | Guidé, toute la salle |
 | 4 | Importer les données SIS | ~25 min | Guidé, toute la salle |
 | 5 | Vérifier et explorer votre configuration | ~10 min | Guidé, toute la salle |
 
@@ -78,19 +78,20 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### 3. Importer et mapper les indicateurs · ~30 min · toute la salle
+### 3. Ajouter les indicateurs · ~30 min · toute la salle
 
-**Le déroulé.** L'étape la plus longue et la plus sujette aux erreurs, en trois phases : créer les indicateurs communs, importer les noms d'indicateurs DHIS2 du pays, puis mapper chaque indicateur DHIS2 à son équivalent commun.
+**Le déroulé.** L'étape la plus longue. Depuis la liste des indicateurs, les participants cliquent sur **Ajouter depuis DHIS2**, cherchent dans leur DHIS2 chaque indicateur de leur feuille de préparation, l'ajoutent, puis donnent à chacun son ID et son libellé FASTR à l'étape de nommage, et enregistrent. Chaque indicateur arrive dans un seul tableau, comme ligne **Élément DHIS2** portant son code DHIS2.
 
-**Démontrer.** Montrez un mappage complet — un indicateur DHIS2 relié à un indicateur commun — et la règle de nommage de l'ID commun, avant que les équipes ne traitent leur propre liste.
+**Démontrer.** Montrez un tour complet — recherche, Ajouter, Suivant : nommer les indicateurs, remplacer l'ID proposé par l'ID standard FASTR, Enregistrer — et la règle de nommage de l'ID, avant que les équipes ne traitent leur propre liste. Montrez le badge **Spécial** : ces ID sont lus par les modules d'analyse et doivent être réutilisés, pas dupliqués.
 
-**Formulez-le ainsi.** *« Les ID communs sont en lettres minuscules et tirets bas uniquement. Pas d'espace, pas d'accent. Et chaque indicateur DHIS2 est mappé à exactement un indicateur commun. »*
+**Formulez-le ainsi.** *« Les ID sont en minuscules, chiffres et tirets bas uniquement. Pas d'espace, pas d'accent. Un code DHIS2 par indicateur. S'il faut additionner deux codes, c'est une Somme, à créer ensuite. »*
 
-**À quoi ressemble un bon résultat.** Chaque indicateur prioritaire mappé, sans ID rejeté ni indicateur DHIS2 mappé à deux indicateurs communs.
+**À quoi ressemble un bon résultat.** Chaque indicateur prioritaire dans la liste avec le badge Élément DHIS2, son code dans Défini par, et l'ID standard FASTR quand il existe.
 
 **À surveiller.**
-- Un ID commun rejeté — un espace, un accent ou un caractère spécial a été utilisé.
-- La confusion de mappage — rappelez que la relation est un-à-un. Une erreur ici ressort comme un mauvais chiffre à l'étape 5.
+- Un ID rejeté — un espace, un accent, un caractère spécial ou un mot réservé a été utilisé.
+- L'ID long proposé automatiquement gardé au lieu de l'ID standard (`anc1`, `penta1`…) : les modules spéciaux tournent alors sur un indicateur vide. Une erreur ici ressort comme un mauvais chiffre à l'étape 5.
+- La ligne DHIS2 principale ajoutée alors qu'il fallait un sous-groupe COC (une tranche d'âge). Le chevron déroule les sous-groupes.
 
 ### 4. Importer les données SIS · ~25 min · toute la salle
 
@@ -104,7 +105,7 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 **À surveiller.**
 - Les équipes qui passent à la suite avant la fin de l'importation — l'étape de vérification (et plus tard le paquet de résultats) a besoin que les données soient arrivées.
-- Les paires (indicateur, mois) en échec ignorées — quelques-unes sont normales (pas de données dans DHIS2) ; beaucoup renvoient au mapping de l'étape 3.
+- Les paires (indicateur, mois) en échec ignorées — quelques-unes sont normales (pas de données dans DHIS2) ; beaucoup renvoient aux codes DHIS2 choisis à l'étape 3.
 
 ---
 
@@ -122,8 +123,8 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 **À surveiller.**
 - Des valeurs plates ou nulles — généralement la plage de période ne recouvre pas les données DHIS2.
-- Un contrôle qui ne correspond pas — presque toujours un mappage d'indicateurs incomplet à l'étape 3. Renvoyez l'équipe là plutôt que de continuer.
+- Un contrôle qui ne correspond pas — presque toujours un indicateur manquant ou sur le mauvais code DHIS2 à l'étape 3. Renvoyez l'équipe là plutôt que de continuer.
 
 ## Pour conclure
 
-Ne passez à la suite que lorsque la vérification de chaque équipe réussit. Un contrôle raté n'est pas un détail à corriger plus tard — tout le reste de l'atelier tourne sur ces données, et une erreur de mappage silencieuse réapparaîtra comme un constat faux dans le rapport d'un participant.
+Ne passez à la suite que lorsque la vérification de chaque équipe réussit. Un contrôle raté n'est pas un détail à corriger plus tard — tout le reste de l'atelier tourne sur ces données, et un mauvais code DHIS2 passé inaperçu réapparaîtra comme un constat faux dans le rapport d'un participant.
