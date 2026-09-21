@@ -11,7 +11,10 @@ name: Platform drift check
 # main. See tools/check_platform_drift.py and .github/drift_triage_prompt.md.
 #
 # The triage job needs the ANTHROPIC_API_KEY repository secret; without it
-# the job is skipped and the issue is still opened.
+# the job is skipped and the issue is still opened. Opening the pull request
+# needs the optional DRIFT_PR_TOKEN secret (a fine-grained PAT), because the
+# organization does not let GITHUB_TOKEN create pull requests; without it the
+# job pushes the drift/issue-N branch and posts a compare link instead.
 #
 # Also runnable on-demand via "Run workflow" in the Actions tab.
 
@@ -114,6 +117,12 @@ jobs:
         uses: anthropics/claude-code-action@v1
         env:
           ISSUE_NUMBER: ${{ env.TRIAGE_ISSUE }}
+          # The organization forbids GITHUB_TOKEN from opening pull requests.
+          # DRIFT_PR_TOKEN is an optional fine-grained PAT (contents + pull
+          # requests: write on this repo); when set, gh uses it for
+          # `gh pr create`. When unset the job pushes the branch and posts
+          # the compare link on the issue instead.
+          GH_TOKEN: ${{ secrets.DRIFT_PR_TOKEN || secrets.GITHUB_TOKEN }}
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
