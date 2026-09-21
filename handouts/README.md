@@ -91,6 +91,18 @@ Each handout replaces a slide in the deck. The slide gets a minimal "pointer" â€
 
 The audit doc (`content-strategy/handout-audit.md`) tracks the suggested pointer slide text per activity. When a handout ships, replace the corresponding slide in `core_content/<module>/` with the pointer version.
 
+## Screenshots
+
+Platform screenshots live in `resources/screenshots/<feature>/` and are embedded
+with a path relative to the handout (`../../../resources/screenshots/...`).
+File names stay stable across recaptures, so a newer platform screen only needs
+a new file with the same name plus a PDF re-render. The folder-by-folder
+inventory, which handout uses which folder, the capture rules and the
+platform version of each set are in
+[`resources/README.md`](../resources/README.md#screenshots). When the weekly
+platform drift check (`tools/check_platform_drift.py`) flags a screen change,
+the text fix lands by pull request and the recapture is done by hand.
+
 ## Theme
 
 `fastr-handout.css` (at repo root, next to `fastr-theme.css`) is the Marp theme. A4 portrait (210mm Ã— 297mm), Poppins font, FASTR brand colors. Each `---` separator in the markdown creates a new A4 page.

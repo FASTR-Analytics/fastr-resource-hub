@@ -100,6 +100,7 @@ sync.
 | `tools/migrate_to_meta.py` | Generate/regenerate module metadata (modules.yaml, _meta.yaml) |
 | `tools/validate_content.py` | Validate content + **drift guard**: flags any core_content slide with no methodology source, plus id collisions |
 | `tools/generate_catalog.py` | Regenerate [`CATALOG.md`](CATALOG.md) — the content index |
+| `tools/check_platform_drift.py` | Weekly platform/modules change sweep → `platform-drift` issue → Claude triage PR (see [`tools/README.md`](tools/README.md#platform-drift)) |
 
 ---
 
