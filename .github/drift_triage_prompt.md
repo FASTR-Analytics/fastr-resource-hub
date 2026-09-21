@@ -4,8 +4,8 @@ Ground rules (from CLAUDE.md): the platform code and the published guides are th
 
 Steps:
 
-1. Read the issue body (number in the `ISSUE_NUMBER` environment variable, use `gh issue view`). Ignore `[internal]`, `[infra]` and `[admin]`-only entries unless an `[admin]` entry changes a screen that handouts describe.
-2. For each `[user]` entry, search this repo's content for what it affects: `handouts/**/*.md`, `methodology/**/*.md`, `core_content*/**/*.md` (generated from methodology, so the fix goes in methodology), `prompts/`, and `resources/screenshots/` names. Grep for the old label, the old button name, the old tab name, the old concept. The issue's "Content likely affected" section gives candidate paths; verify them, do not trust them.
+1. Read the issue body once (`gh issue view <number> --json body -q .body`; the number is also in the `ISSUE_NUMBER` environment variable). Ignore `[internal]`, `[infra]` and `[admin]`-only entries unless an `[admin]` entry changes a screen that handouts describe. Work from the "Content likely affected" section: it already groups the user-facing entries by area.
+2. Budget: about 60 tool calls in total, so one batched Grep per area (alternation of the old and new terms, across `handouts methodology core_content core_content_fr core_content_pt`), then Read only the files that matched. Do not `ls` directories, do not open images, do not read whole methodology chapters. For each `[user]` entry, search this repo's content for what it affects: `handouts/**/*.md`, `methodology/**/*.md`, `core_content*/**/*.md` (generated from methodology, so the fix goes in methodology), `prompts/`, and `resources/screenshots/` names. Grep for the old label, the old button name, the old tab name, the old concept. The issue's "Content likely affected" section gives candidate paths; verify them, do not trust them.
 3. Post ONE comment on the issue with this shape, in plain English, no headers beyond these three, no filler:
 
    **Affects content** (or **No content affected** if nothing does, then close the issue with `gh issue close`):

@@ -100,8 +100,8 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
-            Triage issue #${{ needs.check.outputs.issue_number }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first).
+            Triage issue #${{ needs.check.outputs.issue_number }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first). Fetch the issue body once with `gh issue view ${{ needs.check.outputs.issue_number }} --json body -q .body`. You have a hard budget of about 60 tool calls: batch your greps (one Grep with alternation per area), do not list directories or open screenshots, and post the comment before the budget runs out even if some entries are left unchecked (say so in "Not affected").
           claude_args: |
             --model claude-sonnet-5
-            --max-turns 40
+            --max-turns 80
             --allowedTools "Read,Grep,Glob,Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh issue close:*),Bash(gh api repos/FASTR-Analytics/*),Bash(gh search code:*),Bash(git log:*),Bash(git grep:*)"
