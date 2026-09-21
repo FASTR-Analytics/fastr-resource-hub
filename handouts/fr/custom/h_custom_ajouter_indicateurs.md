@@ -141,6 +141,7 @@ Dans DHIS2, un même élément est souvent découpé en sous-groupes. Ces décou
 4. Écrivez la **formule** avec les ID des autres indicateurs et `+ - * /`, par exemple `anc4 / anc1`. Les boutons **Insérer un indicateur** et **Insérer une population** écrivent les ID à votre place.
 5. Choisissez le **format** : **Pourcentage** pour un taux de 0 à 100 %.
 6. Cliquez sur **Sauvegarder**.
+7. À l'étape 5, cochez le module **M12. Valeurs des indicateurs** : c'est lui qui calcule les taux.
 
 ![w:400](../../../resources/screenshots/indicateurs_v2/07_creer_calcule.png)
 
@@ -161,7 +162,7 @@ Créer l'indicateur ne télécharge **aucun chiffre**. FASTR sait maintenant qu'
 1. Dans la liste des indicateurs, **cochez** les indicateurs que vous venez d'ajouter.
 2. Dans la barre d'actions qui apparaît, cliquez sur **Importer les données HMIS depuis DHIS2**. L'assistant d'importation s'ouvre, déjà réglé sur ces indicateurs.
 
-   ![w:440](../../../resources/screenshots/indicateurs_v2/06_actions_groupees.png)
+   ![w:330](../../../resources/screenshots/indicateurs_v2/06_actions_groupees.png)
 3. **Heure** : choisissez **Maintenant**, puis **Suivant**.
 
    ![h:130](../../../resources/screenshots/dhis2_import_v2/06_wizard_heure.png)
@@ -184,9 +185,27 @@ Les projets ne lisent jamais la base directement. Ils lisent un **paquet de rés
 
 1. Cliquez sur **Résultats** dans la barre du haut, puis sur **Générer un nouveau paquet de résultats**.
 2. **Données** : cochez **Données HMIS**. Puis **Suivant**.
-3. **Modules** : cochez les modules habituels de votre instance. Puis **Suivant**.
+3. **Modules** : cochez les modules à exécuter (voir ci-dessous). Puis **Suivant**.
 
-   ![h:150](../../../resources/screenshots/dhis2_import_v2/11_generer_modules.png)
+## Quels modules cocher ?
+
+| Module | Quand le cocher |
+|---|---|
+| **M1. Évaluation de la qualité des données** et **M2. Ajustements** | Toujours. FASTR les coche tout seul dès que M3 ou M12 est coché. |
+| **M3. Utilisation des services** | Toujours : volumes, tendances et perturbations de service. |
+| **M12. Valeurs des indicateurs** | **Dès que vous avez un indicateur Calculé** (un taux). C'est le module qui applique les formules. Sans lui, vos taux restent vides dans les projets. |
+| **M5 et M6. Estimations de couverture** | Si votre instance les utilisait déjà dans le paquet précédent. |
+| **M11. Détection bayésienne des perturbations** | Optionnel, si votre instance l'utilisait déjà. |
+
+Les modules grisés demandent des données que vous n'avez pas cochées à l'étape 1 (enquêtes FOSA, ICEH) : laissez-les. En cas de doute, reprenez les modules du **dernier paquet** : sur la page **Résultats**, cliquez sur le paquet épinglé, sa liste de modules s'affiche.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+![w:420](../../../resources/screenshots/indicateurs_v2/08_paquet_modules.png)
+
+> **Les réglages des modules ne se font pas ici.** Les paramètres de chaque module (paires de cohérence, niveau administratif, variable de comptage…) sont enregistrés dans **Paramètres par défaut des modules**, sur la page **Résultats**. Le paquet les utilise tels quels. Ne les modifiez pas sans l'équipe FASTR.
 
 4. **Confirmer et lancer** : sous **Rattacher aux projets**, cochez les projets qui doivent voir les nouveaux indicateurs. Cliquez sur **Lancer la génération**.
 
