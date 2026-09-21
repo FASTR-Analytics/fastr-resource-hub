@@ -1,20 +1,26 @@
 name: Platform drift check
 
-# Daily 06:00 UTC sweep of FASTR-Analytics/platform and
+# Weekly (Monday 06:00 UTC) sweep of FASTR-Analytics/platform and
 # FASTR-Analytics/modules. When new CHANGELOG entries or commits appear on
-# either upstream repo, opens a categorized triage issue here so we know
-# to review whether methodology, prompts, or handouts need updating.
+# either upstream repo, opens a labelled, assigned triage issue here listing
+# the repo content each change is likely to touch, then runs a Claude Code
+# triage job that comments on the issue with the files that actually need an
+# edit (or closes it when nothing is affected). See tools/check_platform_drift.py
+# and .github/drift_triage_prompt.md.
+#
+# The triage job needs the ANTHROPIC_API_KEY repository secret; without it
+# the job is skipped and the issue is still opened.
 #
 # Also runnable on-demand via "Run workflow" in the Actions tab.
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 06:00 UTC daily
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write   # to push the updated state file back to main
-  issues: write     # to open the drift issue
+  issues: write     # to open / comment on / close the drift issue
 
 concurrency:
   group: platform-drift-check
@@ -23,6 +29,8 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
+    outputs:
+      issue_number: ${{ steps.drift.outputs.issue_number }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,6 +43,7 @@ jobs:
           python-version: '3.12'
 
       - name: Run drift check
+        id: drift
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/check_platform_drift.py
@@ -64,3 +73,35 @@ jobs:
           done
           echo "::error::Could not push state file after 5 attempts."
           exit 1
+
+  triage:
+    needs: check
+    if: needs.check.outputs.issue_number != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Gate on API key
+        id: gate
+        env:
+          KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "$KEY" ]; then echo "enabled=true" >> "$GITHUB_OUTPUT"; else echo "::warning::ANTHROPIC_API_KEY secret not set — skipping Claude triage."; fi
+
+      - name: Claude triage
+        if: steps.gate.outputs.enabled == 'true'
+        uses: anthropics/claude-code-action@v1
+        env:
+          ISSUE_NUMBER: ${{ needs.check.outputs.issue_number }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Triage issue #${{ needs.check.outputs.issue_number }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first).
+          claude_args: |
+            --model claude-sonnet-5
+            --max-turns 40
+            --allowedTools "Read,Grep,Glob,Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh issue close:*),Bash(gh api repos/FASTR-Analytics/*),Bash(gh search code:*),Bash(git log:*),Bash(git grep:*)"
