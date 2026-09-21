@@ -5,8 +5,10 @@ name: Platform drift check
 # either upstream repo, opens a labelled, assigned triage issue here listing
 # the repo content each change is likely to touch, then runs a Claude Code
 # triage job that comments on the issue with the files that actually need an
-# edit (or closes it when nothing is affected). See tools/check_platform_drift.py
-# and .github/drift_triage_prompt.md.
+# edit, applies them on a drift/issue-N branch and opens a pull request for a
+# human to merge (or closes the issue when nothing is affected). PDFs and
+# extracted slides are rebuilt by the other workflows once the PR lands on
+# main. See tools/check_platform_drift.py and .github/drift_triage_prompt.md.
 #
 # The triage job needs the ANTHROPIC_API_KEY repository secret; without it
 # the job is skipped and the issue is still opened.
@@ -24,8 +26,9 @@ on:
         default: ""
 
 permissions:
-  contents: write   # to push the updated state file back to main
-  issues: write     # to open / comment on / close the drift issue
+  contents: write        # state file on main; drift/issue-N branches
+  issues: write          # open / comment on / close the drift issue
+  pull-requests: write   # the triage job's fix PR
 
 concurrency:
   group: platform-drift-check
@@ -91,6 +94,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python (for validate_content.py)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
 
       - name: Gate on API key
         id: gate
@@ -111,5 +121,5 @@ jobs:
             Triage issue #${{ env.TRIAGE_ISSUE }} in ${{ github.repository }} following the instructions in .github/drift_triage_prompt.md (read that file first). Fetch the issue body once with `gh issue view ${{ env.TRIAGE_ISSUE }} --json body -q .body`. You have a hard budget of about 60 tool calls: batch your greps (one Grep with alternation per area), do not list directories or open screenshots, and post the comment before the budget runs out even if some entries are left unchecked (say so in "Not affected").
           claude_args: |
             --model claude-sonnet-5
-            --max-turns 80
-            --allowedTools "Read,Grep,Glob,Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh issue close:*),Bash(gh api repos/FASTR-Analytics/*),Bash(gh search code:*),Bash(git log:*),Bash(git grep:*)"
+            --max-turns 120
+            --allowedTools "Read,Grep,Glob,Edit,MultiEdit,Write,Bash(gh issue view:*),Bash(gh issue comment:*),Bash(gh issue close:*),Bash(gh pr create:*),Bash(gh api repos/FASTR-Analytics/*),Bash(gh search code:*),Bash(git log:*),Bash(git grep:*),Bash(git status:*),Bash(git diff:*),Bash(git checkout -b drift/*),Bash(git add:*),Bash(git commit:*),Bash(git push -u origin drift/*),Bash(git config user.*),Bash(python3 tools/validate_content.py:*)"
