@@ -34,7 +34,7 @@ Pull the actual data values from DHIS2 for your chosen indicators and time perio
 
 Click **Data** in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**.
 
-The page has four tabs — **Current**, **Future**, **History**, **By indicator** — plus the buttons **New DHIS2 import**, **Upload CSV file**, and **Manage connection**.
+The page has three tabs — **Current**, **Future**, **History** — plus the buttons **New DHIS2 import** and **Upload CSV file**. The per-indicator view lives one level up, on the HMIS Data page's **Ledger** tab.
 
 </div>
 </div>
@@ -45,15 +45,11 @@ The page has four tabs — **Current**, **Future**, **History**, **By indicator*
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Start the wizard — Credentials</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Start the wizard</span></h2>
 
-Click **New DHIS2 import**. The wizard has five steps: **Credentials**, **Indicators**, **Time**, **Config**, **Review & launch**.
+Click **New DHIS2 import**. The wizard has four steps: **Indicators**, **Time**, **Config**, **Review & launch**. It uses the instance's stored DHIS2 connection; there is nothing to type.
 
-On **Credentials**, the stored DHIS2 connection appears. Click **Next**.
-
-![h:170](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
-
-> No stored connection yet? Set one up once with **Manage connection** on the Imports page — it is saved for the whole instance, encrypted, so nobody re-types credentials for every import.
+> No stored connection yet? Set it up once on the **Data** page, **DHIS2 connection** card — it is saved for the whole instance, encrypted, so nobody re-types credentials for every import.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Indicators</span></h2>
 
@@ -97,7 +93,7 @@ The import runs on the server. The **Current** tab shows progress; you can close
 
 ## Checkpoint
 
-The HMIS Data page now shows your indicators as a chart, with values flowing through time. The **By indicator** tab lists every indicator with its months of data and when it was last imported.
+The HMIS Data page now shows your indicators as a chart, with values flowing through time. Its **Ledger** tab lists every indicator with its months of data, when it was last imported, and any failed months.
 
 ---
 
@@ -105,9 +101,9 @@ The HMIS Data page now shows your indicators as a chart, with values flowing thr
 
 ## What could go wrong
 
-- **Some (indicator, month) pairs failed** — the import keeps everything that succeeded; nothing is rolled back. Open the **By indicator** tab to see failed months per indicator and retry just those pairs. A few failures usually mean no data exists in DHIS2 for that combination; many failures point to the indicator mapping (see *Import indicators*).
+- **Some (indicator, month) pairs failed** — the import keeps everything that succeeded; nothing is rolled back. Open the HMIS Data page's **Ledger** tab to see failed months per indicator and retry just those pairs. A few failures usually mean no data exists in DHIS2 for that combination; many failures point to the indicator mapping (see *Import indicators*).
 
-![h:170](../../../resources/screenshots/m9a_setup/24_imports_by_indicator.png)
+![h:170](../../../resources/screenshots/m9a_setup/24_ledger.png)
 
 - **Network drops mid-import** — nothing to protect on your side: the fetch runs on the server, not in your browser. Check the History tab later.
 - **The window was too narrow** — re-run the wizard with a wider period range. Re-imported months are simply refreshed with the current DHIS2 values.

@@ -34,7 +34,7 @@ Descarregar os valores reais do DHIS2 para os seus indicadores e período. É a 
 
 Clique em **Dados** na barra superior e, na secção **HMIS**, no cartão **Dados**. Clique em **Importações**.
 
-A página tem quatro separadores — **Atuais**, **Futuras**, **Histórico**, **Por indicador** — e os botões **Nova importação DHIS2**, **Carregar ficheiro CSV** e **Gerir ligação**.
+A página tem três separadores — **Atual**, **Futuro**, **Histórico** — e os botões **Nova importação DHIS2** e **Carregar ficheiro CSV**. A vista por indicador está um nível acima, no separador **Registo** da página de Dados HMIS.
 
 </div>
 </div>
@@ -45,15 +45,11 @@ A página tem quatro separadores — **Atuais**, **Futuras**, **Histórico**, **
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Iniciar o assistente — Credenciais</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Iniciar o assistente</span></h2>
 
-Clique em **Nova importação DHIS2**. O assistente tem cinco passos: **Credenciais**, **Indicadores**, **Hora**, **Configuração**, **Rever e lançar**.
+Clique em **Nova importação DHIS2**. O assistente tem quatro passos: **Indicadores**, **Hora**, **Configuração**, **Rever e lançar**. Usa a ligação DHIS2 guardada da instância; não há nada a digitar.
 
-No passo **Credenciais**, aparece a ligação DHIS2 guardada. Clique em **Seguinte**.
-
-![h:170](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
-
-> Ainda sem ligação guardada? Configure-a uma vez em **Gerir ligação**, na página Importações — fica guardada para toda a instância, encriptada, e ninguém volta a digitar credenciais em cada importação.
+> Ainda sem ligação guardada? Configure-a uma vez na página **Dados**, cartão **Ligação DHIS2** — fica guardada para toda a instância, encriptada, e ninguém volta a digitar credenciais em cada importação.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Indicadores</span></h2>
 
@@ -97,7 +93,7 @@ A importação corre no servidor. O separador **Atuais** mostra o progresso; pod
 
 ## Ponto de controlo
 
-A página de Dados HMIS mostra agora os seus indicadores num gráfico, com valores ao longo do tempo. O separador **Por indicador** lista cada indicador com os meses com dados e a última importação.
+A página de Dados HMIS mostra agora os seus indicadores num gráfico, com valores ao longo do tempo. O seu separador **Registo** lista cada indicador com os meses com dados, a última importação e os meses falhados, se houver.
 
 ---
 
@@ -105,9 +101,9 @@ A página de Dados HMIS mostra agora os seus indicadores num gráfico, com valor
 
 ## O que pode correr mal
 
-- **Alguns pares (indicador, mês) falharam** — a importação mantém tudo o que teve êxito; nada é anulado. Abra o separador **Por indicador** para ver os meses falhados por indicador e repetir apenas esses pares. Poucas falhas normalmente significam que não existem dados no DHIS2 para essa combinação; muitas falhas apontam para o mapeamento dos indicadores (ver *Importar indicadores*).
+- **Alguns pares (indicador, mês) falharam** — a importação mantém tudo o que teve êxito; nada é anulado. Abra o separador **Registo** da página de Dados HMIS para ver os meses falhados por indicador e repetir apenas esses pares. Poucas falhas normalmente significam que não existem dados no DHIS2 para essa combinação; muitas falhas apontam para o mapeamento dos indicadores (ver *Importar indicadores*).
 
-![h:170](../../../resources/screenshots/m9a_setup/24_imports_by_indicator.png)
+![h:170](../../../resources/screenshots/m9a_setup/24_ledger.png)
 
 - **A rede cai durante a importação** — nada a proteger do seu lado: o descarregamento corre no servidor, não no navegador. Consulte o separador Histórico mais tarde.
 - **A janela era demasiado estreita** — repita o assistente com um intervalo mais largo. Os meses reimportados são simplesmente atualizados com os valores atuais do DHIS2.

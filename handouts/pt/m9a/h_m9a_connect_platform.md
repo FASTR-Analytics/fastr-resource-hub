@@ -51,7 +51,7 @@ Não existe um passo de «ligação» separado. Na primeira vez que despoletar u
 - Palavra-passe do DHIS2
 - ☐ Ligação guardada configurada (uma vez por instância)
 
-> **Dica:** a ligação DHIS2 guarda-se **uma vez para toda a instância** — um administrador configura-a em **Gerir ligação**, na página Importações, encriptada. Depois disso, todas as importações a usam; ninguém volta a digitar credenciais.
+> **Dica:** a ligação DHIS2 guarda-se **uma vez para toda a instância** — um administrador configura-a no cartão **Ligação DHIS2** da página Dados, encriptada. Depois disso, todas as importações a usam; ninguém volta a digitar credenciais.
 
 ## Como usar estas fichas
 

@@ -52,7 +52,7 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 ### 1. Avant de commencer · ~5 min · toute la salle
 
-**Le déroulé.** Une page d'orientation qui présente la séquence en quatre étapes et explique la gestion des identifiants DHIS2. Les participants rassemblent ce qu'il leur faut — Check-list de préparation remplie, URL/nom d'utilisateur/mot de passe DHIS2, navigateur stable. La connexion DHIS2 s'enregistre **une fois pour toute l'instance** (chiffrée), via **Gérer la connexion** sur la page Importations ; ensuite, personne ne ressaisit d'identifiants.
+**Le déroulé.** Une page d'orientation qui présente la séquence en quatre étapes et explique la gestion des identifiants DHIS2. Les participants rassemblent ce qu'il leur faut — Check-list de préparation remplie, URL/nom d'utilisateur/mot de passe DHIS2, navigateur stable. La connexion DHIS2 s'enregistre **une fois pour toute l'instance** (chiffrée), sur la carte **Connexion DHIS2** de la page Données ; ensuite, personne ne ressaisit d'identifiants.
 
 **Formulez-le ainsi.** *« On configure la connexion DHIS2 une seule fois, pour toute l'instance. Ensuite, chaque importation — y compris les importations programmées — utilise cette connexion enregistrée. »*
 
@@ -95,13 +95,13 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 
 ### 4. Importer les données SIS · ~25 min · toute la salle
 
-**Le déroulé.** La plus grande opération de données de la configuration : récupérer les valeurs réelles des données SIS depuis DHIS2. Les participants suivent l'assistant en cinq étapes — **Identifiants, Indicateurs, Heure, Configuration, Vérifier et lancer** — puis l'importation tourne sur le serveur. La progression s'affiche sur la page Importations (onglet En cours) ; la fin, dans l'Historique.
+**Le déroulé.** La plus grande opération de données de la configuration : récupérer les valeurs réelles des données SIS depuis DHIS2. Les participants suivent l'assistant en quatre étapes — **Indicateurs, Heure, Configuration, Vérifier et lancer** — puis l'importation tourne sur le serveur. La progression s'affiche sur la page Importations (onglet En cours) ; la fin, dans l'Historique.
 
-**Démontrer.** Montrez le récapitulatif de l'étape Vérifier et lancer — le nombre de paires (indicateur, mois) donne la taille du téléchargement — et l'onglet **Par indicateur**, pour que les équipes sachent où apparaissent les paires en échec et comment les relancer.
+**Démontrer.** Montrez le récapitulatif de l'étape Vérifier et lancer — le nombre de paires (indicateur, mois) donne la taille du téléchargement — et l'onglet **Registre** de la page Données SNIS, pour que les équipes sachent où apparaissent les paires en échec et comment les relancer.
 
 **Formulez-le ainsi.** *« Une fois "Démarrer l'importation" cliqué, c'est le serveur qui travaille. Vous pouvez fermer l'onglet — regardez l'Historique dans quelques minutes. Tout ce qui réussit est conservé ; les mois en échec se relancent séparément. »*
 
-**À quoi ressemble un bon résultat.** L'importation terminée dans l'Historique, avec l'onglet Par indicateur montrant les mois de données attendus et zéro échec (ou des échecs explicables).
+**À quoi ressemble un bon résultat.** L'importation terminée dans l'Historique, avec l'onglet Registre montrant les mois de données attendus et zéro échec (ou des échecs explicables).
 
 **À surveiller.**
 - Les équipes qui passent à la suite avant la fin de l'importation — l'étape de vérification (et plus tard le paquet de résultats) a besoin que les données soient arrivées.

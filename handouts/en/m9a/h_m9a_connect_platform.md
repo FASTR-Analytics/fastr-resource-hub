@@ -51,7 +51,7 @@ There is no separate "connect" step. The first time you trigger an import (admin
 - DHIS2 Password
 - ☐ Stored connection set up (once per instance)
 
-> **Tip:** the DHIS2 connection is stored **once for the whole instance** — an administrator sets it up via **Manage connection** on the Imports page, encrypted. After that, every import uses it; nobody re-types credentials.
+> **Tip:** the DHIS2 connection is stored **once for the whole instance** — an administrator sets it up on the Data page's **DHIS2 connection** card, encrypted. After that, every import uses it; nobody re-types credentials.
 
 ## How to use these handouts
 

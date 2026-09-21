@@ -71,21 +71,17 @@ L'idée en une phrase : l'importation remplit la réserve de données, le paquet
 
    ![h:160](../../../resources/screenshots/dhis2_import_v2/03_importations.png)
 
-L'assistant s'ouvre. Il compte cinq étapes : **Identifiants**, **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**.
-
-3. **Identifiants** — la connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant**.
-
-   ![h:160](../../../resources/screenshots/dhis2_import_v2/04_wizard_identifiants.png)
+L'assistant s'ouvre. Il compte quatre étapes : **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**. Il utilise la connexion DHIS2 enregistrée de l'instance (page **Données**, carte **Connexion DHIS2**) ; rien à saisir.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-4. **Indicateurs** — cochez les indicateurs à télécharger. Pour une mise à jour de routine, le plus sûr : **cochez-les tous**, avec la case tout en haut de la liste. Puis **Suivant**.
+3. **Indicateurs** — cochez les indicateurs à télécharger. Pour une mise à jour de routine, le plus sûr : **cochez-les tous**, avec la case tout en haut de la liste. Puis **Suivant**.
 
    ![h:210](../../../resources/screenshots/dhis2_import_v2/05_wizard_indicateurs.png)
 
-5. **Heure** — choisissez **Maintenant**, puis **Suivant**.
+4. **Heure** — choisissez **Maintenant**, puis **Suivant**.
 
    ![h:130](../../../resources/screenshots/dhis2_import_v2/06_wizard_heure.png)
 
@@ -95,11 +91,11 @@ L'assistant s'ouvre. Il compte cinq étapes : **Identifiants**, **Indicateurs**,
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-6. **Configuration** — réglez la **plage de périodes** avec les deux curseurs : la fenêtre de mois à télécharger. Pour notre exemple : **septembre 2025 → juillet 2026** — les nouveaux mois, plus la marge pour les saisies tardives.
+5. **Configuration** — réglez la **plage de périodes** avec les deux curseurs : la fenêtre de mois à télécharger. Pour notre exemple : **septembre 2025 → juillet 2026** — les nouveaux mois, plus la marge pour les saisies tardives.
 
    ![h:140](../../../resources/screenshots/dhis2_import_v2/07_wizard_periode.png)
 
-7. **Vérifier et lancer** — relisez le récapitulatif : la connexion, le nombre d'indicateurs, la fenêtre. Puis cliquez sur **Démarrer l'importation**.
+6. **Vérifier et lancer** — relisez le récapitulatif : la connexion, le nombre d'indicateurs, la fenêtre. Puis cliquez sur **Démarrer l'importation**.
 
    ![h:170](../../../resources/screenshots/dhis2_import_v2/08_wizard_lancer.png)
 
@@ -122,7 +118,7 @@ Les nouveaux mois sont téléchargés, mais aucune analyse ne s'est recalculée.
 
    ![h:150](../../../resources/screenshots/dhis2_import_v2/10_generer_donnees.png)
 
-4. **Modules** — cochez les modules d'analyse à exécuter, les mêmes que d'habitude pour votre instance. Si un module en nécessite un autre, FASTR l'ajoute tout seul. Puis **Suivant**.
+3. **Modules** — cochez les modules d'analyse à exécuter, les mêmes que d'habitude pour votre instance. Si un module en nécessite un autre, FASTR l'ajoute tout seul. Puis **Suivant**.
 
    ![h:170](../../../resources/screenshots/dhis2_import_v2/11_generer_modules.png)
 

@@ -51,7 +51,7 @@ Il n'y a plus d'étape de « connexion » séparée. La première fois que vous 
 - Mot de passe DHIS2
 - ☐ Connexion enregistrée configurée (une fois par instance)
 
-> **Astuce :** la connexion DHIS2 s'enregistre **une fois pour toute l'instance** — un administrateur la configure via **Gérer la connexion** sur la page Importations, chiffrée. Ensuite, chaque importation l'utilise ; personne ne ressaisit d'identifiants.
+> **Astuce :** la connexion DHIS2 s'enregistre **une fois pour toute l'instance** — un administrateur la configure sur la carte **Connexion DHIS2** de la page Données, chiffrée. Ensuite, chaque importation l'utilise ; personne ne ressaisit d'identifiants.
 
 ## Comment utiliser ces documents
 

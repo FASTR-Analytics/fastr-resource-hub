@@ -52,7 +52,7 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 ### 1. Antes de começar · ~5 min · sala toda
 
-**O que acontece.** Uma página de orientação que apresenta a sequência de quatro passos e explica como são tratadas as credenciais DHIS2. Os participantes reúnem o que precisam — Lista de verificação preenchida, URL/nome de utilizador/palavra-passe do DHIS2, navegador estável. A ligação DHIS2 guarda-se **uma vez para toda a instância** (encriptada), em **Gerir ligação** na página Importações; depois disso, ninguém volta a digitar credenciais.
+**O que acontece.** Uma página de orientação que apresenta a sequência de quatro passos e explica como são tratadas as credenciais DHIS2. Os participantes reúnem o que precisam — Lista de verificação preenchida, URL/nome de utilizador/palavra-passe do DHIS2, navegador estável. A ligação DHIS2 guarda-se **uma vez para toda a instância** (encriptada), no cartão **Ligação DHIS2** da página Dados; depois disso, ninguém volta a digitar credenciais.
 
 **Diga algo como.** *«Configuramos a ligação DHIS2 uma única vez, para toda a instância. A partir daí, cada importação — incluindo as agendadas — usa essa ligação guardada.»*
 
@@ -95,13 +95,13 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 
 ### 4. Importar dados do HMIS · ~25 min · sala toda
 
-**O que acontece.** A maior operação de dados da configuração: extrair os valores reais do HMIS do DHIS2. Os participantes percorrem o assistente de cinco passos — **Credenciais, Indicadores, Hora, Configuração, Rever e lançar** — e a importação corre depois no servidor. O progresso aparece na página Importações (separador Atuais); a conclusão, no Histórico.
+**O que acontece.** A maior operação de dados da configuração: extrair os valores reais do HMIS do DHIS2. Os participantes percorrem o assistente de quatro passos — **Indicadores, Hora, Configuração, Rever e lançar** — e a importação corre depois no servidor. O progresso aparece na página Importações (separador Atuais); a conclusão, no Histórico.
 
-**Demonstrar.** Mostre o resumo do passo Rever e lançar — o número de pares (indicador, mês) dá a dimensão da extração — e o separador **Por indicador**, para as equipas saberem onde aparecem os pares falhados e como repeti-los.
+**Demonstrar.** Mostre o resumo do passo Rever e lançar — o número de pares (indicador, mês) dá a dimensão da extração — e o separador **Registo** da página de Dados HMIS, para as equipas saberem onde aparecem os pares falhados e como repeti-los.
 
 **Diga algo como.** *«Depois de clicar em Iniciar importação, o servidor faz o trabalho. Podem fechar o separador — vejam o Histórico daqui a uns minutos. O que tiver êxito fica guardado; os meses falhados repetem-se à parte.»*
 
-**Como é um bom resultado.** A importação concluída no Histórico, com o separador Por indicador a mostrar os meses de dados esperados e zero falhas (ou falhas explicáveis).
+**Como é um bom resultado.** A importação concluída no Histórico, com o separador Registo a mostrar os meses de dados esperados e zero falhas (ou falhas explicáveis).
 
 **Atenção a.**
 - Equipas que avançam antes de a importação terminar — o passo de verificação (e mais tarde o pacote de resultados) precisa de os dados terem chegado.

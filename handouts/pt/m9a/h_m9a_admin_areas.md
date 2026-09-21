@@ -45,7 +45,7 @@ Extrair o registo de unidades do seu país — cada unidade com a sua região e 
 
 <h2 class="step-h"><span class="step-n">2</span><span>Importar do DHIS2</span></h2>
 
-Inicie uma importação DHIS2 a partir da página de Unidades. Aparece a **ligação DHIS2 guardada** — a que foi configurada uma vez para toda a instância em **Gerir ligação**. Confirme-a.
+Inicie uma importação DHIS2 a partir da página de Unidades. Aparece a **ligação DHIS2 guardada** — a que foi configurada uma vez para toda a instância no cartão **Ligação DHIS2** da página Dados. Confirme-a.
 
 > Ainda sem ligação guardada? Um administrador configura-a uma vez — URL (com `https://`), utilizador, palavra-passe — e fica guardada encriptada para toda a instância. Depois disso ninguém volta a digitar credenciais.
 

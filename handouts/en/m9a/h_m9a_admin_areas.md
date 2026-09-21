@@ -45,7 +45,7 @@ Pull your country's facility registry — every facility with its region and dis
 
 <h2 class="step-h"><span class="step-n">2</span><span>Import from DHIS2</span></h2>
 
-Start a DHIS2 import from the Facilities page. The **stored DHIS2 connection** appears — the one set up once for the whole instance via **Manage connection**. Confirm it.
+Start a DHIS2 import from the Facilities page. The **stored DHIS2 connection** appears — the one set up once for the whole instance on the Data page's **DHIS2 connection** card. Confirm it.
 
 > No stored connection yet? An administrator sets it up once — URL (with `https://`), username, password — and it is saved encrypted for the whole instance. Nobody re-types credentials after that.
 

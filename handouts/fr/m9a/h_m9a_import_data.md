@@ -34,7 +34,7 @@ Télécharger les valeurs réelles depuis DHIS2 pour vos indicateurs et votre p�
 
 Cliquez sur **Données** dans la barre du haut, puis sur la carte **Données** de la section **SNIS**. Cliquez sur **Importations**.
 
-La page compte quatre onglets — **En cours**, **À venir**, **Historique**, **Par indicateur** — et les boutons **Nouvelle importation DHIS2**, **Téléverser un fichier CSV** et **Gérer la connexion**.
+La page compte trois onglets — **En cours**, **À venir**, **Historique** — et les boutons **Nouvelle importation DHIS2** et **Téléverser un fichier CSV**. La vue par indicateur est un niveau au-dessus, dans l'onglet **Registre** de la page Données SNIS.
 
 </div>
 </div>
@@ -45,15 +45,11 @@ La page compte quatre onglets — **En cours**, **À venir**, **Historique**, **
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Lancer l'assistant — Identifiants</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Lancer l'assistant</span></h2>
 
-Cliquez sur **Nouvelle importation DHIS2**. L'assistant compte cinq étapes : **Identifiants**, **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**.
+Cliquez sur **Nouvelle importation DHIS2**. L'assistant compte quatre étapes : **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**. Il utilise la connexion DHIS2 enregistrée de l'instance ; rien à saisir.
 
-À l'étape **Identifiants**, la connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant**.
-
-![h:170](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
-
-> Pas encore de connexion enregistrée ? Configurez-la une fois via **Gérer la connexion** sur la page Importations — elle est sauvegardée pour toute l'instance, chiffrée, et personne ne retape les identifiants à chaque importation.
+> Pas encore de connexion enregistrée ? Configurez-la une fois sur la page **Données**, carte **Connexion DHIS2** — elle est sauvegardée pour toute l'instance, chiffrée, et personne ne retape les identifiants à chaque importation.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Indicateurs</span></h2>
 
@@ -97,7 +93,7 @@ L'importation tourne sur le serveur. L'onglet **En cours** affiche la progressio
 
 ## Point de contrôle
 
-La page Données SNIS affiche maintenant vos indicateurs sous forme de graphique, avec les valeurs dans le temps. L'onglet **Par indicateur** liste chaque indicateur avec ses mois de données et sa dernière importation.
+La page Données SNIS affiche maintenant vos indicateurs sous forme de graphique, avec les valeurs dans le temps. Son onglet **Registre** liste chaque indicateur avec ses mois de données, sa dernière importation et ses éventuels mois en échec.
 
 ---
 
@@ -105,9 +101,9 @@ La page Données SNIS affiche maintenant vos indicateurs sous forme de graphique
 
 ## En cas de problème
 
-- **Des paires (indicateur, mois) ont échoué** — l'importation conserve tout ce qui a réussi ; rien n'est annulé. Ouvrez l'onglet **Par indicateur** pour voir les mois en échec par indicateur et relancer uniquement ces paires. Quelques échecs signifient généralement qu'aucune donnée n'existe dans DHIS2 pour cette combinaison ; beaucoup d'échecs pointent vers le mapping des indicateurs (voir *Importer les indicateurs*).
+- **Des paires (indicateur, mois) ont échoué** — l'importation conserve tout ce qui a réussi ; rien n'est annulé. Ouvrez l'onglet **Registre** de la page Données SNIS pour voir les mois en échec par indicateur et relancer uniquement ces paires. Quelques échecs signifient généralement qu'aucune donnée n'existe dans DHIS2 pour cette combinaison ; beaucoup d'échecs pointent vers le mapping des indicateurs (voir *Importer les indicateurs*).
 
-![h:170](../../../resources/screenshots/m9a_setup/24_imports_by_indicator.png)
+![h:170](../../../resources/screenshots/m9a_setup/24_ledger.png)
 
 - **Le réseau coupe pendant l'importation** — rien à protéger de votre côté : le téléchargement tourne sur le serveur, pas dans votre navigateur. Consultez l'onglet Historique plus tard.
 - **La fenêtre était trop étroite** — relancez l'assistant avec une plage plus large. Les mois réimportés sont simplement rafraîchis avec les valeurs actuelles de DHIS2.

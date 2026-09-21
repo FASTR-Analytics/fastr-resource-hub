@@ -57,7 +57,7 @@ Escolha um período (ex.: o mês passado) e uma unidade sanitária que conheça 
 
 <h2 class="step-h"><span class="step-n">5</span><span>Rever o histórico de importações</span></h2>
 
-Abra o separador **Histórico** da página Importações para ver todas as importações realizadas, e o separador **Por indicador** para os meses de dados e a última importação de cada indicador. Útil para acompanhar o que foi carregado e quando.
+Abra o separador **Histórico** da página Importações para ver todas as importações realizadas, e o separador **Registo** da página de Dados HMIS para os meses de dados e a última importação de cada indicador. Útil para acompanhar o que foi carregado e quando.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 

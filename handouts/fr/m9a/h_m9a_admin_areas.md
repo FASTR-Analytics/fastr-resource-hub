@@ -45,7 +45,7 @@ Récupérer le registre des établissements de votre pays — chaque établissem
 
 <h2 class="step-h"><span class="step-n">2</span><span>Importer depuis DHIS2</span></h2>
 
-Lancez une importation DHIS2 depuis la page Établissements. La **connexion DHIS2 enregistrée** s'affiche — celle configurée une fois pour toute l'instance via **Gérer la connexion**. Confirmez-la.
+Lancez une importation DHIS2 depuis la page Établissements. La **connexion DHIS2 enregistrée** s'affiche — celle configurée une fois pour toute l'instance sur la carte **Connexion DHIS2** de la page Données. Confirmez-la.
 
 > Pas encore de connexion enregistrée ? Un administrateur la configure une fois — URL (avec `https://`), nom d'utilisateur, mot de passe — et elle est sauvegardée chiffrée pour toute l'instance. Personne ne ressaisit d'identifiants ensuite.
 

@@ -52,7 +52,7 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 ### 1. Before you begin · ~5 min · whole room
 
-**What happens.** An orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled. Participants gather what they need — a completed Data Prep Checklist, DHIS2 URL/username/password, a stable browser. The DHIS2 connection is stored **once per instance** (encrypted), via **Manage connection** on the Imports page; after that, nobody re-types credentials.
+**What happens.** An orientation page that previews the four-step sequence and explains how DHIS2 credentials are handled. Participants gather what they need — a completed Data Prep Checklist, DHIS2 URL/username/password, a stable browser. The DHIS2 connection is stored **once per instance** (encrypted), on the Data page's **DHIS2 connection** card; after that, nobody re-types credentials.
 
 **Say something like.** *"We set up the DHIS2 connection once, for the whole instance. From then on every import — including the scheduled ones — uses that stored connection."*
 
@@ -95,13 +95,13 @@ The five activities run in a **strict order**: each step depends on the one befo
 
 ### 4. Import HMIS data · ~25 min · whole room
 
-**What happens.** The largest data operation in setup: pulling actual HMIS values from DHIS2. Participants walk the five-step wizard — **Credentials, Indicators, Time, Config, Review & launch** — and the import then runs on the server. Progress shows on the Imports page (Current tab); completion shows in History.
+**What happens.** The largest data operation in setup: pulling actual HMIS values from DHIS2. Participants walk the four-step wizard — **Indicators, Time, Config, Review & launch** — and the import then runs on the server. Progress shows on the Imports page (Current tab); completion shows in History.
 
-**Demonstrate.** Show the Review & launch summary — the (indicator, month) pair count tells you how big the pull is — and the **By indicator** tab, so teams know where failed pairs appear and how to retry them.
+**Demonstrate.** Show the Review & launch summary — the (indicator, month) pair count tells you how big the pull is — and the HMIS Data page's **Ledger** tab, so teams know where failed pairs appear and how to retry them.
 
 **Say something like.** *"Once you click Start import, the server does the work. You can close the tab — check the History tab in a few minutes. Whatever succeeds is kept; failed months can be retried on their own."*
 
-**What a good result looks like.** The import finished in History, with the By indicator tab showing the expected months of data and zero (or explainable) failed months.
+**What a good result looks like.** The import finished in History, with the Ledger tab showing the expected months of data and zero (or explainable) failed months.
 
 **Watch for.**
 - Teams moving on before the import finishes — the verify step (and later the results package) needs the data to be in.

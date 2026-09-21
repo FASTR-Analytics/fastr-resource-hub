@@ -57,7 +57,7 @@ Pick one period (e.g., last month) and one facility you know well. Mentally comp
 
 <h2 class="step-h"><span class="step-n">5</span><span>Review import history</span></h2>
 
-Open the Imports page's **History** tab to see every import that's been run, and the **By indicator** tab for months of data and last-import date per indicator. Useful for tracking what's loaded and when.
+Open the Imports page's **History** tab to see every import that's been run, and the HMIS Data page's **Ledger** tab for months of data and last-import date per indicator. Useful for tracking what's loaded and when.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 

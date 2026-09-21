@@ -71,21 +71,17 @@ The idea in one sentence: the import fills the data store, the package does the 
 
    ![h:160](../../../resources/screenshots/m9a_setup/22_imports_page.png)
 
-The wizard opens. It has five steps: **Credentials**, **Indicators**, **Time**, **Config**, **Review & launch**.
-
-3. **Credentials** — the stored DHIS2 connection appears. Click **Next**.
-
-   ![h:160](../../../resources/screenshots/m9a_setup/25_wizard_credentials.png)
+The wizard opens. It has four steps: **Indicators**, **Time**, **Config**, **Review & launch**. It uses the instance's stored DHIS2 connection (Data page, **DHIS2 connection** card); there is nothing to type.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-4. **Indicators** — tick the indicators to download. For a routine update, the safe choice: **tick them all**, with the checkbox at the top of the list. Then **Next**.
+3. **Indicators** — tick the indicators to download. For a routine update, the safe choice: **tick them all**, with the checkbox at the top of the list. Then **Next**.
 
    ![h:210](../../../resources/screenshots/m9a_setup/26_wizard_indicators.png)
 
-5. **Time** — choose **Now**, then **Next**.
+4. **Time** — choose **Now**, then **Next**.
 
    ![h:130](../../../resources/screenshots/m9a_setup/27_wizard_time.png)
 
@@ -95,11 +91,11 @@ The wizard opens. It has five steps: **Credentials**, **Indicators**, **Time**, 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-6. **Config** — set the **period range** with the two sliders: the window of months to download. For our example: **September 2025 → July 2026** — the new months, plus the margin for late entries.
+5. **Config** — set the **period range** with the two sliders: the window of months to download. For our example: **September 2025 → July 2026** — the new months, plus the margin for late entries.
 
    ![h:140](../../../resources/screenshots/m9a_setup/28_wizard_config.png)
 
-7. **Review & launch** — reread the summary: the connection, the indicator count, the window. Then click **Start import**.
+6. **Review & launch** — reread the summary: the connection, the indicator count, the window. Then click **Start import**.
 
    ![h:170](../../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
 
@@ -122,7 +118,7 @@ The new months are downloaded, but no analysis has recomputed. That is the packa
 
    ![h:150](../../../resources/screenshots/m9a_setup/32_generate_data_step.png)
 
-4. **Modules** — tick the analysis modules to run, the usual ones for your instance. If a module needs another one, FASTR adds it by itself. Then **Next**.
+3. **Modules** — tick the analysis modules to run, the usual ones for your instance. If a module needs another one, FASTR adds it by itself. Then **Next**.
 
    ![h:170](../../../resources/screenshots/m9a_setup/33_generate_modules_step.png)
 

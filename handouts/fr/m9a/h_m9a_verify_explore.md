@@ -57,7 +57,7 @@ Choisissez une période (p. ex. le mois dernier) et un établissement que vous c
 
 <h2 class="step-h"><span class="step-n">5</span><span>Consulter l'historique d'importation</span></h2>
 
-Ouvrez l'onglet **Historique** de la page Importations pour voir toutes les importations passées, et l'onglet **Par indicateur** pour les mois de données et la dernière importation de chaque indicateur. Utile pour suivre ce qui est chargé et quand.
+Ouvrez l'onglet **Historique** de la page Importations pour voir toutes les importations passées, et l'onglet **Registre** de la page Données SNIS pour les mois de données et la dernière importation de chaque indicateur. Utile pour suivre ce qui est chargé et quand.
 
 ![h:200](../../../resources/screenshots/m9a_setup/17_previous_imports.jpeg)
 
