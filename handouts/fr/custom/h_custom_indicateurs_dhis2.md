@@ -8,9 +8,9 @@ footer: "FASTR · Indicateurs"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-# Importer un indicateur DHIS2 et créer l'indicateur commun correspondant
+# Ajouter un indicateur DHIS2 dans FASTR
 
-<p class="meta-line"><strong>Guide pas à pas</strong> · <strong>~15 min</strong></p>
+<p class="meta-line"><strong>Guide pas à pas</strong> · <strong>~10 min par indicateur</strong></p>
 
 <div class="p1-grid">
 <aside class="p1-sidebar">
@@ -19,80 +19,53 @@ footer: "FASTR · Indicateurs"
 
 - ☐ Vous êtes connecté à votre instance FASTR
 - ☐ Vous avez l'**ID DHIS2** de l'indicateur (ou son nom exact)
-- ☐ Vous savez quel nom générique vous voulez lui donner
+- ☐ La connexion DHIS2 de l'instance est enregistrée (page **Données**, carte **Connexion DHIS2**)
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Dans DHIS2, chaque indicateur porte un code technique comme `s6MKkVJFwda`. Ce code ne dit rien à personne, et il est différent dans chaque pays.
+Dans DHIS2, chaque élément porte un code technique comme `s6MKkVJFwda`. Ce code ne dit rien à personne. Dans FASTR, le même élément porte un **ID lisible** (`cpn1_faf`) et un **libellé** (« CPN1 femmes ayant reçu FAF »).
 
-FASTR travaille donc à **deux niveaux** :
-
-- l'**indicateur DHIS2** — le code technique, tel qu'il existe dans votre DHIS2
-- l'**indicateur commun** — un nom lisible et stable, le même partout (`anc1`, `bcg`)
-
-Vous allez faire les deux, puis les relier.
+Ajouter un indicateur, c'est donc : **le chercher** dans DHIS2, **lui donner un nom**, **enregistrer**. Puis télécharger ses données et générer un paquet de résultats.
 
 </div>
 </div>
 
-> **L'analogie :** l'indicateur DHIS2 est le numéro de téléphone. L'indicateur commun est le nom dans votre répertoire. Vous composez toujours un nom, jamais un numéro — et si le numéro change, seul le répertoire est à mettre à jour.
+> **L'analogie :** le code DHIS2 est le numéro de téléphone. L'ID FASTR est le nom dans votre répertoire. Vous composez toujours un nom, jamais un numéro.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la page des indicateurs</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la liste des indicateurs</span></h2>
 
-1. Connectez-vous à votre instance FASTR.
-2. Cliquez sur l'icône **Données** dans la barre de navigation en haut.
+1. Cliquez sur **Données** dans la barre du haut.
+2. Dans la section **SNIS**, cliquez sur la carte **Indicateurs**.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/02_donnees_nav.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/01_donnees_indicateurs.png)
 
-3. Cliquez sur la carte **Indicateurs**.
+Tous les indicateurs sont dans **un seul tableau**. Chaque ligne affiche l'**ID de l'indicateur**, son **libellé**, son **type** et la colonne **Défini par** : pour un élément DHIS2, c'est le code DHIS2 et son nom d'origine.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/03_indicateurs_card.jpeg)
-
-Vous arrivez sur une page à trois onglets : **Indicateurs communs**, **Indicateurs DHIS2**, **Indicateurs calculés**. Nous n'utiliserons que les deux premiers.
+![w:470](../../../resources/screenshots/indicateurs_v2/02_liste_indicateurs.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Importer l'indicateur depuis DHIS2</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Chercher l'indicateur dans DHIS2</span></h2>
 
-1. Ouvrez l'onglet **Indicateurs DHIS2**.
+1. Cliquez sur **Ajouter depuis DHIS2**, en haut à droite de la liste.
+2. Dans le champ de recherche, collez l'**ID DHIS2** de l'indicateur, ou tapez son nom. Cliquez sur **Recherche**.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/04_onglet_dhis2.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/03_recherche_dhis2.png)
 
-2. Cliquez sur **Importer un indicateur DHIS2**.
+3. Dans les résultats, cliquez sur **Ajouter** à côté de l'élément voulu. Il passe dans la colonne **Éléments sélectionnés**, à droite.
+4. Répétez pour chaque indicateur à ajouter.
+5. Cliquez sur **Suivant : nommer les indicateurs**, en haut à droite.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/05_importer_btn.jpeg)
-
-3. Dans le champ de recherche, collez l'**ID DHIS2** de l'indicateur — ou tapez son nom si vous ne connaissez pas l'ID.
-
-   ![h:195](../../../resources/screenshots/dhis2_indicators/06b_recherche_champ.jpeg)
-
-4. Cliquez sur **Recherche**.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-> **Astuce :** vous pouvez chercher plusieurs indicateurs d'un coup en séparant les termes par des virgules ou des points-virgules. Un mot large comme `prénatal` ramène toute la famille d'indicateurs en une seule recherche.
-
-5. Dans les résultats, cliquez sur **Ajouter** à côté de l'indicateur voulu. Il bascule dans la colonne **Éléments sélectionnés** à droite.
-
-   ![h:225](../../../resources/screenshots/dhis2_indicators/08_ajouter.jpeg)
-
-6. **Si vous cherchez un sous-groupe** (une tranche d'âge, un sexe, un type de structure), ne prenez pas la ligne principale. Voir l'encadré ci-dessous.
-7. Répétez pour chaque indicateur à importer, puis cliquez sur **Enregistrer la sélection** en haut à droite.
-
-   ![h:225](../../../resources/screenshots/dhis2_indicators/09_enregistrer_selection.jpeg)
-
-L'indicateur DHIS2 apparaît maintenant dans la liste de l'onglet **Indicateurs DHIS2**. À ce stade il est dans FASTR, mais encore relié à rien : il porte son code technique et personne ne peut l'utiliser dans une analyse.
+> **Astuce :** vous pouvez chercher plusieurs termes d'un coup en les séparant par des virgules. Un mot large comme `prénatal` ramène toute la famille d'indicateurs en une seule recherche. Les lignes grisées « Ne peut pas être ajouté » ne sont pas des dénombrements mensuels : FASTR ne peut pas les analyser.
 
 ---
 
@@ -100,42 +73,37 @@ L'indicateur DHIS2 apparaît maintenant dans la liste de l'onglet **Indicateurs 
 
 ## Trouver un sous-groupe : les désagrégations (COC)
 
-Dans DHIS2, un même élément de données est souvent découpé en sous-groupes — tranches d'âge, sexe, type de structure. Ces découpages s'appellent des **COC** (*category option combos*).
+Dans DHIS2, un même élément de données est souvent découpé en sous-groupes, par tranche d'âge, sexe ou type de structure. Ces découpages s'appellent des **COC** (*category option combos*).
 
-Un COC n'apparaît **pas** directement dans les résultats de recherche. Il faut aller le chercher :
-
-1. Recherchez l'**élément de données** lui-même, par son ID — dans notre exemple `Qi1WRFJoSnU`.
-2. Sur la ligne de résultat, repérez le badge orange **« N COCs »**. Il indique que cet élément est désagrégé.
+1. Recherchez l'**élément de données** lui-même, par son ID, par exemple `Qi1WRFJoSnU`.
+2. Sur la ligne de résultat, repérez le badge **« N COCs »**. Il indique que cet élément est désagrégé.
 3. Cliquez sur le **chevron** à gauche de la ligne pour dérouler la liste des sous-groupes.
-4. Chaque sous-groupe apparaît alors sur sa propre ligne, avec son ID complet sous la forme `élément.coc` — par exemple `Qi1WRFJoSnU.b39EuNOkecq`.
+4. Chaque sous-groupe apparaît sur sa propre ligne, avec son ID complet sous la forme `élément.coc`, par exemple `Qi1WRFJoSnU.b39EuNOkecq`.
 5. Cliquez sur **Ajouter** sur la ligne du sous-groupe voulu, pas sur celle de l'élément principal.
 
-> **La différence est importante.** Ajouter la ligne principale (`Qi1WRFJoSnU`) récupère **tous** les accouchements, tous âges confondus. Ajouter les lignes COC récupère précisément les tranches d'âge qui vous intéressent. Si vous voulez « moins de 18 ans », ce sont les COC qu'il vous faut.
+> **La différence est importante.** La ligne principale (`Qi1WRFJoSnU`) récupère **tous** les accouchements, tous âges confondus. Les lignes COC récupèrent précisément les tranches d'âge qui vous intéressent. Si vous voulez « moins de 18 ans », ce sont les COC qu'il vous faut.
+
+**Deux sous-groupes à additionner ?** Ajoutez-les tous les deux, puis cliquez sur **Créer**, choisissez le type **Somme** et cochez les deux membres. FASTR fait le total par établissement et par mois. C'est le cas de l'exemple `accouchements_moins18ans` : deux cases d'âge distinctes dans DHIS2, un seul chiffre dans FASTR.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Créer l'indicateur commun et le relier</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Donner un nom, puis enregistrer</span></h2>
 
-1. Revenez à l'onglet **Indicateurs communs**.
+FASTR propose un **ID de l'indicateur** et un **libellé** pour chaque élément sélectionné, à partir du nom DHIS2. Vous pouvez les garder ou les modifier.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/10_onglet_communs.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/04_nommer.png)
 
-2. Vérifiez d'abord que l'indicateur commun n'existe pas déjà dans la liste. S'il existe, cliquez sur son **icône crayon** et passez directement au point 5.
-3. Sinon, cliquez sur **Créer un indicateur commun**.
+1. Remplacez l'ID proposé par un ID court, par exemple `cpn1_faf`. **Minuscules, sans accents, sans espaces** ; les tirets bas sont acceptés.
+2. Remplacez le libellé par le nom à afficher, par exemple « CPN1 femmes ayant reçu FAF ». Accents et espaces autorisés.
+3. Cliquez sur **Enregistrer**.
 
-   ![h:195](../../../resources/screenshots/dhis2_indicators/11_creer_commun.jpeg)
+## Vérification
 
-4. Remplissez les deux champs :
-   - **ID commun** — le nom technique, p. ex. `cpn1_avant_4mois`. **Minuscules, sans accents, sans espaces** ; les tirets bas sont acceptés.
-   - **Libellé** — le nom affiché à l'écran, p. ex. « CPN1 avant 4 mois de grossesse ». Accents et espaces autorisés.
+De retour sur la liste, le nouvel indicateur apparaît avec le badge **Élément DHIS2**, son code DHIS2 et son nom d'origine dans la colonne **Défini par**, et une coche dans la colonne **Inclure**.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-![h:260](../../../resources/screenshots/dhis2_indicators/12b_id_libelle.jpeg)
+![w:470](../../../resources/screenshots/indicateurs_v2/05_verification.png)
 
 ---
 
@@ -145,53 +113,24 @@ Un COC n'apparaît **pas** directement dans les résultats de recherche. Il faut
 
 C'est la question qui revient le plus souvent. Les deux champs décrivent le même indicateur, mais ils s'adressent à des publics différents.
 
-### L'ID commun — pour la machine
+### L'ID de l'indicateur, pour la machine
 
-L'ID est un **nom de variable**. Il est utilisé par le code d'analyse, les modules et les fichiers exportés. D'où les règles strictes : minuscules, chiffres et tirets bas uniquement, ni accents ni espaces.
-
-Ce n'est pas une coquetterie technique. Un accent ou un espace dans un nom de variable casse les scripts d'analyse et les exports CSV. C'est aussi pourquoi **un ID ne peut plus être modifié après création** : d'autres éléments y font déjà référence.
+L'ID est un **nom de variable**. Il est utilisé par le code d'analyse, les formules et les fichiers exportés. D'où les règles strictes : minuscules, chiffres et tirets bas uniquement, ni accents ni espaces. Un accent ou un espace dans un nom de variable casse les scripts d'analyse et les exports CSV.
 
 Une convention cohérente rend la liste lisible quand elle atteint cent lignes. Nous préfixons par domaine : `cpn1_…` pour les consultations prénatales, `nut_…` pour la nutrition. Les indicateurs d'une même famille se retrouvent ainsi côte à côte au tri alphabétique.
 
-### Le libellé — pour les humains
+### Le libellé, pour les humains
 
-Le libellé est le nom affiché partout dans la plateforme : listes déroulantes, tableaux, et surtout **titres et légendes des graphiques**. Accents, espaces et majuscules sont autorisés, et attendus.
+Le libellé est le nom affiché partout dans la plateforme : listes déroulantes, tableaux, et surtout **titres et légendes des graphiques**. Accents, espaces et majuscules sont autorisés, et attendus. Deux qualités comptent :
 
-C'est le texte que verra quelqu'un qui découvre le graphique sans vous à côté pour l'expliquer. Deux qualités comptent :
+- **Clair** : « CPN1 femmes 15-17 ans » se comprend seul. « CPN1 g2 » non.
+- **Concis** : sur un axe de graphique, un libellé long est tronqué. Visez une poignée de mots.
 
-- **Clair** — « CPN1 femmes 15-17 ans » se comprend seul. « CPN1 g2 » non.
-- **Concis** — sur un axe de graphique, un libellé long est tronqué ou illisible. Visez une poignée de mots.
+> **Le test à faire.** Imaginez le libellé sur la légende d'un graphique projeté en réunion. Un collègue d'un autre service comprend-il de quoi il s'agit, sans explication ? Si oui, c'est le bon libellé.
 
-> **Le test à faire.** Imaginez le libellé sur la légende d'un graphique projeté en réunion. Est-ce qu'un collègue d'un autre service comprend de quoi il s'agit, sans explication et sans plisser les yeux ? Si oui, c'est le bon libellé.
+Inutile de répéter dans le libellé ce que le graphique dit déjà. Si le graphique porte sur la nutrition, « Retard de croissance moins de 5 ans » suffit. Le nom DHIS2 complet reste visible dans la colonne **Défini par**, mais il est trop long pour un axe.
 
-Inutile de répéter dans le libellé ce que le graphique dit déjà. Si le graphique porte déjà sur la nutrition, « Retard de croissance moins de 5 ans » suffit — n'ajoutez pas « Nutrition — Surveillance nutritionnelle… ». Le nom DHIS2 complet reste consultable, mais il est trop long pour un axe.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-5. Sous **Indicateurs DHIS2 associés (ID JSON)**, cliquez sur le bouton **+**, puis choisissez dans le menu déroulant l'indicateur DHIS2 importé à l'étape 2.
-
-   ![h:200](../../../resources/screenshots/dhis2_indicators/13b_associer.jpeg)
-
-6. Cliquez sur **Sauvegarder**.
-
-## Vérification
-
-De retour sur la liste des **Indicateurs communs**, votre nouvel indicateur apparaît avec son code DHIS2 dans la colonne **Associé à**. C'est le signe que le lien est fait.
-
-> **Plusieurs codes pour un seul indicateur commun ?** C'est permis, et souvent nécessaire. Ajoutez-en autant que voulu avec le bouton **+** : FASTR **additionne** leurs valeurs.
-
-**L'exemple que nous avons fait ensemble.** L'indicateur commun `accouchements_moins18ans` (« Accouchements en FOSA moins de 18 ans ») est associé à **deux** codes DHIS2 :
-
-```
-Qi1WRFJoSnU.b39EuNOkecq
-Qi1WRFJoSnU.wQcVaGUsRp6
-```
-
-La partie avant le point est la même : `Qi1WRFJoSnU`, l'élément de données « accouchements ». Ce qui change, c'est la partie après le point — la **désagrégation** (tranche d'âge). Dans DHIS2, les accouchements de moins de 18 ans sont saisis dans deux cases d'âge distinctes. Il n'existe donc aucun code unique pour « moins de 18 ans ».
-
-En associant les deux à un même indicateur commun, vous reconstituez le total : FASTR fait la somme des deux cases et vous obtenez un seul chiffre utilisable dans les analyses.
+> **Bon à savoir.** L'ID peut être renommé plus tard depuis l'icône crayon : FASTR réécrit les formules qui l'utilisent et garde les données. Le code DHIS2, lui, devient fixe dès que des données ont été téléchargées.
 
 ---
 
@@ -199,15 +138,12 @@ En associant les deux à un même indicateur commun, vous reconstituez le total 
 
 ## Que faire si ça ne marche pas
 
-- **L'ID commun est refusé** — il contient une virgule, un point-virgule, un deux-points, ou dépasse 128 caractères. Tenez-vous-en aux minuscules, chiffres et tirets bas.
-- **La recherche DHIS2 ne renvoie rien** — vérifiez l'orthographe de l'ID, essayez le nom au lieu de l'ID, ou vérifiez que votre compte DHIS2 a accès aux métadonnées.
-- **Un formulaire de connexion DHIS2 apparaît** — normal si aucune connexion n'est enregistrée pour cette instance. Saisissez vos identifiants ; ils ne valent que pour la session. Le bouton **Modifier la connexion** permet d'en changer.
-- **L'indicateur DHIS2 n'est pas dans le menu déroulant** — il n'a pas été importé. Retournez à l'étape 2.
-- **Vous vous êtes trompé d'ID commun** — un ID ne peut pas être modifié après création, car les données existantes y font référence. Supprimez l'indicateur et recréez-le.
-
-## Bon à savoir
-
-L'indicateur commun est ce que verront les analystes partout dans la plateforme. Choisissez un ID court et descriptif, et un libellé que quelqu'un d'autre comprendra sans explication.
+- **La recherche DHIS2 ne renvoie rien.** Vérifiez l'orthographe de l'ID, essayez le nom au lieu de l'ID, ou un mot plus court.
+- **Un message « Aucune connexion DHIS2 n'est enregistrée » apparaît.** Sur la page **Données**, ouvrez la carte **Connexion DHIS2** et saisissez l'URL et les identifiants DHIS2 de l'instance.
+- **L'élément est grisé « Ne peut pas être ajouté ».** FASTR n'accepte que les éléments mensuels de type dénombrement (agrégation SUM). Choisissez un autre élément ou demandez à l'administrateur DHIS2.
+- **« Déjà ajouté sous … ».** L'élément existe déjà dans FASTR sous cet ID. Rien à créer : utilisez l'indicateur existant.
+- **L'ID est refusé.** Il contient un accent, un espace, une virgule, un point-virgule, un deux-points ou un crochet, dépasse 128 caractères, ou c'est un mot réservé. Tenez-vous-en aux minuscules, chiffres et tirets bas.
+- **Vous vous êtes trompé d'ID.** Ouvrez l'indicateur avec l'icône crayon et corrigez l'ID. FASTR met à jour les formules et garde les données.
 
 ---
 
@@ -217,18 +153,18 @@ L'indicateur commun est ce que verront les analystes partout dans la plateforme.
 
 <p class="meta-line"><strong>4 indicateurs à ajouter</strong></p>
 
-Pour chacun des quatre indicateurs ci-dessous, appliquez la procédure complète : **étape 2** (importer le code DHIS2), puis **étape 3** (créer l'indicateur commun et l'associer).
+Pour chacun des quatre indicateurs ci-dessous, appliquez les étapes **1 à 3** : recherchez l'ID DHIS2, cliquez sur **Ajouter**, puis à l'étape de nommage remplacez l'ID et le libellé proposés par ceux du tableau.
 
-Ce sont des éléments de données simples, sans désagrégation. Vous n'avez donc **pas** besoin de dérouler les COC — recherchez l'ID, cliquez sur **Ajouter** sur la ligne principale.
+Ce sont des éléments de données simples, sans désagrégation. Vous n'avez donc **pas** besoin de dérouler les COC : recherchez l'ID, cliquez sur **Ajouter** sur la ligne principale.
 
-| ID DHIS2 | ID commun | Libellé |
+| ID DHIS2 | ID de l'indicateur | Libellé |
 |---|---|---|
 | `naBJZSepUeV` | `cpn1_faf` | CPN1 femmes ayant reçu FAF |
 | `qnL45tcZRpB` | `cpn1_15_17` | CPN1 femmes 15-17 ans |
 | `xszA8v2QOOX` | `nut_retard_croissance_moins_5ans` | Retard de croissance moins de 5 ans |
 | `xWYKMcj6CKu` | `nut_insuf_ponderale_moins_5ans` | Insuffisance pondérale moins de 5 ans |
 
-> **Notez la différence.** Les **libellés** ci-dessus portent leurs accents — c'est ce que verront les utilisateurs. Les **ID communs** n'en ont pas, et c'est voulu. Les **noms DHIS2** en bas de page sont recopiés tels quels depuis DHIS2, sans accents : ne les corrigez pas, sinon la recherche ne trouvera plus rien.
+> **Notez la différence.** Les **libellés** ci-dessus portent leurs accents : c'est ce que verront les utilisateurs. Les **ID** n'en ont pas, et c'est voulu. Les **noms DHIS2** en bas de page sont recopiés tels quels depuis DHIS2, sans accents : ne les corrigez pas, sinon la recherche ne trouvera plus rien.
 
 ---
 
@@ -236,16 +172,16 @@ Ce sont des éléments de données simples, sans désagrégation. Vous n'avez do
 
 ## À quoi correspond chaque code dans DHIS2
 
-Utile pour vérifier que vous avez bien importé le bon élément — le nom qui s'affiche dans les résultats de recherche doit correspondre.
+Utile pour vérifier que vous avez bien ajouté le bon élément : le nom qui s'affiche dans les résultats de recherche, puis dans la colonne **Défini par**, doit correspondre.
 
-| ID commun | Nom dans DHIS2 |
+| ID de l'indicateur | Nom dans DHIS2 |
 |---|---|
 | `cpn1_faf` | CPN Femmes Enceintes vues en 1ere CPN ayant recu FAF |
 | `cpn1_15_17` | CPN Femmes Enceintes entre 15 - 17 ans vues en 1ere CPN |
 | `nut_retard_croissance_moins_5ans` | Nutrition Surveillance nutritionnelle des enfants moins de 5 ans T/A inf -2 ZS Retard de croissance |
 | `nut_insuf_ponderale_moins_5ans` | Nutrition Surveillance nutritionnelle des enfants moins de 5 ans P/A inf -2 ZS Insuf pond. |
 
-> **Vérification finale.** Une fois les quatre faits, l'onglet **Indicateurs communs** doit afficher les quatre nouveaux ID, chacun avec son code DHIS2 dans la colonne **Associé à**. Si la colonne est vide pour l'un d'eux, l'association n'a pas été enregistrée — rouvrez-le avec l'icône crayon et refaites l'étape 3, point 5.
+> **Vérification finale.** Une fois les quatre faits, la liste doit afficher les quatre nouveaux ID, chacun avec le badge **Élément DHIS2** et son code DHIS2 dans la colonne **Défini par**. Si l'un manque, reprenez l'étape 2 pour cet indicateur.
 
 ---
 
@@ -267,7 +203,7 @@ FASTR range les données à trois niveaux.
 - Le **paquet de résultats** est un ensemble d'analyses **déjà calculées** sur ces données, généré au niveau de l'instance.
 - Chaque **projet** lit ses chiffres dans **le paquet qu'on lui a rattaché**. Un projet ne lit jamais la base centrale en direct.
 
-> **L'analogie :** l'instance est l'entrepôt, le projet est votre étagère. Une livraison arrive à l'entrepôt, mais votre étagère ne se remplit pas toute seule — l'entrepôt prépare un **carton complet** (le paquet), et votre étagère reçoit ce carton.
+> **L'analogie :** l'instance est l'entrepôt, le projet est votre étagère. Une livraison arrive à l'entrepôt, mais votre étagère ne se remplit pas toute seule. L'entrepôt prépare un **carton complet** (le paquet), et votre étagère reçoit ce carton.
 
 La conséquence pratique : **tout ce que vous changez au niveau de l'instance reste invisible dans les projets** jusqu'à ce qu'un **nouveau paquet de résultats** soit généré et rattaché. Vos quatre nouveaux indicateurs ne font pas exception.
 
@@ -277,43 +213,21 @@ La conséquence pratique : **tout ce que vous changez au niveau de l'instance re
 
 <h2 class="step-h"><span class="step-n">4</span><span>Télécharger les données depuis DHIS2</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut, puis, dans la section **SNIS**, sur la carte **Données**.
+1. Dans la liste des indicateurs, **cochez** les quatre indicateurs que vous venez d'ajouter.
+2. Dans la barre d'actions qui apparaît, cliquez sur **Importer les données HMIS depuis DHIS2**. L'assistant d'importation s'ouvre, déjà réglé sur ces indicateurs.
 
-   ![h:170](../../../resources/screenshots/dhis2_import_v2/01_donnees.png)
+   ![w:360](../../../resources/screenshots/indicateurs_v2/06_actions_groupees.png)
+3. **Heure** : choisissez **Maintenant** pour lancer l'importation tout de suite, puis **Suivant**.
 
-2. Cliquez sur **Importations**, puis sur **Nouvelle importation DHIS2**. L'assistant compte cinq étapes : **Identifiants**, **Indicateurs**, **Heure**, **Configuration**, **Vérifier et lancer**.
+   ![h:110](../../../resources/screenshots/dhis2_import_v2/06_wizard_heure.png)
 
-   ![h:170](../../../resources/screenshots/dhis2_import_v2/03_importations.png)
+4. **Configuration** : réglez la **plage de périodes** avec les deux curseurs, la fenêtre de mois à télécharger. Puis **Suivant**.
 
-3. **Identifiants** — la connexion DHIS2 enregistrée s'affiche. Cliquez sur **Suivant**.
+   ![h:120](../../../resources/screenshots/dhis2_import_v2/07_wizard_periode.png)
 
-   ![h:150](../../../resources/screenshots/dhis2_import_v2/04_wizard_identifiants.png)
+5. **Vérifier et lancer** : relisez le récapitulatif, puis cliquez sur **Démarrer l'importation**.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-4. **Indicateurs** — cochez les indicateurs à télécharger, **y compris vos quatre nouveaux**. Puis **Suivant**.
-
-   ![h:260](../../../resources/screenshots/dhis2_import_v2/05_wizard_indicateurs.png)
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-5. **Heure** — choisissez **Maintenant** pour lancer l'importation tout de suite, puis **Suivant**.
-
-   ![h:130](../../../resources/screenshots/dhis2_import_v2/06_wizard_heure.png)
-
-6. **Configuration** — réglez la **plage de périodes** avec les deux curseurs : la fenêtre de mois à télécharger. Puis **Suivant**.
-
-   ![h:140](../../../resources/screenshots/dhis2_import_v2/07_wizard_periode.png)
-
-7. **Vérifier et lancer** — relisez le récapitulatif, puis cliquez sur **Démarrer l'importation**.
-
-   ![h:150](../../../resources/screenshots/dhis2_import_v2/08_wizard_lancer.png)
-
-L'importation tourne sur le serveur. Selon la période et le nombre d'indicateurs, comptez de quelques minutes à beaucoup plus. Vous pouvez fermer l'onglet : la page **Importations** → **Historique** vous dit quand elle est terminée. **Attendez la fin avant le geste suivant** — un paquet généré trop tôt calculerait sur les anciennes données.
+L'importation tourne sur le serveur. Selon la période et le nombre d'indicateurs, comptez de quelques minutes à beaucoup plus. Vous pouvez fermer l'onglet : sous **Données** → **SNIS** → carte **Données** → **Importations**, l'**Historique** vous dit quand elle est terminée. **Attendez la fin avant le geste suivant** : un paquet généré trop tôt calculerait sur les anciennes données.
 
 > **Prenez la même période que les données existantes.** Un indicateur ajouté aujourd'hui n'a pas d'historique tant que vous ne l'avez pas téléchargé. Si vos autres indicateurs remontent à 2019 et que vous n'importez que 2026 pour les nouveaux, les graphiques comparatifs auront des trous.
 
@@ -330,11 +244,11 @@ Les données sont maintenant dans la base centrale, mais aucune analyse ne s'est
    ![h:160](../../../resources/screenshots/dhis2_import_v2/09_resultats.png)
 
 2. Cliquez sur **Générer un nouveau paquet de résultats**. L'assistant compte trois étapes.
-3. **Données** — cochez **Données HMIS**. Puis **Suivant**.
+3. **Données** : cochez **Données HMIS**. Puis **Suivant**.
 
    ![h:140](../../../resources/screenshots/dhis2_import_v2/10_generer_donnees.png)
 
-4. **Modules** — cochez les modules d'analyse habituels de votre instance. Si un module en nécessite un autre, FASTR l'ajoute tout seul. Puis **Suivant**.
+4. **Modules** : cochez les modules d'analyse habituels de votre instance. Si un module en nécessite un autre, FASTR l'ajoute tout seul. Puis **Suivant**.
 
    ![h:150](../../../resources/screenshots/dhis2_import_v2/11_generer_modules.png)
 
@@ -342,11 +256,11 @@ Les données sont maintenant dans la base centrale, mais aucune analyse ne s'est
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-5. **Confirmer et lancer** — gardez le libellé proposé, ou nommez le paquet plus clairement. Sous **Rattacher aux projets**, **cochez les projets qui doivent voir les nouveaux indicateurs** — pour nous, **Données SRMNIA-N**. Cliquez sur **Lancer la génération**.
+5. **Confirmer et lancer** : gardez le libellé proposé, ou nommez le paquet plus clairement. Sous **Rattacher aux projets**, **cochez les projets qui doivent voir les nouveaux indicateurs**, pour nous **Données SRMNIA-N**. Cliquez sur **Lancer la génération**.
 
    ![h:190](../../../resources/screenshots/dhis2_import_v2/12_generer_confirmer.png)
 
-La génération tourne en arrière-plan ; la progression s'affiche sur la page Paquets de résultats. Dès qu'elle réussit, les projets cochés basculent sur le nouveau paquet — vos quatre indicateurs compris.
+La génération tourne en arrière-plan ; la progression s'affiche sur la page Paquets de résultats. Dès qu'elle réussit, les projets cochés basculent sur le nouveau paquet, vos quatre indicateurs compris.
 
 ## Vérifier que le projet a bien basculé
 
@@ -354,7 +268,7 @@ Ouvrez le projet et allez dans son onglet **Paquet de résultats** : le nom du p
 
 ![h:160](../../../resources/screenshots/dhis2_import_v2/13_projet_paquet.png)
 
-> **Un projet oublié ?** Ouvrez-le, onglet **Paquet de résultats**, choisissez le nouveau paquet et cliquez sur **Utiliser ce paquet**. Et le réglage qui simplifie tout : sur la page **Résultats**, **épinglez** le paquet de référence, puis cochez dans chaque projet **« Toujours utiliser le paquet épinglé de l'instance »** — la routine devient : importer, générer, épingler.
+> **Un projet oublié ?** Ouvrez-le, onglet **Paquet de résultats**, choisissez le nouveau paquet et cliquez sur **Utiliser ce paquet**. Et le réglage qui simplifie tout : sur la page **Résultats**, **épinglez** le paquet de référence, puis cochez dans chaque projet **« Toujours utiliser le paquet épinglé de l'instance »**. La routine devient : importer, générer, épingler.
 
 ---
 
@@ -364,8 +278,8 @@ Ouvrez le projet et allez dans son onglet **Paquet de résultats** : le nom du p
 
 | Étape | Où | Effet |
 |---|---|---|
-| Créer l'indicateur | Instance → Indicateurs | Crée l'étiquette, aucune donnée |
-| Importer depuis DHIS2 | Données → SNIS → Données → Importations | Remplit la base centrale |
-| Générer un paquet et le rattacher | Résultats → Générer un nouveau paquet | Recalcule les analyses ; les projets basculent |
+| 1 à 3. Ajouter l'indicateur | Données → SNIS → Indicateurs → Ajouter depuis DHIS2 | Crée la ligne, aucune donnée |
+| 4. Télécharger les données | Cocher les indicateurs → Importer les données HMIS depuis DHIS2 | Remplit la base centrale |
+| 5. Générer un paquet et le rattacher | Résultats → Générer un nouveau paquet | Recalcule les analyses ; les projets basculent |
 
-Si un chiffre manque à l'arrivée, reprenez ce tableau de bas en haut : le projet est-il sur le bon paquet, la donnée est-elle dans l'instance, l'indicateur est-il bien associé à son code DHIS2 ?
+Si un chiffre manque à l'arrivée, reprenez ce tableau de bas en haut : le projet est-il sur le bon paquet, la donnée est-elle dans l'instance, l'indicateur porte-t-il bien son code DHIS2 dans la colonne **Défini par** ?
