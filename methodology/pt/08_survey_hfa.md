@@ -1,34 +1,44 @@
 <!-- AUTO-TRANSLATED from 08_survey_hfa.md -->
 <!-- Add REVIEWED marker after human review to protect from overwrite -->
 
-# Inquérito telefónico sobre a avaliação dos estabelecimentos de saúde (HFA)
+# Inquérito telefónico de avaliação das unidades sanitárias (HFA)
 
-## Antecedentes e objetivo
+## Contexto e objetivo
 
 ### Objetivo do módulo
 
-O módulo de Avaliação das Unidades Sanitárias (HFA) complementa os dados de rotina do HMIS, recolhendo informações diretamente das unidades sanitárias através de inquéritos telefónicos. Enquanto os dados de rotina proporcionam uma monitorização contínua dos volumes de prestação de serviços, os inquéritos telefónicos captam dimensões adicionais que não estão disponíveis nos sistemas administrativos, incluindo a disponibilidade de serviços, a prontidão e o contexto ao nível das unidades sanitárias.
+O módulo de análise do inquérito de avaliação das unidades sanitárias (HFA) complementa os dados de rotina do SIS recolhendo informação diretamente junto das unidades sanitárias através de inquéritos telefónicos. Enquanto os dados de rotina permitem o acompanhamento contínuo dos volumes de serviços prestados, os inquéritos telefónicos avaliam as lacunas na prestação de cuidados primários e captam dimensões que não existem nos sistemas administrativos: disponibilidade de serviços, prontidão das unidades, impacto dos choques no desempenho dos cuidados de saúde primários, dificuldades na prestação de serviços e outras características das unidades.
 
-O inquérito telefónico FASTR HFA foi concebido para ser rápido, de baixo custo e regularmente repetível. Ao contactar diretamente as unidades sanitárias, o inquérito recolhe informações atempadas sobre o estado operacional, o pessoal, a disponibilidade de fornecimentos e a prestação de serviços, que podem ser trianguladas com os dados de rotina do HMIS para fornecer uma imagem mais completa da prestação de serviços de saúde.
+O inquérito telefónico HFA de ciclo rápido do FASTR foi concebido para ser de baixo custo e flexível, e para apoiar o acompanhamento do sistema de cuidados primários, reforçando a utilização sistemática e atempada dos dados das unidades sanitárias na tomada de decisão. Ao contactar diretamente as unidades de cuidados primários, o inquérito recolhe em tempo real informação sobre o estado operacional, o pessoal, a disponibilidade de insumos e a prestação de serviços, que pode ser triangulada com os dados de rotina do SIS para produzir informação acionável sobre a prestação de serviços de saúde.
 
-### Fundamentação analítica
+### O que são os inquéritos telefónicos de ciclo rápido às unidades sanitárias?
 
-Os dados de rotina do HMIS dizem-nos *quantos* serviços estão a ser prestados, mas não *porque* os padrões de prestação podem estar a mudar. Os inquéritos telefónicos ajudam a responder a questões que os dados de rotina não conseguem abordar:
+Sistemas de cuidados de saúde primários eficazes são essenciais para expandir as intervenções de alto impacto e melhorar os resultados em SRMNIA-N. Os inquéritos telefónicos longitudinais de ciclo rápido às unidades sanitárias criam uma plataforma de acompanhamento contínuo que permite aos países:
 
-- Um estabelecimento está aberto e a funcionar?
-- Estão disponíveis os produtos e medicamentos essenciais?
-- Está presente pessoal com formação?
-- Que desafios enfrentam as instalações?
+1. Avaliar continuamente a prontidão dos cuidados primários e identificar os obstáculos à prestação de cuidados de qualidade, com ciclos de retorno que orientam as ações de reforço a vários níveis
+2. Acompanhar de perto a implementação das reformas do sistema de saúde, com a informação necessária para corrigir o rumo ou expandir a implementação
+3. Captar os efeitos de acontecimentos inesperados, como epidemias, catástrofes naturais ou violência, no sistema de saúde, permitindo medir em tempo quase real a resiliência do sistema de cuidados primários
+4. Acompanhar a evolução do desempenho do sistema de saúde ao longo do tempo
 
-Ao associar as respostas ao inquérito a padrões de dados de rotina, a abordagem FASTR permite uma interpretação mais matizada das tendências da prestação de serviços.
+### Fundamento analítico
+
+Os dados de rotina do SIS dizem-nos *quanto* serviço é prestado, mas não *porquê* os padrões de prestação podem estar a mudar. Os inquéritos telefónicos às unidades ajudam a responder a perguntas que os dados de rotina não conseguem abordar:
+
+- Os insumos essenciais, as vacinas e os medicamentos estão disponíveis para responder à procura de serviços?
+- O pessoal formado está presente?
+- Que dificuldades enfrentam as unidades, e como afetam a prestação de serviços?
+- Que processos de melhoria da qualidade existem?
+- Como se relaciona a unidade com a comunidade que serve?
+
+Ao ligar as respostas do inquérito aos padrões dos dados de rotina, a abordagem FASTR permite uma interpretação mais matizada das tendências de prestação de serviços. A análise conjunta ajuda os decisores a perceber como a disponibilidade e a prontidão dos serviços se relacionam com a utilização, as perturbações e a cobertura. As desagregações por unidade e por área geográfica, como a comparação entre níveis de cuidados, ou entre regiões abrangidas por projetos ou reformas prioritárias e regiões não abrangidas, contam uma história mais completa do efeito das reformas na oferta e na procura do sistema de saúde.
 
 ### Pontos-chave
 
 | Componente | Detalhes |
 |-----------|---------|
-| Quadro de amostragem de instalações do HMIS<br>Questionário padronizado de inquérito por telefone<br>Informações de contacto das instalações
-| Indicadores de disponibilidade de serviços<br>- Pontuações de prontidão<br>- Estado da cadeia de abastecimento<br>- Informação sobre o pessoal<br>- Análise de rotina de inquéritos associados
-| Complementar a monitorização de rotina do HMIS com o contexto ao nível da instalação para melhorar a interpretação e informar as intervenções direcionadas
+| **Objetivo** | Complementar o acompanhamento de rotina do SIS com o contexto das unidades, para melhorar a interpretação das tendências de utilização dos serviços e de cobertura e orientar intervenções dirigidas à melhoria do desempenho dos cuidados primários |
+| **Entradas** | Base de amostragem das unidades a partir do SIS / Ministério da Saúde<br>Questionário telefónico padronizado<br>Contactos validados das unidades |
+| **Resultados** | - Indicadores de disponibilidade de serviços<br>- Pontuações de prontidão das unidades<br>- Perfil resumido da cadeia de abastecimento<br>- Informação sobre o pessoal<br>- Análises ligadas entre inquérito e dados de rotina |
 
 ---
 
@@ -36,104 +46,122 @@ Ao associar as respostas ao inquérito a padrões de dados de rotina, a abordage
 
 ### Abordagem de amostragem
 
-O FASTR HFA utiliza uma amostra aleatória estratificada de estabelecimentos de saúde, com estratificação tipicamente baseada em:
+O HFA do FASTR utiliza uma amostra aleatória estratificada de unidades de cuidados primários seguidas longitudinalmente ao longo do tempo, com estratificação normalmente baseada em:
 
-1. **Região geográfica** - Assegurar a representação em todas as províncias/distritos
-2. **Tipo de instalação** - Hospitais, centros de saúde, postos de saúde
-3. **Propriedade** - Pública, privada, religiosa
-4. **Estado de notificação do SISH** - Reportantes activos vs. não reportantes
+1. **Região geográfica** - Garantir a representação das províncias/distritos, sempre que possível
+2. **Tipo de unidade** - Hospitais distritais, centros de saúde, postos de saúde
+3. **Propriedade da unidade** - Pública, privada, confessional
+4. **Estado de reporte no SIS** - Unidades que reportam ativamente e unidades que não reportam
 
-A dimensão da amostra é determinada com base na precisão necessária para os indicadores-chave e nos recursos disponíveis para a recolha de dados.
+A dimensão da amostra é determinada pela precisão exigida para os indicadores-chave e pelos recursos disponíveis para a recolha de dados.
 
 ### Recolha de dados
 
-Os inquéritos telefónicos são realizados por enumeradores formados, utilizando um questionário padronizado. As principais caraterísticas incluem:
+Os inquéritos telefónicos são realizados por inquiridores formados, com um questionário padronizado. Características principais:
 
-- **Respondente**: Responsável pelo estabelecimento ou profissional de saúde designado
-- **Duração**: 15-30 minutos por estabelecimento
-- **Frequência**: Trimestralmente ou conforme necessário
-- **Controlo de qualidade**: Chamadas de retorno, monitorização pelo supervisor, validação de dados
+- **Respondente**: responsável da unidade ou profissional de saúde designado
+- **Duração**: 30 a 45 minutos por unidade
+- **Frequência**: trimestral, ou conforme as necessidades do país
+- **Controlo de qualidade**: novas chamadas, supervisão, validação dos dados
+
+### Validade dos inquéritos telefónicos
+
+Os inquéritos telefónicos foram validados contra inquéritos presenciais e dão resultados consistentes. Numa comparação no Gana (n = 63 unidades), não houve diferença significativa entre as pontuações médias das duas abordagens, e as verificações por item, como o número médio de pessoal, também não mostraram diferença significativa. A maioria dos itens funciona bem por telefone; alguns itens sobre insumos e infraestruturas verificam-se melhor presencialmente e podem ser assinalados para uma visita de seguimento.
 
 ### Estrutura do questionário
 
-O questionário padrão do FASTR HFA abrange:
+O questionário HFA padrão do FASTR é preenchido ao longo de quatro contactos trimestrais com um painel de unidades sanitárias. Abrange dez módulos centrais: três são recolhidos todos os trimestres e os restantes sete uma vez por ano, numa única ronda. As perguntas provêm do quadro de medição dos cuidados de saúde primários da OMS (PHCMFI) e estão harmonizadas com as ferramentas de avaliação de unidades HHFA, SARA, SPA e SDI. A estrutura final do questionário e o desenho dos módulos são adaptados por cada país e podem variar de país para país.
 
-1. **Identificação do estabelecimento** - Verificação dos pormenores do estabelecimento
-2. **Estado de funcionamento** - Funcionamento atual, eventuais encerramentos
-3. **Disponibilidade de serviços** - Que serviços são atualmente oferecidos
-4. **Pessoal** - Presença atual de pessoal por quadro
-5. **Fornecimentos essenciais** - Situação das existências dos principais medicamentos e produtos de base
-6. **Infraestrutura** - Serviços básicos (água, eletricidade)
-7. **Desafios recentes** - Questões actuais em aberto
+| Ronda 1 | Ronda 2 | Ronda 3 | Ronda 4 |
+|---------|---------|---------|---------|
+| Características da unidade | Características da unidade\* | Características da unidade\* | Características da unidade\* |
+| Choques e resiliência | Choques e resiliência | Choques e resiliência | Choques e resiliência |
+| Insumos médicos | Insumos médicos | Insumos médicos | Insumos médicos |
+| Infraestruturas (apenas perguntas-chave sobre interrupções) | Infraestruturas (apenas perguntas-chave sobre interrupções) | Infraestruturas (módulo completo) | Infraestruturas (apenas perguntas-chave sobre interrupções) |
+| Disponibilidade de serviços | Financiamento | Processos de melhoria da qualidade | Pessoal e dotação |
+| | Envolvimento comunitário | | Liderança e coordenação |
+
+\* Perguntado apenas às unidades de substituição. Perguntas relevantes para o contexto local são acrescentadas durante a adaptação do questionário.
+
+**Módulos trimestrais**
+
+- Choques e resiliência
+- Insumos médicos
+- Infraestruturas (perguntas-chave sobre interrupções; módulo completo uma vez por ano)
+
+**Módulos anuais**
+
+- Características da unidade
+- Disponibilidade de serviços
+- Financiamento
+- Envolvimento comunitário
+- Processos de melhoria da qualidade
+- Pessoal e dotação
+- Liderança e coordenação
+
+Os módulos opcionais incluem preparação para emergências, vacinação (com a Gavi), capacidade operacional em CPN e capacidade operacional em partos/CONE.
 
 ---
 
 ## Adaptação do questionário
 
-### Diretrizes de adaptação
+### Orientações de adaptação
 
-O questionário FASTR padrão serve como ponto de partida que deve ser adaptado ao contexto de cada país. Principais considerações de adaptação:
+O questionário HFA padrão do FASTR é um ponto de partida a adaptar ao contexto de cada país. Principais aspetos da adaptação:
 
-1. **Língua** - Tradução e retroversão
-2. **Terminologia do sistema de saúde** - Alinhar com as convenções de nomenclatura locais
-3. **Prioridades dos indicadores** - Concentrar-se nos serviços relevantes a nível nacional
-4. **Padrões de saltos** - Ajustar com base nos tipos de instalações no país
-5. **Opções de resposta** - Corresponder ao contexto local (por exemplo, nomes de fornecedores)
+1. **Língua** - Tradução e retrotradução
+2. **Terminologia do sistema de saúde** - Alinhar com as designações locais
+3. **Prioridades de indicadores** - Dar prioridade aos serviços relevantes a nível nacional
+4. **Saltos de perguntas** - Ajustar segundo os tipos de unidade e a sua relevância no país
+5. **Opções de resposta** - Adequar ao contexto local (por exemplo, nomes dos insumos)
 
 ### Processo de adaptação
 
-**Passo 1: Rever o questionário padrão**
-Percorrer cada secção com as partes interessadas do país para identificar o que funciona e o que precisa de ser modificado.
+**Passo 1: identificar as prioridades do país**
+Determinar os indicadores mais importantes para os objetivos do país.
 
-**Passo 2: Identificar as prioridades do país
-Determinar que serviços e indicadores são mais importantes para os objectivos de saúde do país.
+**Passo 2: rever o questionário padrão**
+Percorrer cada secção com os intervenientes do país para identificar o que funciona e o que precisa de ser alterado. As orientações de adaptação constam do próprio questionário e assinalam as perguntas que mais frequentemente exigem alterações específicas ao país.
 
-**Etapa 3: Modificar as perguntas
-Adaptar a redação, acrescentar perguntas específicas do país, remover itens irrelevantes.
+**Passo 3: adaptar o questionário**
+Contextualizar a redação, acrescentar perguntas específicas ao país, retirar os itens irrelevantes.
 
-**Passo 4: Pré-teste**
-Testar o questionário adaptado com uma pequena amostra de estabelecimentos.
+**Passo 4: pré-testar**
+Testar o questionário adaptado numa pequena amostra de unidades.
 
-**Etapa 5: Finalizar
-Incorporar o feedback do pré-teste e preparar a versão final para a formação.
-
----
-
-## Ligação de dados de rotina do inquérito
-
-### Ligação das respostas do inquérito aos dados do HMIS
-
-Uma caraterística chave da abordagem FASTR é ligar as respostas do inquérito telefónico aos dados de rotina do HMIS para as mesmas instalações. Isto permite:
-
-1. **Validação** - Verificar se a disponibilidade de serviços comunicada pelo inquérito corresponde aos padrões de comunicação do HMIS
-2. **Contextualização** - Compreender *porque* os dados de rotina apresentam determinados padrões
-3. **Triangulação** - Comparar várias fontes de dados para as mesmas instalações
-
-### Casos de uso para análise vinculada
-
-- **Estabelecimentos que não comunicam dados**: O inquérito confirma se o estabelecimento está fechado ou simplesmente não está a comunicar
-- **Alterações no volume de serviços**: O inquérito revela se as alterações se devem a rupturas de stock, pessoal ou procura real
-- **Interpretação da qualidade**: Os dados do inquérito acrescentam contexto aos sinais de qualidade dos dados de rotina
+**Passo 5: finalizar**
+Incorporar o retorno do pré-teste e preparar a versão final para a recolha de dados.
 
 ---
 
-## Utilização dos dados e tomada de decisões
+## Ligação entre o inquérito e os dados de rotina
 
-### Utilização dos resultados da HFA
+### Ligar as respostas do inquérito aos dados do SIS
 
-Os resultados do inquérito devem informar:
+Uma característica central da abordagem FASTR é a comparação das respostas do inquérito telefónico com os dados de rotina do SIS. Inclui a comparação agregada dos resultados a nível nacional ou subnacional e a análise ligada das mesmas unidades. Estas análises permitem:
 
-1. **Interpretação de dados de rotina** - Explicar padrões nos dados do HMIS
-2. **Apoio direcionado** - Identificar as instalações que necessitam de intervenção
-3. **Gestão da cadeia de abastecimento** - Acompanhar os padrões de rutura de stock
-4. **Reforço do sistema de saúde** - Informar melhorias mais amplas do sistema
+1. **Validação** - Verificar se a disponibilidade de serviços declarada no inquérito corresponde aos padrões de reporte do SIS
+2. **Contextualização** - Perceber as razões possíveis pelas quais os dados de rotina mostram certos padrões
+3. **Triangulação** - Comparar várias fontes de dados para as mesmas unidades e obter uma imagem mais completa
 
-### Frequência dos relatórios
+### Casos de utilização da análise ligada
 
-Dependendo das necessidades e dos recursos do país, podem ser realizados inquéritos sobre a AMH:
-- **Trimestralmente** - Para monitorização contínua
-- **Orientados por eventos** - Em resposta a preocupações específicas (surtos, emergências)
-- **Anualmente** - Como parte da avaliação de rotina do sistema de saúde
+- **Unidades que não reportam**: o inquérito confirma se a unidade está encerrada ou simplesmente não reporta
+- **Variações no volume de serviços**: o inquérito mostra como as variações da cobertura se relacionam com fatores da prestação, como a disponibilidade de equipamento, as ruturas de stock de medicamentos ou o pessoal
+- **Interpretação da qualidade**: os dados do inquérito dão contexto aos alertas de qualidade dos dados de rotina
+
+---
+
+## Utilização dos dados e tomada de decisão
+
+### Utilizar os resultados do HFA
+
+Os resultados do inquérito devem servir para:
+
+1. **Interpretar os dados de rotina** - Explicar os padrões dos dados do SIS
+2. **Prontidão das unidades** - Identificar as áreas com fraca prontidão para respostas concretas
+3. **Gestão da cadeia de abastecimento** - Acompanhar os padrões de ruturas de stock
+4. **Reforço do sistema de saúde** - Orientar melhorias mais amplas do sistema
 
 ---
 
