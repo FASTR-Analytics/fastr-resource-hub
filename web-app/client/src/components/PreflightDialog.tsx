@@ -25,8 +25,9 @@ function findingText(f: PreflightFinding, lang: 'en' | 'fr' | 'pt'): string {
     'overflow-flag': 'pfOverflowFlag',
     'stale-fork': 'pfStaleFork',
   }
-  const tmpl = t(key[f.message] ?? 'pfPlaceholder', lang)
-  return tmpl.replace('{x}', f.detail ?? '')
+  const k = key[f.message]
+  if (!k) return f.detail ? `${f.message}: ${f.detail}` : f.message
+  return t(k, lang).replace('{x}', f.detail ?? '')
 }
 
 function Row({ finding }: { finding: PreflightFinding }) {
@@ -68,7 +69,7 @@ export function PreflightDialog({ result, loading, pendingFormat, onExportAnyway
             {pendingFormat ? t('cancel', contentLanguage) : t('close', contentLanguage)}
           </Button>
           {pendingFormat && onExportAnyway && (
-            <Button variant="primary" onClick={onExportAnyway} disabled={loading}>
+            <Button variant={errors.length > 0 ? 'secondary' : 'primary'} onClick={onExportAnyway} disabled={loading}>
               {t('exportAnyway', contentLanguage)}
             </Button>
           )}
@@ -78,7 +79,7 @@ export function PreflightDialog({ result, loading, pendingFormat, onExportAnyway
       {loading ? (
         <div className="flex items-center gap-2 text-body-sm text-slate-500 py-4">
           <Loader2 className="w-4 h-4 animate-spin" />
-          {t('buildingPreview', contentLanguage)}
+          {t('checkingDeck', contentLanguage)}
         </div>
       ) : clear ? (
         <div className="flex items-center gap-2 text-body-sm text-slate-700 py-4">
@@ -92,6 +93,9 @@ export function PreflightDialog({ result, loading, pendingFormat, onExportAnyway
               <div className="text-caption font-semibold uppercase tracking-wide text-slate-500 mb-1">
                 {t('preflightErrorsLabel', contentLanguage)}
               </div>
+              {pendingFormat && (
+                <p className="text-caption text-slate-600 mb-2">{t('preflightFixBeforeExport', contentLanguage)}</p>
+              )}
               <ul className="divide-y divide-slate-100">
                 {errors.map((f, i) => <Row key={`e${i}`} finding={f} />)}
               </ul>

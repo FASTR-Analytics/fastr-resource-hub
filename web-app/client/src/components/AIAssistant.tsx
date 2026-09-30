@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
 import { Send, Trash2, Sparkles, CheckCircle } from 'lucide-react'
+import { t } from '../i18n/translations'
 
 export function AIAssistant() {
-  const { aiMessages, aiLoading, sendAIMessage, clearAIMessages, currentWorkshopId } = useWorkshopStore()
+  const { aiMessages, aiLoading, sendAIMessage, clearAIMessages, currentWorkshopId, contentLanguage: lang } = useWorkshopStore()
   const [input, setInput] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -34,7 +35,7 @@ export function AIAssistant() {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 mb-3">
             <Sparkles className="w-7 h-7 text-gray-300" />
           </div>
-          <p className="text-sm text-gray-400">Select a workshop to use the AI assistant</p>
+          <p className="text-sm text-gray-400">{t('aiSelectWorkshop', lang)}</p>
         </div>
       </div>
     )
@@ -49,11 +50,11 @@ export function AIAssistant() {
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-fastr-light mb-3">
               <Sparkles className="w-6 h-6 text-fastr-secondary" />
             </div>
-            <p className="font-medium text-gray-500">Ask me to help with your workshop:</p>
+            <p className="font-medium text-gray-500">{t('aiIntro', lang)}</p>
             <ul className="mt-3 text-xs space-y-1.5 text-gray-400">
-              <li>"Add Module 4 to Day 2"</li>
-              <li>"Move the tea break after Data Quality"</li>
-              <li>"Generate objectives for this workshop"</li>
+              <li>{t('aiExample1', lang)}</li>
+              <li>{t('aiExample2', lang)}</li>
+              <li>{t('aiExample3', lang)}</li>
             </ul>
           </div>
         ) : (
@@ -110,7 +111,7 @@ export function AIAssistant() {
             className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600"
           >
             <Trash2 className="w-3 h-3" />
-            Clear chat
+            {t('aiClearChat', lang)}
           </button>
         </div>
       )}
@@ -122,14 +123,14 @@ export function AIAssistant() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask AI to help..."
+            placeholder={t('aiInputPlaceholder', lang)}
             rows={2}
             className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-fastr-primary/20 focus:border-fastr-primary"
           />
           <button
             type="submit"
             disabled={!input.trim() || aiLoading}
-            aria-label="Send message"
+            aria-label={t('sendMessage', lang)}
             className="px-3 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
           >
             <Send className="w-4 h-4" />

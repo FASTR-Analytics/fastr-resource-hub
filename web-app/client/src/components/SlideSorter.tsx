@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
+import { t } from '../i18n/translations'
 import {
   RefreshCw,
   ZoomIn,
@@ -88,6 +89,7 @@ interface SortableSessionProps {
 }
 
 function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
+  const { contentLanguage: lang } = useWorkshopStore()
   const isLocked = isSessionLocked(session.sessionName, session.sessionType)
 
   const {
@@ -140,7 +142,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
           {session.sessionName}
         </span>
         <span className="text-xs opacity-70 mr-2">
-          {session.slides.length} slide{session.slides.length !== 1 ? 's' : ''}
+          {session.slides.length} {t(session.slides.length === 1 ? 'sorterSlideOne' : 'sorterSlideMany', lang)}
         </span>
         {!isLocked && (
           <>
@@ -150,7 +152,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 onEditClick(session)
               }}
               className="p-1 hover:bg-white/20 rounded transition-colors"
-              title="Session settings (name, presenter, duration)"
+              title={t('sorterSessionSettingsTitle', lang)}
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
             </button>
@@ -160,7 +162,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 onDeleteClick(session)
               }}
               className="p-1 hover:bg-red-500/50 rounded transition-colors"
-              title="Delete session"
+              title={t('deleteSession', lang)}
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -197,10 +199,10 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                     onSlideEdit(slide)
                   }}
                   className="absolute top-1 right-1 z-10 flex items-center gap-1 px-1.5 py-1 rounded bg-black/70 text-white text-xs font-medium opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
-                  title="Edit slide content"
+                  title={t('sorterEditSlideContent', lang)}
                 >
                   <Pencil className="w-3.5 h-3.5" />
-                  {zoom >= 0.8 && <span>Edit</span>}
+                  {zoom >= 0.8 && <span>{t('sorterEdit', lang)}</span>}
                 </button>
               )}
 
@@ -213,10 +215,10 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                     onOpenSettings()
                   }}
                   className="absolute top-1 right-1 z-10 flex items-center gap-1 px-1.5 py-1 rounded bg-black/70 text-white text-xs font-medium opacity-0 group-hover:opacity-100 hover:bg-fastr-secondary transition-all"
-                  title="The cover is set in Workshop settings"
+                  title={t('sorterCoverInSettings', lang)}
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
-                  {zoom >= 0.8 && <span>Settings</span>}
+                  {zoom >= 0.8 && <span>{t('settings', lang)}</span>}
                 </button>
               )}
 
@@ -226,14 +228,14 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 slide.stale ? (
                   <div
                     className="absolute bottom-1 right-1 z-10 p-1 rounded bg-orange-600 text-white"
-                    title="Library version changed since you edited this"
+                    title={t('sorterLibraryChanged', lang)}
                   >
                     <RefreshCw className="w-3 h-3" />
                   </div>
                 ) : (
                   <div
                     className="absolute bottom-1 right-1 z-10 p-1 rounded bg-amber-500/90 text-white"
-                    title="Edited for this workshop"
+                    title={t('editedForWorkshop', lang)}
                   >
                     <GitFork className="w-3 h-3" />
                   </div>
@@ -250,7 +252,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                   transform: `scale(${slideWidth / 960})`,
                   transformOrigin: 'top left',
                 }}
-                title={`Slide ${idx + 1}`}
+                title={`${t('sorterSlide', lang)} ${idx + 1}`}
               />
             </div>
           </div>
@@ -273,7 +275,7 @@ interface ModuleSlideInfo {
 }
 
 function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
-  const { currentConfig } = useWorkshopStore()
+  const { currentConfig, contentLanguage: lang } = useWorkshopStore()
   const [sessionName, setSessionName] = useState('')
   const [speaker, setSpeaker] = useState('')
   const [duration, setDuration] = useState(0)
@@ -367,11 +369,11 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
       <div className="bg-gray-800 rounded-xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto ring-1 ring-white/10" onClick={(e) => e.stopPropagation()}>
-        <h3 className="text-lg font-semibold text-white mb-4">Session settings</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{t('sessionSettings', lang)}</h3>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-300 mb-1">Session Name</label>
+            <label className="block text-sm text-gray-300 mb-1">{t('sessionName', lang)}</label>
             <input
               type="text"
               value={sessionName}
@@ -381,18 +383,18 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
           </div>
 
           <div>
-            <label className="block text-sm text-gray-300 mb-1">Facilitator/Presenter</label>
+            <label className="block text-sm text-gray-300 mb-1">{t('sorterFacilitator', lang)}</label>
             <input
               type="text"
               value={speaker}
               onChange={(e) => setSpeaker(e.target.value)}
-              placeholder="e.g., John Smith, MoH Team"
+              placeholder={t('sorterFacilitatorPlaceholder', lang)}
               className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-gray-300 mb-1">Duration (minutes)</label>
+            <label className="block text-sm text-gray-300 mb-1">{t('durationMinutes', lang)}</label>
             <input
               type="number"
               value={duration}
@@ -406,10 +408,10 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
           {moduleId && (
             <div>
               <label className="block text-sm text-gray-300 mb-2">
-                Module Slides ({activeModuleSlides.length}/{moduleSlides.length} active)
+                {t('sorterModuleSlidesCount', lang).replace('{n}', String(activeModuleSlides.length)).replace('{m}', String(moduleSlides.length))}
               </label>
               {loadingModuleSlides ? (
-                <div className="text-gray-400 text-sm py-2">Loading slides...</div>
+                <div className="text-gray-400 text-sm py-2">{t('sorterLoadingSlides', lang)}</div>
               ) : (
                 <div className="space-y-1 bg-gray-700/50 rounded-lg p-3 max-h-48 overflow-y-auto">
                   {moduleSlides.map((slide) => {
@@ -430,7 +432,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
                           onChange={() => toggleModuleSlide(slide.filename)}
                           className="w-4 h-4 rounded border-gray-500 text-fastr-primary focus:ring-fastr-primary"
                         />
-                        <span className={`text-sm flex-1 truncate ${isExcluded ? 'text-gray-500 line-through' : 'text-gray-200'}`} title={slide.filename}>
+                        <span className={`text-sm flex-1 truncate ${isExcluded ? 'text-gray-500 line-through' : 'text-gray-200'}`}>
                           {slide.title}
                         </span>
                       </div>
@@ -439,7 +441,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
                 </div>
               )}
               <p className="text-xs text-gray-500 mt-1">
-                Uncheck slides to exclude them from this session
+                {t('sorterUncheckHint', lang)}
               </p>
             </div>
           )}
@@ -448,7 +450,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
           {extraSlides.length > 0 && (
             <div>
               <label className="block text-sm text-gray-300 mb-2">
-                {moduleId ? 'Additional Slides' : 'Slides'} ({extraSlides.length})
+                {t(moduleId ? 'sorterAdditionalSlides' : 'sorterSlidesLabel', lang)} ({extraSlides.length})
               </label>
               <div className="space-y-2 bg-gray-700/50 rounded-lg p-3">
                 {extraSlides.map((slide, idx) => (
@@ -462,7 +464,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
                     <button
                       onClick={() => removeExtraSlide(idx)}
                       className="p-1 text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded transition-colors"
-                      title="Remove this slide"
+                      title={t('sorterRemoveSlide', lang)}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -471,7 +473,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
               </div>
               {moduleId && (
                 <p className="text-xs text-gray-500 mt-1">
-                  These slides are shown after the module content
+                  {t('sorterExtraSlidesHint', lang)}
                 </p>
               )}
             </div>
@@ -483,7 +485,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
             onClick={onClose}
             className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
           >
-            Cancel
+            {t('cancel', lang)}
           </button>
           <button
             onClick={() => {
@@ -492,7 +494,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
             }}
             className="px-4 py-2 bg-fastr-primary text-white rounded-lg hover:bg-fastr-primary/80 transition-colors duration-200"
           >
-            Save
+            {t('save', lang)}
           </button>
         </div>
       </div>
@@ -506,7 +508,7 @@ interface SlideSorterProps {
 }
 
 export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
-  const { currentWorkshopId, currentConfig, workshops, loadWorkshops, reorderSession, moveSessionToDay, addSession, updateSession, removeSession } = useWorkshopStore()
+  const { currentWorkshopId, currentConfig, workshops, loadWorkshops, reorderSession, moveSessionToDay, addSession, updateSession, removeSession, contentLanguage: lang } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -576,7 +578,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
         credentials: 'include',
       })
 
-      if (!response.ok) throw new Error('Failed to build slides')
+      if (!response.ok) throw new Error(t('sorterBuildFailed', lang))
 
       const data = await response.json()
       setSlides(data.slides)
@@ -615,7 +617,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           setSaving(false)
         }, 500)
       } catch (err: any) {
-        setError('Failed to move session: ' + err.message)
+        setError(t('sorterMoveFailed', lang) + ': ' + err.message)
         await buildSlides()
         setSaving(false)
       }
@@ -648,7 +650,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
         setSaving(false)
       }, 500)
     } catch (err: any) {
-      setError('Failed to save reorder: ' + err.message)
+      setError(t('sorterReorderFailed', lang) + ': ' + err.message)
       // Revert by rebuilding
       await buildSlides()
       setSaving(false)
@@ -686,7 +688,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
       <div className="h-full flex items-center justify-center bg-gray-900">
         <div className="text-center text-white">
           <RefreshCw className="w-10 h-10 animate-spin mx-auto mb-4" />
-          <p className="text-lg">Building slides...</p>
+          <p className="text-lg">{t('sorterBuildingSlides', lang)}</p>
         </div>
       </div>
     )
@@ -696,9 +698,9 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
     return (
       <div className="h-full flex items-center justify-center bg-gray-900">
         <div className="text-center text-white">
-          <p className="text-red-400 mb-4">Error: {error}</p>
+          <p className="text-red-400 mb-4">{t('error', lang)}: {error}</p>
           <button onClick={buildSlides} className="px-4 py-2 bg-fastr-primary rounded-lg">
-            Try Again
+            {t('tryAgain', lang)}
           </button>
         </div>
       </div>
@@ -720,7 +722,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
               className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 text-gray-300 hover:text-white hover:bg-gray-600 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Back</span>
+              <span className="text-sm">{t('back', lang)}</span>
             </button>
           )}
 
@@ -734,7 +736,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                   : 'text-gray-300 hover:text-white hover:bg-gray-600'
               }`}
             >
-              All
+              {t('sorterAll', lang)}
             </button>
             {days.map((dayNum) => (
               <button
@@ -746,7 +748,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                     : 'text-gray-300 hover:text-white hover:bg-gray-600'
                 }`}
               >
-                Day {dayNum}
+                {t('day', lang)} {dayNum}
               </button>
             ))}
           </div>
@@ -755,12 +757,12 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
             <span className="font-medium">
               {dayFilter === 'all'
                 ? slides.length
-                : slides.filter(s => s.dayNumber === dayFilter).length} slides
+                : slides.filter(s => s.dayNumber === dayFilter).length} {t('sorterSlideMany', lang)}
             </span>
             {saving && (
               <span className="ml-3 text-fastr-secondary">
                 <RefreshCw className="w-4 h-4 inline animate-spin mr-1" />
-                Saving...
+                {t('saving', lang)}
               </span>
             )}
           </div>
@@ -790,7 +792,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
             className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 text-gray-300 hover:text-white hover:bg-gray-600 rounded-lg transition-colors duration-200"
           >
             <RefreshCw className="w-4 h-4" />
-            Rebuild
+            {t('rebuild', lang)}
           </button>
 
           <button
@@ -801,7 +803,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
             className="flex items-center gap-2 px-3 py-1.5 bg-fastr-secondary text-white rounded-lg hover:bg-fastr-secondary/90 transition-colors duration-200"
           >
             <Plus className="w-4 h-4" />
-            New Slide
+            {t('newSlide', lang)}
           </button>
         </div>
       </div>
@@ -816,9 +818,9 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           return (
             <div key={dayNum} className="mb-8">
               <h2 className="text-lg font-semibold text-white mb-4">
-                Day {dayNum}
+                {t('day', lang)} {dayNum}
                 <span className="text-gray-400 font-normal ml-2">
-                  ({daySessions.reduce((sum, s) => sum + s.slides.length, 0)} slides)
+                  ({daySessions.reduce((sum, s) => sum + s.slides.length, 0)} {t('sorterSlideMany', lang)})
                 </span>
               </h2>
 
@@ -843,7 +845,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                         onOpenSettings={onOpenSettings}
                         onEditClick={setEditingSession}
                         onDeleteClick={(s) => {
-                          if (confirm(`Delete "${s.sessionName}"? This cannot be undone.`)) {
+                          if (confirm(t('sorterDeleteSessionConfirm', lang).replace('{x}', s.sessionName))) {
                             removeSession(s.dayNumber, s.sessionIndex)
                             // Rebuild slides after deletion
                             setTimeout(() => buildSlides(), 100)
@@ -879,16 +881,16 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-fastr-secondary hover:bg-fastr-secondary/90 text-white text-sm font-semibold shadow-lg"
               >
                 <Pencil className="w-4 h-4" />
-                Edit slide
+                {t('editSlide', lang)}
               </button>
             )}
             <button
               onClick={() => setSelectedSlide(null)}
-              aria-label="Close slide view"
+              aria-label={t('closeSlideView', lang)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium"
             >
               <X className="w-4 h-4" />
-              Close
+              {t('close', lang)}
             </button>
           </div>
 
@@ -896,7 +898,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           <button
             onClick={(e) => { e.stopPropagation(); navigateSlide('prev') }}
             disabled={slides.findIndex((s) => s.id === selectedSlide.id) === 0}
-            aria-label="Previous slide"
+            aria-label={t('previousSlide', lang)}
             className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white disabled:opacity-20"
           >
             <ChevronLeft className="w-12 h-12" />
@@ -905,7 +907,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
           <button
             onClick={(e) => { e.stopPropagation(); navigateSlide('next') }}
             disabled={slides.findIndex((s) => s.id === selectedSlide.id) === slides.length - 1}
-            aria-label="Next slide"
+            aria-label={t('nextSlide', lang)}
             className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white disabled:opacity-20"
           >
             <ChevronRight className="w-12 h-12" />
@@ -919,7 +921,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
               </span>
               <span className="text-gray-400 mx-3">•</span>
               <span className="text-gray-400">
-                Slide {selectedSlide.slideIndex + 1}
+                {t('sorterSlide', lang)} {selectedSlide.slideIndex + 1}
               </span>
             </div>
 
@@ -927,13 +929,13 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
               <iframe
                 srcDoc={selectedSlide.html}
                 className="absolute inset-0 w-full h-full bg-white rounded-xl shadow-2xl"
-                title={`Slide ${selectedSlide.slideIndex + 1}`}
+                title={`${t('sorterSlide', lang)} ${selectedSlide.slideIndex + 1}`}
               />
             </div>
 
             {/* Keyboard hint */}
             <p className="text-center text-gray-500 text-sm mt-4">
-              ← → to navigate • ESC to close
+              {t('sorterKeyboardHint', lang)}
             </p>
           </div>
         </div>

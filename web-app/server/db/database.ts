@@ -248,6 +248,26 @@ export async function getWorkshop(id: string): Promise<WorkshopConfig | null> {
   return JSON.parse(result.rows[0].config as string)
 }
 
+export interface WorkshopMeta {
+  /** Raw stored value (SQLite UTC text timestamp) — pass back to updateWorkshop for compare-and-set. */
+  updatedAtRaw: string | null
+  locked: boolean
+}
+
+// Version metadata for a workshop (used for optimistic concurrency on PUT)
+export async function getWorkshopMeta(id: string): Promise<WorkshopMeta | null> {
+  const result = await db.execute({
+    sql: 'SELECT updated_at, locked FROM workshops WHERE id = ?',
+    args: [id]
+  })
+  if (result.rows.length === 0) return null
+  const row = result.rows[0] as any
+  return {
+    updatedAtRaw: row.updated_at == null ? null : String(row.updated_at),
+    locked: row.locked === 1,
+  }
+}
+
 // Create workshop
 export async function createWorkshop(id: string, config: WorkshopConfig) {
   await db.execute({
@@ -271,15 +291,26 @@ export async function createWorkshop(id: string, config: WorkshopConfig) {
   })
 }
 
-// Update workshop
-export async function updateWorkshop(id: string, config: WorkshopConfig) {
-  await db.execute({
+// Update workshop.
+//
+// updated_at is written with millisecond precision (strftime %f) so two saves
+// inside the same second still get distinct versions. When `ifUpdatedAtRaw` is
+// given, the write is a compare-and-set: it only lands if the row's updated_at
+// still equals that raw value (as returned by getWorkshopMeta). Returns whether
+// the row was written plus the row's current raw updated_at either way.
+export async function updateWorkshop(
+  id: string,
+  config: WorkshopConfig,
+  ifUpdatedAtRaw?: string | null
+): Promise<{ updated: boolean; updatedAtRaw: string | null }> {
+  const guard = ifUpdatedAtRaw != null ? ' AND updated_at = ?' : ''
+  const result = await db.execute({
     sql: `
       UPDATE workshops
       SET name = ?, country = ?, location = ?, date = ?, facilitators = ?,
           venue = ?, contact_email = ?, website = ?, objectives = ?,
-          config = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
+          config = ?, updated_at = strftime('%Y-%m-%d %H:%M:%f', 'now')
+      WHERE id = ?${guard}
     `,
     args: [
       config.workshop.name,
@@ -292,9 +323,12 @@ export async function updateWorkshop(id: string, config: WorkshopConfig) {
       config.workshop.website || null,
       config.workshop.objectives || null,
       JSON.stringify(config),
-      id
+      id,
+      ...(ifUpdatedAtRaw != null ? [ifUpdatedAtRaw] : [])
     ]
   })
+  const meta = await getWorkshopMeta(id)
+  return { updated: result.rowsAffected > 0, updatedAtRaw: meta?.updatedAtRaw ?? null }
 }
 
 export async function isWorkshopLocked(id: string): Promise<boolean> {

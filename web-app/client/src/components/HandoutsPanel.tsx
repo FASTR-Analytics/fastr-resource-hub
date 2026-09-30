@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useWorkshopStore } from '../stores/workshop'
 import { t } from '../i18n/translations'
+import { useToast } from './Toast'
 import {
   ChevronRight,
   ChevronDown,
@@ -82,6 +83,7 @@ function sessionIcon(sessionId: string) {
 
 export function HandoutsPanel() {
   const { contentLanguage } = useWorkshopStore()
+  const { showToast } = useToast()
   const [groups, setGroups] = useState<HandoutGroup[]>([])
   const [loading, setLoading] = useState(true)
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
@@ -111,6 +113,8 @@ export function HandoutsPanel() {
           const data = await response.json()
           setGroups(data)
           setExpanded(new Set(data.map((g: HandoutGroup) => g.moduleId)))
+        } else if (!cancelled) {
+          showToast(t('handoutsLoadFailed', contentLanguage), 'error')
         }
       } catch (err) {
         console.error('Failed to fetch handouts:', err)
@@ -163,7 +167,8 @@ export function HandoutsPanel() {
       setPreview({ handout, pdfUrl: null, fallbackHtml: html, loading: false })
     } catch (err) {
       console.error('Failed to load handout preview:', err)
-      setPreview({ handout, pdfUrl: null, fallbackHtml: null, loading: false })
+      showToast(t('handoutPreviewFailed', contentLanguage), 'error')
+      setPreview(null)
     }
   }
 

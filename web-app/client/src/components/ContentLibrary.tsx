@@ -147,6 +147,8 @@ export function ContentLibrary({ onImportSlides: _onImportSlides, targetDayNum }
         if (response.ok) {
           const data = await response.json()
           setTemplates(data)
+        } else {
+          showToast(t('libraryLoadFailed', contentLanguage), 'error')
         }
       } catch (err) {
         console.error('Failed to fetch templates:', err)
@@ -211,7 +213,7 @@ export function ContentLibrary({ onImportSlides: _onImportSlides, targetDayNum }
   // Add template to schedule
   const addTemplate = (template: Template, category: TemplateCategory) => {
     if (!currentConfig) {
-      console.warn('[ContentLibrary] No currentConfig - cannot add template')
+      showToast(t('openWorkshopFirst', contentLanguage), 'error')
       return
     }
 
@@ -334,6 +336,7 @@ We resume at **[time]**`
 
     if (topics.length === 0) {
       console.warn('No topics for mode:', mode)
+      showToast(t('noSlidesForVariant', contentLanguage), 'info')
       return
     }
 
@@ -393,6 +396,7 @@ We resume at **[time]**`
       })
     } catch (err) {
       console.error('Failed to load module preview:', err)
+      showToast(t('previewFailed', contentLanguage), 'error')
       setModulePreview(null)
     }
   }
