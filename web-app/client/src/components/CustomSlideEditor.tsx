@@ -3,6 +3,8 @@ import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2, Image, Upload, Lo
 import api, { Asset } from '../../lib/api'
 import { useToast } from './Toast'
 import { Modal } from './ui/Modal'
+import { useWorkshopStore } from '../stores/workshop'
+import { t, type Language, type TranslationKey } from '../i18n/translations'
 
 interface CustomSlideEditorProps {
   workshopId: string
@@ -25,42 +27,43 @@ interface SectionSlide {
   subtitle: string
 }
 
-const SLIDE_INFO = {
+const SLIDE_INFO: Record<SlideType, { name: TranslationKey; description: TranslationKey }> = {
   content: {
-    name: 'Content Slide',
-    description: 'Standard slide with title and bullet points',
+    name: 'cseContentSlide',
+    description: 'cseContentSlideDesc',
   },
   section: {
-    name: 'Section Slide',
-    description: 'Section divider with background image',
+    name: 'cseSectionSlide',
+    description: 'cseSectionSlideDesc',
   },
 }
 
 // Generate markdown from form data
-function generateContentMarkdown(slides: ContentSlide[]): string {
+function generateContentMarkdown(slides: ContentSlide[], lang: Language): string {
   return slides
     .map((slide) => {
       const bullets = slide.bullets
         .filter((b) => b.trim())
         .map((b) => `- ${b}`)
         .join('\n')
-      return `## ${slide.title || 'Slide Title'}\n\n${bullets || '- Add your content here'}`
+      return `## ${slide.title || t('cseDefaultSlideTitle', lang)}\n\n${bullets || `- ${t('cseDefaultBullet', lang)}`}`
     })
     .join('\n\n---\n\n')
 }
 
-function generateSectionMarkdown(data: SectionSlide): string {
+function generateSectionMarkdown(data: SectionSlide, lang: Language): string {
   return `<!-- _class: section-cover -->
 
 ![bg](/resources/backgrounds/section_slide.png)
 
-# ${data.title || 'Section Title'}
+# ${data.title || t('cseDefaultSectionTitle', lang)}
 
 ${data.subtitle || ''}`
 }
 
 export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defaultType }: CustomSlideEditorProps) {
   const { showToast } = useToast()
+  const { contentLanguage: lang } = useWorkshopStore()
   const [selectedType, setSelectedType] = useState<SlideType | null>(defaultType ?? null)
   const [editorMode, setEditorMode] = useState<EditorMode>('simple')
   const [markdown, setMarkdown] = useState('')
@@ -117,7 +120,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
       await loadAssets()
     } catch (err: any) {
       console.error('Upload failed:', err)
-      showToast(`Upload failed: ${err.message}`, 'error')
+      showToast(`${t('cseUploadFailed', lang)}: ${err.message}`, 'error')
     } finally {
       setUploadingAsset(false)
     }
@@ -127,11 +130,11 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
   type ImageLayout = 'inline' | 'inline-small' | 'bg-right' | 'bg-left' | 'bg-full'
 
   const imageLayoutOptions: { id: ImageLayout; label: string; desc: string }[] = [
-    { id: 'inline', label: 'Full width', desc: 'Image spans the content area' },
-    { id: 'inline-small', label: 'Small', desc: 'Smaller centered image' },
-    { id: 'bg-right', label: 'Right side', desc: 'Image fills the right half' },
-    { id: 'bg-left', label: 'Left side', desc: 'Image fills the left half' },
-    { id: 'bg-full', label: 'Background', desc: 'Full slide background' },
+    { id: 'inline', label: t('cseLayoutFullWidth', lang), desc: t('cseLayoutFullWidthDesc', lang) },
+    { id: 'inline-small', label: t('cseLayoutSmall', lang), desc: t('cseLayoutSmallDesc', lang) },
+    { id: 'bg-right', label: t('cseLayoutRight', lang), desc: t('cseLayoutRightDesc', lang) },
+    { id: 'bg-left', label: t('cseLayoutLeft', lang), desc: t('cseLayoutLeftDesc', lang) },
+    { id: 'bg-full', label: t('cseLayoutBackground', lang), desc: t('cseLayoutBackgroundDesc', lang) },
   ]
 
   // Build image markdown using full URL + Marp directives for layout
@@ -196,12 +199,12 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
   useEffect(() => {
     if (editorMode === 'simple' && selectedType) {
       if (selectedType === 'content') {
-        setMarkdown(generateContentMarkdown(contentSlides))
+        setMarkdown(generateContentMarkdown(contentSlides, lang))
       } else {
-        setMarkdown(generateSectionMarkdown(sectionData))
+        setMarkdown(generateSectionMarkdown(sectionData, lang))
       }
     }
-  }, [editorMode, selectedType, contentSlides, sectionData])
+  }, [editorMode, selectedType, contentSlides, sectionData, lang])
 
   // Content slide helpers
   const updateSlideTitle = (index: number, title: string) => {
@@ -281,7 +284,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
 
   const handleSave = async () => {
     if (!sessionName.trim()) {
-      setError('Please enter a session name')
+      setError(t('cseEnterSessionName', lang))
       return
     }
 
@@ -310,7 +313,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
       })
 
       if (!response.ok) {
-        throw new Error('Failed to save slide')
+        throw new Error(t('cseSaveFailed', lang))
       }
 
       onSave(filename, markdown, sessionName)
@@ -334,8 +337,8 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
           <div className="flex items-center gap-3">
             <Sparkles className="w-5 h-5 text-fastr-secondary" />
-            <h2 className="text-lg font-semibold text-white">Create Custom Slide</h2>
-            <span className="text-sm text-gray-400">Day {dayNumber}</span>
+            <h2 className="text-lg font-semibold text-white">{t('createCustomSlide', lang)}</h2>
+            <span className="text-sm text-gray-400">{t('day', lang)} {dayNumber}</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -350,7 +353,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
-                    Simple
+                    {t('cseSimple', lang)}
                   </button>
                   <button
                     onClick={() => setEditorMode('advanced')}
@@ -360,7 +363,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
-                    Markdown
+                    {t('cseMarkdown', lang)}
                   </button>
                 </div>
                 <button
@@ -370,13 +373,13 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                   }`}
                 >
                   <Eye className="w-4 h-4" />
-                  Preview
+                  {t('preview', lang)}
                 </button>
               </>
             )}
             <button
               onClick={onClose}
-              aria-label="Close editor"
+              aria-label={t('cseCloseEditor', lang)}
               className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg"
             >
               <X className="w-5 h-5" />
@@ -388,8 +391,8 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
         {!selectedType ? (
           // Template picker
           <div className="flex-1 flex flex-col items-center justify-center p-8">
-            <h3 className="text-xl font-semibold text-white mb-2">Choose a slide type</h3>
-            <p className="text-gray-400 mb-8">Select a template to get started</p>
+            <h3 className="text-xl font-semibold text-white mb-2">{t('cseChooseType', lang)}</h3>
+            <p className="text-gray-400 mb-8">{t('cseChooseTypeHint', lang)}</p>
 
             <div className="flex gap-6">
               {/* Content Slide */}
@@ -400,8 +403,8 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                 <div className="w-16 h-16 mb-4 bg-gray-700 group-hover:bg-fastr-secondary/20 rounded-lg flex items-center justify-center">
                   <Layout className="w-8 h-8 text-gray-400 group-hover:text-fastr-secondary" />
                 </div>
-                <span className="text-lg font-medium text-white mb-1">{SLIDE_INFO.content.name}</span>
-                <span className="text-sm text-gray-400 text-center">{SLIDE_INFO.content.description}</span>
+                <span className="text-lg font-medium text-white mb-1">{t(SLIDE_INFO.content.name, lang)}</span>
+                <span className="text-sm text-gray-400 text-center">{t(SLIDE_INFO.content.description, lang)}</span>
               </button>
 
               {/* Section Slide */}
@@ -412,8 +415,8 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                 <div className="w-16 h-16 mb-4 bg-gray-700 group-hover:bg-fastr-secondary/20 rounded-lg flex items-center justify-center">
                   <Layers className="w-8 h-8 text-gray-400 group-hover:text-fastr-secondary" />
                 </div>
-                <span className="text-lg font-medium text-white mb-1">{SLIDE_INFO.section.name}</span>
-                <span className="text-sm text-gray-400 text-center">{SLIDE_INFO.section.description}</span>
+                <span className="text-lg font-medium text-white mb-1">{t(SLIDE_INFO.section.name, lang)}</span>
+                <span className="text-sm text-gray-400 text-center">{t(SLIDE_INFO.section.description, lang)}</span>
               </button>
             </div>
           </div>
@@ -423,17 +426,17 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
             <div className="px-4 py-3 border-b border-gray-700">
               <div className="flex items-center gap-4">
                 <div className="flex-1">
-                  <label className="block text-sm text-gray-400 mb-1">Session Name</label>
+                  <label className="block text-sm text-gray-400 mb-1">{t('sessionName', lang)}</label>
                   <input
                     type="text"
                     value={sessionName}
                     onChange={(e) => setSessionName(e.target.value)}
-                    placeholder="e.g., Data Quality Activity, Group Discussion..."
+                    placeholder={t('cseSessionNamePlaceholder', lang)}
                     className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Template</label>
+                  <label className="block text-sm text-gray-400 mb-1">{t('cseTemplate', lang)}</label>
                   <div className="flex gap-2">
                     <button
                       onClick={() => selectTemplate('content')}
@@ -443,7 +446,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                       }`}
                     >
-                      Content
+                      {t('content', lang)}
                     </button>
                     <button
                       onClick={() => selectTemplate('section')}
@@ -453,7 +456,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                       }`}
                     >
-                      Section
+                      {t('cseSection', lang)}
                     </button>
                   </div>
                 </div>
@@ -468,13 +471,13 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                   // Advanced: Raw markdown
                   <>
                     <div className="px-4 py-2 bg-gray-800 border-b border-gray-700 flex items-center justify-between">
-                      <span className="text-sm text-gray-400">Markdown</span>
+                      <span className="text-sm text-gray-400">{t('cseMarkdown', lang)}</span>
                       <button
                         onClick={openAssetPicker}
                         className="flex items-center gap-1.5 px-2.5 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white rounded transition-colors"
                       >
                         <Image className="w-3.5 h-3.5" />
-                        Insert Image
+                        {t('insertImage', lang)}
                       </button>
                     </div>
                     <textarea
@@ -482,7 +485,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                       value={markdown}
                       onChange={(e) => setMarkdown(e.target.value)}
                       className="flex-1 w-full p-4 bg-gray-950 text-gray-100 font-mono text-sm resize-none focus:outline-none"
-                      placeholder="Write your slide content in Markdown..."
+                      placeholder={t('cseMarkdownPlaceholder', lang)}
                       spellCheck={false}
                     />
                   </>
@@ -496,12 +499,12 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                       >
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-medium text-gray-400">
-                            Slide {slideIndex + 1}
+                            {t('cseSlide', lang)} {slideIndex + 1}
                           </span>
                           {contentSlides.length > 1 && (
                             <button
                               onClick={() => removeSlide(slideIndex)}
-                              aria-label={`Remove slide ${slideIndex + 1}`}
+                              aria-label={`${t('cseRemoveSlide', lang)} ${slideIndex + 1}`}
                               className="p-1 text-gray-500 hover:text-red-400 transition-colors"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -513,7 +516,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           type="text"
                           value={slide.title}
                           onChange={(e) => updateSlideTitle(slideIndex, e.target.value)}
-                          placeholder="Slide title"
+                          placeholder={t('cseSlideTitlePlaceholder', lang)}
                           className="w-full px-3 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                         />
 
@@ -527,7 +530,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                                 onChange={(e) =>
                                   updateBullet(slideIndex, bulletIndex, e.target.value)
                                 }
-                                placeholder={`Point ${bulletIndex + 1}`}
+                                placeholder={`${t('csePoint', lang)} ${bulletIndex + 1}`}
                                 className="flex-1 px-3 py-1.5 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary text-sm"
                               />
                               {slide.bullets.length > 1 && (
@@ -545,7 +548,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                             className="flex items-center gap-1 text-sm text-gray-400 hover:text-fastr-secondary transition-colors mt-2"
                           >
                             <Plus className="w-3 h-3" />
-                            Add point
+                            {t('cseAddPoint', lang)}
                           </button>
                         </div>
                       </div>
@@ -557,14 +560,14 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                         className="flex-1 py-3 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-fastr-secondary hover:border-fastr-secondary transition-colors flex items-center justify-center gap-2"
                       >
                         <Plus className="w-4 h-4" />
-                        Add another slide
+                        {t('cseAddAnotherSlide', lang)}
                       </button>
                       <button
                         onClick={openAssetPicker}
                         className="py-3 px-4 border-2 border-dashed border-gray-600 rounded-lg text-gray-400 hover:text-fastr-secondary hover:border-fastr-secondary transition-colors flex items-center justify-center gap-2"
                       >
                         <Image className="w-4 h-4" />
-                        Insert Image
+                        {t('insertImage', lang)}
                       </button>
                     </div>
                   </div>
@@ -574,7 +577,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                     <div className="bg-gray-800 rounded-lg p-4 border border-gray-700 space-y-4">
                       <div>
                         <label className="block text-sm text-gray-400 mb-1">
-                          Section Title
+                          {t('cseSectionTitle', lang)}
                         </label>
                         <input
                           type="text"
@@ -582,13 +585,13 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           onChange={(e) =>
                             setSectionData((prev) => ({ ...prev, title: e.target.value }))
                           }
-                          placeholder="e.g., Data Quality Assessment"
+                          placeholder={t('cseSectionTitlePlaceholder', lang)}
                           className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary text-lg"
                         />
                       </div>
                       <div>
                         <label className="block text-sm text-gray-400 mb-1">
-                          Subtitle (optional)
+                          {t('cseSubtitleOptional', lang)}
                         </label>
                         <input
                           type="text"
@@ -596,12 +599,12 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           onChange={(e) =>
                             setSectionData((prev) => ({ ...prev, subtitle: e.target.value }))
                           }
-                          placeholder="e.g., Day 2 - Morning Session"
+                          placeholder={t('cseSubtitlePlaceholder', lang)}
                           className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-fastr-secondary focus:ring-2 focus:ring-fastr-secondary/30"
                         />
                       </div>
                       <div className="pt-2 text-sm text-gray-500">
-                        This creates a full-screen section divider with background image.
+                        {t('cseSectionHint', lang)}
                       </div>
                     </div>
                   </div>
@@ -612,7 +615,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
               {showPreview && (
                 <div className="w-1/2 flex flex-col bg-gray-800">
                   <div className="px-4 py-2 border-b border-gray-700">
-                    <span className="text-sm text-gray-400">Preview</span>
+                    <span className="text-sm text-gray-400">{t('preview', lang)}</span>
                   </div>
                   <div className="flex-1 p-4 overflow-auto flex items-center justify-center">
                     {previewHtml ? (
@@ -621,12 +624,12 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                           <iframe
                             srcDoc={previewHtml}
                             className="absolute inset-0 w-full h-full bg-white rounded-lg shadow-lg"
-                            title="Slide Preview"
+                            title={t('cseSlidePreview', lang)}
                           />
                         </div>
                       </div>
                     ) : (
-                      <div className="text-gray-500">Loading preview...</div>
+                      <div className="text-gray-500">{t('loadingPreview', lang)}</div>
                     )}
                   </div>
                 </div>
@@ -642,15 +645,15 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
               <div className="text-sm text-gray-400">
                 {editorMode === 'simple' ? (
                   selectedType === 'content' ? (
-                    <>Fill in the title and bullet points. Click "Add another slide" to create multiple slides.</>
+                    <>{t('cseFooterContentHint', lang)}</>
                   ) : (
-                    <>Enter your section title. A background image will be added automatically.</>
+                    <>{t('cseFooterSectionHint', lang)}</>
                   )
                 ) : (
                   <>
-                    Use <code className="text-fastr-secondary">---</code> to separate slides.
+                    {t('cseUseSeparator', lang)} <code className="text-fastr-secondary">---</code> {t('cseToSeparateSlides', lang)}
                     {selectedType === 'section' && (
-                      <> Background: <code className="text-fastr-secondary">![bg](/resources/backgrounds/section_slide.png)</code></>
+                      <> {t('cseBackgroundLabel', lang)} <code className="text-fastr-secondary">![bg](/resources/backgrounds/section_slide.png)</code></>
                     )}
                   </>
                 )}
@@ -662,7 +665,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                   onClick={onClose}
                   className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 >
-                  Cancel
+                  {t('cancel', lang)}
                 </button>
                 <button
                   onClick={handleSave}
@@ -670,7 +673,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                   className="flex items-center gap-2 px-4 py-2 bg-fastr-secondary text-white rounded-lg hover:bg-fastr-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <Save className="w-4 h-4" />
-                  {loading ? 'Saving...' : 'Save & Add to Day'}
+                  {loading ? t('saving', lang) : t('cseSaveAddToDay', lang)}
                 </button>
               </div>
             </>
@@ -680,7 +683,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                 onClick={onClose}
                 className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
               >
-                Cancel
+                {t('cancel', lang)}
               </button>
             </div>
           )}
@@ -692,7 +695,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
               <h3 className="font-semibold text-white flex items-center gap-2">
                 <Image className="w-5 h-5" />
-                Insert Image
+                {t('insertImage', lang)}
               </h3>
               <button
                 onClick={() => setShowAssetPicker(false)}
@@ -717,14 +720,14 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                   {uploadingAsset ? (
                     <div className="flex items-center justify-center gap-2 text-gray-400">
                       <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Uploading...</span>
+                      <span>{t('uploadingAssets', lang)}</span>
                     </div>
                   ) : (
                     <>
                       <Upload className="w-6 h-6 mx-auto text-gray-500 mb-2" />
-                      <p className="text-sm text-gray-400 mb-1">Drag & drop or click to upload</p>
+                      <p className="text-sm text-gray-400 mb-1">{t('cseDragDropClick', lang)}</p>
                       <label className="text-xs text-fastr-secondary hover:underline cursor-pointer">
-                        Browse files
+                        {t('cseBrowseFiles', lang)}
                         <input
                           type="file"
                           accept="image/*"
@@ -745,7 +748,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                       onClick={() => setSelectedAsset(null)}
                       className="text-sm text-fastr-secondary hover:underline mb-3 flex items-center gap-1"
                     >
-                      ← Back to images
+                      {t('cseBackToImages', lang)}
                     </button>
                     <div className="flex gap-4 mb-4">
                       <div className="w-32 h-24 bg-gray-900 rounded-lg overflow-hidden flex-shrink-0">
@@ -753,7 +756,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                       </div>
                       <div>
                         <p className="text-sm font-medium text-white">{selectedAsset.filename}</p>
-                        <p className="text-xs text-gray-400 mt-1">Choose how to display this image on the slide</p>
+                        <p className="text-xs text-gray-400 mt-1">{t('cseChooseLayout', lang)}</p>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -787,8 +790,8 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 mb-3">
                       <Image className="w-6 h-6 text-gray-500" />
                     </div>
-                    <p className="text-sm">No images uploaded yet</p>
-                    <p className="text-xs text-gray-500 mt-1">Upload images to insert them into your slides</p>
+                    <p className="text-sm">{t('cseNoImages', lang)}</p>
+                    <p className="text-xs text-gray-500 mt-1">{t('cseNoImagesHint', lang)}</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-3 gap-3">
@@ -805,7 +808,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <span className="text-white text-xs font-medium px-2 py-1 bg-fastr-secondary rounded">
-                            Select
+                            {t('cseSelect', lang)}
                           </span>
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-2 py-1">
@@ -822,7 +825,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
                 onClick={() => { setSelectedAsset(null); setShowAssetPicker(false) }}
                 className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
               >
-                Cancel
+                {t('cancel', lang)}
               </button>
             </div>
           </div>
