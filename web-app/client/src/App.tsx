@@ -39,7 +39,6 @@ import {
   Search,
   AlertTriangle,
   Upload,
-  Monitor,
   Square,
 } from 'lucide-react'
 import {

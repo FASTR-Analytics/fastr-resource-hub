@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { X, Save, Eye, Sparkles, Layout, Layers, Plus, Trash2, Image, Upload, Loader2 } from 'lucide-react'
-import api, { Asset } from '../../lib/api'
+import api, { workshopAPI, Asset } from '../../lib/api'
 import { useToast } from './Toast'
 import { Modal } from './ui/Modal'
 
@@ -296,7 +296,7 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
         .replace(/[^a-z0-9]+/g, '_')
         .replace(/^_|_$/g, '') || 'slide'
       const existing = new Set<string>(
-        ((await api.workshopAPI.getCustomSlides(workshopId)) as any[]).map((s: any) => s.filename)
+        ((await workshopAPI.getCustomSlides(workshopId)) as any[]).map((s: any) => s.filename)
       )
       let filename = `${stem}.md`
       for (let i = 2; existing.has(filename); i++) filename = `${stem}_${i}.md`
