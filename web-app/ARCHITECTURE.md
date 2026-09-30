@@ -539,6 +539,26 @@ web-app/
 
 ---
 
+## URLs
+
+There is no router library. `client/src/hooks/useUrlSync.ts` binds the
+address bar to the app's navigation state (`appMode`, the open workshop, the
+preview toggle) through the History API, using the pure mapping in
+`client/src/lib/urlRoutes.ts` (unit-tested):
+
+| Path | Screen |
+|------|--------|
+| `/` | Workshops list |
+| `/library`, `/settings` | Content library, Settings |
+| `/workshops` | Builder with no workshop open (selector) |
+| `/workshops/:id` | Builder for that workshop |
+| `/workshops/:id/preview` | Slide preview |
+| `/workshops/:id/import` | Slide import wizard |
+
+The Express server already falls back to `index.html` for unknown paths in
+production, and Vite does so in development. To add a screen, extend
+`parsePath`/`pathFor` and the `AppMode` union; the hook needs no change.
+
 ## Data Flow
 
 ### Content Pipeline
