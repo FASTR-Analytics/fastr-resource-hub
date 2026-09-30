@@ -198,7 +198,7 @@ export function SortableSessionCard({
             <button
               onClick={e => { e.stopPropagation(); handleMoveUp() }}
               disabled={isFirst}
-              className="p-1 rounded text-slate-300 hover:text-slate-700 hover:bg-black/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-black/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               title={t('moveUp', contentLanguage)}
               aria-label={t('moveUp', contentLanguage)}
             >
@@ -207,7 +207,7 @@ export function SortableSessionCard({
             <button
               onClick={e => { e.stopPropagation(); handleMoveDown() }}
               disabled={isLast}
-              className="p-1 rounded text-slate-300 hover:text-slate-700 hover:bg-black/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-black/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               title={t('moveDown', contentLanguage)}
               aria-label={t('moveDown', contentLanguage)}
             >
@@ -222,7 +222,7 @@ export function SortableSessionCard({
                 e.stopPropagation()
                 setShowMoveMenu(!showMoveMenu)
               }}
-              className="p-1 rounded text-slate-300 hover:text-slate-700 hover:bg-black/10 transition-colors"
+              className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-black/10 transition-colors"
               title={t('moveToDay', contentLanguage)}
               aria-label={t('moveToDay', contentLanguage)}
             >
@@ -254,7 +254,7 @@ export function SortableSessionCard({
             e.stopPropagation()
             onEdit(session, dayNum, index)
           }}
-          className="p-1 rounded text-slate-300 hover:text-slate-700 hover:bg-black/10 transition-colors"
+          className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-black/10 transition-colors"
           title={t('sessionSettings', contentLanguage)}
           aria-label={t('sessionSettings', contentLanguage)}
         >

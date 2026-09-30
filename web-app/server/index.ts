@@ -34,6 +34,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Team password from environment variable
+// The built-in defaults exist for local development only. A production
+// process must set both secrets in the environment or it refuses to start.
+if (process.env.NODE_ENV === 'production' && (!process.env.TEAM_PASSWORD || !process.env.SESSION_SECRET)) {
+  console.error('Refusing to start: TEAM_PASSWORD and SESSION_SECRET must be set in production.')
+  process.exit(1)
+}
 const TEAM_PASSWORD = process.env.TEAM_PASSWORD || 'fastr2026'
 
 // Initialize session store (Turso in production, SQLite locally)

@@ -289,11 +289,17 @@ export function CustomSlideEditor({ workshopId, dayNumber, onSave, onClose, defa
     setError(null)
 
     try {
-      // Generate filename from session name
-      const filename = sessionName
+      // Generate filename from session name; suffix it when a custom slide with
+      // that name already exists, so a second "Country context" never overwrites the first.
+      const stem = sessionName
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '_')
-        .replace(/^_|_$/g, '') + '.md'
+        .replace(/^_|_$/g, '') || 'slide'
+      const existing = new Set<string>(
+        ((await api.workshopAPI.getCustomSlides(workshopId)) as any[]).map((s: any) => s.filename)
+      )
+      let filename = `${stem}.md`
+      for (let i = 2; existing.has(filename); i++) filename = `${stem}_${i}.md`
 
       // Save to API
       const response = await fetch(`/api/workshops/${workshopId}/custom-slides`, {

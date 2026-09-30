@@ -15,18 +15,18 @@
 // CSS, since fonts can't embed in .pptx), so they are not shared tokens.
 
 export const COLORS = {
-  deepGreen: '09544F',    // H1
+  deepGreen: '0A544F',    // H1
   darkGreen: '0C716B',    // primary
-  green: '1F9A9C',
+  green: '1FA29C',
   lime: 'D0CB17',         // accent/underline
   navy: '21568C',         // H2
-  blue: '1A90C0',         // H2 underline
+  blue: '21568C',         // H2 underline
   lightBlue: 'CAE6E9',    // table headers
   lightGreen: 'E8F4F3',   // session headers (PPTX-only; no CSS var)
-  gold: 'D8A822',
-  purple: '7A1F6E',
-  orchid: 'BD5091',
-  coral: 'FF6462',
+  gold: 'FFB09F',
+  purple: '501E50',
+  orchid: 'B673A2',
+  coral: '68152B',
   textDark: '2c3e50',
   darkGray: '333333',     // PPTX-only; no CSS var
   white: 'FFFFFF',
@@ -34,8 +34,8 @@ export const COLORS = {
   ink: '1A1F1E',          // body text
   ink2: '5A6562',         // secondary
   ink3: '97A09D',         // tertiary / chrome
-  paper2: 'F6F5EF',       // warm panel (breaks, callouts)
-  green900: '063D39',     // dark slides
+  paper2: 'FEF7F1',       // warm panel (breaks, callouts)
+  green900: '00413C',     // dark slides
   rule: 'E4E7E5',         // hairline
 } as const
 

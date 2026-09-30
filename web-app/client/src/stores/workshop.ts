@@ -96,6 +96,8 @@ interface WorkshopStore {
   saveCurrentWorkshop: () => Promise<void>
   createWorkshop: (workshopId: string, config: LocalWorkshopConfig) => Promise<void>
   deleteWorkshop: (workshopId: string) => Promise<void>
+  /** True when the open workshop is locked; every mutation is a no-op then. */
+  isCurrentLocked: () => boolean
   cloneWorkshop: (srcId: string, newId: string, overrides?: { name?: string; country?: string; location?: string; date?: string }) => Promise<string>
   setWorkshopLocked: (workshopId: string, locked: boolean) => Promise<void>
   loadContentLibrary: (language?: Language) => Promise<void>
@@ -162,6 +164,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       })
     } catch (error: any) {
       set({ error: error.message, isLoading: false })
+      throw error
     }
   },
 
@@ -193,6 +196,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       await get().selectWorkshop(workshopId)
     } catch (error: any) {
       set({ error: error.message, isLoading: false })
+      throw error
     }
   },
 
@@ -224,9 +228,15 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       await get().loadWorkshops()
     } catch (error: any) {
       set({ error: error.message })
+      throw error
     } finally {
       set({ isLoading: false })
     }
+  },
+
+  isCurrentLocked: () => {
+    const { workshops, currentWorkshopId } = get()
+    return !!workshops.find(w => w.id === currentWorkshopId)?.locked
   },
 
   // Lock/unlock workshop
@@ -236,6 +246,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
       await get().loadWorkshops()
     } catch (error: any) {
       set({ error: error.message })
+      throw error
     }
   },
 
@@ -259,7 +270,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Update a session
   updateSession: (dayNum: number, sessionIdx: number, updates: Partial<Session>) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const dayKey = `day${dayNum}`
     const sessions = currentConfig.schedule[dayKey] || []
@@ -284,7 +295,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Record a per-workshop slide edit: sourceRef now renders from forkRef
   setSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string, forkRef: string) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
     const session: Session | undefined = (currentConfig.schedule[`day${dayNum}`] || [])[sessionIdx]
     if (!session) return
     get().updateSession(dayNum, sessionIdx, {
@@ -295,7 +306,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Drop a per-workshop slide edit (reset to the library version)
   removeSlideOverride: (dayNum: number, sessionIdx: number, sourceRef: string) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
     const session: Session | undefined = (currentConfig.schedule[`day${dayNum}`] || [])[sessionIdx]
     if (!session?.slideOverrides) return
     const { [sourceRef]: _removed, ...rest } = session.slideOverrides
@@ -307,7 +318,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Add a session
   addSession: (dayNum: number, session: Session) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const dayKey = `day${dayNum}`
     const existingSessions = currentConfig.schedule[dayKey] || []
@@ -332,7 +343,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Remove a session
   removeSession: (dayNum: number, sessionIdx: number) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const dayKey = `day${dayNum}`
     const sessions = currentConfig.schedule[dayKey] || []
@@ -356,7 +367,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Reorder a session
   reorderSession: (dayNum: number, fromIdx: number, toIdx: number) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const dayKey = `day${dayNum}`
     const sessions = currentConfig.schedule[dayKey] || []
@@ -382,7 +393,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Move session between days
   moveSessionToDay: (fromDay: number, fromIdx: number, toDay: number, toIdx: number) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const fromDayKey = `day${fromDay}`
     const toDayKey = `day${toDay}`
@@ -411,7 +422,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Add a new day
   addDay: () => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const newDayNum = currentConfig.schedule.days + 1
     const prevDayNum = newDayNum - 1
@@ -469,7 +480,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Remove a day and renumber remaining days
   removeDay: (dayNum: number) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
     if (currentConfig.schedule.days <= 1) return // Keep at least 1 day
 
     const totalDays = currentConfig.schedule.days
@@ -512,7 +523,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Update day title
   updateDayTitle: (dayNum: number, title: string) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const newConfig = {
       ...currentConfig,
@@ -531,7 +542,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Update day start time
   updateDayStartTime: (dayNum: number, time: string) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const newConfig = {
       ...currentConfig,
@@ -550,7 +561,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Update workshop settings
   updateWorkshopSettings: (updates: Partial<LocalWorkshopConfig['workshop']>) => {
     const { currentConfig } = get()
-    if (!currentConfig) return
+    if (!currentConfig || get().isCurrentLocked()) return
 
     const newConfig = {
       ...currentConfig,

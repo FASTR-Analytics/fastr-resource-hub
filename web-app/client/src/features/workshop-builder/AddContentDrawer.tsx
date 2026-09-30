@@ -129,7 +129,7 @@ paginate: true
         {/* Pane */}
         <div className="flex-1 overflow-hidden min-h-0">
           {tab === 'content' && (
-            <ContentLibrary onImportSlides={onImportSlides} />
+            <ContentLibrary onImportSlides={onImportSlides} targetDayNum={dayNum} />
           )}
           {tab === 'create' && (
             <div className="p-5 overflow-y-auto h-full">

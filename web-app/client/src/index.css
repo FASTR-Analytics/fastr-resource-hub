@@ -74,7 +74,7 @@ body {
     @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
            text-body-sm font-semibold bg-fastr-primary text-white
            hover:bg-fastr-primary-dark active:bg-fastr-primary-dark
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-primary
            disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
   }
 
@@ -82,15 +82,15 @@ body {
     @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
            text-body-sm font-semibold bg-white text-slate-700 border border-slate-200
            hover:bg-slate-50 active:bg-slate-100
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-primary
            disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
   }
 
   .btn-accent {
     @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
            text-body-sm font-semibold bg-fastr-accent text-white
-           hover:bg-[#D87E12] active:bg-[#C2700F]
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           hover:bg-[#9E4E00] active:bg-[#874200]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-primary
            disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
   }
 
@@ -98,7 +98,7 @@ body {
     @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5
            text-body-sm font-semibold text-slate-700
            hover:bg-slate-100 active:bg-slate-200
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-primary
            disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
   }
 
@@ -112,6 +112,6 @@ body {
 
   /* Shared focus ring helper */
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-secondary/40;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fastr-primary;
   }
 }

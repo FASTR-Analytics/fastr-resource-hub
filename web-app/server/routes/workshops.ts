@@ -10,6 +10,7 @@ import {
   updateWorkshop,
   deleteWorkshop,
   setWorkshopLocked,
+  isWorkshopLocked,
   getCustomSlides,
   saveCustomSlide,
   deleteCustomSlide,
@@ -170,6 +171,10 @@ router.put('/:id', async (req, res) => {
     const existing = await getWorkshop(req.params.id)
     if (!existing) {
       return res.status(404).json({ error: 'Workshop not found' })
+    }
+
+    if (await isWorkshopLocked(req.params.id)) {
+      return res.status(403).json({ error: 'Workshop is locked. Unlock it to make changes.' })
     }
 
     await updateWorkshop(req.params.id, config)
