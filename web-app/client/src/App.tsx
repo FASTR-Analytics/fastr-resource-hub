@@ -218,6 +218,43 @@ function SlidePreview({ html, notes, contentLanguage }: { html: string; notes: s
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// TopicThumb — first slide of a topic as a lazy thumbnail (library mosaic)
+// ─────────────────────────────────────────────────────────────────────────────
+const THUMB_ONLY_FIRST = '<style>svg[data-marpit-svg]:not(:first-of-type){display:none!important}html,body{margin:0;overflow:hidden;background:#fff}</style></head>'
+function TopicThumb({ getHtml, title, onClick, badge }: { getHtml: () => Promise<string>; title: string; onClick?: () => void; badge?: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [html, setHtml] = useState<string | null>(null)
+  const [failed, setFailed] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let cancelled = false
+    const load = () => getHtml().then(h => { if (!cancelled) setHtml(h) }).catch(() => { if (!cancelled) setFailed(true) })
+    if (typeof IntersectionObserver === 'undefined') { load(); return }
+    const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { io.disconnect(); load() } }, { rootMargin: '400px 0px' })
+    io.observe(el)
+    return () => { cancelled = true; io.disconnect() }
+  }, [getHtml])
+  return (
+    <div ref={ref} className="relative aspect-video w-full overflow-hidden rounded-lg bg-slate-100 ring-1 ring-black/5" onClick={onClick} role={onClick ? 'button' : undefined} tabIndex={onClick ? 0 : undefined} onKeyDown={e => { if (onClick && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onClick() } }} aria-label={title}>
+      {html ? (
+        <iframe
+          srcDoc={html.replace('</head>', THUMB_ONLY_FIRST)}
+          title={title}
+          className="pointer-events-none absolute left-0 top-0 bg-white"
+          style={{ width: 960, height: 540, transform: 'scale(var(--thumb-scale, 0.25))', transformOrigin: 'top left' }}
+        />
+      ) : failed ? (
+        <div className="absolute inset-0 flex items-center justify-center text-caption text-slate-400">—</div>
+      ) : (
+        <div className="absolute inset-0 animate-pulse bg-slate-200/70" aria-hidden />
+      )}
+      {badge}
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Library Mode Component - Browse and preview content (two-panel with search)
 // ─────────────────────────────────────────────────────────────────────────────
 function LibraryMode() {
@@ -227,6 +264,11 @@ function LibraryMode() {
   const [expandedSessions, setExpandedSessions] = useState<Set<string>>(new Set())
   const [templatesCollapsed, setTemplatesCollapsed] = useState(true)
   const [previewTopic, setPreviewTopic] = useState<any | null>(null)
+  // Mosaic: which module's slides fill the right panel (null = all modules as tiles).
+  const [mosaicModule, setMosaicModule] = useState<string | null>(null)
+  const isActivityTopic = (topic: any) => /^(Activity|Activité|Atividade)\b/i.test(topic?.title || '')
+  const labelTheory = contentLanguage === 'fr' ? 'théorie' : contentLanguage === 'pt' ? 'teoria' : 'theory'
+  const labelActivities = contentLanguage === 'fr' ? 'activités' : contentLanguage === 'pt' ? 'atividades' : 'activities'
   const [previewHtml, setPreviewHtml] = useState<string | null>(null)
   const [presenterNotes, setPresenterNotes] = useState<string[]>([])
   const [isLoadingPreview, setIsLoadingPreview] = useState(false)
@@ -306,6 +348,30 @@ function LibraryMode() {
   }, [contentLanguage])
 
   const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
+  // Rendered HTML for a topic, shared by the preview pane and the mosaic thumbnails.
+  const getTopicHtml = React.useCallback(async (topic: any): Promise<string> => {
+    const cacheKey = `${topic.id}_${contentLanguage}`
+    const cached = previewCache.current.get(cacheKey)
+    if (cached) return cached.html
+    const response = await fetch(`/api/content/topic/${topic.id}?language=${contentLanguage}`, { credentials: 'include' })
+    if (!response.ok) throw new Error('topic')
+    const data = await response.json()
+    const renderResponse = await fetch('/api/content/render', {
+      credentials: 'include', method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ markdown: data.content }),
+    })
+    if (!renderResponse.ok) throw new Error('render')
+    const renderData = await renderResponse.json()
+    previewCache.current.set(cacheKey, { html: renderData.html, notes: renderData.presenterNotes || [] })
+    return renderData.html
+  }, [contentLanguage])
+  const thumbGetters = useRef<Map<string, () => Promise<string>>>(new Map())
+  const thumbGetter = (topic: any) => {
+    const key = `${topic.id}_${contentLanguage}`
+    let g = thumbGetters.current.get(key)
+    if (!g) { g = () => getTopicHtml(topic); thumbGetters.current.set(key, g) }
+    return g
+  }
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   const loadTemplatePreview = async (tmpl: any) => {
@@ -601,6 +667,8 @@ function LibraryMode() {
                       if (next.has(sessionGroup.id)) next.delete(sessionGroup.id)
                       else next.add(sessionGroup.id)
                       setExpandedSessions(next)
+                      setMosaicModule(sessionGroup.id)
+                      setPreviewTopic(null)
                     }}
                     className="w-full text-left px-4 py-2 flex items-center gap-2 bg-slate-50 hover:bg-slate-100 transition-colors border-y border-slate-200 focus-ring"
                   >
@@ -809,6 +877,14 @@ function LibraryMode() {
           <>
             <div className="px-6 py-3 border-b border-slate-200 bg-white flex-shrink-0 flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-slate-400" aria-hidden />
+              <button
+                onClick={() => setPreviewTopic(null)}
+                className="btn-ghost -ml-2"
+                title={t('back', contentLanguage)}
+                aria-label={t('back', contentLanguage)}
+              >
+                <ArrowLeft className="w-4 h-4" aria-hidden />
+              </button>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <h3 className="text-body font-semibold text-slate-900 m-0 truncate">{previewTopic?.title}</h3>
@@ -825,16 +901,56 @@ function LibraryMode() {
               <SlidePreview html={previewHtml} notes={presenterNotes} contentLanguage={contentLanguage} />
             </div>
           </>
-        ) : (
-          <div className="flex-1 flex items-center justify-center bg-slate-100 text-center">
-            <div>
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white border border-slate-200 ring-1 ring-black/5 flex items-center justify-center">
-                <BookOpen className="w-7 h-7 text-slate-400" aria-hidden />
+        ) : (() => {
+          const current = mosaicModule ? sessionGroups.find(g => g.id === mosaicModule) : null
+          if (current) {
+            const items = current.modules.flatMap(m => [...m.theory, ...m.activities])
+            return (
+              <div className="flex-1 min-h-0 overflow-y-auto bg-slate-100" style={{ ['--thumb-scale' as string]: '0.25' } as React.CSSProperties}>
+                <div className="sticky top-0 z-10 flex items-center gap-3 px-6 py-3 bg-white/95 backdrop-blur border-b border-slate-200">
+                  <button onClick={() => setMosaicModule(null)} className="btn-ghost -ml-2" title={t('allModules', contentLanguage)} aria-label={t('allModules', contentLanguage)}>
+                    <ArrowLeft className="w-4 h-4" aria-hidden />
+                  </button>
+                  <h3 className="text-body font-semibold text-slate-900 m-0 truncate flex-1">{current.name}</h3>
+                  <span className="text-caption text-slate-500">{items.length} {t('slides', contentLanguage)}</span>
+                </div>
+                <div className="grid gap-4 p-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}>
+                  {items.map(it => (
+                    <div key={it.topic.id} className="group text-left">
+                      <TopicThumb getHtml={thumbGetter(it.topic)} title={it.topic.title} onClick={() => loadPreview(it.topic)}
+                        badge={isActivityTopic(it.topic) ? <span className="absolute left-2 top-2 rounded-pill bg-amber-500 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">{labelActivities}</span> : undefined} />
+                      <div className="mt-2 flex items-start justify-between gap-2">
+                        <span className="text-body-sm font-medium text-slate-800 leading-snug line-clamp-2">{it.topic.title}</span>
+                        <span className="text-caption text-slate-500 flex-shrink-0">{it.topic.slideCount}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-body-sm text-slate-500">{t('clickToPreview', contentLanguage)}</p>
+            )
+          }
+          return (
+            <div className="flex-1 min-h-0 overflow-y-auto bg-slate-100" style={{ ['--thumb-scale' as string]: '0.25' } as React.CSSProperties}>
+              <div className="grid gap-4 p-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}>
+                {sessionGroups.map(g => {
+                  const first = g.modules.flatMap(m => [...m.theory, ...m.activities])[0]
+                  return (
+                    <button key={g.id} onClick={() => setMosaicModule(g.id)} className="group text-left rounded-xl bg-white border border-slate-200 ring-1 ring-black/5 p-3 hover:border-fastr-primary hover:shadow-md transition-all focus-ring">
+                      {first ? <TopicThumb getHtml={thumbGetter(first.topic)} title={g.name} /> : <div className="aspect-video rounded-lg bg-slate-100" />}
+                      <div className="mt-3 text-body-sm font-semibold text-slate-900 leading-snug">{g.name}</div>
+                      <div className="mt-1 text-caption text-slate-500">
+                        {g.theoryCount} {labelTheory}{g.activityCount > 0 ? ` · ${g.activityCount} ${labelActivities}` : ''}
+                      </div>
+                    </button>
+                  )
+                })}
+                {sessionGroups.length === 0 && (
+                  <p className="text-body-sm text-slate-500">{t('clickToPreview', contentLanguage)}</p>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        })()}
       </div>
     </div>
   )
@@ -1263,8 +1379,10 @@ function App() {
     }
 
     if (data._warnings && Array.isArray(data._warnings) && data._warnings.length > 0) {
+      // Name what was dropped: the generic "some content did not fit" hid which
+      // requested modules were missing from the generated agenda.
       setTimeout(() => {
-        showToast(t('scheduleOverflowWarning', contentLanguage), 'info')
+        showToast(`${t('scheduleOverflowWarning', contentLanguage)} ${data._warnings.join(' ')}`, 'info')
       }, 500)
     }
 
