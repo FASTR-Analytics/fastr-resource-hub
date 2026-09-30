@@ -120,7 +120,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
       }
       setAssets(await api.listAssets(workshopId))
     } catch (err: any) {
-      showToast(`Upload failed: ${err.message}`, 'error')
+      showToast(`${t('cseUploadFailed', contentLanguage)}: ${err.message}`, 'error')
     } finally {
       setUploadingAsset(false)
     }
@@ -171,7 +171,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
         setContent((res.content || '').replace(FRONTMATTER_RE, ''))
       })
       .catch(err => {
-        if (!cancelled) showToast(`Failed to load slide content: ${err.message}`, 'error')
+        if (!cancelled) showToast(`${t('smeLoadFailed', contentLanguage)}: ${err.message}`, 'error')
       })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
@@ -215,7 +215,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
 
   const handleSave = async () => {
     if (!content.trim()) {
-      showToast('Slide content cannot be empty', 'error')
+      showToast(t('smeEmptyContent', contentLanguage), 'error')
       return
     }
     setSaving(true)
@@ -223,19 +223,19 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
       if (forkRef) {
         // Existing fork or genuine custom slide: edit in place
         await workshopAPI.saveCustomSlide(workshopId, forkRef.slice('custom_slides/'.length), content)
-        showToast('Slide content saved', 'success')
+        showToast(t('smeSaved', contentLanguage), 'success')
       } else {
         // First edit of a library/template/imported slide: fork it, recording
         // the source ref so stale-fork detection can compare against it later.
         const forkFilename = await buildForkFilename()
         await workshopAPI.saveCustomSlide(workshopId, forkFilename, content, slide.sourceRef)
         setSlideOverride(slide.dayNumber, slide.sessionIndex, slide.sourceRef, `custom_slides/${forkFilename}`)
-        showToast('Library slide forked for this workshop', 'success')
+        showToast(t('smeCopyCreated', contentLanguage), 'success')
       }
       onSaved()
       onClose()
     } catch (err: any) {
-      showToast(`Slide save failed: ${err.message}`, 'error')
+      showToast(`${t('smeSaveFailed', contentLanguage)}: ${err.message}`, 'error')
     } finally {
       setSaving(false)
     }
@@ -252,7 +252,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
       onSaved()
       onClose()
     } catch (err: any) {
-      showToast(`Reset failed: ${err.message}`, 'error')
+      showToast(`${t('smeResetFailed', contentLanguage)}: ${err.message}`, 'error')
     } finally {
       setSaving(false)
     }
@@ -298,7 +298,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
           <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 px-3 py-2 text-caption text-amber-900">
             <GitFork className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>
-              {t('forkBanner', contentLanguage)} {t('forkAndEditHint', contentLanguage)}
+              {t('smeEditCopyBanner', contentLanguage)} {t('smeEditCopyHint', contentLanguage)}
             </span>
           </div>
         )}
@@ -324,13 +324,13 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
                 />
                 <div className="flex flex-col gap-1">
                   {img.isBackground ? (
-                    <span className="text-caption text-slate-400 px-1">background</span>
+                    <span className="text-caption text-slate-400 px-1">{t('smeBackground', contentLanguage)}</span>
                   ) : (
                     <div className="flex items-center gap-1 text-caption text-slate-600">
                       <button
                         onClick={() => handleResizeImage(i, -100)}
                         className="p-0.5 rounded hover:bg-slate-200"
-                        title="Smaller"
+                        title={t('smeSmaller', contentLanguage)}
                       >
                         <Minus className="w-3 h-3" />
                       </button>
@@ -338,7 +338,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
                       <button
                         onClick={() => handleResizeImage(i, 100)}
                         className="p-0.5 rounded hover:bg-slate-200"
-                        title="Larger"
+                        title={t('smeLarger', contentLanguage)}
                       >
                         <Plus className="w-3 h-3" />
                       </button>
@@ -393,7 +393,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
               <iframe
                 srcDoc={previewHtml}
                 className="w-full h-full bg-white rounded-lg"
-                title="Slide preview"
+                title={t('smeSlidePreview', contentLanguage)}
               />
             ) : (
               <div className="flex-1 flex items-center justify-center text-body-sm text-slate-400">
@@ -427,13 +427,13 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
                 {uploadingAsset ? (
                   <div className="flex items-center justify-center gap-2 text-slate-500">
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span className="text-caption">Uploading...</span>
+                    <span className="text-caption">{t('uploadingAssets', contentLanguage)}</span>
                   </div>
                 ) : (
                   <>
                     <Upload className="w-5 h-5 mx-auto text-slate-400 mb-1" />
                     <label className="text-caption text-fastr-secondary hover:underline cursor-pointer">
-                      Drag & drop or browse files
+                      {t('smeDragDropBrowse', contentLanguage)}
                       <input
                         type="file"
                         accept="image/*"
@@ -451,7 +451,7 @@ export function SlideMarkdownEditor({ workshopId, slide, language, onSaved, onCl
                 </div>
               ) : assets.length === 0 ? (
                 <div className="text-center text-slate-400 py-10 text-caption">
-                  No images uploaded yet for this workshop
+                  {t('smeNoImages', contentLanguage)}
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-2">

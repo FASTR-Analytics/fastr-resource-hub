@@ -189,14 +189,14 @@ export function EditSessionModal({
 
         {showSlideEditor && (
           <Field
-            label={t(isForkable ? 'forkAndEdit' : 'editSlideMarkdown', contentLanguage)}
+            label={t(isForkable ? 'smeEditCopyLabel' : 'editSlideMarkdown', contentLanguage)}
             htmlFor="es-slide-content"
-            hint={t(isForkable ? 'forkAndEditHint' : 'editSlideMarkdownHint', contentLanguage)}
+            hint={t(isForkable ? 'smeEditCopyHint' : 'editSlideMarkdownHint', contentLanguage)}
           >
             {isForkable && (
               <div className="mb-2 flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 px-3 py-2 text-caption text-amber-900">
                 <GitFork className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>{t('forkBanner', contentLanguage)}</span>
+                <span>{t('smeEditCopyBanner', contentLanguage)}</span>
               </div>
             )}
             {slideLoading ? (
