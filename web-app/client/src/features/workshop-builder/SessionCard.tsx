@@ -268,7 +268,7 @@ export function SortableSessionCard({
       </div>
 
       {/* Content */}
-      <div className="pl-5 pr-6">
+      <div className="pl-5 pr-24">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-slate-500 w-12 flex-shrink-0">{session._startTime || ''}</span>
           <SessionIcon className={`w-4 h-4 flex-shrink-0 ${config.iconColor}`} aria-hidden />
@@ -308,7 +308,7 @@ export function DroppableDayColumn({ dayNum, children }: { dayNum: number; child
   return (
     <div
       ref={setNodeRef}
-      className={`flex-shrink-0 w-[340px] rounded-xl shadow-sm border ring-1 ring-black/[0.03] transition-all ${
+      className={`flex-[1_0_280px] min-w-0 max-w-[380px] rounded-xl shadow-sm border ring-1 ring-black/[0.03] transition-all ${
         isOver
           ? 'border-fastr-secondary bg-fastr-secondary/5 ring-2 ring-fastr-secondary/40'
           : 'border-slate-200/80 bg-white/70 backdrop-blur-sm'
