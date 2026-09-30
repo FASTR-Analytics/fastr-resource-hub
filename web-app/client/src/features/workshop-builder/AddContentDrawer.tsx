@@ -90,7 +90,7 @@ paginate: true
           Drag-and-drop from the drawer's ContentLibrary onto day columns works because
           the parent DndContext picks up pointer events through the panel boundary. */}
       <div
-        className="fixed top-14 right-0 bottom-0 z-[80] w-[400px] max-w-[90vw] bg-white border-l border-slate-200 shadow-lg flex flex-col"
+        className="fixed top-14 right-0 bottom-0 z-[80] w-[min(400px,36vw)] max-w-[90vw] bg-white border-l border-slate-200 shadow-lg flex flex-col"
         role="region"
         aria-label={t('addContent', contentLanguage)}
       >

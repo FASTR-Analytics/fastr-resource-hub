@@ -2097,7 +2097,7 @@ function App() {
         data-tour="toolbar-ai"
       >
         <Sparkles className="w-4 h-4" />
-        <span className="hidden xl:inline">{t('aiHelp', contentLanguage)}</span>
+        <span className="hidden lg:inline">{t('aiHelp', contentLanguage)}</span>
       </button>
 
       <div className="w-px h-6 bg-slate-200 mx-1" />
@@ -2113,7 +2113,7 @@ function App() {
         aria-pressed={showPreview}
       >
         <Eye className="w-4 h-4" />
-        <span className="hidden xl:inline">{t('preview', contentLanguage)}</span>
+        <span className="hidden lg:inline">{t('preview', contentLanguage)}</span>
       </button>
 
       <button
@@ -2122,7 +2122,7 @@ function App() {
         title={t('workshopDetails', contentLanguage)}
       >
         <Settings className="w-4 h-4" />
-        <span className="hidden xl:inline">{t('workshopDetails', contentLanguage)}</span>
+        <span className="hidden lg:inline">{t('workshopDetails', contentLanguage)}</span>
       </button>
 
       {currentWorkshopId && (
@@ -2246,7 +2246,7 @@ function App() {
         <main
           aria-disabled={currentLocked || undefined}
           className={`flex-1 overflow-hidden transition-[padding] duration-200 ${
-            addContentDrawerOpen ? 'pr-[400px]' : rightPanelOpen ? 'pr-80' : ''
+            addContentDrawerOpen ? 'pr-[min(400px,36vw)]' : rightPanelOpen ? 'pr-80' : ''
           } ${currentLocked ? 'pointer-events-none select-none opacity-90' : ''}`}
         >
           {currentWorkshopId ? (
@@ -2328,7 +2328,7 @@ function App() {
                         })()
                       ) : (
                         /* ── Workshop mode: Kanban day columns ── */
-                        <div className="flex gap-4 overflow-x-auto pb-4" data-tour="schedule-area">
+                        <div className="flex items-start gap-4 overflow-x-auto pb-4" data-tour="schedule-area">
                           {Array.from({ length: currentConfig?.schedule?.days || 0 }).map((_, i) => {
                             const dayNum = i + 1
                             const dayKey = `day${dayNum}`
@@ -2441,7 +2441,7 @@ function App() {
 
                           {/* Add Day button */}
                           <button
-                            className="flex-shrink-0 w-64 h-32 rounded-xl border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex flex-col items-center justify-center gap-2"
+                            className="flex-[0_0_176px] h-32 rounded-xl border-2 border-dashed border-gray-300 text-gray-400 hover:border-fastr-primary hover:text-fastr-primary transition-colors flex flex-col items-center justify-center gap-2"
                             onClick={() => useWorkshopStore.getState().addDay()}
                           >
                             <Plus className="w-6 h-6" />
