@@ -15,6 +15,10 @@ const router = Router()
 // ─────────────────────────────────────────────────────────────────────────────
 // Session render cache for deck preview
 // ─────────────────────────────────────────────────────────────────────────────
+// Each cached slide holds the slide's SVG only; the frame (theme CSS and the
+// wrapper document) is sent once per response, not once per slide. Inlining
+// the theme in every slide made a 183-slide deck a 20 MB response that the
+// hosted server cut off mid-body.
 interface SessionCacheEntry {
   slides: Array<{
     id: string
@@ -25,7 +29,7 @@ interface SessionCacheEntry {
     sessionName: string
     sessionType: string
     moduleId: string | null
-    html: string
+    body: string
   }>
   timestamp: number
 }
@@ -175,6 +179,15 @@ router.post('/:id/slides', async (req, res) => {
       }
     }
 
+    // Frame document shared by every slide of this response.
+    const frameCss = (() => {
+      const { css } = renderMarkdown(`---\nmarp: true\ntheme: ${themeSpec.marpTheme}\npaginate: true\n---\n\n# Frame`)
+      return `${css}
+${fastrThemeCSS}
+html, body { margin: 0; padding: 0; overflow: hidden; background: white; }
+.marpit { display: flex; justify-content: center; align-items: center; }
+svg[data-marpit-svg] { display: block; width: 100%; height: 100%; }`
+    })()
     for (let day = 1; day <= numDays; day++) {
       const dayKey = `day${day}`
       const sessions = config.schedule[dayKey] || []
@@ -257,7 +270,7 @@ paginate: true
 
 ${sessionMarkdown}`
 
-        const { html, css } = renderMarkdown(fullMarkdown)
+        const { html } = renderMarkdown(fullMarkdown)
 
         // Marp renders slides as SVG elements - extract each one
         const svgRegex = /<svg[^>]*data-marpit-svg[^>]*>[\s\S]*?<\/svg>/g
@@ -273,37 +286,8 @@ ${sessionMarkdown}`
           svgHtml = svgHtml.replace(/&quot;\.\.\/\.\.\/resources\//g, '&quot;/resources/')
           svgHtml = svgHtml.replace(/&quot;\.\.\/resources\//g, '&quot;/resources/')
 
-          // Create standalone HTML for this slide
-          const slideHtml = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <base href="/">
-  <style>
-    ${css}
-    ${fastrThemeCSS}
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: white;
-    }
-    .marpit {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    svg[data-marpit-svg] {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-</head>
-<body>
-  <div class="marpit">${svgHtml}</div>
-</body>
-</html>`
+          // Only the slide itself travels; the client wraps it in the shared frame.
+          const slideBody = svgHtml
 
           const source = sourceForSlide(slideIdx, svgMatches.length)
           const slideData = {
@@ -320,11 +304,11 @@ ${sessionMarkdown}`
             editable: source.editable,
             overridden: source.overridden,
             stale: staleForSource(source),
-            html: slideHtml,
+            body: slideBody,
           }
 
           slidesData.push(slideData)
-          sessionSlides.push({ slideIndex: slideIdx, html: slideHtml })
+          sessionSlides.push({ slideIndex: slideIdx, body: slideBody })
           slideIdx++
         }
 
@@ -340,6 +324,7 @@ ${sessionMarkdown}`
 
     res.json({
       success: true,
+      frameCss,
       slides: slidesData,
       totalSlides: slidesData.length,
       cacheStats: { hits: cacheHits, misses: cacheMisses }

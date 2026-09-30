@@ -64,7 +64,8 @@ interface SlideData {
   editable: boolean
   overridden: boolean
   stale?: boolean
-  html: string
+  /** The slide's SVG; wrapped in the shared frame document when displayed. */
+  body: string
 }
 
 interface SessionGroup {
@@ -80,6 +81,7 @@ interface SessionGroup {
 interface SortableSessionProps {
   session: SessionGroup
   workshopLocked: boolean
+  frameCss: string
   /** Text next to the hover icons; only when thumbnails are large enough. */
   showLabels: boolean
   onSlideClick: (slide: SlideData) => void
@@ -95,6 +97,11 @@ interface SortableSessionProps {
  * cost of the Preview screen. Far-away thumbnails show a flat placeholder and
  * release their document when scrolled away.
  */
+/** Standalone document for one slide: shared frame CSS + the slide's SVG. */
+export function slideDocument(frameCss: string, body: string): string {
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><base href="/"><style>${frameCss}</style></head><body><div class="marpit">${body}</div></body></html>`
+}
+
 function LazySlideFrame({ html, title }: { html: string; title: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const [near, setNear] = useState(false)
@@ -130,7 +137,7 @@ function LazySlideFrame({ html, title }: { html: string; title: string }) {
   )
 }
 
-const SortableSession = memo(function SortableSession({ session, showLabels, workshopLocked, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
+const SortableSession = memo(function SortableSession({ session, showLabels, workshopLocked, frameCss, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
   const { contentLanguage: lang } = useWorkshopStore()
   const isLocked = isSessionLocked(session.sessionName, session.sessionType)
 
@@ -287,7 +294,7 @@ const SortableSession = memo(function SortableSession({ session, showLabels, wor
               )}
 
               {/* Slide preview (lazy iframe) */}
-              <LazySlideFrame html={slide.html} title={`${t('sorterSlide', lang)} ${idx + 1}`} />
+              <LazySlideFrame html={slideDocument(frameCss, slide.body)} title={`${t('sorterSlide', lang)} ${idx + 1}`} />
             </div>
           </div>
         ))}
@@ -544,6 +551,7 @@ interface SlideSorterProps {
 export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
   const { currentWorkshopId, currentConfig, workshops, loadWorkshops, reorderSession, moveSessionToDay, addSession, updateSession, removeSession, contentLanguage: lang } = useWorkshopStore()
   const [slides, setSlides] = useState<SlideData[]>([])
+  const [frameCss, setFrameCss] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [zoom, setZoom] = useState(1)
@@ -615,6 +623,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
       if (!response.ok) throw new Error(t('sorterBuildFailed', lang))
 
       const data = await response.json()
+      setFrameCss(data.frameCss || '')
       setSlides(data.slides)
     } catch (err: any) {
       setError(err.message)
@@ -872,6 +881,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                     {daySessions.map((session) => (
                       <SortableSession
                         showLabels={zoom >= 0.8}
+                        frameCss={frameCss}
                         key={session.sessionId}
                         session={session}
                         workshopLocked={workshopLocked}
@@ -963,7 +973,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
 
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               <iframe
-                srcDoc={selectedSlide.html}
+                srcDoc={slideDocument(frameCss, selectedSlide.body)}
                 className="absolute inset-0 w-full h-full bg-white rounded-xl shadow-2xl"
                 title={`${t('sorterSlide', lang)} ${selectedSlide.slideIndex + 1}`}
               />
