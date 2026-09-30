@@ -243,14 +243,14 @@ Les résultats informent la prise de décisions et les actions concrètes pour r
 <!-- SLIDE:m8_1 -->
 ## Pourquoi des enquêtes rapides auprès des formations sanitaires ?
 
-Les données SNIS de routine mesurent le *volume* des services délivrés, mais n'expliquent pas *pourquoi* un chiffre a bougé. Les **enquêtes FOSA** (Formations Sanitaires) — enquêtes téléphoniques rapides — comblent cet écart. Elles sont conçues pour :
+Les données SNIS de routine mesurent le *volume* des services délivrés, mais n'expliquent pas *pourquoi* un chiffre a bougé. Les **enquêtes FOSA** (Formations Sanitaires) — enquêtes téléphoniques à cycle rapide auprès d'un panel d'établissements de soins primaires — comblent cet écart. Elles permettent aux pays de :
 
-- **Comprendre les contraintes côté offre** de la prestation de services dans les formations de soins de santé primaires
-- **Mesurer la mise en œuvre des réformes** au fil du temps, et non a posteriori
-- **Évaluer l'effet des chocs** sur les systèmes de santé — épidémies, conflits, ruptures d'intrants
-- **Améliorer la rapidité et la pertinence** des enquêtes en établissements comme outil de gestion adaptative
+- **Évaluer en continu la capacité opérationnelle** des soins primaires et repérer les obstacles à des soins de qualité, avec des boucles de rétroaction vers les actions de renforcement à chaque niveau
+- **Suivre la mise en œuvre des réformes** au fil de l'eau, avec les éléments nécessaires pour corriger le cap ou passer à l'échelle
+- **Saisir les effets des chocs** — épidémies, catastrophes naturelles, violences — et mesurer la résilience du système en quasi-temps réel
+- **Suivre la performance du système de santé** dans le temps
 
-> Les enquêtes téléphoniques complètent les données SNIS avec l'information sur la préparation, la capacité et le contexte que le rapportage de routine ne capte pas.
+> Les enquêtes téléphoniques complètent les données SNIS avec l'information sur la capacité opérationnelle et le contexte que le rapportage de routine ne capte pas.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1a -->
@@ -273,23 +273,22 @@ Analyse de la performance et de la capacité opérationnelle des établissements
 <!-- _class: compact -->
 ## Contenu adaptatif de l'enquête axé sur la SRMNIA-N
 
-Les enquêtes rapides auprès des établissements peuvent identifier les lacunes dans la prestation de services et suivre les réformes ou les chocs.
+Le questionnaire standard est administré au fil de quatre contacts trimestriels avec le panel : trois modules passent chaque trimestre, les sept autres une fois par an.
 
-| Cycle 1 | Cycle 2 | Cycle 3 | Cycle 4 |
-|---------|---------|---------|---------|
+| Passage 1 | Passage 2 | Passage 3 | Passage 4 |
+|-----------|-----------|-----------|-----------|
 | Caractéristiques de l'établissement | Caractéristiques de l'établissement* | Caractéristiques de l'établissement* | Caractéristiques de l'établissement* |
-| Chocs | Contenu adaptatif** | Contenu adaptatif** | Contenu adaptatif** |
-| Résilience aux chocs | Chocs | Chocs | Chocs |
-| Services | Résilience aux chocs | Résilience aux chocs | Résilience aux chocs |
-| Fournitures | Fournitures | Fournitures | Fournitures |
-| | Financement | Infrastructure | Personnel et effectifs |
-| | Engagement communautaire | Processus d'amélioration de la qualité | Leadership et coordination |
+| Chocs et résilience | Chocs et résilience | Chocs et résilience | Chocs et résilience |
+| Intrants médicaux | Intrants médicaux | Intrants médicaux | Intrants médicaux |
+| Infrastructures (questions clés sur les interruptions) | Infrastructures (questions clés sur les interruptions) | Infrastructures (module complet) | Infrastructures (questions clés sur les interruptions) |
+| Disponibilité des services | Financement | Processus d'amélioration de la qualité | Personnel et effectifs |
+| | Engagement communautaire | | Leadership et coordination |
 
-\* Posé uniquement aux établissements de remplacement | \*\* Questions supplémentaires localement pertinentes générées lors de l'adaptation
+\* Posé uniquement aux établissements de remplacement. Des questions propres au contexte local sont ajoutées lors de l'adaptation.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1c -->
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
 ## Structure de l'enquête — 10 modules
 
@@ -299,18 +298,20 @@ Les questions sont issues du cadre PHCMFI de l'OMS et harmonisées avec les outi
 
 <div>
 
-### Ce que couvrent les modules
+### Les dix modules
 
-- Chocs externes
-- Résilience aux chocs
-- Offre de services
-- Infrastructure
+- Chocs et résilience *(chaque trimestre)*
+- Intrants médicaux *(chaque trimestre)*
+- Infrastructures *(interruptions clés chaque trimestre ; module complet une fois par an)*
+- Caractéristiques de l'établissement
+- Disponibilité des services
 - Financement
-- Ressources humaines
-- Fournitures médicales
-- Direction et coordination
-- Participation communautaire
-- Processus d'amélioration de la qualité des soins
+- Engagement communautaire
+- Processus d'amélioration de la qualité
+- Personnel et effectifs
+- Leadership et coordination
+
+*Les modules sans mention passent une fois par an.*
 
 </div>
 

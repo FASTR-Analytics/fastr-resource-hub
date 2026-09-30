@@ -174,16 +174,16 @@ Os resultados do inquérito devem servir para:
 -->
 
 <!-- SLIDE:m8_1 -->
-## Porquê inquéritos de ciclo rápido a instalações
+## Porquê inquéritos de ciclo rápido às unidades sanitárias
 
-Os dados de rotina do HMIS capturam o *volume* de serviços prestados, mas não podem explicar *por que* um número foi transferido. Os inquéritos telefónicos rápidos de **Avaliação de Estabelecimentos de Saúde (HFA)** colmatam essa lacuna. Eles são projetados para:
+Os dados de rotina do SIS captam o *volume* de serviços prestados, mas não explicam *porquê* um número mudou. Os inquéritos telefónicos de ciclo rápido de **Avaliação das Unidades Sanitárias (HFA)**, feitos a um painel de unidades de cuidados primários, colmatam essa lacuna. Permitem aos países:
 
-- **Compreender os constrangimentos do lado da oferta** na prestação de serviços em estabelecimentos de cuidados de saúde primários
-- **Medir a implementação da reforma** à medida que esta acontece, e não depois dos factos
-- **Avaliar o efeito dos choques** nos sistemas de saúde - surtos, conflitos, rupturas de abastecimento
-- **Melhorar a rapidez e a relevância** dos inquéritos às unidades sanitárias como instrumento de gestão adaptativa
+- **Avaliar continuamente a prontidão** dos cuidados primários e identificar os obstáculos a cuidados de qualidade, com ciclos de retorno para as ações de reforço a todos os níveis
+- **Acompanhar a implementação das reformas** à medida que acontece, com a informação necessária para corrigir o rumo ou expandir
+- **Captar os efeitos dos choques** — epidemias, catástrofes naturais, violência — e medir a resiliência do sistema em tempo quase real
+- **Acompanhar o desempenho do sistema de saúde** ao longo do tempo
 
-> Os inquéritos telefónicos complementam os dados do HMIS com a informação de prontidão, capacidade e contexto que os relatórios de rotina não captam.
+> Os inquéritos telefónicos complementam os dados do SIS com a informação de prontidão, capacidade e contexto que o reporte de rotina não capta.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1a -->
@@ -202,50 +202,48 @@ Os dados de rotina do HMIS capturam o *volume* de serviços prestados, mas não 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1b -->
-## Conteúdo do inquérito adaptável com foco na RMNCAH-N
+<!-- _class: compact -->
+## Conteúdo adaptável do inquérito com foco na SRMNIA-N
 
-Os inquéritos rápidos às unidades sanitárias podem identificar lacunas na prestação de serviços e monitorizar reformas ou choques.
-
-<div style="font-size: 0.8em;">
+O questionário padrão é preenchido ao longo de quatro contactos trimestrais com o painel: três módulos são aplicados todos os trimestres, os outros sete uma vez por ano.
 
 | Ronda 1 | Ronda 2 | Ronda 3 | Ronda 4 |
 |---------|---------|---------|---------|
-| Caraterísticas do estabelecimento | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Choques
-| Choques | Conteúdo adaptativo** | Conteúdo adaptativo** | Conteúdo adaptativo** | Conteúdo adaptativo** | Resiliência a choques
-| Resiliência a choques | Choques | Choques | Choques | Choques
-| Serviços | Resiliência a choques | Resiliência a choques | Resiliência a choques | Resiliência a choques
-| Fornecimentos | Fornecimentos | Fornecimentos | Fornecimentos | Fornecimentos |
-| Financiamento | Infra-estruturas | Mão de obra e pessoal
-| Envolvimento da comunidade | Processos de melhoria da qualidade | Liderança e coordenação |
+| Características da unidade | Características da unidade* | Características da unidade* | Características da unidade* |
+| Choques e resiliência | Choques e resiliência | Choques e resiliência | Choques e resiliência |
+| Insumos médicos | Insumos médicos | Insumos médicos | Insumos médicos |
+| Infraestruturas (perguntas-chave sobre interrupções) | Infraestruturas (perguntas-chave sobre interrupções) | Infraestruturas (módulo completo) | Infraestruturas (perguntas-chave sobre interrupções) |
+| Disponibilidade de serviços | Financiamento | Processos de melhoria da qualidade | Pessoal e dotação |
+| | Envolvimento comunitário | | Liderança e coordenação |
 
-</div>
-
-<p style="font-size: 0.7em;">* Perguntado apenas a instalações de substituição | ** Perguntas adicionais localmente relevantes geradas durante a adaptação</p>
+\* Perguntado apenas às unidades de substituição. Perguntas relevantes para o contexto local são acrescentadas durante a adaptação.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1c -->
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
-## Estrutura do inquérito - 10 módulos
+## Estrutura do inquérito — 10 módulos
 
-As perguntas são retiradas da estrutura PHCMFI da OMS e harmonizadas com as ferramentas de avaliação de instalações HHFA, SARA, SPA e SDI. O resultado é um instrumento modular que os países adaptam ao seu contexto.
+As perguntas provêm do quadro PHCMFI da OMS e estão harmonizadas com as ferramentas de avaliação de unidades HHFA, SARA, SPA e SDI. O resultado é um instrumento modular que os países adaptam ao seu contexto.
 
 <div class="panel-layout">
 
 <div>
 
-### O que cada módulo cobre
+### Os dez módulos
 
-- Choques externos
-- Resiliência aos choques
-- Prestação de serviços
-- Infra-estruturas
+- Choques e resiliência *(todos os trimestres)*
+- Insumos médicos *(todos os trimestres)*
+- Infraestruturas *(interrupções-chave todos os trimestres; módulo completo uma vez por ano)*
+- Características da unidade
+- Disponibilidade de serviços
 - Financiamento
-- Pessoal
-- Material médico
+- Envolvimento comunitário
+- Processos de melhoria da qualidade
+- Pessoal e dotação
 - Liderança e coordenação
-- Envolvimento da comunidade
-- Processos de melhoria da qualidade dos cuidados
+
+*Os módulos sem indicação são aplicados uma vez por ano.*
 
 </div>
 
@@ -253,19 +251,19 @@ As perguntas são retiradas da estrutura PHCMFI da OMS e harmonizadas com as fer
 
 ### O que a ferramenta oferece
 
-- Instantâneo atualizado do desempenho dos cuidados de saúde primários
+- Retrato atualizado do desempenho dos cuidados de saúde primários
 - Capacidade operacional das unidades de saúde primárias
 - Principais lacunas na prestação de serviços
 - Efeito de choques externos ou reformas nos serviços
-- Maior frequência e relevância política do que os inquéritos tradicionais aos estabelecimentos de saúde
+- Maior frequência e relevância para as políticas do que os inquéritos tradicionais às unidades
 
-*Os módulos opcionais incluem preparação para emergências, imunização (com Gavi), capacidade operacional de ANC e capacidade operacional de parto/EmONC.*
-
-</div>
+*Os módulos opcionais incluem preparação para emergências, vacinação (com a Gavi), capacidade operacional em CPN e capacidade operacional em partos/CONE.*
 
 </div>
 
-> O instrumento é **100% adaptável** pelos países - os módulos podem ser acrescentados, eliminados ou sequenciados de acordo com as prioridades locais.
+</div>
+
+> O instrumento é **100% adaptável** pelos países — os módulos podem ser acrescentados, retirados ou sequenciados segundo as prioridades locais.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_0a -->

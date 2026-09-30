@@ -4,13 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Porquê inquéritos de ciclo rápido a instalações
+## Porquê inquéritos de ciclo rápido às unidades sanitárias
 
-Os dados de rotina do HMIS capturam o *volume* de serviços prestados, mas não podem explicar *por que* um número foi transferido. Os inquéritos telefónicos rápidos de **Avaliação de Estabelecimentos de Saúde (HFA)** colmatam essa lacuna. Eles são projetados para:
+Os dados de rotina do SIS captam o *volume* de serviços prestados, mas não explicam *porquê* um número mudou. Os inquéritos telefónicos de ciclo rápido de **Avaliação das Unidades Sanitárias (HFA)**, feitos a um painel de unidades de cuidados primários, colmatam essa lacuna. Permitem aos países:
 
-- **Compreender os constrangimentos do lado da oferta** na prestação de serviços em estabelecimentos de cuidados de saúde primários
-- **Medir a implementação da reforma** à medida que esta acontece, e não depois dos factos
-- **Avaliar o efeito dos choques** nos sistemas de saúde - surtos, conflitos, rupturas de abastecimento
-- **Melhorar a rapidez e a relevância** dos inquéritos às unidades sanitárias como instrumento de gestão adaptativa
+- **Avaliar continuamente a prontidão** dos cuidados primários e identificar os obstáculos a cuidados de qualidade, com ciclos de retorno para as ações de reforço a todos os níveis
+- **Acompanhar a implementação das reformas** à medida que acontece, com a informação necessária para corrigir o rumo ou expandir
+- **Captar os efeitos dos choques** — epidemias, catástrofes naturais, violência — e medir a resiliência do sistema em tempo quase real
+- **Acompanhar o desempenho do sistema de saúde** ao longo do tempo
 
-> Os inquéritos telefónicos complementam os dados do HMIS com a informação de prontidão, capacidade e contexto que os relatórios de rotina não captam.
+> Os inquéritos telefónicos complementam os dados do SIS com a informação de prontidão, capacidade e contexto que o reporte de rotina não capta.

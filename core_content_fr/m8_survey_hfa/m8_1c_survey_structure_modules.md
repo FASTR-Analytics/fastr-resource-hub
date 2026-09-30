@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
 ## Structure de l'enquête — 10 modules
 
@@ -14,18 +14,20 @@ Les questions sont issues du cadre PHCMFI de l'OMS et harmonisées avec les outi
 
 <div>
 
-### Ce que couvrent les modules
+### Les dix modules
 
-- Chocs externes
-- Résilience aux chocs
-- Offre de services
-- Infrastructure
+- Chocs et résilience *(chaque trimestre)*
+- Intrants médicaux *(chaque trimestre)*
+- Infrastructures *(interruptions clés chaque trimestre ; module complet une fois par an)*
+- Caractéristiques de l'établissement
+- Disponibilité des services
 - Financement
-- Ressources humaines
-- Fournitures médicales
-- Direction et coordination
-- Participation communautaire
-- Processus d'amélioration de la qualité des soins
+- Engagement communautaire
+- Processus d'amélioration de la qualité
+- Personnel et effectifs
+- Leadership et coordination
+
+*Les modules sans mention passent une fois par an.*
 
 </div>
 

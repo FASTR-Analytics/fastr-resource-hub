@@ -10,7 +10,7 @@ slides:
 - file: m8_1_rapid_cycle_facility_survey.md
   order: 1.0
   variant: full
-  title: Porquê inquéritos de ciclo rápido a instalações
+  title: Porquê inquéritos de ciclo rápido às unidades sanitárias
 - file: m8_1a_hfa_survey_design.md
   order: 1.01
   variant: full
@@ -18,11 +18,11 @@ slides:
 - file: m8_1b_adaptive_survey_content.md
   order: 1.02
   variant: full
-  title: Conteúdo do inquérito adaptável com foco na RMNCAH-N
+  title: Conteúdo adaptável do inquérito com foco na SRMNIA-N
 - file: m8_1c_survey_structure_modules.md
   order: 1.03
   variant: full
-  title: Estrutura do inquérito - 10 módulos
+  title: Estrutura do inquérito — 10 módulos
 - file: m8_3_snis_hfa_integration.md
   order: 3.0
   variant: full

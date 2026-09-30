@@ -173,12 +173,12 @@ Survey results should inform:
 <!-- SLIDE:m8_1 -->
 ## Why rapid-cycle facility surveys
 
-Routine HMIS data captures the *volume* of services delivered, but cannot explain *why* a number moved. Rapid **Health Facility Assessment (HFA)** phone surveys close that gap. They are designed to:
+Routine HMIS data captures the *volume* of services delivered, but cannot explain *why* a number moved. Rapid-cycle **Health Facility Assessment (HFA)** phone surveys, run with a panel of primary care facilities, close that gap. They let countries:
 
-- **Understand supply-side constraints** on service delivery in primary health care facilities
-- **Measure reform implementation** as it happens, rather than after the fact
-- **Assess the effect of shocks** on health systems — outbreaks, conflicts, supply disruptions
-- **Improve the speed and relevance** of facility surveys as an adaptive management tool
+- **Evaluate PHC readiness** continuously and identify obstacles to quality care, with feedback loops to strengthening actions at every level
+- **Watch reform implementation** as it happens, with the insight needed to course-correct or scale up
+- **Capture the effects of shocks** — epidemics, natural disasters, violence — and measure the system's resilience in near-real time
+- **Track health system performance** over time
 
 > Phone surveys complement HMIS data with the readiness, capacity, and context information that routine reporting does not capture.
 <!-- /SLIDE -->
@@ -201,27 +201,26 @@ Routine HMIS data captures the *volume* of services delivered, but cannot explai
 <!-- SLIDE:m8_1b -->
 ## Adaptive survey content with RMNCAH-N focus
 
-Rapid facility surveys can identify gaps in service delivery and monitor reforms or shocks.
+The standard questionnaire is completed over four quarterly contacts with the panel: three modules run every quarter, the other seven once a year.
 
 <div style="font-size: 0.8em;">
 
 | Round 1 | Round 2 | Round 3 | Round 4 |
 |---------|---------|---------|---------|
 | Facility characteristics | Facility characteristics* | Facility characteristics* | Facility characteristics* |
-| Shocks | Adaptive content** | Adaptive content** | Adaptive content** |
-| Resilience to shocks | Shocks | Shocks | Shocks |
-| Services | Resilience to shocks | Resilience to shocks | Resilience to shocks |
-| Supplies | Supplies | Supplies | Supplies |
-| | Financing | Infrastructure | Workforce and staffing |
-| | Community engagement | Quality improvement processes | Leadership and coordination |
+| Shocks and resilience | Shocks and resilience | Shocks and resilience | Shocks and resilience |
+| Medical supplies | Medical supplies | Medical supplies | Medical supplies |
+| Infrastructure (key interruption questions) | Infrastructure (key interruption questions) | Infrastructure (full module) | Infrastructure (key interruption questions) |
+| Service availability | Financing | Quality improvement processes | Workforce and staffing |
+| | Community engagement | | Leadership and coordination |
 
 </div>
 
-<p style="font-size: 0.7em;">* Asked only to replacement facilities | ** Additional locally-relevant questions generated during adaptation</p>
+<p style="font-size: 0.7em;">* Asked only to replacement facilities. Locally relevant questions are added during adaptation.</p>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m8_1c -->
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
 ## Survey structure — 10 modules
 
@@ -231,18 +230,20 @@ Questions are drawn from the WHO PHCMFI framework and harmonized with the HHFA, 
 
 <div>
 
-### What each module covers
+### The ten modules
 
-- External shocks
-- Resilience to shocks
-- Service delivery
-- Infrastructure
+- Shocks and resilience *(every quarter)*
+- Medical supplies *(every quarter)*
+- Infrastructure *(key interruptions every quarter; full module once a year)*
+- Facility characteristics
+- Service availability
 - Financing
-- Workforce
-- Medical supplies
-- Leadership and coordination
 - Community engagement
-- Quality-of-care improvement processes
+- Quality improvement processes
+- Workforce and staffing
+- Leadership and coordination
+
+*Modules without a note run once a year.*
 
 </div>
 

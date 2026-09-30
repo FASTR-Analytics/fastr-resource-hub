@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
 ## Survey structure — 10 modules
 
@@ -14,18 +14,20 @@ Questions are drawn from the WHO PHCMFI framework and harmonized with the HHFA, 
 
 <div>
 
-### What each module covers
+### The ten modules
 
-- External shocks
-- Resilience to shocks
-- Service delivery
-- Infrastructure
+- Shocks and resilience *(every quarter)*
+- Medical supplies *(every quarter)*
+- Infrastructure *(key interruptions every quarter; full module once a year)*
+- Facility characteristics
+- Service availability
 - Financing
-- Workforce
-- Medical supplies
-- Leadership and coordination
 - Community engagement
-- Quality-of-care improvement processes
+- Quality improvement processes
+- Workforce and staffing
+- Leadership and coordination
+
+*Modules without a note run once a year.*
 
 </div>
 

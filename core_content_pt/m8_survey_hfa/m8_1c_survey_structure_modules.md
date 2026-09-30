@@ -4,28 +4,30 @@ theme: fastr
 paginate: true
 ---
 
-<!-- _class: two-panel -->
+<!-- _class: two-panel compact -->
 
-## Estrutura do inquérito - 10 módulos
+## Estrutura do inquérito — 10 módulos
 
-As perguntas são retiradas da estrutura PHCMFI da OMS e harmonizadas com as ferramentas de avaliação de instalações HHFA, SARA, SPA e SDI. O resultado é um instrumento modular que os países adaptam ao seu contexto.
+As perguntas provêm do quadro PHCMFI da OMS e estão harmonizadas com as ferramentas de avaliação de unidades HHFA, SARA, SPA e SDI. O resultado é um instrumento modular que os países adaptam ao seu contexto.
 
 <div class="panel-layout">
 
 <div>
 
-### O que cada módulo cobre
+### Os dez módulos
 
-- Choques externos
-- Resiliência aos choques
-- Prestação de serviços
-- Infra-estruturas
+- Choques e resiliência *(todos os trimestres)*
+- Insumos médicos *(todos os trimestres)*
+- Infraestruturas *(interrupções-chave todos os trimestres; módulo completo uma vez por ano)*
+- Características da unidade
+- Disponibilidade de serviços
 - Financiamento
-- Pessoal
-- Material médico
+- Envolvimento comunitário
+- Processos de melhoria da qualidade
+- Pessoal e dotação
 - Liderança e coordenação
-- Envolvimento da comunidade
-- Processos de melhoria da qualidade dos cuidados
+
+*Os módulos sem indicação são aplicados uma vez por ano.*
 
 </div>
 
@@ -33,16 +35,16 @@ As perguntas são retiradas da estrutura PHCMFI da OMS e harmonizadas com as fer
 
 ### O que a ferramenta oferece
 
-- Instantâneo atualizado do desempenho dos cuidados de saúde primários
+- Retrato atualizado do desempenho dos cuidados de saúde primários
 - Capacidade operacional das unidades de saúde primárias
 - Principais lacunas na prestação de serviços
 - Efeito de choques externos ou reformas nos serviços
-- Maior frequência e relevância política do que os inquéritos tradicionais aos estabelecimentos de saúde
+- Maior frequência e relevância para as políticas do que os inquéritos tradicionais às unidades
 
-*Os módulos opcionais incluem preparação para emergências, imunização (com Gavi), capacidade operacional de ANC e capacidade operacional de parto/EmONC.*
-
-</div>
+*Os módulos opcionais incluem preparação para emergências, vacinação (com a Gavi), capacidade operacional em CPN e capacidade operacional em partos/CONE.*
 
 </div>
 
-> O instrumento é **100% adaptável** pelos países - os módulos podem ser acrescentados, eliminados ou sequenciados de acordo com as prioridades locais.
+</div>
+
+> O instrumento é **100% adaptável** pelos países — os módulos podem ser acrescentados, retirados ou sequenciados segundo as prioridades locais.

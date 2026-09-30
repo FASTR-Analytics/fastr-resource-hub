@@ -4,22 +4,18 @@ theme: fastr
 paginate: true
 ---
 
-## Conteúdo do inquérito adaptável com foco na RMNCAH-N
+<!-- _class: compact -->
+## Conteúdo adaptável do inquérito com foco na SRMNIA-N
 
-Os inquéritos rápidos às unidades sanitárias podem identificar lacunas na prestação de serviços e monitorizar reformas ou choques.
-
-<div style="font-size: 0.8em;">
+O questionário padrão é preenchido ao longo de quatro contactos trimestrais com o painel: três módulos são aplicados todos os trimestres, os outros sete uma vez por ano.
 
 | Ronda 1 | Ronda 2 | Ronda 3 | Ronda 4 |
 |---------|---------|---------|---------|
-| Caraterísticas do estabelecimento | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Caraterísticas do estabelecimento* | Choques
-| Choques | Conteúdo adaptativo** | Conteúdo adaptativo** | Conteúdo adaptativo** | Conteúdo adaptativo** | Resiliência a choques
-| Resiliência a choques | Choques | Choques | Choques | Choques
-| Serviços | Resiliência a choques | Resiliência a choques | Resiliência a choques | Resiliência a choques
-| Fornecimentos | Fornecimentos | Fornecimentos | Fornecimentos | Fornecimentos |
-| Financiamento | Infra-estruturas | Mão de obra e pessoal
-| Envolvimento da comunidade | Processos de melhoria da qualidade | Liderança e coordenação |
+| Características da unidade | Características da unidade* | Características da unidade* | Características da unidade* |
+| Choques e resiliência | Choques e resiliência | Choques e resiliência | Choques e resiliência |
+| Insumos médicos | Insumos médicos | Insumos médicos | Insumos médicos |
+| Infraestruturas (perguntas-chave sobre interrupções) | Infraestruturas (perguntas-chave sobre interrupções) | Infraestruturas (módulo completo) | Infraestruturas (perguntas-chave sobre interrupções) |
+| Disponibilidade de serviços | Financiamento | Processos de melhoria da qualidade | Pessoal e dotação |
+| | Envolvimento comunitário | | Liderança e coordenação |
 
-</div>
-
-<p style="font-size: 0.7em;">* Perguntado apenas a instalações de substituição | ** Perguntas adicionais localmente relevantes geradas durante a adaptação</p>
+\* Perguntado apenas às unidades de substituição. Perguntas relevantes para o contexto local são acrescentadas durante a adaptação.

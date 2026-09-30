@@ -6,11 +6,11 @@ paginate: true
 
 ## Pourquoi des enquêtes rapides auprès des formations sanitaires ?
 
-Les données SNIS de routine mesurent le *volume* des services délivrés, mais n'expliquent pas *pourquoi* un chiffre a bougé. Les **enquêtes FOSA** (Formations Sanitaires) — enquêtes téléphoniques rapides — comblent cet écart. Elles sont conçues pour :
+Les données SNIS de routine mesurent le *volume* des services délivrés, mais n'expliquent pas *pourquoi* un chiffre a bougé. Les **enquêtes FOSA** (Formations Sanitaires) — enquêtes téléphoniques à cycle rapide auprès d'un panel d'établissements de soins primaires — comblent cet écart. Elles permettent aux pays de :
 
-- **Comprendre les contraintes côté offre** de la prestation de services dans les formations de soins de santé primaires
-- **Mesurer la mise en œuvre des réformes** au fil du temps, et non a posteriori
-- **Évaluer l'effet des chocs** sur les systèmes de santé — épidémies, conflits, ruptures d'intrants
-- **Améliorer la rapidité et la pertinence** des enquêtes en établissements comme outil de gestion adaptative
+- **Évaluer en continu la capacité opérationnelle** des soins primaires et repérer les obstacles à des soins de qualité, avec des boucles de rétroaction vers les actions de renforcement à chaque niveau
+- **Suivre la mise en œuvre des réformes** au fil de l'eau, avec les éléments nécessaires pour corriger le cap ou passer à l'échelle
+- **Saisir les effets des chocs** — épidémies, catastrophes naturelles, violences — et mesurer la résilience du système en quasi-temps réel
+- **Suivre la performance du système de santé** dans le temps
 
-> Les enquêtes téléphoniques complètent les données SNIS avec l'information sur la préparation, la capacité et le contexte que le rapportage de routine ne capte pas.
+> Les enquêtes téléphoniques complètent les données SNIS avec l'information sur la capacité opérationnelle et le contexte que le rapportage de routine ne capte pas.
