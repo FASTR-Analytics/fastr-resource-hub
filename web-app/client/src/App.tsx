@@ -948,7 +948,17 @@ function App() {
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [exportJob, setExportJob] = useState<{ format: 'html' | 'pdf' | 'pptx'; startedAt: number; controller: AbortController } | null>(null)
   const currentLocked = !!workshops.find(w => w.id === currentWorkshopId)?.locked
-  useUrlSync({
+  // Sidebar: collapsed to an icon rail inside the builder unless the user chose otherwise.
+  const [sidebarPref, setSidebarPref] = useState<boolean | null>(() => {
+    try { const v = localStorage.getItem('fastr-sidebar-collapsed'); return v === null ? null : v === '1' } catch { return null }
+  })
+  const sidebarCollapsed = sidebarPref ?? (appMode === 'workshop' || appMode === 'import')
+  const toggleSidebar = () => {
+    const next = !sidebarCollapsed
+    setSidebarPref(next)
+    try { localStorage.setItem('fastr-sidebar-collapsed', next ? '1' : '0') } catch { /* private mode */ }
+  }
+  const { urlPending } = useUrlSync({
     enabled: isAuthenticated,
     loading: isLoading,
     appMode, setAppMode,
@@ -1009,7 +1019,8 @@ function App() {
   // Skip while loading — selectWorkshop is async and currentWorkshopId is still
   // null during fetch.
   useEffect(() => {
-    if (appMode === 'workshop' && !currentWorkshopId && !isLoading) {
+    // A workshop named in the URL is still being fetched: no selector.
+    if (appMode === 'workshop' && !currentWorkshopId && !isLoading && !urlPending.current) {
       setShowWorkshopSelector(true)
       // Nothing to select yet: go straight to the create form.
       if (workshops.length === 0) setShowCreateWorkshop(true)
@@ -1705,11 +1716,17 @@ function App() {
     searchPlaceholder?: string
     primaryAction?: React.ReactNode
     topbarActions?: React.ReactNode
+    hideTopBar?: boolean
     children: React.ReactNode
   }) {
     return (
       <AppShell
         activeNav={mapModeToNav(appMode)}
+        sidebarCollapsed={sidebarCollapsed}
+        onToggleSidebar={toggleSidebar}
+        collapseLabel={t('collapseSidebar', contentLanguage)}
+        expandLabel={t('expandSidebar', contentLanguage)}
+        hideTopBar={args.hideTopBar}
         onNavChange={(id) => {
           if (id === 'workshops') setAppMode('select')
           else if (id === 'library') setAppMode('library')
@@ -1985,13 +2002,19 @@ function App() {
   // Import Mode
   // ─────────────────────────────────────────────────────────────────────────
   if (appMode === 'import') {
-    return (
-      <SlideImportWizard
-        onBack={() => setAppMode('workshop')}
-        onGoToLibrary={() => setAppMode('workshop')}
-        language={contentLanguage}
-      />
-    )
+    return renderShell({
+      section: t('navWorkshops', contentLanguage),
+      hideTopBar: true,
+      children: (
+        <div className="h-full overflow-auto">
+          <SlideImportWizard
+            onBack={() => setAppMode('workshop')}
+            onGoToLibrary={() => setAppMode('library')}
+            language={contentLanguage}
+          />
+        </div>
+      ),
+    })
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -2153,12 +2176,14 @@ function App() {
     </div>
   )
 
-  // Workshop authoring is rendered WITHOUT the global sidebar — the sidebar's
-  // job is to switch between top-level surfaces, but inside a workshop the user
-  // is focused on building. A "← Workshops" back button + topbar actions cover
-  // navigation. The drawer/preview/AI panel still work the same way.
-  return (
-    <div className="h-screen flex flex-col bg-slate-50">
+  // Workshop authoring uses the same shell as every other screen; the sidebar
+  // collapses to an icon rail here (the user can expand it) and the builder
+  // keeps its own dense toolbar instead of the standard topbar.
+  return renderShell({
+    section: workshopSection,
+    hideTopBar: true,
+    children: (
+    <div className="h-full flex flex-col bg-slate-50">
       <header className="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between gap-4 flex-shrink-0">
         <div className="flex items-center gap-3 min-w-0">
           <button
@@ -3578,7 +3603,8 @@ function App() {
       )}
       </div>
     </div>
-  )
+    ),
+  })
 }
 
 export default App
