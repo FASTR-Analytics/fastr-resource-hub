@@ -8,6 +8,7 @@ import {
   getWorkshop,
   createWorkshop,
   updateWorkshop,
+  getWorkshopMeta,
   deleteWorkshop,
   setWorkshopLocked,
   isWorkshopLocked,
@@ -19,6 +20,27 @@ import {
   WorkshopConfig
 } from '../db/database.js'
 import { resolveLibrarySlideContent, hashLibrarySource, type Language } from '../services/deckBuilder.js'
+import { checkExpectedUpdatedAt, sqliteTimestampToIso } from '../services/workshopConcurrency.js'
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Version / conflict contract
+//
+// The workshop config JSON is returned by GET and echoed back verbatim by PUT,
+// so the version stamp travels in headers rather than the body (a body field
+// would end up persisted inside the config blob):
+//
+//   GET  /:id      → body: config          header: X-Workshop-Updated-At (ISO)
+//   PUT  /:id      ← header: X-Workshop-Expected-Updated-At (ISO, optional)
+//                  → 200 { success, updatedAt } + X-Workshop-Updated-At
+//                  → 409 { error, updatedAt } when the row changed since the
+//                    client last read it (no write happens)
+//   PATCH /:id/lock → { success, locked, updatedAt } + X-Workshop-Updated-At
+//
+// Clients that omit the expected header (legacy) are not conflict-checked.
+// ─────────────────────────────────────────────────────────────────────────────
+export const UPDATED_AT_HEADER = 'X-Workshop-Updated-At'
+export const EXPECTED_UPDATED_AT_HEADER = 'X-Workshop-Expected-Updated-At'
+const CONFLICT_MESSAGE = 'This workshop was changed elsewhere. Reload to see the latest version.'
 
 const router = Router()
 
@@ -103,6 +125,9 @@ router.get('/:id', async (req, res) => {
     if (!config) {
       return res.status(404).json({ error: 'Workshop not found' })
     }
+    const meta = await getWorkshopMeta(req.params.id)
+    const updatedAt = sqliteTimestampToIso(meta?.updatedAtRaw)
+    if (updatedAt) res.set(UPDATED_AT_HEADER, updatedAt)
     res.json(config)
   } catch (error: any) {
     console.error('Error getting workshop:', error)
@@ -177,8 +202,27 @@ router.put('/:id', async (req, res) => {
       return res.status(403).json({ error: 'Workshop is locked. Unlock it to make changes.' })
     }
 
-    await updateWorkshop(req.params.id, config)
-    res.json({ success: true })
+    // Optimistic concurrency: refuse to overwrite a version the client has not seen.
+    const expectedUpdatedAt = req.get(EXPECTED_UPDATED_AT_HEADER) || undefined
+    const meta = await getWorkshopMeta(req.params.id)
+    const check = checkExpectedUpdatedAt(meta?.updatedAtRaw, expectedUpdatedAt)
+    if (check.conflict) {
+      return res.status(409).json({ error: CONFLICT_MESSAGE, updatedAt: check.updatedAt })
+    }
+
+    // Compare-and-set on the raw stored stamp closes the read/write race window.
+    const result = await updateWorkshop(
+      req.params.id,
+      config,
+      expectedUpdatedAt ? meta?.updatedAtRaw ?? null : undefined
+    )
+    if (!result.updated) {
+      return res.status(409).json({ error: CONFLICT_MESSAGE, updatedAt: sqliteTimestampToIso(result.updatedAtRaw) })
+    }
+
+    const updatedAt = sqliteTimestampToIso(result.updatedAtRaw)
+    if (updatedAt) res.set(UPDATED_AT_HEADER, updatedAt)
+    res.json({ success: true, updatedAt })
   } catch (error: any) {
     console.error('Error updating workshop:', error)
     res.status(500).json({ error: error.message })
@@ -214,7 +258,12 @@ router.patch('/:id/lock', async (req, res) => {
     }
 
     await setWorkshopLocked(req.params.id, !!locked)
-    res.json({ success: true, locked: !!locked })
+    // Locking bumps updated_at; return the new stamp so the client that did it
+    // does not see its own next save rejected as a conflict.
+    const meta = await getWorkshopMeta(req.params.id)
+    const updatedAt = sqliteTimestampToIso(meta?.updatedAtRaw)
+    if (updatedAt) res.set(UPDATED_AT_HEADER, updatedAt)
+    res.json({ success: true, locked: !!locked, updatedAt })
   } catch (error: any) {
     console.error('Error updating workshop lock:', error)
     res.status(500).json({ error: error.message })

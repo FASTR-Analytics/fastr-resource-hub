@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import api, { WorkshopInfo, Module, AIMessage, Language } from '../../lib/api'
+import api, { ApiError, WorkshopInfo, Module, AIMessage, Language } from '../../lib/api'
 
 // Types matching the backend
 export interface Session {
@@ -83,8 +83,16 @@ interface WorkshopStore {
   contentLanguage: Language
   isLoading: boolean
   error: string | null
-  saveStatus: 'idle' | 'saving' | 'saved' | 'error'
+  /**
+   * 'saving' while a save is pending (debounced) or in flight; 'saved' after;
+   * 'error' on failure; 'conflict' when the server refused the write because
+   * the workshop changed elsewhere (auto-save is suspended until the workshop
+   * is reloaded via selectWorkshop).
+   */
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error' | 'conflict'
   lastSaved: Date | null
+  /** Version stamp of the open workshop as last seen from the server (ISO). */
+  currentUpdatedAt: string | null
 
   // AI Assistant
   aiMessages: LocalAIMessage[]
@@ -93,7 +101,10 @@ interface WorkshopStore {
   // Actions
   loadWorkshops: () => Promise<void>
   selectWorkshop: (workshopId: string) => Promise<void>
+  /** Schedule a save of the current config (debounced, trailing). Resolves once that save completes. */
   saveCurrentWorkshop: () => Promise<void>
+  /** Run any pending save now and wait for in-flight saves to finish. */
+  flushSave: (opts?: { keepalive?: boolean }) => Promise<void>
   createWorkshop: (workshopId: string, config: LocalWorkshopConfig) => Promise<void>
   deleteWorkshop: (workshopId: string) => Promise<void>
   /** True when the open workshop is locked; every mutation is a no-op then. */
@@ -127,7 +138,92 @@ interface WorkshopStore {
   setError: (error: string | null) => void
 }
 
-export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
+// ─────────────────────────────────────────────────────────────────────────────
+// Debounced auto-save
+//
+// Every mutation calls saveCurrentWorkshop(). Instead of one full PUT per
+// keystroke, calls coalesce into a single trailing save SAVE_DEBOUNCE_MS after
+// the last one. Only one PUT is in flight at a time; a request arriving while
+// one is in flight runs once it finishes (with the latest config).
+// ─────────────────────────────────────────────────────────────────────────────
+const SAVE_DEBOUNCE_MS = 800
+const SAVED_PILL_MS = 2000
+
+let saveTimer: ReturnType<typeof setTimeout> | null = null
+let saveInFlight: Promise<void> | null = null
+let saveQueued = false
+let saveKeepalive = false
+let saveWaiters: Array<() => void> = []
+
+function clearSaveTimer() {
+  if (saveTimer) {
+    clearTimeout(saveTimer)
+    saveTimer = null
+  }
+}
+
+function resolveSaveWaiters() {
+  const waiters = saveWaiters
+  saveWaiters = []
+  waiters.forEach(resolve => resolve())
+}
+
+export const useWorkshopStore = create<WorkshopStore>((set, get) => {
+  // Perform one PUT with the current config. Never runs two at once.
+  const runSave = () => {
+    if (saveInFlight) {
+      saveQueued = true
+      return
+    }
+    const { currentWorkshopId, currentConfig, currentUpdatedAt } = get()
+    if (!currentWorkshopId || !currentConfig) {
+      resolveSaveWaiters()
+      return
+    }
+    const id = currentWorkshopId
+    const keepalive = saveKeepalive
+    saveKeepalive = false
+
+    saveInFlight = (async () => {
+      try {
+        const { updatedAt } = await api.updateWorkshop(id, currentConfig as any, currentUpdatedAt, { keepalive })
+        // Ignore a late response for a workshop we have since navigated away from.
+        if (get().currentWorkshopId !== id) return
+        const stillPending = saveQueued || saveTimer !== null
+        set({
+          currentUpdatedAt: updatedAt ?? currentUpdatedAt,
+          lastSaved: new Date(),
+          ...(stillPending ? {} : { saveStatus: 'saved' as const }),
+        })
+        if (!stillPending) {
+          setTimeout(() => {
+            if (get().saveStatus === 'saved') set({ saveStatus: 'idle' })
+          }, SAVED_PILL_MS)
+        }
+      } catch (error: any) {
+        if (get().currentWorkshopId !== id) return
+        if (error instanceof ApiError && error.status === 409) {
+          // Someone else saved a newer version. Stop auto-saving until the
+          // user reloads; local edits stay on screen so nothing is lost silently.
+          clearSaveTimer()
+          saveQueued = false
+          set({ saveStatus: 'conflict', error: error.message })
+        } else {
+          set({ saveStatus: 'error', error: error.message })
+        }
+      } finally {
+        saveInFlight = null
+        if (saveQueued) {
+          saveQueued = false
+          runSave()
+        } else {
+          resolveSaveWaiters()
+        }
+      }
+    })()
+  }
+
+  return ({
   // Initial state
   workshops: [],
   currentWorkshopId: null,
@@ -138,6 +234,7 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   error: null,
   saveStatus: 'idle',
   lastSaved: null,
+  currentUpdatedAt: null,
   aiMessages: [],
   aiLoading: false,
 
@@ -154,12 +251,17 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
 
   // Select and load a workshop
   selectWorkshop: async (workshopId: string) => {
+    // Land any pending edits on the workshop we are leaving (no-op after a
+    // conflict, whose pending save was already dropped).
+    await get().flushSave()
     set({ isLoading: true, error: null })
     try {
-      const config = await api.getWorkshop(workshopId) as any
+      const { config, updatedAt } = await api.getWorkshopWithMeta(workshopId)
       set({
         currentWorkshopId: workshopId,
-        currentConfig: config,
+        currentConfig: config as any,
+        currentUpdatedAt: updatedAt,
+        saveStatus: 'idle',
         isLoading: false,
       })
     } catch (error: any) {
@@ -168,22 +270,31 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
     }
   },
 
-  // Save current workshop config
-  saveCurrentWorkshop: async () => {
-    const { currentWorkshopId, currentConfig } = get()
-    if (!currentWorkshopId || !currentConfig) return
+  // Save current workshop config (debounced; see runSave)
+  saveCurrentWorkshop: () => {
+    const { currentWorkshopId, currentConfig, saveStatus } = get()
+    if (!currentWorkshopId || !currentConfig) return Promise.resolve()
+    // After a conflict the server would refuse every write; wait for a reload.
+    if (saveStatus === 'conflict') return Promise.resolve()
 
     set({ saveStatus: 'saving' })
+    clearSaveTimer()
+    saveTimer = setTimeout(() => {
+      saveTimer = null
+      runSave()
+    }, SAVE_DEBOUNCE_MS)
+    return new Promise<void>(resolve => saveWaiters.push(resolve))
+  },
 
-    try {
-      await api.updateWorkshop(currentWorkshopId, currentConfig as any)
-      set({ saveStatus: 'saved', lastSaved: new Date() })
-
-      setTimeout(() => {
-        set({ saveStatus: 'idle' })
-      }, 2000)
-    } catch (error: any) {
-      set({ error: error.message, saveStatus: 'error' })
+  flushSave: async (opts) => {
+    if (opts?.keepalive) saveKeepalive = true
+    if (saveTimer) {
+      clearSaveTimer()
+      runSave()
+    }
+    // Wait for the in-flight save and any follow-up it queues.
+    while (saveInFlight) {
+      await saveInFlight
     }
   },
 
@@ -220,10 +331,11 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   deleteWorkshop: async (workshopId: string) => {
     set({ isLoading: true, error: null })
     try {
+      await get().flushSave()
       await api.deleteWorkshop(workshopId)
       // If we deleted the current workshop, clear it
       if (get().currentWorkshopId === workshopId) {
-        set({ currentWorkshopId: null, currentConfig: null })
+        set({ currentWorkshopId: null, currentConfig: null, currentUpdatedAt: null, saveStatus: 'idle' })
       }
       await get().loadWorkshops()
     } catch (error: any) {
@@ -242,7 +354,13 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   // Lock/unlock workshop
   setWorkshopLocked: async (workshopId: string, locked: boolean) => {
     try {
-      await api.setWorkshopLocked(workshopId, locked)
+      await get().flushSave()
+      const { updatedAt } = await api.setWorkshopLocked(workshopId, locked)
+      // Locking bumps the server-side version; adopt it so our next save is not
+      // mistaken for a conflict.
+      if (updatedAt && get().currentWorkshopId === workshopId) {
+        set({ currentUpdatedAt: updatedAt })
+      }
       await get().loadWorkshops()
     } catch (error: any) {
       set({ error: error.message })
@@ -631,6 +749,15 @@ export const useWorkshopStore = create<WorkshopStore>((set, get) => ({
   setError: (error: string | null) => {
     set({ error })
   },
-}))
+  })
+})
+
+// Land pending edits when the tab closes or is backgrounded. keepalive lets the
+// PUT outlive the page; both events fire in some browsers, the second is a no-op.
+if (typeof window !== 'undefined') {
+  const flushOnLeave = () => { void useWorkshopStore.getState().flushSave({ keepalive: true }) }
+  window.addEventListener('beforeunload', flushOnLeave)
+  window.addEventListener('pagehide', flushOnLeave)
+}
 
 export type { Module, Language }

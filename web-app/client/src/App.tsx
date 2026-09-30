@@ -1555,6 +1555,7 @@ function App() {
     setShowExportMenu(false)
     setPreflight({ result: null, loading: true, pendingFormat: format })
     try {
+      await useWorkshopStore.getState().flushSave()
       const result = await exportAPI.preflight(currentWorkshopId)
       if (result.findings.length === 0) {
         setPreflight(null)
@@ -1574,6 +1575,7 @@ function App() {
     setShowExportMenu(false)
     setPreflight({ result: null, loading: true, pendingFormat: null })
     try {
+      await useWorkshopStore.getState().flushSave()
       const result = await exportAPI.preflight(currentWorkshopId)
       setPreflight({ result, loading: false, pendingFormat: null })
     } catch (error: any) {
@@ -2041,6 +2043,16 @@ function App() {
         >
           <AlertTriangle className="w-3 h-3" />
           {t('saveFailed', contentLanguage)} · {t('retry', contentLanguage)}
+        </button>
+      )}
+      {saveStatus === 'conflict' && (
+        <button
+          onClick={() => currentWorkshopId && selectWorkshop(currentWorkshopId).catch((err: any) => showToast(err?.message || t('openFailed', contentLanguage), 'error'))}
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-caption font-semibold bg-red-50 text-red-700 hover:bg-red-100 transition-colors focus-ring"
+          title={error || t('changedElsewhere', contentLanguage)}
+        >
+          <AlertTriangle className="w-3 h-3" />
+          {t('changedElsewhere', contentLanguage)} · {t('reload', contentLanguage)}
         </button>
       )}
 
