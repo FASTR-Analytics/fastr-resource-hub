@@ -432,7 +432,7 @@ function EditSessionModal({ session, onClose, onSave }: EditSessionModalProps) {
                           onChange={() => toggleModuleSlide(slide.filename)}
                           className="w-4 h-4 rounded border-gray-500 text-fastr-primary focus:ring-fastr-primary"
                         />
-                        <span className={`text-sm flex-1 truncate ${isExcluded ? 'text-gray-500 line-through' : 'text-gray-200'}`} title={slide.filename}>
+                        <span className={`text-sm flex-1 truncate ${isExcluded ? 'text-gray-500 line-through' : 'text-gray-200'}`}>
                           {slide.title}
                         </span>
                       </div>

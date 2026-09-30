@@ -468,26 +468,18 @@ function LibraryMode() {
       theory: typeof filteredTopics
       activities: typeof filteredTopics
     }
-    const bySession = new Map<string, ModuleSlides[]>()
-    for (const g of groupedByModule) {
-      const sid = (g.module as any).session || '_other'
-      const theory = g.items.filter(it => !isActivity(it.topic))
-      const activities = g.items.filter(it => isActivity(it.topic))
-      if (!bySession.has(sid)) bySession.set(sid, [])
-      bySession.get(sid)!.push({ module: g.module, theory, activities })
-    }
-    const sessionOrder: Array<{ id: string; name: string }> = [
-      ...sessions,
-      { id: '_other', name: contentLanguage === 'fr' ? 'Autre contenu' : contentLanguage === 'pt' ? 'Outro conteúdo' : 'Other content' },
-    ]
-    return sessionOrder
-      .map(s => {
-        const mods = bySession.get(s.id) || []
-        const theoryCount = mods.reduce((sum, m) => sum + m.theory.length, 0)
-        const activityCount = mods.reduce((sum, m) => sum + m.activities.length, 0)
-        return { id: s.id, name: s.name, modules: mods, theoryCount, activityCount }
+    // One group per module, named the same way as the Add content drawer
+    // (M4 · Data Quality Assessment), so the library reads the same everywhere.
+    void sessions
+    return groupedByModule
+      .map(g => {
+        const theory = g.items.filter(it => !isActivity(it.topic))
+        const activities = g.items.filter(it => isActivity(it.topic))
+        const code = g.module.number != null && g.module.number !== '' ? `M${g.module.number} · ` : ''
+        const mods: ModuleSlides[] = [{ module: g.module, theory, activities }]
+        return { id: String(g.module.id), name: `${code}${g.module.name}`, modules: mods, theoryCount: theory.length, activityCount: activities.length }
       })
-      .filter(s => s.modules.length > 0)
+      .filter(s => s.theoryCount + s.activityCount > 0)
   }, [groupedByModule, sessions, contentLanguage])
 
   if (contentLibrary.length === 0) {
@@ -1362,6 +1354,7 @@ function App() {
 
     // Workshop id from year and country; a suffix keeps a second workshop in the same country distinct.
     const workshopId = makeWorkshopId(newWorkshop.country, workshops)
+    const isFr = contentLanguage === 'fr'
 
     const ts = Date.now()
 
@@ -1436,25 +1429,25 @@ function App() {
             },
             {
               _id: `session-1-${ts}`,
-              session: 'Session 1',
+              session: isFr ? 'Session 1' : 'Session 1',
               duration: 60,
               icon: 'presentation',
             },
             {
               _id: `break-tea-morning-1-${ts}`,
-              session: 'Tea Break',
+              session: isFr ? 'Pause café' : 'Tea Break',
               type: 'break',
               duration: 15,
             },
             {
               _id: `lunch-1-${ts}`,
-              session: 'Lunch Break',
+              session: isFr ? 'Pause déjeuner' : 'Lunch Break',
               type: 'break',
               duration: 60,
             },
             {
               _id: `day-end-1-${ts}`,
-              session: 'End of Day 1',
+              session: isFr ? 'Fin du jour 1' : 'End of Day 1',
               type: 'day_end',
               slides: ['day_end.md'],
               duration: 5,
@@ -1465,44 +1458,44 @@ function App() {
           schedule[`day${d}`] = [
             {
               _id: `day-title-${d}-${ts}`,
-              session: `Day ${d}`,
+              session: isFr ? `Jour ${d}` : `Day ${d}`,
               type: 'day_title',
               slides: ['day_title.md'],
               duration: 0,
             },
             {
               _id: `day-recap-${d}-${ts}`,
-              session: `Recap: Day ${d - 1}`,
+              session: isFr ? `Récapitulatif : jour ${d - 1}` : `Recap: Day ${d - 1}`,
               type: 'day_recap',
               duration: 10,
             },
             {
               _id: `day-agenda-${d}-${ts}`,
-              session: `Day ${d} Agenda`,
+              session: isFr ? `Agenda du jour ${d}` : `Day ${d} Agenda`,
               type: 'section',
               duration: 5,
             },
             {
               _id: `session-${d}-1-${ts}`,
-              session: 'Session 1',
+              session: isFr ? 'Session 1' : 'Session 1',
               duration: 60,
               icon: 'presentation',
             },
             {
               _id: `break-tea-morning-${d}-${ts}`,
-              session: 'Tea Break',
+              session: isFr ? 'Pause café' : 'Tea Break',
               type: 'break',
               duration: 15,
             },
             {
               _id: `lunch-${d}-${ts}`,
-              session: 'Lunch Break',
+              session: isFr ? 'Pause déjeuner' : 'Lunch Break',
               type: 'break',
               duration: 60,
             },
             {
               _id: `day-end-${d}-${ts}`,
-              session: `End of Day ${d}`,
+              session: isFr ? `Fin du jour ${d}` : `End of Day ${d}`,
               type: 'day_end',
               slides: ['day_end.md'],
               duration: 5,
@@ -2328,7 +2321,7 @@ function App() {
                                 <div className="px-4 py-3 border-b border-gray-200 bg-gradient-to-r from-fastr-primary to-fastr-primary-light rounded-t-xl">
                                   <div className="flex items-start justify-between gap-2">
                                     <h3 className="font-semibold text-white">
-                                      Day {dayNum}
+                                      {t('day', contentLanguage)} {dayNum}
                                       {currentConfig?.schedule?.day_titles?.[dayNum] && (
                                         <span className="text-white/60 font-normal ml-1">
                                           - {currentConfig.schedule.day_titles[dayNum]}
@@ -2365,7 +2358,7 @@ function App() {
                                   </div>
                                   {currentConfig?.schedule?.day_start_times?.[dayNum] && (
                                     <div className="text-xs text-white/50 mt-0.5">
-                                      Starts at {currentConfig.schedule.day_start_times[dayNum]}
+                                      {t('startsAt', contentLanguage)} {currentConfig.schedule.day_start_times[dayNum]}
                                     </div>
                                   )}
                                 </div>
@@ -2969,7 +2962,7 @@ function App() {
                               })
                             }}
                             className="p-2 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 opacity-0 group-hover:opacity-100 transition-all"
-                            title="Clone this workshop as a starting point"
+                            title={t('cloneTitle', contentLanguage)}
                           >
                             <Copy className="w-4 h-4" />
                           </button>
@@ -3028,32 +3021,20 @@ function App() {
         <Modal
           open
           onClose={() => { if (!cloneBusy) setCloneSource(null) }}
-          title="Clone workshop"
+          title={t('cloneTitle', contentLanguage)}
           size="md"
         >
           <div className="p-6 space-y-4">
             <p className="text-sm text-gray-600">
-              Fork <span className="font-medium text-gray-900">{cloneSource.name}</span> into a new workshop.
-              The session structure, slide order, breaks, and any custom slides come with you.
-              Override the country and date for the new context.
+              {t('cloneIntro', contentLanguage).split('{x}')[0]}
+              <span className="font-medium text-gray-900">{cloneSource.name}</span>
+              {t('cloneIntro', contentLanguage).split('{x}')[1]}
             </p>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">New workshop ID</label>
+              <label htmlFor="clone-name" className="block text-sm font-medium text-gray-700 mb-1">{t('cloneName', contentLanguage)}</label>
               <input
-                type="text"
-                value={cloneForm.newId}
-                onChange={(e) => setCloneForm({ ...cloneForm, newId: e.target.value.replace(/\s+/g, '-').toLowerCase() })}
-                placeholder="e.g. addis-burkina-2027"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
-                disabled={cloneBusy}
-              />
-              <p className="text-xs text-gray-500 mt-1">Lowercase, hyphens, no spaces. Must be unique.</p>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Display name</label>
-              <input
+                id="clone-name"
                 type="text"
                 value={cloneForm.name}
                 onChange={(e) => setCloneForm({ ...cloneForm, name: e.target.value })}
@@ -3064,8 +3045,9 @@ function App() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                <label htmlFor="clone-country" className="block text-sm font-medium text-gray-700 mb-1">{t('cloneCountry', contentLanguage)}</label>
                 <input
+                  id="clone-country"
                   type="text"
                   value={cloneForm.country}
                   onChange={(e) => setCloneForm({ ...cloneForm, country: e.target.value })}
@@ -3074,12 +3056,13 @@ function App() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                <label htmlFor="clone-date" className="block text-sm font-medium text-gray-700 mb-1">{t('cloneDate', contentLanguage)}</label>
                 <input
+                  id="clone-date"
                   type="text"
                   value={cloneForm.date}
                   onChange={(e) => setCloneForm({ ...cloneForm, date: e.target.value })}
-                  placeholder="(optional)"
+                  placeholder=""
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   disabled={cloneBusy}
                 />
@@ -3092,35 +3075,33 @@ function App() {
                 disabled={cloneBusy}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg disabled:opacity-50"
               >
-                Cancel
+                {t('cancel', contentLanguage)}
               </button>
               <button
                 onClick={async () => {
-                  if (!cloneForm.newId.trim()) {
-                    showToast('New workshop ID is required', 'error')
-                    return
-                  }
+                  // The id is derived, never typed: year + country, suffixed if taken.
+                  const newId = makeWorkshopId(cloneForm.country.trim() || cloneSource.country || cloneSource.name, workshops)
                   setCloneBusy(true)
                   try {
-                    await cloneWorkshop(cloneSource.id, cloneForm.newId.trim(), {
+                    await cloneWorkshop(cloneSource.id, newId, {
                       name: cloneForm.name.trim() || undefined,
                       country: cloneForm.country.trim() || undefined,
                       date: cloneForm.date.trim() || undefined,
                     })
-                    showToast(`Cloned to "${cloneForm.newId.trim()}"`, 'success')
+                    showToast(t('cloneDone', contentLanguage), 'success')
                     setCloneSource(null)
                     setShowWorkshopSelector(false)
                   } catch (err: any) {
-                    showToast(err?.message || 'Clone failed', 'error')
+                    showToast(err?.message || t('cloneFailed', contentLanguage), 'error')
                   } finally {
                     setCloneBusy(false)
                   }
                 }}
-                disabled={cloneBusy || !cloneForm.newId.trim()}
+                disabled={cloneBusy || !cloneForm.name.trim()}
                 className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 inline-flex items-center gap-2"
               >
                 <Copy className="w-4 h-4" />
-                {cloneBusy ? 'Cloning…' : 'Clone'}
+                {cloneBusy ? t('saving', contentLanguage) : t('cloneButton', contentLanguage)}
               </button>
             </div>
           </div>
