@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef, memo } from 'react'
 import { useWorkshopStore } from '../stores/workshop'
 import { t } from '../i18n/translations'
 import {
@@ -79,8 +79,9 @@ interface SessionGroup {
 
 interface SortableSessionProps {
   session: SessionGroup
-  zoom: number
   workshopLocked: boolean
+  /** Text next to the hover icons; only when thumbnails are large enough. */
+  showLabels: boolean
   onSlideClick: (slide: SlideData) => void
   onSlideEdit: (slide: SlideData) => void
   onOpenSettings?: () => void
@@ -88,7 +89,48 @@ interface SortableSessionProps {
   onDeleteClick: (session: SessionGroup) => void
 }
 
-function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
+/**
+ * A slide thumbnail that only mounts its iframe while it is near the viewport.
+ * A deck has one to two hundred slides; keeping every one live was the main
+ * cost of the Preview screen. Far-away thumbnails show a flat placeholder and
+ * release their document when scrolled away.
+ */
+function LazySlideFrame({ html, title }: { html: string; title: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (typeof IntersectionObserver === 'undefined') { setNear(true); return }
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => setNear(e.isIntersecting)),
+      { root: null, rootMargin: '900px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className="w-full h-full bg-white">
+      {near ? (
+        <iframe
+          srcDoc={html}
+          className="pointer-events-none bg-white"
+          style={{
+            width: 960,
+            height: 540,
+            transform: 'scale(calc(var(--slide-zoom, 1) * 0.2083333))',
+            transformOrigin: 'top left',
+          }}
+          title={title}
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-100" aria-hidden />
+      )}
+    </div>
+  )
+}
+
+const SortableSession = memo(function SortableSession({ session, showLabels, workshopLocked, onSlideClick, onSlideEdit, onOpenSettings, onEditClick, onDeleteClick }: SortableSessionProps) {
   const { contentLanguage: lang } = useWorkshopStore()
   const isLocked = isSessionLocked(session.sessionName, session.sessionType)
 
@@ -106,8 +148,10 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
     transition,
   }
 
-  const slideWidth = 200 * zoom
-  const slideHeight = 112.5 * zoom
+  // Sizes follow the --slide-zoom CSS variable set on the list root, so the
+  // zoom slider never re-renders the thumbnails.
+  const slideWidth = 'calc(var(--slide-zoom, 1) * 200px)'
+  const slideHeight = 'calc(var(--slide-zoom, 1) * 112.5px)'
 
   // Session type colors
   const typeColors: Record<string, string> = {
@@ -202,7 +246,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                   title={t('sorterEditSlideContent', lang)}
                 >
                   <Pencil className="w-3.5 h-3.5" />
-                  {zoom >= 0.8 && <span>{t('sorterEdit', lang)}</span>}
+                  {showLabels && <span>{t('sorterEdit', lang)}</span>}
                 </button>
               )}
 
@@ -218,7 +262,7 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                   title={t('sorterCoverInSettings', lang)}
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
-                  {zoom >= 0.8 && <span>{t('settings', lang)}</span>}
+                  {showLabels && <span>{t('settings', lang)}</span>}
                 </button>
               )}
 
@@ -242,25 +286,15 @@ function SortableSession({ session, zoom, workshopLocked, onSlideClick, onSlideE
                 )
               )}
 
-              {/* Slide preview iframe */}
-              <iframe
-                srcDoc={slide.html}
-                className="pointer-events-none bg-white"
-                style={{
-                  width: 960,
-                  height: 540,
-                  transform: `scale(${slideWidth / 960})`,
-                  transformOrigin: 'top left',
-                }}
-                title={`${t('sorterSlide', lang)} ${idx + 1}`}
-              />
+              {/* Slide preview (lazy iframe) */}
+              <LazySlideFrame html={slide.html} title={`${t('sorterSlide', lang)} ${idx + 1}`} />
             </div>
           </div>
         ))}
       </div>
     </div>
   )
-}
+})
 
 // Session edit modal
 interface EditSessionModalProps {
@@ -829,6 +863,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
               >
+                <div style={{ ['--slide-zoom' as string]: zoom } as React.CSSProperties}>
                 <SortableContext
                   items={daySessions.map((s) => s.sessionId)}
                   strategy={verticalListSortingStrategy}
@@ -836,9 +871,9 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                   <div className="space-y-4">
                     {daySessions.map((session) => (
                       <SortableSession
+                        showLabels={zoom >= 0.8}
                         key={session.sessionId}
                         session={session}
-                        zoom={zoom}
                         workshopLocked={workshopLocked}
                         onSlideClick={setSelectedSlide}
                         onSlideEdit={setEditingSlide}
@@ -855,6 +890,7 @@ export function SlideSorter({ onBack, onOpenSettings }: SlideSorterProps) {
                     ))}
                   </div>
                 </SortableContext>
+                </div>
               </DndContext>
             </div>
           )
