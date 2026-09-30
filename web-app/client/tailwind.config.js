@@ -16,8 +16,8 @@ export default {
           'primary-light': '#2A4A7A', // Lighter navy
           secondary: '#00A9CE',     // Teal
           'secondary-light': '#33BFDB', // Light teal
-          accent: '#F7941D',        // Orange
-          'accent-light': '#FAAB4A', // Light orange
+          accent: '#B85C00',        // Orange, darkened so white text passes 4.5:1
+          'accent-light': '#F7941D', // Original orange, decorative use only
           light: '#E8F4F8',         // Light blue
           'light-warm': '#F0F7FA',  // Warm light bg
         },

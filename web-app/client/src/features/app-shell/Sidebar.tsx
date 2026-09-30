@@ -105,14 +105,8 @@ export function Sidebar({
             >
               FR
             </button>
-            <button
-              onClick={() => onLanguageChange('pt')}
-              className={`px-2 py-0.5 text-[11px] font-semibold rounded transition-colors ${
-                language === 'pt' ? 'bg-fastr-primary text-white' : 'text-slate-500 hover:text-slate-900'
-              }`}
-            >
-              PT
-            </button>
+            {/* Portuguese slide content exists, but the interface has no PT strings yet,
+                so the toggle stays EN/FR until the UI is translated. */}
           </div>
           <button
             onClick={onSignOut}

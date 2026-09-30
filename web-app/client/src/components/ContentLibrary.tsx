@@ -96,11 +96,14 @@ function LibraryDragHandle({ id, data }: { id: string; data: any }) {
 
 interface ContentLibraryProps {
   onImportSlides?: () => void
+  /** Day that "add" actions target (from the Add content drawer). Defaults to day 1. */
+  targetDayNum?: number
 }
 
-export function ContentLibrary({ onImportSlides: _onImportSlides }: ContentLibraryProps = {}) {
+export function ContentLibrary({ onImportSlides: _onImportSlides, targetDayNum }: ContentLibraryProps = {}) {
   const { contentLibrary, addSession, currentConfig, currentWorkshopId, updateSession, contentLanguage, loadContentLibrary } = useWorkshopStore()
   const { showToast } = useToast()
+  const dayNum = targetDayNum ?? 1
   const [tab, setTab] = useState<'slides' | 'handouts'>('slides')
   const [expandedModules, setExpandedModules] = useState<Set<number | string>>(new Set())
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['breaks', 'webinar']))
@@ -212,8 +215,6 @@ export function ContentLibrary({ onImportSlides: _onImportSlides }: ContentLibra
       return
     }
 
-    const dayNum = 1
-
     // Determine duration based on template type
     let duration = 15
     if (template.id === 'lunch') duration = 60
@@ -230,6 +231,7 @@ export function ContentLibrary({ onImportSlides: _onImportSlides }: ContentLibra
       duration: duration,
       slides: template.file ? [template.file] : [],
     })
+    showToast(`${t('addedToDay', contentLanguage)} ${dayNum}: ${template.name}`, 'success')
   }
 
   // Show hover preview
@@ -412,7 +414,7 @@ We resume at **[time]**`
       // Webinar mode: add directly as a single-slide session on day1
       // Don't set module — just reference the slide file so deckBuilder loads only this slide
       const duration = Math.max(5, topic.slideCount * 3)
-      addSession(1, {
+      addSession(dayNum, {
         session: topic.title,
         slides: [topic.file],
         duration: duration,
@@ -424,15 +426,16 @@ We resume at **[time]**`
   }
 
   // Add topic as a new session
-  const addTopicAsNewSession = (topic: Topic, module: Module, dayNum: number = 1) => {
+  const addTopicAsNewSession = (topic: Topic, module: Module, day: number = dayNum) => {
     const duration = Math.max(15, topic.slideCount * 3)
-    addSession(dayNum, {
+    addSession(day, {
       session: topic.title,
       module: module.id,
       topics: [topic.id],
       duration: duration,
       slides: [topic.file],
     })
+    showToast(`${t('addedToDay', contentLanguage)} ${day}: ${topic.title}`, 'success')
     setAddToSessionDialog(null)
   }
 
@@ -450,6 +453,7 @@ We resume at **[time]**`
         duration: (existingSession.duration || 0) + topicDuration,
       })
     }
+    showToast(`${t('addedToDay', contentLanguage)} ${dayNum}: ${topic.title}`, 'success')
     setAddToSessionDialog(null)
   }
 
@@ -611,9 +615,9 @@ We resume at **[time]**`
 
                           {/* Add button */}
                           <button
-                            onClick={() => addTemplate(template, category)}
+                            onClick={(e) => { e.stopPropagation(); addTemplate(template, category) }}
                             className="p-1 text-amber-600 hover:bg-amber-100 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                            title={t('addToDay1', contentLanguage)}
+                            title={`${t('addToDay', contentLanguage)} ${dayNum}`}
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -763,7 +767,7 @@ We resume at **[time]**`
                         <button
                           onClick={() => addTopic(topic, module)}
                           className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                          title={t('addToDay1', contentLanguage)}
+                          title={`${t('addToDay', contentLanguage)} ${dayNum}`}
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -811,7 +815,7 @@ We resume at **[time]**`
                         <button
                           onClick={() => addTopic(topic, module)}
                           className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                          title={t('addToDay1', contentLanguage)}
+                          title={`${t('addToDay', contentLanguage)} ${dayNum}`}
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -847,7 +851,7 @@ We resume at **[time]**`
                     <button
                       onClick={() => addTopic(topic, module)}
                       className="p-1 text-fastr-primary hover:bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                      title={t('addToDay1', contentLanguage)}
+                      title={`${t('addToDay', contentLanguage)} ${dayNum}`}
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -1164,11 +1168,11 @@ We resume at **[time]**`
       {showSlideCreator && currentWorkshopId && createPortal(
         <CustomSlideEditor
           workshopId={currentWorkshopId}
-          dayNumber={1}
+          dayNumber={dayNum}
           defaultType="content"
           onClose={() => setShowSlideCreator(false)}
           onSave={(filename, _content, sessionName) => {
-            addSession(1, {
+            addSession(dayNum, {
               session: sessionName,
               // Custom slides are editable, not locked section dividers.
               slides: [`custom_slides/${filename}`],

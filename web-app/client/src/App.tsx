@@ -79,6 +79,16 @@ import { AppShell, type SidebarNavId } from './features/app-shell/AppShell'
 // ─────────────────────────────────────────────────────────────────────────────
 type AppMode = 'select' | 'workshop' | 'library' | 'import' | 'settings'
 
+/** Workshop id: year + country slug, with a numeric suffix when that id is already taken. */
+function makeWorkshopId(country: string, existing: { id: string }[]): string {
+  const year = new Date().getFullYear()
+  const slug = (country || 'workshop').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'workshop'
+  const taken = new Set(existing.map(w => w.id))
+  let id = `${year}-${slug}`
+  for (let n = 2; taken.has(id); n++) id = `${year}-${slug}-${n}`
+  return id
+}
+
 function mapModeToNav(mode: AppMode): SidebarNavId {
   if (mode === 'library') return 'library'
   if (mode === 'settings') return 'settings'
@@ -941,6 +951,7 @@ function App() {
   const settingsTourRef = useRef<GuidedTourHandle>(null)
   const [showHelp, setShowHelp] = useState(false)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
+  const currentLocked = !!workshops.find(w => w.id === currentWorkshopId)?.locked
   // Webinar deck type is paused (coming back later). New builds default to
   // 'workshop'; the webinar button shows a "coming soon" toast instead of
   // flipping this state. The state is kept (rather than hard-removed) so
@@ -990,8 +1001,10 @@ function App() {
   // Skip while loading — selectWorkshop is async and currentWorkshopId is still
   // null during fetch.
   useEffect(() => {
-    if (appMode === 'workshop' && !currentWorkshopId && !isLoading && workshops.length > 0) {
+    if (appMode === 'workshop' && !currentWorkshopId && !isLoading) {
       setShowWorkshopSelector(true)
+      // Nothing to select yet: go straight to the create form.
+      if (workshops.length === 0) setShowCreateWorkshop(true)
     }
   }, [currentWorkshopId, workshops, appMode, isLoading])
 
@@ -1117,9 +1130,7 @@ function App() {
 
   // Shared: convert AI response → config + create workshop
   const buildWorkshopFromAIResponse = async (data: any) => {
-    const year = new Date().getFullYear()
-    const countrySlug = (data.country || 'workshop').toLowerCase().replace(/\s+/g, '-')
-    const workshopId = `${year}-${countrySlug}`
+    const workshopId = makeWorkshopId(data.country, workshops)
     const isFr = data.language === 'fr'
 
     const ts = Date.now()
@@ -1238,7 +1249,12 @@ function App() {
       }, 500)
     }
 
-    await createWorkshop(workshopId, config)
+    try {
+      await createWorkshop(workshopId, config)
+    } catch (err: any) {
+      showToast(err?.message || t('createFailed', contentLanguage), 'error')
+      return
+    }
     setShowCreateWorkshop(false)
     setShowWorkshopSelector(false)
   }
@@ -1341,9 +1357,8 @@ function App() {
       return
     }
 
-    // Generate workshop ID from year and country slug
-    const year = new Date().getFullYear()
-    const workshopId = `${year}-${newWorkshop.country.toLowerCase().replace(/\s+/g, '-')}`
+    // Workshop id from year and country; a suffix keeps a second workshop in the same country distinct.
+    const workshopId = makeWorkshopId(newWorkshop.country, workshops)
 
     const ts = Date.now()
 
@@ -1516,7 +1531,12 @@ function App() {
         },
       }
 
-      await createWorkshop(workshopId, config)
+      try {
+        await createWorkshop(workshopId, config)
+      } catch (err: any) {
+        setError(err?.message || t('createFailed', contentLanguage))
+        return
+      }
     }
 
     setShowCreateWorkshop(false)
@@ -1743,6 +1763,8 @@ function App() {
                 setShowNewDeckMenu(false)
                 setPendingDeckType('workshop')
                 setAppMode('workshop')
+                setShowWorkshopSelector(true)
+                setShowCreateWorkshop(true)
               }}
               className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 focus-ring"
             >
@@ -1750,22 +1772,6 @@ function App() {
               <div className="flex-1 min-w-0">
                 <div className="text-body-sm font-semibold text-slate-900">{t('buildSlideDeck', contentLanguage)}</div>
                 <div className="text-caption text-slate-500 mt-0.5">{t('workshopDeckDesc', contentLanguage)}</div>
-              </div>
-            </button>
-            <button
-              onClick={() => {
-                setShowNewDeckMenu(false)
-                showToast(t('webinarComingSoon', contentLanguage), 'info')
-              }}
-              className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-slate-50 focus-ring"
-            >
-              <Monitor className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-body-sm font-semibold text-slate-500">{t('buildWebinar', contentLanguage)}</span>
-                  <span className="inline-flex items-center rounded-pill px-1.5 py-0 text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700">{t('comingSoonBadge', contentLanguage)}</span>
-                </div>
-                <div className="text-caption text-slate-500 mt-0.5">{t('webinarDeckDescComingSoon', contentLanguage)}</div>
               </div>
             </button>
           </div>
@@ -1808,7 +1814,7 @@ function App() {
                           >
                             <button
                               onClick={() => {
-                                selectWorkshop(workshop.id)
+                                selectWorkshop(workshop.id).catch((err: any) => showToast(err?.message || t('openFailed', contentLanguage), 'error'))
                                 setPendingDeckType((workshop as any).deckType || 'workshop')
                                 setAppMode('workshop')
                               }}
@@ -1867,7 +1873,7 @@ function App() {
               <h2 className="text-h2 text-slate-900 m-0 mb-1">{t('noWorkshopsYet', contentLanguage)}</h2>
               <p className="text-body-sm text-slate-500 mb-5">{t('noWorkshopsYetDesc', contentLanguage)}</p>
               <button
-                onClick={() => { setPendingDeckType('workshop'); setAppMode('workshop') }}
+                onClick={() => { setPendingDeckType('workshop'); setAppMode('workshop'); setShowWorkshopSelector(true); setShowCreateWorkshop(true) }}
                 className="btn-primary"
               >
                 <Plus className="w-4 h-4" />
@@ -2173,13 +2179,27 @@ function App() {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
+      {currentLocked && (
+        <div role="status" className="flex items-center gap-3 px-6 py-2 bg-amber-50 border-b border-amber-200 text-amber-900 text-body-sm">
+          <Lock className="w-4 h-4 flex-shrink-0" />
+          <span className="flex-1">{t('workshopLockedBanner', contentLanguage)}</span>
+          <button
+            onClick={() => currentWorkshopId && setWorkshopLocked(currentWorkshopId, false).catch((err: any) => showToast(err?.message || t('lockFailed', contentLanguage), 'error'))}
+            className="btn-ghost text-amber-900"
+          >
+            {t('unlock', contentLanguage)}
+          </button>
+        </div>
+      )}
       <div className="flex-1 flex overflow-hidden relative">
         {/* Center - Main content. When the AddContentDrawer OR AI panel is open
-            we reserve 400px / 320px on the right so day columns stay visible. */}
+            we reserve 400px / 320px on the right so day columns stay visible.
+            A locked workshop renders read-only: no drag, no add, no edit. */}
         <main
+          aria-disabled={currentLocked || undefined}
           className={`flex-1 overflow-hidden transition-[padding] duration-200 ${
             addContentDrawerOpen ? 'pr-[400px]' : rightPanelOpen ? 'pr-80' : ''
-          }`}
+          } ${currentLocked ? 'pointer-events-none select-none opacity-90' : ''}`}
         >
           {currentWorkshopId ? (
             showPreview ? (
@@ -2391,10 +2411,10 @@ function App() {
                 <Layers className="w-16 h-16 mx-auto mb-4 text-gray-300" />
                 <p className="text-lg">{t('selectOrCreateWorkshop', contentLanguage)}</p>
                 <button
-                  onClick={() => setShowWorkshopSelector(true)}
+                  onClick={() => { setShowWorkshopSelector(true); if (workshops.length === 0) setShowCreateWorkshop(true) }}
                   className="mt-4 px-4 py-2 bg-fastr-primary text-white rounded-md hover:bg-fastr-primary/90 transition-colors"
                 >
-                  {t('chooseWorkshop', contentLanguage)}
+                  {workshops.length === 0 ? t('createNewWorkshop', contentLanguage) : t('chooseWorkshop', contentLanguage)}
                 </button>
               </div>
             </div>
@@ -2906,7 +2926,7 @@ function App() {
                           )}
                           <button
                             onClick={() => {
-                              selectWorkshop(workshop.id)
+                              selectWorkshop(workshop.id).catch((err: any) => showToast(err?.message || t('openFailed', contentLanguage), 'error'))
                               setShowWorkshopSelector(false)
                             }}
                             className="flex-1 text-left"
@@ -2940,7 +2960,7 @@ function App() {
                           <button
                             onClick={(e) => {
                               e.stopPropagation()
-                              setWorkshopLocked(workshop.id, !workshop.locked)
+                              setWorkshopLocked(workshop.id, !workshop.locked).catch((err: any) => showToast(err?.message || t('lockFailed', contentLanguage), 'error'))
                             }}
                             className={`p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all ${
                               workshop.locked
@@ -2961,6 +2981,8 @@ function App() {
                               }
                               if (confirm(`Delete "${workshop.name}"? This cannot be undone.`)) {
                                 deleteWorkshop(workshop.id)
+                                  .then(() => showToast(t('workshopDeleted', contentLanguage), 'success'))
+                                  .catch((err: any) => showToast(err?.message || t('deleteFailed', contentLanguage), 'error'))
                               }
                             }}
                             className={`p-2 rounded-lg transition-all ${

@@ -297,6 +297,11 @@ export async function updateWorkshop(id: string, config: WorkshopConfig) {
   })
 }
 
+export async function isWorkshopLocked(id: string): Promise<boolean> {
+  const result = await db.execute({ sql: 'SELECT locked FROM workshops WHERE id = ?', args: [id] })
+  return result.rows.length > 0 && result.rows[0].locked === 1
+}
+
 // Delete workshop (only if not locked)
 export async function deleteWorkshop(id: string): Promise<boolean> {
   // Check if locked
