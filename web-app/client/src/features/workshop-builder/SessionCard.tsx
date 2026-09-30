@@ -130,6 +130,9 @@ export function SortableSessionCard({
     } else if ((e.metaKey || e.ctrlKey) && e.key === 'ArrowDown') {
       e.preventDefault()
       handleMoveDown()
+    } else if (e.key === 'Enter' && e.target === e.currentTarget) {
+      e.preventDefault()
+      onEdit(session, dayNum, index)
     }
   }
   const isLocked = isSessionLocked(session)
@@ -174,12 +177,14 @@ export function SortableSessionCard({
       style={style}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className={`group relative p-3 rounded-lg border shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-fastr-secondary/40 ${config.bg} ${config.border} ${
+      onClick={() => onEdit(session, dayNum, index)}
+      role="button"
+      className={`group relative p-3 rounded-lg border shadow-sm hover:shadow-md transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-fastr-secondary/40 ${config.bg} ${config.border} ${
         isDragging ? 'opacity-80 scale-[1.02] shadow-lg ring-2 ring-fastr-secondary z-50' : ''
       }`}
     >
       {/* Drag handle — always visible at rest for discoverability */}
-      <div className="absolute left-1 top-1/2 -translate-y-1/2">
+      <div className="absolute left-1 top-1/2 -translate-y-1/2" onClick={e => e.stopPropagation()}>
         <div
           {...attributes}
           {...listeners}
@@ -192,7 +197,7 @@ export function SortableSessionCard({
       </div>
 
       {/* Action buttons (top-right) — always visible at rest, subtle */}
-      <div className="absolute right-1 top-1 flex items-center gap-0.5">
+      <div className="absolute right-1 top-1 flex items-center gap-0.5" onClick={e => e.stopPropagation()}>
         {totalSessions != null && totalSessions > 1 && (
           <>
             <button

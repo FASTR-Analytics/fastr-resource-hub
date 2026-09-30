@@ -5,6 +5,7 @@ import { exportAPI } from '../lib/api'
 import { t } from './i18n/translations'
 import { useToast } from './components/Toast'
 import { PreflightDialog } from './components/PreflightDialog'
+import { ExportProgressDialog } from './components/ExportProgressDialog'
 import { SlideSorter } from './components/SlideSorter'
 import { AIAssistant } from './components/AIAssistant'
 import { SlideImportWizard } from './components/SlideImportWizard'
@@ -293,14 +294,14 @@ function LibraryMode() {
       .then((data) => {
         setSessions(data)
       })
-      .catch(err => console.warn('Failed to load sessions:', err))
+      .catch(err => { console.warn('Failed to load sessions:', err); showToast(t('libraryLoadFailed', contentLanguage), 'error') })
   }, [contentLanguage])
 
   useEffect(() => {
     fetch(`/api/content/templates?language=${contentLanguage}`, { credentials: 'include' })
       .then(r => r.ok ? r.json() : [])
       .then(setTemplates)
-      .catch(err => console.warn('Failed to load templates:', err))
+      .catch(err => { console.warn('Failed to load templates:', err); showToast(t('libraryLoadFailed', contentLanguage), 'error') })
   }, [contentLanguage])
 
   const previewCache = useRef<Map<string, { html: string; notes: string[] }>>(new Map())
@@ -339,6 +340,7 @@ function LibraryMode() {
       }
     } catch (err) {
       console.error('Failed to load template preview:', err)
+      showToast(t('previewFailed', contentLanguage), 'error')
     } finally {
       setIsLoadingPreview(false)
     }
@@ -386,6 +388,7 @@ function LibraryMode() {
       }
     } catch (err) {
       console.error('Failed to load preview:', err)
+      showToast(t('previewFailed', contentLanguage), 'error')
     } finally {
       setIsLoadingPreview(false)
     }
@@ -950,6 +953,7 @@ function App() {
   const settingsTourRef = useRef<GuidedTourHandle>(null)
   const [showHelp, setShowHelp] = useState(false)
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
+  const [exportJob, setExportJob] = useState<{ format: 'html' | 'pdf' | 'pptx'; startedAt: number; controller: AbortController } | null>(null)
   const currentLocked = !!workshops.find(w => w.id === currentWorkshopId)?.locked
   // Webinar deck type is paused (coming back later). New builds default to
   // 'workshop'; the webinar button shows a "coming soon" toast instead of
@@ -1578,37 +1582,39 @@ function App() {
     }
   }
 
+  // Export runs server-side as one request. The dialog shows what is happening,
+  // how long it has been running, and lets the user cancel (aborts the request).
+  // A hard timeout stops a hung render instead of spinning forever.
+  const EXPORT_TIMEOUT_MS = 5 * 60 * 1000
   const doExport = async (format: 'html' | 'pdf' | 'pptx') => {
     if (!currentWorkshopId) return
     setIsBuilding(true)
+    const controller = new AbortController()
+    setExportJob({ format, startedAt: Date.now(), controller })
+    const timer = setTimeout(() => controller.abort('timeout'), EXPORT_TIMEOUT_MS)
 
     try {
-      let downloadUrl = ''
-      let response: Response
-
-      if (format === 'html') {
-        response = await fetch(`/api/export/${currentWorkshopId}/html`, { method: 'POST', credentials: 'include' })
-        downloadUrl = `/api/export/${currentWorkshopId}/download/html`
-      } else if (format === 'pdf') {
-        response = await fetch(`/api/export/${currentWorkshopId}/pdf`, { method: 'POST', credentials: 'include' })
-        downloadUrl = `/api/export/${currentWorkshopId}/download/pdf`
-      } else if (format === 'pptx') {
-        response = await fetch(`/api/export/${currentWorkshopId}/pptx`, { method: 'POST', credentials: 'include' })
-        downloadUrl = `/api/export/${currentWorkshopId}/download/pptx`
-      } else {
-        return
-      }
-
+      const response = await fetch(`/api/export/${currentWorkshopId}/${format}`, {
+        method: 'POST', credentials: 'include', signal: controller.signal,
+      })
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
-        throw new Error(data.error || `Export failed (${response.status})`)
+        throw new Error(data.error || `${t('exportFailed', contentLanguage)} (${response.status})`)
       }
-
-      window.open(downloadUrl, '_blank')
+      window.open(`/api/export/${currentWorkshopId}/download/${format}`, '_blank')
+      showToast(t('exportReady', contentLanguage), 'success')
     } catch (error: any) {
-      showToast(`Build failed: ${error.message}`, 'error')
+      if (controller.signal.aborted) {
+        const timedOut = controller.signal.reason === 'timeout'
+        showToast(t(timedOut ? 'exportTimedOut' : 'exportCancelled', contentLanguage), timedOut ? 'error' : 'info')
+      } else {
+        showToast(`${t('exportFailed', contentLanguage)}: ${error.message}`, 'error')
+      }
+    } finally {
+      clearTimeout(timer)
+      setExportJob(null)
+      setIsBuilding(false)
     }
-    setIsBuilding(false)
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -3110,6 +3116,14 @@ function App() {
       )}
 
       {/* Deck health-check dialog (before export, or standalone "Check deck") */}
+      {exportJob && (
+        <ExportProgressDialog
+          format={exportJob.format}
+          startedAt={exportJob.startedAt}
+          onCancel={() => exportJob.controller.abort('cancel')}
+          contentLanguage={contentLanguage}
+        />
+      )}
       {preflight && (
         <PreflightDialog
           result={preflight.result}
@@ -3142,10 +3156,10 @@ function App() {
                 </h3>
                 <div className="space-y-4 bg-gray-50 rounded-lg p-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-presentationTitle" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('presentationTitle', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-presentationTitle"
                       type="text"
                       value={currentConfig.workshop.title || currentConfig.workshop.name || ''}
                       onChange={(e) => updateWorkshopSettings({ title: e.target.value })}
@@ -3156,10 +3170,10 @@ function App() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-subtitle" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('subtitle', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-subtitle"
                       type="text"
                       value={currentConfig.workshop.subtitle || ''}
                       onChange={(e) => updateWorkshopSettings({ subtitle: e.target.value })}
@@ -3169,10 +3183,10 @@ function App() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-slideStyle" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('slideStyle', contentLanguage)}
                     </label>
-                    <select
+                    <select id="wd-slideStyle"
                       value={currentConfig.workshop.theme || 'classic'}
                       onChange={(e) => updateWorkshopSettings({ theme: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fastr-primary focus:border-fastr-primary text-sm bg-white"
@@ -3193,10 +3207,10 @@ function App() {
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-workshopName" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('workshopName', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-workshopName"
                       type="text"
                       value={currentConfig.workshop.name || ''}
                       onChange={(e) => updateWorkshopSettings({ name: e.target.value })}
@@ -3245,10 +3259,10 @@ function App() {
 
                     return (<>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="wd-startDate" className="block text-sm font-medium text-gray-700 mb-1">
                           {t('startDate', contentLanguage)}
                         </label>
-                        <input
+                        <input id="wd-startDate"
                           type="date"
                           value={startDateVal}
                           onChange={(e) => {
@@ -3262,10 +3276,10 @@ function App() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="wd-endDate" className="block text-sm font-medium text-gray-700 mb-1">
                           {t('endDate', contentLanguage)}
                         </label>
-                        <input
+                        <input id="wd-endDate"
                           type="date"
                           value={endDateVal}
                           onChange={(e) => {
@@ -3281,10 +3295,10 @@ function App() {
                   })()}
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-country" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('country', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-country"
                       type="text"
                       value={currentConfig.workshop.country || ''}
                       onChange={(e) => updateWorkshopSettings({ country: e.target.value })}
@@ -3294,10 +3308,10 @@ function App() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-location" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('location', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-location"
                       type="text"
                       value={currentConfig.workshop.location || ''}
                       onChange={(e) => updateWorkshopSettings({ location: e.target.value })}
@@ -3307,10 +3321,10 @@ function App() {
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-venue" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('venue', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-venue"
                       type="text"
                       value={currentConfig.workshop.venue || ''}
                       onChange={(e) => updateWorkshopSettings({ venue: e.target.value })}
@@ -3320,10 +3334,10 @@ function App() {
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-facilitators" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('facilitators', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-facilitators"
                       type="text"
                       value={currentConfig.workshop.facilitators || ''}
                       onChange={(e) => updateWorkshopSettings({ facilitators: e.target.value })}
@@ -3341,10 +3355,10 @@ function App() {
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-contactEmail" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('contactEmail', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-contactEmail"
                       type="email"
                       value={currentConfig.workshop.contact_email || ''}
                       onChange={(e) => updateWorkshopSettings({ contact_email: e.target.value })}
@@ -3354,10 +3368,10 @@ function App() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-website" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('website', contentLanguage)}
                     </label>
-                    <input
+                    <input id="wd-website"
                       type="url"
                       value={currentConfig.workshop.website || ''}
                       onChange={(e) => updateWorkshopSettings({ website: e.target.value })}
@@ -3378,11 +3392,11 @@ function App() {
                 </p>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-workshopObjectives" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('workshopObjectives', contentLanguage)}
                       <span className="ml-2 text-xs font-normal text-gray-400">→ {t('objectivesSlide', contentLanguage)}</span>
                     </label>
-                    <textarea
+                    <textarea id="wd-workshopObjectives"
                       value={currentConfig.workshop.objectives || ''}
                       onChange={(e) => updateWorkshopSettings({ objectives: e.target.value })}
                       rows={4}
@@ -3393,11 +3407,11 @@ function App() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="wd-expectedOutputs" className="block text-sm font-medium text-gray-700 mb-1">
                       {t('expectedOutputs', contentLanguage)}
                       <span className="ml-2 text-xs font-normal text-gray-400">→ {t('expectedOutputsSlide', contentLanguage)}</span>
                     </label>
-                    <textarea
+                    <textarea id="wd-expectedOutputs"
                       value={currentConfig.workshop.expected_outputs || ''}
                       onChange={(e) => updateWorkshopSettings({ expected_outputs: e.target.value })}
                       rows={4}
