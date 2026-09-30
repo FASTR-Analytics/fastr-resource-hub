@@ -128,13 +128,15 @@ async function fetchJSONWithResponse<T>(
   const timeoutId = setTimeout(() => controller.abort(), timeout)
 
   try {
+    // fetchOptions is spread first so a caller's `headers` cannot replace the
+    // merged set (it used to, dropping Content-Type and sending an empty body).
     const response = await fetch(`${API_BASE}${url}`, {
       credentials: 'include',  // Send session cookie with requests
+      ...fetchOptions,
       headers: {
         'Content-Type': 'application/json',
-        ...fetchOptions?.headers,
+        ...(fetchOptions?.headers || {}),
       },
-      ...fetchOptions,
       signal: controller.signal,
     })
 
