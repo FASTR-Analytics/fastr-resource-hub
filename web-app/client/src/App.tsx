@@ -77,7 +77,8 @@ import { AppShell, type SidebarNavId } from './features/app-shell/AppShell'
 // ─────────────────────────────────────────────────────────────────────────────
 // App Modes
 // ─────────────────────────────────────────────────────────────────────────────
-type AppMode = 'select' | 'workshop' | 'library' | 'import' | 'settings'
+import { useUrlSync } from './hooks/useUrlSync'
+import type { AppMode } from './lib/urlRoutes'
 
 /** Workshop id: year + country slug, with a numeric suffix when that id is already taken. */
 function makeWorkshopId(country: string, existing: { id: string }[]): string {
@@ -947,6 +948,18 @@ function App() {
   const [showCreateWorkshop, setShowCreateWorkshop] = useState(false)
   const [exportJob, setExportJob] = useState<{ format: 'html' | 'pdf' | 'pptx'; startedAt: number; controller: AbortController } | null>(null)
   const currentLocked = !!workshops.find(w => w.id === currentWorkshopId)?.locked
+  useUrlSync({
+    enabled: isAuthenticated,
+    loading: isLoading,
+    appMode, setAppMode,
+    currentWorkshopId, selectWorkshop,
+    showPreview, setShowPreview,
+    onWorkshopNotFound: () => {
+      showToast(t('openFailed', contentLanguage), 'error')
+      setAppMode('select')
+      window.history.replaceState({}, '', '/')
+    },
+  })
   // Webinar deck type is paused (coming back later). New builds default to
   // 'workshop'; the webinar button shows a "coming soon" toast instead of
   // flipping this state. The state is kept (rather than hard-removed) so
