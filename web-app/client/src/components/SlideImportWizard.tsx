@@ -287,7 +287,7 @@ export function SlideImportWizard({ onBack, onGoToLibrary, language }: SlideImpo
   // ─── Render ───
 
   return (
-    <div className="h-screen bg-gradient-to-b from-fastr-light-warm to-white flex flex-col">
+    <div className="h-full min-h-0 bg-gradient-to-b from-fastr-light-warm to-white flex flex-col">
       {/* Header */}
       <div className="flex items-center gap-4 px-6 py-4 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <button

@@ -14,6 +14,12 @@ interface AppShellProps {
   signOutLabel: string
   onSignOut: () => void
   sidebarFooterExtra?: ReactNode
+  sidebarCollapsed?: boolean
+  onToggleSidebar?: () => void
+  collapseLabel?: string
+  expandLabel?: string
+  /** Screens with their own toolbar (the builder) skip the standard topbar. */
+  hideTopBar?: boolean
   // topbar
   section: string
   breadcrumb?: string
@@ -37,6 +43,11 @@ export function AppShell({
   signOutLabel,
   onSignOut,
   sidebarFooterExtra,
+  sidebarCollapsed,
+  onToggleSidebar,
+  collapseLabel,
+  expandLabel,
+  hideTopBar,
   section,
   breadcrumb,
   searchPlaceholder,
@@ -59,17 +70,23 @@ export function AppShell({
         signOutLabel={signOutLabel}
         onSignOut={onSignOut}
         footerExtra={sidebarFooterExtra}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={onToggleSidebar}
+        collapseLabel={collapseLabel}
+        expandLabel={expandLabel}
       />
       <div className="flex-1 flex flex-col min-w-0">
-        <TopBar
-          section={section}
-          breadcrumb={breadcrumb}
-          searchPlaceholder={searchPlaceholder}
-          searchValue={searchValue}
-          onSearchChange={onSearchChange}
-          primaryAction={primaryAction}
-          actions={topbarActions}
-        />
+        {!hideTopBar && (
+          <TopBar
+            section={section}
+            breadcrumb={breadcrumb}
+            searchPlaceholder={searchPlaceholder}
+            searchValue={searchValue}
+            onSearchChange={onSearchChange}
+            primaryAction={primaryAction}
+            actions={topbarActions}
+          />
+        )}
         <div className="flex-1 min-h-0 overflow-hidden">{children}</div>
       </div>
     </div>
