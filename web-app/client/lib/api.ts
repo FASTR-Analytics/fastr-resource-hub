@@ -100,7 +100,27 @@ export interface AIToolResult {
 // Helper Functions
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function fetchJSON<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<T> {
+/**
+ * Error thrown for non-2xx responses. `status` lets callers distinguish e.g. a
+ * 409 (edited elsewhere) from a 403 (locked); `body` is the parsed JSON error
+ * payload when the server sent one.
+ */
+export class ApiError extends Error {
+  status: number
+  body: any
+  constructor(message: string, status: number, body?: any) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.body = body
+  }
+}
+
+/** Like fetchJSON but also returns the Response so callers can read headers. */
+async function fetchJSONWithResponse<T>(
+  url: string,
+  options?: RequestInit & { timeout?: number }
+): Promise<{ data: T; response: Response }> {
   const { timeout = 60000, ...fetchOptions } = options || {}
 
   // Create abort controller for timeout
@@ -122,10 +142,11 @@ async function fetchJSON<T>(url: string, options?: RequestInit & { timeout?: num
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ error: 'Unknown error' }))
-      throw new Error(error.error || `HTTP ${response.status}`)
+      throw new ApiError(error.error || `HTTP ${response.status}`, response.status, error)
     }
 
-    return response.json()
+    const data = (await response.json()) as T
+    return { data, response }
   } catch (error: any) {
     clearTimeout(timeoutId)
     if (error.name === 'AbortError') {
@@ -134,6 +155,16 @@ async function fetchJSON<T>(url: string, options?: RequestInit & { timeout?: num
     throw error
   }
 }
+
+async function fetchJSON<T>(url: string, options?: RequestInit & { timeout?: number }): Promise<T> {
+  const { data } = await fetchJSONWithResponse<T>(url, options)
+  return data
+}
+
+/** Response header carrying the workshop's version stamp (ISO 8601). */
+const UPDATED_AT_HEADER = 'X-Workshop-Updated-At'
+/** Request header: the version the client last saw; the server 409s if the row is newer. */
+const EXPECTED_UPDATED_AT_HEADER = 'X-Workshop-Expected-Updated-At'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Workshop API
@@ -155,6 +186,16 @@ export const workshopAPI = {
   },
 
   /**
+   * Get a workshop configuration plus its version stamp (from the
+   * X-Workshop-Updated-At response header). Pass `updatedAt` back to
+   * `update()` so the server can detect edits made elsewhere.
+   */
+  async getWithMeta(id: string): Promise<{ config: WorkshopConfig; updatedAt: string | null }> {
+    const { data, response } = await fetchJSONWithResponse<WorkshopConfig>(`/workshops/${id}`)
+    return { config: data, updatedAt: response.headers.get(UPDATED_AT_HEADER) }
+  },
+
+  /**
    * Create a new workshop
    */
   async create(id: string, config: WorkshopConfig): Promise<{ id: string }> {
@@ -165,13 +206,32 @@ export const workshopAPI = {
   },
 
   /**
-   * Update an existing workshop
+   * Update an existing workshop.
+   *
+   * `expectedUpdatedAt` is the version stamp the caller last received; when
+   * given it is sent as X-Workshop-Expected-Updated-At and the server answers
+   * 409 (ApiError.status === 409) without writing if the workshop changed in
+   * the meantime. Resolves with the new stamp on success.
+   *
+   * `keepalive` lets the request outlive the page (used when flushing on
+   * unload); browsers cap keepalive bodies at ~64 KB so it is opt-in.
    */
-  async update(id: string, config: WorkshopConfig): Promise<void> {
-    await fetchJSON(`/workshops/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(config),
-    })
+  async update(
+    id: string,
+    config: WorkshopConfig,
+    expectedUpdatedAt?: string | null,
+    opts?: { keepalive?: boolean }
+  ): Promise<{ updatedAt: string | null }> {
+    const { data, response } = await fetchJSONWithResponse<{ success: boolean; updatedAt?: string | null }>(
+      `/workshops/${id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(config),
+        headers: expectedUpdatedAt ? { [EXPECTED_UPDATED_AT_HEADER]: expectedUpdatedAt } : undefined,
+        keepalive: opts?.keepalive,
+      }
+    )
+    return { updatedAt: data.updatedAt ?? response.headers.get(UPDATED_AT_HEADER) }
   },
 
   /**
@@ -202,11 +262,15 @@ export const workshopAPI = {
   /**
    * Lock or unlock a workshop
    */
-  async setLocked(id: string, locked: boolean): Promise<void> {
-    await fetchJSON(`/workshops/${id}/lock`, {
-      method: 'PATCH',
-      body: JSON.stringify({ locked }),
-    })
+  async setLocked(id: string, locked: boolean): Promise<{ updatedAt: string | null }> {
+    const data = await fetchJSON<{ success: boolean; locked: boolean; updatedAt?: string | null }>(
+      `/workshops/${id}/lock`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({ locked }),
+      }
+    )
+    return { updatedAt: data.updatedAt ?? null }
   },
 
   /**
@@ -784,6 +848,7 @@ const api = {
   // Workshop operations
   listWorkshops: workshopAPI.list,
   getWorkshop: workshopAPI.get,
+  getWorkshopWithMeta: workshopAPI.getWithMeta,
   createWorkshop: workshopAPI.create,
   updateWorkshop: workshopAPI.update,
   deleteWorkshop: workshopAPI.delete,
