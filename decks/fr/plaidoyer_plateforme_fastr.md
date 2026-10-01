@@ -52,27 +52,51 @@ footer: "FASTR · Plateforme d'analyse"
 
 # La plateforme d'analyse FASTR
 
-**Un même endroit pour rassembler, analyser et partager les données de santé d'un pays**
-
----
-
-<!-- _class: spacious -->
-
-## Le point de départ
-
-Les données de santé existent déjà. Chaque mois, les établissements les saisissent dans DHIS2. Les enquêtes auprès des formations sanitaires en produisent d'autres. Les enquêtes ménages aussi.
-
-Le problème n'est pas le manque de données. C'est qu'elles restent **dispersées, difficiles à recouper et longues à transformer en analyses**.
-
-Entre le moment où une donnée est saisie et le moment où elle éclaire une décision, il se passe souvent des semaines de travail manuel.
+**Les problèmes qu'elle résout, et comment elle les résout**
 
 ---
 
 <!-- _class: centered -->
 
-## Et si les données d'un pays vivaient — et travaillaient — au même endroit ?
+## Les données de santé existent. Elles n'arrivent pas à temps à ceux qui décident.
 
-Rassemblées, actualisées, prêtes à être analysées et partagées, sans repartir de zéro à chaque fois.
+Chaque mois, les établissements déclarent leurs activités dans DHIS2. Pourtant, entre deux enquêtes nationales, la plupart des décisions de programme se prennent sans analyse récente de ces données.
+
+---
+
+## Trois obstacles, dans tous les pays
+
+<div class="columns-3">
+<div>
+
+<div class="eyebrow">Obstacle 1</div>
+
+### Des données dispersées
+
+Les données de routine, les enquêtes auprès des formations sanitaires et les enquêtes ménages vivent dans des systèmes et des fichiers séparés. Les recouper demande des semaines.
+
+</div>
+<div>
+
+<div class="eyebrow">Obstacle 2</div>
+
+### Une qualité non traitée
+
+Rapports manquants, valeurs aberrantes, incohérences : chacun le sait, et cela sert d'argument pour ne pas utiliser les données du tout.
+
+</div>
+<div>
+
+<div class="eyebrow">Obstacle 3</div>
+
+### Une analyse artisanale
+
+Les analyses dépendent de quelques personnes et de leurs feuilles de calcul. Quand elles partent, la méthode part avec elles. Chaque trimestre, le travail recommence.
+
+</div>
+</div>
+
+<div class="callout-footer">Le résultat se voit en réunion : des chiffres contradictoires, des analyses périmées, et des décisions prises sans elles.</div>
 
 ---
 
@@ -80,33 +104,20 @@ Rassemblées, actualisées, prêtes à être analysées et partagées, sans repa
 
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# Qu'est-ce que FASTR ?
+# Ce que la plateforme change
 
 ---
 
-<!-- _class: spacious -->
-
-## Une plateforme en ligne, deux rôles
-
-FASTR est un outil en ligne. Il ne demande aucune installation : un navigateur suffit, et l'interface existe en **français, anglais et portugais**.
-
-Il réunit deux choses que l'on trouve d'habitude dans des outils séparés :
-
-- **Un dépôt central** où vivent les données de santé d'un pays
-- **Un moteur d'analyse** qui les traite automatiquement, sans écrire de code
-
-C'est cette combinaison qui distingue FASTR d'un simple entrepôt de données.
-
----
-
-## Une architecture simple : l'instance et les projets
+## Une seule source pour tout le pays
 
 <div class="columns-image-right">
 <div>
 
-L'**instance** est l'espace du pays. Elle contient une seule fois la structure sanitaire, les définitions d'indicateurs et toutes les sources de données. C'est la source de vérité partagée.
+L'**instance** du pays contient une seule fois la structure sanitaire, les indicateurs et toutes les sources : DHIS2, enquêtes auprès des formations sanitaires, enquêtes ménages.
 
-Les **projets** sont des espaces d'analyse ciblés. Chacun prend un extrait de l'instance — une période, des régions, des indicateurs — pour répondre à une question précise.
+DHIS2 est relié directement. L'importation se programme et se répète seule, chaque semaine ou chaque mois. Personne ne ressaisit.
+
+Les **projets** prennent un extrait de cette base pour répondre à une question précise. Toutes les équipes partent des mêmes chiffres.
 
 </div>
 <div>
@@ -116,117 +127,13 @@ Les **projets** sont des espaces d'analyse ciblés. Chacun prend un extrait de l
 </div>
 </div>
 
-<div class="callout-footer">Une base commune, plusieurs analyses. Tout le monde part des mêmes données.</div>
-
----
-
-<!-- _class: section-cover -->
-
-![bg](../../resources/backgrounds/section_slide.png)
-
-# Elle se connecte à vos sources de données
-
----
-
-<!-- _class: compact -->
-
-## Trois types de sources, une même plateforme
-
-<div class="columns-3">
-<div>
-
-<div class="eyebrow">Données de routine</div>
-
-### SNIS / DHIS2
-
-Les statistiques mensuelles des établissements : consultations, vaccinations, accouchements.
-
-<span class="data-pill data-pill-navy">DHIS2</span>
-
-</div>
-<div>
-
-<div class="eyebrow">Établissements</div>
-
-### Enquêtes FOSA
-
-L'évaluation des formations sanitaires : disponibilité des services, équipements, personnel.
-
-<span class="data-pill data-pill-deep-green">HFA</span>
-
-</div>
-<div>
-
-<div class="eyebrow">Équité</div>
-
-### Enquêtes ménages
-
-Les estimations de couverture par quintile de richesse, issues des enquêtes DHS et MICS.
-
-<span class="data-pill data-pill-gold">ICEH</span>
-
-</div>
-</div>
-
-<div class="callout-footer">Des sources qui se complètent : le routinier, le structurel et l'équité, côte à côte.</div>
-
----
-
-<!-- _class: spacious -->
-
-## La connexion à DHIS2, sans ressaisie
-
-FASTR se connecte directement à DHIS2. On sélectionne les indicateurs et la période, et les données arrivent dans la plateforme.
-
-Cet import peut se faire de trois façons :
-
-- **Immédiatement**, à la demande
-- **À une date planifiée**, pour un chargement unique
-- **De façon récurrente**, chaque semaine ou toutes les deux semaines
-
-Une fois la connexion enregistrée, les mises à jour ne demandent plus de manipulation. Les données restent alignées sur DHIS2.
-
----
-
-## Un dépôt central, une seule version des faits
-
-<div class="split-panel">
-<div>
-
-Les données d'un pays cessent d'être éparpillées entre des fichiers, des postes et des versions différentes.
-
-Elles sont importées une fois, au niveau de l'instance, et deviennent disponibles pour toutes les analyses.
-
-Quand une correction est faite à la source, elle profite à tout le monde, pas à une copie isolée.
-
-</div>
-<div>
-
-**Une base**
-partagée par toutes les équipes
-
-**Un historique**
-suivi dans le temps
-
-**Une référence**
-sur laquelle chacun s'appuie
-
-</div>
-</div>
-
----
-
-<!-- _class: section-cover -->
-
-![bg](../../resources/backgrounds/section_slide.png)
-
-# Pas seulement stocker — analyser
+<div class="callout-footer">Une correction faite à la source profite à toutes les analyses, pas à une copie isolée.</div>
 
 ---
 
 <!-- _class: output -->
 
-## Un moteur d'analyse intégré
+## La qualité est évaluée et corrigée avant l'analyse
 
 <div class="output-layout">
 <div class="output-viz">
@@ -236,11 +143,9 @@ sur laquelle chacun s'appuie
 </div>
 <div class="output-text">
 
-Stocker des données ne répond à aucune question. FASTR va plus loin : il **analyse**.
+Deux modules passent avant tous les autres. Le premier **évalue** la qualité de chaque indicateur, établissement par établissement : complétude, valeurs aberrantes, cohérence. Le second **ajuste** les séries pour que les tendances reflètent les services rendus, et non les retards de rapportage.
 
-Des **modules** traitent les données automatiquement — qualité, ajustement, utilisation des services, couverture. Chacun exécute des méthodes éprouvées et produit des résultats prêts à visualiser.
-
-L'utilisateur **n'écrit aucune ligne de code**. Les résultats se calculent dans un paquet de résultats ; il le rattache et travaille.
+Les résultats montrent ce qui a été corrigé et pourquoi. La qualité cesse d'être une raison de ne pas utiliser les données. Elle devient un résultat que l'on suit.
 
 </div>
 </div>
@@ -249,85 +154,38 @@ L'utilisateur **n'écrit aucune ligne de code**. Les résultats se calculent dan
 
 <!-- _class: two-panel -->
 
-## Des méthodes reconnues, intégrées à l'outil
+## La méthode est dans l'outil, pas dans une personne
 
 <div class="panel-layout">
 <div>
 
-### Ce que les modules produisent
+### Ce que les modules calculent
 
-- Évaluation de la **qualité des données**
-- **Ajustement** des données incomplètes
-- Analyse de l'**utilisation des services** et des ruptures
-- Estimation de la **couverture** et des dénominateurs
-
-</div>
-<div>
-
-### Ce qui les rend fiables
-
-- Des méthodes **standardisées**, identiques d'un pays à l'autre
-- Des versions **suivies**, pour savoir quel calcul a produit quel résultat
-- Un **recalcul automatique** dès que les données changent
-
-</div>
-</div>
-
-<div class="callout-footer">La méthode ne dépend plus de la personne qui la connaît. Elle est dans l'outil.</div>
-
----
-
-<!-- _class: centered -->
-
-## Ce qui est puissant : rien ne se fige
-
-Les analyses restent liées aux données, pas figées dans un fichier.
-
-Quand les données sont mises à jour, les résultats se recalculent et les graphiques suivent. Pas de copier-coller à refaire, pas de chiffre oublié.
-
----
-
-<!-- _class: section-cover -->
-
-![bg](../../resources/backgrounds/section_slide.png)
-
-# Voir les résultats
-
----
-
-<!-- _class: two-panel -->
-
-## Des visualisations adaptées à chaque question
-
-<div class="panel-layout">
-<div>
-
-### Quatre formes
-
-- **Graphiques** pour comparer entre catégories
-- **Séries temporelles** pour suivre une évolution
-- **Cartes** pour voir les écarts entre régions
-- **Tableaux** pour le détail chiffré exact
+- La **qualité** des données et son **ajustement**
+- L'**utilisation des services** et les **ruptures** par rapport à l'attendu
+- Les **dénominateurs** et les estimations de **couverture**
+- Les indicateurs **calculés** propres au pays
 
 </div>
 <div>
 
-### Que l'on maîtrise
+### Pourquoi les résultats sont fiables
 
-- **Filtrer** et **désagréger** par région, type d'établissement, période
-- **Personnaliser** l'apparence
-- **Exporter** en image ou en données pour un usage externe
+- Les méthodes sont **les mêmes** dans tous les pays, documentées publiquement
+- Chaque résultat porte la **version** du calcul qui l'a produit
+- Les résultats se **recalculent** à chaque mise à jour des données
+- L'utilisateur **n'écrit aucun code**
 
 </div>
 </div>
 
-<div class="callout-footer">La forme suit la question : « comment se comparent nos régions ? » n'appelle pas le même graphique que « quel est le chiffre exact ? ».</div>
+<div class="callout-footer">Une analyse faite à Dakar et une analyse faite à Lusaka reposent sur la même méthode. Elles se comparent.</div>
 
 ---
 
 <!-- _class: output -->
 
-## Une analyse, pas seulement un graphique
+## Un signal, pas un tableau de chiffres
 
 <div class="output-layout">
 <div class="output-viz">
@@ -337,9 +195,9 @@ Quand les données sont mises à jour, les résultats se recalculent et les grap
 </div>
 <div class="output-text">
 
-Chaque visualisation s'appuie sur un module. Ici, l'analyse des **perturbations de services** compare le volume observé au volume attendu, pour une dizaine d'indicateurs à la fois.
+Pour chaque indicateur, la plateforme compare le volume observé au volume attendu et signale les mois qui s'en écartent, au niveau national comme par district.
 
-Les zones colorées signalent les écarts. C'est un signal à recouper avec le terrain, pas une conclusion en soi.
+Un décideur voit en une page où les services ont décroché, depuis quand, et de combien. Le pourquoi reste une question pour le terrain. La plateforme dit où regarder.
 
 </div>
 </div>
@@ -350,78 +208,55 @@ Les zones colorées signalent les écarts. C'est un signal à recouper avec le t
 
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# Partager, à chaque public son format
+# De l'analyse à la décision
 
 ---
 
-<!-- _class: compact -->
-
-## Trois façons de partager les résultats
+## Un même jeu de données, trois formats de restitution
 
 <div class="columns-3">
 <div>
 
-<div class="eyebrow">En direct</div>
+<div class="eyebrow">Pour suivre</div>
 
 ### Tableaux de bord
 
-Plusieurs visualisations sur une page, toujours à jour. Publiables via un lien public : les partenaires les ouvrent dans un navigateur, sans compte FASTR.
+Toujours à jour, partageables par un lien, lisibles sans compte. Pour une revue mensuelle ou un comité de pilotage.
 
 </div>
 <div>
 
-<div class="eyebrow">En réunion</div>
+<div class="eyebrow">Pour présenter</div>
 
 ### Présentations
 
-Des diaporamas assemblés dans la plateforme, avec pages de titre et sections. Export vers PowerPoint ou PDF pour une présentation en personne.
+Assemblées dans la plateforme, exportées en PowerPoint ou PDF. Pour une revue trimestrielle ou une réunion de partenaires.
 
 </div>
 <div>
 
-<div class="eyebrow">À l'écrit</div>
+<div class="eyebrow">Pour documenter</div>
 
 ### Rapports
 
-Des documents narratifs mêlant texte et chiffres en direct. Export vers Word ou PDF pour une lecture complète.
+Texte et figures en direct, exportés en Word ou PDF. Pour un rapport de performance ou une note de plaidoyer.
 
 </div>
 </div>
 
-<div class="callout-footer">Un même jeu de données alimente les trois. On ne refait pas le travail à chaque format.</div>
-
----
-
-<!-- _class: output -->
-
-## Le fil rouge : des chiffres toujours à jour
-
-<div class="output-layout">
-<div class="output-viz">
-
-![Liste de rapports FASTR, chacun combinant texte et figures en direct](../../resources/screenshots/platform_fr/creating-a-report-fr.png)
-
-</div>
-<div class="output-text">
-
-Dans un tableau de bord ou un rapport, les graphiques ne sont pas des captures collées qui vieillissent.
-
-Ce sont des **figures vivantes**, reliées aux données du projet. Quand les données changent, le document reflète la nouvelle réalité.
-
-</div>
-</div>
+<div class="callout-footer">Les figures restent reliées aux données. Quand les données changent, le tableau de bord, la présentation et le rapport changent avec elles.</div>
 
 ---
 
 <!-- _class: spacious -->
 
-## Un assistant IA pour interpréter
+## Un assistant qui lit les données, sans les inventer
 
-Un assistant intégré aide à lire et interpréter les résultats. Il comprend les modules, les indicateurs et les visualisations du projet.
+L'assistant intégré répond à des questions posées en langage courant : « que montre la tendance de la CPN1 ? », « quelles régions ont la couverture la plus basse ? ».
 
-On lui pose des questions en langage courant — « que montre la tendance de la CPN1 ? », « quelles régions ont la couverture la plus basse ? » — et il répond à partir des **données réelles du projet**, pas de suppositions.
+Il répond à partir des **résultats calculés par les modules** du projet. Il ne produit aucun chiffre lui-même et il ne voit que le projet dans lequel on l'utilise.
 
-Il aide aussi à rédiger le texte des rapports, à partir d'une bibliothèque de prompts que l'équipe peut enrichir et partager.
+Il aide ensuite à rédiger : résumé d'un graphique, premier jet d'une section de rapport, que l'équipe relit et signe.
 
 ---
 
@@ -429,85 +264,67 @@ Il aide aussi à rédiger le texte des rapports, à partir d'une bibliothèque d
 
 ![bg](../../resources/backgrounds/section_slide.png)
 
-# Un outil pour les équipes
+# Ce qu'un décideur demande avant de s'engager
 
 ---
 
-## Conçu pour travailler ensemble
+<!-- _class: two-panel -->
 
-<div class="split-panel">
+## Sécurité et souveraineté des données
+
+<div class="panel-layout">
 <div>
 
-Le travail s'organise en projets, et chaque personne reçoit un rôle adapté.
+### Ce que contient la plateforme
 
-Les droits se règlent finement : consulter, éditer, administrer. Un projet terminé peut être **verrouillé** pour préserver son état tout en restant consultable.
-
-Chacun voit la même donnée, dans la langue de son choix.
+- Des **totaux agrégés** par établissement et par mois, les mêmes que dans DHIS2
+- **Aucun dossier patient** et aucune donnée nominative
 
 </div>
 <div>
 
-**Consultation**
-lire et exporter
+### Comment elle est protégée
 
-**Édition**
-créer visualisations et rapports
-
-**Administration**
-paramètres et accès
+- Une **installation isolée par pays** : application, base et stockage séparés, aucun accès entre pays
+- Des **accès par rôle** et un **journal** de chaque action
+- Des **sauvegardes** en couches et l'**export intégral** des données à tout moment
 
 </div>
 </div>
 
----
-
-<!-- _class: compact -->
-
-## De bout en bout, un seul flux
-
-<div class="results-chain">
-<div class="rc-col rc-navy">
-<div class="rc-eyebrow">Importer</div>
-<h3 class="rc-title">Rassembler</h3>
-<p class="rc-desc">Les sources arrivent dans l'instance</p>
-<span class="data-pill data-pill-navy">DHIS2 · HFA · ICEH</span>
-</div>
-<div class="rc-arrow">→</div>
-<div class="rc-col rc-deep-green">
-<div class="rc-eyebrow">Analyser</div>
-<h3 class="rc-title">Traiter</h3>
-<p class="rc-desc">Les modules calculent automatiquement</p>
-<span class="data-pill data-pill-deep-green">Qualité · Couverture</span>
-</div>
-<div class="rc-arrow">→</div>
-<div class="rc-col rc-green">
-<div class="rc-eyebrow">Visualiser</div>
-<h3 class="rc-title">Voir</h3>
-<p class="rc-desc">Graphiques, cartes, tableaux</p>
-<span class="data-pill data-pill-green">Explorer</span>
-</div>
-<div class="rc-arrow">→</div>
-<div class="rc-col rc-gold">
-<div class="rc-eyebrow">Partager</div>
-<h3 class="rc-title">Diffuser</h3>
-<p class="rc-desc">Tableaux de bord, présentations, rapports</p>
-<span class="data-pill data-pill-gold">Décider</span>
-</div>
-</div>
-
-<div class="callout-footer">Chaque étape s'enchaîne dans le même outil. La donnée ne quitte jamais la plateforme jusqu'à la décision.</div>
+<div class="callout-footer">Les données restent celles du pays. Le détail figure dans le dossier « Sécurité, coûts et appropriation ».</div>
 
 ---
 
 <!-- _class: spacious -->
 
-## Ce que cela change
+## Coût et appropriation
 
-Sans FASTR, la donnée est dispersée, retravaillée à la main et vite périmée.
+Le logiciel est **open source** : ni licence, ni frais par utilisateur. Le fonctionnement tient en trois lignes : un hébergement fixe pour le serveur du pays, l'usage de l'IA au compteur, et la maintenance partagée de la plateforme. L'ordre de grandeur est de **12 000 USD par an et par pays**, estimation de planification.
 
-Avec FASTR, elle est **rassemblée** en un lieu, **analysée** avec des méthodes reconnues, et **partagée** dans le format qui convient à chaque public.
+Les administrateurs des pays gèrent déjà eux-mêmes les utilisateurs et les importations. L'objectif proposé est un **hébergement par le ministère de la Santé d'ici 2030**, par une migration structurée qui transfère mises à jour et maintenance avec le serveur.
 
-Le pays passe d'une collection de fichiers à une ressource commune, à jour et fiable, au service de la décision.
+---
+
+<!-- _class: spacious -->
+
+## Où en est le déploiement
+
+Vingt-neuf pays partenaires du GFF disposent aujourd'hui de leur instance FASTR, en anglais, en français ou en portugais. Plusieurs d'entre eux ont commencé par le suivi de la continuité des services après des changements de financement extérieur, avant d'élargir l'usage.
+
+Les équipes pays sont formées sur leurs propres données, dans leur instance, à partir d'un programme commun : configuration, importation, analyse, restitution.
+
+---
+
+<!-- _class: spacious -->
+
+## Ce qui change pour un ministère
+
+Avant, les données de routine étaient dispersées, retravaillées à la main et vite périmées. Les décisions entre deux enquêtes se prenaient sans elles.
+
+Avec la plateforme, le ministère dispose d'une base commune, à jour, dont la qualité est connue, analysée par une méthode partagée et restituée dans le format de chaque public.
+
+Le cycle se boucle chaque trimestre : analyser, apprendre, renforcer, agir, puis vérifier dans les données du trimestre suivant que la décision a produit son effet.
 
 ---
 
@@ -515,9 +332,4 @@ Le pays passe d'une collection de fichiers à une ressource commune, à jour et 
 
 # FASTR
 
-## Des données de routine aux décisions, sans quitter la plateforme
-
-<div style="margin-top: 48px; display: flex; gap: 36px; align-items: center;">
-  <img src="../../resources/logos/FASTR_White_Horiz.png" style="height: 46px;">
-  <img src="../../resources/logos/GFF_Logo_trimmed.png" style="height: 26px;">
-</div>
+## Des données de routine aux décisions, chaque trimestre
