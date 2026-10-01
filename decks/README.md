@@ -34,6 +34,24 @@ app), then regenerate: concatenate the module's slides per `_meta.yaml` order
 into one Marp file and render with `npx @marp-team/marp-cli <combined.md> -o
 decks/<lang>/platform_security_sustainability.pdf --allow-local-files`.
 
+## Madagascar touch-base deck (Sept 2026)
+
+`fr/madagascar_point_etape_2026_09.md` (Marp → PDF) and `build_madagascar_pptx.py`
+(python-pptx → `fr/madagascar_point_etape_2026_09.pptx`) carry the same seven
+slides; edit both. The builder imports the helpers of `build_deck_pptx.py` and
+adds four layouts (agenda grid, big numbers, rates table, three-column closing).
+Facility and rate figures come from the audit workbook described in the
+FASTR team's notes for the 25 Sept 2026 call.
+
+## Coverage analysis deck (FR, Oct 2026)
+
+`fr/analyse_couverture_pas_a_pas.md` → `.pdf`: the coverage estimation
+method explained step by step for a French-speaking country team (entry
+point back-calculation, demographic cascade, chain selection against UN WPP,
+coverage and survey projection), then where each setting lives in the
+platform. Facts verified against `FASTR-Analytics/modules` m005/m006 code
+(defaults, selection rule, projection method). Marp only; no PPTX yet.
+
 ## How to edit
 
 - Each deck is a single Marp markdown file using `theme: fastr` (the shared
