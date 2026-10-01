@@ -296,7 +296,7 @@ Il aide ensuite à rédiger : résumé d'un graphique, premier jet d'une section
 
 ## Coût et appropriation
 
-Le logiciel est **open source** : ni licence, ni frais par utilisateur. Le fonctionnement tient en trois lignes : un hébergement fixe pour le serveur du pays, l'usage de l'IA au compteur, et la maintenance partagée de la plateforme. L'ordre de grandeur est de **12 000 USD par an et par pays**, estimation de planification.
+Le logiciel est **open source** : ni licence, ni frais par utilisateur. Le fonctionnement tient en trois lignes : un hébergement fixe pour le serveur du pays, l'usage de l'IA au compteur, et la maintenance partagée de la plateforme.
 
 Les administrateurs des pays gèrent déjà eux-mêmes les utilisateurs et les importations. L'objectif proposé est un **hébergement par le ministère de la Santé d'ici 2030**, par une migration structurée qui transfère mises à jour et maintenance avec le serveur.
 
