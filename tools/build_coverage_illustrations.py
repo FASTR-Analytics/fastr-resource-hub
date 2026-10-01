@@ -233,3 +233,160 @@ b += big(880, 300, '43 %', 56, DG)
 b += t(880, 350, 'Plus de la moitié des enfants restent à vacciner.', 15, MUTED)
 b += t(600, 440, 'Mêmes 4 000 enfants vaccinés. La décision à prendre n’est pas du tout la même.', 20, INK)
 svg('cov_11_couverture.svg', b, 480)
+
+
+# ───────────────────────── Part 3: what the platform does ─────────────────────────
+
+# 12. Overview: the four steps as a path
+b = ''
+stepsP3 = [('1', 'Compter à partir', 'd’un service', 'CPN1 ÷ enquête', PLUM),
+           ('2', 'Déduire les autres', 'populations', 'la cascade', DG),
+           ('3', 'Choisir la chaîne', 'la plus crédible', 'contre l’ONU', NAVY),
+           ('4', 'Calculer et', 'prolonger', 'couverture + enquête', G)]
+for i, (n, l1, l2, l3, col) in enumerate(stepsP3):
+    x = 70 + i*290
+    b += f'<circle cx="{x+110}" cy="150" r="46" fill="{col}"/>'
+    b += big(x+110, 166, n, 40, '#FFFFFF')
+    b += t(x+110, 235, l1, 18, INK, weight=600); b += t(x+110, 260, l2, 18, INK, weight=600)
+    b += t(x+110, 292, l3, 15, MUTED)
+    if i < 3: b += arrow(x+170, 150, x+230, 150)
+b += f'<rect x="90" y="340" width="520" height="40" rx="20" fill="{TINT}"/>'
+b += t(350, 366, 'Module « Dénominateurs de couverture » : étapes 1 à 3', 15, DG, weight=600)
+b += f'<rect x="700" y="340" width="420" height="40" rx="20" fill="{TINT}"/>'
+b += t(910, 366, 'Module « Estimations de couverture » : étape 4', 15, DG, weight=600)
+b += t(600, 440, 'Tout cela tourne quand on génère un paquet de résultats. Personne ne fait les calculs à la main.', 17, MUTED)
+svg('cov_12_quatre_etapes.svg', b, 470)
+
+# 13. Four entry points, four chains
+b = ''
+chains = [('CPN1', 'grossesses', PLUM, 'pregnant'), ('Accouchements', 'naissances', DG, 'person'), ('BCG', 'naissances', DG, 'person'), ('Penta1', 'nourrissons', LG, 'child')]
+for i, (svc, pop, col, kind) in enumerate(chains):
+    x = 90 + i*280
+    b += clinic(x+30, 110, 120, 90, label=svc)
+    b += arrow(x+90, 235, x+90, 275, col)
+    for k in range(4):
+        px = x + 15 + k*50
+        b += (pregnant(px, 350, col) if kind == 'pregnant' else (child(px, 350, col) if kind == 'child' else person(px, 350, 0.75, col)))
+    b += t(x+90, 385, pop, 15, INK, weight=600)
+    b += t(x+90, 410, 'puis toute la cascade', 13, MUTED)
+b += t(600, 60, 'Chaque service que l’enquête mesure peut servir de point de départ', 20, DG, weight=700)
+b += t(600, 460, 'Quatre points de départ donnent quatre chaînes complètes. Quatre réponses à la même question : combien de personnes ?', 16, MUTED)
+svg('cov_13_quatre_chaines.svg', b, 500)
+
+# 14. Choose the chain: compare to the UN estimate
+b = t(600, 50, 'Au niveau national, on compare chaque chaîne à l’estimation de l’ONU', 20, DG, weight=700)
+ref = 10000
+bars = [('ONU', 10000, GREY), ('CPN1', 11500, PLUM), ('Accouchements', 10300, DG), ('Penta1', 8700, LG)]
+base_y, scale = 330, 0.02
+for i, (lab, v, col) in enumerate(bars):
+    x = 170 + i*230; h = v*scale
+    b += f'<rect x="{x}" y="{base_y-h}" width="110" height="{h}" rx="4" fill="{col}"/>'
+    b += t(x+55, base_y+28, lab, 16, INK, weight=600)
+    b += t(x+55, base_y-h+26, f'{v:,}'.replace(',', ' '), 16, INK if col == GREY else '#FFFFFF', weight=700)
+    if i:
+        ratio = v/ref
+        b += t(x+55, base_y+54, f'{ratio:.2f} × ONU', 14, MUTED)
+b += f'<line x1="130" y1="{base_y}" x2="1070" y2="{base_y}" stroke="{DG}" stroke-width="2"/>'
+b += f'<line x1="130" y1="{base_y-ref*scale}" x2="1070" y2="{base_y-ref*scale}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="8,6"/>'
+b += f'<rect x="{170+2*230-8}" y="{base_y-10300*scale-40}" width="126" height="{10300*scale+100}" rx="10" fill="none" stroke="{DG}" stroke-width="3" stroke-dasharray="10,6"/>'
+b += t(600, 440, 'La chaîne la plus proche de l’ONU est retenue : ici les accouchements, à 1,03. Une seule chaîne pour tous les indicateurs et tous les districts.', 16, INK)
+b += t(600, 470, 'L’ONU n’est pas « la vérité » : c’est un repère indépendant pour départager les chaînes. La chaîne BCG, nationale seulement, ne participe pas au choix automatique.', 14, MUTED)
+svg('cov_14_choix_chaine.svg', b, 500)
+
+# 15. Coverage per year, per district: volume / denominator
+b = t(600, 50, 'Pour chaque indicateur, chaque année, chaque district', 20, DG, weight=700)
+years = [('2021', 4000, 9200), ('2022', 4600, 9400), ('2023', 5300, 9600)]
+for i, (yr, num, den) in enumerate(years):
+    x = 150 + i*330
+    b += f'<rect x="{x}" y="90" width="260" height="280" rx="10" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
+    b += t(x+130, 125, yr, 20, DG, weight=700)
+    b += t(x+130, 170, f'{num:,}'.replace(',', ' ') + ' vaccinés', 17, NAVY, weight=600)
+    b += t(x+130, 192, 'volume SNIS corrigé', 13, MUTED)
+    b += f'<line x1="{x+50}" y1="208" x2="{x+210}" y2="208" stroke="{DG}" stroke-width="3"/>'
+    b += t(x+130, 238, f'{den:,}'.replace(',', ' ') + ' enfants', 17, DG, weight=600)
+    b += t(x+130, 260, 'dénominateur de la chaîne', 13, MUTED)
+    b += big(x+130, 330, f'{round(100*num/den)} %', 40, DG)
+b += t(600, 420, 'Le volume est celui corrigé des valeurs aberrantes par le module d’ajustement.', 16, INK)
+b += t(600, 450, 'La couverture n’est pas plafonnée : au-dessus de 100 %, c’est le dénominateur qu’il faut regarder.', 15, MUTED)
+svg('cov_15_couverture_annees.svg', b, 480)
+
+# 16. Prolong the last survey with the HMIS trend (chart)
+b = t(600, 46, 'L’enquête donne le niveau, le SNIS donne la tendance', 20, DG, weight=700)
+x0, y0, xw, yh = 160, 360, 820, 240   # plot area: y 120..360 for 60..100%
+def X(i): return x0 + i*xw/3
+def Y(p): return y0 - (p-60)/40*yh
+for p in (60, 70, 80, 90, 100):
+    b += f'<line x1="{x0}" y1="{Y(p)}" x2="{x0+xw}" y2="{Y(p)}" stroke="#E4E7E5" stroke-width="1"/>'
+    b += t(x0-14, Y(p)+5, f'{p} %', 13, MUTED, anchor='end')
+for i, yr in enumerate(['2020', '2021', '2022', '2023']):
+    b += t(X(i), y0+26, yr, 14, MUTED)
+hmis = [78, 80, 83, 85]
+pts = ' '.join(f'{X(i)},{Y(v)}' for i, v in enumerate(hmis))
+b += f'<polyline points="{pts}" fill="none" stroke="{NAVY}" stroke-width="3"/>'
+for i, v in enumerate(hmis): b += f'<circle cx="{X(i)}" cy="{Y(v)}" r="5" fill="{NAVY}"/>'
+b += t(X(3)+16, Y(85)+20, 'SNIS 85 %', 13, NAVY, anchor='start', weight=600)
+# survey point 2021 = 82
+b += f'<rect x="{X(1)-9}" y="{Y(82)-9}" width="18" height="18" fill="{PLUM}" transform="rotate(45 {X(1)} {Y(82)})"/>'
+b += t(X(1)-16, Y(82)-16, 'Enquête 82 %', 13, PLUM, anchor='end', weight=600)
+proj = [(1, 82), (2, 85), (3, 87)]
+ppts = ' '.join(f'{X(i)},{Y(v)}' for i, v in proj)
+b += f'<polyline points="{ppts}" fill="none" stroke="{PLUM}" stroke-width="3" stroke-dasharray="9,6"/>'
+for i, v in proj[1:]: b += f'<circle cx="{X(i)}" cy="{Y(v)}" r="5" fill="#FFFFFF" stroke="{PLUM}" stroke-width="3"/>'
+b += t(X(3)+16, Y(87)+5, 'Projection 87 %', 13, PLUM, anchor='start', weight=600)
+# deltas annotations
+b += t(X(1)+ (X(2)-X(1))/2, Y(81)+40, '+3', 14, NAVY, weight=700)
+b += t(X(2)+ (X(3)-X(2))/2, Y(84)+40, '+2', 14, NAVY, weight=700)
+b += t(600, 440, 'Le SNIS monte de 3 points puis de 2. On part de l’enquête (82 %) et on ajoute les mêmes points : 85 %, puis 87 %.', 16, INK)
+b += t(600, 468, 'Quand une nouvelle enquête arrive, la projection repart de sa valeur.', 14, MUTED)
+svg('cov_16_projection.svg', b, 490)
+
+# 17. Reading the chart: three series, which to look at
+b = f'<rect x="60" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>'
+b += f'<line x1="90" y1="120" x2="170" y2="120" stroke="{NAVY}" stroke-width="4"/><circle cx="130" cy="120" r="5" fill="{NAVY}"/>'
+b += t(285, 112, 'Couverture SNIS', 18, NAVY, weight=700, anchor='middle')
+b += t(230, 160, 'chaque année, chaque district', 14, INK)
+b += t(230, 185, 'volume corrigé ÷ dénominateur', 14, MUTED)
+b += f'<rect x="430" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
+b += f'<rect x="491" y="111" width="18" height="18" fill="{PLUM}" transform="rotate(45 500 120)"/>'
+b += t(655, 112, 'Point d’enquête', 18, PLUM, weight=700)
+b += t(600, 160, 'les années où il y a une EDS ou MICS', 14, INK)
+b += t(600, 185, 'la mesure de référence', 14, MUTED)
+b += f'<rect x="800" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
+b += f'<line x1="830" y1="120" x2="910" y2="120" stroke="{PLUM}" stroke-width="4" stroke-dasharray="9,6"/>'
+b += t(1025, 112, 'Projection', 18, PLUM, weight=700)
+b += t(970, 160, 'l’enquête prolongée par le SNIS', 14, INK)
+b += t(970, 185, 'national et régions', 14, MUTED)
+b += f'<rect x="60" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
+b += t(320, 300, 'Pour voir la tendance', 18, DG, weight=700)
+b += t(320, 335, 'regardez la couverture SNIS :', 16, INK)
+b += t(320, 360, 'disponible chaque année et par district', 16, INK)
+b += f'<rect x="620" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
+b += t(880, 300, 'Pour voir le niveau', 18, DG, weight=700)
+b += t(880, 335, 'regardez la projection :', 16, INK)
+b += t(880, 360, 'calée sur la dernière enquête', 16, INK)
+b += t(600, 460, 'Si les deux séries s’écartent beaucoup, c’est le dénominateur qu’il faut questionner avant les services.', 16, MUTED)
+svg('cov_17_lire_graphique.svg', b, 490)
+
+# 18. Three screens in the platform, in order
+b = ''
+screens = [('1', 'Régler', 'Menu Résultats', 'Paramètres par défaut des modules', ['les 5 taux du pays', 'niveau : national, région, district', 'chaîne : « auto »'], DG),
+           ('2', 'Générer', 'Menu Résultats', 'Générer un nouveau paquet', ['cocher les 2 modules de couverture', 'l’ajustement qualité est requis', 'attendre « Prêt », puis épingler'], NAVY),
+           ('3', 'Lire', 'Dans le projet', 'Visualisations', ['Séries temporelles de couverture', 'national, région, district', 'Couverture (SNIS uniquement)'], G)]
+for i, (n, verb, where, title, items, col) in enumerate(screens):
+    x = 60 + i*380
+    b += f'<rect x="{x}" y="60" width="340" height="360" rx="12" fill="#FFFFFF" stroke="{col}" stroke-width="2.5"/>'
+    b += f'<rect x="{x}" y="60" width="340" height="56" rx="12" fill="{col}"/>'
+    b += f'<rect x="{x}" y="90" width="340" height="26" fill="{col}"/>'
+    b += t(x+30, 96, n, 24, '#FFFFFF', anchor='start', weight=800)
+    b += t(x+70, 96, verb, 22, '#FFFFFF', anchor='start', weight=700)
+    b += t(x+170, 150, where, 13, MUTED)
+    b += t(x+170, 178, title, 17, INK, weight=700)
+    # fake window
+    b += f'<rect x="{x+30}" y="200" width="280" height="150" rx="6" fill="#F7F8F7" stroke="#D9E0DE"/>'
+    b += f'<rect x="{x+30}" y="200" width="280" height="22" rx="6" fill="#E4E7E5"/>'
+    for k, it in enumerate(items):
+        b += f'<circle cx="{x+52}" cy="{245+k*36}" r="5" fill="{col}"/>'
+        b += t(x+66, 250+k*36, it, 13, INK, anchor='start')
+    b += t(x+170, 395, ['une fois par pays', 'à chaque mise à jour des données', 'à chaque revue'][i], 13, MUTED)
+    if i < 2: b += arrow(x+345, 240, x+375, 240)
+svg('cov_18_plateforme.svg', b, 450)

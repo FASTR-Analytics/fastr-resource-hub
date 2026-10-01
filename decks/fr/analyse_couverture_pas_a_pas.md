@@ -181,50 +181,27 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 # Troisième partie : ce que la plateforme fait, dans l'ordre
 
 ---
+<!-- _class: pic -->
 
-## Vue d'ensemble : deux modules, quatre étapes
+## Quatre étapes, deux modules, un paquet de résultats
 
-<div class="columns-3">
-<div>
-
-<div class="eyebrow">Module « Dénominateurs de couverture »</div>
-
-### Étapes 1 à 3
-
-1. Estimer une population de départ à partir d'un service et de la dernière enquête
-2. En déduire les autres populations par la cascade démographique
-3. Choisir, parmi les chaînes obtenues, celle qui colle le mieux aux projections de l'ONU
-
-</div>
-<div>
-
-<div class="eyebrow">Module « Estimations de couverture »</div>
-
-### Étape 4
-
-4. Diviser chaque volume de service par son dénominateur, puis prolonger la dernière enquête avec la tendance du SNIS
-
-</div>
-<div>
-
-<div class="eyebrow">Entrées</div>
-
-### Trois sources
-
-- Les volumes du SNIS, **après correction de la qualité**
-- Les enquêtes EDS et MICS, fournies avec la plateforme
-- Les projections de population de l'ONU (UN WPP)
-
-</div>
-</div>
+<img src="../../resources/diagrams_fr/cov_12_quatre_etapes.svg" alt="">
 
 ---
 
-## Étape 2, en détail : la cascade et ses formules
+<!-- _class: pic -->
 
-C'est le même chemin que la page précédente, avec les formules que FASTR applique à chaque étape.
+## Étape 1 : quatre services, donc quatre chaînes
 
-![w:980](../../resources/diagrams_fr/denominator_cascade_example.svg)
+<img src="../../resources/diagrams_fr/cov_13_quatre_chaines.svg" alt="">
+
+---
+
+<!-- _class: pic -->
+
+## Étape 2 : la cascade, avec les formules que FASTR applique
+
+<img src="../../resources/diagrams_fr/denominator_cascade_example.svg" alt="" style="max-height:440px">
 
 ---
 
@@ -258,152 +235,39 @@ C'est le même chemin que la page précédente, avec les formules que FASTR appl
 </div>
 
 ---
+<!-- _class: pic -->
 
-<!-- _class: two-panel -->
+## Étape 3 : garder la chaîne la plus proche de l'ONU
 
-## Quatre points de départ, donc quatre chaînes
-
-<div class="panel-layout">
-<div>
-
-### Les points de départ
-
-| Service | Population estimée d'abord |
-|---------|---------------------------|
-| CPN1 | Grossesses |
-| Accouchements | Naissances vivantes |
-| BCG | Naissances vivantes |
-| Penta1 | Nourrissons après la période néonatale |
-
-</div>
-<div>
-
-### Pourquoi plusieurs
-
-- La cascade se parcourt dans les deux sens : depuis Penta1, on remonte aux naissances vivantes, puis aux grossesses.
-- Chaque point de départ donne donc une estimation complète et indépendante de toutes les populations.
-- Quatre chaînes, c'est quatre réponses à la même question. L'étape suivante en retient une.
-
-</div>
-</div>
+<img src="../../resources/diagrams_fr/cov_14_choix_chaine.svg" alt="">
 
 ---
+<!-- _class: pic -->
 
-<!-- _class: spacious -->
+## Étape 4 : la couverture, chaque année, chaque district
 
-## Étape 3 : retenir la chaîne la plus crédible
-
-Au niveau national, chaque chaîne est comparée aux projections de l'ONU pour trois populations : grossesses, naissances vivantes, nourrissons éligibles au Penta. Pour chaque chaîne, on calcule le rapport chaîne ÷ ONU, année par année, et on prend la médiane.
-
-La chaîne dont la médiane est la plus proche de 1 est retenue. Une médiane de 1,15 signifie que la chaîne compte 15 % de personnes de plus que l'ONU.
-
-La chaîne BCG ne participe pas à ce choix automatique, car elle n'existe qu'au niveau national. Elle reste disponible en choix manuel.
-
-**Une seule chaîne est retenue**, puis appliquée à tous les indicateurs et à tous les niveaux géographiques, pour que les couvertures restent comparables entre eux.
+<img src="../../resources/diagrams_fr/cov_15_couverture_annees.svg" alt="">
 
 ---
+<!-- _class: pic -->
 
-<!-- _class: spacious -->
+## Étape 4, suite : prolonger la dernière enquête
 
-## Étape 4a : calculer la couverture
-
-Pour chaque indicateur, chaque année et chaque niveau géographique :
-
-couverture = volume de service du SNIS ÷ dénominateur de la chaîne retenue.
-
-Le volume utilisé est celui **corrigé des valeurs aberrantes** par le module d'ajustement, le réglage par défaut. Un indicateur qui n'a aucun volume n'a pas de couverture, plutôt qu'un zéro trompeur.
-
-La couverture n'est pas plafonnée. Une valeur au-dessus de 100 % est un signal : le dénominateur est trop petit, ou le numérateur compte des personnes venues d'ailleurs.
+<img src="../../resources/diagrams_fr/cov_16_projection.svg" alt="">
 
 ---
-
-## Étape 4b : prolonger la dernière enquête
-
-<div class="columns-image-right">
-<div>
-
-L'enquête reste la mesure de référence. FASTR part de sa dernière valeur et la fait évoluer comme la couverture SNIS, d'une année à l'autre.
-
-**Exemple.** Enquête 2021 : 82 %. Couverture SNIS : 80 % en 2021, 83 % en 2022, 85 % en 2023.
-
-Le SNIS gagne 3 points puis 2 points. La projection donne 85 % en 2022 et 87 % en 2023.
-
-Le niveau vient de l'enquête, la tendance du SNIS.
-
-</div>
-<div>
-
-| Année | SNIS | Enquête | Projection |
-|------:|-----:|--------:|-----------:|
-| 2021 | 80 % | 82 % | 82 % |
-| 2022 | 83 % | | 85 % |
-| 2023 | 85 % | | 87 % |
-
-</div>
-</div>
-
----
-
-<!-- _class: two-panel -->
+<!-- _class: pic -->
 
 ## Lire un graphique de couverture
 
-<div class="panel-layout">
-<div>
-
-### Trois séries sur le même graphique
-
-- **Couverture SNIS** : volumes corrigés ÷ dénominateur, chaque année
-- **Points d'enquête** : les valeurs EDS ou MICS, les années où il y en a
-- **Projection** : la dernière enquête prolongée par la tendance du SNIS
-
-</div>
-<div>
-
-### Laquelle regarder
-
-- Pour la **tendance** : la couverture SNIS, disponible chaque année et par district
-- Pour le **niveau** : la projection, calée sur l'enquête
-- Si les deux s'écartent fortement, c'est le dénominateur qu'il faut questionner avant les services
-
-</div>
-</div>
-
-<div class="callout-footer">Par district, seule la couverture SNIS existe. Les enquêtes ne descendent pas à ce niveau.</div>
+<img src="../../resources/diagrams_fr/cov_17_lire_graphique.svg" alt="">
 
 ---
+<!-- _class: pic -->
 
-## Dans la plateforme, dans l'ordre
+## Dans la plateforme : régler, générer, lire
 
-<div class="columns-3">
-<div>
-
-<div class="eyebrow">1 · Régler</div>
-
-### Paramètres par défaut des modules
-
-Menu **Résultats**. Carte **Dénominateurs de couverture** : les cinq taux et le niveau de calcul (national, région, district). Carte **Estimations de couverture** : la chaîne, « auto » par défaut.
-
-</div>
-<div>
-
-<div class="eyebrow">2 · Générer</div>
-
-### Un paquet de résultats
-
-**Générer un nouveau paquet** avec les deux modules de couverture cochés. L'ajustement de la qualité doit être inclus : il fournit les volumes corrigés.
-
-</div>
-<div>
-
-<div class="eyebrow">3 · Lire</div>
-
-### Les visualisations
-
-**Séries temporelles de couverture**, national puis par région et par district, avec les points d'enquête. **Couverture (SNIS uniquement)** pour un tableau de bord opérationnel.
-
-</div>
-</div>
+<img src="../../resources/diagrams_fr/cov_18_plateforme.svg" alt="">
 
 ---
 
