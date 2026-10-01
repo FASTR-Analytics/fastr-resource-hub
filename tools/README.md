@@ -41,6 +41,7 @@ shell (`*.sh`). Run them from the repo root.
 | Script | What it does |
 |--------|--------------|
 | `build_fastr_diagrams.py` | Generate translatable FASTR diagrams from the official GFF SVGs. |
+| `build_coverage_illustrations.py` | Generate the eleven pictogram drawings of `decks/fr/analyse_couverture_pas_a_pas.md` (`resources/diagrams_fr/cov_NN_*.svg`). Edit the script, not the SVGs. |
 | `translate.py`, `translate_docs.py` | Auto-translate methodology / docs to French. |
 
 ### Platform drift
