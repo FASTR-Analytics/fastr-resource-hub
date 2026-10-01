@@ -96,8 +96,6 @@ Les analyses dépendent de quelques personnes et de leurs feuilles de calcul. Qu
 </div>
 </div>
 
-<div class="callout-footer">Le résultat se voit en réunion : des chiffres contradictoires, des analyses périmées, et des décisions prises sans elles.</div>
-
 ---
 
 <!-- _class: section-cover -->
@@ -126,8 +124,6 @@ Les **projets** prennent un extrait de cette base pour répondre à une question
 
 </div>
 </div>
-
-<div class="callout-footer">Une correction faite à la source profite à toutes les analyses, pas à une copie isolée.</div>
 
 ---
 
