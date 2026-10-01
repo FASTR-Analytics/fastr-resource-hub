@@ -61,20 +61,20 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 <div class="columns-image-right">
 <div>
 
-La couverture d'un service, c'est la part des personnes qui en avaient besoin et qui l'ont reçu.
+Un district a vacciné 4 000 enfants cette année. Est-ce beaucoup ou peu ?
 
-Le haut de la fraction est dans DHIS2 : le nombre de femmes vues en CPN1, le nombre d'enfants vaccinés, chaque mois, par établissement.
+Pour le savoir, il faut comparer ce chiffre au nombre d'enfants qui devaient être vaccinés. S'ils étaient 5 000, la couverture est de 80 %. S'ils étaient 8 000, elle est de 50 %.
 
-Le bas de la fraction n'y est pas. Personne ne compte les grossesses d'un district. C'est ce chiffre que FASTR doit estimer.
+Le premier chiffre est dans DHIS2. Le second n'y est pas. Personne ne compte les enfants d'un district chaque année. Il faut l'**estimer**.
 
 </div>
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.4em;font-size:0.95em">
 
 <div style="font-weight:700;color:var(--fastr-deep-green)">Couverture</div>
 <div style="font-size:1.6em;color:var(--fastr-deep-green)">=</div>
-<div style="padding:0.5em 1em;background:#E8F4F3;border-radius:6px;text-align:center"><strong>Personnes ayant reçu le service</strong><br><span style="font-size:0.75em;color:#4a5a58">DHIS2, volumes après correction de la qualité</span></div>
+<div style="padding:0.5em 1em;background:#E8F4F3;border-radius:6px;text-align:center"><strong>4 000 enfants vaccinés</strong><br><span style="font-size:0.75em;color:#4a5a58">compté dans DHIS2</span></div>
 <div style="width:70%;border-top:3px solid var(--fastr-deep-green)"></div>
-<div style="padding:0.5em 1em;background:#FDE8E8;border-radius:6px;text-align:center"><strong>Personnes qui en avaient besoin</strong><br><span style="font-size:0.75em;color:#4a5a58">absent de DHIS2 : à estimer</span></div>
+<div style="padding:0.5em 1em;background:#FDE8E8;border-radius:6px;text-align:center"><strong>? enfants à vacciner</strong><br><span style="font-size:0.75em;color:#4a5a58">personne ne les compte : à estimer</span></div>
 
 </div>
 </div>
@@ -83,13 +83,68 @@ Le bas de la fraction n'y est pas. Personne ne compte les grossesses d'un distri
 
 <!-- _class: spacious -->
 
-## Pourquoi le dénominateur est le problème
+## D'où vient le chiffre que tout le monde utilise aujourd'hui
 
-Les projections de population datent du dernier recensement et vieillissent vite au niveau des districts.
+Le pays compte sa population une fois tous les dix ans environ : c'est le **recensement**.
 
-Les enquêtes ménages (EDS, MICS) mesurent la couverture avec précision, mais tous les cinq ans environ, et rarement en dessous de la région.
+Pour les années suivantes, l'institut de statistique **projette** ce chiffre : il applique un taux de croissance, puis une part estimée d'enfants de moins d'un an, de femmes enceintes, et ainsi de suite. C'est la **population cible** inscrite dans les plans et dans DHIS2.
 
-Entre deux enquêtes, un ministère a donc des volumes de services chaque mois, et aucune couverture. FASTR comble cet intervalle en combinant les trois sources : le SNIS, la dernière enquête et les projections démographiques.
+Ce chiffre est utile, mais il repose sur deux hypothèses : que la croissance est la même partout, et que personne ne déménage.
+
+---
+
+<!-- _class: two-panel -->
+
+## Pourquoi ce chiffre s'éloigne de la réalité
+
+<div class="panel-layout">
+<div>
+
+### Ce qui se passe entre deux recensements
+
+- Des familles **déménagent** vers les villes ou les zones minières ; la projection ne le voit pas
+- La croissance d'un district n'est pas celle du pays ; la projection applique le **même taux partout**
+- Plus on s'éloigne du recensement, plus l'**écart grandit**
+
+</div>
+<div>
+
+### Ce que l'on observe sur le terrain
+
+- Un district « à 130 % de couverture » : il a vacciné plus d'enfants que la projection n'en prévoyait
+- Un district voisin « à 45 % », dont les enfants sont en fait partis
+- Des cibles contestées à chaque revue, sans moyen de trancher
+
+</div>
+</div>
+
+<div class="callout-footer">Quand la couverture dépasse 100 %, ce n'est pas le service qui est faux. C'est le nombre d'enfants que l'on a mis en dessous.</div>
+
+---
+
+<!-- _class: spacious -->
+
+## L'idée de FASTR : compter à partir de ce que les services voient
+
+Les enquêtes ménages (EDS, MICS) mesurent la couverture avec précision, mais seulement tous les cinq ans environ, et rarement en dessous de la région.
+
+FASTR combine les deux. L'enquête dit **quelle part** des femmes enceintes viennent en consultation prénatale. DHIS2 dit **combien** sont venues. Avec ces deux chiffres, on retrouve le nombre total de femmes enceintes, dans chaque district, chaque année.
+
+C'est une autre façon d'estimer la population cible : non plus à partir d'un recensement vieilli, mais à partir des personnes réellement présentes dans les services.
+
+---
+
+<!-- _class: spacious -->
+
+## Le même exemple, de bout en bout
+
+Dans un district, DHIS2 compte **8 000 premières consultations prénatales** dans l'année. La dernière enquête dit que **80 %** des femmes enceintes viennent à cette consultation.
+
+Donc il y a eu environ 8 000 ÷ 0,80 = **10 000 grossesses**.
+
+Sur 10 000 grossesses, la démographie dit combien donnent une naissance vivante, puis combien d'enfants atteignent l'âge du vaccin : environ **9 200 enfants à vacciner**.
+
+Le district a vacciné 4 000 enfants. Sa couverture est donc de 4 000 ÷ 9 200 = **43 %**, et non les 80 % que donnait une projection trop basse.
 
 ---
 
@@ -140,7 +195,7 @@ Le SNIS dit combien de femmes ont eu une première consultation prénatale. La d
 
 Diviser l'un par l'autre donne le nombre de grossesses.
 
-**Exemple.** 10 000 CPN1 dans l'année, couverture CPN1 de 80 % dans l'enquête : 10 000 ÷ 0,80 = 12 500 grossesses.
+**Exemple.** 8 000 CPN1 dans l'année, couverture CPN1 de 80 % dans l'enquête : 8 000 ÷ 0,80 = 10 000 grossesses. C'est le chiffre de l'exemple du début.
 
 La valeur de l'enquête est conservée pour les années suivantes, jusqu'à la prochaine enquête. S'il y a une EDS et une MICS la même année, l'EDS est retenue.
 
@@ -156,7 +211,7 @@ La valeur de l'enquête est conservée pour les années suivantes, jusqu'à la p
 
 ## Étape 2 : en déduire les autres populations
 
-Une fois les grossesses connues, la démographie donne le reste. On retire les pertes de grossesse, on ajoute les jumeaux, on retire les mort-nés, puis les décès néonatals.
+Une fois les grossesses connues, la démographie donne le reste. On retire les pertes de grossesse, on ajoute les jumeaux, on retire les mort-nés, puis les décès néonatals. Avec les taux par défaut, 10 000 grossesses donnent environ 9 200 enfants à vacciner.
 
 ![w:980](../../resources/diagrams_fr/denominator_cascade_example.svg)
 
