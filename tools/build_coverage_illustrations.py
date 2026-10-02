@@ -607,26 +607,3 @@ for i, x in enumerate(xs):
 b += f'<rect x="150" y="415" width="900" height="40" rx="20" fill="{TINT}"/>'
 b += t(600, 441, 'Deux enquêtes la même année ? FASTR prend l’EDS (DHS) ; la MICS sert si l’EDS manque.', 14, DG, weight=600)
 svg('cov_23_regles.svg', b, 475)
-
-
-# 24. One-page recap: before vs with FASTR, and the three ideas
-def frac(x, top, top_lab, bot, bot_lab, pct, col, head):
-    o = f'<rect x="{x}" y="70" width="520" height="250" rx="12" fill="#FFFFFF" stroke="{col}" stroke-width="2"/>'
-    o += t(x+260, 102, head, 18, col, weight=700)
-    o += t(x+160, 150, top, 26, NAVY, weight=700); o += t(x+160, 172, top_lab, 12, MUTED)
-    o += f'<line x1="{x+50}" y1="188" x2="{x+270}" y2="188" stroke="{col}" stroke-width="3"/>'
-    o += t(x+160, 222, bot, 26, col, weight=700); o += t(x+160, 244, bot_lab, 12, MUTED)
-    o += t(x+320, 200, '=', 30, DG, weight=700)
-    o += big(x+420, 212, pct, 48, col)
-    return o
-b = frac(60, '4 000', 'enfants vaccinés (DHIS2)', '5 000', 'recensement projeté, le même partout', '80 %', RED, 'Avant')
-b += frac(620, '4 000', 'enfants vaccinés (DHIS2)', '9 200', 'enquête + DHIS2 + cascade, par province', '43 %', DG, 'Avec FASTR')
-b += t(600, 340, 'Mêmes vaccinés, autre chiffre du bas.', 14, MUTED)
-ideas = [('1', 'L’enquête dit la part qui vient, DHIS2 dit combien sont venus : ensemble, le total.', PLUM),
-         ('2', 'La cascade passe d’un âge à l’autre avec les taux du pays.', DG),
-         ('3', 'Quatre chaînes, une seule retenue pour tout, calée sur l’ONU. Puis la couverture, chaque année, chaque province.', NAVY)]
-for i, (n, txt, col) in enumerate(ideas):
-    y = 376 + i*42
-    b += f'<circle cx="90" cy="{y}" r="16" fill="{col}"/>'; b += t(90, y+6, n, 16, '#FFFFFF', weight=800)
-    b += t(120, y+6, txt, 15, INK, anchor='start')
-svg('cov_24_en_une_page.svg', b, 490)

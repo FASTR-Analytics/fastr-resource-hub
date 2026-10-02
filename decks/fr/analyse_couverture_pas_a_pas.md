@@ -295,14 +295,6 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 ---
 
-<!-- _class: pic -->
-
-## En une page
-
-<img src="../../resources/diagrams_fr/cov_24_en_une_page.svg" alt="">
-
----
-
 <!-- _class: bg-green -->
 
 # FASTR
