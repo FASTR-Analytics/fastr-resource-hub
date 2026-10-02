@@ -493,9 +493,7 @@ b += t(400, 340, '10 enfants qui devaient être vaccinés', 15, DG, weight=700)
 b += t(740, 225, '=', 44, DG, weight=700)
 b += big(930, 240, '80 %', 64, DG)
 b += t(930, 280, 'de couverture', 18, INK)
-b += t(930, 310, '8 sur 10 ont été vaccinés.', 15, MUTED); b += t(930, 332, 'Il en manque 2.', 15, MUTED)
-b += t(600, 410, 'C’est la question que pose chaque programme : est-ce qu’on atteint tout le monde, ou seulement une partie ?', 16, INK)
-b += t(600, 440, 'Un nombre de vaccinés tout seul n’y répond pas. Il faut le comparer à tous ceux qu’il fallait vacciner.', 15, MUTED)
+b += t(600, 410, 'Pour la calculer, il faut deux chiffres : ceux qui ont reçu le service, et tous ceux qui devaient le recevoir.', 16, INK)
 svg('cov_21_couverture_def.svg', b, 470)
 
 # 22. The two numbers: the top we have, the bottom nobody counts
