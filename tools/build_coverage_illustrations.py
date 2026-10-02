@@ -68,15 +68,20 @@ def svg(name, body, h=H):
     OUT.joinpath(name).write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {h}" {FONT}>{body}</svg>')
     print('wrote', name)
 
-# 1. 4 000 vaccinated: is it a lot?
-b = clinic(80, 230, label='Centre de santé de la province')
-b += crowd(330, 300, 10, 2, 'child', gap=44, count=20)
-b += big(540, 170, '4 000 enfants vaccinés cette année', 30, DG)
-b += t(540, 205, 'Beaucoup ? Peu ? Impossible de le dire avec ce seul chiffre.', 18, MUTED)
-b += t(600, 440, 'Pour répondre, il faut savoir combien d’enfants vivent dans la province.', 20, INK)
-b += qmark(1080, 320, 110)
-b += t(1080, 380, 'enfants dans la province', 16, MUTED)
-svg('cov_01_question.svg', b, 470)
+# 1. 4 000 vaccinated: what coverage is that? The fraction with an unknown bottom
+b = clinic(70, 120, 150, 110, label='Centre de santé de la province')
+b += arrow(235, 180, 290, 180, DG)
+b += f'<rect x="300" y="90" width="520" height="110" rx="10" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+b += big(560, 140, '4 000', 40, NAVY); b += t(560, 178, 'enfants vaccinés cette année, comptés dans DHIS2', 15, INK)
+b += f'<line x1="300" y1="225" x2="820" y2="225" stroke="{DG}" stroke-width="4"/>'
+b += f'<rect x="300" y="250" width="520" height="110" rx="10" fill="{REDBG}" stroke="{RED}" stroke-width="2" stroke-dasharray="8,5"/>'
+b += qmark(560, 325, 70)
+b += t(560, 350, 'enfants qui devaient être vaccinés dans la province', 15, INK)
+b += t(870, 235, '=', 44, DG, weight=700)
+b += qmark(1040, 255, 90, DG)
+b += t(1040, 290, 'de couverture', 18, INK)
+b += t(600, 430, 'Le chiffre du haut, on l’a. Pour le chiffre du bas, on utilise aujourd’hui une estimation. D’où vient-elle ?', 18, INK)
+svg('cov_01_question.svg', b, 460)
 
 # 2. Where the official number comes from: census then growth then share
 b = t(140, 60, 'Il y a dix ans', 18, MUTED, weight=600)

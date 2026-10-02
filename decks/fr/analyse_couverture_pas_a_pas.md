@@ -84,7 +84,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
-## 4 000 enfants vaccinés. Est-ce beaucoup ?
+## 4 000 enfants vaccinés : quelle couverture ?
 
 <img src="../../resources/diagrams_fr/cov_01_question.svg" alt="">
 
