@@ -69,13 +69,13 @@ def svg(name, body, h=H):
     print('wrote', name)
 
 # 1. 4 000 vaccinated: is it a lot?
-b = clinic(80, 230, label='Centre de santé du district')
+b = clinic(80, 230, label='Centre de santé de la province')
 b += crowd(330, 300, 10, 2, 'child', gap=44, count=20)
 b += big(540, 170, '4 000 enfants vaccinés cette année', 30, DG)
 b += t(540, 205, 'Beaucoup ? Peu ? Impossible de le dire avec ce seul chiffre.', 18, MUTED)
-b += t(600, 440, 'Pour répondre, il faut savoir combien d’enfants vivent dans le district.', 20, INK)
+b += t(600, 440, 'Pour répondre, il faut savoir combien d’enfants vivent dans la province.', 20, INK)
 b += qmark(1080, 320, 110)
-b += t(1080, 380, 'enfants dans le district', 16, MUTED)
+b += t(1080, 380, 'enfants dans la province', 16, MUTED)
 svg('cov_01_question.svg', b, 470)
 
 # 2. Where the official number comes from: census then growth then share
@@ -99,14 +99,14 @@ b += t(600, 400, 'C’est ce chiffre, la population cible, qui est inscrit dans 
 b += t(600, 435, 'Il suppose que tout le monde grandit au même rythme et que personne ne déménage.', 17, MUTED)
 svg('cov_02_recensement.svg', b, 470)
 
-# 3. People move: two districts
-b = t(300, 50, 'District A · près de la mine', 20, DG, weight=700)
+# 3. People move: two provinces
+b = t(300, 50, 'Province A · près de la mine', 20, DG, weight=700)
 b += village(120, 150, 4, 90)
 b += crowd(100, 330, 8, 1, 'child', gap=50)
 b += t(300, 370, 'Des familles sont arrivées', 16, INK)
 b += big(300, 420, '8 000 enfants', 26, DG)
 b += t(300, 455, 'la projection en attendait 5 000', 15, MUTED)
-b += t(900, 50, 'District B · zone rurale', 20, DG, weight=700)
+b += t(900, 50, 'Province B · zone rurale', 20, DG, weight=700)
 b += village(760, 150, 4, 90)
 b += crowd(800, 330, 3, 1, 'child', gap=50)
 b += crowd(950, 330, 5, 1, 'child', gap=50, fill=GREY, outline=True)
@@ -129,9 +129,9 @@ def panel(x, title, num, denom, pct, note, color):
     s += big(x+250, 290, pct, 54, color)
     s += t(x+250, 340, note, 15, MUTED)
     return s
-b = panel(60, 'District A', '4 000', '5 000', '80 %', 'Le vrai chiffre : 4 000 sur 8 000, soit 50 %', RED)
-b += panel(640, 'District B', '3 300', '5 000', '110 %', 'Plus de vaccinés que d’enfants ? Le 5 000 est faux.', RED)
-b += t(600, 450, 'Les deux districts ont vacciné correctement. Ce sont les « 5 000 » qui sont faux.', 20, INK)
+b = panel(60, 'Province A', '4 000', '5 000', '80 %', 'Le vrai chiffre : 4 000 sur 8 000, soit 50 %', RED)
+b += panel(640, 'Province B', '3 300', '5 000', '110 %', 'Plus de vaccinés que d’enfants ? Le 5 000 est faux.', RED)
+b += t(600, 450, 'Les deux provinces ont vacciné correctement. Ce sont les « 5 000 » qui sont faux.', 20, INK)
 svg('cov_04_resultat.svg', b, 480)
 
 # 5. The idea: ask the services. Clinic sees most pregnant women.
@@ -182,7 +182,7 @@ b += t(790, 300, '+', 40, DG, weight=700)
 b += f'<rect x="820" y="240" width="200" height="100" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2" stroke-dasharray="6,4"/>'
 b += big(920, 290, '2 000', 40, PLUM); b += t(920, 325, 'non vues', 15, INK)
 b += f'<rect x="300" y="365" width="600" height="72" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
-b += big(600, 411, '= 10 000 femmes enceintes dans le district', 26, DG)
+b += big(600, 411, '= 10 000 femmes enceintes dans la province', 26, DG)
 b += t(600, 478, 'Les 2 000 non vues sont déduites des 8 000 vues. Personne ne les a comptées, et pourtant on les a.', 16, MUTED)
 svg('cov_08_raisonnement.svg', b, 500)
 
@@ -193,7 +193,7 @@ b += t(600, 160, '8 000 ÷ 0,80', 26, DG, weight=700); b += t(600, 195, 'femmes 
 b += t(900, 160, '= 10 000', 26, DG, weight=700); b += t(900, 195, 'toutes les femmes enceintes', 15, MUTED)
 b += t(600, 300, 'Diviser par 0,80, c’est la même chose que multiplier par 10 et diviser par 8 :', 18, INK)
 b += t(600, 335, '8 000 × 10 ÷ 8 = 10 000', 24, DG, weight=700)
-b += t(600, 420, 'Vous n’avez pas besoin de faire ce calcul. FASTR le fait pour chaque district et chaque année.', 17, MUTED)
+b += t(600, 420, 'Vous n’avez pas besoin de faire ce calcul. FASTR le fait pour chaque province et chaque année.', 17, MUTED)
 svg('cov_09_division.svg', b, 460)
 
 # 10. From pregnancies to children to vaccinate (cascade as pictograms)
@@ -216,7 +216,7 @@ for i, (n, lab, cnt) in enumerate(steps):
         b += t(x+241, 372, what, 12, RED, weight=600)
 b += t(600, 60, 'Toutes les grossesses ne donnent pas un enfant à vacciner', 22, DG, weight=700)
 b += t(600, 95, 'À chaque étape, on en perd une part. Ces taux en rouge sont des taux démographiques : ils changent d’un pays à l’autre.', 17, MUTED)
-b += t(600, 430, 'Chaque pictogramme vaut 1 000 personnes. Le district a 9 200 enfants à vacciner, pas 5 000.', 17, INK)
+b += t(600, 430, 'Chaque pictogramme vaut 1 000 personnes. La province a 9 200 enfants à vacciner, pas 5 000.', 17, INK)
 svg('cov_10_cascade.svg', b, 470)
 
 # 10b. The five rates: defaults vs your country
@@ -245,7 +245,7 @@ b += t(320, 170, '4 000 enfants vaccinés', 18, INK)
 b += f'<line x1="170" y1="188" x2="470" y2="188" stroke="{RED}" stroke-width="3"/>'
 b += t(320, 220, '5 000 enfants « attendus »', 18, INK)
 b += big(320, 300, '80 %', 56, RED)
-b += t(320, 350, 'On croit que le district a presque fini.', 15, MUTED)
+b += t(320, 350, 'On croit que la province a presque fini.', 15, MUTED)
 b += f'<rect x="640" y="80" width="480" height="300" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
 b += t(880, 120, 'Avec le comptage FASTR', 18, DG, weight=700)
 b += t(880, 170, '4 000 enfants vaccinés', 18, INK)
@@ -324,12 +324,12 @@ for i, (lab, v, col) in enumerate(bars):
 b += f'<line x1="130" y1="{base_y}" x2="1070" y2="{base_y}" stroke="{DG}" stroke-width="2"/>'
 b += f'<line x1="130" y1="{base_y-ref*scale}" x2="1070" y2="{base_y-ref*scale}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="8,6"/>'
 b += f'<rect x="{170+2*230-8}" y="{base_y-10300*scale-40}" width="126" height="{10300*scale+100}" rx="10" fill="none" stroke="{DG}" stroke-width="3" stroke-dasharray="10,6"/>'
-b += t(600, 440, 'La chaîne la plus proche de l’ONU est retenue : ici les accouchements, à 1,03. Une seule chaîne pour tous les indicateurs et tous les districts.', 16, INK)
+b += t(600, 440, 'La chaîne la plus proche de l’ONU est retenue : ici les accouchements, à 1,03. Une seule chaîne pour tous les indicateurs et toutes les provinces.', 16, INK)
 b += t(600, 470, 'L’ONU n’est pas « la vérité » : c’est un repère indépendant pour départager les chaînes. La chaîne BCG, nationale seulement, ne participe pas au choix automatique.', 14, MUTED)
 svg('cov_14_choix_chaine.svg', b, 500)
 
-# 15. Coverage per year, per district: volume / denominator
-b = t(600, 50, 'Pour chaque indicateur, chaque année, chaque district', 20, DG, weight=700)
+# 15. Coverage per year, per province: volume / denominator
+b = t(600, 50, 'Pour chaque indicateur, chaque année, chaque province', 20, DG, weight=700)
 years = [('2021', 4000, 9200), ('2022', 4600, 9400), ('2023', 5300, 9600)]
 for i, (yr, num, den) in enumerate(years):
     x = 150 + i*330
@@ -379,7 +379,7 @@ svg('cov_16_projection.svg', b, 490)
 b = f'<rect x="60" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>'
 b += f'<line x1="90" y1="120" x2="170" y2="120" stroke="{NAVY}" stroke-width="4"/><circle cx="130" cy="120" r="5" fill="{NAVY}"/>'
 b += t(285, 112, 'Couverture SNIS', 18, NAVY, weight=700, anchor='middle')
-b += t(230, 160, 'chaque année, chaque district', 14, INK)
+b += t(230, 160, 'chaque année, chaque province', 14, INK)
 b += t(230, 185, 'volume corrigé ÷ dénominateur', 14, MUTED)
 b += f'<rect x="430" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
 b += f'<rect x="491" y="111" width="18" height="18" fill="{PLUM}" transform="rotate(45 500 120)"/>'
@@ -390,11 +390,11 @@ b += f'<rect x="800" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stro
 b += f'<line x1="830" y1="120" x2="910" y2="120" stroke="{PLUM}" stroke-width="4" stroke-dasharray="9,6"/>'
 b += t(1025, 112, 'Projection', 18, PLUM, weight=700)
 b += t(970, 160, 'l’enquête prolongée par le SNIS', 14, INK)
-b += t(970, 185, 'national et régions', 14, MUTED)
+b += t(970, 185, 'national et provinces', 14, MUTED)
 b += f'<rect x="60" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
 b += t(320, 300, 'Pour voir la tendance', 18, DG, weight=700)
 b += t(320, 335, 'regardez la couverture SNIS :', 16, INK)
-b += t(320, 360, 'disponible chaque année et par district', 16, INK)
+b += t(320, 360, 'disponible chaque année et par province', 16, INK)
 b += f'<rect x="620" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
 b += t(880, 300, 'Pour voir le niveau', 18, DG, weight=700)
 b += t(880, 335, 'regardez la projection :', 16, INK)
@@ -404,9 +404,9 @@ svg('cov_17_lire_graphique.svg', b, 490)
 
 # 18. Three screens in the platform, in order
 b = ''
-screens = [('1', 'Régler', 'Menu Résultats', 'Paramètres par défaut des modules', ['les 5 taux du pays', 'niveau : national, région, district', 'chaîne : « auto »'], DG),
+screens = [('1', 'Régler', 'Menu Résultats', 'Paramètres par défaut des modules', ['les 5 taux du pays', 'niveau : national, province', 'chaîne : « auto »'], DG),
            ('2', 'Générer', 'Menu Résultats', 'Générer un nouveau paquet', ['cocher les 2 modules de couverture', 'l’ajustement qualité est requis', 'attendre « Prêt », puis épingler'], NAVY),
-           ('3', 'Lire', 'Dans le projet', 'Visualisations', ['Séries temporelles de couverture', 'national, région, district', 'Couverture (SNIS uniquement)'], G)]
+           ('3', 'Lire', 'Dans le projet', 'Visualisations', ['Séries temporelles de couverture', 'national, province', 'Couverture (SNIS uniquement)'], G)]
 for i, (n, verb, where, title, items, col) in enumerate(screens):
     x = 60 + i*380
     b += f'<rect x="{x}" y="60" width="340" height="360" rx="12" fill="#FFFFFF" stroke="{col}" stroke-width="2.5"/>'

@@ -237,7 +237,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 
 - Ce sont des valeurs de départ, pas des valeurs du pays. Elles se remplacent par l'EDS (DHS) ou les estimations UN IGME dans **Résultats → Paramètres par défaut des modules**.
 - Un taux changé s'applique à chaque paquet de résultats généré ensuite.
-- Au niveau des régions et des districts, ce sont ces taux nationaux qui s'appliquent.
+- Au niveau des provinces, ce sont ces taux nationaux qui s'appliquent.
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 ### Interpréter avec prudence
 
 - Une couverture **au-dessus de 100 %** : dénominateur à revoir
-- Un **petit district** : quelques établissements suffisent à faire bouger la courbe
+- Une **petite province** : quelques établissements suffisent à faire bouger la courbe
 - Un **changement brusque** la même année dans tous les indicateurs : souvent un problème de rapportage, pas de service
 
 </div>
@@ -315,7 +315,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 3. Quatre chaînes sont construites ; celle qui colle le mieux aux projections de l'ONU est retenue pour tout.
 4. La couverture est le volume corrigé divisé par ce dénominateur ; la dernière enquête est prolongée par la tendance du SNIS.
 
-Le résultat se lit chaque année et par district, là où les enquêtes ne vont pas.
+Le résultat se lit chaque année et par province, là où les enquêtes ne vont pas.
 
 ---
 
@@ -323,4 +323,4 @@ Le résultat se lit chaque année et par district, là où les enquêtes ne vont
 
 # FASTR
 
-## Du volume de service à la couverture, chaque année et par district
+## Du volume de service à la couverture, chaque année et par province

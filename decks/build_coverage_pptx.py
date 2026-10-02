@@ -48,7 +48,7 @@ TEXT_SLIDES = {
         "items": [
             "Ce sont des valeurs de départ, pas des valeurs du pays. Elles se remplacent par l'EDS (DHS) ou les estimations UN IGME dans **Résultats → Paramètres par défaut des modules**.",
             "Un taux changé s'applique à chaque paquet de résultats généré ensuite.",
-            "Au niveau des régions et des districts, ce sont ces taux nationaux qui s'appliquent.",
+            "Au niveau des provinces, ce sont ces taux nationaux qui s'appliquent.",
         ]},
     "Avant de faire confiance au résultat": {"type": "two_col", "cols": [
         {"head": "Vérifier", "items": [
@@ -57,7 +57,7 @@ TEXT_SLIDES = {
             "La **chaîne retenue** et sa médiane, dans le journal de génération"]},
         {"head": "Interpréter avec prudence", "items": [
             "Une couverture **au-dessus de 100 %** : dénominateur à revoir",
-            "Un **petit district** : quelques établissements suffisent à faire bouger la courbe",
+            "Une **petite province** : quelques établissements suffisent à faire bouger la courbe",
             "Un **changement brusque** la même année dans tous les indicateurs : souvent un problème de rapportage, pas de service"]},
     ]},
     "En une page": {"type": "text", "numbered": True, "blocks": [
@@ -65,7 +65,7 @@ TEXT_SLIDES = {
         "La cascade démographique en déduit les autres populations avec cinq taux.",
         "Quatre chaînes sont construites ; celle qui colle le mieux aux projections de l'ONU est retenue pour tout.",
         "La couverture est le volume corrigé divisé par ce dénominateur ; la dernière enquête est prolongée par la tendance du SNIS.",
-    ], "tail": "Le résultat se lit chaque année et par district, là où les enquêtes ne vont pas."},
+    ], "tail": "Le résultat se lit chaque année et par province, là où les enquêtes ne vont pas."},
 }
 
 
