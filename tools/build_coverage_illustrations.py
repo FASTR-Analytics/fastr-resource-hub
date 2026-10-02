@@ -328,25 +328,25 @@ b += t(300, 478, 'En plein : le chiffre obtenu avec DHIS2 ÷ enquête. En pointi
 b += t(600, 504, 'La plateforme construit les quatre chaînes, puis en retient une seule pour tout (étape 3).', 15, INK)
 svg('cov_13_quatre_chaines.svg', b, 520)
 
-# 14. Choose the chain: compare to the UN estimate
-b = t(600, 50, 'Au niveau national, on compare chaque chaîne à l’estimation de l’ONU', 20, DG, weight=700)
-ref = 10000
-bars = [('ONU', 10000, GREY), ('CPN1', 11500, PLUM), ('Accouchements', 10300, DG), ('Penta1', 8700, LG)]
-base_y, scale = 330, 0.02
-for i, (lab, v, col) in enumerate(bars):
+# 14. Choose the chain: compare each chain to the UN estimate (national, one population, one year)
+b = t(600, 40, 'Exemple : les naissances vivantes de tout le pays, pour une année', 20, DG, weight=700)
+b += t(600, 66, 'Chaque chaîne donne son chiffre national. On le compare au chiffre de l’ONU pour la même année.', 14, MUTED)
+ref = 1000
+bars = [('ONU', 1000, GREY, 'Nations unies (WPP)'), ('Chaîne CPN1', 1150, PLUM, ''), ('Chaîne Accouchements', 1030, DG, ''), ('Chaîne Penta1', 870, LG, '')]
+base_y, scale = 330, 0.2
+for i, (lab, v, col, sub) in enumerate(bars):
     x = 170 + i*230; h = v*scale
     b += f'<rect x="{x}" y="{base_y-h}" width="110" height="{h}" rx="4" fill="{col}"/>'
-    b += t(x+55, base_y+28, lab, 16, INK, weight=600)
-    b += t(x+55, base_y-h+26, f'{v:,}'.replace(',', ' '), 16, INK if col == GREY else '#FFFFFF', weight=700)
-    if i:
-        ratio = v/ref
-        b += t(x+55, base_y+54, f'{ratio:.2f} × ONU', 14, MUTED)
+    b += t(x+55, base_y-h+26, f'{v*1000:,}'.replace(',', ' '), 16, INK if col == GREY else '#FFFFFF', weight=700)
+    b += t(x+55, base_y+28, lab, 15, INK, weight=600)
+    b += t(x+55, base_y+50, sub if sub else f'{v/ref:.2f} × le chiffre ONU', 13, MUTED)
 b += f'<line x1="130" y1="{base_y}" x2="1070" y2="{base_y}" stroke="{DG}" stroke-width="2"/>'
 b += f'<line x1="130" y1="{base_y-ref*scale}" x2="1070" y2="{base_y-ref*scale}" stroke="{MUTED}" stroke-width="1.5" stroke-dasharray="8,6"/>'
-b += f'<rect x="{170+2*230-8}" y="{base_y-10300*scale-40}" width="126" height="{10300*scale+100}" rx="10" fill="none" stroke="{DG}" stroke-width="3" stroke-dasharray="10,6"/>'
-b += t(600, 440, 'La chaîne la plus proche de l’ONU est retenue : ici les accouchements, à 1,03. Une seule chaîne pour tous les indicateurs et toutes les provinces.', 16, INK)
-b += t(600, 470, 'L’ONU n’est pas « la vérité » : c’est un repère indépendant pour départager les chaînes. La chaîne BCG, nationale seulement, ne participe pas au choix automatique.', 14, MUTED)
-svg('cov_14_choix_chaine.svg', b, 500)
+b += f'<rect x="{170+2*230-20}" y="{base_y-1030*scale-14}" width="150" height="{1030*scale+72}" rx="10" fill="none" stroke="{DG}" stroke-width="3" stroke-dasharray="10,6"/>'
+b += t(600, 420, 'La chaîne la plus proche de l’ONU est retenue : ici Accouchements, à 1,03. Une seule chaîne pour tous les indicateurs et toutes les provinces.', 15, INK)
+b += t(600, 446, 'En vrai, FASTR compare trois populations (grossesses, naissances vivantes, nourrissons) sur toutes les années, et prend la médiane.', 13, MUTED)
+b += t(600, 468, 'L’ONU n’est pas « la vérité » : c’est un repère indépendant pour départager. La chaîne BCG n’entre pas dans ce choix automatique.', 13, MUTED)
+svg('cov_14_choix_chaine.svg', b, 490)
 
 # 15. Coverage per year, per province: volume / denominator
 b = t(600, 50, 'Pour chaque indicateur, chaque année, chaque province', 20, DG, weight=700)
