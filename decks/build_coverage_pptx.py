@@ -36,10 +36,6 @@ RULE = RGBColor(0xD9, 0xDE, 0xDD)
 TMP = Path(tempfile.mkdtemp(prefix="cov_pptx_"))
 
 TEXT_SLIDES = {
-    "Étape 1 : deux règles pratiques": {"type": "text", "blocks": [
-        "**On garde la valeur de l'enquête jusqu'à la suivante.** L'enquête de 2021 dit « 8 sur 10 ». Il n'y en a pas eu depuis. Pour 2022, 2023 et 2024, FASTR continue d'utiliser « 8 sur 10 », avec le nombre de consultations de chaque année. Quand une nouvelle enquête sort, elle remplace l'ancienne.",
-        "**S'il y a deux enquêtes la même année, l'EDS (DHS) passe avant la MICS.**",
-    ]},
     "Avant de faire confiance au résultat": {"type": "two_col", "cols": [
         {"head": "Vérifier", "items": [
             "La **dernière enquête** disponible pour le pays est bien celle utilisée",

@@ -209,13 +209,11 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 ---
 
-<!-- _class: spacious -->
+<!-- _class: pic -->
 
-## Étape 1 : deux règles pratiques
+## Étape 1 : entre deux enquêtes, on garde la dernière valeur
 
-**On garde la valeur de l'enquête jusqu'à la suivante.** L'enquête de 2021 dit « 8 sur 10 ». Il n'y en a pas eu depuis. Pour 2022, 2023 et 2024, FASTR continue d'utiliser « 8 sur 10 », avec le nombre de consultations de chaque année. Quand une nouvelle enquête sort, elle remplace l'ancienne.
-
-**S'il y a deux enquêtes la même année, l'EDS (DHS) passe avant la MICS.**
+<img src="../../resources/diagrams_fr/cov_23_regles.svg" alt="">
 
 ---
 

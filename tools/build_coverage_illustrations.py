@@ -302,24 +302,31 @@ levels = ['grossesses', 'accouchements', 'naissances vivantes', 'enfants à vacc
 chains = [('CPN1', '8 000 ÷ 80 %', 0, 10000, PLUM), ('Accouchements', '6 200 ÷ 65 %', 2, 6200/0.65, DG),
           ('BCG', '8 600 ÷ 88 %', 2, 8600/0.88, DG), ('Penta1', '7 800 ÷ 85 %', 3, 7800/0.85, LG)]
 b = t(600, 36, 'Quatre services, quatre chaînes complètes et indépendantes', 20, DG, weight=700)
+entry_txt = [('8 000 consultations CPN1', '80 % des femmes enceintes y vont'), ('6 200 accouchements en établissement', '65 % des mères y accouchent'),
+             ('8 600 doses de BCG', '88 % des nouveau-nés le reçoivent'), ('7 800 doses de Penta1', '85 % des nourrissons le reçoivent')]
 for i, (svc, calc, lvl, v, col) in enumerate(chains):
     x = 50 + i*290
     vals = chain_from(lvl, v)
-    b += f'<rect x="{x}" y="60" width="260" height="44" rx="10" fill="{col}"/>'
-    b += t(x+130, 88, f'Chaîne {svc}', 17, '#FFFFFF', weight=700)
-    b += t(x+130, 128, f'DHIS2 ÷ enquête : {calc}', 13, MUTED)
+    b += f'<rect x="{x}" y="60" width="260" height="36" rx="10" fill="{col}"/>'
+    b += t(x+130, 84, f'Chaîne {svc}', 16, '#FFFFFF', weight=700)
+    d, e = entry_txt[i]
+    b += f'<rect x="{x}" y="102" width="260" height="38" rx="6" fill="#EDF1F7"/>'
+    b += t(x+8, 117, 'DHIS2 compte', 11, NAVY, anchor='start', weight=700); b += t(x+8, 133, d, 13, INK, anchor='start', weight=600)
+    b += f'<rect x="{x}" y="144" width="260" height="38" rx="6" fill="#F4ECF4"/>'
+    b += t(x+8, 159, 'L’ENQUÊTE dit', 11, PLUM, anchor='start', weight=700); b += t(x+8, 175, e, 13, INK, anchor='start', weight=600)
+    b += t(x+130, 199, f'{calc}  =', 12, MUTED)
     for k, (lab, val) in enumerate(zip(levels, vals)):
-        y = 150 + k*74
+        y = 208 + k*64
         known = (k == lvl)
-        b += f'<rect x="{x}" y="{y}" width="260" height="54" rx="8" fill="{col if known else "#FFFFFF"}" stroke="{col}" stroke-width="{2.5 if known else 1.5}" stroke-dasharray="{"none" if known else "6,4"}"/>'
-        b += big(x+130, y+26, fmt(val), 20, '#FFFFFF' if known else col)
-        b += t(x+130, y+45, lab, 12, '#FFFFFF' if known else MUTED)
+        b += f'<rect x="{x}" y="{y}" width="260" height="50" rx="8" fill="{col if known else "#FFFFFF"}" stroke="{col}" stroke-width="{2.5 if known else 1.5}" stroke-dasharray="{"none" if known else "6,4"}"/>'
+        b += big(x+130, y+24, fmt(val), 19, '#FFFFFF' if known else col)
+        b += t(x+130, y+42, lab, 12, '#FFFFFF' if known else MUTED)
         if k < 3:
-            up = k >= lvl   # below the known level we go down (×), above it we go up (÷)
-            b += (arrow(x+130, y+56, x+130, y+72, col, 2) if up else arrow(x+130, y+72, x+130, y+56, col, 2))
-    b += t(x+130, 468, 'point de départ en plein, le reste calculé', 11, MUTED) if i == 0 else ''
-b += t(600, 498, 'La plateforme construit les quatre chaînes, puis en retient une seule pour tout (étape 3).', 15, INK)
-svg('cov_13_quatre_chaines.svg', b, 515)
+            up = k >= lvl
+            b += (arrow(x+130, y+52, x+130, y+62, col, 2) if up else arrow(x+130, y+62, x+130, y+52, col, 2))
+b += t(300, 478, 'En plein : le chiffre obtenu avec DHIS2 ÷ enquête. En pointillé : le reste, calculé avec la cascade.', 12, MUTED)
+b += t(600, 504, 'La plateforme construit les quatre chaînes, puis en retient une seule pour tout (étape 3).', 15, INK)
+svg('cov_13_quatre_chaines.svg', b, 520)
 
 # 14. Choose the chain: compare to the UN estimate
 b = t(600, 50, 'Au niveau national, on compare chaque chaîne à l’estimation de l’ONU', 20, DG, weight=700)
@@ -526,3 +533,41 @@ b += t(880, 306, 'Ce chiffre, il faut l’estimer.', 17, RED, weight=700)
 b += t(600, 400, 'On appelle le chiffre du haut le numérateur, celui du bas le dénominateur.', 16, INK)
 b += t(600, 430, 'Toute cette présentation porte sur le chiffre du bas : comment FASTR l’estime, et pourquoi cela change les résultats.', 16, DG, weight=700)
 svg('cov_22_deux_chiffres.svg', b, 460)
+
+
+# 23. Rule: between two surveys, keep the last survey value; DHS before MICS
+years = ['2021', '2022', '2023', '2024', '2025']
+xs = [330 + i*190 for i in range(5)]
+b = t(600, 36, 'L’enquête ne sort pas tous les ans. Entre deux enquêtes, on garde la dernière valeur.', 18, DG, weight=700)
+rows_y = {'yr': 80, 'srv': 150, 'dhis': 270, 'pop': 360}
+for x, yr in zip(xs, years): b += t(x, rows_y['yr'], yr, 18, INK, weight=700)
+b += t(60, rows_y['srv']+6, 'Enquête', 15, PLUM, anchor='start', weight=700)
+b += t(60, rows_y['srv']+26, '« part des femmes qui viennent »', 11, MUTED, anchor='start')
+b += t(60, rows_y['dhis']+6, 'DHIS2', 15, NAVY, anchor='start', weight=700)
+b += t(60, rows_y['dhis']+26, 'consultations CPN1 comptées', 11, MUTED, anchor='start')
+b += t(60, rows_y['pop']+6, '= femmes enceintes', 15, DG, anchor='start', weight=700)
+b += t(60, rows_y['pop']+26, 'DHIS2 ÷ part de l’enquête', 11, MUTED, anchor='start')
+survey = {0: '8 sur 10', 4: '7 sur 10'}
+carried = ['8 sur 10', '8 sur 10', '8 sur 10', '8 sur 10', '7 sur 10']
+dhis = ['8 000', '8 400', '8 900', '9 300', '9 100']
+pop = ['10 000', '10 500', '11 100', '11 600', '13 000']
+y = rows_y['srv']
+for i, x in enumerate(xs):
+    if i in survey:
+        b += f'<rect x="{x-12}" y="{y-12}" width="24" height="24" fill="{PLUM}" transform="rotate(45 {x} {y})"/>'
+        b += t(x, y+40, survey[i], 15, PLUM, weight=800)
+        b += t(x, y+58, 'nouvelle enquête', 11, PLUM)
+    else:
+        b += f'<circle cx="{x}" cy="{y}" r="9" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2.5" stroke-dasharray="3,2"/>'
+        b += t(x, y+40, carried[i], 15, PLUM, weight=600)
+        b += t(x, y+58, 'pas d’enquête : on garde', 11, MUTED)
+    if i < 4: b += f'<line x1="{x+14}" y1="{y}" x2="{xs[i+1]-14}" y2="{y}" stroke="{PLUM}" stroke-width="2.5" stroke-dasharray="{"none" if i==3 else "8,5"}"/>'
+for i, x in enumerate(xs):
+    b += f'<rect x="{x-60}" y="{rows_y["dhis"]-22}" width="120" height="40" rx="8" fill="#EDF1F7" stroke="{NAVY}" stroke-width="1.5"/>'
+    b += t(x, rows_y['dhis']+5, dhis[i], 16, NAVY, weight=700)
+    b += f'<rect x="{x-60}" y="{rows_y["pop"]-22}" width="120" height="40" rx="8" fill="{TINT}" stroke="{DG}" stroke-width="1.5"/>'
+    b += t(x, rows_y['pop']+5, pop[i], 16, DG, weight=700)
+    b += arrow(x, rows_y['dhis']+20, x, rows_y['pop']-24, DG, 2)
+b += f'<rect x="150" y="415" width="900" height="40" rx="20" fill="{TINT}"/>'
+b += t(600, 441, 'Deux enquêtes la même année ? FASTR prend l’EDS (DHS) ; la MICS sert si l’EDS manque.', 14, DG, weight=600)
+svg('cov_23_regles.svg', b, 475)
