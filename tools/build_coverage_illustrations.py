@@ -82,18 +82,18 @@ svg('cov_01_question.svg', b, 470)
 b = t(140, 60, 'Il y a dix ans', 18, MUTED, weight=600)
 b += village(60, 150, 3, 80)
 b += t(165, 240, 'Le recensement compte tout le monde', 16, INK)
-b += big(165, 290, '100 000 habitants', 24, DG)
+b += big(165, 290, '93 000 habitants', 24, DG)
 b += arrow(330, 190, 420, 190)
 b += t(610, 60, 'Chaque année depuis', 18, MUTED, weight=600)
-for i, (yr, v) in enumerate([('+1 an', '103 000'), ('+2 ans', '106 000'), ('+3 ans', '109 000'), ('…', '…')]):
+for i, (yr, v) in enumerate([('+1 an', '95 800'), ('+2 ans', '98 700'), ('…', '…'), ('+10 ans', '125 000')]):
     x = 460 + i*110
     b += f'<rect x="{x}" y="120" width="92" height="150" rx="8" fill="{TINT}" stroke="{DG}" stroke-width="1.5"/>'
     b += t(x+46, 150, yr, 15, MUTED); b += t(x+46, 205, '× 1,03', 18, DG, weight=700); b += t(x+46, 245, v, 15, INK)
-b += t(610, 300, 'On fait grossir le chiffre du même pourcentage, partout', 16, INK)
+b += t(610, 300, 'On fait grossir le chiffre de 3 % par an, partout. Dix ans plus tard : 125 000.', 16, INK)
 b += arrow(900, 190, 960, 190)
 b += t(1070, 60, 'Puis on prend une part', 18, MUTED, weight=600)
 b += f'<rect x="980" y="120" width="190" height="150" rx="8" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
-b += t(1075, 155, '4 % d’enfants', 15, INK); b += t(1075, 178, 'de moins d’un an', 15, INK)
+b += t(1075, 155, '4 % de 125 000', 15, INK); b += t(1075, 178, 'ont moins d’un an', 15, INK)
 b += big(1075, 225, '5 000', 34, RED); b += t(1075, 252, 'enfants « attendus »', 14, MUTED)
 b += t(600, 400, 'C’est ce chiffre, la population cible, qui est inscrit dans DHIS2 et dans les plans.', 20, INK)
 b += t(600, 435, 'Il suppose que tout le monde grandit au même rythme et que personne ne déménage.', 17, MUTED)
@@ -170,21 +170,21 @@ b += t(600, 430, 'DHIS2 compte les femmes vues. Il ne peut pas compter celles qu
 svg('cov_07_dhis2.svg', b, 470)
 
 # 8. The reasoning: 8 seen -> 2 unseen, so 8 000 seen -> 2 000 unseen
-b = t(600, 50, 'Si 8 femmes vues vont avec 2 femmes non vues…', 22, DG, weight=700)
-b += crowd(300, 160, 8, 1, 'pregnant', gap=52)
-b += t(480, 190, '8 vues', 16, PLUM, weight=600)
-b += crowd(760, 160, 2, 1, 'pregnant', gap=52, outline=True)
-b += t(785, 190, '2 non vues', 16, MUTED, weight=600)
-b += t(600, 240, '… alors 8 000 femmes vues vont avec 2 000 femmes non vues.', 22, DG, weight=700)
-b += f'<rect x="200" y="280" width="560" height="110" rx="10" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
-b += big(480, 335, '8 000', 40, NAVY); b += t(480, 372, 'vues au centre de santé (DHIS2)', 15, INK)
-b += t(790, 345, '+', 40, DG, weight=700)
-b += f'<rect x="820" y="280" width="200" height="110" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2" stroke-dasharray="6,4"/>'
-b += big(920, 335, '2 000', 40, PLUM); b += t(920, 372, 'non vues', 15, INK)
-b += f'<rect x="300" y="420" width="600" height="80" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
-b += big(600, 470, '= 10 000 femmes enceintes dans le district', 26, DG)
-b += t(600, 535, 'Les 2 000 non vues sont déduites des 8 000 vues. Personne ne les a comptées, et pourtant on les a.', 16, MUTED)
-svg('cov_08_raisonnement.svg', b, 560)
+b = t(600, 40, 'Si 8 femmes vues vont avec 2 femmes non vues…', 22, DG, weight=700)
+b += crowd(300, 135, 8, 1, 'pregnant', gap=52)
+b += t(480, 165, '8 vues', 16, PLUM, weight=600)
+b += crowd(760, 135, 2, 1, 'pregnant', gap=52, outline=True)
+b += t(785, 165, '2 non vues', 16, MUTED, weight=600)
+b += t(600, 210, '… alors 8 000 femmes vues vont avec 2 000 femmes non vues.', 22, DG, weight=700)
+b += f'<rect x="200" y="240" width="560" height="100" rx="10" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+b += big(480, 290, '8 000', 40, NAVY); b += t(480, 325, 'vues au centre de santé (DHIS2)', 15, INK)
+b += t(790, 300, '+', 40, DG, weight=700)
+b += f'<rect x="820" y="240" width="200" height="100" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2" stroke-dasharray="6,4"/>'
+b += big(920, 290, '2 000', 40, PLUM); b += t(920, 325, 'non vues', 15, INK)
+b += f'<rect x="300" y="365" width="600" height="72" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
+b += big(600, 411, '= 10 000 femmes enceintes dans le district', 26, DG)
+b += t(600, 478, 'Les 2 000 non vues sont déduites des 8 000 vues. Personne ne les a comptées, et pourtant on les a.', 16, MUTED)
+svg('cov_08_raisonnement.svg', b, 500)
 
 # 9. Same thing written as a division
 b = f'<rect x="150" y="110" width="900" height="130" rx="10" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
