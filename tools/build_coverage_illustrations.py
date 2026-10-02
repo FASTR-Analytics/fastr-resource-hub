@@ -279,38 +279,38 @@ b += t(910, 366, 'Module « Estimations de couverture » : étape 4', 15, DG, we
 b += t(600, 440, 'Tout cela tourne quand on génère un paquet de résultats. Personne ne fait les calculs à la main.', 17, MUTED)
 svg('cov_12_quatre_etapes.svg', b, 470)
 
-# 13. Four entry points, four chains: a ladder with four rungs
-levels = [('grossesses', PLUM), ('accouchements', DG), ('naissances vivantes', DG), ('enfants à vacciner', LG)]
-ys = [110, 200, 290, 380]
-b = ''
-for (lab, col), y in zip(levels, ys):
-    b += f'<rect x="60" y="{y}" width="200" height="56" rx="10" fill="{col}"/>'
-    b += t(160, y+34, lab, 16, '#FFFFFF', weight=700)
-taux = ['− 3 % de pertes', '+ jumeaux, − 2 % de mort-nés', '− 3,9 % de décès']
-for (y1, y2), tx in zip(zip(ys, ys[1:]), taux):
-    b += arrow(100, y1+60, 100, y2-4, DG); b += arrow(170, y2-4, 170, y1+60, DG)
-    b += f'<rect x="200" y="{y1+61}" width="190" height="26" rx="13" fill="{REDBG}" stroke="{RED}" stroke-width="1.5"/>'
-    b += t(295, y1+78, tx, 12, RED, weight=700)
-b += t(100, 462, '× taux : on descend', 12, MUTED); b += t(170, 480, '÷ taux : on remonte', 12, MUTED)
-entries = [('CPN1', '8 000 consultations', '÷ 80 % viennent', '10 000', 0, PLUM),
-           ('Accouchements', '6 200 en établissement', '÷ 65 % y accouchent', '9 540', 2, DG),
-           ('BCG', '8 600 doses', '÷ 88 % vaccinés', '9 770', 2, DG),
-           ('Penta1', '7 800 doses', '÷ 85 % vaccinés', '9 180', 3, LG)]
-rows_y = [110, 245, 305, 380]
-for (svc, cnt, share, res, lvl, col), y in zip(entries, rows_y):
-    b += f'<rect x="420" y="{y}" width="720" height="50" rx="10" fill="#FFFFFF" stroke="{col}" stroke-width="2"/>'
-    b += f'<rect x="420" y="{y}" width="150" height="50" rx="10" fill="{col}"/><rect x="560" y="{y}" width="10" height="50" fill="{col}"/>'
-    b += t(495, y+31, svc, 16, '#FFFFFF', weight=700)
-    b += t(690, y+31, cnt, 15, INK, anchor='middle')
-    b += t(870, y+31, share, 15, INK, anchor='middle')
-    b += t(1070, y+31, f'= {res}', 18, col, weight=800)
-    sy = y+46 if ys[lvl]+28 > y+46 else y+25
-    b += arrow(418, sy, 266, ys[lvl]+28, col, 2.5)
-b += t(600, 50, 'Chaque service mesuré par l’enquête donne un chiffre à un étage. La cascade remplit les autres étages.', 19, DG, weight=700)
-b += t(780, 80, 'DHIS2', 12, MUTED, weight=600); b += t(870, 80, 'enquête', 12, MUTED, weight=600); b += t(1070, 80, 'population', 12, MUTED, weight=600)
-b += t(780, 462, 'Accouchements et BCG arrivent au même étage : l’enquête compte les accouchements en établissement parmi les naissances vivantes.', 13, MUTED)
-b += t(780, 488, 'Quatre points de départ, quatre chaînes complètes : quatre réponses à la question « combien de personnes ? ».', 15, INK)
-svg('cov_13_quatre_chaines.svg', b, 510)
+# 13. Four entry points = four independent, complete chains
+PL, TW, SB, NMR = 0.03, 0.015, 0.02, 0.039
+def chain_from(level, v):
+    """Fill the 4 levels (grossesses, accouchements, naissances vivantes, enfants) from one known level."""
+    g = a = nv = e = None
+    if level == 0: g = v; a = g*(1-PL); nv = a/(1-0.5*TW)*(1-SB); e = nv*(1-NMR)
+    if level == 2: nv = v; a = nv/(1-SB)*(1-0.5*TW); g = a/(1-PL); e = nv*(1-NMR)
+    if level == 3: e = v; nv = e/(1-NMR); a = nv/(1-SB)*(1-0.5*TW); g = a/(1-PL)
+    return [g, a, nv, e]
+def fmt(v): return f'{int(round(v/10)*10):,}'.replace(',', ' ')
+levels = ['grossesses', 'accouchements', 'naissances vivantes', 'enfants à vacciner']
+chains = [('CPN1', '8 000 ÷ 80 %', 0, 10000, PLUM), ('Accouchements', '6 200 ÷ 65 %', 2, 6200/0.65, DG),
+          ('BCG', '8 600 ÷ 88 %', 2, 8600/0.88, DG), ('Penta1', '7 800 ÷ 85 %', 3, 7800/0.85, LG)]
+b = t(600, 36, 'Quatre services, quatre chaînes complètes et indépendantes', 20, DG, weight=700)
+for i, (svc, calc, lvl, v, col) in enumerate(chains):
+    x = 50 + i*290
+    vals = chain_from(lvl, v)
+    b += f'<rect x="{x}" y="60" width="260" height="44" rx="10" fill="{col}"/>'
+    b += t(x+130, 88, f'Chaîne {svc}', 17, '#FFFFFF', weight=700)
+    b += t(x+130, 128, f'DHIS2 ÷ enquête : {calc}', 13, MUTED)
+    for k, (lab, val) in enumerate(zip(levels, vals)):
+        y = 150 + k*74
+        known = (k == lvl)
+        b += f'<rect x="{x}" y="{y}" width="260" height="54" rx="8" fill="{col if known else "#FFFFFF"}" stroke="{col}" stroke-width="{2.5 if known else 1.5}" stroke-dasharray="{"none" if known else "6,4"}"/>'
+        b += big(x+130, y+26, fmt(val), 20, '#FFFFFF' if known else col)
+        b += t(x+130, y+45, lab, 12, '#FFFFFF' if known else MUTED)
+        if k < 3:
+            up = k >= lvl   # below the known level we go down (×), above it we go up (÷)
+            b += (arrow(x+130, y+56, x+130, y+72, col, 2) if up else arrow(x+130, y+72, x+130, y+56, col, 2))
+    b += t(x+130, 468, 'point de départ en plein, le reste calculé', 11, MUTED) if i == 0 else ''
+b += t(600, 498, 'La plateforme construit les quatre chaînes, puis en retient une seule pour tout (étape 3).', 15, INK)
+svg('cov_13_quatre_chaines.svg', b, 515)
 
 # 14. Choose the chain: compare to the UN estimate
 b = t(600, 50, 'Au niveau national, on compare chaque chaîne à l’estimation de l’ONU', 20, DG, weight=700)
