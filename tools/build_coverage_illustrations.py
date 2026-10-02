@@ -221,7 +221,7 @@ svg('cov_10_cascade.svg', b, 470)
 
 # 10b. The five rates: defaults vs your country
 b = t(600, 48, 'FASTR est livré avec des valeurs par défaut. Elles ne sont pas celles de votre pays.', 20, DG, weight=700)
-rates = [('Perte de grossesse', '3 %', 'enquêtes, littérature'), ('Jumeaux', '1,5 %', 'EDS'), ('Mortinatalité', '20 ‰', 'ONU IGME'), ('Mortalité néonatale', '39 ‰', 'EDS, ONU IGME'), ('Mortalité post-néonatale', '28 ‰', 'EDS, ONU IGME')]
+rates = [('Perte de grossesse', '3 %', 'enquêtes, littérature'), ('Jumeaux', '1,5 %', 'EDS (DHS)'), ('Mortinatalité', '20 ‰', 'ONU IGME'), ('Mortalité néonatale', '39 ‰', 'EDS (DHS), ONU IGME'), ('Mortalité post-néonatale', '28 ‰', 'EDS (DHS), ONU IGME')]
 for i, (name, default, src) in enumerate(rates):
     x = 40 + i*228
     b += f'<rect x="{x}" y="85" width="212" height="300" rx="12" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
@@ -384,7 +384,7 @@ b += t(230, 185, 'volume corrigé ÷ dénominateur', 14, MUTED)
 b += f'<rect x="430" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
 b += f'<rect x="491" y="111" width="18" height="18" fill="{PLUM}" transform="rotate(45 500 120)"/>'
 b += t(655, 112, 'Point d’enquête', 18, PLUM, weight=700)
-b += t(600, 160, 'les années où il y a une EDS ou MICS', 14, INK)
+b += t(600, 160, 'les années où il y a une EDS (DHS) ou MICS', 14, INK)
 b += t(600, 185, 'la mesure de référence', 14, MUTED)
 b += f'<rect x="800" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
 b += f'<line x1="830" y1="120" x2="910" y2="120" stroke="{PLUM}" stroke-width="4" stroke-dasharray="9,6"/>'

@@ -176,7 +176,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 **On garde la valeur de l'enquête jusqu'à la suivante.** L'enquête de 2021 dit « 8 sur 10 ». Il n'y en a pas eu depuis. Pour 2022, 2023 et 2024, FASTR continue d'utiliser « 8 sur 10 », avec le nombre de consultations de chaque année. Quand une nouvelle enquête sort, elle remplace l'ancienne.
 
-**S'il y a deux enquêtes la même année, l'EDS passe avant la MICS.**
+**S'il y a deux enquêtes la même année, l'EDS (DHS) passe avant la MICS.**
 
 Le même raisonnement marche avec d'autres services. Avec les accouchements en établissement et la part de femmes qui accouchent en établissement, on retrouve le nombre de naissances. Avec le premier vaccin Penta et sa couverture d'enquête, on retrouve le nombre de nourrissons.
 
@@ -235,7 +235,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 
 ### Ce qu'il faut en savoir
 
-- Ce sont des valeurs de départ, pas des valeurs du pays. Elles se remplacent par l'EDS ou les estimations UN IGME dans **Résultats → Paramètres par défaut des modules**.
+- Ce sont des valeurs de départ, pas des valeurs du pays. Elles se remplacent par l'EDS (DHS) ou les estimations UN IGME dans **Résultats → Paramètres par défaut des modules**.
 - Un taux changé s'applique à chaque paquet de résultats généré ensuite.
 - Au niveau des régions et des districts, ce sont ces taux nationaux qui s'appliquent.
 
