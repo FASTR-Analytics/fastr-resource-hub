@@ -284,11 +284,14 @@ levels = [('grossesses', PLUM), ('accouchements', DG), ('naissances vivantes', D
 ys = [110, 200, 290, 380]
 b = ''
 for (lab, col), y in zip(levels, ys):
-    b += f'<rect x="60" y="{y}" width="250" height="56" rx="10" fill="{col}"/>'
-    b += t(185, y+34, lab, 17, '#FFFFFF', weight=700)
-for y1, y2 in zip(ys, ys[1:]):
-    b += arrow(150, y1+60, 150, y2-4, DG); b += arrow(220, y2-4, 220, y1+60, DG)
-b += t(150, 462, '× taux : on descend', 13, MUTED); b += t(220, 480, '÷ taux : on remonte', 13, MUTED)
+    b += f'<rect x="60" y="{y}" width="200" height="56" rx="10" fill="{col}"/>'
+    b += t(160, y+34, lab, 16, '#FFFFFF', weight=700)
+taux = ['− 3 % de pertes', '+ jumeaux, − 2 % de mort-nés', '− 3,9 % de décès']
+for (y1, y2), tx in zip(zip(ys, ys[1:]), taux):
+    b += arrow(100, y1+60, 100, y2-4, DG); b += arrow(170, y2-4, 170, y1+60, DG)
+    b += f'<rect x="200" y="{y1+61}" width="190" height="26" rx="13" fill="{REDBG}" stroke="{RED}" stroke-width="1.5"/>'
+    b += t(295, y1+78, tx, 12, RED, weight=700)
+b += t(100, 462, '× taux : on descend', 12, MUTED); b += t(170, 480, '÷ taux : on remonte', 12, MUTED)
 entries = [('CPN1', '8 000 consultations', '÷ 80 % viennent', '10 000', 0, PLUM),
            ('Accouchements', '6 200 en établissement', '÷ 65 % y accouchent', '9 540', 2, DG),
            ('BCG', '8 600 doses', '÷ 88 % vaccinés', '9 770', 2, DG),
@@ -301,7 +304,8 @@ for (svc, cnt, share, res, lvl, col), y in zip(entries, rows_y):
     b += t(690, y+31, cnt, 15, INK, anchor='middle')
     b += t(870, y+31, share, 15, INK, anchor='middle')
     b += t(1070, y+31, f'= {res}', 18, col, weight=800)
-    b += arrow(418, y+25, 316, ys[lvl]+28, col, 2.5)
+    sy = y+46 if ys[lvl]+28 > y+46 else y+25
+    b += arrow(418, sy, 266, ys[lvl]+28, col, 2.5)
 b += t(600, 50, 'Chaque service mesuré par l’enquête donne un chiffre à un étage. La cascade remplit les autres étages.', 19, DG, weight=700)
 b += t(780, 80, 'DHIS2', 12, MUTED, weight=600); b += t(870, 80, 'enquête', 12, MUTED, weight=600); b += t(1070, 80, 'population', 12, MUTED, weight=600)
 b += t(780, 462, 'Accouchements et BCG arrivent au même étage : l’enquête compte les accouchements en établissement parmi les naissances vivantes.', 13, MUTED)
