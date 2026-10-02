@@ -207,9 +207,9 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 
 <!-- _class: pic -->
 
-## Étape 2 : la cascade et ses formules
+## Étape 2 : la cascade, calcul par calcul
 
-<img src="../../resources/diagrams_fr/denominator_cascade_example.svg" alt="" style="max-height:440px">
+<img src="../../resources/diagrams_fr/cov_19_cascade_calcul.svg" alt="">
 
 ---
 

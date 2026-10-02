@@ -425,3 +425,29 @@ for i, (n, verb, where, title, items, col) in enumerate(screens):
     b += t(x+170, 395, ['une fois par pays', 'à chaque mise à jour des données', 'à chaque revue'][i], 13, MUTED)
     if i < 2: b += arrow(x+345, 240, x+375, 240)
 svg('cov_18_plateforme.svg', b, 450)
+
+
+# 19. The cascade as a worked calculation (real default rates, 10 000 pregnancies)
+b = t(600, 40, 'Avec les valeurs par défaut, pour 10 000 grossesses', 20, DG, weight=700)
+rows = [('10 000', 'grossesses', PLUM, None, None, 'point de départ : CPN1 ÷ enquête (étape 1)'),
+        ('9 700', 'accouchements', DG, '10 000 × (1 − 3 %)', '− 3 %', 'on enlève les grossesses perdues'),
+        ('9 770', 'naissances', DG, '9 700 × (1 + 0,75 %)', '+ 0,75 %', 'on ajoute les deuxièmes jumeaux (1,5 % de jumeaux)'),
+        ('9 580', 'naissances vivantes', DG, '9 770 × (1 − 2 %)', '− 2 %', 'on enlève les mort-nés (20 ‰)'),
+        ('9 200', 'enfants à vacciner (Penta)', LG, '9 580 × (1 − 3,9 %)', '− 3,9 %', 'on enlève les décès du premier mois (39 ‰)'),
+        ('8 940', 'enfants pour la rougeole', LG, '9 200 × (1 − 2,8 %)', '− 2,8 %', 'on enlève les décès de 1 à 11 mois (28 ‰)')]
+y0, rh = 70, 62
+for i, (n, lab, col, calc, rate, note) in enumerate(rows):
+    y = y0 + i*rh
+    if i: b += arrow(150, y-8, 150, y+8, col, 2.5)
+    b += f'<rect x="60" y="{y+10}" width="180" height="46" rx="8" fill="{col}"/>'
+    b += big(150, y+42, n, 24, '#FFFFFF')
+    b += t(262, y+38, lab, 16, INK, anchor='start', weight=700)
+    if calc:
+        b += f'<rect x="520" y="{y+13}" width="72" height="40" rx="20" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
+        b += t(556, y+39, rate, 14, RED, weight=800)
+        b += t(610, y+38, f'= {calc}', 15, INK, anchor='start')
+    b += t(880, y+38, note, 13, MUTED, anchor='start')
+b += f'<line x1="500" y1="{y0+rh}" x2="500" y2="{y0+6*rh}" stroke="#E4E7E5" stroke-width="1.5"/>'
+b += f'<line x1="865" y1="{y0+rh}" x2="865" y2="{y0+6*rh}" stroke="#E4E7E5" stroke-width="1.5"/>'
+b += t(600, y0+6*rh+28, 'Mêmes taux pour toutes les provinces. FASTR refait ce calcul pour chaque province et chaque année.', 15, INK)
+svg('cov_19_cascade_calcul.svg', b, y0+6*rh+50)
