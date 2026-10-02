@@ -493,7 +493,7 @@ for k in range(8): b += child(170 + k*62, 150, NAVY)
 b += t(400, 180, '8 enfants vaccinés cette année', 15, NAVY, weight=700)
 b += f'<line x1="120" y1="215" x2="680" y2="215" stroke="{DG}" stroke-width="4"/>'
 b += f'<rect x="120" y="240" width="560" height="110" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
-for k in range(10): b += child(150 + k*56, 310, DG) if k < 8 else child(150 + k*56, 310, GREY, outline=True)
+for k in range(10): b += child(150 + k*56, 310, DG)
 b += t(400, 340, '10 enfants qui devaient être vaccinés', 15, DG, weight=700)
 b += t(740, 225, '=', 44, DG, weight=700)
 b += big(930, 240, '80 %', 64, DG)
