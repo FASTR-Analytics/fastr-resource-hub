@@ -479,3 +479,43 @@ for i, (svc, kind, col, who, ask, level) in enumerate(rows):
     b += t(1020, y+61, level, 14, DG, weight=700)
 b += t(600, 492, 'Quatre services, quatre âges de la vie : c’est pour cela qu’ils peuvent chacun servir de point de départ.', 15, INK)
 svg('cov_20_pourquoi_services.svg', b, 510)
+
+
+# 21. What coverage is: a share, drawn as a fraction
+b = t(600, 40, 'La couverture, c’est la part des personnes qui ont reçu un service parmi toutes celles qui devaient le recevoir', 18, DG, weight=700)
+b += f'<rect x="120" y="80" width="560" height="110" rx="10" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+for k in range(8): b += child(170 + k*62, 150, NAVY)
+b += t(400, 180, '8 enfants vaccinés cette année', 15, NAVY, weight=700)
+b += f'<line x1="120" y1="215" x2="680" y2="215" stroke="{DG}" stroke-width="4"/>'
+b += f'<rect x="120" y="240" width="560" height="110" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
+for k in range(10): b += child(150 + k*56, 310, DG) if k < 8 else child(150 + k*56, 310, GREY, outline=True)
+b += t(400, 340, '10 enfants qui devaient être vaccinés', 15, DG, weight=700)
+b += t(740, 225, '=', 44, DG, weight=700)
+b += big(930, 240, '80 %', 64, DG)
+b += t(930, 280, 'de couverture', 18, INK)
+b += t(930, 310, '8 sur 10 ont été vaccinés.', 15, MUTED); b += t(930, 332, 'Il en manque 2.', 15, MUTED)
+b += t(600, 410, 'C’est la question que pose chaque programme : est-ce qu’on atteint tout le monde, ou seulement une partie ?', 16, INK)
+b += t(600, 440, 'Un nombre de vaccinés tout seul n’y répond pas. Il faut le comparer à tous ceux qu’il fallait vacciner.', 15, MUTED)
+svg('cov_21_couverture_def.svg', b, 470)
+
+# 22. The two numbers: the top we have, the bottom nobody counts
+b = ''
+b += f'<rect x="60" y="50" width="520" height="300" rx="12" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+b += t(320, 90, 'Le chiffre du haut', 20, NAVY, weight=700)
+b += t(320, 118, 'les enfants vaccinés', 15, INK)
+b += clinic(230, 170, 110, 70, label='')
+b += arrow(350, 205, 400, 205, NAVY)
+b += f'<rect x="410" y="175" width="130" height="60" rx="8" fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>'
+b += t(475, 200, 'DHIS2', 15, NAVY, weight=700); b += t(475, 222, 'chaque mois', 12, MUTED)
+b += t(320, 280, 'Compté un par un au centre de santé.', 15, INK, weight=600)
+b += t(320, 306, 'Ce chiffre, on l’a.', 17, NAVY, weight=700)
+b += f'<rect x="620" y="50" width="520" height="300" rx="12" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
+b += t(880, 90, 'Le chiffre du bas', 20, RED, weight=700)
+b += t(880, 118, 'tous les enfants qui devaient l’être', 15, INK)
+for k in range(10): b += child(700 + k*40, 200, RED if k < 6 else GREY, outline=(k >= 6))
+b += qmark(1070, 190, 60)
+b += t(880, 280, 'Ceux qui ne sont pas venus, personne ne les compte.', 15, INK, weight=600)
+b += t(880, 306, 'Ce chiffre, il faut l’estimer.', 17, RED, weight=700)
+b += t(600, 400, 'On appelle le chiffre du haut le numérateur, celui du bas le dénominateur.', 16, INK)
+b += t(600, 430, 'Toute cette présentation porte sur le chiffre du bas : comment FASTR l’estime, et pourquoi cela change les résultats.', 16, DG, weight=700)
+svg('cov_22_deux_chiffres.svg', b, 460)

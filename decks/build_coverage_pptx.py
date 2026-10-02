@@ -36,20 +36,10 @@ RULE = RGBColor(0xD9, 0xDE, 0xDD)
 TMP = Path(tempfile.mkdtemp(prefix="cov_pptx_"))
 
 TEXT_SLIDES = {
-    "Deux règles pratiques pour l'étape 1": {"type": "text", "blocks": [
+    "Étape 1 : deux règles pratiques": {"type": "text", "blocks": [
         "**On garde la valeur de l'enquête jusqu'à la suivante.** L'enquête de 2021 dit « 8 sur 10 ». Il n'y en a pas eu depuis. Pour 2022, 2023 et 2024, FASTR continue d'utiliser « 8 sur 10 », avec le nombre de consultations de chaque année. Quand une nouvelle enquête sort, elle remplace l'ancienne.",
         "**S'il y a deux enquêtes la même année, l'EDS (DHS) passe avant la MICS.**",
-        "Le même raisonnement marche avec d'autres services. Avec les accouchements en établissement et la part de femmes qui accouchent en établissement, on retrouve le nombre de naissances. Avec le premier vaccin Penta et sa couverture d'enquête, on retrouve le nombre de nourrissons.",
     ]},
-    "Les cinq taux de la cascade": {"type": "rates",
-        "rows": [("Perte de grossesse", "3 %"), ("Jumeaux", "1,5 %"), ("Mortinatalité", "20 ‰"),
-                 ("Mortalité néonatale", "39 ‰"), ("Mortalité postnéonatale", "28 ‰")],
-        "head": "Ce qu'il faut en savoir",
-        "items": [
-            "Ce sont des valeurs de départ, pas des valeurs du pays. Elles se remplacent par l'EDS (DHS) ou les estimations UN IGME dans **Résultats → Paramètres par défaut des modules**.",
-            "Un taux changé s'applique à chaque paquet de résultats généré ensuite.",
-            "Au niveau des provinces, ce sont ces taux nationaux qui s'appliquent.",
-        ]},
     "Avant de faire confiance au résultat": {"type": "two_col", "cols": [
         {"head": "Vérifier", "items": [
             "La **dernière enquête** disponible pour le pays est bien celle utilisée",
