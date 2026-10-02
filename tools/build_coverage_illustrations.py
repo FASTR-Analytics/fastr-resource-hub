@@ -447,31 +447,40 @@ for i, (n, verb, where, title, items, col) in enumerate(screens):
 svg('cov_18_plateforme.svg', b, 450)
 
 
-# 19. The cascade as a worked calculation (real default rates, 10 000 pregnancies)
-b = t(600, 40, 'Avec les valeurs par défaut, pour 10 000 grossesses', 20, DG, weight=700)
-rows = [('10 000', 'grossesses', PLUM, None, None, 'point de départ : CPN1 ÷ enquête (étape 1)'),
-        ('9 700', 'accouchements', DG, '10 000 × (1 − 3 %)', '− 3 %', 'on enlève les grossesses perdues'),
-        ('9 770', 'naissances', DG, '9 700 × (1 + 0,75 %)', '+ 0,75 %', 'on ajoute les deuxièmes jumeaux (1,5 % de jumeaux)'),
-        ('9 580', 'naissances vivantes', DG, '9 770 × (1 − 2 %)', '− 2 %', 'on enlève les mort-nés (20 ‰)'),
-        ('9 200', 'enfants à vacciner (Penta)', LG, '9 580 × (1 − 3,9 %)', '− 3,9 %', 'on enlève les décès du premier mois (39 ‰)'),
-        ('8 940', 'enfants pour la rougeole', LG, '9 200 × (1 − 2,8 %)', '− 2,8 %', 'on enlève les décès de 1 à 11 mois (28 ‰)')]
-y0, rh = 70, 62
-for i, (n, lab, col, calc, rate, note) in enumerate(rows):
-    y = y0 + i*rh
-    if i: b += arrow(150, y-8, 150, y+8, col, 2.5)
-    b += f'<rect x="60" y="{y+10}" width="180" height="46" rx="8" fill="{col}"/>'
-    b += big(150, y+42, n, 24, '#FFFFFF')
-    b += t(262, y+38, lab, 16, INK, anchor='start', weight=700)
-    if calc:
-        b += f'<rect x="520" y="{y+13}" width="72" height="40" rx="20" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
-        b += t(556, y+39, rate, 14, RED, weight=800)
-        b += t(610, y+38, f'= {calc}', 15, INK, anchor='start')
-    b += t(880, y+38, note, 13, MUTED, anchor='start')
-b += f'<line x1="500" y1="{y0+rh}" x2="500" y2="{y0+6*rh}" stroke="#E4E7E5" stroke-width="1.5"/>'
-b += f'<line x1="865" y1="{y0+rh}" x2="865" y2="{y0+6*rh}" stroke="#E4E7E5" stroke-width="1.5"/>'
-b += t(600, y0+6*rh+28, 'Mêmes taux pour toutes les provinces. FASTR refait ce calcul pour chaque province et chaque année.', 15, INK)
-svg('cov_19_cascade_calcul.svg', b, y0+6*rh+50)
-
+# 19. The cascade: going down (multiply) and going up (divide), on the same ladder
+PL, TW, SB, NMR = 0.03, 0.015, 0.02, 0.039
+lv = ['grossesses', 'accouchements', 'naissances', 'naissances vivantes', 'enfants à vacciner']
+pills = ['− 3 %', '+ 0,75 %', '− 2 %', '− 3,9 %']
+whats = ['grossesses perdues', 'jumeaux', 'mort-nés', 'décès du 1er mois']
+down = [10000]; down += [down[0]*(1-PL)]; down += [down[1]*(1+0.5*TW)]; down += [down[2]*(1-SB)]; down += [down[3]*(1-NMR)]
+upv = [7800/0.85]; upv = [upv[0]/(1-NMR)] + upv; upv = [upv[0]/(1-SB)] + upv; upv = [upv[0]/(1+0.5*TW)] + upv; upv = [upv[0]/(1-PL)] + upv
+ops = ['(1 − 3 %)', '(1 + 0,75 %)', '(1 − 2 %)', '(1 − 3,9 %)']
+b = t(600, 36, 'Les mêmes taux servent dans les deux sens', 20, DG, weight=700)
+b += f'<rect x="60" y="56" width="340" height="34" rx="17" fill="{PLUM}"/>'; b += t(230, 78, 'DESCENDRE : on multiplie  (chaîne CPN1)', 13, '#FFFFFF', weight=700)
+b += f'<rect x="800" y="56" width="340" height="34" rx="17" fill="{LG}"/>'; b += t(970, 78, 'REMONTER : on divise  (chaîne Penta1)', 13, '#FFFFFF', weight=700)
+y0, dy, bh = 108, 76, 42
+for k, lab in enumerate(lv):
+    y = y0 + k*dy
+    b += f'<rect x="450" y="{y}" width="300" height="{bh}" rx="8" fill="{TINT}" stroke="{DG}" stroke-width="1.5"/>'
+    b += t(600, y+27, lab, 15, DG, weight=700)
+    # left (down) and right (up) numbers at this level
+    known_l, known_r = (k == 0), (k == 4)
+    b += f'<rect x="60" y="{y}" width="110" height="{bh}" rx="8" fill="{PLUM if known_l else "#FFFFFF"}" stroke="{PLUM}" stroke-width="2"/>'
+    b += big(115, y+28, fmt(down[k]), 18, '#FFFFFF' if known_l else PLUM)
+    b += f'<rect x="1030" y="{y}" width="110" height="{bh}" rx="8" fill="{LG if known_r else "#FFFFFF"}" stroke="{LG}" stroke-width="2"/>'
+    b += big(1085, y+28, fmt(upv[k]), 18, '#FFFFFF' if known_r else LG)
+    if k < 4:
+        gy = y + bh + dy/2 - bh/2   # middle of the gap
+        b += f'<rect x="560" y="{gy-13}" width="80" height="26" rx="13" fill="{REDBG}" stroke="{RED}" stroke-width="1.5"/>'
+        b += t(600, gy+5, pills[k], 13, RED, weight=800)
+        b += t(700, gy+5, whats[k], 11, RED, anchor='start')
+        b += arrow(115, y+bh+3, 115, y+dy-3, PLUM, 2)
+        b += t(190, gy+5, f'× {ops[k]}', 14, INK, anchor='start', weight=600)
+        b += arrow(1085, y+dy-3, 1085, y+bh+3, LG, 2)
+        b += t(1020, gy+5, f'÷ {ops[k]}', 14, INK, anchor='end', weight=600)
+b += t(115, y0+5*dy+8, 'point de départ', 11, MUTED); b += t(1085, y0+5*dy+8, 'point de départ', 11, MUTED)
+b += t(600, y0+5*dy+36, 'Descendre, c’est enlever une part : on multiplie. Remonter, c’est retrouver le total : on divise par la même chose.', 15, INK)
+svg('cov_19_cascade_calcul.svg', b, y0+5*dy+56)
 
 # 20. Why these four services: who comes, so what it counts
 b = t(600, 36, 'Un service est un bon point de départ quand on sait qui vient, et que l’enquête mesure la part qui vient', 17, DG, weight=700)

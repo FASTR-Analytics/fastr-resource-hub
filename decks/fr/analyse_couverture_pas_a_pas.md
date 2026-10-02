@@ -219,7 +219,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
-## Étape 2 : la cascade, calcul par calcul
+## Étape 2 : la cascade, pour descendre ou remonter
 
 <img src="../../resources/diagrams_fr/cov_19_cascade_calcul.svg" alt="">
 
