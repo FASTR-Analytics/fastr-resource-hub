@@ -198,7 +198,7 @@ svg('cov_09_division.svg', b, 460)
 
 # 10. From pregnancies to children to vaccinate (cascade as pictograms)
 steps = [('10 000', 'grossesses', 10), ('9 700', 'accouchements', 10), ('9 580', 'naissances vivantes', 10), ('9 200', 'enfants à vacciner', 9)]
-labels = ['− 3 % de grossesses perdues', '− 2 % de mort-nés (+ jumeaux)', '− 4 % de décès avant 1 mois']
+labels = [('− 3 %', 'grossesses perdues'), ('− 2 %', 'mort-nés (+ jumeaux)'), ('− 4 %', 'décès avant 1 mois')]
 for i, (n, lab, cnt) in enumerate(steps):
     x = 60 + i*295
     col = PLUM if i == 0 else (DG if i < 3 else LG)
@@ -209,12 +209,34 @@ for i, (n, lab, cnt) in enumerate(steps):
         b = (b if i or k else '') + b_ if (i or k) else b_
     b += big(x+88, 300, n, 30, DG); b += t(x+88, 328, lab, 15, INK)
     if i < 3:
-        b += arrow(x+205, 230, x+275, 230)
-        b += t(x+240, 370, labels[i], 13, MUTED)
+        rate, what = labels[i]
+        b += f'<rect x="{x+204}" y="196" width="74" height="32" rx="16" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
+        b += t(x+241, 218, rate, 16, RED, weight=800)
+        b += arrow(x+208, 252, x+274, 252)
+        b += t(x+241, 372, what, 12, RED, weight=600)
 b += t(600, 60, 'Toutes les grossesses ne donnent pas un enfant à vacciner', 22, DG, weight=700)
-b += t(600, 95, 'La démographie dit combien on en perd à chaque étape. Ces taux sont ceux du pays.', 17, MUTED)
+b += t(600, 95, 'À chaque étape, on en perd une part. Ces taux en rouge sont des taux démographiques : ils changent d’un pays à l’autre.', 17, MUTED)
 b += t(600, 430, 'Chaque pictogramme vaut 1 000 personnes. Le district a 9 200 enfants à vacciner, pas 5 000.', 17, INK)
 svg('cov_10_cascade.svg', b, 470)
+
+# 10b. The five rates: defaults vs your country
+b = t(600, 48, 'FASTR est livré avec des valeurs par défaut. Elles ne sont pas celles de votre pays.', 20, DG, weight=700)
+rates = [('Perte de grossesse', '3 %', 'enquêtes, littérature'), ('Jumeaux', '1,5 %', 'EDS'), ('Mortinatalité', '20 ‰', 'ONU IGME'), ('Mortalité néonatale', '39 ‰', 'EDS, ONU IGME'), ('Mortalité post-néonatale', '28 ‰', 'EDS, ONU IGME')]
+for i, (name, default, src) in enumerate(rates):
+    x = 40 + i*228
+    b += f'<rect x="{x}" y="85" width="212" height="300" rx="12" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
+    b += f'<rect x="{x}" y="85" width="212" height="46" rx="12" fill="{DG}"/><rect x="{x}" y="110" width="212" height="21" fill="{DG}"/>'
+    b += t(x+106, 116, name, 14, '#FFFFFF', weight=700)
+    b += t(x+106, 162, 'valeur par défaut', 12, MUTED)
+    b += big(x+106, 206, default, 36, MUTED)
+    b += f'<line x1="{x+30}" y1="232" x2="{x+182}" y2="232" stroke="#E4E7E5" stroke-width="2"/>'
+    b += t(x+106, 262, 'votre pays', 12, RED, weight=700)
+    b += f'<rect x="{x+36}" y="276" width="140" height="48" rx="8" fill="{REDBG}" stroke="{RED}" stroke-width="2" stroke-dasharray="7,5"/>'
+    b += big(x+106, 310, '?', 34, RED)
+    b += t(x+106, 360, f'source : {src}', 12, MUTED)
+b += f'<rect x="150" y="410" width="900" height="44" rx="22" fill="{TINT}"/>'
+b += t(600, 437, 'Dans la plateforme : Résultats → Paramètres par défaut des modules. Un taux modifié s’applique au prochain paquet de résultats.', 15, DG, weight=600)
+svg('cov_10b_taux_pays.svg', b, 480)
 
 # 11. Coverage: 4 000 / 9 200 = 43 %
 b = f'<rect x="80" y="80" width="480" height="300" rx="10" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
@@ -257,20 +279,32 @@ b += t(910, 366, 'Module « Estimations de couverture » : étape 4', 15, DG, we
 b += t(600, 440, 'Tout cela tourne quand on génère un paquet de résultats. Personne ne fait les calculs à la main.', 17, MUTED)
 svg('cov_12_quatre_etapes.svg', b, 470)
 
-# 13. Four entry points, four chains
+# 13. Four entry points, four chains: a ladder with four rungs
+levels = [('grossesses', PLUM), ('accouchements', DG), ('naissances vivantes', DG), ('enfants à vacciner', LG)]
+ys = [110, 200, 290, 380]
 b = ''
-chains = [('CPN1', 'grossesses', PLUM, 'pregnant'), ('Accouchements', 'naissances', DG, 'person'), ('BCG', 'naissances', DG, 'person'), ('Penta1', 'nourrissons', LG, 'child')]
-for i, (svc, pop, col, kind) in enumerate(chains):
-    x = 90 + i*280
-    b += clinic(x+30, 110, 120, 90, label=svc)
-    b += arrow(x+90, 235, x+90, 275, col)
-    for k in range(4):
-        px = x + 15 + k*50
-        b += (pregnant(px, 350, col) if kind == 'pregnant' else (child(px, 350, col) if kind == 'child' else person(px, 350, 0.75, col)))
-    b += t(x+90, 385, pop, 15, INK, weight=600)
-    b += t(x+90, 410, 'puis toute la cascade', 13, MUTED)
-b += t(600, 60, 'Chaque service que l’enquête mesure peut servir de point de départ', 20, DG, weight=700)
-b += t(600, 460, 'Quatre points de départ donnent quatre chaînes complètes. Quatre réponses à la même question : combien de personnes ?', 16, MUTED)
+for (lab, col), y in zip(levels, ys):
+    b += f'<rect x="60" y="{y}" width="250" height="56" rx="10" fill="{col}"/>'
+    b += t(185, y+34, lab, 17, '#FFFFFF', weight=700)
+for y1, y2 in zip(ys, ys[1:]):
+    b += arrow(150, y1+60, 150, y2-4, DG); b += arrow(220, y2-4, 220, y1+60, DG)
+b += t(150, 462, '× taux : on descend', 13, MUTED); b += t(220, 480, '÷ taux : on remonte', 13, MUTED)
+entries = [('CPN1', '8 000 consultations', '÷ 80 % viennent', '10 000', 0, PLUM),
+           ('Accouchements', '6 200 en établissement', '÷ 65 % y accouchent', '9 540', 2, DG),
+           ('BCG', '8 600 doses', '÷ 88 % vaccinés', '9 770', 2, DG),
+           ('Penta1', '7 800 doses', '÷ 85 % vaccinés', '9 180', 3, LG)]
+rows_y = [110, 245, 305, 380]
+for (svc, cnt, share, res, lvl, col), y in zip(entries, rows_y):
+    b += f'<rect x="420" y="{y}" width="720" height="50" rx="10" fill="#FFFFFF" stroke="{col}" stroke-width="2"/>'
+    b += f'<rect x="420" y="{y}" width="150" height="50" rx="10" fill="{col}"/><rect x="560" y="{y}" width="10" height="50" fill="{col}"/>'
+    b += t(495, y+31, svc, 16, '#FFFFFF', weight=700)
+    b += t(690, y+31, cnt, 15, INK, anchor='middle')
+    b += t(870, y+31, share, 15, INK, anchor='middle')
+    b += t(1070, y+31, f'= {res}', 18, col, weight=800)
+    b += arrow(418, y+25, 316, ys[lvl]+28, col, 2.5)
+b += t(600, 50, 'Chaque service mesuré par l’enquête donne un chiffre à un étage. La cascade remplit les autres étages.', 19, DG, weight=700)
+b += t(780, 80, 'DHIS2', 12, MUTED, weight=600); b += t(870, 80, 'enquête', 12, MUTED, weight=600); b += t(1070, 80, 'population', 12, MUTED, weight=600)
+b += t(780, 475, 'Quatre points de départ, quatre chaînes complètes : quatre réponses à la question « combien de personnes ? ».', 15, INK)
 svg('cov_13_quatre_chaines.svg', b, 500)
 
 # 14. Choose the chain: compare to the UN estimate

@@ -156,6 +156,14 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
+## Ces cinq taux sont à régler pour votre pays
+
+<img src="../../resources/diagrams_fr/cov_10b_taux_pays.svg" alt="">
+
+---
+
+<!-- _class: pic -->
+
 ## La couverture, enfin : 43 %, pas 80 %
 
 <img src="../../resources/diagrams_fr/cov_11_couverture.svg" alt="">
