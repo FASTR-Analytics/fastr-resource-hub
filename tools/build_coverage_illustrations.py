@@ -107,37 +107,50 @@ svg('cov_02_recensement.svg', b, 470)
 # 3. People move: two provinces
 b = t(300, 50, 'Province A · près de la mine', 20, DG, weight=700)
 b += village(120, 150, 4, 90)
-b += crowd(100, 330, 8, 1, 'child', gap=50)
+b += crowd(80, 330, 9, 1, 'child', gap=50)
 b += t(300, 370, 'Des familles sont arrivées', 16, INK)
-b += big(300, 420, '8 000 enfants', 26, DG)
-b += t(300, 455, 'la projection en attendait 5 000', 15, MUTED)
+b += big(300, 420, '9 200 enfants en réalité', 26, DG)
+b += t(300, 455, 'la projection du recensement en attendait 5 000', 15, MUTED)
 b += t(900, 50, 'Province B · zone rurale', 20, DG, weight=700)
 b += village(760, 150, 4, 90)
-b += crowd(800, 330, 3, 1, 'child', gap=50)
-b += crowd(950, 330, 5, 1, 'child', gap=50, fill=GREY, outline=True)
+b += crowd(850, 330, 3, 1, 'child', gap=50)
 b += t(900, 370, 'Des familles sont parties', 16, INK)
-b += big(900, 420, '3 000 enfants', 26, DG)
-b += t(900, 455, 'la projection en attendait 5 000', 15, MUTED)
+b += big(900, 420, '3 000 enfants en réalité', 26, DG)
+b += t(900, 455, 'la projection du recensement en attendait 5 000', 15, MUTED)
 # moving family arrow
 b += arrow(690, 250, 560, 250, G, 4)
 b += person(640, 300, 0.7, G); b += child(665, 300, G)
 b += t(625, 320, 'déménagement', 13, MUTED)
 svg('cov_03_deplacements.svg', b, 480)
 
-# 4. Result: coverages that mean nothing
-def panel(x, title, num, denom, pct, note, color):
-    s = f'<rect x="{x}" y="70" width="500" height="330" rx="10" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
-    s += t(x+250, 110, title, 20, DG, weight=700)
-    s += t(x+250, 160, f'{num} enfants vaccinés', 18, INK)
-    s += f'<line x1="{x+120}" y1="178" x2="{x+380}" y2="178" stroke="{DG}" stroke-width="3"/>'
-    s += t(x+250, 210, f'{denom} enfants « attendus »', 18, INK)
-    s += big(x+250, 290, pct, 54, color)
-    s += t(x+250, 340, note, 15, MUTED)
+# 4. Result: the projected 5 000 is used as the bottom number in both provinces
+b = f'<rect x="60" y="30" width="1080" height="54" rx="10" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
+b += t(600, 64, 'Le chiffre du bas vient de la projection du recensement : 5 000 enfants, le même chiffre dans les deux provinces', 17, RED, weight=700)
+def panel(x, title, num, real, pct_off, pct_real, verdict_off, verdict_real):
+    s = f'<rect x="{x}" y="105" width="520" height="300" rx="10" fill="#FFFFFF" stroke="{DG}" stroke-width="2"/>'
+    s += t(x+260, 140, title, 20, DG, weight=700)
+    # official
+    s += t(x+130, 175, 'ce que dit le tableau de bord', 12, MUTED)
+    s += t(x+130, 205, f'{num} vaccinés', 16, INK)
+    s += f'<line x1="{x+40}" y1="218" x2="{x+220}" y2="218" stroke="{RED}" stroke-width="3"/>'
+    s += t(x+130, 242, '5 000 « attendus »', 16, RED, weight=700)
+    s += t(x+130, 262, 'projection du recensement', 11, RED)
+    s += big(x+130, 320, pct_off, 44, RED)
+    s += t(x+130, 352, verdict_off, 13, MUTED)
+    s += f'<line x1="{x+260}" y1="170" x2="{x+260}" y2="370" stroke="#E4E7E5" stroke-width="2"/>'
+    # real
+    s += t(x+390, 175, 'avec le vrai nombre d’enfants', 12, MUTED)
+    s += t(x+390, 205, f'{num} vaccinés', 16, INK)
+    s += f'<line x1="{x+300}" y1="218" x2="{x+480}" y2="218" stroke="{DG}" stroke-width="3"/>'
+    s += t(x+390, 242, f'{real} enfants', 16, DG, weight=700)
+    s += t(x+390, 262, 'qui vivent vraiment là', 11, DG)
+    s += big(x+390, 320, pct_real, 44, DG)
+    s += t(x+390, 352, verdict_real, 13, MUTED)
     return s
-b = panel(60, 'Province A', '4 000', '5 000', '80 %', 'Le vrai chiffre : 4 000 sur 8 000, soit 50 %', RED)
-b += panel(640, 'Province B', '3 300', '5 000', '110 %', 'Plus de vaccinés que d’enfants ? Le 5 000 est faux.', RED)
-b += t(600, 450, 'Les deux provinces ont vacciné correctement. Ce sont les « 5 000 » qui sont faux.', 20, INK)
-svg('cov_04_resultat.svg', b, 480)
+b += panel(60, 'Province A', '4 000', '9 200', '80 %', '43 %', 'on croit avoir presque fini', 'plus de la moitié restent à vacciner')
+b += panel(620, 'Province B', '2 700', '3 000', '54 %', '90 %', 'on croit être très en retard', 'presque tout le monde est vacciné')
+b += t(600, 445, 'Les vaccinations sont bien comptées. C’est le 5 000 qui est faux, et il trompe dans les deux sens.', 18, INK, weight=600)
+svg('cov_04_resultat.svg', b, 470)
 
 # 5. The idea: ask the services. Clinic sees most pregnant women.
 b = clinic(100, 220, 180, 130, label='Centre de santé')
@@ -515,7 +528,7 @@ b += t(320, 306, 'Ce chiffre, on l’a.', 17, NAVY, weight=700)
 b += f'<rect x="620" y="50" width="520" height="300" rx="12" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
 b += t(880, 90, 'Le chiffre du bas', 20, RED, weight=700)
 b += t(880, 118, 'tous les enfants qui devaient l’être', 15, INK)
-for k in range(10): b += child(700 + k*40, 200, RED if k < 6 else GREY, outline=(k >= 6))
+for k in range(10): b += child(700 + k*40, 200, RED, outline=True)
 b += qmark(1070, 190, 60)
 b += t(880, 280, 'Ceux qui ne sont pas venus, personne ne les compte.', 15, INK, weight=600)
 b += t(880, 306, 'Ce chiffre, il faut l’estimer.', 17, RED, weight=700)

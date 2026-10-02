@@ -108,7 +108,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
-## Résultat : des couvertures qui ne veulent rien dire
+## Résultat : le 5 000 trompe tout le monde
 
 <img src="../../resources/diagrams_fr/cov_04_resultat.svg" alt="">
 
