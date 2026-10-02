@@ -455,3 +455,27 @@ b += f'<line x1="500" y1="{y0+rh}" x2="500" y2="{y0+6*rh}" stroke="#E4E7E5" stro
 b += f'<line x1="865" y1="{y0+rh}" x2="865" y2="{y0+6*rh}" stroke="#E4E7E5" stroke-width="1.5"/>'
 b += t(600, y0+6*rh+28, 'Mêmes taux pour toutes les provinces. FASTR refait ce calcul pour chaque province et chaque année.', 15, INK)
 svg('cov_19_cascade_calcul.svg', b, y0+6*rh+50)
+
+
+# 20. Why these four services: who comes, so what it counts
+b = t(600, 36, 'Un service est un bon point de départ quand on sait qui vient, et que l’enquête mesure la part qui vient', 17, DG, weight=700)
+rows = [('CPN1', 'pregnant', PLUM, 'Les femmes enceintes viennent à la première consultation prénatale.', 'L’enquête demande aux mères : « êtes-vous allée en CPN ? »', 'grossesses'),
+        ('Accouchements', 'baby', DG, 'Les mères accouchent dans un établissement de santé.', 'L’enquête demande, pour chaque enfant né vivant : « où avez-vous accouché ? »', 'naissances vivantes'),
+        ('BCG', 'baby', DG, 'Le BCG se donne à la naissance ou dans les premiers jours.', 'L’enquête demande : « cet enfant a-t-il reçu le BCG ? »', 'naissances vivantes'),
+        ('Penta1', 'child', LG, 'Le Penta1 se donne à 6 semaines : l’enfant a passé le premier mois.', 'L’enquête demande : « cet enfant a-t-il reçu le Penta1 ? »', 'enfants à vacciner')]
+for i, (svc, kind, col, who, ask, level) in enumerate(rows):
+    y = 70 + i*100
+    b += f'<rect x="40" y="{y}" width="1120" height="86" rx="10" fill="#FFFFFF" stroke="{col}" stroke-width="1.5"/>'
+    b += f'<rect x="40" y="{y}" width="170" height="86" rx="10" fill="{col}"/><rect x="200" y="{y}" width="10" height="86" fill="{col}"/>'
+    b += t(125, y+50, svc, 17, '#FFFFFF', weight=700)
+    px = 270
+    if kind == 'pregnant': b += f'<g transform="translate(0 8) scale(1)">' + pregnant(px, y+60, col) + '</g>'
+    elif kind == 'child': b += child(px, y+58, col)
+    else: b += child(px, y+62, col); b += f'<circle cx="{px}" cy="{y+30}" r="7" fill="none" stroke="{col}" stroke-width="2"/>'
+    b += t(330, y+34, who, 14, INK, anchor='start', weight=600)
+    b += t(330, y+60, ask, 13, MUTED, anchor='start')
+    b += t(905, y+30, 'donc on compte des', 12, MUTED, anchor='start')
+    b += f'<rect x="900" y="{y+40}" width="240" height="32" rx="16" fill="{TINT}"/>'
+    b += t(1020, y+61, level, 14, DG, weight=700)
+b += t(600, 492, 'Quatre services, quatre âges de la vie : c’est pour cela qu’ils peuvent chacun servir de point de départ.', 15, INK)
+svg('cov_20_pourquoi_services.svg', b, 510)

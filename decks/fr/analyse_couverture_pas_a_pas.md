@@ -199,6 +199,14 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 
 <!-- _class: pic -->
 
+## Étape 1 : pourquoi ces quatre services ?
+
+<img src="../../resources/diagrams_fr/cov_20_pourquoi_services.svg" alt="">
+
+---
+
+<!-- _class: pic -->
+
 ## Étape 1 : quatre services, donc quatre chaînes
 
 <img src="../../resources/diagrams_fr/cov_13_quatre_chaines.svg" alt="">
