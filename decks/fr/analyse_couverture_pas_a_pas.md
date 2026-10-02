@@ -124,7 +124,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
-## L'idée de FASTR : compter là où les gens passent
+## L'idée de FASTR : combiner l'enquête et DHIS2
 
 <img src="../../resources/diagrams_fr/cov_05_idee.svg" alt="">
 
@@ -295,16 +295,11 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 ---
 
-<!-- _class: spacious -->
+<!-- _class: pic -->
 
 ## En une page
 
-1. Un service mesuré par l'enquête donne une population de départ : volume SNIS ÷ couverture d'enquête.
-2. La cascade démographique en déduit les autres populations avec cinq taux.
-3. Quatre chaînes sont construites ; celle qui colle le mieux aux projections de l'ONU est retenue pour tout.
-4. La couverture est le volume corrigé divisé par ce dénominateur ; la dernière enquête est prolongée par la tendance du SNIS.
-
-Le résultat se lit chaque année et par province, là où les enquêtes ne vont pas.
+<img src="../../resources/diagrams_fr/cov_24_en_une_page.svg" alt="">
 
 ---
 

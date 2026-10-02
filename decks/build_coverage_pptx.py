@@ -46,12 +46,6 @@ TEXT_SLIDES = {
             "Une **petite province** : quelques établissements suffisent à faire bouger la courbe",
             "Un **changement brusque** la même année dans tous les indicateurs : souvent un problème de rapportage, pas de service"]},
     ]},
-    "En une page": {"type": "text", "numbered": True, "blocks": [
-        "Un service mesuré par l'enquête donne une population de départ : volume SNIS ÷ couverture d'enquête.",
-        "La cascade démographique en déduit les autres populations avec cinq taux.",
-        "Quatre chaînes sont construites ; celle qui colle le mieux aux projections de l'ONU est retenue pour tout.",
-        "La couverture est le volume corrigé divisé par ce dénominateur ; la dernière enquête est prolongée par la tendance du SNIS.",
-    ], "tail": "Le résultat se lit chaque année et par province, là où les enquêtes ne vont pas."},
 }
 
 

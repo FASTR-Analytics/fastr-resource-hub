@@ -152,16 +152,33 @@ b += panel(620, 'Province B', '2 700', '3 000', '54 %', '90 %', 'on croit être 
 b += t(600, 445, 'Les vaccinations sont bien comptées. C’est le 5 000 qui est faux, et il trompe dans les deux sens.', 18, INK, weight=600)
 svg('cov_04_resultat.svg', b, 470)
 
-# 5. The idea: ask the services. Clinic sees most pregnant women.
-b = clinic(100, 220, 180, 130, label='Centre de santé')
-b += crowd(360, 330, 10, 1, 'pregnant', gap=56, count=8)
-b += crowd(920, 330, 2, 1, 'pregnant', gap=56, fill=PLUM, outline=True)
-b += f'<rect x="330" y="140" width="520" height="40" rx="20" fill="{TINT}"/>'
-b += t(590, 167, 'La plupart des femmes enceintes passent par le centre de santé', 16, DG, weight=600)
-b += t(590, 390, '8 femmes sur 10 viennent en consultation prénatale', 20, PLUM, weight=700)
-b += t(975, 390, '2 ne viennent pas', 16, MUTED)
-b += t(600, 460, 'Le centre de santé « voit » presque tout le monde. C’est là que FASTR va compter.', 20, INK)
-svg('cov_05_idee.svg', b, 500)
+# 5. The idea: combine two sources we already have, the survey and DHIS2
+b = t(600, 40, 'On a déjà deux sources. Chacune dit une moitié de la réponse.', 20, DG, weight=700)
+# survey box
+b += f'<rect x="60" y="80" width="470" height="285" rx="12" fill="#F4ECF4" stroke="{PLUM}" stroke-width="2"/>'
+b += t(295, 115, 'L’enquête (EDS, MICS)', 19, PLUM, weight=700)
+b += t(295, 140, 'va voir les familles chez elles, vues ou non par le centre', 13, MUTED)
+b += crowd(120, 238, 8, 1, 'pregnant', gap=40)
+b += crowd(445, 238, 2, 1, 'pregnant', gap=40, fill=PLUM, outline=True)
+b += t(295, 282, 'Elle dit la PART qui vient au centre de santé', 15, INK, weight=600)
+b += big(295, 322, '8 sur 10', 30, PLUM)
+b += t(295, 348, 'mais pas combien elles sont en tout', 12, MUTED)
+# plus
+b += t(600, 245, '+', 54, DG, weight=700)
+# dhis2 box
+b += f'<rect x="670" y="80" width="470" height="285" rx="12" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+b += t(905, 115, 'DHIS2', 19, NAVY, weight=700)
+b += t(905, 140, 'le registre du centre de santé, chaque mois', 13, MUTED)
+b += '<g transform="translate(778 194) scale(0.5)">' + clinic(0, 50, 120, 80, label='') + '</g>'
+b += arrow(860, 236, 915, 236, NAVY)
+b += crowd(935, 238, 4, 1, 'pregnant', gap=40, fill=NAVY)
+b += t(905, 282, 'Il dit COMBIEN sont venues', 15, INK, weight=600)
+b += big(905, 322, '8 000', 30, NAVY)
+b += t(905, 348, 'mais rien sur celles qui ne sont pas venues', 12, MUTED)
+b += f'<rect x="250" y="392" width="700" height="46" rx="23" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
+b += t(600, 421, 'Ensemble, elles donnent le total : combien de femmes enceintes il y a vraiment', 16, DG, weight=700)
+b += t(600, 472, 'C’est l’idée de FASTR. Les trois pages suivantes la déroulent avec les chiffres.', 15, MUTED)
+svg('cov_05_idee.svg', b, 490)
 
 # 6. Survey: 8 out of 10
 b = t(600, 60, 'L’enquête ménages demande à chaque femme : « êtes-vous allée en consultation prénatale ? »', 19, INK)
@@ -365,62 +382,72 @@ b += t(600, 420, 'Le volume est celui corrigé des valeurs aberrantes par le mod
 b += t(600, 450, 'La couverture n’est pas plafonnée : au-dessus de 100 %, c’est le dénominateur qu’il faut regarder.', 15, MUTED)
 svg('cov_15_couverture_annees.svg', b, 480)
 
-# 16. Prolong the last survey with the HMIS trend (chart)
-b = t(600, 46, 'L’enquête donne le niveau, le SNIS donne la tendance', 20, DG, weight=700)
-x0, y0, xw, yh = 160, 360, 820, 240   # plot area: y 120..360 for 60..100%
-def X(i): return x0 + i*xw/3
-def Y(p): return y0 - (p-60)/40*yh
-for p in (60, 70, 80, 90, 100):
-    b += f'<line x1="{x0}" y1="{Y(p)}" x2="{x0+xw}" y2="{Y(p)}" stroke="#E4E7E5" stroke-width="1"/>'
-    b += t(x0-14, Y(p)+5, f'{p} %', 13, MUTED, anchor='end')
-for i, yr in enumerate(['2020', '2021', '2022', '2023']):
-    b += t(X(i), y0+26, yr, 14, MUTED)
-hmis = [78, 80, 83, 85]
-pts = ' '.join(f'{X(i)},{Y(v)}' for i, v in enumerate(hmis))
-b += f'<polyline points="{pts}" fill="none" stroke="{NAVY}" stroke-width="3"/>'
-for i, v in enumerate(hmis): b += f'<circle cx="{X(i)}" cy="{Y(v)}" r="5" fill="{NAVY}"/>'
-b += t(X(3)+16, Y(85)+20, 'SNIS 85 %', 13, NAVY, anchor='start', weight=600)
-# survey point 2021 = 82
-b += f'<rect x="{X(1)-9}" y="{Y(82)-9}" width="18" height="18" fill="{PLUM}" transform="rotate(45 {X(1)} {Y(82)})"/>'
-b += t(X(1)-16, Y(82)-16, 'Enquête 82 %', 13, PLUM, anchor='end', weight=600)
-proj = [(1, 82), (2, 85), (3, 87)]
-ppts = ' '.join(f'{X(i)},{Y(v)}' for i, v in proj)
-b += f'<polyline points="{ppts}" fill="none" stroke="{PLUM}" stroke-width="3" stroke-dasharray="9,6"/>'
-for i, v in proj[1:]: b += f'<circle cx="{X(i)}" cy="{Y(v)}" r="5" fill="#FFFFFF" stroke="{PLUM}" stroke-width="3"/>'
-b += t(X(3)+16, Y(87)+5, 'Projection 87 %', 13, PLUM, anchor='start', weight=600)
-# deltas annotations
-b += t(X(1)+ (X(2)-X(1))/2, Y(81)+40, '+3', 14, NAVY, weight=700)
-b += t(X(2)+ (X(3)-X(2))/2, Y(84)+40, '+2', 14, NAVY, weight=700)
-b += t(600, 440, 'Le SNIS monte de 3 points puis de 2. On part de l’enquête (82 %) et on ajoute les mêmes points : 85 %, puis 87 %.', 16, INK)
-b += t(600, 468, 'Quand une nouvelle enquête arrive, la projection repart de sa valeur.', 14, MUTED)
-svg('cov_16_projection.svg', b, 490)
 
-# 17. Reading the chart: three series, which to look at
-b = f'<rect x="60" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{NAVY}" stroke-width="2"/>'
-b += f'<line x1="90" y1="120" x2="170" y2="120" stroke="{NAVY}" stroke-width="4"/><circle cx="130" cy="120" r="5" fill="{NAVY}"/>'
-b += t(285, 112, 'Couverture SNIS', 18, NAVY, weight=700, anchor='middle')
-b += t(230, 160, 'chaque année, chaque province', 14, INK)
-b += t(230, 185, 'volume corrigé ÷ dénominateur', 14, MUTED)
-b += f'<rect x="430" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
-b += f'<rect x="491" y="111" width="18" height="18" fill="{PLUM}" transform="rotate(45 500 120)"/>'
-b += t(655, 112, 'Point d’enquête', 18, PLUM, weight=700)
-b += t(600, 160, 'les années où il y a une EDS (DHS) ou MICS', 14, INK)
-b += t(600, 185, 'la mesure de référence', 14, MUTED)
-b += f'<rect x="800" y="70" width="340" height="150" rx="10" fill="#FFFFFF" stroke="{PLUM}" stroke-width="2"/>'
-b += f'<line x1="830" y1="120" x2="910" y2="120" stroke="{PLUM}" stroke-width="4" stroke-dasharray="9,6"/>'
-b += t(1025, 112, 'Projection', 18, PLUM, weight=700)
-b += t(970, 160, 'l’enquête prolongée par le SNIS', 14, INK)
-b += t(970, 185, 'national et provinces', 14, MUTED)
-b += f'<rect x="60" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
-b += t(320, 300, 'Pour voir la tendance', 18, DG, weight=700)
-b += t(320, 335, 'regardez la couverture SNIS :', 16, INK)
-b += t(320, 360, 'disponible chaque année et par province', 16, INK)
-b += f'<rect x="620" y="260" width="520" height="150" rx="10" fill="{TINT}"/>'
-b += t(880, 300, 'Pour voir le niveau', 18, DG, weight=700)
-b += t(880, 335, 'regardez la projection :', 16, INK)
-b += t(880, 360, 'calée sur la dernière enquête', 16, INK)
-b += t(600, 460, 'Si les deux séries s’écartent beaucoup, c’est le dénominateur qu’il faut questionner avant les services.', 16, MUTED)
-svg('cov_17_lire_graphique.svg', b, 490)
+# Platform coverage chart colours (platform: client/src/generate_visualization/get_style_from_po/_2_coverage.ts)
+P_HMIS, P_SURVEY, P_PROJ = '#CED4DB', '#000000', '#F04D44'
+P_HMIS_INK = '#8A9299'   # readable version of the grey for text
+
+def plat_chart(x0, y0, xw, yh, years, hmis, survey, proj, show_labels=True):
+    """Draw a coverage chart the way the platform does: grey HMIS line, black survey points, red projection."""
+    o = ''
+    n = len(years)
+    def X(i): return x0 + i*xw/(n-1)
+    def Y(p): return y0 - (p-60)/40*yh
+    for p in (60, 70, 80, 90, 100):
+        o += f'<line x1="{x0}" y1="{Y(p)}" x2="{x0+xw}" y2="{Y(p)}" stroke="#E4E7E5" stroke-width="1"/>'
+        o += t(x0-14, Y(p)+5, f'{p} %', 12, MUTED, anchor='end')
+    for i, yr in enumerate(years): o += t(X(i), y0+24, yr, 13, MUTED)
+    def series(vals, col, w, dash=''):
+        pts = [(X(i), Y(v)) for i, v in enumerate(vals) if v is not None]
+        s_ = ''
+        if len(pts) > 1:
+            s_ += '<polyline points="' + ' '.join(f'{x},{y}' for x, y in pts) + f'" fill="none" stroke="{col}" stroke-width="{w}" {dash}/>'
+        for x, y in pts: s_ += f'<circle cx="{x}" cy="{y}" r="5" fill="{col}"/>'
+        return s_, pts
+    s1, p1 = series(hmis, P_HMIS, 3)
+    s2, p2 = series(survey, P_SURVEY, 3)
+    s3, p3 = series(proj, P_PROJ, 3)
+    o += s1 + s3 + s2
+    if show_labels:
+        for pts, vals, col, dy in ((p1, hmis, P_HMIS_INK, 12), (p3, proj, P_PROJ, -6), (p2, survey, P_SURVEY, -10)):
+            if pts:
+                last = [v for v in vals if v is not None][-1]
+                o += t(pts[-1][0]+14, pts[-1][1]+5+dy, f'{last} %', 12, col, anchor='start', weight=700)
+    return o
+
+# 16. Prolong the last survey with the HMIS trend, drawn like the platform chart
+b = t(600, 40, 'L’enquête donne le niveau, le SNIS donne la tendance', 20, DG, weight=700)
+b += f'<rect x="100" y="58" width="1000" height="350" rx="8" fill="#FFFFFF" stroke="#E4E7E5"/>'
+b += t(600, 82, 'Estimations de couverture pour penta1', 14, INK, weight=600)
+b += plat_chart(180, 370, 700, 260, ['2020', '2021', '2022', '2023'], [78, 80, 83, 85], [None, 82, None, None], [None, 82, 85, 87])
+# legend inside the frame, platform order
+lx = 940
+for i, (lab, col) in enumerate((('Estimation basée sur l’enquête', P_SURVEY), ('Estimation projetée', P_PROJ), ('Couverture calculée à partir du SNIS', P_HMIS))):
+    y = 120 + i*26
+    b += f'<line x1="{lx-20}" y1="{y}" x2="{lx+8}" y2="{y}" stroke="{col}" stroke-width="3"/><circle cx="{lx-6}" cy="{y}" r="4" fill="{col}"/>'
+    b += t(lx+16, y+4, lab, 10, INK, anchor='start')
+b += t(600, 436, 'Le SNIS (gris) monte de 3 points puis de 2. On part de l’enquête (noir, 82 %) et on ajoute les mêmes points : 85 %, puis 87 % (rouge).', 15, INK)
+b += t(600, 460, 'Quand une nouvelle enquête arrive, la projection repart de sa valeur.', 13, MUTED)
+svg('cov_16_projection.svg', b, 480)
+
+# 17. Reading the chart: the three series as the platform draws them, and what to look at
+b = f'<rect x="60" y="40" width="640" height="330" rx="8" fill="#FFFFFF" stroke="#E4E7E5"/>'
+b += t(380, 64, 'Estimations de couverture pour penta1', 14, INK, weight=600)
+b += plat_chart(130, 320, 500, 210, ['2019', '2020', '2021', '2022', '2023'], [72, 75, 80, 83, 85], [78, None, 82, None, None], [None, None, 82, 85, 87])
+cards = [(P_SURVEY, 'Noir : l’enquête', 'La mesure de référence. Un point seulement les années où il y a eu une EDS (DHS) ou une MICS.'),
+         (P_PROJ, 'Rouge : la projection', 'La dernière enquête, prolongée avec la tendance du SNIS. National et provinces.'),
+         (P_HMIS_INK, 'Gris : le SNIS', 'Volume corrigé ÷ dénominateur FASTR. Chaque année, chaque province.')]
+for i, (col, head, txt) in enumerate(cards):
+    y = 40 + i*110
+    b += f'<rect x="730" y="{y}" width="410" height="98" rx="10" fill="#FFFFFF" stroke="{col if col != P_HMIS_INK else P_HMIS}" stroke-width="2"/>'
+    b += f'<line x1="750" y1="{y+28}" x2="790" y2="{y+28}" stroke="{col if col != P_HMIS_INK else P_HMIS}" stroke-width="3"/><circle cx="770" cy="{y+28}" r="5" fill="{col if col != P_HMIS_INK else P_HMIS}"/>'
+    b += t(805, y+33, head, 15, col, anchor='start', weight=700)
+    words = txt.split(); l1 = ''
+    while words and len(l1 + ' ' + words[0]) <= 62: l1 = (l1 + ' ' + words.pop(0)).strip()
+    b += t(750, y+58, l1, 12, INK, anchor='start'); b += t(750, y+78, ' '.join(words), 12, INK, anchor='start')
+b += f'<rect x="60" y="390" width="1080" height="40" rx="20" fill="{TINT}"/>'
+b += t(600, 416, 'Pour la tendance, regardez le gris. Pour le niveau, regardez le rouge. S’ils s’écartent beaucoup, questionnez le dénominateur avant les services.', 14, DG, weight=600)
+svg('cov_17_lire_graphique.svg', b, 450)
 
 # 18. Three screens in the platform, in order
 b = ''
@@ -580,3 +607,26 @@ for i, x in enumerate(xs):
 b += f'<rect x="150" y="415" width="900" height="40" rx="20" fill="{TINT}"/>'
 b += t(600, 441, 'Deux enquêtes la même année ? FASTR prend l’EDS (DHS) ; la MICS sert si l’EDS manque.', 14, DG, weight=600)
 svg('cov_23_regles.svg', b, 475)
+
+
+# 24. One-page recap: before vs with FASTR, and the three ideas
+def frac(x, top, top_lab, bot, bot_lab, pct, col, head):
+    o = f'<rect x="{x}" y="70" width="520" height="250" rx="12" fill="#FFFFFF" stroke="{col}" stroke-width="2"/>'
+    o += t(x+260, 102, head, 18, col, weight=700)
+    o += t(x+160, 150, top, 26, NAVY, weight=700); o += t(x+160, 172, top_lab, 12, MUTED)
+    o += f'<line x1="{x+50}" y1="188" x2="{x+270}" y2="188" stroke="{col}" stroke-width="3"/>'
+    o += t(x+160, 222, bot, 26, col, weight=700); o += t(x+160, 244, bot_lab, 12, MUTED)
+    o += t(x+320, 200, '=', 30, DG, weight=700)
+    o += big(x+420, 212, pct, 48, col)
+    return o
+b = frac(60, '4 000', 'enfants vaccinés (DHIS2)', '5 000', 'recensement projeté, le même partout', '80 %', RED, 'Avant')
+b += frac(620, '4 000', 'enfants vaccinés (DHIS2)', '9 200', 'enquête + DHIS2 + cascade, par province', '43 %', DG, 'Avec FASTR')
+b += t(600, 340, 'Mêmes vaccinés, autre chiffre du bas.', 14, MUTED)
+ideas = [('1', 'L’enquête dit la part qui vient, DHIS2 dit combien sont venus : ensemble, le total.', PLUM),
+         ('2', 'La cascade passe d’un âge à l’autre avec les taux du pays.', DG),
+         ('3', 'Quatre chaînes, une seule retenue pour tout, calée sur l’ONU. Puis la couverture, chaque année, chaque province.', NAVY)]
+for i, (n, txt, col) in enumerate(ideas):
+    y = 376 + i*42
+    b += f'<circle cx="90" cy="{y}" r="16" fill="{col}"/>'; b += t(90, y+6, n, 16, '#FFFFFF', weight=800)
+    b += t(120, y+6, txt, 15, INK, anchor='start')
+svg('cov_24_en_une_page.svg', b, 490)
