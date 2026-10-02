@@ -274,24 +274,18 @@ b += t(560, 406, 'Avec le 5 000 du recensement projeté, on aurait lu 80 %.', 15
 b += t(600, 460, 'Mêmes 4 000 enfants vaccinés. La décision à prendre n’est pas du tout la même.', 18, INK)
 svg('cov_11_couverture.svg', b, 490)
 
-# 12. Overview: the four steps as a path
-b = ''
-stepsP3 = [('1', 'Compter à partir', 'd’un service', 'CPN1 ÷ enquête', PLUM),
-           ('2', 'Déduire les autres', 'populations', 'la cascade', DG),
-           ('3', 'Choisir la chaîne', 'la plus crédible', 'contre l’ONU', NAVY),
-           ('4', 'Calculer et', 'prolonger', 'couverture + enquête', G)]
-for i, (n, l1, l2, l3, col) in enumerate(stepsP3):
+# 12. Overview: four steps, plain words
+b = t(600, 50, 'Ce que vous venez de voir, la plateforme le fait en quatre étapes', 20, DG, weight=700)
+stepsP3 = [('1', 'Compter à partir', 'd’un service', PLUM), ('2', 'Déduire les', 'autres âges', DG),
+           ('3', 'Choisir la', 'meilleure chaîne', NAVY), ('4', 'Calculer la', 'couverture', G)]
+for i, (n, l1, l2, col) in enumerate(stepsP3):
     x = 70 + i*290
-    b += f'<circle cx="{x+110}" cy="150" r="46" fill="{col}"/>'
-    b += big(x+110, 166, n, 40, '#FFFFFF')
-    b += t(x+110, 235, l1, 18, INK, weight=600); b += t(x+110, 260, l2, 18, INK, weight=600)
-    b += t(x+110, 292, l3, 15, MUTED)
-    if i < 3: b += arrow(x+170, 150, x+230, 150)
-b += f'<rect x="90" y="340" width="520" height="40" rx="20" fill="{TINT}"/>'
-b += t(350, 366, 'Module « Dénominateurs de couverture » : étapes 1 à 3', 15, DG, weight=600)
-b += f'<rect x="700" y="340" width="420" height="40" rx="20" fill="{TINT}"/>'
-b += t(910, 366, 'Module « Estimations de couverture » : étape 4', 15, DG, weight=600)
-b += t(600, 440, 'Tout cela tourne quand on génère un paquet de résultats. Personne ne fait les calculs à la main.', 17, MUTED)
+    b += f'<circle cx="{x+110}" cy="190" r="56" fill="{col}"/>'
+    b += big(x+110, 208, n, 48, '#FFFFFF')
+    b += t(x+110, 285, l1, 19, INK, weight=600); b += t(x+110, 312, l2, 19, INK, weight=600)
+    if i < 3: b += arrow(x+180, 190, x+230, 190)
+b += t(600, 400, 'Les étapes 1 et 2, c’est l’exemple des 10 000 femmes enceintes. Les étapes 3 et 4 sont nouvelles.', 16, MUTED)
+b += t(600, 435, 'Tout se calcule automatiquement quand on génère un paquet de résultats.', 16, INK)
 svg('cov_12_quatre_etapes.svg', b, 470)
 
 # 13. Four entry points = four independent, complete chains

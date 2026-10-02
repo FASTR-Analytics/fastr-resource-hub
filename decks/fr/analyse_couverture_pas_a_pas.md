@@ -187,7 +187,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 ---
 <!-- _class: pic -->
 
-## Quatre étapes, deux modules
+## La plateforme fait cela en quatre étapes
 
 <img src="../../resources/diagrams_fr/cov_12_quatre_etapes.svg" alt="">
 
