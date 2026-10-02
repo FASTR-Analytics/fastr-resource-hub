@@ -191,7 +191,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 ---
 <!-- _class: pic -->
 
-## Quatre étapes, deux modules, un paquet de résultats
+## Quatre étapes, deux modules
 
 <img src="../../resources/diagrams_fr/cov_12_quatre_etapes.svg" alt="">
 
@@ -207,7 +207,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 
 <!-- _class: pic -->
 
-## Étape 2 : la cascade, avec les formules que FASTR applique
+## Étape 2 : la cascade et ses formules
 
 <img src="../../resources/diagrams_fr/denominator_cascade_example.svg" alt="" style="max-height:440px">
 
@@ -252,7 +252,7 @@ Le même raisonnement marche avec d'autres services. Avec les accouchements en �
 ---
 <!-- _class: pic -->
 
-## Étape 4 : la couverture, chaque année, chaque district
+## Étape 4 : calculer la couverture
 
 <img src="../../resources/diagrams_fr/cov_15_couverture_annees.svg" alt="">
 
