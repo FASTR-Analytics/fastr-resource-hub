@@ -304,8 +304,9 @@ for (svc, cnt, share, res, lvl, col), y in zip(entries, rows_y):
     b += arrow(418, y+25, 316, ys[lvl]+28, col, 2.5)
 b += t(600, 50, 'Chaque service mesuré par l’enquête donne un chiffre à un étage. La cascade remplit les autres étages.', 19, DG, weight=700)
 b += t(780, 80, 'DHIS2', 12, MUTED, weight=600); b += t(870, 80, 'enquête', 12, MUTED, weight=600); b += t(1070, 80, 'population', 12, MUTED, weight=600)
-b += t(780, 475, 'Quatre points de départ, quatre chaînes complètes : quatre réponses à la question « combien de personnes ? ».', 15, INK)
-svg('cov_13_quatre_chaines.svg', b, 500)
+b += t(780, 462, 'Accouchements et BCG arrivent au même étage : l’enquête compte les accouchements en établissement parmi les naissances vivantes.', 13, MUTED)
+b += t(780, 488, 'Quatre points de départ, quatre chaînes complètes : quatre réponses à la question « combien de personnes ? ».', 15, INK)
+svg('cov_13_quatre_chaines.svg', b, 510)
 
 # 14. Choose the chain: compare to the UN estimate
 b = t(600, 50, 'Au niveau national, on compare chaque chaîne à l’estimation de l’ONU', 20, DG, weight=700)
