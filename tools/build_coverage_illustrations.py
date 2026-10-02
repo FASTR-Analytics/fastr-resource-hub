@@ -256,26 +256,23 @@ b += f'<rect x="150" y="410" width="900" height="44" rx="22" fill="{TINT}"/>'
 b += t(600, 437, 'Dans la plateforme : Résultats → Paramètres par défaut des modules. Un taux modifié s’applique au prochain paquet de résultats.', 15, DG, weight=600)
 svg('cov_10b_taux_pays.svg', b, 480)
 
-# 11. Coverage: 4 000 / 9 200 = 43 %
-b = f'<rect x="80" y="80" width="480" height="300" rx="10" fill="{REDBG}" stroke="{RED}" stroke-width="2"/>'
-b += t(320, 120, 'Avec la projection du recensement', 18, RED, weight=700)
-b += t(320, 170, '4 000 enfants vaccinés', 18, INK)
-b += f'<line x1="170" y1="188" x2="470" y2="188" stroke="{RED}" stroke-width="3"/>'
-b += t(320, 220, '5 000 enfants « attendus »', 18, INK)
-b += big(320, 300, '80 %', 56, RED)
-b += t(320, 350, 'On croit que la province a presque fini.', 15, MUTED)
-b += f'<rect x="640" y="80" width="480" height="300" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2"/>'
-b += t(880, 120, 'Avec le comptage FASTR', 18, DG, weight=700)
-b += t(880, 170, '4 000 enfants vaccinés', 18, INK)
-b += f'<line x1="730" y1="188" x2="1030" y2="188" stroke="{DG}" stroke-width="3"/>'
-b += t(880, 220, '9 200 enfants qui sont vraiment là', 18, INK)
-b += big(880, 300, '43 %', 56, DG)
-b += t(880, 350, 'Plus de la moitié des enfants restent à vacciner.', 15, MUTED)
-b += t(600, 440, 'Mêmes 4 000 enfants vaccinés. La décision à prendre n’est pas du tout la même.', 20, INK)
-svg('cov_11_couverture.svg', b, 480)
-
-
-# ───────────────────────── Part 3: what the platform does ─────────────────────────
+# 11. Coverage at last: the fraction from slide 5, now with its bottom number filled in
+b = t(600, 40, 'On repart de la fraction du début. Le chiffre du bas vient de la cascade : 9 200.', 18, DG, weight=700)
+b += clinic(70, 110, 150, 110, label='Centre de santé de la province')
+b += arrow(235, 170, 290, 170, DG)
+b += f'<rect x="300" y="80" width="520" height="110" rx="10" fill="#EDF1F7" stroke="{NAVY}" stroke-width="2"/>'
+b += big(560, 130, '4 000', 40, NAVY); b += t(560, 168, 'enfants vaccinés cette année, comptés dans DHIS2', 15, INK)
+b += f'<line x1="300" y1="215" x2="820" y2="215" stroke="{DG}" stroke-width="4"/>'
+b += f'<rect x="300" y="240" width="520" height="110" rx="10" fill="{TINT}" stroke="{DG}" stroke-width="2.5"/>'
+b += big(560, 290, '9 200', 40, DG); b += t(560, 328, 'enfants à vacciner, estimés par FASTR (enquête + DHIS2 + cascade)', 14, INK)
+b += t(870, 225, '=', 44, DG, weight=700)
+b += big(1040, 245, '43 %', 64, DG)
+b += t(1040, 282, 'de couverture', 18, INK)
+b += t(1040, 310, 'plus de la moitié des enfants', 13, MUTED); b += t(1040, 328, 'restent à vacciner', 13, MUTED)
+b += f'<rect x="300" y="380" width="520" height="40" rx="20" fill="{REDBG}"/>'
+b += t(560, 406, 'Avec le 5 000 du recensement projeté, on aurait lu 80 %.', 15, RED, weight=600)
+b += t(600, 460, 'Mêmes 4 000 enfants vaccinés. La décision à prendre n’est pas du tout la même.', 18, INK)
+svg('cov_11_couverture.svg', b, 490)
 
 # 12. Overview: the four steps as a path
 b = ''

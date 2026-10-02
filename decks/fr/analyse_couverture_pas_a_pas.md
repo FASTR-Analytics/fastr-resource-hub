@@ -172,7 +172,7 @@ footer: "FASTR · L'analyse de couverture, pas à pas"
 
 <!-- _class: pic -->
 
-## La couverture, enfin : 43 %, pas 80 %
+## Enfin le chiffre du bas : 43 % de couverture
 
 <img src="../../resources/diagrams_fr/cov_11_couverture.svg" alt="">
 
