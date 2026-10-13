@@ -221,6 +221,20 @@ O mapeamento do utilizador final ajuda a garantir que os nossos resultados satis
 | Como é que gostam de receber a informação? Apresentações em reuniões de gestão de topo
 | Implicações de design para o seu produto** | PPT curto com resultados focados apenas nas tendências de serviço; Adicionar recomendações acionáveis |
 
+## Construir um scorecard na plataforma
+
+Um scorecard é uma tabela de indicadores por área, com cada célula colorida a verde, amarelo ou vermelho segundo limiares. Na plataforma não é um módulo à parte nem uma página especial: é uma visualização em tabela sobre o módulo **Valores dos indicadores**, colorida por regras que vivem no dicionário de indicadores. Construir um leva quatro passos.
+
+**1. Definir os indicadores como indicadores calculados.** Em **Dados → HMIS → Indicadores**, clique em **Adicionar indicador**, escolha o tipo **Calculado** e escreva a **Fórmula** sobre indicadores existentes e números de população, por exemplo `anc4 / anc1` ou `anc1 / population_pregnancies`. Os botões **Inserir indicador** e **Inserir população** colam os nomes certos. Os termos de população vêm da página **População** da instância, onde estão guardadas as pessoas-ano por área, ano e tipo de população.
+
+**2. Definir as regras de apresentação em cada indicador.** No mesmo formulário, em **Análise e apresentação**, defina o **Formato** (número, percentagem ou taxa por 10 000), a **Direção** (**Mais alto é melhor** ou **Mais baixo é melhor**), uma **Meta** opcional e a **Regra de formatação condicional**: limiares ascendentes que definem as faixas, por exemplo 70 e 80 para uma cobertura em que abaixo de 70 % é vermelho, de 70 a 80 % amarelo e acima de 80 % verde. A regra pertence ao indicador, por isso todos os scorecards que o mostram colorem-no da mesma forma.
+
+**3. Gerar um pacote de resultados com Valores dos indicadores.** Os indicadores calculados não têm valores até o módulo **Valores dos indicadores** correr. Gere um pacote de resultados (**Resultados → Gerar novo pacote de resultados**) com esse módulo assinalado, e depois fixe-o ou anexe-o ao projeto. As alterações a fórmulas, limiares ou números de população só fazem efeito no pacote seguinte, não no atual.
+
+**4. Criar a tabela no projeto.** No projeto, clique em **Criar visualização**, escolha o módulo **Valores dos indicadores**, a métrica **Valor do indicador** e a predefinição **Tabela scorecard**. A tabela lista os indicadores por área para o período escolhido. No painel de estilo, defina a **Formatação condicional** como **Indicador**: cada valor passa a ser colorido pela regra do seu próprio indicador, e a legenda mostra as faixas. Guarde a visualização e adicione-a a um painel, a um relatório ou a um conjunto de diapositivos como qualquer outra.
+
+Dois hábitos mantêm um scorecard fiável. Decida os limiares com o programa e registe de onde vêm, porque são as cores que transmitem a mensagem. E verifique o Registo antes de cada pacote, porque um indicador com meses em falta mostra um valor enganador em vez de uma célula vazia.
+
 ---
 
 <!--

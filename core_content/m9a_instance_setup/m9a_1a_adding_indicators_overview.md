@@ -4,18 +4,26 @@ theme: fastr
 paginate: true
 ---
 
-## Adding indicators to your instance
+## Adding indicators: one table, four types
 
-Your country instance already holds the priority RMNCAH-N indicators. But it may not hold every indicator your reports and bulletins need.
+<div class="columns-text-left">
+<div>
 
-**FASTR and DHIS2 are two separate databases.** To use a DHIS2 indicator in FASTR, you connect the two: import the indicator from DHIS2 and map it to a "common indicator" in the platform.
+Your instance already holds the priority RMNCAH-N indicators. It may not hold every indicator your reports need. All indicators live in **one table**: **Data → HMIS → Indicators**.
 
-The process has five phases:
-
-| Phase | Where | What |
+| Type | What it is | Where its numbers come from |
 |---|---|---|
-| 1. Identify | DHIS2 | Find the official name and the UID (11 characters) |
-| 2. Document | Spreadsheet | Record the name and UID before you start |
-| 3. Create common indicator | FASTR | Make the container: a common ID and a label |
-| 4. Import DHIS2 indicator | FASTR | Connect to DHIS2, search by UID, add it |
-| 5. Map | FASTR | Link the imported DHIS2 indicator to the common indicator |
+| **DHIS2 element** | One DHIS2 data element or indicator | A DHIS2 import |
+| **Uploaded** | Values from a CSV file | The Imports page |
+| **Sum** | Other indicators added together | Computed from its members |
+| **Calculated** | A formula, e.g. `anc4 / anc1` | The Indicator values module, at package generation |
+
+**Special** rows (`anc1`, `delivery`, `bcg`…) are read by the modules by ID: fill them, do not recreate them.
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/indicators_v2_en/02_indicator_list.png)
+
+</div>
+</div>

@@ -6,7 +6,43 @@ slides:
 - file: m9a_1_importing_data.md
   order: 1.0
   variant: full
-  title: 'Atividade: Importação de dados'
+  title: 'Atividade: Importar dados'
+- file: m9a_1a_adding_indicators_overview.md
+  order: 1.01
+  variant: full
+  title: 'Adicionar indicadores: uma tabela, quatro tipos'
+- file: m9a_1b_phase1_identify_dhis2.md
+  order: 1.02
+  variant: full
+  title: 'Passo 1: encontrar o indicador no DHIS2, a partir do FASTR'
+- file: m9a_1c_phase2_document_excel.md
+  order: 1.03
+  variant: full
+  title: Prepare a sua lista antes de começar
+- file: m9a_1d_phase3_create_common_indicator.md
+  order: 1.04
+  variant: full
+  title: 'Passo 2: nomear e guardar'
+- file: m9a_1e_naming_conventions.md
+  order: 1.05
+  variant: full
+  title: Convenções de nomes para indicadores
+- file: m9a_1f_phase4_import_dhis2_indicator.md
+  order: 1.06
+  variant: full
+  title: 'Indicadores calculados: uma fórmula com regras próprias'
+- file: m9a_1g_phase5_map_indicator.md
+  order: 1.07
+  variant: full
+  title: 'Passo 3: importar os dados, quatro passos'
+- file: m9a_1h_download_data.md
+  order: 1.08
+  variant: full
+  title: 'Depois do lançamento: Atual, Histórico, Registo'
+- file: m9a_1i_practice_adding_indicators.md
+  order: 1.09
+  variant: full
+  title: 'Prática: adicionar indicadores em equipa'
 - file: m9a_2_installing_running_modules.md
   order: 2.0
   variant: full
@@ -15,3 +51,15 @@ slides:
   order: 3.0
   variant: full
   title: 'Atividade: Criar um projeto'
+- file: m9a_4_activity_building_scorecard.md
+  order: 4.0
+  variant: full
+  title: 'Atividade: Construir um scorecard'
+- file: m9a_4a_scorecard_four_moves.md
+  order: 4.01
+  variant: full
+  title: Um scorecard em quatro passos
+- file: m9a_4b_keeping_scorecard_honest.md
+  order: 4.02
+  variant: full
+  title: Manter o scorecard fiável

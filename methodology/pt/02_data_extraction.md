@@ -143,6 +143,42 @@ Esta secção irá abranger:
 - Requisitos de transformação de dados
 - Verificações de garantia de qualidade dos dados extraídos
 
+## Importar dados para a plataforma FASTR
+
+O Data Downloader descrito acima produz ficheiros. Numa instância nacional da plataforma FASTR, os mesmos dados são puxados diretamente do DHIS2 pela própria plataforma, sem ficheiro pelo meio. Têm de existir três coisas, por esta ordem: uma ligação DHIS2 guardada, uma lista de indicadores e uma importação.
+
+### A ligação DHIS2
+
+Um administrador guarda uma ligação DHIS2 por instância, na página **Dados**, cartão **Ligação DHIS2**: o URL do DHIS2 e as credenciais de um utilizador DHIS2 que pode ler dados e metadados. A ligação fica guardada cifrada e é usada por todas as pesquisas e importações; ninguém volta a escrever credenciais.
+
+### A lista de indicadores
+
+Todos os indicadores da instância vivem numa única tabela (**Dados → HMIS → Indicadores**). Cada linha tem um **ID do indicador** (letras minúsculas, dígitos e sublinhados, por exemplo `anc1`), um **rótulo** mostrado nos gráficos e um **tipo**:
+
+| Tipo | O que é | Como recebe dados |
+|------|---------|-------------------|
+| **Elemento DHIS2** | Um elemento de dados ou indicador do DHIS2, opcionalmente uma combinação de opções de categoria | Obtido por uma importação DHIS2 |
+| **Carregado** | Valores fornecidos num ficheiro CSV | Carregado na página Importações |
+| **Soma** | A soma de outros indicadores | Calculado a partir dos seus membros |
+| **Calculado** | Uma fórmula sobre outros indicadores e números de população | Calculado pelo módulo Valores dos indicadores quando um pacote de resultados é gerado |
+
+As linhas marcadas **Especial** são os indicadores que os módulos de análise leem pelo ID (`anc1`, `delivery`, `bcg`, `penta1` e os outros). Preenchem-se com o código DHIS2 certo em vez de serem recriadas.
+
+Para adicionar elementos DHIS2, clique em **Adicionar do DHIS2**, pesquise no DHIS2 por nome ou ID, clique em **Adicionar** ao lado de cada elemento, depois **Seguinte: nomear indicadores**, dê a cada um um ID e um rótulo, e **Guardar**. Um subgrupo, como uma faixa etária, adiciona-se a partir da linha da combinação de opções de categoria do elemento, não da linha principal.
+
+### A importação
+
+**Dados → HMIS → Dados → Importações** tem três separadores, **Atual**, **Futuro** e **Histórico**, e o botão **Nova importação DHIS2**. O assistente tem quatro passos:
+
+1. **Indicadores**: assinale os indicadores a obter. Os indicadores calculados, somas e carregados não são obtidos, porque uma importação DHIS2 não os consegue obter; o assistente avisa.
+2. **Hora**: **Agora**, **Uma vez, a uma hora definida**, ou **Recorrente** (diária, semanal, mensal ou de três em três meses, com hora de início e fuso horário). Uma importação recorrente é o que mantém uma instância atualizada sem que ninguém se lembre de a correr.
+3. **Configuração**: o intervalo de períodos, como ano e mês de início e número de meses.
+4. **Rever e lançar**: a ligação, os indicadores, a janela e o número de pares (elemento DHIS2, mês) a obter. Desde a versão 1.76, este passo também pergunta ao DHIS2 sobre a seleção antes do lançamento e avisa sobre ids que apontam para uma fórmula do DHIS2 em vez de um elemento de dados, e sobre ids que o DHIS2 já não conhece. Clique em **Iniciar importação**.
+
+A importação corre no servidor. O separador **Atual** mostra o progresso, o **Histórico** regista o resultado, e a importação mantém todos os pares que tiveram sucesso mesmo que alguns tenham falhado. O separador **Registo** da página de dados HMIS lista, por indicador, os meses com dados, a última importação e os meses falhados, e permite repetir só esses.
+
+Uma importação muda os dados da instância, não o que os projetos veem. Os projetos leem um pacote de resultados; por isso, depois de uma importação, um administrador gera um novo pacote (**Resultados → Gerar novo pacote de resultados**) e fixa-o ou anexa-o. A sequência importar, gerar, fixar é a rotina mensal de uma instância.
+
 ---
 
 <!--

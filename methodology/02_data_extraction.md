@@ -140,6 +140,42 @@ This section will cover:
 - Data transformation requirements  
 - Quality assurance checks on extracted data  
 
+## Importing data into the FASTR platform
+
+The Data Downloader described above produces files. On a country instance of the FASTR platform, the same data is pulled directly from DHIS2 by the platform itself, with no file in between. Three things have to exist, in this order: a stored DHIS2 connection, a list of indicators, and an import.
+
+### The DHIS2 connection
+
+An administrator stores one DHIS2 connection per instance, on the **Data** page, **DHIS2 connection** card: the DHIS2 URL and the credentials of a DHIS2 user who can read data and metadata. The connection is saved encrypted and used by every search and every import, so nobody types credentials again.
+
+### The indicator list
+
+All indicators of the instance live in one table (**Data → HMIS → Indicators**). Each row has an **Indicator ID** (lowercase letters, digits and underscores, for example `anc1`), a **label** shown on charts, and a **type**:
+
+| Type | What it is | How it gets data |
+|------|------------|------------------|
+| **DHIS2 element** | One DHIS2 data element or indicator, optionally one category option combination | Fetched by a DHIS2 import |
+| **Uploaded** | Values supplied in a CSV file | Uploaded on the Imports page |
+| **Sum** | The sum of other indicators | Computed from its members |
+| **Calculated** | A formula over other indicators and population figures | Computed by the Indicator values module when a results package is generated |
+
+Rows marked **Special** are the indicators the analysis modules read by ID (`anc1`, `delivery`, `bcg`, `penta1` and the others). They are filled with the right DHIS2 code rather than recreated.
+
+To add DHIS2 elements, click **Add from DHIS2**, search DHIS2 by name or ID, click **Add** next to each element, then **Next: name indicators**, give each an ID and a label, and **Save**. A subgroup such as an age band is added from the element's category option combination line rather than from the main line.
+
+### The import
+
+**Data → HMIS → Data → Imports** has three tabs, **Current**, **Future** and **History**, and the button **New DHIS2 import**. The wizard has four steps:
+
+1. **Indicators**: tick the indicators to fetch. Calculated, Sum and Uploaded indicators are not fetched, because a DHIS2 import cannot fetch them; the wizard says so.
+2. **Time**: **Now**, **Once, at a set time**, or **Recurring** (daily, weekly, monthly or every three months, with a start time and time zone). A recurring import is how an instance stays current without anyone remembering to run it.
+3. **Config**: the period range, as a starting year and month and a number of months.
+4. **Review & launch**: the connection, the indicators, the window and the number of (DHIS2 element, month) pairs to fetch. Since version 1.76 the review step also asks DHIS2 about the selection before launch and warns about ids that point to a DHIS2 formula rather than a data element, and about ids DHIS2 no longer knows. Click **Start import**.
+
+The import runs on the server. The **Current** tab shows progress, **History** records the result, and the import keeps every pair that succeeded even if some failed. The HMIS Data page's **Ledger** tab lists, per indicator, the months with data, the last import and any failed months, and lets you retry just those.
+
+An import changes the instance's data, not what projects see. Projects read from a results package, so after an import an administrator generates a new package (**Results → Generate new results package**) and pins or attaches it. The sequence import, generate, pin is the monthly routine of an instance.
+
 ---
 
 <!--

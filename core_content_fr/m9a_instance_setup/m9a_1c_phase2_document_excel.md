@@ -4,13 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 2 : Documenter vos indicateurs
+## Préparez votre liste avant de commencer
 
-Avant de toucher à la plateforme, préparez un simple fichier Excel pour cataloguer les indicateurs DHIS2 que vous souhaitez apporter.
+Avant de toucher à la plateforme, listez les indicateurs voulus dans un tableur simple. Pour chacun :
 
-**Pour chaque indicateur, notez :**
+- Le **nom officiel DHIS2** et, si vous l'avez, l'**ID DHIS2** (11 caractères)
+- L'**ID de l'indicateur** que vous lui donnerez dans FASTR (`anc1_first_trimester`)
+- Le **libellé** qui apparaîtra sur les graphiques (« CPN1, premier trimestre »)
+- Pour un indicateur calculé : la **formule** et les **seuils**
 
-- Le nom officiel dans DHIS2
-- L'UID
-
-Le faire en amont garde le travail organisé, et permet de copier les détails directement dans la plateforme aux phases suivantes, sans faire des allers-retours vers DHIS2.
+Un onglet par groupe de travail garde la séance ordonnée. Vous copierez depuis cette feuille vers la plateforme au lieu de faire des allers-retours avec DHIS2.

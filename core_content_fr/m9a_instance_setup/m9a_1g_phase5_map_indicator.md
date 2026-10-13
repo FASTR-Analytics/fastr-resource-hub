@@ -4,13 +4,26 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 5 : Mapper vers l'indicateur commun
+## Étape 3 : importer les données, quatre étapes
 
-La dernière étape relie l'indicateur DHIS2 importé à l'indicateur commun qui accueillera ses données.
+<div class="columns-text-left">
+<div>
 
-1. Revenez dans l'onglet **Indicateur commun**
-2. Sélectionnez l'indicateur commun que vous avez préparé pour recevoir ces données, et cliquez sur l'icône **crayon**
-3. Cliquez sur le bouton **+** pour associer un indicateur DHIS2
-4. Dans la liste, trouvez l'indicateur DHIS2 correspondant et sélectionnez-le
+**Données → SNIS → Données → Importations**, puis **Nouvelle importation DHIS2**. L'assistant utilise la connexion enregistrée ; il n'y a rien à taper.
 
-L'indicateur DHIS2 et l'indicateur commun sont maintenant reliés. Il ne reste plus qu'à télécharger les données.
+| Étape | Ce que vous faites |
+|---|---|
+| **Indicateurs** | Cochez les indicateurs à récupérer (la case du haut sélectionne tout) |
+| **Heure** | **Maintenant**, **Une fois, à une heure donnée**, ou **Récurrente** |
+| **Configuration** | La plage de périodes : année et mois de départ, nombre de mois |
+| **Vérifier et lancer** | Vérifiez connexion, indicateurs, fenêtre et nombre de paires (élément, mois), puis **Lancer l'importation** |
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/dhis2_import_v2/08_wizard_lancer.png)
+
+</div>
+</div>
+
+Depuis la version 1.76, l'étape de vérification interroge d'abord DHIS2 sur votre sélection. Elle avertit quand un ID pointe vers une formule DHIS2 plutôt qu'un élément de données, ou quand DHIS2 ne connaît plus l'ID.

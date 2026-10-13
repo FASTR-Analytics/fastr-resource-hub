@@ -9,7 +9,7 @@ paginate: true
 **In this hands-on session, we will:**
 
 - Review the available analysis modules
-- Select modules and configure their parameters in the generation wizard
+- Check the parameter values in Module defaults, then tick the modules to run in the generation wizard
 - Generate a results package and attach it to a project
 
 *Participants will generate a results package from their imported data*

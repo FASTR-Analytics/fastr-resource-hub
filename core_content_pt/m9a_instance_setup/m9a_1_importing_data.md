@@ -1,18 +1,16 @@
-<!-- AUTO-TRANSLATED from core_content/m9a_instance_setup/m9a_1_importing_data.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
 paginate: true
 ---
 
-## Atividade: Importação de dados
+## Atividade: Importar dados
 
-**Nesta sessão prática, nós iremos:**
+**Nesta sessão prática vamos:**
 
-- Rever os requisitos de formato de dados
-- Percorrer o processo de importação
-- Tratar da validação e da verificação de erros
+- Verificar a ligação DHIS2 guardada da instância
+- Adicionar os indicadores de que precisamos, a partir do FASTR
+- Correr uma importação DHIS2 com o assistente de quatro passos
+- Ler o Registo e corrigir o que falhou
 
-*Os participantes importarão os dados do seu país*
+*Os participantes importam os dados do seu país a partir do DHIS2. Nada é copiado à mão: a plataforma vai buscá-los.*

@@ -4,12 +4,24 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 3 : Créer l'indicateur commun
+## Étape 2 : nommer, puis enregistrer
 
-Un **indicateur commun** est le contenant, dans FASTR, qui accueillera les données venant de DHIS2. On le crée d'abord, puis on y mappe l'indicateur DHIS2.
+<div class="columns-text-left">
+<div>
 
-1. Cliquez sur **Données** dans le menu horizontal, puis ouvrez l'onglet **Indicateurs**
-2. Travaillez dans le sous-onglet **Indicateur commun** et cliquez sur **Créer un indicateur commun**
-3. Entrez un **ID commun** et un **libellé** (préparés dans votre fichier Excel), puis cliquez sur **Sauvegarder**
+FASTR propose un ID et un libellé pour chaque élément à partir de son nom DHIS2. Remplacez-les par les vôtres :
 
-Vous avez maintenant un contenant vide, prêt à recevoir les données DHIS2. Bien le nommer est important — voir la diapositive suivante.
+- **ID de l'indicateur** : lettres minuscules, chiffres et tirets bas seulement. Pour un indicateur de la liste FASTR, utilisez son ID standard (`anc1`, `anc4`, `penta1`).
+- **Libellé** : le nom affiché sur les graphiques. Accents et espaces acceptés.
+
+Cliquez sur **Enregistrer**. Répétez les étapes 1 et 2 jusqu'à couvrir toute votre liste.
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/indicateurs_v2/04_nommer.png)
+
+</div>
+</div>
+
+**Point de contrôle :** chaque nouvelle ligne montre le badge **Élément DHIS2**, son code DHIS2 sous **Défini par**, et une coche sous **Inclure**. Aucun chiffre n'a encore été téléchargé.

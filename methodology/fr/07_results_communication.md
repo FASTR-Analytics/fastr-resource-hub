@@ -217,6 +217,20 @@ La cartographie des utilisateurs finaux permet de s'assurer que nos produits ré
 | **Comment aiment-ils recevoir l'information ?** | Présentations lors de réunions de direction |
 | **Implications pour la conception de votre produit** | Court PPT avec des résultats axés uniquement sur les tendances des services ; ajouter des recommandations exploitables |
 
+## Construire un tableau de bord dans la plateforme
+
+Un tableau de bord (scorecard) est une table d'indicateurs par zone, chaque cellule colorée en vert, jaune ou rouge selon des seuils. Dans la plateforme, ce n'est ni un module à part ni une page spéciale : c'est une visualisation de type table sur le module **Valeurs des indicateurs**, colorée par des règles qui vivent dans le dictionnaire des indicateurs. La construire prend quatre gestes.
+
+**1. Définir les indicateurs comme indicateurs calculés.** Sur **Données → SNIS → Indicateurs**, cliquez sur **Ajouter un indicateur**, choisissez le type **Calculé**, et écrivez la **Formule** à partir des indicateurs existants et des chiffres de population, par exemple `anc4 / anc1` ou `anc1 / population_pregnancies`. Les boutons **Insérer un indicateur** et **Insérer une population** collent les bons noms. Les termes de population viennent de la page **Population** de l'instance, où sont stockées les personnes-années par zone, année et type de population.
+
+**2. Régler les règles d'affichage sur chaque indicateur.** Dans le même formulaire, sous **Analyse et affichage**, réglez le **Format** (nombre, pourcentage ou taux pour 10 000), la **Direction** (**Plus élevé = meilleur** ou **Plus bas = meilleur**), une **Cible** facultative, et la **Règle de mise en forme conditionnelle** : des seuils croissants qui définissent les tranches, par exemple 70 et 80 pour une couverture où moins de 70 % est rouge, de 70 à 80 % jaune et plus de 80 % vert. La règle appartient à l'indicateur ; chaque tableau de bord qui le montre le colore de la même façon.
+
+**3. Générer un paquet de résultats avec Valeurs des indicateurs.** Les indicateurs calculés n'ont pas de valeurs tant que le module **Valeurs des indicateurs** n'a pas tourné. Générez un paquet de résultats (**Résultats → Générer un nouveau paquet de résultats**) avec ce module coché, puis épinglez-le ou rattachez-le au projet. Les modifications de formules, de seuils ou de chiffres de population prennent effet dans le paquet suivant, pas dans le paquet courant.
+
+**4. Créer la table dans le projet.** Dans le projet, cliquez sur **Créer une visualisation**, choisissez le module **Valeurs des indicateurs**, la mesure **Valeur de l'indicateur** et le préréglage **Tableau de bord**. La table liste les indicateurs par zone pour la période choisie. Dans le panneau de style, mettez la **Mise en forme conditionnelle** sur **Indicateur** : chaque valeur est alors colorée selon la règle de son propre indicateur, et la légende montre les tranches. Enregistrez la visualisation, puis ajoutez-la à un tableau de bord, un rapport ou un diaporama comme n'importe quelle autre.
+
+Deux habitudes gardent un tableau de bord fiable. Décidez les seuils avec le programme, et notez d'où ils viennent, parce que ce sont les couleurs qui portent le message. Et vérifiez le Registre avant chaque paquet, parce qu'un indicateur à mois manquants affiche une valeur trompeuse plutôt qu'une cellule vide.
+
 ---
 
 <!--

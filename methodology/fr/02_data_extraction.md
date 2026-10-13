@@ -143,6 +143,42 @@ Cette section couvrira :
 - Les exigences en matière de transformation des données
 - Les contrôles d'assurance qualité des données extraites
 
+## Importer les données dans la plateforme FASTR
+
+Le Data Downloader décrit ci-dessus produit des fichiers. Sur une instance pays de la plateforme FASTR, les mêmes données sont tirées directement de DHIS2 par la plateforme elle-même, sans fichier intermédiaire. Trois choses doivent exister, dans cet ordre : une connexion DHIS2 enregistrée, une liste d'indicateurs, et une importation.
+
+### La connexion DHIS2
+
+Un administrateur enregistre une connexion DHIS2 par instance, sur la page **Données**, carte **Connexion DHIS2** : l'URL de DHIS2 et les identifiants d'un utilisateur DHIS2 qui peut lire les données et les métadonnées. La connexion est enregistrée chiffrée et sert à chaque recherche et à chaque importation ; personne ne retape d'identifiants.
+
+### La liste des indicateurs
+
+Tous les indicateurs de l'instance vivent dans une seule table (**Données → SNIS → Indicateurs**). Chaque ligne a un **ID de l'indicateur** (lettres minuscules, chiffres et tirets bas, par exemple `anc1`), un **libellé** affiché sur les graphiques, et un **type** :
+
+| Type | Ce que c'est | Comment il reçoit ses données |
+|------|--------------|-------------------------------|
+| **Élément DHIS2** | Un élément de données ou un indicateur DHIS2, avec au besoin une combinaison d'options de catégorie | Récupéré par une importation DHIS2 |
+| **Téléversé** | Des valeurs fournies dans un fichier CSV | Téléversé sur la page Importations |
+| **Somme** | La somme d'autres indicateurs | Calculé à partir de ses membres |
+| **Calculé** | Une formule sur d'autres indicateurs et des chiffres de population | Calculé par le module Valeurs des indicateurs à la génération d'un paquet de résultats |
+
+Les lignes marquées **Spécial** sont les indicateurs que les modules d'analyse lisent par leur ID (`anc1`, `delivery`, `bcg`, `penta1` et les autres). On les remplit avec le bon code DHIS2 plutôt que de les recréer.
+
+Pour ajouter des éléments DHIS2 : cliquez sur **Ajouter depuis DHIS2**, cherchez dans DHIS2 par nom ou par ID, cliquez sur **Ajouter** à côté de chaque élément, puis **Suivant : nommer les indicateurs**, donnez à chacun un ID et un libellé, et **Enregistrer**. Un sous-groupe, comme une tranche d'âge, s'ajoute depuis la ligne de combinaison d'options de catégorie de l'élément, pas depuis la ligne principale.
+
+### L'importation
+
+**Données → SNIS → Données → Importations** a trois onglets, **En cours**, **À venir** et **Historique**, et le bouton **Nouvelle importation DHIS2**. L'assistant a quatre étapes :
+
+1. **Indicateurs** : cochez les indicateurs à récupérer. Les indicateurs calculés, sommes et téléversés ne sont pas récupérés, parce qu'une importation DHIS2 ne peut pas le faire ; l'assistant le signale.
+2. **Heure** : **Maintenant**, **Une fois, à une heure donnée**, ou **Récurrente** (chaque jour, semaine, mois ou tous les trois mois, avec une heure de début et un fuseau horaire). Une importation récurrente est ce qui garde une instance à jour sans que personne ait à y penser.
+3. **Configuration** : la plage de périodes, sous la forme d'une année et d'un mois de départ et d'un nombre de mois.
+4. **Vérifier et lancer** : la connexion, les indicateurs, la fenêtre et le nombre de paires (élément DHIS2, mois) à récupérer. Depuis la version 1.76, cette étape interroge aussi DHIS2 sur la sélection avant le lancement et avertit des ID qui pointent vers une formule DHIS2 plutôt qu'un élément de données, et des ID que DHIS2 ne connaît plus. Cliquez sur **Lancer l'importation**.
+
+L'importation tourne sur le serveur. L'onglet **En cours** montre la progression, **Historique** garde le résultat, et l'importation conserve toutes les paires réussies même si certaines ont échoué. L'onglet **Registre** de la page Données SNIS liste, par indicateur, les mois qui ont des données, la dernière importation et les mois en échec, et permet de relancer seulement ceux-là.
+
+Une importation change les données de l'instance, pas ce que voient les projets. Les projets lisent un paquet de résultats ; après une importation, un administrateur génère donc un nouveau paquet (**Résultats → Générer un nouveau paquet de résultats**) et l'épingle ou le rattache. La séquence importer, générer, épingler est la routine mensuelle d'une instance.
+
 ---
 
 <!--

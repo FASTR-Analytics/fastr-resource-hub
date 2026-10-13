@@ -6,17 +6,17 @@ paginate: true
 
 ## Séance pratique : ajouter des indicateurs en équipe
 
-Nous avons préparé un fichier Excel avec les indicateurs DHIS2 déjà trouvés et sélectionnés pour la plateforme — ceux qui comptent pour reproduire vos rapports et bulletins. Il contient un onglet par groupe de travail.
+Nous avons préparé un tableur d'indicateurs DHIS2 déjà repérés et sélectionnés pour la plateforme, ceux dont vous avez besoin pour reproduire vos rapports et bulletins. Il a un onglet par groupe de travail.
 
-**Comment nous allons procéder — un seul écran à la fois.** Pour éviter les conflits et les bugs, les indicateurs sont ajoutés depuis un seul poste, en partage d'écran, et chaque groupe prend la main à tour de rôle.
+**Comment nous travaillons : un écran à la fois.** Pour éviter les doublons, les indicateurs sont ajoutés depuis un seul ordinateur, écran partagé, et chaque groupe prend son tour.
 
-1. **Chacun son tour** — l'animateur partage son écran ; chaque groupe prend la main à tour de rôle
-2. **Vos indicateurs** — ouvrez l'onglet de votre groupe, ajoutez vos indicateurs attribués comme dans la démonstration, puis laissez la place au groupe suivant
-3. **Une seule mise à jour** — une fois tous les indicateurs saisis, importez les données une seule fois, depuis cet ordinateur
+1. **À tour de rôle** : le facilitateur partage son écran ; chaque groupe mène à son tour
+2. **Ajoutez vos indicateurs** : ouvrez l'onglet de votre groupe, ajoutez vos indicateurs comme montré, puis passez la main
+3. **Une seule importation** : quand tous les groupes ont fini, lancez une importation DHIS2 depuis cet ordinateur, puis générez un paquet de résultats
 
 <!--
-PRESENTER NOTES:
-- Vérifiez que le fichier Excel partagé est ouvert, avec un onglet par groupe, avant de commencer.
-- Faites respecter la règle d'un seul écran — des modifications simultanées depuis plusieurs machines créent des conflits et des indicateurs communs en double.
-- Ne faites l'importation unique des données qu'une fois tous les groupes ont fini le mapping.
+NOTES POUR LE PRÉSENTATEUR :
+- Vérifier que le tableur partagé est ouvert avec un onglet par groupe avant de commencer.
+- Faire respecter la règle de l'écran unique : des saisies simultanées depuis plusieurs machines créent des indicateurs en double.
+- Lancer l'importation unique seulement quand tous les groupes ont fini, puis générer le paquet.
 -->

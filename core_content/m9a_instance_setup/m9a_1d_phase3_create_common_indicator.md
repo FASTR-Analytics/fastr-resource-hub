@@ -4,12 +4,24 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 3: Create the common indicator
+## Step 2: name, then save
 
-A **common indicator** is the container inside FASTR that will hold the data from DHIS2. You create it first, then map the DHIS2 indicator into it.
+<div class="columns-text-left">
+<div>
 
-1. Click **Data** in the top menu, then open the **Indicators** tab
-2. Work in the **Common indicator** sub-tab and click **Create common indicator**
-3. Enter a **common ID** and a **label** (prepared in your spreadsheet), then click **Save**
+FASTR proposes an ID and a label for each element from its DHIS2 name. Replace them with yours:
 
-You now have an empty container ready to receive DHIS2 data. Naming it well matters — see the next slide.
+- **Indicator ID**: lowercase letters, digits and underscores only. For an indicator on the FASTR list, use its standard ID (`anc1`, `anc4`, `penta1`).
+- **Label**: the name shown on charts. Accents and spaces are fine.
+
+Click **Save**. Repeat steps 1 and 2 until your whole list is covered.
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/indicators_v2_en/04_name.png)
+
+</div>
+</div>
+
+**Checkpoint:** each new row shows the **DHIS2 element** badge, its DHIS2 code under **Defined by**, and a tick under **Include**. No numbers have been downloaded yet.

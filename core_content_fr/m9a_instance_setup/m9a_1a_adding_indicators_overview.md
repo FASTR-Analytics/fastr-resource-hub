@@ -4,18 +4,26 @@ theme: fastr
 paginate: true
 ---
 
-## Ajouter des indicateurs à votre instance
+## Ajouter des indicateurs : une table, quatre types
 
-Votre instance pays contient déjà les indicateurs prioritaires SRMNIA-N. Mais elle ne contient pas forcément tous les indicateurs dont vos rapports et bulletins ont besoin.
+<div class="columns-text-left">
+<div>
 
-**FASTR et DHIS2 sont deux bases de données distinctes.** Pour utiliser un indicateur DHIS2 dans FASTR, vous reliez les deux : vous importez l'indicateur depuis DHIS2 et vous le mappez à un « indicateur commun » dans la plateforme.
+Votre instance contient déjà les indicateurs SRMNIA-N prioritaires. Elle n'a peut-être pas tous ceux dont vos rapports ont besoin. Tous les indicateurs vivent dans **une seule table** : **Données → SNIS → Indicateurs**.
 
-Le processus comporte cinq phases :
-
-| Phase | Où ? | Quoi ? |
+| Type | Ce que c'est | D'où viennent ses chiffres |
 |---|---|---|
-| 1. Identifier | DHIS2 | Trouver le nom officiel et l'UID (11 caractères) |
-| 2. Documenter | Fichier Excel | Saisir le nom et l'UID avant de commencer |
-| 3. Créer l'indicateur commun | FASTR | Créer le contenant : un ID commun et un libellé |
-| 4. Importer l'indicateur DHIS2 | FASTR | Se connecter à DHIS2, chercher par UID, ajouter |
-| 5. Mapper | FASTR | Relier l'indicateur DHIS2 importé à l'indicateur commun |
+| **Élément DHIS2** | Un élément de données ou un indicateur DHIS2 | Une importation DHIS2 |
+| **Téléversé** | Des valeurs d'un fichier CSV | La page Importations |
+| **Somme** | D'autres indicateurs additionnés | Calculé à partir de ses membres |
+| **Calculé** | Une formule, p. ex. `anc4 / anc1` | Le module Valeurs des indicateurs, à la génération du paquet |
+
+Les lignes **Spécial** (`anc1`, `delivery`, `bcg`…) sont lues par les modules par leur ID : remplissez-les, ne les recréez pas.
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/indicateurs_v2/02_liste_indicateurs.png)
+
+</div>
+</div>

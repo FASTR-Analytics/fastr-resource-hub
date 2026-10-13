@@ -218,6 +218,20 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 | **How do they like to receive their information?** | Presentations at top management meeting |
 | **Design implications for your output** | Short PPT with results focused only on service trends; Add actionable recommendations |
 
+## Building a scorecard in the platform
+
+A scorecard is a table of indicators by area, each cell colored green, yellow or red against thresholds. In the platform it is not a separate module or a special page: it is a table visualization on the **Indicator values** module, colored by rules that live in the indicator dictionary. Building one takes four moves.
+
+**1. Define the indicators as calculated indicators.** On **Data → HMIS → Indicators**, click **Add indicator**, choose the type **Calculated**, and write the **Formula** over existing indicators and population figures, for example `anc4 / anc1` or `anc1 / population_pregnancies`. The **Insert indicator** and **Insert population** buttons paste the right names. Population terms come from the instance **Population** page, where person-years by area, year and population type are stored.
+
+**2. Set the display rules on each indicator.** In the same form, under **Analysis and display**, set the **Format** (number, percent, or rate per 10,000), the **Direction** (**Higher is better** or **Lower is better**), an optional **Target**, and the **Conditional formatting rule**: ascending thresholds that define the bands, for example 70 and 80 for a coverage where below 70 % is red, 70 to 80 % is yellow and above 80 % is green. The rule belongs to the indicator, so every scorecard that shows it colors it the same way.
+
+**3. Generate a results package with Indicator values.** Calculated indicators have no values until the **Indicator values** module runs. Generate a results package (**Results → Generate new results package**) with that module ticked, then pin it or attach it to the project. Edits to formulas, thresholds or population figures take effect in the next package, not in the current one.
+
+**4. Create the table in the project.** In the project, click **Create visualization**, pick the **Indicator values** module, the metric **Indicator value**, and the preset **Scorecard table**. The table lists indicators by area for the chosen period. In the style panel, set **Conditional formatting** to **Indicator**: each value is then colored by its own indicator's rule, and the legend shows the bands. Save the visualization, and add it to a dashboard, a report or a slide deck like any other.
+
+Two habits keep a scorecard trustworthy. Decide thresholds with the program, and record where they come from, because the colors carry the message. And check the Ledger before each package, because an indicator with missing months shows a misleading value rather than an empty cell.
+
 ---
 
 <!--

@@ -4,14 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 1 : Identifier l'indicateur dans DHIS2
+## Étape 1 : trouver l'indicateur dans DHIS2, depuis FASTR
 
-Chaque élément de données dans DHIS2 possède un identifiant unique — un UID de 11 caractères. C'est ainsi que FASTR retrouve l'indicateur exact que vous voulez.
+<div class="columns-text-left">
+<div>
 
-**Dans DHIS2 :**
+1. Sur la liste des indicateurs, cliquez sur **Ajouter depuis DHIS2** (en haut à droite). FASTR utilise la **connexion DHIS2** enregistrée de l'instance.
+2. Tapez un mot du nom officiel DHIS2 (`prénatale`) ou collez l'ID DHIS2, puis **Rechercher**.
+3. Cliquez sur **Ajouter** à côté de chaque élément voulu. Il passe dans **Éléments sélectionnés**. Relancez une recherche si besoin ; la sélection est gardée.
+4. Cliquez sur **Suivant : nommer les indicateurs (N)**.
 
-1. Trouvez l'indicateur ou l'élément de données dont vous avez besoin
-2. Notez son nom officiel
-3. Copiez son UID (11 caractères)
+</div>
+<div>
 
-C'est l'UID que vous rechercherez plus tard, au moment d'importer l'indicateur dans FASTR — notez-le donc soigneusement.
+![w:100%](../../resources/screenshots/indicateurs_v2/03_recherche_dhis2.png)
+
+</div>
+</div>
+
+Un sous-groupe (tranche d'âge, sexe) ? Dépliez le chevron de la ligne et ajoutez la ligne **COC**, pas la ligne principale. Les lignes grisées « Ne peut pas être ajouté » ne sont pas des comptages mensuels.

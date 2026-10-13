@@ -4,14 +4,22 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 1: Identify the indicator in DHIS2
+## Step 1: find the indicator in DHIS2, from inside FASTR
 
-Every data element in DHIS2 has a unique identifier — a UID of 11 characters. This is how FASTR finds the exact indicator you want.
+<div class="columns-text-left">
+<div>
 
-**In DHIS2:**
+1. On the indicator list, click **Add from DHIS2** (top right). FASTR uses the instance's stored **DHIS2 connection**.
+2. Type a word from the official DHIS2 name (`antenatal`) or paste the DHIS2 ID, then **Search**.
+3. Click **Add** next to each element you want. It moves to **Selected items**. Search again if needed; the selection is kept.
+4. Click **Next: name indicators (N)**.
 
-1. Find the indicator or data element you need
-2. Note its official name
-3. Copy its UID (11 characters)
+</div>
+<div>
 
-The UID is what you will search for later when you import the indicator into FASTR, so record it carefully.
+![w:100%](../../resources/screenshots/indicators_v2_en/03_search_dhis2.png)
+
+</div>
+</div>
+
+A subgroup (an age band, a sex)? Unfold the row's chevron and add the **COC** line, not the main line. Greyed rows marked "Cannot be added" are not monthly counts.

@@ -4,13 +4,26 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 5: Map to the common indicator
+## Step 3: import the data, four steps
 
-The final step links the imported DHIS2 indicator to the common indicator that will hold its data.
+<div class="columns-text-left">
+<div>
 
-1. Go back to the **Common indicator** tab
-2. Select the common indicator you prepared to receive this data, and click the **pencil** icon
-3. Click the **+** button to associate a DHIS2 indicator
-4. Find the matching DHIS2 indicator in the list and select it
+**Data → HMIS → Data → Imports**, then **New DHIS2 import**. The wizard uses the stored connection; there is nothing to type.
 
-The DHIS2 indicator and the common indicator are now connected. The last step is to pull in the data.
+| Step | What you do |
+|---|---|
+| **Indicators** | Tick the indicators to fetch (the top checkbox selects all) |
+| **Time** | **Now**, **Once, at a set time**, or **Recurring** |
+| **Config** | The period range: starting year and month, number of months |
+| **Review & launch** | Check connection, indicators, window and the number of (element, month) pairs, then **Start import** |
+
+</div>
+<div>
+
+![w:100%](../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
+
+</div>
+</div>
+
+Since version 1.76 the review step asks DHIS2 about your selection first. It warns when an ID points to a DHIS2 formula rather than a data element, or when DHIS2 no longer knows the ID.

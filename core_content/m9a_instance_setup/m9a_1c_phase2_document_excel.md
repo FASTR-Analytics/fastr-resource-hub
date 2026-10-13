@@ -4,13 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Phase 2: Document your indicators
+## Prepare your list before you start
 
-Before you touch the platform, prepare a simple spreadsheet to catalog the DHIS2 indicators you want to bring in.
+Before touching the platform, list the indicators you want in a simple spreadsheet. For each one:
 
-**For each indicator, record:**
+- The **official DHIS2 name** and, if you have it, the **DHIS2 ID** (11 characters)
+- The **Indicator ID** you will give it in FASTR (`anc1_first_trimester`)
+- The **label** that will appear on charts ("ANC1, first trimester")
+- For a calculated indicator: the **formula** and the **thresholds**
 
-- The official DHIS2 name
-- The UID
-
-Doing this first keeps the work organized, and means you can copy the details straight into the platform in the next phases instead of switching back and forth to DHIS2.
+One tab per working group keeps the practice session orderly. You will copy from this sheet into the platform instead of switching back and forth to DHIS2.
