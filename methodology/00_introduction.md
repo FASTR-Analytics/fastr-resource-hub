@@ -30,7 +30,7 @@ Existing health systems data sources are critical but often come with challenges
 
 Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
 
-![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 *Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
 
@@ -48,7 +48,7 @@ FASTR's four technical approaches, underpinned by capacity strengthening and dat
 
 Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
 
-![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical_approaches_image.svg)
+![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 *Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
 
@@ -157,12 +157,13 @@ This methodology documentation describes the complete FASTR approach to routine 
 
 ### Analytics modules (FASTR platform)
 
-The FASTR analytics platform includes five automated modules:
+The FASTR analytics platform includes six automated modules:
 
 - [**Data quality assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
 - [**Data quality adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
-- [**Service utilization analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
-- [**Coverage estimates**](06b_coverage_estimates.md) - Modules 5 & 6 in the platform (Part 1: denominator calculation, Part 2: coverage estimation). Methods for estimating service coverage and comparing trends to country targets
+- [**Service utilization analysis**](06a_service_utilization.md) - Service volumes over time: year-over-year and quarter-on-quarter change, and the effect of data quality adjustments
+- [**Disruption detection**](06b_disruption_detection.md) - Module M11 in the platform. Two-part Bayesian model that flags real changes in service delivery among reporting facilities, separately from reporting gaps
+- [**Coverage estimates**](06c_coverage_estimates.md) - Modules 5 & 6 in the platform (Part 1: denominator calculation, Part 2: coverage estimation). Methods for estimating service coverage and comparing trends to country targets
 
 ## References
 

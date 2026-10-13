@@ -210,7 +210,7 @@ See `help and instructions/05_style_guide.md` for full guide.
 | 3b | `03b_ai_assistant.md` | AI Assistant |
 | 4 | `04_data_quality_assessment.md` | DQ Assessment |
 | 5 | `05_data_quality_adjustment.md` | DQ Adjustment |
-| 6 | `06a_service_utilization.md`, `06b_coverage_estimates.md` | Data Analysis |
+| 6 | `06a_service_utilization.md`, `06b_disruption_detection.md`, `06c_coverage_estimates.md` | Data Analysis (volumes, Bayesian disruption detection M11, coverage M5/M6) |
 | 7 | `07_results_communication.md` | Results Communication |
 | 8 | (Survey & HFA) | Survey & HFA |
 | 9a-9h | `10_workshop_activities.md` | Workshop Activities & Platform Guides |

@@ -26,7 +26,7 @@ The `methodology/` folder contains the entire **FASTR RMNCAH-N Service Use Monit
 | `04_data_quality_assessment.md` | Data quality assessment |
 | `05_data_quality_adjustment.md` | Data quality adjustment |
 | `06a_service_utilization.md` | Service utilization analysis |
-| `06b_coverage_estimates.md` | Coverage estimates |
+| `06c_coverage_estimates.md` | Coverage estimates |
 | `07_results_communication.md` | Results communication |
 | `08_survey_hfa.md` | Survey & HFA |
 | `11_user_guide.md` | Platform user guide |

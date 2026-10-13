@@ -33,7 +33,7 @@ As fontes de dados dos sistemas de saúde existentes são essenciais, mas muitas
 
 As abordagens analíticas de ciclo rápido fornecem dados atempados, rigorosos e de alta prioridade que respondem às prioridades específicas de cada país e às necessidades de utilização de dados. Este ciclo contínuo de analisar-aprender-reforçar-agir procura melhorar a utilização sistemática de dados para a tomada de decisões com vista a melhorar os resultados da RMNCAH-N.
 
-quadro analítico de ciclo rápido FASTR que mostra o ciclo contínuo de analisar, aprender, reforçar e atuar](resources/diagrams_pt/FASTR_rapid_cycle_analytics_approach.svg)
+![quadro analítico de ciclo rápido FASTR que mostra o ciclo contínuo de analisar, aprender, reforçar e atuar](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 *Figura 2. Abordagem analítica de ciclo rápido do FASTR: Analisar, aprender, reforçar, atuar*
 
@@ -51,7 +51,7 @@ As quatro abordagens técnicas do FASTR, sustentadas pelo reforço das capacidad
 
 As actividades ilustrativas de desenvolvimento de capacidades incluem apoio para automatizar a extração, limpeza e análise de dados de rotina e apoio para institucionalizar abordagens de recolha e análise de dados de inquéritos telefónicos rápidos. O apoio à utilização de dados dá prioridade à integração da análise de ciclo rápido nos mecanismos de revisão e feedback de dados existentes a nível nacional e subnacional para reforçar a utilização sistemática de dados para a tomada de decisões.
 
-análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)](resources/diagrams_pt/Technical_approaches_image.svg)
+![análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 *Figura 3. Análise de ciclo rápido no âmbito da iniciativa Avaliações Frequentes e Ferramentas de Sistema para a Resiliência (FASTR)*
 
@@ -160,12 +160,13 @@ Esta documentação metodológica descreve a abordagem completa do FASTR à aná
 
 ### Módulos de análise (plataforma FASTR)
 
-A plataforma de análise FASTR inclui cinco módulos automatizados:
+A plataforma de análise FASTR inclui seis módulos automatizados:
 
 - [**Avaliação da qualidade dos dados**](04_data_quality_assessment.md) - Módulo 1 da plataforma. Avaliação da qualidade dos dados do HMIS através de métricas de exaustividade, deteção de anomalias e consistência
 - [**Ajuste da qualidade dos dados**](05_data_quality_adjustment.md) - Módulo 2 na plataforma. Técnicas para melhorar a exatidão dos dados, ajustando os valores anómalos e os relatórios incompletos
-- [Análise da utilização de serviços**](06a_service_utilization.md) - Módulo 3 da plataforma. Análise dos padrões de utilização dos serviços de saúde para detetar e quantificar perturbações
-- [Estimativas de cobertura**](06b_coverage_estimates.md) - Módulos 5 e 6 da plataforma (Parte 1: cálculo do denominador, Parte 2: estimativa de cobertura). Métodos para estimar a cobertura dos serviços e comparar as tendências com os objectivos nacionais
+- [**Análise da utilização de serviços**](06a_service_utilization.md) - Volumes de serviços ao longo do tempo: variação de ano para ano e de trimestre para trimestre, e efeito dos ajustamentos de qualidade dos dados
+- [**Deteção de perturbações**](06b_disruption_detection.md) - Módulo M11 da plataforma. Modelo bayesiano em duas partes que sinaliza mudanças reais na prestação de serviços entre as unidades que reportam, separadamente das lacunas de reporte
+- [Estimativas de cobertura**](06c_coverage_estimates.md) - Módulos 5 e 6 da plataforma (Parte 1: cálculo do denominador, Parte 2: estimativa de cobertura). Métodos para estimar a cobertura dos serviços e comparar as tendências com os objectivos nacionais
 
 ## Referências
 

@@ -22,7 +22,7 @@ nav:
     - Data Quality Adjustments: 05_data_quality_adjustment.md
   - Data Analysis Methods:
     - Service Utilization: 06a_service_utilization.md
-    - Coverage Estimates: 06b_coverage_estimates.md
+    - Coverage Estimates: 06c_coverage_estimates.md
   - Disclaimer: disclaimer.md
 
 # Theme Configuration

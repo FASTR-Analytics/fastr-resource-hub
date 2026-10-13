@@ -15,8 +15,8 @@ The code lives in a separate repository: [**github.com/FASTR-Analytics/modules**
 | **M1** — Data Quality Assessment | `m001/` | `methodology/04_data_quality_assessment.md` |
 | **M2** — Data Quality Adjustment | `m002/` | `methodology/05_data_quality_adjustment.md` |
 | **M3** — Service Utilization & Disruption Detection | `m003/` | `methodology/06a_service_utilization.md` |
-| **M5** — Denominator calculation (Part 1 of coverage) | `m005/` | `methodology/06b_coverage_estimates.md` |
-| **M6** — Coverage Estimation (Part 2 of coverage) | `m006/` | `methodology/06b_coverage_estimates.md` |
+| **M5** — Denominator calculation (Part 1 of coverage) | `m005/` | `methodology/06c_coverage_estimates.md` |
+| **M6** — Coverage Estimation (Part 2 of coverage) | `m006/` | `methodology/06c_coverage_estimates.md` |
 
 > **There is no platform `M4`** — the numbering skips 4. Use M1/M2/M3/M5/M6 explicitly when writing about platform modules.
 >

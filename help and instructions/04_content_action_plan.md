@@ -20,7 +20,7 @@ Audit of content status across all methodology modules.
 | `04_data_quality_assessment.md` | Data quality assessment |
 | `05_data_quality_adjustment.md` | Data quality adjustment |
 | `06a_service_utilization.md` | Service utilization analysis |
-| `06b_coverage_estimates.md` | Coverage estimates |
+| `06c_coverage_estimates.md` | Coverage estimates |
 | `07_results_communication.md` | Results communication |
 | `08_survey_hfa.md` | Survey & HFA |
 | `11_user_guide.md` | Platform user guide |
@@ -88,7 +88,7 @@ Output of `python3 tools/translate_docs.py --lang fr --status` and `--lang pt --
 | `04_data_quality_assessment.md` | ⚠ needs review | 47 | ⚠ needs review | 47 |
 | `05_data_quality_adjustment.md` | ⚠ needs review | 27 | ⚠ needs review | 27 |
 | `06a_service_utilization.md` | ⚠ needs review | 68 | ⚠ needs review | 68 |
-| `06b_coverage_estimates.md` | ⚠ needs review | 65 | ⚠ needs review | 60 |
+| `06c_coverage_estimates.md` | ⚠ needs review | 65 | ⚠ needs review | 60 |
 | `07_results_communication.md` | ⚠ needs review | 36 | ⚠ needs review | 36 |
 | `08_survey_hfa.md` | ⚠ needs review | 37 | ⚠ needs review | 37 |
 | `11_user_guide.md` | ⚠ needs review | 9 | ⚠ needs review | 10 |

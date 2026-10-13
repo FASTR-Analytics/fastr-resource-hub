@@ -206,7 +206,7 @@ TOPIC_NAMES = {
     'm5_s2': 'outlier_adjustment_output',
     'm5_s2b': 'completeness_adjustment_output',
 
-    # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
+    # m6 - Data Analysis (from 06a_service_utilization.md, 06c_coverage_estimates.md)
     'm6_0': 'from_adjusted_data_to_analysis',
     'm6_1': 'service_utilization_analysis',
     'm6_1c': 'service_utilization_output',

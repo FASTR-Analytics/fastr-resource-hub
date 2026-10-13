@@ -23,8 +23,9 @@ Esta documentação descreve a abordagem [FASTR](https://data.gffportal.org/key-
 | [**A plataforma de análise de dados FASTR**](03_fastr_analytics_platform.md) | Utilização da plataforma para análise automatizada
 | [**Avaliação da qualidade dos dados**](04_data_quality_assessment.md) | Módulo 1 na plataforma. Avaliação da integridade e da consistência
 | [**Ajuste da qualidade dos dados**](05_data_quality_adjustment.md) | Módulo 2 na plataforma. Ajustando para outliers e dados faltantes
-| [**Análise da utilização de serviços**](06a_service_utilization.md) | Módulo 3 na plataforma. Análise dos padrões de utilização dos serviços de saúde
-| [**Estimativas de cobertura**](06b_coverage_estimates.md) | Módulos 5 e 6 na plataforma (Parte 1: denominadores, Parte 2: cobertura). Estimativa da cobertura dos serviços em relação aos objectivos
+| [**Análise da utilização de serviços**](06a_service_utilization.md) | Volumes de serviços ao longo do tempo: variação anual e trimestral, efeito dos ajustamentos |
+| [**Deteção de perturbações**](06b_disruption_detection.md) | Módulo M11 na plataforma. Deteção bayesiana de perturbações nos serviços entre as unidades que reportam |
+| [**Estimativas de cobertura**](06c_coverage_estimates.md) | Módulos 5 e 6 na plataforma (Parte 1: denominadores, Parte 2: cobertura). Estimativa da cobertura dos serviços em relação aos objectivos |
 
 ## Ligações rápidas
 
