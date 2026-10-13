@@ -14,7 +14,7 @@ FASTR catalyzes continuous cycles of analysis, learning, system strengthening, a
 </div>
 <div>
 
-![FASTR rapid-cycle analytics approach h:520](../../resources/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR rapid-cycle analytics approach w:560](../../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 </div>
 </div>

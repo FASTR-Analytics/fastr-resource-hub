@@ -224,7 +224,7 @@ FASTR catalyse des cycles continus d'analyse, d'apprentissage, de renforcement d
 </div>
 <div>
 
-![Approche d'analyse en cycle rapide FASTR h:520](../resources/diagrams_fr/FASTR_rapid_cycle_analytics_approach.svg)
+![Approche d'analyse en cycle rapide FASTR w:560](../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 </div>
 </div>
@@ -243,7 +243,7 @@ NOTES DU PRÉSENTATEUR :
 
 FASTR est une approche intégrée reposant sur quatre méthodes rigoureuses, rapides et peu coûteuses pour le suivi des systèmes de soins de santé primaires, soutenues par le renforcement des capacités et l'appui à l'utilisation des données, adaptés aux besoins du pays.
 
-![Quatre approches techniques FASTR w:620](../resources/diagrams_fr/Technical_approaches_image.svg)
+![Quatre approches techniques FASTR w:800](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 <!--
 NOTES DU PRÉSENTATEUR :

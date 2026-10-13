@@ -14,7 +14,7 @@ FASTR catalyse des cycles continus d'analyse, d'apprentissage, de renforcement d
 </div>
 <div>
 
-![Approche d'analyse en cycle rapide FASTR h:520](../../resources/diagrams_fr/FASTR_rapid_cycle_analytics_approach.svg)
+![Approche d'analyse en cycle rapide FASTR w:560](../../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
 </div>
 </div>

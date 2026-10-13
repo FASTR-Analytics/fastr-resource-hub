@@ -8,7 +8,7 @@ paginate: true
 
 FASTR est une approche intégrée reposant sur quatre méthodes rigoureuses, rapides et peu coûteuses pour le suivi des systèmes de soins de santé primaires, soutenues par le renforcement des capacités et l'appui à l'utilisation des données, adaptés aux besoins du pays.
 
-![Quatre approches techniques FASTR w:620](../../resources/diagrams_fr/Technical_approaches_image.svg)
+![Quatre approches techniques FASTR w:800](../../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 <!--
 NOTES DU PRÉSENTATEUR :

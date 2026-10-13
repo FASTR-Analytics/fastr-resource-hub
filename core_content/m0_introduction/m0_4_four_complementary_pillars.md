@@ -8,7 +8,7 @@ paginate: true
 
 FASTR is an integrated approach built on four rigorous, rapid, and low-cost methods for monitoring primary health care systems, underpinned by capacity strengthening and data-use support adapted to country needs.
 
-![Four FASTR technical approaches w:620](../../resources/diagrams/Technical_approaches_image.svg)
+![Four FASTR technical approaches w:800](../../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
 <!--
 PRESENTER NOTES:
