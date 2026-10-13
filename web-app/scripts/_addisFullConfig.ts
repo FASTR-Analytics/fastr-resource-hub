@@ -161,8 +161,8 @@ export function addisFullConfig(language: 'en' | 'fr' | 'pt') {
           slides: [
             'm6_1_service_utilization_analysis.md',
             'm6_1d_quarter_on_quarter_change.md',
-            'm6_2_service_disruptions_surpluses_detection.md',
-            'm6_2d_service_disruption_output.md',
+            'm6_2e_bayesian_two_questions_per_facility.md',
+            'm6_2g_reading_bayesian_disruptions_chart.md',
             'm6_6_service_coverage_introduction.md',
             'm6_7_definition_of_coverage.md',               // Service coverage example
             'm6_9_demographic_cascade.md',                  // Expected relationships
