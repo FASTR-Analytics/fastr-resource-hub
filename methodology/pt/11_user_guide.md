@@ -46,7 +46,9 @@ Para solicitar uma instância de país para a sua organização, contacte Ashley
 
 ??? "2.1 Compreender os módulos"
 
-    Módulos de análise disponíveis, instalação de módulos e execução de análises.
+    Módulos de análise disponíveis e a sua execução quando um pacote de resultados é gerado.
+
+    *Nota: esta demonstração foi gravada numa versão anterior da plataforma, antes dos pacotes de resultados. Os módulos são agora selecionados no assistente de geração de pacotes de resultados, e não instalados por projeto.*
 
     <iframe src="https://scribehow.com/page-embed/21_Understanding_Modules__WuxRH16OStKherxJbQu8Lw" width="100%" height="800" allow="fullscreen" style="border: 0; min-height: 640px"></iframe>
 
@@ -81,8 +83,8 @@ Fluxo de trabalho de configuração de projectos, opções de configuração e m
 
 *Tutoriais em breve.*
 
-## 8. Administração: Módulos
+## 8. Administração: Pacotes de resultados
 
-Módulos de análise disponíveis, instalação de módulos e execução de análises.
+Seleção e configuração dos módulos de análise, geração de pacotes de resultados e fixação ou anexação aos projetos.
 
 *Tutoriais em breve.*

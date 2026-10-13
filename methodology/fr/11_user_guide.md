@@ -41,7 +41,9 @@ Pour demander une instance nationale pour votre organisation, contactez Ashley S
 
 ## 2. Modules
 
-Comprendre les modules, les modules d'analyse disponibles, l'installation des modules et l'exécution des analyses.
+Comprendre les modules d'analyse disponibles et leur exécution lors de la génération d'un paquet de résultats.
+
+*Remarque : cette démonstration a été enregistrée sur une version antérieure de la plateforme, avant les paquets de résultats. Les modules se sélectionnent désormais dans l'assistant de génération des paquets de résultats, et non plus projet par projet.*
 
 *Tutoriels bientôt disponibles.*
 
@@ -75,8 +77,8 @@ Flux de travail pour la mise en place des projets, options de configuration et m
 
 *Tutoriels bientôt disponibles.*
 
-## 8. Administration : Modules
+## 8. Administration : Paquets de résultats
 
-Modules d'analyse disponibles, installation des modules et exécution des analyses.
+Sélection et configuration des modules d'analyse, génération des paquets de résultats, épinglage et rattachement aux projets.
 
 *Tutoriels bientôt disponibles.*

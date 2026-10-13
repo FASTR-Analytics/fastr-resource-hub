@@ -12,7 +12,7 @@ Il existe deux niveaux d'autorisations sur la plateforme :
 
 **Rôles au niveau de l'instance :**
 
-- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules, et exécuter des analyses
+- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, importer des données et générer des paquets de résultats
 
 &nbsp;
 

@@ -14,7 +14,7 @@ The platform provides comprehensive data management functionality. Users can imp
 
 ### Data analysis
 
-Analytical capabilities are delivered through configurable modules. Users can enable and configure analytical modules that process data using R-based statistical scripts. These modules can be chained together to support complex, multi-step analyses, with built-in tools for monitoring processing status and reviewing logs.
+Analytical capabilities are delivered through configurable modules. Administrators select and configure the modules when generating a **results package** — a versioned set of computed results produced at the instance level. The modules process data using R-based statistical scripts and can be chained together to support complex, multi-step analyses, with built-in tools for monitoring processing status and reviewing logs. Every project attached to a package reads the same computed results.
 
 ### AI assistant
 
@@ -58,14 +58,14 @@ The **instance** serves as the organization's primary workspace within the platf
 
 ### Project level
 
-**Projects** provide focused analysis workspaces within an instance. Each project allows users to select which data to include by defining specific time periods, facilities, and indicators. Within a project, users can enable analytical modules, create visualizations, and build reports tailored to specific analytical objectives.
+**Projects** provide focused authoring workspaces within an instance. Each project reads its numbers from the **results package** attached to it — projects do not process data themselves. Within a project, users create visualizations, dashboards, presentations, and reports tailored to specific analytical objectives. Creating a project requires only a name, and a project can optionally be scoped to a single administrative area.
 
 ![Projects within instance](resources/diagrams/projects_within_instance.svg)
 
 
 ### Data flow
 
-The platform follows a structured data flow: **Data Import → Module Processing → Visualizations → Dashboards, Presentations, and Reports**. Users first upload health facility data at the instance level. Projects are then created with specific data windows that define the scope of analysis. Analytical modules process and analyze the selected data, producing outputs that can be turned into charts, maps, and tables. Visualizations can then be assembled into dashboards for live sharing, presentations for live delivery, or narrative reports for written dissemination.
+The platform follows a structured data flow: **Data Import → Results Package Generation → Visualizations → Dashboards, Presentations, and Reports**. Administrators first import health facility data at the instance level. A results package is then generated: the selected analytical modules process the data and store their outputs together as a versioned package. Projects attach a package — several projects can read the same one — and turn its outputs into charts, maps, and tables. Visualizations can then be assembled into dashboards for live sharing, presentations for live delivery, or narrative reports for written dissemination.
 
 
 ## Technical requirements
@@ -88,7 +88,7 @@ An **instance** is the organization's primary workspace within the platform. It 
 
 ### Projects
 
-A **project** is a focused analysis workspace within an instance. Projects enable users to work with specific subsets of data by defining time periods, facilities, and indicators relevant to a particular analytical objective. Within each project, users can enable analytical modules, create visualizations, generate reports, and collaborate with team members. Multiple projects can exist within one instance, each with different data scopes and user access configurations.
+A **project** is a focused authoring workspace within an instance. Each project reads its numbers from the results package attached to it. Within each project, users create visualizations, generate reports, and collaborate with team members. Multiple projects can exist within one instance, each with its own user access configuration — and optionally scoped to a single administrative area.
 
 ### Structure
 
@@ -116,7 +116,7 @@ Health Facility Assessment (HFA) data contains information about facility charac
 - **DHIS2 indicators** are imported from external DHIS2 systems and may follow different naming conventions or calculation methods.
 - **Calculated indicators** are derived metrics that combine two values — typically a numerator indicator divided by a denominator (another indicator, or a population-based figure). For example, ANC1 visits divided by the target pregnant-women population gives an ANC1 coverage estimate. Calculated indicators can be displayed as a percent, a count, or a rate per 10,000, and they support traffic-light thresholds for quick performance review (e.g., green at or above 80%, yellow 70–79%, red below 70%).
 
-Calculated indicators are snapshotted into a project at HMIS-import time, so changing a definition forces a re-import to take effect. Population-based denominators require a population CSV to be uploaded at the instance level before they can be used.
+Calculated indicator definitions are applied when a results package is generated, so a changed definition takes effect in the next package. Population-based denominators require a population CSV to be uploaded at the instance level before they can be used.
 
 ### Datasets and versions
 
@@ -126,7 +126,7 @@ A **dataset** is a collection of health data, either HMIS or HFA. Each time data
 
 **Modules** are data processing units that execute analytical R scripts within the platform. Each module takes input data from datasets or from the outputs of other modules, processes and analyzes the data according to defined statistical methods, and produces results objects as output files. Modules can be chained together to support complex analytical workflows where one module uses another's outputs as its inputs.
 
-The platform distinguishes between two module types. A **Module Definition** is the template or blueprint for a type of analysis, defining the analytical methods and parameters available. A **Module Instance** is a module that has been enabled and configured within a specific project. Some modules have prerequisites, meaning that other modules must be enabled first before they can be used.
+Modules are selected and configured in the results-package generation wizard, at the instance level. Some modules have prerequisites — other modules whose outputs they need — and the platform includes those automatically when a dependent module is selected.
 
 ### Visualizations
 
@@ -152,9 +152,11 @@ Dashboards also support **replicant groups** — a single tile can hold many var
 
 Reports export to **Word (.docx) or PDF** and are designed for stakeholders reading a document end-to-end, rather than sitting through a presentation. Use a presentation when the deliverable will be projected in a meeting; use a report when the deliverable will be read on a desk or in an inbox.
 
-### Windowing
+### Results packages
 
-**Windowing** refers to the process of selecting a subset of instance data for use within a project. Users can filter data by time period (selecting specific months or years), by indicators (including all or only specific indicators), by administrative areas (including all or specific regions), and by facilities (filtering by facility type or ownership). This functionality allows projects to focus on the data most relevant to their analytical objectives without loading the entire dataset.
+A **results package** is a versioned set of computed results generated at the instance level. Generating a package runs the selected analytical modules over the chosen datasets and stores their outputs together. Projects do not process data themselves: each project attaches one package and reads all its numbers from it, so several projects can work from the same consistent results.
+
+An administrator can **pin** a package as the instance reference, and each project can be set to always follow the pinned package. A routine monthly update then comes down to three steps: import the new data, generate a package, and pin it — the projects follow.
 
 ### Disaggregation
 
@@ -170,7 +172,7 @@ The platform automatically assesses data completeness and accuracy, generating q
 
 ### Lock status
 
-Projects can be **locked** to prevent modifications to their configuration while still allowing users to view reports. When a project is locked, modules and data settings cannot be changed, providing a mechanism to preserve analytical configurations once they have been finalized.
+Projects can be **locked** to prevent modifications while still allowing users to view reports. When a project is locked, its visualizations and settings cannot be changed, providing a mechanism to preserve work once it has been finalized.
 
 !!! tip "User guide"
     For step-by-step tutorials on using the platform, see the [FASTR user guide](11_user_guide.md).
@@ -221,7 +223,7 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 **Data Management** — Import facility lists and indicator data from DHIS2 or files
 
-**Data Analysis** — Run statistical modules for quality assessment and adjustment
+**Data Analysis** — Built-in statistical modules for quality assessment, adjustment, and coverage
 
 **Visualization** — Explore results with interactive charts and tables
 
@@ -245,6 +247,7 @@ An instance contains:
 - All registered users and their accounts
 - The shared administrative structure (regions, districts, facilities)
 - Indicator definitions and data sources
+- Results packages — the computed analyses that projects read
 - All projects created for that country
 
 **Think of an instance as your country's dedicated workspace.**
@@ -259,7 +262,7 @@ There are two levels of permissions in the platform:
 
 **Instance-level roles:**
 
-- **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+- **Instance Administrators** can add users, create projects, assign roles, upload data, and generate results packages
 
 &nbsp;
 

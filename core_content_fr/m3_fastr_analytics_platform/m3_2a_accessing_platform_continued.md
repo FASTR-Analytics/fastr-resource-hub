@@ -13,6 +13,7 @@ Une instance contient :
 - Tous les utilisateurs enregistrés et leurs comptes
 - La structure administrative partagée (régions, districts, établissements)
 - Les définitions des indicateurs et les sources de données
+- Les paquets de résultats — les analyses calculées que lisent les projets
 - Tous les projets créés pour ce pays
 
 **Considérez une instance comme l'espace de travail dédié à votre pays.**

@@ -12,7 +12,7 @@ There are two levels of permissions in the platform:
 
 **Instance-level roles:**
 
-- **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
+- **Instance Administrators** can add users, create projects, assign roles, upload data, and generate results packages
 
 &nbsp;
 

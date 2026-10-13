@@ -16,7 +16,7 @@ paginate: true
 
 **Gestion des données** — Importez des listes d'établissements et des données d'indicateurs depuis DHIS2 ou des fichiers
 
-**Analyse des données** — Exécutez des modules statistiques pour l'évaluation et l'ajustement de la qualité
+**Analyse des données** — Modules statistiques intégrés pour l'évaluation de la qualité, l'ajustement et la couverture
 
 **Visualisation** — Explorez les résultats à l'aide de graphiques et de tableaux interactifs
 
