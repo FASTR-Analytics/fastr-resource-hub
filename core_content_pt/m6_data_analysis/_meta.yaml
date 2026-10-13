@@ -35,6 +35,26 @@ slides:
   order: 2.04
   variant: full
   title: Saída de interrupção de serviço
+- file: m6_2e_bayesian_two_questions_per_facility.md
+  order: 2.05
+  variant: full
+  title: 'À maneira bayesiana: duas perguntas por unidade'
+- file: m6_2f_bayesian_expected_volume.md
+  order: 2.06
+  variant: full
+  title: Como se constrói o volume esperado
+- file: m6_2g_reading_bayesian_disruptions_chart.md
+  order: 2.07
+  variant: full
+  title: Ler o gráfico bayesiano de perturbações
+- file: m6_2h_reporting_gap_vs_service_gap.md
+  order: 2.08
+  variant: full
+  title: Lacuna de reporte ou lacuna de serviço?
+- file: m6_2i_disruption_detection_configuration_parameters.md
+  order: 2.09
+  variant: full
+  title: 'Módulo de deteção de perturbações: parâmetros de configuração'
 - file: m6_5a_service_utilization_configuration_parameters.md
   order: 5.01
   variant: full
@@ -131,6 +151,10 @@ slides:
   order: 2.02
   variant: condensed
   title: Saída de interrupção de serviço
+- file: m6_s2c_bayesian_disruption_what_to_look_at.md
+  order: 2.03
+  variant: condensed
+  title: 'Deteção de perturbações (bayesiana): o que olhar'
 - file: m6_s3_coverage_methods.md
   order: 3.0
   variant: condensed

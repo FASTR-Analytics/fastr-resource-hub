@@ -1267,3 +1267,190 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
 **Dernière mise à jour** : 06-05-2026
 **Contact** : <fastr@worldbank.org>
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Modifier les diapositives ci-dessous                   //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m6_2e -->
+<!-- _class: output -->
+## Version bayésienne : deux questions par établissement
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Deux questions par établissement w:640](../resources/diagrams_fr/disruption_bayes_two_questions.svg)
+
+</div>
+<div class="output-text">
+
+**Question 1 :** cet établissement a-t-il rapporté ce mois-ci ? Posée pour chaque établissement et chaque mois.
+
+**Question 2 :** quand il rapporte, combien délivre-t-il ? Posée seulement pour les mois avec un rapport.
+
+**Pourquoi les séparer :** un total bas peut venir d'établissements silencieux ou d'établissements qui délivrent moins. Seul le second cas est une perturbation de service.
+
+</div>
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- C'est le module Détection des perturbations (M11) de la plateforme. Il a remplacé le modèle à cartes de contrôle (M3) en 2026 ; les anciennes diapositives sont gardées pour référence.
+- Le modèle travaille établissement par établissement, mois par mois, puis additionne par province et district. Pas de modèle séparé par zone.
+- La question 1 est un modèle oui/non du rapportage. La question 2 est un modèle de comptage du volume de services, ajusté seulement là où un rapport existe.
+- Chaque établissement a son propre niveau de base : un hôpital et un poste de santé sont comparés chacun à leur propre historique.
+- La tendance et la saison sont dans les deux questions : une baisse de saison sèche ou une hausse nationale lente n'est pas appelée perturbation.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2f -->
+## Comment le volume attendu est construit
+
+Pour chaque zone et chaque mois, le modèle additionne le volume attendu **des seuls établissements qui ont rapporté ce mois-là**, et le compare à ce que ces mêmes établissements ont réellement rapporté.
+
+<div style="font-size: 0.9em;">
+
+| | Ancienne approche (M3) | Approche bayésienne (M11) |
+|---|---|---|
+| **Unité modélisée** | Total du district ou de la province | Chaque établissement |
+| **Rapports manquants** | Comblés, puis modélisés | Modélisés comme une question à part |
+| **Volume attendu** | Tendance + saison sur le total | Tendance + saison + niveau propre à chaque établissement |
+| **Incertitude** | Seuils fixes | Bande de crédibilité à 95 % |
+| **Un établissement devient silencieux** | Ressemble à une baisse | Retiré des deux côtés de la comparaison |
+
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- La ligne clé est la dernière. Quand un établissement cesse de rapporter, l'ancien modèle voyait une baisse du total. Le nouveau retire cet établissement de l'observé et de l'attendu pour ce mois, et la comparaison reste à périmètre égal.
+- « Bande de crédibilité » : la fourchette dans laquelle le modèle s'attend à voir le volume 95 fois sur 100. Hors de la bande, c'est un signal ; dedans, c'est la variation normale.
+- La bande est plus large pour les petites zones et les indicateurs à faible volume, et c'est normal : moins de données, moins de certitude.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2g -->
+<!-- _class: output -->
+## Lire le graphique bayésien des perturbations
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Graphique bayésien des perturbations h:300](../resources/diagrams_fr/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** le volume observé (ligne pleine), le volume attendu (ligne pointillée) et la bande de crédibilité à 95 % (grise).
+
+**Ce que cela montre :** rouge là où l'observé passe sous la bande, un déficit ; vert là où il passe au-dessus, un excédent. Dans la bande, c'est la variation normale.
+
+**Interprétation :** une plage rouge est une vraie baisse parmi les établissements qui ont rapporté. Demandez ce qui s'est passé ces mois-là : ruptures de stock, grèves, insécurité, campagne ailleurs.
+
+</div>
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- Graphique illustratif, dessiné avec les couleurs de la plateforme. Dans la plateforme : paquets de résultats → graphique des perturbations avec bande de crédibilité à 95 %, un panneau par indicateur, national ou par zone administrative 2.
+- Un seul mois rouge mérite un regard ; plusieurs mois rouges d'affilée sont le motif sur lequel agir.
+- Pour les indicateurs où une hausse est défavorable (mort-nés, décès), les couleurs sont inversées.
+- Les derniers mois peuvent changer : des rapports tardifs arrivent après la génération du paquet.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2h -->
+<!-- _class: output -->
+## Écart de rapportage ou écart de service ?
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Écart de rapportage vs écart de service h:300](../resources/diagrams_fr/disruption_bayes_gaps.svg)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** trois barres pour une zone et un mois : l'attendu si tous les établissements avaient rapporté, l'attendu vu qui rapporte d'habitude, et l'observé.
+
+**Ce que cela montre :** la première marche est **l'écart de rapportage**, des rapports manquants. La seconde est **l'écart de service**, un vrai changement de prestation.
+
+**Interprétation :** un grand écart de rapportage est un problème de données à régler avec les établissements. Un grand écart de service est une question pour le programme.
+
+</div>
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- Ces deux écarts sont dans la sortie du module (gap_reporting, gap_service) pour chaque zone et chaque mois, à côté des valeurs observées et attendues.
+- Aussi dans la sortie : mean_p, la chance moyenne de rapporter dans la zone ce mois-là. Elle suit la complétude telle que le modèle la voit.
+- Ordre pratique : regardez d'abord l'écart de rapportage. S'il explique l'essentiel du manque, revenez à la qualité des données avant de demander au programme pourquoi les services ont baissé.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2i -->
+## Module de détection des perturbations : paramètres de configuration
+
+**Note :** se règlent dans Résultats → Paramètres par défaut des modules. Ils s'appliquent à chaque paquet de résultats généré ensuite.
+
+<div style="font-size: 0.75em;">
+
+| Paramètre | Description |
+|-----------|-------------|
+| **Variable de comptage** | Comptage non ajusté ou ajusté pour les valeurs aberrantes. Les comptages imputés pour la complétude sont refusés : le module modélise lui-même les lacunes de rapportage. Défaut : ajusté pour les valeurs aberrantes |
+| **Termes de saisonnalité de Fourier (K)** | Paires sinus/cosinus pour la saisonnalité. Défaut 2 (annuel + semestriel) ; 3–4 pour les indicateurs de type campagne comme la vitamine A |
+| **Tirages a posteriori** | Oui = bandes de crédibilité correctement calibrées au niveau district, environ dix fois plus lent. Défaut non |
+| **Traitement des zéros** | all = chaque zéro est un vrai rapport (défaut) ; none = les zéros sont manquants ; auto / strict = un zéro est réel seulement si un autre indicateur a été soumis ce mois-là ; detect = choix d'après les données |
+| **Exclure les mois avant le premier rapport** | Ignorer les mois antérieurs au premier rapport d'un établissement, pour ne pas compter les nouveaux établissements comme silencieux. Défaut oui |
+| **Grâce de fermeture (mois)** | Exclure les mois au-delà de N mois après le dernier rapport d'un établissement, comme fermeture présumée. Défaut 0 (désactivé) |
+
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- La plupart des pays tournent avec les valeurs par défaut. Les deux réglages qui méritent une discussion : la politique des zéros (votre DHIS2 remplit-il des zéros automatiquement ?) et le K de Fourier pour les indicateurs de campagne.
+- Les tirages a posteriori ne comptent que si les bandes au niveau district servent à décider ; pour le suivi national et provincial de routine, le défaut suffit.
+- La grâce de fermeture sert aux systèmes où beaucoup d'établissements cessent définitivement de rapporter ; sinon, laissez-la désactivée.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2c -->
+<!-- _class: output -->
+## Détection des perturbations (bayésienne) : quoi regarder
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Graphique bayésien des perturbations h:300](../resources/diagrams_fr/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**Ce que vous voyez :** observé (plein) vs attendu (pointillé) avec une bande grise à 95 %, pour les établissements qui ont rapporté chaque mois.
+
+**Ce que cela montre :** rouge sous la bande, c'est un vrai déficit parmi les établissements rapporteurs, pas des rapports manquants. Vert au-dessus, c'est un excédent.
+
+**Interprétation :** plusieurs mois rouges d'affilée sont le motif sur lequel agir. Regardez d'abord l'écart de rapportage, puis demandez au programme ce qui s'est passé.
+
+</div>
+</div>
+
+<!--
+NOTES POUR LE PRÉSENTATEUR :
+- Version condensée de m6_2e à m6_2h. Le modèle pose deux questions par établissement : a-t-il rapporté, et combien a-t-il délivré quand il a rapporté.
+- Comme l'attendu et l'observé utilisent les mêmes établissements chaque mois, un établissement devenu silencieux n'apparaît pas comme une perturbation.
+- Module M11 de la plateforme ; les anciennes diapositives à cartes de contrôle (m6_2, m6_2b, m6_2d) décrivent le modèle M3 retiré.
+-->
+<!-- /SLIDE -->

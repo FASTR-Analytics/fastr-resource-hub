@@ -1171,3 +1171,190 @@ Until 2026 disruption detection ran in the Service utilization module (M3), whic
 
     - Results depend on quality of completeness and outlier adjustments from earlier modules
     - Missing geographic identifiers will reduce coverage of subnational analysis
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Edit workshop slides below this line                //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m6_2e -->
+<!-- _class: output -->
+## The Bayesian way: two questions per facility
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Two questions per facility w:640](../resources/diagrams/disruption_bayes_two_questions.svg)
+
+</div>
+<div class="output-text">
+
+**Question 1:** did this facility report this month? Asked for every facility and every month.
+
+**Question 2:** when it reports, how much does it deliver? Asked only for the months with a report.
+
+**Why separate them:** a low total can come from facilities going silent or from facilities delivering less. Only the second is a service disruption.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- This is the Disruption detection module (M11) in the platform. It replaced the control-chart model (M3) in 2026; the older slides are kept for reference.
+- The model works facility by facility, month by month, then adds up to province and district. No separate model per area.
+- Question 1 is a yes/no model of reporting. Question 2 is a count model of service volume, fitted only where a report exists.
+- Each facility gets its own baseline level, so a hospital and a health post are each compared with their own history.
+- Trend and season are in both questions, so a dry-season dip or a slow national rise is not called a disruption.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2f -->
+## How the expected volume is built
+
+For each area and month, the model adds up the expected volume of **only the facilities that reported that month**, and compares it with what those same facilities actually reported.
+
+<div style="font-size: 0.9em;">
+
+| | Old approach (M3) | Bayesian approach (M11) |
+|---|---|---|
+| **Unit modeled** | District or province total | Each facility |
+| **Missing reports** | Filled in, then modeled | Modeled as a separate question |
+| **Expected volume** | Trend + season on the total | Trend + season + each facility's own level |
+| **Uncertainty** | Fixed thresholds | 95 % credible band |
+| **A facility goes silent** | Looks like a drop | Removed from both sides of the comparison |
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- The key line is the last one. When a facility stops reporting, the old model saw a drop in the total. The new model drops that facility from both observed and expected for that month, so the comparison stays like for like.
+- "Credible band": the range in which the model expects the volume to fall 95 times out of 100. Outside the band is a signal; inside is normal variation.
+- The band is wider for small areas and low-volume indicators, which is right: less data, less certainty.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2g -->
+<!-- _class: output -->
+## Reading the Bayesian disruptions chart
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Bayesian disruptions chart h:300](../resources/diagrams/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**What you see:** observed volume (solid line), expected volume (dashed line), and the 95 % credible band (grey).
+
+**What it shows:** red where observed falls below the band, a deficit; green where it rises above, a surplus. Inside the band is normal variation.
+
+**Interpretation:** a red stretch is a real decline among the facilities that reported. Ask what happened in those months: stock-outs, strikes, insecurity, a campaign elsewhere.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Illustrative chart, drawn with the platform's colours. In the platform: Results packages → the disruptions chart with 95 % credible band, one panel per indicator, national or by admin area 2.
+- A single red month is worth a look; several red months in a row are the pattern to act on.
+- For indicators where an increase is bad (stillbirths, deaths), the colours are swapped.
+- The last months can change: late reports arrive after the package is generated.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2h -->
+<!-- _class: output -->
+## Reporting gap or service gap?
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Reporting gap vs service gap h:300](../resources/diagrams/disruption_bayes_gaps.svg)
+
+</div>
+<div class="output-text">
+
+**What you see:** three bars for one area and month: what was expected if every facility had reported, what was expected given who usually reports, and what was observed.
+
+**What it shows:** the first step down is the **reporting gap**, missing reports. The second is the **service gap**, a real change in delivery.
+
+**Interpretation:** a large reporting gap is a data problem to fix with the facilities. A large service gap is a program question.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- These two gaps are in the module output (gap_reporting, gap_service) for every area and month, next to the observed and expected values.
+- Also in the output: mean_p, the average chance of reporting in the area that month. It tracks completeness as the model sees it.
+- Practical order: check the reporting gap first. If it explains most of the shortfall, go back to data quality before asking the program why services fell.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2i -->
+## Disruption detection module: Configuration parameters
+
+**Note:** Set in Results → Module defaults. They apply to every results package generated afterward.
+
+<div style="font-size: 0.75em;">
+
+| Parameter | Description |
+|-----------|-------------|
+| **Count variable** | Unadjusted or outlier-adjusted count. Completeness-imputed counts are refused: the module models reporting gaps itself. Default: outlier-adjusted |
+| **Fourier seasonality terms (K)** | Sine/cosine pairs for seasonality. Default 2 (annual + semi-annual); 3–4 for campaign-style indicators such as vitamin A |
+| **Posterior draws** | Yes = properly calibrated credible bands at district level, about ten times slower. Default no |
+| **Zero handling** | all = every zero is a real report (default); none = zeros are missing; auto / strict = a zero is real only if another indicator was submitted that month; detect = choose from the data |
+| **Exclude pre-launch months** | Ignore months before a facility's first report, so new facilities are not counted as silent. Default yes |
+| **Closure grace (months)** | Drop months more than N months after a facility's last report, as presumed closure. Default 0 (off) |
+
+</div>
+
+<!--
+PRESENTER NOTES:
+- Most countries run with the defaults. The two settings worth a conversation are the zero policy (does your DHIS2 auto-fill zeros?) and Fourier K for campaign indicators.
+- Posterior draws matter only when district-level bands will be used for decisions; for routine national and provincial monitoring the default is fine.
+- Closure grace is for systems where many facilities go permanently dark, otherwise leave it off.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2c -->
+<!-- _class: output -->
+## Disruption detection (Bayesian): what to look at
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Bayesian disruptions chart h:300](../resources/diagrams/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**What you see:** observed (solid) vs expected (dashed) with a grey 95 % band, for the facilities that reported each month.
+
+**What it shows:** red below the band is a real deficit among reporting facilities, not missing reports. Green above is a surplus.
+
+**Interpretation:** several red months in a row are the pattern to act on. Check the reporting gap first, then ask the program what happened.
+
+</div>
+</div>
+
+<!--
+PRESENTER NOTES:
+- Condensed version of m6_2e to m6_2h. The model asks two questions per facility: did it report, and how much did it deliver when it did.
+- Because expected and observed use the same facilities each month, a facility going silent does not show as a disruption.
+- Module M11 in the platform; the older control-chart slides (m6_2, m6_2b, m6_2d) describe the retired M3 model.
+-->
+<!-- /SLIDE -->

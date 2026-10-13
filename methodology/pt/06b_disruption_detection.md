@@ -1175,3 +1175,190 @@ Até 2026, a deteção de perturbações era executada no módulo de utilizaçã
 
     - Os resultados dependem da qualidade da exaustividade e dos ajustamentos de módulos anteriores
     - A falta de identificadores geográficos reduzirá a cobertura da análise subnacional
+
+---
+
+<!--
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//   _____ _     _____ ____  _____    ____ ___  _   _ _____ _   _ //
+//  / ____| |   |_   _|  _ \| ____|  / ___/ _ \| \ | |_   _| \ | |//
+//  | (___ | |     | | | | | | |__   | |  | | | |  \| | | | |  \| |//
+//   \___ \| |     | | | | | |  __|  | |  | | | | . ` | | | | . ` |//
+//   ____) | |___ _| |_| |_| | |____ | |__| |_| | |\  | | | | |\  |//
+//  |_____/|_____|_____|____/|______| \____\___/|_| \_| |_| |_| \_|//
+//                                                                //
+//            Editar os diapositivos abaixo desta linha                //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+-->
+
+<!-- SLIDE:m6_2e -->
+<!-- _class: output -->
+## À maneira bayesiana: duas perguntas por unidade
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Duas perguntas por unidade w:640](../resources/diagrams_pt/disruption_bayes_two_questions.svg)
+
+</div>
+<div class="output-text">
+
+**Pergunta 1:** esta unidade reportou este mês? Feita para cada unidade e cada mês.
+
+**Pergunta 2:** quando reporta, quanto presta? Feita só para os meses com relatório.
+
+**Porquê separá-las:** um total baixo pode vir de unidades em silêncio ou de unidades que prestam menos. Só a segunda é uma perturbação do serviço.
+
+</div>
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- Este é o módulo Deteção de perturbações (M11) da plataforma. Substituiu o modelo de cartas de controlo (M3) em 2026; os diapositivos antigos ficam para referência.
+- O modelo trabalha unidade a unidade, mês a mês, e depois soma por província e distrito. Não há modelo separado por área.
+- A pergunta 1 é um modelo sim/não do reporte. A pergunta 2 é um modelo de contagem do volume de serviços, ajustado só onde existe relatório.
+- Cada unidade tem o seu próprio nível de base: um hospital e um posto de saúde são comparados cada um com o seu histórico.
+- A tendência e a época estão nas duas perguntas: uma quebra na estação seca ou uma subida nacional lenta não é chamada perturbação.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2f -->
+## Como se constrói o volume esperado
+
+Para cada área e mês, o modelo soma o volume esperado **apenas das unidades que reportaram nesse mês** e compara-o com o que essas mesmas unidades reportaram de facto.
+
+<div style="font-size: 0.9em;">
+
+| | Abordagem anterior (M3) | Abordagem bayesiana (M11) |
+|---|---|---|
+| **Unidade modelada** | Total do distrito ou da província | Cada unidade de saúde |
+| **Relatórios em falta** | Preenchidos e depois modelados | Modelados como pergunta separada |
+| **Volume esperado** | Tendência + época sobre o total | Tendência + época + nível próprio de cada unidade |
+| **Incerteza** | Limiares fixos | Banda de credibilidade de 95 % |
+| **Uma unidade fica em silêncio** | Parece uma quebra | Retirada dos dois lados da comparação |
+
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- A linha-chave é a última. Quando uma unidade deixa de reportar, o modelo antigo via uma quebra no total. O novo retira essa unidade do observado e do esperado nesse mês, e a comparação fica como-para-como.
+- «Banda de credibilidade»: o intervalo em que o modelo espera ver o volume 95 vezes em 100. Fora da banda é sinal; dentro é variação normal.
+- A banda é mais larga em áreas pequenas e indicadores de baixo volume, e isso é correto: menos dados, menos certeza.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2g -->
+<!-- _class: output -->
+## Ler o gráfico bayesiano de perturbações
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Gráfico bayesiano de perturbações h:300](../resources/diagrams_pt/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**O que vê:** volume observado (linha contínua), volume esperado (linha tracejada) e a banda de credibilidade de 95 % (cinzenta).
+
+**O que mostra:** vermelho onde o observado cai abaixo da banda, um défice; verde onde sobe acima, um excedente. Dentro da banda é variação normal.
+
+**Interpretação:** um troço vermelho é uma quebra real entre as unidades que reportaram. Pergunte o que aconteceu nesses meses: ruturas de stock, greves, insegurança, uma campanha noutro lado.
+
+</div>
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- Gráfico ilustrativo, desenhado com as cores da plataforma. Na plataforma: pacotes de resultados → gráfico de perturbações com banda de credibilidade de 95 %, um painel por indicador, nacional ou por área administrativa 2.
+- Um único mês vermelho merece um olhar; vários meses vermelhos seguidos são o padrão sobre o qual agir.
+- Para indicadores em que um aumento é mau (nados-mortos, óbitos), as cores trocam.
+- Os últimos meses podem mudar: relatórios tardios chegam depois de o pacote ser gerado.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2h -->
+<!-- _class: output -->
+## Lacuna de reporte ou lacuna de serviço?
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Lacuna de reporte vs lacuna de serviço h:300](../resources/diagrams_pt/disruption_bayes_gaps.svg)
+
+</div>
+<div class="output-text">
+
+**O que vê:** três barras para uma área e um mês: o esperado se todas as unidades tivessem reportado, o esperado dado quem costuma reportar, e o observado.
+
+**O que mostra:** o primeiro degrau é a **lacuna de reporte**, relatórios em falta. O segundo é a **lacuna de serviço**, uma mudança real na prestação.
+
+**Interpretação:** uma grande lacuna de reporte é um problema de dados a resolver com as unidades. Uma grande lacuna de serviço é uma questão para o programa.
+
+</div>
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- Estas duas lacunas estão na saída do módulo (gap_reporting, gap_service) para cada área e mês, ao lado dos valores observados e esperados.
+- Também na saída: mean_p, a probabilidade média de reportar na área nesse mês. Acompanha a completude tal como o modelo a vê.
+- Ordem prática: veja primeiro a lacuna de reporte. Se explica a maior parte da quebra, volte à qualidade dos dados antes de perguntar ao programa porque é que os serviços caíram.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_2i -->
+## Módulo de deteção de perturbações: parâmetros de configuração
+
+**Nota:** definem-se em Resultados → Predefinições dos módulos. Aplicam-se a todos os pacotes de resultados gerados depois.
+
+<div style="font-size: 0.75em;">
+
+| Parâmetro | Descrição |
+|-----------|-----------|
+| **Variável de contagem** | Contagem não ajustada ou ajustada para outliers. As contagens imputadas por completude são recusadas: o módulo modela ele próprio as lacunas de reporte. Predefinição: ajustada para outliers |
+| **Termos de sazonalidade de Fourier (K)** | Pares seno/cosseno para a sazonalidade. Predefinição 2 (anual + semestral); 3–4 para indicadores de campanha como a vitamina A |
+| **Amostras da posteriori** | Sim = bandas de credibilidade bem calibradas ao nível do distrito, cerca de dez vezes mais lento. Predefinição não |
+| **Tratamento dos zeros** | all = cada zero é um relatório real (predefinição); none = os zeros são em falta; auto / strict = um zero é real só se outro indicador foi submetido nesse mês; detect = escolha a partir dos dados |
+| **Excluir meses antes do primeiro relatório** | Ignorar os meses anteriores ao primeiro relatório de uma unidade, para não contar unidades novas como silenciosas. Predefinição sim |
+| **Tolerância de encerramento (meses)** | Excluir os meses mais de N meses depois do último relatório de uma unidade, como encerramento presumido. Predefinição 0 (desativado) |
+
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- A maioria dos países corre com as predefinições. Os dois ajustes que merecem conversa: a política de zeros (o vosso DHIS2 preenche zeros automaticamente?) e o K de Fourier para indicadores de campanha.
+- As amostras da posteriori só importam se as bandas ao nível do distrito servirem para decidir; para a monitorização nacional e provincial de rotina, a predefinição chega.
+- A tolerância de encerramento serve para sistemas em que muitas unidades deixam de reportar definitivamente; caso contrário, deixe desativada.
+-->
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_s2c -->
+<!-- _class: output -->
+## Deteção de perturbações (bayesiana): o que olhar
+
+<div class="output-layout">
+<div class="output-viz">
+
+![Gráfico bayesiano de perturbações h:300](../resources/diagrams_pt/disruption_bayes_chart.svg)
+
+</div>
+<div class="output-text">
+
+**O que vê:** observado (contínuo) vs esperado (tracejado) com uma banda cinzenta de 95 %, para as unidades que reportaram em cada mês.
+
+**O que mostra:** vermelho abaixo da banda é um défice real entre as unidades que reportam, não relatórios em falta. Verde acima é um excedente.
+
+**Interpretação:** vários meses vermelhos seguidos são o padrão sobre o qual agir. Veja primeiro a lacuna de reporte, depois pergunte ao programa o que aconteceu.
+
+</div>
+</div>
+
+<!--
+NOTAS PARA O APRESENTADOR:
+- Versão condensada de m6_2e a m6_2h. O modelo faz duas perguntas por unidade: reportou, e quanto prestou quando reportou.
+- Como o esperado e o observado usam as mesmas unidades em cada mês, uma unidade em silêncio não aparece como perturbação.
+- Módulo M11 da plataforma; os diapositivos antigos de cartas de controlo (m6_2, m6_2b, m6_2d) descrevem o modelo M3 retirado.
+-->
+<!-- /SLIDE -->
