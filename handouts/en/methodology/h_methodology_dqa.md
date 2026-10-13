@@ -8,7 +8,7 @@ footer: "FASTR · Methodology recap · Data quality assessment"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Methodology recap · Module M1</span>
+<span class="eyebrow">Methodology recap · Data quality assessment</span>
 
 # Data quality assessment
 

@@ -40,8 +40,8 @@ A escolha entre confiar apenas na análise do DHIS2 e aplicar a abordagem FASTR 
 
     - **A deteção de valores atípicos funciona com base na magnitude.** Um estabelecimento que regista 850 visitas ANC1 quando o seu intervalo habitual é de 100-200 é obviamente um valor atípico. O mesmo estabelecimento que comunica *"92% de cobertura "* não nos diz nada - a percentagem é limitada por 100, oculta o volume subjacente e apaga o sinal que utilizamos para assinalar erros de comunicação.
     - **Para obter um total regional ou nacional, a plataforma soma as contagens dos estabelecimentos. A média das percentagens entre estabelecimentos de diferentes dimensões dá uma resposta errada (um hospital com 100 camas e um posto de saúde com 5 camas teriam o mesmo peso).
-    - **O módulo 5 deriva a população alvo (mulheres grávidas, bebés, etc.) dos dados do HMIS, inquéritos e projecções da ONU. O módulo 6 calcula então a cobertura como `count ÷ denominator`. Se introduzir uma % de cobertura diretamente, não há contagem a dividir nem comparação a fazer.
-    - **Os módulos 1 e 2 detectam valores anómalos utilizando limiares estatísticos em valores brutos e preenchem os meses em falta utilizando médias móveis de contagens anteriores. Ambos os métodos são estatisticamente insignificantes em percentagens.
+    - **O módulo Denominadores de cobertura deriva a população alvo (mulheres grávidas, bebés, etc.) dos dados do HMIS, inquéritos e projecções da ONU. O módulo Estimativas de cobertura calcula então a cobertura como `count ÷ denominator`. Se introduzir uma % de cobertura diretamente, não há contagem a dividir nem comparação a fazer.
+    - **Os módulos de avaliação e de ajustes da qualidade dos dados detectam valores anómalos utilizando limiares estatísticos em valores brutos e preenchem os meses em falta utilizando médias móveis de contagens anteriores. Ambos os métodos são estatisticamente insignificantes em percentagens.
 
     **O que extrair:** apenas o numerador - número de serviços prestados, doses administradas, visitas registadas, óbitos registados, etc. A plataforma trata da agregação, do ajustamento e do cálculo da cobertura.
 
@@ -205,8 +205,8 @@ O FASTR analisa **contagens de serviços em bruto**, não percentagens, proporç
 
 - Não é possível detetar valores anómalos numa percentagem: esta limita-se a 100 e esconde o volume subjacente.
 - As percentagens não podem ser somadas em instalações de diferentes dimensões para produzir um total regional.
-- A plataforma constrói a própria cobertura a partir de contagens e denominadores populacionais (**Módulos 5 e 6**).
-- Os ajustamentos de anomalias e de exaustividade (**módulos 1 e 2**) requerem a execução de contagens brutas.
+- A plataforma constrói a própria cobertura a partir de contagens e denominadores populacionais (os módulos **Denominadores de cobertura** e **Estimativas de cobertura**).
+- Os ajustamentos de anomalias e de exaustividade (os módulos **Avaliação** e **Ajustes da qualidade dos dados**) requerem a execução de contagens brutas.
 
 </div>
 </div>

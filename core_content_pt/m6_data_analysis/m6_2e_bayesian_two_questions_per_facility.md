@@ -26,7 +26,7 @@ paginate: true
 
 <!--
 NOTAS PARA O APRESENTADOR:
-- Este é o módulo Deteção de perturbações (M11) da plataforma. Substituiu o modelo de cartas de controlo (M3) em 2026; os diapositivos antigos ficam para referência.
+- Este é o módulo Deteção de perturbações da plataforma. Substituiu em 2026 o antigo módulo de utilização de serviços, de cartas de controlo; os diapositivos antigos ficam para referência.
 - O modelo trabalha unidade a unidade, mês a mês, e depois soma por província e distrito. Não há modelo separado por área.
 - A pergunta 1 é um modelo sim/não do reporte. A pergunta 2 é um modelo de contagem do volume de serviços, ajustado só onde existe relatório.
 - Cada unidade tem o seu próprio nível de base: um hospital e um posto de saúde são comparados cada um com o seu histórico.

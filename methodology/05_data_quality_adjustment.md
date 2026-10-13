@@ -20,7 +20,7 @@ By systematically addressing outliers and missing data prior to analysis, this m
 
 | Component | Details |
 |-----------|---------|
-| **Inputs** | Raw HMIS data (`hmis_ISO3.csv`)<br>Outlier flags from Module 1 (`M1_output_outliers.csv`)<br>Completeness flags from Module 1 (`M1_output_completeness.csv`) |
+| **Inputs** | Raw HMIS data (`hmis_ISO3.csv`)<br>Outlier flags from the Data quality assessment module (`M1_output_outliers.csv`)<br>Completeness flags from the Data quality assessment module (`M1_output_completeness.csv`) |
 | **Outputs** | Facility-level adjusted data (`M2_adjusted_data.csv`)<br>Subnational aggregated data (`M2_adjusted_data_admin_area.csv`)<br>National aggregated data (`M2_adjusted_data_national.csv`)<br>Exclusion metadata (`M2_low_volume_exclusions.csv`) |
 | **Purpose** | Replace outlier values and fill missing data using facility-specific historical patterns; produces four adjustment scenarios (none, outliers only, completeness only, both) |
 
@@ -33,7 +33,7 @@ By systematically addressing outliers and missing data prior to analysis, this m
 The module applies a standardized, multi-step process to adjust routine health facility data while preserving underlying service delivery patterns:
 
 **Step 1: Load and prepare data**
-The module integrates three inputs: reported facility-level service volumes (`hmis_ISO3.csv`), outlier flags identifying anomalous values (`M1_output_outliers.csv` from Module 1), and completeness flags indicating months with incomplete reporting (`M1_output_completeness.csv` from Module 1). Indicators for which adjustment is not appropriate (any indicator whose name contains `death` or `still_birth`, case-insensitive) are identified and excluded from subsequent adjustment steps.
+The module integrates three inputs: reported facility-level service volumes (`hmis_ISO3.csv`), outlier flags identifying anomalous values (`M1_output_outliers.csv` from the Data quality assessment module), and completeness flags indicating months with incomplete reporting (`M1_output_completeness.csv` from the Data quality assessment module). Indicators for which adjustment is not appropriate (any indicator whose name contains `death` or `still_birth`, case-insensitive) are identified and excluded from subsequent adjustment steps.
 
 **Step 2: Identify low-volume indicators**
 Before any adjustments are applied, each indicator is assessed for sufficient volume. Indicators that never reach 100 reported events in any month across the full time series (`count >= 100`) are flagged and excluded from adjustment, as statistical smoothing methods are not meaningful for consistently low-count indicators. The list of excluded low-volume indicators is saved to `M2_low_volume_exclusions.csv`.
@@ -73,7 +73,7 @@ The module generates structured output files for facility-level, subnational, an
 
 ### Workflow diagram
 
-<iframe src="../resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 2 Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Data quality adjustments interactive workflow"></iframe>
 
 ### Key decision points
 
@@ -81,7 +81,7 @@ The module generates structured output files for facility-level, subnational, an
 
 The module applies adjustments to two categories of observations:
 
-- Values flagged as outliers through the statistical detection procedures implemented in Module 1  
+- Values flagged as outliers through the statistical detection procedures implemented in the Data quality assessment module  
 - Values corresponding to months identified as incomplete or missing due to reporting gaps  
 
 Certain indicators are explicitly excluded from adjustment:
@@ -101,7 +101,7 @@ The module generates four adjustment scenarios to accommodate different analytic
 ### Data processing and outputs
 
 **Input structure**  
-The module receives facility-level monthly service volumes together with data quality flags generated in Module 1, including outlier indicators and completeness status. Each facility–indicator–month combination is treated as a distinct observation for potential adjustment.
+The module receives facility-level monthly service volumes together with data quality flags generated in the Data quality assessment module, including outlier indicators and completeness status. Each facility–indicator–month combination is treated as a distinct observation for potential adjustment.
 
 **Application of adjustments**  
 Based on the selected scenario, adjusted service counts are generated. Observations flagged as outliers are replaced with values derived from facility-specific historical averages excluding anomalous periods. For months with incomplete or missing reporting, values are imputed using facility-level historical patterns to maintain continuity in the time series.
@@ -305,8 +305,8 @@ For the combined adjustment heatmap (output 3):
     **Parameters**:
 
     - `raw_data` (data.table): Original HMIS data with service counts
-    - `completeness_data` (data.table): Completeness flags from Module 1
-    - `outlier_data` (data.table): Outlier flags from Module 1
+    - `completeness_data` (data.table): Completeness flags from the Data quality assessment module
+    - `outlier_data` (data.table): Outlier flags from the Data quality assessment module
     - `adjust_outliers` (logical): Whether to apply outlier adjustment
     - `adjust_completeness` (logical): Whether to apply completeness adjustment
 
@@ -357,7 +357,7 @@ For the combined adjustment heatmap (output 3):
 
 ??? "Outlier adjustment methodology"
 
-    Outlier adjustment is applied to any facility-month value flagged in Module 1 (`outlier_flag == 1`). The goal is to replace these outlier values using valid historical data from the same facility and indicator.
+    Outlier adjustment is applied to any facility-month value flagged in the Data quality assessment module (`outlier_flag == 1`). The goal is to replace these outlier values using valid historical data from the same facility and indicator.
 
     **Statistical approach**:
 
@@ -442,7 +442,7 @@ For the combined adjustment heatmap (output 3):
 
 ??? "Completeness adjustment methodology"
 
-    Completeness adjustment is applied to any facility-month where the working count is missing (`is.na(count_working)`). In the `completeness` scenario this is driven by the original `count` being `NA` (i.e., the facility did not report that month). In the `both` scenario, the working count may also be `NA` because the outlier step did not produce a replacement. The `completeness_flag` from Module 1 is merged in for reference but is not used as the replacement trigger.
+    Completeness adjustment is applied to any facility-month where the working count is missing (`is.na(count_working)`). In the `completeness` scenario this is driven by the original `count` being `NA` (i.e., the facility did not report that month). In the `both` scenario, the working count may also be `NA` because the outlier step did not produce a replacement. The `completeness_flag` from the Data quality assessment module is merged in for reference but is not used as the replacement trigger.
 
     **Statistical approach**:
 
@@ -793,7 +793,7 @@ For the combined adjustment heatmap (output 3):
     **Solution**:
 
     - Compare `count_final_none` vs `count_final_both` to assess adjustment impact
-    - Review Module 1 completeness statistics
+    - Review the completeness statistics of the Data quality assessment module
     - Consider data quality threshold for inclusion
 
 ??? "Quality assurance checks"
@@ -881,7 +881,7 @@ For the combined adjustment heatmap (output 3):
 <!-- SLIDE:m5_1 -->
 ## From detection to correction
 
-Module 1 flagged the data-quality problems — extreme values, missing reports, internal inconsistencies. Module 2 picks up from there.
+The Data quality assessment module flagged the data-quality problems — extreme values, missing reports, internal inconsistencies. The Data quality adjustments module picks up from there.
 
 Rather than discarding the flagged values, FASTR replaces them with reasonable estimates from each facility's own historical patterns — like replacing an illegible meter reading with the average of the neighboring months — so the service-utilization and coverage analyses downstream work from cleaner data.
 
@@ -1065,7 +1065,7 @@ PRESENTER NOTES:
 <!-- SLIDE:m5_s0 -->
 ## From detection to correction
 
-Module 1 flagged the data-quality problems — extreme values, missing reports, internal inconsistencies. Module 2 picks up from there.
+The Data quality assessment module flagged the data-quality problems — extreme values, missing reports, internal inconsistencies. The Data quality adjustments module picks up from there.
 
 Rather than discarding the flagged values, FASTR replaces them with reasonable estimates from each facility's own historical patterns — like replacing an illegible meter reading with the average of the neighboring months — so the service-utilization and coverage analyses downstream work from cleaner data.
 

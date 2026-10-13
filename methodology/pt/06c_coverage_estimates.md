@@ -18,7 +18,7 @@ Em conjunto, estes componentes convertem volumes de serviços administrativos em
 
 ### Fundamentação analítica
 
-A cobertura dos serviços de saúde é uma métrica essencial para avaliar o desempenho e a equidade do sistema de saúde. Embora o Módulo 2 produza volumes de serviços ajustados, estes números por si só não indicam até que ponto os serviços chegam às populações que se destinam a servir. As estimativas de cobertura colocam a prestação de serviços em contexto, relacionando os volumes de serviços com as necessidades da população.
+A cobertura dos serviços de saúde é uma métrica essencial para avaliar o desempenho e a equidade do sistema de saúde. Embora o módulo Ajustes da qualidade dos dados produza volumes de serviços ajustados, estes números por si só não indicam até que ponto os serviços chegam às populações que se destinam a servir. As estimativas de cobertura colocam a prestação de serviços em contexto, relacionando os volumes de serviços com as necessidades da população.
 
 Este módulo aborda os principais desafios na estimativa da cobertura, incluindo:
 
@@ -34,14 +34,14 @@ Este módulo aborda os principais desafios na estimativa da cobertura, incluindo
 
 | Componente | Detalhes |
 |-----------|---------|
-| **Inputs** | M2_adjusted_data (national & subnational) from Module 2<br>Survey data (MICS/DHS) from GitHub repository<br>Population data (UN WPP) from GitHub repository |
+| **Inputs** | M2_adjusted_data (national & subnational) from the Data quality adjustments module<br>Survey data (MICS/DHS) from GitHub repository<br>Population data (UN WPP) from GitHub repository |
 | M5_denominators (national, admin2, admin3): populações-alvo calculadas - M5_combined_results (national, admin2, admin3): estimativas de cobertura com todos os denominadores - M5_selected_denominator_per_indicator: melhor denominador por indicador e nível<br>**M6 (Parte 2)** - M6_coverage_estimation (national, admin2, admin3): cobertura final com HMIS, inquérito e estimativas projectadas |
 | Parte 1 = `m005` (requer `m002`) - Parte 2 = `m006` (requer `m005`) |
 | Estimar a cobertura dos serviços de saúde comparando os volumes de serviços com as populações-alvo, validados em relação aos parâmetros de referência dos inquéritos
 
 !!! aviso "Lembrete: A entrada HMIS tem de ser contagens, não % de cobertura"
 
-    A estimativa de cobertura funciona dividindo o número de serviços prestados (a **contagem** que flui através dos Módulos 1, 2 e 3) por um denominador de população-alvo que a plataforma constrói por si própria. Se o extrato original do HMIS continha taxas de cobertura pré-calculadas em vez de contagens de serviços, não há nada para este módulo calcular - a contagem é o numerador e a plataforma fornece o denominador. Consulte [Extração de dados](02_data_extraction.md) para saber o que deve extrair do seu HMIS.
+    A estimativa de cobertura funciona dividindo o número de serviços prestados (a **contagem** que flui através dos módulos de qualidade dos dados) por um denominador de população-alvo que a plataforma constrói por si própria. Se o extrato original do HMIS continha taxas de cobertura pré-calculadas em vez de contagens de serviços, não há nada para este módulo calcular - a contagem é o numerador e a plataforma fornece o denominador. Consulte [Extração de dados](02_data_extraction.md) para saber o que deve extrair do seu HMIS.
 
 ### Parte 1 e parte 2 explicadas
 
@@ -135,7 +135,7 @@ Os resultados são guardados com estruturas de colunas padronizadas para cada n�
 
 ### Diagrama de fluxo de trabalho
 
-<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Estimativa de cobertura (Módulos 5 e 6) Fluxo de trabalho interativo"></iframe>
+<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Estimativa de cobertura: fluxo de trabalho interativo"></iframe>
 
 ### Pontos de decisão chave
 
@@ -149,7 +149,7 @@ Os inquéritos aos agregados familiares são realizados em intervalos irregulare
 
 **3. Utilização de dados de inquéritos nacionais versus subnacionais**
 
-A estimativa de cobertura a níveis subnacionais requer tanto volumes de serviços subnacionais de HMIS (do Módulo 2) como valores de referência de inquéritos subnacionais (DHS/MICS). O módulo trata os dados em falta em dois pontos distintos:
+A estimativa de cobertura a níveis subnacionais requer tanto volumes de serviços subnacionais de HMIS (do módulo Ajustes da qualidade dos dados) como valores de referência de inquéritos subnacionais (DHS/MICS). O módulo trata os dados em falta em dois pontos distintos:
 
 - **Não existem dados HMIS subnacionais para o país** - quando `M2_adjusted_data_admin_area.csv` não contém linhas subnacionais utilizáveis, ou quando não existem quaisquer dados de inquérito subnacional no conjunto de dados DHS/MICS unificado para o país, a Parte 1 recua para `NATIONAL_ONLY` e a Parte 2 detecta ficheiros admin2/admin3 `M5_combined_results_*.csv` vazios e salta completamente o bloco correspondente. Nesse caso, `M6_coverage_estimation_admin2.csv` e/ou `M6_coverage_estimation_admin3.csv` continuam a ser escritos, mas como ficheiros vazios apenas com os cabeçalhos de coluna corretos.
 
@@ -267,7 +267,7 @@ UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 
 A parte 1 integra três fontes de dados primárias:
 
-**1. Dados ajustados do HMIS** (do Módulo 2)
+**1. Dados ajustados do HMIS** (do módulo Ajustes da qualidade dos dados)
 
 - Nacionais: __BLOCO_DE_CÓDIGO_96__
 - Subnacional: __BLOQUEIO_DE_CÓDIGO_97__
@@ -304,7 +304,7 @@ O DHS, realizado pela USAID, fornece dados de inquéritos sobre a utilização d
 
     **Input**:
 
-    - Dados de volume ajustados do Módulo 2
+    - Dados de volume ajustados do módulo Ajustes da qualidade dos dados
     - Variável de contagem selecionada (por exemplo, `count_final_both`)
 
     **Processamento**:
@@ -861,7 +861,7 @@ A parte 1 executa o seguinte fluxo de trabalho para cada nível administrativo (
 
 **Passo 1: Carregar e validar os dados de entrada**
 
-- Carregar dados ajustados do HMIS do Módulo 2 (ficheiros nacionais e subnacionais)
+- Carregar dados ajustados do HMIS do módulo Ajustes da qualidade dos dados (ficheiros nacionais e subnacionais)
 - Carregar dados de inquérito do repositório GitHub (conjunto de dados DHS/MICS unificado)
 - Carregar dados de população do WPP da ONU do repositório GitHub
 - Validar a correspondência dos códigos ISO3 entre os conjuntos de dados
@@ -1057,11 +1057,11 @@ A parte 1 executa o seguinte fluxo de trabalho para cada nível administrativo (
 
     **Problema**: Todos os denominadores apresentam uma cobertura >100%
 
-    - **Solução**: Pode indicar uma subnotificação no inquérito ou uma sobrenotificação no HMIS; verificar a qualidade dos dados do Módulo 2
+    - **Solução**: Pode indicar uma subnotificação no inquérito ou uma sobrenotificação no HMIS; verificar a qualidade dos dados do módulo Ajustes da qualidade dos dados
 
     **Problema**: UNWPP selecionado como "melhor" para a maioria dos indicadores
 
-    - **Solução**: Pode indicar uma fraca qualidade ou integridade dos dados do HMIS; rever os ajustamentos do Módulo 2
+    - **Solução**: Pode indicar uma fraca qualidade ou integridade dos dados do HMIS; rever os ajustamentos do módulo Ajustes da qualidade dos dados
 
 ---
 
@@ -1523,7 +1523,7 @@ Nota: embora o esquema do objeto de resultados `m006` enumere `survey_raw_source
     **Problema**: Lacunas na cobertura projectada
 
     - **Causa**: Dados do HMIS em falta nalguns anos
-    - **Solução**: Rever os resultados do Módulo 2, verificar se os dados estão completos
+    - **Solução**: Rever os resultados do módulo Ajustes da qualidade dos dados, verificar se os dados estão completos
 
 
 ### Exemplos de código

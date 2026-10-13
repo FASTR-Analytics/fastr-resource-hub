@@ -23,7 +23,7 @@ En traitant systématiquement les valeurs aberrantes et les données manquantes 
 
 | Composante | Détails |
 |-----------|---------|
-| **Entrées** | Données brutes du SIGS (`hmis_ISO3.csv`)<br>Indicateurs de valeurs aberrantes du module 1 (`M1_output_outliers.csv`)<br>Indicateurs d'exhaustivité du module 1 (`M1_output_completeness.csv`) |
+| **Entrées** | Données brutes du SIGS (`hmis_ISO3.csv`)<br>Indicateurs de valeurs aberrantes du module Évaluation de la qualité des données (`M1_output_outliers.csv`)<br>Indicateurs d'exhaustivité du module Évaluation de la qualité des données (`M1_output_completeness.csv`) |
 | **Sorties** | Données ajustées au niveau de l'établissement (`M2_adjusted_data.csv`)<br>Données agrégées sous-nationales (`M2_adjusted_data_admin_area.csv`)<br>Données agrégées nationales (`M2_adjusted_data_national.csv`)<br>Métadonnées d'exclusion (`M2_low_volume_exclusions.csv`) |
 | **Objectif** | Remplacer les valeurs aberrantes et compléter les données manquantes à l'aide de modèles historiques spécifiques à l'établissement ; quatre scénarios d'ajustement sont produits (aucun, valeurs aberrantes uniquement, exhaustivité uniquement, les deux) |
 
@@ -36,7 +36,7 @@ En traitant systématiquement les valeurs aberrantes et les données manquantes 
 Le module applique un processus standardisé en plusieurs étapes pour ajuster les données de routine des établissements de santé tout en préservant les modèles de prestation de services sous-jacents :
 
 **Étape 1 : Chargement et préparation des données**
-Le module intègre trois entrées : les volumes de services déclarés au niveau de l'établissement (`hmis_ISO3.csv`), les indicateurs de valeurs aberrantes identifiant les valeurs anormales (`M1_output_outliers.csv` du module 1) et les indicateurs de complétude indiquant les mois pour lesquels la déclaration est incomplète (`M1_output_completeness.csv` du module 1). Les indicateurs pour lesquels l'ajustement n'est pas approprié (tout indicateur dont le nom contient `death` ou `still_birth`, sans tenir compte de la casse) sont identifiés et exclus des étapes d'ajustement ultérieures.
+Le module intègre trois entrées : les volumes de services déclarés au niveau de l'établissement (`hmis_ISO3.csv`), les indicateurs de valeurs aberrantes identifiant les valeurs anormales (`M1_output_outliers.csv` du module Évaluation de la qualité des données) et les indicateurs de complétude indiquant les mois pour lesquels la déclaration est incomplète (`M1_output_completeness.csv` du module Évaluation de la qualité des données). Les indicateurs pour lesquels l'ajustement n'est pas approprié (tout indicateur dont le nom contient `death` ou `still_birth`, sans tenir compte de la casse) sont identifiés et exclus des étapes d'ajustement ultérieures.
 
 **Étape 2 : Identifier les indicateurs à faible volume**
 Avant d'appliquer tout ajustement, chaque indicateur est évalué pour s'assurer qu'il présente un volume suffisant. Les indicateurs qui n'atteignent jamais 100 événements déclarés au cours d'un mois donné sur l'ensemble de la série chronologique (`count >= 100`) sont signalés et exclus de l'ajustement, car les méthodes statistiques de lissage ne sont pas significatives pour les indicateurs à faible volume constant. La liste des indicateurs à faible volume exclus est enregistrée dans `M2_low_volume_exclusions.csv`.
@@ -76,7 +76,7 @@ Le module génère des fichiers de sortie structurés pour les ensembles de donn
 
 ### Diagramme de flux de travail
 
-<iframe src="../../resources/diagrams/mod2_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 2 Interactive Workflow"></iframe>
+<iframe src="../../resources/diagrams/mod2_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="Ajustements de la qualité des données : flux de travail interactif"></iframe>
 
 ### Points de décision clés
 
@@ -84,7 +84,7 @@ Le module génère des fichiers de sortie structurés pour les ensembles de donn
 
 Le module applique des ajustements à deux catégories d'observations :
 
-- Les valeurs signalées comme aberrantes par les procédures de détection statistique mises en œuvre dans le module 1
+- Les valeurs signalées comme aberrantes par les procédures de détection statistique mises en œuvre dans le module Évaluation de la qualité des données
 - Les valeurs correspondant aux mois identifiés comme incomplets ou manquants en raison de lacunes dans les déclarations
 
 Certains indicateurs sont explicitement exclus de l'ajustement :
@@ -104,7 +104,7 @@ Le module génère quatre scénarios d'ajustement pour tenir compte des différe
 ### Traitement des données et résultats
 
 **Structure d'entree**
-Le module recoit les volumes de services mensuels au niveau de l'établissement ainsi que les indicateurs de qualité des données générés dans le module 1, y compris les indicateurs de valeurs aberrantes et l'état d'exhaustivité. Chaque combinaison établissement-indicateur-mois est traitée comme une observation distincte en vue d'un ajustement potentiel.
+Le module recoit les volumes de services mensuels au niveau de l'établissement ainsi que les indicateurs de qualité des données générés dans le module Évaluation de la qualité des données, y compris les indicateurs de valeurs aberrantes et l'état d'exhaustivité. Chaque combinaison établissement-indicateur-mois est traitée comme une observation distincte en vue d'un ajustement potentiel.
 
 **Application des ajustements**
 Sur la base du scenario selectionne, des comptes de services ajustés sont générés. Les observations signalées comme aberrantes sont remplacées par des valeurs dérivées de moyennes historiques spécifiques à l'établissement, excluant les périodes anormales. Pour les mois où la déclaration est incomplète ou manquante, les valeurs sont imputées à l'aide de modèles historiques au niveau de l'établissement afin de maintenir la continuité de la série temporelle.
@@ -308,8 +308,8 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Paramètres** :
 
     - `raw_data` (data.table) : Données SIGS originales avec comptage des services
-    - `completeness_data` (data.table) : Indicateurs d'exhaustivité du module 1
-    - `outlier_data` (data.table) : Indicateurs de valeurs aberrantes du module 1
+    - `completeness_data` (data.table) : Indicateurs d'exhaustivité du module Évaluation de la qualité des données
+    - `outlier_data` (data.table) : Indicateurs de valeurs aberrantes du module Évaluation de la qualité des données
     - `adjust_outliers` (logique) : Application ou non de l'ajustement des valeurs aberrantes
     - `adjust_completeness` (logique) : Appliquer ou non l'ajustement de l'exhaustivité
 
@@ -360,7 +360,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ??? "Méthodologie d'ajustement des valeurs aberrantes"
 
-    L'ajustement des valeurs aberrantes est appliqué à toute valeur du mois de l'établissement signalée dans le module 1 (`outlier_flag == 1`). L'objectif est de remplacer ces valeurs aberrantes par des données historiques valides provenant du même établissement et du même indicateur.
+    L'ajustement des valeurs aberrantes est appliqué à toute valeur du mois de l'établissement signalée dans le module Évaluation de la qualité des données (`outlier_flag == 1`). L'objectif est de remplacer ces valeurs aberrantes par des données historiques valides provenant du même établissement et du même indicateur.
 
     **Approche statistique** :
 
@@ -445,7 +445,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
 ??? "Méthodologie d'ajustement de l'exhaustivité"
 
-    L'ajustement d'exhaustivité est appliqué à tout mois-établissement où le `count_working` est manquant (`is.na(count_working)`). Dans le scénario `completeness`, cela est déclenché par un `count` original `NA` (l'établissement n'a pas déclaré ce mois-là). Dans le scénario `both`, le `count_working` peut également être `NA` parce que l'étape de traitement des valeurs aberrantes n'a pas produit de remplacement. Le `completeness_flag` du module 1 est fusionné dans les données pour référence mais n'est pas utilisé comme déclencheur du remplacement.
+    L'ajustement d'exhaustivité est appliqué à tout mois-établissement où le `count_working` est manquant (`is.na(count_working)`). Dans le scénario `completeness`, cela est déclenché par un `count` original `NA` (l'établissement n'a pas déclaré ce mois-là). Dans le scénario `both`, le `count_working` peut également être `NA` parce que l'étape de traitement des valeurs aberrantes n'a pas produit de remplacement. Le `completeness_flag` du module Évaluation de la qualité des données est fusionné dans les données pour référence mais n'est pas utilisé comme déclencheur du remplacement.
 
     **Approche statistique** :
 
@@ -755,7 +755,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 
     **Solution** :
 
-    Vérifier `M2_low_volume_exclusions.csv` et vérifier que les sorties du module 1 contiennent des indicateurs
+    Vérifier `M2_low_volume_exclusions.csv` et vérifier que les sorties du module Évaluation de la qualité des données contiennent des indicateurs
 
     **Problème 2 : Les valeurs ajustées semblent déraisonnables
 
@@ -796,7 +796,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
     **Solution** :
 
     - Comparer `count_final_none` vs `count_final_both` pour évaluer l'impact de l'ajustement
-    - Examiner les statistiques sur l'exhaustivité du module 1
+    - Examiner les statistiques sur l'exhaustivité du module Évaluation de la qualité des données
     - Considérer le seuil de qualité des données pour l'inclusion
 
 ??? "Contrôles d'assurance qualité"
@@ -885,7 +885,7 @@ Pour la heatmap de l'ajustement combiné (résultat 3) :
 <!-- SLIDE:m5_1 -->
 ## De la détection à la correction
 
-Le module 1 a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module 2 prend le relais.
+Le module Évaluation de la qualité des données a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module Ajustements de la qualité des données prend le relais.
 
 Plutôt que de jeter les valeurs signalées, FASTR les remplace par des estimations raisonnables tirées de l'historique de chaque établissement — comme remplacer une lecture de compteur illisible par la moyenne des mois voisins — pour que les analyses d'utilisation des services et de couverture en aval travaillent à partir de données plus propres.
 
@@ -1063,7 +1063,7 @@ PRESENTER NOTES:
 <!-- SLIDE:m5_s0 -->
 ## De la détection à la correction
 
-Le module 1 a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module 2 prend le relais.
+Le module Évaluation de la qualité des données a signalé les problèmes de qualité des données — valeurs extrêmes, rapports manquants, incohérences internes. Le module Ajustements de la qualité des données prend le relais.
 
 Plutôt que de jeter les valeurs signalées, FASTR les remplace par des estimations raisonnables tirées de l'historique de chaque établissement — comme remplacer une lecture de compteur illisible par la moyenne des mois voisins — pour que les analyses d'utilisation des services et de couverture en aval travaillent à partir de données plus propres.
 

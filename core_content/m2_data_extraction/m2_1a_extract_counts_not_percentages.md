@@ -24,8 +24,8 @@ FASTR analyses **raw service counts**, not percentages, proportions, or pre-calc
 
 - Outliers cannot be detected on a percentage: it caps at 100 and hides the underlying volume.
 - Percentages cannot be summed across facilities of different sizes to produce a regional total.
-- The platform builds coverage itself from counts and population denominators (**Modules 5 & 6**).
-- Outlier and completeness adjustments (**Modules 1 & 2**) require raw counts to run.
+- The platform builds coverage itself from counts and population denominators (the **Coverage denominators** and **Coverage estimates** modules).
+- Outlier and completeness adjustments (the **Data quality assessment** and **Data quality adjustments** modules) require raw counts to run.
 
 </div>
 </div>

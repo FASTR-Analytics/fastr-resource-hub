@@ -6,9 +6,9 @@ paginate: true
 
 ## Des données ajustées à l'analyse
 
-Le module 2 a produit le jeu de données ajustées — valeurs aberrantes remplacées, lacunes comblées. Le module 3 est l'étape où ce travail porte ses fruits.
+Le module Ajustements de la qualité des données a produit le jeu de données ajustées — valeurs aberrantes remplacées, lacunes comblées. L'analyse de l'utilisation des services est l'étape où ce travail porte ses fruits.
 
-Au sein du module 3, les utilisateurs peuvent analyser **soit les données ajustées, soit les données non ajustées**, selon la question posée. Les données ajustées révèlent les tendances de fond ; les données non ajustées montrent ce qui a été effectivement rapporté.
+Dans les vues d'utilisation des services, les utilisateurs peuvent analyser **soit les données ajustées, soit les données non ajustées**, selon la question posée. Les données ajustées révèlent les tendances de fond ; les données non ajustées montrent ce qui a été effectivement rapporté.
 
 Les diapositives suivantes couvrent deux regards sur la prestation de services :
 

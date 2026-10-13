@@ -162,11 +162,11 @@ Esta documentação metodológica descreve a abordagem completa do FASTR à aná
 
 A plataforma de análise FASTR inclui seis módulos automatizados:
 
-- [**Avaliação da qualidade dos dados**](04_data_quality_assessment.md) - Módulo 1 da plataforma. Avaliação da qualidade dos dados do HMIS através de métricas de exaustividade, deteção de anomalias e consistência
-- [**Ajuste da qualidade dos dados**](05_data_quality_adjustment.md) - Módulo 2 na plataforma. Técnicas para melhorar a exatidão dos dados, ajustando os valores anómalos e os relatórios incompletos
+- [**Avaliação da qualidade dos dados**](04_data_quality_assessment.md) - Na plataforma: Avaliação da qualidade dos dados. Avaliação da qualidade dos dados do HMIS através de métricas de exaustividade, deteção de anomalias e consistência
+- [**Ajuste da qualidade dos dados**](05_data_quality_adjustment.md) - Na plataforma: Ajustes da qualidade dos dados. Técnicas para melhorar a exatidão dos dados, ajustando os valores anómalos e os relatórios incompletos
 - [**Análise da utilização de serviços**](06a_service_utilization.md) - Volumes de serviços ao longo do tempo: variação de ano para ano e de trimestre para trimestre, e efeito dos ajustamentos de qualidade dos dados
-- [**Deteção de perturbações**](06b_disruption_detection.md) - Módulo M11 da plataforma. Modelo bayesiano em duas partes que sinaliza mudanças reais na prestação de serviços entre as unidades que reportam, separadamente das lacunas de reporte
-- [Estimativas de cobertura**](06c_coverage_estimates.md) - Módulos 5 e 6 da plataforma (Parte 1: cálculo do denominador, Parte 2: estimativa de cobertura). Métodos para estimar a cobertura dos serviços e comparar as tendências com os objectivos nacionais
+- [**Deteção de perturbações**](06b_disruption_detection.md) - Na plataforma: Deteção de perturbações. Modelo bayesiano em duas partes que sinaliza mudanças reais na prestação de serviços entre as unidades que reportam, separadamente das lacunas de reporte
+- [Estimativas de cobertura**](06c_coverage_estimates.md) - Na plataforma: Denominadores de cobertura (parte 1) e Estimativas de cobertura (parte 2). Métodos para estimar a cobertura dos serviços e comparar as tendências com os objectivos nacionais
 
 ## Referências
 

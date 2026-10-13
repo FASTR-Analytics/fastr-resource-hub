@@ -21,7 +21,7 @@ Comme l'analyse est descriptive, sa lecture dépend du sens de l'indicateur. Plu
 
 | Composante | Détails |
 |-----------|---------|
-| **Entrées** | Volumes de services ajustés du module d'ajustement de la qualité des données (M2) : sans ajustement, ajustés pour les valeurs aberrantes, ajustés pour la complétude, et les deux<br>Valeurs d'indicateurs du module Valeurs des indicateurs (M12) pour les indicateurs calculés |
+| **Entrées** | Volumes de services ajustés du module Ajustements de la qualité des données : sans ajustement, ajustés pour les valeurs aberrantes, ajustés pour la complétude, et les deux<br>Valeurs d'indicateurs du module Valeurs des indicateurs pour les indicateurs calculés |
 | **Sorties** | Volumes de services mensuels et annuels par indicateur et par zone<br>Variation d'une année sur l'autre<br>Variation d'un trimestre sur l'autre<br>Volume selon chaque scénario d'ajustement |
 | **Objectif** | Décrire et comparer les volumes de services dans le temps et entre zones, comme point de départ de l'interprétation et de la détection des perturbations |
 
@@ -135,9 +135,9 @@ Les deux sont calculées par indicateur et par zone géographique. Les variation
 <!-- SLIDE:m6_0 -->
 ## Des données ajustées à l'analyse
 
-Le module 2 a produit le jeu de données ajustées — valeurs aberrantes remplacées, lacunes comblées. Le module 3 est l'étape où ce travail porte ses fruits.
+Le module Ajustements de la qualité des données a produit le jeu de données ajustées — valeurs aberrantes remplacées, lacunes comblées. L'analyse de l'utilisation des services est l'étape où ce travail porte ses fruits.
 
-Au sein du module 3, les utilisateurs peuvent analyser **soit les données ajustées, soit les données non ajustées**, selon la question posée. Les données ajustées révèlent les tendances de fond ; les données non ajustées montrent ce qui a été effectivement rapporté.
+Dans les vues d'utilisation des services, les utilisateurs peuvent analyser **soit les données ajustées, soit les données non ajustées**, selon la question posée. Les données ajustées révèlent les tendances de fond ; les données non ajustées montrent ce qui a été effectivement rapporté.
 
 Les diapositives suivantes couvrent deux regards sur la prestation de services :
 

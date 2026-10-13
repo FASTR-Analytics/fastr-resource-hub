@@ -4,7 +4,7 @@
 
 ### Objective of the module
 
-The Disruption detection module identifies months in which the volume of a health service was unusually low or unusually high compared with what the facilities that reported that month would normally deliver. It replaces the control-chart and panel-regression approach of the earlier Service utilization module (M3), which has been retired from the platform.
+The Disruption detection module identifies months in which the volume of a health service was unusually low or unusually high compared with what the facilities that reported that month would normally deliver. It replaces the control-chart and panel-regression approach of the earlier Service utilization module, which has been retired from the platform.
 
 The module fits a two-part Bayesian model to facility-level monthly data. One part models whether each facility reports in a given month. The other part models how much service a facility delivers when it does report. Keeping these two questions separate is the central idea: a drop in the national total can come from facilities going silent, from facilities delivering less, or from both, and only the second is a service disruption.
 
@@ -25,7 +25,7 @@ Facility-level modeling also handles heterogeneity. A facility random effect let
 | **Inputs** | Facility-level adjusted volumes from the Data quality adjustment module (`M2_adjusted_data.csv`)<br>Raw HMIS (`hmis_ISO3.csv`), only to attach administrative levels to facilities |
 | **Outputs** | `M11_disruptions_analysis_admin_area_1.csv` to `_4.csv`: observed, expected, 95 % credible bounds, reporting and service gaps, and deficit/surplus flags by indicator, month and area |
 | **Purpose** | Detect real changes in service delivery among reporting facilities, separately from changes in reporting completeness |
-| **Prerequisite** | Data quality adjustment module (M2) |
+| **Prerequisite** | Data quality adjustments module |
 | **Method** | Two-part Bayesian latent-intensity model (Bernoulli reporting model and negative binomial service model) fitted with INLA |
 
 The model was developed by Mustapha Wasseja and integrated into the platform as module `m011`.
@@ -202,9 +202,9 @@ The last months of the series deserve caution for a different reason: late repor
 
 ---
 
-## Earlier approach: control charts and panel regression (retired module M3)
+## Earlier approach: control charts and panel regression (retired service utilization module)
 
-Until 2026 disruption detection ran in the Service utilization module (M3), which modeled aggregated volumes with statistical process control and panel regression. The module has been retired from the platform and replaced by the Bayesian module described above. Its method is kept here for reference, because country reports produced before the change cite it and because its outputs are still readable in older results packages.
+Until 2026 disruption detection ran in the Service utilization module, now retired, which modeled aggregated volumes with statistical process control and panel regression. The module has been retired from the platform and replaced by the Bayesian module described above. Its method is kept here for reference, because country reports produced before the change cite it and because its outputs are still readable in older results packages.
 
 ??? "How the earlier model worked"
 
@@ -237,7 +237,7 @@ Until 2026 disruption detection ran in the Service utilization module (M3), whic
 
     ### Workflow diagram
 
-    <iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 3 Interactive Workflow"></iframe>
+    <iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Retired service utilization module, interactive workflow"></iframe>
 
     ### Key decision points
 
@@ -267,14 +267,14 @@ Until 2026 disruption detection ran in the Service utilization module (M3), whic
 
     **Treatment of reporting completeness**
 
-    The module accepts alternative versions of service counts produced by Module 2, allowing users to choose whether to analyze raw reported volumes or volumes adjusted for reporting completeness. This provides flexibility to align disruption analysis with different data quality assumptions.
+    The module accepts alternative versions of service counts produced by the Data quality adjustments module, allowing users to choose whether to analyze raw reported volumes or volumes adjusted for reporting completeness. This provides flexibility to align disruption analysis with different data quality assumptions.
 
 ??? "Data processing and outputs"
 
 
     **Input transformation**
 
-    The module begins with facility-level monthly service counts (for example, deliveries reported by each facility). These data are aggregated to the selected geographic level. Observations identified as outliers in Module 1 are excluded to prevent anomalous values from influencing trend estimation and control limits.
+    The module begins with facility-level monthly service counts (for example, deliveries reported by each facility). These data are aggregated to the selected geographic level. Observations identified as outliers in the Data quality assessment module are excluded to prevent anomalous values from influencing trend estimation and control limits.
 
     **Pattern estimation and detection**
 
@@ -368,12 +368,12 @@ Until 2026 disruption detection ran in the Service utilization module (M3), whic
     #### Primary Inputs
 
     1. **`M2_adjusted_data.csv`** (main data source)
-       - Output from Module 2 (Data Quality Adjustments)
+       - Output from the Data quality adjustments module
        - Contains adjusted service counts with different completeness assumptions
        - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`
 
     2. **`M1_output_outliers.csv`**
-       - Output from Module 1 (Data Quality Assessment)
+       - Output from the Data quality assessment module
        - Contains `outlier_flag` to identify and exclude anomalous data points
        - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag`
 
@@ -1212,7 +1212,7 @@ Until 2026 disruption detection ran in the Service utilization module (M3), whic
 
 <!--
 PRESENTER NOTES:
-- This is the Disruption detection module (M11) in the platform. It replaced the control-chart model (M3) in 2026; the older slides are kept for reference.
+- This is the Disruption detection module in the platform. It replaced the control-chart service utilization module in 2026; the older slides are kept for reference.
 - The model works facility by facility, month by month, then adds up to province and district. No separate model per area.
 - Question 1 is a yes/no model of reporting. Question 2 is a count model of service volume, fitted only where a report exists.
 - Each facility gets its own baseline level, so a hospital and a health post are each compared with their own history.
@@ -1227,7 +1227,7 @@ For each area and month, the model adds up the expected volume of **only the fac
 
 <div style="font-size: 0.9em;">
 
-| | Old approach (M3) | Bayesian approach (M11) |
+| | Earlier approach | Bayesian approach |
 |---|---|---|
 | **Unit modeled** | District or province total | Each facility |
 | **Missing reports** | Filled in, then modeled | Modeled as a separate question |
@@ -1355,6 +1355,6 @@ PRESENTER NOTES:
 PRESENTER NOTES:
 - Condensed version of m6_2e to m6_2h. The model asks two questions per facility: did it report, and how much did it deliver when it did.
 - Because expected and observed use the same facilities each month, a facility going silent does not show as a disruption.
-- Module M11 in the platform; the older control-chart slides (m6_2, m6_2b, m6_2d) describe the retired M3 model.
+- In the platform: Disruption detection; the older control-chart slides (m6_2, m6_2b, m6_2d) describe the retired service utilization model.
 -->
 <!-- /SLIDE -->

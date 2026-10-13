@@ -21,7 +21,7 @@ Como a análise é descritiva, a sua interpretação depende da direção do ind
 
 | Componente | Detalhes |
 |-----------|---------|
-| **Entradas** | Volumes de serviços ajustados a partir do módulo de ajuste da qualidade dos dados (M2): não ajustados, ajustados em relação a valores atípicos, ajustados em termos de exaustividade e ambos<br>Valores dos indicadores a partir do módulo de valores dos indicadores (M12) para indicadores calculados |
+| **Entradas** | Volumes de serviços ajustados a partir do módulo Ajustes da qualidade dos dados: não ajustados, ajustados em relação a valores atípicos, ajustados em termos de exaustividade e ambos<br>Valores dos indicadores a partir do módulo Valores dos indicadores para indicadores calculados |
 | **Resultados** | Volumes de serviços mensais e anuais por indicador e área<br>Variação ano a ano<br>Variação trimestre a trimestre<br>Volume em cada cenário de ajuste |
 | **Objetivo** | Descrever e comparar os volumes de serviços ao longo do tempo e entre áreas, como ponto de partida para a interpretação e para a deteção de perturbações |
 
@@ -135,9 +135,9 @@ Ambas são calculadas por indicador e por área geográfica. As variações supe
 <!-- SLIDE:m6_0 -->
 ## Dos dados ajustados à análise
 
-O módulo 2 produziu o conjunto de dados ajustado - outliers substituídos, gaps imputados. O módulo 3 é onde esse trabalho compensa.
+O módulo Ajustes da qualidade dos dados produziu o conjunto de dados ajustado - outliers substituídos, gaps imputados. A análise da utilização de serviços é onde esse trabalho compensa.
 
-No Módulo 3, os utilizadores podem analisar **os dados ajustados ou não ajustados**, dependendo da pergunta. Os dados ajustados informam-no sobre os padrões subjacentes; os dados não ajustados informam-no sobre o que foi efetivamente comunicado.
+Nas vistas de utilização de serviços, os utilizadores podem analisar **os dados ajustados ou não ajustados**, dependendo da pergunta. Os dados ajustados informam-no sobre os padrões subjacentes; os dados não ajustados informam-no sobre o que foi efetivamente comunicado.
 
 Os próximos diapositivos abordam duas perspectivas da prestação de serviços:
 

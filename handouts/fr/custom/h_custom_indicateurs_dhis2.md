@@ -211,7 +211,7 @@ Utile pour vérifier que vous avez bien ajouté le bon élément : le nom qui s'
 4. Écrivez la **formule** avec les ID des autres indicateurs et `+ - * /`, par exemple `anc4 / anc1`. Les boutons **Insérer un indicateur** et **Insérer une population** écrivent les ID à votre place.
 5. Choisissez le **format** : **Pourcentage** pour un taux de 0 à 100 %.
 6. Cliquez sur **Sauvegarder**.
-7. À l'étape 5, cochez le module **M12. Valeurs des indicateurs** : c'est lui qui calcule les taux.
+7. À l'étape 5, cochez le module **Valeurs des indicateurs** : c'est lui qui calcule les taux.
 
 ![w:400](../../../resources/screenshots/indicateurs_v2/07_creer_calcule.png)
 
@@ -298,11 +298,10 @@ Les données sont maintenant dans la base centrale, mais aucune analyse ne s'est
 
 | Module | Quand le cocher |
 |---|---|
-| **M1. Évaluation de la qualité des données** et **M2. Ajustements** | Toujours. FASTR les coche tout seul dès que M3 ou M12 est coché. |
-| **M3. Utilisation des services** | Toujours : volumes, tendances et perturbations de service. |
-| **M12. Valeurs des indicateurs** | **Dès que vous avez un indicateur Calculé** (un taux). C'est le module qui applique les formules. Sans lui, vos taux restent vides dans les projets. |
-| **M5 et M6. Estimations de couverture** | Si votre instance les utilisait déjà dans le paquet précédent. |
-| **M11. Détection bayésienne des perturbations** | Optionnel, si votre instance l'utilisait déjà. |
+| **Évaluation de la qualité des données** et **Ajustements** | Toujours. FASTR les coche tout seul dès qu’un module qui en dépend est coché. |
+| **Valeurs des indicateurs** | **Dès que vous avez un indicateur Calculé** (un taux). C'est le module qui applique les formules. Sans lui, vos taux restent vides dans les projets. |
+| **Dénominateurs de couverture** et **Estimations de couverture** | Si votre instance les utilisait déjà dans le paquet précédent. |
+| **Détection des perturbations** | Optionnel, si votre instance l'utilisait déjà. |
 
 Les modules grisés demandent des données que vous n'avez pas cochées à l'étape 1 (enquêtes FOSA, ICEH) : laissez-les. En cas de doute, reprenez les modules du **dernier paquet** : sur la page **Résultats**, cliquez sur le paquet épinglé, sa liste de modules s'affiche.
 

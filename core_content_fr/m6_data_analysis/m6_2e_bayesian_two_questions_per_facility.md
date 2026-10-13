@@ -26,7 +26,7 @@ paginate: true
 
 <!--
 NOTES POUR LE PRÉSENTATEUR :
-- C'est le module Détection des perturbations (M11) de la plateforme. Il a remplacé le modèle à cartes de contrôle (M3) en 2026 ; les anciennes diapositives sont gardées pour référence.
+- C'est le module Détection des perturbations de la plateforme. Il a remplacé en 2026 l'ancien module Utilisation des services, à cartes de contrôle ; les anciennes diapositives sont gardées pour référence.
 - Le modèle travaille établissement par établissement, mois par mois, puis additionne par province et district. Pas de modèle séparé par zone.
 - La question 1 est un modèle oui/non du rapportage. La question 2 est un modèle de comptage du volume de services, ajusté seulement là où un rapport existe.
 - Chaque établissement a son propre niveau de base : un hôpital et un poste de santé sont comparés chacun à leur propre historique.

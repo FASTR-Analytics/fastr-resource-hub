@@ -10,7 +10,7 @@ Para cada área e mês, o modelo soma o volume esperado **apenas das unidades qu
 
 <div style="font-size: 0.9em;">
 
-| | Abordagem anterior (M3) | Abordagem bayesiana (M11) |
+| | Abordagem anterior | Abordagem bayesiana |
 |---|---|---|
 | **Unidade modelada** | Total do distrito ou da província | Cada unidade de saúde |
 | **Relatórios em falta** | Preenchidos e depois modelados | Modelados como pergunta separada |

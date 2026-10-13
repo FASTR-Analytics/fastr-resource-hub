@@ -6,9 +6,9 @@ paginate: true
 
 ## Dos dados ajustados à análise
 
-O módulo 2 produziu o conjunto de dados ajustado - outliers substituídos, gaps imputados. O módulo 3 é onde esse trabalho compensa.
+O módulo Ajustes da qualidade dos dados produziu o conjunto de dados ajustado - outliers substituídos, gaps imputados. A análise da utilização de serviços é onde esse trabalho compensa.
 
-No Módulo 3, os utilizadores podem analisar **os dados ajustados ou não ajustados**, dependendo da pergunta. Os dados ajustados informam-no sobre os padrões subjacentes; os dados não ajustados informam-no sobre o que foi efetivamente comunicado.
+Nas vistas de utilização de serviços, os utilizadores podem analisar **os dados ajustados ou não ajustados**, dependendo da pergunta. Os dados ajustados informam-no sobre os padrões subjacentes; os dados não ajustados informam-no sobre o que foi efetivamente comunicado.
 
 Os próximos diapositivos abordam duas perspectivas da prestação de serviços:
 

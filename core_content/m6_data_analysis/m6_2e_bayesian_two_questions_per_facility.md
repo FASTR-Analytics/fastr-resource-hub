@@ -26,7 +26,7 @@ paginate: true
 
 <!--
 PRESENTER NOTES:
-- This is the Disruption detection module (M11) in the platform. It replaced the control-chart model (M3) in 2026; the older slides are kept for reference.
+- This is the Disruption detection module in the platform. It replaced the control-chart service utilization module in 2026; the older slides are kept for reference.
 - The model works facility by facility, month by month, then adds up to province and district. No separate model per area.
 - Question 1 is a yes/no model of reporting. Question 2 is a count model of service volume, fitted only where a report exists.
 - Each facility gets its own baseline level, so a hospital and a health post are each compared with their own history.

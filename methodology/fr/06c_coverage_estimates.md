@@ -18,7 +18,7 @@ Ensemble, ces composantes convertissent les volumes de services administratifs e
 
 ### Raison d'être de l'analyse
 
-La couverture des services de santé est une mesure essentielle pour évaluer la performance et l'équité du système de santé. Bien que le module 2 produise des volumes de services ajustés, ces chiffres n'indiquent pas à eux seuls dans quelle mesure les services atteignent les populations qu'ils sont censés desservir. Les estimations de la couverture placent la prestation de services dans son contexte en établissant un lien entre les volumes de services et les besoins de la population.
+La couverture des services de santé est une mesure essentielle pour évaluer la performance et l'équité du système de santé. Bien que le module Ajustements de la qualité des données produise des volumes de services ajustés, ces chiffres n'indiquent pas à eux seuls dans quelle mesure les services atteignent les populations qu'ils sont censés desservir. Les estimations de la couverture placent la prestation de services dans son contexte en établissant un lien entre les volumes de services et les besoins de la population.
 
 Ce module aborde les principaux défis liés à l'estimation de la couverture, notamment :
 
@@ -34,14 +34,14 @@ Ce module aborde les principaux défis liés à l'estimation de la couverture, n
 
 | Composante | Détails |
 |-----------|---------|
-| **Entrées** | M2_adjusted_data (nationales et sous-nationales) du module 2<br>Données d'enquête (MICS/EDS) du dépôt GitHub<br>Données de population (UN WPP) du dépôt GitHub |
+| **Entrées** | M2_adjusted_data (nationales et sous-nationales) du module Ajustements de la qualité des données<br>Données d'enquête (MICS/EDS) du dépôt GitHub<br>Données de population (UN WPP) du dépôt GitHub |
 | **Sorties** | **M5 (Partie 1)** — M5_denominators (national, admin2, admin3) : populations cibles calculées · M5_combined_results (national, admin2, admin3) : estimations de couverture avec tous les dénominateurs · M5_selected_denominator_per_indicator : meilleur dénominateur par indicateur et niveau<br>**M6 (Partie 2)** — M6_coverage_estimation (national, admin2, admin3) : couverture finale avec estimations SIGS, enquête et projetées |
 | **Identifiants des modules** | Partie 1 = `m005` (requiert `m002`) · Partie 2 = `m006` (requiert `m005`) |
 | **Objectif** | Estimer la couverture des services de santé en comparant les volumes de services aux populations cibles, validés par rapport aux références de l'enquête |
 
 !!! warning "Rappel : l'entrée SIGS doit être des volumes, pas des % de couverture"
 
-    L'estimation de la couverture fonctionne en divisant le nombre de services rendus (le **volume** qui passe par les modules 1, 2 et 3) par un dénominateur de population cible que la plateforme construit elle-même. Si votre extraction SIGS d'origine contenait des taux de couverture pré-calculés au lieu de volumes de services, il n'y a rien à calculer ici — le volume est le numérateur, et la plateforme fournit le dénominateur. Voir [Extraction des données](02_data_extraction.md) pour savoir quoi extraire de votre SIGS.
+    L'estimation de la couverture fonctionne en divisant le nombre de services rendus (le **volume** qui passe par les modules de qualité des données) par un dénominateur de population cible que la plateforme construit elle-même. Si votre extraction SIGS d'origine contenait des taux de couverture pré-calculés au lieu de volumes de services, il n'y a rien à calculer ici — le volume est le numérateur, et la plateforme fournit le dénominateur. Voir [Extraction des données](02_data_extraction.md) pour savoir quoi extraire de votre SIGS.
 
 ### Partie 1 et partie 2 expliquées
 
@@ -135,7 +135,7 @@ Les resultats sont sauvegardes avec des structures de colonnes standardisées po
 
 ### Diagramme de flux de travail
 
-<iframe src="../../resources/diagrams/mod4_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="Estimation de la couverture (Modules 5 et 6) — Workflow interactif"></iframe>
+<iframe src="../../resources/diagrams/mod4_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="Estimation de la couverture — flux de travail interactif"></iframe>
 
 ### Points de décision clés
 
@@ -149,7 +149,7 @@ Les enquêtes auprès des ménages sont menées à intervalles irréguliers, gé
 
 **3. Utilisation de données d'enquête nationales ou infranationales**
 
-L'estimation de la couverture aux niveaux infranationaux exige à la fois des volumes de services SIGS infranationaux (issus du Module 2) et des valeurs d'enquête de référence infranationales (EDS/MICS). Le module gère les données d'entrée manquantes à deux moments distincts :
+L'estimation de la couverture aux niveaux infranationaux exige à la fois des volumes de services SIGS infranationaux (issus du module Ajustements de la qualité des données) et des valeurs d'enquête de référence infranationales (EDS/MICS). Le module gère les données d'entrée manquantes à deux moments distincts :
 
 - **Aucune donnée SIGS infranationale pour le pays** — lorsque `M2_adjusted_data_admin_area.csv` ne contient aucune ligne infranationale exploitable, ou lorsque le jeu de données unifié EDS/MICS ne comporte aucune donnée d'enquête infranationale pour le pays, la partie 1 bascule en `NATIONAL_ONLY` et la partie 2 détecte les fichiers `M5_combined_results_*.csv` admin2/admin3 vides et saute entièrement le bloc correspondant. Dans ce cas, `M6_coverage_estimation_admin2.csv` et/ou `M6_coverage_estimation_admin3.csv` sont tout de même écrits, mais sous forme de fichiers vides ne contenant que les en-têtes de colonnes corrects.
 
@@ -268,7 +268,7 @@ UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 
 La partie 1 intègre trois sources de données primaires :
 
-**1. Données ajustées SIGS** (du module 2)
+**1. Données ajustées SIGS** (du module Ajustements de la qualité des données)
 
 - Nationales : `M2_adjusted_data_national.csv`
 - Sous-national : `M2_adjusted_data_admin_area.csv`
@@ -305,7 +305,7 @@ Les EDS, menées par l'USAID, fournissent des données d'enquête sur l'utilisat
 
     **Entrée** :
 
-    - Données de volume ajustées du module 2
+    - Données de volume ajustées du module Ajustements de la qualité des données
     - Variable de comptage sélectionnée (par exemple, `count_final_both`)
 
     **Traitement** :
@@ -862,7 +862,7 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
 **Étape 1 : Chargement et validation des données d'entrée**
 
-- Charger les données ajustées du module 2 du SIGS (fichiers nationaux et infranationaux)
+- Charger les données ajustées du module Ajustements de la qualité des données du SIGS (fichiers nationaux et infranationaux)
 - Charger les données d'enquête à partir du dépôt GitHub (ensemble de données EDS/MICS unifiées)
 - Charger les données de population du WPP de l'ONU à partir du dépôt GitHub
 - Valider la correspondance des codes ISO3 entre les ensembles de données
@@ -1058,11 +1058,11 @@ La partie 1 exécute le flux de travail suivant pour chaque niveau administratif
 
     **Problème** : Tous les dénominateurs montrent une couverture >100%
 
-    - **Solution** : Peut indiquer une sous-déclaration dans l'enquête ou une sur-déclaration dans le SIGS ; vérifier la qualité des données dans le module 2
+    - **Solution** : Peut indiquer une sous-déclaration dans l'enquête ou une sur-déclaration dans le SIGS ; vérifier la qualité des données dans le module Ajustements de la qualité des données
 
     **Problème** : L'UNWPP a été sélectionné comme "meilleur" pour la plupart des indicateurs
 
-    - **Solution** : Peut indiquer une mauvaise qualité ou complétude des données SIGS ; revoir les ajustements du module 2
+    - **Solution** : Peut indiquer une mauvaise qualité ou complétude des données SIGS ; revoir les ajustements du module Ajustements de la qualité des données
 
 ---
 
@@ -1524,7 +1524,7 @@ Note : bien que le schéma des résultats de `m006` liste `survey_raw_source` et
     **Problème** : Lacunes dans la couverture projetée
 
     - **Cause** : Données SIGS manquantes pour certaines années
-    - **Solution** : Examiner les résultats du module 2 et vérifier l'exhaustivité des données
+    - **Solution** : Examiner les résultats du module Ajustements de la qualité des données et vérifier l'exhaustivité des données
 
 
 ### Exemples de codes

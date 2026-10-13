@@ -152,11 +152,11 @@ Cette documentation méthodologique décrit l'approche complète de la FASTR pou
 
 La plate-forme d'analyse FASTR comprend six modules automatisés :
 
-- [**Évaluation de la qualité des données**](04_data_quality_assessment.md) - module 1 de la plateforme. Évaluation de la qualité des données SIGS par le biais de l'exhaustivité, de la détection des valeurs aberrantes et de la mesure de la cohérence
-- [**Ajustement de la qualité des données**](05_data_quality_adjustment.md) - module 2 de la plate-forme. Techniques pour améliorer la précision des données en ajustant les valeurs aberrantes et les rapports incomplets
+- [**Évaluation de la qualité des données**](04_data_quality_assessment.md) - Dans la plateforme : Évaluation de la qualité des données. Évaluation de la qualité des données SIGS par le biais de l'exhaustivité, de la détection des valeurs aberrantes et de la mesure de la cohérence
+- [**Ajustement de la qualité des données**](05_data_quality_adjustment.md) - Dans la plateforme : Ajustements de la qualité des données. Techniques pour améliorer la précision des données en ajustant les valeurs aberrantes et les rapports incomplets
 - [**Analyse de l'utilisation des services**](06a_service_utilization.md) - Volumes de services dans le temps : variation d'une année sur l'autre et d'un trimestre sur l'autre, et effet des ajustements de qualité des données
-- [**Détection des perturbations**](06b_disruption_detection.md) - module M11 de la plateforme. Modèle bayésien en deux parties qui signale les vrais changements de prestation de services parmi les établissements rapporteurs, séparément des lacunes de rapportage
-- [**Estimation de la couverture**](06c_coverage_estimates.md) - modules 5 et 6 de la plateforme (Partie 1 : calcul des dénominateurs, Partie 2 : estimation de la couverture). Méthodes d'estimation de la couverture des services et comparaison des tendances avec les objectifs nationaux
+- [**Détection des perturbations**](06b_disruption_detection.md) - Dans la plateforme : Détection des perturbations. Modèle bayésien en deux parties qui signale les vrais changements de prestation de services parmi les établissements rapporteurs, séparément des lacunes de rapportage
+- [**Estimation de la couverture**](06c_coverage_estimates.md) - Dans la plateforme : Dénominateurs de couverture (partie 1) et Estimations de couverture (partie 2). Méthodes d'estimation de la couverture des services et comparaison des tendances avec les objectifs nationaux
 
 ## Références
 

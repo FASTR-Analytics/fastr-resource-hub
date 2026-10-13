@@ -64,7 +64,7 @@ O módulo gera um conjunto de resultados estruturados, incluindo sinalizadores d
 
 ### Diagrama do fluxo de trabalho
 
-<iframe src="../resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Fluxo de trabalho interativo do módulo 1"></iframe>
+<iframe src="../resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Avaliação da qualidade dos dados: fluxo de trabalho interativo"></iframe>
 
 ### Pontos de decisão chave
 
@@ -311,7 +311,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Caso de uso**:
 
-    - Entrada para o módulo 2 (Ajustamentos da qualidade dos dados)
+    - Entrada para o módulo Ajustes da qualidade dos dados
     - Análise estatística dos padrões de outlier
     - Geração de visualizações da prevalência de outliers
 

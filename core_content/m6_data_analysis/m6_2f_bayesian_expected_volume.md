@@ -10,7 +10,7 @@ For each area and month, the model adds up the expected volume of **only the fac
 
 <div style="font-size: 0.9em;">
 
-| | Old approach (M3) | Bayesian approach (M11) |
+| | Earlier approach | Bayesian approach |
 |---|---|---|
 | **Unit modeled** | District or province total | Each facility |
 | **Missing reports** | Filled in, then modeled | Modeled as a separate question |

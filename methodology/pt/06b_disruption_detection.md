@@ -7,7 +7,7 @@
 
 ### Objetivo do módulo
 
-O módulo de deteção de perturbações identifica os meses em que o volume de um serviço de saúde foi invulgarmente baixo ou invulgarmente elevado, em comparação com o que as unidades que comunicaram dados nesse mês prestariam normalmente. Substitui a abordagem baseada em gráficos de controlo e regressão de painel do anterior módulo «Utilização de serviços» (M3), que foi retirado da plataforma.
+O módulo de deteção de perturbações identifica os meses em que o volume de um serviço de saúde foi invulgarmente baixo ou invulgarmente elevado, em comparação com o que as unidades que comunicaram dados nesse mês prestariam normalmente. Substitui a abordagem baseada em gráficos de controlo e regressão de painel do anterior módulo «Utilização de serviços», que foi retirado da plataforma.
 
 O módulo aplica um modelo bayesiano de duas partes aos dados mensais ao nível das unidades de saúde. Uma parte modela se cada unidade de saúde apresenta dados num determinado mês. A outra parte modela a quantidade de serviços prestados por uma unidade de saúde quando esta apresenta dados. Manter estas duas questões separadas é a ideia central: uma queda no total nacional pode resultar de unidades de saúde que deixam de apresentar dados, de unidades de saúde que prestam menos serviços, ou de ambos, sendo que apenas a segunda situação constitui uma interrupção do serviço.
 
@@ -28,7 +28,7 @@ A modelação ao nível das unidades de saúde também lida com a heterogeneidad
 | **Entradas** | Volumes ajustados ao nível da unidade, provenientes do módulo de ajuste da qualidade dos dados (`M2_adjusted_data.csv`)<br>HMIS bruto (`hmis_ISO3.csv`), apenas para atribuir níveis administrativos às unidades |
 | **Resultados** | `M11_disruptions_analysis_admin_area_1.csv` a `_4.csv`: valores observados, esperados, limites de credibilidade de 95 %, lacunas de reporte e de prestação de serviços, e indicadores de défice/excedente por indicador, mês e área |
 | **Objetivo** | Detetar alterações reais na prestação de serviços entre as unidades de saúde que comunicam dados, separadamente das alterações na exaustividade dos relatórios |
-| **Pré-requisito** | Módulo de ajuste da qualidade dos dados (M2) |
+| **Pré-requisito** | Módulo Ajustes da qualidade dos dados |
 | **Método** | Modelo bayesiano de intensidade latente em duas partes (modelo de reporte de Bernoulli e modelo de serviço binomial negativo) ajustado com o INLA |
 
 O modelo foi desenvolvido por Mustapha Wasseja e integrado na plataforma como módulo `m011`.
@@ -206,9 +206,9 @@ Os últimos meses da série merecem cautela por uma razão diferente: os relató
 
 ---
 
-## Abordagem anterior: cartas de controlo e regressão em painel (módulo M3 retirado)
+## Abordagem anterior: cartas de controlo e regressão em painel (antigo módulo de utilização de serviços)
 
-Até 2026, a deteção de perturbações era executada no módulo de utilização do serviço (M3), que modelava volumes agregados através do controlo estatístico de processos e da regressão de painel. O módulo foi retirado da plataforma e substituído pelo módulo bayesiano descrito acima. O seu método é aqui mantido para referência, uma vez que os relatórios nacionais elaborados antes da alteração o citam e porque os seus resultados ainda são legíveis em pacotes de resultados mais antigos.
+Até 2026, a deteção de perturbações era executada no módulo de utilização de serviços, entretanto retirado, que modelava volumes agregados através do controlo estatístico de processos e da regressão de painel. O módulo foi retirado da plataforma e substituído pelo módulo bayesiano descrito acima. O seu método é aqui mantido para referência, uma vez que os relatórios nacionais elaborados antes da alteração o citam e porque os seus resultados ainda são legíveis em pacotes de resultados mais antigos.
 
 ??? "Como funcionava o modelo anterior"
 
@@ -241,7 +241,7 @@ Até 2026, a deteção de perturbações era executada no módulo de utilizaçã
 
     ### Diagrama de fluxo de trabalho
 
-    <iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Fluxo de trabalho interativo do módulo 3"></iframe>
+    <iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Antigo módulo de utilização de serviços: fluxo de trabalho interativo"></iframe>
 
     ### Pontos de decisão chave
 
@@ -271,14 +271,14 @@ Até 2026, a deteção de perturbações era executada no módulo de utilizaçã
 
     **Tratamento da exaustividade dos relatórios
 
-    O módulo aceita versões alternativas das contagens de serviços produzidas pelo Módulo 2, permitindo aos utilizadores escolher entre analisar os volumes brutos comunicados ou os volumes ajustados para a exaustividade dos relatórios. Isto proporciona flexibilidade para alinhar a análise das perturbações com diferentes pressupostos de qualidade dos dados.
+    O módulo aceita versões alternativas das contagens de serviços produzidas pelo módulo Ajustes da qualidade dos dados, permitindo aos utilizadores escolher entre analisar os volumes brutos comunicados ou os volumes ajustados para a exaustividade dos relatórios. Isto proporciona flexibilidade para alinhar a análise das perturbações com diferentes pressupostos de qualidade dos dados.
 
 ??? "Processamento de dados e resultados"
 
 
     **Transformação de entrada**
 
-    O módulo começa com contagens mensais de serviços ao nível dos estabelecimentos (por exemplo, entregas comunicadas por cada estabelecimento). Estes dados são agregados ao nível geográfico selecionado. As observações identificadas como anómalas no Módulo 1 são excluídas para evitar que os valores anómalos influenciem a estimativa das tendências e os limites de controlo.
+    O módulo começa com contagens mensais de serviços ao nível dos estabelecimentos (por exemplo, entregas comunicadas por cada estabelecimento). Estes dados são agregados ao nível geográfico selecionado. As observações identificadas como anómalas no módulo Avaliação da qualidade dos dados são excluídas para evitar que os valores anómalos influenciem a estimativa das tendências e os limites de controlo.
 
     **Estimativa e deteção de padrões
 
@@ -372,12 +372,12 @@ Até 2026, a deteção de perturbações era executada no módulo de utilizaçã
     #### Entradas primárias
 
     1. **`M2_adjusted_data.csv`** (fonte de dados principal)
-       - Resultado do Módulo 2 (Ajustes de qualidade dos dados)
+       - Resultado do módulo Ajustes da qualidade dos dados
        - Contém contagens de serviços ajustadas com diferentes pressupostos de exaustividade
        - Colunas obrigatórias: `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`
 
     2. **`M1_output_outliers.csv`**
-       - Resultado do módulo 1 (avaliação da qualidade dos dados)
+       - Resultado do módulo Avaliação da qualidade dos dados
        - Contém `outlier_flag` para identificar e excluir pontos de dados anómalos
        - Colunas obrigatórias: `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag`
 
@@ -1216,7 +1216,7 @@ Até 2026, a deteção de perturbações era executada no módulo de utilizaçã
 
 <!--
 NOTAS PARA O APRESENTADOR:
-- Este é o módulo Deteção de perturbações (M11) da plataforma. Substituiu o modelo de cartas de controlo (M3) em 2026; os diapositivos antigos ficam para referência.
+- Este é o módulo Deteção de perturbações da plataforma. Substituiu em 2026 o antigo módulo de utilização de serviços, de cartas de controlo; os diapositivos antigos ficam para referência.
 - O modelo trabalha unidade a unidade, mês a mês, e depois soma por província e distrito. Não há modelo separado por área.
 - A pergunta 1 é um modelo sim/não do reporte. A pergunta 2 é um modelo de contagem do volume de serviços, ajustado só onde existe relatório.
 - Cada unidade tem o seu próprio nível de base: um hospital e um posto de saúde são comparados cada um com o seu histórico.
@@ -1231,7 +1231,7 @@ Para cada área e mês, o modelo soma o volume esperado **apenas das unidades qu
 
 <div style="font-size: 0.9em;">
 
-| | Abordagem anterior (M3) | Abordagem bayesiana (M11) |
+| | Abordagem anterior | Abordagem bayesiana |
 |---|---|---|
 | **Unidade modelada** | Total do distrito ou da província | Cada unidade de saúde |
 | **Relatórios em falta** | Preenchidos e depois modelados | Modelados como pergunta separada |
@@ -1359,6 +1359,6 @@ NOTAS PARA O APRESENTADOR:
 NOTAS PARA O APRESENTADOR:
 - Versão condensada de m6_2e a m6_2h. O modelo faz duas perguntas por unidade: reportou, e quanto prestou quando reportou.
 - Como o esperado e o observado usam as mesmas unidades em cada mês, uma unidade em silêncio não aparece como perturbação.
-- Módulo M11 da plataforma; os diapositivos antigos de cartas de controlo (m6_2, m6_2b, m6_2d) descrevem o modelo M3 retirado.
+- Na plataforma: Deteção de perturbações; os diapositivos antigos de cartas de controlo (m6_2, m6_2b, m6_2d) descrevem o antigo modelo de utilização de serviços, retirado.
 -->
 <!-- /SLIDE -->

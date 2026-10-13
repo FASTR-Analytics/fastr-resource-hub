@@ -21,11 +21,11 @@ Cette documentation décrit l'approche [FASTR](https://data.gffportal.org/key-th
 | [**Identifier les questions et les indicateurs**](01_identify_questions_indicators.md) | Définir les questions prioritaires et sélectionner les indicateurs de base |
 | [**L'extraction des données**](02_data_extraction.md) | Extraire et préparer les données SIGS pour l'analyse |
 | [**La plateforme d'analyse de données FASTR**](03_fastr_analytics_platform.md) | Utilisation de la plateforme pour l'analyse automatisée |
-| [**Évaluation de la qualité des données**](04_data_quality_assessment.md) | Module 1 de la plate-forme. Évaluation de l'exhaustivité et de la cohérence |
-| [**Ajustement de la qualité des données**](05_data_quality_adjustment.md) | Module 2 de la plate-forme. Ajustement pour les valeurs aberrantes et les données manquantes |
+| [**Évaluation de la qualité des données**](04_data_quality_assessment.md) | Dans la plateforme : Évaluation de la qualité des données. Évaluation de l'exhaustivité et de la cohérence |
+| [**Ajustement de la qualité des données**](05_data_quality_adjustment.md) | Dans la plateforme : Ajustements de la qualité des données. Ajustement pour les valeurs aberrantes et les données manquantes |
 | [**Analyse de l'utilisation des services**](06a_service_utilization.md) | Volumes de services dans le temps : variation annuelle et trimestrielle, effet des ajustements |
-| [**Détection des perturbations**](06b_disruption_detection.md) | Module M11 de la plateforme. Détection bayésienne des perturbations de services parmi les établissements rapporteurs |
-| [**Estimation de la couverture**](06c_coverage_estimates.md) | Modules 5 et 6 de la plateforme (Partie 1 : dénominateurs, Partie 2 : couverture). Estimation de la couverture des services par rapport aux objectifs |
+| [**Détection des perturbations**](06b_disruption_detection.md) | Dans la plateforme : Détection des perturbations. Détection bayésienne des perturbations de services parmi les établissements rapporteurs |
+| [**Estimation de la couverture**](06c_coverage_estimates.md) | Dans la plateforme : Dénominateurs de couverture (partie 1) et Estimations de couverture (partie 2). Estimation de la couverture des services par rapport aux objectifs |
 
 ## Liens rapides
 

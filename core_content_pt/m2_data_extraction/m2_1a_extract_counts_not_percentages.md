@@ -24,8 +24,8 @@ O FASTR analisa **contagens de serviços em bruto**, não percentagens, proporç
 
 - Não é possível detetar valores anómalos numa percentagem: esta limita-se a 100 e esconde o volume subjacente.
 - As percentagens não podem ser somadas em instalações de diferentes dimensões para produzir um total regional.
-- A plataforma constrói a própria cobertura a partir de contagens e denominadores populacionais (**Módulos 5 e 6**).
-- Os ajustamentos de anomalias e de exaustividade (**módulos 1 e 2**) requerem a execução de contagens brutas.
+- A plataforma constrói a própria cobertura a partir de contagens e denominadores populacionais (os módulos **Denominadores de cobertura** e **Estimativas de cobertura**).
+- Os ajustamentos de anomalias e de exaustividade (os módulos **Avaliação** e **Ajustes da qualidade dos dados**) requerem a execução de contagens brutas.
 
 </div>
 </div>

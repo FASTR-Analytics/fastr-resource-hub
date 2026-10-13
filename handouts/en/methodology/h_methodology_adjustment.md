@@ -8,7 +8,7 @@ footer: "FASTR · Methodology recap · Data quality adjustment"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Methodology recap · Module M2</span>
+<span class="eyebrow">Methodology recap · Data quality adjustments</span>
 
 # Data quality adjustment
 

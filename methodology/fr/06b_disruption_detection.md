@@ -7,7 +7,7 @@
 
 ### Objectif du module
 
-Le module Détection des perturbations identifie les mois où le volume d'un service de santé a été anormalement bas ou anormalement haut par rapport à ce que les établissements ayant rapporté ce mois-là délivrent habituellement. Il remplace l'approche par cartes de contrôle et régression par panel de l'ancien module Utilisation des services (M3), retiré de la plateforme.
+Le module Détection des perturbations identifie les mois où le volume d'un service de santé a été anormalement bas ou anormalement haut par rapport à ce que les établissements ayant rapporté ce mois-là délivrent habituellement. Il remplace l'approche par cartes de contrôle et régression par panel de l'ancien module Utilisation des services, retiré de la plateforme.
 
 Le module ajuste un modèle bayésien en deux parties sur des données mensuelles au niveau établissement. Une partie modélise si chaque établissement rapporte un mois donné. L'autre modélise la quantité de service qu'un établissement délivre quand il rapporte. Séparer ces deux questions est l'idée centrale : une baisse du total national peut venir d'établissements devenus silencieux, d'établissements qui délivrent moins, ou des deux, et seule la seconde est une perturbation de service.
 
@@ -28,7 +28,7 @@ La modélisation au niveau établissement prend aussi en charge l'hétérogéné
 | **Entrées** | Volumes ajustés au niveau établissement, issus du module d'ajustement de la qualité des données (`M2_adjusted_data.csv`)<br>SNIS brut (`hmis_ISO3.csv`), uniquement pour rattacher les niveaux administratifs aux établissements |
 | **Sorties** | `M11_disruptions_analysis_admin_area_1.csv` à `_4.csv` : observé, attendu, bornes de crédibilité à 95 %, écarts de rapportage et de service, et signalements de déficit/excédent par indicateur, mois et zone |
 | **Objectif** | Détecter les vrais changements de prestation de services parmi les établissements rapporteurs, séparément des changements de complétude du rapportage |
-| **Prérequis** | Module d'ajustement de la qualité des données (M2) |
+| **Prérequis** | Module Ajustements de la qualité des données |
 | **Méthode** | Modèle bayésien d'intensité latente en deux parties (modèle de rapportage de Bernoulli et modèle de service binomial négatif) ajusté avec INLA |
 
 Le modèle a été développé par Mustapha Wasseja et intégré à la plateforme comme module `m011`.
@@ -205,9 +205,9 @@ Les derniers mois de la série méritent de la prudence pour une autre raison : 
 
 ---
 
-## Approche antérieure : cartes de contrôle et régression par panel (module M3 retiré)
+## Approche antérieure : cartes de contrôle et régression par panel (ancien module Utilisation des services)
 
-Jusqu'en 2026, la détection des perturbations était faite par le module Utilisation des services (M3), qui modélisait les volumes agrégés par contrôle statistique des processus et régression par panel. Ce module a été retiré de la plateforme et remplacé par le module bayésien décrit ci-dessus. Sa méthode est conservée ici pour référence, parce que les rapports pays produits avant le changement la citent et parce que ses sorties restent lisibles dans les anciens paquets de résultats.
+Jusqu'en 2026, la détection des perturbations était faite par le module Utilisation des services, aujourd’hui retiré, qui modélisait les volumes agrégés par contrôle statistique des processus et régression par panel. Ce module a été retiré de la plateforme et remplacé par le module bayésien décrit ci-dessus. Sa méthode est conservée ici pour référence, parce que les rapports pays produits avant le changement la citent et parce que ses sorties restent lisibles dans les anciens paquets de résultats.
 
 ??? "Fonctionnement du modèle antérieur"
 
@@ -240,7 +240,7 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
     ### Diagramme de flux de travail
 
-    <iframe src="../../resources/diagrams/mod3_workflow_FR.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 3 Interactive Workflow"></iframe>
+    <iframe src="../../resources/diagrams/mod3_workflow_FR.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Retired service utilization module, interactive workflow"></iframe>
 
     ### Points de décision clés
 
@@ -270,14 +270,14 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
     **Traitement de la complétude des rapports**
 
-    Le module accepte des versions alternatives des comptages de services produits par le module 2, ce qui permet aux utilisateurs de choisir d'analyser les volumes bruts rapportés ou les volumes ajustés pour tenir compte de la complétude des rapports. Cela permet d'aligner l'analyse des perturbations sur différentes hypothèses de qualité des données.
+    Le module accepte des versions alternatives des comptages de services produits par le module Ajustements de la qualité des données, ce qui permet aux utilisateurs de choisir d'analyser les volumes bruts rapportés ou les volumes ajustés pour tenir compte de la complétude des rapports. Cela permet d'aligner l'analyse des perturbations sur différentes hypothèses de qualité des données.
 
 ??? "Traitement des données et résultats"
 
 
     **Transformation de l'entrée**
 
-    Le module commence par le décompte mensuel des services au niveau de l'établissement (par exemple, les accouchements déclarés par chaque établissement). Ces données sont agrégées au niveau géographique sélectionné. Les observations identifiées comme aberrantes dans le module 1 sont exclues afin d'éviter que les valeurs anormales n'influencent l'estimation des tendances et les limites de contrôle.
+    Le module commence par le décompte mensuel des services au niveau de l'établissement (par exemple, les accouchements déclarés par chaque établissement). Ces données sont agrégées au niveau géographique sélectionné. Les observations identifiées comme aberrantes dans le module Évaluation de la qualité des données sont exclues afin d'éviter que les valeurs anormales n'influencent l'estimation des tendances et les limites de contrôle.
 
     **Estimation et détection des tendances**
 
@@ -371,12 +371,12 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
     #### Entrées primaires
 
     1. **`M2_adjusted_data.csv`** (source de données principale)
-       - Résultat du module 2 (Ajustements de la qualité des données)
+       - Résultat du module Ajustements de la qualité des données
        - Contient des comptes de services ajustés avec différentes hypothèses de complétude
        - Colonnes obligatoires : `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_outliers`, `count_final_completeness`, `count_final_both`
 
     2. **`M1_output_outliers.csv`**
-       - Résultat du module 1 (Évaluation de la qualité des données)
+       - Résultat du module Évaluation de la qualité des données
        - Contient `outlier_flag` pour identifier et exclure les points de données anormaux
        - Colonnes requises : `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag`
 
@@ -1220,7 +1220,7 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
     **Nettoyage des données** :
 
-    - Les valeurs aberrantes ont été supprimées avant l'analyse de la carte de contrôle (sur la base des indicateurs du module 1)
+    - Les valeurs aberrantes ont été supprimées avant l'analyse de la carte de contrôle (sur la base des indicateurs du module Évaluation de la qualité des données)
     - Les mois à faible volume (< 50% de la moyenne) ont été exclus pour améliorer la stabilité du modèle
     - Prédictions limitées à zéro (les comptes ne peuvent pas être négatifs)
 
@@ -1243,7 +1243,7 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
     ### Intégration du flux de travail
 
-    Ce module est le **module 3** du pipeline analytique FASTR :
+    Ce module était le troisième maillon du pipeline analytique FASTR :
 
     **Prérequis** :
 
@@ -1308,7 +1308,7 @@ Jusqu'en 2026, la détection des perturbations était faite par le module Utilis
 
 <!--
 NOTES POUR LE PRÉSENTATEUR :
-- C'est le module Détection des perturbations (M11) de la plateforme. Il a remplacé le modèle à cartes de contrôle (M3) en 2026 ; les anciennes diapositives sont gardées pour référence.
+- C'est le module Détection des perturbations de la plateforme. Il a remplacé en 2026 l'ancien module Utilisation des services, à cartes de contrôle ; les anciennes diapositives sont gardées pour référence.
 - Le modèle travaille établissement par établissement, mois par mois, puis additionne par province et district. Pas de modèle séparé par zone.
 - La question 1 est un modèle oui/non du rapportage. La question 2 est un modèle de comptage du volume de services, ajusté seulement là où un rapport existe.
 - Chaque établissement a son propre niveau de base : un hôpital et un poste de santé sont comparés chacun à leur propre historique.
@@ -1323,7 +1323,7 @@ Pour chaque zone et chaque mois, le modèle additionne le volume attendu **des s
 
 <div style="font-size: 0.9em;">
 
-| | Ancienne approche (M3) | Approche bayésienne (M11) |
+| | Approche antérieure | Approche bayésienne |
 |---|---|---|
 | **Unité modélisée** | Total du district ou de la province | Chaque établissement |
 | **Rapports manquants** | Comblés, puis modélisés | Modélisés comme une question à part |
@@ -1451,6 +1451,6 @@ NOTES POUR LE PRÉSENTATEUR :
 NOTES POUR LE PRÉSENTATEUR :
 - Version condensée de m6_2e à m6_2h. Le modèle pose deux questions par établissement : a-t-il rapporté, et combien a-t-il délivré quand il a rapporté.
 - Comme l'attendu et l'observé utilisent les mêmes établissements chaque mois, un établissement devenu silencieux n'apparaît pas comme une perturbation.
-- Module M11 de la plateforme ; les anciennes diapositives à cartes de contrôle (m6_2, m6_2b, m6_2d) décrivent le modèle M3 retiré.
+- Dans la plateforme : Détection des perturbations ; les anciennes diapositives à cartes de contrôle (m6_2, m6_2b, m6_2d) décrivent l'ancien modèle Utilisation des services, retiré.
 -->
 <!-- /SLIDE -->

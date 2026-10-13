@@ -28,5 +28,5 @@ paginate: true
 NOTES POUR LE PRÉSENTATEUR :
 - Version condensée de m6_2e à m6_2h. Le modèle pose deux questions par établissement : a-t-il rapporté, et combien a-t-il délivré quand il a rapporté.
 - Comme l'attendu et l'observé utilisent les mêmes établissements chaque mois, un établissement devenu silencieux n'apparaît pas comme une perturbation.
-- Module M11 de la plateforme ; les anciennes diapositives à cartes de contrôle (m6_2, m6_2b, m6_2d) décrivent le modèle M3 retiré.
+- Dans la plateforme : Détection des perturbations ; les anciennes diapositives à cartes de contrôle (m6_2, m6_2b, m6_2d) décrivent l'ancien modèle Utilisation des services, retiré.
 -->

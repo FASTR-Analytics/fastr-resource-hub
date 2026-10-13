@@ -21,8 +21,11 @@ etc.), always do this **before** you write anything:
      - `m003/` — Module 3: Service Utilization & Disruption Detection
      - `m005/` — Module 5: Denominator calculation (Part 1 of coverage)
      - `m006/` — Module 6: Coverage Estimation (Part 2 of coverage)
-     - There is no platform M4 — the numbering skips 4. Use M1/M2/M3/M5/M6
-       explicitly when writing about platform modules.
+     - The platform shows modules by **label only** (Indicator values, Data
+       quality assessment, Data quality adjustments, Disruption detection,
+       Coverage denominators, Coverage estimates); users never see a number.
+       Use the label in user-facing text, and the `m0NN` id only in
+       code-facing docs. m003/m004/m007/m008 are frozen and gone from the UI.
    - Do not trust assumptions, memory, or prior conversations — confirm in the
      docs and the code.
 

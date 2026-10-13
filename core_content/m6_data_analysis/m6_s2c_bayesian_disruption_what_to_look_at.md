@@ -28,5 +28,5 @@ paginate: true
 PRESENTER NOTES:
 - Condensed version of m6_2e to m6_2h. The model asks two questions per facility: did it report, and how much did it deliver when it did.
 - Because expected and observed use the same facilities each month, a facility going silent does not show as a disruption.
-- Module M11 in the platform; the older control-chart slides (m6_2, m6_2b, m6_2d) describe the retired M3 model.
+- In the platform: Disruption detection; the older control-chart slides (m6_2, m6_2b, m6_2d) describe the retired service utilization model.
 -->

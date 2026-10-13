@@ -18,7 +18,7 @@ Because the analysis is descriptive, its reading depends on the direction of the
 
 | Component | Details |
 |-----------|---------|
-| **Inputs** | Adjusted service volumes from the Data quality adjustment module (M2): unadjusted, outlier-adjusted, completeness-adjusted, and both<br>Indicator values from the Indicator values module (M12) for calculated indicators |
+| **Inputs** | Adjusted service volumes from the Data quality adjustments module: unadjusted, outlier-adjusted, completeness-adjusted, and both<br>Indicator values from the Indicator values module for calculated indicators |
 | **Outputs** | Monthly and annual service volumes by indicator and area<br>Year-over-year change<br>Quarter-on-quarter change<br>Volume under each adjustment scenario |
 | **Purpose** | Describe and compare service volumes over time and across areas, as the starting point for interpretation and for disruption detection |
 
@@ -132,9 +132,9 @@ Both are computed per indicator and geographic area. Changes beyond ±10 % are f
 <!-- SLIDE:m6_0 -->
 ## From adjusted data to analysis
 
-Module 2 produced the adjusted dataset — outliers replaced, gaps imputed. Module 3 is where that work pays off.
+The Data quality adjustments module produced the adjusted dataset — outliers replaced, gaps imputed. Service utilization analysis is where that work pays off.
 
-Within Module 3, users can analyze **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
+In the service utilization views, users can analyze **either the adjusted or the unadjusted data**, depending on the question. Adjusted data tells you about underlying patterns; unadjusted data tells you what was actually reported.
 
 The next slides cover two views of service delivery:
 

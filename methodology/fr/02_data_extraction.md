@@ -40,8 +40,8 @@ Le choix entre l'utilisation exclusive des données analytiques du DHIS2 et l'ap
 
     - **La détection des valeurs aberrantes repose sur l'ampleur.** Un établissement déclarant 850 visites CPN1 alors que sa fourchette habituelle est de 100 à 200 est manifestement aberrant. Le même établissement déclarant *« 92 % de couverture »* ne nous apprend rien — le pourcentage est plafonné à 100, masque le volume sous-jacent et efface le signal qui sert à détecter les erreurs de déclaration.
     - **On peut additionner des volumes entre établissements ; pas des pourcentages.** Pour obtenir un total régional ou national, la plateforme additionne les volumes des établissements. Faire une moyenne des pourcentages entre établissements de tailles différentes donne le mauvais résultat (un hôpital de 100 lits et un poste de santé de 5 lits pèseraient à parts égales).
-    - **La plateforme construit elle-même le dénominateur.** Le module 5 dérive la population cible (femmes enceintes, nourrissons, etc.) à partir des données SIGS, des enquêtes et des projections de l'ONU. Le module 6 calcule ensuite la couverture comme `volume ÷ dénominateur`. Si vous fournissez directement un % de couverture, il n'y a plus de volume à diviser ni de comparaison à faire.
-    - **L'ajustement impute des volumes.** Les modules 1 et 2 détectent les valeurs aberrantes au moyen de seuils statistiques sur les valeurs brutes et comblent les mois manquants par moyennes mobiles des volumes passés. Ces deux méthodes sont statistiquement dénuées de sens sur des pourcentages.
+    - **La plateforme construit elle-même le dénominateur.** Le module Dénominateurs de couverture dérive la population cible (femmes enceintes, nourrissons, etc.) à partir des données SIGS, des enquêtes et des projections de l'ONU. Le module Estimations de couverture calcule ensuite la couverture comme `volume ÷ dénominateur`. Si vous fournissez directement un % de couverture, il n'y a plus de volume à diviser ni de comparaison à faire.
+    - **L'ajustement impute des volumes.** Les modules d'évaluation et d'ajustements de la qualité des données détectent les valeurs aberrantes au moyen de seuils statistiques sur les valeurs brutes et comblent les mois manquants par moyennes mobiles des volumes passés. Ces deux méthodes sont statistiquement dénuées de sens sur des pourcentages.
 
     **Que faut-il extraire :** uniquement le numérateur — nombre de services rendus, doses administrées, visites enregistrées, décès déclarés, etc. La plateforme se charge de l'agrégation, de l'ajustement et du calcul de la couverture.
 
@@ -206,8 +206,8 @@ FASTR analyse des **volumes bruts de services**, pas des pourcentages, des propo
 
 - Une valeur aberrante ne se détecte pas sur un pourcentage : il est plafonné à 100 et masque le volume sous-jacent.
 - Des pourcentages ne s'additionnent pas entre établissements de tailles différentes pour obtenir un total régional.
-- La plateforme construit elle-même la couverture à partir des volumes et des dénominateurs de population (**modules 5 et 6**).
-- Les ajustements pour valeurs aberrantes et complétude (**modules 1 et 2**) ont besoin de volumes bruts pour fonctionner.
+- La plateforme construit elle-même la couverture à partir des volumes et des dénominateurs de population (les modules **Dénominateurs de couverture** et **Estimations de couverture**).
+- Les ajustements pour valeurs aberrantes et complétude (les modules **Évaluation** et **Ajustements de la qualité des données**) ont besoin de volumes bruts pour fonctionner.
 
 </div>
 </div>

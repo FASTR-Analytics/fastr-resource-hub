@@ -15,7 +15,7 @@ Together, these components convert administrative service volumes into standardi
 
 ### Analytical rationale
 
-Health service coverage is a core metric for assessing health system performance and equity. While Module 2 produces adjusted service volumes, these figures on their own do not indicate the extent to which services reach the populations they are intended to serve. Coverage estimates place service delivery in context by relating service volumes to population need.
+Health service coverage is a core metric for assessing health system performance and equity. While the Data quality adjustments module produces adjusted service volumes, these figures on their own do not indicate the extent to which services reach the populations they are intended to serve. Coverage estimates place service delivery in context by relating service volumes to population need.
 
 This module addresses key challenges in estimating coverage, including:
 
@@ -31,14 +31,14 @@ This module addresses key challenges in estimating coverage, including:
 
 | Component | Details |
 |-----------|---------|
-| **Inputs** | M2_adjusted_data (national & subnational) from Module 2<br>Survey data (MICS/DHS) from GitHub repository<br>Population data (UN WPP) from GitHub repository |
+| **Inputs** | M2_adjusted_data (national & subnational) from the Data quality adjustments module<br>Survey data (MICS/DHS) from GitHub repository<br>Population data (UN WPP) from GitHub repository |
 | **Outputs** | **M5 (Part 1)** — M5_denominators (national, admin2, admin3): calculated target populations · M5_combined_results (national, admin2, admin3): coverage estimates with all denominators · M5_selected_denominator_per_indicator: best denominator per indicator and level<br>**M6 (Part 2)** — M6_coverage_estimation (national, admin2, admin3): final coverage with HMIS, survey, and projected estimates |
 | **Module IDs** | Part 1 = `m005` (requires `m002`) · Part 2 = `m006` (requires `m005`) |
 | **Purpose** | Estimate health service coverage by comparing service volumes to target populations, validated against survey benchmarks |
 
 !!! warning "Reminder: HMIS input must be counts, not coverage %"
 
-    Coverage estimation works by dividing the number of services delivered (the **count** flowing through Modules 1, 2, and 3) by a target-population denominator that the platform builds itself. If your original HMIS extract contained pre-calculated coverage rates instead of service counts, there is nothing for this module to compute — the count is the numerator, and the platform supplies the denominator. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
+    Coverage estimation works by dividing the number of services delivered (the **count** flowing through the data quality modules) by a target-population denominator that the platform builds itself. If your original HMIS extract contained pre-calculated coverage rates instead of service counts, there is nothing for this module to compute — the count is the numerator, and the platform supplies the denominator. See [Data extraction](02_data_extraction.md) for what to pull from your HMIS.
 
 ### Part 1 and part 2 explained
 
@@ -132,7 +132,7 @@ Results are saved with standardized column structures for each administrative le
 
 ### Workflow diagram
 
-<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Coverage estimation (Modules 5 & 6) Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Coverage estimation interactive workflow"></iframe>
 
 ### Key decision points
 
@@ -146,7 +146,7 @@ Household surveys are conducted at irregular intervals, typically every three to
 
 **3. Use of national versus subnational survey data**
 
-Coverage estimation at subnational levels requires both subnational HMIS service volumes (from Module 2) and subnational survey reference values (DHS/MICS). The module handles missing inputs at two distinct points:
+Coverage estimation at subnational levels requires both subnational HMIS service volumes (from the Data quality adjustments module) and subnational survey reference values (DHS/MICS). The module handles missing inputs at two distinct points:
 
 - **No subnational HMIS data for the country** — when `M2_adjusted_data_admin_area.csv` contains no usable subnational rows, or when no subnational survey data exists at all in the unified DHS/MICS dataset for the country, Part 1 falls back to `NATIONAL_ONLY` and Part 2 detects empty admin2/admin3 `M5_combined_results_*.csv` files and skips the corresponding block entirely. In that case `M6_coverage_estimation_admin2.csv` and/or `M6_coverage_estimation_admin3.csv` are still written, but as empty files with the correct column headers only.
 
@@ -264,7 +264,7 @@ UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 
 Part 1 integrates three primary data sources:
 
-**1. HMIS Adjusted Data** (from Module 2)
+**1. HMIS Adjusted Data** (from the Data quality adjustments module)
 
 - National: `M2_adjusted_data_national.csv`
 - Subnational: `M2_adjusted_data_admin_area.csv`
@@ -301,7 +301,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
     **Input**:
 
-    - Adjusted volume data from Module 2
+    - Adjusted volume data from the Data quality adjustments module
     - Selected count variable (e.g., `count_final_both`)
 
     **Processing**:
@@ -858,7 +858,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 **Step 1: Load and validate input data**
 
-- Load HMIS adjusted data from Module 2 (national and subnational files)
+- Load HMIS adjusted data from the Data quality adjustments module (national and subnational files)
 - Load survey data from GitHub repository (unified DHS/MICS dataset)
 - Load UN WPP population data from GitHub repository
 - Validate ISO3 codes match across datasets
@@ -1054,11 +1054,11 @@ Part 1 executes the following workflow for each administrative level (national, 
 
     **Issue**: All denominators show >100% coverage
 
-    - **Solution**: May indicate under-reporting in survey or over-reporting in HMIS; check data quality from Module 2
+    - **Solution**: May indicate under-reporting in survey or over-reporting in HMIS; check data quality from the Data quality adjustments module
 
     **Issue**: UNWPP selected as "best" for most indicators
 
-    - **Solution**: May indicate poor HMIS data quality or completeness; review Module 2 adjustments
+    - **Solution**: May indicate poor HMIS data quality or completeness; review the Data quality adjustments module
 
 ---
 
@@ -1520,7 +1520,7 @@ Note: although the `m006` results-object schema lists `survey_raw_source` and `s
     **Issue**: Gaps in projected coverage
 
     - **Cause**: Missing HMIS data for some years
-    - **Solution**: Review Module 2 outputs, check data completeness adjustments
+    - **Solution**: Review the Data quality adjustments outputs, check data completeness adjustments
 
 
 ### Code examples

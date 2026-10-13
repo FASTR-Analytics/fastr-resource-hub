@@ -10,7 +10,7 @@ Pour chaque zone et chaque mois, le modèle additionne le volume attendu **des s
 
 <div style="font-size: 0.9em;">
 
-| | Ancienne approche (M3) | Approche bayésienne (M11) |
+| | Approche antérieure | Approche bayésienne |
 |---|---|---|
 | **Unité modélisée** | Total du district ou de la province | Chaque établissement |
 | **Rapports manquants** | Comblés, puis modélisés | Modélisés comme une question à part |

@@ -37,8 +37,8 @@ The choice between relying solely on DHIS2 analytics and applying the FASTR appr
 
     - **Outlier detection works on magnitude.** A facility reporting 850 ANC1 visits when its usual range is 100–200 is obviously an outlier. The same facility reporting *"92% coverage"* tells us nothing — the percentage is bounded by 100, hides the underlying volume, and erases the signal we use to flag reporting errors.
     - **Counts can be added across facilities; percentages cannot.** To get a regional or national total, the platform sums facility counts. Averaging percentages across facilities of different sizes gives the wrong answer (a 100-bed hospital and a 5-bed health post would weigh equally).
-    - **The platform builds the denominator itself.** Module 5 derives the target population (pregnant women, infants, etc.) from HMIS data, surveys, and UN projections. Module 6 then calculates coverage as `count ÷ denominator`. If you feed in a coverage % directly, there is no count to divide and no comparison to make.
-    - **Adjustment imputes counts.** Modules 1 and 2 detect outliers using statistical thresholds on raw values and fill missing months using rolling averages of past counts. Both methods are statistically meaningless on percentages.
+    - **The platform builds the denominator itself.** The Coverage denominators module derives the target population (pregnant women, infants, etc.) from HMIS data, surveys, and UN projections. The Coverage estimates module then calculates coverage as `count ÷ denominator`. If you feed in a coverage % directly, there is no count to divide and no comparison to make.
+    - **Adjustment imputes counts.** The data quality assessment and adjustments modules detect outliers using statistical thresholds on raw values and fill missing months using rolling averages of past counts. Both methods are statistically meaningless on percentages.
 
     **What to extract:** the numerator only — number of services delivered, doses given, visits recorded, deaths registered, etc. The platform handles aggregation, adjustment, and coverage calculation.
 
@@ -202,8 +202,8 @@ FASTR analyses **raw service counts**, not percentages, proportions, or pre-calc
 
 - Outliers cannot be detected on a percentage: it caps at 100 and hides the underlying volume.
 - Percentages cannot be summed across facilities of different sizes to produce a regional total.
-- The platform builds coverage itself from counts and population denominators (**Modules 5 & 6**).
-- Outlier and completeness adjustments (**Modules 1 & 2**) require raw counts to run.
+- The platform builds coverage itself from counts and population denominators (the **Coverage denominators** and **Coverage estimates** modules).
+- Outlier and completeness adjustments (the **Data quality assessment** and **Data quality adjustments** modules) require raw counts to run.
 
 </div>
 </div>

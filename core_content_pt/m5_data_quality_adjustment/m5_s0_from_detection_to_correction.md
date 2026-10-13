@@ -6,7 +6,7 @@ paginate: true
 
 ## Da deteção à correção
 
-O módulo 1 assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo 2 continua a partir daí.
+O módulo Avaliação da qualidade dos dados assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo Ajustes da qualidade dos dados continua a partir daí.
 
 O FASTR substitui os valores assinalados por estimativas razoáveis a partir dos padrões históricos de cada estabelecimento, para que as análises de utilização de serviços e de cobertura a jusante funcionem com dados mais limpos.
 

@@ -18,11 +18,11 @@ This documentation describes the [FASTR](https://data.gffportal.org/key-theme/FA
 | [**Identify questions & indicators**](01_identify_questions_indicators.md) | Defining priority questions and selecting core indicators |
 | [**Data extraction**](02_data_extraction.md) | Extracting and preparing HMIS data for analysis |
 | [**The FASTR data analytics platform**](03_fastr_analytics_platform.md) | Using the platform for automated analysis |
-| [**Data quality assessment**](04_data_quality_assessment.md) | Module 1 in platform. Assessing completeness and consistency |
-| [**Data quality adjustment**](05_data_quality_adjustment.md) | Module 2 in platform. Adjusting for outliers and missing data |
+| [**Data quality assessment**](04_data_quality_assessment.md) | In the platform: Data quality assessment. Assessing completeness and consistency |
+| [**Data quality adjustment**](05_data_quality_adjustment.md) | In the platform: Data quality adjustments. Adjusting for outliers and missing data |
 | [**Service utilization analysis**](06a_service_utilization.md) | Service volumes over time: year-over-year and quarter-on-quarter change, effect of adjustments |
-| [**Disruption detection**](06b_disruption_detection.md) | Module M11 in platform. Bayesian detection of service disruptions among reporting facilities |
-| [**Coverage estimates**](06c_coverage_estimates.md) | Modules 5 & 6 in platform (Part 1: denominators, Part 2: coverage). Estimating service coverage against targets |
+| [**Disruption detection**](06b_disruption_detection.md) | In the platform: Disruption detection. Bayesian detection of service disruptions among reporting facilities |
+| [**Coverage estimates**](06c_coverage_estimates.md) | In the platform: Coverage denominators (Part 1) and Coverage estimates (Part 2). Estimating service coverage against targets |
 
 ## Quick links
 

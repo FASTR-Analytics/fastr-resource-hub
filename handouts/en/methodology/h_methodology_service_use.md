@@ -8,7 +8,7 @@ footer: "FASTR · Methodology recap · Service utilization"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Methodology recap · Module M3</span>
+<span class="eyebrow">Methodology recap · Service utilization (retired platform module)</span>
 
 # Service utilization
 

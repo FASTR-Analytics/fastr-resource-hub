@@ -8,7 +8,7 @@ footer: "FASTR · Récapitulatif méthodologique · Estimations de couverture"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Récapitulatif méthodologique · Modules M5 + M6</span>
+<span class="eyebrow">Récapitulatif méthodologique · Dénominateurs de couverture + Estimations de couverture</span>
 
 # Estimations de couverture
 
@@ -23,8 +23,8 @@ Transformer des comptages bruts en **couverture** — la part des personnes qui 
 
 <p class="sb-label">Deux parties</p>
 
-- **M5** détermine la **population cible** (le plus difficile)
-- **M6** la transforme en couverture et comble les années entre enquêtes
+- **Dénominateurs de couverture** détermine la **population cible** (le plus difficile)
+- **Estimations de couverture** la transforme en couverture et comble les années entre enquêtes
 
 <p class="sb-label">À garder en tête</p>
 
@@ -51,7 +51,7 @@ Le chiffre du **haut** est facile — les 8 000 visites ANC1 viennent directemen
 
 Le chiffre du **bas** est le plus dur : **personne ne compte combien il y a de femmes enceintes (ou de nourrissons).** Aucune formation ne déclare « 10 000 femmes étaient enceintes ici cette année ».
 
-Tout le travail de ces modules se ramène donc à une question — **où trouver ce chiffre du bas, la population cible ?** C'est ce que M5 cherche à estimer.
+Tout le travail de ces modules se ramène donc à une question — **où trouver ce chiffre du bas, la population cible ?** C'est ce que le module Dénominateurs de couverture cherche à estimer.
 
 </div>
 </div>
@@ -60,9 +60,9 @@ Tout le travail de ces modules se ramène donc à une question — **où trouver
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M5 · estimer la population</span>
+<span class="eyebrow">Dénominateurs de couverture · estimer la population</span>
 
-## Comment M5 trouve le chiffre du bas
+## Comment le module des dénominateurs trouve le chiffre du bas
 
 **Étape 1 — l'emprunter à une enquête.** Tous les quelques ans, une enquête ménages mesure la couverture *directement*, en interrogeant les familles. Elle peut nous dire que, disons, **80 % des femmes enceintes ont eu l'ANC1**. Combinons avec le comptage que nous avons déjà : si les **8 000** visites ANC1 représentent 80 % de toutes les femmes enceintes, le total est 8 000 ÷ 0,80 = **10 000 femmes enceintes**. Nous avons retrouvé le chiffre du bas qu'on ne pouvait pas compter.
 
@@ -70,13 +70,13 @@ Tout le travail de ces modules se ramène donc à une question — **où trouver
 
 **Étape 3 — recouper, et choisir le meilleur.** L'ANC1 n'est pas le seul point de départ ; les accouchements, le Penta1 et le BCG donnent chacun leur propre estimation de la population, et elles ne concordent pas toutes. Pour choisir, FASTR aligne chaque estimation sur la **projection de population de l'ONU** — un chiffre indépendant, bâti sans le SIGS — et garde celle qui s'en approche le plus.
 
-<div class="callout-footer">La couverture ne vaut que son dénominateur. C'est pourquoi M5 ne se fie pas à un seul indicateur — il en triangule plusieurs et laisse la projection ONU indépendante départager.</div>
+<div class="callout-footer">La couverture ne vaut que son dénominateur. C'est pourquoi le module des dénominateurs ne se fie pas à un seul indicateur — il en triangule plusieurs et laisse la projection ONU indépendante départager.</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M5 · la chaîne de la vie (étape 2)</span>
+<span class="eyebrow">Dénominateurs de couverture · la chaîne de la vie (étape 2)</span>
 
 ## Des grossesses aux nourrissons
 
@@ -88,7 +88,7 @@ Les **flèches turquoise** vont vers l'*avant* — chacune applique un taux dém
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M6 · le résultat</span>
+<span class="eyebrow">Estimations de couverture · le résultat</span>
 
 ## La couverture dans le temps
 

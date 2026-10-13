@@ -8,7 +8,7 @@ footer: "FASTR · Récapitulatif méthodologique · Ajustement de la qualité de
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Récapitulatif méthodologique · Module M2</span>
+<span class="eyebrow">Récapitulatif méthodologique · Ajustements de la qualité des données</span>
 
 # Ajustement de la qualité des données
 

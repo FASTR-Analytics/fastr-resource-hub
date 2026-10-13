@@ -61,7 +61,7 @@ The module generates a set of structured outputs, including outlier flags, compl
 
 ### Workflow diagram
 
-<iframe src="../resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 1 Interactive Workflow"></iframe>
+<iframe src="../resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Data quality assessment interactive workflow"></iframe>
 
 ### Key decision points
 
@@ -308,7 +308,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Use case**:
 
-    - Input for Module 2 (Data Quality Adjustments)
+    - Input for the Data quality adjustments module
     - Statistical analysis of outlier patterns
     - Generating visualizations of outlier prevalence
 

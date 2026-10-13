@@ -23,7 +23,7 @@ Ao tratar sistematicamente os valores atípicos e os dados em falta antes da an�
 
 | Componente | Detalhes |
 |-----------|---------|
-| **Inputs** | Dados brutos do HMIS (`hmis_ISO3.csv`)<br>Sinalizadores de outlier do Módulo 1 (`M1_output_outliers.csv`)<br>Sinalizadores de completude do Módulo 1 (`M1_output_completeness.csv`) |
+| **Inputs** | Dados brutos do HMIS (`hmis_ISO3.csv`)<br>Sinalizadores de outlier do módulo Avaliação da qualidade dos dados (`M1_output_outliers.csv`)<br>Sinalizadores de completude do módulo Avaliação da qualidade dos dados (`M1_output_completeness.csv`) |
 | Dados ajustados ao nível da instalação (`M2_adjusted_data.csv`)<br>Dados agregados subnacionais (`M2_adjusted_data_admin_area.csv`)<br>Dados agregados nacionais (`M2_adjusted_data_national.csv`)<br>Metadados de exclusão (`M2_low_volume_exclusions.csv`) |
 | Substituir valores anómalos e preencher dados em falta utilizando padrões históricos específicos do estabelecimento; produz quatro cenários de ajustamento (nenhum, apenas anómalos, apenas integralidade, ambos)
 
@@ -36,7 +36,7 @@ Ao tratar sistematicamente os valores atípicos e os dados em falta antes da an�
 O módulo aplica um processo padronizado de várias etapas para ajustar os dados de rotina das unidades de saúde, preservando os padrões subjacentes de prestação de serviços:
 
 **Passo 1: Carregar e preparar dados**
-O módulo integra três entradas: volumes de serviços comunicados ao nível da unidade de saúde (`hmis_ISO3.csv`), sinalizadores de anomalias que identificam valores anómalos (`M1_output_outliers.csv` do Módulo 1) e sinalizadores de integralidade que indicam meses com relatórios incompletos (`M1_output_completeness.csv` do Módulo 1). Os indicadores para os quais o ajustamento não é adequado (qualquer indicador cujo nome contenha `death` ou `still_birth`, sem distinção entre maiúsculas e minúsculas) são identificados e excluídos dos passos de ajustamento subsequentes.
+O módulo integra três entradas: volumes de serviços comunicados ao nível da unidade de saúde (`hmis_ISO3.csv`), sinalizadores de anomalias que identificam valores anómalos (`M1_output_outliers.csv` do módulo Avaliação da qualidade dos dados) e sinalizadores de integralidade que indicam meses com relatórios incompletos (`M1_output_completeness.csv` do módulo Avaliação da qualidade dos dados). Os indicadores para os quais o ajustamento não é adequado (qualquer indicador cujo nome contenha `death` ou `still_birth`, sem distinção entre maiúsculas e minúsculas) são identificados e excluídos dos passos de ajustamento subsequentes.
 
 **Etapa 2: Identificar indicadores de baixo volume
 Antes de aplicar quaisquer ajustamentos, cada indicador é avaliado quanto ao volume suficiente. Os indicadores que nunca atingem 100 eventos comunicados em qualquer mês ao longo da série cronológica completa (`count >= 100`) são assinalados e excluídos do ajustamento, uma vez que os métodos de suavização estatística não são significativos para indicadores de contagem consistentemente baixa. A lista de indicadores de baixo volume excluídos é guardada em `M2_low_volume_exclusions.csv`.
@@ -76,7 +76,7 @@ O módulo gera ficheiros de saída estruturados para conjuntos de dados ao níve
 
 ### Diagrama de fluxo de trabalho
 
-<iframe src="../resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Fluxo de trabalho interativo do módulo 2"></iframe>
+<iframe src="../resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Ajustes da qualidade dos dados: fluxo de trabalho interativo"></iframe>
 
 ### Pontos de decisão chave
 
@@ -84,7 +84,7 @@ O módulo gera ficheiros de saída estruturados para conjuntos de dados ao níve
 
 O módulo aplica ajustamentos a duas categorias de observações:
 
-- Valores assinalados como anómalos através dos procedimentos de deteção estatística implementados no módulo 1
+- Valores assinalados como anómalos através dos procedimentos de deteção estatística implementados no módulo Avaliação da qualidade dos dados
 - Valores correspondentes a meses identificados como incompletos ou em falta devido a lacunas de reporte
 
 Certos indicadores são explicitamente excluídos do ajustamento:
@@ -104,7 +104,7 @@ O módulo gera quatro cenários de ajustamento para acomodar diferentes contexto
 ### Processamento de dados e resultados
 
 **Estrutura de entrada
-O módulo recebe os volumes de serviços mensais ao nível do estabelecimento, juntamente com os sinais de qualidade dos dados gerados no módulo 1, incluindo os indicadores de anomalias e o estado de integralidade. Cada combinação estabelecimento-indicador-mês é tratada como uma observação distinta para potencial ajustamento.
+O módulo recebe os volumes de serviços mensais ao nível do estabelecimento, juntamente com os sinais de qualidade dos dados gerados no módulo Avaliação da qualidade dos dados, incluindo os indicadores de anomalias e o estado de integralidade. Cada combinação estabelecimento-indicador-mês é tratada como uma observação distinta para potencial ajustamento.
 
 **Aplicação dos ajustamentos
 Com base no cenário selecionado, são geradas contagens de serviços ajustadas. As observações assinaladas como anómalas são substituídas por valores derivados de médias históricas específicas do estabelecimento, excluindo os períodos anómalos. Para os meses com relatórios incompletos ou em falta, os valores são imputados utilizando padrões históricos a nível do estabelecimento para manter a continuidade da série cronológica.
@@ -308,8 +308,8 @@ Para o mapa de calor do ajustamento combinado (output 3):
     **Parâmetros**:
 
     - `raw_data` (data.table): Dados originais do HMIS com contagens de serviços
-    - `completeness_data` (data.table): Sinalizadores de integralidade do módulo 1
-    - `outlier_data` (data.table): Sinalizadores de outlier do Módulo 1
+    - `completeness_data` (data.table): Sinalizadores de integralidade do módulo Avaliação da qualidade dos dados
+    - `outlier_data` (data.table): Sinalizadores de outlier do módulo Avaliação da qualidade dos dados
     - `adjust_outliers` (lógico): Aplicar ou não o ajustamento de outlier
     - `adjust_completeness` (lógico): Aplicar ou não o ajustamento da integralidade
 
@@ -360,7 +360,7 @@ Para o mapa de calor do ajustamento combinado (output 3):
 
 ??? "Metodologia de ajuste de outlier"
 
-    O ajustamento de valores aberrantes é aplicado a qualquer valor de estabelecimento-mês assinalado no Módulo 1 (`outlier_flag == 1`). O objetivo é substituir estes valores anómalos por dados históricos válidos do mesmo estabelecimento e indicador.
+    O ajustamento de valores aberrantes é aplicado a qualquer valor de estabelecimento-mês assinalado no módulo Avaliação da qualidade dos dados (`outlier_flag == 1`). O objetivo é substituir estes valores anómalos por dados históricos válidos do mesmo estabelecimento e indicador.
 
     **Abordagem estatística**:
 
@@ -445,7 +445,7 @@ Para o mapa de calor do ajustamento combinado (output 3):
 
 ??? "Metodologia de ajustamento da integralidade"
 
-    O ajustamento de integralidade é aplicado a qualquer mês de instalação em que a contagem de trabalho esteja em falta (`is.na(count_working)`). No cenário `completeness` isto deve-se ao facto de o `count` original ser `NA` (ou seja, o estabelecimento não comunicou esse mês). No cenário `both`, a contagem de trabalho também pode ser `NA` porque a etapa anómala não produziu uma substituição. O `completeness_flag` do Módulo 1 é incorporado para referência, mas não é utilizado como acionador de substituição.
+    O ajustamento de integralidade é aplicado a qualquer mês de instalação em que a contagem de trabalho esteja em falta (`is.na(count_working)`). No cenário `completeness` isto deve-se ao facto de o `count` original ser `NA` (ou seja, o estabelecimento não comunicou esse mês). No cenário `both`, a contagem de trabalho também pode ser `NA` porque a etapa anómala não produziu uma substituição. O `completeness_flag` do módulo Avaliação da qualidade dos dados é incorporado para referência, mas não é utilizado como acionador de substituição.
 
     **Abordagem estatística**:
 
@@ -755,7 +755,7 @@ Para o mapa de calor do ajustamento combinado (output 3):
 
     **Solução**:
 
-    Verificar o `M2_low_volume_exclusions.csv` e verificar se as saídas do módulo 1 contêm sinalizadores
+    Verificar o `M2_low_volume_exclusions.csv` e verificar se as saídas do módulo Avaliação da qualidade dos dados contêm sinalizadores
 
     **Problema 2: Os valores ajustados não parecem razoáveis
 
@@ -796,7 +796,7 @@ Para o mapa de calor do ajustamento combinado (output 3):
     **Solução**:
 
     - Comparar `count_final_none` com `count_final_both` para avaliar o impacto do ajustamento
-    - Rever as estatísticas de exaustividade do Módulo 1
+    - Rever as estatísticas de exaustividade do módulo Avaliação da qualidade dos dados
     - Considerar o limiar de qualidade dos dados para inclusão
 
 ??? "Controlos de garantia de qualidade"
@@ -884,7 +884,7 @@ Para o mapa de calor do ajustamento combinado (output 3):
 <!-- SLIDE:m5_1 -->
 ## Da deteção à correção
 
-O módulo 1 assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo 2 continua a partir daí.
+O módulo Avaliação da qualidade dos dados assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo Ajustes da qualidade dos dados continua a partir daí.
 
 O FASTR substitui os valores assinalados por estimativas razoáveis a partir dos padrões históricos de cada estabelecimento, para que as análises de utilização de serviços e de cobertura a jusante funcionem com dados mais limpos.
 
@@ -1068,7 +1068,7 @@ NOTAS DO APRESENTADOR:
 <!-- SLIDE:m5_s0 -->
 ## Da deteção à correção
 
-O módulo 1 assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo 2 continua a partir daí.
+O módulo Avaliação da qualidade dos dados assinalou os problemas de qualidade dos dados - valores extremos, relatórios em falta, inconsistências internas. O módulo Ajustes da qualidade dos dados continua a partir daí.
 
 O FASTR substitui os valores assinalados por estimativas razoáveis a partir dos padrões históricos de cada estabelecimento, para que as análises de utilização de serviços e de cobertura a jusante funcionem com dados mais limpos.
 

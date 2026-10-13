@@ -8,7 +8,7 @@ footer: "FASTR · Recapitulativo de metodologia · Utilização de serviços"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Recapitulativo de metodologia · Módulo M3</span>
+<span class="eyebrow">Recapitulativo de metodologia · Utilização de serviços (antigo módulo da plataforma)</span>
 
 # Utilização de serviços
 

@@ -159,11 +159,11 @@ This methodology documentation describes the complete FASTR approach to routine 
 
 The FASTR analytics platform includes six automated modules:
 
-- [**Data quality assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
-- [**Data quality adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
+- [**Data quality assessment**](04_data_quality_assessment.md) - In the platform: Data quality assessment. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
+- [**Data quality adjustment**](05_data_quality_adjustment.md) - In the platform: Data quality adjustments. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
 - [**Service utilization analysis**](06a_service_utilization.md) - Service volumes over time: year-over-year and quarter-on-quarter change, and the effect of data quality adjustments
-- [**Disruption detection**](06b_disruption_detection.md) - Module M11 in the platform. Two-part Bayesian model that flags real changes in service delivery among reporting facilities, separately from reporting gaps
-- [**Coverage estimates**](06c_coverage_estimates.md) - Modules 5 & 6 in the platform (Part 1: denominator calculation, Part 2: coverage estimation). Methods for estimating service coverage and comparing trends to country targets
+- [**Disruption detection**](06b_disruption_detection.md) - In the platform: Disruption detection. Two-part Bayesian model that flags real changes in service delivery among reporting facilities, separately from reporting gaps
+- [**Coverage estimates**](06c_coverage_estimates.md) - In the platform: Coverage denominators (Part 1) and Coverage estimates (Part 2). Methods for estimating service coverage and comparing trends to country targets
 
 ## References
 

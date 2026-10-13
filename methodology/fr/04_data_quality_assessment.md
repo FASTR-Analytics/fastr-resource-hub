@@ -60,7 +60,7 @@ Le module génère un ensemble de résultats structurés, y compris les indicate
 
 ### Diagramme de flux de travail
 
-<iframe src="../../resources/diagrams/mod1_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="module 1 Interactive Workflow"></iframe>
+<iframe src="../../resources/diagrams/mod1_workflow_FR.html" width="100%" height="800" style="border : 1px solid #ccc ; border-radius : 4px ;" title="Évaluation de la qualité des données : flux de travail interactif"></iframe>
 
 ### Points de décision clés
 
@@ -307,7 +307,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Cas d'utilisation** :
 
-    - Entrée pour le module 2 (Ajustements de la qualité des données)
+    - Entrée pour le module Ajustements de la qualité des données
     - Analyse statistique des modèles de valeurs aberrantes
     - Génération de visualisations de la prévalence des valeurs aberrantes
 

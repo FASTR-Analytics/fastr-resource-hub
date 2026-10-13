@@ -8,7 +8,7 @@ footer: "FASTR · Methodology recap · Coverage estimates"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Methodology recap · Modules M5 + M6</span>
+<span class="eyebrow">Methodology recap · Coverage denominators + Coverage estimates</span>
 
 # Coverage estimates
 
@@ -23,8 +23,8 @@ Turn raw service counts into **coverage** — the share of the people who *neede
 
 <p class="sb-label">Two parts</p>
 
-- **M5** works out the **target population** (the hard part)
-- **M6** turns it into coverage and fills the years between surveys
+- **Coverage denominators** works out the **target population** (the hard part)
+- **Coverage estimates** turns it into coverage and fills the years between surveys
 
 <p class="sb-label">Keep in mind</p>
 
@@ -51,7 +51,7 @@ The **top** number is easy — the 8,000 ANC1 visits come straight from HMIS; it
 
 The **bottom** number is the hard part: **nobody counts how many pregnant women (or infants) there are.** No facility files a report saying "10,000 women were pregnant here this year."
 
-So the whole job of these modules comes down to one question — **where do we get that bottom number, the target population?** That is what M5 sets out to estimate.
+So the whole job of these modules comes down to one question — **where do we get that bottom number, the target population?** That is what the Coverage denominators module sets out to estimate.
 
 </div>
 </div>
@@ -60,9 +60,9 @@ So the whole job of these modules comes down to one question — **where do we g
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M5 · estimating the population</span>
+<span class="eyebrow">Coverage denominators · estimating the population</span>
 
-## How M5 finds the bottom number
+## How the denominators module finds the bottom number
 
 **Step 1 — borrow it from a survey.** Every few years a household survey measures coverage *directly*, by interviewing families. It can tell us that, say, **80% of pregnant women got ANC1**. Now combine that with the count we already have: if the **8,000** ANC1 visits are 80% of all pregnant women, then the total is 8,000 ÷ 0.80 = **10,000 pregnant women**. We've recovered the bottom number we couldn't count.
 
@@ -70,13 +70,13 @@ So the whole job of these modules comes down to one question — **where do we g
 
 **Step 3 — cross-check, and pick the best.** ANC1 isn't the only place to start; deliveries, Penta1 and BCG each give their own estimate of the population, and they won't all agree. To choose, FASTR lines each estimate up against the **UN population projection** — an independent figure built without HMIS — and keeps the one that comes closest.
 
-<div class="callout-footer">Coverage is only as good as its denominator. That's why M5 doesn't trust one indicator — it triangulates several and lets the independent UN projection break the tie.</div>
+<div class="callout-footer">Coverage is only as good as its denominator. That's why the denominators module doesn't trust one indicator — it triangulates several and lets the independent UN projection break the tie.</div>
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M5 · the chain of life (step 2)</span>
+<span class="eyebrow">Coverage denominators · the chain of life (step 2)</span>
 
 ## From pregnancies to infants
 
@@ -88,7 +88,7 @@ The **teal arrows** step *forward* — each applies one standard demographic rat
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">M6 · the output</span>
+<span class="eyebrow">Coverage estimates · the output</span>
 
 ## Coverage over time
 

@@ -8,7 +8,7 @@ footer: "FASTR · Recapitulativo de metodologia · Avaliação da qualidade dos 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<span class="eyebrow">Recapitulativo de metodologia · Módulo M1</span>
+<span class="eyebrow">Recapitulativo de metodologia · Avaliação da qualidade dos dados</span>
 
 # Avaliação da qualidade dos dados
 

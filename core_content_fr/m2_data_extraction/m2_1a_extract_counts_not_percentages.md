@@ -24,8 +24,8 @@ FASTR analyse des **volumes bruts de services**, pas des pourcentages, des propo
 
 - Une valeur aberrante ne se détecte pas sur un pourcentage : il est plafonné à 100 et masque le volume sous-jacent.
 - Des pourcentages ne s'additionnent pas entre établissements de tailles différentes pour obtenir un total régional.
-- La plateforme construit elle-même la couverture à partir des volumes et des dénominateurs de population (**modules 5 et 6**).
-- Les ajustements pour valeurs aberrantes et complétude (**modules 1 et 2**) ont besoin de volumes bruts pour fonctionner.
+- La plateforme construit elle-même la couverture à partir des volumes et des dénominateurs de population (les modules **Dénominateurs de couverture** et **Estimations de couverture**).
+- Les ajustements pour valeurs aberrantes et complétude (les modules **Évaluation** et **Ajustements de la qualité des données**) ont besoin de volumes bruts pour fonctionner.
 
 </div>
 </div>

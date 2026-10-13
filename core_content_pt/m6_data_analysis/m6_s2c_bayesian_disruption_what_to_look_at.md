@@ -28,5 +28,5 @@ paginate: true
 NOTAS PARA O APRESENTADOR:
 - Versão condensada de m6_2e a m6_2h. O modelo faz duas perguntas por unidade: reportou, e quanto prestou quando reportou.
 - Como o esperado e o observado usam as mesmas unidades em cada mês, uma unidade em silêncio não aparece como perturbação.
-- Módulo M11 da plataforma; os diapositivos antigos de cartas de controlo (m6_2, m6_2b, m6_2d) descrevem o modelo M3 retirado.
+- Na plataforma: Deteção de perturbações; os diapositivos antigos de cartas de controlo (m6_2, m6_2b, m6_2d) descrevem o antigo modelo de utilização de serviços, retirado.
 -->
