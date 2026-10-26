@@ -63,7 +63,7 @@ L'idée en une phrase : l'importation remplit la réserve de données, le paquet
 
 <h2 class="step-h"><span class="step-n">1</span><span>Lancer l'importation</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut, puis, dans la section **SNIS**, sur la carte **Données**.
+1. Cliquez sur **Données** dans la navigation latérale, puis, dans la section **SNIS**, sur la carte **Données**.
 
    ![h:160](../../../resources/screenshots/dhis2_import_v2/01_donnees.png)
 
@@ -109,7 +109,7 @@ L'importation tourne en arrière-plan — de quelques minutes à beaucoup plus, 
 
 Les nouveaux mois sont téléchargés, mais aucune analyse ne s'est recalculée. C'est le rôle du paquet.
 
-1. Cliquez sur **Résultats** dans la barre du haut. La page **Paquets de résultats** liste les paquets existants, avec la date de chacun et les projets qui l'utilisent.
+1. Cliquez sur **Résultats** dans la navigation latérale. La page **Paquets de résultats** liste les paquets existants, avec la date de chacun et les projets qui l'utilisent.
 
    ![h:160](../../../resources/screenshots/dhis2_import_v2/09_resultats.png)
 

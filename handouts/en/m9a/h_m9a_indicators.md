@@ -48,7 +48,7 @@ All indicators live in **one table**. Each row has a type: **DHIS2 element** (fe
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the indicator list</span></h2>
 
-1. Click **Data** in the top bar, then, in the **HMIS** section, the **Indicators** card.
+1. Click **Data** in the side navigation, then, in the **HMIS** section, the **Indicators** card.
 2. Look at the **default list**. Each row shows the **Indicator ID**, its **label**, its **type**, and the **Defined by** column (the DHIS2 code and its original name). If an indicator on your list is already there, skip it.
 
 ![w:470](../../../resources/screenshots/indicators_v2_en/02_indicator_list.png)

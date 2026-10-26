@@ -77,7 +77,7 @@ Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **
 
 ![Vue projet — barre latérale gauche avec icônes, onglet Présentations ouvert, panneau Assistant IA à droite h:280](../../../resources/screenshots/m9b/project_sidebar_nav_fr.png)
 
-> Note : la **navigation du haut** (Projets · Données · Résultats · Ressources · Utilisateurs) est destinée aux **administrateurs de l'instance** qui gèrent l'ensemble du site. À l'intérieur d'un projet, les icônes de la barre latérale sont ce que vous utiliserez au quotidien.
+> Note : la **navigation latérale** (Projets · Données · Résultats · Ressources · Utilisateurs) est destinée aux **administrateurs de l'instance** qui gèrent l'ensemble du site. À l'intérieur d'un projet, les icônes de la barre latérale sont ce que vous utiliserez au quotidien.
 
 ## Vérification
 

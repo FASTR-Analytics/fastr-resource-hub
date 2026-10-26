@@ -32,7 +32,7 @@ Descarregar os valores reais do DHIS2 para os seus indicadores e período. É a 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir a página Importações</span></h2>
 
-Clique em **Dados** na barra superior e, na secção **HMIS**, no cartão **Dados**. Clique em **Importações**.
+Clique em **Dados** na navegação lateral e, na secção **HMIS**, no cartão **Dados**. Clique em **Importações**.
 
 A página tem três separadores — **Atual**, **Futuro**, **Histórico** — e os botões **Nova importação DHIS2** e **Carregar ficheiro CSV**. A vista por indicador está um nível acima, no separador **Registo** da página de Dados HMIS.
 

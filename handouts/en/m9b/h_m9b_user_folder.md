@@ -42,7 +42,7 @@ Create two personal folders — one in **Slide Decks**, one in **Visualizations*
 
 <h2 class="step-h"><span class="step-n">1</span><span>Folder in the Slide Decks tab</span></h2>
 
-1. Click the **Slide Decks** tab in the top navigation.
+1. Click the **Slide Decks** tab in the side navigation.
 2. Switch the view to **By folder** (the toggle at the top — the other option is *Flat list*). You'll only see **New folder** when *By folder* is selected.
 
 ![View toggle set to "By folder" h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)

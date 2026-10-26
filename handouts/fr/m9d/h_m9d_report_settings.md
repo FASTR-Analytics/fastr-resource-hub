@@ -35,7 +35,7 @@ Les logos personnalisés ne sont pas stockés dans la présentation. Ils sont da
 
 > **Le téléversement dans Ressources est réservé aux administrateurs.** Si vous n'êtes pas administrateur d'instance, demandez à votre facilitateur ou à votre admin de téléverser les fichiers de logo (PNG ou JPEG) avant que vous ouvriez les paramètres de la présentation. Une fois dans Ressources, ils apparaîtront sous **Custom logos** dans votre présentation.
 
-Pour référence, les admins arrivent à Ressources depuis la page d'accueil principale (en haut à gauche, le logo FASTR ou le fil d'Ariane du projet) → navigation du haut → **Ressources** → **Téléverser des ressources**. Ressources sert aussi aux admins pour téléverser d'autres fichiers partagés (données CSV, GeoJSON).
+Pour référence, les admins arrivent à Ressources depuis la page d'accueil principale (en haut à gauche, le logo FASTR ou le fil d'Ariane du projet) → navigation latérale → **Ressources** → **Téléverser des ressources**. Ressources sert aussi aux admins pour téléverser d'autres fichiers partagés (données CSV, GeoJSON).
 
 ![Bibliothèque Ressources au niveau de l'instance (vue admin) h:230](../../../resources/screenshots/m9d/report_settings_01_assets_page.png)
 

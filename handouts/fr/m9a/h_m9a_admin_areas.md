@@ -31,7 +31,7 @@ Récupérer le registre des établissements de votre pays — chaque établissem
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir le registre des établissements</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut. La page est organisée en sections **Général**, **SNIS**, **EES** et **ICEH**.
+1. Cliquez sur **Données** dans la navigation latérale. La page est organisée en sections **Général**, **SNIS**, **EES** et **ICEH**.
 2. Dans la section **SNIS**, cliquez sur la carte **Établissements**.
 
 ![h:180](../../../resources/screenshots/m9a_setup/20_data_page.png)

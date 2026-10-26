@@ -108,7 +108,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 
 ### Step 2: Where the data lives (instance level)
 
-- **Do:** Briefly show the **top navigation** (Projects · Data · Results · Assets · Users) and click **Data** — the instance-level page with the **HMIS** cards.
+- **Do:** Briefly show the **side navigation** (Projects · Data · Results · Assets · Users) and click **Data** — the instance-level page with the **HMIS** cards.
 - **Say:** *"Admins import data here, at the instance level. Projects don't hold data — each reads a **results package** of already-computed analyses."*
 - **Watch for:** Don't go deep here — just orient. Setup is its own session.
 

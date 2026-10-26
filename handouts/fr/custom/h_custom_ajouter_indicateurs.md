@@ -45,7 +45,7 @@ Ensuite, deux gestes de plus pour que les chiffres arrivent dans les analyses : 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la liste des indicateurs</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut.
+1. Cliquez sur **Données** dans la navigation latérale.
 2. Dans la section **SNIS**, cliquez sur la carte **Indicateurs**.
 
 ![w:470](../../../resources/screenshots/indicateurs_v2/01_donnees_indicateurs.png)
@@ -183,7 +183,7 @@ L'importation tourne sur le serveur. Suivez-la sous **Données** → **SNIS** �
 
 Les projets ne lisent jamais la base directement. Ils lisent un **paquet de résultats**, c'est-à-dire les analyses déjà calculées. Tant qu'aucun nouveau paquet n'est généré, les nouveaux indicateurs restent invisibles dans les projets.
 
-1. Cliquez sur **Résultats** dans la barre du haut, puis sur **Générer un nouveau paquet de résultats**.
+1. Cliquez sur **Résultats** dans la navigation latérale, puis sur **Générer un nouveau paquet de résultats**.
 2. **Données** : cochez **Données HMIS**. Puis **Suivant**.
 3. **Modules** : cochez les modules à exécuter (voir ci-dessous). Puis **Suivant**.
 

@@ -31,7 +31,7 @@ Extrair o registo de unidades do seu país — cada unidade com a sua região e 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir o registo de Unidades</span></h2>
 
-1. Clique em **Dados** na barra superior. A página está organizada nas secções **Geral**, **HMIS**, **HFA** e **ICEH**.
+1. Clique em **Dados** na navegação lateral. A página está organizada nas secções **Geral**, **HMIS**, **HFA** e **ICEH**.
 2. Na secção **HMIS**, clique no cartão **Unidades**.
 
 ![h:180](../../../resources/screenshots/m9a_setup/20_data_page.png)

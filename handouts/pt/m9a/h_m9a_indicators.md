@@ -48,7 +48,7 @@ Todos os indicadores vivem numa **única tabela**. Cada linha tem um tipo: **Ele
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir a lista de indicadores</span></h2>
 
-1. Clique em **Dados** na barra superior e depois, na secção **HMIS**, no cartão **Indicadores**.
+1. Clique em **Dados** na navegação lateral e depois, na secção **HMIS**, no cartão **Indicadores**.
 2. Veja a **lista por defeito**. Cada linha mostra o **ID do indicador**, o **rótulo**, o **tipo** e a coluna **Definido por** (o código DHIS2 e o seu nome original). Se um indicador da sua lista já existir, salte-o.
 
 ![w:470](../../../resources/screenshots/indicators_v2_en/02_indicator_list.png)

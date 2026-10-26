@@ -63,7 +63,7 @@ The idea in one sentence: the import fills the data store, the package does the 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Launch the import</span></h2>
 
-1. Click **Data** in the top bar, then, in the **HMIS** section, the **Data** card.
+1. Click **Data** in the side navigation, then, in the **HMIS** section, the **Data** card.
 
    ![h:160](../../../resources/screenshots/m9a_setup/20_data_page.png)
 
@@ -109,7 +109,7 @@ The import runs in the background — from a few minutes to much longer, dependi
 
 The new months are downloaded, but no analysis has recomputed. That is the package's job.
 
-1. Click **Results** in the top bar. The **Results packages** page lists the existing packages, with each one's date and the projects using it.
+1. Click **Results** in the side navigation. The **Results packages** page lists the existing packages, with each one's date and the projects using it.
 
    ![h:160](../../../resources/screenshots/m9a_setup/31_results_packages_page.png)
 

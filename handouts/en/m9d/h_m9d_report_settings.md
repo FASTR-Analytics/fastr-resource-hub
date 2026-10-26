@@ -35,7 +35,7 @@ Custom logos do not live inside a deck. They live in **Assets**, a library at th
 
 > **Uploading to Assets is admin-only.** If you are not an instance administrator, ask your facilitator or admin to upload your logo files (PNG or JPEG) before you open the deck Settings. Once they are in Assets, they show up under **Custom logos** in your deck.
 
-For reference, admins reach Assets from the main landing page (top-left, the FASTR logo or project breadcrumb) → top navigation → **Assets** → **Upload assets**. Assets is also where admins upload other shared files (CSV data, GeoJSON map files).
+For reference, admins reach Assets from the main landing page (top-left, the FASTR logo or project breadcrumb) → side navigation → **Assets** → **Upload assets**. Assets is also where admins upload other shared files (CSV data, GeoJSON map files).
 
 ![Instance-level Assets library with files listed (admin view) h:230](../../../resources/screenshots/m9d/report_settings_01_assets_page.png)
 

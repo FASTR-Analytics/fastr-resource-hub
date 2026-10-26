@@ -41,7 +41,7 @@ Ajouter un indicateur, c'est donc : **le chercher** dans DHIS2, **lui donner un 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la liste des indicateurs</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut.
+1. Cliquez sur **Données** dans la navigation latérale.
 2. Dans la section **SNIS**, cliquez sur la carte **Indicateurs**.
 
 ![w:470](../../../resources/screenshots/indicateurs_v2/01_donnees_indicateurs.png)
@@ -277,7 +277,7 @@ L'importation tourne sur le serveur. Selon la période et le nombre d'indicateur
 
 Les données sont maintenant dans la base centrale, mais aucune analyse ne s'est recalculée. C'est le rôle du paquet.
 
-1. Cliquez sur **Résultats** dans la barre du haut. La page **Paquets de résultats** liste les paquets existants, avec la date de chacun et les projets qui l'utilisent.
+1. Cliquez sur **Résultats** dans la navigation latérale. La page **Paquets de résultats** liste les paquets existants, avec la date de chacun et les projets qui l'utilisent.
 
    ![h:160](../../../resources/screenshots/dhis2_import_v2/09_resultats.png)
 

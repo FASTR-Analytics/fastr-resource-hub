@@ -68,7 +68,7 @@ Some steps may already be done. If the code is already in FASTR, start at step 2
 
 <h2 class="step-h"><span class="step-n">1</span><span>Tell FASTR the DHIS2 code exists</span></h2>
 
-1. Log into FASTR. Click the **Data** icon in the top bar.
+1. Log into FASTR. Click the **Data** icon in the side navigation.
 2. Click the **Indicators** card. You will see three tabs: **Common Indicators**, **Raw DHIS2 Indicators**, **Calculated indicators**.
 
    ![h:185](../../../resources/screenshots/scorecard_en/01_indicators_tabs.png)
@@ -234,7 +234,7 @@ The scorecard shows columns in the order of the indicator list — not the order
 
 Everything you made so far is empty labels and rules. No numbers have moved yet. Now copy them over.
 
-1. Click the **Data** icon in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**, then **New DHIS2 import**.
+1. Click the **Data** icon in the side navigation, then the **Data** card in the **HMIS** section. Click **Imports**, then **New DHIS2 import**.
 2. The wizard has five steps. **Credentials** — the saved DHIS2 connection appears. Confirm it.
 3. **Indicators** — tick the indicators to copy, **including the new ones**.
 4. **Time** — choose **Now**. **Configuration** — set the period range. **Review & launch** — check the summary and start the import.
@@ -257,7 +257,7 @@ The numbers are in FASTR's central store now. But no analysis has re-run, and yo
 
 ![h:150](../../../resources/diagrams/scorecard_warehouse_shelf.svg)
 
-1. Click **Results** in the top bar. The **Results packages** page lists the existing packages, each with its date and the projects using it.
+1. Click **Results** in the side navigation. The **Results packages** page lists the existing packages, each with its date and the projects using it.
 2. Click **Generate a new results package**. The wizard has three steps.
 3. **Data** — tick **HMIS data**. **Modules** — tick the usual modules for your instance, including **Scorecard**. If a module needs another one first, FASTR adds it by itself.
 4. **Confirm and launch** — keep the suggested label or name the package clearly. Under **Attach to projects**, **tick the project with the scorecard.** Click **Launch generation**.

@@ -112,7 +112,7 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 
 ### Passo 2: Onde vivem os dados (nível da instância)
 
-- **Fazer:** Mostre brevemente a **navegação do topo** (Projetos · Dados · Resultados · Recursos · Utilizadores) e clique em **Dados** — a página ao nível da instância com os cartões **HMIS** (Unidades, Indicadores, Dados).
+- **Fazer:** Mostre brevemente a **navegação lateral** (Projetos · Dados · Resultados · Recursos · Utilizadores) e clique em **Dados** — a página ao nível da instância com os cartões **HMIS** (Unidades, Indicadores, Dados).
 - **Dizer:** *«Os dados vivem ao nível da instância — os administradores importam-nos aqui. Os projetos não guardam dados: cada projeto lê um **pacote de resultados**, um conjunto de análises já calculadas. Vamos configurar tudo isto na atividade de configuração da instância.»*
 - **Atenção a:** Não aprofunde aqui — apenas oriente. A configuração detalhada é uma sessão própria, e a maioria dos participantes nunca precisará das páginas da instância.
 

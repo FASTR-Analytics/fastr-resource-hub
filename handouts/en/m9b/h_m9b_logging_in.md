@@ -77,7 +77,7 @@ Click your country's project to enter it. The project opens with a **left sideba
 
 ![Project view — left sidebar with icons, Visualizations open, AI Assistant on the right h:280](../../../resources/screenshots/m9b/project_sidebar_nav.png)
 
-> Note: the **top navigation** (Projects · Data · Results · Assets · Users) is for **instance admins** managing the whole site. Inside a project the left-sidebar icons are what you'll use day to day.
+> Note: the **side navigation** (Projects · Data · Results · Assets · Users) is for **instance admins** managing the whole site. Inside a project the left-sidebar icons are what you'll use day to day.
 
 ## Checkpoint
 

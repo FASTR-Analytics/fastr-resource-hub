@@ -48,7 +48,7 @@ Tous les indicateurs vivent dans **un seul tableau**. Chaque ligne porte un type
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la liste des indicateurs</span></h2>
 
-1. Cliquez sur **Données** dans la barre du haut, puis, dans la section **SNIS**, sur la carte **Indicateurs**.
+1. Cliquez sur **Données** dans la navigation latérale, puis, dans la section **SNIS**, sur la carte **Indicateurs**.
 2. Regardez la **liste par défaut**. Chaque ligne affiche l'**ID de l'indicateur**, son **libellé**, son **type** et la colonne **Défini par** (le code DHIS2 et son nom d'origine). Si un indicateur de votre liste existe déjà, passez-le.
 
 ![w:470](../../../resources/screenshots/indicateurs_v2/02_liste_indicateurs.png)

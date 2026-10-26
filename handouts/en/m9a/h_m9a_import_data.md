@@ -32,7 +32,7 @@ Pull the actual data values from DHIS2 for your chosen indicators and time perio
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the Imports page</span></h2>
 
-Click **Data** in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**.
+Click **Data** in the side navigation, then the **Data** card in the **HMIS** section. Click **Imports**.
 
 The page has three tabs — **Current**, **Future**, **History** — plus the buttons **New DHIS2 import** and **Upload CSV file**. The per-indicator view lives one level up, on the HMIS Data page's **Ledger** tab.
 

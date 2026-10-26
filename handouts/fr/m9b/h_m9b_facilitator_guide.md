@@ -108,7 +108,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 
 ### Étape 2 : Où vivent les données (niveau instance)
 
-- **Faites :** Montrez brièvement la **navigation du haut** (Projets · Données · Résultats · Ressources · Utilisateurs) et cliquez sur **Données** — la page au niveau instance avec les cartes **SNIS**.
+- **Faites :** Montrez brièvement la **navigation latérale** (Projets · Données · Résultats · Ressources · Utilisateurs) et cliquez sur **Données** — la page au niveau instance avec les cartes **SNIS**.
 - **Dites :** *« Les administrateurs importent les données ici, au niveau de l'instance. Les projets ne stockent rien : chacun lit un **paquet de résultats**, des analyses déjà calculées. »*
 - **Surveillez :** N'allez pas en profondeur ici — juste orientation. La configuration est sa propre session.
 

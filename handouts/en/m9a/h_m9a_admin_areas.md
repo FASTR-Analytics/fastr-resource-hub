@@ -31,7 +31,7 @@ Pull your country's facility registry — every facility with its region and dis
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the Facilities registry</span></h2>
 
-1. Click **Data** in the top navigation. The page is organized into **General**, **HMIS**, **HFA**, and **ICEH** sections.
+1. Click **Data** in the side navigation. The page is organized into **General**, **HMIS**, **HFA**, and **ICEH** sections.
 2. In the **HMIS** section, click the **Facilities** card.
 
 ![h:180](../../../resources/screenshots/m9a_setup/20_data_page.png)

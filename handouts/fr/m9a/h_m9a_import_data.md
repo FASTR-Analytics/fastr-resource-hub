@@ -32,7 +32,7 @@ Télécharger les valeurs réelles depuis DHIS2 pour vos indicateurs et votre p�
 
 <h2 class="step-h"><span class="step-n">1</span><span>Ouvrir la page Importations</span></h2>
 
-Cliquez sur **Données** dans la barre du haut, puis sur la carte **Données** de la section **SNIS**. Cliquez sur **Importations**.
+Cliquez sur **Données** dans la navigation latérale, puis sur la carte **Données** de la section **SNIS**. Cliquez sur **Importations**.
 
 La page compte trois onglets — **En cours**, **À venir**, **Historique** — et les boutons **Nouvelle importation DHIS2** et **Téléverser un fichier CSV**. La vue par indicateur est un niveau au-dessus, dans l'onglet **Registre** de la page Données SNIS.
 
