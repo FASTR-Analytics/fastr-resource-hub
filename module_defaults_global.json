@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "computedAt": "2026-10-29T04:39:41.783Z",
+  "countries": [
+    "afghanistan",
+    "burkinafaso",
+    "cameroun",
+    "ci",
+    "ethiopia",
+    "ghana",
+    "haiti",
+    "kenya",
+    "liberia",
+    "madagascar",
+    "malawi",
+    "mali",
+    "mauritanie",
+    "mozambique",
+    "nigeria",
+    "rdc",
+    "senegal",
+    "sierraleone",
+    "somalia",
+    "somaliland",
+    "tajikistan",
+    "tanzania",
+    "tchad",
+    "zambia",
+    "zimbabwe"
+  ],
+  "parameters": {
+    "m012": {
+      "SELECTEDCOUNT": {
+        "value": "count_final_outliers",
+        "agreeing": 22,
+        "counted": 25
+      }
+    },
+    "m001": {
+      "OUTLIER_PROPORTION_THRESHOLD": {
+        "value": "0.8",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "MINIMUM_COUNT_THRESHOLD": {
+        "value": "100",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "MADS": {
+        "value": "10",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "DQA_INDICATORS": {
+        "value": "c(\"anc1\", \"penta1\", \"opd\")",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "CONSISTENCY_PAIRS_USED": {
+        "value": "c(\"penta\", \"anc\", \"delivery\")",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "GEOLEVEL": {
+        "value": "admin_area_3",
+        "agreeing": 25,
+        "counted": 25
+      }
+    },
+    "m011": {
+      "SELECTEDCOUNT": {
+        "value": "count_final_outliers",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "FOURIER_K": {
+        "value": "2",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "USE_POSTERIOR_DRAWS": {
+        "value": "FALSE",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "ZEROS_REAL": {
+        "value": "all",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "POSTCLOSURE_GRACE": {
+        "value": "0",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "EXCLUDE_PRELAUNCH": {
+        "value": "TRUE",
+        "agreeing": 25,
+        "counted": 25
+      }
+    },
+    "m005": {
+      "SELECTED_COUNT_VARIABLE": {
+        "value": "count_final_outliers",
+        "agreeing": 20,
+        "counted": 25
+      },
+      "ANALYSIS_LEVEL": {
+        "value": "NATIONAL_PLUS_AA2",
+        "agreeing": 23,
+        "counted": 25
+      },
+      "PREGNANCY_LOSS_RATE": {
+        "value": "0.03",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "TWIN_RATE": {
+        "value": "0.015",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "STILLBIRTH_RATE": {
+        "value": "0.02",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "P1_NMR": {
+        "value": "0.039",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "P2_PNMR": {
+        "value": "0.028",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "INFANT_MORTALITY_RATE": {
+        "value": "0.067",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "UNDER5_MORTALITY_RATE": {
+        "value": "0.103",
+        "agreeing": 25,
+        "counted": 25
+      }
+    },
+    "m006": {
+      "DENOMINATOR_CHAIN": {
+        "value": "auto",
+        "agreeing": 25,
+        "counted": 25
+      }
+    },
+    "m010": {
+      "USE_SAMPLE_WEIGHTS": {
+        "value": "FALSE",
+        "agreeing": 23,
+        "counted": 25
+      },
+      "DONT_KNOW_TREATMENT": {
+        "value": "missing",
+        "agreeing": 25,
+        "counted": 25
+      },
+      "STOP_IF_INDICATOR_FAILS": {
+        "value": "FALSE",
+        "agreeing": 25,
+        "counted": 25
+      }
+    }
+  }
+}
