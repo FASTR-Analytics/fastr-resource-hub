@@ -20,7 +20,7 @@ footer: "FASTR · Apresentações"
 <p class="sb-label">Antes de começar</p>
 
 - ☐ Tem sessão iniciada no projeto do seu país na plataforma FASTR
-- ☐ Criou a sua pasta pessoal no separador **Slide Decks** (ver *Criar a sua pasta de utilizador*)
+- ☐ Criou a sua pasta pessoal (ver *Criar a sua pasta de utilizador*)
 - ☐ Tem pelo menos uma visualização guardada que queira usar (ver *Criar visualizações*)
 
 </aside>
@@ -30,13 +30,13 @@ footer: "FASTR · Apresentações"
 
 Criar a sua primeira apresentação e adicionar um diapositivo de conteúdo. Este é o contentor — as próximas atividades enchem-no de gráficos e interpretação.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Abrir a sua pasta</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Abrir o separador Produtos</span></h2>
 
-Vá ao separador **Slide Decks** e entre na sua pasta pessoal.
+Vá ao separador **Produtos** no ecrã inicial do projeto. Apresentações, relatórios e visualizações aparecem todos como cartões aí.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Criar a apresentação</span></h2>
 
-Clique em **+ Create slide deck** no topo da pasta. Dê-lhe um nome (ex.: *Revisão 1.º tri 2026* ou o seu tema), depois clique em **Save**.
+Clique em **Novo** e escolha **Nova apresentação**. Uma caixa de diálogo pede um nome, uma pasta, um pacote de resultados e um âmbito. Dê-lhe um nome (ex.: *Revisão 1.º tri 2026* ou o seu tema), coloque-a na sua pasta pessoal e guarde para abrir o editor.
 
 ![O botão "+ Create slide deck" h:34](../../../resources/screenshots/m9d/create_deck_button.png)
 

@@ -73,7 +73,7 @@ Après connexion, vous arrivez sur l'onglet **Projets**. Vous voyez les projets 
 - **Si vous êtes administrateur de l'instance**, tous les projets de l'instance sont listés.
 - **Sinon**, vous ne voyez que les projets auxquels un administrateur vous a accordé l'accès. Si le projet de votre pays est absent, demandez à votre facilitateur (ou administrateur de l'instance) d'accorder l'accès.
 
-Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **barre latérale gauche d'icônes** — **Rapports**, **Présentations**, **Tableaux de bord**, **Visualisations**, **Métriques** et **Paquet de résultats**. Survolez une icône pour voir son libellé ; le bouton **IA** se trouve en haut à droite.
+Cliquez sur le projet de votre pays pour y entrer. Le projet s'ouvre avec une **barre latérale gauche d'icônes** — **Rapports**, **Présentations**, **Tableaux de bord**, **Visualisations**, **Métriques** et **Paquet de résultats**. Survolez une icône pour voir son libellé ; le bouton **IA** se trouve en bas à droite.
 
 ![Vue projet — barre latérale gauche avec icônes, onglet Présentations ouvert, panneau Assistant IA à droite h:280](../../../resources/screenshots/m9b/project_sidebar_nav_fr.png)
 

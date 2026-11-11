@@ -92,7 +92,7 @@ Un tour d'orientation rapide de la Plateforme analytique FASTR — juste assez p
 ### Liste de préparation
 
 - ☐ Navigateur connecté à l'instance de votre pays, avec un projet de démo chargé
-- ☐ Projet ouvert, barre latérale visible : Rapports, Présentations, Tableaux de bord, Visualisations, Métriques, Paquet de résultats (bouton IA en haut à droite)
+- ☐ Projet ouvert, barre latérale visible : Rapports, Présentations, Tableaux de bord, Visualisations, Métriques, Paquet de résultats (bouton IA en bas à droite)
 - ☐ Au moins une analyse déjà lancée, pour que des graphiques/sorties soient visibles
 - ☐ Partage d'écran qui fonctionne si en distanciel
 - ☐ Le document participant *Connexion à la plateforme* prêt à être distribué après la démo

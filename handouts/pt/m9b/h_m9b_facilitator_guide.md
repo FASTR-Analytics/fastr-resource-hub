@@ -92,7 +92,7 @@ Uma visita rápida de orientação à Plataforma de Análise FASTR — o suficie
 ### Lista de preparação
 
 - ☐ Navegador com sessão iniciada na instância do seu país, com um projeto de demonstração carregado
-- ☐ Projeto aberto, barra lateral visível: Relatórios, Apresentações, Painéis, Visualizações, Métricas, Pacote de resultados (botão IA no canto superior direito)
+- ☐ Projeto aberto, barra lateral visível: Relatórios, Apresentações, Painéis, Visualizações, Métricas, Pacote de resultados (botão IA no canto inferior direito)
 - ☐ Pelo menos uma análise já executada, para que gráficos/resultados estejam visíveis
 - ☐ Partilha de ecrã a funcionar, se à distância
 - ☐ Tenha a ficha *Iniciar sessão* pronta para distribuir depois desta demonstração

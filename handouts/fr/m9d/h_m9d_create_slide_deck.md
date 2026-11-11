@@ -20,7 +20,7 @@ footer: "FASTR · Présentations"
 <p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous êtes connecté au projet de votre pays sur la plateforme FASTR
-- ☐ Vous avez créé votre dossier personnel dans l'onglet **Présentations** (voir *Créer votre dossier personnel*)
+- ☐ Vous avez créé votre dossier personnel (voir *Créer votre dossier personnel*)
 - ☐ Vous avez au moins une visualisation enregistrée que vous souhaitez utiliser (voir *Créer des visualisations*)
 
 </aside>
@@ -30,13 +30,13 @@ footer: "FASTR · Présentations"
 
 Créer votre première présentation et ajouter une diapositive de contenu. C'est le conteneur — les prochaines activités la rempliront de graphiques et d'interprétation.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez votre dossier</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez l'onglet Produits</span></h2>
 
-Allez dans l'onglet **Présentations** et cliquez dans votre dossier personnel.
+Allez dans l'onglet **Produits** sur l'écran d'accueil du projet. Présentations, rapports et visualisations y apparaissent tous sous forme de cartes.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Créez la présentation</span></h2>
 
-Cliquez sur **Créer une présentation** en haut du dossier. Donnez-lui un nom (p. ex. *Revue T1 2026* ou votre sujet), puis cliquez sur **Enregistrer**.
+Cliquez sur **Nouveau**, puis choisissez **Nouvelle présentation**. Une boîte de dialogue demande un nom, un dossier, un paquet de résultats et un périmètre. Donnez-lui un nom (p. ex. *Revue T1 2026* ou votre sujet), placez-la dans votre dossier personnel, puis enregistrez pour ouvrir l'éditeur.
 
 ![Le bouton « Créer une présentation » h:34](../../../resources/screenshots/m9d/create_deck_button.png)
 

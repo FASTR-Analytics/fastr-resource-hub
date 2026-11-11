@@ -58,7 +58,7 @@ La présentation ouverte, cliquez le bouton **Paramètres** dans la barre d'outi
 
 <h2 class="step-h"><span class="step-n">1</span><span>Renommer la présentation</span></h2>
 
-Une icône crayon à côté du nom en haut du panneau permet de renommer. Suivez la convention de votre équipe (pays, période, sujet, votre nom).
+Renommer ne se fait plus dans ce panneau. Fermez-le, puis utilisez **Fichier > Nom et dossier**, ou cliquez sur le titre de la présentation dans son en-tête. Suivez la convention de votre équipe (pays, période, sujet, votre nom).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
 
