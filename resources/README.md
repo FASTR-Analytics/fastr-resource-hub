@@ -51,7 +51,7 @@ screen without an edit. Record the platform version in the commit message.
 | `dhis2_import_v2/` | FR mirror of the import + results-package flow | v1.75, Sept 2026, demo (modules step from the Chad instance, whose module names are in French) | `handouts/fr/custom/` import, ajouter_indicateurs, indicateurs_dhis2 |
 | `indicators_v2_en/` | EN indicator list, Add from DHIS2 search, naming step, check | v1.75, Sept 2026, demo | `handouts/{en,pt}/m9a/h_m9a_indicators.md` |
 | `indicateurs_v2/` | FR indicator manager incl. Créer → Calculé | v1.75, Sept 2026, mostly Chad instance | `handouts/fr/m9a/h_m9a_indicators.md`, `handouts/fr/custom/` ajouter_indicateurs, indicateurs_dhis2 |
-| `scorecard_en/` | Nigeria scorecard handout | Jul 2026; **01–05 show the retired three-tab indicator manager and the credentials wizard step** — recapture when that handout is rewritten | `handouts/en/custom/h_custom_scorecard_indicators.md` |
+| `scorecard_en/` | Nigeria scorecard handout | Emptied Nov 2026: the Jul 2026 captures showed the retired three-tab indicator manager. Two placeholders to capture on demo: `04_calculated_form.png` (Create new → Calculated form) and `07_scorecard_table.png` (New visualization → Scorecard table preset + Conditional formatting: Indicator). |
 | `m9b/`, `m9c/`, `m9d/` | Login + user folder; visualizations; slides + reports | Jul–Aug 2026, not re-checked in the Sept 2026 audit | `handouts/*/m9b`, `m9c`, `m9d` |
 | `m7/` | Finding statement example | 2026 | `handouts/*/m7d/` |
 | `platform/`, `platform_en/`, `platform_fr/` | Platform overview shots | 2025–2026 | methodology ch. 2–3 slides; `decks/*/plaidoyer_plateforme_fastr.md` |

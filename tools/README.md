@@ -41,6 +41,7 @@ shell (`*.sh`). Run them from the repo root.
 | Script | What it does |
 |--------|--------------|
 | `build_fastr_diagrams.py` | Generate translatable FASTR diagrams from the official GFF SVGs. |
+| `build_scorecard_diagrams.py` | Generate the two diagrams of the Nigeria scorecard handout (`resources/diagrams/scorecard_indicator_chain.svg`, `scorecard_warehouse_shelf.svg`), platform v2 wording. Edit the script, not the SVGs. |
 | `build_disruption_bayes_illustrations.py` | Generate the three Bayesian disruption-detection drawings used by slides `m6_2e`–`m6_2h`/`m6_s2c` (`resources/diagrams{,_fr,_pt}/disruption_bayes_*.svg`), in the platform chart colours. Edit the script, not the SVGs. |
 | `build_coverage_illustrations.py` | Generate the eleven pictogram drawings of `decks/fr/analyse_couverture_pas_a_pas.md` (`resources/diagrams_fr/cov_NN_*.svg`). Edit the script, not the SVGs. |
 | `translate.py`, `translate_docs.py` | Auto-translate methodology / docs to French. |

@@ -17,27 +17,29 @@ footer: "FASTR · Scorecard indicators"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You are logged into FASTR with an admin account that has the **Configure data** permission
-- ☐ You have the **DHIS2 ID** of each indicator, or its exact name
-- ☐ You know which program each indicator belongs to
+- ☐ You are logged into FASTR with an admin account that can edit the instance's data
+- ☐ You have the **DHIS2 ID** of each indicator, or its exact DHIS2 name
+- ☐ You know the **target** and the **cutoffs** the program wants for the colors
 
 </aside>
 <div class="p1-main">
 
-## The three kinds of indicators
+## What a scorecard column is
 
-FASTR does not collect data itself. It **copies the data from DHIS2**, through a direct connection between the two systems. Three words describe what happens to that data:
+FASTR does not collect data itself. It **copies the data from DHIS2** over a direct connection and stores it under the name you give it. Everything on the scorecard is built from those copies.
 
-- The **raw DHIS2 indicator** is the code from DHIS2, like `jE6e5ftmgvL`. It tells FASTR exactly what to copy.
-- The **common indicator** is the readable name you give it in FASTR, like `anc1`. The copied monthly counts are stored under this name.
-- The **calculated indicator** is the **calculation**: divide this by that, shown as a percent or a rate — with the cutoffs that color it green, yellow, or red.
+All indicators live in **one list**: **Data → HMIS → Indicators**. Each row has a **type**:
 
-**Every column on the scorecard is a calculated indicator.** Nothing else can be a column. So to add one column, you build all three things, in order. This guide walks you through it.
+- A **Data element** is a monthly count copied from DHIS2, like `anc1`.
+- A **Sum** adds other indicators together, like two age bands into one.
+- A **Calculated** indicator is a **formula**: one thing divided by another, shown as a percent or a rate, with the rule that colors it green, yellow or red.
+
+**Every column on the scorecard is a calculated indicator.** To add a column, you make sure the counts it needs exist, write the formula, set its colors, and generate a results package. This guide walks through it.
 
 </div>
 </div>
 
-> **A real example from the Nigeria platform.** `sba` is a common indicator: deliveries attended by skilled birth staff each month, copied from DHIS2. `delivery` is another: all reported deliveries. `skilled_birth_attendance` is a calculated indicator: `sba` divided by `delivery`, shown as a percent. The scorecard shows it as one colored cell per state — green from 80%, yellow from 50%, red below.
+> **A real example from the Nigeria platform.** `sba` is a data element: deliveries by a skilled birth attendant each month, copied from DHIS2. `delivery` is another: all reported deliveries. `skilled_birth_attendance` is a calculated indicator with the formula `sba / delivery`, shown as a percent, green from 100 %, yellow from 95 %, red below. The scorecard shows it as one colored cell per state.
 
 ![h:135](../../../resources/diagrams/scorecard_indicator_chain.svg)
 
@@ -45,89 +47,85 @@ FASTR does not collect data itself. It **copies the data from DHIS2**, through a
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## The six steps
+## The five steps
 
 | # | What you do | Where |
 |---|---|---|
-| 1 | Tell FASTR the DHIS2 code exists | Instance → **Data** → **Indicators** → **Raw DHIS2 Indicators** tab |
-| 2 | Give it a name people understand | Same page, **Common Indicators** tab |
-| 3 | Create the calculated indicator | Same page, **Calculated indicators** tab |
-| 4 | Copy the numbers over from DHIS2 | Instance → **Data** → HMIS **Data** → **Imports** |
-| 5 | Generate a results package and attach it | Instance → **Results** → **Generate a new results package** |
-| 6 | The new column appears on the scorecard | Happens by itself after step 5 |
+| 1 | Make sure the counts exist in FASTR | Instance → **Data** → **HMIS** → **Indicators** |
+| 2 | Copy their numbers over from DHIS2 | Instance → **Data** → **HMIS** → **Data** → **Imports** |
+| 3 | Create the calculated indicator, with its colors | Same indicator list, **Create new** → **Calculated** |
+| 4 | Generate a results package and attach it | Instance → **Results** → **Generate new results package** |
+| 5 | Put the scorecard table in the project | Project → **Products** → **New** → **New visualization** |
 
-Some steps may already be done. If the code is already in FASTR, start at step 2. If the name already exists and has data, start at step 3.
+Some steps are already done. If the counts are in FASTR with data, start at step 3. If the project already has a scorecard table, stop after step 4: the new column appears in it on its own.
 
-**The example used in this guide.** We follow one request from start to finish: the Safe Motherhood Coordinator wants **ANC1 coverage** on the scorecard — out of all pregnant women, how many came for their first antenatal visit? Look for **Our example** on each page.
+**The example used in this guide.** We follow one request from start to finish: the Safe Motherhood Coordinator wants **ANC1 coverage** on the scorecard. Out of all pregnant women, how many came for their first antenatal visit? Look for **Our example** on each page.
 
-> **Steps 1–3 happen in the shared part of FASTR.** Your project only sees them after a **new results package** is generated and the project switches to it (step 5). Created something and it's not showing? Changed a color cutoff and nothing moved? Do step 5.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">1</span><span>Tell FASTR the DHIS2 code exists</span></h2>
-
-1. Log into FASTR. Click the **Data** icon in the top bar.
-2. Click the **Indicators** card. You will see three tabs: **Common Indicators**, **Raw DHIS2 Indicators**, **Calculated indicators**.
-
-   ![h:185](../../../resources/screenshots/scorecard_en/01_indicators_tabs.png)
-
-3. Open the **Raw DHIS2 Indicators** tab. Click **Import DHIS2 indicator**.
-4. Paste the **DHIS2 ID** in the search box. No ID? Type the name instead. Click **Search**.
-5. Find your indicator in the results. Click **Add** next to it. It moves to the **Selected Items** list on the right.
-6. Want more indicators? Repeat. When done, click **Save Selected**.
-
-   ![h:185](../../../resources/screenshots/scorecard_en/02_search_add_save.png)
-
-> **Tip:** you can search several things at once. Separate them with commas. A broad word like `delivery` finds the whole family in one go.
-
-The code is now in FASTR. But it has no name and no numbers yet.
-
-**Our example:** we type `ANC 1st visit` in the search box, click **Search**, click **Add** on the right row, then **Save Selected**.
+> **Steps 1 to 3 happen in the shared part of FASTR.** Your project only sees them after a **new results package** is generated and the project switches to it (step 4). Created something and it is not showing? Changed a color cutoff and nothing moved? Do step 4.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## When you need a subgroup (an age band, a sex, a facility type)
+<h2 class="step-h"><span class="step-n">1</span><span>Make sure the counts exist in FASTR</span></h2>
 
-In DHIS2, one indicator is often split into subgroups — by age, by sex, by facility type. These subgroups are called **COCs**. They do not show up in search results on their own. Here is how to find one:
+1. Click **Data** in the side navigation, then **HMIS**, then **Indicators**. One list, one row per indicator, with its **Indicator ID**, its label, its **type**, and **Defined by** (the DHIS2 code and its DHIS2 name).
+2. Search the list for the counts your formula needs. If they are there, go to step 2. If not, continue.
 
-1. Search for the main indicator by its ID.
-2. Look at the result row. An orange badge saying **"N COCs"** means it has subgroups.
-3. Click the small **arrow (chevron)** on the left of the row. The subgroups unfold.
-4. Each subgroup has its own line, with an ID made of two parts and a dot: `N70qtdTZ21W.idn6U8HSREb`. Before the dot: the main indicator. After the dot: the subgroup.
-5. Click **Add** on the **subgroup line** — not on the main line.
+   ![h:170](../../../resources/screenshots/indicators_v2_en/02_indicator_list.png)
 
-> **Why it matters.** The main line gives you **everything added together** — all ages, all groups. The subgroup line gives you just the slice you want. If someone hands you an ID with a dot in it, it is a subgroup: search for the part **before** the dot, then unfold.
+3. Click **Add from DHIS2**. Paste the **DHIS2 ID** in the search box, or type the DHIS2 name. Click **Search**.
+4. Click **Add** next to each element you want. It moves to the selected items. Search again for the next one; the selection is kept.
+5. Click **Next: name indicators**. FASTR proposes an ID and a label for each. Replace them with yours (next page). Click **Save**.
 
-**Our example:** ANC 1st visit has no subgroups, so we used the main line. But suppose "Deliveries" is split by type and we only want cesareans — then we unfold Deliveries and click **Add** on the cesarean line only.
+   ![h:170](../../../resources/screenshots/indicators_v2_en/03_search_dhis2.png)
+
+> **Tip:** a broad word like `delivery` finds the whole family in one search. Rows greyed as "Cannot be added" are not monthly counts.
+
+**Our example:** `anc1` already exists in the Nigeria list, with data. We go straight to step 3. The rest of this page is for a count that is missing.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">2</span><span>Give it a name people understand</span></h2>
-
-1. Open the **Common Indicators** tab.
-2. First, check the list. Does the name you need already exist? If yes, click its **pencil icon** and jump to point 4.
-3. If not, click **Create Common Indicator**. Fill in two boxes:
-   - **Common ID** — the short technical name, like `ipd_discharges`.
-   - **Label** — the name people will see on screen, like "Inpatient discharges".
-4. Under **Mapped DHIS2 Indicators (JSON IDs)**, click **+**. Pick the DHIS2 code you saved in step 1.
-5. Save.
-
-   ![h:185](../../../resources/screenshots/scorecard_en/03_common_indicator_form.png)
 
 ## The ID and the label: same indicator, two audiences
 
-- **The ID is for the machine.** It is used in calculations and data files, so the rules are strict: small letters, numbers, and underscore ( _ ) only. No capitals, no spaces, no dashes, no accents. `ipd_discharges` ✓ · `IPD-Discharges` ✗ · `ipd discharges` ✗. An ID that breaks these rules cannot be used in a calculated indicator. And an ID **can never be changed after saving** — a typo means delete and start over. Start the ID with the program area (`anc1_visits`, `nut_stunting_u5`) so related indicators sort together in the list.
-- **The label is for people.** It appears in menus, tables, and chart legends — accents, spaces, and capitals are fine. Make it short and clear enough that a colleague from another program understands it without you there to explain. "ANC1 women 15–17 years" works. "ANC1 g2" does not. On a chart, a long label gets cut off — aim for a handful of words.
+- **The ID is for the machine.** It is used in formulas and data files, so the rules are strict: small letters, numbers and underscore ( _ ) only. No capitals, no spaces, no dashes, no accents. `ipd_discharges` ✓ · `IPD-Discharges` ✗ · `ipd discharges` ✗. An ID **cannot be changed after saving**; a typo means delete and start over. Start the ID with the program area (`anc1_visits`, `nut_stunting_u5`) so related indicators sort together.
+- **The label is for people.** It appears in menus, tables and chart legends. Accents, spaces and capitals are fine. Make it short and clear enough that a colleague from another program understands it. "ANC1 women 15–17 years" works. "ANC1 g2" does not. On a chart a long label gets cut off: aim for a handful of words.
 
-**One name can hold several codes.** Click **+** again to link more DHIS2 codes to the same name. FASTR **adds them together**. This is how you build totals that DHIS2 doesn't give you — like two age bands added into one, or an old code and its replacement joined into one series.
+## When you need a subgroup (an age band, a sex, a facility type)
 
-**Our example:** Common ID `anc1`, Label "ANC 1st visits", linked to the ANC 1st visit code we saved in step 1.
+In DHIS2 one element is often split into subgroups. These are called **COCs**. In the search results:
+
+1. Look at the result row. A badge saying **"N COCs"** means it has subgroups.
+2. Click the **chevron** on the left of the row. The subgroups unfold, each with a two-part ID: `N70qtdTZ21W.idn6U8HSREb`. Before the dot: the element. After the dot: the subgroup.
+3. Click **Add** on the **subgroup line**, not on the main line.
+
+The main line gives you everything added together. The subgroup line gives you just the slice you want. If someone hands you an ID with a dot in it, search for the part **before** the dot, then unfold.
+
+## Two codes that belong together: make a Sum
+
+Two age bands to add up, or an old DHIS2 code and its replacement joined into one series? Add both as data elements, then click **Create new**, choose the type **Sum**, and pick them as **Members**. The sum has no rows of its own; it is read from its members.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">2</span><span>Copy the numbers over from DHIS2</span></h2>
+
+A new data element is an empty name until its numbers are copied. Skip this step if every count in your formula already has data (the HMIS Data page's **Ledger** tab shows the months each indicator holds).
+
+1. Click **Data**, then **HMIS**, then the **Data** card. Click **Imports**, then **New DHIS2 import**. The wizard uses the instance's saved DHIS2 connection; there is nothing to type.
+2. **Indicators**: tick the indicators to copy, including the new ones. Calculated indicators and sums are not fetched, and the wizard says so.
+3. **Time**: choose **Now**. **Config**: set the period range. **Review & launch**: check the summary, then **Start import**.
+
+   ![h:170](../../../resources/screenshots/m9a_setup/29_wizard_review_launch.png)
+
+The import runs on the server. You can close the tab; the **History** tab on the Imports page tells you when it is done, and the **Ledger** tab shows any failed months.
+
+> **Set the period to match your old data.** Your other indicators go back years. If you only copy this year for the new ones, every chart that looks back further has a hole in it. Copy the same period as the rest.
+
+**Our example:** `anc1` has data back to 2020, so nothing to copy.
 
 ---
 
@@ -135,24 +133,19 @@ In DHIS2, one indicator is often split into subgroups — by age, by sex, by fac
 
 <h2 class="step-h"><span class="step-n">3</span><span>Create the calculated indicator</span></h2>
 
-1. Open the **Calculated indicators** tab. Click **Create Calculated indicator**.
+1. On the indicator list, click **Create new** and choose the type **Calculated**.
+2. Fill in **Indicator ID** (same strict rules as before, cannot be changed later) and the **label**, which becomes the column title. Keep it short.
+3. **Formula**: write the calculation. Click **Insert indicator** to paste an indicator's ID and **Insert population** to paste a population term. You can use `+ - * /`, brackets and numbers.
+4. Under **Analysis and display**, set **Format**, **Direction**, **Target** and the **Conditional formatting rule**. The next two pages explain them.
+5. Click **Save**.
 
-   ![h:185](../../../resources/screenshots/scorecard_en/04_calculated_form.png)
+<div class="screenshot-placeholder">
+Screenshot: Create new → Calculated form, with Formula and the Analysis and display section (EN) → resources/screenshots/scorecard_en/04_calculated_form.png
+</div>
 
-2. Fill in the top of the form:
-   - **Calculated indicator ID** — same strict rules as before: small letters, numbers, underscores. Cannot be changed later.
-   - **Label** — the column title on the scorecard. Keep it short.
-   - **Group** — which section of the scorecard it belongs to, like "Reproductive health".
-3. **Numerator** → **Indicator**: pick the common indicator to count. This is the **top** of the division.
-4. **Denominator**: pick what to divide by. This is the **bottom**. Three choices — next page explains them.
-5. **Format**: how the result should look — **Percent**, **Number**, or **Rate per 10,000**. The preview shows you.
-6. **Thresholds**: set the colors. Two pages ahead explains them.
+> **The formula is the indicator.** A calculated indicator is the calculation, shown as a percent or a rate. There is no separate numerator and denominator box: you write the division yourself, and FASTR evaluates it for every area and month when it generates a results package.
 
-> **There is no formula box.** A calculated indicator is always **one thing divided by one thing**. Nothing more.
->
-> Need to add two things first? Like total deliveries = normal deliveries + cesareans? **Do the adding in step 2.** Create one common indicator called `deliveries_total` and link **both** DHIS2 codes to it. FASTR adds them up for you. Then use it here as one thing.
-
-**Our example:** ID `anc1_coverage`, Label "ANC1 coverage (%)", Group "Reproductive health". Numerator: `anc1`. The denominator and colors are on the next pages.
+**Our example:** ID `anc1_coverage`, label "ANC1 coverage (%)", formula `anc1 / (population_total * 0.05)`. Why `* 0.05` is on the next page.
 
 ---
 
@@ -160,144 +153,102 @@ In DHIS2, one indicator is often split into subgroups — by age, by sex, by fac
 
 ## The denominator: what are you dividing by?
 
-| Choice on screen | What it means | When to use it |
+| You want | Write | Example from Nigeria |
 |---|---|---|
-| **None (raw count)** | Don't divide. Just show the count. | Things you count directly: maternal deaths, snake bite cases |
-| **Another indicator** | Divide by another common indicator | C-sections out of all deliveries |
-| **Population-based** | Divide by the number of people in the area | ANC1 visits out of all pregnant women |
+| A count, no division | the indicator alone | `maternal_deaths` |
+| A share of another count | `a / b` | `sba / delivery` |
+| A share of the people in the area | `a / population_type` | `hypertension_new / population_total` |
+| A share of a group inside the population | `a / (population_type * share)` | `penta3 / (population_total * 0.04)` |
 
-If you pick **Population-based**, two more boxes appear:
+**Population terms** come from the instance's **Population** page (**Data → HMIS → Population**). It holds people per area and per year, by population type, and FASTR converts the yearly figures to monthly on its own. **In Nigeria only `population_total` is loaded**, for every zone, state and LGA. To divide by a smaller group, multiply the total by that group's share:
 
-- **Population type** — which people to divide by. In Nigeria, always pick **Total population** — it is the only group loaded.
-- **Multiplier** — the share of the population that is your group. The next page gives the numbers to use.
+| Group | Share | Used today by |
+|---|---|---|
+| Women of reproductive age | `* 0.22` | `new_fp_acceptors_rate` |
+| Infants under one year | `* 0.04` | `penta3_coverage`, `fully_immunized_coverage` |
+| Expected pregnancies | `* 0.05` | the planning figure; confirm it with the M&E team |
 
-**Our example:** ANC1 coverage divides visits by pregnant women. We pick **Population-based**, Population type **Total population**, Multiplier **0.05**.
+> **No population data for an area and year?** FASTR leaves that cell empty rather than guessing. If a column is empty for a whole state, check the Population page before anything else.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## The population file
-
-The population numbers come from one file, `population.csv`, on the instance's **Assets** tab. **In Nigeria it is already loaded — nothing to create or upload.** It holds the **total population** of every zone, state, and LGA, per year, for 2020–2025.
-
-## Dividing by a smaller group: use the multiplier
-
-To divide by a smaller group, pick **Total population** as the population type and set the **Multiplier** to that group's share:
-
-![h:170](../../../resources/screenshots/scorecard_en/08_multiplier.png)
-
-| Group | Multiplier |
-|---|---|
-| Women of reproductive age | **0.22** |
-| Infants (under 1) | **0.04** |
-| Expected pregnancies | **0.05** |
-
-The first two are exactly what the existing Nigeria indicators use. The pregnancies share is the common planning figure — confirm it with the M&E team before relying on it.
-
-**Our example:** for ANC1 coverage we divide by pregnant women: **Total population**, Multiplier **0.05**.
-
-Good to know: FASTR converts the yearly figures to monthly on its own, and matches areas to the health data by name. You never touch the file for any of this.
+**Our example:** ANC1 coverage divides visits by expected pregnancies: `anc1 / (population_total * 0.05)`.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Thresholds: setting the colors
+## Format, direction, target and colors
 
-Every cell on the scorecard gets a color by comparing its value to two cutoffs that **you** set:
+These four settings belong to the indicator, under **Analysis and display**. Every scorecard, chart or table that shows the indicator uses the same ones.
 
-- **Green** — the target is reached. The scorecard calls it **"On track"**.
-- **Yellow** — not there yet, but close. **"Progress needed"**.
-- **Red** — far from the target. **"Not on track"**.
+- **Format**: **Percent**, **Number**, or **Rate per 10,000**. A division of two counts is a percent. A count divided by a population is a rate.
+- **Direction**: **Higher is better** for things you want more of (visits, vaccinations). **Lower is better** for things you want fewer of (deaths, stillbirths). Get this wrong and the colors read backwards.
+- **Target**: optional. The number the program aims for, in the same unit as the format.
+- **Conditional formatting rule**: the cutoffs that color the cells. Type them as **ascending numbers**, in the unit shown. For a percent, `70` and `80` mean 70 % and 80 %.
 
-First set the **Direction**:
+What the colors mean on the scorecard, for a "higher is better" indicator with cutoffs 70 and 80:
 
-- **Higher is better** — for good things: vaccinations, ANC visits. Green when the value is **above** the green cutoff.
-- **Lower is better** — for things you want fewer of: maternal deaths, stockouts. Green when the value is **below** the green cutoff.
+| Value | Color | Label on the scorecard |
+|---|---|---|
+| 80 and above | green | **On track** |
+| 70 to just under 80 | yellow | **Progress needed** |
+| below 70 | red | **Not on track** |
 
-Then type the two cutoffs, written the same way the value is shown. For a percent, write `80` to mean 80%. FASTR's starting values are green at 80 and yellow at 70 — fine for most coverage indicators.
+For "lower is better" the bands flip: below the first cutoff is green.
 
-> **The cutoffs are a program decision.** What is the national target? What counts as "close enough"? Ask the program officer. Write the answer in the form at the end of this guide.
+> **The cutoffs are a program decision.** What is the national target? What counts as close enough? Ask the program officer and write the answer in the form at the end of this guide. Write down where the numbers come from.
 
-**Our example:** the national ANC1 target is 80%. Direction **Higher is better**, green cutoff **80**, yellow cutoff **70**. A state at 84% shows green. A state at 73% shows yellow. A state at 65% shows red.
+**Our example:** the national ANC1 target is 80 %. Format **Percent**, direction **Higher is better**, target `80`, cutoffs `70` and `80`. A state at 84 % shows green, at 73 % yellow, at 65 % red.
 
 ## Column order
 
-The scorecard shows columns in the order of the indicator list — not the order you created them. Click **Sort indicators** on the **Calculated indicators** tab and drag the rows into place. Keep indicators from the same program next to each other.
+The scorecard shows columns in the order of the indicator list. Click **Sort** on the list and drag the rows into place. Keep indicators from the same program together.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">4</span><span>Copy the numbers over from DHIS2</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Generate a results package and attach it</span></h2>
 
-Everything you made so far is empty labels and rules. No numbers have moved yet. Now copy them over.
-
-1. Click the **Data** icon in the top bar, then the **Data** card in the **HMIS** section. Click **Imports**, then **New DHIS2 import**.
-2. The wizard has five steps. **Credentials** — the saved DHIS2 connection appears. Confirm it.
-3. **Indicators** — tick the indicators to copy, **including the new ones**.
-4. **Time** — choose **Now**. **Configuration** — set the period range. **Review & launch** — check the summary and start the import.
-
-   ![h:185](../../../resources/screenshots/scorecard_en/05_import_wizard.png)
-
-The import runs on the server. It can take a few minutes or much longer. You can close the tab and come back — the **History** tab on the Imports page tells you when it is done.
-
-> **Set the period to match your old data.** Your other indicators go back years. If you only copy this year for the new ones, every chart that looks back further will have a hole in it. Copy the same period as the rest.
-
-**Our example:** we tick ANC 1st visit and copy from 2019 to today — the same period as the rest of the data.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">5</span><span>Generate a results package and attach it</span></h2>
-
-The numbers are in FASTR's central store now. But no analysis has re-run, and your project doesn't read the central store directly. It reads a **results package** — a prepared set of computed results. The warehouse is full; now it packs a fresh package, and your project's shelf points at it:
+The indicator and its rule are saved, but no number has been computed. Projects do not read the indicator list directly. They read a **results package**: a prepared set of results, generated from the data and the rules as they stand at that moment.
 
 ![h:150](../../../resources/diagrams/scorecard_warehouse_shelf.svg)
 
-1. Click **Results** in the top bar. The **Results packages** page lists the existing packages, each with its date and the projects using it.
-2. Click **Generate a new results package**. The wizard has three steps.
-3. **Data** — tick **HMIS data**. **Modules** — tick the usual modules for your instance, including **Scorecard**. If a module needs another one first, FASTR adds it by itself.
-4. **Confirm and launch** — keep the suggested label or name the package clearly. Under **Attach to projects**, **tick the project with the scorecard.** Click **Launch generation**.
+1. Click **Results** in the side navigation. The **Results packages** page lists the existing packages, each with its date and the projects using it.
+2. Click **Generate new results package**. Three steps.
+3. **Data**: tick **HMIS**. **Modules**: tick **Indicator values**. This is the module that evaluates every formula; without it the calculated indicators stay empty. FASTR adds the modules it depends on by itself.
+4. **Confirm and launch**: keep the suggested label or name the package clearly. Under **Attach to projects**, tick the project with the scorecard. Click **Launch generation**.
 
-<div class="screenshot-placeholder">
-Screenshot: Results packages page + generation wizard (EN) — capture in Session 1 → resources/screenshots/scorecard_en/06_generate_package.png
-</div>
+   ![h:150](../../../resources/screenshots/m9a_setup/33_generate_modules_step.png)
 
-The generation runs in the background; progress shows on the Results packages page. When it finishes, the ticked projects switch to the new package — your new indicators, rules, and colors included — and the scorecard re-runs.
+Generation runs in the background; progress shows on the Results packages page. When it is **Ready**, the ticked projects switch to it, and every scorecard in them shows the new column with its colors.
 
-## Check that it worked
+> **Forgot a project?** Open that project, go to its **Results package** tab, pick the new package and click **Use this package**. A project left on an old package keeps showing old numbers without warning anyone. The setting that simplifies this: on the Results page, **Pin** the reference package, and in each project tick **Always use the instance's pinned package**. From then on the routine is import, generate, pin, and the projects follow.
 
-Open the scorecard. Your new column is there, in the position you chose, with your colors.
-
-**Our example:** the scorecard now has an "ANC1 coverage (%)" column in the Reproductive health group — green, yellow, and red by state.
-
-> **Forgot a project?** Open that project, go to its **Results package** tab, pick the new package from the list, and click **Use this package**. A project left on an old package keeps showing the old numbers — without warning anyone. The setting that simplifies this: on the Results page, **Pin** the reference package, and in each project tick **"Always use the instance's pinned package"** (it is not on by default). From then on, the routine is: import, generate, pin — the projects follow.
+**Our example:** we tick **Indicator values** and the training project, launch, and wait for **Ready**.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## No scorecard in the project yet? Create one
+<h2 class="step-h"><span class="step-n">5</span><span>Put the scorecard table in the project</span></h2>
 
-The scorecard comes from the **scorecard module** — tick it in the **Modules** step when generating the results package (step 5). Two things to know:
+Skip this step if the project already has a scorecard table: the new column is in it after step 4. Otherwise, build one. A scorecard is an ordinary table visualization with one setting switched on.
 
-- It needs the **data quality adjustment module** to have run first. FASTR keeps the order for you — tick Scorecard and the prerequisite comes along.
-- When a package with the scorecard module attaches to the project, it **creates a scorecard table by itself**: one row per state, indicators as columns, the last 12 months.
+1. Open the project. On the **Products** tab, click **New**, then **New visualization**. Give it a name, choose a folder, and select the results package. Click **Next**.
+2. **Metric**: choose **Indicator values** → **Indicator value**.
+3. **Presets**: choose **Scorecard table**. It lists indicators by area for the chosen period. Click **Configure** if you want to change the period or the geographic level now, then create it.
+4. In the visualization's style panel, set **Conditional formatting** to **Indicator**. Each value is now colored by its own indicator's rule, and the legend shows the bands.
+5. Save.
 
-   ![h:185](../../../resources/screenshots/scorecard_en/07_default_scorecard.png)
+<div class="screenshot-placeholder">
+Screenshot: New visualization → Indicator values → Scorecard table preset, then the style panel with Conditional formatting set to Indicator (EN) → resources/screenshots/scorecard_en/07_scorecard_table.png
+</div>
 
-That first table has a "default" badge and cannot be edited directly. Open it for editing and FASTR gives you **your own copy** — that copy is yours to change:
+Things you can change on the table: the **rows** (zones, states or LGAs, and a filter to one state), the **period** (months or quarters, how many), and which **columns** to show for this audience. Two things are **not** set here: the **colors** come from each indicator's rule (step 3), and the **column order** from **Sort** on the indicator list.
 
-- **Rows** — want one row per LGA instead of per state? Switch the admin level, and filter to your state.
-- **Period** — show more months, fewer months, or quarters instead of months.
-- **Columns** — hide the indicators this audience doesn't need. They stay available everywhere else.
+The finished scorecard behaves like any other visualization. You can put it in dashboards, reports and slide decks.
 
-Two things are **not** set here, so don't look for them: the **colors** (they come from each indicator's thresholds, step 3) and the **column order** (that's **Sort indicators**, on the indicators page).
-
-The finished scorecard behaves like any other table. You can put it in dashboards, reports, and slide decks.
+**Our example:** the training project's scorecard now has an "ANC1 coverage (%)" column, green, yellow and red by state.
 
 ---
 
@@ -305,17 +256,18 @@ The finished scorecard behaves like any other table. You can put it in dashboard
 
 ## If something is not working
 
-- **My new column is not on the scorecard.** No results package has been generated since you created the indicator — or the project is still on an old package. Generate a new package (step 5), or open the project's **Results package** tab and switch it.
-- **I changed a cutoff and the colors didn't move.** Same cause: the change reaches the scorecard through a new results package. Generate one and attach it.
-- **My common indicator is not in the Numerator dropdown.** Its ID breaks the rules — a capital, a space, a dash. IDs cannot be changed. Make a new common indicator with a correct ID, link the same DHIS2 codes to it, and use that one.
-- **Package generation fails and mentions calculated indicators.** One of your calculated indicators points at an indicator that has no data. Copy its data over (step 4), wait for the import to finish, then generate the package again.
-- **A population-based column is empty.** Check the calculated indicator: in Nigeria the population type must be **Total population**, with the multiplier carrying the group's share. If that's already the case, flag it to the FASTR team.
-- **FASTR won't let me delete a common indicator.** A calculated indicator still uses it. The message tells you which one. Change or delete that calculated indicator first.
-- **I made a typo in an ID.** IDs cannot be changed. Delete the item and make it again. Everything else — labels, links, cutoffs — can be changed at any time.
+- **My new column is not on the scorecard.** No results package has been generated since you created the indicator, or the project is still on an old one. Generate a new package (step 4), or open the project's **Results package** tab and switch it.
+- **I changed a cutoff and the colors did not move.** Same cause. The change reaches the scorecard through a new results package.
+- **The table has numbers but no colors.** Conditional formatting is not set to **Indicator** on the table (step 5), or the indicator has no rule (step 3).
+- **The formula is refused.** An ID in it does not exist, is misspelled, or breaks the ID rules. Use **Insert indicator** rather than typing IDs by hand. The list shows **Cannot be computed** next to an indicator whose formula does not resolve.
+- **A population column is empty.** The Population page has no figure for that area and year, or the formula names a population type that is not loaded. In Nigeria use `population_total` with a share.
+- **Package generation fails and names the indicator.** One of the counts in the formula has no data. Copy its data over (step 2), wait for the import to finish, then generate again.
+- **FASTR will not let me delete an indicator.** A formula or a sum still uses it. The message says which one. Change or delete that one first.
+- **I made a typo in an ID.** IDs cannot be changed. Delete the indicator and make it again. Everything else (label, formula, format, direction, cutoffs) can be changed at any time, and takes effect with the next package.
 
 ## Who can do what
 
-Creating indicators needs the **Configure data** permission. Most training participants won't have it. They can view and use the scorecard; the changes are made by you. The form on the next page is how you collect what they want.
+Creating and editing indicators needs an instance admin role. Most training participants will not have it. They can view and use the scorecard; the changes are made by you. The form on the next page is how you collect what they want.
 
 ---
 
@@ -325,25 +277,26 @@ Creating indicators needs the **Configure data** permission. Most training parti
 
 <p class="meta-line"><strong>For the training</strong> · fill one with each program officer · enter it in FASTR later</p>
 
-This form matches the FASTR screen, question by question. A filled form can be entered directly.
+This form matches the FASTR screen, field by field. A filled form can be entered directly.
 
 | Question | How to answer | Example |
 |---|---|---|
 | Who is asking? | Program and officer | Safe Motherhood Coordinator |
-| ID | Small letters, numbers, _ only. Can never change. | `anc1_coverage` |
+| Indicator ID | Small letters, numbers, _ only. Can never change. | `anc1_coverage` |
 | Label | The column title. Short. | ANC1 coverage (%) |
-| Group | Which section of the scorecard | Reproductive health |
-| Top of the division | Which indicator to count. New? Write its DHIS2 ID too. | ANC 1st visit — already in FASTR |
-| Bottom of the division | Nothing / another indicator / a population share | Total population × 0.05 |
+| Top of the division | Which count. New? Write its DHIS2 ID too. | `anc1`, already in FASTR |
+| Bottom of the division | Another count, or a population share | `population_total * 0.05` |
+| Formula, written out | As it will be typed | `anc1 / (population_total * 0.05)` |
 | Format | Percent, Number, or Rate per 10,000 | Percent |
 | Direction | Higher is better, or lower is better? | Higher is better |
-| Green cutoff | The target | 80 |
-| Yellow cutoff | "Close enough" | 70 |
+| Target | The number the program aims for | 80 |
+| Cutoffs | Yellow from, green from | 70, 80 |
+| Where do the cutoffs come from? | National target, WHO benchmark, last year's median | National RMNCAH plan |
 
 **Before leaving the table, check the two things that block everything:**
 
-- ☐ The indicator exists in DHIS2 — name and ID written down. Subgroup? Write the full two-part ID.
-- ☐ Dividing by population? The group's share of total population is agreed and written down.
+- ☐ Every count in the formula exists in DHIS2, with its name and ID written down. Subgroup? Write the full two-part ID.
+- ☐ Dividing by population? The group's share of the total population is agreed and written down.
 
 ---
 
@@ -353,7 +306,7 @@ This form matches the FASTR screen, question by question. A filled form can be e
 
 One line per request. Fill the full form later for the ones that go ahead.
 
-| Program | Indicator wanted | Count what? (DHIS2 name/ID) | Divide by what? | Format | Green / Yellow |
+| Program | Indicator wanted | Count what? (DHIS2 name or ID) | Divide by what? | Format | Yellow from / Green from |
 |---|---|---|---|---|---|
 | | | | | | |
 | | | | | | |
@@ -368,15 +321,14 @@ One line per request. Fill the full form later for the ones that go ahead.
 
 ## Recap: the whole chain on one page
 
-1. **Search DHIS2** — *Raw DHIS2 Indicators → Import DHIS2 indicator*. Find the code and save it. FASTR now knows it exists. No name, no numbers.
-2. **Create the container** — *Common Indicators → Create Common Indicator*. A labeled box with a proper name, like `ipd_discharges`. Still empty.
-3. **Link the two** — *Mapped DHIS2 Indicators (JSON IDs) → +*. Now FASTR knows which code fills which box. Link several codes and FASTR adds them together.
-4. **Copy the numbers over** — *Imports → New DHIS2 import*, ticking your new indicators, matching the old data's period. Now the boxes fill up — in the warehouse.
-5. **Generate and attach a results package** — *Results → Generate a new results package*, ticking the scorecard module and the project. The warehouse packs a fresh package, the project's shelf points at it, and the scorecard re-runs. Before this, the project sees nothing of the above.
-6. **The rule** — *Calculated indicators tab*. One box divided by one box (or by a population group, or by nothing), a format, and two color cutoffs. That is the scorecard column. Write the rule any time — it reaches the scorecard with the next **results package**.
+1. **The counts** — *Indicators → Add from DHIS2*. Each count your formula needs is a data element in the list, with a proper ID and label. FASTR knows what to copy and under which name.
+2. **The numbers** — *Data → Imports → New DHIS2 import*, ticking the new elements and matching the old data's period. Now the names hold monthly counts, in the instance.
+3. **The formula and its rule** — *Indicators → Create new → Calculated*. The division, written out; a format; a direction; a target; two cutoffs. That is the scorecard column. Write or change it any time; it reaches the scorecard with the next package.
+4. **The package** — *Results → Generate new results package*, ticking **Indicator values** and the project. FASTR evaluates every formula for every area and month and the project switches to the result. Before this, the project sees nothing of the above.
+5. **The table** — *Products → New → New visualization → Indicator values → Scorecard table*, with **Conditional formatting: Indicator**. Once per project; after that, new columns appear on their own.
 
-**And the population file:** dividing by population uses `population.csv`, already loaded on the instance. It holds each area's total population — use the **Multiplier** to take your group's share (0.22 for women of reproductive age, 0.04 for infants, 0.05 for pregnancies).
+**And the population:** dividing by people uses the instance's **Population** page. In Nigeria it holds the total population of every zone, state and LGA; multiply by the group's share in the formula (`* 0.22` for women of reproductive age, `* 0.04` for infants, `* 0.05` for pregnancies).
 
-Something missing at the end? Walk backwards: did you generate and attach a package (5)? Did you copy the numbers (4)? Is the box linked to the right code (3)? Does FASTR know the code at all (1)?
+Something missing at the end? Walk backwards: did you generate and attach a package (4)? Does the formula resolve (3)? Do the counts have data (2)? Are they in the list at all (1)?
 
-**Between day 1 and day 2 of the training:** collect the forms, create the common and calculated indicators that evening (steps 1–3), and start the copy from DHIS2 (step 4) before you leave, so it has time to finish. In the morning, generate a results package and attach it to the training project (step 5).
+**Between day 1 and day 2 of the training:** collect the forms, add any missing data elements and start the copy from DHIS2 before you leave (steps 1 and 2), so it has time to finish. In the morning, create the calculated indicators (step 3), generate a results package and attach it to the training project (step 4).
