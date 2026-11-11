@@ -34,6 +34,13 @@ app), then regenerate: concatenate the module's slides per `_meta.yaml` order
 into one Marp file and render with `npx @marp-team/marp-cli <combined.md> -o
 decks/<lang>/platform_security_sustainability.pdf --allow-local-files`.
 
+## Chad BNIS deck (Sept 2026)
+
+`build_bnis_tchad.py` (python-pptx → `bnis_fastr_tchad.pptx`, ignored like every
+`.pptx`): "Du BNIS au bulletin FASTR" for the DPSIS / FASTR Tchad working sessions.
+Audit figures come from the tchad instance's pinned package via the multi-country MCP;
+regenerate with `python3 decks/build_bnis_tchad.py`.
+
 ## Madagascar touch-base deck (Sept 2026)
 
 `fr/madagascar_point_etape_2026_09.md` (Marp → PDF) and `build_madagascar_pptx.py`

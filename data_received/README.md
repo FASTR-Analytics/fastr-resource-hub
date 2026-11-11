@@ -12,6 +12,7 @@ Examples of what lives here:
 
 - FASTR data prep checklists from country teams (`.xlsx`)
 - Translated FASTR prompts (`.docx`)
+- `HFA methodology_platform.docx` — Safia's HFA methodology write-up (Sept 2026), source for the chapter 08 review
 - GFF Measurement Framework indicator reference sheets (`.pdf`)
 - External writing guides (e.g. LLM writing guidance)
 
