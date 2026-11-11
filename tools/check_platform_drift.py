@@ -217,11 +217,35 @@ def categorize(entries: list[str]) -> tuple[list[str], list[str], list[str]]:
 # ─────────────────────────────────────────────────────────────────────────────
 
 
+# GitHub refuses issue bodies above 65 536 characters. Two weeks of platform
+# commits (v1.76 -> v2.4, Nov 2026) blew past that, so commit lists are capped
+# and folded; the compare link always carries the full range.
+MAX_COMMITS_LISTED = 40
+MAX_BODY_CHARS = 60_000
+
+
+def _commit_section(title: str, repo: str, commits: list[tuple[str, str]],
+                    from_sha: str, to_sha: str) -> list[str]:
+    compare = f"https://github.com/{repo}/compare/{from_sha}...{to_sha}"
+    shown = commits[:MAX_COMMITS_LISTED]
+    rest = len(commits) - len(shown)
+    lines = [f"## {title}", "",
+             f"{len(commits)} commit(s) — [full compare]({compare})", "",
+             "<details>", f"<summary>First {len(shown)} commit messages</summary>", ""]
+    lines += [f"- [`{sha[:7]}`](https://github.com/{repo}/commit/{sha}) {msg}" for sha, msg in shown]
+    if rest > 0:
+        lines += ["", f"… and {rest} more in the compare link."]
+    lines += ["", "</details>", ""]
+    return lines
+
+
 def build_issue_body(
     new_changelog: list[str],
     platform_commits: list[tuple[str, str]],
     modules_commits: list[tuple[str, str]],
     last_check: str | None,
+    platform_range: tuple[str, str] = ("", ""),
+    modules_range: tuple[str, str] = ("", ""),
 ) -> str:
     highlighted, chart, other = categorize(new_changelog)
     lines = [
@@ -255,25 +279,11 @@ def build_issue_body(
             "",
         ]
     if platform_commits:
-        lines += [
-            "## Platform commits (non-CHANGELOG, non-deploy)",
-            "",
-            *(
-                f"- [`{sha[:7]}`](https://github.com/{PLATFORM}/commit/{sha}) {msg}"
-                for sha, msg in platform_commits
-            ),
-            "",
-        ]
+        lines += _commit_section("Platform commits (non-CHANGELOG, non-deploy)", PLATFORM,
+                                 platform_commits, *platform_range)
     if modules_commits:
-        lines += [
-            "## FASTR-Analytics/modules commits",
-            "",
-            *(
-                f"- [`{sha[:7]}`](https://github.com/{MODULES}/commit/{sha}) {msg}"
-                for sha, msg in modules_commits
-            ),
-            "",
-        ]
+        lines += _commit_section("FASTR-Analytics/modules commits", MODULES,
+                                 modules_commits, *modules_range)
     areas = map_to_content(new_changelog)
     if areas:
         lines += ["## Content likely affected (by area)", ""]
@@ -288,7 +298,12 @@ def build_issue_body(
         "(or closes this issue if nothing is affected).",
         "- [ ] Review its comment / pull request, then close.",
     ]
-    return "\n".join(lines)
+    body = "\n".join(lines)
+    if len(body) > MAX_BODY_CHARS:
+        cut = body.rfind("\n", 0, MAX_BODY_CHARS)
+        body = body[:cut] + ("\n\n_Body truncated to fit GitHub's issue size limit; "
+                             "see the compare links above for the full range._\n")
+    return body
 
 
 def existing_open_issue(title: str) -> str | None:
@@ -374,7 +389,9 @@ def main():
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     title = f"Platform drift check {today}"
-    body = build_issue_body(new_changelog_entries, platform_commits, modules_commits, last_check)
+    body = build_issue_body(new_changelog_entries, platform_commits, modules_commits, last_check,
+                            platform_range=(last_platform_sha, current_platform_sha),
+                            modules_range=(last_modules_sha, current_modules_sha))
 
     if args.dry_run:
         print(f"\n===== DRY RUN: would open issue =====\n")

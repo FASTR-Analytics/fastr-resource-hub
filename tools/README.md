@@ -47,7 +47,7 @@ shell (`*.sh`). Run them from the repo root.
 
 | Script | What it does |
 |--------|--------------|
-| `check_platform_drift.py` | Compare the FASTR platform and modules repos (CHANGELOG + commits) with the last-seen state in `.github/platform_watch_state.json`, group the user-facing entries by content area (`CONTENT_MAP`), and open one labelled `platform-drift` issue listing the handouts / slides likely affected. Run weekly by `.github/workflows/platform-drift-check.yml`; needs `GH_TOKEN`. |
+| `check_platform_drift.py` | Compare the FASTR platform and modules repos (CHANGELOG + commits) with the last-seen state in `.github/platform_watch_state.json`, group the user-facing entries by content area (`CONTENT_MAP`), and open one labelled `platform-drift` issue listing the handouts / slides likely affected. Run weekly by `.github/workflows/platform-drift-check.yml`; needs `GH_TOKEN`. Issue bodies are capped (`MAX_COMMITS_LISTED`, `MAX_BODY_CHARS`) because GitHub rejects bodies over 65 536 chars; the compare link always carries the full range. |
 
 The workflow then runs a Claude Code triage job (`.github/drift_triage_prompt.md`)
 that greps the repo for the old labels, edits handouts and methodology on a
