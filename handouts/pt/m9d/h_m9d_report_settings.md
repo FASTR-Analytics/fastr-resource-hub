@@ -56,7 +56,7 @@ Com a apresentação aberta, clique no botão **Settings** na barra de ferrament
 
 <h2 class="step-h"><span class="step-n">1</span><span>Renomear a apresentação</span></h2>
 
-Um ícone de lápis junto ao nome no topo do painel permite renomear. Use a convenção combinada pela sua equipa (país, período, tema, o seu nome).
+Renomear já não é feito neste painel. Feche-o e use **Ficheiro > Nome e pasta**, ou clique no título da apresentação no cabeçalho. Use a convenção combinada pela sua equipa (país, período, tema, o seu nome).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
 

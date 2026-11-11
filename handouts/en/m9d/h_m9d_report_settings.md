@@ -56,7 +56,7 @@ With your deck open, click the **Settings** button in the deck toolbar (top righ
 
 <h2 class="step-h"><span class="step-n">1</span><span>Rename the deck</span></h2>
 
-A pencil icon next to the deck name at the top of the panel lets you rename. Use the convention your team agreed on (country, period, topic, your name).
+Renaming does not happen in this panel anymore. Close it, then use **File > Name and folder**, or click the deck's own title in the deck header. Use the convention your team agreed on (country, period, topic, your name).
 
 <h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
 

@@ -92,7 +92,7 @@ A quick orientation tour of the FASTR Analytics Platform — enough that partici
 ### Setup checklist
 
 - ☐ Browser logged in to your country instance, with a demo project loaded
-- ☐ Project open, left sidebar visible: Reports, Decks, Dashboards, Visualizations, Metrics, Results package (AI button top right)
+- ☐ Project open, left sidebar visible: Reports, Decks, Dashboards, Visualizations, Metrics, Results package (AI button bottom right)
 - ☐ At least one analysis already run, so charts/outputs are visible
 - ☐ Screen-share working if remote
 - ☐ Have the participant *Logging in* handout ready to hand out after this demo

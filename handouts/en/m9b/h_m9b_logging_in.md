@@ -73,7 +73,7 @@ After login, you land on the **Projects** tab. You'll see the projects you have 
 - **If you're an instance admin**, every project on the instance is listed.
 - **Otherwise**, you only see projects an admin has granted you access to. If your country's project is missing, ask your facilitator (or instance admin) to grant access.
 
-Click your country's project to enter it. The project opens with a **left sidebar of icons** — **Reports**, **Decks**, **Dashboards**, **Visualizations**, **Metrics**, and **Results package**. Hover an icon to see its label; the **AI** button sits at the top right.
+Click your country's project to enter it. The project opens with a **left sidebar of icons** — **Reports**, **Decks**, **Dashboards**, **Visualizations**, **Metrics**, and **Results package**. Hover an icon to see its label; the **AI** button sits at the bottom right.
 
 ![Project view — left sidebar with icons, Visualizations open, AI Assistant on the right h:280](../../../resources/screenshots/m9b/project_sidebar_nav.png)
 

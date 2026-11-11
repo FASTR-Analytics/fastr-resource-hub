@@ -20,7 +20,7 @@ footer: "FASTR · Slide Decks"
 <p class="sb-label">Before you start</p>
 
 - ☐ You're signed in to your country's project on the FASTR platform
-- ☐ You've created your personal folder in the **Slide Decks** tab (see *Create your user folder*)
+- ☐ You've created your personal folder (see *Create your user folder*)
 - ☐ You have at least one visualization saved that you'd like to use (see *Creating visualizations*)
 
 </aside>
@@ -30,15 +30,13 @@ footer: "FASTR · Slide Decks"
 
 Create your first slide deck and add a content slide. This is the container — the next activities fill it with charts and interpretation.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open your folder</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Open the Products tab</span></h2>
 
-Go to the **Slide Decks** tab and click into your personal folder.
+Go to the **Products** tab on the project's home screen. Slide decks, reports, and visualizations all appear as cards there.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Create the deck</span></h2>
 
-Click **Create slide deck** at the top of the folder. Name it (e.g., *Q1 2026 review* or your topic), then click **Save**.
-
-![The "Create slide deck" button h:34](../../../resources/screenshots/m9d/create_deck_button.png)
+Click **New**, then choose **New deck**. A dialog asks for a name, a folder, a results package, and a scope. Name it (e.g., *Q1 2026 review* or your topic), put it in your personal folder, then save to open the editor.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Add your first slide</span></h2>
 

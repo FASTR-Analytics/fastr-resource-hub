@@ -73,7 +73,7 @@ Após iniciar sessão, chega ao separador **Projects**. Verá os projetos a que 
 - **Se for administrador da instância**, todos os projetos da instância estão listados.
 - **Caso contrário**, só vê os projetos a que um administrador lhe concedeu acesso. Se o projeto do seu país estiver em falta, peça ao facilitador (ou administrador da instância) que conceda acesso.
 
-Clique no projeto do seu país para entrar. O projeto abre com uma **barra lateral esquerda de ícones** — **Relatórios**, **Apresentações**, **Painéis**, **Visualizações**, **Métricas** e **Pacote de resultados**. Passe o rato sobre um ícone para ver o nome; o botão **IA** fica no canto superior direito.
+Clique no projeto do seu país para entrar. O projeto abre com uma **barra lateral esquerda de ícones** — **Relatórios**, **Apresentações**, **Painéis**, **Visualizações**, **Métricas** e **Pacote de resultados**. Passe o rato sobre um ícone para ver o nome; o botão **IA** fica no canto inferior direito.
 
 ![Separador Projects após o início de sessão h:280](../../../resources/screenshots/m9b/projects_tab.png)
 
