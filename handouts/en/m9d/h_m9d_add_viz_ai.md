@@ -10,7 +10,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step current">Add with AI</span> <span class="arrow">→</span> <span class="step">Edit & finalize</span></div>
 
-# Add a visualization (with the AI Assistant)
+# Add a visualization (with the AI assistant)
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~15 min</strong></p>
 
@@ -19,24 +19,24 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You've created your slide deck and added a visualization manually (see prior activities)
-- ☐ You have at least one saved visualization in the **Visualizations** tab
-- ☐ Your deck is open — the AI panel on the right is scoped to it
+- ☐ You created your deck and added a visualization by hand (previous activities)
+- ☐ You have at least one saved visualization on the Products page
+- ☐ Your deck is open: the AI panel on the right reads this deck
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Tell the AI Assistant to add a saved chart to your open deck — in one prompt. No menu navigation, no block-type switch. Same result as the manual path.
+Ask the AI assistant to add a chart to your open deck, in one request. No block to select, no menus. Same result as the manual path.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ask the AI to add the chart</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Ask</span></h2>
 
-In the AI panel (right side), type a prompt that names your chart and your intent:
+In the AI panel on the right (**Ask about this slide deck…**), type a request that names the chart and what you want:
 
-> *"Add the [your chart name] chart to my deck."*
+> *"Add a new content slide with my chart 'ANC1, monthly, last 12 months' and a one-line takeaway next to it."*
 
-The AI runs its tools, finds the chart, creates a new content slide at the end of the deck, and confirms in the chat. No separate "add to deck" button — the prompt does the whole thing.
+The AI lists the steps it takes (reads the deck, finds the visualization, adds the slide, looks at the result) and confirms in the chat. The new slide appears in the list on the left.
 
 </div>
 </div>
@@ -47,47 +47,44 @@ The AI runs its tools, finds the chart, creates a new content slide at the end o
 
 <h2 class="step-h"><span class="step-n">2</span><span>Check what landed</span></h2>
 
-Look at the deck preview — there should now be a new slide at the end with the chart you named.
+Open the new slide and confirm:
 
-Open it and confirm:
+- Right chart? If your request was vague the AI may pick a close one.
+- A title that states something, not just the indicator name?
+- The chart renders, not an error?
 
-- Right chart? (Sometimes the AI grabs a close-but-different one if your prompt is vague.)
-- Slide title makes sense?
-- Chart renders, not an error?
+If anything is off, say so in the same chat: *"Not that one, use the regional split."* The AI updates the slide. Edits save live; the **History** button at the top is the way back if you prefer the previous state.
 
-If anything's off, say so in the same chat: *"That's not the right one — use the regional split instead."* The AI updates the slide.
+<h2 class="step-h"><span class="step-n">3</span><span>Ask for more</span></h2>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Save</span></h2>
+The AI can also build a chart it does not find: *"Make a monthly BCG line chart for the last 12 months and add it as a new slide."* It creates the figure on the slide directly, with the same metric and filters you would click yourself. Check the indicator, the period and the data values it used, as in *Build a visualization with the AI*.
 
-The deck auto-saves as the AI works, but it's worth opening the slide and clicking **Save and close** to confirm.
+## Checkpoint
 
-> **No saved chart of your own yet?** Use this shared example prompt instead: *"Add the quarterly change in service volume chart to my deck."*
+Your deck should now have **two content slides**: one chart added by hand, one through the AI. Same chart or different, the point is you have used both paths.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Checkpoint
-
-Your deck should now have **two slides**: one chart added manually (previous activity), one added via the AI Assistant. Same chart or different — the point is you've used both paths.
-
 ## Comparing the two paths
 
-| Manual path | AI Assistant path |
-|-------------|-------------------|
-| Add slide → click slide → right-click → Add row → switch Content type → Select Visualization | Type one prompt: *"Add [chart] to my deck."* |
-| Useful when you know exactly which chart, and clicking is faster than typing | Useful when you don't remember the exact name, or want the AI to pick a sensible default |
-| One chart at a time | Can ask for several at once: *"Add the ANC1 and BCG monthly charts."* |
+| Manual path | AI path |
+|-------------|---------|
+| Add slide → select block → type Visualization → Insert visualization → Existing → Insert a copy | One request: *"Add [chart] as a new slide."* |
+| When you know exactly which chart and clicking is faster than typing | When you do not remember the exact name, or want a title and takeaway drafted |
+| One chart at a time | Several in one request: *"Add the ANC1 and BCG monthly charts, one slide each."* |
 
-Neither is "better." Pick whichever feels faster for the task.
+Neither is better. Pick whichever is faster for the task, and check the result either way.
 
 ## Tips
 
-> **The AI sees what you've saved.** If a chart isn't in your saved Visualizations, the AI can't find it. Save first, then prompt.
+> **The AI only works on the deck you have open.** From the Products page it can list products but cannot edit them. Open the deck first.
 
-- If the AI returns the wrong chart: name it more specifically in your prompt, or include the indicator + region.
-- The AI can also create a chart from scratch and add it in one go — *"Make a monthly ANC1 chart and add it to my deck."* This combines the previous module's *Build with AI* with this one.
+- The AI finds saved visualizations by name. Clear names on the Products page make requests shorter.
+- Inserted charts are **copies**, as on the manual path. Improving the original later does not change the slide.
+- The AI panel also edits text: *"Shorten the takeaway on slide 2 to one sentence."*
 
 ## What's next
 
-Move on to **Edit and finalize your slides** — review and polish what you've built.
+Move on to **Edit and finalize your slides**: review and polish what you have built.

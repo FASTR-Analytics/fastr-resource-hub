@@ -19,36 +19,22 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You're signed in to your country's project on the FASTR platform
-- ☐ You've created your personal folder (see *Create your user folder*)
-- ☐ You have at least one visualization saved that you'd like to use (see *Creating visualizations*)
+- ☐ You are signed in, on the **Products** page
+- ☐ You have a folder of your own (see *Make a folder for your work*)
+- ☐ You have at least one saved visualization you would like to use
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Create your first slide deck and add a content slide. This is the container — the next activities fill it with charts and interpretation.
+Create a deck, choose its look, and add a content slide. This is the container; the next activities fill it with charts and interpretation.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Open the Products tab</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Create the deck</span></h2>
 
-Go to the **Products** tab on the project's home screen. Slide decks, reports, and visualizations all appear as cards there.
+On the **Products** page click **New**, then **New deck**. The dialog asks for a **Name** and a **Folder**: name it (for example *Q1 2026 review*, or your topic), pick your folder, and click **Next**. The second step asks for the **Results package** and the **Scope**; keep the pinned package and **All data**, and click **Create**.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Create the deck</span></h2>
-
-Click **New**, then choose **New deck**. A dialog asks for a name, a folder, a results package, and a scope. Name it (e.g., *Q1 2026 review* or your topic), put it in your personal folder, then save to open the editor.
-
-<h2 class="step-h"><span class="step-n">3</span><span>Add your first slide</span></h2>
-
-Click **Add slide**. Three slide types appear — pick the one you need:
-
-- **Cover slide** — the title page at the start of the deck (deck name, date, your name). One per deck.
-- **Section slide** — a divider between parts of the deck (e.g. *"Coverage"*, *"Disruptions"*). Use sparingly.
-- **Content slide** — where a chart + interpretation lives. Most of your deck is content slides.
-
-For this activity, pick **Content slide** — that's the one the next activities fill.
-
-You should now see an empty content slide ready for a visualization and text.
+![h:250](../../../resources/screenshots/platform_v2_en/19_new_deck_dialog.png)
 
 </div>
 </div>
@@ -57,14 +43,39 @@ You should now see an empty content slide ready for a visualization and text.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+<h2 class="step-h"><span class="step-n">2</span><span>Choose a theme</span></h2>
+
+A new deck opens on a theme picker: the theme sets the colours, the type and the page furniture of every slide. Keep **Default** (GFF green) for the workshop and click **Apply theme**. You can change it later from the **Deck** menu.
+
+![h:280](../../../resources/screenshots/platform_v2_en/20_deck_theme_picker.png)
+
+<h2 class="step-h"><span class="step-n">3</span><span>Look at the editor</span></h2>
+
+The deck opens with a cover slide already there. The slide list is on the left, the current slide in the middle, the AI panel on the right. Above the slide: **Add slide**, and the menus **File**, **Deck**, **Slide**, **Insert**. The title at the top left renames the deck when you click it. Next to the package name, **Live** means changes are saved automatically and shared with anyone else who has the deck open.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">4</span><span>Add a content slide</span></h2>
+
+Click **Add slide**. Three slide types appear:
+
+- **Cover slide**: the title page (deck name, date, your name). One per deck, already there.
+- **Section slide**: a divider between parts of the deck. Use sparingly.
+- **Content slide**: where a chart and its interpretation live. Most of your deck.
+
+Pick **Content slide**. A second slide appears with a header and one empty block.
+
+![h:230](../../../resources/screenshots/platform_v2_en/22b_add_slide.png)
+
 ## Checkpoint
 
 You should have:
 
-- A new slide deck inside your personal folder, with a clear name
-- One empty content slide ready to edit
+- A deck with a clear name, in your folder (check its row on the Products page)
+- A cover slide and one empty content slide
 
 ## What's next
 
-Your facilitator will demo how to add a chart and split the slide into chart + text. Then you'll repeat it in **Add a visualization (manually)**.
-
+Your facilitator will demo how to put a chart on the slide and split it into chart and text. Then you repeat it in **Add a visualization (manually)**.

@@ -29,7 +29,7 @@ PRESENTER NOTES:
   - I do: insert a viz on a slide and write a three-part interpretation (title, what you see, what it means).
   - We do: together interpret a second viz and add it to a slide deck.
   - You do: interpret a viz of your choice and add it to your own presentation.
-- Working tab: Slide Decks.
+- Done in the deck editor: a visualization block and a text block side by side.
 - Key message: the title is the conclusion, not the topic. "What you see" is facts only. "What it means" names a person or next step.
 - Watch for: descriptive titles ("Coverage results"); facts mixed with interpretation; vague so-whats.
 -->

@@ -24,7 +24,7 @@ The AI can describe a chart but does not know your context. Every claim has to b
 
 <!--
 PRESENTER NOTES:
-- Activity 5 from the m9c facilitator guide. Hands-on, individual. Working tab: Slide Decks.
+- Activity 5 from the m9c facilitator guide. Hands-on, individual. The AI panel on the right of the open deck.
 - Live demo first: generate one interpretation on screen, then check a single claim against the chart aloud. The point is to show that "it sounds right" is not the test.
 - I do / we do / you do scaffolding belongs in the handout.
   - I do: build a slide with the AI, then refine the prompt and check the output against the data.

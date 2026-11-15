@@ -52,7 +52,7 @@ Pick a chart, read it carefully, then write a three-part interpretation next to 
 
 <h2 class="step-h"><span class="step-n">1</span><span>Pick a chart from your folder</span></h2>
 
-Open the **Visualizations** tab and choose one of the charts you saved earlier. Pick one that shows movement (a trend, a drop, a regional contrast) — not a flat line. A flat chart is hard to write about and harder to act on.
+On the **Products** page open one of the charts you saved earlier in your folder. Pick one that shows movement (a trend, a drop, a regional contrast) — not a flat line. A flat chart is hard to write about and harder to act on.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Read the chart with the six-step framework</span></h2>
 
@@ -88,7 +88,7 @@ The so-what, drawn from step 6. **What action would this prompt?** Be specific. 
 
 <h2 class="step-h"><span class="step-n">6</span><span>Add to your slide</span></h2>
 
-In the Slide Decks tab, open your deck and add the chart. Place your three-part text alongside it. Save.
+Open your deck from the Products page and insert the chart on a content slide (select the block, set its type to **Visualization**, then **Insert visualization → Existing visualization…**). Place your three-part text in a second block alongside it. The deck saves by itself.
 
 ## Pitfalls to avoid
 

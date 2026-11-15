@@ -21,22 +21,20 @@ footer: "FASTR · Getting Started"
 
 - ☐ You watched the facilitator's platform demo
 - ☐ You have your **country platform URL** (your facilitator will share it)
-- ☐ You have a working email address you can check during the activity (you'll need to verify it)
+- ☐ You have a working email address you can check during the activity
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Create a FASTR account if you're new, sign in, and confirm you're in your country's project. This is your first time touching the platform — no data work yet.
+Create a FASTR account if you are new, sign in, and find your way around the home screen. No data work yet.
 
 <h2 class="step-h"><span class="step-n">1</span><span>Open the platform URL</span></h2>
 
-Go to your country's platform URL in a browser (your facilitator will share it; the format is usually `https://<country>.fastr-analytics.org`).
+Go to your country's platform URL in a browser (the format is usually `https://<country>.fastr-analytics.org`). You land on the sign-in screen.
 
-You should land on a login screen.
-
-![h:180](../../../resources/screenshots/01_login_page.png)
+![h:200](../../../resources/screenshots/platform_v2_en/00_sign_in.png)
 
 </div>
 </div>
@@ -47,46 +45,46 @@ You should land on a login screen.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Sign up or sign in</span></h2>
 
-- If this is your **first time**: click **Sign up**, enter your email + a password, and create the account.
-- If you already have an account: click **Sign in** and enter your credentials.
+- **First time:** click **Sign up** under the form, enter your email and a password, and create the account. Check your inbox for a verification email and click its link. If nothing arrives within two minutes, look in your spam folder.
+- **Already have an account:** type your email and password and click **Continue**.
 
-![h:180](../../../resources/screenshots/02_sign_up.png)
+<h2 class="step-h"><span class="step-n">3</span><span>Look around the home screen</span></h2>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Verify your email</span></h2>
+After signing in you land on **Products**: one list of everything people on this instance have made, organized in **folders**. Each row is a **Deck**, a **Report** or a **Visualization**, with the results package and the scope it reads from, and the date it was last updated.
 
-Check your inbox for a verification email from FASTR. Click the link in it to confirm your account.
-
-> If you don't see it within 2 minutes, check your spam folder.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Sign in</span></h2>
-
-Go back to the platform and sign in with your verified email + password.
+![h:300](../../../resources/screenshots/platform_v2_en/01_home_products.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Find your project</span></h2>
+The **side navigation** on the left is the same everywhere. Click the small arrow at the bottom to show the labels:
 
-After login, you land on the **Projects** tab. You'll see the projects you have access to:
+| Entry | What it is for |
+|---|---|
+| **Products** | Your decks, reports and visualizations, in folders. Where you will spend most of your time. |
+| **Explore** | Ready-made tables, charts and maps for every analysis module, with no product to create. Good for a quick look. |
+| **Results** | The results packages: the computed analyses that products read from. |
+| **Scopes** | Named views of the data (an area, a period) that products and users can be limited to. |
+| **Data**, **Assets**, **Users** | Administration: imports, indicators, shared files, accounts. You may not see all of them. |
 
-- **If you're an instance admin**, every project on the instance is listed.
-- **Otherwise**, you only see projects an admin has granted you access to. If your country's project is missing, ask your facilitator (or instance admin) to grant access.
+The top bar has **Help** (guided tours, documentation, feedback), the language switch, notifications and **Your account**. The **AI** button sits at the bottom right of every screen.
 
-Click your country's project to enter it. The project opens with a **left sidebar of icons** — **Reports**, **Decks**, **Dashboards**, **Visualizations**, **Metrics**, and **Results package**. Hover an icon to see its label; the **AI** button sits at the bottom right.
+<h2 class="step-h"><span class="step-n">4</span><span>Open something</span></h2>
 
-![Project view — left sidebar with icons, Visualizations open, AI Assistant on the right h:280](../../../resources/screenshots/m9b/project_sidebar_nav.png)
+Click a folder to expand it, then click any product in it. It opens in its own editor; the back arrow at the top left returns you to the list. Open **Explore** once too, to see what is there.
 
-> Note: the **top navigation** (Projects · Data · Results · Assets · Users) is for **instance admins** managing the whole site. Inside a project the left-sidebar icons are what you'll use day to day.
+> **There are no projects anymore.** If you used FASTR before, this is the main change: everything for the country lives in one list, and folders replace projects. A deck or report is tied to one results package and one scope, shown in its row.
 
 ## Checkpoint
 
-After clicking into your project, you should see:
+You should be able to:
 
-- The left sidebar of project icons (Reports, Decks, Dashboards, Visualizations, Metrics, Results package)
-- The project name in the header (e.g., "Country X — Workshop project")
+- See the **Products** list with at least one folder in it
+- Name the entries of the side navigation
+- Open a product and come back to the list
 
-If yes, you're in. Move to the next activity.
+If yes, move on to the next activity.
 
 ---
 
@@ -94,11 +92,12 @@ If yes, you're in. Move to the next activity.
 
 ## What could go wrong
 
-- **"Account not approved"** — your account needs to be added to the country project by an administrator. Ask your facilitator to add you.
-- **Verification email never arrives** — check spam. If still nothing after 5 min, ask your facilitator to re-trigger it.
-- **"Invalid email or password"** after sign-up — double-check the email you entered. Typos are common. You can usually request a password reset.
-- **No projects visible on the Projects tab (or your country's project is missing)** — you're not an instance admin and haven't been granted project access yet. Ask your facilitator or instance admin to grant you access to your country's project.
+- **"Account not approved"** or an empty Products list. Your account has to be approved by an instance administrator before you see anything. Ask your facilitator.
+- **The verification email never arrives.** Check spam. After five minutes, ask your facilitator to re-trigger it.
+- **"Invalid email or password" after signing up.** Check the email you typed. Typos are common. Use the password reset link.
+- **The side navigation shows only icons.** That is the collapsed state. Click the arrow at the bottom of the rail to expand it, or hover an icon to read its label.
+- **The interface is in the wrong language.** Click the language button in the top bar (EN or FR) and choose.
 
 ## What's next
 
-Move on to **Create your user folder** — set up personal folders in the Slide Decks and Visualizations tabs so your work stays organized.
+Move on to **Make a folder for your work**: one folder with your name on the Products page, so the team can find what you build.

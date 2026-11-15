@@ -20,8 +20,8 @@ footer: "FASTR · Visualizations & Interpretation"
 <p class="sb-label">Before you start</p>
 
 - ☐ You have completed the previous 5 handouts
-- ☐ You are signed in to the platform and inside your country project
-- ☐ You are on the **Visualizations** tab
+- ☐ You are signed in and on the **Products** page
+- ☐ You have a folder of your own
 
 <p class="sb-label">Why it matters</p>
 
@@ -32,7 +32,7 @@ The first five handouts taught the technique. This is where you use it: open a r
 
 ## What you'll do
 
-Open the Disruptions and surpluses (national) chart, narrow it to one indicator and a time window of interest, work through the six-step framework, then write a three-part finding to share with the room.
+Create the national disruption chart from the Disruption detection module, narrow it to one indicator and a time window of interest, work through the six-step framework, then write a three-part finding to share with the room.
 
 </div>
 </div>
@@ -41,19 +41,19 @@ Open the Disruptions and surpluses (national) chart, narrow it to one indicator 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Find the disruption chart</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Create the disruption chart</span></h2>
 
-In the **Visualizations** tab, switch the view toggle (top left of the visualization list) to **By module**. This groups the visualizations by which module produced them.
+On the **Products** page click **New → New visualization**, keep the pinned package and **All data**, and click **Next**. In the Metric step click the module **Disruption detection**, then the card **Bayesian disruption detection — observed vs expected with 95% CI**, choose the level **National**, and click **Next**. Pick the preset **Disruptions chart with 95% credible band** and click **Insert**.
 
-Open **M3. Service utilization**. Scroll until you see the group titled **Actual vs expected service volume — National**. The first card in that group is **Disruptions and surpluses (national)**. Click it to open.
+![Metric step with Disruption detection selected h:230](../../../resources/screenshots/platform_v2_en/08_new_viz_module_metrics.png)
 
-![Visualizations tab in By module view, M3 Service utilization selected h:300](../../../resources/screenshots/m9c/spot_disruption_01_m3_module_list.png)
+> Already built by a colleague? The Products page may hold one. Open it, then **⋮ → Duplicate** so your filters do not change theirs: edits save live.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Read the default view</span></h2>
 
-The default chart shows every core indicator as a small chart in a grid. Two black lines run across each chart: a **solid** line for **actual** monthly service volume, and a **dashed** line for the **expected** volume predicted from past trends. The area between them is filled — **red** where actual sits **below** expected (a disruption), **green** where actual sits **above** expected (a surplus).
+The chart opens with every core indicator as a small chart in a grid. Two black lines run across each: a **solid** line for the **observed** monthly volume, and a **dashed** line for the **expected** volume, modelled from the facilities that reported that month. A **grey band** around the expected line is the 95% credible interval. Where the observed line drops **below the band** the gap is filled **red** (a deficit); where it rises **above** it is filled **green** (a surplus). Inside the band is normal variation.
 
-![Default disruptions and surpluses grid, all indicators visible h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
+![Disruption chart, all indicators in a grid h:230](../../../resources/screenshots/platform_v2_en/11_visualization_editor.png)
 
 ---
 
@@ -61,13 +61,9 @@ The default chart shows every core indicator as a small chart in a grid. Two bla
 
 <h2 class="step-h"><span class="step-n">3</span><span>Filter to one indicator</span></h2>
 
-In the **Data** tab on the left, find the **Filter (subset)** section and tick the **Indicator** checkbox. A list of indicator chips appears (ANC1, ANC4, BCG, DELIVERY, OPD, PENTA1, PENTA3, PNC1_MOTHER, PNC1_NEWBORN). Click one chip to filter the chart to that indicator. Click more chips to add others.
+In the **Data** tab on the left, under **Filter (subset)**, tick **Indicator**. A list of indicator chips appears (ANC1, ANC4, BCG, delivery, Penta1…). Click one chip to keep only that indicator; click more to add others.
 
-![Indicator filter expanded with chip list h:340](../../../resources/screenshots/m9c/spot_disruption_03_indicator_filter_open.png)
-
-When a single indicator is selected, the grid collapses to a single full-size chart. You can also tick **Time period** to narrow the window further.
-
-![Filtered to ANC1, single chart full size h:340](../../../resources/screenshots/m9c/spot_disruption_04_filtered_anc1.png)
+When a single indicator is selected, the grid collapses to one full-size chart. Tick **Time period** to narrow the window further.
 
 ---
 
@@ -81,8 +77,8 @@ On your filtered chart, walk the six-step framework from *Reading a viz*:
 |------|----------------|
 | 1. What indicator? | The one you filtered to |
 | 2. What level & period? | National. The period you chose. |
-| 3. What is being compared? | Actual monthly volume (solid black line) vs **expected** (dashed black line, predicted from past trends) |
-| 4. Read the values | Where does the gap fill red (actual below expected)? By how much? |
+| 3. What is being compared? | Observed monthly volume (solid line) vs **expected** (dashed line, modelled from the same facilities that reported), with the grey 95% band |
+| 4. Read the values | Where does the gap fill red (observed below the band)? By how much? |
 | 5. What stands out? | A sustained drop, three months or more? A single spike? A pattern? |
 | 6. So what? | What action would this prompt? |
 
@@ -117,7 +113,8 @@ When each country team is done, one person shares the finding. Listen for:
 ## What to watch out for
 
 - **A one-month dip is usually noise.** Look for a sustained drop, three months or more.
-- **A green fill is not "good", a red fill is not "bad".** They just show direction: green = actual above expected, red = actual below expected. A small red fill for one month is normal noise; a sustained red over several months is what to investigate.
+- **A green fill is not "good", a red fill is not "bad".** They show direction: green = observed above the band, red = observed below it. Inside the band nothing is coloured, and that is the normal case. A sustained red over several months is what to investigate.
+- **Reporting gaps are already handled.** The expected line is built from the facilities that reported that month, so a facility going silent does not show as a disruption. A red stretch is a real change among reporting facilities.
 
 ## What's next
 

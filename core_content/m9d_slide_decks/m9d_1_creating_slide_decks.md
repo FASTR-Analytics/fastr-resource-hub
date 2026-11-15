@@ -15,7 +15,7 @@ paginate: true
 How decks, slides and visualizations connect inside FASTR. A saved deck stays editable, so you can come back to it later.
 
 **What you'll practice**
-- Open the Slide Decks tab
+- On the Products page: **New → New deck**, name it, pick your folder, apply the Default theme
 - Create a new deck
 - Add a slide
 - Save the deck

@@ -35,7 +35,7 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ## Running the session
 
-**Preparation.** Have a saved visualization and an existing deck ready in the demo account so you can show charts immediately. Confirm participants completed Instance Setup — activity 6 uses real country data, which must already be loaded.
+**Preparation.** Have a saved visualization and a deck ready in a demo folder so you can show charts immediately. Confirm participants have their own folder (Getting Started) and that the instance has a pinned results package with the Disruption detection module in it: activity 6 uses real country data. Remind yourself that edits save live: demonstrate on duplicates, never on a participant's chart.
 
 **How to demonstrate.** Every platform task should be demonstrated first, then practiced from the handout, which re-explains what you showed. The detailed live demo for the chart builder (activity 2) is the one to rehearse — it carries the filter/disaggregate distinction the rest of the module depends on.
 
@@ -65,9 +65,9 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ### 2. Create your first visualization · ~15 min · hands-on
 
-**What happens.** Participants build a chart with the built-in builder (the **Metric → Presets → Create** wizard): Create visualization → pick a metric (e.g. *M3. Service utilization → Number of services reported*) → choose a preset like *Service volume over time (monthly)* → Create. The handout then explains **filter vs disaggregate** and the four display modes (Lines / Grid / Rows / Columns).
+**What happens.** Participants build a chart with the built-in builder: **New → New visualization** on the Products page, keep the package and scope, then the **Metric → Presets → Configure** dialog (*Indicator values → Indicator value → Custom → Time series → Insert*). The handout then explains **filter vs disaggregate** and the display modes (Lines / Grid / Rows / Columns / Different charts), and teaches **Duplicate before you change** because there is no Save as: edits save live.
 
-**Demonstrate (~3 min, live).** Open a saved viz and use the **left panel** — point out you must *scroll* to reach these controls, which is where people get lost:
+**Demonstrate (~3 min, live).** Open a duplicate of a saved viz and use the **Data** tab on the left:
 1. Start with one indicator, national total; say in words what it shows.
 2. Under **Display (disaggregate)**, break it down **by district** — switch between **Lines**, **Rows**, then **Grid** so they see the *same data in different shapes*.
 3. Under **Filter (subset)**, tick just two districts — the chart shows only those. Name it: *"I'm choosing what to show."*
@@ -79,7 +79,8 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 **Watch for.**
 - Confusing **filter** (pick what to show) with **disaggregate** (break a total into parts) — the distinction underlies every chart they build.
-- Reaching for **Custom** when a preset would do; metric → preset → Create is the quick path.
+- Expecting a Save button. There is none: the title at the top renames, **History** restores, **Duplicate** on the Products page is the way to keep an original.
+- Picking the Indicator value preset (a scorecard table) and wondering where the line is: for a trend they need **Custom → Time series**.
 
 ---
 
@@ -102,16 +103,17 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ### 4. Build a visualization with the AI · ~15 min · hands-on
 
-**What happens.** Participants produce the same chart through plain-language AI requests: type a chart request, check whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns, and save.
+**What happens.** Participants produce the same chart through plain-language requests to the AI panel **inside a visualization**: open a blank visualization, ask, check whether the AI matched the ask (indicator, period, adjusted vs raw), iterate in short turns. The AI edits the open visualization live; nothing to save.
 
-**Demonstrate.** Type one chart request live, then point out where to confirm the AI used the right indicator, period, and — critically — **adjusted vs raw** data.
+**Demonstrate.** First ask the AI from the Products page and show its answer: it cannot draw there, it lists products to open. Then open a blank visualization, type one request, and point out the steps it lists (read the editor, fetch data, update the figure) and where to confirm indicator, period and **adjusted vs raw** data. Show **History → Restore** once.
 
 **Say something like.** *"Before you save, check the AI used adjusted data, not raw, and the period you actually asked for. It often guesses."*
 
 **What a good result looks like.** A saved chart that matches the request on indicator, period, chart type, and adjusted/raw.
 
 **Watch for.**
-- Trusting the first answer. Verify before saving — especially **adjusted vs raw data**.
+- Trusting the first answer. Verify, especially **adjusted vs raw data**.
+- Asking the AI from inside a colleague's visualization: it will change it. Start from a blank one or a duplicate.
 
 ---
 
@@ -132,11 +134,11 @@ By the end, a participant should be able to: read any FASTR chart with a consist
 
 ### 6. Apply — spot a disruption · ~25 min · country teams
 
-**What happens.** The capstone: using real country data, teams pick a flagged indicator, open its disruption chart, work the six-step framework, add local context, write a three-part finding, and share it with the room.
+**What happens.** The capstone: using real country data, teams create the national chart of the **Disruption detection** module (observed vs expected with the 95% credible band), filter to one indicator, work the six-step framework, add local context, write a three-part finding, and share it with the room.
 
 **Demonstrate.** Nothing new to demonstrate — this applies the whole module. Set it up by reminding teams of the six steps and the three-part finding structure.
 
-**Say something like.** *"A one-month dip is usually noise. Look for a sustained drop — three months or more — and remember stable volumes can still mean falling coverage if the population is growing."*
+**Say something like.** *"A one-month dip is usually noise. Look for a sustained drop, three months or more, below the band. The expected line already allows for facilities that did not report, so a red stretch is a real change among the facilities that did."*
 
 **What a good result looks like.** A clearly stated finding about a genuine, sustained disruption, defensible in front of the room.
 

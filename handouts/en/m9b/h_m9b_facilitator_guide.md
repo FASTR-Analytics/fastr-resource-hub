@@ -10,13 +10,13 @@ footer: "FASTR · Getting Started · Facilitator"
 
 # Facilitator guide — Getting Started
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong> · <strong>3 activities · ~15 min + demo</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong> · <strong>2 activities · ~15 min + demo</strong></p>
 
 ## Purpose
 
-Getting Started puts every participant onto the platform and set up to keep their work organized. It is a short module — one facilitator-led demo followed by two quick activities — but it is a gate: a participant who is not logged in, inside their country project, with a named folder in both tabs will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
+Getting Started puts every participant onto the platform and set up to keep their work organized. It is short, one facilitator-led demo and two quick activities, but it is a gate: a participant who is not signed in, with a folder of their own, will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
 
-By the end, every participant should be signed in, inside their country project, with a personal folder of the same name in both the Slide Decks and Visualizations tabs.
+By the end, every participant should be signed in, able to name the side navigation, and have one folder with their name on the Products page.
 
 ## Session at a glance
 
@@ -24,7 +24,7 @@ By the end, every participant should be signed in, inside their country project,
 |---|----------|------|--------|
 | — | FASTR platform demo | ~10 min | Facilitator-led (appendix) |
 | 1 | Log in to the platform | ~10 min | Hands-on, individual |
-| 2 | Create your user folder | ~5 min | Hands-on, individual |
+| 2 | Make a folder for your work | ~5 min | Hands-on, individual |
 
 ---
 
@@ -32,15 +32,17 @@ By the end, every participant should be signed in, inside their country project,
 
 ## Running the session
 
-**Preparation.** Resolve accounts and project access *before* the session if at all possible. The recurring time sink here is verification emails and un-approved accounts — neither of which a participant can fix themselves, and both of which stall the room. Have the platform demo loaded (appendix) and the *Logging in* handout ready to distribute after it.
+**Preparation.** Resolve accounts *before* the session if at all possible. The recurring time sink is verification emails and un-approved accounts, which a participant cannot fix and which stall the room. Approve every account on the **Users** page the day before. Decide whether participants' folders go inside a country folder; if so, create it first. Have the platform demo loaded (appendix) and the *Log in* handout ready.
 
-**How to demonstrate.** Start with the platform demo (appendix) — a brief, high-level tour of the main tabs before anyone logs in. Keep it short and resist going deep; detailed setup is a later session. Then let participants log in and create their folders from the handouts.
+**How to demonstrate.** Start with the platform demo: a short tour of the home screen before anyone touches a keyboard. Keep it high level; setup is a later session. Then let participants sign in and make their folder from the handouts.
 
 **Grouping.** Both activities are individual. Pair participants for help if someone is stuck on access.
 
-**Pacing.** This module is short, but do not declare it finished early. Check every participant has cleared the gate (logged in, in project, folders made) before moving on — an unresolved access problem only gets more expensive later.
+**Pacing.** Do not declare the module finished early. Check that every participant has cleared the gate (signed in, folder made) before moving on. An unresolved access problem only gets more expensive later.
 
-**The message to carry through.** Organization now prevents chaos later: one folder per person, the same name in both tabs, is the simple habit that keeps a crowded country project navigable.
+**The message to carry through.** One list for the whole country, folders to keep it readable, one folder per person. That habit is what keeps a shared Products page navigable after a week of work.
+
+> **If participants used FASTR before.** Say it plainly: projects are gone. Everything is on one Products page, organized in folders; each deck, report or visualization is tied to a results package and a scope, shown in its row. Dashboards no longer exist; the Explore page and saved visualizations replace them.
 
 ---
 
@@ -50,36 +52,36 @@ By the end, every participant should be signed in, inside their country project,
 
 ### 1. Log in to the platform · ~10 min · hands-on
 
-**What happens.** The first hands-on activity: participants open their country URL, sign up or sign in, verify their email, log in, and click into their country's project on the Projects tab.
+**What happens.** Participants open the country URL, sign up or sign in, verify their email if new, and look around the home screen: the Products list, the side navigation, the AI button.
 
-**Demonstrate.** Covered by the platform demo (appendix). After it, point participants to the *Logging in* handout and let them work.
+**Demonstrate.** Covered by the platform demo. After it, hand out *Log in to the platform* and let them work.
 
-**Say something like.** *"If your verification email hasn't arrived in two minutes, check spam. If your country project isn't listed after login, tell me — that's an access grant I need to make, not something you can fix."*
+**Say something like.** *"If your verification email has not arrived in two minutes, check spam. If you sign in and see an empty list, tell me: your account needs approving, which is my job, not yours."*
 
-**What a good result looks like.** Each participant inside their country project, with their name in the top-right and the navigation tabs visible.
-
-**Watch for.**
-- Verification emails landing in spam.
-- "Account not approved" or a missing project — both need *you* to grant project access or re-trigger the email. Pre-empt these before the session.
-
-### 2. Create your user folder · ~5 min · hands-on
-
-**What happens.** A short setup activity: participants create one personal folder named after themselves in the Slide Decks tab, and another with the **identical name** in the Visualizations tab.
-
-**Demonstrate.** Show that **+ New folder** appears only in the **By folder** view, and that the names must match exactly across both tabs.
-
-**Say something like.** *"Use your own name, and the same name in both tabs. Avoid 'test' — everyone's 'test' folder collides, and you'll never find your work again."*
-
-**What a good result looks like.** A folder with the participant's name in both tabs, identically named.
+**What a good result looks like.** Each participant on the Products page, side navigation expanded, able to open a product and come back.
 
 **Watch for.**
-- The **+ New folder** button missing — they are not in the **By folder** view.
-- Mismatched names across the two tabs, which makes work hard to find later.
-- Generic names like "test" — discourage them.
+- Verification emails in spam.
+- "Account not approved" or an empty list: approve the account on the **Users** page.
+- The collapsed side navigation confusing people: show the arrow at the bottom of the rail.
+
+### 2. Make a folder for your work · ~5 min · hands-on
+
+**What happens.** Each participant creates one folder with their name: **New → New folder**, name, colour, Save.
+
+**Demonstrate.** Create a folder on screen. Show the ⋮ menu on its row (Move into, Rename, Set access, Delete), and the **Folder** field in the New deck dialog so they see why the folder matters.
+
+**Say something like.** *"Use your own name. Everyone's 'test' folder collides, and you will never find your work again. When you create a deck or a chart, the dialog asks which folder: pick yours."*
+
+**What a good result looks like.** One folder per participant, named after them, empty, where you agreed it should be.
+
+**Watch for.**
+- **New folder** missing from the menu: the account lacks the data access needed to manage folders. Fix the role on the Users page.
+- Folders created at the top level when you wanted them inside a country folder: use **Move into**.
 
 ## Wrapping up
 
-Every participant should leave logged in, inside their country project, with a named folder in both tabs. Anyone who is not will be blocked for the rest of the workshop — check before moving on.
+Every participant should leave signed in, with their own folder. Anyone who is not will be blocked for the rest of the workshop. Check before moving on.
 
 ---
 
@@ -87,76 +89,66 @@ Every participant should leave logged in, inside their country project, with a n
 
 ## Appendix — FASTR platform demo script
 
-A quick orientation tour of the FASTR Analytics Platform — enough that participants know what they're looking at when they log in next. This is **before** they touch their own keyboards. Keep it short and high-level; details come in the hands-on activities.
+A short orientation of the FASTR Analytics Platform, enough that participants recognize the screen when they sign in. This is **before** they touch their own keyboards. Keep it high level; the hands-on activities bring the detail.
 
 ### Setup checklist
 
-- ☐ Browser logged in to your country instance, with a demo project loaded
-- ☐ Project open, left sidebar visible: Reports, Decks, Dashboards, Visualizations, Metrics, Results package (AI button bottom right)
-- ☐ At least one analysis already run, so charts/outputs are visible
+- ☐ Browser signed in to your country instance, in the participants' language
+- ☐ A folder with a finished deck and a saved visualization in it, ready to open
+- ☐ Side navigation expanded (click the arrow at the bottom of the rail)
 - ☐ Screen-share working if remote
-- ☐ Have the participant *Logging in* handout ready to hand out after this demo
+- ☐ The *Log in* handout ready to distribute after the demo
 
-### Step 1: The platform at a glance
+### Step 1: The home screen
 
-- **Do:** Show the landing screen with the main navigation across the top.
-- **Say:** *"This is your country's instance of FASTR. Everything you'll see today happens here — there's no separate software to install."*
+- **Do:** Show the **Products** page as it opens after sign-in. Expand a folder, point at the Type, Package and Scope columns.
+- **Say:** *"This is your country's instance of FASTR. Everything is on this one page: every deck, report and chart the team has made, in folders. Nothing to install."*
 
-![Platform landing page with the main tabs h:280](../../../resources/screenshots/m9b/platform_landing.png)
+![Products page with folders expanded h:280](../../../resources/screenshots/platform_v2_en/01_home_products.png)
 
-- **Watch for:** Participants asking "is this the same as DHIS2?" — answer: *"No. FASTR reads from DHIS2 but adds analysis, visualization, and reporting on top."*
+- **Watch for:** "Is this the same as DHIS2?" Answer: *"No. FASTR reads from DHIS2 and adds the analysis, the charts and the reporting on top."*
 
-### Step 2: Where the data lives (instance level)
+### Step 2: The side navigation
 
-- **Do:** Briefly show the **top navigation** (Projects · Data · Results · Assets · Users) and click **Data** — the instance-level page with the **HMIS** cards.
-- **Say:** *"Admins import data here, at the instance level. Projects don't hold data — each reads a **results package** of already-computed analyses."*
-- **Watch for:** Don't go deep here — just orient. Setup is its own session.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### Step 3: Visualizations tab
-
-- **Do:** Open the **Visualizations** tab. Show a saved chart.
-
-![Visualizations tab with example charts h:280](../../../resources/screenshots/m9b/tab_visualizations.png)
-
-- **Say:** *"Once data is loaded, you create charts here. You can also save them to your personal folder — we'll do that in the next activity."*
-- **Watch for:** Mouse over a chart to highlight that the data is interactive (hover values, filters).
-
-### Step 4: Slide Decks tab
-
-- **Do:** Open **Slide Decks**. Show an existing deck and a content slide with a chart + interpretation.
-- **Say:** *"This is where you'll build the outputs you share with decision-makers. Each slide has a chart and an interpretation — both editable."*
-- **Watch for:** Participants ask whether it's like PowerPoint — answer: *"Same idea, but the charts stay linked to your data."*
+- **Do:** Click each entry once. **Explore**: a ready-made chart for a module. **Results**: the packages list, point at the pinned one. **Scopes**: the list of named views. Stop at **Data**: say it is administration.
+- **Say:** *"Products is where you work. Explore is for a quick look without creating anything. Results and Scopes explain where the numbers come from; we come back to that. Data, Assets and Users are for administrators."*
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Step 5: AI Assistant
+### Step 3: Open a deck
 
-- **Do:** Open the AI Assistant panel. Show the prompt library briefly.
+- **Do:** Open the prepared deck. Click a content slide with a chart. Show the **Present** button, the **File** menu, and the **Live** indicator next to the package name.
+- **Say:** *"This is what you will build for decision-makers: slides with a chart and an interpretation. Everything saves by itself and the whole team sees changes live. The chart stays linked to the data."*
 
-![AI Assistant prompt library h:280](../../../resources/screenshots/m9b/tab_ai_assistant.png)
+![Deck editor with a content slide and chart h:280](../../../resources/screenshots/platform_v2_en/27_slide_with_visualization.png)
 
-- **Say:** *"There's an AI assistant that can help you build charts, interpret outputs, and draft slides. We'll have a whole session on this later in the week."*
-- **Watch for:** Don't demo a prompt here — keep curiosity for the dedicated AI session.
+### Step 4: Open a saved visualization
+
+- **Do:** Go back and open the saved visualization. Show the **Data** tab on the left: metric, presentation type, Filter, Display.
+- **Say:** *"A chart is a product too. You build it once, save it in your folder, and put copies in decks and reports."*
+
+### Step 5: The AI button
+
+- **Do:** Inside the visualization, point at the AI panel on the right and type nothing.
+- **Say:** *"There is an AI assistant on every product. It reads the data of the product you have open, so it can build and change charts and draft text. There is a whole session on it later."*
+
+![Visualization editor with the AI panel h:280](../../../resources/screenshots/platform_v2_en/11_visualization_editor.png)
+
+- **Watch for:** Do not run a prompt here. Keep curiosity for the AI session.
 
 ### Common questions
 
-> **Q: Do I need a DHIS2 password to log in to FASTR?**
-> A: No. FASTR has its own login. DHIS2 credentials only come into play when you import data (a separate step).
+> **Q: Do I need a DHIS2 password to sign in?**
+> A: No. FASTR has its own accounts. DHIS2 credentials are used once, by an administrator, to connect the instance.
 
-> **Q: Is my work private to me?**
-> A: Anything you save to your personal folder is yours. Anything saved to project-level folders is visible to your country team.
+> **Q: Is my work private?**
+> A: Anything on the Products page is visible to the team by default. Access can be restricted per product or per folder with **Manage access**; your facilitator decides the rule for the workshop.
 
-> **Q: Can I use this on my phone?**
-> A: Technically yes, but it's designed for a laptop — the visualizations need screen space.
+> **Q: Can I use it on my phone?**
+> A: It works, but it is designed for a laptop: the charts need the space.
 
 ### Backup plan
 
-> If the platform is unavailable during your demo, fall back to slides:
-> - Use the screenshots in the *Logging in* handout to walk through the landing screen.
-> - Skip the live demo and go straight to the participant activity.
+> If the platform is unavailable during your demo, use the screenshots in the *Log in* handout to walk through the home screen, then move to the participant activity as soon as it is back.

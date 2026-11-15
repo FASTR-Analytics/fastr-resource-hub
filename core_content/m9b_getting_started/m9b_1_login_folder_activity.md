@@ -3,31 +3,21 @@ marp: true
 theme: fastr
 paginate: true
 ---
-<!-- _class: activity-pointer -->
-
-<div class="activity-pointer">
-
-![h:90](../../resources/icons/hands_on.svg)
 
 ## Activity: Get into the platform and make a folder for yourself
 
-**What you'll learn**
-Where you land when you log in, how to find your country's project, and why a personal folder keeps your work findable for the rest of the workshop.
+**In this hands-on session, you will:**
 
-**What you'll practice**
-- Log in to the FASTR platform
-- Open your country's (or the demo) project
-- Create a folder under your name in **Visualizations** and **Slide Decks**
+- Sign up or sign in at your country's platform URL
+- Find your way around the home screen: the **Products** list and the side navigation
+- Create **one folder with your name** on the Products page (**New → New folder**)
 
-</div>
+*Two short handouts: Log in to the platform, Make a folder for your work.*
 
 <!--
 PRESENTER NOTES:
-- Recap activity for Getting Started. Hands-on, individual. ~10 min.
-- I do: open the platform URL on the projector, sign in, click into the demo project, show the left-sidebar tabs in <30 seconds.
-- We do: walk one participant through creating a personal folder in Visualizations, then in Slide Decks, with the SAME name in both. Use their actual name, not "test".
-- You do: everyone else does the same on their own laptop.
-- Key message: the folder name = your name, same in both tabs. Without it, the country project gets cluttered and nobody can find their charts.
-- Watch for: people creating differently-named folders in each tab, or skipping the Slide Decks one. Both bite later in the week.
-- Handout: h_m9b_logging_in + h_m9b_user_folder cover the click-by-click. Slide is the recap, handouts are the reference.
+- Gate activity: nobody moves on until they are signed in with a folder.
+- No projects anymore: one Products page for the country, folders inside it. Say it once for people who used FASTR before.
+- Accounts must be approved on the Users page beforehand; that is the usual blocker.
+- Agree where personal folders go (top level, or inside a country folder) before the room starts clicking.
 -->

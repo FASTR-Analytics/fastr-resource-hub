@@ -10,7 +10,7 @@ footer: "FASTR · Getting Started"
 
 <div class="setup-breadcrumb"><span class="step done">Log in</span> <span class="arrow">→</span> <span class="step current">Your folder</span></div>
 
-# Create your user folder
+# Make a folder for your work
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Getting Started</strong> · <strong>~5 min</strong></p>
 
@@ -19,19 +19,27 @@ footer: "FASTR · Getting Started"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You've completed **Log in to the platform** (you can see the main navigation tabs)
-- ☐ You're inside your country's project
+- ☐ You completed **Log in to the platform**
+- ☐ You are on the **Products** page
 
 <p class="sb-label">Why it matters</p>
 
-The country project gets crowded fast. A dozen people saving charts and decks into a shared space without a system means nobody can find anything later. **One folder per person** is the simplest rule that works.
+The whole country team works in the same Products list. A dozen people saving charts and decks without a system means nobody finds anything later. **One folder per person** is the simplest rule that works.
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Create two personal folders — one in **Slide Decks**, one in **Visualizations** — to keep your work organized. Everything you save here will be tagged with your name so the team can see who built what.
+Create one folder with your name on the Products page. Every deck, report or visualization you make during the workshop goes in it.
+
+<h2 class="step-h"><span class="step-n">1</span><span>Create the folder</span></h2>
+
+1. On the **Products** page, click **New** (top right), then **New folder**.
+2. Type your name as the **Folder name** (for example `Aïcha N.` or `John S.`). Pick a **Colour** if you like.
+3. Click **Save**.
+
+![h:260](../../../resources/screenshots/platform_v2_en/05_new_folder_dialog.png)
 
 </div>
 </div>
@@ -40,63 +48,43 @@ Create two personal folders — one in **Slide Decks**, one in **Visualizations*
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Folder in the Slide Decks tab</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Find it in the list</span></h2>
 
-1. Click the **Slide Decks** tab in the top navigation.
-2. Switch the view to **By folder** (the toggle at the top — the other option is *Flat list*). You'll only see **New folder** when *By folder* is selected.
+Your folder appears in the list with the type **Folder**. Click it to expand it: it is empty for now. Use the search box at the top of the list if the list is long.
 
-![View toggle set to "By folder" h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
+<h2 class="step-h"><span class="step-n">3</span><span>Know the folder menu</span></h2>
 
-3. Click **New folder**.
-4. Type your name (e.g., `Aïcha N.` or `John S.`).
-5. Click **Save**.
+Hover your folder's row and click the **⋮** menu at its right end. You will use these later:
 
-![New folder dialog with a name typed in h:300](../../../resources/screenshots/m9b/new_folder_dialog.png)
+- **Move into** / **Move to folder…**: folders can sit inside other folders, for example a country folder with one sub-folder per person.
+- **Rename / change colour…**
+- **Set access for everything in this folder…**: who can view or edit all the products in it.
+- **Delete folder**
 
-You should see your new folder appear in the list. Click on it to open it — it's empty for now, but everything you create going forward can be saved here.
+![h:230](../../../resources/screenshots/platform_v2_en/04_folder_menu.png)
 
-![Folder list with your folder visible h:240](../../../resources/screenshots/m9b/folder_list.png)
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">2</span><span>Folder in the Visualizations tab</span></h2>
-
-Same idea, different tab — and the view toggle has four options here:
-
-1. Click the **Visualizations** tab.
-2. Switch the view to **By folder** (the toggle offers *By module*, *By folder*, *By metric*, and *Flat list*). **New folder** is only visible in *By folder*.
-3. Click **New folder**.
-4. Type your name (use the **same name** as in step 1 so your work is easy to find across tabs).
-5. Click **Save**.
+> **When you create a product,** the dialog asks for its **Folder**. Pick yours. A product in the wrong folder is moved with **Move to folder…** in its own ⋮ menu.
 
 ## Checkpoint
 
-You should now have:
-
-- One folder with your name in **Slide Decks**
-- One folder with the **same name** in **Visualizations**
-
-Both folders are empty. That's fine — the next activities will fill them.
-
-## Naming conventions
-
-> **Use the same name in both tabs.** Mismatched names (e.g., "Aïcha" in one, "A. Niang" in the other) makes it hard for the team to find your work later.
-
-- Avoid generic names like "my folder" or "test" — your country teammates will create folders too, and "test" will overlap with others.
-- Accents and spaces are fine in folder names.
+You should now have one folder with your name on the Products page, empty. The next activities fill it.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+## Naming conventions
+
+- Use your name, not "my folder" or "test". Teammates create folders too, and "test" will collide.
+- Accents and spaces are fine in folder names.
+- If the team already has a country folder, make yours inside it: create it, then **Move into** the country folder.
+
 ## What could go wrong
 
-- **"New folder" button doesn't appear** — you're most likely in the wrong view. Switch the view toggle to **By folder** (not *Flat list* / *By module* / *By metric*). If it still doesn't appear, you may not have permission — ask your facilitator to check your role.
-- **Folder doesn't save** — the network may have dropped. Refresh the page and try again. If the folder already exists with your name, it'll show in the list.
-- **You see other people's folders** — that's expected. The whole country team works in the same project, so everyone's personal folders are visible. Yours is just one row in that list.
+- **No "New folder" entry in the New menu.** Creating folders needs broader data access than viewing. Ask your facilitator to check your role.
+- **The folder does not save.** The network may have dropped. Refresh the page; if the folder already exists with your name, it is in the list.
+- **You see everyone's folders.** That is expected. The whole team shares one list; yours is one row in it.
 
 ## What's next
 
-Setup complete. From here, you'll start running real analyses — the next module covers **Creating visualizations**.
+Setup complete. The next module, **Visualizations**, starts by creating your first chart and saving it in this folder.

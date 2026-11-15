@@ -24,7 +24,7 @@ How to prompt the AI for a chart. Before saving, you check that the AI used the 
 
 <!--
 PRESENTER NOTES:
-- Activity 4 from the m9c facilitator guide. Hands-on, individual. Working tab: Visualisations.
+- Activity 4 from the m9c facilitator guide. Hands-on, individual. The AI panel works inside an open visualization, not from the Products page.
 - Live demo first: type one chart request and point out where to confirm the AI used the right indicator, period, and (critically) adjusted vs raw data.
 - I do / we do / you do scaffolding belongs in the handout.
   - I do: build a time-series of ANC1 monthly volumes (past 12 months) with the AI and save it.

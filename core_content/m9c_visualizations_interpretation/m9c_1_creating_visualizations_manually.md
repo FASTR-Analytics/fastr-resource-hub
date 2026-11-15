@@ -18,18 +18,18 @@ What filtering and disaggregation do to a chart, and when to use a preset instea
 - Build a time-series of ANC1 monthly volumes
 - Build the same for BCG
 - Build a chart for an indicator of your choice
-- Save each one to your own folder
+- Each one lands in your own folder (there is no Save: edits are stored live)
 
 </div>
 
 <!--
 PRESENTER NOTES:
-- Activity 2 from the m9c facilitator guide. Hands-on, individual. Working tab: Visualisations.
+- Activity 2 from the m9c facilitator guide. Hands-on, individual. Starts from the Products page (New → New visualization).
 - Run a 3-minute live demo on the left panel first: start with one indicator at national total, disaggregate by district, switch between Lines / Rows / Grid to show the same data in different shapes, then filter to two districts. Finish with the trap: disaggregate by district AND filter to a single district leaves nothing to compare.
 - I do / we do / you do scaffolding belongs in the handout, not on the slide.
   - I do: build a time-series of ANC1 monthly volumes (past 12 months) and save it.
   - We do: build the same for BCG (past 12 months) and save it.
-  - You do: build a chart for an indicator of your choice and save it to your own folder.
+  - You do: build a chart for an indicator of your choice in your own folder.
 - Key message: filter what you don't need, disaggregate what you want to compare. Line charts for trends, bar charts for comparing.
 - Watch for: confusing filter with disaggregate; reaching for Custom when a preset would do.
 -->

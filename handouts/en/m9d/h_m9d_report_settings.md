@@ -10,7 +10,7 @@ footer: "FASTR · Slide Decks"
 
 <div class="setup-breadcrumb"><span class="step done">Create deck</span> <span class="arrow">→</span> <span class="step done">Add manually</span> <span class="arrow">→</span> <span class="step done">Add with AI</span> <span class="arrow">→</span> <span class="step done">Edit & finalize</span> <span class="arrow">→</span> <span class="step done">Format text</span> <span class="arrow">→</span> <span class="step current">Deck settings</span></div>
 
-# Configure your slide deck settings
+# Deck settings: theme, logos, footer, sharing
 
 <p class="meta-line"><strong>Activity</strong> · <strong>Slide Decks</strong> · <strong>~10 min</strong></p>
 
@@ -19,25 +19,23 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ Your slide deck has at least one finalized content slide
-- ☐ Any custom logos you want to use are already uploaded to **Assets** (see Pre-step below)
+- ☐ Your deck has at least one finished content slide
+- ☐ Any custom logo you want is already in **Assets** (see Pre-step)
 
 <p class="sb-label">Why it matters</p>
 
-Deck Settings turn a working draft into something shareable. A clear name, a consistent style, the right logos in the right slots, and a global footer + page numbers across content slides. This is also where you rename the deck.
+These settings turn a working draft into something shareable: one consistent look, the right logos, a footer and page numbers on every content slide, a name people can find, and the right people able to open it.
 
 </aside>
 <div class="p1-main">
 
-## Pre-step — Custom logos live in Assets
+## Pre-step: custom logos live in Assets
 
-Custom logos do not live inside a deck. They live in **Assets**, a library at the **instance level** that every project on the instance can use.
+Custom logos are not uploaded inside a deck. They live in **Assets**, a library at the instance level that every deck and report can use.
 
-> **Uploading to Assets is admin-only.** If you are not an instance administrator, ask your facilitator or admin to upload your logo files (PNG or JPEG) before you open the deck Settings. Once they are in Assets, they show up under **Custom logos** in your deck.
+> **Uploading to Assets is for administrators.** If you are not one, ask your facilitator to upload your logo files (PNG or JPEG) before you start. Once they are in Assets they appear in the deck's logo picker.
 
-For reference, admins reach Assets from the main landing page (top-left, the FASTR logo or project breadcrumb) → top navigation → **Assets** → **Upload assets**. Assets is also where admins upload other shared files (CSV data, GeoJSON map files).
-
-![Instance-level Assets library with files listed (admin view) h:230](../../../resources/screenshots/m9d/report_settings_01_assets_page.png)
+Administrators reach it from the side navigation: **Assets → Upload assets**. Assets also holds other shared files (GeoJSON map files, CSV uploads).
 
 </div>
 </div>
@@ -46,63 +44,45 @@ For reference, admins reach Assets from the main landing page (top-left, the FAS
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Open Settings
+## Two menus do all of this
 
-With your deck open, click the **Settings** button in the deck toolbar (top right). A panel titled **Slide deck settings: <deck name>** opens. Save / Cancel are at the top of the panel.
+With the deck open, the **Deck** menu holds the look; the **File** menu holds the name, the folder, access and export.
 
-![Slide deck settings panel — Style section visible h:340](../../../resources/screenshots/m9d/report_settings_02_settings_panel.png)
+![h:220](../../../resources/screenshots/platform_v2_en/21b_deck_menu.png)
 
-## What's inside
+<h2 class="step-h"><span class="step-n">1</span><span>Deck → Theme</span></h2>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Rename the deck</span></h2>
+The theme sets colours, type and page furniture for every slide: Default (GFF green), Minimal, Corporate, Ministry, Executive, and others. It is the same picker you saw when the deck was created. Pick one and keep it for the whole deck.
 
-Renaming does not happen in this panel anymore. Close it, then use **File > Name and folder**, or click the deck's own title in the deck header. Use the convention your team agreed on (country, period, topic, your name).
+<h2 class="step-h"><span class="step-n">2</span><span>Deck → Logos</span></h2>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
+Three slots, each independent: the **cover**, the **content header**, the **content footer**. Each offers the built-in FASTR logos (coloured and white) and the custom logos uploaded to Assets. Per slide, the **Slide** menu can show or hide the cover logos.
 
-Three previews at the top show how the **Cover**, **Section**, and **Content** slides will look. Click any option below to update them live.
+<h2 class="step-h"><span class="step-n">3</span><span>Deck → Footer & page numbers</span></h2>
 
----
+A short footer line (country, period, author) shown on every content slide, and a switch for page numbers. Cover and section slides ignore both.
 
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-Sections inside Style:
-
-- **Color theme** — standard palette, FASTR-branded specials, custom picker.
-- **Font** — Inter, Fira Sans, Merriweather, Poppins.
-- **Layout** — Default, Modern, Corporate, Split.
-- **Cover & Section** — six variants (Bold, Muted, Light, Lighter, White, Pure).
-- **Content Pages** — ten-plus variants (Default, Bold, Header Only, Classic, Soft, Bordered, Minimal).
-- **Background detail** — None or a subtle pattern (Dots, Circles, Lines, Grid, Chevrons, Waves, Noise, Maze, World).
-
-Pick one combination and keep it across the deck.
+**Deck → All deck settings…** opens the full settings panel if you want everything on one screen.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Logos</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>File → Name and folder…</span></h2>
 
-Three logo slots, each independent:
+Rename the deck and move it to another folder. Clicking the deck title at the top left also renames it. Use the convention your team agreed on (country, period, topic, your name).
 
-- **Cover** — logo on the title slide
-- **Content header** — logo at the top of each content slide
-- **Content footer** — logo at the bottom of each content slide
+![h:220](../../../resources/screenshots/platform_v2_en/21_deck_file_menu.png)
 
-Each slot has two built-in defaults: **FASTR (colored)** and **FASTR (white)**. Click one to apply.
+<h2 class="step-h"><span class="step-n">5</span><span>File → Manage access…</span></h2>
 
-For custom logos, click **Add** under **Custom logos** and pick from the images you uploaded to Assets (see Pre-step).
+Who can open and edit this deck: **Owner**, **Editor** or **Viewer** per person. A deck is visible to the team by default; the row on the Products page shows **Restricted** when access has been limited. To set access for a whole folder at once, use the folder's **⋮ → Set access for everything in this folder…** on the Products page.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Footer & page numbers</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>File → Download… and Share…</span></h2>
 
-Two controls:
+**Download…** exports the deck (PDF, or PPTX with the charts as images). **Share…** gives a link. **Copy to deck…** copies selected slides into another deck.
 
-- **Set global footer text for all content slides** — type a short line (project name, period, author) that appears on every content slide. Cover and section slides ignore it.
-- **Show page numbers (except on cover and section slides)** — toggle on for printed or PDF decks.
-
-<h2 class="step-h"><span class="step-n">5</span><span>Save</span></h2>
-
-Click **Save** at the top right of the panel. Settings do not autosave the way slide content does — closing without Save loses your changes. Click **Cancel** to discard.
+Nothing to save: every setting applies immediately and is stored live.
 
 ---
 
@@ -110,22 +90,21 @@ Click **Save** at the top right of the panel. Settings do not autosave the way s
 
 ## Checkpoint
 
-When you close the panel, your deck should:
+Your deck should:
 
-- Have a clear name your team can find again
-- Use one consistent color theme + font + layout across all slides
+- Use one theme across all slides
 - Show the logos you intend in each slot
-- Carry the global footer and page numbers if you turned them on
+- Carry the footer and page numbers on content slides
+- Have a name your team can find, in your folder
+- Be open to the people who need it, and only them
 
 ## What could go wrong
 
-- **Custom logos slot is empty** — the file is not in Assets yet. Go back to Assets, upload, return.
-- **Logo is too big or too small** — open the file in Assets, replace with a properly sized version (logos are scaled to fit the slot, but very large files slow rendering).
-- **Footer text appears on the cover** — it shouldn't. If it does, check that you are on the latest platform version.
-- **Page numbers missing** — confirm the toggle is on, and that you are looking at a content slide (cover and section slides intentionally hide the page number).
-
-> 🔎 **Verify in your current UI**: the Settings panel layout may differ slightly between platform versions. The five sections above (rename, Style, Logos, Footer & page numbers, Save) apply across recent versions.
+- **Custom logo missing from the picker.** The file is not in Assets yet. Ask an administrator to upload it, then reopen the logo picker.
+- **Footer on the cover.** It should not be there; cover and section slides ignore the footer. If it appears, check the slide's type in the **Slide** menu.
+- **A colleague cannot open the deck.** They are not in **Manage access**, or the folder is restricted. Add them, or ask the folder owner.
+- **The deck shows old numbers.** It is attached to an older results package. On the Products page, **⋮ → Results package and scope…** moves it to the pinned one.
 
 ## What's next
 
-The deck is now ready to share. The next module covers exporting and disseminating it.
+The deck is ready to share. Download it, or send the link.

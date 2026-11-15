@@ -19,22 +19,22 @@ footer: "FASTR · Slide Decks"
 
 <p class="sb-label">Before you start</p>
 
-- ☐ You've created your slide deck (see *Create your first slide deck*)
+- ☐ You created your deck with one content slide (see *Create your first slide deck*)
 - ☐ You have a saved visualization you want to include
-- ☐ You're in the **Slide Decks** tab inside your deck
+- ☐ The deck is open on the content slide
 
 </aside>
 <div class="p1-main">
 
 ## What you'll do
 
-Add a saved visualization to a content slide in your deck. The path has a few non-obvious steps the first time — they get fast once you've done it once.
+Put a copy of a saved visualization on the content slide, then split the slide so the chart has text next to it. Three moves the first time; fast after that.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Add a content slide</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Select the block</span></h2>
 
-If the deck is empty, click **+ Add slide** at the top, then pick **Content slide** from the three options (Cover / Section / Content).
+Click the content slide in the list on the left, then click the empty block in the middle of the slide. A blue outline appears around it and a block toolbar appears above the slide: a **Text** dropdown, **Layout**, **Edit text**, **Background**.
 
-The slide appears in the deck preview.
+![h:260](../../../resources/screenshots/platform_v2_en/22c_block_selected.png)
 
 </div>
 </div>
@@ -43,50 +43,51 @@ The slide appears in the deck preview.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Open the slide editor</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Make it a visualization block</span></h2>
 
-Click on the slide preview. The full editor opens with **Header / Footer** and **Content** tabs in the left panel.
+Open the **Text** dropdown and choose **Visualization**. The block is now a visualization block and the toolbar offers **Insert visualization**.
 
-Switch to the **Content** tab. It says *"Click a block on the canvas to edit it"* — the canvas is empty, so you'll add a block first.
+![h:190](../../../resources/screenshots/platform_v2_en/23_block_type_menu.png)
 
-<h2 class="step-h"><span class="step-n">3</span><span>Add a block, set it to Visualization</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Insert the saved chart</span></h2>
 
-**Right-click** on the empty canvas. A small menu pops up — **Change to / Split / Add**.
+Click **Insert visualization**, then **Existing visualization…**. A picker lists the saved visualizations of the instance with a thumbnail each; the search box filters by name. Click yours, then **Insert a copy**. The chart appears on the slide.
 
-Hover **Add** and pick **Row below** (or any of the four directions). A new block appears with **Content type** set to **Text** by default.
+![h:210](../../../resources/screenshots/platform_v2_en/26_insert_existing_picker.png)
 
-In the left panel, switch the **Content type** dropdown from **Text** to **Visualization**. Two buttons now appear: **Select Visualization** and **Create New Visualization**.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Pick the saved chart</span></h2>
-
-Click **Select Visualization**. A picker opens — modules on the left, saved viz cards in the middle.
-
-Browse to **M3. Service utilization** (or wherever your chart lives), click the card you want, then click **Select** at the top right. The dialog closes and the chart appears on the slide.
-
-<h2 class="step-h"><span class="step-n">5</span><span>Save</span></h2>
-
-Click **Save and close** at the top left of the slide editor. You're back in the deck view, with your chart on slide 1.
+> **It is a copy.** Changes you make to the chart on the slide do not change the saved visualization, and later changes to the saved one do not reach the slide. To update the slide after you improved the original, select the block and use **Replace visualization → Replace with existing visualization**.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">4</span><span>Give the chart a text block beside it</span></h2>
+
+With the chart block selected, click **Layout**, then **Add**, then a column to the right. A new empty block appears next to the chart; its type is **Text**. Click into it and type a one-line takeaway. Drag the divider between the two blocks to give the chart more room.
+
+![h:230](../../../resources/screenshots/platform_v2_en/28_block_layout_menu.png)
+
+<h2 class="step-h"><span class="step-n">5</span><span>Title the slide</span></h2>
+
+Click the slide header ("New slide") and type a title that states the finding. Nothing to save: the deck saves live.
 
 ## Checkpoint
 
-Your slide should now show:
+Your content slide should show one of your saved charts, with a short text beside it and a title that says what the chart shows.
 
-- One of your saved visualizations
-- The slide title and date filled in
-- The deck is saved
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Tips
 
-> **Reuse, don't recreate.** If you've already built a visualization in the **Visualizations** tab, add the existing one — don't rebuild it inside the slide editor.
+> **Reuse, don't recreate.** If you already built the chart, insert the existing one. **New visualization…** in the same menu opens the metric and preset dialog to build one from scratch, on the slide.
 
-- If you can't find your chart in the picker: check the **Visualizations** tab and confirm it's saved in a folder you can see. Use the search box at the top of the picker.
-- If the chart looks cramped on the slide: that's expected at this stage. The *Edit and finalize* activity covers resizing.
-- The block's Content type can also be set to **Text** or **Image** if you want narrative or a static picture instead.
+- Can't find your chart in the picker: it is not a saved visualization yet, or it sits in a folder you cannot see. Type part of its name in the picker's search box.
+- The chart looks cramped: expected at this stage. *Edit and finalize* covers resizing and simplifying.
+- A block can also hold an **Image** (the same dropdown) for a logo or a photo.
+- **Split panel**, in the top bar, adds a side panel to the slide: a second area for text or a second chart.
 
 ## What's next
 
-Move on to **Add a visualization (with the AI Assistant)** — the same task, but as a single prompt.
+Move on to **Add a visualization (with the AI assistant)**: the same task, as one request in the AI panel.
