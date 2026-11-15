@@ -298,12 +298,12 @@ CONTENT = [
      "notes": "The platform is what makes the method sustainable. The method lives in the tool, not in the person who knows it.\n\nInterface in English, French and Portuguese. Nothing to install; a browser is enough.\n\nThe screenshot shows the disruptions and surpluses view on the demo site: the black line is the actual volume, the dashed line the expected volume, red shading a disruption and green a surplus."},
 
     {"type": "image_text", "title": "The AI assistant, in use",
-     "image": "screenshots/m9c/ai_first_response.png", "side": "left", "tw": 6.0, "pack": True, "blocks": [
+     "image": "screenshots/platform_v2_en/12c_ai_panel_anc1.png", "side": "left", "tw": 6.0, "pack": True, "blocks": [
         {"t": "Ask in plain language: \"Show me ANC1 visits over the last 12 months.\"", "space": 10},
-        {"t": "The assistant finds the metric, **reads the project's real values**, and answers with a chart and an interpretation.", "space": 10},
+        {"t": "The assistant finds the metric, **reads the real values**, updates the chart and explains what it shows.", "space": 10},
         {"t": "It never computes the numbers itself. Those come from the validated modules. It helps read, compare, and turn results into report text.", "space": 0},
      ],
-     "notes": "Screenshot from the demo site. The user asked for ANC1 visits over the last 12 months. The assistant returned the outlier-adjusted time series, the total, and an explanation of what \"outlier-adjusted\" means, then offered to drill down by region or compare with the unadjusted series.\n\nThe principle is \"read before answering\". It searches the project's data and methodology documentation, then responds. It does not guess, and it does not replace the modules: data quality scores, disruption flags and coverage estimates are computed by the validated statistical methods.\n\nWhy it matters for Zambia: many teams have more data than time to analyze it. The assistant lowers the skill barrier for asking the next question."},
+     "notes": "Screenshot from the demo site (platform 2.x). Inside a visualization, the user asked for ANC1 visits over the last 12 months. The assistant retrieved the metric, set the filter, level and period, updated the chart live, listed what it changed, described the line (range, peak, low), and flagged that it had not checked data quality.\n\nThe principle is \"read before answering\". It reads the data of the product that is open and the methodology documentation, then responds. It does not guess, and it does not replace the modules: data quality scores, disruption flags and coverage estimates are computed by the validated statistical methods.\n\nWhy it matters for Zambia: many teams have more data than time to analyze it. The assistant lowers the skill barrier for asking the next question."},
 
     {"type": "diagram", "title": "A result is a signal, not an answer",
      "intro": "FASTR says where to look. People in the health system say why, and what to do. Each quarter's data then shows whether it worked.",
