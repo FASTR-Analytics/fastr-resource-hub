@@ -8,7 +8,7 @@ footer: "FASTR · Getting Started"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Log in</span> <span class="arrow">→</span> <span class="step">Your folder</span></div>
+<div class="setup-breadcrumb"><span class="step current">Log in</span> <span class="arrow">→</span> <span class="step">Your folder</span> <span class="arrow">→</span> <span class="step">Explore</span></div>
 
 # Log in to the platform
 

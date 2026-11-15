@@ -8,7 +8,7 @@ footer: "FASTR · Primeiros passos"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step current">Iniciar sessão</span> <span class="arrow">→</span> <span class="step">A sua pasta</span></div>
+<div class="setup-breadcrumb"><span class="step current">Iniciar sessão</span> <span class="arrow">→</span> <span class="step">A sua pasta</span> <span class="arrow">→</span> <span class="step">Explorar</span></div>
 
 # Iniciar sessão na plataforma
 
@@ -21,22 +21,20 @@ footer: "FASTR · Primeiros passos"
 
 - ☐ Assistiu à demonstração da plataforma feita pelo facilitador
 - ☐ Tem o **URL da plataforma do seu país** (o facilitador irá partilhá-lo)
-- ☐ Tem um endereço de email funcional que pode consultar durante a atividade (vai precisar de o verificar)
+- ☐ Tem um endereço de email funcional que pode consultar durante a atividade
 
 </aside>
 <div class="p1-main">
 
 ## O que vai fazer
 
-Criar uma conta FASTR se for novo, iniciar sessão e confirmar que está no projeto do seu país. Esta é a sua primeira vez na plataforma — ainda sem trabalho com dados.
+Criar uma conta FASTR se for novo, iniciar sessão e aprender a orientar-se no ecrã inicial. Ainda sem trabalho com dados.
 
 <h2 class="step-h"><span class="step-n">1</span><span>Abrir o URL da plataforma</span></h2>
 
-Vá ao URL da plataforma do seu país num navegador (o facilitador irá partilhá-lo; o formato é geralmente `https://<país>.fastr-analytics.org`).
+Vá ao URL da plataforma do seu país num navegador (o formato é geralmente `https://<país>.fastr-analytics.org`). Chega ao ecrã de início de sessão.
 
-Deverá chegar a um ecrã de início de sessão.
-
-![h:180](../../../resources/screenshots/01_login_page.png)
+![h:200](../../../resources/screenshots/platform_v2_en/00_sign_in.png)
 
 </div>
 </div>
@@ -47,44 +45,46 @@ Deverá chegar a um ecrã de início de sessão.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Registar-se ou iniciar sessão</span></h2>
 
-- Se for a sua **primeira vez**: clique em **Sign up**, introduza o seu email + uma palavra-passe, e crie a conta.
-- Se já tem conta: clique em **Sign in** e introduza as suas credenciais.
+- **Primeira vez:** clique em **Registar-se** abaixo do formulário, introduza o seu **Endereço de e-mail** e uma **Palavra-passe**, e crie a conta. Procure na sua caixa de entrada o email de verificação e clique na ligação que ele contém. Se não chegar nada em dois minutos, verifique a pasta de spam.
+- **Já tem conta:** escreva o seu endereço de e-mail e a palavra-passe e clique em **Continuar**.
 
-![h:180](../../../resources/screenshots/02_sign_up.png)
+<h2 class="step-h"><span class="step-n">3</span><span>Conhecer o ecrã inicial</span></h2>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Verificar o seu email</span></h2>
+Depois de iniciar sessão, chega a **Produtos**: uma lista única de tudo o que as pessoas desta instância criaram, organizada em **pastas**. Cada linha é uma **Apresentação**, um **Relatório** ou uma **Visualização**, com o pacote de resultados e o âmbito de onde lê os dados, e a data da última atualização.
 
-Verifique a sua caixa de entrada à procura de um email de verificação do FASTR. Clique na ligação dentro dele para confirmar a sua conta.
-
-> Se não o vir em 2 minutos, verifique a pasta de spam.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Iniciar sessão</span></h2>
-
-Volte à plataforma e inicie sessão com o seu email verificado + palavra-passe.
+![h:300](../../../resources/screenshots/platform_v2_en/01_home_products.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Encontrar o seu projeto</span></h2>
+A **navegação lateral** à esquerda é a mesma em todos os ecrãs. Clique na pequena seta no fundo para mostrar as etiquetas:
 
-Após iniciar sessão, chega ao separador **Projects**. Verá os projetos a que tem acesso:
+| Entrada | Para que serve |
+|---|---|
+| **Produtos** | As suas apresentações, relatórios e visualizações, em pastas. É onde vai passar a maior parte do tempo. |
+| **Explorar** | Tabelas, gráficos e mapas já prontos para cada módulo de análise, sem ter de criar um produto. Útil para uma consulta rápida. |
+| **Resultados** | Os pacotes de resultados: as análises calculadas de onde os produtos leem os dados. |
+| **Âmbitos** | Vistas nomeadas dos dados (uma área, um período) às quais os produtos e os utilizadores podem ser limitados. |
+| **Dados**, **Recursos**, **Utilizadores** | Administração: importações, indicadores, ficheiros partilhados, contas. Pode não ver todas estas entradas. |
 
-- **Se for administrador da instância**, todos os projetos da instância estão listados.
-- **Caso contrário**, só vê os projetos a que um administrador lhe concedeu acesso. Se o projeto do seu país estiver em falta, peça ao facilitador (ou administrador da instância) que conceda acesso.
+A barra superior tem a **Ajuda** (visitas guiadas, documentação, comentários), a troca de idioma, as notificações e a **sua conta**. O botão **IA** fica no canto inferior direito de todos os ecrãs.
 
-Clique no projeto do seu país para entrar. O projeto abre com uma **barra lateral esquerda de ícones** — **Relatórios**, **Apresentações**, **Painéis**, **Visualizações**, **Métricas** e **Pacote de resultados**. Passe o rato sobre um ícone para ver o nome; o botão **IA** fica no canto inferior direito.
+<h2 class="step-h"><span class="step-n">4</span><span>Abrir um produto</span></h2>
 
-![Separador Projects após o início de sessão h:280](../../../resources/screenshots/m9b/projects_tab.png)
+Clique numa pasta para a expandir, e depois clique em qualquer produto dentro dela. Abre no seu próprio editor; a seta de retorno no canto superior esquerdo leva-o de volta à lista. Abra também **Explorar** uma vez, para ver o que existe lá.
+
+> **Já não existem projetos.** Se usou o FASTR anteriormente, esta é a principal mudança: tudo o que pertence ao país está numa só lista, e as pastas substituem os projetos. Cada apresentação ou relatório está ligado a um pacote de resultados e a um âmbito, indicados na sua linha.
 
 ## Ponto de verificação
 
-Depois de entrar no seu projeto, deverá ver:
+Deverá conseguir:
 
-- A barra lateral esquerda de ícones do projeto (Relatórios, Apresentações, Painéis, Visualizações, Métricas, Pacote de resultados)
-- O nome do projeto no cabeçalho (ex.: «País X — Projeto de workshop»)
+- Ver a lista **Produtos** com pelo menos uma pasta
+- Nomear as entradas da navegação lateral
+- Abrir um produto e voltar à lista
 
-Se sim, está dentro. Passe à atividade seguinte.
+Se sim, passe à atividade seguinte.
 
 ---
 
@@ -92,13 +92,12 @@ Se sim, está dentro. Passe à atividade seguinte.
 
 ## O que pode correr mal
 
-- **«Conta não aprovada»** — a sua conta precisa de ser adicionada ao projeto do país por um administrador. Peça ao facilitador para o adicionar.
-- **O email de verificação nunca chega** — verifique o spam. Se ainda nada após 5 min, peça ao facilitador para o reenviar.
-- **«Email ou palavra-passe inválidos»** após o registo — confira o email que introduziu. Os erros de escrita são comuns. Normalmente pode pedir uma reposição da palavra-passe.
-- **Nenhum projeto visível no separador Projects (ou o projeto do seu país está em falta)** — não é administrador da instância e ainda não lhe foi concedido acesso ao projeto. Peça ao facilitador ou administrador da instância para lhe conceder acesso ao projeto do seu país.
-
-> 🔎 **Verifique na sua interface atual**: os ecrãs de início de sessão + registo podem ter evoluído; as etiquetas dos campos podem diferir das capturas de ecrã. O fluxo é o mesmo.
+- **«Conta não aprovada»** ou uma lista de Produtos vazia. A sua conta tem de ser aprovada por um administrador da instância antes de ver qualquer coisa. Peça ao facilitador.
+- **O email de verificação nunca chega.** Verifique o spam. Depois de cinco minutos, peça ao facilitador para o reenviar.
+- **«Email ou palavra-passe inválidos» após o registo.** Confira o email que introduziu. Os erros de escrita são comuns. Use a ligação de reposição da palavra-passe.
+- **A navegação lateral mostra apenas ícones.** É o estado recolhido. Clique na seta no fundo da barra para a expandir, ou passe o rato sobre um ícone para ler a sua etiqueta.
+- **A interface está no idioma errado.** Clique no botão de idioma na barra superior (EN ou FR) e escolha.
 
 ## A seguir
 
-Avance para **Criar a sua pasta de utilizador** — configure pastas pessoais nos separadores Slide Decks e Visualizations para que o seu trabalho fique organizado.
+Avance para **Criar uma pasta para o seu trabalho**: uma pasta com o seu nome na página Produtos, para que a equipa encontre aquilo que criar.

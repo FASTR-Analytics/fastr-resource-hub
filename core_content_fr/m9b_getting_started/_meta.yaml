@@ -6,4 +6,8 @@ slides:
 - file: m9b_2_results_packages_concept.md
   order: 2.0
   variant: full
-  title: D'où viennent les chiffres d'un projet
+  title: D'où viennent les chiffres d'un produit
+- file: m9b_3_explore_activity.md
+  order: 3.0
+  variant: full
+  title: 'Activité : jeter un premier regard avec Explorer'

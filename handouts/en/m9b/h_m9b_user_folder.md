@@ -8,7 +8,7 @@ footer: "FASTR · Getting Started"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Log in</span> <span class="arrow">→</span> <span class="step current">Your folder</span></div>
+<div class="setup-breadcrumb"><span class="step done">Log in</span> <span class="arrow">→</span> <span class="step current">Your folder</span> <span class="arrow">→</span> <span class="step">Explore</span></div>
 
 # Make a folder for your work
 
@@ -87,4 +87,4 @@ You should now have one folder with your name on the Products page, empty. The n
 
 ## What's next
 
-Setup complete. The next module, **Visualizations**, starts by creating your first chart and saving it in this folder.
+Move on to **Take a first look with Explore**: the computed analyses, as tables and charts, with nothing to create yet.

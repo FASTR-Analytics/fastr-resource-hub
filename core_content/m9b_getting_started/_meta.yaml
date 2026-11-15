@@ -6,4 +6,8 @@ slides:
 - file: m9b_2_results_packages_concept.md
   order: 2.0
   variant: full
-  title: Where a project's numbers come from
+  title: Where a product's numbers come from
+- file: m9b_3_explore_activity.md
+  order: 3.0
+  variant: full
+  title: 'Activity: Take a first look with Explore'

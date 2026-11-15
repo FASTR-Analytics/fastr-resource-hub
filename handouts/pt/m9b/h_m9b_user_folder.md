@@ -8,9 +8,9 @@ footer: "FASTR · Primeiros passos"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Iniciar sessão</span> <span class="arrow">→</span> <span class="step current">A sua pasta</span></div>
+<div class="setup-breadcrumb"><span class="step done">Iniciar sessão</span> <span class="arrow">→</span> <span class="step current">A sua pasta</span> <span class="arrow">→</span> <span class="step">Explorar</span></div>
 
-# Criar a sua pasta de utilizador
+# Criar uma pasta para o seu trabalho
 
 <p class="meta-line"><strong>Atividade</strong> · <strong>Primeiros passos</strong> · <strong>~5 min</strong></p>
 
@@ -19,19 +19,27 @@ footer: "FASTR · Primeiros passos"
 
 <p class="sb-label">Antes de começar</p>
 
-- ☐ Concluiu **Iniciar sessão na plataforma** (consegue ver os separadores de navegação principais)
-- ☐ Está dentro do projeto do seu país
+- ☐ Concluiu **Iniciar sessão na plataforma**
+- ☐ Está na página **Produtos**
 
 <p class="sb-label">Porque é importante</p>
 
-O projeto do país enche-se depressa. Uma dúzia de pessoas a guardar gráficos e apresentações num espaço partilhado sem sistema significa que ninguém consegue encontrar nada mais tarde. **Uma pasta por pessoa** é a regra mais simples que funciona.
+A equipa de país inteira trabalha na mesma lista de Produtos. Uma dúzia de pessoas a guardar gráficos e apresentações sem sistema significa que ninguém consegue encontrar nada mais tarde. **Uma pasta por pessoa** é a regra mais simples que funciona.
 
 </aside>
 <div class="p1-main">
 
 ## O que vai fazer
 
-Criar duas pastas pessoais — uma em **Slide Decks**, outra em **Visualizations** — para manter o seu trabalho organizado. Tudo o que guardar aqui ficará marcado com o seu nome para que a equipa veja quem construiu o quê.
+Criar uma pasta com o seu nome na página Produtos. Todas as apresentações, relatórios ou visualizações que criar durante o workshop vão para dentro dela.
+
+<h2 class="step-h"><span class="step-n">1</span><span>Criar a pasta</span></h2>
+
+1. Na página **Produtos**, clique em **Novo** (canto superior direito) e depois em **Nova pasta**.
+2. Escreva o seu nome no campo **Nome da pasta** (por exemplo `Aïcha N.` ou `John S.`). Escolha uma **Cor** se quiser.
+3. Clique em **Guardar**.
+
+![h:260](../../../resources/screenshots/platform_v2_en/05_new_folder_dialog.png)
 
 </div>
 </div>
@@ -40,65 +48,43 @@ Criar duas pastas pessoais — uma em **Slide Decks**, outra em **Visualizations
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Pasta no separador Slide Decks</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Encontrá-la na lista</span></h2>
 
-1. Clique no separador **Slide Decks** na navegação superior.
-2. Mude a vista para **By folder** (o seletor no topo — a outra opção é *Simple list*). Só verá **+ New folder** quando *By folder* estiver selecionado.
+A sua pasta aparece na lista com o tipo **Pasta**. Clique nela para a expandir: por agora está vazia. Use a caixa de pesquisa no topo da lista se a lista for longa.
 
-![Seletor de vista definido para «By folder» h:34](../../../resources/screenshots/m9b/view_toggle_by_folder.png)
+<h2 class="step-h"><span class="step-n">3</span><span>Conhecer o menu da pasta</span></h2>
 
-3. Clique em **+ New folder**.
-4. Escreva o seu nome (ex.: `Aïcha N.` ou `John S.`).
-5. Clique em **Save**.
+Passe o rato sobre a linha da sua pasta e clique no menu **⋮** no extremo direito. Vai usar estas opções mais tarde:
 
-![Caixa de diálogo de nova pasta com um nome escrito h:300](../../../resources/screenshots/m9b/new_folder_dialog.png)
+- **Mover para dentro** / **Mover para a pasta…**: as pastas podem ficar dentro de outras pastas, por exemplo uma pasta de país com uma subpasta por pessoa.
+- **Mudar o nome / alterar a cor…**
+- **Definir o acesso a tudo o que está nesta pasta…**: quem pode ver ou editar todos os produtos que ela contém.
+- **Eliminar pasta**
 
-Deverá ver a sua nova pasta aparecer na lista. Clique nela para a abrir — está vazia por agora, mas tudo o que criar a partir de agora pode ser guardado aqui.
+![h:230](../../../resources/screenshots/platform_v2_en/04_folder_menu.png)
 
-![Lista de pastas com a sua pasta visível h:240](../../../resources/screenshots/m9b/folder_list.png)
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">2</span><span>Pasta no separador Visualizations</span></h2>
-
-Mesma ideia, separador diferente — e aqui o seletor de vista tem quatro opções:
-
-1. Clique no separador **Visualizations**.
-2. Mude a vista para **By folder** (o seletor oferece *By module*, *By folder*, *By metric* e *Simple list*). **+ New folder** só é visível em *By folder*.
-3. Clique em **+ New folder**.
-4. Escreva o seu nome (use o **mesmo nome** do passo 1 para o seu trabalho ser fácil de encontrar entre separadores).
-5. Clique em **Save**.
+> **Quando cria um produto,** a caixa de diálogo pede a **Pasta**. Escolha a sua. Um produto que ficou na pasta errada move-se com **Mover para a pasta…** no seu próprio menu ⋮.
 
 ## Ponto de verificação
 
-Deverá agora ter:
-
-- Uma pasta com o seu nome em **Slide Decks**
-- Uma pasta com o **mesmo nome** em **Visualizations**
-
-Ambas as pastas estão vazias. Não há problema — as próximas atividades vão preenchê-las.
-
-## Convenções de nomes
-
-> **Use o mesmo nome em ambos os separadores.** Nomes diferentes (ex.: «Aïcha» num, «A. Niang» no outro) dificultam à equipa encontrar o seu trabalho mais tarde.
-
-- Evite nomes genéricos como «a minha pasta» ou «teste» — os seus colegas de país também criarão pastas, e «teste» sobrepor-se-á a outros.
-- Acentos e espaços são aceites nos nomes das pastas.
+Deverá agora ter uma pasta com o seu nome na página Produtos, vazia. As próximas atividades vão preenchê-la.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
+## Convenções de nomes
+
+- Use o seu nome, não «a minha pasta» nem «teste». Os seus colegas também criam pastas, e «teste» vai sobrepor-se a outras.
+- Acentos e espaços são aceites nos nomes das pastas.
+- Se a equipa já tiver uma pasta de país, crie a sua dentro dela: crie-a e depois use **Mover para dentro** da pasta do país.
+
 ## O que pode correr mal
 
-- **O botão «+ New folder» não aparece** — está muito provavelmente na vista errada. Mude o seletor de vista para **By folder** (não *Simple list* / *By module* / *By metric*). Se ainda assim não aparecer, pode não ter permissão — peça ao facilitador para verificar o seu papel.
-- **A pasta não guarda** — a rede pode ter caído. Atualize a página e tente de novo. Se a pasta já existir com o seu nome, aparecerá na lista.
-- **Vê as pastas de outras pessoas** — é esperado. A equipa de país inteira trabalha no mesmo projeto, por isso as pastas pessoais de todos são visíveis. A sua é apenas uma linha nessa lista.
-
-> 🔎 **Verifique na sua interface atual**: os nomes dos separadores + a localização do botão «+ New folder» podem diferir de capturas de ecrã mais antigas. O fluxo é o mesmo.
+- **Não existe a entrada «Nova pasta» no menu Novo.** Criar pastas exige um acesso aos dados mais amplo do que apenas consultar. Peça ao facilitador para verificar o seu papel.
+- **A pasta não guarda.** A rede pode ter caído. Atualize a página; se a pasta já existir com o seu nome, está na lista.
+- **Vê as pastas de todas as pessoas.** É esperado. A equipa inteira partilha uma só lista; a sua é apenas uma linha nela.
 
 ## A seguir
 
-Configuração concluída. A partir daqui, vai começar a executar análises reais — o próximo módulo cobre **Criar visualizações**.
+Avance para **Dar uma primeira olhada com o Explorar**: as análises já calculadas, em tabelas e gráficos, sem nada para criar por agora.

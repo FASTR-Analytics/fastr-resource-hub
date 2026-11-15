@@ -10,13 +10,13 @@ footer: "FASTR · Getting Started · Facilitator"
 
 # Facilitator guide — Getting Started
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong> · <strong>2 activities · ~15 min + demo</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Getting Started</strong> · <strong>3 activities · ~30 min + demo</strong></p>
 
 ## Purpose
 
-Getting Started puts every participant onto the platform and set up to keep their work organized. It is short, one facilitator-led demo and two quick activities, but it is a gate: a participant who is not signed in, with a folder of their own, will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
+Getting Started puts every participant onto the platform and set up to keep their work organized. It is short, one facilitator-led demo and three quick activities, but it is a gate: a participant who is not signed in, with a folder of their own, will be stuck for the rest of the workshop. The obstacles here are accounts and access, not skills.
 
-By the end, every participant should be signed in, able to name the side navigation, and have one folder with their name on the Products page.
+By the end, every participant should be signed in, have one folder with their name on the Products page, and have read a table and a chart in Explore.
 
 ## Session at a glance
 
@@ -25,6 +25,7 @@ By the end, every participant should be signed in, able to name the side navigat
 | — | FASTR platform demo | ~10 min | Facilitator-led (appendix) |
 | 1 | Log in to the platform | ~10 min | Hands-on, individual |
 | 2 | Make a folder for your work | ~5 min | Hands-on, individual |
+| 3 | Take a first look with Explore | ~15 min | Hands-on, pairs |
 
 ---
 
@@ -36,9 +37,9 @@ By the end, every participant should be signed in, able to name the side navigat
 
 **How to demonstrate.** Start with the platform demo: a short tour of the home screen before anyone touches a keyboard. Keep it high level; setup is a later session. Then let participants sign in and make their folder from the handouts.
 
-**Grouping.** Both activities are individual. Pair participants for help if someone is stuck on access.
+**Grouping.** Activities 1 and 2 are individual; pair participants for help if someone is stuck on access. Activity 3 is done in pairs so that the three numbers get compared.
 
-**Pacing.** Do not declare the module finished early. Check that every participant has cleared the gate (signed in, folder made) before moving on. An unresolved access problem only gets more expensive later.
+**Pacing.** Do not declare the module finished early. Check that every participant has cleared the gate (signed in, folder made) before Explore, and use Explore to absorb the time while slow accounts are fixed. An unresolved access problem only gets more expensive later.
 
 **The message to carry through.** One list for the whole country, folders to keep it readable, one folder per person. That habit is what keeps a shared Products page navigable after a week of work.
 
@@ -79,9 +80,28 @@ By the end, every participant should be signed in, able to name the side navigat
 - **New folder** missing from the menu: the account lacks the data access needed to manage folders. Fix the role on the Users page.
 - Folders created at the top level when you wanted them inside a country folder: use **Move into**.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 3. Take a first look with Explore · ~15 min · hands-on, pairs
+
+**What happens.** Participants open **Explore**, read Antenatal care 1 in the **Table** (level below national, last 12 months), watch it **Over time**, try the **Map**, switch the module to **Coverage estimates**, and write down three numbers to compare with a neighbour.
+
+**Demonstrate.** Name the four top controls on screen (HMIS/HFA, package, scope, module and metric), switch Table → Over time → Map once, and open the module dropdown to show **Supporting analyses**.
+
+**Say something like.** *"Nothing here is saved and nothing can be broken. Explore is for looking. When a view answers your question, that is the chart you will build tomorrow."*
+
+**What a good result looks like.** Pairs agreeing on the same three numbers, or able to say which filter made them differ.
+
+**Watch for.**
+- Numbers that differ between neighbours: package, scope, level or period. Make them find which.
+- "The map is broken": no boundary files on the instance. Say so up front.
+- Module names in English in the French interface: a known display issue.
+
 ## Wrapping up
 
-Every participant should leave signed in, with their own folder. Anyone who is not will be blocked for the rest of the workshop. Check before moving on.
+Every participant should leave signed in, with their own folder, and with one question from Explore they want to answer with a chart. Anyone who is not will be blocked for the rest of the workshop. Check before moving on.
 
 ---
 
@@ -93,7 +113,7 @@ A short orientation of the FASTR Analytics Platform, enough that participants re
 
 ### Setup checklist
 
-- ☐ Browser signed in to your country instance, in the participants' language
+- ☐ Browser signed in to your country instance, in the participants' language, Explore opened once so it loads fast
 - ☐ A folder with a finished deck and a saved visualization in it, ready to open
 - ☐ Side navigation expanded (click the arrow at the bottom of the rail)
 - ☐ Screen-share working if remote
@@ -137,6 +157,10 @@ A short orientation of the FASTR Analytics Platform, enough that participants re
 ![Visualization editor with the AI panel h:280](../../../resources/screenshots/platform_v2_en/11_visualization_editor.png)
 
 - **Watch for:** Do not run a prompt here. Keep curiosity for the AI session.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Common questions
 
