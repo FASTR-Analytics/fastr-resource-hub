@@ -10,7 +10,7 @@ footer: "FASTR · Instance Setup · Facilitator"
 
 # Facilitator guide — Instance Setup
 
-<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong> · <strong>5 activities · ~90 min</strong></p>
+<p class="meta-line"><strong>Facilitator guide</strong> · <strong>Instance Setup</strong> · <strong>6 activities · ~105 min</strong></p>
 
 ## Purpose
 
@@ -27,6 +27,7 @@ The five activities run in a **strict order**: each step depends on the one befo
 | 3 | Add indicators | ~30 min | Guided, whole room |
 | 4 | Import HMIS data | ~25 min | Guided, whole room |
 | 5 | Verify and explore your setup | ~10 min | Guided, whole room |
+| 6 | Make a scope and attach it to a product | ~15 min | Guided, whole room |
 
 ---
 
@@ -124,6 +125,25 @@ The five activities run in a **strict order**: each step depends on the one befo
 **Watch for.**
 - Flat or zero values — usually the period range does not overlap the DHIS2 data.
 - A mismatched spot-check — almost always an indicator missing or on the wrong DHIS2 code from step 3. Send the team back there rather than continuing.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 6. Make a scope and attach it to a product · ~15 min · whole room
+
+**What happens.** Once a results package exists, participants create one scope on the **Scopes** page (one region, a range of years), attach it to a test product through **⋮ → Results package and scope…**, and check the same view in Explore.
+
+**Demonstrate.** Create the scope on screen, then change a deck's scope and open it so the room sees every figure refilter. Put the deck back on **All data** afterwards.
+
+**Say something like.** *"A project used to carry its restriction. Now the restriction is a scope with a name, in one list the whole team shares. Make a few good ones; everyone filters the same way."*
+
+**What a good result looks like.** One scope per team with a label that says what it contains, and a product row showing it.
+
+**Watch for.**
+- No **New scope** button: the account is restricted. Only administrators and users holding all scopes can create scopes.
+- Labels like "test" or a person's name. Push for content: region and years.
+- Scope confused with access. A scope hides data; **Manage access** hides the product.
 
 ## Closing the session
 

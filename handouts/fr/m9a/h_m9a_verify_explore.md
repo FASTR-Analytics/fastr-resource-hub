@@ -83,4 +83,4 @@ Vous êtes prêt à lancer les modules d'analyse — qualité des données, util
 
 ## Étape suivante
 
-Installation terminée. Un administrateur peut maintenant **générer un paquet de résultats** (Résultats → Générer un nouveau paquet) pour que les projets utilisent les données. Passez ensuite à **Premiers pas** (M9b) pour apprendre l'interface en profondeur.
+Les données sont là. Un administrateur peut maintenant **générer un paquet de résultats** (Résultats → Générer un nouveau paquet) pour que les produits les utilisent. Passez ensuite à **Créer une portée et la rattacher à un produit**, le dernier document de ce module.

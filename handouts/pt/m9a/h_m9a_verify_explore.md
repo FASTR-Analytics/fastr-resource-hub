@@ -85,4 +85,4 @@ Está pronto para correr os módulos de análise — qualidade dos dados, utiliz
 
 ## A seguir
 
-Configuração concluída. Um administrador pode agora **gerar um pacote de resultados** (Resultados → Gerar novo pacote de resultados) para que os projetos usem os dados. Depois avance para **Getting Started** (M9b) para conhecer a interface da plataforma em profundidade.
+Os dados estão carregados. Um administrador pode agora **gerar um pacote de resultados** (Resultados → Gerar novo pacote de resultados) para que os produtos os usem. Depois passe a **Criar um âmbito e associá-lo a um produto**, a última ficha deste módulo.

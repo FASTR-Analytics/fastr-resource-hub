@@ -26,6 +26,7 @@ m9a:
 - h_m9a_indicators.md          # 2. Indicators
 - h_m9a_import_data.md         # 3. Data
 - h_m9a_verify_explore.md      # 4. Verify
+- h_m9a_scopes.md              # 5. Scopes
 
 m9b:
 - h_m9b_facilitator_guide.md   # Facilitator guide — run-of-show (includes platform demo appendix)

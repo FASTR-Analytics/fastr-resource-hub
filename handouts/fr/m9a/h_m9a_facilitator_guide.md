@@ -10,7 +10,7 @@ footer: "FASTR · Configuration de l'instance · Facilitateur"
 
 # Guide du facilitateur — Configuration de l'instance
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Configuration de l'instance</strong> · <strong>5 activités · ~90 min</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Configuration de l'instance</strong> · <strong>6 activités · ~105 min</strong></p>
 
 ## Objectif
 
@@ -27,6 +27,7 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 | 3 | Ajouter les indicateurs | ~30 min | Guidé, toute la salle |
 | 4 | Importer les données SIS | ~25 min | Guidé, toute la salle |
 | 5 | Vérifier et explorer votre configuration | ~10 min | Guidé, toute la salle |
+| 6 | Créer une portée et la rattacher à un produit | ~15 min | Guidé, toute la salle |
 
 ---
 
@@ -124,6 +125,25 @@ Les cinq activités se déroulent dans un **ordre strict** : chaque étape dépe
 **À surveiller.**
 - Des valeurs plates ou nulles — généralement la plage de période ne recouvre pas les données DHIS2.
 - Un contrôle qui ne correspond pas — presque toujours un indicateur manquant ou sur le mauvais code DHIS2 à l'étape 3. Renvoyez l'équipe là plutôt que de continuer.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 6. Créer une portée et la rattacher à un produit · ~15 min · toute la salle
+
+**Le déroulé.** Une fois qu'un paquet de résultats existe, les participants créent une portée sur la page **Portées** (une région, une plage d'années), la rattachent à un produit de test via **⋮ → Paquet de résultats et portée…**, et vérifient la même vue dans Explorer.
+
+**Démontrer.** Créez la portée à l'écran, puis changez la portée d'une présentation et ouvrez-la pour que la salle voie chaque figure se refiltrer. Remettez ensuite la présentation sur **Toutes les données**.
+
+**Formulez-le ainsi.** *« Un projet portait sa restriction. Maintenant la restriction est une portée avec un nom, dans une seule liste partagée par toute l'équipe. Faites-en quelques bonnes ; tout le monde filtre de la même façon. »*
+
+**À quoi ressemble un bon résultat.** Une portée par équipe, avec un libellé qui dit ce qu'elle contient, et une ligne de produit qui l'affiche.
+
+**À surveiller.**
+- Pas de bouton **Nouvelle portée** : le compte est restreint. Seuls les administrateurs et les utilisateurs ayant toutes les portées peuvent en créer.
+- Des libellés comme « test » ou le nom d'une personne. Exigez le contenu : région et années.
+- Portée confondue avec accès. Une portée cache des données ; **Gérer l'accès** cache le produit.
 
 ## Pour conclure
 

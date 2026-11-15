@@ -10,7 +10,7 @@ footer: "FASTR · Configuração da instância · Facilitador"
 
 # Guia do facilitador — Configuração da instância
 
-<p class="meta-line"><strong>Guia do facilitador</strong> · <strong>Configuração da instância</strong> · <strong>5 atividades · ~90 min</strong></p>
+<p class="meta-line"><strong>Guia do facilitador</strong> · <strong>Configuração da instância</strong> · <strong>6 atividades · ~105 min</strong></p>
 
 ## Objetivo
 
@@ -27,6 +27,7 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 | 3 | Adicionar indicadores | ~30 min | Guiada, sala toda |
 | 4 | Importar dados do HMIS | ~25 min | Guiada, sala toda |
 | 5 | Verificar e explorar a sua configuração | ~10 min | Guiada, sala toda |
+| 6 | Criar um âmbito e associá-lo a um produto | ~15 min | Guiada, sala toda |
 
 ---
 
@@ -124,6 +125,25 @@ As cinco atividades correm por uma **ordem estrita**: cada passo depende do ante
 **Atenção a.**
 - Valores planos ou a zero — normalmente o intervalo de períodos não coincide com os dados do DHIS2.
 - Uma verificação que não bate certo — quase sempre um indicador em falta ou com o código DHIS2 errado do passo 3. Reencaminhe a equipa para lá em vez de continuar.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+### 6. Criar um âmbito e associá-lo a um produto · ~15 min · sala toda
+
+**O que acontece.** Assim que existe um pacote de resultados, os participantes criam um âmbito na página **Âmbitos** (uma região, um intervalo de anos), associam-no a um produto de teste através de **⋮ → Pacote de resultados e âmbito…** e verificam a mesma vista no Explorar.
+
+**Demonstrar.** Crie o âmbito no ecrã, depois mude o âmbito de uma apresentação e abra-a para a sala ver todas as figuras voltarem a filtrar-se. No fim, volte a pôr a apresentação em **Todos os dados**.
+
+**Diga algo como.** *«Um projeto transportava a sua restrição. Agora a restrição é um âmbito com nome, numa única lista partilhada por toda a equipa. Façam alguns bons; toda a gente filtra da mesma maneira.»*
+
+**Como é um bom resultado.** Um âmbito por equipa, com um rótulo que diz o que contém, e uma linha de produto que o mostra.
+
+**Atenção a.**
+- Sem botão **Novo âmbito**: a conta é restrita. Só administradores e utilizadores com todos os âmbitos podem criar âmbitos.
+- Rótulos como «teste» ou o nome de uma pessoa. Insista no conteúdo: região e anos.
+- Âmbito confundido com acesso. Um âmbito esconde dados; **Gerir acesso** esconde o produto.
 
 ## Para encerrar
 

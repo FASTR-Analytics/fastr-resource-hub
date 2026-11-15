@@ -83,4 +83,4 @@ You're ready to run analysis modules — data quality, service utilization, cove
 
 ## What's next
 
-Setup complete. An administrator can now **generate a results package** (Results → Generate new results package) so projects can use the data. Then move on to **Getting Started** (M9b) to learn the platform interface in depth.
+Data is in. An administrator can now **generate a results package** (Results → Generate new results package) so products can use it. Then **Make a scope and attach it to a product**, the last handout of this module.
