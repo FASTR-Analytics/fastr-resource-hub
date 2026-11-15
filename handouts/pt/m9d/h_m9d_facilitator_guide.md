@@ -14,9 +14,9 @@ footer: "FASTR · Apresentações · Facilitador"
 
 ## Objetivo
 
-As Apresentações ensinam os participantes a juntar aquilo que já construíram — gráficos e interpretações — numa apresentação. O módulo segue um arco construir-depois-polir: criar o contentor, ver o editor demonstrado, adicionar gráficos de duas formas (manualmente e com a IA), depois finalizar. O resultado é o objeto que os participantes irão mesmo mostrar aos decisores, por isso a fasquia a manter é «pronto a apresentar», não apenas «terminado».
+As Apresentações ensinam os participantes a juntar aquilo que já construíram, gráficos e interpretações, numa apresentação. O módulo segue um arco construir-depois-polir: criar a apresentação, ver o editor demonstrado, adicionar gráficos de duas formas (manualmente e com a IA), e depois finalizar. O resultado é o objeto que os participantes irão mostrar aos decisores, por isso a fasquia é «pronto a apresentar», não apenas «terminado».
 
-No final, cada participante deve ter uma apresentação de dois diapositivos guardada e polida, construída a partir dos gráficos que criou antes, que estaria disposto a mostrar a um diretor.
+No final, cada participante deve ter uma apresentação de dois diapositivos polida, construída a partir dos seus próprios gráficos, que estaria disposto a mostrar a um diretor.
 
 ## A sessão num relance
 
@@ -34,15 +34,15 @@ No final, cada participante deve ter uma apresentação de dois diapositivos gua
 
 ## Conduzir a sessão
 
-**Preparação.** Tenha uma apresentação com um diapositivo de conteúdo vazio e pelo menos uma visualização guardada prontas na conta de demonstração, para a demonstração do editor correr sem percalços. Defina o zoom do navegador a ~100% para a interface ser legível no ecrã partilhado.
+**Preparação.** Tenha numa pasta de demonstração uma apresentação com um diapositivo de conteúdo vazio e pelo menos uma visualização guardada, para que a demonstração do editor corra sem sobressaltos. Ponha o zoom do navegador a cerca de 100% para a interface ser legível no ecrã partilhado. Lembre-se de que as apresentações se guardam em direto e são partilhadas: demonstre na sua própria apresentação, não na de um participante.
 
-**Como demonstrar.** A sequência é **contentor → demonstração → fazer (manual) → fazer (IA) → polir.** A atividade 1 cria a apresentação; depois conduz o passeio pelo editor (apêndice) ao vivo *antes* de os participantes tocarem no editor. Essa demonstração é o momento decisivo para as atividades 2 e 3 — sem ela, os participantes não saberão adicionar um gráfico nem dividir um diapositivo. Siga o guião do apêndice como está escrito; as fichas de atividade reexplicam o que mostrou, não são guiões autoexplicativos.
+**Como demonstrar.** A sequência é **contentor → demonstração → fazer (manual) → fazer (IA) → polir.** A atividade 1 cria a apresentação; depois conduza o passeio pelo editor (apêndice) ao vivo *antes* de os participantes tocarem no editor. Essa demonstração é a porta de entrada das atividades 2 e 3: sem ela, os participantes não encontram a barra de ferramentas do bloco. Siga o apêndice tal como está escrito; as fichas reexplicam o que mostrou, não ensinam por si sós.
 
-**Agrupamento.** As quatro atividades são trabalhos práticos individuais. Junte os participantes em pares só para se entreajudarem em caso de bloqueio.
+**Agrupamento.** As quatro atividades são individuais. Junte os participantes em pares apenas para se ajudarem quando alguém ficar preso.
 
-**Ritmo.** Proteja a demonstração e a atividade 4. Se o tempo for curto, deixe a atividade 3 (a via IA para o mesmo resultado da atividade 2) ser a que escorrega.
+**Ritmo.** Proteja a demonstração e a atividade 4. Se o tempo faltar, deixe cair a atividade 3 (o caminho com IA para o mesmo resultado da atividade 2).
 
-**A mensagem a transmitir.** Reutilize, não recrie: os gráficos constroem-se no separador Visualizations e colocam-se nos diapositivos aqui. O editor de diapositivos serve para montar e polir, não para construir gráficos de raiz.
+**A mensagem a transmitir.** Reutilizar, não recriar: os gráficos constroem-se uma vez como visualizações na página Produtos e inserem-se nos diapositivos como cópias. O editor de diapositivos serve para montar e polir.
 
 ---
 
@@ -52,33 +52,34 @@ No final, cada participante deve ter uma apresentação de dois diapositivos gua
 
 ### 1. Criar a sua primeira apresentação · ~10 min · prática
 
-**O que acontece.** Uma atividade curta para criar o contentor da apresentação e um primeiro diapositivo de conteúdo, que ensina também os três tipos de diapositivo: abrir a pasta pessoal → + Create slide deck e nomeá-la → Add slide → escolher **Cover** (página de título), **Section** (separador) ou **Content** (gráfico + texto). Os participantes escolhem Content.
+**O que acontece.** Os participantes criam a apresentação a partir da página Produtos (**Novo → Nova apresentação**: nome, pasta, e depois pacote e âmbito), aplicam o tema Predefinido no seletor que se abre, e acrescentam um **Diapositivo de conteúdo** com **Adicionar diapositivo**.
 
-**Demonstrar.** Mostre onde a apresentação se cria — *dentro* da pasta pessoal — e o seletor de tipo de diapositivo, frisando que só **Content** acolhe um gráfico e texto.
+**Demonstrar.** Mostre o campo **Pasta** na caixa de diálogo e o seletor de temas, e os três tipos de diapositivo em **Adicionar diapositivo**, sublinhando que só o de **Conteúdo** aceita um gráfico e texto.
 
-**Diga algo como.** *«Criem a apresentação dentro da vossa pasta, e escolham Content — um diapositivo Cover ou Section não tem onde pôr o vosso gráfico.»*
+**Diga algo como.** *«Ponham a apresentação na vossa pasta, mantenham o tema Predefinido, e escolham Conteúdo: um diapositivo de capa ou de secção não tem onde pôr o gráfico.»*
 
-**Como é um bom resultado.** Uma apresentação nomeada na pasta pessoal do participante com um diapositivo de conteúdo editável.
+**Como é um bom resultado.** Uma apresentação com nome, na pasta do participante, com um diapositivo de capa e um diapositivo de conteúdo vazio.
 
 **Atenção a.**
-- A apresentação criada *fora* da pasta pessoal.
-- Cover ou Section escolhido em vez de Content — ficando sem nada editável para as atividades seguintes.
+- A apresentação criada na pasta errada (corrija com **Ficheiro → Nome e pasta…**).
+- O seletor de temas tratado como um obstáculo: diga que é um só clique.
 
-> **Conduza aqui a demonstração do editor**, antes da atividade 2. Use o guião do apêndice.
+> **Conduza agora a demonstração do passeio pelo editor**, antes da atividade 2.
 
 ### 2. Adicionar uma visualização (manualmente) · ~15 min · prática
 
-**O que acontece.** Uma atividade prática para adicionar um gráfico guardado a um diapositivo pelos menus do editor, repetindo o que demonstrou: abrir a apresentação → clicar no diapositivo de conteúdo → Block → Visualisation → Select → escolher um gráfico que o participante criou → guardar.
+**O que acontece.** Os participantes selecionam o bloco vazio, mudam o seu tipo de **Texto** para **Visualização**, clicam em **Inserir visualização → Visualização existente…**, escolhem o seu gráfico e **Inserir uma cópia**, e depois usam **Disposição → Adicionar** para um bloco de texto ao lado.
 
-**Demonstrar.** Coberto no passeio do apêndice (Passo 2). Não é precisa nova demonstração; reencaminhe os participantes para o que viram.
+**Demonstrar.** Coberto no apêndice (passos 2 e 3). Remeta os participantes para o que viram.
 
-**Diga algo como.** *«Não estão a construir um gráfico aqui — estão a escolher um já guardado. Se não estiver na lista, não foi guardado em Visualizations.»*
+**Diga algo como.** *«Não estão a construir um gráfico aqui. Estão a escolher um que já guardaram, e o diapositivo recebe uma cópia dele.»*
 
-**Como é um bom resultado.** Um diapositivo de conteúdo a mostrar um dos gráficos que o próprio participante guardou.
+**Como é um bom resultado.** Um diapositivo de conteúdo com um dos gráficos do próprio participante e uma linha de texto ao lado.
 
 **Atenção a.**
-- Participantes a tentar reconstruir gráficos no editor — reforce «reutilize, não recrie».
-- Um gráfico ausente do seletor — simplesmente não foi guardado numa pasta Visualizations.
+- Clicar na miniatura em vez do bloco: a barra de ferramentas só aparece quando um bloco do diapositivo está selecionado.
+- Um gráfico ausente do seletor: não foi guardado como visualização, ou está numa pasta que não podem ver.
+- Esperar que o gráfico guardado atualize o diapositivo mais tarde: é uma cópia; **Substituir por visualização existente** é o que o renova.
 
 ---
 
@@ -86,34 +87,35 @@ No final, cada participante deve ter uma apresentação de dois diapositivos gua
 
 ### 3. Adicionar uma visualização (com a IA) · ~15 min · prática
 
-**O que acontece.** A mesma tarefa por outra via: os participantes pedem à IA que traga uma visualização guardada, depois usam o botão **Add to slide deck** da pré-visualização da conversa, terminando com uma apresentação de dois diapositivos.
+**O que acontece.** A mesma tarefa por outro caminho: com a apresentação aberta, os participantes pedem ao painel de IA que acrescente um diapositivo com um gráfico que nomeiam, verificam o diapositivo, e corrigem-no na conversa.
 
-**Demonstrar.** Mostre um pedido à IA que traz um gráfico guardado e o botão **Add to slide deck** na pré-visualização, para os participantes o reconhecerem.
+**Demonstrar.** Um pedido ao vivo, para que os participantes vejam a IA listar os seus passos e o diapositivo aparecer. Mostre uma vez o **Histórico** como caminho de volta.
 
-**Diga algo como.** *«A IA só encontra gráficos que já guardaram. Se mostrar o errado, guardem o que querem e deem-lhe um nome mais claro.»*
+**Diga algo como.** *«A IA trabalha na apresentação que têm aberta, e o que ela faz é guardado à medida. Nomeiem o gráfico, verifiquem o diapositivo, e corrijam na conversa se for preciso.»*
 
-**Como é um bom resultado.** Uma apresentação de dois diapositivos, o segundo adicionado pela via IA.
+**Como é um bom resultado.** Uma apresentação de dois diapositivos, com o segundo acrescentado através da IA.
 
 **Atenção a.**
-- A IA a devolver o gráfico errado ou nenhum botão «Add to slide deck» — o gráfico tem de ser guardado primeiro e nomeado de forma específica.
+- Pedir a partir da página Produtos: a IA responde que não pode editar dali.
+- Um pedido vago a devolver um gráfico parecido mas errado: nomeiem-no.
 
 ### 4. Editar e finalizar os seus diapositivos · ~20 min · prática
 
-**O que acontece.** Uma passagem de polimento: quatro revisões por diapositivo — verificação de exatidão, redimensionar caixas de texto, redimensionar/reposicionar gráficos, ajustar layout e espaçamento. Os diapositivos podem voltar à IA para reescritas.
+**O que acontece.** Uma passagem de polimento: quatro revisões por diapositivo (exatidão, redimensionar, reestruturar, cabeçalho e rodapé), com a barra de ferramentas do bloco e o menu **Disposição**.
 
-**Demonstrar.** Mostre onde aparece o divisor de redimensionamento (só depois de clicar num diapositivo) e uma pequena correção de texto por oposição a uma reescrita estrutural que volta à IA.
+**Demonstrar.** Mostre o separador entre dois blocos e um **Disposição → Adicionar**; depois uma pequena edição de texto face a uma reescrita entregue ao painel de IA.
 
-**Diga algo como.** *«As pequenas correções fazem aqui; as reescritas estruturais voltam à IA. A fasquia: conseguiam mostrar este diapositivo a um diretor sem um pedido de desculpa?»*
+**Diga algo como.** *«As pequenas correções fazem-nas aqui; as reescritas estruturais vão para a IA. A fasquia é esta: conseguiriam mostrar este diapositivo a um diretor sem pedir desculpa?»*
 
-**Como é um bom resultado.** Cada diapositivo revisto quanto à exatidão, gráficos e texto dimensionados para caber e um layout limpo.
+**Como é um bom resultado.** Todos os diapositivos revistos, gráficos e texto dimensionados para caber, e um título que enuncia a conclusão.
 
 **Atenção a.**
-- O divisor de redimensionamento não encontrado — só aparece depois de clicar num diapositivo.
-- Um gráfico ainda apertado após redimensionar — tem de ser simplificado no separador **Visualizations**, não no editor.
+- Um gráfico ainda apertado depois de redimensionar: simplifique-o com **Disposição → Editar visualização**, não encolhendo o texto.
+- Participantes à procura de um botão Guardar: não existe. O **Histórico** é a rede de segurança.
 
 ## Para encerrar
 
-No final, cada participante tem uma apresentação de dois diapositivos guardada e polida, construída a partir dos seus próprios gráficos. Mantenha-os numa só fasquia: cada diapositivo pudesse ser mostrado a um diretor sem um pedido de desculpa.
+No final, cada participante tem uma apresentação de dois diapositivos polida, construída a partir dos seus próprios gráficos. Mantenha-os numa única fasquia: cada diapositivo poderia ser mostrado a um diretor sem pedir desculpa.
 
 ---
 
@@ -121,70 +123,67 @@ No final, cada participante tem uma apresentação de dois diapositivos guardada
 
 ## Apêndice — Guião da demonstração do passeio pelo editor
 
-Um passeio ao vivo de 5 minutos pelo editor de diapositivos. Os participantes acabaram de criar um diapositivo de conteúdo vazio; esta demonstração mostra-lhes como colocar um gráfico e texto nele, antes de o repetirem na atividade 2. Não a prolongue — mantenha o ritmo.
+Um passeio ao vivo de cinco minutos pelo editor de apresentações. Os participantes acabaram de criar um diapositivo de conteúdo vazio; isto mostra-lhes como colocar nele um gráfico e texto antes de o repetirem na atividade 2. Mantenha o ritmo.
 
 ### Lista de preparação
 
-- ☐ Uma apresentação aberta com um **diapositivo de conteúdo vazio** pronto
-- ☐ Pelo menos uma visualização guardada na conta de demonstração
-- ☐ Zoom do navegador a ~100% para os participantes verem bem a interface
-- ☐ Partilha de ecrã a funcionar, se for remoto
+- ☐ A sua própria apresentação aberta num **diapositivo de conteúdo vazio**
+- ☐ Pelo menos uma visualização guardada numa pasta de demonstração
+- ☐ Zoom do navegador a cerca de 100%
+- ☐ Partilha de ecrã a funcionar, se à distância
 
-### Passo 1 — Abrir o editor
+### Passo 1: o editor
 
-- **Faça:** clique no diapositivo de conteúdo vazio na lista de diapositivos.
-- **Diga:** *«Clicar no diapositivo abre o editor. A pré-visualização está à direita; as opções de edição estão à esquerda.»*
-- **Atenção a:** participantes perguntam «onde está o editor?» — responda: não é uma janela separada, é o painel da direita que acabou de aparecer.
+- **Fazer:** Aponte para a lista de diapositivos (esquerda), o diapositivo (centro), o painel de IA (direita), e a barra superior: **Adicionar diapositivo**, **Ficheiro**, **Apresentação**, **Diapositivo**, **Inserir**, **Apresentar**, **Histórico**, e a etiqueta **Em direto**.
+- **Dizer:** *«Tudo se guarda enquanto trabalham; Em direto significa que os colegas também veem. Não há botão Guardar; o Histórico traz de volta versões anteriores.»*
 
-![Editor de diapositivos — opções à esquerda, pré-visualização à direita h:280](../../../resources/screenshots/m9d/editor_overview.png)
+![Editor de apresentações com um diapositivo de conteúdo h:260](../../../resources/screenshots/platform_v2_en/20b_deck_editor.png)
 
----
+### Passo 2: o bloco
 
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+- **Fazer:** Clique dentro do bloco vazio. Mostre a barra de ferramentas que aparece: a lista pendente **Texto**, **Disposição**, **Editar texto**. Abra a lista pendente e escolha **Visualização**.
+- **Dizer:** *«Um diapositivo é feito de blocos. Clicam num e a barra de ferramentas aparece. Esta lista pendente diz o que o bloco contém: texto, uma visualização ou uma imagem.»*
 
-### Passo 2 — Adicionar um bloco de visualização
-
-- **Faça:** **Block → Visualisation → Select visualisation** → escolher um gráfico guardado → **Select**. O gráfico preenche o diapositivo.
-- **Diga:** *«É assim que se coloca um gráfico guardado num diapositivo. Não está a construir um gráfico novo aqui — está a escolher um que já guardou no separador Visualisations.»*
-- **Atenção a:** reforce **«reutilize, não recrie»** — o gráfico tem de estar já guardado em Visualisations. Se o gráfico de um participante não aparecer no seletor, ele tem de voltar atrás e guardá-lo lá primeiro.
-
-![Seletor de visualização h:180](../../../resources/screenshots/m9d/block_viz_select.png)
-
-### Passo 3 — Dividir o diapositivo em gráfico + texto
-
-- **Faça:** clique com o botão direito na pré-visualização → **Add → Col to right** → clique na nova coluna de texto e escreva uma conclusão de uma linha.
-- **Diga:** *«Duas colunas são o padrão FASTR: gráfico de um lado, a única coisa que quer que o leitor retenha do outro. Se precisar de mais, divida noutro diapositivo.»*
-- **Atenção a:** participantes tentam meter quatro colunas. Reconduza-os a duas — o conteúdo extra vai para o diapositivo seguinte.
-
-![Menu Adicionar → Col à direita h:180](../../../resources/screenshots/m9d/col_to_right_menu.png)
+![Lista pendente do tipo de bloco h:220](../../../resources/screenshots/platform_v2_en/23_block_type_menu.png)
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-### Passo 4 — Redimensionar as áreas de gráfico e texto
+### Passo 3: inserir um gráfico guardado
 
-- **Faça:** passe o rato sobre o divisor vertical entre as colunas de gráfico e texto. O cursor muda para um manípulo de redimensionamento. Arraste para a esquerda ou direita.
-- **Diga:** *«Arraste isto para dar mais espaço ao gráfico ou ao texto. Ambos se redimensionam automaticamente.»*
-- **Atenção a:** participantes que não repararam na mudança do cursor — aponte-a explicitamente.
+- **Fazer:** **Inserir visualização → Visualização existente…**, escolha um gráfico, **Inserir uma cópia**.
+- **Dizer:** *«É assim que um gráfico guardado chega a um diapositivo, como cópia. Construíram-no uma vez na página Produtos; aqui apenas o colocam.»*
 
-### Passo 5 — Editar os detalhes do diapositivo e guardar
+![Seletor de visualização existente h:220](../../../resources/screenshots/platform_v2_en/26_insert_existing_picker.png)
 
-- **Faça:** mude para o separador **Slide** → edite o título e o subtítulo. Mude para **Header/Footer** → data e rodapé. Guarde.
-- **Diga:** *«O separador Slide é o título do diapositivo. Content são as colunas de texto. Header/Footer é o texto pequeno no fundo. Guarde quando terminar — há gravação automática, mas o Save é a sua rede de segurança.»*
-- **Atenção a:** participantes perguntam se devem editar o texto diretamente ou voltar à IA — responda: pequenas correções aqui, reescritas estruturais voltam à IA.
+### Passo 4: gráfico e texto lado a lado
+
+- **Fazer:** Com o bloco do gráfico selecionado, **Disposição → Adicionar → à direita**. Clique no novo bloco de texto e escreva uma conclusão de uma linha. Arraste o separador.
+- **Dizer:** *«Dois blocos, gráfico e conclusão, é o padrão FASTR. Mais do que isso vai para o diapositivo seguinte.»*
+
+![Menu Disposição h:220](../../../resources/screenshots/platform_v2_en/28_block_layout_menu.png)
+
+### Passo 5: título e pronto
+
+- **Fazer:** Clique no cabeçalho do diapositivo e escreva um título que enuncie a conclusão. Abra **Inserir** para mostrar o subcabeçalho, a data e o rodapé opcionais.
+- **Dizer:** *«O título é a mensagem. E está pronto: não há nada para guardar.»*
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ### Perguntas frequentes
 
-> **P: Posso anular um redimensionamento?**
-> R: Sim — Ctrl/Cmd-Z, ou arraste o divisor de volta. As edições não são destrutivas.
+> **P: Posso desfazer?**
+> R: Sim: as setas à esquerda da barra de ferramentas, ou Ctrl/Cmd+Z. O **Histórico** no topo restaura uma versão anterior completa.
 
-> **P: O editor guarda automaticamente?**
-> R: Sim. O botão Save é uma rede de segurança manual para grandes alterações.
+> **P: Onde está o Guardar?**
+> R: Não existe. As alterações são guardadas à medida que as faz e partilhadas em direto.
 
-> **P: Posso mudar a ordem dos diapositivos no editor?**
-> R: Não — a ordenação dos diapositivos está na vista da apresentação. Arraste os diapositivos na lista.
+> **P: Posso reordenar os diapositivos?**
+> R: Arraste as miniaturas na lista da esquerda.
 
 ### Plano de recurso
 
-> Se a plataforma estiver em baixo: percorra as capturas de ecrã deste apêndice e descreva o padrão de três passos (Block → Visualisation, depois Col to right, depois redimensionar). A atividade 2 (Adicionar manualmente) reforça o mesmo fluxo.
+> Se a plataforma estiver indisponível, percorra as capturas de ecrã deste apêndice e descreva o padrão: selecionar o bloco, defini-lo como Visualização, inserir um gráfico existente, acrescentar um bloco de texto ao lado.

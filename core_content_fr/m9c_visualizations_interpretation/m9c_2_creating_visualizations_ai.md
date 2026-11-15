@@ -24,7 +24,7 @@ Comment demander un graphique à l'IA, et comment vérifier qu'elle a pris le bo
 
 <!--
 NOTES DU PRÉSENTATEUR :
-- Activité 4 du guide du facilitateur m9c. Pratique, individuelle. Onglet : Visualisations.
+- Activité 4 du guide du facilitateur m9c. Pratique, individuelle. Le panneau IA fonctionne à l'intérieur d'une visualisation ouverte, pas depuis la page Produits.
 - Démo en direct d'abord : taper une demande de graphique et montrer où vérifier que l'IA a utilisé le bon indicateur, la bonne période et, surtout, les données ajustées vs brutes.
 - La trame « je fais, nous faisons, vous faites » est dans le document.
   - Je fais : construire une série temporelle des volumes mensuels CPN1 (12 derniers mois) avec l'IA et l'enregistrer.

@@ -35,7 +35,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ## Animer la session
 
-**Préparation.** Ayez une visualisation enregistrée et une présentation existante prêtes dans le compte de démo pour montrer des graphiques immédiatement. Confirmez que les participants ont terminé la Configuration de l'instance — l'activité 6 utilise des données pays réelles, qui doivent déjà être chargées.
+**Préparation.** Ayez une visualisation enregistrée et une présentation prêtes dans un dossier de démo pour montrer des graphiques immédiatement. Confirmez que les participants ont leur propre dossier (Prise en main) et que l'instance a un paquet de résultats épinglé contenant le module Disruption detection : l'activité 6 utilise des données pays réelles. Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur des duplicatas, jamais sur le graphique d'un participant.
 
 **Comment démontrer.** Chaque tâche sur la plateforme doit être démontrée d'abord, puis pratiquée à partir du document, qui réexplique ce que vous avez montré. La démo détaillée du constructeur de graphiques (activité 2) est celle à répéter — elle porte la distinction filtrer/désagréger dont dépend le reste du module.
 
@@ -65,12 +65,12 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 2. Créez votre première visualisation · ~15 min · pratique
 
-**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré (l'assistant **Mesure → Préréglages → Créer**) : Créer une visualisation → choisir une mesure (p. ex. *M3. Utilisation des services → Nombre de services rapportés*) → choisir un préréglage comme *Volume de services au fil du temps (mensuel)* → Créer. Le document explique ensuite **filtrer vs désagréger** et les quatre modes d'affichage (Lines / Grid / Rows / Columns).
+**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré : **Nouveau → Nouvelle visualisation** sur la page Produits, gardez le paquet et la portée, puis la boîte de dialogue **Métrique → Préréglages → Configurer** (*Indicator values → Indicator value → Personnalisé → Série temporelle → Insérer*). Le document explique ensuite **filtrer vs désagréger** et les modes d'affichage (Lignes / Grille / Rangées / Colonnes / Graphiques différents), et enseigne **dupliquer avant de modifier**, puisqu'il n'y a pas d'enregistrement sous un autre nom : les modifications s'enregistrent en direct.
 
-**Démontrer (~3 min, en direct).** Ouvrez une viz enregistrée et utilisez le **panneau de gauche** — signalez qu'il faut *faire défiler* pour atteindre ces contrôles, c'est là que les gens se perdent :
+**Démontrer (~3 min, en direct).** Ouvrez un duplicata d'une viz enregistrée et utilisez l'onglet **Données** à gauche :
 1. Partez d'un seul indicateur, total national ; dites en mots ce qu'il montre.
-2. Sous **Display (disaggregate)**, décomposez **par district** — passez de **Lines** à **Rows** puis **Grid** pour montrer les *mêmes données sous des formes différentes*.
-3. Sous **Filter (subset)**, cochez seulement deux districts — le graphique n'affiche que ceux-là. Nommez-le : *« je choisis ce que j'affiche »*.
+2. Sous **Affichage (désagréger)**, décomposez **par district**, puis passez de **Lignes** à **Rangées** puis **Grille** pour montrer les *mêmes données sous des formes différentes*.
+3. Sous **Filtre (sous-ensemble)**, cochez seulement deux districts : le graphique n'affiche que ceux-là. Nommez-le : *« je choisis ce que j'affiche »*.
 4. **Montrez le piège :** désagréger par district *et* filtrer sur un seul district → plus rien à comparer.
 
 **Formulez-le ainsi.** *« Filtrez ce dont vous n'avez pas besoin ; désagrégez ce que vous voulez comparer. Et courbes pour les tendances, barres pour comparer. »*
@@ -79,7 +79,8 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 **À surveiller.**
 - Confondre **filtrer** (choisir ce qu'on affiche) et **désagréger** (décomposer un total en ses parties) — la distinction sous-tend chaque graphique.
-- Recourir à **Personnalisé** quand un préréglage suffirait ; mesure → préréglage → Créer est le chemin rapide.
+- S'attendre à un bouton d'enregistrement. Il n'y en a pas : le titre en haut permet de renommer, **Historique** de restaurer, et **Dupliquer** sur la page Produits est la façon de garder un original.
+- Choisir le préréglage de la métrique Indicator value (un tableau de type tableau de bord) et se demander où est la courbe : pour une tendance, il leur faut **Personnalisé → Série temporelle**.
 
 ---
 
@@ -102,16 +103,17 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 4. Construire une visualisation avec l'IA · ~15 min · pratique
 
-**Le déroulé.** Les participants produisent le même graphique via des demandes en langage courant à l'IA : saisir une demande, vérifier si l'IA a respecté la demande (indicateur, période, données ajustées vs brutes), itérer en tours courts, et enregistrer.
+**Le déroulé.** Les participants produisent le même graphique via des demandes en langage courant au panneau IA **à l'intérieur d'une visualisation** : ouvrir une visualisation vierge, demander, vérifier si l'IA a respecté la demande (indicateur, période, données ajustées vs brutes), itérer en tours courts. L'IA modifie en direct la visualisation ouverte ; il n'y a rien à enregistrer.
 
-**Démontrer.** Saisissez une demande de graphique en direct, puis montrez où confirmer que l'IA a utilisé le bon indicateur, la bonne période, et — surtout — les **données ajustées vs brutes**.
+**Démontrer.** Posez d'abord la question à l'IA depuis la page Produits et montrez sa réponse : elle ne peut pas dessiner là, elle liste les produits à ouvrir. Ouvrez ensuite une visualisation vierge, saisissez une demande, et montrez les étapes qu'elle liste (lire l'éditeur, récupérer les données, mettre la figure à jour) et où confirmer l'indicateur, la période et les **données ajustées vs brutes**. Montrez **Historique → Restaurer** une fois.
 
 **Formulez-le ainsi.** *« Avant d'enregistrer, vérifiez que l'IA a utilisé les données ajustées, pas brutes, et la période que vous avez réellement demandée. Elle devine souvent. »*
 
 **À quoi ressemble un bon résultat.** Un graphique enregistré conforme à la demande sur l'indicateur, la période, le type de graphique, et ajusté/brut.
 
 **À surveiller.**
-- Faire confiance à la première réponse. Vérifier avant d'enregistrer — surtout **données ajustées vs brutes**.
+- Faire confiance à la première réponse. Vérifier, surtout les **données ajustées vs brutes**.
+- Poser la question à l'IA depuis la visualisation d'un collègue : elle la modifiera. Partez d'une visualisation vierge ou d'un duplicata.
 
 ---
 
@@ -132,11 +134,11 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 6. Application — repérer une perturbation · ~25 min · équipes pays
 
-**Le déroulé.** La synthèse : avec de vraies données pays, les équipes choisissent un indicateur signalé, ouvrent son graphique de perturbation, appliquent le cadre en six étapes, ajoutent le contexte local, rédigent un constat en trois parties, et le partagent avec la salle.
+**Le déroulé.** La synthèse : avec de vraies données pays, les équipes créent le graphique national du module **Disruption detection** (observé vs attendu avec la bande de crédibilité à 95%), filtrent à un indicateur, appliquent le cadre en six étapes, ajoutent le contexte local, rédigent un constat en trois parties, et le partagent avec la salle.
 
 **Démontrer.** Rien de nouveau à démontrer — ceci applique tout le module. Mettez-la en place en rappelant aux équipes les six étapes et la structure de constat en trois parties.
 
-**Formulez-le ainsi.** *« Une baisse d'un seul mois est généralement du bruit. Cherchez une baisse soutenue — trois mois ou plus — et rappelez-vous que des volumes stables peuvent quand même signifier une couverture en baisse si la population croît. »*
+**Formulez-le ainsi.** *« Une baisse d'un seul mois est généralement du bruit. Cherchez une baisse soutenue, trois mois ou plus, sous la bande. La courbe attendue tient déjà compte des formations sanitaires qui n'ont pas déclaré, donc une plage rouge est un vrai changement parmi celles qui ont déclaré. »*
 
 **À quoi ressemble un bon résultat.** Un constat clairement énoncé sur une perturbation réelle et soutenue, défendable devant la salle.
 

@@ -52,25 +52,29 @@ Para cada gráfico que coloca num diapositivo, a sua interpretação tem **três
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Percorra os seis passos com um colega</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Escolher um gráfico na sua pasta</span></h2>
+
+Na página **Produtos**, abra um dos gráficos que guardou na sua pasta. Escolha um que mostre movimento (uma tendência, uma queda, um contraste entre regiões), não uma linha plana. Um gráfico plano é difícil de comentar e ainda mais difícil de transformar em ação.
+
+<h2 class="step-h"><span class="step-n">2</span><span>Percorra os seis passos com um colega</span></h2>
 
 Antes de escrever seja o que for, fale sobre o gráfico com um colega usando o quadro *Ler uma visualização*: indicador, nível e período, o que está a ser comparado, valores, o que se destaca, e então.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Escreva o título</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Escreva o título</span></h2>
 
 Comece pela **mensagem**, não por uma descrição. Se um diretor lesse apenas o título, perceberia a conclusão?
 
-<h2 class="step-h"><span class="step-n">3</span><span>Escreva «o que vê»</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Escreva «o que vê»</span></h2>
 
 Descreva o gráfico em 1–3 frases. Números, tendências, comparações. **Ainda sem interpretação** — apenas os factos visíveis no gráfico.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Escreva «o que significa»</span></h2>
+<h2 class="step-h"><span class="step-n">5</span><span>Escreva «o que significa»</span></h2>
 
 O «e então». **Que ação suscitaria isto?** Seja específico. *«Visitas de supervisão formativa em 3 distritos»* — não *«melhorar o desempenho»*.
 
-<h2 class="step-h"><span class="step-n">5</span><span>Adicione ao seu diapositivo</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>Adicione ao seu diapositivo</span></h2>
 
-No separador Slide Decks, abra a sua apresentação, adicione o gráfico e cole o seu texto ao lado.
+Abra a sua apresentação a partir da página Produtos e insira o gráfico num diapositivo de conteúdo (selecione o bloco, defina o seu tipo como **Visualização**, e depois **Inserir visualização → Visualização existente…**). Coloque o seu texto em três partes num segundo bloco ao lado. A apresentação guarda-se sozinha.
 
 ## Erros a evitar
 

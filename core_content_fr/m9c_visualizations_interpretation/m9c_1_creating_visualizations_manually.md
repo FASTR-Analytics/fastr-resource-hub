@@ -18,18 +18,18 @@ Comment filtre et désagrégation changent ce que dit un graphique, et quand uti
 - Construire une série temporelle des volumes mensuels CPN1
 - Faire la même chose pour BCG
 - Construire un graphique pour un indicateur de votre choix
-- Enregistrer chacun dans votre propre dossier
+- Chacun arrive dans votre propre dossier (il n'y a pas d'enregistrement : les modifications sont stockées en direct)
 
 </div>
 
 <!--
 NOTES DU PRÉSENTATEUR :
-- Activité 2 du guide du facilitateur m9c. Pratique, individuelle. Onglet : Visualisations.
+- Activité 2 du guide du facilitateur m9c. Pratique, individuelle. Démarre depuis la page Produits (Nouveau → Nouvelle visualisation).
 - Démo en direct de 3 min sur le panneau de gauche : partir d'un seul indicateur au total national, désagréger par district, alterner Lines / Rows / Grid pour montrer les mêmes données sous des formes différentes, puis filtrer sur deux districts. Finir avec le piège : désagréger par district ET filtrer sur un seul district ne laisse plus rien à comparer.
 - La trame « je fais, nous faisons, vous faites » est dans le document, pas sur la diapo.
   - Je fais : construire une série temporelle des volumes mensuels CPN1 (12 derniers mois) et l'enregistrer.
   - Nous faisons : faire la même chose pour BCG (12 derniers mois) et l'enregistrer.
-  - Vous faites : construire un graphique pour un indicateur de votre choix et l'enregistrer dans votre dossier.
+  - Vous faites : construire un graphique pour un indicateur de votre choix dans votre propre dossier.
 - Message clé : filtrez ce dont vous n'avez pas besoin, désagrégez ce que vous voulez comparer. Courbes pour les tendances, barres pour comparer.
 - À surveiller : confondre filtre et désagrégation ; passer en Custom alors qu'un préréglage suffirait.
 -->

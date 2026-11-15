@@ -10,7 +10,7 @@ footer: "FASTR · Présentations"
 
 <div class="setup-breadcrumb"><span class="step done">Créer présentation</span> <span class="arrow">→</span> <span class="step done">Ajouter manuel</span> <span class="arrow">→</span> <span class="step done">Ajouter IA</span> <span class="arrow">→</span> <span class="step done">Éditer & finaliser</span> <span class="arrow">→</span> <span class="step done">Formater texte</span> <span class="arrow">→</span> <span class="step current">Paramètres</span></div>
 
-# Configurer les paramètres de votre présentation
+# Paramètres de la présentation : thème, logos, pied de page, partage
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~10 min</strong></p>
 
@@ -20,24 +20,22 @@ footer: "FASTR · Présentations"
 <p class="sb-label">Avant de commencer</p>
 
 - ☐ Votre présentation contient au moins une diapositive de contenu finalisée
-- ☐ Les logos personnalisés à utiliser sont déjà téléversés dans **Assets** (voir Pré-étape ci-dessous)
+- ☐ Le logo personnalisé que vous voulez est déjà dans **Ressources** (voir Pré-étape)
 
 <p class="sb-label">Pourquoi c'est important</p>
 
-Les paramètres transforment un brouillon en quelque chose de partageable. Un nom clair, un style cohérent, les bons logos aux bons emplacements, un pied de page global et des numéros de page sur les diapositives de contenu. C'est aussi ici qu'on renomme la présentation.
+Ces paramètres transforment un brouillon de travail en quelque chose de partageable : une apparence cohérente, les bons logos, un pied de page et des numéros de page sur chaque diapositive de contenu, un nom que les gens retrouvent, et les bonnes personnes capables de l'ouvrir.
 
 </aside>
 <div class="p1-main">
 
-## Pré-étape — Les logos personnalisés sont dans Ressources
+## Pré-étape : les logos personnalisés vivent dans Ressources
 
-Les logos personnalisés ne sont pas stockés dans la présentation. Ils sont dans **Ressources** (Assets), une bibliothèque au **niveau de l'instance** que tous les projets de l'instance peuvent utiliser.
+Les logos personnalisés ne se téléversent pas dans une présentation. Ils vivent dans **Ressources**, une bibliothèque au niveau de l'instance que chaque présentation et chaque rapport peut utiliser.
 
-> **Le téléversement dans Ressources est réservé aux administrateurs.** Si vous n'êtes pas administrateur d'instance, demandez à votre facilitateur ou à votre admin de téléverser les fichiers de logo (PNG ou JPEG) avant que vous ouvriez les paramètres de la présentation. Une fois dans Ressources, ils apparaîtront sous **Custom logos** dans votre présentation.
+> **Le téléversement dans Ressources est réservé aux administrateurs.** Si vous n'en êtes pas un, demandez à votre facilitateur de téléverser vos fichiers de logo (PNG ou JPEG) avant de commencer. Une fois dans Ressources, ils apparaissent dans le sélecteur de logos de la présentation.
 
-Pour référence, les admins arrivent à Ressources depuis la page d'accueil principale (en haut à gauche, le logo FASTR ou le fil d'Ariane du projet) → navigation du haut → **Ressources** → **Téléverser des ressources**. Ressources sert aussi aux admins pour téléverser d'autres fichiers partagés (données CSV, GeoJSON).
-
-![Bibliothèque Ressources au niveau de l'instance (vue admin) h:230](../../../resources/screenshots/m9d/report_settings_01_assets_page.png)
+Les administrateurs y accèdent depuis la navigation latérale : **Ressources → Téléverser des ressources**. Ressources contient aussi d'autres fichiers partagés (fichiers de cartes GeoJSON, fichiers CSV téléversés).
 
 </div>
 </div>
@@ -46,65 +44,45 @@ Pour référence, les admins arrivent à Ressources depuis la page d'accueil pri
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Ouvrir les paramètres
+## Deux menus font tout cela
 
-La présentation ouverte, cliquez le bouton **Paramètres** dans la barre d'outils en haut à droite. Un panneau intitulé **Paramètres de la présentation : <nom>** s'ouvre. **Sauvegarder** / **Annuler** en haut du panneau.
+La présentation ouverte, le menu **Présentation** contient l'apparence ; le menu **Fichier** contient le nom, le dossier, l'accès et l'export.
 
-> Note : les sections principales (**Style**, **Color theme**, **Font**, **Layout**, **Background detail**, **Logos**) gardent leur libellé anglais dans la plateforme. Les sections **Couverture et section**, **Pages de contenu**, **Logos personnalisés** et **Pied de page et numéros** sont traduites, comme indiqué ci-dessous.
+![h:220](../../../resources/screenshots/platform_v2_fr/21b_deck_menu.png)
 
-![Panneau Paramètres de la présentation — section Style visible h:340](../../../resources/screenshots/m9d/report_settings_02_settings_panel_fr.png)
+<h2 class="step-h"><span class="step-n">1</span><span>Présentation → Thème</span></h2>
 
-## Ce qu'on y trouve
+Le thème définit les couleurs, la typographie et les éléments de page de chaque diapositive : Default (le vert GFF), Minimal, Corporate, Ministry, Executive, et d'autres. C'est le même sélecteur que vous avez vu à la création de la présentation. Choisissez-en un et gardez-le pour toute la présentation.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Renommer la présentation</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Présentation → Logos</span></h2>
 
-Renommer ne se fait plus dans ce panneau. Fermez-le, puis utilisez **Fichier > Nom et dossier**, ou cliquez sur le titre de la présentation dans son en-tête. Suivez la convention de votre équipe (pays, période, sujet, votre nom).
+Trois emplacements, chacun indépendant : la **couverture**, l'**en-tête des diapositives de contenu**, le **pied de page des diapositives de contenu**. Chacun propose les logos FASTR intégrés (en couleur et en blanc) et les logos personnalisés téléversés dans Ressources. Diapositive par diapositive, le menu **Diapositive** peut afficher ou masquer les logos de couverture.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Présentation → Pied de page et numéros</span></h2>
 
-Trois aperçus en haut montrent comment seront les diapositives **Cover**, **Section** et **Content**. Cliquez n'importe quelle option en dessous pour les mettre à jour en direct.
+Une courte ligne de pied de page (pays, période, auteur) affichée sur chaque diapositive de contenu, et un interrupteur pour les numéros de page. Les diapositives de couverture et de section ignorent les deux.
 
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-Les sections de la zone Style :
-
-- **Color theme** — palette standard, options spéciales aux couleurs FASTR, sélecteur custom.
-- **Font** — Inter, Fira Sans, Merriweather, Poppins.
-- **Layout** — Default, Modern, Corporate, Split.
-- **Couverture et section** — six variantes (Bold, Muted, Light, Lighter, White, Pure).
-- **Pages de contenu** — plus de dix variantes (Default, Bold, Header Only, Classic, Soft, Bordered, Minimal).
-- **Background detail** — None ou un motif léger (Dots, Circles, Lines, Grid, Chevrons, Waves, Noise, Maze, World).
-
-Choisissez une combinaison et gardez-la sur toute la présentation.
+**Présentation → Tous les paramètres…** ouvre le panneau de paramètres complet si vous voulez tout sur un seul écran.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Logos</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Fichier → Nom et dossier…</span></h2>
 
-Trois emplacements de logo, indépendants :
+Renommez la présentation et déplacez-la dans un autre dossier. Cliquer sur le titre de la présentation en haut à gauche la renomme aussi. Utilisez la convention convenue par votre équipe (pays, période, sujet, votre nom).
 
-- **Couverture** — logo sur la diapo de titre
-- **En-tête de contenu** — logo en haut de chaque diapo de contenu
-- **Pied de page de contenu** — logo en bas de chaque diapo de contenu
+![h:220](../../../resources/screenshots/platform_v2_fr/21_deck_file_menu.png)
 
-Chaque emplacement a deux options par défaut : **FASTR (couleur)** et **FASTR (blanc)**. Cliquez pour appliquer.
+<h2 class="step-h"><span class="step-n">5</span><span>Fichier → Gérer l'accès…</span></h2>
 
-Pour les logos personnalisés, cliquez **Ajouter** sous **Logos personnalisés** et choisissez parmi les images téléversées dans Ressources (voir Pré-étape).
+Qui peut ouvrir et modifier cette présentation : **Propriétaire**, **Éditeur** ou **Lecteur** par personne. Une présentation est visible par l'équipe par défaut ; la ligne sur la page Produits affiche **Restreint** quand l'accès a été limité. Pour définir l'accès à tout un dossier d'un coup, utilisez le **⋮ → Définir l'accès pour tout le contenu de ce dossier…** du dossier sur la page Produits.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Pied de page et numéros</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>Fichier → Télécharger… et Partager…</span></h2>
 
-Deux options :
+**Télécharger…** exporte la présentation (PDF, ou PPTX avec les graphiques sous forme d'images). **Partager…** donne un lien. **Copier vers une présentation…** copie les diapositives sélectionnées dans une autre présentation.
 
-- **Définir un texte de pied de page global pour toutes les diapositives de contenu** — tapez une courte ligne (nom du projet, période, auteur) dans **Texte du pied de page**. Elle apparaît sur toutes les diapos de contenu. Les diapos de couverture et de section l'ignorent.
-- **Afficher les numéros de page (sauf sur les diapositives de couverture et de section)** — activez pour les présentations imprimées ou exportées en PDF.
-
-<h2 class="step-h"><span class="step-n">5</span><span>Enregistrer</span></h2>
-
-Cliquez **Sauvegarder** en haut à droite du panneau. Les paramètres ne s'enregistrent pas automatiquement comme le contenu des diapos — fermer sans Sauvegarder perd vos changements. **Annuler** annule.
+Rien à enregistrer : chaque paramètre s'applique immédiatement et est stocké en direct.
 
 ---
 
@@ -112,22 +90,21 @@ Cliquez **Sauvegarder** en haut à droite du panneau. Les paramètres ne s'enreg
 
 ## Point de contrôle
 
-À la fermeture du panneau, votre présentation doit :
+Votre présentation doit :
 
-- Avoir un nom clair que votre équipe peut retrouver
-- Utiliser un thème de couleurs + une police + une mise en page cohérents sur toutes les diapos
-- Afficher les logos voulus dans chaque emplacement
-- Porter le pied de page global et les numéros de page si vous les avez activés
+- Utiliser un seul thème sur toutes les diapositives
+- Afficher les logos que vous voulez à chaque emplacement
+- Porter le pied de page et les numéros de page sur les diapositives de contenu
+- Avoir un nom que votre équipe peut retrouver, dans votre dossier
+- Être ouverte aux personnes qui en ont besoin, et à elles seules
 
 ## Ce qui peut mal se passer
 
-- **L'emplacement Logos personnalisés est vide** — le fichier n'est pas encore dans Ressources. Demandez à un admin de le téléverser, puis recommencez.
-- **Le logo est trop grand ou trop petit** — ouvrez le fichier dans Assets, remplacez par une version correctement dimensionnée (les logos sont mis à l'échelle, mais les très gros fichiers ralentissent le rendu).
-- **Le pied de page apparaît sur la couverture** — il ne devrait pas. Si c'est le cas, vérifiez que vous êtes sur la dernière version de la plateforme.
-- **Les numéros de page manquent** — vérifiez que la bascule est activée, et que vous regardez une diapo de contenu (les diapos de couverture et de section masquent intentionnellement le numéro).
-
-> 🔎 **À vérifier dans votre interface actuelle** : la disposition du panneau Settings peut varier légèrement selon la version. Les cinq sections ci-dessus (renommer, Style, Logos, Footer & page numbers, Save) s'appliquent dans les versions récentes.
+- **Logo personnalisé absent du sélecteur.** Le fichier n'est pas encore dans Ressources. Demandez à un administrateur de le téléverser, puis rouvrez le sélecteur de logos.
+- **Pied de page sur la couverture.** Il ne devrait pas y être ; les diapositives de couverture et de section ignorent le pied de page. S'il apparaît, vérifiez le type de la diapositive dans le menu **Diapositive**.
+- **Un collègue ne peut pas ouvrir la présentation.** Il n'est pas dans **Gérer l'accès**, ou le dossier est restreint. Ajoutez-le, ou demandez au propriétaire du dossier.
+- **La présentation affiche d'anciens chiffres.** Elle est rattachée à un paquet de résultats plus ancien. Sur la page Produits, **⋮ → Paquet de résultats et portée…** la déplace vers le paquet épinglé.
 
 ## Et ensuite
 
-La présentation est prête à être partagée. Le module suivant couvre l'export et la diffusion.
+La présentation est prête à être partagée. Téléchargez-la, ou envoyez le lien.

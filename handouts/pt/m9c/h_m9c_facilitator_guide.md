@@ -35,7 +35,7 @@ No final, um participante deve conseguir: ler qualquer gráfico FASTR com um qua
 
 ## Conduzir a sessão
 
-**Preparação.** Tenha uma visualização guardada e uma apresentação existente prontas na conta de demonstração para mostrar gráficos de imediato. Confirme que os participantes concluíram a Configuração da instância — a atividade 6 usa dados reais do país, que já têm de estar carregados.
+**Preparação.** Tenha uma visualização guardada e uma apresentação prontas numa pasta de demonstração para poder mostrar gráficos de imediato. Confirme que os participantes têm uma pasta própria (Primeiros passos) e que a instância tem um pacote de resultados fixado com o módulo Disruption detection: a atividade 6 usa dados reais do país. Tenha presente que as edições se guardam em direto, por isso demonstre em duplicados, nunca no gráfico de um participante.
 
 **Como demonstrar.** Cada tarefa na plataforma deve ser demonstrada primeiro, depois praticada a partir da ficha, que reexplica o que mostrou. A demonstração detalhada do construtor de gráficos (atividade 2) é a que deve ensaiar — carrega a distinção filtrar/desagregar de que depende o resto do módulo.
 
@@ -65,9 +65,9 @@ No final, um participante deve conseguir: ler qualquer gráfico FASTR com um qua
 
 ### 2. Criar a sua primeira visualização · ~15 min · prática
 
-**O que acontece.** Os participantes constroem um gráfico com o construtor integrado (o assistente **Metric → Presets → Create**): + Create visualization → escolher uma métrica (ex.: *M3. Service utilization → Number of services reported*) → escolher um preset como *Service volume over time (monthly)* → Create. A ficha explica depois **filtrar vs desagregar** e os quatro modos de apresentação (Lines / Grid / Rows / Columns).
+**O que acontece.** Os participantes constroem um gráfico com o construtor integrado: **Novo → Nova visualização** na página Produtos, mantendo o pacote e o âmbito, e depois a caixa de diálogo **Métrica → Predefinições → Configurar** (*Indicator values → Indicator value → Personalizado → Série temporal → Inserir*). A ficha explica depois **filtrar vs desagregar** e os modos de apresentação (Linhas / Grelha / Linhas de tabela / Colunas / Gráficos diferentes), e ensina a **duplicar antes de alterar**, porque não existe «guardar como»: as edições guardam-se em direto.
 
-**Demonstrar (~3 min, ao vivo).** Abra uma visualização guardada e use o **painel esquerdo** — sublinhe que é preciso *descer (scroll)* para chegar a estes controlos, é aqui que as pessoas se perdem:
+**Demonstrar (~3 min, ao vivo).** Abra um duplicado de uma visualização guardada e use o separador **Dados** à esquerda:
 1. Comece com um indicador, total nacional; diga por palavras o que mostra.
 2. Em **Display (disaggregate)**, decomponha **por distrito** — alterne entre **Lines**, **Rows**, depois **Grid**, para verem os *mesmos dados em formas diferentes*.
 3. Em **Filter (subset)**, marque só dois distritos — o gráfico mostra apenas esses. Nomeie: *«estou a escolher o que mostrar»*.
@@ -79,7 +79,8 @@ No final, um participante deve conseguir: ler qualquer gráfico FASTR com um qua
 
 **Atenção a.**
 - Confundir **filtrar** (escolher o que mostrar) com **desagregar** (dividir um total nas partes) — a distinção está na base de cada gráfico.
-- Recorrer a **Custom** quando um preset chegaria; métrica → preset → Create é o caminho rápido.
+- Esperar um botão Guardar. Não existe: o título no topo muda o nome, o **Histórico** restaura, e **Duplicar** na página Produtos é a forma de manter um original.
+- Escolher a predefinição da métrica Indicator value (uma tabela de scorecard) e perguntar onde está a linha: para uma tendência precisam de **Personalizado → Série temporal**.
 
 ---
 
@@ -102,16 +103,17 @@ No final, um participante deve conseguir: ler qualquer gráfico FASTR com um qua
 
 ### 4. Construir uma visualização com a IA · ~15 min · prática
 
-**O que acontece.** Os participantes produzem o mesmo gráfico através de pedidos à IA em linguagem comum: escrever um pedido, verificar se a IA correspondeu (indicador, período, dados ajustados vs brutos), iterar em pequenos passos, e guardar.
+**O que acontece.** Os participantes produzem o mesmo gráfico através de pedidos em linguagem comum ao painel de IA **dentro de uma visualização**: abrir uma visualização em branco, pedir, verificar se a IA correspondeu ao pedido (indicador, período, dados ajustados vs brutos), e iterar em pequenos passos. A IA edita em direto a visualização aberta; não há nada para guardar.
 
-**Demonstrar.** Escreva um pedido de gráfico ao vivo, depois mostre onde confirmar que a IA usou o indicador certo, o período certo, e — sobretudo — os **dados ajustados vs brutos**.
+**Demonstrar.** Comece por perguntar à IA a partir da página Produtos e mostre a resposta: ali não consegue desenhar, apenas lista produtos para abrir. Depois abra uma visualização em branco, escreva um pedido, e aponte para os passos que ela lista (ler o editor, recolher os dados, atualizar a figura) e para onde confirmar o indicador, o período e os **dados ajustados vs brutos**. Mostre uma vez **Histórico → Restaurar**.
 
 **Diga algo como.** *«Antes de guardar, verifiquem que a IA usou dados ajustados, não brutos, e o período que realmente pediram. Ela adivinha muitas vezes.»*
 
 **Como é um bom resultado.** Um gráfico guardado conforme ao pedido no indicador, período, tipo de gráfico, e ajustado/bruto.
 
 **Atenção a.**
-- Confiar na primeira resposta. Verificar antes de guardar — sobretudo **dados ajustados vs brutos**.
+- Confiar na primeira resposta. Verificar, sobretudo os **dados ajustados vs brutos**.
+- Pedir à IA de dentro da visualização de um colega: ela vai alterá-la. Comece de uma em branco ou de um duplicado.
 
 ---
 
@@ -132,11 +134,11 @@ No final, um participante deve conseguir: ler qualquer gráfico FASTR com um qua
 
 ### 6. Aplicar — detetar uma perturbação · ~25 min · equipas de país
 
-**O que acontece.** A síntese: com dados reais do país, as equipas escolhem um indicador sinalizado, abrem o seu gráfico de perturbações, percorrem o quadro de seis passos, acrescentam contexto local, escrevem uma conclusão em três partes, e partilham-na com a sala.
+**O que acontece.** A síntese: com dados reais do país, as equipas criam o gráfico nacional do módulo **Disruption detection** (observado vs esperado com a banda credível de 95%), filtram para um indicador, percorrem o quadro de seis passos, acrescentam contexto local, escrevem uma conclusão em três partes, e partilham-na com a sala.
 
 **Demonstrar.** Nada de novo a demonstrar — isto aplica todo o módulo. Prepare-a relembrando às equipas os seis passos e a estrutura de conclusão em três partes.
 
-**Diga algo como.** *«Uma quebra de um único mês é normalmente ruído. Procurem uma queda sustentada — três meses ou mais — e lembrem-se de que volumes estáveis podem ainda significar cobertura a cair se a população estiver a crescer.»*
+**Diga algo como.** *«Uma quebra de um único mês é normalmente ruído. Procurem uma queda sustentada, três meses ou mais, abaixo da banda. A linha do esperado já tem em conta as unidades que não reportaram, por isso uma zona vermelha é uma mudança real entre as que reportaram.»*
 
 **Como é um bom resultado.** Uma conclusão claramente enunciada sobre uma perturbação real e sustentada, defensável perante a sala.
 

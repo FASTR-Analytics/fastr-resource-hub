@@ -29,7 +29,7 @@ NOTES DU PRÉSENTATEUR :
   - Je fais : insérer une viz sur une diapo et rédiger une interprétation en trois parties (titre, ce que vous voyez, ce que cela signifie).
   - Nous faisons : interpréter ensemble une seconde viz et l'ajouter à un diaporama.
   - Vous faites : interpréter une viz de votre choix et l'ajouter à votre propre présentation.
-- Onglet : Présentations.
+- Se fait dans l'éditeur de présentation : un bloc de visualisation et un bloc de texte côte à côte.
 - Message clé : le titre est la conclusion, pas le sujet. « Ce que vous voyez » est factuel. « Ce que cela signifie » nomme une personne ou une prochaine étape.
 - À surveiller : des titres purement descriptifs ; faits mélangés à l'interprétation ; « et alors » vagues.
 -->

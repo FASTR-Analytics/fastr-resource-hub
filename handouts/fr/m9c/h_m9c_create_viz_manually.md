@@ -19,24 +19,23 @@ footer: "FASTR · Visualisations et interprétation"
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous êtes connecté·e et sur le projet de votre pays
-- ☐ Vous êtes dans l'onglet **Visualisations**
-- ☐ Vous avez votre propre dossier (ou vous pouvez utiliser le dossier partagé)
+- ☐ Vous êtes connecté·e et sur la page **Produits**
+- ☐ Vous avez un dossier à vous (voir *Créer un dossier pour votre travail*)
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Construire trois graphiques temporels : d'abord **CPN1**, puis **BCG**, puis **un indicateur de votre choix**. Chaque graphique est enregistré dans votre dossier dans la liste Visualisations du projet. L'activité suivante fait la même chose avec l'Assistant IA.
+Construire trois graphiques linéaires, chacun enregistré comme visualisation dans votre dossier : d'abord **CPN1**, puis **BCG**, puis **un indicateur de votre choix**. L'activité suivante fait la même chose avec l'assistant IA.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez la boîte de dialogue Créer une visualisation</span></h2>
+Une visualisation est un produit, comme une présentation ou un rapport. Elle a sa propre ligne sur la page Produits, s'enregistre toute seule, et peut être copiée plus tard dans n'importe quelle présentation ou rapport.
 
-Dans l'onglet **Visualisations**, cliquez sur le bouton **+ Créer une visualisation** en haut à droite.
+<h2 class="step-h"><span class="step-n">1</span><span>Démarrer une nouvelle visualisation</span></h2>
 
-Une boîte de dialogue s'ouvre et vous guide en deux étapes — **Métrique** puis **Préréglages**. Choisir un préréglage nommé ouvre directement le graphique dans l'éditeur ; choisir **Personnalisé** ajoute une troisième étape **Configurer**.
+Sur la page **Produits**, cliquez sur **Nouveau**, puis sur **Nouvelle visualisation**. La première boîte de dialogue demande le **Paquet de résultats** et la **Portée**. Gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**.
 
-![La boîte de dialogue « Créer une visualisation » à l'étape 1, M3 sélectionné — modules à gauche, tuiles de métriques à droite, Annuler/Suivant en bas à droite h:320](../../../resources/screenshots/m9c/create_viz_dialog_fr.png)
+![h:230](../../../resources/screenshots/platform_v2_fr/06_new_visualization_dialog.png)
 
 </div>
 </div>
@@ -45,145 +44,102 @@ Une boîte de dialogue s'ouvre et vous guide en deux étapes — **Métrique** p
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Choisissez une métrique</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Choisir l'indicateur</span></h2>
 
-Dans le panneau de gauche de la boîte de dialogue, cliquez sur **M3. Utilisation des services**. La grille de droite ne liste plus que les métriques de M3.
+La boîte de dialogue **Insérer une visualisation** comporte trois étapes : **Métrique**, **Préréglages**, **Configurer**. La colonne de gauche liste les modules d'analyse par leur nom. Cliquez sur **Indicator values** (Valeurs des indicateurs), puis sur la carte de métrique **Indicator value**, et choisissez le niveau géographique **National** sur la carte. Cliquez sur **Suivant**.
 
-Cliquez sur la tuile **Nombre de services déclarés, par type d'ajustement**, puis sur **Suivant** en bas à droite.
+![h:300](../../../resources/screenshots/platform_v2_fr/08b_new_viz_indicator_value.png)
 
-> Une métrique, c'est *ce qui est mesuré*. Un préréglage, c'est *une façon prête à l'emploi de la dessiner*. Chaque module regroupe les métriques qu'il produit.
+> Une **métrique**, c'est *ce qui est mesuré*. La métrique Indicator value contient le décompte mensuel de chaque indicateur de l'instance. Un **préréglage**, c'est une façon prête à l'emploi de dessiner une métrique. Chaque module regroupe les métriques qu'il produit ; **Résultats principaux** montre les plus utilisées, tous modules confondus.
 
-<h2 class="step-h"><span class="step-n">3</span><span>Choisissez un préréglage</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Choisir comment la dessiner</span></h2>
 
-À l'étape **Préréglages**, cliquez sur **Volume de services dans le temps (mensuel)** — un graphique linéaire du volume mensuel — puis sur **Créer**.
+La métrique Indicator value propose un seul préréglage, **Scorecard table**, qui n'est pas ce que vous voulez ici. Cliquez sur **Personnalisé**, puis sur **Suivant**. À l'étape **Configurer**, choisissez **Série temporelle** et cliquez sur **Insérer**.
 
-![Étape Préréglages — cinq préréglages nommés plus Personnalisé, chacun avec une vignette h:280](../../../resources/screenshots/m9c/create_viz_presets_fr.png)
+![h:220](../../../resources/screenshots/platform_v2_fr/10_new_viz_configure.png)
 
-Le graphique s'ouvre dans l'éditeur.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-<h2 class="step-h"><span class="step-n">4</span><span>Filtrez sur CPN1, 12 derniers mois</span></h2>
-
-Le graphique s'ouvre avec tous les indicateurs sur toute la période disponible. Vous allez le réduire à **CPN1, 12 derniers mois**.
-
-Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Filtre (sous-ensemble)** et faites deux choses :
-
-- Cochez **Indicateur** — une rangée de pastilles apparaît (ANC1, ANC4, BCG, …). Les pastilles sont vides au départ ; cliquez sur **ANC1** pour l'ajouter (dans certains jeux de données l'indicateur s'appelle **CPN1**). Seules les pastilles que vous ajoutez s'affichent.
-- Cochez **Période** — la valeur par défaut est *Derniers N mois* avec N = 12, donc la fenêtre est déjà correcte. Utilisez le curseur pour la changer si besoin.
-
-Le graphique se met à jour à chaque clic.
-
-> La métrique expose aussi quatre pastilles **Valeurs des données** (`count_final_none`, `_outliers`, `_completeness`, `_both`). La valeur par défaut `count_final_both` veut dire *ajusté pour les valeurs aberrantes et pour la complétude* — la version la plus propre des données de votre pays. Laissez-la telle quelle sauf si vous voulez explicitement un autre ajustement.
+Le graphique s'ouvre dans l'éditeur, avec tous les indicateurs tracés sur toute la période.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">5</span><span>Enregistrez-le dans votre dossier</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Filtrer sur CPN1, 12 derniers mois</span></h2>
 
-Cliquez sur **Sauver comme nouvelle viz.** en haut de l'éditeur. Donnez-lui un nom clair (p. ex. *CPN1 — mensuel, 12 derniers mois*) et enregistrez-le dans **votre dossier**.
+L'éditeur a un onglet **Données** à gauche et le graphique à droite. Dans **Filtre (sous-ensemble)** :
 
-Il apparaît maintenant dans la liste Visualisations sous votre dossier.
+- Cochez **Indicateur**. Une rangée de pastilles apparaît (ANC1, ANC4, BCG, …). Cliquez sur **ANC1** (la CPN1). Seules les pastilles que vous sélectionnez sont tracées.
+- Cochez **Période**. La valeur par défaut est *12 derniers mois* ; ajustez le curseur si vous voulez une autre fenêtre.
+
+Le graphique se redessine après chaque changement.
+
+![h:300](../../../resources/screenshots/platform_v2_fr/11c_visualization_timeseries_anc1.png)
+
+> **Valeurs des données.** La métrique propose aussi quatre pastilles de valeurs des données : non ajustée, ajustée pour les valeurs aberrantes, ajustée pour la complétude, les deux. La valeur par défaut est le décompte entièrement ajusté, la version la plus propre des données de votre pays. Laissez-la telle quelle sauf si vous voulez explicitement un autre ajustement.
+
+<h2 class="step-h"><span class="step-n">5</span><span>La nommer et vérifier le dossier</span></h2>
+
+Il n'y a pas de bouton d'enregistrement : les changements sont sauvegardés automatiquement et partagés en direct (le libellé **En direct** à côté du nom du paquet). Cliquez sur le titre en haut de l'éditeur pour le renommer, par exemple *CPN1, mensuel, 12 derniers mois*. Cliquez sur la flèche de retour pour revenir à la page Produits et vérifiez que le graphique se trouve dans votre dossier ; sinon, utilisez **⋮ → Déplacer vers un dossier…** sur sa ligne.
 
 ## Refaites-le deux fois de plus
 
-Refaites les cinq mêmes étapes pour **BCG** (cochez BCG à l'étape 4 au lieu de CPN1) puis pour **un indicateur de votre choix** (Penta1, CPN4, admissions hospitalières…). Vous devriez avoir trois graphiques dans votre dossier.
+Refaites les cinq étapes pour **BCG**, puis pour **un indicateur de votre choix** (Penta1, CPN4, consultations externes…). Vous devriez avoir au final **trois visualisations dans votre dossier**.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Filtrer vs désagréger — quelle différence ?
+## Filtrer vs désagréger : quelle différence ?
 
 Ces deux mots reviennent souvent. Ils ne veulent pas dire la même chose :
 
-- **Filtrer = choisir ce qu'on affiche.** Cochez les indicateurs, les lieux ou les mois que vous voulez — seuls ceux-là apparaissent. p. ex. *afficher seulement CPN1*, ou *seulement la région Nord*. Comme un projecteur : vous le pointez sur ce que vous voulez voir.
-- **Désagréger = décomposer.** Diviser un total en ses parties pour les comparer — p. ex. *une ligne par indicateur*, ou *une barre par district*. Rien n'est caché ; le total est montré en morceaux.
+- **Filtrer = choisir ce qu'on affiche.** Choisissez les indicateurs, les lieux ou les mois que vous voulez ; seuls ceux-là apparaissent. *Afficher seulement CPN1*, ou *seulement la région Nord*. Comme un projecteur : vous le pointez sur ce que vous voulez voir.
+- **Désagréger = décomposer.** Diviser un total en ses parties pour pouvoir les comparer : *une ligne par indicateur*, ou *une barre par district*. Rien n'est caché ; le total est montré en morceaux.
 
 ![Filtrer = choisir ce qu'on affiche : cocher CPN1, et seul CPN1 apparaît h:140](../../../resources/diagrams_fr/m9c_filter.svg)
 
-![Désagréger « CPN1 par district » affiché de quatre façons — Lines, Grid, Rows, Columns h:195](../../../resources/diagrams_fr/m9c_disaggregate.svg)
+![Désagréger « CPN1 par district » affiché de quatre façons : Lignes, Grille, Rangées, Colonnes h:195](../../../resources/diagrams_fr/m9c_disaggregate.svg)
 
-> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » → vous ne voyez plus que la CPN1 du Nord. **Désagrégez** « par district » → le même total divisé en une barre (ou ligne) par district.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Où le faire quand vous éditez une viz
-
-Ouvrez une visualisation enregistrée — les contrôles sont dans le **panneau de gauche**, et il faut souvent **faire défiler** pour les trouver (c'est là que les gens se perdent). Deux sections font le travail :
-
-- **Filtre (sous-ensemble)** — **choisir ce que vous voulez voir** : cocher **Période**, **Indicateur** et le niveau administratif voulu. Seules les valeurs sélectionnées apparaissent.
-- **Affichage (désagréger)** — choisir **comment les parties s'affichent**. Le menu déroulant offre cinq options :
-  - **Lignes** — une courbe par partie, toutes sur le même graphique
-  - **Grille** — un petit graphique séparé pour chaque partie, côte à côte
-  - **Rangées** — une rangée de tableau par partie
-  - **Colonnes** — une colonne de tableau par partie
-  - **Graphiques multiples (réplicants)** — un graphique en taille réelle par partie, empilés
-
-![Le panneau de gauche de l'éditeur de viz — faites défiler jusqu'à « Filtre (sous-ensemble) » et « Affichage (désagréger) » h:400](../../../resources/screenshots/m9c/edit_viz_panel_fr.png)
+> **Exemple.** Partez du *total des visites CPN1, au niveau national*. **Filtrez** sur « région Nord » : vous ne voyez plus que la CPN1 du Nord. **Désagrégez** « par district » : le même total divisé en une ligne par district.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-> **Attention quand vous utilisez les deux ensemble.** Voici le piège, avec un exemple. Vous décomposez un graphique **par district** parce que vous voulez comparer les districts. Puis vous le **filtrez** sur un seul district — les autres disparaissent. Il ne reste qu'un seul district, tout seul, et plus rien à comparer.
->
-> **La règle simple :** utilisez **filtrer** pour choisir les données que vous voulez regarder, et **désagréger** pour les diviser en parties à comparer. Ne filtrez simplement pas jusqu'à une seule des choses que vous vouliez comparer.
+## Où le faire dans l'éditeur
+
+L'onglet **Données** de l'éditeur contient les deux sections, l'une sous l'autre :
+
+- **Filtre (sous-ensemble)** : cochez **Période**, **Indicateur** ou un niveau administratif, puis choisissez les éléments à garder.
+- **Affichage (désagréger)** : cochez la dimension à décomposer, puis choisissez comment montrer les parties : **Lignes** (toutes sur un seul graphique), **Grille** (un petit graphique par partie), **Rangées** ou **Colonnes** (un tableau), **Graphiques différents (réplicats)** (un graphique en taille réelle par partie).
+
+Deux autres onglets se trouvent à côté de Données : **Présentation** (couleurs, axes, libellés) et **Texte** (titre, sous-titre, note de bas de page).
+
+> **Le piège quand vous utilisez les deux.** Vous décomposez un graphique par district pour comparer les districts, puis vous le filtrez sur un seul district. Vous regardez maintenant un district tout seul, sans rien à comparer. Utilisez le filtre pour choisir les données, la désagrégation pour les diviser, et ne filtrez pas jusqu'à une seule des choses que vous vouliez comparer.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Exercice : décomposez votre graphique CPN1 par niveau administratif
+## Exercice : décomposez votre graphique CPN1 par région
 
-En ce moment, votre graphique CPN1 montre une seule ligne : le total national sur les 12 derniers mois. Vous allez le transformer en une ligne par **zone administrative** pour les comparer côte à côte.
+Votre graphique CPN1 montre une seule ligne nationale. Transformez-le en une ligne par région.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ouvrez le graphique</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Dupliquez d'abord</span></h2>
 
-Dans la liste **Visualisations**, ouvrez votre graphique CPN1 enregistré (celui que vous avez nommé *CPN1 — mensuel, 12 derniers mois*).
+Sur la page Produits, ouvrez le menu **⋮** de votre visualisation CPN1 et cliquez sur **Dupliquer**. Renommez la copie *CPN1, mensuel, par région*. Les modifications s'enregistrent toutes seules, donc dupliquer d'abord est la façon de garder le graphique national intact.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Désagrégez par niveau administratif</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Désagrégez</span></h2>
 
-Dans le **panneau de gauche** de l'éditeur, faites défiler jusqu'à **Affichage (désagréger)**.
-
-- Cochez le niveau administratif à comparer. Dans FASTR les niveaux ont un nom générique — **Unité administrative 2** correspond généralement à la *région*, **Unité administrative 3** au *district*. Cochez *Unité administrative 2* pour avoir une ligne par région.
-- Laissez le style d'affichage sur **Lignes** pour l'instant — une ligne par région, toutes sur le même graphique.
-
-Le graphique se redessine. Au lieu d'une seule ligne nationale, vous devriez voir **une ligne par région**.
+Ouvrez la copie. Dans **Affichage (désagréger)**, cochez le niveau administratif que vous voulez comparer. Dans FASTR, les niveaux ont un nom générique : **Zone administrative 2** correspond généralement à la région, **Zone administrative 3** au district. Laissez l'affichage sur **Lignes** : une ligne par région.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Essayez les autres styles d'affichage</span></h2>
 
-Mêmes données, formes différentes :
-
-- **Grille** — un petit graphique séparé par région, côte à côte. Utile quand il y a beaucoup de régions et que les lignes se chevauchent.
-- **Rangées** — un tableau avec une rangée par région. Utile quand vous voulez les valeurs exactes plutôt que la forme.
-- **Colonnes** — un tableau avec une colonne par région.
-- **Graphiques multiples (réplicants)** — un graphique en taille réelle par région, empilés. Utile quand chaque région mérite une lecture complète.
-
-Choisissez celui qui se lit le mieux pour vos données.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Enregistrez-le comme nouveau graphique</span></h2>
-
-Cliquez sur **Sauver comme nouvelle viz.** — nommez-le p. ex. *CPN1 — mensuel, par région* et enregistrez-le dans **votre dossier**.
-
-> **N'écrasez pas le graphique national.** Enregistrez *comme nouveau graphique*, pas seulement *sauvegarder*, pour garder les deux : la tendance nationale et la décomposition régionale.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-### Attention
-
-Vous réglez à la fois **Filtre** et **Affichage** à l'étape 4 du parcours original (filtrer sur CPN1, 12 derniers mois) et à l'étape 2 de cet exercice (désagréger par région). C'est correct. Le piège, c'est de **filtrer jusqu'à l'une des choses que vous disiez vouloir comparer** — p. ex. désagréger par région *puis* filtrer sur une seule région. Il ne resterait qu'une seule ligne, plus rien à comparer.
+Mêmes données, formes différentes. **Grille** quand il y a beaucoup de régions et que les lignes se chevauchent. **Rangées** ou **Colonnes** quand vous voulez les valeurs exactes. **Graphiques différents (réplicats)** quand chaque région mérite une lecture complète. Choisissez celui qui se lit le mieux.
 
 ### Refaites-le pour BCG
 
-Refaites les mêmes trois étapes sur votre graphique BCG enregistré. Vous devriez avoir au final **deux graphiques régionaux** dans votre dossier : un pour CPN1, un pour BCG.
+Dupliquez votre graphique BCG et décomposez-le de la même façon. Vous devriez avoir au final deux graphiques régionaux dans votre dossier.
 
 ---
 
@@ -191,22 +147,22 @@ Refaites les mêmes trois étapes sur votre graphique BCG enregistré. Vous devr
 
 ## Essayez quelques options de plus
 
-Une fois vos trois graphiques enregistrés, essayez une autre métrique ou un autre préréglage :
+Une fois vos graphiques enregistrés, démarrez une autre **Nouvelle visualisation** et regardez les autres modules à l'étape Métrique :
 
-- Une métrique de couverture sous **M6** (une courbe de couverture, pas une tendance de volume).
-- Le préréglage de variation trimestrielle (compare des périodes au lieu de tracer une tendance continue).
+- **Coverage estimates** (estimations de couverture) : une courbe de couverture plutôt qu'une tendance de volume.
+- **Disruption detection** (détection des perturbations) : l'observé face à l'attendu, avec la bande de crédibilité (la dernière activité de cette série l'utilise).
+- **Explorer**, dans la navigation latérale, montre un graphique déjà prêt pour chaque module sans rien créer. Utile pour voir ce qu'un module produit avant de construire avec lui.
 
-> **Astuce :** Les graphiques en ligne (volume des services dans le temps) sont les meilleurs pour les tendances dans le temps. Les graphiques à barres (variation trimestrielle / annuelle) sont meilleurs pour comparer des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
+> **Astuce :** une série temporelle convient mieux à une tendance. Un graphique en barres compare des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
 
 ## Vérification
 
 Vous devriez maintenant avoir :
 
-- **Trois graphiques enregistrés** dans votre dossier : CPN1, BCG, et un de votre choix.
-- Le chemin mémorisé : **+ Créer une visualisation → M3 → métrique → préréglage → filtre → Sauver comme nouvelle viz.**
-- Une idée de quels préréglages conviennent aux tendances vs aux comparaisons.
+- **Trois visualisations dans votre dossier** : CPN1, BCG, et un indicateur de votre choix, plus deux copies régionales.
+- Le chemin mémorisé : **Nouveau → Nouvelle visualisation → paquet et portée → module → métrique → préréglage ou Personnalisé → Insérer**, puis **Filtre** et **Affichage** dans l'onglet Données.
+- L'habitude de **dupliquer avant de modifier** un graphique que vous voulez garder.
 
 ## Étape suivante
 
-L'activité suivante fait la même chose avec l'Assistant IA — en tapant la demande en langage naturel au lieu de cliquer dans la boîte de dialogue. Même résultat, autre chemin.
-
+L'activité suivante fait la même chose avec l'assistant IA, depuis l'intérieur de la visualisation : en tapant la demande au lieu de cliquer. Même résultat, autre chemin.

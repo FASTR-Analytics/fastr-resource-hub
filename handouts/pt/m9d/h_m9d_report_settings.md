@@ -10,7 +10,7 @@ footer: "FASTR · Apresentações"
 
 <div class="setup-breadcrumb"><span class="step done">Criar apresentação</span> <span class="arrow">→</span> <span class="step done">Adicionar manual</span> <span class="arrow">→</span> <span class="step done">Adicionar IA</span> <span class="arrow">→</span> <span class="step done">Editar & finalizar</span> <span class="arrow">→</span> <span class="step done">Formatar texto</span> <span class="arrow">→</span> <span class="step current">Definições</span></div>
 
-# Configurar as definições da sua apresentação
+# Definições da apresentação: tema, logótipos, rodapé, partilha
 
 <p class="meta-line"><strong>Atividade</strong> · <strong>Apresentações</strong> · <strong>~10 min</strong></p>
 
@@ -19,25 +19,23 @@ footer: "FASTR · Apresentações"
 
 <p class="sb-label">Antes de começar</p>
 
-- ☐ A sua apresentação tem pelo menos um diapositivo de conteúdo finalizado
-- ☐ Os logótipos personalizados que pretende usar já estão carregados em **Assets** (ver Pré-passo abaixo)
+- ☐ A sua apresentação tem pelo menos um diapositivo de conteúdo terminado
+- ☐ Qualquer logótipo personalizado que queira já está em **Recursos** (ver Pré-passo)
 
 <p class="sb-label">Porque é importante</p>
 
-As definições transformam um rascunho em algo partilhável. Um nome claro, um estilo coerente, os logótipos certos nos lugares certos, um rodapé global e números de página nos diapositivos de conteúdo. É também aqui que se renomeia a apresentação.
+Estas definições transformam um rascunho em algo partilhável: um aspeto consistente, os logótipos certos, um rodapé e números de página em todos os diapositivos de conteúdo, um nome que as pessoas encontram, e as pessoas certas a poder abri-la.
 
 </aside>
 <div class="p1-main">
 
-## Pré-passo — Os logótipos personalizados vivem em Assets
+## Pré-passo: os logótipos personalizados vivem em Recursos
 
-Os logótipos personalizados não vivem dentro da apresentação. Vivem em **Assets**, uma biblioteca ao **nível da instância** que todos os projetos da instância podem usar.
+Os logótipos personalizados não são carregados dentro de uma apresentação. Vivem em **Recursos**, uma biblioteca ao nível da instância que todas as apresentações e relatórios podem usar.
 
-> **Carregar em Assets é restrito a administradores.** Se não é administrador da instância, peça ao seu facilitador ou administrador para carregar os ficheiros de logótipo (PNG ou JPEG) antes de abrir as definições da apresentação. Uma vez em Assets, aparecem em **Custom logos** na sua apresentação.
+> **O carregamento em Recursos é para administradores.** Se não for administrador, peça ao seu facilitador que carregue os seus ficheiros de logótipo (PNG ou JPEG) antes de começar. Uma vez em Recursos, aparecem no seletor de logótipos da apresentação.
 
-Para referência, os administradores chegam a Assets a partir da página inicial principal (canto superior esquerdo, logótipo FASTR ou caminho do projeto) → navegação superior → **Assets** → **Upload assets**. Assets serve também aos administradores para carregar outros ficheiros partilhados (dados CSV, GeoJSON).
-
-![Biblioteca Assets ao nível da instância (vista admin) h:230](../../../resources/screenshots/m9d/report_settings_01_assets_page.png)
+Os administradores chegam lá pela navegação lateral: **Recursos → Carregar recursos**. Recursos guarda também outros ficheiros partilhados (ficheiros de mapas GeoJSON, carregamentos CSV).
 
 </div>
 </div>
@@ -46,86 +44,67 @@ Para referência, os administradores chegam a Assets a partir da página inicial
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Abrir Definições
+## Dois menus fazem tudo isto
 
-Com a apresentação aberta, clique no botão **Settings** na barra de ferramentas (canto superior direito). Abre um painel intitulado **Slide deck settings: <nome da apresentação>**. Save / Cancel ficam no topo do painel.
+Com a apresentação aberta, o menu **Apresentação** trata do aspeto; o menu **Ficheiro** trata do nome, da pasta, do acesso e da exportação.
 
-![Painel Slide deck settings — secção Style visível h:340](../../../resources/screenshots/m9d/report_settings_02_settings_panel.png)
+![h:220](../../../resources/screenshots/platform_v2_en/21b_deck_menu.png)
 
-## O que está dentro
+<h2 class="step-h"><span class="step-n">1</span><span>Apresentação → Tema</span></h2>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Renomear a apresentação</span></h2>
+O tema define as cores, a tipografia e os elementos fixos de todos os diapositivos: Predefinido (verde GFF), Minimalista, Corporativo, Ministério, Executivo, entre outros. É o mesmo seletor que viu quando a apresentação foi criada. Escolha um e mantenha-o em toda a apresentação.
 
-Renomear já não é feito neste painel. Feche-o e use **Ficheiro > Nome e pasta**, ou clique no título da apresentação no cabeçalho. Use a convenção combinada pela sua equipa (país, período, tema, o seu nome).
+<h2 class="step-h"><span class="step-n">2</span><span>Apresentação → Logótipos</span></h2>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Style</span></h2>
+Três espaços, cada um independente: a **capa**, o **cabeçalho dos diapositivos de conteúdo** e o **rodapé dos diapositivos de conteúdo**. Cada um oferece os logótipos FASTR integrados (a cores e em branco) e os logótipos personalizados carregados em Recursos. Diapositivo a diapositivo, o menu **Diapositivo** pode mostrar ou esconder os logótipos da capa.
 
-Três pré-visualizações mostram como ficarão os diapositivos **Cover**, **Section** e **Content**. Clique qualquer opção por baixo para as atualizar em direto.
+<h2 class="step-h"><span class="step-n">3</span><span>Apresentação → Rodapé e números de página</span></h2>
 
----
+Uma linha curta de rodapé (país, período, autor) mostrada em todos os diapositivos de conteúdo, e um interruptor para os números de página. Os diapositivos de capa e de secção ignoram ambos.
 
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-Secções da zona Style:
-
-- **Color theme** — paleta de cores standard mais algumas opções especiais nas cores FASTR e um seletor custom.
-- **Font** — Inter, Fira Sans, Merriweather ou Poppins.
-- **Layout** — Default, Modern, Corporate ou Split.
-- **Cover & Section** — variantes Bold, Muted, Light, Lighter, White, Pure (aparência dos diapositivos de capa/secção).
-- **Content Pages** — variantes Default, Bold, Header Only, Classic Black, Classic Colored, Soft Black, Soft Colored, Bordered, Minimal (aparência dos diapositivos de conteúdo).
-- **Background detail** — None, Dots, Circles, Ovals, Lines, Grid, Chevrons, Waves, Noise, Maze, World (padrão subtil no fundo).
-
-Escolha uma combinação e mantenha-a em toda a apresentação.
+**Apresentação → Todas as definições da apresentação…** abre o painel completo de definições, se quiser tudo num só ecrã.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">3</span><span>Logos</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Ficheiro → Nome e pasta…</span></h2>
 
-Três espaços de logótipo, independentes:
+Muda o nome da apresentação e move-a para outra pasta. Clicar no título da apresentação no canto superior esquerdo também muda o nome. Use a convenção que a sua equipa combinou (país, período, tema, o seu nome).
 
-- **Cover** — logótipo no diapositivo de título
-- **Content header** — logótipo no topo de cada diapositivo de conteúdo
-- **Content footer** — logótipo no fundo de cada diapositivo de conteúdo
+![h:220](../../../resources/screenshots/platform_v2_en/21_deck_file_menu.png)
 
-Cada espaço tem duas opções por defeito: **FASTR (colored)** e **FASTR (white)**. Clique para aplicar.
+<h2 class="step-h"><span class="step-n">5</span><span>Ficheiro → Gerir acesso…</span></h2>
 
-Para logótipos personalizados, clique **Add** em **Custom logos** e escolha entre as imagens que carregou em Assets (ver Pré-passo).
+Quem pode abrir e editar esta apresentação: **Proprietário**, **Editor** ou **Leitor** por pessoa. Uma apresentação é visível para a equipa por predefinição; a linha na página Produtos mostra **Restrito** quando o acesso foi limitado. Para definir o acesso de uma pasta inteira de uma só vez, use **⋮ → Definir o acesso a tudo o que está nesta pasta…** na linha da pasta, na página Produtos.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Footer & page numbers</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>Ficheiro → Transferir… e Partilhar…</span></h2>
 
-Duas opções:
+**Transferir…** exporta a apresentação (PDF, ou PPTX com os gráficos como imagens). **Partilhar…** dá uma ligação. **Copiar para apresentação…** copia os diapositivos selecionados para outra apresentação.
 
-- **Set global footer text for all content slides** — escreva uma linha curta (nome do projeto, período, autor) que aparece em todos os diapositivos de conteúdo. Os de capa e de secção ignoram-na.
-- **Show page numbers (except on cover and section slides)** — ative para apresentações impressas ou exportadas em PDF.
-
-<h2 class="step-h"><span class="step-n">5</span><span>Guardar</span></h2>
-
-Clique **Save** no canto superior direito do painel. As definições não são guardadas automaticamente como o conteúdo dos diapositivos — fechar sem Save perde as alterações. **Cancel** descarta.
+Não há nada para guardar: todas as definições se aplicam de imediato e ficam guardadas em direto.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Ponto de controlo
+## Ponto de verificação
 
-Ao fechar o painel, a sua apresentação deve:
+A sua apresentação deverá:
 
-- Ter um nome claro que a sua equipa consiga encontrar
-- Usar um tema de cores + tipo de letra + esquema coerentes em todos os diapositivos
-- Mostrar os logótipos pretendidos em cada espaço
-- Mostrar o rodapé global e números de página se os ativou
+- Usar um só tema em todos os diapositivos
+- Mostrar os logótipos que pretende em cada espaço
+- Trazer o rodapé e os números de página nos diapositivos de conteúdo
+- Ter um nome que a sua equipa consiga encontrar, na sua pasta
+- Estar aberta às pessoas que precisam dela, e só a essas
 
 ## O que pode correr mal
 
-- **A área de Custom logos está vazia** — o ficheiro ainda não está em Assets. Volte a Assets, carregue, regresse.
-- **O logótipo está demasiado grande ou pequeno** — abra o ficheiro em Assets, substitua por uma versão com tamanho adequado (os logótipos são escalados, mas ficheiros muito grandes atrasam o render).
-- **O rodapé aparece na capa** — não devia. Se aparecer, verifique se está na versão mais recente da plataforma.
-- **Não aparecem números de página** — confirme que a opção está ativa e que está a olhar para um diapositivo de conteúdo (capa e secção escondem deliberadamente o número de página).
-
-> 🔎 **Verificar na sua interface atual**: a disposição do painel Settings pode variar entre versões da plataforma. As cinco secções acima (renomear, Style, Logos, Footer & page numbers, Save) aplicam-se nas versões recentes.
+- **O logótipo personalizado não aparece no seletor.** O ficheiro ainda não está em Recursos. Peça a um administrador que o carregue, e volte a abrir o seletor de logótipos.
+- **Rodapé na capa.** Não deveria estar lá; os diapositivos de capa e de secção ignoram o rodapé. Se aparecer, verifique o tipo do diapositivo no menu **Diapositivo**.
+- **Um colega não consegue abrir a apresentação.** Não está em **Gerir acesso**, ou a pasta está restrita. Acrescente-o, ou fale com o proprietário da pasta.
+- **A apresentação mostra números antigos.** Está ligada a um pacote de resultados mais antigo. Na página Produtos, **⋮ → Pacote de resultados e âmbito…** move-a para o pacote fixado.
 
 ## A seguir
 
-A apresentação está pronta para ser partilhada. O próximo módulo trata da exportação e da disseminação.
+A apresentação está pronta a partilhar. Transfira-a, ou envie a ligação.

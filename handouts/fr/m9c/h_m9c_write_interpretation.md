@@ -52,25 +52,29 @@ Pour chaque graphique placé sur une diapositive, votre interprétation comporte
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Parcourir les six étapes avec un collègue</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Choisir un graphique dans votre dossier</span></h2>
+
+Sur la page **Produits**, ouvrez l'un des graphiques que vous avez enregistrés dans votre dossier. Choisissez-en un qui bouge (une tendance, une chute, un contraste entre régions), pas une ligne plate. Un graphique plat est difficile à commenter, et plus encore à transformer en action.
+
+<h2 class="step-h"><span class="step-n">2</span><span>Parcourir les six étapes avec un collègue</span></h2>
 
 Avant d'écrire quoi que ce soit, parcourez le graphique avec un collègue en utilisant le cadre *Lire une viz* : indicateur, niveau et période, ce qui est comparé, valeurs, ce qui ressort, et alors.
 
-<h2 class="step-h"><span class="step-n">2</span><span>Écrire le titre</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Écrire le titre</span></h2>
 
 Commencez par le **message**, pas une description. Si un directeur lisait seulement le titre, comprendrait-il le constat ?
 
-<h2 class="step-h"><span class="step-n">3</span><span>Écrire « ce que vous voyez »</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Écrire « ce que vous voyez »</span></h2>
 
 Décrivez le graphique en 1 à 3 phrases. Chiffres, tendances, comparaisons. **Pas encore d'interprétation** — juste les faits visibles sur le graphique.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Écrire « ce que cela signifie »</span></h2>
+<h2 class="step-h"><span class="step-n">5</span><span>Écrire « ce que cela signifie »</span></h2>
 
 Le « et alors ». **Quelle action cela appellerait-il ?** Soyez précis. *« Visites de supervision dans 3 districts »* — pas *« améliorer la performance »*.
 
-<h2 class="step-h"><span class="step-n">5</span><span>Ajouter à votre diapositive</span></h2>
+<h2 class="step-h"><span class="step-n">6</span><span>Ajouter à votre diapositive</span></h2>
 
-Dans l'onglet Présentations, ouvrez votre présentation, ajoutez le graphique, collez votre texte à côté.
+Ouvrez votre présentation depuis la page Produits et insérez le graphique sur une diapositive de contenu (sélectionnez le bloc, réglez son type sur **Visualisation**, puis **Insérer une visualisation → Visualisation existante…**). Placez votre texte en trois parties dans un deuxième bloc à côté. La présentation s'enregistre toute seule.
 
 ## Pièges à éviter
 

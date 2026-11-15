@@ -20,8 +20,8 @@ footer: "FASTR · Visualizações & Interpretação"
 <p class="sb-label">Antes de começar</p>
 
 - ☐ Concluiu os 5 documentos anteriores
-- ☐ Está autenticado na plataforma, dentro do projeto do seu país
-- ☐ Está no separador **Visualizations**
+- ☐ Está autenticado na plataforma, na página **Produtos**
+- ☐ Tem uma pasta sua
 
 <p class="sb-label">Porque é importante</p>
 
@@ -32,7 +32,7 @@ Os primeiros cinco documentos ensinaram a técnica. É aqui que a usa: abrir um 
 
 ## O que vai fazer
 
-Abrir o gráfico Disruptions and surpluses (national), restringi-lo a um indicador e a um período de interesse, percorrer o quadro de seis passos, e depois escrever um achado em três partes para partilhar com a sala.
+Criar o gráfico nacional de perturbações a partir do módulo Disruption detection, restringi-lo a um indicador e a um período de interesse, percorrer o quadro de seis passos, e depois escrever um achado em três partes para partilhar com a sala.
 
 </div>
 </div>
@@ -41,19 +41,19 @@ Abrir o gráfico Disruptions and surpluses (national), restringi-lo a um indicad
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Encontrar o gráfico de perturbações</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Criar o gráfico de perturbações</span></h2>
 
-No separador **Visualizations**, mude o seletor de vista (no topo esquerdo da lista) para **By module**. Isto agrupa as visualizações pelo módulo que as produz.
+Na página **Produtos**, clique em **Novo → Nova visualização**, mantenha o pacote fixado e **Todos os dados**, e clique em **Seguinte**. No passo Métrica, clique no módulo **Disruption detection** (deteção de perturbações), depois no cartão **Bayesian disruption detection — observed vs expected with 95% CI**, escolha o nível **Nacional**, e clique em **Seguinte**. Escolha a predefinição **Gráfico de perturbações com banda credível de 95%** e clique em **Inserir**.
 
-Abra **M3. Service utilization**. Desça até ao grupo **Actual vs expected service volume — National**. O primeiro cartão do grupo é **Disruptions and surpluses (national)**. Clique para abrir.
+![Passo Métrica com Disruption detection selecionado h:230](../../../resources/screenshots/platform_v2_en/08_new_viz_module_metrics.png)
 
-![Separador Visualizations em vista By module, M3 Service utilization selecionado h:300](../../../resources/screenshots/m9c/spot_disruption_01_m3_module_list.png)
+> Já foi construído por um colega? A página Produtos pode ter um. Abra-o e faça **⋮ → Duplicar**, para que os seus filtros não alterem os dele: as edições guardam-se em direto.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Ler a vista por defeito</span></h2>
 
-O gráfico por defeito mostra cada indicador-base num pequeno gráfico em grelha. Duas linhas pretas atravessam cada gráfico: uma linha **contínua** para o **volume mensal observado**, e uma linha **tracejada** para o volume **esperado**, previsto a partir das tendências passadas. A área entre as duas é preenchida — **vermelha** onde o observado fica **abaixo** do esperado (uma perturbação), **verde** onde o observado fica **acima** do esperado (um excedente).
+O gráfico abre com cada indicador-base num pequeno gráfico em grelha. Duas linhas pretas atravessam cada um: uma linha **contínua** para o **volume mensal observado**, e uma linha **tracejada** para o volume **esperado**, modelado a partir das unidades sanitárias que reportaram nesse mês. Uma **banda cinzenta** em torno da linha do esperado é o intervalo credível de 95%. Onde a linha observada desce **abaixo da banda**, a diferença é preenchida a **vermelho** (um défice); onde sobe **acima**, é preenchida a **verde** (um excedente). Dentro da banda é variação normal.
 
-![Grelha por defeito das perturbações e excedentes, todos os indicadores visíveis h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
+![Gráfico de perturbações, todos os indicadores em grelha h:230](../../../resources/screenshots/platform_v2_en/11_visualization_editor.png)
 
 ---
 
@@ -61,13 +61,9 @@ O gráfico por defeito mostra cada indicador-base num pequeno gráfico em grelha
 
 <h2 class="step-h"><span class="step-n">3</span><span>Filtrar a um indicador</span></h2>
 
-No separador **Data** à esquerda, encontre a secção **Filter (subset)** e marque a caixa **Indicator**. Surge uma lista de chips de indicadores (ANC1, ANC4, BCG, DELIVERY, OPD, PENTA1, PENTA3, PNC1_MOTHER, PNC1_NEWBORN). Clique num chip para filtrar o gráfico a esse indicador. Clique em mais para adicionar outros.
+No separador **Dados** à esquerda, em **Filtro (subconjunto)**, marque **Indicador**. Surge uma lista de etiquetas de indicadores (ANC1, ANC4, BCG, parto, Penta1…). Clique numa etiqueta para manter apenas esse indicador; clique em mais para acrescentar outros.
 
-![Filtro Indicator expandido com a lista de chips h:340](../../../resources/screenshots/m9c/spot_disruption_03_indicator_filter_open.png)
-
-Quando só um indicador está selecionado, a grelha colapsa num gráfico único em tamanho real. Também pode marcar **Time period** para restringir a janela temporal.
-
-![Filtrado a ANC1, gráfico único em tamanho real h:340](../../../resources/screenshots/m9c/spot_disruption_04_filtered_anc1.png)
+Quando só um indicador está selecionado, a grelha colapsa num gráfico único em tamanho real. Marque **Período** para restringir ainda mais a janela temporal.
 
 ---
 
@@ -81,8 +77,8 @@ No gráfico filtrado, percorra o quadro de seis passos do documento *Ler uma viz
 |-------|-------------------|
 | 1. Que indicador? | O que filtrou |
 | 2. Que nível e período? | Nacional. O período que escolheu. |
-| 3. O que se compara? | Volume mensal observado (linha contínua preta) vs **esperado** (linha tracejada preta, previsto a partir das tendências passadas) |
-| 4. Ler os valores | Onde é que a área entre as duas linhas se enche de vermelho (observado abaixo do esperado)? Em quanto? |
+| 3. O que se compara? | Volume mensal observado (linha contínua) vs **esperado** (linha tracejada, modelado a partir das mesmas unidades sanitárias que reportaram), com a banda cinzenta de 95% |
+| 4. Ler os valores | Onde é que a diferença se enche de vermelho (observado abaixo da banda)? Em quanto? |
 | 5. O que se destaca? | Uma queda sustentada, três meses ou mais? Um pico isolado? Um padrão? |
 | 6. E então? | Que ação isto sugere? |
 
@@ -117,7 +113,8 @@ Quando cada equipa-país terminar, uma pessoa partilha o achado. Atenção a:
 ## A observar
 
 - **Uma queda de um único mês é, em regra, ruído.** Procure uma queda sustentada, três meses ou mais.
-- **Verde não é "bom" nem vermelho é "mau".** Apenas indicam direção: verde = observado acima do esperado, vermelho = observado abaixo. Uma pequena zona vermelha de um mês é ruído normal; uma zona vermelha sustentada ao longo de vários meses é o que importa investigar.
+- **Verde não é "bom" nem vermelho é "mau".** Apenas indicam direção: verde = observado acima da banda, vermelho = observado abaixo dela. Dentro da banda nada é colorido, e esse é o caso normal. Uma zona vermelha sustentada ao longo de vários meses é o que importa investigar.
+- **As falhas de reporte já estão tratadas.** A linha do esperado é construída a partir das unidades sanitárias que reportaram nesse mês, por isso uma unidade que deixa de reportar não aparece como perturbação. Uma zona vermelha é uma mudança real entre as unidades que reportaram.
 
 ## A seguir
 

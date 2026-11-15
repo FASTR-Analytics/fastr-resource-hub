@@ -27,7 +27,7 @@ A IA pode descrever um gráfico mas não conhece o seu contexto. Todas as afirma
 
 <!--
 NOTAS DO APRESENTADOR:
-- Atividade 5 do guia do facilitador do m9c. Atividade prática, individual. Separador de trabalho: Diapositivos.
+- Atividade 5 do guia do facilitador do m9c. Atividade prática, individual. O painel de IA à direita da apresentação aberta.
 - Primeiro, uma demonstração ao vivo: gerar uma interpretação no ecrã e, em seguida, comparar uma única afirmação com a tabela em voz alta. O objetivo é mostrar que "parece correto" não é o teste.
 - O andaime Eu faço / Nós fazemos / Tu fazes pertence à folha de apoio.
   - Eu faço: construo um diapositivo com a IA, depois aperfeiçoo a pergunta e verifico o resultado em relação aos dados.

@@ -15,7 +15,7 @@ paginate: true
 Comment les présentations, les diapos et les visualisations s'articulent dans FASTR. Une présentation enregistrée reste éditable, vous pouvez y revenir plus tard.
 
 **Ce que vous pratiquerez**
-- Ouvrir l'onglet Présentations
+- Sur la page Produits : **Nouveau → Nouvelle présentation**, la nommer, choisir votre dossier, appliquer le thème Default
 - Créer une nouvelle présentation
 - Ajouter une diapo
 - Enregistrer la présentation

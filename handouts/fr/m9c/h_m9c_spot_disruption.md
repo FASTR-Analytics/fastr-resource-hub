@@ -20,8 +20,8 @@ footer: "FASTR · Visualisations & Interprétation"
 <p class="sb-label">Avant de commencer</p>
 
 - ☐ Vous avez terminé les 5 documents précédents
-- ☐ Vous êtes connecté à la plateforme, dans le projet de votre pays
-- ☐ Vous êtes sur l'onglet **Visualisations**
+- ☐ Vous êtes connecté·e et sur la page **Produits**
+- ☐ Vous avez un dossier à vous
 
 <p class="sb-label">Pourquoi c'est important</p>
 
@@ -32,7 +32,7 @@ Les cinq premiers documents enseignaient la technique. C'est ici que vous l'util
 
 ## Ce que vous allez faire
 
-Ouvrir le graphique Perturbations et surplus (national), le réduire à un indicateur et une période d'intérêt, parcourir le cadre en six étapes, puis rédiger un constat en trois parties à partager avec la salle.
+Créer le graphique national des perturbations à partir du module Disruption detection, le réduire à un indicateur et à une période d'intérêt, parcourir le cadre en six étapes, puis rédiger un constat en trois parties à partager avec la salle.
 
 </div>
 </div>
@@ -41,19 +41,19 @@ Ouvrir le graphique Perturbations et surplus (national), le réduire à un indic
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">1</span><span>Trouver le graphique de perturbation</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Créer le graphique de perturbation</span></h2>
 
-Sur l'onglet **Visualisations**, basculez l'affichage (en haut à gauche de la liste) sur **Par module**. Cela regroupe les visualisations selon le module qui les produit.
+Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**. À l'étape Métrique, cliquez sur le module **Disruption detection** (détection des perturbations), puis sur la carte **Bayesian disruption detection — observed vs expected with 95% CI**, choisissez le niveau **National**, et cliquez sur **Suivant**. Choisissez le préréglage **Graphique des perturbations avec bande de crédibilité à 95%** et cliquez sur **Insérer**.
 
-Ouvrez **M3. Utilisation des services**. Faites défiler jusqu'au groupe **Volume de services observé vs attendu — National**. La première carte du groupe est **Perturbations et surplus (national)**. Cliquez pour l'ouvrir.
+![Étape Métrique avec Disruption detection sélectionné h:230](../../../resources/screenshots/platform_v2_fr/08_new_viz_module_metrics.png)
 
-![Onglet Visualisations en vue Par module, M3 Utilisation des services sélectionné h:300](../../../resources/screenshots/m9c/spot_disruption_01_m3_module_list.png)
+> Déjà construit par un collègue ? La page Produits en contient peut-être un. Ouvrez-le, puis **⋮ → Dupliquer** pour que vos filtres ne changent pas les siens : les modifications s'enregistrent en direct.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Lire la vue par défaut</span></h2>
 
-Le graphique par défaut montre chaque indicateur principal sous forme de petit graphique dans une grille. Deux courbes noires traversent chaque graphique : une courbe **pleine** pour le **volume mensuel observé**, et une courbe **pointillée** pour le volume **attendu** prédit à partir des tendances passées. L'aire entre les deux est remplie — **rouge** là où l'observé est **en dessous** de l'attendu (une perturbation), **vert** là où l'observé est **au-dessus** de l'attendu (un surplus).
+Le graphique s'ouvre avec chaque indicateur principal sous forme de petit graphique dans une grille. Deux courbes noires traversent chacun d'eux : une courbe **pleine** pour le volume mensuel **observé**, et une courbe **pointillée** pour le volume **attendu**, modélisé à partir des formations sanitaires qui ont déclaré ce mois-là. Une **bande grise** autour de la courbe attendue est l'intervalle de crédibilité à 95%. Là où la courbe observée descend **sous la bande**, l'écart est rempli en **rouge** (un déficit) ; là où elle monte **au-dessus**, il est rempli en **vert** (un surplus). À l'intérieur de la bande, c'est de la variation normale.
 
-![Grille par défaut des perturbations et surplus, tous indicateurs visibles h:340](../../../resources/screenshots/m9c/spot_disruption_02_all_indicators_grid.png)
+![Graphique des perturbations, tous les indicateurs en grille h:230](../../../resources/screenshots/platform_v2_fr/11_visualization_editor.png)
 
 ---
 
@@ -61,13 +61,9 @@ Le graphique par défaut montre chaque indicateur principal sous forme de petit 
 
 <h2 class="step-h"><span class="step-n">3</span><span>Filtrer à un indicateur</span></h2>
 
-Sur l'onglet **Data** à gauche, trouvez la section **Filter (subset)** et cochez la case **Indicator**. Une liste de pastilles d'indicateurs apparaît (ANC1, ANC4, BCG, DELIVERY, OPD, PENTA1, PENTA3, PNC1_MOTHER, PNC1_NEWBORN). Cliquez sur une pastille pour filtrer le graphique sur cet indicateur. Cliquez sur plusieurs pour en ajouter.
+Dans l'onglet **Données** à gauche, sous **Filtre (sous-ensemble)**, cochez **Indicateur**. Une liste de pastilles d'indicateurs apparaît (ANC1, ANC4, BCG, delivery, Penta1…). Cliquez sur une pastille pour ne garder que cet indicateur ; cliquez sur d'autres pour en ajouter.
 
-![Filtre Indicator déployé avec la liste de pastilles h:340](../../../resources/screenshots/m9c/spot_disruption_03_indicator_filter_open.png)
-
-Quand un seul indicateur est sélectionné, la grille se réduit à un graphique plein écran. Vous pouvez aussi cocher **Time period** pour réduire la fenêtre temporelle.
-
-![Filtré sur ANC1, graphique unique plein écran h:340](../../../resources/screenshots/m9c/spot_disruption_04_filtered_anc1.png)
+Quand un seul indicateur est sélectionné, la grille se réduit à un graphique en taille réelle. Cochez **Période** pour réduire encore la fenêtre.
 
 ---
 
@@ -81,8 +77,8 @@ Sur votre graphique filtré, parcourez le cadre en six étapes du document *Lire
 |-------|------------------|
 | 1. Quel indicateur ? | Celui que vous avez filtré |
 | 2. Quel niveau et quelle période ? | National. La période que vous avez choisie. |
-| 3. Que compare-t-on ? | Volume mensuel observé (courbe pleine noire) vs **attendu** (courbe pointillée noire, prédit à partir des tendances passées) |
-| 4. Lire les valeurs | Où l'aire entre les deux courbes se remplit-elle en rouge (observé en dessous de l'attendu) ? De combien ? |
+| 3. Que compare-t-on ? | Volume mensuel observé (courbe pleine) vs **attendu** (courbe pointillée, modélisé à partir des mêmes formations sanitaires qui ont déclaré), avec la bande grise à 95% |
+| 4. Lire les valeurs | Où l'écart se remplit-il en rouge (observé sous la bande) ? De combien ? |
 | 5. Qu'est-ce qui ressort ? | Une baisse soutenue, trois mois ou plus ? Un pic unique ? Un motif ? |
 | 6. Et alors ? | Quelle action cela appelle-t-il ? |
 
@@ -117,8 +113,9 @@ Quand chaque équipe pays a terminé, une personne partage le constat. Écoutez 
 ## À surveiller
 
 - **Une baisse d'un seul mois est en général du bruit.** Cherchez une baisse soutenue, trois mois ou plus.
-- **Vert n'est pas « bon », rouge n'est pas « mauvais ».** Ils indiquent juste le sens : vert = observé au-dessus de l'attendu, rouge = observé en dessous. Une petite zone rouge sur un seul mois, c'est du bruit normal ; une zone rouge soutenue sur plusieurs mois, c'est ce qu'il faut creuser.
+- **Un remplissage vert n'est pas « bon », un remplissage rouge n'est pas « mauvais ».** Ils indiquent le sens : vert = observé au-dessus de la bande, rouge = observé en dessous. À l'intérieur de la bande, rien n'est coloré, et c'est le cas normal. C'est un rouge soutenu sur plusieurs mois qu'il faut creuser.
+- **Les lacunes de déclaration sont déjà prises en compte.** La courbe attendue est construite à partir des formations sanitaires qui ont déclaré ce mois-là, donc une formation qui cesse de déclarer n'apparaît pas comme une perturbation. Une plage rouge est un vrai changement parmi les formations qui déclarent.
 
 ## Et ensuite
 
-Ceci clôt la série *Visualisations & Interprétation*. Le module suivant traite de la construction de rapports — assembler vos graphiques, interprétations et constats dans un document partageable.
+Ceci clôt la série *Visualisations & Interprétation*. Le module suivant traite de la construction de rapports : assembler vos graphiques, interprétations et constats dans un document partageable.

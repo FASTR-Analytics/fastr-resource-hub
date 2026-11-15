@@ -19,29 +19,25 @@ footer: "FASTR · Apresentações"
 
 <p class="sb-label">Antes de começar</p>
 
-- ☐ A sua apresentação tem pelo menos um diapositivo de conteúdo com uma visualização e algum texto
-- ☐ A apresentação está guardada
-- ☐ O facilitador mostrou a demo do editor no ecrã
+- ☐ A sua apresentação tem pelo menos um diapositivo de conteúdo com um gráfico e algum texto
+- ☐ O facilitador mostrou a demonstração do editor no ecrã
 
 <p class="sb-label">Porque é importante</p>
 
-A IA gera o conteúdo. O esquema quase sempre precisa de ajustes — texto apertado, um gráfico a precisar de mais espaço, um diapositivo cheio. O editor de diapositivos serve para corrigir isso, um diapositivo de cada vez.
+A IA gera o conteúdo. O esquema quase sempre precisa de ajustes: texto apertado, um gráfico a precisar de mais espaço, um diapositivo cheio de blocos. O editor serve para corrigir isso, um diapositivo de cada vez.
 
 </aside>
 <div class="p1-main">
 
-## Abrir o editor de diapositivos
+## Os três sítios onde edita
 
-Na vista geral da apresentação, clique numa miniatura de diapositivo. O editor abre com a **pré-visualização** a ocupar a maior parte da página e um **painel de edição** à esquerda.
+Um diapositivo é um cabeçalho mais **blocos**. Tudo o que altera acontece num destes três sítios:
 
-![Editor de diapositivos com um diapositivo de conteúdo aberto h:280](../../../resources/screenshots/m9d/edit_slides_01_editor_layout.png)
+- **A barra de ferramentas do bloco**, que aparece acima do diapositivo quando clica num bloco: o seu tipo (**Texto**, **Visualização**, **Imagem**), a **Disposição**, e as ações desse tipo (**Editar texto**; **Editar**, **Substituir** ou **Remover visualização**).
+- **O menu Diapositivo** na barra superior: o tipo de diapositivo (Capa, Secção, Conteúdo) e os logótipos da capa.
+- **O menu Inserir**: novos diapositivos, e os elementos de texto do diapositivo atual (cabeçalho, subcabeçalho, data, rodapé).
 
-O painel da esquerda tem dois separadores:
-
-- **Header / Footer** — o título do diapositivo, sub-título, data, e quais logótipos / texto de rodapé aparecem.
-- **Content** — os controlos de edição das células no corpo do diapositivo. Mostra "Click a block on the canvas to edit it" até selecionar uma célula.
-
-O menu pendente no canto superior direito muda o TIPO de diapositivo entre **Cover**, **Section** e **Content**.
+![h:250](../../../resources/screenshots/platform_v2_en/27_slide_with_visualization.png)
 
 </div>
 </div>
@@ -50,50 +46,24 @@ O menu pendente no canto superior direito muda o TIPO de diapositivo entre **Cov
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## O clique direito é o seu amigo
+## Disposição: dividir, adicionar, mover, remover
 
-A área de edição é feita de células. Cada célula pode conter uma visualização ou texto. Para modificar uma célula — o conteúdo, o esquema, ou a posição — **clique direito** sobre ela. Abre um menu de contexto.
-
-![Menu de contexto após clique direito numa visualização h:340](../../../resources/screenshots/m9d/edit_slides_03_right_click_menu.png)
-
-O menu tem nove entradas:
+Selecione um bloco e clique em **Disposição**. Para um bloco de visualização, o menu é:
 
 | Ação | O que faz |
 |------|-----------|
-| **Edit visualization** | Abre o gráfico no editor de visualizações. |
-| **Switch visualization** | Substitui o gráfico por outra visualização guardada. |
-| **Create new visualization** | Constrói uma nova visualização e coloca-a aqui. |
-| **Remove visualization** | Esvazia a célula, mantém a célula. |
-| **Change to** | Converte a célula noutro tipo (texto ↔ visualização, etc.). |
-| **Split ▸** | Divide ESTA célula em sub-células. |
-| **Add ▸** | Adiciona uma célula vizinha: **Col to left**, **Col to right**, **Row above**, **Row below**. |
-| **Move ▸** | Move esta célula: **Left**, **Right**, **Up**, **Down** (só as direções que fazem sentido). |
-| **Delete this cell** | Remove completamente a célula. |
+| **Editar visualização** | Abre o gráfico no editor de visualizações, no diapositivo. |
+| **Substituir por nova visualização** | Constrói outro gráfico a partir da caixa de diálogo de métrica e predefinição, neste bloco. |
+| **Substituir por visualização existente** | Troca-o por uma cópia de outro gráfico guardado. |
+| **Remover visualização** | Esvazia o bloco e mantém o bloco. |
+| **Dividir ▸** | Divide este bloco em dois, lado a lado ou um acima do outro. |
+| **Adicionar ▸** | Acrescenta um novo bloco junto a este: à esquerda, à direita, acima, abaixo. |
 
----
+Um bloco de texto tem o mesmo **Dividir** e **Adicionar**, com **Editar texto** em vez das ações de visualização.
 
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+![h:240](../../../resources/screenshots/platform_v2_en/28_block_layout_menu.png)
 
-## Os dois submenus mais úteis
-
-<h2 class="step-h"><span class="step-n">1</span><span>Add ▸ — dividir o diapositivo em colunas ou linhas</span></h2>
-
-Use **Add** para criar uma NOVA célula ao lado de uma existente. Clique direito → **Add** → escolha:
-
-- **+ Col to left** — nova coluna à esquerda
-- **+ Col to right** — nova coluna à direita
-- **+ Row above** — nova linha acima
-- **+ Row below** — nova linha abaixo
-
-![Submenu Add a mostrar Col to left / Col to right / Row above / Row below h:340](../../../resources/screenshots/m9d/edit_slides_06_add_submenu.png)
-
-É assim que transforma um diapositivo de uma coluna em duas colunas ou em gráfico+texto.
-
-<h2 class="step-h"><span class="step-n">2</span><span>Move ▸ — reposicionar uma célula sem arrastar</span></h2>
-
-Clique direito → **Move** → escolha **Left**, **Right**, **Up** ou **Down**. Só aparecem as direções que fazem sentido no esquema atual.
-
-Para um gráfico que está na coluna errada, isto é mais rápido do que arrastar.
+Dois blocos lado a lado, gráfico e texto, é o padrão FASTR. Se precisar de mais, isso é outro diapositivo.
 
 ---
 
@@ -101,44 +71,43 @@ Para um gráfico que está na coluna errada, isto é mais rápido do que arrasta
 
 ## As quatro passagens por diapositivo
 
-Percorra cada diapositivo e faça estas quatro passagens antes de seguir.
-
 <h2 class="step-h"><span class="step-n">1</span><span>Verificar a exatidão</span></h2>
 
-Leia o diapositivo como se nunca o tivesse visto. O título corresponde ao que o gráfico mostra? O texto de interpretação está correto? Marque o que precisa de reescrita pela IA.
+Leia o diapositivo como se nunca o tivesse visto. O título corresponde ao que o gráfico mostra? O texto está correto? Marque tudo o que precisa de ser reescrito, por você ou pelo painel de IA à direita.
 
 <h2 class="step-h"><span class="step-n">2</span><span>Redimensionar e reorganizar</span></h2>
 
-Quando clica numa célula, aparece um divisor vertical entre células da mesma linha (e horizontal entre células da mesma coluna). Arraste o divisor para dar mais espaço ao gráfico ou ao texto. A outra célula redimensiona automaticamente.
+Arraste o separador entre dois blocos para dar mais espaço ao gráfico ou ao texto. O outro bloco acompanha. Use os botões de tamanho do texto na barra de ferramentas (**–** e **+**) antes de cortar palavras.
 
-<h2 class="step-h"><span class="step-n">3</span><span>Reestruturar se necessário</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Reestruturar se for preciso</span></h2>
 
-Se o diapositivo está demasiado apertado, clique direito e use **Add** para introduzir uma nova coluna ou linha, ou **Move** para empurrar uma célula para outra posição. Use **Delete this cell** para retirar o que não ganha o seu lugar.
+Demasiado apertado: **Disposição → Adicionar** um bloco, ou passe o conteúdo em excesso para um novo diapositivo (**Adicionar diapositivo → Diapositivo de conteúdo**). Um bloco que não justifica o seu lugar: **Remover visualização**, ou apague o seu texto. Um gráfico demasiado detalhado: **Editar visualização** e simplifique-o ali.
 
-<h2 class="step-h"><span class="step-n">4</span><span>Finalizar cabeçalho, rodapé, guardar</span></h2>
+<h2 class="step-h"><span class="step-n">4</span><span>Terminar o cabeçalho e o rodapé</span></h2>
 
-Mude para o separador **Header / Footer**. Preencha o título, sub-título e data se necessário. Guarde a apresentação (botão Guardar pequeno na barra de ferramentas — a gravação automática apanha a maioria das alterações, mas Guardar é a rede de segurança para reestruturações grandes).
+O menu **Inserir** lista os elementos de texto do diapositivo: cabeçalho, subcabeçalho, data, rodapé. Acrescente os que quiser e clique neles no diapositivo para os editar. O rodapé e os números de página de toda a apresentação ficam no menu **Apresentação** (ver *Definições da apresentação*).
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Ponto de controlo
+## Ponto de verificação
 
-Cada diapositivo deve:
+Cada diapositivo deverá:
 
 - Ter um título claro que corresponde ao gráfico
-- Mostrar gráficos a um tamanho legível, bem alinhados
-- Ter texto de interpretação totalmente visível e editado
-- Ter título, sub-título e data preenchidos
+- Mostrar o gráfico num tamanho legível, alinhado com o seu texto
+- Ter texto totalmente visível e revisto
+- Trazer os elementos de cabeçalho que quer
 
 ## O que pode correr mal
 
-- **O menu de clique direito não aparece** — certifique-se de que clicou no editor de diapositivos primeiro (deve ver "Edit Slide" no canto superior esquerdo).
-- **Divisor de redimensionamento não visível** — só aparece depois de clicar numa célula. O cursor muda para uma pega de redimensionamento ao passar sobre a linha entre células.
-- **Gráfico continua apertado depois de redimensionar** — o próprio gráfico pode ser demasiado detalhado. Abra-o em **Edit visualization** no menu de clique direito (ou no separador Visualizations), simplifique, guarde, volte.
-- **Célula presa no sítio errado** — use **Move ▸ Left / Right / Up / Down** para reposicionar, ou **Delete this cell** e recrie-a no sítio certo.
+- **Não aparece a barra de ferramentas do bloco.** Não selecionou nenhum bloco. Clique dentro do bloco no diapositivo, não na miniatura.
+- **O separador não está visível.** Aparece depois de selecionar um bloco; o cursor muda quando passa sobre a linha entre dois blocos.
+- **O gráfico continua apertado depois de redimensionar.** O próprio gráfico é demasiado detalhado. **Disposição → Editar visualização** e simplifique (menos indicadores, apresentação em grelha, período mais curto).
+- **Desfazer.** As setas à esquerda da barra de ferramentas, ou Ctrl/Cmd+Z. As edições guardam-se em direto, por isso o **Histórico** no topo é o caminho de volta a uma versão anterior de toda a apresentação.
+- **Ordem dos diapositivos.** Arraste as miniaturas na lista da esquerda.
 
 ## A seguir
 
-O próximo documento trata das definições globais da apresentação (estilo, logótipos, rodapé, números de página) antes da partilha.
+O próximo documento trata das definições globais da apresentação: tema, logótipos, rodapé e números de página, antes de a apresentação ser partilhada.

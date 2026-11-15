@@ -24,7 +24,7 @@ L'IA peut décrire un graphique mais ne connaît pas votre contexte. Chaque affi
 
 <!--
 NOTES DU PRÉSENTATEUR :
-- Activité 5 du guide du facilitateur m9c. Pratique, individuelle. Onglet : Présentations.
+- Activité 5 du guide du facilitateur m9c. Pratique, individuelle. Le panneau IA à droite de la présentation ouverte.
 - Démo en direct d'abord : générer une interprétation à l'écran, puis vérifier une seule affirmation par rapport au graphique à voix haute. Le but est de montrer que « ça sonne juste » n'est pas le test.
 - La trame « je fais, nous faisons, vous faites » est dans le document.
   - Je fais : construire une diapo avec l'IA, puis affiner le prompt et vérifier le résultat par rapport aux données.

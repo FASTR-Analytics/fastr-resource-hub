@@ -10,7 +10,7 @@ footer: "FASTR · Présentations"
 
 <div class="setup-breadcrumb"><span class="step done">Créer la présentation</span> <span class="arrow">→</span> <span class="step done">Ajouter manuellement</span> <span class="arrow">→</span> <span class="step current">Ajouter avec l'IA</span> <span class="arrow">→</span> <span class="step">Éditer et finaliser</span></div>
 
-# Ajouter une visualisation (avec l'Assistant IA)
+# Ajouter une visualisation (avec l'assistant IA)
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~15 min</strong></p>
 
@@ -19,24 +19,24 @@ footer: "FASTR · Présentations"
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous avez créé votre présentation et ajouté une visualisation manuellement (voir activités précédentes)
-- ☐ Vous avez au moins une visualisation enregistrée dans l'onglet **Visualisations**
-- ☐ Votre présentation est ouverte — le panneau IA à droite y est rattaché
+- ☐ Vous avez créé votre présentation et ajouté une visualisation manuellement (activités précédentes)
+- ☐ Vous avez au moins une visualisation enregistrée sur la page Produits
+- ☐ Votre présentation est ouverte : le panneau IA à droite lit cette présentation
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Demandez à l'Assistant IA d'ajouter un graphique enregistré à votre présentation ouverte — en un seul prompt. Pas de navigation, pas de changement de type de bloc. Même résultat que la voie manuelle.
+Demander à l'assistant IA d'ajouter un graphique à votre présentation ouverte, en une seule demande. Pas de bloc à sélectionner, pas de menus. Même résultat que la voie manuelle.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Demandez à l'IA d'ajouter le graphique</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Demander</span></h2>
 
-Dans le panneau IA (à droite), tapez un prompt qui nomme votre graphique et votre intention :
+Dans le panneau IA à droite (**Posez une question sur cette présentation…**), tapez une demande qui nomme le graphique et ce que vous voulez :
 
-> *« Ajoute le graphique [nom de votre graphique] à ma présentation. »*
+> *« Ajoute une nouvelle diapositive de contenu avec mon graphique "CPN1, mensuel, 12 derniers mois" et un message à retenir en une ligne à côté. »*
 
-L'IA exécute ses outils, retrouve le graphique, crée une nouvelle diapositive de contenu à la fin de la présentation et confirme dans le chat. Pas de bouton « ajouter à la présentation » séparé — le prompt fait tout.
+L'IA liste les étapes qu'elle suit (lire la présentation, trouver la visualisation, ajouter la diapositive, regarder le résultat) et confirme dans la conversation. La nouvelle diapositive apparaît dans la liste de gauche.
 
 </div>
 </div>
@@ -45,49 +45,46 @@ L'IA exécute ses outils, retrouve le graphique, crée une nouvelle diapositive 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Vérifiez ce qui a été ajouté</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>Vérifier ce qui a été ajouté</span></h2>
 
-Regardez l'aperçu — une nouvelle diapositive doit apparaître à la fin avec le graphique nommé.
+Ouvrez la nouvelle diapositive et confirmez :
 
-Ouvrez-la et confirmez :
-
-- Bon graphique ? (L'IA peut attraper un voisin si le prompt est vague.)
-- Titre de diapositive cohérent ?
+- Bon graphique ? Si votre demande était vague, l'IA peut en prendre un voisin.
+- Un titre qui énonce quelque chose, pas seulement le nom de l'indicateur ?
 - Le graphique s'affiche, pas une erreur ?
 
-Si quelque chose ne va pas, dites-le dans le même chat : *« Ce n'est pas le bon — utilise la version désagrégée par région. »* L'IA met la diapositive à jour.
+Si quelque chose ne va pas, dites-le dans la même conversation : *« Ce n'est pas le bon, utilise la version désagrégée par région. »* L'IA met la diapositive à jour. Les modifications s'enregistrent en direct ; le bouton **Historique** en haut est le chemin de retour si vous préférez l'état précédent.
 
-<h2 class="step-h"><span class="step-n">3</span><span>Enregistrez</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Demander plus</span></h2>
 
-La présentation s'enregistre automatiquement pendant que l'IA travaille, mais ouvrez la diapositive et cliquez sur **Sauvegarder et quitter** pour confirmer.
-
-> **Pas encore de graphique à vous ?** Utilisez ce prompt d'exemple partagé : *« Ajoute le graphique de variation trimestrielle des volumes à ma présentation. »*
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+L'IA peut aussi construire un graphique qu'elle ne trouve pas : *« Fais un graphique linéaire mensuel du BCG sur les 12 derniers mois et ajoute-le comme nouvelle diapositive. »* Elle crée la figure directement sur la diapositive, avec la même métrique et les mêmes filtres que vous auriez cliqués. Vérifiez l'indicateur, la période et les valeurs des données qu'elle a utilisées, comme dans *Construire une visualisation avec l'IA*.
 
 ## Vérification
 
-Votre présentation doit maintenant avoir **deux diapositives** : une ajoutée manuellement (activité précédente), une ajoutée par l'IA. Même graphique ou différent — l'important est que vous ayez utilisé les deux voies.
+Votre présentation doit maintenant avoir **deux diapositives de contenu** : un graphique ajouté manuellement, un ajouté par l'IA. Même graphique ou différent, l'important est que vous ayez utilisé les deux voies.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Comparer les deux voies
 
-| Voie manuelle | Voie Assistant IA |
-|---------------|-------------------|
-| Ajouter diapositive → cliquer → clic droit → Ajouter ligne → changer Type de contenu → Sélectionner une visualisation | Un seul prompt : *« Ajoute [graphique] à ma présentation. »* |
-| Utile quand vous savez exactement quel graphique, et cliquer va plus vite que taper | Utile quand vous n'avez plus le nom exact, ou que vous laissez l'IA proposer un défaut sensé |
-| Un graphique à la fois | Plusieurs en un coup : *« Ajoute les graphiques CPN1 et BCG mensuels. »* |
+| Voie manuelle | Voie IA |
+|---------------|---------|
+| Ajouter une diapositive → sélectionner le bloc → type Visualisation → Insérer une visualisation → Existante → Insérer une copie | Une seule demande : *« Ajoute [graphique] comme nouvelle diapositive. »* |
+| Quand vous savez exactement quel graphique et que cliquer va plus vite que taper | Quand vous ne vous souvenez pas du nom exact, ou que vous voulez un titre et un message à retenir rédigés |
+| Un graphique à la fois | Plusieurs en une demande : *« Ajoute les graphiques mensuels CPN1 et BCG, une diapositive chacun. »* |
 
-Aucune n'est « meilleure ». Choisissez celle qui semble plus rapide pour la tâche.
+Aucune n'est meilleure. Choisissez celle qui est plus rapide pour la tâche, et vérifiez le résultat dans les deux cas.
 
 ## Astuces
 
-> **L'IA voit ce que vous avez enregistré.** Si un graphique n'est pas dans vos Visualisations, l'IA ne peut pas le trouver. Enregistrez d'abord, demandez ensuite.
+> **L'IA ne travaille que sur la présentation que vous avez ouverte.** Depuis la page Produits, elle peut lister les produits mais pas les modifier. Ouvrez d'abord la présentation.
 
-- Si l'IA renvoie le mauvais graphique : nommez-le plus précisément, ou ajoutez l'indicateur + la région.
-- L'IA peut aussi créer un graphique à partir de zéro et l'ajouter en un coup — *« Crée un graphique CPN1 mensuel et ajoute-le à ma présentation. »* Cela combine *Construire avec l'IA* du module précédent avec celui-ci.
+- L'IA retrouve les visualisations enregistrées par leur nom. Des noms clairs sur la page Produits rendent les demandes plus courtes.
+- Les graphiques insérés sont des **copies**, comme sur la voie manuelle. Améliorer l'original plus tard ne change pas la diapositive.
+- Le panneau IA modifie aussi le texte : *« Raccourcis le message à retenir de la diapositive 2 à une phrase. »*
 
 ## Étape suivante
 
-Passez à **Éditer et finaliser vos diapositives** — relire et peaufiner ce que vous avez construit.
+Passez à **Éditer et finaliser vos diapositives** : relire et peaufiner ce que vous avez construit.

@@ -18,7 +18,7 @@ paginate: true
 Como os decks, slides e visualizações se conectam dentro do FASTR. Uma apresentação guardada permanece editável, pelo que pode voltar a ela mais tarde.
 
 **O que vai praticar
-- Abrir o separador "Apresentações de diapositivos
+- Na página Produtos: **Novo → Nova apresentação**, dar-lhe um nome, escolher a sua pasta, aplicar o tema Predefinido
 - Criar um novo deck
 - Adicionar um diapositivo
 - Guardar o deck

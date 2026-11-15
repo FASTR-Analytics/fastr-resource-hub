@@ -19,22 +19,22 @@ footer: "FASTR · Présentations"
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous avez créé votre présentation (voir *Créez votre première présentation*)
+- ☐ Vous avez créé votre présentation avec une diapositive de contenu (voir *Créez votre première présentation*)
 - ☐ Vous avez une visualisation enregistrée que vous souhaitez inclure
-- ☐ Vous êtes dans l'onglet **Présentations** et dans votre présentation
+- ☐ La présentation est ouverte sur la diapositive de contenu
 
 </aside>
 <div class="p1-main">
 
 ## Ce que vous allez faire
 
-Ajouter une visualisation enregistrée à une diapositive de contenu. Le chemin a quelques étapes non évidentes la première fois — elles deviennent rapides ensuite.
+Placer une copie d'une visualisation enregistrée sur la diapositive de contenu, puis diviser la diapositive pour que le graphique ait du texte à côté de lui. Trois gestes la première fois ; rapide ensuite.
 
-<h2 class="step-h"><span class="step-n">1</span><span>Ajoutez une diapositive de contenu</span></h2>
+<h2 class="step-h"><span class="step-n">1</span><span>Sélectionner le bloc</span></h2>
 
-Si la présentation est vide, cliquez sur **+ Ajouter une diapositive** en haut, puis choisissez **Diapositive de contenu** parmi les trois options (Couverture / Section / Contenu).
+Cliquez sur la diapositive de contenu dans la liste de gauche, puis cliquez sur le bloc vide au milieu de la diapositive. Un contour bleu apparaît autour de lui et une barre d'outils de bloc apparaît au-dessus de la diapositive : un menu déroulant **Texte**, **Mise en page**, **Modifier le texte**, **Fond**.
 
-La diapositive apparaît dans l'aperçu.
+![h:260](../../../resources/screenshots/platform_v2_en/22c_block_selected.png)
 
 </div>
 </div>
@@ -43,50 +43,51 @@ La diapositive apparaît dans l'aperçu.
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<h2 class="step-h"><span class="step-n">2</span><span>Ouvrez l'éditeur de diapositive</span></h2>
+<h2 class="step-h"><span class="step-n">2</span><span>En faire un bloc de visualisation</span></h2>
 
-Cliquez sur l'aperçu de la diapositive. L'éditeur s'ouvre avec les onglets **En-tête / Pied de page** et **Contenu** dans le panneau de gauche.
+Ouvrez le menu déroulant **Texte** et choisissez **Visualisation**. Le bloc est maintenant un bloc de visualisation et la barre d'outils propose **Insérer une visualisation**.
 
-Passez sur l'onglet **Contenu**. Il indique *« Cliquez sur un bloc dans le canevas pour le modifier »* — le canevas est vide, donc vous allez ajouter un bloc d'abord.
+![h:190](../../../resources/screenshots/platform_v2_fr/23_block_type_menu.png)
 
-<h2 class="step-h"><span class="step-n">3</span><span>Ajoutez un bloc, réglez-le sur Visualisation</span></h2>
+<h2 class="step-h"><span class="step-n">3</span><span>Insérer le graphique enregistré</span></h2>
 
-**Clic droit** sur le canevas vide. Un petit menu s'ouvre — **Convertir en / Diviser / Ajouter**.
+Cliquez sur **Insérer une visualisation**, puis sur **Visualisation existante…**. Un sélecteur liste les visualisations enregistrées de l'instance avec une vignette pour chacune ; le champ **Rechercher des visualisations** filtre par nom. Cliquez sur la vôtre, puis sur **Insérer une copie**. Le graphique apparaît sur la diapositive.
 
-Survolez **Ajouter** et choisissez **Ligne en dessous** (ou l'une des quatre directions). Un nouveau bloc apparaît avec **Type de contenu** réglé sur **Texte** par défaut.
+![h:210](../../../resources/screenshots/platform_v2_fr/26_insert_existing_picker.png)
 
-Dans le panneau de gauche, changez le menu déroulant **Type de contenu** de **Texte** à **Visualisation**. Deux boutons apparaissent : **Sélectionner une visualisation** et **Créer une nouvelle visualisation**.
-
-<h2 class="step-h"><span class="step-n">4</span><span>Choisissez le graphique enregistré</span></h2>
-
-Cliquez sur **Sélectionner une visualisation**. Un sélecteur s'ouvre — modules à gauche, cartes des graphiques enregistrés au milieu.
-
-Naviguez jusqu'à **M3. Utilisation des services** (ou là où vit votre graphique), cliquez sur la carte voulue, puis cliquez sur **Sélectionner** en haut à droite. La boîte de dialogue se ferme et le graphique apparaît sur la diapositive.
-
-<h2 class="step-h"><span class="step-n">5</span><span>Enregistrez</span></h2>
-
-Cliquez sur **Sauvegarder et quitter** en haut à gauche de l'éditeur. Vous revenez à la vue de la présentation, avec votre graphique sur la diapositive 1.
+> **C'est une copie.** Les changements que vous faites sur le graphique de la diapositive ne changent pas la visualisation enregistrée, et les changements ultérieurs sur celle-ci n'arrivent pas jusqu'à la diapositive. Pour mettre la diapositive à jour après avoir amélioré l'original, sélectionnez le bloc et utilisez **Remplacer la visualisation → Remplacer par une visualisation existante**.
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
+<h2 class="step-h"><span class="step-n">4</span><span>Donner au graphique un bloc de texte à côté</span></h2>
+
+Le bloc du graphique étant sélectionné, cliquez sur **Mise en page**, puis sur **Ajouter**, puis sur une colonne à droite. Un nouveau bloc vide apparaît à côté du graphique ; son type est **Texte**. Cliquez dedans et tapez un message à retenir en une ligne. Faites glisser le séparateur entre les deux blocs pour donner plus de place au graphique.
+
+![h:230](../../../resources/screenshots/platform_v2_fr/28_block_layout_menu.png)
+
+<h2 class="step-h"><span class="step-n">5</span><span>Titrer la diapositive</span></h2>
+
+Cliquez sur l'en-tête de la diapositive (« Nouvelle diapositive ») et tapez un titre qui énonce le constat. Rien à enregistrer : la présentation s'enregistre en direct.
 
 ## Vérification
 
-Votre diapositive doit maintenant montrer :
+Votre diapositive de contenu doit montrer l'un de vos graphiques enregistrés, avec un texte court à côté et un titre qui dit ce que le graphique montre.
 
-- L'une de vos visualisations enregistrées
-- Le titre et la date de la diapositive renseignés
-- La présentation est enregistrée
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Astuces
 
-> **Réutilisez, ne recréez pas.** Si vous avez déjà construit une visualisation dans l'onglet **Visualisations**, ajoutez l'existante — ne la reconstruisez pas dans l'éditeur de diapositive.
+> **Réutilisez, ne recréez pas.** Si vous avez déjà construit le graphique, insérez l'existant. **Nouvelle visualisation…** dans le même menu ouvre la boîte de dialogue métrique et préréglage pour en construire un de zéro, sur la diapositive.
 
-- Si vous ne trouvez pas votre graphique dans le sélecteur : vérifiez l'onglet **Visualisations** et confirmez qu'il est dans un dossier visible. Utilisez la barre de recherche en haut du sélecteur.
-- Si le graphique paraît à l'étroit : c'est normal à ce stade. L'activité *Éditer et finaliser* couvre le redimensionnement.
-- Le **Type de contenu** d'un bloc peut aussi être réglé sur **Texte** ou **Image** si vous voulez du texte narratif ou une image fixe.
+- Vous ne trouvez pas votre graphique dans le sélecteur : ce n'est pas encore une visualisation enregistrée, ou il se trouve dans un dossier que vous ne voyez pas. Tapez une partie de son nom dans le champ de recherche du sélecteur.
+- Le graphique paraît à l'étroit : c'est normal à ce stade. *Éditer et finaliser* couvre le redimensionnement et la simplification.
+- Un bloc peut aussi contenir une **Image** (le même menu déroulant) pour un logo ou une photo.
+- **Panneau divisé**, dans la barre du haut, ajoute un panneau latéral à la diapositive : une deuxième zone pour du texte ou un deuxième graphique.
 
 ## Étape suivante
 
-Passez à **Ajouter une visualisation (avec l'Assistant IA)** — la même tâche, mais en un seul prompt.
+Passez à **Ajouter une visualisation (avec l'assistant IA)** : la même tâche, en une seule demande dans le panneau IA.

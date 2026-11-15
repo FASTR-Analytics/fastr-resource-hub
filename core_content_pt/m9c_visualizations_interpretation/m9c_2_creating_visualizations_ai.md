@@ -27,7 +27,7 @@ Como solicitar um gráfico à IA. Antes de salvar, você verifica se a IA usou o
 
 <!--
 NOTAS DO APRESENTADOR:
-- Atividade 4 do guia do facilitador do m9c. Prática, individual. Separador de trabalho: Visualizações.
+- Atividade 4 do guia do facilitador do m9c. Prática, individual. O painel de IA funciona dentro de uma visualização aberta, não a partir da página Produtos.
 - Demonstração em direto primeiro: escrever um pedido de gráfico e indicar onde confirmar que a IA utilizou o indicador correto, o período e (criticamente) os dados ajustados versus os dados brutos.
 - O andaime "Eu faço" / "Nós fazemos" / "Tu fazes" pertence à folha de apoio.
   - Eu faço: construo uma série temporal dos volumes mensais do ANC1 (últimos 12 meses) com a IA e guardo-a.

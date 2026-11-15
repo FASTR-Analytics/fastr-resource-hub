@@ -32,7 +32,7 @@ NOTAS DO APRESENTADOR:
   - Eu faço: insira uma visualização num diapositivo e escreva uma interpretação em três partes (título, o que vê, o que significa).
   - Nós fazemos: interpretamos em conjunto uma segunda visualização e adicionamo-la a um conjunto de diapositivos.
   - Tu: interpreta uma visualização à tua escolha e adiciona-a à tua própria apresentação.
-- Separador de trabalho: Apresentações de diapositivos.
+- Feito no editor de apresentações: um bloco de visualização e um bloco de texto lado a lado.
 - Mensagem principal: o título é a conclusão, não o tópico. "O que se vê" são apenas factos. "O que significa" nomeia uma pessoa ou o próximo passo.
 - Atenção a: títulos descritivos ("Resultados da cobertura"); factos misturados com interpretação; coisas vagas.
 -->
