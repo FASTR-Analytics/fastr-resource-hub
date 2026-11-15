@@ -1,4 +1,8 @@
 slides:
+- file: m9b_0_home_screen.md
+  order: 0.5
+  variant: full
+  title: 'L''écran d''accueil : une seule page Produits'
 - file: m9b_1_login_folder_activity.md
   order: 1.0
   variant: full
@@ -7,6 +11,22 @@ slides:
   order: 2.0
   variant: full
   title: D'où viennent les chiffres d'un produit
+- file: m9b_2a_explore_overview.md
+  order: 2.1
+  variant: full
+  title: 'Explorer : regarder avant de construire'
+- file: m9b_2b_explore_views.md
+  order: 2.2
+  variant: full
+  title: 'Trois vues : Tableau, Dans le temps, Carte'
+- file: m9b_2c_explore_modules.md
+  order: 2.3
+  variant: full
+  title: Chaque module apporte ses propres métriques
+- file: m9b_2d_explore_vs_visualization.md
+  order: 2.4
+  variant: full
+  title: Explorer ou une visualisation ?
 - file: m9b_3_explore_activity.md
   order: 3.0
   variant: full

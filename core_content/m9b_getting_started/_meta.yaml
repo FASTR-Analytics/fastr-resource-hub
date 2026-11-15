@@ -1,4 +1,8 @@
 slides:
+- file: m9b_0_home_screen.md
+  order: 0.5
+  variant: full
+  title: 'The home screen: one Products page'
 - file: m9b_1_login_folder_activity.md
   order: 1.0
   variant: full
@@ -7,6 +11,22 @@ slides:
   order: 2.0
   variant: full
   title: Where a product's numbers come from
+- file: m9b_2a_explore_overview.md
+  order: 2.1
+  variant: full
+  title: 'Explore: look before you build'
+- file: m9b_2b_explore_views.md
+  order: 2.2
+  variant: full
+  title: 'Three views: Table, Over time, Map'
+- file: m9b_2c_explore_modules.md
+  order: 2.3
+  variant: full
+  title: Each module brings its own metrics
+- file: m9b_2d_explore_vs_visualization.md
+  order: 2.4
+  variant: full
+  title: Explore or a visualization?
 - file: m9b_3_explore_activity.md
   order: 3.0
   variant: full
