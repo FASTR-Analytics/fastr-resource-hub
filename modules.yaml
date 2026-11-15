@@ -324,12 +324,13 @@ modules:
     pt: Configuração da instância
   ai_context:
     description: Admin-track hands-on activities for setting up a FASTR platform instance
-      (admin areas, importing data, installing & running modules, creating a project).
+      (admin areas, importing data, generating a results package, scopes, scorecards).
     topics:
     - Setting up admin areas
     - Importing data
-    - Installing and running modules
-    - Creating a project
+    - Generating a results package
+    - Scopes
+    - Building a scorecard
     duration: 60-90 min
 - id: m9b
   number: 9b

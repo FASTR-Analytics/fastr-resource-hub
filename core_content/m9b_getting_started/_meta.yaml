@@ -11,6 +11,18 @@ slides:
   order: 2.0
   variant: full
   title: Where a product's numbers come from
+- file: m9b_2s1_scope_concept.md
+  order: 2.01
+  variant: full
+  title: 'A scope: a named slice of the data'
+- file: m9b_2s2_scopes_page.md
+  order: 2.02
+  variant: full
+  title: Making a scope
+- file: m9b_2s3_product_scope.md
+  order: 2.03
+  variant: full
+  title: A product carries one scope
 - file: m9b_2a_explore_overview.md
   order: 2.1
   variant: full

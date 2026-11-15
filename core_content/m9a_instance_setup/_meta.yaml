@@ -47,10 +47,10 @@ slides:
   order: 2.0
   variant: full
   title: 'Activity: Generating a results package'
-- file: m9a_3_creating_project.md
+- file: m9a_3_scopes_activity.md
   order: 3.0
   variant: full
-  title: 'Activity: Creating a project'
+  title: 'Activity: Scopes, not projects'
 - file: m9a_4_activity_building_scorecard.md
   order: 4.0
   variant: full

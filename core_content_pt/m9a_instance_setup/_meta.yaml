@@ -47,10 +47,10 @@ slides:
   order: 2.0
   variant: full
   title: 'Atividade: Gerar um pacote de resultados'
-- file: m9a_3_creating_project.md
+- file: m9a_3_scopes_activity.md
   order: 3.0
   variant: full
-  title: 'Atividade: Criar um projeto'
+  title: 'Atividade: âmbitos, não projetos'
 - file: m9a_4_activity_building_scorecard.md
   order: 4.0
   variant: full

@@ -360,7 +360,7 @@ Headline takeaway: roughly **30% of slides** are activity-, demo-, or hybrid-fla
 | m9a_0_setting_up_admin_areas.md | Activity: Setting up admin areas | ACTIVITY | h_m9a_admin_areas | "Activity: admin areas — see handout / 25 min" |  |
 | m9a_1_importing_data.md | Activity: Importing data | ACTIVITY | h_m9a_importing_data | "Activity: import data — see handout / 25 min" |  |
 | m9a_2_installing_running_modules.md | Activity: Installing and running modules | ACTIVITY | h_m9a_modules | "Activity: install modules — see handout / 20 min" |  |
-| m9a_3_creating_project.md | Activity: Creating a project | ACTIVITY | h_m9a_creating_project | "Activity: create project — see handout / 15 min" |  |
+| m9a_3_scopes_activity.md | Activity: Scopes, not projects | ACTIVITY | (none, rewritten 2026-11-15 for 2.x) | spelled out on-slide |  |
 
 ### M9b — Getting Started (3 slides)
 
