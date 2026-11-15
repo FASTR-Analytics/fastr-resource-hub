@@ -14,8 +14,8 @@ slides:
 - file: m3_2b_accessing_platform_continued.md
   order: 2.02
   variant: full
-  title: Rôles et autorisations des utilisateurs
+  title: Utilisateurs, autorisations et accès
 - file: m3_2c_accessing_platform_continued.md
   order: 2.03
   variant: full
-  title: Projets au sein d'une instance
+  title: Produits, dossiers et portées

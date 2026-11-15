@@ -4,23 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Funções e permissões dos utilizadores
+## Utilizadores, permissões e acesso
 
-Existem dois níveis de permissões na plataforma:
+**Primeiro a aprovação.** Uma conta nova não vê nada até um administrador a aprovar.
 
-&nbsp;
+Os **administradores globais** gerem utilizadores, dados e pacotes de resultados, e são proprietários de todos os produtos. Os outros utilizadores têm permissões definidas na página Utilizadores (ver ou configurar utilizadores, ver ou configurar dados).
 
-**Funções ao nível da instância:**
+**Acesso aos dados**: não restrito, ou limitado aos âmbitos que um administrador atribui. Um utilizador restrito vê apenas esses dados, em todo o lado.
 
-- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
-
-&nbsp;
-
-**Funções ao nível do projeto:**
-
-- **Editores de projeto** podem criar visualizações, criar relatórios e descarregar/exportar resultados
-- **Visualizadores de projeto** podem visualizar visualizações, visualizar relatórios e descarregar/exportar resultados
-
-&nbsp;
-
-*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto.*
+**Acesso aos produtos**, como num documento partilhado: um proprietário, editores, visualizadores e um acesso geral para todos os outros (restrito / qualquer pessoa pode ver / qualquer pessoa pode editar). Definido em **Gerir acesso**, por produto ou para uma pasta inteira.

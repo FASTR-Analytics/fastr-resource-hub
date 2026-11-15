@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Projetos dentro de uma instância
+## Produtos, pastas e âmbitos
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -16,24 +16,20 @@ paginate: true
 <div class="container">
 <div class="img-col">
 
-![Projetos dentro da instância](../../resources/diagrams/projects_within_instance.svg)
+![Produtos, pastas e âmbitos dentro da instância](../../resources/diagrams_pt/products_folders_scopes.svg)
 
 </div>
 <div class="text-col">
 
-Cada instância de país pode conter **vários projetos**.
+Uma única página **Produtos** para o país: todas as visualizações, apresentações e relatórios, em **pastas**.
 
-Um país pode precisar apenas de um projeto, ou podem ser utilizados vários projetos para:
-
-- Diferentes versões de análises
-- Um projeto de demonstração ou de teste
-- Projetos separados para diferentes equipas ou programas
+Cada produto lê um **pacote de resultados** (que cálculo) através de um **âmbito** (que parte dos dados).
 
 **Questões-chave ao configurar:**
 
-- Quem é o administrador?
-- Quem pode editar?
-- Quem pode visualizar?
+- Que pacote está fixado?
+- De que âmbitos a equipa precisa?
+- Quem pode abrir ou editar o quê?
 
 </div>
 </div>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380">
+<rect x="20" y="20" width="660" height="340" rx="14" fill="#F8F9FA" stroke="#0A544F" stroke-width="2.5"/>
+<rect x="20" y="20" width="220" height="32" rx="8" fill="#0A544F"/>
+<text x="130" y="41" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#fff">Country platform</text>
+<rect x="40" y="68" width="330" height="262" rx="10" fill="#fff" stroke="#1FA29C" stroke-width="1.5"/>
+<rect x="40" y="68" width="330" height="28" rx="10" fill="#1FA29C"/><rect x="40" y="86" width="330" height="10" fill="#1FA29C"/>
+<text x="205" y="87" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#fff">Products page</text>
+<polygon points="52,109 52,119 60,114" fill="#0C716B"/><text x="66" y="116" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0C716B">Nutrition</text><text x="358" y="116" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="8.5" fill="#999">Folder</text>
+<rect x="58" y="124" width="300" height="42" rx="6" fill="#fff" stroke="#1FA29C" stroke-width="1.2"/>
+<text x="68" y="140" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0A544F">Stunting review</text>
+<text x="348" y="140" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="8.5" fill="#666">Deck</text>
+<rect x="68" y="146" width="63" height="16" rx="8" fill="#E8F4F3"/><text x="99.5" y="157.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#0C716B">2026-10</text>
+<rect x="137" y="146" width="70" height="16" rx="8" fill="#FFF4E0"/><text x="172.0" y="157.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#8A5A00">All data</text>
+<rect x="58" y="172" width="300" height="42" rx="6" fill="#fff" stroke="#1FA29C" stroke-width="1.2"/>
+<text x="68" y="188" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0A544F">Vitamin A trend</text>
+<text x="348" y="188" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="8.5" fill="#666">Visualization</text>
+<rect x="68" y="194" width="63" height="16" rx="8" fill="#E8F4F3"/><text x="99.5" y="205.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#0C716B">2026-10</text>
+<rect x="137" y="194" width="119" height="16" rx="8" fill="#FFF4E0"/><text x="196.5" y="205.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#8A5A00">Northern region</text>
+<polygon points="52,231 52,241 60,236" fill="#0C716B"/><text x="66" y="238" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0C716B">Quarterly bulletin</text><text x="358" y="238" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="8.5" fill="#999">Folder</text>
+<rect x="58" y="246" width="300" height="42" rx="6" fill="#fff" stroke="#0C716B" stroke-width="1.2"/>
+<text x="68" y="262" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0A544F">Q3 bulletin</text>
+<text x="348" y="262" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="8.5" fill="#666">Report</text>
+<rect x="68" y="268" width="63" height="16" rx="8" fill="#E8F4F3"/><text x="99.5" y="279.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#0C716B">2026-10</text>
+<rect x="137" y="268" width="70" height="16" rx="8" fill="#FFF4E0"/><text x="172.0" y="279.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="8.5" font-weight="600" fill="#8A5A00">All data</text>
+<rect x="390" y="68" width="270" height="112" rx="10" fill="#fff" stroke="#0C716B" stroke-width="1.5"/>
+<rect x="390" y="68" width="270" height="28" rx="10" fill="#0C716B"/><rect x="390" y="86" width="270" height="10" fill="#0C716B"/>
+<text x="525" y="87" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#fff">Results packages</text>
+<rect x="402" y="108" width="246" height="22" rx="5" fill="#E8F4F3"/>
+<text x="412" y="123" font-family="Inter, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#0A544F">2026-10 · pinned</text>
+<rect x="402" y="138" width="246" height="22" rx="5" fill="#F8F9FA"/>
+<text x="412" y="153" font-family="Inter, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#0A544F">2026-07</text>
+<rect x="390" y="196" width="270" height="112" rx="10" fill="#fff" stroke="#0C716B" stroke-width="1.5"/>
+<rect x="390" y="196" width="270" height="28" rx="10" fill="#0C716B"/><rect x="390" y="214" width="270" height="10" fill="#0C716B"/>
+<text x="525" y="215" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#fff">Scopes</text>
+<rect x="402" y="236" width="246" height="22" rx="5" fill="#FFF4E0"/>
+<text x="412" y="251" font-family="Inter, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#0A544F">All data · built in</text>
+<rect x="402" y="266" width="246" height="22" rx="5" fill="#F8F9FA"/>
+<text x="412" y="281" font-family="Inter, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#0A544F">Northern region 2023–2025</text>
+<text x="350" y="350" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#0A544F" font-weight="600">Every product reads one results package through one scope</text>
+</svg>

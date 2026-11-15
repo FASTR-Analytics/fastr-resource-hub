@@ -1,5 +1,5 @@
-<!-- AUTO-TRANSLATED from 03_fastr_analytics_platform.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
+<!-- REVIEWED -->
+<!-- Révisé à la main le 2026-11-15 pour la plateforme 2.x ; ne pas écraser par la traduction automatique -->
 
 # La plateforme d'analyse de données FASTR
 
@@ -17,11 +17,11 @@ La plateforme offre des fonctionnalités complètes de gestion des données. Les
 
 ### Analyse des données
 
-Les capacités d'analyse sont fournies par le biais de modules configurables. Les utilisateurs peuvent activer et configurer des modules d'analyse qui traitent les données à l'aide de scripts statistiques basés sur R. Ces modules peuvent être enchaînés pour prendre en charge des analyses complexes en plusieurs étapes, avec des outils intégrés permettant de surveiller l'état du traitement et de consulter les journaux.
+Les capacités d'analyse sont fournies par des modules : évaluation de la qualité des données, ajustements de la qualité des données, détection des perturbations, dénominateurs de couverture, estimations de couverture et valeurs des indicateurs. Un administrateur choisit les modules et génère un **paquet de résultats**, un ensemble versionné de résultats déjà calculés pour toute l'instance. Un paquet est épinglé comme référence ; un nouveau mois de données donne un nouveau paquet. Les utilisateurs n'exécutent jamais d'analyses eux-mêmes : ils lisent des paquets.
 
 ### Assistant IA
 
-Un assistant IA intégré aide les utilisateurs à comprendre et à interpréter leurs données. L'assistant peut expliquer les résultats des modules, décrire les tendances et les schémas des données, fournir des informations sur les visualisations et aider à générer du contenu narratif pour les rapports. Les utilisateurs peuvent poser des questions sur les données de leur projet en langage naturel et recevoir des conseils contextuels sur l'analyse et l'interprétation.
+Un assistant IA intégré aide les utilisateurs à comprendre et à interpréter leurs données. L'assistant peut expliquer les résultats des modules, décrire les tendances et les schémas des données, fournir des informations sur les visualisations et aider à générer du contenu narratif pour les rapports. L'assistant fonctionne dans un produit ouvert (une visualisation, une présentation ou un rapport) : il lit les données de ce produit, met ses figures à jour en direct et rédige du texte. Les utilisateurs posent leurs questions en langage naturel et reçoivent des conseils contextuels sur l'analyse et l'interprétation.
 
 ### Visualisation
 
@@ -29,15 +29,17 @@ La plateforme offre des outils de visualisation robustes pour présenter les ré
 
 ### Partage des résultats
 
-Une fois que les utilisateurs ont créé des visualisations, la plateforme propose trois moyens de les partager, adaptés à différents publics :
+Tout ce qu'un utilisateur crée est un **produit** sur une seule page Produits partagée :
 
-- **Tableaux de bord** — des pages en temps réel et partageables qui regroupent les visualisations dans une vue unique. Les graphiques sont mis à jour à chaque actualisation des données, et le tableau de bord peut être publié via un lien public afin que les parties prenantes puissent l'ouvrir dans un navigateur sans compte FASTR.
-- **Présentations** — des supports de type diaporama conçus pour les réunions et les ateliers en direct. Exportation vers PowerPoint ou PDF pour une présentation en personne.
-- **Rapports** — documents narratifs détaillés combinant une analyse écrite et des chiffres en temps réel. Exportez-les au format Word ou PDF pour que les parties prenantes puissent lire le document dans son intégralité.
+- **Visualisations** — un graphique, une carte ou un tableau enregistré, avec ses propres filtres et son style. Construit une fois, rangé dans un dossier, copié dans les présentations et les rapports.
+- **Présentations** — des diapositives qui combinent visualisations et texte, conçues pour les réunions et les ateliers en direct. Présentées depuis la plateforme ou téléchargées.
+- **Rapports** — des documents narratifs détaillés combinant une analyse écrite et des figures en direct, pour les parties prenantes qui lisent un document de bout en bout.
+
+Pour un coup d'œil rapide sans rien créer, la page **Explorer** montre chaque analyse calculée sous forme de tableau, de série de graphiques ou de carte.
 
 ### Collaboration
 
-La plateforme prend en charge le travail collaboratif grâce à une structure basée sur des projets. Les utilisateurs peuvent organiser leur travail en projets distincts et attribuer aux membres de l'équipe différents rôles, notamment des autorisations de consultation, d'édition et d'administration. Les contrôles d'accès s'appliquent au niveau du projet, et les projets peuvent être verrouillés pour empêcher toute modification involontaire.
+Toute l'équipe du pays travaille sur une seule page Produits, organisée en dossiers. Chaque produit s'enregistre tout seul pendant qu'on le modifie et l'équipe voit les changements en direct. L'accès se règle par produit, comme pour un document partagé : un propriétaire, des éditeurs et des lecteurs, plus un accès général pour tous les autres membres de l'instance. L'accès peut aussi être réglé d'un coup pour tout le contenu d'un dossier.
 
 ## À qui s'adresse cette application ?
 
@@ -57,18 +59,18 @@ Les administrateurs système sont chargés de mettre en place la plateforme, de 
 
 ### Niveau organisationnel (instance)
 
-L'**instance** sert d'espace de travail principal de l'organisation au sein de la plateforme. Chaque instance contient tous les utilisateurs enregistrés, la structure administrative partagée (y compris les zones administratives et les établissements de santé), les définitions d'indicateurs partagées, les sources de données (à la fois SIGS et HFA) et tous les projets créés au sein de l'organisation.
+L'**instance** est l'espace de travail du pays au sein de la plateforme. Chaque instance contient tous les utilisateurs enregistrés, la structure administrative partagée (zones administratives et établissements de santé), les définitions d'indicateurs partagées, les sources de données (SIGS et HFA), les paquets de résultats calculés à partir d'elles, les portées, et chaque produit créé par l'équipe.
 
-### Niveau du projet
+### Produits, dossiers et portées
 
-Les **projets** fournissent des espaces de travail d'analyse ciblés au sein d'une instance. Chaque projet permet aux utilisateurs de sélectionner les données à inclure en définissant des périodes, des établissements et des indicateurs spécifiques. Au sein d'un projet, les utilisateurs peuvent activer des modules d'analyse, créer des visualisations et générer des rapports adaptés à des objectifs analytiques spécifiques.
+Les utilisateurs travaillent sur la page **Produits** : une seule liste pour toute l'instance, organisée en **dossiers** imbriquables, qui contient chaque visualisation, présentation et rapport. Chaque produit lit un **paquet de résultats** (quel calcul) à travers une **portée** (quelle partie des données : une région, une plage d'années, un ensemble de modules ou d'indicateurs). La portée intégrée **Toutes les données** couvre tout ; les portées nommées sont créées une fois sur la page Portées et partagées par toute l'équipe.
 
-![Projets au sein d'une instance](resources/diagrams/projects_within_instance.svg)
+![Produits, dossiers et portées au sein d'une instance](resources/diagrams_fr/products_folders_scopes.svg)
 
 
 ### Flux de données
 
-La plateforme suit un flux de données structuré : **Importation des données → Traitement par les modules → Visualisations → Tableaux de bord, présentations et rapports**. Les utilisateurs commencent par télécharger les données des établissements de santé au niveau de l’instance. Des projets sont ensuite créés avec des fenêtres de données spécifiques qui définissent le champ d’application de l’analyse. Les modules analytiques traitent et analysent les données sélectionnées, produisant des résultats qui peuvent être transformés en graphiques, cartes et tableaux. Les visualisations peuvent ensuite être assemblées dans des tableaux de bord pour un partage en direct, des présentations pour une diffusion en direct ou des rapports narratifs pour une diffusion écrite.
+La plateforme suit un flux de données structuré : **Importation des données → Paquet de résultats → Produits**. Un administrateur importe les données des établissements au niveau de l'instance et en génère un paquet de résultats. Les utilisateurs construisent ensuite des produits qui lisent le paquet : une visualisation montre une métrique sous forme de graphique, de carte ou de tableau ; les présentations et les rapports assemblent des visualisations et du texte. Une portée sur chaque produit restreint ce qu'il montre. La page Explorer se tient à côté de ce flux, pour un coup d'œil rapide à n'importe quel résultat calculé.
 
 
 ## Configuration technique requise
@@ -87,11 +89,19 @@ La compréhension de ces concepts fondamentaux aidera les utilisateurs à travai
 
 ### Instance
 
-Une **instance** est l'espace de travail principal de l'organisation au sein de la plateforme. Elle sert de conteneur de niveau supérieur pour tous les utilisateurs, la structure administrative partagée, les sources de données et les projets. Chaque organisation opère généralement au sein d'une seule instance qui sert de base à tous les travaux d'analyse.
+Une **instance** est l'espace de travail du pays au sein de la plateforme. C'est le conteneur de niveau supérieur pour tous les utilisateurs, la structure administrative partagée, les sources de données, les paquets de résultats, les portées et les produits. Chaque pays opère au sein d'une seule instance.
 
-### Projets
+### Produits et dossiers
 
-Un **projet** est un espace de travail d'analyse ciblé au sein d'une instance. Les projets permettent aux utilisateurs de travailler avec des sous-ensembles spécifiques de données en définissant des périodes, des installations et des indicateurs pertinents pour un objectif analytique particulier. Au sein de chaque projet, les utilisateurs peuvent activer des modules d'analyse, créer des visualisations, générer des rapports et collaborer avec les membres de l'équipe. Une instance peut contenir plusieurs projets, chacun avec des périmètres de données et des configurations d'accès utilisateur différents.
+Un **produit** est tout ce qu'un utilisateur crée et conserve : une visualisation, une présentation ou un rapport. Tous les produits vivent sur la seule page Produits, dans des **dossiers** qui peuvent être imbriqués (un dossier pays avec un sous-dossier par personne, par exemple). La ligne de chaque produit indique son type, son paquet de résultats, sa portée et sa date de dernière modification. Le menu d'un produit permet de le déplacer dans un dossier, de le dupliquer, de changer son paquet et sa portée, ou de gérer qui peut l'ouvrir.
+
+### Paquets de résultats
+
+Un **paquet de résultats** est un ensemble versionné de résultats calculés pour l'instance : un administrateur choisit les modules, génère le paquet et en épingle un comme référence. Les paquets sont immuables ; quand de nouvelles données sont importées, un nouveau paquet est généré et les produits y sont déplacés. Les produits lisent des paquets ; personne n'exécute d'analyse dans un produit.
+
+### Portées
+
+Une **portée** est une vue nommée des données de l'instance à travers laquelle un produit lit. Par famille de données (SIGS, HFA, ICEH), elle peut tout inclure ou limiter la géographie à une région, les années, les modules et les indicateurs. La portée intégrée **Toutes les données** ne limite rien et ne peut être ni modifiée ni supprimée. Les utilisateurs ayant un accès non restreint aux données créent les portées sur la page Portées ; tout utilisateur approuvé voit la liste et en choisit une en créant un produit ou dans Explorer. Une portée est indépendante du paquet de résultats : le paquet dit quel calcul, la portée dit quelle partie en est montrée.
 
 ### Structure
 
@@ -119,7 +129,7 @@ Les **indicateurs** sont des mesures de santé quantifiables utilisées au sein 
 - Les **indicateurs DHIS2** sont importés depuis des systèmes DHIS2 externes et peuvent suivre des conventions de nommage ou des méthodes de calcul différentes.
 - Les **indicateurs calculés** sont des mesures dérivées qui combinent deux valeurs — généralement un indicateur numérateur divisé par un dénominateur (un autre indicateur ou un chiffre basé sur la population). Par exemple, le nombre de consultations prénatales de premier trimestre (CPN1) divisé par la population cible de femmes enceintes donne une estimation de la couverture CPN1. Les indicateurs calculés peuvent être affichés sous forme de pourcentage, de nombre ou de taux pour 10 000, et ils prennent en charge des seuils de type « feu tricolore » pour une évaluation rapide des performances (par exemple, vert à 80 % ou plus, jaune entre 70 et 79 %, rouge en dessous de 70 %).
 
-Les indicateurs calculés sont enregistrés dans un projet au moment de l’importation SIGS ; par conséquent, la modification d’une définition nécessite une réimportation pour prendre effet. Les dénominateurs basés sur la population nécessitent le téléchargement d’un fichier CSV de population au niveau de l’instance avant de pouvoir être utilisés.
+Les indicateurs calculés sont calculés au moment de l'importation SIGS ; par conséquent, la modification d'une définition nécessite une réimportation pour prendre effet. Les dénominateurs basés sur la population nécessitent le téléchargement d’un fichier CSV de population au niveau de l’instance avant de pouvoir être utilisés.
 
 ### Ensembles de données et versions
 
@@ -127,53 +137,41 @@ Un **ensemble de données** est un recueil de données de santé, qu'il s'agisse
 
 ### Modules
 
-Les **modules** sont des unités de traitement des données qui exécutent des scripts R analytiques au sein de la plateforme. Chaque module utilise des données d'entrée provenant d'ensembles de données ou des résultats d'autres modules, traite et analyse les données selon des méthodes statistiques définies, et produit des objets de résultats sous forme de fichiers de sortie. Les modules peuvent être enchaînés pour prendre en charge des flux de travail analytiques complexes où un module utilise les résultats d'un autre comme données d'entrée.
+Les **modules** sont les méthodes d'analyse intégrées à la plateforme : évaluation de la qualité des données, ajustements de la qualité des données, détection des perturbations, dénominateurs de couverture, estimations de couverture et valeurs des indicateurs. Chaque module prend en entrée un ensemble de données ou les résultats d'un autre module et produit des tableaux de résultats. Certains modules dépendent d'autres : les estimations de couverture ont d'abord besoin des dénominateurs de couverture.
 
-La plateforme distingue deux types de modules. Une **définition de module** est le modèle ou le schéma d'un type d'analyse, définissant les méthodes et paramètres analytiques disponibles. Une **instance de module** est un module qui a été activé et configuré au sein d'un projet spécifique. Certains modules ont des prérequis, ce qui signifie que d'autres modules doivent d'abord être activés avant qu'ils puissent être utilisés.
+Les modules s'exécutent quand un administrateur génère un paquet de résultats, avec les réglages choisis à ce moment-là (**Paramètres par défaut des modules** sur la page Résultats). La plateforme affiche les modules par leur libellé ; dans un produit ou dans Explorer, l'utilisateur choisit un module puis l'une de ses métriques.
 
 ### Visualisations
 
 Les **visualisations** sont des représentations visuelles des données générées à partir des résultats des modules. La plateforme prend en charge trois principaux types de visualisation : les graphiques (notamment les histogrammes, les graphiques linéaires et les diagrammes circulaires), les cartes (visualisations géographiques présentant les données par zone administrative) et les tableaux (affichages de données sous forme de tableaux).
 
-Les visualisations peuvent être filtrées selon différentes dimensions et désagrégées en fonction de facteurs tels que le type d'établissement, la période ou le niveau administratif. Les utilisateurs peuvent personnaliser l'apparence et le style des visualisations, puis les exporter pour les utiliser dans des applications externes ou les inclure directement dans des tableaux de bord, des présentations ou des rapports.
+Une visualisation se construit à partir d'une métrique (le résultat d'un module) avec un préréglage ou un type personnalisé : tableau, série temporelle, graphique en barres, camembert ou carte. Elle peut être filtrée sur un sous-ensemble (une période, une zone, un indicateur) et désagrégée (une ligne, une rangée, une colonne ou un graphique par zone, indicateur ou type d'établissement). Les utilisateurs peuvent personnaliser l'apparence et le style, télécharger la figure et en insérer des copies dans les présentations et les rapports. Une visualisation est un produit : elle a une ligne sur la page Produits, s'enregistre toute seule pendant qu'on la modifie et conserve un historique de versions à restaurer.
 
-### Tableaux de bord
+### Explorer
 
-Les **tableaux de bord** sont des pages en temps réel et partageables qui regroupent des visualisations enregistrées en une seule vue. Chaque vignette d'un tableau de bord est un graphique, une carte ou un tableau qui se met à jour automatiquement dès que les données sous-jacentes sont actualisées — ainsi, un tableau de bord affiche toujours l'état actuel des données sans qu'il soit nécessaire de les réexporter.
-
-Les tableaux de bord peuvent être publiés à une URL publique (avec des contrôles d'accès facultatifs) afin que les parties prenantes puissent les ouvrir dans un navigateur sans avoir besoin d'un compte FASTR. Deux mises en page sont disponibles : une **grille** qui organise les vignettes en lignes et en colonnes, et une **barre latérale** qui organise les vignettes dans un menu de gauche pour la navigation.
-
-Les tableaux de bord prennent également en charge les **groupes de réplicats** : une seule tuile peut contenir plusieurs variantes d’un même graphique (par exemple, une par district), avec un menu déroulant permettant à l’utilisateur de basculer entre elles. Cela permet de conserver un tableau de bord compact lorsque la même analyse doit être présentée pour plusieurs zones.
+**Explorer** est la page pour regarder avant de construire. Elle montre chaque analyse d'un paquet de résultats, module par module, sous forme de tableau, de série de petits graphiques dans le temps ou de carte, avec des filtres par niveau, indicateurs et période. Rien dans Explorer n'est enregistré ni partagé ; quand une vue répond à une question, l'utilisateur la construit comme visualisation. Explorer remplace les tableaux de bord des versions précédentes.
 
 ### Présentations
 
-Les **présentations** sont des documents de type diaporama conçus pour des ateliers en direct ou des réunions avec les parties prenantes. L'éditeur organise un graphique, un titre ou un bloc de texte par diapositive, à l'instar de PowerPoint. Les présentations s'exportent au format PowerPoint (.pptx) ou PDF et conviennent particulièrement aux résultats qui seront projetés dans une salle pendant qu'une personne les commente devant l'auditoire.
+Les **présentations** sont des diapositives conçues pour des ateliers en direct ou des réunions avec les parties prenantes. Chaque diapositive contient des blocs de texte, de visualisations ou d'images, mis en page selon un thème choisi pour la présentation. Les visualisations insérées dans une présentation sont des copies qui restent liées aux données. Les présentations se présentent depuis la plateforme ou se téléchargent, et conviennent aux résultats qui seront projetés dans une salle pendant qu'une personne les commente devant l'auditoire.
 
 ### Rapports
 
-Les **rapports** sont des documents narratifs détaillés qui combinent votre analyse écrite avec des chiffres en temps réel provenant de la plateforme. L'éditeur fonctionne comme un traitement de texte avec mise en forme Markdown : les utilisateurs rédigent des commentaires, intègrent des visualisations qui se mettent à jour automatiquement lorsque les données sont actualisées, et ajoutent des images statiques pour le contexte.
-
-Les rapports s'exportent au format **Word (.docx) ou PDF** et sont conçus pour les parties prenantes qui lisent un document de bout en bout, plutôt que d'assister à une présentation. Utilisez une présentation lorsque le document sera projeté lors d'une réunion ; utilisez un rapport lorsque le document sera lu sur un bureau ou dans une boîte de réception.
-
-### Fenêtrage
-
-Le **fenêtrage** désigne le processus de sélection d'un sous-ensemble de données d'instance à utiliser dans le cadre d'un projet. Les utilisateurs peuvent filtrer les données par période (en sélectionnant des mois ou des années spécifiques), par indicateurs (en incluant tous les indicateurs ou seulement certains), par zones administratives (en incluant toutes les régions ou certaines d’entre elles) et par établissements (filtrage par type d’établissement ou par propriété). Cette fonctionnalité permet aux projets de se concentrer sur les données les plus pertinentes pour leurs objectifs analytiques sans charger l’ensemble du jeu de données.
+Les **rapports** sont des documents narratifs détaillés qui combinent une analyse écrite avec des figures en direct provenant de la plateforme. L'éditeur fonctionne comme un traitement de texte : les utilisateurs rédigent des commentaires, intègrent des visualisations qui se mettent à jour quand le paquet change, et ajoutent des images, des tableaux et des éléments de page. Les rapports se téléchargent ou s'envoient par e-mail pour les parties prenantes qui lisent un document de bout en bout. Utilisez une présentation lorsque le document sera projeté lors d'une réunion ; utilisez un rapport lorsqu'il sera lu sur un bureau ou dans une boîte de réception.
 
 ### Désagrégation
 
 **La désagrégation** désigne le processus consistant à décomposer les données par dimensions afin d’identifier des tendances et des variations. Les données peuvent être désagrégées par période (mensuelle, trimestrielle ou annuelle), par niveau de zone administrative, par type d’établissement, par propriété de l’établissement ou par catégories d’indicateurs. Cette fonctionnalité permet une analyse plus nuancée et aide à identifier les disparités entre les différentes dimensions.
 
-### Rôles des utilisateurs
+### Utilisateurs, autorisations et accès
 
-Différents rôles peuvent être attribués aux utilisateurs afin de déterminer leurs autorisations au sein de la plateforme. Au **niveau de l'instance**, les administrateurs globaux disposent d'un accès complet à tous les paramètres de l'instance et à tous les projets. Au **niveau du projet**, trois rôles sont disponibles : les administrateurs peuvent modifier les paramètres du projet, les modules, les visualisations et les rapports ; les éditeurs peuvent créer et modifier les visualisations et les rapports ; et les lecteurs peuvent consulter le contenu du projet mais ne peuvent pas y apporter de modifications.
+Chaque compte doit être **approuvé** par un administrateur avant de voir quoi que ce soit. Les **administrateurs globaux** gèrent l'instance : les utilisateurs, les importations de données, les paquets de résultats et chaque produit. Les autres utilisateurs détiennent des autorisations réglées sur la page Utilisateurs : consulter ou configurer les utilisateurs, consulter ou configurer les données.
+
+Deux autres réglages décident de ce qu'un utilisateur voit. L'**accès aux données** est soit non restreint (toutes les portées), soit limité à une liste de portées accordées par un administrateur ; un utilisateur restreint ne voit que les données couvertes par ces portées, partout sur la plateforme. L'**accès aux produits** fonctionne comme pour un document partagé : chaque produit a un propriétaire, des droits par utilisateur comme éditeur ou lecteur, et un accès général pour tous les autres membres de l'instance (restreint, tout le monde peut consulter, ou tout le monde peut modifier). Les dossiers n'ont pas d'accès propre, mais l'accès peut être réglé d'un coup pour tout leur contenu.
 
 ### Scores de qualité des données
 
 La plateforme évalue automatiquement l'exhaustivité et l'exactitude des données, générant des scores de qualité qui aident les utilisateurs à identifier les problèmes potentiels liés aux données. Ces scores facilitent les processus de contrôle de la qualité des données et aident à hiérarchiser les domaines nécessitant une attention particulière.
-
-### Statut de verrouillage
-
-Les projets peuvent être **verrouillés** afin d'empêcher toute modification de leur configuration tout en permettant aux utilisateurs de consulter les rapports. Lorsqu'un projet est verrouillé, les modules et les paramètres de données ne peuvent pas être modifiés, ce qui permet de préserver les configurations analytiques une fois qu'elles ont été finalisées.
 
 !!! conseil « Guide de l'utilisateur »
     Pour des tutoriels étape par étape sur l'utilisation de la plateforme, consultez le [guide de l'utilisateur FASTR](11_user_guide.md).
@@ -222,17 +220,17 @@ La plateforme offre une interface conviviale pour effectuer des analyses et prop
 </div>
 <div>
 
-**Gestion des données** — Importez des listes d'établissements et des données d'indicateurs depuis DHIS2 ou des fichiers
+**Gestion des données** — Importez établissements et indicateurs depuis DHIS2 ou des fichiers
 
-**Analyse des données** — Exécutez des modules statistiques pour l'évaluation et l'ajustement de la qualité
+**Analyse des données** — Des modules statistiques, calculés en paquets de résultats
 
-**Visualisation** — Explorez les résultats à l'aide de graphiques et de tableaux interactifs
+**Visualisation** — Explorer pour regarder, puis graphiques, cartes et tableaux
 
-**Partage des résultats** — Créez des tableaux de bord en temps réel, des présentations PowerPoint ou des rapports narratifs à l'intention des parties prenantes
+**Partage des résultats** — Présentations et rapports, figures liées aux données
 
-**Collaboration** — Travaillez avec votre équipe sur des projets communs
+**Collaboration** — Une page Produits pour l'équipe, des dossiers, un accès par produit
 
-**Assistant IA** — Bénéficiez d'une aide pour interpréter les résultats et comprendre vos données
+**Assistant IA** — Une aide pour interpréter les résultats et comprendre vos données
 
 </div>
 </div>
@@ -247,37 +245,26 @@ Une instance contient :
 
 - Tous les utilisateurs enregistrés et leurs comptes
 - La structure administrative partagée (régions, districts, établissements)
-- Les définitions des indicateurs et les sources de données
-- Tous les projets créés pour ce pays
+- Les définitions des indicateurs, les sources de données et les paquets de résultats calculés à partir d'elles
+- Les portées, et chaque produit créé par l'équipe
 
 **Considérez une instance comme l'espace de travail dédié à votre pays.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
-## Rôles et autorisations des utilisateurs
+## Utilisateurs, autorisations et accès
 
-Il existe deux niveaux d'autorisations sur la plateforme :
+**L'approbation d'abord.** Un nouveau compte ne voit rien tant qu'un administrateur ne l'a pas approuvé.
 
-&nbsp;
+Les **administrateurs globaux** gèrent les utilisateurs, les données, les paquets de résultats, et sont propriétaires de chaque produit. Les autres utilisateurs détiennent des autorisations réglées sur la page Utilisateurs (consulter ou configurer les utilisateurs, consulter ou configurer les données).
 
-**Rôles au niveau de l'instance :**
+**Accès aux données** : non restreint, ou limité aux portées accordées par un administrateur. Un utilisateur restreint ne voit que ces données, partout.
 
-- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules, et exécuter des analyses
-
-&nbsp;
-
-**Rôles au niveau du projet :**
-
-- **Les éditeurs de projet** peuvent créer des visualisations, générer des rapports et télécharger/exporter les résultats
-- **Les lecteurs de projet** peuvent consulter les visualisations, consulter les rapports et télécharger/exporter les résultats
-
-&nbsp;
-
-*Les administrateurs sont affectés par instance ; les éditeurs et les lecteurs sont affectés par projet.*
+**Accès aux produits**, comme pour un document partagé : un propriétaire, des éditeurs, des lecteurs, et un accès général pour tous les autres (restreint / tout le monde peut consulter / tout le monde peut modifier). Réglé dans **Gérer l'accès**, par produit ou pour tout un dossier.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
-## Projets au sein d'une instance
+## Produits, dossiers et portées
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -289,24 +276,20 @@ Il existe deux niveaux d'autorisations sur la plateforme :
 <div class="container">
 <div class="img-col">
 
-![Projets au sein d'une instance](../resources/diagrams/projects_within_instance.svg)
+![Produits, dossiers et portées au sein d'une instance](../resources/diagrams_fr/products_folders_scopes.svg)
 
 </div>
 <div class="text-col">
 
-Chaque instance de pays peut contenir **plusieurs projets**.
+Une seule page **Produits** pour le pays : chaque visualisation, présentation et rapport, rangés en **dossiers**.
 
-Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
-
-- Différentes versions d'analyses
-- Un projet de démonstration ou d'expérimentation
-- Des projets distincts pour différentes équipes ou différents programmes
+Chaque produit lit un **paquet de résultats** (quel calcul) à travers une **portée** (quelle partie des données).
 
 **Questions clés lors de la configuration :**
 
-- Qui est l'administrateur ?
-- Qui peut modifier ?
-- Qui peut consulter ?
+- Quel paquet est épinglé ?
+- De quelles portées l'équipe a-t-elle besoin ?
+- Qui peut ouvrir ou modifier quoi ?
 
 </div>
 </div>

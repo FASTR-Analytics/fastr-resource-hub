@@ -59,7 +59,8 @@ Prioritize by frequency of use.
 | outlier_impact.svg | ✓ | ✓ | m4 |
 | platform_capabilities.svg | ✓ | ✓ | m3 |
 | platform_roadmap_2026.svg | ✓ | ✓ | m3 |
-| projects_within_instance.svg | ✓ | ✓ | m3 |
+| products_folders_scopes.svg | ✓ | ✓ | m3 |
+| projects_within_instance.svg | ✓ | ✓ | (retired from m3; plaidoyer deck) |
 | service_cascade_funnel.svg | ✓ | ✓ | m6 |
 | steps_to_implement_rmncahn_service_chart.svg | ✓ | ✓ | m0 |
 | storytelling_with_data.svg | ✓ | ✓ | m7 |

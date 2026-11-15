@@ -18,11 +18,11 @@ paginate: true
 
 **Data Analysis** — Run statistical modules for quality assessment and adjustment
 
-**Visualization** — Explore results with interactive charts and tables
+**Visualization** — Look at any result in Explore, then build charts, maps and tables
 
-**Sharing results** — Build live dashboards, slide presentations, or narrative reports for stakeholders
+**Sharing results** — Slide decks and narrative reports, with figures that stay linked to the data
 
-**Collaboration** — Work together with your team on shared projects
+**Collaboration** — One Products page for the team, folders, and access per product
 
 **AI Assistant** — Get help interpreting results and understanding your data
 

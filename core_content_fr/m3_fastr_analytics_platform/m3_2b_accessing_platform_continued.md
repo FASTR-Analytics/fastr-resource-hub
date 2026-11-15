@@ -4,23 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Rôles et autorisations des utilisateurs
+## Utilisateurs, autorisations et accès
 
-Il existe deux niveaux d'autorisations sur la plateforme :
+**L'approbation d'abord.** Un nouveau compte ne voit rien tant qu'un administrateur ne l'a pas approuvé.
 
-&nbsp;
+Les **administrateurs globaux** gèrent les utilisateurs, les données, les paquets de résultats, et sont propriétaires de chaque produit. Les autres utilisateurs détiennent des autorisations réglées sur la page Utilisateurs (consulter ou configurer les utilisateurs, consulter ou configurer les données).
 
-**Rôles au niveau de l'instance :**
+**Accès aux données** : non restreint, ou limité aux portées accordées par un administrateur. Un utilisateur restreint ne voit que ces données, partout.
 
-- **Les administrateurs d'instance** peuvent ajouter des utilisateurs, créer des projets, attribuer des rôles, télécharger des données, importer et configurer des modules, et exécuter des analyses
-
-&nbsp;
-
-**Rôles au niveau du projet :**
-
-- **Les éditeurs de projet** peuvent créer des visualisations, générer des rapports et télécharger/exporter les résultats
-- **Les lecteurs de projet** peuvent consulter les visualisations, consulter les rapports et télécharger/exporter les résultats
-
-&nbsp;
-
-*Les administrateurs sont affectés par instance ; les éditeurs et les lecteurs sont affectés par projet.*
+**Accès aux produits**, comme pour un document partagé : un propriétaire, des éditeurs, des lecteurs, et un accès général pour tous les autres (restreint / tout le monde peut consulter / tout le monde peut modifier). Réglé dans **Gérer l'accès**, par produit ou pour tout un dossier.

@@ -14,17 +14,17 @@ paginate: true
 </div>
 <div>
 
-**Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
+**Gestão de dados** — Importe unidades e indicadores do DHIS2 ou de ficheiros
 
-**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Módulos estatísticos, calculados em pacotes de resultados
 
-**Visualização** — Explore os resultados com gráficos e tabelas interativos
+**Visualização** — Explorar para olhar, depois gráficos, mapas e tabelas
 
-**Partilha de resultados** — Crie painéis em tempo real, apresentações de slides ou relatórios narrativos para as partes interessadas
+**Partilha de resultados** — Apresentações e relatórios, figuras ligadas aos dados
 
-**Colaboração** — Trabalhe em conjunto com a sua equipa em projetos partilhados
+**Colaboração** — Uma única página Produtos para a equipa, pastas e acesso por produto
 
-**Assistente de IA** — Obtenha ajuda para interpretar resultados e compreender os seus dados
+**Assistente de IA** — Ajuda para interpretar resultados e compreender os dados
 
 </div>
 </div>

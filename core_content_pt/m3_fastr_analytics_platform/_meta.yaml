@@ -14,8 +14,8 @@ slides:
 - file: m3_2b_accessing_platform_continued.md
   order: 2.02
   variant: full
-  title: Funções e permissões dos utilizadores
+  title: Utilizadores, permissões e acesso
 - file: m3_2c_accessing_platform_continued.md
   order: 2.03
   variant: full
-  title: Projetos dentro de uma instância
+  title: Produtos, pastas e âmbitos

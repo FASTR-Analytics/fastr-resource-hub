@@ -14,11 +14,11 @@ The platform provides comprehensive data management functionality. Users can imp
 
 ### Data analysis
 
-Analytical capabilities are delivered through configurable modules. Users can enable and configure analytical modules that process data using R-based statistical scripts. These modules can be chained together to support complex, multi-step analyses, with built-in tools for monitoring processing status and reviewing logs.
+Analytical capabilities are delivered through modules: data quality assessment, data quality adjustments, disruption detection, coverage denominators, coverage estimates and indicator values. An administrator chooses the modules and generates a **results package**, a versioned set of already-computed results for the whole instance. One package is pinned as the reference; a new month of data means a new package. Users never run analyses themselves: they read packages.
 
 ### AI assistant
 
-An integrated AI assistant helps users understand and interpret their data. The assistant can explain module outputs, describe data trends and patterns, provide insights about visualizations, and help generate narrative content for reports. Users can ask questions about their project data in natural language and receive contextual guidance on analysis and interpretation.
+An integrated AI assistant helps users understand and interpret their data. The assistant can explain module outputs, describe data trends and patterns, provide insights about visualizations, and help generate narrative content for reports. The assistant works inside an open product (a visualization, a slide deck or a report): it reads that product's data, updates its figures live, and drafts text. Users ask in natural language and receive contextual guidance on analysis and interpretation.
 
 ### Visualization
 
@@ -26,15 +26,17 @@ The platform offers robust visualization tools for presenting analytical results
 
 ### Sharing results
 
-Once users have built visualizations, the platform offers three ways to share them, suited to different audiences:
+Everything a user makes is a **product** on one shared Products page: 
 
-- **Dashboards** — live, shareable pages that bundle visualizations into a single view. Charts update whenever data refreshes, and the dashboard can be published at a public link so stakeholders open it in a browser without a FASTR account.
-- **Presentations** — slide-deck-style outputs designed for live meetings and workshops. Export to PowerPoint or PDF for in-person delivery.
-- **Reports** — long-form narrative documents that combine written analysis with live figures. Export to Word or PDF for stakeholders reading a document end-to-end.
+- **Visualizations** — a saved chart, map or table with its own filters and styling. Built once, kept in a folder, copied into decks and reports.
+- **Slide decks** — slides that combine visualizations and text, designed for live meetings and workshops. Presented from the platform or downloaded.
+- **Reports** — long-form narrative documents that combine written analysis with live figures, for stakeholders reading a document end-to-end.
+
+For a quick look without creating anything, the **Explore** page shows every computed analysis as a table, a set of charts or a map.
 
 ### Collaboration
 
-The platform supports collaborative work through a project-based structure. Users can organize their work into discrete projects and assign team members with different roles, including viewer, editor, and administrator permissions. Access controls operate at the project level, and projects can be locked to prevent unintended changes.
+The whole country team works on one Products page, organized in folders. Every product saves itself as it is edited and the team sees changes live. Access is set per product, like a shared document: an owner, editors and viewers, plus a general access for everyone else in the instance. Access can also be set for everything in a folder at once.
 
 ## Who should use this application?
 
@@ -54,18 +56,18 @@ System administrators are responsible for setting up the platform, managing user
 
 ### Organization level (instance)
 
-The **instance** serves as the organization's primary workspace within the platform. Each instance contains all registered users, the shared administrative structure (including administrative areas and health facilities), shared indicator definitions, data sources (both HMIS and HFA), and all projects created within the organization.
+The **instance** is the country's workspace within the platform. Each instance contains all registered users, the shared administrative structure (administrative areas and health facilities), shared indicator definitions, the data sources (HMIS and HFA), the results packages computed from them, the scopes, and every product the team has made.
 
-### Project level
+### Products, folders and scopes
 
-**Projects** provide focused analysis workspaces within an instance. Each project allows users to select which data to include by defining specific time periods, facilities, and indicators. Within a project, users can enable analytical modules, create visualizations, and build reports tailored to specific analytical objectives.
+Users work on the **Products** page: one list for the whole instance, organized in nestable **folders**, holding every visualization, slide deck and report. Each product reads one **results package** (which computation) through one **scope** (which part of the data: a region, a range of years, a set of modules or indicators). The built-in scope **All data** covers everything; named scopes are created once on the Scopes page and shared by the whole team.
 
-![Projects within instance](resources/diagrams/projects_within_instance.svg)
+![Products, folders and scopes within an instance](resources/diagrams/products_folders_scopes.svg)
 
 
 ### Data flow
 
-The platform follows a structured data flow: **Data Import → Module Processing → Visualizations → Dashboards, Presentations, and Reports**. Users first upload health facility data at the instance level. Projects are then created with specific data windows that define the scope of analysis. Analytical modules process and analyze the selected data, producing outputs that can be turned into charts, maps, and tables. Visualizations can then be assembled into dashboards for live sharing, presentations for live delivery, or narrative reports for written dissemination.
+The platform follows a structured data flow: **Data import → Results package → Products**. An administrator imports facility data at the instance level and generates a results package from it. Users then build products that read the package: a visualization shows one metric as a chart, map or table; slide decks and reports assemble visualizations with text. A scope on each product narrows what it shows. The Explore page sits beside this flow for a quick look at any computed result.
 
 
 ## Technical requirements
@@ -84,11 +86,19 @@ Understanding these core concepts will help users work effectively with the appl
 
 ### Instance
 
-An **instance** is the organization's primary workspace within the platform. It serves as the top-level container for all users, the shared administrative structure, data sources, and projects. Each organization typically operates within a single instance that provides the foundation for all analytical work.
+An **instance** is the country's workspace within the platform. It is the top-level container for all users, the shared administrative structure, data sources, results packages, scopes and products. Each country operates within a single instance.
 
-### Projects
+### Products and folders
 
-A **project** is a focused analysis workspace within an instance. Projects enable users to work with specific subsets of data by defining time periods, facilities, and indicators relevant to a particular analytical objective. Within each project, users can enable analytical modules, create visualizations, generate reports, and collaborate with team members. Multiple projects can exist within one instance, each with different data scopes and user access configurations.
+A **product** is anything a user makes and keeps: a visualization, a slide deck or a report. All products live on the one Products page, in **folders** that can be nested (a country folder with one sub-folder per person, for example). Each product's row shows its type, its results package, its scope and when it was last updated. A product's menu lets you move it to a folder, duplicate it, change its package and scope, or manage who can open it.
+
+### Results packages
+
+A **results package** is a versioned set of computed results for the instance: an administrator chooses the modules, generates the package, and pins one as the reference. Packages are immutable; when new data is imported, a new package is generated and products are moved to it. Products read packages; nobody runs analyses inside a product.
+
+### Scopes
+
+A **scope** is a named view of the instance's data that a product reads through. Per data family (HMIS, HFA, ICEH) it can include everything or limit the geography to one region, the years, the modules and the indicators. The built-in scope **All data** limits nothing and cannot be edited or deleted. Users with unrestricted data access create scopes on the Scopes page; every approved user sees the list and picks one when creating a product or in Explore. A scope is independent of the results package: the package says which computation, the scope says which part of it is shown.
 
 ### Structure
 
@@ -116,7 +126,7 @@ Health Facility Assessment (HFA) data contains information about facility charac
 - **DHIS2 indicators** are imported from external DHIS2 systems and may follow different naming conventions or calculation methods.
 - **Calculated indicators** are derived metrics that combine two values — typically a numerator indicator divided by a denominator (another indicator, or a population-based figure). For example, ANC1 visits divided by the target pregnant-women population gives an ANC1 coverage estimate. Calculated indicators can be displayed as a percent, a count, or a rate per 10,000, and they support traffic-light thresholds for quick performance review (e.g., green at or above 80%, yellow 70–79%, red below 70%).
 
-Calculated indicators are snapshotted into a project at HMIS-import time, so changing a definition forces a re-import to take effect. Population-based denominators require a population CSV to be uploaded at the instance level before they can be used.
+Calculated indicators are computed at HMIS-import time, so changing a definition requires a re-import to take effect. Population-based denominators require a population CSV to be uploaded at the instance level before they can be used.
 
 ### Datasets and versions
 
@@ -124,53 +134,41 @@ A **dataset** is a collection of health data, either HMIS or HFA. Each time data
 
 ### Modules
 
-**Modules** are data processing units that execute analytical R scripts within the platform. Each module takes input data from datasets or from the outputs of other modules, processes and analyzes the data according to defined statistical methods, and produces results objects as output files. Modules can be chained together to support complex analytical workflows where one module uses another's outputs as its inputs.
+**Modules** are the analytical methods built into the platform: data quality assessment, data quality adjustments, disruption detection, coverage denominators, coverage estimates, and indicator values. Each module takes a dataset or another module's outputs as input and produces result tables. Some modules depend on others, so coverage estimates need coverage denominators first.
 
-The platform distinguishes between two module types. A **Module Definition** is the template or blueprint for a type of analysis, defining the analytical methods and parameters available. A **Module Instance** is a module that has been enabled and configured within a specific project. Some modules have prerequisites, meaning that other modules must be enabled first before they can be used.
+Modules run when an administrator generates a results package, with the settings chosen at that time (**Module defaults** on the Results page). The platform shows modules by their label; in a product or in Explore, a user picks a module and one of its metrics.
 
 ### Visualizations
 
 **Visualizations** are visual representations of data generated from module outputs. The platform supports three main visualization types: charts (including bar charts, line graphs, and pie charts), maps (geographic visualizations showing data across administrative areas), and tables (tabular data displays).
 
-Visualizations can be filtered by various dimensions and disaggregated by factors such as facility type, time period, or administrative level. Users can customize the appearance and styling of visualizations, and export them for use in external applications or include them directly in dashboards, presentations, or reports.
+A visualization is built from a metric (a module's output) with a preset or a custom type: table, time series, bar chart, pie chart or map. It can be filtered to a subset (a time period, an area, an indicator) and disaggregated (one line, row, column or chart per area, indicator or facility type). Users can customize the appearance and styling, download the figure, and insert copies of it into slide decks and reports. A visualization is a product: it has a row on the Products page, saves itself as it is edited, and keeps a history of versions to restore from.
 
-### Dashboards
+### Explore
 
-**Dashboards** are live, shareable pages that bundle saved visualizations into one view. Each tile on a dashboard is a chart, map, or table that updates automatically whenever the underlying data refreshes — so a dashboard always shows the current state of the data without re-exporting.
+**Explore** is the page for looking before building. It shows every analysis in a results package, module by module, as a table, a set of small charts over time, or a map, with filters for level, indicators and period. Nothing in Explore is saved or shared; when a view answers a question, the user builds it as a visualization. Explore replaces the dashboards of earlier versions.
 
-Dashboards can be published at a public URL (with optional access controls) so stakeholders open them in a browser without needing a FASTR account. Two layouts are available: a **grid** arranges tiles in rows and columns, and a **sidebar** organizes tiles into a left-side menu for navigation.
+### Slide decks
 
-Dashboards also support **replicant groups** — a single tile can hold many variants of the same chart (for example, one per district), with a dropdown that lets the viewer switch between them. This keeps the dashboard compact when the same analysis needs to be shown for many areas.
-
-### Presentations
-
-**Presentations** are slide-deck-style outputs designed for live workshops or stakeholder meetings. The editor lays out one chart, title, or text block per slide, similar to PowerPoint. Presentations export to PowerPoint (.pptx) or PDF and are best suited for findings that will be projected in a room while someone walks the audience through them.
+**Slide decks** are slides designed for live workshops or stakeholder meetings. Each slide holds blocks of text, visualizations or images, laid out with a theme chosen for the deck. Visualizations inserted in a deck are copies that stay linked to the data. Decks are presented from the platform or downloaded, and are best suited for findings that will be projected in a room while someone walks the audience through them.
 
 ### Reports
 
-**Reports** are long-form narrative documents that combine your written analysis with live figures from the platform. The editor works like a word processor with markdown formatting: users write commentary, embed visualizations that update automatically when data refreshes, and add static images for context.
-
-Reports export to **Word (.docx) or PDF** and are designed for stakeholders reading a document end-to-end, rather than sitting through a presentation. Use a presentation when the deliverable will be projected in a meeting; use a report when the deliverable will be read on a desk or in an inbox.
-
-### Windowing
-
-**Windowing** refers to the process of selecting a subset of instance data for use within a project. Users can filter data by time period (selecting specific months or years), by indicators (including all or only specific indicators), by administrative areas (including all or specific regions), and by facilities (filtering by facility type or ownership). This functionality allows projects to focus on the data most relevant to their analytical objectives without loading the entire dataset.
+**Reports** are long-form narrative documents that combine written analysis with live figures from the platform. The editor works like a word processor: users write commentary, embed visualizations that update when the package changes, and add images, tables and page elements. Reports are downloaded or emailed for stakeholders reading a document end-to-end. Use a slide deck when the deliverable will be projected in a meeting; use a report when it will be read on a desk or in an inbox.
 
 ### Disaggregation
 
 **Disaggregation** refers to the process of breaking down data by dimensions to identify patterns and variations. Data can be disaggregated by time period (monthly, quarterly, or yearly), by administrative area level, by facility type, by facility ownership, or by indicator categories. This capability supports more nuanced analysis and helps identify disparities across different dimensions.
 
-### User roles
+### Users, permissions and access
 
-Users can be assigned different roles that determine their permissions within the platform. At the **instance level**, Global Administrators have full access to all instance settings and projects. At the **project level**, three roles are available: Administrators can modify project settings, modules, visualizations, and reports; Editors can create and modify visualizations and reports; and Viewers can view project contents but cannot make modifications.
+Every account must be **approved** by an administrator before it can see anything. **Global administrators** manage the instance: users, data imports, results packages, and every product. Other users hold permissions set on the Users page: viewing or configuring users, viewing or configuring data.
+
+Two further settings decide what a user sees. **Data access** is either unrestricted (all scopes) or restricted to a list of scopes granted by an administrator; a restricted user sees only the data those scopes cover, everywhere on the platform. **Product access** works like a shared document: each product has an owner, per-user grants as editor or viewer, and a general access for everyone else in the instance (restricted, anyone can view, or anyone can edit). Folders carry no access of their own, but access can be set for everything in a folder at once.
 
 ### Data quality scores
 
 The platform automatically assesses data completeness and accuracy, generating quality scores that help users identify potential data issues. These scores support data quality review processes and help prioritize areas requiring attention.
-
-### Lock status
-
-Projects can be **locked** to prevent modifications to their configuration while still allowing users to view reports. When a project is locked, modules and data settings cannot be changed, providing a mechanism to preserve analytical configurations once they have been finalized.
 
 !!! tip "User guide"
     For step-by-step tutorials on using the platform, see the [FASTR user guide](11_user_guide.md).
@@ -223,11 +221,11 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 **Data Analysis** — Run statistical modules for quality assessment and adjustment
 
-**Visualization** — Explore results with interactive charts and tables
+**Visualization** — Look at any result in Explore, then build charts, maps and tables
 
-**Sharing results** — Build live dashboards, slide presentations, or narrative reports for stakeholders
+**Sharing results** — Slide decks and narrative reports, with figures that stay linked to the data
 
-**Collaboration** — Work together with your team on shared projects
+**Collaboration** — One Products page for the team, folders, and access per product
 
 **AI Assistant** — Get help interpreting results and understanding your data
 
@@ -244,37 +242,26 @@ An instance contains:
 
 - All registered users and their accounts
 - The shared administrative structure (regions, districts, facilities)
-- Indicator definitions and data sources
-- All projects created for that country
+- Indicator definitions, data sources and the results packages computed from them
+- The scopes, and every product the team has made
 
 **Think of an instance as your country's dedicated workspace.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
-## User Roles and Permissions
+## Users, permissions and access
 
-There are two levels of permissions in the platform:
+**Approval first.** A new account sees nothing until an administrator approves it.
 
-&nbsp;
+**Global administrators** manage users, data, results packages, and own every product. Other users hold permissions set on the Users page (view or configure users, view or configure data).
 
-**Instance-level roles:**
+**Data access**: unrestricted, or limited to the scopes an administrator grants. A restricted user sees only that data, everywhere.
 
-- **Instance Administrators** can add users, create projects, assign roles, upload data, import and configure modules, and run analyses
-
-&nbsp;
-
-**Project-level roles:**
-
-- **Project Editors** can create visualizations, create reports, and download/export results
-- **Project Viewers** can view visualizations, view reports, and download/export results
-
-&nbsp;
-
-*Administrators are assigned per instance; Editors and Viewers are assigned per project.*
+**Product access**, like a shared document: an owner, editors, viewers, and a general access for everyone else (restricted / anyone can view / anyone can edit). Set in **Manage access**, per product or for a whole folder.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
-## Projects Within an Instance
+## Products, folders and scopes
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -286,24 +273,20 @@ There are two levels of permissions in the platform:
 <div class="container">
 <div class="img-col">
 
-![Projects within instance](../resources/diagrams/projects_within_instance.svg)
+![Products, folders and scopes within an instance](../resources/diagrams/products_folders_scopes.svg)
 
 </div>
 <div class="text-col">
 
-Each country instance can contain **multiple projects**.
+One **Products** page for the country: every visualization, slide deck and report, in **folders**.
 
-A country may only need one project, or multiple projects can be used for:
-
-- Different versions of analyses
-- A demo or playground project
-- Separate projects for different teams or programs
+Each product reads one **results package** (which computation) through one **scope** (which part of the data).
 
 **Key questions when setting up:**
 
-- Who is the admin?
-- Who can edit?
-- Who can view?
+- Which package is pinned?
+- Which scopes does the team need?
+- Who may open or edit what?
 
 </div>
 </div>

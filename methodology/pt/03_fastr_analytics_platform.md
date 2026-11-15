@@ -1,5 +1,5 @@
-<!-- AUTO-TRANSLATED from 03_fastr_analytics_platform.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
+<!-- REVIEWED -->
+<!-- Revisto à mão em 2026-11-15 para a plataforma 2.x; não substituir pela tradução automática -->
 
 # A plataforma de análise de dados FASTR
 
@@ -17,11 +17,11 @@ A plataforma oferece funcionalidades abrangentes de gestão de dados. Os utiliza
 
 ### Análise de dados
 
-As capacidades analíticas são fornecidas através de módulos configuráveis. Os utilizadores podem ativar e configurar módulos analíticos que processam dados utilizando scripts estatísticos baseados em R. Estes módulos podem ser encadeados para suportar análises complexas e em várias etapas, com ferramentas integradas para monitorizar o estado do processamento e rever registos.
+As capacidades analíticas são fornecidas por módulos: avaliação da qualidade dos dados, ajustes da qualidade dos dados, deteção de perturbações, denominadores de cobertura, estimativas de cobertura e valores dos indicadores. Um administrador escolhe os módulos e gera um **pacote de resultados**, um conjunto versionado de resultados já calculados para toda a instância. Um pacote fica fixado como referência; um novo mês de dados dá um novo pacote. Os utilizadores nunca executam análises: leem pacotes.
 
 ### Assistente de IA
 
-Um assistente de IA integrado ajuda os utilizadores a compreender e interpretar os seus dados. O assistente pode explicar os resultados dos módulos, descrever tendências e padrões de dados, fornecer insights sobre visualizações e ajudar a gerar conteúdo narrativo para relatórios. Os utilizadores podem fazer perguntas sobre os dados dos seus projetos em linguagem natural e receber orientação contextual sobre análise e interpretação.
+Um assistente de IA integrado ajuda os utilizadores a compreender e interpretar os seus dados. O assistente pode explicar os resultados dos módulos, descrever tendências e padrões de dados, fornecer insights sobre visualizações e ajudar a gerar conteúdo narrativo para relatórios. O assistente funciona dentro de um produto aberto (uma visualização, uma apresentação ou um relatório): lê os dados desse produto, atualiza as suas figuras ao vivo e redige texto. Os utilizadores perguntam em linguagem natural e recebem orientação contextual sobre análise e interpretação.
 
 ### Visualização
 
@@ -29,15 +29,17 @@ A plataforma oferece ferramentas de visualização robustas para apresentar resu
 
 ### Partilha de resultados
 
-Depois de os utilizadores terem criado visualizações, a plataforma oferece três formas de as partilhar, adequadas a diferentes públicos:
+Tudo o que um utilizador cria é um **produto** numa única página Produtos partilhada:
 
-- **Painéis** — páginas em tempo real e partilháveis que agrupam visualizações numa única vista. Os gráficos atualizam-se sempre que os dados são atualizados, e o painel de controlo pode ser publicado através de um link público para que as partes interessadas o abram num navegador sem uma conta FASTR.
-- **Apresentações** — resultados em formato de apresentação de slides concebidos para reuniões e workshops ao vivo. Exporte para PowerPoint ou PDF para apresentação presencial.
-- **Relatórios** — documentos narrativos extensos que combinam análises escritas com dados em tempo real. Exporte para Word ou PDF para que as partes interessadas possam ler o documento na íntegra.
+- **Visualizações** — um gráfico, mapa ou tabela guardado, com os seus próprios filtros e estilo. Construído uma vez, guardado numa pasta, copiado para apresentações e relatórios.
+- **Apresentações** — diapositivos que combinam visualizações e texto, concebidos para reuniões e workshops ao vivo. Apresentados a partir da plataforma ou transferidos.
+- **Relatórios** — documentos narrativos extensos que combinam análise escrita com figuras ao vivo, para quem lê um documento do início ao fim.
+
+Para uma olhada rápida sem criar nada, a página **Explorar** mostra cada análise calculada como tabela, série de gráficos ou mapa.
 
 ### Colaboração
 
-A plataforma suporta o trabalho colaborativo através de uma estrutura baseada em projetos. Os utilizadores podem organizar o seu trabalho em projetos distintos e atribuir aos membros da equipa diferentes funções, incluindo permissões de visualizador, editor e administrador. Os controlos de acesso funcionam ao nível do projeto, e os projetos podem ser bloqueados para evitar alterações indesejadas.
+Toda a equipa do país trabalha numa única página Produtos, organizada em pastas. Cada produto guarda-se sozinho enquanto é editado e a equipa vê as alterações ao vivo. O acesso define-se por produto, como num documento partilhado: um proprietário, editores e visualizadores, mais um acesso geral para todos os outros membros da instância. O acesso também pode ser definido de uma vez para todo o conteúdo de uma pasta.
 
 ## Quem deve utilizar esta aplicação?
 
@@ -57,18 +59,18 @@ Os administradores de sistema são responsáveis pela configuração da platafor
 
 ### Nível da organização (instância)
 
-A **instância** funciona como o principal espaço de trabalho da organização dentro da plataforma. Cada instância contém todos os utilizadores registados, a estrutura administrativa partilhada (incluindo áreas administrativas e unidades de saúde), definições de indicadores partilhadas, fontes de dados (tanto HMIS como HFA) e todos os projetos criados dentro da organização.
+A **instância** é o espaço de trabalho do país dentro da plataforma. Cada instância contém todos os utilizadores registados, a estrutura administrativa partilhada (áreas administrativas e unidades de saúde), definições de indicadores partilhadas, as fontes de dados (HMIS e HFA), os pacotes de resultados calculados a partir delas, os âmbitos e todos os produtos que a equipa criou.
 
-### Nível do projeto
+### Produtos, pastas e âmbitos
 
-Os **projetos** fornecem espaços de trabalho de análise específicos dentro de uma instância. Cada projeto permite aos utilizadores selecionar quais os dados a incluir, definindo períodos de tempo, unidades e indicadores específicos. Dentro de um projeto, os utilizadores podem ativar módulos analíticos, criar visualizações e elaborar relatórios adaptados a objetivos analíticos específicos.
+Os utilizadores trabalham na página **Produtos**: uma única lista para toda a instância, organizada em **pastas** que podem ser aninhadas, com todas as visualizações, apresentações e relatórios. Cada produto lê um **pacote de resultados** (que cálculo) através de um **âmbito** (que parte dos dados: uma região, um intervalo de anos, um conjunto de módulos ou indicadores). O âmbito integrado **Todos os dados** cobre tudo; os âmbitos nomeados são criados uma vez na página Âmbitos e partilhados por toda a equipa.
 
-![Projetos dentro da instância](resources/diagrams/projects_within_instance.svg)
+![Produtos, pastas e âmbitos dentro da instância](resources/diagrams_pt/products_folders_scopes.svg)
 
 
 ### Fluxo de dados
 
-A plataforma segue um fluxo de dados estruturado: **Importação de dados → Processamento de módulos → Visualizações → Painéis, apresentações e relatórios**. Os utilizadores carregam primeiro os dados das unidades de saúde ao nível da instância. Em seguida, são criados projetos com janelas de dados específicas que definem o âmbito da análise. Os módulos analíticos processam e analisam os dados selecionados, produzindo resultados que podem ser transformados em gráficos, mapas e tabelas. As visualizações podem então ser reunidas em painéis para partilha em tempo real, apresentações para exibição ao vivo ou relatórios narrativos para divulgação por escrito.
+A plataforma segue um fluxo de dados estruturado: **Importação de dados → Pacote de resultados → Produtos**. Um administrador importa os dados das unidades ao nível da instância e gera a partir deles um pacote de resultados. Os utilizadores constroem depois produtos que leem o pacote: uma visualização mostra uma métrica como gráfico, mapa ou tabela; apresentações e relatórios juntam visualizações e texto. Um âmbito em cada produto restringe o que ele mostra. A página Explorar fica ao lado deste fluxo, para uma olhada rápida a qualquer resultado calculado.
 
 
 ## Requisitos técnicos
@@ -87,11 +89,19 @@ Compreender estes conceitos fundamentais ajudará os utilizadores a trabalhar ef
 
 ### Instância
 
-Uma **instância** é o espaço de trabalho principal da organização dentro da plataforma. Funciona como o contentor de nível superior para todos os utilizadores, a estrutura administrativa partilhada, as fontes de dados e os projetos. Cada organização opera normalmente dentro de uma única instância que fornece a base para todo o trabalho analítico.
+Uma **instância** é o espaço de trabalho do país dentro da plataforma. É o contentor de nível superior para todos os utilizadores, a estrutura administrativa partilhada, as fontes de dados, os pacotes de resultados, os âmbitos e os produtos. Cada país opera numa única instância.
 
-### Projetos
+### Produtos e pastas
 
-Um **projeto** é um espaço de trabalho de análise específico dentro de uma instância. Os projetos permitem aos utilizadores trabalhar com subconjuntos específicos de dados, definindo períodos de tempo, instalações e indicadores relevantes para um determinado objetivo analítico. Dentro de cada projeto, os utilizadores podem ativar módulos analíticos, criar visualizações, gerar relatórios e colaborar com os membros da equipa. Podem existir vários projetos dentro de uma instância, cada um com diferentes âmbitos de dados e configurações de acesso de utilizadores.
+Um **produto** é tudo o que um utilizador cria e guarda: uma visualização, uma apresentação ou um relatório. Todos os produtos vivem na única página Produtos, em **pastas** que podem ser aninhadas (uma pasta do país com uma subpasta por pessoa, por exemplo). A linha de cada produto mostra o tipo, o pacote de resultados, o âmbito e a data da última alteração. O menu de um produto permite movê-lo para uma pasta, duplicá-lo, mudar o pacote e o âmbito, ou gerir quem o pode abrir.
+
+### Pacotes de resultados
+
+Um **pacote de resultados** é um conjunto versionado de resultados calculados para a instância: um administrador escolhe os módulos, gera o pacote e fixa um como referência. Os pacotes são imutáveis; quando são importados dados novos, gera-se um novo pacote e os produtos são movidos para ele. Os produtos leem pacotes; ninguém executa análises dentro de um produto.
+
+### Âmbitos
+
+Um **âmbito** é uma vista nomeada dos dados da instância através da qual um produto lê. Por família de dados (HMIS, HFA, ICEH) pode incluir tudo ou limitar a geografia a uma região, os anos, os módulos e os indicadores. O âmbito integrado **Todos os dados** não limita nada e não pode ser editado nem eliminado. Os utilizadores com acesso não restrito aos dados criam âmbitos na página Âmbitos; todos os utilizadores aprovados veem a lista e escolhem um ao criar um produto ou no Explorar. Um âmbito é independente do pacote de resultados: o pacote diz que cálculo, o âmbito diz que parte dele é mostrada.
 
 ### Estrutura
 
@@ -119,7 +129,7 @@ Os dados da Avaliação de Unidades de Saúde (HFA) contêm informações sobre 
 - **Os indicadores DHIS2** são importados de sistemas DHIS2 externos e podem seguir diferentes convenções de nomenclatura ou métodos de cálculo.
 - **Os indicadores calculados** são métricas derivadas que combinam dois valores — tipicamente um indicador numerador dividido por um denominador (outro indicador ou um valor baseado na população). Por exemplo, as consultas de ANC1 divididas pela população-alvo de mulheres grávidas fornecem uma estimativa da cobertura de ANC1. Os indicadores calculados podem ser apresentados como uma percentagem, uma contagem ou uma taxa por 10 000, e suportam limiares de semáforo para uma análise rápida do desempenho (por exemplo, verde a partir de 80%, amarelo entre 70% e 79%, vermelho abaixo de 70%).
 
-Os indicadores calculados são capturados num projeto no momento da importação do HMIS, pelo que a alteração de uma definição obriga a uma reimportação para que a alteração tenha efeito. Os denominadores baseados na população requerem que um ficheiro CSV da população seja carregado ao nível da instância antes de poderem ser utilizados.
+Os indicadores calculados são calculados no momento da importação do HMIS, pelo que a alteração de uma definição obriga a uma reimportação para ter efeito. Os denominadores baseados na população requerem que um ficheiro CSV da população seja carregado ao nível da instância antes de poderem ser utilizados.
 
 ### Conjuntos de dados e versões
 
@@ -127,53 +137,41 @@ Um **conjunto de dados** é uma coleção de dados de saúde, sejam eles HMIS ou
 
 ### Módulos
 
-**Módulos** são unidades de processamento de dados que executam scripts R analíticos dentro da plataforma. Cada módulo recebe dados de entrada de conjuntos de dados ou dos resultados de outros módulos, processa e analisa os dados de acordo com métodos estatísticos definidos e produz objetos de resultados como ficheiros de saída. Os módulos podem ser encadeados para suportar fluxos de trabalho analíticos complexos, nos quais um módulo utiliza os resultados de outro como entradas.
+**Módulos** são os métodos analíticos integrados na plataforma: avaliação da qualidade dos dados, ajustes da qualidade dos dados, deteção de perturbações, denominadores de cobertura, estimativas de cobertura e valores dos indicadores. Cada módulo recebe como entrada um conjunto de dados ou os resultados de outro módulo e produz tabelas de resultados. Alguns módulos dependem de outros: as estimativas de cobertura precisam primeiro dos denominadores de cobertura.
 
-A plataforma distingue entre dois tipos de módulos. Uma **Definição de Módulo** é o modelo ou plano para um tipo de análise, definindo os métodos analíticos e os parâmetros disponíveis. Uma **Instância de Módulo** é um módulo que foi ativado e configurado dentro de um projeto específico. Alguns módulos têm pré-requisitos, o que significa que outros módulos devem ser ativados primeiro antes de poderem ser utilizados.
+Os módulos executam-se quando um administrador gera um pacote de resultados, com as definições escolhidas nesse momento (**Predefinições dos módulos** na página Resultados). A plataforma mostra os módulos pelo seu rótulo; num produto ou no Explorar, o utilizador escolhe um módulo e uma das suas métricas.
 
 ### Visualizações
 
 **Visualizações** são representações visuais de dados gerados a partir dos resultados dos módulos. A plataforma suporta três tipos principais de visualização: gráficos (incluindo gráficos de barras, gráficos de linhas e gráficos circulares), mapas (visualizações geográficas que mostram dados em áreas administrativas) e tabelas (apresentações de dados em tabelas).
 
-As visualizações podem ser filtradas por várias dimensões e desagregadas por fatores como tipo de instalação, período de tempo ou nível administrativo. Os utilizadores podem personalizar a aparência e o estilo das visualizações, bem como exportá-las para utilização em aplicações externas ou incluí-las diretamente em painéis, apresentações ou relatórios.
+Uma visualização constrói-se a partir de uma métrica (o resultado de um módulo) com uma predefinição ou um tipo personalizado: tabela, série temporal, gráfico de barras, gráfico circular ou mapa. Pode ser filtrada a um subconjunto (um período, uma área, um indicador) e desagregada (uma linha, uma fila, uma coluna ou um gráfico por área, indicador ou tipo de unidade). Os utilizadores podem personalizar a aparência e o estilo, transferir a figura e inserir cópias dela em apresentações e relatórios. Uma visualização é um produto: tem uma linha na página Produtos, guarda-se sozinha enquanto é editada e mantém um histórico de versões para restaurar.
 
-### Painéis
+### Explorar
 
-**Os painéis** são páginas ativas e partilháveis que agrupam visualizações guardadas numa única vista. Cada mosaico num painel é um gráfico, mapa ou tabela que se atualiza automaticamente sempre que os dados subjacentes são atualizados — pelo que um painel mostra sempre o estado atual dos dados sem necessidade de reexportação.
-
-Os painéis podem ser publicados num URL público (com controlos de acesso opcionais) para que as partes interessadas os abram num navegador sem precisarem de uma conta FASTR. Estão disponíveis dois layouts: uma **grelha** que organiza os blocos em linhas e colunas e uma **barra lateral** que organiza os blocos num menu do lado esquerdo para navegação.
-
-Os painéis também suportam **grupos de réplicas** — um único bloco pode conter muitas variantes do mesmo gráfico (por exemplo, uma por distrito), com um menu suspenso que permite ao utilizador alternar entre elas. Isto mantém o painel compacto quando a mesma análise precisa de ser apresentada para muitas áreas.
+**Explorar** é a página para olhar antes de construir. Mostra cada análise de um pacote de resultados, módulo a módulo, como tabela, série de pequenos gráficos ao longo do tempo ou mapa, com filtros por nível, indicadores e período. Nada no Explorar é guardado ou partilhado; quando uma vista responde a uma pergunta, o utilizador constrói-a como visualização. O Explorar substitui os painéis das versões anteriores.
 
 ### Apresentações
 
-**Apresentações** são resultados no estilo de apresentações de slides, concebidas para workshops ao vivo ou reuniões com partes interessadas. O editor dispõe um gráfico, título ou bloco de texto por slide, semelhante ao PowerPoint. As apresentações são exportadas para PowerPoint (.pptx) ou PDF e são mais adequadas para resultados que serão projetados numa sala enquanto alguém os explica ao público.
+**Apresentações** são diapositivos concebidos para workshops ao vivo ou reuniões com partes interessadas. Cada diapositivo contém blocos de texto, visualizações ou imagens, dispostos segundo um tema escolhido para a apresentação. As visualizações inseridas numa apresentação são cópias que continuam ligadas aos dados. As apresentações apresentam-se a partir da plataforma ou transferem-se, e são as mais adequadas para resultados que serão projetados numa sala enquanto alguém os explica ao público.
 
 ### Relatórios
 
-**Os relatórios** são documentos narrativos extensos que combinam a sua análise escrita com dados em tempo real da plataforma. O editor funciona como um processador de texto com formatação Markdown: os utilizadores escrevem comentários, incorporam visualizações que se atualizam automaticamente quando os dados são atualizados e adicionam imagens estáticas para contextualizar.
-
-Os relatórios são exportados para **Word (.docx) ou PDF** e foram concebidos para que as partes interessadas leiam um documento na íntegra, em vez de assistirem a uma apresentação. Utilize uma apresentação quando o produto final for projetado numa reunião; utilize um relatório quando o produto final for lido numa secretária ou numa caixa de entrada.
-
-### Janelas
-
-**Janelas** refere-se ao processo de selecionar um subconjunto de dados de instâncias para utilização num projeto. Os utilizadores podem filtrar dados por período de tempo (selecionando meses ou anos específicos), por indicadores (incluindo todos ou apenas indicadores específicos), por áreas administrativas (incluindo todas ou regiões específicas) e por instalações (filtrando por tipo de instalação ou propriedade). Esta funcionalidade permite que os projetos se concentrem nos dados mais relevantes para os seus objetivos analíticos sem carregar o conjunto de dados completo.
+**Os relatórios** são documentos narrativos extensos que combinam análise escrita com figuras ao vivo da plataforma. O editor funciona como um processador de texto: os utilizadores escrevem comentários, incorporam visualizações que se atualizam quando o pacote muda e adicionam imagens, tabelas e elementos de página. Os relatórios transferem-se ou enviam-se por e-mail para quem lê um documento do início ao fim. Utilize uma apresentação quando o produto final for projetado numa reunião; utilize um relatório quando for lido numa secretária ou numa caixa de entrada.
 
 ### Desagregação
 
 **Desagregação** refere-se ao processo de decompor os dados por dimensões para identificar padrões e variações. Os dados podem ser desagregados por período de tempo (mensal, trimestral ou anual), por nível de área administrativa, por tipo de instalação, por propriedade da instalação ou por categorias de indicadores. Esta capacidade permite uma análise mais matizada e ajuda a identificar disparidades entre diferentes dimensões.
 
-### Funções dos utilizadores
+### Utilizadores, permissões e acesso
 
-Podem ser atribuídas diferentes funções aos utilizadores, que determinam as suas permissões dentro da plataforma. Ao **nível da instância**, os Administradores Globais têm acesso total a todas as definições da instância e projetos. Ao **nível do projeto**, estão disponíveis três funções: os Administradores podem modificar as definições do projeto, módulos, visualizações e relatórios; Os editores podem criar e modificar visualizações e relatórios; e Os visualizadores podem visualizar o conteúdo do projeto, mas não podem fazer modificações.
+Cada conta tem de ser **aprovada** por um administrador antes de ver o que quer que seja. Os **administradores globais** gerem a instância: utilizadores, importações de dados, pacotes de resultados e todos os produtos. Os outros utilizadores têm permissões definidas na página Utilizadores: ver ou configurar utilizadores, ver ou configurar dados.
+
+Duas outras definições decidem o que um utilizador vê. O **acesso aos dados** é não restrito (todos os âmbitos) ou restrito a uma lista de âmbitos atribuídos por um administrador; um utilizador restrito vê apenas os dados cobertos por esses âmbitos, em toda a plataforma. O **acesso aos produtos** funciona como num documento partilhado: cada produto tem um proprietário, permissões por utilizador como editor ou visualizador, e um acesso geral para todos os outros membros da instância (restrito, qualquer pessoa pode ver, ou qualquer pessoa pode editar). As pastas não têm acesso próprio, mas o acesso pode ser definido de uma vez para todo o seu conteúdo.
 
 ### Pontuações de qualidade dos dados
 
 A plataforma avalia automaticamente a integridade e a precisão dos dados, gerando pontuações de qualidade que ajudam os utilizadores a identificar potenciais problemas nos dados. Estas pontuações apoiam os processos de revisão da qualidade dos dados e ajudam a priorizar áreas que requerem atenção.
-
-### Estado de bloqueio
-
-Os projetos podem ser **bloqueados** para impedir modificações na sua configuração, permitindo ainda assim que os utilizadores visualizem relatórios. Quando um projeto está bloqueado, os módulos e as definições de dados não podem ser alterados, proporcionando um mecanismo para preservar as configurações analíticas depois de estas terem sido finalizadas.
 
 !!! dica "Guia do utilizador"
     Para tutoriais passo a passo sobre a utilização da plataforma, consulte o [Guia do utilizador do FASTR](11_user_guide.md).
@@ -222,17 +220,17 @@ A plataforma oferece uma interface intuitiva para a realização de análises e 
 </div>
 <div>
 
-**Gestão de dados** — Importe listas de instalações e dados de indicadores a partir do DHIS2 ou de ficheiros
+**Gestão de dados** — Importe unidades e indicadores do DHIS2 ou de ficheiros
 
-**Análise de dados** — Execute módulos estatísticos para avaliação e ajuste da qualidade
+**Análise de dados** — Módulos estatísticos, calculados em pacotes de resultados
 
-**Visualização** — Explore os resultados com gráficos e tabelas interativos
+**Visualização** — Explorar para olhar, depois gráficos, mapas e tabelas
 
-**Partilha de resultados** — Crie painéis em tempo real, apresentações de slides ou relatórios narrativos para as partes interessadas
+**Partilha de resultados** — Apresentações e relatórios, figuras ligadas aos dados
 
-**Colaboração** — Trabalhe em conjunto com a sua equipa em projetos partilhados
+**Colaboração** — Uma única página Produtos para a equipa, pastas e acesso por produto
 
-**Assistente de IA** — Obtenha ajuda para interpretar resultados e compreender os seus dados
+**Assistente de IA** — Ajuda para interpretar resultados e compreender os dados
 
 </div>
 </div>
@@ -247,37 +245,26 @@ Uma instância contém:
 
 - Todos os utilizadores registados e as suas contas
 - A estrutura administrativa partilhada (regiões, distritos, instalações)
-- Definições de indicadores e fontes de dados
-- Todos os projetos criados para esse país
+- Definições de indicadores, fontes de dados e os pacotes de resultados calculados a partir delas
+- Os âmbitos e todos os produtos que a equipa criou
 
 **Pense numa instância como o espaço de trabalho dedicado ao seu país.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2b -->
-## Funções e permissões dos utilizadores
+## Utilizadores, permissões e acesso
 
-Existem dois níveis de permissões na plataforma:
+**Primeiro a aprovação.** Uma conta nova não vê nada até um administrador a aprovar.
 
-&nbsp;
+Os **administradores globais** gerem utilizadores, dados e pacotes de resultados, e são proprietários de todos os produtos. Os outros utilizadores têm permissões definidas na página Utilizadores (ver ou configurar utilizadores, ver ou configurar dados).
 
-**Funções ao nível da instância:**
+**Acesso aos dados**: não restrito, ou limitado aos âmbitos que um administrador atribui. Um utilizador restrito vê apenas esses dados, em todo o lado.
 
-- **Os administradores da instância** podem adicionar utilizadores, criar projetos, atribuir funções, carregar dados, importar e configurar módulos e executar análises
-
-&nbsp;
-
-**Funções ao nível do projeto:**
-
-- **Editores de projeto** podem criar visualizações, criar relatórios e descarregar/exportar resultados
-- **Visualizadores de projeto** podem visualizar visualizações, visualizar relatórios e descarregar/exportar resultados
-
-&nbsp;
-
-*Os administradores são atribuídos por instância; os editores e visualizadores são atribuídos por projeto.*
+**Acesso aos produtos**, como num documento partilhado: um proprietário, editores, visualizadores e um acesso geral para todos os outros (restrito / qualquer pessoa pode ver / qualquer pessoa pode editar). Definido em **Gerir acesso**, por produto ou para uma pasta inteira.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2c -->
-## Projetos dentro de uma instância
+## Produtos, pastas e âmbitos
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -289,24 +276,20 @@ Existem dois níveis de permissões na plataforma:
 <div class="container">
 <div class="img-col">
 
-![Projetos dentro da instância](../resources/diagrams/projects_within_instance.svg)
+![Produtos, pastas e âmbitos dentro da instância](../resources/diagrams_pt/products_folders_scopes.svg)
 
 </div>
 <div class="text-col">
 
-Cada instância de país pode conter **vários projetos**.
+Uma única página **Produtos** para o país: todas as visualizações, apresentações e relatórios, em **pastas**.
 
-Um país pode precisar apenas de um projeto, ou podem ser utilizados vários projetos para:
-
-- Diferentes versões de análises
-- Um projeto de demonstração ou de teste
-- Projetos separados para diferentes equipas ou programas
+Cada produto lê um **pacote de resultados** (que cálculo) através de um **âmbito** (que parte dos dados).
 
 **Questões-chave ao configurar:**
 
-- Quem é o administrador?
-- Quem pode editar?
-- Quem pode visualizar?
+- Que pacote está fixado?
+- De que âmbitos a equipa precisa?
+- Quem pode abrir ou editar o quê?
 
 </div>
 </div>

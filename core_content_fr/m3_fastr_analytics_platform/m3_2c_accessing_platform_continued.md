@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Projets au sein d'une instance
+## Produits, dossiers et portées
 
 <style scoped>
 .container { display: flex; gap: 1rem; }
@@ -16,24 +16,20 @@ paginate: true
 <div class="container">
 <div class="img-col">
 
-![Projets au sein d'une instance](../../resources/diagrams/projects_within_instance.svg)
+![Produits, dossiers et portées au sein d'une instance](../../resources/diagrams_fr/products_folders_scopes.svg)
 
 </div>
 <div class="text-col">
 
-Chaque instance de pays peut contenir **plusieurs projets**.
+Une seule page **Produits** pour le pays : chaque visualisation, présentation et rapport, rangés en **dossiers**.
 
-Un pays peut n'avoir besoin que d'un seul projet, ou plusieurs projets peuvent être utilisés pour :
-
-- Différentes versions d'analyses
-- Un projet de démonstration ou d'expérimentation
-- Des projets distincts pour différentes équipes ou différents programmes
+Chaque produit lit un **paquet de résultats** (quel calcul) à travers une **portée** (quelle partie des données).
 
 **Questions clés lors de la configuration :**
 
-- Qui est l'administrateur ?
-- Qui peut modifier ?
-- Qui peut consulter ?
+- Quel paquet est épinglé ?
+- De quelles portées l'équipe a-t-elle besoin ?
+- Qui peut ouvrir ou modifier quoi ?
 
 </div>
 </div>
