@@ -1,44 +1,44 @@
 slides:
 - file: m9b_0_home_screen.md
-  order: 0.5
+  order: 0.0
   variant: full
   title: 'L''écran d''accueil : une seule page Produits'
 - file: m9b_1_login_folder_activity.md
   order: 1.0
   variant: full
-  title: 'Activité : entrer dans la plateforme et créer votre dossier'
+  title: 'Activité : entrer dans la plateforme et créer votre propre dossier'
 - file: m9b_2_results_packages_concept.md
   order: 2.0
   variant: full
   title: D'où viennent les chiffres d'un produit
-- file: m9b_2s1_scope_concept.md
-  order: 2.01
-  variant: full
-  title: 'Une portée : une tranche nommée des données'
-- file: m9b_2s2_scopes_page.md
-  order: 2.02
-  variant: full
-  title: Créer une portée
-- file: m9b_2s3_product_scope.md
-  order: 2.03
-  variant: full
-  title: Un produit porte une seule portée
 - file: m9b_2a_explore_overview.md
-  order: 2.1
+  order: 2.01
   variant: full
   title: 'Explorer : regarder avant de construire'
 - file: m9b_2b_explore_views.md
-  order: 2.2
+  order: 2.02
   variant: full
   title: 'Trois vues : Tableau, Dans le temps, Carte'
 - file: m9b_2c_explore_modules.md
-  order: 2.3
+  order: 2.03
   variant: full
   title: Chaque module apporte ses propres métriques
 - file: m9b_2d_explore_vs_visualization.md
-  order: 2.4
+  order: 2.04
   variant: full
   title: Explorer ou une visualisation ?
+- file: m9b_2s1_scope_concept.md
+  order: 2.191
+  variant: full
+  title: 'Une portée : une tranche nommée des données'
+- file: m9b_2s2_scopes_page.md
+  order: 2.192
+  variant: full
+  title: Créer une portée
+- file: m9b_2s3_product_scope.md
+  order: 2.193
+  variant: full
+  title: Un produit porte une seule portée
 - file: m9b_3_explore_activity.md
   order: 3.0
   variant: full
