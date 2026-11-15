@@ -798,7 +798,7 @@ Runs: npm install && npm run build
 Runs: npm start
       │
       ▼
-App live at https://fastr-deck-builder.onrender.com
+App live at https://fastr-resource-hub.onrender.com
 ```
 
 ---
