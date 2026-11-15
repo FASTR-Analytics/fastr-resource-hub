@@ -11,34 +11,34 @@ slides:
   order: 2.0
   variant: full
   title: Where a product's numbers come from
-- file: m9b_2a_explore_overview.md
+- file: m9b_2a_scope_concept.md
   order: 2.01
   variant: full
-  title: 'Explore: look before you build'
-- file: m9b_2b_explore_views.md
+  title: 'A scope: a named slice of the data'
+- file: m9b_2b_scopes_page.md
   order: 2.02
   variant: full
-  title: 'Three views: Table, Over time, Map'
-- file: m9b_2c_explore_modules.md
+  title: Making a scope
+- file: m9b_2c_product_scope.md
   order: 2.03
   variant: full
-  title: Each module brings its own metrics
-- file: m9b_2d_explore_vs_visualization.md
+  title: A product carries one scope
+- file: m9b_2d_explore_overview.md
   order: 2.04
   variant: full
+  title: 'Explore: look before you build'
+- file: m9b_2e_explore_views.md
+  order: 2.05
+  variant: full
+  title: 'Three views: Table, Over time, Map'
+- file: m9b_2f_explore_modules.md
+  order: 2.06
+  variant: full
+  title: Each module brings its own metrics
+- file: m9b_2g_explore_vs_visualization.md
+  order: 2.07
+  variant: full
   title: Explore or a visualization?
-- file: m9b_2s1_scope_concept.md
-  order: 2.191
-  variant: full
-  title: 'A scope: a named slice of the data'
-- file: m9b_2s2_scopes_page.md
-  order: 2.192
-  variant: full
-  title: Making a scope
-- file: m9b_2s3_product_scope.md
-  order: 2.193
-  variant: full
-  title: A product carries one scope
 - file: m9b_3_explore_activity.md
   order: 3.0
   variant: full
