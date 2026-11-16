@@ -657,6 +657,7 @@ def main():
     # Contacts (65)
     sh = shapes_by_name(S[65])
     set_text(sh["Text 1"], "Vos contacts FASTR")
+    sh["TextBox 8"].width = Inches(11.2)
     set_lines(sh["TextBox 8"], [
         "Équipe FASTR",
         "Amal Tucker Brown, spécialiste résultats",
