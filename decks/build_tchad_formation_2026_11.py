@@ -523,6 +523,14 @@ def main():
                 tree = s.shapes._spTree
                 tree.remove(pic._element)
                 tree.insert(2, pic._element)
+        if idx == 25:
+            for x in s.shapes:
+                if x.name.startswith("Rectangle"):
+                    x.left, x.top, x.width, x.height = Inches(11.78), Inches(6.33), Inches(0.72), Inches(0.25)
+                elif x.name.startswith("Leader"):
+                    x.left, x.top, x.height = Inches(12.14), Inches(6.58), Inches(0.14)
+                elif x.name.startswith("Note 31"):
+                    x.top = Inches(6.72)
 
     # Roles → users, permissions and access (2.x)
     rewrite(28, FR / "m3_fastr_analytics_platform" / "m3_2b_accessing_platform_continued.md", tag=TAG_PRISE)
@@ -734,13 +742,13 @@ def main():
               "Bande de crédibilité : la fourchette dans laquelle le modèle s'attend à voir le volume 95 fois sur 100. Hors de la bande, c'est un signal ; dedans, c'est la variation normale.",
               "La bande est plus large pour les petites zones et les indicateurs à faible volume : moins de données, moins de certitude."])
     n_b3 = new_content(title="Lire le graphique des perturbations", tag=TAG_METH,
-                       image=TCHAD_SHOTS / "20b_disruption_cpn1_panel.png", img_box=(6.9, 1.7, 6.0, None), blocks=[
+                       image=TCHAD_SHOTS / "20b_disruption_cpn4_panel.png", img_box=(6.9, 1.7, 6.0, None), blocks=[
         ("h", [("Ce que vous voyez", True)]),
-        ("p", [("Explorer → Détection des perturbations → Services observés et attendus, CPN 1 au niveau national, Tchad. La ligne pleine est le volume observé, la ligne pointillée le volume attendu, la bande grise la bande de crédibilité à 95 %.", False)]),
+        ("p", [("Explorer → Détection des perturbations → Services observés et attendus, CPN4 au niveau national, Tchad. La ligne pleine est le volume observé, la ligne pointillée le volume attendu, la bande grise la bande de crédibilité à 95 %.", False)]),
         ("h", [("Ce que cela montre", True)]),
         ("p", [("Rouge là où l'observé passe sous la bande, un déficit ; vert là où il passe au-dessus, un excédent. Dans la bande, c'est la variation normale.", False)]),
         ("h", [("Interprétation", True)]),
-        ("p", [("Une plage rouge est une vraie baisse parmi les établissements qui ont rapporté. Demandez ce qui s'est passé ces mois-là : ruptures de stock, grèves, insécurité, campagne ailleurs.", False)]),
+        ("p", [("La plage rouge de 2026 est une vraie baisse de la CPN4 parmi les établissements qui ont rapporté. Demandez ce qui s'est passé ces mois-là : ruptures de stock, grèves, insécurité, campagne ailleurs.", False)]),
     ], notes=["Capture réelle de l'instance Tchad, paquet 2026-11-15, prise le 16 novembre. Le même graphique existe pour les 57 indicateurs ; les participants le retrouveront dans Explorer l'après-midi.",
               "Un seul mois rouge mérite un regard ; plusieurs mois rouges d'affilée sont le motif sur lequel agir.",
               "Les derniers mois peuvent changer : des rapports tardifs arrivent après la génération du paquet."])
