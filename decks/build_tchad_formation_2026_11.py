@@ -541,7 +541,6 @@ def main():
     rewrite(43, FR / "m9d_slide_decks" / "m9d_1c_adding_viz_ai.md", tag=TAG_DECK, is_activity=True)
     rewrite(44, FR / "m9d_slide_decks" / "m9d_2_editing_formatting_slides.md", tag=TAG_DECK, is_activity=True)
     rewrite(60, FR / "m9d_slide_decks" / "m9d_2b_open_slide_editor.md", tag=TAG_DECK, is_activity=True)
-    rewrite(61, FR / "m9d_slide_decks" / "m9d_3_formatting_text.md", tag=TAG_DECK, is_activity=True)
     rewrite(63, FR / "m9d_slide_decks" / "m9d_3a_formatting_report_settings.md", tag=TAG_DECK, is_activity=True)
 
     # ---------- prescriptive tasks on every activity slide ----------
@@ -630,17 +629,10 @@ def main():
     tasks(S[44], "20 min", [
         B("1. Sur chaque diapositive, relisez les chiffres du texte contre le graphique."),
         B("2. Un graphique à l'étroit ? ", ("Mise en page → Modifier la visualisation", True), " ou déplacez le séparateur. Ne rétrécissez pas le texte."),
-        B("3. ", ("Insérer", True), " : ajoutez l'en-tête, la date et le pied de page à la diapositive courante."),
-        B("4. Supprimez toute diapositive vide ; réordonnez en glissant les vignettes."),
+        B("3. Dans le bloc texte, avec la barre d'outils de l'éditeur : le chiffre clé en ", ("gras", True), ", « Ce que je vois » en liste à puces, un ", ("sous-titre", True), " au-dessus de « Ce que cela signifie »."),
+        B("4. ", ("Insérer", True), " : ajoutez l'en-tête, la date et le pied de page à la diapositive courante. Supprimez toute diapositive vide ; réordonnez en glissant les vignettes."),
         B("5. ", ("Présenter", True), " : parcourez vos trois diapositives en plein écran, comme devant le directeur."),
     ], "Trois diapositives (couverture, CPN 1, Penta 3) que vous pourriez projeter sans vous excuser.")
-
-    tasks(S[61], "10 min", [
-        B("1. Dans le bloc texte de la diapositive CPN 1 : mettez le chiffre clé en ", ("gras", True), "."),
-        B("2. Transformez « Ce que je vois » en une liste de trois puces."),
-        B("3. Ajoutez un sous-titre « Ce que cela signifie » au-dessus de la dernière phrase."),
-        B("4. La référence rapide est sur la diapositive suivante."),
-    ], "Un texte de diapositive lisible en dix secondes : un chiffre en gras, trois puces, un sous-titre.")
 
     tasks(S[63], "15 min", [
         B("1. Menu ", ("Présentation → Logos", True), " : ajoutez le logo du ministère s'il est dans Ressources. ", ("Pied de page", True), " : « DPSIS · Tchad · novembre 2026 », numéros de page activés."),
@@ -752,7 +744,7 @@ def main():
              S[54], S[55], S[36],
              S[45], S[46], S[47], S[48], S[49], S[50], S[51], S[52], S[53],
              S[32], S[34], S[35], S[37], S[38],
-             S[40], S[41], S[42], S[43], S[44], S[60], S[61], S[62], S[63],
+             S[40], S[41], S[42], S[43], S[44], S[60], S[63],
              S[64], S[65], S[66], S[67]]
     keep = {s.part.partname for s in order}
     for idx, s in S.items():
@@ -761,7 +753,7 @@ def main():
     reorder(prs, order)
 
     # ---------- footer + page numbers + section tags on kept slides ----------
-    tag_fix = {S[36].part.partname: TAG_INTERP, S[55].part.partname: TAG_INTERP, S[62].part.partname: TAG_DECK}
+    tag_fix = {S[36].part.partname: TAG_INTERP, S[55].part.partname: TAG_INTERP}
     for n, s in enumerate(prs.slides, 1):
         for x in s.shapes:
             if not x.has_text_frame:
