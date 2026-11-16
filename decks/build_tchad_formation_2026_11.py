@@ -503,7 +503,7 @@ def main():
     ], body_content)
 
     # Sign-up slides (25, 26): URL text + Chad captures when available
-    for idx, shot in ((25, TCHAD_SHOTS / "00_sign_in.png"), (26, TCHAD_SHOTS / "01_sign_up.png")):
+    for idx, shot in ((25, TCHAD_SHOTS / "00b_sign_in_crop.png"), (26, TCHAD_SHOTS / "01b_sign_up_crop.png")):
         s = S[idx]
         for x in s.shapes:
             if x.has_text_frame:
@@ -523,14 +523,21 @@ def main():
                 tree = s.shapes._spTree
                 tree.remove(pic._element)
                 tree.insert(2, pic._element)
+        # callouts re-pointed at the Chad captures (cropped to the original aspect ratios)
         if idx == 25:
             for x in s.shapes:
                 if x.name.startswith("Rectangle"):
-                    x.left, x.top, x.width, x.height = Inches(11.78), Inches(6.33), Inches(0.72), Inches(0.25)
+                    x.left, x.top, x.width, x.height = Inches(10.12), Inches(5.25), Inches(0.70), Inches(0.25)
                 elif x.name.startswith("Leader"):
-                    x.left, x.top, x.height = Inches(12.14), Inches(6.58), Inches(0.14)
+                    x.left, x.top, x.width, x.height = Inches(10.47), Inches(5.50), 0, Inches(0.16)
                 elif x.name.startswith("Note 31"):
-                    x.top = Inches(6.72)
+                    x.left, x.top = Inches(8.67), Inches(5.68)
+        if idx == 26:
+            for x in s.shapes:
+                if x.name.startswith("Leader"):
+                    x.left, x.top, x.width, x.height = Inches(9.72), Inches(5.42), Inches(0.47), 0
+                elif x.name.startswith("Note 31"):
+                    x.left, x.top = Inches(10.25), Inches(5.12)
 
     # Roles → users, permissions and access (2.x)
     rewrite(28, FR / "m3_fastr_analytics_platform" / "m3_2b_accessing_platform_continued.md", tag=TAG_PRISE)
