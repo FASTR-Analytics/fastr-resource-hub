@@ -550,10 +550,9 @@ def main():
         body.top = Inches(1.75)
         body.height = Inches(5.2)
         body.width = Inches(11.5)
-        for x in slide.shapes:
+        for x in list(slide.shapes):
             if x.shape_type == 13 and x.width <= Inches(1.1):
-                x.top = Inches(1.0 + 0.0)
-                x.left = Inches(11.6)
+                x._element.getparent().remove(x._element)  # the small activity icon: dropped, it collided with long titles
 
     tasks(S[33], "20 min", [
         B("1. Ouvrez ", ("https://tchad.fastr-analytics.org/", True), ". Nouveau compte : ", ("S'inscrire", True), " (prénom, nom, e-mail, mot de passe), puis attendez l'approbation. Compte existant : ", ("S'identifier", True), "."),
