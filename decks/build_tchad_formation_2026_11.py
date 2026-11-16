@@ -1,0 +1,633 @@
+#!/usr/bin/env python3
+"""Build the Chad FASTR training deck (18-19 Nov 2026) by patching the Mauritania deck.
+
+Source: the Deck Builder export used in Mauritania (Oct 2026). This script
+removes the platform-introduction and indicator-download sections, reorders
+the rest into two days (theory in the morning, practice in the afternoon),
+rewrites every slide that still described platform 1.x (projects, dashboards,
+the linear disruption model) from the current French slide library
+(core_content_fr/), and adds the Explore, scope and Bayesian slides.
+
+Usage:  python3 decks/build_tchad_formation_2026_11.py [source.pptx]
+Output: decks/fr/formation_fastr_tchad_2026_11.pptx
+"""
+from __future__ import annotations
+
+import copy
+import io
+import re
+import sys
+from pathlib import Path
+
+from pptx import Presentation
+from pptx.util import Inches
+
+REPO = Path(__file__).resolve().parents[1]
+SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(
+    "/Users/claireboulange/Downloads/2026-mauritanie-2_deck For Sharing day 2-3.pptx")
+OUT = REPO / "decks" / "fr" / "formation_fastr_tchad_2026_11.pptx"
+FR = REPO / "core_content_fr"
+SHOT = REPO / "resources" / "screenshots"
+TCHAD_SHOTS = SHOT / "tchad_2026_11"
+
+FOOTER_OLD = "FASTR · MAURITANIE · OCT. 2026"
+FOOTER_NEW = "FASTR · TCHAD · NOV. 2026"
+URL = "https://tchad.fastr-analytics.org/"
+
+NS = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+      "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+      "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
+
+
+# ─────────────────────────────── markdown → blocks ───────────────────────────
+def parse_md(path: Path):
+    """Return (title, blocks, notes, image). blocks: list of (kind, runs);
+    kind in h (bold heading), b (bullet), p (plain); runs: [(text, bold)]."""
+    text = path.read_text(encoding="utf-8")
+    # strip front matter
+    if text.startswith("---"):
+        text = text.split("---", 2)[2]
+    notes = []
+    for m in re.finditer(r"<!--(.*?)-->", text, re.S):
+        body = m.group(1)
+        if "NOTES" in body.upper():
+            for line in body.splitlines():
+                line = line.strip()
+                if line.startswith("- "):
+                    notes.append(line[2:].strip())
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+    title, blocks, image = "", [], None
+    in_table = False
+    for raw in text.splitlines():
+        line = raw.rstrip()
+        s = line.strip()
+        if not s:
+            in_table = False
+            continue
+        if s.startswith("<") or s.startswith("</"):
+            continue
+        m = re.match(r"!\[[^\]]*\]\(([^)]+)\)", s)
+        if m:
+            if image is None:
+                rel = m.group(1).split(" ")[0]
+                image = (path.parent / rel).resolve()
+            continue
+        if s.startswith("## "):
+            title = s[3:].strip()
+            continue
+        if s.startswith("### "):
+            blocks.append(("h", [(s[4:].strip(), True)]))
+            continue
+        if s.startswith("|"):
+            cells = [c.strip() for c in s.strip("|").split("|")]
+            if all(re.fullmatch(r"-+", c) for c in cells if c):
+                continue
+            if not in_table:
+                in_table = True
+                if all(not c for c in cells):
+                    continue
+            cells = [strip_md(c) for c in cells if c]
+            blocks.append(("b", inline_runs(" : ".join(cells))))
+            continue
+        if s.startswith("- "):
+            blocks.append(("b", inline_runs(s[2:].strip())))
+            continue
+        if re.fullmatch(r"\*\*[^*]+\*\*:?", s):
+            blocks.append(("h", [(s.strip("*:").strip() + (":" if s.endswith(":") else ""), True)]))
+            continue
+        if re.fullmatch(r"\*[^*].*[^*]\*", s):
+            blocks.append(("p", inline_runs(s[1:-1])))
+            continue
+        blocks.append(("p", inline_runs(s)))
+    return title, blocks, notes, image
+
+
+def strip_md(s: str) -> str:
+    return s.replace("**", "").replace("`", "")
+
+
+def inline_runs(s: str):
+    s = s.replace("`", "")
+    parts = s.split("**")
+    runs = []
+    for i, part in enumerate(parts):
+        if part:
+            runs.append((part, i % 2 == 1))
+    return runs or [("", False)]
+
+
+# ─────────────────────────────── XML helpers ────────────────────────────────
+def shapes_by_name(slide):
+    return {sh.name: sh for sh in slide.shapes}
+
+
+def para_template(shape, kind):
+    """Pick a paragraph of the template shape by kind: h = bold, b = buChar, p = plain."""
+    for para in shape.text_frame.paragraphs:
+        xml = para._p
+        has_bu = xml.find(".//a:buChar", NS) is not None
+        runs = xml.findall("a:r", NS)
+        bold = bool(runs) and runs[0].find("a:rPr", NS) is not None and runs[0].find("a:rPr", NS).get("b") == "1"
+        if kind == "b" and has_bu:
+            return para._p
+        if kind == "h" and bold and not has_bu:
+            return para._p
+        if kind == "p" and not bold and not has_bu and runs:
+            return para._p
+    # fallback: first paragraph
+    return shape.text_frame.paragraphs[0]._p
+
+
+def build_para(tpl_p, runs):
+    p = copy.deepcopy(tpl_p)
+    r_tpl = p.find("a:r", NS)
+    for r in p.findall("a:r", NS):
+        p.remove(r)
+    for br in p.findall("a:br", NS):
+        p.remove(br)
+    end = p.find("a:endParaRPr", NS)
+    for text, bold in runs:
+        r = copy.deepcopy(r_tpl)
+        rpr = r.find("a:rPr", NS)
+        if rpr is not None:
+            if bold:
+                rpr.set("b", "1")
+            elif "b" in rpr.attrib:
+                del rpr.attrib["b"]
+            for k in ("err", "dirty"):
+                if k in rpr.attrib:
+                    del rpr.attrib[k]
+        r.find("a:t", NS).text = text
+        if end is not None:
+            end.addprevious(r)
+        else:
+            p.append(r)
+    return p
+
+
+def fill_body(shape, blocks, tpl_shape=None):
+    """Replace the paragraphs of `shape` with `blocks`, styled from `tpl_shape`."""
+    tpl_shape = tpl_shape or shape
+    tpls = {k: para_template(tpl_shape, k) for k in ("h", "b", "p")}
+    tx = shape.text_frame._txBody
+    for p in tx.findall("a:p", NS):
+        tx.remove(p)
+    for kind, runs in blocks:
+        tx.append(build_para(tpls[kind], runs))
+
+
+def set_text(shape, text):
+    """Keep the first run's formatting, set a single line of text."""
+    paras = shape.text_frame.paragraphs
+    first = paras[0]._p
+    tx = shape.text_frame._txBody
+    for p in tx.findall("a:p", NS)[1:]:
+        tx.remove(p)
+    runs = first.findall("a:r", NS)
+    if not runs:
+        # paragraph with only endParaRPr: build a run, styled from any run in the shape or from endParaRPr
+        src_r = None
+        for para in paras:
+            src_r = para._p.find("a:r", NS)
+            if src_r is not None:
+                break
+        if src_r is not None:
+            r = copy.deepcopy(src_r)
+        else:
+            from pptx.oxml import parse_xml
+            end = first.find("a:endParaRPr", NS)
+            rpr = copy.deepcopy(end) if end is not None else None
+            r = parse_xml('<a:r xmlns:a="%s"><a:t/></a:r>' % NS["a"])
+            if rpr is not None:
+                rpr.tag = "{%s}rPr" % NS["a"]
+                r.insert(0, rpr)
+        end = first.find("a:endParaRPr", NS)
+        if end is not None:
+            end.addprevious(r)
+        else:
+            first.append(r)
+        runs = [r]
+    runs[0].find("a:t", NS).text = text
+    for r in runs[1:]:
+        first.remove(r)
+
+
+def set_lines(shape, lines):
+    """Multi-line text where every line reuses the first paragraph's style."""
+    first = shape.text_frame.paragraphs[0]._p
+    tx = shape.text_frame._txBody
+    for p in tx.findall("a:p", NS):
+        tx.remove(p)
+    for line in lines:
+        tx.append(build_para(first, [(line, False)]))
+
+
+def set_cell(cell, text):
+    set_text(cell, text) if hasattr(cell, "text_frame") else None
+
+
+def set_notes(slide, notes):
+    if not notes:
+        return
+    text = "NOTES POUR LE PRÉSENTATEUR :\n" + "\n".join("- " + n for n in notes)
+    ns = slide.notes_slide
+    tf = ns.notes_text_frame
+    if tf is None:
+        from pptx.oxml import parse_xml
+        sp = parse_xml(
+            '<p:sp xmlns:p="%s" xmlns:a="%s"><p:nvSpPr><p:cNvPr id="3" name="Notes Placeholder"/>'
+            '<p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="1"/></p:nvPr></p:nvSpPr>'
+            '<p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:endParaRPr lang="fr-FR"/></a:p></p:txBody></p:sp>'
+            % (NS["p"], NS["a"]))
+        ns.shapes._spTree.append(sp)
+        tf = ns.notes_text_frame
+    tf.text = text
+
+
+# ─────────────────────────────── slide helpers ──────────────────────────────
+def clone_slide(prs, src):
+    """Clone a slide: shapes are deep-copied; every r:embed / r:link in the copied
+    XML is re-pointed at a relationship of the new slide part (images, SVG blips)."""
+    new = prs.slides.add_slide(src.slide_layout)
+    for ph in list(new.placeholders):
+        ph._element.getparent().remove(ph._element)
+    R_EMBED = "{%s}embed" % NS["r"]
+    R_LINK = "{%s}link" % NS["r"]
+    for sh in src.shapes:
+        el = copy.deepcopy(sh._element)
+        for node in el.iter():
+            for attr in (R_EMBED, R_LINK):
+                rid = node.get(attr)
+                if not rid:
+                    continue
+                rel = src.part.rels[rid]
+                if rel.is_external:
+                    new_rid = new.part.rels.get_or_add_ext_rel(rel.reltype, rel.target_ref)
+                else:
+                    new_rid = new.part.rels.get_or_add(rel.reltype, rel.target_part)
+                node.set(attr, new_rid)
+        new.shapes._spTree.append(el)
+    return new
+
+
+def delete_slide(prs, slide):
+    sldIdLst = prs.slides._sldIdLst
+    for sldId in list(sldIdLst):
+        if prs.slides.part.related_part(sldId.rId) is slide.part:  # pragma: no cover
+            pass
+    rId = None
+    for sldId in list(sldIdLst):
+        if prs.part.related_part(sldId.rId) is slide.part:
+            rId = sldId.rId
+            sldIdLst.remove(sldId)
+            break
+    if rId:
+        prs.part.drop_rel(rId)
+
+
+def reorder(prs, ordered_slides):
+    sldIdLst = prs.slides._sldIdLst
+    by_part = {}
+    for sldId in list(sldIdLst):
+        by_part[prs.part.related_part(sldId.rId).partname] = sldId
+    for sldId in list(sldIdLst):
+        sldIdLst.remove(sldId)
+    for s in ordered_slides:
+        sldIdLst.append(by_part[s.part.partname])
+
+
+_TMP = REPO / "decks" / "_tmp_tchad"
+
+
+def add_pic(slide, path, left, top, width=None, height=None):
+    path = Path(path)
+    if path.suffix.lower() == ".svg":
+        import cairosvg
+        _TMP.mkdir(exist_ok=True)
+        png = _TMP / (path.stem + ".png")
+        if not png.exists():
+            cairosvg.svg2png(url=str(path), write_to=str(png), output_width=2000)
+        path = png
+    return slide.shapes.add_picture(str(path), Inches(left), Inches(top),
+                                    Inches(width) if width else None, Inches(height) if height else None)
+
+
+def find_tag(slide):
+    for sh in slide.shapes:
+        if sh.has_text_frame and abs(sh.top - Inches(0.28)) < Inches(0.05) and abs(sh.left - Inches(0.5)) < Inches(0.05):
+            return sh
+    return None
+
+
+# ─────────────────────────────── main ───────────────────────────────────────
+def main():
+    prs = Presentation(str(SRC))
+    S = {i + 1: s for i, s in enumerate(prs.slides)}  # original 1-based index
+
+    T_content = S[29]   # title + body + section tag + footer
+    T_activity = S[34]  # title + icon + body
+    T_section = S[23]   # full-bleed image + title
+    body_content = shapes_by_name(T_content)["Text 2"]
+    body_activity = shapes_by_name(T_activity)["Text 2"]
+
+    # ---------- new slides ----------
+    def new_content(md: Path | None = None, *, title=None, blocks=None, image=None, tag="", notes=None,
+                    img_box=(7.05, 1.62, 5.8, None)):
+        s = clone_slide(prs, T_content)
+        sh = shapes_by_name(s)
+        if md:
+            t, b, n, img = parse_md(md)
+            title = title or t
+            blocks = blocks or b
+            notes = notes or n
+            image = image or img
+        set_text(sh["Text 1"], title)
+        if image and Path(image).exists():
+            body = sh["Text 2"]
+            body.width = Inches(6.1)
+            fill_body(body, blocks, body_content)
+            left, top, w, h = img_box
+            pic = add_pic(s, image, left, top, w, h)
+            # keep inside the content area
+            if pic.height > Inches(5.3):
+                ratio = Inches(5.3) / pic.height
+                pic.height = Inches(5.3)
+                pic.width = int(pic.width * ratio)
+        else:
+            fill_body(sh["Text 2"], blocks, body_content)
+        set_text(sh["Text 3"], tag)
+        set_notes(s, notes)
+        return s
+
+    def new_activity(md: Path, tag=""):
+        s = clone_slide(prs, T_activity)
+        sh = shapes_by_name(s)
+        t, b, n, _ = parse_md(md)
+        set_text(sh["Text 1"], t)
+        fill_body(sh["Text 2"], b, body_activity)
+        set_text(sh["Text 3"], tag)
+        set_notes(s, n)
+        return s
+
+    def new_section(title):
+        s = clone_slide(prs, T_section)
+        set_text(shapes_by_name(s)["Text 0"], title)
+        return s
+
+    def title_and_body(s):
+        texts = [x for x in s.shapes if x.has_text_frame and x.text_frame.text.strip()]
+        body = max(texts, key=lambda x: x.height)
+        cands = [x for x in texts if x is not body and x.top < Inches(1.2) and x.height >= Inches(0.5) and x.width > Inches(5)]
+        title = cands[0] if cands else None
+        return title, body
+
+    def rewrite(idx, md: Path, tag=None, is_activity=False, title=None):
+        s = S[idx]
+        t, b, n, _ = parse_md(md)
+        title_shape, body = title_and_body(s)
+        if title_shape is not None:
+            set_text(title_shape, title or t)
+        fill_body(body, b, body_activity if is_activity else body_content)
+        tag_shape = find_tag(s)
+        if tag is not None and tag_shape is not None:
+            set_text(tag_shape, tag)
+        set_notes(s, n)
+        return s
+
+    TAG_PRISE = "PRISE EN MAIN DE LA PLATEFORME FASTR"
+    TAG_EXPLORE = "EXPLORER : PREMIÈRE LECTURE DES RÉSULTATS"
+    TAG_METH = "MÉTHODES FASTR ET RÉSULTATS ANALYTIQUES"
+    TAG_INTERP = "INTERPRÉTATION DES VISUALISATIONS"
+    TAG_VIZ = "PRODUITS : VISUALISATIONS ET INTERPRÉTATIONS"
+    TAG_DECK = "CRÉER ET STRUCTURER DES RAPPORTS ET PRÉSENTATIONS FASTR"
+
+    # ---------- edits to kept slides ----------
+    # Cover
+    sh = shapes_by_name(S[1])
+    set_text(sh["Text 0"], "Atelier de formation à la plateforme FASTR")
+    set_text(sh["Text 1"], "Institutionnalisation de FASTR au Tchad")
+    set_text(sh["Text 2"], "18-19 novembre 2026 · Centre Jardi de Bakara")
+
+    # Agenda
+    sh = shapes_by_name(S[3])
+    day1 = [("09:00-09:30", "Remarques d'ouverture"),
+            ("09:30-09:45", "Ordre du jour et objectifs"),
+            ("09:45-10:30", "Aperçu de l'approche FASTR"),
+            ("10:30-11:00", "Pause café"),
+            ("11:00-12:30", "Méthodes FASTR et résultats analytiques"),
+            ("12:30-14:00", "Pause déjeuner"),
+            ("14:00-15:30", "Prise en main de la plateforme : connexion, Produits, paquets et portées"),
+            ("15:30-15:45", "Pause café"),
+            ("15:45-16:45", "Explorer : première lecture des résultats du Tchad"),
+            ("16:45-17:00", "Fin du Jour 1")]
+    day2 = [("08:30-09:00", "Récapitulatif de mercredi"),
+            ("09:00-10:30", "Interprétation des visualisations"),
+            ("10:30-11:00", "Pause café"),
+            ("11:00-12:30", "Techniques de prompting avec l'assistant IA FASTR"),
+            ("12:30-14:00", "Pause déjeuner"),
+            ("14:00-15:30", "Produits : visualisations et interprétations"),
+            ("15:30-15:45", "Pause café"),
+            ("15:45-16:45", "Produits : présentations et rapports"),
+            ("16:45-17:00", "Où obtenir de l'aide et fin du Jour 2")]
+    for tbl_name, rows in (("Table 0", day1), ("Table Jour 2", day2)):
+        tbl = sh[tbl_name].table
+        assert len(tbl.rows) == len(rows) + 1, (tbl_name, len(tbl.rows), len(rows))
+        for r, (h, t) in zip(list(tbl.rows)[1:], rows):
+            set_text(r.cells[0], h)
+            set_text(r.cells[1], t)
+    heads = [x for x in S[3].shapes if x.name == "Text 1"]
+    set_lines(heads[0], ["Atelier de formation à la plateforme FASTR", "Mercredi 18/11"])
+    set_lines(heads[1], ["Atelier de formation à la plateforme FASTR", "Jeudi 19/11"])
+
+    # Objectives
+    sh = shapes_by_name(S[4])
+    set_text(sh["Text 1"], "Objectifs de l'atelier")
+    set_lines(sh["Text 2"], [
+        "Comprendre les bases du FASTR : les méthodes et ce qu'elles produisent",
+        "Lire les résultats du Tchad dans Explorer",
+        "Construire des visualisations et les interpréter",
+        "Créer des présentations et des rapports à partir de vos résultats",
+        "Savoir où obtenir de l'aide au Tchad et auprès de l'équipe FASTR"])
+
+    # How FASTR analyses your data (2.x module set)
+    s14 = S[14]
+    texts = [x for x in s14.shapes if x.has_text_frame and x.text_frame.text.strip() and x.top > Inches(1)]
+    intro = max(texts, key=lambda x: x.width * x.height) if texts else None
+    if intro is not None:
+        fill_body(intro, [
+            ("p", [("FASTR calcule ses modules ", False), ("dans l'ordre", True), (", dans un ", False), ("paquet de résultats", True), (" que tous les produits lisent. Un administrateur génère le paquet ; vous lisez les résultats dans Explorer et dans vos produits.", False)]),
+        ], intro)
+    tbls = [x for x in s14.shapes if x.has_table]
+    if tbls:
+        tbl = tbls[0].table
+        rows_xml = tbl._tbl.findall("a:tr", NS)
+        # one more row (5 module rows + header)
+        while len(rows_xml) < 6:
+            tbl._tbl.append(copy.deepcopy(rows_xml[-1]))
+            rows_xml = tbl._tbl.findall("a:tr", NS)
+        data = [("Module", "", "Ce qu'il fait", "Pourquoi"),
+                ("", "Indicator values", "Volumes mensuels et indicateurs calculés, par zone", "La base : ce que les établissements ont rapporté"),
+                ("", "Data quality assessment", "Repère rapports manquants, valeurs extrêmes, incohérences", "On n'analyse pas des données peu fiables"),
+                ("", "Data quality adjustments", "Remplace les valeurs extrêmes, comble les mois manquants", "Des données propres pour des résultats fiables"),
+                ("", "Disruption detection", "Compare l'observé à l'attendu, par établissement (bayésien)", "Savoir où et quand les services ont changé"),
+                ("", "Coverage denominators, Coverage estimates", "Estime les populations cibles, puis le % couvert", "Des chiffres bruts aux indicateurs qui guident l'action")]
+        ncols = len(tbl.columns)
+        data = [row[-ncols:] if ncols < 4 else row for row in data]
+        for r, vals in zip(list(tbl.rows), data):
+            for c, v in zip(r.cells, vals):
+                set_text(c, v)
+        # table may grow: keep it inside the slide
+        if tbls[0].top + tbls[0].height > Inches(6.9):
+            tbls[0].top = Inches(6.9) - tbls[0].height
+
+    # Prise en main intro (24)
+    sh = shapes_by_name(S[24])
+    fill_body(sh["Google Shape;541;p26"], [
+        ("p", [("Maintenant que vous savez ce que FASTR calcule, vous allez pratiquer sur l'instance du Tchad.", False)]),
+        ("h", [("Vous allez :", True)]),
+        ("b", [("Vous connecter à l'instance pays FASTR : " + URL, False)]),
+        ("b", [("Vous repérer sur l'écran d'accueil : la page ", False), ("Produits", True), (", la navigation latérale, le bouton IA", False)]),
+        ("b", [("Comprendre d'où viennent les chiffres : le paquet de résultats et la portée de chaque produit", False)]),
+        ("b", [("Créer un dossier à votre nom, puis lire les résultats du Tchad dans ", False), ("Explorer", True)]),
+    ], body_content)
+
+    # Sign-up slides (25, 26): URL text + Chad captures when available
+    for idx, shot in ((25, TCHAD_SHOTS / "00_sign_in.png"), (26, TCHAD_SHOTS / "01_sign_up.png")):
+        s = S[idx]
+        for x in s.shapes:
+            if x.has_text_frame:
+                for para in x.text_frame.paragraphs:
+                    for r in para.runs:
+                        r.text = (r.text.replace("mauritanie.fastr-analytics.org", "tchad.fastr-analytics.org")
+                                  .replace("FASTR Mauritanie 2026", "FASTR Tchad 2026"))
+        if shot.exists():
+            pics = [x for x in s.shapes if x.shape_type == 13]
+            if pics:
+                old = pics[0]
+                left, top, width, height = old.left, old.top, old.width, old.height
+                old._element.getparent().remove(old._element)
+                pic = s.shapes.add_picture(str(shot), left, top, width=width)
+                # send to back so the text overlays stay on top
+                tree = s.shapes._spTree
+                tree.remove(pic._element)
+                tree.insert(2, pic._element)
+
+    # Roles → users, permissions and access (2.x)
+    rewrite(28, FR / "m3_fastr_analytics_platform" / "m3_2b_accessing_platform_continued.md", tag=TAG_PRISE)
+    # Where a product's numbers come from
+    rewrite(29, FR / "m9b_getting_started" / "m9b_2_results_packages_concept.md", tag=TAG_PRISE)
+    # Login + folder activity
+    rewrite(33, FR / "m9b_getting_started" / "m9b_1_login_folder_activity.md", tag=TAG_PRISE, is_activity=True)
+    # Visualizations and interpretation activities
+    rewrite(34, FR / "m9c_visualizations_interpretation" / "m9c_1_creating_visualizations_manually.md", tag=TAG_VIZ, is_activity=True)
+    rewrite(35, FR / "m9c_visualizations_interpretation" / "m9c_2_creating_visualizations_ai.md", tag=TAG_VIZ, is_activity=True)
+    rewrite(36, FR / "m9c_visualizations_interpretation" / "m9c_3_interpreting_visualizations.md", tag=TAG_INTERP, is_activity=True)
+    rewrite(37, FR / "m9c_visualizations_interpretation" / "m9c_3b_interpreting_activity.md", tag=TAG_VIZ, is_activity=True)
+    rewrite(38, FR / "m9c_visualizations_interpretation" / "m9c_4_interpreting_with_ai.md", tag=TAG_VIZ, is_activity=True)
+    # Deck activities
+    rewrite(41, FR / "m9d_slide_decks" / "m9d_1_creating_slide_decks.md", tag=TAG_DECK, is_activity=True)
+    rewrite(42, FR / "m9d_slide_decks" / "m9d_1b_adding_viz_manually.md", tag=TAG_DECK, is_activity=True)
+    rewrite(43, FR / "m9d_slide_decks" / "m9d_1c_adding_viz_ai.md", tag=TAG_DECK, is_activity=True)
+    rewrite(44, FR / "m9d_slide_decks" / "m9d_2_editing_formatting_slides.md", tag=TAG_DECK, is_activity=True)
+    rewrite(60, FR / "m9d_slide_decks" / "m9d_2b_open_slide_editor.md", tag=TAG_DECK, is_activity=True)
+    rewrite(61, FR / "m9d_slide_decks" / "m9d_3_formatting_text.md", tag=TAG_DECK, is_activity=True)
+    rewrite(63, FR / "m9d_slide_decks" / "m9d_3a_formatting_report_settings.md", tag=TAG_DECK, is_activity=True)
+
+    # Section titles
+    def section_title(slide, text):
+        for x in slide.shapes:
+            if x.has_text_frame and x.text_frame.text.strip():
+                set_text(x, text)
+                return
+    section_title(S[7], "Aperçu de l'approche FASTR")
+    section_title(S[13], "Méthodes FASTR et résultats analytiques")
+    title_and_body(S[15])[0] and set_text(title_and_body(S[15])[0], "Évaluation de la qualité des données : que vérifie FASTR ?")
+    title_and_body(S[17])[0] and set_text(title_and_body(S[17])[0], "Ajustements de la qualité des données : comment FASTR corrige")
+    section_title(S[54], "Interprétation des visualisations")
+    section_title(S[32], "Produits : visualisations et interprétations")
+
+    # Contacts (65)
+    sh = shapes_by_name(S[65])
+    set_text(sh["Text 1"], "Vos contacts FASTR")
+    set_lines(sh["TextBox 8"], [
+        "Équipe FASTR",
+        "Amal Tucker Brown, spécialiste résultats",
+        "Claire Boulange, experte technique FASTR : assistance technique et formation",
+        "fastr@usefuldata.com.au",
+        "Points focaux DPSIS : à compléter"])
+
+    # ---------- new slides ----------
+    home_shot = TCHAD_SHOTS / "01_home_products.png"
+    if not home_shot.exists():
+        home_shot = SHOT / "platform_v2_fr" / "01_home_products.png"
+    n_home = new_content(FR / "m9b_getting_started" / "m9b_0_home_screen.md", tag=TAG_PRISE, image=home_shot)
+    n_scope = new_content(FR / "m9b_getting_started" / "m9b_2a_scope_concept.md", tag=TAG_PRISE,
+                          image=SHOT / "platform_v2_fr" / "14_scopes.png")
+    n_sec_explore = new_section("Explorer : première lecture des résultats du Tchad")
+    explore_shot = TCHAD_SHOTS / "13_explore.png"
+    if not explore_shot.exists():
+        explore_shot = SHOT / "platform_v2_fr" / "13_explore.png"
+    n_ex1 = new_content(FR / "m9b_getting_started" / "m9b_2d_explore_overview.md", tag=TAG_EXPLORE, image=explore_shot)
+    n_ex2 = new_content(FR / "m9b_getting_started" / "m9b_2e_explore_views.md", tag=TAG_EXPLORE,
+                        image=SHOT / "platform_v2_fr" / "13b_explore_over_time.png")
+    n_ex3 = new_content(FR / "m9b_getting_started" / "m9b_2f_explore_modules.md", tag=TAG_EXPLORE,
+                        image=SHOT / "platform_v2_fr" / "13e_explore_coverage_table.png")
+    n_ex4 = new_content(FR / "m9b_getting_started" / "m9b_2g_explore_vs_visualization.md", tag=TAG_EXPLORE)
+    n_ex_act = new_activity(FR / "m9b_getting_started" / "m9b_3_explore_activity.md", tag=TAG_EXPLORE)
+    # Bayesian disruption (replaces the linear-model slides 19 and 20)
+    n_b1 = new_content(FR / "m6_data_analysis" / "m6_2e_bayesian_two_questions_per_facility.md", tag=TAG_METH,
+                       title="Détection des perturbations : deux questions par établissement")
+    n_b2 = new_content(title="Comment le volume attendu est construit", tag=TAG_METH, blocks=[
+        ("p", [("Pour chaque zone et chaque mois, le modèle additionne le volume attendu ", False), ("des seuls établissements qui ont rapporté ce mois-là", True), (", et le compare à ce que ces mêmes établissements ont réellement rapporté.", False)]),
+        ("h", [("Ce qui change par rapport à l'ancienne approche", True)]),
+        ("b", [("Unité modélisée", True), (" : chaque établissement, et non plus le total du district ou de la province", False)]),
+        ("b", [("Rapports manquants", True), (" : modélisés comme une question à part, et non plus comblés avant l'analyse", False)]),
+        ("b", [("Volume attendu", True), (" : tendance + saison + niveau propre à chaque établissement", False)]),
+        ("b", [("Incertitude", True), (" : une bande de crédibilité à 95 % plutôt que des seuils fixes", False)]),
+        ("b", [("Un établissement devient silencieux", True), (" : retiré des deux côtés de la comparaison, au lieu de ressembler à une baisse", False)]),
+    ], notes=["La ligne clé est la dernière. Quand un établissement cesse de rapporter, l'ancien modèle voyait une baisse du total. Le nouveau retire cet établissement de l'observé et de l'attendu pour ce mois.",
+              "Bande de crédibilité : la fourchette dans laquelle le modèle s'attend à voir le volume 95 fois sur 100. Hors de la bande, c'est un signal ; dedans, c'est la variation normale.",
+              "La bande est plus large pour les petites zones et les indicateurs à faible volume : moins de données, moins de certitude."])
+    n_b3 = new_content(FR / "m6_data_analysis" / "m6_2g_reading_bayesian_disruptions_chart.md", tag=TAG_METH)
+    n_b4 = new_content(FR / "m6_data_analysis" / "m6_2h_reporting_gap_vs_service_gap.md", tag=TAG_METH)
+
+    # ---------- order ----------
+    order = [S[1], S[2], S[3], S[4],
+             S[7], S[8], S[9], S[10], S[11], S[12],
+             S[13], S[14], S[15], S[16], S[17], S[18], n_b1, n_b2, n_b3, n_b4, S[21], S[22],
+             S[23], S[24], S[25], S[26], n_home, S[29], n_scope, S[28], S[33],
+             n_sec_explore, n_ex1, n_ex2, n_ex3, n_ex4, n_ex_act,
+             S[54], S[55], S[36],
+             S[45], S[46], S[47], S[48], S[49], S[50], S[51], S[52], S[53],
+             S[32], S[34], S[35], S[37], S[38],
+             S[40], S[41], S[42], S[43], S[44], S[60], S[61], S[62], S[63],
+             S[64], S[65], S[66], S[67]]
+    keep = {s.part.partname for s in order}
+    for idx, s in S.items():
+        if s.part.partname not in keep:
+            delete_slide(prs, s)
+    reorder(prs, order)
+
+    # ---------- footer + page numbers + section tags on kept slides ----------
+    tag_fix = {S[36].part.partname: TAG_INTERP, S[55].part.partname: TAG_INTERP, S[62].part.partname: TAG_DECK}
+    for n, s in enumerate(prs.slides, 1):
+        for x in s.shapes:
+            if not x.has_text_frame:
+                continue
+            t = x.text_frame.text.strip()
+            if t == FOOTER_OLD:
+                set_text(x, FOOTER_NEW)
+            elif t.isdigit() and abs(x.left - Inches(11.5)) < Inches(0.1) and abs(x.top - Inches(7.1)) < Inches(0.1):
+                set_text(x, str(n))
+        if s.part.partname in tag_fix:
+            tag = find_tag(s)
+            if tag is not None:
+                set_text(tag, tag_fix[s.part.partname])
+
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    prs.save(str(OUT))
+    print(f"Wrote {len(prs.slides)} slides -> {OUT}")
+
+
+if __name__ == "__main__":
+    main()
