@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 from pptx import Presentation
-from pptx.util import Inches
+from pptx.util import Inches, Pt
 
 REPO = Path(__file__).resolve().parents[1]
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(
@@ -533,6 +533,111 @@ def main():
     rewrite(61, FR / "m9d_slide_decks" / "m9d_3_formatting_text.md", tag=TAG_DECK, is_activity=True)
     rewrite(63, FR / "m9d_slide_decks" / "m9d_3a_formatting_report_settings.md", tag=TAG_DECK, is_activity=True)
 
+    # ---------- prescriptive tasks on every activity slide ----------
+    def B(*parts):
+        """bullet from (text, bold) pairs or plain strings"""
+        return ("p", [(x, False) if isinstance(x, str) else x for x in parts])
+
+    def tasks(slide, duration, items, result, fmt="individuel"):
+        _, body = title_and_body(slide)
+        blocks = [("h", [(f"À faire · {duration} · {fmt}", True)])] + items + [("h", [("Résultat attendu", True)]), ("p", [(result, False)])]
+        fill_body(body, blocks, body_activity)
+        for para in body.text_frame.paragraphs:
+            for r in para.runs:
+                r.font.size = Pt(17)
+        body.top = Inches(1.75)
+        body.height = Inches(5.2)
+        body.width = Inches(11.5)
+        for x in slide.shapes:
+            if x.shape_type == 13 and x.width <= Inches(1.1):
+                x.top = Inches(1.0 + 0.0)
+                x.left = Inches(11.6)
+
+    tasks(S[33], "20 min", [
+        B("1. Ouvrez ", ("https://tchad.fastr-analytics.org/", True), ". Nouveau compte : ", ("S'inscrire", True), " (prénom, nom, e-mail, mot de passe), puis attendez l'approbation. Compte existant : ", ("S'identifier", True), "."),
+        B("2. Dépliez la navigation latérale (flèche en bas). Ouvrez ", ("Explorer", True), ", puis revenez à ", ("Produits", True), "."),
+        B("3. Dans le dossier de l'atelier indiqué par le facilitateur : ", ("Nouveau → Nouveau dossier", True), ", votre prénom et votre nom, une couleur, ", ("Sauvegarder", True), "."),
+        B("4. Ouvrez le menu ⋮ de votre dossier et lisez ses options, sans rien changer."),
+    ], "Vous êtes connecté et un dossier à votre nom apparaît dans la liste.")
+
+    tasks(S[34], "20 min", [
+        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), ", paquet épinglé, portée ", ("Toutes les données", True), "."),
+        B("2. ", ("Indicator values → Indicator value → Personnalisé → Série temporelle → Insérer", True), "."),
+        B("3. Onglet ", ("Données", True), " : Filtre → Indicateur = ", ("CPN 1", True), " ; Période = 24 derniers mois. Titre : « CPN 1, Tchad, 24 derniers mois »."),
+        B("4. ", ("Affichage (désagréger) → Province (AA2)", True), " : une courbe par province. Puis Filtre → gardez ", ("NDJAMENA", True), " et ", ("LOGONE OCCIDENTAL", True), "."),
+        B("5. Page Produits → ⋮ → ", ("Dupliquer", True), " ; dans la copie, remplacez CPN 1 par ", ("Penta 3", True), "."),
+    ], "Deux visualisations dans votre dossier : CPN 1 (deux provinces) et Penta 3.")
+
+    tasks(S[35], "15 min", [
+        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), " (laissez-la vide), puis ouvrez le bouton ", ("IA", True), "."),
+        B("2. Demandez : « Montre-moi les ", ("accouchements dans la FOSA", True), " par mois sur les 24 derniers mois, au niveau national, en courbe »."),
+        B("3. Vérifiez l'indicateur, la période et le type de graphique. Puis : « Compare ", ("NDJAMENA", True), " et ", ("OUADDAÏ", True), " sur le même graphique »."),
+        B("4. Demandez un titre. Si quelque chose est faux, corrigez dans la conversation ; ", ("Historique → Restaurer", True), " revient en arrière."),
+    ], "Une visualisation construite par l'IA, vérifiée point par point, dans votre dossier.")
+
+    tasks(S[36], "10 min", [
+        B("1. Regardez le graphique projeté (CPN 1 par province, 24 mois)."),
+        B("2. En binôme, répondez par écrit aux six questions : quel indicateur ? quel niveau et quelle période ? qu'est-ce qui est comparé ? quelles valeurs ? qu'est-ce qui ressort ? et alors ?"),
+        B("3. Une phrase par question. Un binôme lit ses six phrases à la salle."),
+    ], "Six phrases sur papier, dont la dernière nomme une personne ou une action.", fmt="binômes")
+
+    tasks(S[37], "20 min", [
+        B("1. Ouvrez votre visualisation ", ("CPN 1 par province", True), "."),
+        B("2. Écrivez un ", ("titre-message", True), " de 12 mots maximum : ce que le graphique montre, pas son sujet."),
+        B("3. Écrivez ", ("« Ce que je vois »", True), " : deux phrases factuelles avec des chiffres lus sur le graphique."),
+        B("4. Écrivez ", ("« Ce que cela signifie »", True), " : une phrase qui nomme qui doit agir (le district, le programme, la DPSIS) et quoi."),
+        B("5. Échangez avec votre voisin : il vérifie chaque chiffre contre le graphique."),
+    ], "Trois blocs de texte, vérifiés par un collègue, prêts pour une diapositive.")
+
+    tasks(S[38], "15 min", [
+        B("1. Dans la même visualisation, bouton ", ("IA", True), " : « Rédige une interprétation en trois parties, titre, ce que l'on voit, ce que cela signifie, pour un directeur de programme »."),
+        B("2. Vérifiez chaque chiffre du texte contre le graphique. Une affirmation fausse ? Dites-le à l'IA."),
+        B("3. Demandez : « Plus simple, 60 mots ». Ajoutez le contexte que l'IA ignore : rupture de stock, grève, campagne, zone inaccessible."),
+        B("4. Comparez avec votre version écrite à la main : laquelle garderiez-vous, et pourquoi ?"),
+    ], "Une interprétation de l'IA vérifiée phrase par phrase, avec votre contexte ajouté.")
+
+    tasks(S[41], "15 min", [
+        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle présentation", True), ". Nom : « Revue des services, <votre province> ». Paquet épinglé, Toutes les données, ", ("Créer", True), "."),
+        B("2. Choisissez un thème et cliquez ", ("Appliquer le thème", True), "."),
+        B("3. ", ("Ajouter une diapositive → Contenu", True), "."),
+        B("4. Sur la couverture, écrivez le titre « Suivi des services de santé, Tchad, novembre 2026 » et votre nom."),
+    ], "Une présentation dans votre dossier : une couverture remplie et une diapositive de contenu vide.")
+
+    tasks(S[42], "15 min", [
+        B("1. Cliquez dans le bloc de la diapositive de contenu. Type : ", ("Visualisation", True), "."),
+        B("2. ", ("Insérer une visualisation → Visualisation existante…", True), " → votre « CPN 1 par province » → ", ("Insérer une copie", True), "."),
+        B("3. ", ("Mise en page → Ajouter", True), " : un bloc de texte à droite. Collez-y vos trois blocs d'interprétation."),
+        B("4. Le titre de la diapositive est votre titre-message, pas « CPN 1 »."),
+    ], "Une diapositive avec votre graphique à gauche et votre message à droite.")
+
+    tasks(S[43], "10 min", [
+        B("1. Panneau ", ("IA", True), " de la présentation : « Ajoute une diapositive de contenu avec ma visualisation ", ("Penta 3", True), " et deux puces d'interprétation »."),
+        B("2. Vérifiez : bon graphique ? chiffres exacts ? Puis : « Remplace la deuxième puce par une recommandation pour le programme de vaccination »."),
+        B("3. Déplacez la nouvelle diapositive après celle de la CPN 1 en glissant sa vignette."),
+    ], "Une deuxième diapositive de contenu, ajoutée par l'IA et corrigée par vous.")
+
+    tasks(S[44], "20 min", [
+        B("1. Sur chaque diapositive, relisez les chiffres du texte contre le graphique."),
+        B("2. Un graphique à l'étroit ? ", ("Mise en page → Modifier la visualisation", True), " ou déplacez le séparateur. Ne rétrécissez pas le texte."),
+        B("3. ", ("Insérer", True), " : ajoutez l'en-tête, la date et le pied de page à la diapositive courante."),
+        B("4. Supprimez toute diapositive vide ; réordonnez en glissant les vignettes."),
+        B("5. ", ("Présenter", True), " : parcourez vos trois diapositives en plein écran, comme devant le directeur."),
+    ], "Trois diapositives (couverture, CPN 1, Penta 3) que vous pourriez projeter sans vous excuser.")
+
+    tasks(S[61], "10 min", [
+        B("1. Dans le bloc texte de la diapositive CPN 1 : mettez le chiffre clé en ", ("gras", True), "."),
+        B("2. Transformez « Ce que je vois » en une liste de trois puces."),
+        B("3. Ajoutez un sous-titre « Ce que cela signifie » au-dessus de la dernière phrase."),
+        B("4. La référence rapide est sur la diapositive suivante."),
+    ], "Un texte de diapositive lisible en dix secondes : un chiffre en gras, trois puces, un sous-titre.")
+
+    tasks(S[63], "15 min", [
+        B("1. Menu ", ("Présentation → Logos", True), " : ajoutez le logo du ministère s'il est dans Ressources. ", ("Pied de page", True), " : « DPSIS · Tchad · novembre 2026 », numéros de page activés."),
+        B("2. ", ("Fichier → Nom et dossier…", True), " : vérifiez que la présentation est dans votre dossier."),
+        B("3. ", ("Fichier → Gérer l'accès…", True), " : accès général « Tout le monde dans l'instance peut consulter »."),
+        B("4. ", ("Fichier → Télécharger…", True), " : récupérez le fichier et ouvrez-le."),
+    ], "Un fichier téléchargé, avec logo et pied de page, visible par toute l'instance.")
+
     # Section titles
     def section_title(slide, text):
         for x in slide.shapes:
@@ -574,6 +679,13 @@ def main():
                         image=SHOT / "platform_v2_fr" / "13e_explore_coverage_table.png")
     n_ex4 = new_content(FR / "m9b_getting_started" / "m9b_2g_explore_vs_visualization.md", tag=TAG_EXPLORE)
     n_ex_act = new_activity(FR / "m9b_getting_started" / "m9b_3_explore_activity.md", tag=TAG_EXPLORE)
+    tasks(n_ex_act, "45 min", [
+        B("1. ", ("Explorer → Tableau", True), " : niveau ", ("Province (AA2)", True), ", période ", ("12 derniers mois", True), ", indicateur ", ("CPN 1", True), ". Notez le total national et la province la plus basse."),
+        B("2. ", ("Dans le temps", True), " : CPN 1, niveau national, pas ", ("Mois", True), ". Notez le mois le plus haut des 24 derniers mois."),
+        B("3. Module ", ("Coverage estimates → Coverage over time", True), " : notez la dernière couverture projetée de ", ("Penta 3", True), " (courbe rouge)."),
+        B("4. ", ("Carte", True), " : ", ("Accouchement dans la FOSA", True), ", Province, 12 derniers mois. Quelle province est la plus claire ? (Si la carte ne s'affiche pas, passez.)"),
+        B("5. Comparez vos quatre réponses avec le binôme voisin. Écrivez ", ("une question", True), " que vous voulez transformer en graphique demain."),
+    ], "Quatre chiffres et une question sur papier, lus à la salle au tour de table.", fmt="binômes")
     # Bayesian disruption (replaces the linear-model slides 19 and 20)
     n_b1 = new_content(FR / "m6_data_analysis" / "m6_2e_bayesian_two_questions_per_facility.md", tag=TAG_METH,
                        title="Détection des perturbations : deux questions par établissement")

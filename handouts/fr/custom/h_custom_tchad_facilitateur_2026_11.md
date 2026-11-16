@@ -29,7 +29,7 @@ L'atelier de formation à la plateforme FASTR, dans le cadre de l'institutionnal
 ## Avant l'atelier
 
 - ☐ Comptes créés et approuvés sur la page **Utilisateurs** pour la liste des participants connue à l'avance
-- ☐ Paquet de résultats épinglé sur la page **Résultats**, généré avec les données récentes
+- ☐ Paquet de résultats épinglé sur la page **Résultats** (le 16 novembre, le paquet « 2026-11-15 » l'était), généré avec les données récentes
 - ☐ Fichiers de limites administratives chargés pour la carte d'Explorer (sinon, le dire dès le départ)
 - ☐ Dossier pays créé sur la page **Produits**, dans lequel les participants créeront leur propre dossier
 - ☐ Une visualisation enregistrée et une présentation terminée dans un dossier de démo
@@ -108,7 +108,7 @@ C'est vous qui conduisez la salle. L'équipe FASTR circule entre les tables. Com
 
 ### 2. Créer un dossier pour votre travail · ~10 min · pratique, individuel
 
-**Le déroulé.** Chaque participant ouvre le dossier pays, puis **Nouveau → Nouveau dossier**, saisit son nom, choisit une couleur, **Sauvegarder**.
+**Le déroulé.** Chaque participant ouvre le dossier de l'atelier que vous indiquez, puis **Nouveau → Nouveau dossier**, saisit son prénom et son nom, choisit une couleur, **Sauvegarder**, et ouvre le menu ⋮ du dossier pour en lire les options sans rien changer.
 
 **Démontrer.** Créez un dossier à l'écran. Montrez le menu ⋮ sur sa ligne (Déplacer dans, Renommer, Définir l'accès, Supprimer) et le champ **Dossier** de la boîte de dialogue Nouvelle présentation, pour qu'ils voient à quoi le dossier servira demain.
 
@@ -130,7 +130,7 @@ Avant de lancer l'activité, dites une phrase sur Explorer : on regarde avant de
 
 ### 3. Jeter un premier regard avec Explorer · ~60 min avec la pause · pratique, en binôme
 
-**Le déroulé.** Les binômes ouvrent **Explorer**, lisent Antenatal care 1 (la CPN1) dans la vue **Tableau** au niveau en dessous du national sur les **12 derniers mois**, suivent la même série **Dans le temps**, essaient la **Carte**, passent le module sur Coverage estimates, et notent trois chiffres à comparer avec le binôme voisin : le total national de la CPN1 sur les 12 derniers mois et la zone la plus basse ; le mois le plus haut ; la dernière couverture projetée de Penta 3. Chaque binôme formule ensuite une question qu'il voudrait transformer en graphique demain. Après la pause, faites un tour de salle : chaque binôme lit ses trois chiffres et sa question.
+**Le déroulé.** Les consignes sont sur la diapositive, quatre lectures et une question. 1. **Tableau** : niveau Province (AA2), période 12 derniers mois, indicateur CPN 1 ; noter le total national et la province la plus basse. 2. **Dans le temps** : CPN 1 au niveau national, pas Mois ; noter le mois le plus haut des 24 derniers mois. 3. Module Coverage estimates → Coverage over time ; noter la dernière couverture projetée de Penta 3 (courbe rouge). 4. **Carte** : Accouchement dans la FOSA, Province, 12 derniers mois ; quelle province est la plus claire (à sauter si la carte ne s'affiche pas). 5. Comparer les quatre réponses avec le binôme voisin et écrire une question à transformer en graphique demain. Après la pause, tour de salle : chaque binôme lit ses chiffres et sa question.
 
 **Démontrer.** Nommez à l'écran les contrôles du haut : le paquet, la portée, le module et la métrique, le niveau, les indicateurs et la période (12 derniers mois, Dernier trimestre, Dernière année, Tout). Passez une fois de Tableau à Dans le temps puis à Carte. Montrez **Rechercher une colonne** et **Télécharger**. Ouvrez le menu du module pour montrer **Résultats principaux** et **Analyses complémentaires**.
 
@@ -179,21 +179,25 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 4. Créez votre première visualisation · ~20 min · pratique, individuel
 
-**Le déroulé.** Sur la page Produits, dans son dossier : **Nouveau → Nouvelle visualisation**, garder le paquet et la portée, puis dans la boîte de dialogue : Indicator values → Indicator value → **Personnalisé** → **Série temporelle**, et filtrer sur un indicateur. Le graphique s'enregistre tout seul, l'indicateur **En direct** le confirme. Il n'y a pas de « Enregistrer sous » : **Dupliquer** sur la page Produits garde un original, **Historique → Restaurer** ramène une version antérieure.
+**Le déroulé.** Les consignes sont sur la diapositive. Dans son dossier : **Nouveau → Nouvelle visualisation**, paquet épinglé, Toutes les données ; Indicator values → Indicator value → **Personnalisé** → **Série temporelle** → Insérer ; onglet **Données**, Filtre → Indicateur = CPN 1, période 24 derniers mois, titre « CPN 1, Tchad, 24 derniers mois » ; **Affichage (désagréger) → Province (AA2)**, puis Filtre → garder NDJAMENA et LOGONE OCCIDENTAL ; enfin **Dupliquer** sur la page Produits et remplacer CPN 1 par Penta 3 dans la copie. Le graphique s'enregistre tout seul, l'indicateur **En direct** le confirme. Il n'y a pas de « Enregistrer sous » : Dupliquer garde un original, **Historique → Restaurer** ramène une version antérieure.
 
 **Démontrer.** Faites le parcours une fois en entier, puis dans l'onglet **Données** : partez d'un indicateur au total national, désagrégez par province, puis filtrez sur deux provinces. Montrez le piège : désagréger par province et filtrer sur une seule, il ne reste rien à comparer.
 
 **Formulez-le ainsi.** *« Filtrez ce dont vous n'avez pas besoin ; désagrégez ce que vous voulez comparer. Courbes pour les tendances, barres pour comparer. Et il n'y a pas de bouton Enregistrer : tout est déjà enregistré. »*
 
-**À quoi ressemble un bon résultat.** Une visualisation dans le dossier du participant, qui répond à la question notée la veille, et un participant capable d'expliquer la différence entre filtrer et désagréger.
+**À quoi ressemble un bon résultat.** Deux visualisations dans le dossier du participant, CPN 1 (deux provinces) et Penta 3, et un participant capable d'expliquer la différence entre filtrer et désagréger.
 
 **À surveiller.**
 - Le préréglage Indicator value choisi tel quel (un tableau) et la question « où est la courbe ? » : il faut Personnalisé → Série temporelle.
 - Une visualisation créée hors du dossier du participant : **Déplacer dans**.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### 5. Construire une visualisation avec l'assistant IA · ~15 min · pratique, individuel
 
-**Le déroulé.** Le même graphique par une autre voie : créer une visualisation vierge, ouvrir le bouton IA à l'intérieur, demander en langage courant, vérifier l'indicateur, la période et les données ajustées ou brutes, corriger dans la conversation.
+**Le déroulé.** Les consignes sont sur la diapositive : créer une visualisation vierge dans son dossier, ouvrir le bouton IA, demander « Montre-moi les accouchements dans la FOSA par mois sur les 24 derniers mois, au niveau national, en courbe », vérifier l'indicateur, la période et le type, puis « Compare NDJAMENA et OUADDAÏ sur le même graphique », demander un titre, corriger dans la conversation.
 
 **Démontrer.** Posez d'abord la question à l'IA depuis la page Produits : elle ne peut pas dessiner là, elle liste les produits à ouvrir. Ouvrez ensuite une visualisation vierge, saisissez une demande, montrez les étapes que l'IA liste et le graphique qui change. Montrez **Historique → Restaurer** une fois.
 
@@ -211,7 +215,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 6. Écrire une interprétation pour un graphique · ~20 min · individuel
 
-**Le déroulé.** Pour leur graphique, les participants rédigent une interprétation en trois parties : un titre qui porte le message, un « ce que vous voyez » factuel, un « ce que cela signifie » qui nomme une personne ou une prochaine étape. *Comment lire une visualisation FASTR* sert de référence.
+**Le déroulé.** Pour leur graphique CPN 1 par province, les participants rédigent une interprétation en trois parties : un titre-message de 12 mots maximum, un « ce que je vois » de deux phrases avec des chiffres lus sur le graphique, un « ce que cela signifie » d'une phrase qui nomme qui doit agir. Le voisin vérifie chaque chiffre. *Comment lire une visualisation FASTR* sert de référence.
 
 **Démontrer.** Montrez un titre faible et un titre fort côte à côte, « Résultats de couverture » contre un titre qui énonce le constat.
 
@@ -221,9 +225,13 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 **À surveiller.** Des titres purement descriptifs, des faits mélangés à l'interprétation, des « et alors » qui ne nomment personne.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### 7. Laisser l'IA rédiger l'interprétation · ~15 min · pratique, individuel
 
-**Le déroulé.** Dans la visualisation ouverte, demander à l'IA une interprétation, vérifier chaque affirmation par rapport au graphique, demander un langage plus simple, ajouter le contexte local que l'IA ne connaît pas (rupture de stock, grève, campagne, zone inaccessible).
+**Le déroulé.** Dans la même visualisation, demander à l'IA « Rédige une interprétation en trois parties, titre, ce que l'on voit, ce que cela signifie, pour un directeur de programme », vérifier chaque chiffre contre le graphique, demander « Plus simple, 60 mots », ajouter le contexte local que l'IA ne connaît pas (rupture de stock, grève, campagne, zone inaccessible), puis comparer avec la version écrite à la main.
 
 **Démontrer.** Générez une interprétation à l'écran et vérifiez une seule affirmation à voix haute, pour montrer que « ça sonne juste » n'est pas le test.
 
@@ -233,11 +241,15 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 **À surveiller.** Un texte accepté parce qu'il sonne assuré.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Jour 2, après-midi : présentations
 
 ### 8. Créez votre première présentation · ~20 min · pratique, individuel
 
-**Le déroulé.** **Nouveau → Nouvelle présentation** : nom et dossier, paquet et portée, puis le choix du thème et **Appliquer le thème**. Ajouter une **Diapositive de contenu** avec **Ajouter une diapositive**.
+**Le déroulé.** **Nouveau → Nouvelle présentation** dans son dossier, nom « Revue des services, <province> », paquet épinglé et Toutes les données, puis le choix du thème et **Appliquer le thème**. **Ajouter une diapositive → Contenu**, et sur la couverture le titre « Suivi des services de santé, Tchad, novembre 2026 » avec le nom du participant.
 
 **Démontrer.** La boîte de dialogue, le champ **Dossier**, le sélecteur de thème, et les types de diapositives : seule **Contenu** accueille un graphique et du texte. Puis une visite de l'éditeur : la liste des diapositives à gauche, la diapositive au milieu, le panneau IA à droite, la barre du haut (Fichier, Présentation, Insérer, Présenter, Historique, En direct).
 
@@ -253,7 +265,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 9. Ajouter une visualisation (manuellement) · ~15 min · pratique, individuel
 
-**Le déroulé.** Cliquer dans le bloc vide, passer son type de **Texte** à **Visualisation**, puis **Insérer une visualisation → Visualisation existante…**, choisir son graphique, **Insérer une copie**. Ajouter un bloc de texte à côté avec **Mise en page → Ajouter**, y coller l'interprétation, et écrire le titre de la diapositive.
+**Le déroulé.** Cliquer dans le bloc vide, passer son type de **Texte** à **Visualisation**, puis **Insérer une visualisation → Visualisation existante…**, choisir « CPN 1 par province », **Insérer une copie**. Ajouter un bloc de texte à droite avec **Mise en page → Ajouter**, y coller les trois blocs d'interprétation, et donner à la diapositive le titre-message, pas « CPN 1 ».
 
 **Démontrer.** Le schéma complet une fois, en nommant chaque geste, séparateur compris.
 
@@ -268,15 +280,19 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 10. Ajouter une visualisation (avec l'assistant IA) · ~10 min · pratique, individuel
 
-**Le déroulé.** La présentation ouverte, demander au panneau IA d'ajouter une diapositive avec un graphique nommé, vérifier la diapositive, corriger dans la conversation.
+**Le déroulé.** La présentation ouverte, demander au panneau IA « Ajoute une diapositive de contenu avec ma visualisation Penta 3 et deux puces d'interprétation », vérifier le graphique et les chiffres, puis « Remplace la deuxième puce par une recommandation pour le programme de vaccination », et glisser la vignette après la diapositive CPN 1.
 
 **Formulez-le ainsi.** *« Nommez le graphique : une demande vague renvoie un graphique proche mais faux. Depuis la page Produits, l'IA ne peut rien ajouter. »*
 
 **À quoi ressemble un bon résultat.** Deux diapositives, la seconde ajoutée par l'IA et vérifiée.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ### 11. Éditer et finaliser vos diapositives · ~20 min · pratique, individuel
 
-**Le déroulé.** Quatre revues par diapositive : exactitude, taille des blocs, structure, en-tête et pied de page, avec la barre d'outils du bloc et le menu **Mise en page**. *Formater le texte de votre rapport* couvre la mise en forme du texte.
+**Le déroulé.** Sur chaque diapositive : relire les chiffres contre le graphique ; corriger un graphique à l'étroit avec **Mise en page → Modifier la visualisation** ou le séparateur ; ajouter en-tête, date et pied de page par le menu **Insérer** ; supprimer les diapositives vides et réordonner en glissant les vignettes ; puis **Présenter** les trois diapositives en plein écran. *Formater le texte de votre rapport* couvre la mise en forme du texte : chiffre clé en gras, trois puces, un sous-titre.
 
 **Formulez-le ainsi.** *« Les petites corrections, vous les faites ici ; les réécritures vont à l'IA. Le critère : pourriez-vous montrer cette diapositive au directeur sans vous excuser ? »*
 
@@ -284,7 +300,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 12. Paramètres de la présentation et rapports · ~15 min · démo, puis pratique
 
-**Le déroulé.** Menu **Présentation** : Thème, Logos, Pied de page. Menu **Fichier** : Nom et dossier…, Gérer l'accès…, Télécharger…, Partager…. Puis, en démo seulement, l'éditeur de rapport (**Nouveau → Nouveau rapport**, menus Fichier, Widgets, Figures, Page), pour que les participants sachent qu'il existe.
+**Le déroulé.** Menu **Présentation → Logos** (logo du ministère s'il est dans Ressources) et **Pied de page** « DPSIS · Tchad · novembre 2026 » avec numéros de page ; **Fichier → Nom et dossier…** pour vérifier le dossier ; **Fichier → Gérer l'accès…** avec l'accès général « Tout le monde dans l'instance peut consulter » ; **Fichier → Télécharger…** et ouvrir le fichier. Puis, en démo seulement, l'éditeur de rapport (**Nouveau → Nouveau rapport**, menus Fichier, Widgets, Figures, Page), pour que les participants sachent qu'il existe.
 
 **Formulez-le ainsi.** *« Le logo du ministère et le pied de page se règlent une fois dans Présentation. Télécharger produit le fichier à envoyer ; Gérer l'accès décide qui voit la présentation sur la plateforme. »*
 
