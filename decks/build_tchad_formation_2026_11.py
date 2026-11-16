@@ -873,8 +873,14 @@ def main():
                 sl.shapes._spTree.append(copy.deepcopy(el))
         for x in sl.shapes:
             if not x.has_text_frame: continue
-            t = x.text_frame.text.strip()
-            if abs(x.top - Inches(7.1)) < Inches(0.1):
+            if x.height < Inches(0.1):
+                # the footer rule line: never carries text
+                tx = x.text_frame._txBody
+                for para in tx.findall("a:p", NS):
+                    for r in para.findall("a:r", NS):
+                        para.remove(r)
+                continue
+            if abs(x.top - Inches(7.1)) < Inches(0.05):
                 if abs(x.left - Inches(11.5)) < Inches(0.1): set_text(x, str(n))
                 else: set_text(x, FOOTER_NEW)
         # body fonts: Calibri, cap oversized text
@@ -952,6 +958,14 @@ def main():
             parent.remove(x._element)
             pic = sl.shapes.add_picture(str(png), left, top, width, height)
             parent.remove(pic._element); parent.insert(idx, pic._element)
+
+    for sl in prs.slides:
+        for x in sl.shapes:
+            if x.has_text_frame and x.height < Inches(0.1):
+                tx = x.text_frame._txBody
+                for para in tx.findall("a:p", NS):
+                    for r in para.findall("a:r", NS):
+                        para.remove(r)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     prs.save(str(OUT))
