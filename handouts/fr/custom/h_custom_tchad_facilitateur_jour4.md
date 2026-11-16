@@ -26,6 +26,10 @@ L'atelier de formation à la plateforme FASTR, dans le cadre de l'institutionnal
 | **Après-midis (pratique)** | Appuie les tables, règle les problèmes techniques | Conduit la salle : lance chaque activité, démontre à l'écran, tient le rythme, vérifie les points de passage |
 | **Comptes et accès** | L'administrateur FASTR de l'instance approuve les comptes sur la page **Utilisateurs** | Repère les participants bloqués et les signale à l'administrateur FASTR |
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Avant l'atelier
 
 - ☐ Comptes créés et approuvés par l'administrateur FASTR sur la page **Utilisateurs** pour la liste des participants connue à l'avance
@@ -243,6 +247,10 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 > **Plateforme indisponible.** Parcourez l'écran avec les captures d'écran des documents participants, et faites travailler les binômes sur papier : la question à transformer en graphique, ou l'interprétation en trois parties.
 
 > **Comptes non approuvés.** L'administrateur FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
+
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
 ## Où obtenir de l'aide
 

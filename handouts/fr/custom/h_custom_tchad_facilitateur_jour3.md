@@ -175,6 +175,10 @@ Vérifiez les trois points de passage avant de laisser partir la salle : connect
 
 > **Comptes non approuvés.** L'administrateur FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
 
+---
+
+<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
+
 ## Où obtenir de l'aide
 
 - **Amal Tucker Brown**, spécialiste des résultats, équipe FASTR : résultats, interprétation et usage.
