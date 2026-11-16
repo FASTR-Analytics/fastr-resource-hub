@@ -918,6 +918,33 @@ def main():
             for r in para.runs:
                 r.font.size = Pt(13)
 
+    # ---------- SVG-only pictures (activity icons) -> PNG, so Keynote and older PowerPoint show them ----------
+    import cairosvg
+    R_EMBED = "{%s}embed" % NS["r"]
+    for sl in prs.slides:
+        for x in list(sl.shapes):
+            if x.shape_type != 13:
+                continue
+            svg_rid = None
+            for node in x._element.iter():
+                if node.tag.endswith("}svgBlip"):
+                    svg_rid = node.get(R_EMBED)
+            if not svg_rid:
+                continue
+            try:
+                blob = sl.part.related_part(svg_rid).blob
+            except Exception:
+                continue
+            _TMP.mkdir(exist_ok=True)
+            png = _TMP / ("svg_%s.png" % abs(hash(blob)))
+            if not png.exists():
+                cairosvg.svg2png(bytestring=blob, write_to=str(png), output_width=600)
+            left, top, width, height = x.left, x.top, x.width, x.height
+            parent = x._element.getparent(); idx = list(parent).index(x._element)
+            parent.remove(x._element)
+            pic = sl.shapes.add_picture(str(png), left, top, width, height)
+            parent.remove(pic._element); parent.insert(idx, pic._element)
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     prs.save(str(OUT))
     print(f"Wrote {len(prs.slides)} slides -> {OUT}")
