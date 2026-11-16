@@ -203,7 +203,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 11. Éditer et finaliser vos diapositives · ~20 min · pratique, individuel
 
-**Le déroulé.** Sur chaque diapositive : relire les chiffres contre le graphique ; corriger un graphique à l'étroit avec **Mise en page → Modifier la visualisation** ou le séparateur ; ajouter en-tête, date et pied de page par le menu **Insérer** ; supprimer les diapositives vides et réordonner en glissant les vignettes ; puis **Présenter** les trois diapositives en plein écran. *Formater le texte de votre rapport* couvre la mise en forme du texte : chiffre clé en gras, trois puces, un sous-titre.
+**Le déroulé.** Sur chaque diapositive : relire les chiffres contre le graphique ; corriger un graphique à l'étroit avec **Mise en page → Modifier la visualisation** ou le séparateur ; mettre en forme le bloc texte avec la barre d'outils de l'éditeur (chiffre clé en gras, « Ce que je vois » en puces, un sous-titre avant « Ce que cela signifie ») ; ajouter en-tête, date et pied de page par le menu **Insérer** ; supprimer les diapositives vides et réordonner en glissant les vignettes ; puis **Présenter** les trois diapositives en plein écran.
 
 **Formulez-le ainsi.** *« Les petites corrections, vous les faites ici ; les réécritures vont à l'IA. Le critère : pourriez-vous montrer cette diapositive au directeur sans vous excuser ? »*
 
