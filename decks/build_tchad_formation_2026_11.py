@@ -707,12 +707,13 @@ def main():
     n_ex4 = new_content(FR / "m9b_getting_started" / "m9b_2g_explore_vs_visualization.md", tag=TAG_EXPLORE)
     n_ex_act = new_activity(FR / "m9b_getting_started" / "m9b_3_explore_activity.md", tag=TAG_EXPLORE)
     tasks(n_ex_act, "45 min", [
-        B("1. ", ("Explorer", True), " → vue ", ("Tableau", True), ". Niveau ", ("Province (AA2)", True), ", période ", ("12 derniers mois", True), ". Cliquez l'en-tête ", ("CPN 1", True), " pour trier. Notez le total ", ("National", True), " et la province la plus basse."),
-        B("2. Vue ", ("Dans le temps", True), " : indicateur CPN 1, niveau National, pas ", ("Mois", True), ". Notez le mois le plus haut des 24 derniers mois."),
-        B("3. Module ", ("Estimations de couverture", True), " → métrique ", ("Couverture dans le temps", True), ". Sur le panneau ", ("Penta 3", True), ", notez la dernière valeur de la courbe rouge (projection)."),
-        B("4. Module ", ("Détection des perturbations", True), " → ", ("Services observés et attendus", True), ", National. Sur le panneau CPN 1, comptez les mois en rouge sur les 12 derniers mois."),
-        B("5. Vue ", ("Carte", True), " (module Utilisation des services) : ", ("Accouchement dans la FOSA", True), ", Province, 12 derniers mois. Quelle province est la plus claire ? Si la carte ne s'affiche pas, passez."),
-        B("6. Comparez vos réponses avec le binôme voisin. Écrivez ", ("une question", True), " à transformer en graphique demain."),
+        B("1. Cliquez ", ("Explorer", True), ". Vérifiez en haut : HMIS, le paquet épinglé, portée Toutes les données. À gauche, commencez par le module ", ("Utilisation des services", True), " → métrique ", ("Volumes de services", True), " (c'est l'ouverture par défaut)."),
+        B("2. Vue ", ("Tableau", True), " : niveau ", ("Province (AA2)", True), ", période ", ("12 derniers mois", True), ". Cliquez l'en-tête ", ("CPN 1", True), " pour trier. Notez le total ", ("National", True), " et la province la plus basse."),
+        B("3. Vue ", ("Dans le temps", True), " : indicateur CPN 1, niveau National, pas ", ("Mois", True), ". Notez le mois le plus haut des 24 derniers mois."),
+        B("4. Changez de module : ", ("Estimations de couverture", True), " → métrique ", ("Couverture dans le temps", True), ". Sur le panneau ", ("Penta 3", True), ", notez la dernière valeur de la courbe rouge (projection)."),
+        B("5. Changez de module : ", ("Détection des perturbations", True), " → métrique ", ("Services observés et attendus", True), ", National. Sur le panneau CPN 1, comptez les mois en rouge sur les 12 derniers mois."),
+        B("6. Revenez au module ", ("Utilisation des services", True), ", vue ", ("Carte", True), " : ", ("Accouchement dans la FOSA", True), ", Province, 12 derniers mois. Quelle province est la plus claire ? Si la carte ne s'affiche pas, passez."),
+        B("7. Comparez vos réponses avec le binôme voisin. Écrivez ", ("une question", True), " à transformer en graphique demain."),
     ], "Cinq réponses et une question sur papier, lues à la salle au tour de table.", fmt="binômes")
 
     # Bayesian disruption (replaces the linear-model slides 19 and 20)
