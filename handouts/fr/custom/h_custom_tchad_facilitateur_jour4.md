@@ -3,14 +3,14 @@ marp: true
 theme: fastr-handout
 paginate: true
 class: facilitator
-footer: "FASTR · Tchad · Novembre 2026 · Facilitateur"
+footer: "FASTR · Tchad · Jour 4 · Facilitateur"
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-# Guide du facilitateur DPSIS — Atelier FASTR Tchad
+# Guide du facilitateur DPSIS — Atelier FASTR Tchad, Jour 4
 
-<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>2 jours</strong> · <strong>18–19 novembre 2026</strong> · <strong>Centre Jardi de Bakara</strong></p>
+<p class="meta-line"><strong>Guide du facilitateur</strong> · <strong>Jour 4</strong> · <strong>jeudi 19 novembre 2026</strong> · <strong>Centre Jardi de Bakara</strong></p>
 
 ## Objectif
 
@@ -34,120 +34,30 @@ L'atelier de formation à la plateforme FASTR, dans le cadre de l'institutionnal
 - ☐ Dossier pays créé sur la page **Produits**, dans lequel les participants créeront leur propre dossier
 - ☐ Une visualisation enregistrée et une présentation terminée dans un dossier de démo
 - ☐ Salle : projecteur, wifi testé, un ordinateur par participant ou par binôme
-- ☐ Documents participants imprimés (liste page suivante)
+- ☐ Documents participants imprimés : onze pour la journée (Visualisations et interprétation, Présentations)
+- ☐ Les questions des binômes de la veille, relevées sur papier, pour les reprendre au récapitulatif
 
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Les deux journées en bref
+## La journée en bref
 
 Les matinées sont consacrées à la théorie, présentée par l'équipe FASTR avec votre appui. Les après-midis sont consacrés à la pratique sur la plateforme : vous conduisez la salle, l'équipe FASTR appuie les tables. Les horaires des séquences sont indicatifs ; les pauses et la fin de journée sont fixes.
 
-| Heure | Mercredi 18 novembre | Jeudi 19 novembre |
-|---|---|---|
-| 08:30 | | Récapitulatif de la veille (plénière, vous) |
-| 09:00 | Ouverture, ordre du jour et objectifs, puis Pourquoi FASTR : l'analyse à cycle rapide, la valeur ajoutée par rapport au DHIS2 | Interprétation des visualisations : le cadre en six étapes, résultat et message clé |
-| 10:30 | Pause café | Pause café |
-| 11:00 | Comment FASTR analyse vos données : qualité, ajustements, perturbations, couverture | Techniques de prompting avec l'assistant IA |
-| 12:30 | Déjeuner | Déjeuner |
-| 14:00 | Prise en main : démo de la plateforme, connexion, dossier | Visualisations et interprétation : à la main, puis avec l'IA |
-| 15:00 | Explorer : regarder avant de construire (en binôme) | Présentations : créer la présentation |
-| 15:30 | Pause café | Pause café |
-| 15:45 | Explorer (suite) : tour de salle des binômes | Présentations : ajouter des graphiques, finaliser, paramètres |
-| 16:30 | Synthèse de la journée | Où obtenir de l'aide, clôture |
-| 17:00 | Fin | Fin |
-
-**Documents participants à imprimer.** Un jeu par participant des documents cités en italique dans chaque activité : trois pour le jour 1 (Prise en main), onze pour le jour 2 (Visualisations et interprétation, Présentations).
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Jour 1, matin : la théorie
-
-**Ce que l'équipe FASTR présente.**
-- Pourquoi FASTR : ce qu'est FASTR, l'analyse à cycle rapide (des résultats mis à jour chaque mois, pas une enquête tous les cinq ans), et ce que la plateforme ajoute au DHIS2.
-- Comment FASTR analyse vos données : six modules calculés ensemble dans un **paquet de résultats** : Indicator values (valeurs des indicateurs), Data quality assessment (évaluation de la qualité des données), Data quality adjustments (ajustements de la qualité des données), Disruption detection (détection des perturbations), Coverage denominators (dénominateurs de couverture) et Coverage estimates (estimations de couverture).
-- Évaluation de la qualité des données : complétude, valeurs aberrantes, cohérence interne, puis un score global.
-- Ajustements de la qualité des données : valeurs aberrantes remplacées, mois manquants comblés, ce qui donne quatre versions des données (non ajustées, valeurs aberrantes ajustées, complétude ajustée, les deux).
-- Détection des perturbations, version bayésienne : deux questions par établissement et par mois (a-t-il rapporté ? quand il rapporte, combien délivre-t-il ?), une bande de crédibilité à 95 % autour du volume attendu, et la distinction entre écart de rapportage et écart de service.
-- Couverture : d'abord les dénominateurs, puis les estimations ; sur le graphique, gris pour les données de routine, noir pour l'enquête, rouge pour la projection.
-
-**Ce que vous faites.** Vous ouvrez la journée avec l'ordre du jour et les objectifs. Pendant les présentations, vous reliez chaque notion à ce que les participants connaissent : les formulaires mensuels, les rapports qui arrivent en retard, les campagnes qui gonflent un mois. Vous notez les questions qui méritent une réponse sur la plateforme l'après-midi.
-
-**Messages à renforcer.**
-1. FASTR ne remplace pas le DHIS2 : il lit les données du DHIS2 et ajoute l'analyse, les graphiques et le reporting par-dessus.
-2. Les résultats ne sont pas calculés à la demande : ils sont dans un paquet de résultats, généré après chaque import, et tout le monde lit le même paquet.
-3. Une valeur aberrante n'est pas forcément une erreur : une campagne de vaccination en produit. L'ajustement la remplace dans une version des données, l'original reste disponible.
-4. Un total national qui baisse peut venir d'établissements silencieux ou d'établissements qui délivrent moins. Seul le second cas est une perturbation de service ; le module les sépare.
-5. Une plage rouge sur le graphique des perturbations est une vraie baisse parmi les établissements qui ont rapporté. Un seul mois rouge mérite un regard ; trois mois d'affilée méritent une action.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Jour 1, après-midi : prise en main
-
-C'est vous qui conduisez la salle. L'équipe FASTR circule entre les tables. Commencez par une démo de dix minutes de l'écran d'accueil avant que quiconque ne touche un clavier : la page **Produits** et ses dossiers, la navigation latérale (Produits, Explorer, Résultats, Portées, Données, Ressources, Utilisateurs), puis d'où viennent les chiffres : un paquet de résultats est épinglé sur la page Résultats, chaque produit lit ce paquet à travers une portée, et la portée **Toutes les données** couvre le pays entier. Dites que Données, Ressources et Utilisateurs sont réservés aux administrateurs.
-
-### 1. Connexion à la plateforme · ~20 min · pratique, individuel
-
-**Le déroulé.** Les participants ouvrent https://tchad.fastr-analytics.org/, cliquent sur **S'inscrire** s'ils n'ont pas encore de compte, saisissent leur e-mail et un mot de passe, puis attendent que l'administrateur approuve le compte sur la page **Utilisateurs**. Ceux qui ont déjà un compte se connectent directement. Chacun se repère ensuite sur la page Produits.
-
-**Démontrer.** Couvert par la démo de l'écran d'accueil. Distribuez ensuite *Connexion à la plateforme* et laissez-les travailler.
-
-**Formulez-le ainsi.** *« Vous n'avez pas besoin de votre mot de passe DHIS2 : FASTR a ses propres comptes. Si vous vous inscrivez aujourd'hui et que vous voyez une liste vide après connexion, dites-le-moi : votre compte doit être approuvé, et c'est notre travail, pas le vôtre. »*
-
-**À quoi ressemble un bon résultat.** Chaque participant sur la page Produits, la navigation latérale dépliée, capable d'ouvrir le dossier pays et de revenir.
-
-**À surveiller.**
-- Les e-mails de vérification qui arrivent dans les spams.
-- Une liste vide ou un message de compte non approuvé : signalez-le à l'équipe FASTR, qui approuve sur la page **Utilisateurs**. Pendant ce temps, mettez le participant en binôme avec un voisin connecté.
-- La navigation latérale repliée qui déroute : montrez la flèche en bas de la barre.
-
-### 2. Créer un dossier pour votre travail · ~10 min · pratique, individuel
-
-**Le déroulé.** Chaque participant ouvre le dossier de l'atelier que vous indiquez, puis **Nouveau → Nouveau dossier**, saisit son prénom et son nom, choisit une couleur, **Sauvegarder**, et ouvre le menu ⋮ du dossier pour en lire les options sans rien changer.
-
-**Démontrer.** Créez un dossier à l'écran. Montrez le menu ⋮ sur sa ligne (Déplacer dans, Renommer, Définir l'accès, Supprimer) et le champ **Dossier** de la boîte de dialogue Nouvelle présentation, pour qu'ils voient à quoi le dossier servira demain.
-
-**Formulez-le ainsi.** *« Utilisez votre propre nom. La page Produits est partagée par tout le pays : un dossier par personne, c'est ce qui la garde lisible après une semaine. Demain, chaque graphique et chaque présentation ira dans votre dossier. »*
-
-**À quoi ressemble un bon résultat.** Un dossier par participant, à son nom, vide, dans le dossier pays.
-
-**À surveiller.**
-- **Nouveau dossier** absent du menu : le compte n'a pas le rôle nécessaire. Signalez-le à l'équipe FASTR.
-- Un dossier créé au premier niveau au lieu du dossier pays : **Déplacer dans**.
-
----
-
-<div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
-
-## Jour 1, après-midi : Explorer
-
-Avant de lancer l'activité, dites une phrase sur Explorer : on regarde avant de construire. Rien n'y est enregistré et rien ne peut casser.
-
-### 3. Jeter un premier regard avec Explorer · ~60 min avec la pause · pratique, en binôme
-
-**Le déroulé.** Les consignes sont sur la diapositive, quatre lectures et une question. 1. **Tableau** : niveau Province (AA2), période 12 derniers mois, indicateur CPN 1 ; noter le total national et la province la plus basse. 2. **Dans le temps** : CPN 1 au niveau national, pas Mois ; noter le mois le plus haut des 24 derniers mois. 3. Module Coverage estimates → Coverage over time ; noter la dernière couverture projetée de Penta 3 (courbe rouge). 4. **Carte** : Accouchement dans la FOSA, Province, 12 derniers mois ; quelle province est la plus claire (à sauter si la carte ne s'affiche pas). 5. Comparer les quatre réponses avec le binôme voisin et écrire une question à transformer en graphique demain. Après la pause, tour de salle : chaque binôme lit ses chiffres et sa question.
-
-**Démontrer.** Nommez à l'écran les contrôles du haut : le paquet, la portée, le module et la métrique, le niveau, les indicateurs et la période (12 derniers mois, Dernier trimestre, Dernière année, Tout). Passez une fois de Tableau à Dans le temps puis à Carte. Montrez **Rechercher une colonne** et **Télécharger**. Ouvrez le menu du module pour montrer **Résultats principaux** et **Analyses complémentaires**.
-
-**Formulez-le ainsi.** *« Les noms des modules sont en anglais dans l'interface française : c'est un problème d'affichage connu, pas une erreur de votre part. Quand une vue répond à votre question, c'est le graphique que vous construirez demain. Notez la question. »*
-
-**À quoi ressemble un bon résultat.** Des binômes d'accord sur les mêmes trois chiffres, ou capables de dire quel filtre les a fait différer, et une question par binôme écrite sur papier.
-
-**À surveiller.**
-- Des chiffres qui diffèrent entre voisins : paquet, portée, niveau ou période. Faites-leur trouver lequel.
-- « La carte est cassée » : pas de fichiers de limites administratives sur l'instance. Dites-le dès le départ si c'est le cas.
-- Des binômes qui cherchent Penta 3 dans le module Indicator values : la couverture projetée est dans Coverage estimates.
-- Des participants qui attendent un bouton Enregistrer dans Explorer : il n'y en a pas, Explorer sert à regarder.
-
-## Pour conclure la journée
-
-Vérifiez les trois points de passage avant de laisser partir la salle : connecté, un dossier à son nom, une question tirée d'Explorer. Un participant qui n'en est pas là sera bloqué demain. Relevez les questions des binômes : elles serviront d'exemples pour l'après-midi du jour 2.
-
+| Heure | Jeudi 19 novembre |
+|---|---|
+| 08:30 | Récapitulatif de la veille (plénière, vous) |
+| 09:00 | Interprétation des visualisations : le cadre en six étapes, résultat et message clé |
+| 10:30 | Pause café |
+| 11:00 | Techniques de prompting avec l'assistant IA |
+| 12:30 | Déjeuner |
+| 14:00 | Visualisations et interprétation : à la main, puis avec l'IA |
+| 15:00 | Présentations : créer la présentation |
+| 15:30 | Pause café |
+| 15:45 | Présentations : ajouter des graphiques, finaliser, paramètres |
+| 16:30 | Où obtenir de l'aide, clôture |
+| 17:00 | Fin |
 ---
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
@@ -177,18 +87,19 @@ Vérifiez les trois points de passage avant de laisser partir la salle : connect
 
 Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur des duplicatas, jamais sur le graphique d'un participant. La séquence est : construire à la main, puis avec l'IA ; interpréter à la main, puis avec l'IA. Si le temps presse, resserrez les passages IA plutôt que les passages manuels.
 
-### 4. Créez votre première visualisation · ~20 min · pratique, individuel
+### 4. Créez votre première visualisation · ~25 min · pratique, individuel
 
-**Le déroulé.** Les consignes sont sur la diapositive. Dans son dossier : **Nouveau → Nouvelle visualisation**, paquet épinglé, Toutes les données ; Indicator values → Indicator value → **Personnalisé** → **Série temporelle** → Insérer ; onglet **Données**, Filtre → Indicateur = CPN 1, période 24 derniers mois, titre « CPN 1, Tchad, 24 derniers mois » ; **Affichage (désagréger) → Province (AA2)**, puis Filtre → garder NDJAMENA et LOGONE OCCIDENTAL ; enfin **Dupliquer** sur la page Produits et remplacer CPN 1 par Penta 3 dans la copie. Le graphique s'enregistre tout seul, l'indicateur **En direct** le confirme. Il n'y a pas de « Enregistrer sous » : Dupliquer garde un original, **Historique → Restaurer** ramène une version antérieure.
+**Le déroulé.** Les consignes sont sur la diapositive, trois visualisations. 1. Dans son dossier : **Nouveau → Nouvelle visualisation** → paquet épinglé, Toutes les données → Suivant. 2. Module **Utilisation des services** → métrique **Valeur de l'indicateur** → Suivant → préréglage **Valeurs des indicateurs dans le temps (mensuel)** → Insérer. 3. Onglet **Données** → Filtre (sous-ensemble) → Indicateur : cocher CPN 1 seulement ; titre « CPN 1, Tchad, par mois ». 4. **Affichage (désagréger) → Zone administrative 2**, puis Filtre → Zone administrative 2 : NDJAMENA et LOGONE OCCIDENTAL. 5. Page Produits → ⋮ → **Dupliquer** ; dans la copie, Filtre → Indicateur = Penta 3 et nouveau titre. 6. Troisième visualisation : module **Détection des perturbations** → **Détection bayésienne, observé vs attendu avec IC à 95 %** → niveau National → préréglage **Graphique des perturbations par indicateur** → Insérer → Filtre → Indicateur = CPN 1. Le graphique s'enregistre tout seul, l'indicateur **En direct** le confirme. Il n'y a pas de « Enregistrer sous » : Dupliquer garde un original, **Historique → Restaurer** ramène une version antérieure.
 
 **Démontrer.** Faites le parcours une fois en entier, puis dans l'onglet **Données** : partez d'un indicateur au total national, désagrégez par province, puis filtrez sur deux provinces. Montrez le piège : désagréger par province et filtrer sur une seule, il ne reste rien à comparer.
 
 **Formulez-le ainsi.** *« Filtrez ce dont vous n'avez pas besoin ; désagrégez ce que vous voulez comparer. Courbes pour les tendances, barres pour comparer. Et il n'y a pas de bouton Enregistrer : tout est déjà enregistré. »*
 
-**À quoi ressemble un bon résultat.** Deux visualisations dans le dossier du participant, CPN 1 (deux provinces) et Penta 3, et un participant capable d'expliquer la différence entre filtrer et désagréger.
+**À quoi ressemble un bon résultat.** Trois visualisations dans le dossier du participant, CPN 1 (deux provinces), Penta 3 et la perturbation CPN 1 avec sa bande à 95 %, et un participant capable d'expliquer la différence entre filtrer et désagréger.
 
 **À surveiller.**
-- Le préréglage Indicator value choisi tel quel (un tableau) et la question « où est la courbe ? » : il faut Personnalisé → Série temporelle.
+- Le préréglage **Tableau de bord** choisi par erreur (c'est un tableau coloré) et la question « où est la courbe ? » : il faut **Valeurs des indicateurs dans le temps (mensuel)**.
+- La bande à 95 % prise pour une erreur : elle est normale et plus large pour les petites zones.
 - Une visualisation créée hors du dossier du participant : **Déplacer dans**.
 
 ---
@@ -197,7 +108,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 ### 5. Construire une visualisation avec l'assistant IA · ~15 min · pratique, individuel
 
-**Le déroulé.** Les consignes sont sur la diapositive : créer une visualisation vierge dans son dossier, ouvrir le bouton IA, demander « Montre-moi les accouchements dans la FOSA par mois sur les 24 derniers mois, au niveau national, en courbe », vérifier l'indicateur, la période et le type, puis « Compare NDJAMENA et OUADDAÏ sur le même graphique », demander un titre, corriger dans la conversation.
+**Le déroulé.** Les consignes sont sur la diapositive : créer une visualisation dans son dossier (Utilisation des services → Valeur de l'indicateur → Suivant → **Personnalisé** → Insérer), ouvrir le bouton IA, demander « Montre-moi les accouchements dans la FOSA par mois sur les 24 derniers mois, au niveau national, en courbe », vérifier l'indicateur, la période et le type, puis « Compare NDJAMENA et OUADDAÏ sur le même graphique », demander un titre, corriger dans la conversation.
 
 **Démontrer.** Posez d'abord la question à l'IA depuis la page Produits : elle ne peut pas dessiner là, elle liste les produits à ouvrir. Ouvrez ensuite une visualisation vierge, saisissez une demande, montrez les étapes que l'IA liste et le graphique qui change. Montrez **Historique → Restaurer** une fois.
 
@@ -321,8 +232,8 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 > **Q : Puis-je l'utiliser sur mon téléphone ?**
 > R : Cela fonctionne, mais c'est conçu pour un ordinateur.
 
-> **Q : Pourquoi les noms des modules sont-ils en anglais ?**
-> R : Un problème d'affichage connu dans l'interface française. Les résultats, eux, sont bien ceux du Tchad.
+> **Q : Où sont passés les projets et les tableaux de bord ?**
+> R : Depuis la version 2, une seule page Produits avec des dossiers remplace les projets ; Explorer et les visualisations enregistrées remplacent les tableaux de bord.
 
 > **Q : Mon voisin et moi n'avons pas les mêmes chiffres.**
 > R : Quatre réglages peuvent différer : paquet de résultats, portée, niveau, période. Comparez-les un par un.

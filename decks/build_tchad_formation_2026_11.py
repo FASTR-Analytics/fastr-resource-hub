@@ -457,6 +457,7 @@ def main():
         fill_body(intro, [
             ("p", [("FASTR calcule ses modules ", False), ("dans l'ordre", True), (", dans un ", False), ("paquet de résultats", True), (" que tous les produits lisent. Un administrateur génère le paquet ; vous lisez les résultats dans Explorer et dans vos produits.", False)]),
         ], intro)
+    # (module labels are shown in French on the Chad instance, 2.13.3)
     tbls = [x for x in s14.shapes if x.has_table]
     if tbls:
         tbl = tbls[0].table
@@ -466,11 +467,11 @@ def main():
             tbl._tbl.append(copy.deepcopy(rows_xml[-1]))
             rows_xml = tbl._tbl.findall("a:tr", NS)
         data = [("Module", "", "Ce qu'il fait", "Pourquoi"),
-                ("", "Indicator values", "Volumes mensuels et indicateurs calculés, par zone", "La base : ce que les établissements ont rapporté"),
-                ("", "Data quality assessment", "Repère rapports manquants, valeurs extrêmes, incohérences", "On n'analyse pas des données peu fiables"),
-                ("", "Data quality adjustments", "Remplace les valeurs extrêmes, comble les mois manquants", "Des données propres pour des résultats fiables"),
-                ("", "Disruption detection", "Compare l'observé à l'attendu, par établissement (bayésien)", "Savoir où et quand les services ont changé"),
-                ("", "Coverage denominators, Coverage estimates", "Estime les populations cibles, puis le % couvert", "Des chiffres bruts aux indicateurs qui guident l'action")]
+                ("", "Utilisation des services", "Volumes mensuels et indicateurs calculés, par zone", "La base : ce que les établissements ont rapporté"),
+                ("", "Évaluation de la qualité des données", "Repère rapports manquants, valeurs extrêmes, incohérences", "On n'analyse pas des données peu fiables"),
+                ("", "Ajustements de la qualité des données", "Remplace les valeurs extrêmes, comble les mois manquants", "Des données propres pour des résultats fiables"),
+                ("", "Détection des perturbations", "Compare l'observé à l'attendu, par établissement (bayésien)", "Savoir où et quand les services ont changé"),
+                ("", "Dénominateurs de couverture, Estimations de couverture", "Estime les populations cibles, puis le % couvert", "Des chiffres bruts aux indicateurs qui guident l'action")]
         ncols = len(tbl.columns)
         data = [row[-ncols:] if ncols < 4 else row for row in data]
         for r, vals in zip(list(tbl.rows), data):
@@ -560,19 +561,20 @@ def main():
         B("4. Ouvrez le menu ⋮ de votre dossier et lisez ses options, sans rien changer."),
     ], "Vous êtes connecté et un dossier à votre nom apparaît dans la liste.")
 
-    tasks(S[34], "20 min", [
-        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), ", paquet épinglé, portée ", ("Toutes les données", True), "."),
-        B("2. ", ("Indicator values → Indicator value → Personnalisé → Série temporelle → Insérer", True), "."),
-        B("3. Onglet ", ("Données", True), " : Filtre → Indicateur = ", ("CPN 1", True), " ; Période = 24 derniers mois. Titre : « CPN 1, Tchad, 24 derniers mois »."),
-        B("4. ", ("Affichage (désagréger) → Province (AA2)", True), " : une courbe par province. Puis Filtre → gardez ", ("NDJAMENA", True), " et ", ("LOGONE OCCIDENTAL", True), "."),
-        B("5. Page Produits → ⋮ → ", ("Dupliquer", True), " ; dans la copie, remplacez CPN 1 par ", ("Penta 3", True), "."),
-    ], "Deux visualisations dans votre dossier : CPN 1 (deux provinces) et Penta 3.")
+    tasks(S[34], "25 min", [
+        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), " → paquet épinglé, portée ", ("Toutes les données", True), " → ", ("Suivant", True), "."),
+        B("2. Module ", ("Utilisation des services", True), " → métrique ", ("Valeur de l'indicateur", True), " → ", ("Suivant", True), " → préréglage ", ("Valeurs des indicateurs dans le temps (mensuel)", True), " → ", ("Insérer", True), "."),
+        B("3. Onglet ", ("Données", True), " → ", ("Filtre (sous-ensemble)", True), " → Indicateur : cochez ", ("CPN 1", True), " seulement. Cliquez le titre : « CPN 1, Tchad, par mois »."),
+        B("4. ", ("Affichage (désagréger)", True), " → ", ("Zone administrative 2", True), " : une courbe par province. Puis Filtre → Zone administrative 2 : ", ("NDJAMENA", True), " et ", ("LOGONE OCCIDENTAL", True), "."),
+        B("5. Page Produits → ⋮ → ", ("Dupliquer", True), ". Dans la copie : Filtre → Indicateur = ", ("Penta 3", True), ", titre « Penta 3, Tchad, par mois »."),
+        B("6. Troisième visualisation : module ", ("Détection des perturbations", True), " → ", ("Détection bayésienne, observé vs attendu avec IC à 95 %", True), " → niveau ", ("National", True), " → préréglage ", ("Graphique des perturbations par indicateur", True), " → Insérer → Filtre → Indicateur = CPN 1."),
+    ], "Trois visualisations dans votre dossier : CPN 1 (deux provinces), Penta 3, et la perturbation CPN 1 avec sa bande à 95 %.")
 
     tasks(S[35], "15 min", [
-        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), " (laissez-la vide), puis ouvrez le bouton ", ("IA", True), "."),
-        B("2. Demandez : « Montre-moi les ", ("accouchements dans la FOSA", True), " par mois sur les 24 derniers mois, au niveau national, en courbe »."),
-        B("3. Vérifiez l'indicateur, la période et le type de graphique. Puis : « Compare ", ("NDJAMENA", True), " et ", ("OUADDAÏ", True), " sur le même graphique »."),
-        B("4. Demandez un titre. Si quelque chose est faux, corrigez dans la conversation ; ", ("Historique → Restaurer", True), " revient en arrière."),
+        B("1. Dans votre dossier : ", ("Nouveau → Nouvelle visualisation", True), " → Suivant → module Utilisation des services → Valeur de l'indicateur → Suivant → ", ("Personnalisé", True), " → Insérer. Ouvrez le bouton ", ("IA", True), " en bas à droite."),
+        B("2. Tapez : « Montre-moi ", ("Accouchement dans la FOSA", True), " par mois sur les 24 derniers mois, au niveau national, en courbe »."),
+        B("3. Vérifiez à l'écran : l'indicateur, la période, le type de graphique. Puis tapez : « Compare ", ("NDJAMENA", True), " et ", ("OUADDAÏ", True), " sur le même graphique »."),
+        B("4. Tapez : « Donne un titre au graphique ». Si un élément est faux, dites-le dans la conversation ; ", ("Historique → Restaurer", True), " revient en arrière."),
     ], "Une visualisation construite par l'IA, vérifiée point par point, dans votre dossier.")
 
     tasks(S[36], "10 min", [
@@ -665,27 +667,54 @@ def main():
     home_shot = TCHAD_SHOTS / "01_home_products.png"
     if not home_shot.exists():
         home_shot = SHOT / "platform_v2_fr" / "01_home_products.png"
-    n_home = new_content(FR / "m9b_getting_started" / "m9b_0_home_screen.md", tag=TAG_PRISE, image=home_shot)
+    n_home = new_content(title="L'écran d'accueil : une seule page Produits", tag=TAG_PRISE, image=home_shot, blocks=[
+        ("p", [("Pensez à un ", False), ("Google Drive partagé", True), (" par tout le pays : des dossiers, des fichiers dedans, et un réglage de partage par fichier.", False)]),
+        ("b", [("Les fichiers", True), (" sont les ", False), ("produits", True), (" : visualisations, présentations, rapports. Chaque ligne indique son paquet de résultats et sa portée.", False)]),
+        ("b", [("Les dossiers", True), (" rangent les produits : un dossier par personne, dans le dossier de l'atelier.", False)]),
+        ("b", [("Gérer l'accès", True), (" sur un produit ou un dossier dit qui peut l'ouvrir ou le modifier.", False)]),
+        ("h", [("Navigation latérale :", True)]),
+        ("b", [("Produits", True), (" : là où vous travaillez · ", False), ("Explorer", True), (" : regarder sans rien créer · ", False), ("Résultats", True), (" et ", False), ("Portées", True), (" : d'où viennent les chiffres · ", False), ("Données, Ressources, Utilisateurs", True), (" : administration", False)]),
+    ], notes=["Montrez-le en direct ; la capture est le plan B. L'analogie Google Drive tient jusqu'au bout : fichiers = produits, dossiers = dossiers, partage = Gérer l'accès. Une différence : chaque fichier lit un paquet de résultats et une portée.",
+              "Depuis la version 2, plus de projets ni de tableaux de bord : une seule liste pour tout le pays.",
+              "Le bouton IA (en bas à droite) fonctionne dans un produit ouvert, pas sur cette page."])
     n_scope = new_content(FR / "m9b_getting_started" / "m9b_2a_scope_concept.md", tag=TAG_PRISE,
                           image=SHOT / "platform_v2_fr" / "14_scopes.png")
     n_sec_explore = new_section("Explorer : première lecture des résultats du Tchad")
     explore_shot = TCHAD_SHOTS / "13_explore.png"
     if not explore_shot.exists():
         explore_shot = SHOT / "platform_v2_fr" / "13_explore.png"
-    n_ex1 = new_content(FR / "m9b_getting_started" / "m9b_2d_explore_overview.md", tag=TAG_EXPLORE, image=explore_shot)
+    n_ex1 = new_content(title="Explorer : regarder avant de construire", tag=TAG_EXPLORE, image=explore_shot, blocks=[
+        ("p", [("Explorer montre toutes les analyses déjà calculées dans un paquet de résultats, sans rien créer et sans rien enregistrer.", False)]),
+        ("h", [("Quatre contrôles en haut :", True)]),
+        ("b", [("HMIS / FOSA", True), (" : la famille de données", False)]),
+        ("b", [("Paquet de résultats", True), (" (en haut à droite) : celui qui est épinglé est sélectionné", False)]),
+        ("b", [("Portée", True), (" : ", False), ("Toutes les données", True), (", c'est tout le pays", False)]),
+        ("b", [("Module", True), (" et ", False), ("métrique", True), (" (à gauche) : s'ouvre sur ", False), ("Utilisation des services → Volumes de services", True)]),
+    ], notes=["~3 min. L'idée : avant de construire un graphique, on peut voir ce que disent les données.",
+              "Nommez les quatre contrôles à l'écran, dans cet ordre ; l'activité demande aux participants de les retrouver.",
+              "Changez un filtre et la page se rafraîchit ; personne d'autre ne le voit, rien n'est conservé. « Rien ne peut casser » rassure les débutants."])
     n_ex2 = new_content(FR / "m9b_getting_started" / "m9b_2e_explore_views.md", tag=TAG_EXPLORE,
                         image=SHOT / "platform_v2_fr" / "13b_explore_over_time.png")
-    n_ex3 = new_content(FR / "m9b_getting_started" / "m9b_2f_explore_modules.md", tag=TAG_EXPLORE,
-                        image=SHOT / "platform_v2_fr" / "13e_explore_coverage_table.png")
+    n_ex3 = new_content(title="Chaque module apporte ses propres métriques", tag=TAG_EXPLORE,
+                        image=SHOT / "platform_v2_fr" / "13e_explore_coverage_table.png", blocks=[
+        ("p", [("Le menu ", False), ("module", True), (" a deux groupes :", False)]),
+        ("b", [("Résultats principaux", True), (" : Utilisation des services (les volumes)", False)]),
+        ("b", [("Analyses complémentaires", True), (" : Évaluation de la qualité des données, Ajustements de la qualité des données, Détection des perturbations, Dénominateurs de couverture, Estimations de couverture", False)]),
+        ("p", [("Chaque module change les métriques et la vue. ", False), ("Estimations de couverture → Couverture dans le temps", True), (" : un graphique par indicateur, gris pour les données de routine, noir pour les enquêtes, rouge pour la projection. ", False), ("Détection des perturbations → Services observés et attendus", True), (" : la bande à 95 % et les mois qui en sortent.", False)]),
+    ], notes=["Ouvrez le menu des modules à l'écran et lisez les deux groupes.",
+              "Les couleurs du graphique de couverture sont celles des diapositives de méthodologie : gris HMIS, noir enquête, rouge projection.",
+              "N'expliquez pas les méthodes ici ; elles ont été vues le matin."])
     n_ex4 = new_content(FR / "m9b_getting_started" / "m9b_2g_explore_vs_visualization.md", tag=TAG_EXPLORE)
     n_ex_act = new_activity(FR / "m9b_getting_started" / "m9b_3_explore_activity.md", tag=TAG_EXPLORE)
     tasks(n_ex_act, "45 min", [
-        B("1. ", ("Explorer → Tableau", True), " : niveau ", ("Province (AA2)", True), ", période ", ("12 derniers mois", True), ", indicateur ", ("CPN 1", True), ". Notez le total national et la province la plus basse."),
-        B("2. ", ("Dans le temps", True), " : CPN 1, niveau national, pas ", ("Mois", True), ". Notez le mois le plus haut des 24 derniers mois."),
-        B("3. Module ", ("Coverage estimates → Coverage over time", True), " : notez la dernière couverture projetée de ", ("Penta 3", True), " (courbe rouge)."),
-        B("4. ", ("Carte", True), " : ", ("Accouchement dans la FOSA", True), ", Province, 12 derniers mois. Quelle province est la plus claire ? (Si la carte ne s'affiche pas, passez.)"),
-        B("5. Comparez vos quatre réponses avec le binôme voisin. Écrivez ", ("une question", True), " que vous voulez transformer en graphique demain."),
-    ], "Quatre chiffres et une question sur papier, lus à la salle au tour de table.", fmt="binômes")
+        B("1. ", ("Explorer", True), " → vue ", ("Tableau", True), ". Niveau ", ("Province (AA2)", True), ", période ", ("12 derniers mois", True), ". Cliquez l'en-tête ", ("CPN 1", True), " pour trier. Notez le total ", ("National", True), " et la province la plus basse."),
+        B("2. Vue ", ("Dans le temps", True), " : indicateur CPN 1, niveau National, pas ", ("Mois", True), ". Notez le mois le plus haut des 24 derniers mois."),
+        B("3. Module ", ("Estimations de couverture", True), " → métrique ", ("Couverture dans le temps", True), ". Sur le panneau ", ("Penta 3", True), ", notez la dernière valeur de la courbe rouge (projection)."),
+        B("4. Module ", ("Détection des perturbations", True), " → ", ("Services observés et attendus", True), ", National. Sur le panneau CPN 1, comptez les mois en rouge sur les 12 derniers mois."),
+        B("5. Vue ", ("Carte", True), " (module Utilisation des services) : ", ("Accouchement dans la FOSA", True), ", Province, 12 derniers mois. Quelle province est la plus claire ? Si la carte ne s'affiche pas, passez."),
+        B("6. Comparez vos réponses avec le binôme voisin. Écrivez ", ("une question", True), " à transformer en graphique demain."),
+    ], "Cinq réponses et une question sur papier, lues à la salle au tour de table.", fmt="binômes")
+
     # Bayesian disruption (replaces the linear-model slides 19 and 20)
     n_b1 = new_content(FR / "m6_data_analysis" / "m6_2e_bayesian_two_questions_per_facility.md", tag=TAG_METH,
                        title="Détection des perturbations : deux questions par établissement")
