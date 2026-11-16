@@ -847,9 +847,12 @@ def main():
                         r.insert(0, new_rpr)
             bar = copy.deepcopy(bar_xml)
             sl.shapes._spTree.insert(2, bar)
-            # push bodies that start above 1.45in down a little
+            # push bodies and pictures that start above 1.45in down a little
             for x in texts:
                 if x is not title and x.top < Inches(1.45) and x.height > Inches(1):
+                    x.top = Inches(1.5)
+            for x in sl.shapes:
+                if x.shape_type == 13 and Inches(0.3) < x.top < Inches(1.45) and x.width < Inches(10.5):
                     x.top = Inches(1.5)
         if not has_tag:
             el = copy.deepcopy(tag_xml); sl.shapes._spTree.append(el)
