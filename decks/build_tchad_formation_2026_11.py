@@ -21,6 +21,7 @@ from pathlib import Path
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
+from lxml import etree
 
 REPO = Path(__file__).resolve().parents[1]
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(
@@ -659,7 +660,7 @@ def main():
     set_lines(sh["TextBox 8"], [
         "Équipe FASTR",
         "Amal Tucker Brown, spécialiste résultats",
-        "Claire Boulange, experte technique FASTR : assistance technique et formation",
+        "Claire Boulange, experte technique FASTR (assistance technique, formation)",
         "fastr@usefuldata.com.au",
         "Points focaux DPSIS : à compléter"])
 
@@ -765,6 +766,118 @@ def main():
             tag = find_tag(s)
             if tag is not None:
                 set_text(tag, tag_fix[s.part.partname])
+
+    # ---------- style normalization: every content slide in the Deck Builder style ----------
+    tpl = T_content
+    tpl_sh = shapes_by_name(tpl)
+    bar_xml = copy.deepcopy(tpl_sh["Shape 0"]._element)
+    tag_xml = copy.deepcopy(tpl_sh["Text 3"]._element)
+    line_xml = copy.deepcopy(tpl_sh["Shape 5"]._element)
+    foot_xml = copy.deepcopy(tpl_sh["Text 6"]._element)
+    num_xml = copy.deepcopy(tpl_sh["Text 7"]._element)
+    title_rpr = copy.deepcopy(tpl_sh["Text 1"].text_frame.paragraphs[0].runs[0]._r.find("a:rPr", NS))
+    TAG_INTRO = "ATELIER DE FORMATION À LA PLATEFORME FASTR"
+    TAG_APERCU = "APERÇU DE L'APPROCHE FASTR"
+    TAG_AIDE = "OÙ OBTENIR DE L'AIDE"
+    TAG_PROMPT = "TECHNIQUES DE PROMPTING AVEC L'ASSISTANT IA FASTR"
+    section_tags = {}
+    current = TAG_INTRO
+    for sl in prs.slides:
+        txt = " ".join(x.text_frame.text.strip() for x in sl.shapes if x.has_text_frame and x.text_frame.text.strip())
+        is_section = any(x.shape_type == 13 and x.width >= Inches(13) and x.height >= Inches(7) for x in sl.shapes) and len(txt) < 90
+        if is_section:
+            t = txt.lower()
+            if "aperçu" in t: current = TAG_APERCU
+            elif "méthodes" in t: current = TAG_METH
+            elif "prise en main" in t: current = TAG_PRISE
+            elif "explorer" in t: current = TAG_EXPLORE
+            elif "interprétation" in t: current = TAG_INTERP
+            elif "prompting" in t: current = TAG_PROMPT
+            elif "produits" in t: current = TAG_VIZ
+            elif "rapports" in t or "présentations" in t: current = TAG_DECK
+            elif "aide" in t: current = TAG_AIDE
+        section_tags[sl.part.partname] = (current, is_section)
+
+    def is_fullbleed_special(sl):
+        # sign-up screenshots and the cover keep their own layout
+        return any(x.shape_type == 13 and x.width >= Inches(10.5) for x in sl.shapes)
+
+    def fix_run_font(r, size=None, color=None, bold=None, face="Calibri"):
+        rpr = r.find("a:rPr", NS)
+        if rpr is None:
+            rpr = etree.SubElement(r, "{%s}rPr" % NS["a"]); r.insert(0, rpr)
+        for tagname in ("latin", "ea", "cs", "sym"):
+            el = rpr.find("a:%s" % tagname, NS)
+            if el is not None:
+                el.set("typeface", face)
+        if rpr.find("a:latin", NS) is None:
+            lat = etree.SubElement(rpr, "{%s}latin" % NS["a"]); lat.set("typeface", face)
+        if size: rpr.set("sz", str(size))
+        if bold is not None:
+            if bold: rpr.set("b", "1")
+            elif "b" in rpr.attrib: del rpr.attrib["b"]
+
+    for n, sl in enumerate(prs.slides, 1):
+        tag_text, is_section = section_tags[sl.part.partname]
+        if n == 1 or is_section or is_fullbleed_special(sl) or n == len(prs.slides):
+            continue
+        if sl.slide_layout.name != "DEFAULT" or sl.part.partname == S[3].part.partname:
+            continue  # designed infographic slides and the agenda keep their own layout
+        texts = [x for x in sl.shapes if x.has_text_frame and x.text_frame.text.strip()]
+        has_tag = any(abs(x.top - Inches(0.28)) < Inches(0.06) for x in texts)
+        has_foot = any(abs(x.top - Inches(7.1)) < Inches(0.1) for x in texts)
+        tops = [x for x in texts if x.top < Inches(1.3) and x.height >= Inches(0.4) and x.width > Inches(4)
+                and not (abs(x.top - Inches(0.28)) < Inches(0.06))]
+        title = tops[0] if tops else None
+        # drop Google-style thin title bars (narrow tall shapes near the top)
+        for x in list(sl.shapes):
+            if (not x.has_text_frame or not x.text_frame.text.strip()) and x.width <= Inches(0.12) and x.top < Inches(1.3) and x.shape_type != 13 and x.name != "Shape 0":
+                x._element.getparent().remove(x._element)
+        if title is not None and title.name != "Text 1":
+            # Google-style title: move and restyle
+            title.left, title.top, title.width, title.height = Inches(0.75), Inches(0.82), Inches(12.08), Inches(0.55)
+            for para in title.text_frame.paragraphs:
+                for r in para._p.findall("a:r", NS):
+                    old = r.find("a:rPr", NS)
+                    new_rpr = copy.deepcopy(title_rpr)
+                    if old is not None:
+                        r.replace(old, new_rpr)
+                    else:
+                        r.insert(0, new_rpr)
+            bar = copy.deepcopy(bar_xml)
+            sl.shapes._spTree.insert(2, bar)
+            # push bodies that start above 1.45in down a little
+            for x in texts:
+                if x is not title and x.top < Inches(1.45) and x.height > Inches(1):
+                    x.top = Inches(1.5)
+        if not has_tag:
+            el = copy.deepcopy(tag_xml); sl.shapes._spTree.append(el)
+        # set the tag text (new or existing)
+        for x in sl.shapes:
+            if x.has_text_frame and abs(x.top - Inches(0.28)) < Inches(0.06) and abs(x.left - Inches(0.5)) < Inches(0.06):
+                set_text(x, tag_text)
+        if not has_foot:
+            for el in (line_xml, foot_xml, num_xml):
+                sl.shapes._spTree.append(copy.deepcopy(el))
+        for x in sl.shapes:
+            if not x.has_text_frame: continue
+            t = x.text_frame.text.strip()
+            if abs(x.top - Inches(7.1)) < Inches(0.1):
+                if abs(x.left - Inches(11.5)) < Inches(0.1): set_text(x, str(n))
+                else: set_text(x, FOOTER_NEW)
+        # body fonts: Calibri, cap oversized text
+        for x in sl.shapes:
+            if not x.has_text_frame or x is title: continue
+            if abs(x.top - Inches(0.28)) < Inches(0.06) or abs(x.top - Inches(7.1)) < Inches(0.1): continue
+            for para in x.text_frame.paragraphs:
+                for r in para._p.findall("a:r", NS):
+                    rpr = r.find("a:rPr", NS)
+                    sz = int(rpr.get("sz")) if rpr is not None and rpr.get("sz") else None
+                    fix_run_font(r, size=(2000 if sz and sz > 2200 else None))
+        if title is not None:
+            for para in title.text_frame.paragraphs:
+                for r in para._p.findall("a:r", NS):
+                    fix_run_font(r, size=3200, bold=True)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     prs.save(str(OUT))
